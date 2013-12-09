@@ -2,7 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
-import net.sf.mmm.util.lang.api.AbstractDatatype;
+import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
@@ -43,7 +44,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Length extends AbstractDatatype<String> {
+public class Length extends AbstractSimpleDatatypeBase<String> implements SimpleDatatype<String> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -2672855069930598174L;

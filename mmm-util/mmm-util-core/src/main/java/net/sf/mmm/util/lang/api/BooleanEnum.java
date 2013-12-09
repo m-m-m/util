@@ -12,7 +12,7 @@ package net.sf.mmm.util.lang.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public enum BooleanEnum implements Datatype<Boolean> {
+public enum BooleanEnum implements SimpleDatatype<Boolean> {
 
   /**
    * Represents {@link Boolean#TRUE}.

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.data.api.datatype;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This is the interface for an ID that uniquely identifies a {@link net.sf.mmm.data.api.DataObject} in a
@@ -35,7 +35,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface DataId extends Datatype<DataId> {
+public interface DataId extends SimpleDatatype<String> {
 
   /** The name of this value type. */
   String VALUE_NAME = "Id";

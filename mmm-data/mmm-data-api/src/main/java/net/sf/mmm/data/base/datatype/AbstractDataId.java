@@ -36,17 +36,18 @@ public abstract class AbstractDataId implements DataId {
   /**
    * {@inheritDoc}
    */
-  public long getObjectId() {
+  @Override
+  public String getValue() {
 
-    return this.objectId;
+    return getTitle();
   }
 
   /**
    * {@inheritDoc}
    */
-  public DataId getValue() {
+  public long getObjectId() {
 
-    return this;
+    return this.objectId;
   }
 
   /**

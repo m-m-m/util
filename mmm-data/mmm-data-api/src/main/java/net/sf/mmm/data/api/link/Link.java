@@ -4,10 +4,13 @@ package net.sf.mmm.data.api.link;
 
 import net.sf.mmm.data.api.entity.DataEntity;
 import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This is the interface for a link pointing from one {@link DataEntity} to {@link #getTarget() another}. A
  * link is an immutable object - it can not be modified.
+ * 
+ * TODO This is NOT a {@link Datatype}
  * 
  * @see #getTarget()
  * @see #getClassifier()
@@ -17,7 +20,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface Link<TARGET extends DataEntity> extends Datatype<TARGET> {
+public interface Link<TARGET extends DataEntity> extends SimpleDatatype<TARGET> {
 
   /**
    * This method gets the {@link DataEntity} this link is pointing to.<br/>

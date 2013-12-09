@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteOptions;
-import net.sf.mmm.client.ui.api.common.Color;
+import net.sf.mmm.client.ui.api.color.Color;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting

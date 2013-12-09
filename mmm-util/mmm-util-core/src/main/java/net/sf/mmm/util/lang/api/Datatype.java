@@ -5,7 +5,6 @@ package net.sf.mmm.util.lang.api;
 import java.io.Serializable;
 
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
-import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 /**
  * This is the interface for a <em>datatype</em>. A datatype is an object representing a value of a specific
@@ -33,27 +32,13 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * order to be fully {@link java.io.Serializable}. Additionally, it should have a (protected) non-arg
  * {@link java.lang.reflect.Constructor}.<br/>
  * A regular implementation should be immutable and bind all fields at {@link java.lang.reflect.Constructor
- * construction}. When ever possible it should have a {@link java.lang.reflect.Constructor} that is compatible
- * with {@link #getValue()} . It is suitable and also recommended to use the class implementing the datatype
- * as API omitting a dedicated interface if possible. An {@link EnumTypeWithCategory} implementing this interface should
- * also offer a static method called <code>fromValue(V value)</code> that returns the appropriate
- * {@link EnumTypeWithCategory} instance or <code>null</code> if no such instance exists.
+ * construction}. It is suitable and in most cases also recommended to use the class implementing the datatype
+ * as API omitting a dedicated interface if possible.
  * 
- * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public interface Datatype<V> extends AttributeReadTitle<String>, AttributeReadValue<V>, Serializable {
-
-  /**
-   * This method returns the raw value of this datatype. This will typically be a common
-   * <code>java.lang</code> datatype. In case of a composed datatype it is also legal that this method returns
-   * the datatype instance itself.
-   * 
-   * @return the value of this datatype.
-   */
-  @Override
-  V getValue();
+public interface Datatype extends AttributeReadTitle<String>, Serializable {
 
   /**
    * This method gets the <em>title</em> of this datatype. The title is a string representation intended to be

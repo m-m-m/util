@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
-import net.sf.mmm.client.ui.api.common.Color;
+import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -62,7 +62,18 @@ class FeatureBehaviorBackgroundColor extends AbstractColorFeatureBehavior {
   public void updateFontSettings() {
 
     String colorString = getFormatter().getBackColor();
-    Color color = new Color(colorString);
+    Color color = parseColor(colorString);
     getColorBox().setValue(color);
+  }
+
+  /**
+   * Parses a {@link Color} given as {@link String} from GWT/browser.
+   * 
+   * @param colorString is the {@link Color} as {@link String}.
+   * @return the parsed {@link Color}.
+   */
+  protected Color parseColor(String colorString) {
+
+    return Color.valueOf(colorString);
   }
 }

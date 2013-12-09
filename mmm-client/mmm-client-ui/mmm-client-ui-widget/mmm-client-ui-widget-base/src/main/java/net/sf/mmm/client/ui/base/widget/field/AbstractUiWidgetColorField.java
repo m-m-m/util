@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.Color;
+import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetColorField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterColorField;
 

@@ -14,7 +14,7 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public enum Alignment implements Datatype<String> {
+public enum Alignment implements SimpleDatatype<String> {
 
   /**
    * the component will be horizontally and vertically centered.<br>

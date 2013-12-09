@@ -160,7 +160,7 @@ public abstract class AbstractRole implements Role {
    * @param name is the name of the attribute.
    * @param datatype is the value to set as a {@link Datatype}.
    */
-  protected final void setAttribute(String name, Datatype<?> datatype) {
+  protected final void setAttribute(String name, Datatype datatype) {
 
     if (this.delegate != null) {
       String value = null;

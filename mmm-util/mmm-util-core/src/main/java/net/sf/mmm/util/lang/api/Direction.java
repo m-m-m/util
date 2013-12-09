@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public enum Direction implements Datatype<String>, NlsObject {
+public enum Direction implements SimpleDatatype<String>, NlsObject {
 
   /** Direction to the south (down/bottom). */
   SOUTH("S", NlsBundleUtilCoreRoot.INF_SOUTH) {

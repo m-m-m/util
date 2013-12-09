@@ -4,7 +4,7 @@ package net.sf.mmm.util.date.api;
 
 import java.util.Date;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum Month implements Datatype<Integer> {
+public enum Month implements SimpleDatatype<Integer> {
 
   /** The according month. */
   JANUARY(1, "January"),

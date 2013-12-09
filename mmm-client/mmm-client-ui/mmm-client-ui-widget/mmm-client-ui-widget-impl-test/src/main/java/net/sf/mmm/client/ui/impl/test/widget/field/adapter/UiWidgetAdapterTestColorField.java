@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 
 import java.util.List;
 
-import net.sf.mmm.client.ui.api.common.Color;
+import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterColorField;
 
 /**

@@ -2,18 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.music;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
- * This enum represents the {@link TonePitch} of a musical note. It is based on
- * the twelve tone music system and only represents a single octave instead of
- * an absolute pitch value.
+ * This enum represents the {@link TonePitch} of a musical note. It is based on the twelve tone music system
+ * and only represents a single octave instead of an absolute pitch value.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum TonePitch implements Datatype<String> {
+public enum TonePitch implements SimpleDatatype<String> {
 
   /**
    * The base tone of the common C-Major key.
@@ -21,8 +20,8 @@ public enum TonePitch implements Datatype<String> {
   C("C", "C"),
 
   /**
-   * A semitone (half step) higher than the pitch {@link #C}. This pitch is also
-   * called <em>des</em> (<code>d&#9837;</code>).
+   * A semitone (half step) higher than the pitch {@link #C}. This pitch is also called <em>des</em> (
+   * <code>d&#9837;</code>).
    */
   CIS("C#", "Cis"),
 
@@ -32,8 +31,8 @@ public enum TonePitch implements Datatype<String> {
   D("D", "D"),
 
   /**
-   * Three semitones (half steps) higher than the pitch {@link #C}. This pitch
-   * is also called <em>es</em> (<code>e&#9837;</code>).
+   * Three semitones (half steps) higher than the pitch {@link #C}. This pitch is also called <em>es</em> (
+   * <code>e&#9837;</code>).
    */
   DIS("D#", "Dis"),
 
@@ -48,8 +47,8 @@ public enum TonePitch implements Datatype<String> {
   F("F", "F"),
 
   /**
-   * Six semitones (half steps) higher than the pitch {@link #C}. This pitch is
-   * also called <em>ges</em> (<code>g&#9837;</code>).
+   * Six semitones (half steps) higher than the pitch {@link #C}. This pitch is also called <em>ges</em> (
+   * <code>g&#9837;</code>).
    */
   FIS("F#", "Fis"),
 
@@ -59,8 +58,8 @@ public enum TonePitch implements Datatype<String> {
   G("G", "G"),
 
   /**
-   * Eight semitones (half steps) higher than the pitch {@link #C}. This pitch
-   * is also called <em>as</em> (<code>a&#9837;</code>).
+   * Eight semitones (half steps) higher than the pitch {@link #C}. This pitch is also called <em>as</em> (
+   * <code>a&#9837;</code>).
    */
   GIS("G#", "Gis"),
 
@@ -70,18 +69,16 @@ public enum TonePitch implements Datatype<String> {
   A("A", "A"),
 
   /**
-   * Ten semitones (half steps) higher than the pitch {@link #C}. In most
-   * countries this pitch is simply called <em>B</em>. See {@link #H} for
-   * further details.
+   * Ten semitones (half steps) higher than the pitch {@link #C}. In most countries this pitch is simply
+   * called <em>B</em>. See {@link #H} for further details.
    */
   BB("Bb", "B\u266D"),
 
   /**
-   * Eleven semitones (half steps) higher than the pitch {@link #C}. This pitch
-   * is also called <em>ces</em> (<code>c&#9837;</code>). In most countries this
-   * pitch is simply called <em>H</em>. However the Americans use <em>B</em>
-   * instead of <em>H</em> what can cause confusion with {@link #BB}. The
-   * international notation therefore suggests the following notation:
+   * Eleven semitones (half steps) higher than the pitch {@link #C}. This pitch is also called <em>ces</em> (
+   * <code>c&#9837;</code>). In most countries this pitch is simply called <em>H</em>. However the Americans
+   * use <em>B</em> instead of <em>H</em> what can cause confusion with {@link #BB}. The international
+   * notation therefore suggests the following notation:
    * <table border="1">
    * <tr>
    * <th>International</th>
@@ -139,10 +136,8 @@ public enum TonePitch implements Datatype<String> {
   /**
    * This method gets the {@link TonePitch} for the given <code>value</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link TonePitch} .
-   * @return the requested {@link TonePitch} or <code>null</code> if no such
-   *         {@link TonePitch} exists.
+   * @param value is the {@link #getValue() value} of the requested {@link TonePitch} .
+   * @return the requested {@link TonePitch} or <code>null</code> if no such {@link TonePitch} exists.
    */
   public static TonePitch fromValue(String value) {
 
@@ -155,15 +150,13 @@ public enum TonePitch implements Datatype<String> {
   }
 
   /**
-   * This method transposes this {@link TonePitch} by the given number of
-   * <code>semitoneSteps</code>. The {@link TonePitch} will wrap so
-   * {@link #transpose(int) transpose(12)} will return the {@link TonePitch}
-   * itself (this) just like {@link #transpose(int) transpose(0)} or e.g.
-   * {@link #transpose(int) transpose(-24)}.
+   * This method transposes this {@link TonePitch} by the given number of <code>semitoneSteps</code>. The
+   * {@link TonePitch} will wrap so {@link #transpose(int) transpose(12)} will return the {@link TonePitch}
+   * itself (this) just like {@link #transpose(int) transpose(0)} or e.g. {@link #transpose(int)
+   * transpose(-24)}.
    * 
-   * @param semitoneSteps is the number of semitone steps to transpose. A
-   *        positive value transposes towards a higher pitch, a negative value
-   *        transposes towards a lower pitch. A value of zero (<code>0</code>)
+   * @param semitoneSteps is the number of semitone steps to transpose. A positive value transposes towards a
+   *        higher pitch, a negative value transposes towards a lower pitch. A value of zero (<code>0</code>)
    *        will have no change.
    * @return the transposed {@link TonePitch}.
    */

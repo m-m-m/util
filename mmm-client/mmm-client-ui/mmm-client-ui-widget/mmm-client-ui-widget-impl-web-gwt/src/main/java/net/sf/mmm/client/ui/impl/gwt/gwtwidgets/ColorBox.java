@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 import java.text.ParseException;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
-import net.sf.mmm.client.ui.api.common.Color;
+import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
 import com.google.gwt.dom.client.InputElement;
@@ -121,7 +121,7 @@ public class ColorBox extends ValueBoxBase<Color> implements AttributeWriteDataL
       if (colorString.length() == 0) {
         return null;
       }
-      return new Color(colorString);
+      return Color.valueOf(colorString);
     }
 
   }

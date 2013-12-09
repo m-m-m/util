@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public enum Comparator implements Datatype<String>, NlsObject {
+public enum Comparator implements SimpleDatatype<String>, NlsObject {
 
   /** {@link Comparator} to check if some value is greater than another. */
   GREATER_THAN(">", NlsBundleUtilCoreRoot.INF_GREATER_THAN, false, Boolean.FALSE) {

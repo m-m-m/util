@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This enum contains the available units for size measures.
@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  */
 // absolute units 1in = 2.54cm = 25.4mm = 72pt = 12pc
 // for font-size ~ 1em = 12pt = 16px = 100%
-public enum SizeUnit implements Datatype<String> {
+public enum SizeUnit implements SimpleDatatype<String> {
 
   /** Unit for pixels. */
   PIXEL("px", "pixel"),

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.person;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * The enum represents the gender of a natural person.
@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum Gender implements Datatype<String> {
+public enum Gender implements SimpleDatatype<String> {
 
   /**
    * The gender of a male person (a mister).
@@ -62,10 +62,8 @@ public enum Gender implements Datatype<String> {
   /**
    * This method gets the {@link Gender} for the given <code>value</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link Gender}.
-   * @return the requested {@link Gender} or <code>null</code> if no such
-   *         {@link Gender} exists.
+   * @param value is the {@link #getValue() value} of the requested {@link Gender}.
+   * @return the requested {@link Gender} or <code>null</code> if no such {@link Gender} exists.
    */
   public static Gender fromValue(String value) {
 

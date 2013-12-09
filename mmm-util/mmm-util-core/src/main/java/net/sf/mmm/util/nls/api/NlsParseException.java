@@ -104,7 +104,7 @@ public class NlsParseException extends NlsRuntimeException {
   public NlsParseException(Throwable nested, CharSequence value, CharSequence requiredFormat, Object type,
       Object valueSource) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorParseFormat(value, requiredFormat, type, valueSource));
+    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorParseFormat(value, requiredFormat, type, valueSource));
   }
 
   /**

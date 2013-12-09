@@ -9,7 +9,7 @@ package net.sf.mmm.util.lang.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public abstract class AbstractSimpleDatatype<V> extends AbstractDatatype<V> {
+public abstract class AbstractSimpleDatatype<V> extends AbstractSimpleDatatypeBase<V> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -7672725330000849564L;

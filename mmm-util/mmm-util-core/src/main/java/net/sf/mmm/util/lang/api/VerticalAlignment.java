@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public enum VerticalAlignment implements Datatype<String> {
+public enum VerticalAlignment implements SimpleDatatype<String> {
 
   /** Align content to the top. */
   TOP("^", NlsBundleUtilCoreRoot.INF_TOP),

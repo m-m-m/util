@@ -2,14 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
-
 /**
  * This enum contains the possible values for the sort order of a list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public enum SortOrder implements Datatype<String> {
+public enum SortOrder implements SimpleDatatype<String> {
 
   /** Indicating that values are in increasing order (e.g. "1, 2, 3"). */
   ASCENDING("asc", "ascending"),

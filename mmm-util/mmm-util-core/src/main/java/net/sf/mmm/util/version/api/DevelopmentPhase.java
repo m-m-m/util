@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.version.api;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.text.api.UnicodeUtil;
 
 /**
@@ -13,7 +13,7 @@ import net.sf.mmm.util.text.api.UnicodeUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public enum DevelopmentPhase implements Datatype<String> {
+public enum DevelopmentPhase implements SimpleDatatype<String> {
 
   /**
    * This is the earliest {@link DevelopmentPhase} in the development cycle. In this {@link DevelopmentPhase}

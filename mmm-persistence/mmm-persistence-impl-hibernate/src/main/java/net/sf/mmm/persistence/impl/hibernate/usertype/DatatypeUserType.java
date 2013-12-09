@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.math.base.MathUtilImpl;
@@ -24,16 +24,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 
 /**
- * This is the abstract base implementation of
- * {@link org.hibernate.usertype.UserType} to map a custom {@link Datatype}.
+ * This is the abstract base implementation of {@link org.hibernate.usertype.UserType} to map a custom
+ * {@link SimpleDatatype}.
  * 
- * @param <V> the generic for the basic java type representing the
- *        {@link Datatype#getValue() value}.
- * @param <T> the generic for the adapted {@link Datatype}.
+ * @param <V> the generic for the basic java type representing the {@link SimpleDatatype#getValue() value}.
+ * @param <T> the generic for the adapted {@link SimpleDatatype}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
  */
-public class DatatypeUserType<V, T extends Datatype<V>> extends AbstractUserType<T> {
+public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUserType<T> {
 
   /** @see #getValueClass() */
   private final Class<V> valueClass;
@@ -44,12 +43,11 @@ public class DatatypeUserType<V, T extends Datatype<V>> extends AbstractUserType
   /**
    * The constructor.
    * 
-   * @param sqlType is the {@link #sqlTypes() SQL type} used to store the
-   *        adapted {@link Datatype}.
-   * @param datatype is the {@link #returnedClass() java class} representing the
-   *        adapted {@link Datatype}.
-   * @param valueClass is the {@link #getValueClass() value class} reflecting
-   *        the {@link Datatype#getValue() basic java value}.
+   * @param sqlType is the {@link #sqlTypes() SQL type} used to store the adapted {@link SimpleDatatype}.
+   * @param datatype is the {@link #returnedClass() java class} representing the adapted
+   *        {@link SimpleDatatype}.
+   * @param valueClass is the {@link #getValueClass() value class} reflecting the
+   *        {@link SimpleDatatype#getValue() basic java value}.
    */
   public DatatypeUserType(int sqlType, Class<T> datatype, Class<V> valueClass) {
 
@@ -93,9 +91,8 @@ public class DatatypeUserType<V, T extends Datatype<V>> extends AbstractUserType
   }
 
   /**
-   * This method gets the {@link Class} reflecting the
-   * {@link Datatype#getValue() basic java value} of the adapted
-   * {@link Datatype}.
+   * This method gets the {@link Class} reflecting the {@link SimpleDatatype#getValue() basic java value} of
+   * the adapted {@link SimpleDatatype}.
    * 
    * @return the value class.
    */
@@ -105,12 +102,11 @@ public class DatatypeUserType<V, T extends Datatype<V>> extends AbstractUserType
   }
 
   /**
-   * This method converts the given <code>value</code> from {@link Object} to
-   * the {@link #getValueClass() value class}.
+   * This method converts the given <code>value</code> from {@link Object} to the {@link #getValueClass()
+   * value class}.
    * 
    * @param value is the value as retrieved from hibernate.
-   * @return the value cast or converted to the {@link #getValueClass() value
-   *         class}.
+   * @return the value cast or converted to the {@link #getValueClass() value class}.
    */
   protected V toValue(Object value) {
 
@@ -128,11 +124,10 @@ public class DatatypeUserType<V, T extends Datatype<V>> extends AbstractUserType
   }
 
   /**
-   * This method converts the value given as <code>value</code> to the custom
-   * {@link Datatype}.
+   * This method converts the value given as <code>value</code> to the custom {@link SimpleDatatype}.
    * 
-   * @param value is the basic java type representing the {@link Datatype}.
-   * @return the converted {@link Datatype}.
+   * @param value is the basic java type representing the {@link SimpleDatatype}.
+   * @return the converted {@link SimpleDatatype}.
    */
   protected T toDatatype(V value) {
 
@@ -172,8 +167,7 @@ public class DatatypeUserType<V, T extends Datatype<V>> extends AbstractUserType
    * {@inheritDoc}
    */
   @Override
-  public T nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
-      throws SQLException {
+  public T nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner) throws SQLException {
 
     assert (rs != null);
     assert (names != null);
@@ -189,10 +183,10 @@ public class DatatypeUserType<V, T extends Datatype<V>> extends AbstractUserType
   }
 
   /**
-   * This method converts the given {@link Datatype} <code>value</code> to the
-   * according {@link #sqlTypes() SQL type}.
+   * This method converts the given {@link SimpleDatatype} <code>value</code> to the according
+   * {@link #sqlTypes() SQL type}.
    * 
-   * @param value is the {@link Datatype} instance to convert.
+   * @param value is the {@link SimpleDatatype} instance to convert.
    * @return the given <code>value</code> as {@link #sqlTypes() SQL type}.
    */
   public Object toSqlType(T value) {

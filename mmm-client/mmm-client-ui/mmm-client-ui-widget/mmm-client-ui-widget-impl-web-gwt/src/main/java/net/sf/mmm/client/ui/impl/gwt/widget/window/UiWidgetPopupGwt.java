@@ -19,9 +19,6 @@ import net.sf.mmm.client.ui.impl.gwt.widget.window.adapter.UiWidgetAdapterGwtPop
  */
 public class UiWidgetPopupGwt extends AbstractUiWidgetPopup<UiWidgetAdapterGwtPopup> {
 
-  /** @see #getButtonPanel() */
-  private UiWidgetButtonPanel buttonPanel;
-
   /**
    * The constructor.
    * 
@@ -38,15 +35,11 @@ public class UiWidgetPopupGwt extends AbstractUiWidgetPopup<UiWidgetAdapterGwtPo
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButtonPanel getButtonPanel() {
+  protected UiWidgetButtonPanel createButtonPanel() {
 
-    if (this.buttonPanel == null) {
-      UiWidgetAdapterGwtButtonPanel buttonPanelAdapter = new UiWidgetAdapterGwtButtonPanel(getWidgetAdapter()
-          .getToplevelWidget().getButtonPanel());
-      this.buttonPanel = new UiWidgetButtonPanelGwt(getContext(), buttonPanelAdapter);
-      setParent(this.buttonPanel, this);
-    }
-    return this.buttonPanel;
+    UiWidgetAdapterGwtButtonPanel buttonPanelAdapter = new UiWidgetAdapterGwtButtonPanel(getWidgetAdapter()
+        .getToplevelWidget().getButtonPanel());
+    return new UiWidgetButtonPanelGwt(getContext(), buttonPanelAdapter);
   }
 
   /**

@@ -5,7 +5,8 @@ package net.sf.mmm.util.datatype.api.phone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.lang.api.AbstractDatatype;
+import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
@@ -18,7 +19,7 @@ import net.sf.mmm.util.nls.api.NlsParseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class PhoneNumber extends AbstractDatatype<String> {
+public class PhoneNumber extends AbstractSimpleDatatypeBase<String> implements SimpleDatatype<String> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -6395551467951327196L;

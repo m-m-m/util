@@ -22,7 +22,7 @@ package net.sf.mmm.util.lang.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface EnumType<V> extends Datatype<V> {
+public interface EnumType<V> extends SimpleDatatype<V> {
 
   // nothing to add...
 

@@ -89,6 +89,30 @@ public interface CharStreamScanner {
   long readLong(int maxDigits) throws NumberFormatException;
 
   /**
+   * This method reads the double value (decimal number) starting at the {@link #getCurrentIndex() current
+   * position} by reading as many matching characters as available and returns its
+   * {@link Double#parseDouble(String) parsed} value.<br>
+   * 
+   * @return the parsed number.
+   * @throws NumberFormatException if the current {@link #getCurrentIndex() current position} does NOT point
+   *         to a number.
+   * @since 4.0.0
+   */
+  double readDouble() throws NumberFormatException;
+
+  /**
+   * This method reads the float value (decimal number) starting at the {@link #getCurrentIndex() current
+   * position} by reading as many matching characters as available and returns its
+   * {@link Float#parseFloat(String) parsed} value.<br>
+   * 
+   * @return the parsed number.
+   * @throws NumberFormatException if the current {@link #getCurrentIndex() current position} does NOT point
+   *         to a number.
+   * @since 4.0.0
+   */
+  float readFloat() throws NumberFormatException;
+
+  /**
    * This method reads the number of {@link #next() next characters} given by <code>count</code> and returns
    * them as string. If there are less characters {@link #hasNext() available} the returned string will be
    * shorter than <code>count</code> and only contain the available characters.

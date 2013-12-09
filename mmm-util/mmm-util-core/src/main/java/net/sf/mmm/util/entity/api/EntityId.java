@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.entity.api;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This is the interface for an ID that uniquely identifies an object of a particular type. The referenced
@@ -24,7 +24,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface EntityId extends Datatype<EntityId> {
+public interface EntityId extends SimpleDatatype<String> {
 
   /** This radix is used to convert numbers to/from strings. */
   int RADIX = 32;

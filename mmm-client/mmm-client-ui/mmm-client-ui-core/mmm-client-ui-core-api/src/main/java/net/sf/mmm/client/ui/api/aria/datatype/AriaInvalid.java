@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.aria.datatype;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This enum contains the possible values for
@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum AriaInvalid implements Datatype<String> {
+public enum AriaInvalid implements SimpleDatatype<String> {
 
   /**
    * Indicating that a grammatical error was detected.

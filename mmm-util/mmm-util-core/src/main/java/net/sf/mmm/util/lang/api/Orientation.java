@@ -12,7 +12,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public enum Orientation implements Datatype<String> {
+public enum Orientation implements SimpleDatatype<String> {
 
   /**
    * A horizontal orientation means that objects are ordered from the left to the right.

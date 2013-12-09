@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**
@@ -37,7 +37,7 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public enum DiacriticalMark implements Datatype<Character> {
+public enum DiacriticalMark implements SimpleDatatype<Character> {
 
   /**
    * A mark that can be placed on top of some Latin, Cyrillic or Greek characters. It looks like a stroke

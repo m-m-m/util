@@ -4,19 +4,19 @@ package net.sf.mmm.util.date.api;
 
 import java.util.Calendar;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * The enum contains the units of a date. These are {@link #DAY}, {@link #WEEK},
- * {@link #MONTH}, and {@link #YEAR}.
+ * The enum contains the units of a date. These are {@link #DAY}, {@link #WEEK}, {@link #MONTH}, and
+ * {@link #YEAR}.
  * 
  * @see java.util.concurrent.TimeUnit
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum DateUnit implements Datatype<String> {
+public enum DateUnit implements SimpleDatatype<String> {
 
   /** The day of the month starting with 1. */
   DAY("D", "day", Calendar.DAY_OF_MONTH),
@@ -74,9 +74,9 @@ public enum DateUnit implements Datatype<String> {
   }
 
   /**
-   * This method delegates to {@link Calendar#get(int)}. However, it will return
-   * the month in a natural way from 1 to 12. Java {@link Calendar} returns 0
-   * for January instead of 1 and so forth what is the cause of many mistakes.
+   * This method delegates to {@link Calendar#get(int)}. However, it will return the month in a natural way
+   * from 1 to 12. Java {@link Calendar} returns 0 for January instead of 1 and so forth what is the cause of
+   * many mistakes.
    * 
    * @param calendar is the {@link Calendar}.
    * @return the requested calendar field for this {@link DateUnit}.
@@ -92,10 +92,9 @@ public enum DateUnit implements Datatype<String> {
   }
 
   /**
-   * This method delegates to {@link Calendar#set(int, int)}. However, it will
-   * treat the month in a natural way from 1 to 12. Java {@link Calendar}
-   * expects 0 for January instead of 1 and so forth what is the cause of many
-   * mistakes.
+   * This method delegates to {@link Calendar#set(int, int)}. However, it will treat the month in a natural
+   * way from 1 to 12. Java {@link Calendar} expects 0 for January instead of 1 and so forth what is the cause
+   * of many mistakes.
    * 
    * @param calendar is the {@link Calendar}.
    * @param unitValue is the value to set.
@@ -111,8 +110,8 @@ public enum DateUnit implements Datatype<String> {
   }
 
   /**
-   * This method gets the ID constant for {@link java.util.Calendar} operations
-   * such as {@link java.util.Calendar#get(int)}.
+   * This method gets the ID constant for {@link java.util.Calendar} operations such as
+   * {@link java.util.Calendar#get(int)}.
    * 
    * @return the calendar ID.
    */
@@ -124,10 +123,8 @@ public enum DateUnit implements Datatype<String> {
   /**
    * This method gets the {@link DateUnit} for the given <code>value</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link DateUnit}.
-   * @return the requested {@link DateUnit} or <code>null</code> if no such
-   *         {@link DateUnit} exists.
+   * @param value is the {@link #getValue() value} of the requested {@link DateUnit}.
+   * @return the requested {@link DateUnit} or <code>null</code> if no such {@link DateUnit} exists.
    */
   public static DateUnit fromValue(String value) {
 

@@ -534,6 +534,72 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * {@inheritDoc}
    */
+  @Override
+  public double readDouble() throws NumberFormatException {
+
+    String number = consumeDecimal();
+    return Double.parseDouble(number);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float readFloat() throws NumberFormatException {
+
+    String number = consumeDecimal();
+    return Float.parseFloat(number);
+  }
+
+  /**
+   * Consumes the characters of a decimal number (double or float).
+   * 
+   * @return the decimal number as {@link String}.
+   */
+  private String consumeDecimal() {
+
+    int index = this.pos;
+    boolean noSign = false;
+    boolean noExponent = false;
+    boolean noDot = false;
+    while (this.pos < this.endIndex) {
+      char c = this.chars[this.pos];
+      if ((c == '+') || (c == '-')) {
+        if (noSign) {
+          break;
+        } else {
+          noSign = true;
+        }
+      } else if (c == 'e') {
+        if (noExponent) {
+          break;
+        } else {
+          noExponent = true;
+          noSign = false;
+          noDot = true;
+        }
+      } else if (c == '.') {
+        if (noDot) {
+          break;
+        } else {
+          noDot = true;
+        }
+      } else if ((c < '0') || (c > '9')) {
+        break;
+      }
+      this.pos++;
+    }
+    int len = this.pos - index;
+    if (len < 1) {
+      throw new NlsParseException(getTail(), "([0-9.e+-]+", Number.class);
+    }
+    String number = new String(this.chars, index, len);
+    return number;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public boolean skipOver(String substring, boolean ignoreCase) {
 
     return skipOver(substring, ignoreCase, null);

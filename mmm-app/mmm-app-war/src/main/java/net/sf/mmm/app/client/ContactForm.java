@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.Color;
+import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
@@ -71,7 +71,7 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     colorOptions.add(Color.GREEN);
     colorOptions.add(Color.BLUE);
     colorOptions.add(Color.WHITE);
-    colorOptions.add(Color.CYJAN);
+    colorOptions.add(Color.CYAN);
     colorOptions.add(Color.YELLOW);
     colorOptions.add(Color.MAGENTA);
     colorOptions.add(Color.GREY);

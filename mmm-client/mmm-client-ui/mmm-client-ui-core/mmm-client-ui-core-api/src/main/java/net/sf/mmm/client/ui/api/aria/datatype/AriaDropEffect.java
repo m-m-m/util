@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.aria.datatype;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This enum contains the possible values for
@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum AriaDropEffect implements Datatype<String> {
+public enum AriaDropEffect implements SimpleDatatype<String> {
 
   /**
    * Indicating that a duplicate of the source object will be dropped into the target.

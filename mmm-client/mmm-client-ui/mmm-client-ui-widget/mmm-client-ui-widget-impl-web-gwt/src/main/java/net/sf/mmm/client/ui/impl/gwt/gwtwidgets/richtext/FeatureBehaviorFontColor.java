@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
-import net.sf.mmm.client.ui.api.common.Color;
+import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -62,7 +62,7 @@ class FeatureBehaviorFontColor extends AbstractColorFeatureBehavior {
   public void updateFontSettings() {
 
     String colorString = getFormatter().getForeColor();
-    Color color = new Color(colorString);
+    Color color = Color.valueOf(colorString);
     getColorBox().setValue(color);
   }
 }

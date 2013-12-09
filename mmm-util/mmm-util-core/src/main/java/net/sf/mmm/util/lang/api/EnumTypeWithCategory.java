@@ -11,7 +11,7 @@ package net.sf.mmm.util.lang.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface EnumTypeWithCategory<V, CATEGORY> extends Datatype<V> {
+public interface EnumTypeWithCategory<V, CATEGORY> extends SimpleDatatype<V> {
 
   /**
    * This method gets the {@link EnumType} of the category of this enum instance. The category typically

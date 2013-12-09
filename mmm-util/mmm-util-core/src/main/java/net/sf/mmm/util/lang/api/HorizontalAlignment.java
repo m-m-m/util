@@ -31,7 +31,7 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public enum HorizontalAlignment implements Datatype<String> {
+public enum HorizontalAlignment implements SimpleDatatype<String> {
 
   /** Align content to the left side. */
   LEFT("-", NlsBundleUtilCoreRoot.INF_LEFT),

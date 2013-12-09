@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.music;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This enum represents the musical key.
@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum MusicalKey implements Datatype<String> {
+public enum MusicalKey implements SimpleDatatype<String> {
 
   /**
    * TODO.
@@ -207,8 +207,7 @@ public enum MusicalKey implements Datatype<String> {
   }
 
   /**
-   * This method gets the {@link TonePitch} of the tonika (base-tone) for this
-   * key.
+   * This method gets the {@link TonePitch} of the tonika (base-tone) for this key.
    * 
    * @return the {@link TonePitch}.
    */
@@ -222,10 +221,8 @@ public enum MusicalKey implements Datatype<String> {
   /**
    * This method gets the {@link MusicalKey} for the given <code>value</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link MusicalKey}.
-   * @return the requested {@link MusicalKey} or <code>null</code> if no such
-   *         {@link MusicalKey} exists.
+   * @param value is the {@link #getValue() value} of the requested {@link MusicalKey}.
+   * @return the requested {@link MusicalKey} or <code>null</code> if no such {@link MusicalKey} exists.
    */
   public static MusicalKey fromValue(String value) {
 

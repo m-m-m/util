@@ -27,9 +27,9 @@ public abstract class AbstractEntityId implements EntityId {
    * {@inheritDoc}
    */
   @Override
-  public EntityId getValue() {
+  public String getValue() {
 
-    return this;
+    return getTitle();
   }
 
   /**

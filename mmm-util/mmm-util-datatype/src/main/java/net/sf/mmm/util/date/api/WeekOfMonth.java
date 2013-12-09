@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.api;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * The enum contains the twelve months of a year in Gregorian calendar.
@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum WeekOfMonth implements Datatype<Integer> {
+public enum WeekOfMonth implements SimpleDatatype<Integer> {
 
   /** The according month. */
   FIRST(1, "1."),
@@ -64,10 +64,8 @@ public enum WeekOfMonth implements Datatype<Integer> {
   /**
    * This method gets the {@link WeekOfMonth} for the given <code>value</code>.
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link WeekOfMonth}.
-   * @return the requested {@link WeekOfMonth} or <code>null</code> if no such
-   *         {@link WeekOfMonth} exists.
+   * @param value is the {@link #getValue() value} of the requested {@link WeekOfMonth}.
+   * @return the requested {@link WeekOfMonth} or <code>null</code> if no such {@link WeekOfMonth} exists.
    */
   public static WeekOfMonth fromValue(Integer value) {
 

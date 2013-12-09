@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
-
 /**
  * This is the interface for the definition of an {@link EnumType}. <br/>
  * As an example we can think of an instance of this interface called <em>country</em> defined as
@@ -20,7 +19,7 @@ package net.sf.mmm.util.lang.api;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface EnumDefinition<TYPE, CATEGORY> extends Datatype<String> {
+public interface EnumDefinition<TYPE, CATEGORY> extends SimpleDatatype<String> {
 
   /**
    * @return the {@link EnumDefinition} this {@link EnumDefinition} is categorized by or <code>null</code> for

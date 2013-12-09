@@ -137,6 +137,7 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
    * @param categories are the {@link EnumDefinition#getCategory() categories}.
    * @return the {@link List} of matching {@link EnumType}s.
    */
+  @SuppressWarnings("unchecked")
   <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> List<ENUM> getEnumValues(
       EnumDefinition<ENUM, CATEGORY> enumDefinition, CATEGORY... categories);
 

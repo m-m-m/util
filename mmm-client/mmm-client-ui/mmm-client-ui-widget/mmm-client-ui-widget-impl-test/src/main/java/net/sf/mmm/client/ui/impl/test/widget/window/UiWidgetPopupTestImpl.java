@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.impl.test.widget.window;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.window.AbstractUiWidgetPopup;
@@ -33,6 +34,15 @@ public class UiWidgetPopupTestImpl extends AbstractUiWidgetPopup<UiWidgetAdapter
   protected UiWidgetAdapterTestCompositeRegular createWidgetAdapter() {
 
     return new UiWidgetAdapterTestCompositeRegular();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected UiWidgetButtonPanel createButtonPanel() {
+
+    return getContext().getWidgetFactory().create(UiWidgetButtonPanel.class);
   }
 
   /**

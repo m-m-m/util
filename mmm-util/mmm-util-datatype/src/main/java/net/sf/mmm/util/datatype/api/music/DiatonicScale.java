@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.music;
 
-import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * TODO: this class ...
@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum DiatonicScale implements Datatype<String> {
+public enum DiatonicScale implements SimpleDatatype<String> {
 
   // DORIAN("dor", "dorian"),
   //
@@ -73,13 +73,10 @@ public enum DiatonicScale implements Datatype<String> {
   }
 
   /**
-   * This method gets the {@link DiatonicScale} for the given <code>value</code>
-   * .
+   * This method gets the {@link DiatonicScale} for the given <code>value</code> .
    * 
-   * @param value is the {@link #getValue() value} of the requested
-   *        {@link DiatonicScale}.
-   * @return the requested {@link DiatonicScale} or <code>null</code> if no such
-   *         {@link DiatonicScale} exists.
+   * @param value is the {@link #getValue() value} of the requested {@link DiatonicScale}.
+   * @return the requested {@link DiatonicScale} or <code>null</code> if no such {@link DiatonicScale} exists.
    */
   public static DiatonicScale fromValue(String value) {
 

@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.base.widget.window;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainClose;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterPopup;
 
@@ -19,6 +20,9 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterPopup;
 public abstract class AbstractUiWidgetPopup<ADAPTER extends UiWidgetAdapterPopup> extends
     AbstractUiWidgetAbstractDialogWindow<ADAPTER> implements UiWidgetPopup {
 
+  /** @see #getButtonPanel() */
+  private UiWidgetButtonPanel buttonPanel;
+
   /**
    * The constructor.
    * 
@@ -31,6 +35,24 @@ public abstract class AbstractUiWidgetPopup<ADAPTER extends UiWidgetAdapterPopup
     super(context, widgetAdapter);
     addStyle(STYLE_POPUP);
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetButtonPanel getButtonPanel() {
+
+    if (this.buttonPanel == null) {
+      this.buttonPanel = createButtonPanel();
+      setParent(this.buttonPanel, this);
+    }
+    return this.buttonPanel;
+  }
+
+  /**
+   * @return the {@link UiWidgetButton button panel} instance located at the bottom of the popup.
+   */
+  protected abstract UiWidgetButtonPanel createButtonPanel();
 
   /**
    * {@inheritDoc}

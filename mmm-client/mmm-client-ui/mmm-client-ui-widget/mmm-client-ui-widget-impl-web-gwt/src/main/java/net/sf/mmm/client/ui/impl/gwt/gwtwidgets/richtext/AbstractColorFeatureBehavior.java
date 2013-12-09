@@ -86,7 +86,7 @@ abstract class AbstractColorFeatureBehavior extends AbstractClickFeatureBehavior
   }
 
   /**
-   * @return the {@link ColorBox} with the {@link net.sf.mmm.client.ui.api.common.Color} for the feature
+   * @return the {@link ColorBox} with the {@link net.sf.mmm.client.ui.api.color.Color} for the feature
    *         value.
    */
   protected ColorBox getColorBox() {
