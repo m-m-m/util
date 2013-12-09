@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
@@ -18,6 +17,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomGridPanel;
+import net.sf.mmm.util.datatype.api.color.Color;
 
 /**
  * 

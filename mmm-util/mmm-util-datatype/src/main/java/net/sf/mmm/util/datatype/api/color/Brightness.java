@@ -1,18 +1,17 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.color;
+package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} represents the lightness of a {@link Color}. Just like {@link Brightness} it is a
- * {@link Factor factor} indicating the amount of light emitted by a {@link Color}, but relative to the
- * {@link Brightness} of a similarly illuminated white.
+ * This {@link Segment} represents the brightness of a {@link Color}. The brightness is a {@link Factor
+ * factor} indicating the amount of light emitted by a {@link Color}.
  * 
- * @see GenericColor#getLightness()
+ * @see GenericColor#getBrightness()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Lightness extends Factor {
+public class Brightness extends Factor {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
@@ -20,7 +19,7 @@ public class Lightness extends Factor {
   /**
    * The constructor for de-serialization.
    */
-  protected Lightness() {
+  protected Brightness() {
 
     super();
   }
@@ -30,7 +29,7 @@ public class Lightness extends Factor {
    * 
    * @param value is the {@link #getValue() value}.
    */
-  public Lightness(Double value) {
+  public Brightness(Double value) {
 
     super(value);
   }
@@ -40,7 +39,7 @@ public class Lightness extends Factor {
    * 
    * @param value is the {@link #getValue() value}.
    */
-  public Lightness(double value) {
+  public Brightness(double value) {
 
     super(value);
   }
@@ -51,7 +50,7 @@ public class Lightness extends Factor {
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */
-  public Lightness(String value) {
+  public Brightness(String value) {
 
     super(value);
   }

@@ -1,31 +1,25 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.color;
+package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} represents the alpha value of a color what is its opacity. A value of <code>0</code>
- * stands for fully transparent (color not visible), while <code>1.0</code> stands for a regular color (color
- * fully visible). An alpha value of <code>0.5</code> will be 50% transparent so you can see the color but the
- * background shines through.
+ * This {@link Segment} represents the <em>red</em> part of a {@link GenericColor color}.
  * 
- * @see Color#getAlpha()
- * @see GenericColor#getAlpha()
+ * @see Color#getRed()
+ * @see GenericColor#getRed()
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Alpha extends Factor {
+public class Red extends Factor {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
 
-  /** The maximum {@link Alpha} value for full opaque (no transparency). */
-  public static final Alpha OPAQUE = new Alpha(1.0);
-
   /**
    * The constructor for de-serialization.
    */
-  protected Alpha() {
+  protected Red() {
 
     super();
   }
@@ -35,7 +29,7 @@ public class Alpha extends Factor {
    * 
    * @param value is the {@link #getValue() value}.
    */
-  public Alpha(Double value) {
+  public Red(Double value) {
 
     super(value);
   }
@@ -45,7 +39,7 @@ public class Alpha extends Factor {
    * 
    * @param value is the {@link #getValue() value}.
    */
-  public Alpha(double value) {
+  public Red(double value) {
 
     super(value);
   }
@@ -56,7 +50,7 @@ public class Alpha extends Factor {
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */
-  public Alpha(String value) {
+  public Red(String value) {
 
     super(value);
   }
@@ -66,7 +60,7 @@ public class Alpha extends Factor {
    * 
    * @param byteValue is the {@link #getValueAsByte() value given as byte}.
    */
-  public Alpha(int byteValue) {
+  public Red(int byteValue) {
 
     super(byteValue);
   }

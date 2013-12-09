@@ -38,16 +38,21 @@ public final class ExceptionHelper {
    * exception or one of its {@link Throwable#getCause() causes} are an {@link Class#isInstance(Object)
    * instance of} the given <code>expectedType</code>.
    * 
+   * @param <T> is the generic type of the expected cause.
    * @param catched is the {@link Throwable} that has been catched.
    * @param expectedType is the {@link Class} of the {@link Throwable} that is expected.
+   * @return the first {@link Throwable} in the hierarchy of <code>catched</code> matching to the given
+   *         <code>expectedType</code>.
    */
-  public static void assertCause(Throwable catched, Class<? extends Throwable> expectedType) {
+  public static <T extends Throwable> T assertCause(Throwable catched, Class<T> expectedType) {
 
-    if (!isCause(catched, expectedType)) {
+    T cause = getCause(catched, expectedType);
+    if (cause == null) {
       String message = expectedType.getName() + " expected but catched " + catched.getClass().getName() + "!";
       LOGGER.error(message, catched);
       Assert.fail(message);
     }
+    return cause;
   }
 
   /**
@@ -61,15 +66,32 @@ public final class ExceptionHelper {
    */
   public static boolean isCause(Throwable catched, Class<? extends Throwable> expectedType) {
 
+    Throwable cause = getCause(catched, expectedType);
+    return (cause != null);
+  }
+
+  /**
+   * This method gets a catched exception or one of its {@link Throwable#getCause() causes} that is an
+   * {@link Class#isInstance(Object) instance of} the given <code>expectedType</code>.
+   * 
+   * @param <T> is the generic type of the expected cause.
+   * @param catched is the {@link Throwable} that has been catched.
+   * @param expectedType is the {@link Class} of the {@link Throwable} that is expected.
+   * @return <code>true</code> if the given <code>catched</code> or one of its {@link Throwable#getCause()
+   *         causes} is an {@link Class#isInstance(Object) instance of} the given <code>expectedType</code>.
+   */
+  @SuppressWarnings("unchecked")
+  public static <T extends Throwable> T getCause(Throwable catched, Class<T> expectedType) {
+
     Throwable t = catched;
     while (!expectedType.isInstance(t)) {
       Throwable cause = t.getCause();
       if ((cause == null) || (cause == t)) {
-        return false;
+        return null;
       }
       t = cause;
     }
-    return true;
+    return (T) t;
   }
 
   /**

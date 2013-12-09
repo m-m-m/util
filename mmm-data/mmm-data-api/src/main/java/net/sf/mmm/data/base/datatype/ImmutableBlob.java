@@ -9,9 +9,9 @@ import net.sf.mmm.data.api.datatype.Blob;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This is an implementation of {@link Blob} that delegates to another instance
- * of {@link Blob} in order to make it immutable. This is useful to create an
- * unmodifiable view on a {@link net.sf.mmm.data.api.datatype.MutableBlob}.
+ * This is an implementation of {@link Blob} that delegates to another instance of {@link Blob} in order to
+ * make it immutable. This is useful to create an unmodifiable view on a
+ * {@link net.sf.mmm.data.api.datatype.MutableBlob}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -65,14 +65,6 @@ public class ImmutableBlob implements Blob {
   public int getRevision() {
 
     return this.delegate.getRevision();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Blob getValue() {
-
-    return this;
   }
 
   /**

@@ -5,10 +5,10 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterColorField;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ColorBox;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
+import net.sf.mmm.util.datatype.api.color.Color;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterColorField} using GWT based on {@link ColorBox}.

@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.color;
+package net.sf.mmm.util.datatype.api.color;
 
 /**
  * This {@link Segment} is a {@link Factor factor} that represents the colorfulness of a stimulus relative to

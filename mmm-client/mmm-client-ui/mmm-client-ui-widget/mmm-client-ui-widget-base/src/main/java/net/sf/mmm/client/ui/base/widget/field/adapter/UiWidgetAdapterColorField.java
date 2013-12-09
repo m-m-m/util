@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteOptions;
-import net.sf.mmm.client.ui.api.color.Color;
+import net.sf.mmm.util.datatype.api.color.Color;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
@@ -12,8 +12,7 @@ import net.sf.mmm.client.ui.api.color.Color;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterColorField extends UiWidgetAdapterField<Color, Color>,
-    AttributeWriteOptions<Color> {
+public interface UiWidgetAdapterColorField extends UiWidgetAdapterField<Color, Color>, AttributeWriteOptions<Color> {
 
   // nothing to add
 

@@ -1,8 +1,12 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.color;
+package net.sf.mmm.util.datatype.api.color;
 
+import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.nls.api.NlsObject;
+import net.sf.mmm.util.nls.api.NlsParseException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -110,17 +114,30 @@ public class GenericColorTest extends Assert {
 
     if (allEqual) {
       for (ColorModel colorModel : ColorModel.values()) {
-        String colorString = color.toString(colorModel);
-        if (!color.equals(GenericColor.valueOf(colorString))) {
-          System.out.println("Buh!");
-        }
-        assertEquals(color, GenericColor.valueOf(colorString));
+        checkStringConversion(color, colorModel);
       }
     } else {
-      String colorString = color.toString(model);
-      assertEquals(color, GenericColor.valueOf(colorString));
+      checkStringConversion(color, model);
     }
 
+  }
+
+  /**
+   * Checks the conversion of {@link GenericColor} {@link GenericColor#valueOf(String) from} and
+   * {@link GenericColor#toString(ColorModel) to} {@link String}.
+   * 
+   * @param color is the {@link GenericColor} to test.
+   * @param colorModel is the expected {@link ColorModel}.
+   */
+  private void checkStringConversion(GenericColor color, ColorModel colorModel) {
+
+    String colorString = color.toString(colorModel);
+    GenericColor copy = GenericColor.valueOf(colorString);
+    assertEquals(color, copy);
+    assertEquals(color.hashCode(), copy.hashCode());
+    if (colorModel == ColorModel.RGB) {
+      assertEquals(colorString, color.getValue());
+    }
   }
 
   /**
@@ -164,6 +181,7 @@ public class GenericColorTest extends Assert {
 
     // then
     assertEquals("#7F7F7F", color.toColor().toString());
+    assertEquals(color, GenericColor.valueOf("rgb(0.5, 0.5, 0.5)"));
     checkColor(color, red, green, blue, new Hue(0.0), new Saturation(0.0), new Saturation(0.0), new Brightness(0.5),
         new Lightness(0.5), new Chroma(0.0), alpha, true, model);
   }
@@ -187,6 +205,7 @@ public class GenericColorTest extends Assert {
     // then
     assertEquals(color, GenericColor.valueOf("BLACK"));
     assertEquals(color, GenericColor.valueOf("#000000"));
+    assertEquals(color, GenericColor.valueOf("rgb(0, 0, 0)"));
     checkColor(color, red, green, blue, new Hue(0.0), new Saturation(0.0), new Saturation(0.0), new Brightness(0.0),
         new Lightness(0.0), new Chroma(0.0), alpha, true, model);
   }
@@ -264,6 +283,61 @@ public class GenericColorTest extends Assert {
     assertEquals(red, color.getRed());
     assertEquals(lightness, color.getLightness());
     assertEquals(chroma, color.getChroma());
+    // check generic access
+    assertSame(alpha, color.getSegment(ColorSegmentType.ALPHA));
+  }
+
+  /**
+   * Tests {@link GenericColor#equals(Object)}.
+   */
+  @Test
+  public void testEquals() {
+
+    // given
+    GenericColor color = GenericColor.valueOf(Color.NAVY);
+
+    // then
+    assertTrue(color.equals(color));
+    assertFalse(color.equals(null));
+    assertFalse(color.equals("navy"));
+    Red red = color.getRed();
+    Green green = color.getGreen();
+    Blue blue = color.getBlue();
+    Alpha alpha = new Alpha(0.5);
+    assertFalse(color.equals(GenericColor.valueOf(red, green, blue, alpha)));
+    assertFalse(color.equals(GenericColor.valueOf(red, green, new Blue(1.0), color.getAlpha())));
+    assertFalse(color.equals(GenericColor.valueOf(red, new Green(1.0), blue, color.getAlpha())));
+    assertFalse(color.equals(GenericColor.valueOf(new Red(1.0), green, blue, color.getAlpha())));
+  }
+
+  /**
+   * Tests {@link GenericColor#valueOf(String)} with various invalid {@link String}s.
+   */
+  @Test
+  public void testInvalidStrings() {
+
+    NlsNullPointerException npe = checkInvalidString(null, NlsNullPointerException.class);
+    assertEquals("color", npe.getNlsMessage().getArgument(NlsObject.KEY_OBJECT));
+    checkInvalidString("", NlsParseException.class);
+    checkInvalidString("rgba", NlsParseException.class);
+    checkInvalidString("rgb(x,y,z)", NumberFormatException.class);
+  }
+
+  /**
+   * @param <T> is the generic type of <code>expectedException</code>.
+   * @param colorString is the invalid {@link GenericColor#valueOf(String) color string}.
+   * @param expectedException the expected exception.
+   * @return the expected exception.
+   */
+  private <T extends Throwable> T checkInvalidString(String colorString, Class<T> expectedException) {
+
+    try {
+      GenericColor.valueOf(colorString);
+      ExceptionHelper.failExceptionExpected();
+      return null; // will never happen...
+    } catch (RuntimeException e) {
+      return ExceptionHelper.assertCause(e, expectedException);
+    }
   }
 
   /**

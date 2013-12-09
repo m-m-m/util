@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetColorField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterColorField;
+import net.sf.mmm.util.datatype.api.color.Color;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetColorField}.

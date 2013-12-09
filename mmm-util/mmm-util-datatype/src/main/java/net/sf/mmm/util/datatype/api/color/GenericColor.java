@@ -1,6 +1,8 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.color;
+package net.sf.mmm.util.datatype.api.color;
+
+import java.util.Objects;
 
 import net.sf.mmm.util.lang.api.AbstractDatatype;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
@@ -563,16 +565,16 @@ public final class GenericColor extends AbstractDatatype implements SimpleDataty
 
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this.alpha == null) ? 0 : this.alpha.hashCode());
-    result = prime * result + ((this.blue == null) ? 0 : this.blue.hashCode());
-    result = prime * result + ((this.brightness == null) ? 0 : this.brightness.hashCode());
-    result = prime * result + ((this.chroma == null) ? 0 : this.chroma.hashCode());
-    result = prime * result + ((this.green == null) ? 0 : this.green.hashCode());
-    result = prime * result + ((this.hue == null) ? 0 : this.hue.hashCode());
-    result = prime * result + ((this.lightness == null) ? 0 : this.lightness.hashCode());
-    result = prime * result + ((this.red == null) ? 0 : this.red.hashCode());
-    result = prime * result + ((this.saturationHsb == null) ? 0 : this.saturationHsb.hashCode());
-    result = prime * result + ((this.saturationHsl == null) ? 0 : this.saturationHsl.hashCode());
+    result = prime * result + this.alpha.hashCode();
+    result = prime * result + this.blue.hashCode();
+    result = prime * result + this.brightness.hashCode();
+    result = prime * result + this.chroma.hashCode();
+    result = prime * result + this.green.hashCode();
+    result = prime * result + this.hue.hashCode();
+    result = prime * result + this.lightness.hashCode();
+    result = prime * result + this.red.hashCode();
+    result = prime * result + this.saturationHsb.hashCode();
+    result = prime * result + this.saturationHsl.hashCode();
     return result;
   }
 
@@ -592,74 +594,34 @@ public final class GenericColor extends AbstractDatatype implements SimpleDataty
       return false;
     }
     GenericColor other = (GenericColor) obj;
-    if (this.alpha == null) {
-      if (other.alpha != null) {
-        return false;
-      }
-    } else if (!this.alpha.equals(other.alpha)) {
+    if (!Objects.equals(this.alpha, other.alpha)) {
       return false;
     }
-    if (this.blue == null) {
-      if (other.blue != null) {
-        return false;
-      }
-    } else if (!this.blue.equals(other.blue)) {
+    if (!Objects.equals(this.red, other.red)) {
       return false;
     }
-    if (this.brightness == null) {
-      if (other.brightness != null) {
-        return false;
-      }
-    } else if (!this.brightness.equals(other.brightness)) {
+    if (!Objects.equals(this.green, other.green)) {
       return false;
     }
-    if (this.chroma == null) {
-      if (other.chroma != null) {
-        return false;
-      }
-    } else if (!this.chroma.equals(other.chroma)) {
+    if (!Objects.equals(this.blue, other.blue)) {
       return false;
     }
-    if (this.green == null) {
-      if (other.green != null) {
-        return false;
-      }
-    } else if (!this.green.equals(other.green)) {
+    if (!Objects.equals(this.brightness, other.brightness)) {
       return false;
     }
-    if (this.hue == null) {
-      if (other.hue != null) {
-        return false;
-      }
-    } else if (!this.hue.equals(other.hue)) {
+    if (!Objects.equals(this.chroma, other.chroma)) {
       return false;
     }
-    if (this.lightness == null) {
-      if (other.lightness != null) {
-        return false;
-      }
-    } else if (!this.lightness.equals(other.lightness)) {
+    if (!Objects.equals(this.hue, other.hue)) {
       return false;
     }
-    if (this.red == null) {
-      if (other.red != null) {
-        return false;
-      }
-    } else if (!this.red.equals(other.red)) {
+    if (!Objects.equals(this.lightness, other.lightness)) {
       return false;
     }
-    if (this.saturationHsb == null) {
-      if (other.saturationHsb != null) {
-        return false;
-      }
-    } else if (!this.saturationHsb.equals(other.saturationHsb)) {
+    if (!Objects.equals(this.saturationHsb, other.saturationHsb)) {
       return false;
     }
-    if (this.saturationHsl == null) {
-      if (other.saturationHsl != null) {
-        return false;
-      }
-    } else if (!this.saturationHsl.equals(other.saturationHsl)) {
+    if (!Objects.equals(this.saturationHsl, other.saturationHsl)) {
       return false;
     }
     return true;

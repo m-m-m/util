@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.impl.test.widget.field.adapter;
 
 import java.util.List;
 
-import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterColorField;
+import net.sf.mmm.util.datatype.api.color.Color;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterColorField} for testing without native toolkit.

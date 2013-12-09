@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.sf.mmm.client.ui.api.color.Color;
+import net.sf.mmm.util.datatype.api.color.Color;
 import net.sf.mmm.util.lang.api.Datatype;
 
 /**

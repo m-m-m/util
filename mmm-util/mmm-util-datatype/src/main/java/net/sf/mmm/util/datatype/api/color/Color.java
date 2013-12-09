@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.api.color;
+package net.sf.mmm.util.datatype.api.color;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,27 +16,27 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * {@link #getRed() red}, {@link #getGreen() green}, {@link #getBlue()}, and {@link #getAlpha() alpha}.
  * Internally these values are encoded in a single {@link #getValue() ARGB value}. This class is similar to
  * AWT {@link java.awt.Color} but GWT compatible and especially compatible to CSS. <br/>
+ * For transformations and other {@link ColorModel}s use {@link GenericColor}.<br/>
  * <b>ATTENTION:</b><br/>
- * The world could be so easy if people that create standards would care more about compatibility. The
- * {@link #getAlpha() alpha} value could instead have been a transparency value (inverse logic so
- * <code>0</code> means no transparency or in other words a regular color). Then if encoding in A/R/G/B the
- * hexadecimal RGB notation would be compatible with transparency because #2F4F8F would be the same as
- * #002F4F8F. Unfortunately pain is on our side and we have to keep with existing standards. Therefore #2F4F8F
- * is actually the same as #FF2F4F8F. To avoid confusion and to be compatible with CSS, {@link #getTitle()}
- * and {@link #toString()} will print the hexadecimal RGB form (e.g. #2F4F8F) in case {@link #getAlpha()
- * alpha} has its maximum value (256/FF). Otherwise the CSS RGBA notation (e.g. rgba(47,79,143,0.5) is used
- * instead of #7F2F4F8F).
+ * Unfortunately the {@link #getAlpha() alpha} value has NOT been designed as a transparency value (inverse
+ * logic so <code>0</code> means no transparency or in other words a regular color). Then if encoding in
+ * A/R/G/B the hexadecimal RGB notation would be compatible with transparency because #2F4F8F would be the
+ * same as #002F4F8F. Unfortunately pain is on our side and we have to keep with existing standards. Therefore
+ * #2F4F8F is actually the same as #FF2F4F8F. To avoid confusion and to be compatible with CSS,
+ * {@link #getTitle()} and {@link #toString()} will print the hexadecimal RGB form (e.g. #2F4F8F) in case
+ * {@link #getAlpha() alpha} has its maximum value (255/FF). Otherwise the CSS RGBA notation is used (e.g.
+ * rgba(47,79,143,0.5) instead of #7F2F4F8F).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class Color extends AbstractSimpleDatatype<Integer> {
 
-  /** The {@link Integer#parseInt(String, int) radix} for hexadecimal notation. */
-  private static final int RADIX_HEX = 16;
-
   /** UID for serialization. */
   private static final long serialVersionUID = 4307511006443832245L;
+
+  /** The {@link Integer#parseInt(String, int) radix} for hexadecimal notation. */
+  private static final int RADIX_HEX = 16;
 
   /** Number of bits to shift for {@link #getBlue() blue} value. */
   private static final int SHIFT_BLUE = 0;
@@ -79,9 +79,6 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /** @see #Color(int, int, int) */
   private static final Integer MAX_SEGMENT = Integer.valueOf(MASK);
-
-  /** The maximum of a single R/G/B value as float. */
-  static final float MASK_FLOAT = 255.0f;
 
   /** The {@link java.util.regex.Pattern} for a valid {@link Color} {@link #getTitle() as string}. */
   private static final String PATTERN = "#RRGGBB|rgba(r,g,b,a)|hsla(h,s,l,a)";

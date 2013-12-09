@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
-import net.sf.mmm.client.ui.api.color.Color;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
+import net.sf.mmm.util.datatype.api.color.Color;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 

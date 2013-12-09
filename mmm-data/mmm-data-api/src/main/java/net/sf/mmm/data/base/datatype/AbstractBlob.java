@@ -79,14 +79,6 @@ public abstract class AbstractBlob implements Blob {
   /**
    * {@inheritDoc}
    */
-  public Blob getValue() {
-
-    return this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public String getTitle() {
 
     return "<Blob>";
