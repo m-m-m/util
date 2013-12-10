@@ -3,23 +3,21 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} represents the <em>red</em> part of a {@link GenericColor color}.
- * 
- * @see Color#getRed()
- * @see GenericColor#getRed()
+ * This class is a generic implementation of {@link Factor} used for color transformations such as
+ * {@link GenericColor#lighten(ColorFactor)} or {@link GenericColor#darken(ColorFactor)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Red extends Factor<Red> {
+public class ColorFactor extends Factor<ColorFactor> {
 
   /** UID for serialization. */
-  private static final long serialVersionUID = 323656018661251252L;
+  private static final long serialVersionUID = -6917422770605923183L;
 
   /**
    * The constructor for de-serialization.
    */
-  protected Red() {
+  protected ColorFactor() {
 
     super();
   }
@@ -29,7 +27,7 @@ public class Red extends Factor<Red> {
    * 
    * @param value is the {@link #getValue() value}.
    */
-  public Red(Double value) {
+  public ColorFactor(double value) {
 
     super(value);
   }
@@ -39,7 +37,7 @@ public class Red extends Factor<Red> {
    * 
    * @param value is the {@link #getValue() value}.
    */
-  public Red(double value) {
+  public ColorFactor(Double value) {
 
     super(value);
   }
@@ -50,28 +48,18 @@ public class Red extends Factor<Red> {
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */
-  public Red(String value) {
+  public ColorFactor(String value) {
 
     super(value);
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param byteValue is the {@link #getValueAsByte() value given as byte}.
-   */
-  public Red(int byteValue) {
-
-    super(byteValue);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected Red newInstance(double value) {
+  protected ColorFactor newInstance(double value) {
 
-    return new Red(value);
+    return new ColorFactor(value);
   }
 
 }

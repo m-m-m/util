@@ -15,7 +15,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color}. It is based on values for
  * {@link #getRed() red}, {@link #getGreen() green}, {@link #getBlue()}, and {@link #getAlpha() alpha}.
  * Internally these values are encoded in a single {@link #getValue() ARGB value}. This class is similar to
- * AWT {@link java.awt.Color} but GWT compatible and especially compatible to CSS. <br/>
+ * AWT {@link java.awt.Color} but GWT compatible (AWT color is linked with AWT, see e.g.
+ * {@link java.awt.Color#createContext(java.awt.image.ColorModel, java.awt.Rectangle, java.awt.geom.Rectangle2D, java.awt.geom.AffineTransform, java.awt.RenderingHints)
+ * createContext}) and especially compatible to CSS. <br/>
  * For transformations and other {@link ColorModel}s use {@link GenericColor}.<br/>
  * <b>ATTENTION:</b><br/>
  * Unfortunately the {@link #getAlpha() alpha} value has NOT been designed as a transparency value (inverse
@@ -137,6 +139,12 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   /** The {@link Color} teal. */
   public static final Color TEAL = new Color(0x0FF008080);
 
+  /** The {@link Color} BlueViolet. */
+  public static final Color BLUE_VIOLET = new Color(0x0FF8A2BE2);
+
+  /** The {@link Color} Brown. */
+  public static final Color BROWN = new Color(0x0FFA52A2A);
+
   /** Maps CSS names to {@link Color}s. */
   private static final Map<String, Color> NAME_TO_COLOR_MAP = new HashMap<String, Color>();
 
@@ -161,6 +169,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
     NAME_TO_COLOR_MAP.put("ORANGE", ORANGE);
     NAME_TO_COLOR_MAP.put("PURPLE", PURPLE);
     NAME_TO_COLOR_MAP.put("SILVER", SILVER);
+    NAME_TO_COLOR_MAP.put("BLUEVIOLET", BLUE_VIOLET);
   }
 
   /**

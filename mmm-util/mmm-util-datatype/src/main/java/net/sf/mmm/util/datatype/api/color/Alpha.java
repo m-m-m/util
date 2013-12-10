@@ -14,7 +14,7 @@ package net.sf.mmm.util.datatype.api.color;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Alpha extends Factor {
+public class Alpha extends Factor<Alpha> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
@@ -69,6 +69,15 @@ public class Alpha extends Factor {
   public Alpha(int byteValue) {
 
     super(byteValue);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Alpha newInstance(double value) {
+
+    return new Alpha(value);
   }
 
 }

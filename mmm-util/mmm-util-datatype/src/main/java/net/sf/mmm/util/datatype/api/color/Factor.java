@@ -9,10 +9,11 @@ package net.sf.mmm.util.datatype.api.color;
  * Beside {@link #toStringAsPercent() percent} notation the {@link String} constructor both accepts
  * {@link #getValueAsByte() byte values} as well as {@link #toStringAsFactor() factor} notation.
  * 
+ * @param <SELF> is the generic type of the class itself (bound by the actual final subclass).
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class Factor extends AbstractDoubleSegment {
+public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSegment<SELF> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 2276148174440077961L;

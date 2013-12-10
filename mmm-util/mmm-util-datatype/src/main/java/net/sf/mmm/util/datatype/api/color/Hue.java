@@ -11,7 +11,7 @@ package net.sf.mmm.util.datatype.api.color;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Hue extends AbstractDoubleSegment {
+public class Hue extends AbstractDoubleSegment<Hue> {
 
   /** The factor for percent values (360 / 100). */
   private static final double PERCENT_FACTOR = 3.6;
@@ -90,6 +90,15 @@ public class Hue extends AbstractDoubleSegment {
   public Double getMaximumValue() {
 
     return Double.valueOf(MAX_VALUE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Hue newInstance(double value) {
+
+    return new Hue(value);
   }
 
 }

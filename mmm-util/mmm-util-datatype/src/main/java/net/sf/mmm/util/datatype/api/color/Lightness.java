@@ -12,7 +12,7 @@ package net.sf.mmm.util.datatype.api.color;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Lightness extends Factor {
+public class Lightness extends Factor<Lightness> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
@@ -54,6 +54,15 @@ public class Lightness extends Factor {
   public Lightness(String value) {
 
     super(value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Lightness newInstance(double value) {
+
+    return new Lightness(value);
   }
 
   /**

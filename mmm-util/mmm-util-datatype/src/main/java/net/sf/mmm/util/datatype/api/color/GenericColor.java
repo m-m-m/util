@@ -15,10 +15,13 @@ import net.sf.mmm.util.nls.api.NlsParseException;
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color} based on {@link Factor factors}. <br/>
  * <b>Note:</b><br/>
  * Use {@link Color} for simple and efficient representation and transport of color information. However, if
- * precision is required or for transformation between different color models use this class instead. <br/>
+ * precision is required or for transformation between different {@link ColorModel color models} use this
+ * class instead. <br/>
  * <b>Credits:</b><br/>
  * The algorithms for transformation of the color models are mainly taken from <a
- * href="http://en.wikipedia.org/wiki/HSL_and_HSV">HSL and HSV on wikipedia</a>.
+ * href="http://en.wikipedia.org/wiki/HSL_and_HSV">HSL and HSV on wikipedia</a>. <br/>
+ * <b>ATTENTION:</b><br/>
+ * This implementation does not support color profiles or the Adobe RGB color space.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -363,11 +366,6 @@ public final class GenericColor extends AbstractDatatype implements SimpleDataty
     double hueX = hue.getValue().doubleValue() / 60;
     double x = chroma * (1 - Math.abs((hueX % 2) - 1));
     double red, green, blue;
-    // if (hueX == 0) {
-    // red = min;
-    // green = min;
-    // blue = min;
-    // } else
     if (hueX < 1) {
       red = chroma + min;
       green = x + min;
@@ -484,8 +482,9 @@ public final class GenericColor extends AbstractDatatype implements SimpleDataty
    * @param type is the {@link ColorSegmentType} identifying the requested {@link Segment}.
    * @return the {@link Segment} of the given <code>type</code>.
    */
-  public AbstractDoubleSegment getSegment(ColorSegmentType type) {
+  public AbstractDoubleSegment<?> getSegment(ColorSegmentType type) {
 
+    NlsNullPointerException.checkNotNull(ColorSegmentType.class, type);
     switch (type) {
       case RED:
         return this.red;
@@ -526,6 +525,51 @@ public final class GenericColor extends AbstractDatatype implements SimpleDataty
 
     return new Color(this.red.getValueAsByte(), this.green.getValueAsByte(), this.blue.getValueAsByte(),
         this.alpha.getValueAsByte());
+  }
+
+  /**
+   * @param model the {@link ColorModel} indicating the {@link Segment}s to
+   *        {@link AbstractDoubleSegment#invert() invert}. Typically {@link ColorModel#RGB} to build the
+   *        complement of the color.
+   * @return the complementary (or inverse) color.
+   */
+  public GenericColor invert(ColorModel model) {
+
+    switch (model) {
+      case RGB:
+        return valueOf(this.red.invert(), this.green.invert(), this.blue.invert(), this.alpha);
+      case HSL:
+        return valueOf(this.hue.invert(), this.saturationHsl.invert(), this.lightness.invert(), this.alpha);
+      case HSB:
+      case HSV:
+        return valueOf(this.hue.invert(), this.saturationHsb.invert(), this.brightness.invert(), this.alpha);
+      default :
+        throw new IllegalCaseException(ColorModel.class, model);
+    }
+  }
+
+  /**
+   * Lightens this color by the given <code>factor</code>.
+   * 
+   * @param factor is the factor to increase by. E.g. <code>0.0</code> will cause no change, while
+   *        <code>1.0</code> will return {@link Color#WHITE white}.
+   * @return a new color lighter by the given <code>factor</code>.
+   */
+  public GenericColor lighten(ColorFactor factor) {
+
+    return valueOf(this.red.increase(factor), this.green.increase(factor), this.blue.increase(factor), this.alpha);
+  }
+
+  /**
+   * Darkens this color by the given <code>factor</code>.
+   * 
+   * @param factor is the factor to decrease by. E.g. <code>0.0</code> will cause no change, while
+   *        <code>1.0</code> will return {@link Color#BLACK black}.
+   * @return a new color darker by the given <code>factor</code>.
+   */
+  public GenericColor darken(ColorFactor factor) {
+
+    return valueOf(this.red.decrease(factor), this.green.decrease(factor), this.blue.decrease(factor), this.alpha);
   }
 
   /**

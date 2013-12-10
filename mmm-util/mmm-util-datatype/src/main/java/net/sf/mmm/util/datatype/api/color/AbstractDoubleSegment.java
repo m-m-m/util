@@ -7,10 +7,11 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 /**
  * This is the abstract implementation of a {@link Segment} based on {@link Double}.
  * 
+ * @param <SELF> is the generic type of the class itself (bound by the actual final subclass).
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDoubleSegment extends AbstractSegment<Double> {
+public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<SELF>> extends AbstractSegment<Double> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 9206218315093630999L;
@@ -66,6 +67,45 @@ public abstract class AbstractDoubleSegment extends AbstractSegment<Double> {
   public Double getMinimumValue() {
 
     return Double.valueOf(0);
+  }
+
+  /**
+   * Creates a new instance with the given value.
+   * 
+   * @param value is the {@link #getValue() value}.
+   * @return the new instance.
+   */
+  protected abstract SELF newInstance(double value);
+
+  /**
+   * @return a new segment of the same type with the <em>inverted</em> value. Inverted means the complement or
+   *         technically <code>{@link #getMaximumValue()} - {@link #getValue()}</code>.
+   */
+  public SELF invert() {
+
+    return newInstance(getMaximumValue().doubleValue() - getValue().doubleValue());
+  }
+
+  /**
+   * @param factor is the {@link ColorFactor} to increase by. E.g. <code>0.0</code> will cause no change,
+   *        <code>1.0</code> will lead to {@link #getMaximumValue() maximum value}.
+   * @return a new segment with the value increased by the given factor through linear interpolation.
+   */
+  public SELF increase(ColorFactor factor) {
+
+    double d = getValue().doubleValue();
+    return newInstance(d + (getMaximumValue().doubleValue() - d) * factor.getValueAsFactor());
+  }
+
+  /**
+   * @param factor is the {@link ColorFactor} to decrease by. E.g. <code>0.0</code> will cause no change,
+   *        <code>1.0</code> will lead to {@link #getMinimumValue() minimum value} (0).
+   * @return a new segment with the value decreased by the given factor through linear interpolation.
+   */
+  public SELF decrease(ColorFactor factor) {
+
+    double d = getValue().doubleValue();
+    return newInstance(d - d * factor.getValueAsFactor());
   }
 
 }

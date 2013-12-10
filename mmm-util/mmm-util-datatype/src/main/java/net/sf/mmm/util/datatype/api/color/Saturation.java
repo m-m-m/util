@@ -13,7 +13,7 @@ package net.sf.mmm.util.datatype.api.color;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Saturation extends Factor {
+public class Saturation extends Factor<Saturation> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
@@ -55,6 +55,15 @@ public class Saturation extends Factor {
   public Saturation(String value) {
 
     super(value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Saturation newInstance(double value) {
+
+    return new Saturation(value);
   }
 
   /**

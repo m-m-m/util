@@ -11,7 +11,7 @@ package net.sf.mmm.util.datatype.api.color;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Chroma extends Factor {
+public class Chroma extends Factor<Chroma> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
@@ -63,6 +63,15 @@ public class Chroma extends Factor {
   public Chroma(String value) {
 
     super(value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Chroma newInstance(double value) {
+
+    return new Chroma(value);
   }
 
 }
