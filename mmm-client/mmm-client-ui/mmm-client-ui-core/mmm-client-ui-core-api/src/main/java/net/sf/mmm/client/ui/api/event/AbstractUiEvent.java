@@ -39,7 +39,8 @@ public abstract class AbstractUiEvent implements UiEvent {
   @Override
   public String toString() {
 
-    return getClass().getSimpleName() + "[" + getType() + (this.programmatic ? ",programmatic]" : "]");
+    return getClass().getSimpleName() + "[" + getType() + "@" + getSource()
+        + (this.programmatic ? ",programmatic]" : "]");
   }
 
 }

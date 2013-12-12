@@ -4,19 +4,19 @@ package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionClose;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainClose;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainClose close} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionClose close} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryClose extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainClose> {
+public class UiSingleWidgetButtonFactoryClose extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionClose> {
 
   /**
    * The constructor.
@@ -30,33 +30,32 @@ public class UiSingleWidgetButtonFactoryClose extends AbstractUiSingleWidgetButt
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainClose> getHandlerInterface() {
+  public Class<UiHandlerActionClose> getHandlerInterface() {
 
-    return UiHandlerPlainClose.class;
+    return UiHandlerActionClose.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainClose);
+    return (handler instanceof UiHandlerActionClose);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainClose handler, boolean preventConfirmationPopup,
-      final Object variant) {
+  public UiWidgetButton create(UiContext context, final UiHandlerActionClose handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
 
-        handler.onClose(variant);
+        handler.onClose(event);
       }
     };
     return createButton(context, getBundle().labelClose(), clickHandler, null, null);

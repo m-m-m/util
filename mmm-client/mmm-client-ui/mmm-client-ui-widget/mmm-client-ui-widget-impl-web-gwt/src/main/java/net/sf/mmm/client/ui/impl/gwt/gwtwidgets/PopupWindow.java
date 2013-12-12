@@ -64,9 +64,6 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   /** @see #getButtonPanel() */
   private final ButtonPanel buttonPanel;
 
-  /** @see #getCancelButton() */
-  private ButtonWidget cancelButton;
-
   // /** The footer panel. */
   // private final HorizontalFlowPanel footerBar;
 
@@ -526,6 +523,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   @Override
   public void show() {
 
+    if (isShowing()) {
+      return;
+    }
     super.show();
     this.focusedElement = JavaScriptUtil.getInstance().getFocusedElement();
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -551,6 +551,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   @Override
   public void hide() {
 
+    if (!isShowing()) {
+      return;
+    }
     super.hide();
     if (this.focusedElement != null) {
       this.focusedElement.focus();

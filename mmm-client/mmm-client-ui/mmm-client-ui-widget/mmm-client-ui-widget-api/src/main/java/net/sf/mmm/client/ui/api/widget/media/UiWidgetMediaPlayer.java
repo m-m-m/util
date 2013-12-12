@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.media;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWritePaused;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainPreviousNext;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionPreviousNext;
 import net.sf.mmm.client.ui.api.media.AudioDescriptor;
 import net.sf.mmm.client.ui.api.media.VideoDescriptor;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
@@ -24,9 +24,9 @@ public interface UiWidgetMediaPlayer extends UiWidgetComposite<UiWidget>, Attrib
    * This method makes the <em>previous</em> and <em>next</em> buttons visible and connects them with the
    * given <code>handler</code>.
    * 
-   * @param handler is the {@link UiHandlerPlainPreviousNext}.
+   * @param handler is the {@link UiHandlerActionPreviousNext}.
    */
-  void setPreviousNextHandler(UiHandlerPlainPreviousNext handler);
+  void setPreviousNextHandler(UiHandlerActionPreviousNext handler);
 
   /**
    * This method loads the audio track identified by the given {@link AudioDescriptor} into this media-player.

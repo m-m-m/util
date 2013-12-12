@@ -2,9 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.scanner.base;
 
-import java.util.Locale;
-
 import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.lang.base.GwtHelper;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
@@ -534,7 +533,6 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * {@inheritDoc}
    */
-  @Override
   public double readDouble() throws NumberFormatException {
 
     String number = consumeDecimal();
@@ -544,7 +542,6 @@ public class CharSequenceScanner implements CharStreamScanner {
   /**
    * {@inheritDoc}
    */
-  @Override
   public float readFloat() throws NumberFormatException {
 
     String number = consumeDecimal();
@@ -616,7 +613,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
     char[] subChars;
     if (ignoreCase) {
-      subChars = substring.toLowerCase(Locale.ENGLISH).toCharArray();
+      subChars = GwtHelper.toLowerCase(substring).toCharArray();
     } else {
       subChars = substring.toCharArray();
     }

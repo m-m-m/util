@@ -334,7 +334,7 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
+  public void setVisible(boolean visible, boolean programmatic) {
 
     super.setVisible(visible);
     // TODO hohwille conceptional revisit required!

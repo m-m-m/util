@@ -4,19 +4,19 @@ package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionSave;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainSave save} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionSave save} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactorySave extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainSave> {
+public class UiSingleWidgetButtonFactorySave extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionSave> {
 
   /**
    * The constructor.
@@ -30,18 +30,18 @@ public class UiSingleWidgetButtonFactorySave extends AbstractUiSingleWidgetButto
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainSave> getHandlerInterface() {
+  public Class<UiHandlerActionSave> getHandlerInterface() {
 
-    return UiHandlerPlainSave.class;
+    return UiHandlerActionSave.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainSave);
+    return (handler instanceof UiHandlerActionSave);
   }
 
   /**
@@ -57,15 +57,14 @@ public class UiSingleWidgetButtonFactorySave extends AbstractUiSingleWidgetButto
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainSave handler, boolean preventConfirmationPopup,
-      final Object variant) {
+  public UiWidgetButton create(UiContext context, final UiHandlerActionSave handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
 
-        handler.onSave(variant);
+        handler.onSave(event);
       }
     };
     return createButton(context, getBundle().labelSave(), clickHandler, null, null);

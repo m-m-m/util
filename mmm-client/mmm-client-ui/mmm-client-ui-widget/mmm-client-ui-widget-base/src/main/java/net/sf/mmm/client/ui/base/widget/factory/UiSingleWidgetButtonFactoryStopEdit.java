@@ -4,19 +4,19 @@ package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionStopEdit;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStopEdit;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainStopEdit stop edit} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionStopEdit stop edit} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryStopEdit extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainStopEdit> {
+public class UiSingleWidgetButtonFactoryStopEdit extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionStopEdit> {
 
   /**
    * The constructor.
@@ -30,18 +30,18 @@ public class UiSingleWidgetButtonFactoryStopEdit extends AbstractUiSingleWidgetB
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainStopEdit> getHandlerInterface() {
+  public Class<UiHandlerActionStopEdit> getHandlerInterface() {
 
-    return UiHandlerPlainStopEdit.class;
+    return UiHandlerActionStopEdit.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainStopEdit);
+    return (handler instanceof UiHandlerActionStopEdit);
   }
 
   /**
@@ -57,15 +57,15 @@ public class UiSingleWidgetButtonFactoryStopEdit extends AbstractUiSingleWidgetB
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainStopEdit handler,
-      boolean preventConfirmationPopup, final Object variant) {
+  public UiWidgetButton create(UiContext context, final UiHandlerActionStopEdit handler,
+      boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
 
-        handler.onStopEditMode(variant);
+        handler.onStopEditMode(event);
       }
     };
     return createButton(context, getBundle().labelStopEdit(), clickHandler, null, null);

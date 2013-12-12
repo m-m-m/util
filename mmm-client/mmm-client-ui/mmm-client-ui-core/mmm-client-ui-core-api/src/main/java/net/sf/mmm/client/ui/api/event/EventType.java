@@ -40,6 +40,12 @@ public enum EventType {
    */
   SELECTION_CHANGE,
 
+  /** The widget (window) has been {@link net.sf.mmm.client.ui.api.feature.UiFeatureOpenClose#open() opened}. */
+  OPEN,
+
+  /** The widget (window) has been {@link net.sf.mmm.client.ui.api.feature.UiFeatureOpenClose#close() closed}. */
+  CLOSE,
+
   /**
    * The {@link net.sf.mmm.client.ui.api.attribute.AttributeReadMode#getMode() mode} of the widget has
    * changed.

@@ -5,20 +5,20 @@ package net.sf.mmm.client.ui.base.widget.factory;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionUp;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainUp;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainUp up} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionUp up} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryUp extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainUp> {
+public class UiSingleWidgetButtonFactoryUp extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionUp> {
 
   /**
    * The constructor.
@@ -32,18 +32,18 @@ public class UiSingleWidgetButtonFactoryUp extends AbstractUiSingleWidgetButtonF
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainUp> getHandlerInterface() {
+  public Class<UiHandlerActionUp> getHandlerInterface() {
 
-    return UiHandlerPlainUp.class;
+    return UiHandlerActionUp.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainUp);
+    return (handler instanceof UiHandlerActionUp);
   }
 
   /**
@@ -59,15 +59,14 @@ public class UiSingleWidgetButtonFactoryUp extends AbstractUiSingleWidgetButtonF
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainUp handler, boolean preventConfirmationPopup,
-      final Object variant) {
+  public UiWidgetButton create(UiContext context, final UiHandlerActionUp handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
 
-        handler.onUp(variant);
+        handler.onUp(event);
       }
     };
     // TODO: label/tooltip ?

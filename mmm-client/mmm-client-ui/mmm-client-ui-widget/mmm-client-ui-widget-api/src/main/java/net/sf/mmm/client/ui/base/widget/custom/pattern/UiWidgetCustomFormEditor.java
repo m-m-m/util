@@ -26,8 +26,8 @@ public class UiWidgetCustomFormEditor<VALUE> extends UiWidgetCustomEditor<VALUE>
    * 
    * @param context is the {@link #getContext() context}.
    * @param handlerSaveObject is the {@link UiHandlerObjectSave}
-   *        {@link UiHandlerObjectSave#onSave(Object, Object) invoked} if the end-user clicked "save" and the
-   *        {@link #getValue() value} has been validated successfully.
+   *        {@link UiHandlerObjectSave#onSave(Object, net.sf.mmm.client.ui.api.event.UiEvent) invoked} if the
+   *        end-user clicked "save" and the {@link #getValue() value} has been validated successfully.
    * @param formPanel is the
    */
   public UiWidgetCustomFormEditor(UiContext context, UiHandlerObjectSave<VALUE> handlerSaveObject,

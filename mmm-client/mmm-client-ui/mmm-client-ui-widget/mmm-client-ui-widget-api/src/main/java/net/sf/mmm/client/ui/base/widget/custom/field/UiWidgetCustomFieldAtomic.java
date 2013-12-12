@@ -78,7 +78,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * 
    * <pre>
    * protected String convertValueForDelegate(MyDatatype value) {
-   *   return value.{@link net.sf.mmm.util.lang.api.Datatype#getValue() getValue()}.
+   *   return value.{@link net.sf.mmm.util.lang.api.SimpleDatatype#getValue() getValue()}.
    * }
    * </pre>
    * 

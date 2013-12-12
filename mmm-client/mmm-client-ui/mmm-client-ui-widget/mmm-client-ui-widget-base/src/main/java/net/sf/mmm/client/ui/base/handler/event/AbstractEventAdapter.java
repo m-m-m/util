@@ -5,11 +5,13 @@ package net.sf.mmm.client.ui.base.handler.event;
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.event.UiEvent;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.event.UiEventClose;
 import net.sf.mmm.client.ui.api.event.UiEventCollapse;
 import net.sf.mmm.client.ui.api.event.UiEventExpand;
 import net.sf.mmm.client.ui.api.event.UiEventFocusGain;
 import net.sf.mmm.client.ui.api.event.UiEventFocusLoss;
 import net.sf.mmm.client.ui.api.event.UiEventMode;
+import net.sf.mmm.client.ui.api.event.UiEventOpen;
 import net.sf.mmm.client.ui.api.event.UiEventSelectionChange;
 import net.sf.mmm.client.ui.api.event.UiEventValueChange;
 import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
@@ -17,6 +19,7 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureCollapse;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.feature.UiFeatureFocus;
 import net.sf.mmm.client.ui.api.feature.UiFeatureMode;
+import net.sf.mmm.client.ui.api.feature.UiFeatureOpenClose;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
@@ -93,6 +96,12 @@ public abstract class AbstractEventAdapter {
         break;
       case VALUE_CHANGE:
         event = new UiEventValueChange((UiFeatureValue) this.source, programmatic);
+        break;
+      case OPEN:
+        event = new UiEventOpen((UiFeatureOpenClose) this.source, programmatic);
+        break;
+      case CLOSE:
+        event = new UiEventClose((UiFeatureOpenClose) this.source, programmatic);
         break;
       default :
         throw new IllegalCaseException(EventType.class, type);

@@ -253,11 +253,11 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
+  public void setVisible(boolean visible, boolean programmatic) {
 
+    super.setVisible(visible, programmatic);
     // ensure that the widget adapter has been created at this time...
     getWidgetAdapter();
-    super.setVisible(visible);
   }
 
   /**

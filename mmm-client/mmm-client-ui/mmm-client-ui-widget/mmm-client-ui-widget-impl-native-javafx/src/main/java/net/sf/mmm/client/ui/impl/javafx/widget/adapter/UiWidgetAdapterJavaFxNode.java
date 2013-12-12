@@ -59,7 +59,7 @@ public abstract class UiWidgetAdapterJavaFxNode<WIDGET extends Node> extends UiW
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
+  public void setVisible(boolean visible, boolean programmatic) {
 
     getToplevelWidget().setVisible(visible);
   }

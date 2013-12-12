@@ -32,7 +32,7 @@ public abstract class UiWidgetAdapterJavaFxBaseWindow<WIDGET extends Window> ext
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
+  public void setVisible(boolean visible, boolean programmatic) {
 
     // TODO Auto-generated method stub
 

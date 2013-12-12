@@ -4,19 +4,19 @@ package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionApprove;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainApprove;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainApprove approve} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionApprove approve} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryApprove extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainApprove> {
+public class UiSingleWidgetButtonFactoryApprove extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionApprove> {
 
   /**
    * The constructor.
@@ -30,33 +30,32 @@ public class UiSingleWidgetButtonFactoryApprove extends AbstractUiSingleWidgetBu
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainApprove> getHandlerInterface() {
+  public Class<UiHandlerActionApprove> getHandlerInterface() {
 
-    return UiHandlerPlainApprove.class;
+    return UiHandlerActionApprove.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainApprove);
+    return (handler instanceof UiHandlerActionApprove);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainApprove handler,
-      boolean preventConfirmationPopup, final Object variant) {
+  public UiWidgetButton create(UiContext context, final UiHandlerActionApprove handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
 
-        handler.onApprove(variant);
+        handler.onApprove(event);
       }
     };
     return createButton(context, getBundle().labelApprove(), clickHandler, null, null);

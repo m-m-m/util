@@ -25,19 +25,6 @@ public class UiWidgetAdapterGwtPopup extends UiWidgetAdapterGwtAbstractDialogWin
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
-
-    if (visible) {
-      getToplevelWidget().show();
-    } else {
-      getToplevelWidget().hide();
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   protected PopupWindow createToplevelWidget() {
 
     PopupWindow popup = new PopupWindow(false, true);

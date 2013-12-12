@@ -13,9 +13,13 @@ import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.dialog.DialogConstants;
+import net.sf.mmm.client.ui.api.event.UiEvent;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.event.UiEventClose;
+import net.sf.mmm.client.ui.api.event.UiEventOpen;
 import net.sf.mmm.client.ui.api.event.UiEventValueChange;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventOpenClose;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
@@ -171,7 +175,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     handlerObjectSave.delegate = new UiHandlerObjectSave<ContactBean>() {
 
       @Override
-      public void onSave(ContactBean object, Object variant) {
+      public void onSave(ContactBean object, UiEvent event) {
 
         contactEditor.setValue(object);
         Window.alert("Contact " + object + " saved.");
@@ -226,6 +230,20 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
             popup.setResizable(checkboxResizsable.getValue().booleanValue());
           }
         };
+        popup.addOpenCloseHandler(new UiHandlerEventOpenClose() {
+
+          @Override
+          public void onOpen(UiEventOpen event) {
+
+            Log.debug("open");
+          }
+
+          @Override
+          public void onClose(UiEventClose event) {
+
+            Log.debug("close");
+          }
+        });
         checkboxResizsable.addChangeHandler(changeHandler);
         final UiWidgetCheckboxField checkboxMovable = factory.create(UiWidgetCheckboxField.class);
         checkboxMovable.setTitle("movable");
@@ -509,17 +527,17 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
    */
   private static class SaveAdapter<O> implements UiHandlerObjectSave<O> {
 
-    /** @see #onSave(Object, Object) */
+    /** @see #onSave(Object, UiEvent) */
     private UiHandlerObjectSave<O> delegate;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onSave(O object, Object variant) {
+    public void onSave(O object, UiEvent event) {
 
       if (this.delegate != null) {
-        this.delegate.onSave(object, variant);
+        this.delegate.onSave(object, event);
       }
     }
   }

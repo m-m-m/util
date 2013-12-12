@@ -159,7 +159,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     // for ariaRole see getWidgetAdapter()
-    adapter.setVisible(isVisible());
+    adapter.setVisible(isVisible(), true);
     if (!this.enabled) {
       adapter.setEnabled(this.enabled);
     }
@@ -431,23 +431,48 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
+  public final void setVisible(boolean visible) {
 
-    if (this.visible != visible) {
+    setVisible(visible, true);
+  }
+
+  /**
+   * @see #setVisible(boolean)
+   * 
+   * @param visibility - see {@link #setVisible(boolean)}.
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
+   */
+  public void setVisible(boolean visibility, boolean programmatic) {
+
+    if (this.visible != visibility) {
       boolean oldVisibility = this.visible;
       if (this.visibleFlag != null) {
         oldVisibility = this.visibleFlag.getFlag();
       }
-      this.visible = visible;
-      boolean newVisible = visible;
+      this.visible = visibility;
+      boolean newVisible = visibility;
       if (this.visibleFlag != null) {
         // this would actually not be necessary but we do not want to assume implementation knowledge here...
         newVisible = this.visibleFlag.getFlag();
       }
-      if ((oldVisibility != newVisible) && (this.widgetAdapter != null)) {
-        this.widgetAdapter.setVisible(newVisible);
+      if (oldVisibility != newVisible) {
+        if (this.widgetAdapter != null) {
+          this.widgetAdapter.setVisible(newVisible, programmatic);
+        }
+        visibilityChanged(newVisible, programmatic);
       }
     }
+  }
+
+  /**
+   * Called from {@link #setVisible(boolean)} is the visibility has actually changed.
+   * 
+   * @param visibility is the new {@link #isVisible() visibility}.
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
+   */
+  protected void visibilityChanged(boolean visibility, boolean programmatic) {
+
+    // nothing by default...
   }
 
   /**
@@ -1102,11 +1127,12 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
         AbstractUiWidgetNative.this.visible = flag;
       }
       super.setFlag(flag, modifier);
-      if (AbstractUiWidgetNative.this.widgetAdapter != null) {
-        boolean newFlag = getFlag();
-        if (oldFlag != newFlag) {
-          AbstractUiWidgetNative.this.widgetAdapter.setVisible(newFlag);
+      boolean newFlag = getFlag();
+      if (oldFlag != newFlag) {
+        if (AbstractUiWidgetNative.this.widgetAdapter != null) {
+          AbstractUiWidgetNative.this.widgetAdapter.setVisible(newFlag, true);
         }
+        visibilityChanged(newFlag, true);
       }
     }
   }

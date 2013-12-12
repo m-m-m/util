@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.base.widget.window;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.event.UiEventOpen;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventOpenClose;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetAbstractDialogWindow;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractDialogWindow;
 
@@ -60,6 +62,23 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
     adapter.setResizable(this.resizable);
     adapter.setMovable(this.movable);
     adapter.setClosable(this.closable);
+    if (isVisible()) {
+      fireEvent(new UiEventOpen(this, true));
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void visibilityChanged(boolean visibility, boolean programmatic) {
+
+    super.visibilityChanged(visibility, programmatic);
+    if (visibility) {
+      fireEvent(new UiEventOpen(this, programmatic));
+    } else {
+      // event = new UiEventClose(this, programmatic);
+    }
   }
 
   /**
@@ -180,6 +199,42 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
       getWidgetAdapter().setMaximized(maximized);
     }
     this.maximized = maximized;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void open() {
+
+    setVisible(true);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void close() {
+
+    setVisible(false);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addOpenCloseHandler(UiHandlerEventOpenClose handler) {
+
+    addEventHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeOpenCloseHandle(UiHandlerEventOpenClose handler) {
+
+    return removeEventHandler(handler);
   }
 
 }

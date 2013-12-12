@@ -9,20 +9,20 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionRemove;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainRemove;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainRemove remove} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionRemove remove} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainRemove> {
+public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionRemove> {
 
   /**
    * The constructor.
@@ -36,18 +36,18 @@ public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetBut
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainRemove> getHandlerInterface() {
+  public Class<UiHandlerActionRemove> getHandlerInterface() {
 
-    return UiHandlerPlainRemove.class;
+    return UiHandlerActionRemove.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainRemove);
+    return (handler instanceof UiHandlerActionRemove);
   }
 
   /**
@@ -63,8 +63,8 @@ public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetBut
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(final UiContext context, final UiHandlerPlainRemove handler,
-      final boolean preventConfirmationPopup, final Object variant) {
+  public UiWidgetButton create(final UiContext context, final UiHandlerActionRemove handler,
+      final boolean preventConfirmationPopup) {
 
     final NlsBundleClientUiRoot bundle = getBundle();
 
@@ -73,10 +73,10 @@ public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetBut
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
-      public void onClick(UiEventClick event) {
+      public void onClick(final UiEventClick event) {
 
         if (preventConfirmationPopup) {
-          handler.onRemove(variant);
+          handler.onRemove(event);
         } else {
           UiPopupHelper popupHelper = context.getPopupHelper();
           Consumer<String> callback = new Consumer<String>() {
@@ -85,7 +85,7 @@ public class UiSingleWidgetButtonFactoryRemove extends AbstractUiSingleWidgetBut
             public void accept(String argument) {
 
               if (UiPopupHelper.BUTTON_ID_OK.equals(argument)) {
-                handler.onRemove(variant);
+                handler.onRemove(event);
               }
             }
           };

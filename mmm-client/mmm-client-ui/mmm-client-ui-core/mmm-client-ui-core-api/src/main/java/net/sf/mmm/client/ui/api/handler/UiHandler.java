@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.handler;
 
+import net.sf.mmm.client.ui.api.event.UiEvent;
+
 /**
  * This is the marker interface for a <em>handler</em> of action(s) in the context of a user-interface (UI). An actual
  * handler is a particular interface extending this one that specifies <em>action operations</em> for events triggered
@@ -10,9 +12,9 @@ package net.sf.mmm.client.ui.api.handler;
  * <code>on</code> and are followed with the name of the event that has been triggered.<br/>
  * For examples see e.g.
  * {@link net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick#onClick(net.sf.mmm.client.ui.api.event.UiEventClick)}
- * , {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainCancel#onCancel(Object)},
- * {@link net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectDelete#onDelete(Object, Object)}, or
- * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave#onSave(Object)}.
+ * , {@link net.sf.mmm.client.ui.api.handler.action.UiHandlerActionCancel#onCancel(UiEvent)},
+ * {@link net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectDelete#onDelete(Object, UiEvent)}, or
+ * {@link net.sf.mmm.client.ui.api.handler.action.UiHandlerActionSave#onSave(UiEvent)}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

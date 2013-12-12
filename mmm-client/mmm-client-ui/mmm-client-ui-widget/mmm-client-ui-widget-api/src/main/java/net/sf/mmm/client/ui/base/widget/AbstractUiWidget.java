@@ -37,11 +37,11 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
 import org.slf4j.Logger;
 
 /**
- * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.widget.UiWidget}. Below this class there
- * are two inheritance hierarchies <code>AbstractUiWidgetNative</code> and
- * {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom}. To avoid problems with the lack of multi-inheritance
- * in Java, we already implement {@link net.sf.mmm.client.ui.api.widget.UiWidgetWithValue}. For subclasses that have no
- * value {@link Void} is used for {@literal <VALUE>}.
+ * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.widget.UiWidget}. Below this
+ * class there are two inheritance hierarchies <code>AbstractUiWidgetNative</code> and
+ * {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom}. To avoid problems with the lack of
+ * multi-inheritance in Java, we already implement {@link net.sf.mmm.client.ui.api.widget.UiWidgetWithValue}.
+ * For subclasses that have no value {@link Void} is used for {@literal <VALUE>}.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -169,40 +169,43 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * This method is called from the {@link #getDataBinding() data-binding} triggered by API methods such as
-   * {@link #getValue()}. In many cases the {@link #getDataBinding() data-binding} already performs the required work to
-   * do. However, here is the place to implemented the custom logic to get the value from the actual widget. The
-   * following cases have to be distinguished:
+   * {@link #getValue()}. In many cases the {@link #getDataBinding() data-binding} already performs the
+   * required work to do. However, here is the place to implemented the custom logic to get the value from the
+   * actual widget. The following cases have to be distinguished:
    * <ul>
    * <li>For {@link net.sf.mmm.client.ui.api.widget.UiWidgetNative native}
-   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField fields} this method has to get the actual value from the
-   * underlying native widget (text-box, password-field, etc.).</li>
-   * <li>For {@link net.sf.mmm.client.ui.base.widget.custom.field.UiWidgetCustomField custom fields} this method will be
-   * responsible to convert from the delegates value (see <code>UiWidgetCustom.getDelegate()</code>) to the proper value
-   * type. E.g. if you want to create a custom widget to edit your own datatype such as <code>CustomerNumber</code>
-   * based on a {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField} you need to convert from {@link String}
+   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField fields} this method has to get the actual
+   * value from the underlying native widget (text-box, password-field, etc.).</li>
+   * <li>For {@link net.sf.mmm.client.ui.base.widget.custom.field.UiWidgetCustomField custom fields} this
+   * method will be responsible to convert from the delegates value (see
+   * <code>UiWidgetCustom.getDelegate()</code>) to the proper value type. E.g. if you want to create a custom
+   * widget to edit your own datatype such as <code>CustomerNumber</code> based on a
+   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField} you need to convert from {@link String}
    * to <code>CustomerNumber</code>.</li>
-   * <li>For {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite custom composite widgets} you should
-   * use {@link #getDataBinding()}.
+   * <li>For {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite custom composite widgets}
+   * you should use {@link #getDataBinding()}.
    * {@link net.sf.mmm.client.ui.base.binding.UiDataBinding#createAndBind(net.sf.mmm.util.pojo.path.api.TypedProperty)}
-   * that gives you high-level support and makes your live easy. Then there is no need to override this method.</li>
+   * that gives you high-level support and makes your live easy. Then there is no need to override this
+   * method.</li>
    * <li>For other cases, especially if {@literal <VALUE>} is {@link Void}, there is nothing to do here.</li>
    * </ul>
-   * The implementation of this method has to correspond with the implementation of {@link #doSetValue(Object, boolean)}
-   * .
+   * The implementation of this method has to correspond with the implementation of
+   * {@link #doSetValue(Object, boolean)} .
    * 
    * @see #doSetValue(Object, boolean)
    * 
    * @param template is the object where the data is filled in. May only be <code>null</code> if according to
    *        {@link #getDataBinding() data-binding} (e.g. if {@literal <VALUE>} is an (immutable)
    *        {@link net.sf.mmm.util.lang.api.Datatype}).
-   * @param state is the {@link ValidationState}. May be <code>null</code> (if the validation is omitted). Should only
-   *        be used to propagate to {@link #getValueDirect(Object, ValidationState)} of children.
+   * @param state is the {@link ValidationState}. May be <code>null</code> (if the validation is omitted).
+   *        Should only be used to propagate to {@link #getValueDirect(Object, ValidationState)} of children.
    * @return the current value of this widget. May be <code>null</code> if empty. If {@literal <VALUE>} is
    *         {@link String} the empty {@link String} has to be returned if no value has been entered. In case
-   *         {@literal <VALUE>} is a mutable object (java bean) the <code>template</code> is NOT <code>null</code> and
-   *         is to be returned by this method after the value(s) of this widget have been assigned. For immutable
-   *         {@link net.sf.mmm.util.lang.api.Datatype datatypes} <code>template</code> will be <code>null</code> and
-   *         this method has to create a new instance of {@literal <VALUE>} based on the end-users input in the widget.
+   *         {@literal <VALUE>} is a mutable object (java bean) the <code>template</code> is NOT
+   *         <code>null</code> and is to be returned by this method after the value(s) of this widget have
+   *         been assigned. For immutable {@link net.sf.mmm.util.lang.api.Datatype datatypes}
+   *         <code>template</code> will be <code>null</code> and this method has to create a new instance of
+   *         {@literal <VALUE>} based on the end-users input in the widget.
    */
   protected VALUE doGetValue(VALUE template, ValidationState state) {
 
@@ -211,16 +214,16 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * This method is called from the {@link #getDataBinding() data-binding} triggered by API methods such as
-   * {@link #setValue(Object, boolean)}. In many cases the {@link #getDataBinding() data-binding} already performs the
-   * required work to do. However, here is the place to implemented the custom logic to get the value from the actual
-   * widget. For details see {@link #doGetValue(Object, ValidationState)}.
+   * {@link #setValue(Object, boolean)}. In many cases the {@link #getDataBinding() data-binding} already
+   * performs the required work to do. However, here is the place to implemented the custom logic to get the
+   * value from the actual widget. For details see {@link #doGetValue(Object, ValidationState)}.
    * 
    * @see #doGetValue(Object, ValidationState)
    * 
-   * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set to fields
-   *        (see <code>UiWidgetField</code>).
-   * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if set from
-   *        {@link #setValue(Object)}.
+   * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set
+   *        to fields (see <code>UiWidgetField</code>).
+   * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
+   *        set from {@link #setValue(Object)}.
    */
   protected void doSetValue(VALUE value, boolean forUser) {
 
@@ -261,8 +264,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * This method is called whenever the {@link #isMandatory()} flag is updated. You may override it to update the UI to
-   * reflect this change.
+   * This method is called whenever the {@link #isMandatory()} flag is updated. You may override it to update
+   * the UI to reflect this change.
    * 
    * @param mandatory is the new value of {@link #isMandatory()}.
    */
@@ -358,10 +361,10 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * This method is called from {@link #validate(ValidationState)} and performs the actual validation of this object.
-   * This method performs the recursive validation of potential children of this widget excluding the validation of this
-   * widget itself. A legal implementation of a composite widget needs to call {@link #validate(ValidationState)} on all
-   * child widgets.
+   * This method is called from {@link #validate(ValidationState)} and performs the actual validation of this
+   * object. This method performs the recursive validation of potential children of this widget excluding the
+   * validation of this widget itself. A legal implementation of a composite widget needs to call
+   * {@link #validate(ValidationState)} on all child widgets.
    * 
    * @param state is the {@link ValidationState}. Never <code>null</code>.
    * @param value is the {@link #getValue() current value} of this object that has already be determined.
@@ -381,10 +384,10 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * This method is called from {@link #validate(ValidationState)} and performs the actual validation of this object.
-   * This method performs the recursive validation of potential children of this widget excluding the validation of this
-   * widget itself. A legal implementation of a composite widget needs to call {@link #validate(ValidationState)} on all
-   * child widgets.
+   * This method is called from {@link #validate(ValidationState)} and performs the actual validation of this
+   * object. This method performs the recursive validation of potential children of this widget excluding the
+   * validation of this widget itself. A legal implementation of a composite widget needs to call
+   * {@link #validate(ValidationState)} on all child widgets.
    * 
    * @param state is the {@link ValidationState}. Never <code>null</code>.
    * @param value is the {@link #getValue() current value} of this object that has already be determined.
@@ -432,16 +435,18 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * @return <code>true</code> if the {@link UiWidgetAdapter} has already been {@link #getWidgetAdapter() created}.
-   *         Otherwise <code>false</code> (if {@link #getWidgetAdapter()} has never been called yet).
+   * @return <code>true</code> if the {@link UiWidgetAdapter} has already been {@link #getWidgetAdapter()
+   *         created}. Otherwise <code>false</code> (if {@link #getWidgetAdapter()} has never been called
+   *         yet).
    */
   public abstract boolean hasWidgetAdapter();
 
   /**
    * This method gets or creates the {@link UiWidgetAdapter}.<br/>
    * <b>ATTENTION:</b><br/>
-   * On the first call of this method, the {@link UiWidgetAdapter} is created. For the purpose of lazy instantiation
-   * this should happen as late as possible. Use {@link #hasWidgetAdapter()} to prevent unnecessary creation.
+   * On the first call of this method, the {@link UiWidgetAdapter} is created. For the purpose of lazy
+   * instantiation this should happen as late as possible. Use {@link #hasWidgetAdapter()} to prevent
+   * unnecessary creation.
    * 
    * @return the {@link UiWidgetAdapter}.
    */
@@ -450,8 +455,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   /**
    * This method gives access to {@link #getWidgetAdapter()}.<br/>
    * <b>ATTENTION:</b><br/>
-   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by regular
-   * users (what also applies for all classes in this <code>base</code> packages).
+   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
+   * regular users (what also applies for all classes in this <code>base</code> packages).
    * 
    * @param widget is the widget.
    * @return the {@link #getWidgetAdapter() widget adapter} of the given <code>widget</code>.
@@ -462,16 +467,16 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * This method removes this widget from its {@link #getParent() parent}. The {@link #getParent() parent} is set to
-   * <code>null</code> and the native widget is removed from its parent.
+   * This method removes this widget from its {@link #getParent() parent}. The {@link #getParent() parent} is
+   * set to <code>null</code> and the native widget is removed from its parent.
    */
   protected abstract void removeFromParent();
 
   /**
    * This method invokes {@link #removeFromParent()} on the given <code>widget</code>.<br/>
    * <b>ATTENTION:</b><br/>
-   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by regular
-   * users.
+   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
+   * regular users.
    * 
    * @param widget is the widget that should be removed from its {@link #getParent() parent}.
    */
@@ -490,8 +495,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   /**
    * This method sets the {@link #getParent() parent} of the given <code>widget</code>.<br/>
    * <b>ATTENTION:</b><br/>
-   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by regular
-   * users (what also applies for all classes in this <code>base</code> packages).
+   * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
+   * regular users (what also applies for all classes in this <code>base</code> packages).
    * 
    * @param widget is the widget where to set the {@link #getParent() parent}.
    * @param newParent is the new {@link #getParent() parent}.
@@ -557,8 +562,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * @return <code>true</code> if the {@link EventSender} has already been {@link #getEventSender() created}. Otherwise
-   *         <code>false</code> (if {@link #getEventSender()} has never been called yet).
+   * @return <code>true</code> if the {@link EventSender} has already been {@link #getEventSender() created}.
+   *         Otherwise <code>false</code> (if {@link #getEventSender()} has never been called yet).
    */
   protected final boolean hasEventSender() {
 
@@ -683,6 +688,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
       if (eventObserver != null) {
         eventObserver.beforeHandler(event);
       }
+      // getLogger().debug(event.toString());
       for (UiHandlerEvent handler : this.eventHandlers) {
         // TODO hohwille if a handler will remove itself in onEvent we might get
         // ConcurrentModificationException
@@ -695,8 +701,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * @return a {@link String} representation of this object that qualifies as source description that might be displayed
-   *         to end-users (unlike {@link #toString()} what is for debugging only).
+   * @return a {@link String} representation of this object that qualifies as source description that might be
+   *         displayed to end-users (unlike {@link #toString()} what is for debugging only).
    */
   @Override
   public String getSource() {
@@ -716,8 +722,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   /**
    * This inner class gives access to methods not visible in the public API.<br/>
    * <b>ATTENTION:</b><br/>
-   * It is reserved for internal usage and should therefore never be used by regular users. Otherwise compatibility
-   * might break with any release update.
+   * It is reserved for internal usage and should therefore never be used by regular users. Otherwise
+   * compatibility might break with any release update.
    */
   public static class AccessHelper {
 

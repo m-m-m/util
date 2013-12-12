@@ -79,8 +79,8 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
    * if {@link net.sf.mmm.client.ui.api.common.SelectionMode#MULTIPLE_SELECTION multi-selection} is enabled,
    * nothing will be displayed in the {@link #getDetailPanel() details panel}. This may still make sense to
    * allow mass-operations such as
-   * {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainRemove#onRemove(Object) remove} in the
-   * {@link #getMasterPanel() master panel}.
+   * {@link net.sf.mmm.client.ui.api.handler.action.UiHandlerActionRemove#onRemove(net.sf.mmm.client.ui.api.event.UiEvent)
+   * remove} in the {@link #getMasterPanel() master panel}.
    * 
    * @return the master list.
    */

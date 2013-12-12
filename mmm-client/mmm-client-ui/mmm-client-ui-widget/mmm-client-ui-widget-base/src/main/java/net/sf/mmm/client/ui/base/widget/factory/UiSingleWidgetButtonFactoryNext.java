@@ -5,20 +5,20 @@ package net.sf.mmm.client.ui.base.widget.factory;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionNext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainNext;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainNext next} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionNext next} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryNext extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainNext> {
+public class UiSingleWidgetButtonFactoryNext extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionNext> {
 
   /**
    * The constructor.
@@ -32,33 +32,32 @@ public class UiSingleWidgetButtonFactoryNext extends AbstractUiSingleWidgetButto
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainNext> getHandlerInterface() {
+  public Class<UiHandlerActionNext> getHandlerInterface() {
 
-    return UiHandlerPlainNext.class;
+    return UiHandlerActionNext.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainNext);
+    return (handler instanceof UiHandlerActionNext);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainNext handler, boolean preventConfirmationPopup,
-      final Object variant) {
+  public UiWidgetButton create(UiContext context, final UiHandlerActionNext handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
 
-        handler.onNext(variant);
+        handler.onNext(event);
       }
     };
     NlsMessage tooltipNext = getBundle().tooltipNext();

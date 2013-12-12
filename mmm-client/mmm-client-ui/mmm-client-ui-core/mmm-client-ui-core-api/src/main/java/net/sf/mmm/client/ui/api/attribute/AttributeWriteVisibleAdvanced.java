@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.attribute;
 
+
 /**
  * This interface gives advanced read and write access to the {@link #isVisible() visibility} of an object.
  * 
@@ -62,5 +63,16 @@ public abstract interface AttributeWriteVisibleAdvanced extends AttributeWriteVi
    */
   @Override
   void setVisible(boolean visible);
+
+  /**
+   * This method shows or hides this object.
+   * 
+   * @see #isVisible()
+   * 
+   * @param visible is the new visibility status of this object. If <code>true</code>, the object will be
+   *        shown (and raised), if false the object will be hidden (iconified).
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
+   */
+  void setVisible(boolean visible, boolean programmatic);
 
 }

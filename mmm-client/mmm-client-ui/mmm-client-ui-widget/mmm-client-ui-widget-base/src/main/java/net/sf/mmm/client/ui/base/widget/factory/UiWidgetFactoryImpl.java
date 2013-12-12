@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
@@ -51,8 +51,8 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   /** @see #getClientUiBundle() */
   private NlsBundleClientUiRoot clientUiBundle;
 
-  /** @see #createButton(Class, UiHandlerPlain, boolean) */
-  private Map<Class<? extends UiHandlerPlain>, UiSingleWidgetButtonFactory<?>> handlerType2ButtonFactoryMap;
+  /** @see #createButton(Class, UiHandlerAction, boolean) */
+  private Map<Class<? extends UiHandlerAction>, UiSingleWidgetButtonFactory<?>> handlerType2ButtonFactoryMap;
 
   /**
    * The constructor.
@@ -60,7 +60,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   public UiWidgetFactoryImpl() {
 
     super();
-    this.handlerType2ButtonFactoryMap = new HashMap<Class<? extends UiHandlerPlain>, UiSingleWidgetButtonFactory<?>>();
+    this.handlerType2ButtonFactoryMap = new HashMap<Class<? extends UiHandlerAction>, UiSingleWidgetButtonFactory<?>>();
     registerButtonFactories();
   }
 
@@ -72,7 +72,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
   protected void registerButtonFactory(UiSingleWidgetButtonFactory<?> factory) {
 
     NlsNullPointerException.checkNotNull(UiSingleWidgetButtonFactory.class, factory);
-    Class<? extends UiHandlerPlain> key = factory.getHandlerInterface();
+    Class<? extends UiHandlerAction> key = factory.getHandlerInterface();
     NlsNullPointerException.checkNotNull("factory.handlerInterface", key);
     UiSingleWidgetButtonFactory<?> duplicate = this.handlerType2ButtonFactoryMap.get(key);
     if (duplicate != null) {
@@ -162,7 +162,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton createButton(UiHandlerPlain handler) {
+  public UiWidgetButton createButton(UiHandlerAction handler) {
 
     return createButton(null, handler, false);
   }
@@ -171,7 +171,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
    * {@inheritDoc}
    */
   @Override
-  public <HANDLER extends UiHandlerPlain> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler) {
+  public <HANDLER extends UiHandlerAction> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler) {
 
     return createButton(handlerType, handler, false);
   }
@@ -180,20 +180,9 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
    * {@inheritDoc}
    */
   @Override
-  public <HANDLER extends UiHandlerPlain> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler,
-      final boolean preventConfirmationPopup) {
-
-    Object variant = null;
-    return createButton(handlerType, handler, preventConfirmationPopup, variant);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   @SuppressWarnings("unchecked")
-  public <HANDLER extends UiHandlerPlain> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler,
-      final boolean preventConfirmationPopup, Object variant) {
+  public <HANDLER extends UiHandlerAction> UiWidgetButton createButton(Class<HANDLER> handlerType, HANDLER handler,
+      final boolean preventConfirmationPopup) {
 
     UiSingleWidgetButtonFactory<?> buttonFactory;
     if (handlerType == null) {
@@ -220,7 +209,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
       throw new IllegalCaseException(illegalCase);
     }
     return ((UiSingleWidgetButtonFactory<HANDLER>) buttonFactory).create(getContext(), handler,
-        preventConfirmationPopup, variant);
+        preventConfirmationPopup);
   }
 
   /**

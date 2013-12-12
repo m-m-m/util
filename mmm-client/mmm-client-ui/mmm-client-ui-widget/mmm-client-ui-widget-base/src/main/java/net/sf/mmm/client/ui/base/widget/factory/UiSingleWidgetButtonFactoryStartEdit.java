@@ -4,19 +4,19 @@ package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionStartEdit;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStartEdit;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainStartEdit start edit} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionStartEdit start edit} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainStartEdit> {
+public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionStartEdit> {
 
   /**
    * The constructor.
@@ -30,18 +30,18 @@ public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidget
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainStartEdit> getHandlerInterface() {
+  public Class<UiHandlerActionStartEdit> getHandlerInterface() {
 
-    return UiHandlerPlainStartEdit.class;
+    return UiHandlerActionStartEdit.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainStartEdit);
+    return (handler instanceof UiHandlerActionStartEdit);
   }
 
   /**
@@ -57,15 +57,15 @@ public class UiSingleWidgetButtonFactoryStartEdit extends AbstractUiSingleWidget
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainStartEdit handler,
-      boolean preventConfirmationPopup, final Object variant) {
+  public UiWidgetButton create(UiContext context, final UiHandlerActionStartEdit handler,
+      boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
 
-        handler.onStartEditMode(variant);
+        handler.onStartEditMode(event);
       }
     };
     return createButton(context, getBundle().labelStartEdit(), clickHandler, null, null);

@@ -3,7 +3,7 @@
 /**
  * Contains interfaces for plain UI handlers.
  * <a name="documentation"/><h2>UI Handlers API Plain</h2> 
- * This package contains {@link net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain plain UI-handler}-interfaces.
+ * This package contains {@link net.sf.mmm.client.ui.api.handler.action.UiHandlerAction plain UI-handler}-interfaces.
  */
-package net.sf.mmm.client.ui.api.handler.plain;
+package net.sf.mmm.client.ui.api.handler.action;
 

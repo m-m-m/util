@@ -9,7 +9,6 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSize;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
@@ -30,9 +29,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteTooltip, AttributeWriteVisible,
-    AttributeWriteEnabled, AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize,
-    AttributeWriteAttribute {
+public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteTooltip, AttributeWriteEnabled,
+    AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize, AttributeWriteAttribute {
 
   /**
    * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
@@ -55,6 +53,14 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * @param parent is the new parent or <code>null</code> if {@link #removeFromParent() removed from parent}.
    */
   void setParent(UiWidgetComposite<?> parent);
+
+  /**
+   * @see net.sf.mmm.client.ui.api.attribute.AttributeWriteVisibleAdvanced#setVisible(boolean, boolean)
+   * 
+   * @param visible - <code>true</code> to set visible (show), <code>false</code> to set invisible (hide).
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
+   */
+  void setVisible(boolean visible, boolean programmatic);
 
   /**
    * This method is called from {@link net.sf.mmm.client.ui.base.UiModeChanger} for

@@ -505,7 +505,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
         case MULTIPLE_SELECTION:
           initializeMultiSelection();
           break;
-        default:
+        default :
           throw new IllegalCaseException(SelectionMode.class, UiWidgetAdapterGwtTree.this.selectionMode);
       }
       updateNode();
@@ -536,8 +536,8 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     @SuppressWarnings({ "unchecked", "rawtypes" })
     protected void updateNode() {
 
-      ((UiTreeNodeRenderer) UiWidgetAdapterGwtTree.this.treeNodeRenderer).assignNodeToWidget(this.node,
-          this.nodeWidget);
+      ((UiTreeNodeRenderer) UiWidgetAdapterGwtTree.this.treeNodeRenderer)
+          .assignNodeToWidget(this.node, this.nodeWidget);
     }
 
     /**
@@ -599,7 +599,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
             initializeMultiSelection();
           }
           break;
-        default:
+        default :
           throw new IllegalCaseException(SelectionMode.class, UiWidgetAdapterGwtTree.this.selectionMode);
       }
     }
@@ -777,6 +777,15 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
       // TODO hohwille
       this.nodeWidget.setEnabled(enabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setVisible(boolean visible, boolean programmatic) {
+
+      setVisible(visible);
     }
 
     /**

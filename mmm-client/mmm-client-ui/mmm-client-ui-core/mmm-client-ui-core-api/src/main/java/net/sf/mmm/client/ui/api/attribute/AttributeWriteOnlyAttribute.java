@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.attribute;
 
 /**
- * This interface gives write access to the {@link #setAttribute(String, String) attribute} of an object.
+ * This interface gives write access to the {@link #setAttribute(String, String) attributes} of an object.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

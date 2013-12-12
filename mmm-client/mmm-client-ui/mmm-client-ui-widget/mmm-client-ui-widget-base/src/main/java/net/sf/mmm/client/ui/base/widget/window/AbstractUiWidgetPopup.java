@@ -3,7 +3,8 @@
 package net.sf.mmm.client.ui.base.widget.window;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainClose;
+import net.sf.mmm.client.ui.api.event.UiEvent;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionClose;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
@@ -60,12 +61,12 @@ public abstract class AbstractUiWidgetPopup<ADAPTER extends UiWidgetAdapterPopup
   @Override
   public UiWidgetButton createAndAddCloseButton() {
 
-    UiHandlerPlainClose closeHandler = new UiHandlerPlainClose() {
+    UiHandlerActionClose closeHandler = new UiHandlerActionClose() {
 
       @Override
-      public void onClose(Object variant) {
+      public void onClose(UiEvent event) {
 
-        setVisible(false);
+        setVisible(false, event.isProgrammatic());
       }
     };
     UiWidgetButton closeButton = getContext().getWidgetFactory().createButton(closeHandler);

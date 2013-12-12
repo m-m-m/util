@@ -11,7 +11,7 @@ import java.util.Locale;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-final class GwtHelper {
+public final class GwtHelper {
 
   /**
    * Construction prohibited.
@@ -34,6 +34,16 @@ final class GwtHelper {
     }
     return null;
   }
+  /**
+   * Indirection for {@link String#toLowerCase(Locale)}.
+   *
+   * @param string is the {@link String}.
+   * @return the result of {@link String#toLowerCase(Locale)}.
+   */
+  public static String toLowerCase(String string) {
+
+    return string.toLowerCase();
+  }
 
   /**
    * Indirection for {@link String#toLowerCase(Locale)}.
@@ -45,6 +55,17 @@ final class GwtHelper {
   public static String toLowerCase(String string, Locale locale) {
 
     return string.toLowerCase();
+  }
+
+  /**
+   * Indirection for {@link String#toUpperCase(Locale)}.
+   *
+   * @param string is the {@link String}.
+   * @return the result of {@link String#toUpperCase(Locale)}.
+   */
+  public static String toUpperCase(String string) {
+
+    return string.toUpperCase();
   }
 
   /**

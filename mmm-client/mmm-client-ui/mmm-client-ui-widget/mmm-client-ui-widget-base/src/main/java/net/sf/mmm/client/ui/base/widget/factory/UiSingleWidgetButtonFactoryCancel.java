@@ -4,19 +4,19 @@ package net.sf.mmm.client.ui.base.widget.factory;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionCancel;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainCancel;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainCancel cancel} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionCancel cancel} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryCancel extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainCancel> {
+public class UiSingleWidgetButtonFactoryCancel extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionCancel> {
 
   /**
    * The constructor.
@@ -30,33 +30,32 @@ public class UiSingleWidgetButtonFactoryCancel extends AbstractUiSingleWidgetBut
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainCancel> getHandlerInterface() {
+  public Class<UiHandlerActionCancel> getHandlerInterface() {
 
-    return UiHandlerPlainCancel.class;
+    return UiHandlerActionCancel.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainCancel);
+    return (handler instanceof UiHandlerActionCancel);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(UiContext context, final UiHandlerPlainCancel handler, boolean preventConfirmationPopup,
-      final Object variant) {
+  public UiWidgetButton create(UiContext context, final UiHandlerActionCancel handler, boolean preventConfirmationPopup) {
 
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
       public void onClick(UiEventClick event) {
 
-        handler.onCancel(variant);
+        handler.onCancel(event);
       }
     };
     return createButton(context, getBundle().labelCancel(), clickHandler, null, null);

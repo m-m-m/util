@@ -9,20 +9,20 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionDelete;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlain;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainDelete;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
- * {@link UiHandlerPlainDelete delete} {@link UiWidgetButton buttons}.
+ * {@link UiHandlerActionDelete delete} {@link UiWidgetButton buttons}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiSingleWidgetButtonFactoryDelete extends AbstractUiSingleWidgetButtonFactory<UiHandlerPlainDelete> {
+public class UiSingleWidgetButtonFactoryDelete extends AbstractUiSingleWidgetButtonFactory<UiHandlerActionDelete> {
 
   /**
    * The constructor.
@@ -36,18 +36,18 @@ public class UiSingleWidgetButtonFactoryDelete extends AbstractUiSingleWidgetBut
    * {@inheritDoc}
    */
   @Override
-  public Class<UiHandlerPlainDelete> getHandlerInterface() {
+  public Class<UiHandlerActionDelete> getHandlerInterface() {
 
-    return UiHandlerPlainDelete.class;
+    return UiHandlerActionDelete.class;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean isInstance(UiHandlerPlain handler) {
+  public boolean isInstance(UiHandlerAction handler) {
 
-    return (handler instanceof UiHandlerPlainDelete);
+    return (handler instanceof UiHandlerActionDelete);
   }
 
   /**
@@ -63,8 +63,8 @@ public class UiSingleWidgetButtonFactoryDelete extends AbstractUiSingleWidgetBut
    * {@inheritDoc}
    */
   @Override
-  public UiWidgetButton create(final UiContext context, final UiHandlerPlainDelete handler,
-      final boolean preventConfirmationPopup, final Object variant) {
+  public UiWidgetButton create(final UiContext context, final UiHandlerActionDelete handler,
+      final boolean preventConfirmationPopup) {
 
     final NlsBundleClientUiRoot bundle = getBundle();
     NlsMessage labelDelete = bundle.labelDelete();
@@ -72,10 +72,10 @@ public class UiSingleWidgetButtonFactoryDelete extends AbstractUiSingleWidgetBut
     UiHandlerEventClick clickHandler = new UiHandlerEventClick() {
 
       @Override
-      public void onClick(UiEventClick event) {
+      public void onClick(final UiEventClick event) {
 
         if (preventConfirmationPopup) {
-          handler.onDelete(variant);
+          handler.onDelete(event);
         } else {
           UiPopupHelper popupHelper = context.getPopupHelper();
           Consumer<String> callback = new Consumer<String>() {
@@ -84,7 +84,7 @@ public class UiSingleWidgetButtonFactoryDelete extends AbstractUiSingleWidgetBut
             public void accept(String argument) {
 
               if (UiPopupHelper.BUTTON_ID_OK.equals(argument)) {
-                handler.onDelete(variant);
+                handler.onDelete(event);
               }
             }
           };

@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.api.common;
 /**
  * This is the interface for a
  * {@link net.sf.mmm.client.ui.api.attribute.AttributeReadFlagAdvanced#getFlag(FlagModifier) flag modifier}.
- * As an implementation you should define well documented constants that typically just extend from
+ * As an implementation you should define well documented constants that typically just extends from
  * {@link Object}. For debugging purposes it is recommended to provide a proper implementation of
  * {@link #toString()}.<br/>
  * <b>ATTENTION:</b><br/>

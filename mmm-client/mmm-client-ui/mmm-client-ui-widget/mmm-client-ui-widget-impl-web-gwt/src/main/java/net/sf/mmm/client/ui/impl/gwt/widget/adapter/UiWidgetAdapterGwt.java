@@ -140,7 +140,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
+  public void setVisible(boolean visible, boolean programmatic) {
 
     getToplevelWidget().setVisible(visible);
   }

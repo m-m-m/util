@@ -2,9 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
+import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractDialogWindow;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
+import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 
 /**
  * This is the implementation of
@@ -23,6 +25,40 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
   public UiWidgetAdapterGwtAbstractDialogWindow() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void applyEventAdapter(EventAdapterGwt adapter) {
+
+    super.applyEventAdapter(adapter);
+    getToplevelWidget().addCloseHandler(adapter);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setVisible(boolean visible, boolean programmatic) {
+
+    EventAdapterGwt eventAdapter = getEventAdapter();
+    if (visible) {
+      if (programmatic && (eventAdapter != null)) {
+        eventAdapter.setProgrammaticEventType(EventType.OPEN);
+      }
+      getToplevelWidget().show();
+      // GWT has no OPEN events and this is the only way to open the
+      if (eventAdapter != null) {
+        eventAdapter.fireEvent(EventType.OPEN);
+      }
+    } else {
+      if (programmatic && (eventAdapter != null)) {
+        eventAdapter.setProgrammaticEventType(EventType.CLOSE);
+      }
+      getToplevelWidget().hide();
+    }
   }
 
   /**

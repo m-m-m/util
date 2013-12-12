@@ -186,15 +186,6 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
    * {@inheritDoc}
    */
   @Override
-  public boolean isVisible() {
-
-    throw new NlsUnsupportedOperationException();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public boolean isEnabled() {
 
     throw new NlsUnsupportedOperationException();

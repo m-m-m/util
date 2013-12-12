@@ -15,6 +15,9 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.ui.PopupPanel;
 
 /**
  * This class is the GWT specific adapter for {@link UiHandlerEvent}.
@@ -23,7 +26,7 @@ import com.google.gwt.event.dom.client.FocusHandler;
  * @since 1.0.0
  */
 public class EventAdapterGwt extends AbstractEventAdapter implements FocusHandler, BlurHandler, ClickHandler,
-    ChangeHandler {
+    ChangeHandler, CloseHandler<PopupPanel> {
 
   /**
    * The constructor.
@@ -70,6 +73,15 @@ public class EventAdapterGwt extends AbstractEventAdapter implements FocusHandle
   public void onChange(ChangeEvent event) {
 
     fireEvent(EventType.VALUE_CHANGE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void onClose(CloseEvent<PopupPanel> event) {
+
+    fireEvent(EventType.CLOSE);
   }
 
 }

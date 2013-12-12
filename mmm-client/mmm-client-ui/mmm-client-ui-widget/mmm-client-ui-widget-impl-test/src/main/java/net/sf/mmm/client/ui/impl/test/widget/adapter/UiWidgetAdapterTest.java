@@ -206,7 +206,7 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
    * {@inheritDoc}
    */
   @Override
-  public void setVisible(boolean visible) {
+  public void setVisible(boolean visible, boolean programmatic) {
 
     // dummy/mock
   }

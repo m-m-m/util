@@ -8,10 +8,11 @@ import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.client.ui.api.common.UiMode;
+import net.sf.mmm.client.ui.api.event.UiEvent;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionSave;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionStartEdit;
+import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionStopEdit;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainSave;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStartEdit;
-import net.sf.mmm.client.ui.api.handler.plain.UiHandlerPlainStopEdit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
@@ -34,7 +35,7 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
  * {@link #isModified() modifications}, trigger
  * {@link #validate(net.sf.mmm.util.validation.api.ValidationState) validation} and create a new instance of
  * the {@link #getValue() value object} with the current modifications that is saved by delegation to the
- * {@link UiHandlerObjectSave#onSave(Object, Object)} on widgets for UI patterns or forms to edit business
+ * {@link UiHandlerObjectSave#onSave(Object, UiEvent)} on widgets for UI patterns or forms to edit business
  * objects (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object, boolean)}).
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
@@ -51,7 +52,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
   /** @see #createButtonPanel() */
   private final UiHandler handler;
 
-  /** @see UiHandler#onSave(Object) */
+  /** @see UiHandler#onSave(UiEvent) */
   private final UiHandlerObjectSave<VALUE> handlerSaveObject;
 
   /**
@@ -59,7 +60,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
    * 
    * @param context is the {@link #getContext() context}.
    * @param handlerSaveObject is the {@link UiHandlerObjectSave}
-   *        {@link UiHandlerObjectSave#onSave(Object, Object) invoked} if the end-user clicked "save" and the
+   *        {@link UiHandlerObjectSave#onSave(Object, UiEvent) invoked} if the end-user clicked "save" and the
    *        {@link #getValue() value} has been validated successfully.
    * @param valueClass is the {@link #getValueClass() value class}.
    */
@@ -114,9 +115,9 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
     UiWidgetFactory factory = getContext().getWidgetFactory();
     UiWidgetButtonPanel buttonPanel = factory.create(UiWidgetButtonPanel.class);
 
-    UiWidgetButton startEditButton = factory.createButton(UiHandlerPlainStartEdit.class, this.handler);
-    UiWidgetButton saveButton = factory.createButton(UiHandlerPlainSave.class, this.handler);
-    UiWidgetButton stopEditButton = factory.createButton(UiHandlerPlainStopEdit.class, this.handler);
+    UiWidgetButton startEditButton = factory.createButton(UiHandlerActionStartEdit.class, this.handler);
+    UiWidgetButton saveButton = factory.createButton(UiHandlerActionSave.class, this.handler);
+    UiWidgetButton stopEditButton = factory.createButton(UiHandlerActionStopEdit.class, this.handler);
 
     buttonPanel.addChild(startEditButton);
     buttonPanel.addChild(saveButton);
@@ -127,18 +128,18 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
   /**
    * This inner class implements the handler interfaces.
    */
-  private class UiHandler implements UiHandlerPlainStartEdit, UiHandlerPlainStopEdit, UiHandlerPlainSave {
+  private class UiHandler implements UiHandlerActionStartEdit, UiHandlerActionStopEdit, UiHandlerActionSave {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onSave(Object variant) {
+    public void onSave(UiEvent event) {
 
       ValidationState state = new ValidationStateImpl();
       VALUE value = getValueAndValidate(state);
       if (state.isValid()) {
-        UiWidgetCustomEditor.this.handlerSaveObject.onSave(value, variant);
+        UiWidgetCustomEditor.this.handlerSaveObject.onSave(value, event);
         setMode(UiMode.VIEW);
       } else {
         boolean showPopup = true;
@@ -163,7 +164,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
      * {@inheritDoc}
      */
     @Override
-    public void onStopEditMode(Object variant) {
+    public void onStopEditMode(UiEvent event) {
 
       if (isModified()) {
         NlsBundleClientUiRoot bundle = NlsAccess.getBundleFactory().createBundle(NlsBundleClientUiRoot.class);
@@ -186,7 +187,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
     }
 
     /**
-     * Called from {@link #onStopEditMode(Object)} to actually discard the changes and leave the edit mode.
+     * Called from {@link #onStopEditMode(UiEvent)} to actually discard the changes and leave the edit mode.
      */
     private void stopEditMode() {
 
@@ -198,7 +199,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
      * {@inheritDoc}
      */
     @Override
-    public void onStartEditMode(Object variant) {
+    public void onStartEditMode(UiEvent event) {
 
       setMode(UiMode.EDIT);
     }
