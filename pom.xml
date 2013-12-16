@@ -506,7 +506,7 @@
         <inherited>false</inherited>
         <executions>
           <execution>
-          <phase>post-integration-test</phase>
+          <phase>post-site</phase>
           <goals>
             <goal>run</goal>
           </goals>
