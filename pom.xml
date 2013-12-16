@@ -40,6 +40,7 @@
     <!--<org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>-->
     <org.hibernate.validator.version>4.1.0.Final</org.hibernate.validator.version>
     <org.slf4j.version>1.6.1</org.slf4j.version>
+    <jacoco.version>0.6.4.201312101107</jacoco.version>
   </properties>
 
   <dependencyManagement>
@@ -180,8 +181,6 @@
   </dependencyManagement>
 
   <build>
-    <!-- Only for maven 3.0 and above... -->
-    <!-- <sourceEncoding>UTF-8</sourceEncoding> -->
     <pluginManagement>
       <plugins>
         <plugin>
@@ -265,8 +264,8 @@
             <notree>true</notree>
             <!--<javadocExecutable>C:/Program Files/Java/jdk1.6.0_45/bin/javadoc.exe</javadocExecutable>-->
             <show>private</show>
-            <encoding>UTF-8</encoding>
-            <charset>UTF-8</charset>
+            <encoding>${project.reporting.outputEncoding}</encoding>
+            <charset>${project.build.sourceEncoding}</charset>
             <docfilessubdirs>true</docfilessubdirs>
             <!--<debug>true</debug>-->
             <links>
@@ -313,6 +312,11 @@
           <version>1.0.0-beta-1</version>
         </plugin>
         <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.version}</version>
+        </plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>cobertura-maven-plugin</artifactId>
           <version>2.6</version>
@@ -352,6 +356,11 @@
             <sonar.skippedModules>mmm-util-backport-java.util.function,mmm-util-backport-java.time</sonar.skippedModules>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -360,7 +369,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <configuration>
-          <encoding>UTF-8</encoding>
+          <encoding>${project.build.sourceEncoding}</encoding>
           <includeEmptyDirs>true</includeEmptyDirs>
         </configuration>
       </plugin>
@@ -454,6 +463,28 @@
          </configuration>
       </plugin>
 
+      <!-- JaCoCo for test coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <!--
+          <execution>
+            <id>default-report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          -->
+        </executions>
+      </plugin>
       <!-- site generation settings-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -468,6 +499,62 @@
           </dependency>
         </dependencies>
       </plugin>
+      <!-- genercate jacoco coverage report-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <inherited>false</inherited>
+        <executions>
+          <execution>
+          <phase>post-integration-test</phase>
+          <goals>
+            <goal>run</goal>
+          </goals>
+          <configuration>
+            <target>
+              <!-- Execute an ant task within maven -->
+              <echo message="Generating JaCoCo Reports" />
+              <taskdef name="report" classname="org.jacoco.ant.ReportTask">
+                <classpath path="${settings.localRepository}/org/jacoco/org.jacoco.ant/${jacoco.version}/org.jacoco.ant-${jacoco.version}.jar" />
+              </taskdef>
+              <mkdir dir="${basedir}/target/site/coverage-report" />
+              <report>
+                <executiondata>
+                  <fileset dir="${basedir}">
+                    <include name="**/target/**/jacoco.exec" />
+                  </fileset>
+                </executiondata>
+                <structure name="m-m-m project coverage">
+                  <group name="m-m-m">
+                    <classfiles>
+                      <fileset dir="${basedir}">
+                        <include name="**/target/classes/**/*.class" />
+                      </fileset>
+                    </classfiles>
+                    <sourcefiles encoding="${project.build.sourceEncoding}">
+                      <fileset dir="${basedir}">
+                        <include name="**/src/main/java/**/*.java" />
+                      </fileset>
+                    </sourcefiles>
+                  </group>
+                </structure>
+                <html destdir="${basedir}/target/site/coverage-report/html" />
+                <xml destfile="${basedir}/target/site/coverage-report/coverage-report.xml" />
+                <csv destfile="${basedir}/target/site/coverage-report/coverage-report.csv" />
+              </report>
+            </target>
+          </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.ant</artifactId>
+            <version>${jacoco.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
     </plugins>
   </build>
   <reporting>
@@ -496,8 +583,8 @@
         <configuration>
           <notree>true</notree>
           <show>private</show>
-          <encoding>UTF-8</encoding>
-          <charset>UTF-8</charset>
+          <encoding>${project.reporting.outputEncoding}</encoding>
+          <charset>${project.build.sourceEncoding}</charset>
           <docfilessubdirs>true</docfilessubdirs>
           <links>
             <link>http://docs.oracle.com/javase/7/docs/api/</link>
@@ -562,14 +649,17 @@
           </reportSet>
         </reportSets>
       </plugin>
+      <!--
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-report-plugin</artifactId>
         <inherited>false</inherited>
         <configuration>
           <aggregate>true</aggregate>
       	</configuration>
       </plugin>
+      -->
+      <!--
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
@@ -578,6 +668,7 @@
         	<encoding>${project.build.sourceEncoding}</encoding>
       	</configuration>
       </plugin>
+      -->
       <!--
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -608,7 +699,7 @@
         <configuration>
           <format>xml</format>
           <linkXref>true</linkXref>
-          <sourceEncoding>UTF-8</sourceEncoding>
+          <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
           <minimumTokens>100</minimumTokens>
         </configuration>
       </plugin>
@@ -705,7 +796,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <argLine>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-function-version}/mmm-util-backport-java.util.function-${backport-function-version}.jar${path.separator}${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</argLine>
+              <argLine>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-function-version}/mmm-util-backport-java.util.function-${backport-function-version}.jar${path.separator}${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar ${argLine}</argLine>
             </configuration>
           </plugin>
         </plugins>
