@@ -29,6 +29,8 @@
   </modules>
 
   <properties>
+    <!-- argLine needs to be set in sonar build otherwise it remains as unresolved class ${argLine} in surefire -->
+    <argLine></argLine>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <backport-time-version>1.0.0</backport-time-version>
@@ -470,6 +472,7 @@
         <executions>
           <execution>
             <id>default-prepare-agent</id>
+            <phase>pre-site</phase>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
