@@ -95,7 +95,7 @@
 .fancyButton () {
   border-style: solid;
   border-radius: @radius;
-  font-size: 16pt;
+  /* font-size: 16pt; */
   margin: @margin;
 }
 
@@ -434,6 +434,7 @@ body > * {
 
 .ButtonPanel {
   flex-grow: 0;
+  min-height: 1.8em;
   .Button {
     margin: @margin;
     min-width: 6em;
@@ -457,6 +458,7 @@ body > * {
 
 .Field {
   margin-left: 0.5em;
+  flex-grow: 0;
   > input {
     width: 100%;
   }
@@ -531,10 +533,18 @@ body > * {
   width: 100%;
 }
 
-.gwt-PopupPanelGlass {
+.GlassPanel {
   background: black;
   opacity: 0.3;
   cursor: not-allowed;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  /* z-index: 10; */
 }
 
 .Window {
@@ -543,7 +553,7 @@ body > * {
   border-radius: @radius;
   .WindowTitleBar {
     .gradientActive;
-    height: 1.7em;
+    min-height: 1.7em;
     border-top-left-radius: @radius;
     border-top-right-radius: @radius;
     flex-grow: 0;
@@ -564,9 +574,8 @@ body > * {
     overflow: auto;
   }
 
-  .WindowFooterBar {
-    heigth: 0.5em;
-    flex-grow: 0;
+  > .ButtonPanel {
+    align: center;
   }
 
   .BorderE {

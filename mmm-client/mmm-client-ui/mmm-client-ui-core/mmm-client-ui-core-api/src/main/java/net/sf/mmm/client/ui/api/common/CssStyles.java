@@ -129,4 +129,7 @@ public interface CssStyles {
   /** The name of the CSS style for an object that can be moved around by dragging. */
   String MOVABLE = "Movable";
 
+  /** The name of the CSS style for the glass panel used for modal popups. */
+  String GLASS_PANEL = "GlassPanel";
+
 }

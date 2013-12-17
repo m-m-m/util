@@ -14,9 +14,11 @@ import net.sf.mmm.util.lang.api.Direction;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -59,7 +61,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   private final Button closeButton;
 
   /** The button to {@link #setMaximized(boolean) (un)maximize} the window. */
-  private final Button maximizeButton;
+  private final SimpleToggleButton maximizeButton;
 
   /** @see #getButtonPanel() */
   private final ButtonPanel buttonPanel;
@@ -130,6 +132,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
    */
   private Element focusedElement;
 
+  /** @see #getGlassPanel() */
+  private Element glassPanel;
+
   /**
    * The constructor.
    */
@@ -157,6 +162,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   public PopupWindow(boolean autoHide, boolean modal) {
 
     super(autoHide, modal);
+    setGlassStyleName(CssStyles.GLASS_PANEL);
+    setGlassEnabled(true);
+    getGlassElement().getStyle().setPosition(Position.FIXED);
     this.resizable = true;
     this.maximized = false;
     this.maximizable = true;
@@ -178,8 +186,10 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     };
     this.closeButton.addClickHandler(closeHandler);
     iconMarkup = HtmlTemplates.INSTANCE.iconMarkup(IconConstants.MAXIMIZE);
-    this.maximizeButton = new Button(iconMarkup);
+    this.maximizeButton = new SimpleToggleButton();
+    this.maximizeButton.setHTML(iconMarkup);
     this.maximizeButton.setStyleName(CssStyles.BUTTON);
+    this.maximizeButton.addStyleName(CssStyles.TOGGLE_BUTTON);
     ClickHandler maximizeHandler = new ClickHandler() {
 
       @Override
@@ -268,15 +278,23 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     if (this.resizable == resizable) {
       return;
     }
-    this.borderEast.setVisible(resizable);
-    this.borderNorth.setVisible(resizable);
-    this.borderNorthEast.setVisible(resizable);
-    this.borderNorthWest.setVisible(resizable);
-    this.borderSouth.setVisible(resizable);
-    this.borderSouthEast.setVisible(resizable);
-    this.borderSouthWest.setVisible(resizable);
-    this.borderWest.setVisible(resizable);
+    doSetResizable(resizable);
     this.resizable = resizable;
+  }
+
+  /**
+   * @param newResizable - see {@link #setResizable(boolean)}.
+   */
+  private void doSetResizable(boolean newResizable) {
+
+    this.borderEast.setVisible(newResizable);
+    this.borderNorth.setVisible(newResizable);
+    this.borderNorthEast.setVisible(newResizable);
+    this.borderNorthWest.setVisible(newResizable);
+    this.borderSouth.setVisible(newResizable);
+    this.borderSouthEast.setVisible(newResizable);
+    this.borderSouthWest.setVisible(newResizable);
+    this.borderWest.setVisible(newResizable);
   }
 
   /**
@@ -352,11 +370,24 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
       this.savedHeight = getOffsetHeight();
       setPopupPosition(Window.getScrollLeft(), Window.getScrollTop());
       setPixelSize(Window.getClientWidth(), Window.getClientHeight());
+      if (this.movable) {
+        this.titleBar.removeStyleName(CssStyles.MOVABLE);
+      }
+      if (this.resizable) {
+        doSetResizable(false);
+      }
     } else {
       setPopupPosition(this.savedX, this.savedY);
       setPixelSize(this.savedWidth, this.savedHeight);
+      if (this.movable) {
+        this.titleBar.addStyleName(CssStyles.MOVABLE);
+      }
+      if (this.resizable) {
+        doSetResizable(true);
+      }
     }
     this.maximized = maximized;
+    this.maximizeButton.setValue(Boolean.valueOf(maximized), false);
   }
 
   /**
@@ -488,7 +519,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
    */
   private Element getLastFocusElement() {
 
-    return JavaScriptUtil.getInstance().getFocusable(this.contentPanel.getElement(), true, true);
+    return JavaScriptUtil.getInstance().getFocusable(getElement(), true, true);
   }
 
   /**
@@ -518,6 +549,18 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   }
 
   /**
+   * @return the glassPanel
+   */
+  protected Element getGlassPanel() {
+
+    if (this.glassPanel == null) {
+      this.glassPanel = Document.get().createDivElement();
+      this.glassPanel.setClassName(CssStyles.GLASS_PANEL);
+    }
+    return this.glassPanel;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -527,6 +570,10 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
       return;
     }
     super.show();
+    // if (isModal()) {
+    // Document.get().getBody().appendChild(getGlassPanel());
+    // }
+
     this.focusedElement = JavaScriptUtil.getInstance().getFocusedElement();
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
@@ -555,6 +602,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
       return;
     }
     super.hide();
+    // if (isModal()) {
+    // Document.get().getBody().removeChild(getGlassPanel());
+    // }
     if (this.focusedElement != null) {
       this.focusedElement.focus();
       this.focusedElement = null;

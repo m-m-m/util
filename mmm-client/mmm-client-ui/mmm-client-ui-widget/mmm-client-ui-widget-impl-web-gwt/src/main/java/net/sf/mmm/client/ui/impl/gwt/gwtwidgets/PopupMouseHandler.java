@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 import net.sf.mmm.client.ui.api.common.Rectangle;
 import net.sf.mmm.util.lang.api.Direction;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseDownHandler;
@@ -13,6 +14,7 @@ import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Window;
@@ -39,9 +41,6 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
 
   /** The current {@link Rectangle} of the {@link PopupWindow}. */
   private Rectangle popupRectangle;
-
-  /** The current {@link Rectangle} of the browser. */
-  private Rectangle browserRectangle;
 
   /** The minimum width of the {@link PopupWindow}. */
   private int minWidth;
@@ -89,11 +88,14 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
   @Override
   public void onMouseDown(MouseDownEvent event) {
 
-    if (!this.popupWindow.isResizable() && (this.resizeDirection != null)) {
-      return;
-    }
-    if (!this.popupWindow.isMovable() && (this.resizeDirection == null)) {
-      return;
+    if (this.resizeDirection == null) {
+      if (!this.popupWindow.isMovable() || this.popupWindow.isMaximized()) {
+        return;
+      }
+    } else {
+      if (!this.popupWindow.isResizable() || this.popupWindow.isMaximized()) {
+        return;
+      }
     }
     this.mouseX = event.getClientX();
     this.mouseY = event.getClientY();
@@ -101,10 +103,12 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
         this.popupWindow.getOffsetWidth(), this.popupWindow.getOffsetHeight());
 
     // TODO: calculate from CSS values
-    this.minWidth = 200;
-    this.minHeight = 100;
 
-    this.browserRectangle = new Rectangle(0, 0, Window.getClientWidth(), Window.getClientHeight());
+    Element element = this.popupWindow.getElement();
+    this.minWidth = element.getOffsetWidth() / 2;
+    this.minHeight = element.getOffsetHeight();
+
+    Log.debug(this.minWidth + "/" + this.minHeight);
 
     assert (this.registration == null);
     this.registration = Event.addNativePreviewHandler(this);
