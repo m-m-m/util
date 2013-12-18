@@ -132,4 +132,7 @@ public interface CssStyles {
   /** The name of the CSS style for the glass panel used for modal popups. */
   String GLASS_PANEL = "GlassPanel";
 
+  /** The name of the CSS style for a label corresponding to a field. */
+  String FIELD_LABEL = "FieldLabel";
+
 }

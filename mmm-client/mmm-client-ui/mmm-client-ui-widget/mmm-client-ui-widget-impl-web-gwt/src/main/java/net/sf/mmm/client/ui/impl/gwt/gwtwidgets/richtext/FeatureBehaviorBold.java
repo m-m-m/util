@@ -4,6 +4,9 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.FontWeight;
+
 /**
  * This is the implementation of {@link FeatureBehavior} for {@link RichTextFeature#BOLD}.
  * 
@@ -47,6 +50,21 @@ class FeatureBehaviorBold extends AbstractToggleFeatureBehavior {
   public void toggle() {
 
     getFormatter().toggleBold();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateFontSettings(boolean checked, Style style) {
+
+    FontWeight weight;
+    if (checked) {
+      weight = FontWeight.BOLD;
+    } else {
+      weight = FontWeight.NORMAL;
+    }
+    style.setFontWeight(weight);
   }
 
 }

@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteColumnSpan;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridCell;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.SingleCompositePanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtSingleMutableComposite;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtGridCell.GridCell;
 
@@ -78,7 +79,7 @@ public class UiWidgetAdapterGwtGridCell extends UiWidgetAdapterGwtSingleMutableC
    * This inner class is a custom {@link com.google.gwt.user.client.ui.Widget} that represents a
    * {@link GridCell} (TD-tag).
    */
-  protected static class GridCell extends UiWidgetAdapterGwtSingleMutableComposite.SingleCompositePanel implements
+  protected static class GridCell extends SingleCompositePanel implements
       AttributeWriteColumnSpan {
 
     /** @see #setColumnSpan(int) */

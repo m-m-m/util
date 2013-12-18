@@ -2,9 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ColorBox;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LabelWidget;
+import net.sf.mmm.util.datatype.api.color.Color;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -45,12 +51,6 @@ abstract class AbstractColorFeatureBehavior extends AbstractClickFeatureBehavior
    * {@inheritDoc}
    */
   @Override
-  public abstract void updateFontSettings();
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public Widget getFontSettingsWidget() {
 
     if (this.fontSettingsWidget == null) {
@@ -80,14 +80,14 @@ abstract class AbstractColorFeatureBehavior extends AbstractClickFeatureBehavior
     if (this.fontSettingsLabel == null) {
       this.fontSettingsLabel = new LabelWidget(getLocalizedLabel());
       this.fontSettingsLabel.setId(getFeature().name() + "_LABEL");
+      this.fontSettingsLabel.setStyleName(CssStyles.FIELD_LABEL);
       this.fontSettingsLabel.setLabelledWidget(getFontSettingsWidget());
     }
     return this.fontSettingsLabel;
   }
 
   /**
-   * @return the {@link ColorBox} with the {@link net.sf.mmm.client.ui.api.color.Color} for the feature
-   *         value.
+   * @return the {@link ColorBox} with the {@link Color} for the feature value.
    */
   protected ColorBox getColorBox() {
 
@@ -98,5 +98,71 @@ abstract class AbstractColorFeatureBehavior extends AbstractClickFeatureBehavior
     }
     return this.colorBox;
   }
+
+  /**
+   * Parses a {@link Color} given as {@link String} from GWT/browser.
+   * 
+   * @param colorString is the {@link Color} as {@link String}.
+   * @return the parsed {@link Color}.
+   */
+  protected Color parseColor(String colorString) {
+
+    return Color.valueOf(colorString);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateFontSettings() {
+
+    String colorString = getValue();
+    Color color = parseColor(colorString);
+    getColorBox().setValue(color, true);
+  }
+
+  /**
+   * @return the current value of the color in the rich text area.
+   */
+  protected abstract String getValue();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFontSettingsPreviewElement(final Element element) {
+
+    super.setFontSettingsPreviewElement(element);
+    ValueChangeHandler<Color> handler = new ValueChangeHandler<Color>() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public void onValueChange(ValueChangeEvent<Color> event) {
+
+        Color value = event.getValue();
+        if (value != null) {
+          Style style = element.getStyle();
+          applyFontSettings(value, style);
+        }
+      }
+    };
+    getColorBox().addValueChangeHandler(handler);
+  }
+
+  /**
+   * @param style the {@link Style} to modify.
+   */
+  public void applyFontSettings(Style style) {
+
+    applyFontSettings(getColorBox().getValue(), style);
+  }
+
+  /**
+   * @param value the {@link Color} to set.
+   * @param style the {@link Style} to modify.
+   */
+  protected abstract void applyFontSettings(Color value, Style style);
 
 }

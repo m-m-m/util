@@ -9,6 +9,7 @@ import java.util.Map;
 
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.RichTextArea.FontSize;
 
@@ -111,5 +112,28 @@ class FeatureBehaviorFontSize extends AbstractSelectionFeatureBehavior {
     if (fontSize != null) {
       getFormatter().setFontSize(fontSize);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void applyFontSettings(String value, Style style) {
+
+    FontSize fontSize = getFontSizeMap().get(value);
+    if (fontSize != null) {
+      // TODO Joerg Hohwiller (hohwille at users.sourceforge.net) <task>
+      // style.setFontSize(, Unit.MM);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getValue() {
+
+    // not available in GWT rich text Formatter...
+    return null;
   }
 }

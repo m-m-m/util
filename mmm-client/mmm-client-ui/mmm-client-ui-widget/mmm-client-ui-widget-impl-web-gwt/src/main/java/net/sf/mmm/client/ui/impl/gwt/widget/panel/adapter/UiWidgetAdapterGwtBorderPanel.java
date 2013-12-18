@@ -4,17 +4,15 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.BorderPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtSingleMutableComposite;
-import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtBorderPanel.BorderPanel;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of
  * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel} using GWT based on
- * {@link net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtBorderPanel.BorderPanel}.
+ * {@link net.sf.mmm.client.ui.impl.gwt.gwtwidgets.BorderPanel}.
  * 
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -69,37 +67,6 @@ public class UiWidgetAdapterGwtBorderPanel extends
       childWidget = getToplevelWidget(child);
     }
     getToplevelWidget().setChild(childWidget);
-  }
-
-  /**
-   * This inner class is a custom {@link Widget} that represents a
-   * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel} (fieldset-tag).
-   */
-  protected static class BorderPanel extends UiWidgetAdapterGwtSingleMutableComposite.SingleCompositePanel {
-
-    /** The labeled legend element. */
-    private final Element legend;
-
-    /**
-     * The constructor.
-     */
-    public BorderPanel() {
-
-      super();
-      setElement(Document.get().createElement("fieldset"));
-      this.legend = Document.get().createElement("legend");
-      getElement().appendChild(this.legend);
-    }
-
-    /**
-     * @param label is the label for the border text.
-     */
-    public void setLabel(String label) {
-
-      // HTML injection???
-      this.legend.setInnerText(label);
-    }
-
   }
 
 }

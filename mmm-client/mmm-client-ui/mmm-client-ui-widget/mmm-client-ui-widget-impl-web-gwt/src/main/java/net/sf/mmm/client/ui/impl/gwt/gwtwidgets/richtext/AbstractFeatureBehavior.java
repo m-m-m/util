@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HtmlTemplates;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LabelWidget;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.ui.RichTextArea.Formatter;
 import com.google.gwt.user.client.ui.Widget;
@@ -20,6 +21,9 @@ abstract class AbstractFeatureBehavior implements FeatureBehavior {
   /** @see #getRichTextToolbar() */
   private final RichTextToolbar richTextToolbar;
 
+  /** @see #isVisible() */
+  private boolean visible;
+
   /**
    * The constructor.
    * 
@@ -29,6 +33,7 @@ abstract class AbstractFeatureBehavior implements FeatureBehavior {
 
     super();
     this.richTextToolbar = richTextToolbar;
+    this.visible = true;
   }
 
   /**
@@ -47,9 +52,6 @@ abstract class AbstractFeatureBehavior implements FeatureBehavior {
 
     return this.richTextToolbar.getFormatter();
   }
-
-  /** @see #isVisible() */
-  private boolean visible;
 
   /**
    * {@inheritDoc}
@@ -109,6 +111,15 @@ abstract class AbstractFeatureBehavior implements FeatureBehavior {
    */
   @Override
   public void applyFontSettings() {
+
+    // nothing by default
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFontSettingsPreviewElement(Element element) {
 
     // nothing by default
   }

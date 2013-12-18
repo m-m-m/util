@@ -162,9 +162,11 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   public PopupWindow(boolean autoHide, boolean modal) {
 
     super(autoHide, modal);
-    setGlassStyleName(CssStyles.GLASS_PANEL);
-    setGlassEnabled(true);
-    getGlassElement().getStyle().setPosition(Position.FIXED);
+    if (modal) {
+      setGlassStyleName(CssStyles.GLASS_PANEL);
+      setGlassEnabled(true);
+      getGlassElement().getStyle().setPosition(Position.FIXED);
+    }
     this.resizable = true;
     this.maximized = false;
     this.maximizable = true;
@@ -278,7 +280,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     if (this.resizable == resizable) {
       return;
     }
-    doSetResizable(resizable);
+    if (!this.maximized) {
+      doSetResizable(resizable);
+    }
     this.resizable = resizable;
   }
 
@@ -316,7 +320,9 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
       return;
     }
     if (movable) {
-      this.titleBar.addStyleName(CssStyles.MOVABLE);
+      if (!this.maximized) {
+        this.titleBar.addStyleName(CssStyles.MOVABLE);
+      }
     } else {
       this.titleBar.removeStyleName(CssStyles.MOVABLE);
     }

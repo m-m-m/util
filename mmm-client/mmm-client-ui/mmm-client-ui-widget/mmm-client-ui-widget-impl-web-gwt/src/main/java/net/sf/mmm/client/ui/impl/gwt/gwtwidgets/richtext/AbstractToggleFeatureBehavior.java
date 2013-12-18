@@ -6,8 +6,12 @@ import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.SimpleToggleButton;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.CheckBox;
 
 /**
@@ -59,7 +63,8 @@ abstract class AbstractToggleFeatureBehavior extends AbstractFeatureBehavior imp
   public void updateFontSettings() {
 
     super.updateFontSettings();
-    getFontSettingsWidget().setValue(getValue());
+    Boolean value = getValue();
+    getFontSettingsWidget().setValue(value, true);
   }
 
   /**
@@ -94,6 +99,41 @@ abstract class AbstractToggleFeatureBehavior extends AbstractFeatureBehavior imp
     }
     return this.fontSettingsWidget;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFontSettingsPreviewElement(final Element element) {
+
+    super.setFontSettingsPreviewElement(element);
+    ValueChangeHandler<Boolean> handler = new ValueChangeHandler<Boolean>() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public void onValueChange(ValueChangeEvent<Boolean> event) {
+
+        updateFontSettings(event.getValue().booleanValue(), element.getStyle());
+      }
+    };
+    getFontSettingsWidget().addValueChangeHandler(handler);
+  }
+
+  /**
+   * @param style the {@link Style} to update.
+   */
+  public void updateFontSettings(Style style) {
+
+    updateFontSettings(getFontSettingsWidget().getValue().booleanValue(), style);
+  }
+
+  /**
+   * @param checked - the value of the {@link #getFontSettingsWidget() checkbox}.
+   * @param style the {@link Style} to update.
+   */
+  protected abstract void updateFontSettings(boolean checked, Style style);
 
   /**
    * {@inheritDoc}

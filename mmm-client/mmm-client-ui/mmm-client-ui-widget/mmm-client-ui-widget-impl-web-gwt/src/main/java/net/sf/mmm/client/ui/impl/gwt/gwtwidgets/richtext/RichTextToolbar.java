@@ -8,6 +8,7 @@ import java.util.Map;
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.BorderPanel;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ButtonGroup;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ButtonWidget;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
@@ -17,6 +18,7 @@ import net.sf.mmm.util.gwt.api.JavaScriptSelection;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -24,13 +26,16 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RichTextArea.FontSize;
 import com.google.gwt.user.client.ui.RichTextArea.Formatter;
 import com.google.gwt.user.client.ui.RichTextArea.Justification;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This class is a {@link com.google.gwt.user.client.ui.Widget} that represents the toolbar for a
@@ -408,6 +413,9 @@ public class RichTextToolbar extends Toolbar {
     }
   }
 
+  /**
+   * The {@link PopupWindow} for the font settings.
+   */
   class FontSettingsPopup extends PopupWindow {
 
     private FontSize fontSize;
@@ -416,6 +424,12 @@ public class RichTextToolbar extends Toolbar {
 
     private final VerticalFlowPanel contentPanel;
 
+    private final BorderPanel previewPanel;
+
+    private final FlowPanel previewArea;
+
+    private final InlineLabel previewText;
+
     /**
      * The constructor.
      */
@@ -423,12 +437,15 @@ public class RichTextToolbar extends Toolbar {
 
       super(false, true);
       addStyleName(CssStyles.POPUP);
-      String title = NlsAccess.getBundleFactory().createBundle(NlsBundleClientUiRoot.class).titleFontSettings()
-          .getLocalizedMessage();
+      String title = RichTextToolbar.this.bundle.titleFontSettings().getLocalizedMessage();
       setTitleText(title);
 
       this.contentPanel = new VerticalFlowPanel();
       this.gridLayout = new Grid(4, 2);
+      String labelPreviewText = RichTextToolbar.this.bundle.labelFontSettingsPreviewText().getLocalizedMessage();
+      this.previewText = new InlineLabel(labelPreviewText);
+      this.previewArea = new FlowPanel();
+      this.previewArea.add(this.previewText);
 
       int rowIndex = 0;
       addSelectionFeature(RichTextFeature.FONT_FAMILY, rowIndex++);
@@ -437,20 +454,51 @@ public class RichTextToolbar extends Toolbar {
       addSelectionFeature(RichTextFeature.BACKGROUND_COLOR, rowIndex++);
       this.contentPanel.add(this.gridLayout);
 
+      BorderPanel effectsPanel = new BorderPanel();
+      effectsPanel.setLabel("Effects");
+      VerticalFlowPanel effectsArea = new VerticalFlowPanel();
+      effectsPanel.setChild(effectsArea);
       for (FeatureBehavior behavior : RichTextToolbar.this.behaviorMap.values()) {
         if (behavior instanceof AbstractToggleFeatureBehavior) {
-          this.contentPanel.add(behavior.getFontSettingsWidget());
+          Widget fontSettingsWidget = behavior.getFontSettingsWidget();
+          effectsArea.add(fontSettingsWidget);
+          Element element;
+          RichTextFeature feature = behavior.getFeature();
+          if ((feature == RichTextFeature.STRIKETHROUGH) || (feature == RichTextFeature.SUPERSCRIPT)) {
+            element = this.previewArea.getElement();
+          } else {
+            element = this.previewText.getElement();
+          }
+          behavior.setFontSettingsPreviewElement(element);
         }
       }
-      // getButtonPanel().add(applyButton);
-      ButtonWidget cancelButton = new ButtonWidget(NlsAccess.getBundleFactory()
-          .createBundle(NlsBundleClientUiRoot.class).labelCancel().getLocalizedMessage());
+      this.contentPanel.add(effectsPanel);
+      String labelPreview = RichTextToolbar.this.bundle.labelPreview().getLocalizedMessage();
+      this.previewPanel = new BorderPanel();
+      this.previewPanel.setLabel(labelPreview);
+      this.previewPanel.setChild(this.previewArea);
+      this.contentPanel.add(this.previewPanel);
+
+      ButtonWidget applyButton = new ButtonWidget(RichTextToolbar.this.bundle.labelApply().getLocalizedMessage());
+      applyButton.addClickHandler(new ClickHandler() {
+
+        @Override
+        public void onClick(ClickEvent event) {
+
+          for (FeatureBehavior behavior : RichTextToolbar.this.behaviorMap.values()) {
+            behavior.applyFontSettings();
+          }
+          hide();
+        }
+      });
+      getButtonPanel().add(applyButton);
+      ButtonWidget cancelButton = new ButtonWidget(RichTextToolbar.this.bundle.labelCancel().getLocalizedMessage());
       cancelButton.addClickHandler(new ClickHandler() {
 
         @Override
         public void onClick(ClickEvent event) {
 
-          setVisible(false);
+          hide();
         }
       });
       getButtonPanel().add(cancelButton);
@@ -462,6 +510,8 @@ public class RichTextToolbar extends Toolbar {
       FeatureBehavior behavior = getBehavior(feature);
       this.gridLayout.setWidget(rowIndex, 0, behavior.getFontSettingsLabel());
       this.gridLayout.setWidget(rowIndex, 1, behavior.getFontSettingsWidget());
+      Element element = this.previewText.getElement();
+      behavior.setFontSettingsPreviewElement(element);
     }
   }
 }

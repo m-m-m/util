@@ -7,6 +7,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LabelWidget;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -34,6 +35,14 @@ interface FeatureBehavior extends AttributeWriteVisible, AttributeWriteEnabled {
    * the font-settings.
    */
   void applyFontSettings();
+
+  /**
+   * Updates the {@link com.google.gwt.user.client.ui.RichTextArea} according to the value from the widget for
+   * the font-settings.
+   * 
+   * @param element is the {@link Element} where to apply font settings whenever the value changed.
+   */
+  void setFontSettingsPreviewElement(Element element);
 
   /**
    * @return the {@link RichTextFeature} implemented by this object.

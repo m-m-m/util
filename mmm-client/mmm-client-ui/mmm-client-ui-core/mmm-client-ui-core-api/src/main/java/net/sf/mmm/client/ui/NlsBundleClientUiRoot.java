@@ -348,4 +348,16 @@ public interface NlsBundleClientUiRoot extends NlsBundle {
   @NlsBundleMessage("Undefined option")
   NlsMessage failureUndefinedOption();
 
+  /**
+   * @return the {@link NlsMessage} for the label of the preview (e.g. for font-settings).
+   */
+  @NlsBundleMessage("Preview")
+  NlsMessage labelPreview();
+
+  /**
+   * @return the {@link NlsMessage} for the label of the actual text to preview the font settings.
+   */
+  @NlsBundleMessage("Abcdefghijklmnopqrstuvwxyz0123456789")
+  NlsMessage labelFontSettingsPreviewText();
+
 }

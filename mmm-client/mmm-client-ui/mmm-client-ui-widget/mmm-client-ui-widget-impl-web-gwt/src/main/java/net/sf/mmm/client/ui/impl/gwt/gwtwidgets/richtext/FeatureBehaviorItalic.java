@@ -4,6 +4,9 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.FontStyle;
+
 /**
  * This is the implementation of {@link FeatureBehavior} for {@link RichTextFeature#ITALIC}.
  * 
@@ -48,4 +51,20 @@ class FeatureBehaviorItalic extends AbstractToggleFeatureBehavior {
 
     getFormatter().toggleItalic();
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateFontSettings(boolean checked, Style style) {
+
+    FontStyle fontStyle;
+    if (checked) {
+      fontStyle = FontStyle.ITALIC;
+    } else {
+      fontStyle = FontStyle.NORMAL;
+    }
+    style.setFontStyle(fontStyle);
+  }
+
 }

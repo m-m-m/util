@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 import net.sf.mmm.util.datatype.api.color.Color;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 /**
@@ -59,21 +60,17 @@ class FeatureBehaviorBackgroundColor extends AbstractColorFeatureBehavior {
    * {@inheritDoc}
    */
   @Override
-  public void updateFontSettings() {
+  protected void applyFontSettings(Color value, Style style) {
 
-    String colorString = getFormatter().getBackColor();
-    Color color = parseColor(colorString);
-    getColorBox().setValue(color);
+    style.setBackgroundColor(value.toString());
   }
 
   /**
-   * Parses a {@link Color} given as {@link String} from GWT/browser.
-   * 
-   * @param colorString is the {@link Color} as {@link String}.
-   * @return the parsed {@link Color}.
+   * {@inheritDoc}
    */
-  protected Color parseColor(String colorString) {
+  @Override
+  protected String getValue() {
 
-    return Color.valueOf(colorString);
+    return getFormatter().getBackColor();
   }
 }

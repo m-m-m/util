@@ -8,6 +8,10 @@ import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ComboBox;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LabelWidget;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -119,5 +123,60 @@ abstract class AbstractSelectionFeatureBehavior extends AbstractClickFeatureBeha
     }
     return this.combobox;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFontSettingsPreviewElement(final Element element) {
+
+    super.setFontSettingsPreviewElement(element);
+    ValueChangeHandler<String> handler = new ValueChangeHandler<String>() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public void onValueChange(ValueChangeEvent<String> event) {
+
+        String value = event.getValue();
+        if (value != null) {
+          Style style = element.getStyle();
+          applyFontSettings(value, style);
+        }
+      }
+    };
+    getCombobox().addValueChangeHandler(handler);
+  }
+
+  /**
+   * @param style the {@link Style} to modify.
+   */
+  public void applyFontSettings(Style style) {
+
+    applyFontSettings(getCombobox().getValue(), style);
+  }
+
+  /**
+   * @param value the value to set (e.g. font family).
+   * @param style the {@link Style} to modify.
+   */
+  protected abstract void applyFontSettings(String value, Style style);
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateFontSettings() {
+
+    super.updateFontSettings();
+    String value = getValue();
+    getCombobox().setValue(value, true);
+  }
+
+  /**
+   * @return the current value of the font setting in the rich text area.
+   */
+  protected abstract String getValue();
 
 }

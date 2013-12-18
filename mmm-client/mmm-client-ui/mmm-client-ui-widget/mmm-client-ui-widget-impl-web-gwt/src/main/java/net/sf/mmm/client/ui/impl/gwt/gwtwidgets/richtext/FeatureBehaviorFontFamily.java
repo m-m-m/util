@@ -7,6 +7,7 @@ import java.util.List;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 /**
@@ -61,6 +62,25 @@ class FeatureBehaviorFontFamily extends AbstractSelectionFeatureBehavior {
   public void applyFontSettings() {
 
     getFormatter().setFontName(getCombobox().getValue());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void applyFontSettings(String value, Style style) {
+
+    style.setProperty("fontFamily", value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getValue() {
+
+    // not available in GWT rich text Formatter
+    return null;
   }
 
 }

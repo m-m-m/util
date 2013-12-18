@@ -4,6 +4,9 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.TextDecoration;
+
 /**
  * This is the implementation of {@link FeatureBehavior} for {@link RichTextFeature#UNDERLINE}.
  * 
@@ -47,5 +50,20 @@ class FeatureBehaviorUnderline extends AbstractToggleFeatureBehavior {
   public void toggle() {
 
     getFormatter().toggleUnderline();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateFontSettings(boolean checked, Style style) {
+
+    TextDecoration decoration;
+    if (checked) {
+      decoration = TextDecoration.UNDERLINE;
+    } else {
+      decoration = TextDecoration.NONE;
+    }
+    style.setTextDecoration(decoration);
   }
 }

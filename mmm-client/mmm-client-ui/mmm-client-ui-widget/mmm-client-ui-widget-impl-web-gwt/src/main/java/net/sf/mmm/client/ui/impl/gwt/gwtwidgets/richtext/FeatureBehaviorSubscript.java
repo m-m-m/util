@@ -4,6 +4,9 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.VerticalAlign;
+
 /**
  * This is the implementation of {@link FeatureBehavior} for {@link RichTextFeature#SUBSCRIPT}.
  * 
@@ -47,5 +50,20 @@ class FeatureBehaviorSubscript extends AbstractToggleFeatureBehavior {
   public void toggle() {
 
     getFormatter().toggleSubscript();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void updateFontSettings(boolean checked, Style style) {
+
+    VerticalAlign align;
+    if (checked) {
+      align = VerticalAlign.SUB;
+    } else {
+      align = VerticalAlign.BASELINE;
+    }
+    style.setVerticalAlign(align);
   }
 }

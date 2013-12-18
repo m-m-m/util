@@ -299,7 +299,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
       }
     };
     button1.addClickHandler(clickHandler);
-    clickHandler.onClick(null);
+    // clickHandler.onClick(null);
     UiWidgetButton button2 = factory.create(UiWidgetButton.class);
     button2.setLabel("button2:" + Locale.getDefault());
     verticalPanel2.addChild(button2);
