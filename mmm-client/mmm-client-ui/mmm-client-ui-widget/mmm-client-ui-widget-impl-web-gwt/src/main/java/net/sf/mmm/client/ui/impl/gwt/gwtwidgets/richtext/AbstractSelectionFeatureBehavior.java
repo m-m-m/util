@@ -90,9 +90,7 @@ abstract class AbstractSelectionFeatureBehavior extends AbstractClickFeatureBeha
   public LabelWidget getFontSettingsLabel() {
 
     if (this.fontSettingsLabel == null) {
-      this.fontSettingsLabel = new LabelWidget(getLocalizedLabel());
-      this.fontSettingsLabel.setId(getFeature().name() + "_LABEL");
-      this.fontSettingsLabel.setLabelledWidget(getFontSettingsWidget());
+      this.fontSettingsLabel = createFontSettingsLabel();
     }
     return this.fontSettingsLabel;
   }

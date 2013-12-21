@@ -16,5 +16,5 @@
   It only allows to create libraries with modern APIs to allow 1.8 code to use nice and natural lambdas without locking out users with older java versions.
   ATTENTION: This only works with -Xbootclasspath. Also it is inofficial and invalid according to JCP/JSR. However, we need a working update-path to 1.8.</description>
   <dependencies>
-  </dependencies>  
+  </dependencies>
 </project>

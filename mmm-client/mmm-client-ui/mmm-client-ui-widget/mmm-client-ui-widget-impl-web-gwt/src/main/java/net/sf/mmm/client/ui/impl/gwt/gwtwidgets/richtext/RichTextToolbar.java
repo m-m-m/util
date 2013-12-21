@@ -26,6 +26,7 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -452,16 +453,27 @@ public class RichTextToolbar extends Toolbar {
       addSelectionFeature(RichTextFeature.FONT_SIZE, rowIndex++);
       addSelectionFeature(RichTextFeature.FONT_COLOR, rowIndex++);
       addSelectionFeature(RichTextFeature.BACKGROUND_COLOR, rowIndex++);
-      this.contentPanel.add(this.gridLayout);
+      BorderPanel fontPanel = new BorderPanel();
+      fontPanel.setLabel("Font");
+      fontPanel.add(this.gridLayout);
+      this.contentPanel.add(fontPanel);
 
       BorderPanel effectsPanel = new BorderPanel();
       effectsPanel.setLabel("Effects");
-      VerticalFlowPanel effectsArea = new VerticalFlowPanel();
-      effectsPanel.setChild(effectsArea);
+      FlexTable effectsGrid = new FlexTable();
+      effectsPanel.add(effectsGrid);
+      int row = 0;
+      int column = 0;
+      int columnCount = 2;
       for (FeatureBehavior behavior : RichTextToolbar.this.behaviorMap.values()) {
         if (behavior instanceof AbstractToggleFeatureBehavior) {
           Widget fontSettingsWidget = behavior.getFontSettingsWidget();
-          effectsArea.add(fontSettingsWidget);
+          effectsGrid.setWidget(row, column, fontSettingsWidget);
+          column++;
+          if (column >= columnCount) {
+            column = 0;
+            row++;
+          }
           Element element;
           RichTextFeature feature = behavior.getFeature();
           if ((feature == RichTextFeature.STRIKETHROUGH) || (feature == RichTextFeature.SUPERSCRIPT)) {
@@ -476,7 +488,7 @@ public class RichTextToolbar extends Toolbar {
       String labelPreview = RichTextToolbar.this.bundle.labelPreview().getLocalizedMessage();
       this.previewPanel = new BorderPanel();
       this.previewPanel.setLabel(labelPreview);
-      this.previewPanel.setChild(this.previewArea);
+      this.previewPanel.add(this.previewArea);
       this.contentPanel.add(this.previewPanel);
 
       ButtonWidget applyButton = new ButtonWidget(RichTextToolbar.this.bundle.labelApply().getLocalizedMessage());

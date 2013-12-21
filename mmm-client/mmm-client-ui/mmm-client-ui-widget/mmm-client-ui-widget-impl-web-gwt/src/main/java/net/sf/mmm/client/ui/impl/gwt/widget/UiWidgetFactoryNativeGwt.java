@@ -41,6 +41,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuItemSeparatorGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetBorderPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetButtonGroupGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetButtonPanelGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetCollapsableBorderPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridCellGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridRowGwt;
@@ -105,6 +106,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetGridRowGwt.Factory());
     register(new UiWidgetGridCellGwt.Factory());
     register(new UiWidgetBorderPanelGwt.Factory());
+    register(new UiWidgetCollapsableBorderPanelGwt.Factory());
     register(new UiWidgetButtonGroupGwt.Factory());
     register(new UiWidgetButtonPanelGwt.Factory());
     register(new UiWidgetToolbarGwt.Factory());

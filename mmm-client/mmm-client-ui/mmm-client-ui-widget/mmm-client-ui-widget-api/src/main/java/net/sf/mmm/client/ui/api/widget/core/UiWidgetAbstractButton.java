@@ -19,6 +19,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 public abstract interface UiWidgetAbstractButton extends UiWidgetRegular, UiWidgetClickable {
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String STYLE_PRIMARY = CssStyles.BUTTON;
+  String STYLE_BUTTON = CssStyles.BUTTON;
 
 }

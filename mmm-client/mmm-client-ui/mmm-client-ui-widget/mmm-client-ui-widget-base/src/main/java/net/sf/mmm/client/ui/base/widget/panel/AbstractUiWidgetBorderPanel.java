@@ -3,9 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.panel;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetSingleMutableComposite;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel;
 
 /**
@@ -17,10 +15,7 @@ import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetBorderPanel<ADAPTER extends UiWidgetAdapterBorderPanel> extends
-    AbstractUiWidgetSingleMutableComposite<ADAPTER, UiWidgetRegular> implements UiWidgetBorderPanel {
-
-  /** @see #getLabel() */
-  private String label;
+    AbstractUiWidgetAbstractBorderPanel<ADAPTER> implements UiWidgetBorderPanel {
 
   /**
    * The constructor.
@@ -32,40 +27,6 @@ public abstract class AbstractUiWidgetBorderPanel<ADAPTER extends UiWidgetAdapte
   public AbstractUiWidgetBorderPanel(UiContext context, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
-    setPrimaryStyle(STYLE_PRIMARY);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void initializeWidgetAdapter(ADAPTER adapter) {
-
-    super.initializeWidgetAdapter(adapter);
-    if (this.label != null) {
-      adapter.setLabel(this.label);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setLabel(String label) {
-
-    this.label = label;
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setLabel(label);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getLabel() {
-
-    return this.label;
   }
 
 }

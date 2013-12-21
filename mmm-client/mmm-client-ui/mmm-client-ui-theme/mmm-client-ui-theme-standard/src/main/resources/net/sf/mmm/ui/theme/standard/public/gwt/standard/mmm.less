@@ -11,8 +11,9 @@
 @color-border-bottom: darken(@color-border, 10%);
 @color-border-right: @color-border;
 @color-background: #FFFFFF;
-@color-background-fieldview: #DDDDDD;
+@color-background-fieldview: darken(@color-background, 15%);
 @color-background-em: darken(@color-background, 10%);
+@color-background-fieldset: darken(@color-background, 10%);
 @color-invalid: #FF0000;
 @color-background-invalid: lighten(@color-invalid, 30%);
 @color-border-invalid: lighten(@color-invalid, 20%);
@@ -470,6 +471,23 @@ body > * {
   background: @color-background-fieldview;
 }
 
+fieldset {
+  background: @color-background-fieldset;
+  border-radius: @radius;
+}
+
+legend {
+  background: @color-background;
+  border-radius: @radius;
+  border: 1px solid @color-background-fieldset;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 0.3em;
+  .Button {
+    margin-right: 0.5em;
+  }
+}
+
 .FieldLabel:after {
   content: ":";
 }
@@ -529,6 +547,10 @@ body > * {
   }
 }
 
+.SectionLabel {
+  border-radius: @radius;
+}
+
 .GridPanel {
   width: 100%;
 }
@@ -572,6 +594,7 @@ body > * {
 
   .WindowContent {
     overflow: auto;
+    margin: 0.3em;
   }
 
   > .ButtonPanel {

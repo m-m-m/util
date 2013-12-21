@@ -135,4 +135,7 @@ public interface CssStyles {
   /** The name of the CSS style for a label corresponding to a field. */
   String FIELD_LABEL = "FieldLabel";
 
+  /** The name of the CSS style for a border panel (fieldset). */
+  String BORDER_PANEL = "BorderPanel";
+
 }

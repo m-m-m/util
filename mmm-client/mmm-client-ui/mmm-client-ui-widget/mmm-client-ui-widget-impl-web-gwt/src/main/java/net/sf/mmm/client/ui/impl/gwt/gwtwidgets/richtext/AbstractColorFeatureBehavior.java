@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
-import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ColorBox;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LabelWidget;
 import net.sf.mmm.util.datatype.api.color.Color;
@@ -78,10 +77,7 @@ abstract class AbstractColorFeatureBehavior extends AbstractClickFeatureBehavior
   public LabelWidget getFontSettingsLabel() {
 
     if (this.fontSettingsLabel == null) {
-      this.fontSettingsLabel = new LabelWidget(getLocalizedLabel());
-      this.fontSettingsLabel.setId(getFeature().name() + "_LABEL");
-      this.fontSettingsLabel.setStyleName(CssStyles.FIELD_LABEL);
-      this.fontSettingsLabel.setLabelledWidget(getFontSettingsWidget());
+      this.fontSettingsLabel = createFontSettingsLabel();
     }
     return this.fontSettingsLabel;
   }

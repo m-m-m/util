@@ -10,9 +10,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtSingleMuta
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of
- * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel} using GWT based on
- * {@link net.sf.mmm.client.ui.impl.gwt.gwtwidgets.BorderPanel}.
+ * This is the implementation of {@link UiWidgetAdapterBorderPanel} using GWT based on {@link BorderPanel}.
  * 
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -20,6 +18,9 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class UiWidgetAdapterGwtBorderPanel extends
     UiWidgetAdapterGwtSingleMutableComposite<BorderPanel, UiWidgetRegular> implements UiWidgetAdapterBorderPanel {
+
+  /** @see #setChild(UiWidgetRegular) */
+  private Widget childWidget;
 
   /**
    * The constructor.
@@ -62,11 +63,15 @@ public class UiWidgetAdapterGwtBorderPanel extends
   @Override
   public void setChild(UiWidgetRegular child) {
 
-    Widget childWidget = null;
-    if (child != null) {
-      childWidget = getToplevelWidget(child);
+    if (this.childWidget != null) {
+      getToplevelWidget().remove(this.childWidget);
     }
-    getToplevelWidget().setChild(childWidget);
+    Widget newChildWidget = null;
+    if (child != null) {
+      newChildWidget = getToplevelWidget(child);
+      getToplevelWidget().add(newChildWidget);
+    }
+    this.childWidget = newChildWidget;
   }
 
 }

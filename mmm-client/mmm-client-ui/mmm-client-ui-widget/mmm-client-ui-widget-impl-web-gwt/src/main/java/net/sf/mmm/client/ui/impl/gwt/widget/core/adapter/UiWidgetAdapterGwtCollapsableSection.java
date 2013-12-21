@@ -3,16 +3,13 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
 import net.sf.mmm.client.ui.api.event.EventType;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetAbstractButton;
-import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.CollapseExpandButton;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.CollapseExpandButton.CollapseHandler;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -27,14 +24,11 @@ import com.google.gwt.user.client.ui.InlineLabel;
 public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidgetActive<FlowPanel> implements
     UiWidgetAdapterCollapsableSection {
 
-  /** The hyperlink with the expand/collapse icon. */
-  private Button toggleButton;
+  /** The {@link CollapseExpandButton}. */
+  private CollapseExpandButton collapseButton;
 
   /** The label for the {@link #setLabel(String) label-text}. */
   private InlineLabel label;
-
-  /** @see #setEnabled(boolean) */
-  private boolean collapsed;
 
   /**
    * The constructor.
@@ -51,23 +45,27 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
   protected FlowPanel createToplevelWidget() {
 
     FlowPanel flowPanel = new FlowPanel();
-    this.collapsed = false;
-    this.toggleButton = new Button("<span></span>");
-    this.toggleButton.setStylePrimaryName(UiWidgetAbstractButton.STYLE_PRIMARY);
-    this.toggleButton.addStyleName(UiWidgetCollapsableSection.STYLE_COLLAPSE_BUTTON);
-    this.toggleButton.setTitle(getBundle().tooltipCollapse().getLocalizedMessage());
-    ClickHandler handler;
-    handler = new ClickHandler() {
+    // ClickHandler handler;
+    // handler = new ClickHandler() {
+    //
+    // @Override
+    // public void onClick(ClickEvent event) {
+    //
+    // setCollapsed(!UiWidgetAdapterGwtCollapsableSection.this.collapsed, false);
+    // }
+    // };
+    // setClickEventSender(handler, this.toggleButton);
+    CollapseHandler collapseHandler = new CollapseHandler() {
 
       @Override
-      public void onClick(ClickEvent event) {
+      public void onCollapse(boolean collapse, boolean programmatic) {
 
-        setCollapsed(!UiWidgetAdapterGwtCollapsableSection.this.collapsed, false);
+        setCollapsed(collapse, false);
       }
     };
-    setClickEventSender(handler, this.toggleButton);
+    this.collapseButton = new CollapseExpandButton(collapseHandler);
     // add collapse/expand button
-    flowPanel.add(this.toggleButton);
+    flowPanel.add(this.collapseButton);
 
     this.label = new InlineLabel();
     this.label.setStylePrimaryName("SectionLabel");
@@ -81,7 +79,7 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
   @Override
   public boolean isCollapsed() {
 
-    return this.collapsed;
+    return this.collapseButton.isCollapsed();
   }
 
   /**
@@ -90,31 +88,26 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
   @Override
   public void setCollapsed(boolean collapsed) {
 
+    if (collapsed == isCollapsed()) {
+      return;
+    }
     setCollapsed(collapsed, true);
   }
 
   /**
    * @see #setCollapsed(boolean)
    * 
-   * @param newCollapsed - see {@link #setCollapsed(boolean)}.
+   * @param collapsed - see {@link #setCollapsed(boolean)}.
    * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()} .
    */
-  public void setCollapsed(boolean newCollapsed, boolean programmatic) {
+  public void setCollapsed(boolean collapsed, boolean programmatic) {
 
-    // if (this.collapsed == collapsed) {
-    // return;
-    // }
     EventType eventType;
-    if (newCollapsed) {
+    if (collapsed) {
       eventType = EventType.COLLAPSE;
-      this.toggleButton.addStyleName(UiWidgetCollapsableSection.STYLE_COLLAPSED);
-      this.toggleButton.setTitle(getBundle().tooltipExpand().getLocalizedMessage());
     } else {
       eventType = EventType.EXPAND;
-      this.toggleButton.removeStyleName(UiWidgetCollapsableSection.STYLE_COLLAPSED);
-      this.toggleButton.setTitle(getBundle().tooltipCollapse().getLocalizedMessage());
     }
-    this.collapsed = newCollapsed;
     if (programmatic) {
       getEventAdapter().setProgrammaticEventType(eventType);
     }
@@ -136,7 +129,7 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
   @Override
   public void setEnabled(boolean enabled) {
 
-    this.toggleButton.setEnabled(enabled);
+    this.collapseButton.setEnabled(enabled);
   }
 
   /**
@@ -145,7 +138,7 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
   @Override
   protected Focusable getWidgetAsFocusable() {
 
-    return this.toggleButton;
+    return this.collapseButton;
   }
 
   /**
@@ -154,7 +147,7 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
   @Override
   protected HasKeyPressHandlers getWidgetAsKeyPressHandlers() {
 
-    return this.toggleButton;
+    return this.collapseButton;
   }
 
   /**
@@ -163,7 +156,7 @@ public class UiWidgetAdapterGwtCollapsableSection extends UiWidgetAdapterGwtWidg
   @Override
   protected HasAllFocusHandlers getWidgetAsHasAllFocusHandlers() {
 
-    return this.toggleButton;
+    return this.collapseButton;
   }
 
 }

@@ -8,6 +8,7 @@ import net.sf.mmm.client.ui.base.SizeUnitHelper;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterSlot;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterTab;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel;
+import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterCollapsableBorderPanel;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridCell;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterHorizontalPanel;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterVerticalPanel;
@@ -24,7 +25,8 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
  */
 public class UiWidgetAdapterTestCompositeRegular extends UiWidgetAdapterTestComposite<UiWidgetRegular> implements
     UiWidgetAdapterSlot, UiWidgetAdapterTab, UiWidgetAdapterHorizontalPanel, UiWidgetAdapterVerticalPanel,
-    UiWidgetAdapterBorderPanel, UiWidgetAdapterGridCell, UiWidgetAdapterPopup, UiWidgetAdapterMainWindow {
+    UiWidgetAdapterBorderPanel, UiWidgetAdapterCollapsableBorderPanel, UiWidgetAdapterGridCell, UiWidgetAdapterPopup,
+    UiWidgetAdapterMainWindow {
 
   /** @see #getPositionX() */
   private double positionX;

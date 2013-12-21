@@ -38,7 +38,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenu;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
-import net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetCollapsableBorderPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
@@ -166,7 +166,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     // comboBox.setFieldLabel("Label2");
     // comboBox.setOptions(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
     // gridPanel.addChildren(textField1, comboBox);
-    UiWidgetBorderPanel borderPanel = factory.create(UiWidgetBorderPanel.class);
+    UiWidgetCollapsableBorderPanel borderPanel = factory.create(UiWidgetCollapsableBorderPanel.class);
     borderPanel.setLabel("Hello World");
 
     // borderPanel.setChild(gridPanel);

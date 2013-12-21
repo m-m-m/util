@@ -4,10 +4,9 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridRow;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.GridRow;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicComposite;
-import net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter.UiWidgetAdapterGwtGridRow.GridRow;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -48,29 +47,6 @@ public class UiWidgetAdapterGwtGridRow extends UiWidgetAdapterGwtDynamicComposit
     } else {
       getToplevelWidget().insert(widget, index);
     }
-    // Element childElement = getToplevelWidget(child).getElement();
-    // Element element = getToplevelWidget().getElement();
-    // if (index < 0) {
-    // element.appendChild(childElement);
-    // } else {
-    // DOM.insertChild(element, childElement, index);
-    // }
-  }
-
-  /**
-   * This inner class is a custom panel that represents a {@link GridRow} (TR-tag).
-   */
-  protected static class GridRow extends UiWidgetAdapterGwtDynamicComposite.CustomPanel {
-
-    /**
-     * The constructor.
-     */
-    public GridRow() {
-
-      super();
-      setElement(Document.get().createTRElement());
-    }
-
   }
 
 }

@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HtmlTemplates;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LabelWidget;
 
@@ -158,6 +159,21 @@ abstract class AbstractFeatureBehavior implements FeatureBehavior {
 
     // no such widget by default...
     return null;
+  }
+
+  /**
+   * @see #getFontSettingsLabel()
+   * 
+   * @return the new {@link LabelWidget} instance for {@link #getFontSettingsLabel()}.
+   */
+  protected LabelWidget createFontSettingsLabel() {
+
+    // help method to implement getFontSettingsLabel() consistently
+    LabelWidget label = new LabelWidget(getLocalizedLabel());
+    label.setId(getFeature().name() + "_LABEL");
+    label.setStyleName(CssStyles.FIELD_LABEL);
+    label.setLabelledWidget(getFontSettingsWidget());
+    return label;
   }
 
   /**

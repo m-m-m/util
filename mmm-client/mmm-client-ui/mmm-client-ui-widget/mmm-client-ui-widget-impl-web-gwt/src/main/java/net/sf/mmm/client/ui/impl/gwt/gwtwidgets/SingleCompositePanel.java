@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import net.sf.mmm.util.collection.base.SingleElementIterator;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -57,7 +58,9 @@ public abstract class SingleCompositePanel extends Panel {
   public void add(Widget child) {
 
     if (this.childWidget == null) {
-      getElement().appendChild(child.getElement());
+      child.removeFromParent();
+      DOM.appendChild(getElement(), child.getElement());
+      // getElement().appendChild(child.getElement());
       this.childWidget = child;
       adopt(child);
     } else {

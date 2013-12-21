@@ -29,7 +29,7 @@ public abstract class AbstractUiWidgetAbstractButton<ADAPTER extends UiWidgetAda
   public AbstractUiWidgetAbstractButton(UiContext context, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
-    setPrimaryStyle(STYLE_PRIMARY);
+    setPrimaryStyle(STYLE_BUTTON);
   }
 
 }

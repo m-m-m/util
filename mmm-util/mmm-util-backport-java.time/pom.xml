@@ -34,32 +34,12 @@
   </dependencies>
   <build>
     <plugins>
-      <!-- Disable JaCoCo as it is making trouble with Xbootclasspath -->
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>default-prepare-agent</id>
-            <phase>pre-site</phase>
-            <goals>
-            </goals>
-          </execution>
-          <!--
-          <execution>
-            <id>default-report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-          -->
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.13</version>
+        <configuration>
+          <argLine>-Xbootclasspath/p:${project.build.directory}/${project.build.finalName}.jar</argLine>
+        </configuration>
         <executions>
           <execution>
             <id>default-test</id>
@@ -80,7 +60,6 @@
               <goal>test</goal>
             </goals>
             <configuration>
-              <argLine>-Xbootclasspath/p:${project.build.directory}/${project.build.finalName}.jar</argLine>
               <includes>
                 <include>**/javax/**/Test*.java</include>
                 <include>**/javax/**/TCK*.java</include>
@@ -91,5 +70,27 @@
       </plugin>
     </plugins>
   </build>
-  
+
+  <profiles>
+    <profile>
+      <id>mmm.sonar</id>
+      <activation>
+        <property>
+          <name>sonar.host.url</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>

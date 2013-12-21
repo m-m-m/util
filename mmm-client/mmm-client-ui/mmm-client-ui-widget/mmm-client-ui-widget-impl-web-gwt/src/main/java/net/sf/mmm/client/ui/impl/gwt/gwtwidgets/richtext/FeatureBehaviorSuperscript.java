@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets.richtext;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
 
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Style.VerticalAlign;
 
 /**
@@ -61,8 +62,10 @@ class FeatureBehaviorSuperscript extends AbstractToggleFeatureBehavior {
     VerticalAlign align;
     if (checked) {
       align = VerticalAlign.SUPER;
+      style.setFontSize(0.83, Unit.EM);
     } else {
       align = VerticalAlign.BASELINE;
+      style.setFontSize(1.0, Unit.EM);
     }
     style.setVerticalAlign(align);
   }
