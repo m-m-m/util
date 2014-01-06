@@ -8,7 +8,8 @@ import javax.inject.Inject;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import net.sf.mmm.client.ui.base.AbstractUiContextImpl;
+import net.sf.mmm.client.ui.api.binding.DatatypeDetector;
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
 import net.sf.mmm.util.math.api.MathUtilLimited;
@@ -92,20 +93,46 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   public <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<VALUE> widget) {
 
     Class<VALUE> valueType = AbstractUiWidget.AccessHelper.getValueClass(widget);
+    return createDataBinding(widget.getContext(), widget, valueType);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<?> widget, Class<VALUE> valueType) {
+
+    return createDataBinding(widget.getContext(), null, valueType);
+  }
+
+  /**
+   * @see #createDataBinding(AbstractUiWidget)
+   * @see #createDataBinding(AbstractUiWidget, Class)
+   * 
+   * @param <VALUE> is the generic type of the <code>valueType</code>.
+   * 
+   * @param context is the {@link AbstractUiContext}.
+   * @param widget is the widget the {@link UiDataBinding} is associated with. May be <code>null</code> if
+   *        called from {@link #createDataBinding(AbstractUiWidget, Class)}.
+   * @param valueType is the {@link Class} reflecting the type of the value.
+   * @return the new {@link UiDataBinding}.
+   */
+  @SuppressWarnings("unchecked")
+  protected <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiContext context, AbstractUiWidget<VALUE> widget,
+      Class<VALUE> valueType) {
+
     if ((valueType == null) || (valueType == Void.class)) {
       return (UiDataBinding<VALUE>) UiDataBindingNone.getInstance();
     }
     if (valueType == List.class) {
       return (UiDataBinding<VALUE>) new UiDataBindingList(widget);
     }
-    AbstractUiContextImpl context = (AbstractUiContextImpl) widget.getContext();
     DatatypeDetector datatypeDetector = context.getDatatypeDetector();
-    if (datatypeDetector.isDatatype(valueType)) {
+    if ((widget != null) && datatypeDetector.isDatatype(valueType)) {
       return new UiDataBindingDatatype<VALUE>(widget);
     }
     PojoDescriptorBuilderFactory descriptorBuilderFactory = context.getContainer().get(

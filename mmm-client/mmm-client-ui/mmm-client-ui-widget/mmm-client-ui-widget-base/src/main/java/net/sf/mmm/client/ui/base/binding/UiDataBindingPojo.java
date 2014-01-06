@@ -3,6 +3,8 @@
 package net.sf.mmm.client.ui.base.binding;
 
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.binding.UiDataBinding} for any
@@ -36,6 +38,66 @@ public class UiDataBindingPojo<VALUE> extends AbstractUiDataBinding<VALUE> {
   public UiDataBindingAdapter<VALUE> getAdapter() {
 
     return this.adapter;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public PropertyAccessor<VALUE, ?> createPropertyAccessor(final String property) {
+
+    PropertyAccessor<VALUE, ?> accessor = new PropertyAccessor<VALUE, Object>() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public Object getValue(VALUE element) {
+
+        return UiDataBindingPojo.this.adapter.getPropertyValue(element, property);
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public void setValue(VALUE element, Object value) {
+
+        UiDataBindingPojo.this.adapter.setPropertyValue(element, property, value);
+      }
+
+    };
+    return accessor;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <P> PropertyAccessor<VALUE, P> createPropertyAccessor(final TypedProperty<P> property) {
+
+    PropertyAccessor<VALUE, P> accessor = new PropertyAccessor<VALUE, P>() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public P getValue(VALUE element) {
+
+        return UiDataBindingPojo.this.adapter.getPropertyValue(element, property);
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public void setValue(VALUE element, P value) {
+
+        UiDataBindingPojo.this.adapter.setPropertyValue(element, property, value);
+      }
+
+    };
+    return accessor;
   }
 
   /**

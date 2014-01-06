@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.base.binding;
+package net.sf.mmm.client.ui.api.binding;
 
 /**
  * This is the interface to {@link #isDatatype(Class) detect} if some type is a

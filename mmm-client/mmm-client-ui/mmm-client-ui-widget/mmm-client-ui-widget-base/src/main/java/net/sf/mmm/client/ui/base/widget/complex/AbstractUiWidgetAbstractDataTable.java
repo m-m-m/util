@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
+import net.sf.mmm.client.ui.base.binding.UiDataBinding;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractDataTable;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
@@ -31,14 +32,17 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidgetAdapterAbstractDataTable, ROW> extends
-    AbstractUiWidgetActive<ADAPTER, List<ROW>> implements UiWidgetAbstractDataTable<ROW> {
+public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidgetAdapterAbstractDataTable<ROW>, ROW>
+    extends AbstractUiWidgetActive<ADAPTER, List<ROW>> implements UiWidgetAbstractDataTable<ROW> {
 
   /** @see #sort(AbstractUiWidgetTableColumn) */
   private final ColumnComparator<ROW> columnComparator;
 
   /** The internal {@link #getValue() value} according to the current sorting, etc. */
   private final List<ROW> value;
+
+  /** @see #setColumns(UiWidgetTableColumn...) */
+  private final List<UiWidgetTableColumn<ROW, ?>> columns;
 
   /** @see #getSelectedValues() */
   private List<ROW> selectedValues;
@@ -48,6 +52,12 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
   /** @see #getSelectionMode() */
   private SelectionMode selectionMode;
+
+  /** @see #createColumn(TypedProperty, UiSingleWidgetFactory, Comparator) */
+  private UiDataBinding<ROW> rowBinding;
+
+  /** @see #getHeightInRows() */
+  private int heigthInRows;
 
   /**
    * The constructor.
@@ -62,6 +72,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
     this.editable = false;
     this.value = new ArrayList<ROW>();
     this.columnComparator = new ColumnComparator<ROW>();
+    this.columns = new ArrayList<UiWidgetTableColumn<ROW, ?>>();
   }
 
   /**
@@ -70,6 +81,16 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   List<ROW> getValueInternal() {
 
     return this.value;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @Override
+  protected Class<List<ROW>> getValueClass() {
+
+    return (Class) List.class;
   }
 
   /**
@@ -99,8 +120,10 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   @Override
   public void setHeightInRows(int rows) {
 
-    // TODO Auto-generated method stub
-
+    this.heigthInRows = rows;
+    if (hasWidgetAdapter()) {
+      // getWidgetAdapter().setHeight(height);
+    }
   }
 
   /**
@@ -109,8 +132,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   @Override
   public int getHeightInRows() {
 
-    // TODO Auto-generated method stub
-    return 0;
+    return this.heigthInRows;
   }
 
   /**
@@ -123,9 +145,18 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
       // getWidgetAdapter().setSelectedValue(selectedValue);
     } else {
       this.selectedValues = Arrays.asList(selectedValue);
-      // return isContained(selectedValue);
     }
-    return false;
+    return isContained(selectedValue);
+  }
+
+  /**
+   * @param row is the row to check.
+   * @return <code>true</code> if the given <code>row</code> is {@link java.util.Collection#contains(Object)
+   *         contained} in this {@link #getValue() value list}.
+   */
+  private boolean isContained(ROW row) {
+
+    return this.value.contains(row);
   }
 
   /**
@@ -246,11 +277,16 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
    * {@inheritDoc}
    */
   @Override
-  public <CELL> UiWidgetTableColumn<ROW, CELL> createColumn(TypedProperty<CELL> rowProperty,
+  public <CELL> UiWidgetTableColumn<ROW, CELL> createColumn(final TypedProperty<CELL> rowProperty,
       UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator) {
 
-    // TODO Auto-generated method stub
-    return null;
+    PropertyAccessor<ROW, CELL> accessor;
+    if (this.rowBinding == null) {
+      accessor = new LazyPropertyAccessor<CELL>(rowProperty);
+    } else {
+      accessor = this.rowBinding.createPropertyAccessor(rowProperty);
+    }
+    return createColumn(accessor, widgetFactory, sortComparator);
   }
 
   /**
@@ -260,18 +296,26 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   public <CELL> UiWidgetTableColumn<ROW, CELL> createColumn(PropertyAccessor<ROW, CELL> rowAccessor,
       UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator) {
 
-    // TODO Auto-generated method stub
-    return null;
+    UiWidgetTableColumnImpl<ROW, CELL> column = new UiWidgetTableColumnImpl<ROW, CELL>(getContext(), this, null);
+    column.setSortComparator(sortComparator);
+    column.setPropertyAccessor(rowAccessor);
+    column.setWidgetFactory(widgetFactory);
+    return column;
   }
 
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void setColumns(UiWidgetTableColumn<ROW, ?>... columns) {
 
-    // TODO Auto-generated method stub
-
+    this.columns.clear();
+    Collections.addAll(this.columns, columns);
+    if (hasWidgetAdapter()) {
+      ADAPTER widgetAdapter = getWidgetAdapter();
+      widgetAdapter.setColumns(this.columns);
+    }
   }
 
   /**
@@ -280,8 +324,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   @Override
   public int getColumnCount() {
 
-    // TODO Auto-generated method stub
-    return 0;
+    return this.columns.size();
   }
 
   /**
@@ -290,8 +333,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   @Override
   public UiWidgetTableColumn<ROW, ?> getColumn(int index) {
 
-    // TODO Auto-generated method stub
-    return null;
+    return this.columns.get(index);
   }
 
   /**
@@ -302,11 +344,85 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   void sort(AbstractUiWidgetTableColumn<?, ROW, ?> column) {
 
     if ((this.value != null) && (!this.value.isEmpty())) {
+      if (!this.columns.contains(column)) {
+        getLogger().warn("Columun " + column.getTitle() + " not set in table!");
+        return;
+      }
       this.columnComparator.column = column;
       Collections.sort(this.value, this.columnComparator);
       if (hasWidgetAdapter()) {
         // update widget adapter...
       }
+    }
+  }
+
+  /**
+   * @param column is the {@link UiWidgetTableColumn} for which to create the widget adapter.
+   * @return a new {@link UiWidgetAdapterTableColumn} for the given {@link UiWidgetTableColumn}.
+   */
+  public UiWidgetAdapterTableColumn createTableColumnAdapter(UiWidgetTableColumn<ROW, ?> column) {
+
+    return getWidgetAdapter().createTableColumnAdapter(column);
+  }
+
+  /**
+   * This class is a lazy implementation of {@link PropertyAccessor}.
+   * 
+   * @param <CELL> is the generic type of the cell property to access.
+   */
+  private final class LazyPropertyAccessor<CELL> implements PropertyAccessor<ROW, CELL> {
+
+    /** The {@link TypedProperty} to access. */
+    private final TypedProperty<CELL> rowProperty;
+
+    /** The {@link PropertyAccessor} to delegate to. Will be <code>null</code> until first initialization. */
+    private PropertyAccessor<ROW, CELL> delegate;
+
+    /**
+     * The constructor.
+     * 
+     * @param rowProperty is the {@link TypedProperty} to access.
+     */
+    private LazyPropertyAccessor(TypedProperty<CELL> rowProperty) {
+
+      this.rowProperty = rowProperty;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CELL getValue(ROW element) {
+
+      return getDelegate(element).getValue(element);
+    }
+
+    /**
+     * Lazy accessor to get the {@link PropertyAccessor} to delegate to.
+     * 
+     * @param row is the row value to access.
+     * @return the {@link PropertyAccessor} to delegate to.
+     */
+    private PropertyAccessor<ROW, CELL> getDelegate(ROW row) {
+
+      if (this.delegate == null) {
+        if (AbstractUiWidgetAbstractDataTable.this.rowBinding == null) {
+          Class<?> rowClass = row.getClass();
+          AbstractUiWidgetAbstractDataTable.this.rowBinding = (UiDataBinding<ROW>) getContext().getDataBindingFactory()
+              .createDataBinding(AbstractUiWidgetAbstractDataTable.this, rowClass);
+        }
+        this.delegate = AbstractUiWidgetAbstractDataTable.this.rowBinding.createPropertyAccessor(this.rowProperty);
+      }
+      return this.delegate;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValue(ROW element, CELL cellValue) {
+
+      getDelegate(element).setValue(element, cellValue);
     }
   }
 
@@ -356,15 +472,6 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
         }
       }
     }
-  }
-
-  /**
-   * @param column is the {@link UiWidgetTableColumn} for which to create the widget adapter.
-   * @return a new {@link UiWidgetAdapterTableColumn} for the given {@link UiWidgetTableColumn}.
-   */
-  public UiWidgetAdapterTableColumn createTableColumnAdapter(UiWidgetTableColumn<ROW, ?> column) {
-
-    return getWidgetAdapter().createTableColumnAdapter(column);
   }
 
 }

@@ -126,7 +126,7 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
       labelText = getLabel(property);
     }
 
-    AbstractUiWidget<VALUE> widget = getWidget();
+    AbstractUiWidget<?> widget = getWidget();
     Class<P> propertyType = getAdapter().getPropertyType(property);
     UiWidgetFactory widgetFactory = widget.getContext().getWidgetFactory();
 

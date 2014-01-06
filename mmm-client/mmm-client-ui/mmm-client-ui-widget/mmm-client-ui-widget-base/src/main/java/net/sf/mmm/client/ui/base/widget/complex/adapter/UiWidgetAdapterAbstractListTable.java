@@ -15,7 +15,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterAbstractListTable<ROW> extends UiWidgetAdapterAbstractDataTable,
+public interface UiWidgetAdapterAbstractListTable<ROW> extends UiWidgetAdapterAbstractDataTable<ROW>,
     AttributeWriteValue<List<ROW>> {
 
   // nothing to add...

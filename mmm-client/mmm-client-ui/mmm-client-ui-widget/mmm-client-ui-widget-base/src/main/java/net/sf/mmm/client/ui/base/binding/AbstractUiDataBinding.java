@@ -11,6 +11,7 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.SimpleValidationFailure;
+import net.sf.mmm.util.value.api.PropertyAccessor;
 
 import org.slf4j.Logger;
 
@@ -312,6 +313,25 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
   public <P> UiWidgetWithValue<P> createAndBind(TypedProperty<P> property, String label) {
 
     throw new NlsUnsupportedOperationException("bind");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public PropertyAccessor<VALUE, ?> createPropertyAccessor(String property) {
+
+    throw new NlsUnsupportedOperationException("createPropertyAccessor");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public <P> PropertyAccessor<VALUE, P> createPropertyAccessor(TypedProperty<P> property) {
+
+    return (PropertyAccessor<VALUE, P>) createPropertyAccessor(property.getPojoPath());
   }
 
   /**

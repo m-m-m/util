@@ -8,6 +8,7 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
  * This is the implementation of {@link UiDataBinding} for no value ({@link Void}).
@@ -228,6 +229,24 @@ public class UiDataBindingNone implements UiDataBinding<Void> {
   public <P> UiWidgetWithValue<P> createAndBind(TypedProperty<P> property, String label) {
 
     throw new NlsUnsupportedOperationException("createAndBind");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public PropertyAccessor<Void, ?> createPropertyAccessor(String property) {
+
+    throw new NlsUnsupportedOperationException("createPropertyAccessor");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <P> PropertyAccessor<Void, P> createPropertyAccessor(TypedProperty<P> property) {
+
+    throw new NlsUnsupportedOperationException("createPropertyAccessor");
   }
 
   /**

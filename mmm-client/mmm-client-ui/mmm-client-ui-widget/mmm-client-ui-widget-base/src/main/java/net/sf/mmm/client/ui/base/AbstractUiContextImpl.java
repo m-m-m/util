@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.binding.DatatypeDetector;
 import net.sf.mmm.client.ui.base.binding.DatatypeDetectorImpl;
 import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.client.ui.base.binding.UiDataBindingFactoryImpl;
@@ -29,9 +28,6 @@ public abstract class AbstractUiContextImpl extends AbstractUiContext {
 
   /** @see #getWidgetFactoryDatatype() */
   private UiWidgetFactoryDatatype widgetFactoryDatatype;
-
-  /** @see #getDatatypeDetector() */
-  private DatatypeDetector datatypeDetector;
 
   /**
    * The constructor.
@@ -91,9 +87,8 @@ public abstract class AbstractUiContextImpl extends AbstractUiContext {
       UiAccessKeyBinding impl = new UiAccessKeyBindingImpl();
       setAccessKeyBinding(impl);
     }
-
-    if (this.datatypeDetector == null) {
-      this.datatypeDetector = new DatatypeDetectorImpl();
+    if (getDatatypeDetector() == null) {
+      setDatatypeDetector(new DatatypeDetectorImpl());
     }
   }
 
@@ -131,24 +126,6 @@ public abstract class AbstractUiContextImpl extends AbstractUiContext {
 
     getInitializationState().requireNotInitilized();
     this.widgetFactoryDatatype = widgetFactoryDatatype;
-  }
-
-  /**
-   * @return the instance of {@link DatatypeDetector}.
-   */
-  public DatatypeDetector getDatatypeDetector() {
-
-    return this.datatypeDetector;
-  }
-
-  /**
-   * @param datatypeDetector is the datatypeDetector to set
-   */
-  @Inject
-  public void setDatatypeDetector(DatatypeDetector datatypeDetector) {
-
-    getInitializationState().requireNotInitilized();
-    this.datatypeDetector = datatypeDetector;
   }
 
 }

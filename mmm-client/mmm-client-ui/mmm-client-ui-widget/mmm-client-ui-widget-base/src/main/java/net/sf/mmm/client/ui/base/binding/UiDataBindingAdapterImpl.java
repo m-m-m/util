@@ -13,6 +13,7 @@ import javax.validation.constraints.Min;
 import javax.validation.metadata.ConstraintDescriptor;
 import javax.validation.metadata.PropertyDescriptor;
 
+import net.sf.mmm.client.ui.api.binding.DatatypeDetector;
 import net.sf.mmm.util.math.api.MathUtilLimited;
 import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -149,8 +150,7 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
   @Override
   public <T> ValueValidator<T> getPropertyValidator(TypedProperty<T> property, Class<T> propertyType) {
 
-    return new ValidatorJsr303<T>(this.validator, this.descriptor.getPojoClass(), property.getSegment(),
-        propertyType);
+    return new ValidatorJsr303<T>(this.validator, this.descriptor.getPojoClass(), property.getSegment(), propertyType);
   }
 
   /**
@@ -235,12 +235,30 @@ public class UiDataBindingAdapterImpl<VALUE> implements UiDataBindingAdapter<VAL
    * {@inheritDoc}
    */
   @Override
+  public Object getPropertyValue(VALUE pojo, String property) {
+
+    return this.descriptor.getProperty(pojo, property);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public <T> void setPropertyValue(VALUE pojo, TypedProperty<T> property, T propertyValue) {
 
     if ((propertyValue == null) && getPropertyType(property).isPrimitive()) {
       // TODO hohwille Doing nothing is also wrong null might actually mean 0 or what to do here?
       return;
     }
+    this.descriptor.setProperty(pojo, property, propertyValue);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setPropertyValue(VALUE pojo, String property, Object propertyValue) {
+
     this.descriptor.setProperty(pojo, property, propertyValue);
   }
 

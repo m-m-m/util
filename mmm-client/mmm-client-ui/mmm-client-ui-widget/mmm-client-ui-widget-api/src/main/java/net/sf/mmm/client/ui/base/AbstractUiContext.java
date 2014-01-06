@@ -10,6 +10,7 @@ import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEventObserver;
+import net.sf.mmm.client.ui.api.binding.DatatypeDetector;
 import net.sf.mmm.client.ui.api.handler.UiEventObserver;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
@@ -62,6 +63,9 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
 
   /** @see #getAccessKeyBinding() */
   private UiAccessKeyBinding accessKeyBinding;
+
+  /** @see #getDatatypeDetector() */
+  private DatatypeDetector datatypeDetector;
 
   /**
    * The constructor.
@@ -299,6 +303,24 @@ public abstract class AbstractUiContext extends AbstractLoggableComponent implem
   public Logger getLogger() {
 
     return super.getLogger();
+  }
+
+  /**
+   * @return the instance of {@link DatatypeDetector}.
+   */
+  public DatatypeDetector getDatatypeDetector() {
+
+    return this.datatypeDetector;
+  }
+
+  /**
+   * @param datatypeDetector is the datatypeDetector to set
+   */
+  @Inject
+  public void setDatatypeDetector(DatatypeDetector datatypeDetector) {
+
+    getInitializationState().requireNotInitilized();
+    this.datatypeDetector = datatypeDetector;
   }
 
 }

@@ -5,7 +5,10 @@ package net.sf.mmm.client.ui.base.widget.complex;
 import java.util.Comparator;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
+import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
 import net.sf.mmm.util.lang.api.SortOrder;
@@ -28,7 +31,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
     AbstractUiWidgetNative<ADAPTER, CELL> implements UiWidgetTableColumn<ROW, CELL> {
 
   /** @see #getListTable() */
-  private final AbstractUiWidgetAbstractListTable<?, ROW> listTable;
+  private final AbstractUiWidgetAbstractDataTable<?, ROW> listTable;
 
   /** @see #setPropertyAccessor(PropertyAccessor) */
   private PropertyAccessor<ROW, CELL> propertyAccessor;
@@ -48,6 +51,8 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   /** @see #isResizable() */
   private boolean resizable;
 
+  private UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory;
+
   /**
    * The constructor.
    * 
@@ -56,7 +61,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public AbstractUiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractListTable<?, ROW> listTable,
+  public AbstractUiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW> listTable,
       ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
@@ -77,6 +82,25 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   void setPropertyAccessor(PropertyAccessor<ROW, CELL> propertyAccessor) {
 
     this.propertyAccessor = propertyAccessor;
+  }
+
+  /**
+   * @see UiWidgetAbstractDataTable#createColumn(PropertyAccessor, UiSingleWidgetFactory, Comparator)
+   * 
+   * @return the {@link UiSingleWidgetFactory} used to create {@link UiWidgetWithValue widgets} to view (and
+   *         potentially edit) the values of a cell in this column.
+   */
+  public UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> getWidgetFactory() {
+
+    return this.widgetFactory;
+  }
+
+  /**
+   * @param widgetFactory is the new {@link #getWidgetFactory() widget factory}.
+   */
+  void setWidgetFactory(UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory) {
+
+    this.widgetFactory = widgetFactory;
   }
 
   /**
@@ -194,7 +218,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   /**
    * @return the {@link AbstractUiWidgetAbstractListTable list table} owning this column.
    */
-  public AbstractUiWidgetAbstractListTable<?, ROW> getListTable() {
+  public AbstractUiWidgetAbstractDataTable<?, ROW> getListTable() {
 
     return this.listTable;
   }

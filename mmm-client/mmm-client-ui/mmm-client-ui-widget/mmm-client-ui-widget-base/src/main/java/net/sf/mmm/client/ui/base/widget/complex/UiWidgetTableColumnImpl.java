@@ -14,7 +14,8 @@ import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColu
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTableColumn<ROW, CELL> extends AbstractUiWidgetTableColumn<UiWidgetAdapterTableColumn, ROW, CELL> {
+public class UiWidgetTableColumnImpl<ROW, CELL> extends
+    AbstractUiWidgetTableColumn<UiWidgetAdapterTableColumn, ROW, CELL> {
 
   /**
    * The constructor.
@@ -24,7 +25,7 @@ public class UiWidgetTableColumn<ROW, CELL> extends AbstractUiWidgetTableColumn<
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractListTable<?, ROW> listTable,
+  public UiWidgetTableColumnImpl(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW> listTable,
       UiWidgetAdapterTableColumn widgetAdapter) {
 
     super(context, listTable, widgetAdapter);

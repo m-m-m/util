@@ -28,4 +28,16 @@ public interface UiDataBindingFactory {
    */
   <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<VALUE> widget);
 
+  /**
+   * This method creates a new instance of {@link UiDataBinding} for the given <code>valueType</code> and
+   * <code>widget</code>.
+   * 
+   * @param <VALUE> is the generic type of the <code>valueType</code>.
+   * 
+   * @param widget is the widget the {@link UiDataBinding} is associated with.
+   * @param valueType is the {@link Class} reflecting the type of the value.
+   * @return the new {@link UiDataBinding}.
+   */
+  <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<?> widget, Class<VALUE> valueType);
+
 }
