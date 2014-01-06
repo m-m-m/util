@@ -122,4 +122,24 @@ public abstract class AbstractUiWidgetCollapsableBorderPanel<ADAPTER extends UiW
     return removeEventHandler(handler);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void onChildRemoved(UiWidgetRegular oldChild) {
+
+    super.onChildRemoved(oldChild);
+    oldChild.getVisibleFlag().setFlag(false, VisibilityFlagModifier.MODIFIER_COLLAPSE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void onChildSet(UiWidgetRegular newChild) {
+
+    super.onChildSet(newChild);
+    newChild.getVisibleFlag().setFlag(!isCollapsed(), VisibilityFlagModifier.MODIFIER_COLLAPSE);
+  }
+
 }

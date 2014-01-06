@@ -136,6 +136,7 @@ public abstract class AbstractUiWidgetCollapsableSection<ADAPTER extends UiWidge
       addCollapseHandler(this.collapseHandler);
     }
     this.collapseHandler.widgets.add(widget);
+    widget.getVisibleFlag().setFlag(!isCollapsed(), VisibilityFlagModifier.MODIFIER_COLLAPSE);
   }
 
   /**

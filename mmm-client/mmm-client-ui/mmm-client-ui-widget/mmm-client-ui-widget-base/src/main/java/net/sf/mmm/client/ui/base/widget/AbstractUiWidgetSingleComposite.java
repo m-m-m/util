@@ -90,6 +90,7 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
 
     if (this.child != null) {
       removeFromParent(this.child);
+      onChildRemoved(this.child);
     }
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setChild(child);
@@ -98,7 +99,24 @@ public abstract class AbstractUiWidgetSingleComposite<ADAPTER extends UiWidgetAd
     this.child = child;
     if (child != null) {
       setParent(child, this);
+      onChildSet(child);
     }
+  }
+
+  /**
+   * @param oldChild is the child that has just been removed.
+   */
+  protected void onChildRemoved(CHILD oldChild) {
+
+    // nothing by default...
+  }
+
+  /**
+   * @param newChild is the child that has just been set.
+   */
+  protected void onChildSet(CHILD newChild) {
+
+    // nothing by default...
   }
 
   /**
