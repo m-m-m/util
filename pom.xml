@@ -43,6 +43,7 @@
     <org.hibernate.validator.version>4.1.0.Final</org.hibernate.validator.version>
     <org.slf4j.version>1.6.1</org.slf4j.version>
     <jacoco.version>0.6.4.201312101107</jacoco.version>
+    <effective.pom>${project.build.directory}/${project.build.finalName}.pom</effective.pom>
   </properties>
 
   <dependencyManagement>
@@ -363,6 +364,11 @@
           <artifactId>maven-antrun-plugin</artifactId>
           <version>1.6</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-help-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -401,6 +407,40 @@
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
           </archive>
+        </configuration>
+      </plugin>
+      
+      <!-- generate effective pom -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <configuration>
+          <output>${effective.pom}</output>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-effective-pom</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>effective-pom</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- install effective pom -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <configuration>
+          <pomFile>${effective.pom}</pomFile>
+        </configuration>
+      </plugin>
+      <!-- deploy effective pom -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <pomFile>${effective.pom}</pomFile>
         </configuration>
       </plugin>
 
