@@ -134,7 +134,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
    * {@inheritDoc}
    */
   @Override
-  public boolean setSelectedValue(NODE selectedValue) {
+  public void setSelectedValue(NODE selectedValue) {
 
     TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(selectedValue);
     if (treeNodeAdapter != null) {
@@ -144,9 +144,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
         clearMultiSelection();
         treeNodeAdapter.multiSelectionCheckbox.setValue(Boolean.TRUE);
       }
-      return true;
     }
-    return false;
   }
 
   /**
@@ -163,22 +161,17 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
    * {@inheritDoc}
    */
   @Override
-  public boolean setSelectedValues(List<NODE> selectedValues) {
+  public void setSelectedValues(List<NODE> selectedValues) {
 
-    boolean success = false;
     if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
-      success = true;
       clearMultiSelection();
       for (NODE node : selectedValues) {
         TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(node);
         if (treeNodeAdapter != null) {
           treeNodeAdapter.multiSelectionCheckbox.setValue(Boolean.TRUE);
-        } else {
-          success = false;
         }
       }
     }
-    return success;
   }
 
   /**

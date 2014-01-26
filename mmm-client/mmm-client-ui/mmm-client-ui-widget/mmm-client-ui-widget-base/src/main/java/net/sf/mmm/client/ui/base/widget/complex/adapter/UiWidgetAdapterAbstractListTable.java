@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget.complex.adapter;
 
 import java.util.List;
 
+import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
@@ -18,6 +19,19 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 public interface UiWidgetAdapterAbstractListTable<ROW> extends UiWidgetAdapterAbstractDataTable<ROW>,
     AttributeWriteValue<List<ROW>> {
 
-  // nothing to add...
+  /**
+   * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable#addRow(Object, int)
+   * 
+   * @param row is the {@literal <ROW>} to add.
+   * @param index is the index where to add the new row.
+   */
+  void addRow(TableRowContainer<ROW> row, int index);
+
+  /**
+   * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable#removeRow(Object)
+   * 
+   * @param row is the {@literal <ROW>} to remove.
+   */
+  void removeRow(TableRowContainer<ROW> row);
 
 }

@@ -3,28 +3,24 @@
 package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteColumnSpan;
-
-import com.google.gwt.dom.client.Document;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteRowSpan;
 
 /**
- * A {@link GridCell} is a {@link SingleCompositePanel} that represents a table data element ({@literal <td>}
- * for a cell in a {@link GridRow}).
+ * A {@link AbstractTableCell} is a {@link SingleCompositePanel} that represents a table cell in a
+ * {@link TableRow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class GridCell extends SingleCompositePanel implements AttributeWriteColumnSpan {
-
-  /** @see #setColumnSpan(int) */
-  private static final String ATTRIBUTE_COLSPAN = "colspan";
+public abstract class AbstractTableCell extends SingleCompositePanel implements AttributeWriteColumnSpan,
+    AttributeWriteRowSpan {
 
   /**
    * The constructor.
    */
-  public GridCell() {
+  public AbstractTableCell() {
 
     super();
-    setElement(Document.get().createTDElement());
   }
 
   /**
@@ -47,5 +43,27 @@ public class GridCell extends SingleCompositePanel implements AttributeWriteColu
   public void setColumnSpan(int columnSpan) {
 
     getElement().setAttribute(ATTRIBUTE_COLSPAN, Integer.toString(columnSpan));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getRowSpan() {
+
+    String rowspan = getElement().getAttribute(ATTRIBUTE_ROWSPAN);
+    if ((rowspan == null) || rowspan.isEmpty()) {
+      return 1;
+    }
+    return Integer.parseInt(rowspan);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setRowSpan(int rowSpan) {
+
+    getElement().setAttribute(ATTRIBUTE_ROWSPAN, Integer.toString(rowSpan));
   }
 }

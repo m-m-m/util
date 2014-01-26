@@ -5,21 +5,21 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 import com.google.gwt.dom.client.Document;
 
 /**
- * A {@link GridRow} is a {@link CustomPanel} that represents a table row ({@literal <tr>}). You can
- * {@link #add(com.google.gwt.user.client.ui.IsWidget) add} a {@link GridCell} to it.
+ * A {@link TableHead} is a {@link CustomPanel} that represents the head of a {@link TableWidget table} (
+ * {@literal <thead>} element). You can add {@link TableRow} widgets to it.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class GridRow extends CustomPanel {
+public class TableHead extends CustomPanel {
 
   /**
    * The constructor.
    */
-  public GridRow() {
+  public TableHead() {
 
     super();
-    setElement(Document.get().createTRElement());
+    setElement(Document.get().createTHeadElement());
   }
 
 }

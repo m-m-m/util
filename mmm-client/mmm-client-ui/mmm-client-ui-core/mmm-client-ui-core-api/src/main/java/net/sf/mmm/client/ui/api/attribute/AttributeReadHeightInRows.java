@@ -11,9 +11,9 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeReadHeightInRows {
 
   /**
-   * This method gets the <em>height in rows</em> of this object. This is the number of rows (textual lines)
-   * that are visible at a time. If the there are more rows than this height a scrollbar will automatically
-   * appear.
+   * This method gets the <em>height in rows</em> of this object. This is the number of rows (e.g. textual
+   * lines) that are visible at a time. If the there are more rows than this height a scrollbar will
+   * automatically appear.
    * 
    * @return the height in rows.
    */

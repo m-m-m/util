@@ -3,11 +3,13 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This is the abstract base implementation of {@link EqualsChecker}.
+ * This is the abstract base implementation of {@link EqualsChecker}. It contains the handling of
+ * <code>null</code> values.
+ * 
+ * @param <VALUE> is the generic type of the values to {@link #isEqual(Object, Object) check}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
- * @param <VALUE> is the generic type of the values to {@link #isEqual(Object, Object) check}.
  */
 public abstract class AbstractEqualsChecker<VALUE> implements EqualsChecker<VALUE> {
 

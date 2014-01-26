@@ -4,18 +4,18 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridRow;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.GridRow;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.TableRow;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicComposite;
 
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterGridRow} using GWT based on {@link GridRow}.
+ * This is the implementation of {@link UiWidgetAdapterGridRow} using GWT based on {@link TableRow}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtGridRow extends UiWidgetAdapterGwtDynamicComposite<GridRow, UiWidgetGridCell> implements
+public class UiWidgetAdapterGwtGridRow extends UiWidgetAdapterGwtDynamicComposite<TableRow, UiWidgetGridCell> implements
     UiWidgetAdapterGridRow {
 
   /**
@@ -30,9 +30,9 @@ public class UiWidgetAdapterGwtGridRow extends UiWidgetAdapterGwtDynamicComposit
    * {@inheritDoc}
    */
   @Override
-  protected GridRow createToplevelWidget() {
+  protected TableRow createToplevelWidget() {
 
-    return new GridRow();
+    return new TableRow();
   }
 
   /**

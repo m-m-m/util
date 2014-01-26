@@ -101,11 +101,19 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   }
 
   /**
-   * @return the uiWidget
+   * @return the {@link AbstractUiWidget UI widget} wrapping this widget adapter.
    */
   public AbstractUiWidget<?> getUiWidget() {
 
     return this.uiWidget;
+  }
+
+  /**
+   * @return the {@link UiContext}.
+   */
+  public UiContext getContext() {
+
+    return this.uiWidget.getContext();
   }
 
   /**

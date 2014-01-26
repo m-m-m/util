@@ -30,30 +30,4 @@ public interface UiWidgetListTable<ROW> extends UiWidgetAbstractListTable<ROW>, 
   @Override
   List<ROW> getValue();
 
-  /**
-   * Like {@link #addRow(Object, int)} but adding the new <code>row</code> at the end of the list.
-   * 
-   * @param row is the {@literal <ROW>} to add.
-   */
-  void addRow(ROW row);
-
-  /**
-   * This method adds the given <code>row</code> at the given <code>index</code> in this list. Will mark the
-   * widget as {@link #isModified() modified}.
-   * 
-   * @param row is the {@literal <ROW>} to add.
-   * @param index is the index where to add the given <code>row</code> in {@link #getValue() the list}.
-   */
-  void addRow(ROW row, int index);
-
-  /**
-   * This method removes the given <code>row</code> from this list. Will mark the widget as
-   * {@link #isModified() modified}.
-   * 
-   * @param row is the {@literal <ROW>} to remove.
-   * @return <code>true</code> if the given <code>row</code> was removed successfully, <code>false</code>
-   *         otherwise (no such {@literal <ROW>} exists).
-   */
-  boolean removeRow(ROW row);
-
 }

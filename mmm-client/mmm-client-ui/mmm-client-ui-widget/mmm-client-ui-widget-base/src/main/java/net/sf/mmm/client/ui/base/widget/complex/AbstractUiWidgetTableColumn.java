@@ -6,7 +6,6 @@ import java.util.Comparator;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
-import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
@@ -51,6 +50,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   /** @see #isResizable() */
   private boolean resizable;
 
+  /** @see #getWidgetFactory() */
   private UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory;
 
   /**
@@ -69,9 +69,9 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   }
 
   /**
-   * @return the propertyAccessor
+   * @return the {@link PropertyAccessor}.
    */
-  PropertyAccessor<ROW, CELL> getPropertyAccessor() {
+  public PropertyAccessor<ROW, CELL> getPropertyAccessor() {
 
     return this.propertyAccessor;
   }
@@ -85,7 +85,8 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   }
 
   /**
-   * @see UiWidgetAbstractDataTable#createColumn(PropertyAccessor, UiSingleWidgetFactory, Comparator)
+   * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable#createColumn(PropertyAccessor,
+   *      UiSingleWidgetFactory, Comparator)
    * 
    * @return the {@link UiSingleWidgetFactory} used to create {@link UiWidgetWithValue widgets} to view (and
    *         potentially edit) the values of a cell in this column.
@@ -212,7 +213,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   @Override
   public void sort(SortOrder order) {
 
-    this.listTable.sort(this);
+    this.listTable.sort(this, order);
   }
 
   /**

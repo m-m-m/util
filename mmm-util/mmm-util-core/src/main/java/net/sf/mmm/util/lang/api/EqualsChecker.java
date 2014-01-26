@@ -3,10 +3,16 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This interface allows to implement an external function to check if two objects are considered as
- * {@link #isEqual(Object, Object) equal} independent from the objects {@link Object#equals(Object) equals}
- * method. It is also used to switch between {@link EqualsCheckerIsEqual equals} and
- * {@link EqualsCheckerIsSame same}. Additionally it is <code>null</code>-aware.
+ * This (functional) interface allows to implement an external function to check if two objects are considered
+ * as {@link #isEqual(Object, Object) equal} independent from the objects {@link Object#equals(Object) equals}
+ * method. It allows to switch between {@link EqualsCheckerIsEqual equals}, {@link EqualsCheckerIsSame same}
+ * or other implementations. Additionally it is <code>null</code>-aware.<br/>
+ * <b>ATTENTION:</b><br/>
+ * For specific custom implementations also a corresponding {@link HashCodeFunction} has to be provided. Due
+ * to lambda support we keep these aspects in separate functional interfaces. Containers that accept an
+ * {@link EqualsChecker} should also accept a {@link HashCodeFunction} for customization. Unfortunately
+ * {@link java.util.Collection}s do not allow such customization so you need to wrap objects before using them
+ * as
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -25,7 +31,7 @@ public interface EqualsChecker<VALUE> {
    * <li><em>transitive</em>: <code>(isEquals(x, y) == isEquals(y, z) == true)</code> implies
    * <code>isEquals(x, z)</code></li>
    * <li><em>consistent</em>: multiple invocations of <code>isEquals(x, y)</code> will always return the same
-   * result if <code>x</code> and <code>y</code> are unchainged.</li>
+   * result if <code>x</code> and <code>y</code> are unchanged.</li>
    * <li><em>null-compatible</em>: for all x != null: isEquals(x, null) == isEquals(null, x) == false</li>
    * </ul>
    * 

@@ -11,7 +11,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 /**
  * This is the interface for a {@link UiWidgetRegular regular widget} that represents a <em>section</em>. A
  * section is a widget that displays a short text in a single line. The text is supposed to be a title that
- * explains the content below. This is an alternative to
+ * explains the content below. This is an alternative approach to a
  * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

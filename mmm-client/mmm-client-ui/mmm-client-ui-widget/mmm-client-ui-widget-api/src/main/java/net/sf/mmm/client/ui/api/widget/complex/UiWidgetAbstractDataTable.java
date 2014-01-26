@@ -5,12 +5,12 @@ package net.sf.mmm.client.ui.api.widget.complex;
 import java.util.Comparator;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteHeightInRows;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
+import net.sf.mmm.util.lang.api.EqualsChecker;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
@@ -51,10 +51,13 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * @since 1.0.0
  */
 public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetRegular, UiFeatureSelectedValue<ROW>,
-    AttributeWriteSelectionMode, AttributeWriteHeightInRows, AttributeWriteEditable {
+    AttributeWriteSelectionMode, AttributeWriteEditable {
 
   /**
-   * This method creates a new {@link UiWidgetTableColumn column} for this table.
+   * This method creates a new {@link UiWidgetTableColumn column} for this table. <br/>
+   * <b>ATTENTION:</b><br/>
+   * The column is not automatically added to the table. You need to call
+   * {@link #setColumns(UiWidgetTableColumn...)} for all columns that should appear in the UI.
    * 
    * @param <CELL> is the generic type of the {@link TypedProperty#getPropertyType() property type}.
    * @param rowProperty is the {@link TypedProperty} identifying which {@link TypedProperty#getPojoPath()
@@ -75,7 +78,10 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetRegular, UiFeatu
       UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator);
 
   /**
-   * This method creates a new {@link UiWidgetTableColumn column} for this table.
+   * This method creates a new {@link UiWidgetTableColumn column} for this table.<br/>
+   * <b>ATTENTION:</b><br/>
+   * The column is not automatically added to the table. You need to call
+   * {@link #setColumns(UiWidgetTableColumn...)} for all columns that should appear in the UI.
    * 
    * @param <CELL> is the generic type of the {@link PropertyAccessor#getValue(Object) property value}.
    * @param rowAccessor is the {@link PropertyAccessor} to {@link PropertyAccessor#getValue(Object) access}
@@ -98,12 +104,16 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetRegular, UiFeatu
   /**
    * This method sets the {@link #getColumn(int) columns} for the table of this model.<br/>
    * <b>ATTENTION:</b><br/>
-   * This method should typically be called only once during initialization of this model. Multiple calls of
+   * This method should typically be called only once during initialization of this table. Multiple calls of
    * this method for dynamic changes of the UI may NOT be completely supported by all underlying
    * implementations. We recommend to test your code with all relevant implementations before investing in
    * multiple dynamic changes. Consider {@link UiWidgetTableColumn#setVisible(boolean)} instead if possible.
    * 
-   * @param columns are the {@link UiWidgetTableColumn columns} to set.
+   * @see #createColumn(TypedProperty, UiSingleWidgetFactory, Comparator)
+   * @see #createColumn(PropertyAccessor, UiSingleWidgetFactory, Comparator)
+   * 
+   * @param columns are the {@link UiWidgetTableColumn columns} to set. Use <code>createColumn</code> to
+   *        create before.
    */
   @SuppressWarnings("unchecked")
   void setColumns(UiWidgetTableColumn<ROW, ?>... columns);
@@ -128,5 +138,28 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetRegular, UiFeatu
    * @return the requested {@link UiWidgetTableColumn column}.
    */
   UiWidgetTableColumn<ROW, ?> getColumn(int index);
+
+  /**
+   * @see #setRowEqualsChecker(EqualsChecker)
+   * 
+   * @return the {@link EqualsChecker} used to compare if two given rows are considered equal.
+   */
+  EqualsChecker<ROW> getRowEqualsChecker();
+
+  /**
+   * This method sets the {@link EqualsChecker} used to compare if two given rows are considered equal. <br/>
+   * <b>ATTENTION:</b><br/>
+   * By default {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame} is used as a data list can potentially
+   * contain two rows (nodes for tree table) with the same data. As an equals method may then return
+   * <code>true</code> these two different rows could not be distinguished causing strange effects. You may
+   * change the behavior by providing a different implementation of {@link EqualsChecker} such as
+   * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual} if you are aware that editable data tables allow
+   * the end-user to modify rows what will create a copy that will not be {@link Object#equals(Object) equal}.
+   * You should only use this method when creating a data table but not on the fly after the data table has
+   * already been attached to the UI.
+   * 
+   * @param equalsChecker is the new {@link EqualsChecker} to use.
+   */
+  void setRowEqualsChecker(EqualsChecker<ROW> equalsChecker);
 
 }

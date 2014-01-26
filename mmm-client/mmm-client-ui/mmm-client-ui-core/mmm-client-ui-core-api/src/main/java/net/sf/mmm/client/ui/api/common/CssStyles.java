@@ -138,4 +138,10 @@ public interface CssStyles {
   /** The name of the CSS style for a border panel (fieldset). */
   String BORDER_PANEL = "BorderPanel";
 
+  /**
+   * The name of the CSS style to mark a selection (e.g. a {@literal <tr>} tag of a data list
+   * {@literal <table>}).
+   */
+  String SELECTED = "Selected";
+
 }

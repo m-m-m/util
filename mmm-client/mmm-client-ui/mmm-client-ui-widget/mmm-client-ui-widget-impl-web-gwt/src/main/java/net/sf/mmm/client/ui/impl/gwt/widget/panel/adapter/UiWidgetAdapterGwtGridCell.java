@@ -4,18 +4,18 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridCell;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.GridCell;
+import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.TableCell;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtSingleMutableComposite;
 
 /**
  * This is the implementation of
  * {@link net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterDynamicPanel} using GWT based on
- * {@link GridCell}.
+ * {@link TableCell}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtGridCell extends UiWidgetAdapterGwtSingleMutableComposite<GridCell, UiWidgetRegular>
+public class UiWidgetAdapterGwtGridCell extends UiWidgetAdapterGwtSingleMutableComposite<TableCell, UiWidgetRegular>
     implements UiWidgetAdapterGridCell {
 
   /**
@@ -30,9 +30,9 @@ public class UiWidgetAdapterGwtGridCell extends UiWidgetAdapterGwtSingleMutableC
    * {@inheritDoc}
    */
   @Override
-  protected GridCell createToplevelWidget() {
+  protected TableCell createToplevelWidget() {
 
-    return new GridCell();
+    return new TableCell();
   }
 
   /**

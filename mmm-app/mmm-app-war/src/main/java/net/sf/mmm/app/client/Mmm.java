@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.app.client;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
@@ -24,6 +27,8 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.handler.object.UiHandlerObjectSave;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
@@ -323,6 +328,26 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     // setRichTextRenderer(tree);
     tree.setValue(model.getRootNode());
     verticalPanel2.addChild(tree);
+
+    UiWidgetListTable<ContactBean> contactTable = factory.create(UiWidgetListTable.class);
+    Comparator<String> sortComparator = null;
+    UiWidgetTableColumn<ContactBean, ?> columnFirstName = contactTable.createColumn(Contact.PROPERTY_FIRST_NAME, null,
+        sortComparator);
+    UiWidgetTableColumn<ContactBean, ?> columnLastName = contactTable.createColumn(Contact.PROPERTY_LAST_NAME, null,
+        sortComparator);
+    contactTable.setColumns(columnFirstName, columnLastName);
+    List<ContactBean> contactBeanList = new ArrayList<ContactBean>();
+    ContactBean contact = new ContactBean();
+    contact.setFirstName("James");
+    contact.setLastName("Bond");
+    contactBeanList.add(contact);
+    contact = new ContactBean();
+    contact.setFirstName("Sean");
+    contact.setLastName("Connery");
+    contactBeanList.add(contact);
+    contactTable.setValue(contactBeanList);
+
+    verticalPanel2.addChild(contactTable);
     mainWindow.addChild(tabPanel);
 
     UiWidgetDateField dateField = factory.create(UiWidgetDateField.class);

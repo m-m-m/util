@@ -5,23 +5,23 @@ package net.sf.mmm.client.ui.impl.gwt.gwtwidgets;
 import com.google.gwt.dom.client.Document;
 
 /**
- * A {@link GridPanel} is a {@link CustomPanel} that represents a table (&lt;table&gt;). You can
- * {@link #add(com.google.gwt.user.client.ui.Widget)} {@link TableRow rows} to it.
+ * A {@link TableCellHeader} is a {@link AbstractTableCell table cell} that represents a header cell in a
+ * {@link TableWidget} (a {@literal <th>} element).
  * 
- * @see TableWidget
+ * @see TableRow
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class GridPanel extends CustomPanel {
+public class TableCellHeader extends AbstractTableCell {
 
   /**
    * The constructor.
    */
-  public GridPanel() {
+  public TableCellHeader() {
 
     super();
-    setElement(Document.get().createTableElement());
+    setElement(Document.get().createTHElement());
   }
 
 }

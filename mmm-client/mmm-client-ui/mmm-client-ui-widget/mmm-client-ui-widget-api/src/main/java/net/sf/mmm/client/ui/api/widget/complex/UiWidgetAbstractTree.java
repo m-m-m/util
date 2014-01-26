@@ -79,6 +79,9 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetRegular, Ui
 
   /**
    * This is the interface for the model for a {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree}.
+   * If the tree structure should be editable for the end-user you need to implement
+   * {@link UiWidgetAbstractTree.UiTreeModelMutable}. However, modification of the tree node data is still
+   * possible if the tree is {@link UiWidgetAbstractTree#isEditable() editable}.
    * 
    * @param <NODE> is the generic type of the tree-nodes of this model.
    */
@@ -106,6 +109,55 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetRegular, Ui
      *        children are available. Maybe <code>null</code> if only loading shall be triggered.
      */
     void getChildrenAsync(NODE node, Consumer<List<NODE>> callback);
+
+  }
+
+  /**
+   * Extends {@link UiWidgetAbstractTree.UiTreeModel} with features for editing the tree structure. It
+   * represents the current state of the tree for a tree widget. Modifications may still be cancelled and
+   * reverted.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Implementing a mutable tree model is not always easy. The suggested approach is to create a copy of each
+   * tree node that can be modified by the tree widget without causing harm. Central caching of tree nodes
+   * from the server can be done based on a central and immutable {@link UiWidgetAbstractTree.UiTreeModel}
+   * used by the according mutable tree models.
+   * 
+   * @param <NODE> is the generic type of the tree-nodes of this model.
+   */
+  @SuppressWarnings("unchecked")
+  interface UiTreeModelMutable<NODE> extends UiTreeModel<NODE> {
+
+    /**
+     * Adds the given <code>child</code> {@literal <NODE>} to the given <code>parent</code> at the specified
+     * <code>index</code>.
+     * 
+     * @param parent is the parent {@literal <NODE>} where to add the given <code>child</code>.
+     * @param child is the {@literal <NODE>} to add to the {@link #getChildren(Object) children} of
+     *        <code>parent</code>. This method will remove the <code>child</code> from any previous parent.
+     *        The instance of the child may later be modified. To prevent undesired modifications create a
+     *        deep-copy of the node before calling this method.
+     * @param index is the index where to add the child.
+     */
+    void addChild(NODE parent, NODE child, int index);
+
+    /**
+     * Convenience method variant of {@link #addChild(Object, Object, int)} to add a child at the end.
+     * 
+     * @see #addChild(Object, Object, int)
+     * 
+     * @param parent is the parent {@literal <NODE>} where to add the given <code>child</code>.
+     * @param child is the {@literal <NODE>} to add to the {@link #getChildren(Object) children} of
+     *        <code>parent</code>.
+     */
+    void addChild(NODE parent, NODE child);
+
+    /**
+     * Removes the given <code>children</code> from the <code>parent</code>.
+     * 
+     * @param parent is the parent {@literal <NODE>} where to remove the given <code>children</code>.
+     * @param children are the children to remove.
+     */
+    void removeChilden(NODE parent, NODE... children);
 
   }
 

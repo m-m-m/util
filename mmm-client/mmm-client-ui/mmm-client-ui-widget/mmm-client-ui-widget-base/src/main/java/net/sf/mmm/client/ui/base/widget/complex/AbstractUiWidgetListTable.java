@@ -2,9 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.complex;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterListTable;
+import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This is the base implementation of {@link UiWidgetListTable}.
@@ -34,37 +38,63 @@ public abstract class AbstractUiWidgetListTable<ADAPTER extends UiWidgetAdapterL
    * {@inheritDoc}
    */
   @Override
-  public void addRow(ROW row) {
+  protected void doSetValue(List<ROW> newValue, boolean forUser) {
 
-    getValueInternal().add(row);
-    if (hasWidgetAdapter()) {
-      // getWidgetAdapter().addRow(row);
+    super.doSetValue(newValue, forUser);
+    boolean hasWidgetAdapter = hasWidgetAdapter();
+    List<TableRowContainer<ROW>> rows = getRowsInternal();
+    int i = 0;
+    int size = rows.size();
+    TableRowContainer<ROW> container;
+    for (ROW newRow : newValue) {
+      if (i < size) {
+        container = rows.get(i);
+        container.setValue(newRow);
+      } else {
+        container = createRowContainer(newRow);
+        rows.add(container);
+        if (hasWidgetAdapter) {
+          getWidgetAdapter().addRow(container, i);
+        }
+      }
+      i++;
     }
+    for (int j = rows.size() - 1; j >= i; j--) {
+      // TODO potentially pool obsolete rows for later reuse...
+      TableRowContainer<ROW> removedRow = rows.remove(j);
+      if (hasWidgetAdapter) {
+        getWidgetAdapter().removeRow(removedRow);
+      }
+    }
+    getSelectedValuesInternal().clear();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void addRow(ROW row, int index) {
+  protected List<ROW> doGetValue(List<ROW> template, ValidationState state) throws RuntimeException {
 
-    getValueInternal().add(index, row);
-    if (hasWidgetAdapter()) {
-      // getWidgetAdapter().addRow(row, index);
+    List<TableRowContainer<ROW>> rows = getRowsInternal();
+    List<ROW> result = new ArrayList<ROW>(rows.size());
+    for (TableRowContainer<ROW> container : rows) {
+      result.add(container.getValue());
     }
+    return result;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean removeRow(ROW row) {
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
 
-    boolean removed = getValueInternal().remove(row);
-    if (hasWidgetAdapter()) {
-      // getWidgetAdapter().removeRow(row);
+    super.initializeWidgetAdapter(adapter);
+    int i = 0;
+    for (TableRowContainer<ROW> row : getRowsInternal()) {
+      getWidgetAdapter().addRow(row, i++);
     }
-    return removed;
+
   }
 
 }

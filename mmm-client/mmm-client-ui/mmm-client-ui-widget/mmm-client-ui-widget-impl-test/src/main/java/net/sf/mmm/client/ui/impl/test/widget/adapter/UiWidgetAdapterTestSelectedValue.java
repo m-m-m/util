@@ -69,25 +69,21 @@ public class UiWidgetAdapterTestSelectedValue<VALUE> extends UiWidgetAdapterTest
    * {@inheritDoc}
    */
   @Override
-  public boolean setSelectedValue(VALUE selectedValue) {
+  public void setSelectedValue(VALUE selectedValue) {
 
     verifyNotDisposed();
-    boolean contained = true;
     this.selectedValues = new LinkedList<VALUE>();
     this.selectedValues.add(selectedValue);
-    return contained;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean setSelectedValues(List<VALUE> selection) {
+  public void setSelectedValues(List<VALUE> selection) {
 
     verifyNotDisposed();
-    boolean contained = true;
     this.selectedValues = selection;
-    return contained;
   }
 
 }

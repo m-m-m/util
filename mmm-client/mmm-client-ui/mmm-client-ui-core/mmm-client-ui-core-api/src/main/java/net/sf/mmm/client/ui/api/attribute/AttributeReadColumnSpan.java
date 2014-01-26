@@ -10,8 +10,13 @@ package net.sf.mmm.client.ui.api.attribute;
  */
 public abstract interface AttributeReadColumnSpan {
 
+  /** The attribute name of {@link #getColumnSpan()}. */
+  String ATTRIBUTE_COLSPAN = "colspan";
+
   /**
-   * This method gets the number of columns spanned by this object.
+   * This method gets the number of columns spanned by this object (cell). This cell expands to that number of
+   * cells horizontally so a value greater than <code>1</code> indicates that the next cells to the right are
+   * connected.
    * 
    * @return the column span. By default <code>1</code>.
    */

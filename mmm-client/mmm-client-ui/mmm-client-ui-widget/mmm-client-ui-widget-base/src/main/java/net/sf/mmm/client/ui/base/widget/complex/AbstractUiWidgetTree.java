@@ -186,30 +186,26 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
    * {@inheritDoc}
    */
   @Override
-  public boolean setSelectedValue(NODE selectedValue) {
+  public void setSelectedValue(NODE selectedValue) {
 
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setSelectedValue(selectedValue);
     } else {
       this.selectedValues = Arrays.asList(selectedValue);
-      // return isContained(selectedValue);
     }
-    return false;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean setSelectedValues(List<NODE> selection) {
+  public void setSelectedValues(List<NODE> selection) {
 
     if (hasWidgetAdapter()) {
       getWidgetAdapter().setSelectedValues(selection);
     } else {
       this.selectedValues = selection;
-      // return isContained(selection);
     }
-    return false;
   }
 
   /**

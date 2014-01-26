@@ -2,6 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection.base;
 
+import net.sf.mmm.util.lang.api.EqualsChecker;
+import net.sf.mmm.util.lang.api.EqualsCheckerIsSame;
+import net.sf.mmm.util.lang.api.HashCodeFunction;
+import net.sf.mmm.util.lang.api.HashCodeFunctionSystemIdentity;
+
 /**
  * This is a simple class that allows to use any {@link #getDelegate() object} as
  * {@link java.util.Map#get(Object) hash-key}. It only {@link #equals(Object) matches} the exact same instance
@@ -14,10 +19,18 @@ package net.sf.mmm.util.collection.base;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public class HashKey<T> {
+public final class HashKey<T> extends AbstractHashKey<T> {
 
-  /** @see #getDelegate() */
-  private T delegate;
+  /** UID for serialization. */
+  private static final long serialVersionUID = -2492195114074688424L;
+
+  /**
+   * The constructor for de-serialization.
+   */
+  protected HashKey() {
+
+    super();
+  }
 
   /**
    * The constructor.
@@ -26,58 +39,25 @@ public class HashKey<T> {
    */
   public HashKey(T object) {
 
-    super();
-    this.delegate = object;
-  }
-
-  /**
-   * This method gets the original object this hash-key delegates to.
-   * 
-   * @return the data object.
-   */
-  public T getDelegate() {
-
-    return this.delegate;
+    super(object);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public int hashCode() {
+  protected HashCodeFunction<T> getHashCodeFunction() {
 
-    return System.identityHashCode(this.delegate);
+    return HashCodeFunctionSystemIdentity.getInstance();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean equals(Object other) {
+  protected EqualsChecker<T> getEqualsChecker() {
 
-    if (other == this) {
-      return true;
-    }
-    if (other == null) {
-      return false;
-    }
-    if (!getClass().equals(other.getClass())) {
-      return false;
-    }
-    HashKey<?> otherKey = (HashKey<?>) other;
-    return (this.delegate == otherKey.delegate);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    if (this.delegate == null) {
-      return "<null>";
-    }
-    return this.delegate.toString();
+    return EqualsCheckerIsSame.getInstance();
   }
 
 }

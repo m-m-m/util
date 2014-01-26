@@ -9,6 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetFactoryNative;
+import net.sf.mmm.client.ui.impl.gwt.widget.complex.UiWidgetListTableGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.complex.UiWidgetTreeGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetButtonGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.core.UiWidgetCollapsableSectionGwt;
@@ -116,6 +117,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetMenuItemClickableGwt.Factory());
     register(new UiWidgetMenuItemSeparatorGwt.Factory());
     // complex
+    register(new UiWidgetListTableGwt.Factory());
     register(new UiWidgetTreeGwt.Factory());
     // window
     register(new UiWidgetPopupGwt.Factory());
