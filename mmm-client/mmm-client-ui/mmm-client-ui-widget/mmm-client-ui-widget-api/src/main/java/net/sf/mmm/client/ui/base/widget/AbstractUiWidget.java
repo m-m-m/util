@@ -779,6 +779,19 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
     }
 
     /**
+     * @see AbstractUiWidget#getRecentValue()
+     * 
+     * @param <VALUE> - see {@link AbstractUiWidget#getRecentValue()}.
+     * 
+     * @param widget is the {@link AbstractUiWidget}.
+     * @return - see {@link AbstractUiWidget#getRecentValue()}.
+     */
+    public static <VALUE> VALUE getRecentValue(AbstractUiWidget<VALUE> widget) {
+
+      return widget.getRecentValue();
+    }
+
+    /**
      * @see AbstractUiWidget#doValidate(ValidationState, Object)
      * 
      * @param <VALUE> - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.

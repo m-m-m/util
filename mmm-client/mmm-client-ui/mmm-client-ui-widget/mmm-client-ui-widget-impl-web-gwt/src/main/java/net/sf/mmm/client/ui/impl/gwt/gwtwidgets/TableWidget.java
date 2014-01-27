@@ -8,8 +8,9 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
 
 /**
- * A {@link TableWidget} is a {@link CustomPanel} that represents a table (&lt;table&gt;). You can
- * {@link #add(com.google.gwt.user.client.ui.Widget)} {@link TableRow rows} to it.
+ * A {@link TableWidget} is a {@link CustomPanel} that represents a table ({@literal <table>}). You can
+ * {@link #add(com.google.gwt.user.client.ui.Widget)} {@link TableRow rows} to it. It is an alternative to
+ * GWTs {@link com.google.gwt.user.client.ui.HTMLTable} or {@link com.google.gwt.user.client.ui.Grid}.
  * 
  * @see #getTableBody()
  * @see #getTableHeader()
@@ -36,6 +37,7 @@ public class TableWidget extends ComplexPanel {
 
     super();
     TableElement tableElement = Document.get().createTableElement();
+    tableElement.setCellSpacing(0);
     setElement(tableElement);
 
     Element element = getElement();

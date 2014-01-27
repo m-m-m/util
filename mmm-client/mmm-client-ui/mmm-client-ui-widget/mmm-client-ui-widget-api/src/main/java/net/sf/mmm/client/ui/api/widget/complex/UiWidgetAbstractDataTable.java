@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
@@ -52,6 +53,9 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  */
 public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetRegular, UiFeatureSelectedValue<ROW>,
     AttributeWriteSelectionMode, AttributeWriteEditable {
+
+  /** The default {@link #hasStyle(String) style} of this data table widget. */
+  String STYLE_DATA_TABLE = CssStyles.DATA_TABLE;
 
   /**
    * This method creates a new {@link UiWidgetTableColumn column} for this table. <br/>

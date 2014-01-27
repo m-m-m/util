@@ -440,7 +440,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     FlowPanel toplevelWidget = new FlowPanel();
     toplevelWidget.add(getTitleHeader());
     toplevelWidget.add(getScrollPanel());
-    toplevelWidget.setStylePrimaryName(UiWidgetTree.PRIMARY_STYLE);
+    toplevelWidget.setStylePrimaryName(UiWidgetTree.STYLE_TREE);
     return toplevelWidget;
   }
 

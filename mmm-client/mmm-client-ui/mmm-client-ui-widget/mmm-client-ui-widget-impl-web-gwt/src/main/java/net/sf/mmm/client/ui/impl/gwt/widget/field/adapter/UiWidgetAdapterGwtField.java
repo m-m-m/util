@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
+import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HorizontalFlowPanel;
@@ -44,6 +45,9 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    * edit mode}. Empty by default. May be used to show error markers.
    */
   private InlineLabel widgetMarkerEditMode;
+
+  /** @see #getValue() */
+  private ADAPTER_VALUE recentValue;
 
   /**
    * The constructor.
@@ -98,8 +102,8 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   protected void updateWidgetViewMode() {
 
     try {
-      ADAPTER_VALUE value = getValue();
-      String valueAsString = convertValueToString(value);
+      ADAPTER_VALUE currentValue = getValue();
+      String valueAsString = convertValueToString(currentValue);
       ((Label) getWidgetViewMode()).setText(valueAsString);
     } catch (Exception e) {
       getUiWidget().getContext().getLogger().error("Error while updating value for view mode.", e);
@@ -138,6 +142,9 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   @Override
   public ADAPTER_VALUE getValue() {
 
+    if (this.activeWidget == null) {
+      return this.recentValue;
+    }
     return getWidgetAsTakesValue().getValue();
   }
 
@@ -147,7 +154,13 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   @Override
   public void setValue(ADAPTER_VALUE value) {
 
-    getWidgetAsTakesValue().setValue(value);
+    if (this.activeWidget != null) {
+      getWidgetAsTakesValue().setValue(value);
+    }
+    if ((this.widgetViewMode != null) && (!getUiWidget().getMode().isEditable())) {
+      updateWidgetViewMode();
+    }
+    this.recentValue = value;
   }
 
   /**
@@ -194,8 +207,13 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
     if (this.activeWidget == null) {
       this.activeWidget = createActiveWidget();
       getInputElement().setAttribute("oninput", "this.setCustomValidity('');");
-      attachActiveWidget();
       this.widgetMarkerEditMode = new InlineLabel();
+      UiMode mode = getUiWidget().getMode();
+      if ((mode != null) && (!mode.isEditable())) {
+        this.activeWidget.setVisible(false);
+        this.widgetMarkerEditMode.setVisible(false);
+      }
+      attachActiveWidget();
       getToplevelWidget().add(this.widgetMarkerEditMode);
     }
     return this.activeWidget;

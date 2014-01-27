@@ -128,6 +128,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       this.widgetAdapter = createWidgetAdapter();
       ((AbstractUiWidgetAdapter<?>) this.widgetAdapter).setUiWidget(this);
       initializeWidgetAdapter(this.widgetAdapter);
+
       if (getAriaRole() != null) {
         this.ariaRole.setDelegate(this.widgetAdapter);
       }
@@ -159,6 +160,9 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     // for ariaRole see getWidgetAdapter()
+    if (this.mode != null) {
+      getContext().getModeChanger().changeMode(this, this.mode);
+    }
     adapter.setVisible(isVisible(), true);
     if (!this.enabled) {
       adapter.setEnabled(this.enabled);
@@ -166,10 +170,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
     if (this.parent != null) {
       adapter.setParent(this.parent);
     }
-    // if (this.id != null) {
-    // adapter.setId(this.id);
     adapter.setId(getId());
-    // }
     if (this.tooltip != null) {
       adapter.setTooltip(this.tooltip);
     }

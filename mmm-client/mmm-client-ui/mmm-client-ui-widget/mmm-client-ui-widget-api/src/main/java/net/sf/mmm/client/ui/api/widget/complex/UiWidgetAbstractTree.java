@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteCollapsed;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
@@ -30,6 +31,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  */
 public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetRegular, UiFeatureSelectedValue<NODE>,
     AttributeWriteSelectionMode {
+
+  /** The {@link #hasStyle(String) style} of this tree widget. */
+  String STYLE_TREE = CssStyles.TREE;
 
   /**
    * This method gets the {@link UiTreeModel} adapting from {@literal <NODE>} to this tree-widget.

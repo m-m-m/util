@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.common.SelectionMode;
+import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
@@ -65,6 +66,7 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
         } else {
           cellWidget = widgetFactory.create(getContext());
         }
+        cellWidget.setMode(UiMode.VIEW);
         cellWidget.setValue(cellValue);
         tableRow.addCell(getToplevelWidget(cellWidget));
       }

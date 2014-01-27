@@ -7,7 +7,6 @@ import java.util.List;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboboxField;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ComboBox;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 import com.google.gwt.user.client.ui.HasValue;
 
@@ -86,33 +85,8 @@ public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFo
    * {@inheritDoc}
    */
   @Override
-  public String getValue() {
-
-    return getActiveWidget().getText();
-    // if (this.options != null) {
-    // int selectedIndex = getActiveWidget().getSelectedIndex();
-    // if ((selectedIndex >= 0) && (selectedIndex < this.options.size())) {
-    // return this.options.get(selectedIndex);
-    // }
-    // }
-    // return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setValue(String value) {
-
-    getActiveWidget().setText(value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   protected HasValue<String> getWidgetAsTakesValue() {
 
-    throw new NlsIllegalStateException();
+    return getActiveWidget();
   }
 }

@@ -144,4 +144,10 @@ public interface CssStyles {
    */
   String SELECTED = "Selected";
 
+  /** The style of a tree. */
+  String TREE = "Tree";
+
+  /** The style of a data table (list grid or tree grid). */
+  String DATA_TABLE = "DataTable";
+
 }

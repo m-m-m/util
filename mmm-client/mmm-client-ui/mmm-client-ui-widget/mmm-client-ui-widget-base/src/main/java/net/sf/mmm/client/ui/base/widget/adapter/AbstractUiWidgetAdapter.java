@@ -21,7 +21,7 @@ import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
@@ -45,7 +45,7 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   private final WIDGET toplevelWidget;
 
   /** @see #getUiWidget() */
-  private AbstractUiWidget<?> uiWidget;
+  private AbstractUiWidgetNative<?, ?> uiWidget;
 
   /**
    * The constructor.
@@ -101,9 +101,9 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   }
 
   /**
-   * @return the {@link AbstractUiWidget UI widget} wrapping this widget adapter.
+   * @return the {@link AbstractUiWidgetNative UI widget} wrapping this widget adapter.
    */
-  public AbstractUiWidget<?> getUiWidget() {
+  public AbstractUiWidgetNative<?, ?> getUiWidget() {
 
     return this.uiWidget;
   }
@@ -119,7 +119,7 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   /**
    * @param uiWidget is the uiWidget to set
    */
-  public void setUiWidget(AbstractUiWidget<?> uiWidget) {
+  public void setUiWidget(AbstractUiWidgetNative<?, ?> uiWidget) {
 
     if (this.uiWidget != null) {
       throw new AlreadyInitializedException();

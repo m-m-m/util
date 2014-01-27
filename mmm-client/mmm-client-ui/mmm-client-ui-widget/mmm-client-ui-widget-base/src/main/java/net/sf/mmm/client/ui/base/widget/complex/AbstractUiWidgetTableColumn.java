@@ -69,6 +69,21 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void initializeWidgetAdapter(ADAPTER adapter) {
+
+    super.initializeWidgetAdapter(adapter);
+    if (this.title != null) {
+      adapter.setTitle(this.title);
+    }
+    adapter.setReorderable(this.reorderable);
+    adapter.setResizable(this.resizable);
+    // adapter.setSortable(this.sortComparator != null);
+  }
+
+  /**
    * @return the {@link PropertyAccessor}.
    */
   public PropertyAccessor<ROW, CELL> getPropertyAccessor() {

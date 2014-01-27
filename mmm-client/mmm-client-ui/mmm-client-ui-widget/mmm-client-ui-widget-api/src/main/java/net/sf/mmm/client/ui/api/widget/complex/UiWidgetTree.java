@@ -19,7 +19,6 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 public interface UiWidgetTree<NODE> extends UiWidgetAbstractTree<NODE>, UiWidgetWithValue<NODE>,
     AttributeWriteStringTitle, UiWidgetNative {
 
-  /** The default {@link #getPrimaryStyle() primary style} of this widget. */
-  String PRIMARY_STYLE = "Tree";
+  // nothing to add...
 
 }

@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.common.SelectionMode;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.complex.UiWidgetTableColumnImpl;
@@ -201,6 +202,7 @@ public class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetAdapterGwt
     flowPanel.add(this.section);
 
     this.tableWidget = new TableWidget();
+    this.tableWidget.setStyleName(UiWidgetAbstractDataTable.STYLE_DATA_TABLE);
     flowPanel.add(this.tableWidget);
 
     return flowPanel;
