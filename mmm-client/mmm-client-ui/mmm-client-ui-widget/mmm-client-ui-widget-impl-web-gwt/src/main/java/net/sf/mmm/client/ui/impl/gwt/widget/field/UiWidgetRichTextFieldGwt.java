@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetRichTextField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRichTextField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtRichTextField;
 
 /**
@@ -15,7 +16,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtRich
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetRichTextFieldGwt extends AbstractUiWidgetRichTextField<UiWidgetAdapterGwtRichTextField> {
+public class UiWidgetRichTextFieldGwt extends AbstractUiWidgetRichTextField<UiWidgetAdapterRichTextField> {
 
   /**
    * The constructor.

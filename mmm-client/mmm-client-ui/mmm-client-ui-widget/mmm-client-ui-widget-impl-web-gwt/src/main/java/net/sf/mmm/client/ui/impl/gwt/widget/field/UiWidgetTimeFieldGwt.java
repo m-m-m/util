@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTimeField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTimeField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTimeField;
 
 /**
@@ -14,7 +15,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTime
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTimeFieldGwt extends AbstractUiWidgetTimeField<UiWidgetAdapterGwtTimeField> {
+public class UiWidgetTimeFieldGwt extends AbstractUiWidgetTimeField<UiWidgetAdapterTimeField> {
 
   /**
    * The constructor.

@@ -5,8 +5,9 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsVerticalField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCellPanelRadiosVertical;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetRadioButtonsVerticalField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRadioButtonsField;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtRadioButtonsVertical;
 
 /**
  * This is the implementation of {@link UiWidgetRadioButtonsVerticalField} using GWT.
@@ -17,8 +18,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCell
  * @since 1.0.0
  */
 public class UiWidgetRadioButtonsVerticalFieldGwt<VALUE> extends
-    AbstractUiWidgetOptionsField<UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE>, VALUE> implements
-    UiWidgetRadioButtonsVerticalField<VALUE> {
+    AbstractUiWidgetRadioButtonsVerticalField<UiWidgetAdapterRadioButtonsField<VALUE>, VALUE> {
 
   /**
    * The constructor.
@@ -28,7 +28,7 @@ public class UiWidgetRadioButtonsVerticalFieldGwt<VALUE> extends
    *        lazy initialization.
    */
   public UiWidgetRadioButtonsVerticalFieldGwt(UiContext context,
-      UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE> widgetAdapter) {
+      UiWidgetAdapterGwtRadioButtonsVertical<VALUE> widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -37,9 +37,9 @@ public class UiWidgetRadioButtonsVerticalFieldGwt<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtRadioButtonsVertical<VALUE> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtCellPanelRadiosVertical<VALUE>();
+    return new UiWidgetAdapterGwtRadioButtonsVertical<VALUE>();
   }
 
   /**

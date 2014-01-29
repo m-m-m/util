@@ -67,6 +67,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -192,6 +193,43 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     section.setLabel("Foo");
     section.addCollapseWidget(contactEditor);
     verticalPanel1.addChild(section);
+
+    final UiWidgetListTable<ContactBean> contactTable = factory.create(UiWidgetListTable.class);
+    Comparator<String> sortComparator = null;
+    UiWidgetTableColumn<ContactBean, ?> columnFirstName = contactTable.createColumn(Contact.PROPERTY_FIRST_NAME, null,
+        sortComparator);
+    UiWidgetTableColumn<ContactBean, ?> columnLastName = contactTable.createColumn(Contact.PROPERTY_LAST_NAME, null,
+        sortComparator);
+    contactTable.setColumns(columnFirstName, columnLastName);
+
+    final List<ContactBean> contactBeanList = new ArrayList<ContactBean>();
+    createContacts(contactBeanList);
+
+    verticalPanel1.addChild(contactTable);
+    UiWidgetButton buttonFillTable = factory.create(UiWidgetButton.class);
+    buttonFillTable.setLabel("Fill Table");
+    verticalPanel1.addChild(buttonFillTable);
+    buttonFillTable.addClickHandler(new UiHandlerEventClick() {
+
+      @Override
+      public void onClick(UiEventClick event) {
+
+        contactTable.setValue(contactBeanList);
+      }
+    });
+    UiWidgetButton buttonUpdateList = factory.create(UiWidgetButton.class);
+    buttonUpdateList.setLabel("Update List");
+    verticalPanel1.addChild(buttonUpdateList);
+    buttonUpdateList.addClickHandler(new UiHandlerEventClick() {
+
+      @Override
+      public void onClick(UiEventClick event) {
+
+        contactBeanList.clear();
+        createContacts(contactBeanList);
+      }
+    });
+
     verticalPanel1.setMode(UiMode.EDIT);
 
     UiWidgetVerticalPanel verticalPanel2 = factory.create(UiWidgetVerticalPanel.class);
@@ -329,25 +367,6 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     tree.setValue(model.getRootNode());
     verticalPanel2.addChild(tree);
 
-    UiWidgetListTable<ContactBean> contactTable = factory.create(UiWidgetListTable.class);
-    Comparator<String> sortComparator = null;
-    UiWidgetTableColumn<ContactBean, ?> columnFirstName = contactTable.createColumn(Contact.PROPERTY_FIRST_NAME, null,
-        sortComparator);
-    UiWidgetTableColumn<ContactBean, ?> columnLastName = contactTable.createColumn(Contact.PROPERTY_LAST_NAME, null,
-        sortComparator);
-    contactTable.setColumns(columnFirstName, columnLastName);
-    List<ContactBean> contactBeanList = new ArrayList<ContactBean>();
-    ContactBean contact = new ContactBean();
-    contact.setFirstName("James");
-    contact.setLastName("Bond");
-    contactBeanList.add(contact);
-    contact = new ContactBean();
-    contact.setFirstName("Sean");
-    contact.setLastName("Connery");
-    contactBeanList.add(contact);
-    contactTable.setValue(contactBeanList);
-
-    verticalPanel2.addChild(contactTable);
     mainWindow.addChild(tabPanel);
 
     UiWidgetDateField dateField = factory.create(UiWidgetDateField.class);
@@ -520,6 +539,25 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     button.addClickHandler(handler);
     // TODO textField.addSubmitHandler();
     // textField.setKeyboardFilter(handler);
+  }
+
+  private void createContacts(final List<ContactBean> contactBeanList) {
+
+    ContactBean contact = new ContactBean();
+    contact.setFirstName("James");
+    contact.setLastName("Bond");
+    contactBeanList.add(contact);
+    int rnd = Random.nextInt() % 1000;
+    if (rnd < 0) {
+      rnd = -rnd;
+    }
+    for (int i = 1; i <= rnd; i++) {
+      contact = new ContactBean();
+      String suffix = i + " of " + rnd;
+      contact.setFirstName("First " + suffix);
+      contact.setLastName("Last " + suffix);
+      contactBeanList.add(contact);
+    }
   }
 
   private void setRichTextRenderer(UiWidgetTree<String> tree) {

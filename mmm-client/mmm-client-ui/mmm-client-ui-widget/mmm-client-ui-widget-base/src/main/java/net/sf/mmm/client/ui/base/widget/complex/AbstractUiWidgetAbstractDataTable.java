@@ -342,7 +342,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
     } else {
       accessor = this.rowBinding.createPropertyAccessor(rowProperty);
     }
-    UiWidgetTableColumn<ROW, CELL> column = createColumn(accessor, widgetFactory, sortComparator);
+    UiWidgetTableColumn<ROW, CELL> column = createColumn(accessor, widgetFactory, sortComparator, rowProperty);
     // TODO reuse label mechanism with I18N...
     column.setTitle(rowProperty.getTitle());
     return column;
@@ -355,7 +355,34 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   public <CELL> UiWidgetTableColumn<ROW, CELL> createColumn(PropertyAccessor<ROW, CELL> rowAccessor,
       UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator) {
 
-    UiWidgetTableColumnImpl<ROW, CELL> column = new UiWidgetTableColumnImpl<ROW, CELL>(getContext(), this, null);
+    return createColumn(rowAccessor, widgetFactory, sortComparator, null);
+  }
+
+  /**
+   * @see #createColumn(PropertyAccessor, UiSingleWidgetFactory, Comparator)
+   * 
+   * @param <CELL> is the generic type of the {@link PropertyAccessor#getValue(Object) property value}.
+   * @param rowAccessor is the {@link PropertyAccessor} to {@link PropertyAccessor#getValue(Object) access}
+   *        the property of {@literal <ROW>} to show in the column.
+   * @param widgetFactory is the factory to
+   *        {@link UiSingleWidgetFactory#create(net.sf.mmm.client.ui.api.UiContext) create} widgets for this
+   *        column. <b>ATTENTION:</b> These widgets might be reused for performance-reasons for a different
+   *        row just by {@link UiWidgetWithValue#setValue(Object) setting its value}. They should NOT contain
+   *        additional state information (what is generally a bad idea). This parameter may be
+   *        <code>null</code> to fall back to
+   *        {@link net.sf.mmm.client.ui.api.widget.UiWidgetFactory#createForDatatype(Class) datatype based
+   *        creation}.
+   * @param sortComparator is the {@link UiWidgetTableColumn#setSortComparator(Comparator) sort-comparator to
+   *        set}.
+   * @param rowProperty is the {@link TypedProperty}. May be <code>null</code>.
+   * @return a new {@link UiWidgetTableColumn}.
+   */
+  private <CELL> UiWidgetTableColumn<ROW, CELL> createColumn(PropertyAccessor<ROW, CELL> rowAccessor,
+      UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator,
+      TypedProperty<CELL> rowProperty) {
+
+    UiWidgetTableColumnImpl<ROW, CELL> column = new UiWidgetTableColumnImpl<ROW, CELL>(getContext(), this, rowProperty,
+        null);
     column.setPropertyAccessor(rowAccessor);
     if (sortComparator != null) {
       column.setSortComparator(sortComparator);

@@ -58,7 +58,7 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
   @Override
   public void setOptions(List<String> options) {
 
-    getToplevelWidget().clear();
+    getActiveWidget().clear();
     this.options = options;
     for (String item : options) {
       getActiveWidget().addItem(item);

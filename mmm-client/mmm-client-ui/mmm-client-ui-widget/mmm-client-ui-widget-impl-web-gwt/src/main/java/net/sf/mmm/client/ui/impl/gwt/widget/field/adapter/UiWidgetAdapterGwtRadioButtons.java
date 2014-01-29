@@ -8,7 +8,7 @@ import java.util.List;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.base.widget.adapter.RadioGroupIdManager;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRadioButtonsField;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwtClickToChange;
 
@@ -23,15 +23,16 @@ import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.RadioButton;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterOptionsField} using GWT based on a {@link ComplexPanel}
- * and {@link RadioButton}s.
+ * This is the base implementation of {@link UiWidgetAdapterRadioButtonsField} using GWT based on a
+ * {@link ComplexPanel} and {@link RadioButton}s.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value.
  */
-public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
-    UiWidgetAdapterGwtField<ComplexPanel, VALUE, String> implements UiWidgetAdapterOptionsField<VALUE>, ClickHandler {
+public abstract class UiWidgetAdapterGwtRadioButtons<VALUE> extends
+    UiWidgetAdapterGwtField<ComplexPanel, VALUE, String> implements UiWidgetAdapterRadioButtonsField<VALUE>,
+    ClickHandler {
 
   /** @see #setOptions(List) */
   private final List<RadioButton> radioButtons;
@@ -48,7 +49,7 @@ public abstract class UiWidgetAdapterGwtCellPanelRadios<VALUE> extends
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtCellPanelRadios() {
+  public UiWidgetAdapterGwtRadioButtons() {
 
     super();
     this.radioButtons = new ArrayList<RadioButton>();

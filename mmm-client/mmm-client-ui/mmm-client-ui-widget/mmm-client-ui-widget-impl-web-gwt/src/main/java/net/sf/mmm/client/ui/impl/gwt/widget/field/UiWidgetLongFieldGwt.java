@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetLongField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterLongField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtLongField;
 
 /**
@@ -15,7 +16,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtLong
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetLongFieldGwt extends AbstractUiWidgetLongField<UiWidgetAdapterGwtLongField> {
+public class UiWidgetLongFieldGwt extends AbstractUiWidgetLongField<UiWidgetAdapterLongField> {
 
   /**
    * The constructor.

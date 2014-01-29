@@ -15,7 +15,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.user.client.TakesValue;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 1.0.0
  */
 public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAPTER_VALUE> extends
-    UiWidgetAdapterGwtWidgetActive<FlowPanel> implements UiWidgetAdapterField<VALUE, ADAPTER_VALUE>,
+    UiWidgetAdapterGwtWidgetActive<Widget> implements UiWidgetAdapterField<VALUE, ADAPTER_VALUE>,
     AttributeReadMinimumValue<ADAPTER_VALUE>, AttributeReadMaximumValue<ADAPTER_VALUE> {
 
   /** @see #getWidgetViewMode() */
@@ -70,6 +70,14 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   protected abstract TakesValue<ADAPTER_VALUE> getWidgetAsTakesValue();
 
   /**
+   * @return - see {@link UiWidgetField#isViewOnly()}.
+   */
+  protected boolean isViewOnly() {
+
+    return ((UiWidgetField<?>) getUiWidget()).isViewOnly();
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -103,11 +111,35 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
     try {
       ADAPTER_VALUE currentValue = getValue();
-      String valueAsString = convertValueToString(currentValue);
-      ((Label) getWidgetViewMode()).setText(valueAsString);
+      setAdapterValueInViewMode(currentValue);
     } catch (Exception e) {
       getUiWidget().getContext().getLogger().error("Error while updating value for view mode.", e);
     }
+  }
+
+  /**
+   * This method updates the {@link #getWidgetViewMode() view-mode-widget} such that it displays the given
+   * <code>value</code>. By default a label is {@link #createViewWidget() created} for view-mode. If you
+   * change this you will also need to override this method to properly apply the value.
+   * 
+   * @param value is the value to display.
+   */
+  protected void setAdapterValueInViewMode(ADAPTER_VALUE value) {
+
+    String valueAsString = convertValueToString(value);
+    setValueInViewMode(valueAsString);
+  }
+
+  /**
+   * This method updates the {@link #getWidgetViewMode() view-mode-widget} such that it displays the given
+   * <code>value</code>. By default a label is {@link #createViewWidget() created} for view-mode. If you
+   * change this you will also need to override this method to properly apply the value.
+   * 
+   * @param value is the value to display.
+   */
+  protected void setValueInViewMode(String value) {
+
+    ((Label) getWidgetViewMode()).setText(value);
   }
 
   /**
@@ -158,7 +190,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
       getWidgetAsTakesValue().setValue(value);
     }
     if ((this.widgetViewMode != null) && (!getUiWidget().getMode().isEditable())) {
-      updateWidgetViewMode();
+      setAdapterValueInViewMode(value);
     }
     this.recentValue = value;
   }
@@ -167,9 +199,13 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    * {@inheritDoc}
    */
   @Override
-  protected final FlowPanel createToplevelWidget() {
+  protected final Widget createToplevelWidget() {
 
-    return new HorizontalFlowPanel();
+    if (isViewOnly()) {
+      return getWidgetViewMode();
+    } else {
+      return new HorizontalFlowPanel();
+    }
   }
 
   /**
@@ -180,7 +216,9 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
     if (this.widgetViewMode == null) {
       this.widgetViewMode = createViewWidget();
       this.widgetViewMode.setStylePrimaryName(UiWidgetField.STYLE_VIEW);
-      getToplevelWidget().add(this.widgetViewMode);
+      if (!isViewOnly()) {
+        ((ComplexPanel) getToplevelWidget()).add(this.widgetViewMode);
+      }
     }
     return this.widgetViewMode;
   }
@@ -205,16 +243,19 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   public final WIDGET getActiveWidget() {
 
     if (this.activeWidget == null) {
-      this.activeWidget = createActiveWidget();
-      getInputElement().setAttribute("oninput", "this.setCustomValidity('');");
-      this.widgetMarkerEditMode = new InlineLabel();
-      UiMode mode = getUiWidget().getMode();
-      if ((mode != null) && (!mode.isEditable())) {
-        this.activeWidget.setVisible(false);
-        this.widgetMarkerEditMode.setVisible(false);
+      if (!isViewOnly()) {
+        this.activeWidget = createActiveWidget();
+        getInputElement().setAttribute("oninput", "this.setCustomValidity('');");
+        this.widgetMarkerEditMode = new InlineLabel();
+        UiMode mode = getUiWidget().getMode();
+        if ((mode != null) && (!mode.isEditable())) {
+          this.activeWidget.setVisible(false);
+          this.widgetMarkerEditMode.setVisible(false);
+        }
+        ComplexPanel panel = (ComplexPanel) getToplevelWidget();
+        attachActiveWidget(panel);
+        panel.add(this.widgetMarkerEditMode);
       }
-      attachActiveWidget();
-      getToplevelWidget().add(this.widgetMarkerEditMode);
     }
     return this.activeWidget;
   }
@@ -222,10 +263,13 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   /**
    * Attaches the {@link #getActiveWidget() active widget} after {@link #createActiveWidget() creation} to
    * {@link #getToplevelWidget()}. May be overridden for composed active widgets.
+   * 
+   * @param panel is the {@link ComplexPanel} (see {@link #getToplevelWidget()}) where to
+   *        {@link ComplexPanel#add(com.google.gwt.user.client.ui.Widget) attach}.
    */
-  protected void attachActiveWidget() {
+  protected void attachActiveWidget(ComplexPanel panel) {
 
-    getToplevelWidget().add(this.activeWidget);
+    panel.add(this.activeWidget);
   }
 
   /**

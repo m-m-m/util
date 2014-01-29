@@ -8,6 +8,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboboxFie
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ComboBox;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
 
+import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.HasValue;
 
 /**
@@ -18,19 +19,16 @@ import com.google.gwt.user.client.ui.HasValue;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the changed value.
  */
-public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFocusWidgetBase<ComboBox, VALUE, String>
-    implements UiWidgetAdapterComboboxField<VALUE> {
+public class UiWidgetAdapterGwtComboBoxField<VALUE> extends
+    UiWidgetAdapterGwtFieldFocusWidgetBase<ComboBox, VALUE, String> implements UiWidgetAdapterComboboxField<VALUE> {
 
   /** @see #createActiveWidget() */
-  private DataList datalist;
-
-  /** @see #setOptions(List) */
-  private List<String> options;
+  private DataList dataList;
 
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtComboBox() {
+  public UiWidgetAdapterGwtComboBoxField() {
 
     super();
   }
@@ -42,22 +40,29 @@ public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFo
   protected ComboBox createActiveWidget() {
 
     ComboBox combo = new ComboBox();
-    this.datalist = new DataList();
-    if (this.options != null) {
-      this.datalist.setOptions(this.options);
-    }
-    combo.setDataList(this.datalist);
+    combo.setDataList(getDataList());
     return combo;
+  }
+
+  /**
+   * @return the {@link DataList} with the options.
+   */
+  protected DataList getDataList() {
+
+    if (this.dataList == null) {
+      this.dataList = new DataList();
+    }
+    return this.dataList;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void attachActiveWidget() {
+  protected void attachActiveWidget(ComplexPanel panel) {
 
-    super.attachActiveWidget();
-    getToplevelWidget().add(this.datalist);
+    super.attachActiveWidget(panel);
+    panel.add(this.dataList);
   }
 
   /**
@@ -66,7 +71,7 @@ public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFo
   @Override
   public List<String> getOptions() {
 
-    return this.options;
+    throw new UnsupportedOperationException();
   }
 
   /**
@@ -75,10 +80,10 @@ public class UiWidgetAdapterGwtComboBox<VALUE> extends UiWidgetAdapterGwtFieldFo
   @Override
   public void setOptions(List<String> options) {
 
-    this.options = options;
-    if (this.datalist != null) {
-      this.datalist.setOptions(options);
+    if (isViewOnly()) {
+      return;
     }
+    getDataList().setOptions(options);
   }
 
   /**

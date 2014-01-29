@@ -42,7 +42,7 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
     AttributeReadHeightInRows, AttributeReadColumnSpan, AttributeReadResizable, AttributeReadSelectionMode {
 
   /** @see #getToplevelWidget() */
-  private final WIDGET toplevelWidget;
+  private WIDGET toplevelWidget;
 
   /** @see #getUiWidget() */
   private AbstractUiWidgetNative<?, ?> uiWidget;
@@ -53,7 +53,6 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   public AbstractUiWidgetAdapter() {
 
     super();
-    this.toplevelWidget = createToplevelWidget();
   }
 
   /**
@@ -85,6 +84,9 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   @Override
   public WIDGET getToplevelWidget() {
 
+    if (this.toplevelWidget == null) {
+      this.toplevelWidget = createToplevelWidget();
+    }
     return this.toplevelWidget;
   }
 

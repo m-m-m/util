@@ -10,6 +10,8 @@ import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ColorBox;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
 import net.sf.mmm.util.datatype.api.color.Color;
 
+import com.google.gwt.user.client.ui.ComplexPanel;
+
 /**
  * This is the implementation of {@link UiWidgetAdapterColorField} using GWT based on {@link ColorBox}.
  * 
@@ -36,7 +38,9 @@ public class UiWidgetAdapterGwtColorField extends UiWidgetAdapterGwtFieldValueBo
   @Override
   protected ColorBox createActiveWidget() {
 
-    return new ColorBox();
+    ColorBox colorBox = new ColorBox();
+    colorBox.setDataList(getDataList());
+    return colorBox;
   }
 
   /**
@@ -46,10 +50,18 @@ public class UiWidgetAdapterGwtColorField extends UiWidgetAdapterGwtFieldValueBo
 
     if (this.dataList == null) {
       this.dataList = new DataList();
-      getActiveWidget().setDataList(this.dataList);
-      getToplevelWidget().add(this.dataList);
     }
     return this.dataList;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void attachActiveWidget(ComplexPanel panel) {
+
+    super.attachActiveWidget(panel);
+    panel.add(getDataList());
   }
 
   /**
@@ -67,6 +79,9 @@ public class UiWidgetAdapterGwtColorField extends UiWidgetAdapterGwtFieldValueBo
   @Override
   public void setOptions(List<Color> options) {
 
+    if (isViewOnly()) {
+      return;
+    }
     List<String> stringOptions = new ArrayList<String>(options.size());
     for (Color color : options) {
       stringOptions.add(color.toString());

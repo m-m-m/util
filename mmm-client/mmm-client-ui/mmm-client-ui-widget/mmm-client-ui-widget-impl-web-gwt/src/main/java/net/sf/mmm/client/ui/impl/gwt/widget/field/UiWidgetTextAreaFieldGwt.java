@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextAreaField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextAreaField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextAreaField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTextAreaField;
 
 /**
@@ -15,7 +16,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtText
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTextAreaFieldGwt extends AbstractUiWidgetTextAreaField<UiWidgetAdapterGwtTextAreaField> {
+public class UiWidgetTextAreaFieldGwt extends AbstractUiWidgetTextAreaField<UiWidgetAdapterTextAreaField> {
 
   /**
    * The constructor.

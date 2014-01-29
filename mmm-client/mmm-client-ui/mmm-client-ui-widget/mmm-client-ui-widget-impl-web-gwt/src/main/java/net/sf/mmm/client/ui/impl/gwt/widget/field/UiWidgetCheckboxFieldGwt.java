@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetCheckboxField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckboxField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCheckboxField;
 
 /**
@@ -15,7 +16,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtChec
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetCheckboxFieldGwt extends AbstractUiWidgetCheckboxField<UiWidgetAdapterGwtCheckboxField> {
+public class UiWidgetCheckboxFieldGwt extends AbstractUiWidgetCheckboxField<UiWidgetAdapterCheckboxField> {
 
   /**
    * The constructor.

@@ -159,4 +159,22 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
     return getDelegate();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isViewOnly() {
+
+    return getDelegate().isViewOnly();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setViewOnly() {
+
+    getDelegate().setViewOnly();
+  }
+
 }

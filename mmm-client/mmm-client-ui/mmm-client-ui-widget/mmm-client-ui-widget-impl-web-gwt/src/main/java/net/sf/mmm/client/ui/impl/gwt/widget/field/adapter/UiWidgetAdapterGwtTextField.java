@@ -2,24 +2,24 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterPasswordField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextField;
 
-import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.TextBox;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}
- * using GWT based on {@link PasswordTextBox}.
+ * using GWT based on {@link TextBox}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtPasswordTextBox extends UiWidgetAdapterGwtTextBoxBase<PasswordTextBox, String> implements
-    UiWidgetAdapterPasswordField {
+public class UiWidgetAdapterGwtTextField extends UiWidgetAdapterGwtTextBoxBase<TextBox, String> implements
+    UiWidgetAdapterTextField {
 
   /**
    * The constructor.
    */
-  public UiWidgetAdapterGwtPasswordTextBox() {
+  public UiWidgetAdapterGwtTextField() {
 
     super();
   }
@@ -28,9 +28,9 @@ public class UiWidgetAdapterGwtPasswordTextBox extends UiWidgetAdapterGwtTextBox
    * {@inheritDoc}
    */
   @Override
-  protected PasswordTextBox createActiveWidget() {
+  protected TextBox createActiveWidget() {
 
-    return new PasswordTextBox();
+    TextBox textBox = new TextBox();
+    return textBox;
   }
-
 }

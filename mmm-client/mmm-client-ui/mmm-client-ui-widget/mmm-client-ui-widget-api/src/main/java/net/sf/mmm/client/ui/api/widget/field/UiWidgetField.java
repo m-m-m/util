@@ -102,4 +102,24 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
    */
   UiWidgetLabel getLabelWidget();
 
+  /**
+   * This method determines if this field is set to <em>viewOnly</em>. In such case the field does not support
+   * {@link net.sf.mmm.client.ui.api.common.UiMode#isEditable() editing} and is therefore internally more
+   * lightweight. This is especially helpful for complex widgets such as
+   * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable} that create many widgets only to view
+   * data and need to save overhead for better performance.
+   * 
+   * @return <code>true</code> if this field mode, <code>false</code> otherwise.
+   */
+  boolean isViewOnly();
+
+  /**
+   * Sets the {@link #isViewOnly() view only} flag to <code>true</code>. Must be called before the widget is
+   * {@link net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite#addChild(UiWidget) attached}. This is
+   * useful to create a more lightweight widget to save overhead if the field is only used to display values.
+   * Will also {@link #setModeFixed(net.sf.mmm.client.ui.api.common.UiMode) fix} this field to
+   * {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW} what can not be changed afterwards.
+   */
+  void setViewOnly();
+
 }

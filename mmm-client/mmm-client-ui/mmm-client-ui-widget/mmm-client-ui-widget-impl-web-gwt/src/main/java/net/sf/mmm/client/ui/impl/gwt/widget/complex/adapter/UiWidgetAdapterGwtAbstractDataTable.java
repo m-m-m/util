@@ -32,8 +32,8 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetAdapterGwtWidgetActive<FlowPanel> implements
-    UiWidgetAdapterAbstractDataTable<ROW> {
+public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetAdapterGwtWidgetActive<FlowPanel>
+    implements UiWidgetAdapterAbstractDataTable<ROW> {
 
   /** @see #getTableWidget() */
   private TableWidget tableWidget;
@@ -43,8 +43,6 @@ public class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetAdapterGwt
 
   /** @see #setColumns(List) */
   private List<UiWidgetTableColumnImpl<ROW, ?>> columns;
-
-  private SelectionMode selectionMode;
 
   /**
    * The constructor.
@@ -138,7 +136,7 @@ public class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetAdapterGwt
   @Override
   public SelectionMode getSelectionMode() {
 
-    return this.selectionMode;
+    return ((UiWidgetAbstractDataTable<?>) getUiWidget()).getSelectionMode();
   }
 
   /**
@@ -157,7 +155,6 @@ public class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetAdapterGwt
       default :
         break;
     }
-    this.selectionMode = selectionMode;
   }
 
   /**

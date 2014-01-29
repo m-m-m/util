@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerSliderField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetIntegerSliderField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerSliderField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtIntegerSliderField;
 
 /**
@@ -15,8 +16,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtInte
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetIntegerRangeFieldGwt extends
-    AbstractUiWidgetIntegerSliderField<UiWidgetAdapterGwtIntegerSliderField> {
+public class UiWidgetIntegerSliderFieldGwt extends AbstractUiWidgetIntegerSliderField<UiWidgetAdapterIntegerSliderField> {
 
   /**
    * The constructor.
@@ -25,7 +25,7 @@ public class UiWidgetIntegerRangeFieldGwt extends
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetIntegerRangeFieldGwt(UiContext context, UiWidgetAdapterGwtIntegerSliderField widgetAdapter) {
+  public UiWidgetIntegerSliderFieldGwt(UiContext context, UiWidgetAdapterGwtIntegerSliderField widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -58,7 +58,7 @@ public class UiWidgetIntegerRangeFieldGwt extends
     @Override
     public UiWidgetIntegerSliderField create(UiContext context) {
 
-      return new UiWidgetIntegerRangeFieldGwt(context, null);
+      return new UiWidgetIntegerSliderFieldGwt(context, null);
     }
 
   }

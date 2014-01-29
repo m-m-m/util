@@ -20,10 +20,10 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiWidgetTreeNode;
-import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HtmlConstants;
@@ -440,7 +440,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     FlowPanel toplevelWidget = new FlowPanel();
     toplevelWidget.add(getTitleHeader());
     toplevelWidget.add(getScrollPanel());
-    toplevelWidget.setStylePrimaryName(UiWidgetTree.STYLE_TREE);
+    toplevelWidget.setStylePrimaryName(UiWidgetAbstractTree.STYLE_TREE);
     return toplevelWidget;
   }
 

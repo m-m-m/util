@@ -26,7 +26,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetComboboxFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDateFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDoubleFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerFieldGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerRangeFieldGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerSliderFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetLongFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetPasswordFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsFieldGwt;
@@ -89,7 +89,7 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetRichTextFieldGwt.Factory());
     register(new UiWidgetLongFieldGwt.Factory());
     register(new UiWidgetIntegerFieldGwt.Factory());
-    register(new UiWidgetIntegerRangeFieldGwt.Factory());
+    register(new UiWidgetIntegerSliderFieldGwt.Factory());
     register(new UiWidgetDoubleFieldGwt.Factory());
     register(new UiWidgetDateFieldGwt.Factory());
     register(new UiWidgetTimeFieldGwt.Factory());

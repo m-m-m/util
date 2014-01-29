@@ -5,8 +5,9 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCellPanelRadiosHorizontal;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetRadioButtonsField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRadioButtonsField;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtRadioButtonsHorizontal;
 
 /**
  * This is the implementation of {@link UiWidgetRadioButtonsField} using GWT.
@@ -17,8 +18,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtCell
  * @since 1.0.0
  */
 public class UiWidgetRadioButtonsFieldGwt<VALUE> extends
-    AbstractUiWidgetOptionsField<UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE>, VALUE> implements
-    UiWidgetRadioButtonsField<VALUE> {
+    AbstractUiWidgetRadioButtonsField<UiWidgetAdapterRadioButtonsField<VALUE>, VALUE> {
 
   /**
    * The constructor.
@@ -27,8 +27,7 @@ public class UiWidgetRadioButtonsFieldGwt<VALUE> extends
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetRadioButtonsFieldGwt(UiContext context,
-      UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE> widgetAdapter) {
+  public UiWidgetRadioButtonsFieldGwt(UiContext context, UiWidgetAdapterGwtRadioButtonsHorizontal<VALUE> widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -37,9 +36,9 @@ public class UiWidgetRadioButtonsFieldGwt<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtRadioButtonsHorizontal<VALUE> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtCellPanelRadiosHorizontal<VALUE>();
+    return new UiWidgetAdapterGwtRadioButtonsHorizontal<VALUE>();
   }
 
   /**

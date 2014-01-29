@@ -6,11 +6,12 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetComboboxField;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtComboBox;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboboxField;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtComboBoxField;
 
 /**
  * This is a simple implementation of {@link UiWidgetComboboxField} using GWT based on
- * {@link UiWidgetAdapterGwtComboBox}.
+ * {@link UiWidgetAdapterGwtComboBoxField}.
  * 
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * 
@@ -18,7 +19,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtComb
  * @since 1.0.0
  */
 public class UiWidgetComboboxFieldGwt<VALUE> extends
-    AbstractUiWidgetComboboxField<UiWidgetAdapterGwtComboBox<VALUE>, VALUE> {
+    AbstractUiWidgetComboboxField<UiWidgetAdapterComboboxField<VALUE>, VALUE> {
 
   /**
    * The constructor.
@@ -27,7 +28,7 @@ public class UiWidgetComboboxFieldGwt<VALUE> extends
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetComboboxFieldGwt(UiContext context, UiWidgetAdapterGwtComboBox<VALUE> widgetAdapter) {
+  public UiWidgetComboboxFieldGwt(UiContext context, UiWidgetAdapterGwtComboBoxField<VALUE> widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -36,9 +37,9 @@ public class UiWidgetComboboxFieldGwt<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtComboBox<VALUE> createWidgetAdapter() {
+  protected UiWidgetAdapterGwtComboBoxField<VALUE> createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtComboBox<VALUE>();
+    return new UiWidgetAdapterGwtComboBoxField<VALUE>();
   }
 
   /**
@@ -58,6 +59,7 @@ public class UiWidgetComboboxFieldGwt<VALUE> extends
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public UiWidgetComboboxField create(UiContext context) {
 

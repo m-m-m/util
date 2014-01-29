@@ -6,16 +6,17 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTextField;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTextBox;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextField;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTextField;
 
 /**
  * This is the implementation of {@link UiWidgetTextField} using GWT based on
- * {@link UiWidgetAdapterGwtTextBox}.
+ * {@link UiWidgetAdapterGwtTextField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdapterGwtTextBox> {
+public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdapterTextField> {
 
   /**
    * The constructor.
@@ -24,7 +25,7 @@ public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdap
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetTextFieldGwt(UiContext context, UiWidgetAdapterGwtTextBox widgetAdapter) {
+  public UiWidgetTextFieldGwt(UiContext context, UiWidgetAdapterGwtTextField widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -33,9 +34,9 @@ public class UiWidgetTextFieldGwt extends AbstractUiWidgetTextField<UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtTextBox createWidgetAdapter() {
+  protected UiWidgetAdapterGwtTextField createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtTextBox();
+    return new UiWidgetAdapterGwtTextField();
   }
 
   /**

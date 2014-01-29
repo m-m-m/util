@@ -6,16 +6,17 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetPasswordField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetPasswordField;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtPasswordTextBox;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterPasswordField;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtPasswordField;
 
 /**
  * This is the implementation of {@link UiWidgetPasswordField} using GWT based on
- * {@link UiWidgetAdapterGwtPasswordTextBox}.
+ * {@link UiWidgetAdapterGwtPasswordField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetPasswordFieldGwt extends AbstractUiWidgetPasswordField<UiWidgetAdapterGwtPasswordTextBox> {
+public class UiWidgetPasswordFieldGwt extends AbstractUiWidgetPasswordField<UiWidgetAdapterPasswordField> {
 
   /**
    * The constructor.
@@ -24,7 +25,7 @@ public class UiWidgetPasswordFieldGwt extends AbstractUiWidgetPasswordField<UiWi
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetPasswordFieldGwt(UiContext context, UiWidgetAdapterGwtPasswordTextBox widgetAdapter) {
+  public UiWidgetPasswordFieldGwt(UiContext context, UiWidgetAdapterGwtPasswordField widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -33,9 +34,9 @@ public class UiWidgetPasswordFieldGwt extends AbstractUiWidgetPasswordField<UiWi
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtPasswordTextBox createWidgetAdapter() {
+  protected UiWidgetAdapterGwtPasswordField createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtPasswordTextBox();
+    return new UiWidgetAdapterGwtPasswordField();
   }
 
   /**

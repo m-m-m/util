@@ -396,7 +396,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
-  public final void setModeFixed(UiMode modeFixed) {
+  public void setModeFixed(UiMode modeFixed) {
 
     if (this.modeFixed == modeFixed) {
       return;

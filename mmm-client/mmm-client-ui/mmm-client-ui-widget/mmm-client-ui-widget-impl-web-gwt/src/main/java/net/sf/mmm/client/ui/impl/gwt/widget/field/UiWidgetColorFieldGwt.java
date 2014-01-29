@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetColorField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetColorField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterColorField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtColorField;
 
 /**
@@ -15,7 +16,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtColo
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetColorFieldGwt extends AbstractUiWidgetColorField<UiWidgetAdapterGwtColorField> {
+public class UiWidgetColorFieldGwt extends AbstractUiWidgetColorField<UiWidgetAdapterColorField> {
 
   /**
    * The constructor.

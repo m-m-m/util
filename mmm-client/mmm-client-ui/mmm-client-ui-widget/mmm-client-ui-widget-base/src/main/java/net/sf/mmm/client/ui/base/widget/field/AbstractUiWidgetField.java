@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
@@ -37,6 +38,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /** @see #isTrimValue() */
   private boolean trimValue;
 
+  /** @see #isViewOnly() */
+  private boolean viewOnly;
+
   /**
    * The constructor.
    * 
@@ -69,6 +73,47 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     if (this.validationFailure != null) {
       adapter.setValidationFailure(this.validationFailure);
     }
+  }
+
+  /**
+   * This method determines if this field is set to <em>viewOnly</em>. In such case this widget will be
+   * {@link #setModeFixed(UiMode) fixed to} {@link UiMode#VIEW} what can not be changed afterwards. This will
+   * internally cause the widget to be more lightweight. This is especially helpful for complex widgets such
+   * as {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable}.
+   * 
+   * @return <code>true</code> if this field mode, <code>false</code> otherwise.
+   */
+  public boolean isViewOnly() {
+
+    return this.viewOnly;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setViewOnly() {
+
+    if (this.viewOnly) {
+      return;
+    }
+    if (hasWidgetAdapter()) {
+      throw new IllegalStateException("Can not set widget " + getId()
+          + " to viewOnly after widgetAdapter has been created!");
+    }
+    setModeFixed(UiMode.VIEW);
+    this.viewOnly = true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final void setModeFixed(UiMode modeFixed) {
+
+    if (this.viewOnly && ((modeFixed == null) || modeFixed.isEditable())) {
+      throw new IllegalStateException("Can not change fixed mode of widget " + getId() + " if viewOnly has been set!");
+    }
+    super.setModeFixed(modeFixed);
   }
 
   /**

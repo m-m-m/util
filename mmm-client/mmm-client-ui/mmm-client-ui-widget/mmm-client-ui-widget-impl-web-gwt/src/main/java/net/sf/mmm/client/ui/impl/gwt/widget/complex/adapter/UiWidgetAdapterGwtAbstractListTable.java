@@ -8,11 +8,13 @@ import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
 import net.sf.mmm.client.ui.base.widget.complex.UiWidgetTableColumnImpl;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractListTable;
 import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.TableRow;
 import net.sf.mmm.client.ui.impl.gwt.widget.complex.TableRowContainerGwt;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
@@ -61,10 +63,13 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
         UiWidgetWithValue cellWidget;
         Object cellValue = column.getPropertyAccessor().getValue(row.getValue());
         if (widgetFactory == null) {
-          // TODO cellValue may be null...
-          cellWidget = getContext().getWidgetFactory().createForDatatype(cellValue.getClass());
+          Class<?> cellType = determineCellType(column, cellValue);
+          cellWidget = getContext().getWidgetFactory().createForDatatype(cellType);
         } else {
           cellWidget = widgetFactory.create(getContext());
+        }
+        if (cellWidget instanceof UiWidgetField) {
+          ((UiWidgetField<?>) cellWidget).setViewOnly();
         }
         cellWidget.setMode(UiMode.VIEW);
         cellWidget.setValue(cellValue);
@@ -72,6 +77,32 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
       }
     }
     getTableWidget().getTableBody().insert(tableRow, index);
+  }
+
+  /**
+   * Determines the type of the cell from <code>column</code> and <code>cellValue</code>.
+   * 
+   * @param column is the {@link UiWidgetTableColumnImpl} specifying the cells in that column.
+   * @param cellValue is the current value for the cell. May be <code>null</code>.
+   * @return the type of the values in the cell.
+   */
+  private Class<?> determineCellType(UiWidgetTableColumnImpl<ROW, ?> column, Object cellValue) {
+
+    Class<?> cellType = null;
+    TypedProperty<?> typedProperty = column.getTypedProperty();
+    if (typedProperty != null) {
+      cellType = typedProperty.getPropertyType();
+    }
+    if (cellType == null) {
+      if (cellValue == null) {
+        throw new IllegalStateException("Can not handle null values in column " + column.getId() + " of table "
+            + getUiWidget().getId()
+            + " as neither a TypedProperty nor a WidgetFactory has been provided when the column was created!");
+      } else {
+        cellType = cellValue.getClass();
+      }
+    }
+    return cellType;
   }
 
   /**
