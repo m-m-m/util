@@ -41,7 +41,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
     extends AbstractUiWidgetActive<ADAPTER, List<ROW>> implements UiWidgetAbstractDataTable<ROW> {
 
   /** @see #setColumns(UiWidgetTableColumn...) */
-  private final List<UiWidgetTableColumnImpl<ROW, ?>> columns;
+  private final List<AbstractUiWidgetTableColumn<?, ROW, ?>> columns;
 
   /** @see #getSelectedValues() */
   private final Set<TableRowContainer<ROW>> selectedValues;
@@ -58,6 +58,9 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   /** @see #getRowEqualsChecker() */
   private EqualsChecker<ROW> rowEqualsChecker;
 
+  /** @see #sort(AbstractUiWidgetTableColumn, SortOrder) */
+  private AbstractUiWidgetTableColumn<?, ROW, ?> sortColumn;
+
   /**
    * The constructor.
    * 
@@ -69,7 +72,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
     super(context, widgetAdapter);
     this.editable = false;
-    this.columns = new ArrayList<UiWidgetTableColumnImpl<ROW, ?>>();
+    this.columns = new ArrayList<AbstractUiWidgetTableColumn<?, ROW, ?>>();
     this.selectionMode = SelectionMode.SINGLE_SELECTION;
     this.selectedValues = new HashSet<TableRowContainer<ROW>>();
   }
@@ -400,14 +403,17 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   @Override
   public void setColumns(UiWidgetTableColumn<ROW, ?>... columns) {
 
+    for (AbstractUiWidgetTableColumn<?, ROW, ?> column : this.columns) {
+      column.setAttached(false);
+    }
     this.columns.clear();
-    // Collections.addAll(this.columns, (UiWidgetTableColumnImpl<ROW, ?>[]) columns);
     for (UiWidgetTableColumn<ROW, ?> column : columns) {
-      this.columns.add((UiWidgetTableColumnImpl<ROW, ?>) column);
+      AbstractUiWidgetTableColumn<?, ROW, ?> columnImpl = (AbstractUiWidgetTableColumn<?, ROW, ?>) column;
+      columnImpl.setAttached(true);
+      this.columns.add(columnImpl);
     }
     if (hasWidgetAdapter()) {
-      ADAPTER widgetAdapter = getWidgetAdapter();
-      widgetAdapter.setColumns(this.columns);
+      getWidgetAdapter().setColumns(this.columns);
     }
   }
 
@@ -435,7 +441,23 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
    * @param column is the {@link AbstractUiWidgetTableColumn} to sort by.
    * @param sortOrder is the {@link SortOrder}.
    */
-  abstract void sort(AbstractUiWidgetTableColumn<?, ROW, ?> column, SortOrder sortOrder);
+  void sort(AbstractUiWidgetTableColumn<?, ROW, ?> column, SortOrder sortOrder) {
+
+    // incomplete implementation, has to be overridden/extended...
+    if (this.sortColumn != null) {
+      this.sortColumn.setSortOrder(null);
+    }
+    column.setSortOrder(sortOrder);
+    this.sortColumn = column;
+  }
+
+  /**
+   * @return the sortColumn
+   */
+  AbstractUiWidgetTableColumn<?, ROW, ?> getSortColumn() {
+
+    return this.sortColumn;
+  }
 
   /**
    * @param column is the {@link UiWidgetTableColumn} for which to create the widget adapter.

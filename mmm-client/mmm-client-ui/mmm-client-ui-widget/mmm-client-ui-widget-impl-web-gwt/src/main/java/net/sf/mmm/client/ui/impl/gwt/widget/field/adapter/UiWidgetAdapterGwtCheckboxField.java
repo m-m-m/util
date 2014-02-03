@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckboxField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.CheckBoxWithChangeHandlers;
+import net.sf.mmm.client.ui.gwt.widgets.CheckBoxWithChangeHandlers;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterCheckboxField} using GWT based on

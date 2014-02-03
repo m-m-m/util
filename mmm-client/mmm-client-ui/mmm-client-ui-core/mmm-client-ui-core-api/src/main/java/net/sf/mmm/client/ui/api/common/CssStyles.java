@@ -150,4 +150,13 @@ public interface CssStyles {
   /** The style of a data table (list grid or tree grid). */
   String DATA_TABLE = "DataTable";
 
+  /** The style of an icon showing that there is currently no sort order. */
+  String SORT_ICON_NONE = "SortNone";
+
+  /** The style of an icon showing an ascending sort order. */
+  String SORT_ICON_ASCENDING = "SortAscending";
+
+  /** The style of an icon showing a descending sort order. */
+  String SORT_ICON_DESCENDING = "SortDescending";
+
 }

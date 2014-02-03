@@ -26,7 +26,7 @@ import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRe
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiWidgetTreeNode;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HtmlConstants;
+import net.sf.mmm.client.ui.gwt.widgets.HtmlConstants;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 import net.sf.mmm.util.nls.api.IllegalCaseException;

@@ -18,5 +18,6 @@
     <module>mmm-client-ui-widget</module>
     <module>mmm-client-ui-dialog</module>
     <module>mmm-client-ui-theme</module>
+    <module>mmm-client-ui-gwt</module>
   </modules>
 </project>

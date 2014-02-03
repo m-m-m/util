@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.TableRow;
+import net.sf.mmm.client.ui.gwt.widgets.TableRow;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 import com.google.gwt.event.dom.client.ClickEvent;

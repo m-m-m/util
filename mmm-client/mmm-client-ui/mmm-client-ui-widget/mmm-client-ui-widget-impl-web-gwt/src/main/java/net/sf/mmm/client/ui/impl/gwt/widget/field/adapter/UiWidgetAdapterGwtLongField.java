@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterLongField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LongSpinBox;
+import net.sf.mmm.client.ui.gwt.widgets.LongSpinBox;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using GWT

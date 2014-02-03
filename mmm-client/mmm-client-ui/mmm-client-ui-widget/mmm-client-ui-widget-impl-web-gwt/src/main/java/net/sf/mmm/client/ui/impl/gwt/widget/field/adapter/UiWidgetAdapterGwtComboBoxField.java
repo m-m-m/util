@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboboxField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ComboBox;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
+import net.sf.mmm.client.ui.gwt.widgets.ComboBox;
+import net.sf.mmm.client.ui.gwt.widgets.DataList;
 
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.HasValue;

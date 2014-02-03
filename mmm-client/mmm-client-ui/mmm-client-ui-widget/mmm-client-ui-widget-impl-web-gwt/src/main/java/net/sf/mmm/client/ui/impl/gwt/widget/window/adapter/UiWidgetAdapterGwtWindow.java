@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterWindow;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
+import net.sf.mmm.client.ui.gwt.widgets.PopupWindow;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterWindow}

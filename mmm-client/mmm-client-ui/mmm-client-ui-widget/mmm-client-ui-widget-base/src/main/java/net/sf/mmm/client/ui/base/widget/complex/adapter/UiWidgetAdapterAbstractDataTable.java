@@ -9,7 +9,6 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTableColumn;
-import net.sf.mmm.client.ui.base.widget.complex.UiWidgetTableColumnImpl;
 import net.sf.mmm.util.lang.api.SortOrder;
 
 /**
@@ -35,7 +34,7 @@ public interface UiWidgetAdapterAbstractDataTable<ROW> extends UiWidgetAdapterAc
    * 
    * @param columns are the {@link UiWidgetTableColumn columns} to set.
    */
-  void setColumns(List<UiWidgetTableColumnImpl<ROW, ?>> columns);
+  void setColumns(List<AbstractUiWidgetTableColumn<?, ROW, ?>> columns);
 
   /**
    * @see AbstractUiWidgetTableColumn#sort(SortOrder)

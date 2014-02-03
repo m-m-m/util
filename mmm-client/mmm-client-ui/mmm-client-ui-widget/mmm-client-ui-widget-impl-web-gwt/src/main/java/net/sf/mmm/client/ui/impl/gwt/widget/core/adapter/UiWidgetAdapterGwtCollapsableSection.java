@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.CollapseExpandButton;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.CollapseExpandButton.CollapseHandler;
+import net.sf.mmm.client.ui.gwt.widgets.CollapseExpandButton;
+import net.sf.mmm.client.ui.gwt.widgets.CollapseExpandButton.CollapseHandler;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;

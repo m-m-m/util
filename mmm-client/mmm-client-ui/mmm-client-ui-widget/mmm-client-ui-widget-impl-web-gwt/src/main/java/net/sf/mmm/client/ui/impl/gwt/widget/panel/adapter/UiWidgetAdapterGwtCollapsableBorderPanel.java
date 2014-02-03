@@ -3,13 +3,13 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterCollapsableBorderPanel;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.CollapseExpandButton;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.CollapseExpandButton.CollapseHandler;
+import net.sf.mmm.client.ui.gwt.widgets.CollapseExpandButton;
+import net.sf.mmm.client.ui.gwt.widgets.CollapseExpandButton.CollapseHandler;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetCollapsableBorderPanelGwt;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterCollapsableBorderPanel} using GWT based on
- * {@link net.sf.mmm.client.ui.impl.gwt.gwtwidgets.BorderPanel} and {@link CollapseExpandButton}.
+ * {@link net.sf.mmm.client.ui.gwt.widgets.BorderPanel} and {@link CollapseExpandButton}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

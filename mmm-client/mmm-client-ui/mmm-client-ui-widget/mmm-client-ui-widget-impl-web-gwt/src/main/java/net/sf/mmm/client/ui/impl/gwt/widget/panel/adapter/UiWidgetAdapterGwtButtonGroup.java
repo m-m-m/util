@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterButtonGroup;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ButtonGroup;
+import net.sf.mmm.client.ui.gwt.widgets.ButtonGroup;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtPanel;
 
 /**

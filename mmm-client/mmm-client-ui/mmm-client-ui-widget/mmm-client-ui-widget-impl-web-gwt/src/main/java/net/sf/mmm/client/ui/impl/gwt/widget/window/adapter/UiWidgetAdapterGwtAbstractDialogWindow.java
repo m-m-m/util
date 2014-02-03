@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractDialogWindow;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.PopupWindow;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
+import net.sf.mmm.client.ui.gwt.widgets.PopupWindow;
+import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 
 /**

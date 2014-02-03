@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximumTextLength;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterRangeField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.NumberBox;
+import net.sf.mmm.client.ui.gwt.widgets.NumberBox;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}

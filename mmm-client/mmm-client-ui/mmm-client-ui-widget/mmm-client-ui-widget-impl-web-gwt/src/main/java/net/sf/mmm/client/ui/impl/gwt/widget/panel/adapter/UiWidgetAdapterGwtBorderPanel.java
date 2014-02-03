@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.BorderPanel;
+import net.sf.mmm.client.ui.gwt.widgets.BorderPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtSingleMutableComposite;
 
 import com.google.gwt.user.client.ui.Widget;

@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterVerticalPanel;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
+import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtPanel;
 
 /**

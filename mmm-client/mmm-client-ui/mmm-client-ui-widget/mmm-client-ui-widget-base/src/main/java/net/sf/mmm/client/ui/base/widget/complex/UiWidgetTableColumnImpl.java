@@ -18,9 +18,6 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 public class UiWidgetTableColumnImpl<ROW, CELL> extends
     AbstractUiWidgetTableColumn<UiWidgetAdapterTableColumn, ROW, CELL> {
 
-  /** @see #getTypedProperty() */
-  private final TypedProperty<CELL> typedProperty;
-
   /**
    * The constructor.
    * 
@@ -34,19 +31,7 @@ public class UiWidgetTableColumnImpl<ROW, CELL> extends
   public UiWidgetTableColumnImpl(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW> listTable,
       TypedProperty<CELL> typedProperty, UiWidgetAdapterTableColumn widgetAdapter) {
 
-    super(context, listTable, widgetAdapter);
-    this.typedProperty = typedProperty;
-  }
-
-  /**
-   * @return the {@link TypedProperty} identifying the property managed with this column. May be
-   *         <code>null</code> if the column was created with an explicit {@link #getPropertyAccessor()
-   *         property accessor}. In such case the {@link #getWidgetFactory() widget factory} shall not be
-   *         <code>null</code> or cells with <code>null</code> values can not be handled.
-   */
-  public TypedProperty<CELL> getTypedProperty() {
-
-    return this.typedProperty;
+    super(context, listTable, typedProperty, widgetAdapter);
   }
 
   /**

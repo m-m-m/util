@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridRow;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridPanel;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.GridPanel;
+import net.sf.mmm.client.ui.gwt.widgets.GridPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicComposite;
 
 import com.google.gwt.user.client.ui.Widget;

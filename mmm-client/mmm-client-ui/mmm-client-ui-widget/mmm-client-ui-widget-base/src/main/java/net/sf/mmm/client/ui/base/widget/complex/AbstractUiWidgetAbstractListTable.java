@@ -187,6 +187,7 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
   void sort(AbstractUiWidgetTableColumn<?, ROW, ?> column, SortOrder sortOrder) {
 
     this.comparator.sort(this.rows, column, sortOrder);
+    super.sort(column, sortOrder);
     if (hasWidgetAdapter()) {
       // getWidgetAdapter().updateRows();
     }

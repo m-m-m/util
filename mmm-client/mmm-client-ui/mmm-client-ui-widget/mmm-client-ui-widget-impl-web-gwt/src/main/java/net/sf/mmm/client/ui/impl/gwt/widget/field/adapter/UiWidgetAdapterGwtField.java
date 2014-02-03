@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.HorizontalFlowPanel;
+import net.sf.mmm.client.ui.gwt.widgets.HorizontalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;

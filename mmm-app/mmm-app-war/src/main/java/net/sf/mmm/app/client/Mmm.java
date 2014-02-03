@@ -196,10 +196,10 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
 
     final UiWidgetListTable<ContactBean> contactTable = factory.create(UiWidgetListTable.class);
     Comparator<String> sortComparator = null;
-    UiWidgetTableColumn<ContactBean, ?> columnFirstName = contactTable.createColumn(Contact.PROPERTY_FIRST_NAME, null,
-        sortComparator);
-    UiWidgetTableColumn<ContactBean, ?> columnLastName = contactTable.createColumn(Contact.PROPERTY_LAST_NAME, null,
-        sortComparator);
+    final UiWidgetTableColumn<ContactBean, ?> columnFirstName = contactTable.createColumn(Contact.PROPERTY_FIRST_NAME,
+        null, sortComparator);
+    final UiWidgetTableColumn<ContactBean, ?> columnLastName = contactTable.createColumn(Contact.PROPERTY_LAST_NAME,
+        null, sortComparator);
     contactTable.setColumns(columnFirstName, columnLastName);
 
     final List<ContactBean> contactBeanList = new ArrayList<ContactBean>();
@@ -227,6 +227,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
 
         contactBeanList.clear();
         createContacts(contactBeanList);
+        columnFirstName.sort();
       }
     });
 

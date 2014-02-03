@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterIntegerField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.IntegerSpinBox;
+import net.sf.mmm.client.ui.gwt.widgets.IntegerSpinBox;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterIntegerField} using GWT based on {@link IntegerSpinBox}.

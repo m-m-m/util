@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm-client-ui</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-client-ui-gwt</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>client-ui-gwt</name>
+  <description>GWT specific code that is provided as reusable module without requirements to also use mmm-client-ui-widget.</description>
+  <modules>
+    <module>mmm-client-ui-gwt-widgets</module>
+  </modules>
+</project>

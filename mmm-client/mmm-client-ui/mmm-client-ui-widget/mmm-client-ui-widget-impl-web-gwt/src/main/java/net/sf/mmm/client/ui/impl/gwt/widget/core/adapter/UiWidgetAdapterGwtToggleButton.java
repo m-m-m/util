@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterToggleButton;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.SimpleToggleButton;
+import net.sf.mmm.client.ui.gwt.widgets.SimpleToggleButton;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtClickable;
 
 /**

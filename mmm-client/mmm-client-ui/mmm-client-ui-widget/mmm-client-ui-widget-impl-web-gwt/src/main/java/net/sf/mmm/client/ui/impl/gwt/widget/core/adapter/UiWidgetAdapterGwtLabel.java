@@ -3,13 +3,11 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLabel;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LabelWidget;
+import net.sf.mmm.client.ui.gwt.widgets.LabelWidget;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidget;
 
-import com.google.gwt.user.client.ui.Label;
-
 /**
- * This is the implementation of {@link UiWidgetAdapterLabel} using GWT based on {@link Label}.
+ * This is the implementation of {@link UiWidgetAdapterLabel} using GWT based on {@link LabelWidget}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

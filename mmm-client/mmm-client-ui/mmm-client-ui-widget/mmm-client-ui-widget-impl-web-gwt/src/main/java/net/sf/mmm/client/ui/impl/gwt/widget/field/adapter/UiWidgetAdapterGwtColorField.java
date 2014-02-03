@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterColorField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.ColorBox;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DataList;
+import net.sf.mmm.client.ui.gwt.widgets.ColorBox;
+import net.sf.mmm.client.ui.gwt.widgets.DataList;
 import net.sf.mmm.util.datatype.api.color.Color;
 
 import com.google.gwt.user.client.ui.ComplexPanel;

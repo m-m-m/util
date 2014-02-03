@@ -9,10 +9,10 @@ import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
-import net.sf.mmm.client.ui.base.widget.complex.UiWidgetTableColumnImpl;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractListTable;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.TableRow;
+import net.sf.mmm.client.ui.gwt.widgets.TableRow;
 import net.sf.mmm.client.ui.impl.gwt.widget.complex.TableRowContainerGwt;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
@@ -57,7 +57,7 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
         SimpleCheckBox multiSelectCheckbox = gwtRow.getMultiSelectCheckbox();
         tableRow.addCell(multiSelectCheckbox);
       }
-      for (UiWidgetTableColumnImpl<ROW, ?> column : getColumns()) {
+      for (AbstractUiWidgetTableColumn<?, ROW, ?> column : getColumns()) {
         UiSingleWidgetFactory<? extends UiWidgetWithValue<?>> widgetFactory = column.getWidgetFactory();
         @SuppressWarnings("rawtypes")
         UiWidgetWithValue cellWidget;
@@ -82,11 +82,11 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
   /**
    * Determines the type of the cell from <code>column</code> and <code>cellValue</code>.
    * 
-   * @param column is the {@link UiWidgetTableColumnImpl} specifying the cells in that column.
+   * @param column is the {@link AbstractUiWidgetTableColumn} specifying the cells in that column.
    * @param cellValue is the current value for the cell. May be <code>null</code>.
    * @return the type of the values in the cell.
    */
-  private Class<?> determineCellType(UiWidgetTableColumnImpl<ROW, ?> column, Object cellValue) {
+  private Class<?> determineCellType(AbstractUiWidgetTableColumn<?, ROW, ?> column, Object cellValue) {
 
     Class<?> cellType = null;
     TypedProperty<?> typedProperty = column.getTypedProperty();

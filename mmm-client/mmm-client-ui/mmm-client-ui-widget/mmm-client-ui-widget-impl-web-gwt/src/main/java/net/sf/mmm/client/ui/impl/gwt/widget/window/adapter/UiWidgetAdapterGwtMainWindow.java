@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.VerticalFlowPanel;
+import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
 import com.google.gwt.user.client.Window;

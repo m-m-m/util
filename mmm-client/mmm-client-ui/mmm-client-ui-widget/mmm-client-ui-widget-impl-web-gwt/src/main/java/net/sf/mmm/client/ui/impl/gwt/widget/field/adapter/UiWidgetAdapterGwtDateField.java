@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.time.LocalDate;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.LocalDateBox;
+import net.sf.mmm.client.ui.gwt.widgets.LocalDateBox;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField}

@@ -8,12 +8,11 @@ import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTableColumn;
-import net.sf.mmm.client.ui.base.widget.complex.UiWidgetTableColumnImpl;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractDataTable;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.Section;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.TableHead;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.TableWidget;
+import net.sf.mmm.client.ui.gwt.widgets.Section;
+import net.sf.mmm.client.ui.gwt.widgets.TableHead;
+import net.sf.mmm.client.ui.gwt.widgets.TableWidget;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
 import net.sf.mmm.util.lang.api.SortOrder;
 
@@ -25,7 +24,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterAbstractDataTable} using GWT based on {@link FlowPanel}
- * and {@link net.sf.mmm.client.ui.impl.gwt.gwtwidgets.TableWidget}.
+ * and {@link net.sf.mmm.client.ui.gwt.widgets.TableWidget}.
  * 
  * @param <ROW> is the generic type of a row in the list.
  * 
@@ -42,7 +41,7 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
   private Section section;
 
   /** @see #setColumns(List) */
-  private List<UiWidgetTableColumnImpl<ROW, ?>> columns;
+  private List<AbstractUiWidgetTableColumn<?, ROW, ?>> columns;
 
   /**
    * The constructor.
@@ -65,7 +64,7 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
   /**
    * @return the columns
    */
-  public List<UiWidgetTableColumnImpl<ROW, ?>> getColumns() {
+  public List<AbstractUiWidgetTableColumn<?, ROW, ?>> getColumns() {
 
     return this.columns;
   }
@@ -74,7 +73,7 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  public void setColumns(List<UiWidgetTableColumnImpl<ROW, ?>> columns) {
+  public void setColumns(List<AbstractUiWidgetTableColumn<?, ROW, ?>> columns) {
 
     TableHead tableHeader = this.tableWidget.getTableHeader();
     if (this.columns != null) {

@@ -12,6 +12,7 @@ import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
@@ -31,6 +32,9 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
 
   /** @see #getListTable() */
   private final AbstractUiWidgetAbstractDataTable<?, ROW> listTable;
+
+  /** @see #getTypedProperty() */
+  private final TypedProperty<CELL> typedProperty;
 
   /** @see #setPropertyAccessor(PropertyAccessor) */
   private PropertyAccessor<ROW, CELL> propertyAccessor;
@@ -53,19 +57,28 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   /** @see #getWidgetFactory() */
   private UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory;
 
+  /** @see #getSortOrder() */
+  private SortOrder sortOrder;
+
+  /** @see #isAttached() */
+  private boolean attached;
+
   /**
    * The constructor.
    * 
    * @param context is the {@link #getContext() context}.
    * @param listTable is the {@link AbstractUiWidgetAbstractListTable list table} this column is connected to.
+   * @param typedProperty is the {@link #getTypedProperty() typed property} of the column to create. May be
+   *        <code>null</code>.
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
   public AbstractUiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW> listTable,
-      ADAPTER widgetAdapter) {
+      TypedProperty<CELL> typedProperty, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
     this.listTable = listTable;
+    this.typedProperty = typedProperty;
   }
 
   /**
@@ -81,6 +94,20 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
     adapter.setReorderable(this.reorderable);
     adapter.setResizable(this.resizable);
     // adapter.setSortable(this.sortComparator != null);
+    if (this.sortOrder != null) {
+      adapter.setSortOrder(this.sortOrder);
+    }
+  }
+
+  /**
+   * @return the {@link TypedProperty} identifying the property managed with this column. May be
+   *         <code>null</code> if the column was created with an explicit {@link #getPropertyAccessor()
+   *         property accessor}. In such case the {@link #getWidgetFactory() widget factory} shall not be
+   *         <code>null</code> or cells with <code>null</code> values can not be handled.
+   */
+  public TypedProperty<CELL> getTypedProperty() {
+
+    return this.typedProperty;
   }
 
   /**
@@ -117,6 +144,22 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   void setWidgetFactory(UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory) {
 
     this.widgetFactory = widgetFactory;
+  }
+
+  /**
+   * @return the attached
+   */
+  boolean isAttached() {
+
+    return this.attached;
+  }
+
+  /**
+   * @param attached is the attached to set
+   */
+  void setAttached(boolean attached) {
+
+    this.attached = attached;
   }
 
   /**
@@ -226,9 +269,41 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
    * {@inheritDoc}
    */
   @Override
+  public void sort() {
+
+    if (this.sortOrder == SortOrder.ASCENDING) {
+      sort(SortOrder.DESCENDING);
+    } else {
+      sort(SortOrder.ASCENDING);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void sort(SortOrder order) {
 
     this.listTable.sort(this, order);
+  }
+
+  /**
+   * @return the current {@link SortOrder} of this column. May be <code>null</code> for no order.
+   */
+  public SortOrder getSortOrder() {
+
+    return this.sortOrder;
+  }
+
+  /**
+   * @param order is the new {@link SortOrder}. May be <code>null</code> to remove order.
+   */
+  public void setSortOrder(SortOrder order) {
+
+    this.sortOrder = order;
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setSortOrder(order);
+    }
   }
 
   /**

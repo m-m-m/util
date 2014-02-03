@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.core.adapter;
 
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterSection;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.Section;
+import net.sf.mmm.client.ui.gwt.widgets.Section;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidget;
 
 /**

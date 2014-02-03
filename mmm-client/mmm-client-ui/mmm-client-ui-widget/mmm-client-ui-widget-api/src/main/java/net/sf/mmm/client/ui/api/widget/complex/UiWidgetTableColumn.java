@@ -27,6 +27,11 @@ public interface UiWidgetTableColumn<ROW, CELL> extends UiWidget, HasValueValida
     AttributeWriteEditable, AttributeWriteResizable, AttributeWriteReorderable, AttributeWriteSortComparator<CELL> {
 
   /**
+   * Like {@link #sort(SortOrder)} but will toggle the {@link SortOrder} state of this column.
+   */
+  void sort();
+
+  /**
    * This method sorts the {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable#getValue()
    * table-data} according to this column using the {@link #getSortComparator() sort-comparator} and the given
    * <code>order</code>.

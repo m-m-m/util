@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDoubleField;
-import net.sf.mmm.client.ui.impl.gwt.gwtwidgets.DoubleSpinBox;
+import net.sf.mmm.client.ui.gwt.widgets.DoubleSpinBox;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using GWT
