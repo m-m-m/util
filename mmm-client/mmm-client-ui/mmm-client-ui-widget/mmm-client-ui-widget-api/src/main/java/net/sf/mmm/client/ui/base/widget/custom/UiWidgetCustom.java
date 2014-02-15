@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
 import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
@@ -363,6 +364,42 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
   public final void setSize(Length width, Length height) {
 
     this.delegate.setSize(width, height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Length getLength(LengthProperty property) {
+
+    return this.delegate.getLength(property);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setLength(LengthProperty property, Length value) {
+
+    this.delegate.setLength(property, value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public double getWidthInPixel() {
+
+    return getDelegate().getWidthInPixel();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public double getHeightInPixel() {
+
+    return getDelegate().getHeightInPixel();
   }
 
   /**

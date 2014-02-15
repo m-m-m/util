@@ -11,12 +11,12 @@ import com.google.gwt.core.client.UnsafeNativeLong;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class JavaScriptBlob extends JavaScriptObject {
+public class JsBlob extends JavaScriptObject {
 
   /**
    * The constructor.
    */
-  protected JavaScriptBlob() {
+  protected JsBlob() {
 
     super();
   }

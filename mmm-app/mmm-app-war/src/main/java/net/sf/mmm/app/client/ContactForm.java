@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetCollapsableSection;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetColorField;
@@ -58,8 +58,8 @@ public class ContactForm extends UiWidgetCustomGridPanel<ContactBean> {
     richTextField.setLabel("RichText");
     getDelegate().addChildren(richTextField);
 
-    UiWidgetRadioButtonsField<SizeUnit> radios = context.getWidgetFactory().create(UiWidgetRadioButtonsField.class);
-    radios.setOptions(Arrays.asList(SizeUnit.values()));
+    UiWidgetRadioButtonsField<LengthUnit> radios = context.getWidgetFactory().create(UiWidgetRadioButtonsField.class);
+    radios.setOptions(Arrays.asList(LengthUnit.values()));
     radios.setLabel("Unit");
     getDelegate().addChildren(radios);
 

@@ -12,8 +12,9 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
 import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
+import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
-import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
@@ -42,6 +43,9 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -305,7 +309,8 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   @Override
   protected void applyEventAdapterForSelection(EventAdapterGwt adapter) {
 
-    getGwtTree().addSelectionHandler((EventAdapterGwtTree) adapter);
+    HandlerRegistration registration = getGwtTree().addSelectionHandler((EventAdapterGwtTree) adapter);
+    addHandlerRegistration(registration);
   }
 
   /**
@@ -405,18 +410,9 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
    * {@inheritDoc}
    */
   @Override
-  public void setHeight(Length height) {
+  protected Element getSizeElement() {
 
-    getScrollPanel().setHeight(height.toString());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidth(Length width) {
-
-    getScrollPanel().setWidth(width.toString());
+    return getScrollPanel().getElement();
   }
 
   /**
@@ -595,6 +591,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
         default :
           throw new IllegalCaseException(SelectionMode.class, UiWidgetAdapterGwtTree.this.selectionMode);
       }
+
     }
 
     /**
@@ -824,24 +821,6 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      * {@inheritDoc}
      */
     @Override
-    public void setPrimaryStyle(String primaryStyle) {
-
-      setStylePrimaryName(primaryStyle);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setStyles(String styles) {
-
-      super.setStyleName(styles);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public UiContext getContext() {
 
       return getUiWidget().getContext();
@@ -872,6 +851,24 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     public boolean removeEventHandler(UiHandlerEvent handler) {
 
       return this.nodeWidget.removeEventHandler(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrimaryStyle(String primaryStyle) {
+
+      setStylePrimaryName(primaryStyle);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setStyles(String styles) {
+
+      super.setStyleName(styles);
     }
 
     /**
@@ -925,6 +922,25 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      * {@inheritDoc}
      */
     @Override
+    public void setLength(LengthProperty property, Length length) {
+
+      DOM.setStyleAttribute(getElement(), property.getMemberName(), length.toString());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Length getLength(LengthProperty property) {
+
+      String value = DOM.getStyleAttribute(getSizeElement(), property.getMemberName());
+      return new Length(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Role getAriaRole() {
 
       return this.nodeWidget.getAriaRole();
@@ -934,10 +950,27 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      * {@inheritDoc}
      */
     @Override
+    public double getWidthInPixel() {
+
+      return getOffsetWidth();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getHeightInPixel() {
+
+      return getOffsetHeight();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Length getWidth() {
 
-      // TODO Auto-generated method stub
-      return null;
+      return Length.valueOfPixel(getWidthInPixel());
     }
 
     /**
@@ -946,8 +979,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     @Override
     public Length getHeight() {
 
-      // TODO Auto-generated method stub
-      return null;
+      return Length.valueOfPixel(getHeightInPixel());
     }
 
     /**
@@ -1046,7 +1078,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      * {@inheritDoc}
      */
     @Override
-    public void setSize(double width, double height, SizeUnit unit) {
+    public void setSize(double width, double height, LengthUnit unit) {
 
       setSize(new Length(width, unit), new Length(height, unit));
     }

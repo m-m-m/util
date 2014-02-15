@@ -10,12 +10,12 @@ import com.google.gwt.core.client.JavaScriptObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class JavaScriptSelection extends JavaScriptObject {
+public class JsSelection extends JavaScriptObject {
 
   /**
    * The constructor.
    */
-  protected JavaScriptSelection() {
+  protected JsSelection() {
 
     super();
   }

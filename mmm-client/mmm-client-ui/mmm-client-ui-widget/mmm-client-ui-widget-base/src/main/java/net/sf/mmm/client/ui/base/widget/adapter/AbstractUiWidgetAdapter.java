@@ -16,7 +16,6 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadResizable;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadSelectionMode;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadUrl;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadValidationFailure;
-import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
@@ -103,9 +102,29 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   }
 
   /**
+   * This method gives access to the {@link AbstractUiWidgetNative native UI widget} wrapping this widget
+   * adapter. <br/>
+   * <b>ATTENTION:</b><br/>
+   * For the most cases the call hierarchy should go from the widget to the widget adapter. Only access this
+   * method when required (to avoid redundant storage of attributes, etc.).
+   * 
    * @return the {@link AbstractUiWidgetNative UI widget} wrapping this widget adapter.
    */
-  public AbstractUiWidgetNative<?, ?> getUiWidget() {
+  public final AbstractUiWidgetNative<?, ?> getUiWidget() {
+
+    return this.uiWidget;
+  }
+
+  /**
+   * This method is a design suggestion for implementations of widget adapters that need typed access to
+   * {@link #getUiWidget()} and want to perform the cast only in a single place. If you would override
+   * {@link #getUiWidget()} to add the cast and do that multiple times across the inheritance hierarchy this
+   * would cause multiple/unnecessary casts. Casting is required as we already declare enough generics for
+   * widget adapters and also want to keep the code more flexible.
+   * 
+   * @return the {@link #getUiWidget() UiWidget} potentially specifically typed.
+   */
+  protected AbstractUiWidgetNative<?, ?> getUiWidgetTyped() {
 
     return this.uiWidget;
   }
@@ -163,16 +182,6 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   public void setMode(boolean editMode) {
 
     // do nothing by default
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(Length width, Length height) {
-
-    setWidth(width);
-    setHeight(height);
   }
 
   /**

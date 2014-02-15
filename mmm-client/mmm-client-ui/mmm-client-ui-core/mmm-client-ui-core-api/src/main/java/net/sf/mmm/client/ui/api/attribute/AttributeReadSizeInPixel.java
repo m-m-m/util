@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.api.attribute;
 
 /**
  * This interface gives read access to the size of an object in
- * {@link net.sf.mmm.client.ui.api.common.SizeUnit#PIXEL}.
+ * {@link net.sf.mmm.client.ui.api.common.LengthUnit#PIXEL}.
  * 
  * @see AttributeReadSize
  * 

@@ -11,7 +11,8 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteModified;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteOnlyFocused;
 import net.sf.mmm.client.ui.api.common.Length;
-import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
+import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.event.UiEvent;
@@ -234,7 +235,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * {@inheritDoc}
    */
   @Override
-  public final void setValue(VALUE newValue, boolean forUser) {
+  public void setValue(VALUE newValue, boolean forUser) {
 
     if ((this.dataBinding == null) && (newValue != null)) {
       if (getValueClass() == null) {
@@ -243,6 +244,20 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
     }
     getDataBinding().setValue(newValue, forUser);
     fireValueChange(true);
+  }
+
+  /**
+   * Converts the given value to {@link String}.
+   * 
+   * @param value is the value to convert.
+   * @return the {@link String} representation to display the given <code>value</code>.
+   */
+  protected String convertValueToString(VALUE value) {
+
+    if (value == null) {
+      return "";
+    }
+    return value.toString();
   }
 
   /**
@@ -546,9 +561,55 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * {@inheritDoc}
    */
   @Override
-  public void setSize(double widthAmount, double heightAmount, SizeUnit unit) {
+  public void setSize(double widthAmount, double heightAmount, LengthUnit unit) {
 
     setSize(unit.newLength(widthAmount), unit.newLength(heightAmount));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSize(Length width, Length height) {
+
+    setWidth(width);
+    setHeight(height);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Length getWidth() {
+
+    return getLength(LengthProperty.WIDTH);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWidth(Length width) {
+
+    setLength(LengthProperty.WIDTH, width);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Length getHeight() {
+
+    return getLength(LengthProperty.HEIGHT);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setHeight(Length height) {
+
+    setLength(LengthProperty.HEIGHT, height);
   }
 
   /**
@@ -823,6 +884,19 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
     public static void clearValidity(AbstractUiWidget<?> widget) {
 
       widget.clearValidity();
+    }
+
+    /**
+     * @see AbstractUiWidget#convertValueToString(Object)
+     * 
+     * @param <VALUE> - see {@link AbstractUiWidget#convertValueToString(Object)}.
+     * @param widget is the {@link AbstractUiWidget}.
+     * @param value - see {@link AbstractUiWidget#convertValueToString(Object)}.
+     * @return - see {@link AbstractUiWidget#convertValueToString(Object)}.
+     */
+    public static <VALUE> String convertValueToString(AbstractUiWidget<VALUE> widget, VALUE value) {
+
+      return widget.convertValueToString(value);
     }
   }
 

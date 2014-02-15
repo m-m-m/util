@@ -3,10 +3,11 @@
 package net.sf.mmm.client.ui.base.widget.adapter;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAttribute;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteSize;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteLengthProperty;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
@@ -30,7 +31,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
  * @since 1.0.0
  */
 public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteTooltip, AttributeWriteEnabled,
-    AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteSize, AttributeWriteAttribute {
+    AttributeWriteStylesAdvanced, AttributeWriteDisposed, AttributeWriteLengthProperty, AttributeReadSizeInPixel,
+    AttributeWriteAttribute {
 
   /**
    * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)

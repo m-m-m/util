@@ -8,6 +8,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterComboboxFie
 import net.sf.mmm.client.ui.gwt.widgets.ComboBox;
 import net.sf.mmm.client.ui.gwt.widgets.DataList;
 
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.HasValue;
 
@@ -80,9 +81,6 @@ public class UiWidgetAdapterGwtComboBoxField<VALUE> extends
   @Override
   public void setOptions(List<String> options) {
 
-    if (isViewOnly()) {
-      return;
-    }
     getDataList().setOptions(options);
   }
 
@@ -93,5 +91,14 @@ public class UiWidgetAdapterGwtComboBoxField<VALUE> extends
   protected HasValue<String> getWidgetAsTakesValue() {
 
     return getActiveWidget();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TakesValue<String> getWidgetAsTakesValueString() {
+
+    return getWidgetAsTakesValue();
   }
 }

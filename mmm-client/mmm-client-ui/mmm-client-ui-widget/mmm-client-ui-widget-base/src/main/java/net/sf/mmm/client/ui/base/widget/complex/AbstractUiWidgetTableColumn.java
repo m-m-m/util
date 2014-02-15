@@ -63,6 +63,9 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   /** @see #isAttached() */
   private boolean attached;
 
+  /** @see #getCurrentIndex() */
+  private int currentIndex;
+
   /**
    * The constructor.
    * 
@@ -79,6 +82,8 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
     super(context, widgetAdapter);
     this.listTable = listTable;
     this.typedProperty = typedProperty;
+    // initialize default width
+    setWidthInPixel(50);
   }
 
   /**
@@ -269,6 +274,15 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
    * {@inheritDoc}
    */
   @Override
+  public boolean isSortable() {
+
+    return (this.sortComparator == null);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void sort() {
 
     if (this.sortOrder == SortOrder.ASCENDING) {
@@ -312,6 +326,24 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   public AbstractUiWidgetAbstractDataTable<?, ROW> getListTable() {
 
     return this.listTable;
+  }
+
+  /**
+   * @return the current index of this column according to the actual order of the columns. This may change
+   *         due to {@link #isReorderable() reordering} or internal technical columns (e.g. row-numbers or
+   *         checkboxes for multi-selection).
+   */
+  public int getCurrentIndex() {
+
+    return this.currentIndex;
+  }
+
+  /**
+   * @param currentIndex is the new value of {@link #getCurrentIndex()}.
+   */
+  public void setCurrentIndex(int currentIndex) {
+
+    this.currentIndex = currentIndex;
   }
 
 }

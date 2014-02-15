@@ -114,7 +114,8 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
   @Override
   protected void applyEventAdapterForClick(EventAdapterGwt adapter) {
 
-    getToplevelWidget().addDomHandler(adapter, ClickEvent.getType());
+    HandlerRegistration registration = getToplevelWidget().addDomHandler(adapter, ClickEvent.getType());
+    addHandlerRegistration(registration);
   }
 
   /**
@@ -125,11 +126,13 @@ public abstract class UiWidgetAdapterGwtWidgetActive<WIDGET extends Widget> exte
 
     HasFocusHandlers focusHandlers = getWidgetAsHasFocusHandlers();
     if (focusHandlers != null) {
-      focusHandlers.addFocusHandler(adapter);
+      HandlerRegistration registration = focusHandlers.addFocusHandler(adapter);
+      addHandlerRegistration(registration);
     }
     HasBlurHandlers blurHandlers = getWidgetAsHasBlurHandlers();
     if (blurHandlers != null) {
-      blurHandlers.addBlurHandler(adapter);
+      HandlerRegistration registration = blurHandlers.addBlurHandler(adapter);
+      addHandlerRegistration(registration);
     }
   }
 

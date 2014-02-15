@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextualInputField;
 
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.TextBox;
 
 /**
@@ -34,6 +35,15 @@ public abstract class UiWidgetAdapterGwtTextBoxBase<WIDGET extends TextBox, VALU
   public void setMaximumTextLength(int length) {
 
     getActiveWidget().setMaxLength(length);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TakesValue<String> getWidgetAsTakesValueString() {
+
+    return getWidgetAsTakesValue();
   }
 
 }

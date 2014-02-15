@@ -5,8 +5,10 @@ package net.sf.mmm.client.ui.api.widget;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadAriaRole;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadModified;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEnabled;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteHtmlId;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteLengthProperty;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSizeAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStylesAdvanced;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTooltip;
@@ -45,8 +47,8 @@ import net.sf.mmm.util.validation.api.AbstractValidatableObject;
  */
 public abstract interface UiWidget extends UiFeatureMessages, UiFeatureEvent, UiFeatureMode, AttributeWriteHtmlId,
     AttributeWriteTooltip, AttributeWriteVisibleAdvanced, AttributeWriteEnabled, AttributeWriteStylesAdvanced,
-    AttributeWriteDisposed, AttributeWriteSizeAdvanced, AttributeReadModified, AttributeReadAriaRole,
-    AbstractValidatableObject {
+    AttributeWriteDisposed, AttributeWriteSizeAdvanced, AttributeWriteLengthProperty, AttributeReadSizeInPixel,
+    AttributeReadModified, AttributeReadAriaRole, AbstractValidatableObject {
 
   /** The {@link #addStyle(String) style} for a header element. */
   String STYLE_HEADER = "Header";
@@ -66,5 +68,29 @@ public abstract interface UiWidget extends UiFeatureMessages, UiFeatureEvent, Ui
    * @return the {@link UiContext}.
    */
   UiContext getContext();
+
+  /**
+   * While {@link #getLength(net.sf.mmm.client.ui.api.common.LengthProperty)} or {@link #getWidth()} will only
+   * return the {@link net.sf.mmm.client.ui.api.common.Length} value that has been set before (e.g. 50%),
+   * {@link #getWidthInPixel()} will determine the actual width in
+   * {@link net.sf.mmm.client.ui.api.common.LengthUnit#PIXEL pixels}. Therefore this widget should already be
+   * attached (added to a parent visible on the screen).
+   * 
+   * {@inheritDoc}
+   */
+  @Override
+  double getWidthInPixel();
+
+  /**
+   * While {@link #getLength(net.sf.mmm.client.ui.api.common.LengthProperty)} or {@link #getHeight()} will
+   * only return the {@link net.sf.mmm.client.ui.api.common.Length} value that has been set before (e.g. 50%),
+   * {@link #getHeightInPixel()} will determine the actual height in
+   * {@link net.sf.mmm.client.ui.api.common.LengthUnit#PIXEL pixels}. Therefore this widget should already be
+   * attached (added to a parent visible on the screen).
+   * 
+   * {@inheritDoc}
+   */
+  @Override
+  double getHeightInPixel();
 
 }

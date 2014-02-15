@@ -12,8 +12,10 @@ import net.sf.mmm.app.client.dialog.DialogControllerFactoryImpl;
 import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.base.gwt.dialog.DialogManagerImplGwt;
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
+import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
-import net.sf.mmm.client.ui.api.common.SizeUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.event.UiEvent;
@@ -45,7 +47,6 @@ import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuItemClickable;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetCollapsableBorderPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
-import net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
@@ -155,14 +156,14 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     optionsMenuItem.setLabel("Options");
     settingsMenu.addChild(optionsMenuItem);
 
-    UiWidgetTabPanel tabPanel = factory.create(UiWidgetTabPanel.class);
+    // UiWidgetTabPanel tabPanel = factory.create(UiWidgetTabPanel.class);
 
     UiWidgetVerticalPanel verticalPanel1 = factory.create(UiWidgetVerticalPanel.class);
     UiWidgetLabel label1 = factory.create(UiWidgetLabel.class);
     label1.setLabel("label1");
     verticalPanel1.addChild(label1);
     // final UiWidgetTab tab1 =
-    tabPanel.addChild(verticalPanel1, "Tab1");
+    // tabPanel.addChild(verticalPanel1, "Tab1");
 
     // UiWidgetGridPanel gridPanel = factory.create(UiWidgetGridPanel.class);
     // final UiWidgetTextField textField1 = factory.create(UiWidgetTextField.class);
@@ -200,7 +201,16 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         null, sortComparator);
     final UiWidgetTableColumn<ContactBean, ?> columnLastName = contactTable.createColumn(Contact.PROPERTY_LAST_NAME,
         null, sortComparator);
-    contactTable.setColumns(columnFirstName, columnLastName);
+    final UiWidgetTableColumn<ContactBean, ?> columnIncome = contactTable.createColumn(Contact.PROPERTY_INCOME, null,
+        null);
+    // final UiWidgetTableColumn<ContactBean, ?> columnBirthday =
+    // contactTable.createColumn(Contact.PROPERTY_BIRTHDAY, null, null);
+    columnFirstName.setLength(LengthProperty.MIN_WIDTH, Length.valueOfPixel(20));
+    columnFirstName.setLength(LengthProperty.WIDTH, Length.valueOfPixel(100));
+    columnFirstName.setLength(LengthProperty.MAX_WIDTH, Length.valueOfPixel(200));
+    columnLastName.setLength(LengthProperty.MIN_WIDTH, Length.valueOfPixel(50));
+    columnLastName.setLength(LengthProperty.WIDTH, Length.valueOfPixel(400));
+    contactTable.setColumns(columnFirstName, columnLastName, columnIncome);
 
     final List<ContactBean> contactBeanList = new ArrayList<ContactBean>();
     createContacts(contactBeanList);
@@ -236,7 +246,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     UiWidgetVerticalPanel verticalPanel2 = factory.create(UiWidgetVerticalPanel.class);
     final UiWidgetLabel label2 = factory.create(UiWidgetLabel.class);
     // final UiWidgetTab tab2 =
-    tabPanel.addChild(verticalPanel2, "Tab2");
+    // tabPanel.addChild(verticalPanel2, "Tab2");
     label2.setLabel("label2");
     verticalPanel2.addChild(label2);
     UiWidgetButton button1 = factory.create(UiWidgetButton.class);
@@ -354,13 +364,13 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
 
         label2.setLabel(mainWindow.getWidthInPixel() + "x" + mainWindow.getHeightInPixel());
         mainWindow.setPosition(mainWindow.getPositionX() - 5, mainWindow.getPositionY() - 5);
-        mainWindow.setSize(mainWindow.getWidthInPixel() + 1, mainWindow.getHeightInPixel() + 1, SizeUnit.PIXEL);
+        mainWindow.setSize(mainWindow.getWidthInPixel() + 1, mainWindow.getHeightInPixel() + 1, LengthUnit.PIXEL);
       }
     });
 
     UiWidgetTree<String> tree = factory.create(UiWidgetTree.class);
     tree.setTitle("Tree");
-    tree.setSize(300, 300, SizeUnit.PIXEL);
+    tree.setSize(300, 300, LengthUnit.PIXEL);
     tree.setSelectionMode(SelectionMode.MULTIPLE_SELECTION);
     UiTreeModelDummy model = new UiTreeModelDummy();
     tree.setTreeModel(model);
@@ -368,7 +378,8 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     tree.setValue(model.getRootNode());
     verticalPanel2.addChild(tree);
 
-    mainWindow.addChild(tabPanel);
+    mainWindow.addChild(verticalPanel1);
+    mainWindow.addChild(verticalPanel2);
 
     UiWidgetDateField dateField = factory.create(UiWidgetDateField.class);
     verticalPanel2.addChild(dateField);
@@ -557,6 +568,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
       String suffix = i + " of " + rnd;
       contact.setFirstName("First " + suffix);
       contact.setLastName("Last " + suffix);
+      contact.setIncome(i + 0.001D);
       contactBeanList.add(contact);
     }
   }

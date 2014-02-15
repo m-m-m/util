@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
-import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField;
@@ -243,19 +243,19 @@ public class UiWidgetFieldTest extends AbstractUiTest {
   @Test
   public void testComboboxField() {
 
-    UiWidgetComboboxField<SizeUnit> widget = getContext().getWidgetFactory().create(UiWidgetComboboxField.class);
+    UiWidgetComboboxField<LengthUnit> widget = getContext().getWidgetFactory().create(UiWidgetComboboxField.class);
     checkOptionsField(widget);
   }
 
   /**
-   * Tests the given <code>widget</code> using {@link SizeUnit#values()} as options and testing some values.
+   * Tests the given <code>widget</code> using {@link LengthUnit#values()} as options and testing some values.
    * 
    * @param widget is the widget to test.
    */
-  private void checkOptionsField(UiWidgetOptionsField<SizeUnit> widget) {
+  private void checkOptionsField(UiWidgetOptionsField<LengthUnit> widget) {
 
-    widget.setOptions(Arrays.asList(SizeUnit.values()));
-    checkWidgetWithStringAdapterValue(widget, SizeUnit.PIXEL, SizeUnit.PERCENT);
+    widget.setOptions(Arrays.asList(LengthUnit.values()));
+    checkWidgetWithStringAdapterValue(widget, LengthUnit.PIXEL, LengthUnit.PERCENT);
   }
 
   /**
@@ -367,7 +367,7 @@ public class UiWidgetFieldTest extends AbstractUiTest {
   @Test
   public void testRadiobuttonsField() {
 
-    UiWidgetRadioButtonsField<SizeUnit> widget = getContext().getWidgetFactory()
+    UiWidgetRadioButtonsField<LengthUnit> widget = getContext().getWidgetFactory()
         .create(UiWidgetRadioButtonsField.class);
     checkOptionsField(widget);
   }
@@ -378,7 +378,7 @@ public class UiWidgetFieldTest extends AbstractUiTest {
   @Test
   public void testRadiobuttonsVerticalField() {
 
-    UiWidgetRadioButtonsVerticalField<SizeUnit> widget = getContext().getWidgetFactory().create(
+    UiWidgetRadioButtonsVerticalField<LengthUnit> widget = getContext().getWidgetFactory().create(
         UiWidgetRadioButtonsVerticalField.class);
     checkOptionsField(widget);
   }

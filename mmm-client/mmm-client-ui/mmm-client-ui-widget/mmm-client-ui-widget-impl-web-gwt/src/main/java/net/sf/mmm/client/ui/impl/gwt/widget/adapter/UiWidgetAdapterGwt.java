@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteImage;
 import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
@@ -15,6 +16,8 @@ import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.UIObject;
@@ -197,38 +200,49 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
    * {@inheritDoc}
    */
   @Override
-  public Length getWidth() {
+  public Length getLength(LengthProperty property) {
 
-    int width = getToplevelWidget().getOffsetWidth();
-    return Length.valueOfPixel(width);
+    String value = DOM.getStyleAttribute(getSizeElement(), property.getMemberName());
+    if ((value == null) || (value.length() == 0)) {
+      return property.getDefaultValue();
+    }
+    return new Length(value);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Length getHeight() {
+  public void setLength(LengthProperty property, Length length) {
 
-    int heigth = getToplevelWidget().getOffsetHeight();
-    return Length.valueOfPixel(heigth);
+    DOM.setStyleAttribute(getSizeElement(), property.getMemberName(), length.toString());
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setWidth(Length width) {
+  public double getWidthInPixel() {
 
-    getToplevelWidget().setWidth(width.toString());
+    return getSizeElement().getOffsetWidth();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setHeight(Length height) {
+  public double getHeightInPixel() {
 
-    getToplevelWidget().setHeight(height.toString());
+    return getSizeElement().getOffsetHeight();
+  }
+
+  /**
+   * @return the sized {@link Element} used by {@link #getLength(LengthProperty)} and
+   *         {@link #setLength(LengthProperty, Length)}.
+   */
+  protected Element getSizeElement() {
+
+    return getToplevelWidget().getElement();
   }
 
   /**
@@ -302,6 +316,18 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
 
     return GWT.getModuleBaseURL() + "gwt/" + getUiWidget().getContext().getConfiguration().getTheme() + "/images/"
         + relativePath;
+  }
+
+  /**
+   * This method should be called with the {@link HandlerRegistration} for all permanent handlers. This allows
+   * to remove them on {@link #dispose() disposal}.
+   * 
+   * @param registration is the {@link HandlerRegistration} to add.
+   */
+  protected void addHandlerRegistration(HandlerRegistration registration) {
+
+    // currently ignored, we might add them to a lazy allocated collection and remove them all on dispose...
+    // http://www.draconianoverlord.com/2010/11/23/gwt-handlers.html
   }
 
 }

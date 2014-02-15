@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a simple 2-dimensional point measured in
- * {@link SizeUnit#PIXEL pixels}.
+ * {@link LengthUnit#PIXEL pixels}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -44,7 +44,7 @@ public class Point extends AbstractSimpleDatatypeBase {
   }
 
   /**
-   * @return the x-position of this {@link Point} in {@link SizeUnit#PIXEL pixel}.
+   * @return the x-position of this {@link Point} in {@link LengthUnit#PIXEL pixel}.
    */
   public int getX() {
 
@@ -52,7 +52,7 @@ public class Point extends AbstractSimpleDatatypeBase {
   }
 
   /**
-   * @return the y-position of this {@link Point} in {@link SizeUnit#PIXEL pixel}.
+   * @return the y-position of this {@link Point} in {@link LengthUnit#PIXEL pixel}.
    */
   public int getY() {
 

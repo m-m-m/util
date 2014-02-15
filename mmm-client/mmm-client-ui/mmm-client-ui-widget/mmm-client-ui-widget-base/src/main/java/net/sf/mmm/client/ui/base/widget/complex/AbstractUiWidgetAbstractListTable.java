@@ -65,7 +65,7 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
    * 
    * @return the {@link List} with all rows of this list table.
    */
-  List<TableRowContainer<ROW>> getRowsInternal() {
+  public List<TableRowContainer<ROW>> getRowsInternal() {
 
     return this.rows;
   }
@@ -77,9 +77,10 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
   public void addRow(ROW row) {
 
     TableRowContainer<ROW> rowContainer = createRowContainer(row);
+    int index = this.rows.size();
     this.rows.add(rowContainer);
     if (hasWidgetAdapter()) {
-      // getWidgetAdapter().addRow(row);
+      getWidgetAdapter().addRow(rowContainer, index);
     }
   }
 
@@ -92,7 +93,7 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
     TableRowContainer<ROW> rowContainer = createRowContainer(row);
     this.rows.add(index, rowContainer);
     if (hasWidgetAdapter()) {
-      // getWidgetAdapter().addRow(row, index);
+      getWidgetAdapter().addRow(rowContainer, index);
     }
   }
 
@@ -123,7 +124,7 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
     }
     this.rows.remove(rowContainer);
     if (hasWidgetAdapter()) {
-      // getWidgetAdapter().removeRow(row);
+      getWidgetAdapter().removeRow(rowContainer);
     }
     return true;
   }
@@ -162,9 +163,9 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
     if (selected) {
       selection.add(rowContainer);
     }
-    if (hasWidgetAdapter()) {
-      // getWidgetAdapter().setRow(index, newRow);
-    }
+    // if (hasWidgetAdapter()) {
+    // getWidgetAdapter().setRow(newRow, index);
+    // }
     return true;
   }
 
@@ -189,7 +190,7 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
     this.comparator.sort(this.rows, column, sortOrder);
     super.sort(column, sortOrder);
     if (hasWidgetAdapter()) {
-      // getWidgetAdapter().updateRows();
+      getWidgetAdapter().sort(column, sortOrder);
     }
   }
 

@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.api.common;
 
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
-import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
@@ -25,41 +24,44 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * <tr>
  * <td>12px</td>
  * <td>12.0</td>
- * <td>{@link SizeUnit#PIXEL}</td>
+ * <td>{@link LengthUnit#PIXEL}</td>
  * </tr>
  * <tr>
  * <td>100%</td>
  * <td>100.0</td>
- * <td>{@link SizeUnit#PERCENT}</td>
+ * <td>{@link LengthUnit#PERCENT}</td>
  * </tr>
  * <tr>
  * <td>0.8em</td>
  * <td>0.8</td>
- * <td>{@link SizeUnit#EM}</td>
+ * <td>{@link LengthUnit#EM}</td>
  * </tr>
  * </table>
  * 
- * @see SizeUnit#newLength(double)
+ * @see LengthUnit#newLength(double)
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Length extends AbstractSimpleDatatypeBase<String> implements SimpleDatatype<String> {
+public class Length extends AbstractSimpleDatatypeBase<String> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -2672855069930598174L;
 
   /** The empty {@link Length}. */
-  public static final Length ZERO = new Length(0, SizeUnit.PIXEL);
+  public static final Length ZERO = new Length(0, LengthUnit.PIXEL);
+
+  /** The maximum {@link Length}. */
+  public static final Length MAX = new Length(Double.MAX_VALUE, LengthUnit.PIXEL);
 
   /** The full {@link Length} as "100%". */
-  public static final Length FULL = new Length(100, SizeUnit.PERCENT);
+  public static final Length FULL = new Length(100, LengthUnit.PERCENT);
 
   /** @see #getAmount() */
   private double amount;
 
   /** @see #getUnit() */
-  private SizeUnit unit;
+  private LengthUnit unit;
 
   /**
    * The constructor.
@@ -75,10 +77,10 @@ public class Length extends AbstractSimpleDatatypeBase<String> implements Simple
    * @param value is the {@link #getAmount() value}.
    * @param unit is the {@link #getUnit() unit}.
    */
-  public Length(double value, SizeUnit unit) {
+  public Length(double value, LengthUnit unit) {
 
     super();
-    NlsNullPointerException.checkNotNull(SizeUnit.class, unit);
+    NlsNullPointerException.checkNotNull(LengthUnit.class, unit);
     this.unit = unit;
     this.amount = value;
   }
@@ -92,7 +94,7 @@ public class Length extends AbstractSimpleDatatypeBase<String> implements Simple
 
     super();
     NlsNullPointerException.checkNotNull("size", size);
-    for (SizeUnit sizeUnit : SizeUnit.values()) {
+    for (LengthUnit sizeUnit : LengthUnit.values()) {
       String unitString = sizeUnit.getValue();
       if (size.endsWith(unitString)) {
         this.unit = sizeUnit;
@@ -130,35 +132,35 @@ public class Length extends AbstractSimpleDatatypeBase<String> implements Simple
   }
 
   /**
-   * This method gets the {@link SizeUnit unit} of the {@link #getAmount() value}.
+   * This method gets the {@link LengthUnit unit} of the {@link #getAmount() value}.
    * 
-   * @return the {@link SizeUnit}.
+   * @return the {@link LengthUnit}.
    */
-  public SizeUnit getUnit() {
+  public LengthUnit getUnit() {
 
     return this.unit;
   }
 
   /**
-   * Creates a new {@link Length} with {@link #getUnit() unit} {@link SizeUnit#PERCENT}.
+   * Creates a new {@link Length} with {@link #getUnit() unit} {@link LengthUnit#PERCENT}.
    * 
    * @param amount is the {@link #getAmount() amount}.
    * @return the new {@link Length}.
    */
   public static Length valueOfPercent(double amount) {
 
-    return SizeUnit.PERCENT.newLength(amount);
+    return LengthUnit.PERCENT.newLength(amount);
   }
 
   /**
-   * Creates a new {@link Length} with {@link #getUnit() unit} {@link SizeUnit#PERCENT}.
+   * Creates a new {@link Length} with {@link #getUnit() unit} {@link LengthUnit#PERCENT}.
    * 
    * @param amount is the {@link #getAmount() amount}.
    * @return the new {@link Length}.
    */
   public static Length valueOfPixel(double amount) {
 
-    return SizeUnit.PIXEL.newLength(amount);
+    return LengthUnit.PIXEL.newLength(amount);
   }
 
 }

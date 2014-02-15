@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.api.widget.field;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTrimValue;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteValueAsString;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
@@ -37,7 +38,8 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
  * @since 1.0.0
  */
 public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<UiWidget>, UiWidgetWithValue<VALUE>,
-    AttributeWriteValidationFailure, AttributeWriteTrimValue, AttributeWriteLabel, UiWidgetActive {
+    AttributeWriteValueAsString, AttributeWriteValidationFailure, AttributeWriteTrimValue, AttributeWriteLabel,
+    UiWidgetActive {
 
   /** The default top-level {@link #hasStyle(String) style} of this widget. */
   String STYLE_FIELD = "Field";
@@ -101,25 +103,5 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
    * @return the associated label widget.
    */
   UiWidgetLabel getLabelWidget();
-
-  /**
-   * This method determines if this field is set to <em>viewOnly</em>. In such case the field does not support
-   * {@link net.sf.mmm.client.ui.api.common.UiMode#isEditable() editing} and is therefore internally more
-   * lightweight. This is especially helpful for complex widgets such as
-   * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable} that create many widgets only to view
-   * data and need to save overhead for better performance.
-   * 
-   * @return <code>true</code> if this field mode, <code>false</code> otherwise.
-   */
-  boolean isViewOnly();
-
-  /**
-   * Sets the {@link #isViewOnly() view only} flag to <code>true</code>. Must be called before the widget is
-   * {@link net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite#addChild(UiWidget) attached}. This is
-   * useful to create a more lightweight widget to save overhead if the field is only used to display values.
-   * Will also {@link #setModeFixed(net.sf.mmm.client.ui.api.common.UiMode) fix} this field to
-   * {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW} what can not be changed afterwards.
-   */
-  void setViewOnly();
 
 }

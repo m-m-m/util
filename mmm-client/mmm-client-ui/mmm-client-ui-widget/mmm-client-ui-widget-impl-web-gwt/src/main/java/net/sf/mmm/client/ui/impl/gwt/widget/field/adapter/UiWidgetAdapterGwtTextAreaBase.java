@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTextAreaFieldBase;
 
 import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
 
@@ -34,6 +35,15 @@ public abstract class UiWidgetAdapterGwtTextAreaBase<WIDGET extends FocusWidget 
   public void setMaximumTextLength(int length) {
 
     getToplevelWidget().getElement().setAttribute("maxlength", Integer.toString(length));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TakesValue<String> getWidgetAsTakesValueString() {
+
+    return getWidgetAsTakesValue();
   }
 
 }

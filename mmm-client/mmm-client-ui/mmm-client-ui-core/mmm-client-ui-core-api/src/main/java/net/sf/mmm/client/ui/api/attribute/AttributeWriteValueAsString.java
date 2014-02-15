@@ -14,11 +14,11 @@ public abstract interface AttributeWriteValueAsString extends AttributeReadValue
   /**
    * This method sets the {@link #getValueAsString() valueAsString} of this object. <br/>
    * <b>ATTENTION:</b><br/>
-   * This method shall only be used in very specific situations. Use it if you explicitly want to enter
+   * This method shall only be used in very specific situations. Use it e.g. if you explicitly want to enter
    * invalid data.
    * 
-   * @param url is the new {@link #getValueAsString() value} as it would have been entered by the user.
+   * @param value is the new {@link #getValueAsString() value} as it would have been entered by the user.
    */
-  void setUrl(String url);
+  void setValueAsString(String value);
 
 }

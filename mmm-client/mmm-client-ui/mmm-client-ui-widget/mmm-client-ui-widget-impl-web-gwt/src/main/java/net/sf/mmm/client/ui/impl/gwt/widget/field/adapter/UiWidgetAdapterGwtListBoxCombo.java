@@ -5,9 +5,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
-import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.ListBox;
 
 /**
@@ -19,7 +18,8 @@ import com.google.gwt.user.client.ui.ListBox;
  * @param <VALUE> is the generic type of the changed value.
  */
 public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
-    UiWidgetAdapterGwtFieldFocusWidgetBase<ListBox, VALUE, String> implements UiWidgetAdapterOptionsField<VALUE> {
+    UiWidgetAdapterGwtFieldFocusWidgetBase<ListBox, VALUE, String> implements UiWidgetAdapterOptionsField<VALUE>,
+    TakesValue<String> {
 
   /** @see #setOptions(List) */
   private List<String> options;
@@ -101,8 +101,17 @@ public class UiWidgetAdapterGwtListBoxCombo<VALUE> extends
    * {@inheritDoc}
    */
   @Override
-  protected HasValue<String> getWidgetAsTakesValue() {
+  protected TakesValue<String> getWidgetAsTakesValue() {
 
-    throw new NlsIllegalStateException();
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TakesValue<String> getWidgetAsTakesValueString() {
+
+    return getWidgetAsTakesValueString();
   }
 }

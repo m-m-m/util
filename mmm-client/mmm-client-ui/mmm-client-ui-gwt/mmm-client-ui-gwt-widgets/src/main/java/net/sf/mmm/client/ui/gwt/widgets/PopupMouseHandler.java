@@ -7,16 +7,7 @@ import net.sf.mmm.util.lang.api.Direction;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseUpEvent;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Window;
 
 /**
@@ -25,19 +16,13 @@ import com.google.gwt.user.client.Window;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler, Event.NativePreviewHandler {
+class PopupMouseHandler extends AbstractMouseDragHandler {
 
   /** The {@link PopupWindow} to manage. */
   private final PopupWindow popupWindow;
 
   /** The resize {@link Direction} or <code>null</code> for move. */
   private final Direction resizeDirection;
-
-  /** The initial x position while dragging the mouse. */
-  private int mouseX;
-
-  /** The initial y position while dragging the mouse. */
-  private int mouseY;
 
   /** The current {@link Rectangle} of the {@link PopupWindow}. */
   private Rectangle popupRectangle;
@@ -47,12 +32,6 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
 
   /** The minimum height of the {@link PopupWindow}. */
   private int minHeight;
-
-  /**
-   * The {@link HandlerRegistration} for the global mouse-listener registration while dragging or
-   * <code>null</code>.
-   */
-  private HandlerRegistration registration;
 
   /**
    * The constructor.
@@ -71,70 +50,49 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
    * {@inheritDoc}
    */
   @Override
-  public void onPreviewNativeEvent(NativePreviewEvent event) {
+  protected boolean isActive() {
 
-    int eventType = event.getTypeInt();
-    if (eventType == Event.ONMOUSEMOVE) {
-      NativeEvent nativeEvent = event.getNativeEvent();
-      onMouseMove(nativeEvent.getClientX(), nativeEvent.getClientY());
-    } else if (eventType == Event.ONMOUSEUP) {
-      onMouseUp(null);
+    if (this.resizeDirection == null) {
+      if (!this.popupWindow.isMovable() || this.popupWindow.isMaximized()) {
+        return false;
+      }
+    } else {
+      if (!this.popupWindow.isResizable() || this.popupWindow.isMaximized()) {
+        return false;
+      }
     }
+    return super.isActive();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void onMouseDown(MouseDownEvent event) {
+  protected void initializeOnMouseDown() {
 
-    if (this.resizeDirection == null) {
-      if (!this.popupWindow.isMovable() || this.popupWindow.isMaximized()) {
-        return;
-      }
-    } else {
-      if (!this.popupWindow.isResizable() || this.popupWindow.isMaximized()) {
-        return;
-      }
-    }
-    this.mouseX = event.getClientX();
-    this.mouseY = event.getClientY();
+    super.initializeOnMouseDown();
     this.popupRectangle = new Rectangle(this.popupWindow.getAbsoluteLeft(), this.popupWindow.getAbsoluteTop(),
         this.popupWindow.getOffsetWidth(), this.popupWindow.getOffsetHeight());
 
     // TODO: calculate from CSS values
+    // JavaScriptUtil javaScriptUtil = JavaScriptUtil.getInstance();
+    // JsCssStyleDeclaration computedStyle = javaScriptUtil.getComputedStyle(this.popupWindow.getElement());
+    // String width = computedStyle.getPropertyValue(JsCssStyleDeclaration.STYLE_WIDTH);
+    // String minWidth = computedStyle.getPropertyValue(JsCssStyleDeclaration.STYLE_MIN_WIDTH);
+    // Log.info("Width: " + width + " min-width: " + minWidth);
 
     Element element = this.popupWindow.getElement();
     this.minWidth = element.getOffsetWidth() / 2;
     this.minHeight = element.getOffsetHeight();
 
     Log.debug(this.minWidth + "/" + this.minHeight);
-
-    assert (this.registration == null);
-    this.registration = Event.addNativePreviewHandler(this);
-    // prevent other things such as text selection while dragging...
-    event.preventDefault();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void onMouseMove(MouseMoveEvent event) {
-
-    onMouseMove(event.getClientX(), event.getClientY());
-  }
-
-  /**
-   * @see #onMouseMove(MouseMoveEvent)
-   * 
-   * @param x is the mouse X position.
-   * @param y is the mouse Y position.
-   */
-  private void onMouseMove(int x, int y) {
-
-    int deltaX = x - this.mouseX;
-    int deltaY = y - this.mouseY;
+  protected void onMouseMove(int deltaX, int deltaY, NativeEvent nativeEvent) {
 
     Rectangle newRectangle;
 
@@ -150,14 +108,4 @@ class PopupMouseHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHa
     this.popupWindow.setPopupPosition(newRectangle.getX(), newRectangle.getY());
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void onMouseUp(MouseUpEvent event) {
-
-    // DOM.releaseCapture(((Widget) event.getSource()).getElement());
-    this.registration.removeHandler();
-    this.registration = null;
-  }
 }

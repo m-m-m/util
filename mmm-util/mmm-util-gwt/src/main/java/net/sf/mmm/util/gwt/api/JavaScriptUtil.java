@@ -220,12 +220,12 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method gets the response of the given {@link XMLHttpRequest} as {@link JavaScriptBlob}.
+   * This method gets the response of the given {@link XMLHttpRequest} as {@link JsBlob}.
    *
    * @param xhr is the {@link XMLHttpRequest} that {@link XMLHttpRequest#getStatus() has already been} loaded.
-   * @return the response as a {@link JavaScriptBlob}.
+   * @return the response as a {@link JsBlob}.
    */
-  public native JavaScriptBlob getResponseAsBlob(XMLHttpRequest xhr) /*-{
+  public native JsBlob getResponseAsBlob(XMLHttpRequest xhr) /*-{
     BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;
     var bb = new BlobBuilder();
     bb.append(xhr.response);
@@ -233,14 +233,14 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method gets the {@link JavaScriptFileList} for a given {@link Event}. E.g. if files are dragged onto some
+   * This method gets the {@link JsFileList} for a given {@link Event}. E.g. if files are dragged onto some
    * element in the browser or in case of an {@link Event} (e.g. of {@value Event#ONCHANGE}) of a file input you can
-   * receive the {@link JavaScriptFileList} here.
+   * receive the {@link JsFileList} here.
    *
    * @param event is the {@link Event}.
-   * @return the {@link JavaScriptFileList} or <code>null</code> if no files are available.
+   * @return the {@link JsFileList} or <code>null</code> if no files are available.
    */
-  public native JavaScriptFileList getFileList(Event event) /*-{
+  public native JsFileList getFileList(Event event) /*-{
     if (event.dataTransfer && event.dataTransfer.files) {
       // drag and drop suppoer
       return event.dataTransfer.files;
@@ -254,32 +254,47 @@ public class JavaScriptUtil {
 
 
   /**
-   * This method creates the URL pointing to a {@link JavaScriptBlob}. Such URL is starting with the "blob:" scheme and
+   * This method creates the URL pointing to a {@link JsBlob}. Such URL is starting with the "blob:" scheme and
    * is only valid within the current JS context.
    *
-   * @param blob is the {@link JavaScriptBlob}.
+   * @param blob is the {@link JsBlob}.
    * @return the new instance.
    */
-  public native String getBlobUrl(JavaScriptBlob blob) /*-{
+  public native String getBlobUrl(JsBlob blob) /*-{
     return $wnd.URL.createObjectURL(blob);
   }-*/;
 
   /**
-   * This method opens a given {@link JavaScriptBlob}. The browser will show a regular popup to open the file or save it
+   * This method opens a given {@link JsBlob}. The browser will show a regular popup to open the file or save it
    * to the local disc. Depending on its mimetype the browser might already open the file immediately in a new window.
    *
-   * @param blob is the {@link JavaScriptBlob}.
+   * @param blob is the {@link JsBlob}.
    */
-  public native void openBlob(JavaScriptBlob blob) /*-{
+  public native void openBlob(JsBlob blob) /*-{
     window.open($wnd.URL.createObjectURL(blob), '_blank');
   }-*/;
 
   /**
-   * This method gets the {@link JavaScriptSelection} of the browser {@link com.google.gwt.user.client.Window}.
+   * This method gets the {@link JsCssStyleDeclaration computed style} of the given {@link Element}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Do not get confused by the name of this method. It will only "calculate" the CSS rules but return these properties
+   * unmodified. So if you are looking for a way to get the actual calculated width or height of an {@link Element} in
+   * pixels (rather than something like "50%") just use {@link Element#getOffsetWidth()} or
+   * {@link Element#getOffsetHeight()} instead.
    *
-   * @return the corresponding {@link JavaScriptSelection}.
+   * @param element is the {@link Element} to compute the style of.
+   * @return the computed style.
    */
-  public native JavaScriptSelection getSelection() /*-{
+  public native JsCssStyleDeclaration getComputedStyle(Element element) /*-{
+    return $wnd.getComputedStyle(element);
+  }-*/;
+
+  /**
+   * This method gets the {@link JsSelection} of the browser {@link com.google.gwt.user.client.Window}.
+   *
+   * @return the corresponding {@link JsSelection}.
+   */
+  public native JsSelection getSelection() /*-{
     if ($wnd.getSelection) {
       return $wnd.getSelection();
     } else if ($wnd.document.getSelection) {
@@ -290,14 +305,14 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method gets the {@link JavaScriptSelection} of the given <code>&lt;iframe&gt;</code> {@link Element}.
+   * This method gets the {@link JsSelection} of the given <code>&lt;iframe&gt;</code> {@link Element}.
    * The given <code>iframe</code> needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
    * to ensure.
    *
    * @param iframe is the <code>&lt;iframe&gt;</code> {@link Element}.
-   * @return the corresponding {@link JavaScriptSelection}.
+   * @return the corresponding {@link JsSelection}.
    */
-  public native JavaScriptSelection getSelection(Element iframe) /*-{
+  public native JsSelection getSelection(Element iframe) /*-{
     if (iframe.contentWindow) {
       if (iframe.contentWindow.getSelection) {
         return iframe.contentWindow.getSelection();

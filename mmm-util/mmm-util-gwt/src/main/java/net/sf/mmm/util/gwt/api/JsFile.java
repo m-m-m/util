@@ -10,12 +10,12 @@ import net.sf.mmm.util.io.api.FileItem;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class JavaScriptFile extends JavaScriptBlob implements FileItem {
+public class JsFile extends JsBlob implements FileItem {
 
   /**
    * The constructor.
    */
-  protected JavaScriptFile() {
+  protected JsFile() {
 
     super();
   }

@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.RadioButton;
  */
 public abstract class UiWidgetAdapterGwtRadioButtons<VALUE> extends
     UiWidgetAdapterGwtField<ComplexPanel, VALUE, String> implements UiWidgetAdapterRadioButtonsField<VALUE>,
-    ClickHandler {
+    ClickHandler, TakesValue<String> {
 
   /** @see #setOptions(List) */
   private final List<RadioButton> radioButtons;
@@ -102,7 +102,16 @@ public abstract class UiWidgetAdapterGwtRadioButtons<VALUE> extends
   @Override
   protected TakesValue<String> getWidgetAsTakesValue() {
 
-    return null;
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TakesValue<String> getWidgetAsTakesValueString() {
+
+    return getWidgetAsTakesValue();
   }
 
   /**
@@ -160,9 +169,10 @@ public abstract class UiWidgetAdapterGwtRadioButtons<VALUE> extends
       this.radioButtons.add(rb);
       rb.addClickHandler(this);
     }
-    applyEventAdapter(getEventAdapter());
-    // registerChangeEventAdapter();
-    // applyFocusEventAdapter();
+    EventAdapterGwt eventAdapter = getEventAdapter();
+    // applyEventAdapter(eventAdapter);
+    applyEventAdapterForChange(eventAdapter);
+    applyEventAdapterForFocus(eventAdapter);
   }
 
   /**

@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
-import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractWindow;
 import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicComposite;
 
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Panel;
 
 /**
@@ -60,27 +60,9 @@ public abstract class UiWidgetAdapterGwtAbstractWindow<WIDGET extends Panel> ext
    * {@inheritDoc}
    */
   @Override
-  public void setWidth(Length width) {
+  protected Element getSizeElement() {
 
-    getContentPanel().setWidth(width.toString());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeight(Length height) {
-
-    getContentPanel().setHeight(height.toString());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(Length width, Length height) {
-
-    getContentPanel().setSize(width.toString(), height.toString());
+    return getContentPanel().getElement();
   }
 
 }

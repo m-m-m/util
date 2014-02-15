@@ -7,7 +7,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a 2-dimensional rectangle measured in
- * {@link SizeUnit#PIXEL pixels}.
+ * {@link LengthUnit#PIXEL pixels}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -226,7 +226,7 @@ public class Rectangle extends Point {
   }
 
   /**
-   * @return the width of this {@link Rectangle} in {@link SizeUnit#PIXEL pixel}.
+   * @return the width of this {@link Rectangle} in {@link LengthUnit#PIXEL pixel}.
    */
   public int getWidth() {
 
@@ -234,7 +234,7 @@ public class Rectangle extends Point {
   }
 
   /**
-   * @return the height of this {@link Rectangle} in {@link SizeUnit#PIXEL pixel}.
+   * @return the height of this {@link Rectangle} in {@link LengthUnit#PIXEL pixel}.
    */
   public int getHeight() {
 

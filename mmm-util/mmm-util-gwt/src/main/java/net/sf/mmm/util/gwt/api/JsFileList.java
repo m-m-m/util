@@ -6,17 +6,17 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * This is the {@link JavaScriptObject} representing a <code>FileList</code> what is an array of
- * {@link JavaScriptFile files}.
+ * {@link JsFile files}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class JavaScriptFileList extends JavaScriptObject {
+public class JsFileList extends JavaScriptObject {
 
   /**
    * The constructor.
    */
-  protected JavaScriptFileList() {
+  protected JsFileList() {
 
     super();
   }
@@ -24,7 +24,7 @@ public class JavaScriptFileList extends JavaScriptObject {
   //formatter:off
 
   /**
-   * @return the length of this list (the number of {@link JavaScriptFile files}).
+   * @return the length of this list (the number of {@link JsFile files}).
    */
   public final native int length() /*-{
     return this.length;
@@ -33,10 +33,10 @@ public class JavaScriptFileList extends JavaScriptObject {
   /**
    * @see java.util.List#get(int)
    *
-   * @param index is the index of the {@link JavaScriptFile file} to get.
-   * @return the {@link JavaScriptFile file} at the given <code>index</code>.
+   * @param index is the index of the {@link JsFile file} to get.
+   * @return the {@link JsFile file} at the given <code>index</code>.
    */
-  public final native JavaScriptFile item(int index) /*-{
+  public final native JsFile item(int index) /*-{
     return this.item(index);
   }-*/;
 
@@ -45,9 +45,9 @@ public class JavaScriptFileList extends JavaScriptObject {
   /**
    * @return this list as regular Java array.
    */
-  public final JavaScriptFile[] toFileArray() {
+  public final JsFile[] toFileArray() {
 
-    JavaScriptFile[] result = new JavaScriptFile[length()];
+    JsFile[] result = new JsFile[length()];
     for (int i = 0; i < result.length; i++) {
       result[i] = item(i);
     }

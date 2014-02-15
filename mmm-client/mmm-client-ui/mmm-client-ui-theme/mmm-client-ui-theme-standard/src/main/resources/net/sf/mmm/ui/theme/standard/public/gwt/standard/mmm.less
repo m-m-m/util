@@ -404,11 +404,17 @@ body > * {
 
 .SortAscending:before {
   .fontAwesome ();
-  content: '\F15D';
+  /* content: '\F15D'; */
+  content: '\F0D7';
 }
 .SortDescending:before {
   .fontAwesome ();
-  content: '\F15E';
+  /* content: '\F15E'; */
+  content: '\F0D8';
+}
+.SortAscending, .SortDescending {
+  margin-left: 0.2em;
+  margin-right: 0.2em;
 }
 
 .SearchField {
@@ -504,14 +510,71 @@ legend {
 }
 
 .DataTable {
+  overflow-x: auto;
+  table-layout: fixed;
+  margin: 0.1em;
+  .Cell, th {
+    /* HTML/CSS is actually sick, workaround (but semantically wrong) */
+    max-width: 1px;
+  }
   td, th {
     border-color: @color-border;
     border-style: solid;
     border-width: 1px;
+    padding: 0px;
+    div {
+    }
+  }
+  td, .Label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  th {
+    .bordered;
+    background-color: @color-background-em;
+  }
+  .ScrollbarHeader {
+    min-width: 11px;
+    width: 10px;
+  }
+  .ColumnWidthRow {
+    height: 0px;
+    td {
+      /* border-style: none; */
+      margin: 0;
+      padding: 0;
+      border-top-width: 0;
+      border-bottom-width: 0;
+    }
+  }
+
+  .TableHeader {
+    /* force horizontal display */
+    display: flex;
+    flex-direction: row;
+    /* allow relative positioning of resizer */
+    position: relative;
+  }
+  /* HTML/CSS is actually sick (display:block). No hope even with HTML5. */
+  thead {
+    display: block;
   }
   tbody {
-    overflow: auto;
+    display: block;
+    overflow-y: scroll;
   }
+}
+/* has to be inside a position relative div */
+.ColumnResizer {
+  position: absolute;
+  right: -@border-size;
+  top: 0;
+  width: 2 * @border-size;
+  height: 100%;
+  cursor: col-resize;
 }
 
 .Tree {

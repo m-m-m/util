@@ -119,10 +119,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
     }
     StringBuilder titleBuffer = null;
     for (VALUE option : options) {
-      String title = this.formatter.format(option);
-      if (title == null) {
-        title = "<>";
-      }
+      String title = convertValueToString(option);
       if (this.title2OptionMap.containsKey(title)) {
         if (titleBuffer == null) {
           titleBuffer = new StringBuilder(title);
@@ -153,6 +150,19 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
       getWidgetAdapter().setOptions(this.optionTitleList);
     }
     setValue(currentValue);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String convertValueToString(VALUE option) {
+
+    String title = this.formatter.format(option);
+    if (title == null) {
+      title = "---";
+    }
+    return title;
   }
 
   /**

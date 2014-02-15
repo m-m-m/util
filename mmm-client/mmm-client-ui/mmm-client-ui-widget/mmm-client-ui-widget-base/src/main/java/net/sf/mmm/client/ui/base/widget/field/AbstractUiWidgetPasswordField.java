@@ -38,4 +38,22 @@ public abstract class AbstractUiWidgetPasswordField<ADAPTER extends UiWidgetAdap
     return String.class;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String convertValueToString(String value) {
+
+    // Security: Never display password as plain text
+    if ((value == null) || (value.length() == 0)) {
+      return "";
+    } else {
+      char[] chars = new char[value.length()];
+      for (int i = 0; i < chars.length; i++) {
+        chars[i] = '*';
+      }
+      return new String(chars);
+    }
+  }
+
 }

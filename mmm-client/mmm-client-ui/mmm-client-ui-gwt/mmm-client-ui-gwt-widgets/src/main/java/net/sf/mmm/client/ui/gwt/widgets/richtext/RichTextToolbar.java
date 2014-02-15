@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.gwt.widgets.ButtonWidget;
 import net.sf.mmm.client.ui.gwt.widgets.PopupWindow;
 import net.sf.mmm.client.ui.gwt.widgets.Toolbar;
 import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
-import net.sf.mmm.util.gwt.api.JavaScriptSelection;
+import net.sf.mmm.util.gwt.api.JsSelection;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
 
@@ -296,7 +296,7 @@ public class RichTextToolbar extends Toolbar {
         popup.show();
         break;
       case FONT_SIZE:
-        JavaScriptSelection selection = JavaScriptUtil.getInstance().getSelection(
+        JsSelection selection = JavaScriptUtil.getInstance().getSelection(
             RichTextToolbar.this.richTextArea.getElement());
         Window.alert(selection.getText() + "\n" + selection.getHtml());
         // RichTextToolbar.this.formatter.setFontSize(fontSize);

@@ -150,6 +150,12 @@ public interface CssStyles {
   /** The style of a data table (list grid or tree grid). */
   String DATA_TABLE = "DataTable";
 
+  /** The style of a table header container that may contain a ColumnResizer. */
+  String TABLE_HEADER = "TableHeader";
+
+  /** The style of a generic div in a table header that allows to resize a table column. */
+  String COLUMN_RESIZER = "ColumnResizer";
+
   /** The style of an icon showing that there is currently no sort order. */
   String SORT_ICON_NONE = "SortNone";
 
@@ -158,5 +164,14 @@ public interface CssStyles {
 
   /** The style of an icon showing a descending sort order. */
   String SORT_ICON_DESCENDING = "SortDescending";
+
+  /** The style of an invisible table row used to set the column width (HTML5 sucks, colgroup does not work). */
+  String COLUMN_WIDTH_ROW = "ColumnWidthRow";
+
+  /** The style of a table cell (the {@literal <div>} in a {@literal <td>} of a {@link #DATA_TABLE}) */
+  String CELL = "Cell";
+
+  /** The style of a header (the {@literal <th>} in a {@link #DATA_TABLE}) displayed above the scrollbar. */
+  String SCROLLBAR_HEADER = "ScrollbarHeader";
 
 }

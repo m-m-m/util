@@ -40,4 +40,11 @@ public interface UiWidgetTableColumn<ROW, CELL> extends UiWidget, HasValueValida
    */
   void sort(SortOrder order);
 
+  /**
+   * @return <code>true</code> if a {@link #getSortComparator() sort comparator} is
+   *         {@link #setSortComparator(java.util.Comparator) set} and this column allows {@link #sort()
+   *         sorting}, <code>false</code> otherwise (if {@link #getSortComparator()} is <code>null</code>).
+   */
+  boolean isSortable();
+
 }

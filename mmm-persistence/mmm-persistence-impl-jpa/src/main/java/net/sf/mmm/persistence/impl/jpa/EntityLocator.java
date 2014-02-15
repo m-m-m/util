@@ -45,7 +45,6 @@ public class EntityLocator extends AbstractLoggableComponent implements Persiste
   /**
    * The constructor.
    */
-  @SuppressWarnings("unchecked")
   public EntityLocator() {
 
     super();

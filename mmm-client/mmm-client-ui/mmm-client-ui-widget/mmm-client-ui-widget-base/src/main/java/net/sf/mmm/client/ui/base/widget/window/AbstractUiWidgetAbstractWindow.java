@@ -5,7 +5,8 @@ package net.sf.mmm.client.ui.base.widget.window;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.client.ui.api.common.Length;
-import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
+import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetAbstractWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
@@ -119,40 +120,6 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
    * {@inheritDoc}
    */
   @Override
-  public double getWidthInPixel() {
-
-    if (isResizable() && hasWidgetAdapter()) {
-      return getWidgetAdapter().getWidthInPixel();
-    }
-    Length width = getWidth();
-    if (width == null) {
-      return 0;
-    }
-    assert (width.getUnit() == SizeUnit.PIXEL);
-    return width.getAmount();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public double getHeightInPixel() {
-
-    if (isResizable() && hasWidgetAdapter()) {
-      return getWidgetAdapter().getHeightInPixel();
-    }
-    Length height = getHeight();
-    if (height == null) {
-      return 0;
-    }
-    assert (height.getUnit() == SizeUnit.PIXEL);
-    return height.getAmount();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public String getTitle() {
 
     return this.title;
@@ -186,53 +153,43 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
    * {@inheritDoc}
    */
   @Override
-  protected Length convertHeight(Length newHeight) {
+  public void setLength(LengthProperty property, Length value) {
 
-    SizeUnit unit = newHeight.getUnit();
+    LengthUnit unit = value.getUnit();
+    Length newValue;
     switch (unit) {
       case PIXEL:
-        return super.convertHeight(newHeight);
+        newValue = value;
+        break;
       case PERCENT:
-        double amount = getScreenBase().getHeightInPixel() * newHeight.getAmount() / 100.0;
-        return Length.valueOfPixel(amount);
+        double screenLength;
+        if (property.isWidth()) {
+          screenLength = getScreenBase().getWidthInPixel();
+        } else {
+          screenLength = getScreenBase().getHeightInPixel();
+        }
+        double amount = screenLength * value.getAmount() / 100.0;
+        newValue = Length.valueOfPixel(amount);
+        break;
       case EM:
-        return convertEmToPixel(newHeight);
+        newValue = convertEmToPixel(value);
+        break;
       default :
-        throw new IllegalCaseException(SizeUnit.class, unit);
+        throw new IllegalCaseException(LengthUnit.class, unit);
     }
-
+    super.setLength(property, newValue);
   }
 
   /**
-   * Converts a {@link Length} given in {@link SizeUnit#EM} to {@link SizeUnit#PIXEL}.
+   * Converts a {@link Length} given in {@link LengthUnit#EM} to {@link LengthUnit#PIXEL}.
    * 
    * @param length is the {@link Length} to convert.
    * @return the converted {@link Length}.
    */
   private Length convertEmToPixel(Length length) {
 
-    assert (length.getUnit() == SizeUnit.EM);
+    assert (length.getUnit() == LengthUnit.EM);
     return Length.valueOfPixel(length.getAmount() * 16.0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected Length convertWidth(Length newWidth) {
-
-    SizeUnit unit = newWidth.getUnit();
-    switch (unit) {
-      case PIXEL:
-        return super.convertWidth(newWidth);
-      case PERCENT:
-        double amount = getScreenBase().getWidthInPixel() * newWidth.getAmount() / 100.0;
-        return Length.valueOfPixel(amount);
-      case EM:
-        return convertEmToPixel(newWidth);
-      default :
-        throw new IllegalCaseException(SizeUnit.class, unit);
-    }
   }
 
   /**

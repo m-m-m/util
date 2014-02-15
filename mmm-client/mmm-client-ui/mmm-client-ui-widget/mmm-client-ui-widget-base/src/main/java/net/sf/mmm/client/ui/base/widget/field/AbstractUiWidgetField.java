@@ -35,6 +35,9 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /** @see #getLabelWidget() */
   private AbstractUiWidgetLabel<?> fieldLabelWidget;
 
+  /** @see #getValueAsString() */
+  private String valueAsString;
+
   /** @see #isTrimValue() */
   private boolean trimValue;
 
@@ -73,35 +76,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     if (this.validationFailure != null) {
       adapter.setValidationFailure(this.validationFailure);
     }
-  }
-
-  /**
-   * This method determines if this field is set to <em>viewOnly</em>. In such case this widget will be
-   * {@link #setModeFixed(UiMode) fixed to} {@link UiMode#VIEW} what can not be changed afterwards. This will
-   * internally cause the widget to be more lightweight. This is especially helpful for complex widgets such
-   * as {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable}.
-   * 
-   * @return <code>true</code> if this field mode, <code>false</code> otherwise.
-   */
-  public boolean isViewOnly() {
-
-    return this.viewOnly;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setViewOnly() {
-
-    if (this.viewOnly) {
-      return;
-    }
-    if (hasWidgetAdapter()) {
-      throw new IllegalStateException("Can not set widget " + getId()
-          + " to viewOnly after widgetAdapter has been created!");
-    }
-    setModeFixed(UiMode.VIEW);
-    this.viewOnly = true;
   }
 
   /**
@@ -237,6 +211,46 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   protected ADAPTER_VALUE convertFromValue(VALUE widgetValue) {
 
     return (ADAPTER_VALUE) widgetValue;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValue(VALUE newValue, boolean forUser) {
+
+    this.valueAsString = null;
+    super.setValue(newValue, forUser);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getValueAsString() {
+
+    if (hasWidgetAdapter()) {
+      return getWidgetAdapter().getValueAsString();
+    } else {
+      if (this.valueAsString != null) {
+        return this.valueAsString;
+      } else {
+        return convertValueToString(getRecentValue());
+      }
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValueAsString(String value) {
+
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setValueAsString(value);
+    } else {
+      this.valueAsString = value;
+    }
   }
 
   /**

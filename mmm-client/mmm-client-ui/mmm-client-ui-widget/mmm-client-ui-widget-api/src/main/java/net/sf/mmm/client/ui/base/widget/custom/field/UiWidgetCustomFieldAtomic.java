@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.base.widget.custom.field;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventFocus;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
@@ -42,8 +43,8 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
   @Override
   protected final VALUE doGetValue(VALUE template, ValidationState state) throws RuntimeException {
 
-    // TODO: template should be passed but may not match...
-    DELEGATE_VALUE value = getDelegate().getValueOrException(null);
+    DELEGATE_VALUE convertedTemplate = convertValueForDelegate(template);
+    DELEGATE_VALUE value = getDelegate().getValueOrException(convertedTemplate);
     if (value == null) {
       return getNullValue();
     } else {
@@ -86,6 +87,17 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * @return the converted value for the {@link #getDelegate() delegate widget}
    */
   protected abstract DELEGATE_VALUE convertValueForDelegate(VALUE value);
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String convertValueToString(VALUE value) {
+
+    DELEGATE_VALUE convertedValue = convertValueForDelegate(value);
+    return AbstractUiWidget.AccessHelper.convertValueToString((AbstractUiWidget<DELEGATE_VALUE>) getDelegate(),
+        convertedValue);
+  }
 
   /**
    * This method gets the value for the {@link #getDelegate() delegate widget} in case <code>null</code> is
@@ -157,24 +169,6 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
   protected UiWidgetField<?> getFirstField() {
 
     return getDelegate();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isViewOnly() {
-
-    return getDelegate().isViewOnly();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setViewOnly() {
-
-    getDelegate().setViewOnly();
   }
 
 }

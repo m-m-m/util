@@ -5,6 +5,8 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterCheckboxField;
 import net.sf.mmm.client.ui.gwt.widgets.CheckBoxWithChangeHandlers;
 
+import com.google.gwt.user.client.TakesValue;
+
 /**
  * This is the implementation of {@link UiWidgetAdapterCheckboxField} using GWT based on
  * {@link CheckBoxWithChangeHandlers}.
@@ -15,6 +17,9 @@ import net.sf.mmm.client.ui.gwt.widgets.CheckBoxWithChangeHandlers;
 public class UiWidgetAdapterGwtCheckboxField extends
     UiWidgetAdapterGwtFieldFocusWidget<CheckBoxWithChangeHandlers, Boolean, Boolean> implements
     UiWidgetAdapterCheckboxField {
+
+  /** @see #getWidgetAsTakesValueString() */
+  private ValueAdapter valueAdapter;
 
   /**
    * The constructor.
@@ -40,6 +45,44 @@ public class UiWidgetAdapterGwtCheckboxField extends
   public void setTitle(String title) {
 
     getActiveWidget().setText(title);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected TakesValue<String> getWidgetAsTakesValueString() {
+
+    if (this.valueAdapter == null) {
+      this.valueAdapter = new ValueAdapter();
+    }
+    return this.valueAdapter;
+  }
+
+  /**
+   * Adapter from the active widget to {@link TakesValue} {@literal <String>}.
+   */
+  protected class ValueAdapter implements TakesValue<String> {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue() {
+
+      return getActiveWidget().getValue().toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValue(String value) {
+
+      Boolean booleanValue = Boolean.valueOf(value);
+      getActiveWidget().setValue(booleanValue);
+    }
+
   }
 
 }

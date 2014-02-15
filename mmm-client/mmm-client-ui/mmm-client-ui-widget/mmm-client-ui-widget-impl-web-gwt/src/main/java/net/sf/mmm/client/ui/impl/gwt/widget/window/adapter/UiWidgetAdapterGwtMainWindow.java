@@ -3,7 +3,8 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
 import net.sf.mmm.client.ui.api.common.Length;
-import net.sf.mmm.client.ui.api.common.SizeUnit;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
+import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow;
 import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
@@ -75,18 +76,19 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtAbstractWind
    * {@inheritDoc}
    */
   @Override
-  public Length getWidth() {
+  public void setLength(LengthProperty property, Length value) {
 
-    return Length.valueOfPixel(getWidthInPixel());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidth(Length width) {
-
-    Window.resizeTo(convertLength(width), Window.getClientHeight());
+    switch (property) {
+      case HEIGHT:
+        Window.resizeTo(Window.getClientWidth(), convertLength(value));
+        break;
+      case WIDTH:
+        Window.resizeTo(convertLength(value), Window.getClientHeight());
+        break;
+      // TODO hohwille min/max width/height
+      default :
+        break;
+    }
   }
 
   /**
@@ -98,35 +100,8 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtAbstractWind
    */
   private int convertLength(Length length) {
 
-    assert (length.getUnit() == SizeUnit.PIXEL);
+    assert (length.getUnit() == LengthUnit.PIXEL);
     return (int) length.getAmount();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Length getHeight() {
-
-    return Length.valueOfPixel(getHeightInPixel());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeight(Length height) {
-
-    Window.resizeTo(Window.getClientWidth(), convertLength(height));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(Length width, Length height) {
-
-    Window.resizeTo(convertLength(width), convertLength(height));
   }
 
   /**

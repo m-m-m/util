@@ -22,13 +22,11 @@ import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -70,28 +68,28 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   // private final HorizontalFlowPanel footerBar;
 
   /** The left border of the window */
-  private FlowPanel borderWest;
+  private final Widget borderWest;
 
   /** The right border of the window */
-  private FlowPanel borderEast;
+  private final Widget borderEast;
 
   /** The bottom border of the window */
-  private final FlowPanel borderSouth;
+  private final Widget borderSouth;
 
   /** The bottom left corner of the window */
-  private final FlowPanel borderSouthWest;
+  private final Widget borderSouthWest;
 
   /** The bottom right corner of the window */
-  private final FlowPanel borderSouthEast;
+  private final Widget borderSouthEast;
 
   /** The top border of the window */
-  private final FlowPanel borderNorth;
+  private final Widget borderNorth;
 
   /** The top left corner of the window */
-  private final FlowPanel borderNorthWest;
+  private final Widget borderNorthWest;
 
   /** The top right corner of the window */
-  private final FlowPanel borderNorthEast;
+  private final Widget borderNorthEast;
 
   /** @see #isResizable() */
   private boolean resizable;
@@ -214,22 +212,14 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     this.contentPanel.addStyleName(CssStyles.WINDOW_CONTENT);
 
     // borders for resizing...
-    this.borderWest = new FlowPanel();
-    this.borderWest.setStyleName(CssStyles.BORDER_WEST);
-    this.borderEast = new FlowPanel();
-    this.borderEast.setStyleName(CssStyles.BORDER_EAST);
-    this.borderSouth = new FlowPanel();
-    this.borderSouth.setStyleName(CssStyles.BORDER_SOUTH);
-    this.borderSouthWest = new FlowPanel();
-    this.borderSouthWest.setStyleName(CssStyles.BORDER_SOUTH_WEST);
-    this.borderSouthEast = new FlowPanel();
-    this.borderSouthEast.setStyleName(CssStyles.BORDER_SOUTH_EAST);
-    this.borderNorth = new FlowPanel();
-    this.borderNorth.setStyleName(CssStyles.BORDER_NORTH);
-    this.borderNorthWest = new FlowPanel();
-    this.borderNorthWest.setStyleName(CssStyles.BORDER_NORTH_WEST);
-    this.borderNorthEast = new FlowPanel();
-    this.borderNorthEast.setStyleName(CssStyles.BORDER_NORTH_EAST);
+    this.borderWest = new CssDivWidget(CssStyles.BORDER_WEST);
+    this.borderEast = new CssDivWidget(CssStyles.BORDER_EAST);
+    this.borderSouth = new CssDivWidget(CssStyles.BORDER_SOUTH);
+    this.borderSouthWest = new CssDivWidget(CssStyles.BORDER_SOUTH_WEST);
+    this.borderSouthEast = new CssDivWidget(CssStyles.BORDER_SOUTH_EAST);
+    this.borderNorth = new CssDivWidget(CssStyles.BORDER_NORTH);
+    this.borderNorthWest = new CssDivWidget(CssStyles.BORDER_NORTH_WEST);
+    this.borderNorthEast = new CssDivWidget(CssStyles.BORDER_NORTH_EAST);
 
     this.mainPanel = new VerticalFlowPanel();
     this.mainPanel.add(this.titleBar);
@@ -427,8 +417,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   private void addMouseHandler(Widget widget, Direction resizeDirection) {
 
     PopupMouseHandler handler = new PopupMouseHandler(this, resizeDirection);
-    widget.sinkEvents(Event.ONMOUSEDOWN);
-    widget.addDomHandler(handler, MouseDownEvent.getType());
+    handler.registerMouseDragHandler(widget);
   }
 
   /**

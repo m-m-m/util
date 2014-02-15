@@ -4,16 +4,20 @@ package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 
 import java.util.List;
 
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
-import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
+import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetListTable;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractListTable;
+import net.sf.mmm.client.ui.gwt.widgets.TableBody;
+import net.sf.mmm.client.ui.gwt.widgets.TableCellAtomic;
 import net.sf.mmm.client.ui.gwt.widgets.TableRow;
 import net.sf.mmm.client.ui.impl.gwt.widget.complex.TableRowContainerGwt;
+import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
@@ -43,40 +47,79 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void addRow(TableRowContainer<ROW> row, int index) {
 
-    TableRowContainerGwt<ROW> gwtRow = (TableRowContainerGwt<ROW>) row;
-    TableRow tableRow = gwtRow.getTableRow();
+    TableRowContainerGwt<ROW> gwtRowContainer = (TableRowContainerGwt<ROW>) row;
+    TableRow tableRow = gwtRowContainer.getTableRow();
     if (tableRow == null) {
       tableRow = new TableRow();
-      gwtRow.setTableRow(tableRow);
+      gwtRowContainer.setTableRow(tableRow);
       // add multiselection checkbox
       if (getSelectionMode() == SelectionMode.MULTIPLE_SELECTION) {
-        SimpleCheckBox multiSelectCheckbox = gwtRow.getMultiSelectCheckbox();
+        SimpleCheckBox multiSelectCheckbox = gwtRowContainer.getMultiSelectCheckbox();
         tableRow.addCell(multiSelectCheckbox);
       }
-      for (AbstractUiWidgetTableColumn<?, ROW, ?> column : getColumns()) {
-        UiSingleWidgetFactory<? extends UiWidgetWithValue<?>> widgetFactory = column.getWidgetFactory();
-        @SuppressWarnings("rawtypes")
-        UiWidgetWithValue cellWidget;
-        Object cellValue = column.getPropertyAccessor().getValue(row.getValue());
-        if (widgetFactory == null) {
-          Class<?> cellType = determineCellType(column, cellValue);
-          cellWidget = getContext().getWidgetFactory().createForDatatype(cellType);
-        } else {
-          cellWidget = widgetFactory.create(getContext());
-        }
-        if (cellWidget instanceof UiWidgetField) {
-          ((UiWidgetField<?>) cellWidget).setViewOnly();
-        }
-        cellWidget.setMode(UiMode.VIEW);
-        cellWidget.setValue(cellValue);
-        tableRow.addCell(getToplevelWidget(cellWidget));
-      }
+      update(gwtRowContainer, false);
+    } else {
+      // update(gwtRowContainer, true);
     }
-    getTableWidget().getTableBody().insert(tableRow, index);
+    // "index + 1" because we have an invisible row at the top to set the column width
+    getTableWidget().getTableBody().insert(tableRow, index + 1);
+  }
+
+  /**
+   * @param row is the {@link TableRowContainerGwt} where to add or update the cells.
+   * @param update - <code>true</code> to update an already initialized <code>row</code>, <code>false</code>
+   *        to initialize a newly created row.
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  protected void update(TableRowContainerGwt<ROW> row, boolean update) {
+
+    TableRow tableRow = row.getTableRow();
+    for (AbstractUiWidgetTableColumn<?, ROW, ?> column : getColumns()) {
+      TableCellAtomic cellWidget;
+      Object cellValue = column.getPropertyAccessor().getValue(row.getValue());
+      UiWidgetWithValue<?> editWidget = getEditWidget(column, cellValue);
+      if (update) {
+        cellWidget = (TableCellAtomic) tableRow.getWidget(column.getCurrentIndex());
+      } else {
+        cellWidget = new TableCellAtomic();
+        cellWidget.setStyleName(CssStyles.CELL);
+        // cellWidget.setStyleName(editWidget.getStyles());
+        // cellWidget.setStyleName(CssStyles.CELL);
+        tableRow.add(cellWidget);
+      }
+      String displayValue = AbstractUiWidget.AccessHelper
+          .convertValueToString((AbstractUiWidget) editWidget, cellValue);
+      cellWidget.setText(displayValue);
+    }
+  }
+
+  /**
+   * This method gets the {@link UiWidgetAdapterGwtTableColumn#getEditWidget() edit widget}. If it does not
+   * yet exist, it is lazily created and then set for further invocations.
+   * 
+   * @param column is the table column that stores the edit widget.
+   * @param cellValue is the current value for a cell in the column. It may be used to interfere the type for
+   *        the edit widget.
+   * @return the edit widget.
+   */
+  private UiWidgetWithValue<?> getEditWidget(AbstractUiWidgetTableColumn<?, ROW, ?> column, Object cellValue) {
+
+    UiWidgetAdapterGwtTableColumn columnAdapter = getWidgetAdapterForColumn(column);
+    UiWidgetWithValue<?> editWidget = columnAdapter.getEditWidget();
+    if (editWidget == null) {
+      UiSingleWidgetFactory<? extends UiWidgetWithValue<?>> widgetFactory = column.getWidgetFactory();
+      if (widgetFactory == null) {
+        Class<?> cellType = determineCellType(column, cellValue);
+        editWidget = getContext().getWidgetFactory().createForDatatype(cellType);
+      } else {
+        editWidget = widgetFactory.create(getContext());
+      }
+      columnAdapter.setEditWidget(editWidget);
+    }
+    return editWidget;
   }
 
   /**
@@ -114,6 +157,33 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
     TableRowContainerGwt<ROW> gwtRow = (TableRowContainerGwt<ROW>) row;
     TableRow tableRow = gwtRow.getTableRow();
     getTableWidget().getTableBody().remove(tableRow);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void sort(AbstractUiWidgetTableColumn<?, ROW, ?> column, SortOrder sortOrder) {
+
+    super.sort(column, sortOrder);
+    List<TableRowContainer<ROW>> rows = getUiWidgetTyped().getRowsInternal();
+    TableBody tableBody = getTableWidget().getTableBody();
+    int index = 1;
+    for (TableRowContainer<ROW> row : rows) {
+      TableRow tableRow = (TableRow) tableBody.getWidget(index++);
+      TableRowContainerGwt<ROW> gwtRow = (TableRowContainerGwt<ROW>) row;
+      gwtRow.setTableRow(tableRow);
+      update(gwtRow, true);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public AbstractUiWidgetListTable<?, ROW> getUiWidgetTyped() {
+
+    return (AbstractUiWidgetListTable<?, ROW>) getUiWidget();
   }
 
   /**

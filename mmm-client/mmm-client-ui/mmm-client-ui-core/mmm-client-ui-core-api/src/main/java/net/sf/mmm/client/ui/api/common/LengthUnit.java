@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  */
 // absolute units 1in = 2.54cm = 25.4mm = 72pt = 12pc
 // for font-size ~ 1em = 12pt = 16px = 100%
-public enum SizeUnit implements SimpleDatatype<String> {
+public enum LengthUnit implements SimpleDatatype<String> {
 
   /** Unit for pixels. */
   PIXEL("px", "pixel"),
@@ -37,7 +37,7 @@ public enum SizeUnit implements SimpleDatatype<String> {
    * @param value - see {@link #getValue()}.
    * @param title - see {@link #getTitle()}.
    */
-  private SizeUnit(String value, String title) {
+  private LengthUnit(String value, String title) {
 
     this.value = value;
     this.title = title;
@@ -62,7 +62,7 @@ public enum SizeUnit implements SimpleDatatype<String> {
   }
 
   /**
-   * Creates a new {@link Length} with this {@link SizeUnit} as {@link Length#getUnit() unit}.
+   * Creates a new {@link Length} with this {@link LengthUnit} as {@link Length#getUnit() unit}.
    * 
    * @param amount is the {@link Length#getAmount() amount}.
    * @return the new {@link Length}.

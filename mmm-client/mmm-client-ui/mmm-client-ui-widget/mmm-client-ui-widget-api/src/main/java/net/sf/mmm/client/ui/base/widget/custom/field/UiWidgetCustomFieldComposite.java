@@ -99,20 +99,6 @@ public abstract class UiWidgetCustomFieldComposite<VALUE, DELEGATE extends UiWid
    * {@inheritDoc}
    */
   @Override
-  public boolean isViewOnly() {
-
-    return getFirstField().isViewOnly();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setViewOnly() {
-
-    for (UiWidgetField<?> field : this.fieldList) {
-      field.setViewOnly();
-    }
-  }
+  protected abstract String convertValueToString(VALUE value);
 
 }

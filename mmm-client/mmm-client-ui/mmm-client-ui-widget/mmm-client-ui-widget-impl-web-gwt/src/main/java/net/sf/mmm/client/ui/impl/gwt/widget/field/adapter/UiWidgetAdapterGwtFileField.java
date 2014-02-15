@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.field.adapter;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterFileField;
 import net.sf.mmm.util.io.api.FileItem;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -27,7 +28,8 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtFileField extends UiWidgetAdapterGwtField<FileUpload, FileItem, FileItem> implements
+public class UiWidgetAdapterGwtFileField extends
+    UiWidgetAdapterGwtField<UiWidgetAdapterGwtFileField.MyFileUpload, FileItem, FileItem> implements
     UiWidgetAdapterFileField, TakesValue<FileItem> {
 
   /** @see #createViewWidget() */
@@ -82,6 +84,15 @@ public class UiWidgetAdapterGwtFileField extends UiWidgetAdapterGwtField<FileUpl
    * {@inheritDoc}
    */
   @Override
+  protected TakesValue<String> getWidgetAsTakesValueString() {
+
+    return getActiveWidget();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public FileItem getValue() {
 
     // String filename = getActiveWidget().getFilename();
@@ -122,9 +133,9 @@ public class UiWidgetAdapterGwtFileField extends UiWidgetAdapterGwtField<FileUpl
    * {@inheritDoc}
    */
   @Override
-  protected FileUpload createActiveWidget() {
+  protected MyFileUpload createActiveWidget() {
 
-    return new FileUpload();
+    return new MyFileUpload();
   }
 
   /**
@@ -226,6 +237,46 @@ public class UiWidgetAdapterGwtFileField extends UiWidgetAdapterGwtField<FileUpl
     public void setValue(String value, boolean fireEvents) {
 
       setHTML(value);
+    }
+
+  }
+
+  protected static class MyFileUpload extends FileUpload implements TakesValue<String> {
+
+    /**
+     * The constructor.
+     */
+    public MyFileUpload() {
+
+      super();
+    }
+
+    /**
+     * The constructor.
+     * 
+     * @param element is the {@link #getElement() toplevel element}.
+     */
+    public MyFileUpload(Element element) {
+
+      super(element);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue() {
+
+      return getFilename();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValue(String value) {
+
+      // not supported...
     }
 
   }

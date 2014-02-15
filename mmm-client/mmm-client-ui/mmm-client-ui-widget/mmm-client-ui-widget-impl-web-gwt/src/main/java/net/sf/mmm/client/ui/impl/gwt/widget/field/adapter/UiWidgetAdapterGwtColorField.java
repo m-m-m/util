@@ -79,9 +79,6 @@ public class UiWidgetAdapterGwtColorField extends UiWidgetAdapterGwtFieldValueBo
   @Override
   public void setOptions(List<Color> options) {
 
-    if (isViewOnly()) {
-      return;
-    }
     List<String> stringOptions = new ArrayList<String>(options.size());
     for (Color color : options) {
       stringOptions.add(color.toString());

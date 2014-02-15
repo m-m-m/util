@@ -14,6 +14,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -49,6 +50,11 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   /** @see #getValue() */
   private ADAPTER_VALUE recentValue;
 
+  /** @see #getValueAsString() */
+  // TODO this is somewhat inconsistent, according to issue #85 both recentValue and recentStringValue might
+  // be removed
+  private String recentStringValue;
+
   /**
    * The constructor.
    */
@@ -58,24 +64,20 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   }
 
   /**
-   * @return the {@link #getToplevelWidget() widget} as {@link HasChangeHandlers} or <code>null</code> if NOT
+   * @return the {@link #getActiveWidget() widget} as {@link HasChangeHandlers} or <code>null</code> if NOT
    *         supported.
    */
   protected abstract HasChangeHandlers getWidgetAsHasChangeHandlers();
 
   /**
-   * @return the {@link #getToplevelWidget() widget} as {@link HasChangeHandlers} or <code>null</code> if NOT
-   *         supported.
+   * @return the {@link #getActiveWidget() widget} as {@link TakesValue}.
    */
   protected abstract TakesValue<ADAPTER_VALUE> getWidgetAsTakesValue();
 
   /**
-   * @return - see {@link UiWidgetField#isViewOnly()}.
+   * @return the {@link #getActiveWidget() widget} as {@link TakesValue} for the value type {@link String}.
    */
-  protected boolean isViewOnly() {
-
-    return ((UiWidgetField<?>) getUiWidget()).isViewOnly();
-  }
+  protected abstract TakesValue<String> getWidgetAsTakesValueString();
 
   /**
    * {@inheritDoc}
@@ -164,7 +166,8 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
 
     HasChangeHandlers widget = getWidgetAsHasChangeHandlers();
     if (widget != null) {
-      widget.addChangeHandler(adapter);
+      HandlerRegistration registration = widget.addChangeHandler(adapter);
+      addHandlerRegistration(registration);
     }
   }
 
@@ -199,13 +202,38 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
    * {@inheritDoc}
    */
   @Override
+  public String getValueAsString() {
+
+    if (this.activeWidget == null) {
+      return this.recentStringValue;
+    } else {
+      return getWidgetAsTakesValueString().getValue();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValueAsString(String value) {
+
+    // TODO this is inconsistent for view mode, according to issue #85 it will change anyways...
+    if (this.activeWidget != null) {
+      getWidgetAsTakesValueString().setValue(value);
+    }
+    this.recentStringValue = value;
+    if (!getUiWidget().getMode().isEditable()) {
+      updateWidgetViewMode();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected final Widget createToplevelWidget() {
 
-    if (isViewOnly()) {
-      return getWidgetViewMode();
-    } else {
-      return new HorizontalFlowPanel();
-    }
+    return new HorizontalFlowPanel();
   }
 
   /**
@@ -216,9 +244,7 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
     if (this.widgetViewMode == null) {
       this.widgetViewMode = createViewWidget();
       this.widgetViewMode.setStylePrimaryName(UiWidgetField.STYLE_VIEW);
-      if (!isViewOnly()) {
-        ((ComplexPanel) getToplevelWidget()).add(this.widgetViewMode);
-      }
+      ((ComplexPanel) getToplevelWidget()).add(this.widgetViewMode);
     }
     return this.widgetViewMode;
   }
@@ -243,19 +269,17 @@ public abstract class UiWidgetAdapterGwtField<WIDGET extends Widget, VALUE, ADAP
   public final WIDGET getActiveWidget() {
 
     if (this.activeWidget == null) {
-      if (!isViewOnly()) {
-        this.activeWidget = createActiveWidget();
-        getInputElement().setAttribute("oninput", "this.setCustomValidity('');");
-        this.widgetMarkerEditMode = new InlineLabel();
-        UiMode mode = getUiWidget().getMode();
-        if ((mode != null) && (!mode.isEditable())) {
-          this.activeWidget.setVisible(false);
-          this.widgetMarkerEditMode.setVisible(false);
-        }
-        ComplexPanel panel = (ComplexPanel) getToplevelWidget();
-        attachActiveWidget(panel);
-        panel.add(this.widgetMarkerEditMode);
+      this.activeWidget = createActiveWidget();
+      getInputElement().setAttribute("oninput", "this.setCustomValidity('');");
+      this.widgetMarkerEditMode = new InlineLabel();
+      UiMode mode = getUiWidget().getMode();
+      if ((mode != null) && (!mode.isEditable())) {
+        this.activeWidget.setVisible(false);
+        this.widgetMarkerEditMode.setVisible(false);
       }
+      ComplexPanel panel = (ComplexPanel) getToplevelWidget();
+      attachActiveWidget(panel);
+      panel.add(this.widgetMarkerEditMode);
     }
     return this.activeWidget;
   }

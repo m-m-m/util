@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.gwt.widgets;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteColumnSpan;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteRowSpan;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteText;
 
 /**
  * A {@link AbstractTableCellAtomic} is a {@link SingleCompositePanel} that represents a table cell in a
@@ -13,7 +14,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteRowSpan;
  * @since 1.0.0
  */
 public abstract class AbstractTableCellAtomic extends SingleCompositePanel implements AttributeWriteColumnSpan,
-    AttributeWriteRowSpan {
+    AttributeWriteRowSpan, AttributeWriteText {
 
   /**
    * The constructor.
@@ -65,5 +66,23 @@ public abstract class AbstractTableCellAtomic extends SingleCompositePanel imple
   public void setRowSpan(int rowSpan) {
 
     getElement().setAttribute(ATTRIBUTE_ROWSPAN, Integer.toString(rowSpan));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getText() {
+
+    return getElement().getInnerText();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setText(String text) {
+
+    getElement().setInnerText(text);
   }
 }

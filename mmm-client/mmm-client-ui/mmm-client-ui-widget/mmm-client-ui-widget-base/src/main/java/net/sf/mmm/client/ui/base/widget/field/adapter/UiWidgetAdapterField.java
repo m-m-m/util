@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.field.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteValueAsString;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
@@ -18,7 +19,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * @since 1.0.0
  */
 public interface UiWidgetAdapterField<VALUE, ADAPTER_VALUE> extends UiWidgetAdapterActive,
-    AttributeWriteValue<ADAPTER_VALUE>, AttributeWriteValidationFailure {
+    AttributeWriteValue<ADAPTER_VALUE>, AttributeWriteValueAsString, AttributeWriteValidationFailure {
 
   // nothing to add...
 }

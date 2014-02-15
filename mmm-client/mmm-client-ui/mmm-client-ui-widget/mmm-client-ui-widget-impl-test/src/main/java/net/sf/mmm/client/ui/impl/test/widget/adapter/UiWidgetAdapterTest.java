@@ -7,10 +7,12 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
+import net.sf.mmm.client.ui.base.LengthUnitHelper;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
@@ -33,12 +35,6 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
     AttributeWriteValidationFailure, UiWidgetAdapterButton, UiWidgetAdapterCollapsableSection, UiWidgetAdapterImage,
     UiWidgetAdapterLabel, UiWidgetAdapterLink, UiWidgetAdapterSection, UiWidgetAdapterMenuItemClickable,
     UiWidgetAdapterMenuItemSeparator, AttributeWriteSelectionMode, AttributeWriteStringTitle {
-
-  /** @see #getWidth() */
-  private Length width;
-
-  /** @see #getHeight() */
-  private Length height;
 
   /** @see #dispose() */
   private boolean disposed;
@@ -102,40 +98,38 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
    * {@inheritDoc}
    */
   @Override
-  public void setWidth(Length width) {
+  public Length getLength(LengthProperty property) {
 
     verifyNotDisposed();
-    this.width = width;
+    return null;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setHeight(Length height) {
+  public void setLength(LengthProperty property, Length value) {
 
     verifyNotDisposed();
-    this.height = height;
+    // do nothing...
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Length getWidth() {
+  public double getWidthInPixel() {
 
-    verifyNotDisposed();
-    return this.width;
+    return LengthUnitHelper.convertToPixel(getLength(LengthProperty.WIDTH), 0);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Length getHeight() {
+  public double getHeightInPixel() {
 
-    verifyNotDisposed();
-    return this.height;
+    return LengthUnitHelper.convertToPixel(getLength(LengthProperty.HEIGHT), 0);
   }
 
   /**

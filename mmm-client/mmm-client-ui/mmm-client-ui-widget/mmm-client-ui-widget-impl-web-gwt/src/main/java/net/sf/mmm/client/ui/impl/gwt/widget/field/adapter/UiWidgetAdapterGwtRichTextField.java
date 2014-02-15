@@ -130,6 +130,15 @@ public class UiWidgetAdapterGwtRichTextField extends UiWidgetAdapterGwtField<Flo
    * {@inheritDoc}
    */
   @Override
+  protected TakesValue<String> getWidgetAsTakesValueString() {
+
+    return getWidgetAsTakesValue();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected Focusable getWidgetAsFocusable() {
 
     return getRichTextArea();
