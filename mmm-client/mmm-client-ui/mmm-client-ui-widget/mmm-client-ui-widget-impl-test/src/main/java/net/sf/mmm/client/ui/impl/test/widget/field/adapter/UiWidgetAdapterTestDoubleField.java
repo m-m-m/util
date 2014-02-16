@@ -21,4 +21,13 @@ public class UiWidgetAdapterTestDoubleField extends UiWidgetAdapterTestNumberFie
     super();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Double convertValueFromString(String stringValue) {
+
+    return Double.valueOf(stringValue);
+  }
+
 }

@@ -23,4 +23,13 @@ public class UiWidgetAdapterTestDateField extends UiWidgetAdapterTestField<Local
     super();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected LocalDate convertValueFromString(String stringValue) {
+
+    return LocalDate.parse(stringValue);
+  }
+
 }

@@ -15,11 +15,14 @@ import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterTestField<VALUE, ADAPTER_VALUE> extends UiWidgetAdapterTest implements
+public abstract class UiWidgetAdapterTestField<VALUE, ADAPTER_VALUE> extends UiWidgetAdapterTest implements
     UiWidgetAdapterField<VALUE, ADAPTER_VALUE> {
 
   /** @see #getValue() */
   private ADAPTER_VALUE value;
+
+  /** @see #getValueAsString() */
+  private String valueAsString;
 
   /**
    * The constructor.
@@ -36,8 +39,20 @@ public class UiWidgetAdapterTestField<VALUE, ADAPTER_VALUE> extends UiWidgetAdap
   public ADAPTER_VALUE getValue() {
 
     verifyNotDisposed();
-    return this.value;
+    if (this.value != null) {
+      return this.value;
+    }
+    if (this.valueAsString != null) {
+      return convertValueFromString(this.valueAsString);
+    }
+    return null;
   }
+
+  /**
+   * @param stringValue is the value as {@link String}.
+   * @return the value as {@literal <ADAPTER_VALUE>}.
+   */
+  protected abstract ADAPTER_VALUE convertValueFromString(String stringValue);
 
   /**
    * {@inheritDoc}
@@ -47,6 +62,35 @@ public class UiWidgetAdapterTestField<VALUE, ADAPTER_VALUE> extends UiWidgetAdap
 
     verifyNotDisposed();
     this.value = value;
+    this.valueAsString = null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getValueAsString() {
+
+    verifyNotDisposed();
+    if (this.valueAsString != null) {
+      return this.valueAsString;
+    }
+    if (this.value == null) {
+      return "";
+    } else {
+      return this.value.toString();
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValueAsString(String value) {
+
+    verifyNotDisposed();
+    this.valueAsString = value;
+    this.value = null;
   }
 
 }

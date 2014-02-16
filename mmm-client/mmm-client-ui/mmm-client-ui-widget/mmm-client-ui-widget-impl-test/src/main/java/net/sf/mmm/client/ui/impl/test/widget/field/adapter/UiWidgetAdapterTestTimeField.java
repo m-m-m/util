@@ -23,4 +23,13 @@ public class UiWidgetAdapterTestTimeField extends UiWidgetAdapterTestField<Local
     super();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected LocalTime convertValueFromString(String stringValue) {
+
+    return LocalTime.parse(stringValue);
+  }
+
 }

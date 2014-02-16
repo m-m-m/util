@@ -48,4 +48,13 @@ public class UiWidgetAdapterTestOptionsField<VALUE> extends UiWidgetAdapterTestF
     this.options = options;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String convertValueFromString(String stringValue) {
+
+    return stringValue;
+  }
+
 }

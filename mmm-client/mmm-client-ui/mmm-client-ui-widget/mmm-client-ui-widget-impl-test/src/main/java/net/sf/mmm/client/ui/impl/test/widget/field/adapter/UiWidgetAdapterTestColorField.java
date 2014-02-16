@@ -45,4 +45,13 @@ public class UiWidgetAdapterTestColorField extends UiWidgetAdapterTestField<Colo
     return this.options;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Color convertValueFromString(String stringValue) {
+
+    return Color.valueOf(stringValue);
+  }
+
 }

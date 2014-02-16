@@ -22,4 +22,13 @@ public class UiWidgetAdapterTestFileField extends UiWidgetAdapterTestField<FileI
     super();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected FileItem convertValueFromString(String stringValue) {
+
+    return null;
+  }
+
 }

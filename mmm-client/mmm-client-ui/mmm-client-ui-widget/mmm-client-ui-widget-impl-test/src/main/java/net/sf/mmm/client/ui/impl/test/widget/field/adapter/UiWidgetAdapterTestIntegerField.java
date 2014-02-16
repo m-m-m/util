@@ -64,4 +64,13 @@ public class UiWidgetAdapterTestIntegerField extends UiWidgetAdapterTestField<In
     this.max = maximum;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Integer convertValueFromString(String stringValue) {
+
+    return Integer.valueOf(stringValue);
+  }
+
 }

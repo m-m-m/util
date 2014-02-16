@@ -21,4 +21,13 @@ public class UiWidgetAdapterTestCheckboxField extends UiWidgetAdapterTestField<B
     super();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Boolean convertValueFromString(String stringValue) {
+
+    return Boolean.valueOf(stringValue);
+  }
+
 }

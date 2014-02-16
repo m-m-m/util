@@ -21,4 +21,13 @@ public class UiWidgetAdapterTestLongField extends UiWidgetAdapterTestNumberField
     super();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Long convertValueFromString(String stringValue) {
+
+    return Long.valueOf(stringValue);
+  }
+
 }

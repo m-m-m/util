@@ -69,4 +69,13 @@ public class UiWidgetAdapterTestStringField extends UiWidgetAdapterTestField<Str
     verifyNotDisposed();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String convertValueFromString(String value) {
+
+    return value;
+  }
+
 }
