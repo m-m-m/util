@@ -2,16 +2,25 @@
 <!-- $Id$ -->
 <document>
   <properties>
-    <title>Multi Media Manager</title>
+    <title>Mature Modular Meta-framework</title>
     <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
   </properties>
 
   <body>
     <section name="Introduction">
-      Welcome to the wonderful world of MMM. The initial goal of this project was to build a Multi-Media-Manager (MMM).
-      However, in order to build this we first wanted to build a generic application framework for Java to build ontop.
-      This is where we currently seem to end so please do not get confused by the project name and have a closer look.
-      We could also rename this to <em>Modern-Mature-Modules</em>.
+      Welcome to the wonderful world of the <em>Mature Modular Meta-Framework</em> (mmm).
+      This project provides modules to speed up the development of (complex) applications.
+      It is based on common standards such as <em>Context and Dependency Injection</em> (CDI) by default using
+      <a href="www.springframework.org">spring</a> and <em>Java Persistence Api</em> (JPA) using
+      <a href="http://hibernate.org/">hibernate</a>. Most of such frameworks aim to be minimal invasive what
+      is nice in general. However, development of large applications with only such frameworks is still not 
+      efficient as you always have to implement a lot of general code in every project reinventing the wheel.
+      Further there are hundreds of possible ways to do something and you can easily get on the wrong track.
+      This project helps you to make the right decisions leading to a mature, flexible and powerful architecture
+      that has proven success in various open-source and commercial medium to large scale projects.
+      By providing a lot of reusable and generic code for all the common problems on your way this projects
+      aims to speed you up so you can concentrate on the actual features of your application.
+      <br/>
       To get started have a look at the <a href="images/Architecture.svg">technical architecture</a>.
       Please also read our strategic posting <a href="https://github.com/m-m-m/mmm/wiki/Rescue-the-java-world">Rescue the (Java) world</a>.
       <subsection name="Ready to use">
@@ -22,19 +31,6 @@
           <li><a href="mmm-util/index.html">mmm-util</a> contains powerful utilities.</li>
         </ul>
       </subsection>
-    </section>
-    <section name="About MMM">
-      MMM is a generic application framework that massively speeds up development of (complex) applications.
-      It is based on common standards such as <em>Context and Dependency Injection</em> (CDI) by default using
-      <a href="www.springframework.org">spring</a> or <em>Java Persistence Api</em> (JPA) by default using
-      <a href="http://hibernate.org/">hibernate</a>. Most of such frameworks aim to be minimal invasive what
-      is nice in general. However, development of large applications with only such frameworks is still not 
-      efficient as you always have to implement a lot of general code in every project reinventing the wheel.
-      Further there are hundreds of possible ways to do something and you can easily get on the wrong track.
-      This project helps you to make the right decisions leading to a mature, flexible and powerful architecture
-      that has proven success in various open-source and commercial medium to large scale projects.
-      By providing a lot of reusable and generic code for all the common problems on your way this projects
-      extremely speeds you up.
       <subsection name="Mission Statement">
         <ul>
           <li>Designed with beauty.</li>
@@ -42,20 +38,19 @@
           <li>Tested with care.</li>
           <li>Documented with devotion.</li>
         </ul>      
-        MMM is entirely written in Java. It makes extensive use of the Java 5 syntax.
+        MMM is entirely written in Java. It makes extensive use of the Java 5 syntax and is already prepared for Java 8.
         All code is written with focus on design &amp; quality and comes with detailed API documentation.<br/>
         The application is heavily based on the idioms separation of concerns (SoC) and inversion of control (IoC) 
         and therefore split into tiny components (see <a href="modules.html">modules</a>). This open architecture allows any 
         component implementation to be reused (by other projects) or be replaced (for custom needs).<br/>
         <b>ATTENTION:</b><br/>
-        This mission statement applies to subprojects (modules) that are released. Modules that are NOT 
+        This mission statement applies to sub-projects (modules) that are released. Modules that are NOT 
         released (version less than <code>1.0.0</code> including <code>1.0.0-SNAPSHOT</code>) may be 
-        completely refactored, change their API or even dissappear completely.
+        completely refactored, change their API or even disappear completely.
       </subsection>
       <subsection name="Project State">
-        Even though the project exists for many years now, there is no multi-media-manager available.
-        However, the application framework provided here has matured over the last years and many modules
-        are going to be released officially within 2013.
+        We are making great progress with our next generation UI framework (see <a href="mmm-client/mmm-client-ui/index.html">mmm-client-ui</a>)
+        and are on our way to create a large showcase to demonstrate the features and concepts.
         If you are looking for open, flexible and well-designed software components (see "Ready to use") 
         or you want to get involved (see <a href="https://github.com/m-m-m/mmm/wiki/Get-Involved">Get Involved</a>) 
         and let the vision of MMM become reality then you are at the right place.
