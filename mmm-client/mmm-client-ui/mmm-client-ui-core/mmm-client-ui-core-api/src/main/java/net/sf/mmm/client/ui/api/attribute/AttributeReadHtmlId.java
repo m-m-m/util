@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.attribute;
 
 import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**
  * This interface gives read access to a {@link #getId() ID}.
@@ -11,6 +12,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  * @since 1.0.0
  */
 public abstract interface AttributeReadHtmlId extends AttributeReadId<String> {
+
+  /** {@link TypedProperty} for {@link #getId()}. */
+  TypedProperty<String> PROPERTY_ID = new TypedProperty<String>(String.class, "id");
 
   /** The name of the <code>id</code> attribute. */
   String HTML_ATTRIBUTE_ID = "id";

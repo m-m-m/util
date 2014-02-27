@@ -3,18 +3,18 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterListTable;
+import net.sf.mmm.client.ui.impl.gwt.widget.complex.ItemContainerGwt;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterListTable} using GWT.
  * 
- * @param <ROW> is the generic type of a
- *        {@link #addRow(net.sf.mmm.client.ui.base.widget.complex.TableRowContainer, int) row} in the list.
+ * @param <ROW> is the generic type of a row in the list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetAdapterGwtListTable<ROW> extends UiWidgetAdapterGwtAbstractListTable<ROW> implements
-    UiWidgetAdapterListTable<ROW> {
+    UiWidgetAdapterListTable<ROW, ItemContainerGwt<ROW>> {
 
   /**
    * The constructor.

@@ -5,7 +5,9 @@ package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.common.CssStyles;
+import net.sf.mmm.client.ui.api.common.SelectionChoice;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
+import net.sf.mmm.client.ui.api.common.SelectionOperation;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
@@ -21,15 +23,20 @@ import net.sf.mmm.client.ui.gwt.widgets.TableHead;
 import net.sf.mmm.client.ui.gwt.widgets.TableRow;
 import net.sf.mmm.client.ui.gwt.widgets.TableWidget;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
+import net.sf.mmm.client.ui.impl.gwt.widget.complex.ItemContainerGwt;
 import net.sf.mmm.util.lang.api.SortOrder;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.StyleElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
+import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -56,8 +63,17 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
   /** @see #setSelectionMode(SelectionMode) */
   private AbstractUiWidgetTableColumn<?, ROW, Boolean> multiSelectionColumn;
 
+  /** @see #setShowRowNumbers(boolean) */
+  private AbstractUiWidgetTableColumn<?, ROW, String> rowNumberColumn;
+
   /** @see #getStyleElement() */
   private StyleElement styleElement;
+
+  /** @see #setColumns(List) */
+  private TableRow headerRow;
+
+  /** @see #setColumns(List) */
+  private TableRow bodyWidthRow;
 
   /**
    * The constructor.
@@ -102,45 +118,43 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
       this.tableWidget.getTableFooter().clear();
     }
     this.columns = columns;
-    TableRow headerRow = new TableRow();
-    // Hack due to HTML design flaw: we need to add an invisible row to tbody with empty cells that control
-    // the width of the column so tbody can be scrollable vertically.
-    TableRow bodyWidthRow = new TableRow();
-    bodyWidthRow.setStyleName(CssStyles.COLUMN_WIDTH_ROW);
+    this.headerRow = new TableRow();
+    this.bodyWidthRow = new TableRow();
+    this.bodyWidthRow.setStyleName(CssStyles.COLUMN_WIDTH_ROW);
     int size = columns.size();
     if (size > 0) {
       // double widthInPercent = 100D / size;
       int columnIndex = 0;
+      if (this.rowNumberColumn != null) {
+        addColumn(this.rowNumberColumn, columnIndex++);
+      }
       if (this.multiSelectionColumn != null) {
-        addColumn(headerRow, bodyWidthRow, this.multiSelectionColumn, columnIndex++);
+        addColumn(this.multiSelectionColumn, columnIndex++);
       }
       for (UiWidgetTableColumn<ROW, ?> column : columns) {
         // column.setWidthInPercent(widthInPercent);
-        addColumn(headerRow, bodyWidthRow, (AbstractUiWidgetTableColumn<?, ROW, ?>) column, columnIndex++);
+        addColumn((AbstractUiWidgetTableColumn<?, ROW, ?>) column, columnIndex++);
       }
     }
     Widget columnWidget = new TableCellHeaderAtomic();
     columnWidget.setStyleName(CssStyles.SCROLLBAR_HEADER);
-    headerRow.add(columnWidget);
-    tableHeader.add(headerRow);
-    tableBody.add(bodyWidthRow);
+    this.headerRow.add(columnWidget);
+    tableHeader.add(this.headerRow);
+    tableBody.add(this.bodyWidthRow);
   }
 
   /**
    * Adds the given column to this table.
    * 
-   * @param headerRow is the {@link TableRow} for the header of the table.
-   * @param bodyWidthRow is the invisible row to set the width of the tbody columns.
    * @param column is the actual column widget.
    * @param columnIndex is the current column index.
    */
-  private void addColumn(TableRow headerRow, TableRow bodyWidthRow, AbstractUiWidgetTableColumn<?, ROW, ?> column,
-      int columnIndex) {
+  private void addColumn(AbstractUiWidgetTableColumn<?, ROW, ?> column, int columnIndex) {
 
     UiWidgetAdapterGwtTableColumn columnAdapter = getWidgetAdapterForColumn(column);
     Widget columnWidget = columnAdapter.getToplevelWidget();
-    headerRow.add(columnWidget);
-    bodyWidthRow.add(columnAdapter.getBodyWidthCell());
+    this.headerRow.insert(columnWidget, columnIndex);
+    this.bodyWidthRow.insert(columnAdapter.getBodyWidthCell(), columnIndex);
     column.setCurrentIndex(columnIndex);
   }
 
@@ -171,9 +185,9 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  public AbstractUiWidgetAbstractDataTable<?, ROW> getUiWidgetTyped() {
+  public AbstractUiWidgetAbstractDataTable<?, ROW, ItemContainerGwt<ROW>> getUiWidgetTyped() {
 
-    return (AbstractUiWidgetAbstractDataTable<?, ROW>) getUiWidget();
+    return (AbstractUiWidgetAbstractDataTable<?, ROW, ItemContainerGwt<ROW>>) getUiWidget();
   }
 
   /**
@@ -191,10 +205,18 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  public void setEditable(boolean editableFlag) {
+  public void setSummary(String summary) {
 
-    // TODO Auto-generated method stub
+    this.tableWidget.setSummary(summary);
+  }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSummary() {
+
+    return this.tableWidget.getSummary();
   }
 
   /**
@@ -211,10 +233,27 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  public boolean isEditable() {
+  public void setTitle(String title) {
 
-    // TODO Auto-generated method stub
-    return false;
+    getTableWidget().setCaption(title);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTitleVisible(boolean titleVisible) {
+
+    getTableWidget().getCaptionWidget().setVisible(titleVisible);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTitleVisible() {
+
+    return getTableWidget().getCaptionWidget().isVisible();
   }
 
   /**
@@ -223,7 +262,7 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
   @Override
   public SelectionMode getSelectionMode() {
 
-    return ((UiWidgetAbstractDataTable<?>) getUiWidget()).getSelectionMode();
+    return getUiWidgetTyped().getSelectionMode();
   }
 
   /**
@@ -235,19 +274,62 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
     switch (selectionMode) {
       case MULTIPLE_SELECTION:
         if (this.multiSelectionColumn == null) {
-          AbstractUiWidgetAbstractDataTable<?, ROW> listTable = (AbstractUiWidgetAbstractDataTable<?, ROW>) getUiWidget();
-          // this.multiSelectionColumn = ((UiWidgetAbstractDataTable) getUiWidget()).createColumn(rowAccessor,
-          // widgetFactory, sortComparator)
-          this.multiSelectionColumn = new UiWidgetTableColumnImpl<ROW, Boolean>(getContext(), listTable, null, null);
+          initializeMultiSelection();
+        } else {
+          this.multiSelectionColumn.setVisible(true);
         }
-        // hide multi-selection column
+        // show multi-selection column
+        // getUiWidgetTyped().get
         break;
       case SINGLE_SELECTION:
-        // show multi-selection column
+        // hide multi-selection column
+        if (this.multiSelectionColumn != null) {
+          this.multiSelectionColumn.setVisible(false);
+        }
         break;
       default :
         break;
     }
+  }
+
+  /**
+   * Method called once to initialize multi-selection mode (add checkbox column).
+   */
+  protected void initializeMultiSelection() {
+
+    this.multiSelectionColumn = new UiWidgetTableColumnImpl<ROW, Boolean>(getContext(), getUiWidgetTyped(),
+        AbstractUiWidgetTableColumn.PROPERTY_SELECTED, null);
+    this.multiSelectionColumn.setStyles(CssStyles.MULTI_SELECTION_HEADER);
+    this.multiSelectionColumn.setResizable(false);
+    this.multiSelectionColumn.setReorderable(false);
+    this.multiSelectionColumn.setWidthInPixel(20);
+    if (this.headerRow == null) {
+      return;
+    }
+    TableCellHeaderAtomic toplevelWidget = getToplevelWidget(this.multiSelectionColumn, TableCellHeaderAtomic.class);
+    final SimpleCheckBox headerCheckbox = new SimpleCheckBox();
+    HandlerRegistration registration = headerCheckbox.addClickHandler(new ClickHandler() {
+
+      @Override
+      public void onClick(ClickEvent event) {
+
+        Boolean checked = headerCheckbox.getValue();
+        SelectionOperation operation;
+        if (Boolean.TRUE.equals(checked)) {
+          operation = SelectionOperation.SET;
+        } else {
+          operation = SelectionOperation.REMOVE;
+        }
+        getUiWidgetTyped().setSelection(SelectionChoice.ALL, operation);
+      }
+    });
+    addHandlerRegistration(registration);
+    toplevelWidget.setChild(headerCheckbox);
+    int index = 0;
+    if (this.rowNumberColumn != null) {
+      index = 1;
+    }
+    addColumn(this.multiSelectionColumn, index);
   }
 
   /**

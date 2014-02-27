@@ -73,6 +73,25 @@ public abstract class UiWidgetCustomField<VALUE, DELEGATE extends UiWidgetCompos
    * {@inheritDoc}
    */
   @Override
+  public String getValueAsString() {
+
+    // this method does not make sense for composite fields as there is no sane implementation possible...
+    return getFirstField().getValueAsString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setValueAsString(String value) {
+
+    getFirstField().setValueAsString(value);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public String toString() {
 
     String fieldLabel = getLabel();

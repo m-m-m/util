@@ -25,7 +25,7 @@ public class UiWidgetTreeTestImpl<NODE> extends AbstractUiWidgetTree<UiWidgetAda
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetTreeTestImpl(UiContext context, UiWidgetAdapterTestTree widgetAdapter) {
+  public UiWidgetTreeTestImpl(UiContext context, UiWidgetAdapterTestTree<NODE> widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -56,6 +56,7 @@ public class UiWidgetTreeTestImpl<NODE> extends AbstractUiWidgetTree<UiWidgetAda
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public UiWidgetTree create(UiContext context) {
 

@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.attribute;
 
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
+
 /**
  * This interface gives read access to the {@link #getLabel() label} attribute of an object.
  * 
@@ -9,6 +11,9 @@ package net.sf.mmm.client.ui.api.attribute;
  * @since 1.0.0
  */
 public abstract interface AttributeReadLabel {
+
+  /** {@link TypedProperty} for {@link #getLabel()}. */
+  TypedProperty<String> PROPERTY_LABEL = new TypedProperty<String>(String.class, "label");
 
   /**
    * This method gets the <em>label</em> of this object. A label is some text that is permanently shown to the

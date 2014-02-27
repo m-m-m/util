@@ -8,7 +8,7 @@ import java.util.Map;
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.RichTextFeature;
-import net.sf.mmm.client.ui.gwt.widgets.BorderPanel;
+import net.sf.mmm.client.ui.gwt.widgets.Fieldset;
 import net.sf.mmm.client.ui.gwt.widgets.ButtonGroup;
 import net.sf.mmm.client.ui.gwt.widgets.ButtonWidget;
 import net.sf.mmm.client.ui.gwt.widgets.PopupWindow;
@@ -425,7 +425,7 @@ public class RichTextToolbar extends Toolbar {
 
     private final VerticalFlowPanel contentPanel;
 
-    private final BorderPanel previewPanel;
+    private final Fieldset previewPanel;
 
     private final FlowPanel previewArea;
 
@@ -453,12 +453,12 @@ public class RichTextToolbar extends Toolbar {
       addSelectionFeature(RichTextFeature.FONT_SIZE, rowIndex++);
       addSelectionFeature(RichTextFeature.FONT_COLOR, rowIndex++);
       addSelectionFeature(RichTextFeature.BACKGROUND_COLOR, rowIndex++);
-      BorderPanel fontPanel = new BorderPanel();
+      Fieldset fontPanel = new Fieldset();
       fontPanel.setLabel("Font");
       fontPanel.add(this.gridLayout);
       this.contentPanel.add(fontPanel);
 
-      BorderPanel effectsPanel = new BorderPanel();
+      Fieldset effectsPanel = new Fieldset();
       effectsPanel.setLabel("Effects");
       FlexTable effectsGrid = new FlexTable();
       effectsPanel.add(effectsGrid);
@@ -486,7 +486,7 @@ public class RichTextToolbar extends Toolbar {
       }
       this.contentPanel.add(effectsPanel);
       String labelPreview = RichTextToolbar.this.bundle.labelPreview().getLocalizedMessage();
-      this.previewPanel = new BorderPanel();
+      this.previewPanel = new Fieldset();
       this.previewPanel.setLabel(labelPreview);
       this.previewPanel.add(this.previewArea);
       this.contentPanel.add(this.previewPanel);

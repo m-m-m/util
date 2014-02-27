@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.attribute;
 
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**
  * This interface gives read access to the {@link #getTitle() title} of an object.
@@ -11,6 +12,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * @since 1.0.0
  */
 public abstract interface AttributeReadStringTitle extends AttributeReadTitle<String> {
+
+  /** {@link TypedProperty} for {@link #getTitle()}. */
+  TypedProperty<String> PROPERTY_TITLE = new TypedProperty<String>(String.class, "title");
 
   /**
    * This method gets the title of this object. The detailed meaning of the title depends on the type of

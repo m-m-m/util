@@ -5,6 +5,8 @@ package net.sf.mmm.client.ui.impl.test.widget.adapter;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximumTextLength;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSummary;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteTitleVisible;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteValidationFailure;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.LengthProperty;
@@ -34,7 +36,8 @@ import net.sf.mmm.util.nls.api.ObjectDisposedException;
 public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implements AttributeWriteMaximumTextLength,
     AttributeWriteValidationFailure, UiWidgetAdapterButton, UiWidgetAdapterCollapsableSection, UiWidgetAdapterImage,
     UiWidgetAdapterLabel, UiWidgetAdapterLink, UiWidgetAdapterSection, UiWidgetAdapterMenuItemClickable,
-    UiWidgetAdapterMenuItemSeparator, AttributeWriteSelectionMode, AttributeWriteStringTitle {
+    UiWidgetAdapterMenuItemSeparator, AttributeWriteSelectionMode, AttributeWriteStringTitle, AttributeWriteSummary,
+    AttributeWriteTitleVisible {
 
   /** @see #dispose() */
   private boolean disposed;
@@ -340,6 +343,44 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
    */
   @Override
   public void setTitle(String title) {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSummary() {
+
+    verifyNotDisposed();
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSummary(String summary) {
+
+    verifyNotDisposed();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTitleVisible() {
+
+    verifyNotDisposed();
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTitleVisible(boolean titleVisible) {
 
     verifyNotDisposed();
   }

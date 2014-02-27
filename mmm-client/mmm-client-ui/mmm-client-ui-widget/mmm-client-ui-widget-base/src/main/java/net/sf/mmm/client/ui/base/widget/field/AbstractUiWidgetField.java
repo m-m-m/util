@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.base.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
@@ -41,9 +40,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
   /** @see #isTrimValue() */
   private boolean trimValue;
 
-  /** @see #isViewOnly() */
-  private boolean viewOnly;
-
   /**
    * The constructor.
    * 
@@ -76,18 +72,6 @@ public abstract class AbstractUiWidgetField<ADAPTER extends UiWidgetAdapterField
     if (this.validationFailure != null) {
       adapter.setValidationFailure(this.validationFailure);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setModeFixed(UiMode modeFixed) {
-
-    if (this.viewOnly && ((modeFixed == null) || modeFixed.isEditable())) {
-      throw new IllegalStateException("Can not change fixed mode of widget " + getId() + " if viewOnly has been set!");
-    }
-    super.setModeFixed(modeFixed);
   }
 
   /**

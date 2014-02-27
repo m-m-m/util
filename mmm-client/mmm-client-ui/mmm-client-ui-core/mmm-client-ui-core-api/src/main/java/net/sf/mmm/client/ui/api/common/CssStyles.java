@@ -174,4 +174,10 @@ public interface CssStyles {
   /** The style of a header (the {@literal <th>} in a {@link #DATA_TABLE}) displayed above the scrollbar. */
   String SCROLLBAR_HEADER = "ScrollbarHeader";
 
+  /** The style of a cell ({@literal <td>}) showing the row number in a {@link #DATA_TABLE}. */
+  String ROW_NUMBER = "Rownum";
+
+  /** The multi-selection column header ({@literal <th>}). */
+  String MULTI_SELECTION_HEADER = "MultiSelection";
+
 }

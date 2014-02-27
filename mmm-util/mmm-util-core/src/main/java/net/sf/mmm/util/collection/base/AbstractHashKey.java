@@ -25,6 +25,9 @@ public abstract class AbstractHashKey<T> implements Serializable {
   /** @see #getDelegate() */
   private T delegate;
 
+  /** @see #hashCode() */
+  private int hashCode;
+
   /**
    * The constructor for de-serialization.
    */
@@ -70,7 +73,14 @@ public abstract class AbstractHashKey<T> implements Serializable {
   @Override
   public int hashCode() {
 
-    return getHashCodeFunction().hashCode(this.delegate);
+    if (this.hashCode == 0) {
+      int hash = getHashCodeFunction().hashCode(this.delegate);
+      if (hash == 0) {
+        hash = 1;
+      }
+      this.hashCode = hash;
+    }
+    return this.hashCode;
   }
 
   /**
@@ -93,8 +103,8 @@ public abstract class AbstractHashKey<T> implements Serializable {
       AbstractHashKey<T> otherKey = (AbstractHashKey<T>) other;
       return getEqualsChecker().isEqual(this.delegate, otherKey.delegate);
     } catch (ClassCastException e) {
-      // Will hopefully never happen, but to get sure we better return false in such case (we cannot test this
-      // before using instanceof due to generic erasure limitations)...
+      // Will never happen under sane conditions, but to get sure we better return false in such case (we
+      // cannot test this before using instanceof due to generic erasure limitations)...
       return false;
     }
   }

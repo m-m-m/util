@@ -387,7 +387,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
     public ColumnWidthRange(UiWidget widget) {
 
       super();
-      this.initialWidth = widget.getWidthInPixel();
+      this.initialWidth = widget.getWidthInPixel() - 1;
       double minWidth = LengthUnitHelper.getLengthInPixel(widget, LengthProperty.MIN_WIDTH, this.initialWidth);
       this.minDx = (int) (minWidth - this.initialWidth); // typically negative...
       double maxWidth = LengthUnitHelper.getLengthInPixel(widget, LengthProperty.MAX_WIDTH, this.initialWidth);

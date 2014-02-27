@@ -95,8 +95,27 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    */
   protected UiDataBinding<VALUE> getDataBinding() {
 
+    return getDataBinding(null);
+  }
+
+  /**
+   * @see #getDataBinding()
+   * 
+   * @param example is an example value that may be used to determine the {@link #getValueClass() value class}
+   *        if not available. May be <code>null</code>.
+   * @return the data binding.
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  private UiDataBinding<VALUE> getDataBinding(VALUE example) {
+
     if (this.dataBinding == null) {
-      this.dataBinding = getContext().getDataBindingFactory().createDataBinding(this);
+      Class<VALUE> valueType = getValueClass();
+      if (valueType == null) {
+        if (example != null) {
+          valueType = (Class) example.getClass();
+        }
+      }
+      this.dataBinding = getContext().getDataBindingFactory().createDataBinding(this, valueType);
     }
     return this.dataBinding;
   }
@@ -237,12 +256,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   @Override
   public void setValue(VALUE newValue, boolean forUser) {
 
-    if ((this.dataBinding == null) && (newValue != null)) {
-      if (getValueClass() == null) {
-        throw new IllegalStateException("valueClass is null!");
-      }
-    }
-    getDataBinding().setValue(newValue, forUser);
+    getDataBinding(newValue).setValue(newValue, forUser);
     fireValueChange(true);
   }
 
@@ -824,19 +838,6 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
     public static <VALUE> VALUE doGetValue(AbstractUiWidget<VALUE> widget, VALUE template, ValidationState state) {
 
       return widget.doGetValue(template, state);
-    }
-
-    /**
-     * @see AbstractUiWidget#getValueClass()
-     * 
-     * @param <VALUE> - see {@link AbstractUiWidget#getValueClass()}.
-     * 
-     * @param widget is the {@link AbstractUiWidget}.
-     * @return - see {@link AbstractUiWidget#getValueClass()}.
-     */
-    public static <VALUE> Class<VALUE> getValueClass(AbstractUiWidget<VALUE> widget) {
-
-      return widget.getValueClass();
     }
 
     /**

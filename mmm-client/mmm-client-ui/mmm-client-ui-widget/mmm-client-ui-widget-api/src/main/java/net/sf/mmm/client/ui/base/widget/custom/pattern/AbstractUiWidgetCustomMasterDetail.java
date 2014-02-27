@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom.pattern;
 
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.UiMode;
@@ -150,12 +150,14 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
    * @param selectedValues are the currently selected values.
    * @param event is the {@link UiEventSelectionChange selection change event}.
    */
-  protected void onMasterListSelection(List<SELECTION> selectedValues, UiEventSelectionChange<SELECTION> event) {
+  protected void onMasterListSelection(Collection<SELECTION> selectedValues, UiEventSelectionChange<SELECTION> event) {
 
     if (selectedValues.size() == 1) {
-      SELECTION selection = selectedValues.get(0);
+      SELECTION selection = selectedValues.iterator().next();
       DETAIL detail = getDetailsForSelection(selection);
       getDetailPanel().setValue(detail);
+    } else {
+      // TODO hohwille deselect...
     }
   }
 
@@ -188,7 +190,7 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
     @Override
     public void onSelectionChange(UiEventSelectionChange<SELECTION> event) {
 
-      List<SELECTION> selectedValues = event.getSource().getSelectedValues();
+      Collection<SELECTION> selectedValues = event.getSource().getSelectedValues();
       onMasterListSelection(selectedValues, event);
     }
 

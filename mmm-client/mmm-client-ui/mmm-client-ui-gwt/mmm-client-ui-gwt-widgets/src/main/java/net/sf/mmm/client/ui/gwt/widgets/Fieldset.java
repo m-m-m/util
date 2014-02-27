@@ -5,15 +5,15 @@ package net.sf.mmm.client.ui.gwt.widgets;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.FieldSetElement;
 
 /**
- * This is a custom {@link com.google.gwt.user.client.ui.Widget} that represents a
- * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetBorderPanel} (fieldset-tag).
+ * This is a custom {@link com.google.gwt.user.client.ui.Widget} that represents a <em>fieldset</em>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class BorderPanel extends CustomPanel implements AttributeWriteLabel {
+public class Fieldset extends CustomPanel implements AttributeWriteLabel {
 
   /** The labeled legend element. */
   private final Legend legend;
@@ -21,10 +21,11 @@ public class BorderPanel extends CustomPanel implements AttributeWriteLabel {
   /**
    * The constructor.
    */
-  public BorderPanel() {
+  public Fieldset() {
 
     super();
-    setElement(Document.get().createElement("fieldset"));
+    FieldSetElement element = Document.get().createFieldSetElement();
+    setElement(element);
     this.legend = new Legend();
     add(this.legend);
   }

@@ -3,27 +3,17 @@
 package net.sf.mmm.client.ui.base.widget.complex;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.SelectionMode;
-import net.sf.mmm.client.ui.api.event.UiEventSelectionChange;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractDataTable;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
-import net.sf.mmm.util.lang.api.EqualsChecker;
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
@@ -33,30 +23,20 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <ROW> is the generic type of a row in the {@link #getValue() value list}.
+ * @param <ITEM_CONTAINER> is the generic type of the {@link ItemContainer}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidgetAdapterAbstractDataTable<ROW>, ROW>
-    extends AbstractUiWidgetActive<ADAPTER, List<ROW>> implements UiWidgetAbstractDataTable<ROW> {
+public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidgetAdapterAbstractDataTable<ROW>, ROW, ITEM_CONTAINER extends ItemContainer<ROW, ITEM_CONTAINER>>
+    extends AbstractUiWidgetAbstractDataSet<ADAPTER, List<ROW>, ROW, ITEM_CONTAINER> implements
+    UiWidgetAbstractDataTable<ROW> {
 
   /** @see #setColumns(UiWidgetTableColumn...) */
   private final List<AbstractUiWidgetTableColumn<?, ROW, ?>> columns;
 
-  /** @see #getSelectedValues() */
-  private final Set<TableRowContainer<ROW>> selectedValues;
-
-  /** @see #isEditable() */
-  private boolean editable;
-
-  /** @see #getSelectionMode() */
-  private SelectionMode selectionMode;
-
   /** @see #createColumn(TypedProperty, UiSingleWidgetFactory, Comparator) */
   private UiDataBinding<ROW> rowBinding;
-
-  /** @see #getRowEqualsChecker() */
-  private EqualsChecker<ROW> rowEqualsChecker;
 
   /** @see #sort(AbstractUiWidgetTableColumn, SortOrder) */
   private AbstractUiWidgetTableColumn<?, ROW, ?> sortColumn;
@@ -71,10 +51,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   public AbstractUiWidgetAbstractDataTable(UiContext context, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
-    this.editable = false;
     this.columns = new ArrayList<AbstractUiWidgetTableColumn<?, ROW, ?>>();
-    this.selectionMode = SelectionMode.SINGLE_SELECTION;
-    this.selectedValues = new HashSet<TableRowContainer<ROW>>();
   }
 
   /**
@@ -94,242 +71,39 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     super.initializeWidgetAdapter(adapter);
-    adapter.setEditable(this.editable);
     if (!this.columns.isEmpty()) {
       adapter.setColumns(this.columns);
     }
-    adapter.setSelectionMode(this.selectionMode);
     // if (!this.selectedValues.isEmpty()) {
     // List<ROW> emptyList = Collections.emptyList();
     // // adapter.updateSelection(emptyList, this.selectedValues);
     // }
-    // adapter.setHeight(this.heigthInRows);
   }
 
   /**
-   * @param row is the {@literal <ROW>} to {@link TableRowContainer#setValue(Object) set} in the container.
-   * @return a new instance of {@link TableRowContainer}.
+   * @param row is the {@literal <ROW>} to {@link AbstractItemContainer#setItemOriginal(Object) set} in the
+   *        container.
+   * @return a new instance of {@link AbstractItemContainer}.
    */
-  protected TableRowContainer<ROW> createRowContainer(ROW row) {
+  protected ITEM_CONTAINER createRowContainer(ROW row) {
 
-    TableRowContainer<ROW> container = createRowContainer();
-    container.setValue(row);
+    ITEM_CONTAINER container = createRowContainer();
+    container.setItemOriginal(row);
     return container;
   }
 
   /**
-   * @return a new instance of {@link TableRowContainer}.
+   * @return a new instance of {@link AbstractItemContainer}.
    */
-  protected abstract TableRowContainer<ROW> createRowContainer();
-
-  /**
-   * Searches for an existing {@link TableRowContainer} for the given <code>row</code>.
-   * 
-   * @param row is the {@literal <ROW>}.
-   * @return the existing {@link TableRowContainer} {@link TableRowContainer#getValue() containing} the given
-   *         <code>row</code> (for a list table from the list of rows) or <code>null</code>.
-   */
-  protected abstract TableRowContainer<ROW> getRowContainer(ROW row);
-
-  /**
-   * Called from adapter if a row ({@literal <ROW>}) has been (de)selected.
-   * 
-   * @param row is the {@link TableRowContainer} containing the (de)selected {@literal <ROW>}.
-   * @param selected - <code>true</code> if row was just selected, <code>false</code> if just deselected.
-   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
-   */
-  public void onRowSelection(TableRowContainer<ROW> row, boolean selected, boolean programmatic) {
-
-    boolean fireEvent;
-    if (selected) {
-      if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
-        this.selectedValues.clear();
-      }
-      fireEvent = this.selectedValues.add(row);
-    } else {
-      fireEvent = this.selectedValues.remove(row);
-    }
-    if (fireEvent) {
-      fireEvent(new UiEventSelectionChange<ROW>(this, programmatic));
-    }
-  }
+  protected abstract ITEM_CONTAINER createRowContainer();
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setEditable(boolean editable) {
+  protected ROW getItem(ITEM_CONTAINER container) {
 
-    this.editable = editable;
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setEditable(editable);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isEditable() {
-
-    return this.editable;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void addSelectionHandler(UiHandlerEventSelection<ROW> handler) {
-
-    addEventHandler(handler);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean removeSelectionHandler(UiHandlerEventSelection<ROW> handler) {
-
-    return removeEventHandler(handler);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SelectionMode getSelectionMode() {
-
-    return this.selectionMode;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSelectionMode(SelectionMode selectionMode) {
-
-    this.selectionMode = selectionMode;
-    if ((this.selectionMode == SelectionMode.SINGLE_SELECTION) && (this.selectedValues.size() > 1)) {
-      Iterator<TableRowContainer<ROW>> iterator = this.selectedValues.iterator();
-      TableRowContainer<ROW> firstSelection = iterator.next();
-      while (iterator.hasNext()) {
-        TableRowContainer<ROW> rowContainer = iterator.next();
-        rowContainer.setSelected(false);
-        // iterator.remove();
-      }
-      this.selectedValues.clear();
-      this.selectedValues.add(firstSelection);
-    }
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setSelectionMode(selectionMode);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSelectedValues(List<ROW> selectionList) {
-
-    switch (this.selectionMode) {
-      case SINGLE_SELECTION:
-        ROW selectionRow = null;
-        TableRowContainer<ROW> selectionRowContainer = null;
-        if (!selectionList.isEmpty()) {
-          // in single selection mode, we only care for the first selection and ignore anything else...
-          selectionRow = selectionList.get(0);
-          selectionRowContainer = getRowContainer(selectionRow);
-        }
-        for (TableRowContainer<ROW> rowContainer : this.selectedValues) {
-          if (rowContainer != selectionRowContainer) {
-            rowContainer.setSelected(false);
-          }
-        }
-        this.selectedValues.clear();
-        if (selectionRowContainer != null) {
-          this.selectedValues.add(selectionRowContainer);
-        }
-        break;
-      case MULTIPLE_SELECTION:
-        // add and select new rows...
-        Set<TableRowContainer<ROW>> newSelectedValues = new HashSet<TableRowContainer<ROW>>();
-        for (ROW rowToSelect : selectionList) {
-          TableRowContainer<ROW> rowContainer = getRowContainer(rowToSelect);
-          if (rowContainer != null) {
-            newSelectedValues.add(rowContainer);
-            boolean isNew = this.selectedValues.add(rowContainer);
-            if (isNew) {
-              rowContainer.setSelected(true);
-            }
-          }
-        }
-        // remove and deselect rows not selected anymore...
-        Iterator<TableRowContainer<ROW>> rowIterator = this.selectedValues.iterator();
-        while (rowIterator.hasNext()) {
-          TableRowContainer<ROW> rowContainer = rowIterator.next();
-          if (!newSelectedValues.contains(rowContainer)) {
-            rowContainer.setSelected(false);
-            rowIterator.remove();
-          }
-        }
-        break;
-      default :
-        break;
-    }
-    boolean programmatic = true;
-    fireEvent(new UiEventSelectionChange<ROW>(this, programmatic));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSelectedValue(ROW selectedValue) {
-
-    setSelectedValues(Arrays.asList(selectedValue));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean hasSelectedValue() {
-
-    return !this.selectedValues.isEmpty();
-  }
-
-  /**
-   * @return the internal representation of the {@link #getSelectedValues()}.
-   */
-  public Collection<TableRowContainer<ROW>> getSelectedValuesInternal() {
-
-    return this.selectedValues;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ROW getSelectedValue() {
-
-    if (this.selectedValues.isEmpty()) {
-      return null;
-    }
-    TableRowContainer<ROW> first = this.selectedValues.iterator().next();
-    return first.getValue();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<ROW> getSelectedValues() {
-
-    ArrayList<ROW> result = new ArrayList<ROW>(this.selectedValues.size());
-    for (TableRowContainer<ROW> rowContainer : this.selectedValues) {
-      result.add(rowContainer.getValue());
-    }
-    return result;
+    return container.getItem();
   }
 
   /**
@@ -444,7 +218,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   void sort(AbstractUiWidgetTableColumn<?, ROW, ?> column, SortOrder sortOrder) {
 
     // incomplete implementation, has to be overridden/extended...
-    if (this.sortColumn != null) {
+    if ((this.sortColumn != null) && (this.sortColumn != column)) {
       this.sortColumn.setSortOrder(null);
     }
     column.setSortOrder(sortOrder);
@@ -466,24 +240,6 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   public UiWidgetAdapterTableColumn createTableColumnAdapter(UiWidgetTableColumn<ROW, ?> column) {
 
     return getWidgetAdapter().createTableColumnAdapter(column);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public EqualsChecker<ROW> getRowEqualsChecker() {
-
-    return this.rowEqualsChecker;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setRowEqualsChecker(EqualsChecker<ROW> rowEqualsChecker) {
-
-    this.rowEqualsChecker = rowEqualsChecker;
   }
 
   /**

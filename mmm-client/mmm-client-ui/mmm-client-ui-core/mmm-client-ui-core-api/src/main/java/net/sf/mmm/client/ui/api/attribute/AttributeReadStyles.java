@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.attribute;
 
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
+
 /**
  * This interface gives read access to the {@link #getStyles() style(s)} of an object.
  * 
@@ -9,6 +11,9 @@ package net.sf.mmm.client.ui.api.attribute;
  * @since 1.0.0
  */
 public abstract interface AttributeReadStyles {
+
+  /** {@link TypedProperty} for {@link #getStyles}. */
+  TypedProperty<String> PROPERTY_STYLES = new TypedProperty<String>(String.class, "styles");
 
   /** The regular expression pattern for a single style. */
   String STYLE_PATTERN_SINGLE = "[a-zA-Z][_a-zA-Z0-9-]*";

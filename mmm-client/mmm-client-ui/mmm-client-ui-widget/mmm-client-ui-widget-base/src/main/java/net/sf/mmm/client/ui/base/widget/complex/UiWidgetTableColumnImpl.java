@@ -28,7 +28,7 @@ public class UiWidgetTableColumnImpl<ROW, CELL> extends
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetTableColumnImpl(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW> listTable,
+  public UiWidgetTableColumnImpl(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW, ?> listTable,
       TypedProperty<CELL> typedProperty, UiWidgetAdapterTableColumn widgetAdapter) {
 
     super(context, listTable, typedProperty, widgetAdapter);

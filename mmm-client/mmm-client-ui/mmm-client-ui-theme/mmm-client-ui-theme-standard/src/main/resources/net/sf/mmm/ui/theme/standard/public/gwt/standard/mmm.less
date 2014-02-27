@@ -5,6 +5,7 @@
 @color-hover: lighten(@color-focus, 15%);
 @color-hover-gradient: darken(@color-hover, 10%);
 @color-select: #C0F0F0;
+@color-header: #C0C0F0;
 @color-border: #808080;
 @color-border-top: lighten(@color-border, 40%);
 @color-border-left: lighten(@color-border, 30%);
@@ -402,6 +403,10 @@ body > * {
   content: '\F0B2';
 }
 
+.SortNone:before {
+  .fontAwesome ();
+  content: '\F0DA';
+}
 .SortAscending:before {
   .fontAwesome ();
   /* content: '\F15D'; */
@@ -412,7 +417,7 @@ body > * {
   /* content: '\F15E'; */
   content: '\F0D8';
 }
-.SortAscending, .SortDescending {
+.SortNone, .SortAscending, .SortDescending {
   margin-left: 0.2em;
   margin-right: 0.2em;
 }
@@ -534,7 +539,7 @@ legend {
   }
   th {
     .bordered;
-    background-color: @color-background-em;
+    background-color: @color-header;
   }
   .ScrollbarHeader {
     min-width: 11px;
@@ -565,6 +570,12 @@ legend {
   tbody {
     display: block;
     overflow-y: scroll;
+    tr.Selected {
+      background-color: @color-select;
+    }
+    tr:nth-child(2n+1) {
+      background-color: @color-background-em;
+    }
   }
 }
 /* has to be inside a position relative div */

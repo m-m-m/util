@@ -2,17 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.gwt.widgets;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteLabel;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteText;
 
 import com.google.gwt.dom.client.Document;
 
 /**
- * A {@link Legend} is a {@link CustomPanel} for a legend ({@literal <legend>}) of a {@link Fieldset}.
+ * A {@link Caption} is a {@link CustomPanel} for a legend ({@literal <legend>}) of a {@link Fieldset}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Legend extends CustomPanel implements AttributeWriteLabel {
+public class Caption extends CustomPanel implements AttributeWriteText {
 
   /** @see #getLabelWidget() */
   private final LabelWidget labelWidget;
@@ -20,10 +20,10 @@ public class Legend extends CustomPanel implements AttributeWriteLabel {
   /**
    * The constructor.
    */
-  public Legend() {
+  public Caption() {
 
     super();
-    setElement(Document.get().createElement("legend"));
+    setElement(Document.get().createCaptionElement());
     this.labelWidget = new LabelWidget();
     add(this.labelWidget);
   }
@@ -40,7 +40,7 @@ public class Legend extends CustomPanel implements AttributeWriteLabel {
    * {@inheritDoc}
    */
   @Override
-  public String getLabel() {
+  public String getText() {
 
     return this.labelWidget.getText();
   }
@@ -49,9 +49,9 @@ public class Legend extends CustomPanel implements AttributeWriteLabel {
    * {@inheritDoc}
    */
   @Override
-  public void setLabel(String label) {
+  public void setText(String text) {
 
-    this.labelWidget.setText(label);
+    this.labelWidget.setText(text);
   }
 
 }

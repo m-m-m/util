@@ -7,21 +7,21 @@ import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteCollapsed;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
 import net.sf.mmm.client.ui.api.common.CssStyles;
-import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 /**
- * This is the interface for a {@link UiWidgetRegular regular widget} that represents a <em>tree</em>. Such
- * widget represents a tree-structure showing tree-nodes that can be collapsed and expanded. It has the
- * following features:
+ * This is the interface for a {@link UiWidgetAbstractDataSet data set widget} that represents a <em>tree</em>
+ * widget. Such widget represents a tree-structure showing tree-nodes that can be collapsed and expanded. It
+ * has the following features:
  * <ul>
- * <li>Configured via {@link #setTreeModel(UiTreeModel)} with a number of</li>
+ * <li>Configured via {@link #setTreeModel(UiTreeModel) tree model}</li>
+ * <li></li>
  * </ul>
  * 
  * @param <NODE> is the generic type of the tree-nodes. E.g. {@link net.sf.mmm.util.collection.api.TreeNode}.
@@ -29,8 +29,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetRegular, UiFeatureSelectedValue<NODE>,
-    AttributeWriteSelectionMode {
+public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDataSet<NODE>, UiWidgetWithValue<NODE> {
 
   /** The {@link #hasStyle(String) style} of this tree widget. */
   String STYLE_TREE = CssStyles.TREE;
@@ -93,7 +92,9 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetRegular, Ui
 
     /**
      * @return the root-node of the tree. Must not be <code>null</code>.
+     * @deprecated has to be done via get/setValue!
      */
+    @Deprecated
     NODE getRootNode();
 
     /**

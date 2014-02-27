@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 
+import java.util.Collection;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.common.CssStyles;
@@ -11,30 +12,28 @@ import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetListTable;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTableColumn;
-import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractListTable;
 import net.sf.mmm.client.ui.gwt.widgets.TableBody;
 import net.sf.mmm.client.ui.gwt.widgets.TableCellAtomic;
 import net.sf.mmm.client.ui.gwt.widgets.TableRow;
-import net.sf.mmm.client.ui.impl.gwt.widget.complex.TableRowContainerGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.complex.ItemContainerGwt;
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.user.client.ui.Focusable;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterAbstractListTable} using GWT.
  * 
- * @param <ROW> is the generic type of a {@link #addRow(TableRowContainer, int) row} in the list.
+ * @param <ROW> is the generic type of a {@link #addRow(ItemContainerGwt, int) row} in the list.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwtAbstractDataTable<ROW> implements
-    UiWidgetAdapterAbstractListTable<ROW> {
+public abstract class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwtAbstractDataTable<ROW>
+    implements UiWidgetAdapterAbstractListTable<ROW, ItemContainerGwt<ROW>> {
 
   /**
    * The constructor.
@@ -48,18 +47,15 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
    * {@inheritDoc}
    */
   @Override
-  public void addRow(TableRowContainer<ROW> row, int index) {
+  public void addRow(ItemContainerGwt<ROW> row, int index) {
 
-    TableRowContainerGwt<ROW> gwtRowContainer = (TableRowContainerGwt<ROW>) row;
+    ItemContainerGwt<ROW> gwtRowContainer = row;
     TableRow tableRow = gwtRowContainer.getTableRow();
     if (tableRow == null) {
       tableRow = new TableRow();
       gwtRowContainer.setTableRow(tableRow);
       // add multiselection checkbox
-      if (getSelectionMode() == SelectionMode.MULTIPLE_SELECTION) {
-        SimpleCheckBox multiSelectCheckbox = gwtRowContainer.getMultiSelectCheckbox();
-        tableRow.addCell(multiSelectCheckbox);
-      }
+      gwtRowContainer.setSelectionMode(getSelectionMode());
       update(gwtRowContainer, false);
     } else {
       // update(gwtRowContainer, true);
@@ -69,12 +65,12 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
   }
 
   /**
-   * @param row is the {@link TableRowContainerGwt} where to add or update the cells.
+   * @param row is the {@link ItemContainerGwt} where to add or update the cells.
    * @param update - <code>true</code> to update an already initialized <code>row</code>, <code>false</code>
    *        to initialize a newly created row.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  protected void update(TableRowContainerGwt<ROW> row, boolean update) {
+  protected void update(ItemContainerGwt<ROW> row, boolean update) {
 
     TableRow tableRow = row.getTableRow();
     for (AbstractUiWidgetTableColumn<?, ROW, ?> column : getColumns()) {
@@ -152,9 +148,9 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
    * {@inheritDoc}
    */
   @Override
-  public void removeRow(TableRowContainer<ROW> row) {
+  public void removeRow(ItemContainerGwt<ROW> row) {
 
-    TableRowContainerGwt<ROW> gwtRow = (TableRowContainerGwt<ROW>) row;
+    ItemContainerGwt<ROW> gwtRow = row;
     TableRow tableRow = gwtRow.getTableRow();
     getTableWidget().getTableBody().remove(tableRow);
   }
@@ -166,14 +162,13 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
   public void sort(AbstractUiWidgetTableColumn<?, ROW, ?> column, SortOrder sortOrder) {
 
     super.sort(column, sortOrder);
-    List<TableRowContainer<ROW>> rows = getUiWidgetTyped().getRowsInternal();
+    Collection<ItemContainerGwt<ROW>> rows = getUiWidgetTyped().getAllAvailableItems();
     TableBody tableBody = getTableWidget().getTableBody();
     int index = 1;
-    for (TableRowContainer<ROW> row : rows) {
+    for (ItemContainerGwt<ROW> row : rows) {
       TableRow tableRow = (TableRow) tableBody.getWidget(index++);
-      TableRowContainerGwt<ROW> gwtRow = (TableRowContainerGwt<ROW>) row;
-      gwtRow.setTableRow(tableRow);
-      update(gwtRow, true);
+      row.setTableRow(tableRow);
+      update(row, true);
     }
   }
 
@@ -181,9 +176,22 @@ public class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetAdapterGwt
    * {@inheritDoc}
    */
   @Override
-  public AbstractUiWidgetListTable<?, ROW> getUiWidgetTyped() {
+  public AbstractUiWidgetListTable<?, ROW, ItemContainerGwt<ROW>> getUiWidgetTyped() {
 
-    return (AbstractUiWidgetListTable<?, ROW>) getUiWidget();
+    return (AbstractUiWidgetListTable<?, ROW, ItemContainerGwt<ROW>>) getUiWidget();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void initializeMultiSelection() {
+
+    super.initializeMultiSelection();
+    List<ItemContainerGwt<ROW>> rowsInternal = getUiWidgetTyped().getAllAvailableItems();
+    for (ItemContainerGwt<ROW> tableRowContainer : rowsInternal) {
+      tableRowContainer.setSelectionMode(SelectionMode.MULTIPLE_SELECTION);
+    }
   }
 
   /**

@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.widget.complex.adapter;
 
 import java.util.List;
 
-import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
+import net.sf.mmm.client.ui.base.widget.complex.ItemContainer;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
@@ -12,12 +12,13 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable}.
  * 
  * @param <ROW> is the generic type of a row in the {@link #getValue() value list}.
+ * @param <ITEM_CONTAINER> is the generic type of the {@link ItemContainer}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAdapterAbstractListTable<ROW> extends UiWidgetAdapterAbstractDataTable<ROW>,
-    AttributeWriteValue<List<ROW>> {
+public interface UiWidgetAdapterAbstractListTable<ROW, ITEM_CONTAINER extends ItemContainer<ROW, ?>> extends
+    UiWidgetAdapterAbstractDataTable<ROW>, AttributeWriteValue<List<ROW>> {
 
   /**
    * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable#addRow(Object, int)
@@ -25,13 +26,13 @@ public interface UiWidgetAdapterAbstractListTable<ROW> extends UiWidgetAdapterAb
    * @param row is the {@literal <ROW>} to add.
    * @param index is the index where to add the new row.
    */
-  void addRow(TableRowContainer<ROW> row, int index);
+  void addRow(ITEM_CONTAINER row, int index);
 
   /**
    * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable#removeRow(Object)
    * 
    * @param row is the {@literal <ROW>} to remove.
    */
-  void removeRow(TableRowContainer<ROW> row);
+  void removeRow(ITEM_CONTAINER row);
 
 }

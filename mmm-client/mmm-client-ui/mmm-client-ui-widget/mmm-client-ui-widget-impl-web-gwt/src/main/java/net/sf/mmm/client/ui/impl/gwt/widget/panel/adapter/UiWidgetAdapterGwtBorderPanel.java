@@ -4,20 +4,20 @@ package net.sf.mmm.client.ui.impl.gwt.widget.panel.adapter;
 
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel;
-import net.sf.mmm.client.ui.gwt.widgets.BorderPanel;
+import net.sf.mmm.client.ui.gwt.widgets.Fieldset;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtSingleMutableComposite;
 
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterBorderPanel} using GWT based on {@link BorderPanel}.
+ * This is the implementation of {@link UiWidgetAdapterBorderPanel} using GWT based on {@link Fieldset}.
  * 
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class UiWidgetAdapterGwtBorderPanel extends
-    UiWidgetAdapterGwtSingleMutableComposite<BorderPanel, UiWidgetRegular> implements UiWidgetAdapterBorderPanel {
+    UiWidgetAdapterGwtSingleMutableComposite<Fieldset, UiWidgetRegular> implements UiWidgetAdapterBorderPanel {
 
   /** @see #setChild(UiWidgetRegular) */
   private Widget childWidget;
@@ -34,9 +34,9 @@ public class UiWidgetAdapterGwtBorderPanel extends
    * {@inheritDoc}
    */
   @Override
-  protected BorderPanel createToplevelWidget() {
+  protected Fieldset createToplevelWidget() {
 
-    return new BorderPanel();
+    return new Fieldset();
   }
 
   /**

@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.attribute;
 
 import net.sf.mmm.util.lang.api.Alignment;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**
  * This interface gives read access to the {@link #getAlignment() alignment} of an object.
@@ -13,6 +14,9 @@ import net.sf.mmm.util.lang.api.Alignment;
  * @since 1.0.0
  */
 public abstract interface AttributeReadAlignment {
+
+  /** {@link TypedProperty} for {@link #getAlignment()}. */
+  TypedProperty<Alignment> PROPERTY_ALIGNMENT = new TypedProperty<Alignment>(Alignment.class, "alignment");
 
   /**
    * This method gets the {@link Alignment} of this object.

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.attribute;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * This interface gives read access to the {@link #getSelectedValues() selected value(s)} (items) of an
@@ -30,12 +30,21 @@ public abstract interface AttributeReadSelectedValue<VALUE> {
   VALUE getSelectedValue();
 
   /**
-   * This method gets the currently selected values.
+   * This method gets the currently selected values. The order of the returned {@link Collection} is
+   * unspecified.
    * 
    * @see #getSelectedValue()
    * 
-   * @return the {@link List} with all selected values. Will be empty if nothing is selected.
+   * @return the {@link Collection} with all selected values. Will be {@link Collection#isEmpty() empty} if
+   *         nothing is selected.
    */
-  List<VALUE> getSelectedValues();
+  Collection<VALUE> getSelectedValues();
+
+  /**
+   * Logically the same as {@link #getSelectedValues()}.size() but more efficient.
+   * 
+   * @return the number of {@link #getSelectedValue() selected values}.
+   */
+  int getSelectionCount();
 
 }

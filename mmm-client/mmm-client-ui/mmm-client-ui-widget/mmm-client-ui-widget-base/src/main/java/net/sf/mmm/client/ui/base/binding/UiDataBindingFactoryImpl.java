@@ -94,23 +94,12 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
    * {@inheritDoc}
    */
   @Override
-  public <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<VALUE> widget) {
-
-    Class<VALUE> valueType = AbstractUiWidget.AccessHelper.getValueClass(widget);
-    return createDataBinding(widget.getContext(), widget, valueType);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<?> widget, Class<VALUE> valueType) {
 
     return createDataBinding(widget.getContext(), null, valueType);
   }
 
   /**
-   * @see #createDataBinding(AbstractUiWidget)
    * @see #createDataBinding(AbstractUiWidget, Class)
    * 
    * @param <VALUE> is the generic type of the <code>valueType</code>.

@@ -16,7 +16,8 @@ import net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter.UiWidgetAdapterGwtLi
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetListTableGwt<ROW> extends AbstractUiWidgetListTable<UiWidgetAdapterGwtListTable<ROW>, ROW> {
+public class UiWidgetListTableGwt<ROW> extends
+    AbstractUiWidgetListTable<UiWidgetAdapterGwtListTable<ROW>, ROW, ItemContainerGwt<ROW>> {
 
   /**
    * The constructor.
@@ -34,29 +35,9 @@ public class UiWidgetListTableGwt<ROW> extends AbstractUiWidgetListTable<UiWidge
    * {@inheritDoc}
    */
   @Override
-  protected TableRowContainerGwt<ROW> createRowContainer() {
+  protected ItemContainerGwt<ROW> createRowContainer() {
 
-    return new TableRowContainerGwt<ROW>(this);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInRows(int rows) {
-
-    // TODO Auto-generated method stub
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int getHeightInRows() {
-
-    // TODO Auto-generated method stub
-    return 0;
+    return new ItemContainerGwt<ROW>(this);
   }
 
   /**

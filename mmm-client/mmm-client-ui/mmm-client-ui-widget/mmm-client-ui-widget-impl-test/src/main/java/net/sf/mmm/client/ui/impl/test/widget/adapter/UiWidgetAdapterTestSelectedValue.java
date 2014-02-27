@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test.widget.adapter;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectedValue;
 
@@ -21,7 +21,7 @@ public class UiWidgetAdapterTestSelectedValue<VALUE> extends UiWidgetAdapterTest
     AttributeWriteSelectedValue<VALUE> {
 
   /** @see #getSelectedValues() */
-  private List<VALUE> selectedValues;
+  private Collection<VALUE> selectedValues;
 
   /**
    * The constructor.
@@ -46,11 +46,20 @@ public class UiWidgetAdapterTestSelectedValue<VALUE> extends UiWidgetAdapterTest
    * {@inheritDoc}
    */
   @Override
+  public int getSelectionCount() {
+
+    return this.selectedValues.size();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public VALUE getSelectedValue() {
 
     verifyNotDisposed();
     if (!this.selectedValues.isEmpty()) {
-      return this.selectedValues.get(0);
+      return this.selectedValues.iterator().next();
     }
     return null;
   }
@@ -59,7 +68,7 @@ public class UiWidgetAdapterTestSelectedValue<VALUE> extends UiWidgetAdapterTest
    * {@inheritDoc}
    */
   @Override
-  public List<VALUE> getSelectedValues() {
+  public Collection<VALUE> getSelectedValues() {
 
     verifyNotDisposed();
     return this.selectedValues;
@@ -69,21 +78,23 @@ public class UiWidgetAdapterTestSelectedValue<VALUE> extends UiWidgetAdapterTest
    * {@inheritDoc}
    */
   @Override
-  public void setSelectedValue(VALUE selectedValue) {
+  public boolean setSelectedValue(VALUE selectedValue) {
 
     verifyNotDisposed();
     this.selectedValues = new LinkedList<VALUE>();
     this.selectedValues.add(selectedValue);
+    return true;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setSelectedValues(List<VALUE> selection) {
+  public boolean setSelectedValues(Collection<VALUE> selection) {
 
     verifyNotDisposed();
     this.selectedValues = selection;
+    return true;
   }
 
 }

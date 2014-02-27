@@ -2,18 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.javafx.widget.adapter;
 
-import javafx.scene.control.Control;
-import javafx.scene.control.Tooltip;
 import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterActive;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} using JavaFx
  * based on {@link Control}.
- * 
+ *
  * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -22,7 +21,7 @@ public abstract class UiWidgetAdapterJavaFxControl<WIDGET extends Control> exten
 
   /**
    * The constructor.
-   * 
+   *
    */
   public UiWidgetAdapterJavaFxControl() {
 
@@ -31,7 +30,7 @@ public abstract class UiWidgetAdapterJavaFxControl<WIDGET extends Control> exten
 
   /**
    * This method is a simplified variant of {@link #getToplevelWidget(UiWidget, Class)}.
-   * 
+   *
    * @param widget is the {@link UiWidget} to "unwrap".
    * @return the native widget.
    */
@@ -71,6 +70,24 @@ public abstract class UiWidgetAdapterJavaFxControl<WIDGET extends Control> exten
   public Length getWidth() {
 
     return Length.valueOfPixel(getToplevelWidget().getWidth());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Length getLength(LengthProperty property) {
+
+    Control widget = getToplevelWidget();
+    switch (property) {
+      case WIDTH:
+        widget.getWidth();
+        break;
+
+      default :
+        break;
+    }
+    return null;
   }
 
   /**

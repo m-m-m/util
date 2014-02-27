@@ -4,8 +4,6 @@ package net.sf.mmm.client.ui.api.widget;
 
 import java.util.List;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteHeightInRows;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 
 /**
@@ -20,8 +18,7 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
  * @since 1.0.0
  * @param <ROW> is the generic type of the object in each row of the list.
  */
-public abstract interface UiWidgetListBase<ROW> extends UiWidgetWithValue<List<ROW>>, UiFeatureSelectedValue<ROW>,
-    AttributeWriteSelectionMode, AttributeWriteHeightInRows {
+public abstract interface UiWidgetListBase<ROW> extends UiWidgetWithValue<List<ROW>>, UiFeatureSelectedValue<ROW> {
 
   // nothing to add...
 

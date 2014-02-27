@@ -30,8 +30,11 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
 public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapterTableColumn, ROW, CELL> extends
     AbstractUiWidgetNative<ADAPTER, CELL> implements UiWidgetTableColumn<ROW, CELL> {
 
+  /** The virtual property for multi-selection. */
+  public static final TypedProperty<Boolean> PROPERTY_SELECTED = new TypedProperty<Boolean>("<selected>");
+
   /** @see #getListTable() */
-  private final AbstractUiWidgetAbstractDataTable<?, ROW> listTable;
+  private final AbstractUiWidgetAbstractDataTable<?, ROW, ?> listTable;
 
   /** @see #getTypedProperty() */
   private final TypedProperty<CELL> typedProperty;
@@ -76,7 +79,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public AbstractUiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW> listTable,
+  public AbstractUiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW, ?> listTable,
       TypedProperty<CELL> typedProperty, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
@@ -323,7 +326,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   /**
    * @return the {@link AbstractUiWidgetAbstractListTable list table} owning this column.
    */
-  public AbstractUiWidgetAbstractDataTable<?, ROW> getListTable() {
+  public AbstractUiWidgetAbstractDataTable<?, ROW, ?> getListTable() {
 
     return this.listTable;
   }

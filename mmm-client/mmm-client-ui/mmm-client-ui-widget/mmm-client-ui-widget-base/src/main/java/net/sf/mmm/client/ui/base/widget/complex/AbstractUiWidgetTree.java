@@ -2,15 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.complex;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.common.SelectionMode;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
-import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
 
 /**
@@ -24,7 +21,7 @@ import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<NODE>, NODE> extends
-    AbstractUiWidgetActive<ADAPTER, NODE> implements UiWidgetTree<NODE> {
+    AbstractUiWidgetAbstractDataSet<ADAPTER, NODE, NODE, NODE> implements UiWidgetTree<NODE> {
 
   /** The default {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer}. */
   private static final UiTreeNodeRenderer<Object, UiWidgetLabel> DEFAULT_RENDERER = new UiTreeNodeRendererDefault<Object>();
@@ -34,12 +31,6 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
 
   /** @see #setTreeNodeRenderer(net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer) */
   private UiTreeNodeRenderer<NODE, ?> treeNodeRenderer;
-
-  /** @see #getSelectedValues() */
-  private List<NODE> selectedValues;
-
-  /** @see #getSelectionMode() */
-  private SelectionMode selectionMode;
 
   /** @see #getTitle() */
   private String title;
@@ -56,7 +47,6 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
 
     super(context, widgetAdapter);
     this.treeNodeRenderer = (UiTreeNodeRenderer) DEFAULT_RENDERER;
-    this.selectionMode = SelectionMode.SINGLE_SELECTION;
   }
 
   /**
@@ -75,11 +65,9 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
     if (this.treeNodeRenderer != null) {
       adapter.setTreeNodeRenderer(this.treeNodeRenderer);
     }
-    if (this.selectionMode != null) {
-      adapter.setSelectionMode(this.selectionMode);
-    }
-    if (getOriginalValue() != null) {
-      adapter.setRootNode(getOriginalValue());
+    NODE rootNode = getOriginalValue();
+    if (rootNode != null) {
+      adapter.setRootNode(rootNode);
     }
   }
 
@@ -141,16 +129,19 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @SuppressWarnings({ "unchecked", "rawtypes" })
-  @Override
-  protected Class<NODE> getValueClass() {
-
-    NODE rootNode = this.treeModel.getRootNode();
-    return (Class) rootNode.getClass();
-  }
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @SuppressWarnings({ "unchecked", "rawtypes" })
+  // @Override
+  // protected Class<NODE> getValueClass() {
+  //
+  // NODE rootNode = getRecentValue();
+  // if (rootNode == null) {
+  // return null;
+  // }
+  // return (Class) rootNode.getClass();
+  // }
 
   /**
    * @return the treeModel
@@ -186,71 +177,6 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
    * {@inheritDoc}
    */
   @Override
-  public void setSelectedValue(NODE selectedValue) {
-
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setSelectedValue(selectedValue);
-    } else {
-      this.selectedValues = Arrays.asList(selectedValue);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSelectedValues(List<NODE> selection) {
-
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setSelectedValues(selection);
-    } else {
-      this.selectedValues = selection;
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public SelectionMode getSelectionMode() {
-
-    return this.selectionMode;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSelectionMode(SelectionMode selectionMode) {
-
-    this.selectionMode = selectionMode;
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().setSelectionMode(selectionMode);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void addSelectionHandler(UiHandlerEventSelection<NODE> handler) {
-
-    addEventHandler(handler);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean removeSelectionHandler(UiHandlerEventSelection<NODE> handler) {
-
-    return removeEventHandler(handler);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   protected void doSetValue(NODE value, boolean forUser) {
 
     super.doSetValue(value, forUser);
@@ -263,42 +189,80 @@ public abstract class AbstractUiWidgetTree<ADAPTER extends UiWidgetAdapterTree<N
    * {@inheritDoc}
    */
   @Override
-  public boolean hasSelectedValue() {
+  protected void doSetSelected(NODE container, boolean selected) {
 
-    if (hasWidgetAdapter()) {
-      return getWidgetAdapter().hasSelectedValue();
-    } else {
-      return ((this.selectedValues != null) && (!this.selectedValues.isEmpty()));
-    }
+    // TODO Auto-generated method stub
+
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public NODE getSelectedValue() {
+  public Collection<NODE> getAllAvailableItems() {
 
-    if (hasWidgetAdapter()) {
-      return getWidgetAdapter().getSelectedValue();
-    } else {
-      if ((this.selectedValues == null) || (this.selectedValues.isEmpty())) {
-        return null;
-      }
-      return this.selectedValues.get(0);
-    }
+    // TODO Auto-generated method stub
+    return Collections.emptyList();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public List<NODE> getSelectedValues() {
+  protected NODE getLastAvailableItem() {
 
-    if (hasWidgetAdapter()) {
-      return getWidgetAdapter().getSelectedValues();
-    } else {
-      return this.selectedValues;
-    }
+    // TODO Auto-generated method stub
+    return null;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected NODE getItemContainer(NODE item) {
+
+    // TODO Auto-generated method stub
+    return item;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected NODE getItem(NODE container) {
+
+    // TODO Auto-generated method stub
+    return container;
+  }
+
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public NODE getSelectedValue() {
+  //
+  // if (hasWidgetAdapter()) {
+  // return getWidgetAdapter().getSelectedValue();
+  // } else {
+  // if ((this.selectedValues == null) || (this.selectedValues.isEmpty())) {
+  // return null;
+  // }
+  // return this.selectedValues.get(0);
+  // }
+  // }
+
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public List<NODE> getSelectedValues() {
+  //
+  // if (hasWidgetAdapter()) {
+  // return getWidgetAdapter().getSelectedValues();
+  // } else {
+  // return this.selectedValues;
+  // }
+  // }
 
 }

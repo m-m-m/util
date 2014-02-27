@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -134,22 +133,22 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSelectedValue(NODE selectedValue) {
-
-    TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(selectedValue);
-    if (treeNodeAdapter != null) {
-      if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
-        getGwtTree().setSelectedItem(treeNodeAdapter);
-      } else {
-        clearMultiSelection();
-        treeNodeAdapter.multiSelectionCheckbox.setValue(Boolean.TRUE);
-      }
-    }
-  }
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public boolean setSelectedValue(NODE selectedValue) {
+  //
+  // TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(selectedValue);
+  // if (treeNodeAdapter != null) {
+  // if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
+  // getGwtTree().setSelectedItem(treeNodeAdapter);
+  // } else {
+  // clearMultiSelection();
+  // treeNodeAdapter.multiSelectionCheckbox.setValue(Boolean.TRUE);
+  // }
+  // }
+  // }
 
   /**
    * Clear {@link SimpleCheckBox}es of {@link SelectionMode#MULTIPLE_SELECTION}.
@@ -161,74 +160,84 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSelectedValues(List<NODE> selectedValues) {
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public boolean setSelectedValues(List<NODE> selectedValues) {
+  //
+  // if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
+  // clearMultiSelection();
+  // for (NODE node : selectedValues) {
+  // TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(node);
+  // if (treeNodeAdapter != null) {
+  // treeNodeAdapter.multiSelectionCheckbox.setValue(Boolean.TRUE);
+  // }
+  // }
+  // }
+  // }
 
-    if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
-      clearMultiSelection();
-      for (NODE node : selectedValues) {
-        TreeNodeAdapter treeNodeAdapter = this.nodeMap.get(node);
-        if (treeNodeAdapter != null) {
-          treeNodeAdapter.multiSelectionCheckbox.setValue(Boolean.TRUE);
-        }
-      }
-    }
-  }
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public boolean hasSelectedValue() {
+  //
+  // return (getSelectedValue() != null);
+  // }
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public NODE getSelectedValue() {
+  //
+  // if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
+  // TreeNodeAdapter selectedItem = (TreeNodeAdapter) getGwtTree().getSelectedItem();
+  // if (selectedItem != null) {
+  // return selectedItem.node;
+  // }
+  // } else if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
+  // for (TreeNodeAdapter adapter : this.nodeMap.values()) {
+  // if (adapter.multiSelectionCheckbox.getValue().booleanValue()) {
+  // return adapter.node;
+  // }
+  // }
+  // }
+  // return null;
+  // }
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public List<NODE> getSelectedValues() {
+  //
+  // List<NODE> selectedValues = new LinkedList<NODE>();
+  // if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
+  // TreeNodeAdapter selectedItem = (TreeNodeAdapter) getGwtTree().getSelectedItem();
+  // if (selectedItem != null) {
+  // selectedValues.add(selectedItem.node);
+  // }
+  // } else if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
+  // for (TreeNodeAdapter adapter : this.nodeMap.values()) {
+  // if (adapter.multiSelectionCheckbox.getValue().booleanValue()) {
+  // selectedValues.add(adapter.node);
+  // }
+  // }
+  // }
+  // return selectedValues;
+  // }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean hasSelectedValue() {
-
-    return (getSelectedValue() != null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public NODE getSelectedValue() {
-
-    if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
-      TreeNodeAdapter selectedItem = (TreeNodeAdapter) getGwtTree().getSelectedItem();
-      if (selectedItem != null) {
-        return selectedItem.node;
-      }
-    } else if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
-      for (TreeNodeAdapter adapter : this.nodeMap.values()) {
-        if (adapter.multiSelectionCheckbox.getValue().booleanValue()) {
-          return adapter.node;
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<NODE> getSelectedValues() {
-
-    List<NODE> selectedValues = new LinkedList<NODE>();
-    if (this.selectionMode == SelectionMode.SINGLE_SELECTION) {
-      TreeNodeAdapter selectedItem = (TreeNodeAdapter) getGwtTree().getSelectedItem();
-      if (selectedItem != null) {
-        selectedValues.add(selectedItem.node);
-      }
-    } else if (this.selectionMode == SelectionMode.MULTIPLE_SELECTION) {
-      for (TreeNodeAdapter adapter : this.nodeMap.values()) {
-        if (adapter.multiSelectionCheckbox.getValue().booleanValue()) {
-          selectedValues.add(adapter.node);
-        }
-      }
-    }
-    return selectedValues;
-  }
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // public int getSelectionCount() {
+  //
+  // // TODO hohwille implement more efficient!
+  // return getSelectedValues().size();
+  // }
 
   /**
    * {@inheritDoc}
@@ -381,9 +390,6 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.tree.setTabIndex(HtmlConstants.TAB_INDEX_DISABLE);
       OpenHandler<TreeItem> openHandler = new OpenHandler<TreeItem>() {
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public void onOpen(OpenEvent<TreeItem> event) {
 
@@ -425,6 +431,44 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.titleHeader.setStylePrimaryName("Header");
     }
     return this.titleHeader;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTitleVisible() {
+
+    return getTitleHeader().isVisible();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setTitleVisible(boolean titleVisible) {
+
+    getTitleHeader().setVisible(titleVisible);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSummary(String summary) {
+
+    // TODO Auto-generated method stub
+
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getSummary() {
+
+    // TODO Auto-generated method stub
+    return null;
   }
 
   /**

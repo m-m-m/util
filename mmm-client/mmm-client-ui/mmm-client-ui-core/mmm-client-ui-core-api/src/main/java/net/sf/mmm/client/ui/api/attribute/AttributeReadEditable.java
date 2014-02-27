@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.attribute;
 
-
 /**
  * This interface gives read access to the {@link #isEditable() editable} attribute of an object.
  * 
@@ -21,9 +20,14 @@ public abstract interface AttributeReadEditable {
    * disabling} a UI object. An {@link AttributeReadEnabled#isEnabled() enabled} but NOT {@link #isEditable()
    * editable} object may still allow user-interaction (e.g. a combobox that still allows selection out of a
    * predefined list but no editing of the text). Further the visualization is softer (no grey out of the
-   * entire object).
+   * entire object). <br/>
+   * <b>ATTENTION:</b><br/>
+   * There may be other aspects that have influence if the user can currently edit this object such as the
+   * {@link AttributeReadMode#getMode() mode} or {@link AttributeReadEnabled#isEnabled() enabled flag}. This
+   * method only returns the editable flag (as set via {@link AttributeWriteEditable#setEditable(boolean)})
+   * and therefore only tells if the object is potentially editable.
    * 
-   * @return <code>true</code> if this object is editable.
+   * @return <code>true</code> if this object is editable, <code>false</code> otherwise.
    */
   boolean isEditable();
 

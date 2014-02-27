@@ -4,8 +4,9 @@ package net.sf.mmm.client.ui.impl.gwt.widget.complex;
 
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
+import net.sf.mmm.client.ui.base.widget.complex.AbstractItemContainer;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetAbstractDataTable;
-import net.sf.mmm.client.ui.base.widget.complex.TableRowContainer;
+import net.sf.mmm.client.ui.gwt.widgets.TableCellAtomic;
 import net.sf.mmm.client.ui.gwt.widgets.TableRow;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 
@@ -22,10 +23,14 @@ import com.google.gwt.user.client.ui.SimpleCheckBox;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class TableRowContainerGwt<ROW> extends TableRowContainer<ROW> implements ClickHandler {
+public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContainerGwt<ROW>> implements
+    ClickHandler {
 
   /** @see #getTableRow() */
   private TableRow tableRow;
+
+  /** @see #getRowNumberCell() */
+  private TableCellAtomic rowNumberCell;
 
   /** @see #setSelected(boolean) */
   private SimpleCheckBox multiSelectCheckbox;
@@ -34,9 +39,9 @@ public class TableRowContainerGwt<ROW> extends TableRowContainer<ROW> implements
    * The constructor.
    * 
    * @param dataTable is the {@link AbstractUiWidgetAbstractDataTable} creating and owning this
-   *        {@link TableRowContainerGwt}.
+   *        {@link ItemContainerGwt}.
    */
-  public TableRowContainerGwt(AbstractUiWidgetAbstractDataTable<?, ROW> dataTable) {
+  public ItemContainerGwt(AbstractUiWidgetAbstractDataTable<?, ROW, ItemContainerGwt<ROW>> dataTable) {
 
     super(dataTable);
   }
@@ -64,10 +69,37 @@ public class TableRowContainerGwt<ROW> extends TableRowContainer<ROW> implements
 
     if (this.multiSelectCheckbox == null) {
       this.multiSelectCheckbox = new SimpleCheckBox();
-      getTableRow().insert(this.multiSelectCheckbox, 0);
+      TableCellAtomic cell = new TableCellAtomic();
+      cell.add(this.multiSelectCheckbox);
+      if (this.rowNumberCell == null) {
+        getTableRow().insert(cell, 0);
+      } else {
+        getTableRow().insert(cell, 1);
+      }
       this.multiSelectCheckbox.addClickHandler(this);
     }
     return this.multiSelectCheckbox;
+  }
+
+  /**
+   * @return the cell showing the row number.
+   */
+  public TableCellAtomic getRowNumberCell() {
+
+    if (this.rowNumberCell == null) {
+      this.rowNumberCell = new TableCellAtomic();
+      this.rowNumberCell.setStyleName(CssStyles.ROW_NUMBER);
+      getTableRow().insert(this.multiSelectCheckbox, 0);
+    }
+    return this.rowNumberCell;
+  }
+
+  /**
+   * @param row is the current number of this row (starting with 1).
+   */
+  public void setRowNumber(int row) {
+
+    getRowNumberCell().setText(Integer.toString(row));
   }
 
   /**
@@ -78,7 +110,7 @@ public class TableRowContainerGwt<ROW> extends TableRowContainer<ROW> implements
 
     boolean selected = isSelected();
     updateSelectionStyle(selected);
-    getDataTable().onRowSelection(this, selected, false);
+    getUiWidget().onItemSelection(this, selected, false);
   }
 
   /**
@@ -91,7 +123,7 @@ public class TableRowContainerGwt<ROW> extends TableRowContainer<ROW> implements
       case MULTIPLE_SELECTION:
         return this.multiSelectCheckbox.getValue().booleanValue();
       case SINGLE_SELECTION:
-        return (getDataTable().getSelectedValue() == getValue());
+        return (getUiWidget().getSelectedValue() == getValue());
       default :
         throw new IllegalCaseException(SelectionMode.class, getSelectionMode());
     }
@@ -136,48 +168,16 @@ public class TableRowContainerGwt<ROW> extends TableRowContainer<ROW> implements
 
     switch (selectionMode) {
       case MULTIPLE_SELECTION:
-        getMultiSelectCheckbox();
-        // TODO show multiselection column
+        getMultiSelectCheckbox().setVisible(true);
         break;
       case SINGLE_SELECTION:
+        if (this.multiSelectCheckbox != null) {
+          this.multiSelectCheckbox.setVisible(false);
+        }
         break;
-      // TODO hide multiselection column
       default :
         throw new IllegalCaseException(SelectionMode.class, selectionMode);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public boolean equals(Object obj) {
-
-    if (obj == null) {
-      return false;
-    }
-    // ATTENTION: This implementation of equals is violating the contract of equals
-    // this is done on purpose for performance reasons and flexibility with equals checker
-    // However, this class shall never be passed to API users and is to be used only internal by complex
-    // widgets and their adapters.
-    ROW otherRow;
-    if (obj instanceof TableRowContainerGwt) {
-      otherRow = ((TableRowContainerGwt<ROW>) obj).getValue();
-    } else {
-      otherRow = (ROW) obj;
-    }
-    return getDataTable().getRowEqualsChecker().isEqual(getValue(), otherRow);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int hashCode() {
-
-    // For reusing row container via setValue we intentionally do not delegate to this.row.hashValue()
-    return super.hashCode();
   }
 
 }

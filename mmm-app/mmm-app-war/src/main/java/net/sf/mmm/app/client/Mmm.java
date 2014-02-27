@@ -211,6 +211,7 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
     columnLastName.setLength(LengthProperty.MIN_WIDTH, Length.valueOfPixel(50));
     columnLastName.setLength(LengthProperty.WIDTH, Length.valueOfPixel(400));
     contactTable.setColumns(columnFirstName, columnLastName, columnIncome);
+    contactTable.setSelectionMode(SelectionMode.MULTIPLE_SELECTION);
 
     final List<ContactBean> contactBeanList = new ArrayList<ContactBean>();
     createContacts(contactBeanList);

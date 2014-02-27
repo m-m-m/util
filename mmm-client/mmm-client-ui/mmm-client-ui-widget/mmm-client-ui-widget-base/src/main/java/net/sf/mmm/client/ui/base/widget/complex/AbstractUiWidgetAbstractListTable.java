@@ -3,14 +3,15 @@
 package net.sf.mmm.client.ui.base.widget.complex;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.ColumnContainerComparator;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractListTable;
-import net.sf.mmm.util.lang.api.EqualsChecker;
+import net.sf.mmm.util.collection.base.HashKey;
 import net.sf.mmm.util.lang.api.SortOrder;
 
 /**
@@ -18,15 +19,19 @@ import net.sf.mmm.util.lang.api.SortOrder;
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <ROW> is the generic type of a row in the {@link #getValue() value list}.
+ * @param <ITEM_CONTAINER> is the generic type of the {@link ItemContainer}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidgetAdapterAbstractListTable<ROW>, ROW>
-    extends AbstractUiWidgetAbstractDataTable<ADAPTER, ROW> implements UiWidgetAbstractListTable<ROW> {
+public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidgetAdapterAbstractListTable<ROW, ITEM_CONTAINER>, ROW, ITEM_CONTAINER extends ItemContainer<ROW, ITEM_CONTAINER>>
+    extends AbstractUiWidgetAbstractDataTable<ADAPTER, ROW, ITEM_CONTAINER> implements UiWidgetAbstractListTable<ROW> {
 
-  /** @see #getRowsInternal() */
-  private final List<TableRowContainer<ROW>> rows;
+  /** @see #getAllAvailableItems() */
+  private final List<ITEM_CONTAINER> rows;
+
+  /** @see #getItemContainer(Object) */
+  private final Map<HashKey<ROW>, ITEM_CONTAINER> rowMap;
 
   /** The {@link ColumnContainerComparator} for this table. */
   private final ColumnContainerComparator<ROW> comparator;
@@ -41,7 +46,8 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
   public AbstractUiWidgetAbstractListTable(UiContext context, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
-    this.rows = new ArrayList<TableRowContainer<ROW>>();
+    this.rows = new ArrayList<ITEM_CONTAINER>();
+    this.rowMap = new HashMap<HashKey<ROW>, ITEM_CONTAINER>();
     this.comparator = new ColumnContainerComparator<ROW>();
   }
 
@@ -56,16 +62,10 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
   }
 
   /**
-   * Returns the {@link List} with all rows of this list table. <br/>
-   * <b>ATTENTION:</b><br/>
-   * The result is an internal reference that shall not be passed to users as result of API methods.
-   * 
-   * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable#getValue()
-   * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetOptionListTable#getOptions()
-   * 
-   * @return the {@link List} with all rows of this list table.
+   * {@inheritDoc}
    */
-  public List<TableRowContainer<ROW>> getRowsInternal() {
+  @Override
+  public List<ITEM_CONTAINER> getAllAvailableItems() {
 
     return this.rows;
   }
@@ -74,14 +74,36 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
    * {@inheritDoc}
    */
   @Override
+  protected ITEM_CONTAINER getLastAvailableItem() {
+
+    return this.rows.get(this.rows.size() - 1);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected ITEM_CONTAINER getItemContainer(ROW item) {
+
+    return this.rowMap.get(new HashKey<ROW>(item));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doSetSelected(ITEM_CONTAINER container, boolean selected) {
+
+    container.setSelected(selected);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void addRow(ROW row) {
 
-    TableRowContainer<ROW> rowContainer = createRowContainer(row);
-    int index = this.rows.size();
-    this.rows.add(rowContainer);
-    if (hasWidgetAdapter()) {
-      getWidgetAdapter().addRow(rowContainer, index);
-    }
+    addRow(row, this.rows.size());
   }
 
   /**
@@ -90,7 +112,8 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
   @Override
   public void addRow(ROW row, int index) {
 
-    TableRowContainer<ROW> rowContainer = createRowContainer(row);
+    ITEM_CONTAINER rowContainer = createRowContainer(row);
+    this.rowMap.put(new HashKey<ROW>(row), rowContainer);
     this.rows.add(index, rowContainer);
     if (hasWidgetAdapter()) {
       getWidgetAdapter().addRow(rowContainer, index);
@@ -101,24 +124,9 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
    * {@inheritDoc}
    */
   @Override
-  protected TableRowContainer<ROW> getRowContainer(ROW row) {
-
-    EqualsChecker<ROW> rowEqualsChecker = getRowEqualsChecker();
-    for (TableRowContainer<ROW> rowContainer : this.rows) {
-      if (rowEqualsChecker.isEqual(rowContainer.getValue(), row)) {
-        return rowContainer;
-      }
-    }
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public boolean removeRow(ROW row) {
 
-    TableRowContainer<ROW> rowContainer = getRowContainer(row);
+    ITEM_CONTAINER rowContainer = removeRowFromMap(row);
     if (rowContainer == null) {
       return false;
     }
@@ -130,14 +138,38 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
   }
 
   /**
+   * Removes the given row from the internal {@link Map}.
+   * 
+   * @param row is the {@literal <ROW>} to remove or replace.
+   * @return the {@link ItemContainer} for the given <code>row</code> that has been removed or
+   *         <code>null</code> if none was found.
+   */
+  private ITEM_CONTAINER removeRowFromMap(ROW row) {
+
+    HashKey<ROW> key = new HashKey<ROW>(row);
+    ITEM_CONTAINER rowContainer = this.rowMap.remove(key);
+    if (rowContainer == null) {
+      return null;
+    }
+    ROW duplicate = rowContainer.getItemEdited();
+    if (duplicate == row) {
+      duplicate = rowContainer.getItemOriginal();
+    }
+    if (duplicate != null) {
+      key = new HashKey<ROW>(duplicate);
+      this.rowMap.remove(key);
+    }
+    return rowContainer;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override
   public int getRowIndex(ROW row) {
 
-    EqualsChecker<ROW> equalsChecker = getRowEqualsChecker();
     for (int i = 0; i < this.rows.size(); i++) {
-      if (equalsChecker.isEqual(row, this.rows.get(i).getValue())) {
+      if (this.rows.get(i).isContainerForItem(row)) {
         return i;
       }
     }
@@ -150,22 +182,23 @@ public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidget
   @Override
   public boolean replaceRow(ROW oldRow, ROW newRow) {
 
-    TableRowContainer<ROW> rowContainer = getRowContainer(oldRow);
+    if (oldRow == newRow) {
+      return true;
+    }
+    ITEM_CONTAINER rowContainer = removeRowFromMap(oldRow);
     if (rowContainer == null) {
       return false;
     }
-    Collection<TableRowContainer<ROW>> selection = getSelectedValuesInternal();
-    boolean selected = selection.contains(rowContainer);
-    if (selected) {
-      selection.remove(rowContainer);
+    rowContainer.setItemOriginal(newRow);
+    rowContainer.setItemEdited(null);
+    this.rowMap.put(new HashKey<ROW>(newRow), rowContainer);
+    // TODO hohwille what about sorting? We need to insert the new row according to the current sort order...
+    // or for simplicity trigger the sorting again...
+
+    if (hasWidgetAdapter()) {
+      // TODO hohwille update row...
+      // getWidgetAdapter().updateRow(rowContainer);
     }
-    rowContainer.setValue(newRow);
-    if (selected) {
-      selection.add(rowContainer);
-    }
-    // if (hasWidgetAdapter()) {
-    // getWidgetAdapter().setRow(newRow, index);
-    // }
     return true;
   }
 

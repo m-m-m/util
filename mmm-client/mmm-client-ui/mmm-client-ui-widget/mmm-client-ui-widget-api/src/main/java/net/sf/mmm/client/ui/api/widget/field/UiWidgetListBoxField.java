@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.api.widget.field;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.aria.role.RoleListbox;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteHeightInRows;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteOptions;
 import net.sf.mmm.client.ui.api.widget.UiWidgetListBase;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
@@ -18,8 +19,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  */
-public interface UiWidgetListBoxField<VALUE> extends UiWidgetListBase<VALUE>, UiWidgetField<List<VALUE>>, UiWidgetNative,
-    AttributeWriteOptions<VALUE> {
+public interface UiWidgetListBoxField<VALUE> extends UiWidgetListBase<VALUE>, UiWidgetField<List<VALUE>>,
+    UiWidgetNative, AttributeWriteOptions<VALUE>, AttributeWriteHeightInRows {
 
   /**
    * {@inheritDoc}

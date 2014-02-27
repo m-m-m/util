@@ -46,7 +46,7 @@ public class UiWidgetCustomFieldPostalCode extends UiWidgetCustomFieldAtomic<Pos
     if (value == null) {
       return null;
     }
-    return value.getTitle();
+    return value.toString();
   }
 
 }

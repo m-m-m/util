@@ -4,19 +4,14 @@ package net.sf.mmm.client.ui.api.widget.complex;
 
 import java.util.Comparator;
 
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectionMode;
 import net.sf.mmm.client.ui.api.common.CssStyles;
-import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
-import net.sf.mmm.util.lang.api.EqualsChecker;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
- * This is the abstract interface for a {@link UiWidgetRegular regular widget} that represents a
+ * This is the abstract interface for a {@link UiWidgetAbstractDataSet data set widget} that represents a
  * <em>data table</em>. That is a table showing rows of data with their attributes in columns. It has the
  * following features:
  * <ul>
@@ -51,8 +46,7 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetRegular, UiFeatureSelectedValue<ROW>,
-    AttributeWriteSelectionMode, AttributeWriteEditable {
+public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<ROW> {
 
   /** The default {@link #hasStyle(String) style} of this data table widget. */
   String STYLE_DATA_TABLE = CssStyles.DATA_TABLE;
@@ -142,28 +136,30 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetRegular, UiFeatu
    * @return the requested {@link UiWidgetTableColumn column}.
    */
   UiWidgetTableColumn<ROW, ?> getColumn(int index);
-
-  /**
-   * @see #setRowEqualsChecker(EqualsChecker)
-   * 
-   * @return the {@link EqualsChecker} used to compare if two given rows are considered equal.
-   */
-  EqualsChecker<ROW> getRowEqualsChecker();
-
-  /**
-   * This method sets the {@link EqualsChecker} used to compare if two given rows are considered equal. <br/>
-   * <b>ATTENTION:</b><br/>
-   * By default {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame} is used as a data list can potentially
-   * contain two rows (nodes for tree table) with the same data. As an equals method may then return
-   * <code>true</code> these two different rows could not be distinguished causing strange effects. You may
-   * change the behavior by providing a different implementation of {@link EqualsChecker} such as
-   * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual} if you are aware that editable data tables allow
-   * the end-user to modify rows what will create a copy that will not be {@link Object#equals(Object) equal}.
-   * You should only use this method when creating a data table but not on the fly after the data table has
-   * already been attached to the UI.
-   * 
-   * @param equalsChecker is the new {@link EqualsChecker} to use.
-   */
-  void setRowEqualsChecker(EqualsChecker<ROW> equalsChecker);
+  //
+  // /**
+  // * @see #setRowEqualsChecker(EqualsChecker)
+  // *
+  // * @return the {@link EqualsChecker} used to compare if two given rows are considered equal.
+  // */
+  // EqualsChecker<ROW> getRowEqualsChecker();
+  //
+  // /**
+  // * This method sets the {@link EqualsChecker} used to compare if two given rows are considered equal.
+  // <br/>
+  // * <b>ATTENTION:</b><br/>
+  // * By default {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame} is used as a data list can potentially
+  // * contain two rows (nodes for tree table) with the same data. As an equals method may then return
+  // * <code>true</code> these two different rows could not be distinguished causing strange effects. You may
+  // * change the behavior by providing a different implementation of {@link EqualsChecker} such as
+  // * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual} if you are aware that editable data tables allow
+  // * the end-user to modify rows what will create a copy that will not be {@link Object#equals(Object)
+  // equal}.
+  // * You should only use this method when creating a data table but not on the fly after the data table has
+  // * already been attached to the UI.
+  // *
+  // * @param equalsChecker is the new {@link EqualsChecker} to use.
+  // */
+  // void setRowEqualsChecker(EqualsChecker<ROW> equalsChecker);
 
 }
