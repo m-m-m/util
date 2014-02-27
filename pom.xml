@@ -370,6 +370,12 @@
           <version>2.2</version>
         </plugin>
         <plugin>
+          <!-- https://svn.codehaus.org/mojo/trunk/sandbox/consumer-maven-plugin -->
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>consumer-maven-plugin</artifactId>
+          <version>0.9.0-SNAPSHOT</version>
+        </plugin>
+        <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>
           <version>1.0.0</version>
@@ -378,11 +384,11 @@
               <pluginExecutions>
                 <pluginExecution>
                   <pluginExecutionFilter>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-help-plugin</artifactId>
-                    <versionRange>[1.0,)</versionRange>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>consumer-maven-plugin</artifactId>
+                    <versionRange>[0.1,)</versionRange>
                     <goals>
-                      <goal>effective-pom</goal>
+                      <goal>consumer</goal>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
@@ -434,38 +440,21 @@
         </configuration>
       </plugin>
       
-      <!-- generate effective pom -->
+      <!-- generate and use consumer pom instead of pom.xml -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-help-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>consumer-maven-plugin</artifactId>
         <configuration>
-          <output>${effective.pom}</output>
         </configuration>
         <executions>
           <execution>
-            <id>generate-effective-pom</id>
+            <id>generate-consumer-pom</id>
             <phase>process-resources</phase>
             <goals>
-              <goal>effective-pom</goal>
+              <goal>consumer</goal>
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <!-- install effective pom -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <configuration>
-          <pomFile>${effective.pom}</pomFile>
-        </configuration>
-      </plugin>
-      <!-- deploy effective pom -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <configuration>
-          <pomFile>${effective.pom}</pomFile>
-        </configuration>
       </plugin>
 
       <!-- also generate source JARs -->
