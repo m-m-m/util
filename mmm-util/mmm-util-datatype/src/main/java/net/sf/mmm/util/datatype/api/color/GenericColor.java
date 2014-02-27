@@ -5,7 +5,6 @@ package net.sf.mmm.util.datatype.api.color;
 import java.util.Objects;
 
 import net.sf.mmm.util.lang.api.AbstractDatatype;
-import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.lang.base.GwtHelper;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
@@ -26,7 +25,7 @@ import net.sf.mmm.util.nls.api.NlsParseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public final class GenericColor extends AbstractDatatype implements SimpleDatatype<String> {
+public final class GenericColor extends AbstractDatatype {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 3175467633850341788L;
@@ -510,15 +509,6 @@ public final class GenericColor extends AbstractDatatype implements SimpleDataty
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getValue() {
-
-    return getTitle();
-  }
-
-  /**
    * @return the converted {@link Color} corresponding to this {@link GenericColor}.
    */
   public Color toColor() {
@@ -576,7 +566,7 @@ public final class GenericColor extends AbstractDatatype implements SimpleDataty
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     return toString(ColorModel.RGB);
   }
@@ -588,7 +578,7 @@ public final class GenericColor extends AbstractDatatype implements SimpleDataty
    */
   public String toString(ColorModel colorModel) {
 
-    StringBuilder buffer = new StringBuilder(GwtHelper.toLowerCase(colorModel.getTitle()));
+    StringBuilder buffer = new StringBuilder(GwtHelper.toLowerCase(colorModel.toString()));
     buffer.append("a(");
     buffer.append(getSegment(colorModel.getFirstSegmentType()));
     buffer.append(',');

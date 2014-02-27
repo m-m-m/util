@@ -54,7 +54,7 @@ public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
   /**
    * The constructor.
    * 
-   * @param countryCode - see {@link #getTitle()}.
+   * @param countryCode - see {@link #toString()}.
    */
   public PhoneCountryCode(String countryCode) {
 
@@ -104,7 +104,7 @@ public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     return InternationalCallPrefix.PREFIX_PLUS + getValue();
   }

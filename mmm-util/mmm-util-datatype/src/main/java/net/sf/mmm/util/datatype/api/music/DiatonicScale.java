@@ -29,26 +29,28 @@ public enum DiatonicScale implements SimpleDatatype<String> {
   // HYPOMIXOLYDIAN("hmix", "hypomixolydian"),
 
   /**
-   * TODO.
+   * {@link DiatonicScale Scale} of a major {@link MusicalKey key}. Its scale sequence has semitone intervals
+   * from the 3. to the 4. tone as well as from the 7. to the 8. tone (1-1-½-1-1-1-½).
    */
   MAJOR("maj", "major"),
 
   /**
-   * TODO.
+   * {@link DiatonicScale Scale} of a minor {@link MusicalKey key}. Its scale sequence has semitone intervals
+   * from the 2. to the 3. tone as well as from the 6. to the 7. tone (1-½-1-1-½-1).
    */
   MINOR("min", "minor");
 
   /** @see #getValue() */
   private final String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /**
    * The constructor.
    * 
    * @param value - see {@link #getValue()}.
-   * @param title - see {@link #getTitle()}.
+   * @param title - see {@link #toString()}.
    */
   private DiatonicScale(String value, String title) {
 
@@ -67,7 +69,8 @@ public enum DiatonicScale implements SimpleDatatype<String> {
   /**
    * {@inheritDoc}
    */
-  public String getTitle() {
+  @Override
+  public String toString() {
 
     return this.title;
   }

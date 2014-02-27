@@ -29,7 +29,7 @@ public abstract class AbstractEntityId implements EntityId {
   @Override
   public String getValue() {
 
-    return getTitle();
+    return toString();
   }
 
   /**
@@ -74,15 +74,6 @@ public abstract class AbstractEntityId implements EntityId {
       hash = hash + revision.intValue();
     }
     return hash;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getTitle() {
-
-    return toString();
   }
 
   /**

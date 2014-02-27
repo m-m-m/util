@@ -13,6 +13,7 @@ import net.sf.mmm.util.nls.api.NlsObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+// TODO hohwille Sick name. Should be renamed to CompareOperator
 public enum Comparator implements SimpleDatatype<String>, NlsObject {
 
   /** {@link Comparator} to check if some value is greater than another. */
@@ -154,7 +155,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   /** @see #getValue() */
   private final String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /** @see #eval(Object, Object) */
@@ -167,7 +168,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
    * The constructor.
    * 
    * @param value is the {@link #getValue() raw value} (symbol).
-   * @param title is the {@link #getTitle() title}.
+   * @param title is the {@link #toString() string representation}.
    * @param evalTrueIfEquals - <code>true</code> if {@link Comparator} {@link #eval(Object, Object) evaluates}
    *        to <code>true</code> if arguments are equal, <code>false</code> otherwise.
    * @param less - {@link Boolean#TRUE} if {@link Comparator} {@link #eval(Object, Object) evaluates} to
@@ -221,15 +222,6 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   public String getValue() {
 
     return this.value;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getTitle() {
-
-    return this.title;
   }
 
   /**
@@ -316,7 +308,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   @Override
   public String toString() {
 
-    return getTitle();
+    return this.title;
   }
 
   /**

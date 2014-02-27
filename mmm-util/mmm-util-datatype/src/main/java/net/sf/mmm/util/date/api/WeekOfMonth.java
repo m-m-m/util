@@ -30,14 +30,14 @@ public enum WeekOfMonth implements SimpleDatatype<Integer> {
   /** @see #getValue() */
   private final Integer value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /**
    * The constructor.
    * 
    * @param value - see {@link #getValue()}.
-   * @param title - see {@link #getTitle()}.
+   * @param title - see {@link #toString()}.
    */
   private WeekOfMonth(int value, String title) {
 
@@ -56,7 +56,8 @@ public enum WeekOfMonth implements SimpleDatatype<Integer> {
   /**
    * {@inheritDoc}
    */
-  public String getTitle() {
+  @Override
+  public String toString() {
 
     return this.title;
   }

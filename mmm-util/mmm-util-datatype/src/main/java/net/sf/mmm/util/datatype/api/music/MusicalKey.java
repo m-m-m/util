@@ -13,147 +13,154 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 public enum MusicalKey implements SimpleDatatype<String> {
 
   /**
-   * TODO.
+   * The {@link MusicalKey} Ces-{@link DiatonicScale#MAJOR major} (with 7 &#9837; signs).
    */
-  CES_MAJOR(TonePitch.H, DiatonicScale.MAJOR, "Ces"),
+  CES_MAJOR(TonePitch.B_NATURAL, DiatonicScale.MAJOR, "Ces"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} as-{@link DiatonicScale#MINOR minor} (with 7 &#9837; signs).
    */
   AS_MINOR(TonePitch.GIS, DiatonicScale.MINOR, "as"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} Ges-{@link DiatonicScale#MAJOR major} (with 6 &#9837; signs).
    */
   GES_MAJOR(TonePitch.FIS, DiatonicScale.MAJOR, "Ges"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} es-{@link DiatonicScale#MINOR minor} (with 6 &#9837; signs).
    */
   ES_MINOR(TonePitch.DIS, DiatonicScale.MINOR, "es"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} Des-{@link DiatonicScale#MAJOR major} (with 5 &#9837; signs).
    */
   DES_MAJOR(TonePitch.CIS, DiatonicScale.MAJOR, "Des"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} b&#9837;-{@link DiatonicScale#MINOR minor} (with 5 &#9837; signs).
    */
-  B_MINOR(TonePitch.BB, DiatonicScale.MINOR, "bb"),
+  B_MINOR(TonePitch.B_FLAT, DiatonicScale.MINOR, "b\u266D"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} As-{@link DiatonicScale#MAJOR major} (with 4 &#9837; signs).
    */
   AS_MAJOR(TonePitch.GIS, DiatonicScale.MAJOR, "As"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} f-{@link DiatonicScale#MINOR minor} (with 4 &#9837; signs).
    */
   F_MINOR(TonePitch.F, DiatonicScale.MINOR, "f"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} Es-{@link DiatonicScale#MAJOR major} (with 3 &#9837; signs).
    */
   ES_MAJOR(TonePitch.DIS, DiatonicScale.MAJOR, "Es"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} c-{@link DiatonicScale#MINOR minor} (with 3 &#9837; signs).
    */
   C_MINOR(TonePitch.C, DiatonicScale.MINOR, "c"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} B&#9837;-{@link DiatonicScale#MAJOR major} (with 2 &#9837; signs).
    */
-  B_MAJOR(TonePitch.BB, DiatonicScale.MAJOR, "Bb"),
+  B_MAJOR(TonePitch.B_FLAT, DiatonicScale.MAJOR, "Bb"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} g-{@link DiatonicScale#MINOR minor} (with 2 &#9837; signs).
    */
   G_MINOR(TonePitch.G, DiatonicScale.MINOR, "g"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} F-{@link DiatonicScale#MAJOR major} (with 1 &#9837; signs).
    */
   F_MAJOR(TonePitch.F, DiatonicScale.MAJOR, "F"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} d-{@link DiatonicScale#MINOR minor} (with 1 &#9837; signs).
    */
   D_MINOR(TonePitch.D, DiatonicScale.MINOR, "d"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} C-{@link DiatonicScale#MAJOR major} (without any signs).
    */
   C_MAJOR(TonePitch.C, DiatonicScale.MAJOR, "C"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} a-{@link DiatonicScale#MINOR minor} (without any signs).
    */
   A_MINOR(TonePitch.A, DiatonicScale.MINOR, "a"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} G-{@link DiatonicScale#MAJOR major} (with 1 &#9839; signs).
    */
   G_MAJOR(TonePitch.G, DiatonicScale.MAJOR, "G"),
 
   /**
-   * TODO
+   * The {@link MusicalKey} e-{@link DiatonicScale#MINOR minor} (with 1 &#9839; signs).
    */
   E_MINOR(TonePitch.E, DiatonicScale.MINOR, "e"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} D-{@link DiatonicScale#MAJOR major} (with 2 &#9839; signs).
    */
   D_MAJOR(TonePitch.D, DiatonicScale.MAJOR, "D"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} b&#9838;-{@link DiatonicScale#MINOR minor} (with 2 &#9839; signs).
    */
-  H_MINOR(TonePitch.H, DiatonicScale.MINOR, "h"),
+  H_MINOR(TonePitch.B_NATURAL, DiatonicScale.MINOR, "b\u266E"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} A-{@link DiatonicScale#MAJOR major} (with 3 &#9839; signs).
    */
   A_MAJOR(TonePitch.A, DiatonicScale.MAJOR, "A"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} fis-{@link DiatonicScale#MINOR minor} (with 3 &#9839; signs).
    */
   FIS_MINOR(TonePitch.FIS, DiatonicScale.MINOR, "fis"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} E-{@link DiatonicScale#MAJOR major} (with 4 &#9839; signs).
    */
-  E_MAJOR(TonePitch.BB, DiatonicScale.MAJOR, "E"),
+  E_MAJOR(TonePitch.E, DiatonicScale.MAJOR, "E"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} cis-{@link DiatonicScale#MINOR minor} (with 4 &#9839; signs).
    */
   CIS_MINOR(TonePitch.CIS, DiatonicScale.MINOR, "cis"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} B&#9838;-{@link DiatonicScale#MAJOR major} (with 5 &#9839; signs).
    */
-  H_MAJOR(TonePitch.H, DiatonicScale.MAJOR, "H"),
+  H_MAJOR(TonePitch.B_NATURAL, DiatonicScale.MAJOR, "B\u266E"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} gis-{@link DiatonicScale#MINOR minor} (with 5 &#9839; signs).
    */
   GIS_MINOR(TonePitch.GIS, DiatonicScale.MINOR, "gis"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} Fis-{@link DiatonicScale#MAJOR major} (with 6 &#9839; signs).
    */
   FIS_MAJOR(TonePitch.FIS, DiatonicScale.MAJOR, "Fis"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} dis-{@link DiatonicScale#MINOR minor} (with 6 &#9839; signs).
    */
   DIS_MINOR(TonePitch.DIS, DiatonicScale.MINOR, "dis"),
 
   /**
-   * TODO.
+   * The {@link MusicalKey} Cis-{@link DiatonicScale#MAJOR major} (with 7 &#9839; signs). The enharmonic
+   * identical {@link MusicalKey key} is {@link #DES_MAJOR}.
+   */
+  CIS_MAJOR(TonePitch.CIS, DiatonicScale.MAJOR, "Cis"),
+
+  /**
+   * The {@link MusicalKey} ais-{@link DiatonicScale#MAJOR major} (with 7 &#9839; signs). The enharmonic
+   * identical {@link MusicalKey key} is {@link #B_MINOR}.
    */
   AIS_MINOR(TonePitch.GIS, DiatonicScale.MINOR, "ais");
 
@@ -191,9 +198,10 @@ public enum MusicalKey implements SimpleDatatype<String> {
   /**
    * {@inheritDoc}
    */
-  public String getTitle() {
+  @Override
+  public String toString() {
 
-    return getValue() + "-" + this.scale.getTitle();
+    return getValue() + "-" + this.scale.toString();
   }
 
   /**

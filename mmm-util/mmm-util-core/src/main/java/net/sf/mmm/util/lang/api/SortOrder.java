@@ -19,14 +19,14 @@ public enum SortOrder implements SimpleDatatype<String> {
   /** @see #getValue() */
   private final String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /**
    * The constructor.
    * 
    * @param value is the {@link #getValue() raw value} (symbol).
-   * @param title is the {@link #getTitle() title}.
+   * @param title is the {@link #toString() string representation}.
    */
   private SortOrder(String value, String title) {
 
@@ -41,15 +41,6 @@ public enum SortOrder implements SimpleDatatype<String> {
   public String getValue() {
 
     return this.value;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getTitle() {
-
-    return this.title;
   }
 
   /**
@@ -75,7 +66,7 @@ public enum SortOrder implements SimpleDatatype<String> {
   @Override
   public String toString() {
 
-    return getTitle();
+    return this.title;
   }
 
 }

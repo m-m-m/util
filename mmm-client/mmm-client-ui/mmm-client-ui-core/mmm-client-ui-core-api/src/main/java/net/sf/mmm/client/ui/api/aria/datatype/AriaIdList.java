@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
-import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This class is a simple representation for a {@link List} of IDs. Each ID is pointing to a DOM element and
@@ -15,7 +14,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class AriaIdList extends AbstractSimpleDatatypeBase<String> implements SimpleDatatype<String> {
+public class AriaIdList extends AbstractSimpleDatatypeBase<String> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -690230679053352591L;

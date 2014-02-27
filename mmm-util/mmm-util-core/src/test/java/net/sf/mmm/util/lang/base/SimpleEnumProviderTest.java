@@ -166,7 +166,7 @@ public class SimpleEnumProviderTest extends Assert {
      * {@inheritDoc}
      */
     @Override
-    public String getTitle() {
+    public String toString() {
 
       return toString();
     }

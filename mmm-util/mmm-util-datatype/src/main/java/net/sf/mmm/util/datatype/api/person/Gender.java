@@ -28,14 +28,14 @@ public enum Gender implements SimpleDatatype<String> {
   /** @see #getValue() */
   private final String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /**
    * The constructor.
    * 
    * @param value - see {@link #getValue()}.
-   * @param title - see {@link #getTitle()}.
+   * @param title - see {@link #toString()}.
    */
   private Gender(String value, String title) {
 
@@ -54,7 +54,8 @@ public enum Gender implements SimpleDatatype<String> {
   /**
    * {@inheritDoc}
    */
-  public String getTitle() {
+  @Override
+  public String toString() {
 
     return this.title;
   }

@@ -37,7 +37,7 @@ public enum DateUnit implements SimpleDatatype<String> {
   /** @see #getValue() */
   private final String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /** @see #getCalendarId() */
@@ -47,7 +47,7 @@ public enum DateUnit implements SimpleDatatype<String> {
    * The constructor.
    * 
    * @param value - see {@link #getValue()}.
-   * @param title - see {@link #getTitle()}.
+   * @param title - see {@link #toString()}.
    * @param calendarId - see {@link #getCalendarId()}.
    */
   private DateUnit(String value, String title, int calendarId) {
@@ -68,7 +68,8 @@ public enum DateUnit implements SimpleDatatype<String> {
   /**
    * {@inheritDoc}
    */
-  public String getTitle() {
+  @Override
+  public String toString() {
 
     return this.title;
   }

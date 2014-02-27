@@ -54,14 +54,14 @@ public enum Month implements SimpleDatatype<Integer> {
   /** @see #getValue() */
   private final Integer value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /**
    * The constructor.
    * 
    * @param value - see {@link #getValue()}.
-   * @param title - see {@link #getTitle()}.
+   * @param title - see {@link #toString()}.
    */
   private Month(int value, String title) {
 
@@ -80,15 +80,6 @@ public enum Month implements SimpleDatatype<Integer> {
   public Integer getValue() {
 
     return this.value;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getTitle() {
-
-    return this.title;
   }
 
   /**
@@ -152,6 +143,15 @@ public enum Month implements SimpleDatatype<Integer> {
 
     NlsNullPointerException.checkNotNull(Date.class, date);
     return fromValue(Integer.valueOf(date.getMonth() + 1));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return this.title;
   }
 
 }

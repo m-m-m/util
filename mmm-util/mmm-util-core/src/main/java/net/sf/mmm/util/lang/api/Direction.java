@@ -122,28 +122,19 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** @see #getValue() */
   private final String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /**
    * The constructor.
    * 
    * @param value - see {@link #getValue()}.
-   * @param title - see {@link #getTitle()}.
+   * @param title - see {@link #toString()}.
    */
   private Direction(String value, String title) {
 
     this.value = value;
     this.title = title;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getTitle() {
-
-    return this.title;
   }
 
   /**
@@ -161,7 +152,7 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   @Override
   public String toString() {
 
-    return getTitle();
+    return this.title;
   }
 
   /**

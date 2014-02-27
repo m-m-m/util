@@ -8,8 +8,8 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the area code for a phone number.
- * The area code is the part of the phone number that follows after the {@link PhoneCountryCode} and identifies the
- * area (typically the major city) that is to be called.<br/>
+ * The area code is the part of the phone number that follows after the {@link PhoneCountryCode} and
+ * identifies the area (typically the major city) that is to be called.<br/>
  * <b>ATTENTION:</b><br/>
  * There are countries like Singapore that do not have the concept of area codes.
  * 
@@ -44,7 +44,7 @@ public final class AreaCode extends AbstractSimpleDatatype<Integer> {
   /**
    * The constructor.
    * 
-   * @param areaCode - see {@link #getTitle()}.
+   * @param areaCode - see {@link #toString()}.
    */
   public AreaCode(String areaCode) {
 

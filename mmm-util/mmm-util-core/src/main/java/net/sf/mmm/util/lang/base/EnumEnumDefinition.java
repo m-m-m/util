@@ -34,7 +34,7 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> extends Abstract
   /** @see #getValue() */
   private String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private String title;
 
   /** @see #getCategory() */
@@ -153,7 +153,7 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> extends Abstract
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     return this.title;
   }

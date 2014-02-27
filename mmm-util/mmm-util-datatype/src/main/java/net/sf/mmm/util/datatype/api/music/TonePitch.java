@@ -15,40 +15,42 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
 public enum TonePitch implements SimpleDatatype<String> {
 
   /**
-   * The base tone of the common C-Major key.
+   * The base tone of the common {@link MusicalKey#C_MAJOR} key.
    */
   C("C", "C"),
 
   /**
-   * A semitone (half step) higher than the pitch {@link #C}. This pitch is also called <em>des</em> (
-   * <code>d&#9837;</code>).
+   * A semitone (half step) higher than the pitch {@link #C}. The enharmonic change of this pitch is
+   * <em>des</em> (<code>d&#9837;</code>).
    */
   CIS("C#", "Cis"),
 
   /**
-   * Two semitone (half step) / a whole-tone higher than the pitch {@link #C}.
+   * Two semitones (half steps) higher than the pitch {@link #C}.
    */
   D("D", "D"),
 
   /**
-   * Three semitones (half steps) higher than the pitch {@link #C}. This pitch is also called <em>es</em> (
-   * <code>e&#9837;</code>).
+   * Three semitones (half steps) higher than the pitch {@link #C}. The enharmonic change of this pitch is
+   * <em>es</em> (<code>e&#9837;</code>).
    */
   DIS("D#", "Dis"),
 
   /**
-   * Four semitones (half steps) higher than the pitch {@link #C}.
+   * Four semitones (half steps) higher than the pitch {@link #C}. The enharmonic change of this pitch is
+   * <em>fes</em> (<code>f&#9837;</code>).
    */
   E("E", "E"),
 
   /**
-   * Five semitones (half steps) higher than the pitch {@link #C}.
+   * Five semitones (half steps) higher than the pitch {@link #C}. The enharmonic change of this pitch is
+   * <em>eis</em> (<code>e&#9839;</code>).
    */
   F("F", "F"),
 
   /**
-   * Six semitones (half steps) higher than the pitch {@link #C}. This pitch is also called <em>ges</em> (
-   * <code>g&#9837;</code>).
+   * Six semitones (half steps) higher than the pitch {@link #C}. The enharmonic change of this pitch is
+   * <em>ges</em> (<code>g&#9837;</code>).
    */
   FIS("F#", "Fis"),
 
@@ -58,27 +60,28 @@ public enum TonePitch implements SimpleDatatype<String> {
   G("G", "G"),
 
   /**
-   * Eight semitones (half steps) higher than the pitch {@link #C}. This pitch is also called <em>as</em> (
-   * <code>a&#9837;</code>).
+   * Eight semitones (half steps) higher than the pitch {@link #C}. The enharmonic change of this pitch is
+   * <em>as</em> (<code>a&#9837;</code>).
    */
   GIS("G#", "Gis"),
 
   /**
-   * Nine semitones (half steps) higher than the pitch {@link #C}.
+   * Nine semitones (half steps) higher than the pitch {@link #C}. The middle a (a<sup>1</sup>, Concert A
+   * reference) is normalized to 440Hz.
    */
   A("A", "A"),
 
   /**
    * Ten semitones (half steps) higher than the pitch {@link #C}. In most countries this pitch is simply
-   * called <em>B</em>. See {@link #H} for further details.
+   * called <em>B</em>. See {@link #B_NATURAL} for further details.
    */
-  BB("Bb", "B\u266D"),
+  B_FLAT("Bb", "B\u266D"),
 
   /**
-   * Eleven semitones (half steps) higher than the pitch {@link #C}. This pitch is also called <em>ces</em> (
-   * <code>c&#9837;</code>). In most countries this pitch is simply called <em>H</em>. However the Americans
-   * use <em>B</em> instead of <em>H</em> what can cause confusion with {@link #BB}. The international
-   * notation therefore suggests the following notation:
+   * Eleven semitones (half steps) higher than the pitch {@link #C}. The enharmonic change of this pitch is
+   * <em>ces</em> (<code>c&#9837;</code>). In most countries this pitch is simply called <em>H</em>. However
+   * the Americans use <em>B</em> instead of <em>H</em> what can cause confusion with {@link #B_FLAT}. The
+   * international notation therefore suggests the following notation:
    * <table border="1">
    * <tr>
    * <th>International</th>
@@ -97,19 +100,19 @@ public enum TonePitch implements SimpleDatatype<String> {
    * </tr>
    * </table>
    */
-  H("H", "B\u266E");
+  B_NATURAL("H", "B\u266E");
 
   /** @see #getValue() */
   private final String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /**
    * The constructor.
    * 
    * @param value - see {@link #getValue()}.
-   * @param title - see {@link #getTitle()}.
+   * @param title - see {@link #toString()}.
    */
   private TonePitch(String value, String title) {
 
@@ -128,7 +131,8 @@ public enum TonePitch implements SimpleDatatype<String> {
   /**
    * {@inheritDoc}
    */
-  public String getTitle() {
+  @Override
+  public String toString() {
 
     return this.title;
   }

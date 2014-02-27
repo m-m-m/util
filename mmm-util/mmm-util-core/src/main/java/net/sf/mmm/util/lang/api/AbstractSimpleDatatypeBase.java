@@ -67,7 +67,8 @@ public abstract class AbstractSimpleDatatypeBase<V> extends AbstractDatatype imp
   /**
    * {@inheritDoc}
    */
-  public String getTitle() {
+  @Override
+  public String toString() {
 
     V value = getValue();
     if (value == null) {

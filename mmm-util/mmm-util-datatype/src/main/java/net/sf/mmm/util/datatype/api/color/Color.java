@@ -25,9 +25,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * A/R/G/B the hexadecimal RGB notation would be compatible with transparency because #2F4F8F would be the
  * same as #002F4F8F. Unfortunately pain is on our side and we have to keep with existing standards. Therefore
  * #2F4F8F is actually the same as #FF2F4F8F. To avoid confusion and to be compatible with CSS,
- * {@link #getTitle()} and {@link #toString()} will print the hexadecimal RGB form (e.g. #2F4F8F) in case
- * {@link #getAlpha() alpha} has its maximum value (255/FF). Otherwise the CSS RGBA notation is used (e.g.
- * rgba(47,79,143,0.5) instead of #7F2F4F8F).
+ * {@link #toString()} will print the hexadecimal RGB form (e.g. #2F4F8F) in case {@link #getAlpha() alpha}
+ * has its maximum value (255/FF). Otherwise the CSS RGBA notation is used (e.g. rgba(47,79,143,0.5) instead
+ * of #7F2F4F8F).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -52,7 +52,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   /** Number of bits to shift for {@link #getAlpha() alpha} value. */
   private static final int SHIFT_ALPHA = 24;
 
-  /** The prefix for the {@link #getTitle() title}. */
+  /** The prefix for the {@link #toString() title}. */
   public static final String HEX_PREFIX = "#";
 
   /** The prefix for the rgba(r,g,b,a) syntax. */
@@ -82,7 +82,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   /** @see #Color(int, int, int) */
   private static final Integer MAX_SEGMENT = Integer.valueOf(MASK);
 
-  /** The {@link java.util.regex.Pattern} for a valid {@link Color} {@link #getTitle() as string}. */
+  /** The {@link java.util.regex.Pattern} for a valid {@link Color} {@link #toString() as string}. */
   private static final String PATTERN = "#RRGGBB|rgba(r,g,b,a)|hsla(h,s,l,a)";
 
   /** The {@link Color} transparent (actually not really a color). */
@@ -245,7 +245,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
         Color namedColor = NAME_TO_COLOR_MAP.get(upperColor);
         if (namedColor != null) {
           return namedColor;
-        } else if (upperColor.startsWith(ColorModel.RGB.getTitle())) {
+        } else if (upperColor.startsWith(ColorModel.RGB.toString())) {
           Color rgbColor = parseRgb(upperColor);
           if (rgbColor != null) {
             return rgbColor;
@@ -426,7 +426,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     int alpha = getAlpha();
     StringBuilder buffer;

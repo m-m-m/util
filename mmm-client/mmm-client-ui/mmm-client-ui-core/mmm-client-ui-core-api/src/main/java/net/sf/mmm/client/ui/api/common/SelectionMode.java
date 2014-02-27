@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
-
 /**
- * This enum contains the available modes for the selection of items from a list of items.
+ * This enum contains the available modes for the selection of items from a container widget (list, tree,
+ * etc.).
  * 
  * @see net.sf.mmm.client.ui.api.attribute.AttributeWriteSelectedValue
  * 

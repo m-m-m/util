@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.color;
 
-import net.sf.mmm.util.datatype.api.color.Alpha;
-import net.sf.mmm.util.datatype.api.color.Color;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
 
 import org.junit.Assert;
@@ -35,7 +33,7 @@ public class ColorTest extends Assert {
       // test string representation
       String colorString = color.toString();
       assertEquals("#" + StringUtilImpl.getInstance().padNumber(i, 6, 16).toUpperCase(), colorString);
-      assertEquals(colorString, color.getTitle());
+      assertEquals(colorString, color.toString());
 
       checkColorGeneric(color, colorString);
     }
@@ -59,7 +57,6 @@ public class ColorTest extends Assert {
 
       // test string representation
       String colorString = color.toString();
-      assertEquals(colorString, color.getTitle());
       if (i == 255) {
         assertEquals("#1F2F3F", colorString);
       } else {
@@ -74,7 +71,7 @@ public class ColorTest extends Assert {
    * Performs generic checks on the given {@link Color}.
    * 
    * @param color is the {@link Color} to test.
-   * @param colorString is the expected {@link Color#getTitle() string representation} of the {@link Color}.
+   * @param colorString is the expected {@link Color#toString() string representation} of the {@link Color}.
    */
   private void checkColorGeneric(Color color, String colorString) {
 

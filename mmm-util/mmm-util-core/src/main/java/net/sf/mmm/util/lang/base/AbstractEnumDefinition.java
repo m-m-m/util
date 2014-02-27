@@ -77,7 +77,7 @@ public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefi
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     return getEnumType().getSimpleName();
   }

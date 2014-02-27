@@ -136,7 +136,7 @@ public class GenericColorTest extends Assert {
     assertEquals(color, copy);
     assertEquals(color.hashCode(), copy.hashCode());
     if (colorModel == ColorModel.RGB) {
-      assertEquals(colorString, color.getValue());
+      assertEquals(colorString, color.toString());
     }
   }
 

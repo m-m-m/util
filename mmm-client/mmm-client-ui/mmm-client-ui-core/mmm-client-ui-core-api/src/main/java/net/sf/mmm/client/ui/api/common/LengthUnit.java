@@ -28,28 +28,19 @@ public enum LengthUnit implements SimpleDatatype<String> {
   /** @see #getValue() */
   private final String value;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /**
    * The constructor.
    * 
    * @param value - see {@link #getValue()}.
-   * @param title - see {@link #getTitle()}.
+   * @param title - see {@link #toString()}.
    */
   private LengthUnit(String value, String title) {
 
     this.value = value;
     this.title = title;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getTitle() {
-
-    return this.title;
   }
 
   /**
@@ -78,7 +69,7 @@ public enum LengthUnit implements SimpleDatatype<String> {
   @Override
   public String toString() {
 
-    return getTitle();
+    return this.title;
   }
 
 }

@@ -32,11 +32,11 @@ public class TonePitchTest {
     Assert.assertEquals(TonePitch.G, TonePitch.C.transpose(7));
     Assert.assertEquals(TonePitch.GIS, TonePitch.C.transpose(8));
     Assert.assertEquals(TonePitch.A, TonePitch.C.transpose(9));
-    Assert.assertEquals(TonePitch.BB, TonePitch.C.transpose(10));
-    Assert.assertEquals(TonePitch.H, TonePitch.C.transpose(11));
+    Assert.assertEquals(TonePitch.B_FLAT, TonePitch.C.transpose(10));
+    Assert.assertEquals(TonePitch.B_NATURAL, TonePitch.C.transpose(11));
 
-    Assert.assertEquals(TonePitch.H, TonePitch.C.transpose(-1));
-    Assert.assertEquals(TonePitch.BB, TonePitch.C.transpose(-2));
+    Assert.assertEquals(TonePitch.B_NATURAL, TonePitch.C.transpose(-1));
+    Assert.assertEquals(TonePitch.B_FLAT, TonePitch.C.transpose(-2));
     Assert.assertEquals(TonePitch.A, TonePitch.C.transpose(-3));
     Assert.assertEquals(TonePitch.GIS, TonePitch.C.transpose(-4));
     Assert.assertEquals(TonePitch.G, TonePitch.C.transpose(-5));

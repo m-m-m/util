@@ -25,9 +25,6 @@ public abstract class AbstractDatatype implements Datatype {
    * {@inheritDoc}
    */
   @Override
-  public String toString() {
-
-    return getTitle();
-  }
+  public abstract String toString();
 
 }

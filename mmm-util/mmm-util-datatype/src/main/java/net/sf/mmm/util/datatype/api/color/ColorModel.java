@@ -161,8 +161,9 @@ public enum ColorModel implements SimpleDatatype<String> {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
+    // make it explicit, actually overriding not necessary.
     return name();
   }
 

@@ -57,7 +57,7 @@ public class EntityIdImpl extends AbstractEntityId {
   /**
    * The constructor.
    * 
-   * @param idAsString is the {@link #getTitle() string representation} of the {@link EntityId} to create.
+   * @param idAsString is the {@link #toString() string representation} of the {@link EntityId} to create.
    */
   public EntityIdImpl(String idAsString) {
 

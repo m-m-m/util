@@ -10,9 +10,8 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This {@link net.sf.mmm.util.lang.api.Datatype} represents a {@link #getSet()
- * set} of {@link Weekday}s. It can represent any unordered combination from
- * none to all.
+ * This {@link net.sf.mmm.util.lang.api.Datatype} represents a {@link #getSet() set} of {@link Weekday}s. It
+ * can represent any unordered combination from none to all.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -23,8 +22,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   private static final long serialVersionUID = -2431073569164463800L;
 
   /**
-   * An empty {@link WeekdaySet} {@link #getSet() containing} no {@link Weekday}
-   * at all.
+   * An empty {@link WeekdaySet} {@link #getSet() containing} no {@link Weekday} at all.
    */
   public static final WeekdaySet NONE = new WeekdaySet(Integer.valueOf(0));
 
@@ -32,8 +30,8 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   public static final WeekdaySet ALL = new WeekdaySet(Integer.valueOf(127));
 
   /**
-   * An {@link WeekdaySet} {@link #getSet() containing} the working days (all
-   * but {@link Weekday#SUNDAY} and {@link Weekday#SUNDAY}).
+   * An {@link WeekdaySet} {@link #getSet() containing} the working days (all but {@link Weekday#SUNDAY} and
+   * {@link Weekday#SUNDAY}).
    */
   public static final WeekdaySet WORKDAYS = new WeekdaySet(Integer.valueOf(31));
 
@@ -48,15 +46,13 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   public WeekdaySet(Integer bitmask) {
 
     super(bitmask);
-    ValueOutOfRangeException.checkRange(bitmask, Integer.valueOf(0), Integer.valueOf(127),
-        WeekdaySet.class);
+    ValueOutOfRangeException.checkRange(bitmask, Integer.valueOf(0), Integer.valueOf(127), WeekdaySet.class);
   }
 
   /**
    * The constructor.
    * 
-   * @param set is the {@link #getSet() set} representing the {@link WeekdaySet}
-   *        to create.
+   * @param set is the {@link #getSet() set} representing the {@link WeekdaySet} to create.
    */
   public WeekdaySet(Set<Weekday> set) {
 
@@ -67,8 +63,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   /**
    * The constructor.
    * 
-   * @param weekdays are the {@link Weekday}s representing the
-   *        {@link WeekdaySet} to create.
+   * @param weekdays are the {@link Weekday}s representing the {@link WeekdaySet} to create.
    */
   public WeekdaySet(Weekday... weekdays) {
 
@@ -76,8 +71,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method encodes the given <code>set</code> to a bit-mask for
-   * {@link #getValue()}.
+   * This method encodes the given <code>set</code> to a bit-mask for {@link #getValue()}.
    * 
    * @param weekdays are the {@link Weekday}s.
    * @return the encoded {@link #getValue() value}.
@@ -92,8 +86,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method encodes the given <code>set</code> to a bit-mask for
-   * {@link #getValue()}.
+   * This method encodes the given <code>set</code> to a bit-mask for {@link #getValue()}.
    * 
    * @param set is the {@link Set} of {@link Weekday}s.
    * @return the encoded {@link #getValue() value}.
@@ -108,8 +101,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method returns the {@link WeekdaySet} as compressed mask of seven
-   * bits.
+   * This method returns the {@link WeekdaySet} as compressed mask of seven bits.
    * 
    * {@inheritDoc}
    */
@@ -120,14 +112,14 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method determines if this {@link WeekdaySet} contains the given
-   * {@link Weekday}. This is equivalent to:
+   * This method determines if this {@link WeekdaySet} contains the given {@link Weekday}. This is equivalent
+   * to:
    * 
    * <pre>{@link #getSet()}.{@link Set#contains(Object) contains}(weekday)</pre>
    * 
    * @param weekday is the {@link Weekday} to check.
-   * @return <code>true</code> if the given <code>weekday</code> is contained in
-   *         this {@link #getSet() set}, <code>false</code> otherwise.
+   * @return <code>true</code> if the given <code>weekday</code> is contained in this {@link #getSet() set},
+   *         <code>false</code> otherwise.
    */
   public boolean contains(Weekday weekday) {
 
@@ -135,8 +127,8 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method gets an {@link Collections#unmodifiableSet(Set) unmodifiable}
-   * {@link Set} representing this {@link WeekdaySet}.
+   * This method gets an {@link Collections#unmodifiableSet(Set) unmodifiable} {@link Set} representing this
+   * {@link WeekdaySet}.
    * 
    * @return the {@link Set} with all {@link Weekday}s.
    */
@@ -157,16 +149,14 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method gets the next {@link Weekday} {@link #contains(Weekday)
-   * contained} in this {@link WeekdaySet} starting with the given
-   * <code>weekday</code>. If the given <code>weekday</code> is
-   * {@link #contains(Weekday) contained}, it will be returned. Otherwise the
-   * {@link Weekday#getNext() next} successor is determined.
+   * This method gets the next {@link Weekday} {@link #contains(Weekday) contained} in this {@link WeekdaySet}
+   * starting with the given <code>weekday</code>. If the given <code>weekday</code> is
+   * {@link #contains(Weekday) contained}, it will be returned. Otherwise the {@link Weekday#getNext() next}
+   * successor is determined.
    * 
    * @param weekday is the {@link Weekday} to start with.
-   * @return the next {@link Weekday} starting with the given
-   *         <code>weekday</code> or <code>null</code> if this
-   *         {@link WeekdaySet} is {@link Set#isEmpty() empty}.
+   * @return the next {@link Weekday} starting with the given <code>weekday</code> or <code>null</code> if
+   *         this {@link WeekdaySet} is {@link Set#isEmpty() empty}.
    */
   public Weekday getNextMatch(Weekday weekday) {
 
@@ -190,7 +180,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     StringBuilder buffer = new StringBuilder("{");
     getSet();
@@ -199,7 +189,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
         if (buffer.length() > 1) {
           buffer.append(",");
         }
-        buffer.append(weekday.getTitle());
+        buffer.append(weekday.toString());
       }
     }
     buffer.append('}');
@@ -207,9 +197,8 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method returns a new {@link WeekdaySet} that is the inverse selection
-   * of this {@link WeekdaySet}. Every {@link Weekday}
-   * {@link #contains(Weekday) contained} in this {@link WeekdaySet} is NOT
+   * This method returns a new {@link WeekdaySet} that is the inverse selection of this {@link WeekdaySet}.
+   * Every {@link Weekday} {@link #contains(Weekday) contained} in this {@link WeekdaySet} is NOT
    * {@link #contains(Weekday) contained} in the returned result and vice versa.
    * 
    * @return the inverse {@link WeekdaySet}.

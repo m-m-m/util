@@ -4,8 +4,6 @@ package net.sf.mmm.util.lang.api;
 
 import java.io.Serializable;
 
-import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
-
 /**
  * This is the interface for a <em>datatype</em>. A datatype is an object representing a value of a specific
  * type. It is typically <em>immutable</em> so it gets its value assigned at construction time and can then
@@ -38,28 +36,19 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public interface Datatype extends AttributeReadTitle<String>, Serializable {
+public interface Datatype extends Serializable {
 
   /**
-   * This method gets the <em>title</em> of this datatype. The title is a string representation intended to be
-   * displayed to end-users (for i18n see {@link net.sf.mmm.util.nls.api.NlsMessage}).<br>
-   * Since the general contract of {@link #toString()} is quite weak, this method is added to explicitly
-   * express the presence of the title and to ensure implementors of this interface can NOT miss to implement
-   * this.
+   * Returns the official {@link String} representation of this {@link Datatype}. While the general contract
+   * of {@link Object#toString()} is very weak and mainly used for debugging, the contract here is very
+   * strong. The returned {@link String} has to be suitable for end-users and official output to any kind of
+   * sink.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This method is not supposed to do internationalization (I18N). See
+   * {@link net.sf.mmm.util.nls.api.NlsMessage} for this purpose and implement
+   * {@link net.sf.mmm.util.nls.api.NlsObject} if you want to support I18N/L10N.
    * 
-   * @see #toString()
-   * 
-   * @return the display title of this datatype.
-   */
-  @Override
-  String getTitle();
-
-  /**
-   * This method needs to return the same result a {@link #getTitle()}.
-   * 
-   * {@inheritDoc}
-   * 
-   * @return the display title of this datatype.
+   * @return the official {@link String} representation to display the value of this {@link Datatype}.
    */
   @Override
   String toString();

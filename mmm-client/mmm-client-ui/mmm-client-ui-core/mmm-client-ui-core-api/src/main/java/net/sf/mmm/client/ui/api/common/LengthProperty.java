@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This enum contains the available properties that are configured with {@link Length} values. Both
- * {@link #getValue() value} and {@link #getTitle() title} represent the CSS property name.
+ * {@link #getValue() value} and {@link #toString() string representation} are the CSS property name.
  * 
  * @see Length
  * 
@@ -73,15 +73,6 @@ public enum LengthProperty implements SimpleDatatype<String>, CssProperty {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
-
-    return getStyleName();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public String getValue() {
 
     return getStyleName();
@@ -102,7 +93,7 @@ public enum LengthProperty implements SimpleDatatype<String>, CssProperty {
   @Override
   public String toString() {
 
-    return getTitle();
+    return this.styleName;
   }
 
   /**

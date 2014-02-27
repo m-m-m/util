@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
-import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
+import net.sf.mmm.util.lang.api.AbstractDatatype;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a simple 2-dimensional point measured in
@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Point extends AbstractSimpleDatatypeBase {
+public class Point extends AbstractDatatype {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -6404311020184915937L;
@@ -63,7 +63,7 @@ public class Point extends AbstractSimpleDatatypeBase {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     return this.x + "," + this.y;
   }
@@ -97,15 +97,6 @@ public class Point extends AbstractSimpleDatatypeBase {
   public int hashCode() {
 
     return (this.x * 31) + this.y;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Point getValue() {
-
-    return this;
   }
 
 }

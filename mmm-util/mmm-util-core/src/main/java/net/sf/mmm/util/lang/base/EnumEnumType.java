@@ -43,18 +43,9 @@ public final class EnumEnumType implements EnumType<Enum<?>> {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
-
-    return this.value.toString();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public String toString() {
 
-    return getTitle();
+    return this.value.toString();
   }
 
 }

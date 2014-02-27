@@ -18,7 +18,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * Just like the {@link #getObjectId() primary key} the {@link #getRevision() revision} and
  * {@link #getTypeId() type} of an object do not change. This allows to create an instance of the identified
  * object without additional costs (e.g. database lookup) by a dynamic proxy using lazy loading.<br>
- * An {@link EntityId} has a compact {@link #getTitle() string representation} that can be converted back to
+ * An {@link EntityId} has a compact {@link #toString() string representation} that can be converted back to
  * an {@link EntityId}. Therefore, the implementation shall provide a {@link String}-arg constructor.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -86,8 +86,6 @@ public interface EntityId extends SimpleDatatype<String> {
   Number getRevision();
 
   /**
-   * {@inheritDoc}
-   * 
    * The string representation of the {@link EntityId} in the following form:
    * 
    * <pre>
@@ -97,8 +95,10 @@ public interface EntityId extends SimpleDatatype<String> {
    * 
    * The {@link #getRevision() revision} can be omitted if zero. All number values are
    * {@link Long#toString(long, int) encoded} using the {@link #RADIX} constant.<br/>
+   * 
+   * {@inheritDoc}
    */
   @Override
-  String getTitle();
+  String toString();
 
 }

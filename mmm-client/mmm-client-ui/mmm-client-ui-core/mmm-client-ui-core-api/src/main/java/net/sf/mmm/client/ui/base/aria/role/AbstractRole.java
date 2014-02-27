@@ -165,7 +165,7 @@ public abstract class AbstractRole implements Role {
     if (this.delegate != null) {
       String value = null;
       if (datatype != null) {
-        value = datatype.getTitle();
+        value = datatype.toString();
       }
       this.delegate.setAttribute(name, value);
     }

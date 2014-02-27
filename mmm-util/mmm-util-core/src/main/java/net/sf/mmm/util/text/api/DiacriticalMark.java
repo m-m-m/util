@@ -695,7 +695,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   /** @see #getCombiningCharacter() */
   private final char combiningCharacter;
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private final String title;
 
   /** @see #compose(char) */
@@ -712,7 +712,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    * 
    * @param separateCharacter is the {@link #getSeparateCharacter() separator character}.
    * @param combiningChar is the {@link #getCombiningCharacter() combining character}.
-   * @param title is the {@link #getTitle() title}.
+   * @param title is the {@link #toString() title}.
    */
   private DiacriticalMark(char separateCharacter, char combiningChar, String title) {
 
@@ -783,15 +783,6 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
-
-    return this.title;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public Character getValue() {
 
     return Character.valueOf(this.separateCharacter);
@@ -840,7 +831,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   @Override
   public String toString() {
 
-    return getTitle();
+    return this.title;
   }
 
 }

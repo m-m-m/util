@@ -71,18 +71,6 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  public String getTitle() {
-
-    if (this.value == null) {
-      return "null";
-    } else {
-      return this.value.toString();
-    }
-  }
-
-  /**
    * This method gets the {@link BooleanEnum} for the given <code>value</code>.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link BooleanEnum}.
@@ -105,6 +93,10 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
   @Override
   public String toString() {
 
-    return getTitle();
+    if (this.value == null) {
+      return "null";
+    } else {
+      return this.value.toString();
+    }
   }
 }

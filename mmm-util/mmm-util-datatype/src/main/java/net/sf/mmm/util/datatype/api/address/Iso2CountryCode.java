@@ -25,7 +25,7 @@ public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
   /** @see #Iso2CountryCode(String) */
   private static final Pattern PATTERN_COUNTRY_CODE = Pattern.compile("[A-Z]{2}");
 
-  /** @see #getTitle() */
+  /** @see #toString() */
   private String title;
 
   /**
@@ -53,7 +53,7 @@ public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     if (this.title == null) {
       this.title = new Locale("", getValue()).getDisplayCountry();

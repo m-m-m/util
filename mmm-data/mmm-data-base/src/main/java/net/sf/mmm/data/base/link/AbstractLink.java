@@ -59,7 +59,7 @@ public abstract class AbstractLink<TARGET extends DataEntity> implements Link<TA
    * {@inheritDoc}
    */
   @Override
-  public String getTitle() {
+  public String toString() {
 
     StringBuilder buffer = new StringBuilder();
     buffer.append("link");
@@ -71,17 +71,6 @@ public abstract class AbstractLink<TARGET extends DataEntity> implements Link<TA
     buffer.append(": ");
     buffer.append(getTarget().getId());
     return buffer.toString();
-  }
-
-  /**
-   * NOTE: Override {@link #getTitle()} instead of this method.<br/>
-   * 
-   * {@inheritDoc}
-   */
-  @Override
-  public final String toString() {
-
-    return getTitle();
   }
 
 }
