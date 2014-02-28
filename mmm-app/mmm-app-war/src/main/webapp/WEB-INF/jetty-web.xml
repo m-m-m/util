@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+<!--
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
   <Set name="systemClasses">
     <Array type="java.lang.String">
       <Item>java.</Item>
@@ -11,10 +12,12 @@
       <Item>org.apache.commons.logging.</Item>
       <Item>org.apache.log4j.</Item>
 
-      <!-- we must promote slf4j to system classes, otherwise gwt hosted mode will not allow loading them due to a policy
-        that don't allow server classes to be loaded from the outside world (see gwt JettyLauncher source code). -->
+      <!- - we must promote slf4j to system classes, otherwise gwt hosted mode will not allow loading them due to a policy
+        that don't allow server classes to be loaded from the outside world (see gwt JettyLauncher source code). - ->
       <Item>org.slf4j.</Item>
 
     </Array>
   </Set>
 </Configure>
+ -->
+<Configure/>

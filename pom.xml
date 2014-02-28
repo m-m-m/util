@@ -35,8 +35,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <backport-time-version>1.0.0</backport-time-version>
     <backport-function-version>1.0.1</backport-function-version>
-    <!--<com.google.gwt.version>2.6.0-rc1</com.google.gwt.version>-->
-    <com.google.gwt.version>2.5.0</com.google.gwt.version>
+    <com.google.gwt.version>2.6.0</com.google.gwt.version>
+    <!--<com.google.gwt.version>2.5.0</com.google.gwt.version>-->
     <org.springframework.version>3.2.0.RELEASE</org.springframework.version>
     <org.hibernate.version>4.2.7.SP1</org.hibernate.version>
     <!--<org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>-->
