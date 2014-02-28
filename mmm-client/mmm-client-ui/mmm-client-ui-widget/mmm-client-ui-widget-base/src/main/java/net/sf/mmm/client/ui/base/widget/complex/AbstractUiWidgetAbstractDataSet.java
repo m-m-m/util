@@ -46,7 +46,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
   private final Set<ITEM_CONTAINER> selectedValues;
 
   /**
-   * Temporary {@link Set} stored as instance for performance (as widgets are not thread-safe anyways).
+   * Temporary {@link Set} stored as instance for performance (as widgets are not really thread-safe anyways).
    * 
    * @see #setSelectedValues(Collection)
    */

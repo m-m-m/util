@@ -203,6 +203,15 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
    * {@inheritDoc}
    */
   @Override
+  public boolean isReorderable() {
+
+    return this.reorderable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void setReorderable(boolean reorderable) {
 
     this.reorderable = reorderable;
@@ -212,9 +221,18 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
    * {@inheritDoc}
    */
   @Override
-  public boolean isReorderable() {
+  public boolean isSortable() {
 
-    return this.reorderable;
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSortable(boolean sortable) {
+
+    this.sortIcon.setVisible(sortable);
   }
 
   /**
@@ -339,12 +357,12 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
         }
         if (this.nextWidthRange != null) {
           newDeltaX = this.nextWidthRange.clip(newDeltaX);
-          this.nextColumn.setWidthInPixel(this.nextWidthRange.initialWidth - newDeltaX);
+          this.nextColumn.getSize().setWidthInPixel(this.nextWidthRange.initialWidth - newDeltaX);
         }
       } else {
         this.nextWidthRange = null;
       }
-      getUiWidget().setWidthInPixel(this.widthRange.initialWidth + newDeltaX);
+      getUiWidget().getSize().setWidthInPixel(this.widthRange.initialWidth + newDeltaX);
     }
 
     /**
@@ -387,7 +405,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
     public ColumnWidthRange(UiWidget widget) {
 
       super();
-      this.initialWidth = widget.getWidthInPixel() - 1;
+      this.initialWidth = widget.getSize().getWidthInPixel() - 1;
       double minWidth = LengthUnitHelper.getLengthInPixel(widget, LengthProperty.MIN_WIDTH, this.initialWidth);
       this.minDx = (int) (minWidth - this.initialWidth); // typically negative...
       double maxWidth = LengthUnitHelper.getLengthInPixel(widget, LengthProperty.MAX_WIDTH, this.initialWidth);

@@ -135,10 +135,10 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
     AttributeReadSizeInPixel desktop = getScreenBase();
 
     double desktopWidth = desktop.getWidthInPixel();
-    double windowWidth = getWidthInPixel();
+    double windowWidth = getSize().getWidthInPixel();
     double xDiff = desktopWidth - windowWidth;
     double desktopHeight = desktop.getHeightInPixel();
-    double windowHeight = getHeightInPixel();
+    double windowHeight = getSize().getHeightInPixel();
     double yDiff = desktopHeight - windowHeight;
     if (xDiff < 0) {
       xDiff = 0;
@@ -153,31 +153,9 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
    * {@inheritDoc}
    */
   @Override
-  public void setLength(LengthProperty property, Length value) {
+  protected SizeImpl createSize() {
 
-    LengthUnit unit = value.getUnit();
-    Length newValue;
-    switch (unit) {
-      case PIXEL:
-        newValue = value;
-        break;
-      case PERCENT:
-        double screenLength;
-        if (property.isWidth()) {
-          screenLength = getScreenBase().getWidthInPixel();
-        } else {
-          screenLength = getScreenBase().getHeightInPixel();
-        }
-        double amount = screenLength * value.getAmount() / 100.0;
-        newValue = Length.valueOfPixel(amount);
-        break;
-      case EM:
-        newValue = convertEmToPixel(value);
-        break;
-      default :
-        throw new IllegalCaseException(LengthUnit.class, unit);
-    }
-    super.setLength(property, newValue);
+    return new SizeWindowImpl();
   }
 
   /**
@@ -199,7 +177,7 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
   private AttributeReadSizeInPixel getScreenBase() {
 
     UiWidgetMainWindow mainWindow = getContext().getWidgetFactory().getMainWindow();
-    AttributeReadSizeInPixel desktop = mainWindow;
+    AttributeReadSizeInPixel desktop = mainWindow.getSize();
     if ((mainWindow == this) || mainWindow.isWindowPositionAbsolute()) {
       desktop = getContext().getDisplay();
     }
@@ -227,6 +205,45 @@ public abstract class AbstractUiWidgetAbstractWindow<ADAPTER extends UiWidgetAda
       return this.title;
     }
     return super.getSource();
+  }
+
+  /**
+   * Extends {@link net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative.SizeImpl} with window specific
+   * size logic.
+   */
+  private class SizeWindowImpl extends SizeImpl {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setLength(LengthProperty property, Length value) {
+
+      LengthUnit unit = value.getUnit();
+      Length newValue;
+      switch (unit) {
+        case PIXEL:
+          newValue = value;
+          break;
+        case PERCENT:
+          double screenLength;
+          if (property.isWidth()) {
+            screenLength = getScreenBase().getWidthInPixel();
+          } else {
+            screenLength = getScreenBase().getHeightInPixel();
+          }
+          double amount = screenLength * value.getAmount() / 100.0;
+          newValue = Length.valueOfPixel(amount);
+          break;
+        case EM:
+          newValue = convertEmToPixel(value);
+          break;
+        default :
+          throw new IllegalCaseException(LengthUnit.class, unit);
+      }
+      super.setLength(property, newValue);
+    }
+
   }
 
 }

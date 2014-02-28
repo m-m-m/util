@@ -10,10 +10,11 @@ import java.util.function.Consumer;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
+import net.sf.mmm.client.ui.api.common.AbstractSize;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.LengthProperty;
-import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
+import net.sf.mmm.client.ui.api.common.Size;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
@@ -43,7 +44,6 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
@@ -508,6 +508,9 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     /** The {@link SimpleCheckBox} for {@link SelectionMode#MULTIPLE_SELECTION}. */
     private SimpleCheckBox multiSelectionCheckbox;
 
+    /** @see #getSize() */
+    private Size size;
+
     /**
      * The dummy constructor.
      */
@@ -966,19 +969,12 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      * {@inheritDoc}
      */
     @Override
-    public void setLength(LengthProperty property, Length length) {
+    public Size getSize() {
 
-      DOM.setStyleAttribute(getElement(), property.getMemberName(), length.toString());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Length getLength(LengthProperty property) {
-
-      String value = DOM.getStyleAttribute(getSizeElement(), property.getMemberName());
-      return new Length(value);
+      if (this.size == null) {
+        this.size = new SizeImpl();
+      }
+      return this.size;
     }
 
     /**
@@ -994,73 +990,9 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
      * {@inheritDoc}
      */
     @Override
-    public double getWidthInPixel() {
-
-      return getOffsetWidth();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getHeightInPixel() {
-
-      return getOffsetHeight();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Length getWidth() {
-
-      return Length.valueOfPixel(getWidthInPixel());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Length getHeight() {
-
-      return Length.valueOfPixel(getHeightInPixel());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean isModified() {
 
       return this.nodeWidget.isModified();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setWidth(Length width) {
-
-      setWidth(width.toString());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHeight(Length height) {
-
-      setHeight(height.toString());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSize(Length width, Length height) {
-
-      setWidth(width);
-      setHeight(height);
     }
 
     /**
@@ -1082,51 +1014,49 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.nodeWidget.clearMessages();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHeightInPercent(double heightInPercent) {
+    private class SizeImpl extends AbstractSize {
 
-      setHeight(Length.valueOfPercent(heightInPercent));
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public void setLength(LengthProperty property, Length length) {
+
+        getElement().getStyle().setProperty(property.getMemberName(), length.toString());
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public Length getLength(LengthProperty property) {
+
+        String value = getSizeElement().getStyle().getProperty(property.getMemberName());
+        if (value == null) {
+          return property.getDefaultValue();
+        }
+        return new Length(value);
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public double getWidthInPixel() {
+
+        return getOffsetWidth();
+      }
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public double getHeightInPixel() {
+
+        return getOffsetHeight();
+      }
+
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHeightInPixel(double heightInPixel) {
-
-      setHeight(Length.valueOfPixel(heightInPixel));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setWidthInPercent(double widthInPercent) {
-
-      setWidth(Length.valueOfPercent(widthInPercent));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setWidthInPixel(double widthInPixel) {
-
-      setWidth(Length.valueOfPixel(widthInPixel));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSize(double width, double height, LengthUnit unit) {
-
-      setSize(new Length(width, unit), new Length(height, unit));
-    }
-
   }
 
   /**

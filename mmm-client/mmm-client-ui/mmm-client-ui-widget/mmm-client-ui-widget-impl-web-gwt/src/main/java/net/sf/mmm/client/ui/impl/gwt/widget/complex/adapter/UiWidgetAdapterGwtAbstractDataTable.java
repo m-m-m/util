@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.common.CssStyles;
+import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.SelectionChoice;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.common.SelectionOperation;
@@ -33,7 +34,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
@@ -63,7 +63,7 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
   /** @see #setSelectionMode(SelectionMode) */
   private AbstractUiWidgetTableColumn<?, ROW, Boolean> multiSelectionColumn;
 
-  /** @see #setShowRowNumbers(boolean) */
+  /** @see #initializeRowNumberColumn() */
   private AbstractUiWidgetTableColumn<?, ROW, String> rowNumberColumn;
 
   /** @see #getStyleElement() */
@@ -297,12 +297,13 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
    */
   protected void initializeMultiSelection() {
 
-    this.multiSelectionColumn = new UiWidgetTableColumnImpl<ROW, Boolean>(getContext(), getUiWidgetTyped(),
+    this.multiSelectionColumn = new UiWidgetTableColumnImpl<>(getContext(), getUiWidgetTyped(),
         AbstractUiWidgetTableColumn.PROPERTY_SELECTED, null);
     this.multiSelectionColumn.setStyles(CssStyles.MULTI_SELECTION_HEADER);
     this.multiSelectionColumn.setResizable(false);
     this.multiSelectionColumn.setReorderable(false);
-    this.multiSelectionColumn.setWidthInPixel(20);
+    this.multiSelectionColumn.setSortable(false); // actually sorting could be a feature
+    this.multiSelectionColumn.getSize().setWidthInPixel(20);
     if (this.headerRow == null) {
       return;
     }
@@ -330,6 +331,21 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
       index = 1;
     }
     addColumn(this.multiSelectionColumn, index);
+  }
+
+  /**
+   * Initializes the column showing the row numbers.
+   */
+  protected void initializeRowNumberColumn() {
+
+    this.rowNumberColumn = new UiWidgetTableColumnImpl<>(getContext(), getUiWidgetTyped(),
+        AbstractUiWidgetTableColumn.PROPERTY_ROW_NUMBER, null);
+    this.rowNumberColumn.setTitle("#"); // I18N/Customization ?
+    this.rowNumberColumn.setResizable(true); // allow user to modify?
+    this.rowNumberColumn.setReorderable(false); // should always be the first column
+    this.rowNumberColumn.setSortable(false); // sorting makes absolutely no sense here...
+    this.rowNumberColumn.getSize().setMinimumWidth(Length.valueOfPixel(20));
+    this.rowNumberColumn.getSize().setWidthInPixel(40);
   }
 
   /**
@@ -376,7 +392,7 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
     this.tableWidget = new TableWidget();
     this.tableWidget.setStyleName(UiWidgetAbstractDataTable.STYLE_DATA_TABLE);
     // TODO temporary hack...
-    DOM.setStyleAttribute(this.tableWidget.getTableBody().getElement(), "maxHeight", "300px");
+    this.tableWidget.getTableBody().getElement().getStyle().setPropertyPx("maxHeight", 300);
     flowPanel.add(this.tableWidget);
 
     return flowPanel;

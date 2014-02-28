@@ -94,9 +94,18 @@ public class UiDataBindingFactoryImpl extends AbstractUiDataBindingFactory {
    * {@inheritDoc}
    */
   @Override
-  public <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<?> widget, Class<VALUE> valueType) {
+  public <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiContext context, Class<VALUE> valueType) {
 
-    return createDataBinding(widget.getContext(), null, valueType);
+    return createDataBinding(context, null, valueType);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<VALUE> widget, Class<VALUE> valueType) {
+
+    return createDataBinding(widget.getContext(), widget, valueType);
   }
 
   /**

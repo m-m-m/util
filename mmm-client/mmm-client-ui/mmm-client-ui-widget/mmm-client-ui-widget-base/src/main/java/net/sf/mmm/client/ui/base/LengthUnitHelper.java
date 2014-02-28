@@ -57,7 +57,7 @@ public final class LengthUnitHelper {
   }
 
   /**
-   * @see UiWidget#getLength(LengthProperty)
+   * @see UiWidget#getSize()
    * @see #convertToPixel(Length, double)
    * 
    * @param widget is the {@link UiWidget} to get the {@link Length} from.
@@ -67,7 +67,7 @@ public final class LengthUnitHelper {
    */
   public static double getLengthInPixel(UiWidget widget, LengthProperty property, double basePixelLength) {
 
-    Length length = widget.getLength(property);
+    Length length = widget.getSize().getLength(property);
     if ((length.getUnit() == LengthUnit.PERCENT) && (basePixelLength <= 0)) {
       if (length.getAmount() == 0) {
         // 0% of anything is just nothing...

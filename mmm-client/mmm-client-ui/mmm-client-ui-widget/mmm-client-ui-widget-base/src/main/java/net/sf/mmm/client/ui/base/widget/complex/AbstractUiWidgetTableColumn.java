@@ -31,7 +31,10 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
     AbstractUiWidgetNative<ADAPTER, CELL> implements UiWidgetTableColumn<ROW, CELL> {
 
   /** The virtual property for multi-selection. */
-  public static final TypedProperty<Boolean> PROPERTY_SELECTED = new TypedProperty<Boolean>("<selected>");
+  public static final TypedProperty<Boolean> PROPERTY_SELECTED = new TypedProperty<Boolean>("_selected_");
+
+  /** The virtual property for multi-selection. */
+  public static final TypedProperty<String> PROPERTY_ROW_NUMBER = new TypedProperty<String>("_rownumber_");
 
   /** @see #getListTable() */
   private final AbstractUiWidgetAbstractDataTable<?, ROW, ?> listTable;
@@ -56,6 +59,9 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
 
   /** @see #isResizable() */
   private boolean resizable;
+
+  /** @see #isSortable() */
+  private boolean sortable;
 
   /** @see #getWidgetFactory() */
   private UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory;
@@ -86,7 +92,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
     this.listTable = listTable;
     this.typedProperty = typedProperty;
     // initialize default width
-    setWidthInPixel(50);
+    getSize().setWidthInPixel(50);
   }
 
   /**
@@ -101,10 +107,10 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
     }
     adapter.setReorderable(this.reorderable);
     adapter.setResizable(this.resizable);
-    // adapter.setSortable(this.sortComparator != null);
     if (this.sortOrder != null) {
       adapter.setSortOrder(this.sortOrder);
     }
+    adapter.setSortable(this.sortable);
   }
 
   /**
@@ -279,7 +285,22 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   @Override
   public boolean isSortable() {
 
-    return (this.sortComparator == null);
+    return (this.sortable);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSortable(boolean sortable) {
+
+    if (sortable == this.sortable) {
+      return;
+    }
+    this.sortable = sortable;
+    if (hasWidgetAdapter()) {
+      getWidgetAdapter().setSortable(sortable);
+    }
   }
 
   /**

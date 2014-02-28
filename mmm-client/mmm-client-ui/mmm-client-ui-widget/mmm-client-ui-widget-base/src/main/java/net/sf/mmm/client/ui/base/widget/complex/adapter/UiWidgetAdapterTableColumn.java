@@ -4,6 +4,7 @@ package net.sf.mmm.client.ui.base.widget.complex.adapter;
 
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteReorderable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSortable;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
@@ -16,7 +17,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteTitle;
  * @since 1.0.0
  */
 public interface UiWidgetAdapterTableColumn extends UiWidgetAdapter, AttributeWriteTitle<String>,
-    AttributeWriteResizable, AttributeWriteReorderable {
+    AttributeWriteResizable, AttributeWriteReorderable, AttributeWriteSortable {
 
   /**
    * @param sortOrder is the {@link SortOrder} or <code>null</code> for none.

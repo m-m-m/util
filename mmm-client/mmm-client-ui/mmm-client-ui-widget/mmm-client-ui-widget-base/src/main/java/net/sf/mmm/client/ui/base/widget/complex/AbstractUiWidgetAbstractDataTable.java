@@ -284,9 +284,10 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
       if (this.delegate == null) {
         if (AbstractUiWidgetAbstractDataTable.this.rowBinding == null) {
-          Class<?> rowClass = row.getClass();
-          AbstractUiWidgetAbstractDataTable.this.rowBinding = (UiDataBinding<ROW>) getContext().getDataBindingFactory()
-              .createDataBinding(AbstractUiWidgetAbstractDataTable.this, rowClass);
+          @SuppressWarnings({ "unchecked", "rawtypes" })
+          Class<ROW> rowClass = (Class) row.getClass();
+          AbstractUiWidgetAbstractDataTable.this.rowBinding = getContext().getDataBindingFactory().createDataBinding(
+              getContext(), rowClass);
         }
         this.delegate = AbstractUiWidgetAbstractDataTable.this.rowBinding.createPropertyAccessor(this.rowProperty);
       }

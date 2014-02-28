@@ -10,9 +10,6 @@ import net.sf.mmm.client.ui.api.attribute.AttributeReadEventObserver;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadFocused;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteModified;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteOnlyFocused;
-import net.sf.mmm.client.ui.api.common.Length;
-import net.sf.mmm.client.ui.api.common.LengthProperty;
-import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.event.UiEvent;
@@ -533,97 +530,6 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   public static void setParent(UiWidget widget, UiWidgetComposite<?> newParent) {
 
     ((AbstractUiWidget<?>) widget).setParent(newParent);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInPercent(double heightInPercent) {
-
-    setHeight(Length.valueOfPercent(heightInPercent));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeightInPixel(double heightInPixel) {
-
-    setHeight(Length.valueOfPixel(heightInPixel));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidthInPercent(double widthInPercent) {
-
-    setWidth(Length.valueOfPercent(widthInPercent));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidthInPixel(double widthInPixel) {
-
-    setWidth(Length.valueOfPixel(widthInPixel));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(double widthAmount, double heightAmount, LengthUnit unit) {
-
-    setSize(unit.newLength(widthAmount), unit.newLength(heightAmount));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setSize(Length width, Length height) {
-
-    setWidth(width);
-    setHeight(height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Length getWidth() {
-
-    return getLength(LengthProperty.WIDTH);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setWidth(Length width) {
-
-    setLength(LengthProperty.WIDTH, width);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Length getHeight() {
-
-    return getLength(LengthProperty.HEIGHT);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setHeight(Length height) {
-
-    setLength(LengthProperty.HEIGHT, height);
   }
 
   /**

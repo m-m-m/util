@@ -5,8 +5,7 @@ package net.sf.mmm.client.ui.base.widget.custom;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
-import net.sf.mmm.client.ui.api.common.Length;
-import net.sf.mmm.client.ui.api.common.LengthProperty;
+import net.sf.mmm.client.ui.api.common.Size;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
@@ -325,81 +324,9 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * {@inheritDoc}
    */
   @Override
-  public final Length getWidth() {
+  public Size getSize() {
 
-    return this.delegate.getWidth();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setWidth(Length width) {
-
-    this.delegate.setWidth(width);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final Length getHeight() {
-
-    return this.delegate.getHeight();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setHeight(Length height) {
-
-    this.delegate.setHeight(height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void setSize(Length width, Length height) {
-
-    this.delegate.setSize(width, height);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Length getLength(LengthProperty property) {
-
-    return this.delegate.getLength(property);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setLength(LengthProperty property, Length value) {
-
-    this.delegate.setLength(property, value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public double getWidthInPixel() {
-
-    return getDelegate().getWidthInPixel();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public double getHeightInPixel() {
-
-    return getDelegate().getHeightInPixel();
+    return this.delegate.getSize();
   }
 
   /**

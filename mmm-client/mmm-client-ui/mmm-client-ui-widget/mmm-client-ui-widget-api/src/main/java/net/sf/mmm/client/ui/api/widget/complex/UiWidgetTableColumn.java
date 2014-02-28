@@ -6,6 +6,7 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteReorderable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSortComparator;
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteSortable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.util.lang.api.SortOrder;
@@ -24,7 +25,8 @@ import net.sf.mmm.util.validation.api.HasValueValidators;
  * @since 1.0.0
  */
 public interface UiWidgetTableColumn<ROW, CELL> extends UiWidget, HasValueValidators<CELL>, AttributeWriteStringTitle,
-    AttributeWriteEditable, AttributeWriteResizable, AttributeWriteReorderable, AttributeWriteSortComparator<CELL> {
+    AttributeWriteEditable, AttributeWriteResizable, AttributeWriteSortable, AttributeWriteReorderable,
+    AttributeWriteSortComparator<CELL> {
 
   /**
    * Like {@link #sort(SortOrder)} but will toggle the {@link SortOrder} state of this column.

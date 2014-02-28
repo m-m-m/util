@@ -6,10 +6,11 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAriaRole;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteFlagAdvanced;
-import net.sf.mmm.client.ui.api.attribute.AttributeWriteLengthProperty;
+import net.sf.mmm.client.ui.api.common.AbstractSize;
 import net.sf.mmm.client.ui.api.common.FlagModifier;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.LengthProperty;
+import net.sf.mmm.client.ui.api.common.Size;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.event.UiEventMode;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
@@ -81,8 +82,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   /** @see #getStyles() */
   private String styles;
 
-  /** @see #setLength */
-  private Size size;
+  /** @see #getSize() */
+  private SizeImpl size;
 
   /** @see #getAriaRole() */
   private AbstractRole ariaRole;
@@ -573,85 +574,21 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * {@inheritDoc}
    */
   @Override
-  public Length getLength(LengthProperty property) {
+  public Size getSize() {
 
     if (this.size == null) {
-      if (this.widgetAdapter == null) {
-        return Length.ZERO;
-      } else {
-        return this.widgetAdapter.getLength(property);
-      }
-    } else {
-      return this.size.getLength(property);
+      this.size = createSize();
     }
+    return this.size;
   }
 
   /**
-   * {@inheritDoc}
+   * @return the {@link Size} instance lazily created by {@link #getSize()}.
    */
-  @Override
-  public void setLength(LengthProperty property, Length value) {
+  protected SizeImpl createSize() {
 
-    if (this.size == null) {
-      this.size = new Size();
-    }
-    this.size.setLength(property, value);
+    return new SizeImpl();
   }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public double getWidthInPixel() {
-
-    if (hasWidgetAdapter()) {
-      return getWidgetAdapter().getWidthInPixel();
-    }
-    Length width = getLength(LengthProperty.WIDTH);
-    return LengthUnitHelper.convertToPixel(width, 0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public double getHeightInPixel() {
-
-    if (hasWidgetAdapter()) {
-      return getWidgetAdapter().getHeightInPixel();
-    }
-    Length height = getLength(LengthProperty.HEIGHT);
-    return LengthUnitHelper.convertToPixel(height, 0);
-  }
-
-  //
-  // /**
-  // * Converts the {@link Length} given as width.<br/>
-  // * Just returns the given {@link Length} by default. Override to change (e.g. if you need to convert to
-  // * {@link net.sf.mmm.client.ui.api.common.SizeUnit#PIXEL pixels}). Global conversion should be done in
-  // * {@link #getWidgetAdapter() widget adapter} instead.
-  // *
-  // * @param newWidth is the width to convert.
-  // * @return the converted {@link Length} value.
-  // */
-  // protected Length convertWidth(Length newWidth) {
-  //
-  // return newWidth;
-  // }
-  //
-  // /**
-  // * Converts the {@link Length} given as height.<br/>
-  // * Just returns the given {@link Length} by default. Override to change (e.g. if you need to convert to
-  // * {@link net.sf.mmm.client.ui.api.common.SizeUnit#PIXEL pixels}). Global conversion should be done in
-  // * {@link #getWidgetAdapter() widget adapter} instead.
-  // *
-  // * @param newHeight is the height to convert.
-  // * @return the converted {@link Length} value.
-  // */
-  // protected Length convertHeight(Length newHeight) {
-  //
-  // return newHeight;
-  // }
 
   /**
    * {@inheritDoc}
@@ -1130,7 +1067,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   /**
    * This class contains the size ({@link Length} values) of this widget.
    */
-  private class Size implements AttributeWriteLengthProperty {
+  protected class SizeImpl extends AbstractSize {
 
     /** @see #getLength(LengthProperty) */
     private Length[] lengthValues;
@@ -1138,10 +1075,36 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
     /**
      * The constructor.
      */
-    public Size() {
+    public SizeImpl() {
 
       super();
       this.lengthValues = new Length[LENGTH_PROPERTIES.length];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getWidthInPixel() {
+
+      if (hasWidgetAdapter()) {
+        return getWidgetAdapter().getWidthInPixel();
+      }
+      Length width = getLength(LengthProperty.WIDTH);
+      return LengthUnitHelper.convertToPixel(width, 0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getHeightInPixel() {
+
+      if (hasWidgetAdapter()) {
+        return getWidgetAdapter().getHeightInPixel();
+      }
+      Length height = getLength(LengthProperty.HEIGHT);
+      return LengthUnitHelper.convertToPixel(height, 0);
     }
 
     /**

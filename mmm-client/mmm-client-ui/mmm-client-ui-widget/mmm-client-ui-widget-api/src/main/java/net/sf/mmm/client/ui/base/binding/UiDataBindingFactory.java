@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.binding;
 
+import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
@@ -27,6 +28,18 @@ public interface UiDataBindingFactory {
    * @param valueType is the {@link Class} reflecting the type of the value.
    * @return the new {@link UiDataBinding}.
    */
-  <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<?> widget, Class<VALUE> valueType);
+  <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiWidget<VALUE> widget, Class<VALUE> valueType);
+
+  /**
+   * This method creates a new instance of {@link UiDataBinding} for the given <code>valueType</code> and
+   * <code>context</code>. It should only be used for very specific cases.
+   * 
+   * @param <VALUE> is the generic type of the <code>valueType</code>.
+   * 
+   * @param context is the {@link AbstractUiContext}.
+   * @param valueType is the {@link Class} reflecting the type of the value.
+   * @return the new {@link UiDataBinding}.
+   */
+  <VALUE> UiDataBinding<VALUE> createDataBinding(AbstractUiContext context, Class<VALUE> valueType);
 
 }

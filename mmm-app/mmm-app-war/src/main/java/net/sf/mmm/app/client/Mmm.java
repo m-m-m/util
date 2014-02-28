@@ -13,9 +13,9 @@ import net.sf.mmm.app.shared.GreetingService;
 import net.sf.mmm.client.base.gwt.dialog.DialogManagerImplGwt;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.Length;
-import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.common.LengthUnit;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
+import net.sf.mmm.client.ui.api.common.Size;
 import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.event.UiEvent;
@@ -205,11 +205,14 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
         null);
     // final UiWidgetTableColumn<ContactBean, ?> columnBirthday =
     // contactTable.createColumn(Contact.PROPERTY_BIRTHDAY, null, null);
-    columnFirstName.setLength(LengthProperty.MIN_WIDTH, Length.valueOfPixel(20));
-    columnFirstName.setLength(LengthProperty.WIDTH, Length.valueOfPixel(100));
-    columnFirstName.setLength(LengthProperty.MAX_WIDTH, Length.valueOfPixel(200));
-    columnLastName.setLength(LengthProperty.MIN_WIDTH, Length.valueOfPixel(50));
-    columnLastName.setLength(LengthProperty.WIDTH, Length.valueOfPixel(400));
+    Size size = columnFirstName.getSize();
+    size.setMinimumWidth(Length.valueOfPixel(20));
+    size.setWidth(Length.valueOfPixel(100));
+    size.setMaximumWidth(Length.valueOfPixel(200));
+    size = columnLastName.getSize();
+    size.setMinimumWidth(Length.valueOfPixel(50));
+    size.setWidth(Length.valueOfPixel(400));
+    columnIncome.getSize().setWidthInPixel(100);
     contactTable.setColumns(columnFirstName, columnLastName, columnIncome);
     contactTable.setSelectionMode(SelectionMode.MULTIPLE_SELECTION);
 
@@ -363,15 +366,16 @@ public class Mmm implements EntryPoint {// extends AbstractEntryPoint<ClientGinj
       @Override
       public void onClick(UiEventClick event) {
 
-        label2.setLabel(mainWindow.getWidthInPixel() + "x" + mainWindow.getHeightInPixel());
+        Size windowSize = mainWindow.getSize();
+        label2.setLabel(windowSize.getWidthInPixel() + "x" + windowSize.getHeightInPixel());
         mainWindow.setPosition(mainWindow.getPositionX() - 5, mainWindow.getPositionY() - 5);
-        mainWindow.setSize(mainWindow.getWidthInPixel() + 1, mainWindow.getHeightInPixel() + 1, LengthUnit.PIXEL);
+        windowSize.setSize(windowSize.getWidthInPixel() + 1, windowSize.getHeightInPixel() + 1, LengthUnit.PIXEL);
       }
     });
 
     UiWidgetTree<String> tree = factory.create(UiWidgetTree.class);
     tree.setTitle("Tree");
-    tree.setSize(300, 300, LengthUnit.PIXEL);
+    tree.getSize().setSize(300, 300, LengthUnit.PIXEL);
     tree.setSelectionMode(SelectionMode.MULTIPLE_SELECTION);
     UiTreeModelDummy model = new UiTreeModelDummy();
     tree.setTreeModel(model);
