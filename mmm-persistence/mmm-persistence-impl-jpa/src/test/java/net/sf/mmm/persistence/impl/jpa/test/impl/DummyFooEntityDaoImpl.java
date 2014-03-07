@@ -6,17 +6,17 @@ import javax.inject.Named;
 
 import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
-import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityManager;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityDao;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityView;
 
 /**
- * This is the implementation of the {@link DummyFooEntityManager} interface.
+ * This is the implementation of the {@link DummyFooEntityDao} interface.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Named
-public class DummyFooEntityManagerImpl extends AbstractJpaGenericDao<Integer, DummyFooEntity>
-    implements DummyFooEntityManager {
+public class DummyFooEntityDaoImpl extends AbstractJpaGenericDao<Integer, DummyFooEntity>
+    implements DummyFooEntityDao {
 
   /**
    * {@inheritDoc}

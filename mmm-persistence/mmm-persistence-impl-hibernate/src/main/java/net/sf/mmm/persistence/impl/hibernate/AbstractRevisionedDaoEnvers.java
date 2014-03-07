@@ -51,7 +51,7 @@ public abstract class AbstractRevisionedDaoEnvers<ID, ENTITY extends MutableRevi
   public ENTITY load(ID id, Number revision) throws ObjectNotFoundException {
 
     if (revision == RevisionedEntity.LATEST_REVISION) {
-      return load(id);
+      return find(id);
     } else {
       return loadRevision(id, revision);
     }

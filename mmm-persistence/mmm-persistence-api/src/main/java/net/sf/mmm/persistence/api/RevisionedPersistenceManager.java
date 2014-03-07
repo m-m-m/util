@@ -42,8 +42,8 @@ public interface RevisionedPersistenceManager extends PersistenceManager {
    * @param entityClass is the class reflecting the type of the requested entity.
    * @param id is the {@link RevisionedEntity#getId() primary key} of the requested entity.
    * @param revision is the {@link RevisionedEntity#getRevision() revision} of the requested entity or
-   *        {@link RevisionedEntity#LATEST_REVISION} to get the {@link #load(Class, Object) latest} revision.
-   * @return the requested entity. It is immutable if NOT the {@link #load(Class, Object) latest} revision.
+   *        {@link RevisionedEntity#LATEST_REVISION} to get the {@link #find(Class, Object) latest} revision.
+   * @return the requested entity. It is immutable if NOT the {@link #find(Class, Object) latest} revision.
    * @throws ObjectNotFoundException if the requested {@link RevisionedEntity entity} could NOT be found.
    * @throws NlsUnsupportedOperationException if the given <code>entityClass</code> reflects a
    *         {@link RevisionedEntity} that is NOT revision-controlled.

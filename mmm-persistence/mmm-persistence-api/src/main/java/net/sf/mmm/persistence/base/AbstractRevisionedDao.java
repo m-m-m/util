@@ -24,7 +24,7 @@ public abstract class AbstractRevisionedDao<ID, ENTITY extends RevisionedEntity<
   public ENTITY load(ID id, Number revision) throws ObjectNotFoundException {
 
     if (revision == RevisionedEntity.LATEST_REVISION) {
-      return load(id);
+      return find(id);
     } else {
       return loadRevision(id, revision);
     }

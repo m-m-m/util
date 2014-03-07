@@ -13,7 +13,7 @@ import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-public class DummyBarEntityImpl extends AbstractJpaEntity<Integer> implements DummyBarEntity {
+public class DummyBarEntityImpl extends AbstractJpaEntity<Long> implements DummyBarEntity {
 
   /** @see #getValue() */
   private String value;

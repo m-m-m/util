@@ -74,9 +74,9 @@ public class EnversTest {
 
     Assert.assertNotNull(fooId);
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
-    DummyRevisionedFooEntityManager fooManager = (DummyRevisionedFooEntityManager) persistenceManager
-        .getManager(DummyRevisionedFooEntity.class);
-    DummyRevisionedFooEntity foo = fooManager.load(fooId);
+    DummyRevisionedFooEntityDao fooManager = (DummyRevisionedFooEntityDao) persistenceManager
+        .getDao(DummyRevisionedFooEntity.class);
+    DummyRevisionedFooEntity foo = fooManager.find(fooId);
     Assert.assertEquals("This is magic", foo.getValue());
     foo.setValue("It was magic");
     fooManager.save(foo);
@@ -86,8 +86,8 @@ public class EnversTest {
 
     Assert.assertNotNull(fooId);
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
-    DummyRevisionedFooEntityManager fooManager = (DummyRevisionedFooEntityManager) persistenceManager
-        .getManager(DummyRevisionedFooEntity.class);
+    DummyRevisionedFooEntityDao fooManager = (DummyRevisionedFooEntityDao) persistenceManager
+        .getDao(DummyRevisionedFooEntity.class);
     DummyRevisionedFooEntity foo = fooManager.load(fooId, RevisionedEntity.LATEST_REVISION);
     Assert.assertEquals("It was magic", foo.getValue());
     // fooManager.delete(foo);
@@ -99,8 +99,8 @@ public class EnversTest {
   protected DummyRevisionedFooEntity createAndSave() {
 
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
-    DummyRevisionedFooEntityManager fooManager = (DummyRevisionedFooEntityManager) persistenceManager
-        .getManager(DummyRevisionedFooEntity.class);
+    DummyRevisionedFooEntityDao fooManager = (DummyRevisionedFooEntityDao) persistenceManager
+        .getDao(DummyRevisionedFooEntity.class);
     Assert.assertSame(DummyRevisionedFooEntity.class, fooManager.getEntityClassImplementation());
     DummyRevisionedFooEntity foo = new DummyRevisionedFooEntity();
     foo.setValue("This is magic");

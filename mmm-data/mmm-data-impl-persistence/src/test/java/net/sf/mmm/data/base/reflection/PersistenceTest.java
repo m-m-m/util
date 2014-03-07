@@ -85,7 +85,7 @@ public class PersistenceTest {
   protected void loadAndUpdate(Long contactId) {
 
     PersistenceManager persistenceManager = getPersistenceManager();
-    DataContactImpl contact = persistenceManager.load(DataContactImpl.class, contactId);
+    DataContactImpl contact = persistenceManager.find(DataContactImpl.class, contactId);
     MutableLinkList<DataContactInfo> linkList = contact.getContactInfos();
     Assert.assertEquals(1, linkList.size());
     Link<DataContactInfo> link = linkList.getLink(0);
@@ -103,7 +103,7 @@ public class PersistenceTest {
     rootClass.setId(Long.valueOf(DataObject.CLASS_ID));
     rootClass.setJavaClass(DataObject.class);
     rootClass.setModifiers(DataClassModifiersBean.SYSTEM_ABSTRACT_UNEXTENDABLE);
-    DataClassGroupVersionImpl groupVersion = persistenceManager.loadIfExists(DataClassGroupVersionImpl.class,
+    DataClassGroupVersionImpl groupVersion = persistenceManager.findIfExists(DataClassGroupVersionImpl.class,
         DataClassGroupRoot.GROUP_ID);
     if (groupVersion == null) {
       groupVersion = new DataClassGroupVersionImpl(DataClassGroupRoot.GROUP_ID, VersionUtilImpl.getInstance()

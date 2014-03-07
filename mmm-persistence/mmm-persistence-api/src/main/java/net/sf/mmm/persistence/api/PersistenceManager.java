@@ -10,9 +10,9 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * This is the interface for a manager of the persistence layer. It is the entrance point to the persistence
  * component. In a common environment there is typically only one single instance of this interface active.<br>
  * The {@link PersistenceManager} acts as delegation to the {@link GenericDao}
- * {@link GenericDao#getEntityClassImplementation() responsible} for the according
- * {@link GenericEntity} in the invoked methods. This guarantees that individual custom logic is also
- * invoked in case of generic access.<br>
+ * {@link GenericDao#getEntityClassImplementation() responsible} for the according {@link GenericEntity} in
+ * the invoked methods. This guarantees that individual custom logic is also invoked in case of generic
+ * access.<br>
  * <b>NOTE:</b><br>
  * You will have to perform operations of this persistence-layer in a transactional context. The suggested way
  * is to use {@link net.sf.mmm.transaction.api.TransactionExecutor}.
@@ -28,37 +28,35 @@ public interface PersistenceManager {
   String CDI_NAME = "net.sf.mmm.persistence.api.PersistenceManager";
 
   /**
-   * This method determines if the {@link #getManager(Class) manager} for the given <code>entityClass</code>
-   * is available. This can be useful to prevent exceptions.
+   * This method determines if the {@link #getDao(Class) DAO} for the given <code>entityClass</code> is
+   * available. This can be useful to prevent exceptions.
    * 
-   * @param entityClass is the type of the {@link GenericEntity} for which the according
-   *        {@link GenericDao} is requested.
-   * @return <code>true</code> if {@link #getManager(Class)} will return a valid manager for the given
+   * @param entityClass is the type of the {@link GenericEntity} for which the according {@link GenericDao} is
+   *        requested.
+   * @return <code>true</code> if {@link #getDao(Class)} will return a valid DAO for the given
    *         <code>entityClass</code>, <code>false</code> otherwise (if an exception would be thrown).
    */
-  boolean hasManager(Class<? extends GenericEntity<?>> entityClass);
+  boolean hasDao(Class<? extends GenericEntity<?>> entityClass);
 
   /**
-   * This method gets the individual {@link GenericDao}
-   * {@link GenericDao#getEntityClassImplementation() responsible} for the given
-   * <code>entityClass</code>.
+   * This method gets the individual {@link GenericDao} {@link GenericDao#getEntityClassImplementation()
+   * responsible} for the given <code>entityClass</code>.
    * 
    * @param <ENTITY> is the generic entity-type.
    * @param <ID> is the type of the {@link GenericEntity#getId() primary key}.
-   * @param entityClass is the type of the {@link GenericEntity} for which the according
-   *        {@link GenericDao} is requested.
+   * @param entityClass is the type of the {@link GenericEntity} for which the according {@link GenericDao} is
+   *        requested.
    * @return the {@link GenericDao} responsible for the given <code>entityClass</code>.
-   * @throws ObjectNotFoundException if the requested {@link GenericDao manager} could NOT be
-   *         found.
+   * @throws ObjectNotFoundException if the requested {@link GenericDao DAO} could NOT be found.
    */
-  <ID, ENTITY extends GenericEntity<ID>> GenericDao<ID, ENTITY> getManager(Class<ENTITY> entityClass)
+  <ID, ENTITY extends GenericEntity<ID>> GenericDao<ID, ENTITY> getDao(Class<ENTITY> entityClass)
       throws ObjectNotFoundException;
 
   /**
-   * This method loads the {@link GenericEntity} with the given <code>entityClass</code> and
-   * <code>id</code> from the persistent store.
+   * This method loads the {@link GenericEntity} with the given <code>entityClass</code> and <code>id</code>
+   * from the persistent store.
    * 
-   * @see GenericDao#load(Object)
+   * @see GenericDao#find(Object)
    * 
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param <ID> is the type of the {@link GenericEntity#getId() primary key}.
@@ -67,14 +65,13 @@ public interface PersistenceManager {
    * @return the requested entity.
    * @throws ObjectNotFoundException if the requested {@link GenericEntity entity} could NOT be found.
    */
-  <ID, ENTITY extends GenericEntity<ID>> ENTITY load(Class<ENTITY> entityClass, ID id)
-      throws ObjectNotFoundException;
+  <ID, ENTITY extends GenericEntity<ID>> ENTITY find(Class<ENTITY> entityClass, ID id) throws ObjectNotFoundException;
 
   /**
-   * This method loads the {@link GenericEntity} with the given <code>entityClass</code> and
-   * <code>id</code> from the persistent store.
+   * This method loads the {@link GenericEntity} with the given <code>entityClass</code> and <code>id</code>
+   * from the persistent store.
    * 
-   * @see GenericDao#loadIfExists(Object)
+   * @see GenericDao#findIfExists(Object)
    * 
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param <ID> is the type of the {@link GenericEntity#getId() primary key}.
@@ -82,7 +79,7 @@ public interface PersistenceManager {
    * @param id is the {@link GenericEntity#getId() primary key} of the requested entity.
    * @return the requested entity or <code>null</code> if it does NOT exist.
    */
-  <ID, ENTITY extends GenericEntity<ID>> ENTITY loadIfExists(Class<ENTITY> entityClass, ID id);
+  <ID, ENTITY extends GenericEntity<ID>> ENTITY findIfExists(Class<ENTITY> entityClass, ID id);
 
   /**
    * This method creates a lazy reference proxy of the {@link GenericEntity} with the given
@@ -132,8 +129,8 @@ public interface PersistenceManager {
   void delete(GenericEntity<?> entity);
 
   /**
-   * This method gets the {@link Class} reflecting the given <code>{@link GenericEntity entity}</code>.
-   * Unlike <code>entity.{@link #getClass()}</code> this method will always return the real
+   * This method gets the {@link Class} reflecting the given <code>{@link GenericEntity entity}</code>. Unlike
+   * <code>entity.{@link #getClass()}</code> this method will always return the real
    * {@link GenericDao#getEntityClassImplementation() class defining the entity}.<br>
    * E.g. if the underlying implementation may create a dynamic proxy that extends the entity-class and
    * <code>entity.{@link #getClass()}</code> will return the {@link Class} of the proxy instead. In such case

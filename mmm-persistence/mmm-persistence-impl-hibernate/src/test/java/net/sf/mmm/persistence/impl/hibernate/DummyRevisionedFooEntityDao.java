@@ -11,13 +11,13 @@ import javax.inject.Named;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Named
-public class DummyRevisionedFooEntityManager extends
+public class DummyRevisionedFooEntityDao extends
     AbstractRevisionedDaoEnvers<Long, DummyRevisionedFooEntity> {
 
   /**
    * The constructor.
    */
-  public DummyRevisionedFooEntityManager() {
+  public DummyRevisionedFooEntityDao() {
 
     super();
   }

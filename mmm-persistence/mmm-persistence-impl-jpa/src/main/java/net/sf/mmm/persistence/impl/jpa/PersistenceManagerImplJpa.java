@@ -70,7 +70,7 @@ public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceMana
       if (entityClass == null) {
         // ignore entities that have no java type such as audit/jornal tables from envers.
       } else if (GenericEntity.class.isAssignableFrom(entityClass)) {
-        if (!hasManager((Class<? extends GenericEntity<?>>) entityClass)) {
+        if (!hasDao((Class<? extends GenericEntity<?>>) entityClass)) {
           JpaGenericDao manager = new JpaGenericDao(entityClass);
           manager.setEntityManager(this.entityManager);
           manager.setPojoFactory(this.pojoFactory);
@@ -131,7 +131,7 @@ public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceMana
   }
 
   /**
-   * This method injects the {@link #getManager(Class) entity-managers}.
+   * This method injects the {@link #getDao(Class) entity-managers}.
    * 
    * @param managerList is the {@link List} of all {@link GenericDao} to register.
    * @throws DuplicateObjectException if two managers use the same entity-class (

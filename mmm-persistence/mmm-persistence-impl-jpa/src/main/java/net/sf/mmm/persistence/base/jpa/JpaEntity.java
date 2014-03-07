@@ -8,7 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
- * This class extends {@link AbstractJpaEntity} binding the {@link #getId() ID} to the type {@link Long}.
+ * This class extends {@link AbstractJpaEntity} binding the {@link #getId() ID} to the type {@link Long}. <br/>
+ * <b>ATTENTION:</b><br/>
+ * This class is currently causing a bug in hibernate: <a
+ * href="https://hibernate.atlassian.net/browse/HHH-8958">HHH-8958</a>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

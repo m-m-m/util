@@ -115,9 +115,9 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
    * {@inheritDoc}
    */
   @Override
-  public ENTITY load(ID id) throws ObjectNotFoundException {
+  public ENTITY find(ID id) throws ObjectNotFoundException {
 
-    ENTITY entity = loadIfExists(id);
+    ENTITY entity = findIfExists(id);
     if (entity == null) {
       throw new ObjectNotFoundUserException(getEntityClassImplementation(), id);
     }
@@ -128,7 +128,7 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
    * {@inheritDoc}
    */
   @Override
-  public ENTITY loadIfExists(ID id) throws ObjectNotFoundException {
+  public ENTITY findIfExists(ID id) throws ObjectNotFoundException {
 
     NlsNullPointerException.checkNotNull("id", id);
     return getEntityManager().find(getEntityClassImplementation(), id);

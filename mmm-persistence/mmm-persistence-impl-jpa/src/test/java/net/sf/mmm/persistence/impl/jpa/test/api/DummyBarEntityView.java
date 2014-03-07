@@ -10,7 +10,7 @@ import net.sf.mmm.util.entity.api.GenericEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
  */
-public interface DummyBarEntityView extends GenericEntity<Integer> {
+public interface DummyBarEntityView extends GenericEntity<Long> {
 
   /** The name of the property {@link #getValue() value}. */
   String PROPERTY_VALUE = "value";

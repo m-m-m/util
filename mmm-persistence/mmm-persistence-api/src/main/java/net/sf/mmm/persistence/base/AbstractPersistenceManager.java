@@ -21,7 +21,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 public abstract class AbstractPersistenceManager extends AbstractLoggableComponent implements
     PersistenceManager {
 
-  /** @see #getManager(Class) */
+  /** @see #getDao(Class) */
   private final Map<Class<?>, GenericDao<?, ?>> class2managerMap;
 
   /**
@@ -81,7 +81,7 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   /**
    * {@inheritDoc}
    */
-  public boolean hasManager(Class<? extends GenericEntity<?>> entityClass) {
+  public boolean hasDao(Class<? extends GenericEntity<?>> entityClass) {
 
     return this.class2managerMap.containsKey(entityClass);
   }
@@ -89,7 +89,7 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   /**
    * {@inheritDoc}
    */
-  public <ID, ENTITY extends GenericEntity<ID>> GenericDao<ID, ENTITY> getManager(
+  public <ID, ENTITY extends GenericEntity<ID>> GenericDao<ID, ENTITY> getDao(
       Class<ENTITY> entityType) {
 
     GenericDao<ID, ENTITY> manager = (GenericDao<ID, ENTITY>) this.class2managerMap
@@ -103,20 +103,20 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   /**
    * {@inheritDoc}
    */
-  public <ID, ENTITY extends GenericEntity<ID>> ENTITY load(Class<ENTITY> entityClass, ID id) {
+  public <ID, ENTITY extends GenericEntity<ID>> ENTITY find(Class<ENTITY> entityClass, ID id) {
 
-    GenericDao<ID, ENTITY> manager = getManager(entityClass);
-    return manager.load(id);
+    GenericDao<ID, ENTITY> manager = getDao(entityClass);
+    return manager.find(id);
   }
 
   /**
    * {@inheritDoc}
    */
-  public <ID, ENTITY extends GenericEntity<ID>> ENTITY loadIfExists(Class<ENTITY> entityClass,
+  public <ID, ENTITY extends GenericEntity<ID>> ENTITY findIfExists(Class<ENTITY> entityClass,
       ID id) {
 
-    GenericDao<ID, ENTITY> manager = getManager(entityClass);
-    return manager.loadIfExists(id);
+    GenericDao<ID, ENTITY> manager = getDao(entityClass);
+    return manager.findIfExists(id);
   }
 
   /**
@@ -125,7 +125,7 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   public <ID, ENTITY extends GenericEntity<ID>> ENTITY getReference(Class<ENTITY> entityClass,
       ID id) throws ObjectNotFoundException {
 
-    GenericDao<ID, ENTITY> manager = getManager(entityClass);
+    GenericDao<ID, ENTITY> manager = getDao(entityClass);
     return manager.getReference(id);
   }
 
@@ -134,7 +134,7 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
    */
   public <ID, ENTITY extends GenericEntity<ID>> ENTITY create(Class<ENTITY> entityClass) {
 
-    GenericDao<ID, ENTITY> manager = getManager(entityClass);
+    GenericDao<ID, ENTITY> manager = getDao(entityClass);
     return manager.create();
   }
 
@@ -145,7 +145,7 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   public void save(GenericEntity entity) {
 
     Class<? extends GenericEntity> entityClass = getEntityClass(entity);
-    GenericDao manager = getManager(entityClass);
+    GenericDao manager = getDao(entityClass);
     manager.save(entity);
   }
 
@@ -156,7 +156,7 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
   public void delete(GenericEntity entity) {
 
     Class<? extends GenericEntity> entityClass = getEntityClass(entity);
-    GenericDao manager = getManager(entityClass);
+    GenericDao manager = getDao(entityClass);
     manager.delete(entity);
   }
 

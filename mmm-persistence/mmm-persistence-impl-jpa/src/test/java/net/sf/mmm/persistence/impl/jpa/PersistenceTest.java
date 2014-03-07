@@ -6,10 +6,10 @@ import java.util.concurrent.Callable;
 
 import net.sf.mmm.persistence.api.PersistenceManager;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
-import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityManager;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityDao;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityView;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
-import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityManager;
+import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityDao;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityView;
 import net.sf.mmm.persistence.impl.jpa.test.impl.DummyBarEntityImpl;
 import net.sf.mmm.persistence.impl.jpa.test.impl.DummyFooEntityImpl;
@@ -38,8 +38,8 @@ public class PersistenceTest {
   @Test
   public void testPersistence() throws Exception {
 
-    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).get(
-        TransactionExecutor.class);
+    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML)
+        .get(TransactionExecutor.class);
 
     DummyFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyFooEntity>() {
 
@@ -49,7 +49,7 @@ public class PersistenceTest {
       }
     });
     final Integer fooId = foo.getId();
-    final Integer barId = foo.getBar().getId();
+    final Long barId = foo.getBar().getId();
 
     System.out.println("--------------------------------------------------------");
     System.out.println(fooId);
@@ -82,14 +82,14 @@ public class PersistenceTest {
 
     Assert.assertNotNull(fooId);
     PersistenceManager persistenceManager = getPersistenceManager();
-    DummyFooEntityManager fooManager = (DummyFooEntityManager) persistenceManager.getManager(DummyFooEntity.class);
-    DummyFooEntity foo = fooManager.load(fooId);
+    DummyFooEntityDao fooManager = (DummyFooEntityDao) persistenceManager.getDao(DummyFooEntity.class);
+    DummyFooEntity foo = fooManager.find(fooId);
     Assert.assertEquals(42, foo.getNumber());
     DummyBarEntity bar = foo.getBar();
     Assert.assertNotNull(bar);
     Assert.assertEquals("value42", bar.getValue());
     foo.setNumber(24);
-    DummyBarEntityManager barManager = (DummyBarEntityManager) persistenceManager.getManager(DummyBarEntity.class);
+    DummyBarEntityDao barManager = (DummyBarEntityDao) persistenceManager.getDao(DummyBarEntity.class);
     DummyBarEntity bar2 = barManager.create();
     bar2.setValue("24value");
     barManager.save(bar2);
@@ -97,19 +97,19 @@ public class PersistenceTest {
     fooManager.save(foo);
   }
 
-  protected void readAgainAndDelete(Integer fooId, Integer barId) {
+  protected void readAgainAndDelete(Integer fooId, Long barId) {
 
     Assert.assertNotNull(fooId);
     PersistenceManager persistenceManager = getPersistenceManager();
-    DummyFooEntityManager fooManager = (DummyFooEntityManager) persistenceManager.getManager(DummyFooEntity.class);
-    DummyFooEntity foo = fooManager.load(fooId);
+    DummyFooEntityDao fooManager = (DummyFooEntityDao) persistenceManager.getDao(DummyFooEntity.class);
+    DummyFooEntity foo = fooManager.find(fooId);
     Assert.assertEquals(24, foo.getNumber());
     DummyBarEntity bar2 = foo.getBar();
     Assert.assertNotNull(bar2);
     Assert.assertEquals("24value", bar2.getValue());
-    DummyBarEntityManager barManager = (DummyBarEntityManager) persistenceManager.getManager(DummyBarEntity.class);
+    DummyBarEntityDao barManager = (DummyBarEntityDao) persistenceManager.getDao(DummyBarEntity.class);
     Assert.assertNotNull(barId);
-    DummyBarEntity bar = barManager.load(barId);
+    DummyBarEntity bar = barManager.find(barId);
     Assert.assertEquals("value42", bar.getValue());
     barManager.delete(bar);
     fooManager.delete(foo);
@@ -118,16 +118,16 @@ public class PersistenceTest {
   protected DummyFooEntity createAndSave() {
 
     PersistenceManager persistenceManager = getPersistenceManager();
-    DummyFooEntityManager fooManager = (DummyFooEntityManager) persistenceManager.getManager(DummyFooEntity.class);
+    DummyFooEntityDao fooManager = (DummyFooEntityDao) persistenceManager.getDao(DummyFooEntity.class);
     Assert.assertSame(DummyFooEntity.class, fooManager.getEntityClassReadWrite());
     Assert.assertSame(DummyFooEntityView.class, fooManager.getEntityClassReadOnly());
     Assert.assertSame(DummyFooEntityImpl.class, fooManager.getEntityClassImplementation());
-    Assert.assertTrue(fooManager instanceof DummyFooEntityManager);
-    DummyBarEntityManager barManager = (DummyBarEntityManager) persistenceManager.getManager(DummyBarEntity.class);
+    Assert.assertTrue(fooManager instanceof DummyFooEntityDao);
+    DummyBarEntityDao barManager = (DummyBarEntityDao) persistenceManager.getDao(DummyBarEntity.class);
     Assert.assertSame(DummyBarEntityView.class, barManager.getEntityClassReadOnly());
     Assert.assertSame(DummyBarEntity.class, barManager.getEntityClassReadWrite());
     Assert.assertSame(DummyBarEntityImpl.class, barManager.getEntityClassImplementation());
-    Assert.assertTrue(barManager instanceof DummyBarEntityManager);
+    Assert.assertTrue(barManager instanceof DummyBarEntityDao);
     DummyBarEntity bar = barManager.create();
     bar.setValue("value42");
     barManager.save(bar);

@@ -8,9 +8,9 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
- * This is the interface for a manager of a {@link #getEntityClassImplementation() specific type} of
- * {@link GenericEntity}. In other contexts this is often called a DAO (Data Access Object). It is responsible
- * for {@link #load(Object) loading} , {@link #save(GenericEntity) saving} and
+ * This is the interface for a <em>Data Access Object</em> (DAO). It acts as a manager responsible for the
+ * persistence operations on a {@link #getEntityClassImplementation() specific type} of {@link GenericEntity}.
+ * It is responsible for {@link #find(Object) loading}, {@link #save(GenericEntity) saving} and
  * {@link net.sf.mmm.util.search.api.SearchQuery searching} {@link GenericEntity entities} of the
  * {@link #getEntityClassImplementation() according type}.<br>
  * For each (non-abstract) implementation of {@link GenericEntity} there should exist one instance of this
@@ -55,8 +55,10 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
 
   /**
    * This method gets the {@link #getEntityClassImplementation() entity-class} with the view for reading the
-   * entity. This may be the same as {@link #getEntityClassImplementation()} but can also be an interface with
-   * the getters of the entity. If there is only one interface containing both setters and getters, this
+   * entity. For simplicity you should follow the {@link net.sf.mmm.util.pojo.api.Pojo POJO} principle and use
+   * the entity implementation in your API and bind it to {@literal <ENTITY>}. Then this method will simply
+   * return the same result as {@link #getEntityClassImplementation()}. However, you can also use an interface
+   * with the getters of the entity. If there is only one interface containing both setters and getters, this
    * method and {@link #getEntityClassReadWrite()} should both return that interface.
    * 
    * @return the according entity-class.
@@ -65,8 +67,11 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
 
   /**
    * This method gets the {@link #getEntityClassImplementation() entity-class} with the view for reading and
-   * writing the entity. This may be the same as {@link #getEntityClassImplementation()} but can also be an
-   * interface with the getters and setters (extending {@link #getEntityClassReadOnly()}) of the entity.
+   * writing the entity. For simplicity you should follow the {@link net.sf.mmm.util.pojo.api.Pojo POJO}
+   * principle and use the entity implementation in your API and bind it to {@literal <ENTITY>}. Then this
+   * method will simply return the same result as {@link #getEntityClassImplementation()}. However, you can
+   * also use an interface with the getters and setters (extending {@link #getEntityClassReadOnly()}) of the
+   * entity.
    * 
    * @return the according entity-class.
    */
@@ -81,9 +86,10 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * @return the requested {@link GenericEntity entity}.
    * @throws ObjectNotFoundException if the requested {@link GenericEntity entity} could NOT be found. Unlike
    *         the JPA we throw this exception instead of returning <code>null</code> as this is typically an
-   *         exceptional situation and it is better to have a precise exception than a NPE.
+   *         exceptional situation and it is better to have a precise exception than a NPE. Otherwise use
+   *         {@link #findIfExists(Object)}.
    */
-  ENTITY load(ID id) throws ObjectNotFoundException;
+  ENTITY find(ID id) throws ObjectNotFoundException;
 
   /**
    * This method loads the {@link GenericEntity} with the given <code>id</code> from the persistent store.
@@ -94,7 +100,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * @return the requested {@link GenericEntity entity} or <code>null</code> if it does NOT exist in
    *         persistent store.
    */
-  ENTITY loadIfExists(ID id);
+  ENTITY findIfExists(ID id);
 
   /**
    * This method creates a lazy reference proxy of the {@link GenericEntity} with the given <code>id</code>
@@ -116,11 +122,11 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * , the <code>entity</code> is updated in the persistent store.<br>
    * <b>ATTENTION:</b><br>
    * Modifications to a {@link net.sf.mmm.util.entity.api.PersistenceEntity#STATE_MANAGED managed}
-   * {@link GenericEntity entity} are automatically saved even if this method has NOT been invoked. However
-   * you should always invoke this method after modifying a
+   * {@link GenericEntity entity} are automatically saved even if this method has NOT been invoked. However,
+   * it is a good practice to always invoke this method after modifying a
    * {@link net.sf.mmm.util.entity.api.PersistenceEntity#STATE_MANAGED managed} {@link GenericEntity entity}
    * to make your code more explicit. This will also guarantee that potential custom-logic of your
-   * {@link GenericDao} is invoked.
+   * {@link GenericDao DAO} is invoked.
    * 
    * @param entity is the {@link GenericEntity} to save.
    */

@@ -33,7 +33,7 @@ public abstract class AbstractRevisionedPersistenceManager extends AbstractPersi
   public <ID, ENTITY extends RevisionedEntity<ID>> RevisionedDao<ID, ENTITY> getRevisionedManager(
       Class<ENTITY> entityClass) throws ObjectNotFoundException {
 
-    GenericDao<ID, ENTITY> manager = getManager(entityClass);
+    GenericDao<ID, ENTITY> manager = getDao(entityClass);
     try {
       return (RevisionedDao<ID, ENTITY>) manager;
     } catch (ClassCastException e) {

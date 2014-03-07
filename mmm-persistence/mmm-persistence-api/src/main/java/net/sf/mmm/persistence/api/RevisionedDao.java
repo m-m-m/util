@@ -47,12 +47,12 @@ public interface RevisionedDao<ID, ENTITY extends RevisionedEntity<ID>> extends 
    * This method loads a historic {@link RevisionedEntity#getRevision() revision} of the
    * {@link RevisionedEntity} with the given <code>id</code> from the persistent store.<br>
    * However if the given <code>revision</code> is {@link RevisionedEntity#LATEST_REVISION} the
-   * {@link #load(Object) latest revision will be loaded}.<br>
+   * {@link #find(Object) latest revision will be loaded}.<br>
    * 
    * @param id is the {@link RevisionedEntity#getId() primary key} of the requested {@link RevisionedEntity
    *        entity}.
    * @param revision is the {@link RevisionedEntity#getRevision() revision} of the requested entity or
-   *        {@link RevisionedEntity#LATEST_REVISION} to get the {@link #load(Object) latest} revision.
+   *        {@link RevisionedEntity#LATEST_REVISION} to get the {@link #find(Object) latest} revision.
    * @return the requested {@link RevisionedEntity entity}.
    * @throws ObjectNotFoundException if the requested {@link RevisionedEntity entity} could NOT be found.
    */
