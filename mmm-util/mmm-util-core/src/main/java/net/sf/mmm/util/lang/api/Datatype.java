@@ -6,14 +6,33 @@ import java.io.Serializable;
 
 /**
  * This is the interface for a <em>datatype</em>. A datatype is an object representing a value of a specific
- * type. It is typically <em>immutable</em> so it gets its value assigned at construction time and can then
- * not be modified anymore. Further, a datatype should ensure validation so it is NOT possible to create an
- * instance with an inconsistent value. Based on the {@link Datatype} a presentation layer can decide how to
- * view and how to edit the value. Therefore a structured data model should make use of custom datatypes in
- * order to be expressive.<br/>
- * Common generic datatypes are {@link String}, {@link Boolean}, {@link Long}, {@link Integer},
- * {@link java.math.BigDecimal}, {@link Double}, etc. They should always be accepted and supported as
- * datatypes (even though they do NOT implement this interface).<br/>
+ * type with the following aspects:
+ * <ul>
+ * <li>It has a technical or business specific <em>semantic</em>.</li>
+ * <li>Its JavaDoc explains the meaning and semantic of the value.</li>
+ * <li>It is <em>immutable</em> and therefore stateless (its value assigned at construction time and can not
+ * be modified).</li>
+ * <li>It is {@link Serializable}.</li>
+ * <li>It implements {@link #equals(Object)} and {@link #hashCode()} properly (two different instances with
+ * the same value are {@link #equals(Object) equal} and have the same {@link #hashCode() hash}).</li>
+ * <li>It shall ensure syntactical validation so it is NOT possible to create an instance with an invalid
+ * value.</li>
+ * <li>It is responsible for formatting its value to a {@link #toString() string representation} suitable for
+ * sinks such as UI, loggers, etc. Also consider cases like a {@link Datatype} representing a password where
+ * {@link #toString()} should return something like "********" instead of the actual password to prevent
+ * security accidents.</li>
+ * <li>It is responsible for parsing the value from other representations such as a {@link #toString() string}
+ * (as needed).</li>
+ * <li>It shall provide required logical operations on the value to prevent redundancies. Due to the immutable
+ * attribute all manipulative operations have to return a new {@link Datatype} instance (see e.g.
+ * {@link java.math.BigDecimal#add(java.math.BigDecimal)}).</li>
+ * <li>It should implement {@link Comparable} if a natural order is defined.</li>
+ * </ul>
+ * Based on the {@link Datatype} a presentation layer can decide how to view and how to edit the value.
+ * Therefore a structured data model should make use of custom datatypes in order to be expressive.<br/>
+ * Common generic datatypes are {@link String}, {@link Boolean}, {@link Number} and its subclasses,
+ * {@link java.util.Currency}, etc. They should always be accepted and supported as datatypes (even though
+ * they obviously do NOT implement this interface).<br/>
  * Please note that both {@link java.util.Date} and {@link java.util.Calendar} are mutable and have very
  * confusing APIs. Therefore, use JSR-310 or jodatime instead. <br/>
  * Even if a datatype is technically nothing but a {@link String} or a {@link Number} but logically something
@@ -21,17 +40,18 @@ import java.io.Serializable;
  * javadoc to explain it. On the other side avoid to introduce technical datatypes like <code>String32</code>
  * for a {@link String} with a maximum length of 32 characters as this is not adding value in the sense of a
  * real {@link Datatype}.<br/>
- * A datatype needs proper implementations of {@link #equals(Object)} and {@link #hashCode()}. It should
- * probably also be {@link Comparable}.<br/>
- * If a datatype is <em>mutable</em> this should be documented with an according reason (e.g. a Blob may allow
- * to append data as it would be inefficient to create a copy instead). In such case it is recommended to
- * declare a view interface that only declares methods to read (getters).<br/>
- * An implementation of this interface should NOT declare its {@link java.lang.reflect.Field}s as final in
- * order to be fully {@link java.io.Serializable}. Additionally, it should have a (protected) non-arg
- * {@link java.lang.reflect.Constructor}.<br/>
- * A regular implementation should be immutable and bind all fields at {@link java.lang.reflect.Constructor
- * construction}. It is suitable and in most cases also recommended to use the class implementing the datatype
- * as API omitting a dedicated interface if possible.
+ * An implementation of this interface should usually declare its {@link java.lang.reflect.Field}s as final to
+ * ensure being immutable. However, we are supporting Google Web Toolkit (GWT) that has additional
+ * requirements for serialization:
+ * <ul>
+ * <li>{@link java.lang.reflect.Field}s are NOT {@link java.lang.reflect.Modifier#isFinal(int) final}. See <a
+ * href="http://code.google.com/p/google-web-toolkit/issues/detail?id=1054">GWT issue 1054</a>.</li>
+ * <li>It has a protected non-arg {@link java.lang.reflect.Constructor}.</li>
+ * </ul>
+ * It is suitable and in most cases also recommended to use the class implementing the datatype as API
+ * omitting a dedicated interface.
+ * 
+ * @see AbstractSimpleDatatype
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
