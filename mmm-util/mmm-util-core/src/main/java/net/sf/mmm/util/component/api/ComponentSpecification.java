@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 
 /**
  * {@link ComponentSpecification} is used to annotate the specification (should be an interface) of a
- * component. It acts only for the purpose of documentation and has no functional impact. However it will say
- * that you can get one (or {@link #plugin() multiple}) instance(s) of this specification via
- * {@link javax.inject.Inject injection}.<br/>
+ * component (or better a part of it). It acts only for the purpose of documentation and has no functional
+ * impact. However it will say that you can get one (or {@link #plugin() multiple}) instance(s) of this
+ * specification via {@link javax.inject.Inject injection}.<br/>
  * If you find this:
  * 
  * <pre>
@@ -43,11 +43,10 @@ import java.lang.annotation.Target;
  * </pre>
  * 
  * For simplicity all implementations of such component in this project have to be
- * {@link javax.inject.Singleton stateless} and thread-safe. Otherwise this has to be documented in an
+ * {@link javax.inject.Singleton stateless} and thread-safe. Otherwise this has to be documented as an
  * explicit WARNING.
  * 
  * @see net.sf.mmm.util.component.api.Ioc
- * @see org.springframework.context.annotation.AnnotationConfigApplicationContext
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (moved in 3.1.0)

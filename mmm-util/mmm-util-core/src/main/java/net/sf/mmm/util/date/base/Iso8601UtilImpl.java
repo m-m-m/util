@@ -19,9 +19,9 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 /**
  * This is the implementation of the {@link net.sf.mmm.util.date.api.Iso8601Util} interface. It does NOT use
  * {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe.<br>
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -29,11 +29,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 @Named(Iso8601Util.CDI_NAME)
 public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso8601Util {
 
-  /**
-   * This is the singleton instance of this {@link Iso8601UtilImpl}. Instead of declaring the methods static,
-   * we declare this static instance what gives the same way of access while still allowing a design for
-   * extension by inheriting from this class.
-   */
+  /** @see #getInstance() */
   private static Iso8601UtilImpl instance;
 
   /** The ID for UTC (Coordinated Universal Time). */
@@ -54,7 +50,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
    * This method gets the singleton instance of this {@link Iso8601UtilImpl}.<br/>
    * <b>ATTENTION:</b><br/>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static Iso8601UtilImpl getInstance() {
@@ -218,7 +214,7 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
 
   /**
    * This method parses the timezone from the given <code>parser</code>.
-   * 
+   *
    * @param scanner is the parser pointing to the timezone or at the end of the string
    * @return the parsed timezone or <code>null</code> if parser already at the end of the string.
    */
@@ -226,8 +222,8 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
 
     int pos = scanner.getCurrentIndex();
     Integer offset = parseTimezoneOffset(scanner);
-    boolean hasOffset = offset != null;
-    if (hasOffset) {
+    // has offset?
+    if (offset != null) {
       int offsetMs = offset.intValue();
       String tzName = "GMT";
       if (offsetMs != 0) {

@@ -63,11 +63,16 @@
     <!--
     Spring-context is marked as optional component. You can use spring, guice, seam or whatever framework you like
     together with mmm as it comes with proper annotations using JSR 250 and JSR 330.
-    However, everything is tested with spring so you will this will be best choice if there are no other constraints.
+    However, everything is tested with spring so this will be best choice if there are no other constraints.
     -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
       <optional>true</optional>
     </dependency>
     <!--
@@ -117,14 +122,6 @@
       <artifactId>gwt-log</artifactId>
       <optional>true</optional>
     </dependency>
-    <!--
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>5.8</version>
-      <classifier>jdk15</classifier>
-    </dependency>
-     -->
   </dependencies>
 
   <reporting>
