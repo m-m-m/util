@@ -37,13 +37,14 @@
     <backport-function-version>1.0.1</backport-function-version>
     <com.google.gwt.version>2.6.0</com.google.gwt.version>
     <!--<com.google.gwt.version>2.5.0</com.google.gwt.version>-->
-    <org.springframework.version>3.2.0.RELEASE</org.springframework.version>
+    <org.springframework.version>4.0.2.RELEASE</org.springframework.version>
+    <org.springsecurity.version>3.2.2.RELEASE</org.springsecurity.version>
     <org.hibernate.version>4.2.7.SP1</org.hibernate.version>
     <!--<org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>-->
     <org.hibernate.validator.version>4.1.0.Final</org.hibernate.validator.version>
     <org.slf4j.version>1.6.1</org.slf4j.version>
     <jacoco.version>0.6.4.201312101107</jacoco.version>
-    <effective.pom>${project.build.directory}/${project.build.finalName}.pom</effective.pom>
+    <mmm.bootclasspath>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-function-version}/mmm-util-backport-java.util.function-${backport-function-version}.jar${path.separator}${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</mmm.bootclasspath>
   </properties>
 
   <dependencyManagement>
@@ -82,6 +83,11 @@
         <groupId>org.springframework</groupId>
         <artifactId>spring-test</artifactId>
         <version>${org.springframework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-core</artifactId>
+        <version>${org.springsecurity.version}</version>
       </dependency>
       
       <dependency>
@@ -167,6 +173,11 @@
         <groupId>com.allen-sauer.gwt.log</groupId>
         <artifactId>gwt-log</artifactId>
         <version>3.1.7</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>jsr250-api</artifactId>
+        <version>1.0</version>
       </dependency>
       
       <dependency>
@@ -370,10 +381,10 @@
           <version>2.2</version>
         </plugin>
         <plugin>
-          <!-- https://svn.codehaus.org/mojo/trunk/sandbox/consumer-maven-plugin -->
+          <!-- https://svn.codehaus.org/mojo/trunk/sandbox/flatten-maven-plugin -->
           <groupId>org.codehaus.mojo</groupId>
-          <artifactId>consumer-maven-plugin</artifactId>
-          <version>0.9.0-SNAPSHOT</version>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>1.0.0-beta-1-SNAPSHOT</version>
         </plugin>
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
@@ -385,10 +396,10 @@
                 <pluginExecution>
                   <pluginExecutionFilter>
                     <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>consumer-maven-plugin</artifactId>
+                    <artifactId>flatten-maven-plugin</artifactId>
                     <versionRange>[0.1,)</versionRange>
                     <goals>
-                      <goal>consumer</goal>
+                      <goal>flatten</goal>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
@@ -421,7 +432,7 @@
            <source>1.7</source>
            <target>1.7</target>
            <!-- we need to extend a class from "com.sun.internal" -->
-           <compilerArgument>-XDignore.symbol.file=true</compilerArgument>
+           <compilerArgument>-XDignore.symbol.file=true ${mmm.bootclasspath}</compilerArgument>
            <fork>true</fork>
          </configuration>
       </plugin>
@@ -443,15 +454,15 @@
       <!-- generate and use consumer pom instead of pom.xml -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
-        <artifactId>consumer-maven-plugin</artifactId>
+        <artifactId>flatten-maven-plugin</artifactId>
         <configuration>
         </configuration>
         <executions>
           <execution>
-            <id>generate-consumer-pom</id>
+            <id>flatten</id>
             <phase>process-resources</phase>
             <goals>
-              <goal>consumer</goal>
+              <goal>flatten</goal>
             </goals>
           </execution>
         </executions>
@@ -852,7 +863,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <argLine>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-function-version}/mmm-util-backport-java.util.function-${backport-function-version}.jar${path.separator}${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar ${argLine}</argLine>
+              <argLine>${mmm.bootclasspath} ${argLine}</argLine>
             </configuration>
           </plugin>
         </plugins>
