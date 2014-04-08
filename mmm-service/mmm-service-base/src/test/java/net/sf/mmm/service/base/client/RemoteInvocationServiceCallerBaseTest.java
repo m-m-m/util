@@ -2,10 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.base.client;
 
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceQueue.State;
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
+import net.sf.mmm.service.api.client.RemoteInvocationQueueState;
+import net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller;
+import net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceQueue;
+import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcRequest;
+import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceCaller;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,10 +40,10 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
 
   /**
    * @param caller is the {@link RemoteInvocationServiceCaller}.
-   * @return the current {@link RemoteInvocationGenericServiceRequest} that has been "performed" by the caller
+   * @return the current {@link GenericRemoteInvocationRpcRequest} that has been "performed" by the caller
    *         or <code>null</code> if no request has been performed.
    */
-  protected abstract RemoteInvocationGenericServiceRequest getCurrentRequest(CALLER caller);
+  protected abstract GenericRemoteInvocationRpcRequest getCurrentRequest(CALLER caller);
 
   /**
    * Cancels the given {@link RemoteInvocationServiceQueue} and performs verifications.
@@ -53,7 +54,7 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
   protected void cancel(CALLER caller, RemoteInvocationServiceQueue queue) {
 
     queue.cancel();
-    assertFalse(queue.getState() == State.CANCELLED);
+    assertFalse(queue.getState() == RemoteInvocationQueueState.CANCELLED);
     verifyNoRequest(caller);
   }
 
@@ -67,7 +68,7 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
 
     RemoteInvocationServiceQueue queue = caller.newQueue();
     assertNotNull(queue);
-    assertTrue(queue.getState() == State.OPEN);
+    assertTrue(queue.getState() == RemoteInvocationQueueState.OPEN);
     assertSame(queue, caller.getCurrentQueue());
     return queue;
   }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <inherits name="net.sf.mmm.util.UtilCore"/>
+  <source path="api" excludes="**/rpc/**"/>
+  <source path="base" excludes="**/server/**,**/rpc/**"/>
+  <source path="impl" excludes="**/server/**,**/rebind/**,**/rpc/**"/>
+</module>

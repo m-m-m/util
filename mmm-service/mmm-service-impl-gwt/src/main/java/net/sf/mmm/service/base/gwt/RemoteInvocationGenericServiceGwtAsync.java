@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.base.gwt;
 
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
+import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcRequest;
+import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcResponse;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -35,13 +35,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface RemoteInvocationGenericServiceGwtAsync {
 
   /**
-   * @see RemoteInvocationGenericServiceGwt#callServices(RemoteInvocationGenericServiceRequest)
+   * @see RemoteInvocationGenericServiceGwt#callServices(GenericRemoteInvocationRpcRequest)
    * 
-   * @param request is the {@link RemoteInvocationGenericServiceRequest}.
+   * @param request is the {@link GenericRemoteInvocationRpcRequest}.
    * @param callback is the {@link AsyncCallback} for receiving the
-   *        {@link RemoteInvocationGenericServiceResponse response}.
+   *        {@link GenericRemoteInvocationRpcResponse response}.
    */
-  void callServices(RemoteInvocationGenericServiceRequest request,
-      AsyncCallback<RemoteInvocationGenericServiceResponse> callback);
+  void callServices(GenericRemoteInvocationRpcRequest request,
+      AsyncCallback<GenericRemoteInvocationRpcResponse> callback);
 
 }

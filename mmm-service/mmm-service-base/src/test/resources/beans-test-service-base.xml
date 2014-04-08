@@ -6,10 +6,11 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-  <import resource="classpath:net/sf/mmm/util/beans-util-core.xml"/>
+  <import resource="classpath:net/sf/mmm/service/beans-service-server.xml"/>
+
+  <bean id="net.sf.mmm.service.base.server.XsrfTokenManager" class="net.sf.mmm.service.impl.CsrfTokenManagerDummyImpl"/>
 
   <bean class="net.sf.mmm.transaction.base.NoTransactionExecutor"/>
 
-  <bean class="net.sf.mmm.service.impl.server.RemoteInvocationGenericServiceImpl"/>
-  <bean class="net.sf.mmm.service.impl.server.TestServiceImpl"/>
+  <bean class="net.sf.mmm.service.impl.rpc.server.TestServiceImpl"/>
 </beans>

@@ -24,8 +24,24 @@
       <artifactId>mmm-transaction-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <!-- To avoid overcomplicated module structures we bundle server and client code together
-           and declare this as optional -->
+        and declare this as optional -->
       <optional>true</optional>
     </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <!-- <artifactId>spring-webmvc</artifactId>-->
+      <artifactId>spring-web</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-servlet_3.0_spec</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 </project>

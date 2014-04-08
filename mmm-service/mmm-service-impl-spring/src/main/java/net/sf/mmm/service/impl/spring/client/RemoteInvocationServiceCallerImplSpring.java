@@ -11,20 +11,20 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.service.api.RemoteInvocationService;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
-import net.sf.mmm.service.base.RemoteInvocationGenericService;
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceRequest;
-import net.sf.mmm.service.base.RemoteInvocationGenericServiceResponse;
-import net.sf.mmm.service.base.RemoteInvocationServiceCall;
-import net.sf.mmm.service.base.client.AbstractRemoteInvocationServiceCaller;
+import net.sf.mmm.service.api.rpc.RemoteInvocationService;
+import net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller;
+import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcCall;
+import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcRequest;
+import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcResponse;
+import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcService;
+import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceCaller;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
- * This is the implementation of {@link net.sf.mmm.service.api.client.RemoteInvocationServiceCaller} using an
- * {@link #setServiceClient(RemoteInvocationGenericService) injected client-stub} (provided by
+ * This is the implementation of {@link net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller} using
+ * an {@link #setServiceClient(GenericRemoteInvocationRpcService) injected client-stub} (provided by
  * spring-remoting) and {@link Proxy java dynamic proxies}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -32,8 +32,8 @@ import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 @Named(RemoteInvocationServiceCaller.CDI_NAME)
 public class RemoteInvocationServiceCallerImplSpring extends AbstractRemoteInvocationServiceCaller {
 
-  /** @see #setServiceClient(RemoteInvocationGenericService) */
-  private RemoteInvocationGenericService serviceClient;
+  /** @see #setServiceClient(GenericRemoteInvocationRpcService) */
+  private GenericRemoteInvocationRpcService serviceClient;
 
   /**
    * The constructor.
@@ -47,9 +47,9 @@ public class RemoteInvocationServiceCallerImplSpring extends AbstractRemoteInvoc
    * {@inheritDoc}
    */
   @Override
-  protected void performRequest(RemoteInvocationGenericServiceRequest request, RequestBuilder builder) {
+  protected void performRequest(GenericRemoteInvocationRpcRequest request, RequestBuilder builder) {
 
-    RemoteInvocationGenericServiceResponse response = this.serviceClient.callServices(request);
+    GenericRemoteInvocationRpcResponse response = this.serviceClient.callServices(request);
     handleResponse(request, builder, response);
   }
 
@@ -59,6 +59,7 @@ public class RemoteInvocationServiceCallerImplSpring extends AbstractRemoteInvoc
   @Override
   protected <SERVICE extends RemoteInvocationService> SERVICE getServiceClient(final Class<SERVICE> serviceInterface) {
 
+    // TODO: cache the dynamic proxies per service interface?
     InvocationHandler handler = new InvocationHandler() {
 
       @Override
@@ -78,8 +79,8 @@ public class RemoteInvocationServiceCallerImplSpring extends AbstractRemoteInvoc
                 + i, e);
           }
         }
-        int signature = RemoteInvocationServiceCall.getSignature(method.getParameterTypes());
-        RemoteInvocationServiceCall call = new RemoteInvocationServiceCall(serviceInterface.getName(),
+        int signature = GenericRemoteInvocationRpcCall.getSignature(method.getParameterTypes());
+        GenericRemoteInvocationRpcCall call = new GenericRemoteInvocationRpcCall(serviceInterface.getName(),
             method.getName(), signature, arguments);
         addCall(call, method.getReturnType());
         return null;
@@ -93,16 +94,16 @@ public class RemoteInvocationServiceCallerImplSpring extends AbstractRemoteInvoc
   /**
    * @return the serviceClient
    */
-  protected RemoteInvocationGenericService getServiceClient() {
+  protected GenericRemoteInvocationRpcService getServiceClient() {
 
     return this.serviceClient;
   }
 
   /**
-   * @param serviceClient is the client-stub for {@link RemoteInvocationGenericService} to inject.
+   * @param serviceClient is the client-stub for {@link GenericRemoteInvocationRpcService} to inject.
    */
   @Inject
-  public void setServiceClient(RemoteInvocationGenericService serviceClient) {
+  public void setServiceClient(GenericRemoteInvocationRpcService serviceClient) {
 
     this.serviceClient = serviceClient;
   }

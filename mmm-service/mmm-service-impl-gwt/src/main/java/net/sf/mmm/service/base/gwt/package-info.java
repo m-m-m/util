@@ -3,7 +3,7 @@
 /**
  * Contains the base classes for simple remote services using GWT.
  * <a name="documentation"/><h2>Service Base GWT</h2> 
- * This package contains the base implementation for {@link net.sf.mmm.service.api.RemoteInvocationService}s
+ * This package contains the base implementation for {@link net.sf.mmm.service.api.rpc.RemoteInvocationService}s
  * using Goolge Web-Toolkit (GWT).<br/>
  */
 package net.sf.mmm.service.base.gwt;

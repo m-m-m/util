@@ -3,7 +3,7 @@
 /**
  * Contains the client-specific implementation for remote services using spring-remoting.
  * <a name="documentation"/><h2>Service Impl Spring Client</h2>
- * This package contains the client-specific implementation of {@link net.sf.mmm.service.api.RemoteInvocationService}
+ * This package contains the client-specific implementation of {@link net.sf.mmm.service.api.rpc.RemoteInvocationService}
  * using spring-remoting.<br/>
  */
 package net.sf.mmm.service.impl.spring.client;

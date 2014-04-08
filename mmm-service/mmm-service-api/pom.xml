@@ -18,5 +18,10 @@
       <artifactId>mmm-util-core</artifactId>
       <version>4.0.0-SNAPSHOT</version>
     </dependency>
-  </dependencies>  
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>jsr250-api</artifactId>
+      <!-- <optional>true</optional> -->
+    </dependency>
+  </dependencies>
 </project>

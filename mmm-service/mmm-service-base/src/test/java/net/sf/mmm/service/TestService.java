@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service;
 
-import net.sf.mmm.service.api.RemoteInvocationService;
+import net.sf.mmm.service.api.rpc.RemoteInvocationService;
 
 /**
  * This is a {@link RemoteInvocationService} for JUnit testing.

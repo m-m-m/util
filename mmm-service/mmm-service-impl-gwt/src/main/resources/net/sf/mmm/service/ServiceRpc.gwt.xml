@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <inherits name="net.sf.mmm.util.UtilCore"/>
+  <source path="api" excludes="**/command/**"/>
+  <source path="base" excludes="**/server/**,**/command/**"/>
+  <source path="impl" excludes="**/server/**,**/rebind/**,**/command/**"/>
+
+  <generate-with class="net.sf.mmm.service.impl.gwt.rpc.client.rebind.RemoteInvocationServiceCallerGenerator">
+    <when-type-assignable class="net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller"/>
+  </generate-with>
+</module>
