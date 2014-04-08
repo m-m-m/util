@@ -3,7 +3,7 @@
 package net.sf.mmm.client.impl.gwt.gin;
 
 import net.sf.mmm.client.api.ClientComponents;
-import net.sf.mmm.service.api.client.RemoteInvocationServiceCaller;
+import net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;

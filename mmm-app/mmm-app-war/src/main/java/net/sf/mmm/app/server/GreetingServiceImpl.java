@@ -5,7 +5,7 @@ package net.sf.mmm.app.server;
 import javax.inject.Named;
 
 import net.sf.mmm.app.shared.GreetingService;
-import net.sf.mmm.service.base.server.AbstractRemoteInvocationService;
+import net.sf.mmm.service.base.rpc.server.AbstractRemoteInvocationService;
 
 /**
  * TODO: this class ...
