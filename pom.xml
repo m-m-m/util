@@ -20,10 +20,7 @@
     <module>mmm-transaction</module>
     <module>mmm-persistence</module>
     <module>mmm-security</module>
-    <module>mmm-upnp</module>
     <module>mmm-l10n</module>
-    <module>mmm-data</module>
-    <module>mmm-app</module>
     <module>mmm-setup</module>
     <module>mmm-test</module>
   </modules>
