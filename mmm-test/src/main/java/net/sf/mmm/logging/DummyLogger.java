@@ -7,7 +7,7 @@ import org.slf4j.helpers.MarkerIgnoringBase;
 /**
  * This is an implementation of the {@link org.slf4j.Logger} interface that does nothing. Unlike
  * {@link org.slf4j.helpers.NOPLogger} its methods are NOT final so it can be extended for testing purposes.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class DummyLogger extends MarkerIgnoringBase {
@@ -17,7 +17,7 @@ public class DummyLogger extends MarkerIgnoringBase {
 
   /**
    * The constructor.
-   * 
+   *
    */
   public DummyLogger() {
 
