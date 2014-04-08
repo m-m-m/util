@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.client.ui.gwt.widgets;
+package net.sf.mmm.client.ui.gwt.widgets.handler;
 
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.MouseDownEvent;
@@ -15,13 +15,13 @@ import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This class is the handler for mouse events to move an resize a {@link PopupWindow}.
+ * This is the abstract base class for a handler that allows moving or resizing with the mouse.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class AbstractMouseDragHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler,
-    Event.NativePreviewHandler {
+    Event.NativePreviewHandler, AbstractCustomHandler {
 
   /** The initial x position while dragging the mouse. */
   private int mouseX;
@@ -82,7 +82,7 @@ public abstract class AbstractMouseDragHandler implements MouseDownHandler, Mous
     this.mouseX = event.getClientX();
     this.mouseY = event.getClientY();
 
-    initializeOnMouseDown();
+    initializeOnMouseDown(event);
 
     // assert (this.registration == null);
     this.registration = Event.addNativePreviewHandler(this);
@@ -92,8 +92,10 @@ public abstract class AbstractMouseDragHandler implements MouseDownHandler, Mous
 
   /**
    * Override to add initialization logic to {@link #onMouseDown(MouseDownEvent)}.
+   * 
+   * @param event is the initial {@link MouseDownEvent}.
    */
-  protected void initializeOnMouseDown() {
+  protected void initializeOnMouseDown(MouseDownEvent event) {
 
     // Nothing by default...
   }
@@ -150,17 +152,15 @@ public abstract class AbstractMouseDragHandler implements MouseDownHandler, Mous
   }
 
   /**
-   * This method registers this mouse drag handler in the given {@link Widget}. It will also ensure that the
-   * widget {@link Widget#sinkEvents(int) sends} the required mouse events.
-   * 
-   * @param widget is the {@link Widget} where to register this handler.
-   * @return the {@link HandlerRegistration} that may be used to {@link HandlerRegistration#removeHandler()
-   *         remove} the handler.
+   * {@inheritDoc}
    */
-  public HandlerRegistration registerMouseDragHandler(Widget widget) {
+  @Override
+  public void register(Widget widget, HandlerRegistrationCollector collector) {
 
     widget.sinkEvents(Event.ONMOUSEDOWN);
     HandlerRegistration handlerRegistration = widget.addDomHandler(this, MouseDownEvent.getType());
-    return handlerRegistration;
+    if (collector != null) {
+      collector.addHandlerRegistration(handlerRegistration);
+    }
   }
 }

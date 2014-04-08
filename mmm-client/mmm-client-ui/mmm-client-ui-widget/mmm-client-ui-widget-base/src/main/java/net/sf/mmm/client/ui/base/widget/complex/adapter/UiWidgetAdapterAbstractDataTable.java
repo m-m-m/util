@@ -40,4 +40,6 @@ public interface UiWidgetAdapterAbstractDataTable<ROW> extends UiWidgetAdapterAb
    */
   void sort(AbstractUiWidgetTableColumn<?, ROW, ?> column, SortOrder sortOrder);
 
+  void dragColumn(AbstractUiWidgetTableColumn<?, ROW, ?> dragColumn, AbstractUiWidgetTableColumn<?, ROW, ?> dropColumn);
+
 }

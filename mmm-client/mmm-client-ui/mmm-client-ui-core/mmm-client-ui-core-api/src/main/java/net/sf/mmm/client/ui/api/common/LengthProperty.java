@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadLengthProperty;
+import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
@@ -85,6 +87,41 @@ public enum LengthProperty implements SimpleDatatype<String>, CssProperty {
   public boolean isWidth() {
 
     return ((this == WIDTH) || (this == MIN_WIDTH) || (this == MAX_WIDTH));
+  }
+
+  /**
+   * @see Length#convertToPixel(double, LengthProperty)
+   * 
+   * @param lengthSource is the object to get the {@link Length} from.
+   * @param basePixelLength - see Length#convertToPixel(double, LengthProperty)
+   * @return the requested {@link Length} in {@link LengthUnit#PIXEL}.
+   */
+  public double getLengthInPixel(AttributeReadLengthProperty lengthSource, double basePixelLength) {
+
+    Length length = lengthSource.getLength(this);
+    return length.convertToPixel(basePixelLength, this);
+  }
+
+  /**
+   * @see Length#convertToPixel(double, LengthProperty)
+   * 
+   * @param lengthSource is the object to get the {@link Length} from.
+   * @param basePixelSize gives access to read the size of the base container (e.g. screen, parent panel,
+   *        etc.).
+   * @return the requested {@link Length} in {@link LengthUnit#PIXEL}.
+   */
+  public double getLengthInPixel(AttributeReadLengthProperty lengthSource, AttributeReadSizeInPixel basePixelSize) {
+
+    Length length = lengthSource.getLength(this);
+    double basePixelLength = 0;
+    if ((length.getUnit() == LengthUnit.PERCENT) && (length.getAmount() > 0)) {
+      if (isWidth()) {
+        basePixelLength = basePixelSize.getWidthInPixel();
+      } else {
+        basePixelLength = basePixelSize.getHeightInPixel();
+      }
+    }
+    return length.convertToPixel(basePixelLength, this);
   }
 
   /**

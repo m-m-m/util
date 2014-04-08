@@ -23,7 +23,7 @@ public class Point extends AbstractDatatype {
   private int y;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected Point() {
 

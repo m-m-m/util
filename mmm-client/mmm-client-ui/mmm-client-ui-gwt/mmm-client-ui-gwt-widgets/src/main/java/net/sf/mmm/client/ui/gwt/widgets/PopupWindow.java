@@ -2,13 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.gwt.widgets;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeReadLengthProperty;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteClosable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximizable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMaximized;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteMovable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteResizable;
 import net.sf.mmm.client.ui.api.common.CssStyles;
-import net.sf.mmm.client.ui.api.common.IconConstants;
+import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
+import net.sf.mmm.client.ui.gwt.widgets.handler.HandlerRegistrationCollector;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.lang.api.Direction;
 
@@ -22,6 +25,7 @@ import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
@@ -41,7 +45,10 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 1.0.0
  */
 public class PopupWindow extends PopupPanel implements AttributeWriteResizable, AttributeWriteMovable,
-    AttributeWriteClosable, AttributeWriteMaximized, AttributeWriteMaximizable {
+    AttributeWriteClosable, AttributeWriteMaximized, AttributeWriteMaximizable, AttributeReadLengthProperty {
+
+  /** The {@link HandlerRegistrationCollector} or <code>null</code> to ignore {@link HandlerRegistration}s. */
+  private final HandlerRegistrationCollector registrationCollector;
 
   /** The main panel. */
   private final VerticalFlowPanel mainPanel;
@@ -159,7 +166,21 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
    */
   public PopupWindow(boolean autoHide, boolean modal) {
 
+    this(autoHide, modal, null);
+  }
+
+  /**
+   * The constructor.
+   * 
+   * @param autoHide - see {@link #setAutoHideEnabled(boolean)}.
+   * @param modal - see {@link #setModal(boolean)}.
+   * @param registrationCollector the {@link HandlerRegistrationCollector} used to collect
+   *        {@link HandlerRegistration}s.
+   */
+  public PopupWindow(boolean autoHide, boolean modal, HandlerRegistrationCollector registrationCollector) {
+
     super(autoHide, modal);
+    this.registrationCollector = registrationCollector;
     if (modal) {
       setGlassStyleName(CssStyles.GLASS_PANEL);
       setGlassEnabled(true);
@@ -173,7 +194,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
     this.title = new InlineLabel();
     this.title.setStyleName(CssStyles.WINDOW_TITLE);
 
-    SafeHtml iconMarkup = HtmlTemplates.INSTANCE.iconMarkup(IconConstants.CLOSE);
+    SafeHtml iconMarkup = HtmlTemplates.INSTANCE.iconMarkup(CssStyles.CLOSE);
     this.closeButton = new Button(iconMarkup);
     this.closeButton.setStyleName(CssStyles.BUTTON);
     ClickHandler closeHandler = new ClickHandler() {
@@ -185,7 +206,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
       }
     };
     this.closeButton.addClickHandler(closeHandler);
-    iconMarkup = HtmlTemplates.INSTANCE.iconMarkup(IconConstants.MAXIMIZE);
+    iconMarkup = HtmlTemplates.INSTANCE.iconMarkup(CssStyles.MAXIMIZE);
     this.maximizeButton = new SimpleToggleButton();
     this.maximizeButton.setHTML(iconMarkup);
     this.maximizeButton.setStyleName(CssStyles.BUTTON);
@@ -409,6 +430,19 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Length getLength(LengthProperty property) {
+
+    String value = getElement().getStyle().getProperty(property.getMemberName());
+    if ((value == null) || (value.length() == 0)) {
+      return property.getDefaultValue();
+    }
+    return new Length(value);
+  }
+
+  /**
    * Adds a {@link PopupMouseHandler} to the given {@link Widget} based on the given {@link Direction}.
    * 
    * @param widget is the {@link Widget} where to add the {@link PopupMouseHandler} to.
@@ -417,7 +451,7 @@ public class PopupWindow extends PopupPanel implements AttributeWriteResizable, 
   private void addMouseHandler(Widget widget, Direction resizeDirection) {
 
     PopupMouseHandler handler = new PopupMouseHandler(this, resizeDirection);
-    handler.registerMouseDragHandler(widget);
+    handler.register(widget, this.registrationCollector);
   }
 
   /**

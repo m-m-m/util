@@ -54,7 +54,7 @@ public class LabelWidget extends AbstractWidget implements HasText {
   /**
    * This method sets the {@link Widget} labelled by this {@link LabelWidget}. You should always associate the
    * input widget with a {@link LabelWidget} via this method for advanced usability and
-   * {@link net.sf.mmm.client.ui.api.common.Accessibility}. <br/>
+   * {@link net.sf.mmm.util.lang.api.concern.Accessibility}. <br/>
    * <b>ATTENTION:</b><br/>
    * This method creates a bidirectional connection of this {@link LabelWidget} and the given
    * <code>labelledWidget</code> via {@link String} attributes pointing to each others IDs. If an ID is

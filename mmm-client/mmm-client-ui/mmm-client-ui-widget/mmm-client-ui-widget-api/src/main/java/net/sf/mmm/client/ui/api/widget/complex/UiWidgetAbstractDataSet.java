@@ -24,9 +24,9 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  * <li>The items can be edited. By default this happens inline (directly inside the widget) but it also
  * possible to write a custom editor popup.</li>
  * <li>It has a {@link #getSummary() summary} that is not visible but is honored by assistive technology
- * (screen-readers) for {@link net.sf.mmm.client.ui.api.common.Accessibility}.</li>
+ * (screen-readers) for {@link net.sf.mmm.util.lang.api.concern.Accessibility}.</li>
  * <li>It has a {@link #getTitle() title} that describes the content of the table briefly. It should always be
- * {@link #setTitle(String) set} for {@link net.sf.mmm.client.ui.api.common.Accessibility} even if you do not
+ * {@link #setTitle(String) set} for {@link net.sf.mmm.util.lang.api.concern.Accessibility} even if you do not
  * want to {@link #isTitleVisible() show} it.</li>
  * </ul>
  * 

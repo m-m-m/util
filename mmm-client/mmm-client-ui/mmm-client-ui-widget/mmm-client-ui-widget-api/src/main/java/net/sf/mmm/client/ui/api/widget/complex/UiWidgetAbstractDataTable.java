@@ -7,6 +7,7 @@ import java.util.Comparator;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
+import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
@@ -136,30 +137,46 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
    * @return the requested {@link UiWidgetTableColumn column}.
    */
   UiWidgetTableColumn<ROW, ?> getColumn(int index);
-  //
-  // /**
-  // * @see #setRowEqualsChecker(EqualsChecker)
-  // *
-  // * @return the {@link EqualsChecker} used to compare if two given rows are considered equal.
-  // */
-  // EqualsChecker<ROW> getRowEqualsChecker();
-  //
-  // /**
-  // * This method sets the {@link EqualsChecker} used to compare if two given rows are considered equal.
-  // <br/>
-  // * <b>ATTENTION:</b><br/>
-  // * By default {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame} is used as a data list can potentially
-  // * contain two rows (nodes for tree table) with the same data. As an equals method may then return
-  // * <code>true</code> these two different rows could not be distinguished causing strange effects. You may
-  // * change the behavior by providing a different implementation of {@link EqualsChecker} such as
-  // * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual} if you are aware that editable data tables allow
-  // * the end-user to modify rows what will create a copy that will not be {@link Object#equals(Object)
-  // equal}.
-  // * You should only use this method when creating a data table but not on the fly after the data table has
-  // * already been attached to the UI.
-  // *
-  // * @param equalsChecker is the new {@link EqualsChecker} to use.
-  // */
-  // void setRowEqualsChecker(EqualsChecker<ROW> equalsChecker);
+
+  /**
+   * Gets implicit {@link UiWidgetTableColumn column} that shows the checkboxes or radios for the selection of
+   * a row.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This is available for advanced flexibility. Please avoid changing
+   * {@link UiWidgetTableColumn#setTitle(String) title}, {@link UiWidgetTableColumn#setReorderable(boolean)
+   * reorderable}, {@link UiWidgetTableColumn#setResizable(boolean) resizable}, or
+   * {@link UiWidgetTableColumn#setSortable(boolean) sortable}.
+   * 
+   * @return the implicit {@link UiWidgetTableColumn column} that shows the checkboxes or radios for the
+   *         selection of a row.
+   */
+  UiWidgetTableColumn<?, Boolean> getSelectionColumn();
+
+  /**
+   * Gets implicit {@link UiWidgetTableColumn column} that shows the row-numbers.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This is available for advanced flexibility. Please avoid changing
+   * {@link UiWidgetTableColumn#setTitle(String) title}, {@link UiWidgetTableColumn#setReorderable(boolean)
+   * reorderable}, {@link UiWidgetTableColumn#setResizable(boolean) resizable}, or
+   * {@link UiWidgetTableColumn#setSortable(boolean) sortable}.<br/>
+   * This column may be lazily created. Only use if you want to
+   * {@link UiWidgetTableColumn#setVisible(boolean) make it visible}.
+   * 
+   * @return the implicit {@link UiWidgetTableColumn column} that shows the row-numbers.
+   */
+  UiWidgetTableColumn<?, Integer> getRowNumberColumn();
+
+  /**
+   * This method gets the {@link UiWidgetTableColumn column} with the given <code>columnId</code>.
+   * 
+   * @param columnId is the {@link UiWidgetTableColumn#getId() ID} of the requested column.
+   * @param required - if <code>true</code> and the requested column does not exist, an exception is thrown,
+   *        <code>false</code> otherwise (<code>null</code> will be returned for non existent columns).
+   * @return the requested {@link UiWidgetTableColumn column} or <code>null</code> if no such column exists
+   *         and <code>required</code> is <code>false</code>.
+   * @throws ObjectNotFoundException if no column exists with the given <code>columnId</code> and
+   *         <code>required</code> is <code>true</code>.
+   */
+  UiWidgetTableColumn<ROW, ?> getColumnById(String columnId, boolean required) throws ObjectNotFoundException;
 
 }

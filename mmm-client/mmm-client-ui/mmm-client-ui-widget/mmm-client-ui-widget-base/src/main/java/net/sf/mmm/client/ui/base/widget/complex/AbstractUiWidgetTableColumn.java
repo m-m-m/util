@@ -30,14 +30,17 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
 public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapterTableColumn, ROW, CELL> extends
     AbstractUiWidgetNative<ADAPTER, CELL> implements UiWidgetTableColumn<ROW, CELL> {
 
+  /** The initial default width of a column in pixel. */
+  private static final int DEFAULT_WIDTH = 50;
+
   /** The virtual property for multi-selection. */
   public static final TypedProperty<Boolean> PROPERTY_SELECTED = new TypedProperty<Boolean>("_selected_");
 
   /** The virtual property for multi-selection. */
-  public static final TypedProperty<String> PROPERTY_ROW_NUMBER = new TypedProperty<String>("_rownumber_");
+  public static final TypedProperty<Integer> PROPERTY_ROW_NUMBER = new TypedProperty<Integer>("_rownumber_");
 
-  /** @see #getListTable() */
-  private final AbstractUiWidgetAbstractDataTable<?, ROW, ?> listTable;
+  /** @see #getDataTable() */
+  private final AbstractUiWidgetAbstractDataTable<?, ?, ROW, ?> dataTable;
 
   /** @see #getTypedProperty() */
   private final TypedProperty<CELL> typedProperty;
@@ -85,14 +88,18 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public AbstractUiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW, ?> listTable,
+  public AbstractUiWidgetTableColumn(UiContext context, AbstractUiWidgetAbstractDataTable<?, ?, ROW, ?> listTable,
       TypedProperty<CELL> typedProperty, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
-    this.listTable = listTable;
+    this.dataTable = listTable;
     this.typedProperty = typedProperty;
+    // default is sortable, type must be comparable or comparator has to be set
+    this.sortable = true;
+    // default is reorderable, must be switched off by end-user
+    setReorderable(true);
     // initialize default width
-    getSize().setWidthInPixel(50);
+    getSize().setWidthInPixel(DEFAULT_WIDTH);
   }
 
   /**
@@ -322,7 +329,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   @Override
   public void sort(SortOrder order) {
 
-    this.listTable.sort(this, order);
+    this.dataTable.sort(this, order);
   }
 
   /**
@@ -347,9 +354,9 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   /**
    * @return the {@link AbstractUiWidgetAbstractListTable list table} owning this column.
    */
-  public AbstractUiWidgetAbstractDataTable<?, ROW, ?> getListTable() {
+  public AbstractUiWidgetAbstractDataTable<?, ?, ROW, ?> getDataTable() {
 
-    return this.listTable;
+    return this.dataTable;
   }
 
   /**

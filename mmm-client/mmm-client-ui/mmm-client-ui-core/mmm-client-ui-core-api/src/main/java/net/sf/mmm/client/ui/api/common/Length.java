@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.common;
 
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
+import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
@@ -139,6 +140,39 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
   public LengthUnit getUnit() {
 
     return this.unit;
+  }
+
+  /**
+   * This method gets the {@link #getAmount() amount} in {@link LengthUnit#PIXEL pixels}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * This implementation is NOT precise and should only used when you know what you are doing.
+   * 
+   * @param basePixelLength is the base length in pixel used to convert from {@link LengthUnit#PERCENT
+   *        percent}. Use <code>0</code> if unknown (what will result in <code>0</code> in case of
+   *        {@link LengthUnit#PERCENT percent} length values).
+   * @param property is the {@link LengthProperty} or <code>null</code> if not available.
+   * @return the <code>length</code> in pixels.
+   */
+  public double convertToPixel(double basePixelLength, LengthProperty property) {
+
+    switch (this.unit) {
+      case PIXEL:
+        return this.amount;
+      case EM:
+        return this.amount * 16.0;
+      case PERCENT:
+        if (basePixelLength <= 0) {
+          if ((property != null) && (this.amount > 0)) {
+            // 1% or more of unbounded min/max is still unbounded...
+            return property.getDefaultValue().getAmount();
+          }
+          // 0% of anything is just nothing...
+          return 0;
+        }
+        return this.amount * basePixelLength / 100D;
+      default :
+        throw new IllegalCaseException(LengthUnit.class, this.unit);
+    }
   }
 
   /**

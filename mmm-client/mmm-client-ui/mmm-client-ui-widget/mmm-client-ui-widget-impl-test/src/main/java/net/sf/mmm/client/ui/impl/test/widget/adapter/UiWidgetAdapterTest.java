@@ -14,7 +14,6 @@ import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
-import net.sf.mmm.client.ui.base.LengthUnitHelper;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterButton;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterCollapsableSection;
@@ -123,7 +122,8 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
   @Override
   public double getWidthInPixel() {
 
-    return LengthUnitHelper.convertToPixel(getLength(LengthProperty.WIDTH), 0);
+    verifyNotDisposed();
+    return LengthProperty.WIDTH.getLengthInPixel(this, 0);
   }
 
   /**
@@ -132,7 +132,8 @@ public class UiWidgetAdapterTest extends AbstractUiWidgetAdapter<Void> implement
   @Override
   public double getHeightInPixel() {
 
-    return LengthUnitHelper.convertToPixel(getLength(LengthProperty.HEIGHT), 0);
+    verifyNotDisposed();
+    return LengthProperty.HEIGHT.getLengthInPixel(this, 0);
   }
 
   /**

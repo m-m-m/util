@@ -17,16 +17,15 @@ import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This is a {@link com.google.gwt.user.client.ui.Widget} representing a <em>toolbar</em>. It renders a horizontal bar
- * that is supposed to contain buttons with icons. You can directly {@link #add(com.google.gwt.user.client.ui.Widget)
- * add} buttons. To put buttons into a {@link ButtonGroup} you may also use {@link #startGroup()} and
- * {@link #endGroup()}.
+ * This is a {@link com.google.gwt.user.client.ui.Widget} representing a <em>toolbar</em>. It renders a
+ * horizontal bar that is supposed to contain buttons with icons. You can directly
+ * {@link #add(com.google.gwt.user.client.ui.Widget) add} buttons. To put buttons into a {@link ButtonGroup}
+ * you may also use {@link #startGroup()} and {@link #endGroup()}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -51,8 +50,7 @@ public class Toolbar extends FlowPanel implements ButtonContainer, HasAllFocusHa
     this.buttonList = new ArrayList<ButtonBase>();
     setStylePrimaryName("Toolbar");
     ToolbarRole toolbarRole = Roles.getToolbarRole();
-    Element element = getElement();
-    toolbarRole.set(element);
+    toolbarRole.set(getElement());
   }
 
   /**
@@ -167,7 +165,8 @@ public class Toolbar extends FlowPanel implements ButtonContainer, HasAllFocusHa
 
   /**
    * 
-   * @param button is the {@link ButtonBase button} to set a active descendant and receiver of the focus (via tab).
+   * @param button is the {@link ButtonBase button} to set a active descendant and receiver of the focus (via
+   *        tab).
    */
   private void setFocusButton(ButtonBase button) {
 

@@ -2,10 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.test.widget.adapter;
 
-import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.menu.UiWidgetMenuBar;
-import net.sf.mmm.client.ui.base.LengthUnitHelper;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterSlot;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterTab;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterBorderPanel;
@@ -53,26 +51,6 @@ public class UiWidgetAdapterTestCompositeRegular extends UiWidgetAdapterTestComp
   public void setColumnSpan(int columnSpan) {
 
     verifyNotDisposed();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public double getWidthInPixel() {
-
-    verifyNotDisposed();
-    return LengthUnitHelper.convertToPixel(getLength(LengthProperty.WIDTH), 0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public double getHeightInPixel() {
-
-    verifyNotDisposed();
-    return LengthUnitHelper.convertToPixel(getLength(LengthProperty.HEIGHT), 0);
   }
 
   /**

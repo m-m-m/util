@@ -5,6 +5,7 @@
 @color-hover: lighten(@color-focus, 15%);
 @color-hover-gradient: darken(@color-hover, 10%);
 @color-select: #C0F0F0;
+@color-select-em: darken(@color-select, 10%);
 @color-header: #C0C0F0;
 @color-border: #808080;
 @color-border-top: lighten(@color-border, 40%);
@@ -420,6 +421,7 @@ body > * {
 .SortNone, .SortAscending, .SortDescending {
   margin-left: 0.2em;
   margin-right: 0.2em;
+  cursor: default;
 }
 
 .SearchField {
@@ -575,6 +577,9 @@ legend {
     }
     tr:nth-child(2n+1) {
       background-color: @color-background-em;
+      &.Selected {
+        background-color: @color-select-em;
+      }
     }
   }
 }
@@ -586,6 +591,14 @@ legend {
   width: 2 * @border-size;
   height: 100%;
   cursor: col-resize;
+}
+.Draggable {
+  cursor: -moz-grab;
+}
+.DragOver {
+  border-width: 1px !important;
+  border-color: @color-border !important;
+  border-style: dashed !important;
 }
 
 .Tree {

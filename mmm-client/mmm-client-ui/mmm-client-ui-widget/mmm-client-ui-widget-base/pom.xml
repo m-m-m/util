@@ -28,10 +28,6 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
       <scope>test</scope>
-      <!-- <version>5.0.1.Final</version> -->
-      <!-- <version>4.3.1.Final</version> -->
-      <!-- <version>4.0.2.GA</version> -->
-      <version>4.1.0.Final</version>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>

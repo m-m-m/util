@@ -58,7 +58,7 @@ public abstract class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetA
       gwtRowContainer.setSelectionMode(getSelectionMode());
       update(gwtRowContainer, false);
     } else {
-      // update(gwtRowContainer, true);
+      update(gwtRowContainer, true);
     }
     // "index + 1" because we have an invisible row at the top to set the column width
     getTableWidget().getTableBody().insert(tableRow, index + 1);
@@ -82,13 +82,14 @@ public abstract class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetA
       } else {
         cellWidget = new TableCellAtomic();
         cellWidget.setStyleName(CssStyles.CELL);
-        // cellWidget.setStyleName(editWidget.getStyles());
-        // cellWidget.setStyleName(CssStyles.CELL);
         tableRow.add(cellWidget);
       }
       String displayValue = AbstractUiWidget.AccessHelper
           .convertValueToString((AbstractUiWidget) editWidget, cellValue);
       cellWidget.setText(displayValue);
+    }
+    if (update) {
+      row.setSelected(false);
     }
   }
 
@@ -170,6 +171,8 @@ public abstract class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetA
       row.setTableRow(tableRow);
       update(row, true);
     }
+    // TODO temporary hack!
+    getUiWidgetTyped().setSelectedValues(getUiWidgetTyped().getSelectedValues());
   }
 
   /**
@@ -185,9 +188,9 @@ public abstract class UiWidgetAdapterGwtAbstractListTable<ROW> extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  protected void initializeMultiSelection() {
+  public void setSelectionMode(SelectionMode selectionMode) {
 
-    super.initializeMultiSelection();
+    super.setSelectionMode(selectionMode);
     List<ItemContainerGwt<ROW>> rowsInternal = getUiWidgetTyped().getAllAvailableItems();
     for (ItemContainerGwt<ROW> tableRowContainer : rowsInternal) {
       tableRowContainer.setSelectionMode(SelectionMode.MULTIPLE_SELECTION);

@@ -11,14 +11,14 @@ import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapterWithEvents;
+import net.sf.mmm.client.ui.gwt.widgets.handler.HandlerRegistrationCollector;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
@@ -32,7 +32,8 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <WIDGET> is the generic type of {@link #getToplevelWidget()}.
  */
 public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
-    AbstractUiWidgetAdapterWithEvents<WIDGET, EventAdapterGwt> implements AttributeWriteImage<UiWidgetImage> {
+    AbstractUiWidgetAdapterWithEvents<WIDGET, EventAdapterGwt> implements AttributeWriteImage<UiWidgetImage>,
+    HandlerRegistrationCollector {
 
   /**
    * The tab index to remove from tab-order. Should actually be <code>-1</code>. See <a
@@ -202,7 +203,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
   @Override
   public Length getLength(LengthProperty property) {
 
-    String value = DOM.getStyleAttribute(getSizeElement(), property.getMemberName());
+    String value = getSizeElement().getStyle().getProperty(property.getMemberName());
     if ((value == null) || (value.length() == 0)) {
       return property.getDefaultValue();
     }
@@ -215,7 +216,7 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
   @Override
   public void setLength(LengthProperty property, Length length) {
 
-    DOM.setStyleAttribute(getSizeElement(), property.getMemberName(), length.toString());
+    getSizeElement().getStyle().setProperty(property.getMemberName(), length.toString());
   }
 
   /**
@@ -319,12 +320,10 @@ public abstract class UiWidgetAdapterGwt<WIDGET extends UIObject> extends
   }
 
   /**
-   * This method should be called with the {@link HandlerRegistration} for all permanent handlers. This allows
-   * to remove them on {@link #dispose() disposal}.
-   * 
-   * @param registration is the {@link HandlerRegistration} to add.
+   * {@inheritDoc}
    */
-  protected void addHandlerRegistration(HandlerRegistration registration) {
+  @Override
+  public void addHandlerRegistration(HandlerRegistration registration) {
 
     // currently ignored, we might add them to a lazy allocated collection and remove them all on dispose...
     // http://www.draconianoverlord.com/2010/11/23/gwt-handlers.html

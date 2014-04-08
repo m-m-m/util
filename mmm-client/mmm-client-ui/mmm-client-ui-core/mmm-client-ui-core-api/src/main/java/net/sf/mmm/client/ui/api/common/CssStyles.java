@@ -177,7 +177,19 @@ public interface CssStyles {
   /** The style of a cell ({@literal <td>}) showing the row number in a {@link #DATA_TABLE}. */
   String ROW_NUMBER = "Rownum";
 
-  /** The multi-selection column header ({@literal <th>}). */
-  String MULTI_SELECTION_HEADER = "MultiSelection";
+  /** The style of a multi-selection column header ({@literal <th>}). */
+  String SELECTION_HEADER = "Selection";
+
+  /** The style of a close button "icon". */
+  String CLOSE = "Close";
+
+  /** The style of a maximize (fullscreen) button "icon". */
+  String MAXIMIZE = "Fullscreen";
+
+  /** The style of a widget that can be dragged. */
+  String DRAGGABLE = "Draggable";
+
+  /** The style of a widget that is currently the drop target of a dragged widget. */
+  String DRAG_OVER = "DragOver";
 
 }

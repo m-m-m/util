@@ -2,12 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.gwt.widgets;
 
+import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.common.Rectangle;
+import net.sf.mmm.client.ui.gwt.widgets.handler.AbstractMouseDragHandler;
 import net.sf.mmm.util.lang.api.Direction;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.user.client.Window;
 
 /**
@@ -68,24 +69,22 @@ class PopupMouseHandler extends AbstractMouseDragHandler {
    * {@inheritDoc}
    */
   @Override
-  protected void initializeOnMouseDown() {
+  protected void initializeOnMouseDown(MouseDownEvent event) {
 
-    super.initializeOnMouseDown();
+    super.initializeOnMouseDown(event);
     this.popupRectangle = new Rectangle(this.popupWindow.getAbsoluteLeft(), this.popupWindow.getAbsoluteTop(),
         this.popupWindow.getOffsetWidth(), this.popupWindow.getOffsetHeight());
 
-    // TODO: calculate from CSS values
-    // JavaScriptUtil javaScriptUtil = JavaScriptUtil.getInstance();
-    // JsCssStyleDeclaration computedStyle = javaScriptUtil.getComputedStyle(this.popupWindow.getElement());
-    // String width = computedStyle.getPropertyValue(JsCssStyleDeclaration.STYLE_WIDTH);
-    // String minWidth = computedStyle.getPropertyValue(JsCssStyleDeclaration.STYLE_MIN_WIDTH);
-    // Log.info("Width: " + width + " min-width: " + minWidth);
-
-    Element element = this.popupWindow.getElement();
-    this.minWidth = element.getOffsetWidth() / 2;
-    this.minHeight = element.getOffsetHeight();
-
-    Log.debug(this.minWidth + "/" + this.minHeight);
+    int clientWidth = Window.getClientWidth();
+    int clientHeight = Window.getClientHeight();
+    this.minWidth = (int) LengthProperty.MIN_WIDTH.getLengthInPixel(this.popupWindow, clientWidth);
+    this.minHeight = (int) LengthProperty.MIN_HEIGHT.getLengthInPixel(this.popupWindow, clientHeight);
+    if (this.minWidth == 0) {
+      this.minWidth = clientWidth / 10;
+    }
+    if (this.minHeight == 0) {
+      this.minHeight = clientHeight / 10;
+    }
   }
 
   /**

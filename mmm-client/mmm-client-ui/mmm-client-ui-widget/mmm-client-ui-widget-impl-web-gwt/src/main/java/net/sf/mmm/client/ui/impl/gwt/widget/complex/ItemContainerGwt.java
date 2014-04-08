@@ -12,6 +12,7 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 
 /**
@@ -23,17 +24,25 @@ import com.google.gwt.user.client.ui.SimpleCheckBox;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContainerGwt<ROW>> implements
-    ClickHandler {
+public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContainerGwt<ROW>> implements ClickHandler {
 
   /** @see #getTableRow() */
   private TableRow tableRow;
+
+  /** @see #getTableRow() */
+  private TableRow originalTableRow;
 
   /** @see #getRowNumberCell() */
   private TableCellAtomic rowNumberCell;
 
   /** @see #setSelected(boolean) */
-  private SimpleCheckBox multiSelectCheckbox;
+  private SimpleCheckBox multiSelectionCheckbox;
+
+  /** @see #setSelected(boolean) */
+  private RadioButton singleSelectionRadioButton;
+
+  /** @see #setSelectionMode(SelectionMode) */
+  private TableCellAtomic selectionCell;
 
   /**
    * The constructor.
@@ -41,7 +50,7 @@ public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContai
    * @param dataTable is the {@link AbstractUiWidgetAbstractDataTable} creating and owning this
    *        {@link ItemContainerGwt}.
    */
-  public ItemContainerGwt(AbstractUiWidgetAbstractDataTable<?, ROW, ItemContainerGwt<ROW>> dataTable) {
+  public ItemContainerGwt(AbstractUiWidgetAbstractDataTable<?, ?, ROW, ItemContainerGwt<ROW>> dataTable) {
 
     super(dataTable);
   }
@@ -60,25 +69,59 @@ public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContai
   public void setTableRow(TableRow tableRow) {
 
     this.tableRow = tableRow;
+    if (this.originalTableRow == null) {
+      this.originalTableRow = tableRow;
+      initTableRow();
+    }
+  }
+
+  /**
+   * Initializes the current table row.
+   */
+  private void initTableRow() {
+
+    AbstractUiWidgetAbstractDataTable<?, ?, ROW, ItemContainerGwt<ROW>> uiWidget = (AbstractUiWidgetAbstractDataTable<?, ?, ROW, ItemContainerGwt<ROW>>) getUiWidget();
+    if (uiWidget.hasRowNumberColumn()) {
+      this.tableRow.add(getRowNumberCell());
+    }
+    this.tableRow.add(getSelectionCell());
+    setSelectionMode(uiWidget.getSelectionMode());
   }
 
   /**
    * @return the multiSelectCheckbox
    */
-  public SimpleCheckBox getMultiSelectCheckbox() {
+  public SimpleCheckBox getMultiSelectionCheckbox() {
 
-    if (this.multiSelectCheckbox == null) {
-      this.multiSelectCheckbox = new SimpleCheckBox();
-      TableCellAtomic cell = new TableCellAtomic();
-      cell.add(this.multiSelectCheckbox);
-      if (this.rowNumberCell == null) {
-        getTableRow().insert(cell, 0);
-      } else {
-        getTableRow().insert(cell, 1);
-      }
-      this.multiSelectCheckbox.addClickHandler(this);
+    if (this.multiSelectionCheckbox == null) {
+      this.multiSelectionCheckbox = new SimpleCheckBox();
+      this.multiSelectionCheckbox.addClickHandler(this);
     }
-    return this.multiSelectCheckbox;
+    return this.multiSelectionCheckbox;
+  }
+
+  /**
+   * @return the singleSelectRadioButton
+   */
+  public RadioButton getSingleSelectionRadioButton() {
+
+    if (this.singleSelectionRadioButton == null) {
+      // TODO: id might be changed on the fly by the user
+      this.singleSelectionRadioButton = new RadioButton(getUiWidget().getId());
+      this.singleSelectionRadioButton.addClickHandler(this);
+    }
+    return this.singleSelectionRadioButton;
+  }
+
+  /**
+   * @return the selectionCell
+   */
+  public TableCellAtomic getSelectionCell() {
+
+    if (this.selectionCell == null) {
+      this.selectionCell = new TableCellAtomic();
+    }
+    return this.selectionCell;
   }
 
   /**
@@ -89,7 +132,7 @@ public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContai
     if (this.rowNumberCell == null) {
       this.rowNumberCell = new TableCellAtomic();
       this.rowNumberCell.setStyleName(CssStyles.ROW_NUMBER);
-      getTableRow().insert(this.multiSelectCheckbox, 0);
+      getTableRow().insert(this.rowNumberCell, 0);
     }
     return this.rowNumberCell;
   }
@@ -121,9 +164,10 @@ public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContai
 
     switch (getSelectionMode()) {
       case MULTIPLE_SELECTION:
-        return this.multiSelectCheckbox.getValue().booleanValue();
+        return this.multiSelectionCheckbox.getValue().booleanValue();
       case SINGLE_SELECTION:
-        return (getUiWidget().getSelectedValue() == getValue());
+        // return (getUiWidget().getSelectedValue() == getValue());
+        return this.singleSelectionRadioButton.getValue().booleanValue();
       default :
         throw new IllegalCaseException(SelectionMode.class, getSelectionMode());
     }
@@ -139,10 +183,10 @@ public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContai
 
     switch (getSelectionMode()) {
       case MULTIPLE_SELECTION:
-        this.multiSelectCheckbox.setValue(Boolean.valueOf(selected));
+        this.multiSelectionCheckbox.setValue(Boolean.valueOf(selected));
         break;
       case SINGLE_SELECTION:
-        // nothing to do here...
+        this.singleSelectionRadioButton.setValue(Boolean.valueOf(selected));
         break;
       default :
         throw new IllegalCaseException(SelectionMode.class, getSelectionMode());
@@ -155,9 +199,9 @@ public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContai
   private void updateSelectionStyle(boolean selected) {
 
     if (selected) {
-      getTableRow().addStyleName(CssStyles.SELECTED);
+      this.originalTableRow.addStyleName(CssStyles.SELECTED);
     } else {
-      getTableRow().removeStyleName(CssStyles.SELECTED);
+      this.originalTableRow.removeStyleName(CssStyles.SELECTED);
     }
   }
 
@@ -168,12 +212,10 @@ public class ItemContainerGwt<ROW> extends AbstractItemContainer<ROW, ItemContai
 
     switch (selectionMode) {
       case MULTIPLE_SELECTION:
-        getMultiSelectCheckbox().setVisible(true);
+        getSelectionCell().setChild(getMultiSelectionCheckbox());
         break;
       case SINGLE_SELECTION:
-        if (this.multiSelectCheckbox != null) {
-          this.multiSelectCheckbox.setVisible(false);
-        }
+        getSelectionCell().setChild(getSingleSelectionRadioButton());
         break;
       default :
         throw new IllegalCaseException(SelectionMode.class, selectionMode);

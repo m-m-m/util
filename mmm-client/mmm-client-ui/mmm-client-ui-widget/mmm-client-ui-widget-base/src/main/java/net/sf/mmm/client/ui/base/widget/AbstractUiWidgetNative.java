@@ -17,7 +17,6 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetAbstractComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
-import net.sf.mmm.client.ui.base.LengthUnitHelper;
 import net.sf.mmm.client.ui.base.aria.role.AbstractRole;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.client.ui.base.attribute.AbstractFlagAdvanced;
@@ -1090,8 +1089,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       if (hasWidgetAdapter()) {
         return getWidgetAdapter().getWidthInPixel();
       }
-      Length width = getLength(LengthProperty.WIDTH);
-      return LengthUnitHelper.convertToPixel(width, 0);
+      return LengthProperty.WIDTH.getLengthInPixel(this, 0);
     }
 
     /**
@@ -1103,8 +1101,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       if (hasWidgetAdapter()) {
         return getWidgetAdapter().getHeightInPixel();
       }
-      Length height = getLength(LengthProperty.HEIGHT);
-      return LengthUnitHelper.convertToPixel(height, 0);
+      return LengthProperty.HEIGHT.getLengthInPixel(this, 0);
     }
 
     /**

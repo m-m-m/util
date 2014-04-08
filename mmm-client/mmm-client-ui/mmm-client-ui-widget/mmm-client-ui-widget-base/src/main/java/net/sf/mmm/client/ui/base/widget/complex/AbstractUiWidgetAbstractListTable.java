@@ -25,7 +25,8 @@ import net.sf.mmm.util.lang.api.SortOrder;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetAbstractListTable<ADAPTER extends UiWidgetAdapterAbstractListTable<ROW, ITEM_CONTAINER>, ROW, ITEM_CONTAINER extends ItemContainer<ROW, ITEM_CONTAINER>>
-    extends AbstractUiWidgetAbstractDataTable<ADAPTER, ROW, ITEM_CONTAINER> implements UiWidgetAbstractListTable<ROW> {
+    extends AbstractUiWidgetAbstractDataTable<ADAPTER, List<ROW>, ROW, ITEM_CONTAINER> implements
+    UiWidgetAbstractListTable<ROW> {
 
   /** @see #getAllAvailableItems() */
   private final List<ITEM_CONTAINER> rows;

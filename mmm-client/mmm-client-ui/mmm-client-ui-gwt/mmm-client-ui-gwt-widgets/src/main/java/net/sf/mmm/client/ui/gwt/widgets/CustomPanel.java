@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.gwt.widgets;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -29,7 +30,7 @@ public abstract class CustomPanel extends ComplexPanel implements InsertPanel.Fo
   @Override
   public void add(Widget w) {
 
-    add(w, getElement());
+    add(w, (Element) getElement());
   }
 
   /**
@@ -38,7 +39,7 @@ public abstract class CustomPanel extends ComplexPanel implements InsertPanel.Fo
   @Override
   public void insert(Widget widget, int beforeIndex) {
 
-    insert(widget, getElement(), beforeIndex, true);
+    insert(widget, (Element) getElement(), beforeIndex, true);
   }
 
   /**

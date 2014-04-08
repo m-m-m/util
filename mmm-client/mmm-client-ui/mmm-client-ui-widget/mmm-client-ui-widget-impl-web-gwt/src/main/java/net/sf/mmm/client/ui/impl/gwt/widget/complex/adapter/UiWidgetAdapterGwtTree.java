@@ -33,6 +33,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActi
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.validation.api.ValidationState;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
@@ -44,7 +45,6 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -1014,6 +1014,9 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       this.nodeWidget.clearMessages();
     }
 
+    /**
+     * The implementation of {@link net.sf.mmm.client.ui.api.common.Size} for {@link TreeNodeAdapter}.
+     */
     private class SizeImpl extends AbstractSize {
 
       /**

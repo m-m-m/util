@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.base.widget.complex;
 
 import net.sf.mmm.client.ui.api.UiContext;
+import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
@@ -28,7 +29,7 @@ public class UiWidgetTableColumnImpl<ROW, CELL> extends
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetTableColumnImpl(UiContext context, AbstractUiWidgetAbstractDataTable<?, ROW, ?> listTable,
+  public UiWidgetTableColumnImpl(UiContext context, AbstractUiWidgetAbstractDataTable<?, ?, ROW, ?> listTable,
       TypedProperty<CELL> typedProperty, UiWidgetAdapterTableColumn widgetAdapter) {
 
     super(context, listTable, typedProperty, widgetAdapter);
@@ -40,7 +41,21 @@ public class UiWidgetTableColumnImpl<ROW, CELL> extends
   @Override
   protected UiWidgetAdapterTableColumn createWidgetAdapter() {
 
-    return getListTable().createTableColumnAdapter(this);
+    return getDataTable().createTableColumnAdapter(this);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setReorderable(boolean reorderable) {
+
+    super.setReorderable(reorderable);
+    if (reorderable) {
+      addStyle(CssStyles.DRAGGABLE);
+    } else {
+      removeStyle(CssStyles.DRAGGABLE);
+    }
   }
 
 }

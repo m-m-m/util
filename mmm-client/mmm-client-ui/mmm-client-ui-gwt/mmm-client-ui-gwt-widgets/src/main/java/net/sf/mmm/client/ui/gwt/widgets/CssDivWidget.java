@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.gwt.widgets;
 
+import net.sf.mmm.client.ui.gwt.widgets.handler.AbstractMouseDragHandler;
+
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 

@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 import java.util.List;
 
 import net.sf.mmm.client.ui.api.common.CssStyles;
-import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.common.SelectionChoice;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.common.SelectionOperation;
@@ -14,7 +14,6 @@ import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTableColumn;
-import net.sf.mmm.client.ui.base.widget.complex.UiWidgetTableColumnImpl;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractDataTable;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
 import net.sf.mmm.client.ui.gwt.widgets.Section;
@@ -36,6 +35,7 @@ import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Focusable;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -60,12 +60,6 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
   /** @see #setColumns(List) */
   private List<AbstractUiWidgetTableColumn<?, ROW, ?>> columns;
 
-  /** @see #setSelectionMode(SelectionMode) */
-  private AbstractUiWidgetTableColumn<?, ROW, Boolean> multiSelectionColumn;
-
-  /** @see #initializeRowNumberColumn() */
-  private AbstractUiWidgetTableColumn<?, ROW, String> rowNumberColumn;
-
   /** @see #getStyleElement() */
   private StyleElement styleElement;
 
@@ -74,6 +68,15 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
 
   /** @see #setColumns(List) */
   private TableRow bodyWidthRow;
+
+  /** @see #getHeaderMultiSelectionWidget() */
+  private SimpleCheckBox headerMultiSelectionWidget;
+
+  /** @see #getHeaderSingleSelectionWidget() */
+  private RadioButton headerSingleSelectionWidget;
+
+  /** @see #getHeaderCellSelection() */
+  private TableCellHeaderAtomic headerCellSelection;
 
   /**
    * The constructor.
@@ -125,12 +128,10 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
     if (size > 0) {
       // double widthInPercent = 100D / size;
       int columnIndex = 0;
-      if (this.rowNumberColumn != null) {
-        addColumn(this.rowNumberColumn, columnIndex++);
+      if (getUiWidgetTyped().hasRowNumberColumn()) {
+        addColumn(getUiWidgetTyped().getRowNumberColumn(), columnIndex++);
       }
-      if (this.multiSelectionColumn != null) {
-        addColumn(this.multiSelectionColumn, columnIndex++);
-      }
+      addColumn(getUiWidgetTyped().getSelectionColumn(), columnIndex++);
       for (UiWidgetTableColumn<ROW, ?> column : columns) {
         // column.setWidthInPercent(widthInPercent);
         addColumn((AbstractUiWidgetTableColumn<?, ROW, ?>) column, columnIndex++);
@@ -185,9 +186,9 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
    * {@inheritDoc}
    */
   @Override
-  public AbstractUiWidgetAbstractDataTable<?, ROW, ItemContainerGwt<ROW>> getUiWidgetTyped() {
+  public AbstractUiWidgetAbstractDataTable<?, ?, ROW, ItemContainerGwt<ROW>> getUiWidgetTyped() {
 
-    return (AbstractUiWidgetAbstractDataTable<?, ROW, ItemContainerGwt<ROW>>) getUiWidget();
+    return (AbstractUiWidgetAbstractDataTable<?, ?, ROW, ItemContainerGwt<ROW>>) getUiWidget();
   }
 
   /**
@@ -199,6 +200,34 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
     // the major task of sorting has already happened in the widget before this method has been called
     // all left to do here is update the UI with the new sort order...
 
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void dragColumn(AbstractUiWidgetTableColumn<?, ROW, ?> dragColumn,
+      AbstractUiWidgetTableColumn<?, ROW, ?> dropColumn) {
+
+    UiWidgetAdapterGwtTableColumn dragColumnAdapter = getWidgetAdapterForColumn(dragColumn);
+    TableCellHeaderAtomic dragHeader = dragColumnAdapter.getToplevelWidget();
+    int dragIndex = dragColumn.getCurrentIndex();
+    int dropIndex = dropColumn.getCurrentIndex();
+    this.headerRow.remove(dragIndex);
+    int beforeIndex = dropIndex;
+    if (dragIndex < dropIndex) {
+      // if we are dragging from left to right, we want to insert after the drop column
+      // beforeIndex++;
+    }
+    this.headerRow.insert(dragHeader, beforeIndex);
+    TableBody tableBody = this.tableWidget.getTableBody();
+    int widgetCount = tableBody.getWidgetCount();
+    for (int i = widgetCount - 1; i >= 0; i--) {
+      TableRow row = (TableRow) tableBody.getWidget(i);
+      Widget dragCell = row.getWidget(dragIndex);
+      row.remove(dragIndex);
+      row.insert(dragCell, beforeIndex);
+    }
   }
 
   /**
@@ -271,81 +300,17 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
   @Override
   public void setSelectionMode(SelectionMode selectionMode) {
 
+    Widget selectionWidget;
     switch (selectionMode) {
       case MULTIPLE_SELECTION:
-        if (this.multiSelectionColumn == null) {
-          initializeMultiSelection();
-        } else {
-          this.multiSelectionColumn.setVisible(true);
-        }
-        // show multi-selection column
-        // getUiWidgetTyped().get
+        selectionWidget = getHeaderMultiSelectionWidget();
         break;
       case SINGLE_SELECTION:
-        // hide multi-selection column
-        if (this.multiSelectionColumn != null) {
-          this.multiSelectionColumn.setVisible(false);
-        }
-        break;
       default :
+        selectionWidget = getHeaderSingleSelectionWidget();
         break;
     }
-  }
-
-  /**
-   * Method called once to initialize multi-selection mode (add checkbox column).
-   */
-  protected void initializeMultiSelection() {
-
-    this.multiSelectionColumn = new UiWidgetTableColumnImpl<>(getContext(), getUiWidgetTyped(),
-        AbstractUiWidgetTableColumn.PROPERTY_SELECTED, null);
-    this.multiSelectionColumn.setStyles(CssStyles.MULTI_SELECTION_HEADER);
-    this.multiSelectionColumn.setResizable(false);
-    this.multiSelectionColumn.setReorderable(false);
-    this.multiSelectionColumn.setSortable(false); // actually sorting could be a feature
-    this.multiSelectionColumn.getSize().setWidthInPixel(20);
-    if (this.headerRow == null) {
-      return;
-    }
-    TableCellHeaderAtomic toplevelWidget = getToplevelWidget(this.multiSelectionColumn, TableCellHeaderAtomic.class);
-    final SimpleCheckBox headerCheckbox = new SimpleCheckBox();
-    HandlerRegistration registration = headerCheckbox.addClickHandler(new ClickHandler() {
-
-      @Override
-      public void onClick(ClickEvent event) {
-
-        Boolean checked = headerCheckbox.getValue();
-        SelectionOperation operation;
-        if (Boolean.TRUE.equals(checked)) {
-          operation = SelectionOperation.SET;
-        } else {
-          operation = SelectionOperation.REMOVE;
-        }
-        getUiWidgetTyped().setSelection(SelectionChoice.ALL, operation);
-      }
-    });
-    addHandlerRegistration(registration);
-    toplevelWidget.setChild(headerCheckbox);
-    int index = 0;
-    if (this.rowNumberColumn != null) {
-      index = 1;
-    }
-    addColumn(this.multiSelectionColumn, index);
-  }
-
-  /**
-   * Initializes the column showing the row numbers.
-   */
-  protected void initializeRowNumberColumn() {
-
-    this.rowNumberColumn = new UiWidgetTableColumnImpl<>(getContext(), getUiWidgetTyped(),
-        AbstractUiWidgetTableColumn.PROPERTY_ROW_NUMBER, null);
-    this.rowNumberColumn.setTitle("#"); // I18N/Customization ?
-    this.rowNumberColumn.setResizable(true); // allow user to modify?
-    this.rowNumberColumn.setReorderable(false); // should always be the first column
-    this.rowNumberColumn.setSortable(false); // sorting makes absolutely no sense here...
-    this.rowNumberColumn.getSize().setMinimumWidth(Length.valueOfPixel(20));
-    this.rowNumberColumn.getSize().setWidthInPixel(40);
+    getHeaderCellSelection().setChild(selectionWidget);
   }
 
   /**
@@ -392,10 +357,62 @@ public abstract class UiWidgetAdapterGwtAbstractDataTable<ROW> extends UiWidgetA
     this.tableWidget = new TableWidget();
     this.tableWidget.setStyleName(UiWidgetAbstractDataTable.STYLE_DATA_TABLE);
     // TODO temporary hack...
-    this.tableWidget.getTableBody().getElement().getStyle().setPropertyPx("maxHeight", 300);
+    this.tableWidget.getTableBody().getElement().getStyle()
+        .setPropertyPx(LengthProperty.MAX_HEIGHT.getMemberName(), 300);
     flowPanel.add(this.tableWidget);
-
     return flowPanel;
+  }
+
+  /**
+   * @return the headerCellSelection
+   */
+  public TableCellHeaderAtomic getHeaderCellSelection() {
+
+    if (this.headerCellSelection == null) {
+      this.headerCellSelection = getToplevelWidget(getUiWidgetTyped().getSelectionColumn(), TableCellHeaderAtomic.class);
+    }
+    return this.headerCellSelection;
+  }
+
+  /**
+   * @return the single selection widget used in the header.
+   */
+  private RadioButton getHeaderSingleSelectionWidget() {
+
+    if (this.headerSingleSelectionWidget == null) {
+      this.headerSingleSelectionWidget = new RadioButton("");
+      this.headerSingleSelectionWidget.setEnabled(false);
+      // TODO set I18N based tooltip
+    }
+    return this.headerSingleSelectionWidget;
+  }
+
+  /**
+   * @return the {@link SimpleCheckBox} for the multi-selection in the header to select / deselect all.
+   */
+  private SimpleCheckBox getHeaderMultiSelectionWidget() {
+
+    if (this.headerMultiSelectionWidget == null) {
+      this.headerMultiSelectionWidget = new SimpleCheckBox();
+      HandlerRegistration registration = this.headerMultiSelectionWidget.addClickHandler(new ClickHandler() {
+
+        @Override
+        public void onClick(ClickEvent event) {
+
+          Boolean checked = UiWidgetAdapterGwtAbstractDataTable.this.headerMultiSelectionWidget.getValue();
+          SelectionOperation operation;
+          if (Boolean.TRUE.equals(checked)) {
+            operation = SelectionOperation.SET;
+          } else {
+            operation = SelectionOperation.REMOVE;
+          }
+          getUiWidgetTyped().setSelection(SelectionChoice.ALL, operation);
+        }
+      });
+      addHandlerRegistration(registration);
+      // TODO set I18N based tooltip
+    }
+    return this.headerMultiSelectionWidget;
   }
 
   /**

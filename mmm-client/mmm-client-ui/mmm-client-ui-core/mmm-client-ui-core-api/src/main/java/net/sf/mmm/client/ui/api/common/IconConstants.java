@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
+import net.sf.mmm.util.lang.api.concern.Accessibility;
+
 
 /**
  * This interface is used as collection of constants with the names of central image icons.

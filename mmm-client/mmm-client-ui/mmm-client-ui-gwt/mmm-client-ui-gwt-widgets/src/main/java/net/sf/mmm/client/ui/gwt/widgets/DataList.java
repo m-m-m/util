@@ -82,6 +82,7 @@ public class DataList extends Widget implements AttributeWriteOptions<String> {
   public void setOptions(List<String> options) {
 
     // clear potential previous options
+    @SuppressWarnings("deprecation")
     com.google.gwt.user.client.Element element = getElement();
     Element childElement = element.getFirstChildElement();
     while (childElement != null) {

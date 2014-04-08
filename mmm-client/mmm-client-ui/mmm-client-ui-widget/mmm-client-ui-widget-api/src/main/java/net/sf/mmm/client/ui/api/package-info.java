@@ -125,8 +125,8 @@
  * <li><b>Usability</b><br/>
  * By providing established UI patterns this framework supports you in creating a UI with high usability.
  * <li><b>Accessibility</b><br/>
- * {@link net.sf.mmm.client.ui.api.common.Accessibility} is an important but also complex topic. This layer
- * support standards such as {@link net.sf.mmm.client.ui.api.common.Accessibility#WAI_ARIA WAI-ARIA} as well
+ * {@link net.sf.mmm.util.lang.api.concern.Accessibility} is an important but also complex topic. This layer
+ * support standards such as {@link net.sf.mmm.util.lang.api.concern.Accessibility#WAI_ARIA WAI-ARIA} as well
  * as keyboard control and other features to increase accessibility.</li>
  * <li><b>Internationalization</b><br/>
  * Of course everything is integrated with our great native language support provided by

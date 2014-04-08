@@ -86,10 +86,10 @@ public abstract class UiWidgetAdapterTestField<VALUE, ADAPTER_VALUE> extends UiW
    * {@inheritDoc}
    */
   @Override
-  public void setValueAsString(String value) {
+  public void setValueAsString(String valueAsString) {
 
     verifyNotDisposed();
-    this.valueAsString = value;
+    this.valueAsString = valueAsString;
     this.value = null;
   }
 

@@ -6,27 +6,33 @@ import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.common.Length;
 import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.common.LengthUnit;
+import net.sf.mmm.client.ui.api.common.Size;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
-import net.sf.mmm.client.ui.base.LengthUnitHelper;
+import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTableColumn;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
-import net.sf.mmm.client.ui.gwt.widgets.AbstractMouseDragHandler;
 import net.sf.mmm.client.ui.gwt.widgets.CssDivWidget;
 import net.sf.mmm.client.ui.gwt.widgets.CssIconWidget;
 import net.sf.mmm.client.ui.gwt.widgets.TableCellAtomic;
 import net.sf.mmm.client.ui.gwt.widgets.TableCellHeaderAtomic;
+import net.sf.mmm.client.ui.gwt.widgets.handler.AbstractDragAndDropHandler;
+import net.sf.mmm.client.ui.gwt.widgets.handler.AbstractMouseDragHandler;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidget;
 import net.sf.mmm.util.lang.api.SortOrder;
 
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.dom.client.DragEndEvent;
+import com.google.gwt.event.dom.client.DragOverEvent;
+import com.google.gwt.event.dom.client.DropEvent;
+import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterTableColumn} using GWT.
@@ -94,7 +100,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
   @Override
   protected TableCellHeaderAtomic createToplevelWidget() {
 
-    TableCellHeaderAtomic tableCellHeader = new TableCellHeaderAtomic();
+    final TableCellHeaderAtomic tableCellHeader = new TableCellHeaderAtomic();
     this.divContainer = new FlowPanel();
     this.divContainer.setStyleName(CssStyles.TABLE_HEADER);
     tableCellHeader.setChild(this.divContainer);
@@ -104,10 +110,15 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
     this.sortIcon = new CssIconWidget(CssStyles.SORT_ICON_NONE);
     this.divContainer.add(this.sortIcon);
     this.resizeWidget = new CssDivWidget(CssStyles.COLUMN_RESIZER);
+
     ResizeHandler resizeHandler = new ResizeHandler();
-    HandlerRegistration registration = resizeHandler.registerMouseDragHandler(this.resizeWidget);
-    addHandlerRegistration(registration);
+    resizeHandler.register(this.resizeWidget, this);
+
+    ReorderHandler reorderHandler = new ReorderHandler();
+    reorderHandler.register(tableCellHeader, this);
+
     tableCellHeader.sinkEvents(Event.ONCLICK);
+
     ClickHandler handler = new ClickHandler() {
 
       @Override
@@ -118,7 +129,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
           // ignore click event caused from resizing...
           return;
         }
-        UiWidgetTableColumn<?, ?> tableColumn = getUiWidgetTableColumn();
+        UiWidgetTableColumn<?, ?> tableColumn = getUiWidgetTyped();
         if (tableColumn.isSortable()) {
           tableColumn.sort();
         }
@@ -291,11 +302,105 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
   }
 
   /**
-   * @return the {@link AbstractUiWidgetTableColumn table column} owning this widget adapter.
+   * {@inheritDoc}
    */
-  private AbstractUiWidgetTableColumn<?, ?, ?> getUiWidgetTableColumn() {
+  @Override
+  protected AbstractUiWidgetTableColumn<?, ?, ?> getUiWidgetTyped() {
 
     return (AbstractUiWidgetTableColumn<?, ?, ?>) getUiWidget();
+  }
+
+  /**
+   * Handler for the reorder behavior of this column.
+   */
+  private class ReorderHandler extends AbstractDragAndDropHandler {
+
+    /** The data format used to store the drag information in DND events. */
+    private static final String DATA_FORMAT = "text/plain";
+
+    /**
+     * The constructor.
+     */
+    public ReorderHandler() {
+
+      super();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isActive() {
+
+      if (!UiWidgetAdapterGwtTableColumn.this.reorderable) {
+        return false;
+      }
+      return super.isActive();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onDrop(DropEvent event) {
+
+      super.onDrop(event);
+      String dragId = event.getData(DATA_FORMAT);
+      AbstractUiWidgetAbstractDataTable<?, ?, ?, ?> dataTable = getUiWidgetTyped().getDataTable();
+      dataTable.dragColumn(dragId, getUiWidget().getId());
+      // UiWidgetTableColumn<?, ?> draggedColumn = dataTable.getColumnById(dragId);
+      // Log.info("Dropping " + draggedColumn.getId() + " to " +
+      // GwtUtil.getInstance().getId(getToplevelWidget()));
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onDragOver(DragOverEvent event) {
+
+      AbstractUiWidgetTableColumn<?, ?, ?> dragOverColumn = getUiWidgetTyped();
+      AbstractUiWidgetAbstractDataTable<?, ?, ?, ?> dataTable = dragOverColumn.getDataTable();
+      if (dragOverColumn.isReorderable()) {
+        String dragId = event.getData(DATA_FORMAT);
+        AbstractUiWidgetTableColumn<?, ?, ?> draggedColumn = dataTable.getColumnById(dragId, false);
+        if (draggedColumn == dragOverColumn) {
+          dragOverColumn = null;
+        }
+        super.onDragOver(event);
+      } else {
+        dragOverColumn = null;
+      }
+      AbstractUiWidgetTableColumn<?, ?, ?> previousDragOverColumn = dataTable.setDragOverColumn(dragOverColumn);
+      if (previousDragOverColumn != dragOverColumn) {
+        updateDragOver(previousDragOverColumn, false);
+        updateDragOver(dragOverColumn, true);
+      }
+    }
+
+    private void updateDragOver(AbstractUiWidgetTableColumn<?, ?, ?> dragOverColumn, boolean addStyle) {
+
+      if (dragOverColumn != null) {
+        Widget headerWidget = getToplevelWidget(dragOverColumn);
+        if (addStyle) {
+          headerWidget.addStyleName(CssStyles.DRAG_OVER);
+        } else {
+          headerWidget.removeStyleName(CssStyles.DRAG_OVER);
+        }
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onDragEnd(DragEndEvent event) {
+
+      AbstractUiWidgetAbstractDataTable<?, ?, ?, ?> dataTable = getUiWidgetTyped().getDataTable();
+      AbstractUiWidgetTableColumn<?, ?, ?> previousDragOverColumn = dataTable.setDragOverColumn(null);
+      updateDragOver(previousDragOverColumn, false);
+    }
   }
 
   /**
@@ -306,10 +411,10 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
     /** The width range of this column. */
     private ColumnWidthRange widthRange;
 
-    /** @see #initializeOnMouseDown() */
+    /** @see #initializeOnMouseDown(MouseDownEvent) */
     private AbstractUiWidgetTableColumn<?, ?, ?> nextColumn;
 
-    /** @see #initializeOnMouseDown() */
+    /** @see #initializeOnMouseDown(MouseDownEvent) */
     private boolean nextInitialized;
 
     /** The width range of the next column. */
@@ -331,9 +436,9 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
      * {@inheritDoc}
      */
     @Override
-    protected void initializeOnMouseDown() {
+    protected void initializeOnMouseDown(MouseDownEvent event) {
 
-      super.initializeOnMouseDown();
+      super.initializeOnMouseDown(event);
       this.widthRange = new ColumnWidthRange(getUiWidget());
       this.nextInitialized = false;
     }
@@ -370,7 +475,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
      */
     private AbstractUiWidgetTableColumn<?, ?, ?> determineNextColumn() {
 
-      int nextColumnIndex = getUiWidgetTableColumn().getCurrentIndex() + 1;
+      int nextColumnIndex = getUiWidgetTyped().getCurrentIndex() + 1;
       for (AbstractUiWidgetTableColumn<?, ?, ?> column : UiWidgetAdapterGwtTableColumn.this.dataTableAdapter
           .getColumns()) {
         int currentIndex = column.getCurrentIndex();
@@ -405,10 +510,11 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
     public ColumnWidthRange(UiWidget widget) {
 
       super();
-      this.initialWidth = widget.getSize().getWidthInPixel() - 1;
-      double minWidth = LengthUnitHelper.getLengthInPixel(widget, LengthProperty.MIN_WIDTH, this.initialWidth);
+      Size size = widget.getSize();
+      this.initialWidth = size.getWidthInPixel() - 1;
+      double minWidth = LengthProperty.MIN_WIDTH.getLengthInPixel(size, size);
       this.minDx = (int) (minWidth - this.initialWidth); // typically negative...
-      double maxWidth = LengthUnitHelper.getLengthInPixel(widget, LengthProperty.MAX_WIDTH, this.initialWidth);
+      double maxWidth = LengthProperty.MAX_WIDTH.getLengthInPixel(size, size);
       if (maxWidth == Double.MAX_VALUE) {
         this.maxDx = Integer.MAX_VALUE;
       } else {
