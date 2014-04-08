@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.attribute;
 
 import net.sf.mmm.client.ui.api.aria.role.Role;
-import net.sf.mmm.client.ui.api.common.Accessibility;
+import net.sf.mmm.util.lang.api.concern.Accessibility;
 
 /**
  * This interface gives read access to the {@link #getAriaRole() ARIA role} attribute of an object.
@@ -21,7 +21,7 @@ public abstract interface AttributeReadAriaRole extends Accessibility {
    * users should only use this for special situations e.g. for setting {@link Role#setHidden(boolean)
    * aria-hidden} intentionally for a visible object.
    * 
-   * @see net.sf.mmm.client.ui.api.common.Accessibility
+   * @see net.sf.mmm.util.lang.api.concern.Accessibility
    * 
    * @return the {@link Role} or <code>null</code> if NOT set.
    */

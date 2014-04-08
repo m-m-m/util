@@ -22,7 +22,7 @@ public abstract interface AttributeWriteAriaRole extends AttributeReadAriaRole {
    * This method will fail if an abstract {@link Role} is given.
    * 
    * @see #getAriaRole()
-   * @see net.sf.mmm.client.ui.api.common.Accessibility
+   * @see net.sf.mmm.util.lang.api.concern.Accessibility
    * 
    * @param <ROLE> is the generic type of the new {@link Role}.
    * 

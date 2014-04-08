@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.attribute;
 
-import net.sf.mmm.client.ui.api.common.Accessibility;
+import net.sf.mmm.util.lang.api.concern.Accessibility;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**

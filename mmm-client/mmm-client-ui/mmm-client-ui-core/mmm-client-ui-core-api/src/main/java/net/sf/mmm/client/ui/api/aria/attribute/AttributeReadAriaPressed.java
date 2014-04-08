@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.aria.attribute;
 
 import net.sf.mmm.client.ui.api.aria.datatype.AriaTristate;
-import net.sf.mmm.client.ui.api.common.Accessibility;
+import net.sf.mmm.util.lang.api.concern.Accessibility;
 
 /**
  * This interface gives read access to the {@link #getPressed() pressed} attribute (state) of an object.

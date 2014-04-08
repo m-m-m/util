@@ -23,7 +23,7 @@ import net.sf.mmm.client.ui.api.aria.attribute.AttributeWriteAriaRelevant;
  * This interface represents the abstract {@link #WAI_ARIA} <a
  * href="http://www.w3.org/TR/wai-aria/roles#roletype">roletype</a>. For each particular role a sub-interface
  * is defined for type-safe support of the standard. The ARIA roles and attributes aim to support
- * {@link net.sf.mmm.client.ui.api.common.Accessibility} for rich Internet applications (RIA).
+ * {@link net.sf.mmm.util.lang.api.concern.Accessibility} for rich Internet applications (RIA).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
