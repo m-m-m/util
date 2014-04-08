@@ -18,7 +18,7 @@ public class Lightness extends Factor<Lightness> {
   private static final long serialVersionUID = 323656018661251252L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected Lightness() {
 

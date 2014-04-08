@@ -17,7 +17,7 @@ public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<S
   private static final long serialVersionUID = 9206218315093630999L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected AbstractDoubleSegment() {
 

@@ -25,7 +25,7 @@ public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSe
   protected static final double BYTE_MAX = 255;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected Factor() {
 

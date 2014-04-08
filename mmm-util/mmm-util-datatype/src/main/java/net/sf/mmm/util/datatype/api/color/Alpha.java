@@ -23,7 +23,7 @@ public class Alpha extends Factor<Alpha> {
   public static final Alpha OPAQUE = new Alpha(1.0);
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected Alpha() {
 

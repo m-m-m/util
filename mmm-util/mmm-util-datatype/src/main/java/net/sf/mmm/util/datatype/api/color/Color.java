@@ -173,7 +173,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected Color() {
 

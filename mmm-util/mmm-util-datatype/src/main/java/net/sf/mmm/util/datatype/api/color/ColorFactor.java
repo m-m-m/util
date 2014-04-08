@@ -15,7 +15,7 @@ public class ColorFactor extends Factor<ColorFactor> {
   private static final long serialVersionUID = -6917422770605923183L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected ColorFactor() {
 

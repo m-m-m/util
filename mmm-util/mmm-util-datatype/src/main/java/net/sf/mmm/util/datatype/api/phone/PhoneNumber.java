@@ -46,7 +46,7 @@ public class PhoneNumber extends AbstractSimpleDatatypeBase<String> {
   private String phoneNumber;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected PhoneNumber() {
 

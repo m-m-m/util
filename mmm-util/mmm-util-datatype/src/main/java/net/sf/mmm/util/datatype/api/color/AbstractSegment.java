@@ -11,14 +11,13 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractSegment<V extends Number> extends AbstractSimpleDatatype<V> implements
-    Segment<V> {
+public abstract class AbstractSegment<V extends Number> extends AbstractSimpleDatatype<V> implements Segment<V> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -2574365836749680058L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected AbstractSegment() {
 

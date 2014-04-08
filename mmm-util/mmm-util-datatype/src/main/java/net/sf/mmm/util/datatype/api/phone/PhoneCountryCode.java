@@ -32,7 +32,7 @@ public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
   private static final int MAX_VALUE = 9999;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected PhoneCountryCode() {
 

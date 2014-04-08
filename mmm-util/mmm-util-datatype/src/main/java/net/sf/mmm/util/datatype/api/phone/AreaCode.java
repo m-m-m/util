@@ -22,7 +22,7 @@ public final class AreaCode extends AbstractSimpleDatatype<Integer> {
   private static final long serialVersionUID = -4095519482392043680L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected AreaCode() {
 

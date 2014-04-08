@@ -29,7 +29,7 @@ public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
   private String title;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected Iso2CountryCode() {
 

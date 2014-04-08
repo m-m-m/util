@@ -29,7 +29,7 @@ public class Hue extends AbstractDoubleSegment<Hue> {
   public static final double MAX_VALUE = 360;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected Hue() {
 

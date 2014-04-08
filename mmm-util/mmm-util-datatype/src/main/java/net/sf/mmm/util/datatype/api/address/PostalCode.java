@@ -27,7 +27,7 @@ public class PostalCode extends AbstractSimpleDatatype<String> {
   private static final long serialVersionUID = -7499247409257142127L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected PostalCode() {
 

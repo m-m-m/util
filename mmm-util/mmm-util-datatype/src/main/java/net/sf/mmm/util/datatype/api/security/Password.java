@@ -3,6 +3,7 @@
 package net.sf.mmm.util.datatype.api.security;
 
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
+import net.sf.mmm.util.lang.api.concern.Security;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} used to store a simple password as {@link String}.
@@ -13,13 +14,13 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class Password extends AbstractSimpleDatatype<String> {
+public class Password extends AbstractSimpleDatatype<String> implements Security {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 2487698739503641538L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected Password() {
 

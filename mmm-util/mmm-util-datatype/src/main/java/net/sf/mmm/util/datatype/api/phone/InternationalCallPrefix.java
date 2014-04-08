@@ -42,7 +42,7 @@ public final class InternationalCallPrefix extends AbstractSimpleDatatype<String
   private static final Pattern PATTERN_PREFIX = Pattern.compile("[0-9]{1,5}");
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected InternationalCallPrefix() {
 
