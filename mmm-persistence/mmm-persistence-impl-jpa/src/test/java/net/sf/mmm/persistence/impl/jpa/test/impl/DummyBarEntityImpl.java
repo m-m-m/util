@@ -4,7 +4,7 @@ package net.sf.mmm.persistence.impl.jpa.test.impl;
 
 import javax.persistence.Entity;
 
-import net.sf.mmm.persistence.base.jpa.AbstractJpaEntity;
+import net.sf.mmm.persistence.base.jpa.JpaEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 
 /**
@@ -13,7 +13,7 @@ import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-public class DummyBarEntityImpl extends AbstractJpaEntity<Long> implements DummyBarEntity {
+public class DummyBarEntityImpl extends JpaEntity implements DummyBarEntity {
 
   /** @see #getValue() */
   private String value;
