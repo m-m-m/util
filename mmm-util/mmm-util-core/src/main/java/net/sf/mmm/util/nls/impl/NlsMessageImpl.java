@@ -11,56 +11,51 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
+import net.sf.mmm.util.nls.base.AbstractNlsDependencies;
 import net.sf.mmm.util.nls.base.BasicNlsMessage;
-import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.nls.impl.formatter.NlsMessageFormatterImpl;
 
 /**
  * This is the implementation of {@link net.sf.mmm.util.nls.api.NlsMessage}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class NlsMessageImpl extends BasicNlsMessage {
 
-  /** @see #getNlsDependencies() */
-  private final NlsDependencies nlsDependencies;
+  /** UID for serialization. */
+  private static final long serialVersionUID = -610175491381297549L;
+
+  /**
+   * The constructor for de-serialization in GWT.
+   */
+  public NlsMessageImpl() {
+
+    super();
+  }
 
   /**
    * The constructor.
-   * 
+   *
    * @param template is the {@link NlsTemplate} for the {@link #getInternationalizedMessage() raw message}.
    * @param messageArguments are the {@link #getArgument(String) arguments} filled into the message after
    *        nationalization.
-   * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
-  public NlsMessageImpl(NlsTemplate template, Map<String, Object> messageArguments, NlsDependencies nlsDependencies) {
+  public NlsMessageImpl(NlsTemplate template, Map<String, Object> messageArguments) {
 
     super(template, messageArguments);
-    this.nlsDependencies = nlsDependencies;
   }
 
   /**
    * The constructor.
-   * 
+   *
    * @param internationalizedMessage is the {@link #getInternationalizedMessage() internationalized message}.
    * @param messageArguments are the {@link #getArgument(String) arguments} filled into the message after
    *        nationalization.
-   * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
-  public NlsMessageImpl(String internationalizedMessage, Map<String, Object> messageArguments,
-      NlsDependencies nlsDependencies) {
+  public NlsMessageImpl(String internationalizedMessage, Map<String, Object> messageArguments) {
 
     super(internationalizedMessage, messageArguments);
-    this.nlsDependencies = nlsDependencies;
-  }
-
-  /**
-   * @return the {@link NlsDependencies}.
-   */
-  protected NlsDependencies getNlsDependencies() {
-
-    return this.nlsDependencies;
   }
 
   /**
@@ -93,10 +88,10 @@ public class NlsMessageImpl extends BasicNlsMessage {
       } else {
         boolean success = false;
         if (nlsTemplate != null) {
-          success = nlsTemplate.translate(locale, arguments, buffer, resolver, this.nlsDependencies);
+          success = nlsTemplate.translate(locale, arguments, buffer, resolver, AbstractNlsDependencies.getInstance());
         }
         if (!success) {
-          NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(message, getNlsDependencies());
+          NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(message, AbstractNlsDependencies.getInstance());
           format.format(null, locale, arguments, resolver, buffer);
         }
       }

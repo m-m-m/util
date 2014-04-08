@@ -31,7 +31,7 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
   private boolean technical;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected AbstractErrorMessage() {
 

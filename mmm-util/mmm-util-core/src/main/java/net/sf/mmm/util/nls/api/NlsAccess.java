@@ -2,15 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
-import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
 import net.sf.mmm.util.nls.base.NlsMessageFactoryImpl;
 import net.sf.mmm.util.nls.impl.DefaultNlsTemplateResolver;
 import net.sf.mmm.util.nls.impl.NlsBundleFactoryImpl;
 
 /**
- * This is an ugly static accessor for the {@link NlsMessageFactory} used to create instances of
- * {@link net.sf.mmm.util.nls.api.NlsMessage} and allowing to exchange the default implementation.
- * 
+ * This is a static accessor for central components supporting <em>native language support</em> (NLS). It is
+ * therefore the entry point to create instances of {@link NlsBundle} and
+ * {@link net.sf.mmm.util.nls.api.NlsMessage}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -36,7 +36,7 @@ public final class NlsAccess {
   /**
    * This method gets the {@link NlsMessageFactory} used to create instances of
    * {@link net.sf.mmm.util.nls.api.NlsMessage}.
-   * 
+   *
    * @return the factory instance.
    */
   public static NlsMessageFactory getFactory() {
@@ -45,9 +45,6 @@ public final class NlsAccess {
       synchronized (NlsAccess.class) {
         if (factory == null) {
           NlsMessageFactoryImpl factoryImpl = new NlsMessageFactoryImpl();
-          if ((templateResolver != null) && (templateResolver instanceof AbstractNlsTemplateResolver)) {
-            factoryImpl.setNlsDependencies(((AbstractNlsTemplateResolver) templateResolver).getNlsDependencies());
-          }
           factoryImpl.initialize();
           factory = factoryImpl;
         }
@@ -71,7 +68,7 @@ public final class NlsAccess {
    * No synchronization is performed setting the factory instance. This assumes that an assignment is an
    * atomic operation in the JVM you are using. Additionally this method should only be invoked in the
    * initialization phase of your application.
-   * 
+   *
    * @param instance the factory-instance to use.
    */
   public static void setFactory(NlsMessageFactory instance) {
@@ -81,7 +78,7 @@ public final class NlsAccess {
 
   /**
    * This method gets the default {@link NlsTemplateResolver}.
-   * 
+   *
    * @return the default {@link NlsTemplateResolver}.
    * @since 2.0.0
    */
@@ -91,9 +88,6 @@ public final class NlsAccess {
       synchronized (NlsAccess.class) {
         if (templateResolver == null) {
           DefaultNlsTemplateResolver resolver = new DefaultNlsTemplateResolver();
-          if ((factory != null) && (factory instanceof NlsMessageFactoryImpl)) {
-            resolver.setNlsDependencies(((NlsMessageFactoryImpl) factory).getNlsDependencies());
-          }
           resolver.initialize();
           templateResolver = resolver;
         }
@@ -110,7 +104,7 @@ public final class NlsAccess {
    * No synchronization is performed setting the instance. This assumes that an assignment is an atomic
    * operation in the JVM you are using. Additionally this method should only be invoked in the initialization
    * phase of your application.
-   * 
+   *
    * @param templateResolver is the {@link NlsTemplateResolver} to use by default.
    * @since 2.0.0
    */
@@ -121,7 +115,7 @@ public final class NlsAccess {
 
   /**
    * This method gets the default {@link NlsBundleFactory}.
-   * 
+   *
    * @return the default {@link NlsBundleFactory}.
    * @since 3.0.0
    */
@@ -148,7 +142,7 @@ public final class NlsAccess {
    * No synchronization is performed setting the instance. This assumes that an assignment is an atomic
    * operation in the JVM you are using. Additionally this method should only be invoked in the initialization
    * phase of your application.
-   * 
+   *
    * @param bundleFactory is the {@link NlsBundleFactory} to use by default.
    * @since 3.0.0
    */

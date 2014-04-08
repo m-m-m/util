@@ -4,7 +4,7 @@
   <inherits name="org.slf4j.Slf4j"/>
   <inherits name="java.time.Time"/>
 
-  <source path="" includes="NlsBundleUtilCoreRoot.java"/>
+  <source path="" includes="NlsBundleUtilCore*.java"/>
   <source path="math" excludes="base/MathUtilImpl.java"/>
   <source path="gwt" excludes="base/rebind/*"/>
   <source path="concurrent/api"/>
@@ -14,6 +14,7 @@
   <source path="reflect" includes="**/*Limited*"/>
   <source path="component" excludes="impl/**,base/*Servlet*"/>
   <source path="scanner"/>
+  <source path="exception" excludes="api/ExceptionUtil.java,base/ExceptionUtilImpl.java"/>
   <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
   <source path="lang" excludes="**/System*"/>
   <source path="uuid"/>

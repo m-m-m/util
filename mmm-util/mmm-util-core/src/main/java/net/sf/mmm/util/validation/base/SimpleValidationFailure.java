@@ -20,7 +20,7 @@ public class SimpleValidationFailure extends AbstractValidationFailure {
   private String message;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected SimpleValidationFailure() {
 

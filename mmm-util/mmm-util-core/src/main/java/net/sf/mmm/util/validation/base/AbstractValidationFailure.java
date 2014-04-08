@@ -19,7 +19,7 @@ public abstract class AbstractValidationFailure extends AbstractMessage implemen
   private static final long serialVersionUID = -882452608746200225L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected AbstractValidationFailure() {
 

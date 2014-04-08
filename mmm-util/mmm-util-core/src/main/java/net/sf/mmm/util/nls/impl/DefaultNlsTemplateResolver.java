@@ -65,6 +65,15 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
     for (int i = 0; i < bundleCount; i++) {
       this.nlsBundles[i] = new NlsReversedResourceBundleImpl(bundles.get(i));
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialized() {
+
+    super.doInitialized();
     NlsAccess.setTemplateResolver(this);
   }
 

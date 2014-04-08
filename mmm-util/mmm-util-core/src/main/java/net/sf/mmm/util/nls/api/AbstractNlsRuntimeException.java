@@ -5,6 +5,7 @@ package net.sf.mmm.util.nls.api;
 import java.util.Locale;
 import java.util.UUID;
 
+import net.sf.mmm.util.exception.api.ExceptionTruncation;
 import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
@@ -14,13 +15,13 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  * Please prefer extending {@link net.sf.mmm.util.nls.api.NlsRuntimeException} instead of this class.<br>
  * <b>INFORMATION:</b><br>
  * Unchecked exceptions should be used for technical errors and should only occur in unexpected situations.
- * 
+ *
  * @see NlsThrowable
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsRuntimeException extends RuntimeException implements NlsThrowable {
+public abstract class AbstractNlsRuntimeException extends RuntimeException implements NlsThrowable, Cloneable {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -7838850701154079724L;
@@ -32,8 +33,16 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   private UUID uuid;
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected AbstractNlsRuntimeException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public AbstractNlsRuntimeException(NlsMessage message) {
@@ -45,7 +54,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
@@ -61,8 +70,32 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   }
 
   /**
+   * The copy constructor.
+   *
+   * @param copySource is the exception to copy.
+   * @param truncation is the {@link ExceptionTruncation} to configure potential truncations.
+   */
+  protected AbstractNlsRuntimeException(AbstractNlsRuntimeException copySource, ExceptionTruncation truncation) {
+
+    // super(null, truncation.isRemoveCause() ? null : copySource.getCause(),
+    // !truncation.isRemoveSuppressed(),
+    // !truncation.isRemoveStacktrace());
+    super(null, truncation.isRemoveCause() ? null : copySource.getCause());
+    this.nlsMessage = copySource.nlsMessage;
+    this.uuid = copySource.uuid;
+    if (!truncation.isRemoveStacktrace()) {
+      setStackTrace(copySource.getStackTrace());
+    }
+    if (!truncation.isRemoveSuppressed()) {
+      for (Throwable suppressed : copySource.getSuppressed()) {
+        addSuppressed(suppressed);
+      }
+    }
+  }
+
+  /**
    * This method creates a new {@link UUID}.
-   * 
+   *
    * @return the new {@link UUID} or <code>null</code> to turn this feature off.
    */
   protected UUID createUuid() {
@@ -164,7 +197,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
 
   /**
    * @see NlsBundleFactory#createBundle(Class)
-   * 
+   *
    * @param <BUNDLE> is the generic type of the requested {@link NlsBundle}.
    * @param bundleInterface is the {@link NlsBundle} interface.
    * @return the {@link NlsBundle} instance.
@@ -191,6 +224,37 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
   public boolean isForUser() {
 
     return !isTechnical();
+  }
+
+  /**
+   * @see #createCopy(ExceptionTruncation)
+   *
+   * @param truncation the {@link ExceptionTruncation} settings.
+   * @return the (truncated) copy.
+   */
+  protected AbstractNlsRuntimeException createCopyViaClone(ExceptionTruncation truncation) {
+
+    // try {
+    AbstractNlsRuntimeException copy = null; // (AbstractNlsRuntimeException) clone();
+    ThrowableHelper.removeDetails(copy, truncation);
+    return copy;
+    // } catch (CloneNotSupportedException e) {
+    // throw new IllegalStateException(e);
+    // }
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * This default implementation is using {@link #createCopyViaClone(ExceptionTruncation) clone} to create a
+   * copy and truncate it as configured. However, a proper implementation would use the appropriate
+   * {@link #AbstractNlsRuntimeException(AbstractNlsRuntimeException, ExceptionTruncation) copy constructor}
+   * instead.
+   */
+  @Override
+  public AbstractNlsRuntimeException createCopy(ExceptionTruncation truncation) {
+
+    return createCopyViaClone(truncation);
   }
 
   /**

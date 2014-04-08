@@ -15,7 +15,7 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
 /**
  * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
  * an {@link Object} to a {@link Collection}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -61,6 +61,7 @@ public class ValueConverterToCollection extends AbstractValueConverterToContaine
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   protected <T extends Collection> T createContainer(GenericType<T> targetType, int length) {
 

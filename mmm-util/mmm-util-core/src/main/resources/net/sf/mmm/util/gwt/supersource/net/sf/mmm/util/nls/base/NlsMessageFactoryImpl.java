@@ -29,7 +29,7 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 
 /**
  * This is the implementation of {@link NlsMessageFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -57,7 +57,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
     if ((messageArguments == null) || (messageArguments.isEmpty())) {
       return new NlsMessagePlain(template.translate(Locale.getDefault()));
     }
-    return new NlsMessageImpl(template, messageArguments, getNlsDependencies());
+    return new NlsMessageImpl(template, messageArguments);
   }
 
   /**
@@ -69,7 +69,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
     if ((messageArguments == null) || (messageArguments.isEmpty())) {
       return new NlsMessagePlain(internationalizedMessage);
     }
-    return new NlsMessageImpl(internationalizedMessage, messageArguments, getNlsDependencies());
+    return new NlsMessageImpl(internationalizedMessage, messageArguments);
   }
 
   /**
@@ -110,10 +110,10 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
           dictionaryContainer.callbackAdapters = new LinkedList<CallbackAdapter>();
           dictionaryContainer.callbackAdapters.add(adapter);
           String url = GWT.getModuleBaseURL() + AbstractNlsResourceBundleJavaScriptServlet.URL_PATH + AbstractNlsResourceBundleJavaScriptServlet.URL_PARAM_NAME_QUERY + name;
-          ScriptInjector.fromUrl(url).setCallback(dictionaryContainer).inject();          
+          ScriptInjector.fromUrl(url).setCallback(dictionaryContainer).inject();
         } else {
           // we already have a request ongoing to get the bundle/dictionary so we just append the adapter.
-          dictionaryContainer.callbackAdapters.add(adapter);          
+          dictionaryContainer.callbackAdapters.add(adapter);
         }
       }
     }
@@ -124,11 +124,11 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
   }
 
   protected class CallbackAdapter {
-    
+
     private final Set<String> bundleNameSet;
-    
+
     private final Runnable callback;
-    
+
     /**
      * The constructor.
      */
@@ -138,9 +138,9 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
       this.callback = callback;
       this.bundleNameSet = new HashSet<String>();
     }
-    
+
     public void onSuccess(String bundleName) {
-      
+
       boolean removed = this.bundleNameSet.remove(bundleName);
       assert (removed) : bundleName;
       if (this.bundleNameSet.isEmpty()) {
@@ -148,15 +148,15 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
       }
     }
   }
-  
+
   protected class DictionaryContainer implements Callback<Void, Exception> {
 
     private String bundleName;
-    
+
     private String dictionaryName;
 
     private Dictionary dictionary;
-    
+
     private Collection<CallbackAdapter> callbackAdapters;
 
     /**
@@ -182,7 +182,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
       }
       return this.dictionary;
     }
-    
+
     protected String escapeBundleName(String name) {
 
       return name.replace('.', '$');
@@ -200,7 +200,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
         return key;
       }
     }
-    
+
     /**
      * {@inheritDoc}
      */

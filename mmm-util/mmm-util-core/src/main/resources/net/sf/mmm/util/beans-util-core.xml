@@ -14,6 +14,9 @@
   <beans profile="default">
     <bean id="java.util.concurrent.Executor" class="net.sf.mmm.util.concurrent.base.SimpleExecutor"/>
     <bean id="net.sf.mmm.util.lang.api.EnumProvider" class="net.sf.mmm.util.lang.base.SimpleEnumProvider"/>
+    <!-- ATTENTION: It is important that EnvironmentDetector is initialized lazily, as profiles may be set after context setup (e.g. when using ClassPathXmlApplicationContext) -->
+    <bean id="net.sf.mmm.util.lang.api.EnvironmentDetector" class="net.sf.mmm.util.lang.base.EnvironmentDetectorSpringProfileImpl" lazy-init="true"/>
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
   </beans>
 
   <beans profile="server">

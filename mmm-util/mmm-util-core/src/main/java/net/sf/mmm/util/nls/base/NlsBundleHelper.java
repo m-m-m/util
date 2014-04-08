@@ -3,21 +3,29 @@
 package net.sf.mmm.util.nls.base;
 
 import java.lang.reflect.Method;
+import java.util.Hashtable;
+import java.util.ResourceBundle;
 
+import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleKey;
 import net.sf.mmm.util.nls.api.NlsBundleLocation;
+import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.reflect.api.ClassName;
 
 /**
  * Helper class to deal with {@link NlsBundle} interfaces.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class NlsBundleHelper {
+@SuppressWarnings("deprecation")
+public class NlsBundleHelper extends AbstractLoggableObject {
+
+  /** @see #getInstance() */
+  public static final NlsBundleHelper INSTANCE = new NlsBundleHelper();
 
   /**
    * The constructor.
@@ -28,11 +36,20 @@ public class NlsBundleHelper {
   }
 
   /**
-   * This method gets the {@link NlsBundleLocation location} of the {@link java.util.ResourceBundle} for the
-   * given {@link NlsBundle}-interface.
-   * 
-   * @param nlsBundleInterface is the {@link NlsBundle}-interface.
-   * @return the fully qualified {@link java.util.ResourceBundle}-location for the given {@link NlsBundle}
+   * @return the singleton instance of this class.
+   * @since 4.0.0
+   */
+  public static NlsBundleHelper getInstance() {
+
+    return INSTANCE;
+  }
+
+  /**
+   * This method gets the location of the {@link java.util.ResourceBundle} base name for the given
+   * {@link NlsBundle} interface.
+   *
+   * @param nlsBundleInterface is the {@link NlsBundle} interface.
+   * @return the fully qualified {@link java.util.ResourceBundle} base name for the given {@link NlsBundle}
    *         interface.
    */
   public ClassName getQualifiedLocation(Class<? extends NlsBundle> nlsBundleInterface) {
@@ -49,12 +66,20 @@ public class NlsBundleHelper {
       }
       return new ClassName(pkg, name);
     }
-    return new ClassName(nlsBundleInterface);
+    String simpleName = nlsBundleInterface.getSimpleName();
+    if (simpleName.endsWith(NlsBundle.INTERFACE_NAME_SUFFIX)) {
+      simpleName = simpleName.substring(0, simpleName.length() - NlsBundle.INTERFACE_NAME_SUFFIX.length());
+    } else {
+      getLogger().error(
+          "Illegal NlsBundle interface '" + nlsBundleInterface.getName() + "': has to end with the suffix '"
+              + NlsBundle.INTERFACE_NAME_SUFFIX + "'.");
+    }
+    return new ClassName(nlsBundleInterface.getPackage().getName(), simpleName);
   }
 
   /**
    * This method gets the {@link NlsBundleKey key} of an {@link NlsBundle}-method.
-   * 
+   *
    * @param method is the Method to check.
    * @return the requested key.
    */
@@ -71,8 +96,46 @@ public class NlsBundleHelper {
   }
 
   /**
+   * This method gets the {@link NlsBundleMessage message} of an {@link NlsBundle}-method.
+   *
+   * @param method is the {@link Method} of a {@link NlsBundle}.
+   * @return the {@link NlsBundleMessage#value() bundle message} or <code>null</code> if not present.
+   * @since 4.0.0
+   */
+  public String getMessage(Method method) {
+
+    NlsBundleMessage messageAnnotation = method.getAnnotation(NlsBundleMessage.class);
+    if (messageAnnotation != null) {
+      return messageAnnotation.value();
+    }
+    return null;
+  }
+
+  /**
+   * Converts the given {@link NlsBundle} class to a {@link ResourceBundle}.
+   *
+   * @param bundleClass is the class reflecting a {@link NlsBundle}.
+   * @return a {@link ResourceBundle} with the key/value pairs of the given <code>bundleClass</code> for
+   *         {@link java.util.Locale#ROOT}.
+   * @since 4.0.0
+   */
+  public ResourceBundle toResourceBundle(Class<? extends NlsBundle> bundleClass) {
+
+    Hashtable<String, String> bundleProperties = new Hashtable<String, String>();
+    for (Method method : bundleClass.getMethods()) {
+      if (isNlsBundleMethod(method, false)) {
+        String key = getKey(method);
+        String message = getMessage(method);
+        bundleProperties.put(key, message);
+      }
+    }
+    GenericResourceBundle bundle = new GenericResourceBundle(bundleProperties);
+    return bundle;
+  }
+
+  /**
    * This method determines if the given {@link Method} is a regular {@link NlsBundle}-method.
-   * 
+   *
    * @param method the {@link Method} to check.
    * @param ignoreIllegalMethods - <code>true</code> if illegal methods (non NlsBundleMethods other than those
    *        defined by {@link Object}) should be ignored, <code>false</code> if they should cause an

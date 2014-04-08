@@ -9,19 +9,15 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import junit.framework.Assert;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
-import net.sf.mmm.util.nls.api.NlsBundleMessage;
 
 import org.junit.Test;
 
@@ -92,7 +88,7 @@ public class ResourceBundleSynchronizerTest {
   @Test
   public void testSynchronizerNlsBundle() throws Exception {
 
-    NlsBundleHelper bundleHelper = new NlsBundleHelper();
+    NlsBundleHelper bundleHelper = NlsBundleHelper.getInstance();
     ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
     String targetPath = TARGET_TEST;
     FileUtilImpl.getInstance().deleteRecursive(new File(targetPath));
@@ -103,73 +99,13 @@ public class ResourceBundleSynchronizerTest {
         ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
         bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
-    Hashtable<String, String> bundleProperties = new Hashtable<String, String>();
-    for (Method method : bundleClass.getMethods()) {
-      if (bundleHelper.isNlsBundleMethod(method, false)) {
-        String key = bundleHelper.getKey(method);
-        String message = method.getAnnotation(NlsBundleMessage.class).value();
-        bundleProperties.put(key, message);
-      }
-    }
-    GenericResourceBundle bundle = new GenericResourceBundle(bundleProperties);
+
+    ResourceBundle bundle = bundleHelper.toResourceBundle(bundleClass);
     String resultFileBase = targetPath + "/"
         + bundleHelper.getQualifiedLocation(bundleClass).getName().replace('.', '/');
 
     // checkBundle(bundle, resultFileBase, null);
     checkBundle(bundle, resultFileBase, locale1);
-  }
-
-  private static class GenericResourceBundle extends ResourceBundle {
-
-    private final Hashtable<String, String> bundle;
-
-    /**
-     * The constructor.
-     * 
-     * @param bundle
-     */
-    public GenericResourceBundle(Hashtable<String, String> bundle) {
-
-      super();
-      this.bundle = bundle;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Object handleGetObject(String key) {
-
-      return this.bundle.get(key);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Enumeration<String> getKeys() {
-
-      return this.bundle.keys();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean containsKey(String key) {
-
-      return this.bundle.containsKey(key);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Set<String> keySet() {
-
-      return this.bundle.keySet();
-    }
-
   }
 
 }

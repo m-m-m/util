@@ -12,9 +12,9 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the abstract base implementation of the {@link GenericValueConverter} interface.
- * 
+ *
  * @param <SOURCE> is the generic type of the values to convert.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -83,6 +83,7 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
       throws ValueNotSetException, WrongValueTypeException, ValueOutOfRangeException {
 
     Class<? extends Number> targetClass = minimum.getClass();
+    @SuppressWarnings("unchecked")
     TARGET result = (TARGET) convertValue(value, valueSource, targetClass, targetClass);
     ValueOutOfRangeException.checkRange(result, minimum, maximum, valueSource);
     return result;

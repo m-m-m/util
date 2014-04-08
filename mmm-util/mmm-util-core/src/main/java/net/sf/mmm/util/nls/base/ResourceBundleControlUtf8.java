@@ -16,14 +16,11 @@ import net.sf.mmm.util.io.api.EncodingUtil;
 
 /**
  * Adds UTF-8 support for {@link ResourceBundle} <code>*.properties</code> files.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
 public class ResourceBundleControlUtf8 extends Control {
-
-  /** The singleton instance. */
-  static final ResourceBundleControlUtf8 INSTANCE = new ResourceBundleControlUtf8();
 
   /**
    * The constructor.
@@ -40,7 +37,7 @@ public class ResourceBundleControlUtf8 extends Control {
   public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
       throws IllegalAccessException, InstantiationException, IOException {
 
-    // The below is a copy of the default implementation.
+    // copy of default implementation but with UTF-8 encoding.
     String bundleName = toBundleName(baseName, locale);
     String resourceName = toResourceName(bundleName, "properties");
     ResourceBundle bundle = null;

@@ -10,9 +10,10 @@ import java.lang.annotation.Target;
 /**
  * This optional annotation is used to define a different location for the {@link java.util.ResourceBundle}
  * -properties of an {@link NlsBundle} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
+ * @deprecated should not be used anymore due to smart solution for GWT and clever Control
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

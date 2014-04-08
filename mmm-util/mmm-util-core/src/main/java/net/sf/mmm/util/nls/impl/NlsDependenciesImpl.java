@@ -7,11 +7,11 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.api.Iso8601UtilLimited;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
+import net.sf.mmm.util.nls.base.AbstractNlsDependencies;
 import net.sf.mmm.util.nls.base.NlsArgumentFormatter;
 import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
@@ -24,7 +24,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
  */
 @Singleton
 @Named(NlsDependencies.CDI_NAME)
-public class NlsDependenciesImpl extends AbstractComponent implements NlsDependencies {
+public class NlsDependenciesImpl extends AbstractNlsDependencies {
 
   /** @see #getArgumentParser() */
   private NlsArgumentParser argumentParser;
@@ -56,7 +56,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   }
 
   /**
-   * @param argumentParser is the argumentParser to set
+   * @param argumentParser is the {@link NlsArgumentParser} to {@link Inject}.
    */
   @Inject
   public void setArgumentParser(NlsArgumentParser argumentParser) {
@@ -75,7 +75,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   }
 
   /**
-   * @param argumentFormatter is the argumentFormatter to set
+   * @param argumentFormatter is the {@link NlsArgumentFormatter} to {@link Inject}.
    */
   @Inject
   public void setArgumentFormatter(NlsArgumentFormatter argumentFormatter) {
@@ -94,7 +94,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   }
 
   /**
-   * @param messageFormatterFactory is the messageFormatterFactory to set
+   * @param messageFormatterFactory is the {@link NlsMessageFormatterFactory} to {@link Inject}.
    */
   @Inject
   public void setMessageFormatterFactory(NlsMessageFormatterFactory messageFormatterFactory) {
@@ -113,7 +113,7 @@ public class NlsDependenciesImpl extends AbstractComponent implements NlsDepende
   }
 
   /**
-   * @param iso8601Util is the iso8601Util to set
+   * @param iso8601Util is the {@link Iso8601UtilLimited} to {@link Inject}.
    */
   @Inject
   public void setIso8601Util(Iso8601UtilLimited iso8601Util) {

@@ -54,21 +54,13 @@ public abstract class AbstractEnvironmentDetector extends AbstractLoggableCompon
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doInitialized() {
-
-    super.doInitialized();
-    logEnvironmentStatus();
-  }
-
-  /**
    * Logs the current environment status information.
    */
   protected void logEnvironmentStatus() {
 
-    getLogger().info("You are running in {} mode", getEnvironmentType());
+    if (getLogger().isInfoEnabled()) {
+      getLogger().info("You are running in {} mode", getEnvironmentType());
+    }
   }
 
 }

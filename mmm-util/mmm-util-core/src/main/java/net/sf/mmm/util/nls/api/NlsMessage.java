@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 /**
@@ -17,9 +18,9 @@ import java.util.Locale;
  * possible to use {@link #getArgument(String) named arguments}. Further there is also support for additional
  * styles as well as {@link net.sf.mmm.util.text.api.Justification}. The format specification for
  * parameter-syntax is as following:
- * 
+ *
  * <pre>'{' ArgumentKey [ ',' FormatType [ ',' FormatStyle ] ] [ '{' Justification '}' ] '}'</pre>
- * 
+ *
  * The literals are explained in this table.
  * <table border="1">
  * <tr>
@@ -44,7 +45,7 @@ import java.util.Locale;
  * <td>a {@link net.sf.mmm.util.text.api.JustificationBuilder justification}</td>
  * </tr>
  * </table>
- * 
+ *
  * <br>
  * The following table shows the supported variants of <code>FormatType</code> and <code>FormatStyle</code>:
  * <table border="1">
@@ -255,16 +256,16 @@ import java.util.Locale;
  * unmaintainable if the power is missused.</td>
  * </tr>
  * </table>
- * 
+ *
  * For the term <em>internationalization</em> usually the shortcut <em>i18n</em> is used.
- * 
+ *
  * @see NlsMessageFactory
  * @see net.sf.mmm.util.nls.api
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface NlsMessage extends NlsObject {
+public interface NlsMessage extends NlsObject, Serializable {
 
   /**
    * The prefix appended to the {@link #getInternationalizedMessage() message} if the localization
@@ -280,18 +281,18 @@ public interface NlsMessage extends NlsObject {
    * <code>"Joelle"</code>. The final result will then be <code>"Welcome Joelle!"</code>. If the message is
    * translated to German as <code>"Willkommen {name}!"</code> the final result will be
    * <code>"Willkommen Joelle!"</code>.
-   * 
+   *
    * @see NlsMessage
    * @see #getArgument(String)
    * @see java.text.MessageFormat
-   * 
+   *
    * @return the message for internationalization.
    */
   String getInternationalizedMessage();
 
   /**
    * This method gets the number of language independent arguments of this exception.
-   * 
+   *
    * @return the argument count.
    * @deprecated this method does NOT make sense anymore.
    */
@@ -300,7 +301,7 @@ public interface NlsMessage extends NlsObject {
 
   /**
    * This method gets the language independent argument for the given <code>key</code>.
-   * 
+   *
    * @param key is the name of the requested argument.
    * @return the argument for the given key or <code>null</code> if NOT defined.
    */
@@ -308,7 +309,7 @@ public interface NlsMessage extends NlsObject {
 
   /**
    * This method gets the language independent argument at the given <code>index</code>.
-   * 
+   *
    * @param index is the index of the requested argument.
    * @return the argument for the given key.
    * @deprecated use {@link #getArgument(String)} instead (and use named keys instead of numbers where
@@ -321,9 +322,9 @@ public interface NlsMessage extends NlsObject {
    * This method gets the untranslated message (default language should be English) with arguments filled in.<br/>
    * <b>ATTENTION:</b><br/>
    * In most cases you wand to use {@link #getLocalizedMessage(Locale)} instead of this method.
-   * 
+   *
    * @see #getLocalizedMessage(Locale, NlsTemplateResolver)
-   * 
+   *
    * @return the i18n message with arguments filled in.
    */
   String getMessage();
@@ -333,7 +334,7 @@ public interface NlsMessage extends NlsObject {
    * {@link Locale}.<br>
    * <b>ATTENTION:</b><br>
    * If possible try to avoid using this method and use {@link #getLocalizedMessage(Locale)} instead.
-   * 
+   *
    * @return the localized message.
    */
   String getLocalizedMessage();
@@ -344,7 +345,7 @@ public interface NlsMessage extends NlsObject {
    * {@link Locale}. This will only work if you follow specific rules as described in the
    * {@link net.sf.mmm.util.nls.api package javadoc}. If this fails or is NOT supported, the
    * {@link #getMessage() untranslated} message will be returned.
-   * 
+   *
    * @param locale is the locale to translate to.
    * @return the localized message.
    */
@@ -352,9 +353,9 @@ public interface NlsMessage extends NlsObject {
 
   /**
    * This method gets the localized message as string.
-   * 
+   *
    * @see NlsMessage#getLocalizedMessage(Locale, NlsTemplateResolver, Appendable)
-   * 
+   *
    * @param locale is the locale to translate to.
    * @param resolver is used to translate the message.
    * @return the localized message.
@@ -367,7 +368,7 @@ public interface NlsMessage extends NlsObject {
    * <code>resolver</code>. If this fails, the {@link #getInternationalizedMessage() original message} will be
    * used. After translation is done, the language independent arguments will be filled in the translated
    * message string according to the given <code>locale</code>.
-   * 
+   *
    * @param locale is the locale to translate to.
    * @param resolver is used to resolve the template required to translate the
    *        {@link #getInternationalizedMessage() internationalized message}.

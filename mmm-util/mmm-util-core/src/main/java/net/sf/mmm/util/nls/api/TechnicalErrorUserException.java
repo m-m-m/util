@@ -3,25 +3,34 @@
 package net.sf.mmm.util.nls.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.api.ExceptionTruncation;
 
 /**
  * A {@link TechnicalErrorUserException} is wrapping arbitrary technical errors to a generic exception for
  * end-users or clients.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
 public class TechnicalErrorUserException extends NlsRuntimeException {
 
-  /** UID for serialization. */
-  private static final long serialVersionUID = -1993835994222744405L;
-
   /** @see #getCode() */
   public static final String CODE = "TechnicalError";
 
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected TechnicalErrorUserException() {
+
+    super();
+  }
+
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause}.
    */
   public TechnicalErrorUserException(Throwable nested) {
@@ -30,14 +39,39 @@ public class TechnicalErrorUserException extends NlsRuntimeException {
   }
 
   /**
-   * The constructor.
-   * 
+   * The constructor for the very special case that you want to define a custom message. You are not
+   * encouraged to use this constructor. Please also consider that you can still customize the localized texts
+   * for the message when using {@link #TechnicalErrorUserException(Throwable)}.
+   *
    * @param nested is the {@link #getCause() cause}.
    * @param message is a custom {@link #getNlsMessage() message}.
    */
   public TechnicalErrorUserException(Throwable nested, NlsMessage message) {
 
     super(nested, message);
+  }
+
+  /**
+   * The copy constructor.
+   *
+   * @see net.sf.mmm.util.nls.api.AbstractNlsRuntimeException#AbstractNlsRuntimeException(net.sf.mmm.util.nls.api.AbstractNlsRuntimeException,
+   *      ExceptionTruncation)
+   *
+   * @param copySource is the exception to copy.
+   * @param truncation is the {@link ExceptionTruncation} to configure potential truncations.
+   */
+  protected TechnicalErrorUserException(TechnicalErrorUserException copySource, ExceptionTruncation truncation) {
+
+    super(copySource, truncation);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public TechnicalErrorUserException createCopy(ExceptionTruncation truncation) {
+
+    return new TechnicalErrorUserException(this, truncation);
   }
 
   /**
@@ -70,7 +104,7 @@ public class TechnicalErrorUserException extends NlsRuntimeException {
   /**
    * Gets the given {@link Throwable} as {@link NlsThrowable#isForUser() user}
    * {@link AbstractNlsRuntimeException exception} or converts it to such.
-   * 
+   *
    * @param exception is the {@link Throwable} to convert.
    * @return the {@link AbstractNlsRuntimeException} with {@link NlsThrowable#isForUser()} returning
    *         <code>true</code>.

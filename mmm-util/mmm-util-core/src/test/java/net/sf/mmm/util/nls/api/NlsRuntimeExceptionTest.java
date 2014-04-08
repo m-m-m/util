@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
+import net.sf.mmm.test.SerializationHelper;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
@@ -89,6 +90,26 @@ public class NlsRuntimeExceptionTest extends Assert {
 
     // test German stacktrace
     checkException(messageDe, e, Locale.GERMAN, resolver);
+  }
+
+  /**
+   * Test fundamentals of {@link NlsRuntimeException}.
+   */
+  @Test
+  public void testNlsRuntimeExceptionSerializable() {
+
+    String source = "bad boy";
+    NlsNullPointerException e = new NlsNullPointerException(source);
+    NlsNullPointerException clone = SerializationHelper.reserialize(e);
+    Assert.assertNotNull(clone);
+    Assert.assertNotSame(e, clone);
+    String message = "The object \"" + source + "\" is null!";
+    assertEquals(message, e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
+    String messageDe = "Das Objekt \"" + source + "\" ist null!";
+    assertEquals(messageDe, e.getLocalizedMessage(Locale.GERMAN));
+
+    // test UUID and stacktrace
+    checkException(e.getLocalizedMessage(), e, null, null);
   }
 
   /**

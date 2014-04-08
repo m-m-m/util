@@ -22,7 +22,7 @@ public class ComposedValidationFailure extends AbstractValidationFailure {
   private ValidationFailure[] failures;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected ComposedValidationFailure() {
 

@@ -14,7 +14,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link NlsMessage} and {@link NlsMessageFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

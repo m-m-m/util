@@ -10,9 +10,9 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 /**
  * This is a simple wrapper in order to use an object as hash key but with ability to customize
  * {@link Object#equals(Object) equals} and {@link #hashCode() hashCode}.
- * 
+ *
  * @param <T> is the generic type of the {@link #getDelegate() delegate-object}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -28,7 +28,7 @@ public class CustomHashKey<T> extends AbstractHashKey<T> {
   private HashCodeFunction<T> hashCodeFunction;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected CustomHashKey() {
 
@@ -37,10 +37,11 @@ public class CustomHashKey<T> extends AbstractHashKey<T> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the {@link #getDelegate() delegate object}.
    * @param equalsChecker is the {@link EqualsChecker} used to customize {@link #equals(Object)}.
    */
+  @SuppressWarnings("unchecked")
   public CustomHashKey(T object, EqualsChecker<T> equalsChecker) {
 
     this(object, equalsChecker, (HashCodeFunction<T>) HashCodeFunctionDefault.getInstance());
@@ -48,7 +49,7 @@ public class CustomHashKey<T> extends AbstractHashKey<T> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the {@link #getDelegate() delegate object}.
    * @param equalsChecker is the {@link EqualsChecker} used to customize {@link #equals(Object)}.
    * @param hashCodeFunction is the {@link HashCodeFunction} used to customize {@link #hashCode()}.

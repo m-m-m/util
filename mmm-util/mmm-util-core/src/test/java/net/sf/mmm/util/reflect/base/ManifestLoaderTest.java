@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  * This is the {@link TestCase} for {@link ManifestLoader}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -26,7 +26,7 @@ public class ManifestLoaderTest {
   /**
    * Tests the content of the manifest from the servlet-api that is added as test-dependency especially for
    * this test.
-   * 
+   *
    * @throws IOException on error.
    */
   @Test
@@ -47,9 +47,9 @@ public class ManifestLoaderTest {
 
     Attributes mainAttributes = slf4jApiManifest.getMainAttributes();
     assertEquals("1.0", mainAttributes.getValue(Attributes.Name.MANIFEST_VERSION));
-    assertEquals("1.6.1", mainAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION));
+    assertEquals("1.7.6", mainAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION));
     assertEquals("Apache Maven", mainAttributes.getValue("Created-By"));
-    assertEquals("slf4j-api-1.6.1.jar", mainAttributes.getValue(ManifestLoader.MANIFEST_SOURCE));
+    assertEquals("slf4j-api-1.7.6.jar", mainAttributes.getValue(ManifestLoader.MANIFEST_SOURCE));
 
     Manifest jaxbRIManifest = null;
     for (Manifest manifest : manifests) {

@@ -23,7 +23,7 @@ public class ValidationFailureImpl extends AbstractValidationFailure {
   private NlsMessage message;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected ValidationFailureImpl() {
 

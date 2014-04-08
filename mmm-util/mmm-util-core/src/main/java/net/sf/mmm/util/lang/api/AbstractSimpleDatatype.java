@@ -18,7 +18,7 @@ public abstract class AbstractSimpleDatatype<V> extends AbstractSimpleDatatypeBa
   private V value;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected AbstractSimpleDatatype() {
 

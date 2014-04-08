@@ -26,7 +26,7 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.value.api.ComposedValueConverter} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -64,7 +64,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       throw new ResourceMissingException("converters");
     }
     for (ValueConverter<?, ?> converter : this.converters) {
-      if (converter != this) {
+      if (!(converter instanceof ComposedValueConverter)) {
         addConverterInternal(converter);
       }
     }
@@ -72,7 +72,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
   /**
    * This method registers the given <code>converter</code> to this composed converter.
-   * 
+   *
    * @param converter is the converter to add.
    */
   public void addConverter(ValueConverter<?, ?> converter) {
@@ -86,7 +86,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
   /**
    * This method registers the given <code>converter</code> to this composed converter.
-   * 
+   *
    * @param converter is the converter to add.
    * @return the converter with the same {@link ValueConverter#getSourceType() source-type} and
    *         {@link ValueConverter#getTargetType() target-type} that has been replaced by
@@ -119,7 +119,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * This method injects a {@link List} of {@link ValueConverter}s to {@link #addConverter(ValueConverter)
    * add}.
-   * 
+   *
    * @param converterList is the list of converters to register.
    */
   @Inject
@@ -127,6 +127,14 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
     getInitializationState().requireNotInitilized();
     this.converters = converterList;
+  }
+
+  /**
+   * @return the converters
+   */
+  List<ValueConverter<?, ?>> getConverters() {
+
+    return this.converters;
   }
 
   /**
@@ -214,9 +222,9 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * This method determines if the given <code>converter</code> is applicable for the given
    * <code>targetType</code>.
-   * 
+   *
    * @see ValueConverter#getTargetType()
-   * 
+   *
    * @param converter is the {@link ValueConverter} to check.
    * @param targetType is the {@link GenericType} to match with {@link ValueConverter#getTargetType()}.
    * @return <code>true</code> if the given <code>converter</code> is applicable, <code>false</code>
@@ -234,7 +242,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * This method determines if the given <code>converterTargetClass</code> is applicable for the
    * <code>expectedTargetClass</code>.
-   * 
+   *
    * @param converterTargetClass is the {@link ValueConverter#getTargetType() target-class} of the
    *        {@link ValueConverter} to check.
    * @param expectedTargetClass is the target-class to convert to.
@@ -267,7 +275,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * interfaces} and regular classes. For an interface the entire traversal of super-interfaces is skipped,
    * while for a regular class, just that class is skipped, but {@link Class#getSuperclass() super-classes}
    * are recursively traversed.
-   * 
+   *
    * @param type is the {@link Class} reflecting the type to check.
    * @return <code>true</code> if the given <code>type</code> is acceptable, <code>false</code> if the given
    *         <code>type</code> should be ignored.
@@ -285,7 +293,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
   /**
    * This method performs the {@link #convert(Object, Object, GenericType) conversion} recursive.
-   * 
+   *
    * @param value is the value to convert.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
    *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
@@ -359,7 +367,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   /**
    * This inner class is a composed converter for all {@link ValueConverter}s with the same
    * {@link ValueConverter#getTargetType() target-type}.
-   * 
+   *
    * @param <TARGET> is the generic {@link #getTargetType() target-type}.
    */
   protected class ComposedTargetTypeConverter<TARGET> implements ValueConverter<Object, TARGET> {
@@ -372,7 +380,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
     /**
      * The constructor.
-     * 
+     *
      * @param targetType is the {@link #getTargetType() target-type} of this converter.
      */
     public ComposedTargetTypeConverter(Class<TARGET> targetType) {
@@ -402,7 +410,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
     /**
      * This method registers the given <code>converter</code> to this composed converter.
-     * 
+     *
      * @param converter is the converter to add.
      * @return the converter with the same {@link ValueConverter#getSourceType() source-type} that has been
      *         replaced by <code>converter</code> or <code>null</code> if no converter has been replaced.
@@ -435,7 +443,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
     /**
      * This method performs the {@link #convert(Object, Object, GenericType) conversion} recursive.
-     * 
+     *
      * @param <T> is the generic type of <code>genericTargetType</code>.
      * @param value is the value to convert.
      * @param valueSource describes the source of the value. This may be the filename where the value was read
@@ -447,6 +455,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      *         returned value has to be an {@link Class#isInstance(Object) instance} of the given
      *         <code>targetType</code>.
      */
+    @SuppressWarnings("unchecked")
     protected <T extends TARGET> T convertRecursive(Object value, Object valueSource, GenericType<T> genericTargetType,
         Class<?> sourceClass) {
 
@@ -498,7 +507,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
     /**
      * The constructor.
-     * 
+     *
      */
     public TargetClass2ConverterMap() {
 
@@ -507,7 +516,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
     /**
      * The constructor.
-     * 
+     *
      * @param mapFactory is the factory used to create the internal {@link Map}.
      */
     @SuppressWarnings({ "rawtypes" })

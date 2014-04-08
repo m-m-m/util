@@ -9,11 +9,14 @@ import java.util.ResourceBundle;
 /**
  * This class is the implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplate} interface. It uses
  * {@link ResourceBundle}s for localization.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (moved, 1.0.0)
  */
 public class NlsTemplateImpl extends AbstractNlsTemplate {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = -312035648040124881L;
 
   /** @see #getName() */
   private final String name;
@@ -23,7 +26,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
 
   /**
    * The constructor.
-   * 
+   *
    * @param name is the {@link #getName() name} of the bundle.
    * @param key is the {@link #getKey() key} of the string to lookup in the bundle.
    */
@@ -37,7 +40,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   /**
    * This method gets the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} used
    * to lookup the bundle (typically a {@link java.util.ResourceBundle}).
-   * 
+   *
    * @return the bundleName is the base-name of the associated bundle.
    */
   public String getName() {
@@ -48,7 +51,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   /**
    * This method gets the {@link java.util.ResourceBundle#getString(String) key} of the string to lookup from
    * the {@link #getName() bundle}. The key is a technical UID like (<code>ERR_VALUE_OUT_OF_RANGE</code>).
-   * 
+   *
    * @return the bundleKey is the key used to lookup the string from the bundle.
    */
   public String getKey() {
@@ -63,7 +66,8 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   public String translate(Locale locale) {
 
     try {
-      ResourceBundle bundle = ResourceBundle.getBundle(this.name, locale, ResourceBundleControlUtf8.INSTANCE);
+      ResourceBundle bundle = ResourceBundle.getBundle(this.name, locale,
+          ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
       return bundle.getString(this.key);
     } catch (MissingResourceException e) {
       return translateFallback(e);
@@ -72,7 +76,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
 
   /**
    * Called from {@link #translate(Locale)} if localization failed.
-   * 
+   *
    * @param e is the {@link MissingResourceException}.
    * @return the fallback message.
    */
@@ -80,6 +84,17 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
 
     String messageId = this.name + ":" + this.key;
     getLogger().warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
+    return translateFallback(messageId);
+  }
+
+  /**
+   * @see #translateFallback(MissingResourceException)
+   *
+   * @param messageId is the ID of the message composed out of bundle base name and key.
+   * @return the fallback message.
+   */
+  protected String translateFallback(String messageId) {
+
     return "unresolved (" + messageId + ")";
   }
 

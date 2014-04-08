@@ -41,6 +41,27 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
   @Override
   public String getEnvironmentType() {
 
+    if (this.environmentType == null) {
+      // Spring profiles do not work properly via
+      // AbstractApplicationContext.getEnvironment().setActiveProfiles(...)
+      // not even with lazy-init as lazy-init is violated as soon as a bean is requesting this bean without
+      // being itself configured via lazy-init. To avoid all the problems and trouble we use our own lazy
+      // initialization mechanism.
+      String result = getEnvironmentTypeSynchronized();
+      logEnvironmentStatus();
+      return result;
+    }
+    return this.environmentType;
+  }
+
+  /**
+   * @return the {@link #getEnvironmentType() environment type} with lazy initialization.
+   */
+  protected synchronized String getEnvironmentTypeSynchronized() {
+
+    if (this.environmentType == null) {
+      this.environmentType = detectEnvironmentType(this.environment.getActiveProfiles());
+    }
     return this.environmentType;
   }
 
@@ -72,7 +93,6 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
     if (this.environment == null) {
       throw new ResourceMissingException("environment");
     }
-    this.environmentType = detectEnvironmentType(this.environment.getActiveProfiles());
   }
 
   /**

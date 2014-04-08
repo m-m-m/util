@@ -5,9 +5,11 @@ package net.sf.mmm.util.nls.api;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.exception.api.ExceptionTruncation;
+
 /**
  * This the base class for all runtime exceptions of the project.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -17,8 +19,16 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   private static final long serialVersionUID = 6002426164465970398L;
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected NlsRuntimeException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        internationalization and should be in English language.
    * @param arguments are the arguments filled into the <code>internationalizedMessage</code> after
@@ -33,7 +43,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        internationalization and should be in English language.
@@ -49,7 +59,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
    *        language.
@@ -61,7 +71,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
@@ -74,7 +84,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
    *        language.
@@ -89,9 +99,9 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @see #toMap(String, Object, String, Object)
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
@@ -107,7 +117,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public NlsRuntimeException(NlsMessage message) {
@@ -117,7 +127,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
@@ -127,8 +137,22 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
   }
 
   /**
+   * The copy constructor.
+   *
+   * @see AbstractNlsRuntimeException#AbstractNlsRuntimeException(AbstractNlsRuntimeException,
+   *      ExceptionTruncation)
+   *
+   * @param copySource is the exception to copy.
+   * @param truncation is the {@link ExceptionTruncation} to configure potential truncations.
+   */
+  protected NlsRuntimeException(NlsRuntimeException copySource, ExceptionTruncation truncation) {
+
+    super(copySource, truncation);
+  }
+
+  /**
    * This method adds the given arguments to the given {@link Map}.
-   * 
+   *
    * @param map is the {@link Map} to use or <code>null</code> to create a new {@link Map}.
    * @param key is the {@link Map#keySet() key} of the entry to add.
    * @param value is the {@link Map#get(Object) value} of the entry to add.
@@ -150,7 +174,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * This method create a {@link Map} for the given arguments.
-   * 
+   *
    * @param key1 is the {@link Map#keySet() key} of the first map entry.
    * @param value1 is the {@link Map#get(Object) value} of the first map entry.
    * @return a {@link Map} containing only the given arguments.
@@ -164,7 +188,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * This method create a {@link Map} for the given arguments.
-   * 
+   *
    * @param key1 is the {@link Map#keySet() key} of the first map entry.
    * @param value1 is the {@link Map#get(Object) value} of the first map entry.
    * @param key2 is the {@link Map#keySet() key} of the second map entry.
@@ -182,7 +206,7 @@ public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /**
    * This method create a {@link Map} for the given arguments.
-   * 
+   *
    * @param key1 is the {@link Map#keySet() key} of the first map entry.
    * @param value1 is the {@link Map#get(Object) value} of the first map entry.
    * @param key2 is the {@link Map#keySet() key} of the second map entry.

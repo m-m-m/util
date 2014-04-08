@@ -5,9 +5,7 @@ package net.sf.mmm.util.nls.impl.rebind;
 import java.io.PrintWriter;
 
 import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleKey;
-import net.sf.mmm.util.nls.api.NlsBundleLocation;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.base.NlsBundleHelper;
@@ -29,7 +27,7 @@ import com.google.gwt.user.rebind.SourceWriter;
 /**
  * This is the GWT {@link com.google.gwt.core.ext.Generator} for generation of
  * {@link net.sf.mmm.util.nls.api.NlsBundle} implementations.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -38,26 +36,12 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
   /** The name of the variable with the GWT i18n interface. */
   private static final String VARIABLE_GWT_I18N = "GWT_I18N";
 
-  /** The {@link NlsBundleHelper} instance to use. */
-  private final NlsBundleHelper bundleHelper;
-
   /**
    * The constructor.
    */
   public NlsBundleGeneratorGwtI18n() {
 
-    this(new NlsBundleHelper());
-  }
-
-  /**
-   * The constructor.
-   * 
-   * @param bundleHelper is the {@link NlsBundleHelper}.
-   */
-  public NlsBundleGeneratorGwtI18n(NlsBundleHelper bundleHelper) {
-
     super();
-    this.bundleHelper = bundleHelper;
   }
 
   /**
@@ -110,13 +94,14 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
 
   /**
    * This method generates the GWT-i18n-interface for the NLS-bundle.
-   * 
-   * @param bundleClass is the {@link JClassType class} of the {@link NlsBundle} to generate.
+   *
+   * @param bundleClass is the {@link JClassType class} of the {@link net.sf.mmm.util.nls.api.NlsBundle} to
+   *        generate.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
    * @return the name of the generated class.
    */
-  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @SuppressWarnings({ "rawtypes" })
   private String generateBundleInterface(JClassType bundleClass, TreeLogger logger, GeneratorContext context) {
 
     Class bundleJavaClass;
@@ -126,14 +111,13 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
     } catch (ClassNotFoundException e) {
       throw new TypeNotFoundException(bundleName);
     }
-    ClassName i18nInterfaceName = this.bundleHelper.getQualifiedLocation(bundleJavaClass);
-    ClassName bundleClassName = new ClassName(bundleJavaClass);
-    String packageName = i18nInterfaceName.getPackageName();
-    String simpleName = i18nInterfaceName.getSimpleName();
-    if (bundleClassName.equals(i18nInterfaceName)) {
-      logger.log(TreeLogger.ERROR, getClass().getSimpleName() + ": " + NlsBundle.class.getSimpleName()
-          + " NOT relocated via @" + NlsBundleLocation.class.getSimpleName() + " in " + bundleName
-          + " - localization will not work properly!");
+    @SuppressWarnings("unchecked")
+    ClassName bundleClassName = NlsBundleHelper.getInstance().getQualifiedLocation(bundleJavaClass);
+    String packageName = bundleClassName.getPackageName();
+    String simpleName = bundleClassName.getSimpleName();
+    if (bundleClassName.getName().equals(bundleName)) {
+      logger.log(TreeLogger.ERROR, getClass().getSimpleName() + ": Illegal NlsBundle '" + bundleName
+          + "' - has to end with suffix 'Root'. Localization will not work!");
       simpleName = simpleName + "_Interface";
     }
     logger.log(TreeLogger.INFO, getClass().getSimpleName() + ": Generating " + simpleName);
@@ -151,12 +135,9 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
     annotationBuffer.append(Generate.class.getSimpleName());
     annotationBuffer.append("(format = \"");
     annotationBuffer.append(PropertiesFormat.class.getName());
-    annotationBuffer.append("\", fileName = \"");
-    annotationBuffer.append(bundleClass.getSimpleSourceName());
     annotationBuffer.append("\")");
 
-    sourceComposerFactory.addAnnotationDeclaration("@" + Generate.class.getSimpleName() + "(format = \""
-        + PropertiesFormat.class.getName() + "\")");
+    sourceComposerFactory.addAnnotationDeclaration(annotationBuffer.toString());
 
     PrintWriter writer = context.tryCreate(logger, packageName, simpleName);
     if (writer != null) {

@@ -18,8 +18,6 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleFactory;
-import net.sf.mmm.util.nls.api.NlsBundleKey;
-import net.sf.mmm.util.nls.api.NlsBundleLocation;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsBundleOptions;
 import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
@@ -30,7 +28,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base implementation of {@link NlsBundleFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -56,7 +54,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
   /**
    * The constructor.
-   * 
+   *
    * @param classLoader is the {@link ClassLoader} to use.
    */
   public AbstractNlsBundleFactory(ClassLoader classLoader) {
@@ -69,6 +67,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
 
@@ -87,7 +86,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   /**
    * This method gets the {@link NlsBundleOptions} for the given <code>bundleInterface</code>. If NOT present
    * a default instance is returned.
-   * 
+   *
    * @param bundleInterface is the {@link Class} reflecting the {@link NlsBundle} interface.
    * @return the annotated {@link NlsBundleOptions} or the default if <code>bundleInterface</code> is NOT
    *         annotated accordingly.
@@ -103,13 +102,13 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
   /**
    * This method creates a new {@link InvocationHandler} for the given <code>bundleInterface</code>.
-   * 
+   *
    * @param bundleInterface is the {@link Class} reflecting the {@link NlsBundle} interface.
    * @return the {@link InvocationHandler} for the given <code>bundleInterface</code>.
    */
   protected InvocationHandler createHandler(Class<? extends NlsBundle> bundleInterface) {
 
-    String bundleName = getBundleQualifiedName(bundleInterface);
+    String bundleName = NlsBundleHelper.getInstance().getQualifiedLocation(bundleInterface).getName();
     NlsBundleOptions options = getBundleOptions(bundleInterface);
     return new NlsBundleInvocationHandler(bundleName, options);
   }
@@ -120,39 +119,6 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   protected NlsMessageFactory getMessageFactory() {
 
     return NlsAccess.getFactory();
-  }
-
-  /**
-   * This Method gets the {@link java.util.ResourceBundle#getBundle(String) qualified name} of the
-   * {@link java.util.ResourceBundle} associated by the given <code>bundleInterface</code>.
-   * 
-   * @see NlsBundleLocation
-   * 
-   * @param bundleInterface is the {@link NlsBundle} interface.
-   * @return the qualified name.
-   */
-  protected String getBundleQualifiedName(Class<? extends NlsBundle> bundleInterface) {
-
-    NlsBundleLocation bundleLocation = bundleInterface.getAnnotation(NlsBundleLocation.class);
-    String bundlePackage = "";
-    String bundleName = "";
-    if (bundleLocation != null) {
-      bundlePackage = bundleLocation.bundlePackage();
-      bundleName = bundleLocation.bundleName();
-    }
-    if (bundlePackage.length() == 0) {
-      bundlePackage = bundleInterface.getPackage().getName();
-    }
-    if (bundleName.length() == 0) {
-      bundleName = bundleInterface.getSimpleName();
-    }
-    String bundleFqn;
-    if (bundlePackage.length() == 0) {
-      bundleFqn = bundleName;
-    } else {
-      bundleFqn = bundlePackage + "." + bundleName;
-    }
-    return bundleFqn;
   }
 
   /**
@@ -171,7 +137,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
     /**
      * The constructor.
-     * 
+     *
      * @param bundleName is the qualified name of the {@link java.util.ResourceBundle}.
      * @param options are the {@link NlsBundleOptions}.
      */
@@ -186,7 +152,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     /**
      * This method converts the given <code>arguments</code> to a {@link Map} with the
      * {@link NlsMessage#getArgument(String) arguments}.
-     * 
+     *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @param methodInfo is the {@link NlsBundleMethodInfo} for the given {@link Method}.
      * @param arguments are the arguments for the call of the {@link Method}.
@@ -208,7 +174,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     /**
      * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given
      * {@link Method}.
-     * 
+     *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @return an array with the {@link NlsMessage#getArgument(String) argument-names}.
      */
@@ -283,7 +249,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     /**
      * Gets {@link NlsBundleMethodInfo} for <code>methodName</code> from cache or creates it and puts it into
      * the cache.
-     * 
+     *
      * @param method is the {@link Method} or <code>null</code> for generic invocation (lookup).
      * @param args are the method arguments or <code>null</code> for generic invocation (lookup).
      * @param methodName is the {@link Method#getName() name} of the {@link Method}.
@@ -330,32 +296,27 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
     /**
      * This method creates the {@link NlsTemplate} for the given {@link NlsBundle}-{@link Method}.
-     * 
+     *
      * @param method is the {@link Method} of an {@link NlsBundle}.
      * @return the according {@link NlsTemplate}.
      */
     protected NlsTemplate createTemplate(Method method) {
 
-      NlsBundleKey keyAnnotation = method.getAnnotation(NlsBundleKey.class);
-      String key;
-      if (keyAnnotation != null) {
-        key = keyAnnotation.value();
-      } else {
-        key = method.getName();
-      }
-      NlsBundleMessage messageAnnotation = method.getAnnotation(NlsBundleMessage.class);
+      NlsBundleHelper bundleHelper = NlsBundleHelper.getInstance();
+      String key = bundleHelper.getKey(method);
+      String message = bundleHelper.getMessage(method);
       NlsTemplate template;
-      if (messageAnnotation != null) {
-        String message = messageAnnotation.value();
-        template = new NlsTemplateImplWithMessage(this.bundleName, key, message);
-      } else {
+      if (message == null) {
         if (this.options.requireMessages()) {
           throw new ObjectNotFoundException("@" + NlsBundleMessage.class.getSimpleName(), method.getName());
         }
         template = new NlsTemplateImpl(this.bundleName, key);
+      } else {
+        template = new NlsTemplateImplWithMessage(this.bundleName, key, message);
       }
       return template;
     }
+
   }
 
   /**
@@ -371,7 +332,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
     /**
      * The constructor.
-     * 
+     *
      * @param template - see {@link #getTemplate()}.
      * @param argumentNames - see {@link #getArgumentNames()}.
      */

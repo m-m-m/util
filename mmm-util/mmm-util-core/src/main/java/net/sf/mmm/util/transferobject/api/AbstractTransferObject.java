@@ -12,7 +12,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This is the abstract base class for a {@link TransferObject}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -31,7 +31,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
 
   /**
    * The copy-constructor.
-   * 
+   *
    * @param template is the object to create a deep-copy from.
    */
   protected AbstractTransferObject(Object template) {
@@ -44,7 +44,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
 
   /**
    * @see #copyFrom(Object)
-   * 
+   *
    * @param source is the source object where to copy the properties from.
    */
   final void copyFromInternal(Object source) {
@@ -60,7 +60,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
    * This method copies all properties from <code>source</code> to this object. If a property is copied whose
    * value is a mutable object (not a {@link net.sf.mmm.util.lang.api.Datatype} or the like), that object also
    * has to be copied/cloned.
-   * 
+   *
    * @param source is the source object where to copy the properties from.
    */
   protected void copyFrom(Object source) {
@@ -71,7 +71,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * <b>ATTENTION:</b><br/>
    * For being type-safe please use {@link TransferObjectUtil#clone(AbstractTransferObject)} instead.
    */
@@ -148,6 +148,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public <TO extends AbstractTransferObject> TO newInstance(TO template) {
 

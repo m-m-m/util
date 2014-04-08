@@ -5,8 +5,9 @@ package net.sf.mmm.util.lang.api.attribute;
 /**
  * This is the abstract interface for an object that has an {@link #getTitle() title}.
  * 
- * @param <TITLE> is the generic type of the {@link #getTitle() title}. The type will typically be {@link String}
- *        but can also be something else (e.g. {@link net.sf.mmm.util.nls.api.NlsMessage}.
+ * @param <TITLE> is the generic type of the {@link #getTitle() title}. The type will typically be
+ *        {@link String} but can also be something else (e.g. {@link net.sf.mmm.util.nls.api.NlsMessage}. It
+ *        must provide a reasonable {@link Object#toString() string representation}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

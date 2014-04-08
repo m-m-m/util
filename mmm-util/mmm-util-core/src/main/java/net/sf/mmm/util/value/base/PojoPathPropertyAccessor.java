@@ -12,10 +12,10 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
 /**
  * This is an implementation of {@link PropertyAccessor} using {@link PojoPathNavigator} (based on
  * reflection).
- * 
+ *
  * @param <POJO> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo} to access.
  * @param <VALUE> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo POJOs} property to access.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -39,7 +39,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
 
   /**
    * The constructor.
-   * 
+   *
    * @param navigator is the {@link PojoPathNavigator} instance to use.
    * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property
    *        to access.
@@ -52,7 +52,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
 
   /**
    * The constructor.
-   * 
+   *
    * @param navigator is the {@link PojoPathNavigator} instance to use.
    * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property
    *        to access.
@@ -68,7 +68,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
 
   /**
    * The constructor.
-   * 
+   *
    * @param navigator is the {@link PojoPathNavigator} instance to use.
    * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property
    *        to access.
@@ -100,6 +100,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public VALUE getValue(POJO element) {
 

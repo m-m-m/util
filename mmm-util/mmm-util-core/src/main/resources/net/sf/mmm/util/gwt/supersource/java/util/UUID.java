@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * This is a very limited variant of {@link java.util.UUID} to allow access in GWT clients.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -19,10 +19,10 @@ public final class UUID implements Serializable, Comparable<UUID> {
   private static final int NOT_INITIALIZED = -1;
 
   /** @see #getMostSignificantBits() */
-  private final long mostSignificantBits;
+  private long mostSignificantBits;
 
   /** @see #getLeastSignificantBits() */
-  private final long leastSignificantBits;
+  private long leastSignificantBits;
 
   /** @see #version() */
   private transient int version;
@@ -43,8 +43,16 @@ public final class UUID implements Serializable, Comparable<UUID> {
   private transient int hashCode;
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected UUID() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param mostSignificantBits - see {@link #getMostSignificantBits()}.
    * @param leastSignificantBits - see {@link #getLeastSignificantBits()}.
    */
@@ -63,9 +71,9 @@ public final class UUID implements Serializable, Comparable<UUID> {
   /**
    * <b>ATTENTION:</b><br/>
    * This method is not supported and returns <code>null</code>.
-   * 
+   *
    * @see java.util.UUID#randomUUID()
-   * 
+   *
    * @return <code>null</code>.
    */
   public static UUID randomUUID() {
@@ -199,7 +207,7 @@ public final class UUID implements Serializable, Comparable<UUID> {
 
   /**
    * Returns the given <code>value</code> represented by the specified number of hex <code>digits</code>.
-   * 
+   *
    * @param value is the number to format.
    * @param digits are the number of digits requested.
    * @return the given <code>value</code> as hex {@link String} with the given number of digits.

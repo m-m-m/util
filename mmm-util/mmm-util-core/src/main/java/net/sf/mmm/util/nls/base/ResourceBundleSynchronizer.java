@@ -340,7 +340,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   public NlsBundleHelper getBundleHelper() {
 
     if (this.bundleHelper == null) {
-      this.bundleHelper = new NlsBundleHelper();
+      this.bundleHelper = NlsBundleHelper.getInstance();
     }
     return this.bundleHelper;
   }

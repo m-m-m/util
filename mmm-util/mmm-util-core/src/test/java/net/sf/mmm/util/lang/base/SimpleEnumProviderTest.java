@@ -166,15 +166,6 @@ public class SimpleEnumProviderTest extends Assert {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-
-      return toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Continent getCategory() {
 
       return this.continent;

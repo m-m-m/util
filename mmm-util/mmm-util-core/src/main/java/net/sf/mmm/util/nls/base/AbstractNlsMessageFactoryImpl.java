@@ -4,13 +4,10 @@ package net.sf.mmm.util.nls.base;
 
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
-import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 
 /**
  * This is the abstract but almost complete implementation of
@@ -20,9 +17,6 @@ import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
  * @since 3.1.0
  */
 public abstract class AbstractNlsMessageFactoryImpl extends AbstractNlsMessageFactory {
-
-  /** @see #getNlsDependencies() */
-  private NlsDependencies nlsDependencies;
 
   /**
    * The constructor.
@@ -38,7 +32,7 @@ public abstract class AbstractNlsMessageFactoryImpl extends AbstractNlsMessageFa
   @Override
   public NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments) {
 
-    return new NlsMessageImpl(template, messageArguments, this.nlsDependencies);
+    return new NlsMessageImpl(template, messageArguments);
   }
 
   /**
@@ -47,7 +41,7 @@ public abstract class AbstractNlsMessageFactoryImpl extends AbstractNlsMessageFa
   @Override
   public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments) {
 
-    return new NlsMessageImpl(internationalizedMessage, messageArguments, this.nlsDependencies);
+    return new NlsMessageImpl(internationalizedMessage, messageArguments);
   }
 
   /**
@@ -57,11 +51,6 @@ public abstract class AbstractNlsMessageFactoryImpl extends AbstractNlsMessageFa
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.nlsDependencies == null) {
-      NlsFormatterManagerImpl formatterManager = new NlsFormatterManagerImpl();
-      formatterManager.initialize();
-      this.nlsDependencies = formatterManager.getNlsDependencies();
-    }
   }
 
   /**
@@ -72,24 +61,6 @@ public abstract class AbstractNlsMessageFactoryImpl extends AbstractNlsMessageFa
 
     super.doInitialized();
     NlsAccess.setFactory(this);
-  }
-
-  /**
-   * @return the {@link NlsDependencies}.
-   */
-  public NlsDependencies getNlsDependencies() {
-
-    return this.nlsDependencies;
-  }
-
-  /**
-   * @param nlsDependencies are the {@link NlsDependencies} to set.
-   */
-  @Inject
-  public void setNlsDependencies(NlsDependencies nlsDependencies) {
-
-    getInitializationState().requireNotInitilized();
-    this.nlsDependencies = nlsDependencies;
   }
 
 }

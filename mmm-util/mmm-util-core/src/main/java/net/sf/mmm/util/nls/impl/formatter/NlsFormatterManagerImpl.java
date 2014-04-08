@@ -7,10 +7,10 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsFormatter;
+import net.sf.mmm.util.nls.base.AbstractNlsDependencies;
 import net.sf.mmm.util.nls.base.MappedNlsFormatterManager;
 import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.nls.impl.ConfiguredNlsFormatterMap;
-import net.sf.mmm.util.nls.impl.NlsDependenciesImpl;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
@@ -42,10 +42,7 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
 
     super.doInitialize();
     if (this.nlsDependencies == null) {
-      NlsDependenciesImpl impl = new NlsDependenciesImpl();
-      impl.setArgumentParser(this);
-      impl.initialize();
-      this.nlsDependencies = impl;
+      this.nlsDependencies = AbstractNlsDependencies.getInstance();
     }
     if (getFormatterMap() == null) {
       ConfiguredNlsFormatterMap formatterMap = new ConfiguredNlsFormatterMap();

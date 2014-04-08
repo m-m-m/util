@@ -25,7 +25,7 @@ public final class HashKey<T> extends AbstractHashKey<T> {
   private static final long serialVersionUID = -2492195114074688424L;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected HashKey() {
 

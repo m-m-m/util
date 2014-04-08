@@ -3,6 +3,7 @@
 package net.sf.mmm.util.nls.api;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ import net.sf.mmm.util.nls.base.NlsDependencies;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface NlsTemplate {
+public interface NlsTemplate extends Serializable {
 
   /**
    * This method translates the represented string for the given <code>locale</code>.<br>

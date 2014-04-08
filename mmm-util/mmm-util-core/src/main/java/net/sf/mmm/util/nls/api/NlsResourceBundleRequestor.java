@@ -10,10 +10,9 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * methods of this component will have no effect. However, on special client-environments like GWT you may
  * need to request them explicitly if you do NOT use {@link NlsBundle} and want to make use of code-splitting
  * and lazy loading.
- * 
+ *
  * @see NlsMessageFactory#createDirect(String, String, java.util.Map)
- * @see net.sf.mmm.util.nls.base.NlsResourceBundleJavaScriptServlet
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -30,7 +29,7 @@ public interface NlsResourceBundleRequestor {
    * {@link java.util.Locale} of the user so they are available for dictionaries. After the last bundle has
    * been loaded the given <code>callback</code> will be invoked. In other environments this method will do
    * nothing but synchronously invoking the <code>callback</code>.
-   * 
+   *
    * @param callback is the {@link Runnable} that is {@link Runnable#run() called} when all bundles are loaded
    *        and available.
    * @param bundleNames are the {@link java.util.ResourceBundle#getBundle(String) base-names} of the requested

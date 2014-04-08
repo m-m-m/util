@@ -13,9 +13,9 @@ import net.sf.mmm.util.nls.api.DuplicateObjectException;
  * {@link net.sf.mmm.util.entity.api.PersistenceEntity} there are no restrictions and you can treat the
  * instance as a regular java-bean or {@link net.sf.mmm.util.pojo.api.Pojo}.<br/>
  * For an example see also JavaDoc of {@link CompositeTo}.
- * 
+ *
  * @param <ID> is the type of the {@link #getId() primary key}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -50,7 +50,7 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
 
   /**
    * The constructor.
-   * 
+   *
    * @param template is the object to create a deep-copy from.
    */
   public EntityTo(RevisionedEntity<ID> template) {
@@ -153,7 +153,7 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
    * This method is called if {@link #copyFrom(Object)} has been called with <code>overwrite</code> set to
    * false but the method has already been called before. It will throw an exception as this is not expected
    * and might cause problems. You may override this method to allow this.
-   * 
+   *
    * @param sourceRevisionedEntity is the {@link RevisionedEntity} to {@link #copyFrom(Object) copy from}.
    */
   protected void handleDuplicatePersistentEntity(RevisionedEntity<ID> sourceRevisionedEntity) {
@@ -164,6 +164,7 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public EntityTo<ID> clone() {
 
@@ -222,7 +223,7 @@ public abstract class EntityTo<ID> extends AbstractTransferObject implements Mut
 
   /**
    * Method to extend {@link #toString()} logic.
-   * 
+   *
    * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the
    *        string representation.
    */

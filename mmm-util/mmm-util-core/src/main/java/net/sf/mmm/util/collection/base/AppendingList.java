@@ -11,9 +11,9 @@ import java.util.List;
  * <b>ATTENTION:</b><br>
  * This implementation is NOT thread-safe. It may cause problems if a method is called while one of the
  * concatenated sub-lists is modified.
- * 
+ *
  * @param <E> is the generic type of the list elements.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class AppendingList<E> extends AbstractList<E> {
@@ -23,9 +23,10 @@ public class AppendingList<E> extends AbstractList<E> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param lists is the array of lists to "concatenate" in the order of the array.
    */
+  @SafeVarargs
   public AppendingList(List<? extends E>... lists) {
 
     super();

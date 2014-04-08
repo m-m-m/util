@@ -29,7 +29,7 @@ public abstract class AbstractHashKey<T> implements Serializable {
   private int hashCode;
 
   /**
-   * The constructor for de-serialization.
+   * The constructor for de-serialization in GWT.
    */
   protected AbstractHashKey() {
 

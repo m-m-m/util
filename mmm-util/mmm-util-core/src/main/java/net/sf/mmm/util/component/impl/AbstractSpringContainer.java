@@ -17,7 +17,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * <b>ATTENTION:</b><br>
  * Please check your dependencies as <code>spring</code> is an optional dependency in
  * <code>mmm-util-core</code>.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -28,7 +28,7 @@ public abstract class AbstractSpringContainer extends AbstractLoggableComponent 
 
   /**
    * The constructor.
-   * 
+   *
    * @param applicationContext is the {@link ConfigurableApplicationContext} to adapt.
    */
   protected AbstractSpringContainer(ConfigurableApplicationContext applicationContext) {
@@ -70,6 +70,7 @@ public abstract class AbstractSpringContainer extends AbstractLoggableComponent 
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public <COMPONENT_API> COMPONENT_API get(Class<COMPONENT_API> apiClass) {
 
