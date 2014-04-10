@@ -34,9 +34,9 @@
 		.st23 {fill:#b5cb85;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
 		.st24 {fill:#85a446;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
 		.st25 {fill:#ebf1de;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
-		.st26 {marker-end:url(#mrkr1-301);stroke:#000000;stroke-dasharray:3.36,2.4;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.48}
+		.st26 {marker-end:url(#mrkr1-289);stroke:#000000;stroke-dasharray:3.36,2.4;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.48}
 		.st27 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.10810810810811}
-		.st28 {marker-end:url(#mrkr1-301);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.48}
+		.st28 {marker-end:url(#mrkr1-289);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.48}
 		.st29 {fill:#000000;font-family:Arial;font-size:0.333344em;font-weight:bold}
 		.st30 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
 		.st31 {fill:#000000;font-family:Arial;font-size:0.333344em}
@@ -51,7 +51,7 @@
 		<marker id="mrkr1-46" class="st15" v:arrowType="1" v:arrowSize="3" orient="auto" markerUnits="strokeWidth" preserveAspectRatio="xMidYMid meet" overflow="visible">
 			<use xlink:href="#lend1" transform="scale(-7.75,-7.75) " xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
 		</marker>
-		<marker id="mrkr1-301" class="st27" v:arrowType="1" v:arrowSize="4" orient="auto" markerUnits="strokeWidth" preserveAspectRatio="xMidYMid meet" overflow="visible">
+		<marker id="mrkr1-289" class="st27" v:arrowType="1" v:arrowSize="4" orient="auto" markerUnits="strokeWidth" preserveAspectRatio="xMidYMid meet" overflow="visible">
 			<use xlink:href="#lend1" transform="scale(-9.25,-9.25) " xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
 		</marker>
 	</defs>
@@ -349,31 +349,10 @@
 				<path d="M-7.07 843.48 L-7.07 846.14 L-7.1 846.14 L-7.1 854.47" class="st18"/>
 			</g>
 		</g>
-		<g id="group102-96" transform="translate(395.433,-306.496)" v:mID="102" v:groupContext="group" v:layerMember="3">
-			<v:userDefs>
-				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
-				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
-				<v:ud v:nameU="UMLError" v:val="VT0(0):26"/>
-				<v:ud v:nameU="BeginAngle" v:val="VT0(1.5707963267949):32"/>
-				<v:ud v:nameU="DX1" v:val="VT0(8.8817841970013E-016):1"/>
-				<v:ud v:nameU="UMLPresOption1" v:val="VT0(2):26"/>
-				<v:ud v:nameU="UMLVersion" v:val="VT0(2):26"/>
-				<v:ud v:nameU="DY1" v:val="VT0(0.14852362204724):1"/>
-				<v:ud v:nameU="visDescription" v:val="VT4(Indicates a classification relationship between a more general and a more specific element.)"/>
-				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
-			</v:userDefs>
-			
-			<g id="shape103-97" v:mID="103" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
-				
-			</g>
-			<g id="shape102-99" v:mID="102" v:groupContext="groupContent" v:layerMember="3">
-				<path d="M7.09 841.89 L7.09 663.66" class="st18"/>
-			</g>
-		</g>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/transferobject/api/CompositeTo.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group108-102" transform="translate(-330.945,462.047) rotate(-90)" v:mID="108" v:groupContext="group" v:layerMember="3">
+			<g id="group108-96" transform="translate(-330.945,462.047) rotate(-90)" v:mID="108" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape109-103" v:mID="109" v:groupContext="shape" v:layerMember="3">
+				<g id="shape109-97" v:mID="109" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">CompositeTo</desc>
 					<v:userDefs>
@@ -383,17 +362,17 @@
 					<v:textRect cx="24.0945" cy="829.134" width="48.19" height="25.5118"/>
 					<rect x="0" y="816.378" width="48.189" height="25.5118" class="st20"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>CompositeTo</text>				</g>
-				<g id="shape110-106" v:mID="110" v:groupContext="shape" v:layerMember="3" transform="translate(-4.39648E-014,-6.37795)">
+				<g id="shape110-100" v:mID="110" v:groupContext="shape" v:layerMember="3" transform="translate(-4.39648E-014,-6.37795)">
 					
 					<path d="M0 841.89 L48.19 841.89" class="st12"/>
 				</g>
-				<g id="shape111-109" v:mID="111" v:groupContext="shape" v:layerMember="3" transform="translate(-1.59872E-014,-12.7559)">
+				<g id="shape111-103" v:mID="111" v:groupContext="shape" v:layerMember="3" transform="translate(-1.59872E-014,-12.7559)">
 					
 					<path d="M0 841.89 L48.19 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
-		<g id="group116-112" transform="translate(523.701,-379.843)" v:mID="116" v:groupContext="group" v:layerMember="3">
+		<g id="group116-106" transform="translate(523.701,-379.843)" v:mID="116" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -407,14 +386,14 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape117-113" v:mID="117" v:groupContext="shape" v:layerMember="3" transform="translate(-15.2,22.4)">
+			<g id="shape117-107" v:mID="117" v:groupContext="shape" v:layerMember="3" transform="translate(-15.2,22.4)">
 				
 			</g>
-			<g id="shape116-115" v:mID="116" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape116-109" v:mID="116" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M-1.06 841.89 L-7.87 841.89 L-7.87 865.98 L-13.11 865.98" class="st18"/>
 			</g>
 		</g>
-		<g id="group118-118" transform="translate(523.878,-379.843)" v:mID="118" v:groupContext="group" v:layerMember="3">
+		<g id="group118-112" transform="translate(523.878,-379.843)" v:mID="118" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -428,14 +407,14 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape119-119" v:mID="119" v:groupContext="shape" v:layerMember="3" transform="translate(-15.2,22.4)">
+			<g id="shape119-113" v:mID="119" v:groupContext="shape" v:layerMember="3" transform="translate(-15.2,22.4)">
 				
 			</g>
-			<g id="shape118-121" v:mID="118" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape118-115" v:mID="118" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M-1.24 841.89 L-8.04 841.89 L-8.04 817.8 L-12.93 817.8" class="st18"/>
 			</g>
 		</g>
-		<g id="group120-124" transform="translate(476.22,-355.748)" v:mID="120" v:groupContext="group" v:layerMember="3">
+		<g id="group120-118" transform="translate(476.22,-355.748)" v:mID="120" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -449,16 +428,16 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape121-125" v:mID="121" v:groupContext="shape" v:layerMember="3" transform="translate(-15.2,22.4)">
+			<g id="shape121-119" v:mID="121" v:groupContext="shape" v:layerMember="3" transform="translate(-15.2,22.4)">
 				
 			</g>
-			<g id="shape120-127" v:mID="120" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape120-121" v:mID="120" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M0 841.89 L-17.01 841.89 L-17.01 960.24 L-45.35 960.24" class="st21"/>
 			</g>
 		</g>
-		<g id="group125-130" transform="translate(-283.465,640.63) rotate(-90)" v:mID="125" v:groupContext="group" v:layerMember="3">
+		<g id="group125-124" transform="translate(-283.465,640.63) rotate(-90)" v:mID="125" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape126-131" v:mID="126" v:groupContext="shape" v:layerMember="3">
+			<g id="shape126-125" v:mID="126" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">MyDatatype</desc>
 				<v:userDefs>
@@ -468,12 +447,12 @@
 				<v:textRect cx="29.7638" cy="829.134" width="59.53" height="25.5118"/>
 				<rect x="0" y="816.378" width="59.5276" height="25.5118" class="st19"/>
 				<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyDatatype</text>			</g>
-			<g id="shape127-134" v:mID="127" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17658E-011,-6.37795)">
+			<g id="shape127-128" v:mID="127" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17658E-011,-6.37795)">
 				
 				<path d="M0 841.89 L59.53 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="group128-137" transform="translate(552.756,-273.455)" v:mID="128" v:groupContext="group" v:layerMember="3">
+		<g id="group128-131" transform="translate(552.756,-273.455)" v:mID="128" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -487,15 +466,15 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape129-138" v:mID="129" v:groupContext="shape" v:layerMember="3" transform="translate(-18.1664,22.4)">
+			<g id="shape129-132" v:mID="129" v:groupContext="shape" v:layerMember="3" transform="translate(-18.1664,22.4)">
 				
 			</g>
-			<g id="shape128-140" v:mID="128" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape128-134" v:mID="128" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M-7.09 843.4 L-7.09 854.56" class="st18"/>
 			</g>
 		</g>
 		<a xlink:href="http://m-m-m.sourceforge.net/mmm-persistence/index.html" xlink:title="Maven-Site" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="shape15-143" v:mID="15" v:groupContext="shape" v:layerMember="1" transform="translate(35.3323,-65.1969)">
+			<g id="shape15-137" v:mID="15" v:groupContext="shape" v:layerMember="1" transform="translate(35.3323,-65.1969)">
 				
 				<desc content="structured text">Persistence (mmm-persistence)</desc>
 				<v:userDefs>
@@ -507,9 +486,9 @@
 				<text x="142.79" y="724.5" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>Persistence (mmm-persistence)</text>			</g>
 		</a>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/persistence/base/jpa/AbstractJpaEntity.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group62-146" transform="translate(76.5354,-69.4488)" v:mID="62" v:groupContext="group" v:layerMember="3">
+			<g id="group62-140" transform="translate(76.5354,-69.4488)" v:mID="62" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape63-147" v:mID="63" v:groupContext="shape" v:layerMember="3">
+				<g id="shape63-141" v:mID="63" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">AbstractJpaEntity</desc>
 					<v:userDefs>
@@ -519,19 +498,19 @@
 					<v:textRect cx="35.4331" cy="829.134" width="70.87" height="25.5118"/>
 					<rect x="0" y="816.378" width="70.8661" height="25.5118" class="st20"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>AbstractJpaEntity</text>				</g>
-				<g id="shape64-150" v:mID="64" v:groupContext="shape" v:layerMember="3" transform="translate(1.59872E-014,-6.37795)">
+				<g id="shape64-144" v:mID="64" v:groupContext="shape" v:layerMember="3" transform="translate(1.59872E-014,-6.37795)">
 					
 					<path d="M0 841.89 L70.87 841.89" class="st12"/>
 				</g>
-				<g id="shape65-153" v:mID="65" v:groupContext="shape" v:layerMember="3" transform="translate(2.79776E-014,-12.7559)">
+				<g id="shape65-147" v:mID="65" v:groupContext="shape" v:layerMember="3" transform="translate(2.79776E-014,-12.7559)">
 					
 					<path d="M0 841.89 L70.87 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
-		<g id="group68-156" transform="translate(212.598,-69.4488)" v:mID="68" v:groupContext="group" v:layerMember="3">
+		<g id="group68-150" transform="translate(212.598,-69.4488)" v:mID="68" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape69-157" v:mID="69" v:groupContext="shape" v:layerMember="3">
+			<g id="shape69-151" v:mID="69" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">MyObjectEntity</desc>
 				<v:userDefs>
@@ -541,16 +520,16 @@
 				<v:textRect cx="38.2677" cy="829.134" width="76.54" height="25.5118"/>
 				<rect x="0" y="816.378" width="76.5354" height="25.5118" class="st19"/>
 				<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyObjectEntity</text>			</g>
-			<g id="shape70-160" v:mID="70" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+			<g id="shape70-154" v:mID="70" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 				
 				<path d="M0 841.89 L76.54 841.89" class="st12"/>
 			</g>
-			<g id="shape71-163" v:mID="71" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
+			<g id="shape71-157" v:mID="71" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
 				
 				<path d="M0 841.89 L76.54 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="group72-166" transform="translate(156.26,-75.1181)" v:mID="72" v:groupContext="group" v:layerMember="3">
+		<g id="group72-160" transform="translate(156.26,-75.1181)" v:mID="72" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -564,17 +543,17 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape73-167" v:mID="73" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape73-161" v:mID="73" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape72-169" v:mID="72" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape72-163" v:mID="72" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M0 834.8 L56.34 834.8" class="st21"/>
 			</g>
 		</g>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/persistence/api/query/JpqlBuilder.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group9-172" transform="translate(42.5197,-106.299)" v:mID="9" v:groupContext="group" v:layerMember="3">
+			<g id="group9-166" transform="translate(42.5197,-106.299)" v:mID="9" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape10-173" v:mID="10" v:groupContext="shape" v:layerMember="3">
+				<g id="shape10-167" v:mID="10" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">JpqlBuilder</desc>
 					<v:userDefs>
@@ -584,13 +563,13 @@
 					<v:textRect cx="24.8031" cy="829.134" width="49.61" height="25.5118"/>
 					<rect x="0" y="816.378" width="49.6063" height="25.5118" class="st10"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>JpqlBuilder</text>				</g>
-				<g id="shape11-176" v:mID="11" v:groupContext="shape" v:layerMember="3" transform="translate(-1.59872E-014,-6.37795)">
+				<g id="shape11-170" v:mID="11" v:groupContext="shape" v:layerMember="3" transform="translate(-1.59872E-014,-6.37795)">
 					
 					<path d="M0 841.89 L49.61 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
-		<g id="group23-179" transform="translate(187.441,-155.906)" v:mID="23" v:groupContext="group" v:layerMember="3">
+		<g id="group23-173" transform="translate(187.441,-155.906)" v:mID="23" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -604,14 +583,14 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape24-180" v:mID="24" v:groupContext="shape" v:layerMember="3" transform="translate(9.7303,22.4)">
+			<g id="shape24-174" v:mID="24" v:groupContext="shape" v:layerMember="3" transform="translate(9.7303,22.4)">
 				
 			</g>
-			<g id="shape23-182" v:mID="23" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape23-176" v:mID="23" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M0 834.8 L25.16 834.8" class="st18"/>
 			</g>
 		</g>
-		<g id="group29-185" transform="translate(141.732,-143.681)" v:mID="29" v:groupContext="group" v:layerMember="3">
+		<g id="group29-179" transform="translate(141.732,-143.681)" v:mID="29" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -625,14 +604,14 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape30-186" v:mID="30" v:groupContext="shape" v:layerMember="3" transform="translate(-9.6728,22.4)">
+			<g id="shape30-180" v:mID="30" v:groupContext="shape" v:layerMember="3" transform="translate(-9.6728,22.4)">
 				
 			</g>
-			<g id="shape29-188" v:mID="29" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape29-182" v:mID="29" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M7.09 844.19 L7.09 853.76" class="st18"/>
 			</g>
 		</g>
-		<g id="group31-191" transform="translate(201.437,-111.969)" v:mID="31" v:groupContext="group" v:layerMember="3">
+		<g id="group31-185" transform="translate(201.437,-111.969)" v:mID="31" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -646,16 +625,16 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape32-192" v:mID="32" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape32-186" v:mID="32" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape31-194" v:mID="31" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape31-188" v:mID="31" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M3.01 834.8 L11.16 834.8" class="st21"/>
 			</g>
 		</g>
-		<g id="group93-197" transform="translate(212.598,-106.299)" v:mID="93" v:groupContext="group" v:layerMember="3">
+		<g id="group93-191" transform="translate(212.598,-106.299)" v:mID="93" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape94-198" v:mID="94" v:groupContext="shape" v:layerMember="3">
+			<g id="shape94-192" v:mID="94" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">MyObjectDaoImpl</desc>
 				<v:userDefs>
@@ -665,16 +644,16 @@
 				<v:textRect cx="38.2677" cy="829.134" width="76.54" height="25.5118"/>
 				<rect x="0" y="816.378" width="76.5354" height="25.5118" class="st19"/>
 				<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyObjectDaoImpl</text>			</g>
-			<g id="shape95-201" v:mID="95" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+			<g id="shape95-195" v:mID="95" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 				
 				<path d="M0 841.89 L76.54 841.89" class="st12"/>
 			</g>
-			<g id="shape96-204" v:mID="96" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
+			<g id="shape96-198" v:mID="96" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
 				
 				<path d="M0 841.89 L76.54 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="group97-207" transform="translate(243.78,-143.681)" v:mID="97" v:groupContext="group" v:layerMember="3">
+		<g id="group97-201" transform="translate(243.78,-143.681)" v:mID="97" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -688,14 +667,14 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape98-208" v:mID="98" v:groupContext="shape" v:layerMember="3" transform="translate(-9.6728,22.4)">
+			<g id="shape98-202" v:mID="98" v:groupContext="shape" v:layerMember="3" transform="translate(-9.6728,22.4)">
 				
 			</g>
-			<g id="shape97-210" v:mID="97" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape97-204" v:mID="97" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M7.09 844.19 L7.09 853.76" class="st18"/>
 			</g>
 		</g>
-		<g id="group85-213" transform="translate(498.155,-192.402)" v:mID="85" v:groupContext="group" v:layerMember="3">
+		<g id="group85-207" transform="translate(498.155,-192.402)" v:mID="85" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -709,15 +688,15 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape86-214" v:mID="86" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape86-208" v:mID="86" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape85-216" v:mID="85" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape85-210" v:mID="85" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M0 841.89 L0 952.09 L-209.02 952.09" class="st18"/>
 			</g>
 		</g>
 		<a xlink:href="http://m-m-m.sourceforge.net/mmm-client/mmm-client-ui/index.html" xlink:title="Maven-Site" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="shape44-219" v:mID="44" v:groupContext="shape" v:layerMember="1" transform="translate(34.7244,-595.276)">
+			<g id="shape44-213" v:mID="44" v:groupContext="shape" v:layerMember="1" transform="translate(34.7244,-595.276)">
 				
 				<desc content="structured text">User Interface (mmm-client-ui)</desc>
 				<v:userDefs>
@@ -729,7 +708,7 @@
 				<text x="145.85" y="670.64" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>User Interface (mmm-client-ui)</text>			</g>
 		</a>
 		<a xlink:href="http://m-m-m.sourceforge.net/mmm-client/mmm-client-ui/mmm-client-ui-dialog/index.html" xlink:title="Maven-Site" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="shape212-222" v:mID="212" v:groupContext="shape" v:layerMember="1" transform="translate(42.5197,-600.945)">
+			<g id="shape212-216" v:mID="212" v:groupContext="shape" v:layerMember="1" transform="translate(42.5197,-600.945)">
 				
 				<desc content="structured text">Dialog (mmm-client-ui-dialog)</desc>
 				<v:userDefs>
@@ -741,7 +720,7 @@
 				<text x="140.22" y="803.87" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>Dialog (mmm-client-ui-dialog)</text>			</g>
 		</a>
 		<a xlink:href="http://m-m-m.sourceforge.net/mmm-client/mmm-client-ui/mmm-client-ui-widget/index.html" xlink:title="Maven-Site" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="shape61-225" v:mID="61" v:groupContext="shape" v:layerMember="1" transform="translate(42.5197,-660.472)">
+			<g id="shape61-219" v:mID="61" v:groupContext="shape" v:layerMember="1" transform="translate(42.5197,-660.472)">
 				
 				<desc content="structured text">Widget (mmm-client-ui-widget)</desc>
 				<v:userDefs>
@@ -752,7 +731,7 @@
 				<rect x="0" y="756.85" width="411.024" height="85.0394" class="st25"/>
 				<text x="137.72" y="769.85" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>Widget (mmm-client-ui-widget)</text>			</g>
 		</a>
-		<g id="group143-228" transform="translate(368.504,-143.681)" v:mID="143" v:groupContext="group" v:layerMember="3">
+		<g id="group143-222" transform="translate(368.504,-143.681)" v:mID="143" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -766,16 +745,16 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape144-229" v:mID="144" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape144-223" v:mID="144" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape143-231" v:mID="143" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape143-225" v:mID="143" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M7.09 844.19 L7.09 853.76" class="st21"/>
 			</g>
 		</g>
-		<g id="group145-234" transform="translate(328.819,-106.299)" v:mID="145" v:groupContext="group" v:layerMember="3">
+		<g id="group145-228" transform="translate(328.819,-106.299)" v:mID="145" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape146-235" v:mID="146" v:groupContext="shape" v:layerMember="3">
+			<g id="shape146-229" v:mID="146" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">MyDatatypeUserType</desc>
 				<v:userDefs>
@@ -785,18 +764,18 @@
 				<v:textRect cx="46.7717" cy="829.134" width="93.55" height="25.5118"/>
 				<rect x="0" y="816.378" width="93.5433" height="25.5118" class="st19"/>
 				<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyDatatypeUserType</text>			</g>
-			<g id="shape147-238" v:mID="147" v:groupContext="shape" v:layerMember="3" transform="translate(6.39488E-014,-6.37795)">
+			<g id="shape147-232" v:mID="147" v:groupContext="shape" v:layerMember="3" transform="translate(6.39488E-014,-6.37795)">
 				
 				<path d="M0 841.89 L93.54 841.89" class="st12"/>
 			</g>
-			<g id="shape148-241" v:mID="148" v:groupContext="shape" v:layerMember="3" transform="translate(6.39488E-014,-12.7559)">
+			<g id="shape148-235" v:mID="148" v:groupContext="shape" v:layerMember="3" transform="translate(6.39488E-014,-12.7559)">
 				
 				<path d="M0 841.89 L93.54 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="group139-244" transform="translate(121.89,-8.50394)" v:mID="139" v:groupContext="group" v:layerMember="3">
+		<g id="group139-238" transform="translate(121.89,-8.50394)" v:mID="139" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape140-245" v:mID="140" v:groupContext="shape" v:layerMember="3">
+			<g id="shape140-239" v:mID="140" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">CustomClass</desc>
 				<v:userDefs>
@@ -806,18 +785,18 @@
 				<v:textRect cx="38.2677" cy="829.134" width="76.54" height="25.5118"/>
 				<rect x="0" y="816.378" width="76.5354" height="25.5118" class="st19"/>
 				<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>CustomClass</text>			</g>
-			<g id="shape141-248" v:mID="141" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+			<g id="shape141-242" v:mID="141" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 				
 				<path d="M0 841.89 L76.54 841.89" class="st12"/>
 			</g>
-			<g id="shape142-251" v:mID="142" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
+			<g id="shape142-245" v:mID="142" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
 				
 				<path d="M0 841.89 L76.54 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="group149-254" transform="translate(36.8504,-8.50394)" v:mID="149" v:groupContext="group" v:layerMember="3">
+		<g id="group149-248" transform="translate(36.8504,-8.50394)" v:mID="149" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape150-255" v:mID="150" v:groupContext="shape" v:layerMember="3">
+			<g id="shape150-249" v:mID="150" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">FrameworkClass</desc>
 				<v:userDefs>
@@ -827,39 +806,18 @@
 				<v:textRect cx="35.4331" cy="829.134" width="70.87" height="25.5118"/>
 				<rect x="0" y="816.378" width="70.8661" height="25.5118" class="st20"/>
 				<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>FrameworkClass</text>			</g>
-			<g id="shape151-258" v:mID="151" v:groupContext="shape" v:layerMember="3" transform="translate(1.59872E-014,-6.37795)">
+			<g id="shape151-252" v:mID="151" v:groupContext="shape" v:layerMember="3" transform="translate(1.59872E-014,-6.37795)">
 				
 				<path d="M0 841.89 L70.87 841.89" class="st12"/>
 			</g>
-			<g id="shape152-261" v:mID="152" v:groupContext="shape" v:layerMember="3" transform="translate(2.79776E-014,-12.7559)">
+			<g id="shape152-255" v:mID="152" v:groupContext="shape" v:layerMember="3" transform="translate(2.79776E-014,-12.7559)">
 				
 				<path d="M0 841.89 L70.87 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="group157-264" transform="translate(351.142,-277.795)" v:mID="157" v:groupContext="group" v:layerMember="3">
-			<v:userDefs>
-				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
-				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
-				<v:ud v:nameU="UMLError" v:val="VT0(0):26"/>
-				<v:ud v:nameU="BeginAngle" v:val="VT0(8.594183565861E-015):32"/>
-				<v:ud v:nameU="DX1" v:val="VT0(-0.051673228346452):1"/>
-				<v:ud v:nameU="UMLPresOption1" v:val="VT0(2):26"/>
-				<v:ud v:nameU="UMLVersion" v:val="VT0(2):26"/>
-				<v:ud v:nameU="DY1" v:val="VT0(4.4408920985006E-016):1"/>
-				<v:ud v:nameU="visDescription" v:val="VT4(Indicates a classification relationship between a more general and a more specific element.)"/>
-				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
-			</v:userDefs>
+		<g id="group159-258" transform="translate(212.598,-223.087)" v:mID="159" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape158-265" v:mID="158" v:groupContext="shape" v:layerMember="3" transform="translate(-15.2,22.4)">
-				
-			</g>
-			<g id="shape157-267" v:mID="157" v:groupContext="groupContent" v:layerMember="3">
-				<path d="M0 834.8 L-62.01 834.8" class="st18"/>
-			</g>
-		</g>
-		<g id="group159-270" transform="translate(212.598,-223.087)" v:mID="159" v:groupContext="group" v:layerMember="3">
-			
-			<g id="shape160-271" v:mID="160" v:groupContext="shape" v:layerMember="3">
+			<g id="shape160-259" v:mID="160" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">MyUseCaseImpl</desc>
 				<v:userDefs>
@@ -869,16 +827,16 @@
 				<v:textRect cx="38.2677" cy="829.134" width="76.54" height="25.5118"/>
 				<rect x="0" y="816.378" width="76.5354" height="25.5118" class="st19"/>
 				<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyUseCaseImpl</text>			</g>
-			<g id="shape161-274" v:mID="161" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+			<g id="shape161-262" v:mID="161" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 				
 				<path d="M0 841.89 L76.54 841.89" class="st12"/>
 			</g>
-			<g id="shape162-277" v:mID="162" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
+			<g id="shape162-265" v:mID="162" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
 				
 				<path d="M0 841.89 L76.54 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="group163-280" transform="translate(243.78,-263.268)" v:mID="163" v:groupContext="group" v:layerMember="3">
+		<g id="group163-268" transform="translate(243.78,-263.268)" v:mID="163" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -892,16 +850,16 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape164-281" v:mID="164" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape164-269" v:mID="164" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape163-283" v:mID="163" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape163-271" v:mID="163" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M7.09 841.89 L7.09 856.56" class="st18"/>
 			</g>
 		</g>
-		<g id="group165-286" transform="translate(184.252,-605.197)" v:mID="165" v:groupContext="group" v:layerMember="3">
+		<g id="group165-274" transform="translate(184.252,-605.197)" v:mID="165" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape166-287" v:mID="166" v:groupContext="shape" v:layerMember="3">
+			<g id="shape166-275" v:mID="166" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">MyMaskDialogController</desc>
 				<v:userDefs>
@@ -911,16 +869,16 @@
 				<v:textRect cx="48.189" cy="829.134" width="96.38" height="25.5118"/>
 				<rect x="0" y="816.378" width="96.378" height="25.5118" class="st19"/>
 				<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyMaskDialogController</text>			</g>
-			<g id="shape167-290" v:mID="167" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+			<g id="shape167-278" v:mID="167" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 				
 				<path d="M0 841.89 L96.38 841.89" class="st12"/>
 			</g>
-			<g id="shape168-293" v:mID="168" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
+			<g id="shape168-281" v:mID="168" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
 				
 				<path d="M0 841.89 L96.38 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="shape169-296" v:mID="169" v:groupContext="shape" v:layerMember="3" transform="translate(422.362,-119.055)">
+		<g id="shape169-284" v:mID="169" v:groupContext="shape" v:layerMember="3" transform="translate(422.362,-119.055)">
 			
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(31):26"/>
@@ -934,9 +892,9 @@
 			<path d="M0 841.89 L73.43 841.89 A2.3622 2.3622 0 0 1 78.16 841.89 L123.31 841.89 L123.31 759.69" class="st26"/>
 		</g>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/service/impl/gwt/server/package-summary.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group170-302" transform="translate(40.3937,-333.071)" v:mID="170" v:groupContext="group" v:layerMember="3">
+			<g id="group170-290" transform="translate(40.3937,-333.071)" v:mID="170" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape171-303" v:mID="171" v:groupContext="shape" v:layerMember="3">
+				<g id="shape171-291" v:mID="171" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">RemoteInvocationGenericServiceImplGwt</desc>
 					<v:userDefs>
@@ -946,17 +904,17 @@
 					<v:textRect cx="78.6614" cy="829.134" width="157.33" height="25.5118"/>
 					<rect x="0" y="816.378" width="157.323" height="25.5118" class="st20"/>
 					<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>RemoteInvocationGenericServiceImplGwt</text>				</g>
-				<g id="shape172-306" v:mID="172" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+				<g id="shape172-294" v:mID="172" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 					
 					<path d="M0 841.89 L157.32 841.89" class="st12"/>
 				</g>
-				<g id="shape173-309" v:mID="173" v:groupContext="shape" v:layerMember="3" transform="translate(7.99361E-014,-12.7559)">
+				<g id="shape173-297" v:mID="173" v:groupContext="shape" v:layerMember="3" transform="translate(7.99361E-014,-12.7559)">
 					
 					<path d="M0 841.89 L157.32 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
-		<g id="group174-312" transform="translate(111.969,-378.071)" v:mID="174" v:groupContext="group" v:layerMember="3">
+		<g id="group174-300" transform="translate(111.969,-378.071)" v:mID="174" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -970,16 +928,16 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape175-313" v:mID="175" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape175-301" v:mID="175" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape174-315" v:mID="174" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape174-303" v:mID="174" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M7.09 841.89 L7.09 861.38" class="st21"/>
 			</g>
 		</g>
-		<g id="group176-318" transform="translate(184.252,-668.976)" v:mID="176" v:groupContext="group" v:layerMember="3">
+		<g id="group176-306" transform="translate(184.252,-668.976)" v:mID="176" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape177-319" v:mID="177" v:groupContext="shape" v:layerMember="3">
+			<g id="shape177-307" v:mID="177" v:groupContext="shape" v:layerMember="3">
 				
 				<desc content="structured text">MyMaskView</desc>
 				<v:userDefs>
@@ -989,16 +947,16 @@
 				<v:textRect cx="48.189" cy="829.134" width="96.38" height="25.5118"/>
 				<rect x="0" y="816.378" width="96.378" height="25.5118" class="st19"/>
 				<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyMaskView</text>			</g>
-			<g id="shape178-322" v:mID="178" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+			<g id="shape178-310" v:mID="178" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 				
 				<path d="M0 841.89 L96.38 841.89" class="st12"/>
 			</g>
-			<g id="shape179-325" v:mID="179" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
+			<g id="shape179-313" v:mID="179" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
 				
 				<path d="M0 841.89 L96.38 841.89" class="st12"/>
 			</g>
 		</g>
-		<g id="group180-328" transform="translate(225.354,-630.709)" v:mID="180" v:groupContext="group" v:layerMember="3">
+		<g id="group180-316" transform="translate(225.354,-630.709)" v:mID="180" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(23):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -1015,26 +973,26 @@
 				<v:ud v:nameU="DY3" v:val="VT0(0.015944881889762):1"/>
 			</v:userDefs>
 			
-			<g id="shape181-329" v:mID="181" v:groupContext="shape" v:layerMember="3" transform="translate(-6.00455,-6.2392)">
+			<g id="shape181-317" v:mID="181" v:groupContext="shape" v:layerMember="3" transform="translate(-6.00455,-6.2392)">
 				
 			</g>
-			<g id="shape182-331" v:mID="182" v:groupContext="shape" v:layerMember="3" transform="translate(12.1778,-6.2392)">
+			<g id="shape182-319" v:mID="182" v:groupContext="shape" v:layerMember="3" transform="translate(12.1778,-6.2392)">
 				
 			</g>
-			<g id="shape183-333" v:mID="183" v:groupContext="shape" v:layerMember="3" transform="translate(-6.00455,-16.8285)">
+			<g id="shape183-321" v:mID="183" v:groupContext="shape" v:layerMember="3" transform="translate(-6.00455,-16.8285)">
 				
 			</g>
-			<g id="shape184-335" v:mID="184" v:groupContext="shape" v:layerMember="3" transform="translate(12.1778,-16.8285)">
+			<g id="shape184-323" v:mID="184" v:groupContext="shape" v:layerMember="3" transform="translate(12.1778,-16.8285)">
 				
 			</g>
-			<g id="shape180-337" v:mID="180" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape180-325" v:mID="180" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M7.09 841.89 L7.09 803.62" class="st21"/>
 			</g>
 		</g>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/api/widget/UiWidgetFactory.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group188-340" transform="translate(348.661,-704.409)" v:mID="188" v:groupContext="group" v:layerMember="3">
+			<g id="group188-328" transform="translate(348.661,-704.409)" v:mID="188" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape189-341" v:mID="189" v:groupContext="shape" v:layerMember="3">
+				<g id="shape189-329" v:mID="189" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">UiWidgetFactory</desc>
 					<v:userDefs>
@@ -1044,16 +1002,16 @@
 					<v:textRect cx="48.189" cy="829.134" width="96.38" height="25.5118"/>
 					<rect x="0" y="816.378" width="96.378" height="25.5118" class="st10"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>UiWidgetFactory</text>				</g>
-				<g id="shape190-344" v:mID="190" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+				<g id="shape190-332" v:mID="190" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 					
 					<path d="M0 841.89 L96.38 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/api/UiContext.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group191-347" transform="translate(80.6929,-751.748)" v:mID="191" v:groupContext="group" v:layerMember="3">
+			<g id="group191-335" transform="translate(80.6929,-751.748)" v:mID="191" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape192-348" v:mID="192" v:groupContext="shape" v:layerMember="3">
+				<g id="shape192-336" v:mID="192" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">UiContext</desc>
 					<v:userDefs>
@@ -1063,13 +1021,13 @@
 					<v:textRect cx="33.3071" cy="829.134" width="66.62" height="25.5118"/>
 					<rect x="0" y="816.378" width="66.6142" height="25.5118" class="st10"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>UiContext</text>				</g>
-				<g id="shape193-351" v:mID="193" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+				<g id="shape193-339" v:mID="193" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 					
 					<path d="M0 841.89 L66.61 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
-		<g id="group208-354" transform="translate(106.866,-706.447)" v:mID="208" v:groupContext="group" v:layerMember="3">
+		<g id="group208-342" transform="translate(106.866,-706.447)" v:mID="208" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -1083,14 +1041,14 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape209-355" v:mID="209" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape209-343" v:mID="209" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape208-357" v:mID="208" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape208-345" v:mID="208" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M7.09 844.1 L7.09 853.85" class="st18"/>
 			</g>
 		</g>
-		<g id="group210-360" transform="translate(156.26,-610.866)" v:mID="210" v:groupContext="group" v:layerMember="3">
+		<g id="group210-348" transform="translate(156.26,-610.866)" v:mID="210" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -1104,14 +1062,14 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape211-361" v:mID="211" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape211-349" v:mID="211" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape210-363" v:mID="210" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape210-351" v:mID="210" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M0 834.8 L27.99 834.8" class="st21"/>
 			</g>
 		</g>
-		<g id="group213-366" transform="translate(170.593,-674.622)" v:mID="213" v:groupContext="group" v:layerMember="3">
+		<g id="group213-354" transform="translate(170.593,-674.622)" v:mID="213" v:groupContext="group" v:layerMember="3">
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(22):26"/>
 				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
@@ -1125,17 +1083,17 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			
-			<g id="shape214-367" v:mID="214" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
+			<g id="shape214-355" v:mID="214" v:groupContext="shape" v:layerMember="3" transform="translate(7.2,22.4)">
 				
 			</g>
-			<g id="shape213-369" v:mID="213" v:groupContext="groupContent" v:layerMember="3">
+			<g id="shape213-357" v:mID="213" v:groupContext="groupContent" v:layerMember="3">
 				<path d="M0.51 834.83 L7.32 834.83 L7.32 834.78 L13.66 834.78" class="st21"/>
 			</g>
 		</g>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/api/dialog/DialogManager.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group215-372" transform="translate(364.252,-605.197)" v:mID="215" v:groupContext="group" v:layerMember="3">
+			<g id="group215-360" transform="translate(364.252,-605.197)" v:mID="215" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape216-373" v:mID="216" v:groupContext="shape" v:layerMember="3">
+				<g id="shape216-361" v:mID="216" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">DialogManager</desc>
 					<v:userDefs>
@@ -1145,13 +1103,13 @@
 					<v:textRect cx="32.5984" cy="829.134" width="65.2" height="25.5118"/>
 					<rect x="0" y="816.378" width="65.1969" height="25.5118" class="st10"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>DialogManager</text>				</g>
-				<g id="shape217-376" v:mID="217" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+				<g id="shape217-364" v:mID="217" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 					
 					<path d="M0 841.89 L65.2 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
-		<g id="shape199-379" v:mID="199" v:groupContext="shape" v:layerMember="3" transform="translate(106.89,-738.089)">
+		<g id="shape199-367" v:mID="199" v:groupContext="shape" v:layerMember="3" transform="translate(106.89,-738.089)">
 			
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(31):26"/>
@@ -1164,7 +1122,7 @@
 			</v:userDefs>
 			<path d="M7.06 841.38 L7.06 834.57 L7.11 834.57 L7.11 828.23" class="st28"/>
 		</g>
-		<g id="shape194-384" v:mID="194" v:groupContext="shape" v:layerMember="3" transform="translate(147.307,-764.504)">
+		<g id="shape194-372" v:mID="194" v:groupContext="shape" v:layerMember="3" transform="translate(147.307,-764.504)">
 			
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(31):26"/>
@@ -1177,7 +1135,7 @@
 			</v:userDefs>
 			<path d="M0 841.89 L249.54 841.89 L249.54 876.47" class="st28"/>
 		</g>
-		<g id="shape195-389" v:mID="195" v:groupContext="shape" v:layerMember="3" transform="translate(510.911,-223.937)">
+		<g id="shape195-377" v:mID="195" v:groupContext="shape" v:layerMember="3" transform="translate(510.911,-223.937)">
 			
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(31):26"/>
@@ -1190,7 +1148,7 @@
 			</v:userDefs>
 			<path d="M0 834.8 L22 834.8" class="st28"/>
 		</g>
-		<g id="shape33-394" v:mID="33" v:groupContext="shape" v:layerMember="3" transform="translate(104.173,-111.969)">
+		<g id="shape33-382" v:mID="33" v:groupContext="shape" v:layerMember="3" transform="translate(104.173,-111.969)">
 			
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(31):26"/>
@@ -1204,9 +1162,9 @@
 			<path d="M-2.13 834.8 L-12.05 834.8" class="st28"/>
 		</g>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/nls/api/NlsMessage.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group66-399" transform="translate(-330.945,408.189) rotate(-90)" v:mID="66" v:groupContext="group" v:layerMember="3">
+			<g id="group66-387" transform="translate(-330.945,408.189) rotate(-90)" v:mID="66" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape67-400" v:mID="67" v:groupContext="shape" v:layerMember="3">
+				<g id="shape67-388" v:mID="67" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">NlsMessage</desc>
 					<v:userDefs>
@@ -1216,16 +1174,16 @@
 					<v:textRect cx="26.9291" cy="829.134" width="53.86" height="25.5118"/>
 					<rect x="0" y="816.378" width="53.8583" height="25.5118" class="st10"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>NlsMessage</text>				</g>
-				<g id="shape91-403" v:mID="91" v:groupContext="shape" v:layerMember="3" transform="translate(-4.39648E-014,-6.37795)">
+				<g id="shape91-391" v:mID="91" v:groupContext="shape" v:layerMember="3" transform="translate(-4.39648E-014,-6.37795)">
 					
 					<path d="M0 841.89 L53.86 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/nls/api/NlsRuntimeException.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group92-406" transform="translate(-330.945,348.661) rotate(-90)" v:mID="92" v:groupContext="group" v:layerMember="3">
+			<g id="group92-394" transform="translate(-330.945,348.661) rotate(-90)" v:mID="92" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape130-407" v:mID="130" v:groupContext="shape" v:layerMember="3">
+				<g id="shape130-395" v:mID="130" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">NlsRuntimeException</desc>
 					<v:userDefs>
@@ -1235,20 +1193,20 @@
 					<v:textRect cx="48.189" cy="829.134" width="96.38" height="25.5118"/>
 					<rect x="0" y="816.378" width="96.378" height="25.5118" class="st20"/>
 					<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>NlsRuntimeException</text>				</g>
-				<g id="shape131-410" v:mID="131" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17418E-011,-6.37795)">
+				<g id="shape131-398" v:mID="131" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17418E-011,-6.37795)">
 					
 					<path d="M0 841.89 L96.38 841.89" class="st12"/>
 				</g>
-				<g id="shape132-413" v:mID="132" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
+				<g id="shape132-401" v:mID="132" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
 					
 					<path d="M0 841.89 L96.38 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/component/base/AbstractLoggableComponent.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group133-416" transform="translate(-284.882,348.661) rotate(-90)" v:mID="133" v:groupContext="group" v:layerMember="3">
+			<g id="group133-404" transform="translate(-284.882,348.661) rotate(-90)" v:mID="133" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape134-417" v:mID="134" v:groupContext="shape" v:layerMember="3">
+				<g id="shape134-405" v:mID="134" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">AbstractLoggableComponent</desc>
 					<v:userDefs>
@@ -1258,20 +1216,20 @@
 					<v:textRect cx="48.189" cy="829.134" width="96.38" height="25.5118"/>
 					<rect x="0" y="816.378" width="96.378" height="25.5118" class="st20"/>
 					<text x="4" y="823.98" class="st29" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>AbstractLoggableComponent</text>				</g>
-				<g id="shape196-420" v:mID="196" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17418E-011,-6.37795)">
+				<g id="shape196-408" v:mID="196" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17418E-011,-6.37795)">
 					
 					<path d="M0 841.89 L96.38 841.89" class="st12"/>
 				</g>
-				<g id="shape197-423" v:mID="197" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
+				<g id="shape197-411" v:mID="197" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
 					
 					<path d="M0 841.89 L96.38 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
 		<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/lang/api/EnumProvider.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-			<g id="group198-426" transform="translate(-284.882,408.189) rotate(-90)" v:mID="198" v:groupContext="group" v:layerMember="3">
+			<g id="group198-414" transform="translate(-284.882,408.189) rotate(-90)" v:mID="198" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape200-427" v:mID="200" v:groupContext="shape" v:layerMember="3">
+				<g id="shape200-415" v:mID="200" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">EnumProvider</desc>
 					<v:userDefs>
@@ -1281,13 +1239,13 @@
 					<v:textRect cx="26.9291" cy="829.134" width="53.86" height="25.5118"/>
 					<rect x="0" y="816.378" width="53.8583" height="25.5118" class="st10"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>EnumProvider</text>				</g>
-				<g id="shape201-430" v:mID="201" v:groupContext="shape" v:layerMember="3" transform="translate(-3.59712E-014,-6.37795)">
+				<g id="shape201-418" v:mID="201" v:groupContext="shape" v:layerMember="3" transform="translate(-3.59712E-014,-6.37795)">
 					
 					<path d="M0 841.89 L53.86 841.89" class="st12"/>
 				</g>
 			</g>
 		</a>
-		<g id="shape202-433" v:mID="202" v:groupContext="shape" v:layerMember="3" transform="translate(65.7638,-681.732)">
+		<g id="shape202-421" v:mID="202" v:groupContext="shape" v:layerMember="3" transform="translate(65.7638,-681.732)">
 			
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(31):26"/>
@@ -1300,7 +1258,7 @@
 			</v:userDefs>
 			<path d="M0 841.89 L-16.87 841.89 L-16.87 797.78 L14.88 797.78" class="st28"/>
 		</g>
-		<g id="shape203-438" v:mID="203" v:groupContext="shape" v:layerMember="3" transform="translate(409.606,-272.126)">
+		<g id="shape203-426" v:mID="203" v:groupContext="shape" v:layerMember="3" transform="translate(409.606,-484.724)">
 			
 			<v:userDefs>
 				<v:ud v:nameU="UMLShapeType" v:val="VT0(31):26"/>
@@ -1311,14 +1269,14 @@
 				<v:ud v:nameU="visDescription" v:val="VT4(Indicates a semantic relationship between two model elements.)"/>
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
-			<path d="M-7.09 841.89 L-7.09 863.86" class="st26"/>
+			<path d="M-7.09 841.89 L-7.09 1076.46" class="st26"/>
 		</g>
-		<g id="group219-443" transform="translate(80.6457,-704.232)" v:mID="219" v:groupContext="group" v:layerMember="3">
+		<g id="group219-431" transform="translate(80.6457,-704.232)" v:mID="219" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/api/widget/UiWidget.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group185-444" transform="translate(0,-8.85827)" v:mID="185" v:groupContext="group" v:layerMember="3">
+				<g id="group185-432" transform="translate(0,-8.85827)" v:mID="185" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape186-445" v:mID="186" v:groupContext="shape" v:layerMember="3">
+					<g id="shape186-433" v:mID="186" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">UiWidget</desc>
 						<v:userDefs>
@@ -1328,13 +1286,13 @@
 						<v:textRect cx="33.3071" cy="829.134" width="66.62" height="25.5118"/>
 						<rect x="0" y="816.378" width="66.6142" height="25.5118" class="st10"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>UiWidget</text>					</g>
-					<g id="shape187-448" v:mID="187" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+					<g id="shape187-436" v:mID="187" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 						
 						<path d="M0 841.89 L66.61 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape218-451" v:mID="218" v:groupContext="shape" v:layerMember="3" transform="translate(28.3465,0)">
+			<g id="shape218-439" v:mID="218" v:groupContext="shape" v:layerMember="3" transform="translate(28.3465,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1342,12 +1300,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group227-453" transform="translate(55.2756,-378.071)" v:mID="227" v:groupContext="group" v:layerMember="3">
+		<g id="group227-441" transform="translate(55.2756,-378.071)" v:mID="227" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/service/base/RemoteInvocationGenericService.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group38-454" transform="translate(0,-8.85827)" v:mID="38" v:groupContext="group" v:layerMember="3">
+				<g id="group38-442" transform="translate(0,-8.85827)" v:mID="38" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape39-455" v:mID="39" v:groupContext="shape" v:layerMember="3">
+					<g id="shape39-443" v:mID="39" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">RemoteInvocationGenericService</desc>
 						<v:userDefs>
@@ -1357,13 +1315,13 @@
 						<v:textRect cx="63.7795" cy="829.134" width="127.56" height="25.5118"/>
 						<rect x="0" y="816.378" width="127.559" height="25.5118" class="st10"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>RemoteInvocationGenericService</text>					</g>
-					<g id="shape40-458" v:mID="40" v:groupContext="shape" v:layerMember="3" transform="translate(-4.79616E-014,-6.37795)">
+					<g id="shape40-446" v:mID="40" v:groupContext="shape" v:layerMember="3" transform="translate(-4.79616E-014,-6.37795)">
 						
 						<path d="M0 841.89 L127.56 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape221-461" v:mID="221" v:groupContext="shape" v:layerMember="3" transform="translate(58.8189,0)">
+			<g id="shape221-449" v:mID="221" v:groupContext="shape" v:layerMember="3" transform="translate(58.8189,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1371,11 +1329,11 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group230-463" transform="translate(212.598,-141.378)" v:mID="230" v:groupContext="group" v:layerMember="3">
+		<g id="group230-451" transform="translate(212.598,-141.378)" v:mID="230" v:groupContext="group" v:layerMember="3">
 			
-			<g id="group20-464" transform="translate(0,-8.85827)" v:mID="20" v:groupContext="group" v:layerMember="3">
+			<g id="group20-452" transform="translate(0,-8.85827)" v:mID="20" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape21-465" v:mID="21" v:groupContext="shape" v:layerMember="3">
+				<g id="shape21-453" v:mID="21" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">MyObjectDao</desc>
 					<v:userDefs>
@@ -1385,12 +1343,12 @@
 					<v:textRect cx="38.2677" cy="829.134" width="76.54" height="25.5118"/>
 					<rect x="0" y="816.378" width="76.5354" height="25.5118" class="st19"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyObjectDao</text>				</g>
-				<g id="shape22-468" v:mID="22" v:groupContext="shape" v:layerMember="3" transform="translate(-3.19744E-014,-6.37795)">
+				<g id="shape22-456" v:mID="22" v:groupContext="shape" v:layerMember="3" transform="translate(-3.19744E-014,-6.37795)">
 					
 					<path d="M0 841.89 L76.54 841.89" class="st12"/>
 				</g>
 			</g>
-			<g id="shape224-471" v:mID="224" v:groupContext="shape" v:layerMember="3" transform="translate(33.3071,0)">
+			<g id="shape224-459" v:mID="224" v:groupContext="shape" v:layerMember="3" transform="translate(33.3071,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1398,12 +1356,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group232-473" transform="translate(325.984,-141.378)" v:mID="232" v:groupContext="group" v:layerMember="3">
+		<g id="group232-461" transform="translate(325.984,-141.378)" v:mID="232" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/persistence/impl/hibernate/usertype/DatatypeUserType.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group135-474" transform="translate(7.99361E-015,-8.85827)" v:mID="135" v:groupContext="group" v:layerMember="3">
+				<g id="group135-462" transform="translate(7.99361E-015,-8.85827)" v:mID="135" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape136-475" v:mID="136" v:groupContext="shape" v:layerMember="3">
+					<g id="shape136-463" v:mID="136" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">DatatypeUserType</desc>
 						<v:userDefs>
@@ -1413,17 +1371,17 @@
 						<v:textRect cx="49.6063" cy="829.134" width="99.22" height="25.5118"/>
 						<rect x="0" y="816.378" width="99.2126" height="25.5118" class="st20"/>
 						<text x="4" y="824.88" class="st2" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>DatatypeUserType</text>					</g>
-					<g id="shape137-478" v:mID="137" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-6.37795)">
+					<g id="shape137-466" v:mID="137" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-6.37795)">
 						
 						<path d="M0 841.89 L99.21 841.89" class="st12"/>
 					</g>
-					<g id="shape138-481" v:mID="138" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
+					<g id="shape138-469" v:mID="138" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
 						
 						<path d="M0 841.89 L99.21 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape225-484" v:mID="225" v:groupContext="shape" v:layerMember="3" transform="translate(44.6457,0)">
+			<g id="shape225-472" v:mID="225" v:groupContext="shape" v:layerMember="3" transform="translate(44.6457,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1431,11 +1389,11 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group233-486" transform="translate(212.598,-263.268)" v:mID="233" v:groupContext="group" v:layerMember="3">
+		<g id="group233-474" transform="translate(212.598,-263.268)" v:mID="233" v:groupContext="group" v:layerMember="3">
 			
-			<g id="group154-487" transform="translate(0,-8.85827)" v:mID="154" v:groupContext="group" v:layerMember="3">
+			<g id="group154-475" transform="translate(0,-8.85827)" v:mID="154" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape155-488" v:mID="155" v:groupContext="shape" v:layerMember="3">
+				<g id="shape155-476" v:mID="155" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">MyUseCase</desc>
 					<v:userDefs>
@@ -1445,12 +1403,12 @@
 					<v:textRect cx="38.2677" cy="829.134" width="76.54" height="25.5118"/>
 					<rect x="0" y="816.378" width="76.5354" height="25.5118" class="st19"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyUseCase</text>				</g>
-				<g id="shape156-491" v:mID="156" v:groupContext="shape" v:layerMember="3" transform="translate(-3.19744E-014,-6.37795)">
+				<g id="shape156-479" v:mID="156" v:groupContext="shape" v:layerMember="3" transform="translate(-3.19744E-014,-6.37795)">
 					
 					<path d="M0 841.89 L76.54 841.89" class="st12"/>
 				</g>
 			</g>
-			<g id="shape222-494" v:mID="222" v:groupContext="shape" v:layerMember="3" transform="translate(33.3071,0)">
+			<g id="shape222-482" v:mID="222" v:groupContext="shape" v:layerMember="3" transform="translate(33.3071,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1458,12 +1416,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group228-496" transform="translate(345.827,-538.228)" v:mID="228" v:groupContext="group" v:layerMember="3">
+		<g id="group228-484" transform="translate(345.827,-538.228)" v:mID="228" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/service/api/RemoteInvocationService.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group45-497" transform="translate(0,-8.85827)" v:mID="45" v:groupContext="group" v:layerMember="3">
+				<g id="group45-485" transform="translate(0,-8.85827)" v:mID="45" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape46-498" v:mID="46" v:groupContext="shape" v:layerMember="3">
+					<g id="shape46-486" v:mID="46" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">RemoteInvocationService</desc>
 						<v:userDefs>
@@ -1473,13 +1431,13 @@
 						<v:textRect cx="56.6929" cy="829.134" width="113.39" height="25.5118"/>
 						<rect x="0" y="816.378" width="113.386" height="25.5118" class="st10"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>RemoteInvocationService</text>					</g>
-					<g id="shape47-501" v:mID="47" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+					<g id="shape47-489" v:mID="47" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 						
 						<path d="M0 841.89 L113.39 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape226-504" v:mID="226" v:groupContext="shape" v:layerMember="3" transform="translate(51.7323,0)">
+			<g id="shape226-492" v:mID="226" v:groupContext="shape" v:layerMember="3" transform="translate(51.7323,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1487,12 +1445,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group236-506" transform="translate(65.7638,-668.976)" v:mID="236" v:groupContext="group" v:layerMember="3">
+		<g id="group236-494" transform="translate(65.7638,-668.976)" v:mID="236" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/base/widget/custom/UiWidgetCustom.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group204-507" v:mID="204" v:groupContext="group" v:layerMember="3">
+				<g id="group204-495" v:mID="204" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape205-508" v:mID="205" v:groupContext="shape" v:layerMember="3">
+					<g id="shape205-496" v:mID="205" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">UiWidgetCustom</desc>
 						<v:userDefs>
@@ -1502,17 +1460,17 @@
 						<v:textRect cx="48.189" cy="829.134" width="96.38" height="25.5118"/>
 						<rect x="0" y="816.378" width="96.378" height="25.5118" class="st20"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>UiWidgetCustom</text>					</g>
-					<g id="shape206-511" v:mID="206" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+					<g id="shape206-499" v:mID="206" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 						
 						<path d="M0 841.89 L96.38 841.89" class="st12"/>
 					</g>
-					<g id="shape207-514" v:mID="207" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
+					<g id="shape207-502" v:mID="207" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-12.7559)">
 						
 						<path d="M0 841.89 L96.38 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape235-517" v:mID="235" v:groupContext="shape" v:layerMember="3" transform="translate(-736.547,834.142) rotate(-90)">
+			<g id="shape235-505" v:mID="235" v:groupContext="shape" v:layerMember="3" transform="translate(-736.547,834.142) rotate(-90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1520,19 +1478,19 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="shape239-519" v:mID="239" v:groupContext="shape" v:layerMember="3" transform="translate(-685.63,764.646) rotate(-90)">
+		<g id="shape239-507" v:mID="239" v:groupContext="shape" v:layerMember="3" transform="translate(-685.63,764.646) rotate(-90)">
 			
 			<v:userDefs>
 				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 			</v:userDefs>
 			<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 		</g>
-		<g id="group231-521" transform="translate(119.055,-141.378)" v:mID="231" v:groupContext="group" v:layerMember="3">
+		<g id="group231-509" transform="translate(119.055,-141.378)" v:mID="231" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/persistence/api/GenericDao.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group12-522" transform="translate(0,-8.85827)" v:mID="12" v:groupContext="group" v:layerMember="3">
+				<g id="group12-510" transform="translate(0,-8.85827)" v:mID="12" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape13-523" v:mID="13" v:groupContext="shape" v:layerMember="3">
+					<g id="shape13-511" v:mID="13" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">GenericDao</desc>
 						<v:userDefs>
@@ -1542,20 +1500,20 @@
 						<v:textRect cx="29.7638" cy="829.134" width="59.53" height="25.5118"/>
 						<rect x="0" y="816.378" width="59.5276" height="25.5118" class="st10"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>GenericDao</text>					</g>
-					<g id="shape19-526" v:mID="19" v:groupContext="shape" v:layerMember="3" transform="translate(-3.19744E-014,-6.37795)">
+					<g id="shape19-514" v:mID="19" v:groupContext="shape" v:layerMember="3" transform="translate(-3.19744E-014,-6.37795)">
 						
 						<path d="M0 841.89 L59.53 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape229-529" v:mID="229" v:groupContext="shape" v:layerMember="3" transform="translate(24.8031,0)">
+			<g id="shape229-517" v:mID="229" v:groupContext="shape" v:layerMember="3" transform="translate(24.8031,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 				</v:userDefs>
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
-			<g id="shape238-531" v:mID="238" v:groupContext="shape" v:layerMember="3" transform="translate(-773.504,825.236) rotate(-90)">
+			<g id="shape238-519" v:mID="238" v:groupContext="shape" v:layerMember="3" transform="translate(-773.504,825.236) rotate(-90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1563,12 +1521,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group243-533" transform="translate(102.047,-106.299)" v:mID="243" v:groupContext="group" v:layerMember="3">
+		<g id="group243-521" transform="translate(102.047,-106.299)" v:mID="243" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/persistence/base/jpa/AbstractJpaGenericDao.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group25-534" v:mID="25" v:groupContext="group" v:layerMember="3">
+				<g id="group25-522" v:mID="25" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape26-535" v:mID="26" v:groupContext="shape" v:layerMember="3">
+					<g id="shape26-523" v:mID="26" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">AbstractJpaGenericDao</desc>
 						<v:userDefs>
@@ -1578,17 +1536,17 @@
 						<v:textRect cx="46.7717" cy="829.134" width="93.55" height="25.5118"/>
 						<rect x="0" y="816.378" width="93.5433" height="25.5118" class="st20"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>AbstractJpaGenericDao</text>					</g>
-					<g id="shape27-538" v:mID="27" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-6.37795)">
+					<g id="shape27-526" v:mID="27" v:groupContext="shape" v:layerMember="3" transform="translate(3.19744E-014,-6.37795)">
 						
 						<path d="M0 841.89 L93.54 841.89" class="st12"/>
 					</g>
-					<g id="shape28-541" v:mID="28" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
+					<g id="shape28-529" v:mID="28" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
 						
 						<path d="M0 841.89 L93.54 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape240-544" v:mID="240" v:groupContext="shape" v:layerMember="3" transform="translate(-739.488,834.094) rotate(-90)">
+			<g id="shape240-532" v:mID="240" v:groupContext="shape" v:layerMember="3" transform="translate(-739.488,834.094) rotate(-90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1596,12 +1554,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group244-546" transform="translate(485.433,-271.772)" v:mID="244" v:groupContext="group" v:layerMember="3">
+		<g id="group244-534" transform="translate(485.433,-271.772)" v:mID="244" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/entity/api/GenericEntity.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group41-547" transform="translate(-816.378,833.031) rotate(-90)" v:mID="41" v:groupContext="group" v:layerMember="3">
+				<g id="group41-535" transform="translate(-816.378,833.031) rotate(-90)" v:mID="41" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape42-548" v:mID="42" v:groupContext="shape" v:layerMember="3">
+					<g id="shape42-536" v:mID="42" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">GenericEntity</desc>
 						<v:userDefs>
@@ -1611,13 +1569,13 @@
 						<v:textRect cx="25.5118" cy="829.134" width="51.03" height="25.5118"/>
 						<rect x="0" y="816.378" width="51.0236" height="25.5118" class="st10"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>GenericEntity</text>					</g>
-					<g id="shape43-551" v:mID="43" v:groupContext="shape" v:layerMember="3" transform="translate(-1.1046E-011,-6.37795)">
+					<g id="shape43-539" v:mID="43" v:groupContext="shape" v:layerMember="3" transform="translate(-1.1046E-011,-6.37795)">
 						
 						<path d="M0 841.89 L51.02 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape241-554" v:mID="241" v:groupContext="shape" v:layerMember="3" transform="translate(7.79528,0)">
+			<g id="shape241-542" v:mID="241" v:groupContext="shape" v:layerMember="3" transform="translate(7.79528,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1625,12 +1583,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group245-556" transform="translate(532.913,-271.949)" v:mID="245" v:groupContext="group" v:layerMember="3">
+		<g id="group245-544" transform="translate(532.913,-271.949)" v:mID="245" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/lang/api/Datatype.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group122-557" transform="translate(-816.378,833.209) rotate(-90)" v:mID="122" v:groupContext="group" v:layerMember="3">
+				<g id="group122-545" transform="translate(-816.378,833.209) rotate(-90)" v:mID="122" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape123-558" v:mID="123" v:groupContext="shape" v:layerMember="3">
+					<g id="shape123-546" v:mID="123" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">Datatype</desc>
 						<v:userDefs>
@@ -1640,13 +1598,13 @@
 						<v:textRect cx="25.5118" cy="829.134" width="51.03" height="25.5118"/>
 						<rect x="0" y="816.378" width="51.0236" height="25.5118" class="st10"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>Datatype</text>					</g>
-					<g id="shape124-561" v:mID="124" v:groupContext="shape" v:layerMember="3" transform="translate(-1.1046E-011,-6.37795)">
+					<g id="shape124-549" v:mID="124" v:groupContext="shape" v:layerMember="3" transform="translate(-1.1046E-011,-6.37795)">
 						
 						<path d="M0 841.89 L51.02 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape242-564" v:mID="242" v:groupContext="shape" v:layerMember="3" transform="translate(7.79528,0)">
+			<g id="shape242-552" v:mID="242" v:groupContext="shape" v:layerMember="3" transform="translate(7.79528,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1654,12 +1612,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group246-566" transform="translate(48.189,-605.197)" v:mID="246" v:groupContext="group" v:layerMember="3">
+		<g id="group246-554" transform="translate(48.189,-605.197)" v:mID="246" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/client/ui/base/dialog/AbstractDialogController.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group87-567" v:mID="87" v:groupContext="group" v:layerMember="3">
+				<g id="group87-555" v:mID="87" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape88-568" v:mID="88" v:groupContext="shape" v:layerMember="3">
+					<g id="shape88-556" v:mID="88" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">AbstractDialogController</desc>
 						<v:userDefs>
@@ -1669,17 +1627,17 @@
 						<v:textRect cx="49.6063" cy="829.134" width="99.22" height="25.5118"/>
 						<rect x="0" y="816.378" width="99.2126" height="25.5118" class="st20"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>AbstractDialogController</text>					</g>
-					<g id="shape89-571" v:mID="89" v:groupContext="shape" v:layerMember="3" transform="translate(1.59872E-014,-6.37795)">
+					<g id="shape89-559" v:mID="89" v:groupContext="shape" v:layerMember="3" transform="translate(1.59872E-014,-6.37795)">
 						
 						<path d="M0 841.89 L99.21 841.89" class="st12"/>
 					</g>
-					<g id="shape90-574" v:mID="90" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
+					<g id="shape90-562" v:mID="90" v:groupContext="shape" v:layerMember="3" transform="translate(4.79616E-014,-12.7559)">
 						
 						<path d="M0 841.89 L99.21 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape237-577" v:mID="237" v:groupContext="shape" v:layerMember="3" transform="translate(-733.819,834.094) rotate(-90)">
+			<g id="shape237-565" v:mID="237" v:groupContext="shape" v:layerMember="3" transform="translate(-733.819,834.094) rotate(-90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1687,18 +1645,18 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="shape247-579" v:mID="247" v:groupContext="shape" v:layerMember="3" transform="translate(42.5197,-726.236)">
+		<g id="shape247-567" v:mID="247" v:groupContext="shape" v:layerMember="3" transform="translate(42.5197,-726.236)">
 			
 			<desc content="structured text">delegate</desc>
 			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
 			<v:textRect cx="14.1732" cy="838.817" width="28.35" height="6.14567"/>
 			<rect x="0" y="835.744" width="28.3465" height="6.14567" class="st30"/>
 			<text x="4" y="840.02" class="st31" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>delegate</text>		</g>
-		<g id="group253-582" transform="translate(351.142,-484.724)" v:mID="253" v:groupContext="group" v:layerMember="3">
+		<g id="group253-570" transform="translate(351.142,-484.724)" v:mID="253" v:groupContext="group" v:layerMember="3">
 			
-			<g id="group49-583" transform="translate(8.85827,0)" v:mID="49" v:groupContext="group" v:layerMember="3">
+			<g id="group49-571" transform="translate(8.85827,0)" v:mID="49" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape50-584" v:mID="50" v:groupContext="shape" v:layerMember="3">
+				<g id="shape50-572" v:mID="50" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">MyUseCaseService</desc>
 					<v:userDefs>
@@ -1708,12 +1666,12 @@
 					<v:textRect cx="42.5197" cy="829.134" width="85.04" height="25.5118"/>
 					<rect x="0" y="816.378" width="85.0394" height="25.5118" class="st19"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyUseCaseService</text>				</g>
-				<g id="shape51-587" v:mID="51" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+				<g id="shape51-575" v:mID="51" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 					
 					<path d="M0 841.89 L85.04 841.89" class="st12"/>
 				</g>
 			</g>
-			<g id="shape252-590" v:mID="252" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,824.173) rotate(90)">
+			<g id="shape252-578" v:mID="252" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,824.173) rotate(90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1721,12 +1679,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group254-592" transform="translate(476.22,-337.323)" v:mID="254" v:groupContext="group" v:layerMember="3">
+		<g id="group254-580" transform="translate(476.22,-337.323)" v:mID="254" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/transferobject/api/EntityTo.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group112-593" transform="translate(-807.52,841.89) rotate(-90)" v:mID="112" v:groupContext="group" v:layerMember="3">
+				<g id="group112-581" transform="translate(-807.52,841.89) rotate(-90)" v:mID="112" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape113-594" v:mID="113" v:groupContext="shape" v:layerMember="3">
+					<g id="shape113-582" v:mID="113" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">EntityTo</desc>
 						<v:userDefs>
@@ -1736,17 +1694,17 @@
 						<v:textRect cx="18.4252" cy="829.134" width="36.86" height="25.5118"/>
 						<rect x="0" y="816.378" width="36.8504" height="25.5118" class="st20"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>EntityTo</text>					</g>
-					<g id="shape114-597" v:mID="114" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
+					<g id="shape114-585" v:mID="114" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
 						
 						<path d="M0 841.89 L36.85 841.89" class="st12"/>
 					</g>
-					<g id="shape115-600" v:mID="115" v:groupContext="shape" v:layerMember="3" transform="translate(0,-12.7559)">
+					<g id="shape115-588" v:mID="115" v:groupContext="shape" v:layerMember="3" transform="translate(0,-12.7559)">
 						
 						<path d="M0 841.89 L36.85 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape251-603" v:mID="251" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,818.504) rotate(90)">
+			<g id="shape251-591" v:mID="251" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,818.504) rotate(90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1754,12 +1712,12 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group255-605" transform="translate(522.638,-344.409)" v:mID="255" v:groupContext="group" v:layerMember="3">
+		<g id="group255-593" transform="translate(522.638,-344.409)" v:mID="255" v:groupContext="group" v:layerMember="3">
 			
 			<a xlink:href="http://m-m-m.sourceforge.net/apidocs/net/sf/mmm/util/transferobject/api/TransferObject.html" xlink:title="JavaDoc" xlink:type="simple" xlink:show="replace" xlink:actuate="onRequest">
-				<g id="group104-606" transform="translate(-807.52,841.89) rotate(-90)" v:mID="104" v:groupContext="group" v:layerMember="3">
+				<g id="group104-594" transform="translate(-807.52,841.89) rotate(-90)" v:mID="104" v:groupContext="group" v:layerMember="3">
 					
-					<g id="shape105-607" v:mID="105" v:groupContext="shape" v:layerMember="3">
+					<g id="shape105-595" v:mID="105" v:groupContext="shape" v:layerMember="3">
 						
 						<desc content="structured text">TransferObject</desc>
 						<v:userDefs>
@@ -1769,13 +1727,13 @@
 						<v:textRect cx="35.4331" cy="829.134" width="70.87" height="25.5118"/>
 						<rect x="0" y="816.378" width="70.8661" height="25.5118" class="st20"/>
 						<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>TransferObject</text>					</g>
-					<g id="shape106-610" v:mID="106" v:groupContext="shape" v:layerMember="3" transform="translate(1.59872E-014,-6.37795)">
+					<g id="shape106-598" v:mID="106" v:groupContext="shape" v:layerMember="3" transform="translate(1.59872E-014,-6.37795)">
 						
 						<path d="M0 841.89 L70.87 841.89" class="st12"/>
 					</g>
 				</g>
 			</a>
-			<g id="shape250-613" v:mID="250" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,801.496) rotate(90)">
+			<g id="shape250-601" v:mID="250" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,801.496) rotate(90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1783,18 +1741,18 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group257-615" transform="translate(476.187,-192.402)" v:mID="257" v:groupContext="group" v:layerMember="3">
+		<g id="group257-603" transform="translate(476.187,-192.402)" v:mID="257" v:groupContext="group" v:layerMember="3">
 			
-			<g id="shape223-616" v:mID="223" v:groupContext="shape" v:layerMember="3" transform="translate(17.0079,0)">
+			<g id="shape223-604" v:mID="223" v:groupContext="shape" v:layerMember="3" transform="translate(17.0079,0)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
 				</v:userDefs>
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
-			<g id="group80-618" transform="translate(-807.165,833.031) rotate(-90)" v:mID="80" v:groupContext="group" v:layerMember="3">
+			<g id="group80-606" transform="translate(-807.165,833.031) rotate(-90)" v:mID="80" v:groupContext="group" v:layerMember="3">
 				
-				<g id="shape81-619" v:mID="81" v:groupContext="shape" v:layerMember="3">
+				<g id="shape81-607" v:mID="81" v:groupContext="shape" v:layerMember="3">
 					
 					<desc content="structured text">MyObject</desc>
 					<v:userDefs>
@@ -1804,12 +1762,12 @@
 					<v:textRect cx="29.7638" cy="829.134" width="59.53" height="25.5118"/>
 					<rect x="0" y="816.378" width="59.5276" height="25.5118" class="st19"/>
 					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>MyObject</text>				</g>
-				<g id="shape82-622" v:mID="82" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17658E-011,-6.37795)">
+				<g id="shape82-610" v:mID="82" v:groupContext="shape" v:layerMember="3" transform="translate(-1.17658E-011,-6.37795)">
 					
 					<path d="M0 841.89 L59.53 841.89" class="st12"/>
 				</g>
 			</g>
-			<g id="shape256-625" v:mID="256" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,798.307) rotate(90)">
+			<g id="shape256-613" v:mID="256" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,798.307) rotate(90)">
 				
 				<v:userDefs>
 					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
@@ -1817,39 +1775,18 @@
 				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
 			</g>
 		</g>
-		<g id="group258-627" transform="translate(351.142,-272.126)" v:mID="258" v:groupContext="group" v:layerMember="3">
+		<g id="shape99-615" v:mID="99" v:groupContext="shape" v:layerMember="3" transform="translate(289.134,-284.882)">
 			
-			<g id="group99-628" transform="translate(8.85827,0)" v:mID="99" v:groupContext="group" v:layerMember="3">
-				
-				<g id="shape100-629" v:mID="100" v:groupContext="shape" v:layerMember="3">
-					
-					<desc content="structured text">AbstractMyUseCase</desc>
-					<v:userDefs>
-						<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(12):26"/>
-					</v:userDefs>
-					<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
-					<v:textRect cx="42.5197" cy="829.134" width="85.04" height="25.5118"/>
-					<rect x="0" y="816.378" width="85.0394" height="25.5118" class="st19"/>
-					<text x="4" y="824.88" class="st11" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>AbstractMyUseCase</text>				</g>
-				<g id="shape101-632" v:mID="101" v:groupContext="shape" v:layerMember="3" transform="translate(0,-6.37795)">
-					
-					<path d="M0 841.89 L85.04 841.89" class="st12"/>
-				</g>
-			</g>
-			<g id="shape248-635" v:mID="248" v:groupContext="shape" v:layerMember="3" transform="translate(56.3386,1649.41) rotate(180)">
-				
-				<v:userDefs>
-					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
-				</v:userDefs>
-				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
-			</g>
-			<g id="shape249-637" v:mID="249" v:groupContext="shape" v:layerMember="3" transform="translate(841.89,824.173) rotate(90)">
-				
-				<v:userDefs>
-					<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
-				</v:userDefs>
-				<path d="M10.69 841.89 L4.96 833.03 L-0.77 841.89 L10.69 841.89 Z" class="st10"/>
-			</g>
+			<v:userDefs>
+				<v:ud v:nameU="UMLShapeType" v:val="VT0(31):26"/>
+				<v:ud v:nameU="UMLError" v:val="VT0(0):26"/>
+				<v:ud v:nameU="UMLObjectGUID" v:val="VT4()"/>
+				<v:ud v:nameU="UMLPresOption1" v:val="VT0(2):26"/>
+				<v:ud v:nameU="UMLVersion" v:val="VT0(2):26"/>
+				<v:ud v:nameU="visDescription" v:val="VT4(Indicates a semantic relationship between two model elements.)"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(12):26"/>
+			</v:userDefs>
+			<path d="M0 841.89 L113.39 841.89 L113.39 876.61" class="st26"/>
 		</g>
 	</g>
 </svg>
