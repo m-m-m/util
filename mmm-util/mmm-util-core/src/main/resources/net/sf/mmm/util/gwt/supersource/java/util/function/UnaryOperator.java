@@ -9,13 +9,13 @@ package java.util.function;
  * java versions. Therefore, <code>mmm-util-core</code> offers helper methods that give similar features.
  * However, we strongly recommend that you update your project to Java 1.8+ to make use of closures (lambda
  * expressions) and other benefits.
- * 
+ *
  * @param <T> the generic type of the input and result of the {@link #apply(Object)} operation.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UnarayOperator<T> extends Function<T, T> {
+public interface UnaryOperator<T> extends Function<T, T> {
 
   // nothing to add...
 

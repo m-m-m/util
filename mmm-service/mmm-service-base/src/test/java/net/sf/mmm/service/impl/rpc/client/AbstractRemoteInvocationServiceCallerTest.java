@@ -3,7 +3,6 @@
 package net.sf.mmm.service.impl.rpc.client;
 
 import java.io.Serializable;
-import java.util.function.Consumer;
 
 import net.sf.mmm.service.TestService;
 import net.sf.mmm.service.api.CsrfToken;
@@ -20,6 +19,7 @@ import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceCallerW
 import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceClient;
 import net.sf.mmm.service.impl.rpc.client.AbstractRemoteInvocationServiceCallerTest.RemoteInvocationServiceCallerTestImpl;
 import net.sf.mmm.util.lang.api.GenericBean;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 import org.junit.Test;
 

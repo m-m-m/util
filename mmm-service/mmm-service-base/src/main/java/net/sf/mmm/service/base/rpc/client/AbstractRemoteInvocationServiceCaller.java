@@ -3,7 +3,6 @@
 package net.sf.mmm.service.base.rpc.client;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import net.sf.mmm.service.api.CsrfToken;
 import net.sf.mmm.service.api.client.RemoteInvocationQueueSettings;
@@ -15,6 +14,7 @@ import net.sf.mmm.service.base.client.RemoteInvocationCallData;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcCall;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcRequest;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcTransactionalCalls;
+import net.sf.mmm.util.lang.api.function.Consumer;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
@@ -80,23 +80,6 @@ public abstract class AbstractRemoteInvocationServiceCaller
 
     ((RemoteInvocationServiceQueueImpl) requireCurrentQueue()).addCall(call, returnType);
   }
-
-  // /**
-  // * This method finally performs a request with the invocations collected by the given <code>queue</code>.
-  // *
-  // * @param queue is the {@link RemoteInvocationServiceQueueImpl}.
-  // */
-  // protected void performRequest(RemoteInvocationServiceQueueImpl queue) {
-  //
-  // assert (queue == this.currentQueue);
-  // RequestBuilder builder = new RequestBuilder();
-  // queue.collectCalls(builder, false);
-  // if (builder.txCallList.isEmpty()) {
-  // return;
-  // }
-  // GenericRemoteInvocationRpcRequest request = builder.build(nextRequestId());
-  // performRequest(request, builder);
-  // }
 
   /**
    * {@inheritDoc}

@@ -3,7 +3,6 @@
 package net.sf.mmm.client.ui.api.widget.complex;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteCollapsed;
@@ -14,6 +13,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 /**
  * This is the interface for a {@link UiWidgetAbstractDataSet data set widget} that represents a <em>tree</em>
@@ -23,9 +23,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * <li>Configured via {@link #setTreeModel(UiTreeModel) tree model}</li>
  * <li></li>
  * </ul>
- * 
+ *
  * @param <NODE> is the generic type of the tree-nodes. E.g. {@link net.sf.mmm.util.collection.api.TreeNode}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -36,14 +36,14 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
 
   /**
    * This method gets the {@link UiTreeModel} adapting from {@literal <NODE>} to this tree-widget.
-   * 
+   *
    * @return the {@link UiTreeModel}. May be <code>null</code> if NOT set.
    */
   UiTreeModel<NODE> getTreeModel();
 
   /**
    * This method sets the {@link UiTreeModel} adapting from {@literal <NODE>} to this tree-widget.
-   * 
+   *
    * @param model is the {@link UiTreeModel} to set.
    */
   void setTreeModel(UiTreeModel<NODE> model);
@@ -51,7 +51,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
   /**
    * This method sets the {@link UiTreeNodeRenderer} used to render the {@link UiWidgetRegular widgets} for an
    * individual {@literal <NODE>}.
-   * 
+   *
    * @param renderer is the {@link UiTreeNodeRenderer}.
    */
   void setTreeNodeRenderer(UiTreeNodeRenderer<NODE, ?> renderer);
@@ -60,9 +60,9 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
    * This method gets the {@link UiWidgetTreeNode} for the given {@literal <NODE>}. It contains a
    * {@link UiWidgetTreeNode#getNodeWidget() node widget} that was created by the {@link UiTreeNodeRenderer}.
    * Further you can {@link UiWidgetTreeNode#setCollapsed(boolean) collapse or expand} the node.
-   * 
+   *
    * @see #setTreeNodeRenderer(UiTreeNodeRenderer)
-   * 
+   *
    * @param node is the {@literal <NODE>}.
    * @return the according {@link UiWidgetTreeNode} or <code>null</code> if the given <code>node</code> is NOT
    *         in this tree.
@@ -85,7 +85,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
    * If the tree structure should be editable for the end-user you need to implement
    * {@link UiWidgetAbstractTree.UiTreeModelMutable}. However, modification of the tree node data is still
    * possible if the tree is {@link UiWidgetAbstractTree#isEditable() editable}.
-   * 
+   *
    * @param <NODE> is the generic type of the tree-nodes of this model.
    */
   interface UiTreeModel<NODE> {
@@ -99,7 +99,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
 
     /**
      * This method gets the children of the given tree-node.
-     * 
+     *
      * @param node the tree-node for which the children are requested.
      * @return the {@link List} of child-nodes or <code>null</code> if NOT available and
      *         {@link #getChildrenAsync(Object, Consumer) asynchronous loading} is required.
@@ -108,7 +108,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
 
     /**
      * This method gets the children of the given tree-node asynchronously.
-     * 
+     *
      * @param node the tree-node for which the children are requested.
      * @param callback is the {@link Consumer} that will be {@link Consumer#accept(Object) called} when the
      *        children are available. Maybe <code>null</code> if only loading shall be triggered.
@@ -126,7 +126,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
    * tree node that can be modified by the tree widget without causing harm. Central caching of tree nodes
    * from the server can be done based on a central and immutable {@link UiWidgetAbstractTree.UiTreeModel}
    * used by the according mutable tree models.
-   * 
+   *
    * @param <NODE> is the generic type of the tree-nodes of this model.
    */
   @SuppressWarnings("unchecked")
@@ -135,7 +135,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
     /**
      * Adds the given <code>child</code> {@literal <NODE>} to the given <code>parent</code> at the specified
      * <code>index</code>.
-     * 
+     *
      * @param parent is the parent {@literal <NODE>} where to add the given <code>child</code>.
      * @param child is the {@literal <NODE>} to add to the {@link #getChildren(Object) children} of
      *        <code>parent</code>. This method will remove the <code>child</code> from any previous parent.
@@ -147,9 +147,9 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
 
     /**
      * Convenience method variant of {@link #addChild(Object, Object, int)} to add a child at the end.
-     * 
+     *
      * @see #addChild(Object, Object, int)
-     * 
+     *
      * @param parent is the parent {@literal <NODE>} where to add the given <code>child</code>.
      * @param child is the {@literal <NODE>} to add to the {@link #getChildren(Object) children} of
      *        <code>parent</code>.
@@ -158,7 +158,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
 
     /**
      * Removes the given <code>children</code> from the <code>parent</code>.
-     * 
+     *
      * @param parent is the parent {@literal <NODE>} where to remove the given <code>children</code>.
      * @param children are the children to remove.
      */
@@ -168,7 +168,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
 
   /**
    * This is the interface for the main widget representing a node of the tree.
-   * 
+   *
    * @param <NODE> is the generic type of the {@link #getValue() node data}.
    */
   interface UiWidgetTreeNode<NODE> extends UiWidget, AttributeWriteCollapsed, AttributeReadValue<NODE> {
@@ -176,9 +176,9 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
     /**
      * Please note that you may need to cast to the {@link UiWidgetRegular}-type according to your
      * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer}.
-     * 
+     *
      * @see UiWidgetAbstractTree#setTreeNodeRenderer(UiTreeNodeRenderer)
-     * 
+     *
      * @return the {@link UiWidgetRegular regular widget} used to render the node data.
      */
     UiWidgetRegular getNodeWidget();
@@ -188,7 +188,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
   /**
    * The renderer responsible to {@link #create(net.sf.mmm.client.ui.api.UiContext) create} widgets and
    * {@link #assignNodeToWidget(Object, UiWidgetRegular) assign} a {@literal <NODE>} to them.
-   * 
+   *
    * @param <NODE> is the generic type of the tree-nodes.
    * @param <WIDGET> is the generic type of the {@link UiWidgetRegular} used to render a {@literal <NODE>}.
    */
@@ -203,7 +203,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
      * The {@link UiWidgetRegular} may be reused for optimal performance if the {@literal <NODE>} has changed
      * or been removed. Therefore this method needs to reset and update the entire state of the
      * {@link UiWidgetRegular}.
-     * 
+     *
      * @param node is the {@literal <NODE>} to assign.
      * @param widget is the {@link UiWidgetRegular} that is to be assigned. It has initially been created via
      *        {@link #create(net.sf.mmm.client.ui.api.UiContext)}.
@@ -215,7 +215,7 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
   /**
    * This is the default implementation of
    * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer}.
-   * 
+   *
    * @param <NODE> is the generic type of the tree-nodes.
    */
   class UiTreeNodeRendererDefault<NODE> implements UiTreeNodeRenderer<NODE, UiWidgetLabel> {

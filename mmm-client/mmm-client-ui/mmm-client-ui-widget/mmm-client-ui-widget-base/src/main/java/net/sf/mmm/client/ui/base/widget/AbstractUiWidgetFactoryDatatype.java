@@ -40,7 +40,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
 /**
  * This is the abstract base implementation of {@link UiWidgetFactoryDatatype}. It already contains the
  * implementations for the {@link #registerStandardDatatypes() standard datatypes}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -98,7 +98,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
 
   /**
    * This method registers the given {@link UiSingleWidgetFactoryDatatype} as sub-context of this context.
-   * 
+   *
    * @param subFactory is the {@link UiSingleWidgetFactoryDatatype} to register.
    */
   protected void register(UiSingleWidgetFactoryDatatype<?> subFactory) {
@@ -121,9 +121,9 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     register(new UiSingleWidgetFactoryDatatypeLong());
     register(new UiSingleWidgetFactoryDatatypeDouble());
     register(new UiSingleWidgetFactoryDatatypeBoolean());
-    register(new UiSingleWidgetFactoryDatatypeLocalDate());
-    register(new UiSingleWidgetFactoryDatatypeLocalTime());
-    register(new UiSingleWidgetFactoryDatatypeInstant());
+    // register(new UiSingleWidgetFactoryDatatypeLocalDate());
+    // register(new UiSingleWidgetFactoryDatatypeLocalTime());
+    // register(new UiSingleWidgetFactoryDatatypeInstant());
   }
 
   /**
@@ -377,7 +377,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
   /**
    * This inner class is the abstract {@link AbstractUiSingleWidgetFactoryDatatype context} for {@link Enum}
    * datatypes.
-   * 
+   *
    * @param <E> is the generic type of the {@link Enum}.
    */
   public static class UiSingleWidgetFactoryDatatypeEnum<E extends Enum<E>> extends
@@ -388,7 +388,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
 
     /**
      * The constructor.
-     * 
+     *
      * @param enumType is the type of the {@link Enum}.
      */
     public UiSingleWidgetFactoryDatatypeEnum(Class<E> enumType) {
@@ -398,7 +398,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
 
     /**
      * The constructor.
-     * 
+     *
      * @param enumType is the type of the {@link Enum}.
      * @param formatter is the {@link Formatter} used to get the display titles of the {@link Enum} constants.
      */

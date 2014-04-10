@@ -5,7 +5,6 @@ package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.aria.role.Role;
@@ -30,6 +29,7 @@ import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
 import net.sf.mmm.client.ui.gwt.widgets.HtmlConstants;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
+import net.sf.mmm.util.lang.api.function.Consumer;
 import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.validation.api.ValidationState;
 
@@ -55,9 +55,9 @@ import com.google.gwt.user.client.ui.TreeItem;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterTree} using GWT based on {@link Tree}.
- * 
+ *
  * @param <NODE> is the generic type of the tree-nodes.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -525,7 +525,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
     /**
      * The constructor.
-     * 
+     *
      * @param node is the unwrapped node (business object).
      * @param widget is the {@link UiWidgetRegular} rendering this node.
      */
@@ -676,7 +676,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
     /**
      * Sets the selection state.
-     * 
+     *
      * @param selected - <code>true</code> for selected, <code>false</code> for not selected.
      */
     private void setNodeSelected(boolean selected) {
@@ -1069,7 +1069,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
     /**
      * The constructor.
-     * 
+     *
      * @param source is the source of the events (typically {@link net.sf.mmm.client.ui.api.widget.UiWidget}).
      * @param sender is the sender of events (an adapter that delegates to the individual handlers/listeners).
      */

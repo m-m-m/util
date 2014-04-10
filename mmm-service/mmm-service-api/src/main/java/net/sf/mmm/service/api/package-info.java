@@ -87,7 +87,7 @@
  * implementation with {@link javax.inject.Named} and that is all.<br/>
  * On the client side you will use {@link net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller} to
  * {@link net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller#getServiceClient(Class, Class,
- * java.util.function.Consumer, java.util.function.Consumer) get a stub of your service interface}
+ * net.sf.mmm.util.lang.api.function.Consumer, net.sf.mmm.util.lang.api.function.Consumer) get a stub of your service interface}
  * while providing a callback that receives the result asynchronously and invoke a corresponding method on the stub.
  * This way you can use your favorite IDE to directly step from the client-side service call to the server-side service
  * implementation. For its simplicity and compliance with java service design this is the favorite approach.
@@ -106,7 +106,7 @@
  *   public void doSomething() {
  *     {@link net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller} caller = getCaller();
  *     HelloWorldService service = caller.{@link net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller#getServiceClient(Class,
- *     Class, java.util.function.Consumer) getServiceClient}(HelloWorldService.class, String.class, message -> showPopup(message));
+ *     Class, net.sf.mmm.util.lang.api.function.Consumer) getServiceClient}(HelloWorldService.class, String.class, message -> showPopup(message));
  *     service.sayHi("John");
  *   }
  * }
@@ -121,7 +121,7 @@
  * you only have to annotate the implementation with {@link javax.inject.Named} and that is all.<br/>
  * On the client side you will use {@link net.sf.mmm.service.api.command.client.RemoteInvocationCommandCaller} to
  * {@link net.sf.mmm.service.api.command.client.RemoteInvocationCommandCaller#callCommand(net.sf.mmm.service.api.command.RemoteInvocationCommand,
- * java.util.function.Consumer, java.util.function.Consumer) call a command}. This is entirely type-safe due to the
+ * net.sf.mmm.util.lang.api.function.Consumer, net.sf.mmm.util.lang.api.function.Consumer) call a command}. This is entirely type-safe due to the
  * generic type {@literal <RESULT>} of {@link net.sf.mmm.service.api.command.RemoteInvocationCommand}.
  * As a further advantage it allows better optimization of serialization (e.g. in GWT the compiler needs to know which
  * classes can be part of the invocation what can be any {@link java.io.Serializable} in RPC while in command style only
@@ -156,7 +156,7 @@
  *     {@link net.sf.mmm.service.api.command.client.RemoteInvocationCommandCaller} caller = getCaller();
  *     HelloWorldCommand command = new HelloWorldCommand("John");
  *     caller.{@link net.sf.mmm.service.api.command.client.RemoteInvocationCommandCaller#callCommand(
- *     net.sf.mmm.service.api.command.RemoteInvocationCommand, java.util.function.Consumer) callCommand}(command, message -> showPopup(message));
+ *     net.sf.mmm.service.api.command.RemoteInvocationCommand, net.sf.mmm.util.lang.api.function.Consumer) callCommand}(command, message -> showPopup(message));
  *   }
  * }
  * </pre>

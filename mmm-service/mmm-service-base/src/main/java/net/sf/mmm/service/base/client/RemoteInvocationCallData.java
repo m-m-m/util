@@ -2,13 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.base.client;
 
-import java.util.function.Consumer;
-
 import net.sf.mmm.service.api.RemoteInvocationCall;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 /**
  * This is a simple container for the data corresponding to a {@link RemoteInvocationCall}.
- * 
+ *
  * @param <RESULT> is the generic type of the method return-type.
  * @param <CALL> is the generic type of the {@link #getCall() call} data.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -27,7 +26,7 @@ public class RemoteInvocationCallData<RESULT, CALL extends RemoteInvocationCall>
 
   /**
    * The constructor.
-   * 
+   *
    * @param successCallback is the callback that {@link Consumer#accept(Object) receives} the result on
    *        success.
    * @param failureCallback is the callback that {@link Consumer#accept(Object) receives} the failure on

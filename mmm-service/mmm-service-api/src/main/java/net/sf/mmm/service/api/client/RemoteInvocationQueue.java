@@ -2,9 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.api.client;
 
-import java.util.function.Consumer;
-
 import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 /**
  * This is the abstract interface for a queue of method-calls to one or multiple
@@ -15,7 +14,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  * collect the service invocations. In order to send these invocations to the server use the {@link #commit()}
  * method. This approach typically gains performance (especially reduces overall latency) if multiple service
  * methods have to be called in a row.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -23,7 +22,7 @@ public abstract interface RemoteInvocationQueue extends AttributeReadId<String>,
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * It will be used as fallback if no failure callback is specified explicitly. {@link RemoteInvocationQueue
    * Queues} will inherit the default failure callback from their parent. A toplevel queue inherits from the
    * {@link RemoteInvocationCaller invocation caller}.
@@ -33,10 +32,10 @@ public abstract interface RemoteInvocationQueue extends AttributeReadId<String>,
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * It will be used for error messages, logging, etc. and will therefore help you debugging problems if you
    * specify a reasonable ID.
-   * 
+   *
    * @see RemoteInvocationCaller#newQueue(String)
    */
   @Override
@@ -51,7 +50,7 @@ public abstract interface RemoteInvocationQueue extends AttributeReadId<String>,
    * {@link RemoteInvocationQueueState#CANCELLED}. As soon as the status is closed (NOT
    * {@link RemoteInvocationQueueState#OPEN}), it can NOT be opened anymore and further adding of service
    * invocations to the queue will fail.
-   * 
+   *
    * @return the {@link RemoteInvocationQueueState} of this queue.
    */
   RemoteInvocationQueueState getState();

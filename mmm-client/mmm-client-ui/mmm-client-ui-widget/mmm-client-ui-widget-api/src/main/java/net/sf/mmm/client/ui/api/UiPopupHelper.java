@@ -3,10 +3,10 @@
 package net.sf.mmm.client.ui.api;
 
 import java.util.Map;
-import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.util.component.api.ComponentSpecification;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 /**
  * This is the interface for a component that allows to open very simple popup dialogs.<br/>
@@ -14,7 +14,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * Be aware of {@link net.sf.mmm.util.nls.api.NlsMessage internationalization} whenever you supply messages,
  * labels or titles of a popup. Please also note that this component is designed for a client that only needs
  * to deal with a single {@link java.util.Locale}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -29,7 +29,7 @@ public interface UiPopupHelper {
 
   /**
    * This method opens a popup dialog with the given <code>message</code>.
-   * 
+   *
    * @param message is the message to display.
    * @param severity is the {@link MessageSeverity}. Should NOT be {@link MessageSeverity#QUESTION}.
    * @param title is the title that will be displayed in the title-bar of the popup.
@@ -39,9 +39,9 @@ public interface UiPopupHelper {
   /**
    * This method opens a popup dialog with the given <code>message</code>. The title of the popup is
    * automatically derived from the given {@link MessageSeverity}.
-   * 
+   *
    * @see #showPopup(String, MessageSeverity, String)
-   * 
+   *
    * @param message is the message to display.
    * @param severity is the {@link MessageSeverity}. Should NOT be {@link MessageSeverity#QUESTION}.
    */
@@ -49,7 +49,7 @@ public interface UiPopupHelper {
 
   /**
    * This method opens a confirmation popup dialog with the given <code>message</code> and an "OK" button.
-   * 
+   *
    * @param message is the message to display.
    * @param severity is the {@link MessageSeverity}. Should NOT be {@link MessageSeverity#QUESTION}.
    * @param callback is the {@link Consumer} invoked after the popup has been confirmed (the user has clicked
@@ -59,7 +59,7 @@ public interface UiPopupHelper {
 
   /**
    * This method opens a confirmation popup dialog with the given <code>message</code> and an "OK" button.
-   * 
+   *
    * @param message is the message to display.
    * @param title is the title that will be displayed in the title-bar of the popup.
    * @param severity is the {@link MessageSeverity}. Should NOT be {@link MessageSeverity#QUESTION}.
@@ -80,7 +80,7 @@ public interface UiPopupHelper {
    * "Do you want to delete this occurrence or the series of the appointment? Press "
    * Yes" to delete the series and "No" for this occurrence.". From this bad example that confuses the user,
    * you should learn that it is always better to use more explicit labels.
-   * 
+   *
    * @param message is the message to display.
    * @param title is the title that will be displayed in the title-bar of the popup.
    * @param callback is the {@link Consumer} invoked after the popup has been confirmed (the user has clicked
@@ -92,7 +92,7 @@ public interface UiPopupHelper {
   /**
    * This method opens a confirmation popup dialog with the given <code>message</code> and two buttons for the
    * options "Yes" and "No". It will use {@link MessageSeverity#QUESTION}.
-   * 
+   *
    * @param message is the message to display.
    * @param severity is the {@link MessageSeverity} - typically {@link MessageSeverity#QUESTION}.
    * @param title is the title that will be displayed in the title-bar of the popup.
@@ -108,7 +108,7 @@ public interface UiPopupHelper {
   /**
    * This method opens a confirmation popup dialog with the given <code>message</code>. It is the most generic
    * and flexible but also the most inconvenient method variant.
-   * 
+   *
    * @param message is the message to display.
    * @param severity is the {@link MessageSeverity}. Should NOT be {@link MessageSeverity#QUESTION}.
    * @param title is the title that will be displayed in the title-bar of the popup.
@@ -125,7 +125,7 @@ public interface UiPopupHelper {
   /**
    * This method opens a popup dialog showing the given <code>error</code>. It will use
    * {@link MessageSeverity#ERROR}.
-   * 
+   *
    * @param error is the {@link Throwable} that has occurred.
    */
   void showPopup(Throwable error);

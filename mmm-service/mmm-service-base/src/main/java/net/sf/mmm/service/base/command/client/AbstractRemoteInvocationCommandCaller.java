@@ -4,7 +4,6 @@ package net.sf.mmm.service.base.command.client;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.function.Consumer;
 
 import net.sf.mmm.service.api.CsrfToken;
 import net.sf.mmm.service.api.client.RemoteInvocationQueueSettings;
@@ -15,6 +14,7 @@ import net.sf.mmm.service.base.client.AbstractRemoteInvocationCaller;
 import net.sf.mmm.service.base.client.RemoteInvocationCallData;
 import net.sf.mmm.service.base.command.GenericRemoteInvocationCommandRequest;
 import net.sf.mmm.service.base.command.GenericRemoteInvocationCommandTransactionalCalls;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 /**
  * This is the abstract base implementation of {@link RemoteInvocationCommandCaller}.

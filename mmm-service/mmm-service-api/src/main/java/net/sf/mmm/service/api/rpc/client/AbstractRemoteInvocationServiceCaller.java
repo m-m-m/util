@@ -2,13 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.api.rpc.client;
 
-import java.util.function.Consumer;
-
 import net.sf.mmm.service.api.rpc.RemoteInvocationService;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 /**
  * This is the abstract interface to call a {@link RemoteInvocationService} from the client.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -19,7 +18,7 @@ public interface AbstractRemoteInvocationServiceCaller {
    * {@link RemoteInvocationService}. After this method has been called, the intended method (with the given
    * <code>returnType</code>) has to be invoked on the resulting client-stub exactly once. This records the
    * desired method invocation and returns a dummy result (typically <code>null</code>) that shall be ignored.
-   * 
+   *
    * @param <SERVICE> is the generic type of <code>serviceInterface</code>.
    * @param <RESULT> is the generic type of <code>returnType</code>.
    * @param serviceInterface is the interface of the {@link RemoteInvocationService}.
@@ -40,9 +39,9 @@ public interface AbstractRemoteInvocationServiceCaller {
 
   /**
    * Same as {@link #getServiceClient(Class, Class, Consumer, Consumer)} but using the
-   * {@link net.sf.mmm.service.api.client.RemoteInvocationQueue#setDefaultFailureCallback(Consumer)
-   * default failure callback}.
-   * 
+   * {@link net.sf.mmm.service.api.client.RemoteInvocationQueue#setDefaultFailureCallback(Consumer) default
+   * failure callback}.
+   *
    * @param <SERVICE> is the generic type of <code>serviceInterface</code>.
    * @param <RESULT> is the generic type of <code>returnType</code>.
    * @param serviceInterface is the interface of the {@link RemoteInvocationService}.

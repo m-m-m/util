@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.custom.pattern;
 
-import java.util.function.Consumer;
-
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
@@ -20,6 +18,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
+import net.sf.mmm.util.lang.api.function.Consumer;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.ValidationStateImpl;
@@ -37,9 +36,9 @@ import net.sf.mmm.util.validation.base.ValidationStateImpl;
  * the {@link #getValue() value object} with the current modifications that is saved by delegation to the
  * {@link UiHandlerObjectSave#onSave(Object, UiEvent)} on widgets for UI patterns or forms to edit business
  * objects (see {@link #doGetValue(Object, ValidationState)} and {@link #doSetValue(Object, boolean)}).
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -57,7 +56,7 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param handlerSaveObject is the {@link UiHandlerObjectSave}
    *        {@link UiHandlerObjectSave#onSave(Object, UiEvent) invoked} if the end-user clicked "save" and the
@@ -97,9 +96,9 @@ public abstract class UiWidgetCustomEditor<VALUE> extends
    * This method adds a new child. It should be called from the constructor or from {@link #doInitialize()}
    * before the <code>super</code> call. Otherwise the child may appear after the {@link #createButtonPanel()
    * button panel}.
-   * 
+   *
    * @see net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite#addChild(net.sf.mmm.client.ui.api.widget.UiWidget)
-   * 
+   *
    * @param child is the {@link UiWidgetRegular} to add as child.
    */
   protected void addChild(UiWidgetRegular child) {

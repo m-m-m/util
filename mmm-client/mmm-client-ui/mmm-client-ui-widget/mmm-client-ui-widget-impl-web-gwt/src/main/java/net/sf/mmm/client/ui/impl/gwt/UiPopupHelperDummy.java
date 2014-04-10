@@ -3,17 +3,17 @@
 package net.sf.mmm.client.ui.impl.gwt;
 
 import java.util.Map;
-import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.client.ui.base.AbstractUiPopupHelper;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 import com.google.gwt.user.client.Window;
 
 /**
  * This is a dummy implementation of {@link net.sf.mmm.client.ui.api.UiPopupHelper}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -29,7 +29,7 @@ public class UiPopupHelperDummy extends AbstractUiPopupHelper {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nlsBundle is the instance of {@link NlsBundleUtilCoreRoot}.
    */
   public UiPopupHelperDummy(NlsBundleUtilCoreRoot nlsBundle) {

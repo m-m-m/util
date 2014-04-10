@@ -3,13 +3,13 @@
 package net.sf.mmm.service.api.command.client;
 
 import java.io.Serializable;
-import java.util.function.Consumer;
 
 import net.sf.mmm.service.api.command.RemoteInvocationCommand;
+import net.sf.mmm.util.lang.api.function.Consumer;
 
 /**
  * This is the abstract interface to call a {@link RemoteInvocationCommand} from the client.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -18,7 +18,7 @@ public interface AbstractRemoteInvocationCommandCaller {
   /**
    * This method invokes the given {@link RemoteInvocationCommand} on a
    * {@link net.sf.mmm.service.api.rpc.RemoteInvocationService}.
-   * 
+   *
    * @param <RESULT> is the generic type of <code>returnType</code>.
    * @param command is the {@link RemoteInvocationCommand} to invoke.
    * @param successCallback is the {@link Consumer} that is asynchronously {@link Consumer#accept(Object)
@@ -35,9 +35,9 @@ public interface AbstractRemoteInvocationCommandCaller {
 
   /**
    * Same as {@link #callCommand(RemoteInvocationCommand, Consumer)} but using the
-   * {@link net.sf.mmm.service.api.client.RemoteInvocationQueue#setDefaultFailureCallback(Consumer)
-   * default failure callback}.
-   * 
+   * {@link net.sf.mmm.service.api.client.RemoteInvocationQueue#setDefaultFailureCallback(Consumer) default
+   * failure callback}.
+   *
    * @param <RESULT> is the generic type of <code>returnType</code>.
    * @param command is the {@link RemoteInvocationCommand} to invoke.
    * @param successCallback is the {@link Consumer} that is asynchronously {@link Consumer#accept(Object)

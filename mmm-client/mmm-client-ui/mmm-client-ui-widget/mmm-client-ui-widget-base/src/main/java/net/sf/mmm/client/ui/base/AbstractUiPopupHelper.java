@@ -4,18 +4,18 @@ package net.sf.mmm.client.ui.base;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.common.MessageSeverity;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.lang.api.function.Consumer;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is the abstract base implementation of {@link UiPopupHelper}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -34,7 +34,7 @@ public abstract class AbstractUiPopupHelper extends AbstractLoggableComponent im
 
   /**
    * The constructor.
-   * 
+   *
    * @param nlsBundle is the instance of {@link NlsBundleUtilCoreRoot}.
    */
   public AbstractUiPopupHelper(NlsBundleUtilCoreRoot nlsBundle) {
@@ -45,7 +45,7 @@ public abstract class AbstractUiPopupHelper extends AbstractLoggableComponent im
 
   /**
    * This method gets the title for the given {@link MessageSeverity}.
-   * 
+   *
    * @param severity is the {@link MessageSeverity}.
    * @return the according title.
    */

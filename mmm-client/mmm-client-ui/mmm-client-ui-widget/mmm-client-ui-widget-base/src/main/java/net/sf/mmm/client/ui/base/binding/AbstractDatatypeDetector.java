@@ -4,10 +4,6 @@ package net.sf.mmm.client.ui.base.binding;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +14,7 @@ import net.sf.mmm.util.lang.api.Datatype;
 
 /**
  * This is the abstract base implementation of {@link DatatypeDetector}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -41,7 +37,7 @@ public abstract class AbstractDatatypeDetector implements DatatypeDetector {
    * {@link #isDatatype(Class)}.<br/>
    * <b>NOTE:</b><br/>
    * There is no need in registering {@link Enum} datatypes as they are detected as such automatically.
-   * 
+   *
    * @param datatype is the {@link net.sf.mmm.util.lang.api.Datatype} to register.
    */
   protected void registerDatatype(Class<?> datatype) {
@@ -66,10 +62,10 @@ public abstract class AbstractDatatypeDetector implements DatatypeDetector {
     registerDatatype(BigInteger.class);
     registerDatatype(BigDecimal.class);
     registerDatatype(Number.class);
-    registerDatatype(LocalTime.class);
-    registerDatatype(LocalDate.class);
-    registerDatatype(LocalDateTime.class);
-    registerDatatype(Instant.class);
+    // registerDatatype(LocalTime.class);
+    // registerDatatype(LocalDate.class);
+    // registerDatatype(LocalDateTime.class);
+    // registerDatatype(Instant.class);
     registerDatatype(Date.class);
     // Calendar is not GWT compatible and as obsolete as java.util.Date
     // registerDatatype(Calendar.class);

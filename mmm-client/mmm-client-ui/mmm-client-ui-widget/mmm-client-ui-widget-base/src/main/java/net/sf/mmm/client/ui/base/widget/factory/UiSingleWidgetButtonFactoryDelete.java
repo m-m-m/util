@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.factory;
 
-import java.util.function.Consumer;
-
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
@@ -13,12 +11,13 @@ import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
 import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionDelete;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
+import net.sf.mmm.util.lang.api.function.Consumer;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is the {@link net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory} for
  * {@link UiHandlerActionDelete delete} {@link UiWidgetButton buttons}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
