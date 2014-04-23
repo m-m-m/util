@@ -14,15 +14,9 @@
   <description>The implementation of mmm-persistence-query-api</description>
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
+      <groupId>net.sf.m-m-m</groupId>
       <artifactId>mmm-persistence-query-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate.javax.persistence</groupId>
-      <artifactId>hibernate-jpa-2.0-api</artifactId>
-      <version>1.0.1.Final</version>
-      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>

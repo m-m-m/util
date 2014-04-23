@@ -19,8 +19,6 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-core</artifactId>
-      <version>${net.sf.mmm.version.util-core}</version>
-      <scope>compile</scope>
     </dependency>
     -->
   </dependencies>

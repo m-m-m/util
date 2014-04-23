@@ -35,14 +35,15 @@
     <com.google.gwt.version>2.6.0</com.google.gwt.version>
     <org.springframework.version>4.0.2.RELEASE</org.springframework.version>
     <org.springsecurity.version>3.2.2.RELEASE</org.springsecurity.version>
-    <org.hibernate.version>4.2.7.SP1</org.hibernate.version>
-    <!--<org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>-->
-    <org.hibernate.validator.version>4.2.0.Final</org.hibernate.validator.version>
+    <org.hibernate.version>4.3.5.Final</org.hibernate.version>
+    <org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>
+    <!--<org.hibernate.validator.version>4.2.0.Final</org.hibernate.validator.version>-->
     <!--<org.slf4j.version>1.6.1</org.slf4j.version>-->
     <org.slf4j.version>1.7.6</org.slf4j.version>
     <!--<org.slf4j.version>1.5.6</org.slf4j.version>-->
     <jacoco.version>0.6.4.201312101107</jacoco.version>
-    <mmm.bootclasspath>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.util.function/${backport-function-version}/mmm-util-backport-java.util.function-${backport-function-version}.jar${path.separator}${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</mmm.bootclasspath>
+    <net.sf.mmm.util.core.version>4.0.0-SNAPSHOT</net.sf.mmm.util.core.version>
+    <mmm.bootclasspath>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</mmm.bootclasspath>
   </properties>
 
   <dependencyManagement>
@@ -87,16 +88,21 @@
         <artifactId>spring-security-core</artifactId>
         <version>${org.springsecurity.version}</version>
       </dependency>
-      
+
       <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-entitymanager</artifactId>
         <version>${org.hibernate.version}</version>
-      </dependency>        
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-envers</artifactId>
+        <version>${org.hibernate.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.hibernate.javax.persistence</groupId>
-        <artifactId>hibernate-jpa-2.0-api</artifactId>
-        <version>1.0.1.Final</version>
+        <artifactId>hibernate-jpa-2.1-api</artifactId>
+        <version>1.0.0.Final</version>
       </dependency>
       <dependency>
         <groupId>org.hibernate</groupId>
@@ -126,6 +132,11 @@
         <artifactId>c3p0</artifactId>
         <version>0.9.1.2</version>
       </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>1.1.0.Final</version>
+      </dependency>
 
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -148,7 +159,7 @@
         <artifactId>logback-classic</artifactId>
         <version>1.1.1</version>
       </dependency>
-      
+
       <dependency>
         <groupId>com.google.gwt</groupId>
         <artifactId>gwt-dev</artifactId>
@@ -171,7 +182,7 @@
         <artifactId>gwt-servlet</artifactId>
         <version>${com.google.gwt.version}</version>
       </dependency>
-      
+
       <dependency>
         <groupId>com.allen-sauer.gwt.log</groupId>
         <artifactId>gwt-log</artifactId>
@@ -182,7 +193,14 @@
         <artifactId>jsr250-api</artifactId>
         <version>1.0</version>
       </dependency>
-      
+      <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-servlet_3.0_spec</artifactId>
+        <version>1.0</version>
+        <scope>provided</scope>
+      </dependency>
+
+
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
@@ -193,7 +211,20 @@
         <artifactId>h2</artifactId>
         <version>1.3.160</version>
       </dependency>
-      
+
+      <!-- Internal dependencies -->
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-util-core</artifactId>
+        <version>${net.sf.mmm.util.core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-util-core</artifactId>
+        <version>${net.sf.mmm.util.core.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -453,7 +484,7 @@
           </archive>
         </configuration>
       </plugin>
-      
+
       <!-- generate and use consumer pom instead of pom.xml -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
