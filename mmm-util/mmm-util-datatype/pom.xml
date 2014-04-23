@@ -17,8 +17,6 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-core</artifactId>
-      <version>4.0.0-SNAPSHOT</version>
-      <scope>compile</scope>
     </dependency>
     <!--
     <dependency>
@@ -29,4 +27,21 @@
     </dependency>
     -->
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>backport</id>
+      <activation>
+        <jdk>1.7</jdk>
+      </activation>
+      <dependencies>
+        <!-- backport for java.time (in java < 1.8) -->
+        <dependency>
+          <groupId>net.sf.m-m-m</groupId>
+          <artifactId>mmm-util-backport-java.time</artifactId>
+          <version>${backport-time-version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>
