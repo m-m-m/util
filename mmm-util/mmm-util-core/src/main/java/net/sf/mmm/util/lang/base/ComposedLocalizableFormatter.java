@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.LocalizableFormatter;
 /**
  * This is the implementation of a {@link LocalizableFormatter} that is composed out of other
  * {@link LocalizableFormatter}s. See {@link ComposedFormatter} for further details.
- * 
+ *
  * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -22,9 +22,10 @@ public class ComposedLocalizableFormatter<V> extends AbstractLocalizableFormatte
 
   /**
    * The constructor.
-   * 
+   *
    * @param subFormatters are the {@link LocalizableFormatter}s to delegate to in the given order.
    */
+  @SafeVarargs
   public ComposedLocalizableFormatter(LocalizableFormatter<V>... subFormatters) {
 
     super();
