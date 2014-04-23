@@ -19,7 +19,6 @@ import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
-import net.sf.mmm.util.lang.base.DatatypeDetectorImpl;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 import org.junit.Assert;
@@ -74,9 +73,6 @@ public abstract class AbstractUiTest extends Assert {
       impl.setContext(context);
       impl.initialize();
       context.setWidgetFactoryDatatype(impl);
-      DatatypeDetectorImpl datatypeDetector = new DatatypeDetectorImpl();
-      datatypeDetector.initialize();
-      context.setDatatypeDetector(datatypeDetector);
       context.initialize();
       return context;
     } else {
