@@ -4,16 +4,19 @@ package net.sf.mmm.persistence.impl.jpa.test.impl;
 
 import javax.persistence.Entity;
 
-import net.sf.mmm.persistence.base.jpa.JpaEntity;
+import net.sf.mmm.persistence.base.jpa.AbstractJpaEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 
 /**
  * This is a simple entity for testing.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
-public class DummyBarEntityImpl extends JpaEntity implements DummyBarEntity {
+public class DummyBarEntityImpl extends AbstractJpaEntity<Long> implements DummyBarEntity {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1L;
 
   /** @see #getValue() */
   private String value;

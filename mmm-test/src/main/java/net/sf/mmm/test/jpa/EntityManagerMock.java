@@ -2,22 +2,27 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.test.jpa;
 
+import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import javax.persistence.LockModeType;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.metamodel.Metamodel;
 
 /**
  * This is a mock implementation of {@link EntityManager}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class EntityManagerMock implements EntityManager {
@@ -28,6 +33,116 @@ public class EntityManagerMock implements EntityManager {
   public EntityManagerMock() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Query createQuery(CriteriaUpdate updateQuery) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Query createQuery(CriteriaDelete deleteQuery) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public StoredProcedureQuery createNamedStoredProcedureQuery(String name) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public StoredProcedureQuery createStoredProcedureQuery(String procedureName) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public StoredProcedureQuery createStoredProcedureQuery(String procedureName, Class... resultClasses) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public StoredProcedureQuery createStoredProcedureQuery(String procedureName, String... resultSetMappings) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isJoinedToTransaction() {
+
+    // mock
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T> EntityGraph<T> createEntityGraph(Class<T> rootType) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public EntityGraph<?> createEntityGraph(String graphName) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public EntityGraph<?> getEntityGraph(String graphName) {
+
+    // mock
+    return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T> List<EntityGraph<? super T>> getEntityGraphs(Class<T> entityClass) {
+
+    // mock
+    return null;
   }
 
   /**

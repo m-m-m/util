@@ -5,18 +5,18 @@ package net.sf.mmm.persistence.impl.hibernate;
 
 import javax.persistence.Entity;
 
-import net.sf.mmm.persistence.base.jpa.JpaEntity;
+import net.sf.mmm.persistence.base.jpa.AbstractJpaEntity;
 
 import org.hibernate.envers.Audited;
 
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
 @Audited
-public class DummyRevisionedFooEntity extends JpaEntity {
+public class DummyRevisionedFooEntity extends AbstractJpaEntity<Long> {
 
   /** @see #getValue() */
   private String value;

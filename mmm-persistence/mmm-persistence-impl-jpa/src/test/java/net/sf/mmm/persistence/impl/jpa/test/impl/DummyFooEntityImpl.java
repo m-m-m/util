@@ -11,11 +11,14 @@ import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 
 /**
  * This is a simple entity for testing.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
 public class DummyFooEntityImpl extends AbstractJpaEntity<Integer> implements DummyFooEntity {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1L;
 
   /** @see #getNumber() */
   private int number;

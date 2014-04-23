@@ -8,15 +8,10 @@
                       http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-  <bean id="EntityLocator" class="net.sf.mmm.persistence.impl.jpa.EntityLocator">
-    <property name="persistenceBasePackages" value="${persistence.base.packages}"/>
-  </bean>
-
   <bean id="EntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="javax.sql.DataSource"/>
-    <!-- <property name="persistenceUnitName" value="m-m-m"/> -->
-    <property name="persistenceUnitName" value="${persistence.unit.name}"/>
-    <property name="persistenceXmlLocation" value="classpath:META-INF/persistence-${persistence.unit.name}.xml"/>
+    <!-- TODO find a way to make this config more flexible -->
+    <property name="packagesToScan"><list><value>net.sf.mmm</value></list></property>
     <property name="jpaVendorAdapter">
       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="showSql" value="${persistence.show.sql}"/>
@@ -24,11 +19,13 @@
         <property name="databasePlatform" value="${persistence.hibernate.dialect}"/>
       </bean>
     </property>
+    <!--
     <property name="persistenceUnitPostProcessors">
       <list>
         <ref bean="EntityLocator"/>
       </list>
     </property>
+     -->
     <!-- <property name="jpaPropertyMap"> <map> <entry key="hibernate.ejb.naming_strategy"><value>org.hibernate.cfg.ImprovedNamingStrategy</value></entry>
       </map> </property> -->
     <!-- <property name="loadTimeWeaver"> <bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver"/>
