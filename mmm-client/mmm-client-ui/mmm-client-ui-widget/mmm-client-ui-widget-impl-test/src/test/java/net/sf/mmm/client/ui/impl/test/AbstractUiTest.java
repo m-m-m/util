@@ -19,6 +19,7 @@ import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
+import net.sf.mmm.util.lang.base.DatatypeDetectorImpl;
 import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 import org.junit.Assert;
@@ -29,7 +30,7 @@ import org.junit.runners.Parameterized.Parameters;
 /**
  * This is the abstract base class for Tests of the {@link UiWidget}-framework based on the test
  * implementation. It provides the {@link #getContext() context} to start your tests with.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -44,7 +45,7 @@ public abstract class AbstractUiTest extends Assert {
 
   /**
    * The constructor.
-   * 
+   *
    * @param springConfig is the Spring XML config location or <code>null</code> to test without spring.
    */
   public AbstractUiTest(String springConfig) {
@@ -73,7 +74,9 @@ public abstract class AbstractUiTest extends Assert {
       impl.setContext(context);
       impl.initialize();
       context.setWidgetFactoryDatatype(impl);
-      context.setDatatypeDetector(new DatatypeDetectorTestImpl());
+      DatatypeDetectorImpl datatypeDetector = new DatatypeDetectorImpl();
+      datatypeDetector.initialize();
+      context.setDatatypeDetector(datatypeDetector);
       context.initialize();
       return context;
     } else {
@@ -83,7 +86,7 @@ public abstract class AbstractUiTest extends Assert {
 
   /**
    * This method enforces that the {@link UiWidgetAdapter} for the given <code>widget</code> is created.
-   * 
+   *
    * @param widget is the {@link UiWidget}.
    */
   protected void forceWidgetAdapter(UiWidget widget) {
@@ -111,7 +114,7 @@ public abstract class AbstractUiTest extends Assert {
    * can be used to verify that the value is actually set in the adapter and will appear in the real UI.
    * However, this is a matter of the actual native {@link UiWidgetAdapter} implementation that cannot be
    * tested here.
-   * 
+   *
    * @param widget is the {@link UiWidgetWithValue}.
    * @return the adapter value.
    */
@@ -127,7 +130,7 @@ public abstract class AbstractUiTest extends Assert {
    * This method sets the given <code>value</code> in the {@link AbstractUiWidget#getWidgetAdapter(UiWidget)
    * widget adapter} of the given <code>widget</code>. This may be used to simulate that the end-user has
    * entered the value.
-   * 
+   *
    * @param widget is the {@link UiWidgetWithValue}.
    * @param value is the value to set.
    */
@@ -202,7 +205,7 @@ public abstract class AbstractUiTest extends Assert {
 
   /**
    * This class is a {@link UiHandlerEventValueChange} implementation that counts the change-events.
-   * 
+   *
    * @param <VALUE> is the generic type of the changed
    *        {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value}.
    */
@@ -216,7 +219,7 @@ public abstract class AbstractUiTest extends Assert {
 
     /**
      * The constructor.
-     * 
+     *
      * @param widget is the {@link UiWidgetWithValue} where to register this handler.
      */
     public ValueChangeHandler(UiWidgetWithValue<VALUE> widget) {

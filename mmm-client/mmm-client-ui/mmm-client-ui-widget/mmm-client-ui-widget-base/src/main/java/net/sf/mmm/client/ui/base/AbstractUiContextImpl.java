@@ -7,12 +7,12 @@ import javax.inject.Inject;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.binding.DatatypeDetectorImpl;
 import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.client.ui.base.binding.UiDataBindingFactoryImpl;
 import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryDatatypeSimple;
 import net.sf.mmm.client.ui.base.widget.factory.UiWidgetFactoryImpl;
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.lang.base.DatatypeDetectorImpl;
 
 /**
  * This class extends {@link AbstractUiContext} with an initialization that falls back to the default

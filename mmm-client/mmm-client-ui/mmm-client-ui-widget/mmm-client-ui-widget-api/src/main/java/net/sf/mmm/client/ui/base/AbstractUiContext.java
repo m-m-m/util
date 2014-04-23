@@ -10,7 +10,6 @@ import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
 import net.sf.mmm.client.ui.api.UiPopupHelper;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteEventObserver;
-import net.sf.mmm.client.ui.api.binding.DatatypeDetector;
 import net.sf.mmm.client.ui.api.handler.UiEventObserver;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
@@ -19,6 +18,7 @@ import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.client.ui.base.binding.UiDataBindingFactory;
 import net.sf.mmm.util.component.api.ComponentContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.lang.api.DatatypeDetector;
 
 import org.slf4j.Logger;
 

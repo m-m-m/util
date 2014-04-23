@@ -8,10 +8,10 @@ import javax.inject.Inject;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import net.sf.mmm.client.ui.api.binding.DatatypeDetector;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
+import net.sf.mmm.util.lang.api.DatatypeDetector;
 import net.sf.mmm.util.math.api.MathUtilLimited;
 import net.sf.mmm.util.math.base.MathUtilLimitedImpl;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;

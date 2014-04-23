@@ -13,7 +13,7 @@ import javax.validation.constraints.Min;
 import javax.validation.metadata.ConstraintDescriptor;
 import javax.validation.metadata.PropertyDescriptor;
 
-import net.sf.mmm.client.ui.api.binding.DatatypeDetector;
+import net.sf.mmm.util.lang.api.DatatypeDetector;
 import net.sf.mmm.util.math.api.MathUtilLimited;
 import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
