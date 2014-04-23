@@ -12,7 +12,7 @@ package net.sf.mmm.util.lang.api.function;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public interface Consumer<T> {
+public interface Consumer<T/* > extends java.util.function.Consumer<T */> {
 
   /**
    * Accept an input value.
