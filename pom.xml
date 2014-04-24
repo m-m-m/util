@@ -415,10 +415,10 @@
           <version>2.2</version>
         </plugin>
         <plugin>
-          <!-- https://svn.codehaus.org/mojo/trunk/sandbox/flatten-maven-plugin -->
+          <!-- https://svn.codehaus.org/mojo/trunk/mojo/flatten-maven-plugin -->
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
-          <version>1.0.0-beta-1-SNAPSHOT</version>
+          <version>1.0.0-beta-1</version>
         </plugin>
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
