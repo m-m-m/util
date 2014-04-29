@@ -8,7 +8,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * This exception is thrown if a value has the wrong type (a different value type was expected).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -21,8 +21,16 @@ public class WrongValueTypeException extends ValueException {
   public static final String MESSAGE_CODE = "WrongValueType";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected WrongValueTypeException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param value is the wrong value.
    * @param expectedType is the expected type of the value.
    */
@@ -33,7 +41,7 @@ public class WrongValueTypeException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the throwable that caused this exception.
    * @param value is the wrong value.
    * @param expectedType is the expected type of the value.
@@ -45,7 +53,7 @@ public class WrongValueTypeException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the wrong value.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
    *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
@@ -59,7 +67,7 @@ public class WrongValueTypeException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the throwable that caused this exception.
    * @param value is the wrong value.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
@@ -75,7 +83,7 @@ public class WrongValueTypeException extends ValueException {
 
   /**
    * This method gets the type reflecting the actual value.
-   * 
+   *
    * @param value is the value for which the type is requested.
    * @return the type of the given <code>value</code>.
    */

@@ -8,7 +8,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * A {@link IllegalCaseException} is thrown if a specific case occurred that should never happen. It is
  * typically thrown in the <code>default</code> -section of a <code>switch</code>-statement where all
  * <code>case</code>s should have been covered.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -21,8 +21,16 @@ public class IllegalCaseException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "IllegalCase";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected IllegalCaseException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param illegalCase is the case that should never occur.
    */
   public IllegalCaseException(String illegalCase) {
@@ -32,9 +40,9 @@ public class IllegalCaseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param <E> is the generic type of <code>enumType</code>.
-   * 
+   *
    * @param enumType is the enum-{@link Class} of <code>enumValue</code>.
    * @param enumValue is the value of the enum that was NOT covered.
    */

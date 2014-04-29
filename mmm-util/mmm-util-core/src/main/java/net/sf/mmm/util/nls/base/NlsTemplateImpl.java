@@ -19,10 +19,18 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   private static final long serialVersionUID = -312035648040124881L;
 
   /** @see #getName() */
-  private final String name;
+  private/* final */String name;
 
   /** @see #getKey() */
-  private final String key;
+  private/* final */String key;
+
+  /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected NlsTemplateImpl() {
+
+    super();
+  }
 
   /**
    * The constructor.

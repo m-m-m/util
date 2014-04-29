@@ -7,7 +7,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 /**
  * A {@link NlsIllegalStateException} is analog to an {@link IllegalStateException} but with true native
  * language support.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -29,7 +29,7 @@ public class NlsIllegalStateException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    */
   public NlsIllegalStateException(Throwable nested) {

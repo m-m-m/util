@@ -7,7 +7,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 /**
  * A {@link NlsNullPointerException} is analog to an {@link NullPointerException} but with native language
  * support.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -20,8 +20,16 @@ public class NlsNullPointerException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "NPE";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected NlsNullPointerException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param argument is the argument that is illegal. May be <code>null</code>.
    */
   public NlsNullPointerException(String argument) {
@@ -31,7 +39,7 @@ public class NlsNullPointerException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param argument is the argument that is illegal. May be <code>null</code>.
    * @param nested is the {@link #getCause() cause} of this exception.
    */
@@ -49,7 +57,7 @@ public class NlsNullPointerException extends NlsRuntimeException {
    * {@link Object}, {@link String}, {@link Integer}, etc.<br>
    * <br>
    * Here is an example:
-   * 
+   *
    * <pre>
    * public void myMethod(MySpecificBusinessObject businessObject, String someParameter) {
    *   {@link NlsNullPointerException}.checkNotNull(MySpecificBusinessObject.class, businessObject);
@@ -57,7 +65,7 @@ public class NlsNullPointerException extends NlsRuntimeException {
    *   doTheWork();
    * }
    * </pre>
-   * 
+   *
    * @param <O> is the generic type of the <code>object</code>.
    * @param type is the class reflecting the <code>object</code>. Its {@link Class#getSimpleName() simple
    *        name} will be used in the exception-message if <code>object</code> is <code>null</code>.
@@ -74,20 +82,20 @@ public class NlsNullPointerException extends NlsRuntimeException {
   /**
    * This method checks if the given <code>object</code> is <code>null</code>.<br>
    * Look at the following example:
-   * 
+   *
    * <pre>
    * {@link NlsNullPointerException}.checkNotNull("someParameter", someParameter);
    * </pre>
-   * 
+   *
    * This is equivalent to this code:
-   * 
+   *
    * <pre>
    * if (someParameter == null) {
    *   throw new {@link NlsNullPointerException}("someParameter");
    * }
    * </pre>
-   * 
-   * 
+   *
+   *
    * @param objectName is the (argument-)name of the given <code>object</code>.
    * @param object is the object that is checked and should NOT be <code>null</code>.
    * @throws NlsNullPointerException if the given <code>object</code> is <code>null</code>.

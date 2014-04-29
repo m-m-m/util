@@ -10,9 +10,9 @@ import net.sf.mmm.util.lang.api.EnumDefinition;
 /**
  * This is the abstract base implementation of {@link EnumDefinition} with no {@link #getCategory() category}
  * and a static set of {@link #getEnumValues() enum values}. For an example see {@link BooleanEnumDefinition}.
- * 
+ *
  * @param <TYPE> is the generic type of the {@link #getEnumType() enum type}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -26,9 +26,10 @@ public abstract class AbstractSimpleEnumDefinition<TYPE> extends AbstractEnumDef
 
   /**
    * The constructor.
-   * 
+   *
    * @param enumValues are the static {@link #getEnumValues() enum values}.
    */
+  @SafeVarargs
   public AbstractSimpleEnumDefinition(TYPE... enumValues) {
 
     super();

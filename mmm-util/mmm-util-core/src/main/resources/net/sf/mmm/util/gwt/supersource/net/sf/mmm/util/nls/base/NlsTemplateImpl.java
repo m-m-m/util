@@ -9,21 +9,29 @@ import com.google.gwt.i18n.client.Dictionary;
 /**
  * This class is the implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplate} interface. It uses
  * {@link Dictionary} for localization.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (moved, 1.0.0)
  */
 public class NlsTemplateImpl extends AbstractNlsTemplate {
 
   /** @see #getName() */
-  private final String name;
+  private /*final*/ String name;
 
   /** @see #getKey() */
-  private final String key;
+  private /*final*/ String key;
+
+  /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected NlsTemplateImpl() {
+
+    super();
+  }
 
   /**
    * The constructor.
-   * 
+   *
    * @param name is the {@link #getName() name} of the bundle.
    * @param key is the {@link #getKey() key} of the string to lookup in the bundle.
    */
@@ -37,7 +45,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   /**
    * This method gets the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} used
    * to lookup the bundle (typically a {@link java.util.ResourceBundle}).
-   * 
+   *
    * @return the bundleName is the base-name of the associated bundle.
    */
   public String getName() {
@@ -48,7 +56,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   /**
    * This method gets the {@link java.util.ResourceBundle#getString(String) key} of the string to lookup from
    * the {@link #getName() bundle}. The key is a technical UID like (<code>ERR_VALUE_OUT_OF_RANGE</code>).
-   * 
+   *
    * @return the bundleKey is the key used to lookup the string from the bundle.
    */
   public String getKey() {
@@ -71,7 +79,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
 
   /**
    * Called from {@link #translate(Locale)} if localization failed.
-   * 
+   *
    * @param e is the {@link MissingResourceException}.
    * @return the fallback message.
    */

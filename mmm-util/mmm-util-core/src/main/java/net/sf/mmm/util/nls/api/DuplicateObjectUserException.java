@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.api;
 /**
  * This is a {@link DuplicateObjectException} that represents a user failure (is NOT {@link #isTechnical()
  * technical}).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -15,8 +15,16 @@ public class DuplicateObjectUserException extends DuplicateObjectException {
   private static final long serialVersionUID = -2872400478804617675L;
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected DuplicateObjectUserException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param object is the object that was rejected because it is a duplicate.
    */
   public DuplicateObjectUserException(Object object) {
@@ -26,7 +34,7 @@ public class DuplicateObjectUserException extends DuplicateObjectException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the object that was rejected because it is a duplicate.
    * @param key is the key the object could NOT be associated with because it already leads to another object.
    */
@@ -37,7 +45,7 @@ public class DuplicateObjectUserException extends DuplicateObjectException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the object that was rejected because it is a duplicate.
    * @param key is the key the object could NOT be associated with because it already leads to another object.
    * @param existing is the object that is already registered for the given <code>key</code>.

@@ -40,7 +40,7 @@ import net.sf.mmm.util.version.api.VersionUtil;
 
 /**
  * This is the abstract base-implementation of the {@link VersionUtil} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -93,7 +93,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
    * the {@link net.sf.mmm.util.component.api.IocContainer container-framework} of your choice. To wire up the
    * dependent components everything is properly annotated using annotations (JSR-250 and JSR-330). If your
    * container does NOT support this, you should consider using a better one.
-   * 
+   *
    * @return the singleton instance.
    */
   public static VersionUtil getInstance() {
@@ -229,7 +229,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   /**
    * This method puts the given <code>phase</code> in the given <code>map</code> using normalized variants of
    * the given <code>key</code>.
-   * 
+   *
    * @param map is the {@link #getPhaseMap()}.
    * @param key is the key.
    * @param phase is the {@link DevelopmentPhase} to put.
@@ -253,14 +253,14 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
 
   /**
    * This method creates the {@link #getPhaseMap() phase map} used as default.
-   * 
+   *
    * @return the {@link Map}.
    */
   protected Map<String, DevelopmentPhase> createDefaultPhaseMap() {
 
     Map<String, DevelopmentPhase> map = new HashMap<String, DevelopmentPhase>();
     for (DevelopmentPhase phase : DevelopmentPhase.values()) {
-      putPhase(map, phase.getTitle(), phase);
+      putPhase(map, phase.toString(), phase);
       putPhase(map, phase.getValue(), phase);
       for (String key : phase.getAlternatives()) {
         putPhase(map, key, phase);
@@ -421,7 +421,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
 
   /**
    * @see #createFormatter(String, boolean)
-   * 
+   *
    * @param scanner is the {@link CharSequenceScanner}.
    * @param formatPattern is the format pattern.
    * @param infixBuffer is a {@link StringBuilder} containing the current infix.

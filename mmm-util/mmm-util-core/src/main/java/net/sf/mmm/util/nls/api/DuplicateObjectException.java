@@ -10,7 +10,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * An {@link DuplicateObjectException} is thrown if an object was rejected because it is a duplicate. This
  * typically happens if objects are registered (e.g. in a {@link java.util.Map}) and two objects should be
  * associated with the same key.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -23,8 +23,16 @@ public class DuplicateObjectException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "DuplicateObject";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected DuplicateObjectException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param object is the object that was rejected because it is a duplicate.
    */
   public DuplicateObjectException(Object object) {
@@ -34,7 +42,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the object that was rejected because it is a duplicate.
    * @param key is the key the object could NOT be associated with because it already leads to another object.
    */
@@ -45,7 +53,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the object that was rejected because it is a duplicate.
    * @param key is the key the object could NOT be associated with because it already leads to another object.
    * @param existing is the object that is already registered for the given <code>key</code>.
@@ -59,7 +67,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
   /**
    * This method {@link Map#put(Object, Object) puts} the given <code>value</code> into the given
    * <code>map</code> using the given <code>key</code>.
-   * 
+   *
    * @param <KEY> is the generic type of the <code>key</code>.
    * @param <VALUE> is the generic type of the <code>value</code>.
    * @param map is the {@link Map}.

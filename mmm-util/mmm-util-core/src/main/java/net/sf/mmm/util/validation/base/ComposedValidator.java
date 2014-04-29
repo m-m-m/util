@@ -13,9 +13,9 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * {@link #getValidator(int) validators} given at {@link #ComposedValidator(AbstractValidator...)
  * construction}. It will always invoke <em>all</em> {@link #getValidator(int) contained validators} when a
  * {@link #validate(Object, Object) validation} is performed.
- * 
+ *
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -29,9 +29,10 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param validators are the {@link #getValidator(int) validators} to compose.
    */
+  @SafeVarargs
   public ComposedValidator(AbstractValidator<? super V>... validators) {
 
     super();
@@ -92,7 +93,7 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
   /**
    * @see #getValidator(int)
    * @see java.util.Collection#size()
-   * 
+   *
    * @return the number of {@link #getValidator(int) validators}.
    */
   public int getValidatorCount() {
@@ -102,9 +103,9 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
 
   /**
    * Gets the {@link ValueValidator} at the given <code>index</code>.
-   * 
+   *
    * @see java.util.List#get(int)
-   * 
+   *
    * @param index is the index of the {@link ValueValidator} to get.
    * @return the requested {@link ValueValidator}.
    */

@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.session.api;
 
+import java.security.Principal;
 import java.util.Locale;
 
 /**
@@ -20,5 +21,19 @@ public interface MutableUserSession extends UserSession {
    * @param locale is the new value of {@link #getLocale()}.
    */
   void setLocale(Locale locale);
+
+  /**
+   * Sets the {@link #getUser() current user}. <br/>
+   * <b>ATTENTION:</b><br/>
+   * This method is not intended for end-users to avoid getting used to strange design. This is just a
+   * back-door required for specific limited (client) environments where the user has to be set explicitly.
+   * Typically you will just use a security solution such as spring-security and {@link UserSession} will give
+   * you abstracted access on it throughout the application. Setting the user after successful login is to be
+   * done in a single place of the application and should directly happen via the underlying technology.
+   *
+   * @param user is the new value of {@link #getUser()}
+   * @throws UnsupportedOperationException if not supported.
+   */
+  void setUser(Principal user) throws UnsupportedOperationException;
 
 }

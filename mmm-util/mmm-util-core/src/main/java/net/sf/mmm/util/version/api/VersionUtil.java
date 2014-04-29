@@ -8,7 +8,7 @@ import net.sf.mmm.util.nls.api.NlsParseException;
 /**
  * This is the interface for a collection of utility functions that help to deal with versions. E.g. you can
  * {@link #createVersionIdentifier(String) parse} a a version {@link String} to a {@link VersionIdentifier}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -22,7 +22,7 @@ public interface VersionUtil {
    * This method parses the given <code>versionString</code> and builds an according {@link VersionIdentifier}
    * instance. It delegates to {@link #createFormatter(String, boolean)} using <code>false</code> for
    * <code>normalizeFormat</code>.
-   * 
+   *
    * @param versionString is the {@link VersionIdentifier#toString() string representation} of a
    *        {@link VersionIdentifier}.
    * @return the parsed {@link VersionIdentifier}.
@@ -33,7 +33,7 @@ public interface VersionUtil {
   /**
    * This method parses the given <code>versionString</code> and builds an according {@link VersionIdentifier}
    * instance.
-   * 
+   *
    * @param versionString is the {@link VersionIdentifier#toString() string representation} of a
    *        {@link VersionIdentifier}.
    * @param normalizeFormat - if <code>true</code> the returned {@link VersionIdentifier} will return a
@@ -46,9 +46,9 @@ public interface VersionUtil {
 
   /**
    * Variant of {@link #createFormatter(String, boolean)} with <code>strict</code> mode.
-   * 
+   *
    * @see #createFormatter(String, boolean)
-   * 
+   *
    * @param formatPattern is the format string.
    * @return the according {@link VersionIdentifierFormatter}.
    */
@@ -78,7 +78,7 @@ public interface VersionUtil {
    * <tr>
    * <td>P</td>
    * <td>{@link VersionIdentifier#getPhase() phase}</td>
-   * <td>The {@link DevelopmentPhase#getTitle() official phase name} - typically you want to use "A" instead.
+   * <td>The {@link DevelopmentPhase#toString() official phase name} - typically you want to use "A" instead.
    * May be followed by <code>{&lt;max&gt;}</code> to limit (truncate) to a maximum number of characters.</td>
    * </tr>
    * <tr>
@@ -128,7 +128,7 @@ public interface VersionUtil {
    * Further, infix text (no matter if enclosed in braces or not) is omitted if the following letter symbol is
    * resolved as undefined. To prevent this add the dollar character ($) to terminate a static infix that
    * should always occur.
-   * 
+   *
    * <table border="1">
    * <tr>
    * <th>{@link VersionIdentifier#getVersionSegmentCount() segment count}</th>
@@ -211,7 +211,7 @@ public interface VersionUtil {
    * <td>"01.02.03up02-snap_-rev654321-19991231T23:59:59Z"</td>
    * </tr>
    * </table>
-   * 
+   *
    * @param formatPattern is the format string.
    * @param strict - if <code>true</code> then the given <code>formatPattern</code> has to include at least
    *        the {@link VersionIdentifier#getVersionSegment(int) version segments}, the

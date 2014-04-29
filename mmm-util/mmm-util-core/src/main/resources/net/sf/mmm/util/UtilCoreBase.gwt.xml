@@ -14,6 +14,7 @@
   <source path="reflect" includes="**/*Limited*"/>
   <source path="component" excludes="impl/**,base/*Servlet*"/>
   <source path="scanner"/>
+  <source path="session"/>
   <source path="exception" excludes="api/ExceptionUtil.java,base/ExceptionUtilImpl.java"/>
   <source path="filter" excludes="**/*Parser.java,**/Pattern*"/>
   <source path="lang" excludes="**/System*"/>

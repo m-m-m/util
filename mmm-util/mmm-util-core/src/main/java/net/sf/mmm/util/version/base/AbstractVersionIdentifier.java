@@ -10,7 +10,7 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
  * This is the abstract base implementation of {@link VersionIdentifier}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -27,7 +27,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
 
   /**
    * The constructor.
-   * 
+   *
    * @param stringRepresentation is the {@link String} returned by {@link #toString()}.
    */
   public AbstractVersionIdentifier(String stringRepresentation) {
@@ -88,7 +88,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   /**
    * This method performs the part of {@link #compareTo(VersionIdentifier)} for the
    * {@link #getVersionSegment(int) version number}.
-   * 
+   *
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
    */
@@ -127,7 +127,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
 
   /**
    * This method gets {@link #getPhaseNumber()} as <code>int</code>.
-   * 
+   *
    * @param version is the {@link VersionIdentifier}.
    * @return the {@link #getPhaseNumber()} as <code>int</code>, using <code>0</code> for <code>null</code>.
    */
@@ -144,7 +144,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   /**
    * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp()
    * timestamp}.
-   * 
+   *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
@@ -209,7 +209,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   /**
    * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp()
    * timestamp}.
-   * 
+   *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
@@ -222,7 +222,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   /**
    * This method performs the part of {@link #compareTo(VersionIdentifier)} for linear and optional attributes
    * like {@link #getTimestamp()} or {@link #getRevision()}.
-   * 
+   *
    * @param <T> is the generic type of the {@link Comparable} value.
    * @param currentResult is the current result so far.
    * @param thisValue is the value of this {@link VersionIdentifier}.
@@ -268,7 +268,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   /**
    * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getRevision()
    * revision}.
-   * 
+   *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
@@ -280,7 +280,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
 
   /**
    * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getLabel() label}.
-   * 
+   *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
@@ -422,14 +422,6 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   /**
    * {@inheritDoc}
    */
-  public String getTitle() {
-
-    return getValue();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public String getValue() {
 
     if (this.stringRepresentation == null) {
@@ -445,7 +437,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   @Override
   public String toString() {
 
-    return getTitle();
+    return getValue();
   }
 
 }

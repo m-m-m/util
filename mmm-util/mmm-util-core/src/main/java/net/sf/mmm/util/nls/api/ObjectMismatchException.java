@@ -6,7 +6,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * An {@link ObjectMismatchException} is thrown if an object or value do NOT match as expected.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -19,8 +19,16 @@ public class ObjectMismatchException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "Mismatch";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ObjectMismatchException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
    */
@@ -31,7 +39,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
    * @param source is the source of the mismatching <code>object</code>.
@@ -43,7 +51,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
    * @param source is the source of the mismatching <code>object</code>.
@@ -57,7 +65,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
@@ -69,7 +77,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
@@ -82,7 +90,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).

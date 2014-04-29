@@ -75,7 +75,7 @@ public final class UserSessionAccess {
    */
   public static String getUserLogin() {
 
-    return null;
+    return getSession().getLogin();
   }
 
   /**

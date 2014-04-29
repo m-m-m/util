@@ -8,7 +8,7 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
 /**
  * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the
  * {@link VersionIdentifier#getPhaseAlias() phase alias}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -16,7 +16,7 @@ public class VersionIdentifierFormatterPhaseAlias extends AbstractVersionIdentif
 
   /**
    * The constructor.
-   * 
+   *
    * @param prefix is the static prefix to append before the {@link VersionIdentifier#getPhase() phase}. Will
    *        be omitted if {@link VersionIdentifier#getPhase() phase} is <code>null</code>.
    * @param maximumLength is the maximum number of letters for the {@link VersionIdentifier#getPhaseAlias()
@@ -38,7 +38,7 @@ public class VersionIdentifierFormatterPhaseAlias extends AbstractVersionIdentif
       // fallback for robustness, should not happen...
       DevelopmentPhase phase = value.getPhase();
       if (phase != null) {
-        phaseAlias = phase.getTitle();
+        phaseAlias = phase.toString();
       }
     }
     return phaseAlias;

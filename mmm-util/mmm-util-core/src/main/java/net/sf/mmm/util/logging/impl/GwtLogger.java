@@ -8,7 +8,7 @@ import com.allen_sauer.gwt.log.client.Log;
 
 /**
  * This is a SLF4J {@link org.slf4j.Logger} for GWT clients. It adapts to {@link Log}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -19,7 +19,7 @@ public class GwtLogger extends MarkerIgnoringBase {
 
   /**
    * The constructor. *
-   * 
+   *
    * @param name - is the {@link #getName() name} of the logger.
    */
   public GwtLogger(String name) {
@@ -48,7 +48,7 @@ public class GwtLogger extends MarkerIgnoringBase {
 
   /**
    * This is a GWT compatible implementation of {@link org.slf4j.helpers.MessageFormatter}.
-   * 
+   *
    * @param format is the format string (containing "{}"-place-holders).
    * @param args are the arguments to fill in.
    * @return the formatted string.
@@ -110,7 +110,7 @@ public class GwtLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void trace(String format, Object[] argArray) {
+  public void trace(String format, Object... argArray) {
 
     if (Log.isTraceEnabled()) {
       Log.trace(format(format, argArray));
@@ -170,7 +170,7 @@ public class GwtLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void debug(String format, Object[] argArray) {
+  public void debug(String format, Object... argArray) {
 
     if (Log.isDebugEnabled()) {
       Log.debug(format(format, argArray));
@@ -230,7 +230,7 @@ public class GwtLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void info(String format, Object[] argArray) {
+  public void info(String format, Object... argArray) {
 
     if (Log.isInfoEnabled()) {
       Log.info(format(format, argArray));
@@ -279,7 +279,7 @@ public class GwtLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void warn(String format, Object[] argArray) {
+  public void warn(String format, Object... argArray) {
 
     if (Log.isWarnEnabled()) {
       Log.warn(format(format, argArray));
@@ -350,7 +350,7 @@ public class GwtLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void error(String format, Object[] argArray) {
+  public void error(String format, Object... argArray) {
 
     if (Log.isErrorEnabled()) {
       Log.error(format(format, argArray));

@@ -11,7 +11,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * {@link java.util.Map}) but an expected object was NOT registered or the key is wrong for some reason.<br>
  * If you design your API please always consider if you should return <code>null</code> or throw an
  * {@link ObjectNotFoundException}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -24,8 +24,16 @@ public class ObjectNotFoundException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "NotFound";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ObjectNotFoundException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param object is a description (e.g. the classname) of the object that was required but could NOT be
    *        found.
    */
@@ -36,7 +44,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is a description (e.g. the classname) of the object that was required but could NOT be
    *        found.
    * @param key is the key to the required object.
@@ -48,7 +56,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is a description (e.g. the classname) of the object that was required but could NOT be
    *        found.
@@ -61,7 +69,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is a description (e.g. the classname) of the object that was required but could NOT be
    *        found.

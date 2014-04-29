@@ -9,7 +9,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 /**
  * The {@link ValueConvertException} is thrown if the {@link ValueConverter#convert(Object, Object, Class)
  * conversion} of some value failed.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -22,8 +22,16 @@ public class ValueConvertException extends ValueException {
   public static final String MESSAGE_CODE = "ValueConvert";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ValueConvertException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param value is the value that could NOT be converted.
    * @param targetType is the (generic) type the value should be converted to.
    */
@@ -34,7 +42,7 @@ public class ValueConvertException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the value that could NOT be converted.
    * @param targetType is the (generic) type the value should be converted to.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
@@ -48,7 +56,7 @@ public class ValueConvertException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be converted.
    * @param targetType is the (generic) type the value should be converted to.
@@ -60,7 +68,7 @@ public class ValueConvertException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be converted.
    * @param targetType is the (generic) type the value should be converted to.

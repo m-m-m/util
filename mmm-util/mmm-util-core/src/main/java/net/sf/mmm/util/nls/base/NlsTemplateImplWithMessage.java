@@ -20,7 +20,15 @@ public class NlsTemplateImplWithMessage extends NlsTemplateImpl {
   /**
    * The {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalized message}.
    */
-  private final String message;
+  private/* final */String message;
+
+  /**
+   * The constructor for de-serialization in GWT.
+   */
+  public NlsTemplateImplWithMessage() {
+
+    super();
+  }
 
   /**
    * The constructor.

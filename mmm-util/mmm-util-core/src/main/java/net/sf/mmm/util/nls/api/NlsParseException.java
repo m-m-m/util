@@ -9,7 +9,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 /**
  * The {@link NlsParseException} is thrown if some data could NOT be parsed because it does NOT match the
  * according format (pattern or grammar).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
  */
@@ -25,8 +25,16 @@ public class NlsParseException extends NlsRuntimeException {
   public static final String KEY_FORMAT = "format";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected NlsParseException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param value is the value that could NOT be parsed.
    * @param expected is the string or character that was expected but not found at the end of
    *        <code>value</code>.
@@ -38,7 +46,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
    * @param expected is the string or character that was expected but not found at the end of
@@ -52,7 +60,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g. "[+-][0-9]*[.][0-9]+")
    * @param type is type the given <code>value</code> should be converted to.
@@ -64,7 +72,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g. "[+-][0-9]*[.][0-9]+")
    * @param type is type the given <code>value</code> should be converted to.
@@ -79,7 +87,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g. "[+-][0-9]*[.][0-9]+")
@@ -92,7 +100,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g. "[+-][0-9]*[.][0-9]+")
@@ -109,7 +117,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the value that could NOT be parsed.
    * @param targetType is type the given <code>value</code> should be converted to.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
@@ -123,7 +131,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
    * @param targetType is type the given <code>value</code> should be converted to.
@@ -138,7 +146,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the value that could NOT be parsed.
    * @param targetType is type the given <code>value</code> should be converted to.
    */
@@ -149,7 +157,7 @@ public class NlsParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
    * @param targetType is type the given <code>value</code> should be converted to.

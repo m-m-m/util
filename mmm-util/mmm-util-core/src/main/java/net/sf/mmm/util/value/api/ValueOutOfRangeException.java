@@ -8,9 +8,9 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the exception thrown if a numeric value is not in the expected range.
- * 
+ *
  * @see GenericValueConverter#convertValue(Object, Object, Number, Number)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -23,8 +23,16 @@ public class ValueOutOfRangeException extends ValueException {
   public static final String MESSAGE_CODE = "ValueOutOfRange";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ValueOutOfRangeException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
@@ -36,7 +44,7 @@ public class ValueOutOfRangeException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
@@ -58,9 +66,9 @@ public class ValueOutOfRangeException extends ValueException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param <V> is the generic type of the values.
-   * 
+   *
    * @param valueSource describes the source of the value or <code>null</code> if NOT available. This may be
    *        the filename where the value was read from, an XPath where the value was located in an XML
    *        document, etc. It is used in exceptions thrown if something goes wrong. This will help to find the
@@ -78,7 +86,7 @@ public class ValueOutOfRangeException extends ValueException {
 
   /**
    * Verifies that the <code>value</code> is actually out of range.
-   * 
+   *
    * @param <V> is the generic type of the values.
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
@@ -101,7 +109,7 @@ public class ValueOutOfRangeException extends ValueException {
 
   /**
    * Verifies that the <code>value</code> is actually out of range.
-   * 
+   *
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
@@ -124,7 +132,7 @@ public class ValueOutOfRangeException extends ValueException {
   /**
    * This method checks that the given <code>value</code> is in the inclusive range from <code>minimum</code>
    * to <code>maximum</code>.
-   * 
+   *
    * @param value is the value to check.
    * @param minimum is the minimum number allowed.
    * @param maximum is the maximum number allowed.
@@ -151,7 +159,7 @@ public class ValueOutOfRangeException extends ValueException {
   /**
    * Creates a new error {@link NlsMessage} that the given <code>value</code> is not in the {@link Range} from
    * <code>minimum</code> to <code>maximum</code>.
-   * 
+   *
    * @param <V> is the generic type of the values. Needs to be an instance of {@link Number} or
    *        {@link Comparable}.
    * @param value is the invalid value.

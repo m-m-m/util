@@ -22,6 +22,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider implements MutableUserSession {
 
+  /** @see #getUser() */
+  private Principal user;
+
   /**
    * The constructor.
    */
@@ -43,13 +46,9 @@ public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider 
    * {@inheritDoc}
    */
   @Override
-  public Authentication getUser() {
+  public Principal getUser() {
 
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    if (authentication == null) {
-      return null;
-    }
-    return authentication;
+    return this.user;
   }
 
   /**
@@ -58,9 +57,7 @@ public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider 
   @Override
   public void setUser(Principal user) {
 
-    // we do not want to get developers used to do evil things. This is just a backdoor needed for specific
-    // client environments such as GWT.
-    throw new UnsupportedOperationException();
+    this.user = user;
   }
 
   /**
@@ -69,11 +66,10 @@ public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider 
   @Override
   public String getLogin() {
 
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    if (authentication == null) {
+    if (this.user == null) {
       return null;
     }
-    return authentication.getName();
+    return this.user.getName();
   }
 
   /**
@@ -82,7 +78,7 @@ public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider 
   @Override
   public Locale getLocale() {
 
-    return LocaleContextHolder.getLocale();
+    return Locale.getDefault();
   }
 
   /**
@@ -91,7 +87,7 @@ public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider 
   @Override
   public void setLocale(Locale locale) {
 
-    LocaleContextHolder.setLocale(locale);
+    Locale.setDefault(locale);
   }
 
   /**
@@ -100,10 +96,10 @@ public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider 
   @Override
   public boolean isFallback() {
 
-    if (SecurityContextHolder.getContext().getAuthentication() != null) {
-      return false;
+    if (this.user == null) {
+      return true;
     }
-    return true;
+    return false;
   }
 
 }

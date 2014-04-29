@@ -22,7 +22,7 @@ import net.sf.mmm.util.text.api.Justification;
  * {@link NlsArgument#getJustification() justification} delegating the lower-level formatting to the
  * {@link NlsArgument#getFormatter() according sub-formatter} (typically a
  * {@link net.sf.mmm.util.nls.api.NlsFormatterPlugin}).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -64,6 +64,7 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
       buffer.append(argument.getKey());
       buffer.append(NlsArgumentParser.END_EXPRESSION);
     } else {
+      @SuppressWarnings("unchecked")
       NlsFormatter<Object> formatter = (NlsFormatter<Object>) argument.getFormatter();
       Justification justification = argument.getJustification();
       if (justification == null) {

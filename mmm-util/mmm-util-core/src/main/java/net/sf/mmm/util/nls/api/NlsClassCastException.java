@@ -9,7 +9,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 /**
  * A {@link NlsClassCastException} is analog to an {@link ClassCastException} but with native language
  * support.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -22,8 +22,16 @@ public class NlsClassCastException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "ClassCast";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected NlsClassCastException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param object is the object that can NOT be cast to <code>expectedType</code>.
    * @param expectedType is the expected type the <code>object</code> should have but has not.
    */
@@ -34,7 +42,7 @@ public class NlsClassCastException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object that can NOT be cast to <code>expectedType</code>.
    * @param expectedType is the expected type the <code>object</code> should have but has not.
@@ -46,7 +54,7 @@ public class NlsClassCastException extends NlsRuntimeException {
 
   /**
    * This method gets the {@link #getClass() class} of an object in a null-safe way.
-   * 
+   *
    * @param object is the object for which the {@link #getClass() class} is requested. May be
    *        <code>null</code>
    * @return the class reflecting the given <code>object</code> or <code>null</code> if <code>object</code> is

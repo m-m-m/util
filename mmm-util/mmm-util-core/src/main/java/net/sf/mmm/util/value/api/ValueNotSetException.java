@@ -6,7 +6,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * This is the exception thrown if a required value was not set.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -19,8 +19,16 @@ public class ValueNotSetException extends ValueException {
   public static final String MESSAGE_CODE = "ValueNotSet";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ValueNotSetException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param valueSource describes the source of the value. This may be the filename where the value was read
    *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
    *        thrown if something goes wrong. This will help to find the problem easier.

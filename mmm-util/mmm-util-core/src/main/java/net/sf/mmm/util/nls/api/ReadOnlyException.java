@@ -10,7 +10,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * <b>ATTENTION:</b><br>
  * Please design your APIs in a way to prevent such exception where ever possible. However for generic access
  * to objects that can be mutable or read-only this exception is the right choice.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -23,8 +23,16 @@ public class ReadOnlyException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "ReadOnly";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ReadOnlyException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param object is the object that is read-only and can not be modified.
    */
   public ReadOnlyException(Object object) {
@@ -34,10 +42,10 @@ public class ReadOnlyException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the object that is read-only and can not be modified.
    * @param attribute is the attribute of <code>object</code> that can not be modified.
-   * 
+   *
    * @since 3.1.0
    */
   public ReadOnlyException(Object object, Object attribute) {
@@ -47,7 +55,7 @@ public class ReadOnlyException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object that is read-only and can not be modified.
    */
@@ -58,11 +66,11 @@ public class ReadOnlyException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param object is the object that is read-only and can not be modified.
    * @param attribute is the attribute of <code>object</code> that can not be modified.
-   * 
+   *
    * @since 3.1.0
    */
   public ReadOnlyException(Throwable nested, Object object, Object attribute) {

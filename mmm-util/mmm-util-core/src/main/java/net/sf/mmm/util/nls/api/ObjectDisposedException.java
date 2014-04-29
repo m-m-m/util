@@ -8,7 +8,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * An {@link ObjectDisposedException} is thrown if an object or value is already
  * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadDisposed#isDisposed() disposed} and therefore an
  * operation failed that has been invoked on it.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -21,8 +21,16 @@ public class ObjectDisposedException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "Disposed";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ObjectDisposedException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param object is the object (or an identifier of the object) that is
    *        {@link net.sf.mmm.util.lang.api.attribute.AttributeReadDisposed#isDisposed() disposed}.
    */

@@ -7,9 +7,9 @@ import net.sf.mmm.util.text.api.UnicodeUtil;
 
 /**
  * A {@link DevelopmentPhase} represents the state of development of an artifact.
- * 
+ *
  * @see VersionIdentifier#getPhase()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -64,10 +64,10 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
    */
   UPDATE("update", "u", "SR", "service-release", "SP", "service-pack");
 
-  /** @see #getTitle() */
-  private final String title;
+  /** @see #toString() */
+  private final String stringRepresentation;
 
-  /** @see #getTitle() */
+  /** @see #getValue() */
   private final String value;
 
   /** @see #getAlternatives() */
@@ -75,24 +75,16 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
 
   /**
    * The constructor.
-   * 
-   * @param title - see {@link #getTitle()}.
+   *
+   * @param stringRepresentation - see {@link #toString()}.
    * @param value - see {@link #getValue()}.
    * @param alternatives - see {@link #getAlternatives()}.
    */
-  private DevelopmentPhase(String title, String value, String... alternatives) {
+  private DevelopmentPhase(String stringRepresentation, String value, String... alternatives) {
 
-    this.title = title;
+    this.stringRepresentation = stringRepresentation;
     this.value = value;
     this.alternatives = alternatives;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getTitle() {
-
-    return this.title;
   }
 
   /**
@@ -105,8 +97,8 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
 
   /**
    * This method gets the alternatives. On each call of this method a copy of the internal array is created.
-   * 
-   * @return an array with string representations alternative to {@link #getTitle() title} and
+   *
+   * @return an array with string representations alternative to {@link #toString() string representation} and
    *         {@link #getValue() value}. May be empty.
    */
   public String[] getAlternatives() {
@@ -119,7 +111,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   /**
    * This method determines if this {@link DevelopmentPhase} is before the given <code>phase</code>. Here
    * <em>before</em> means that it is earlier and typically less stable.
-   * 
+   *
    * @param phase is the {@link DevelopmentPhase} to compare with.
    * @return <code>true</code> if this phase is before the given <code>phase</code>, <code>false</code>
    *         otherwise (also if <code>phase</code> is <code>null</code>).
@@ -135,7 +127,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   /**
    * This method determines if this {@link DevelopmentPhase} is after the given <code>phase</code>. Here
    * <em>after</em> means that it is later and typically more stable.
-   * 
+   *
    * @param phase is the {@link DevelopmentPhase} to compare with.
    * @return <code>true</code> if this phase is after the given <code>phase</code>, <code>false</code>
    *         otherwise (also if <code>phase</code> is <code>null</code>).
@@ -150,7 +142,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
 
   /**
    * This method gets the {@link DevelopmentPhase} with the given <code>value</code>.
-   * 
+   *
    * @param value is the {@link #getValue() value} of the requested {@link DevelopmentPhase}.
    * @return the requested {@link DevelopmentPhase} or <code>null</code> if it does not exists.
    */
@@ -165,14 +157,12 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link #getTitle() title} of this {@link DevelopmentPhase}.
-   * 
    * {@inheritDoc}
    */
   @Override
   public String toString() {
 
-    return this.title;
+    return this.stringRepresentation;
   }
 
 }

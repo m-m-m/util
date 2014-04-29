@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * A {@link VersionIdentifier} is a version identifying a particular state of an object under version control.
  * Such object can be an atomic asset like a single file but also a complex composition of many input
  * artifacts like an entire software product.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -29,7 +29,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * indicator whether a {@link VersionIdentifier} is a legal successor.<br/>
    * E.g. for the version "1.2.3-RC4" strict successors are "1.2.3-RC5", "1.2.3-GA", "1.2.4", etc. while
    * "1.2.3-RC6" or "1.2.4-RC2" are NOT.<br/>
-   * 
+   *
    * @see #compareTo(VersionIdentifier)
    */
   int COMPARE_TO_STRICT_SUCCESSOR = 1;
@@ -132,14 +132,14 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * </tr>
    * </table>
    * E.g. if the version number is "1.2.3.42", then <code>{@link #getVersionSegment(int) getSegment}()</code>
-   * 
+   *
    * @see #VERSION_SEGMENT_INDEX_MAJOR
    * @see #VERSION_SEGMENT_INDEX_MINOR
    * @see #VERSION_SEGMENT_INDEX_MILLI
    * @see #VERSION_SEGMENT_INDEX_MICRO
    * @see #VERSION_SEGMENT_INDEX_NANNO
    * @see #VERSION_SEGMENT_INDEX_PICO
-   * 
+   *
    * @param index is the 0-based index of the requested segment. It shall not be negative.
    * @return the requested segment. If not available (in other words if <code>index</code> is greater or equal
    *         to {@link #getVersionSegmentCount()}) the value <code>0</code> is returned.
@@ -150,7 +150,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
   /**
    * This method gets the number of {@link #getVersionSegment(int) segments} of this {@link VersionIdentifier}
    * .
-   * 
+   *
    * @return the number of {@link #getVersionSegment(int) segments}.
    */
   int getVersionSegmentCount();
@@ -161,9 +161,9 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * of the version. It only gets updated on significant functional and/or structural changes of the versioned
    * artifact. An upgrade can cause appreciable manual effort and will often cause compatibility problems and
    * require migration of data or configuration.
-   * 
+   *
    * @see #VERSION_SEGMENT_INDEX_MAJOR
-   * 
+   *
    * @return the major version segment.
    */
   int getVersionMajorSegment();
@@ -174,9 +174,9 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * segment} of the version. It only gets updated on functional and/or structural changes of the versioned
    * artifact. An upgrade should be supported but may cause compatibility problems and require migration of
    * data or configuration.
-   * 
+   *
    * @see #VERSION_SEGMENT_INDEX_MINOR
-   * 
+   *
    * @return the minor version segment.
    */
   int getVersionMinorSegment();
@@ -186,9 +186,9 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * of this {@link VersionIdentifier}. This is the third most significant {@link #getVersionSegment(int)
    * segment} of the version. It only gets updated on small functional and/or structural changes of the
    * versioned artifact. An upgrade should not cause problems but needs to be tested.
-   * 
+   *
    * @see #VERSION_SEGMENT_INDEX_MILLI
-   * 
+   *
    * @return the milli version segment.
    */
   int getVersionMilliSegment();
@@ -198,9 +198,9 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * of this {@link VersionIdentifier}. This is the fourth most significant {@link #getVersionSegment(int)
    * segment} of the version. It only gets updated on small internal changes (e.g. bugfixes) of the versioned
    * artifact. An upgrade should not cause problems.
-   * 
+   *
    * @see #VERSION_SEGMENT_INDEX_MICRO
-   * 
+   *
    * @return the milli version segment.
    */
   int getVersionMicroSegment();
@@ -210,7 +210,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * <b>ATTENTION:</b><br/>
    * If the {@link #getPhase() phase} is undefined (<code>null</code>), {@link DevelopmentPhase#RELEASE} will
    * be assumed for {@link #compareTo(VersionIdentifier)}.
-   * 
+   *
    * @return the {@link DevelopmentPhase} or <code>null</code> if NOT defined.
    */
   DevelopmentPhase getPhase();
@@ -218,11 +218,11 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
   /**
    * This method gets the string representation of the {@link #getPhase() phase} for this
    * {@link VersionIdentifier}. This is ideally
-   * <code>{@link #getPhase()}.{@link DevelopmentPhase#getTitle() getTitle()}</code> but may also be any other
+   * <code>{@link #getPhase()}.{@link DevelopmentPhase#toString() toString()}</code> but may also be any other
    * legal alias for the {@link #getPhase() phase}.<br/>
    * E.g. for {@link DevelopmentPhase#RELEASE} the {@link #getPhaseAlias() phase name} may also be "final",
    * "GA", "RTM", "REL", "gold", or "stable".
-   * 
+   *
    * @return the alias of the {@link #getPhase() phase}.
    */
   String getPhaseAlias();
@@ -239,7 +239,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * <b>ATTENTION:</b><br/>
    * If the {@link #getPhaseNumber() phase} is undefined (<code>null</code>), <code>0</code> will be assumed
    * for {@link #compareTo(VersionIdentifier)}.
-   * 
+   *
    * @return the phase number or <code>null</code> if NOT defined.
    */
   Integer getPhaseNumber();
@@ -253,7 +253,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * E.g. multiple "1.0.0-SNAPSHOT" versions can be published for testers. After all tests pass, the version
    * "1.0.0" gets released. This approach is orthogonal to the {@link #getPhase() phase} and can be combined
    * (e.g. "1.0.0-beta2-SNAPSHOT").
-   * 
+   *
    * @return <code>true</code> if this {@link VersionIdentifier} represents a snapshot release,
    *         <code>false</code> in case of an official release.
    */
@@ -262,7 +262,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
   /**
    * This method gets the revision of the {@link VersionIdentifier}. It typically has a technical nature and
    * might be derived from the underlying version control system.
-   * 
+   *
    * @return the revision or <code>null</code> if NOT defined.
    */
   Long getRevision();
@@ -272,7 +272,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * {@link VersionIdentifier} was assigned to the associated object. The timestamp may also called
    * <em>release date</em>. The value is optional but is best practice to assign a timestamp to a
    * {@link VersionIdentifier}.
-   * 
+   *
    * @return the timestamp or <code>null</code> if NOT defined.
    */
   Date getTimestamp();
@@ -280,7 +280,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
   /**
    * This method gets the optional label of the {@link VersionIdentifier}. A label is a non-technical
    * identifier also called code name (e.g. "Tiger" or "Dolphin").
-   * 
+   *
    * @return the label or <code>null</code> if NOT defined.
    */
   String getLabel();
@@ -352,14 +352,14 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * <td>{@link #COMPARE_TO_INCOMPARABLE}</td>
    * </tr>
    * </table>
-   * 
+   *
    * {@inheritDoc}
    */
   int compareTo(VersionIdentifier otherVersion);
 
   /**
    * This method gets a unique string representation of this {@link VersionIdentifier}.
-   * 
+   *
    * {@inheritDoc}
    */
   @Override

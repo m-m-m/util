@@ -12,9 +12,9 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * This is an implementation of the {@link TypeVariable} interface.
- * 
+ *
  * @param <DECLARATION> the type of generic declaration that declared the underlying type variable.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -31,7 +31,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
 
   /**
    * The constructor.
-   * 
+   *
    * @param name is the {@link #getName() name}.
    * @param declaration is the {@link #getGenericDeclaration() declaring element} (e.g. Class or Method).
    * @param bounds are the {@link #getBounds()}.
@@ -84,7 +84,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("javadoc")
+  @SuppressWarnings({ "javadoc", "unchecked" })
   // Java8 support
   public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
 
@@ -114,7 +114,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("javadoc")
+  @SuppressWarnings({ "javadoc", "unchecked" })
   // Java8 support
   public <T extends Annotation> T[] getDeclaredAnnotationsByType(Class<T> annotationClass) {
 

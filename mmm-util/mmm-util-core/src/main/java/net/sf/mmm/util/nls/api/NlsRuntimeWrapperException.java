@@ -4,7 +4,7 @@ package net.sf.mmm.util.nls.api;
 
 /**
  * This is an {@link NlsRuntimeException} to wrap an arbitrary {@link NlsThrowable}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -14,11 +14,19 @@ public class NlsRuntimeWrapperException extends NlsRuntimeException {
   private static final long serialVersionUID = -7836201532457130038L;
 
   /** The original cause as {@link NlsThrowable}. */
-  private final NlsThrowable cause;
+  private/* final */NlsThrowable cause;
+
+  /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected NlsRuntimeWrapperException() {
+
+    super();
+  }
 
   /**
    * The constructor.
-   * 
+   *
    * @param e is the {@link #getCause() cause} to wrap.
    */
   public NlsRuntimeWrapperException(AbstractNlsException e) {
@@ -29,7 +37,7 @@ public class NlsRuntimeWrapperException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param e is the {@link #getCause() cause} to wrap.
    */
   public NlsRuntimeWrapperException(AbstractNlsRuntimeException e) {
