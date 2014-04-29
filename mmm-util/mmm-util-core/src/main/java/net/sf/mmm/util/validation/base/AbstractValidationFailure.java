@@ -5,11 +5,12 @@ package net.sf.mmm.util.validation.base;
 import java.util.UUID;
 
 import net.sf.mmm.util.lang.base.AbstractMessage;
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
  * This is the abstract base implementation of {@link ValidationFailure}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -28,13 +29,30 @@ public abstract class AbstractValidationFailure extends AbstractMessage implemen
 
   /**
    * The constructor.
-   * 
+   *
    * @param code is the {@link #getCode() code}.
    * @param source is the {@link #getSource() source}.
+   * @param message is the {@link #getMessage() message}.
+   * @param uuid is the {@link #getUuid() uuid}.
+   * @param details are the {@link #getDetails() details}.
    */
-  public AbstractValidationFailure(String code, Object source) {
+  public AbstractValidationFailure(String code, Object source, NlsMessage message, UUID uuid, String details) {
 
-    super(code, source);
+    super(code, source, message, uuid, details);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param code is the {@link #getCode() code}.
+   * @param source is the {@link #getSource() source}.
+   * @param message is the {@link #getMessage() message}.
+   * @param uuid is the {@link #getUuid() uuid}.
+   * @param details are the {@link #getDetails() details}.
+   */
+  public AbstractValidationFailure(String code, Object source, String message, UUID uuid, String details) {
+
+    super(code, source, message, uuid, details);
   }
 
   /**
@@ -46,24 +64,4 @@ public abstract class AbstractValidationFailure extends AbstractMessage implemen
     return TYPE_VALIDATION_FAILURE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getDetails() {
-
-    // no details by default - override to change...
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public UUID getUuid() {
-
-    // UUID is expensive to create and only required to track down errors in log-files what is pointless in
-    // validation failures
-    return null;
-  }
 }

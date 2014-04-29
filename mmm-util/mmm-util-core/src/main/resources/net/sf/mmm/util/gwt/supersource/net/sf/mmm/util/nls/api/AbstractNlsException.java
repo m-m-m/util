@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+import net.sf.mmm.util.exception.api.ExceptionTruncation;
+import net.sf.mmm.util.nls.api.AbstractNlsException;
 import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
@@ -65,6 +67,19 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
     } else {
       this.uuid = createUuid();
     }
+  }
+
+  /**
+   * The copy constructor.
+   *
+   * @param copySource is the exception to copy.
+   * @param truncation is the {@link ExceptionTruncation} to configure potential truncations.
+   */
+  protected AbstractNlsException(AbstractNlsException copySource, ExceptionTruncation truncation) {
+
+    super();
+    this.nlsMessage = copySource.getNlsMessage();
+    this.uuid = copySource.getUuid();
   }
 
   /**
@@ -183,6 +198,15 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   @Override
   public String getMessage() {
 
+    return getNlsMessage().getMessage();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLocalizedMessage() {
+
     return getNlsMessage().getLocalizedMessage();
   }
 
@@ -218,6 +242,26 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   public NlsMessage toNlsMessage() {
 
     return getNlsMessage();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isTechnical() {
+
+    // checked exceptions should be avoided at all. However, if they are used they should represent business
+    // exceptions (user failures).
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isForUser() {
+
+    return !isTechnical();
   }
 
   /**

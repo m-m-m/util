@@ -4,6 +4,7 @@ package net.sf.mmm.util.lang.api;
 
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.UUID;
 
 import net.sf.mmm.util.lang.api.attribute.AttributeReadMessage;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadMessageCode;
@@ -11,7 +12,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadUuid;
 
 /**
  * This is the interface for a message that gets displayed to an end-user.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -19,15 +20,15 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
 
   /**
    * The {@link #getType() type} for a technical error.
-   * 
+   *
    * @see net.sf.mmm.util.nls.api.NlsThrowable#isTechnical()
    */
   String TYPE_TECHNICAL_ERROR = "TechnicalError";
 
   /**
    * The {@link #getType() type} for a user error.
-   * 
-   * @see net.sf.mmm.util.nls.api.NlsThrowable#isTechnical()
+   *
+   * @see net.sf.mmm.util.nls.api.NlsThrowable#isForUser()
    */
   String TYPE_USER_ERROR = "UserError";
 
@@ -44,7 +45,7 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
    * This method gets the (optional) source of the message. E.g. the name or a field or file that is invalid.
    * It can be used to enrich {@link #getMessage() messages} displayed to end-users. This will help to find
    * the problem easier.
-   * 
+   *
    * @return the source or <code>null</code> if NOT available.
    */
   String getSource();
@@ -55,7 +56,7 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
    * This method is designed for server applications with {@link net.sf.mmm.util.nls.api.NlsMessage NLS}. On
    * client side (e.g. for GWT clients) only a single locale may be supported at a time and this method may
    * behave like {@link #getMessage()} ignoring the {@link Locale}.
-   * 
+   *
    * @param locale is the {@link Locale}.
    * @return the message.
    */
@@ -64,7 +65,7 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
   /**
    * This method gets optional details for this message. E.g. in case of an exception this can be the
    * stacktrace.
-   * 
+   *
    * @return the details or <code>null</code> if no additional details are available.
    */
   String getDetails();
@@ -83,9 +84,19 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
    * such case it should be possible to continue the use-case or operation normally.</li>
    * <li>{@value #TYPE_INFORMATION} - for additional information - e.g. a hint.</li>
    * </ul>
-   * 
+   *
    * @return the message type.
    */
   String getType();
+
+  /**
+   * {@inheritDoc}
+   *
+   * @return the {@link UUID} if this {@link Message}. Will typically only be available if {@link #getType()
+   *         type} is {@link #TYPE_TECHNICAL_ERROR} or {@link #TYPE_USER_ERROR}. Will be <code>null</code> if
+   *         not available.
+   */
+  @Override
+  UUID getUuid();
 
 }

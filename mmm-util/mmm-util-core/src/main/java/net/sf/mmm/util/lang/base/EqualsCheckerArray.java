@@ -13,18 +13,21 @@ import net.sf.mmm.util.lang.api.EqualsChecker;
  * other types it will delegate to the {@link EqualsChecker} given at construction. This way you can simply
  * check if two arrays have the {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame same} or
  * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual equal} elements.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public class EqualsCheckerArray extends AbstractEqualsChecker<Object> {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1L;
 
   /** The delegate to check regular objects. */
   private final EqualsChecker<Object> delegate;
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link EqualsChecker} used to check objects other than arrays.
    */
   public EqualsCheckerArray(EqualsChecker<Object> delegate) {
@@ -69,7 +72,7 @@ public class EqualsCheckerArray extends AbstractEqualsChecker<Object> {
 
   /**
    * This method is the part of {@link #isEqualNotNull(Object, Object)} for primitive arrays.
-   * 
+   *
    * @param value1 is the first value to check.
    * @param value2 is the first value to check.
    * @return <code>true</code> if the given values are considered as equal, <code>false</code> otherwise.

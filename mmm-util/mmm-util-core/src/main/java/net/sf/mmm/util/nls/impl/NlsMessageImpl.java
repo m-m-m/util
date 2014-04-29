@@ -29,7 +29,7 @@ public class NlsMessageImpl extends BasicNlsMessage {
   /**
    * The constructor for de-serialization in GWT.
    */
-  public NlsMessageImpl() {
+  protected NlsMessageImpl() {
 
     super();
   }
@@ -64,10 +64,14 @@ public class NlsMessageImpl extends BasicNlsMessage {
   @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
+    Locale actualLocale = locale;
+    if (actualLocale == null) {
+      actualLocale = LOCALE_ROOT;
+    }
     try {
       NlsTemplate nlsTemplate = getTemplate();
       if (nlsTemplate == null) {
-        if (locale != LOCALE_ROOT) {
+        if (actualLocale != LOCALE_ROOT) {
           nlsTemplate = getTemplate(resolver);
         }
       }
@@ -76,7 +80,7 @@ public class NlsMessageImpl extends BasicNlsMessage {
       if ((arguments == null) || arguments.isEmpty()) {
         String text = null;
         if (nlsTemplate != null) {
-          text = nlsTemplate.translate(locale);
+          text = nlsTemplate.translate(actualLocale);
         }
         if (text == null) {
           // if (locale != LOCALE_ROOT) {
@@ -88,25 +92,17 @@ public class NlsMessageImpl extends BasicNlsMessage {
       } else {
         boolean success = false;
         if (nlsTemplate != null) {
-          success = nlsTemplate.translate(locale, arguments, buffer, resolver, AbstractNlsDependencies.getInstance());
+          success = nlsTemplate.translate(actualLocale, arguments, buffer, resolver,
+              AbstractNlsDependencies.getInstance());
         }
         if (!success) {
           NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(message, AbstractNlsDependencies.getInstance());
-          format.format(null, locale, arguments, resolver, buffer);
+          format.format(null, actualLocale, arguments, resolver, buffer);
         }
       }
     } catch (IOException e) {
       throw new RuntimeIoException(e, IoMode.WRITE);
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getMessage() {
-
-    return getLocalizedMessage(LOCALE_ROOT, null);
   }
 
   /**

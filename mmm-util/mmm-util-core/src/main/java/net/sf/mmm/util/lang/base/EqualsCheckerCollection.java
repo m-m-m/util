@@ -21,18 +21,21 @@ import net.sf.mmm.util.lang.api.EqualsChecker;
  * {@link java.util.Set} or only different implementations of {@link java.util.List} with same elements to be
  * considered as equal) you can extend this class and override
  * {@link #isEqualCollectionType(Collection, Collection)}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public class EqualsCheckerCollection extends AbstractEqualsChecker<Object> {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1L;
 
   /** The delegate to check regular objects. */
   private final EqualsChecker<Object> delegate;
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link EqualsChecker} used to check objects other than {@link Collection}s.
    */
   public EqualsCheckerCollection(EqualsChecker<Object> delegate) {
@@ -78,7 +81,7 @@ public class EqualsCheckerCollection extends AbstractEqualsChecker<Object> {
   /**
    * This method is called from {@link #isEqualNotNull(Object, Object)} to check if the
    * {@link Object#getClass() type} of two given {@link Collection}s should be considered as equal.
-   * 
+   *
    * @param collection1 is the first {@link Collection}.
    * @param collection2 is the second {@link Collection}.
    * @return <code>true</code> if the {@link Object#getClass() type} of the given {@link Collection}s is

@@ -340,11 +340,10 @@ public interface NlsMessage extends NlsObject, Serializable {
   String getLocalizedMessage();
 
   /**
-   * This method tries to get the localized message as string. Since no {@link NlsTemplateResolver translator}
-   * is specified, the implementation will try its best to do the translation on its own according to given
-   * {@link Locale}. This will only work if you follow specific rules as described in the
-   * {@link net.sf.mmm.util.nls.api package javadoc}. If this fails or is NOT supported, the
-   * {@link #getMessage() untranslated} message will be returned.
+   * This method gets the message localized to the given {@link Locale} as string. If this fails for whatever
+   * reason, the {@link #getMessage() untranslated} message will be returned as fallback.
+   *
+   * @see net.sf.mmm.util.nls.api
    *
    * @param locale is the locale to translate to.
    * @return the localized message.

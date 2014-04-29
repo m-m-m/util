@@ -10,16 +10,16 @@ import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
-import net.sf.mmm.util.validation.base.SimpleValidationFailure;
+import net.sf.mmm.util.validation.base.ValidationFailureImpl;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
 import org.slf4j.Logger;
 
 /**
  * This is a base implementation of {@link UiDataBinding}.
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -43,7 +43,7 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
 
   /**
    * The constructor.
-   * 
+   *
    * @param widget is the {@link #getWidget() widget} to bind.
    */
   public AbstractUiDataBinding(AbstractUiWidget<VALUE> widget) {
@@ -98,9 +98,9 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
    * This method is called from {@link #setValue(Object, boolean)}. It has to be implemented with the custom
    * logic to set the value in the view. The implementation of this method has to correspond with the
    * implementation of {@link #doGetValue(Object, ValidationState)}.
-   * 
+   *
    * @see #doGetValue(Object, ValidationState)
-   * 
+   *
    * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set
    *        to fields (see <code>UiWidgetField</code>).
    * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
@@ -149,7 +149,7 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
    * their {@link #getValue() value} to something else. Further, to be GWT compatible you cannot create the
    * new instance via reflection. If you do not care about GWT, you can use reflection or better use it via
    * {@link net.sf.mmm.util.pojo.api.PojoFactory}.
-   * 
+   *
    * @return a new instance of &lt;VALUE&gt;.
    */
   protected abstract VALUE createNewValue();
@@ -158,7 +158,7 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
    * This method will create a (deep-)copy of the given <code>value</code>.<br/>
    * <b>ATTENTION:</b><br/>
    * If &lt;VALUE&gt; is immutable you can simply return <code>null</code>.
-   * 
+   *
    * @param value is the {@link #getValue() value} to copy. Will typically be {@link #getOriginalValue()}.
    *        Must NOT be modified in any way.
    * @return a copy of the value or <code>null</code> if NOT implemented or supported.
@@ -170,9 +170,9 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
    * logic to get the value from the view. The implementation of this method has to correspond with the
    * implementation of {@link #doSetValue(Object, boolean)}. A typical implementation of this method for a
    * composite widget should look like this:
-   * 
+   *
    * @see #doSetValue(Object, boolean)
-   * 
+   *
    * @param template is the object where the data is filled in. May only be <code>null</code> if
    *        {@link #createNewValue()} does.
    * @param state is the {@link ValidationState}. May be <code>null</code> (if the validation is omitted).
@@ -260,14 +260,14 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
   /**
    * This method converts an exception from {@link #getValueOrException(Object)} to a
    * {@link ValidationFailure}.
-   * 
+   *
    * @param error is the exception.
    * @return the {@link ValidationFailure}.
    */
   @Override
   protected ValidationFailure createValidationFailure(Throwable error) {
 
-    return new SimpleValidationFailure(error.getClass().getSimpleName(), getSource(), error.getLocalizedMessage());
+    return new ValidationFailureImpl(error.getClass().getSimpleName(), getSource(), error.getLocalizedMessage());
   }
 
   /**

@@ -35,7 +35,12 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * The line separator used by
    * {@link #printStackTrace(NlsThrowable, Locale, NlsTemplateResolver, Appendable)}.
    */
+  // BEGIN_GWT: IF_GWT_IS_SERVER
   static final String LINE_SEPARATOR = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
+
+  // ELSE_IF_GWT_IS_CLIENT
+  // static final String LINE_SEPARATOR = "\n";
+  // :END_GWT
 
   /** the internationalized message */
   private final NlsMessage nlsMessage;

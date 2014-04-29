@@ -4,12 +4,13 @@ package net.sf.mmm.util.validation.base;
 
 import java.util.Locale;
 
+import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
  * This is an implementation of {@link ValidationFailure} that represents the composition of other
  * {@link ValidationFailure}s.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -31,14 +32,14 @@ public class ComposedValidationFailure extends AbstractValidationFailure {
 
   /**
    * The constructor.
-   * 
+   *
    * @param code is the {@link #getCode() code}.
    * @param source is the {@link #getSource() source}.
    * @param failures are the individual {@link ValidationFailure}s.
    */
   public ComposedValidationFailure(String code, Object source, ValidationFailure[] failures) {
 
-    super(code, source);
+    super(code, source, (NlsMessage) null, null, null);
     this.failures = failures;
   }
 
@@ -53,7 +54,7 @@ public class ComposedValidationFailure extends AbstractValidationFailure {
   /**
    * @see #getFailure(int)
    * @see java.util.Collection#size()
-   * 
+   *
    * @return the number of {@link #getFailure(int) failures}.
    */
   public int getFailureCount() {
@@ -63,9 +64,9 @@ public class ComposedValidationFailure extends AbstractValidationFailure {
 
   /**
    * Gets the {@link ValidationFailure} at the given <code>index</code>.
-   * 
+   *
    * @see java.util.List#get(int)
-   * 
+   *
    * @param index is the index of the {@link ValidationFailure} to get.
    * @return the requested {@link ValidationFailure}.
    */
@@ -94,15 +95,6 @@ public class ComposedValidationFailure extends AbstractValidationFailure {
       return null;
     }
     return buffer.toString();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getMessage() {
-
-    return getMessage(null);
   }
 
   /**

@@ -8,23 +8,20 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsThrowable;
 
 /**
- * This is the abstract base class for an error {@link net.sf.mmm.util.lang.api.Message}.
+ * This is the implementation of an error {@link net.sf.mmm.util.lang.api.Message} that is already localized.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 3.1.0
+ * @since 4.0.0
  */
-public abstract class AbstractErrorMessage extends AbstractMessage {
+public class ErrorMessage extends AbstractErrorMessage {
 
   /** UID for serialization. */
-  private static final long serialVersionUID = 1997543457414946906L;
-
-  /** @see #getType() */
-  private boolean technical;
+  private static final long serialVersionUID = 1L;
 
   /**
    * The constructor for de-serialization in GWT.
    */
-  protected AbstractErrorMessage() {
+  protected ErrorMessage() {
 
     super();
   }
@@ -40,10 +37,9 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
    * @param technical - <code>true</code> in case of {@link NlsThrowable#isTechnical() technical error} with
    *        {@link #TYPE_TECHNICAL_ERROR}, <code>false</code> otherwise (business error).
    */
-  public AbstractErrorMessage(String code, Object source, String message, UUID uuid, String details, boolean technical) {
+  public ErrorMessage(String code, Object source, String message, UUID uuid, String details, boolean technical) {
 
-    super(code, source, message, uuid, details);
-    this.technical = technical;
+    super(code, source, message, uuid, details, technical);
   }
 
   /**
@@ -57,11 +53,9 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
    * @param technical - <code>true</code> in case of {@link NlsThrowable#isTechnical() technical error} with
    *        {@link #TYPE_TECHNICAL_ERROR}, <code>false</code> otherwise (business error).
    */
-  public AbstractErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details,
-      boolean technical) {
+  public ErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details, boolean technical) {
 
-    super(code, source, message, uuid, details);
-    this.technical = technical;
+    super(code, source, message, uuid, details, technical);
   }
 
   /**
@@ -69,22 +63,9 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
    *
    * @param error is the {@link NlsThrowable} to convert as error message.
    */
-  public AbstractErrorMessage(NlsThrowable error) {
+  public ErrorMessage(NlsThrowable error) {
 
-    this(error.getCode(), null, error.getNlsMessage(), error.getUuid(), null, error.isTechnical());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getType() {
-
-    if (this.technical) {
-      return TYPE_TECHNICAL_ERROR;
-    } else {
-      return TYPE_USER_ERROR;
-    }
+    super(error);
   }
 
 }

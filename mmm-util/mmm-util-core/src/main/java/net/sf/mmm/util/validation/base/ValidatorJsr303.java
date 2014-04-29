@@ -21,9 +21,9 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
 /**
  * This is an implementation of {@link net.sf.mmm.util.validation.api.ValueValidator} that adapts to
  * {@link javax.validation} (JSR 303).
- * 
+ *
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -49,7 +49,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param validator is the {@link Validator} instance.
    * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    */
@@ -60,7 +60,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param validator is the {@link Validator} instance.
    * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    * @param groups are the {@link Validator#validate(Object, Class...) groups to use for validation}.
@@ -72,7 +72,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param validator is the {@link Validator} instance.
    * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    * @param property is the property to validate or <code>null</code> to validate the entire object.
@@ -84,7 +84,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param validator is the {@link Validator} instance.
    * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    * @param property is the property to validate or <code>null</code> to validate the entire object.
@@ -97,7 +97,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param validator is the {@link Validator} instance.
    * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    * @param property is the property to validate or <code>null</code> to validate the entire object.
@@ -192,9 +192,10 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * Validates the given <code>value</code>.
-   * 
+   *
    * @param value is the value to validate.
-   * @return the {@link Set} of {@link ConstraintViolation}s. Will be empty if the given <code>value</code> is valid.
+   * @return the {@link Set} of {@link ConstraintViolation}s. Will be empty if the given <code>value</code> is
+   *         valid.
    */
   private Set<ConstraintViolation<?>> validateJsr303(V value) {
 
@@ -215,7 +216,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * Creates a {@link ValidationFailure} for the given {@link ConstraintViolation}.
-   * 
+   *
    * @param violation is the {@link ConstraintViolation}.
    * @param valueSource is the source of the value. May be <code>null</code>.
    * @return the created {@link ValidationFailure}.
@@ -223,7 +224,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   protected ValidationFailure createValidationFailure(ConstraintViolation<?> violation, Object valueSource) {
 
     String code = violation.getConstraintDescriptor().getAnnotation().annotationType().getSimpleName();
-    return new SimpleValidationFailure(code, valueSource, violation.getMessage());
+    return new ValidationFailureImpl(code, valueSource, violation.getMessage());
   }
 
   /**
@@ -250,8 +251,8 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   }
 
   /**
-   * @return the name of the property to validate or <code>null</code> to validate the entire {@link #getPojoType()
-   *         POJO}.
+   * @return the name of the property to validate or <code>null</code> to validate the entire
+   *         {@link #getPojoType() POJO}.
    */
   public String getProperty() {
 
@@ -260,8 +261,8 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * @return the {@link Class} reflecting the type of the {@link #getProperty() property} to validate or
-   *         <code>null</code> if undefined. May be used for additional support currently missing in JSR 303 such as
-   *         primitive types that are implicitly mandatory but implementations of JSR 303 cause
+   *         <code>null</code> if undefined. May be used for additional support currently missing in JSR 303
+   *         such as primitive types that are implicitly mandatory but implementations of JSR 303 cause
    *         {@link NullPointerException} or similar effects on property validation.
    */
   public Class<?> getPropertyType() {

@@ -8,7 +8,7 @@ import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
  * This is the implementation of {@link EntityId} including identification of {@link #getRevision() revision}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -27,8 +27,16 @@ public class EntityIdImpl extends AbstractEntityId {
   private Number revision;
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected EntityIdImpl() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param objectId - see {@link #getObjectId()}.
    * @param typeId - see {@link #getTypeId()}.
    * @param revision - see {@link #getRevision()}.
@@ -46,7 +54,7 @@ public class EntityIdImpl extends AbstractEntityId {
 
   /**
    * The constructor.
-   * 
+   *
    * @param entityId is the {@link EntityId} instance to "clone".
    */
   public EntityIdImpl(EntityId entityId) {
@@ -56,7 +64,7 @@ public class EntityIdImpl extends AbstractEntityId {
 
   /**
    * The constructor.
-   * 
+   *
    * @param idAsString is the {@link #toString() string representation} of the {@link EntityId} to create.
    */
   public EntityIdImpl(String idAsString) {

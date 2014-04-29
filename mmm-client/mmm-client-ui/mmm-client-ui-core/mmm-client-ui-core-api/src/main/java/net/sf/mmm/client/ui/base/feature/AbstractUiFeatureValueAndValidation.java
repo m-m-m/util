@@ -7,7 +7,6 @@ import net.sf.mmm.util.nls.api.NlsThrowable;
 import net.sf.mmm.util.nls.api.TechnicalErrorUserException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
-import net.sf.mmm.util.validation.base.SimpleValidationFailure;
 import net.sf.mmm.util.validation.base.ValidationFailureImpl;
 import net.sf.mmm.util.validation.base.ValidationStateImpl;
 import net.sf.mmm.util.validation.base.ValidatorMandatory;
@@ -16,9 +15,9 @@ import org.slf4j.Logger;
 
 /**
  * This is the abstract base implementation of {@link UiFeatureValueAndValidation}.
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -72,7 +71,7 @@ public abstract class AbstractUiFeatureValueAndValidation<VALUE> implements UiFe
   /**
    * This method handles a {@link RuntimeException} that occurred in
    * {@link #getValueDirect(Object, ValidationState)}.
-   * 
+   *
    * @param e is the {@link RuntimeException} to handle.
    * @param state is the {@link ValidationState} or <code>null</code> if no validation is performed.
    */
@@ -168,7 +167,7 @@ public abstract class AbstractUiFeatureValueAndValidation<VALUE> implements UiFe
   /**
    * This method converts an exception from {@link #getValueOrException(Object)} to a
    * {@link ValidationFailure}.
-   * 
+   *
    * @param error is the exception.
    * @return the {@link ValidationFailure}.
    */
@@ -179,7 +178,7 @@ public abstract class AbstractUiFeatureValueAndValidation<VALUE> implements UiFe
       NlsThrowable nlsThrowable = (NlsThrowable) error;
       failure = new ValidationFailureImpl(nlsThrowable.getCode(), getSource(), ((NlsThrowable) error).getNlsMessage());
     } else {
-      failure = new SimpleValidationFailure(TechnicalErrorUserException.CODE, getSource(), error.getMessage());
+      failure = new ValidationFailureImpl(TechnicalErrorUserException.CODE, getSource(), error.getMessage());
     }
     return failure;
   }

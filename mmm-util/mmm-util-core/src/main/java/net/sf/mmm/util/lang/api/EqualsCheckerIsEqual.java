@@ -4,11 +4,14 @@ package net.sf.mmm.util.lang.api;
 
 /**
  * This is an implementation of {@link EqualsChecker} that simply delegates to {@link Object#equals(Object)}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public final class EqualsCheckerIsEqual extends AbstractEqualsChecker<Object> {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1L;
 
   /** @see #getInstance() */
   private static final EqualsCheckerIsEqual INSTANCE = new EqualsCheckerIsEqual();

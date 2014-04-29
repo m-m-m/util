@@ -7,7 +7,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * A {@link NodeCycleException} is thrown if a chain of nodes has a cyclic dependency.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -25,8 +25,16 @@ public class NodeCycleException extends NlsRuntimeException {
   public static final String KEY_CYCLE = "cycle";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected NodeCycleException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param cycle is the description of the cycle.
    */
   public NodeCycleException(NodeCycle<?> cycle) {
@@ -36,7 +44,7 @@ public class NodeCycleException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param cycle is the description of the cycle.
    * @param type describes the type of the nodes that form the cycle.
    */

@@ -8,7 +8,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
 /**
  * This is the exception thrown if a unique {@link javax.annotation.Resource resource} is required but
  * multiple instances have been found.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -21,8 +21,16 @@ public class ResourceAmbiguousException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "ResAmbiguos";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ResourceAmbiguousException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param resourceName is the name of the requested resource that is ambiguous.
    */
   public ResourceAmbiguousException(String resourceName) {
@@ -32,7 +40,7 @@ public class ResourceAmbiguousException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param resourceName is the name of the requested resource that is ambiguous.
    * @param resourceIds are the IDs of the resources available. Should be at least two for ambiguity.
    */

@@ -8,7 +8,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
 /**
  * This is the exception thrown if a {@link javax.annotation.Resource resource} is required but is NOT
  * available.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -21,8 +21,16 @@ public class ResourceMissingException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "ResMissing";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected ResourceMissingException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param resourceName is the name of the missing resource.
    */
   public ResourceMissingException(String resourceName) {
@@ -32,7 +40,7 @@ public class ResourceMissingException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param resourceName is the name of the missing resource.
    * @param nested is the {@link #getCause() cause} of this exception.
    */

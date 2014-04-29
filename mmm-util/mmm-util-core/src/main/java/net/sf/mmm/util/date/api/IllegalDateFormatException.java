@@ -7,7 +7,7 @@ import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is the exception thrown if a date given as string was illegal.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -20,8 +20,16 @@ public class IllegalDateFormatException extends NlsRuntimeException {
   public static final String MESSAGE_CODE = "IllegalDateFormat";
 
   /**
+   * The constructor for de-serialization in GWT.
+   */
+  protected IllegalDateFormatException() {
+
+    super();
+  }
+
+  /**
    * The constructor.
-   * 
+   *
    * @param dateString is the string that was supposed to be a valid date but is NOT.
    */
   public IllegalDateFormatException(String dateString) {
@@ -31,7 +39,7 @@ public class IllegalDateFormatException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param dateString is the string that was supposed to be a valid date but is NOT.
    * @param nested is the {@link #getCause() cause} of this exception.
    */
