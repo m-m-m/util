@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<embed1 xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="subfolder/test-include-recursive.xml"/>
+  <text><xi:include parse="text" href="subfolder/test-include-text.txt"/></text>
+</embed1>

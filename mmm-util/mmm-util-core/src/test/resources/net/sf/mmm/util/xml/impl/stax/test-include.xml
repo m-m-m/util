@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<root xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="test-include-embed1.xml"/>
+  <xi:include href="test-non-existing.xml">
+    <xi:fallback>
+      <default value="42"/>
+    </xi:fallback>
+  </xi:include>
+</root>
