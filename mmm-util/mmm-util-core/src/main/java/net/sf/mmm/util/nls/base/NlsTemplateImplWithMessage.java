@@ -25,7 +25,7 @@ public class NlsTemplateImplWithMessage extends NlsTemplateImpl {
   /**
    * The constructor for de-serialization in GWT.
    */
-  public NlsTemplateImplWithMessage() {
+  protected NlsTemplateImplWithMessage() {
 
     super();
   }

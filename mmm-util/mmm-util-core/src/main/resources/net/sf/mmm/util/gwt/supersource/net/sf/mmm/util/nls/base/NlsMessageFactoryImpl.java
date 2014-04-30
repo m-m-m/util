@@ -25,6 +25,8 @@ import net.sf.mmm.util.nls.api.NlsResourceBundleRequestor;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.base.AbstractNlsResourceBundleJavaScriptServlet;
 import net.sf.mmm.util.nls.base.NlsMessagePlain;
+import net.sf.mmm.util.nls.base.NlsTemplateImplWithMessage;
+import net.sf.mmm.util.nls.base.NlsTenmplateImplWithMessage;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 
 /**
@@ -38,6 +40,8 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl implements NlsResourceBundleRequestor {
 
   private final Map<String, DictionaryContainer> name2dictionaryContainerMap;
+
+  private NlsTemplateImplWithMessage dummy = new NlsTemplateImplWithMessage("name", "key", "message");
 
   /**
    * The constructor.

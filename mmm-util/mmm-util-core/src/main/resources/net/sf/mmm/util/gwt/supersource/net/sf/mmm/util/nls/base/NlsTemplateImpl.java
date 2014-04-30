@@ -4,6 +4,7 @@ package net.sf.mmm.util.nls.base;
 
 import java.util.Locale;
 import java.util.MissingResourceException;
+
 import com.google.gwt.i18n.client.Dictionary;
 
 /**
@@ -87,6 +88,17 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
 
     String messageId = this.name + ":" + this.key;
     getLogger().warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
+    return translateFallback(messageId);
+  }
+
+  /**
+   * @see #translateFallback(MissingResourceException)
+   *
+   * @param messageId is the ID of the message composed out of bundle base name and key.
+   * @return the fallback message.
+   */
+  protected String translateFallback(String messageId) {
+
     return "unresolved (" + messageId + ")";
   }
 
