@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>.<br>
  * <b>ATTENTION:</b><br/>
  * Please note that currently only plain XML inclusion is currently supported and no XPointer.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XIncludeStreamReader extends StreamReaderProxy {
@@ -79,7 +79,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
 
   /**
    * The constructor.
-   * 
+   *
    * @param factory is the {@link XMLInputFactory} required to create new {@link XMLStreamReader} instances
    *        for includes.
    * @param resource is the {@link DataResource} pointing to the XML content.
@@ -91,7 +91,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
 
   /**
    * The constructor.
-   * 
+   *
    * @param factory is the input factory used to create raw XML-readers.
    * @param resource is where to read the XML from.
    * @param parent is the parent {@link XMLStreamReader}.
@@ -123,10 +123,10 @@ public class XIncludeStreamReader extends StreamReaderProxy {
 
   /**
    * This method detects if a recursive inclusion takes place.<br>
-   * 
+   *
    * TODO: Potentially the same resource could cause an inclusion cycle without causing an infinity loop by
    * using different XPointer expressions.
-   * 
+   *
    * @param dataResource is the current data-resource to include.
    * @throws XMLStreamException if the given <code>dataResource</code> has already been included causing an
    *         infinity loop.
@@ -147,7 +147,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * <b>ATTENTION:</b><br>
    * This method violates the StAX API and closes the underlying input stream!<br>
    * The StAX API has a bad design mistake about the {@link #close()} method NOT to close the underlying input
@@ -182,7 +182,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   /**
    * This method is called when an include tag of the XInclude namespace was started. It resolves the include
    * and finds a fallback on failure.
-   * 
+   *
    * @return the next event type.
    * @throws XMLStreamException if the XML stream processing caused an error.
    */
@@ -194,6 +194,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
     int eventType = -1;
     // read attributes...
     String href = getAttributeValue(null, "href");
+    LOGGER.trace("Resolving xi:include to href {}", href);
     String xpointer = getAttributeValue(null, "xpointer");
     // get the included resource...
     DataResource includeResource = this.resource.navigate(href);
@@ -225,6 +226,8 @@ public class XIncludeStreamReader extends StreamReaderProxy {
         InputStream textInputStream = includeResource.openStream();
         Reader reader = new InputStreamReader(textInputStream, charset);
         this.includeText = StreamUtilImpl.getInstance().read(reader);
+        // we ascend the XML until the initial include is closed.
+        closeInitialInclude();
         return XMLStreamConstants.CHARACTERS;
       } else {
         throw new XMLStreamException("Unsupported XInclude parse type:" + parse);
@@ -251,21 +254,25 @@ public class XIncludeStreamReader extends StreamReaderProxy {
 
   /**
    * This method ascends the XML until the initial include is closed.
-   * 
+   *
    * @throws XMLStreamException if the XML stream processing caused an error.
    */
   protected void closeInitialInclude() throws XMLStreamException {
 
+    LOGGER.trace("Closing xi:include");
     int eventType = -1;
     // we ascend the XML until the initial include is closed.
     while (this.depth > 0) {
       eventType = this.mainReader.next();
       if (eventType == XMLStreamConstants.START_ELEMENT) {
+        LOGGER.trace("Closing loop: Start {}", this.mainReader.getLocalName());
         this.depth++;
       } else if (eventType == XMLStreamConstants.END_ELEMENT) {
+        LOGGER.trace("Closing loop: End {}", this.mainReader.getLocalName());
         this.depth--;
       }
     }
+    LOGGER.trace("Closing xi:include complete");
   }
 
   /**
@@ -286,8 +293,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
               eventType = resolveInclude();
             } else {
               // unknown/misplaced XInclude tag!
-              // is this an error?
-              // TODO: we should eat this garbage
+              // currently we just leave it alone...
             }
           } else {
             if (this.fallback && ("fallback".equals(tag))) {
