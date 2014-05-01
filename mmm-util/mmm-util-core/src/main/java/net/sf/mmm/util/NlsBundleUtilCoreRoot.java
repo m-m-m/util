@@ -671,7 +671,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("An unexpetected error has occured while reading data!")
+  @NlsBundleMessage("An unexpetected error has occurred while reading data!")
   NlsMessage errorIoRead();
 
   /**
@@ -679,7 +679,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("An unexpetected error has occured while writing data!")
+  @NlsBundleMessage("An unexpetected error has occurred while writing data!")
   NlsMessage errorIoWrite();
 
   /**
@@ -703,7 +703,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("An unexpetected error has occured while copying data!")
+  @NlsBundleMessage("An unexpetected error has occurred while copying data!")
   NlsMessage errorIoCopy();
 
   /**
