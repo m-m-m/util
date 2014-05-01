@@ -26,7 +26,7 @@ import net.sf.mmm.util.nls.api.NlsBundle;
 public class ResourceBundleControlUtf8WithNlsBundleSupport extends ResourceBundleControlUtf8 {
 
   /** The singleton instance. */
-  static final ResourceBundleControlUtf8 INSTANCE = new ResourceBundleControlUtf8();
+  static final ResourceBundleControlUtf8WithNlsBundleSupport INSTANCE = new ResourceBundleControlUtf8WithNlsBundleSupport();
 
   /**
    * The constructor.
