@@ -38,9 +38,9 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This class is a collection of utility functions for {@link File} handling and manipulation.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -94,7 +94,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
    * This method gets the singleton instance of this {@link FileUtilImpl}.<br/>
    * <b>ATTENTION:</b><br/>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static FileUtil getInstance() {
@@ -142,7 +142,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
   /**
    * This method gets the {@link StringUtilImpl} that is used by this {@link FileUtilImpl}.
-   * 
+   *
    * @return the stringUtil the {@link StringUtilImpl}.
    */
   protected StringUtil getStringUtil() {
@@ -152,7 +152,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
   /**
    * This method sets the {@link #getStringUtil() StringUtil}. It can only be set once during initialization.
-   * 
+   *
    * @param stringUtil the stringUtil to set.
    * @throws AlreadyInitializedException if the value has already been set.
    */
@@ -175,7 +175,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * This method set the {@link #getUserHomeDirectory() users home directory}. It can only be set once during
    * initialization.
-   * 
+   *
    * @param userHome is the home directory of the user.
    * @throws AlreadyInitializedException if the value has already been set.
    */
@@ -196,7 +196,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
   /**
    * This method sets the {@link #getTemporaryDirectory() tmp directory}.
-   * 
+   *
    * @param tmpDir the tmpDir to set
    * @throws AlreadyInitializedException if the value has already been set.
    */
@@ -208,7 +208,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
   /**
    * This method gets the {@link String}.
-   * 
+   *
    * @return the {@link String}.
    */
   public String getUserLogin() {
@@ -261,7 +261,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
   /**
    * This method handles {@link #normalizePath(String)} internally.
-   * 
+   *
    * @param path is the path.
    * @param slash is the character used to to separate folders.
    * @return the resolved path.
@@ -542,13 +542,13 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
    * <br>
    * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory
    * "/tmp". The copy will have the same name "foo".
-   * 
+   *
    * <pre>
    * {@link File} source = new {@link File}("/usr/local/foo");
    * {@link File} destination = new {@link File}("/tmp", source.getName()); // file: "/tmp/foo"
    * {@link FileUtilImpl}.copyRecursive(source, destination, true);
    * </pre>
-   * 
+   *
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.
    * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File) decides} which files should be
@@ -695,7 +695,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
    * This method adds all files matching to the given <code>path</code> and <code>fileType</code> to the
    * <code>list</code>. The <code>path</code> may contain
    * {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
-   * 
+   *
    * @param cwd is the current working directory and should therefore point to an existing
    *        {@link File#isDirectory() directory}. If the given <code>path</code> is NOT
    *        {@link File#isAbsolute() absolute} it is interpreted relative to this directory.
@@ -756,7 +756,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
   /**
    * This method tokenized the given <code>path</code> by adding {@link PathSegment}s to the given
    * <code>list</code>.
-   * 
+   *
    * @param path is the path to tokenized
    * @param list is the list where to add the segment tokens.
    * @param patternCompiler is the {@link PatternCompiler} used to compile the individual {@link PathSegment
@@ -807,7 +807,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
     /**
      * The constructor.
-     * 
+     *
      * @param string is the {@link #getString() string} of the segment.
      */
     public PathSegment(String string) {
@@ -817,7 +817,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
     /**
      * The constructor.
-     * 
+     *
      * @param string is the {@link #getString() string} of the segment.
      * @param pattern is the <code>string</code> parsed as {@link #getPattern() pattern}.
      */
@@ -830,7 +830,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
     /**
      * This method gets the segment as raw string. This may be a {@link #getPattern() pattern}.
-     * 
+     *
      * @return the string.
      */
     public String getString() {
@@ -840,7 +840,7 @@ public class FileUtilImpl extends AbstractLoggableComponent implements FileUtil 
 
     /**
      * This method gets the pattern.
-     * 
+     *
      * @return the pattern or <code>null</code> if the {@link #getString() string} is to be matched exactly.
      */
     public Pattern getPattern() {

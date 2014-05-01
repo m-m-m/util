@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
 
+import net.sf.mmm.test.TestResourceHelper;
 import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
 
@@ -19,7 +20,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link FileUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -166,7 +167,7 @@ public class FileUtilTest {
   public void testCopyFile() throws IOException {
 
     FileUtil util = getFileUtil();
-    File originalFile = new File("src/test/resources/net/sf/mmm/util/file/testdata.properties");
+    File originalFile = new File(TestResourceHelper.getTestPath("net/sf/mmm/util/file/testdata.properties"));
     File copyFile = File.createTempFile("testdata", ".properties");
     util.copyFile(originalFile, copyFile);
     checkTestdata(originalFile, copyFile);
@@ -186,7 +187,7 @@ public class FileUtilTest {
     boolean success = subdir.mkdir();
     assertTrue(success);
     assertTrue(subdir.isDirectory());
-    File originalFile = new File("src/test/resources/net/sf/mmm/util/file/testdata.properties");
+    File originalFile = new File(TestResourceHelper.getTestPath("net/sf/mmm/util/file/testdata.properties"));
     File copyFile = new File(subdir, originalFile.getName());
     util.copyFile(originalFile, copyFile);
     checkTestdata(originalFile, copyFile);
