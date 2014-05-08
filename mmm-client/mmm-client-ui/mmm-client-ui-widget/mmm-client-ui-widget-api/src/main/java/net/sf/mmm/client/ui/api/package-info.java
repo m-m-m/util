@@ -151,7 +151,7 @@
  * <li><b>Not small</b><br/>
  * This framework is designed for medium to large sized client applications. If you want a small client with
  * few screens, the overhead of setting up and learning this technology might be too high. However, we have a
- * strong focus on making your live easy. So also many things are much faster to implement. The choice is up to you:
+ * strong focus on making your life easy. So also many things are much faster to implement. The choice is up to you:
  * either you swear at the beginning of your project while setting everything up (when using this framework) or your
  * swear at the end while you loose control over the maintenance of your code-base (when using JavaScript).</li>
  * </ul>
