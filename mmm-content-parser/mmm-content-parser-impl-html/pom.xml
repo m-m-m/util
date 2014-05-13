@@ -11,7 +11,7 @@
   <artifactId>mmm-content-parser-impl-html</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>content-parser-impl-html</name>
+  <name>${project.artifactId}</name>
   <description>Content parser for files of the mimetype "text/html".</description>
 
   <dependencies>

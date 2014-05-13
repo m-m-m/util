@@ -11,7 +11,7 @@
   <artifactId>mmm-client-ui-dialog</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>client-ui-dialog</name>
+  <name>${project.artifactId}</name>
   <description>Dialog-Framework based on client-ui-widget.</description>
   <modules>
     <module>mmm-client-ui-dialog-api</module>

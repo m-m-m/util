@@ -11,7 +11,7 @@
   <artifactId>mmm-util-backport-java.time-tzdb</artifactId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
-  <name>util-backport-java.time-tzdb</name>
+  <name>${project.artifactId}</name>
   <description>Contains the TimeZoneDataBase (TZDB) for mmm-util-backport-java.time.</description>
   <dependencies>
   </dependencies>

@@ -10,7 +10,7 @@
   <artifactId>mmm-transaction-impl-jta</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>transaction-impl-jta</name>
+  <name>${project.artifactId}</name>
   <description>This project implements the transaction-api using JTA (Java Transaction API).</description>
   
   <dependencies>

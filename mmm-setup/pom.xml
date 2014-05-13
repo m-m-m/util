@@ -11,7 +11,7 @@
   <artifactId>mmm-setup</artifactId>
   <version>0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>setup</name>
+  <name>${project.artifactId}</name>
   <description>infrastructure for project setup</description>
   
   <dependencies>

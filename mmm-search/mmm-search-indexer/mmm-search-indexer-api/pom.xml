@@ -10,7 +10,7 @@
   <artifactId>mmm-search-indexer-api</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>search-indexer-api</name>
+  <name>${project.artifactId}</name>
   <description>This project provides the API of an indexer using the provided search-engine.</description>
   
   <dependencies>

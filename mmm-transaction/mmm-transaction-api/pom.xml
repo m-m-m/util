@@ -10,7 +10,7 @@
   <artifactId>mmm-transaction-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>transaction-api</name>
+  <name>${project.artifactId}</name>
   <description>This project provides the API of the transaction-manager.</description>
   
   <dependencies>

@@ -11,7 +11,7 @@
   <artifactId>mmm-client-ui-core</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>client-ui-core</name>
+  <name>${project.artifactId}</name>
   <description>Core APIs for user-interfaces (UI).</description>
   <modules>
     <module>mmm-client-ui-core-api</module>

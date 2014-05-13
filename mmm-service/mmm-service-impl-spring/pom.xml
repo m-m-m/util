@@ -11,7 +11,7 @@
   <artifactId>mmm-service-impl-spring</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>service-impl-gwt</name>
+  <name>${project.artifactId}</name>
   <description>The implementation of mmm-service-api using spring remoting (HttpInvoker).</description>
   <dependencies>
     <dependency>

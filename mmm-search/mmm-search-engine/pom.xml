@@ -11,7 +11,7 @@
   <artifactId>mmm-search-engine</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>search-engine</name>
+  <name>${project.artifactId}</name>
   <description>This project provides the engine used for full-text search indexing and retrieval.</description>
   
   <modules>

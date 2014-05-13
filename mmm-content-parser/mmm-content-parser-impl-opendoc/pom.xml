@@ -11,7 +11,7 @@
   <artifactId>mmm-content-parser-impl-opendoc</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>content-parser-impl-opendoc</name>
+  <name>${project.artifactId}</name>
   <description>Content parsers for open-document files (mimetypes "application/vnd.oasis.opendocument.*").</description>
 
   <dependencies>

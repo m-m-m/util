@@ -11,7 +11,7 @@
   <artifactId>mmm-content-parser</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>content-parser</name>
+  <name>${project.artifactId}</name>
   <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>
   
   <modules>

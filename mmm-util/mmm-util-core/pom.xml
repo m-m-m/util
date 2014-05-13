@@ -10,7 +10,7 @@
   <artifactId>mmm-util-core</artifactId>
   <version>${net.sf.mmm.util.core.version}</version>
   <packaging>jar</packaging>
-  <name>util-core</name>
+  <name>${project.artifactId}</name>
   <description>provides core utilities that fill gaps in the jdk.</description>
   <profiles>
     <profile>

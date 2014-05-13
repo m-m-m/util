@@ -11,7 +11,7 @@
   <artifactId>mmm-content-parser-impl-text</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>content-parser-impl-text</name>
+  <name>${project.artifactId}</name>
   <description>This is the search parser for files of the mimetype "text/plain".</description>
 
   <dependencies>

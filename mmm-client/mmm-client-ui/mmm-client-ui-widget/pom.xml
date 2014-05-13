@@ -11,7 +11,7 @@
   <artifactId>mmm-client-ui-widget</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>client-ui-widget</name>
+  <name>${project.artifactId}</name>
   <description>Abstraction layer for UI widgets.</description>
   <modules>
     <module>mmm-client-ui-widget-api</module>

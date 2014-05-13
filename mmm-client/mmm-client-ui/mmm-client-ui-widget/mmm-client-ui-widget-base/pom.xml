@@ -11,7 +11,7 @@
   <artifactId>mmm-client-ui-widget-base</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>client-ui-widget-base</name>
+  <name>${project.artifactId}</name>
   <description>Base implementation of UI widget API (including implementation of advanced widgets).</description>
   <dependencies>
     <dependency>

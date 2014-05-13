@@ -10,7 +10,7 @@
   <artifactId>mmm-transaction-impl-jpa</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>transaction-impl-jpa</name>
+  <name>${project.artifactId}</name>
   <description>This project implements the transaction-api using JPA (Java Persistence API).</description>
 
   <dependencies>

@@ -10,7 +10,7 @@
   <artifactId>mmm-persistence-query-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>persistence-query-api</name>
+  <name>${project.artifactId}</name>
   <description>The API to build typesafe dynamic queries</description>
   <dependencies>
     <dependency>

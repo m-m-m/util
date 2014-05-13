@@ -10,7 +10,7 @@
   <artifactId>mmm-util-gwt</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>util-gwt</name>
+  <name>${project.artifactId}</name>
   <description>provides utilities support for GWT.</description>
 
   <dependencies>
@@ -38,6 +38,10 @@
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
       <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>

@@ -11,7 +11,7 @@
   <artifactId>mmm-service-base</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>service-base</name>
+  <name>${project.artifactId}</name>
   <description>The base implementation of mmm-service-api used by all specific implementations.</description>
   <dependencies>
     <dependency>

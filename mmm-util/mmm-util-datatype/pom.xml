@@ -10,7 +10,7 @@
   <artifactId>mmm-util-datatype</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>util-datatype</name>
+  <name>${project.artifactId}</name>
   <description>provides common datatypes that fill gaps in the jdk.</description>
 
   <dependencies>

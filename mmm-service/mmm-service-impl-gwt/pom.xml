@@ -11,7 +11,7 @@
   <artifactId>mmm-service-impl-gwt</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>service-impl-gwt</name>
+  <name>${project.artifactId}</name>
   <description>The implementation of mmm-service-api using RPC-Mechanism of GWT (Google Web Toolkit).</description>
   <dependencies>
     <dependency>

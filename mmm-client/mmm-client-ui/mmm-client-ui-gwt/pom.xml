@@ -11,7 +11,7 @@
   <artifactId>mmm-client-ui-gwt</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>client-ui-gwt</name>
+  <name>${project.artifactId}</name>
   <description>GWT specific code that is provided as reusable module without requirements to also use mmm-client-ui-widget.</description>
   <modules>
     <module>mmm-client-ui-gwt-widgets</module>

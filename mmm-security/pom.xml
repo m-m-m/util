@@ -11,7 +11,7 @@
   <artifactId>mmm-security</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>security</name>
+  <name>${project.artifactId}</name>
   <description>Security for management and authorization of users.</description>
   <modules>
     <module>mmm-security-api</module>

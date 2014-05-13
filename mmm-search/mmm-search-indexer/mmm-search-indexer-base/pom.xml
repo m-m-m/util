@@ -8,7 +8,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>mmm-search-indexer-base</artifactId>
-  <name>search-indexer-base</name>
+  <name>${project.artifactId}</name>
   <version>1.0.2-SNAPSHOT</version>
   <description>This project provides the base-implementation for an search-indexer using a provided search-technology.</description>
   <dependencies>

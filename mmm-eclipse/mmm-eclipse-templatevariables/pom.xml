@@ -11,7 +11,7 @@
   <artifactId>mmm-eclipse-templatevariables</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
-  <name>eclipse-templatevariables</name>
+  <name>${project.artifactId}</name>
   <description>Eclipse plugin to register additional variables for java templates like project_version.</description>
   <!--
   <dependencies>

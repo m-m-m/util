@@ -10,7 +10,7 @@
   <artifactId>mmm-persistence-query-impl</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>persistence-query-impl</name>
+  <name>${project.artifactId}</name>
   <description>The implementation of mmm-persistence-query-api</description>
   <dependencies>
     <dependency>

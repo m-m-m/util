@@ -10,7 +10,7 @@
   <artifactId>mmm-persistence-impl-hibernate</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>persistence-impl-hibernate</name>
+  <name>${project.artifactId}</name>
   <description>This is the API of the persistence-layer.</description>
 
   <dependencies>

@@ -11,7 +11,7 @@
   <artifactId>mmm-content-parser-impl-poi</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>content-parser-impl-poi</name>
+  <name>${project.artifactId}</name>
   <description>Content parsers for MS office documents using apache POI.</description>
 
   <properties>

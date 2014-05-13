@@ -18,7 +18,7 @@
   <artifactId>mmm-eclipse</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>eclipse</name>
+  <name>${project.artifactId}</name>
   <description>Eclipse plugins created by the mmm project.</description>
   <modules>
     <module>mmm-eclipse-templatevariables</module>

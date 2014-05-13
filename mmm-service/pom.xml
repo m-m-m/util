@@ -11,7 +11,7 @@
   <artifactId>mmm-service</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>service</name>
+  <name>${project.artifactId}</name>
   <description>Simple leight-weight services</description>
   <modules>
     <module>mmm-service-api</module>

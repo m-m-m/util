@@ -11,7 +11,7 @@
   <artifactId>mmm-transaction</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>transaction</name>
+  <name>${project.artifactId}</name>
   <description>This project provides an API and implementation for a transaction-manager (e.g. based on JTA).</description>
   
   <modules>

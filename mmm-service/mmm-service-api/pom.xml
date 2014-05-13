@@ -10,7 +10,7 @@
   <artifactId>mmm-service-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>service-api</name>
+  <name>${project.artifactId}</name>
   <description>The API for the services and their invocation on client-side.</description>
   <dependencies>
     <dependency>

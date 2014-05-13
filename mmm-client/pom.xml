@@ -11,7 +11,7 @@
   <artifactId>mmm-client</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>client</name>
+  <name>${project.artifactId}</name>
   <description>Support for clients.</description>
   <modules>
     <module>mmm-client-api</module>

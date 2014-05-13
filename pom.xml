@@ -6,7 +6,7 @@
   <artifactId>mmm</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>mmm</name>
+  <name>${project.artifactId}</name>
   <description>Mature Modular Meta-Framework (MMM) is a generic and modular meta-framework to build applications.</description>
   <url>http://m-m-m.sourceforge.net/</url>
   <inceptionYear>2001</inceptionYear>
@@ -42,7 +42,11 @@
     <org.slf4j.version>1.7.6</org.slf4j.version>
     <!--<org.slf4j.version>1.5.6</org.slf4j.version>-->
     <jacoco.version>0.6.4.201312101107</jacoco.version>
-    <net.sf.mmm.util.core.version>4.0.0</net.sf.mmm.util.core.version>
+    <!-- Internal project versions -->
+    <net.sf.mmm.util.core.version>4.0.1-SNAPSHOT</net.sf.mmm.util.core.version>
+    <net.sf.mmm.util.xml.version>1.0.0-SNAPSHOT</net.sf.mmm.util.xml.version>
+    <net.sf.mmm.util.datatype.version>1.0.0-SNAPSHOT</net.sf.mmm.util.datatype.version>
+    <net.sf.mmm.service.version>1.0.0-SNAPSHOT</net.sf.mmm.service.version>
     <mmm.bootclasspath>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</mmm.bootclasspath>
   </properties>
 
@@ -428,7 +432,14 @@
           <!-- https://svn.codehaus.org/mojo/trunk/mojo/flatten-maven-plugin -->
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
-          <version>1.0.0-beta-1</version>
+          <version>1.0.0-beta-2-SNAPSHOT</version>
+          <configuration>
+            <handleName>KeepOrAdd</handleName>
+            <handleDescription>KeepIfExists</handleDescription>
+            <handleUrl>KeepOrAdd</handleUrl>
+            <handleScm>KeepOrAdd</handleScm>
+            <handleDevelopers>KeepOrAdd</handleDevelopers>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.eclipse.m2e</groupId>

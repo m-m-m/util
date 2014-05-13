@@ -11,7 +11,7 @@
   <artifactId>mmm-content-parser-impl-generic</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>content-parser-impl-generic</name>
+  <name>${project.artifactId}</name>
   <description>Generic content parser used as fallback if no specific parser is available.</description>
 
   <dependencies>

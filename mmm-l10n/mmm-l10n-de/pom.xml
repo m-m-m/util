@@ -11,7 +11,7 @@
   <artifactId>mmm-l10n-de</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>l10n-de</name>
+  <name>${project.artifactId}</name>
   <description>Localization for Germany (de_DE).</description>
   <dependencies>
   </dependencies>  

@@ -11,7 +11,7 @@
   <artifactId>mmm-l10n-fr</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>l10n-fr</name>
+  <name>${project.artifactId}</name>
   <description>Localization for French (fr_FR).</description>
   <dependencies>
   </dependencies>  

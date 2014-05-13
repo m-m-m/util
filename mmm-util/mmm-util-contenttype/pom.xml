@@ -10,7 +10,7 @@
   <artifactId>mmm-util-contenttype</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>util-contenttype</name>
+  <name>${project.artifactId}</name>
   <description>library to detect metadata while streaming</description>
   
   <dependencies>

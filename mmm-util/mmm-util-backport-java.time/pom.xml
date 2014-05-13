@@ -11,7 +11,7 @@
   <artifactId>mmm-util-backport-java.time</artifactId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
-  <name>util-backport-java.time</name>
+  <name>${project.artifactId}</name>
   <description>A backport for java.time to be used in java versions older than 1.8.
   ATTENTION: This only works with -Xbootclasspath. Also it is inofficial and invalid according to JCP/JSR. However, we need a working update-path to 1.8.</description>
   <dependencies>

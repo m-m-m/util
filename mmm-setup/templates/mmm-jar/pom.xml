@@ -11,7 +11,7 @@
   <artifactId>mmm-POM-JAR</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>POM-JAR</name>
+  <name>${project.artifactId}</name>
   <description>TODO</description>
   <dependencies>
   	<!--

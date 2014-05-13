@@ -11,7 +11,7 @@
   <artifactId>mmm-content-parser-impl-java</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>content-parser-impl-java</name>
+  <name>${project.artifactId}</name>
   <description>Content parser for files of the mimetype "text/java-source".</description>
 
   <dependencies>
