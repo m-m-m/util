@@ -20,6 +20,7 @@
     <module>mmm-util-backport-java.time-tzdb</module>
     <module>mmm-util-core</module>
     <module>mmm-util-gwt</module>
+    <module>mmm-util-cli</module>
     <module>mmm-util-http</module>
     <module>mmm-util-xml</module>
     <module>mmm-util-contenttype</module>
