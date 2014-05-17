@@ -432,7 +432,8 @@
           <!-- https://svn.codehaus.org/mojo/trunk/mojo/flatten-maven-plugin -->
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
-          <version>1.0.0-beta-2-SNAPSHOT</version>
+          <!--<version>1.0.0-beta-2-SNAPSHOT</version>-->
+          <version>1.0.0-beta-1</version>
           <configuration>
             <handleName>KeepOrAdd</handleName>
             <handleDescription>KeepIfExists</handleDescription>
