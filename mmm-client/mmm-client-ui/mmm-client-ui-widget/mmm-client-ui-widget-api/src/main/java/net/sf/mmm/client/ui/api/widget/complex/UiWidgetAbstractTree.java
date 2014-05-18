@@ -81,21 +81,15 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
   void expandNodes();
 
   /**
-   * This is the interface for the model for a {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree}.
-   * If the tree structure should be editable for the end-user you need to implement
-   * {@link UiWidgetAbstractTree.UiTreeModelMutable}. However, modification of the tree node data is still
-   * possible if the tree is {@link UiWidgetAbstractTree#isEditable() editable}.
+   * This is the interface for the model (adapter) for a
+   * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree}. If the tree structure should be editable
+   * for the end-user you need to implement {@link UiWidgetAbstractTree.UiTreeModelMutable}. However,
+   * modification of the tree node data is still possible if the tree is
+   * {@link UiWidgetAbstractTree#isEditable() editable}.
    *
    * @param <NODE> is the generic type of the tree-nodes of this model.
    */
   interface UiTreeModel<NODE> {
-
-    /**
-     * @return the root-node of the tree. Must not be <code>null</code>.
-     * @deprecated has to be done via get/setValue!
-     */
-    @Deprecated
-    NODE getRootNode();
 
     /**
      * This method gets the children of the given tree-node.

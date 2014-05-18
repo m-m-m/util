@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.complex.adapter;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +18,6 @@ import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.common.Size;
 import net.sf.mmm.client.ui.api.common.UiMode;
-import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
@@ -25,6 +27,7 @@ import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeNodeRenderer;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiWidgetTreeNode;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
+import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetTree;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
 import net.sf.mmm.client.ui.gwt.widgets.HtmlConstants;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
@@ -469,6 +472,16 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
 
     // TODO Auto-generated method stub
     return null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  protected AbstractUiWidgetTree<?, NODE> getUiWidgetTyped() {
+
+    return (AbstractUiWidgetTree<?, NODE>) getUiWidget();
   }
 
   /**
@@ -1065,7 +1078,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   /**
    * @see UiWidgetAdapterGwtTree#createEventAdapter(UiFeatureEvent, UiHandlerEvent)
    */
-  private static class EventAdapterGwtTree extends EventAdapterGwt implements SelectionHandler<TreeItem> {
+  private class EventAdapterGwtTree extends EventAdapterGwt implements SelectionHandler<TreeItem> {
 
     /**
      * The constructor.
@@ -1084,8 +1097,15 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
     @Override
     public void onSelection(SelectionEvent<TreeItem> event) {
 
-      fireEvent(EventType.SELECTION_CHANGE);
+      @SuppressWarnings("unchecked")
+      TreeNodeAdapter selection = (TreeNodeAdapter) event.getSelectedItem();
+      Collection<NODE> selectedValues;
+      if (selection == null) {
+        selectedValues = Collections.emptyList();
+      } else {
+        selectedValues = Arrays.asList(selection.getNode());
+      }
+      getUiWidgetTyped().setSelectedValues(selectedValues, false);
     }
-
   }
 }

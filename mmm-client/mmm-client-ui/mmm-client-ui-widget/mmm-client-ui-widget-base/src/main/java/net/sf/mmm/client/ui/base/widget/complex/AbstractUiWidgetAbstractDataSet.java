@@ -5,6 +5,7 @@ package net.sf.mmm.client.ui.base.widget.complex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -25,14 +26,14 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 /**
  * This is the abstract base implementation of
  * {@link net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable}.
- * 
+ *
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Has to be either {@literal ITEM} or
  *        {@literal List<ITEM>}.
  * @param <ITEM> is the generic type of the items contained in this widget.
  * @param <ITEM_CONTAINER> is the generic type of the {@link #getItemContainer(Object) container} for the
  *        {@literal <ITEM>} objects. Typically a {@link ItemContainer}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -47,7 +48,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
 
   /**
    * Temporary {@link Set} stored as instance for performance (as widgets are not really thread-safe anyways).
-   * 
+   *
    * @see #setSelectedValues(Collection)
    */
   private final Set<ITEM_CONTAINER> newSelectedValues;
@@ -61,9 +62,12 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
   /** @see #isTitleVisible() */
   private boolean titleVisible;
 
+  /** @see #isEditable() */
+  private boolean editable;
+
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
@@ -169,6 +173,30 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
    * {@inheritDoc}
    */
   @Override
+  public boolean isEditable() {
+
+    return this.editable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setEditable(boolean editableFlag) {
+
+    if (this.editable == editableFlag) {
+      return;
+    }
+    if (hasWidgetAdapter()) {
+      // TODO...
+    }
+    this.editable = editableFlag;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public SelectionMode getSelectionMode() {
 
     return this.selectionMode;
@@ -260,7 +288,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
 
   /**
    * Internal method to get the direct reference to the {@link #getSelectedValues() selected values}.
-   * 
+   *
    * @return the {@link Collection} with all currently selected item containers.
    */
   protected Collection<ITEM_CONTAINER> getSelectedValuesInternal() {
@@ -274,7 +302,13 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
   @Override
   public boolean setSelectedValue(ITEM selectedValue) {
 
-    return setSelectedValues(Arrays.asList(selectedValue));
+    List<ITEM> selection;
+    if (selectedValue == null) {
+      selection = Collections.emptyList();
+    } else {
+      selection = Arrays.asList(selectedValue);
+    }
+    return setSelectedValues(selection);
   }
 
   /**
@@ -282,6 +316,18 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
    */
   @Override
   public boolean setSelectedValues(Collection<ITEM> selectedItems) {
+
+    return setSelectedValues(selectedItems, true);
+  }
+
+  /**
+   * @see #setSelectedValues(Collection)
+   *
+   * @param selectedItems is the {@link Collection} with the {@link #getSelectedValues() values to select}.
+   * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
+   * @return see {@link #setSelectedValues(Collection)}.
+   */
+  public boolean setSelectedValues(Collection<ITEM> selectedItems, boolean programmatic) {
 
     boolean success = true;
     switch (this.selectionMode) {
@@ -343,7 +389,6 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
       default :
         break;
     }
-    boolean programmatic = true;
     fireEvent(new UiEventSelectionChange<ITEM>(this, programmatic));
     return success;
   }
@@ -409,7 +454,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
 
   /**
    * Clears the {@link #getSelectedValues() current selection} except for the given <code>exclusion</code>.
-   * 
+   *
    * @param exclusion is the itemContainer to exclude (keep its selection untouched) or <code>null</code> for
    *        no exclusion.
    */
@@ -453,7 +498,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
   /**
    * Updates the selection of the given <code>itemContainer</code> according to the given
    * <code>operation</code>.
-   * 
+   *
    * @param itemContainer is the container with the item to update.
    * @param operation is the {@link SelectionOperation} to perform.
    * @return the new selection state of the <code>itemContainer</code>.
@@ -479,7 +524,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
 
   /**
    * Called from adapter if an item ({@literal <ITEM>}) has been (de)selected.
-   * 
+   *
    * @param itemContainer is the container with the item to update.
    * @param selected - <code>true</code> if item has been selected, <code>false</code> if deselected.
    * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
@@ -502,7 +547,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
 
   /**
    * Internal method to get the selection status of the item in the given <code>container</code>.
-   * 
+   *
    * @param container is the container with the item to check.
    * @return <code>true</code> if the item is selected, <code>false</code> otherwise.
    */
@@ -514,7 +559,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
   /**
    * Internal method to set the selection of the item in the given <code>container</code>. Shall not do
    * anything else (e.g. firing event).
-   * 
+   *
    * @param container is the container with the item to mark.
    * @param selected - <code>true</code> to select, <code>false</code> to deselect.
    */
@@ -526,7 +571,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
    * <b>ATTENTION:</b><br/>
    * The {@link Collection} must NOT be modified if retrieved via this method. Implementations will provide
    * separate <code>addItem</code> and <code>removeItem</code> methods.
-   * 
+   *
    * @return the {@link Collection} with all items (currently) available in this widget. In case of lazy
    *         loading only those that have already been loaded.
    */
@@ -553,7 +598,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
   /**
    * Gets the existing container for the given <code>item</code>. This method has to be very efficient. You
    * should use a {@link java.util.Map} for this purpose.
-   * 
+   *
    * @param item is the item to lookup.
    * @return the container for the given <code>item</code> or <code>null</code> if no such container exists.
    */
@@ -561,7 +606,7 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
 
   /**
    * This method gets the item in the given <code>container.</code>
-   * 
+   *
    * @param container is the container of the requested item.
    * @return the unwrapped item.
    */

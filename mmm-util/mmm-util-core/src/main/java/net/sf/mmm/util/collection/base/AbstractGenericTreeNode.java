@@ -13,17 +13,17 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of the {@link GenericTreeNode} interface.
- * 
+ *
  * @param <CHILD> is the generic type of the {@link #getChildren() children}.
  * @param <PARENT> is the generic type of the {@link #getParent() parent}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT extends GenericTreeNode<CHILD, PARENT>>
     implements GenericTreeNode<CHILD, PARENT> {
 
-  /** @see #getChildren() */
+  /** @see #getMutableChildList() */
   private final transient List<CHILD> mutableChildList;
 
   /** @see #getChildren() */
@@ -42,7 +42,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
 
   /**
    * The constructor.
-   * 
+   *
    * @param parent is the {@link #getParent() parent} node.
    */
   public AbstractGenericTreeNode(PARENT parent) {
@@ -52,7 +52,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
 
   /**
    * The constructor.
-   * 
+   *
    * @param listFactory the factory used to create the internal {@link List}.
    */
   public AbstractGenericTreeNode(ListFactory listFactory) {
@@ -62,7 +62,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
 
   /**
    * The constructor.
-   * 
+   *
    * @param parent is the {@link #getParent() parent} node.
    * @param listFactory the factory used to create the internal {@link List}.
    */
@@ -84,7 +84,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
 
   /**
    * This method sets the {@link #getParent() parent} of this {@link GenericTreeNode}.
-   * 
+   *
    * @param parent is the {@link #getParent() parent} to set. It may be <code>null</code>. However you should
    *        typically only call this method once with a non-null argument. It is still legal to re-arrange the
    *        tree-structure on existing {@link GenericTreeNode}s.
@@ -113,7 +113,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   /**
    * This method adds the given <code>child</code> to the {@link #getChildren() children} of this
    * {@link GenericTreeNode}.
-   * 
+   *
    * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be
    *        identical to this {@link GenericTreeNode}.
    */
@@ -129,9 +129,29 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
+   * This method adds the given <code>child</code> to the {@link #getChildren() children} of this
+   * {@link GenericTreeNode}.
+   *
+   * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be
+   *        identical to this {@link GenericTreeNode}.
+   * @param index is the {@link List#get(int) index} where to {@link List#add(int, Object) insert} the new
+   *        child.
+   */
+  protected void addChild(CHILD child, int index) {
+
+    if (child == null) {
+      throw new NlsNullPointerException("child");
+    }
+    if (child.getParent() != this) {
+      throw new NlsIllegalArgumentException(child);
+    }
+    this.mutableChildList.add(index, child);
+  }
+
+  /**
    * This method removes the given <code>child</code> from the {@link #getChildren() children} of this
    * {@link GenericTreeNode}.
-   * 
+   *
    * @param child is the {@link #getChildren() child} to remove.
    * @return <code>true</code> if the given <code>child</code> was contained in this {@link GenericTreeNode}s
    *         {@link #getChildren() children} and has been removed successfully, <code>false</code> otherwise.
@@ -147,7 +167,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   /**
    * This method removes the {@link #getChildren() child} from the {@link #getChildren() children} of this
    * {@link GenericTreeNode} at the given <code>index</code>.
-   * 
+   *
    * @param index is {@link List#get(int) index} of the {@link #getChildren() child} to remove.
    * @return the {@link #getChildren() child} that has actually been removed.
    */

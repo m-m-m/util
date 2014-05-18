@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget.complex;
 
+import net.sf.mmm.client.ui.api.attribute.AttributeWriteEditable;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSummary;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTitleVisible;
@@ -29,18 +30,18 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  * {@link #setTitle(String) set} for {@link net.sf.mmm.util.lang.api.concern.Accessibility} even if you do not
  * want to {@link #isTitleVisible() show} it.</li>
  * </ul>
- * 
+ *
  * @param <ITEM> is the generic type of a row in the list.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface UiWidgetAbstractDataSet<ITEM> extends UiWidgetRegular, UiFeatureSelectedValue<ITEM>,
-    AttributeWriteSummary, AttributeWriteStringTitle, AttributeWriteTitleVisible {
+    AttributeWriteSummary, AttributeWriteStringTitle, AttributeWriteTitleVisible, AttributeWriteEditable {
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * The title may also be called caption (technically in HTML).
    */
   @Override
@@ -48,7 +49,7 @@ public interface UiWidgetAbstractDataSet<ITEM> extends UiWidgetRegular, UiFeatur
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @see #setTitleVisible(boolean)
    */
   @Override
