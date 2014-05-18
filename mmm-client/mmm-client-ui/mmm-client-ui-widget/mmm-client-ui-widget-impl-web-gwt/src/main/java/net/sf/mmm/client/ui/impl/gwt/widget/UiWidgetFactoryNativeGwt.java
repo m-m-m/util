@@ -47,9 +47,11 @@ import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridCellGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetGridRowGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetHorizontalPanelGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetHorizontalSplitPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetTabPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetToolbarGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetVerticalPanelGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetVerticalSplitPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetMainWindowGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetPopupGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetWindowGwt;
@@ -59,7 +61,7 @@ import com.google.gwt.user.client.ui.UIObject;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.client.ui.api.UiContext} for GWT widgets.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -103,6 +105,8 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetTabPanelGwt.Factory());
     register(new UiWidgetHorizontalPanelGwt.Factory());
     register(new UiWidgetVerticalPanelGwt.Factory());
+    register(new UiWidgetHorizontalSplitPanelGwt.Factory());
+    register(new UiWidgetVerticalSplitPanelGwt.Factory());
     register(new UiWidgetGridPanelGwt.Factory());
     register(new UiWidgetGridRowGwt.Factory());
     register(new UiWidgetGridCellGwt.Factory());

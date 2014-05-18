@@ -14,6 +14,8 @@ import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
@@ -22,6 +24,7 @@ import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetButtonFactory;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextAreaField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalSplitPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
@@ -38,7 +41,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the implementation of {@link UiWidgetFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -66,7 +69,7 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
 
   /**
    * Registers the given <code>factory</code>.
-   * 
+   *
    * @param factory is the {@link UiSingleWidgetButtonFactory} to register.
    */
   protected void registerButtonFactory(UiSingleWidgetButtonFactory<?> factory) {
@@ -261,6 +264,17 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
    * {@inheritDoc}
    */
   @Override
+  public UiWidgetTextAreaField createTextAreaField(String label) {
+
+    UiWidgetTextAreaField widget = create(UiWidgetTextAreaField.class);
+    widget.setLabel(label);
+    return widget;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public UiWidgetIntegerField createIntegerField(String label) {
 
     UiWidgetIntegerField widget = create(UiWidgetIntegerField.class);
@@ -276,6 +290,18 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
 
     UiWidgetLongField widget = create(UiWidgetLongField.class);
     widget.setLabel(label);
+    return widget;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <VALUE> UiWidgetComboboxField<VALUE> createComboBox(String label, List<VALUE> options) {
+
+    final UiWidgetComboboxField<VALUE> widget = create(UiWidgetComboboxField.class);
+    widget.setLabel(label);
+    widget.setOptions(options);
     return widget;
   }
 
@@ -299,6 +325,18 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
     };
     this.enumProvider.require(callback, enumDefinition);
     return widget;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <NODE> UiWidgetTree<NODE> createTree(UiTreeModel<NODE> model, String title) {
+
+    UiWidgetTree<NODE> tree = create(UiWidgetTree.class);
+    tree.setTreeModel(model);
+    tree.setTitle(title);
+    return tree;
   }
 
   /**

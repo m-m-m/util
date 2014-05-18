@@ -6,8 +6,9 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
  * This is the interface for a {@link UiWidgetSplitPanel split panel} that shows its {@link #getChild(int)
- * children} vertically from the top to the bottom.
- * 
+ * children} with {@link net.sf.mmm.util.lang.api.Orientation#VERTICAL vertical} {@link #getOrientation()
+ * orientation} from the top to the bottom.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

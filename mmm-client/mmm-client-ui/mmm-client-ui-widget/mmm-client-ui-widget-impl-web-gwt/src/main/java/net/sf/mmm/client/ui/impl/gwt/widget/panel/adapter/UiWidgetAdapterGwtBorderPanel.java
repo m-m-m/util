@@ -11,13 +11,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterBorderPanel} using GWT based on {@link Fieldset}.
- * 
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetAdapterGwtBorderPanel extends
-    UiWidgetAdapterGwtSingleMutableComposite<Fieldset, UiWidgetRegular> implements UiWidgetAdapterBorderPanel {
+public class UiWidgetAdapterGwtBorderPanel extends UiWidgetAdapterGwtSingleMutableComposite<Fieldset, UiWidgetRegular>
+    implements UiWidgetAdapterBorderPanel {
 
   /** @see #setChild(UiWidgetRegular) */
   private Widget childWidget;

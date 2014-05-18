@@ -4,19 +4,19 @@ package net.sf.mmm.client.ui.base.widget.panel;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
-import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
-import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterVerticalPanel;
+import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
+import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterSplitPanel;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetVerticalPanel}.
+ * This is the abstract base implementation of {@link UiWidgetSplitPanel}.
  *
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetVerticalPanel<ADAPTER extends UiWidgetAdapterVerticalPanel> extends
-    AbstractUiWidgetDynamicPanel<ADAPTER, UiWidgetRegular> implements UiWidgetVerticalPanel {
+public abstract class AbstractUiWidgetSplitPanel<ADAPTER extends UiWidgetAdapterSplitPanel> extends
+    AbstractUiWidgetDynamicPanel<ADAPTER, UiWidgetRegular> implements UiWidgetSplitPanel {
 
   /**
    * The constructor.
@@ -25,10 +25,9 @@ public abstract class AbstractUiWidgetVerticalPanel<ADAPTER extends UiWidgetAdap
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public AbstractUiWidgetVerticalPanel(UiContext context, ADAPTER widgetAdapter) {
+  public AbstractUiWidgetSplitPanel(UiContext context, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
-    setPrimaryStyle(STYLE_PRIMARY);
   }
 
 }

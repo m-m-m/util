@@ -2,8 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.widget;
 
+import java.util.List;
+
 import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
@@ -13,6 +17,7 @@ import net.sf.mmm.client.ui.api.widget.factory.AbstractUiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextAreaField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
 import net.sf.mmm.util.component.api.ComponentSpecification;
@@ -32,7 +37,7 @@ import net.sf.mmm.util.lang.api.Orientation;
  * {@link net.sf.mmm.util.component.api.Api API} for end-users and is implemented independent from the UI
  * toolkit.<br/>
  * For generic access you can do:
- * 
+ *
  * <pre>
  * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton} saveButton = factory.{@link #create(Class)
  * create}({@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton}.class);
@@ -40,30 +45,30 @@ import net.sf.mmm.util.lang.api.Orientation;
  * saveButton.{@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton#addClickHandler(UiHandlerEventClick)
  * addClickHandler}(clickHandler);
  * </pre>
- * 
+ *
  * However, it is a more comfortable to do:
- * 
+ *
  * <pre>
  * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton} saveButton = factory.{@link #createButton(String, UiHandlerEventClick)
  * createButton}("save", clickHandler);
  * </pre>
- * 
+ *
  * But you maybe also want to have a icon and a tooltip and {@link net.sf.mmm.util.nls.api.NlsMessage
  * NLS/I18N}. And you discover that you do not only need this code once in your application but all over the
  * place. Then you will be happy to see that you get all the comfort this way:
- * 
+ *
  * <pre>
  * {@link net.sf.mmm.client.ui.api.handler.action.UiHandlerActionSave} saveHandler = ...;
  * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetButton} saveButton = factory.{@link #createButton(UiHandlerAction) createButton}(saveHandler);
  * </pre>
- * 
+ *
  * Now this is just the beginning of this awesome UI framework. You will discover that there are even much
  * higher level features such as e.g. the <em>editor pattern</em>. So see
  * <code>net.sf.mmm.client.ui.base.widget.custom.pattern.UiWidgetCustomEditor</code> for more.
- * 
+ *
  * <b>ATTENTION:</b><br/>
  * This is a {@link net.sf.mmm.util.component.api.Api#EXTENDABLE_INTERFACE extendable interface}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -75,9 +80,9 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
 
   /**
    * This method creates a new {@link UiWidgetButton}.
-   * 
+   *
    * @see #createButton(UiHandlerAction)
-   * 
+   *
    * @param label is the {@link UiWidgetButton#getLabel() label}.
    * @param clickHandler is the {@link UiHandlerEventClick} invoked if the button is clicked.
    * @return the new widget instance.
@@ -93,7 +98,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
    * <b>ATTENTION:</b><br/>
    * This method will fail with an exception if the given <code>handler</code> implements more than one known
    * {@link UiHandlerAction} interface. Use {@link #createButton(Class, UiHandlerAction)} to prevent this.
-   * 
+   *
    * @param handler is the {@link UiHandlerAction} instance.
    * @return the new widget instance.
    */
@@ -104,9 +109,9 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
    * {@link #createButton(UiHandlerAction)} this method can be used for an handler implementation that
    * realizes multiple {@link UiHandlerAction} interfaces as the proper one to choose is identified by
    * <code>handlerType</code>.
-   * 
+   *
    * @param <HANDLER> is the generic type of the {@link UiHandlerAction}.
-   * 
+   *
    * @param handlerType is the {@link Class} reflecting the {@link UiHandlerAction} interface to create a
    *        button for.
    * @param handler is the {@link UiHandlerAction} instance.
@@ -119,9 +124,9 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
    * {@link #createButton(UiHandlerAction)} this method can be used for an handler implementation that
    * realizes multiple {@link UiHandlerAction} interfaces as the proper one to choose is identified by
    * <code>handlerType</code>.
-   * 
+   *
    * @param <HANDLER> is the generic type of the {@link UiHandlerAction}.
-   * 
+   *
    * @param handlerType is the {@link Class} reflecting the {@link UiHandlerAction} interface to create a
    *        button for.
    * @param handler is the {@link UiHandlerAction} instance.
@@ -140,7 +145,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
 
   /**
    * This method creates a new {@link UiWidgetLabel}.
-   * 
+   *
    * @param label is the {@link UiWidgetLabel#getLabel() label}.
    * @return the new widget instance.
    */
@@ -148,7 +153,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
 
   /**
    * This method creates a new {@link UiWidgetSection}.
-   * 
+   *
    * @param label is the {@link UiWidgetSection#getLabel() label}.
    * @return the new widget instance.
    */
@@ -156,7 +161,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
 
   /**
    * This method creates a new {@link UiWidgetImage}.
-   * 
+   *
    * @param url is the {@link UiWidgetImage#getUrl() URL}.
    * @param altText is the {@link UiWidgetImage#getAltText() alternative text}.
    * @return the new widget instance.
@@ -165,15 +170,23 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
 
   /**
    * This method creates a new {@link UiWidgetTextField}.
-   * 
+   *
    * @param label is the {@link UiWidgetTextField#getLabel() label}.
    * @return the new widget instance.
    */
   UiWidgetTextField createTextField(String label);
 
   /**
+   * This method creates a new {@link UiWidgetTextAreaField}.
+   *
+   * @param label is the {@link UiWidgetTextAreaField#getLabel() label}.
+   * @return the new widget instance.
+   */
+  UiWidgetTextAreaField createTextAreaField(String label);
+
+  /**
    * This method creates a new {@link UiWidgetIntegerField}.
-   * 
+   *
    * @param label is the {@link UiWidgetIntegerField#getLabel() label}.
    * @return the new widget instance.
    */
@@ -181,7 +194,7 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
 
   /**
    * This method creates a new {@link UiWidgetLongField}.
-   * 
+   *
    * @param label is the {@link UiWidgetLongField#getLabel() label}.
    * @return the new widget instance.
    */
@@ -189,9 +202,22 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
 
   /**
    * This method creates a new {@link UiWidgetComboboxField}.
-   * 
+   *
    * @param <VALUE> is the generic type of the available selection options.
-   * 
+   *
+   * @param label is the {@link UiWidgetComboboxField#getLabel() label}.
+   * @param options are the {@link UiWidgetComboboxField#getOptions() options} of the combobox. E.g.
+   *        {@link Class#getEnumConstants() enum values} via
+   *        <code>{@link java.util.Arrays#asList(Object...) Arrays.asList}(MyEnum.values())</code>.
+   * @return the new widget instance.
+   */
+  <VALUE> UiWidgetComboboxField<VALUE> createComboBox(String label, List<VALUE> options);
+
+  /**
+   * This method creates a new {@link UiWidgetComboboxField}.
+   *
+   * @param <VALUE> is the generic type of the available selection options.
+   *
    * @param label is the {@link UiWidgetLongField#getLabel() label}.
    * @param enumDefinition is the {@link EnumDefinition} identifying the available
    *        {@link UiWidgetComboboxField#getOptions() options}. These may be loaded asynchronous via
@@ -201,8 +227,19 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
   <VALUE> UiWidgetComboboxField<VALUE> createComboBox(String label, EnumDefinition<VALUE, ?> enumDefinition);
 
   /**
+   * Creates a new {@link UiWidgetTree} for the given <code>model</code>.
+   *
+   * @param <NODE> is the generic type of the tree nodes.
+   * @param model is the {@link UiTreeModel}.
+   * @param title is the {@link UiWidgetTree#getTitle() title} of the tree. See also
+   *        {@link UiWidgetTree#isTitleVisible()}.
+   * @return the new widget instance.
+   */
+  <NODE> UiWidgetTree<NODE> createTree(UiTreeModel<NODE> model, String title);
+
+  /**
    * This method creates a new {@link UiWidgetSplitPanel}.
-   * 
+   *
    * @param orientation - {@link Orientation#HORIZONTAL} for
    *        {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalSplitPanel} or
    *        {@link Orientation#VERTICAL} for
