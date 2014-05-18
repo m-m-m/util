@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.mmm.client.ui.api.UiConfiguration;
 import net.sf.mmm.client.ui.api.UiDispatcher;
 import net.sf.mmm.client.ui.api.UiDisplay;
@@ -20,7 +23,7 @@ import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderFactory
 /**
  * This is a fake implementation of {@link ComponentContainer} used as fallback for
  * {@link AbstractUiContext#getContainer()} if no real {@link net.sf.mmm.util.component.api.Ioc} is available.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -29,14 +32,41 @@ public class ComponentContainerContextFallback extends AbstractLoggableComponent
   /** The {@link AbstractUiContext} instance. */
   private final AbstractUiContext context;
 
+  /** @see #get(Class) */
+  private final Map<Class<?>, Object> componentMap;
+
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link AbstractUiContext}.
    */
   public ComponentContainerContextFallback(AbstractUiContext context) {
 
+    super();
     this.context = context;
+    this.componentMap = new HashMap<>();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialized() {
+
+    this.componentMap.put(UiWidgetFactory.class, this.context.getWidgetFactory());
+    this.componentMap.put(UiDispatcher.class, this.context.getDispatcher());
+    this.componentMap.put(UiDisplay.class, this.context.getDisplay());
+    this.componentMap.put(UiPopupHelper.class, this.context.getPopupHelper());
+    this.componentMap.put(RoleFactory.class, this.context.getRoleFactory());
+    this.componentMap.put(UiConfiguration.class, this.context.getConfiguration());
+
+    this.componentMap.put(UiDataBindingFactory.class, this.context.getDataBindingFactory());
+    PojoDescriptorBuilderFactory result = AbstractPojoDescriptorBuilderFactory.getInstance();
+    if (result == null) {
+      throw new ObjectNotFoundException(PojoDescriptorBuilderFactory.class);
+    }
+    this.componentMap.put(PojoDescriptorBuilderFactory.class, result);
+    super.doInitialized();
   }
 
   /**
@@ -47,27 +77,8 @@ public class ComponentContainerContextFallback extends AbstractLoggableComponent
   public <COMPONENT_API> COMPONENT_API get(Class<COMPONENT_API> apiClass) throws ResourceAmbiguousException,
       ResourceMissingException {
 
-    Object result;
-    if (apiClass == UiWidgetFactory.class) {
-      result = this.context.getWidgetFactory();
-    } else if (apiClass == UiDispatcher.class) {
-      result = this.context.getDispatcher();
-    } else if (apiClass == UiDisplay.class) {
-      result = this.context.getDisplay();
-    } else if (apiClass == UiPopupHelper.class) {
-      result = this.context.getPopupHelper();
-    } else if (apiClass == RoleFactory.class) {
-      result = this.context.getRoleFactory();
-    } else if (apiClass == UiConfiguration.class) {
-      result = this.context.getConfiguration();
-    } else if (apiClass == UiDataBindingFactory.class) {
-      result = this.context.getDataBindingFactory();
-    } else if (apiClass == PojoDescriptorBuilderFactory.class) {
-      result = AbstractPojoDescriptorBuilderFactory.getInstance();
-      if (result == null) {
-        throw new ObjectNotFoundException(PojoDescriptorBuilderFactory.class);
-      }
-    } else {
+    Object result = this.componentMap.get(apiClass);
+    if (result == null) {
       throw new ResourceMissingException(apiClass.getName());
     }
     return (COMPONENT_API) result;
@@ -81,6 +92,22 @@ public class ComponentContainerContextFallback extends AbstractLoggableComponent
       throws ResourceMissingException {
 
     return get(apiClass);
+  }
+
+  /**
+   * Puts the given <code>componentInstance</code> associated with the given <code>apiClass</code> into this
+   * container. <br/>
+   * <b>ATTENTION:</b><br/>
+   * This class and especially this method should only be used for initialization of limited environments.
+   * Otherwise please prefer proper usage of {@link net.sf.mmm.util.component.api.Cdi}.
+   *
+   * @param <COMPONENT_API> is the generic type of the <code>apiClass</code>.
+   * @param apiClass is the class reflecting the API of component. This should be an interface.
+   * @param componentInstance is the instance of the component to register.
+   */
+  public <COMPONENT_API> void put(Class<COMPONENT_API> apiClass, COMPONENT_API componentInstance) {
+
+    this.componentMap.put(apiClass, componentInstance);
   }
 
 }
