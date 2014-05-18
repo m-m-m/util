@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-showcase</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>${project.artifactId}</name>
+  <description>A showcase to show the features and possibilities of mmm (especially for mmm-client).</description>
+  <modules>
+    <module>mmm-showcase-shared</module>
+    <module>mmm-showcase-client</module>
+    <module>mmm-showcase-server</module>
+    <module>mmm-showcase-app-gwt</module>
+    <module>mmm-showcase-app-javafx</module>
+  </modules>
+  
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-test</artifactId>
+      <version>0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
