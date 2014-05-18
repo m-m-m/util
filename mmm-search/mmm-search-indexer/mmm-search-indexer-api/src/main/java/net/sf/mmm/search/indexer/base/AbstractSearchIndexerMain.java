@@ -18,7 +18,7 @@ import net.sf.mmm.util.component.api.IocContainer;
  * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer search-indexer} according to a given
  * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration configuration}. It allows to do
  * complex indexing of files from arbitrary sources.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -61,7 +61,7 @@ public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
 
   /**
    * An {@link IocContainer} is required. Override this method to provide it.
-   * 
+   *
    * {@inheritDoc}
    */
   @Override
