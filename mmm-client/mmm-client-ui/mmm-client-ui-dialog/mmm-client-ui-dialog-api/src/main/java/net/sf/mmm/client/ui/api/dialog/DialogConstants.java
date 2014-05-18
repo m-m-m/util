@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.base.dialog.DialogSlot;
  * We recommend that you extend this interface with your own <code>MyProjectDialogConstants</code> to define
  * the constants for your dialogs. In most cases you should avoid defining constants for parameterized
  * {@link DialogPlace}s.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -23,7 +23,7 @@ public interface DialogConstants {
   /**
    * The {@link Dialog#getType() type} of the <em>root</em> dialog. This is the top-level dialog of the
    * application and represents the {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow}.
-   * 
+   *
    * @see net.sf.mmm.client.ui.base.dialog.root.RootDialogController
    */
   String TYPE_ROOT = "Root";
@@ -34,7 +34,7 @@ public interface DialogConstants {
    * {@link #TYPE_ROOT root} page and provide {@link net.sf.mmm.client.ui.base.dialog.DialogSlot slots} for
    * child dialogs, at least a {@link #TYPE_MAIN main} slot. For an example see
    * {@link net.sf.mmm.client.ui.base.dialog.DialogController}.
-   * 
+   *
    * @see net.sf.mmm.client.ui.base.dialog.page.AbstractPageDialogController
    */
   String TYPE_PAGE = "Page";
@@ -80,6 +80,9 @@ public interface DialogConstants {
   /** The {@link Dialog#getId() dialog-id} of the {@link #TYPE_PAGE page} dialog. */
   String DIALOG_ID_PAGE = "page";
 
+  /** The {@link Dialog#getId() dialog-id} of the (default) {@link #TYPE_NAVIGATION navigation} dialog. */
+  String DIALOG_ID_NAVIGATION = "nav";
+
   /**
    * The {@link DialogSlot} of the {@link #DIALOG_ID_ROOT root dialog} where the {@link #TYPE_PAGE page}
    * dialog is {@link net.sf.mmm.client.ui.base.dialog.DialogController#embed} embedded.
@@ -89,18 +92,21 @@ public interface DialogConstants {
   /** The {@link DialogSlot} for the main dialog. */
   DialogSlot SLOT_PAGE_MAIN = new DialogSlot(DIALOG_ID_PAGE, TYPE_MAIN);
 
+  /** The {@link DialogSlot} for the navigation dialog. */
+  DialogSlot SLOT_PAGE_NAVIGATION = new DialogSlot(DIALOG_ID_NAVIGATION, TYPE_NAVIGATION);
+
   /**
    * The {@link Dialog#getId() dialog-id} of the {@link #TYPE_MAIN main} dialog that defines the home screen
    * or start page. It is just a recommendation to make your life easier. You can also define your own ID and
    * place and just ignore these constant if you have a reason to do so.
-   * 
+   *
    * @see DialogManager#initialize(DialogPlace)
    */
   String DIALOG_ID_HOME = "home";
 
   /**
    * The {@link DialogPlace} for the {@link #DIALOG_ID_HOME home dialog}.
-   * 
+   *
    * @see DialogManager#initialize(DialogPlace)
    */
   DialogPlace PLACE_HOME = new DialogPlace(DIALOG_ID_HOME);

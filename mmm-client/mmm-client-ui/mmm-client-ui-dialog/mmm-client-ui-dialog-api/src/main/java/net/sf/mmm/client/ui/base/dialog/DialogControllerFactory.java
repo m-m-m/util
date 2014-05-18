@@ -2,13 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.dialog;
 
-import java.util.List;
-
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for the factory of all available {@link DialogController}s.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -16,10 +14,11 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface DialogControllerFactory {
 
   /**
-   * This method creates a new list with all {@link DialogController}s available in the client.
-   * 
-   * @return a new list with fresh instances of all available {@link DialogController}s.
+   * Creates the {@link DialogController} with the given <code>dialogId</code>.
+   *
+   * @param dialogId is the {@link DialogController#getId() ID} of the requested {@link DialogController}.
+   * @return a new instance of the specified {@link DialogController}.
    */
-  List<DialogController<?>> createDialogControllers();
+  DialogController<?> createDialogController(String dialogId);
 
 }

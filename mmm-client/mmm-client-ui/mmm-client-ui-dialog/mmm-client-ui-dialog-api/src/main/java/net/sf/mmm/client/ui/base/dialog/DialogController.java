@@ -21,7 +21,7 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
  * This is the abstract base class for the {@link AbstractDialogController controller} of a {@link Dialog}.
  * For each {@link net.sf.mmm.client.ui.api.dialog.ApplicationWindow} a single instance of
  * {@link DialogController} exists for each {@link Dialog} holding its state.
- * 
+ *
  * <pre>
  * public class PageDialogController extends {@link net.sf.mmm.client.ui.base.dialog.DialogController}&lt;MyPageView&gt; {
  *
@@ -47,9 +47,9 @@ import net.sf.mmm.util.nls.api.ObjectMismatchException;
  *
  * }
  * </pre>
- * 
+ *
  * @param <VIEW> is the generic type of the {@link #getView() view}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -93,7 +93,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
 
   /**
    * This method sets the parent {@link DialogController} when embedding.
-   * 
+   *
    * @param parent is the parent {@link DialogController} or <code>null</code> to reset.
    */
   void setParent(DialogController<?> parent) {
@@ -106,7 +106,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
 
   /**
    * This method notifies that the given {@link DialogController} has been removed as a sub-dialog.
-   * 
+   *
    * @param subDialog is the child {@link DialogController} that has been removed.
    */
   protected void onRemoveChild(DialogController<?> subDialog) {
@@ -147,7 +147,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
 
   /**
    * This method opens this dialog as triggered by the given {@link DialogPlace}.
-   * 
+   *
    * @param dialogPlace is the {@link DialogPlace} {@link DialogPlace#getDialogId() identifying} this
    *        {@link DialogController} and providing potential {@link DialogPlace#getParameter(String)
    *        parameters}.
@@ -159,14 +159,14 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
       throw new ObjectMismatchException(dialogPlace.getDialogId(), getId(), DialogPlace.class.getSimpleName()
           + ".dialogId");
     }
-    if (this.place == dialogPlace) {
-      return;
-    }
+    // if (this.place == dialogPlace) {
+    // return;
+    // }
     showInternal(dialogPlace);
   }
 
   /**
-   * 
+   *
    * @param dialogPlace is the {@link DialogPlace} {@link DialogPlace#getDialogId() pointing} to the
    *        <em>direct</em> dialog to open and containing potential {@link DialogPlace#getParameter(String)
    *        parameters}.
@@ -203,7 +203,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
    * </ul>
    * If this is the {@link DialogConstants#TYPE_ROOT root} {@link DialogController} this method will never be
    * called.
-   * 
+   *
    * @param dialogPlace is the {@link DialogPlace} {@link DialogPlace#getDialogId() pointing} to the
    *        <em>direct</em> dialog to open and containing potential {@link DialogPlace#getParameter(String)
    *        parameters}.
@@ -215,7 +215,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
   /**
    * This method embeds the given <code>subDialog</code> inside the given <code>slot</code> of this dialog.
    * The <code>subDialog</code> previously set in that slot is replaced with the new one.
-   * 
+   *
    * @param subDialog is the {@link DialogController} of the sub-dialog to embed.
    * @param slot is the {@link DialogSlot} identifying the location in the {@link #getView() view} where the
    *        <code>subDialog</code> shall be embedded.
@@ -250,7 +250,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
    * sub-dialog in a predefined slot. If this {@link DialogController} represents a leaf-dialog than can not
    * have sub-dialogs this method will be never called.<br/>
    * Here is a typical example:
-   * 
+   *
    * <pre>
    * protected void embed({@link DialogController} subDialog, {@link DialogSlot} slot) {
    *   if (slot == SLOT_MAIN) {
@@ -263,10 +263,10 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
    *   }
    * }
    * </pre>
-   * 
+   *
    * The cast to {@link net.sf.mmm.client.ui.api.widget.UiWidgetRegular} is legal here if you are not doing
    * odd things. See {@link #getView()} for details.
-   * 
+   *
    * @param subDialog is the {@link DialogController} of the sub-dialog to embed.
    * @param slot is the {@link DialogSlot} identifying the location in the {@link #getView() view} where the
    *        <code>subDialog</code> shall be embedded.

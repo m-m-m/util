@@ -6,6 +6,8 @@ import net.sf.mmm.client.ui.api.dialog.ApplicationWindow;
 import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.base.dialog.AbstractDialogManager;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
@@ -14,7 +16,7 @@ import com.google.gwt.user.client.Window.Location;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.api.dialog.DialogManager} for GWT.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -53,6 +55,9 @@ public class DialogManagerImplGwt extends AbstractDialogManager {
   @Override
   public void navigateTo(DialogPlace place) {
 
+    if (place.equals(getCurrentPlace())) {
+      return;
+    }
     History.newItem(place.toString(), false);
     show(place);
   }
@@ -92,13 +97,26 @@ public class DialogManagerImplGwt extends AbstractDialogManager {
 
   /**
    * This method gets called whenever the {@link DialogPlace} changes.
-   * 
+   *
    * @param place is the new place.
    */
   protected void onNavigate(String place) {
 
-    DialogPlace dialogPlace = DialogPlace.fromString(place);
-    show(dialogPlace);
+    final DialogPlace dialogPlace = DialogPlace.fromString(place);
+    GWT.runAsync(new RunAsyncCallback() {
+
+      @Override
+      public void onSuccess() {
+
+        show(dialogPlace);
+      }
+
+      @Override
+      public void onFailure(Throwable reason) {
+
+        getContext().getPopupHelper().showPopup(reason);
+      }
+    });
   }
 
   /**
