@@ -17,20 +17,19 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link LuceneSearchIndexer}. It is a complete
- * integration test that performs the actual indexing via
- * {@link SearchIndexerMain}. In order to test the result, it will use the
+ * This is the test-case for {@link LuceneSearchIndexer}. It is a complete integration test that performs the
+ * actual indexing via {@link SearchIndexerMain}. In order to test the result, it will use the
  * {@link SearchEngine}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class LuceneSearchIndexerTest {
 
   /**
-   * This method performs a search for the given <code>query</code> that is
-   * expected to return a single {@link SearchHit} as result.
-   * 
+   * This method performs a search for the given <code>query</code> that is expected to return a single
+   * {@link SearchHit} as result.
+   *
    * @param searchEngine is the {@link SearchEngine}.
    * @param query is the {@link SearchQuery}.
    * @return the {@link SearchHit}.
@@ -45,22 +44,19 @@ public class LuceneSearchIndexerTest {
   }
 
   /**
-   * This method indexes the complete sources of this maven module. It will then
-   * perform a search and check if it gets the correct results.
+   * This method indexes the complete sources of this maven module. It will then perform a search and check if
+   * it gets the correct results.
    */
   @Test
   public void testIndexer() {
 
     SearchIndexerMain main = new SearchIndexerMain();
     String configLocation = TestResourceHelper.getTestPath(LuceneSearchIndexerTest.class, ".xml");
-    int exitCode = main.run(new String[] { "--config", configLocation, "--overwrite" });
+    int exitCode = main.run("--config", configLocation, "--overwrite");
     Assert.assertEquals(0, exitCode);
-    SearchEngineConfigurationLoader configLoader = main.getIocContainer().get(
-        SearchEngineConfigurationLoader.class);
-    SearchEngineConfigurationHolder configurationHolder = configLoader
-        .loadConfiguration(configLocation);
-    SearchEngineBuilder searchEngineBuilder = main.getIocContainer().get(
-        SearchEngineBuilder.class);
+    SearchEngineConfigurationLoader configLoader = main.getIocContainer().get(SearchEngineConfigurationLoader.class);
+    SearchEngineConfigurationHolder configurationHolder = configLoader.loadConfiguration(configLocation);
+    SearchEngineBuilder searchEngineBuilder = main.getIocContainer().get(SearchEngineBuilder.class);
     String path = LuceneSearchIndexerTest.class.getName().replace('.', '/');
     ManagedSearchEngine searchEngine = searchEngineBuilder.createSearchEngine(configurationHolder);
     try {
