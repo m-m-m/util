@@ -2,17 +2,22 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.impl.gwt.widget.window.adapter;
 
+import net.sf.mmm.client.ui.api.common.Length;
+import net.sf.mmm.client.ui.api.common.LengthProperty;
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractDialogWindow;
 import net.sf.mmm.client.ui.gwt.widgets.PopupWindow;
 import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
+import net.sf.mmm.util.gwt.api.JavaScriptUtil;
+
+import com.google.gwt.dom.client.Element;
 
 /**
  * This is the implementation of
  * {@link net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractDialogWindow} using GWT based
  * on {@link PopupWindow}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -85,7 +90,8 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
   @Override
   public double getWidthInPixel() {
 
-    return getToplevelWidget().getOffsetWidth();
+    return new Length(JavaScriptUtil.getInstance().getComputedStyle(getSizeElement())
+        .getPropertyValue(LengthProperty.WIDTH.getStyleName())).getAmount();
   }
 
   /**
@@ -94,7 +100,8 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
   @Override
   public double getHeightInPixel() {
 
-    return getToplevelWidget().getOffsetHeight();
+    return new Length(JavaScriptUtil.getInstance().getComputedStyle(getSizeElement())
+        .getPropertyValue(LengthProperty.HEIGHT.getStyleName())).getAmount();
   }
 
   /**
@@ -212,6 +219,15 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
   public double getPositionY() {
 
     return getToplevelWidget().getAbsoluteTop();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Element getSizeElement() {
+
+    return super.getSizeElement();
   }
 
 }

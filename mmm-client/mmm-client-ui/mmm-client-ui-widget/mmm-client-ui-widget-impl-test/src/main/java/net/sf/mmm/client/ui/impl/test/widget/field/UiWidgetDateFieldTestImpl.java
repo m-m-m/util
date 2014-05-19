@@ -3,13 +3,13 @@
 package net.sf.mmm.client.ui.impl.test.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetDateField;
 import net.sf.mmm.client.ui.impl.test.widget.field.adapter.UiWidgetAdapterTestDateField;
 
 /**
- * This is the implementation of {@link UiWidgetDateField} for testing without a native toolkit.
+ * This is the implementation of {@link UiWidgetLocalDateField} for testing without a native toolkit.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -38,21 +38,21 @@ public class UiWidgetDateFieldTestImpl extends AbstractUiWidgetDateField<UiWidge
   /**
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetDateField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetLocalDateField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetDateField.class);
+      super(UiWidgetLocalDateField.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetDateField create(UiContext context) {
+    public UiWidgetLocalDateField create(UiContext context) {
 
       return new UiWidgetDateFieldTestImpl(context);
     }

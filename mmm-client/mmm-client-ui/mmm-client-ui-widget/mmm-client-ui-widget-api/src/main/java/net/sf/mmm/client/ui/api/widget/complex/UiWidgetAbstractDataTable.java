@@ -3,6 +3,7 @@
 package net.sf.mmm.client.ui.api.widget.complex;
 
 import java.util.Comparator;
+import java.util.List;
 
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
@@ -16,7 +17,7 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * <em>data table</em>. That is a table showing rows of data with their attributes in columns. It has the
  * following features:
  * <ul>
- * <li>Configured via its {@link #setColumns(UiWidgetTableColumn...) columns}.</li>
+ * <li>Configured via its {@link #setColumns(List) columns}.</li>
  * <li>Each column defines attributes like {@link UiWidgetTableColumn#getId() ID},
  * {@link UiWidgetTableColumn#getTitle() title}, and {@link UiWidgetTableColumn#getTooltip() tooltip} that
  * will be used for the header of the column.</li>
@@ -41,9 +42,9 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * <li>{@link UiWidgetOptionListTable}</li>
  * <li>{@link UiWidgetTreeTable}</li>
  * </ul>
- * 
+ *
  * @param <ROW> is the generic type of a row in the list.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -55,9 +56,9 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
   /**
    * This method creates a new {@link UiWidgetTableColumn column} for this table. <br/>
    * <b>ATTENTION:</b><br/>
-   * The column is not automatically added to the table. You need to call
-   * {@link #setColumns(UiWidgetTableColumn...)} for all columns that should appear in the UI.
-   * 
+   * The column is not automatically added to the table. You need to call {@link #setColumns(List)} for all
+   * columns that should appear in the UI.
+   *
    * @param <CELL> is the generic type of the {@link TypedProperty#getPropertyType() property type}.
    * @param rowProperty is the {@link TypedProperty} identifying which {@link TypedProperty#getPojoPath()
    *        property} of {@literal <ROW>} to show in the column.
@@ -79,9 +80,9 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
   /**
    * This method creates a new {@link UiWidgetTableColumn column} for this table.<br/>
    * <b>ATTENTION:</b><br/>
-   * The column is not automatically added to the table. You need to call
-   * {@link #setColumns(UiWidgetTableColumn...)} for all columns that should appear in the UI.
-   * 
+   * The column is not automatically added to the table. You need to call {@link #setColumns(List)} for all
+   * columns that should appear in the UI.
+   *
    * @param <CELL> is the generic type of the {@link PropertyAccessor#getValue(Object) property value}.
    * @param rowAccessor is the {@link PropertyAccessor} to {@link PropertyAccessor#getValue(Object) access}
    *        the property of {@literal <ROW>} to show in the column.
@@ -102,38 +103,41 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
 
   /**
    * This method sets the {@link #getColumn(int) columns} for the table of this model.<br/>
+   * You typically will call this method like this:
+   *
+   * <pre>list.setColumns(Arrays.asList(column1, column2, column3))</pre>
+   *
+   * Unfortunately varargs with generics cause trouble in interfaces.<br/>
    * <b>ATTENTION:</b><br/>
    * This method should typically be called only once during initialization of this table. Multiple calls of
    * this method for dynamic changes of the UI may NOT be completely supported by all underlying
    * implementations. We recommend to test your code with all relevant implementations before investing in
    * multiple dynamic changes. Consider {@link UiWidgetTableColumn#setVisible(boolean)} instead if possible.
-   * 
+   *
    * @see #createColumn(TypedProperty, UiSingleWidgetFactory, Comparator)
    * @see #createColumn(PropertyAccessor, UiSingleWidgetFactory, Comparator)
-   * 
+   *
    * @param columns are the {@link UiWidgetTableColumn columns} to set. Use <code>createColumn</code> to
    *        create before.
    */
-  @SuppressWarnings("unchecked")
-  void setColumns(UiWidgetTableColumn<ROW, ?>... columns);
+  void setColumns(List<? extends UiWidgetTableColumn<ROW, ?>> columns);
 
   /**
    * @see java.util.List#size()
-   * 
-   * @return the number of {@link #getColumn(int) columns} that are currently
-   *         {@link #setColumns(UiWidgetTableColumn...) set}.
+   *
+   * @return the number of {@link #getColumn(int) columns} that are currently {@link #setColumns(List) set}.
    */
   int getColumnCount();
 
   /**
    * This method gets the {@link UiWidgetTableColumn column} at the given <code>index</code>.
-   * 
+   *
    * @see java.util.List#get(int)
-   * 
+   *
    * @param index is the index of the requested {@link UiWidgetTableColumn column}. The index corresponds to
-   *        the index when the columns have been {@link #setColumns(UiWidgetTableColumn...) set}. Reordering
-   *        or hiding columns in the UI has no effect on the index. The value has to be in the range from
-   *        <code>0</code> to <code>{@link #getColumnCount()} - 1</code>.
+   *        the index when the columns have been {@link #setColumns(List) set}. Reordering or hiding columns
+   *        in the UI has no effect on the index. The value has to be in the range from <code>0</code> to
+   *        <code>{@link #getColumnCount()} - 1</code>.
    * @return the requested {@link UiWidgetTableColumn column}.
    */
   UiWidgetTableColumn<ROW, ?> getColumn(int index);
@@ -146,7 +150,7 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
    * {@link UiWidgetTableColumn#setTitle(String) title}, {@link UiWidgetTableColumn#setReorderable(boolean)
    * reorderable}, {@link UiWidgetTableColumn#setResizable(boolean) resizable}, or
    * {@link UiWidgetTableColumn#setSortable(boolean) sortable}.
-   * 
+   *
    * @return the implicit {@link UiWidgetTableColumn column} that shows the checkboxes or radios for the
    *         selection of a row.
    */
@@ -161,14 +165,14 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
    * {@link UiWidgetTableColumn#setSortable(boolean) sortable}.<br/>
    * This column may be lazily created. Only use if you want to
    * {@link UiWidgetTableColumn#setVisible(boolean) make it visible}.
-   * 
+   *
    * @return the implicit {@link UiWidgetTableColumn column} that shows the row-numbers.
    */
   UiWidgetTableColumn<?, Integer> getRowNumberColumn();
 
   /**
    * This method gets the {@link UiWidgetTableColumn column} with the given <code>columnId</code>.
-   * 
+   *
    * @param columnId is the {@link UiWidgetTableColumn#getId() ID} of the requested column.
    * @param required - if <code>true</code> and the requested column does not exist, an exception is thrown,
    *        <code>false</code> otherwise (<code>null</code> will be returned for non existent columns).

@@ -10,13 +10,14 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow
 import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterMainWindow} using GWT based on {@link RootPanel} and
  * {@link Window}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -94,7 +95,7 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtAbstractWind
   /**
    * Converts the width to pixels. Actual conversion has already been done by the
    * {@link net.sf.mmm.client.ui.base.widget.window.AbstractUiWidgetAbstractWindow}.
-   * 
+   *
    * @param length is the {@link Length}.
    * @return the {@link Length#getAmount() amount} of pixels.
    */
@@ -178,6 +179,15 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtAbstractWind
 
     RootPanel rootLayoutPanel = RootPanel.get();
     return rootLayoutPanel;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Element getSizeElement() {
+
+    return getContentPanel().getElement();
   }
 
 }

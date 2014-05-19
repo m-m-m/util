@@ -7,6 +7,7 @@ import java.util.List;
 import net.sf.mmm.client.ui.api.handler.action.UiHandlerAction;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
@@ -20,6 +21,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextAreaField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
+import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.Orientation;
@@ -238,7 +240,17 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
   <NODE> UiWidgetTree<NODE> createTree(UiTreeModel<NODE> model, String title);
 
   /**
-   * This method creates a new {@link UiWidgetSplitPanel}.
+   * Creates a new {@link UiWidgetListTable} for the given <code>rowType</code>.
+   *
+   * @param <ROW> is the generic type of <code>rowType</code>.
+   * @param rowType is the {@link Class} reflecting a row in the {@link UiWidgetListTable#getValue() value
+   *        list}.
+   * @return the new widget instance.
+   */
+  <ROW> UiWidgetListTable<ROW> createListTable(Class<ROW> rowType);
+
+  /**
+   * Creates a new {@link UiWidgetSplitPanel}.
    *
    * @param orientation - {@link Orientation#HORIZONTAL} for
    *        {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalSplitPanel} or
@@ -246,8 +258,27 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
    *        {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalSplitPanel}.
    * @param children are the {@link UiWidgetSplitPanel#getChild(String) children}. You need to provide at
    *        least two children.
-   * @return the new {@link UiWidgetSplitPanel}.
+   * @return the new widget instance.
    */
   UiWidgetSplitPanel createSplitPanel(Orientation orientation, UiWidgetRegular... children);
+
+  /**
+   * Creates a new {@link UiWidgetPopup}.
+   *
+   * @param title is the {@link UiWidgetPopup#getTitle() title}.
+   * @return the new widget instance.
+   */
+  UiWidgetPopup createPopup(String title);
+
+  /**
+   * Creates a new {@link UiWidgetPopup}.
+   *
+   * @param title is the {@link UiWidgetPopup#getTitle() title}.
+   * @param closable is the value of {@link UiWidgetPopup#isClosable()}.
+   * @param resizable is the value of {@link UiWidgetPopup#isResizable()}.
+   * @param movable is the value of {@link UiWidgetPopup#isMovable()}.
+   * @return the new widget instance.
+   */
+  UiWidgetPopup createPopup(String title, boolean closable, boolean resizable, boolean movable);
 
 }

@@ -12,20 +12,20 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * {@link UiWidgetComposite composite widget}. It supports creating reusable high-level widgets for UI
  * patterns or forms to edit business objects (see {@link #doGetValue(Object, ValidationState)} and
  * {@link #doSetValue(Object, boolean)}).
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <CHILD> is the generic type of the {@link #getChild(int) children}.
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DELEGATE extends UiWidgetComposite<? super CHILD>>
+public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DELEGATE extends UiWidgetComposite<CHILD>>
     extends UiWidgetCustom<VALUE, DELEGATE> implements UiWidgetComposite<CHILD> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    * @param valueClass is the {@link #getValueClass() value class}.
@@ -50,7 +50,7 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
   @Override
   public CHILD getChild(int index) {
 
-    return (CHILD) getDelegate().getChild(index);
+    return getDelegate().getChild(index);
   }
 
   /**
@@ -59,7 +59,7 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
   @Override
   public CHILD getChild(String id) {
 
-    return (CHILD) getDelegate().getChild(id);
+    return getDelegate().getChild(id);
   }
 
   /**
@@ -73,12 +73,12 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * <br/>
    * <br/>
    * If you do not want to use the advanced {@link #getDataBinding() data-binding} you could override this
    * method and manually implement the binding like in the following example:<br/>
-   * 
+   *
    * <pre>
    * protected Person doGetValue(Person template, {@link ValidationState} state) {
    *
@@ -95,7 +95,7 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
    *   return result;
    * }
    * </pre>
-   * 
+   *
    * You may also mix the advanced data-binding with custom logic implemented in this method.
    */
   @Override
@@ -106,12 +106,12 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * <br/>
    * <br/>
    * If you do not want to use the advanced {@link #getDataBinding() data-binding} you could override this
    * method and manually implement the binding like in the following example:<br/>
-   * 
+   *
    * <pre>
    * protected void doSetValue(Person value) {
    *   this.widgetFirstName.{@link #setValue(Object) setValue}(value?.getFirstName());

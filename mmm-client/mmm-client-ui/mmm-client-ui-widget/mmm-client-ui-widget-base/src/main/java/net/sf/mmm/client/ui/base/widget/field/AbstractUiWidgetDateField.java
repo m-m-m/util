@@ -5,11 +5,11 @@ package net.sf.mmm.client.ui.base.widget.field;
 import java.time.LocalDate;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetDateField}.
+ * This is the abstract base implementation of {@link UiWidgetLocalDateField}.
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * 
@@ -17,7 +17,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetDateField<ADAPTER extends UiWidgetAdapterDateField> extends
-    AbstractUiWidgetTextualInputField<ADAPTER, LocalDate, LocalDate> implements UiWidgetDateField {
+    AbstractUiWidgetTextualInputField<ADAPTER, LocalDate, LocalDate> implements UiWidgetLocalDateField {
 
   /**
    * The constructor.

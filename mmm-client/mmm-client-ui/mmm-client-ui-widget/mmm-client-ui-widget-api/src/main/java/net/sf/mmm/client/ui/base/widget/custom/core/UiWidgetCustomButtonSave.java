@@ -4,15 +4,15 @@ package net.sf.mmm.client.ui.base.widget.custom.core;
 
 import net.sf.mmm.client.ui.NlsBundleClientUiRoot;
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.event.UiEvent;
 import net.sf.mmm.client.ui.api.event.UiEventClick;
 import net.sf.mmm.client.ui.api.handler.action.UiHandlerActionSave;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.util.nls.api.NlsAccess;
 
 /**
- * This is a {@link UiWidgetCustomButton} for the {@link UiHandlerActionSave#onSave(UiEvent) save} operation.
- * 
+ * This is a {@link UiWidgetCustomButton} for the
+ * {@link UiHandlerActionSave#onSave(net.sf.mmm.client.ui.api.event.UiEvent) save} operation.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -20,9 +20,10 @@ public class UiWidgetCustomButtonSave extends UiWidgetCustomButton {
 
   /**
    * The constructor.
-   * 
+   *
    * @param context - see {@link #getContext()}.
-   * @param handler gets {@link UiHandlerActionSave#onSave(UiEvent) invoked} if the button is clicked.
+   * @param handler gets {@link UiHandlerActionSave#onSave(net.sf.mmm.client.ui.api.event.UiEvent) invoked} if
+   *        the button is clicked.
    */
   public UiWidgetCustomButtonSave(UiContext context, final UiHandlerActionSave handler) {
 

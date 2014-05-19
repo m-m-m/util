@@ -3,14 +3,14 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalTimeField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetTimeField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTimeField;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtTimeField;
 
 /**
- * This is the implementation of {@link UiWidgetTimeField} using GWT.
+ * This is the implementation of {@link UiWidgetLocalTimeField} using GWT.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -41,21 +41,21 @@ public class UiWidgetTimeFieldGwt extends AbstractUiWidgetTimeField<UiWidgetAdap
   /**
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetTimeField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetLocalTimeField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetTimeField.class);
+      super(UiWidgetLocalTimeField.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetTimeField create(UiContext context) {
+    public UiWidgetLocalTimeField create(UiContext context) {
 
       return new UiWidgetTimeFieldGwt(context, null);
     }

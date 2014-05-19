@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This is the implementation of {@link UiWidgetAdapterTableColumn} using GWT.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -72,7 +72,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
 
   /**
    * The constructor.
-   * 
+   *
    * @param dataTableAdapter is the {@link #getDataTableAdapter() data table adapter}.
    */
   public UiWidgetAdapterGwtTableColumn(UiWidgetAdapterGwtAbstractDataTable<?> dataTableAdapter) {
@@ -82,7 +82,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
 
   /**
    * The constructor.
-   * 
+   *
    * @param toplevelWidget is the {@link #getToplevelWidget() toplevel widget}.
    * @param dataTableAdapter is the {@link #getDataTableAdapter() data table adapter}.
    */
@@ -379,6 +379,13 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
       }
     }
 
+    /**
+     * Updates the style of the given <code>dragOverColumn</code>.
+     *
+     * @param dragOverColumn is the {@link AbstractUiWidgetTableColumn} that is dragged over and shall be
+     *        updated.
+     * @param addStyle - <code>true</code> to add drag over style, <code>false</code> to remove.
+     */
     private void updateDragOver(AbstractUiWidgetTableColumn<?, ?, ?> dragOverColumn, boolean addStyle) {
 
       if (dragOverColumn != null) {
@@ -504,7 +511,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
 
     /**
      * The constructor.
-     * 
+     *
      * @param widget is the actual column widget.
      */
     public ColumnWidthRange(UiWidget widget) {
@@ -549,7 +556,7 @@ public class UiWidgetAdapterGwtTableColumn extends UiWidgetAdapterGwtWidget<Tabl
     /**
      * Clips the given <code>deltaX</code> value according to {@link #getMinDx() minDx} and
      * {@link #getMaxDx() maxDx}.
-     * 
+     *
      * @param deltaX is the current <code>deltaX</code> to clip.
      * @return the given <code>deltaX</code> value if within the given range, otherwise if it violates the
      *         {@link #getMinDx() minDx} or {@link #getMaxDx() maxDx} constraint, {@link #getMinDx() minDx} or

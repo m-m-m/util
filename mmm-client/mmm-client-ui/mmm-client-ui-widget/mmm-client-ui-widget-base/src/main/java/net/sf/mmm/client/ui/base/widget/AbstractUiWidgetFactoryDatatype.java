@@ -17,15 +17,15 @@ import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateTimeField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetInstantField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRadioButtonsField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalTimeField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryDatatype;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.Formatter;
@@ -319,7 +319,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     @Override
     public UiWidgetField<LocalDate> create(UiContext context) {
 
-      UiWidgetDateField widget = context.getWidgetFactory().create(UiWidgetDateField.class);
+      UiWidgetLocalDateField widget = context.getWidgetFactory().create(UiWidgetLocalDateField.class);
       return widget;
     }
   }
@@ -344,7 +344,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     @Override
     public UiWidgetField<LocalTime> create(UiContext context) {
 
-      UiWidgetTimeField widget = context.getWidgetFactory().create(UiWidgetTimeField.class);
+      UiWidgetLocalTimeField widget = context.getWidgetFactory().create(UiWidgetLocalTimeField.class);
       return widget;
     }
   }
@@ -369,7 +369,7 @@ public abstract class AbstractUiWidgetFactoryDatatype extends AbstractLoggableCo
     @Override
     public UiWidgetField<Instant> create(UiContext context) {
 
-      UiWidgetDateTimeField widget = context.getWidgetFactory().create(UiWidgetDateTimeField.class);
+      UiWidgetInstantField widget = context.getWidgetFactory().create(UiWidgetInstantField.class);
       return widget;
     }
   }

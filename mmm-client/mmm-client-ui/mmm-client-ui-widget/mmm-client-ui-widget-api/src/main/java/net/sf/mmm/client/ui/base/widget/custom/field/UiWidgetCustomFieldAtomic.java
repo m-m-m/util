@@ -11,13 +11,13 @@ import net.sf.mmm.util.validation.api.ValidationState;
 /**
  * This is the abstract base class for a {@link UiWidgetCustomField custom field widget} that is
  * {@link #getDelegate() build} out of a single {@link UiWidgetField field widget}.
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Typically a custom
  *        {@link net.sf.mmm.util.lang.api.Datatype}.
  * @param <DELEGATE_VALUE> is the generic type of the {@link #getDelegate() delegates} {@link #getValue()
  *        value}.
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -26,7 +26,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    * @param valueClass is the {@link #getValueClass() value class}.
@@ -58,13 +58,13 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * that {@literal <VALUE>} and {@literal <DELEGATE_VALUE>} are the same you can just return the given
    * <code>value</code>.<br/>
    * A typical implementation shall look like this:
-   * 
+   *
    * <pre>
    * protected MyDatatype convertValueFromDelegate(String value) {
    *   return new MyDatatype(value);
    * }
    * </pre>
-   * 
+   *
    * @param value is the value of the {@link #getDelegate() delegate}. Never <code>null</code>.
    * @return the converted value of this widget.
    */
@@ -76,13 +76,13 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * datatype conversion. In case that {@literal <VALUE>} and {@literal <DELEGATE_VALUE>} are the same you can
    * just return the given <code>value</code>.<br/>
    * A typical implementation shall look like this:
-   * 
+   *
    * <pre>
    * protected String convertValueForDelegate(MyDatatype value) {
    *   return value.{@link net.sf.mmm.util.lang.api.SimpleDatatype#getValue() getValue()}.
    * }
    * </pre>
-   * 
+   *
    * @param value is the value to convert. Never <code>null</code>.
    * @return the converted value for the {@link #getDelegate() delegate widget}
    */
@@ -91,6 +91,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   protected String convertValueToString(VALUE value) {
 
@@ -103,7 +104,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * This method gets the value for the {@link #getDelegate() delegate widget} in case <code>null</code> is
    * provided as value for this widget. The default implementation return <code>null</code>. Override to
    * change.
-   * 
+   *
    * @return the <code>null</code>-value.
    */
   protected DELEGATE_VALUE getNullValueForDelegate() {

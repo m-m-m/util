@@ -15,6 +15,7 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractTree.UiTreeModel;
+import net.sf.mmm.client.ui.api.widget.complex.UiWidgetListTable;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTree;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetButton;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
@@ -29,6 +30,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalSplitPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalSplitPanel;
+import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.Orientation;
@@ -343,6 +345,16 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
    * {@inheritDoc}
    */
   @Override
+  public <ROW> UiWidgetListTable<ROW> createListTable(Class<ROW> rowType) {
+
+    UiWidgetListTable<ROW> listTable = create(UiWidgetListTable.class);
+    return listTable;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public UiWidgetSplitPanel createSplitPanel(Orientation orientation, UiWidgetRegular... children) {
 
     if (children == null) {
@@ -366,6 +378,30 @@ public class UiWidgetFactoryImpl extends AbstractUiWidgetFactory {
       splitPanel.addChild(child);
     }
     return splitPanel;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetPopup createPopup(String title) {
+
+    UiWidgetPopup popup = create(UiWidgetPopup.class);
+    popup.setTitle(title);
+    return popup;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiWidgetPopup createPopup(String title, boolean closable, boolean resizable, boolean movable) {
+
+    UiWidgetPopup popup = createPopup(title);
+    popup.setClosable(closable);
+    popup.setResizable(resizable);
+    popup.setMovable(movable);
+    return popup;
   }
 
 }

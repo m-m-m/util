@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField}.
+ * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

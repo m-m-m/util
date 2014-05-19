@@ -14,13 +14,16 @@ import net.sf.mmm.client.ui.api.common.UiMode;
 import net.sf.mmm.client.ui.api.event.EventType;
 import net.sf.mmm.client.ui.api.event.UiEvent;
 import net.sf.mmm.client.ui.api.event.UiEventValueChange;
+import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.UiEventObserver;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventIgnore;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetAbstractWithValue;
 import net.sf.mmm.client.ui.api.widget.UiWidgetComposite;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.base.AbstractUiContext;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
 import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValueAndValidation;
@@ -40,9 +43,9 @@ import org.slf4j.Logger;
  * {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom}. To avoid problems with the lack of
  * multi-inheritance in Java, we already implement {@link net.sf.mmm.client.ui.api.widget.UiWidgetWithValue}.
  * For subclasses that have no value {@link Void} is used for {@literal <VALUE>}.
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -60,7 +63,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    */
   public AbstractUiWidget(UiContext context) {
@@ -88,6 +91,20 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
+   * Makes {@link #getDataBinding()} accessible.
+   *
+   * @param <VALUE> is the generic type of the {@link UiWidgetWithValue#getValue() value}.
+   * @param widget is the {@link UiWidgetWithValue}.
+   * @param value is the value, may be <code>null</code>.
+   * @return the {@link #getDataBinding() data binding} of the given <code>widget</code>.
+   */
+  @SuppressWarnings("unchecked")
+  protected static <VALUE> UiDataBinding<VALUE> getDataBindingForWidget(UiWidgetWithValue<VALUE> widget, VALUE value) {
+
+    return ((AbstractUiWidget<VALUE>) widget).getDataBinding(value);
+  }
+
+  /**
    * @return the {@link UiDataBinding} for this widget.
    */
   protected UiDataBinding<VALUE> getDataBinding() {
@@ -97,13 +114,13 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * @see #getDataBinding()
-   * 
+   *
    * @param example is an example value that may be used to determine the {@link #getValueClass() value class}
    *        if not available. May be <code>null</code>.
    * @return the data binding.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  private UiDataBinding<VALUE> getDataBinding(VALUE example) {
+  protected UiDataBinding<VALUE> getDataBinding(VALUE example) {
 
     if (this.dataBinding == null) {
       Class<VALUE> valueType = getValueClass();
@@ -208,9 +225,9 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * </ul>
    * The implementation of this method has to correspond with the implementation of
    * {@link #doSetValue(Object, boolean)} .
-   * 
+   *
    * @see #doSetValue(Object, boolean)
-   * 
+   *
    * @param template is the object where the data is filled in. May only be <code>null</code> if according to
    *        {@link #getDataBinding() data-binding} (e.g. if {@literal <VALUE>} is an (immutable)
    *        {@link net.sf.mmm.util.lang.api.Datatype}).
@@ -234,9 +251,9 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * {@link #setValue(Object, boolean)}. In many cases the {@link #getDataBinding() data-binding} already
    * performs the required work to do. However, here is the place to implemented the custom logic to get the
    * value from the actual widget. For details see {@link #doGetValue(Object, ValidationState)}.
-   * 
+   *
    * @see #doGetValue(Object, ValidationState)
-   * 
+   *
    * @param value is the value to set. Typically a composite object (e.g. java bean) so its attributes are set
    *        to fields (see <code>UiWidgetField</code>).
    * @param forUser <code>true</code> if called from {@link #setValueForUser(Object)}, <code>false</code> if
@@ -259,7 +276,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * Converts the given value to {@link String}.
-   * 
+   *
    * @param value is the value to convert.
    * @return the {@link String} representation to display the given <code>value</code>.
    */
@@ -292,7 +309,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   /**
    * This method is called whenever the {@link #isMandatory()} flag is updated. You may override it to update
    * the UI to reflect this change.
-   * 
+   *
    * @param mandatory is the new value of {@link #isMandatory()}.
    */
   protected void setMandatory(boolean mandatory) {
@@ -344,7 +361,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * @see #setMode(UiMode)
-   * 
+   *
    * @param mode is the new {@link UiMode} to set.
    * @param programmatic - see {@link UiEvent#isProgrammatic()}.
    */
@@ -377,7 +394,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * It clears the {@link UiDataBinding#getValidity() validity} recursively.
    */
   @Override
@@ -391,7 +408,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * object. This method performs the recursive validation of potential children of this widget excluding the
    * validation of this widget itself. A legal implementation of a composite widget needs to call
    * {@link #validate(ValidationState)} on all child widgets.
-   * 
+   *
    * @param state is the {@link ValidationState}. Never <code>null</code>.
    * @param value is the {@link #getValue() current value} of this object that has already be determined.
    */
@@ -414,7 +431,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * object. This method performs the recursive validation of potential children of this widget excluding the
    * validation of this widget itself. A legal implementation of a composite widget needs to call
    * {@link #validate(ValidationState)} on all child widgets.
-   * 
+   *
    * @param state is the {@link ValidationState}. Never <code>null</code>.
    * @param value is the {@link #getValue() current value} of this object that has already be determined.
    */
@@ -473,7 +490,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * On the first call of this method, the {@link UiWidgetAdapter} is created. For the purpose of lazy
    * instantiation this should happen as late as possible. Use {@link #hasWidgetAdapter()} to prevent
    * unnecessary creation.
-   * 
+   *
    * @return the {@link UiWidgetAdapter}.
    */
   protected abstract UiWidgetAdapter getWidgetAdapter();
@@ -483,7 +500,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * <b>ATTENTION:</b><br/>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
    * regular users (what also applies for all classes in this <code>base</code> packages).
-   * 
+   *
    * @param widget is the widget.
    * @return the {@link #getWidgetAdapter() widget adapter} of the given <code>widget</code>.
    */
@@ -503,7 +520,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * <b>ATTENTION:</b><br/>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
    * regular users.
-   * 
+   *
    * @param widget is the widget that should be removed from its {@link #getParent() parent}.
    */
   public static void removeFromParent(UiWidget widget) {
@@ -513,7 +530,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * This method sets the {@link #getParent() parent}.
-   * 
+   *
    * @param parent is the new {@link #getParent() parent}.
    */
   protected abstract void setParent(UiWidgetComposite<?> parent);
@@ -523,23 +540,13 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * <b>ATTENTION:</b><br/>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
    * regular users (what also applies for all classes in this <code>base</code> packages).
-   * 
+   *
    * @param widget is the widget where to set the {@link #getParent() parent}.
    * @param newParent is the new {@link #getParent() parent}.
    */
   public static void setParent(UiWidget widget, UiWidgetComposite<?> newParent) {
 
     ((AbstractUiWidget<?>) widget).setParent(newParent);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final void addEventHandler(UiHandlerEvent handler) {
-
-    NlsNullPointerException.checkNotNull(UiHandlerEvent.class, handler);
-    getEventSender().eventHandlers.add(handler);
   }
 
   /**
@@ -553,7 +560,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * This method gets the {@link EventSender}. It will be created on the first call.
-   * 
+   *
    * @return the {@link EventSender}.
    */
   protected final EventSender getEventSender() {
@@ -572,12 +579,22 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
    * {@inheritDoc}
    */
   @Override
+  public final void addEventHandler(UiHandlerEvent handler) {
+
+    NlsNullPointerException.checkNotNull(UiHandlerEvent.class, handler);
+    getEventSender().addEventHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public final boolean removeEventHandler(UiHandlerEvent handler) {
 
     if (this.eventSender == null) {
       return false;
     }
-    return this.eventSender.eventHandlers.remove(handler);
+    return this.eventSender.removeEventHandler(handler);
   }
 
   /**
@@ -600,7 +617,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
   /**
    * Fires an event with the given parameters.
-   * 
+   *
    * @param event is the {@link UiEvent}.
    */
   protected final void fireEvent(UiEvent event) {
@@ -613,7 +630,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   /**
    * Called if the value has changed internally. Implementation has to fire a
    * {@link net.sf.mmm.client.ui.api.event.EventType#VALUE_CHANGE value change} event.
-   * 
+   *
    * @param programmatic - see {@link UiEvent#isProgrammatic()}, should typically be <code>true</code> here.
    */
   protected void fireValueChange(boolean programmatic) {
@@ -624,10 +641,13 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   /**
    * This inner class is an adapter for the events.
    */
-  protected class EventSender implements UiHandlerEvent, AttributeReadFocused {
+  protected class EventSender implements UiHandlerEvent, UiFeatureEvent, AttributeReadFocused {
 
     /** @see #addEventHandler(UiHandlerEvent) */
-    private final List<UiHandlerEvent> eventHandlers;
+    private final List<HandlerContainer> handlerContainers;
+
+    /** @see #getRemoveCount() */
+    private volatile int removeCount;
 
     /** @see #isFocused() */
     private boolean focused;
@@ -638,7 +658,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
     public EventSender() {
 
       super();
-      this.eventHandlers = new LinkedList<UiHandlerEvent>();
+      this.handlerContainers = new LinkedList<HandlerContainer>();
     }
 
     /**
@@ -648,6 +668,41 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
     public boolean isFocused() {
 
       return this.focused;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addEventHandler(UiHandlerEvent handler) {
+
+      if (this.removeCount > 0) {
+        for (HandlerContainer adapter : this.handlerContainers) {
+          if (adapter.handler == UiHandlerEventIgnore.INSTANCE) {
+            adapter.handler = handler;
+            this.removeCount--;
+            return;
+          }
+        }
+        // actually a concurrency bug if we get here, but we can slightly ignore this and repair ourselves...
+        this.removeCount = 0;
+      }
+      this.handlerContainers.add(new HandlerContainer(handler));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean removeEventHandler(UiHandlerEvent handler) {
+
+      for (HandlerContainer adapter : this.handlerContainers) {
+        if (adapter.handler == handler) {
+          this.removeCount++;
+          adapter.clear();
+          return true;
+        }
+      }
+      return false;
     }
 
     /**
@@ -670,14 +725,20 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
         eventObserver.beforeHandler(event);
       }
       // getLogger().debug(event.toString());
-      for (UiHandlerEvent handler : this.eventHandlers) {
-        // TODO hohwille if a handler will remove itself in onEvent we might get
-        // ConcurrentModificationException
-        handler.onEvent(event);
+      for (HandlerContainer container : this.handlerContainers) {
+        container.handler.onEvent(event);
       }
       if (eventObserver != null) {
         eventObserver.afterHandler(event);
       }
+    }
+
+    /**
+     * @return the removeCount
+     */
+    public int getRemoveCount() {
+
+      return this.removeCount;
     }
   }
 
@@ -701,6 +762,34 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
+   * A simple adapter containing a {@link UiHandlerEvent}.
+   */
+  protected static class HandlerContainer {
+
+    /** The actual event handler. */
+    private UiHandlerEvent handler;
+
+    /**
+     * The constructor.
+     *
+     * @param handler is the {@link UiHandlerEvent} to carry.
+     */
+    public HandlerContainer(UiHandlerEvent handler) {
+
+      super();
+      this.handler = handler;
+    }
+
+    /**
+     * Clears the handler so it actually gets removed.
+     */
+    protected void clear() {
+
+      this.handler = UiHandlerEventIgnore.INSTANCE;
+    }
+  }
+
+  /**
    * This inner class gives access to methods not visible in the public API.<br/>
    * <b>ATTENTION:</b><br/>
    * It is reserved for internal usage and should therefore never be used by regular users. Otherwise
@@ -710,7 +799,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
     /**
      * @see AbstractUiWidget#setMandatory(boolean)
-     * 
+     *
      * @param widget is the {@link AbstractUiWidget}.
      * @param mandatory - see {@link AbstractUiWidget#setMandatory(boolean)}.
      */
@@ -721,7 +810,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
     /**
      * @see AbstractUiWidget#doSetValue(Object, boolean)
-     * 
+     *
      * @param <VALUE> - see {@link AbstractUiWidget#doSetValue(Object, boolean)}.
      * @param widget is the {@link AbstractUiWidget}.
      * @param value - see {@link AbstractUiWidget#doSetValue(Object, boolean)}
@@ -734,7 +823,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
     /**
      * @see AbstractUiWidget#doGetValue(Object, ValidationState)
-     * 
+     *
      * @param <VALUE> - see {@link AbstractUiWidget#doGetValue(Object, ValidationState)}.
      * @param widget is the {@link AbstractUiWidget}.
      * @param template - see {@link AbstractUiWidget#doGetValue(Object, ValidationState)}.
@@ -748,9 +837,9 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
     /**
      * @see AbstractUiWidget#getRecentValue()
-     * 
+     *
      * @param <VALUE> - see {@link AbstractUiWidget#getRecentValue()}.
-     * 
+     *
      * @param widget is the {@link AbstractUiWidget}.
      * @return - see {@link AbstractUiWidget#getRecentValue()}.
      */
@@ -761,9 +850,9 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
     /**
      * @see AbstractUiWidget#doValidate(ValidationState, Object)
-     * 
+     *
      * @param <VALUE> - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
-     * 
+     *
      * @param widget is the {@link AbstractUiWidget}.
      * @param state - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
      * @param value - see {@link AbstractUiWidget#doValidate(ValidationState, Object)}.
@@ -775,7 +864,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
     /**
      * @see AbstractUiWidget#clearValidationFailure()
-     * 
+     *
      * @param widget is the {@link AbstractUiWidget}.
      */
     public static void clearValidationFailure(AbstractUiWidget<?> widget) {
@@ -785,7 +874,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
     /**
      * @see AbstractUiWidget#clearValidity()
-     * 
+     *
      * @param widget is the {@link AbstractUiWidget}.
      */
     public static void clearValidity(AbstractUiWidget<?> widget) {
@@ -795,7 +884,7 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
 
     /**
      * @see AbstractUiWidget#convertValueToString(Object)
-     * 
+     *
      * @param <VALUE> - see {@link AbstractUiWidget#convertValueToString(Object)}.
      * @param widget is the {@link AbstractUiWidget}.
      * @param value - see {@link AbstractUiWidget#convertValueToString(Object)}.

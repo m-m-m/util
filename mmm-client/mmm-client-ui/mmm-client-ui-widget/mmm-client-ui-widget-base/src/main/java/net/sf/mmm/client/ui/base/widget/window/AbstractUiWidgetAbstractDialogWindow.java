@@ -4,15 +4,16 @@ package net.sf.mmm.client.ui.base.widget.window;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.event.UiEventOpen;
-import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventOpenClose;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClose;
+import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventOpen;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetAbstractDialogWindow;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractDialogWindow;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetAbstractDialogWindow}.
- * 
+ *
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -36,7 +37,7 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
@@ -44,12 +45,13 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
   public AbstractUiWidgetAbstractDialogWindow(UiContext context, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
-    setPrimaryStyle(STYLE_PRIMARY);
-    this.movable = true;
-    this.resizable = true;
-    this.closable = true;
     this.maximized = false;
-    this.maximizable = true;
+    setMovable(true);
+    setResizable(true);
+    setClosable(true);
+    setMaximizable(true);
+    setVisible(false);
+    setPrimaryStyle(STYLE_PRIMARY);
   }
 
   /**
@@ -223,7 +225,7 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
    * {@inheritDoc}
    */
   @Override
-  public void addOpenCloseHandler(UiHandlerEventOpenClose handler) {
+  public void addOpenHandler(UiHandlerEventOpen handler) {
 
     addEventHandler(handler);
   }
@@ -232,7 +234,25 @@ public abstract class AbstractUiWidgetAbstractDialogWindow<ADAPTER extends UiWid
    * {@inheritDoc}
    */
   @Override
-  public boolean removeOpenCloseHandle(UiHandlerEventOpenClose handler) {
+  public boolean removeOpenHandler(UiHandlerEventOpen handler) {
+
+    return removeEventHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addCloseHandler(UiHandlerEventClose handler) {
+
+    addEventHandler(handler);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean removeCloseHandler(UiHandlerEventClose handler) {
 
     return removeEventHandler(handler);
   }

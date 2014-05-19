@@ -13,8 +13,6 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRangeField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsMessageLookup;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.value.api.Range;
@@ -22,9 +20,9 @@ import net.sf.mmm.util.value.api.Range;
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.binding.UiDataBinding} for composite custom
  * widgets.
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -35,7 +33,7 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
 
   /**
    * The constructor.
-   * 
+   *
    * @param widget is the {@link #getWidget() widget} to bind.
    * @param adapter is the {@link UiDataBindingAdapter}.
    */
@@ -63,7 +61,7 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
   /**
    * Verifies that the given <code>widget</code> is NOT already {@link List#contains(Object) contained} in the
    * given <code>list</code>.
-   * 
+   *
    * @param list is the {@link List} to check.
    * @param widget is the {@link UiWidgetWithValue} to check.
    * @param property is the {@link TypedProperty} used for the potential error mesasage.
@@ -90,30 +88,11 @@ public class UiDataBindingPojoComposite<VALUE> extends UiDataBindingPojo<VALUE> 
   }
 
   /**
-   * Determines the label to use for the given <code>property</code> (including I18N, etc.).
-   * 
-   * @see TypedProperty#getTitle()
-   * 
-   * @param property is the {@link TypedProperty}.
-   * @return the label to use for the property.
-   */
-  protected String getLabel(TypedProperty<?> property) {
-
-    String title = property.getTitle();
-    NlsMessageLookup labelLookup = getWidget().getContext().getConfiguration().getLabelLookup();
-    NlsMessage message = labelLookup.getMessage(title, null);
-    if (message == null) {
-      return title;
-    }
-    return message.getLocalizedMessage();
-  }
-
-  /**
    * Creates the {@link UiWidgetWithValue} for the given <code>property</code> using the given
    * <code>label</code>.
-   * 
+   *
    * @param <P> is the generic {@link TypedProperty#getPropertyType() property type}.
-   * 
+   *
    * @param property is the {@link TypedProperty}.
    * @param label is the label for the widget or <code>null</code> to determine automatically.
    * @return the new {@link UiWidgetWithValue} for the given input.

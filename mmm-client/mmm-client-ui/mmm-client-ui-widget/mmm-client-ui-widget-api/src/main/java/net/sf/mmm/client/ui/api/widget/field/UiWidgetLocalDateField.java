@@ -21,7 +21,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract interface UiWidgetDateField extends UiWidgetTextualInputField<LocalDate>, UiWidgetNative {
+public abstract interface UiWidgetLocalDateField extends UiWidgetTextualInputField<LocalDate>, UiWidgetNative {
 
   // nothing to add...
 

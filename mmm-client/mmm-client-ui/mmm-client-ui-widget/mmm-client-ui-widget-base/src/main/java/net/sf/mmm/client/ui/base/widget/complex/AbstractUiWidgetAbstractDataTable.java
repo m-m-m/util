@@ -22,13 +22,13 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetAbstractDataTable}.
- * 
+ *
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Has to be either {@literal ITEM} or
  *        {@literal List<ITEM>}.
  * @param <ROW> is the generic type of a row in the {@link #getValue() value list}.
  * @param <ITEM_CONTAINER> is the generic type of the {@link ItemContainer}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -36,7 +36,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
     extends AbstractUiWidgetAbstractDataSet<ADAPTER, VALUE, ROW, ITEM_CONTAINER> implements
     UiWidgetAbstractDataTable<ROW> {
 
-  /** @see #setColumns(UiWidgetTableColumn...) */
+  /** @see #setColumns(List) */
   private final List<AbstractUiWidgetTableColumn<?, ROW, ?>> columns;
 
   /** @see #createColumn(TypedProperty, UiSingleWidgetFactory, Comparator) */
@@ -56,7 +56,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
@@ -97,7 +97,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
   /**
    * @see #getSelectionColumn()
-   * 
+   *
    * @return the newly created selection column.
    */
   protected AbstractUiWidgetTableColumn<?, ROW, Boolean> createSelectionColumn() {
@@ -134,7 +134,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
   /**
    * @see #getRowNumberColumn()
-   * 
+   *
    * @return the newly created row number column.
    */
   private AbstractUiWidgetTableColumn<?, ROW, Integer> createRowNumberColumn() {
@@ -190,8 +190,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
       accessor = this.rowBinding.createPropertyAccessor(rowProperty);
     }
     UiWidgetTableColumn<ROW, CELL> column = createColumn(accessor, widgetFactory, sortComparator, rowProperty);
-    // TODO reuse label mechanism with I18N...
-    column.setTitle(rowProperty.getTitle());
+    column.setTitle(getDataBinding().getLabel(rowProperty));
     return column;
   }
 
@@ -207,7 +206,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
   /**
    * @see #createColumn(PropertyAccessor, UiSingleWidgetFactory, Comparator)
-   * 
+   *
    * @param <CELL> is the generic type of the {@link PropertyAccessor#getValue(Object) property value}.
    * @param rowAccessor is the {@link PropertyAccessor} to {@link PropertyAccessor#getValue(Object) access}
    *        the property of {@literal <ROW>} to show in the column.
@@ -245,7 +244,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
    */
   @SuppressWarnings("unchecked")
   @Override
-  public void setColumns(UiWidgetTableColumn<ROW, ?>... columns) {
+  public void setColumns(List<? extends UiWidgetTableColumn<ROW, ?>> columns) {
 
     for (AbstractUiWidgetTableColumn<?, ROW, ?> column : this.columns) {
       column.setAttached(false);
@@ -305,7 +304,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
   /**
    * This method sorts this list according to the given <code>column</code>.
-   * 
+   *
    * @param column is the {@link AbstractUiWidgetTableColumn} to sort by.
    * @param sortOrder is the {@link SortOrder}.
    */
@@ -338,7 +337,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
   /**
    * This class is a lazy implementation of {@link PropertyAccessor}.
-   * 
+   *
    * @param <CELL> is the generic type of the cell property to access.
    */
   private final class LazyPropertyAccessor<CELL> implements PropertyAccessor<ROW, CELL> {
@@ -351,7 +350,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
     /**
      * The constructor.
-     * 
+     *
      * @param rowProperty is the {@link TypedProperty} to access.
      */
     private LazyPropertyAccessor(TypedProperty<CELL> rowProperty) {
@@ -370,7 +369,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
     /**
      * Lazy accessor to get the {@link PropertyAccessor} to delegate to.
-     * 
+     *
      * @param row is the row value to access.
      * @return the {@link PropertyAccessor} to delegate to.
      */
@@ -401,7 +400,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   /**
    * This method updates this table after a column has been dragged and dropped onto another column. It
    * therefore moves the dragged column to the drop column.
-   * 
+   *
    * @param dragId the ID of the dragged column (that is to be moved).
    * @param dropId the ID of the dropped column (where to move to).
    */
@@ -414,7 +413,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
 
   /**
    * @see #dragColumn(AbstractUiWidgetTableColumn, AbstractUiWidgetTableColumn)
-   * 
+   *
    * @param dragColumn the dragged column (that is to be moved).
    * @param dropColumn the dropped column (where to move to).
    */
@@ -450,7 +449,7 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
    * <b>Note:</b><br/>
    * For simplicity we ignore the generics here and do not require {@literal <ROW>} what would actually be
    * required for correctness.
-   * 
+   *
    * @param column is the new drag-over column. May be <code>null</code>.
    * @return the previously stored drag-over column that is now replaced. May be <code>null</code>.
    */

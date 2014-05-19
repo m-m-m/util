@@ -9,11 +9,12 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 
 /**
  * This is the interface for a {@link UiWidgetAbstractWindow base window widget} that represents a
- * <em>popup</em> window. A popup is a modal window that blocks the client application until it is closed.<br/>
- * <b>ATTENTION:</b><br/>
- * The {@link #setResizable(boolean)} feature may NOT be supported by all implementations. In that case the
- * method will have no effect.
- * 
+ * <em>popup</em> window. A popup is a modal window that blocks the client application until it is
+ * {@link #close() closed}. <br/>
+ * <b>NOTE:</b><br/>
+ * You typically want to call {@link #createAndAddCloseButton()}. This is not done automatically so you can
+ * define the order of the buttons yourself.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -31,7 +32,7 @@ public interface UiWidgetPopup extends UiWidgetAbstractDialogWindow, UiWidgetNat
   /**
    * This method creates a {@link UiWidgetButton button} to close this popup and adds it to the
    * {@link #getButtonPanel() button panel}.
-   * 
+   *
    * @return the close button.
    */
   UiWidgetButton createAndAddCloseButton();

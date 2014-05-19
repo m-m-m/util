@@ -12,9 +12,9 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
  * This is the implementation of {@link UiDataBinding} for no value ({@link Void}).
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -288,6 +288,15 @@ public class UiDataBindingNone implements UiDataBinding<Void> {
     // if (Boolean.FALSE.equals(valid)) {
     // throw new NlsIllegalStateException();
     // }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLabel(TypedProperty<?> property) {
+
+    return property.getTitle();
   }
 
 }

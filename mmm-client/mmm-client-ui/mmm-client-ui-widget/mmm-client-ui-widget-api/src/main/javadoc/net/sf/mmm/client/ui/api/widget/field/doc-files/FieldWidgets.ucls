@@ -56,9 +56,9 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <interface id="6" language="java" name="net.sf.mmm.client.ui.api.widget.field.UiWidgetDateTimeField" 
+  <interface id="6" language="java" name="net.sf.mmm.client.ui.api.widget.field.UiWidgetInstantField" 
     project="mmm-client-ui-widget-api" 
-    file="/mmm-client-ui-widget-api/src/main/java/net/sf/mmm/client/ui/api/widget/field/UiWidgetDateTimeField.java" 
+    file="/mmm-client-ui-widget-api/src/main/java/net/sf/mmm/client/ui/api/widget/field/UiWidgetInstantField.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="84" y="501"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -133,9 +133,9 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <interface id="13" language="java" name="net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField" 
+  <interface id="13" language="java" name="net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField" 
     project="mmm-client-ui-widget-api" 
-    file="/mmm-client-ui-widget-api/src/main/java/net/sf/mmm/client/ui/api/widget/field/UiWidgetDateField.java" 
+    file="/mmm-client-ui-widget-api/src/main/java/net/sf/mmm/client/ui/api/widget/field/UiWidgetLocalDateField.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="226" y="434"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 

@@ -5,11 +5,11 @@ package net.sf.mmm.client.ui.base.widget.field;
 import java.time.Instant;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateTimeField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetInstantField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateTimeField;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetDateTimeField}.
+ * This is the abstract base implementation of {@link UiWidgetInstantField}.
  * 
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * 
@@ -17,7 +17,7 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateTimeFie
  * @since 1.0.0
  */
 public abstract class AbstractUiWidgetDateTimeField<ADAPTER extends UiWidgetAdapterDateTimeField> extends
-    AbstractUiWidgetTextualInputField<ADAPTER, Instant, Instant> implements UiWidgetDateTimeField {
+    AbstractUiWidgetTextualInputField<ADAPTER, Instant, Instant> implements UiWidgetInstantField {
 
   /**
    * The constructor.

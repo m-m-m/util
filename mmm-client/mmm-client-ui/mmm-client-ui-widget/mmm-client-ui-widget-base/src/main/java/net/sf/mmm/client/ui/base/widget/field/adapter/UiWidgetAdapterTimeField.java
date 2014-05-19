@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 /**
  * This is the interface for a {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} adapting
- * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField}.
+ * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalTimeField}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

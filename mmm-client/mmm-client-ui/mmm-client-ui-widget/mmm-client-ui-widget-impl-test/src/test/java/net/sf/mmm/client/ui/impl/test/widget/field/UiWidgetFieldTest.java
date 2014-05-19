@@ -13,8 +13,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetCodeAreaField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateTimeField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetInstantField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetDoubleField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetIntegerSliderField;
@@ -27,7 +27,7 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetRangeField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextAreaField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetTimeField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalTimeField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetOptionsField;
 import net.sf.mmm.client.ui.impl.test.AbstractUiTest;
@@ -315,23 +315,23 @@ public class UiWidgetFieldTest extends AbstractUiTest {
   }
 
   /**
-   * Test of {@link UiWidgetDateField}.
+   * Test of {@link UiWidgetLocalDateField}.
    */
   @Test
   public void testDateField() {
 
     LocalDate now = LocalDate.now();
     LocalDate old = LocalDate.of(2000, 12, 31);
-    checkWidget(UiWidgetDateField.class, now, old);
+    checkWidget(UiWidgetLocalDateField.class, now, old);
   }
 
   /**
-   * Test of {@link UiWidgetDateTimeField}.
+   * Test of {@link UiWidgetInstantField}.
    */
   @Test
   public void testDateTimeField() {
 
-    checkWidget(UiWidgetTimeField.class, LocalTime.now(), LocalTime.of(23, 59, 59));
+    checkWidget(UiWidgetLocalTimeField.class, LocalTime.now(), LocalTime.of(23, 59, 59));
   }
 
   /**

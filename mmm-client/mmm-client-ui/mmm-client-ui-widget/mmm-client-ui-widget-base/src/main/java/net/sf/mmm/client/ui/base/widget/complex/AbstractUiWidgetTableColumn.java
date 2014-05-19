@@ -17,13 +17,13 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetTableColumn}.
- * 
+ *
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <ROW> is the generic type of the element representing a row of the grid. It should be a java-bean
  *        oriented object. Immutable objects (that have no setters) can also be used but only for read-only
  *        tables.
  * @param <CELL> is the generic type of the values located in the cells of this column.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -31,7 +31,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
     AbstractUiWidgetNative<ADAPTER, CELL> implements UiWidgetTableColumn<ROW, CELL> {
 
   /** The initial default width of a column in pixel. */
-  private static final int DEFAULT_WIDTH = 50;
+  private static final int DEFAULT_WIDTH = 100;
 
   /** The virtual property for multi-selection. */
   public static final TypedProperty<Boolean> PROPERTY_SELECTED = new TypedProperty<Boolean>("_selected_");
@@ -80,7 +80,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param listTable is the {@link AbstractUiWidgetAbstractListTable list table} this column is connected to.
    * @param typedProperty is the {@link #getTypedProperty() typed property} of the column to create. May be
@@ -150,7 +150,7 @@ public abstract class AbstractUiWidgetTableColumn<ADAPTER extends UiWidgetAdapte
   /**
    * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataTable#createColumn(PropertyAccessor,
    *      UiSingleWidgetFactory, Comparator)
-   * 
+   *
    * @return the {@link UiSingleWidgetFactory} used to create {@link UiWidgetWithValue widgets} to view (and
    *         potentially edit) the values of a cell in this column.
    */

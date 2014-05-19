@@ -156,7 +156,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   /**
    * Clear {@link SimpleCheckBox}es of {@link SelectionMode#MULTIPLE_SELECTION}.
    */
-  private void clearMultiSelection() {
+  protected void clearMultiSelection() {
 
     for (TreeNodeAdapter adapter : this.nodeMap.values()) {
       adapter.multiSelectionCheckbox.setValue(Boolean.FALSE);
@@ -321,6 +321,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
   @Override
   protected void applyEventAdapterForSelection(EventAdapterGwt adapter) {
 
+    @SuppressWarnings("unchecked")
     HandlerRegistration registration = getGwtTree().addSelectionHandler((EventAdapterGwtTree) adapter);
     addHandlerRegistration(registration);
   }
@@ -379,6 +380,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
    */
   private void onOpenEvent(OpenEvent<TreeItem> event) {
 
+    @SuppressWarnings("unchecked")
     TreeNodeAdapter treeNodeAdapter = (TreeNodeAdapter) event.getTarget();
     treeNodeAdapter.loadChildren();
   }
@@ -623,6 +625,7 @@ public class UiWidgetAdapterGwtTree<NODE> extends UiWidgetAdapterGwtWidgetActive
       if (this.loaded) {
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
+          @SuppressWarnings("unchecked")
           TreeNodeAdapter child = (TreeNodeAdapter) getChild(i);
           TreeNodeAdapter oldNode = UiWidgetAdapterGwtTree.this.nodeMap.remove(child.node);
           assert (oldNode == child);

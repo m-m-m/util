@@ -13,7 +13,7 @@ import com.google.gwt.user.client.Window;
 
 /**
  * This class is the handler for mouse events to move an resize a {@link PopupWindow}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -36,7 +36,7 @@ class PopupMouseHandler extends AbstractMouseDragHandler {
 
   /**
    * The constructor.
-   * 
+   *
    * @param resizeDirection is the resize {@link Direction} or <code>null</code> for move.
    * @param popupWindow is the {@link PopupWindow}.
    */

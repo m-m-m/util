@@ -6,6 +6,8 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.base.feature.AbstractUiFeatureValueAndValidationWithValidators;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsMessageLookup;
 import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
@@ -313,6 +315,25 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
   public <P> UiWidgetWithValue<P> createAndBind(TypedProperty<P> property, String label) {
 
     throw new NlsUnsupportedOperationException("bind");
+  }
+
+  /**
+   * Determines the label to use for the given <code>property</code> (including I18N, etc.).
+   *
+   * @see TypedProperty#getTitle()
+   *
+   * @param property is the {@link TypedProperty}.
+   * @return the label to use for the property.
+   */
+  public String getLabel(TypedProperty<?> property) {
+
+    String title = property.getTitle();
+    NlsMessageLookup labelLookup = getWidget().getContext().getConfiguration().getLabelLookup();
+    NlsMessage message = labelLookup.getMessage(title, null);
+    if (message == null) {
+      return title;
+    }
+    return message.getLocalizedMessage();
   }
 
   /**

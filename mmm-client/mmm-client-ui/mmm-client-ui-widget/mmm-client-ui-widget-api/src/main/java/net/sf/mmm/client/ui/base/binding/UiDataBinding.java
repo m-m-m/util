@@ -17,7 +17,7 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite} and derived classes where it allows
  * comfortable {@link #createAndBind(TypedProperty) property-bindings}.<br/>
  * Have a look at the following example:
- * 
+ *
  * <pre>
  * public class MyBeanFrom extends {@link net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomGridPanel}<MyBean> {
  *
@@ -31,9 +31,9 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  *   }
  * }
  * </pre>
- * 
+ *
  * With <code>MyBean</code> like this:
- * 
+ *
  * <pre>
  * public class MyBean implements {@link net.sf.mmm.util.pojo.api.Pojo} {
  *
@@ -67,10 +67,10 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  *
  * }
  * </pre>
- * 
+ *
  * This will automatically do all the nasty work for you as described in {@link #createAndBind(TypedProperty)}
  * . Otherwise you would have to do something like this in your widget:
- * 
+ *
  * <pre>
  * public class MyBeanFrom extends {@link net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomGridPanel}<MyBean> {
  *
@@ -147,9 +147,9 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    * automatically get the property-value of the given property from the &lt;VALUE&gt;-object and
    * {@link #setValue(Object, boolean) set that property-value} to the given widget.</li>
    * </ul>
-   * 
+   *
    * @see #createAndBind(TypedProperty)
-   * 
+   *
    * @param <P> is the generic {@link TypedProperty#getPropertyType() type of the property value}.
    * @param property is the {@link TypedProperty} representing the property to bind. It has to be a property
    *        of &lt;VALUE&gt;.
@@ -184,7 +184,7 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    * <li>The new widget is automatically {@link #bind(TypedProperty, UiWidgetWithValue) bound} to the given
    * <code>property</code>.</li>
    * </ul>
-   * 
+   *
    * @param <P> is the generic {@link TypedProperty#getPropertyType() type of the property value}.
    * @param property is the {@link TypedProperty} representing the property to bind. It has to be a property
    *        of &lt;VALUE&gt; and contain its {@link TypedProperty#getPropertyType() property type}.
@@ -196,7 +196,7 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
   /**
    * This method is like {@link #createAndBind(TypedProperty)} but using the given <code>label</code> instead
    * of deriving it automatically.
-   * 
+   *
    * @param <P> is the generic {@link TypedProperty#getPropertyType() type of the property value}.
    * @param property is the {@link TypedProperty} representing the property to bind. It has to be a property
    *        of &lt;VALUE&gt; and contain its {@link TypedProperty#getPropertyType() property type}.
@@ -220,7 +220,7 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    * <b>ATTENTION:</b><br/>
    * This is an internal method and should NOT be used by external users. Usage has to be compliant with
    * {@link #getValidity()}.
-   * 
+   *
    * @param validity is the new value for {@link #getValidity()}. May be <code>null</code>.
    */
   void setValidity(Boolean validity);
@@ -230,7 +230,7 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    * {@link #addValidator(net.sf.mmm.util.validation.api.ValueValidator) registered} validators. It is called
    * from {@link net.sf.mmm.client.ui.base.widget.AbstractUiWidget} (method <code>doValidate</code>) that
    * itself is called from {@link #validate(ValidationState)}.
-   * 
+   *
    * @param state is the {@link ValidationState}. Must NOT be <code>null</code>.
    * @param value is the {@link #getValue() current value} of this object that has already be determined.
    * @return <code>true</code> if the validation was successful, <code>false</code> otherwise (if there are
@@ -260,5 +260,15 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
    *         {@link net.sf.mmm.util.pojo.api.Pojo} type {@literal <VALUE>}.
    */
   PropertyAccessor<VALUE, ?> createPropertyAccessor(String property);
+
+  /**
+   * Determines the label to use for the given <code>property</code> (including I18N, etc.).
+   *
+   * @see TypedProperty#getTitle()
+   *
+   * @param property is the {@link TypedProperty}.
+   * @return the label to use for the property.
+   */
+  String getLabel(TypedProperty<?> property);
 
 }

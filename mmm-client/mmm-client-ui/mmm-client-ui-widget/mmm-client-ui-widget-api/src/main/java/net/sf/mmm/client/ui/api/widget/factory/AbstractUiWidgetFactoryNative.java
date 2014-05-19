@@ -32,7 +32,7 @@ public abstract interface AbstractUiWidgetFactoryNative {
    * <b>IMPORTANT:</b><br/>
    * When creating a large (enterprise) application client you should NOT (directly) use this method to create
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField field widgets} such as
-   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField} or
+   * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField} or
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField}. Instead use
    * {@link UiWidgetFactoryDatatype#createForDatatype(Class)}.<br/>
    * <b>ATTENTION:</b><br/>
