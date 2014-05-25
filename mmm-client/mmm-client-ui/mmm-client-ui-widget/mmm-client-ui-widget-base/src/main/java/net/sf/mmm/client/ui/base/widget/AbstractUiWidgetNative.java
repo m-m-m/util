@@ -35,10 +35,10 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * If you want to create an implementation of all the {@link UiWidget}s for a native UI toolkit, you are
  * strongly encouraged to extend from this class and its subclasses (all classes named
  * <code>AbstractUiWidget*</code>).
- * 
+ *
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Use {@link Void} for no value.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -95,7 +95,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
@@ -131,7 +131,6 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
       this.widgetAdapter = createWidgetAdapter();
       ((AbstractUiWidgetAdapter<?>) this.widgetAdapter).setUiWidget(this);
       initializeWidgetAdapter(this.widgetAdapter);
-
       if (getAriaRole() != null) {
         this.ariaRole.setDelegate(this.widgetAdapter);
       }
@@ -144,7 +143,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * <b>ATTENTION:</b><br/>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
    * regular users (what also applies for all classes in this <code>base</code> packages).
-   * 
+   *
    * @param <A> is the generic type of {@link #getWidgetAdapter()}.
    * @param widget is the widget.
    * @return the {@link #getWidgetAdapter() widget adapter} of the given <code>widget</code>.
@@ -157,13 +156,17 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   /**
    * This method is called from {@link #getWidgetAdapter()} to initialize the {@link UiWidgetAdapter}. All
    * attributes of this widget need to be set in the {@link UiWidgetAdapter}.
-   * 
+   *
    * @param adapter is the {@link UiWidgetAdapter} to initialize.
    */
   protected void initializeWidgetAdapter(ADAPTER adapter) {
 
     // for ariaRole see getWidgetAdapter()
-    if (this.mode != null) {
+    if (this.mode == null) {
+      // default mode is edit, in case not already initialized...
+      // TODO: Should actually inherit from parent...
+      setMode(UiMode.EDIT);
+    } else {
       getContext().getModeChanger().changeMode(this, this.mode);
     }
     adapter.setVisible(isVisible(), true);
@@ -192,7 +195,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * This method creates the {@link #getWidgetAdapter() widget adapter}.<br/>
    * This design is done to give more flexibility by overriding and also for lazy initialization of the
    * widget.
-   * 
+   *
    * @return a new instance of the {@link #getWidgetAdapter() underlying widget}.
    */
   protected abstract ADAPTER createWidgetAdapter();
@@ -226,7 +229,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * This method sets the static prefix used for generated IDs.
-   * 
+   *
    * @param idPrefix is the idPrefix to set
    */
   // TODO hohwille statics are evil. Better use component "WidgetIdGenerator" via UiContext
@@ -272,7 +275,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * This method sets the {@link #getParent() parent}.
-   * 
+   *
    * @param parent is the new {@link #getParent() parent}.
    */
   @Override
@@ -360,7 +363,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * This method is called from {@link #setMode(UiMode)} if the {@link UiMode} actually changed.
-   * 
+   *
    * @param uiMode is the new {@link UiMode}.
    */
   protected void doSetMode(UiMode uiMode) {
@@ -370,7 +373,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * This method is called from {@link #setMode(UiMode)} to recursively change the {@link UiMode}.
-   * 
+   *
    * @param newMode is the new {@link UiMode}.
    * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
    */
@@ -439,7 +442,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * @see #setVisible(boolean)
-   * 
+   *
    * @param visibility - see {@link #setVisible(boolean)}.
    * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
    */
@@ -467,7 +470,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * Called from {@link #setVisible(boolean)} is the visibility has actually changed.
-   * 
+   *
    * @param visibility is the new {@link #isVisible() visibility}.
    * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
    */
@@ -744,7 +747,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * @see #hasStyle(String)
-   * 
+   *
    * @param style is the {@link #hasStyle(String) style to check}.
    * @return the start-index of the given <code>style</code> in {@link #getStyles() styles} or <code>-1</code>
    *         if NOT present.
@@ -756,7 +759,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * @see #getIndexOfStyle(String)
-   * 
+   *
    * @param allStyles is the {@link String} with all current styles separated with whitespaces.
    * @param style is the single style to check.
    * @return the start-index of the given <code>style</code> in <code>allStyles</code> or <code>-1</code> if
@@ -888,7 +891,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * <br/>
    * It performs the {@link #validate(ValidationState) validation} of this widget by delegating to
    * {@link #validateRecursive(ValidationState)}. It may be overridden to collect potential validation
@@ -905,7 +908,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
    * This method performs the recursive validation of potential children of this widget excluding the
    * validation of this widget itself. A legal implementation of a composite widget needs to call
    * {@link #validate(ValidationState)} on all child widgets.
-   * 
+   *
    * @param state is the {@link ValidationState}.
    */
   void validateRecursive(ValidationState state) {

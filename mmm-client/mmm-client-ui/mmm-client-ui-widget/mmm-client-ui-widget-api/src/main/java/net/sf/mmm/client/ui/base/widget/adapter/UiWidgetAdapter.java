@@ -26,7 +26,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
  * <b>ATTENTION:</b><br/>
  * The getters (<code>AttributeRead*</code> methods) of attributes that cannot be changed by the end-user are
  * never used and therefore NOT implemented properly.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -36,7 +36,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
 
   /**
    * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#getNativeWidget(net.sf.mmm.client.ui.api.widget.UiWidgetRegular)
-   * 
+   *
    * @return the native widget.
    */
   Object getToplevelWidget();
@@ -51,14 +51,14 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * This method gets called whenever the parent of the according
    * {@link net.sf.mmm.client.ui.api.widget.UiWidget} is changed. It does nothing by default but may be
    * overridden to deal with special behavior of native UI toolkits.
-   * 
+   *
    * @param parent is the new parent or <code>null</code> if {@link #removeFromParent() removed from parent}.
    */
   void setParent(UiWidgetComposite<?> parent);
 
   /**
    * @see net.sf.mmm.client.ui.api.attribute.AttributeWriteVisibleAdvanced#setVisible(boolean, boolean)
-   * 
+   *
    * @param visible - <code>true</code> to set visible (show), <code>false</code> to set invisible (hide).
    * @param programmatic - see {@link net.sf.mmm.client.ui.api.event.UiEvent#isProgrammatic()}.
    */
@@ -68,7 +68,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * This method is called from {@link net.sf.mmm.client.ui.base.UiModeChanger} for
    * {@link net.sf.mmm.client.ui.api.widget.UiWidget#setMode(net.sf.mmm.client.ui.api.common.UiMode)}. It only
    * handles the predefined {@link net.sf.mmm.client.ui.api.common.UiMode}s.
-   * 
+   *
    * @param editMode - <code>true</code> of {@link net.sf.mmm.client.ui.api.common.UiMode#EDIT} and
    *        <code>false</code> for {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW}.
    */
@@ -76,11 +76,11 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
 
   /**
    * This method creates an absolute URL from the given <code>relativePath</code>.
-   * 
+   *
    * @param relativePath is the relative path (URL suffix) to the image.
-   * 
+   *
    * @see net.sf.mmm.client.ui.api.UiConfiguration#getTheme()
-   * 
+   *
    * @return the absolute URL.
    */
   String createAbsoluteImageUrl(String relativePath);
@@ -91,7 +91,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * case this method will wrap it as {@link UiWidgetLabel}. Otherwise this method should
    * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative#create(Class) create} a new
    * {@link UiWidgetLabel} and return it.
-   * 
+   *
    * @param context is the {@link UiContext} that may be used to create the label.
    * @return the label.
    */
@@ -102,7 +102,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
    * {@link #removeStyle(String)} and {@link #setPrimaryStyle(String)} are supported by this widget adapter.
    * Otherwise such operations are always performed via the {@link #setStyles(String)} method. If supported
    * the delta operations are preferred as they are assumed to be more efficient.
-   * 
+   *
    * @return <code>true</code> if style delta operations are supported, <code>false</code> otherwise.
    */
   boolean isStyleDeltaSupported();
@@ -110,7 +110,7 @@ public interface UiWidgetAdapter extends AttributeWriteHtmlId, AttributeWriteToo
   /**
    * This method registers the given {@link UiHandlerEvent event handler} in the {@link #getToplevelWidget()
    * widget}. This method will be called only once.
-   * 
+   *
    * @param source is the {@link net.sf.mmm.client.ui.api.event.UiEvent#getSource() event source}.
    * @param sender is the {@link UiHandlerEvent} where the events are send to. This is actually an adapter
    *        that dispatches the events to the individual listeners registered in the widget.

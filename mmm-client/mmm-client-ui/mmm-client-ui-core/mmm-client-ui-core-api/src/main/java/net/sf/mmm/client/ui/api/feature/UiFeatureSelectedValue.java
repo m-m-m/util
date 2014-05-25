@@ -14,24 +14,25 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
  * {@link #addSelectionHandler(UiHandlerEventSelection) add} and
  * {@link #removeSelectionHandler(UiHandlerEventSelection) remove} instances of
  * {@link UiHandlerEventSelection}.
- * 
+ *
+ * @param <VALUE> is the generic type of the selectable {@link #getSelectedValues() values}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
- * @param <VALUE> is the generic type of the selectable {@link #getSelectedValues() values}.
  */
 public interface UiFeatureSelectedValue<VALUE> extends UiFeature, AttributeWriteSelectedValue<VALUE>,
     AttributeWriteSelectionMode {
 
   /**
    * This method adds the given {@link UiHandlerEventSelection} to this object.
-   * 
+   *
    * @param handler is the {@link UiHandlerEventSelection} to add.
    */
   void addSelectionHandler(UiHandlerEventSelection<VALUE> handler);
 
   /**
    * This method removes the given {@link UiHandlerEventSelection} from this object.
-   * 
+   *
    * @param handler is the {@link UiHandlerEventSelection} to remove.
    * @return <code>true</code> if the <code>handler</code> has been removed successfully, <code>false</code>
    *         if it was NOT {@link #addSelectionHandler(UiHandlerEventSelection) registered} and nothing has
@@ -122,7 +123,7 @@ public interface UiFeatureSelectedValue<VALUE> extends UiFeature, AttributeWrite
    * <td>no</td>
    * </tr>
    * </table>
-   * 
+   *
    * @param choice is the {@link SelectionChoice} indicating the items to select or deselect.
    * @param operation is the {@link SelectionOperation} indicating what to do with the <code>choice</code>.
    * @return <code>true</code> if the operation was successful, <code>false</code> otherwise. If there are no
@@ -133,7 +134,7 @@ public interface UiFeatureSelectedValue<VALUE> extends UiFeature, AttributeWrite
 
   /**
    * This method determines if the given logical {@link SelectionChoice} is currently selected.
-   * 
+   *
    * @param choice is the {@link SelectionChoice} to check.
    * @return <code>true</code> if the items identified by the given <code>choice</code> are currently
    *         selected, <code>false</code> otherwise (if at least one of them is NOT selected).

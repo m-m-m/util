@@ -10,6 +10,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.common.SelectionChoice;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.common.SelectionOperation;
+import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractListTable;
@@ -352,6 +353,15 @@ public abstract class UiWidgetCustomAbstractListTable<ROW, DELEGATE extends UiWi
   public boolean removeRow(ROW row) {
 
     return getDelegate().removeRow(row);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiFeatureSelectedValue<ROW> asFeatureSelectedValue() {
+
+    return this;
   }
 
 }

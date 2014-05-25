@@ -7,6 +7,7 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractWi
 import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtDynamicComposite;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Panel;
 
 /**
@@ -53,6 +54,15 @@ public abstract class UiWidgetAdapterGwtAbstractWindow<WIDGET extends Panel> ext
     } else {
       getContentPanel().add(getToplevelWidget(child));
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected Element getSizeElement() {
+
+    return getContentPanel().getElement();
   }
 
 }

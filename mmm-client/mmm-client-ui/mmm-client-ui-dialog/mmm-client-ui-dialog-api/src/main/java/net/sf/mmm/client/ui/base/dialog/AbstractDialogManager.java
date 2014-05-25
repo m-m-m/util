@@ -162,7 +162,8 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
       }
       dialog = this.dialogControllerFactory.createDialogController(dialogId);
       if (dialog == null) {
-        throw new ObjectNotFoundException(Dialog.class, dialogId);
+        // throw new ObjectNotFoundException(Dialog.class, dialogId);
+        return null;
       }
       if (!dialogId.equals(dialog.getId())) {
         throw new ObjectMismatchException(dialog.getId(), dialogId, "DialogController.id");
@@ -257,8 +258,17 @@ public abstract class AbstractDialogManager extends AbstractLoggableComponent im
 
     String dialogId = dialogPlace.getDialogId();
     DialogController<?> dialogController = getDialog(dialogId);
-    dialogController.show(dialogPlace);
-    this.currentPlace = dialogPlace;
+    DialogPlace place = dialogPlace;
+    if (dialogController == null) {
+      dialogController = getDialog(DialogConstants.DIALOG_ID_HOME);
+      if (dialogController == null) {
+        ObjectNotFoundException cause = new ObjectNotFoundException(Dialog.class, dialogId);
+        throw new ObjectNotFoundException(cause, Dialog.class, DialogConstants.DIALOG_ID_HOME);
+      }
+      place = DialogConstants.PLACE_HOME;
+    }
+    dialogController.show(place);
+    this.currentPlace = place;
     assert verifyUniqueAccessKeys();
   }
 

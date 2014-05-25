@@ -10,7 +10,6 @@ import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow
 import net.sf.mmm.client.ui.gwt.widgets.VerticalFlowPanel;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -179,15 +178,6 @@ public class UiWidgetAdapterGwtMainWindow extends UiWidgetAdapterGwtAbstractWind
 
     RootPanel rootLayoutPanel = RootPanel.get();
     return rootLayoutPanel;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected Element getSizeElement() {
-
-    return getContentPanel().getElement();
   }
 
 }

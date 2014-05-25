@@ -14,7 +14,7 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * <li>an {@link #getAmount() amount}</li>
  * <li>a {@link #getUnit() unit}</li>
  * </ul>
- * 
+ *
  * Examples:
  * <table border="1">
  * <tr>
@@ -38,9 +38,9 @@ import net.sf.mmm.util.nls.api.NlsNullPointerException;
  * <td>{@link LengthUnit#EM}</td>
  * </tr>
  * </table>
- * 
+ *
  * @see LengthUnit#newLength(double)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -74,7 +74,7 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getAmount() value}.
    * @param unit is the {@link #getUnit() unit}.
    */
@@ -88,7 +88,7 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param size is the {@link #getValue() value} representing the size as string.
    */
   public Length(String size) {
@@ -104,7 +104,12 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
       }
     }
     if (this.unit == null) {
-      throw new NlsIllegalArgumentException(size, "size");
+      if ("auto".equals(size)) {
+        this.unit = LengthUnit.PIXEL;
+        this.amount = 0;
+      } else {
+        throw new NlsIllegalArgumentException(size, "size");
+      }
     }
   }
 
@@ -124,7 +129,7 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
   /**
    * This method gets the value (amount) of this size. Is to be interpreted in the according
    * {@link #getUnit() unit}.
-   * 
+   *
    * @return the actual value of this {@link Length}.
    */
   public double getAmount() {
@@ -134,7 +139,7 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
 
   /**
    * This method gets the {@link LengthUnit unit} of the {@link #getAmount() value}.
-   * 
+   *
    * @return the {@link LengthUnit}.
    */
   public LengthUnit getUnit() {
@@ -146,7 +151,7 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
    * This method gets the {@link #getAmount() amount} in {@link LengthUnit#PIXEL pixels}.<br/>
    * <b>ATTENTION:</b><br/>
    * This implementation is NOT precise and should only used when you know what you are doing.
-   * 
+   *
    * @param basePixelLength is the base length in pixel used to convert from {@link LengthUnit#PERCENT
    *        percent}. Use <code>0</code> if unknown (what will result in <code>0</code> in case of
    *        {@link LengthUnit#PERCENT percent} length values).
@@ -177,7 +182,7 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
 
   /**
    * Creates a new {@link Length} with {@link #getUnit() unit} {@link LengthUnit#PERCENT}.
-   * 
+   *
    * @param amount is the {@link #getAmount() amount}.
    * @return the new {@link Length}.
    */
@@ -188,7 +193,7 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
 
   /**
    * Creates a new {@link Length} with {@link #getUnit() unit} {@link LengthUnit#PERCENT}.
-   * 
+   *
    * @param amount is the {@link #getAmount() amount}.
    * @return the new {@link Length}.
    */

@@ -7,11 +7,11 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteStringTitle;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteSummary;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteTitleVisible;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
-import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.api.widget.UiWidgetWithSelectedValue;
 
 /**
- * This is the abstract interface for a {@link UiWidgetRegular regular widget} that is used to present complex
- * data sets. There are the following variants of this widget:
+ * This is the abstract interface for a {@link net.sf.mmm.client.ui.api.widget.UiWidgetRegular regular widget}
+ * that is used to present complex data sets. There are the following variants of this widget:
  * <ul>
  * <li>{@link UiWidgetAbstractListTable}</li>
  * <li>{@link UiWidgetTree}</li>
@@ -26,9 +26,9 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  * possible to write a custom editor popup.</li>
  * <li>It has a {@link #getSummary() summary} that is not visible but is honored by assistive technology
  * (screen-readers) for {@link net.sf.mmm.util.lang.api.concern.Accessibility}.</li>
- * <li>It has a {@link #getTitle() title} that describes the content of the table briefly. It should always be
- * {@link #setTitle(String) set} for {@link net.sf.mmm.util.lang.api.concern.Accessibility} even if you do not
- * want to {@link #isTitleVisible() show} it.</li>
+ * <li>It has a {@link #getTitle() title} that describes the content of the widget briefly. It should always
+ * be {@link #setTitle(String) set} for {@link net.sf.mmm.util.lang.api.concern.Accessibility} even if you do
+ * not want to {@link #isTitleVisible() show} it.</li>
  * </ul>
  *
  * @param <ITEM> is the generic type of a row in the list.
@@ -36,7 +36,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface UiWidgetAbstractDataSet<ITEM> extends UiWidgetRegular, UiFeatureSelectedValue<ITEM>,
+public interface UiWidgetAbstractDataSet<ITEM> extends UiWidgetWithSelectedValue<ITEM>, UiFeatureSelectedValue<ITEM>,
     AttributeWriteSummary, AttributeWriteStringTitle, AttributeWriteTitleVisible, AttributeWriteEditable {
 
   /**

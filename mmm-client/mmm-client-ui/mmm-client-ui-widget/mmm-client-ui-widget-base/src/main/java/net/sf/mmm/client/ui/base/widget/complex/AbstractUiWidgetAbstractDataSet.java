@@ -16,6 +16,7 @@ import net.sf.mmm.client.ui.api.common.SelectionChoice;
 import net.sf.mmm.client.ui.api.common.SelectionMode;
 import net.sf.mmm.client.ui.api.common.SelectionOperation;
 import net.sf.mmm.client.ui.api.event.UiEventSelectionChange;
+import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataSet;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
@@ -270,6 +271,8 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
     if (this.selectedValues.isEmpty()) {
       return null;
     }
+    // TODO hohwille distinguish between 1 selected item and multi-selected items (e.g. for master/detail
+    // panel usability, open details, etc.)
     return getItem(this.selectedValues.iterator().next());
   }
 
@@ -611,5 +614,14 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
    * @return the unwrapped item.
    */
   protected abstract ITEM getItem(ITEM_CONTAINER container);
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public UiFeatureSelectedValue<ITEM> asFeatureSelectedValue() {
+
+    return this;
+  }
 
 }

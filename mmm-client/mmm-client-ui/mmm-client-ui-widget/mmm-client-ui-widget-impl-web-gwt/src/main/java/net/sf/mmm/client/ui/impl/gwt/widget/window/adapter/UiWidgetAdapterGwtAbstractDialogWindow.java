@@ -90,7 +90,7 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
   @Override
   public double getWidthInPixel() {
 
-    return new Length(JavaScriptUtil.getInstance().getComputedStyle(getSizeElement())
+    return new Length(JavaScriptUtil.getInstance().getComputedStyle(getToplevelWidget().getElement())
         .getPropertyValue(LengthProperty.WIDTH.getStyleName())).getAmount();
   }
 
@@ -100,7 +100,7 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
   @Override
   public double getHeightInPixel() {
 
-    return new Length(JavaScriptUtil.getInstance().getComputedStyle(getSizeElement())
+    return new Length(JavaScriptUtil.getInstance().getComputedStyle(getToplevelWidget().getElement())
         .getPropertyValue(LengthProperty.HEIGHT.getStyleName())).getAmount();
   }
 
@@ -225,9 +225,19 @@ public abstract class UiWidgetAdapterGwtAbstractDialogWindow extends UiWidgetAda
    * {@inheritDoc}
    */
   @Override
+  public void setLength(LengthProperty property, Length length) {
+
+    super.setLength(property, length);
+    // getToplevelWidget().getElement().getStyle().setProperty(property.getMemberName(), length.toString());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected Element getSizeElement() {
 
-    return super.getSizeElement();
+    return getContentPanel().getElement();
   }
 
 }

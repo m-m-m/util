@@ -10,6 +10,7 @@ import net.sf.mmm.client.ui.api.event.UiEventSelectionChange;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
+import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetDynamicPanel;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
 import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite;
@@ -20,13 +21,13 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * implements the UI pattern <em>master/detail (panel)</em>. It combines a {@link #getMasterPanel() master
  * panel} that allows {@link UiFeatureSelectedValue selecting} an object that automatically gets displayed in
  * the {@link #getDetailPanel() details panel} and can typically be edited there.
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}. Typically bound to
  *        {@link java.util.List}&lt;SELECTION&gt;.
  * @param <SELECTION> is the generic type of the individual row from the {@link #getMasterList() master list}.
  * @param <DETAIL> is the generic type of the actual value representing the &lt;SELECTION&gt; that gets set in
  *        the {@link #getDetailPanel() details panel}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -38,7 +39,7 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    * @param valueClass is the {@link #getValueClass() value class}.
@@ -51,7 +52,7 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param delegate is the {@link #getDelegate() delegate}.
    * @param valueClass is the {@link #getValueClass() value class}.
@@ -68,7 +69,7 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
   /**
    * @return the master panel containing the {@link #getMasterList() master list}.
    */
-  protected abstract UiWidgetCustom<VALUE, ?> getMasterPanel();
+  protected abstract UiWidgetWithValue<VALUE> getMasterPanel();
 
   /**
    * This method gets the actual widget containing a list of &lt;SELECTION&gt; to choose from. This widget has
@@ -81,7 +82,7 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
    * allow mass-operations such as
    * {@link net.sf.mmm.client.ui.api.handler.action.UiHandlerActionRemove#onRemove(net.sf.mmm.client.ui.api.event.UiEvent)
    * remove} in the {@link #getMasterPanel() master panel}.
-   * 
+   *
    * @return the master list.
    */
   protected abstract UiFeatureSelectedValue<SELECTION> getMasterList();
@@ -90,7 +91,7 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
    * This method gets the details panel showing the {@link #getDetailsForSelection(Object) detail for the
    * current selection} from the {@link #getMasterList() master list}. If the &lt;DETAIL&gt; should be
    * editable for the user, this details panel will typically be an {@link UiWidgetCustomEditor editor}.
-   * 
+   *
    * @return the details panel.
    */
   protected abstract UiWidgetCustom<DETAIL, ?> getDetailPanel();
@@ -146,7 +147,7 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
 
   /**
    * This method is called if the selection of the {@link #getMasterList() master list} has changed.
-   * 
+   *
    * @param selectedValues are the currently selected values.
    * @param event is the {@link UiEventSelectionChange selection change event}.
    */
@@ -156,16 +157,18 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
       SELECTION selection = selectedValues.iterator().next();
       DETAIL detail = getDetailsForSelection(selection);
       getDetailPanel().setValue(detail);
+    } else if (selectedValues.isEmpty()) {
+      // TODO hohwille deselect, message none selected...
     } else {
-      // TODO hohwille deselect...
+      // TODO hohwille deselect, message multiple selected...
     }
   }
 
   /**
    * This method gets the &gt;DETAIL&ls; for the given &lt;SELECTION&gt;.
-   * 
+   *
    * @see UiHandlerDetailsForSelection
-   * 
+   *
    * @param selection is the current selection.
    * @return the according detail.
    */

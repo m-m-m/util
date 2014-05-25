@@ -13,8 +13,11 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 /**
  * This is the interface for a {@link UiWidgetOptionsField options field widget} that represents a
  * <em>list box</em>. Such widget is a simple list that allows to select one or multiple items out of a list
- * of options.
- * 
+ * of {@link #getOptions() options}. Its {@link #getValue() value} is therefore the
+ * {@link #getSelectedValues() list of selected items}.
+ *
+ * @see net.sf.mmm.client.ui.api.widget.complex.UiWidgetOptionListTable
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
