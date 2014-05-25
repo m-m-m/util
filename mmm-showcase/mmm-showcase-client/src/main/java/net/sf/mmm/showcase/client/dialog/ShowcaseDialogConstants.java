@@ -15,9 +15,35 @@ import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 public interface ShowcaseDialogConstants extends DialogConstants {
 
   /** The {@link Dialog#getId() dialog-id} of the {@link #TYPE_MAIN main} dialog showing basic widgets. */
-  String DIALOG_ID_WIDGETS = "widgets";
+  String DIALOG_ID_WIDGETS = "Widgets";
 
-  /** The {@link DialogPlace} for the {@link #DIALOG_ID_WIDGETS widgets dialog}. */
+  /** The {@link Dialog#getId() dialog-id} of the {@link #TYPE_MAIN main} dialog showing an editor. */
+  String DIALOG_ID_EDITOR = "Editor";
+
+  /** The {@link Dialog#getId() dialog-id} of the {@link #TYPE_MAIN main} dialog showing a list table. */
+  String DIALOG_ID_LIST = "List";
+
+  /** The {@link Dialog#getId() dialog-id} of the {@link #TYPE_MAIN main} dialog showing a popup. */
+  String DIALOG_ID_POPUP = "Popup";
+
+  /**
+   * The {@link Dialog#getId() dialog-id} of the {@link #TYPE_MAIN main} dialog showing a master/detail panel.
+   */
+  String DIALOG_ID_MASTER_DETAIL = "MasterDetail";
+
+  /** The {@link DialogPlace} for {@link #DIALOG_ID_WIDGETS}. */
   DialogPlace PLACE_WIDGETS = new DialogPlace(DIALOG_ID_WIDGETS);
+
+  /** The {@link DialogPlace} for {@link #DIALOG_ID_EDITOR}. */
+  DialogPlace PLACE_EDITOR = new DialogPlace(DIALOG_ID_EDITOR);
+
+  /** The {@link DialogPlace} for {@link #DIALOG_ID_LIST}. */
+  DialogPlace PLACE_LIST = new DialogPlace(DIALOG_ID_LIST);
+
+  /** The {@link DialogPlace} for {@link #DIALOG_ID_POPUP}. */
+  DialogPlace PLACE_POPUP = new DialogPlace(DIALOG_ID_POPUP);
+
+  /** The {@link DialogPlace} for {@link #DIALOG_ID_MASTER_DETAIL}. */
+  DialogPlace PLACE_MASTER_DETAIL = new DialogPlace(DIALOG_ID_MASTER_DETAIL);
 
 }

@@ -1,10 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.showcase.client.gwt;
-
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+package net.sf.mmm.showcase.client.dialog.editor;
 
 import net.sf.mmm.util.pojo.api.Pojo;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
@@ -13,7 +9,7 @@ import net.sf.mmm.util.validation.base.Mandatory;
 
 /**
  * This is the interface for a contact person.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -25,14 +21,11 @@ public interface Contact extends TransferObject, Pojo {
   /** {@link TypedProperty} for {@link #getLastName()}. */
   TypedProperty<String> PROPERTY_LAST_NAME = new TypedProperty<String>("lastName");
 
-  // /** {@link TypedProperty} for {@link #getBirthday()}. */
-  // TypedProperty<LocalDate> PROPERTY_BIRTHDAY = new TypedProperty<LocalDate>("birthday");
+  /** {@link TypedProperty} for {@link #getEmail()}. */
+  TypedProperty<String> PROPERTY_EMAIL = new TypedProperty<String>("email");
 
-  /** {@link TypedProperty} for {@link #getShoeSize()}. */
-  TypedProperty<Integer> PROPERTY_SHOE_SIZE = new TypedProperty<Integer>("shoeSize");
-
-  /** {@link TypedProperty} for {@link #getIncome()}. */
-  TypedProperty<Double> PROPERTY_INCOME = new TypedProperty<Double>("income");
+  /** {@link TypedProperty} for {@link #getPhone()}. */
+  TypedProperty<String> PROPERTY_PHONE = new TypedProperty<String>("phone");
 
   /**
    * @return the firstName
@@ -56,39 +49,26 @@ public interface Contact extends TransferObject, Pojo {
    */
   void setLastName(String lastName);
 
-  //
-  // /**
-  // * @return the birthday
-  // */
-  // @Past
-  // LocalDate getBirthday();
-  //
-  // /**
-  // * @param birthday is the birthday to set
-  // */
-  // void setBirthday(LocalDate birthday);
+  /**
+   * @return the email address.
+   */
+  // @Email
+  String getEmail();
 
   /**
-   * @return the shoe size.
+   * @param email is the new value of {@link #getEmail()}.
    */
-  @Min(19)
-  @Max(52)
-  int getShoeSize();
+  void setEmail(String email);
 
   /**
-   * @param size is the new shoe size.
+   * @return the phone number.
    */
-  void setShoeSize(int size);
+  // @PhoneNumber
+  String getPhone();
 
   /**
-   * @return the income in EUR.
+   * @param phone is the new value of {@link #getPhone()}.
    */
-  @DecimalMin(value = "0")
-  double getIncome();
-
-  /**
-   * @param income is the new income.
-   */
-  void setIncome(double income);
+  void setPhone(String phone);
 
 }

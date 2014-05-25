@@ -2,9 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.showcase.client.gwt;
 
-import javax.validation.ParameterNameProvider;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
+
+import net.sf.mmm.showcase.client.dialog.editor.ContactBean;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.validation.client.AbstractGwtValidatorFactory;
@@ -36,22 +37,4 @@ public final class SampleValidatorFactory extends AbstractGwtValidatorFactory {
     return GWT.create(GwtValidator.class);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ParameterNameProvider getParameterNameProvider() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void close() {
-
-    // nothing to do...
-  }
 }

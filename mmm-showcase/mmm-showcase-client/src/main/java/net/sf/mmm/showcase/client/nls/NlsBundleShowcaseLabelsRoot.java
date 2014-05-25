@@ -12,18 +12,19 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@SuppressWarnings("javadoc")
 public interface NlsBundleShowcaseLabelsRoot extends NlsBundleWithLookup {
 
-  /**
-   * @return the label for the first name field.
-   */
-  @NlsBundleMessage("Vorname1")
+  @NlsBundleMessage("Vorname")
   NlsMessage firstName();
 
-  /**
-   * @return the label for the last name field.
-   */
-  @NlsBundleMessage("Nachname1")
+  @NlsBundleMessage("Nachname")
   NlsMessage lastName();
+
+  @NlsBundleMessage("Email-Adresse")
+  NlsMessage email();
+
+  @NlsBundleMessage("Telefon-Nummer")
+  NlsMessage phone();
 
 }

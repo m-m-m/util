@@ -6,11 +6,14 @@ import java.util.Arrays;
 
 import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidgetFactory;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetColorField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetComboboxField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLongField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetRichTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextAreaField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomGridPanel;
+import net.sf.mmm.util.datatype.api.color.Color;
 
 /**
  * TODO: this class ...
@@ -37,6 +40,13 @@ public class WidgetsViewWidget extends UiWidgetCustomGridPanel<Void> {
     getDelegate().addChildren(longField);
     UiWidgetComboboxField<Fruit> fruitsField = factory.createComboBox("Fruits", Arrays.asList(Fruit.values()));
     getDelegate().addChildren(fruitsField);
+    UiWidgetRichTextField richTextField = factory.create(UiWidgetRichTextField.class);
+    richTextField.setLabel("Rich-Text");
+    getDelegate().addChildren(richTextField);
+    UiWidgetColorField colorField = factory.create(UiWidgetColorField.class);
+    colorField.setLabel("Color");
+    colorField.setOptions(Arrays.asList(Color.RED, Color.GREEN, Color.BLUE, Color.BLACK, Color.WHITE));
+    getDelegate().addChildren(colorField);
   }
 
 }

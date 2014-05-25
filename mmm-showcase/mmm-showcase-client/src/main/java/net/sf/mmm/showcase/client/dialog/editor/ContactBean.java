@@ -1,9 +1,9 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.showcase.client.gwt;
+package net.sf.mmm.showcase.client.dialog.editor;
 
 /**
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -18,14 +18,11 @@ public class ContactBean implements Contact {
   /** @see #getLastName() */
   private String lastName;
 
-  // /** @see #getBirthday() */
-  // private LocalDate birthday;
+  /** @see #getEmail() */
+  private String email;
 
-  /** @see #getShoeSize() */
-  private int shoeSize;
-
-  /** @see #getIncome() */
-  private double income;
+  /** @see #getPhone() */
+  private String phone;
 
   /**
    * The constructor.
@@ -33,6 +30,23 @@ public class ContactBean implements Contact {
   public ContactBean() {
 
     super();
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param firstName - see {@link #getFirstName()}.
+   * @param lastName - see {@link #getLastName()}.
+   * @param email - see {@link #getEmail()}.
+   * @param phone - see {@link #getPhone()}.
+   */
+  public ContactBean(String firstName, String lastName, String email, String phone) {
+
+    super();
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.phone = phone;
   }
 
   /**
@@ -71,55 +85,40 @@ public class ContactBean implements Contact {
     this.lastName = lastName;
   }
 
-  //
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // public LocalDate getBirthday() {
-  //
-  // return this.birthday;
-  // }
-  //
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // public void setBirthday(LocalDate birthday) {
-  //
-  // this.birthday = birthday;
-  // }
-
   /**
    * {@inheritDoc}
    */
-  public int getShoeSize() {
+  @Override
+  public String getEmail() {
 
-    return this.shoeSize;
+    return this.email;
   }
 
   /**
    * {@inheritDoc}
    */
-  public void setShoeSize(int shoeSize) {
+  @Override
+  public void setEmail(String email) {
 
-    this.shoeSize = shoeSize;
+    this.email = email;
   }
 
   /**
    * {@inheritDoc}
    */
-  public double getIncome() {
+  @Override
+  public String getPhone() {
 
-    return this.income;
+    return this.phone;
   }
 
   /**
    * {@inheritDoc}
    */
-  public void setIncome(double income) {
+  @Override
+  public void setPhone(String phone) {
 
-    this.income = income;
+    this.phone = phone;
   }
 
   /**
@@ -132,11 +131,6 @@ public class ContactBean implements Contact {
     result.append(this.lastName);
     result.append(", ");
     result.append(this.firstName);
-    // if (this.birthday != null) {
-    // result.append(" (*");
-    // result.append(this.birthday);
-    // result.append(")");
-    // }
     return result.toString();
   }
 

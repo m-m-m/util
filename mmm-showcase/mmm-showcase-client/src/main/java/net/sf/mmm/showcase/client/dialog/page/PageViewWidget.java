@@ -47,9 +47,9 @@ public class PageViewWidget extends UiWidgetCustomPanel<UiWidgetHorizontalPanel>
     UiTreeNodeModel<PageInfo> treeModel = new UiTreeNodeModel<>();
     TreeNodeSimple<PageInfo> rootNode = new TreeNodeSimple<>(new PageInfo("Features", DialogConstants.PLACE_HOME));
     rootNode.addChildValue(new PageInfo("Widgets", ShowcaseDialogConstants.PLACE_WIDGETS));
-    rootNode.addChildValue(new PageInfo("Layout", null));
-    rootNode.addChildValue(new PageInfo("Editor", null));
-    rootNode.addChildValue(new PageInfo("Validation", null));
+    rootNode.addChildValue(new PageInfo("Editor", ShowcaseDialogConstants.PLACE_EDITOR));
+    rootNode.addChildValue(new PageInfo("List", ShowcaseDialogConstants.PLACE_LIST));
+    rootNode.addChildValue(new PageInfo("Popup", ShowcaseDialogConstants.PLACE_POPUP));
     rootNode.addChildValue(new PageInfo("Data-Binding", null));
     this.navigationTree = factory.createTree(treeModel, "Feature-Tree");
     this.navigationTree.setValue(rootNode);
@@ -70,6 +70,7 @@ public class PageViewWidget extends UiWidgetCustomPanel<UiWidgetHorizontalPanel>
         }
       }
     });
+    this.navigationTree.expandNodes();
     getDelegate().addChild(this.navigationTree);
     this.mainSlot = factory.create(UiWidgetSlot.class);
     getDelegate().addChild(this.mainSlot);

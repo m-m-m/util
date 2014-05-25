@@ -29,5 +29,9 @@
       <artifactId>mmm-client-ui-dialog-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
-  </dependencies>  
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
+  </dependencies>
 </project>
