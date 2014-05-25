@@ -36,8 +36,12 @@
     <org.springframework.version>4.0.2.RELEASE</org.springframework.version>
     <org.springsecurity.version>3.2.2.RELEASE</org.springsecurity.version>
     <org.hibernate.version>4.3.5.Final</org.hibernate.version>
+    <!--
+    <javax.validation.version>1.1.0.Final</javax.validation.version>
     <org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>
-    <!--<org.hibernate.validator.version>4.2.0.Final</org.hibernate.validator.version>-->
+    -->
+    <org.hibernate.validator.version>4.2.0.Final</org.hibernate.validator.version>
+    <javax.validation.version>1.0.0.GA</javax.validation.version>
     <!--<org.slf4j.version>1.6.1</org.slf4j.version>-->
     <org.slf4j.version>1.7.6</org.slf4j.version>
     <!--<org.slf4j.version>1.5.6</org.slf4j.version>-->
@@ -47,7 +51,7 @@
     <net.sf.mmm.util.xml.version>1.0.0-SNAPSHOT</net.sf.mmm.util.xml.version>
     <net.sf.mmm.util.datatype.version>1.0.0-SNAPSHOT</net.sf.mmm.util.datatype.version>
     <net.sf.mmm.service.version>1.0.0-SNAPSHOT</net.sf.mmm.service.version>
-    <mmm.bootclasspath>-Xbootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</mmm.bootclasspath>
+    <mmm.bootclasspath>bootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</mmm.bootclasspath>
   </properties>
 
   <dependencyManagement>
@@ -139,12 +143,12 @@
       <dependency>
         <groupId>javax.validation</groupId>
         <artifactId>validation-api</artifactId>
-        <version>1.1.0.Final</version>
+        <version>${javax.validation.version}</version>
       </dependency>
       <dependency>
         <groupId>javax.validation</groupId>
         <artifactId>validation-api</artifactId>
-        <version>1.1.0.Final</version>
+        <version>${javax.validation.version}</version>
         <classifier>sources</classifier>
       </dependency>
 
@@ -429,17 +433,19 @@
           <version>2.2</version>
         </plugin>
         <plugin>
-          <!-- https://svn.codehaus.org/mojo/trunk/mojo/flatten-maven-plugin -->
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
           <!--<version>1.0.0-beta-2-SNAPSHOT</version>-->
           <version>1.0.0-beta-1</version>
           <configuration>
+          <!--
             <handleName>KeepOrAdd</handleName>
             <handleDescription>KeepIfExists</handleDescription>
             <handleUrl>KeepOrAdd</handleUrl>
             <handleScm>KeepOrAdd</handleScm>
             <handleDevelopers>KeepOrAdd</handleDevelopers>
+           -->            
+            <updatePomFile>false</updatePomFile>
           </configuration>
         </plugin>
         <plugin>
@@ -456,6 +462,7 @@
                     <versionRange>[0.1,)</versionRange>
                     <goals>
                       <goal>flatten</goal>
+                      <goal>clean</goal>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
@@ -488,7 +495,7 @@
            <source>1.7</source>
            <target>1.7</target>
            <!-- we need to extend a class from "com.sun.internal" -->
-           <compilerArgument>-XDignore.symbol.file=true ${mmm.bootclasspath}</compilerArgument>
+           <compilerArgument>-XDignore.symbol.file=true -${mmm.bootclasspath}</compilerArgument>
            <fork>true</fork>
          </configuration>
       </plugin>
@@ -519,6 +526,13 @@
             <phase>process-resources</phase>
             <goals>
               <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
             </goals>
           </execution>
         </executions>
@@ -919,7 +933,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <argLine>${mmm.bootclasspath} ${argLine}</argLine>
+              <argLine>-X${mmm.bootclasspath} ${argLine}</argLine>
             </configuration>
           </plugin>
         </plugins>
