@@ -20,14 +20,6 @@
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
 
-<!--
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-persistence-query-impl</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
- -->
-
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
@@ -46,5 +38,13 @@
       <version>1.0.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
+
+    <!--
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-dbcp</artifactId>
+      <scope>provided</scope>
+    </dependency>
+     -->
   </dependencies>
 </project>

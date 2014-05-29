@@ -14,7 +14,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for the persistence.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -30,8 +30,8 @@ public class EnversTest {
   @Test
   public void testPersistence() throws Exception {
 
-    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML).get(
-        TransactionExecutor.class);
+    TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML)
+        .get(TransactionExecutor.class);
 
     DummyRevisionedFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyRevisionedFooEntity>() {
 
@@ -93,7 +93,7 @@ public class EnversTest {
     // fooManager.delete(foo);
     DummyRevisionedFooEntity fooHistory = fooManager.load(fooId, 1);
     Assert.assertNotNull(fooHistory);
-    Assert.assertEquals("It is magic", fooHistory.getValue());
+    Assert.assertEquals("This is magic", fooHistory.getValue());
   }
 
   protected DummyRevisionedFooEntity createAndSave() {

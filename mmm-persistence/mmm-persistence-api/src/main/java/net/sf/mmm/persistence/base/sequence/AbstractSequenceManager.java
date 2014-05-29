@@ -5,17 +5,14 @@ package net.sf.mmm.persistence.base.sequence;
 import net.sf.mmm.persistence.api.sequence.Sequence;
 import net.sf.mmm.persistence.api.sequence.SequenceManager;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
- * This is the abstract base implementation of the {@link SequenceManager}
- * interface.
- * 
+ * This is the abstract base implementation of the {@link SequenceManager} interface.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
  */
-public abstract class AbstractSequenceManager extends AbstractLoggableComponent implements
-    SequenceManager {
+public abstract class AbstractSequenceManager extends AbstractLoggableComponent implements SequenceManager {
 
   /**
    * The constructor.
@@ -26,12 +23,20 @@ public abstract class AbstractSequenceManager extends AbstractLoggableComponent 
   }
 
   /**
-   * {@inheritDoc}
+   * A {@link String} identifying the {@link Sequence} with {@link Sequence#getSchema() schema} and
+   * {@link Sequence#getName() name}.
+   *
+   * @param sequence is the {@link Sequence}.
+   * @return the {@link String} identifier.
    */
-  public void reset(Sequence sequence) {
+  protected String getSequenceAsString(Sequence sequence) {
 
-    NlsNullPointerException.checkNotNull(Sequence.class, sequence);
-    setValue(sequence, sequence.getMinimumValue());
+    String schema = sequence.getSchema();
+    if (schema == null) {
+      return sequence.getName();
+    } else {
+      return schema + "." + sequence.getName();
+    }
   }
 
 }

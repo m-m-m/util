@@ -33,7 +33,7 @@
     <backport-time-version>1.0.0</backport-time-version>
     <backport-function-version>1.0.1</backport-function-version>
     <com.google.gwt.version>2.6.0</com.google.gwt.version>
-    <org.springframework.version>4.0.2.RELEASE</org.springframework.version>
+    <org.springframework.version>4.0.5.RELEASE</org.springframework.version>
     <org.springsecurity.version>3.2.2.RELEASE</org.springsecurity.version>
     <org.hibernate.version>4.3.5.Final</org.hibernate.version>
     <!--
@@ -213,7 +213,16 @@
         <version>1.0</version>
         <scope>provided</scope>
       </dependency>
-
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-dbcp</artifactId>
+        <version>8.0.8</version>      
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-dbcp2</artifactId>
+        <version>2.0.1</version>
+      </dependency>
 
       <dependency>
         <groupId>junit</groupId>
@@ -435,18 +444,13 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
-          <!--<version>1.0.0-beta-2-SNAPSHOT</version>-->
           <version>1.0.0-beta-1</version>
+          <!--<version>1.0.0-beta-2-SNAPSHOT</version>
           <configuration>
-          <!--
-            <handleName>KeepOrAdd</handleName>
-            <handleDescription>KeepIfExists</handleDescription>
-            <handleUrl>KeepOrAdd</handleUrl>
-            <handleScm>KeepOrAdd</handleScm>
-            <handleDevelopers>KeepOrAdd</handleDevelopers>
-           -->            
+            <flattenMode>oss</flattenMode>
             <updatePomFile>false</updatePomFile>
           </configuration>
+          -->
         </plugin>
         <plugin>
           <groupId>org.eclipse.m2e</groupId>

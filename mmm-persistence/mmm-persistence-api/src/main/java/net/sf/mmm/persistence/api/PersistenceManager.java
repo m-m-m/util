@@ -16,9 +16,9 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
  * <b>NOTE:</b><br>
  * You will have to perform operations of this persistence-layer in a transactional context. The suggested way
  * is to use {@link net.sf.mmm.transaction.api.TransactionExecutor}.
- * 
+ *
  * @see javax.persistence.EntityManager
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @ComponentSpecification
@@ -30,7 +30,7 @@ public interface PersistenceManager {
   /**
    * This method determines if the {@link #getDao(Class) DAO} for the given <code>entityClass</code> is
    * available. This can be useful to prevent exceptions.
-   * 
+   *
    * @param entityClass is the type of the {@link GenericEntity} for which the according {@link GenericDao} is
    *        requested.
    * @return <code>true</code> if {@link #getDao(Class)} will return a valid DAO for the given
@@ -41,7 +41,7 @@ public interface PersistenceManager {
   /**
    * This method gets the individual {@link GenericDao} {@link GenericDao#getEntityClassImplementation()
    * responsible} for the given <code>entityClass</code>.
-   * 
+   *
    * @param <ENTITY> is the generic entity-type.
    * @param <ID> is the type of the {@link GenericEntity#getId() primary key}.
    * @param entityClass is the type of the {@link GenericEntity} for which the according {@link GenericDao} is
@@ -55,9 +55,9 @@ public interface PersistenceManager {
   /**
    * This method loads the {@link GenericEntity} with the given <code>entityClass</code> and <code>id</code>
    * from the persistent store.
-   * 
+   *
    * @see GenericDao#find(Object)
-   * 
+   *
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param <ID> is the type of the {@link GenericEntity#getId() primary key}.
    * @param entityClass is the class reflecting the type of the requested entity.
@@ -70,9 +70,9 @@ public interface PersistenceManager {
   /**
    * This method loads the {@link GenericEntity} with the given <code>entityClass</code> and <code>id</code>
    * from the persistent store.
-   * 
+   *
    * @see GenericDao#findIfExists(Object)
-   * 
+   *
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param <ID> is the type of the {@link GenericEntity#getId() primary key}.
    * @param entityClass is the class reflecting the type of the requested entity.
@@ -84,9 +84,9 @@ public interface PersistenceManager {
   /**
    * This method creates a lazy reference proxy of the {@link GenericEntity} with the given
    * <code>entityClass</code> and <code>id</code> from the persistent store.
-   * 
+   *
    * @see GenericDao#getReference(Object)
-   * 
+   *
    * @param <ID> is the type of the {@link GenericEntity#getId() primary key}.
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param entityClass is the class reflecting the type of the requested entity.
@@ -99,9 +99,9 @@ public interface PersistenceManager {
 
   /**
    * This method creates a new and transient instance for the given <code>entityClass</code>.<br>
-   * 
+   *
    * @see GenericDao#create()
-   * 
+   *
    * @param <ID> is the type of the {@link GenericEntity#getId() primary key}.
    * @param <ENTITY> is the generic type of the <code>entityClass</code>.
    * @param entityClass is the {@link Class} reflecting the entity to create. This may also be the interface
@@ -112,18 +112,18 @@ public interface PersistenceManager {
 
   /**
    * This method saves the given <code>entity</code>.<br>
-   * 
+   *
    * @see GenericDao#save(GenericEntity)
-   * 
+   *
    * @param entity is the entity to save.
    */
   void save(GenericEntity<?> entity);
 
   /**
    * This method deletes the given <code>entity</code>.<br>
-   * 
+   *
    * @see GenericDao#delete(GenericEntity)
-   * 
+   *
    * @param entity is the entity to delete.
    */
   void delete(GenericEntity<?> entity);
@@ -132,10 +132,11 @@ public interface PersistenceManager {
    * This method gets the {@link Class} reflecting the given <code>{@link GenericEntity entity}</code>. Unlike
    * <code>entity.{@link #getClass()}</code> this method will always return the real
    * {@link GenericDao#getEntityClassImplementation() class defining the entity}.<br>
-   * E.g. if the underlying implementation may create a dynamic proxy that extends the entity-class and
-   * <code>entity.{@link #getClass()}</code> will return the {@link Class} of the proxy instead. In such case
-   * this method will return the real entity-class adapted by the proxy.
-   * 
+   * The underlying JPA implementation may create a dynamic proxy or byte-code generated sub-class that
+   * extends the entity-class. In such case <code>entity.{@link #getClass()}</code> will return the
+   * {@link Class} of the proxy instead. In such case this method will return the real entity-class adapted by
+   * the proxy.
+   *
    * @param entity is the {@link GenericEntity} for which the class is requested.
    * @return the {@link Class} reflecting the given <code>entity</code>.
    */

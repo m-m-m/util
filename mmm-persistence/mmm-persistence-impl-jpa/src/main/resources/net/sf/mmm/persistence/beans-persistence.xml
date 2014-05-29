@@ -12,11 +12,13 @@
 
   <import resource="classpath:net/sf/mmm/util/beans-util-core.xml"/>
 
+  <import resource="classpath:net/sf/mmm/persistence/beans-persistence-sequence-manager.xml*"/>
+
   <context:component-scan base-package="net.sf.mmm.persistence"/>
 
   <!-- https://jira.springsource.org/browse/SPR-1358 -->
   <!-- <import resource="classpath:net/sf/mmm/persistence/beans-persistence-datasource-${persistence.datasource}.xml"/> -->
-  <import resource="classpath:net/sf/mmm/persistence/beans-persistence-datasource-h2.xml"/>
+  <import resource="classpath:net/sf/mmm/persistence/beans-persistence-datasource-dbcp2.xml"/>
 
   <!-- https://jira.springsource.org/browse/SPR-1358 -->
   <!-- <import resource="classpath:net/sf/mmm/persistence/beans-persistence-jpa-${persistence.jpa.vendor}.xml"/> -->
