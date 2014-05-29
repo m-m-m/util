@@ -2,15 +2,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.hibernate;
 
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Callable;
 
+import net.sf.mmm.persistence.api.RevisionMetadata;
 import net.sf.mmm.persistence.api.RevisionedPersistenceManager;
+import net.sf.mmm.test.TestUser;
 import net.sf.mmm.transaction.api.TransactionExecutor;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.entity.api.RevisionedEntity;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * This is the test-case for the persistence.
@@ -18,7 +23,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class EnversTest {
+public class EnversTest extends Assert {
 
   private static final String SPRING_XML = "/net/sf/mmm/persistence/impl/hibernate/beans-test-persistence-hibernate.xml";
 
@@ -32,6 +37,9 @@ public class EnversTest {
 
     TransactionExecutor transactionExecutor = SpringContainerPool.getInstance(SPRING_XML)
         .get(TransactionExecutor.class);
+    // MutableUserSession session = (MutableUserSession) UserSessionAccess.getSession();
+    // session.setUser(TestUser.DEFAULT_USER);
+    SecurityContextHolder.getContext().setAuthentication(TestUser.DEFAULT_USER);
 
     DummyRevisionedFooEntity foo = transactionExecutor.doInTransaction(new Callable<DummyRevisionedFooEntity>() {
 
@@ -72,28 +80,43 @@ public class EnversTest {
 
   protected void readAndUpdate(Long fooId) {
 
-    Assert.assertNotNull(fooId);
+    assertNotNull(fooId);
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
     DummyRevisionedFooEntityDao fooManager = (DummyRevisionedFooEntityDao) persistenceManager
         .getDao(DummyRevisionedFooEntity.class);
     DummyRevisionedFooEntity foo = fooManager.find(fooId);
-    Assert.assertEquals("This is magic", foo.getValue());
+    assertEquals("This is magic", foo.getValue());
     foo.setValue("It was magic");
     fooManager.save(foo);
   }
 
   protected void readAgainAndDelete(Long fooId) {
 
-    Assert.assertNotNull(fooId);
+    assertNotNull(fooId);
+    Date now = new Date();
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
     DummyRevisionedFooEntityDao fooManager = (DummyRevisionedFooEntityDao) persistenceManager
         .getDao(DummyRevisionedFooEntity.class);
     DummyRevisionedFooEntity foo = fooManager.load(fooId, RevisionedEntity.LATEST_REVISION);
-    Assert.assertEquals("It was magic", foo.getValue());
-    // fooManager.delete(foo);
-    DummyRevisionedFooEntity fooHistory = fooManager.load(fooId, 1);
-    Assert.assertNotNull(fooHistory);
-    Assert.assertEquals("This is magic", fooHistory.getValue());
+    assertEquals("It was magic", foo.getValue());
+    List<RevisionMetadata> history = fooManager.getRevisionHistoryMetadata(fooId);
+    assertEquals(2, history.size());
+    RevisionMetadata firstRevision = history.get(0);
+    assertEquals(TestUser.DEFAULT_NAME, firstRevision.getCreator());
+    RevisionMetadata secondRevision = history.get(1);
+    assertEquals(TestUser.DEFAULT_NAME, firstRevision.getCreator());
+    assertEquals(firstRevision.getRevision().longValue() + 1, secondRevision.getRevision());
+    Date firstDate = firstRevision.getDate();
+    Date secondDate = secondRevision.getDate();
+    assertTrue(firstDate.before(secondDate));
+    assertTrue(secondDate.before(now));
+    // duration from first revision to now in millis
+    long delta = now.getTime() - firstDate.getTime();
+    assertTrue(delta < 6000L);
+    DummyRevisionedFooEntity fooHistory = fooManager.load(fooId, firstRevision.getRevision());
+    assertNotNull(fooHistory);
+    assertEquals("This is magic", fooHistory.getValue());
+    fooManager.delete(foo);
   }
 
   protected DummyRevisionedFooEntity createAndSave() {
@@ -101,7 +124,7 @@ public class EnversTest {
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
     DummyRevisionedFooEntityDao fooManager = (DummyRevisionedFooEntityDao) persistenceManager
         .getDao(DummyRevisionedFooEntity.class);
-    Assert.assertSame(DummyRevisionedFooEntity.class, fooManager.getEntityClassImplementation());
+    assertSame(DummyRevisionedFooEntity.class, fooManager.getEntityClassImplementation());
     DummyRevisionedFooEntity foo = new DummyRevisionedFooEntity();
     foo.setValue("This is magic");
     fooManager.save(foo);

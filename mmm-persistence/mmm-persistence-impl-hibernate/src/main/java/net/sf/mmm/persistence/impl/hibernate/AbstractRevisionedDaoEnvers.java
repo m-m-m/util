@@ -5,6 +5,9 @@ package net.sf.mmm.persistence.impl.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import net.sf.mmm.persistence.api.PersistenceManager;
 import net.sf.mmm.persistence.api.RevisionMetadata;
 import net.sf.mmm.persistence.api.RevisionedDao;
 import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
@@ -18,15 +21,18 @@ import org.hibernate.envers.AuditReaderFactory;
 /**
  * This is the abstract base-implementation of a {@link net.sf.mmm.persistence.api.RevisionedDao} using
  * {@link org.hibernate.envers Hibernate-Envers} to manage the revision-control.
- * 
+ *
  * @param <ID> is the type of the {@link net.sf.mmm.util.entity.api.GenericEntity#getId() primary key} of the
  *        managed {@link net.sf.mmm.util.entity.api.GenericEntity}.
  * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractRevisionedDaoEnvers<ID, ENTITY extends MutableRevisionedEntity<ID>> extends
     AbstractJpaGenericDao<ID, ENTITY> implements RevisionedDao<ID, ENTITY> {
+
+  /** @see #getPersistenceManager() */
+  private PersistenceManager persistenceManager;
 
   /**
    * The constructor.
@@ -34,6 +40,24 @@ public abstract class AbstractRevisionedDaoEnvers<ID, ENTITY extends MutableRevi
   public AbstractRevisionedDaoEnvers() {
 
     super();
+  }
+
+  /**
+   * @return the {@link PersistenceManager} instance.
+   */
+  protected PersistenceManager getPersistenceManager() {
+
+    return this.persistenceManager;
+  }
+
+  /**
+   * @param persistenceManager is the {@link PersistenceManager} to {@link Inject}.
+   */
+  @Inject
+  public void setPersistenceManager(PersistenceManager persistenceManager) {
+
+    getInitializationState().requireNotInitilized();
+    this.persistenceManager = persistenceManager;
   }
 
   /**
@@ -60,7 +84,7 @@ public abstract class AbstractRevisionedDaoEnvers<ID, ENTITY extends MutableRevi
   /**
    * This method gets a historic revision of the {@link net.sf.mmm.util.entity.api.GenericEntity} with the
    * given <code>id</code>.
-   * 
+   *
    * @param id is the {@link net.sf.mmm.util.entity.api.GenericEntity#getId() ID} of the requested
    *        {@link net.sf.mmm.util.entity.api.GenericEntity entity}.
    * @param revision is the {@link RevisionedEntity#getRevision() revision}
@@ -107,9 +131,9 @@ public abstract class AbstractRevisionedDaoEnvers<ID, ENTITY extends MutableRevi
     List<Number> revisionList = auditReader.getRevisions(getEntityClassImplementation(), id);
     List<RevisionMetadata> result = new ArrayList<RevisionMetadata>();
     for (Number revision : revisionList) {
-      result.add(new LazyRevisionMetadata(auditReader, revision));
+      Long revisionLong = Long.valueOf(revision.longValue());
+      result.add(new LazyRevisionMetadata(this.persistenceManager, revisionLong));
     }
     return result;
   }
-
 }
