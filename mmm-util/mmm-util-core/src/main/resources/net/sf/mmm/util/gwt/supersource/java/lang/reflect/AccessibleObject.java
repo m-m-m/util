@@ -14,6 +14,6 @@ package java.lang.reflect;
  */
 public class AccessibleObject {
 
-  // just a marker interface.
+  // not supported by GWT, just to allow compilation of API using this type.
 
 }

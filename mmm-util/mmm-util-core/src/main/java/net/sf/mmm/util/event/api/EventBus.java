@@ -18,8 +18,8 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * they need to see is the {@link EventBus} and the {@link Event} itself. <br/>
  * This interface exists only for the high abstraction needed for <code>mmm-client</code>. If you want to
  * write a portable client application that can run in different environments (GWT, JavaFx, etc.) then you
- * should use this simplified but normalized API. Otherwise it is totally legal to directly use an external
- * event bus implementation such as <a
+ * should use this simplified but normalized API. Otherwise you may want to use an external event bus
+ * implementation directly such as <a
  * href="https://code.google.com/p/guava-libraries/wiki/EventBusExplained">guava event bus</a>.<br/>
  * <b>NOTE:</b><br/>
  * The loose coupling makes flows less easy to see, understand and debug. You should only consider this
