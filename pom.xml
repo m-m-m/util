@@ -47,7 +47,7 @@
     <!--<org.slf4j.version>1.5.6</org.slf4j.version>-->
     <jacoco.version>0.6.4.201312101107</jacoco.version>
     <!-- Internal project versions -->
-    <net.sf.mmm.util.core.version>4.0.1-SNAPSHOT</net.sf.mmm.util.core.version>
+    <net.sf.mmm.util.core.version>5.0.0-SNAPSHOT</net.sf.mmm.util.core.version>
     <net.sf.mmm.util.xml.version>1.0.0-SNAPSHOT</net.sf.mmm.util.xml.version>
     <net.sf.mmm.util.datatype.version>1.0.0-SNAPSHOT</net.sf.mmm.util.datatype.version>
     <net.sf.mmm.service.version>1.0.0-SNAPSHOT</net.sf.mmm.service.version>
@@ -206,6 +206,11 @@
         <groupId>javax.annotation</groupId>
         <artifactId>jsr250-api</artifactId>
         <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>13.0.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.geronimo.specs</groupId>
@@ -442,17 +447,6 @@
           <version>2.2</version>
         </plugin>
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>flatten-maven-plugin</artifactId>
-          <version>1.0.0-beta-1</version>
-          <!--<version>1.0.0-beta-2-SNAPSHOT</version>
-          <configuration>
-            <flattenMode>oss</flattenMode>
-            <updatePomFile>false</updatePomFile>
-          </configuration>
-          -->
-        </plugin>
-        <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>
           <version>1.0.0</version>
@@ -519,28 +513,8 @@
       </plugin>
 
       <!-- generate and use consumer pom instead of pom.xml -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <configuration>
-        </configuration>
-        <executions>
-          <execution>
-            <id>flatten</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>flatten</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>flatten.clean</id>
-            <phase>clean</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+      <!--
+      -->
 
       <!-- also generate source JARs -->
       <plugin>
@@ -895,6 +869,31 @@
                 <phase>verify</phase>
                 <goals>
                   <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>flatten-maven-plugin</artifactId>
+            <version>1.0.0-beta-2</version>
+            <configuration>
+              <flattenMode>oss</flattenMode>
+              <!--<updatePomFile>false</updatePomFile>-->
+            </configuration>
+            <executions>
+              <execution>
+                <id>flatten</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>flatten</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>flatten.clean</id>
+                <phase>clean</phase>
+                <goals>
+                  <goal>clean</goal>
                 </goals>
               </execution>
             </executions>

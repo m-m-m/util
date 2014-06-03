@@ -14,12 +14,12 @@ import net.sf.mmm.util.event.api.EventListener;
 /**
  * This class extends {@link AbstractSynchronizedEventSource} with the ability to send events asynchronous in
  * separate {@link Thread}s.
- * 
+ *
  * @param <E> is the templated type of the events to send.
  * @param <L> is the templated type of the listeners that can be {@link #addListener(EventListener)
- *        registered} here and that will {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Event)
+ *        registered} here and that will {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Object)
  *        receive} the sent events.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -40,7 +40,7 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
 
   /**
    * This method sets the {@link #getExecutor() executor} to use.
-   * 
+   *
    * @param threadPool is used to dispatch events in separate threads.
    */
   @Inject
@@ -54,7 +54,7 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
 
   /**
    * This method gets the {@link Executor} used to run asynchronous tasks. It may use a thread-pool.
-   * 
+   *
    * @return the executor.
    */
   public Executor getExecutor() {
