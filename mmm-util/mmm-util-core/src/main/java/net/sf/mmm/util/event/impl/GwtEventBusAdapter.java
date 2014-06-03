@@ -12,10 +12,12 @@ import com.google.web.bindery.event.shared.Event.Type;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
- * TODO: this class ...
+ * This is an implementation of {@link com.google.web.bindery.event.shared.EventBus} that delegates to an
+ * implementation of the {@link EventBus} interface. So you can adapt a GWT event bus usage to
+ * {@link EventBus}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 4.0.1
+ * @since 5.0.0
  */
 public class GwtEventBusAdapter extends com.google.web.bindery.event.shared.EventBus {
 

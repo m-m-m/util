@@ -6,7 +6,7 @@ package net.sf.mmm.util.event.api;
  * This is an implementation of {@link EventListener} that simply ignores all events.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 4.0.1
+ * @since 5.0.0
  */
 public class EventListenerIgnore implements EventListener<Object> {
 
