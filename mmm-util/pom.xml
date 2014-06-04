@@ -26,7 +26,7 @@
     <module>mmm-util-contenttype</module>
     <module>mmm-util-metakeys</module>
     <module>mmm-util-datatype</module>
-    <module>mmm-util-xml</module>
+    <module>mmm-util-sandbox</module>
   </modules>
   
   <dependencies>
