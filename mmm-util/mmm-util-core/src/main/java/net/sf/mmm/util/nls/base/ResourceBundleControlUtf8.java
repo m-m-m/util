@@ -12,8 +12,6 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.ResourceBundle.Control;
 
-import net.sf.mmm.util.io.api.EncodingUtil;
-
 /**
  * Adds UTF-8 support for {@link ResourceBundle} <code>*.properties</code> files.
  *
@@ -56,7 +54,7 @@ public class ResourceBundleControlUtf8 extends Control {
     }
     if (stream != null) {
       try {
-        bundle = new PropertyResourceBundle(new InputStreamReader(stream, EncodingUtil.ENCODING_UTF_8));
+        bundle = new PropertyResourceBundle(new InputStreamReader(stream, "UTF-8"));
       } finally {
         stream.close();
       }

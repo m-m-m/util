@@ -139,16 +139,26 @@ public abstract class EventBusTest extends Assert {
     }
   }
 
+  /**
+   * A {@link Thread} sending and receiving events for asynchronous tests.
+   */
   protected static class EventThread extends Thread implements EventListener<MyEvent> {
 
+    /** The {@link EventBus} to test. */
     private final EventBus eventBus;
 
+    /** The sequential ID of this {@link EventThread}. */
     private final int threadId;
 
-    private volatile boolean active;
-
+    /**
+     * A counter for the number of events that have been processed (causing an event to the following
+     * {@link EventThread}).
+     */
     private int eventProcessCount;
 
+    /**
+     * The total number of events received.
+     */
     private int eventTotalCount;
 
     /**
@@ -163,7 +173,6 @@ public abstract class EventBusTest extends Assert {
       this.eventBus = eventBus;
       this.threadId = id;
       this.eventBus.addListener(MyEvent.class, this);
-      this.active = true;
     }
 
     /**
@@ -195,18 +204,27 @@ public abstract class EventBusTest extends Assert {
       }
       yield();
       // this.eventBus.removeListener(this);
-      this.active = false;
     }
   }
 
+  /**
+   * A simple event for testing.
+   */
   protected static class MyEvent implements Event {
 
+    /** Counter for unique {@link #eventId}. */
     private static int idCounter = 0;
 
+    /** The ID of this event (used for copies of the event for following {@link EventThread}s). */
     private int eventId;
 
+    /**
+     * The {@link EventThread#getId() id} of the thread who initially triggered the event (mainly for
+     * debugging and tracing).
+     */
     private int sourceThreadId;
 
+    /** The {@link EventThread#getId() id} of the thread who should handle the event. */
     private int targetThreadId;
 
     /**

@@ -9,9 +9,9 @@ import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 /**
  * This is the abstract base implementation for a {@link net.sf.mmm.util.pojo.path.api.PojoPathFunction} that
  * operates on a {@link Map}.
- * 
+ *
  * @param <VALUE> is the value this function traverses to starting from the actual POJO.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -20,6 +20,7 @@ public abstract class AbstractMapPojoPathFunction<VALUE> extends AbstractPojoPat
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public VALUE get(Map<String, Object> current, String functionName, PojoPathContext context) {
 
@@ -29,6 +30,7 @@ public abstract class AbstractMapPojoPathFunction<VALUE> extends AbstractPojoPat
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public VALUE set(Map<String, Object> current, String functionName, VALUE value, PojoPathContext context) {
 

@@ -2,13 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.resource.NlsBundleUtilResourceRoot;
 
 /**
  * This exception is thrown if a resource was requested for an URI that is undefined or illegal (e.g.
  * "hppt:\\.com/...").
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -22,7 +22,7 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param uri is the resource URI that is undefined or illegal.
    */
   public ResourceUriUndefinedException(String uri) {
@@ -32,13 +32,13 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param uri is the resource URI that is undefined or illegal.
    */
   public ResourceUriUndefinedException(Throwable nested, String uri) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorResourceUndefinedUri(uri));
+    super(nested, createBundle(NlsBundleUtilResourceRoot.class).errorResourceUndefinedUri(uri));
   }
 
   /**

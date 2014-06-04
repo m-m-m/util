@@ -50,20 +50,5 @@ public class ManifestLoaderTest {
     assertEquals("1.7.6", mainAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION));
     assertEquals("Apache Maven", mainAttributes.getValue("Created-By"));
     assertEquals("slf4j-api-1.7.6.jar", mainAttributes.getValue(ManifestLoader.MANIFEST_SOURCE));
-
-    Manifest jaxbRIManifest = null;
-    for (Manifest manifest : manifests) {
-      String implementationTitle = ManifestLoader.getValue(manifest, Attributes.Name.IMPLEMENTATION_TITLE);
-      if (implementationTitle != null) {
-        implementationTitle = implementationTitle.trim();
-      }
-      if ("JAXB Reference Implementation".equals(implementationTitle)) {
-        jaxbRIManifest = manifest;
-      }
-    }
-    assertNotNull(jaxbRIManifest);
-
-    Attributes runtimeAttributes = jaxbRIManifest.getAttributes("com.sun.xml.bind.v2.runtime");
-    assertEquals("hudson-jaxb-ri-2.1-520", runtimeAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION));
   }
 }

@@ -5,9 +5,9 @@ package net.sf.mmm.util.io.api;
 /**
  * This is the interface for a {@link java.io.File}. This abstraction is required as abstraction since a
  * web-client cannot support {@link java.io.File}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
+ * @since 4.0.0
  */
 public interface FileItem {
 

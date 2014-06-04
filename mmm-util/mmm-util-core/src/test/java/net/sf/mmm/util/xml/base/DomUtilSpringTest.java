@@ -5,11 +5,9 @@ package net.sf.mmm.util.xml.base;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.xml.api.DomUtil;
 
-import org.junit.AfterClass;
-
 /**
  * This is the test-case for {@link DomUtil} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -22,15 +20,6 @@ public class DomUtilSpringTest extends DomUtilTest {
   public DomUtil getDomUtil() {
 
     return SpringContainerPool.getInstance().get(DomUtil.class);
-  }
-
-  /**
-   * This method is invoked after all tests of this class have completed.
-   */
-  @AfterClass
-  public static void tearDown() {
-
-    SpringContainerPool.dispose();
   }
 
 }

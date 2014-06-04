@@ -45,15 +45,45 @@ package net.sf.mmm.util.resource.api;
  * <td>C:\WINDOWS\system32\drivers\etc\hosts</td>
  * </tr>
  * </table>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public interface ResourceUri {
 
   /**
+   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the regular
+   * {@link java.nio.file.FileSystem} (see {@link java.io.File}).
+   */
+  String SCHEME_PREFIX_FILE = "file://";
+
+  /**
+   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the classpath (see
+   * {@link ClassLoader} for details).
+   */
+  String SCHEME_PREFIX_CLASSPATH = "classpath:";
+
+  /**
+   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the web accessed via
+   * HTTP.
+   */
+  String SCHEME_PREFIX_HTTP = "http://";
+
+  /**
+   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the web accessed via
+   * HTTPS.
+   */
+  String SCHEME_PREFIX_HTTPS = "https://";
+
+  /**
+   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the network accessed via
+   * FTP.
+   */
+  String SCHEME_PREFIX_FTP = "ftp://";
+
+  /**
    * This method gets this {@link ResourceUri} as string.
-   * 
+   *
    * @return the URI as string.
    */
   String getUri();
@@ -70,7 +100,7 @@ public interface ResourceUri {
    * <li>https://</li>
    * <li>ftp://</li>
    * </ul>
-   * 
+   *
    * @return the schemePrefix or <code>null</code> if this {@link ResourceUri} is unqualified.
    */
   String getSchemePrefix();
@@ -78,7 +108,7 @@ public interface ResourceUri {
   /**
    * This method gets the path of this {@link ResourceUri}. This is the part of the {@link #getUri() URI}
    * after the {@link #getSchemePrefix() scheme-prefix}.
-   * 
+   *
    * @return the path.
    */
   String getPath();

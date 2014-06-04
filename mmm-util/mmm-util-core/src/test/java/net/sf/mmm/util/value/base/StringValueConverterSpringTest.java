@@ -6,11 +6,9 @@ import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.value.api.StringValueConverter;
 
-import org.junit.AfterClass;
-
 /**
  * This is the test-case for {@link StringValueConverter} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class StringValueConverterSpringTest extends StringValueConverterTest {
@@ -32,15 +30,6 @@ public class StringValueConverterSpringTest extends StringValueConverterTest {
 
     return SpringContainerPool.getInstance().get(Iso8601Util.class);
 
-  }
-
-  /**
-   * This method is invoked after all tests of this class have completed.
-   */
-  @AfterClass
-  public static void tearDown() {
-
-    SpringContainerPool.dispose();
   }
 
 }

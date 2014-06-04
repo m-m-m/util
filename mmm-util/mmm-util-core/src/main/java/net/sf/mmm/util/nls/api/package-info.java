@@ -104,7 +104,7 @@
  *
  * In order to support you with creating and maintaining the localized
  * properties, this solution also comes with the
- * {@link net.sf.mmm.util.nls.base.ResourceBundleSynchronizer}.
+ * <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>.
  * <br/>
  * The advantage is that also the bundle name and key are available in the {@link net.sf.mmm.util.nls.api.NlsMessage}
  * and that this approach is GWT compatible when using <code>mmm-util-gwt</code>. However, there is still our legacy
@@ -150,7 +150,7 @@
  *
  * In order to support you with creating and maintaining the localized
  * properties, this solution also comes with the
- * {@link net.sf.mmm.util.nls.base.ResourceBundleSynchronizer}.
+ * <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>.
  * <h3>Conclusion</h3>
  * As we have seen the NLS provided here makes it very easy for developers to write and maintain internationalized code.
  * While messages are created throughout the code they only need to be localized for the end-user in the client and at

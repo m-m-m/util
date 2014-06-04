@@ -16,7 +16,7 @@ import org.junit.Test;
 
 /**
  * This is the {@link TestCase} for {@link StringTransformerChainXmlParser}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -26,8 +26,7 @@ public class StringTransformerChainTest {
   public void testUnmarshall() throws Exception {
 
     JAXBContext context = JAXBContext.newInstance(StringTransformerList.class);
-    InputStream inStream = new ClasspathResource(StringTransformerList.class, ".xml", true).openStream();
-    try {
+    try (InputStream inStream = new ClasspathResource(StringTransformerList.class, ".xml", true).openStream()) {
       StringTransformerList chainList = (StringTransformerList) context.createUnmarshaller().unmarshal(inStream);
       Map<String, StringTransformerChain> chainMap = new HashMap<String, StringTransformerChain>();
       for (StringTransformerChain chain : chainList.getTransformers()) {
@@ -42,8 +41,6 @@ public class StringTransformerChainTest {
       Assert.assertNotNull(extendedChain);
       Assert.assertEquals("/garbarge/foo", extendedChain.transform("/trash/foo"));
       Assert.assertEquals("/dummy/dummy/dummy", extendedChain.transform("/foobar/foo/bar"));
-    } finally {
-      inStream.close();
     }
   }
 }

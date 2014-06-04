@@ -9,7 +9,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-cli</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>${net.sf.mmm.util.cli.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>Build commandline-interfaces (CLI) easily</description>
@@ -18,5 +18,9 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-core</artifactId>
     </dependency>
-  </dependencies>  
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-io</artifactId>
+    </dependency>
+  </dependencies>
 </project>

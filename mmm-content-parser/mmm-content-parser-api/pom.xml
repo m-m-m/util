@@ -16,7 +16,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-core</artifactId>
+      <artifactId>mmm-util-io</artifactId>
     </dependency>
   </dependencies>
 </project>

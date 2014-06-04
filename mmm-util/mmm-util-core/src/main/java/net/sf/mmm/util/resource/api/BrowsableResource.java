@@ -15,7 +15,7 @@ import net.sf.mmm.util.filter.api.Filter;
  * {@link #isFolder() folder} containing the linked sites. Further you have to be careful when recursively
  * scanning {@link BrowsableResource}s that you avoid infinity loops. E.g. create a {@link java.util.Set}
  * holding the {@link #getUri() URIs} of the {@link BrowsableResource}s that have already been visited.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -25,7 +25,7 @@ public interface BrowsableResource extends DataResource {
    * This method iterates the immediate child-{@link BrowsableResource resources} contained in this
    * {@link BrowsableResource}.<br/>
    * If this is no {@link #isFolder() folder}, this method will always return an empty {@link Iterable}.
-   * 
+   *
    * @return an {@link Iterable} of the child-{@link BrowsableResource resources}.
    */
   Iterable<BrowsableResource> getChildResources();
@@ -34,7 +34,7 @@ public interface BrowsableResource extends DataResource {
    * This method iterates the immediate child-{@link BrowsableResource resources} contained in this
    * {@link BrowsableResource} and are {@link Filter#accept(Object) accepted} by the given <code>filter</code>
    * .<br/>
-   * 
+   *
    * @param filter is the {@link Filter} applied to the {@link #getChildResources() child-resources}.
    * @return an {@link Iterable} of the child-{@link BrowsableResource resources}.
    */
@@ -48,7 +48,7 @@ public interface BrowsableResource extends DataResource {
    * In order to determine if this {@link BrowsableResource} is {@link #openStream() containing data}, please
    * use {@link #isAvailable()}. Please note that {@link #isFolder()} and {@link #isAvailable()} can both
    * return <code>true</code> or both return <code>false</code>.
-   * 
+   *
    * @return <code>true</code> if this is a folder, <code>false</code> otherwise.
    */
   boolean isFolder();

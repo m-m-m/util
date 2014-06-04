@@ -18,6 +18,10 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-core</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.javamoney</groupId>
+      <artifactId>moneta</artifactId>
+    </dependency>
   </dependencies>
 
   <profiles>

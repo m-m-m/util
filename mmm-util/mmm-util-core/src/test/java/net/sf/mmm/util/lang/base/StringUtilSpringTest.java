@@ -7,11 +7,9 @@ import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.value.impl.ValueConverterToNumber;
 
-import org.junit.AfterClass;
-
 /**
  * This is the test-case for {@link StringUtil} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class StringUtilSpringTest extends StringUtilTest {
@@ -32,15 +30,6 @@ public class StringUtilSpringTest extends StringUtilTest {
   protected ValueConverterToNumber getValueConverterToNumber() {
 
     return SpringContainerPool.getInstance().get(ValueConverterToNumber.class);
-  }
-
-  /**
-   * This method is invoked after all tests of this class have completed.
-   */
-  @AfterClass
-  public static void tearDown() {
-
-    SpringContainerPool.dispose();
   }
 
 }

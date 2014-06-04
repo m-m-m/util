@@ -15,7 +15,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
  * This is the abstract base-implementation of the {@link PojoDescriptorBuilder} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -34,7 +34,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
 
   /**
    * The constructor.
-   * 
+   *
    * @param mapFactory the factory used to create the {@link #getDescriptor(Class) descriptor-cache}.
    */
   @SuppressWarnings({ "rawtypes" })
@@ -46,7 +46,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
 
   /**
    * This method gets the instance of {@link ReflectionUtilLimited}.
-   * 
+   *
    * @return the {@link ReflectionUtilLimited}.
    */
   protected abstract ReflectionUtilLimited getReflectionUtil();
@@ -74,6 +74,7 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
 
@@ -96,9 +97,9 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   /**
    * This method creates the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor pojo descriptor} for
    * the given <code>pojoType</code>.
-   * 
+   *
    * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder#getDescriptor(java.lang.Class)
-   * 
+   *
    * @param <POJO> is the templated type of the <code>pojoType</code>.
    * @param pojoType is the {@link GenericType} reflecting the {@link net.sf.mmm.util.pojo.api.Pojo}.
    * @return the descriptor used to get information about the properties of the according

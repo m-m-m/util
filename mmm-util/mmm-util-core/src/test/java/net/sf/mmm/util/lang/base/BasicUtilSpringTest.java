@@ -5,11 +5,9 @@ package net.sf.mmm.util.lang.base;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.lang.api.BasicUtil;
 
-import org.junit.AfterClass;
-
 /**
  * This is the test-case for {@link BasicUtil} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class BasicUtilSpringTest extends BasicUtilTest {
@@ -21,15 +19,6 @@ public class BasicUtilSpringTest extends BasicUtilTest {
   public BasicUtil getBasicUtil() {
 
     return SpringContainerPool.getInstance().get(BasicUtil.class);
-  }
-
-  /**
-   * This method is invoked after all tests of this class have completed.
-   */
-  @AfterClass
-  public static void tearDown() {
-
-    SpringContainerPool.dispose();
   }
 
 }

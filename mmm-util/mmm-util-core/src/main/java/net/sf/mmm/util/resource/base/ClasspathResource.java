@@ -8,6 +8,7 @@ import java.util.Date;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
+import net.sf.mmm.util.resource.api.ResourceUri;
 
 /**
  * This is the implementation of the {@link DataResource} interface for a resource that comes from the
@@ -16,17 +17,17 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
  * deployed within a jar-file. Adding a directory to the beginning of the classpath still allows to override
  * such a resource.<br>
  * Anyways a typical mistake is illustrated by the following code example:
- * 
+ *
  * <pre>
  * MyClass.class.{@link Class#getResourceAsStream(String) getResourceAsStream}("config.xml")
  * </pre>
- * 
+ *
  * This will NOT allow to override resources in other classpath entries and especially NOT work in situations
  * where there are specific classloaders, what is a typical situation in environments of applications servers
  * or IoC frameworks.<br>
  * The solution is to use the {@link Thread#getContextClassLoader() context-class-loader} to get resources
  * what is done by this implementation. A proper version of the example above is:
- * 
+ *
  * <pre>
  * {@link DataResource} resource = {@link ClasspathResource#ClasspathResource(String) ClasspathResource}((MyClass.class.getPackage(), "config.xml"));
  * if (!resource.{@link DataResource#isAvailable() isAvailable()}) {
@@ -36,7 +37,7 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
  * InputStream inStream = resource.{@link DataResource#openStream() openStream()};
  * ...
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -45,7 +46,7 @@ public class ClasspathResource extends AbstractDataResource {
   /**
    * The {@link #getSchemePrefix() scheme-prefix} for this type of {@link DataResource}.
    */
-  public static final String SCHEME_PREFIX = "classpath:";
+  public static final String SCHEME_PREFIX = ResourceUri.SCHEME_PREFIX_CLASSPATH;
 
   /** @see #getUrl() */
   private final String path;
@@ -55,7 +56,7 @@ public class ClasspathResource extends AbstractDataResource {
 
   /**
    * The constructor.
-   * 
+   *
    * @param absoluteClasspath is the absolute path to the resource. E.g.
    *        "net/sf/mmm/util/resource/ClasspathResource.txt".
    */
@@ -80,27 +81,27 @@ public class ClasspathResource extends AbstractDataResource {
    * <code>nameOrSuffix</code>.<br>
    * E.g. the following code would get a resource named " {@linkplain ClasspathResource}.xml" from the same
    * package where this class is located:
-   * 
+   *
    * <pre>
-   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.base.ClasspathResource}.class, 
+   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.base.ClasspathResource}.class,
    * ".xml", true)
    * </pre>
-   * 
+   *
    * This is the same as:
-   * 
+   *
    * <pre>
-   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.base.ClasspathResource}.class, 
+   * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.base.ClasspathResource}.class,
    * "{@linkplain ClasspathResource}.xml", false)
    * </pre>
-   * 
+   *
    * This is the same as:
-   * 
+   *
    * <pre>
    * new {@link ClasspathResource}("net/sf/mmm/util/resource/{@linkplain ClasspathResource}.xml")
    * </pre>
-   * 
+   *
    * @see #ClasspathResource(Package, String)
-   * 
+   *
    * @param someClass is the class identifying the path where the resource is located and the prefix of its
    *        filename.
    * @param nameOrSuffix is the filename of the resource or a suffix (e.g. ".properties" or "-test.xml") for
@@ -119,20 +120,20 @@ public class ClasspathResource extends AbstractDataResource {
    * <code>filename</code>.<br>
    * E.g. the following code would create a resource named "relection.properties" from the same package where
    * this class is located:
-   * 
+   *
    * <pre>
-   * new {@link ClasspathResource}({@link ClasspathResource}.class.{@link Class#getPackage() getPackage}(), 
+   * new {@link ClasspathResource}({@link ClasspathResource}.class.{@link Class#getPackage() getPackage}(),
    * "relection.properties")
    * </pre>
-   * 
+   *
    * This is the same as:
-   * 
+   *
    * <pre>
    * new {@link ClasspathResource}({@link ClasspathResource}.class, "relection.properties", false)
    * </pre>
-   * 
+   *
    * @see #ClasspathResource(Class, String, boolean)
-   * 
+   *
    * @param somePackage is the package identifying the path where the resource is located.
    * @param filename is the name of the resource.
    */
@@ -152,7 +153,7 @@ public class ClasspathResource extends AbstractDataResource {
 
   /**
    * @see #ClasspathResource(Class, String, boolean)
-   * 
+   *
    * @param someClass is the class identifying the path where the resource is located and the prefix of its
    *        filename.
    * @param nameOrSuffix is the filename of the resource or a suffix (e.g. ".properties" or "-test.xml") for

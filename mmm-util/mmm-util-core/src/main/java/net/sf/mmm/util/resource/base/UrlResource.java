@@ -7,54 +7,55 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
-import net.sf.mmm.util.file.api.FileUtil;
-import net.sf.mmm.util.file.base.FileUtilImpl;
+import net.sf.mmm.util.file.api.FileUtilLimited;
+import net.sf.mmm.util.file.base.FileUtilLimitedImpl;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
+import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 
 /**
  * This is the implementation of the {@link DataResource} interface for a resource that comes from an
  * {@link URL}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 public class UrlResource extends AbstractDataResource {
 
   /** The {@link #getSchemePrefix() scheme-prefix} for HTTP. */
-  public static final String SCHEME_PREFIX_HTTP = "http://";
+  public static final String SCHEME_PREFIX_HTTP = ResourceUri.SCHEME_PREFIX_HTTP;
 
   /** The {@link #getSchemePrefix() scheme-prefix} for HTTPS. */
-  public static final String SCHEME_PREFIX_HTTPS = "https://";
+  public static final String SCHEME_PREFIX_HTTPS = ResourceUri.SCHEME_PREFIX_HTTPS;
 
   /** The {@link #getSchemePrefix() scheme-prefix} for FTP. */
-  public static final String SCHEME_PREFIX_FTP = "ftp://";
+  public static final String SCHEME_PREFIX_FTP = ResourceUri.SCHEME_PREFIX_FTP;
 
   /** @see #getUrl() */
   private final URL url;
 
-  /** The {@link FileUtil} instance. */
-  private final FileUtil fileUtil;
+  /** The {@link FileUtilLimited} instance. */
+  private final FileUtilLimited fileUtil;
 
   /**
    * The constructor.
-   * 
+   *
    * @param url is the URL to the resource. E.g. "http://foo.bar/index.html".
    */
   public UrlResource(String url) {
 
-    this(url, FileUtilImpl.getInstance());
+    this(url, FileUtilLimitedImpl.getInstance());
   }
 
   /**
    * The constructor.
-   * 
+   *
    * @param absolutePath is the absolute path to the resource. E.g. "http://foo.bar/index.html".
-   * @param fileUtil is the {@link FileUtil} to use.
+   * @param fileUtil is the {@link FileUtilLimited} to use.
    */
-  public UrlResource(String absolutePath, FileUtil fileUtil) {
+  public UrlResource(String absolutePath, FileUtilLimited fileUtil) {
 
     super();
     try {
@@ -67,21 +68,21 @@ public class UrlResource extends AbstractDataResource {
 
   /**
    * The constructor.
-   * 
+   *
    * @param url is the {@link URL}.
    */
   public UrlResource(URL url) {
 
-    this(url, FileUtilImpl.getInstance());
+    this(url, FileUtilLimitedImpl.getInstance());
   }
 
   /**
    * The constructor.
-   * 
+   *
    * @param url is the {@link URL}.
-   * @param fileUtil is the {@link FileUtil} to use.
+   * @param fileUtil is the {@link FileUtilLimited} to use.
    */
-  public UrlResource(URL url, FileUtil fileUtil) {
+  public UrlResource(URL url, FileUtilLimited fileUtil) {
 
     super();
     if (url == null) {

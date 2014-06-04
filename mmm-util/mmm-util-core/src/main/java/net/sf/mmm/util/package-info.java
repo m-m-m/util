@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Top-level package of the utilities.
- * <a name="documentation"/><h2>Utilities</h2> 
- * This is the top-level package of all utilities of this project. This package 
- * itself only contains the {@link net.sf.mmm.util.NlsBundleUtilCoreRoot NLS-Bundle} 
+ * <a name="documentation"/><h2>Util</h2>
+ * This is the top-level package of all utilities of this project. This package
+ * itself only contains the {@link net.sf.mmm.util.NlsBundleUtilCoreRoot NLS-Bundle}
  * that allows the localization of this module (util-core).
  */
 package net.sf.mmm.util;

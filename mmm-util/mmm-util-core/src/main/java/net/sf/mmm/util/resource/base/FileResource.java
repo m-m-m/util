@@ -14,15 +14,16 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.mmm.util.file.api.FileUtil;
+import net.sf.mmm.util.collection.base.EmptyIterator;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.api.ResourceNotWritableException;
+import net.sf.mmm.util.resource.api.ResourceUri;
 
 /**
  * This is the implementation of the {@link BrowsableResource} interface for a resource that is a
  * {@link File#isFile() regular} {@link File}. <br>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -31,14 +32,14 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * The {@link #getSchemePrefix() scheme-prefix} for this type of {@link BrowsableResource}.
    */
-  public static final String SCHEME_PREFIX = "file://";
+  public static final String SCHEME_PREFIX = ResourceUri.SCHEME_PREFIX_FILE;
 
   /** The {@link File} to adapt. */
   private final File file;
 
   /**
    * The constructor.
-   * 
+   *
    * @param file is the {@link File} to represent.
    */
   public FileResource(File file) {
@@ -49,7 +50,7 @@ public class FileResource extends AbstractBrowsableResource {
 
   /**
    * The constructor.
-   * 
+   *
    * @param filePath is the {@link File#getPath() path} to the {@link File} to represent.
    */
   public FileResource(String filePath) {
@@ -210,7 +211,7 @@ public class FileResource extends AbstractBrowsableResource {
       if (FileResource.this.file.isDirectory()) {
         files = FileResource.this.file.listFiles();
       } else {
-        files = FileUtil.NO_FILES;
+        return EmptyIterator.getInstance();
       }
       return new FileResourceIterator(files);
     }
@@ -229,7 +230,7 @@ public class FileResource extends AbstractBrowsableResource {
 
     /**
      * The constructor.
-     * 
+     *
      * @param files are the {@link File}s to iterate.
      */
     public FileResourceIterator(File[] files) {

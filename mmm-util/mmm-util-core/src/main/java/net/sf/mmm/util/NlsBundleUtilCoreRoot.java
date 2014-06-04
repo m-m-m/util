@@ -630,69 +630,6 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorIoCopy();
 
   /**
-   * @see net.sf.mmm.util.io.api.StreamClosedException
-   *
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The stream is already closed!")
-  NlsMessage errorStreamClosed();
-
-  /**
-   * @see net.sf.mmm.util.file.api.FileAlreadyExistsException
-   *
-   * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
-   *        otherwise or if unknown.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" already exists!")
-  NlsMessage errorFileAlreadyExists(@Named("file") String file, @Named("directory") boolean directory);
-
-  /**
-   * @see net.sf.mmm.util.file.api.FileNotExistsException
-   *
-   * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
-   *        otherwise or if unknown.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" does not exist!")
-  NlsMessage errorFileNotExists(@Named("file") String file, @Named("directory") boolean directory);
-
-  /**
-   * @see net.sf.mmm.util.file.api.FileCreationFailedException
-   *
-   * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
-   *        otherwise or if unknown.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be created!")
-  NlsMessage errorFileCreationFailed(@Named("file") String file, @Named("directory") boolean directory);
-
-  /**
-   * @see net.sf.mmm.util.file.api.FileAttributeModificationFailedException
-   *
-   * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
-   *        otherwise or if unknown.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The attributes of the {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be modified!")
-  NlsMessage errorFileAttributeModificationFailed(@Named("file") String file, @Named("directory") boolean directory);
-
-  /**
-   * @see net.sf.mmm.util.file.api.FileDeletionFailedException
-   *
-   * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code>
-   *        otherwise or if unknown.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be deleted!")
-  NlsMessage errorFileDeletionFailed(@Named("file") String file, @Named("directory") boolean directory);
-
-  /**
    * @see net.sf.mmm.util.nls.api.NlsNullPointerException
    *
    * @param object is the name of the object that is <code>null</code>.
@@ -805,33 +742,6 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    */
   @NlsBundleMessage("The case \"{case}\" is NOT covered!")
   NlsMessage errorIllegalCase(@Named("case") Object illegalCase);
-
-  /**
-   * @see net.sf.mmm.util.resource.api.ResourceNotAvailableException
-   *
-   * @param resource is the unavailable resource.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The resource \"{resource}\" is not available!")
-  NlsMessage errorResourceNotAvailable(@Named("resource") Object resource);
-
-  /**
-   * @see net.sf.mmm.util.resource.api.ResourceNotWritableException
-   *
-   * @param resource is the read-only resource.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The resource \"{resource}\" is not writable!")
-  NlsMessage errorResourceNotWritable(@Named("resource") Object resource);
-
-  /**
-   * @see net.sf.mmm.util.resource.api.ResourceUriUndefinedException
-   *
-   * @param uri is the URI of the undefined resource.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The resource URI \"{uri}\" is undefined!")
-  NlsMessage errorResourceUndefinedUri(@Named("uri") Object uri);
 
   /**
    * @see net.sf.mmm.util.nls.api.NlsUnsupportedOperationException
@@ -951,16 +861,6 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    */
   @NlsBundleMessage("Reflective access for \"{accessible}\" failed!")
   NlsMessage errorAccessFailed(@Named("accessible") Object accessible);
-
-  /**
-   * @see net.sf.mmm.util.io.api.BufferExceedException
-   *
-   * @param length the given length.
-   * @param capacity the maximum capacity.
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("Offset or length \"{length}\" exceeds buffer with capacity \"{capacity}\"!")
-  NlsMessage errorBufferLengthExceed(@Named("length") int length, @Named("capacity") int capacity);
 
   /**
    * @see net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceNoElseConditionException

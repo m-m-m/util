@@ -48,6 +48,8 @@
     <jacoco.version>0.6.4.201312101107</jacoco.version>
     <!-- Internal project versions -->
     <net.sf.mmm.util.core.version>5.0.0-SNAPSHOT</net.sf.mmm.util.core.version>
+    <net.sf.mmm.util.cli.version>5.0.0-SNAPSHOT</net.sf.mmm.util.cli.version>
+    <net.sf.mmm.util.io.version>5.0.0-SNAPSHOT</net.sf.mmm.util.io.version>
     <net.sf.mmm.util.xml.version>1.0.0-SNAPSHOT</net.sf.mmm.util.xml.version>
     <net.sf.mmm.util.datatype.version>1.0.0-SNAPSHOT</net.sf.mmm.util.datatype.version>
     <net.sf.mmm.service.version>1.0.0-SNAPSHOT</net.sf.mmm.service.version>
@@ -213,6 +215,11 @@
         <version>13.0.1</version>
       </dependency>
       <dependency>
+        <groupId>org.javamoney</groupId>
+        <artifactId>moneta</artifactId>
+        <version>0.8</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.geronimo.specs</groupId>
         <artifactId>geronimo-servlet_3.0_spec</artifactId>
         <version>1.0</version>
@@ -251,6 +258,16 @@
         <artifactId>mmm-util-core</artifactId>
         <version>${net.sf.mmm.util.core.version}</version>
         <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-util-io</artifactId>
+        <version>${net.sf.mmm.util.io.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-util-cli</artifactId>
+        <version>${net.sf.mmm.util.cli.version}</version>
       </dependency>
 
     </dependencies>

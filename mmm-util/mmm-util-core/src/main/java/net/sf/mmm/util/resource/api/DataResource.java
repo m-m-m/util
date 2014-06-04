@@ -14,7 +14,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  * {@link DataResource} as a {@link java.io.File file} but it may come from other sources than the filesystem.<br>
  * The major reason for naming it {@link DataResource} is that <code>Resource</code> is a very general name
  * already occupied by {@link javax.annotation.Resource}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -27,7 +27,7 @@ public interface DataResource {
    * Depending on the underlying implementation this can be a relatively expensive operation. E.g. if this
    * resource points to a remote URL this method has to open a network connection in order to verify if the
    * resource is available. Use {@link #isData()} to prevent such expensive operaitons.
-   * 
+   *
    * @return <code>true</code> if this resource is available, <code>false</code> otherwise.
    */
   boolean isAvailable();
@@ -45,7 +45,7 @@ public interface DataResource {
    * can change at any time so you never have a full guarantee if some data exists or NOT. However in most
    * cases it is very improbable that this status changes when you {@link #openStream() read} the resource
    * immediately after the check.
-   * 
+   *
    * @return <code>true</code> if this resource points to potential data, <code>false</code> otherwise.
    * @since 2.0.0
    */
@@ -55,16 +55,15 @@ public interface DataResource {
    * This method gets the path of this resource. Please note that the path is including the {@link #getName()
    * name} of the resource.<br/>
    * <b>ATTENTION:</b><br>
-   * The result of this method may differ to the path used in the URL when this resource has been
-   * {@link DataResourceFactory#createDataResource(String) created}.
-   * 
+   * The result of this method may differ to the path used in the URL when this resource has been created.
+   *
    * @return the path that was used to identify this resource when creating.
    */
   String getPath();
 
   /**
    * This method gets the name of the resource. It is analog to a {@link java.io.File#getName() filename}.
-   * 
+   *
    * @return the name of the resource.
    * @since 2.0.0
    */
@@ -72,7 +71,7 @@ public interface DataResource {
 
   /**
    * This method gets the size (content-length) of this resource.
-   * 
+   *
    * @return the size of this resource.
    * @throws ResourceNotAvailableException if this resource is NOT {@link #isAvailable() available}.
    */
@@ -80,7 +79,7 @@ public interface DataResource {
 
   /**
    * This method gets this resource as {@link URL}.
-   * 
+   *
    * @return the URL that represents this resource.
    * @throws ResourceNotAvailableException if an URL can NOT be created because the represented resource does
    *         not exist.
@@ -91,16 +90,16 @@ public interface DataResource {
    * This method gets a string identifying this {@link DataResource}. In most cases this will be the same as
    * {@link Object#toString() string-representation} of the {@link #getUrl() URL}. However this method will
    * not throw an exception.
-   * 
+   *
    * @return the URI as string.
    */
   String getUri();
 
   /**
    * This method opens this resource for reading.
-   * 
+   *
    * @see java.net.URL#openStream()
-   * 
+   *
    * @return the input stream where to read from.
    * @throws ResourceNotAvailableException if this resource is NOT {@link #isAvailable() available}.
    * @throws RuntimeIoException if an input/output error occurred.
@@ -109,7 +108,7 @@ public interface DataResource {
 
   /**
    * This method opens an output-stream in order to write data to the resource.
-   * 
+   *
    * @return the {@link OutputStream} to write to the resource.
    * @throws ResourceNotAvailableException if this resource is NOT {@link #isAvailable() available}.
    * @throws ResourceNotWritableException if the resource is NOT writable (e.g. read-only).
@@ -124,7 +123,7 @@ public interface DataResource {
    * this resource.<br>
    * E.g. if this resource points to the file "/etc/init.d/rc" and <code>relativePath</code> would be
    * "../apt/sources.list" the resulting resource would point to "/etc/apt/sources.list".
-   * 
+   *
    * @param resourcePath is the absolute or relative path pointing to a new resource. If it is a relative
    *        path, it is interpreted relative to the parent URI (directory) of this resource.
    * @return is the resource pointing to the given path (relative to this resource).
@@ -136,7 +135,7 @@ public interface DataResource {
   /**
    * This method gets the last modification date of the {@link DataResource} if {@link #isAvailable()
    * available} and supported.
-   * 
+   *
    * @return the last modification {@link Date} or <code>null</code> if not available or supported.
    * @since 2.0.0
    */
@@ -144,7 +143,7 @@ public interface DataResource {
 
   /**
    * This method determines if this resource has been been modified since the given <code>data</code>.
-   * 
+   *
    * @param date is the {@link Date} to check for.
    * @return <code>true</code> if the resource has been modified after the given <code>date</code>,
    *         <code>false</code> if it has NOT been modified after the given <code>date</code> and

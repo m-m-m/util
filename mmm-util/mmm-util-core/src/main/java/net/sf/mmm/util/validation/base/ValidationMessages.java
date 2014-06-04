@@ -7,7 +7,7 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
 /**
  * This are the {@link ConstantsWithLookup} for the I18N/NLS of custom {@link javax.validation.Constraint}s
  * for GWT.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -19,5 +19,8 @@ public interface ValidationMessages extends ConstantsWithLookup {
   @Key("net.sf.mmm.util.validation.base.Mandatory.message")
   // CHECKSTYLE:OFF (GWT requirements force this method name mapping)
   String net_sf_mmm_util_validation_base_Mandatory_message();
+
+  @Key("net.sf.mmm.util.validation.base.PhoneNumber.message")
+  String net_sf_mmm_util_validation_base_PhoneNumber_message();
   // CHECKSTYLE:ON
 }
