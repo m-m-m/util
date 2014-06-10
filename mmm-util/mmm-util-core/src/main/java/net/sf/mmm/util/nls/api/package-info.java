@@ -59,7 +59,7 @@
  * <pre>
  * package foo.bar;
  *
- * public class NlsBundleFooBarRoot extends {@link net.sf.mmm.util.nls.api.NlsBundle} {
+ * public interface NlsBundleFooBarRoot extends {@link net.sf.mmm.util.nls.api.NlsBundle} {
  *
  *   &#64;{@link net.sf.mmm.util.nls.api.NlsBundleMessage}("Hi {name}! How are you?")
  *   {@link net.sf.mmm.util.nls.api.NlsMessage} messageSayHi(&#64;{@link javax.inject.Named}("name") String name);
