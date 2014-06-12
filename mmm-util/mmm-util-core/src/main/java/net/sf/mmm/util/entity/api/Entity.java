@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * This is the interface for an <em>entity</em> or <code>business object</code>. It is typically a
  * {@link GenericEntity} or a {@link net.sf.mmm.util.transferobject.api.TransferObject} (or both).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */

@@ -1,14 +1,13 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.transferobject.base.example.logic;
+package net.sf.mmm.util.transferobject.base.example.common.to;
 
-import net.sf.mmm.util.entity.api.RevisionedEntity;
 import net.sf.mmm.util.transferobject.api.EntityTo;
 import net.sf.mmm.util.transferobject.base.example.common.Address;
 
 /**
- * This is the {@link EntityTo} implementing {@link Address}.
- * 
+ * This is the {@link EntityTo ETO} implementing {@link Address}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -43,31 +42,22 @@ public class AddressEto extends EntityTo<Long> implements Address {
     super();
   }
 
-  /**
-   * The constructor.
-   * 
-   * @param template is the object to create a deep-copy from.
-   */
-  public AddressEto(RevisionedEntity<Long> template) {
-
-    super(template);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void copyFrom(Object source) {
-
-    super.copyFrom(source);
-    Address sourceAddress = (Address) source;
-    this.city = sourceAddress.getCity();
-    this.country = sourceAddress.getCountry();
-    this.houseNumber = sourceAddress.getHouseNumber();
-    this.state = sourceAddress.getState();
-    this.street = sourceAddress.getStreet();
-    this.zip = sourceAddress.getZip();
-  }
+  //
+  // /**
+  // * {@inheritDoc}
+  // */
+  // @Override
+  // protected void copyFrom(Object source) {
+  //
+  // super.copyFrom(source);
+  // Address sourceAddress = (Address) source;
+  // this.city = sourceAddress.getCity();
+  // this.country = sourceAddress.getCountry();
+  // this.houseNumber = sourceAddress.getHouseNumber();
+  // this.state = sourceAddress.getState();
+  // this.street = sourceAddress.getStreet();
+  // this.zip = sourceAddress.getZip();
+  // }
 
   /**
    * {@inheritDoc}

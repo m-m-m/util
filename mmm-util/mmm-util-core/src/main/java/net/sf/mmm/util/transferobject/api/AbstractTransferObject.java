@@ -3,15 +3,15 @@
 package net.sf.mmm.util.transferobject.api;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.entity.api.Entity;
-import net.sf.mmm.util.nls.api.NlsClassCastException;
 import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
- * This is the abstract base class for a {@link TransferObject}.
+ * This is the abstract base class for a {@link TransferObject}. It already contains a small and simple
+ * infrastructure for {@link #clone() cloning}, {@link #equals(Object)} and {@link #hashCode()} as well as
+ * {@link #toString()}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
@@ -27,46 +27,6 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
   public AbstractTransferObject() {
 
     super();
-  }
-
-  /**
-   * The copy-constructor.
-   *
-   * @param template is the object to create a deep-copy from.
-   */
-  protected AbstractTransferObject(Object template) {
-
-    super();
-    if (template != null) {
-      copyFromInternal(template);
-    }
-  }
-
-  /**
-   * @see #copyFrom(Object)
-   *
-   * @param source is the source object where to copy the properties from.
-   */
-  final void copyFromInternal(Object source) {
-
-    try {
-      copyFrom(source);
-    } catch (ClassCastException e) {
-      throw new NlsClassCastException(source, AbstractTransferObject.this.getClass());
-    }
-  }
-
-  /**
-   * This method copies all properties from <code>source</code> to this object. If a property is copied whose
-   * value is a mutable object (not a {@link net.sf.mmm.util.lang.api.Datatype} or the like), that object also
-   * has to be copied/cloned.
-   *
-   * @param source is the source object where to copy the properties from.
-   */
-  protected void copyFrom(Object source) {
-
-    // has to be overridden by every sub-class...
-    NlsNullPointerException.checkNotNull("source", source);
   }
 
   /**
@@ -132,17 +92,8 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
     @SuppressWarnings("unchecked")
     public <TO extends AbstractTransferObject> TO clone(TO template) {
 
-      NlsNullPointerException.checkNotNull(AbstractTransferObject.class.getSimpleName(), template);
+      NlsNullPointerException.checkNotNull(TransferObject.class.getSimpleName(), template);
       return (TO) template.clone();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <ENTITY extends Entity, TO extends AbstractTransferObject> void copyProperties(ENTITY source, TO target) {
-
-      target.copyFromInternal(source);
     }
 
     /**
@@ -164,6 +115,28 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
       }
       return newInstance;
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public final String toString() {
+
+    StringBuilder buffer = new StringBuilder();
+    toString(buffer);
+    return buffer.toString();
+  }
+
+  /**
+   * Method to extend {@link #toString()} logic. Override to add additional information.
+   *
+   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the
+   *        string representation.
+   */
+  protected void toString(StringBuilder buffer) {
+
+    buffer.append(getClass().getSimpleName());
   }
 
 }

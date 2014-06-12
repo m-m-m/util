@@ -2,33 +2,39 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transferobject.base;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import net.sf.mmm.util.entity.api.PersistenceEntity;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
-import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
+import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.lang.api.DatatypeDetector;
+import net.sf.mmm.util.lang.base.DatatypeDetectorImpl;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.transferobject.api.EntityTo;
-import net.sf.mmm.util.transferobject.api.TransferObject;
+import net.sf.mmm.util.transferobject.api.EntityTo.PersistentEntityAccess;
 import net.sf.mmm.util.transferobject.api.TransferObjectUtil;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
 /**
  * This is the implementation of {@link TransferObjectUtil}.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
 @Named
 public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implements TransferObjectUtil {
+
+  /** The singleton instance of {@link EtoHelper}. */
+  private static final EtoHelper HELPER = new EtoHelper();
 
   /** @see #getInstance() */
   private static TransferObjectUtil instance;
@@ -36,11 +42,11 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   /** @see #getComposedValueConverter() */
   private ComposedValueConverter composedValueConverter;
 
-  /** @see #getPojoDescriptorBuilderFactory() */
-  private PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
+  /** @see #getReflectionUtil() */
+  private ReflectionUtil reflectionUtil;
 
-  /** @see #getPojoDescriptorBuilder() */
-  private PojoDescriptorBuilder pojoDescriptorBuilder;
+  /** @see #getDatatypeDetector() */
+  private DatatypeDetector datatypeDetector;
 
   /**
    * The constructor.
@@ -54,7 +60,7 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
    * This method gets the singleton instance of this {@link TransferObjectUtilImpl}.<br/>
    * <b>ATTENTION:</b><br/>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static TransferObjectUtil getInstance() {
@@ -81,16 +87,13 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
     if (this.composedValueConverter == null) {
       this.composedValueConverter = DefaultComposedValueConverter.getInstance();
     }
-    if (this.pojoDescriptorBuilderFactory == null) {
-      this.pojoDescriptorBuilderFactory = PojoDescriptorBuilderFactoryImpl.getInstance();
+    if (this.datatypeDetector == null) {
+      DatatypeDetectorImpl impl = new DatatypeDetectorImpl();
+      impl.initialize();
+      this.datatypeDetector = impl;
     }
-    if (this.pojoDescriptorBuilder == null) {
-      // VisibilityModifier methodVisibility = VisibilityModifier.PROTECTED;
-      // VisibilityModifier fieldVisibility = null;
-      // this.pojoDescriptorBuilder =
-      // this.pojoDescriptorBuilderFactory.createDescriptorBuilder(methodVisibility,
-      // fieldVisibility);
-      this.pojoDescriptorBuilder = this.pojoDescriptorBuilderFactory.createPublicMethodDescriptorBuilder();
+    if (this.reflectionUtil == null) {
+      this.reflectionUtil = ReflectionUtilImpl.getInstance();
     }
   }
 
@@ -113,38 +116,39 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   }
 
   /**
-   * @return the instance of {@link PojoDescriptorBuilderFactory}.
+   * @return the {@link DatatypeDetector} instance.
    */
-  protected PojoDescriptorBuilderFactory getPojoDescriptorBuilderFactory() {
+  protected DatatypeDetector getDatatypeDetector() {
 
-    return this.pojoDescriptorBuilderFactory;
+    return this.datatypeDetector;
   }
 
   /**
-   * @param pojoDescriptorBuilderFactory is the instance of {@link PojoDescriptorBuilderFactory} to
-   *        {@link Inject}.
+   * @param datatypeDetector is the {@link DatatypeDetector} to {@link Inject}.
    */
   @Inject
-  public void setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
+  public void setDatatypeDetector(DatatypeDetector datatypeDetector) {
 
     getInitializationState().requireNotInitilized();
-    this.pojoDescriptorBuilderFactory = pojoDescriptorBuilderFactory;
+    this.datatypeDetector = datatypeDetector;
   }
 
   /**
-   * @return the {@link PojoDescriptorBuilder}.
+   * @return the {@link ReflectionUtil} instance.
    */
-  protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
+  protected ReflectionUtil getReflectionUtil() {
 
-    return this.pojoDescriptorBuilder;
+    return this.reflectionUtil;
   }
 
   /**
-   * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder} to set.
+   * @param reflectionUtil is the {@link ReflectionUtil} to {@link Inject}.
    */
-  public void setPojoDescriptorBuilder(PojoDescriptorBuilder pojoDescriptorBuilder) {
+  @Inject
+  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
-    this.pojoDescriptorBuilder = pojoDescriptorBuilder;
+    getInitializationState().requireNotInitilized();
+    this.reflectionUtil = reflectionUtil;
   }
 
   /**
@@ -161,6 +165,40 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
    * {@inheritDoc}
    */
   @Override
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> List<TO> convertFromEntityList(
+      List<ENTITY> entityList, Class<TO> toType) {
+
+    if (entityList == null) {
+      return null;
+    }
+    List<TO> result = new ArrayList<>(entityList.size());
+    for (ENTITY entity : entityList) {
+      result.add(convertFromEntity(entity, toType));
+    }
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> Set<TO> convertFromEntitySet(
+      Set<ENTITY> entitySet, Class<TO> toType) {
+
+    if (entitySet == null) {
+      return null;
+    }
+    Set<TO> result = new HashSet<>(entitySet.size());
+    for (ENTITY entity : entitySet) {
+      result.add(convertFromEntity(entity, toType));
+    }
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> ENTITY convertToEntity(TO transferObject,
       Class<ENTITY> entityType) {
 
@@ -171,28 +209,74 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
    * {@inheritDoc}
    */
   @Override
-  public void updateModificationCounter(TransferObject transferObject) {
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> List<ENTITY> convertToEntityList(
+      List<TO> transferObjects, Class<ENTITY> entityType) {
 
-    if (transferObject == null) {
-      return;
+    if (transferObjects == null) {
+      return null;
     }
-    if (transferObject instanceof EntityTo) {
-      EntityTo<?> entityTo = (EntityTo<?>) transferObject;
-      // we call this method to update the field...
-      entityTo.getModificationCounter();
-    } else {
-      Class<? extends TransferObject> toClass = transferObject.getClass();
-      PojoDescriptor<? extends TransferObject> descriptor = this.pojoDescriptorBuilder.getDescriptor(toClass);
-      for (PojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
-        PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
-        if (getter != null) {
-          Object propertyValue = getter.invoke(transferObject);
-          if (propertyValue instanceof TransferObject) {
-            updateModificationCounter((TransferObject) propertyValue);
-          }
-        }
-      }
+    List<ENTITY> result = new ArrayList<>(transferObjects.size());
+    for (TO to : transferObjects) {
+      result.add(convertToEntity(to, entityType));
     }
+    return result;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> Set<ENTITY> convertToEntitySet(
+      Set<TO> transferObjects, Class<ENTITY> entityType) {
+
+    if (transferObjects == null) {
+      return null;
+    }
+    Set<ENTITY> result = new HashSet<>(transferObjects.size());
+    for (TO to : transferObjects) {
+      result.add(convertToEntity(to, entityType));
+    }
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void updateModificationCounter(Object container, final boolean remove) {
+
+    Filter<Object> visitor = new Filter<Object>() {
+
+      public boolean accept(Object value) {
+
+        if (TransferObjectUtilImpl.this.datatypeDetector.isDatatype(value.getClass())) {
+          return false;
+        }
+        if (value instanceof EntityTo) {
+          EntityTo<?> eto = (EntityTo<?>) value;
+          eto.getModificationCounter();
+          if (remove) {
+            HELPER.setPersistentEntity(eto, null);
+          }
+        }
+        return true;
+      }
+    };
+    this.reflectionUtil.visitObjectRecursive(container, visitor);
+  }
+
+  /**
+   * Make {@link PersistentEntityAccess} accessible.
+   */
+  private static class EtoHelper extends PersistentEntityAccess {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected <ID> void setPersistentEntity(EntityTo<ID> eto, PersistenceEntity<ID> persistentEntity) {
+
+      super.setPersistentEntity(eto, persistentEntity);
+    }
+  }
 }

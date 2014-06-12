@@ -23,13 +23,16 @@ import java.util.Enumeration;
 import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.util.collection.base.HashKey;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
@@ -41,6 +44,13 @@ import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
@@ -57,9 +67,9 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This class is a collection of utility functions for dealing with {@link java.lang.reflect reflection}.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -76,6 +86,12 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   /** @see #toType(CharSequenceScanner, ClassResolver, Type) */
   private static final CharFilter CHAR_FILTER = new ListCharFilter(false, '<', '[', ',', '?', '>');
 
+  /** @see #getPojoDescriptorBuilderFactory() */
+  private PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
+
+  /** @see #getPojoDescriptorBuilder() */
+  private PojoDescriptorBuilder pojoDescriptorBuilder;
+
   // private static final WeakHashMap<K, V>
 
   /**
@@ -90,19 +106,76 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * This method gets the singleton instance of this {@link ReflectionUtil}.<br/>
    * <b>ATTENTION:</b><br/>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static ReflectionUtil getInstance() {
 
     if (instance == null) {
+      ReflectionUtilImpl impl = null;
       synchronized (ReflectionUtilImpl.class) {
         if (instance == null) {
-          instance = new ReflectionUtilImpl();
+          impl = new ReflectionUtilImpl();
+          instance = impl;
         }
+      }
+      if (impl != null) {
+        // static access is generally discouraged, cyclic dependency forces this ugly initialization to
+        // prevent deadlock.
+        impl.initialize();
       }
     }
     return instance;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.pojoDescriptorBuilderFactory == null) {
+      this.pojoDescriptorBuilderFactory = PojoDescriptorBuilderFactoryImpl.getInstance();
+    }
+    if (this.pojoDescriptorBuilder == null) {
+      this.pojoDescriptorBuilder = this.pojoDescriptorBuilderFactory.createPrivateFieldDescriptorBuilder();
+    }
+  }
+
+  /**
+   * @return the instance of {@link PojoDescriptorBuilderFactory}.
+   */
+  protected PojoDescriptorBuilderFactory getPojoDescriptorBuilderFactory() {
+
+    return this.pojoDescriptorBuilderFactory;
+  }
+
+  /**
+   * @param pojoDescriptorBuilderFactory is the instance of {@link PojoDescriptorBuilderFactory} to
+   *        {@link Inject}.
+   */
+  @Inject
+  public void setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.pojoDescriptorBuilderFactory = pojoDescriptorBuilderFactory;
+  }
+
+  /**
+   * @return the {@link PojoDescriptorBuilder}.
+   */
+  protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
+
+    return this.pojoDescriptorBuilder;
+  }
+
+  /**
+   * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder} to set.
+   */
+  public void setPojoDescriptorBuilder(PojoDescriptorBuilder pojoDescriptorBuilder) {
+
+    this.pojoDescriptorBuilder = pojoDescriptorBuilder;
   }
 
   /**
@@ -173,7 +246,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path.<br>
    * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
    * NOT be unique. In such case it will be unspecified which of the possible paths is used.
-   * 
+   *
    * @param ancestor is the super-class or super-interface of <code>descendant</code>.
    * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
    * @return the sub-class or sub-interface on the hierarchy-path from <code>descendant</code> up to
@@ -214,7 +287,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path.<br>
    * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
    * NOT be unique. In such case it will be unspecified which of the possible paths is used.
-   * 
+   *
    * @param ancestor is the super-class or super-interface of <code>descendant</code>.
    * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
    * @return the sub-class or sub-interface on the hierarchy-path from <code>descendant</code> up to
@@ -294,7 +367,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * This method parses the given <code>type</code> as generic {@link Type}.<br>
    * This would be easier when using <code>StringParser</code> but we want to avoid the dependency on
    * <code>util-misc</code>.
-   * 
+   *
    * @param parser is the string-parser on the type string to parse.
    * @param resolver is used to resolve classes.
    * @param owner is the {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type} or
@@ -615,7 +688,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   /**
    * This method scans the given <code>packageDirectory</code> recursively for resources.
-   * 
+   *
    * @param packageDirectory is the directory representing the {@link Package}.
    * @param qualifiedNameBuilder is a {@link StringBuilder} containing the qualified prefix (the
    *        {@link Package} with a trailing dot).
@@ -688,7 +761,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   /**
    * @see #findClassNames(String, boolean, Filter, ClassLoader)
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
    *        be included in the search.
@@ -771,7 +844,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   /**
    * This method does the actual magic to locate resources on the classpath.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator
    *        (e.g. "net.sf.mmm.util.reflect).
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
@@ -898,7 +971,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * This method gets the default {@link ClassLoader} to use. This should be the
    * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to alternatives if no such
    * {@link ClassLoader} is available.
-   * 
+   *
    * @return the default {@link ClassLoader} to use.
    */
   protected ClassLoader getDefaultClassLoader() {
@@ -910,7 +983,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * This method gets the default {@link ClassLoader} to use. This should be the
    * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to alternatives if no such
    * {@link ClassLoader} is available.
-   * 
+   *
    * @param fallbackClass is used to {@link Class#getClassLoader() retrieve} a {@link ClassLoader} as fallback
    *        if the {@link Thread#getContextClassLoader() ContextClassLoader} is not available.
    * @return the default {@link ClassLoader} to use.
@@ -927,5 +1000,92 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
       }
     }
     return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void visitObjectRecursive(Object object, Filter<Object> visitor) {
+
+    visitObjectRecursive(object, visitor, true);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void visitObjectRecursive(Object object, Filter<Object> visitor, boolean loopProtection) {
+
+    Set<HashKey<Object>> visitedSet = null;
+    if (loopProtection) {
+      visitedSet = new HashSet<>();
+    }
+    visitObjectRecursive(object, visitor, visitedSet);
+  }
+
+  /**
+   * @see #visitObjectRecursive(Object, Filter, boolean)
+   *
+   * @param object is the {@link Object} to traverse recursively.
+   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed
+   *        {@link Object}s. If an {@link Object} is not {@link Filter#accept(Object) accepted} by this
+   *        {@link Filter} the recursion stops at this point.
+   * @param visitedSet is the {@link Set} where to collect all object to visit in order to prevent infinity
+   *        loops or <code>null</code> to disable.
+   */
+  protected void visitObjectRecursive(Object object, Filter<Object> visitor, Set<HashKey<Object>> visitedSet) {
+
+    if (object == null) {
+      return;
+    }
+    if (visitedSet != null) {
+      HashKey<Object> hashKey = new HashKey<Object>(object);
+      boolean added = visitedSet.add(hashKey);
+      if (!added) {
+        // already visited same object...
+        return;
+      }
+    }
+    boolean accepted = visitor.accept(object);
+    if (!accepted) {
+      return;
+    }
+    if (object instanceof Collection) {
+      Collection<?> collection = (Collection<?>) object;
+      for (Object element : collection) {
+        visitObjectRecursive(element, visitor, visitedSet);
+      }
+    } else if (object instanceof Map) {
+      Map<?, ?> map = (Map<?, ?>) object;
+      // ETOs should only be used as values and not as keys...
+      for (Map.Entry<?, ?> entry : map.entrySet()) {
+        visitObjectRecursive(entry.getKey(), visitor, visitedSet);
+        visitObjectRecursive(entry.getValue(), visitor, visitedSet);
+      }
+    } else if (object instanceof Object[]) {
+      Object[] array = (Object[]) object;
+      for (Object element : array) {
+        visitObjectRecursive(element, visitor, visitedSet);
+      }
+    } else if (object instanceof Type) {
+      // we do not traverse types (Class, ParameterizedType, TypeVariable, ...)
+      return;
+    } else {
+      Class<?> objectClass = object.getClass();
+      if (objectClass.isArray()) {
+        return;
+      }
+      PojoDescriptor<?> descriptor = this.pojoDescriptorBuilder.getDescriptor(objectClass);
+      for (PojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
+        if (!"class".equals(propertyDescriptor.getName())) {
+          PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
+          if (getter != null) {
+            Object propertyValue = getter.invoke(object);
+            visitObjectRecursive(propertyValue, visitor, visitedSet);
+          }
+        }
+      }
+    }
   }
 }

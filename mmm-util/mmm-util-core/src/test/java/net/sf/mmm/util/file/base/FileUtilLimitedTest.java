@@ -49,7 +49,7 @@ public class FileUtilLimitedTest extends Assert {
     assertEquals("foo/bar", util.normalizePath("foo\\//.\\./bar/.", '/'));
     String homeDir = "~";
     assertEquals(homeDir, util.normalizePath("~", '/'));
-    assertEquals(homeDir + "/", util.normalizePath("~/", '/'));
+    assertEquals(homeDir, util.normalizePath("~/", '/'));
     assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
     assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
     assertEquals(homeDir + "/.mmm/search.xml", util.normalizePath("~/.mmm/search.xml", '/'));

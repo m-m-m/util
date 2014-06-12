@@ -18,10 +18,10 @@ import net.sf.mmm.util.resource.api.DataResource;
 /**
  * This is the interface for a collection of utility functions to deal with {@link java.lang.reflect
  * reflection}.
- * 
+ *
  * @see AnnotationUtil
  * @see net.sf.mmm.util.reflect.base.ReflectionUtilImpl
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -36,14 +36,14 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * An empty {@link Annotation}-array.
-   * 
+   *
    * @since 4.0.0
    */
   Annotation[] NO_ANNOTATIONS = new Annotation[0];
 
   /**
    * This method gets the {@link Object#getClass() classes} of the given objects.
-   * 
+   *
    * @param objects is an array containing the objects for that the classes are requested.
    * @return an array of the same length as the given array. At each position the returned array contains the
    *         {@link Object#getClass() class} of the object from the given array at the same position or
@@ -54,7 +54,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method creates the {@link Class} reflecting an {@link Class#isArray() array} of the given
    * <code>{@link Class#getComponentType() componentType}</code>.
-   * 
+   *
    * @param componentType is the {@link Class#getComponentType() component type} .
    * @return the according {@link Class#isArray() array}-class.
    */
@@ -63,9 +63,9 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method is the analogy to {@link Class#forName(String)} for creating a {@link Type} instance from
    * {@link String}.
-   * 
+   *
    * @see #toType(String, ClassResolver)
-   * 
+   *
    * @param type is the string representation of the requested type.
    * @return the requested type.
    * @throws TypeNotFoundException if a class could NOT be found (e.g. in
@@ -79,7 +79,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method is the analogy to {@link Class#forName(String)} for creating a {@link Type} instance from
    * {@link String}.
-   * 
+   *
    * @param type is the string representation of the requested type.
    * @param resolver is used to resolve classes.
    * @return the requested type.
@@ -94,7 +94,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method gets the string representation of a {@link Type}. Instead of
    * <code>{@link Type}.toString()</code> it returns {@link Class#getName()} if the type is a {@link Class}.
-   * 
+   *
    * @param type is the type to get as string.
    * @return the string representation of the given <code>type</code>.
    */
@@ -103,7 +103,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method gets the string representation of a {@link Type}. Instead of
    * <code>{@link Type}.toString()</code> it returns {@link Class#getName()} if the type is a {@link Class}.
-   * 
+   *
    * @param type is the type to get as string.
    * @param appendable is where to {@link Appendable#append(CharSequence) append} the string representation
    *        to.
@@ -117,7 +117,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method compares the given classes.
-   * 
+   *
    * @param class1 is the first class.
    * @param class2 is the second class.
    * @return <ul>
@@ -133,7 +133,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * This method determines if the given <code>interfaceClass</code> is a marker-interface (e.g.
    * {@link java.io.Serializable} or {@link Cloneable}). A marker-interface is also called a
    * tagging-interface.
-   * 
+   *
    * @param interfaceClass is the {@link Class} reflecting the interface to check.
    * @return <code>true</code> if the given <code>interfaceClass</code> is a marker-interface,
    *         <code>false</code> otherwise (if regular interface or no interface at all).
@@ -143,7 +143,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method gets the {@link java.lang.reflect.Field#get(java.lang.Object) value} of a
    * {@link java.lang.reflect.Modifier#isStatic(int) static} {@link java.lang.reflect.Field field} .
-   * 
+   *
    * @param <T> the templated type the requested field is assigned to.
    * @param type is the class or interface containing the requested field.
    * @param fieldName is the {@link java.lang.reflect.Field#getName() name} of the requested field.
@@ -170,7 +170,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
       IllegalArgumentException;
 
   /**
-   * 
+   *
    * @param <T> the templated type the requested field is assigned to.
    * @param type is the class or interface containing the requested field.
    * @param fieldName is the {@link java.lang.reflect.Field#getName() name} of the requested field.
@@ -197,7 +197,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * This method gets the parent method of the given <code>method</code>. The parent method is the method
    * overridden (is the sense of {@link Override}) by the given <code>method</code> or directly inherited from
    * an {@link Class#getInterfaces() interface}.
-   * 
+   *
    * @param method is the method.
    * @return the parent method or <code>null</code> if no such method exists.
    * @throws SecurityException if access has been denied by the {@link SecurityManager}.
@@ -208,9 +208,9 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * This method gets the method {@link Class#getMethod(String, Class[]) identified} by
    * <code>methodName</code> and <code>parameterTypes</code> that is NOT {@link Method#getDeclaringClass()
    * declared} but inherited by the given <code>declaringClass</code>.
-   * 
+   *
    * @see #getParentMethod(Class, String, Class[])
-   * 
+   *
    * @param inheritingClass is the class inheriting the requested method.
    * @param methodName is the {@link Method#getName() name} of the requested method.
    * @param parameterTypes is the {@link Method#getParameterTypes() signature} of the requested method.
@@ -226,7 +226,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
    *        be included in the search.
@@ -241,7 +241,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
    *        be included in the search.
@@ -261,7 +261,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
    *        be included in the search.
@@ -282,7 +282,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan.
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
    *        be included in the search.
@@ -294,7 +294,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method loads the classes given as {@link Collection} of {@link Class#getName() fully qualified
    * names} by <code>qualifiedClassNames</code> and returns them as {@link Set}.
-   * 
+   *
    * @param qualifiedClassNames is a collection containing the {@link Class#getName() qualified names} of the
    *        classes to load.
    * @return a {@link Set} with all loaded classes.
@@ -306,7 +306,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * This method loads the classes given as {@link Collection} of {@link Class#getName() fully qualified
    * names} by <code>qualifiedClassNames</code>. It returns a {@link Set} containing only those loaded classes
    * that are {@link Filter#accept(Object) accepted} by the given <code>filter</code>.
-   * 
+   *
    * @param qualifiedClassNames is a collection containing the {@link Class#getName() qualified names} of the
    *        classes to load.
    * @param filter is used to filter the loaded classes.
@@ -321,7 +321,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * This method loads the classes given as {@link Collection} of names by <code>classNames</code> using the
    * given <code>classResolver</code>. It returns a {@link Set} containing only those loaded classes that are
    * {@link Filter#accept(Object) accepted} by the given <code>filter</code>.
-   * 
+   *
    * @param classNames is a collection containing the names of the classes to load. The class names should
    *        typically be the {@link Class#getName() qualified names} of the classes to load. But this may
    *        differ depending on the <code>classResolver</code>.
@@ -340,7 +340,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator
    *        (e.g. "net.sf.mmm.util.reflect).
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
@@ -363,7 +363,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator
    *        (e.g. "net.sf.mmm.util.reflect).
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
@@ -387,7 +387,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator
    *        (e.g. "net.sf.mmm.util.reflect).
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
@@ -405,7 +405,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * This method finds all resources that match to the given <code>absoluteClasspath</code>. Unlike
    * {@link net.sf.mmm.util.resource.base.ClasspathResource#ClasspathResource(String)} this method will return
    * all resources that with the given classpath (e.g. out of multiple JAR-files).<br>
-   * 
+   *
    * @param absoluteClasspath is the absolute path to the resource. E.g.
    *        "net/sf/mmm/util/resource/ClasspathResource.txt".
    * @return a {@link Set} with all requested {@link DataResource resources}.
@@ -420,7 +420,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
-   * 
+   *
    * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator
    *        (e.g. "net.sf.mmm.util.reflect).
    * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
@@ -434,5 +434,35 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    */
   Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter,
       ClassLoader classLoader) throws RuntimeIoException;
+
+  /**
+   * This method recursively traverses all objects starting from the given {@link Object} via all properties
+   * and contents. It simply delegates to {@link #visitObjectRecursive(Object, Filter, boolean)} using
+   * <code>true</code> for <code>loopProtection</code>.
+   *
+   * @param object is the {@link Object} to traverse recursively.
+   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed
+   *        {@link Object}s. If an {@link Object} is not {@link Filter#accept(Object) accepted} by this
+   *        {@link Filter} the recursion stops at this point.
+   */
+  void visitObjectRecursive(Object object, Filter<Object> visitor);
+
+  /**
+   * This method recursively traverses all objects starting from the given {@link Object} via all properties
+   * and contents. It supports {@link java.util.Collection}s, {@link java.util.Map}s, {@link Object}
+   * {@link Class#isArray() arrays}, and {@link net.sf.mmm.util.pojo.api.Pojo}s. <br/>
+   * <b>ATTENTION:</b><br/>
+   * This method will NOT traverse into {@link Class#isPrimitive() primitive} {@link Class#isArray() arrays}
+   * for performance reasons. Simply realize this inside your <code>visitor</code> if you need it.
+   *
+   * @param object is the {@link Object} to traverse recursively.
+   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed
+   *        {@link Object}s. If an {@link Object} is not {@link Filter#accept(Object) accepted} by this
+   *        {@link Filter} the recursion stops at this point.
+   * @param loopProtection - <code>true</code> to collect all visited {@link Object}s in a {@link Set} in
+   *        order to prevent infinity loops, <code>false</code> otherwise (to save performance if no loops are
+   *        possible for the given {@link Object}).
+   */
+  void visitObjectRecursive(Object object, Filter<Object> visitor, boolean loopProtection);
 
 }

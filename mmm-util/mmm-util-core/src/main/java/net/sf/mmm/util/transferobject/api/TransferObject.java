@@ -9,7 +9,7 @@ import net.sf.mmm.util.entity.api.Entity;
  * {@link net.sf.mmm.util.pojo.api.Pojo} used to transfer data between application layers (e.g. from
  * <em>logic</em> to <em>client</em> layer). For more information see the <a
  * href="http://www.corej2eepatterns.com/Patterns2ndEd/TransferObject.htm">Transfer Object Pattern</a>.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
