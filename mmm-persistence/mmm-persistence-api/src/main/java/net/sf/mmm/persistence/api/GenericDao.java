@@ -19,15 +19,15 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * {@link GenericDao} for some type of {@link GenericEntity}, a generic implementation is used as fallback.<br>
  * The {@link PersistenceManager} can be seen as the manager of all {@link GenericDao} and acts as front-end
  * to them.
- * 
+ *
  * @see GenericEntity
  * @see PersistenceManager
- * 
+ *
  * @param <ID> is the type of the {@link GenericEntity#getId() primary key} of the managed
  *        {@link GenericEntity}.
  * @param <ENTITY> is the {@link #getEntityClassReadWrite() type} of the managed entity. We strongly recommend
  *        to extend {@link net.sf.mmm.util.entity.api.PersistenceEntity}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @ComponentSpecification(plugin = true)
@@ -39,7 +39,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * implementations are possible. This allows to use interfaces for entities and use the persistence layer as
    * API without knowing the implementation. However you are still free to ignore this method and work with
    * the POJO approach.
-   * 
+   *
    * @return the new instance.
    * @throws ReflectionException is the instantiation failed.
    */
@@ -48,7 +48,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
   /**
    * This method gets the implementation class reflecting the {@link GenericEntity} managed by this
    * {@link GenericDao}.
-   * 
+   *
    * @return the according entity-class.
    */
   Class<? extends ENTITY> getEntityClassImplementation();
@@ -60,7 +60,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * return the same result as {@link #getEntityClassImplementation()}. However, you can also use an interface
    * with the getters of the entity. If there is only one interface containing both setters and getters, this
    * method and {@link #getEntityClassReadWrite()} should both return that interface.
-   * 
+   *
    * @return the according entity-class.
    */
   Class<? super ENTITY> getEntityClassReadOnly();
@@ -72,16 +72,16 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * method will simply return the same result as {@link #getEntityClassImplementation()}. However, you can
    * also use an interface with the getters and setters (extending {@link #getEntityClassReadOnly()}) of the
    * entity.
-   * 
+   *
    * @return the according entity-class.
    */
   Class<ENTITY> getEntityClassReadWrite();
 
   /**
    * This method loads the {@link GenericEntity} with the given <code>id</code> from the persistent store.
-   * 
+   *
    * @see javax.persistence.EntityManager#find(Class, Object)
-   * 
+   *
    * @param id is the {@link GenericEntity#getId() primary key} of the requested {@link GenericEntity entity}.
    * @return the requested {@link GenericEntity entity}.
    * @throws ObjectNotFoundException if the requested {@link GenericEntity entity} could NOT be found. Unlike
@@ -93,9 +93,9 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
 
   /**
    * This method loads the {@link GenericEntity} with the given <code>id</code> from the persistent store.
-   * 
+   *
    * @see javax.persistence.EntityManager#find(Class, Object)
-   * 
+   *
    * @param id is the {@link GenericEntity#getId() primary key} of the requested {@link GenericEntity entity}.
    * @return the requested {@link GenericEntity entity} or <code>null</code> if it does NOT exist in
    *         persistent store.
@@ -105,9 +105,9 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
   /**
    * This method creates a lazy reference proxy of the {@link GenericEntity} with the given <code>id</code>
    * from the persistent store.
-   * 
+   *
    * @see javax.persistence.EntityManager#getReference(Class, Object)
-   * 
+   *
    * @param id is the {@link GenericEntity#getId() primary key} of the requested {@link GenericEntity entity}.
    * @return the requested {@link GenericEntity entity}.
    */
@@ -127,7 +127,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * {@link net.sf.mmm.util.entity.api.PersistenceEntity#STATE_MANAGED managed} {@link GenericEntity entity}
    * to make your code more explicit. This will also guarantee that potential custom-logic of your
    * {@link GenericDao DAO} is invoked.
-   * 
+   *
    * @param entity is the {@link GenericEntity} to save.
    */
   void save(ENTITY entity);
@@ -136,7 +136,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * This method deletes the given <code>entity</code> from the persistent store.<br>
    * If the <code>entity</code> is {@link net.sf.mmm.util.entity.api.PersistenceEntity#STATE_NEW transient}
    * this method has no effect.<br>
-   * 
+   *
    * @param entity is the {@link GenericEntity} to save.
    */
   void delete(ENTITY entity);
@@ -144,7 +144,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
   /**
    * This method deletes the {@link GenericEntity entity} identified by the given <code>id</code> from the
    * persistent store.<br>
-   * 
+   *
    * @param id is the {@link GenericEntity#getId() primary key} of the {@link GenericEntity entity} to delete.
    */
   void deleteById(ID id);

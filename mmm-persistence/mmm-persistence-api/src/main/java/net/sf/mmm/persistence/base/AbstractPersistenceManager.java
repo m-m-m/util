@@ -159,6 +159,10 @@ public abstract class AbstractPersistenceManager extends AbstractLoggableCompone
     // this is a very simple way - it might be wrong...
     Class<?> entityClass = entity.getClass();
     if (!this.class2managerMap.containsKey(entityClass)) {
+      // if (entity instanceof HibernateProxy) {
+      // entityClass = ((HibernateProxy) proxy).getHibernateLazyInitializer().getImplementation().getClass();
+      // return (Class<? extends GenericEntity<?>>) entity.getClass();
+      // }
       entityClass = entityClass.getSuperclass();
       if (!this.class2managerMap.containsKey(entityClass)) {
         throw new ObjectNotFoundException(GenericDao.class.getSimpleName(), entity.getClass());

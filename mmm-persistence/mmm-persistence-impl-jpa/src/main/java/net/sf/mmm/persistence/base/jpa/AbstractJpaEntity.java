@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.base.jpa;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,9 +16,9 @@ import net.sf.mmm.util.entity.base.AbstractRevisionedEntity;
 /**
  * This is the abstract base-implementation of a {@link net.sf.mmm.util.entity.api.GenericEntity} using the
  * {@link javax.persistence JPA} (Java Persistence API).<br>
- * 
+ *
  * @param <ID> is the type of the {@link #getId() primary key}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -40,7 +41,7 @@ public abstract class AbstractJpaEntity<ID> extends AbstractRevisionedEntity<ID>
    * If your ID is not {@link GeneratedValue generated}, you need to override this method. In this case you
    * can also override {@link #setId(Object)} to change the visibility to public.<br/>
    * <br/>
-   * 
+   *
    * {@inheritDoc}
    */
   @Override
@@ -56,6 +57,7 @@ public abstract class AbstractJpaEntity<ID> extends AbstractRevisionedEntity<ID>
    */
   @Override
   @Version
+  @Column(name = "version")
   public int getModificationCounter() {
 
     return super.getModificationCounter();
