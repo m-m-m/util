@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transferobject.api;
 
-import net.sf.mmm.util.exception.api.NlsIllegalStateException;
-
 /**
  * This is the abstract base class for a {@link TransferObject}. It already contains a small and simple
  * infrastructure for {@link #clone() cloning}, {@link #equals(Object)} and {@link #hashCode()} as well as
@@ -34,11 +32,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
   @Override
   public AbstractTransferObject clone() {
 
-    try {
-      return (AbstractTransferObject) super.clone();
-    } catch (CloneNotSupportedException e) {
-      throw new NlsIllegalStateException(e);
-    }
+    return (AbstractTransferObject) JavaScriptUtil.getInstance().clone(this);
   }
 
   /**
