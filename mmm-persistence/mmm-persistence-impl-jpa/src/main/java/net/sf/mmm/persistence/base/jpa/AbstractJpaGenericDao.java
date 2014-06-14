@@ -10,7 +10,6 @@ import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.entity.api.GenericEntity;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
-import net.sf.mmm.util.exception.api.ObjectNotFoundUserException;
 
 /**
  * This is the abstract base-implementation of a {@link net.sf.mmm.persistence.api.GenericDao} using the
@@ -72,19 +71,6 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
 
     getInitializationState().requireNotInitilized();
     this.entityManager = entityManager;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ENTITY find(ID id) throws ObjectNotFoundException {
-
-    ENTITY entity = findIfExists(id);
-    if (entity == null) {
-      throw new ObjectNotFoundUserException(getEntityClass(), id);
-    }
-    return entity;
   }
 
   /**

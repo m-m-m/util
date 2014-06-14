@@ -5,6 +5,8 @@ package net.sf.mmm.persistence.base;
 import net.sf.mmm.persistence.api.GenericDao;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.entity.api.GenericEntity;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundUserException;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.base.DefaultPojoFactory;
 import net.sf.mmm.util.reflect.api.ReflectionException;
@@ -69,6 +71,19 @@ public abstract class AbstractGenericDao<ID, ENTITY extends GenericEntity<ID>> e
   public ENTITY create() throws ReflectionException {
 
     return getPojoFactory().newInstance(getEntityClass());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ENTITY find(ID id) throws ObjectNotFoundException {
+
+    ENTITY entity = findIfExists(id);
+    if (entity == null) {
+      throw new ObjectNotFoundUserException(getEntityClass(), id);
+    }
+    return entity;
   }
 
   /**
