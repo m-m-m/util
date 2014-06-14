@@ -8,7 +8,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-transaction-api</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>${net.sf.mmm.transaction.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project provides the API of the transaction-manager.</description>

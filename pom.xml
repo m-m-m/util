@@ -57,6 +57,7 @@
 
     <net.sf.mmm.service.version>1.0.0-SNAPSHOT</net.sf.mmm.service.version>
     <net.sf.mmm.persistence.version>1.0.0-SNAPSHOT</net.sf.mmm.persistence.version>
+    <net.sf.mmm.transaction.version>1.0.0-SNAPSHOT</net.sf.mmm.transaction.version>
 
     <mmm.bootclasspath>bootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</mmm.bootclasspath>
   </properties>
@@ -299,6 +300,16 @@
         <groupId>net.sf.m-m-m</groupId>
         <artifactId>mmm-persistence-impl-hibernate</artifactId>
         <version>${net.sf.mmm.persistence.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-transaction-api</artifactId>
+        <version>${net.sf.mmm.transaction.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-transaction-impl-spring</artifactId>
+        <version>${net.sf.mmm.transaction.version}</version>
       </dependency>
       <dependency>
         <groupId>net.sf.m-m-m</groupId>
