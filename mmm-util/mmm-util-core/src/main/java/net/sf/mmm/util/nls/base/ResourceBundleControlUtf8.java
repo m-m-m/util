@@ -37,6 +37,15 @@ public class ResourceBundleControlUtf8 extends Control {
 
     // copy of default implementation but with UTF-8 encoding.
     String bundleName = toBundleName(baseName, locale);
+    try {
+      Class<?> bundleClass = Class.forName(bundleName, true, loader);
+      if (ResourceBundle.class.isAssignableFrom(bundleClass)) {
+        return (ResourceBundle) bundleClass.newInstance();
+      }
+    } catch (ClassNotFoundException e) {
+      // ignore
+    }
+
     String resourceName = toResourceName(bundleName, "properties");
     ResourceBundle bundle = null;
     InputStream stream = null;
