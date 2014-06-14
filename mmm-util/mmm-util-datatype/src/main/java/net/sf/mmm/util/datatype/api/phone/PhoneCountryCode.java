@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.phone;
 
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
-import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.accessor;
 
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccessor;
 import net.sf.mmm.util.reflect.api.GenericType;
 

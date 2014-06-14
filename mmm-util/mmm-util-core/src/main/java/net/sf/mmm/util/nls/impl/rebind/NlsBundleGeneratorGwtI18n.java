@@ -4,7 +4,7 @@ package net.sf.mmm.util.nls.impl.rebind;
 
 import java.io.PrintWriter;
 
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsBundleKey;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;

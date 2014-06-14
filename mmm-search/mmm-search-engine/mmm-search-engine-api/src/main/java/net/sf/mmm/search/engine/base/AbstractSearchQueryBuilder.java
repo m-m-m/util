@@ -12,15 +12,15 @@ import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
 import net.sf.mmm.search.engine.api.SearchQueryBuilderOptions;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.UnicodeUtil;
 
 /**
  * This is the abstract base implementation of the {@link SearchQueryBuilder} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject implements SearchQueryBuilder {
@@ -58,7 +58,7 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
 
   /**
    * This method creates (or gets) a query that matches anything.
-   * 
+   *
    * @return a query that matches any {@link SearchEntry entry}.
    */
   protected SearchQuery createNullQuery() {
@@ -77,7 +77,7 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
 
   /**
    * @see #parseStandardQuery(String, SearchQueryBuilderOptions)
-   * 
+   *
    * @param parser is the scanner of the query-string.
    * @param options are the {@link SearchQueryBuilderOptions}.
    * @param defaultProperty is the property to use as default for unqualified search-terms.
@@ -143,7 +143,7 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
   }
 
   /**
-   * 
+   *
    * @param parser is the scanner of the query-string.
    * @param defaultField is the field to use as default for unqualified search-terms.
    * @param depth is the depth of the query expression (number of open parenthesis).
@@ -220,7 +220,7 @@ public abstract class AbstractSearchQueryBuilder extends AbstractLoggableObject 
     } catch (NlsRuntimeException e) {
       options.getErrorHandler().handleError(parser.getOriginalString(), start, parser.getCurrentIndex(), e);
     } catch (RuntimeException e) {
-      SearchQueryParseException ex = new SearchQueryParseException(e);
+      SearchQueryParseException ex = new SearchQueryParseException(e, parser.getOriginalString());
       options.getErrorHandler().handleError(parser.getOriginalString(), start, parser.getCurrentIndex(), ex);
     }
     return null;

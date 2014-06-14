@@ -4,7 +4,7 @@ package net.sf.mmm.search.view.api;
 
 import javax.servlet.ServletRequest;
 
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This class allows to {@link #getContext(ServletRequest) get} the {@link SearchViewContext} from anywhere

@@ -3,8 +3,8 @@
 package net.sf.mmm.util.transferobject.api;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 

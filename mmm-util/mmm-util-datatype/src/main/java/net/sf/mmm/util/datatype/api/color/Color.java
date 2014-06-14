@@ -5,10 +5,10 @@ package net.sf.mmm.util.datatype.api.color;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
-import net.sf.mmm.util.lang.base.GwtHelper;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.lang.api.GwtHelper;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**

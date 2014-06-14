@@ -74,7 +74,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   public static final String OPTION_LOCALE = "--locale";
 
   /** @see #getPath() */
-  private static final String DEFAULT_BASE_PATH = "src/main/resources";
+  protected static final String DEFAULT_BASE_PATH = "src/main/resources";
 
   /** @see #getEncoding() */
   private static final String DEFAULT_ENCODING = "UTF-8";

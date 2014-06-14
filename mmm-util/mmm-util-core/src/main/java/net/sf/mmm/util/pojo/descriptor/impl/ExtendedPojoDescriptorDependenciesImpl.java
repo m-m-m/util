@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependenciesImpl;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer;

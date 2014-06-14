@@ -10,8 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.file.api.FileUtilLimited;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**

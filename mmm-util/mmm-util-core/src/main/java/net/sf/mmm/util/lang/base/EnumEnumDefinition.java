@@ -8,11 +8,11 @@ import java.util.List;
 
 import net.sf.mmm.util.collection.base.NodeCycle;
 import net.sf.mmm.util.collection.base.NodeCycleException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumTypeWithCategory;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 /**
  * This class implements {@link EnumDefinition} for a java {@link Enum}.<br/>

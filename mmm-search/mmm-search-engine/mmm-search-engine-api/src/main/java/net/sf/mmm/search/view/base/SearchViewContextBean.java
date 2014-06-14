@@ -10,7 +10,7 @@ import net.sf.mmm.search.view.api.SearchViewConfiguration;
 import net.sf.mmm.search.view.api.SearchViewContext;
 import net.sf.mmm.search.view.api.SearchViewLogic;
 import net.sf.mmm.search.view.api.SearchViewRequestParameters;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This class contains represents the context of a search-request.

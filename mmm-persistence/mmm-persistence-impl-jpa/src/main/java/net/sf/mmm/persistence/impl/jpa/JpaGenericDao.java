@@ -11,20 +11,20 @@ import net.sf.mmm.util.entity.api.GenericEntity;
  * 
  * @param <ID> is the type of the {@link GenericEntity#getId() primary key} of the managed
  *        {@link GenericEntity}.
- * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
  */
 public class JpaGenericDao<ID, ENTITY extends GenericEntity<ID>> extends AbstractJpaGenericDao<ID, ENTITY> {
 
-  /** @see #getEntityClassImplementation() */
+  /** @see #getEntityClass() */
   private Class<? extends ENTITY> entityClassImplementation;
 
   /**
    * The constructor.
    * 
-   * @param entityClassImplementation is the {@link #getEntityClassImplementation()}.
+   * @param entityClassImplementation is the {@link #getEntityClass()}.
    */
   public JpaGenericDao(Class<? extends ENTITY> entityClassImplementation) {
 
@@ -36,7 +36,7 @@ public class JpaGenericDao<ID, ENTITY extends GenericEntity<ID>> extends Abstrac
    * {@inheritDoc}
    */
   @Override
-  public Class<? extends ENTITY> getEntityClassImplementation() {
+  public Class<? extends ENTITY> getEntityClass() {
 
     return this.entityClassImplementation;
   }

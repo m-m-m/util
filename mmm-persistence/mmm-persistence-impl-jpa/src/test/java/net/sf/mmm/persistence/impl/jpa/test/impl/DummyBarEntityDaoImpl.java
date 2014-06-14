@@ -7,11 +7,10 @@ import javax.inject.Named;
 import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityDao;
-import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityView;
 
 /**
  * This is the implementation of the {@link DummyBarEntityDao} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Named
@@ -21,7 +20,7 @@ public class DummyBarEntityDaoImpl extends AbstractJpaGenericDao<Long, DummyBarE
    * {@inheritDoc}
    */
   @Override
-  public Class<DummyBarEntity> getEntityClassReadWrite() {
+  public Class<DummyBarEntity> getEntityApiClass() {
 
     return DummyBarEntity.class;
   }
@@ -29,16 +28,7 @@ public class DummyBarEntityDaoImpl extends AbstractJpaGenericDao<Long, DummyBarE
   /**
    * {@inheritDoc}
    */
-  @Override
-  public Class<? super DummyBarEntity> getEntityClassReadOnly() {
-
-    return DummyBarEntityView.class;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public Class<DummyBarEntityImpl> getEntityClassImplementation() {
+  public Class<DummyBarEntityImpl> getEntityClass() {
 
     return DummyBarEntityImpl.class;
   }

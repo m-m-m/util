@@ -22,10 +22,10 @@ import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilder;
 import net.sf.mmm.search.impl.lucene.LuceneDirectoryBuilderImpl;
 import net.sf.mmm.util.component.api.PeriodicRefresher;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.IndexReader;

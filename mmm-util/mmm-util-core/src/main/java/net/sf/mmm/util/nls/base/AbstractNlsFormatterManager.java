@@ -5,13 +5,13 @@ package net.sf.mmm.util.nls.base;
 import javax.inject.Inject;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
-import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.Justification;

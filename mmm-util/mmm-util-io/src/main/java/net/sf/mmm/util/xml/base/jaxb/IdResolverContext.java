@@ -9,10 +9,10 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.ComposedException;
+import net.sf.mmm.util.exception.api.ComposedException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsObject;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This class is a context for {@link InternalValidatingIdResolver}. JAXB is a little strange: It is using a

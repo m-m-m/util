@@ -4,9 +4,9 @@ package net.sf.mmm.util.date.api;
 
 import java.util.Calendar;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * The enum contains the seven days of a week in Gregorian calendar.

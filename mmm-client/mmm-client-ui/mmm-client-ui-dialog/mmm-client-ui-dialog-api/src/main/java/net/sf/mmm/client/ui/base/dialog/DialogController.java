@@ -13,9 +13,9 @@ import net.sf.mmm.client.ui.api.dialog.DialogConstants;
 import net.sf.mmm.client.ui.api.dialog.DialogManager;
 import net.sf.mmm.client.ui.api.dialog.DialogPlace;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
 
 /**
  * This is the abstract base class for the {@link AbstractDialogController controller} of a {@link Dialog}.

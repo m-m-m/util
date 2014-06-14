@@ -124,7 +124,7 @@ public class EnversTest extends Assert {
     RevisionedPersistenceManager persistenceManager = getPersistenceManager();
     DummyRevisionedFooEntityDao fooManager = (DummyRevisionedFooEntityDao) persistenceManager
         .getDao(DummyRevisionedFooEntity.class);
-    assertSame(DummyRevisionedFooEntity.class, fooManager.getEntityClassImplementation());
+    assertSame(DummyRevisionedFooEntity.class, fooManager.getEntityClass());
     DummyRevisionedFooEntity foo = new DummyRevisionedFooEntity();
     foo.setValue("This is magic");
     fooManager.save(foo);

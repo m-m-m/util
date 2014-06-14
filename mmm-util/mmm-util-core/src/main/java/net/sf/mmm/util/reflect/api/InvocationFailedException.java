@@ -11,7 +11,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * An {@link InvocationFailedException} is thrown if an invocation failed. Typically invocation means a
  * {@link java.lang.reflect reflective} call of an {@link AccessibleObject}. Unlike
  * {@link InvocationTargetException} this is a {@link RuntimeException} and has
- * {@link net.sf.mmm.util.nls.api.NlsThrowable native-language-support}.
+ * {@link net.sf.mmm.util.exception.api.NlsThrowable native-language-support}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

@@ -5,9 +5,9 @@ package net.sf.mmm.util.resource.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;

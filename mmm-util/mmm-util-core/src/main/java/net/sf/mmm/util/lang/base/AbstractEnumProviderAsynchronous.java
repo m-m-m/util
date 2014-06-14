@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.lang.api.EnumType;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base implementation of {@link AbstractEnumProvider} that retrieves

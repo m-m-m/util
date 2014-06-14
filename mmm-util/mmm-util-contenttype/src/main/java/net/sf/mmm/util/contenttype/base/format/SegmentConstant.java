@@ -6,10 +6,10 @@ import java.io.UnsupportedEncodingException;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.io.api.EncodingUtil;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**

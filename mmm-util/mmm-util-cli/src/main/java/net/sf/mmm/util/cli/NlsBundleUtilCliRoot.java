@@ -10,7 +10,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This class holds the {@link NlsBundle internationalized messages} for this module.
+ * This interface holds the {@link NlsBundle internationalized messages} for this module.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

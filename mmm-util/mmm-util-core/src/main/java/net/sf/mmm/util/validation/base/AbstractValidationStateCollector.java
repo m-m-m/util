@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 

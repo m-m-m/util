@@ -10,7 +10,7 @@ import java.util.Map;
 import net.sf.mmm.client.ui.api.widget.UiWidgetActive;
 import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 
 /**
  * This is the default implementation of {@link UiAccessKeyBinding}.

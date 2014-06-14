@@ -3,7 +3,7 @@
 package net.sf.mmm.util.pojo.descriptor.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 
 /**

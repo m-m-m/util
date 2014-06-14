@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import net.sf.mmm.util.collection.base.AbstractTreeNode;
 import net.sf.mmm.util.contenttype.api.ContentType;
 import net.sf.mmm.util.contenttype.base.format.SegmentContainerSequence;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of the {@link ContentType}

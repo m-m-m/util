@@ -3,7 +3,7 @@
 package net.sf.mmm.util.search.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This is the exception thrown if an operation (typically a query) in the persistence exceeded a configured

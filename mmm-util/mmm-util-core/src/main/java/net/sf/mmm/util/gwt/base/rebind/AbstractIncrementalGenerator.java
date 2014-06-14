@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 import com.google.gwt.core.ext.CachedGeneratorResult;
 import com.google.gwt.core.ext.GeneratorContext;

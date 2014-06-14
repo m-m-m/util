@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.impl;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.AbstractValueConverter;

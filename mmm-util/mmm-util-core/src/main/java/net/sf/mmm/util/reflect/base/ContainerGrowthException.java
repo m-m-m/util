@@ -3,7 +3,7 @@
 package net.sf.mmm.util.reflect.base;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * A {@link ContainerGrowthException} is thrown if a container should grow (increase its size) but this

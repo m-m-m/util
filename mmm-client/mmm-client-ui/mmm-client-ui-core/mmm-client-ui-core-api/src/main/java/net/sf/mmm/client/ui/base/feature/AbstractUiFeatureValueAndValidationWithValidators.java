@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.base.feature;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;

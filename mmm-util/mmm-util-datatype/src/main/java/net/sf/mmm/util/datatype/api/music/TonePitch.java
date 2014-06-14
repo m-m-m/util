@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.music;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This enum represents the {@link TonePitch} of a musical note. It is based on the twelve tone music system

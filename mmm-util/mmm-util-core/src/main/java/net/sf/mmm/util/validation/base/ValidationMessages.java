@@ -20,7 +20,10 @@ public interface ValidationMessages extends ConstantsWithLookup {
   // CHECKSTYLE:OFF (GWT requirements force this method name mapping)
   String net_sf_mmm_util_validation_base_Mandatory_message();
 
-  @Key("net.sf.mmm.util.validation.base.PhoneNumber.message")
-  String net_sf_mmm_util_validation_base_PhoneNumber_message();
+  // /**
+  // * @return failure message for {@link net.sf.mmm.util.validation.base.PhoneNumber}.
+  // */
+  // @Key("net.sf.mmm.util.validation.base.PhoneNumber.message")
+  // String net_sf_mmm_util_validation_base_PhoneNumber_message();
   // CHECKSTYLE:ON
 }

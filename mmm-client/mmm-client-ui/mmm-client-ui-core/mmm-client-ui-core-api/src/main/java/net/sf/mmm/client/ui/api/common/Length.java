@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.common;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Length}. It typically represents a width

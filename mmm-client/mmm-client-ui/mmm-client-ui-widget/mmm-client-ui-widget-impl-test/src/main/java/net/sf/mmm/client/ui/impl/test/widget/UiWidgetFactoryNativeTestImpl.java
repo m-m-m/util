@@ -46,7 +46,7 @@ import net.sf.mmm.client.ui.impl.test.widget.panel.UiWidgetTabPanelTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.panel.UiWidgetVerticalPanelTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.window.UiWidgetMainWindowTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.window.UiWidgetPopupTestImpl;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.client.ui.api.UiContext} for testing without a native

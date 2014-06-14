@@ -4,15 +4,15 @@ package net.sf.mmm.persistence.api;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.entity.api.GenericEntity;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
  * This is the interface for a <em>Data Access Object</em> (DAO). It acts as a manager responsible for the
- * persistence operations on a {@link #getEntityClassImplementation() specific type} of {@link GenericEntity}.
- * It is responsible for {@link #find(Object) loading}, {@link #save(GenericEntity) saving} and
+ * persistence operations on a {@link #getEntityClass() specific type} of {@link GenericEntity}. It is
+ * responsible for {@link #find(Object) loading}, {@link #save(GenericEntity) saving} and
  * {@link net.sf.mmm.util.search.api.SearchQuery searching} {@link GenericEntity entities} of the
- * {@link #getEntityClassImplementation() according type}.<br>
+ * {@link #getEntityClass() according type}.<br>
  * For each (non-abstract) implementation of {@link GenericEntity} there should exist one instance of this
  * interface. Typically when you create a custom {@link GenericEntity entity} you will also create a custom
  * interface and implementation of an according {@link GenericDao}. If there is no custom implementation of a
@@ -25,8 +25,8 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  *
  * @param <ID> is the type of the {@link GenericEntity#getId() primary key} of the managed
  *        {@link GenericEntity}.
- * @param <ENTITY> is the {@link #getEntityClassReadWrite() type} of the managed entity. We strongly recommend
- *        to extend {@link net.sf.mmm.util.entity.api.PersistenceEntity}.
+ * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity. We strongly recommend to
+ *        extend {@link net.sf.mmm.util.entity.api.PersistenceEntity}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -34,11 +34,10 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
 public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
 
   /**
-   * This method creates a new, empty, and transient instance of the {@link #getEntityClassImplementation()
-   * managed} entity. The default implementation is {@link Class#newInstance()}, however more specific
-   * implementations are possible. This allows to use interfaces for entities and use the persistence layer as
-   * API without knowing the implementation. However you are still free to ignore this method and work with
-   * the POJO approach.
+   * This method creates a new, empty, and transient instance of the {@link #getEntityClass() managed} entity.
+   * The default implementation is {@link Class#newInstance()}, however more specific implementations are
+   * possible. This allows to use interfaces for entities and use the persistence layer as API without knowing
+   * the implementation. However you are still free to ignore this method and work with the POJO approach.
    *
    * @return the new instance.
    * @throws ReflectionException is the instantiation failed.
@@ -46,36 +45,12 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
   ENTITY create() throws ReflectionException;
 
   /**
-   * This method gets the implementation class reflecting the {@link GenericEntity} managed by this
+   * This method gets the {@link Class} reflecting the {@link GenericEntity} managed by this
    * {@link GenericDao}.
    *
    * @return the according entity-class.
    */
-  Class<? extends ENTITY> getEntityClassImplementation();
-
-  /**
-   * This method gets the {@link #getEntityClassImplementation() entity-class} with the view for reading the
-   * entity. For simplicity you should follow the {@link net.sf.mmm.util.pojo.api.Pojo POJO} principle and use
-   * the entity implementation in your API and bind it to {@literal <ENTITY>}. Then this method will simply
-   * return the same result as {@link #getEntityClassImplementation()}. However, you can also use an interface
-   * with the getters of the entity. If there is only one interface containing both setters and getters, this
-   * method and {@link #getEntityClassReadWrite()} should both return that interface.
-   *
-   * @return the according entity-class.
-   */
-  Class<? super ENTITY> getEntityClassReadOnly();
-
-  /**
-   * This method gets the {@link #getEntityClassImplementation() entity-class} with the view for reading and
-   * writing the entity. For simplicity you should follow the {@link net.sf.mmm.util.pojo.api.Pojo POJO}
-   * principle and use the entity implementation in your API and bind it to {@literal <ENTITY>}. Then this
-   * method will simply return the same result as {@link #getEntityClassImplementation()}. However, you can
-   * also use an interface with the getters and setters (extending {@link #getEntityClassReadOnly()}) of the
-   * entity.
-   *
-   * @return the according entity-class.
-   */
-  Class<ENTITY> getEntityClassReadWrite();
+  Class<? extends ENTITY> getEntityClass();
 
   /**
    * This method loads the {@link GenericEntity} with the given <code>id</code> from the persistent store.

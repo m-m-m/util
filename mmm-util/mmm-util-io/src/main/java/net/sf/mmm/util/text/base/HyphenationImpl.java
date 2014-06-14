@@ -4,7 +4,7 @@ package net.sf.mmm.util.text.base;
 
 import java.util.Arrays;
 
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.text.api.Hyphenation;
 
 /**

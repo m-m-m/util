@@ -93,6 +93,7 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("deprecation")
   @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
       throws RuntimeIoException {

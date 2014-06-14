@@ -13,8 +13,8 @@ import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapterWithEvents;
 import net.sf.mmm.client.ui.gwt.widgets.handler.HandlerRegistrationCollector;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
-import net.sf.mmm.util.nls.api.NlsClassCastException;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.NlsClassCastException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;

@@ -20,9 +20,9 @@ import net.sf.mmm.client.ui.base.binding.UiAccessKeyBinding;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base implementation of {@link DialogManager}.

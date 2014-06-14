@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
 import net.sf.mmm.util.reflect.api.GenericType;

@@ -12,7 +12,9 @@ import net.sf.mmm.util.exception.api.ExceptionTruncation;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.NlsRuntimeException} instead.
  */
+@Deprecated
 public abstract class NlsRuntimeException extends AbstractNlsRuntimeException {
 
   /** UID for serialization. */

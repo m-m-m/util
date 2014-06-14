@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This class is like a {@link Map} to {@link #registerFormatter(NlsFormatter, String, String) register} and

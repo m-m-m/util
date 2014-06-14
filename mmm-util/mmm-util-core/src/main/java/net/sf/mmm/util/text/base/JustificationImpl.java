@@ -4,10 +4,10 @@ package net.sf.mmm.util.text.base;
 
 import java.io.IOException;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.HorizontalAlignment;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.text.api.Justification;
 
 /**

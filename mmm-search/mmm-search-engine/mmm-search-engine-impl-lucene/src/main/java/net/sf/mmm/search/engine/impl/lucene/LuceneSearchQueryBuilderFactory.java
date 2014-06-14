@@ -14,7 +14,7 @@ import net.sf.mmm.search.impl.lucene.LuceneAnalyzer;
 import net.sf.mmm.search.impl.lucene.LuceneAnalyzerImpl;
 import net.sf.mmm.search.impl.lucene.LuceneVersion;
 import net.sf.mmm.search.impl.lucene.LuceneVersionImpl;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 import org.apache.lucene.analysis.Analyzer;
 

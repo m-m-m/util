@@ -3,7 +3,7 @@
 package net.sf.mmm.util.date.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This is the exception thrown if a date given as string was illegal.

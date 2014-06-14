@@ -10,8 +10,8 @@ import net.sf.mmm.client.ui.api.widget.complex.UiWidgetTableColumn;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.SortOrder;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 

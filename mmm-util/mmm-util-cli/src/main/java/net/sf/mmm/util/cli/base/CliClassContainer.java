@@ -16,9 +16,9 @@ import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.collection.base.NodeCycle;
 import net.sf.mmm.util.collection.base.NodeCycleException;
 import net.sf.mmm.util.component.api.InitializationState;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 

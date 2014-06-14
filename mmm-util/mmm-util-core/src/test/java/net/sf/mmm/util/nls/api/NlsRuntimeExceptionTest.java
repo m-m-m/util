@@ -16,8 +16,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link net.sf.mmm.util.nls.api.NlsRuntimeException} and subclass(es).
- * 
+ * This is the test-case for {@link net.sf.mmm.util.exception.api.NlsRuntimeException} and subclass(es).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

@@ -16,8 +16,8 @@ import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationLoader;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper;
 

@@ -8,9 +8,9 @@ import javax.persistence.PersistenceContext;
 import net.sf.mmm.persistence.base.AbstractGenericDao;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.entity.api.GenericEntity;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundUserException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundUserException;
 
 /**
  * This is the abstract base-implementation of a {@link net.sf.mmm.persistence.api.GenericDao} using the
@@ -18,7 +18,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundUserException;
  *
  * @param <ID> is the type of the {@link GenericEntity#getId() primary key} of the managed
  *        {@link GenericEntity}.
- * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -82,7 +82,7 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
 
     ENTITY entity = findIfExists(id);
     if (entity == null) {
-      throw new ObjectNotFoundUserException(getEntityClassImplementation(), id);
+      throw new ObjectNotFoundUserException(getEntityClass(), id);
     }
     return entity;
   }
@@ -94,7 +94,7 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
   public ENTITY findIfExists(ID id) throws ObjectNotFoundException {
 
     NlsNullPointerException.checkNotNull("id", id);
-    return getEntityManager().find(getEntityClassImplementation(), id);
+    return getEntityManager().find(getEntityClass(), id);
   }
 
   /**
@@ -103,7 +103,7 @@ public abstract class AbstractJpaGenericDao<ID, ENTITY extends GenericEntity<ID>
   @Override
   public ENTITY getReference(ID id) {
 
-    return getEntityManager().getReference(getEntityClassImplementation(), id);
+    return getEntityManager().getReference(getEntityClass(), id);
   }
 
   /**

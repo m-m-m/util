@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetSingleMutableComposite;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridCell;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetGridCell}.

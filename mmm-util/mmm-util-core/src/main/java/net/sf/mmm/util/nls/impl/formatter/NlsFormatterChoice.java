@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.sf.mmm.util.date.api.Iso8601UtilLimited;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConjunctionCharFilter;
@@ -19,7 +20,6 @@ import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
-import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
 import net.sf.mmm.util.nls.base.NlsDependencies;
@@ -43,7 +43,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * <td>23:59:59</td>
  * </tr>
  * </table>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -58,18 +58,18 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   /** The format of a condition. */
   private static final String REQUIRED_FORMAT_CONDITION = "(else|?" + REQUIRED_FORMAT_COMPARATOR + "[0-9a-zA-Z+-.:])";
 
-  /** The character used to indicate the start of a {@link Choice} condition. */
+  /** The character used to indicate the start of a Choice condition. */
   public static final char CONDITION_START = '(';
 
-  /** The character used to indicate the end of a {@link Choice} condition. */
+  /** The character used to indicate the end of a Choice condition. */
   public static final char CONDITION_END = ')';
 
   /**
-   * The character used to indicate the variable object of a {@link Choice} condition.
+   * The character used to indicate the variable object of a Choice condition.
    */
   public static final char CONDITION_VAR = '?';
 
-  /** The value of a {@link Choice} condition that matches always. */
+  /** The value of a Choice condition that matches always. */
   public static final String CONDITION_ELSE = "else";
 
   /** The {@link Filter} for {@link #CONDITION_ELSE}. */
@@ -92,7 +92,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
   /**
    * The constructor.
-   * 
+   *
    * @param scanner is the {@link CharSequenceScanner} pointing to the choice- <code>formatStyle</code>.
    * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
@@ -122,7 +122,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
   /**
    * This method parses the {@link Choice}.
-   * 
+   *
    * @param scanner is the {@link CharSequenceScanner}.
    * @return the parsed {@link Choice}.
    */
@@ -170,7 +170,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
   /**
    * This method parses the {@link Condition}.
-   * 
+   *
    * @param scanner is the {@link CharSequenceScanner}.
    * @return the parsed {@link Condition} or {@link #FILTER_ELSE} in case of {@link #CONDITION_ELSE}.
    */
@@ -202,7 +202,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
   /**
    * This method parses the {@link Condition#comparatorArgument comparator argument}.
-   * 
+   *
    * @param scanner is the {@link CharSequenceScanner}.
    * @return the parsed comparator argument.
    */
@@ -285,7 +285,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
     /**
      * The constructor.
-     * 
+     *
      * @param condition is the {@link #condition}.
      * @param segments is the {@link List} of {@link Segment}s.
      */
@@ -312,7 +312,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
     /**
      * The constructor.
-     * 
+     *
      * @param literal is the literal (prefix).
      * @param argument is the {@link NlsArgument} or <code>null</code> if this is the last {@link Segment}.
      */
@@ -342,7 +342,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
     /**
      * The constructor.
-     * 
+     *
      * @param comparator is the {@link #comparator}.
      * @param comparatorArgument is the {@link #comparatorArgument}.
      */

@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.dialog;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the interface for the component used to manage {@link Dialog}s.

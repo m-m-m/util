@@ -6,7 +6,7 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureClick;
 import net.sf.mmm.client.ui.api.feature.UiFeatureEvent;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
 import net.sf.mmm.client.ui.base.handler.event.AbstractEventAdapter;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 
 /**
  * This class extends {@link AbstractUiWidgetAdapter} with #addEventHandler.

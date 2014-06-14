@@ -23,8 +23,8 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureOpenClose;
 import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 import net.sf.mmm.client.ui.api.feature.UiFeatureValue;
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEvent;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsClassCastException;
 
 /**
  * This is the abstract base class for a toolkit specific adapter of {@link UiHandlerEvent}. It will adapt

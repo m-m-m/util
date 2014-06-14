@@ -14,9 +14,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.AbstractFormatter;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 
 /**

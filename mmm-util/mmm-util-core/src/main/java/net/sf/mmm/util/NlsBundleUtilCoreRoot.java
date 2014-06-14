@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This class holds the {@link NlsBundle internationalized messages} for this module.
+ * This interface holds the {@link NlsBundle internationalized messages} for this module.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -417,7 +417,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorValueNotSet(@Named("source") Object value);
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsParseException
+   * @see net.sf.mmm.util.exception.api.NlsParseException
    *
    * @param value is the invalid value.
    * @param type is the expected type.
@@ -427,7 +427,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorParseExpected(@Named("value") Object value, @Named("type") Object type);
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsParseException
+   * @see net.sf.mmm.util.exception.api.NlsParseException
    *
    * @param value is the invalid value.
    * @param type is the expected type.
@@ -438,7 +438,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorParseType(@Named("value") Object value, @Named("type") Object type, @Named("source") Object source);
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsParseException
+   * @see net.sf.mmm.util.exception.api.NlsParseException
    *
    * @param value is the value that could NOT be parsed.
    * @param format is the expected format.
@@ -544,7 +544,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorNotInitialized();
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsIllegalArgumentException
+   * @see net.sf.mmm.util.exception.api.NlsIllegalArgumentException
    *
    * @param value is the illegal value of the argument.
    * @return the {@link NlsMessage}
@@ -553,7 +553,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorIllegalArgument(@Named("value") Object value);
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsIllegalArgumentException
+   * @see net.sf.mmm.util.exception.api.NlsIllegalArgumentException
    *
    * @param value is the illegal value of the argument.
    * @param name is the name of the argument.
@@ -630,7 +630,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorIoCopy();
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsNullPointerException
+   * @see net.sf.mmm.util.exception.api.NlsNullPointerException
    *
    * @param object is the name of the object that is <code>null</code>.
    * @return the {@link NlsMessage}
@@ -639,7 +639,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorArgumentNull(@Named("object") Object object);
 
   /**
-   * @see net.sf.mmm.util.nls.api.TechnicalErrorUserException
+   * @see net.sf.mmm.util.exception.api.TechnicalErrorUserException
    *
    * @return the {@link NlsMessage}
    */
@@ -663,7 +663,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorSecurityRestriction();
 
   /**
-   * @see net.sf.mmm.util.nls.api.DuplicateObjectException
+   * @see net.sf.mmm.util.exception.api.DuplicateObjectException
    *
    * @param object is the duplicate object.
    * @return the {@link NlsMessage}
@@ -672,7 +672,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorDuplicateObject(@Named("object") Object object);
 
   /**
-   * @see net.sf.mmm.util.nls.api.DuplicateObjectException
+   * @see net.sf.mmm.util.exception.api.DuplicateObjectException
    *
    * @param object is the duplicate object.
    * @param key is the key associated with the object (e.g. in a {@link java.util.Map}).
@@ -682,7 +682,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorDuplicateObjectWithKey(@Named("object") Object object, @Named("key") Object key);
 
   /**
-   * @see net.sf.mmm.util.nls.api.DuplicateObjectException
+   * @see net.sf.mmm.util.exception.api.DuplicateObjectException
    *
    * @param object is the duplicate object.
    * @param key is the key associated with the object (e.g. in a {@link java.util.Map}).
@@ -694,7 +694,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
       @Named("existing") Object existing);
 
   /**
-   * @see net.sf.mmm.util.nls.api.ObjectMismatchException
+   * @see net.sf.mmm.util.exception.api.ObjectMismatchException
    *
    * @param object is the mismatching object.
    * @param expected is the expected object (e.g. type).
@@ -708,7 +708,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
       @Named("source") Object source, @Named("property") Object property);
 
   /**
-   * @see net.sf.mmm.util.nls.api.ObjectNotFoundException
+   * @see net.sf.mmm.util.exception.api.ObjectNotFoundException
    *
    * @param object describes the missing object (e.g. the expected type).
    * @param key is the key associated with the object (e.g. in a {@link java.util.Map}).
@@ -718,7 +718,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorObjectNotFound(@Named("object") Object object, @Named("key") Object key);
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsIllegalStateException
+   * @see net.sf.mmm.util.exception.api.NlsIllegalStateException
    *
    * @return the {@link NlsMessage}
    */
@@ -726,7 +726,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorIllegalState();
 
   /**
-   * @see net.sf.mmm.util.nls.api.ComposedException
+   * @see net.sf.mmm.util.exception.api.ComposedException
    *
    * @param error the error.
    * @return the {@link NlsMessage}
@@ -735,7 +735,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorComposed(@Named("error") Object error);
 
   /**
-   * @see net.sf.mmm.util.nls.api.IllegalCaseException
+   * @see net.sf.mmm.util.exception.api.IllegalCaseException
    *
    * @param illegalCase is the illegal case.
    * @return the {@link NlsMessage}
@@ -744,7 +744,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorIllegalCase(@Named("case") Object illegalCase);
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsUnsupportedOperationException
+   * @see net.sf.mmm.util.exception.api.NlsUnsupportedOperationException
    *
    * @return the {@link NlsMessage}
    */
@@ -752,7 +752,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorUnsupportedOperation();
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsUnsupportedOperationException
+   * @see net.sf.mmm.util.exception.api.NlsUnsupportedOperationException
    *
    * @param operation is the unsupported operation.
    * @param source is the source object that does not support the operation.
@@ -898,7 +898,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorNodeCycle(@Named("cycle") Object cycle, @Named("type") Object type);
 
   /**
-   * @see net.sf.mmm.util.nls.api.ReadOnlyException
+   * @see net.sf.mmm.util.exception.api.ReadOnlyException
    *
    * @param object is the object that is read-only and can not be modified.
    * @param attribute is the attribute that is read-only or <code>null</code> for the entire object.
@@ -1000,7 +1000,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
       @Named("targetType") Object targetType);
 
   /**
-   * @see net.sf.mmm.util.nls.api.NlsClassCastException
+   * @see net.sf.mmm.util.exception.api.NlsClassCastException
    *
    * @param object is the object that should be cased.
    * @param source is the actual type of the <code>object</code>.
@@ -1011,7 +1011,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorCast(@Named("object") Object object, @Named("source") Type source, @Named("target") Type target);
 
   /**
-   * @see net.sf.mmm.util.nls.api.ObjectDisposedException
+   * @see net.sf.mmm.util.exception.api.ObjectDisposedException
    *
    * @param object is the disposed object.
    * @return the {@link NlsMessage}

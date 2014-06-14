@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the interface for a generic provider of {@link EnumType enumerations}. The major goal of this

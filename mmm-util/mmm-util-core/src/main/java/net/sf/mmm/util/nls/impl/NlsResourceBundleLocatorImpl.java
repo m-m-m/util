@@ -21,6 +21,7 @@ import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
+import net.sf.mmm.util.nls.base.ResourceBundleControlUtf8WithNlsBundleSupport;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -29,7 +30,7 @@ import org.slf4j.Logger;
 
 /**
  * This is the implementation of {@link NlsResourceBundleLocator}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -53,9 +54,9 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
 
   /**
    * This method gets the {@link List} of {@link ResourceBundle}s.
-   * 
+   *
    * @see #findBundles()
-   * 
+   *
    * @return the {@link ResourceBundle}s.
    */
   protected List<ResourceBundle> getNlsBundles() {
@@ -74,7 +75,7 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
 
   /**
    * This method gets the {@link ReflectionUtil}.
-   * 
+   *
    * @return the {@link ReflectionUtil}.
    */
   public ReflectionUtil getReflectionUtil() {
@@ -123,7 +124,8 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
               }
               noEntryInBundleResource = false;
               try {
-                ResourceBundle bundleInstance = ResourceBundle.getBundle(line, AbstractNlsMessage.LOCALE_ROOT);
+                ResourceBundle bundleInstance = ResourceBundle.getBundle(line, AbstractNlsMessage.LOCALE_ROOT,
+                    ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
                 this.nlsBundles.add(bundleInstance);
               } catch (Exception e) {
                 logger.error("Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line

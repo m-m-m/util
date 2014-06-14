@@ -11,7 +11,6 @@ import java.util.UUID;
 
 import net.sf.mmm.util.exception.api.ExceptionTruncation;
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
  * This is an abstract base implementation of a checked exception with real <em>native language support</em>
@@ -25,28 +24,14 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.NlsException} instead.
  */
-public abstract class AbstractNlsException extends Exception implements NlsThrowable, Cloneable {
+@Deprecated
+public abstract class AbstractNlsException extends net.sf.mmm.util.exception.api.NlsException implements
+    NlsThrowable {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -9077132842682462106L;
-
-  /**
-   * The line separator used by
-   * {@link #printStackTrace(NlsThrowable, Locale, NlsTemplateResolver, Appendable)}.
-   */
-  // BEGIN_GWT: IF_GWT_IS_SERVER
-  static final String LINE_SEPARATOR = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
-
-  // ELSE_IF_GWT_IS_CLIENT
-  // static final String LINE_SEPARATOR = "\n";
-  // :END_GWT
-
-  /** the internationalized message */
-  private final NlsMessage nlsMessage;
-
-  /** @see #getUuid() */
-  private final UUID uuid;
 
   /**
    * The constructor.
@@ -55,9 +40,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    */
   public AbstractNlsException(NlsMessage message) {
 
-    super();
-    this.nlsMessage = message;
-    this.uuid = createUuid();
+    super(message);
   }
 
   /**
@@ -68,13 +51,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    */
   public AbstractNlsException(Throwable nested, NlsMessage message) {
 
-    super(nested);
-    this.nlsMessage = message;
-    if ((nested != null) && (nested instanceof NlsThrowable)) {
-      this.uuid = ((NlsThrowable) nested).getUuid();
-    } else {
-      this.uuid = createUuid();
-    }
+    super(nested, message);
   }
 
   /**
@@ -85,55 +62,7 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    */
   protected AbstractNlsException(AbstractNlsException copySource, ExceptionTruncation truncation) {
 
-    super(null, truncation.isRemoveCause() ? null : copySource.getCause(), !truncation.isRemoveSuppressed(),
-        !truncation.isRemoveStacktrace());
-    this.nlsMessage = copySource.nlsMessage;
-    this.uuid = copySource.uuid;
-    if (!truncation.isRemoveStacktrace()) {
-      setStackTrace(copySource.getStackTrace());
-    }
-    if (!truncation.isRemoveSuppressed()) {
-      for (Throwable suppressed : copySource.getSuppressed()) {
-        addSuppressed(suppressed);
-      }
-    }
-  }
-
-  /**
-   * This method creates a new {@link UUID}.
-   *
-   * @return the new {@link UUID} or <code>null</code> to turn this feature off.
-   */
-  protected UUID createUuid() {
-
-    return UuidAccess.getFactory().createUuid();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final UUID getUuid() {
-
-    return this.uuid;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final NlsMessage getNlsMessage() {
-
-    return this.nlsMessage;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void printStackTrace(Locale locale, Appendable buffer) {
-
-    printStackTrace(locale, null, buffer);
+    super(copySource, truncation);
   }
 
   /**
@@ -143,36 +72,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
   public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
     printStackTrace(this, locale, resolver, buffer);
-  }
-
-  /**
-   * @see #createCopy(ExceptionTruncation)
-   *
-   * @param truncation the {@link ExceptionTruncation} settings.
-   * @return the (truncated) copy.
-   */
-  protected AbstractNlsRuntimeException createCopyViaClone(ExceptionTruncation truncation) {
-
-    try {
-      AbstractNlsRuntimeException copy = (AbstractNlsRuntimeException) clone();
-      ThrowableHelper.removeDetails(copy, truncation);
-      return copy;
-    } catch (CloneNotSupportedException e) {
-      throw new IllegalStateException(e);
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   *
-   * This default implementation is using {@link #createCopyViaClone(ExceptionTruncation) clone} to create a
-   * copy and truncate it as configured. However, a proper implementation would use the appropriate
-   * {@link #AbstractNlsException(AbstractNlsException, ExceptionTruncation) copy constructor} instead.
-   */
-  @Override
-  public AbstractNlsRuntimeException createCopy(ExceptionTruncation truncation) {
-
-    return createCopyViaClone(truncation);
   }
 
   /**
@@ -190,28 +89,28 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
         buffer.append(throwable.getClass().getName());
         buffer.append(": ");
         throwable.getLocalizedMessage(locale, resolver, buffer);
-        buffer.append(LINE_SEPARATOR);
+        buffer.append(StringUtil.LINE_SEPARATOR);
         UUID uuid = throwable.getUuid();
         if (uuid != null) {
           buffer.append(uuid.toString());
-          buffer.append(LINE_SEPARATOR);
+          buffer.append(StringUtil.LINE_SEPARATOR);
         }
         StackTraceElement[] trace = throwable.getStackTrace();
         for (int i = 0; i < trace.length; i++) {
           buffer.append("\tat ");
           buffer.append(trace[i].toString());
-          buffer.append(LINE_SEPARATOR);
+          buffer.append(StringUtil.LINE_SEPARATOR);
         }
         for (Throwable suppressed : ((Throwable) throwable).getSuppressed()) {
           buffer.append("Suppressed: ");
-          buffer.append(LINE_SEPARATOR);
+          buffer.append(StringUtil.LINE_SEPARATOR);
           printStackTraceNested(suppressed, locale, resolver, buffer);
         }
 
         Throwable nested = throwable.getCause();
         if (nested != null) {
           buffer.append("Caused by: ");
-          buffer.append(LINE_SEPARATOR);
+          buffer.append(StringUtil.LINE_SEPARATOR);
           printStackTraceNested(nested, locale, resolver, buffer);
         }
       }
@@ -253,33 +152,6 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
    * {@inheritDoc}
    */
   @Override
-  public String getMessage() {
-
-    return getNlsMessage().getMessage();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getLocalizedMessage() {
-
-    return getNlsMessage().getLocalizedMessage();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getLocalizedMessage(Locale locale) {
-
-    return getLocalizedMessage(locale, null);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
     StringBuffer buffer = new StringBuffer();
@@ -296,45 +168,4 @@ public abstract class AbstractNlsException extends Exception implements NlsThrow
     getNlsMessage().getLocalizedMessage(locale, resolver, buffer);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public NlsMessage toNlsMessage() {
-
-    return getNlsMessage();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isTechnical() {
-
-    // checked exceptions should be avoided at all. However, if they are used they should represent business
-    // exceptions (user failures).
-    return false;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isForUser() {
-
-    return !isTechnical();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    String result = super.toString();
-    if (this.uuid != null) {
-      result = result + LINE_SEPARATOR + this.uuid.toString();
-    }
-    return result;
-  }
 }

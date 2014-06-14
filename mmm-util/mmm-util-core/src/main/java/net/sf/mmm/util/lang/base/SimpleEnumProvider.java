@@ -4,8 +4,8 @@ package net.sf.mmm.util.lang.base;
 
 import java.util.List;
 
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.lang.api.EnumDefinition;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 /**
  * This is a simple implementation of {@link net.sf.mmm.util.lang.api.EnumProvider}. It only supports

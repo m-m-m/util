@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.lang.base;
+package net.sf.mmm.util.lang.api;
 
 import java.util.Locale;
 
@@ -12,6 +12,11 @@ import java.util.Locale;
  * @since 3.1.0
  */
 public final class GwtHelper {
+
+  /**
+   * The system specific line separator.
+   */
+  static final String LINE_SEPARATOR = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
 
   /**
    * Construction prohibited.
@@ -29,20 +34,19 @@ public final class GwtHelper {
    */
   public static String getSystemProperty(String propertyName) {
 
-    if ("line.separator".equals(propertyName)) {
-      return "\n";
-    }
-    return null;
+    return System.getProperty(propertyName);
   }
+
   /**
-   * Indirection for {@link String#toLowerCase(Locale)}.
+   * Indirection for {@link String#toLowerCase(Locale)} with {@link Locale#US}.
    *
    * @param string is the {@link String}.
    * @return the result of {@link String#toLowerCase(Locale)}.
+   * @since 4.0.0
    */
   public static String toLowerCase(String string) {
 
-    return string.toLowerCase();
+    return string.toLowerCase(Locale.US);
   }
 
   /**
@@ -54,18 +58,7 @@ public final class GwtHelper {
    */
   public static String toLowerCase(String string, Locale locale) {
 
-    return string.toLowerCase();
-  }
-
-  /**
-   * Indirection for {@link String#toUpperCase(Locale)}.
-   *
-   * @param string is the {@link String}.
-   * @return the result of {@link String#toUpperCase(Locale)}.
-   */
-  public static String toUpperCase(String string) {
-
-    return string.toUpperCase();
+    return string.toLowerCase(locale);
   }
 
   /**
@@ -77,7 +70,18 @@ public final class GwtHelper {
    */
   public static String toUpperCase(String string, Locale locale) {
 
-    return string.toUpperCase();
+    return string.toUpperCase(locale);
+  }
+
+  /**
+   * Indirection for {@link String#toUpperCase(Locale)} with {@link Locale#US}.
+   *
+   * @param string is the {@link String}.
+   * @return the result of {@link String#toUpperCase(Locale)}.
+   */
+  public static String toUpperCase(String string) {
+
+    return string.toUpperCase(Locale.US);
   }
 
 }

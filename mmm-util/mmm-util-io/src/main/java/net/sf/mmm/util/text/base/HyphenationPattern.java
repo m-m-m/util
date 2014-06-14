@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.text.api.StringHasher;
 
 /**

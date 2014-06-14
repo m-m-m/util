@@ -12,7 +12,9 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
+ * @deprecated use {@link net.sf.mmm.util.exception.api.NlsParseException} instead.
  */
+@Deprecated
 public class NlsParseException extends NlsRuntimeException {
 
   /** UID for serialization. */

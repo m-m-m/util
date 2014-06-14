@@ -4,8 +4,8 @@ package net.sf.mmm.util.lang.base;
 
 import java.util.UUID;
 
+import net.sf.mmm.util.exception.api.NlsThrowable;
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsThrowable;
 
 /**
  * This is the implementation of an error {@link net.sf.mmm.util.lang.api.Message} that is already localized.

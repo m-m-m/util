@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;

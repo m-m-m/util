@@ -12,9 +12,9 @@ import net.sf.mmm.search.engine.impl.lucene.LuceneFieldManager;
 import net.sf.mmm.search.impl.lucene.LuceneFieldNameIterator;
 import net.sf.mmm.search.indexer.base.AbstractMutableSearchEntry;
 import net.sf.mmm.search.indexer.base.SearchEntryIdImmutableException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Fieldable;

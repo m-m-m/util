@@ -3,7 +3,7 @@
 package net.sf.mmm.util.nls.impl.formatter;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * The {@link NlsFormatterChoiceNoElseConditionException} is thrown if a {@link NlsFormatterChoice

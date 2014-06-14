@@ -15,8 +15,8 @@ import net.sf.mmm.util.date.api.RecurrenceUtil;
 import net.sf.mmm.util.date.api.WeekOfMonth;
 import net.sf.mmm.util.date.api.Weekday;
 import net.sf.mmm.util.date.api.WeekdaySet;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**

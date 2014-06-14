@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection.base;
 
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.EqualsChecker;
 import net.sf.mmm.util.lang.api.HashCodeFunction;
 import net.sf.mmm.util.lang.api.HashCodeFunctionDefault;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is a simple wrapper in order to use an object as hash key but with ability to customize

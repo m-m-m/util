@@ -10,18 +10,16 @@ import net.sf.mmm.util.pojo.base.DefaultPojoFactory;
 import net.sf.mmm.util.reflect.api.ReflectionException;
 
 /**
- * This is the abstract base-implementation of the
- * {@link GenericDao} interface.
- * 
- * @param <ID> is the type of the {@link GenericEntity#getId() primary key}
- *        of the managed {@link GenericEntity}.
- * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the
- *        managed entity.
- * 
+ * This is the abstract base-implementation of the {@link GenericDao} interface.
+ *
+ * @param <ID> is the type of the {@link GenericEntity#getId() primary key} of the managed
+ *        {@link GenericEntity}.
+ * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractGenericDao<ID, ENTITY extends GenericEntity<ID>>
-    extends AbstractLoggableComponent implements GenericDao<ID, ENTITY> {
+public abstract class AbstractGenericDao<ID, ENTITY extends GenericEntity<ID>> extends AbstractLoggableComponent
+    implements GenericDao<ID, ENTITY> {
 
   /** @see #getPojoFactory() */
   private PojoFactory pojoFactory;
@@ -70,25 +68,21 @@ public abstract class AbstractGenericDao<ID, ENTITY extends GenericEntity<ID>>
    */
   public ENTITY create() throws ReflectionException {
 
-    return getPojoFactory().newInstance(getEntityClassImplementation());
+    return getPojoFactory().newInstance(getEntityClass());
   }
 
   /**
-   * {@inheritDoc}
+   * This method gets the {@link Class} used as API for the entity. For simplicity you should follow the
+   * {@link net.sf.mmm.util.pojo.api.Pojo POJO} principle and use the {@link #getEntityClass() entity
+   * implementation} in your API and bind it to {@literal <ENTITY>}. Then this method will simply return the
+   * same result as {@link #getEntityClass()} what is the default implementation. However, if you really want
+   * to use an interface with the getters and setters of the entity, you can do so by overriding this method.
+   *
+   * @return the {@link Class} used as API for the entity.
    */
-  @SuppressWarnings({ "rawtypes", "unchecked" })
-  public Class<? super ENTITY> getEntityClassReadOnly() {
+  public Class<? extends ENTITY> getEntityApiClass() {
 
-    return (Class) getEntityClassImplementation();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @SuppressWarnings({ "rawtypes", "unchecked" })
-  public Class<ENTITY> getEntityClassReadWrite() {
-
-    return (Class) getEntityClassImplementation();
+    return getEntityClass();
   }
 
 }

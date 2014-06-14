@@ -16,7 +16,7 @@ import net.sf.mmm.persistence.api.GenericDao;
 import net.sf.mmm.persistence.base.AbstractRevisionedPersistenceManager;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.entity.api.GenericEntity;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.base.DefaultPojoFactory;
 
@@ -75,7 +75,7 @@ public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceMana
           manager.setEntityManager(this.entityManager);
           manager.setPojoFactory(this.pojoFactory);
           manager.initialize();
-          addManager(manager);
+          addDao(manager);
           getLogger().info("Added generic manager for entity " + entityClass.getName());
         } else {
           getLogger().debug("Found registered manager for entity " + entityClass.getName());
@@ -135,14 +135,14 @@ public class PersistenceManagerImplJpa extends AbstractRevisionedPersistenceMana
    * 
    * @param managerList is the {@link List} of all {@link GenericDao} to register.
    * @throws DuplicateObjectException if two managers use the same entity-class (
-   *         {@link GenericDao#getEntityClassImplementation()}, {@link GenericDao#getEntityClassReadWrite()}, or
+   *         {@link GenericDao#getEntityClass()}, {@link GenericDao#getEntityClassReadWrite()}, or
    *         {@link GenericDao#getEntityClassReadOnly()}).
    */
   @Inject
   public void setManagers(List<GenericDao<?, ?>> managerList) throws DuplicateObjectException {
 
     for (GenericDao<?, ?> manager : managerList) {
-      addManager(manager);
+      addDao(manager);
     }
   }
 

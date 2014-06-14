@@ -66,12 +66,23 @@ public abstract class AbstractNlsMessage implements NlsMessage {
    */
   public String getLocalizedMessage(Locale locale) {
 
-    return getLocalizedMessage(locale, null);
+    return getLocalizedMessage(locale, (NlsTemplateResolver) null);
   }
 
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("deprecation")
+  @Override
+  public void getLocalizedMessage(Locale locale, Appendable buffer) {
+
+    getLocalizedMessage(locale, null, buffer);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("deprecation")
   public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
     StringBuilder result = new StringBuilder();
@@ -84,7 +95,7 @@ public abstract class AbstractNlsMessage implements NlsMessage {
    */
   public String getMessage() {
 
-    return getLocalizedMessage(LOCALE_ROOT, null);
+    return getLocalizedMessage(LOCALE_ROOT, (NlsTemplateResolver) null);
   }
 
   /**

@@ -14,7 +14,7 @@ import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
 /**
  * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor}
  * interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -28,7 +28,7 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    */
   public PojoPropertyDescriptorImpl(String propertyName) {
@@ -41,6 +41,7 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(PojoPropertyAccessorMode<ACCESSOR> mode) {
 

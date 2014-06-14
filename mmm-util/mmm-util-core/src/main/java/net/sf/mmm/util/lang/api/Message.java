@@ -21,14 +21,14 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
   /**
    * The {@link #getType() type} for a technical error.
    *
-   * @see net.sf.mmm.util.nls.api.NlsThrowable#isTechnical()
+   * @see net.sf.mmm.util.exception.api.NlsThrowable#isTechnical()
    */
   String TYPE_TECHNICAL_ERROR = "TechnicalError";
 
   /**
    * The {@link #getType() type} for a user error.
    *
-   * @see net.sf.mmm.util.nls.api.NlsThrowable#isForUser()
+   * @see net.sf.mmm.util.exception.api.NlsThrowable#isForUser()
    */
   String TYPE_USER_ERROR = "UserError";
 
@@ -74,10 +74,10 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
    * This method gets the type of this {@link Message}. This should be one of the following options:
    * <ul>
    * <li>{@value #TYPE_VALIDATION_FAILURE} - for a {@link net.sf.mmm.util.validation.api.ValidationFailure}.</li>
-   * <li>{@value #TYPE_USER_ERROR} - for an {@link net.sf.mmm.util.nls.api.NlsThrowable error} caused by the
+   * <li>{@value #TYPE_USER_ERROR} - for an {@link net.sf.mmm.util.exception.api.NlsThrowable error} caused by the
    * end-user (e.g. by providing invalid data). Unlike {@link #TYPE_VALIDATION_FAILURE} this is an actual
    * error that has been detected after a successful validation.</li>
-   * <li>{@value #TYPE_TECHNICAL_ERROR} - for an {@link net.sf.mmm.util.nls.api.NlsThrowable error} related to
+   * <li>{@value #TYPE_TECHNICAL_ERROR} - for an {@link net.sf.mmm.util.exception.api.NlsThrowable error} related to
    * a technical problem (e.g. programming failure such as {@link NullPointerException} or operational error
    * like {@link java.net.ConnectException}).</li>
    * <li>{@value #TYPE_WARNING} - for a warning such as "The hit-list for your query has been truncated."). In

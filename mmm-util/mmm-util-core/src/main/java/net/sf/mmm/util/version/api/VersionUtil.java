@@ -3,7 +3,7 @@
 package net.sf.mmm.util.version.api;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 
 /**
  * This is the interface for a collection of utility functions that help to deal with versions. E.g. you can

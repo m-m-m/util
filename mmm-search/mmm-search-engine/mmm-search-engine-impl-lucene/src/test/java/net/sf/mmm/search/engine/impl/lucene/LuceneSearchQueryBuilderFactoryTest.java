@@ -12,7 +12,7 @@ import net.sf.mmm.search.engine.api.SearchQueryBuilderFactory;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationHolder;
 import net.sf.mmm.search.engine.base.config.SearchEngineConfigurationBean;
 import net.sf.mmm.search.engine.base.config.SearchEngineConfigurationHolderImpl;
-import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.util.exception.api.NlsClassCastException;
 
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;

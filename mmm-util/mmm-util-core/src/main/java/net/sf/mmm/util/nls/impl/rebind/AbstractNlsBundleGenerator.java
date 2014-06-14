@@ -7,12 +7,12 @@ import java.util.Map;
 
 import javax.inject.Named;
 
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
 import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
 import net.sf.mmm.util.nls.base.NlsMessagePlain;
 

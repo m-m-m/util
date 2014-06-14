@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.filter.base;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.lang.api.Conjunction;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 /**
  * This is an implementation of the {@link CharFilter} interface that combines a given list of filters using a

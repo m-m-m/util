@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.address;
 
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents a postal code (also called ZIP

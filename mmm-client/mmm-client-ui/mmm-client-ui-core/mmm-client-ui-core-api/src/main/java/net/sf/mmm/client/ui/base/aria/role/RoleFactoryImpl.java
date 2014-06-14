@@ -65,7 +65,7 @@ import net.sf.mmm.client.ui.api.aria.role.RoleTooltip;
 import net.sf.mmm.client.ui.api.aria.role.RoleTree;
 import net.sf.mmm.client.ui.api.aria.role.RoleTreeGrid;
 import net.sf.mmm.client.ui.api.aria.role.RoleTreeItem;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 /**
  * This is the implementation of {@link RoleFactory}.

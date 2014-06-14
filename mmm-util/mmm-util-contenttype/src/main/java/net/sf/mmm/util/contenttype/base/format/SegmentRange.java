@@ -4,7 +4,7 @@ package net.sf.mmm.util.contenttype.base.format;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 
 /**
  * A {@link SegmentRange} is a {@link Segment} that matches a value of a fixed

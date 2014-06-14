@@ -3,17 +3,15 @@
 package net.sf.mmm.client.ui;
 
 import net.sf.mmm.util.nls.api.NlsBundle;
-import net.sf.mmm.util.nls.api.NlsBundleLocation;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This class holds the {@link NlsBundle internationalized messages} for this module.
- * 
+ * This interface holds the {@link NlsBundle internationalized messages} for this module.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@NlsBundleLocation(bundleName = "NlsBundleClientUi")
 public interface NlsBundleClientUiRoot extends NlsBundle {
 
   /**

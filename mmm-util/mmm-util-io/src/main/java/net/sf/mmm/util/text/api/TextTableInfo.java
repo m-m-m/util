@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This is a Java-bean for the layout-configuration of a text table.<br>

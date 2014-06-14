@@ -32,8 +32,8 @@ import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTree;
 import net.sf.mmm.client.ui.gwt.widgets.HtmlConstants;
 import net.sf.mmm.client.ui.impl.gwt.handler.event.EventAdapterGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.adapter.UiWidgetAdapterGwtWidgetActive;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.lang.api.function.Consumer;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 import com.google.gwt.dom.client.Element;

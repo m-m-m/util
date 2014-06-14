@@ -3,7 +3,7 @@
 package net.sf.mmm.service.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This exception is thrown if {@link RemoteInvocationCall} has failed.

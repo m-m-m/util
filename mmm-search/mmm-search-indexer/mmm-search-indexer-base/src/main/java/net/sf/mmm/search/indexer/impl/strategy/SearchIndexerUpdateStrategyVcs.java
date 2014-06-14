@@ -20,10 +20,10 @@ import net.sf.mmm.search.indexer.api.strategy.UpdateStrategyArguments;
 import net.sf.mmm.search.indexer.base.strategy.BasicSearchIndexerUpdateStrategy;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.event.api.ChangeType;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.resource.api.DataResource;
 
 import org.apache.maven.scm.ScmException;

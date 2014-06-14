@@ -3,8 +3,8 @@
 package net.sf.mmm.client.ui.base.feature;
 
 import net.sf.mmm.client.ui.api.feature.UiFeatureValueAndValidation;
-import net.sf.mmm.util.nls.api.NlsThrowable;
-import net.sf.mmm.util.nls.api.TechnicalErrorUserException;
+import net.sf.mmm.util.exception.api.NlsThrowable;
+import net.sf.mmm.util.exception.api.TechnicalErrorUserException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.ValidationFailureImpl;

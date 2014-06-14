@@ -15,12 +15,12 @@ import net.sf.mmm.search.api.config.SearchFieldType;
 import net.sf.mmm.search.api.config.SearchFields;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsClassCastException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsClassCastException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;

@@ -3,7 +3,7 @@
 package net.sf.mmm.util.component.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This is the exception thrown if a {@link javax.annotation.Resource resource} is required but is NOT

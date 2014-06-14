@@ -29,8 +29,8 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.context.impl.GenericContextFactoryImpl;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the implementation of the {@link ConfiguredSearchIndexer}.<br>

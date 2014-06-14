@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.filter.base;
 
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.filter.api.Filter;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 /**
  * This is an implementation of {@link Filter} that either accepts or rejects all objects to filter.

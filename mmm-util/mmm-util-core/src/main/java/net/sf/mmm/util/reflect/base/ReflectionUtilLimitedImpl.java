@@ -5,8 +5,8 @@ package net.sf.mmm.util.reflect.base;
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 

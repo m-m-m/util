@@ -8,7 +8,7 @@ import java.util.List;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 

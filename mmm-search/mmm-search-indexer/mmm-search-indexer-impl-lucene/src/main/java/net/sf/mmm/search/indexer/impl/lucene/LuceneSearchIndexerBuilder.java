@@ -25,8 +25,8 @@ import net.sf.mmm.search.indexer.api.SearchIndexerOptions;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationHolder;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexerBuilder;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.IndexWriter;

@@ -55,7 +55,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.panel.UiWidgetVerticalSplitPanelGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetMainWindowGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetPopupGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.window.UiWidgetWindowGwt;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 import com.google.gwt.user.client.ui.UIObject;
 

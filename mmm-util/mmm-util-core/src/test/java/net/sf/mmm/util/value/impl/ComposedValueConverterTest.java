@@ -13,7 +13,7 @@ import junit.framework.Assert;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.ValueConverter;

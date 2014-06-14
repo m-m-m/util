@@ -13,25 +13,28 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.attribute.AttributeWriteAllowCustomInput;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetOptionsField;
 import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterOptionsField;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
 import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.base.ValidationFailureImpl;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetOptionsField}.
- * 
+ *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapterOptionsField<VALUE>, VALUE> extends
-    AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE>,
+public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapterOptionsField<VALUE>, VALUE /*
+                                                                                                              * ,
+                                                                                                              * ITEM
+                                                                                                              */>
+    extends AbstractUiWidgetField<ADAPTER, VALUE, String> implements UiWidgetOptionsField<VALUE>,
     AttributeWriteAllowCustomInput {
 
   /**
@@ -63,7 +66,7 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
 
   /**
    * The constructor.
-   * 
+   *
    * @param context is the {@link #getContext() context}.
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
@@ -216,9 +219,9 @@ public abstract class AbstractUiWidgetOptionsField<ADAPTER extends UiWidgetAdapt
 
   /**
    * Converts the given <code>customInput</code> to {@literal <VALUE>}.
-   * 
+   *
    * @see #isAllowCustomInput()
-   * 
+   *
    * @param customInput is the custom input.
    * @return the converted value.
    */

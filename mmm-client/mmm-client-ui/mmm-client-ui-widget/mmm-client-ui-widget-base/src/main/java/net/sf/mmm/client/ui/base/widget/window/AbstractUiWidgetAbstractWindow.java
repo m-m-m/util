@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.widget.window.UiWidgetAbstractWindow;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterAbstractWindow;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetAbstractWindow}.

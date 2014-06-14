@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.base;
 
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.IllegalPojoPathException;
 import net.sf.mmm.util.pojo.path.api.PojoPath;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;

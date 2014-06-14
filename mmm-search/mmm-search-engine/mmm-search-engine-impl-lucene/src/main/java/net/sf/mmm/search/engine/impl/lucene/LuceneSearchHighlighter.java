@@ -4,12 +4,12 @@ package net.sf.mmm.search.engine.impl.lucene;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.HashMap;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.engine.api.SearchHit;
 import net.sf.mmm.search.engine.base.SearchHighlighter;
+import net.sf.mmm.util.nls.api.NlsAccess;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
@@ -22,7 +22,7 @@ import org.apache.lucene.search.highlight.QueryScorer;
 /**
  * This is the implementation of the {@link SearchHighlighter} interface using lucene as underlying
  * search-engine.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class LuceneSearchHighlighter implements SearchHighlighter {
@@ -35,7 +35,7 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param searchAnalyzer is the {@link Analyzer} used by the {@link LuceneSearchEngine search-engine}.
    * @param formatter is the formatter used to highlight terms.
    * @param searchQuery is the {@link Query} of the search. Matching terms of this query shall be highlighted.
@@ -65,7 +65,7 @@ public class LuceneSearchHighlighter implements SearchHighlighter {
         result = text;
       } catch (InvalidTokenOffsetsException e) {
         // TODO
-        throw new SearchException(e, e.getMessage(), new HashMap<String, Object>()) {};
+        throw new SearchException(e, NlsAccess.getFactory().create(e.getMessage())) {};
       }
     }
     if (result == null) {

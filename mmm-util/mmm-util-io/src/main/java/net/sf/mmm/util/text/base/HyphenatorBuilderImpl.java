@@ -19,9 +19,9 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.text.api.Hyphenator;

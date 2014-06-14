@@ -8,8 +8,8 @@ import java.util.List;
 import net.sf.mmm.util.collection.api.GenericTreeNode;
 import net.sf.mmm.util.collection.api.ListFactory;
 import net.sf.mmm.util.collection.api.Node;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of the {@link GenericTreeNode} interface.

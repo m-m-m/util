@@ -5,7 +5,7 @@ package net.sf.mmm.util.text.base;
 import java.text.BreakIterator;
 import java.util.Locale;
 
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.api.TextColumn;

@@ -123,6 +123,15 @@ public class NlsMessagePlain implements NlsMessage {
    * {@inheritDoc}
    */
   @Override
+  public void getLocalizedMessage(Locale locale, Appendable buffer) {
+
+    getLocalizedMessage(locale, null, buffer);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
     return this.message;

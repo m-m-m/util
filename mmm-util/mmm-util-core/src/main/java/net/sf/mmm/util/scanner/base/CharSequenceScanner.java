@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.scanner.base;
 
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.lang.base.GwtHelper;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.lang.api.GwtHelper;
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 import net.sf.mmm.util.scanner.api.CharStreamScanner;
 

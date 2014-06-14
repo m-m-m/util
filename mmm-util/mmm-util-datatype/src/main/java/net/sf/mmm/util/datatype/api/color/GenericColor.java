@@ -4,11 +4,11 @@ package net.sf.mmm.util.datatype.api.color;
 
 import java.util.Objects;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractDatatype;
-import net.sf.mmm.util.lang.base.GwtHelper;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.lang.api.GwtHelper;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color} based on {@link Factor factors}. <br/>

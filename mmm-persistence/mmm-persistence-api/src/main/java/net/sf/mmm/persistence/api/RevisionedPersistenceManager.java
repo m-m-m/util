@@ -3,8 +3,8 @@
 package net.sf.mmm.persistence.api;
 
 import net.sf.mmm.util.entity.api.RevisionedEntity;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the interface for a {@link PersistenceManager} with the ability of revision-control (auditing),
@@ -17,7 +17,7 @@ import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 public interface RevisionedPersistenceManager extends PersistenceManager {
 
   /**
-   * This method gets the individual {@link RevisionedDao} {@link GenericDao#getEntityClassImplementation()
+   * This method gets the individual {@link RevisionedDao} {@link GenericDao#getEntityClass()
    * responsible} for the given <code>entityClass</code>.
    * 
    * @param <ENTITY> is the generic entity-type.

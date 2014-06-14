@@ -4,8 +4,8 @@ package net.sf.mmm.util.date.api;
 
 import java.util.Date;
 
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * The enum contains the twelve months of a year in Gregorian calendar.

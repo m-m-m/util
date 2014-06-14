@@ -31,15 +31,15 @@ import net.sf.mmm.util.cli.api.CliParser;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsObject;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.api.TextColumnInfo;
@@ -655,6 +655,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
      * @param dependencies are the {@link CliParserDependencies}.
      * @param settings are the {@link CliOutputSettings}.
      */
+    @SuppressWarnings("deprecation")
     public CliOptionHelpInfo(CliOptionContainer option, CliParserDependencies dependencies, CliOutputSettings settings) {
 
       super();
@@ -747,6 +748,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
      * @param dependencies are the {@link CliParserDependencies}.
      * @param settings are the {@link CliOutputSettings}.
      */
+    @SuppressWarnings("deprecation")
     public CliArgumentHelpInfo(CliArgumentContainer argument, CliParserDependencies dependencies,
         CliOutputSettings settings) {
 

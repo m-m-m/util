@@ -4,7 +4,7 @@ package net.sf.mmm.util.version.base;
 
 import java.util.Date;
 
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 

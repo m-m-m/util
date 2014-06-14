@@ -9,10 +9,10 @@ import java.util.Collection;
 import java.util.Set;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.Visitor;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**

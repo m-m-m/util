@@ -23,8 +23,8 @@ import net.sf.mmm.util.collection.base.BasicDoubleLinkedNode;
 import net.sf.mmm.util.collection.base.NodeCycle;
 import net.sf.mmm.util.collection.base.NodeCycleException;
 import net.sf.mmm.util.component.api.InitializationState;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
@@ -134,8 +134,8 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method initializes the {@link #arguments}. This means that the {@link #arguments} are ordered
-   * properly.
+   * This method initializes the {@link #getArguments() arguments}. This means that the
+   * {@link #getArguments() arguments} are ordered properly.
    *
    * @see CliArgument#addCloseTo()
    * @see CliArgument#addAfter()

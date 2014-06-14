@@ -9,8 +9,8 @@ import javax.validation.ValidationException;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.ExceptionUtilLimited;
-import net.sf.mmm.util.nls.api.NlsThrowable;
-import net.sf.mmm.util.nls.api.TechnicalErrorUserException;
+import net.sf.mmm.util.exception.api.NlsThrowable;
+import net.sf.mmm.util.exception.api.TechnicalErrorUserException;
 import net.sf.mmm.util.security.api.SecurityErrorUserException;
 import net.sf.mmm.util.validation.api.ValidationErrorUserException;
 

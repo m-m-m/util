@@ -15,8 +15,8 @@ import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactory;
 import net.sf.mmm.client.ui.base.binding.UiDataBinding;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractDataTable;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterTableColumn;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.lang.api.SortOrder;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 

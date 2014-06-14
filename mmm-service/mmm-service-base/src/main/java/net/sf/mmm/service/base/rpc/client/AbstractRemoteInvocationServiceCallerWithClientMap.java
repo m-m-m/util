@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.service.api.rpc.RemoteInvocationService;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base-implementation of

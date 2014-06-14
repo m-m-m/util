@@ -6,8 +6,8 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.io.api.StreamClosedException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is an {@link InputStream} that wraps an existing {@link InputStream} and prevents {@link #close()

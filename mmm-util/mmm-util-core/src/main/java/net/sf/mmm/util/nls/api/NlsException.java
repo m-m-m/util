@@ -10,12 +10,14 @@ import java.util.Map;
  * (NLS).<br>
  * <b>ATTENTION:</b><br>
  * Checked exceptions should be used for business errors and should only occur in unexpected situations.
- * 
- * @see net.sf.mmm.util.nls.api.NlsThrowable
- * 
+ *
+ * @see net.sf.mmm.util.exception.api.NlsThrowable
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated use {@link NlsException} instead.
  */
+@Deprecated
 public abstract class NlsException extends AbstractNlsException {
 
   /** UID for serialization. */
@@ -23,7 +25,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * The constructor.<br>
-   * 
+   *
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
    *        should be in English language.
@@ -39,7 +41,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * The constructor.<br>
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
@@ -56,7 +58,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
    *        language.
@@ -71,9 +73,9 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * The constructor.
-   * 
+   *
    * @see #toMap(String, Object, String, Object)
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It is used for
    *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
@@ -89,7 +91,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
   public NlsException(NlsMessage message) {
@@ -99,7 +101,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param message the {@link #getNlsMessage() message} describing the problem briefly.
    */
@@ -110,7 +112,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * This method adds the given arguments to the given {@link Map}.
-   * 
+   *
    * @param map is the {@link Map} to use or <code>null</code> to create a new {@link Map}.
    * @param key is the {@link Map#keySet() key} of the entry to add.
    * @param value is the {@link Map#get(Object) value} of the entry to add.
@@ -131,7 +133,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * This method create a {@link Map} for the given arguments.
-   * 
+   *
    * @param key1 is the {@link Map#keySet() key} of the first map entry.
    * @param value1 is the {@link Map#get(Object) value} of the first map entry.
    * @return a {@link Map} containing only the given arguments.
@@ -145,7 +147,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * This method create a {@link Map} for the given arguments.
-   * 
+   *
    * @param key1 is the {@link Map#keySet() key} of the first map entry.
    * @param value1 is the {@link Map#get(Object) value} of the first map entry.
    * @param key2 is the {@link Map#keySet() key} of the second map entry.
@@ -162,7 +164,7 @@ public abstract class NlsException extends AbstractNlsException {
 
   /**
    * This method create a {@link Map} for the given arguments.
-   * 
+   *
    * @param key1 is the {@link Map#keySet() key} of the first map entry.
    * @param value1 is the {@link Map#get(Object) value} of the first map entry.
    * @param key2 is the {@link Map#keySet() key} of the second map entry.

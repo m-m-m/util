@@ -3,7 +3,7 @@
 package net.sf.mmm.util.pojo.path.base;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;

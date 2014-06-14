@@ -4,8 +4,8 @@ package net.sf.mmm.search.indexer.base;
 
 import java.util.List;
 
+import net.sf.mmm.search.NlsBundleSearchRoot;
 import net.sf.mmm.search.api.config.SearchConfiguration;
-import net.sf.mmm.search.indexer.NlsBundleSearchIndexerApi;
 import net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer;
 import net.sf.mmm.search.indexer.base.config.ConfiguredSearchIndexerOptionsBean;
 import net.sf.mmm.util.cli.api.AbstractVersionedMain;
@@ -22,7 +22,7 @@ import net.sf.mmm.util.component.api.IocContainer;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@CliMode(id = CliMode.ID_DEFAULT, usage = NlsBundleSearchIndexerApi.MSG_SEARCH_INDEXER_MAIN_MODE_USAGE_DEFAULT)
+@CliMode(id = CliMode.ID_DEFAULT, usage = NlsBundleSearchRoot.MSG_SEARCH_INDEXER_MAIN_MODE_USAGE_DEFAULT)
 public abstract class AbstractSearchIndexerMain extends AbstractVersionedMain {
 
   /** The optional filename of the configuration XML-file. */

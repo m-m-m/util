@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetRangeField;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.value.api.Range;

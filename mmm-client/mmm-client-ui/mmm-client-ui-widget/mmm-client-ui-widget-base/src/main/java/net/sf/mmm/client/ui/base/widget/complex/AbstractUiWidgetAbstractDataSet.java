@@ -21,8 +21,8 @@ import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventSelection;
 import net.sf.mmm.client.ui.api.widget.complex.UiWidgetAbstractDataSet;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetActive;
 import net.sf.mmm.client.ui.base.widget.complex.adapter.UiWidgetAdapterAbstractDataSet;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of

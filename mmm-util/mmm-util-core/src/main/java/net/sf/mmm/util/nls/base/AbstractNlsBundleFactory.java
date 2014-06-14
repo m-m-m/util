@@ -13,8 +13,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.inject.Named;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleFactory;
@@ -24,7 +25,6 @@ import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base implementation of {@link NlsBundleFactory}.

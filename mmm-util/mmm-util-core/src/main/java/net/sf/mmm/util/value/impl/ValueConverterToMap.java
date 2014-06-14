@@ -8,8 +8,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 

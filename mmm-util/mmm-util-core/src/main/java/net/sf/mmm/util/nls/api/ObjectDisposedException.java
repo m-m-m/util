@@ -11,7 +11,9 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.ObjectDisposedException} instead.
  */
+@Deprecated
 public class ObjectDisposedException extends NlsRuntimeException {
 
   /** UID for serialization. */

@@ -15,13 +15,12 @@ import net.sf.mmm.util.nls.base.NlsDependencies;
  * There is no direct factory to create an {@link NlsTemplate} as an alternative implementation might take
  * totally different arguments for construction. If you want to use your own implementation of
  * {@link NlsTemplate}, you can either directly supply it when {@link NlsMessageFactory#create(NlsTemplate)
- * creating} an {@link NlsMessage} or otherwise for
- * {@link NlsMessage#getLocalizedMessage(Locale, NlsTemplateResolver) localization}.
- * 
+ * creating} an {@link NlsMessage} or otherwise for localization via {@link NlsTemplateResolver}.
+ *
  * @see NlsMessage
  * @see NlsTemplateResolver
  * @see net.sf.mmm.util.nls.base.NlsTemplateImpl
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -30,7 +29,7 @@ public interface NlsTemplate extends Serializable {
   /**
    * This method translates the represented string for the given <code>locale</code>.<br>
    * This typically happens via a lookup in a {@link java.util.ResourceBundle}).
-   * 
+   *
    * @param locale is the locale to translate to.
    * @return the resolved string (closest translation for the given <code>locale</code>).
    */
@@ -39,7 +38,7 @@ public interface NlsTemplate extends Serializable {
   /**
    * This method behaves like {@link #translate(Locale)} but additionally fills the given
    * <code>arguments</code> into the translated message writing into the given <code>buffer</code>.
-   * 
+   *
    * @param locale is the locale to translate to.
    * @param arguments are the variable arguments to fill in the message.
    * @param buffer is the buffer where the translation will be appended to.

@@ -6,8 +6,6 @@ import java.io.IOException;
 
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.base.SearchDependencies;
-import net.sf.mmm.search.base.SearchEntryIdInvalidException;
-import net.sf.mmm.search.base.SearchEntryIdMissingException;
 import net.sf.mmm.search.engine.api.SearchHit;
 import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchQueryBuilder;
@@ -18,9 +16,11 @@ import net.sf.mmm.search.engine.base.SearchHitImpl;
 import net.sf.mmm.search.engine.base.SearchResultPageImpl;
 import net.sf.mmm.search.impl.lucene.LuceneSearchEntry;
 import net.sf.mmm.util.component.api.PeriodicRefresher;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsParseException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
@@ -36,7 +36,7 @@ import org.apache.lucene.search.highlight.Formatter;
 /**
  * This is the implementation of the {@link net.sf.mmm.search.engine.api.SearchEngine} interface using lucene
  * as underlying search-engine.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class LuceneSearchEngine extends AbstractSearchEngine {
@@ -64,7 +64,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
 
   /**
    * The constructor.
-   * 
+   *
    * @param indexReader is the {@link IndexReader} to access the index.
    * @param analyzer is the {@link Analyzer} to use.
    * @param queryBuilder is the {@link SearchQueryBuilder} query builder.
@@ -96,7 +96,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
 
   /**
    * The constructor.
-   * 
+   *
    * @param indexReader is the {@link IndexReader}.
    * @param analyzer is the {@link Analyzer} to use.
    * @param queryBuilder is the {@link SearchQueryBuilder} query builder.
@@ -112,7 +112,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
 
   /**
    * This method gets the {@link SearchDependencies}.
-   * 
+   *
    * @return the {@link SearchDependencies}.
    */
   protected SearchDependencies getSearchDependencies() {
@@ -122,7 +122,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
 
   /**
    * This method gets the {@link LuceneFieldManager}.
-   * 
+   *
    * @return the {@link LuceneFieldManager}.
    */
   protected LuceneFieldManager getFieldManager() {
@@ -149,7 +149,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
 
   /**
    * This method gets the lucene {@link Query} for the given <code>query</code>.
-   * 
+   *
    * @param query is the {@link SearchQuery} to "convert".
    * @return the lucene {@link Query}.
    */
@@ -166,7 +166,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
 
   /**
    * This method creates a new instance of the {@link SearchHighlighter} for a {@link SearchResultPage}.
-   * 
+   *
    * @param luceneQuery is the lucene {@link Query} used for highlighting.
    * @return the {@link SearchHighlighter}.
    */
@@ -177,7 +177,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
 
   /**
    * This method creates an {@link SearchHit} for the given <code>documentId</code> and <code>score</code>.
-   * 
+   *
    * @param documentId is the technical ID of the lucene {@link Document} representing the hit.
    * @param score is the {@link SearchHit#getScore() score} of the hit.
    * @param searchHighlighter is used to create the {@link SearchHit#getHighlightedText() highlighted text}.
@@ -270,13 +270,13 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     try {
       return getEntry(Integer.parseInt(entryId));
     } catch (NumberFormatException e) {
-      throw new SearchEntryIdInvalidException(e, entryId);
+      throw new NlsParseException(e, entryId, Integer.class);
     }
   }
 
   /**
    * @see #getEntry(String)
-   * 
+   *
    * @param documentId is the technical ID of the lucene {@link Document} representing the hit.
    * @return the document as {@link SearchEntry}.
    */
@@ -285,7 +285,7 @@ public class LuceneSearchEngine extends AbstractSearchEngine {
     try {
       Document doc = this.searcher.doc(documentId);
       if (doc == null) {
-        throw new SearchEntryIdMissingException(Integer.toString(documentId));
+        throw new ObjectNotFoundException(SearchEntry.class, Integer.toString(documentId));
       }
       return new LuceneSearchEntry(doc, this.fieldManager.getConfigurationHolder().getBean().getFields(),
           this.searchDependencies);

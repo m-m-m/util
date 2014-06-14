@@ -3,7 +3,7 @@
 package net.sf.mmm.util.collection.base;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * A {@link NodeCycleException} is thrown if a chain of nodes has a cyclic dependency.

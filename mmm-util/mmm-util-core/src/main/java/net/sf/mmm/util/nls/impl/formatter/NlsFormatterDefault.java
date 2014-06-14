@@ -19,7 +19,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for default formatting.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -38,6 +38,7 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("deprecation")
   @Override
   public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException {

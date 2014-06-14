@@ -3,7 +3,7 @@
 package net.sf.mmm.util.io.api;
 
 import net.sf.mmm.util.NlsBundleUtilIoRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * A {@link BufferExceedException} is thrown if a buffer (typically array of bytes or chars) is exceeded (e.g.

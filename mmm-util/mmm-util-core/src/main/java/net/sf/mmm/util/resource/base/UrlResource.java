@@ -7,9 +7,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.file.api.FileUtilLimited;
 import net.sf.mmm.util.file.base.FileUtilLimitedImpl;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.api.ResourceUri;

@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is an implementation of {@link XmlAdapter} for mapping {@link Enum}s to {@link #normalize(String)

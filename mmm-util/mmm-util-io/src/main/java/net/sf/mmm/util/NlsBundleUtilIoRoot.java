@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This class holds the {@link NlsBundle internationalized messages} for this module.
+ * This interface holds the {@link NlsBundle internationalized messages} for this module.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0

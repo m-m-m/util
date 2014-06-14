@@ -4,7 +4,7 @@ package net.sf.mmm.util.contenttype.base.format;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 
 /**
  * A {@link SegmentContainerRepeat} is a {@link SegmentContainerSequence} that

@@ -3,10 +3,10 @@
 package net.sf.mmm.util.datatype.api.color;
 
 import net.sf.mmm.test.ExceptionHelper;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.nls.api.NlsObject;
-import net.sf.mmm.util.nls.api.NlsParseException;
 
 import org.junit.Assert;
 import org.junit.Test;

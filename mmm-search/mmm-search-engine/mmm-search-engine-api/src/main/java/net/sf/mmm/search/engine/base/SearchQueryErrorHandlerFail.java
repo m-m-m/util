@@ -3,8 +3,8 @@
 package net.sf.mmm.search.engine.base;
 
 import net.sf.mmm.search.engine.api.SearchQueryErrorHandler;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.nls.api.NlsObject;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This is an implementation of {@link SearchQueryErrorHandler} that throws an exception in case of any error.

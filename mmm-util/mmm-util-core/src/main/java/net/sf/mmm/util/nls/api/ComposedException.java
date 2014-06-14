@@ -17,10 +17,12 @@ import net.sf.mmm.util.nls.base.ComposedNlsMessage;
  * information.<br/>
  * Otherwise you would stop at the first error, the user could fix it, restart and end up with the next error
  * and so on.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
+ * @deprecated use {@link net.sf.mmm.util.exception.api.ComposedException} instead.
  */
+@Deprecated
 public class ComposedException extends NlsRuntimeException {
 
   /** UID for serialization. */
@@ -34,7 +36,7 @@ public class ComposedException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param errors are the {@link Throwable errors} that have been collected.
    */
   public ComposedException(Throwable... errors) {
@@ -45,7 +47,7 @@ public class ComposedException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param errors are the {@link NlsMessage error messages} that have been collected.
    */
   public ComposedException(NlsObject... errors) {
@@ -56,7 +58,7 @@ public class ComposedException extends NlsRuntimeException {
 
   /**
    * This method creates the {@link NlsMessage} wrapping the given <code>errors</code>.
-   * 
+   *
    * @param errors are the {@link Throwable errors} that have been collected.
    * @return the combined {@link NlsMessage}.
    */

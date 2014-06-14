@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.io.api.DetectorInputStream;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
 import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.io.api.DetectorOutputStream}.

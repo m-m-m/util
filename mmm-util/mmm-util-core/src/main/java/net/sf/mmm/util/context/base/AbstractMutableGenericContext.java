@@ -9,7 +9,7 @@ import java.util.Set;
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.context.api.MutableGenericContext;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 
 /**

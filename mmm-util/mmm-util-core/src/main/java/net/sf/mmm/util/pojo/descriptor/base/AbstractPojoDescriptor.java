@@ -4,7 +4,7 @@ package net.sf.mmm.util.pojo.descriptor.base;
 
 import java.util.Collection;
 
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;

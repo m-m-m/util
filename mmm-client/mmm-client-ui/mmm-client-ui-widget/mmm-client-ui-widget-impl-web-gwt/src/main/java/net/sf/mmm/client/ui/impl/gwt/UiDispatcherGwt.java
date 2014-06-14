@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.impl.gwt;
 import java.util.concurrent.Callable;
 
 import net.sf.mmm.client.ui.base.widget.AbstractUiDispatcher;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.Scheduler;

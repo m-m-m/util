@@ -23,9 +23,9 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel;
 import net.sf.mmm.client.ui.base.widget.AbstractUiWidgetNative;
 import net.sf.mmm.client.ui.base.widget.core.AbstractUiWidgetLabel;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetAdapter}.

@@ -13,7 +13,7 @@ import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterHorizontalP
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterVerticalPanel;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterMainWindow;
 import net.sf.mmm.client.ui.base.widget.window.adapter.UiWidgetAdapterPopup;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterComposite} and

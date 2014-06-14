@@ -8,9 +8,9 @@ import javax.inject.Inject;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**

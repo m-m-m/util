@@ -25,7 +25,7 @@ public class DummyRevisionedFooEntityDao extends
   /**
    * {@inheritDoc}
    */
-  public Class<DummyRevisionedFooEntity> getEntityClassImplementation() {
+  public Class<DummyRevisionedFooEntity> getEntityClass() {
 
     return DummyRevisionedFooEntity.class;
   }

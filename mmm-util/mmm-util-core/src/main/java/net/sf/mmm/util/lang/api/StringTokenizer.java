@@ -5,8 +5,8 @@ package net.sf.mmm.util.lang.api;
 import java.util.Iterator;
 
 import net.sf.mmm.util.collection.base.AbstractIterator;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 
 /**
  * This is a rewrite of the awkward {@link java.util.StringTokenizer} provided by the JDK. This implementation
@@ -15,7 +15,7 @@ import net.sf.mmm.util.nls.api.NlsParseException;
  * <b>ATTENTION:</b><br>
  * Returning an empty {@link String} also for duplicated delimited might NOT always be desired (especially
  * when delimiter is whitespace).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -38,7 +38,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
 
   /**
    * The constructor.
-   * 
+   *
    * @param string is the string to be tokenized.
    * @param delimiters are the characters that will be detected as delimiters.
    */
@@ -49,7 +49,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
 
   /**
    * The constructor.
-   * 
+   *
    * @param string is the string to be tokenized.
    * @param delimiters is a {@link String} with all the characters that will be detected as delimiters.
    */
@@ -60,13 +60,13 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
 
   /**
    * The constructor that allows escaping. The escaping can be cascaded:
-   * 
+   *
    * <pre>
    * new StringTokenizer("{[foo,{[bar,thing]}]},some", "{[", "]}", ',').next()
    * </pre>
-   * 
+   *
    * will return "foo,{[bar,thing]}".
-   * 
+   *
    * @param string is the string to be tokenized.
    * @param escapeStart is the string used to start escaping of a token. The string has to be free of
    *        <code>delimiters</code>.
@@ -77,7 +77,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    *         string or contains a character of <code>delimiters</code>, or one of them is <code>null</code>
    *         while the other is not, or both are not <code>null</code> but {@link Object#equals(Object) equal}
    *         to each other.
-   * 
+   *
    * @since 2.0.0
    */
   public StringTokenizer(String string, String escapeStart, String escapeEnd, char... delimiters)
@@ -88,9 +88,9 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
 
   /**
    * The constructor.
-   * 
+   *
    * @see #StringTokenizer(String, String, String, char...)
-   * 
+   *
    * @param string is the string to be tokenized.
    * @param escapeStart is the string used to start escaping of a token. May NOT be the empty string. The
    *        string has to be free of <code>delimiters</code>.
@@ -101,7 +101,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    *         string or contains a character of <code>delimiters</code>, or one of them is <code>null</code>
    *         while the other is not, or both are not <code>null</code> but {@link Object#equals(Object) equal}
    *         to each other.
-   * 
+   *
    * @since 2.0.0
    */
   public StringTokenizer(char[] string, String escapeStart, String escapeEnd, char... delimiters)
@@ -141,7 +141,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
 
   /**
    * The constructor.
-   * 
+   *
    * @param string is the string to be tokenized.
    * @param delimiters are the characters that will be detected as delimiters.
    */
@@ -153,7 +153,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   /**
    * This method checks that the given <code>escape</code> sequence does NOT contain any of the
    * <code>delimiters</code>.
-   * 
+   *
    * @param escape is the escape-sequence to check.
    * @param delimiters are the delimiters that should NOT be contained in <code>escape</code>.
    * @return <code>true</code> if <code>escape</code> contains a character of <code>delimiters</code>,
@@ -264,11 +264,11 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   }
 
   /**
-   * This method tests if the {@link #string} contains the given <code>substring</code> starting at the given
-   * <code>index</code>.
-   * 
+   * This method tests if the string to tokenize contains the given <code>substring</code> starting at the
+   * given <code>index</code>.
+   *
    * @param substring is the substring to check for.
-   * @param startIndex is the start index in {@link #string}.
+   * @param startIndex is the start index in the string to tokenize.
    * @return <code>true</code> if the given <code>substring</code> was found at <code>index</code>.
    */
   protected boolean containsSubstring(char[] substring, int startIndex) {
@@ -286,7 +286,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
 
   /**
    * @see java.util.StringTokenizer#hasMoreTokens()
-   * 
+   *
    * @return <code>true</code> if {@link #next()} is available, <code>false</code> otherwise.
    */
   public boolean hasMoreTokens() {
@@ -296,23 +296,13 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
 
   /**
    * @see java.util.StringTokenizer#nextToken()
-   * 
+   *
    * @return the {@link #next() next} token.
    */
   public String nextToken() {
 
     return next();
   }
-
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // public void forEach(Consumer<? super String> action) {
-  //
-  // // TODO hohwille temporary workaround for bug in Eclipse/Kepler...
-  // super.forEach(action);
-  // }
 
   /**
    * {@inheritDoc}

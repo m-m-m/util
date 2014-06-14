@@ -17,9 +17,10 @@ import net.sf.mmm.client.ui.base.widget.AbstractUiWidget;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
 import net.sf.mmm.client.ui.impl.test.widget.adapter.UiWidgetAdapterTest;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
+import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -69,6 +70,8 @@ public abstract class AbstractUiTest extends Assert {
 
     if (this.springConfig == null) {
       UiContextTestImpl context = new UiContextTestImpl();
+      // ensure created and registered...
+      PojoDescriptorBuilderFactoryImpl.getInstance();
       UiWidgetFactoryDatatypeTestImpl impl = new UiWidgetFactoryDatatypeTestImpl();
       impl.setContext(context);
       impl.initialize();

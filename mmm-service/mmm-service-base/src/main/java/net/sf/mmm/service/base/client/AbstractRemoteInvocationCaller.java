@@ -22,11 +22,11 @@ import net.sf.mmm.service.base.GenericRemoteInvocationResponse;
 import net.sf.mmm.service.base.GenericRemoteInvocationTransactionalCalls;
 import net.sf.mmm.service.base.GenericRemoteInvocationTransactionalResults;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.lang.api.function.Consumer;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
 
 /**
  * This is the abstract base-implementation of {@link RemoteInvocationCaller}.

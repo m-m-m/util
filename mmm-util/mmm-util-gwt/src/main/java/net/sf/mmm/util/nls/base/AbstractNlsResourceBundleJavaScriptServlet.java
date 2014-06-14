@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.mmm.util.component.base.AbstractLoggableHttpServlet;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is a {@link javax.servlet.http.HttpServlet} that dynamically generates some JavaScript containing the

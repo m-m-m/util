@@ -8,7 +8,7 @@ import net.sf.mmm.client.ui.base.widget.complex.AbstractItemContainer;
 import net.sf.mmm.client.ui.base.widget.complex.AbstractUiWidgetAbstractDataTable;
 import net.sf.mmm.client.ui.gwt.widgets.TableCellAtomic;
 import net.sf.mmm.client.ui.gwt.widgets.TableRow;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

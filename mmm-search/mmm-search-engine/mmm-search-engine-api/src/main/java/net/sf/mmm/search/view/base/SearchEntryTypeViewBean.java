@@ -9,8 +9,8 @@ import java.util.Set;
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
 import net.sf.mmm.search.engine.base.config.SearchEntryTypeBean;
 import net.sf.mmm.search.view.api.SearchEntryTypeView;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

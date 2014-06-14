@@ -20,10 +20,10 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;

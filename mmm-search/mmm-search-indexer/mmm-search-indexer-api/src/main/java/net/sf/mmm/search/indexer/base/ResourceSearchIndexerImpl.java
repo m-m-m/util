@@ -23,9 +23,9 @@ import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.event.api.ChangeType;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.file.base.FileUtilImpl;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**

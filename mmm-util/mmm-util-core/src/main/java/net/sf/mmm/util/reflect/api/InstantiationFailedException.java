@@ -9,7 +9,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 /**
  * An {@link InstantiationFailedException} indicates that the {@link Class#newInstance() instantiation} of a
  * {@link Class} failed for arbitrary reasons. Unlike {@link InstantiationException} this is a
- * {@link RuntimeException} and has {@link net.sf.mmm.util.nls.api.NlsThrowable native-language-support}.
+ * {@link RuntimeException} and has {@link net.sf.mmm.util.exception.api.NlsThrowable native-language-support}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1

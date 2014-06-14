@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
 
 /**
  * This enum contains the most important diacritical marks.<br>

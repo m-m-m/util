@@ -10,12 +10,12 @@ import java.sql.SQLException;
 
 import javax.inject.Inject;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.math.base.MathUtilImpl;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 import net.sf.mmm.util.value.api.ValueConvertException;

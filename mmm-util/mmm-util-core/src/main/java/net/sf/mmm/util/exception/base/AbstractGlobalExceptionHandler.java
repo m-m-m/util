@@ -3,8 +3,8 @@
 package net.sf.mmm.util.exception.base;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.exception.api.ComposedException;
 import net.sf.mmm.util.exception.api.GlobalExceptionHandler;
-import net.sf.mmm.util.nls.api.ComposedException;
 
 /**
  * This is the abstract base implementation of the {@link GlobalExceptionHandler} interface.

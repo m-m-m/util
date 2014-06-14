@@ -23,7 +23,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * translations. So only use this class for a dedicated set of constant {@link #localize(Locale, String)
  * internationalized messages} to avoid memory leaks or supply an according {@link MapFactory} at
  * construction.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
  */
@@ -53,7 +53,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
 
   /**
    * The constructor.
-   * 
+   *
    * @param bundleName is the default {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName() bundle-name}.
    */
   public NlsCachingLocalizer(String bundleName) {
@@ -63,7 +63,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
 
   /**
    * The constructor.
-   * 
+   *
    * @param bundleName is the default {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName() bundle-name}.
    * @param messageFactory is the {@link NlsMessageFactory} instance.
    * @param templateResolver is the {@link NlsTemplateResolver} instance.
@@ -75,7 +75,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
 
   /**
    * The constructor.
-   * 
+   *
    * @param bundleName is the default {@link net.sf.mmm.util.nls.base.NlsTemplateImpl#getName() bundle-name}.
    * @param messageFactory is the {@link NlsMessageFactory} instance.
    * @param templateResolver is the {@link NlsTemplateResolver} instance.
@@ -97,7 +97,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
   /**
    * This method parses the given <code>internationalizedMessage</code> as {@link NlsTemplate} in case it is
    * given in the form <code>{&lt;BUNDLE&gt;#&lt;KEY&gt;}</code>.
-   * 
+   *
    * @param internationalizedMessage is the template specified in the form described above or the
    *        {@link NlsMessage#getInternationalizedMessage() internationalized message}.
    * @return the {@link NlsTemplate} if the <code>internationalizedMessage</code> has the form described above
@@ -137,6 +137,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("deprecation")
   public String localize(Locale locale, String internationalizedMessage) {
 
     NlsMessage message = this.messagesMap.get(internationalizedMessage);

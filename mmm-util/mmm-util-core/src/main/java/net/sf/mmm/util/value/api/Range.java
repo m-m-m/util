@@ -4,9 +4,9 @@ package net.sf.mmm.util.value.api;
 
 import java.io.Serializable;
 
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadMaximumValue;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This class represents a range of two values, {@link #getMin() minimum} and {@link #getMax() maximum}.

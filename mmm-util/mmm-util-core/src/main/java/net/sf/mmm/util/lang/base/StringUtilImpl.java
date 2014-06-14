@@ -11,14 +11,15 @@ import java.util.Locale;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.Formatter;
+import net.sf.mmm.util.lang.api.GwtHelper;
 import net.sf.mmm.util.lang.api.StringSyntax;
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.scanner.base.SimpleCharScannerSyntax;
 import net.sf.mmm.util.value.api.ValueConverter;

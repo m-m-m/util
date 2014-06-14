@@ -8,7 +8,9 @@ package net.sf.mmm.util.nls.api;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.ObjectNotFoundUserException} instead.
  */
+@Deprecated
 public class ObjectNotFoundUserException extends ObjectNotFoundException {
 
   /** UID for serialization. */

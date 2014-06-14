@@ -3,8 +3,8 @@
 package net.sf.mmm.util.entity.base;
 
 import net.sf.mmm.util.entity.api.EntityId;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 
 /**
  * This is the implementation of {@link EntityId} including identification of {@link #getRevision() revision}.

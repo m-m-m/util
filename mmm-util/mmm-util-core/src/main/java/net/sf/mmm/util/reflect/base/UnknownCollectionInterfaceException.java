@@ -3,7 +3,7 @@
 package net.sf.mmm.util.reflect.base;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * A {@link UnknownCollectionInterfaceException} is thrown if a {@link java.util.Collection}-interface was

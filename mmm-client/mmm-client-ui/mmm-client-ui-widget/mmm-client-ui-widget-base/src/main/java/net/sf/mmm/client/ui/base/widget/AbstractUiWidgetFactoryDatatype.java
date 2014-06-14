@@ -28,12 +28,12 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField;
 import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalTimeField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryDatatype;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.BooleanFormatter;
 import net.sf.mmm.util.lang.base.FormatterToString;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
 

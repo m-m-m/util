@@ -8,14 +8,14 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import net.sf.mmm.util.exception.api.BusinessErrorUserException;
 import net.sf.mmm.util.exception.api.ExceptionTruncation;
 import net.sf.mmm.util.exception.api.ExceptionUtil;
+import net.sf.mmm.util.exception.api.GenericSerializableException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsThrowable;
+import net.sf.mmm.util.exception.api.TechnicalErrorUserException;
 import net.sf.mmm.util.lang.api.EnvironmentDetector;
-import net.sf.mmm.util.nls.api.BusinessErrorUserException;
-import net.sf.mmm.util.nls.api.GenericSerializableException;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
-import net.sf.mmm.util.nls.api.NlsThrowable;
-import net.sf.mmm.util.nls.api.TechnicalErrorUserException;
 import net.sf.mmm.util.session.api.UserSessionAccess;
 import net.sf.mmm.util.uuid.api.UuidAccess;
 

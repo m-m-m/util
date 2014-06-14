@@ -4,13 +4,13 @@ package net.sf.mmm.persistence.api;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.entity.api.GenericEntity;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the interface for a manager of the persistence layer. It is the entrance point to the persistence
  * component. In a common environment there is typically only one single instance of this interface active.<br>
  * The {@link PersistenceManager} acts as delegation to the {@link GenericDao}
- * {@link GenericDao#getEntityClassImplementation() responsible} for the according {@link GenericEntity} in
+ * {@link GenericDao#getEntityClass() responsible} for the according {@link GenericEntity} in
  * the invoked methods. This guarantees that individual custom logic is also invoked in case of generic
  * access.<br>
  * <b>NOTE:</b><br>
@@ -39,7 +39,7 @@ public interface PersistenceManager {
   boolean hasDao(Class<? extends GenericEntity<?>> entityClass);
 
   /**
-   * This method gets the individual {@link GenericDao} {@link GenericDao#getEntityClassImplementation()
+   * This method gets the individual {@link GenericDao} {@link GenericDao#getEntityClass()
    * responsible} for the given <code>entityClass</code>.
    *
    * @param <ENTITY> is the generic entity-type.
@@ -131,7 +131,7 @@ public interface PersistenceManager {
   /**
    * This method gets the {@link Class} reflecting the given <code>{@link GenericEntity entity}</code>. Unlike
    * <code>entity.{@link #getClass()}</code> this method will always return the real
-   * {@link GenericDao#getEntityClassImplementation() class defining the entity}.<br>
+   * {@link GenericDao#getEntityClass() class defining the entity}.<br>
    * The underlying JPA implementation may create a dynamic proxy or byte-code generated sub-class that
    * extends the entity-class. In such case <code>entity.{@link #getClass()}</code> will return the
    * {@link Class} of the proxy instead. In such case this method will return the real entity-class adapted by

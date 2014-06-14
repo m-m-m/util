@@ -43,8 +43,8 @@
  * We simply bundle the message in default language together with the separated
  * dynamic arguments in one container object that is called
  * <code>{@link net.sf.mmm.util.nls.api.NlsMessage}</code>.
- * For exceptions there is additional support via <code>{@link net.sf.mmm.util.nls.api.NlsException}</code> and
- * <code>{@link net.sf.mmm.util.nls.api.NlsRuntimeException}</code>.
+ * For exceptions there is additional support via <code>{@link net.sf.mmm.util.exception.api.NlsException}</code> and
+ * <code>{@link net.sf.mmm.util.exception.api.NlsRuntimeException}</code>.
  * Here is an example to clarify the idea of {@link net.sf.mmm.util.nls.api.NlsMessage}:
  * The i18n message is "Hi {name}! How are you?" and the dynamic argument is the users name e.g. "Lilli".
  * Now if we store these informations together we have all we need. To get the localized message we simply translate the
@@ -81,10 +81,10 @@
  * </pre>
  * For the error message create an exception like this:
  * <pre>
- * public class LoginAlreadyInUseException extends {@link net.sf.mmm.util.nls.api.NlsRuntimeException} {
+ * public class LoginAlreadyInUseException extends {@link net.sf.mmm.util.exception.api.NlsRuntimeException} {
  *   public LoginAlreadyInUseException(String usedLogin) {
  *
- *     super({@link net.sf.mmm.util.nls.api.NlsRuntimeException#createBundle(Class)
+ *     super({@link net.sf.mmm.util.exception.api.NlsRuntimeException#createBundle(Class)
  *     createBundle}(NlsBundleFooBarRoot.class).errorLoginInUse(usedLogin));
  *   }
  * }
@@ -136,7 +136,7 @@
  * </pre>
  * For the error message create an exception like this:
  * <pre>
- * public class LoginAlreadyInUseException extends {@link net.sf.mmm.util.nls.api.NlsRuntimeException} {
+ * public class LoginAlreadyInUseException extends {@link net.sf.mmm.util.exception.api.NlsRuntimeException} {
  *   public LoginAlreadyInUseException(String usedLogin) {
  *     super(MyResourceBundle.ERR_LOGIN_IN_USE, toMap(KEY_NAME, usedLogin));
  *   }
@@ -168,7 +168,7 @@
  *   escape characters to unicode number sequences.</li>
  *   <li>The localization (translation to native language) is easily performed by
  *   {@link net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage(java.util.Locale)}.</li>
- *   <li>For exceptions there is additional support via {@link net.sf.mmm.util.nls.api.NlsThrowable}.</li>
+ *   <li>For exceptions there is additional support via {@link net.sf.mmm.util.exception.api.NlsThrowable}.</li>
  * </ul>
  */
 package net.sf.mmm.util.nls.api;

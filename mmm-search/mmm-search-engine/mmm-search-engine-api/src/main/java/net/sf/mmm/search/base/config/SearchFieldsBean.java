@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.config.SearchFieldType;
 import net.sf.mmm.search.api.config.SearchFields;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 
 /**
  * This is the implementation of {@link SearchFields} as JAXB-ready Java-Bean.

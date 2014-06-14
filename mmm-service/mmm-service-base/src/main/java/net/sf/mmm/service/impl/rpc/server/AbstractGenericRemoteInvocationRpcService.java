@@ -16,7 +16,7 @@ import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcResponse;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcService;
 import net.sf.mmm.service.base.server.AbstractGenericRemoteInvocationService;
 import net.sf.mmm.util.component.api.AlreadyInitializedException;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
 
 /**
  * This is the server-side default implementation of {@link GenericRemoteInvocationRpcService}. You can extend

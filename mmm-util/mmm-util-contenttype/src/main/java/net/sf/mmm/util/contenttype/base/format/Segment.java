@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.util.contenttype.base.DecisionState;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This is the base class of a {@link Segment} that represents a format pattern (or pieces of such) to detect

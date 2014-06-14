@@ -351,6 +351,19 @@ public interface NlsMessage extends NlsObject, Serializable {
   String getLocalizedMessage(Locale locale);
 
   /**
+   * This method writes the localized message to the given <code>buffer</code>. <br>
+   * The actual localization is done by a {@link NlsTemplate template} that is provided via the given
+   * <code>resolver</code>. If this fails, the {@link #getInternationalizedMessage() original message} will be
+   * used. After translation is done, the language independent arguments will be filled in the translated
+   * message string according to the given <code>locale</code>.
+   *
+   * @param locale is the locale to translate to.
+   * @param buffer is the buffer where to write the message to.
+   * @since 5.0.0
+   */
+  void getLocalizedMessage(Locale locale, Appendable buffer);
+
+  /**
    * This method gets the localized message as string.
    *
    * @see NlsMessage#getLocalizedMessage(Locale, NlsTemplateResolver, Appendable)
@@ -358,7 +371,9 @@ public interface NlsMessage extends NlsObject, Serializable {
    * @param locale is the locale to translate to.
    * @param resolver is used to translate the message.
    * @return the localized message.
+   * @deprecated providing external {@link NlsTemplateResolver} has been discouraged.
    */
+  @Deprecated
   String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver);
 
   /**
@@ -372,7 +387,9 @@ public interface NlsMessage extends NlsObject, Serializable {
    * @param resolver is used to resolve the template required to translate the
    *        {@link #getInternationalizedMessage() internationalized message}.
    * @param buffer is the buffer where to write the message to.
+   * @deprecated providing external {@link NlsTemplateResolver} has been discouraged.
    */
+  @Deprecated
   void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer);
 
 }

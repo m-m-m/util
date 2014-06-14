@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import net.sf.mmm.util.contenttype.api.ContentType;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.xml.base.jaxb.JaxbObject;
 
 /**

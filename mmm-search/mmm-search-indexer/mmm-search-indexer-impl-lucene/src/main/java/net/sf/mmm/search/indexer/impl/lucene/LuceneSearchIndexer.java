@@ -7,7 +7,6 @@ import java.io.IOException;
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.base.SearchDependencies;
-import net.sf.mmm.search.base.SearchPropertyValueInvalidException;
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchEngine;
 import net.sf.mmm.search.engine.impl.lucene.LuceneFieldManager;
@@ -16,10 +15,11 @@ import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexer;
 import net.sf.mmm.search.indexer.base.SearchAddFailedException;
 import net.sf.mmm.search.indexer.base.SearchRemoveFailedException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
@@ -31,7 +31,7 @@ import org.apache.lucene.util.NumericUtils;
 /**
  * This is the implementation of {@link net.sf.mmm.search.indexer.api.SearchIndexer} using lucene as
  * underlying search-engine.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class LuceneSearchIndexer extends AbstractSearchIndexer {
@@ -44,7 +44,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
 
   /**
    * The {@link SearchDependencies}.
-   * 
+   *
    * @see #createEntry()
    */
   private final SearchDependencies searchDependencies;
@@ -68,7 +68,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
 
   /**
    * The constructor.
-   * 
+   *
    * @param indexWriter is the index modifier to use.
    * @param searchEngineBuilder is the {@link LuceneSearchEngineBuilder} required for
    *        {@link #getSearchEngine()}.
@@ -89,7 +89,7 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
 
   /**
    * This method gets the {@link IndexWriter}.
-   * 
+   *
    * @return the {@link IndexWriter}.
    */
   protected IndexWriter getIndexWriter() {
@@ -193,11 +193,11 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
 
   /**
    * This method performs the actual remove by {@link Term}.
-   * 
+   *
    * @see #removeByCustumId(String)
    * @see #removeByUri(String, String)
    * @see IndexWriter#deleteDocuments(Term)
-   * 
+   *
    * @param term is the {@link Term} identifying the {@link SearchEntry entry/entries} to remove.
    * @return the number of removed {@link SearchEntry entries}.
    */
@@ -221,12 +221,13 @@ public class LuceneSearchIndexer extends AbstractSearchIndexer {
   @Override
   public int remove(String field, Object value) throws SearchException {
 
+    NlsNullPointerException.checkNotNull("value", value);
     if (value == null) {
-      throw new SearchPropertyValueInvalidException(field, "null");
+      throw new NlsNullPointerException("value [" + field + "]");
     }
     Term term = this.fieldManager.createTerm(field, value);
     if (term.text().length() == 0) {
-      throw new SearchPropertyValueInvalidException(field, value.toString());
+      throw new NlsIllegalArgumentException(value.toString(), "value [" + field + "]");
     }
     return remove(term);
   }

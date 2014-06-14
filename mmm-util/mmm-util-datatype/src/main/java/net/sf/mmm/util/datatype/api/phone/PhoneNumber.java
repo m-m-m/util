@@ -5,8 +5,8 @@ package net.sf.mmm.util.datatype.api.phone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
-import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
  * This is the interface for a <em>phone number</em>. In this context phone number means an international

@@ -3,7 +3,7 @@
 package net.sf.mmm.persistence.base.sequence;
 
 import net.sf.mmm.persistence.api.sequence.Sequence;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the implementation of the {@link Sequence} interface as simple POJO. If you have a fixed set of

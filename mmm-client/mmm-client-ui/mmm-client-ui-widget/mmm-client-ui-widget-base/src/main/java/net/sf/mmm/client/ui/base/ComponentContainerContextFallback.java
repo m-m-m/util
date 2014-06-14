@@ -16,7 +16,7 @@ import net.sf.mmm.util.component.api.ComponentContainer;
 import net.sf.mmm.util.component.api.ResourceAmbiguousException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderFactory;
 

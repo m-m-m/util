@@ -7,7 +7,9 @@ package net.sf.mmm.util.nls.api;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.NlsRuntimeWrapperException} instead.
  */
+@Deprecated
 public class NlsRuntimeWrapperException extends NlsRuntimeException {
 
   /** UID for serialization. */

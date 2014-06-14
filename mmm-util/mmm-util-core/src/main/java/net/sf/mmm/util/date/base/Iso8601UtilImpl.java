@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.date.api.IllegalDateFormatException;
 import net.sf.mmm.util.date.api.Iso8601Util;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**

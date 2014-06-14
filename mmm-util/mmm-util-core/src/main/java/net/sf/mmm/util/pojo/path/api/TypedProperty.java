@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This class represents a typed property (typically from a java bean). The raw property name is called

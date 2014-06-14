@@ -7,11 +7,11 @@ import java.util.Hashtable;
 import java.util.ResourceBundle;
 
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleKey;
 import net.sf.mmm.util.nls.api.NlsBundleLocation;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.reflect.api.ClassName;
 

@@ -11,7 +11,7 @@ import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.search.indexer.api.MutableSearchEntry;
 import net.sf.mmm.search.indexer.api.SearchIndexer;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of the {@link SearchIndexer}

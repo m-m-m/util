@@ -9,7 +9,7 @@ import net.sf.mmm.logging.TestLogger.LogEvent;
 import net.sf.mmm.logging.TestLogger.LogLevel;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.api.TimeMeasure;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.UiContext;
 import net.sf.mmm.client.ui.api.widget.UiWidget;
 import net.sf.mmm.client.ui.api.widget.UiWidgetDynamicComposite;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapterDynamicComposite;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**

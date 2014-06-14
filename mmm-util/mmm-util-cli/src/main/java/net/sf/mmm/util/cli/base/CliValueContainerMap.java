@@ -5,8 +5,8 @@ package net.sf.mmm.util.cli.base;
 import java.util.Map;
 
 import net.sf.mmm.util.cli.api.CliStyleHandling;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 

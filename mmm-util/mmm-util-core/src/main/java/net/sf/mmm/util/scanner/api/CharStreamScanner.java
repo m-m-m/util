@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.scanner.api;
 
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
  * This is the interface for a scanner that can be used to parse a stream or sequence of characters.

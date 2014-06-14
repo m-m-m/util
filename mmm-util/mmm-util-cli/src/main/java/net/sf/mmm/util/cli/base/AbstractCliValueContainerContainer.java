@@ -6,7 +6,7 @@ import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliOptionDuplicateException;
 import net.sf.mmm.util.cli.api.CliStyle;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.api.GenericType;
 

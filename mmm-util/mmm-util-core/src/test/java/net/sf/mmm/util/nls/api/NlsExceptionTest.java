@@ -15,8 +15,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link net.sf.mmm.util.nls.api.NlsException}.
- * 
+ * This is the test-case for {@link net.sf.mmm.util.exception.api.NlsException}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -69,7 +69,7 @@ public class NlsExceptionTest {
   public void testNlsException() {
 
     String source = "bad boy";
-    NlsException e = new NlsException(MyResourceBundle.ERR_NULL, source) {};
+    NlsException e = new NlsException(NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {};
     String message = "NullPointerException caused by \"" + source + "\"!";
     Assert.assertEquals(message, e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
     NlsTemplateResolverImpl resolver = new NlsTemplateResolverImpl(new MyResourceBundle());

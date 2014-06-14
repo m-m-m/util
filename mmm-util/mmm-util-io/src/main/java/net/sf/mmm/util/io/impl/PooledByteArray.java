@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.impl;
 
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.io.api.ByteArray} that holds a pooled

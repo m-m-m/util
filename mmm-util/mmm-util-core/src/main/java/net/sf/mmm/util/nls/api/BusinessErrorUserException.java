@@ -13,7 +13,9 @@ import net.sf.mmm.util.exception.api.ExceptionTruncation;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.BusinessErrorUserException} instead.
  */
+@Deprecated
 public class BusinessErrorUserException extends NlsRuntimeException {
 
   /** @see #getCode() */
@@ -75,7 +77,7 @@ public class BusinessErrorUserException extends NlsRuntimeException {
   /**
    * The copy constructor.
    *
-   * @see net.sf.mmm.util.nls.api.AbstractNlsRuntimeException#AbstractNlsRuntimeException(net.sf.mmm.util.nls.api.AbstractNlsRuntimeException,
+   * @see net.sf.mmm.util.exception.api.NlsRuntimeException#NlsRuntimeException(net.sf.mmm.util.exception.api.NlsRuntimeException,
    *      ExceptionTruncation)
    *
    * @param copySource is the exception to copy.

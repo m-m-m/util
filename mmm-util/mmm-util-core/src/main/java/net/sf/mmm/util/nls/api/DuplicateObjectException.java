@@ -13,7 +13,9 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
+ * @deprecated use {@link DuplicateObjectException} instead.
  */
+@Deprecated
 public class DuplicateObjectException extends NlsRuntimeException {
 
   /** UID for serialization. */

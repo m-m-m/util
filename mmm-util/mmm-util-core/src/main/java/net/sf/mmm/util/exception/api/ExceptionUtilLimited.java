@@ -25,14 +25,14 @@ public interface ExceptionUtilLimited {
 
   /**
    * Converts the given <code>exception</code> for end-users. Technical exceptions are converted to
-   * {@link net.sf.mmm.util.nls.api.TechnicalErrorUserException}.
+   * {@link net.sf.mmm.util.exception.api.TechnicalErrorUserException}.
    *
-   * @see net.sf.mmm.util.nls.api.TechnicalErrorUserException#getOrCreateUserException(Throwable)
-   * @see net.sf.mmm.util.nls.api.NlsThrowable#isForUser()
-   * @see net.sf.mmm.util.nls.api.TechnicalErrorUserException
+   * @see net.sf.mmm.util.exception.api.TechnicalErrorUserException#getOrCreateUserException(Throwable)
+   * @see net.sf.mmm.util.exception.api.NlsThrowable#isForUser()
+   * @see net.sf.mmm.util.exception.api.TechnicalErrorUserException
    *
    * @param exception is the exception to wrap.
-   * @return the converted exception. Will be an instance of {@link net.sf.mmm.util.nls.api.NlsThrowable}.
+   * @return the converted exception. Will be an instance of {@link net.sf.mmm.util.exception.api.NlsThrowable}.
    */
   Throwable convertForUser(Throwable exception);
 

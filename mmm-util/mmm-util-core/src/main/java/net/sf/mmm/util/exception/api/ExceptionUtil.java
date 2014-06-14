@@ -25,15 +25,15 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
   /**
    * Converts the given <code>exception</code> so it is ensured to be serializable.
    *
-   * @see net.sf.mmm.util.nls.api.GenericSerializableException
-   * @see net.sf.mmm.util.nls.api.NlsThrowable#createCopy(ExceptionTruncation)
+   * @see net.sf.mmm.util.exception.api.GenericSerializableException
+   * @see net.sf.mmm.util.exception.api.NlsThrowable#createCopy(ExceptionTruncation)
    *
    * @param exception is the {@link Throwable} to convert.
    * @param truncation the {@link ExceptionTruncation} to configure if details shall be removed. E.g.
    *        {@link ExceptionTruncation#REMOVE_ALL}.
    * @return a serializable variant of the given <code>exception</code>. Guaranteed to implement
-   *         {@link net.sf.mmm.util.nls.api.NlsThrowable}. By default an instance of
-   *         {@link net.sf.mmm.util.nls.api.GenericSerializableException}.
+   *         {@link net.sf.mmm.util.exception.api.NlsThrowable}. By default an instance of
+   *         {@link net.sf.mmm.util.exception.api.GenericSerializableException}.
    */
   Throwable convertForSerialization(Throwable exception, ExceptionTruncation truncation);
 
@@ -45,7 +45,7 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
    * @param exception is the exception to wrap.
    * @param truncation the {@link ExceptionTruncation} to configure if details shall be removed. E.g.
    *        {@link ExceptionTruncation#REMOVE_ALL}.
-   * @return the converted exception. Will be an instance of {@link net.sf.mmm.util.nls.api.NlsThrowable}.
+   * @return the converted exception. Will be an instance of {@link net.sf.mmm.util.exception.api.NlsThrowable}.
    */
   Throwable convertForUser(Throwable exception, ExceptionTruncation truncation);
 
@@ -71,8 +71,8 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
    * <br/>
    * <b>ATTENTION:</b><br/>
    * It is not the task of this utility to log exceptions. Instead this shall be done before this method is
-   * invoked. To make use of the features of {@link net.sf.mmm.util.nls.api.NlsThrowable} such as the
-   * {@link net.sf.mmm.util.nls.api.NlsThrowable#getUuid() UUID} that is logged and transferred to the client,
+   * invoked. To make use of the features of {@link net.sf.mmm.util.exception.api.NlsThrowable} such as the
+   * {@link net.sf.mmm.util.exception.api.NlsThrowable#getUuid() UUID} that is logged and transferred to the client,
    * you should call {@link #convertForUser(Throwable)} in advance.
    *
    * @param exception is the {@link Throwable} that has been catched at an application boundary.

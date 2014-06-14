@@ -11,7 +11,7 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridCell;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetGridRow;
 import net.sf.mmm.client.ui.base.widget.panel.adapter.UiWidgetAdapterGridPanel;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the abstract base implementation of {@link UiWidgetGridPanel}.

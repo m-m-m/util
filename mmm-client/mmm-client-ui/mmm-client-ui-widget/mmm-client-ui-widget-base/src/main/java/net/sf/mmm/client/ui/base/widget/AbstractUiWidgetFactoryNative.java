@@ -15,10 +15,10 @@ import net.sf.mmm.client.ui.api.widget.factory.UiSingleWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.util.component.base.AbstractComponent;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsClassCastException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsClassCastException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.client.ui.api.UiContext} using

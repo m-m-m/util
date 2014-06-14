@@ -29,6 +29,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.BasicUtil;
@@ -36,8 +38,6 @@ import net.sf.mmm.util.lang.api.CharIterator;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.lang.base.SpaceNormalizingCharIterator;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
-import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.api.XmlCompareMode;
 import net.sf.mmm.util.xml.api.XmlException;

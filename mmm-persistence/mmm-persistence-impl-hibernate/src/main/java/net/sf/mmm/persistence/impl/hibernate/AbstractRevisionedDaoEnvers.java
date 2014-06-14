@@ -13,7 +13,7 @@ import net.sf.mmm.persistence.api.RevisionedDao;
 import net.sf.mmm.persistence.base.jpa.AbstractJpaGenericDao;
 import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
 import net.sf.mmm.util.entity.api.RevisionedEntity;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
@@ -24,7 +24,7 @@ import org.hibernate.envers.AuditReaderFactory;
  *
  * @param <ID> is the type of the {@link net.sf.mmm.util.entity.api.GenericEntity#getId() primary key} of the
  *        managed {@link net.sf.mmm.util.entity.api.GenericEntity}.
- * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -94,7 +94,7 @@ public abstract class AbstractRevisionedDaoEnvers<ID, ENTITY extends MutableRevi
    */
   protected ENTITY loadRevision(Object id, Number revision) throws ObjectNotFoundException {
 
-    Class<? extends ENTITY> entityClassImplementation = getEntityClassImplementation();
+    Class<? extends ENTITY> entityClassImplementation = getEntityClass();
     ENTITY entity = getAuditReader().find(entityClassImplementation, id, revision);
     if (entity != null) {
       entity.setRevision(revision);
@@ -118,7 +118,7 @@ public abstract class AbstractRevisionedDaoEnvers<ID, ENTITY extends MutableRevi
   @Override
   public List<Number> getRevisionHistory(ENTITY entity) {
 
-    return getAuditReader().getRevisions(getEntityClassImplementation(), entity.getId());
+    return getAuditReader().getRevisions(getEntityClass(), entity.getId());
   }
 
   /**
@@ -128,7 +128,7 @@ public abstract class AbstractRevisionedDaoEnvers<ID, ENTITY extends MutableRevi
   public List<RevisionMetadata> getRevisionHistoryMetadata(Object id) {
 
     AuditReader auditReader = getAuditReader();
-    List<Number> revisionList = auditReader.getRevisions(getEntityClassImplementation(), id);
+    List<Number> revisionList = auditReader.getRevisions(getEntityClass(), id);
     List<RevisionMetadata> result = new ArrayList<RevisionMetadata>();
     for (Number revision : revisionList) {
       Long revisionLong = Long.valueOf(revision.longValue());

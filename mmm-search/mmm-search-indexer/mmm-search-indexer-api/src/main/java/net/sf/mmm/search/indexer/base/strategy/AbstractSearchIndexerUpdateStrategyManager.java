@@ -11,7 +11,7 @@ import net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategy;
 import net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategyManager;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base-implementation of the

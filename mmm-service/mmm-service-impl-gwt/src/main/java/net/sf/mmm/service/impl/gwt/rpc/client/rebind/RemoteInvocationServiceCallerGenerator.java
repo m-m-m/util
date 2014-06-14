@@ -10,8 +10,8 @@ import net.sf.mmm.service.base.gwt.RemoteInvocationGenericServiceGwtAsync;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcCall;
 import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceClient;
 import net.sf.mmm.service.impl.gwt.rpc.client.AbstractRemoteInvocationServiceCallerGwt;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;

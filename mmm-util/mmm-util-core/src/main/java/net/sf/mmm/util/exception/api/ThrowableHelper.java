@@ -1,18 +1,16 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.nls.api;
+package net.sf.mmm.util.exception.api;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-import net.sf.mmm.util.exception.api.ExceptionTruncation;
-import net.sf.mmm.util.exception.api.ExceptionUtil;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 
 import org.slf4j.LoggerFactory;
 
 /**
- * This is a small hack to {@link #removeDetails(Throwable, ExceptionTruncation) truncate} exceptions.
+ * This is a small hack to truncate exceptions.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0

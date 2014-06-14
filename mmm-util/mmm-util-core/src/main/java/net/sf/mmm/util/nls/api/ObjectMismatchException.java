@@ -9,7 +9,9 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.ObjectMismatchException} instead.
  */
+@Deprecated
 public class ObjectMismatchException extends NlsRuntimeException {
 
   /** UID for serialization. */

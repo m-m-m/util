@@ -3,8 +3,8 @@
 /**
  * Contains the (base) implementations of dynamic effects.
  * <a name="documentation"/><h2>Client UI Base Dynamic</h2>
- * This package contains the (base) implementations of dynamic features such as common
- * {@link net.sf.mmm.client.ui.api.widget.UiWidget#addVisibleFunction(net.sf.mmm.client.ui.api.attribute.AttributeReadVisible) visible-functions}.
+ * This package contains the (base) implementations of dynamic features such as
+ * {@link net.sf.mmm.client.ui.base.dynamic.UiHandlerEventModeVisibility}.
  */
 package net.sf.mmm.client.ui.base.dynamic;
 

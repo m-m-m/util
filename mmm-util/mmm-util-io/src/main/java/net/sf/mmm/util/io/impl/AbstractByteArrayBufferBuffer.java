@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
 
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.io.api.BufferExceedException;
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
@@ -13,7 +14,6 @@ import net.sf.mmm.util.io.api.ByteProcessor;
 import net.sf.mmm.util.io.api.ComposedByteBuffer;
 import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**

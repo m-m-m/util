@@ -10,12 +10,12 @@ import javax.validation.ConstraintViolationException;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.ExceptionTruncation;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This exception is thrown if a validation failed unexpectedly. You may just use
  * {@link javax.validation.ValidationException}. However, this exception implements
- * {@link net.sf.mmm.util.nls.api.NlsThrowable} will all features and allows
+ * {@link net.sf.mmm.util.exception.api.NlsThrowable} will all features and allows
  * {@link net.sf.mmm.util.exception.api.ExceptionTruncation}.<br/>
  * <b>ATTENTION:</b><br/>
  * Regular validation should not use exceptions. E.g. in a rich client validation happens for usability to
@@ -70,7 +70,7 @@ public class ValidationErrorUserException extends NlsRuntimeException {
   /**
    * The copy constructor.
    *
-   * @see net.sf.mmm.util.nls.api.AbstractNlsRuntimeException#AbstractNlsRuntimeException(net.sf.mmm.util.nls.api.AbstractNlsRuntimeException,
+   * @see net.sf.mmm.util.exception.api.NlsRuntimeException#NlsRuntimeException(net.sf.mmm.util.exception.api.NlsRuntimeException,
    *      ExceptionTruncation)
    *
    * @param copySource is the exception to copy.

@@ -20,8 +20,8 @@ import java.util.Map;
 import java.util.Set;
 
 import junit.framework.Assert;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.path.base.AbstractPojoPathFunction;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathContext;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;

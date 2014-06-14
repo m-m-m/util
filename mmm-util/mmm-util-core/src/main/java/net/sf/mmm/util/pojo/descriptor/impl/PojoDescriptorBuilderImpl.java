@@ -18,7 +18,7 @@ import javax.inject.Inject;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoFieldIntrospector;

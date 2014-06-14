@@ -5,7 +5,7 @@ package net.sf.mmm.util.lang.api;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 import org.junit.Assert;
 import org.junit.Test;

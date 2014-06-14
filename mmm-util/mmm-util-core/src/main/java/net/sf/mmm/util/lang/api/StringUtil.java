@@ -12,10 +12,10 @@ import net.sf.mmm.util.value.api.ValueConverter;
 /**
  * This is the interface for a collection of utility functions that help with {@link String} handling and
  * manipulation.
- * 
+ *
  * @see net.sf.mmm.util.lang.base.StringUtilImpl#getInstance()
  * @see net.sf.mmm.util.text.api.UnicodeUtil
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -49,17 +49,12 @@ public interface StringUtil {
   /**
    * The platform-specific line-separator string. Should be one of {@link #LINE_SEPARATOR_LF},
    * {@link #LINE_SEPARATOR_CRLF}, {@link #LINE_SEPARATOR_LFCR}, {@link #LINE_SEPARATOR_CR}.
-   * 
-   * @deprecated Due to GWT compatibility we had to remove dependency on {@link System#getProperty(String)}.
-   *             Please use {@link #getLineSeparator()} or get it manually via
-   *             {@link System#getProperty(String)} using {@link #SYSTEM_PROPERTY_LINE_SEPARATOR}.
    */
-  @Deprecated
-  String LINE_SEPARATOR = LINE_SEPARATOR_LF;
+  String LINE_SEPARATOR = GwtHelper.LINE_SEPARATOR;
 
   /**
    * The {@link System#getProperty(String) system property name} for {@link #LINE_SEPARATOR}.
-   * 
+   *
    * @since 3.1.0
    */
   String SYSTEM_PROPERTY_LINE_SEPARATOR = "line.separator";
@@ -69,7 +64,7 @@ public interface StringUtil {
 
   /**
    * An empty char array.
-   * 
+   *
    * @since 2.0.0
    */
   char[] EMPTY_CHAR_ARRAY = new char[0];
@@ -77,16 +72,16 @@ public interface StringUtil {
   /**
    * The platform-specific line-separator string. Should be one of {@link #LINE_SEPARATOR_LF},
    * {@link #LINE_SEPARATOR_CRLF}, {@link #LINE_SEPARATOR_LFCR}, {@link #LINE_SEPARATOR_CR}.
-   * 
+   *
    * @return the line separator.
    */
   String getLineSeparator();
 
   /**
    * This method parses a boolean value given as string.
-   * 
+   *
    * @see Boolean#valueOf(String)
-   * 
+   *
    * @param booleanValue is the boolean value as string.
    * @return <code>true</code> if the given string {@link String#equalsIgnoreCase(java.lang.String) equals} to
    *         {@link #TRUE true}, <code>false</code> if it {@link String#equalsIgnoreCase(java.lang.String)
@@ -97,9 +92,9 @@ public interface StringUtil {
   /**
    * This method replaces all occurrences of <code>oldChar</code> in the char-array given by
    * <code>string</code> with <code>newChar</code>.
-   * 
+   *
    * @see String#replace(char, char)
-   * 
+   *
    * @param string is the char-array where the replacement should take place.
    * @param oldChar is the character to be replaced.
    * @param newChar is the replacement for <code>oldChar</code>.
@@ -109,7 +104,7 @@ public interface StringUtil {
   /**
    * This method replaces all occurrences of the string <code>match</code> with the string
    * <code>replace</code> in the given string.
-   * 
+   *
    * @param string is the string where to replace.
    * @param match is the string that is searched and replaced.
    * @param replace is the string <code>match</code> is substituted with.
@@ -120,9 +115,9 @@ public interface StringUtil {
   /**
    * This method delegates to {@link #replaceSuffixWithCase(String, int, String, Locale)} using
    * {@link Locale#ENGLISH}.
-   * 
+   *
    * @see #replaceSuffixWithCase(String, int, String, Locale)
-   * 
+   *
    * @param string is the string to replace.
    * @param suffixLength is the length of the suffix from <code>string</code> to replace.
    * @param newSuffixLowerCase is the new suffix for the given <code>string</code> in
@@ -170,7 +165,7 @@ public interface StringUtil {
    * <td>FooBfoo</td>
    * </tr>
    * </table>
-   * 
+   *
    * @param string is the string to replace.
    * @param suffixLength is the length of the suffix from <code>string</code> to replace.
    * @param newSuffixLowerCase is the new suffix for the given <code>string</code> in
@@ -184,9 +179,9 @@ public interface StringUtil {
 
   /**
    * This method determines if the given string contains no information.
-   * 
+   *
    * @see #isEmpty(String, boolean)
-   * 
+   *
    * @param string is the string to check.
    * @return <code>true</code> if the given string is <code>null</code> or has a trimmed length of zero,
    *         <code>false</code> otherwise.
@@ -195,7 +190,7 @@ public interface StringUtil {
 
   /**
    * This method determines if the given string is empty.
-   * 
+   *
    * @param string is the string to check.
    * @param trim if whitespaces should be ignored and a string with a trimmed length of zero is considered as
    *        empty.
@@ -214,7 +209,7 @@ public interface StringUtil {
    * <li><code>padNumber(100, 3)</code> will return <code>"100"</code></li>
    * <li><code>padNumber(1234, 3)</code> will return <code>"1234"</code></li>
    * </ul>
-   * 
+   *
    * @param number is the positive number to format.
    * @param digits is the (minimum) number of digits required.
    * @return the number as string with the length of (at least) <code>digits</code>. If the number is less,
@@ -230,7 +225,7 @@ public interface StringUtil {
    * <li><code>padNumber(31, 3, 16)</code> will return <code>"01f"</code></li>
    * <li><code>padNumber(5, 6, 2)</code> will return <code>"000101"</code></li>
    * </ul>
-   * 
+   *
    * To pad a number to a constant length you can use the following value for <code>digits</code>: <br>
    * <table border="1">
    * <tr>
@@ -269,7 +264,7 @@ public interface StringUtil {
    * <td>16</td>
    * </tr>
    * </table>
-   * 
+   *
    * @param number is the positive number to format.
    * @param digits is the (minimum) number of digits required.
    * @param radix is the radix to use.
@@ -281,9 +276,9 @@ public interface StringUtil {
   /**
    * This method converts the given <code>string</code> to caml-case syntax using the default separators
    * <code>' '</code>, <code>'-'</code>, <code>'_'</code> and <code>'.'</code>.
-   * 
+   *
    * @see #toCamlCase(String, char[])
-   * 
+   *
    * @param string is the string to convert.
    * @return the given <code>string</code> in caml-case syntax.
    */
@@ -313,7 +308,7 @@ public interface StringUtil {
    * <td><code>XML</code></td>
    * </tr>
    * </table>
-   * 
+   *
    * @param string is the string to convert.
    * @param separators is the list of characters that are treated as word-separators.
    * @return the given <code>string</code> in caml-case syntax.
@@ -351,9 +346,9 @@ public interface StringUtil {
    * <td>foo_bar</td>
    * </tr>
    * </table>
-   * 
+   *
    * @see #toCamlCase(String, char...)
-   * 
+   *
    * @param string is the string to convert.
    * @param separator is the character to insert at word-boundaries indicated by a switch from lower- to
    *        upper-case.
@@ -366,13 +361,13 @@ public interface StringUtil {
    * This method checks if the given <code>string</code> {@link String#contains(CharSequence) contains} the
    * given <code>substring</code> at the given <code>offset</code>.<br>
    * This is an efficient implementation of
-   * 
+   *
    * <pre>string.indexOf(substring, offset) == offset</pre>
-   * 
+   *
    * or
-   * 
+   *
    * <pre>string.substring(offset).beginsWith(substring)</pre>
-   * 
+   *
    * @param string is the string potentially containing <code>substring</code>.
    * @param substring is the substring that should be contained in <code>string</code> at the given
    *        <code>offset</code>.
@@ -387,13 +382,13 @@ public interface StringUtil {
    * This method checks if the given <code>string</code> {@link String#contains(CharSequence) contains} the
    * given <code>substring</code> at the given <code>offset</code>.<br>
    * This is an efficient implementation of
-   * 
+   *
    * <pre>string.indexOf(substring, offset) == offset</pre>
-   * 
+   *
    * or
-   * 
+   *
    * <pre>string.substring(offset).beginsWith(substring)</pre>
-   * 
+   *
    * @param string is the char[] representing the string potentially containing <code>substring</code>.
    * @param substring is the substring that should be contained in <code>string</code> at the given
    *        <code>offset</code>.
@@ -447,7 +442,7 @@ public interface StringUtil {
    * </table>
    * Please note that {@link Collection}s with heterogeneous elements can NOT be converted back from
    * {@link String}.
-   * 
+   *
    * @param collection is the {@link Collection} with the elements to format as separated string. May be
    *        {@link Collection#isEmpty() empty}.
    * @param separator is the {@link String} used to separate elements. It is appended after each but the last
@@ -464,9 +459,9 @@ public interface StringUtil {
   /**
    * This method is like {@link #toSeparatedString(Collection, String, StringSyntax)} but allows to specify an
    * explicit {@link Formatter} to use instead of {@link Object#toString()}.
-   * 
+   *
    * @param <E> is the generic type of the elements in the collection.
-   * 
+   *
    * @param collection is the {@link Collection} with the elements to format as separated string. May be
    *        {@link Collection#isEmpty() empty}.
    * @param separator is the {@link String} used to separate elements. It is appended after each but the last
@@ -484,9 +479,9 @@ public interface StringUtil {
   /**
    * This method is like {@link #toSeparatedString(Collection, String, StringSyntax)} but allows to specify an
    * explicit {@link Formatter} to use instead of {@link Object#toString()}.
-   * 
+   *
    * @param <E> is the generic type of the elements in the collection.
-   * 
+   *
    * @param collection is the {@link Collection} with the elements to format as separated string. May be
    *        {@link Collection#isEmpty() empty}.
    * @param separator is the {@link String} used to separate elements. It is appended after each but the last
@@ -506,7 +501,7 @@ public interface StringUtil {
    * This method is like
    * {@link #fromSeparatedString(CharSequence, String, StringSyntax, Collection, ValueConverter)} but expects
    * elements of the type {@link String} that do not need additional custom conversion.
-   * 
+   *
    * @param separatedString is the separated {@link String} of elements to add to the collection.
    * @param separator is the {@link String} used to separate the individual elements in
    *        <code>separatedString</code>. There should be no <code>separator</code> after the last element in
@@ -522,7 +517,7 @@ public interface StringUtil {
    * This method is like
    * {@link #fromSeparatedString(CharSequence, String, StringSyntax, Collection, ValueConverter)} but expects
    * elements of the type {@link String} that do not need additional custom conversion.
-   * 
+   *
    * @param separatedString is the separated {@link String} of elements to add to the collection.
    * @param separator is the {@link String} used to separate the individual elements in
    *        <code>separatedString</code>. There should be no <code>separator</code> after the last element in
@@ -540,9 +535,9 @@ public interface StringUtil {
    * <code>separator</code> and the given <code>syntax</code> and {@link Collection#add(Object) adds} these
    * elements to the given <code>collection</code>.<br/>
    * This is the inverse operation of {@link #toSeparatedString(Collection, String, StringSyntax, Formatter)}.
-   * 
+   *
    * @param <E> is the generic type of the elements in the collection.
-   * 
+   *
    * @param separatedString is the separated {@link String} of elements to add to the collection.
    * @param separator is the {@link String} used to separate the individual elements in
    *        <code>separatedString</code>. There should be no <code>separator</code> after the last element in
@@ -562,9 +557,9 @@ public interface StringUtil {
    * <code>separator</code> and the given <code>syntax</code> and {@link Collection#add(Object) adds} these
    * elements to the given <code>collection</code>.<br/>
    * This is the inverse operation of {@link #toSeparatedString(Collection, String, StringSyntax, Formatter)}.
-   * 
+   *
    * @param <E> is the generic type of the elements in the collection.
-   * 
+   *
    * @param separatedString is the separated {@link String} of elements to add to the collection.
    * @param separator is the {@link String} used to separate the individual elements in
    *        <code>separatedString</code>. There should be no <code>separator</code> after the last element in

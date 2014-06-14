@@ -9,10 +9,9 @@ import org.w3c.dom.NodeList;
 
 /**
  * This class is used to {@link java.util.Iterator#next() iterate} the {@link Node}s of a {@link NodeList}.
- * Depending on the {@link XmlCompareMode} given at {@link #JoiningNodeIterator(NodeList, XmlCompareMode)
- * construction} it automatically joins {@link Node}s of according {@link Node#getNodeType() types} by
- * returning them as a {@link org.w3c.dom.DocumentFragment}.
- * 
+ * Depending on the {@link XmlCompareMode} given at construction it automatically joins {@link Node}s of
+ * according {@link Node#getNodeType() types} by returning them as a {@link org.w3c.dom.DocumentFragment}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -26,7 +25,7 @@ class JoiningNodeIterator extends NodeIterator {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nodeList is the {@link NodeList} to iterate.
    * @param mode is the {@link XmlCompareMode}.
    */

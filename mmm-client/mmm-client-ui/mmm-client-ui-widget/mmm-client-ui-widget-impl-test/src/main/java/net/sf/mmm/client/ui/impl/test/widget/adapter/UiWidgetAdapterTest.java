@@ -23,7 +23,7 @@ import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterLink;
 import net.sf.mmm.client.ui.base.widget.core.adapter.UiWidgetAdapterSection;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemClickable;
 import net.sf.mmm.client.ui.base.widget.menu.adapter.UiWidgetAdapterMenuItemSeparator;
-import net.sf.mmm.util.nls.api.ObjectDisposedException;
+import net.sf.mmm.util.exception.api.ObjectDisposedException;
 
 /**
  * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter} for testing

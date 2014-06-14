@@ -4,13 +4,12 @@ package net.sf.mmm.persistence.impl.jpa;
 
 import java.util.concurrent.Callable;
 
+import net.sf.mmm.persistence.api.GenericDao;
 import net.sf.mmm.persistence.api.PersistenceManager;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityDao;
-import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntityView;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityDao;
-import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntityView;
 import net.sf.mmm.persistence.impl.jpa.test.impl.DummyBarEntityImpl;
 import net.sf.mmm.persistence.impl.jpa.test.impl.DummyFooEntityImpl;
 import net.sf.mmm.transaction.api.TransactionExecutor;
@@ -22,7 +21,7 @@ import org.junit.Test;
 /**
  * This is the test-case for the persistence. It performs a full integration test using hibernate as OR mapper
  * and an embedded database.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -118,23 +117,21 @@ public class PersistenceTest {
   protected DummyFooEntity createAndSave() {
 
     PersistenceManager persistenceManager = getPersistenceManager();
-    DummyFooEntityDao fooManager = (DummyFooEntityDao) persistenceManager.getDao(DummyFooEntity.class);
-    Assert.assertSame(DummyFooEntity.class, fooManager.getEntityClassReadWrite());
-    Assert.assertSame(DummyFooEntityView.class, fooManager.getEntityClassReadOnly());
-    Assert.assertSame(DummyFooEntityImpl.class, fooManager.getEntityClassImplementation());
-    Assert.assertTrue(fooManager instanceof DummyFooEntityDao);
-    DummyBarEntityDao barManager = (DummyBarEntityDao) persistenceManager.getDao(DummyBarEntity.class);
-    Assert.assertSame(DummyBarEntityView.class, barManager.getEntityClassReadOnly());
-    Assert.assertSame(DummyBarEntity.class, barManager.getEntityClassReadWrite());
-    Assert.assertSame(DummyBarEntityImpl.class, barManager.getEntityClassImplementation());
-    Assert.assertTrue(barManager instanceof DummyBarEntityDao);
-    DummyBarEntity bar = barManager.create();
+    GenericDao<Integer, DummyFooEntity> fooDao = persistenceManager.getDao(DummyFooEntity.class);
+    Assert.assertTrue(fooDao instanceof DummyFooEntityDao);
+    Assert.assertSame(DummyFooEntityImpl.class, fooDao.getEntityClass());
+    Assert.assertSame(fooDao, persistenceManager.getDao(DummyFooEntityImpl.class));
+    GenericDao<Long, DummyBarEntity> barDao = persistenceManager.getDao(DummyBarEntity.class);
+    Assert.assertTrue(barDao instanceof DummyBarEntityDao);
+    Assert.assertSame(DummyBarEntityImpl.class, barDao.getEntityClass());
+    Assert.assertSame(barDao, persistenceManager.getDao(DummyBarEntityImpl.class));
+    DummyBarEntity bar = barDao.create();
     bar.setValue("value42");
-    barManager.save(bar);
-    DummyFooEntity foo = fooManager.create();
+    barDao.save(bar);
+    DummyFooEntity foo = fooDao.create();
     foo.setNumber(42);
     foo.setBar(bar);
-    fooManager.save(foo);
+    fooDao.save(foo);
     return foo;
   }
 }

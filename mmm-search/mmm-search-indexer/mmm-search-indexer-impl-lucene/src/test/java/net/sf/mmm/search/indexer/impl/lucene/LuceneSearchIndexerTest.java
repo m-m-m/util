@@ -12,6 +12,9 @@ import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationHolder;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationLoader;
 import net.sf.mmm.search.indexer.impl.SearchIndexerMain;
 import net.sf.mmm.test.TestResourceHelper;
+import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.component.base.SpringConfigs;
+import net.sf.mmm.util.component.impl.SpringContainerPool;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -54,9 +57,11 @@ public class LuceneSearchIndexerTest {
     String configLocation = TestResourceHelper.getTestPath(LuceneSearchIndexerTest.class, ".xml");
     int exitCode = main.run("--config", configLocation, "--overwrite");
     Assert.assertEquals(0, exitCode);
-    SearchEngineConfigurationLoader configLoader = main.getIocContainer().get(SearchEngineConfigurationLoader.class);
+
+    IocContainer iocContainer = SpringContainerPool.getInstance(SpringConfigs.SPRING_XML_SEARCH_INDEXER);
+    SearchEngineConfigurationLoader configLoader = iocContainer.get(SearchEngineConfigurationLoader.class);
     SearchEngineConfigurationHolder configurationHolder = configLoader.loadConfiguration(configLocation);
-    SearchEngineBuilder searchEngineBuilder = main.getIocContainer().get(SearchEngineBuilder.class);
+    SearchEngineBuilder searchEngineBuilder = iocContainer.get(SearchEngineBuilder.class);
     String path = LuceneSearchIndexerTest.class.getName().replace('.', '/');
     ManagedSearchEngine searchEngine = searchEngineBuilder.createSearchEngine(configurationHolder);
     try {

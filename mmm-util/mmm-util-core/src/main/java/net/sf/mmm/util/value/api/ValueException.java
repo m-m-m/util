@@ -2,10 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-import java.util.Map;
-
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This exception is thrown if a something goes wrong about values. This can be an invalid "casting", a parse
@@ -25,41 +23,6 @@ public abstract class ValueException extends NlsRuntimeException {
   protected ValueException() {
 
     super();
-  }
-
-  /**
-   * The constructor.
-   *
-   * @see #toMap(String, Object, String, Object)
-   *
-   * @param internationalizedMessage is a short description of the problem. It is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
-   *        should be in English language.
-   * @param arguments are the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) arguments} to be
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() filled into
-   *        <code>internationalizedMessage</code>}.
-   */
-  public ValueException(String internationalizedMessage, Map<String, Object> arguments) {
-
-    super(internationalizedMessage, arguments);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @see #toMap(String, Object, String, Object)
-   *
-   * @param nested is the {@link #getCause() cause} of this exception.
-   * @param internationalizedMessage is a short description of the problem. It is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
-   *        should be in English language.
-   * @param arguments are the {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) arguments} to be
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() filled into
-   *        <code>internationalizedMessage</code>}.
-   */
-  public ValueException(Throwable nested, String internationalizedMessage, Map<String, Object> arguments) {
-
-    super(nested, internationalizedMessage, arguments);
   }
 
   /**

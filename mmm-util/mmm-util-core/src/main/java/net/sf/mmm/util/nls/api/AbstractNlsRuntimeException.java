@@ -3,10 +3,8 @@
 package net.sf.mmm.util.nls.api;
 
 import java.util.Locale;
-import java.util.UUID;
 
 import net.sf.mmm.util.exception.api.ExceptionTruncation;
-import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
  * This is an abstract base implementation of an unchecked exception with real
@@ -20,17 +18,14 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.NlsRuntimeException} instead.
  */
-public abstract class AbstractNlsRuntimeException extends RuntimeException implements NlsThrowable, Cloneable {
+@Deprecated
+public abstract class AbstractNlsRuntimeException extends net.sf.mmm.util.exception.api.NlsRuntimeException
+    implements NlsThrowable {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -7838850701154079724L;
-
-  /** the internationalized message */
-  private NlsMessage nlsMessage;
-
-  /** @see #getUuid() */
-  private UUID uuid;
 
   /**
    * The constructor for de-serialization in GWT.
@@ -47,9 +42,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
    */
   public AbstractNlsRuntimeException(NlsMessage message) {
 
-    super();
-    this.nlsMessage = message;
-    this.uuid = createUuid();
+    super(message);
   }
 
   /**
@@ -60,13 +53,7 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
    */
   public AbstractNlsRuntimeException(Throwable nested, NlsMessage message) {
 
-    super(nested);
-    this.nlsMessage = message;
-    if ((nested != null) && (nested instanceof NlsThrowable)) {
-      this.uuid = ((NlsThrowable) nested).getUuid();
-    } else {
-      this.uuid = createUuid();
-    }
+    super(nested, message);
   }
 
   /**
@@ -77,93 +64,16 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
    */
   protected AbstractNlsRuntimeException(AbstractNlsRuntimeException copySource, ExceptionTruncation truncation) {
 
-    // super(null, truncation.isRemoveCause() ? null : copySource.getCause(),
-    // !truncation.isRemoveSuppressed(),
-    // !truncation.isRemoveStacktrace());
-    super(null, truncation.isRemoveCause() ? null : copySource.getCause());
-    this.nlsMessage = copySource.nlsMessage;
-    this.uuid = copySource.uuid;
-    if (!truncation.isRemoveStacktrace()) {
-      setStackTrace(copySource.getStackTrace());
-    }
-    if (!truncation.isRemoveSuppressed()) {
-      for (Throwable suppressed : copySource.getSuppressed()) {
-        addSuppressed(suppressed);
-      }
-    }
-  }
-
-  /**
-   * This method creates a new {@link UUID}.
-   *
-   * @return the new {@link UUID} or <code>null</code> to turn this feature off.
-   */
-  protected UUID createUuid() {
-
-    return UuidAccess.getFactory().createUuid();
+    super(copySource, truncation);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public final UUID getUuid() {
+  public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
-    return this.uuid;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public final NlsMessage getNlsMessage() {
-
-    return this.nlsMessage;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
-
-    AbstractNlsException.printStackTrace(this, locale, resolver, buffer);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void printStackTrace(Locale locale, Appendable buffer) {
-
-    printStackTrace(locale, null, buffer);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getMessage() {
-
-    return getNlsMessage().getMessage();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getLocalizedMessage() {
-
-    return getNlsMessage().getLocalizedMessage();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getLocalizedMessage(Locale locale) {
-
-    return getLocalizedMessage(locale, null);
+    getNlsMessage().getLocalizedMessage(locale, resolver, buffer);
   }
 
   /**
@@ -181,92 +91,9 @@ public abstract class AbstractNlsRuntimeException extends RuntimeException imple
    * {@inheritDoc}
    */
   @Override
-  public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
+  public void printStackTrace(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
-    getNlsMessage().getLocalizedMessage(locale, resolver, buffer);
+    AbstractNlsException.printStackTrace(this, locale, resolver, buffer);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public NlsMessage toNlsMessage() {
-
-    return getNlsMessage();
-  }
-
-  /**
-   * @see NlsBundleFactory#createBundle(Class)
-   *
-   * @param <BUNDLE> is the generic type of the requested {@link NlsBundle}.
-   * @param bundleInterface is the {@link NlsBundle} interface.
-   * @return the {@link NlsBundle} instance.
-   */
-  protected static <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
-
-    return NlsAccess.getBundleFactory().createBundle(bundleInterface);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isTechnical() {
-
-    // override to change...
-    return true;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isForUser() {
-
-    return !isTechnical();
-  }
-
-  /**
-   * @see #createCopy(ExceptionTruncation)
-   *
-   * @param truncation the {@link ExceptionTruncation} settings.
-   * @return the (truncated) copy.
-   */
-  protected AbstractNlsRuntimeException createCopyViaClone(ExceptionTruncation truncation) {
-
-    // try {
-    AbstractNlsRuntimeException copy = null; // (AbstractNlsRuntimeException) clone();
-    ThrowableHelper.removeDetails(copy, truncation);
-    return copy;
-    // } catch (CloneNotSupportedException e) {
-    // throw new IllegalStateException(e);
-    // }
-  }
-
-  /**
-   * {@inheritDoc}
-   *
-   * This default implementation is using {@link #createCopyViaClone(ExceptionTruncation) clone} to create a
-   * copy and truncate it as configured. However, a proper implementation would use the appropriate
-   * {@link #AbstractNlsRuntimeException(AbstractNlsRuntimeException, ExceptionTruncation) copy constructor}
-   * instead.
-   */
-  @Override
-  public AbstractNlsRuntimeException createCopy(ExceptionTruncation truncation) {
-
-    return createCopyViaClone(truncation);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String toString() {
-
-    String result = super.toString();
-    if (this.uuid != null) {
-      result = result + AbstractNlsException.LINE_SEPARATOR + this.uuid.toString();
-    }
-    return result;
-  }
 }

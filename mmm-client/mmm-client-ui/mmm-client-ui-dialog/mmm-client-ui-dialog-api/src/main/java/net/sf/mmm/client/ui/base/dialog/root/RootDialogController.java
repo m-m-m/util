@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow;
 import net.sf.mmm.client.ui.base.dialog.DialogController;
 import net.sf.mmm.client.ui.base.dialog.DialogSlot;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
 
 /**
  * This is the {@link DialogController} for the {@link DialogConstants#TYPE_ROOT root} dialog. It simply

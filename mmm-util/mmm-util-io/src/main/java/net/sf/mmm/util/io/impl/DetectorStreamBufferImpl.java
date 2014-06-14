@@ -8,13 +8,13 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.io.api.BufferExceedException;
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
 import net.sf.mmm.util.io.base.AbstractByteArray;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.pool.api.ByteArrayPool;
 
 /**

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import net.sf.mmm.search.api.config.SearchFieldConfiguration;
 import net.sf.mmm.search.api.config.SearchFieldMode;
 import net.sf.mmm.search.api.config.SearchFieldType;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.xml.base.jaxb.XmlAdapterEnum;
 
 /**

@@ -19,7 +19,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * {@link NlsMessage#getLocalizedMessage(Locale) localized message} of the given text. In other words
  * everything that is written here (except via {@link #printRaw(CharSequence)} and
  * {@link #printlnRaw(CharSequence)}) gets translated via {@link NlsMessage}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -42,7 +42,7 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param appendable is the {@link Appendable} to delegate to.
    */
   public NlsWriter(Appendable appendable) {
@@ -52,7 +52,7 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param appendable is the {@link Appendable} to delegate to.
    * @param arguments are the {@link #getArguments() arguments}.
    */
@@ -63,7 +63,7 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param appendable is the {@link Appendable} to delegate to.
    * @param arguments are the {@link #getArguments() arguments}.
    * @param locale is the {@link Locale}.
@@ -75,7 +75,7 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param appendable is the {@link Appendable} to delegate to.
    * @param arguments are the {@link #getArguments() arguments}.
    * @param locale is the {@link Locale}.
@@ -88,7 +88,7 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param appendable is the {@link Appendable} to delegate to.
    * @param arguments are the {@link #getArguments() arguments}.
    * @param locale is the {@link Locale}.
@@ -103,7 +103,7 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param appendable is the {@link Appendable} to delegate to.
    * @param arguments are the {@link #getArguments() arguments}.
    * @param locale is the {@link Locale}.
@@ -134,6 +134,7 @@ public class NlsWriter extends AppendableWriter {
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("deprecation")
   @Override
   public NlsWriter append(CharSequence csq) throws RuntimeIoException {
 
@@ -149,7 +150,7 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * This method is the same as {@link #append(CharSequence)} or {@link #write(String)}.
-   * 
+   *
    * @param csq is the {@link NlsMessage#getInternationalizedMessage() internationalized message} to write.
    * @throws RuntimeIoException if an error occurred while {@link Appendable#append(CharSequence) writing}.
    */
@@ -160,10 +161,11 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * This method writes an {@link NlsMessage}.
-   * 
+   *
    * @param message is the {@link NlsMessage} to write.
    * @throws RuntimeIoException if an error occurred while {@link Appendable#append(CharSequence) writing}.
    */
+  @SuppressWarnings("deprecation")
   public void print(NlsMessage message) throws RuntimeIoException {
 
     message.getLocalizedMessage(this.locale, this.resolver, getAppendable());
@@ -171,7 +173,7 @@ public class NlsWriter extends AppendableWriter {
 
   /**
    * This method writes a newline (line-separator).
-   * 
+   *
    * @throws RuntimeIoException if an error occurred while {@link Appendable#append(CharSequence) writing}.
    */
   public void println() throws RuntimeIoException {
@@ -182,7 +184,7 @@ public class NlsWriter extends AppendableWriter {
   /**
    * This method is like {@link #append(CharSequence)} or {@link #write(String)} but additionally adds a
    * newline (line-separator) after the message.
-   * 
+   *
    * @param csq is the {@link NlsMessage#getInternationalizedMessage() internationalized message} to write.
    * @throws RuntimeIoException if an error occurred while {@link Appendable#append(CharSequence) writing}.
    */
@@ -195,7 +197,7 @@ public class NlsWriter extends AppendableWriter {
   /**
    * This method {@link #write(String) writes} the raw <code>text</code> without internationalization. It may
    * be used for text that is language independent or already internationalized.
-   * 
+   *
    * @param text is the raw text to write.
    * @throws RuntimeIoException if an {@link java.io.IOException} occurred while
    *         {@link Appendable#append(CharSequence) writing} to the underlying {@link Appendable}.
@@ -208,7 +210,7 @@ public class NlsWriter extends AppendableWriter {
   /**
    * This method {@link #write(String) writes} the raw <code>text</code> without internationalization. It may
    * be used for text that is language independent or already internationalized.
-   * 
+   *
    * @param text is the raw text to write.
    * @throws RuntimeIoException if an {@link java.io.IOException} occurred while
    *         {@link Appendable#append(CharSequence) writing} to the underlying {@link Appendable}.
@@ -223,7 +225,7 @@ public class NlsWriter extends AppendableWriter {
    * This method gets the {@link NlsMessage#getArgument(String) arguments} for the created {@link NlsMessage}
    * s. The arguments may be modified or {@link #setArguments(Map) replaced} before the next message is
    * {@link #write(String) written}.
-   * 
+   *
    * @return the arguments.
    */
   public Map<String, Object> getArguments() {
@@ -234,7 +236,7 @@ public class NlsWriter extends AppendableWriter {
   /**
    * This method sets the {@link #getArguments() arguments}. This allows to replace them before writing
    * another message.
-   * 
+   *
    * @param arguments is the arguments to set
    */
   public void setArguments(Map<String, Object> arguments) {

@@ -2,11 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.path.api;
 
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
+import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This exception is thrown if any piece of XML could NOT be parsed because it has an illegal syntax.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XmlParseException extends NlsRuntimeException {
@@ -19,27 +20,23 @@ public class XmlParseException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
-   * @param internaitionalizedMessage
-   * @param arguments
+   *
+   * @param message
    */
-  public XmlParseException(String internaitionalizedMessage, Object... arguments) {
+  public XmlParseException(NlsMessage message) {
 
-    super(internaitionalizedMessage, arguments);
-    // TODO Auto-generated constructor stub
+    super(message);
   }
 
   /**
    * The constructor.
-   * 
-   * @param nested
-   * @param internaitionalizedMessage
-   * @param arguments
+   *
+   * @param cause
+   * @param message
    */
-  public XmlParseException(Throwable nested, String internaitionalizedMessage, Object... arguments) {
+  public XmlParseException(Throwable cause, NlsMessage message) {
 
-    super(nested, internaitionalizedMessage, arguments);
-    // TODO Auto-generated constructor stub
+    super(cause, message);
   }
 
   /**

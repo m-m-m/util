@@ -3,7 +3,7 @@
 package net.sf.mmm.util.lang.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 /**
  * This enum represents a vertical alignment of some object.<br>

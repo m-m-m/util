@@ -4,7 +4,7 @@ package net.sf.mmm.util.value.impl;
 
 import java.lang.reflect.Array;
 
-import net.sf.mmm.util.nls.api.NlsParseException;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 

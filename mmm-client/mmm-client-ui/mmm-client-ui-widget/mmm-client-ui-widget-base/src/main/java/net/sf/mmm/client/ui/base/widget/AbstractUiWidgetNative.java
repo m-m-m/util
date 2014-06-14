@@ -22,10 +22,10 @@ import net.sf.mmm.client.ui.base.aria.role.RoleFactory;
 import net.sf.mmm.client.ui.base.attribute.AbstractFlagAdvanced;
 import net.sf.mmm.client.ui.base.widget.adapter.AbstractUiWidgetAdapter;
 import net.sf.mmm.client.ui.base.widget.adapter.UiWidgetAdapter;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectDisposedException;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
-import net.sf.mmm.util.nls.api.ReadOnlyException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectDisposedException;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
+import net.sf.mmm.util.exception.api.ReadOnlyException;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**

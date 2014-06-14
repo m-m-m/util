@@ -4,7 +4,7 @@ package net.sf.mmm.client.ui.base.binding;
 
 import net.sf.mmm.client.ui.api.handler.event.UiHandlerEventValueChange;
 import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationState;
 import net.sf.mmm.util.validation.api.ValueValidator;

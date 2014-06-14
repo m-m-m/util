@@ -16,6 +16,7 @@ import java.util.TimeZone;
 
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplate;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;

@@ -17,7 +17,7 @@ import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.component.api.Refreshable;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
-import net.sf.mmm.util.nls.api.NlsIllegalStateException;
+import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**

@@ -4,13 +4,13 @@ package net.sf.mmm.persistence.base;
 
 import net.sf.mmm.persistence.api.RevisionedDao;
 import net.sf.mmm.util.entity.api.RevisionedEntity;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base implementation of the {@link RevisionedDao} interface.
  * 
  * @param <ID> is the type of the {@link net.sf.mmm.util.entity.api.GenericEntity#getId() primary key}.
- * @param <ENTITY> is the {@link #getEntityClassImplementation() type} of the managed entity.
+ * @param <ENTITY> is the {@link #getEntityClass() type} of the managed entity.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

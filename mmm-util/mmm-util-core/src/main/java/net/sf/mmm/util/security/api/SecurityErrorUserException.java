@@ -4,8 +4,8 @@ package net.sf.mmm.util.security.api;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.ExceptionTruncation;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.lang.api.concern.Security;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
 
 /**
  * This exception is thrown if an operation or invocation failed due to security restrictions. This can be any
@@ -54,7 +54,7 @@ public class SecurityErrorUserException extends NlsRuntimeException implements S
   /**
    * The copy constructor.
    *
-   * @see net.sf.mmm.util.nls.api.AbstractNlsRuntimeException#AbstractNlsRuntimeException(net.sf.mmm.util.nls.api.AbstractNlsRuntimeException,
+   * @see net.sf.mmm.util.exception.api.NlsRuntimeException#NlsRuntimeException(net.sf.mmm.util.exception.api.NlsRuntimeException,
    *      ExceptionTruncation)
    *
    * @param copySource is the exception to copy.

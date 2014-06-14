@@ -14,13 +14,13 @@ import java.util.Set;
 
 import net.sf.mmm.util.collection.base.AbstractIterator;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.EnumTypeWithCategory;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base implementation of {@link EnumProvider}.

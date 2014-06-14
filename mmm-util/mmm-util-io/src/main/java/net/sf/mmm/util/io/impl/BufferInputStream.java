@@ -5,12 +5,12 @@ package net.sf.mmm.util.io.impl;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.io.api.ByteProcessable;
 import net.sf.mmm.util.io.api.ByteProcessor;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This class represents a {@link InputStream} that works like a {@link java.io.BufferedInputStream} but

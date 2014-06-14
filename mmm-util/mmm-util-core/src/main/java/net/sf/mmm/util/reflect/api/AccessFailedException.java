@@ -10,7 +10,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 /**
  * An {@link AccessFailedException} is thrown if a {@link java.lang.reflect reflective} call failed because
  * the executing code does NOT have access to the according definition. Unlike {@link IllegalAccessException}
- * this is a {@link RuntimeException} and has {@link net.sf.mmm.util.nls.api.NlsThrowable
+ * this is a {@link RuntimeException} and has {@link net.sf.mmm.util.exception.api.NlsThrowable
  * native-language-support}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

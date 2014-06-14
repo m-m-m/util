@@ -31,15 +31,15 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalSplitPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetSplitPanel;
 import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalSplitPanel;
 import net.sf.mmm.client.ui.api.widget.window.UiWidgetPopup;
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.lang.base.SimpleEnumProvider;
-import net.sf.mmm.util.nls.api.DuplicateObjectException;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
 
 /**
  * This is the implementation of {@link UiWidgetFactory}.

@@ -20,7 +20,7 @@ import net.sf.mmm.util.event.api.EventBus;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventListenerIgnore;
 import net.sf.mmm.util.exception.api.GlobalExceptionHandler;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This is the default implementation of {@link EventBus}. It is compatible to work in limited environments

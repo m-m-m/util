@@ -18,7 +18,7 @@ import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcRequest;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcResponse;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcService;
 import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceCaller;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 
 /**
  * This is the implementation of {@link net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller} using

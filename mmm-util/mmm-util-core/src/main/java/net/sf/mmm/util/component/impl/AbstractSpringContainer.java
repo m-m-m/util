@@ -6,7 +6,7 @@ import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.api.ResourceAmbiguousException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.ObjectDisposedException;
+import net.sf.mmm.util.exception.api.ObjectDisposedException;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;

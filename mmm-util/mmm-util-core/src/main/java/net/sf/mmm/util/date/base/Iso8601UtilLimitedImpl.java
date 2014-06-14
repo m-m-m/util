@@ -7,8 +7,8 @@ import java.util.Date;
 
 import net.sf.mmm.util.date.api.IllegalDateFormatException;
 import net.sf.mmm.util.date.api.Iso8601UtilLimited;
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.nls.api.NlsParseException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**

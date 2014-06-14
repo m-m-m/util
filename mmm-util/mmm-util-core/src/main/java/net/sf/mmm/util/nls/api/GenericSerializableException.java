@@ -28,7 +28,9 @@ import net.sf.mmm.util.lang.api.StringUtil;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.GenericSerializableException} instead.
  */
+@Deprecated
 public class GenericSerializableException extends RuntimeException implements NlsThrowable, NlsMessage {
 
   /** UID for serialization. */
@@ -231,6 +233,15 @@ public class GenericSerializableException extends RuntimeException implements Nl
   public String getLocalizedMessage(Locale locale) {
 
     return getLocalizedMessage();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void getLocalizedMessage(Locale locale, Appendable appendable) {
+
+    getLocalizedMessage(locale, null, appendable);
   }
 
   /**

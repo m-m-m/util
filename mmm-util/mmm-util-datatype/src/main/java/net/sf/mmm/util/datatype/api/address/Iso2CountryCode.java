@@ -5,8 +5,8 @@ package net.sf.mmm.util.datatype.api.address;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
-import net.sf.mmm.util.nls.api.NlsParseException;
 
 /**
  * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents a 2 letter code representing a

@@ -3,7 +3,7 @@
 package net.sf.mmm.transaction.base;
 
 import net.sf.mmm.transaction.NlsBundleTransaction;
-import net.sf.mmm.util.nls.api.NlsRuntimeException;
+import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This exception is thrown if a {@link net.sf.mmm.transaction.api.TransactionAdapter transaction} should be

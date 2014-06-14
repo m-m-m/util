@@ -11,7 +11,9 @@ import net.sf.mmm.util.exception.api.ExceptionTruncation;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
+ * @deprecated use {@link net.sf.mmm.util.exception.api.TechnicalErrorUserException} instead.
  */
+@Deprecated
 public class TechnicalErrorUserException extends NlsRuntimeException {
 
   /** @see #getCode() */
@@ -54,7 +56,7 @@ public class TechnicalErrorUserException extends NlsRuntimeException {
   /**
    * The copy constructor.
    *
-   * @see net.sf.mmm.util.nls.api.AbstractNlsRuntimeException#AbstractNlsRuntimeException(net.sf.mmm.util.nls.api.AbstractNlsRuntimeException,
+   * @see net.sf.mmm.util.exception.api.NlsRuntimeException#NlsRuntimeException(net.sf.mmm.util.exception.api.NlsRuntimeException,
    *      ExceptionTruncation)
    *
    * @param copySource is the exception to copy.

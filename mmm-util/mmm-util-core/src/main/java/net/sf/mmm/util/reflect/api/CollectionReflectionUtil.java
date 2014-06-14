@@ -6,8 +6,8 @@ import java.util.Collection;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.component.api.ComponentSpecification;
+import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.lang.api.GenericBean;
-import net.sf.mmm.util.nls.api.NlsIllegalArgumentException;
 
 /**
  * This is the interface for a collection of utility functions to deal with {@link Collection}s reflectively.

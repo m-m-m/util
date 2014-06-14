@@ -19,7 +19,7 @@ import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.XMLEvent;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueException;

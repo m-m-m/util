@@ -20,10 +20,10 @@ import net.sf.mmm.service.base.GenericRemoteInvocationTransactionalResults;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.date.api.TimeMeasure;
 import net.sf.mmm.util.exception.api.ExceptionUtil;
-import net.sf.mmm.util.nls.api.NlsNullPointerException;
-import net.sf.mmm.util.nls.api.NlsThrowable;
-import net.sf.mmm.util.nls.api.ObjectMismatchException;
-import net.sf.mmm.util.nls.api.ObjectNotFoundException;
+import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.exception.api.NlsThrowable;
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
  * This is the abstract base class for the common implementation of

@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import net.sf.mmm.util.nls.api.NlsClassCastException;
+import net.sf.mmm.util.exception.api.NlsClassCastException;
 
 /**
  * This is an implementation of {@link XmlAdapter} for mapping {@link Properties}. It uses a

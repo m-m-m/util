@@ -6,7 +6,7 @@ import java.io.Flushable;
 import java.util.Date;
 
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
-import net.sf.mmm.util.nls.api.NlsUnsupportedOperationException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
