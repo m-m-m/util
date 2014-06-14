@@ -3,7 +3,6 @@
 package net.sf.mmm.util.nls.base;
 
 import java.util.Locale;
-import java.util.MissingResourceException;
 
 import com.google.gwt.i18n.client.Dictionary;
 
@@ -71,20 +70,17 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   @Override
   public String translate(Locale locale) {
 
-    try {
-      return Dictionary.getDictionary(this.name.replace('.', '$')).get(this.key);
-    } catch (MissingResourceException e) {
-      return translateFallback(e);
-    }
+    // TODO hohwille See https://github.com/m-m-m/mmm/issues/113
+    return translateFallback(this.name + ":" + this.key);
   }
 
   /**
    * Called from {@link #translate(Locale)} if localization failed.
    *
-   * @param e is the {@link MissingResourceException}.
+   * @param e is the {@link Exception}.
    * @return the fallback message.
    */
-  protected String translateFallback(MissingResourceException e) {
+  protected String translateFallback(Exception e) {
 
     String messageId = this.name + ":" + this.key;
     getLogger().warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
@@ -92,7 +88,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   }
 
   /**
-   * @see #translateFallback(MissingResourceException)
+   * @see #translateFallback(Exception)
    *
    * @param messageId is the ID of the message composed out of bundle base name and key.
    * @return the fallback message.

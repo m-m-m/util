@@ -3,7 +3,6 @@
 package net.sf.mmm.util.nls.base;
 
 import java.util.Locale;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -77,7 +76,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
       ResourceBundle bundle = ResourceBundle.getBundle(this.name, locale,
           ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
       return bundle.getString(this.key);
-    } catch (MissingResourceException e) {
+    } catch (Exception e) {
       return translateFallback(e);
     }
   }
@@ -85,10 +84,10 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   /**
    * Called from {@link #translate(Locale)} if localization failed.
    *
-   * @param e is the {@link MissingResourceException}.
+   * @param e is the {@link Exception}.
    * @return the fallback message.
    */
-  protected String translateFallback(MissingResourceException e) {
+  protected String translateFallback(Exception e) {
 
     String messageId = this.name + ":" + this.key;
     getLogger().warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
@@ -96,7 +95,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   }
 
   /**
-   * @see #translateFallback(MissingResourceException)
+   * @see #translateFallback(Exception)
    *
    * @param messageId is the ID of the message composed out of bundle base name and key.
    * @return the fallback message.

@@ -8,10 +8,10 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-gwt</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>${net.sf.mmm.util.gwt.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
-  <description>provides utilities support for GWT.</description>
+  <description>provides utilities support for GWT (especially to use code from mmm-util-core in GWT clients).</description>
 
   <dependencies>
     <dependency>

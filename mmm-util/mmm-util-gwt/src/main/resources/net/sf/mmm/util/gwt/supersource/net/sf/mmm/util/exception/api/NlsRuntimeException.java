@@ -3,12 +3,10 @@
 package net.sf.mmm.util.exception.api;
 
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
+import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
@@ -112,20 +110,9 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
    */
   protected NlsRuntimeException(NlsRuntimeException copySource, ExceptionTruncation truncation) {
 
-    // super(null, truncation.isRemoveCause() ? null : copySource.getCause(),
-    // !truncation.isRemoveSuppressed(),
-    // !truncation.isRemoveStacktrace());
-    super(null, truncation.isRemoveCause() ? null : copySource.getCause());
+    super();
     this.nlsMessage = copySource.nlsMessage;
     this.uuid = copySource.uuid;
-    if (!truncation.isRemoveStacktrace()) {
-      setStackTrace(copySource.getStackTrace());
-    }
-    if (!truncation.isRemoveSuppressed()) {
-      for (Throwable suppressed : copySource.getSuppressed()) {
-        addSuppressed(suppressed);
-      }
-    }
   }
 
   /**
@@ -212,26 +199,26 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * @see NlsThrowable#printStackTrace(Locale, Appendable)
    *
-   * @param cause is the {@link Throwable} to print.
+   * @param nested is the {@link Throwable} to print.
    * @param locale is the {@link Locale} to translate to.
    * @param buffer is where to write the stack trace to.
    * @throws IOException if caused by <code>buffer</code>.
    */
-  private static void printStackTraceCause(Throwable cause, Locale locale, Appendable buffer) throws IOException {
+  private static void printStackTraceCause(Throwable nested, Locale locale, Appendable buffer) throws IOException {
 
-    if (cause instanceof NlsThrowable) {
-      ((NlsThrowable) cause).printStackTrace(locale, buffer);
+    if (nested instanceof NlsThrowable) {
+      ((NlsThrowable) nested).printStackTrace(locale, buffer);
     } else {
-      if (buffer instanceof PrintStream) {
-        cause.printStackTrace((PrintStream) buffer);
-      } else if (buffer instanceof PrintWriter) {
-        cause.printStackTrace((PrintWriter) buffer);
-      } else {
-        StringWriter writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-        cause.printStackTrace(printWriter);
-        printWriter.flush();
-        buffer.append(writer.toString());
+      for (StackTraceElement element : nested.getStackTrace()) {
+        buffer.append("\tat ");
+        buffer.append(element.toString());
+        buffer.append(StringUtil.LINE_SEPARATOR);
+      }
+      Throwable cause = nested.getCause();
+      if (cause != null) {
+        buffer.append("Caused by: ");
+        buffer.append(StringUtil.LINE_SEPARATOR);
+        printStackTraceCause(cause, locale, buffer);
       }
     }
   }
@@ -329,13 +316,9 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
    */
   protected NlsRuntimeException createCopyViaClone(ExceptionTruncation truncation) {
 
-    try {
-      NlsRuntimeException copy = (NlsRuntimeException) clone();
-      ThrowableHelper.removeDetails(copy, truncation);
-      return copy;
-    } catch (CloneNotSupportedException e) {
-      throw new IllegalStateException(e);
-    }
+    NlsRuntimeException copy = (NlsRuntimeException) JavaScriptUtil.getInstance().clone(this);
+    // ThrowableHelper.removeDetails(copy, truncation);
+    return copy;
   }
 
   /**

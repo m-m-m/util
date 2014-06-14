@@ -50,6 +50,7 @@
     <net.sf.mmm.util.core.version>5.0.0-SNAPSHOT</net.sf.mmm.util.core.version>
     <net.sf.mmm.util.cli.version>5.0.0-SNAPSHOT</net.sf.mmm.util.cli.version>
     <net.sf.mmm.util.io.version>5.0.0-SNAPSHOT</net.sf.mmm.util.io.version>
+    <net.sf.mmm.util.gwt.version>5.0.0-SNAPSHOT</net.sf.mmm.util.gwt.version>
     <net.sf.mmm.util.xml.version>1.0.0-SNAPSHOT</net.sf.mmm.util.xml.version>
     <net.sf.mmm.util.datatype.version>1.0.0-SNAPSHOT</net.sf.mmm.util.datatype.version>
     <net.sf.mmm.service.version>1.0.0-SNAPSHOT</net.sf.mmm.service.version>
@@ -257,6 +258,17 @@
         <groupId>net.sf.m-m-m</groupId>
         <artifactId>mmm-util-core</artifactId>
         <version>${net.sf.mmm.util.core.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-util-gwt</artifactId>
+        <version>${net.sf.mmm.util.gwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-util-gwt</artifactId>
+        <version>${net.sf.mmm.util.gwt.version}</version>
         <classifier>sources</classifier>
       </dependency>
       <dependency>
