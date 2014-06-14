@@ -51,9 +51,13 @@
     <net.sf.mmm.util.cli.version>5.0.0-SNAPSHOT</net.sf.mmm.util.cli.version>
     <net.sf.mmm.util.io.version>5.0.0-SNAPSHOT</net.sf.mmm.util.io.version>
     <net.sf.mmm.util.gwt.version>5.0.0-SNAPSHOT</net.sf.mmm.util.gwt.version>
+    
     <net.sf.mmm.util.xml.version>1.0.0-SNAPSHOT</net.sf.mmm.util.xml.version>
     <net.sf.mmm.util.datatype.version>1.0.0-SNAPSHOT</net.sf.mmm.util.datatype.version>
+
     <net.sf.mmm.service.version>1.0.0-SNAPSHOT</net.sf.mmm.service.version>
+    <net.sf.mmm.persistence.version>1.0.0-SNAPSHOT</net.sf.mmm.persistence.version>
+
     <mmm.bootclasspath>bootclasspath/p:${settings.localRepository}/net/sf/m-m-m/mmm-util-backport-java.time/${backport-time-version}/mmm-util-backport-java.time-${backport-time-version}.jar</mmm.bootclasspath>
   </properties>
 
@@ -281,7 +285,41 @@
         <artifactId>mmm-util-cli</artifactId>
         <version>${net.sf.mmm.util.cli.version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-persistence-api</artifactId>
+        <version>${net.sf.mmm.persistence.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-persistence-impl-jpa</artifactId>
+        <version>${net.sf.mmm.persistence.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-persistence-impl-hibernate</artifactId>
+        <version>${net.sf.mmm.persistence.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-service-api</artifactId>
+        <version>${net.sf.mmm.service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-service-base</artifactId>
+        <version>${net.sf.mmm.service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-service-impl-gwt</artifactId>
+        <version>${net.sf.mmm.service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.m-m-m</groupId>
+        <artifactId>mmm-service-impl-spring</artifactId>
+        <version>${net.sf.mmm.service.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
