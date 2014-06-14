@@ -16,15 +16,14 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is a very specific exception that allows sending of any {@link Throwable} via a remote service. While
- * some exceptions can not be serialized at all and others may not be de-serialized. The latter can happen
- * because they (or one of their {@link #getCause() cause}s or {@link #getSuppressed() suppressed} exceptions)
- * are an implementation secret and are therefore not in the classpath on the other end. This exception allows
- * to wrap any other kind of exception so the {@link #getMessage() message}, {@link #getCode() code},
- * {@link #getUuid() UUID} and {@link #printStackTrace(java.io.PrintWriter) stacktrace} are preserved while
- * the other end only needs to know this exception. However the original {@link #getClass() type} of the
- * exception is lost in the manner that catching, handling and instanceof-checks of the actual exception will
- * not work anymore.
+ * This is a very specific exception that allows sending of any {@link Throwable} via a remote service. Some
+ * exceptions can not be serialized at all and others may not be de-serialized because they (or one of their
+ * {@link #getCause() cause}s or {@link #getSuppressed() suppressed} exceptions) are an implementation secret
+ * and are therefore not in the classpath on the other end. This exception allows to wrap any other kind of
+ * exception so the {@link #getMessage() message}, {@link #getCode() code}, {@link #getUuid() UUID} and
+ * {@link #printStackTrace(java.io.PrintWriter) stacktrace} are preserved while the other end only needs to
+ * know this exception class. However the original {@link #getClass() type} of the exception is lost in the
+ * manner that catching, handling and instanceof-checks of the actual exception will not work anymore.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0

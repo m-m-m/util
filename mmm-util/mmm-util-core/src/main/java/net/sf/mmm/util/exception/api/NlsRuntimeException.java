@@ -17,20 +17,8 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
  * This is an abstract base implementation of {@link NlsThrowable} based on {@link RuntimeException}. For
- * further details see {@link NlsThrowable}. <br/>
- * <b>Example:</b><br/>
- *
- * <pre>
- * public class InvalidCustomerNumberException extends {@link NlsRuntimeException} {
- *   public InvalidCustomerNumberException(String customerNumber) {
- *     super({@link #createBundle(Class) createBundle}(My{@link NlsBundle}Root.class).errorInvalidCustomerNumber(customerNumber);
- *   }
- *
- *   public {@link #getCode()} { // optional method
- *     return "CUST0001"; // maybe use a constant
- *   }
- * }
- * </pre>
+ * further details see {@link NlsThrowable}. For an example read the {@link net.sf.mmm.util.exception.api
+ * package javadoc} or see the source code of the derived exceptions.
  *
  * @see NlsThrowable
  *
