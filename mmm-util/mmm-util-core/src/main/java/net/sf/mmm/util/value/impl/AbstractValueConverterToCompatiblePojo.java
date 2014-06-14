@@ -94,7 +94,7 @@ public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> ext
           PojoPropertyAccessorNonArg getter = (PojoPropertyAccessorNonArg) sourceDescriptor.getAccessor(
               targetPropertyDescriptor.getName(), PojoPropertyAccessorNonArgMode.GET);
           if (getter == null) {
-            handleNoGetterForSetter(setter, value, sourceClass);
+            handleNoGetterForSetter(setter, targetClass, value, sourceClass);
           } else {
             Object sourcePropertyValue = getter.invoke(value);
             GenericType<?> targetPropertyType = setter.getPropertyType();
@@ -116,10 +116,12 @@ public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> ext
    * object to convert.
    *
    * @param setter is the existing setter.
+   * @param targetClass is the {@link Class} reflecting the target object to convert to.
    * @param sourceObject is the source object to convert that has no corresponding getter.
    * @param sourceClass is the {@link Class} reflecting the source object.
    */
-  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Object sourceObject, Class<?> sourceClass) {
+  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass, Object sourceObject,
+      Class<?> sourceClass) {
 
     throw new PojoPropertyNotFoundException(sourceClass, setter.getName());
   }

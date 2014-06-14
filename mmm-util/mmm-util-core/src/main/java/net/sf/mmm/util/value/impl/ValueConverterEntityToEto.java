@@ -22,7 +22,7 @@ import net.sf.mmm.util.value.api.ValueException;
 @Singleton
 @Named
 @SuppressWarnings("rawtypes")
-public class ValueConverterEntityToEto extends AbstractValueConverterToCompatiblePojo<PersistenceEntity, EntityTo> {
+public class ValueConverterEntityToEto extends AbstractValueConverterToSimilarPojo<PersistenceEntity, EntityTo> {
 
   /** The singleton instance of {@link EtoHelper}. */
   private static final EtoHelper HELPER = new EtoHelper();

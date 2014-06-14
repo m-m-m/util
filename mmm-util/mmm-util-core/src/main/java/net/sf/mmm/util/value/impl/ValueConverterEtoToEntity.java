@@ -21,7 +21,7 @@ import net.sf.mmm.util.transferobject.api.EntityTo;
 @Singleton
 @Named
 @SuppressWarnings("rawtypes")
-public class ValueConverterEtoToEntity extends AbstractValueConverterToCompatiblePojo<EntityTo, PersistenceEntity> {
+public class ValueConverterEtoToEntity extends AbstractValueConverterToSimilarPojo<EntityTo, PersistenceEntity> {
 
   /**
    * The constructor.
@@ -53,7 +53,8 @@ public class ValueConverterEtoToEntity extends AbstractValueConverterToCompatibl
    * {@inheritDoc}
    */
   @Override
-  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Object sourceObject, Class<?> sourceClass) {
+  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass, Object sourceObject,
+      Class<?> sourceClass) {
 
     Class<?> propertyClass = setter.getPropertyClass();
     if (GenericEntity.class.isAssignableFrom(propertyClass)) {
@@ -66,6 +67,6 @@ public class ValueConverterEtoToEntity extends AbstractValueConverterToCompatibl
         return;
       }
     }
-    super.handleNoGetterForSetter(setter, sourceObject, sourceClass);
+    super.handleNoGetterForSetter(setter, targetClass, sourceObject, sourceClass);
   }
 }
