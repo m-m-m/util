@@ -92,8 +92,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   /** @see #getPojoDescriptorBuilder() */
   private PojoDescriptorBuilder pojoDescriptorBuilder;
 
-  // private static final WeakHashMap<K, V>
-
   /**
    * The constructor.
    */
