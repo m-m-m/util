@@ -7,7 +7,8 @@ package net.sf.mmm.util.lang.api.concern;
  * for this purpose. In order not to reinvent the wheel, we do NOT create yet another security framework.
  * Instead we suggest to use <a href="http://projects.spring.io/spring-security/">spring-security</a> and
  * support integration with it. However, there are some missing links that we aim to close with our project.
- * 
+ * Have a look at the known subinterfaces and implementing classes to get an overview.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<document>
+  <properties>
+    <title>mmm-util-gwt</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About mmm-util-gwt">
+      <p>
+      This module contains the GWT port for <code>mmm-util-core</code> and contains additional GWT related utilities.
+      </p>
+      <subsection name="Features">
+      Here are some of the features provided by this module:
+      <ul>
+        <li>GWT support for SLF4J: You can use SLF4J in your shared code and it will work normally on the server and for 
+        the client it gets bridget to <a href="https://code.google.com/p/gwt-log/">gwt-log</a>.</li>
+        <li>GWT support for the <a href="../apidocs/net/sf/mmm/util/nls/api/package-summary.html#documentation">Native Language Support (NLS)</a>.</li>
+        <li>GWT support <a href="../apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html#documentation">POJO-Introspection</a>. Your beans only need
+        to implement a marker interface (defaults to <a href="../apidocs/net/sf/mmm/util/pojo/api/Pojo.html">Pojo</a>).</li>
+        <li>and many more...</li>
+      </ul>
+      </subsection>
+      <subsection name="Usage">
+      For your <code>pom.xml</code> simply add this to your dependencies:
+      <pre><![CDATA[<dependency>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>mmm-util-core</artifactId>
+  <version>${mmm.gwt.version}</version>
+</dependency>
+<dependency>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>mmm-util-core</artifactId>
+  <version>${mmm.gwt.version}</version>
+  <classifier>sources</classifier>
+</dependency>]]></pre>
+      For your GWT module (<code>*.gwt.xml</code>) simply add this include:
+      <pre><![CDATA[<inherits name="net.sf.mmm.util.UtilCore"/>]]></pre>
+      </subsection>
+    </section>
+  </body>
+</document>

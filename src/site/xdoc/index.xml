@@ -22,13 +22,15 @@
       aims to speed you up so you can concentrate on the actual features of your application.
       <br/>
       To get started have a look at the <a href="images/Architecture.svg">technical architecture</a>.
-      Please also read our strategic posting <a href="https://github.com/m-m-m/mmm/wiki/Rescue-the-java-world">Rescue the (Java) world</a>.
+      For the vision of this project please also read our strategic posting 
+      <a href="https://github.com/m-m-m/mmm/wiki/Rescue-the-java-world">Rescue the (Java) world</a>.
       <subsection name="Ready to use">
         This project provides the following generic components that can already be used now:
         <ul>
           <li><a href="mmm-persistence/index.html">mmm-persistence</a> provides code and best practices to build your persistence layer with JPA easier.</li>
-          <li><a href="mmm-search/index.html">mmm-search</a> provides a full-text solution base on lucene.</li>
           <li><a href="mmm-util/index.html">mmm-util</a> contains powerful utilities.</li>
+          <li><a href="mmm-transaction/index.html">mmm-transaction</a> provides transactions for those who dislike AOP and might like lambdas.</li>
+          <!--<li><a href="mmm-search/index.html">mmm-search</a> provides a full-text solution base on lucene.</li>-->
         </ul>
       </subsection>
       <subsection name="Mission Statement">
@@ -42,11 +44,18 @@
         All code is written with focus on design &amp; quality and comes with detailed API documentation.<br/>
         The application is heavily based on the idioms separation of concerns (SoC) and inversion of control (IoC) 
         and therefore split into tiny components (see <a href="modules.html">modules</a>). This open architecture allows any 
-        component implementation to be reused (by other projects) or be replaced (for custom needs).<br/>
+        component implementation to be reused (by other projects) or be replaced (for custom needs).<br/><br/>
+        We are a truly open, community based project and not driven by commercial vendor(s).<br/>
         <b>ATTENTION:</b><br/>
         This mission statement applies to sub-projects (modules) that are released. Modules that are NOT 
         released (version less than <code>1.0.0</code> including <code>1.0.0-SNAPSHOT</code>) may be 
         completely refactored, change their API or even disappear completely.
+      </subsection>
+      <subsection name="Cross-Cutting Concerns">
+        We care a lot for cross-cutting concerns such as 
+        <a href="apidocs/net/sf/mmm/util/lang/api/concern/Security.html">security</a> and
+        <a href="apidocs/net/sf/mmm/util/lang/api/concern/Accessibility.html">accessibility</a> that
+        are sometimes neglected by other OSS projects.
       </subsection>
       <subsection name="Project State">
         We are making great progress with our next generation UI framework (see <a href="mmm-client/mmm-client-ui/index.html">mmm-client-ui</a>)

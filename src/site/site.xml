@@ -28,15 +28,14 @@
     <menu name="General Information">
       <item name="Introduction" href="index.html"/>
       <item name="Get Involved" href="https://github.com/m-m-m/mmm/wiki/Get-Involved"/>
-      <item name="Road Map" href="https://github.com/m-m-m/mmm/wiki/Roadmap"/>
-      <!-- <item name="Release Notes" href="changes-report.html"/> -->
       <item name="History" href="https://github.com/m-m-m/mmm/wiki/History"/>
+      <item name="Road Map" href="https://github.com/m-m-m/mmm/wiki/Roadmap"/>
       <item name="Downloads" href="https://github.com/m-m-m/mmm/wiki/Download"/>
     </menu>
 
     <menu name="Documentation">
       <item name="Javadoc" href="apidocs/index.html"/>
-      <item name="FAQ" href="faq.html"/>
+      <item name="FAQ" href="https://github.com/m-m-m/mmm/wiki/FAQ"/>
       <item name="Developer Guide" href="https://github.com/m-m-m/mmm/wiki/Developer-Guide"/>
       <item name="Users Guide" href="https://github.com/m-m-m/mmm/wiki/User-Guide"/>
     </menu>

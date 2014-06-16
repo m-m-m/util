@@ -8,8 +8,10 @@ package net.sf.mmm.util.lang.api.concern;
  * interface you can find the related spots. However, descriptive information such as meaningful alt-texts
  * have to be defined by the developers of actual UIs and can not be generated automatically by the framework.
  * Please support people with disabilities by enriching your application with semantical information - we
- * already do our best to make this easy for you.
- * 
+ * already do our best to make this easy for you. Have a look at the known subinterfaces and implementing
+ * classes to get an overview of our supporting code.
+ *
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */

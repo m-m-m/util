@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<document>
+  <properties>
+    <title>mmm-util-io</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About mmm-util-io">
+      <p>
+      This module contains utilities that deal with input and output (IO) and also related stuff
+      such as files, processes, XML steams and text formatting.
+      </p>
+      <subsection name="Features">
+      Here are some of the features provided by this module:
+      <ul>
+        <li><a href="apidocs/net/sf/mmm/util/io/api/package-summary.html#documentation">Stream-Utilities</a> for dealing with streams and readers/writers easily.</li>
+        <li><a href="apidocs/net/sf/mmm/util/process/api/package-summary.html#documentation">Process-Utilities</a> for dealing with external processes and creating pipes.</li>
+        <li><a href="apidocs/net/sf/mmm/util/text/api/package-summary.html#documentation">Text-Utilities</a> for hyphenation and linewrapping.</li>
+        <li>Support for loading and navigating <a href="apidocs/net/sf/mmm/util/resource/api/package-summary.html#documentation">resources</a> 
+        from arbitrary sources.</li>
+        <li><a href="apidocs/net/sf/mmm/util/xml/api/package-summary.html#documentation">StaxUtil</a> for streaming XML access via StAX with XInclude and other features.</li>
+        <li><a href="apidocs/net/sf/mmm/util/file/api/package-summary.html#documentation">File-Utilities</a> for dealing with files.</li>
+        <li>and many more...</li>
+      </ul>
+      </subsection>
+    </section>
+  </body>
+</document>

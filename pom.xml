@@ -779,6 +779,24 @@
           <encoding>${project.reporting.outputEncoding}</encoding>
           <charset>${project.build.sourceEncoding}</charset>
           <docfilessubdirs>true</docfilessubdirs>
+          <!--
+          <doclet>uk.org.retep.doclets.Doclet</doclet>
+          <docletArtifact>
+            <groupId>uk.org.retep.doclet</groupId>
+            <artifactId>core</artifactId>
+            <version>9.11</version>
+          </docletArtifact>
+          -->
+          <!--<top><![CDATA[
+<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" type="text/javascript"></script>
+<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJava.js" type="text/javascript"></script>
+]]></top>-->
+          <stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile>
+          <!--<footer><![CDATA[<script type="text/javascript">
+  SyntaxHighlighter.defaults["auto-links"] = false;
+  SyntaxHighlighter.defaults["tab-size"] = 2;
+  SyntaxHighlighter.all();
+</script>]]></footer>-->
           <links>
             <link>http://docs.oracle.com/javase/7/docs/api/</link>
             <link>http://m-m-m.sourceforge.net/apidocs/</link>
@@ -820,10 +838,10 @@
         <artifactId>maven-changelog-plugin</artifactId>
       </plugin>
       -->
+      <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
-        <!-- http://jira.codehaus.org/browse/MNG-3385 -->
         <version>2.2</version>
         <configuration>
           <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
@@ -831,7 +849,7 @@
           <issueLinkTemplatePerSystem>
             <github>%URL%/%ISSUE%</github>
           </issueLinkTemplatePerSystem>
-          <!-- http://jira.codehaus.org/browse/MCHANGES-190 -->
+          <!- - http://jira.codehaus.org/browse/MCHANGES-190 - ->
           <escapeHTML>false</escapeHTML>
         </configuration>
         <reportSets>
@@ -842,6 +860,7 @@
           </reportSet>
         </reportSets>
       </plugin>
+      -->
       <!--
       <plugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -1045,7 +1064,7 @@
     </snapshotRepository>
     <site>
       <id>m-m-m.sf.net</id>
-      <url>file://C:/tmp/mmm-site</url>
+      <url>file://${user.dir}/target/mmm-site</url>
     </site>
   </distributionManagement>
   <mailingLists>

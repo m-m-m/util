@@ -18,13 +18,26 @@
       <ul>
         <li><a href="mmm-util-core/index.html">mmm-util-core</a> contains valuable utilities for 
             general purpose (NLS, ISO-8601, generic value conversion, scanners, pattern compilers, reflection, etc.).</li>
-        <li><a href="mmm-util-http/index.html">mmm-util-http</a> is an HTTP utility NOT wired up 
-            with the protocol (to be used for HTTPMU in UPnP).</li>
+        <li><a href="mmm-util-io/index.html">mmm-util-io</a> contains valuable utilities for 
+            input/output as well as file and resource handling.</li>
+        <li><a href="mmm-util-cli/index.html">mmm-util-cli</a> provides excellent support for 
+            creating Command Line Interfaces (CLI).</li>
+        <li><a href="mmm-util-gwt/index.html">mmm-util-gwt</a> provides GWT compatibility for 
+        <code>mmm-util-core</code>, SLF4J and more.</li>
+      </ul>
+      The following utilities are experimental or work in progress:
+      <ul>
+        <li><a href="mmm-util-datatype/index.html">mmm-util-datatype</a> contains standard datatypes
+            for various common purposes (<code>PhoneNumber</code>, <code>PostalCode</code>, 
+            <code>Password</code>, <code>Color</code>, <code>Gender</code>, <code>Iso2CountryCode</code>, etc.)
+        including corresponding hibernate <code>UserType</code>s.</li>
         <li><a href="mmm-util-metakeys/index.html">mmm-util-metakeys</a> contains various constants
             for metadata properties from different standards.</li>
         <li><a href="mmm-util-contenttype/index.html">mmm-util-contenttype</a> aims to provide a detailed tree
             of various filetypes together with an implementation for the stream-detection-framework
             in order to detect metadata on the fly while streaming.</li>
+        <li><a href="mmm-util-http/index.html">mmm-util-http</a> is an HTTP utility NOT wired up 
+            with the protocol (to be used for HTTPMU in UPnP).</li>
       </ul>
       </subsection>
     </section>

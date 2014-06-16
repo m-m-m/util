@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<document>
+  <properties>
+    <title>mmm-util-cli</title>
+    <author email="hohwille@users.sourceforge.net">J&#246;rg Hohwiller</author>
+  </properties>
+
+  <body>
+    <section name="About mmm-util-cli">
+      <p>
+      This module provides excellent support to create a 
+      <a href="apidocs/net/sf/mmm/util/cli/api/package-summary.html#documentation">Command Line Interface (CLI)</a>.
+      </p>
+      <subsection name="Features">
+      Here are some of the features provided by this module:
+      <ul>
+        <li>Annotation based configuration.</li>
+        <li>Build in support for parsing the arguments.</li>
+        <li>Build in support for help usage (<code>-h</code> or <code>--help</code>).</li>
+        <li>Build in support for version output (<code>-v</code> or <code>--version</code>).</li>
+        <li>All output with <a href="../apidocs/net/sf/mmm/util/nls/api/package-summary.html#documentation">Native
+        Language Support (NLS)</a>, <a href="../apidocs/net/sf/mmm/util/text/api/LineWrapper.html">automatic layout</a>,
+        <a href="../apidocs/net/sf/mmm/util/text/api/Hyphenator.html">hyphenation</a>, etc.</li>
+        <li>Build in support for bean validation and error feedback.</li>
+      </ul>
+      For details and examples please read the <a href="apidocs/net/sf/mmm/util/cli/api/package-summary.html#documentation">javadoc</a>.
+      </subsection>
+    </section>
+  </body>
+</document>
