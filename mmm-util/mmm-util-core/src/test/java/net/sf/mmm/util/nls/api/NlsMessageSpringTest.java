@@ -3,6 +3,8 @@
 package net.sf.mmm.util.nls.api;
 
 import net.sf.mmm.util.component.impl.SpringContainerPool;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsMessageFactory;
 
 /**
  * This is the test-case for {@link NlsMessage} and {@link NlsMessageFactory} configured using spring.

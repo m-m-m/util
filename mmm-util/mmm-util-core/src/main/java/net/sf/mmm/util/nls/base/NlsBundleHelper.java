@@ -10,7 +10,6 @@ import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleKey;
-import net.sf.mmm.util.nls.api.NlsBundleLocation;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.reflect.api.ClassName;
@@ -21,7 +20,6 @@ import net.sf.mmm.util.reflect.api.ClassName;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-@SuppressWarnings("deprecation")
 public class NlsBundleHelper extends AbstractLoggableObject {
 
   /** @see #getInstance() */
@@ -54,18 +52,6 @@ public class NlsBundleHelper extends AbstractLoggableObject {
    */
   public ClassName getQualifiedLocation(Class<? extends NlsBundle> nlsBundleInterface) {
 
-    NlsBundleLocation location = nlsBundleInterface.getAnnotation(NlsBundleLocation.class);
-    if (location != null) {
-      String pkg = location.bundlePackage();
-      if (pkg.length() == 0) {
-        pkg = nlsBundleInterface.getPackage().getName();
-      }
-      String name = location.bundleName();
-      if (name.length() == 0) {
-        name = nlsBundleInterface.getSimpleName();
-      }
-      return new ClassName(pkg, name);
-    }
     String simpleName = nlsBundleInterface.getSimpleName();
     if (simpleName.endsWith(NlsBundle.INTERFACE_NAME_SUFFIX)) {
       simpleName = simpleName.substring(0, simpleName.length() - NlsBundle.INTERFACE_NAME_SUFFIX.length());

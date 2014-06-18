@@ -9,6 +9,8 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
+import net.sf.mmm.util.io.api.IoMode;
+import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
@@ -357,10 +359,44 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   @Override
   public String toString() {
 
-    String result = super.toString();
-    if (this.uuid != null) {
-      result = result + StringUtil.LINE_SEPARATOR + this.uuid.toString();
+    // We intentionally use the system locale here to prevent mixed languages in log-files...
+    return toString(Locale.getDefault(), null).toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String toString(Locale locale) {
+
+    return toString(locale, null).toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Appendable toString(Locale locale, Appendable appendable) {
+
+    Appendable buffer = appendable;
+    if (buffer == null) {
+      buffer = new StringBuilder(32);
     }
-    return result;
+    try {
+      Class<?> myClass = getClass();
+      buffer.append(myClass.getName());
+      buffer.append(": ");
+      String code = getCode();
+      if (!myClass.getSimpleName().equals(code)) {
+        buffer.append(code);
+        buffer.append(": ");
+      }
+      buffer.append(getLocalizedMessage(locale));
+      if (this.uuid != null) {
+        buffer.append(StringUtil.LINE_SEPARATOR);
+        buffer.append(this.uuid.toString());
+      }
+      return buffer;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
+    }
   }
 }

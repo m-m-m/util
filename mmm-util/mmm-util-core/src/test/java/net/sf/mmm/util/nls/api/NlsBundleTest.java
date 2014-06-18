@@ -7,6 +7,14 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.nls.NlsBundleUtilCoreTestRoot;
+import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsBundle;
+import net.sf.mmm.util.nls.api.NlsBundleFactory;
+import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.api.NlsMessageFactory;
+import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 
 import org.junit.Assert;
@@ -50,7 +58,7 @@ public class NlsBundleTest {
   @Test
   public void testNlsBundleWithLookup() {
 
-    NlsBundleUtilCoreTest bundle = getBundleFactory().createBundle(NlsBundleUtilCoreTest.class);
+    NlsBundleUtilCoreTestRoot bundle = getBundleFactory().createBundle(NlsBundleUtilCoreTestRoot.class);
 
     // test without arguments
     NlsMessage infoAnd = bundle.getMessage("infoAnd", null);
@@ -81,11 +89,5 @@ public class NlsBundleTest {
     Assert.assertEquals("and", infoAnd.getInternationalizedMessage());
     Assert.assertEquals("and", infoAnd.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
     Assert.assertEquals("und", infoAnd.getLocalizedMessage(Locale.GERMAN));
-  }
-
-  // This is a hack only for testing. Anti-pattern should NOT be copied.
-  @NlsBundleLocation(bundleName = "NlsBundleUtilCore", bundlePackage = "net.sf.mmm.util")
-  public interface NlsBundleUtilCoreTest extends NlsBundleUtilCoreRoot, NlsBundleWithLookup {
-
   }
 }

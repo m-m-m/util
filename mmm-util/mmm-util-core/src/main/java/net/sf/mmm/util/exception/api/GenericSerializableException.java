@@ -293,17 +293,47 @@ public class GenericSerializableException extends RuntimeException implements Nl
   @Override
   public String toString() {
 
-    StringBuilder buffer = new StringBuilder();
-    buffer.append(getClass().getSimpleName());
-    buffer.append(':');
-    buffer.append(this.originalExceptionName);
-    buffer.append(": ");
-    buffer.append(getMessage());
-    if (this.uuid != null) {
-      buffer.append(StringUtil.LINE_SEPARATOR_LF);
-      buffer.append(this.uuid);
+    // We intentionally use the system locale here to prevent mixed languages in log-files...
+    return toString(Locale.getDefault(), null).toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString(Locale locale) {
+
+    return toString(locale, null).toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Appendable toString(Locale locale, Appendable appendable) {
+
+    Appendable buffer = appendable;
+    if (buffer == null) {
+      buffer = new StringBuilder(32);
     }
-    return buffer.toString();
+    try {
+      Class<?> myClass = getClass();
+      buffer.append(myClass.getName());
+      buffer.append(':');
+      buffer.append(this.originalExceptionName);
+      buffer.append(": ");
+      if (!this.originalExceptionName.endsWith(this.code)) {
+        buffer.append(this.code);
+        buffer.append(": ");
+      }
+      buffer.append(getLocalizedMessage(locale));
+      if (this.uuid != null) {
+        buffer.append(StringUtil.LINE_SEPARATOR);
+        buffer.append(this.uuid.toString());
+      }
+      return buffer;
+    } catch (IOException e) {
+      throw new RuntimeIoException(e, IoMode.WRITE);
+    }
   }
 
 }

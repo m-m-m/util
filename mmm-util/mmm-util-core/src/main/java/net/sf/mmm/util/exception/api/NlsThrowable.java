@@ -123,4 +123,35 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    */
   Throwable createCopy(ExceptionTruncation truncation);
 
+  /**
+   * {@inheritDoc}
+   *
+   * @see #toString(Locale)
+   */
+  String toString();
+
+  /**
+   * Like {@link #toString()} but using the specified {@link Locale}.
+   *
+   * @param locale is the {@link Locale} used for {@link #getLocalizedMessage(Locale)}.
+   * @return the localized string representation of this exception as described in
+   *         {@link #toString(Locale, Appendable)}.
+   * @since 6.0.0
+   */
+  String toString(Locale locale);
+
+  /**
+   * {@link Appendable#append(CharSequence) appends} the localized string representation of this exception. It
+   * is defined as following:
+   *
+   * <pre>&lt;{@link Class#getName() classname}>: [&lt;custom-{@link #getCode() code}>: ]&lt;{@link #getLocalizedMessage(Locale) message}></pre>
+   *
+   * @param locale is the {@link Locale} used for {@link #getLocalizedMessage(Locale)}.
+   * @param appendable is the buffer to {@link Appendable#append(CharSequence) append} to. Will be created as
+   *        {@link StringBuilder} if <code>null</code> is provided.
+   * @return the provided {@link Appendable} or the created one if <code>null</code> was given.
+   * @since 6.0.0
+   */
+  Appendable toString(Locale locale, Appendable appendable);
+
 }
