@@ -10,7 +10,7 @@
 
   <bean id="EntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="javax.sql.DataSource"/>
-    <property name="packagesToScan" value="${persistence.packagesToScan}]"/>
+    <property name="packagesToScan" value="${persistence.packagesToScan}"/>
     <property name="jpaVendorAdapter">
       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="showSql" value="${persistence.show.sql}"/>
