@@ -18,8 +18,6 @@
         <property name="databasePlatform" value="${persistence.hibernate.dialect}"/>
       </bean>
     </property>
-    <!-- <property name="jpaPropertyMap"> <map> <entry key="hibernate.ejb.naming_strategy"><value>org.hibernate.cfg.ImprovedNamingStrategy</value></entry>
-      </map> </property> -->
   </bean>
 
 </beans>
