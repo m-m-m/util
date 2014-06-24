@@ -2,22 +2,24 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
-import java.util.Date;
+import java.time.LocalTime;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalTimeField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterLocalTimeField;
+
+//import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterTimeField;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetDateField}.
+ * This is the abstract base implementation of {@link UiWidgetLocalTimeField}.
  *
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetDateField<ADAPTER extends UiWidgetAdapterDateField> extends
-    AbstractUiWidgetTextualInputField<ADAPTER, Date, Date> implements UiWidgetDateField {
+public abstract class AbstractUiWidgetLocalTimeField<ADAPTER extends UiWidgetAdapterLocalTimeField> extends
+    AbstractUiWidgetTextualInputField<ADAPTER, LocalTime, LocalTime> implements UiWidgetLocalTimeField {
 
   /**
    * The constructor.
@@ -26,7 +28,7 @@ public abstract class AbstractUiWidgetDateField<ADAPTER extends UiWidgetAdapterD
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public AbstractUiWidgetDateField(UiContext context, ADAPTER widgetAdapter) {
+  public AbstractUiWidgetLocalTimeField(UiContext context, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -35,9 +37,9 @@ public abstract class AbstractUiWidgetDateField<ADAPTER extends UiWidgetAdapterD
    * {@inheritDoc}
    */
   @Override
-  protected Class<Date> getValueClass() {
+  protected Class<LocalTime> getValueClass() {
 
-    return Date.class;
+    return LocalTime.class;
   }
 
 }

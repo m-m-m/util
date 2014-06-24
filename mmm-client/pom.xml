@@ -13,6 +13,11 @@
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>Support for clients.</description>
+  
+  <properties>
+    <java.version>1.8</java.version>
+  </properties>
+  
   <modules>
     <module>mmm-client-api</module>
     <module>mmm-client-impl-gwt</module>

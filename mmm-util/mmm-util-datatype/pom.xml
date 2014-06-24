@@ -23,21 +23,4 @@
       <artifactId>moneta</artifactId>
     </dependency>
   </dependencies>
-
-  <profiles>
-    <profile>
-      <id>backport</id>
-      <activation>
-        <jdk>1.7</jdk>
-      </activation>
-      <dependencies>
-        <!-- backport for java.time (in java < 1.8) -->
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>mmm-util-backport-java.time</artifactId>
-          <version>${backport-time-version}</version>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
 </project>

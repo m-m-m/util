@@ -23,13 +23,6 @@
       <artifactId>mmm-util-core</artifactId>
       <classifier>sources</classifier>
     </dependency>
-    <!-- TODO: only in profile with java less than 1.8 -->
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-backport-java.time</artifactId>
-      <version>${backport-time-version}</version>
-      <classifier>sources</classifier>
-    </dependency>
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>

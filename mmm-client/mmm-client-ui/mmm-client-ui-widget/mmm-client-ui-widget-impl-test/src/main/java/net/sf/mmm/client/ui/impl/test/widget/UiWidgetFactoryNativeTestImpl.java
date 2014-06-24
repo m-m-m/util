@@ -21,7 +21,7 @@ import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetCheckboxFieldTestImpl
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetCodeAreaFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetColorFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetComboboxFieldTestImpl;
-import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetDateFieldTestImpl;
+import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetLocalDateFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetDoubleFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetIntegerFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetIntegerSliderFieldTestImpl;
@@ -32,7 +32,7 @@ import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetRadioButtonsVerticalF
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetRichTextFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetTextAreaFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetTextFieldTestImpl;
-import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetTimeFieldTestImpl;
+import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetLocalTimeFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuBarTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuItemClickableTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuItemSeparatorTestImpl;
@@ -84,8 +84,8 @@ public class UiWidgetFactoryNativeTestImpl extends AbstractUiWidgetFactoryNative
     register(new UiWidgetIntegerFieldTestImpl.Factory());
     register(new UiWidgetIntegerSliderFieldTestImpl.Factory());
     register(new UiWidgetDoubleFieldTestImpl.Factory());
-    register(new UiWidgetDateFieldTestImpl.Factory());
-    register(new UiWidgetTimeFieldTestImpl.Factory());
+    register(new UiWidgetLocalDateFieldTestImpl.Factory());
+    register(new UiWidgetLocalTimeFieldTestImpl.Factory());
     register(new UiWidgetRadioButtonsTestImpl.Factory());
     register(new UiWidgetRadioButtonsVerticalFieldTestImpl.Factory());
     register(new UiWidgetComboboxFieldTestImpl.Factory());

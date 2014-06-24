@@ -27,6 +27,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDateFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetDoubleFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetIntegerSliderFieldGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetLocalDateFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetLongFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetPasswordFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsFieldGwt;
@@ -34,7 +35,7 @@ import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRadioButtonsVerticalFi
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetRichTextFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextAreaFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTextFieldGwt;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetTimeFieldGwt;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.UiWidgetLocalTimeFieldGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuBarGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuGwt;
 import net.sf.mmm.client.ui.impl.gwt.widget.menu.UiWidgetMenuItemClickableGwt;
@@ -94,7 +95,8 @@ public class UiWidgetFactoryNativeGwt extends AbstractUiWidgetFactoryNative {
     register(new UiWidgetIntegerSliderFieldGwt.Factory());
     register(new UiWidgetDoubleFieldGwt.Factory());
     register(new UiWidgetDateFieldGwt.Factory());
-    register(new UiWidgetTimeFieldGwt.Factory());
+    register(new UiWidgetLocalDateFieldGwt.Factory());
+    register(new UiWidgetLocalTimeFieldGwt.Factory());
     register(new UiWidgetRadioButtonsFieldGwt.Factory());
     register(new UiWidgetRadioButtonsVerticalFieldGwt.Factory());
     register(new UiWidgetComboboxFieldGwt.Factory());

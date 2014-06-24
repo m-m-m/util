@@ -13,11 +13,11 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * widget is not available by the underlying native toolkit, an implementation shall be provided that is based
  * on {@link UiWidgetTextField}.<br/>
  * Here you can see an example (with {@link #setLabel(String) field label} "Departure"):
- * 
+ *
  * <pre>
  * Departure: <input type="time" />
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

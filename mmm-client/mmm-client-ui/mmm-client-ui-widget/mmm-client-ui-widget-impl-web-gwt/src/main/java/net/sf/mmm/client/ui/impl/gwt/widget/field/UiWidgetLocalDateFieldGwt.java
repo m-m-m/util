@@ -3,19 +3,19 @@
 package net.sf.mmm.client.ui.impl.gwt.widget.field;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField;
 import net.sf.mmm.client.ui.base.widget.factory.AbstractUiSingleWidgetFactoryNative;
-import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetDateField;
-import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtDateField;
+import net.sf.mmm.client.ui.base.widget.field.AbstractUiWidgetLocalDateField;
+import net.sf.mmm.client.ui.impl.gwt.widget.field.adapter.UiWidgetAdapterGwtLocalDateField;
 
 /**
- * This is the implementation of {@link UiWidgetDateField} using GWT based on
- * {@link UiWidgetAdapterGwtDateField}.
+ * This is the implementation of {@link UiWidgetLocalDateField} using GWT based on
+ * {@link UiWidgetAdapterGwtLocalDateField}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class UiWidgetDateFieldGwt extends AbstractUiWidgetDateField<UiWidgetAdapterGwtDateField> {
+public class UiWidgetLocalDateFieldGwt extends AbstractUiWidgetLocalDateField<UiWidgetAdapterGwtLocalDateField> {
 
   /**
    * The constructor.
@@ -24,7 +24,7 @@ public class UiWidgetDateFieldGwt extends AbstractUiWidgetDateField<UiWidgetAdap
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public UiWidgetDateFieldGwt(UiContext context, UiWidgetAdapterGwtDateField widgetAdapter) {
+  public UiWidgetLocalDateFieldGwt(UiContext context, UiWidgetAdapterGwtLocalDateField widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -33,31 +33,33 @@ public class UiWidgetDateFieldGwt extends AbstractUiWidgetDateField<UiWidgetAdap
    * {@inheritDoc}
    */
   @Override
-  protected UiWidgetAdapterGwtDateField createWidgetAdapter() {
+  protected UiWidgetAdapterGwtLocalDateField createWidgetAdapter() {
 
-    return new UiWidgetAdapterGwtDateField();
+    return new UiWidgetAdapterGwtLocalDateField();
   }
 
   /**
    * This inner class is the {@link AbstractUiSingleWidgetFactoryNative factory} for this widget.
    */
-  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetDateField> {
+  public static class Factory extends AbstractUiSingleWidgetFactoryNative<UiWidgetLocalDateField> {
 
     /**
      * The constructor.
      */
     public Factory() {
 
-      super(UiWidgetDateField.class);
+      super(UiWidgetLocalDateField.class);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UiWidgetDateField create(UiContext context) {
+    public UiWidgetLocalDateField create(UiContext context) {
 
-      return new UiWidgetDateFieldGwt(context, null);
+      return new UiWidgetLocalDateFieldGwt(context, null);
     }
+
   }
+
 }

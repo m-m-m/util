@@ -2,22 +2,22 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.base.widget.field;
 
-import java.util.Date;
+import java.time.Instant;
 
 import net.sf.mmm.client.ui.api.UiContext;
-import net.sf.mmm.client.ui.api.widget.field.UiWidgetDateField;
-import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterDateField;
+import net.sf.mmm.client.ui.api.widget.field.UiWidgetInstantField;
+import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterInstantField;
 
 /**
- * This is the abstract base implementation of {@link UiWidgetDateField}.
+ * This is the abstract base implementation of {@link UiWidgetInstantField}.
  *
  * @param <ADAPTER> is the generic type of {@link #getWidgetAdapter()}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractUiWidgetDateField<ADAPTER extends UiWidgetAdapterDateField> extends
-    AbstractUiWidgetTextualInputField<ADAPTER, Date, Date> implements UiWidgetDateField {
+public abstract class AbstractUiWidgetInstantField<ADAPTER extends UiWidgetAdapterInstantField> extends
+    AbstractUiWidgetTextualInputField<ADAPTER, Instant, Instant> implements UiWidgetInstantField {
 
   /**
    * The constructor.
@@ -26,7 +26,7 @@ public abstract class AbstractUiWidgetDateField<ADAPTER extends UiWidgetAdapterD
    * @param widgetAdapter is the {@link #getWidgetAdapter() widget adapter}. Typically <code>null</code> for
    *        lazy initialization.
    */
-  public AbstractUiWidgetDateField(UiContext context, ADAPTER widgetAdapter) {
+  public AbstractUiWidgetInstantField(UiContext context, ADAPTER widgetAdapter) {
 
     super(context, widgetAdapter);
   }
@@ -35,9 +35,9 @@ public abstract class AbstractUiWidgetDateField<ADAPTER extends UiWidgetAdapterD
    * {@inheritDoc}
    */
   @Override
-  protected Class<Date> getValueClass() {
+  protected Class<Instant> getValueClass() {
 
-    return Date.class;
+    return Instant.class;
   }
 
 }

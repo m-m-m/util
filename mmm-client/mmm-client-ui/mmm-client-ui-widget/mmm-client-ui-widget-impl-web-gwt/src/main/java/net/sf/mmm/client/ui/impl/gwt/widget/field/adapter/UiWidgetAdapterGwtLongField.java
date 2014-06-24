@@ -6,9 +6,8 @@ import net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterLongField;
 import net.sf.mmm.client.ui.gwt.widgets.LongSpinBox;
 
 /**
- * This is the implementation of {@link net.sf.mmm.client.ui.base.widget.field.adapter.UiWidgetAdapterField} using GWT
- * based on {@link LongSpinBox}.
- * 
+ * This is the implementation of {@link UiWidgetAdapterLongField} using GWT based on {@link LongSpinBox}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
