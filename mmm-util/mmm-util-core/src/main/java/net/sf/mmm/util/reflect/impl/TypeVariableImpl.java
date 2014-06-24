@@ -124,22 +124,21 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("javadoc")
   // Java8 support
   public Annotation[] getDeclaredAnnotations() {
 
     return getAnnotations();
   }
 
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // public AnnotatedType[] getAnnotatedBounds() {
-  //
-  // // TODO hohwille actually incorrect...
-  // return new AnnotatedType[0];
-  // }
+  /**
+   * {@inheritDoc}
+   */
+  // Java8 support
+  public java.lang.reflect.AnnotatedType[] getAnnotatedBounds() {
+
+    // TODO hohwille actually incorrect...
+    return new java.lang.reflect.AnnotatedType[0];
+  }
 
   /**
    * {@inheritDoc}

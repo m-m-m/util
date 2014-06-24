@@ -30,12 +30,12 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is the test-case for {@link CliMode}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @SuppressWarnings("all")
-public class CliStateTest {
+public class CliStateTest extends Assert {
 
   /** The option for a string. */
   private static final String OPTION_NAME_STRING = "--string";
@@ -111,13 +111,13 @@ public class CliStateTest {
 
   /**
    * This method gets the {@link CliModeCycle} in the hierarchy of the given <code>exception</code>.
-   * 
+   *
    * @param exception the {@link CliException}
    * @return the {@link CliModeCycle}.
    */
   protected NodeCycle getCycle(Exception exception) {
 
-    Assert.assertNotNull(exception);
+    assertNotNull(exception);
     NodeCycle cycle = null;
     Throwable cause = exception;
     while ((cycle == null) && (cause != null)) {
@@ -127,7 +127,7 @@ public class CliStateTest {
       }
       cause = cause.getCause();
     }
-    Assert.assertNotNull(cycle);
+    assertNotNull(cycle);
     return cycle;
   }
 
@@ -142,22 +142,22 @@ public class CliStateTest {
     CliState state;
     state = createState(OptionTest1.class);
     List<CliOptionContainer> optionList = state.getOptions();
-    Assert.assertNotNull(optionList);
-    Assert.assertEquals(2, optionList.size());
+    assertNotNull(optionList);
+    assertEquals(2, optionList.size());
     CliOptionContainer option = state.getOption(OPTION_NAME_STRING);
-    Assert.assertNotNull(option);
-    Assert.assertTrue(optionList.contains(option));
-    Assert.assertEquals(OPTION_NAME_STRING, option.getOption().name());
-    Assert.assertEquals(OPTION_USAGE_STRING, option.getOption().usage());
-    Assert.assertEquals(String.class, option.getSetter().getPropertyClass());
-    Assert.assertSame(option, state.getOption(OPTION_ALIAS_STRING));
+    assertNotNull(option);
+    assertTrue(optionList.contains(option));
+    assertEquals(OPTION_NAME_STRING, option.getOption().name());
+    assertEquals(OPTION_USAGE_STRING, option.getOption().usage());
+    assertEquals(String.class, option.getSetter().getPropertyClass());
+    assertSame(option, state.getOption(OPTION_ALIAS_STRING));
     option = state.getOption(OPTION_NAME_BOOLEAN);
-    Assert.assertNotNull(option);
-    Assert.assertTrue(optionList.contains(option));
-    Assert.assertEquals(OPTION_NAME_BOOLEAN, option.getOption().name());
-    Assert.assertEquals(OPTION_USAGE_BOOLEAN, option.getOption().usage());
-    Assert.assertEquals(boolean.class, option.getSetter().getPropertyClass());
-    Assert.assertNull(state.getOption("undefined"));
+    assertNotNull(option);
+    assertTrue(optionList.contains(option));
+    assertEquals(OPTION_NAME_BOOLEAN, option.getOption().name());
+    assertEquals(OPTION_USAGE_BOOLEAN, option.getOption().usage());
+    assertEquals(boolean.class, option.getSetter().getPropertyClass());
+    assertNull(state.getOption("undefined"));
   }
 
   /**
@@ -170,15 +170,15 @@ public class CliStateTest {
     CliState state;
     state = createState(ArgumentTest1.class);
     CliModeContainer modeObject = (CliModeContainer) state.getMode(MODE_Z_EXTENDS_X_Y_HELP);
-    Assert.assertNotNull(modeObject);
-    Assert.assertEquals(MODE_Z_EXTENDS_X_Y_HELP, modeObject.getId());
+    assertNotNull(modeObject);
+    assertEquals(MODE_Z_EXTENDS_X_Y_HELP, modeObject.getId());
     Set<? extends CliModeObject> extendedModes = modeObject.getExtendedModes();
-    Assert.assertTrue(extendedModes.contains(state.getMode(MODE_Z_EXTENDS_X_Y_HELP)));
-    Assert.assertTrue(extendedModes.contains(state.getMode(MODE_X_EXTENDS_DEFAULT)));
-    Assert.assertTrue(extendedModes.contains(state.getMode(MODE_Y_EXTENDS_HELP)));
-    Assert.assertTrue(extendedModes.contains(state.getMode(CliMode.ID_HELP)));
-    Assert.assertTrue(extendedModes.contains(state.getMode(CliMode.ID_DEFAULT)));
-    Assert.assertEquals(5, extendedModes.size());
+    assertTrue(extendedModes.contains(state.getMode(MODE_Z_EXTENDS_X_Y_HELP)));
+    assertTrue(extendedModes.contains(state.getMode(MODE_X_EXTENDS_DEFAULT)));
+    assertTrue(extendedModes.contains(state.getMode(MODE_Y_EXTENDS_HELP)));
+    assertTrue(extendedModes.contains(state.getMode(CliMode.ID_HELP)));
+    assertTrue(extendedModes.contains(state.getMode(CliMode.ID_DEFAULT)));
+    assertEquals(5, extendedModes.size());
   }
 
   /**
@@ -193,28 +193,28 @@ public class CliStateTest {
     // test regular order
     state = createState(ArgumentTest1.class);
     List<CliArgumentContainer> argumentsList = state.getArguments(state.getMode(MODE_Z_EXTENDS_X_Y_HELP));
-    Assert.assertEquals(1, argumentsList.size());
-    Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(0).getId());
+    assertEquals(1, argumentsList.size());
+    assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(0).getId());
     argumentsList = state.getArguments(state.getMode(CliMode.ID_HELP));
-    Assert.assertEquals(1, argumentsList.size());
-    Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(0).getId());
+    assertEquals(1, argumentsList.size());
+    assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(0).getId());
     argumentsList = state.getArguments(state.getMode(CliMode.ID_DEFAULT));
-    Assert.assertEquals(4, argumentsList.size());
-    Assert.assertEquals(ARGUMENT_NAME_BOOLEAN, argumentsList.get(0).getId());
-    Assert.assertEquals(ARGUMENT_NAME_FOO, argumentsList.get(1).getId());
-    Assert.assertEquals(ARGUMENT_NAME_BAR, argumentsList.get(2).getId());
-    Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(3).getId());
+    assertEquals(4, argumentsList.size());
+    assertEquals(ARGUMENT_NAME_BOOLEAN, argumentsList.get(0).getId());
+    assertEquals(ARGUMENT_NAME_FOO, argumentsList.get(1).getId());
+    assertEquals(ARGUMENT_NAME_BAR, argumentsList.get(2).getId());
+    assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(3).getId());
 
     // Test inheritance
     state = createState(ArgumentTest2.class);
     argumentsList = state.getArguments(state.getMode(CliMode.ID_DEFAULT));
-    Assert.assertEquals(6, argumentsList.size());
-    Assert.assertEquals(ARGUMENT_NAME_BOOLEAN, argumentsList.get(0).getId());
-    Assert.assertEquals(ARGUMENT_NAME_WHOOP, argumentsList.get(1).getId());
-    Assert.assertEquals(ARGUMENT_NAME_FOO, argumentsList.get(2).getId());
-    Assert.assertEquals(ARGUMENT_NAME_BAR, argumentsList.get(3).getId());
-    Assert.assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(4).getId());
-    Assert.assertEquals(ARGUMENT_NAME_THING, argumentsList.get(5).getId());
+    assertEquals(6, argumentsList.size());
+    assertEquals(ARGUMENT_NAME_BOOLEAN, argumentsList.get(0).getId());
+    assertEquals(ARGUMENT_NAME_WHOOP, argumentsList.get(1).getId());
+    assertEquals(ARGUMENT_NAME_FOO, argumentsList.get(2).getId());
+    assertEquals(ARGUMENT_NAME_BAR, argumentsList.get(3).getId());
+    assertEquals(ARGUMENT_NAME_STRING, argumentsList.get(4).getId());
+    assertEquals(ARGUMENT_NAME_THING, argumentsList.get(5).getId());
 
   }
 
@@ -230,29 +230,42 @@ public class CliStateTest {
     CliState state = null;
     try {
       state = createState(CyclicTest1.class);
-      Assert.fail();
+      fail();
     } catch (Exception e) {
       List<CliModeContainer> inverseCycle = getCycle(e).getInverseCycle();
-      Assert.assertNotNull(inverseCycle);
-      Assert.assertEquals(2, inverseCycle.size());
-      Assert.assertEquals("foo", inverseCycle.get(0).getMode().id());
-      Assert.assertEquals("foo", inverseCycle.get(1).getMode().id());
+      assertNotNull(inverseCycle);
+      assertEquals(2, inverseCycle.size());
+      assertEquals("foo", inverseCycle.get(0).getMode().id());
+      assertEquals("foo", inverseCycle.get(1).getMode().id());
     }
 
     // complex dependency...
     try {
       state = createState(CyclicTest2.class);
-      Assert.fail();
+      fail();
     } catch (Exception e) {
       List<CliModeContainer> inverseCycle = getCycle(e).getInverseCycle();
-      Assert.assertNotNull(inverseCycle);
-      Assert.assertEquals(4, inverseCycle.size());
-      Assert.assertEquals("foo", inverseCycle.get(0).getMode().id());
-      Assert.assertEquals("bar2", inverseCycle.get(1).getMode().id());
-      Assert.assertEquals("bar1", inverseCycle.get(2).getMode().id());
-      Assert.assertEquals("foo", inverseCycle.get(3).getMode().id());
+      assertNotNull(inverseCycle);
+      assertEquals(4, inverseCycle.size());
+      String firstModeId = inverseCycle.get(0).getMode().id();
+      // map order is not deterministic across JDK versions...
+      if ("foo".equals(firstModeId)) {
+        assertEquals("bar2", inverseCycle.get(1).getMode().id());
+        assertEquals("bar1", inverseCycle.get(2).getMode().id());
+        assertEquals("foo", inverseCycle.get(3).getMode().id());
+      } else if ("bar1".equals(firstModeId)) {
+        assertEquals("foo", inverseCycle.get(1).getMode().id());
+        assertEquals("bar2", inverseCycle.get(2).getMode().id());
+        assertEquals("bar1", inverseCycle.get(3).getMode().id());
+      } else if ("bar2".equals(firstModeId)) {
+        assertEquals("bar1", inverseCycle.get(1).getMode().id());
+        assertEquals("foo", inverseCycle.get(2).getMode().id());
+        assertEquals("bar2", inverseCycle.get(3).getMode().id());
+      } else {
+        fail();
+      }
     }
-    Assert.assertNull(state);
+    assertNull(state);
   }
 
   /**
@@ -263,9 +276,9 @@ public class CliStateTest {
 
     CliState state = createState(ContainerStyleTest.class);
     CliOptionContainer option = state.getOption(OPTION_NAME_OPTION);
-    Assert.assertEquals(CliContainerStyle.MULTIPLE_OCCURRENCE, option.getContainerStyle(state.getCliStyle()));
+    assertEquals(CliContainerStyle.MULTIPLE_OCCURRENCE, option.getContainerStyle(state.getCliStyle()));
     CliOptionContainer list = state.getOption(OPTION_NAME_LIST);
-    Assert.assertEquals(CliContainerStyle.COMMA_SEPARATED, list.getContainerStyle(state.getCliStyle()));
+    assertEquals(CliContainerStyle.COMMA_SEPARATED, list.getContainerStyle(state.getCliStyle()));
   }
 
   /**
@@ -278,10 +291,10 @@ public class CliStateTest {
     // illegal container style
     try {
       state = createState(IllegalContainerStyleTest.class);
-      Assert.fail();
+      fail();
       // } catch (NlsIllegalArgumentException e) {
     } catch (Exception e) {
-      Assert.assertTrue(e.getMessage().contains(CliContainerStyle.DEFAULT.toString()));
+      assertTrue(e.getMessage().contains(CliContainerStyle.DEFAULT.toString()));
     }
   }
 
