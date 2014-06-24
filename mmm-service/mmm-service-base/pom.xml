@@ -17,12 +17,10 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-service-api</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-transaction-api</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
       <!-- To avoid overcomplicated module structures we bundle server and client code together
         and declare this as optional -->
       <optional>true</optional>
