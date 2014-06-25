@@ -21,10 +21,12 @@ import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetCheckboxFieldTestImpl
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetCodeAreaFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetColorFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetComboboxFieldTestImpl;
-import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetLocalDateFieldTestImpl;
+import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetDateFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetDoubleFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetIntegerFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetIntegerSliderFieldTestImpl;
+import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetLocalDateFieldTestImpl;
+import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetLocalTimeFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetLongFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetPasswordFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetRadioButtonsTestImpl;
@@ -32,7 +34,6 @@ import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetRadioButtonsVerticalF
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetRichTextFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetTextAreaFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetTextFieldTestImpl;
-import net.sf.mmm.client.ui.impl.test.widget.field.UiWidgetLocalTimeFieldTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuBarTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuItemClickableTestImpl;
 import net.sf.mmm.client.ui.impl.test.widget.menu.UiWidgetMenuItemSeparatorTestImpl;
@@ -51,7 +52,7 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 /**
  * This is the implementation of the {@link net.sf.mmm.client.ui.api.UiContext} for testing without a native
  * toolkit.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -84,6 +85,7 @@ public class UiWidgetFactoryNativeTestImpl extends AbstractUiWidgetFactoryNative
     register(new UiWidgetIntegerFieldTestImpl.Factory());
     register(new UiWidgetIntegerSliderFieldTestImpl.Factory());
     register(new UiWidgetDoubleFieldTestImpl.Factory());
+    register(new UiWidgetDateFieldTestImpl.Factory());
     register(new UiWidgetLocalDateFieldTestImpl.Factory());
     register(new UiWidgetLocalTimeFieldTestImpl.Factory());
     register(new UiWidgetRadioButtonsTestImpl.Factory());

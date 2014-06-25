@@ -12,11 +12,11 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.date.api.Iso8601UtilLimited} interface. It does NOT use
- * {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe.<br>
- * 
+ * This is the implementation of the {@link net.sf.mmm.util.date.api.Iso8601UtilLimited} interface. It does
+ * NOT use {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe.<br>
+ *
  * @see Iso8601UtilImpl
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -29,12 +29,35 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /** The maximum month of the year. */
   protected static final int MAX_MONTH = 12;
 
+  /** @see #getInstance() */
+  private static Iso8601UtilLimitedImpl instance;
+
   /**
    * The constructor.
    */
   public Iso8601UtilLimitedImpl() {
 
     super();
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link Iso8601UtilImpl}.<br/>
+   * <b>ATTENTION:</b><br/>
+   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   *
+   * @return the singleton instance.
+   * @since 6.0.0
+   */
+  public static Iso8601UtilLimited getInstance() {
+
+    if (instance == null) {
+      synchronized (Iso8601UtilLimitedImpl.class) {
+        if (instance == null) {
+          instance = new Iso8601UtilLimitedImpl();
+        }
+      }
+    }
+    return instance;
   }
 
   /**
@@ -73,12 +96,12 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
 
   /**
    * @see #formatDate(Date, boolean, Appendable)
-   * 
+   *
    * @param year is the {@link java.util.Calendar#YEAR year}
    * @param month is the month (1-12).
    * @param day is the {@link java.util.Calendar#DAY_OF_MONTH day}.
-   * @param extended if <code>false</code> the basic date format ("yyyyMMdd") is used, if <code>true</code> the extended
-   *        date format ("yyyy-MM-dd") is used.
+   * @param extended if <code>false</code> the basic date format ("yyyyMMdd") is used, if <code>true</code>
+   *        the extended date format ("yyyy-MM-dd") is used.
    * @param buffer is where to append the formatted date.
    */
   public void formatDate(int year, int month, int day, boolean extended, Appendable buffer) {
@@ -163,12 +186,12 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
 
   /**
    * @see #formatTime(Date, boolean, Appendable)
-   * 
+   *
    * @param hours are the {@link java.util.Calendar#HOUR_OF_DAY hours}.
    * @param minutes are the {@link java.util.Calendar#MINUTE minutes}.
    * @param seconds are the {@link java.util.Calendar#SECOND seconds}.
-   * @param extended if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code> the extended
-   *        time format ("HH:mm:ss") is used.
+   * @param extended if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code> the
+   *        extended time format ("HH:mm:ss") is used.
    * @param buffer is where to append the formatted date.
    */
   public void formatTime(int hours, int minutes, int seconds, boolean extended, Appendable buffer) {
@@ -281,7 +304,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
 
   /**
    * This method parses the timezone offset from the given <code>scanner</code>.
-   * 
+   *
    * @param scanner is the parser pointing to the timezone or at the end of the string.
    * @return the parsed timezone offset or <code>null</code> for UTC (Z) or if no timezone is present.
    */
@@ -309,8 +332,9 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   }
 
   /**
-   * This method parses the date from the given <code>scanner</code>. The format is <code>yyyy[-]MM[-]dd</code>
-   * 
+   * This method parses the date from the given <code>scanner</code>. The format is
+   * <code>yyyy[-]MM[-]dd</code>
+   *
    * @param scanner is the parser pointing to the date.
    * @return an array containing the year, month, and day in that order.
    */
@@ -355,10 +379,10 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
 
   /**
    * This method reads two digits from the given <code>scanner</code>.
-   * 
+   *
    * @param scanner is the scanner potentially pointing to the digits.
-   * @return <code>-1</code> if the <code>scanner</code> does NOT point to a digit or the number represented by the two
-   *         digits consumed from the <code>scanner</code>.
+   * @return <code>-1</code> if the <code>scanner</code> does NOT point to a digit or the number represented
+   *         by the two digits consumed from the <code>scanner</code>.
    * @throws IllegalDateFormatException if the <code>scanner</code> only contained a single digit.
    */
   private int read2Digits(CharSequenceScanner scanner) throws IllegalDateFormatException {
@@ -377,7 +401,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /**
    * This method parses the time (or timezone offset) from the given <code>scanner</code>. The format is
    * <code>hh[[:]mm[[:]ss]]</code>
-   * 
+   *
    * @param scanner is the parser pointing to the time.
    * @return an int-array containing the hour, minute and second in that order.
    */
