@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.service.TestService;
 import net.sf.mmm.service.api.CsrfToken;
 import net.sf.mmm.service.base.GenericRemoteInvocationTransactionalResults;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcCall;
@@ -15,6 +14,7 @@ import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcResponse;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcService;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcTransactionalCalls;
 import net.sf.mmm.service.impl.CsrfTokenManagerDummyImpl;
+import net.sf.mmm.service.test.rpc.TestService;
 import net.sf.mmm.test.AbstractSpringTest;
 
 import org.junit.Test;

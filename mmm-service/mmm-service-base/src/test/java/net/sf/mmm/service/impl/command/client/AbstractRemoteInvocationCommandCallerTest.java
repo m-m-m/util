@@ -1,22 +1,25 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.service.impl.rpc.client;
+package net.sf.mmm.service.impl.command.client;
 
 import java.io.Serializable;
 
 import net.sf.mmm.service.api.CsrfToken;
+import net.sf.mmm.service.api.command.RemoteInvocationCommand;
+import net.sf.mmm.service.api.command.client.RemoteInvocationCommandQueue;
 import net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.base.GenericRemoteInvocationTransactionalResults;
-import net.sf.mmm.service.base.client.RemoteInvocationServiceCallerBaseTest;
-import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcCall;
-import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcRequest;
+import net.sf.mmm.service.base.client.AbstractRemoteInvocationCaller;
+import net.sf.mmm.service.base.client.RemoteInvocationCallerBaseTest;
+import net.sf.mmm.service.base.command.GenericRemoteInvocationCommandRequest;
+import net.sf.mmm.service.base.command.GenericRemoteInvocationCommandTransactionalCalls;
+import net.sf.mmm.service.base.command.client.AbstractRemoteInvocationCommandCaller;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcResponse;
-import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcTransactionalCalls;
 import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceCaller;
-import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceCallerWithClientMap;
-import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceClient;
+import net.sf.mmm.service.impl.command.client.AbstractRemoteInvocationCommandCallerTest.RemoteInvocationCommandCallerTestImpl;
 import net.sf.mmm.service.impl.rpc.client.AbstractRemoteInvocationServiceCallerTest.RemoteInvocationServiceCallerTestImpl;
+import net.sf.mmm.service.test.command.GetMagicValueCommand;
 import net.sf.mmm.service.test.rpc.TestService;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.lang.api.function.Consumer;
@@ -28,8 +31,8 @@ import org.junit.Test;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class AbstractRemoteInvocationServiceCallerTest extends
-    RemoteInvocationServiceCallerBaseTest<RemoteInvocationServiceCallerTestImpl> {
+public class AbstractRemoteInvocationCommandCallerTest extends
+    RemoteInvocationCallerBaseTest<RemoteInvocationCommandQueue, RemoteInvocationCommandCallerTestImpl> {
 
   /**
    * This method tests
@@ -38,7 +41,7 @@ public class AbstractRemoteInvocationServiceCallerTest extends
   @Test
   public void testAutoCommit() {
 
-    RemoteInvocationServiceCallerTestImpl caller = getServiceCaller();
+    RemoteInvocationCommandCallerTestImpl caller = getRemoteInvocationCaller();
     assertNull(caller.getCurrentQueue());
     final GenericBean<String> resultBean = new GenericBean<String>();
     Consumer<String> successCallback = new Consumer<String>() {
@@ -60,12 +63,7 @@ public class AbstractRemoteInvocationServiceCallerTest extends
       }
     };
 
-    TestService serviceClient = caller.getServiceClient(TestService.class, String.class, successCallback,
-        failureCallback);
-    assertNotNull(serviceClient);
-    assertNull(resultBean.getValue());
-    String magicValue = serviceClient.getMagicValue();
-    assertNull(magicValue);
+    caller.callCommand(new GetMagicValueCommand(), successCallback, failureCallback);
     assertSame(TestService.MAGIC_VALUE, resultBean.getValue());
   }
 
@@ -76,7 +74,7 @@ public class AbstractRemoteInvocationServiceCallerTest extends
   @Test
   public void testCommit() {
 
-    RemoteInvocationServiceCallerTestImpl caller = getServiceCaller();
+    RemoteInvocationCommandCallerTestImpl caller = getRemoteInvocationCaller();
     assertNull(caller.getCurrentQueue());
     final GenericBean<String> resultBean = new GenericBean<String>();
     Consumer<String> successCallback = new Consumer<String>() {
@@ -98,31 +96,27 @@ public class AbstractRemoteInvocationServiceCallerTest extends
       }
     };
 
-    RemoteInvocationServiceQueue queue = newQueue(caller);
-    TestService serviceClient = queue.getServiceClient(TestService.class, String.class, successCallback,
-        failureCallback);
-    assertNotNull(serviceClient);
-    String magicValue = serviceClient.getMagicValue();
-    assertNull(magicValue);
+    RemoteInvocationCommandQueue queue = newQueue(caller);
+    queue.callCommand(new GetMagicValueCommand(), successCallback, failureCallback);
     assertNull(resultBean.getValue());
     queue.commit();
     assertSame(TestService.MAGIC_VALUE, resultBean.getValue());
   }
 
   /**
-   * @return the {@link AbstractRemoteInvocationServiceCaller} to be tested.
+   * {@inheritDoc}
    */
   @Override
-  protected RemoteInvocationServiceCallerTestImpl getServiceCaller() {
+  protected RemoteInvocationCommandCallerTestImpl getRemoteInvocationCaller() {
 
-    return new RemoteInvocationServiceCallerTestImpl();
+    return new RemoteInvocationCommandCallerTestImpl();
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected GenericRemoteInvocationRpcRequest getCurrentRequest(RemoteInvocationServiceCallerTestImpl caller) {
+  protected GenericRemoteInvocationCommandRequest getCurrentRequest(RemoteInvocationCommandCallerTestImpl caller) {
 
     return caller.currentRequest;
   }
@@ -130,18 +124,17 @@ public class AbstractRemoteInvocationServiceCallerTest extends
   /**
    * This inner class extends {@link AbstractRemoteInvocationServiceCaller} so it can be tested.
    */
-  public static class RemoteInvocationServiceCallerTestImpl extends AbstractRemoteInvocationServiceCallerWithClientMap {
+  public static class RemoteInvocationCommandCallerTestImpl extends AbstractRemoteInvocationCommandCaller {
 
-    /** @see AbstractRemoteInvocationServiceCallerTest#getCurrentRequest(RemoteInvocationServiceCallerTestImpl) */
-    private GenericRemoteInvocationRpcRequest currentRequest;
+    /** @see AbstractRemoteInvocationCommandCallerTest#getCurrentRequest(RemoteInvocationServiceCallerTestImpl) */
+    private GenericRemoteInvocationCommandRequest currentRequest;
 
     /**
      * The constructor.
      */
-    public RemoteInvocationServiceCallerTestImpl() {
+    public RemoteInvocationCommandCallerTestImpl() {
 
       super();
-      registerService(TestService.class, new TestServiceClient());
       initialize();
     }
 
@@ -149,21 +142,23 @@ public class AbstractRemoteInvocationServiceCallerTest extends
      * {@inheritDoc}
      */
     @Override
-    protected void performRequest(GenericRemoteInvocationRpcRequest request, RequestBuilder builder) {
+    protected void performRequest(
+        GenericRemoteInvocationCommandRequest request,
+        AbstractRemoteInvocationCaller<RemoteInvocationCommandQueue, RemoteInvocationCommand<?>, GenericRemoteInvocationCommandTransactionalCalls, GenericRemoteInvocationCommandRequest>.RequestBuilder builder) {
 
       verifyNoRequest();
       assertNotNull(request);
       assertNotNull(builder);
       this.currentRequest = request;
-      GenericRemoteInvocationRpcTransactionalCalls[] txCalls = request.getTransactionalCalls();
+      GenericRemoteInvocationCommandTransactionalCalls[] txCalls = request.getTransactionalCalls();
       GenericRemoteInvocationTransactionalResults[] txResults = new GenericRemoteInvocationTransactionalResults[txCalls.length];
 
       for (int txIndex = 0; txIndex < txCalls.length; txIndex++) {
 
-        GenericRemoteInvocationRpcCall[] calls = txCalls[txIndex].getCalls();
-        Serializable[] results = new Serializable[calls.length];
-        for (int callIndex = 0; callIndex < calls.length; callIndex++) {
-          results[callIndex] = processCall(calls[callIndex]);
+        RemoteInvocationCommand<?>[] commands = txCalls[txIndex].getCalls();
+        Serializable[] results = new Serializable[commands.length];
+        for (int callIndex = 0; callIndex < commands.length; callIndex++) {
+          results[callIndex] = processCall(commands[callIndex]);
         }
         txResults[txIndex] = new GenericRemoteInvocationTransactionalResults(results);
       }
@@ -178,20 +173,15 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     /**
      * Processes the given call.
      *
-     * @param call is the {@link GenericRemoteInvocationRpcCall} to process.
+     * @param call is the {@link RemoteInvocationCommand} to process.
      * @return the result of the call.
      */
-    private Serializable processCall(GenericRemoteInvocationRpcCall call) {
+    private Serializable processCall(RemoteInvocationCommand<?> call) {
 
-      if (TestService.class.getName().equals(call.getServiceInterfaceName())) {
-        if ("getMagicValue".equals(call.getMethodName())) {
-          assertEquals(0, call.getArguments().length);
-          return TestService.MAGIC_VALUE;
-        } else {
-          fail("unknown service method: " + call.getServiceInterfaceName() + "." + call.getMethodName());
-        }
+      if (call instanceof GetMagicValueCommand) {
+        return TestService.MAGIC_VALUE;
       } else {
-        fail("unknown service: " + call.getServiceInterfaceName());
+        fail("unknown command: " + call);
       }
       throw new IllegalStateException();
     }
@@ -210,33 +200,6 @@ public class AbstractRemoteInvocationServiceCallerTest extends
     public void reset() {
 
       this.currentRequest = null;
-    }
-
-  }
-
-  /**
-   * Client stub for {@link TestService}.
-   */
-  private static class TestServiceClient extends AbstractRemoteInvocationServiceClient implements TestService {
-
-    /**
-     * The constructor.
-     */
-    public TestServiceClient() {
-
-      super();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMagicValue() {
-
-      GenericRemoteInvocationRpcCall call = new GenericRemoteInvocationRpcCall(TestService.class.getName(),
-          "getMagicValue", GenericRemoteInvocationRpcCall.getSignature(new String[0]), new Serializable[0]);
-      addCall(call, String.class);
-      return null;
     }
 
   }

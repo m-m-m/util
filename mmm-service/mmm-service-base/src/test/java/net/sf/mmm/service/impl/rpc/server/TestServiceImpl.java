@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.service.impl.rpc.server;
 
-import net.sf.mmm.service.TestService;
 import net.sf.mmm.service.base.rpc.server.AbstractRemoteInvocationService;
+import net.sf.mmm.service.test.rpc.TestService;
 
 /**
  * This is the implementation of {@link TestService}.

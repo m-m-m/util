@@ -6,14 +6,13 @@ import net.sf.mmm.service.api.client.RemoteInvocationQueueState;
 import net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller;
 import net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceQueue;
 import net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcRequest;
-import net.sf.mmm.service.base.rpc.client.AbstractRemoteInvocationServiceCaller;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link AbstractRemoteInvocationServiceCaller}.
- * 
+ * This is the base-class for a test-case of {@link RemoteInvocationServiceCaller}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @param <CALLER> is the generic type of the {@link #getServiceCaller() service caller implementation to
  *        test}.
@@ -30,7 +29,7 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
    * This method is called if {@link RemoteInvocationServiceQueue}s have been created but been
    * {@link RemoteInvocationServiceQueue#cancel() cancelled}. Depending on the implementation of the
    * {@link RemoteInvocationServiceCaller} it should verify that no request has been performed.
-   * 
+   *
    * @param caller is the {@link RemoteInvocationServiceCaller}.
    */
   protected void verifyNoRequest(CALLER caller) {
@@ -40,14 +39,14 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
 
   /**
    * @param caller is the {@link RemoteInvocationServiceCaller}.
-   * @return the current {@link GenericRemoteInvocationRpcRequest} that has been "performed" by the caller
-   *         or <code>null</code> if no request has been performed.
+   * @return the current {@link GenericRemoteInvocationRpcRequest} that has been "performed" by the caller or
+   *         <code>null</code> if no request has been performed.
    */
   protected abstract GenericRemoteInvocationRpcRequest getCurrentRequest(CALLER caller);
 
   /**
    * Cancels the given {@link RemoteInvocationServiceQueue} and performs verifications.
-   * 
+   *
    * @param caller is the {@link RemoteInvocationServiceCaller}.
    * @param queue is the {@link RemoteInvocationServiceQueue} to cancel.
    */
@@ -60,7 +59,7 @@ public abstract class RemoteInvocationServiceCallerBaseTest<CALLER extends Remot
 
   /**
    * This method creates a new {@link RemoteInvocationServiceQueue} and performs verifcations.
-   * 
+   *
    * @param caller is the {@link RemoteInvocationServiceCaller}.
    * @return the new queue.
    */
