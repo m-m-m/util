@@ -25,11 +25,11 @@ import org.junit.runner.Result;
 
 /**
  * This is the test for {@link ReflectionUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class ReflectionUtilTest {
+public class ReflectionUtilTest extends Assert {
 
   protected ReflectionUtil getReflectionUtil() {
 
@@ -65,6 +65,28 @@ public class ReflectionUtilTest {
 
     GenericType type = getReturnType(declaringClass, methodName);
     return type.getComponentType().getRetrievalClass();
+  }
+
+  /**
+   * Test of {@link ReflectionUtil#getNonPrimitiveType(Class)}.
+   */
+  @Test
+  public void testGetNonPrimitiveType() {
+
+    ReflectionUtil reflectionUtil = getReflectionUtil();
+    // primitives...
+    assertEquals(Integer.class, reflectionUtil.getNonPrimitiveType(int.class));
+    assertEquals(Long.class, reflectionUtil.getNonPrimitiveType(long.class));
+    assertEquals(Double.class, reflectionUtil.getNonPrimitiveType(double.class));
+    assertEquals(Float.class, reflectionUtil.getNonPrimitiveType(float.class));
+    assertEquals(Short.class, reflectionUtil.getNonPrimitiveType(short.class));
+    assertEquals(Byte.class, reflectionUtil.getNonPrimitiveType(byte.class));
+    assertEquals(Character.class, reflectionUtil.getNonPrimitiveType(char.class));
+    assertEquals(Boolean.class, reflectionUtil.getNonPrimitiveType(boolean.class));
+    assertEquals(Void.class, reflectionUtil.getNonPrimitiveType(void.class));
+    // objects...
+    assertEquals(Object.class, reflectionUtil.getNonPrimitiveType(Object.class));
+    assertEquals(int[].class, reflectionUtil.getNonPrimitiveType(int[].class));
   }
 
   @Test
