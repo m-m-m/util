@@ -12,7 +12,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
  * This is the implementation of the {@link ReflectionUtilLimited} interface. It is strictly GWT compatible.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -40,34 +40,35 @@ public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent impleme
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings("unchecked")
   @Override
-  public Class<?> getNonPrimitiveType(Class<?> type) {
+  public <T> Class<T> getNonPrimitiveType(Class<T> type) {
 
     Class<?> result = type;
     if (type.isPrimitive()) {
       if (int.class == type) {
-        return Integer.class;
+        result = Integer.class;
       } else if (long.class == type) {
-        return Long.class;
+        result = Long.class;
       } else if (double.class == type) {
-        return Double.class;
+        result = Double.class;
       } else if (boolean.class == type) {
-        return Boolean.class;
+        result = Boolean.class;
       } else if (float.class == type) {
-        return Float.class;
+        result = Float.class;
       } else if (char.class == type) {
-        return Character.class;
+        result = Character.class;
       } else if (byte.class == type) {
-        return Byte.class;
+        result = Byte.class;
       } else if (short.class == type) {
-        return Short.class;
+        result = Short.class;
       } else if (void.class == type) {
-        return Void.class;
+        result = Void.class;
       } else {
         throw new IllegalStateException("Class-loader isolation trap!");
       }
     }
-    return result;
+    return (Class<T>) result;
   }
 
   /**

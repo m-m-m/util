@@ -4,7 +4,7 @@ package net.sf.mmm.util.reflect.api;
 
 /**
  * This is a limited subset of {@link ReflectionUtil} that is GWT compatible.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -21,14 +21,16 @@ public interface ReflectionUtilLimited extends GenericTypeFactory {
    * <code>type</code>.<br>
    * E.g. <code>{@link #getNonPrimitiveType(Class) getNonPrimitiveType}(int.class)</code> will return
    * <code>Integer.class</code>.
-   * 
+   *
+   *
    * @see Class#isPrimitive()
-   * 
+   *
+   * @param <T> is the generic type of the given <code>type</code> {@link Class}.
    * @param type is the (potentially) {@link Class#isPrimitive() primitive} type.
    * @return the according object-type for the given <code>type</code>. This will be the given
    *         <code>type</code> itself if it is NOT {@link Class#isPrimitive() primitive}.
    * @since 1.0.2
    */
-  Class<?> getNonPrimitiveType(Class<?> type);
+  <T> Class<T> getNonPrimitiveType(Class<T> type);
 
 }

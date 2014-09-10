@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * A legal implementation should have a {@link java.lang.reflect.Constructor} that is compatible with
  * {@link #getValue()}. An {@link EnumType} implementing this interface should also offer a static method
  * called <code>fromValue(V value)</code> that returns the appropriate {@link EnumType} instance or
- * <code>null</code> if no such instance exists. *
+ * <code>null</code> if no such instance exists.
  *
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

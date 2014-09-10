@@ -4,7 +4,7 @@ package net.sf.mmm.util.lang.api;
 
 /**
  * This enum contains the possible values for the sort order of a list.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -24,7 +24,7 @@ public enum SortOrder implements SimpleDatatype<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
    */
@@ -47,7 +47,7 @@ public enum SortOrder implements SimpleDatatype<String> {
    * Adjusts the {@link Math#signum(double)} of a {@link Comparable#compareTo(Object) compare to} result with
    * this {@link SortOrder} to the semantic of
    * {@link java.util.Collections#sort(java.util.List, java.util.Comparator)}. In other words *
-   * 
+   *
    * @param compareTo is the result of a regular {@link Comparable#compareTo(Object) compare to} operation.
    * @return the given value (<code>compareTo</code>) for {@link #ASCENDING} and the negation (
    *         <code>-compareTo</code>) otherwise (for {@link #DESCENDING}).

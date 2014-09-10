@@ -4,7 +4,7 @@ package net.sf.mmm.util.lang.api;
 
 /**
  * This is the abstract base implementation of a simple {@link Datatype}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

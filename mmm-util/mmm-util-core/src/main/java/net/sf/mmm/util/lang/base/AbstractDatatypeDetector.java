@@ -22,7 +22,10 @@ import net.sf.mmm.util.lang.api.DatatypeDetector;
 public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent implements DatatypeDetector {
 
   /** @see #isDatatype(Class) */
-  private final Set<String> datatypeSet;
+  private final Set<String> customDatatypeSet;
+
+  /** @see #isDatatype(Class) */
+  private final Set<String> standardDatatypeSet;
 
   /**
    * The constructor.
@@ -30,35 +33,62 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
   public AbstractDatatypeDetector() {
 
     super();
-    this.datatypeSet = new HashSet<>();
+    this.customDatatypeSet = new HashSet<>();
+    this.standardDatatypeSet = new HashSet<>();
   }
 
   /**
-   * This method registers a {@link net.sf.mmm.util.lang.api.Datatype} so it is recognized by
+   * This method registers a custom {@link net.sf.mmm.util.lang.api.Datatype} so it is recognized by
    * {@link #isDatatype(Class)}.<br/>
    * <b>NOTE:</b><br/>
    * There is no need in registering {@link Enum} datatypes as they are detected as such automatically.
    *
    * @param datatype is the {@link net.sf.mmm.util.lang.api.Datatype} to register.
    */
-  protected void registerDatatype(Class<?> datatype) {
+  protected void registerCustomDatatype(Class<?> datatype) {
 
-    this.datatypeSet.add(datatype.getName());
+    this.customDatatypeSet.add(datatype.getName());
   }
 
   /**
-   * Like {@link #registerDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can be used
-   * to prevent compile-time dependencies on datatype.
+   * Like {@link #registerCustomDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can be
+   * used to prevent compile-time dependencies on datatype.
    *
-   * @see #registerDatatype(Class)
+   * @see #registerCustomDatatype(Class)
    *
    *
    * @param fullQualifiedDatatypeName is the {@link Class#getName() fully qualified name} of the
    *        {@link net.sf.mmm.util.lang.api.Datatype} to register.
    */
-  protected void registerDatatype(String fullQualifiedDatatypeName) {
+  protected void registerCustomDatatype(String fullQualifiedDatatypeName) {
 
-    this.datatypeSet.add(fullQualifiedDatatypeName);
+    this.customDatatypeSet.add(fullQualifiedDatatypeName);
+  }
+
+  /**
+   * This method registers a Java standard {@link net.sf.mmm.util.lang.api.Datatype} so it is recognized by
+   * {@link #isJavaStandardDatatype(Class)}.
+   *
+   * @param datatype is the {@link net.sf.mmm.util.lang.api.Datatype} to register.
+   */
+  protected void registerStandardDatatype(Class<?> datatype) {
+
+    this.standardDatatypeSet.add(datatype.getName());
+  }
+
+  /**
+   * Like {@link #registerStandardDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can
+   * be used to prevent compile-time dependencies on datatype.
+   *
+   * @see #registerStandardDatatype(Class)
+   *
+   *
+   * @param fullQualifiedDatatypeName is the {@link Class#getName() fully qualified name} of the
+   *        {@link net.sf.mmm.util.lang.api.Datatype} to register.
+   */
+  protected void registerStandardDatatype(String fullQualifiedDatatypeName) {
+
+    this.standardDatatypeSet.add(fullQualifiedDatatypeName);
   }
 
   /**
@@ -66,10 +96,10 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
    */
   protected void registerDefaultDatatypes() {
 
-    registerDatatype(String.class);
-    registerDatatype(Boolean.class);
-    registerDatatype(Character.class);
-    registerDatatype(Datatype.class); // internal trick...
+    registerStandardDatatype(String.class);
+    registerStandardDatatype(Boolean.class);
+    registerStandardDatatype(Character.class);
+    registerCustomDatatype(Datatype.class); // internal trick...
     registerNumberDatatypes();
     registerJavaTimeDatatypes();
     registerJavaUtilDateCalendarDatatypes();
@@ -81,15 +111,15 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
    */
   protected void registerNumberDatatypes() {
 
-    registerDatatype(Integer.class);
-    registerDatatype(Long.class);
-    registerDatatype(Double.class);
-    registerDatatype(Float.class);
-    registerDatatype(Byte.class);
-    registerDatatype(Short.class);
-    registerDatatype(BigInteger.class);
-    registerDatatype(BigDecimal.class);
-    registerDatatype(Number.class);
+    registerStandardDatatype(Integer.class);
+    registerStandardDatatype(Long.class);
+    registerStandardDatatype(Double.class);
+    registerStandardDatatype(Float.class);
+    registerStandardDatatype(Byte.class);
+    registerStandardDatatype(Short.class);
+    registerStandardDatatype(BigInteger.class);
+    registerStandardDatatype(BigDecimal.class);
+    registerStandardDatatype(Number.class);
   }
 
   /**
@@ -98,8 +128,8 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
    */
   protected void registerJavaUtilDateCalendarDatatypes() {
 
-    registerDatatype(Date.class);
-    registerDatatype("java.util.Calendar");
+    registerStandardDatatype(Date.class);
+    registerStandardDatatype("java.util.Calendar");
   }
 
   /**
@@ -109,23 +139,22 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
   protected void registerJavaTimeDatatypes() {
 
     // prevent compile-time dependencies and GWT availability problems
-    registerDatatype("java.time.LocalTime");
-    registerDatatype("java.time.LocalTime");
-    registerDatatype("java.time.LocalDate");
-    registerDatatype("java.time.LocalDateTime");
-    registerDatatype("java.time.MonthDay");
-    registerDatatype("java.time.Year");
-    registerDatatype("java.time.YearMonth");
-    registerDatatype("java.time.Instant");
-    registerDatatype("java.time.Duration");
-    registerDatatype("java.time.Period");
-    registerDatatype("java.time.OffsetTime");
-    registerDatatype("java.time.OffsetDate");
-    registerDatatype("java.time.OffsetDateTime");
-    registerDatatype("java.time.ZoneId");
-    registerDatatype("java.time.ZonedDateTime");
-    registerDatatype("java.time.ZoneOffset");
-    registerDatatype("java.time.ZoneRegion");
+    registerStandardDatatype("java.time.LocalTime");
+    registerStandardDatatype("java.time.LocalDate");
+    registerStandardDatatype("java.time.LocalDateTime");
+    registerStandardDatatype("java.time.MonthDay");
+    registerStandardDatatype("java.time.Year");
+    registerStandardDatatype("java.time.YearMonth");
+    registerStandardDatatype("java.time.Instant");
+    registerStandardDatatype("java.time.Duration");
+    registerStandardDatatype("java.time.Period");
+    registerStandardDatatype("java.time.OffsetTime");
+    registerStandardDatatype("java.time.OffsetDate");
+    registerStandardDatatype("java.time.OffsetDateTime");
+    registerStandardDatatype("java.time.ZoneId");
+    registerStandardDatatype("java.time.ZonedDateTime");
+    registerStandardDatatype("java.time.ZoneOffset");
+    registerStandardDatatype("java.time.ZoneRegion");
   }
 
   /**
@@ -137,20 +166,35 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
     if (type.isEnum()) {
       return true;
     }
-    return this.datatypeSet.contains(type.getName());
+    if (isJavaStandardDatatype(type)) {
+      return true;
+    }
+    return this.customDatatypeSet.contains(type.getName());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isJavaStandardDatatype(Class<?> type) {
+
+    if (type.isPrimitive()) {
+      return true;
+    }
+    return this.standardDatatypeSet.contains(type.getName());
   }
 
   /**
    * Adds a list of additional datatypes to register. E.g. for easy spring configuration and custom extension.
    *
    * @param datatypeList is the {@link List} of {@link Class#getName() fully qualified names} of additional
-   *        {@link Datatype}s to {@link #registerDatatype(String) register}.
+   *        {@link Datatype}s to {@link #registerCustomDatatype(String) register}.
    */
   public void setExtraDatatypes(List<String> datatypeList) {
 
     getInitializationState().requireNotInitilized();
     for (String fqn : datatypeList) {
-      registerDatatype(fqn);
+      registerCustomDatatype(fqn);
     }
   }
 
