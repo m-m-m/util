@@ -4,7 +4,7 @@ package net.sf.mmm.util.entity.api;
 
 /**
  * This is the interface to mark a {@link RevisionedEntity} that represents an entity of the
- * <em>persistence</em>. Unlike {@link net.sf.mmm.util.transferobject.api.AbstractTransferObject}s such object may be
+ * <em>persistence</em>. Unlike {@link net.sf.mmm.util.transferobject.api.TransferObject}s such object may be
  * in {@link #STATE_MANAGED} and is connected with a persistent store. Typically this will happen using JPA
  * and an RDBMS. In this case classes implementing this interface will have {@link javax.persistence.Entity
  * JPA annotations} and gets {@link #STATE_MANAGED managed} by an {@link javax.persistence.EntityManager}.<br/>
@@ -17,18 +17,18 @@ package net.sf.mmm.util.entity.api;
  * Additionally {@link #getClass()} may return a subclass of your entity that you never created (see
  * <code>PersistenceManager</code> in <code>mmm-persistence</code> for additional information and
  * support).</li>
- * 
- * 
+ *
+ *
  * @param <ID> is the type of the {@link #getId() primary key}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public interface PersistenceEntity<ID> extends RevisionedEntity<ID> {
 
   /**
-   * A {@link GenericEntity} is in the <em>new</em> (or transient) state when it is manually created via its
-   * constructor (using <code>new</code>). In this state it can be considered as a regular java-object.
+   * A {@link PersistenceEntity} is in the <em>new</em> (or transient) state when it is manually created via
+   * its constructor (using <code>new</code>). In this state it can be considered as a regular java-object.
    * Whenever {@link javax.persistence.EntityManager#persist(Object) persist} or even
    * {@link javax.persistence.EntityManager#merge(Object) merge} is called, the state of the entity changes to
    * {@link #STATE_MANAGED managed}.
@@ -36,7 +36,7 @@ public interface PersistenceEntity<ID> extends RevisionedEntity<ID> {
   String STATE_NEW = "new";
 
   /**
-   * A {@link GenericEntity} becomes <em>managed</em> when it is
+   * A {@link PersistenceEntity} becomes <em>managed</em> when it is
    * {@link javax.persistence.EntityManager#persist(Object) persisted} or in case it is directly
    * {@link javax.persistence.EntityManager#find(Class, Object) retrieved} from the persistent store
    * (database). It will remain in the managed state until a state change is explicitly triggered via

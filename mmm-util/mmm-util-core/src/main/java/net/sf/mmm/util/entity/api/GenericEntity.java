@@ -22,24 +22,20 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
  * <li>a <b>{@link net.sf.mmm.util.transferobject.api.EntityTo transfer-object}</b><br/>
  * </ul>
  * In order to distinguish the above cases an application has an architecture that organizes the code in
- * technical layers (see classical 3-tier architecture) and business oriented slices (also called domains).
- * Therefore within the persistence layer instances should always be {@link PersistenceEntity persistence
- * entities} (independent from their actual state such as {@link PersistenceEntity#STATE_MANAGED managed}). On
- * the other hand in the usage layer (service or presentation layer) instances always need to be transfer
- * objects. Within the logic layer this may depend on the actual design. Our recommendation is to
+ * technical layers (see <a href="http://en.wikipedia.org/wiki/Multilayered_architecture">multilayered
+ * architecture</a>) and business oriented slices (business components). Therefore within the persistence
+ * layer instances should always be {@link PersistenceEntity persistence entities} (independent from their
+ * actual state such as {@link PersistenceEntity#STATE_MANAGED managed}). On the other hand in the higher
+ * layers instances always need to be {@link net.sf.mmm.util.transferobject.api.TransferObject}s. Our
+ * recommendation is to
  * {@link net.sf.mmm.util.transferobject.api.TransferObjectUtil#convertFromEntity(PersistenceEntity, Class)
- * convert} persistent entities into {@link net.sf.mmm.util.transferobject.api.EntityTo transfer-objects} when
- * exposing functionality to be used by other slices and allow to pass persistent entities within the same
- * slice to make use of lazy loading and other features. However, it is totally legal to use the same
- * implementation of {@link PersistenceEntity} also as logical transfer-objects by
- * {@link PersistenceEntity#STATE_DETACHED detaching} them (safest way is to create a clone/copy).<br/>
- * Further please note that transfer-objects for external services need to be separated from the actual
- * entities so they keep stable in case of internal changes.
- * 
+ * convert} persistent entities into {@link net.sf.mmm.util.transferobject.api.EntityTo entity
+ * transfer-objects} when exposing functionality in the API of the <em>logic</em> layer.
+ *
  * @see javax.persistence.Entity
- * 
+ *
  * @param <ID> is the type of the {@link #getId() primary key}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -58,7 +54,7 @@ public interface GenericEntity<ID> extends AttributeReadId<ID>, Entity {
    * custom {@link net.sf.mmm.util.lang.api.Datatype} for it. If it can easily be mapped to a {@link Long}
    * value you can still use {@link Long} here and provide a transient getter method that returns the your
    * custom {@link net.sf.mmm.util.lang.api.Datatype} from the {@link Long}.
-   * 
+   *
    * @return the ID of this entity. It may be <code>null</code> if the object is
    *         {@link PersistenceEntity#STATE_NEW new} and no ID has manually been assigned.
    */
@@ -70,9 +66,9 @@ public interface GenericEntity<ID> extends AttributeReadId<ID>, Entity {
    * {@link javax.persistence.EntityManager#persist(Object) saved}, this counter will be increased. The
    * initial value after construction is <code>0</code>.<br>
    * If this feature is NOT supported for some reason, this method should always return <code>0</code>.
-   * 
+   *
    * @see javax.persistence.Version
-   * 
+   *
    * @return the current modification-counter.
    */
   int getModificationCounter();
