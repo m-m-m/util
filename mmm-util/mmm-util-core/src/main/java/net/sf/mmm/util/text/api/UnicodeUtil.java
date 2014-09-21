@@ -7,10 +7,10 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 /**
  * This is the interface for a collection of utility functions that help with unicode characters and texts. It
  * also contains constants for many unicode characters.
- * 
+ *
  * @see DiacriticalMark
  * @see net.sf.mmm.util.xml.api.XmlUtil#resolveEntity(String)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -90,7 +90,7 @@ public interface UnicodeUtil {
 
   /**
    * The ASCII hyphen or minus sign ({@value} ).
-   * 
+   *
    * @see #HYPHEN
    * @see #MINUS_SIGN
    * @see #SOFT_HYPHEN
@@ -265,7 +265,7 @@ public interface UnicodeUtil {
 
   /**
    * The circumflex accent. Looks like this: {@value}
-   * 
+   *
    * @see #COMBINING_CIRCUMFLEX_ACCENT
    */
   char CIRCUMFLEX_ACCENT = 0x0005E;
@@ -275,7 +275,7 @@ public interface UnicodeUtil {
 
   /**
    * The grave accent. Looks like this: {@value}
-   * 
+   *
    * @see #COMBINING_GRAVE_ACCENT
    */
   char GRAVE_ACCENT = 0x00060;
@@ -414,7 +414,7 @@ public interface UnicodeUtil {
 
   /**
    * Looks like two small upper dots: {@value}
-   * 
+   *
    * @see DiacriticalMark#DIAERESIS
    * @see #COMBINING_DIAERESIS
    */
@@ -1885,53 +1885,71 @@ public interface UnicodeUtil {
   // ...
   // COMBINING_LATIN_SMALL_LETTER_X = 0x036F
 
-  char GREEK_CAPITAL_LETTER_ALPHA = LATIN_CAPITAL_LETTER_A;
+  char GREEK_CAPITAL_LETTER_HETA = 0x000370;
 
-  char GREEK_CAPITAL_LETTER_BETA = LATIN_CAPITAL_LETTER_B;
+  char GREEK_SMALL_LETTER_HETA = 0x000371;
+
+  char GREEK_CAPITAL_LETTER_ALPHA = 0x000391;
+
+  char GREEK_CAPITAL_LETTER_BETA = 0x000392;
 
   char GREEK_CAPITAL_LETTER_GAMMA = 0x00393;
 
   char GREEK_CAPITAL_LETTER_DELTA = 0x00394;
 
-  char GREEK_CAPITAL_LETTER_EPSILON = LATIN_CAPITAL_LETTER_E;
+  char GREEK_CAPITAL_LETTER_EPSILON = 0x00395;
 
-  char GREEK_CAPITAL_LETTER_ZETA = LATIN_CAPITAL_LETTER_Z;
+  char GREEK_CAPITAL_LETTER_ZETA = 0x00396;
 
-  char GREEK_CAPITAL_LETTER_ETA = LATIN_CAPITAL_LETTER_H;
+  char GREEK_CAPITAL_LETTER_ETA = 0x00397;
 
   char GREEK_CAPITAL_LETTER_THETA = 0x00398;
 
-  char GREEK_CAPITAL_LETTER_IOTA = LATIN_CAPITAL_LETTER_I;
+  char GREEK_CAPITAL_LETTER_IOTA = 0x00399;
 
-  char GREEK_CAPITAL_LETTER_KAPPA = LATIN_CAPITAL_LETTER_K;
+  char GREEK_CAPITAL_LETTER_KAPPA = 0x0039A;
 
   char GREEK_CAPITAL_LETTER_LAMDA = 0x0039B;
 
-  char GREEK_CAPITAL_LETTER_MU = LATIN_CAPITAL_LETTER_M;
+  char GREEK_CAPITAL_LETTER_MU = 0x0039C;
 
-  char GREEK_CAPITAL_LETTER_NU = LATIN_CAPITAL_LETTER_N;
+  char GREEK_CAPITAL_LETTER_NU = 0x0039D;
 
   char GREEK_CAPITAL_LETTER_XI = 0x0039E;
 
-  char GREEK_CAPITAL_LETTER_OMICRON = LATIN_CAPITAL_LETTER_O;
+  char GREEK_CAPITAL_LETTER_OMICRON = 0x0039F;
 
   char GREEK_CAPITAL_LETTER_PI = 0x003A0;
 
-  char GREEK_CAPITAL_LETTER_RHO = LATIN_CAPITAL_LETTER_P;
+  char GREEK_CAPITAL_LETTER_RHO = 0x003A1;
 
   char GREEK_CAPITAL_LETTER_SIGMA = 0x003A3;
 
-  char GREEK_CAPITAL_LETTER_TAU = LATIN_CAPITAL_LETTER_T;
+  char GREEK_CAPITAL_LETTER_TAU = 0x003A4;
 
   char GREEK_CAPITAL_LETTER_UPSILON = 0x003A5;
 
   char GREEK_CAPITAL_LETTER_PHI = 0x003A6;
 
-  char GREEK_CAPITAL_LETTER_CHI = LATIN_CAPITAL_LETTER_X;
+  char GREEK_CAPITAL_LETTER_CHI = 0x003A7;
 
   char GREEK_CAPITAL_LETTER_PSI = 0x003A8;
 
   char GREEK_CAPITAL_LETTER_OMEGA = 0x003A9;
+
+  char GREEK_CAPITAL_LETTER_IOTA_WITH_DIALYTIKA = 0x003AA;
+
+  char GREEK_CAPITAL_LETTER_UPSILON_WITH_DIALYTIKA = 0x003AB;
+
+  char GREEK_SMALL_LETTER_ALPHA_WITH_TONOS = 0x003AC;
+
+  char GREEK_SMALL_LETTER_EPSILON_WITH_TONOS = 0x003AD;
+
+  char GREEK_SMALL_LETTER_ETA_WITH_TONOS = 0x003AE;
+
+  char GREEK_SMALL_LETTER_IOTA_WITH_TONOS = 0x003AF;
+
+  char GREEK_SMALL_LETTER_UPSILON_WITH_DIALYTIKA_AND_TONOS = 0x003B0;
 
   char GREEK_SMALL_LETTER_ALPHA = 0x003B1;
 
@@ -1961,7 +1979,7 @@ public interface UnicodeUtil {
 
   char GREEK_SMALL_LETTER_XI = 0x003BE;
 
-  char GREEK_SMALL_LETTER_OMICRON = LATIN_SMALL_LETTER_O;
+  char GREEK_SMALL_LETTER_OMICRON = 0x003BF;
 
   char GREEK_SMALL_LETTER_PI = 0x003C0;
 
@@ -1983,37 +2001,142 @@ public interface UnicodeUtil {
 
   char GREEK_SMALL_LETTER_OMEGA = 0x003C9;
 
+  char GREEK_SMALL_LETTER_IOTA_WITH_DIALYTIKA = 0x003CA;
+
+  char GREEK_SMALL_LETTER_UPSILON_WITH_DIALYTIKA = 0x003CB;
+
+  char GREEK_SMALL_LETTER_OMICRON_WITH_TONOS = 0x003CC;
+
+  char GREEK_SMALL_LETTER_UPSILON_WITH_TONOS = 0x003CD;
+
+  char GREEK_SMALL_LETTER_OMEGA_WITH_TONOS = 0x003CE;
+
+  char GREEK_CAPITAL_KAI_SYMBOL = 0x003CF;
+
+  char GREEK_BETA_SYMBOL = 0x003D0;
+
   char GREEK_THETA_SYMBOL = 0x003D1;
 
-  // TODO: should be GREEK_CAPITAL_LETTER_UPSILON_WITH_HOOK
   char GREEK_UPSILON_WITH_HOOK_SYMBOL = 0x003D2;
+
+  char GREEK_UPSILON_WITH_ACUTE_AND_HOOK_SYMBOL = 0x003D3;
+
+  char GREEK_UPSILON_WITH_DIAERESIS_AND_HOOK_SYMBOL = 0x003D4;
 
   char GREEK_PHI_SYMBOL = 0x003D5;
 
   char GREEK_PI_SYMBOL = 0x003D6;
 
+  char GREEK_KAI_SYMBOL = 0x003D7;
+
+  char GREEK_LETTER_ARCHAIC_KOPPA = 0x003D8;
+
+  char GREEK_SMALL_LETTER_ARCHAIC_KOPPA = 0x003D9;
+
+  char GREEK_LETTER_STIGMA = 0x003DA;
+
+  char GREEK_SMALL_LETTER_STIGMA = 0x003DB;
+
   char GREEK_LETTER_DIGAMMA = 0x003DC;
 
   char GREEK_SMALL_LETTER_DIGAMMA = 0x003DD;
+
+  char GREEK_LETTER_KOPPA = 0x003DE;
+
+  char GREEK_SMALL_LETTER_KOPPA = 0x003DF;
+
+  char GREEK_LETTER_SAMPI = 0x003E0;
+
+  char GREEK_SMALL_LETTER_SAMPI = 0x003E1;
+
+  char COPTIC_CAPITAL_LETTER_SHEI = 0x003E2;
+
+  char COPTIC_SMALL_LETTER_SHEI = 0x003E3;
+
+  char COPTIC_CAPITAL_LETTER_FEI = 0x003E4;
+
+  char COPTIC_SMALL_LETTER_FEI = 0x003E5;
+
+  char COPTIC_CAPITAL_LETTER_KHEI = 0x003E6;
+
+  char COPTIC_SMALL_LETTER_KHEI = 0x003E7;
+
+  char COPTIC_CAPITAL_LETTER_HORI = 0x003E8;
+
+  char COPTIC_SMALL_LETTER_HORI = 0x003E9;
+
+  char COPTIC_CAPITAL_LETTER_GANGIA = 0x003EA;
+
+  char COPTIC_SMALL_LETTER_GANGIA = 0x003EB;
+
+  char COPTIC_CAPITAL_LETTER_SHIMA = 0x003EC;
+
+  char COPTIC_SMALL_LETTER_SHIMA = 0x003ED;
+
+  char COPTIC_CAPITAL_LETTER_DEI = 0x003EE;
+
+  char COPTIC_SMALL_LETTER_DEI = 0x003EF;
 
   char GREEK_KAPPA_SYMBOL = 0x003F0;
 
   char GREEK_RHO_SYMBOL = 0x003F1;
 
+  char GREEK_LUNATE_SIGMA_SYMBOL = 0x003F2;
+
+  char GREEK_LETTER_YOT = 0x003F3;
+
+  char GREEK_CAPITAL_THETA_SYMBOL = 0x003F4;
+
   char GREEK_LUNATE_EPSILON_SYMBOL = 0x003F5;
 
   char GREEK_REVERSED_LUNATE_EPSILON_SYMBOL = 0x003F6;
 
+  char GREEK_CAPITAL_LETTER_SHO = 0x003F7;
+
+  char GREEK_SMALL_LETTER_SHO = 0x003F8;
+
+  char GREEK_CAPITAL_LUNATE_SIGMA_SYMBOL = 0x003F9;
+
+  char GREEK_CAPITAL_LETTER_SAN = 0x003FA;
+
+  char GREEK_SMALL_LETTER_SAN = 0x003FB;
+
+  char GREEK_RHO_WITH_STROKE_SYMBOL = 0x003FC;
+
+  char GREEK_CAPITAL_REVERSED_LUNATE_SIGMA_SYMBOL = 0x003FD;
+
+  char GREEK_CAPITAL_REVERSED_DOTTED_LUNATE_SIGMA_SYMBOL = 0x003FF;
+
+  // ************************************
+  // Cyrillic alphabet (0400-04FF)
+  // ************************************
+
+  char CYRILLIC_CAPITAL_LETTER_IE_WITH_GRAVE = 0x00400;
+
+  /** The capital Cyrillic letter <em>Io</em>. Looks like an 'E' with a {@link #DIAERESIS}: {@value} */
   char CYRILLIC_CAPITAL_LETTER_IO = 0x00401;
 
+  /**
+   * The capital Cyrillic letter <em>Dje</em>. Looks like an 'b' that is open at the bottom and has a bar on
+   * top: {@value}
+   */
   char CYRILLIC_CAPITAL_LETTER_DJE = 0x00402;
 
+  /** The capital Cyrillic letter <em>Gje</em>. Looks like this: {@value} */
   char CYRILLIC_CAPITAL_LETTER_GJE = 0x00403;
 
+  /**
+   * The capital Cyrillic letter <em>Ie</em> used by Ukrainian. Looks like an 'E' in the shape of an
+   * {@link #EURO_CURRENCY_SIGN} : {@value}
+   */
   char CYRILLIC_CAPITAL_LETTER_UKRAINIAN_IE = 0x00404;
 
+  /** The capital Cyrillic letter <em>Dze</em>. Looks like an 'S': {@value} */
   char CYRILLIC_CAPITAL_LETTER_DZE = 0x00405;
 
+  /**
+   * The capital Cyrillic letter <em>I</em> used by Byelorussian and Ukrainian. Looks like an 'I' : {@value}
+   */
   char CYRILLIC_CAPITAL_LETTER_BYELORUSSIAN_UKRAINIAN_I = 0x00406;
 
   char CYRILLIC_CAPITAL_LETTER_YI = 0x00407;
@@ -2034,22 +2157,34 @@ public interface UnicodeUtil {
 
   char CYRILLIC_CAPITAL_LETTER_A = 0x00410;
 
+  /** The capital Cyrillic letter <em>Be</em>. Looks like the union of an 'E' with a 'b': {@value} */
   char CYRILLIC_CAPITAL_LETTER_BE = 0x00411;
 
+  /** The capital Cyrillic letter <em>Ve</em>. Looks like a 'B': {@value} */
   char CYRILLIC_CAPITAL_LETTER_VE = 0x00412;
 
+  /**
+   * The capital Cyrillic letter <em>Ghe</em>. Looks like a vertical and a horizontal bar crossing in the top
+   * left edge: {@value}
+   */
   char CYRILLIC_CAPITAL_LETTER_GHE = 0x00413;
 
+  /** The capital Cyrillic letter <em>De</em>. Looks like similar to an 'A': {@value} */
   char CYRILLIC_CAPITAL_LETTER_DE = 0x00414;
 
+  /** The capital Cyrillic letter <em>Ie</em>. Looks like an 'E': {@value} */
   char CYRILLIC_CAPITAL_LETTER_IE = 0x00415;
 
+/** The capital Cyrillic letter <em>Zhe</em>. Looks like an 'X' with a vertical bar through the center or the combination of '>|<': {@value} */
   char CYRILLIC_CAPITAL_LETTER_ZHE = 0x00416;
 
+  /** The capital Cyrillic letter <em>Ze</em>. Looks like a '3': {@value} */
   char CYRILLIC_CAPITAL_LETTER_ZE = 0x00417;
 
+  /** The capital Cyrillic letter <em>I</em>. Looks like an inverted 'N': {@value} */
   char CYRILLIC_CAPITAL_LETTER_I = 0x00418;
 
+  /** The capital Cyrillic letter <em>short I</em>. Looks like a 'B': {@value} */
   char CYRILLIC_CAPITAL_LETTER_SHORT_I = 0x00419;
 
   char CYRILLIC_CAPITAL_LETTER_KA = 0x0041A;
@@ -2084,6 +2219,7 @@ public interface UnicodeUtil {
 
   char CYRILLIC_CAPITAL_LETTER_SHCHA = 0x00429;
 
+  /** The capital Cyrillic letter TODO. Looks like this: {@value} */
   char CYRILLIC_CAPITAL_LETTER_HARD_SIGN = 0x0042A;
 
   char CYRILLIC_CAPITAL_LETTER_YERU = 0x0042B;
@@ -2187,6 +2323,325 @@ public interface UnicodeUtil {
   char CYRILLIC_SMALL_LETTER_SHORT_U = 0x0045E;
 
   char CYRILLIC_SMALL_LETTER_DZHE = 0x0045F;
+
+  char CYRILLIC_CAPITAL_LETTER_OMEGA = 0x000460;
+
+  char CYRILLIC_SMALL_LETTER_OMEGA = 0x000461;
+
+  char CYRILLIC_CAPITAL_LETTER_YAT = 0x000462;
+
+  char CYRILLIC_SMALL_LETTER_YAT = 0x000463;
+
+  char CYRILLIC_CAPITAL_LETTER_IOTIFIED_E = 0x000464;
+
+  char CYRILLIC_SMALL_LETTER_IOTIFIED_E = 0x000465;
+
+  char CYRILLIC_CAPITAL_LETTER_LITTLE_YUS = 0x000466;
+
+  char CYRILLIC_SMALL_LETTER_LITTLE_YUS = 0x000467;
+
+  char CYRILLIC_CAPITAL_LETTER_IOTIFIED_LITTLE_YUS = 0x000468;
+
+  char CYRILLIC_SMALL_LETTER_IOTIFIED_LITTLE_YUS = 0x000469;
+
+  char CYRILLIC_CAPITAL_LETTER_BIG_YUS = 0x00046A;
+
+  char CYRILLIC_SMALL_LETTER_BIG_YUS = 0x00046B;
+
+  char CYRILLIC_CAPITAL_LETTER_IOTIFIED_BIG_YUS = 0x00046C;
+
+  char CYRILLIC_SMALL_LETTER_IOTIFIED_BIG_YUS = 0x00046D;
+
+  char CYRILLIC_CAPITAL_LETTER_KSI = 0x00046E;
+
+  char CYRILLIC_SMALL_LETTER_KSI = 0x00046F;
+
+  char CYRILLIC_CAPITAL_LETTER_PSI = 0x000470;
+
+  char CYRILLIC_SMALL_LETTER_PSI = 0x000471;
+
+  char CYRILLIC_CAPITAL_LETTER_FITA = 0x000472;
+
+  char CYRILLIC_SMALL_LETTER_FITA = 0x000473;
+
+  char CYRILLIC_CAPITAL_LETTER_IZHITSA = 0x00474;
+
+  char CYRILLIC_SMALL_LETTER_IZHITSA = 0x00475;
+
+  char CYRILLIC_CAPITAL_LETTER_IZHITSA_WITH_DOUBLE_GRAVE_ACCENT = 0x00476;
+
+  char CYRILLIC_SMALL_LETTER_IZHITSA_WITH_DOUBLE_GRAVE_ACCENT = 0x00477;
+
+  char CYRILLIC_CAPITAL_LETTER_UK = 0x00478;
+
+  char CYRILLIC_SMALL_LETTER_UK = 0x00479;
+
+  char CYRILLIC_CAPITAL_LETTER_ROUND_OMEGA = 0x00047A;
+
+  char CYRILLIC_SMALL_LETTER_ROUND_OMEGA = 0x00047B;
+
+  char CYRILLIC_CAPITAL_LETTER_OMEGA_WITH_TITLO = 0x00047C;
+
+  char CYRILLIC_SMALL_LETTER_OMEGA_WITH_TITLO = 0x00047D;
+
+  char CYRILLIC_CAPITAL_LETTER_OT = 0x00047E;
+
+  char CYRILLIC_SMALL_LETTER_OT = 0x00047F;
+
+  char CYRILLIC_CAPITAL_LETTER_KOPPA = 0x00480;
+
+  char CYRILLIC_SMALL_LETTER_KOPPA = 0x00481;
+
+  char CYRILLIC_THOUSANDS_SIGN = 0x00482;
+
+  char COMBINING_CYRILLIC_TITLO = 0x00483;
+
+  char COMBINING_CYRILLIC_PALATALIZATION = 0x00484;
+
+  char COMBINING_CYRILLIC_DASIA_PNEUMATA = 0x00485;
+
+  char COMBINING_CYRILLIC_PSILI_PNEUMATA = 0x00486;
+
+  char COMBINING_CYRILLIC_HUNDRED_THOUSANDS_SIGN = 0x00488;
+
+  char COMBINING_CYRILLIC_MILLIONS_SIGN = 0x00489;
+
+  char CYRILLIC_CAPITAL_LETTER_SEMISOFT_SIGN = 0x00048C;
+
+  char CYRILLIC_SMALL_LETTER_SEMISOFT_SIGN = 0x00048D;
+
+  char CYRILLIC_CAPITAL_LETTER_ER_WITH_TICK = 0x00048E;
+
+  char CYRILLIC_SMALL_LETTER_ER_WITH_TICK = 0x00048F;
+
+  char CYRILLIC_CAPITAL_LETTER_GHE_WITH_UPTURN = 0x000490;
+
+  char CYRILLIC_SMALL_LETTER_GHE_WITH_UPTURN = 0x000491;
+
+  char CYRILLIC_CAPITAL_LETTER_GHE_WITH_STROKE = 0x000492;
+
+  char CYRILLIC_SMALL_LETTER_GHE_WITH_STROKE = 0x000493;
+
+  char CYRILLIC_CAPITAL_LETTER_GHE_WITH_MIDDLE_HOOK = 0x000494;
+
+  char CYRILLIC_SMALL_LETTER_GHE_WITH_MIDDLE_HOOK = 0x000495;
+
+  char CYRILLIC_CAPITAL_LETTER_ZHE_WITH_DESCENDER = 0x000496;
+
+  char CYRILLIC_SMALL_LETTER_ZHE_WITH_DESCENDER = 0x000497;
+
+  char CYRILLIC_CAPITAL_LETTER_ZE_WITH_DESCENDER = 0x00498;
+
+  char CYRILLIC_SMALL_LETTER_ZE_WITH_DESCENDER = 0x00499;
+
+  char CYRILLIC_CAPITAL_LETTER_KA_WITH_DESCENDER = 0x00049A;
+
+  char CYRILLIC_SMALL_LETTER_KA_WITH_DESCENDER = 0x00049B;
+
+  char CYRILLIC_CAPITAL_LETTER_KA_WITH_VERTICAL_STROKE = 0x00049C;
+
+  char CYRILLIC_SMALL_LETTER_KA_WITH_VERTICAL_STROKE = 0x00049D;
+
+  char CYRILLIC_CAPITAL_LETTER_KA_WITH_STROKE = 0x00049E;
+
+  char CYRILLIC_SMALL_LETTER_KA_WITH_STROKE = 0x00049F;
+
+  char CYRILLIC_CAPITAL_LETTER_BASHKIR_KA = 0x0004A0;
+
+  char CYRILLIC_SMALL_LETTER_BASHKIR_KA = 0x0004A1;
+
+  char CYRILLIC_CAPITAL_LETTER_EN_WITH_DESCENDER = 0x0004A2;
+
+  char CYRILLIC_SMALL_LETTER_EN_WITH_DESCENDER = 0x0004A3;
+
+  char CYRILLIC_CAPITAL_LIGATURE_EN_GHE = 0x0004A4;
+
+  char CYRILLIC_SMALL_LIGATURE_EN_GHE = 0x0004A5;
+
+  char CYRILLIC_CAPITAL_LETTER_PE_WITH_MIDDLE_HOOK = 0x0004A6;
+
+  char CYRILLIC_SMALL_LETTER_PE_WITH_MIDDLE_HOOK = 0x0004A7;
+
+  char CYRILLIC_CAPITAL_LETTER_ABKHASIAN_HA = 0x0004A8;
+
+  char CYRILLIC_SMALL_LETTER_ABKHASIAN_HA = 0x0004A9;
+
+  char CYRILLIC_CAPITAL_LETTER_ES_WITH_DESCENDER = 0x0004AA;
+
+  char CYRILLIC_SMALL_LETTER_ES_WITH_DESCENDER = 0x0004AB;
+
+  char CYRILLIC_CAPITAL_LETTER_TE_WITH_DESCENDER = 0x0004AC;
+
+  char CYRILLIC_SMALL_LETTER_TE_WITH_DESCENDER = 0x0004AD;
+
+  char CYRILLIC_CAPITAL_LETTER_STRAIGHT_U = 0x0004AE;
+
+  char CYRILLIC_SMALL_LETTER_STRAIGHT_U = 0x0004AF;
+
+  char CYRILLIC_CAPITAL_LETTER_STRAIGHT_U_WITH_STROKE = 0x0004B0;
+
+  char CYRILLIC_SMALL_LETTER_STRAIGHT_U_WITH_STROKE = 0x0004B1;
+
+  char CYRILLIC_CAPITAL_LETTER_HA_WITH_DESCENDER = 0x0004B2;
+
+  char CYRILLIC_SMALL_LETTER_HA_WITH_DESCENDER = 0x0004B3;
+
+  char CYRILLIC_CAPITAL_LIGATURE_TE_TSE = 0x0004B4;
+
+  char CYRILLIC_SMALL_LIGATURE_TE_TSE = 0x0004B5;
+
+  char CYRILLIC_CAPITAL_LETTER_CHE_WITH_DESCENDER = 0x0004B6;
+
+  char CYRILLIC_SMALL_LETTER_CHE_WITH_DESCENDER = 0x0004B7;
+
+  char CYRILLIC_CAPITAL_LETTER_CHE_WITH_VERTICAL_STROKE = 0x0004B8;
+
+  char CYRILLIC_SMALL_LETTER_CHE_WITH_VERTICAL_STROKE = 0x0004B9;
+
+  char CYRILLIC_CAPITAL_LETTER_SHHA = 0x0004BA;
+
+  char CYRILLIC_SMALL_LETTER_SHHA = 0x0004BB;
+
+  char CYRILLIC_CAPITAL_LETTER_ABKHASIAN_CHE = 0x0004BC;
+
+  char CYRILLIC_SMALL_LETTER_ABKHASIAN_CHE = 0x0004BD;
+
+  char CYRILLIC_CAPITAL_LETTER_ABKHASIAN_CHE_WITH_DESCENDER = 0x00004BE;
+
+  char CYRILLIC_SMALL_LETTER_ABKHASIAN_CHE_WITH_DESCENDER = 0x00004BF;
+
+  char CYRILLIC_LETTER_PALOCHKA = 0x0004C0;
+
+  char CYRILLIC_CAPITAL_LETTER_ZHE_WITH_BREVE = 0x00004C1;
+
+  char CYRILLIC_SMALL_LETTER_ZHE_WITH_BREVE = 0x00004C2;
+
+  char CYRILLIC_CAPITAL_LETTER_KA_WITH_HOOK = 0x0004C3;
+
+  char CYRILLIC_SMALL_LETTER_KA_WITH_HOOK = 0x0004C4;
+
+  char CYRILLIC_CAPITAL_LETTER_EN_WITH_HOOK = 0x0004C7;
+
+  char CYRILLIC_SMALL_LETTER_EN_WITH_HOOK = 0x0004C8;
+
+  char CYRILLIC_CAPITAL_LETTER_KHAKASSIAN_CHE = 0x0004CB;
+
+  char CYRILLIC_SMALL_LETTER_KHAKASSIAN_CHE = 0x0004CC;
+
+  char CYRILLIC_CAPITAL_LETTER_A_WITH_BREVE = 0x0004D0;
+
+  char CYRILLIC_SMALL_LETTER_A_WITH_BREVE = 0x0004D1;
+
+  char CYRILLIC_CAPITAL_LETTER_A_WITH_DIAERESIS = 0x0004D2;
+
+  char CYRILLIC_SMALL_LETTER_A_WITH_DIAERESIS = 0x0004D3;
+
+  char CYRILLIC_CAPITAL_LIGATURE_A_IE = 0x0004D4;
+
+  char CYRILLIC_SMALL_LIGATURE_A_IE = 0x0004D5;
+
+  char CYRILLIC_CAPITAL_LETTER_IE_WITH_BREVE = 0x0004D6;
+
+  char CYRILLIC_SMALL_LETTER_IE_WITH_BREVE = 0x0004D7;
+
+  char CYRILLIC_CAPITAL_LETTER_SCHWA = 0x0004D8;
+
+  char CYRILLIC_SMALL_LETTER_SCHWA = 0x0004D9;
+
+  char CYRILLIC_CAPITAL_LETTER_SCHWA_WITH_DIAERESIS = 0x0004DA;
+
+  char CYRILLIC_SMALL_LETTER_SCHWA_WITH_DIAERESIS = 0x0004DB;
+
+  char CYRILLIC_CAPITAL_LETTER_ZHE_WITH_DIAERESIS = 0x0004DC;
+
+  char CYRILLIC_SMALL_LETTER_ZHE_WITH_DIAERESIS = 0x0004DD;
+
+  char CYRILLIC_CAPITAL_LETTER_ZE_WITH_DIAERESIS = 0x0004DE;
+
+  char CYRILLIC_SMALL_LETTER_ZE_WITH_DIAERESIS = 0x0004DF;
+
+  char CYRILLIC_CAPITAL_LETTER_ABKHASIAN_DZE = 0x0004E0;
+
+  char CYRILLIC_SMALL_LETTER_ABKHASIAN_DZE = 0x0004E1;
+
+  char CYRILLIC_SMALL_LETTER_I_WITH_MACRON = 0x004E3;
+
+  char CYRILLIC_CAPITAL_LETTER_I_WITH_DIAERESIS = 0x00004E4;
+
+  char CYRILLIC_SMALL_LETTER_I_WITH_DIAERESIS = 0x00004E5;
+
+  char CYRILLIC_CAPITAL_LETTER_O_WITH_DIAERESIS = 0x0004E6;
+
+  char CYRILLIC_SMALL_LETTER_O_WITH_DIAERESIS = 0x00004E7;
+
+  char CYRILLIC_CAPITAL_LETTER_BARRED_O = 0x0004E8;
+
+  char CYRILLIC_SMALL_LETTER_BARRED_O = 0x00004E9;
+
+  char CYRILLIC_CAPITAL_LETTER_BARRED_O_WITH_DIAERESIS = 0x0004EA;
+
+  char CYRILLIC_SMALL_LETTER_BARRED_O_WITH_DIAERESIS = 0x0004EB;
+
+  char CYRILLIC_CAPITAL_LETTER_E_WITH_DIAERESIS = 0x0004EC;
+
+  char CYRILLIC_SMALL_LETTER_E_WITH_DIAERESIS = 0x0004ED;
+
+  char CYRILLIC_CAPITAL_LETTER_U_WITH_MACRON = 0x0004EE;
+
+  char CYRILLIC_SMALL_LETTER_U_WITH_MACRON = 0x0004EF;
+
+  char CYRILLIC_CAPITAL_LETTER_U_WITH_DIAERESIS = 0x0004F0;
+
+  char CYRILLIC_SMALL_LETTER_U_WITH_DIAERESIS = 0x00004F1;
+
+  char CYRILLIC_CAPITAL_LETTER_U_WITH_DOUBLE_ACUTE = 0x0004F2;
+
+  char CYRILLIC_SMALL_LETTER_U_WITH_DOUBLE_ACUTE = 0x00004F3;
+
+  char CYRILLIC_CAPITAL_LETTER_CHE_WITH_DIAERESIS = 0x0004F4;
+
+  char CYRILLIC_SMALL_LETTER_CHE_WITH_DIAERESIS = 0x0004F5;
+
+  char CYRILLIC_CAPITAL_LETTER_YERU_WITH_DIAERESIS = 0x0004F8;
+
+  char CYRILLIC_SMALL_LETTER_YERU_WITH_DIAERESIS = 0x0004F9;
+
+  // --- ---
+  char LATIN_CAPITAL_LETTER_E_WITH_MACRON_AND_ACUTE = 0x001E16;
+
+  char LATIN_SMALL_LETTER_E_WITH_MACRON_AND_ACUTE = 0x001E17;
+
+  char LATIN_CAPITAL_LETTER_H_WITH_DOT_BELOW = 0x001E24;
+
+  char LATIN_CAPITAL_LETTER_H_WITH_CEDILLA = 0x001E28;
+
+  char LATIN_SMALL_LETTER_H_WITH_CEDILLA = 0x001E29;
+
+  char LATIN_CAPITAL_LETTER_K_WITH_ACUTE = 0x001E30;
+
+  char LATIN_SMALL_LETTER_K_WITH_ACUTE = 0x001E31;
+
+  char LATIN_CAPITAL_LETTER_N_WITH_DOT_ABOVE = 0x001E44;
+
+  char LATIN_SMALL_LETTER_N_WITH_DOT_ABOVE = 0x001E45;
+
+  char LATIN_CAPITAL_LETTER_N_WITH_DOT_BELOW = 0x001E46;
+
+  char LATIN_SMALL_LETTER_N_WITH_DOT_BELOW = 0x001E47;
+
+  char LATIN_CAPITAL_LETTER_P_WITH_ACUTE = 0x001E54;
+
+  char LATIN_SMALL_LETTER_P_WITH_ACUTE = 0x001E55;
+
+  char LATIN_CAPITAL_LETTER_Z_WITH_CIRCUMFLEX = 0x001E90;
+
+  char LATIN_SMALL_LETTER_Z_WITH_CIRCUMFLEX = 0x001E91;
+
+  char LATIN_CAPITAL_LETTER_Y_WITH_GRAVE = 0x001EF2;
+
+  char LATIN_SMALL_LETTER_Y_WITH_GRAVE = 0x001EF3;
+
+  // --- chars with more than 2 bytes ---
 
   char EN_SPACE = 0x02002;
 
@@ -2297,12 +2752,12 @@ public interface UnicodeUtil {
 
   char COMBINING_FOUR_DOTS_ABOVE = 0x020DC;
 
-  /** The Sign for Currency EUR. */
+  /** The Sign for Currency EUR. Looks like this: {@value} */
   char EURO_CURRENCY_SIGN = 0x020AC;
 
   char DOUBLE_STRUCK_CAPITAL_C = 0x02102;
 
-  /** The "care-of" (c/o) sign ({@value} ). */
+  /** The "care-of" (c/o) sign. Looks like this: {@value} */
   char CARE_OF = 0x02105;
 
   char SCRIPT_SMALL_G = 0x0210A;
@@ -4073,23 +4528,47 @@ public interface UnicodeUtil {
 
   /**
    * As it seems, unicode only specifies the combining double grave accent.
-   * 
+   *
    * @see DiacriticalMark#DOUBLE_GRAVE
    */
   char DOUBLE_GRAVE_ACCENT = '\0';
 
   /**
    * As it seems, unicode only specifies the combining horn.
-   * 
+   *
    * @see DiacriticalMark#HORN_ABOVE
    */
   char HORN = '\0';
 
   /**
-   * This method determines an ASCII-representation for the given character if available.
-   * 
+   * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the
+   * given <code>character</code>.
+   *
    * @see java.text.Normalizer
-   * 
+   *
+   * @param character is the character to convert.
+   * @return a sequence of characters with the transliteration of the given character or <code>null</code> if
+   *         no such transliteration is available.
+   */
+  String transliterate(char character);
+
+  /**
+   * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the
+   * given <code>text</code>.
+   *
+   * @see java.text.Normalizer
+   *
+   * @param text is the {@link String} to convert.
+   * @return the transliteration of the given text. All characters that have no transliteration will remain
+   *         unmodified.
+   */
+  String transliterate(String text);
+
+  /**
+   * This method determines an ASCII-representation for the given character if available.
+   *
+   * @see java.text.Normalizer
+   *
    * @param character is the character to convert.
    * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the
    *         character is already ASCII or there is no ASCII-representation available.
@@ -4100,10 +4579,10 @@ public interface UnicodeUtil {
    * This method converts the given <code>text</code> to the best possible ASCII-representation. All
    * ASCII-characters will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized
    * to ASCII}.
-   * 
+   *
    * @see #normalize2Ascii(CharSequence, char)
    * @see java.text.Normalizer
-   * 
+   *
    * @param text is the text to convert.
    * @return the converted text.
    */
@@ -4113,9 +4592,9 @@ public interface UnicodeUtil {
    * This method converts the given <code>text</code> to the best possible ASCII-representation. All
    * ASCII-characters will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized
    * to ASCII} and if not possible replaced by <code>nonNormalizableCharaterReplacement</code>.
-   * 
+   *
    * @see java.text.Normalizer
-   * 
+   *
    * @param text is the text to convert.
    * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have
    *        no {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove
@@ -4126,14 +4605,14 @@ public interface UnicodeUtil {
 
   /**
    * This method determines if the given character is a dash.
-   * 
+   *
    * @see #HYPHEN_MINUS
    * @see #EN_DASH
    * @see #EM_DASH
    * @see #FIGURE_DASH
    * @see #HORIZONTAL_BAR
    * @see #SWUNG_DASH
-   * 
+   *
    * @param character is the character to check.
    * @return <code>true</code> if <code>character</code> is a dash.
    */
@@ -4142,14 +4621,14 @@ public interface UnicodeUtil {
   /**
    * This method determines if the given character is a hyphen. A hyphen is a character used to separate
    * syllables in words or to join words.
-   * 
+   *
    * @see net.sf.mmm.util.text.api.Hyphenator
-   * 
+   *
    * @see #HYPHEN_MINUS
    * @see #HYPHEN
    * @see #HYPHEN_BULLET
    * @see #HYPHENATION_POINT
-   * 
+   *
    * @param character is the character to check.
    * @return <code>true</code> if <code>character</code> is a hypen.
    */
@@ -4157,10 +4636,10 @@ public interface UnicodeUtil {
 
   /**
    * This method determines if the given character is a minus-sign.
-   * 
+   *
    * @see #HYPHEN_MINUS
    * @see #MINUS_SIGN
-   * 
+   *
    * @param character is the character to check.
    * @return <code>true</code> if <code>character</code> is a minus sign.
    */

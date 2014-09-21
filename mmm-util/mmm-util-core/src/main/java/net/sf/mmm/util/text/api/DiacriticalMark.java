@@ -31,9 +31,9 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * Therefore this class and also {@link UnicodeUtil} should be considered as work in progress and we heavily
  * require your contribution to improve and support more diacritics. It may also be possible that characters
  * or diacritics get renamed in future versions if our understanding of unicode grows.
- * 
+ *
  * @see java.text.Normalizer
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -56,9 +56,11 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_ACUTE);
       addComposition('g', UnicodeUtil.LATIN_SMALL_LETTER_G_WITH_ACUTE);
       addComposition('i', UnicodeUtil.LATIN_SMALL_LETTER_I_WITH_ACUTE);
+      addComposition('k', UnicodeUtil.LATIN_SMALL_LETTER_K_WITH_ACUTE);
       addComposition('l', UnicodeUtil.LATIN_SMALL_LETTER_L_WITH_ACUTE);
       addComposition('n', UnicodeUtil.LATIN_SMALL_LETTER_N_WITH_ACUTE);
       addComposition('o', UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_ACUTE);
+      addComposition('p', UnicodeUtil.LATIN_SMALL_LETTER_P_WITH_ACUTE);
       addComposition('r', UnicodeUtil.LATIN_SMALL_LETTER_R_WITH_ACUTE);
       addComposition('s', UnicodeUtil.LATIN_SMALL_LETTER_S_WITH_ACUTE);
       addComposition('u', UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_ACUTE);
@@ -69,9 +71,11 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('E', UnicodeUtil.LATIN_CAPITAL_LETTER_E_WITH_ACUTE);
       addComposition('G', UnicodeUtil.LATIN_CAPITAL_LETTER_G_WITH_ACUTE);
       addComposition('I', UnicodeUtil.LATIN_CAPITAL_LETTER_I_WITH_ACUTE);
+      addComposition('K', UnicodeUtil.LATIN_CAPITAL_LETTER_K_WITH_ACUTE);
       addComposition('L', UnicodeUtil.LATIN_CAPITAL_LETTER_L_WITH_ACUTE);
       addComposition('N', UnicodeUtil.LATIN_CAPITAL_LETTER_N_WITH_ACUTE);
       addComposition('O', UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_ACUTE);
+      addComposition('P', UnicodeUtil.LATIN_CAPITAL_LETTER_P_WITH_ACUTE);
       addComposition('R', UnicodeUtil.LATIN_CAPITAL_LETTER_R_WITH_ACUTE);
       addComposition('S', UnicodeUtil.LATIN_CAPITAL_LETTER_S_WITH_ACUTE);
       addComposition('U', UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_ACUTE);
@@ -192,6 +196,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_CEDILLA);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_CEDILLA);
       addComposition('g', UnicodeUtil.LATIN_SMALL_LETTER_G_WITH_CEDILLA);
+      addComposition('h', UnicodeUtil.LATIN_SMALL_LETTER_H_WITH_CEDILLA);
       addComposition('k', UnicodeUtil.LATIN_SMALL_LETTER_K_WITH_CEDILLA);
       addComposition('l', UnicodeUtil.LATIN_SMALL_LETTER_L_WITH_CEDILLA);
       addComposition('n', UnicodeUtil.LATIN_SMALL_LETTER_N_WITH_CEDILLA);
@@ -201,6 +206,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('C', UnicodeUtil.LATIN_CAPITAL_LETTER_C_WITH_CEDILLA);
       addComposition('E', UnicodeUtil.LATIN_CAPITAL_LETTER_E_WITH_CEDILLA);
       addComposition('G', UnicodeUtil.LATIN_CAPITAL_LETTER_G_WITH_CEDILLA);
+      addComposition('H', UnicodeUtil.LATIN_CAPITAL_LETTER_H_WITH_CEDILLA);
       addComposition('K', UnicodeUtil.LATIN_CAPITAL_LETTER_K_WITH_CEDILLA);
       addComposition('L', UnicodeUtil.LATIN_CAPITAL_LETTER_L_WITH_CEDILLA);
       addComposition('N', UnicodeUtil.LATIN_CAPITAL_LETTER_N_WITH_CEDILLA);
@@ -234,6 +240,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('u', UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_CIRCUMFLEX);
       addComposition('w', UnicodeUtil.LATIN_SMALL_LETTER_W_WITH_CIRCUMFLEX);
       addComposition('y', UnicodeUtil.LATIN_SMALL_LETTER_Y_WITH_CIRCUMFLEX);
+      addComposition('z', UnicodeUtil.LATIN_SMALL_LETTER_Z_WITH_CIRCUMFLEX);
       addComposition('A', UnicodeUtil.LATIN_CAPITAL_LETTER_A_WITH_CIRCUMFLEX);
       addComposition('C', UnicodeUtil.LATIN_CAPITAL_LETTER_C_WITH_CIRCUMFLEX);
       addComposition('E', UnicodeUtil.LATIN_CAPITAL_LETTER_E_WITH_CIRCUMFLEX);
@@ -246,6 +253,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('U', UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_CIRCUMFLEX);
       addComposition('W', UnicodeUtil.LATIN_CAPITAL_LETTER_W_WITH_CIRCUMFLEX);
       addComposition('Y', UnicodeUtil.LATIN_CAPITAL_LETTER_Y_WITH_CIRCUMFLEX);
+      addComposition('Z', UnicodeUtil.LATIN_CAPITAL_LETTER_Z_WITH_CIRCUMFLEX);
     }
 
   },
@@ -322,6 +330,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_DOT_ABOVE);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_DOT_ABOVE);
       addComposition('g', UnicodeUtil.LATIN_SMALL_LETTER_G_WITH_DOT_ABOVE);
+      addComposition('n', UnicodeUtil.LATIN_SMALL_LETTER_N_WITH_DOT_ABOVE);
       addComposition('o', UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_DOT_ABOVE);
       addComposition('z', UnicodeUtil.LATIN_SMALL_LETTER_Z_WITH_DOT_ABOVE);
       addComposition('A', UnicodeUtil.LATIN_CAPITAL_LETTER_A_WITH_DOT_ABOVE);
@@ -329,6 +338,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('E', UnicodeUtil.LATIN_CAPITAL_LETTER_E_WITH_DOT_ABOVE);
       addComposition('G', UnicodeUtil.LATIN_CAPITAL_LETTER_G_WITH_DOT_ABOVE);
       addComposition('I', UnicodeUtil.LATIN_CAPITAL_LETTER_I_WITH_DOT_ABOVE);
+      addComposition('N', UnicodeUtil.LATIN_CAPITAL_LETTER_N_WITH_DOT_ABOVE);
       addComposition('O', UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_DOT_ABOVE);
       addComposition('Z', UnicodeUtil.LATIN_CAPITAL_LETTER_Z_WITH_DOT_ABOVE);
 
@@ -356,7 +366,9 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
     @Override
     protected void initialize() {
 
-      // empty... whatever this is good for...
+      addComposition('n', UnicodeUtil.LATIN_SMALL_LETTER_N_WITH_DOT_BELOW);
+      addComposition('N', UnicodeUtil.LATIN_CAPITAL_LETTER_N_WITH_DOT_BELOW);
+      addComposition('H', UnicodeUtil.LATIN_CAPITAL_LETTER_H_WITH_DOT_BELOW);
     }
 
   },
@@ -403,6 +415,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('O', UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_DOUBLE_GRAVE);
       addComposition('R', UnicodeUtil.LATIN_CAPITAL_LETTER_R_WITH_DOUBLE_GRAVE);
       addComposition('U', UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_DOUBLE_GRAVE);
+      addComposition('Y', UnicodeUtil.LATIN_CAPITAL_LETTER_Y_WITH_GRAVE);
     }
 
   },
@@ -709,7 +722,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param separateCharacter is the {@link #getSeparateCharacter() separator character}.
    * @param combiningChar is the {@link #getCombiningCharacter() combining character}.
    * @param title is the {@link #toString() title}.
@@ -732,7 +745,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
 
   /**
    * This method adds the given {@link #compose(char) composition} pair.
-   * 
+   *
    * @param uncomposed is the uncomposed character.
    * @param composed is the composed character.
    */
@@ -757,9 +770,9 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    * For an unknown reason unicode does NOT define a proper separate character for each diacritic or for each
    * {@link #getCombiningCharacter() combining character}. Therefore this method may return a character that
    * looks similar to the diacritic mark, but is NOT the correct representation for it.
-   * 
+   *
    * @see #getCombiningCharacter()
-   * 
+   *
    * @return the separate character.
    */
   public char getSeparateCharacter() {
@@ -771,7 +784,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    * This method gets the combining character for this {@link DiacriticalMark}. Unlike the
    * {@link #getSeparateCharacter() separate character} this character gets combined with the following
    * character to a single glyph.
-   * 
+   *
    * @return the combining character.
    */
   public char getCombiningCharacter() {
@@ -790,7 +803,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
 
   /**
    * This method composes the given <code>character</code> with this {@link DiacriticalMark}.
-   * 
+   *
    * @param character is the character to compose (e.g. 'a').
    * @return the composed character (e.g. '&auml;' or '&aacute;') or <code>null</code> if no such composition
    *         exists in unicode.
@@ -804,7 +817,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    * This method de-composes the given <code>character</code> with this {@link DiacriticalMark}. In other
    * words this {@link DiacriticalMark} is removed from the given <code>character</code> if it is
    * {@link #compose(char) composed}. It is the inverse operation of {@link #compose(char)}.
-   * 
+   *
    * @param character is the character to de-compose (e.g. '&auml;' or '&aacute;').
    * @return the de-composed character (e.g. 'a') or <code>null</code> if the given <code>character</code>
    *         does is not {@link #compose(char) composed} with this {@link DiacriticalMark}.
@@ -817,7 +830,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   /**
    * This method gets a {@link Collection} with all precomposed {@link Character characters} containing this
    * mark.
-   * 
+   *
    * @return the composed characters.
    */
   public Collection<Character> getComposedCharacters() {

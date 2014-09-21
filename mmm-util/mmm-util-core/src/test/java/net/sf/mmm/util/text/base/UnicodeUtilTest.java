@@ -9,7 +9,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link UnicodeUtil}
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -17,7 +17,7 @@ public class UnicodeUtilTest extends Assert {
 
   /**
    * This method gets the {@link UnicodeUtil} instance to test.
-   * 
+   *
    * @return the {@link UnicodeUtil}.
    */
   protected UnicodeUtil getUnicodeUtil() {
@@ -46,6 +46,17 @@ public class UnicodeUtilTest extends Assert {
     UnicodeUtil util = getUnicodeUtil();
     assertEquals("haesslich", util.normalize2Ascii("häßlich"));
     assertEquals("voila maitre asteroide", util.normalize2Ascii("voilà maître astéroïde"));
+  }
+
+  /**
+   * Test for {@link UnicodeUtil#transliterate(String)}.
+   */
+  @Test
+  public void testTransliterate() {
+
+    UnicodeUtil util = getUnicodeUtil();
+    assertEquals("Ellēnikḗ Dēmokratía", util.transliterate("Ελληνική Δημοκρατία"));
+    assertEquals("Slavʹsâ, Otečestvo naše svobodnoe", util.transliterate("Славься, Отечество наше свободное"));
   }
 
 }
