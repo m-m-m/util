@@ -20,7 +20,7 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the implementation of {@link StringValueConverter}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -49,7 +49,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
    * This method gets the singleton instance of this {@link StringValueConverterImpl}.<br/>
    * <b>ATTENTION:</b><br/>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static StringValueConverterImpl getInstance() {
@@ -84,7 +84,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   /**
    * This method gets the {@link Iso8601Util} used to parse and format date and time according to the standard
    * <code>ISO-8601</code>.
-   * 
+   *
    * @return the iso8601Util
    */
   protected Iso8601Util getIso8601Util() {
@@ -94,7 +94,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
 
   /**
    * This method sets the {@link #getIso8601Util() Iso8601Util}.
-   * 
+   *
    * @param iso8601Util the iso8601Util to set
    */
   @Inject
@@ -106,7 +106,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
 
   /**
    * This method gets the {@link StringUtil} used to deal with strings.
-   * 
+   *
    * @return the stringUtil
    */
   protected StringUtil getStringUtil() {
@@ -126,7 +126,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
 
   /**
    * This method parses a numeric value.
-   * 
+   *
    * @param numberValue is the number value as string.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
    *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
@@ -190,8 +190,6 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
         } else {
           throw new WrongValueTypeException(value, valueSource, type);
         }
-      } else if (type == Class.class) {
-        result = Class.forName(value);
       } else {
         return convertUnknownValue(value, type, valueSource);
       }
@@ -212,13 +210,13 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
    * class and override this method in order to support the conversion for additional types. You should first
    * handle the conversion for all value types you like. Then for all other types you should delegate to the
    * <code>super</code> method implementation.
-   * 
+   *
    * @param value is the value to convert.
    * @param type is the type the <code>value</code> should be converted to.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
    *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
    *        thrown if something goes wrong. This will help to find the problem easier.
-   * 
+   *
    * @param <V> is the type the <code>value</code> should be converted to.
    * @return the <code>value</code> converted to <code>type</code>.
    * @throws ValueNotSetException if the given <code>value</code> is <code>null</code>.
