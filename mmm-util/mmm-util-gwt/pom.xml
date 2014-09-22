@@ -23,6 +23,7 @@
       <artifactId>mmm-util-core</artifactId>
       <classifier>sources</classifier>
     </dependency>
+    <!-- 
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
@@ -41,6 +42,7 @@
       <artifactId>hibernate-validator</artifactId>
       <classifier>sources</classifier>
     </dependency>
+     -->
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
@@ -48,6 +50,7 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-dev</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -61,6 +64,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
+      <optional>true</optional>
     </dependency>
 
     <!-- servlet 3.0 in progress, depends on GWT support -->
