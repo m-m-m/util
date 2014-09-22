@@ -3,14 +3,15 @@
 package net.sf.mmm.util.search.base;
 
 import net.sf.mmm.util.search.api.SearchCriteria;
+import net.sf.mmm.util.transferobject.api.AbstractTransferObject;
 
 /**
  * This is the abstract base implementation of {@link SearchCriteria}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public abstract class AbstractSearchCriteria implements SearchCriteria {
+public abstract class AbstractSearchCriteria extends AbstractTransferObject implements SearchCriteria {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -8080276978548478955L;
@@ -33,6 +34,60 @@ public abstract class AbstractSearchCriteria implements SearchCriteria {
   public AbstractSearchCriteria() {
 
     super();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + this.hitOffset;
+    result = prime * result + ((this.maximumHitCount == null) ? 0 : this.maximumHitCount.hashCode());
+    result = prime * result + (this.readOnly ? 1231 : 1237);
+    result = prime * result + ((this.searchTimeout == null) ? 0 : this.searchTimeout.hashCode());
+    return result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (!super.equals(obj)) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    AbstractSearchCriteria other = (AbstractSearchCriteria) obj;
+    if (this.hitOffset != other.hitOffset) {
+      return false;
+    }
+    if (this.maximumHitCount == null) {
+      if (other.maximumHitCount != null) {
+        return false;
+      }
+    } else if (!this.maximumHitCount.equals(other.maximumHitCount)) {
+      return false;
+    }
+    if (this.readOnly != other.readOnly) {
+      return false;
+    }
+    if (this.searchTimeout == null) {
+      if (other.searchTimeout != null) {
+        return false;
+      }
+    } else if (!this.searchTimeout.equals(other.searchTimeout)) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -103,4 +158,19 @@ public abstract class AbstractSearchCriteria implements SearchCriteria {
     this.readOnly = readOnly;
   }
 
+  /**
+   * Limits the {@link #getMaximumHitCount() maximum hit count} by the given <code>limit</code>. If current
+   * {@link #getMaximumHitCount() maximum hit count} is <code>null</code> or greater than the given
+   * <code>limit</code>, the value is replaced by <code>limit</code>.
+   *
+   * @param limit is the maximum allowed value for {@link #getMaximumHitCount() maximum hit count}.
+   * @since 6.0.0
+   */
+  public void limitMaximumHitCount(int limit) {
+
+    Integer max = getMaximumHitCount();
+    if ((max == null) || (max.intValue() > limit)) {
+      setMaximumHitCount(Integer.valueOf(limit));
+    }
+  }
 }

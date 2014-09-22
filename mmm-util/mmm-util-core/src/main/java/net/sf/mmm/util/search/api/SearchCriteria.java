@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.search.api;
 
-import java.io.Serializable;
+import net.sf.mmm.util.transferobject.api.TransferObject;
 
 /**
  * This is the interface for a transfer-object with the criteria for a {@link SearchQuery search query}. Such
@@ -14,19 +14,19 @@ import java.io.Serializable;
  * {@link net.sf.mmm.util.search.base.AbstractSearchCriteria} to create a java bean with all the fields for
  * your search. For searches in a database using JPA there is additional support provided by
  * <code>mmm-persistence</code>.
- * 
+ *
  * @see SearchResult
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface SearchCriteria extends Serializable {
+public interface SearchCriteria extends TransferObject {
 
   /**
    * This method gets the maximum number of hits that will be received as result for this query.<br/>
    * <b>Note:</b><br/>
    * This feature is the same as <code>Query.setMaxResults(int)</code> in JPA.
-   * 
+   *
    * @return the maximum hit-count or <code>null</code> for NO limit.
    */
   Integer getMaximumHitCount();
@@ -36,7 +36,7 @@ public interface SearchCriteria extends Serializable {
    * of {@link #getMaximumHitCount()} you can simply implement paging.<br/>
    * <b>Note:</b><br/>
    * This feature is the same as <code>Query.setFirstResult(int)</code> in JPA.
-   * 
+   *
    * @return the offset of the first hit.
    */
   int getHitOffset();
@@ -45,7 +45,7 @@ public interface SearchCriteria extends Serializable {
    * This method gets the maximum delay in milliseconds the search may last until it is canceled.<br/>
    * <b>Note:</b><br/>
    * This feature is the same as the query hint <code>"javax.persistence.query.timeout"</code> in JPA.
-   * 
+   *
    * @return the search timeout in milliseconds or <code>null</code> for NO timeout.
    */
   Long getSearchTimeout();
@@ -55,7 +55,7 @@ public interface SearchCriteria extends Serializable {
    * {@link SearchResult#getHits() result hits} can NOT be modified or their changes will NOT be persisted. If
    * a search-engine does not support this feature (e.g. for full-text search this makes no sense), it will be
    * ignored.
-   * 
+   *
    * @return <code>true</code> if read-only, <code>false</code> otherwise (default).
    * @since 3.1.0
    */
