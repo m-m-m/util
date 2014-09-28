@@ -52,6 +52,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
     protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_ACUTE);
+      addComposition(UnicodeUtil.LATIN_SMALL_LETTER_AE, UnicodeUtil.LATIN_SMALL_LETTER_AE_WITH_ACUTE);
       addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_ACUTE);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_ACUTE);
       addComposition('g', UnicodeUtil.LATIN_SMALL_LETTER_G_WITH_ACUTE);
@@ -67,6 +68,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('y', UnicodeUtil.LATIN_SMALL_LETTER_Y_WITH_ACUTE);
       addComposition('z', UnicodeUtil.LATIN_SMALL_LETTER_Z_WITH_ACUTE);
       addComposition('A', UnicodeUtil.LATIN_CAPITAL_LETTER_A_WITH_ACUTE);
+      addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_AE, UnicodeUtil.LATIN_CAPITAL_LETTER_AE_WITH_ACUTE);
       addComposition('C', UnicodeUtil.LATIN_CAPITAL_LETTER_C_WITH_ACUTE);
       addComposition('E', UnicodeUtil.LATIN_CAPITAL_LETTER_E_WITH_ACUTE);
       addComposition('G', UnicodeUtil.LATIN_CAPITAL_LETTER_G_WITH_ACUTE);
@@ -96,6 +98,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
           UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_DIAERESIS_AND_ACUTE);
       addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS,
           UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS_AND_ACUTE);
+      addComposition(UnicodeUtil.GREEK_UPSILON_WITH_HOOK_SYMBOL, UnicodeUtil.GREEK_UPSILON_WITH_ACUTE_AND_HOOK_SYMBOL);
     }
 
   },
@@ -124,6 +127,12 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('I', UnicodeUtil.LATIN_CAPITAL_LETTER_I_WITH_BREVE);
       addComposition('O', UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_BREVE);
       addComposition('U', UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_BREVE);
+      addComposition(UnicodeUtil.CYRILLIC_SMALL_LETTER_ZHE, UnicodeUtil.CYRILLIC_SMALL_LETTER_ZHE_WITH_BREVE);
+      addComposition(UnicodeUtil.CYRILLIC_CAPITAL_LETTER_ZHE, UnicodeUtil.CYRILLIC_CAPITAL_LETTER_ZHE_WITH_BREVE);
+      addComposition(UnicodeUtil.CYRILLIC_CAPITAL_LETTER_A, UnicodeUtil.CYRILLIC_CAPITAL_LETTER_A_WITH_BREVE);
+      addComposition(UnicodeUtil.CYRILLIC_SMALL_LETTER_A, UnicodeUtil.CYRILLIC_SMALL_LETTER_A_WITH_BREVE);
+      addComposition(UnicodeUtil.CYRILLIC_CAPITAL_LETTER_IE, UnicodeUtil.CYRILLIC_CAPITAL_LETTER_IE_WITH_BREVE);
+      addComposition(UnicodeUtil.CYRILLIC_SMALL_LETTER_IE, UnicodeUtil.CYRILLIC_SMALL_LETTER_IE_WITH_BREVE);
     }
 
   },
@@ -177,6 +186,10 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
           UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_DIAERESIS_AND_CARON);
       addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS,
           UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS_AND_CARON);
+      addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_DZ, UnicodeUtil.LATIN_CAPITAL_LETTER_DZ_WITH_CARON);
+      addComposition(UnicodeUtil.LATIN_SMALL_LETTER_DZ, UnicodeUtil.LATIN_SMALL_LETTER_DZ_WITH_CARON);
+      addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_D_WITH_SMALL_LETTER_Z,
+          UnicodeUtil.LATIN_CAPITAL_LETTER_D_WITH_SMALL_LETTER_Z_WITH_CARON);
     }
 
   },
@@ -254,6 +267,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
       addComposition('W', UnicodeUtil.LATIN_CAPITAL_LETTER_W_WITH_CIRCUMFLEX);
       addComposition('Y', UnicodeUtil.LATIN_CAPITAL_LETTER_Y_WITH_CIRCUMFLEX);
       addComposition('Z', UnicodeUtil.LATIN_CAPITAL_LETTER_Z_WITH_CIRCUMFLEX);
+      addComposition('+', UnicodeUtil.PLUS_SIGN_WITH_CIRCUMFLEX_ACCENT_ABOVE);
     }
 
   },

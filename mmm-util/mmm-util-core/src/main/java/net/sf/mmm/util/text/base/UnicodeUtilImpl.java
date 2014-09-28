@@ -84,17 +84,18 @@ public class UnicodeUtilImpl implements UnicodeUtil {
                 ascii = CHARACTER_TO_ASCII_MAP.get(decomposed);
               }
               if (ascii == null) {
-                boolean decomposeFailed = true;
+                boolean decomposeFailed2Ascii = true;
                 for (DiacriticalMark subMark : DiacriticalMark.values()) {
                   decomposed = subMark.decompose(normalized);
                   if (decomposed != null) {
                     normalized = decomposed.charValue();
-                    decomposeFailed = false;
+                    decomposeFailed2Ascii = false;
                     break;
                   }
                 }
-                if (decomposeFailed) {
-                  LoggerFactory.getLogger(UnicodeUtilImpl.class).error("Failed to decompose '" + normalized + "'!");
+                if (decomposeFailed2Ascii) {
+                  LoggerFactory.getLogger(UnicodeUtilImpl.class).debug(
+                      "Decomposed form '" + normalized + "' is not ASCII!");
                   break;
                 }
               }
@@ -399,6 +400,8 @@ public class UnicodeUtilImpl implements UnicodeUtil {
    * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have
    *        no {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove
    *        these characters. A typical character to use is <code>?</code>.
+   * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the
+   *         character is already ASCII or there is no ASCII-representation available.
    */
   public String normalize2Ascii(char character, char nonNormalizableCharaterReplacement) {
 
