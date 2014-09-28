@@ -3,9 +3,12 @@
 package net.sf.mmm.util.lang.base.datatype.descriptor;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 
 import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
@@ -48,15 +51,18 @@ public class DatatypeSegmentDescriptorSimpleDatatype<T extends SimpleDatatype<V>
    * @param <T> is the generic type of the {@link SimpleDatatype}.
    * @param <V> is the generic type of the datatypes {@link SimpleDatatype#getValue() value}.
    * @param datatype is the {@link Class} reflecting the {@link SimpleDatatype}.
+   * @param reflectionUtil is the instance of {@link ReflectionUtil} to use.
    * @return the new {@link DatatypeSegmentDescriptorSimpleDatatype} instance.
    */
   public static <T extends SimpleDatatype<V>, V> DatatypeSegmentDescriptorSimpleDatatype<T, V> newInstance(
-      Class<T> datatype) {
+      Class<T> datatype, ReflectionUtil reflectionUtil) {
 
     try {
       Method method = datatype.getMethod("getValue", ReflectionUtilLimited.NO_PARAMETERS);
-      @SuppressWarnings("unchecked")
-      Class<V> type = (Class<V>) method.getReturnType();
+      Type returnType = method.getGenericReturnType();
+      GenericType<?> genericType = reflectionUtil.createGenericType(returnType, datatype);
+      @SuppressWarnings({ "unchecked", "rawtypes" })
+      Class<V> type = (Class) genericType.getRetrievalClass();
       return new DatatypeSegmentDescriptorSimpleDatatype<>(DatatypeSegmentDescriptor.DEFAULT_NAME, type);
     } catch (Exception e) {
       throw new IllegalStateException("Failed to reflect type of " + datatype.getName(), e);

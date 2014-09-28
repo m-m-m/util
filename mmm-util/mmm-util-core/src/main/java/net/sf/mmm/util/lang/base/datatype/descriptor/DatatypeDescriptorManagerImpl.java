@@ -174,12 +174,17 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public <T> DatatypeDescriptor<T> getDatatypeDescriptor(Class<T> inputDatatype) throws IllegalArgumentException {
 
     NlsNullPointerException.checkNotNull("datatype", inputDatatype);
     Class<T> datatype = this.reflectionUtil.getNonPrimitiveType(inputDatatype);
-    @SuppressWarnings("unchecked")
+    if (Enum.class.isAssignableFrom(datatype) && !datatype.isEnum()) {
+      // Jep! This can happen in case of an enum item that has a body
+      // Java is sometimes insane
+      datatype = (Class) datatype.getSuperclass();
+    }
     DatatypeDescriptor<T> datatypeDescriptor = (DatatypeDescriptor<T>) this.datatypeInfoMap.get(datatype);
     if (datatypeDescriptor == null) {
       datatypeDescriptor = createDatatypeDescriptor(datatype);
@@ -207,7 +212,7 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
           + datatype);
     }
     if (SimpleDatatype.class.isAssignableFrom(datatype)) {
-      return new DatatypeDescriptorSimpleDatatype(datatype);
+      return new DatatypeDescriptorSimpleDatatype(datatype, this.reflectionUtil);
     }
     if (datatype.isEnum()) {
       return new DatatypeDescriptorEnum(datatype, this.stringUtil);

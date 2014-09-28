@@ -11,6 +11,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeDescriptor} for a
@@ -30,12 +31,13 @@ public class DatatypeDescriptorSimpleDatatype<T extends SimpleDatatype<?>> exten
    * The constructor.
    *
    * @param datatype is the {@link Class} reflecting the {@link SimpleDatatype}.
+   * @param reflectionUtil is the {@link ReflectionUtil} instance.
    */
   // generic type of Java/Eclipse is very poor...
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public DatatypeDescriptorSimpleDatatype(Class<T> datatype) {
+  public DatatypeDescriptorSimpleDatatype(Class<T> datatype, ReflectionUtil reflectionUtil) {
 
-    super(datatype, DatatypeSegmentDescriptorSimpleDatatype.newInstance((Class) datatype));
+    super(datatype, DatatypeSegmentDescriptorSimpleDatatype.newInstance((Class) datatype, reflectionUtil));
     if (datatype.isEnum()) {
       this.constructor = null;
     } else {

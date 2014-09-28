@@ -3,6 +3,8 @@
 package net.sf.mmm.util.value.base;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -180,6 +182,10 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
         result = Short.valueOf(value);
       } else if ((type == byte.class) || (type == Byte.class)) {
         result = Byte.valueOf(value);
+      } else if (type == BigDecimal.class) {
+        result = new BigDecimal(value);
+      } else if (type == BigInteger.class) {
+        result = new BigInteger(value);
       } else if (type == Number.class) {
         result = parseNumber(value, valueSource);
       } else if (type == Date.class) {
