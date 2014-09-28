@@ -643,7 +643,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("An unexpected error has occurred! We appologize any inconvenience. Please try again later.")
+  @NlsBundleMessage("An unexpected error has occurred! We apologize any inconvenience. Please try again later.")
   NlsMessage errorTechnical();
 
   /**
