@@ -4,6 +4,7 @@ package net.sf.mmm.util.lang.base;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Currency;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -99,6 +100,7 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
     registerStandardDatatype(String.class);
     registerStandardDatatype(Boolean.class);
     registerStandardDatatype(Character.class);
+    registerStandardDatatype(Currency.class);
     registerCustomDatatype(Datatype.class); // internal trick...
     registerNumberDatatypes();
     registerJavaTimeDatatypes();
