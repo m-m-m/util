@@ -8,16 +8,14 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsObject;
 
 /**
- * A {@link Comparator} represents a function that compares two given values.
+ * A {@link CompareOperator} represents a function that compares two given values.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 2.0.0
- * @deprecated renamed to {@link CompareOperator} to avoid confusion with {@link java.util.Comparator}.
+ * @since 6.0.0
  */
-@Deprecated
-public enum Comparator implements SimpleDatatype<String>, NlsObject {
+public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
 
-  /** {@link Comparator} to check if some value is greater than another. */
+  /** {@link CompareOperator} to check if some value is greater than another. */
   GREATER_THAN(">", NlsBundleUtilCoreRoot.INF_GREATER_THAN, false, Boolean.FALSE) {
 
     /**
@@ -39,7 +37,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
     }
   },
 
-  /** {@link Comparator} to check if some value is greater or equal to another. */
+  /** {@link CompareOperator} to check if some value is greater or equal to another. */
   GREATER_OR_EQUAL(">=", NlsBundleUtilCoreRoot.INF_GREATER_OR_EQUAL, true, Boolean.FALSE) {
 
     /**
@@ -61,7 +59,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
     }
   },
 
-  /** {@link Comparator} to check if some value is less than another. */
+  /** {@link CompareOperator} to check if some value is less than another. */
   LESS_THAN("<", NlsBundleUtilCoreRoot.INF_LESS_THAN, false, Boolean.TRUE) {
 
     /**
@@ -83,7 +81,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
     }
   },
 
-  /** {@link Comparator} to check if some value is less or equal than another. */
+  /** {@link CompareOperator} to check if some value is less or equal than another. */
   LESS_OR_EQUAL("<=", NlsBundleUtilCoreRoot.INF_LESS_OR_EQUAL, true, Boolean.TRUE) {
 
     /**
@@ -106,7 +104,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   },
 
   /**
-   * {@link Comparator} to check if objects are {@link Object#equals(Object) equal}.
+   * {@link CompareOperator} to check if objects are {@link Object#equals(Object) equal}.
    */
   EQUAL("==", NlsBundleUtilCoreRoot.INF_EQUAL, true, null) {
 
@@ -130,7 +128,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   },
 
   /**
-   * {@link Comparator} to check if objects are NOT {@link Object#equals(Object) equal}.
+   * {@link CompareOperator} to check if objects are NOT {@link Object#equals(Object) equal}.
    */
   NOT_EQUAL("!=", NlsBundleUtilCoreRoot.INF_NOT_EQUAL, false, null) {
 
@@ -170,13 +168,13 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
    *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
-   * @param evalTrueIfEquals - <code>true</code> if {@link Comparator} {@link #eval(Object, Object) evaluates}
-   *        to <code>true</code> if arguments are equal, <code>false</code> otherwise.
-   * @param less - {@link Boolean#TRUE} if {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   * @param evalTrueIfEquals - <code>true</code> if {@link CompareOperator} {@link #eval(Object, Object)
+   *        evaluates} to <code>true</code> if arguments are equal, <code>false</code> otherwise.
+   * @param less - {@link Boolean#TRUE} if {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
    *        <code>true</code> if first argument is less than second, {@link Boolean#FALSE} on greater,
    *        <code>null</code> otherwise.
    */
-  private Comparator(String value, String title, boolean evalTrueIfEquals, Boolean less) {
+  private CompareOperator(String value, String title, boolean evalTrueIfEquals, Boolean less) {
 
     this.value = value;
     this.title = title;
@@ -185,7 +183,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   * @return <code>true</code> if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
    *         <code>true</code> for {@link Object}s that are {@link Object#equals(Object) equal} to each other,
    *         <code>false</code> otherwise.
    */
@@ -195,7 +193,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   * @return <code>true</code> if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
    *         <code>true</code> in case the first argument is less than the second, <code>false</code>
    *         otherwise.
    */
@@ -205,7 +203,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   * @return <code>true</code> if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
    *         <code>true</code> in case the first argument is greater than the second, <code>false</code>
    *         otherwise.
    */
@@ -215,7 +213,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * This method gets the symbol of the {@link Comparator}. E.g. "==", ">", ">=", etc.
+   * This method gets the symbol of the {@link CompareOperator}. E.g. "==", ">", ">=", etc.
    *
    * @return the comparator symbol.
    */
@@ -234,11 +232,11 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * This method evaluates this {@link Comparator} for the given arguments.
+   * This method evaluates this {@link CompareOperator} for the given arguments.
    *
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @return the result of the {@link Comparator} applied to the given arguments.
+   * @return the result of the {@link CompareOperator} applied to the given arguments.
    */
   public abstract boolean eval(double arg1, double arg2);
 
@@ -260,19 +258,19 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
    *
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @return the result of the {@link Comparator} applied to the given arguments.
+   * @return the result of the {@link CompareOperator} applied to the given arguments.
    */
   private boolean evalComparable(Comparable arg1, Comparable arg2) {
 
-    return ComparatorHelper.evalComparable(CompareOperator.fromValue(this.value), arg1, arg2);
+    return ComparatorHelper.evalComparable(this, arg1, arg2);
   }
 
   /**
-   * This method evaluates this {@link Comparator} for the given arguments.
+   * This method evaluates this {@link CompareOperator} for the given arguments.
    *
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @return the result of the {@link Comparator} applied to the given arguments.
+   * @return the result of the {@link CompareOperator} applied to the given arguments.
    */
   @SuppressWarnings("rawtypes")
   public boolean eval(Object arg1, Object arg2) {
@@ -313,14 +311,15 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * This method gets the {@link Comparator} for the given <code>symbol</code>.
+   * This method gets the {@link CompareOperator} for the given <code>symbol</code>.
    *
-   * @param value is the {@link #getValue() symbol} of the requested {@link Comparator}.
-   * @return the requested {@link Comparator} or <code>null</code> if no such {@link Comparator} exists.
+   * @param value is the {@link #getValue() symbol} of the requested {@link CompareOperator}.
+   * @return the requested {@link CompareOperator} or <code>null</code> if no such {@link CompareOperator}
+   *         exists.
    */
-  public static Comparator fromValue(String value) {
+  public static CompareOperator fromValue(String value) {
 
-    for (Comparator comparator : values()) {
+    for (CompareOperator comparator : values()) {
       if (comparator.value.equals(value)) {
         return comparator;
       }

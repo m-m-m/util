@@ -3,14 +3,14 @@
 package net.sf.mmm.util.validation.base;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.lang.api.Comparator;
+import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that {@link #validate(Object, Object)
- * validates that a value} is {@link Comparator#eval(double, double) satisfies} a given {@link Comparator}
+ * validates that a value} is {@link CompareOperator#eval(double, double) satisfies} a given {@link CompareOperator}
  * -operation for given value to compare to.
  * 
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
@@ -21,7 +21,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueValidator<V> {
 
   /** The comparison operator. */
-  private final Comparator comparator;
+  private final CompareOperator comparator;
 
   /** @see #validateNotNull(Comparable) */
   private final AttributeReadValue<V> valueSource;
@@ -35,7 +35,7 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
   /**
    * The constructor.
    * 
-   * @param comparator is the {@link Comparator comparison operator} used to compare the
+   * @param comparator is the {@link CompareOperator comparison operator} used to compare the
    *        {@link #validate(Object) value to validate} (first argument) with the value of the given
    *        <code>valueSource</code>.
    * @param valueSource is a reference to something that {@link AttributeReadValue#getValue() provides a
@@ -44,7 +44,7 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
    * @param source is a brief description of the <code>valueSource</code> for potential failure messages. E.g.
    *        in case of a user interface the label of the field providing the value. May be <code>null</code>.
    */
-  public ValidatorCompare(Comparator comparator, AttributeReadValue<V> valueSource, String source) {
+  public ValidatorCompare(CompareOperator comparator, AttributeReadValue<V> valueSource, String source) {
 
     super();
     this.comparator = comparator;
@@ -56,12 +56,12 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
   /**
    * The constructor.
    * 
-   * @param comparator is the {@link Comparator comparison operator} used to compare the
+   * @param comparator is the {@link CompareOperator comparison operator} used to compare the
    *        {@link #validate(Object) value to validate} (first argument) with the value of the given
    *        <code>value</code>.
    * @param value is the fixed value to compare to.
    */
-  public ValidatorCompare(Comparator comparator, V value) {
+  public ValidatorCompare(CompareOperator comparator, V value) {
 
     super();
     this.comparator = comparator;

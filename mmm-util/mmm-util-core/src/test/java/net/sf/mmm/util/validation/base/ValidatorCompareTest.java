@@ -8,7 +8,7 @@ import java.util.TimeZone;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
-import net.sf.mmm.util.lang.api.Comparator;
+import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
@@ -27,7 +27,7 @@ public class ValidatorCompareTest extends AbstractValidatorTest {
   @Test
   public void testIntegers() {
 
-    ValidatorCompare<Integer> validator = new ValidatorCompare<Integer>(Comparator.LESS_THAN, Integer.valueOf(42));
+    ValidatorCompare<Integer> validator = new ValidatorCompare<Integer>(CompareOperator.LESS_THAN, Integer.valueOf(42));
     verifyPositiveValidation(validator, null);
     verifyPositiveValidation(validator, Integer.valueOf(0));
     verifyPositiveValidation(validator, Integer.valueOf(41));
@@ -44,7 +44,7 @@ public class ValidatorCompareTest extends AbstractValidatorTest {
 
     Iso8601Util isoUtil = Iso8601UtilImpl.getInstance();
     Date date = isoUtil.parseDate("2000-01-31T23:59:59");
-    ValidatorCompare<Date> validator = new ValidatorCompare<Date>(Comparator.GREATER_OR_EQUAL, date);
+    ValidatorCompare<Date> validator = new ValidatorCompare<Date>(CompareOperator.GREATER_OR_EQUAL, date);
     verifyPositiveValidation(validator, null);
     verifyPositiveValidation(validator, date);
     verifyPositiveValidation(validator, new Date());

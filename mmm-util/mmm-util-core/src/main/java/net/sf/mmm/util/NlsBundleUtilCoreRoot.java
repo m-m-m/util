@@ -7,7 +7,6 @@ import java.util.Date;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.lang.api.Comparator;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
@@ -292,7 +291,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoNor();
 
   /**
-   * @see net.sf.mmm.util.lang.api.Comparator#GREATER_THAN
+   * @see net.sf.mmm.util.lang.api.CompareOperator#GREATER_THAN
    *
    * @return the {@link NlsMessage}
    */
@@ -300,7 +299,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoGreaterThan();
 
   /**
-   * @see net.sf.mmm.util.lang.api.Comparator#GREATER_OR_EQUAL
+   * @see net.sf.mmm.util.lang.api.CompareOperator#GREATER_OR_EQUAL
    *
    * @return the {@link NlsMessage}
    */
@@ -308,7 +307,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoGreaterOrEqual();
 
   /**
-   * @see net.sf.mmm.util.lang.api.Comparator#EQUAL
+   * @see net.sf.mmm.util.lang.api.CompareOperator#EQUAL
    *
    * @return the {@link NlsMessage}
    */
@@ -316,7 +315,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoEqual();
 
   /**
-   * @see net.sf.mmm.util.lang.api.Comparator#NOT_EQUAL
+   * @see net.sf.mmm.util.lang.api.CompareOperator#NOT_EQUAL
    *
    * @return the {@link NlsMessage}
    */
@@ -324,7 +323,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoNotEqual();
 
   /**
-   * @see net.sf.mmm.util.lang.api.Comparator#LESS_THAN
+   * @see net.sf.mmm.util.lang.api.CompareOperator#LESS_THAN
    *
    * @return the {@link NlsMessage}
    */
@@ -332,7 +331,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage infoLessThan();
 
   /**
-   * @see net.sf.mmm.util.lang.api.Comparator#LESS_OR_EQUAL
+   * @see net.sf.mmm.util.lang.api.CompareOperator#LESS_OR_EQUAL
    *
    * @return the {@link NlsMessage}
    */
@@ -467,25 +466,25 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @see net.sf.mmm.util.validation.base.ValidatorCompare
    *
    * @param value is the invalid value.
-   * @param comparator is the {@link Comparator}.
+   * @param comparator is the {@link net.sf.mmm.util.lang.api.CompareOperator}.
    * @param value2 is the value to compare to (second argument).
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value ({value}) needs to be {comparator} \"{value2}\"!")
-  NlsMessage errorValueComparison(@Named("value") Object value, @Named("comparator") Comparator comparator,
+  NlsMessage errorValueComparison(@Named("value") Object value, @Named("comparator") Object comparator,
       @Named("value2") Object value2);
 
   /**
    * @see net.sf.mmm.util.validation.base.ValidatorCompare
    *
    * @param value is the invalid value.
-   * @param comparator is the {@link Comparator}.
+   * @param comparator is the {@link net.sf.mmm.util.lang.api.CompareOperator}.
    * @param value2 is the value to compare to (second argument).
    * @param source is the source of the value or <code>null</code> if NOT available.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value ({value}) needs to be {comparator} the value from \"{source}\" ({value2})!")
-  NlsMessage errorValueComparisonWithSource(@Named("value") Object value, @Named("comparator") Comparator comparator,
+  NlsMessage errorValueComparisonWithSource(@Named("value") Object value, @Named("comparator") Object comparator,
       @Named("value2") Object value2, @Named("source") Object source);
 
   /**

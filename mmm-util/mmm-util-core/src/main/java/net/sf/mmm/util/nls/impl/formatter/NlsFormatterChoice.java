@@ -15,7 +15,7 @@ import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConjunctionCharFilter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
-import net.sf.mmm.util.lang.api.Comparator;
+import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
@@ -76,7 +76,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   private static final Filter<Object> FILTER_ELSE = ConstantFilter.getInstance(true);
 
   /**
-   * The {@link CharFilter} for the {@link Comparator#getValue() comparator symbol} .
+   * The {@link CharFilter} for the {@link CompareOperator#getValue() comparator symbol} .
    */
   private static final CharFilter FILTER_COMPARATOR = new ListCharFilter(true, '<', '=', '>', '!');
 
@@ -181,9 +181,9 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     if (scanner.expect(CONDITION_VAR)) {
       // variable choice
       String symbol = scanner.readWhile(FILTER_COMPARATOR);
-      Comparator comparator = Comparator.fromValue(symbol);
+      CompareOperator comparator = CompareOperator.fromValue(symbol);
       if (comparator == null) {
-        throw new NlsParseException(symbol, REQUIRED_FORMAT_COMPARATOR, Comparator.class);
+        throw new NlsParseException(symbol, REQUIRED_FORMAT_COMPARATOR, CompareOperator.class);
       }
       Object comparatorArgument = parseComparatorArgument(scanner);
       condition = new Condition(comparator, comparatorArgument);
@@ -334,8 +334,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
    */
   private static class Condition implements Filter<Object> {
 
-    /** The {@link Comparator}. */
-    private final Comparator comparator;
+    /** The {@link CompareOperator}. */
+    private final CompareOperator comparator;
 
     /** The argument for the {@link #comparator}. */
     private final Object comparatorArgument;
@@ -346,7 +346,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
      * @param comparator is the {@link #comparator}.
      * @param comparatorArgument is the {@link #comparatorArgument}.
      */
-    public Condition(Comparator comparator, Object comparatorArgument) {
+    public Condition(CompareOperator comparator, Object comparatorArgument) {
 
       super();
       this.comparator = comparator;

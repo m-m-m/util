@@ -7,7 +7,7 @@ import java.util.Calendar;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
- * This class contains the implementation of {@link Comparator#eval(Object, Object)} for {@link Comparable} arguments.
+ * This class contains the implementation of {@link CompareOperator#eval(Object, Object)} for {@link Comparable} arguments.
  * This allows the implementation to be replaced with a GWT compatible one.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -43,15 +43,15 @@ final class ComparatorHelper {
   }
 
   /**
-   * Logic for {@link Comparator#eval(Object, Object)} with {@link Comparable} arguments.
+   * Logic for {@link CompareOperator#eval(Object, Object)} with {@link Comparable} arguments.
    * 
-   * @param comparator is the {@link Comparator}.
+   * @param comparator is the {@link CompareOperator}.
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @return the result of the {@link Comparator} applied to the given arguments.
+   * @return the result of the {@link CompareOperator} applied to the given arguments.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  static boolean evalComparable(Comparator comparator, Comparable arg1, Comparable arg2) {
+  static boolean evalComparable(CompareOperator comparator, Comparable arg1, Comparable arg2) {
 
     Class<?> type1 = arg1.getClass();
     Class<?> type2 = arg2.getClass();
