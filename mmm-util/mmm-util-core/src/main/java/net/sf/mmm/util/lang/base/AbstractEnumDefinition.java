@@ -9,10 +9,10 @@ import net.sf.mmm.util.lang.api.Formatter;
 
 /**
  * This class implements {@link EnumDefinition} for a java {@link Enum}.
- * 
+ *
  * @param <TYPE> is the generic type of the {@link #getEnumType() enum type}.
  * @param <CATEGORY> is the generic type of the {@link #getCategory() category} or {@link Void} for none.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -35,7 +35,7 @@ public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefi
   /**
    * This method is called from the constructor to set the {@link #getValue() value}. By default it returns
    * {@link Class#getName()}. Override to change (e.g. to {@link Class#getSimpleName()}).
-   * 
+   *
    * @param type is the {@link #getEnumType()}.
    * @return the {@link #getValue()} to use.
    */

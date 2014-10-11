@@ -13,7 +13,11 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.lang.api.EnumDefinition;
+import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.base.SimpleEnumProvider;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.api.StringValueConverter;
@@ -38,6 +42,9 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
 
   /** @see #getStringUtil() */
   private StringUtil stringUtil;
+
+  /** @see #getEnumProvider() */
+  private EnumProvider enumProvider;
 
   /**
    * The constructor.
@@ -80,6 +87,11 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
     }
     if (this.stringUtil == null) {
       this.stringUtil = StringUtilImpl.getInstance();
+    }
+    if (this.enumProvider == null) {
+      SimpleEnumProvider impl = new SimpleEnumProvider();
+      impl.initialize();
+      this.enumProvider = impl;
     }
   }
 
@@ -127,6 +139,23 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   }
 
   /**
+   * @return the {@link EnumProvider} used to deal with {@link Enum}s.
+   */
+  protected EnumProvider getEnumProvider() {
+
+    return this.enumProvider;
+  }
+
+  /**
+   * @param enumProvider is the {@link EnumProvider} to {@link Inject}.
+   */
+  @Inject
+  public void setEnumProvider(EnumProvider enumProvider) {
+
+    this.enumProvider = enumProvider;
+  }
+
+  /**
    * This method parses a numeric value.
    *
    * @param numberValue is the number value as string.
@@ -150,7 +179,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @SuppressWarnings({ "unchecked" })
   public final <TARGET> TARGET convertValue(String value, Object valueSource, Class<TARGET> type, Type targetType)
       throws ValueNotSetException, WrongValueTypeException {
 
@@ -160,7 +189,8 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
     Object result;
     try {
       if (type.isEnum()) {
-        result = Enum.valueOf((Class<Enum>) type, value);
+        EnumDefinition<TARGET, ?> enumDefinition = this.enumProvider.getEnumDefinition(type);
+        result = this.enumProvider.getEnumValue(enumDefinition, value, true);
       } else if (type.isAssignableFrom(String.class)) {
         result = value;
       } else if ((type == boolean.class) || (type == Boolean.class)) {
@@ -199,9 +229,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
       } else {
         return convertUnknownValue(value, type, valueSource);
       }
-    } catch (NumberFormatException e) {
-      throw new WrongValueTypeException(e, value, valueSource, type);
-    } catch (ClassNotFoundException e) {
+    } catch (IllegalCaseException | NumberFormatException | ClassNotFoundException e) {
       throw new WrongValueTypeException(e, value, valueSource, type);
     }
     // ATTENTION: cast does NOT work if type is primitive

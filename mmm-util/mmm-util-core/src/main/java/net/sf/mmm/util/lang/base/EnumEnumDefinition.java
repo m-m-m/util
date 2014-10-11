@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,20 +14,22 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumTypeWithCategory;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
+import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
  * This class implements {@link EnumDefinition} for a java {@link Enum}.<br/>
  * <b>ATTENTION:</b><br/>
  * Please only use this class to build an {@link net.sf.mmm.util.lang.api.EnumProvider}. From out-side use
  * {@link net.sf.mmm.util.lang.api.EnumProvider#getEnumDefinition(Class)} instead.
- * 
+ *
  * @param <TYPE> is the generic type of the {@link #getEnumType() enum type}.
  * @param <CATEGORY> is the generic type of the {@link #getCategory() category} or {@link Void} for none.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> extends AbstractEnumDefinition<TYPE, CATEGORY> {
+public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends AbstractEnumDefinition<TYPE, CATEGORY> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = -5796877491769409263L;
@@ -46,41 +49,54 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> extends Abstract
   /** @see #getEnumValues() */
   private List<TYPE> enumValues;
 
+  /** @see EnumDefaultFormatter */
+  private StringUtil stringUtil;
+
   /**
    * The constructor. A potential {@link #getCategory() category} is automatically detected.
-   * 
+   *
    * @param enumType - see {@link #getEnumType()}.
+   * @param stringUtil is the {@link StringUtil} instance to use.
    */
-  public EnumEnumDefinition(Class<TYPE> enumType) {
+  public EnumEnumDefinition(Class<TYPE> enumType, StringUtil stringUtil) {
 
-    this(enumType, new NodeCycle<Class<?>>(enumType), null);
+    this(enumType, new NodeCycle<Class<?>>(enumType), null, stringUtil);
   }
 
   /**
    * The constructor.
-   * 
+   *
    * @param enumType - see {@link #getEnumType()}.
    * @param category is the explicit {@link #getCategory() category} (if not realized by an {@link Enum} or
    *        auto-detection not desired for other reasons).
+   * @param stringUtil is the {@link StringUtil} instance to use.
    */
-  public EnumEnumDefinition(Class<TYPE> enumType, EnumDefinition<CATEGORY, ?> category) {
+  public EnumEnumDefinition(Class<TYPE> enumType, EnumDefinition<CATEGORY, ?> category, StringUtil stringUtil) {
 
-    this(enumType, new NodeCycle<Class<?>>(enumType), category);
+    this(enumType, new NodeCycle<Class<?>>(enumType), category, stringUtil);
   }
 
   /**
    * The constructor.
-   * 
+   *
    * @param enumType - see {@link #getEnumType()}.
    * @param cycle is a {@link NodeCycle} instance to detect cyclic {@link #getCategory() categories}.
    * @param category is the {@link #getCategory() category} or <code>null</code> for auto-detect / none.
+   * @param stringUtil is the {@link StringUtil} instance to use.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  private EnumEnumDefinition(Class<TYPE> enumType, NodeCycle<Class<?>> cycle, EnumDefinition<CATEGORY, ?> category) {
+  private EnumEnumDefinition(Class<TYPE> enumType, NodeCycle<Class<?>> cycle, EnumDefinition<CATEGORY, ?> category,
+      StringUtil stringUtil) {
 
     super();
     this.enumType = enumType;
     this.value = getKey(enumType);
+    this.stringUtil = stringUtil;
+    if (SimpleDatatype.class.isAssignableFrom(enumType)) {
+      setFormatter(new EnumTypeFormatter());
+    } else {
+      setFormatter(new EnumDefaultFormatter());
+    }
     Class<?> categoryType = null;
     Boolean hasCategory = null;
     if (category != null) {
@@ -120,7 +136,7 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> extends Abstract
       if (inverseCycle.contains(categoryType)) {
         throw new NodeCycleException(cycle, EnumTypeWithCategory.class);
       }
-      this.category = new EnumEnumDefinition(categoryType, cycle, null);
+      this.category = new EnumEnumDefinition(categoryType, cycle, null, this.stringUtil);
     } else {
       throw new ObjectMismatchException(categoryType, Enum.class, enumType);
     }
@@ -130,7 +146,7 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> extends Abstract
    * This method is called from the constructor to set the {@link #getValue() value}. By default it returns
    * the {@link Class#getName() qualified name} of {@link #getEnumType()}. Override to change (e.g. to
    * {@link Class#getSimpleName() simple name}).
-   * 
+   *
    * @param type is the {@link #getEnumType()}.
    * @return the {@link #getValue()} to use.
    */
@@ -201,6 +217,60 @@ public class EnumEnumDefinition<TYPE extends Enum<?>, CATEGORY> extends Abstract
   public boolean isCachable() {
 
     return true;
+  }
+
+  /**
+   * The default {@link net.sf.mmm.util.lang.api.Formatter} for {@link Enum}s that implement
+   * {@link SimpleDatatype}.
+   */
+  protected class EnumTypeFormatter extends AbstractFormatter<TYPE> {
+
+    /**
+     * The constructor.
+     */
+    public EnumTypeFormatter() {
+
+      super();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
+
+      SimpleDatatype<?> datatype = (SimpleDatatype<?>) enumValue;
+      Object result = datatype.getValue();
+      if (result == null) {
+        buffer.append(formatNull());
+      } else {
+        buffer.append(result.toString());
+      }
+    }
+  }
+
+  /**
+   * The default {@link net.sf.mmm.util.lang.api.Formatter} for {@link Enum}s.
+   */
+  protected class EnumDefaultFormatter extends AbstractFormatter<TYPE> {
+
+    /**
+     * The constructor.
+     */
+    public EnumDefaultFormatter() {
+
+      super();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
+
+      String result = EnumEnumDefinition.this.stringUtil.toCamlCase(enumValue.name());
+      buffer.append(result);
+    }
   }
 
 }
