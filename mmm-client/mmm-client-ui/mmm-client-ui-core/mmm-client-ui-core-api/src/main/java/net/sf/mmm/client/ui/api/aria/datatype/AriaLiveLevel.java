@@ -2,16 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.client.ui.api.aria.datatype;
 
-import net.sf.mmm.util.lang.api.SimpleDatatype;
+import net.sf.mmm.util.lang.api.EnumType;
 
 /**
  * This enum contains the possible values for
  * {@link net.sf.mmm.client.ui.api.aria.attribute.AttributeReadAriaLive#getLive()}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum AriaLiveLevel implements SimpleDatatype<String> {
+public enum AriaLiveLevel implements EnumType<String> {
 
   /**
    * Indicating that assistive technologies should notify the user immediately. Because an interruption may
@@ -40,7 +40,7 @@ public enum AriaLiveLevel implements SimpleDatatype<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
    */

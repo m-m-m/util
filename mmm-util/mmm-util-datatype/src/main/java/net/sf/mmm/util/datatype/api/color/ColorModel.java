@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.color;
 
-import net.sf.mmm.util.lang.api.SimpleDatatype;
+import net.sf.mmm.util.lang.api.EnumType;
 
 /**
  * This enum contains the available {@link ColorModel}s supported by {@link GenericColor}. Please note that a
@@ -10,11 +10,11 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * {@link ColorModel} and the fourth is {@link Alpha} (opacity). So for each of these {@link ColorModel}s
  * there is a notation with and without {@link Alpha}. E.g. "rgb(255, 255, 255)" is the same as
  * "rgba(255, 255, 255, 1.0)".
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum ColorModel implements SimpleDatatype<String> {
+public enum ColorModel implements EnumType<String> {
 
   /**
    * The indicator for the RGB color model, where RGB stands for the components {@link Red}, {@link Green},
