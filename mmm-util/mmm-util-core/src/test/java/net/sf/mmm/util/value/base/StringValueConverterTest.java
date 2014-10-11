@@ -4,6 +4,7 @@ package net.sf.mmm.util.value.base;
 
 import java.lang.annotation.RetentionPolicy;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 
 import net.sf.mmm.test.ExceptionHelper;
@@ -76,6 +77,19 @@ public class StringValueConverterTest extends Assert {
     assertEquals(value, shortValue);
     Short shortObject = converter.convertValue(valueString, source, Short.class);
     assertEquals(value, shortObject.shortValue());
+  }
+
+  @Test
+  public void testCurrency() {
+
+    // given
+    String source = "test-case";
+    String valueString = "EUR";
+    StringValueConverter converter = getStringValueConverter();
+
+    // then
+    Currency currency = converter.convertValue(valueString, source, Currency.class);
+    assertEquals(Currency.getInstance(valueString), currency);
   }
 
   @Test

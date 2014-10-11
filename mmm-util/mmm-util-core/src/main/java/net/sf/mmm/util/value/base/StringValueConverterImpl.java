@@ -5,6 +5,7 @@ package net.sf.mmm.util.value.base;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Currency;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -226,6 +227,8 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
         } else {
           throw new WrongValueTypeException(value, valueSource, type);
         }
+      } else if (type == Currency.class) {
+        result = Currency.getInstance(value);
       } else {
         return convertUnknownValue(value, type, valueSource);
       }

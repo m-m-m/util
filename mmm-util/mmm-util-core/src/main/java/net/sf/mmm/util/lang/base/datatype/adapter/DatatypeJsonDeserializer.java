@@ -5,6 +5,7 @@ package net.sf.mmm.util.lang.base.datatype.adapter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Currency;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -95,7 +96,7 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
         return null;
       }
     }
-    return getValue(node, type);
+    return getValue(childNode, type);
   }
 
   /**
@@ -169,6 +170,8 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
         if (text.length() == 1) {
           value = Character.valueOf(text.charAt(0));
         }
+      } else if (type == Currency.class) {
+        value = Currency.getInstance(valueNode.asText());
       } else {
         throw new IllegalArgumentException("Unsupported value type " + type.getName());
       }
@@ -230,9 +233,9 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
    * {@inheritDoc}
    */
   @Override
-  public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public T deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 
-    return deserializeGeneric(jp, ctxt, this.datatype, null, null);
+    return deserializeGeneric(parser, context, this.datatype, null, null);
   }
 
 }

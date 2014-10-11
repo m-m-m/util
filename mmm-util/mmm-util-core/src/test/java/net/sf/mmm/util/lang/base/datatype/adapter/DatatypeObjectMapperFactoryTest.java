@@ -3,11 +3,15 @@
 package net.sf.mmm.util.lang.base.datatype.adapter;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Currency;
 
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
+import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.Direction;
 import net.sf.mmm.util.lang.api.Password;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,12 +37,12 @@ public class DatatypeObjectMapperFactoryTest extends Assert {
   }
 
   /**
-   * Test of customized {@link ObjectMapper}.
+   * Test of customized {@link ObjectMapper} for {@link SimpleDatatype}s.
    *
    * @throws IOException if something goes wrong.
    */
   @Test
-  public void testDatatypeJsonSupport() throws IOException {
+  public void testJsonSupportSimpleDatatype() throws IOException {
 
     ObjectMapper mapper = getObjectMapper();
     assertSame(Direction.SOUTH, mapper.readValue("\"S\"", Direction.class));
@@ -49,7 +53,25 @@ public class DatatypeObjectMapperFactoryTest extends Assert {
     String json = '"' + secret + '"';
     assertEquals(password, mapper.readValue(json, Password.class));
     assertEquals(json, mapper.writeValueAsString(password));
+  }
 
+  /**
+   * Test of customized {@link ObjectMapper} for composite {@link Datatype}s.
+   *
+   * @throws IOException if something goes wrong.
+   */
+  @Test
+  public void testJsonSupportCompositeDatatype() throws IOException {
+
+    ObjectMapper mapper = getObjectMapper();
+    String amountString = "42.42";
+    BigDecimal amount = new BigDecimal(amountString);
+    String currencyString = "EUR";
+    Currency currency = Currency.getInstance(currencyString);
+    SampleComposedDatatype datatype = new SampleComposedDatatype(amount, currency);
+    String json = "{\"amount\":" + amountString + ",\"currency\":\"" + currencyString + "\"}";
+    assertEquals(json, mapper.writeValueAsString(datatype));
+    assertEquals(datatype, mapper.readValue(json, SampleComposedDatatype.class));
   }
 
 }
