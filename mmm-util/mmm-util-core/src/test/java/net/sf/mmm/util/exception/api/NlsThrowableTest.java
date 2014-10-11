@@ -15,6 +15,7 @@ import net.sf.mmm.util.session.api.UserSessionAccess;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the test-case for {@link net.sf.mmm.util.exception.api.NlsException}.
@@ -54,6 +55,8 @@ public class NlsThrowableTest extends Assert {
     pw.flush();
     String expected = sw.toString();
     assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
+    LoggerFactory.getLogger(NlsThrowableTest.class).error(
+        "This is a test and should contain the UUID and code of the exception", e);
   }
 
   /**
@@ -103,7 +106,14 @@ public class NlsThrowableTest extends Assert {
   public void testNlsRuntimeException() {
 
     String source = "bad boy";
-    NlsRuntimeException e = new NlsRuntimeException(NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {};
+    NlsRuntimeException e = new NlsRuntimeException(NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {
+
+      @Override
+      public String getCode() {
+
+        return "CustomCode";
+      }
+    };
     String message = "NullPointerException caused by \"" + source + "\"!";
     assertEquals(message, e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
     String messageDe = "NullZeigerAusnahme verursacht durch \"" + source + "\"!";

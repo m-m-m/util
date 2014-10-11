@@ -244,7 +244,15 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   @Override
   public String getMessage() {
 
-    return getNlsMessage().getMessage();
+    StringBuilder buffer = new StringBuilder(getNlsMessage().getMessage());
+    buffer.append(StringUtil.LINE_SEPARATOR);
+    buffer.append(this.uuid);
+    String code = getCode();
+    if (!getClass().getSimpleName().equals(code)) {
+      buffer.append(":");
+      buffer.append(code);
+    }
+    return buffer.toString();
   }
 
   /**
