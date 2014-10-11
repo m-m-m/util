@@ -8,7 +8,7 @@ import java.util.List;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
-import net.sf.mmm.util.lang.api.Comparator;
+import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.lang.api.DatatypeDescriptor;
 import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
 import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
@@ -46,7 +46,7 @@ public class DatatypeDescriptorManagerTest extends Assert {
   }
 
   /**
-   * Test of {@link Comparator} that is an {@link Enum} implementing
+   * Test of {@link CompareOperator} that is an {@link Enum} implementing
    * {@link net.sf.mmm.util.lang.api.SimpleDatatype}.
    */
   @Test
@@ -54,21 +54,21 @@ public class DatatypeDescriptorManagerTest extends Assert {
 
     // given
     DatatypeDescriptorManager manager = getDatatypeDescriptorManager();
-    DatatypeDescriptor<Comparator> descriptor = manager.getDatatypeDescriptor(Comparator.class);
+    DatatypeDescriptor<CompareOperator> descriptor = manager.getDatatypeDescriptor(CompareOperator.class);
     // then
     assertNotNull(descriptor);
     // disassembly
-    List<DatatypeSegmentDescriptor<Comparator, ?>> segments = descriptor.getSegmentDescriptors();
+    List<DatatypeSegmentDescriptor<CompareOperator, ?>> segments = descriptor.getSegmentDescriptors();
     assertEquals(1, segments.size());
-    DatatypeSegmentDescriptor<Comparator, ?> segment = segments.get(0);
-    checkSegment(segment, "value", String.class, false, Comparator.LESS_THAN, "<");
-    assertEquals("<", descriptor.getSegment(Comparator.LESS_THAN, 0));
+    DatatypeSegmentDescriptor<CompareOperator, ?> segment = segments.get(0);
+    checkSegment(segment, "value", String.class, false, CompareOperator.LESS_THAN, "<");
+    assertEquals("<", descriptor.getSegment(CompareOperator.LESS_THAN, 0));
     assertNull(descriptor.getSegment(null, 0));
     // assembly
-    Comparator comparator = descriptor.create("<");
-    assertSame(Comparator.LESS_THAN, comparator);
+    CompareOperator comparator = descriptor.create("<");
+    assertSame(CompareOperator.LESS_THAN, comparator);
     // full cycle
-    for (Comparator c : Comparator.values()) {
+    for (CompareOperator c : CompareOperator.values()) {
       Object value = segment.getSegment(c);
       assertEquals(c.getValue(), value);
       assertSame(c, descriptor.create(value));
