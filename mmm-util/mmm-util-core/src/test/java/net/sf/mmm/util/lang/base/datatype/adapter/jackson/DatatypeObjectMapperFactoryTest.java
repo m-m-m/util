@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.lang.base.datatype.adapter;
+package net.sf.mmm.util.lang.base.datatype.adapter.jackson;
 
 import java.io.IOException;
 import java.lang.annotation.ElementType;
@@ -13,6 +13,7 @@ import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.Direction;
 import net.sf.mmm.util.lang.api.Password;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
+import net.sf.mmm.util.lang.base.datatype.adapter.SampleComposedDatatype;
 import net.sf.mmm.util.lang.base.datatype.adapter.jackson.DatatypeObjectMapperFactory;
 
 import org.junit.Assert;
