@@ -8,7 +8,7 @@
 
   <import resource="classpath:/net/sf/mmm/util/beans-util-core.xml"/>
 
-  <bean id="ObjectMapperFactory" class="net.sf.mmm.util.lang.base.datatype.adapter.DatatypeObjectMapperFactory"/>
+  <bean id="ObjectMapperFactory" class="net.sf.mmm.util.lang.base.datatype.adapter.jackson.DatatypeObjectMapperFactory"/>
   <bean id="ObjectMapper" factory-bean="ObjectMapperFactory" factory-method="create"/>
 
 </beans>
