@@ -200,6 +200,64 @@ public interface StringUtil {
   boolean isEmpty(String string, boolean trim);
 
   /**
+   * Determines if all characters of the given <code>string</code> are in {@link Character#toUpperCase(char)
+   * upper case}.
+   * <table border="1">
+   * <tr>
+   * <th>string</th>
+   * <th>{@link #isAllUpperCase(String) isAllUpperCase}(string)</th>
+   * </tr>
+   * <tr>
+   * <td>UPPER_CASE</td>
+   * <td>true</td>
+   * </tr>
+   * <tr>
+   * <td>lower_case</td>
+   * <td>false</td>
+   * </tr>
+   * <tr>
+   * <td>CamlCase</td>
+   * <td>false</td>
+   * </tr>
+   * </table>
+   *
+   * @param string the {@link String} to check.
+   * @return <code>true</code> if all characters are in {@link Character#toUpperCase(char) upper case},
+   *         <code>false</code> otherwise.
+   * @since 6.0.0
+   */
+  boolean isAllUpperCase(String string);
+
+  /**
+   * Determines if all characters of the given <code>string</code> are in {@link Character#toLowerCase(char)
+   * lower case}.
+   * <table border="1">
+   * <tr>
+   * <th>string</th>
+   * <th>{@link #isAllLowerCase(String) isAllLowerCase}(string)</th>
+   * </tr>
+   * <tr>
+   * <td>UPPER_CASE</td>
+   * <td>false</td>
+   * </tr>
+   * <tr>
+   * <td>lower_case</td>
+   * <td>true</td>
+   * </tr>
+   * <tr>
+   * <td>CamlCase</td>
+   * <td>false</td>
+   * </tr>
+   * </table>
+   *
+   * @param string the {@link String} to check.
+   * @return <code>true</code> if all characters are in {@link Character#toLowerCase(char) lower case},
+   *         <code>false</code> otherwise.
+   * @since 6.0.0
+   */
+  boolean isAllLowerCase(String string);
+
+  /**
    * This method formats a positive number to a string with at least the given number of digits padding it
    * with leading zeros.<br>
    * Examples:

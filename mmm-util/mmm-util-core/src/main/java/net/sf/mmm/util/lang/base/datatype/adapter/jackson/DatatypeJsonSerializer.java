@@ -86,7 +86,6 @@ public class DatatypeJsonSerializer<T> extends JsonSerializer<T> {
       jgen.writeObject(value);
     } else if (segmentCount == 1) {
       Object segment = descriptor.getSegment(value, 0);
-      // TODO: avoid infinity loop?
       serializeGeneric(segment, jgen, provider);
     } else {
       jgen.writeStartObject();

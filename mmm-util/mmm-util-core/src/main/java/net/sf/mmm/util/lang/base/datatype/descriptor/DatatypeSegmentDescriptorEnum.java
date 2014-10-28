@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base.datatype.descriptor;
 
+import java.util.Locale;
+
 import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
@@ -36,7 +38,12 @@ public class DatatypeSegmentDescriptorEnum<T extends Enum<T>> extends AbstractDa
   @Override
   protected String doGetSegment(T datatype) {
 
-    return this.stringUtil.toCamlCase(datatype.name());
+    String name = datatype.name();
+    if (this.stringUtil.isAllUpperCase(name)) {
+      name = name.charAt(0) + name.substring(1).toLowerCase(Locale.US);
+      name = this.stringUtil.toCamlCase(name);
+    }
+    return name;
   }
 
 }

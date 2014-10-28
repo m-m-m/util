@@ -27,9 +27,9 @@ import net.sf.mmm.util.value.base.ValueConverterIdentity;
 
 /**
  * This is the implementation of {@link StringUtil}.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -55,7 +55,7 @@ public class StringUtilImpl implements StringUtil {
    * This method gets the singleton instance of this {@link StringUtilImpl}.<br/>
    * <b>ATTENTION:</b><br/>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static StringUtil getInstance() {
@@ -255,6 +255,38 @@ public class StringUtilImpl implements StringUtil {
       s = string;
     }
     return (s.length() == 0);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isAllLowerCase(String string) {
+
+    if (string != null) {
+      for (char c : string.toCharArray()) {
+        if (Character.toLowerCase(c) != c) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isAllUpperCase(String string) {
+
+    if (string != null) {
+      for (char c : string.toCharArray()) {
+        if (Character.toUpperCase(c) != c) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   /**

@@ -14,7 +14,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link StringUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -33,7 +33,7 @@ public class StringUtilTest extends Assert {
   }
 
   @Test
-  public void testEmpty() {
+  public void testIsEmpty() {
 
     assertTrue(getStringUtil().isEmpty(null));
     assertTrue(getStringUtil().isEmpty(""));
@@ -45,6 +45,28 @@ public class StringUtilTest extends Assert {
     assertFalse(getStringUtil().isEmpty("a"));
     assertFalse(getStringUtil().isEmpty(" a "));
     assertFalse(getStringUtil().isEmpty(" ", false));
+  }
+
+  /**
+   * Test of {@link StringUtil#isAllUpperCase(String)}
+   */
+  @Test
+  public void testIsAllUpperCase() {
+
+    assertTrue(getStringUtil().isAllUpperCase("UPPER_CASE"));
+    assertFalse(getStringUtil().isAllUpperCase("lower_case"));
+    assertFalse(getStringUtil().isAllUpperCase("CamlCase"));
+  }
+
+  /**
+   * Test of {@link StringUtil#isAllLowerCase(String)}
+   */
+  @Test
+  public void testIsAllLowerCase() {
+
+    assertFalse(getStringUtil().isAllLowerCase("UPPER_CASE"));
+    assertTrue(getStringUtil().isAllLowerCase("lower_case"));
+    assertFalse(getStringUtil().isAllLowerCase("CamlCase"));
   }
 
   @Test

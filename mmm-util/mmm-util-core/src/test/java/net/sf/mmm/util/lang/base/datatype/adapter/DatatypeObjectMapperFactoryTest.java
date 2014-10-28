@@ -3,6 +3,7 @@
 package net.sf.mmm.util.lang.base.datatype.adapter;
 
 import java.io.IOException;
+import java.lang.annotation.ElementType;
 import java.math.BigDecimal;
 import java.util.Currency;
 
@@ -54,6 +55,20 @@ public class DatatypeObjectMapperFactoryTest extends Assert {
     String json = '"' + secret + '"';
     assertEquals(password, mapper.readValue(json, Password.class));
     assertEquals(json, mapper.writeValueAsString(password));
+  }
+
+  /**
+   * Test of customized {@link ObjectMapper} for standard {@link Enum} (that does not implement
+   * {@link SimpleDatatype}).
+   *
+   * @throws IOException if something goes wrong.
+   */
+  @Test
+  public void testJsonSupportStandardEnum() throws IOException {
+
+    ObjectMapper mapper = getObjectMapper();
+    assertSame(ElementType.ANNOTATION_TYPE, mapper.readValue("\"AnnotationType\"", ElementType.class));
+    assertEquals("\"LocalVariable\"", mapper.writeValueAsString(ElementType.LOCAL_VARIABLE));
   }
 
   /**
