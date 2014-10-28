@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.lang.base.datatype.adapter;
+package net.sf.mmm.util.lang.base.datatype.adapter.hibernate;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -26,11 +26,11 @@ import org.hibernate.engine.spi.SessionImplementor;
 /**
  * This is the abstract base implementation of {@link org.hibernate.usertype.UserType} to map a custom
  * {@link SimpleDatatype}.
- * 
+ *
  * @param <V> the generic for the basic java type representing the {@link SimpleDatatype#getValue() value}.
  * @param <T> the generic for the adapted {@link SimpleDatatype}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 0.9.0
+ * @since 6.0.0
  */
 public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUserType<T> {
 
@@ -42,7 +42,7 @@ public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUs
 
   /**
    * The constructor.
-   * 
+   *
    * @param sqlType is the {@link #sqlTypes() SQL type} used to store the adapted {@link SimpleDatatype}.
    * @param datatype is the {@link #returnedClass() java class} representing the adapted
    *        {@link SimpleDatatype}.
@@ -80,7 +80,7 @@ public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUs
 
   /**
    * This method injects the {@link MathUtil}.
-   * 
+   *
    * @param mathUtil is the {@link MathUtil} instance.
    */
   @Inject
@@ -93,7 +93,7 @@ public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUs
   /**
    * This method gets the {@link Class} reflecting the {@link SimpleDatatype#getValue() basic java value} of
    * the adapted {@link SimpleDatatype}.
-   * 
+   *
    * @return the value class.
    */
   protected final Class<V> getValueClass() {
@@ -104,7 +104,7 @@ public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUs
   /**
    * This method converts the given <code>value</code> from {@link Object} to the {@link #getValueClass()
    * value class}.
-   * 
+   *
    * @param value is the value as retrieved from hibernate.
    * @return the value cast or converted to the {@link #getValueClass() value class}.
    */
@@ -125,7 +125,7 @@ public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUs
 
   /**
    * This method converts the value given as <code>value</code> to the custom {@link SimpleDatatype}.
-   * 
+   *
    * @param value is the basic java type representing the {@link SimpleDatatype}.
    * @return the converted {@link SimpleDatatype}.
    */
@@ -185,7 +185,7 @@ public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUs
   /**
    * This method converts the given {@link SimpleDatatype} <code>value</code> to the according
    * {@link #sqlTypes() SQL type}.
-   * 
+   *
    * @param value is the {@link SimpleDatatype} instance to convert.
    * @return the given <code>value</code> as {@link #sqlTypes() SQL type}.
    */

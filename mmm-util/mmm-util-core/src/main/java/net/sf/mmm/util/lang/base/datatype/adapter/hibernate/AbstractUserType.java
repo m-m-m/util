@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.lang.base.datatype.adapter;
+package net.sf.mmm.util.lang.base.datatype.adapter.hibernate;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
@@ -16,12 +16,12 @@ import org.slf4j.Logger;
 
 /**
  * This is the abstract base implementation of {@link UserType}.
- * 
+ *
  * @see org.hibernate.annotations.Type
- * 
+ *
  * @param <T> the generic for the adapted datatype.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 0.9.0
+ * @since 6.0.0
  */
 public abstract class AbstractUserType<T> extends AbstractLoggableComponent implements UserType {
 
@@ -33,7 +33,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
 
   /**
    * The constructor.
-   * 
+   *
    * @param sqlType is the {@link #sqlTypes() SQL type} used to store the adapted datatype.
    * @param javaType is the {@link #returnedClass() java class} representing the adapted datatype.
    */

@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.lang.base.datatype.adapter;
+package net.sf.mmm.util.lang.base.datatype.adapter.jackson;
 
 import javax.inject.Inject;
 
@@ -14,7 +14,6 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.module.SimpleDeserializers;
-import com.google.gwt.i18n.server.Type.EnumType;
 
 /**
  * This class extends {@link SimpleDeserializers} in order to create a {@link DatatypeJsonDeserializer}
@@ -52,8 +51,6 @@ public class DatatypeJsonDeserializers extends SimpleDeserializers {
   public void setDatatypeDescriptorManager(DatatypeDescriptorManager datatypeDescriptorManager) {
 
     this.datatypeDescriptorManager = datatypeDescriptorManager;
-    EnumJsonDeserializer enumDeserializer = new EnumJsonDeserializer(this.datatypeDescriptorManager, this.enumProvider);
-    addDeserializer(Enum.class, enumDeserializer);
   }
 
   /**
@@ -77,6 +74,16 @@ public class DatatypeJsonDeserializers extends SimpleDeserializers {
   /**
    * {@inheritDoc}
    */
+  @Override
+  public JsonDeserializer<?> findEnumDeserializer(Class<?> type, DeserializationConfig config, BeanDescription beanDesc)
+      throws JsonMappingException {
+
+    return new EnumTypeJsonDeserializer<>(type, this.enumProvider);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   @SuppressWarnings("unchecked")
   @Override
   public JsonDeserializer<?> findBeanDeserializer(JavaType type, DeserializationConfig config, BeanDescription beanDesc)
@@ -87,9 +94,7 @@ public class DatatypeJsonDeserializers extends SimpleDeserializers {
       @SuppressWarnings("rawtypes")
       Class datatype = type.getRawClass();
       if (this.datatypeDetector.isDatatype(datatype)) {
-        if ((datatype.isEnum() || EnumType.class.isAssignableFrom(datatype))) {
-          deserializer = new EnumTypeJsonDeserializer<>(datatype, this.enumProvider);
-        } else {
+        if (!this.datatypeDetector.isJavaStandardDatatype(datatype)) {
           // construction is cheap, addDeserializer uses a Map that is not thread-safe...
           deserializer = new DatatypeJsonDeserializer<>(datatype, this.datatypeDescriptorManager);
         }

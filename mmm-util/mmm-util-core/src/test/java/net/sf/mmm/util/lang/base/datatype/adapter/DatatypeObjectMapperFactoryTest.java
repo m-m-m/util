@@ -12,6 +12,7 @@ import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.Direction;
 import net.sf.mmm.util.lang.api.Password;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
+import net.sf.mmm.util.lang.base.datatype.adapter.jackson.DatatypeObjectMapperFactory;
 
 import org.junit.Assert;
 import org.junit.Test;
