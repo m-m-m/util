@@ -24,7 +24,7 @@ public class IntegerDatatypeUserType<T extends SimpleDatatype<Integer>> extends 
    */
   public IntegerDatatypeUserType(Class<T> datatype) {
 
-    super(Types.NUMERIC, datatype, Integer.class);
+    super(Types.INTEGER, datatype, Integer.class);
   }
 
 }

@@ -3,8 +3,14 @@
 package net.sf.mmm.util.lang.base.datatype.adapter.hibernate;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.sql.Types;
+import java.util.Date;
 
 import net.sf.mmm.util.component.api.NotInitializedException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -153,6 +159,57 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
   public Object replace(Object original, Object target, Object owner) throws HibernateException {
 
     return original;
+  }
+
+  /**
+   * Gets the corresponding {@link Types sql type} for the given java {@link Class}.
+   *
+   * @param standardDatatype a {@link Class} reflecting a
+   *        {@link net.sf.mmm.util.lang.api.DatatypeDetector#isJavaStandardDatatype(Class) standard java}
+   *        datatype (or anything else).
+   * @return the {@link Types sql type} corresponding to the given {@link Class} or <code>null</code> if the
+   *         type is no {@link net.sf.mmm.util.lang.api.DatatypeDetector#isJavaStandardDatatype(Class)
+   *         standard java}.
+   */
+  public static Integer getSqlType(Class<?> standardDatatype) {
+
+    int result;
+    if (standardDatatype == String.class) {
+      result = Types.VARCHAR;
+    } else if ((standardDatatype == Integer.class) || (standardDatatype == int.class)) {
+      result = Types.INTEGER;
+    } else if ((standardDatatype == Long.class) || (standardDatatype == long.class)) {
+      result = Types.BIGINT;
+    } else if ((standardDatatype == Boolean.class) || (standardDatatype == boolean.class)) {
+      result = Types.BOOLEAN;
+    } else if ((standardDatatype == Double.class) || (standardDatatype == double.class)) {
+      result = Types.DOUBLE;
+    } else if ((standardDatatype == Float.class) || (standardDatatype == float.class)) {
+      result = Types.REAL; // not Types.FLOAT !
+    } else if ((standardDatatype == Short.class) || (standardDatatype == short.class)) {
+      result = Types.SMALLINT;
+    } else if ((standardDatatype == Byte.class) || (standardDatatype == byte.class)) {
+      // TINYINT is unsigned [0..255] and cannot represent negative values as byte is signed [-128,172]
+      // result = Types.SMALLINT;
+      result = Types.TINYINT;
+    } else if (standardDatatype == BigDecimal.class) {
+      result = Types.DECIMAL;
+    } else if (standardDatatype == BigInteger.class) {
+      result = Types.BIGINT;
+    } else if (standardDatatype == Timestamp.class) {
+      result = Types.TIMESTAMP;
+    } else if (standardDatatype == Time.class) {
+      result = Types.TIME;
+    } else if (standardDatatype == Date.class) {
+      result = Types.DATE;
+    } else if (standardDatatype == java.sql.Date.class) {
+      result = Types.DATE;
+    } else if ((standardDatatype == Character.class) || (standardDatatype == char.class)) {
+      result = Types.CHAR;
+    } else {
+      return null;
+    }
+    return Integer.valueOf(result);
   }
 
 }

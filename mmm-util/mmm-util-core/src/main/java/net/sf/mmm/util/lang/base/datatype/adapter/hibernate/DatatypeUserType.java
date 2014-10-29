@@ -12,6 +12,8 @@ import javax.inject.Inject;
 
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.lang.api.DatatypeDescriptor;
+import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
@@ -206,7 +208,29 @@ public class DatatypeUserType<V, T extends SimpleDatatype<V>> extends AbstractUs
     } else {
       st.setObject(index, toSqlType((T) value));
     }
+  }
 
+  /**
+   * Creates the a new instance of {@link DatatypeUserType} for the given <code>datatype</code>.
+   *
+   * @param <V> is the generic type of the {@link SimpleDatatype#getValue() value}.
+   * @param <T> is the generic type of the <code>datatype</code>.
+   * @param datatype the {@link Class} reflecting the {@link SimpleDatatype}.
+   * @param datatypeDescriptorManager the {@link DatatypeDescriptorManager} used to analyze the datatype.
+   * @return the {@link DatatypeUserType} instance.
+   */
+  public static <V, T extends SimpleDatatype<V>> DatatypeUserType<V, T> create(Class<T> datatype,
+      DatatypeDescriptorManager datatypeDescriptorManager) {
+
+    DatatypeDescriptor<T> datatypeDescriptor = datatypeDescriptorManager.getDatatypeDescriptor(datatype);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    Class<V> valueClass = (Class) datatypeDescriptor.getSegmentDescriptors().get(0).getType();
+    Integer sqlType = getSqlType(valueClass);
+    if (sqlType == null) {
+      // could work recursive to prevent this...
+      throw new IllegalArgumentException("Unsupported value type: " + valueClass);
+    }
+    return new DatatypeUserType<>(sqlType.intValue(), datatype, valueClass);
   }
 
 }
