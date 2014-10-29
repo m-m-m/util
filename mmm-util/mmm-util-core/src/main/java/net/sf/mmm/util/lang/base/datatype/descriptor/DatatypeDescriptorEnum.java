@@ -28,7 +28,7 @@ public class DatatypeDescriptorEnum<T extends Enum<T>> extends AbstractDatatypeD
   public DatatypeDescriptorEnum(Class<T> datatype, StringUtil stringUtil) {
 
     super(datatype, new DatatypeSegmentDescriptorEnum<T>("name", stringUtil));
-    assert !(datatype.isEnum());
+    assert (datatype.isEnum());
     this.stringUtil = stringUtil;
   }
 
