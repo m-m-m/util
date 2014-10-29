@@ -23,7 +23,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * reading. If one of the underlying {@link ByteArrayBufferImpl buffers} has been read to the
  * {@link ByteArrayBufferImpl#getMaximumIndex() end} this class steps to the next one in a rotating way until
  * the last buffer has been reached, that contains data that has NOT been read before. Further this class
- * allows to be {@link #fill(InputStream) (re)filled}.<br>
+ * allows to be {@link #fill(InputStream) (re)filled}. <br>
  * <b>NOTE:</b><br>
  * This class is NOT public visible, because further releases might break it's compatibility. Feel free to
  * review and give feedback on the mailing list if you want to use it directly.

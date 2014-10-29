@@ -11,7 +11,7 @@ import net.sf.mmm.util.io.api.ByteProcessor;
 /**
  * This class is a <code>byte</code>-Buffer that represents the concatenation of multiple
  * {@link ByteArrayBufferImpl}s. The resulting {@link LookaheadByteArrayBufferBuffer} has its own state and
- * does NOT modify a contained {@link ByteArrayBufferImpl}.<br>
+ * does NOT modify a contained {@link ByteArrayBufferImpl}. <br>
  * <b>ATTENTION:</b><br>
  * This class is NOT intended to be exposed. It should only be used internally by some class or component.
  * 

@@ -23,7 +23,7 @@ public interface RevisionedDao<ID, ENTITY extends RevisionedEntity<ID>> extends 
   /**
    * This method will get the {@link List} of historic {@link RevisionedEntity#getRevision() revisions} before
    * the given <code>entity</code>. If the given <code>entity</code> is the
-   * {@link RevisionedEntity#LATEST_REVISION latest revision} ...<br>
+   * {@link RevisionedEntity#LATEST_REVISION latest revision} ... <br>
    * If the <code>entity</code> is NOT revision controlled, an {@link java.util.Collections#emptyList() empty
    * list} is returned.
    *
@@ -45,10 +45,10 @@ public interface RevisionedDao<ID, ENTITY extends RevisionedEntity<ID>> extends 
 
   /**
    * This method loads a historic {@link RevisionedEntity#getRevision() revision} of the
-   * {@link RevisionedEntity} with the given <code>id</code> from the persistent store.<br>
+   * {@link RevisionedEntity} with the given <code>id</code> from the persistent store. <br>
    * However if the given <code>revision</code> is {@link RevisionedEntity#LATEST_REVISION} the
-   * {@link #find(Object) latest revision will be loaded}.<br>
-   * <b>ATTENTION:</b><br/>
+   * {@link #find(Object) latest revision will be loaded}. <br>
+   * <b>ATTENTION:</b><br>
    * You should not make assumptions about the <code>revision</code> numbering of the underlying
    * implementation. Please use {@link #getRevisionHistory(RevisionedEntity)} or
    * {@link #getRevisionHistoryMetadata(Object)} to find revision numbers.
@@ -75,7 +75,7 @@ public interface RevisionedDao<ID, ENTITY extends RevisionedEntity<ID>> extends 
   /**
    * {@inheritDoc}
    *
-   * The behavior of this method depends on the revision-control strategy of the implementation.<br>
+   * The behavior of this method depends on the revision-control strategy of the implementation. <br>
    * <ul>
    * <li>In case of an <em>audit-proof revision-history</em> the deletion of the
    * {@link RevisionedEntity#LATEST_REVISION latest revision} of an entity will only move it to the history

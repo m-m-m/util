@@ -135,7 +135,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method sets the {@link #getDefaultExtension() default extension}.<br>
+   * This method sets the {@link #getDefaultExtension() default extension}. <br>
    * <b>ATTENTION:</b><br>
    * You should also {@link #addExtension(String) add} the
    * <code>defaultExtension</code> to the {@link #getExtensions() extensions}.

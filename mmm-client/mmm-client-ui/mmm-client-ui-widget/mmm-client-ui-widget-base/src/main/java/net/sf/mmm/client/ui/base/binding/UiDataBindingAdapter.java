@@ -8,8 +8,8 @@ import net.sf.mmm.util.value.api.Range;
 
 /**
  * This is the interface for an adapter that keeps reflective operations out of the implementation of
- * {@link net.sf.mmm.client.ui.base.binding.UiDataBinding}.<br/>
- * <b>ATTENTION:</b><br/>
+ * {@link net.sf.mmm.client.ui.base.binding.UiDataBinding}. <br>
+ * <b>ATTENTION:</b><br>
  * This is just a simple abstraction of reflective introspection solutions such as
  * {@link net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder}. However, we want to be
  * the minimum needed so users can replace reflective approaches with generated code or the like. Please note
@@ -92,7 +92,7 @@ public interface UiDataBindingAdapter<VALUE> {
   <T> T getPropertyValue(VALUE pojo, TypedProperty<T> property);
 
   /**
-   * This method gets the value of the specified property.<br/>
+   * This method gets the value of the specified property. <br>
    * E.g. <code>getPropertyValue(pojo, "foo")</code> is supposed to return <code>pojo.getFoo()</code>.
    * 
    * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} owning the property.
@@ -115,7 +115,7 @@ public interface UiDataBindingAdapter<VALUE> {
   <T> void setPropertyValue(VALUE pojo, TypedProperty<T> property, T propertyValue);
 
   /**
-   * This method sets the value of the specified property.<br/>
+   * This method sets the value of the specified property. <br>
    * E.g. <code>setPropertyValue(pojo, "foo", value)</code> is supposed to do <code>pojo.setFoo(value)</code>.
    * 
    * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} owning the property.

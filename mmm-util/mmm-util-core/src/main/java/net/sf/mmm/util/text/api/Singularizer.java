@@ -21,7 +21,7 @@ public interface Singularizer extends Transformer<String> {
 
   /**
    * This method gets the singular form of the given term (some word) <code>pluralForm</code> that is
-   * (potentially) in plural form. Additionally it preserves the case of the term.<br>
+   * (potentially) in plural form. Additionally it preserves the case of the term. <br>
    * The following table illustrates some examples how an implementation for English language could behave:<br>
    * <table border="1">
    * <tr>

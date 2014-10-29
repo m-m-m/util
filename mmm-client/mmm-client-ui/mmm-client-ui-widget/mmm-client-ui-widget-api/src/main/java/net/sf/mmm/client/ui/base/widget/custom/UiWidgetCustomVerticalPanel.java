@@ -7,8 +7,8 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetVerticalPanel;
 
 /**
  * This is the base class for a generic {@link UiWidgetCustomPanel custom panel widget} using a
- * {@link UiWidgetVerticalPanel} as {@link #getDelegate() delegate}.<br/>
- * <b>ATTENTION:</b><br/>
+ * {@link UiWidgetVerticalPanel} as {@link #getDelegate() delegate}. <br>
+ * <b>ATTENTION:</b><br>
  * This widget has no value and should only be used for (re-usable) generic layouts.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

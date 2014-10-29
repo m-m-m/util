@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for transaction support.
- * <a name="documentation"/><h2>Transaction API</h2> 
+ * <a name="documentation"></a><h2>Transaction API</h2> 
  * This package contains the API for transaction support. For scenarios where
  * AOP is not an option (for what ever reason) <code>mmm-transaction</code>
  * supports simple and effective transaction management and prevents you from
- * doing typical mistakes when dealing with transactions.<br/>
+ * doing typical mistakes when dealing with transactions. <br>
  * The main component offered by this API is 
  * {@link net.sf.mmm.transaction.api.TransactionExecutor} that allows to perform
  * arbitrary code within a transaction. Use this at the entry points to your
@@ -20,7 +20,7 @@
  * details of transaction handling. Additionally, 
  * {@link net.sf.mmm.transaction.api.TransactionExecutor} allows to register
  * an {@link net.sf.mmm.transaction.api.TransactionEventListener} to add custom
- * logic to the transaction management.<br/>
+ * logic to the transaction management. <br>
  * This API abstracts from any underlying transaction management framework (JTA,
  * spring-transaction) and allows to choose it by adding the right 
  * implementation of this API to your classpath.

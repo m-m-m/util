@@ -10,7 +10,7 @@ import net.sf.mmm.util.context.api.GenericContext;
 
 /**
  * This is the interface for a parser that {@link #parse(InputStream, long)
- * extracts} (meta-)data from the content of an {@link InputStream}.<br>
+ * extracts} (meta-)data from the content of an {@link InputStream}. <br>
  * <b>ATTENTION:</b><br>
  * The implementation should allocate expensive resources (e.g. byte-arrays)
  * only temporary while {@link #parse(InputStream, long) parsing}. See also
@@ -24,7 +24,7 @@ public interface ContentParser {
   /**
    * This is the name of the {@link GenericContext#getVariable(String, Class)
    * variable} with the plain <code>text</code> of the content from the
-   * {@link #parse(InputStream, long) parsed} {@link GenericContext}.<br>
+   * {@link #parse(InputStream, long) parsed} {@link GenericContext}. <br>
    * This variable has the type {@link String} and should always be set (not
    * <code>null</code>).
    */
@@ -33,7 +33,7 @@ public interface ContentParser {
   /**
    * This is the name of the {@link GenericContext#getVariable(String, Class)
    * variable} with the <code>title</code> of the content from the
-   * {@link #parse(InputStream, long) parsed} {@link GenericContext}.<br>
+   * {@link #parse(InputStream, long) parsed} {@link GenericContext}. <br>
    * It has the type {@link String} and is optional (may be <code>null</code>).
    */
   String VARIABLE_NAME_TITLE = "title";
@@ -41,7 +41,7 @@ public interface ContentParser {
   /**
    * This is the name of the {@link GenericContext#getVariable(String, Class)
    * variable} with the <code>keywords</code> (also called tags) of the content
-   * from the {@link #parse(InputStream, long) parsed} {@link GenericContext}.<br>
+   * from the {@link #parse(InputStream, long) parsed} {@link GenericContext}. <br>
    * It has the type {@link String} and is optional (may be <code>null</code>).
    */
   String VARIABLE_NAME_KEYWORDS = "keywords";
@@ -50,7 +50,7 @@ public interface ContentParser {
    * This is the name of the {@link GenericContext#getVariable(String, Class)
    * variable} with the <code>creator</code> (also called author, artist,
    * composer, etc.) of the content from the {@link #parse(InputStream, long)
-   * parsed} {@link GenericContext}.<br>
+   * parsed} {@link GenericContext}. <br>
    * It has the type {@link String} and is optional (may be <code>null</code>).
    */
   String VARIABLE_NAME_CREATOR = "creator";
@@ -58,7 +58,7 @@ public interface ContentParser {
   /**
    * This is the name of the {@link GenericContext#getVariable(String, Class)
    * variable} with the <code>language</code> of the content from the
-   * {@link #parse(InputStream, long) parsed} {@link GenericContext}.<br>
+   * {@link #parse(InputStream, long) parsed} {@link GenericContext}. <br>
    * It has the type {@link String} and is optional (may be <code>null</code>).
    */
   String VARIABLE_NAME_LANGUAGE = "language";
@@ -152,8 +152,8 @@ public interface ContentParser {
    * {@link net.sf.mmm.content.parser.api.ContentParserService#getParser(String)
    * keys} used to register this {@link ContentParser}. This set contains
    * {@link #getExtension() extension} and {@link #getMimetype() mimetype} and
-   * maybe other alternatives.<br/>
-   * Examples:<br/>
+   * maybe other alternatives. <br>
+   * Examples:<br>
    * <ul>
    * <li>An HTML-parser will return "html" for {@link #getExtension()} but can
    * also include "htm" as {@link #getPrimaryKeys() primary key}.</li>
@@ -178,8 +178,8 @@ public interface ContentParser {
    * keys} used to register this {@link ContentParser}. If an other (more
    * specific) {@link ContentParser} defines such key as
    * {@link #getPrimaryKeys() primary key}, that {@link ContentParser} is chosen
-   * first. Otherwise this implementation will be used.<br/>
-   * Examples:<br/>
+   * first. Otherwise this implementation will be used. <br>
+   * Examples:<br>
    * <ul>
    * <li>An HTML-parser will return "html" for {@link #getExtension()} but can
    * define "xhtml" and "application/xhtml+xml" as {@link #getSecondaryKeys()

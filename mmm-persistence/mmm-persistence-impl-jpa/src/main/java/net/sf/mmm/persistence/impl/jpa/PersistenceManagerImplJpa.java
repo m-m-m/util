@@ -21,8 +21,8 @@ import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.base.DefaultPojoFactory;
 
 /**
- * This is the default implementation of the {@link net.sf.mmm.persistence.api.PersistenceManager} interface.<br/>
- * <b>ATTENTION:</b><br/>
+ * This is the default implementation of the {@link net.sf.mmm.persistence.api.PersistenceManager} interface. <br>
+ * <b>ATTENTION:</b><br>
  * This class assumes that you have at least one custom implementation of {@link GenericDao} that gets injected to
  * {@link #setManagers(List)}.
  * 

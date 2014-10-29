@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the API for an application client.
- * <a name="documentation"/><h2>Client API</h2> 
+ * <a name="documentation"></a><h2>Client API</h2> 
  * This package and its sub-packages contain the API for an application client. It provides central infrastructure for 
  * cross-toolkit client components. See {@link net.sf.mmm.client.api.ClientComponents}.
  */

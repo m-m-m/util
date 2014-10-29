@@ -127,7 +127,7 @@ public abstract class AbstractClassHierarchyMap<E> {
   }
 
   /**
-   * This method determines whether the given <code>type</code> is accepted in the hierarchy.<br>
+   * This method determines whether the given <code>type</code> is accepted in the hierarchy. <br>
    * This implementation accepts any type. Override this method to ignore specific types (e.g.
    * {@link net.sf.mmm.util.reflect.api.ReflectionUtil#isMarkerInterface(Class) marker-interfaces}).
    * 

@@ -12,8 +12,8 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeWriteValidationFailure extends AttributeReadValidationFailure {
 
   /**
-   * This method sets the {@link #getValidationFailure() validation failure}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getValidationFailure() validation failure}. <br>
+   * <b>ATTENTION:</b><br>
    * For regular usage you should use {@link net.sf.mmm.client.ui.api.feature.UiFeatureValidation}. This
    * method is only intended as back-door for very special cases (e.g. you have to use your own validator
    * infrastructure and perform validation outside this framework). It is not recommended to use this method

@@ -10,7 +10,7 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
  * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to an array.<br>
+ * an {@link Object} to an array. <br>
  * Java has a string type-system and arrays of primitive types (int[], etc.) can therefore NOT be casted to
  * Object[]. However Object is NOT specific enough so we need to supply multiple
  * {@link net.sf.mmm.util.value.api.ValueConverter}

@@ -445,8 +445,8 @@ public abstract class AbstractUiWidgetAbstractDataTable<ADAPTER extends UiWidget
   }
 
   /**
-   * Sets the column that is currently under the dragged column. <br/>
-   * <b>Note:</b><br/>
+   * Sets the column that is currently under the dragged column. <br>
+   * <b>Note:</b><br>
    * For simplicity we ignore the generics here and do not require {@literal <ROW>} what would actually be
    * required for correctness.
    *

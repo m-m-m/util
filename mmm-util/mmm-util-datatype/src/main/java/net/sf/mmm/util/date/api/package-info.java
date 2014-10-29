@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for utilities that help to deal with date and time.
- * <a name="documentation"/><h2>Date-Util API</h2>
+ * <a name="documentation"></a><h2>Date-Util API</h2>
  * This package contains the API for utilities that help to deal with date and
  * time.
  * For regular representation of date there are the common java datatypes

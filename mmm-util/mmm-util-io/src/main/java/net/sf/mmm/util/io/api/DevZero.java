@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 /**
  * This is an implementation of <code>/dev/zero</code> as {@link InputStream}. In other words the
- * {@link DevZero} is a dummy {@link InputStream} that produces infinite zeros.<br>
+ * {@link DevZero} is a dummy {@link InputStream} that produces infinite zeros. <br>
  * <b>ATTENTION:</b><br>
  * Please be careful NOT to cause infinity loops when using this class!
  * 

@@ -9,7 +9,7 @@ import net.sf.mmm.util.filter.api.Filter;
 /**
  * This is an implementation of an {@link Iterator} that adapts another {@link Iterator} but only
  * {@link #next() iterates} the elements that are {@link Filter#accept(Object) accepted} by a given
- * {@link Filter}.<br/>
+ * {@link Filter}. <br>
  * <b>ATTENTION:</b><br>
  * According to the design of the {@link Iterator} interface, it is NOT possible to implement the
  * {@link #remove()} method properly here. The method {@link #hasNext()} has to step forward in the adapted

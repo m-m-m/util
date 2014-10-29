@@ -18,9 +18,9 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface PojoPathNamedFunction<IN, VALUE> extends PojoPathFunction<IN, VALUE> {
 
   /**
-   * This method gets the name of this function.<br/>
-   * <b>ATTENTION:</b><br/>
-   * The name has to be unique for all functions registered to a {@link PojoPathNavigator} implementation.<br/>
+   * This method gets the name of this function. <br>
+   * <b>ATTENTION:</b><br>
+   * The name has to be unique for all functions registered to a {@link PojoPathNavigator} implementation. <br>
    * E.g. if the name is "foo", then the function can be invoked via "@foo" as {@link PojoPath#getSegment()
    * segment}.
    * 

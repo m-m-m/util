@@ -16,7 +16,7 @@ import net.sf.mmm.util.lang.api.EqualsChecker;
  * For objects of other types it will delegate to the {@link EqualsChecker} given at construction. This way
  * you can simply check if two {@link Collection}s have the
  * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame same} or
- * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual equal} elements.<br/>
+ * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual equal} elements. <br>
  * In case you want to ignore the type of the collection (e.g. allow {@link java.util.List} and
  * {@link java.util.Set} or only different implementations of {@link java.util.List} with same elements to be
  * considered as equal) you can extend this class and override

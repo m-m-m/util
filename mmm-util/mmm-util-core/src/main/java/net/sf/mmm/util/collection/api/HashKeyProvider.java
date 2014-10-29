@@ -4,7 +4,7 @@ package net.sf.mmm.util.collection.api;
 
 /**
  * This is the interface that {@link #getHashKey(Object) provides a hash key} for an object of type
- * {@literal <O>}.<br/>
+ * {@literal <O>}. <br>
  * Common implementations will return e.g. one of the following:
  * <ul>
  * <li>the given object itself</li>

@@ -3,7 +3,7 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This is the interface for a descriptor of a {@link DatatypeDescriptor#getSegment(Object, int) segment}.<br/>
+ * This is the interface for a descriptor of a {@link DatatypeDescriptor#getSegment(Object, int) segment}. <br>
  * E.g. the {@link DatatypeSegmentDescriptor} for {@link java.time.LocalDate#getYear()} behaves as described
  * by the following table:
  * <table border="1">

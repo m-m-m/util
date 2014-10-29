@@ -81,8 +81,8 @@ public class UiWidgetCustomMasterDetail<ROW> extends AbstractUiWidgetCustomMaste
   }
 
   /**
-   * Sets the {@link #getMasterPanel() master panel} in case of lazy initialization.<br/>
-   * <b>ATTENTION:</b><br/>
+   * Sets the {@link #getMasterPanel() master panel} in case of lazy initialization. <br>
+   * <b>ATTENTION:</b><br>
    * This method has to be called only once and before <code>super.{@link #doInitialize()}</code> has been
    * invoked.
    *
@@ -112,8 +112,8 @@ public class UiWidgetCustomMasterDetail<ROW> extends AbstractUiWidgetCustomMaste
   }
 
   /**
-   * Sets the {@link #getDetailPanel() detail panel} in case of lazy initialization.<br/>
-   * <b>ATTENTION:</b><br/>
+   * Sets the {@link #getDetailPanel() detail panel} in case of lazy initialization. <br>
+   * <b>ATTENTION:</b><br>
    * This method has to be called only once and before <code>super.{@link #doInitialize()}</code> has been
    * invoked.
    *

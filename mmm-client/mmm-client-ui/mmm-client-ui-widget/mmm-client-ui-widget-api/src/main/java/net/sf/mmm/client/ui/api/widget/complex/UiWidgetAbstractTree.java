@@ -114,8 +114,8 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
   /**
    * Extends {@link UiWidgetAbstractTree.UiTreeModel} with features for editing the tree structure. It
    * represents the current state of the tree for a tree widget. Modifications may still be cancelled and
-   * reverted.<br/>
-   * <b>ATTENTION:</b><br/>
+   * reverted. <br>
+   * <b>ATTENTION:</b><br>
    * Implementing a mutable tree model is not always easy. The suggested approach is to create a copy of each
    * tree node that can be modified by the tree widget without causing harm. Central caching of tree nodes
    * from the server can be done based on a central and immutable {@link UiWidgetAbstractTree.UiTreeModel}
@@ -189,11 +189,11 @@ public abstract interface UiWidgetAbstractTree<NODE> extends UiWidgetAbstractDat
   interface UiTreeNodeRenderer<NODE, WIDGET extends UiWidgetRegular> extends UiSingleWidgetFactory<WIDGET> {
 
     /**
-     * This method assigns the given {@literal <NODE>} to the given {@link UiWidgetRegular widget}.<br/>
+     * This method assigns the given {@literal <NODE>} to the given {@link UiWidgetRegular widget}. <br>
      * As a simple example {@literal <WIDGET>} may be
      * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetLabel} and {@literal <NODE>} may be {@link String}.
-     * Then this method would simply do <code>widget.setLabel(node)</code>.<br/>
-     * <b>ATTENTION:</b><br/>
+     * Then this method would simply do <code>widget.setLabel(node)</code>. <br>
+     * <b>ATTENTION:</b><br>
      * The {@link UiWidgetRegular} may be reused for optimal performance if the {@literal <NODE>} has changed
      * or been removed. Therefore this method needs to reset and update the entire state of the
      * {@link UiWidgetRegular}.

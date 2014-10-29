@@ -8,7 +8,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface used to {@link #getHyphenator(Locale) retrieve} a {@link Hyphenator} for a given
- * {@link Locale}.<br>
+ * {@link Locale}. <br>
  * An implementation has to be thread-safe.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

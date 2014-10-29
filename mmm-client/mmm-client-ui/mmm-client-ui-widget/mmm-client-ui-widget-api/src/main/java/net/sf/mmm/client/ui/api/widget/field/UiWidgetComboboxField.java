@@ -10,7 +10,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * This is the interface for a {@link UiWidgetOptionsField options field widget} that represents a
  * <em>combobox</em>. Such widget is like a drop-down where the user can open a menu with the available
  * {@link #getOptions() options} to choose from. If supported by the underlying native toolkit it also allows
- * typing text and offering completions in order to allow better keyboard control.<br/>
+ * typing text and offering completions in order to allow better keyboard control. <br>
  * Here you can see an example (with {@link #setLabel(String) field label} "Title"):
  * 
  * <pre>

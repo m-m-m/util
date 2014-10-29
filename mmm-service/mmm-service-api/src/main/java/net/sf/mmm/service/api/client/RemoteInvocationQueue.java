@@ -56,13 +56,13 @@ public abstract interface RemoteInvocationQueue extends AttributeReadId<String>,
   RemoteInvocationQueueState getState();
 
   /**
-   * This method completes this queue. After the call of this method the queue can NOT be used anymore.<br/>
+   * This method completes this queue. After the call of this method the queue can NOT be used anymore. <br>
    * If this is the root-queue all collected invocations will be send to the server immediately on
    * {@link #commit()}. Otherwise, if this is a sub-queue (a queue
    * {@link RemoteInvocationCaller#newQueue(RemoteInvocationQueueSettings) created} while another queue was
    * {@link RemoteInvocationCaller#getCurrentQueue() already open}), the collected invocations will be
-   * appended to the parent queue.<br/>
-   * <b>NOTE:</b><br/>
+   * appended to the parent queue. <br>
+   * <b>NOTE:</b><br>
    * Committing an empty queue is cheap and will have no effect but {@link #getState() closing} the queue.
    * Therefore it is totally legal to open a queue in your generic infrastructure by default then perform some
    * sort of initialization that may or may not cause service invocations on that queue and finally commit the
@@ -72,8 +72,8 @@ public abstract interface RemoteInvocationQueue extends AttributeReadId<String>,
 
   /**
    * This method cancels this queue. All collected invocations will be discarded including those from
-   * sub-queues. If this queue has a parent queue, the parent queue is NOT affected by this operation.<br/>
-   * <b>NOTE:</b><br/>
+   * sub-queues. If this queue has a parent queue, the parent queue is NOT affected by this operation. <br>
+   * <b>NOTE:</b><br>
    * This operation should only be used in very specific situations.
    */
   void cancel();

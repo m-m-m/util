@@ -8,18 +8,18 @@ import java.util.Map;
 /**
  * This is the interface for a processor that can be plugged into a
  * {@link net.sf.mmm.util.io.api.DetectorStream}. Such {@link net.sf.mmm.util.io.api.DetectorStream} holds a
- * chain of {@link DetectorStreamProcessor}s and routes the stream data through this chain.<br>
+ * chain of {@link DetectorStreamProcessor}s and routes the stream data through this chain. <br>
  * At the head of this chain is the producer of the data (the native {@link java.io.InputStream} or the caller
  * that wants to write to the
  * {@link net.sf.mmm.util.io.api.DetectorStreamProvider#wrapOutputStream(java.io.OutputStream) wrapped}
  * {@link java.io.OutputStream}). The end of the chain is the consumer of the data (the native
  * {@link java.io.OutputStream} or caller that wants to read from the
  * {@link net.sf.mmm.util.io.api.DetectorStreamProvider#wrapInputStream(java.io.InputStream) wrapped}
- * {@link java.io.InputStream}).<br>
+ * {@link java.io.InputStream}). <br>
  * An implementation of this interface can detect information (typically metadata) from the streamed data.
  * Additionally it is possible to manipulate the streamed data by {@link DetectorStreamBuffer#remove(long)
  * removing} data from the stream and/or {@link DetectorStreamBuffer#insert(net.sf.mmm.util.io.api.ByteArray)
- * inserting} new data into the stream.<br>
+ * inserting} new data into the stream. <br>
  * 
  * @see net.sf.mmm.util.io.api.DetectorStream
  * @see DetectorStreamProcessorFactory
@@ -33,7 +33,7 @@ public interface DetectorStreamProcessor {
    * This method performs the actual detection and optionally manipulates the data. All this happens via the
    * given <code>buffer</code> that provides access to read buffered parts of the stream. As streams are
    * typically larger pieces of data, this method will be called repetitive in order to process the entire
-   * stream.<br>
+   * stream. <br>
    * <b>ATTENTION:</b><br>
    * A legal implementation of this interface has to consume data from the given <code>buffer</code> whenever
    * it is invoked. To ensure your implementation can always make an appropriate decision it may have to

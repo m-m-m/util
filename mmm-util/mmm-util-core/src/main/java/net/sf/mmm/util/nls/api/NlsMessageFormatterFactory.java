@@ -14,7 +14,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface NlsMessageFormatterFactory {
 
   /**
-   * This method creates a new {@link NlsMessageFormatter} for the given <code>message</code>.<br/>
+   * This method creates a new {@link NlsMessageFormatter} for the given <code>message</code>. <br>
    * The format of the <code>message</code> is described in {@link NlsMessage}.
    * 
    * @param message is the template for the message where potential

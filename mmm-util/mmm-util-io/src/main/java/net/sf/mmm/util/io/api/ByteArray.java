@@ -5,9 +5,9 @@ package net.sf.mmm.util.io.api;
 /**
  * This is the interface for some object that holds a {@link #getBytes() byte-array} together with a range
  * where the user of this interface may {@link #getCurrentIndex() start} and {@link #getMaximumIndex() end}
- * reading in that array.<br>
+ * reading in that array. <br>
  * A {@link ByteArray} is similar to {@link java.nio.ByteBuffer}. However it is a lot simpler, has an
- * interface as API and can permit modifying indices.<br>
+ * interface as API and can permit modifying indices. <br>
  * <b>ATTENTION:</b><br>
  * Unfortunately there is no way in java to give a read-only view on a <code>byte[]</code> than can be
  * iterated as efficient. Unlike many APIs of the JDK this interface trusts the user NOT to modify the
@@ -55,7 +55,7 @@ public interface ByteArray extends ByteProvider {
 
   /**
    * This method gets the maximum index in the {@link #getBytes() buffer}. It will be in the range from
-   * <code>-1</code> to <code>{@link #getBytes()}.length - 1</code>.<br>
+   * <code>-1</code> to <code>{@link #getBytes()}.length - 1</code>. <br>
    * A negative value (<code>-1</code>) indicates that the {@link #getBytes() buffer} does NOT contain data
    * (payload).
    * 
@@ -73,7 +73,7 @@ public interface ByteArray extends ByteProvider {
 
   /**
    * This method creates a new {@link ByteArray} with the same {@link #getBytes() bytes} but the given
-   * indices.<br>
+   * indices. <br>
    * <b>ATTENTION:</b><br>
    * If the implementation is immutable and the given <code>minimum</code> and <code>maximum</code> index are
    * both equal to the current indices of this {@link ByteArray} this method may return the instance itself (

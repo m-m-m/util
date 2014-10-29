@@ -119,8 +119,8 @@ public abstract class Segment {
   }
 
   /**
-   * This method validates this segment to ensure the correctness of the configured format.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method validates this segment to ensure the correctness of the configured format. <br>
+   * <b>ATTENTION:</b><br>
    * This method does NOT perform a recursive validation of potential {@link SegmentContainer#getSegment(int)
    * sub-segments}.
    * 

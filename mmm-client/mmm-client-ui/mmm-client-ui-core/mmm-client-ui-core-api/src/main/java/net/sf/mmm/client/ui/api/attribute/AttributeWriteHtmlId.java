@@ -14,7 +14,7 @@ public abstract interface AttributeWriteHtmlId extends AttributeReadHtmlId, Attr
 
   /**
    * This method set the {@link #getId() ID} of this object. Use this method to give the object a meaningful
-   * identifier after creation.<br/>
+   * identifier after creation. <br>
    * <b>ATTENTION:</b><br>
    * See javadoc of {@link #getId()} for the syntax constraints of IDs.
    * 

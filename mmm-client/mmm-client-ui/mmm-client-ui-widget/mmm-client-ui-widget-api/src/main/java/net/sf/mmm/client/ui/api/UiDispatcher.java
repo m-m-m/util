@@ -18,9 +18,9 @@ public interface UiDispatcher {
   /**
    * If you want to support SWT in its intended way (this method delegates to
    * <code>Display.readAndDispatch</code>), you need to call this method frequently from a main loop of your
-   * application client. For other toolkit implementations this method will simply do nothing.<br>
+   * application client. For other toolkit implementations this method will simply do nothing. <br>
    * If you have a main loop in your foreground thread waiting until the GUI is closed, it is recommended to
-   * call this method from your main loop followed by {@link #sleep()}.<br>
+   * call this method from your main loop followed by {@link #sleep()}. <br>
    * 
    * @return <code>true</code> if there is more work to do, <code>false</code> if it is safe to
    *         {@link #sleep() sleep} for a short while.

@@ -14,7 +14,7 @@ public interface TransactionContext {
 
   /**
    * This method gets the {@link Map} that allows to associate custom-data with
-   * a transaction.<br>
+   * a transaction. <br>
    * <b>ATTENTION:</b><br>
    * Please only use specific keys such as {@link Class#getName() qualified
    * class-names} of your custom code.

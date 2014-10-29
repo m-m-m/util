@@ -15,7 +15,7 @@ public interface DetectorInputStream extends DetectorStream {
   /**
    * This method gets the wrapped stream. After this stream is read to the end, the {@link #getMetadata()
    * metadata} can be retrieved. This method is a simple getter - it will always return the same stream
-   * object.<br>
+   * object. <br>
    * This returned wrapper stream has the following limitations:
    * <ul>
    * <li>{@link java.io.InputStream#skip(long) skipping} is NOT permitted.</li>

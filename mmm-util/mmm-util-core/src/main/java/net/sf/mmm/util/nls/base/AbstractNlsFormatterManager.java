@@ -19,7 +19,7 @@ import net.sf.mmm.util.text.api.JustificationBuilder;
 import net.sf.mmm.util.text.base.JustificationBuilderImpl;
 
 /**
- * This is the abstract base implementation of the {@link NlsFormatterManager} interface.<br>
+ * This is the abstract base implementation of the {@link NlsFormatterManager} interface. <br>
  * You should extend this class rather than directly implementing the {@link NlsFormatterManager} interface to
  * gain compatibility with further releases.
  * 
@@ -52,8 +52,8 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
   }
 
   /**
-   * This method gets the singleton instance of this {@link AbstractNlsFormatterManager}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link AbstractNlsFormatterManager}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    * 
    * @return the singleton instance.

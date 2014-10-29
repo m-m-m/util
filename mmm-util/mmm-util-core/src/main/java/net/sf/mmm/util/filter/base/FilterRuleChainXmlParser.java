@@ -25,7 +25,7 @@ import org.xml.sax.SAXException;
 /**
  * This class allows to parse a list of including and excluding regex {@link PatternFilterRule}s from XML and
  * build an according {@link FilterRuleChain}. The rules (include/exclude patterns) are proceeded in the order
- * of their appearance in the list.<br>
+ * of their appearance in the list. <br>
  * Here is an example of a configuration (rule list) parsed by this class:
  * 
  * <pre>

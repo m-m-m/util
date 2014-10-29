@@ -18,7 +18,7 @@ public interface GlobalExceptionHandler {
 
   /**
    * This method handles one or multiple errors that occurred in a generic component that can not handle them
-   * in a specific way. <br/>
+   * in a specific way. <br>
    * In a typical server application you may like to log the errors while in a client application you might
    * want to show a popup that displays the error.
    *

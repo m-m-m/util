@@ -16,7 +16,7 @@ import net.sf.mmm.util.nls.base.ComposedNlsMessage;
 /**
  * An {@link ComposedException} combines a list of exceptions in one single exception. This is helpful if you
  * are validating something and want to collect all errors and throw them as one exception with all
- * information.<br/>
+ * information. <br>
  * Otherwise you would stop at the first error, the user could fix it, restart and end up with the next error
  * and so on.
  *

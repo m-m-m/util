@@ -4,7 +4,7 @@ package net.sf.mmm.util.io.api;
 
 /**
  * This is the callback interface used to receive the status of an {@link AsyncTransferrer}. Exactly one of
- * the methods declared in this interface are called when the transfer is done (successful or unsuccessful).<br>
+ * the methods declared in this interface are called when the transfer is done (successful or unsuccessful). <br>
  * <b>ATTENTION:</b><br>
  * The according method of this callback will (typically) be invoked by a different {@link Thread}. Please
  * ensure that your implementation is thread-safe.

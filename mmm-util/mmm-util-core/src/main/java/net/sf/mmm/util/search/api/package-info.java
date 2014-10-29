@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for a search.
- * <a name="documentation"/><h2>Search-Util API</h2>
+ * <a name="documentation"></a><h2>Search-Util API</h2>
  * This package contains the basic API for search related objects (
  * {@link net.sf.mmm.util.search.api.SearchCriteria} and {@link net.sf.mmm.util.search.api.SearchResult}). It aims to
  * standardize the API without requiring specific dependencies (e.g. to JPA or Lucene). The advanced support is

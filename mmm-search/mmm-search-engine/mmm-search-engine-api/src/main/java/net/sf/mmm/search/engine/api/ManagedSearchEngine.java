@@ -18,7 +18,7 @@ public interface ManagedSearchEngine extends SearchEngine, Closeable, Refreshabl
    * This method tells the search-engine to refresh explicitly. Depending on the implementation this may cause
    * that the search index is reread from the disk or that caches are purged. The implementation is expected
    * to be smart in a way that it only rebuilds things if things really have changed since creation or the
-   * last call of {@link #refresh()}.<br>
+   * last call of {@link #refresh()}. <br>
    * This can be an expensive operation and should NOT be called per search request.
    * 
    * {@inheritDoc}

@@ -30,8 +30,8 @@ public abstract class AbstractLoggableComponent extends AbstractComponent {
   }
 
   /**
-   * This method creates the {@link #getLogger() logger} for this component.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method creates the {@link #getLogger() logger} for this component. <br>
+   * <b>ATTENTION:</b><br>
    * This method is called from the constructor. It is not final to allow tests to replace the logger with a
    * mock. You should never override this method unless you are exactly aware about what you are doing!
    * 
@@ -43,7 +43,7 @@ public abstract class AbstractLoggableComponent extends AbstractComponent {
   }
 
   /**
-   * This method gets the {@link Logger logger} for this component.<br>
+   * This method gets the {@link Logger logger} for this component. <br>
    * This method is NOT public because the logger should only be used by the component itself and NOT
    * externally.
    * 

@@ -6,7 +6,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a collection of utility functions that help to deal with things specific for the
- * operating system running this java virtual machine.<br>
+ * operating system running this java virtual machine. <br>
  * <b>ATTENTION:</b><br>
  * A key-feature of Java is the great portability of the platform. Please use this util to make your
  * application even more portable rather than restrict your code to platform specific circumstances.

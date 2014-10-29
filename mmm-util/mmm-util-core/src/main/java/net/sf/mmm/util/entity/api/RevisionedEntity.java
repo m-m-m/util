@@ -7,16 +7,16 @@ package net.sf.mmm.util.entity.api;
  * this interface represents the {@link #getRevision() revision} of a {@link GenericEntity}. There are two
  * cases to distinguish:
  * <ul>
- * <li><b>{@link #LATEST_REVISION latest revision}</b><br/>
+ * <li><b>{@link #LATEST_REVISION latest revision}</b><br>
  * A {@link RevisionedEntity} pointing to {@link #LATEST_REVISION} represents the latest state of the entity
  * and can be modified.</li>
- * <li><b>historic {@link #getRevision() revision}</b><br/>
+ * <li><b>historic {@link #getRevision() revision}</b><br>
  * If the object is {@link #getRevision() revision controlled}, it has a history of modifications. A
  * {@link RevisionedEntity} can represent a historic {@link #getRevision() revision} out of this history. It
  * therefore is immutable so operations to modify the {@link RevisionedEntity} will typically fail. At least
  * they can NOT be written to the database.</li>
  * </ul>
- * <b>ATTENTION:</b><br/>
+ * <b>ATTENTION:</b><br>
  * Due to the lack of multi-inheritance and for simplicity one will typically implement this interface in
  * base-classes of the data-model. However, maybe only some classes of the hierarchy (or even not at all) are
  * actually revision controlled. In case of envers you can see this by looking for <code>&#64;Audited</code>
@@ -31,7 +31,7 @@ package net.sf.mmm.util.entity.api;
 public interface RevisionedEntity<ID> extends GenericEntity<ID> {
 
   /**
-   * The latest {@link #getRevision() revision} of an {@link GenericEntity entity}.<br>
+   * The latest {@link #getRevision() revision} of an {@link GenericEntity entity}. <br>
    * Value is: {@value}
    */
   Number LATEST_REVISION = null;

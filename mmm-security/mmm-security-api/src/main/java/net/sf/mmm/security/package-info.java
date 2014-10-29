@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Top-level package of the security component.
- * <a name="documentation"/><h2>Security</h2> 
+ * <a name="documentation"></a><h2>Security</h2> 
  * This is the top-level package of the security component. This package 
  * itself only contains the {@link net.sf.mmm.security.NlsBundleSecurity NLS-Bundle} 
  * that allows the localization of this module (mmm-security-api).

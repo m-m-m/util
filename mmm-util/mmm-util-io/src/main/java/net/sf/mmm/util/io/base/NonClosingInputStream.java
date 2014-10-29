@@ -11,7 +11,7 @@ import net.sf.mmm.util.io.api.StreamClosedException;
 
 /**
  * This is an {@link InputStream} that wraps an existing {@link InputStream} and prevents {@link #close()
- * closing} the original {@link InputStream}.<br/>
+ * closing} the original {@link InputStream}. <br>
  * This can be useful as workaround for bugs like <a
  * href="http://bugs.sun.com/view_bug.do?bug_id=6539065">6539065</a>.
  * 

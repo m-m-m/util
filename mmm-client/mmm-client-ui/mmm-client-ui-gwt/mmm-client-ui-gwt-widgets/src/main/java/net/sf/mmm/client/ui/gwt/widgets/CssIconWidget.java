@@ -8,7 +8,7 @@ import com.google.gwt.dom.client.SpanElement;
 /**
  * This is a {@link com.google.gwt.user.client.ui.Widget} for an empty {@literal <span>} element that is used
  * as placeholder for an icon. Via CSS it can be styled to appear as an icon. This can be done via
- * background-image or web-fonts (font-awesome).<br/>
+ * background-image or web-fonts (font-awesome). <br>
  * The icon style is given at {@link #CssIconWidget(String) construction time} but can also be
  * {@link #setStyleName(String) modified} for dynamic icons.
  * 

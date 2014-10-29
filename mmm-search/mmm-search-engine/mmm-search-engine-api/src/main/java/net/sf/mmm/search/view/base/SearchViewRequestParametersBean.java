@@ -27,7 +27,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   private int totalHitCount;
 
   /**
-   * The constructor.<br>
+   * The constructor. <br>
    * 
    * @param request is the servlet request.
    */
@@ -91,7 +91,7 @@ public class SearchViewRequestParametersBean implements SearchViewRequestParamet
   }
 
   /**
-   * This method gets the {@link ServletRequest}.<br/>
+   * This method gets the {@link ServletRequest}. <br>
    * <b>NOTE:</b><br>
    * This method is only for very specific cases.
    * 

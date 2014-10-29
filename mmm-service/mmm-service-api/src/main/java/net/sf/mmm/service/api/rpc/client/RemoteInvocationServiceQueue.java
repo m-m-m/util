@@ -29,8 +29,8 @@ public interface RemoteInvocationServiceQueue extends RemoteInvocationQueue, Abs
   /**
    * {@inheritDoc}
    *
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * After the service method has been called, no technical request will be send to the server unless this
    * queue is {@link #commit() committed}. This allows multiple invocations of this method and subsequent
    * service method calls in order to collect service invocations that shall be send to the server within the
@@ -45,8 +45,8 @@ public interface RemoteInvocationServiceQueue extends RemoteInvocationQueue, Abs
   /**
    * {@inheritDoc}
    *
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * After the service method has been called, no technical request will be send to the server unless this
    * queue is {@link #commit() committed}. This allows multiple invocations of this method and subsequent
    * service method calls in order to collect service invocations that shall be send to the server within the

@@ -8,7 +8,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.nls.api.NlsResourceBundle;
 
 /**
- * This interface allows to {@link #getBundles() get} all registered bundles.<br>
+ * This interface allows to {@link #getBundles() get} all registered bundles. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

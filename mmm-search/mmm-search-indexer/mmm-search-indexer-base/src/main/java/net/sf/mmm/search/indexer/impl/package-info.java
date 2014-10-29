@@ -3,7 +3,7 @@
 /**
  * Contains the generic part of the implementation of the 
  * {@link net.sf.mmm.search.indexer.api Search-Indexer API}.
- * <a name="documentation"/><h2>Search-Indexer Impl</h2> 
+ * <a name="documentation"></a><h2>Search-Indexer Impl</h2> 
  * This package contains the generic part of the implementation of the 
  * {@link net.sf.mmm.search.indexer.api Search-Indexer API}.
  */

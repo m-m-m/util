@@ -12,8 +12,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 /**
  * This is the interface for a {@link UiWidgetRegular regular widget} that represents a
  * <em>collapsable section</em>. It is like {@link UiWidgetSection} but allows to be
- * {@link #setCollapsed(boolean) collapsed and expanded}.<br/>
- * <b>ATTENTION:</b><br/>
+ * {@link #setCollapsed(boolean) collapsed and expanded}. <br>
+ * <b>ATTENTION:</b><br>
  * This widget should only be used directly for specific situations.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

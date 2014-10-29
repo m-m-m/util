@@ -6,7 +6,7 @@ import net.sf.mmm.search.api.SearchEntry;
 
 /**
  * This is the interface for a single hit of a {@link SearchResult search}. It represents any content
- * (web-page, document, etc.) that is represented by a single {@link #getUri() URI}.<br>
+ * (web-page, document, etc.) that is represented by a single {@link #getUri() URI}. <br>
  * ATTENTION: Depending on the implementation it might be expensive to call methods multiple times.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -59,7 +59,7 @@ public interface SearchHit extends SearchEntry {
 
   /**
    * This method gets an excerpt of the plain text of the content that contains terms of the search query as a
-   * highlighted html fragment.<br>
+   * highlighted html fragment. <br>
    * The highlighted terms should be surrounded by {@link #HIGHLIGHT_START_TAG} and {@link #HIGHLIGHT_END_TAG}
    * and parts of the text that have been cut out should be replaced with {@link #HIGHLIGHT_CUT_TEXT}. An
    * implementing search-engine component may allow to override these defaults for custom needs.

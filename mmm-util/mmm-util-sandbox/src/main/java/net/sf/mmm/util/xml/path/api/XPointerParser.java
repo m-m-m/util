@@ -3,7 +3,7 @@
 package net.sf.mmm.util.xml.path.api;
 
 /**
- * This is the interface for a parser of XPointer expressions.<br>
+ * This is the interface for a parser of XPointer expressions. <br>
  * See <a href="http://www.w3.org/TR/WD-xptr">XML Pointer Language (XPointer)</a>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -16,7 +16,7 @@ public abstract interface AttributeReadUuid {
    * This method gets the {@link UUID} of this object. When the object is created, a {@link UUID} is
    * generated. In case the object is created from another object that already {@link #getUuid() has a UUID},
    * the existing {@link UUID} will be used (e.g. for chained
-   * {@link net.sf.mmm.util.exception.api.NlsThrowable exceptions}).<br>
+   * {@link net.sf.mmm.util.exception.api.NlsThrowable exceptions}). <br>
    * The {@link UUID} will appear in a
    * {@link net.sf.mmm.util.exception.api.NlsThrowable#printStackTrace(java.util.Locale, Appendable)
    * stacktrace} but NOT in the {@link net.sf.mmm.util.exception.api.NlsThrowable#getMessage() message}. It

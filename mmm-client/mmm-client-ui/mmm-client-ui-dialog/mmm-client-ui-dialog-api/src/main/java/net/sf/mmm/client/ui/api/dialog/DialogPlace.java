@@ -17,8 +17,8 @@ import net.sf.mmm.util.value.base.SimpleGenericValueConverterImpl;
 /**
  * This is the interface for an object that identifies a {@link #getDialogId() dialog} in combination with its
  * {@link #getParameters()}. It allows to represent a specific state of the client that can be bookmarked and
- * reopened at a later point in time.<br/>
- * <b>HINT:</b><br/>
+ * reopened at a later point in time. <br>
+ * <b>HINT:</b><br>
  * For each of your {@link Dialog} you need to define a {@link #getDialogId() dialog-id}. To decouple your
  * navigation from the actual dialogs and their implementation, it is recommended to define them in a central
  * interface (you can also have multiple such interfaces or classes for large modular systems). See

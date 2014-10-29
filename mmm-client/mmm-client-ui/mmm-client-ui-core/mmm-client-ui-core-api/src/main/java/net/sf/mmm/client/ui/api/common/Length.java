@@ -148,8 +148,8 @@ public class Length extends AbstractSimpleDatatypeBase<String> {
   }
 
   /**
-   * This method gets the {@link #getAmount() amount} in {@link LengthUnit#PIXEL pixels}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the {@link #getAmount() amount} in {@link LengthUnit#PIXEL pixels}. <br>
+   * <b>ATTENTION:</b><br>
    * This implementation is NOT precise and should only used when you know what you are doing.
    *
    * @param basePixelLength is the base length in pixel used to convert from {@link LengthUnit#PERCENT

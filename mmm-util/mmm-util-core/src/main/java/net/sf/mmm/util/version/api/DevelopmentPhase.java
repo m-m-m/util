@@ -17,7 +17,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
 
   /**
    * This is the earliest {@link DevelopmentPhase} in the development cycle. In this {@link DevelopmentPhase}
-   * the software is typically very unstable, experimental, and the focus is on creating new functionality.<br/>
+   * the software is typically very unstable, experimental, and the focus is on creating new functionality. <br>
    * This {@link DevelopmentPhase} is sometimes also just called <em>development</em> but this is quite
    * ambiguous as development happens in all {@link DevelopmentPhase}s.
    */
@@ -25,7 +25,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
 
   /**
    * This {@link DevelopmentPhase} aims to given an early preview of the product and to allow first testings
-   * (by "friendly users"). Therefore this {@link DevelopmentPhase} has focus on gathering feedback.<br/>
+   * (by "friendly users"). Therefore this {@link DevelopmentPhase} has focus on gathering feedback. <br>
    * This {@link DevelopmentPhase} is sometimes also called <em>developer preview (DP)</em> .
    */
   ALPHA("alpha", "a", Character.toString(UnicodeUtil.GREEK_SMALL_LETTER_ALPHA)),
@@ -33,7 +33,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   /**
    * This {@link DevelopmentPhase} already gives a good impression of the final {@link #RELEASE release} but
    * is still containing bugs and may not be fully complete while all major features should be included.
-   * Therefore this {@link DevelopmentPhase} has focus on stabilization of the product.<br/>
+   * Therefore this {@link DevelopmentPhase} has focus on stabilization of the product. <br>
    * This {@link DevelopmentPhase} is sometimes also called <em>early access (EA)</em>.
    */
   BETA("beta", "b", Character.toString(UnicodeUtil.GREEK_SMALL_LETTER_BETA)),
@@ -41,7 +41,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   /**
    * This {@link DevelopmentPhase} is feature complete but may contain some last bugs while known bugs should
    * already be fixed. If all acceptance tests are passed, the {@link #RELEASE} is reached. Therefore this
-   * {@link DevelopmentPhase} has focus on finalization of the product.<br/>
+   * {@link DevelopmentPhase} has focus on finalization of the product. <br>
    * This {@link DevelopmentPhase} is sometimes also just called <em>pre-release</em> or <em>gamma</em> (while
    * gamma may be somewhere in between of {@link #BETA} and {@link #RELEASE_CANDIDATE}).
    */
@@ -50,7 +50,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   /**
    * This {@link DevelopmentPhase} is feature complete and has passed acceptance tests. For productive usage
    * only product releases in this {@link DevelopmentPhase phase} or {@link #isAfter(DevelopmentPhase) after}
-   * are officially intended. Please note that also a release can obviously still have bugs. <br/>
+   * are officially intended. Please note that also a release can obviously still have bugs. <br>
    * This {@link DevelopmentPhase} is sometimes also just called <em>final</em>, <em>stable</em>,
    * <em>gold</em>, <em>release to manufacturing (RTM)</em> or <em>general availability (GA)</em>.
    */
@@ -59,7 +59,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
 
   /**
    * This {@link DevelopmentPhase} is like {@link #RELEASE} but may be used for bugfixes or tiny improvements
-   * of the {@link #RELEASE released} product version.<br/>
+   * of the {@link #RELEASE released} product version. <br>
    * This is sometimes called <em>service release (SR)</em> or <code>service pack (SP)</code>.
    */
   UPDATE("update", "u", "SR", "service-release", "SP", "service-pack");

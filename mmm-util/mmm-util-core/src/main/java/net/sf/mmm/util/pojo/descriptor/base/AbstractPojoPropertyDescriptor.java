@@ -37,7 +37,7 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   }
 
   /**
-   * This method puts the given <code>accessor</code> into this property-descriptor.<br>
+   * This method puts the given <code>accessor</code> into this property-descriptor. <br>
    * <b>ATTENTION:</b><br>
    * This method may only be used during creation and initialization of this object. Be careful NOT to
    * accidently replace existing {@link PojoPropertyAccessor accessors}.

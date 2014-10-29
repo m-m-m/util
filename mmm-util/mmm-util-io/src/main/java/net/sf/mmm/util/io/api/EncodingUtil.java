@@ -29,53 +29,53 @@ public interface EncodingUtil {
 
   /**
    * The encoding <code>US-ASCII</code> (American Standard Code for Information Interchange) also just called
-   * <code>ASCII</code>.<br>
+   * <code>ASCII</code>. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_US_ASCII = "US-ASCII";
 
   /**
-   * The encoding <code>UTF-8</code>. It is an 8-bit Unicode Transformation Format.<br>
+   * The encoding <code>UTF-8</code>. It is an 8-bit Unicode Transformation Format. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_UTF_8 = "UTF-8";
 
   /**
    * The encoding <code>UTF-16</code>. It is an 16-bit Unicode Transformation Format. The byte-order is
-   * determined by an optional {@link ByteOrderMark}.<br>
+   * determined by an optional {@link ByteOrderMark}. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_UTF_16 = "UTF-16";
 
   /**
-   * The encoding <code>UTF-16, little-endian</code>. It is an 16-bit Unicode Transformation Format.<br>
+   * The encoding <code>UTF-16, little-endian</code>. It is an 16-bit Unicode Transformation Format. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_UTF_16_LE = "UTF-16LE";
 
   /**
-   * The encoding <code>UTF-16, big-endian</code>. It is an 16-bit Unicode Transformation Format.<br>
+   * The encoding <code>UTF-16, big-endian</code>. It is an 16-bit Unicode Transformation Format. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_UTF_16_BE = "UTF-16BE";
 
   /**
    * The encoding <code>UTF-32</code>. It is an 32-bit Unicode Transformation Format. The byte-order is
-   * determined by an optional {@link ByteOrderMark}.<br>
+   * determined by an optional {@link ByteOrderMark}. <br>
    * <b>ATTENTION:</b><br>
    * UTF-32 is NOT yet supported by Java.
    */
   String ENCODING_UTF_32 = "UTF-32";
 
   /**
-   * The encoding <code>UTF-32, little-endian</code>. It is an 32-bit Unicode Transformation Format.<br>
+   * The encoding <code>UTF-32, little-endian</code>. It is an 32-bit Unicode Transformation Format. <br>
    * <b>ATTENTION:</b><br>
    * UTF-32 is NOT yet supported by Java.
    */
   String ENCODING_UTF_32_LE = "UTF-32LE";
 
   /**
-   * The encoding <code>UTF-32, big-endian</code>. It is an 32-bit Unicode Transformation Format.<br>
+   * The encoding <code>UTF-32, big-endian</code>. It is an 32-bit Unicode Transformation Format. <br>
    * <b>ATTENTION:</b><br>
    * UTF-32 is NOT yet supported by Java.
    */
@@ -83,66 +83,66 @@ public interface EncodingUtil {
 
   /**
    * The encoding <code>ISO-8859-1</code> also called <code>Latin-1</code>. It is covering most Western
-   * European languages.<br>
+   * European languages. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_ISO_8859_1 = "ISO-8859-1";
 
   /**
    * The encoding <code>ISO-8859-2</code> also called <code>Latin-2</code>. It is covering the Central and
-   * Eastern European languages that use the Latin alphabet.<br>
+   * Eastern European languages that use the Latin alphabet. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_ISO_8859_2 = "ISO-8859-2";
 
   /**
    * The encoding <code>ISO-8859-3</code> also called <code>Latin-3</code>. It is covering the South European
-   * languages.<br>
+   * languages. <br>
    * This is an extended encoding for Java contained in <code>lib/charsets.jar</code>.
    */
   String ENCODING_ISO_8859_3 = "ISO-8859-3";
 
   /**
    * The encoding <code>ISO-8859-4</code> also called <code>Latin-4</code>. It is covering the North European
-   * languages.<br>
+   * languages. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_ISO_8859_4 = "ISO-8859-4";
 
   /**
    * The encoding <code>ISO-8859-5</code>. It is covering mostly Slavic languages that use a Cyrillic
-   * alphabet.<br>
+   * alphabet. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_ISO_8859_5 = "ISO-8859-5";
 
   /**
-   * The encoding <code>ISO-8859-6</code>. It is covering common Arabic language characters.<br>
+   * The encoding <code>ISO-8859-6</code>. It is covering common Arabic language characters. <br>
    * This is an extended encoding for Java contained in <code>lib/charsets.jar</code>.
    */
   String ENCODING_ISO_8859_6 = "ISO-8859-6";
 
   /**
-   * The encoding <code>ISO-8859-7</code>. It is covering modern Greek.<br>
+   * The encoding <code>ISO-8859-7</code>. It is covering modern Greek. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_ISO_8859_7 = "ISO-8859-7";
 
   /**
-   * The encoding <code>ISO-8859-8</code>. It is covering modern Hebrew (used in Israel).<br>
+   * The encoding <code>ISO-8859-8</code>. It is covering modern Hebrew (used in Israel). <br>
    * This is an extended encoding for Java contained in <code>lib/charsets.jar</code>.
    */
   String ENCODING_ISO_8859_8 = "ISO-8859-8";
 
   /**
    * The encoding <code>ISO-8859-9</code> also called <code>Latin-5</code>. It is covering Turkish and
-   * Kurdish.<br>
+   * Kurdish. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_ISO_8859_9 = "ISO-8859-9";
 
   /**
-   * The encoding <code>ISO-8859-10</code> also called <code>Latin-6</code>. It is used for Nordic languages.<br>
+   * The encoding <code>ISO-8859-10</code> also called <code>Latin-6</code>. It is used for Nordic languages. <br>
    * <b>ATTENTION:</b><br>
    * This encoding is NOT supported by Java.
    */
@@ -162,13 +162,13 @@ public interface EncodingUtil {
   String ENCODING_ISO_8859_12 = "ISO-8859-12";
 
   /**
-   * The encoding <code>ISO-8859-13</code> also called <code>Latin-7</code>. It is covering Baltic languages.<br>
+   * The encoding <code>ISO-8859-13</code> also called <code>Latin-7</code>. It is covering Baltic languages. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_ISO_8859_13 = "ISO-8859-13";
 
   /**
-   * The encoding <code>ISO-8859-14</code> also called <code>Latin-8</code>. It is covering Celtic languages.<br>
+   * The encoding <code>ISO-8859-14</code> also called <code>Latin-8</code>. It is covering Celtic languages. <br>
    * This encoding is NOT supported by Java.
    */
   String ENCODING_ISO_8859_14 = "ISO-8859-14";
@@ -176,28 +176,28 @@ public interface EncodingUtil {
   /**
    * The encoding <code>ISO-8859-15</code> also called <code>Latin-9</code>. It is very similar to
    * {@link #ENCODING_ISO_8859_1 Latin-1} but adds the euro-sign and 7 other characters by replacing rarely
-   * used ones.<br>
+   * used ones. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_ISO_8859_15 = "ISO-8859-15";
 
   /**
    * The encoding <code>ISO-8859-16</code> also called <code>Latin-10</code>. It is covering South-Eastern
-   * European languages and includes the euro-sign.<br>
+   * European languages and includes the euro-sign. <br>
    * This encoding is NOT supported by Java.
    */
   String ENCODING_ISO_8859_16 = "ISO-8859-16";
 
   /**
    * The encoding <code>KOI8-R</code>. It is covering Russian and Bulgarian. It is therefore related to
-   * {@link #ENCODING_ISO_8859_5} and {@link #ENCODING_WINDOWS_1251}.<br>
+   * {@link #ENCODING_ISO_8859_5} and {@link #ENCODING_WINDOWS_1251}. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_KOI8_R = "KOI8-R";
 
   /**
    * The encoding <code>KOI8-U</code>. It is covering Ukrainian. It is related to {@link #ENCODING_KOI8_R},
-   * {@link #ENCODING_ISO_8859_5} and {@link #ENCODING_WINDOWS_1251}.<br>
+   * {@link #ENCODING_ISO_8859_5} and {@link #ENCODING_WINDOWS_1251}. <br>
    * <b>ATTENTION:</b><br>
    * This encoding is NOT supported by Java.
    */
@@ -284,35 +284,35 @@ public interface EncodingUtil {
 
   /**
    * The encoding <code>CP1250</code> also called <code>Windows-1250</code>. It is used by Microsoft Windows
-   * for Central European languages and is similar to {@link #ENCODING_ISO_8859_2}.<br>
+   * for Central European languages and is similar to {@link #ENCODING_ISO_8859_2}. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_WINDOWS_1250 = "windows-1250";
 
   /**
    * The encoding <code>CP1251</code> also called <code>Windows-1251</code>. It is used by Microsoft Windows
-   * for Cyrillic letters and is similar to {@link #ENCODING_ISO_8859_5}.<br>
+   * for Cyrillic letters and is similar to {@link #ENCODING_ISO_8859_5}. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_WINDOWS_1251 = "windows-1251";
 
   /**
    * The encoding <code>CP1252</code> also called <code>Windows-1252</code>. It is used by Microsoft Windows
-   * for Western European languages and is similar to {@link #ENCODING_ISO_8859_1}.<br>
+   * for Western European languages and is similar to {@link #ENCODING_ISO_8859_1}. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_WINDOWS_1252 = "windows-1252";
 
   /**
    * The encoding <code>CP1253</code> also called <code>Windows-1253</code>. It is used by Microsoft Windows
-   * for Greek and is similar to {@link #ENCODING_ISO_8859_7}.<br>
+   * for Greek and is similar to {@link #ENCODING_ISO_8859_7}. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_WINDOWS_1253 = "windows-1253";
 
   /**
    * The encoding <code>CP1254</code> also called <code>Windows-1254</code>. It is used by Microsoft Windows
-   * for Turkish and is similar to {@link #ENCODING_ISO_8859_9}.<br>
+   * for Turkish and is similar to {@link #ENCODING_ISO_8859_9}. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_WINDOWS_1254 = "windows-1254";
@@ -331,7 +331,7 @@ public interface EncodingUtil {
 
   /**
    * The encoding <code>CP1257</code> also called <code>Windows-1257</code>. It is used by Microsoft Windows
-   * for Baltic languages and is similar to {@link #ENCODING_ISO_8859_13}.<br>
+   * for Baltic languages and is similar to {@link #ENCODING_ISO_8859_13}. <br>
    * This is a basic encoding for Java contained in <code>lib/rt.jar</code>.
    */
   String ENCODING_WINDOWS_1257 = "windows-1257";
@@ -346,7 +346,7 @@ public interface EncodingUtil {
    * This method creates a new {@link java.io.Reader} for the given <code>inputStream</code>. The
    * {@link EncodingDetectionReader} automatically detects UTF (Unicode Transformation Format) encodings. If
    * the data provided by <code>inputStream</code> is NOT in such encoding, it will use the given
-   * <code>nonUtfEncoding</code> as fallback.<br>
+   * <code>nonUtfEncoding</code> as fallback. <br>
    * The {@link EncodingDetectionReader} will behave like {@link java.io.InputStreamReader} but with an
    * encoding that is automatically detected whilst reading. It will use a lookahead buffer to detect the
    * encoding. As long as no UTF characteristic was detected and only ASCII-characters (<code>&lt;128</code>)

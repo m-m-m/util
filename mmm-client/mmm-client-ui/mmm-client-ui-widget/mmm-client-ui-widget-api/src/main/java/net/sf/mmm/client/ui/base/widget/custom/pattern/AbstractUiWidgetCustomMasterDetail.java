@@ -74,8 +74,8 @@ public abstract class AbstractUiWidgetCustomMasterDetail<VALUE, SELECTION, DETAI
   /**
    * This method gets the actual widget containing a list of &lt;SELECTION&gt; to choose from. This widget has
    * to be a child of the {@link #getMasterPanel() master panel}. A selection in the master list will
-   * automatically trigger an update of the {@link #getDetailPanel() details panel}.<br/>
-   * <b>NOTE:</b><br/>
+   * automatically trigger an update of the {@link #getDetailPanel() details panel}. <br>
+   * <b>NOTE:</b><br>
    * The {@link #getDetailPanel() details panel} can only display a single &lt;DETAIL&gt; at a time. Therefore
    * if {@link net.sf.mmm.client.ui.api.common.SelectionMode#MULTIPLE_SELECTION multi-selection} is enabled,
    * nothing will be displayed in the {@link #getDetailPanel() details panel}. This may still make sense to

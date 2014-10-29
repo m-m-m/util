@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * This is the interface for the node of a tree. The tree itself is defined by the <em>root-node</em> which is
- * its only {@link GenericTreeNode node} in the tree that has no {@link #getParent() parent}.<br/>
+ * its only {@link GenericTreeNode node} in the tree that has no {@link #getParent() parent}. <br>
  * A {@link GenericTreeNode} is generic and allows different types for {@literal <CHILD>} and
  * {@literal <PARENT>} (e.g. to implement a <em>folder</em> that can only have a <em>folder</em> as parent but
  * can have any <em>resource</em> as child that is of type <em>folder</em> or <em>file</em>). For a regular

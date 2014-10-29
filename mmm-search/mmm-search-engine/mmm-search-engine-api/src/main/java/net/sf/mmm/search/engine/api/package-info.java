@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API of the search-engine.
- * <a name="documentation"/><h2>Search-Engine API</h2> 
+ * <a name="documentation"></a><h2>Search-Engine API</h2> 
  * This package contains the API of the 
  * {@link net.sf.mmm.search.engine.api.SearchEngine}.
  */

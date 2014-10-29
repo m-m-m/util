@@ -12,8 +12,8 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeWriteColumnSpan extends AttributeReadColumnSpan {
 
   /**
-   * This method sets the {@link #getColumnSpan() columnSpan} attribute.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getColumnSpan() columnSpan} attribute. <br>
+   * <b>ATTENTION:</b><br>
    * Please note that this is the number of columns spanned by this object (and not the number of columns to
    * join). This means the default value is <code>1</code> and not <code>0</code>. To join with the next
    * column, you need to provide the value <code>2</code>.

@@ -11,10 +11,10 @@ import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
 /**
  * This class represents a {@link String} or better a sequence of characters ( <code>char[]</code>) together
- * with a {@link #getCurrentIndex() position} in that sequence.<br>
+ * with a {@link #getCurrentIndex() position} in that sequence. <br>
  * It has various useful methods for scanning the sequence. This scanner is designed to be fast on long
  * sequences and therefore internally {@link String#toCharArray() converts} {@link String}s to a char array
- * instead of frequently calling {@link String#charAt(int)}.<br>
+ * instead of frequently calling {@link String#charAt(int)}. <br>
  * <b>ATTENTION:</b><br>
  * This implementation is NOT and has no intention to be thread-safe.
  * 
@@ -158,7 +158,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * This method appends the {@link #substring(int, int) substring} specified by <code>start</code> and
-   * <code>end</code> to the given <code>buffer</code>.<br>
+   * <code>end</code> to the given <code>buffer</code>. <br>
    * This avoids the overhead of creating a new string and copying the char array.
    * 
    * @param buffer is the buffer where to append the substring to.
@@ -268,7 +268,7 @@ public class CharSequenceScanner implements CharStreamScanner {
 
   /**
    * This method decrements the {@link #getCurrentIndex() index} by one. If the {@link #getCurrentIndex()
-   * index} is <code>0</code> this method will have no effect.<br>
+   * index} is <code>0</code> this method will have no effect. <br>
    * E.g. use this method if you read a character too much.
    */
   public void stepBack() {

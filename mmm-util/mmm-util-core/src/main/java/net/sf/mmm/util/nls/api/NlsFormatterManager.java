@@ -3,7 +3,7 @@
 package net.sf.mmm.util.nls.api;
 
 /**
- * This is the interface for a manager of {@link NlsFormatter}s.<br>
+ * This is the interface for a manager of {@link NlsFormatter}s. <br>
  * A legal implementation of this interface has to be thread-safe.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -54,7 +54,7 @@ public interface NlsFormatterManager {
   String STYLE_ISO_8601 = "iso8601";
 
   /**
-   * This method gets the default {@link NlsFormatter}.<br>
+   * This method gets the default {@link NlsFormatter}. <br>
    * 
    * @see #getFormatter(String, String)
    * 
@@ -63,7 +63,7 @@ public interface NlsFormatterManager {
   NlsFormatter<Object> getFormatter();
 
   /**
-   * This method gets the {@link NlsFormatter} for the given <code>formatType</code>.<br>
+   * This method gets the {@link NlsFormatter} for the given <code>formatType</code>. <br>
    * 
    * @see #getFormatter(String, String)
    * 
@@ -74,7 +74,7 @@ public interface NlsFormatterManager {
 
   /**
    * This method gets the {@link NlsFormatter} for the given <code>formatType</code> and
-   * <code>formatStyle</code>.<br>
+   * <code>formatStyle</code>. <br>
    * To be compliant with {@link java.text.MessageFormat} the following types and styles need to be supported
    * by the implementation: <br>
    * <br>

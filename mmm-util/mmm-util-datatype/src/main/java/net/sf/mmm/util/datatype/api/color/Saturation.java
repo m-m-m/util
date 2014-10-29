@@ -4,8 +4,8 @@ package net.sf.mmm.util.datatype.api.color;
 
 /**
  * This {@link Segment} is a {@link Factor factor} that represents the colorfulness of a stimulus relative to
- * its own brightness.<br/>
- * <b>ATTENTION:</b><br/>
+ * its own brightness. <br>
+ * <b>ATTENTION:</b><br>
  * The saturation has different definitions for {@link ColorModel#HSB} and {@link ColorModel#HSL}. Hence
  * transformation from other {@link ColorModel}s like {@link ColorModel#RGB} differs and will return different
  * results for {@link Saturation}.

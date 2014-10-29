@@ -28,7 +28,7 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
   /**
    * {@inheritDoc}
    *
-   * <b>ATTENTION:</b><br/>
+   * <b>ATTENTION:</b><br>
    * For being type-safe please use {@link TransferObjectUtil#clone(AbstractTransferObject)} instead.
    */
   @Override

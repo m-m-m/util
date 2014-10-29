@@ -162,7 +162,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
   /**
    * This method gets the capacity of this pool. This value is the maximum {@link #getSize() size} of this
    * pool. If that size is reached further {@link #release(Object) released} objects are NOT pooled and can be
-   * freed by the garbage-collector.<br>
+   * freed by the garbage-collector. <br>
    * <b>ATTENTION:</b><br>
    * The optimal capacity of a {@link Pool} depends heavily on the type of objects that are pooled. For some
    * lightweight objects a very high capacity may suite. However for big buffers (e.g.

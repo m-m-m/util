@@ -8,7 +8,7 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 /**
  * This is the abstract base implementation of a
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} that acts as proxy to a
- * {@link #getDelegate() delegate} allowing to add new ways to access a property.<br>
+ * {@link #getDelegate() delegate} allowing to add new ways to access a property. <br>
  * E.g. if the {@link #getDelegate() delegate} is a
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter} that returns
  * an array or a {@link java.util.List} then this adapter may expose it as

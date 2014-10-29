@@ -39,7 +39,7 @@ public interface AnnotationUtil {
 
   /**
    * This method determines if the given <code>annotationType</code> represents an {@link Annotation} that has
-   * a {@link java.lang.annotation.Target} compatible with the given <code>targetType</code>.<br>
+   * a {@link java.lang.annotation.Target} compatible with the given <code>targetType</code>. <br>
    * 
    * @param <A> is the type of the annotation to check.
    * @param annotationType is the type of the annotation to check.
@@ -52,7 +52,7 @@ public interface AnnotationUtil {
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of the type given by
    * <code>annotation</code> in the class {@link Class#getSuperclass() hierarchy} of the given
-   * <code>annotatedClass</code>.<br>
+   * <code>annotatedClass</code>. <br>
    * <b>INFORMATION:</b><br>
    * This method is only useful if the given <code>annotation</code> is a {@link #isRuntimeAnnotation(Class)
    * runtime annotation} that is {@link #isAnnotationForType(Class, ElementType) applicable} for
@@ -80,9 +80,9 @@ public interface AnnotationUtil {
 
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of the type given by
-   * <code>annotation</code> in the declaration of the given <code>annotatedType</code>.<br>
+   * <code>annotation</code> in the declaration of the given <code>annotatedType</code>. <br>
    * Instead of {@link #getClassAnnotation(Class, Class)} this method will also scan implemented interfaces
-   * for the given <code>annotation</code>.<br>
+   * for the given <code>annotation</code>. <br>
    * This method is only useful if the given <code>annotation</code> is a
    * {@link java.lang.annotation.RetentionPolicy#RUNTIME runtime} annotation.
    * 
@@ -102,7 +102,7 @@ public interface AnnotationUtil {
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of the type given by
    * <code>annotation</code> in the {@link ReflectionUtil#getParentMethod(Method) hierarchy} of the given
-   * {@link Method method}.<br>
+   * {@link Method method}. <br>
    * This method is only useful if the given <code>annotation</code> is a
    * {@link java.lang.annotation.RetentionPolicy#RUNTIME runtime} annotation.
    * 

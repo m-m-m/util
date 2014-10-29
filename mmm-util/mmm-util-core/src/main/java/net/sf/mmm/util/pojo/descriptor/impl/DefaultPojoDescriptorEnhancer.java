@@ -39,12 +39,12 @@ import net.sf.mmm.util.text.base.EnglishSingularizer;
  * This is an implementation of the {@link PojoDescriptorEnhancer} interface that scans all
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPropertyDescriptors() PropertyDescriptor}s for
  * accessing {@link java.util.Collection}s, {@link Map} s or arrays. For such {@link PojoPropertyDescriptor}s
- * additional {@link PojoPropertyAccessor accessors} that are NOT already present are created and added.<br>
+ * additional {@link PojoPropertyAccessor accessors} that are NOT already present are created and added. <br>
  * <br>
  * In a first step the {@link PojoPropertyDescriptor#getName() name} of the {@link PojoPropertyDescriptor} is
  * {@link Singularizer#transform(String) singularized}. If a different singular form is determined, the
  * {@link PojoPropertyAccessor accessors} of the singular-named {@link PojoPropertyDescriptor} are copied to
- * the original {@link PojoPropertyDescriptor} if such accessors do NOT already exist.<br>
+ * the original {@link PojoPropertyDescriptor} if such accessors do NOT already exist. <br>
  * In a second step {@link PojoPropertyAccessor accessors} that are (still) NOT present in the original
  * {@link PojoPropertyDescriptor} are created and added as virtual delegates on the container-typed getter
  * (and according setter for array-resizing if available). This will happen for the following modes:

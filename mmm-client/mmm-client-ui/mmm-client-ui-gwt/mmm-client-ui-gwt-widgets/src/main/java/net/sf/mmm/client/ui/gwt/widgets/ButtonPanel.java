@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.gwt.widgets;
 import net.sf.mmm.client.ui.api.common.CssStyles;
 
 /**
- * This is a {@link HorizontalFlowPanel horizontal panel} for buttons.<br/>
- * <b>ATTENTION:</b><br/>
+ * This is a {@link HorizontalFlowPanel horizontal panel} for buttons. <br>
+ * <b>ATTENTION:</b><br>
  * Technically you can add any kind of {@link com.google.gwt.user.client.ui.Widget} to this panel. However,
  * only {@link com.google.gwt.user.client.ui.Button}s, {@link ButtonGroup}s and related widgets shall be
  * added.

@@ -18,8 +18,8 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
- * This class implements {@link EnumDefinition} for a java {@link Enum}.<br/>
- * <b>ATTENTION:</b><br/>
+ * This class implements {@link EnumDefinition} for a java {@link Enum}. <br>
+ * <b>ATTENTION:</b><br>
  * Please only use this class to build an {@link net.sf.mmm.util.lang.api.EnumProvider}. From out-side use
  * {@link net.sf.mmm.util.lang.api.EnumProvider#getEnumDefinition(Class)} instead.
  *

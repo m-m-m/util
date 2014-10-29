@@ -15,8 +15,8 @@ package net.sf.mmm.client.ui.api.common;
 public enum SelectionChoice {
 
   /**
-   * This choice will affect all available items.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This choice will affect all available items. <br>
+   * <b>ATTENTION:</b><br>
    * This choice only makes sense for {@link SelectionMode#MULTIPLE_SELECTION}. Further some widgets allow
    * lazy loading of their data. This choice will only affect the items that are already loaded and available.
    * Otherwise a very large or infinite tree would be loaded completely into the client causing undesired

@@ -3,13 +3,13 @@
 package net.sf.mmm.util.component.api;
 
 /**
- * This interface only exists for documentation purpose!<br/>
+ * This interface only exists for documentation purpose!<br>
  * <em>CDI</em> is a shortcut for <em>Context and Dependency Injection</em> and is a java standard supporting
  * the {@link Ioc IoC} pattern. The annotations from JSR 250 and JSR 330 are combined to configure component
  * implementations. A {@link IocContainer CDI framework} can understand these standardized annotations and
  * assembles your components performing the dependency injection. We strongly recommend to use <a
  * href="http://www.springframework.org">spring</a> as {@link IocContainer} but there are also other
- * implementations like JBoss Seam, Google Guice (GIN for GWT)/Eclipse SiSu, etc.<br/>
+ * implementations like JBoss Seam, Google Guice (GIN for GWT)/Eclipse SiSu, etc. <br>
  * Here is an example how everything works together:
  * 
  * <pre>
@@ -77,14 +77,14 @@ public interface Cdi {
 
   /**
    * A <em>CDI name</em> is the {@link javax.inject.Named name} of a
-   * {@link net.sf.mmm.util.component.api.ComponentSpecification component} for {@link Cdi CDI}.<br/>
+   * {@link net.sf.mmm.util.component.api.ComponentSpecification component} for {@link Cdi CDI}. <br>
    * The regular implementation will be annotated with &#64;{@link javax.inject.Named}
-   * (MyComponentInterface.CDI_NAME).<br/>
+   * (MyComponentInterface.CDI_NAME). <br>
    * If you want to replace this implementation you can do so by defining your own spring-bean with the same
    * bean-id at a higher level (in a spring-XML file directly or indirectly importing the component-scan for
    * the default implementation) or even using the same annotation (if you know what you are doing). Your
-   * replacement may or may not extend the default implementation.<br/>
-   * <b>NOTE:</b><br/>
+   * replacement may or may not extend the default implementation. <br>
+   * <b>NOTE:</b><br>
    * This constant is only for documentation purpose. Please never use it in your code.
    */
   String CDI_NAME = null;
@@ -96,8 +96,8 @@ public interface Cdi {
    * <em>Singleton</em> (or maybe <em>AbstractFactory</em>) that make use of <em>static</em> access and lead
    * to inflexible and bad design. Instead {@link Ioc} is the pattern of choice to get access to singletons or
    * factories. However, the problem is that Java does NOT support {@link Ioc} in its core. So for a small and
-   * simple application it might be over-complicated to use it.<br/>
-   * <br/>
+   * simple application it might be over-complicated to use it. <br>
+   * <br>
    * Therefore we picked a design that is the best compromise between easy access and flexibility:
    * <ul>
    * <li>We strictly follow the {@link Ioc} design which allows extension and customization.</li>
@@ -107,16 +107,16 @@ public interface Cdi {
    * use {@link net.sf.mmm.util.lang.base.StringUtilImpl#getInstance()}. However if you want to make use of
    * many components of this project and decide for {@link Ioc} you can get all utilities and other components
    * {@link javax.inject.Inject injected}. This gives you the final freedom to replace or extend components
-   * without patching our code.<br/>
+   * without patching our code. <br>
    * A special case are GWT (Google Web Toolkit) specific utilities, because GWT allows rebinding that we are
    * using to create the singleton instance. You can configure your <code>*.gwt.xml</code> to replace the
    * default implementation with a derived custom class extending the default and overriding methods to add
-   * changed behavior. <br/>
-   * <b>ATTENTION:</b><br/>
+   * changed behavior. <br>
+   * <b>ATTENTION:</b><br>
    * You always have to be aware of what you are actually doing when you are replacing central components.
    * Changing behavior will NOT only have impact on your code using the component but on everybody else in
-   * your JVM what is the actual idea of the approach.<br/>
-   * <b>NOTE:</b><br/>
+   * your JVM what is the actual idea of the approach. <br>
+   * <b>NOTE:</b><br>
    * This constant is only for documentation purpose. Please never use it in your code.
    */
   String GET_INSTANCE = null;

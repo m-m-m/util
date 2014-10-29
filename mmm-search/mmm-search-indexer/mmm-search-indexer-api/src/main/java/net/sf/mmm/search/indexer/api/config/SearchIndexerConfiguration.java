@@ -8,7 +8,7 @@ import net.sf.mmm.search.api.config.SearchConfiguration;
 
 /**
  * This is the interface for the configuration of the
- * {@link net.sf.mmm.search.indexer.api.SearchIndexer}.<br>
+ * {@link net.sf.mmm.search.indexer.api.SearchIndexer}. <br>
  * You will typically provide your configuration as XML. The base-implementation
  * comes with an according (un)marshaler.
  * 

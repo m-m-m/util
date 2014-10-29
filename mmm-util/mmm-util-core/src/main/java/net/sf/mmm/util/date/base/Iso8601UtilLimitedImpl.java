@@ -13,7 +13,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.date.api.Iso8601UtilLimited} interface. It does
- * NOT use {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe.<br>
+ * NOT use {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe. <br>
  *
  * @see Iso8601UtilImpl
  *
@@ -41,8 +41,8 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   }
 
   /**
-   * This method gets the singleton instance of this {@link Iso8601UtilImpl}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link Iso8601UtilImpl}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    *
    * @return the singleton instance.

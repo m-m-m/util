@@ -3,9 +3,9 @@
 /**
  * Provides the implementation of the persistence API based on the JPA and 
  * hibernate-envers for revisioning/auditing.
- * <a name="documentation"/><h2>Persistence Impl Hibernate</h2> 
+ * <a name="documentation"></a><h2>Persistence Impl Hibernate</h2> 
  * This package contains the implementation of the persistence API based on the
- * java persistence API (JPA) and hibernate-envers.<br/>
+ * java persistence API (JPA) and hibernate-envers. <br>
  */
 package net.sf.mmm.persistence.impl.hibernate;
 

@@ -3,7 +3,7 @@
 /**
  * Contains the base-implementation of the {@link net.sf.mmm.search.indexer.api.state
  * Search-Indexer State API}.
- * <a name="documentation"/><h2>Search-Indexer State Base</h2> 
+ * <a name="documentation"></a><h2>Search-Indexer State Base</h2> 
  * This package contains the default-implementation of the 
  * {@link net.sf.mmm.search.indexer.api.state Search-Indexer State API}.
  * It uses simple Java-Beans with JAX-Bindings for de-/serialization of XML.

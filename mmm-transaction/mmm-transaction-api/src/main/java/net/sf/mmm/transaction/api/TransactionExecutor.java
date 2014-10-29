@@ -10,7 +10,7 @@ import net.sf.mmm.util.event.api.EventSource;
 /**
  * This is the interface for a component capable of executing your code within a transaction. It is a
  * front-end to an underlying transaction-manager that makes your transactional code easy and less
- * error-prone.<br>
+ * error-prone. <br>
  * Additionally it allows you to add custom hooks to your transaction-management if you perform all
  * transaction operations via this API.
  * 
@@ -23,7 +23,7 @@ public interface TransactionExecutor extends EventSource<TransactionEvent, Trans
   String CDI_NAME = "net.sf.mmm.transaction.api.TransactionExecutor";
 
   /**
-   * This method executes the given <code>callable</code> in the context of a transaction.<br>
+   * This method executes the given <code>callable</code> in the context of a transaction. <br>
    * Therefore this method opens a new transaction, {@link Callable#call() invokes} the <code>callable</code>
    * in a surrounding try-statement so that the transaction is automatically committed if your
    * <code>callable</code> succeeds while a rollback is performed in case it fails (throws anything).
@@ -36,7 +36,7 @@ public interface TransactionExecutor extends EventSource<TransactionEvent, Trans
   <RESULT> RESULT doInTransaction(Callable<RESULT> callable) throws Exception;
 
   /**
-   * This method executes the given <code>callable</code> in the context of a transaction.<br>
+   * This method executes the given <code>callable</code> in the context of a transaction. <br>
    * Therefore this method opens a new transaction, {@link Callable#call() invokes} the <code>callable</code>
    * in a surrounding try-statement so that the transaction is automatically committed if your
    * <code>callable</code> succeeds while a rollback is performed in case it fails (throws anything).
@@ -50,7 +50,7 @@ public interface TransactionExecutor extends EventSource<TransactionEvent, Trans
   <RESULT> RESULT doInTransaction(Callable<RESULT> callable, TransactionSettings settings) throws Exception;
 
   /**
-   * This method executes the given <code>callable</code> in the context of a transaction.<br>
+   * This method executes the given <code>callable</code> in the context of a transaction. <br>
    * Therefore this method opens a new transaction, {@link TransactionCallable#call(TransactionAdapter)
    * invokes} the <code>callable</code> in a surrounding try-statement so that the transaction is
    * automatically committed if your <code>callable</code> succeeds while a rollback is performed in case it
@@ -63,7 +63,7 @@ public interface TransactionExecutor extends EventSource<TransactionEvent, Trans
   <RESULT> RESULT doInTransaction(TransactionCallable<RESULT> callable);
 
   /**
-   * This method executes the given <code>callable</code> in the context of a transaction.<br>
+   * This method executes the given <code>callable</code> in the context of a transaction. <br>
    * Therefore this method opens a new transaction, {@link TransactionCallable#call(TransactionAdapter)
    * invokes} the <code>callable</code> in a surrounding try-statement so that the transaction is
    * automatically committed if your <code>callable</code> succeeds while a rollback is performed in case it

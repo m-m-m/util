@@ -101,8 +101,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method gets the singleton instance of this {@link ReflectionUtil}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link ReflectionUtil}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    *
    * @return the singleton instance.
@@ -241,7 +241,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   /**
    * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code>
-   * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path.<br>
+   * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path. <br>
    * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
    * NOT be unique. In such case it will be unspecified which of the possible paths is used.
    *
@@ -282,7 +282,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   /**
    * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code>
-   * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path.<br>
+   * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path. <br>
    * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
    * NOT be unique. In such case it will be unspecified which of the possible paths is used.
    *
@@ -362,7 +362,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method parses the given <code>type</code> as generic {@link Type}.<br>
+   * This method parses the given <code>type</code> as generic {@link Type}. <br>
    * This would be easier when using <code>StringParser</code> but we want to avoid the dependency on
    * <code>util-misc</code>.
    *

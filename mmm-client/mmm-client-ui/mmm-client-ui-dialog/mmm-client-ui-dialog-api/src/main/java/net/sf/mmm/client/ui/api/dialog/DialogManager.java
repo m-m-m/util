@@ -35,8 +35,8 @@ public interface DialogManager {
 
   /**
    * This method gets the current {@link PopupDialog}. If multiple {@link PopupDialog}s are open, it will
-   * return the top-level one.<br/>
-   * <b>ATTENTION:</b><br/>
+   * return the top-level one. <br>
+   * <b>ATTENTION:</b><br>
    * Beside a {@link PopupDialog} there can also be {@link net.sf.mmm.client.ui.api.UiPopupHelper simple
    * popups} that are NOT considered by this method.
    * 
@@ -84,8 +84,8 @@ public interface DialogManager {
 
   /**
    * This is a convenience method for
-   * <code>{@link #navigateTo(DialogPlace) navigateTo}(new {@link DialogPlace}(dialogId))</code>. <br/>
-   * <b>ATTENTION:</b><br/>
+   * <code>{@link #navigateTo(DialogPlace) navigateTo}(new {@link DialogPlace}(dialogId))</code>. <br>
+   * <b>ATTENTION:</b><br>
    * It is best practice NOT to use this method. See {@link DialogPlace} for further details.
    * 
    * @param dialogId is the {@link Dialog#getId() ID} of the dialog to open.

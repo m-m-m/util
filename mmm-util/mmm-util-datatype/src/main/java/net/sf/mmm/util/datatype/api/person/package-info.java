@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides common datatypes related to persons.
- * <a name="documentation"/><h2>Datatype Person</h2> 
+ * <a name="documentation"></a><h2>Datatype Person</h2> 
  * This package provides common datatypes related to persons.
  */
 package net.sf.mmm.util.datatype.api.person;

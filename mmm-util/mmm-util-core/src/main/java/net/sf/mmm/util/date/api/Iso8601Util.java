@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is a collection of utility functions for formatting and parsing dates according to ISO 8601 formats.<br>
+ * This is a collection of utility functions for formatting and parsing dates according to ISO 8601 formats. <br>
  * The ISO 8601 defines multiple formats for date and times. The following forms are handled by this
  * implementation:<br>
  * <table border="1">
@@ -38,7 +38,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * </tr>
  * </table>
  * <br>
- * Please note that the special timezone character <code>Z</code> means UTC.<br>
+ * Please note that the special timezone character <code>Z</code> means UTC. <br>
  * Out of these forms the following combinations are supported:
  * <ul>
  * <li>&lt;Date&gt;</li>
@@ -54,10 +54,10 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * <li>20000101T000000Z</li>
  * </ul>
  * As you can see by the example the basic format is harder to read (for humans). Therefore you should use the
- * extended format if possible.<br>
+ * extended format if possible. <br>
  * The {@link #parseCalendar(String) parse} methods support all formats described above. For
- * {@link #formatDateTime(Calendar) formatting} various methods exist for different format combinations. <br/>
- * <b>ATTENTION:</b><br/>
+ * {@link #formatDateTime(Calendar) formatting} various methods exist for different format combinations. <br>
+ * <b>ATTENTION:</b><br>
  * If you are using java 8+ please use <code>java.time</code> where everything is build in and APIs are clean.
  *
  * @see net.sf.mmm.util.date.base.Iso8601UtilImpl
@@ -155,7 +155,7 @@ public interface Iso8601Util extends Iso8601UtilLimited {
   void formatTime(Calendar calendar, boolean extended, Appendable buffer);
 
   /**
-   * This method formats the given <code>timezone</code> according to {@link Iso8601Util ISO 8601}.<br>
+   * This method formats the given <code>timezone</code> according to {@link Iso8601Util ISO 8601}. <br>
    *
    * @param calendar is the {@link Calendar} to format.
    * @param extended - if <code>false</code> the basic timezone format ("&#177;HHmm[ss]") is used, if

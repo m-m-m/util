@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.base.NlsDependencies;
 
 /**
  * This interface represents the template for an internationalized text that can be {@link #translate(Locale)
- * translated} to a given {@link Locale}.<br>
+ * translated} to a given {@link Locale}. <br>
  * There is no direct factory to create an {@link NlsTemplate} as an alternative implementation might take
  * totally different arguments for construction. If you want to use your own implementation of
  * {@link NlsTemplate}, you can either directly supply it when {@link NlsMessageFactory#create(NlsTemplate)
@@ -27,7 +27,7 @@ import net.sf.mmm.util.nls.base.NlsDependencies;
 public interface NlsTemplate extends Serializable {
 
   /**
-   * This method translates the represented string for the given <code>locale</code>.<br>
+   * This method translates the represented string for the given <code>locale</code>. <br>
    * This typically happens via a lookup in a {@link java.util.ResourceBundle}).
    *
    * @param locale is the locale to translate to.

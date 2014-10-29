@@ -28,7 +28,7 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 /**
  * This is the abstract base class for the common implementation of
  * {@link net.sf.mmm.service.base.rpc.GenericRemoteInvocationRpcService} and
- * {@link net.sf.mmm.service.base.command.GenericRemoteInvocationCommandService}.<br/>
+ * {@link net.sf.mmm.service.base.command.GenericRemoteInvocationCommandService}. <br>
  * As extension you could e.g. add
  * {@link #doSecurityCheck(net.sf.mmm.service.base.server.AbstractGenericRemoteInvocationService.RequestContext)
  * custom security checks} or override the {@link #handleCallFailure(RemoteInvocationCall, Throwable) error
@@ -342,8 +342,8 @@ RESPONSE extends GenericRemoteInvocationResponse, HANDLER extends GenericRemoteI
   /**
    * This method calls
    * {@link #processTransactionalCalls(GenericRemoteInvocationTransactionalCalls, RequestContext)} in a new
-   * transaction.<br/>
-   * <b>ATTENTION:</b><br/>
+   * transaction. <br>
+   * <b>ATTENTION:</b><br>
    * If you want to implement this using spring-aop and <code>@Transactional</code> you need to be aware that
    * you have to keep the annotated method out of this class as spring-aop uses dynamic proxies by default
    * that only support transactions when a method is called from outside the class and not for method calls

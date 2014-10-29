@@ -58,8 +58,8 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
   /**
    * This method performs the validation in case <code>value</code> is NOT <code>null</code>. This method contains the
    * actual custom logic for the validation. It is therefore designed in a way that makes it most simple to implement
-   * custom validators.<br/>
-   * <b>ATTENTION:</b><br/>
+   * custom validators. <br>
+   * <b>ATTENTION:</b><br>
    * For internationalization you should not directly return string literals but use
    * {@link net.sf.mmm.util.nls.api.NlsMessage} instead.
    * 

@@ -7,7 +7,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for the actual strategy used for the (delta-)indexing
- * of content.<br/>
+ * of content. <br>
  * There are multiple implementations of this interface with different
  * strategies for incremental indexing as well as for indexing from scratch
  * every time. Implementations of this interface are typically stateful and
@@ -24,7 +24,7 @@ public interface SearchIndexerUpdateStrategy {
   /**
    * This method determines if this {@link SearchIndexerUpdateStrategy} is
    * responsible for {@link #index(UpdateStrategyArguments) indexing} the given
-   * <code>source</code>.<br/>
+   * <code>source</code>. <br>
    * Typical implementations will check if the
    * {@link SearchIndexerSource#getUpdateStrategy() update-strategy} matches a
    * specific value.

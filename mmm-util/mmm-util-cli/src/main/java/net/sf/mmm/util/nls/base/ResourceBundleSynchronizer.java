@@ -44,7 +44,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This class can be used to create and update the localized bundles (properties) from an
- * {@link AbstractResourceBundle} .<br>
+ * {@link AbstractResourceBundle} . <br>
  * It is a main-program. Simply call it with the parameter "--help" to get help. <b>ATTENTION:</b><br>
  * This class only works with java 6 or above.
  *

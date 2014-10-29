@@ -26,10 +26,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is an implementation of the {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader}
- * adding support for XInclude.<br>
+ * adding support for XInclude. <br>
  * For details about XInclude see: <a
- * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>.<br>
- * <b>ATTENTION:</b><br/>
+ * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>. <br>
+ * <b>ATTENTION:</b><br>
  * Please note that currently only plain XML inclusion is currently supported and no XPointer.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -122,7 +122,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   }
 
   /**
-   * This method detects if a recursive inclusion takes place.<br>
+   * This method detects if a recursive inclusion takes place. <br>
    *
    * TODO: Potentially the same resource could cause an inclusion cycle without causing an infinity loop by
    * using different XPointer expressions.

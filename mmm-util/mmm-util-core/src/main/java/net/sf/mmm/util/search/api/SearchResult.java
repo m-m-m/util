@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * This is the interface for the result of a query for {@link SearchCriteria}. It contains the
- * {@link #getHits() hits} matching the {@link SearchCriteria}.<br>
+ * {@link #getHits() hits} matching the {@link SearchCriteria}. <br>
  * 
  * @param <HIT> is the type of {@link #getHits() hits}. Should typically be a
  *        {@link net.sf.mmm.util.entity.api.GenericEntity}.
@@ -18,7 +18,7 @@ import java.util.List;
 public interface SearchResult<HIT> extends Serializable {
 
   /**
-   * This method gets the {@link List} with all hits returned by this {@link SearchResult}.<br/>
+   * This method gets the {@link List} with all hits returned by this {@link SearchResult}. <br>
    * <b>ATTENTION:</b><br>
    * The {@link List#size() hit-count} is limited to the {@link SearchCriteria#getMaximumHitCount() maximum
    * hit-count} specified by your {@link SearchCriteria}.

@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains interfaces for handlers of the UI.
- * <a name="documentation"/><h2>UI Handlers API</h2> 
+ * <a name="documentation"></a><h2>UI Handlers API</h2> 
  * This package and it sub-packages contain {@link net.sf.mmm.client.ui.api.handler.UiHandler}-interfaces defining
  * <em>action operations</em> for events triggered from the UI (user interface). These are call-back interfaces that 
- * will be implemented with the custom behavior for the particular event.<br/>
- * <b>ATTENTION:</b><br/>
+ * will be implemented with the custom behavior for the particular event. <br>
+ * <b>ATTENTION:</b><br>
  * Typically these interfaces are implemented by a controller or presenter following the <em>MVC</em> or
  * <em>MVP</em> paradigm. However, this should only be done if it helps to increase code quality (e.g. for separation 
  * of concerns). In various cases there are recurring <em>UI patterns</em> in an application client that are best 

@@ -11,7 +11,7 @@ import net.sf.mmm.util.exception.api.NlsParseException;
 /**
  * This is a rewrite of the awkward {@link java.util.StringTokenizer} provided by the JDK. This implementation
  * {@link #next() returns} an empty {@link String} if a duplicate delimiter is detected. Further it implements
- * {@link Iterable} and can be used in enhanced for-loops.<br>
+ * {@link Iterable} and can be used in enhanced for-loops. <br>
  * <b>ATTENTION:</b><br>
  * Returning an empty {@link String} also for duplicated delimited might NOT always be desired (especially
  * when delimiter is whitespace).

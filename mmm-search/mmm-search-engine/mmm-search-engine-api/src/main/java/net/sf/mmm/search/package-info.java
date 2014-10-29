@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides full-text search that can be easily integrated into any application.
- * <a name="documentation"/><h2>mmm-search</h2>
+ * <a name="documentation"></a><h2>mmm-search</h2>
  * Here you will find how to use <code>mmm-search</code>.
  * <h3>Configuration</h3>
  * First of all you have to create an XML configuration file
@@ -138,8 +138,8 @@
  * container, you can start searching with your browser. Visit this URL: 
  * <a href="http://localhost:8080/mmm-search-engine-webapp/search">http://localhost:8080/mmm-search-engine-webapp/search</a>.
  * If your servlet container is running on a different port or host, you have to 
- * adjust the URL accordingly.<br/>
- * <br/>
+ * adjust the URL accordingly. <br>
+ * <br>
  * Have fun!
  */
 package net.sf.mmm.search;

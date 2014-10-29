@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.api.common;
 /**
  * This is the interface that represents the <em>severity</em> of a simple message popup. The severity defines
  * the default title and the icon to use. We do NOT use an enum here to allow custom extension. However, we do
- * NOT just use a {@link String} instead to make signatures more explicit and for better documentation.<br/>
+ * NOT just use a {@link String} instead to make signatures more explicit and for better documentation. <br>
  * The following severities are predefined:
  * <ul>
  * <li>{@link #INFORMATION}</li>

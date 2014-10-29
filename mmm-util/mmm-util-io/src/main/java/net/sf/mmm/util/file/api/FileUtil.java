@@ -11,8 +11,8 @@ import net.sf.mmm.util.file.base.FileAccessPermissions;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This is the interface for a collection of utility functions for {@link File} handling and manipulation.<br/>
- * <b>NOTE:</b><br/>
+ * This is the interface for a collection of utility functions for {@link File} handling and manipulation. <br>
+ * <b>NOTE:</b><br>
  * Since Java7 there is also {@link java.nio.file.Files} that offers similar and additional features. However
  * this is not supported in limited environments such as e.g. GWT.
  *
@@ -53,7 +53,7 @@ public interface FileUtil extends FileUtilLimited {
   void copyFile(File source, File destination) throws RuntimeIoException;
 
   /**
-   * This method copies the file given by <code>source</code> to the file given by <code>destination</code>.<br>
+   * This method copies the file given by <code>source</code> to the file given by <code>destination</code>. <br>
    * <b>ATTENTION:</b><br>
    * This method will only work with java 1.6 and above!
    *
@@ -68,7 +68,7 @@ public interface FileUtil extends FileUtilLimited {
   void copyFile(File source, File destination, boolean keepFlags) throws RuntimeIoException;
 
   /**
-   * This method gets the {@link FileAccessPermissions permissions} of the given <code>file</code>.<br>
+   * This method gets the {@link FileAccessPermissions permissions} of the given <code>file</code>. <br>
    * <b>ATTENTION:</b><br>
    * This operation is only available since java 6. Further it is limited and can only determine the
    * permissions granted to the current user running this application.
@@ -83,7 +83,7 @@ public interface FileUtil extends FileUtilLimited {
 
   /**
    * This method sets the <code>{@link FileAccessPermissions permissions}</code> of the given
-   * <code>file</code>.<br>
+   * <code>file</code>. <br>
    * <b>ATTENTION:</b><br>
    * This operation is only available since java 6. Further it is limited to the permissions
    * {@link FileAccessClass#OTHERS} and {@link FileAccessClass#USER} so {@link FileAccessClass#GROUP} flags
@@ -97,11 +97,11 @@ public interface FileUtil extends FileUtilLimited {
 
   /**
    * This method copies the file or directory given by <code>source</code> into the given
-   * <code>destination</code>.<br>
+   * <code>destination</code>. <br>
    * <b>ATTENTION:</b><br>
    * In order to allow giving the copy of <code>source</code> a new {@link File#getName() name}, the
    * <code>destination</code> has to point to the final place where the copy should appear rather than the
-   * directory where the copy will be located in.<br>
+   * directory where the copy will be located in. <br>
    * <br>
    * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory
    * "/tmp". The copy will have the same name "foo".
@@ -123,11 +123,11 @@ public interface FileUtil extends FileUtilLimited {
 
   /**
    * This method copies the file or directory given by <code>source</code> into the given
-   * <code>destination</code>.<br>
+   * <code>destination</code>. <br>
    * <b>ATTENTION:</b><br>
    * In order to allow giving the copy of <code>source</code> a new {@link File#getName() name}, the
    * <code>destination</code> has to point to the final place where the copy should appear rather than the
-   * directory where the copy will be located in.<br>
+   * directory where the copy will be located in. <br>
    * <br>
    *
    * @see #copyRecursive(File, File, boolean)
@@ -171,7 +171,7 @@ public interface FileUtil extends FileUtilLimited {
 
   /**
    * This method gets all {@link File files} matching to the given <code>path</code> and <code>fileType</code>
-   * . The <code>path</code> may contain {@link net.sf.mmm.util.pattern.base.PathPatternCompiler wildcards}.<br>
+   * . The <code>path</code> may contain {@link net.sf.mmm.util.pattern.base.PathPatternCompiler wildcards}. <br>
    * Examples:
    * <ul>
    * <li>

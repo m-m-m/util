@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for the native language support (NLS).
- * <a name="documentation"/><h2>NLS API</h2>
+ * <a name="documentation"></a><h2>NLS API</h2>
  * Applications that should be used by people all over the world need
  * <em>native language support</em> (NLS). The developers task is the
  * <em>internationalization</em> (i18n) where the application has to be
@@ -10,7 +10,7 @@
  * informations. This is a challenging task that affects many aspects like
  * GUI-dialogs as well as all text-messages displayed to the end-user.
  * The NLS provided here only addresses the internationalization of text-messages
- * in a way that allows <em>localization</em> (l10n) to the users locale.<br>
+ * in a way that allows <em>localization</em> (l10n) to the users locale. <br>
  * <h3>The Problem</h3>
  * <p>
  * <img src="{@docRoot}/doc-files/no-msg-dialog.png"/>
@@ -20,13 +20,13 @@
  * peaces missing to complete the great puzzle of NLS:<br>
  * There is almost no support if an application needs NLS that is
  * handling multiple users with different locales concurrently (e.g. a
- * web-application).<br>
+ * web-application). <br>
  * You will typically store your messages in a
  * {@link java.util.ResourceBundle}. Now if you store the
  * technical key of the bundle in a message or exception the receiver needs the
  * proper <code>{@link java.util.ResourceBundle}</code> to decode it or he ends
  * up with a cryptic message he can NOT understand (e.g. as illustrated by the
- * screenshot).<br>
+ * screenshot). <br>
  * On the other hand you need to know the locale of the receiver to do the l10n when creating the message or exception
  * with the proper text. This may lead to sick design such as static hacks. Also if you have to translate the text at
  * the creation of the message every receiver has to live with this language. Especially for logging this is a big problem.
@@ -49,7 +49,7 @@
  * The i18n message is "Hi {name}! How are you?" and the dynamic argument is the users name e.g. "Lilli".
  * Now if we store these informations together we have all we need. To get the localized message we simply translate the
  * i18n message to the proper language and then fill in the arguments. If we can NOT translate we always have the
- * message in default language which is "Hi Lilli! How are you?".<br>
+ * message in default language which is "Hi Lilli! How are you?". <br>
  * But how do we translate the i18n message without artificial intelligence?
  * The answer is quite easy:
  * <h4>Recommended Approach: {@link net.sf.mmm.util.nls.api.NlsBundle}</h4>
@@ -89,8 +89,8 @@
  *   }
  * }
  * </pre>
- * For further details see {@link net.sf.mmm.util.nls.api.NlsBundle}.<br/>
- * <br/>
+ * For further details see {@link net.sf.mmm.util.nls.api.NlsBundle}. <br>
+ * <br>
  * For localization you can create property files with the translations of your NLS-bundle.
  * E.g. <code>foo/bar/NlsBundleFooBar_de.properties</code> with this content:
  * <pre>
@@ -105,7 +105,7 @@
  * In order to support you with creating and maintaining the localized
  * properties, this solution also comes with the
  * <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>.
- * <br/>
+ * <br>
  * The advantage is that also the bundle name and key are available in the {@link net.sf.mmm.util.nls.api.NlsMessage}
  * and that this approach is GWT compatible when using <code>mmm-util-gwt</code>. However, there is still our legacy
  * approach.
@@ -145,7 +145,7 @@
  * For the automatic reverse-lookup create the file
  * <code>META-INF/net.sf.mmm/nls-bundles</code> with the fully qualified name
  * of your bundle-class (foo.bar.FooBarResourceBundle) as content.
- * <br/>
+ * <br>
  * For localization you can create property files as described above in the recommended approach.
  *
  * In order to support you with creating and maintaining the localized

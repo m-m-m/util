@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is the abstract base implementation of the controller {@link javax.servlet.Servlet servlet} of the
- * search.<br/>
+ * search. <br>
  * <b>ATTENTION:</b><br>
  * Please set <code>URIEncoding="UTF-8"</code> or better <code>useBodyEncodingForURI="true"</code> for the
  * connector in the server.xml of your tomcat.
@@ -474,11 +474,11 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   }
 
   /**
-   * This method updates the {@link #getEntryTypeViews() entry type views}.<br/>
+   * This method updates the {@link #getEntryTypeViews() entry type views}. <br>
    * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s. For this view these
    * {@link SearchEntryType}s are reduced to those types that actually exist in the search-index. Then they
    * are {@link SearchEntryTypeViewBean#combine(SearchEntryType, long) combined} and finally sorted according
-   * to the {@link SearchEntryType#getTitle() title}.<br/>
+   * to the {@link SearchEntryType#getTitle() title}. <br>
    * This way the view can present the proper titles of the types and the search can filter even on combined
    * types.
    */
@@ -516,11 +516,11 @@ public abstract class AbstractSearchServlet extends HttpServlet implements Searc
   }
 
   /**
-   * This method updates the {@link #getEntryTypeViews() entry type views}.<br/>
+   * This method updates the {@link #getEntryTypeViews() entry type views}. <br>
    * The {@link SearchEngineConfiguration} defines the {@link SearchEntryType}s. For this view these
    * {@link SearchEntryType}s are reduced to those types that actually exist in the search-index. Then they
    * are {@link SearchEntryTypeViewBean#combine(SearchEntryType, long) combined} and finally sorted according
-   * to the {@link SearchEntryType#getTitle() title}.<br/>
+   * to the {@link SearchEntryType#getTitle() title}. <br>
    * This way the view can present the proper titles of the types and the search can filter even on combined
    * types.
    */

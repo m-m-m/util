@@ -7,9 +7,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
 
 /**
  * This class represents the {@link Class type} reflecting a specific {@link Number}. It allows to check attributes like
- * {@link #isDecimal()} or to {@link #getExactnessDifference(NumberType) compare} {@link NumberType}s.<br>
+ * {@link #isDecimal()} or to {@link #getExactnessDifference(NumberType) compare} {@link NumberType}s. <br>
  * Further it acts as factory to create according numbers {@link NumberType#valueOf(String) from string} or
- * {@link NumberType#valueOf(String) by converting an given number}.<br>
+ * {@link NumberType#valueOf(String) by converting an given number}. <br>
  * This is a class and NOT an {@link Enum} to be extensible.
  * 
  * @see net.sf.mmm.util.math.base.MathUtilImpl#getNumberType(Class)
@@ -55,7 +55,7 @@ public interface NumberType<NUMBER extends Number> extends AttributeReadMinimumV
   Class<NUMBER> getNumberClass();
 
   /**
-   * This method determines if the represented {@link #getNumberClass() Number} is a decimal value.<br>
+   * This method determines if the represented {@link #getNumberClass() Number} is a decimal value. <br>
    * E.g. {@link Double}, {@link Float}, or {@link java.math.BigDecimal} represent decimal values while {@link Integer}
    * or {@link Long} are NOT decimal.
    * 
@@ -64,7 +64,7 @@ public interface NumberType<NUMBER extends Number> extends AttributeReadMinimumV
   boolean isDecimal();
 
   /**
-   * This method gets the difference of the exactness of this {@link NumberType} and the given <code>otherType</code>.<br>
+   * This method gets the difference of the exactness of this {@link NumberType} and the given <code>otherType</code>. <br>
    * <b>ATTENTION:</b><br>
    * Some types such as {@link Double} and {@link java.math.BigInteger} are NOT really comparable so the exactness
    * difference might only make sense if the compared {@link NumberType types} are both {@link #isDecimal() decimal} or

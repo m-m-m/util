@@ -55,15 +55,15 @@ public final class NlsAccess {
 
   /**
    * This method sets (overrides) the {@link NlsMessageFactory}. This allows to exchange the
-   * {@link NlsMessageFactory} and thereby the implementation of {@link net.sf.mmm.util.nls.api.NlsMessage}.<br>
+   * {@link NlsMessageFactory} and thereby the implementation of {@link net.sf.mmm.util.nls.api.NlsMessage}. <br>
    * The desired behavior of a universal translator can depend from the situation where it is used. E.g. a
    * client application could use the {@link java.util.Locale#getDefault() "default locale"} to choose the
    * destination language. In a multi-user server application a {@link ThreadLocal} may be used to retrieve
-   * the appropriate {@link java.util.Locale locale}.<br>
+   * the appropriate {@link java.util.Locale locale}. <br>
    * <b>WARNING:</b><br>
    * This is only a back-door for simple applications or test situations. Please try to avoid using this
    * feature as well as {@link net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage()} and solve this issue
-   * with IoC strategies (using non-final static fields like here is evil).<br>
+   * with IoC strategies (using non-final static fields like here is evil). <br>
    * <b>ATTENTION:</b><br>
    * No synchronization is performed setting the factory instance. This assumes that an assignment is an
    * atomic operation in the JVM you are using. Additionally this method should only be invoked in the
@@ -99,7 +99,7 @@ public final class NlsAccess {
   /**
    * This method sets (overrides) the default {@link NlsTemplateResolver}. <b>WARNING:</b><br>
    * This is only a back-door for simple applications or test situations. Please try to avoid using this
-   * feature and solve this issue with IoC strategies (using non-final static fields like here is evil).<br>
+   * feature and solve this issue with IoC strategies (using non-final static fields like here is evil). <br>
    * <b>ATTENTION:</b><br>
    * No synchronization is performed setting the instance. This assumes that an assignment is an atomic
    * operation in the JVM you are using. Additionally this method should only be invoked in the initialization
@@ -134,10 +134,10 @@ public final class NlsAccess {
   }
 
   /**
-   * This method sets (overrides) the default {@link NlsBundleFactory}.<br/>
+   * This method sets (overrides) the default {@link NlsBundleFactory}. <br>
    * <b>WARNING:</b><br>
    * This is only a back-door for simple applications or test situations. Please try to avoid using this
-   * feature and solve this issue with IoC strategies (using non-final static fields like here is evil).<br>
+   * feature and solve this issue with IoC strategies (using non-final static fields like here is evil). <br>
    * <b>ATTENTION:</b><br>
    * No synchronization is performed setting the instance. This assumes that an assignment is an atomic
    * operation in the JVM you are using. Additionally this method should only be invoked in the initialization

@@ -24,8 +24,8 @@ public interface AttributeWriteValueAdvanced<VALUE> extends AttributeReadValueAd
   void setValue(VALUE value);
 
   /**
-   * This is the generic variant of {@link #setValue(Object)} and {@link #setValueForUser(Object)}.<br/>
-   * <b>NOTE:</b><br/>
+   * This is the generic variant of {@link #setValue(Object)} and {@link #setValueForUser(Object)}. <br>
+   * <b>NOTE:</b><br>
    * To make your code expressive please only use this method for generic situations where
    * <code>forUser</code> is dynamic.
    * 
@@ -45,7 +45,7 @@ public interface AttributeWriteValueAdvanced<VALUE> extends AttributeReadValueAd
   void setValueForUser(VALUE value);
 
   /**
-   * This method resets this widget. It is a convenience method for the following code.<br/>
+   * This method resets this widget. It is a convenience method for the following code. <br>
    * 
    * <pre>{@link #setValue(Object) setValue}({@link #getOriginalValue()})</pre>
    */

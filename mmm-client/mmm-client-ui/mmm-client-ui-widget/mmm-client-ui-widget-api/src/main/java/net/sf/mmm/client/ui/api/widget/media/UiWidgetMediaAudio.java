@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.api.widget.media;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
- * This is the interface for a {@link UiWidgetMedia media-player widget} that plays audio tracks. <br/>
- * <b>NOTE:</b><br/>
+ * This is the interface for a {@link UiWidgetMedia media-player widget} that plays audio tracks. <br>
+ * <b>NOTE:</b><br>
  * This is widget is invisible. For simple usage see {@link UiWidgetMediaPlayer}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

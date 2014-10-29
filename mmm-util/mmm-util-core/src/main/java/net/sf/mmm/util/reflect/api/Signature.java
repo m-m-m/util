@@ -69,7 +69,7 @@ public class Signature {
 
   /**
    * This method determines if the given signature is applicable for this signature. Here applicable means that if this
-   * is the signature of a method, that method could be called with arguments of the given signature <code>s</code>.<br>
+   * is the signature of a method, that method could be called with arguments of the given signature <code>s</code>. <br>
    * Only call this method if this signature does NOT {@link #getType(int) contain} <code>null</code>.
    * 
    * @param s is the signature to test.

@@ -3,23 +3,23 @@
 package net.sf.mmm.util.component.api;
 
 /**
- * This interface only exists for documentation purpose!<br/>
+ * This interface only exists for documentation purpose!<br>
  * <em>API</em> is a shortcut for <em>Application Programming Interface</em> and identifies all types required
  * to access a {@link net.sf.mmm.util.component.api.ComponentSpecification component}. The main idea is to
- * abstract from the implementation of the component so it gets replaceable and the design is maintainable.<br/>
+ * abstract from the implementation of the component so it gets replaceable and the design is maintainable. <br>
  * The most important type in Java to define an API is the {@link Class#isInterface() interface}. However an
  * API may also consist of {@link Enum} types or {@link net.sf.mmm.util.pojo.api.Pojo} {@link Class classes}
  * and {@link net.sf.mmm.util.lang.api.Datatype}s that are accepted as arguments by an interface. The actual
  * <em>API</em> of a {@link net.sf.mmm.util.component.api.ComponentSpecification component} is therefore the
  * combination of all these types. It has to be <em>self-contained</em> what means that it only contains
  * references to types legally considered as part of the <em>API</em>. With references we are NOT talking
- * about JavaDoc-links.<br/>
+ * about JavaDoc-links. <br>
  * A typical negative example is an interface that references objects from the implementation. That is bad
- * design as the idea of the <em>API</em> is to abstract from the implementation.<br/>
+ * design as the idea of the <em>API</em> is to abstract from the implementation. <br>
  * Please also note that the <em>API</em> will typically have references to common java
  * {@link net.sf.mmm.util.lang.api.Datatype}s such as {@link String}, {@link Long}, etc. as well as
  * {@link java.util.Collection}s especially {@link java.util.List}. All these types are considered as legal
- * parts that do NOT influence if <em>API</em> is considered as <em>self-contained</em>.<br/>
+ * parts that do NOT influence if <em>API</em> is considered as <em>self-contained</em>. <br>
  * We strongly recommend to define sub-packages named <em>api</em> for your components that define the actual
  * <em>API</em> (see Developer-Guide of this project). This allows easy checking if your code is following
  * architectural guidelines via the full-qualified references (typically in import statements). Within this
@@ -60,8 +60,8 @@ public interface Api {
    * the prefix <code>Abstract</code>. You are strongly encouraged to extend these base implementations rather
    * than directly implementing the interface to gain compatibility in case of an extension. The latter is
    * still allowed but you have to be aware of the consequences that you may have to fix compile errors after
-   * upgrading and your code may NOT work across different releases.<br/>
-   * <b>NOTE:</b><br/>
+   * upgrading and your code may NOT work across different releases. <br>
+   * <b>NOTE:</b><br>
    * With Java8 default methods can be added to interfaces. This reduces the problem but may not eliminate it.
    * This constant is only for documentation purpose. Please never use it in your code.
    */

@@ -7,8 +7,8 @@ import java.io.File;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a collection of utility functions for {@link File} handling and manipulation.<br/>
- * <b>NOTE:</b><br/>
+ * This is the interface for a collection of utility functions for {@link File} handling and manipulation. <br>
+ * <b>NOTE:</b><br>
  * Since Java7 there is also {@link java.nio.file.Files} that offers similar and additional features. However
  * this is not supported in limited environments such as e.g. GWT.
  *
@@ -28,14 +28,14 @@ public interface FileUtilLimited {
 
   /**
    * The key of the {@link System#getProperty(String) system property} <code>{@value}</code>. It contains the
-   * home directory of the user that started this JVM.<br>
+   * home directory of the user that started this JVM. <br>
    * Examples are <code>/home/mylogin</code> or <code>C:\Windows\Profiles\mylogin</code>.
    */
   String PROPERTY_USER_HOME = "user.home";
 
   /**
    * The key of the {@link System#getProperty(String) system property} <code>{@value}</code>. It contains the
-   * directory to use for temporary files.<br>
+   * directory to use for temporary files. <br>
    * Examples are <code>/tmp</code>, <code>C:\Temp</code> or <code>/usr/local/tomcat/temp</code>.
    */
   String PROPERTY_TMP_DIR = "java.io.tmpdir";
@@ -47,7 +47,7 @@ public interface FileUtilLimited {
    * This method normalizes a given <code>path</code>. It will resolve ".." and "." segments, normalize
    * backslashes and remove duplicated slashes. Further it can resolve "~" at the beginning of the path (like
    * in bash-scripts, etc.). Therefore this method resolves the path in such situations (e.g. to
-   * "/home/login/foo") and returns a physical path.<br/>
+   * "/home/login/foo") and returns a physical path. <br>
    * Here are some examples assuming that <code>separator</code> is '/' (backslashes are NOT escaped):
    * <table border="1">
    * <tr>
@@ -101,9 +101,9 @@ public interface FileUtilLimited {
   String normalizePath(String path);
 
   /**
-   * This method extracts the extension from the given <code>filename</code>.<br>
+   * This method extracts the extension from the given <code>filename</code>. <br>
    * Example: <code>{@link #getExtension(String) getExtension}("test.java")</code> would return
-   * <code>"java"</code>.<br>
+   * <code>"java"</code>. <br>
    * <b>ATTENTION:</b><br>
    * If the <code>filename</code> is just a dot followed by the extension (e.g. <code>".java"</code>), the
    * empty string is returned.
@@ -116,7 +116,7 @@ public interface FileUtilLimited {
 
   /**
    * This method gets the <em>basename</em> of the given <code>filename</code> (path). The basename is the raw
-   * name of the file without the {@link #getDirname(String) path}.<br>
+   * name of the file without the {@link #getDirname(String) path}. <br>
    * Examples:
    * <table border="1">
    * <tr>
@@ -167,7 +167,7 @@ public interface FileUtilLimited {
   String getBasename(String filename);
 
   /**
-   * This method gets the directory-name of the given <code>filename</code> (path).<br>
+   * This method gets the directory-name of the given <code>filename</code> (path). <br>
    * Examples:
    * <table border="1">
    * <tr>

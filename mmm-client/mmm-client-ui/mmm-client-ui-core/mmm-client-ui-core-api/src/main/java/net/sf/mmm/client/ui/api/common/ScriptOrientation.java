@@ -4,15 +4,15 @@ package net.sf.mmm.client.ui.api.common;
 
 /**
  * This enumeration represents the orientation of a script-system. It is rather used to determine the
- * orientation of the layout for widgets but better to understand as the orientation of the script.<br>
+ * orientation of the layout for widgets but better to understand as the orientation of the script. <br>
  * When you read this javadoc you will be used to the fact that many scripts are written
  * {@link #isHorizontal() horizontally} in the direction from {@link #isLeftToRight() left to right}. However
  * various other scripts on the world work different. Some scripts are written from the right to the left
  * others vertically from the top to the bottom while the vertical rows may be ordered again from the left to
- * the right. The user expects the orientation of widgets ordered according to its script-system.<br>
+ * the right. The user expects the orientation of widgets ordered according to its script-system. <br>
  * Please note that there are also scripts that go bidirectional (bidi) so e.g. normal text is going
  * right-to-left while numbers are written left-to-right. However the {@link ScriptOrientation} only specifies
- * the main direction for the layout.<br>
+ * the main direction for the layout. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

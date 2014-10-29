@@ -20,7 +20,7 @@ public interface BusyManager {
    * waiting for a remote invocation service result or performing client-side longer lasting logic (sorting
    * long lists, complex rendering, etc.). The logic what happens is abstracted by the interface. Typically
    * the user gets visual feedback (e.g. an animated wait image or progress-bar) and can not interact with the
-   * client (e.g. press additional buttons).<br/>
+   * client (e.g. press additional buttons). <br>
    * If the client is NOT busy, it is considered as <em>idle</em> and the user can interact normally with the
    * client.
    * 

@@ -3,9 +3,9 @@
 /**
  * Contains the base-implementation for the available (delta-)indexing 
  * strategies.
- * <a name="documentation"/><h2>Search-Indexer Strategy Base</h2> 
+ * <a name="documentation"></a><h2>Search-Indexer Strategy Base</h2> 
  * This package contains the base-implementation of the 
- * {@link net.sf.mmm.search.indexer.api.strategy strategy API}.<br/>
+ * {@link net.sf.mmm.search.indexer.api.strategy strategy API}. <br>
  */
 package net.sf.mmm.search.indexer.base.strategy;
 

@@ -72,7 +72,7 @@ public enum CliStyleHandling {
   };
 
   /**
-   * This method performs the handling of the anomaly represented by the given <code>exception</code>.<br>
+   * This method performs the handling of the anomaly represented by the given <code>exception</code>. <br>
    * You should avoid creating the exception and call this method for the handling {@link #OK}.
    * 
    * @param logger is the {@link Logger} potentially used to log the exception (-message).

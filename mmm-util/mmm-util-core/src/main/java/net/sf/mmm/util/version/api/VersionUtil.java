@@ -130,7 +130,7 @@ public interface VersionUtil {
    * </table>
    * As all ASCII letters are reserved for existing letter symbol definitions (see table above) or further
    * extensions, you need to enclose static text in braces (e.g. "(rev)" to represent the static
-   * {@link String} "rev" as infix for a format pattern).<br>
+   * {@link String} "rev" as infix for a format pattern). <br>
    * Further, infix text (no matter if enclosed in braces or not) is omitted if the following letter symbol is
    * resolved as undefined. To prevent this add the dollar character ($) to terminate a static infix that
    * should always occur.

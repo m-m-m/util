@@ -11,7 +11,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the interface for a resource {@link #isData() potentially} containing data. You can think of a
- * {@link DataResource} as a {@link java.io.File file} but it may come from other sources than the filesystem.<br>
+ * {@link DataResource} as a {@link java.io.File file} but it may come from other sources than the filesystem. <br>
  * The major reason for naming it {@link DataResource} is that <code>Resource</code> is a very general name
  * already occupied by {@link javax.annotation.Resource}.
  *
@@ -22,7 +22,7 @@ public interface DataResource {
 
   /**
    * This method determines if this resource is available. Available simply means that it exists and
-   * {@link #openStream() data can be read}.<br/>
+   * {@link #openStream() data can be read}. <br>
    * <b>ATTENTION:</b><br>
    * Depending on the underlying implementation this can be a relatively expensive operation. E.g. if this
    * resource points to a remote URL this method has to open a network connection in order to verify if the
@@ -53,7 +53,7 @@ public interface DataResource {
 
   /**
    * This method gets the path of this resource. Please note that the path is including the {@link #getName()
-   * name} of the resource.<br/>
+   * name} of the resource. <br>
    * <b>ATTENTION:</b><br>
    * The result of this method may differ to the path used in the URL when this resource has been created.
    *
@@ -120,7 +120,7 @@ public interface DataResource {
 
   /**
    * This method creates a new {@link DataResource} pointing to the given <code>resourcePath</code> based on
-   * this resource.<br>
+   * this resource. <br>
    * E.g. if this resource points to the file "/etc/init.d/rc" and <code>relativePath</code> would be
    * "../apt/sources.list" the resulting resource would point to "/etc/apt/sources.list".
    *

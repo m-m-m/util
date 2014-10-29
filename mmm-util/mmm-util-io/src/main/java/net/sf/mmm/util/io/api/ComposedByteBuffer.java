@@ -17,7 +17,7 @@ public interface ComposedByteBuffer extends ByteBuffer {
    * {@link net.sf.mmm.util.io.api.spi.DetectorStreamBuffer} is composed out of {@link ByteArray}s. This
    * method allows efficient processing of bytes from <code>byte[]</code> rather then calling
    * {@link #hasNext()} and {@link #next()} and repetitive. Additionally this way allows full lookahead up to
-   * the end of the buffer without consuming the data.<br>
+   * the end of the buffer without consuming the data. <br>
    * <b>ATTENTION:</b><br>
    * Consuming operations such as {@link #next()} or {@link #skip(long)} will invalidate the returned
    * {@link ByteArray}. Please do NOT call these methods while working with {@link ByteArray}s.
@@ -34,7 +34,7 @@ public interface ComposedByteBuffer extends ByteBuffer {
   ByteArray getByteArray(int index);
 
   /**
-   * This method gets the number of {@link ByteArray}s currently available via {@link #getByteArray(int)}.<br>
+   * This method gets the number of {@link ByteArray}s currently available via {@link #getByteArray(int)}. <br>
    * <b>ATTENTION:</b><br>
    * Consuming operations such as {@link #next()} or {@link #skip(long)} will invalidate the returned
    * {@link ByteArray}. Please do NOT call these methods while working with {@link ByteArray}s.

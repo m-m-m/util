@@ -13,7 +13,7 @@ public interface StringSyntax {
   /**
    * This method gets the character used to start a quotation that should be terminated by a
    * {@link #getQuoteEnd() quote-end} character. The text inside the quote is taken as is (without the quote
-   * characters).<br>
+   * characters). <br>
    * Common examples for quote characters are the single quotes (<code>'</code>) and double quotes (
    * <code>"</code>).
    * 
@@ -33,8 +33,8 @@ public interface StringSyntax {
   /**
    * This method gets the character used as escape. It is used to mark special characters like
    * {@link #getQuoteStart()} to allow these characters also in the payload. The escape itself is removed on
-   * decoding while the next character is taken as is without any special interpretation.<br/>
-   * The most common escape character is the backslash (<code>\</code>).<br>
+   * decoding while the next character is taken as is without any special interpretation. <br>
+   * The most common escape character is the backslash (<code>\</code>). <br>
    * Here are some examples for decoding:
    * <table border="1">
    * <tr>

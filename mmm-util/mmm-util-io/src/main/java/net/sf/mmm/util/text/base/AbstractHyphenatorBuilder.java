@@ -15,7 +15,7 @@ import net.sf.mmm.util.text.api.Hyphenator;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
 
 /**
- * This is the abstract base-implementation of the {@link HyphenatorBuilder} interface.<br>
+ * This is the abstract base-implementation of the {@link HyphenatorBuilder} interface. <br>
  * It uses a cache with {@link WeakReference}s to the {@link Hyphenator}s that have already been build. If a
  * {@link Hyphenator} is requested several times, it can typically be served from the cache.
  * 

@@ -10,8 +10,8 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetButtonPanel;
 /**
  * This is the interface for a {@link UiWidgetAbstractWindow base window widget} that represents a
  * <em>popup</em> window. A popup is a modal window that blocks the client application until it is
- * {@link #close() closed}. <br/>
- * <b>NOTE:</b><br/>
+ * {@link #close() closed}. <br>
+ * <b>NOTE:</b><br>
  * You typically want to call {@link #createAndAddCloseButton()}. This is not done automatically so you can
  * define the order of the buttons yourself.
  *

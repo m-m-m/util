@@ -103,7 +103,7 @@ public interface DomUtil {
 
   /**
    * This method gets the local name of a given <code>element</code>. This is the name of the element without
-   * any namespace prefix.<br>
+   * any namespace prefix. <br>
    * The method {@link Node#getLocalName()} will return <code>null</code> if the {@link Node} has no
    * {@link Node#getNamespaceURI() namespace}. Therefore this method makes your life a little easier.
    * 

@@ -5,7 +5,7 @@ package net.sf.mmm.util.value.api;
 /**
  * This is the interface for an accessor to a specific property of a typed object. It allows to
  * {@link #getValue(Object) get} and {@link #setValue(Object, Object) set} the property abstracting from the
- * way how to do this.<br/>
+ * way how to do this. <br>
  * Generic implementations can be based on reflection (e.g. using
  * {@link net.sf.mmm.util.pojo.path.api.PojoPathNavigator}). However, for environments such as GWT where no
  * reflection is available implementations for each property can be provided either hand-written or generated.

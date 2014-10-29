@@ -18,7 +18,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  * This is the abstract base class for <em>custom widgets</em>. A custom widget is a
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget widget} implemented via {@link #getDelegate() delegation}
  * to another widget. It is therefore toolkit independent and can be implemented as a regular class. This
- * makes the programming model of this UI-Toolkit easy to use.<br/>
+ * makes the programming model of this UI-Toolkit easy to use. <br>
  * Typical use-cases for custom widgets are {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField field
  * widgets} for custom datatypes and {@link UiWidgetComposite composites} for editors of particular business
  * objects.
@@ -442,8 +442,8 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
    * This method initializes this widget. It is automatically called from
    * {@link #setParent(UiWidgetComposite)} so initialization is performed before the widget is actually
    * attached to the screen for the first time. The first call of this method delegates to
-   * {@link #doInitialize()}. Further calls of this method will have no effect.<br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link #doInitialize()}. Further calls of this method will have no effect. <br>
+   * <b>ATTENTION:</b><br>
    * You should not call this method directly unless you are absolutely aware of what you are doing.
    */
   protected final void initialize() {
@@ -456,8 +456,8 @@ public abstract class UiWidgetCustom<VALUE, DELEGATE extends UiWidget> extends A
 
   /**
    * This method is called from {@link #initialize()} but only if called for the first time. You may override
-   * this method to add additional initialization logic. Then do not forget the <code>super</code> call.<br/>
-   * <b>ATTENTION:</b><br/>
+   * this method to add additional initialization logic. Then do not forget the <code>super</code> call. <br>
+   * <b>ATTENTION:</b><br>
    * Never call this method directly.
    */
   protected void doInitialize() {

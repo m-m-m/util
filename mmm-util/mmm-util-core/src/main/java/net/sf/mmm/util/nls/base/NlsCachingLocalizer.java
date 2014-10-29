@@ -17,7 +17,7 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is a class that stores {@link NlsMessage messages} and simplifies to resolve them.<br/>
+ * This is a class that stores {@link NlsMessage messages} and simplifies to resolve them. <br>
  * <b>ATTENTION:</b><br>
  * This class collects instances {@link NlsMessage} and {@link NlsTemplate} to speed up repetitive
  * translations. So only use this class for a dedicated set of constant {@link #localize(Locale, String)

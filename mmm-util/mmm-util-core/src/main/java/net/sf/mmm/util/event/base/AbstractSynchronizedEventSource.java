@@ -8,7 +8,7 @@ import net.sf.mmm.util.event.api.EventListener;
 
 /**
  * This class extends {@link AbstractEventSource} with the ability of synchronization and therefore is
- * thread-safe.<br>
+ * thread-safe. <br>
  * It uses a {@link java.util.concurrent.ConcurrentLinkedQueue} and therefore allows
  * {@link #addListener(EventListener) adding} or {@link #removeListener(EventListener) removing} of
  * {@link EventListener listeners} during {@link EventListener#handleEvent(Object) event-handling}.

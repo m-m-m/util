@@ -14,7 +14,7 @@ import net.sf.mmm.util.entity.base.AbstractRevisionedEntity;
 
 /**
  * This is the abstract base-implementation of a {@link net.sf.mmm.util.entity.api.GenericEntity} using the
- * {@link javax.persistence JPA} (Java Persistence API).<br>
+ * {@link javax.persistence JPA} (Java Persistence API). <br>
  * 
  * @param <ID> is the type of the {@link #getId() primary key}.
  * 
@@ -35,10 +35,10 @@ public abstract class AbstractEntity<ID> extends AbstractRevisionedEntity<ID> im
   }
 
   /**
-   * <b>ATTENTION:</b><br/>
+   * <b>ATTENTION:</b><br>
    * If your ID is not {@link GeneratedValue generated}, you need to override this method. In this case you
-   * can also override {@link #setId(Object)} to change the visibility to public.<br/>
-   * <br/>
+   * can also override {@link #setId(Object)} to change the visibility to public. <br>
+   * <br>
    * 
    * {@inheritDoc}
    */

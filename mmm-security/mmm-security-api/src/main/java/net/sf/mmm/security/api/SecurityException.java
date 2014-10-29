@@ -7,8 +7,8 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This exception is used if something was accessed violating a security constraint.<br>
- * <b>ATTENTION:</b><br/>
+ * This exception is used if something was accessed violating a security constraint. <br>
+ * <b>ATTENTION:</b><br>
  * For regular exceptions it is desirable to give many details to the end-user so the problem can be tracked
  * down precisely. However, in the context of security (especially authentication and authorization) it is
  * recommended to give very limited feedback to the user and log the exception on the server. This does NOT

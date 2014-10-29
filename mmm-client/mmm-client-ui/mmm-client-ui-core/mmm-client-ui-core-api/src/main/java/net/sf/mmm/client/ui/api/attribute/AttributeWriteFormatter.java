@@ -14,8 +14,8 @@ import net.sf.mmm.util.lang.api.Formatter;
 public abstract interface AttributeWriteFormatter<VALUE> extends AttributeReadFormatter<VALUE> {
 
   /**
-   * This method sets the {@link #getFormatter() formatter} of this object.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getFormatter() formatter} of this object. <br>
+   * <b>ATTENTION:</b><br>
    * Please be aware of {@link net.sf.mmm.util.nls.api.NlsMessage i18n} when implementing formatters.
    * 
    * @see net.sf.mmm.util.lang.base.FormatterToString

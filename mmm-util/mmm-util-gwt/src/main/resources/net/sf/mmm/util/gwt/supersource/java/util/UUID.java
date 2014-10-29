@@ -69,7 +69,7 @@ public final class UUID implements Serializable, Comparable<UUID> {
   }
 
   /**
-   * <b>ATTENTION:</b><br/>
+   * <b>ATTENTION:</b><br>
    * This method is not supported and returns <code>null</code>.
    *
    * @see java.util.UUID#randomUUID()

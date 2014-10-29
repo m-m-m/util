@@ -4,10 +4,10 @@ package net.sf.mmm.util.metakey.api;
 
 /**
  * This interface is a collection of constants defining keys for
- * metadata-properties.<br>
+ * metadata-properties. <br>
  * This is the root that all such interfaces inherit from. It defines the common
  * properties and is inspired by but NOT identical to the <a
- * href="http://dublincore.org">DCMI</a>.<br>
+ * href="http://dublincore.org">DCMI</a>. <br>
  * All properties defined by this interface and its sub-interfaces by default
  * have values of the type {@link String}. Exceptions will be documented
  * explicitly in the javadoc.
@@ -17,7 +17,7 @@ package net.sf.mmm.util.metakey.api;
 public interface MetakeyCore {
 
   /**
-   * The official title of the content.<br>
+   * The official title of the content. <br>
    * <table border="1">
    * <tr>
    * <td>DCMI Name:</td>
@@ -37,13 +37,13 @@ public interface MetakeyCore {
 
   /**
    * The subtitle of the content. It informs about a specific detail of the
-   * content but is NOT part of the official {@link #TITLE}.<br>
+   * content but is NOT part of the official {@link #TITLE}. <br>
    * Examples: "Live in Budapest", "Digitally Remastered", "Limited Edition"
    */
   String SUBTITLE = "subtitle";
 
   /**
-   * A short description (abstract) of the content.<br>
+   * A short description (abstract) of the content. <br>
    * <table border="1">
    * <tr>
    * <td>DCMI Name:</td>
@@ -132,10 +132,10 @@ public interface MetakeyCore {
    * href="http://www.mathguide.de/projekt/doku/landcode.html">two-letter code
    * according to ISO-3166</a>. The case of the letters does NOT matter. However
    * a common practice is to use lower-case for language-codes and upper-case
-   * for country-codes.<br>
-   * Examples are "en" or "fr-CA".<br>
+   * for country-codes. <br>
+   * Examples are "en" or "fr-CA". <br>
    * Will NOT be set if NOT applicable (e.g. for an symbolic image or
-   * instrumental music).<br>
+   * instrumental music). <br>
    * URI: http://purl.org/dc/elements/1.1/language
    * <table border="1">
    * <tr>
@@ -171,13 +171,13 @@ public interface MetakeyCore {
   String SOURCE = "source";
 
   /**
-   * The material or physical carrier of the resource.<br>
+   * The material or physical carrier of the resource. <br>
    * URI: http://purl.org/dc/terms/medium
    */
   String MEDIUM = "medium";
 
   /**
-   * The size of the file containing the content.<br>
+   * The size of the file containing the content. <br>
    * <b>ATTENTION:</b><br>
    * This property does NOT actually belong to the metadata of the content
    * itself. It is directly related to the file representing the content.
@@ -187,7 +187,7 @@ public interface MetakeyCore {
 
   /**
    * The type of the file containing the content. This will typically be the <a
-   * href="http://www.iana.org/assignments/media-types/">mimetype</a>.<br>
+   * href="http://www.iana.org/assignments/media-types/">mimetype</a>. <br>
    * <b>ATTENTION:</b><br>
    * This property does NOT actually belong to the metadata of the content
    * itself. It is directly related to the file representing the content.

@@ -4,11 +4,11 @@ package net.sf.mmm.util.validation.api;
 
 
 /**
- * A {@link ValueValidator} allows to {@link #validate(Object) validate} according values.<br/>
+ * A {@link ValueValidator} allows to {@link #validate(Object) validate} according values. <br>
  * There can be arbitrary implementations of this interface. A regular implementation shall be stateless and
  * therefore thread-safe. All parameterization shall therefore happen on initialization - ideally at
- * construction.<br/>
- * <b>NOTE:</b><br/>
+ * construction. <br>
+ * <b>NOTE:</b><br>
  * This API intentionally does NOT make use of {@link Throwable exceptions} as they are expensive to produce
  * and shall only occur in exceptional situations, while a validation failure is a regular use-case. Further,
  * a validation shall validate entire objects to the end collecting all {@link ValidationFailure failures} so

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 /**
  * A {@link CliClass} is used to annotate a Java-class that holds the parameters of a main-program that are
- * parsed from the commandline arguments.<br>
+ * parsed from the commandline arguments. <br>
  * It declares the {@link #name() name of the program} and the additional {@link #usage() usage information}.
  * This annotation is optional, however it is recommended to declare it for the reason of documentation and
  * maintenance. If it is not present, the defaults will apply.

@@ -20,8 +20,8 @@ public interface UiWidgetWithValue<VALUE> extends UiWidgetAbstractWithValue<VALU
   /**
    * {@inheritDoc}
    * 
-   * <br/>
-   * <b>IMPORTANT:</b><br/>
+   * <br>
+   * <b>IMPORTANT:</b><br>
    * To prevent problems with undesired modifications of values there is a general <em>copy on get</em>
    * strategy. This way you can {@link #setValue(Object) set values} and allow them to be modified in the UI
    * without side-effects on the original value. This is especially important for composite custom widgets

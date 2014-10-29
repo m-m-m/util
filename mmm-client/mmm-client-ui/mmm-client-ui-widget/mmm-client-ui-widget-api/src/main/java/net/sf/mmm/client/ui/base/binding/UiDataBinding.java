@@ -11,11 +11,11 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
  * This is the interface for the data-binding for {@link #getValue() values} with
- * {@link net.sf.mmm.client.ui.api.widget.UiWidget widgets}.<br/>
- * <b>Important:</b><br/>
+ * {@link net.sf.mmm.client.ui.api.widget.UiWidget widgets}. <br>
+ * <b>Important:</b><br>
  * Regular users should only use the data-binding for
  * {@link net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustomComposite} and derived classes where it allows
- * comfortable {@link #createAndBind(TypedProperty) property-bindings}.<br/>
+ * comfortable {@link #createAndBind(TypedProperty) property-bindings}. <br>
  * Have a look at the following example:
  *
  * <pre>
@@ -216,8 +216,8 @@ public interface UiDataBinding<VALUE> extends UiFeatureValueAndValidation<VALUE>
   Boolean getValidity();
 
   /**
-   * This method sets the value of {@link #getValidity()}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the value of {@link #getValidity()}. <br>
+   * <b>ATTENTION:</b><br>
    * This is an internal method and should NOT be used by external users. Usage has to be compliant with
    * {@link #getValidity()}.
    *

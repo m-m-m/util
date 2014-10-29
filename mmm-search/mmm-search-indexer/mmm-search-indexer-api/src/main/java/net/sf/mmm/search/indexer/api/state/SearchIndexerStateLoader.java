@@ -17,7 +17,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface SearchIndexerStateLoader {
 
   /**
-   * This method loads the {@link SearchIndexerState}.<br/>
+   * This method loads the {@link SearchIndexerState}. <br>
    * Please avoid multiple calls of this method for the same configuration as it
    * is unspecified if the implementation will reload the state on each call.
    * 

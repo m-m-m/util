@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This is the interface for an ID that uniquely identifies an object of a particular type. The referenced
- * object is typically (but NOT strictly necessary) an {@link GenericEntity entity}.<br/>
+ * object is typically (but NOT strictly necessary) an {@link GenericEntity entity}. <br>
  * An {@link EntityId} is build out of the following parts:
  * <ul>
  * <li>{@link #getObjectId() object-id} - unique ID of an object of a particular type.</li>
@@ -17,7 +17,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * </ul>
  * Just like the {@link #getObjectId() primary key} the {@link #getRevision() revision} and
  * {@link #getTypeId() type} of an object do not change. This allows to create an instance of the identified
- * object without additional costs (e.g. database lookup) by a dynamic proxy using lazy loading.<br>
+ * object without additional costs (e.g. database lookup) by a dynamic proxy using lazy loading. <br>
  * An {@link EntityId} has a compact {@link #toString() string representation} that can be converted back to
  * an {@link EntityId}. Therefore, the implementation shall provide a {@link String}-arg constructor.
  * 
@@ -36,8 +36,8 @@ public interface EntityId extends SimpleDatatype<String> {
 
   /**
    * The minimum {@link #getObjectId() object-id} that can be used for custom {@link GenericEntity entities}.
-   * All object-IDs lower than this are reserved for master-data entities provided with the application.<br/>
-   * <b>NOTE:</b><br/>
+   * All object-IDs lower than this are reserved for master-data entities provided with the application. <br>
+   * <b>NOTE:</b><br>
    * If you want to create a reusable and distributed extension for mmm please get in contact with us and we
    * can try to find a reserved ID space.
    */
@@ -74,7 +74,7 @@ public interface EntityId extends SimpleDatatype<String> {
   /**
    * This method gets the number of the specific revision of the object referenced by this {@link EntityId}.
    * If the associated object is NOT version controlled (e.g. a class or field), then the revision will always
-   * be {@link RevisionedEntity#LATEST_REVISION null}.<br>
+   * be {@link RevisionedEntity#LATEST_REVISION null}. <br>
    * Further a revision of {@link RevisionedEntity#LATEST_REVISION null} always points to the latest revision
    * of an object.
    * 
@@ -94,7 +94,7 @@ public interface EntityId extends SimpleDatatype<String> {
    * </pre>
    * 
    * The {@link #getRevision() revision} can be omitted if zero. All number values are
-   * {@link Long#toString(long, int) encoded} using the {@link #RADIX} constant.<br/>
+   * {@link Long#toString(long, int) encoded} using the {@link #RADIX} constant. <br>
    * 
    * {@inheritDoc}
    */

@@ -24,7 +24,7 @@ import org.w3c.tidy.Tidy;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for HTML
- * documents (content with the mimetype "text/html").<br/>
+ * documents (content with the mimetype "text/html"). <br>
  * It uses JTidy for HTML-parsing but falls back to raw parsing for files that
  * are {@link ContentParserOptions#getMaximumBufferSize() large} or have
  * unpredictable size to avoid memory problems.

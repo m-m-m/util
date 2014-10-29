@@ -12,8 +12,8 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeWriteValueAsString extends AttributeReadValueAsString {
 
   /**
-   * This method sets the {@link #getValueAsString() valueAsString} of this object. <br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getValueAsString() valueAsString} of this object. <br>
+   * <b>ATTENTION:</b><br>
    * This method shall only be used in very specific situations. Use it e.g. if you explicitly want to enter
    * invalid data.
    * 

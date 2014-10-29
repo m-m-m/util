@@ -43,7 +43,7 @@ public class PojoPropertyAccessorOneArgMode extends PojoPropertyAccessorMode<Poj
   public static final PojoPropertyAccessorOneArgMode REMOVE = new PojoPropertyAccessorOneArgMode("remove", false);
 
   /**
-   * The mode for a {@link PojoPropertyAccessorOneArg getter} of a mapped property.<br>
+   * The mode for a {@link PojoPropertyAccessorOneArg getter} of a mapped property. <br>
    * For example an {@link PojoPropertyAccessorOneArg#invoke(Object, Object) invoke} with argument
    * <code>key</code> for a property {@link #getName() named} "colors" might cause a
    * <code>pojo.getColors().get(key)</code> or <code>pojo.getColors(key)</code> or even

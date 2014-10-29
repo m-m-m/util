@@ -5,7 +5,7 @@ package net.sf.mmm.client.ui.api.widget.core;
 import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 
 /**
- * This is the interface for an regular {@link UiWidgetAbstractButton button}.<br/>
+ * This is the interface for an regular {@link UiWidgetAbstractButton button}. <br>
  * Here you can see an example (with {@link #setLabel(String) label} "Click me"):
  * 
  * <pre>

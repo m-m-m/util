@@ -16,8 +16,8 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  * This exception is thrown if a validation failed unexpectedly. You may just use
  * {@link javax.validation.ValidationException}. However, this exception implements
  * {@link net.sf.mmm.util.exception.api.NlsThrowable} will all features and allows
- * {@link net.sf.mmm.util.exception.api.ExceptionTruncation}.<br/>
- * <b>ATTENTION:</b><br/>
+ * {@link net.sf.mmm.util.exception.api.ExceptionTruncation}. <br>
+ * <b>ATTENTION:</b><br>
  * Regular validation should not use exceptions. E.g. in a rich client validation happens for usability to
  * give early feedback to the end-user in case his data is incomplete or wrong and to prevent sending requests
  * to the server that can only fail. Fur such purpose bean validation (JSR303) does a great job and can be

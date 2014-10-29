@@ -9,7 +9,7 @@ import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 
 /**
  * A {@link NlsResourceLocator} is used to {@link #findResource(String, String, Locale) find} a {@link Locale
- * localized} {@link DataResource resource}.<br>
+ * localized} {@link DataResource resource}. <br>
  * The lookup algorithm is analog to the one used by {@link java.util.ResourceBundle}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -27,7 +27,7 @@ public interface NlsResourceLocator {
    * <pre>[_&lt;{@link Locale#getLanguage() language}&gt;[_&lt;{@link Locale#getCountry() country}&gt;[_&lt;{@link Locale#getVariant() variant}&gt;]]]</pre>
    * 
    * Please note that if a segment is empty but a following segment is present, multiple underscores ('_')
-   * will occur.<br>
+   * will occur. <br>
    * Examples:
    * <table border="1">
    * <tr>

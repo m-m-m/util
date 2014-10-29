@@ -11,8 +11,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
 /**
  * This class represents a range of two values, {@link #getMin() minimum} and {@link #getMax() maximum}.
  * Validation is performed at {@link #Range(Comparable, Comparable) construction} so a given {@link Range}
- * should always be valid (unless created via reflection or de-serialization).<br/>
- * <b>ATTENTION:</b><br/>
+ * should always be valid (unless created via reflection or de-serialization). <br>
+ * <b>ATTENTION:</b><br>
  * Since version 4.0.0 the {@link #getMinimumValue() minimum} and {@link #getMaximumValue() maximum value} may
  * be <code>null</code> for unbounded ranges. It is still recommended to use fixed bounds such as
  * {@link Long#MAX_VALUE}. However, for types such as {@link java.math.BigDecimal} this is not possible.

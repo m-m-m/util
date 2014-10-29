@@ -14,7 +14,7 @@ import net.sf.mmm.client.ui.api.common.LengthProperty;
 public abstract interface AttributeReadLengthProperty {
 
   /**
-   * This method gets the {@link Length} for the given {@link LengthProperty} of this object.<br/>
+   * This method gets the {@link Length} for the given {@link LengthProperty} of this object. <br>
    * E.g. the call of <code>{@link #getLength(LengthProperty) getLength}({@link LengthProperty#WIDTH})</code>
    * will return the same result as {@link AttributeReadSize#getWidth()}. Unlike {@link AttributeReadSize}
    * this method provides access to additional properties such as e.g. {@link LengthProperty#MIN_WIDTH} or

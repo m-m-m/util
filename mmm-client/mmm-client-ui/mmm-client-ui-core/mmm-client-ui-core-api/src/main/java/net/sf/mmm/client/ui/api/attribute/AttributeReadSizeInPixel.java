@@ -15,8 +15,8 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeReadSizeInPixel {
 
   /**
-   * This method gets the width of this object in pixels.<br/>
-   * <b>NOTE:</b><br/>
+   * This method gets the width of this object in pixels. <br>
+   * <b>NOTE:</b><br>
    * The result will typically be an <code>int</code> value. However, to be compatible with
    * {@link net.sf.mmm.client.ui.api.common.Length#getAmount()} and with some underlying native toolkits we
    * use <code>double</code> to prevent potential information loss.
@@ -26,8 +26,8 @@ public abstract interface AttributeReadSizeInPixel {
   double getWidthInPixel();
 
   /**
-   * This method gets the height of this object in pixels.<br/>
-   * <b>NOTE:</b><br/>
+   * This method gets the height of this object in pixels. <br>
+   * <b>NOTE:</b><br>
    * The result will typically be an <code>int</code> value. However, to be compatible with
    * {@link net.sf.mmm.client.ui.api.common.Length#getAmount()} and with some underlying native toolkits we
    * use <code>double</code> to prevent potential information loss.

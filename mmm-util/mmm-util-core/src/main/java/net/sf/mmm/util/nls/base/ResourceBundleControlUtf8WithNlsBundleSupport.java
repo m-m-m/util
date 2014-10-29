@@ -14,7 +14,7 @@ import net.sf.mmm.util.nls.api.NlsBundle;
  * {@link net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage(Locale) localization} takes place for a
  * {@link java.util.Locale} where no {@link ResourceBundle} is available then every lookup will cause a
  * {@link java.util.MissingResourceException}. As this is causing massive overhead when many localizations
- * take place, we use this control class with the following strategy:<br/>
+ * take place, we use this control class with the following strategy:<br>
  * If {@link #newBundle(String, Locale, String, ClassLoader, boolean)} is called with
  * {@link java.util.Locale#ROOT} and there is no regular {@link ResourceBundle} available, but an
  * {@link NlsBundle} with the given <code>baseName</code> it is

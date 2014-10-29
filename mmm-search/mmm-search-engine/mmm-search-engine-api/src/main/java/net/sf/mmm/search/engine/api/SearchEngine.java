@@ -24,7 +24,7 @@ public interface SearchEngine {
    * This method performs an initial search for a given <code>query</code> and returns the first
    * {@link SearchResultPage}. The {@link SearchHit hits} are in descending order of their
    * {@link SearchHit#getScore() score} so the best {@link SearchHit hit} is the first
-   * {@link SearchResultPage#getPageHit(int) hit} of the page .<br/>
+   * {@link SearchResultPage#getPageHit(int) hit} of the page . <br>
    * For getting the results of a following {@link SearchResultPage} use
    * {@link #search(SearchQuery, int, int, int)}.
    * 
@@ -53,7 +53,7 @@ public interface SearchEngine {
    *        After a {@link SearchResultPage search result} was retrieved by this method, further calls for the
    *        {@link String#equals(Object) same} {@link SearchResultPage#getQuery() query} can be performed with
    *        a <code>pageIndex</code> greater than <code>0</code> and less than
-   *        <code>{@link SearchResultPage#getPageCount()}</code>.<br>
+   *        <code>{@link SearchResultPage#getPageCount()}</code>. <br>
    *        It can NOT be guaranteed that the <code>pageIndex</code> is always valid in the sense as described
    *        above (the search index may have been modified in the meantime). An implementation has to be able
    *        to handle calls with a <code>pageIndex</code> greater or equal to

@@ -26,7 +26,7 @@ public interface ValidationFailure extends Message {
 
   /**
    * This method gets the message of the validation failure. This is a localized text displayed to end-users.
-   * It should explain the reason of the failure in a understandable but short form.<br/>
+   * It should explain the reason of the failure in a understandable but short form. <br>
    * Some examples are "This field may not be blank." or "This value has to be in the range from 5 to 9.".
    * Depending on the {@link ValueValidator#validate(Object, Object) usage} the message may also contain the
    * name of the field or other context information in order to determine the source of the problem.
@@ -36,8 +36,8 @@ public interface ValidationFailure extends Message {
   String getMessage();
 
   /**
-   * This method gets the {@link #getMessage() message} localized for the given {@link Locale}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the {@link #getMessage() message} localized for the given {@link Locale}. <br>
+   * <b>ATTENTION:</b><br>
    * This method is designed for server applications with NLS. On client side (e.g. for GWT clients) only a
    * single locale may be supported at a time and this method will behave like {@link #getMessage()} ignoring
    * the lcoale.

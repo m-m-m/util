@@ -20,7 +20,7 @@ public abstract interface Accessibility {
   /**
    * The Web Acessibility initiative (WAI) has created a standardized framework called <a
    * href="http://www.w3.org/WAI/intro/aria.php">WAI-ARIA</a> that aims to support accessibility for rich
-   * Internet applications (ARIA).<br/>
+   * Internet applications (ARIA). <br>
    * The main concept is to add semantical information to UI elements via specialized attributes. The most
    * important of these attributes is the role attribute. While this is already handled inside our framework
    * there are some descriptive informations required that have to be set by the UI developer.

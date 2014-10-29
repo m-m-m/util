@@ -64,7 +64,7 @@ public class ConfiguredSearchIndexerOptionsBean implements ConfiguredSearchIndex
   }
 
   /**
-   * This method sets the {@link #isOverwriteEntries() overwriteEntries-flag}.<br/>
+   * This method sets the {@link #isOverwriteEntries() overwriteEntries-flag}. <br>
    * <b>ATTENTION:</b><br>
    * Be careful with overwriting. Your existing entries will be lost. You may
    * loose valuable data.

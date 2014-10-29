@@ -8,8 +8,8 @@ import java.security.Principal;
  * This is the interface for a component that manages the <em>authorization</em>
  * of an application. The term authorization means that it is
  * {@link #verifyPermission(Principal, Object) verified} that a given user is
- * permitted to perform a given operation.<br>
- * <b>ATTENTION:</b><br/>
+ * permitted to perform a given operation. <br>
+ * <b>ATTENTION:</b><br>
  * Never mix positive (granting) and negative (denying) permission concepts. It
  * is strongly recommended to follow the principle that everything is forbidden
  * by default and configured permissions grant a user access to an operation.

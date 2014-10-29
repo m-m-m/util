@@ -319,8 +319,8 @@ public interface NlsMessage extends NlsObject, Serializable {
   Object getArgument(int index);
 
   /**
-   * This method gets the untranslated message (default language should be English) with arguments filled in.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the untranslated message (default language should be English) with arguments filled in. <br>
+   * <b>ATTENTION:</b><br>
    * In most cases you wand to use {@link #getLocalizedMessage(Locale)} instead of this method.
    *
    * @see #getLocalizedMessage(Locale, NlsTemplateResolver)
@@ -331,7 +331,7 @@ public interface NlsMessage extends NlsObject, Serializable {
 
   /**
    * This method tries to get the localized message as string using the {@link Locale#getDefault() default}
-   * {@link Locale}.<br>
+   * {@link Locale}. <br>
    * <b>ATTENTION:</b><br>
    * If possible try to avoid using this method and use {@link #getLocalizedMessage(Locale)} instead.
    *

@@ -3,9 +3,9 @@
 /**
  * Contains {@link net.sf.mmm.content.parser.api.ContentParser}-implementations 
  * for XML files.
- * <a name="documentation"/><h2>Content-Parser Impl XML</h2>
+ * <a name="documentation"></a><h2>Content-Parser Impl XML</h2>
  * This package contains implementations of the 
- * {@link net.sf.mmm.content.parser.api.ContentParser} interface for XML files.<br/>
+ * {@link net.sf.mmm.content.parser.api.ContentParser} interface for XML files. <br>
  */
 package net.sf.mmm.content.parser.impl.xml;
 

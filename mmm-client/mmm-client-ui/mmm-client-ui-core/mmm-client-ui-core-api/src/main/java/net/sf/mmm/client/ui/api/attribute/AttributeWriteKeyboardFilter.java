@@ -15,8 +15,8 @@ public interface AttributeWriteKeyboardFilter extends AttributeReadKeyboardFilte
 
   /**
    * This method sets the {@link #getKeyboardFilter() keyboard-filter}. Typically such filter is only set once
-   * (e.g. to build custom datatype fields based on generic text input widgets) and then never changed.<br/>
-   * <b>ATTENTION:</b><br/>
+   * (e.g. to build custom datatype fields based on generic text input widgets) and then never changed. <br>
+   * <b>ATTENTION:</b><br>
    * A keyboard filter is no guarantee that it is impossible for the user to enter invalid characters. E.g. if
    * you are building a web-client some browser quirks allow to bypass the keyboard filter using copy and
    * paste. Be sure to also validate the result in any case.

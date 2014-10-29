@@ -80,8 +80,8 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
 
   /**
    * This method will initialize and startup this refresher. On the first call of this method a new thread
-   * will be started, that periodically performs a refresh.<br/>
-   * Multiple calls of this method have no further effect unless the refresher is {@link #close() closed}.<br/>
+   * will be started, that periodically performs a refresh. <br>
+   * Multiple calls of this method have no further effect unless the refresher is {@link #close() closed}. <br>
    * <b>NOTE:</b><br>
    * This is intentionally NOT performed automatically via
    * {@link net.sf.mmm.util.component.base.AbstractComponent#initialize()} so the startup only happens if

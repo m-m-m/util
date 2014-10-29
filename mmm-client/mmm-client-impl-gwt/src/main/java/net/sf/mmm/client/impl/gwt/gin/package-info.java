@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the GIN configuration for this client framework.
- * <a name="documentation"/><h2>Client Impl GIN (GWT)</h2> 
+ * <a name="documentation"></a><h2>Client Impl GIN (GWT)</h2> 
  * This package contains the GIN (GWT INject) configuration for this GWT based implementation of the
  * {@link net.sf.mmm.client.api Client API}.
  */

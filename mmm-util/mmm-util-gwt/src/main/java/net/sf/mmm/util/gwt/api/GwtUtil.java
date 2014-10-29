@@ -8,8 +8,8 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * This utility class provides various functions for GWT specific functions. <br/>
- * <b>NOTE:</b><br/>
+ * This utility class provides various functions for GWT specific functions. <br>
+ * <b>NOTE:</b><br>
  * All functions related to JavaScript (JSNI) can be found in {@link JavaScriptUtil}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

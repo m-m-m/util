@@ -4,7 +4,7 @@ package net.sf.mmm.util.contenttype.base.format;
 
 /**
  * A {@link SegmentContainerChoice} is a {@link SegmentContainer} that matches
- * if any of the {@link #getSegment(int) contained} {@link Segment}s match.<br/>
+ * if any of the {@link #getSegment(int) contained} {@link Segment}s match. <br>
  * In typical cases it will contain multiple {@link SegmentContainerSequence}
  * instances that represent alternative patterns in the stream.
  * 

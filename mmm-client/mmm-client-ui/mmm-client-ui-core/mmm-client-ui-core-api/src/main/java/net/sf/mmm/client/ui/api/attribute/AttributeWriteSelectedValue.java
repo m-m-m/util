@@ -28,11 +28,11 @@ public abstract interface AttributeWriteSelectedValue<VALUE> extends AttributeRe
 
   /**
    * This method sets the {@link #getSelectedValues() values currently selected}. All values that are NOT
-   * available, will be ignored. <br/>
-   * <b>ATTENTION:</b><br/>
+   * available, will be ignored. <br>
+   * <b>ATTENTION:</b><br>
    * In case of {@link net.sf.mmm.client.ui.api.common.SelectionMode#SINGLE_SELECTION} you shall not provide a
    * {@link Collection} with more than one element. So you should then use {@link #setSelectedValue(Object)}
-   * instead.<br/>
+   * instead. <br>
    * Further, if you call {@link #getSelectedValues()} after this method the items may be in a different
    * order. Additionally the result of {@link #getSelectedValue()} will contain elements that are actually
    * items available in this object. So e.g. if you have a list of items and call this method to select two

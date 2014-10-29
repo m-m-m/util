@@ -576,7 +576,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
 
     /**
      * Indicates a punctuation character (e.g. '.' or '!'). Line wrapping should be avoided before this
-     * character.<br>
+     * character. <br>
      * Please note that "punctuation character" is a local definition and does NOT match with other
      * definitions as from unicode.
      */

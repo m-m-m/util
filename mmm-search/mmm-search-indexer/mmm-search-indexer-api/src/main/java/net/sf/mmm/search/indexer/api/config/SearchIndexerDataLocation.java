@@ -18,7 +18,7 @@ public interface SearchIndexerDataLocation {
   // /**
   // * The {@link #getUpdateStrategyVariant() variant} of
   // * {@link SearchIndexerSource#UPDATE_STRATEGY_VCS} for <a
-  // * href="http://www.samba.org/rsync/">rsync</a>.<br/>
+  // * href="http://www.samba.org/rsync/">rsync</a>. <br>
   // * Please be aware that rsync is actually no VCS. However it can provide us
   // * with the required change-set for delta-indexing just like a VCS.
   // */
@@ -85,7 +85,7 @@ public interface SearchIndexerDataLocation {
   /**
    * This method gets the location (typically an URL) with the data that should
    * be part of the search index. This location will be indexed recursively
-   * according to the {@link #getFilter() filter}.<br>
+   * according to the {@link #getFilter() filter}. <br>
    * <ul>
    * <li>File-URLs should point to a directory to index (e.g.
    * "file:///data/documents")</li>
@@ -99,7 +99,7 @@ public interface SearchIndexerDataLocation {
   /**
    * This method gets the base-URI used to build the
    * {@link net.sf.mmm.search.api.SearchEntry#getUri() search-entry-URI} for the
-   * {@link #getLocationUri() location} itself.<br>
+   * {@link #getLocationUri() location} itself. <br>
    * This will typically be the empty string. However if you want to index
    * multiple {@link SearchIndexerDataLocation locations} of the same
    * {@link SearchIndexerSource source} you can use this attribute. E.g. when
@@ -157,7 +157,7 @@ public interface SearchIndexerDataLocation {
 
   /**
    * This method gets the {@link Filter} that decides which resource-URIs should
-   * be {@link Filter#accept(Object) accepted} for indexing.<br/>
+   * be {@link Filter#accept(Object) accepted} for indexing. <br>
    * <b>ATTENTION:</b><br>
    * This filter is applied to {@link net.sf.mmm.util.resource.api.DataResource
    * files} AND {@link net.sf.mmm.util.resource.api.BrowsableResource folders}.
@@ -190,7 +190,7 @@ public interface SearchIndexerDataLocation {
 
   /**
    * This method determines the optional variant of the
-   * {@link SearchIndexerSource#getUpdateStrategy() update-strategy}.<br/>
+   * {@link SearchIndexerSource#getUpdateStrategy() update-strategy}. <br>
    * E.g. if the {@link SearchIndexerSource#getUpdateStrategy() update-strategy}
    * of the {@link #getSource() according} {@link SearchIndexerSource} is
    * {@link SearchIndexerSource#UPDATE_STRATEGY_VCS}, then this variant can

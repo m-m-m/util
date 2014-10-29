@@ -27,7 +27,7 @@ public interface DatatypeDescriptor<T> {
 
   /**
    * Gets the {@link List} of {@link DatatypeSegmentDescriptor}s the {@link #getDatatype() described datatype}
-   * is composed of.<br/>
+   * is composed of. <br>
    * E.g. a {@link java.time.LocalDate} is composed out of three segments all of the
    * {@link DatatypeSegmentDescriptor#getType() type} {@link Integer}: year, month, and day.
    *

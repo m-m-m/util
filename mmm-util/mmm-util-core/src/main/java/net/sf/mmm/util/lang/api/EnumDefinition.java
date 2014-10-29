@@ -3,14 +3,14 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This is the interface for the definition of an {@link EnumType}. <br/>
+ * This is the interface for the definition of an {@link EnumType}. <br>
  * As an example we can think of an instance of this interface called <em>country</em> defined as
  * {@link EnumDefinition}{@literal <Iso2CountryCode, Void>}. This defines an enumeration based on the type
  * <code>Iso2CountryCode</code> that has no {@link #getCategory() category}. Next, we define another instance
  * of this interface called <code>state</code> defined as {@link EnumDefinition}
  * {@literal <StateDatatype, Iso2CountryCode>}. The method {@link #getCategory()} will return the
- * <em>country</em> instance we defined earlier. This means that a state is classified by a county.<br/>
- * <b>ATTENTION:</b><br/>
+ * <em>country</em> instance we defined earlier. This means that a state is classified by a county. <br>
+ * <b>ATTENTION:</b><br>
  * The {@link #getValue() value} is used as identifier key and has to be unique.
  * 
  * @param <TYPE> is the generic type of the {@link #getEnumType() enum type}.
@@ -33,7 +33,7 @@ public interface EnumDefinition<TYPE, CATEGORY> extends SimpleDatatype<String> {
    * be used. However, e.g. for the type {@link Boolean} you might want to display as "yes" or "no" and might
    * have an alternative {@link EnumDefinition} for {@link Boolean} that displays as "all" or "none". Further,
    * also I18N (see {@link net.sf.mmm.util.nls.api.NlsMessage}) can be addressed by this {@link Formatter}.
-   * <b>ATTENTION:</b><br/>
+   * <b>ATTENTION:</b><br>
    * A {@link EnumDefinition} may be used with or without allowing a <code>null</code> value. Therefore, this
    * {@link Formatter} should be able to properly format <code>null</code> (see
    * <code>AbstractFormatter#formatNull()</code>). E.g. a {@link Boolean} option in a search form may be
@@ -64,8 +64,8 @@ public interface EnumDefinition<TYPE, CATEGORY> extends SimpleDatatype<String> {
   /**
    * {@inheritDoc}
    * 
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * The value is used as identifier for this {@link #getEnumType() enum type} and has to be unique for
    * {@link EnumProvider#getEnumDefinitions() all available enumerations}.
    */

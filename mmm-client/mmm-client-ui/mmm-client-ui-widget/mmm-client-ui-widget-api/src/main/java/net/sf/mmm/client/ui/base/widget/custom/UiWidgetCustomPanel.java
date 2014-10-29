@@ -8,8 +8,8 @@ import net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel;
 
 /**
  * This is the base class for a generic {@link UiWidgetCustomCompositeNoValue custom regular composite widget}
- * using a {@link UiWidgetPanel panel} as {@link #getDelegate() delegate}.<br/>
- * <b>ATTENTION:</b><br/>
+ * using a {@link UiWidgetPanel panel} as {@link #getDelegate() delegate}. <br>
+ * <b>ATTENTION:</b><br>
  * This widget has no value and should only be used for (re-usable) generic layouts.
  * 
  * @param <DELEGATE> is the generic type of the {@link #getDelegate() delegate}.

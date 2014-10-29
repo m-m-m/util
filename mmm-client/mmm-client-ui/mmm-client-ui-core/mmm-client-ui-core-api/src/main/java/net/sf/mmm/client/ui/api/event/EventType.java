@@ -3,7 +3,7 @@
 package net.sf.mmm.client.ui.api.event;
 
 /**
- * This enum contains the available types of a {@link UiEvent}.<br/>
+ * This enum contains the available types of a {@link UiEvent}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

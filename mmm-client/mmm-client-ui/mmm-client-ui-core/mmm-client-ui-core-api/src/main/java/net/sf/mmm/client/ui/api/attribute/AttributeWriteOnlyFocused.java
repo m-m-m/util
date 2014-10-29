@@ -11,8 +11,8 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeWriteOnlyFocused {
 
   /**
-   * This method sets the {@link AttributeReadFocused#isFocused() focus} to this object.<br/>
-   * <b>NOTE:</b><br/>
+   * This method sets the {@link AttributeReadFocused#isFocused() focus} to this object. <br>
+   * <b>NOTE:</b><br>
    * You can only set the focus. To actually remove it, you need to set it in a different widget. Further, as
    * an API user you can normally ignore the result. This is only relevant for composite widgets such as
    * panels, that delegate the call recursively and may not contain any child that can take the focus.

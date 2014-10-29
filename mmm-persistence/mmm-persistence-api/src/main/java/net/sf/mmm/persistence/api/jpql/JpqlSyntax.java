@@ -17,8 +17,8 @@ package net.sf.mmm.persistence.api.jpql;
 public interface JpqlSyntax extends JpqlConstants {
 
   /**
-   * This is the root element of the {@link JpqlSyntax} and represents any statement.<br/>
-   * The BNF definition is as following: <br/>
+   * This is the root element of the {@link JpqlSyntax} and represents any statement. <br>
+   * The BNF definition is as following: <br>
    * {@link #JPQL_STATEMENT} ::= {@link #SELECT_STATEMENT} | {@link #UPDATE_STATEMENT} |
    * {@link #DELETE_STATEMENT}
    */
@@ -26,24 +26,24 @@ public interface JpqlSyntax extends JpqlConstants {
 
   /**
    * A Select Statement in JPQL is a {@link #JPQL_STATEMENT} used to search on persistent entities. It will
-   * result in a query object and will only read from the store without causing modifications.<br/>
-   * The BNF definition is as following: <br/>
+   * result in a query object and will only read from the store without causing modifications. <br>
+   * The BNF definition is as following: <br>
    * {@link #SELECT} ::= {@link #SELECT_CLAUSE} {@link #FROM_CLAUSE} [ {@link #WHERE_CLAUSE}] [
    * {@link #GROUP_BY_CLAUSE}] [{@link #HAVING_CLAUSE}] [ {@link #ORDER_BY_CLAUSE}]
    */
   JpqlSyntax SELECT_STATEMENT = null;
 
   /**
-   * The actual SELECT clause of a {@link #SELECT_STATEMENT}.<br/>
-   * The BNF definition is as following: <br/>
+   * The actual SELECT clause of a {@link #SELECT_STATEMENT}. <br>
+   * The BNF definition is as following: <br>
    * {@link #SELECT_CLAUSE} ::= {@link #SELECT SELECT} [{@link #DISTINCT}] {@link #SELECT_EXPRESSION} {,
    * {@link #SELECT_EXPRESSION} &#125; {@literal *}
    */
   JpqlSyntax SELECT_CLAUSE = null;
 
   /**
-   * The actual FROM clause of a {@link #JPQL_STATEMENT}.<br/>
-   * The BNF definition is as following: <br/>
+   * The actual FROM clause of a {@link #JPQL_STATEMENT}. <br>
+   * The BNF definition is as following: <br>
    *
    * {@link #FROM_CLAUSE} ::= {@link #FROM} {@link #IDENTIFICATION_VARIABLE_DECLARATION} {, {
    * {@link #IDENTIFICATION_VARIABLE_DECLARATION} | {@link #COLLECTION_MEMBER_DECLARATION} &#125;&#125;
@@ -52,8 +52,8 @@ public interface JpqlSyntax extends JpqlConstants {
   JpqlSyntax FROM_CLAUSE = null;
 
   /**
-   * An expression of a {@link #SELECT_CLAUSE} that specifies what to select.<br/>
-   * The BNF definition is as following: <br/>
+   * An expression of a {@link #SELECT_CLAUSE} that specifies what to select. <br>
+   * The BNF definition is as following: <br>
    *
    * {@link #SELECT_EXPRESSION} ::= {@link #SINGLE_VALUED_PATH_EXPRESSION} | {@link #AGGREGATE_EXPRESSION} |
    * {@link #IDENTIFICATION_VARIABLE} | {@link #OBJECT OBJECT}({@link #IDENTIFICATION_VARIABLE})|
@@ -63,8 +63,8 @@ public interface JpqlSyntax extends JpqlConstants {
 
   /**
    * An expression of a {@link #SELECT_CLAUSE} that creates new transient objects using the specified
-   * constructor.<br/>
-   * The BNF definition is as following: <br/>
+   * constructor. <br>
+   * The BNF definition is as following: <br>
    * {@link #CONSTRUCTOR_EXPRESSION} ::= {@link #NEW NEW} {@link #CONSTRUCTOR_NAME}( {@link #CONSTRUCTOR_ITEM}
    * {, {@link #CONSTRUCTOR_ITEM} {@literal *})
    */
@@ -111,7 +111,7 @@ public interface JpqlSyntax extends JpqlConstants {
    * A simple variable to use as identifier, typically called <em>alias</em>. It is like a variable used to
    * identify an {@link javax.persistence.Entity entity} (see
    * {@link net.sf.mmm.util.entity.api.PersistenceEntity}) or an expression in statements like FROM, JOIN, IN,
-   * etc.<br/>
+   * etc. <br>
    * E.g. in the JPQL query "SELECT DISTINCT alias2.author FROM Magazine alias1, IN(alias1.articles) alias2"
    * there are two aliases used:
    * <ul>
@@ -185,7 +185,7 @@ public interface JpqlSyntax extends JpqlConstants {
   /**
    * A {@link #COLLECTION_VALUED_ASSOCIATION_FIELD} is designated by the name of an association-field in a
    * one-to-many or a many-to-many relationship. The type of a {@link #COLLECTION_VALUED_ASSOCIATION_FIELD} is
-   * a collection of values of the abstract schema type of the related entity.<br/>
+   * a collection of values of the abstract schema type of the related entity. <br>
    * It is the {@link java.lang.reflect.Field#getName() name of a field}/property to identify.
    */
   JpqlSyntax COLLECTION_VALUED_ASSOCIATION_FIELD = null;
@@ -402,7 +402,7 @@ public interface JpqlSyntax extends JpqlConstants {
 
   /**
    * The value of a pattern in a {@link #LIKE_EXPRESSION}, e.g. <code>'%foo%'</code> to match any string that
-   * {@link String#contains(CharSequence) contains} "foo".<br/>
+   * {@link String#contains(CharSequence) contains} "foo". <br>
    * Unlike the more common glob-patterns (typically used and expected by end-users) SQL has its own syntax
    * that is also used in JPQL. The following table explains the two pattern styles.
    * <table border="1">
@@ -429,7 +429,7 @@ public interface JpqlSyntax extends JpqlConstants {
    * <tr>
    * <td>Any single character NOT in the given list.</td>
    * <td>&lt;not supported&gt;</td>
-   * <td>[^&lt;characters&gt;]<br/>
+   * <td>[^&lt;characters&gt;]<br>
    * or [!&lt;characters&gt;]</td>
    * </tr>
    * </table>
@@ -585,15 +585,15 @@ public interface JpqlSyntax extends JpqlConstants {
   /**
    * A DELETE statement in JPQL is a {@link #JPQL_STATEMENT} used to delete persistent entities. It is similar
    * to a {@link #SELECT_STATEMENT} but will delete the {@link javax.persistence.Query#getResultList()
-   * results} instead of returning them.<br/>
-   * The BNF definition is as following: <br/>
+   * results} instead of returning them. <br>
+   * The BNF definition is as following: <br>
    * {@link #DELETE_STATEMENT} ::= {@link #DELETE_CLAUSE} [ {@link #WHERE_CLAUSE}]
    */
   JpqlSyntax DELETE_STATEMENT = null;
 
   /**
-   * The actual DELETE clause of a {@link #DELETE_STATEMENT}.<br/>
-   * The BNF definition is as following: <br/>
+   * The actual DELETE clause of a {@link #DELETE_STATEMENT}. <br>
+   * The BNF definition is as following: <br>
    * {@link #DELETE_CLAUSE} ::= {@link #DELETE DELETE} {@link #FROM} {@link #ABSTRACT_SCHEMA_NAME} [[
    * {@link #AS}] {@link #IDENTIFICATION_VARIABLE}]
    */
@@ -608,16 +608,16 @@ public interface JpqlSyntax extends JpqlConstants {
   /**
    * An UPDATE statement in JPQL is a {@link #JPQL_STATEMENT} used to delete persistent entities. It is
    * similar to a {@link #SELECT_STATEMENT} but will update the
-   * {@link javax.persistence.Query#getResultList() results} instead of returning them.<br/>
-   * The BNF definition is as following: <br/>
+   * {@link javax.persistence.Query#getResultList() results} instead of returning them. <br>
+   * The BNF definition is as following: <br>
    *
    * {@link #UPDATE_STATEMENT} ::= {@link #UPDATE_CLAUSE} [{@link #WHERE_CLAUSE}]
    */
   JpqlSyntax UPDATE_STATEMENT = null;
 
   /**
-   * The actual UPDATE clause of an {@link #UPDATE_STATEMENT}.<br/>
-   * The BNF definition is as following: <br/>
+   * The actual UPDATE clause of an {@link #UPDATE_STATEMENT}. <br>
+   * The BNF definition is as following: <br>
    *
    * {@link #UPDATE_CLAUSE} ::= {@link #UPDATE} {@link #ABSTRACT_SCHEMA_NAME} [[{@link #AS}]
    * {@link #IDENTIFICATION_VARIABLE}] {@link #SET} {@link #UPDATE_ITEM} {, {@link #UPDATE_ITEM}&#125;
@@ -626,8 +626,8 @@ public interface JpqlSyntax extends JpqlConstants {
   JpqlSyntax UPDATE_CLAUSE = null;
 
   /**
-   * An update assignment of a single item in a {@link #UPDATE_CLAUSE}.<br/>
-   * The BNF definition is as following: <br/>
+   * An update assignment of a single item in a {@link #UPDATE_CLAUSE}. <br>
+   * The BNF definition is as following: <br>
    *
    * {@link #UPDATE_ITEM} ::= [{@link #IDENTIFICATION_VARIABLE}.]{{@link #STATE_FIELD} |
    * {@link #SINGLE_VALUED_ASSOCIATION_FIELD} = {@link #NEW_VALUE}
@@ -645,7 +645,7 @@ public interface JpqlSyntax extends JpqlConstants {
   /**
    * A {@link #SINGLE_VALUED_ASSOCIATION_FIELD} is designated by the name of an association-field in a
    * one-to-one or many-to-one relationship. The type of a {@link #SINGLE_VALUED_ASSOCIATION_FIELD} and thus a
-   * {@link #SINGLE_VALUED_ASSOCIATION_PATH_EXPRESSION} is the abstract schema type of the related entity.<br/>
+   * {@link #SINGLE_VALUED_ASSOCIATION_PATH_EXPRESSION} is the abstract schema type of the related entity. <br>
    * It is the {@link java.lang.reflect.Field#getName() name of a field}/property to identify.
    */
   JpqlSyntax SINGLE_VALUED_ASSOCIATION_FIELD = null;

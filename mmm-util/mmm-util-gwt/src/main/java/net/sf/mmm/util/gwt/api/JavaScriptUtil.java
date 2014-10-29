@@ -275,8 +275,8 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method gets the {@link JsCssStyleDeclaration computed style} of the given {@link Element}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the {@link JsCssStyleDeclaration computed style} of the given {@link Element}. <br>
+   * <b>ATTENTION:</b><br>
    * Do not get confused by the name of this method. It will only "calculate" the CSS rules but return these properties
    * unmodified. So if you are looking for a way to get the actual calculated width or height of an {@link Element} in
    * pixels (rather than something like "50%") just use {@link Element#getOffsetWidth()} or

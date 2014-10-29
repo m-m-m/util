@@ -23,16 +23,16 @@ public abstract interface AttributeReadStyles {
 
   /**
    * This method gets the style(s) (also called style-name(s)) of this object. The style defines aspects for
-   * the appearance (look & feel) of a UI element when displayed to the user.<br/>
+   * the appearance (look & feel) of a UI element when displayed to the user. <br>
    * If you are familiar with web-technology just think of this as the <code>class</code> attribute of HTML
-   * elements that are then configured via some cascading style sheet (CSS).<br/>
+   * elements that are then configured via some cascading style sheet (CSS). <br>
    * The following situations can be distinguished:
    * <ul>
-   * <li><b>no style</b><br/>
+   * <li><b>no style</b><br>
    * The empty string is returned.</li>
-   * <li><b>single style</b><br/>
+   * <li><b>single style</b><br>
    * The name of that single style is returned. The result does NOT contain any whitespace.</li>
-   * <li><b>multiple styles</b><br/>
+   * <li><b>multiple styles</b><br>
    * The list of individual styles are separated by whitespaces in the result.</li>
    * </ul>
    * Each individual style has to match {@link #STYLE_PATTERN_SINGLE}. Any number of styles or in other words

@@ -13,12 +13,12 @@ public interface MutableSearchEntry extends SearchEntry {
 
   /**
    * This method sets the field with the given <code>name</code> to the given
-   * <code>value</code>.<br/>
+   * <code>value</code>. <br>
    * It is forbidden to change the value of {@link #FIELD_ID} and doing so will
-   * cause an exception.<br/>
+   * cause an exception. <br>
    * For the supported types see
    * {@link net.sf.mmm.search.api.config.SearchFieldType}. Additionally
-   * {@link java.io.Reader} can be used to index large texts.<br/>
+   * {@link java.io.Reader} can be used to index large texts. <br>
    * <b>ATTENTION:</b><br>
    * A <code>value</code> of the type {@link java.io.Reader} should only be used
    * when indexing really large texts. In this case the

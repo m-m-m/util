@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains abstract interfaces for attributes of ARIA roles.
- * <a name="documentation"/><h2>Client UI API ARIA Attribute</h2>
+ * <a name="documentation"></a><h2>Client UI API ARIA Attribute</h2>
  * This package contains interfaces for attributes (states and properties) of ARIA {@link net.sf.mmm.client.ui.api.aria.role.Role
  * roles}.
  */

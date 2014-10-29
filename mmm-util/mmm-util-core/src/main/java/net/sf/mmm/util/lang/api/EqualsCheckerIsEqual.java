@@ -17,7 +17,7 @@ public final class EqualsCheckerIsEqual extends AbstractEqualsChecker<Object> {
   private static final EqualsCheckerIsEqual INSTANCE = new EqualsCheckerIsEqual();
 
   /**
-   * The constructor.<br/>
+   * The constructor. <br>
    * If possible use {@link #getInstance()} instead.
    */
   public EqualsCheckerIsEqual() {

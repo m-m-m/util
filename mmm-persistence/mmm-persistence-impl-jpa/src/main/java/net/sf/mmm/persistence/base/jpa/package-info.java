@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the base implementation of the persistence API based on the JPA.
- * <a name="documentation"/><h2>Persistence Base JPA</h2>
+ * <a name="documentation"></a><h2>Persistence Base JPA</h2>
  * This package contains the base implementation of the persistence API based on the
- * java persistence API (JPA).<br/>
+ * java persistence API (JPA). <br>
  */
 package net.sf.mmm.persistence.base.jpa;
 

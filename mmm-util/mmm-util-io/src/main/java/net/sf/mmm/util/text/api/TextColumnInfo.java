@@ -7,7 +7,7 @@ import java.util.Locale;
 import net.sf.mmm.util.lang.api.HorizontalAlignment;
 
 /**
- * This is a Java-bean for the layout-configuration of a text column.<br>
+ * This is a Java-bean for the layout-configuration of a text column. <br>
  * It contains the {@link TextColumnInfo#getWidth() width}, {@link TextColumnInfo#getAlignment() alignment},
  * {@link TextColumnInfo#getIndent() indent}, and various other meta-information for the layout of a textual
  * column.
@@ -84,7 +84,7 @@ public class TextColumnInfo {
 
   /**
    * This method gets the width of this column in characters excluding the {@link #getBorderLeft() left} and
-   * {@link #getBorderRight() right border}.<br>
+   * {@link #getBorderRight() right border}. <br>
    * The value has to be positive or may have the value of {@link #WIDTH_AUTO_ADJUST} (the default). A
    * reasonable value is at least 5, typically more than 10. However you may use a very low values (&lt;5) for
    * rendering a small column of a large table, but then do NOT expect nice results if text is really wrapped.
@@ -108,7 +108,7 @@ public class TextColumnInfo {
 
   /**
    * This method gets the auto calculated width of the {@link #getBorderLeft() left} and
-   * {@link #getBorderRight() right border}.<br>
+   * {@link #getBorderRight() right border}. <br>
    * 
    * @return {@link #getBorderLeft()}.length() + {@link #getBorderRight()} .length()
    */
@@ -165,7 +165,7 @@ public class TextColumnInfo {
   /**
    * This method gets the indent. This string is added after the {@link #getBorderLeft() left border} and
    * before the text of the column in each line except the first one. The exact behavior depends on
-   * {@link #getIndentationMode()}. The default is the empty string.<br>
+   * {@link #getIndentationMode()}. The default is the empty string. <br>
    * <b>ATTENTION:</b><br>
    * <ul>
    * <li>Indentation is ignored if {@link #getWidth() width} is less than
@@ -279,7 +279,7 @@ public class TextColumnInfo {
   /**
    * This method gets the {@link IndentationMode} that defines when to add an {@link #getIndent() indentation}
    * . To turn {@link #getIndent() indentation} off, simply set {@link #getIndent() indent} to the empty
-   * string.<br>
+   * string. <br>
    * The default is {@link IndentationMode#NO_INDENT_AFTER_DOUBLE_NEWLINE}.
    * 
    * @see #getIndent()

@@ -5,7 +5,7 @@ package net.sf.mmm.util.pojo.path.api;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a manager of {@link PojoPathFunction}s.<br>
+ * This is the interface for a manager of {@link PojoPathFunction}s. <br>
  * Typically a {@link PojoPathNavigator} instance will have an {@link PojoPathFunctionManager} to
  * {@link #getFunction(String) resolve} {@link PojoPathFunction}s. Further the {@link PojoPathContext} can
  * {@link PojoPathContext#getAdditionalFunctionManager() provide additional functions} that are used prior.

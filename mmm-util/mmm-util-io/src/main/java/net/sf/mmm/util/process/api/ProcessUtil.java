@@ -24,7 +24,7 @@ public interface ProcessUtil {
 
   /**
    * This method executes the external {@link Process}es configured by the given <code>builders</code>. If
-   * more than one {@link ProcessBuilder builder} is given, the according processes are piped.<br>
+   * more than one {@link ProcessBuilder builder} is given, the according processes are piped. <br>
    * 
    * @param context is the context of the process pipe (fist <code>stdin</code>, last <code>stdout</code> and
    *        <code>stderr</code> for all processes as well as a potential timeout).
@@ -40,7 +40,7 @@ public interface ProcessUtil {
 
   /**
    * This method executes the external {@link Process}es configured by the given <code>builders</code>. If
-   * more than one {@link ProcessBuilder builder} is given, the according processes are piped.<br>
+   * more than one {@link ProcessBuilder builder} is given, the according processes are piped. <br>
    * <b>ATTENTION:</b><br>
    * This method spins up multiple {@link Thread threads}, especially when multiple processes are piped
    * (2*n+1[+1] threads). Therefore you should NOT use the
@@ -68,7 +68,7 @@ public interface ProcessUtil {
 
   /**
    * This method executes the external {@link Process}es configured by the given <code>builders</code> as
-   * async task. If more than one {@link ProcessBuilder builder} is given, the according processes are piped.<br>
+   * async task. If more than one {@link ProcessBuilder builder} is given, the according processes are piped. <br>
    * <b>ATTENTION:</b><br>
    * This method spins up multiple {@link Thread threads}, especially when multiple processes are piped
    * (2*n+1[+1] threads). Therefore you should NOT use the

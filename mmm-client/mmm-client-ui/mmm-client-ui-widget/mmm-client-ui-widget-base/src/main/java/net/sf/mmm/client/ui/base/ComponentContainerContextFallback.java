@@ -96,8 +96,8 @@ public class ComponentContainerContextFallback extends AbstractLoggableComponent
 
   /**
    * Puts the given <code>componentInstance</code> associated with the given <code>apiClass</code> into this
-   * container. <br/>
-   * <b>ATTENTION:</b><br/>
+   * container. <br>
+   * <b>ATTENTION:</b><br>
    * This class and especially this method should only be used for initialization of limited environments.
    * Otherwise please prefer proper usage of {@link net.sf.mmm.util.component.api.Cdi}.
    *

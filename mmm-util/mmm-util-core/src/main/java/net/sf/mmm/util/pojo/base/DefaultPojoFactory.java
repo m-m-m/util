@@ -15,7 +15,7 @@ import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
- * This is the default implementation of the {@link net.sf.mmm.util.pojo.api.PojoFactory} interface.<br>
+ * This is the default implementation of the {@link net.sf.mmm.util.pojo.api.PojoFactory} interface. <br>
  * It extends {@link SimplePojoFactory} with the ability to create {@link Map}s and {@link Collection}s from
  * their interfaces.
  * 

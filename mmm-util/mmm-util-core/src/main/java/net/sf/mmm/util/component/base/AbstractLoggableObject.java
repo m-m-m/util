@@ -38,7 +38,7 @@ public abstract class AbstractLoggableObject {
   }
 
   /**
-   * This method gets the {@link Logger logger} for this object.<br>
+   * This method gets the {@link Logger logger} for this object. <br>
    * This method is NOT public because the logger should only be used by the component itself and NOT
    * externally.
    * 

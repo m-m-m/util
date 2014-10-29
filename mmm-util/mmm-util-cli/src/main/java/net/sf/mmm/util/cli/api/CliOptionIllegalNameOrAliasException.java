@@ -5,7 +5,7 @@ package net.sf.mmm.util.cli.api;
 
 /**
  * A {@link CliOptionIllegalNameOrAliasException} is thrown if the {@link CliOption#name() name} or
- * {@link CliOption#aliases() alias} of a {@link CliOption} is illegal.<br>
+ * {@link CliOption#aliases() alias} of a {@link CliOption} is illegal. <br>
  * Proper values should follow GNU conventions (e.g. "-h" for short option and "--help" for long option).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

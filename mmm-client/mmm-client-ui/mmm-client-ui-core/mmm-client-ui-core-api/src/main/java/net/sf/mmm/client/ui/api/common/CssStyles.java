@@ -4,8 +4,8 @@ package net.sf.mmm.client.ui.api.common;
 
 /**
  * This interface contains the names of common CSS
- * {@link net.sf.mmm.client.ui.api.attribute.AttributeReadStyles#getStyles() styles}.<br/>
- * <b>NOTE:</b><br/>
+ * {@link net.sf.mmm.client.ui.api.attribute.AttributeReadStyles#getStyles() styles}. <br>
+ * <b>NOTE:</b><br>
  * This interface is partially biased. However, we wanted to both have a central definition of the CSS style
  * constants AND a way to provide our internal widgets in a reusable way without a dependency on the
  * <code>UiWidget</code>-API so this is the best compromise done on purpose.

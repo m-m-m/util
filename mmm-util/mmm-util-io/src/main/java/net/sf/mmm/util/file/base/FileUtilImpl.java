@@ -74,8 +74,8 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   }
 
   /**
-   * This method gets the singleton instance of this {@link FileUtilImpl}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link FileUtilImpl}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    *
    * @return the singleton instance.
@@ -280,11 +280,11 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
 
   /**
    * This method copies the file or directory given by <code>source</code> into the given
-   * <code>destination</code>.<br>
+   * <code>destination</code>. <br>
    * <b>ATTENTION:</b><br>
    * In order to allow giving the copy of <code>source</code> a new {@link File#getName() name}, the
    * <code>destination</code> has to point to the final place where the copy should appear rather than the
-   * directory where the copy will be located in.<br>
+   * directory where the copy will be located in. <br>
    * <br>
    * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory
    * "/tmp". The copy will have the same name "foo".

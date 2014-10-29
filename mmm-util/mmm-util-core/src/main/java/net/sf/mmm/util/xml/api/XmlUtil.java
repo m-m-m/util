@@ -163,7 +163,7 @@ public interface XmlUtil {
   /**
    * This method extracts the plain text from the given <code>htmlFragment</code> and appends it to the given
    * <code>buffer</code>. This includes removing tags, un-escaping entities and parsing CDATA sections. Unlike
-   * DOM parsers this method is completely fault tolerant, fast and uses a minimum amount of memory.<br>
+   * DOM parsers this method is completely fault tolerant, fast and uses a minimum amount of memory. <br>
    * <b>ATTENTION:</b><br>
    * Be aware that the caller is responsible for reading the HTML with the proper encoding (according to
    * Content-Type from HTTP header and/or META tag).

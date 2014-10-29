@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 /**
  * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a text
  * area field for editing source code. It acts like {@link UiWidgetTextAreaField} but displays the text as
- * pretty formatted source code in {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view mode}.<br/>
+ * pretty formatted source code in {@link net.sf.mmm.client.ui.api.common.UiMode#VIEW view mode}. <br>
  * Here you can see an example in view mode:
  * 
  * <pre style="font-family: monospaced">

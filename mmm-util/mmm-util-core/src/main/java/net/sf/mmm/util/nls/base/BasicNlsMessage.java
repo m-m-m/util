@@ -10,7 +10,7 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is the abstract implementation of {@link net.sf.mmm.util.nls.api.NlsMessage} with the basic features.<br>
+ * This is the abstract implementation of {@link net.sf.mmm.util.nls.api.NlsMessage} with the basic features. <br>
  * You should extend this class whenever suitable to implement {@link net.sf.mmm.util.nls.api.NlsMessage}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

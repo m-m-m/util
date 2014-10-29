@@ -4,7 +4,7 @@ package net.sf.mmm.util.lang.base;
 
 /**
  * This is an implementation of the {@link java.lang.CharSequence} Interface that can be used to implement the
- * method {@link java.lang.CharSequence#subSequence(int, int)}.<br>
+ * method {@link java.lang.CharSequence#subSequence(int, int)}. <br>
  * ATTENTION: This implementation assumes that the original char sequence has an immutable
  * {@link CharSequence#length() length} (at least it should NOT shrink)!
  * 

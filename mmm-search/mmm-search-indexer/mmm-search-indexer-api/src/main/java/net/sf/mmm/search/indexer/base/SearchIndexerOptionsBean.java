@@ -34,7 +34,7 @@ public class SearchIndexerOptionsBean implements SearchIndexerOptions {
   }
 
   /**
-   * This method sets the {@link #isOverwriteIndex() overwriteIndex-flag}.<br/>
+   * This method sets the {@link #isOverwriteIndex() overwriteIndex-flag}. <br>
    * <b>ATTENTION:</b><br>
    * Be careful when overwriting the search-index. Your existing index will be
    * lost. You may loose valuable data.

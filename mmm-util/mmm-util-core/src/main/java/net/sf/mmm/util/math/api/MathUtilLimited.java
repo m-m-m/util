@@ -40,7 +40,7 @@ public interface MathUtilLimited {
   /**
    * This method converts the given value to the simplest suitable {@link java.lang.Number number-type}. The
    * ordering implied by "simplest" is {@link Byte} &lt; {@link Short} &lt; {@link Integer} &lt; {@link Long}
-   * &lt; {@link Float} &lt; {@link Double}.<br>
+   * &lt; {@link Float} &lt; {@link Double}. <br>
    * Please note that a decimal {@link Double} is only converted to {@link Float} if the result is exactly the
    * same. Be aware that <code>0.2F - 0.2</code> is NOT <code>0.0</code> (but
    * <code>2.980232227667301E-9</code>).

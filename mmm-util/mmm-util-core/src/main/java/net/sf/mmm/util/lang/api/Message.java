@@ -51,8 +51,8 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
   String getSource();
 
   /**
-   * This method gets the {@link #getMessage() message} localized for the given {@link Locale}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the {@link #getMessage() message} localized for the given {@link Locale}. <br>
+   * <b>ATTENTION:</b><br>
    * This method is designed for server applications with {@link net.sf.mmm.util.nls.api.NlsMessage NLS}. On
    * client side (e.g. for GWT clients) only a single locale may be supported at a time and this method may
    * behave like {@link #getMessage()} ignoring the {@link Locale}.

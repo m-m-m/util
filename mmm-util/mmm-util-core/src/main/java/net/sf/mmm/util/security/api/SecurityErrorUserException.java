@@ -14,8 +14,8 @@ import net.sf.mmm.util.lang.api.concern.Security;
  * complete his attack. A typical problem is e.g. if an attacker can distinguish between
  * "account does not exist" and "invalid credentials" he can easily scan for valid accounts. A large list of
  * valid accounts can be the basis for another account wit a standard password and rotating logins what is
- * hard to detect and prevent.<br/>
- * <b>ATTENTION:</b><br/>
+ * hard to detect and prevent. <br>
+ * <b>ATTENTION:</b><br>
  * When sending security exceptions as response to a remote request you have to ensure
  * {@link net.sf.mmm.util.exception.api.ExceptionTruncation}. All this is handled by
  * {@link net.sf.mmm.util.exception.api.ExceptionUtil#convertForClient(Throwable)}.

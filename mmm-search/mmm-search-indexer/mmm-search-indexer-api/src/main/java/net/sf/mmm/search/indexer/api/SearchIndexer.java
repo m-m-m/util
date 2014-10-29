@@ -62,7 +62,7 @@ public interface SearchIndexer extends Flushable, Closeable {
    * This method removes an {@link #add(MutableSearchEntry) existing} entry
    * identified by the given
    * <code>{@link net.sf.mmm.search.engine.api.SearchHit#getId() id}</code> from
-   * the search-index.<br/>
+   * the search-index. <br>
    * <b>ATTENTION:</b><br>
    * If you are using lucene as implementation according to some questionable
    * design of lucene this method has to close the IndexWriter and create an
@@ -142,7 +142,7 @@ public interface SearchIndexer extends Flushable, Closeable {
   /**
    * This method removes all {@link #add(MutableSearchEntry) existing} entries
    * identified by the given <code>value</code> at the given
-   * <code>property</code> from the search-index.<br>
+   * <code>property</code> from the search-index. <br>
    * <b>ATTENTION:</b><br>
    * Please use this method with care.
    * 

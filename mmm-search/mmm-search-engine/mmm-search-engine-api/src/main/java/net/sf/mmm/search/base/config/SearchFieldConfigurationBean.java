@@ -51,7 +51,7 @@ public class SearchFieldConfigurationBean implements SearchFieldConfiguration {
   }
 
   /**
-   * The constructor.<br/>
+   * The constructor. <br>
    * Creates a default field with {@link SearchFieldType#TEXT} and
    * {@link SearchFieldMode#SEARCHABLE_AND_RETRIEVABLE}.
    * 
@@ -63,7 +63,7 @@ public class SearchFieldConfigurationBean implements SearchFieldConfiguration {
   }
 
   /**
-   * The constructor.<br/>
+   * The constructor. <br>
    * Creates a field with {@link SearchFieldMode#SEARCHABLE_AND_RETRIEVABLE}.
    * 
    * @param name is the {@link #getName() name}.

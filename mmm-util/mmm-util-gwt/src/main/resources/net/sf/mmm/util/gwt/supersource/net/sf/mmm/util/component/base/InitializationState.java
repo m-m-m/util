@@ -6,7 +6,7 @@ import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.component.api.NotInitializedException;
 
 /**
- * This class represents the state of an initialization.<br>
+ * This class represents the state of an initialization. <br>
  * It therefore offers the method {@link #requireNotInitilized()} that can be called before initialization
  * e.g. from {@link javax.inject.Inject injection-setters} so nothing can be re-injected after
  * {@link #setInitializing() initialization}. Additionally there is {@link #requireInitilized()} that can be
@@ -60,7 +60,7 @@ public class InitializationState {
   }
 
   /**
-   * This method sets the state to {@link #isInitialized() initialized}.<br>
+   * This method sets the state to {@link #isInitialized() initialized}. <br>
    * <b>ATTENTION:</b><br>
    * You need to call {@link #setInitializing()} before you invoke this method!
    */

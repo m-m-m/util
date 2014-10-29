@@ -10,8 +10,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 /**
  * This is the interface for a {@link UiWidgetDynamicPanel dynamic panel} that represents a flexible grid. It
  * consists of {@link UiWidgetGridRow rows} that themselves consists of {@link UiWidgetGridCell cells}. You
- * can think of this widget as an HTML table used for layout (role=presentation).<br/>
- * <b>ATTENTION:</b><br/>
+ * can think of this widget as an HTML table used for layout (role=presentation). <br>
+ * <b>ATTENTION:</b><br>
  * Please initialize the grid using {@link #setColumnCount(int)} to get consistent results.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -34,8 +34,8 @@ public interface UiWidgetGridPanel extends UiWidgetDynamicPanel<UiWidgetGridRow>
   /**
    * This method creates a {@link UiWidgetGridRow}, {@link UiWidgetGridRow#addChild(UiWidgetRegular) adds} the
    * given <code>child</code> with a full {@link UiWidgetGridCell#getColumnSpan() column span} to it and then
-   * {@link #addChild(UiWidgetGridRow) adds} it to this {@link UiWidgetGridPanel}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link #addChild(UiWidgetGridRow) adds} it to this {@link UiWidgetGridPanel}. <br>
+   * <b>ATTENTION:</b><br>
    * It is strongly recommended to call {@link #setColumnCount(int)} before using the method.
    * 
    * @param child is the child widget to show in a {@link UiWidgetGridRow row} with the full width of this

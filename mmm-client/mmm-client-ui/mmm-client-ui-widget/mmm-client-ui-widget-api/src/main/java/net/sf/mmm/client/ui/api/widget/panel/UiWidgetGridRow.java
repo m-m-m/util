@@ -16,8 +16,8 @@ public interface UiWidgetGridRow extends UiWidgetDynamicPanel<UiWidgetGridCell>,
 
   /**
    * This method creates a {@link UiWidgetGridCell}, {@link UiWidgetGridCell#setChild(UiWidgetRegular) sets}
-   * the given <code>child</code> and {@link #addChild(UiWidgetGridCell) adds} it to this row.<br/>
-   * <b>ATTENTION:</b><br/>
+   * the given <code>child</code> and {@link #addChild(UiWidgetGridCell) adds} it to this row. <br>
+   * <b>ATTENTION:</b><br>
    * If the given <code>child</code> is a {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField}, this
    * method will also attach the
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField#getLabelWidget() label} before. This is
@@ -37,7 +37,7 @@ public interface UiWidgetGridRow extends UiWidgetDynamicPanel<UiWidgetGridCell>,
   /**
    * This method creates a {@link UiWidgetGridCell}, {@link UiWidgetGridCell#setChild(UiWidgetRegular) sets}
    * the given <code>children</code> composed to a single widget and {@link #addChild(UiWidgetGridCell) adds}
-   * it to this row.<br/>
+   * it to this row. <br>
    * 
    * @see #addChild(UiWidgetGridCell)
    * @see UiWidgetGridCell#setChildren(UiWidgetRegular...)

@@ -132,8 +132,8 @@ public abstract class SegmentContainer extends Segment {
   /**
    * This method aggregates the current <code>aggregated</code>
    * {@link #getMaximumLength() maximum length} with the given <code>next</code>
-   * value. The default implementation is a simple summation.<br/>
-   * <b>ATTENTION:</b><br/>
+   * value. The default implementation is a simple summation. <br>
+   * <b>ATTENTION:</b><br>
    * Please note that {@link Long#MAX_VALUE} is already handled by
    * {@link #getMaximumLength()}. In that case this method is NOT invoked
    * anymore.

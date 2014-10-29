@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * This is the abstract base implementation for a <em>simple</em> {@link Map}.<br>
+ * This is the abstract base implementation for a <em>simple</em> {@link Map}. <br>
  * <b>ATTENTION:</b><br>
  * Here <em>simple</em> means that subclasses of this class only guarantee that the method
  * {@link #get(Object)} and {@link #containsKey(Object)} is properly implemented.

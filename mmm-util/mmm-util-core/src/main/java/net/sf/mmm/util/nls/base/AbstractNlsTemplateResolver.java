@@ -6,7 +6,7 @@ import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is the abstract base implementation of the {@link NlsTemplateResolver} interface.<br>
+ * This is the abstract base implementation of the {@link NlsTemplateResolver} interface. <br>
  * You should extend this class rather than directly implementing the {@link NlsTemplateResolver} interface to
  * gain compatibility with further releases.
  * 
@@ -16,7 +16,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 public abstract class AbstractNlsTemplateResolver extends AbstractComponent implements NlsTemplateResolver {
 
   /**
-   * The constructor.<br>
+   * The constructor. <br>
    */
   public AbstractNlsTemplateResolver() {
 

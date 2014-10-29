@@ -27,7 +27,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This is the implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for
- * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#TYPE_CHOICE choice-format}.<br>
+ * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#TYPE_CHOICE choice-format}. <br>
  * Examples:<br>
  * <table border="1">
  * <tr>

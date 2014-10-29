@@ -5,7 +5,7 @@ package net.sf.mmm.search.engine.api.config;
 import net.sf.mmm.search.api.config.SearchConfiguration;
 
 /**
- * This is the interface for the configuration of the {@link net.sf.mmm.search.engine.api.SearchEngine}.<br>
+ * This is the interface for the configuration of the {@link net.sf.mmm.search.engine.api.SearchEngine}. <br>
  * You will typically provide your configuration as XML. The base-implementation comes with an according
  * (un)marshaler.
  * 

@@ -6,7 +6,7 @@ import java.util.Collection;
 
 /**
  * This is the interface for the configuration of the entire search (e.g. for the
- * {@link net.sf.mmm.search.engine.api.SearchEngine}).<br>
+ * {@link net.sf.mmm.search.engine.api.SearchEngine}). <br>
  * You will typically provide your configuration as XML in the {@link #DEFAULT_CONFIGURATION_URL default
  * configuration file}. The base-implementation comes with an according (un)marshaler.
  * 

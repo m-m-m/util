@@ -123,7 +123,7 @@ public interface StaxUtil {
 
   /**
    * This method reads the {@link XMLStreamReader#getText() text} at the current position of the given
-   * <code>xmlReader</code>.<br>
+   * <code>xmlReader</code>. <br>
    * If the <code>xmlReader</code> is {@link XMLStreamReader#getEventType() pointing} to
    * {@link javax.xml.stream.XMLStreamConstants#START_ELEMENT} or
    * {@link javax.xml.stream.XMLStreamConstants#ATTRIBUTE} all
@@ -141,7 +141,7 @@ public interface StaxUtil {
   String readText(XMLStreamReader xmlReader) throws XmlGenericException;
 
   /**
-   * This method skips all events until the current element (tag) is closed.<br>
+   * This method skips all events until the current element (tag) is closed. <br>
    * You can use this method if you hit an element you want to ignore. Here is a piece of code that shows an
    * example that loops over all child elements of the current open element:
    * 
@@ -168,7 +168,7 @@ public interface StaxUtil {
   void skipOpenElement(XMLStreamReader xmlReader) throws XmlGenericException;
 
   /**
-   * This method skips all events until the current element (tag) is closed.<br>
+   * This method skips all events until the current element (tag) is closed. <br>
    * 
    * @see #skipOpenElement(XMLStreamReader)
    * 

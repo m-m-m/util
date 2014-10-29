@@ -18,12 +18,12 @@ import net.sf.mmm.util.nls.base.NlsDependencies;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.nls.api.NlsMessageFormatter} interface.<br>
+ * This is the implementation of the {@link net.sf.mmm.util.nls.api.NlsMessageFormatter} interface. <br>
  * <b>NOTE:</b><br>
  * This is more or less a rewrite of {@link java.text.MessageFormat} and is syntax-compatible with the
  * {@link java.text.MessageFormat#applyPattern(String) MessageFormat-pattern} -format. Some special (and
  * somewhat sick) features as modifying internal {@link java.text.Format}s or {@link java.text.FieldPosition}
- * are NOT supported. Currently also parsing is NOT supported.<br>
+ * are NOT supported. Currently also parsing is NOT supported. <br>
  * Instead this implementation is immutable and thread-safe. Further it works on any {@link Appendable} rather
  * than only on {@link StringBuffer}. It also uses the same {@link Appendable} for recursive invocations.
  *
@@ -95,7 +95,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
   }
 
   /**
-   * This inner class represents a segment out of the parsed message-pattern.<br>
+   * This inner class represents a segment out of the parsed message-pattern. <br>
    * E.g. if the message-pattern is "Hi {0} you have {1} items!" then it is parsed into two
    * {@link PatternSegment}s. The first has a {@link #getPrefix() prefix} of <code>"Hi "</code> and
    * {@link #getArgument() argument} of <code>{0}</code> and the second has <code>" you have "</code> as

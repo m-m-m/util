@@ -71,7 +71,7 @@ public abstract class AbstractComponent {
 
   /**
    * This method performs the actual {@link #initialize() initialization}. It is called when
-   * {@link #initialize()} is invoked for the first time.<br>
+   * {@link #initialize()} is invoked for the first time. <br>
    * <b>ATTENTION:</b><br>
    * When you override this method from a sub-class you need to do a
    * <code>super.{@link #doInitialize()}</code>.
@@ -85,7 +85,7 @@ public abstract class AbstractComponent {
    * This method is invoked at the end of the actual {@link #initialize() initialization}. It is called when
    * {@link #initialize()} is invoked for the first time after {@link #doInitialize()} is completed and
    * {@link #getInitializationState() initialization-state} has changed to
-   * {@link InitializationState#isInitialized() initialized}.<br>
+   * {@link InitializationState#isInitialized() initialized}. <br>
    * <b>ATTENTION:</b><br>
    * When you override this method from a sub-class you need to do a
    * <code>super.{@link #doInitialized()}</code>.

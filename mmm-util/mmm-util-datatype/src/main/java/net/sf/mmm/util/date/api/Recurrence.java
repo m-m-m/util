@@ -5,7 +5,7 @@ package net.sf.mmm.util.date.api;
 
 /**
  * This is the interface for a datatype representing the recurrence of an event
- * or appointment.<br/>
+ * or appointment. <br>
  * In addition to the method specification here are some examples to get started
  * easily:
  * <table border="1">
@@ -111,8 +111,8 @@ public interface Recurrence {
    * is used as a filter to match only for particular
    * {@link net.sf.mmm.util.date.api.Weekday}s. The default is
    * {@link WeekdaySet#ALL}. This method is ignored for {@link DateUnit#WEEK
-   * weekly} {@link Recurrence} as it would NOT make any sense.<br/>
-   * <b>ATTENTION:</b><br/>
+   * weekly} {@link Recurrence} as it would NOT make any sense. <br>
+   * <b>ATTENTION:</b><br>
    * If {@link #getUnit() unit} is {@link DateUnit#DAY daily} recurrences that
    * do not
    * {@link WeekdaySet#contains(net.sf.mmm.util.date.api.Weekday)

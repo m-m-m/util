@@ -59,7 +59,7 @@ public interface UnicodeUtil {
   char NUMBER_SIGN = 0x00023;
 
   /**
-   * The sign for the currency dollar. Looks like this: {@value}<br/>
+   * The sign for the currency dollar. Looks like this: {@value}<br>
    * This currency is not unique as many countries named their currency dollar (e.g. US-$, CAN-$, AU-$).
    */
   char DOLLAR_SIGN = 0x0024;
@@ -1695,7 +1695,7 @@ public interface UnicodeUtil {
   char COMBINING_MACRON = 0x0304;
 
   /**
-   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for {@link DiacriticalMark#OVERLINE}.
+   * {@link DiacriticalMark#getCombiningCharacter() combining-char} for an overline (line on top).
    */
   char COMBINING_OVERLINE = 0x0305;
 
@@ -2175,7 +2175,7 @@ public interface UnicodeUtil {
   /** The capital Cyrillic letter <em>Ie</em>. Looks like an 'E': {@value} */
   char CYRILLIC_CAPITAL_LETTER_IE = 0x00415;
 
-/** The capital Cyrillic letter <em>Zhe</em>. Looks like an 'X' with a vertical bar through the center or the combination of '>|<': {@value} */
+/** The capital Cyrillic letter <em>Zhe</em>. Looks like an 'X' with a vertical bar through the center or the combination of {@literal '>|<'}: {@value} */
   char CYRILLIC_CAPITAL_LETTER_ZHE = 0x00416;
 
   /** The capital Cyrillic letter <em>Ze</em>. Looks like a '3': {@value} */

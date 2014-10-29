@@ -4,7 +4,7 @@ package net.sf.mmm.util.filter.api;
 
 /**
  * This is the interface for a filter that {@link #accept(char) decides} if a given character is acceptable or
- * should be filtered.<br>
+ * should be filtered. <br>
  * It is used by {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} and avoids conversion of
  * <code>char</code> to {@link Character} for performance reasons. In other cases please prefer to use
  * {@link Filter}.

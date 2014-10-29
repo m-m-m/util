@@ -3,7 +3,7 @@
 /**
  * Contains the implementation of the {@link net.sf.mmm.search.indexer.api 
  * Search-Indexer API} using apache lucene.
- * <a name="documentation"/><h2>Search-Indexer Implementation</h2> 
+ * <a name="documentation"></a><h2>Search-Indexer Implementation</h2> 
  * This package contains the implementation of the 
  * {@link net.sf.mmm.search.indexer.api Search-Indexer API} using 
  * <a href="http://lucene.apache.org">apache lucene</a> as underlying search 

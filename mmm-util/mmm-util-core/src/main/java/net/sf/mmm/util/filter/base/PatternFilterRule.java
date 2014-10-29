@@ -33,7 +33,7 @@ public class PatternFilterRule implements FilterRule<String> {
   private Boolean result;
 
   /**
-   * The non-arg constructor.<br>
+   * The non-arg constructor. <br>
    * <b>NOTE:</b><br>
    * This constructor should not be called directly! It is only intended for reflective access (e.g. for
    * JAXB).

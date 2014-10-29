@@ -3,7 +3,7 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This is the interface for an {@link java.util.Iterator} of primitive char values.<br>
+ * This is the interface for an {@link java.util.Iterator} of primitive char values. <br>
  * The intention of {@link CharIterator} is to allow faster processing of large streams of characters by using
  * the primitive type <code>char</code> and by making calls of {@link #hasNext()} unnecessary.
  * 

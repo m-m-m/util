@@ -19,8 +19,8 @@ package net.sf.mmm.util.lang.api;
  * </ul>
  * In any case you should avoid casting a given {@link Variant}. Instead, whenever possible use a simple type
  * for {@link Variant} such as an {@link Enum} or {@link String} (from a constant). Then you can do something
- * like <code>if (MyVariantEnum.SPECIAL == variant) { doSomethingSpecial(); } ...</code>.<br/>
- * <b>ATTENTION:</b><br/>
+ * like <code>if (MyVariantEnum.SPECIAL == variant) { doSomethingSpecial(); } ...</code>. <br>
+ * <b>ATTENTION:</b><br>
  * If not documented otherwise a {@link Variant} may always be <code>null</code> what is typically the
  * default.
  * 

@@ -138,7 +138,7 @@ public final class HttpParser {
   /**
    * This method parses the HTTP-header from the given <code>stream</code> and applies all information to the
    * given <code>request</code>. After this method has been called, the given <code>stream</code> is pointing
-   * to the beginning of the HTTP-body (or EOF if empty).<br>
+   * to the beginning of the HTTP-body (or EOF if empty). <br>
    * 
    * @param stream is the input-stream to read the header from. Only the header is read so the stream is NOT
    *        closed by this method.
@@ -153,7 +153,7 @@ public final class HttpParser {
   /**
    * This method parses the HTTP-header from the given <code>stream</code> and applies all information to the
    * given <code>request</code>. After this method has been called, the given <code>stream</code> is pointing
-   * to the beginning of the HTTP-body (or EOF if empty).<br>
+   * to the beginning of the HTTP-body (or EOF if empty). <br>
    * 
    * @param stream is the input-stream to read the header from. Only the header is read so the stream is NOT
    *        closed by this method.

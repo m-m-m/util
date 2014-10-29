@@ -9,7 +9,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the abstract base implementation of a
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} that acts as proxy to a
- * {@link #getDelegate() delegate} allowing to add new ways to access a property.<br>
+ * {@link #getDelegate() delegate} allowing to add new ways to access a property. <br>
  * It extends {@link AbstractPojoPropertyAccessorProxyAdapter} implementing {@link #getPropertyType()} to
  * return the {@link GenericType#getComponentType() component-type} from the
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getReturnType() return-type} of

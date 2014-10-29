@@ -12,7 +12,7 @@ public interface ByteProcessor {
 
   /**
    * This method is called to process the number of <code>length</code> bytes from the given
-   * <code>buffer</code> starting from the given <code>offset</code>.<br>
+   * <code>buffer</code> starting from the given <code>offset</code>. <br>
    * <b>ATTENTION:</b><br>
    * An implementation of this interface should only read bytes from the given <code>buffer</code>. It is NOT
    * permitted to modify the given <code>buffer</code> unless this is explicitly specified by the calling

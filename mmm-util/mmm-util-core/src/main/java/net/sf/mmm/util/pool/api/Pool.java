@@ -4,11 +4,11 @@ package net.sf.mmm.util.pool.api;
 
 /**
  * This is the interface for a simple pool. It allows to {@link #borrow() borrow} an object from the pool. If
- * that object is NOT needed anymore, it should be {@link #release(Object) released}.<br>
+ * that object is NOT needed anymore, it should be {@link #release(Object) released}. <br>
  * A typical pool implementation will have an internal buffer to cache {@link #release(Object) released}
  * objects so they can be reused for further {@link #borrow() requests}. Such buffer should be limited to a
  * maximum size (capacity). While that size is reached, {@link #release(Object) released} objects will NOT be
- * cached anymore (and the garbage collector should free them).<br>
+ * cached anymore (and the garbage collector should free them). <br>
  * <b>ATTENTION:</b><br>
  * Do NOT use this interface for a {@link Thread}-pool. There is already {@link java.util.concurrent.Executor}
  * for this use-case (see {@link java.util.concurrent.Executors}).
@@ -22,7 +22,7 @@ public interface Pool<E> {
 
   /**
    * This method borrows an element from this pool. If you do NOT need the object anymore you should
-   * {@link #release(Object) release} it.<br>
+   * {@link #release(Object) release} it. <br>
    * If this pool is {@link #isEmpty() empty}, a new instance is created for you. Otherwise a existing
    * instance (that has been {@link #release(Object) released} before) will be returned so it can be reused.
    * 
@@ -32,7 +32,7 @@ public interface Pool<E> {
   E borrow();
 
   /**
-   * This method releases the given <code>element</code>. It will be put back into the pool.<br>
+   * This method releases the given <code>element</code>. It will be put back into the pool. <br>
    * <b>ATTENTION:</b><br>
    * Only call this method if you are sure that the given <code>element</code> is NOT in use anymore.
    * Therefore no reference should exist on the <code>element</code> and you should NOT have passed the

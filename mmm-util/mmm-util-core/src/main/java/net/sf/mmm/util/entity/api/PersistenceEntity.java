@@ -7,11 +7,11 @@ package net.sf.mmm.util.entity.api;
  * <em>persistence</em>. Unlike {@link net.sf.mmm.util.transferobject.api.TransferObject}s such object may be
  * in {@link #STATE_MANAGED} and is connected with a persistent store. Typically this will happen using JPA
  * and an RDBMS. In this case classes implementing this interface will have {@link javax.persistence.Entity
- * JPA annotations} and gets {@link #STATE_MANAGED managed} by an {@link javax.persistence.EntityManager}.<br/>
- * <b>ATTENTION:</b><br/>
+ * JPA annotations} and gets {@link #STATE_MANAGED managed} by an {@link javax.persistence.EntityManager}. <br>
+ * <b>ATTENTION:</b><br>
  * An instance of this interface can NOT be considered as a regular java-object. It is better to think of a
  * persistence entity as a direct view into the persistent store. Therefore you should never make
- * modifications (e.g. invoke setters or sort list properties) that are NOT intended to be persisted.<br>
+ * modifications (e.g. invoke setters or sort list properties) that are NOT intended to be persisted. <br>
  * Further the underlying persistence-code may create dynamic proxies for your entity. Therefore you should
  * NOT declare methods (getters and setters) as <code>final</code> except you exactly know what you are doing.
  * Additionally {@link #getClass()} may return a subclass of your entity that you never created (see
@@ -41,8 +41,8 @@ public interface PersistenceEntity<ID> extends RevisionedEntity<ID> {
    * {@link javax.persistence.EntityManager#find(Class, Object) retrieved} from the persistent store
    * (database). It will remain in the managed state until a state change is explicitly triggered via
    * {@link javax.persistence.EntityManager#detach(Object) detach} /
-   * {@link javax.persistence.EntityManager#remove(Object) remove} or in case the transaction is committed. <br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link javax.persistence.EntityManager#remove(Object) remove} or in case the transaction is committed. <br>
+   * <b>ATTENTION:</b><br>
    * If managed entity is modified and the transaction gets committed, all modifications are written to the
    * persistent store. Be careful that you never make modifications that are NOT intended to be persisted.
    */
@@ -59,7 +59,7 @@ public interface PersistenceEntity<ID> extends RevisionedEntity<ID> {
    * If {@link javax.persistence.EntityManager#detach(Object) detach} is called on a {@link #STATE_MANAGED
    * managed} entity, its state changes to <code>detached</code>. The same applies of the transaction is
    * committed or on manual invocations of {@link javax.persistence.EntityManager#clear() clear} or
-   * {@link javax.persistence.EntityManager#close() close}.<br/>
+   * {@link javax.persistence.EntityManager#close() close}. <br>
    * If a relational property is {@link javax.persistence.FetchType#LAZY lazy} and has not been fetched
    * previously, calls to get this property will cause an exception. A detached entity can change its state
    * back to {@link #STATE_MANAGED managed} via {@link javax.persistence.EntityManager#merge(Object) merge}.

@@ -23,8 +23,8 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
  * or {@link java.util.Map}. It supports objects given as {@link CharSequence} (e.g. {@link String}),
  * {@link Collection}, or array. If a value is given as {@link CharSequence} it will be parsed as
  * comma-separated values. An individual value can be escaped by enclosing it with "<{[" and "]}>" so it can
- * itself contain the separator character.<br/>
- * Here are some examples:<br/>
+ * itself contain the separator character. <br>
+ * Here are some examples:<br>
  * <table border="1">
  * <tr>
  * <th>value</th>

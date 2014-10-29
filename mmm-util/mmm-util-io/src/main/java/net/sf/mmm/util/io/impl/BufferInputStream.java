@@ -14,9 +14,9 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This class represents a {@link InputStream} that works like a {@link java.io.BufferedInputStream} but
- * exposes its internal state to be used for lookahead operations.<br>
+ * exposes its internal state to be used for lookahead operations. <br>
  * <b>ATTENTION:</b><br>
- * This class is intended for internal usage only.<br>
+ * This class is intended for internal usage only. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -114,7 +114,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
   /**
    * This method (re-)fills the internal buffer as far as data is available from the underlying
    * {@link InputStream} without {@link #read() consuming} data from the stream. If the internal buffer is
-   * already filled, the call of this method will have no effect.<br>
+   * already filled, the call of this method will have no effect. <br>
    * 
    * @return <code>true</code> if the end of the stream was encountered while (re)filling the internal buffer,
    *         <code>false</code> otherwise.

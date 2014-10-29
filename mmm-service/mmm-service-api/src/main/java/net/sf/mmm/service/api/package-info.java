@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the API for simple remote invocations to communicate between client and server.
- * <a name="documentation"/><h2>Service API</h2>
+ * <a name="documentation"></a><h2>Service API</h2>
  * This package and it sub-packages contain the API for remote invocations. The API (and implementations)
  * provide a solution for simple but flexible and powerful remote invocations with focus on asynchronous processing on
  * clients (e.g. web-clients using Google Web Toolkit, native JavaFx clients, etc.).
@@ -40,7 +40,7 @@
  * you have a large amount of services. Even worse, if your client is also written in Java the calling code is not
  * directly related to the service operation. You have to manually ensure consistency so everything fits and works together.
  * The latter is better with JAX-WS but SOAP is also causing a lot of problems and limitations.
- * Also during development and maintenance it is hard to trace calls from the client to the server side implementation.<br/>
+ * Also during development and maintenance it is hard to trace calls from the client to the server side implementation. <br>
  * Solutions like JAX-RS and JAX-WS are cool and reasonable for external and interoperable services consumed by third-party
  * vendors. However, for <em>internal services</em> (services dedicated to clients or other applications within the same
  * application landscape typically under control of the same vendor) this is causing a lot of unnecessary effort and problems.
@@ -80,11 +80,11 @@
  * </ul>
  * There are two supported styles available that you can choose from:
  * <ul>
- * <li><b>RPC style</b><br/>
+ * <li><b>RPC style</b><br>
  * Here you simply create an interface for your remote service that inherits from the marker interface
  * {@link net.sf.mmm.service.api.rpc.RemoteInvocationService}. Further, you create an server-side implementation for
  * that interface. If you are using {@link net.sf.mmm.util.component.api.Cdi CDI} you only have to annotate the
- * implementation with {@link javax.inject.Named} and that is all.<br/>
+ * implementation with {@link javax.inject.Named} and that is all. <br>
  * On the client side you will use {@link net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller} to
  * {@link net.sf.mmm.service.api.rpc.client.RemoteInvocationServiceCaller#getServiceClient(Class, Class,
  * net.sf.mmm.util.lang.api.function.Consumer, net.sf.mmm.util.lang.api.function.Consumer) get a stub of your service interface}
@@ -112,13 +112,13 @@
  * }
  * </pre>
  * </li>
- * <li><b>Command style</b><br/>
+ * <li><b>Command style</b><br>
  * This approach is implementing the <em>command pattern</em>. Here you create implementations of the marker interface
  * {@link net.sf.mmm.service.api.command.RemoteInvocationCommand}s that represent a single service operation. This
  * corresponds to a method of a {@link net.sf.mmm.service.api.rpc.RemoteInvocationService} in RPC style and is a
  * container for all method parameters. On the server-side you create a corresponding implementation of
  * {@link net.sf.mmm.service.api.command.RemoteInvocationCommandHandler}. If you are using {@link net.sf.mmm.util.component.api.Cdi CDI}
- * you only have to annotate the implementation with {@link javax.inject.Named} and that is all.<br/>
+ * you only have to annotate the implementation with {@link javax.inject.Named} and that is all. <br>
  * On the client side you will use {@link net.sf.mmm.service.api.command.client.RemoteInvocationCommandCaller} to
  * {@link net.sf.mmm.service.api.command.client.RemoteInvocationCommandCaller#callCommand(net.sf.mmm.service.api.command.RemoteInvocationCommand,
  * net.sf.mmm.util.lang.api.function.Consumer, net.sf.mmm.util.lang.api.function.Consumer) call a command}. This is entirely type-safe due to the

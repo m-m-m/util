@@ -16,7 +16,7 @@ public interface SearchIndexerState {
 
   /**
    * This method gets the {@link SearchIndexerSourceState} for the given
-   * <code>source</code>.<br/>
+   * <code>source</code>. <br>
    * For each
    * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration#getSources()
    * configured source} a {@link SearchIndexerSourceState source-state} will be

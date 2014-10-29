@@ -56,7 +56,7 @@ public class HttpRequest extends HttpMessage {
   }
 
   /**
-   * This method gets the HTTP method to use.<br>
+   * This method gets the HTTP method to use. <br>
    * The typical methods are {@link #METHOD_GET GET}, {@link #METHOD_HEAD HEAD},
    * {@link #METHOD_POST POST}.
    * 

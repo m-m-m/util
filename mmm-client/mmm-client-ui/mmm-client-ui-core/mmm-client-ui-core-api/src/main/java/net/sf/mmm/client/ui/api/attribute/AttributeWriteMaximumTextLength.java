@@ -12,8 +12,8 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeWriteMaximumTextLength extends AttributeReadMaximumTextLength {
 
   /**
-   * This method sets the {@link #getMaximumTextLength() maximum text length} of this object.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getMaximumTextLength() maximum text length} of this object. <br>
+   * <b>ATTENTION:</b><br>
    * If you are setting this property on a UI field, the typical behavior is that after the maximum text
    * length is reached, any additional input is ignored. This also applies for copy and paste operations. For
    * usability this might be undesired in many cases as users can not append something and then remove a

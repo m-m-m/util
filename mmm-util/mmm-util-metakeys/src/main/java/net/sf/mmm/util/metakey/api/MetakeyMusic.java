@@ -25,7 +25,7 @@ public interface MetakeyMusic extends MetakeyAudioVideo {
   String COMPOSER = "composer";
 
   /**
-   * The album (CD) containing this musical content.<br>
+   * The album (CD) containing this musical content. <br>
    * <b>ATTENTION:</b><br>
    * This property does NOT actually belong to the metadata of the content
    * itself. The exact same song may be present on different CDs. Therefore this

@@ -3,7 +3,7 @@
 /**
  * Provides the common attribute-interfaces of the API for introspection of 
  * {@link net.sf.mmm.util.pojo.api.Pojo}s.
- * <a name="documentation"/><h2>POJO Introspection API - Attributes</h2>
+ * <a name="documentation"></a><h2>POJO Introspection API - Attributes</h2>
  * This package provides common super-interfaces for the POJO Introspection API.
  */
 package net.sf.mmm.util.pojo.descriptor.api.attribute;

@@ -9,7 +9,7 @@ import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 /**
  * A {@link SegmentContainerRepeat} is a {@link SegmentContainerSequence} that
  * can be repeated. The occurrences of the actual sequence is bound by
- * {@link #getMinimumOccurrence()} and {@link #getMaximumOccurrence()}.<br/>
+ * {@link #getMinimumOccurrence()} and {@link #getMaximumOccurrence()}. <br>
  * The following example shows a metadata definition of key/value pairs
  * ("KEY=VALUE;") that are terminated by '\0'. There has to be at least 1 and at
  * maximum 99 of such key/value pairs to match.

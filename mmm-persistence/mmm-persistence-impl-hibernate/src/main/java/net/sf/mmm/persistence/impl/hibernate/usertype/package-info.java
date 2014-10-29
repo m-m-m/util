@@ -3,9 +3,9 @@
 /**
  * Provides classes for implementing hibernate usertypes to map custom
  * datatypes.
- * <a name="documentation"/><h2>Persistence Impl Hibernate Usertype</h2> 
+ * <a name="documentation"></a><h2>Persistence Impl Hibernate Usertype</h2> 
  * This package contains classes to implement hibernate
- * {@link org.hibernate.usertype.UserType}s easily.<br/>
+ * {@link org.hibernate.usertype.UserType}s easily. <br>
  */
 package net.sf.mmm.persistence.impl.hibernate.usertype;
 

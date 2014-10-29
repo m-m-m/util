@@ -81,7 +81,7 @@ public interface BasicUtil {
 
   /**
    * This method returns the index of the first element in the given <code>array</code> that equals (see
-   * <code>checkEqual</code>) to the given <code>value</code>.<br>
+   * <code>checkEqual</code>) to the given <code>value</code>. <br>
    * Unlike {@link #findInArray(Object, Object[], boolean)} this method also works for
    * {@link Class#isPrimitive() primitive} arrays (such as <code>int[]</code>). In such case you need to
    * supply the according {@link net.sf.mmm.util.reflect.base.ReflectionUtilImpl#getNonPrimitiveType(Class)

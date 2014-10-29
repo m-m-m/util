@@ -21,7 +21,7 @@ public interface PojoPropertyAccessorOneArg extends PojoPropertyAccessor {
   PojoPropertyAccessorOneArgMode getMode();
 
   /**
-   * This method invokes the according property-method of <code>pojoInstance</code> with the given arguments.<br>
+   * This method invokes the according property-method of <code>pojoInstance</code> with the given arguments. <br>
    * 
    * @param pojoInstance is the instance of the POJO where to access the property. Has to be an instance of
    *        the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor#getPojoClass() type} from where this

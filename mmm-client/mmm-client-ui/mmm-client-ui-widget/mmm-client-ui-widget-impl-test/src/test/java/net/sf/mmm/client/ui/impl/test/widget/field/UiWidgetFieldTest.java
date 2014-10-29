@@ -349,7 +349,7 @@ public class UiWidgetFieldTest extends AbstractUiTest {
   @Test
   public void testRichTextField() {
 
-    checkWidget(UiWidgetRichTextField.class, "<span>text<br/>next</span>", "hi there");
+    checkWidget(UiWidgetRichTextField.class, "<span>text<br>next</span>", "hi there");
   }
 
   /**

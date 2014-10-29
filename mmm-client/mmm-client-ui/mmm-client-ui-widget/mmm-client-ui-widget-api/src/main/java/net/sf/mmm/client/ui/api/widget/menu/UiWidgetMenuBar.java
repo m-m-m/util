@@ -9,8 +9,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetRegularComposite;
 /**
  * This is the interface for a {@link UiWidgetRegularComposite composite widget} that represents a
  * <em>menu bar</em>. It is {@link #getChild(int) contains} {@link UiWidgetMenu menus} that are displayed by
- * their title in the menu bar.<br/>
- * <b>ATTENTION:</b><br/>
+ * their title in the menu bar. <br>
+ * <b>ATTENTION:</b><br>
  * A {@link UiWidgetMenuBar} should typically be created via
  * {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow#getMenuBar()}. For portability and
  * usability you should avoid creating it manually via

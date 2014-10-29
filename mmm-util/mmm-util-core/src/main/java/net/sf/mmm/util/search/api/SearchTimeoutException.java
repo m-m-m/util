@@ -7,7 +7,7 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This is the exception thrown if an operation (typically a query) in the persistence exceeded a configured
- * timeout.<br>
+ * timeout. <br>
  * This typically means that the end-user should refine his query and rerun the search.
  * 
  * @see net.sf.mmm.util.search.api.SearchCriteria#getSearchTimeout()

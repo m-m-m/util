@@ -9,7 +9,7 @@ import net.sf.mmm.util.date.api.Iso8601Util;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.date.api.Iso8601Util} interface. It does NOT use
- * {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe.<br>
+ * {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe. <br>
  *
  * @see #getInstance()
  *
@@ -36,8 +36,8 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   }
 
   /**
-   * This method gets the singleton instance of this {@link Iso8601UtilImpl}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link Iso8601UtilImpl}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Ioc#GET_INSTANCE} before using.
    *
    * @return the singleton instance.

@@ -38,8 +38,8 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * will be send to the server when the top-level queue is {@link RemoteInvocationCommandQueue#commit()
  * committed}. When the result is received from the server, it will be
  * {@link net.sf.mmm.util.lang.api.function.Consumer#accept(Object) passed} to the provided success callback
- * function. <br/>
- * <b>NOTE:</b><br/>
+ * function. <br>
+ * <b>NOTE:</b><br>
  * We have prepared everything for Java 1.8 so you can use lambdas. See
  * {@link net.sf.mmm.util.lang.api.function} for details. If you are using a java version less than 1.8, you
  * can NOT use lambdas and have to provide instances via anonymous classes.

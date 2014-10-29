@@ -3,8 +3,8 @@
 package net.sf.mmm.util.collection.api;
 
 /**
- * This is the interface for a node of a double linked list. <br/>
- * <b>ATTENTION:</b><br/>
+ * This is the interface for a node of a double linked list. <br>
+ * <b>ATTENTION:</b><br>
  * According to the generic-type-system of Java this interface can not be used as a proper API until the
  * generic &lt;NODE&gt; is finally bound. Please use
  * {@link net.sf.mmm.util.collection.base.BasicDoubleLinkedNode} instead.

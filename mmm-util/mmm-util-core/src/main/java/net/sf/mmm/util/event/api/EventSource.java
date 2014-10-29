@@ -3,8 +3,8 @@
 package net.sf.mmm.util.event.api;
 
 /**
- * This interface allows listeners to be registered and unregistered.<br/>
- * <b>NOTE:</b><br/>
+ * This interface allows listeners to be registered and unregistered. <br>
+ * <b>NOTE:</b><br>
  * For event base communication between loosely coupled components we recommend to use {@link EventBus}.
  *
  * @param <E> is the templated type of the {@link Event events} to send.

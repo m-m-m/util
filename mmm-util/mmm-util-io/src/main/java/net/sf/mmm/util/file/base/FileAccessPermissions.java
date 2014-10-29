@@ -543,7 +543,7 @@ public class FileAccessPermissions implements Cloneable {
 
   /**
    * This method allows to change the {@link #getMaskBits() modifiers} by a string expression. It behaves like
-   * the GNU command <code>chmod</code> (change modifiers).<br>
+   * the GNU command <code>chmod</code> (change modifiers). <br>
    * Examples:<br>
    * <ul>
    * <li><code>0124</code><br>

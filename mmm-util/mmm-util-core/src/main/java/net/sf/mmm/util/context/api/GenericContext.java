@@ -9,7 +9,7 @@ import net.sf.mmm.util.value.api.ValueNotSetException;
 
 /**
  * This is the interface for a context of variables. It allows to read all variables as well as to
- * {@link #createChildContext() create a child-context} this is {@link MutableGenericContext mutable}.<br>
+ * {@link #createChildContext() create a child-context} this is {@link MutableGenericContext mutable}. <br>
  * <b>Note:</b> Initially the name of this interface should be just <code>Context</code>. However there are
  * tons of common java projects shipped with a type of this name so to avoid confusion a longer name was
  * chosen.
@@ -41,7 +41,7 @@ public interface GenericContext {
 
   /**
    * This method gets the variable associated with the given <code>type</code>. It will use the
-   * {@link Class#getName() classname} as {@link #getVariable(String, Class) variable-name}.<br/>
+   * {@link Class#getName() classname} as {@link #getVariable(String, Class) variable-name}. <br>
    * <b>ATTENTION:</b><br>
    * Only use this method in combination with expressive types. E.g. types like {@link String} or
    * {@link Integer} are bad candidates while <code>MySpecificSingletonComponentInterface</code> might be a
@@ -79,7 +79,7 @@ public interface GenericContext {
 
   /**
    * This method gets the variable associated with the given <code>type</code>. It will use the
-   * {@link Class#getName() classname} as {@link #getVariable(String, Class) variable-name}.<br/>
+   * {@link Class#getName() classname} as {@link #getVariable(String, Class) variable-name}. <br>
    * <b>ATTENTION:</b><br>
    * Only use this method in combination with expressive types. E.g. types like {@link String} or
    * {@link Integer} are bad candidates while <code>MySpecificSingletonComponentInterface</code> might be a
@@ -105,7 +105,7 @@ public interface GenericContext {
   boolean hasVariable(String variableName);
 
   /**
-   * This method returns the names of all defined variables.<br>
+   * This method returns the names of all defined variables. <br>
    * <b>ATTENTION:</b><br>
    * Please note that this is an expensive operation so prefer {@link #hasVariable(String)} where possible.
    * 
@@ -116,7 +116,7 @@ public interface GenericContext {
   /**
    * This method creates a new context that inherits all variables from this context (and its parent
    * contexts). Variables that are set in the child-context override inherited variables. However changes to
-   * the child-context do NOT modify this context.<br>
+   * the child-context do NOT modify this context. <br>
    * <b>ATTENTION:</b><br>
    * Typically the child-context will be a cheap-copy connected to this context. So you should be aware of
    * this when creating many child-contexts recursively as their parent-contexts can NOT be collected by the
@@ -129,7 +129,7 @@ public interface GenericContext {
   /**
    * This method allows to create a {@link Map} representing the variables of this context. This can be useful
    * to pass this context to an external component (e.g. a template-engine) that typically accepts a
-   * {@link Map}.<br>
+   * {@link Map}. <br>
    * <b>ATTENTION:</b><br>
    * This method will create a fresh map with all variables filled in. Therefore it is NOT a cheap operation.
    * Further the {@link Map} will NOT reflect changes of this context and vice versa.

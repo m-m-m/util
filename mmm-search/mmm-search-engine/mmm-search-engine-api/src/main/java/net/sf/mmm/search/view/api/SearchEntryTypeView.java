@@ -7,7 +7,7 @@ import java.util.Collection;
 import net.sf.mmm.search.engine.api.config.SearchEntryType;
 
 /**
- * This interface represents the view on a {@link SearchEntryType}.<br/>
+ * This interface represents the view on a {@link SearchEntryType}. <br>
  * If you configure multiple {@link SearchEntryType}s with the same {@link #getTitle() title} these are
  * combined to one {@link SearchEntryTypeView}. The first of these that has an {@link #getIcon() icon} set is
  * used to define the {@link #getId() ID} and {@link #getIcon() icon} of this {@link SearchEntryTypeView}.

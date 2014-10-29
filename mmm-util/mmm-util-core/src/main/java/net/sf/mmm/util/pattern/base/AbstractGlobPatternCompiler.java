@@ -42,7 +42,7 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
   }
 
   /**
-   * This method gets the flag that determines if wildcards are required.<br>
+   * This method gets the flag that determines if wildcards are required. <br>
    * This implementation always returns <code>false</code>. Override to change.
    * 
    * @return <code>true</code> if wildcards are required. In that case <code>null</code> is

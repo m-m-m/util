@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * This is the interface for a {@link UiWidgetAbstractButtonContainer button container} that represents a
  * <em>toolbar</em>. Such toolbar typically contains a number of
  * {@link net.sf.mmm.client.ui.api.widget.core.UiWidgetAbstractButton buttons} that have an icon instead of a
- * label. For additional features please see {@link UiWidgetAbstractButtonContainer}.<br/>
+ * label. For additional features please see {@link UiWidgetAbstractButtonContainer}. <br>
  * As a toolbar typically contains many icon buttons it has its own focus management: Only one button of the
  * toolbar is <em>active</em> and will receive the focus when you tab. Using arrow left/right keys you can
  * move the focus to the previous/next button that will then become active.

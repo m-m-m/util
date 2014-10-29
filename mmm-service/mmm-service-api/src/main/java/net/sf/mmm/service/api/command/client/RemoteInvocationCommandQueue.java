@@ -20,8 +20,8 @@ public interface RemoteInvocationCommandQueue extends AbstractRemoteInvocationCo
   /**
    * {@inheritDoc}
    *
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * This will NOT send a technical request to the server unless this queue is {@link #commit() committed}. A
    * queue allows multiple invocations of this method in order to collect remote invocations that shall be
    * send to the server within the same technical request.
@@ -35,8 +35,8 @@ public interface RemoteInvocationCommandQueue extends AbstractRemoteInvocationCo
   /**
    * {@inheritDoc}
    *
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * This will NOT send a technical request to the server unless this queue is {@link #commit() committed}. A
    * queue allows multiple invocations of this method in order to collect remote invocations that shall be
    * send to the server within the same technical request.

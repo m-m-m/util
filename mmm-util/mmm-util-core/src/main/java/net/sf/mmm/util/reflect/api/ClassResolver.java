@@ -31,7 +31,7 @@ public interface ClassResolver {
 
   /**
    * This method resolves the class with the given <code>name</code>. In addition to a {@link ClassLoader}
-   * this method may also find types via a logical alias name.<br>
+   * this method may also find types via a logical alias name. <br>
    * The <code>name</code> can be the physical (fully qualified) classname (e.g. <code>org.foo.BlobImpl</code>
    * ) but this may also be a logical name depending on the implementation of this interface (e.g.
    * <code>Blob</code> may point to the same type).

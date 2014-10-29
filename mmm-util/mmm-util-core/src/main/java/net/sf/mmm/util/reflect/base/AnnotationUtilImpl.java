@@ -46,8 +46,8 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   }
 
   /**
-   * This method gets the singleton instance of this {@link AnnotationUtilImpl}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link AnnotationUtilImpl}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    * 
    * @return the singleton instance.
@@ -149,7 +149,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of the type given by
    * <code>annotation</code> in the {@link Class#getInterfaces() hierarchy} of the given
-   * <code>annotatedInterface</code>.<br>
+   * <code>annotatedInterface</code>. <br>
    * This method is only useful if the given <code>annotation</code> is a {@link #isRuntimeAnnotation(Class)
    * runtime annotation} that is {@link #isAnnotationForType(Class, ElementType) applicable} for
    * {@link ElementType#TYPE classes}.

@@ -13,7 +13,7 @@ package net.sf.mmm.util.event.api;
 public interface EventListener<E /* extends Event */> extends java.util.EventListener {
 
   /**
-   * This method is called if an event occurred.<br>
+   * This method is called if an event occurred. <br>
    * <b>WARNING:</b><br>
    * Depending on the implementation of {@link EventSource} it may NOT be legal to
    * {@link EventSource#addListener(EventListener) add} or {@link EventSource#removeListener(EventListener)

@@ -156,7 +156,7 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method sets the HTTP version to use.<br>
+   * This method sets the HTTP version to use. <br>
    * By {@link HttpMessage#HttpMessage() default} the version is {@link #VERSION_1_1}.
    * 
    * @param httpVersion the HTTP version to set.
@@ -167,11 +167,11 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method converts the header property to an hash key.<br>
+   * This method converts the header property to an hash key. <br>
    * The result must ensure that its {@link Object#toString() string-representation} is
    * {@link String#equalsIgnoreCase(String) case in-sensitive equal} to the given <code>name</code>. Additionally it
    * needs to have compliant implementations for {@link Object#equals(Object) equals} and {@link Object#hashCode()
-   * hashCode}.<br>
+   * hashCode}. <br>
    * This implementations ensures that the original case of the header <code>name</code> is NOT modified while
    * {@link #getHeaderProperty(String)} acts case in-sensitive.
    * 
@@ -196,7 +196,7 @@ public abstract class HttpMessage {
 
   /**
    * This method sets a single attribute of the property with the given <code>name</code> in the header of this HTTP
-   * message.<br>
+   * message. <br>
    * 
    * @param name is the name of the property to manipulate.
    * @param attributeName is the name of the attribute to set.
@@ -269,7 +269,7 @@ public abstract class HttpMessage {
 
   /**
    * This method gets a single attribute of the property with the given <code>name</code> from the header of this HTTP
-   * message.<br>
+   * message. <br>
    * E.g. the property {@link #HEADER_PROPERTY_CACHE_CONTROL Cache-Control} may have the value
    * <code>no-cache,no-store,max-age=0</code>. Then the following code snipplet would return "0":
    * 
@@ -433,7 +433,7 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method sets the {@link #HEADER_ATTRIBUTE_MAX_AGE maximum age} (lease time) in seconds.<br>
+   * This method sets the {@link #HEADER_ATTRIBUTE_MAX_AGE maximum age} (lease time) in seconds. <br>
    * 
    * @param seconds is the max-age in seconds.
    */

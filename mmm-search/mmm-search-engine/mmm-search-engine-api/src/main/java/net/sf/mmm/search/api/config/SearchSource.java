@@ -35,15 +35,15 @@ public interface SearchSource extends AttributeReadId<String> {
   //
   // /**
   // * The {@link #getUpdateStrategy() update-type} for delta-updating using a
-  // * version-control-system (VCS).<br/>
+  // * version-control-system (VCS). <br>
   // * In case of a VCS, the location(s) should be a local working copy of a
   // * checked out VCS-repository. This initial checkout has to be done once
   // * outside of the search-indexer in advance. This is done by intention
   // because
   // * you potentially have to deal with verification of certificates (e.g. for
   // * SSL in https) and provide authentication credentials. You can still use a
-  // * wrapper shell script for further automation.<br/>
-  // * <b>ATTENTION:</b><br/>
+  // * wrapper shell script for further automation. <br>
+  // * <b>ATTENTION:</b><br>
   // * Using a VCS as {@link #getUpdateStrategy() update-strategy} requires that
   // * the locations for this source are dedicated to the search-indexer and do
   // * not get updated form outside of the search-indexer. The indexer will save
@@ -82,7 +82,7 @@ public interface SearchSource extends AttributeReadId<String> {
   /**
    * This method gets the display-name of this source. This title can be displayed to end-users in the
    * application where a {@link net.sf.mmm.search.engine.api.SearchQuery} is performed so the user can
-   * restrict his search to specific sources.<br/>
+   * restrict his search to specific sources. <br>
    * For localization see {@link net.sf.mmm.util.nls.api}.
    * 
    * @return the title of this source.
@@ -93,7 +93,7 @@ public interface SearchSource extends AttributeReadId<String> {
    * This method gets the prefix for the URL pointing to the content of a
    * {@link net.sf.mmm.search.api.SearchEntry}. The URL that links to this content is build by appending the
    * {@link net.sf.mmm.search.api.SearchEntry#getUri() URI} of the {@link net.sf.mmm.search.api.SearchEntry}
-   * to this prefix.<br>
+   * to this prefix. <br>
    * Typical examples are "http://foo.org/svn/trunk" or "http://foo.org/wiki/".
    * 
    * @return the URL-prefix of this source.
@@ -107,7 +107,7 @@ public interface SearchSource extends AttributeReadId<String> {
   // * search-indexer and can be ignored for the search-engine (due to the lack
   // of
   // * full generic support in JAXB we decided NOT to move this method to a
-  // * sub-interface in the search-indexer-api).<br/>
+  // * sub-interface in the search-indexer-api). <br>
   // * The default update-type is {@link #UPDATE_STRATEGY_LAST_MODIFIED} that
   // * should work for all locations/resources that have a modification date.
   // * Besides {@link #UPDATE_STRATEGY_NONE} there is also

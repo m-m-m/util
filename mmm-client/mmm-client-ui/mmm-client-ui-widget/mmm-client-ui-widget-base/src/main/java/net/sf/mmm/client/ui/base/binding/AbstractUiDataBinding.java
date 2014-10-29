@@ -144,8 +144,8 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
   /**
    * This method creates a new instance of &lt;VALUE&gt; (see {@link #getValue()}). It is called from
    * {@link #getValueDirect(Object, ValidationState)} or {@link #setValue(Object)} in case the given value is
-   * <code>null</code>.<br/>
-   * <b>NOTE:</b><br/>
+   * <code>null</code>. <br>
+   * <b>NOTE:</b><br>
    * If &lt;VALUE&gt; is {@link Void} or a {@link net.sf.mmm.util.lang.api.Datatype} (immutable object), this
    * method should legally return <code>null</code>. This can also be suitable for objects that only delegate
    * their {@link #getValue() value} to something else. Further, to be GWT compatible you cannot create the
@@ -157,8 +157,8 @@ public abstract class AbstractUiDataBinding<VALUE> extends AbstractUiFeatureValu
   protected abstract VALUE createNewValue();
 
   /**
-   * This method will create a (deep-)copy of the given <code>value</code>.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method will create a (deep-)copy of the given <code>value</code>. <br>
+   * <b>ATTENTION:</b><br>
    * If &lt;VALUE&gt; is immutable you can simply return <code>null</code>.
    *
    * @param value is the {@link #getValue() value} to copy. Will typically be {@link #getOriginalValue()}.

@@ -16,8 +16,8 @@ import java.security.Principal;
  * {@link javax.servlet.http.HttpServletRequest#getUserPrincipal()}). Assume you
  * need to read the user from a database and want to do this is the transaction
  * managed by your business logic, then it makes sense to use an application
- * component for this case. This is what this interface is for.<br>
- * <b>ATTENTION:</b><br/>
+ * component for this case. This is what this interface is for. <br>
+ * <b>ATTENTION:</b><br>
  * However you should NOT bypass the authentication mechanism of
  * application-server and do that manually. However if you use a single-sign-on
  * authentication (e.g. kerberos) but your application is only accessible for a

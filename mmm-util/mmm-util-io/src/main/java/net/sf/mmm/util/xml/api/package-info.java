@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API of utilities that help to deal with XML.
- * <a name="documentation"/><h2>XML-Util API</h2>
+ * <a name="documentation"></a><h2>XML-Util API</h2>
  * Provides utilities to deal with XML:
  * <ul>
  * <li>{@link net.sf.mmm.util.xml.api.XmlUtil} offers general help with XML.</li>

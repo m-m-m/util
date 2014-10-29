@@ -144,7 +144,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
 
     /**
      * This method tries to ensure that the internal buffer has at least the given number of bytes available.
-     * If less bytes are available, the buffer is filled up accordingly using the underlying stream.<br>
+     * If less bytes are available, the buffer is filled up accordingly using the underlying stream. <br>
      * <b>ATTENTION:</b><br>
      * If EOS is hit, the requested buffer size can NOT be ensured.
      * 

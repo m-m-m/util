@@ -16,10 +16,10 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface GenericTypeFactory {
 
   /**
-   * This method creates the {@link GenericType} representing the given <code>type</code>.<br>
+   * This method creates the {@link GenericType} representing the given <code>type</code>. <br>
    * The {@link GenericType#getType() type}, {@link GenericType#getAssignmentClass() lower bound} and
    * {@link GenericType#getRetrievalClass() upper bound} of the returned {@link GenericType} will all be
-   * identical to the given <code>type</code>.<br>
+   * identical to the given <code>type</code>. <br>
    * <b>ATTENTION:</b><br>
    * If you know the {@link Type} where the given <code>type</code> was
    * {@link net.sf.mmm.util.reflect.base.AbstractGenericType#getDefiningType() defined} you should use
@@ -33,9 +33,9 @@ public interface GenericTypeFactory {
   <T> GenericType<T> createGenericType(Class<T> type);
 
   /**
-   * This method creates the {@link GenericType} representing the given <code>type</code>.<br>
+   * This method creates the {@link GenericType} representing the given <code>type</code>. <br>
    * If the given <code>type</code> is a {@link Class}, the methods behaves like
-   * {@link #createGenericType(Class)}.<br>
+   * {@link #createGenericType(Class)}. <br>
    * <b>ATTENTION:</b><br>
    * If you know the {@link Type} where the given <code>type</code> was defined (e.g. the {@link Class} where
    * you retrieved the given <code>type</code> from as parameter, return-type or field-type) you should use
@@ -48,7 +48,7 @@ public interface GenericTypeFactory {
 
   /**
    * This method creates the {@link GenericType} representing the given <code>type</code> in the context of
-   * the given <code>definingType</code>.<br>
+   * the given <code>definingType</code>. <br>
    * Here is some typical example of how to use this:
    * 
    * <pre>
@@ -63,7 +63,7 @@ public interface GenericTypeFactory {
    * 
    * Now if you ask your self why all this instead of just using
    * <code>myMethod.{@link java.lang.reflect.Method#getReturnType() getReturnType()}</code> ? Read the javadoc
-   * of {@link GenericType} to get the answer.<br>
+   * of {@link GenericType} to get the answer. <br>
    * <b>NOTE:</b><br>
    * Please look at <code>mmm-util-pojo</code> which allows to use this features at a higher level and
    * therefore much easier.
@@ -79,7 +79,7 @@ public interface GenericTypeFactory {
 
   /**
    * This method creates the {@link GenericType} representing the given <code>type</code> in the context of
-   * the given <code>definingType</code>.<br>
+   * the given <code>definingType</code>. <br>
    * It is a convenience method for
    * <code>{@link #createGenericType(Type, GenericType) createGenericType}(type, 
    * {@link #createGenericType(Type) createGenericType}(definingType))</code>

@@ -3,7 +3,7 @@
 /**
  * Contains the implementation of the 
  * {@link net.sf.mmm.util.version.api Version API}.
- * <a name="documentation"/><h2>Version-Util Impl</h2>
+ * <a name="documentation"></a><h2>Version-Util Impl</h2>
  * This package contains the implementation of the 
  * {@link net.sf.mmm.util.version.api Version API}.
  */

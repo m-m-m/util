@@ -8,7 +8,7 @@ package net.sf.mmm.client.ui.api.handler;
  * An actual handler is a particular interface extending this one that specifies <em>action operations</em>
  * for events triggered from the <em>view</em> (UI). These are typically implemented by the controller or
  * presenter following the <em>MVC</em> or <em>MVP</em> paradigm. Such action operations shall be methods that
- * start with the prefix <code>on</code> and are followed with the name of the event that has been triggered.<br/>
+ * start with the prefix <code>on</code> and are followed with the name of the event that has been triggered. <br>
  * For examples see e.g.
  * {@link net.sf.mmm.client.ui.api.handler.event.UiHandlerEventClick#onClick(net.sf.mmm.client.ui.api.event.UiEventClick)}
  * ,

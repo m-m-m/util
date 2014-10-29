@@ -32,14 +32,14 @@ public interface SearchIndexerSource extends SearchSource {
 
   /**
    * The {@link #getUpdateStrategy() update-type} for delta-updating using a
-   * version-control-system (VCS).<br/>
+   * version-control-system (VCS). <br>
    * In case of a VCS, the location(s) should be a local working copy of a
    * checked out VCS-repository. This initial checkout has to be done once
    * outside of the search-indexer in advance. This is done by intention because
    * you potentially have to deal with verification of certificates (e.g. for
    * SSL in https) and provide authentication credentials. You can still use a
-   * wrapper shell script for further automation.<br/>
-   * <b>ATTENTION:</b><br/>
+   * wrapper shell script for further automation. <br>
+   * <b>ATTENTION:</b><br>
    * Using a VCS as {@link #getUpdateStrategy() update-strategy} requires that
    * the locations for this source are dedicated to the search-indexer and do
    * not get updated form outside of the search-indexer. The indexer will save
@@ -60,7 +60,7 @@ public interface SearchIndexerSource extends SearchSource {
    * updates of this {@link SearchSource}. This property is of interest for the
    * search-indexer and can be ignored for the search-engine (due to the lack of
    * full generic support in JAXB we decided NOT to move this method to a
-   * sub-interface in the search-indexer-api).<br/>
+   * sub-interface in the search-indexer-api). <br>
    * The default update-type is {@link #UPDATE_STRATEGY_LAST_MODIFIED} that
    * should work for all locations/resources that have a modification date.
    * Besides {@link #UPDATE_STRATEGY_NONE} there is also

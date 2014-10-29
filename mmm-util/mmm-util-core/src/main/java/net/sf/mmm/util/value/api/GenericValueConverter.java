@@ -6,7 +6,7 @@ import java.lang.reflect.Type;
 
 /**
  * This is the interface for generic conversion of values from a specific source-type (
- * <code>&lt;SOURCE&gt;</code>) to a given target-type ( <code>&lt;TARGET&gt;</code>).<br>
+ * <code>&lt;SOURCE&gt;</code>) to a given target-type ( <code>&lt;TARGET&gt;</code>). <br>
  * <b>ATTENTION:</b><br>
  * An implementation of this interface should be stateless and thread-safe.
  * 

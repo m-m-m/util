@@ -6,7 +6,7 @@ import java.util.Locale;
 
 /**
  * A {@link Hyphenator} is used to hyphenate words. If a word is to long to fit at the end of a line of text,
- * it may be hyphenated according to the {@link #getLocale() locale}.<br>
+ * it may be hyphenated according to the {@link #getLocale() locale}. <br>
  * An implementation has to be thread-safe.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -34,7 +34,7 @@ public interface Hyphenator {
 
   /**
    * This method hyphenates the word from the given <code>text</code> from <code>start</code> to
-   * <code>end</code>.<br>
+   * <code>end</code>. <br>
    * <b>ATTENTION:</b><br>
    * To ensure correct results you need to invoke this method for a single word of text. Please also note that
    * word detection is far from trivial for specific languages such as Thai. You should use

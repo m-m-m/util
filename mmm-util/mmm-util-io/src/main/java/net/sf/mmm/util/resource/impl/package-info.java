@@ -3,7 +3,7 @@
 /**
  * Contains the implementation of the 
  * {@link net.sf.mmm.util.resource.api resource-API}.
- * <a name="documentation"/><h2>Resource-Util Impl</h2>
+ * <a name="documentation"></a><h2>Resource-Util Impl</h2>
  * This package contains the 
  * {@link net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl}.
  */

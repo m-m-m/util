@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the API of the state for the search-indexer.
- * <a name="documentation"/><h2>Search-Indexer State API</h2> 
+ * <a name="documentation"></a><h2>Search-Indexer State API</h2> 
  * This package contains the API of the 
  * {@link net.sf.mmm.search.indexer.api.state.SearchIndexerState state} for the 
  * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer search-indexer}.

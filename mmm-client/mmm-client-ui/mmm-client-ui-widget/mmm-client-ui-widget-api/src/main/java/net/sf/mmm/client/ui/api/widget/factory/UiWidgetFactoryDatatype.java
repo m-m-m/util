@@ -20,8 +20,8 @@ public interface UiWidgetFactoryDatatype extends AbstractUiWidgetFactoryDatatype
 
   /**
    * This method creates a new instance of the {@link UiWidgetField field widget} to view and edit the given
-   * <code>datatype</code>.<br/>
-   * <b>NOTE:</b><br/>
+   * <code>datatype</code>. <br>
+   * <b>NOTE:</b><br>
    * Using this API is a key for creating a maintainable UI. Define {@link net.sf.mmm.util.lang.api.Datatype
    * custom datatypes} (e.g. <em>CustomerNumber</em>) and use them in your data-model to make it more
    * expressive. For each datatype you are using (including standard datatypes such as {@link String} as well

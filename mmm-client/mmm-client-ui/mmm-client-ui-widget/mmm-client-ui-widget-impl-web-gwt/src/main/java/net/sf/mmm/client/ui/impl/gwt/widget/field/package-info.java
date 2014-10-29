@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the implementation for field widgets using GWT.
- * <a name="documentation"/><h2>Client UI Impl GWT Widget Field</h2>
+ * <a name="documentation"></a><h2>Client UI Impl GWT Widget Field</h2>
  * This package contains the implementation of {@link net.sf.mmm.client.ui.api.widget.field} using GWT (Google Web
  * Toolkit).
  */

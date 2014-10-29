@@ -24,7 +24,7 @@ public enum SelectionMode {
   /**
    * The selection mode for selection of multiple items. The best usability for this mode is provided by
    * having checkboxes in front of every item. The user can select or deselect items by checking or unchecking
-   * the according checkbox.<br/>
+   * the according checkbox. <br>
    * A simplified variant works without checkboxes and allows to extend the selection by holding the [control]
    * key and clicking on additional items. In that variant additionally when holding the [shift] key and and
    * clicking on an item, the including range from the first to the last items clicked is selected.

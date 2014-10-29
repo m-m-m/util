@@ -7,7 +7,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.UiWidgetRegular;
 
 /**
- * This is the interface for an {@link UiWidgetRegular regular widget} that represents a <em>hyperlink</em>.<br/>
+ * This is the interface for an {@link UiWidgetRegular regular widget} that represents a <em>hyperlink</em>. <br>
  * Here you can see an example (with {@link #setLabel(String) label} "Click me"):
  * 
  * <pre>

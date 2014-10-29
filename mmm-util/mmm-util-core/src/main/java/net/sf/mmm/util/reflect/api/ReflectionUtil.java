@@ -222,7 +222,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method finds all classes that are located in the package identified by the given
-   * <code>packageName</code>.<br>
+   * <code>packageName</code>. <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
@@ -237,7 +237,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method finds all classes that are located in the package identified by the given
-   * <code>packageName</code>.<br>
+   * <code>packageName</code>. <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
@@ -257,7 +257,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method finds all classes that are located in the package identified by the given
-   * <code>packageName</code>.<br>
+   * <code>packageName</code>. <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
@@ -278,7 +278,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method finds all classes that are located in the package identified by the given
-   * <code>packageName</code>.<br>
+   * <code>packageName</code>. <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
@@ -336,7 +336,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method finds all resources that are located in the package identified by the given
-   * <code>packageName</code>.<br>
+   * <code>packageName</code>. <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
@@ -359,7 +359,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method finds all resources that are located in the package identified by the given
-   * <code>packageName</code>.<br>
+   * <code>packageName</code>. <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
@@ -383,7 +383,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method finds all resources that are located in the package identified by the given
-   * <code>packageName</code>.<br>
+   * <code>packageName</code>. <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
@@ -404,7 +404,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method finds all resources that match to the given <code>absoluteClasspath</code>. Unlike
    * {@link net.sf.mmm.util.resource.base.ClasspathResource#ClasspathResource(String)} this method will return
-   * all resources that with the given classpath (e.g. out of multiple JAR-files).<br>
+   * all resources that with the given classpath (e.g. out of multiple JAR-files). <br>
    *
    * @param absoluteClasspath is the absolute path to the resource. E.g.
    *        "net/sf/mmm/util/resource/ClasspathResource.txt".
@@ -416,7 +416,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
 
   /**
    * This method finds all resources that are located in the package identified by the given
-   * <code>packageName</code>.<br>
+   * <code>packageName</code>. <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and
    * WAR-files may need to be scanned.
@@ -450,8 +450,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   /**
    * This method recursively traverses all objects starting from the given {@link Object} via all properties
    * and contents. It supports {@link java.util.Collection}s, {@link java.util.Map}s, {@link Object}
-   * {@link Class#isArray() arrays}, and {@link net.sf.mmm.util.pojo.api.Pojo}s. <br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link Class#isArray() arrays}, and {@link net.sf.mmm.util.pojo.api.Pojo}s. <br>
+   * <b>ATTENTION:</b><br>
    * This method will NOT traverse into {@link Class#isPrimitive() primitive} {@link Class#isArray() arrays}
    * for performance reasons. Simply realize this inside your <code>visitor</code> if you need it.
    *

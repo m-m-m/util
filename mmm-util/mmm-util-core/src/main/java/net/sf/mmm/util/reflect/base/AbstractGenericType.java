@@ -161,7 +161,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   /**
    * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code>
    * and collects the generic {@link Class#getGenericSuperclass() super-classes} or
-   * {@link Class#getGenericInterfaces() super-interfaces} of <code>ancestor</code> on that hierarchy-path.<br>
+   * {@link Class#getGenericInterfaces() super-interfaces} of <code>ancestor</code> on that hierarchy-path. <br>
    * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
    * NOT be unique. In such case it will be unspecified which of the possible paths is used.
    * 

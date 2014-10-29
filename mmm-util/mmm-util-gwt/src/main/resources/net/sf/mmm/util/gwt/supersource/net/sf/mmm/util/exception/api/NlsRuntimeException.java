@@ -57,8 +57,8 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * The constructor. <br/>
-   * <b>ATTENTION:</b><br/>
+   * The constructor. <br>
+   * <b>ATTENTION:</b><br>
    * Please use {@link NlsRuntimeException#NlsRuntimeException(NlsMessage)} in advance to this constructor to
    * get best NLS/I18N.
    *
@@ -72,8 +72,8 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * The constructor. <br/>
-   * <b>ATTENTION:</b><br/>
+   * The constructor. <br>
+   * <b>ATTENTION:</b><br>
    * Please use {@link NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)} in advance to this
    * constructor to get best NLS/I18N.
    *

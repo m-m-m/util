@@ -62,8 +62,8 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   }
 
   /**
-   * This method gets the singleton instance of this {@link ProcessUtilImpl}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link ProcessUtilImpl}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    * 
    * @return the singleton instance.

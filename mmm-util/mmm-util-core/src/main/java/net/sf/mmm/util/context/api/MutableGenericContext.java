@@ -26,7 +26,7 @@ public interface MutableGenericContext extends GenericContext {
   /**
    * This method sets the variable given by <code>value</code>. If the variable is already set, it will be
    * overridden. This method will use the {@link Class#getName() classname} as
-   * {@link #setVariable(String, Object) variable-name}.<br/>
+   * {@link #setVariable(String, Object) variable-name}. <br>
    * <b>ATTENTION:</b><br>
    * Only use this method in combination with expressive types. E.g. types like {@link String} or
    * {@link Integer} are bad candidates while <code>MySpecificSingletonComponentInterface</code> might be a

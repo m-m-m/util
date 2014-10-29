@@ -6,7 +6,7 @@ package net.sf.mmm.util.resource.api;
  * This interface represents an URI pointing to the location of a
  * {@link net.sf.mmm.util.resource.api.DataResource}. A {@link ResourceUri} can be {@link #getUri()
  * represented as string} but consists of two parts: a {@link #getSchemePrefix() scheme-prefix} and a
- * {@link #getPath() path}.<br>
+ * {@link #getPath() path}. <br>
  * Here are some examples:
  * <table border="1">
  * <tr>
@@ -91,7 +91,7 @@ public interface ResourceUri {
   /**
    * This method gets the <em>scheme-prefix</em> of a qualified {@link ResourceUri}. The scheme-prefix has the
    * following form: <code>[a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?</code>. The part before the colon (:) is called
-   * the {@link java.net.URI#getScheme() scheme}.<br>
+   * the {@link java.net.URI#getScheme() scheme}. <br>
    * Examples for scheme-prefixes are:
    * <ul>
    * <li>classpath:</li>

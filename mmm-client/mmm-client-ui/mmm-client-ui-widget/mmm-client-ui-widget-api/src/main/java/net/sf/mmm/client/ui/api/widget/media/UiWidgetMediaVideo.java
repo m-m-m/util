@@ -8,8 +8,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 import net.sf.mmm.client.ui.api.widget.core.UiWidgetImage;
 
 /**
- * This is the interface for a {@link UiWidgetMedia media-player widget} that plays videos (movies). <br/>
- * <b>NOTE:</b><br/>
+ * This is the interface for a {@link UiWidgetMedia media-player widget} that plays videos (movies). <br>
+ * <b>NOTE:</b><br>
  * This widget is just the video-screen itself without controls. For simple usage see
  * {@link UiWidgetMediaPlayer}.
  * 

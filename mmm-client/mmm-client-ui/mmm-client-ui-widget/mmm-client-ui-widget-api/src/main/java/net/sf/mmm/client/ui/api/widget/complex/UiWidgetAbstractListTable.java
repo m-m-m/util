@@ -6,8 +6,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetListBase;
 
 /**
  * This is the abstract interface for a {@link UiWidgetAbstractDataTable data table widget} that represents a
- * <em>list table</em>.<br/>
- * <b>Note:</b><br/>
+ * <em>list table</em>. <br>
+ * <b>Note:</b><br>
  * There are the following variants of this abstract list table widget:
  * <ul>
  * <li>{@link UiWidgetListTable}</li>
@@ -22,8 +22,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetListBase;
 public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTable<ROW>, UiWidgetListBase<ROW> {
 
   /**
-   * Gets the index of the given <code>row</code>. <br/>
-   * <b>ATTENTION:</b><br/>
+   * Gets the index of the given <code>row</code>. <br>
+   * <b>ATTENTION:</b><br>
    * The index of a row is not stable and may change at any time due to sorting or other features. You should
    * only retrieve an index to immediately use it e.g. for {@link #addRow(Object, int)} to insert a row before
    * or after a given row such as the {@link #getSelectedValue() selected row}. Please avoid storing such
@@ -46,8 +46,8 @@ public interface UiWidgetAbstractListTable<ROW> extends UiWidgetAbstractDataTabl
   void addRow(ROW row);
 
   /**
-   * Adds the given row to this list table. <br/>
-   * <b>ATTENTION:</b><br/>
+   * Adds the given row to this list table. <br>
+   * <b>ATTENTION:</b><br>
    * Be careful when dealing with indices. The index of a row can change at any time due to sorting or other
    * features. You may use this method in combination of recent calls to {@link #getRowIndex(Object)}.
    *

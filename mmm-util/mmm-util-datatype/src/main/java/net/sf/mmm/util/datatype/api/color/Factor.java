@@ -4,8 +4,8 @@ package net.sf.mmm.util.datatype.api.color;
 
 /**
  * The implementation of {@link Segment} for a factor in the range from <code>0</code> to <code>1</code> such
- * as {@link Saturation}, {@link Lightness}, or {@link Brightness}. <br/>
- * <b>ATTENTION:</b><br/>
+ * as {@link Saturation}, {@link Lightness}, or {@link Brightness}. <br>
+ * <b>ATTENTION:</b><br>
  * Beside {@link #toStringAsPercent() percent} notation the {@link String} constructor both accepts
  * {@link #getValueAsByte() byte values} as well as {@link #toStringAsFactor() factor} notation.
  * 

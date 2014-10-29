@@ -39,8 +39,8 @@ public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLogga
   }
 
   /**
-   * This method gets the singleton instance of {@link PojoDescriptorBuilderFactory}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of {@link PojoDescriptorBuilderFactory}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    * 
    * @return the static instance of this class. May be <code>null</code> if not initialized.

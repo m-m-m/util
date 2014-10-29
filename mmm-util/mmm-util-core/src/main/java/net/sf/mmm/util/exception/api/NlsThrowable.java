@@ -112,8 +112,8 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
 
   /**
    * Returns a copy of the given exception where the specified details are removed. See {@link ExceptionUtil}
-   * for advanced usage and further details.<br/>
-   * <b>NOTE:</b><br/>
+   * for advanced usage and further details. <br>
+   * <b>NOTE:</b><br>
    * Implementations/subclasses can override the return type with the subclass. As Java does not support an
    * implicit SELF generic and we do not want to overload all exceptions with a generic type.
    *

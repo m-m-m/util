@@ -20,7 +20,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadId;
 public interface SearchEntry extends AttributeReadId<Long> {
 
   /**
-   * The name of the "id" field. The UID (Unique Identifier) is a field that identifies the content uniquely.<br/>
+   * The name of the "id" field. The UID (Unique Identifier) is a field that identifies the content uniquely. <br>
    * It is strongly suggested for the implementation but NOT strictly guaranteed that the ID remains the same
    * if a {@link SearchEntry} is updated in the index. The ID is a {@link Long} value. End-users should never
    * make any assumptions or interpretation of its value as this is totally implementation specific.
@@ -38,7 +38,7 @@ public interface SearchEntry extends AttributeReadId<Long> {
    * The name of the {@value} field. The URI (Unified Resource Identifier) identifies the original content and
    * allows to link to it. Typically this is not an entire URL but a path relative to the
    * {@link net.sf.mmm.search.api.config.SearchSource#getUrlPrefix URL-prefix} of the according
-   * {@link #getSource() source}.<br>
+   * {@link #getSource() source}. <br>
    * <b>NOTE:</b><br>
    * This field should typically be present. Only if the content has a technical UID, the
    * {@link #FIELD_CUSTOM_ID} can be used for linking the content and the URI might NOT be set then. However
@@ -140,7 +140,7 @@ public interface SearchEntry extends AttributeReadId<Long> {
 
   /**
    * This method is a generic accessor for fields of this {@link SearchEntry entry} with a specific
-   * <code>type</code>.<br/>
+   * <code>type</code>. <br>
    * The type {@link String} will always work. Other types have to be compatible to the
    * {@link net.sf.mmm.search.api.config.SearchFieldConfiguration#getType() field type} (or a
    * {@link RuntimeException} will be thrown).

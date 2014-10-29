@@ -6,7 +6,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This interface extends {@link NlsFormatter} with the methods required to register this automatically as
- * plugin via {@link javax.inject.Inject injection}.<br/>
+ * plugin via {@link javax.inject.Inject injection}. <br>
  * All subclasses annotated with &#64;{@link javax.inject.Named} will automatically be registered. If no
  * {@link NlsFormatterPlugin} with default {@link #getStyle() style} (<code>null</code>) is found for some
  * {@link #getType() type} the one with {@link NlsFormatterManager#STYLE_MEDIUM medium} style is used as

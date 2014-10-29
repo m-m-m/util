@@ -65,8 +65,8 @@ public class SearchIndexerStateBean implements SearchIndexerState {
   }
 
   /**
-   * This method gets the {@link List} of {@link SearchIndexerSourceStateBean}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the {@link List} of {@link SearchIndexerSourceStateBean}. <br>
+   * <b>ATTENTION:</b><br>
    * Do NOT modify this list externally.
    * 
    * @see #getOrCreateSourceState(String)

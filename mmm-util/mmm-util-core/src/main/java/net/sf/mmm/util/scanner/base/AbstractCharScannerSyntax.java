@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.base.StringSyntaxBean;
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 
 /**
- * This is the abstract base implementation of the {@link CharScannerSyntax} interface.<br>
+ * This is the abstract base implementation of the {@link CharScannerSyntax} interface. <br>
  * The actual <code>char</code>s like {@link #getEscape() escape} are realized as simple bean-properties and
  * initialized with <code>'\0'</code> so they are disabled by default.
  * 

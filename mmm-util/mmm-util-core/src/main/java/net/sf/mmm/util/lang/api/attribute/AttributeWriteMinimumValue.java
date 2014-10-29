@@ -15,8 +15,8 @@ package net.sf.mmm.util.lang.api.attribute;
 public abstract interface AttributeWriteMinimumValue<VALUE> extends AttributeReadMinimumValue<VALUE> {
 
   /**
-   * This method sets the {@link #getMinimumValue() minimum value} of this object.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getMinimumValue() minimum value} of this object. <br>
+   * <b>ATTENTION:</b><br>
    * Changing the minimum value dynamically can invalidate the current
    * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value}. This should be avoided as it may
    * have undesired effects.

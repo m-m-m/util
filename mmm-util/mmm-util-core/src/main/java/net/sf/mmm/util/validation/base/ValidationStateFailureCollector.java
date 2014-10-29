@@ -11,8 +11,8 @@ import net.sf.mmm.util.validation.api.ValidationState;
 /**
  * This is an implementation of {@link ValidationState} that wraps an existing {@link ValidationState} and
  * allows to {@link #onFailure(ValidationFailure) collect the potential failures} for a part of the validation
- * process.<br/>
- * <b>Example:</b><br/>
+ * process. <br>
+ * <b>Example:</b><br>
  * 
  * <pre>
  * public boolean {@link net.sf.mmm.util.validation.api.ValidatableObject#validate(ValidationState) validate}({@link ValidationState} state) {

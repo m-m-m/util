@@ -6,11 +6,11 @@ import net.sf.mmm.client.ui.base.dialog.DialogSlot;
 
 /**
  * This interface is (mis)used to define the constants for common {@link Dialog#getId() dialog IDs},
- * {@link Dialog#getType() dialog types}, {@link DialogSlot}s and {@link DialogPlace}s.<br/>
+ * {@link Dialog#getType() dialog types}, {@link DialogSlot}s and {@link DialogPlace}s. <br>
  * Technically mandatory for the core implementation are only {@link #TYPE_ROOT} and {@link #TYPE_MAIN}.
  * However, you find the entire common sense here and there are (base) implementations for
  * {@link net.sf.mmm.client.ui.base.dialog.DialogController} that depend on these predefined constants and
- * will make your life a lot easier.<br/>
+ * will make your life a lot easier. <br>
  * We recommend that you extend this interface with your own <code>MyProjectDialogConstants</code> to define
  * the constants for your dialogs. In most cases you should avoid defining constants for parameterized
  * {@link DialogPlace}s.

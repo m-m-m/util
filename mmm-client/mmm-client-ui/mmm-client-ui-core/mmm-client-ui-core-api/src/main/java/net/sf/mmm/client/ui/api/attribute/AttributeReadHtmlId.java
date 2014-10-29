@@ -23,7 +23,7 @@ public abstract interface AttributeReadHtmlId extends AttributeReadId<String> {
   String ID_SEPARATOR = "_";
 
   /**
-   * This method gets the unique identifier of this object.<br/>
+   * This method gets the unique identifier of this object. <br>
    * <b>ATTENTION:</b><br>
    * In order to be compliant with all possible UI toolkit implementations, a valid ID has to fulfill
    * ECMA-262, Section 7.6. It is recommended to use IDs of the form <code>[a-zA-Z][a-zA-Z0-9_$]*</code>.

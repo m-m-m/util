@@ -98,8 +98,8 @@ public abstract class AbstractDragAndDropHandler implements DragStartHandler, Dr
   /**
    * {@inheritDoc}
    * 
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * This method is invoked on the listener registered on the widget that is currently under the dragged item
    * and NOT on the widget that is actually dragged around.
    */

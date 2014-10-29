@@ -5,8 +5,8 @@ package net.sf.mmm.client.ui.api;
 import net.sf.mmm.client.ui.api.attribute.AttributeReadSizeInPixel;
 
 /**
- * This is the interface for the display where the UI objects are shown.<br/>
- * <b>ATTENTION:</b><br/>
+ * This is the interface for the display where the UI objects are shown. <br>
+ * <b>ATTENTION:</b><br>
  * Be aware of multi-monitor setups. This object will represent the main screen OR the current screen where
  * the {@link net.sf.mmm.client.ui.api.widget.window.UiWidgetMainWindow} is located. This can depend on the
  * underlying implementation or in case of a web-application on the browser.

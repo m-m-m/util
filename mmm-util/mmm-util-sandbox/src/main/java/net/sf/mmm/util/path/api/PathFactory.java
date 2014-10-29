@@ -8,7 +8,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a factory used to create instance of {@link Path} across multiple
- * {@link java.nio.file.FileSystem}s.<br>
+ * {@link java.nio.file.FileSystem}s. <br>
  * If you want to read resources from configurable locations, you should use this factory. In situations where
  * you want to load a resource, for which you already know the location (e.g. from a specific classpath
  * location) and you are going to wire the location into your code, you can bypass this factory and simply

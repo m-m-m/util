@@ -39,6 +39,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * information or cause wrong results (e.g. "10000" with a justification of " +3|" will result in "100").</td>
  * </tr>
  * </table>
+ *
  * Examples:
  * <table border="1">
  * <tr>
@@ -72,7 +73,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * <td><code>Hello</code></td>
  * </tr>
  * </table>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
  */
@@ -84,7 +85,7 @@ public interface JustificationBuilder {
 
   /**
    * This method parses the given <code>format</code> as {@link Justification}.
-   * 
+   *
    * @param format is the format specified {@link JustificationBuilder above}.
    * @return the parsed {@link Justification}
    */

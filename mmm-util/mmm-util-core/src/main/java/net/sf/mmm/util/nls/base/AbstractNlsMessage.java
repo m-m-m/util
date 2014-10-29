@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.session.api.UserSessionAccess;
 
 /**
- * This is the abstract base implementation of {@link NlsMessage}.<br>
+ * This is the abstract base implementation of {@link NlsMessage}. <br>
  * You should extend this class rather than directly implementing the {@link NlsMessage} interface to gain
  * compatibility with further releases.
  *

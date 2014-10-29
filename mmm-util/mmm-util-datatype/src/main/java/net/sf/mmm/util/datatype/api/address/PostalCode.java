@@ -10,8 +10,8 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
  * code). This is an identifier of a region, city, or even a district within a country. Different countries
  * have different systems for their postal codes. Some are numeric some are alphanumeric. In any case the
  * postal codes aim to optimize the logistics of mail delivery and typically allow sorting mail for different
- * regions. In most cases the (major) city can be determined from country and postal code.<br/>
- * <b>ATTENTION:</b><br/>
+ * regions. In most cases the (major) city can be determined from country and postal code. <br>
+ * <b>ATTENTION:</b><br>
  * Please note that some countries (e.g. Panama) do not have the concept of postal codes. Further, this
  * datatype is just a container for the actual postal code value. It does NOT perform true validation as this
  * is specific per country.

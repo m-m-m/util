@@ -9,8 +9,8 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * that shall differ between environments. The common approach is the <em>DTAP</em> setup with the
  * environments {@link #ENVIRONMENT_TYPE_DEVELOPMENT Development}, {@link #ENVIRONMENT_TYPE_TEST Test},
  * {@link #ENVIRONMENT_TYPE_ACCEPTANCE Acceptance}, and the {@link #ENVIRONMENT_TYPE_PRODUCTION Production}.
- * However, also other more fine-grained environment setups are supported.<br/>
- * <b>ATTENTION:</b><br/>
+ * However, also other more fine-grained environment setups are supported. <br>
+ * <b>ATTENTION:</b><br>
  * Unfortunately there is no Java standard for this. Therefore your configuration to setup the environments
  * has to be compliant to the implementation of this interface. Environments can be defined via spring
  * profiles, via JEE application server specific configurations, via custom {@link System#getProperties()

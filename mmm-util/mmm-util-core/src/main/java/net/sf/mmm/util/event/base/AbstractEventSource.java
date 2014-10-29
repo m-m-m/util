@@ -94,7 +94,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   }
 
   /**
-   * This method is called if a listener throws something while handling an event.<br>
+   * This method is called if a listener throws something while handling an event. <br>
    * The default implementation is log the error. Override this method to change the behaviour (e.g. ignore
    * the problem, remove the "evil" listener, throw the error anyways).
    *

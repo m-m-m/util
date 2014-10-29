@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 /**
  * This is the interface for a {@link UiWidgetTextualInputField input field widget} that represents a text
  * area field. Such field is a multi-line variant of {@link UiWidgetTextField}. The user can enter line breaks
- * by hitting [enter] or [return].<br/>
+ * by hitting [enter] or [return]. <br>
  * Here you can see an example (with {@link #setLabel(String) field label} "Comment" and
  * {@link #setValue(String) value} set to "some text"):
  * 

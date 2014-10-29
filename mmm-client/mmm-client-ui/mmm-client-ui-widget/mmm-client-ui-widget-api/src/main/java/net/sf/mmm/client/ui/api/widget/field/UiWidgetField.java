@@ -62,9 +62,9 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
   /**
    * {@inheritDoc}
    * 
-   * <br/>
-   * <br/>
-   * <b>NOTE:</b><br/>
+   * <br>
+   * <br>
+   * <b>NOTE:</b><br>
    * Every field widget ({@link UiWidgetField}) has an associated {@link #getLabelWidget() label widget}. This
    * method gets its label text. Please note that the {@link #getLabelWidget() label widget} is not contained
    * in this field widget itself, so if you regularly add this field widget to some other widget you will not
@@ -74,7 +74,7 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
    * adds} the {@link #getLabelWidget() label widget}. The recommended use-case is to create a form to view
    * and edit your business object extending
    * {@link net.sf.mmm.client.ui.base.widget.custom.panel.UiWidgetCustomGridPanel} and use
-   * {@link net.sf.mmm.client.ui.base.binding.UiDataBinding}.<br/>
+   * {@link net.sf.mmm.client.ui.base.binding.UiDataBinding}. <br>
    * Unlike <code>{@link #getLabelWidget()}.{@link UiWidgetLabel#getLabel() getLabel()}</code> this method
    * prevents actually creating the {@link #getLabelWidget() label widget} if it does NOT yet exist. Further
    * it will only return what has been set via {@link #setLabel(String)} and NOT what has potentially been set
@@ -90,8 +90,8 @@ public abstract interface UiWidgetField<VALUE> extends UiWidgetRegularComposite<
   void setLabel(String label);
 
   /**
-   * This method gets the {@link UiWidgetLabel label widget} associated with this field.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the {@link UiWidgetLabel label widget} associated with this field. <br>
+   * <b>ATTENTION:</b><br>
    * Depending on the underlying toolkit the label widget is lazily created on the first call of this method.
    * Additionally users of this API (unlike implementors of the API) may only use this for very specific cases
    * (e.g. setting the style of the label). Therefore you should avoid calling this method unless you are

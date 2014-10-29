@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the (base) implementations of dynamic effects.
- * <a name="documentation"/><h2>Client UI Base Dynamic</h2>
+ * <a name="documentation"></a><h2>Client UI Base Dynamic</h2>
  * This package contains the (base) implementations of dynamic features such as
  * {@link net.sf.mmm.client.ui.base.dynamic.UiHandlerEventModeVisibility}.
  */

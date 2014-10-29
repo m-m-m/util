@@ -15,7 +15,7 @@ import net.sf.mmm.util.resource.api.ResourceUri;
  * {@link ClassLoader#getResource(String) classpath}. <br>
  * A very nice feature of Java is to load resources from the classpath. This allows that these resource are
  * deployed within a jar-file. Adding a directory to the beginning of the classpath still allows to override
- * such a resource.<br>
+ * such a resource. <br>
  * Anyways a typical mistake is illustrated by the following code example:
  *
  * <pre>
@@ -24,7 +24,7 @@ import net.sf.mmm.util.resource.api.ResourceUri;
  *
  * This will NOT allow to override resources in other classpath entries and especially NOT work in situations
  * where there are specific classloaders, what is a typical situation in environments of applications servers
- * or IoC frameworks.<br>
+ * or IoC frameworks. <br>
  * The solution is to use the {@link Thread#getContextClassLoader() context-class-loader} to get resources
  * what is done by this implementation. A proper version of the example above is:
  *
@@ -78,7 +78,7 @@ public class ClasspathResource extends AbstractDataResource {
 
   /**
    * The constructor for a classpath-resource identified by <code>someClass</code> and the given
-   * <code>nameOrSuffix</code>.<br>
+   * <code>nameOrSuffix</code>. <br>
    * E.g. the following code would get a resource named " {@linkplain ClasspathResource}.xml" from the same
    * package where this class is located:
    *
@@ -117,7 +117,7 @@ public class ClasspathResource extends AbstractDataResource {
 
   /**
    * The constructor. for a classpath-resource identified by <code>somePackage</code> and the given
-   * <code>filename</code>.<br>
+   * <code>filename</code>. <br>
    * E.g. the following code would create a resource named "relection.properties" from the same package where
    * this class is located:
    *

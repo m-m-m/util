@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for the Java Persistence Query Language (JPQL).
- * <a name="documentation"/><h2>Persistence API JPQL</h2>
+ * <a name="documentation"></a><h2>Persistence API JPQL</h2>
  * This package contains the specification of the {@link net.sf.mmm.persistence.api.jpql.JpqlSyntax Java Persistence
  * Query Language (JPQL)} syntax as JavaDoc.
  * Initially we created our own type-safe builder for dynamic JPQL statements (mmm-persistence-query). However, we discovered

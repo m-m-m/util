@@ -19,8 +19,8 @@ public abstract interface AttributeReadFlagAdvanced extends AttributeReadFlag {
   /**
    * {@inheritDoc}
    * 
-   * <br/>
-   * <b>NOTE:</b><br/>
+   * <br>
+   * <b>NOTE:</b><br>
    * This method determines if the flag is <code>true</code> for all {@link FlagModifier}s.
    * 
    * @return <code>true</code> if all {@link #getFlag(FlagModifier) aggregated flags} are <code>true</code>
@@ -30,7 +30,7 @@ public abstract interface AttributeReadFlagAdvanced extends AttributeReadFlag {
   boolean getFlag();
 
   /**
-   * This method gets the value of the flag for the given {@link FlagModifier}.<br/>
+   * This method gets the value of the flag for the given {@link FlagModifier}. <br>
    * 
    * @param modifier is the {@link FlagModifier}. May be <code>null</code> for the default modifier.
    * @return the flag for the given {@link FlagModifier}. Will be <code>true</code> if it has never been set

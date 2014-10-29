@@ -7,7 +7,7 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This is the exception thrown if an operation was invoked before the object was initialized but has to be
- * called after initialization.<br>
+ * called after initialization. <br>
  * Typical this exception is thrown by a component if it was used (a method declared in the component API was
  * called) before the {@link javax.annotation.PostConstruct initialization}.
  * 

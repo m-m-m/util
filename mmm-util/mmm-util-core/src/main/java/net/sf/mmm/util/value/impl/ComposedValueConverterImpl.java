@@ -269,7 +269,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * and lookup of {@link ValueConverter}s. E.g. interfaces such as {@link Cloneable} or
    * {@link java.io.Serializable} are not more significant than {@link Object} in order to choose the
    * appropriate {@link ValueConverter} and should therefore be skipped when the {@link Class}-hierarchy is
-   * recursively traversed.<br>
+   * recursively traversed. <br>
    * <b>ATTENTION:</b><br>
    * If this method returns <code>false</code> the behaviour differs between {@link Class#isInterface()
    * interfaces} and regular classes. For an interface the entire traversal of super-interfaces is skipped,

@@ -36,7 +36,7 @@ public final class UuidAccess {
 
   /**
    * This method sets (overrides) the {@link UuidFactory}. This allows to exchange the {@link UuidFactory} and
-   * thereby the type of the created {@link java.util.UUID}s.<br>
+   * thereby the type of the created {@link java.util.UUID}s. <br>
    * <b>ATTENTION:</b><br>
    * No synchronization is performed setting the factory instance. This assumes that an assignment is an
    * atomic operation in the JVM you are using. Additionally this method should only be invoked in the

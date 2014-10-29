@@ -27,7 +27,7 @@ public interface PojoPropertyPath {
   String getPojoPath();
 
   /**
-   * This method gets the parent-path of this path.<br>
+   * This method gets the parent-path of this path. <br>
    * E.g. if this path represents <code>"foo.bar.property"</code> then this method would return
    * <code>"foo.bar"</code>.
    * 

@@ -72,7 +72,7 @@ public enum Month implements SimpleDatatype<Integer> {
   /**
    * {@inheritDoc}
    * 
-   * <b>ATTENTION:</b><br/>
+   * <b>ATTENTION:</b><br>
    * Unlike java {@link java.util.Calendar} this will return the natural representation of a {@link Month} in
    * the range from <code>1-12</code>.
    */

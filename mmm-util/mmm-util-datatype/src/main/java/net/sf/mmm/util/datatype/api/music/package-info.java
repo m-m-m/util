@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides common datatypes related to music.
- * <a name="documentation"/><h2>Datatype Music</h2> 
+ * <a name="documentation"></a><h2>Datatype Music</h2> 
  * This package provides common datatypes related to music.
  * This includes {@link net.sf.mmm.util.datatype.api.music.TonePitch}, 
  * {@link net.sf.mmm.util.datatype.api.music.DiatonicScale} and 

@@ -11,7 +11,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Panel;
 
 /**
- * This is the implementation of {@link UiWidgetAdapterAbstractWindow} using GWT based on {@link Panel}.<br/>
+ * This is the implementation of {@link UiWidgetAdapterAbstractWindow} using GWT based on {@link Panel}. <br>
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

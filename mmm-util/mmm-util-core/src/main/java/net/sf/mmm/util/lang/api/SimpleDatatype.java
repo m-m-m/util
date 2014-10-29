@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 /**
  * This is the interface for a simple {@link Datatype}, that can be represented by a single standard
- * {@link #getValue() value}.<br/>
+ * {@link #getValue() value}. <br>
  * A legal implementation should have a {@link java.lang.reflect.Constructor} that is compatible with
  * {@link #getValue()}. An {@link EnumType} implementing this interface should also offer a static method
  * called <code>fromValue(V value)</code> that returns the appropriate {@link EnumType} instance or

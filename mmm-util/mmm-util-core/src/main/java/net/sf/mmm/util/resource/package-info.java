@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Top-level package of the utilities for resources.
- * <a name="documentation"/><h2>Util Resource</h2>
+ * <a name="documentation"></a><h2>Util Resource</h2>
  * This package itself only contains the {@link net.sf.mmm.util.resource.NlsBundleUtilResourceRoot NLS-Bundle}
  * that allows the localization of this module (util-core).
  */

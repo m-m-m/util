@@ -6,7 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * This is a simple implementation of the {@link net.sf.mmm.util.component.api.IocContainer} using spring.<br/>
+ * This is a simple implementation of the {@link net.sf.mmm.util.component.api.IocContainer} using spring. <br>
  * <b>ATTENTION:</b><br>
  * Please check your dependencies as <code>spring</code> is an optional dependency in
  * <code>mmm-util-core</code>.

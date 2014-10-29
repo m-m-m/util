@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 /**
  * This is an implementation of the {@link java.util.Iterator} interface that gives a read-only view on an
- * existing {@link java.util.Iterator} instance.<br>
+ * existing {@link java.util.Iterator} instance. <br>
  * The design of the JDK sucks: if only {@link java.util.Iterator} would extend {@link java.util.Enumeration}
  * the world could be so simple.
  * 

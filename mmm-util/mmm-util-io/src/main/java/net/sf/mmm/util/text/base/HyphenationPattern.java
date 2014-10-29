@@ -6,7 +6,7 @@ import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.text.api.StringHasher;
 
 /**
- * A {@link HyphenationPattern} is a pattern that acts as rule for a hyphenation algorithm.<br>
+ * A {@link HyphenationPattern} is a pattern that acts as rule for a hyphenation algorithm. <br>
  * The concept is based on the thesis <em>Word Hy-phen-a-tion by Com-put-er</em> by
  * <em>Franklin Mark Liang</em>. Out of an entire dictionary of hyphenated words for a specific language, a
  * set of {@link HyphenationPattern patterns} is extracted. To allow correct results with a reasonable small
@@ -15,12 +15,12 @@ import net.sf.mmm.util.text.api.StringHasher;
  * <code>1</code> to <code>9</code>. If two patterns apply for a hyphenation-position the higher number wins.
  * Odd numbers indicate a hyphenation while even values indicate an exception that should NOT be hyphenated.
  * The character '.' is used at the beginning and/or end of a pattern to indicate that it should only match at
- * the beginning/end of the word to hyphenate.<br>
+ * the beginning/end of the word to hyphenate. <br>
  * Logically for each start-index of the (normalized) word to hyphenate (enclosed with '.') all
  * {@link HyphenationPattern patterns} are checked if they match (please note that the order of the patterns
  * is important!). Matching means that the pattern stripped from digits is a substring of the word at this
  * start-index. If the pattern matches the {@link HyphenationPatternPosition hyphenation-positions} are
- * applied.<br>
+ * applied. <br>
  * <br>
  * Here is an example to illustrate the algorithm:<br>
  * The string <code>"Computer"</code> will be transformed to <code>".computer."</code> that matches the
@@ -112,7 +112,7 @@ public class HyphenationPattern {
   }
 
   /**
-   * This method gets the pre-calculated hash of {@link #getWordPart() word-part}.<br>
+   * This method gets the pre-calculated hash of {@link #getWordPart() word-part}. <br>
    * <b>ATTENTION:</b><br>
    * The result may be different to the {@link String#hashCode() hash-code} of {@link #getWordPart()
    * word-part}. A specific hash algorithm is used that allows efficient calculation of shifting substrings.
@@ -126,7 +126,7 @@ public class HyphenationPattern {
 
   /**
    * This method gets the original pattern ({@link #getWordPart() word-part} with
-   * {@link #getHyphenationPositions() hyphenation-points}).<br>
+   * {@link #getHyphenationPositions() hyphenation-points}). <br>
    * <b>ATTENTION:</b><br>
    * This method is intended for debugging purposes. It rebuilds the pattern wasting some performance.
    * 

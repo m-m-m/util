@@ -16,7 +16,7 @@ import net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom;
 /**
  * This is the abstract base class for a {@link UiWidgetCustom custom widget} that is a {@link UiWidgetField
  * field widget}. The major usecase is to create {@link UiWidgetField field widgets} for custom
- * {@link net.sf.mmm.util.lang.api.Datatype} based on existing {@link UiWidgetField field widgets}.<br/>
+ * {@link net.sf.mmm.util.lang.api.Datatype} based on existing {@link UiWidgetField field widgets}. <br>
  * Instead of extending this class directly you should rather extend one of its sub-classes.
  * 
  * @see net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype#createForDatatype(Class)

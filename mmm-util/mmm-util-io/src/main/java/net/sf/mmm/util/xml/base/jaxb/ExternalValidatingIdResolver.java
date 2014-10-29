@@ -12,7 +12,7 @@ import com.sun.xml.bind.IDResolver;
 
 /**
  * This is an implementation of {@link IDResolver} validating that no IDs are duplicated or missing (IDRef is
- * pointing to an undefined ID).<br/>
+ * pointing to an undefined ID). <br>
  * <b>ATTENTION:</b><br>
  * This class only works if <code>jaxb-impl</code> (com.sun.xml.bind) is on your classpath!
  * 

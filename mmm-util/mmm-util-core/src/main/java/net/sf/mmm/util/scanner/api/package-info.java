@@ -3,12 +3,12 @@
 /**
  * Provides the API for scanners that help to parse character sequences 
  * efficient and easily.
- * <a name="documentation"/><h2>Scanner API</h2>
+ * <a name="documentation"></a><h2>Scanner API</h2>
  * For efficient parsers of complex grammars it is best practice to use a parser
- * generator like <code>javacc</code> or <code>antlr</code>.<br>
+ * generator like <code>javacc</code> or <code>antlr</code>. <br>
  * However in some situations it is more suitable to write a handwritten parser.
  * The tradeoff is that this may result in ugly monolithic code that is hard to 
- * maintain.<br>
+ * maintain. <br>
  * The {@link net.sf.mmm.util.scanner.api.CharStreamScanner} is an interface 
  * that covers typical tasks when paring strings or streams and therefore makes 
  * your life a lot easier. You can concentrate on the syntax you want to parse 
@@ -18,7 +18,7 @@
  * string together with the state (parsing position) so you can easily delegate 
  * a step to another method or class. Otherwise you would need to pass the current 
  * position to that method and return the new one from there. This is tricky if 
- * the method should already return something else.<br>
+ * the method should already return something else. <br>
  * Here is a little example of an entirely handwritten parser:
  * <pre>
  * String input = getInputString();

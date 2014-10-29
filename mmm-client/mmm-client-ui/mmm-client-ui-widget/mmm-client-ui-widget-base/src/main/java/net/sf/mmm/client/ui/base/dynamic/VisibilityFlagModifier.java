@@ -24,8 +24,8 @@ public final class VisibilityFlagModifier implements FlagModifier {
   /**
    * The {@link VisibilityFlagModifier} for visibility changes triggered for security reasons (e.g. if a
    * button should be hidden because the user has no permissions for it). For usability the recommended
-   * pattern is to hide widgets that the end-user could never invoke due to his permissions.<br/>
-   * <b>ATTENTION:</b><br/>
+   * pattern is to hide widgets that the end-user could never invoke due to his permissions. <br>
+   * <b>ATTENTION:</b><br>
    * You always have to be aware that security happens on the server. On the client this is just done for
    * usability. A end-user can always manipulate the client to trigger the operation on the server.
    */

@@ -12,8 +12,8 @@ package net.sf.mmm.util.lang.api.attribute;
 public interface AttributeWriteId<ID> extends AttributeReadId<ID> {
 
   /**
-   * This method sets the {@link #getId() ID} of this object.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getId() ID} of this object. <br>
+   * <b>ATTENTION:</b><br>
    * An ID should typically NOT be changed after it has been assigned once.
    * 
    * @param id is the new {@link #getId() ID}

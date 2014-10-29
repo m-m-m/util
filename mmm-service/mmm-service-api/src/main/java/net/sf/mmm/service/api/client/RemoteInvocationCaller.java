@@ -19,8 +19,8 @@ public abstract interface RemoteInvocationCaller<QUEUE extends RemoteInvocationQ
 
   /**
    * This method gets the current {@link RemoteInvocationQueue queue}. This is the last queue that has
-   * been {@link #newQueue() created} and is still {@link RemoteInvocationQueueState#OPEN open}.<br/>
-   * <b>NOTE:</b><br/>
+   * been {@link #newQueue() created} and is still {@link RemoteInvocationQueueState#OPEN open}. <br>
+   * <b>NOTE:</b><br>
    * This method is only for specific scenarios. You should typically use {@link #newQueue()} instead, to
    * retrieve a queue and perform service invocations.
    * 

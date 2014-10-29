@@ -75,7 +75,7 @@ public interface CharStreamScanner {
   /**
    * This method reads the long starting at the {@link #getCurrentIndex() current position} by reading as many
    * Latin digits as available but at maximum the given <code>maxDigits</code> and returns its
-   * {@link Long#parseLong(String) parsed} value.<br>
+   * {@link Long#parseLong(String) parsed} value. <br>
    * <b>ATTENTION:</b><br>
    * This method does NOT treat signs (<code>+</code> or <code>-</code>) to do so, scan them yourself before
    * and negate the result as needed.
@@ -91,7 +91,7 @@ public interface CharStreamScanner {
   /**
    * This method reads the double value (decimal number) starting at the {@link #getCurrentIndex() current
    * position} by reading as many matching characters as available and returns its
-   * {@link Double#parseDouble(String) parsed} value.<br>
+   * {@link Double#parseDouble(String) parsed} value. <br>
    * 
    * @return the parsed number.
    * @throws NumberFormatException if the current {@link #getCurrentIndex() current position} does NOT point
@@ -103,7 +103,7 @@ public interface CharStreamScanner {
   /**
    * This method reads the float value (decimal number) starting at the {@link #getCurrentIndex() current
    * position} by reading as many matching characters as available and returns its
-   * {@link Float#parseFloat(String) parsed} value.<br>
+   * {@link Float#parseFloat(String) parsed} value. <br>
    * 
    * @return the parsed number.
    * @throws NumberFormatException if the current {@link #getCurrentIndex() current position} does NOT point
@@ -127,7 +127,7 @@ public interface CharStreamScanner {
 
   /**
    * This method skips all {@link #next() next characters} as long as they equal to the according character of
-   * the <code>expected</code> string.<br>
+   * the <code>expected</code> string. <br>
    * If a character differs this method stops and the parser points to the first character that differs from
    * <code>expected</code>. Except for the latter circumstance, this method behaves like the following code:
    * 
@@ -159,7 +159,7 @@ public interface CharStreamScanner {
 
   /**
    * This method checks that the {@link #next() current character} is equal to the given <code>expected</code>
-   * character.<br>
+   * character. <br>
    * If the current character was as expected, the parser points to the next character. Otherwise its position
    * will remain unchanged.
    * 
@@ -171,7 +171,7 @@ public interface CharStreamScanner {
 
   /**
    * This method verifies that the <code>expected</code> string gets consumed from this scanner with respect
-   * to <code>ignoreCase</code>. Otherwise an exception is thrown indicating the problem.<br>
+   * to <code>ignoreCase</code>. Otherwise an exception is thrown indicating the problem. <br>
    * This method behaves functionally equivalent to the following code:
    * 
    * <pre>
@@ -189,7 +189,7 @@ public interface CharStreamScanner {
 
   /**
    * This method verifies that the {@link #next() current character} is equal to the given
-   * <code>expected</code> character.<br>
+   * <code>expected</code> character. <br>
    * If the current character was as expected, the parser points to the next character. Otherwise an exception
    * is thrown indicating the problem.
    * 
@@ -224,7 +224,7 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} until the given <code>stop</code> character or the
-   * end is reached.<br>
+   * end is reached. <br>
    * After the call of this method, the {@link #getCurrentIndex() current index} will point to the next
    * character after the (first) <code>stop</code> character or to the end if NO such character exists.
    * 
@@ -238,11 +238,11 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} until the given (un-escaped) <code>stop</code>
-   * character or the end is reached.<br>
+   * character or the end is reached. <br>
    * In advance to {@link #readUntil(char, boolean)}, this method allows that the <code>stop</code> character
    * may be used in the input-string by adding the given <code>escape</code> character. After the call of this
    * method, the {@link #getCurrentIndex() current index} will point to the next character after the (first)
-   * <code>stop</code> character or to the end if NO such character exists.<br>
+   * <code>stop</code> character or to the end if NO such character exists. <br>
    * This method is especially useful when quoted strings should be parsed. E.g.:
    * 
    * <pre>
@@ -288,7 +288,7 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} that are {@link CharFilter#accept(char) accepted}
-   * by the given <code>filter</code>.<br>
+   * by the given <code>filter</code>. <br>
    * After the call of this method, the {@link #getCurrentIndex() current index} will point to the next
    * character that was NOT {@link CharFilter#accept(char) accepted} by the given <code>filter</code> or to
    * the end if NO such character exists.
@@ -303,7 +303,7 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} that are {@link CharFilter#accept(char) accepted}
-   * by the given <code>filter</code>.<br>
+   * by the given <code>filter</code>. <br>
    * After the call of this method, the {@link #getCurrentIndex() current index} will point to the next
    * character that was NOT {@link CharFilter#accept(char) accepted} by the given <code>filter</code>. If the
    * next <code>max</code> characters or the characters left until the {@link #hasNext() end} of this scanner
@@ -321,10 +321,10 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} until the given <code>substring</code> has been
-   * detected.<br>
+   * detected. <br>
    * After the call of this method, the {@link #getCurrentIndex() current index} will point to the next
    * character after the first occurrence of <code>substring</code> or to the end of the string if the given
-   * <code>substring</code> was NOT found.<br>
+   * <code>substring</code> was NOT found. <br>
    * 
    * @param substring is the substring to search and skip over starting at the {@link #getCurrentIndex()
    *        current index}.
@@ -338,12 +338,12 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} until the given <code>substring</code> has been
-   * detected.<br>
+   * detected. <br>
    * If a {@link CharFilter#accept(char) stop character} is detected by the given <code>stopFilter</code> this
    * method returns <code>false</code> pointing to the character next to that stop character. Otherwise after
    * this method, the {@link #getCurrentIndex() current index} will point to the next character after the
    * first occurrence of <code>substring</code> or to the end of the string if the given
-   * <code>substring</code> was NOT found.<br>
+   * <code>substring</code> was NOT found. <br>
    * 
    * @param substring is the substring to search and skip over starting at the {@link #getCurrentIndex()
    *        current index}.
@@ -361,7 +361,7 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} that are identical to the character given by
-   * <code>c</code>.<br>
+   * <code>c</code>. <br>
    * E.g. use <code>{@link #skipWhile(char) readWhile}(' ')</code> to skip all blanks from the
    * {@link #getCurrentIndex() current index}. After the call of this method, the {@link #getCurrentIndex()
    * current index} will point to the next character that is different to <code>c</code> or to the end if NO
@@ -374,7 +374,7 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} that are {@link CharFilter#accept(char) accepted}
-   * by the given <code>filter</code>.<br>
+   * by the given <code>filter</code>. <br>
    * After the call of this method, the {@link #getCurrentIndex() current index} will point to the next
    * character that was NOT {@link CharFilter#accept(char) accepted} by the given <code>filter</code> or to
    * the end if NO such character exists.
@@ -389,7 +389,7 @@ public interface CharStreamScanner {
 
   /**
    * This method reads all {@link #next() next characters} that are {@link CharFilter#accept(char) accepted}
-   * by the given <code>filter</code>.<br>
+   * by the given <code>filter</code>. <br>
    * After the call of this method, the {@link #getCurrentIndex() current index} will point to the next
    * character that was NOT {@link CharFilter#accept(char) accepted} by the given <code>filter</code>. If the
    * next <code>max</code> characters or the characters left until the {@link #hasNext() end} of this scanner

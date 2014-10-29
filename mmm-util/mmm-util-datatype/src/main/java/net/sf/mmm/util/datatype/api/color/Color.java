@@ -17,9 +17,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * Internally these values are encoded in a single {@link #getValue() ARGB value}. This class is similar to
  * AWT {@link java.awt.Color} but GWT compatible (AWT color is linked with AWT, see e.g.
  * {@link java.awt.Color#createContext(java.awt.image.ColorModel, java.awt.Rectangle, java.awt.geom.Rectangle2D, java.awt.geom.AffineTransform, java.awt.RenderingHints)
- * createContext}) and especially compatible to CSS. <br/>
- * For transformations and other {@link ColorModel}s use {@link GenericColor}.<br/>
- * <b>ATTENTION:</b><br/>
+ * createContext}) and especially compatible to CSS. <br>
+ * For transformations and other {@link ColorModel}s use {@link GenericColor}. <br>
+ * <b>ATTENTION:</b><br>
  * Unfortunately the {@link #getAlpha() alpha} value has NOT been designed as a transparency value (inverse
  * logic so <code>0</code> means no transparency or in other words a regular color). Then if encoding in
  * A/R/G/B the hexadecimal RGB notation would be compatible with transparency because #2F4F8F would be the

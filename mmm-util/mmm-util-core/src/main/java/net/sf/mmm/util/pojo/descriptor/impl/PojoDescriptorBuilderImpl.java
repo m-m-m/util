@@ -48,7 +48,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   private PojoFieldIntrospector fieldIntrospector;
 
   /**
-   * The constructor. By default it only introspects {@link Method methods} that are public and NOT static.<br>
+   * The constructor. By default it only introspects {@link Method methods} that are public and NOT static. <br>
    * <b>ATTENTION:</b><br>
    * You need to {@link #initialize()} this component before it can be used.
    */
@@ -58,7 +58,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * The constructor. By default it only introspects {@link Method methods} that are public and NOT static.<br>
+   * The constructor. By default it only introspects {@link Method methods} that are public and NOT static. <br>
    * <b>ATTENTION:</b><br>
    * You need to {@link #initialize()} this component before it can be used.
    * 

@@ -485,8 +485,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   public abstract boolean hasWidgetAdapter();
 
   /**
-   * This method gets or creates the {@link UiWidgetAdapter}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets or creates the {@link UiWidgetAdapter}. <br>
+   * <b>ATTENTION:</b><br>
    * On the first call of this method, the {@link UiWidgetAdapter} is created. For the purpose of lazy
    * instantiation this should happen as late as possible. Use {@link #hasWidgetAdapter()} to prevent
    * unnecessary creation.
@@ -496,8 +496,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   protected abstract UiWidgetAdapter getWidgetAdapter();
 
   /**
-   * This method gives access to {@link #getWidgetAdapter()}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gives access to {@link #getWidgetAdapter()}. <br>
+   * <b>ATTENTION:</b><br>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
    * regular users (what also applies for all classes in this <code>base</code> packages).
    *
@@ -516,8 +516,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   protected abstract void removeFromParent();
 
   /**
-   * This method invokes {@link #removeFromParent()} on the given <code>widget</code>.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method invokes {@link #removeFromParent()} on the given <code>widget</code>. <br>
+   * <b>ATTENTION:</b><br>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
    * regular users.
    *
@@ -536,8 +536,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   protected abstract void setParent(UiWidgetComposite<?> parent);
 
   /**
-   * This method sets the {@link #getParent() parent} of the given <code>widget</code>.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getParent() parent} of the given <code>widget</code>. <br>
+   * <b>ATTENTION:</b><br>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
    * regular users (what also applies for all classes in this <code>base</code> packages).
    *
@@ -790,8 +790,8 @@ public abstract class AbstractUiWidget<VALUE> extends AbstractUiFeatureValueAndV
   }
 
   /**
-   * This inner class gives access to methods not visible in the public API.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This inner class gives access to methods not visible in the public API. <br>
+   * <b>ATTENTION:</b><br>
    * It is reserved for internal usage and should therefore never be used by regular users. Otherwise
    * compatibility might break with any release update.
    */

@@ -175,9 +175,9 @@ public enum ByteOrderMark {
   }
 
   /**
-   * This method detects if this {@link ByteOrderMark} is present in the given <code>bytes</code>.<br>
+   * This method detects if this {@link ByteOrderMark} is present in the given <code>bytes</code>. <br>
    * <b>NOTE:</b><br>
-   * A BOM may only occur at the head of your data (file, payload, etc.).<br>
+   * A BOM may only occur at the head of your data (file, payload, etc.). <br>
    * <b>ATTENTION:</b><br>
    * Please note that binary data may accidently have header bytes that represent this {@link ByteOrderMark}.
    * This method can NOT know this and will return <code>true</code> even if the data is NOT encoded with the
@@ -212,7 +212,7 @@ public enum ByteOrderMark {
 
   /**
    * This method detects the {@link ByteOrderMark} that may be {@link #isPresent(byte[], int) present} in the
-   * given <code>bytes</code> starting at <code>offset</code>.<br>
+   * given <code>bytes</code> starting at <code>offset</code>. <br>
    * <b>ATTENTION:</b><br>
    * Please note that binary data may accidently have header bytes that represent a {@link ByteOrderMark}.
    * This method can NOT know this and will return that {@link ByteOrderMark} even if the data is NOT encoded

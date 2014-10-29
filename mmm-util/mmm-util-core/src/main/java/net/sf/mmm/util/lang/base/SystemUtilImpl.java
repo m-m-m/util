@@ -37,8 +37,8 @@ public class SystemUtilImpl extends AbstractLoggableComponent implements SystemU
   }
 
   /**
-   * This method gets the singleton instance of this {@link SystemUtil}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link SystemUtil}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    * 
    * @return the singleton instance.

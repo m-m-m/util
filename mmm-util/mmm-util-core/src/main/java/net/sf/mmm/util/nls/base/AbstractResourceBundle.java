@@ -12,15 +12,15 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
- * This is the abstract base class for {@link ResourceBundle} implementations using this NLS support. <br/>
- * <b>ATTENTION:</b><br/>
+ * This is the abstract base class for {@link ResourceBundle} implementations using this NLS support. <br>
+ * <b>ATTENTION:</b><br>
  * The preferred approach to define messages for the root locale is via
- * {@link net.sf.mmm.util.nls.api.NlsBundle} instead of using this class.<br/>
- * <br/>
+ * {@link net.sf.mmm.util.nls.api.NlsBundle} instead of using this class. <br>
+ * <br>
  * Create your {@link ResourceBundle}s by sub-classing this class and simply define some public static final
- * fields that will be automatically added to the bundle using reflection (only from constructor).<br/>
+ * fields that will be automatically added to the bundle using reflection (only from constructor). <br>
  * Please note that your sub-class must also be public or you need to set privileges in the security manager
- * to allow this class reading the fields via reflection.<br/>
+ * to allow this class reading the fields via reflection. <br>
  * Please also follow the convention using the following prefixes followed by a suffix that properly explains
  * what the text is about:
  * <table border="1">

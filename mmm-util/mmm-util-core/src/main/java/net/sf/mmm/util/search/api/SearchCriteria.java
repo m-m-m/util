@@ -7,8 +7,8 @@ import net.sf.mmm.util.transferobject.api.TransferObject;
 /**
  * This is the interface for a transfer-object with the criteria for a {@link SearchQuery search query}. Such
  * object specifies the criteria selecting which {@link SearchResult#getHits() hits} will match when
- * performing a search.<br/>
- * <b>NOTE:</b><br/>
+ * performing a search. <br>
+ * <b>NOTE:</b><br>
  * This interface only holds generic settings for the query such as {@link #getHitOffset()},
  * {@link #getMaximumHitCount()}, and {@link #getSearchTimeout()}. For your individual search, you can extend
  * {@link net.sf.mmm.util.search.base.AbstractSearchCriteria} to create a java bean with all the fields for
@@ -23,8 +23,8 @@ import net.sf.mmm.util.transferobject.api.TransferObject;
 public interface SearchCriteria extends TransferObject {
 
   /**
-   * This method gets the maximum number of hits that will be received as result for this query.<br/>
-   * <b>Note:</b><br/>
+   * This method gets the maximum number of hits that will be received as result for this query. <br>
+   * <b>Note:</b><br>
    * This feature is the same as <code>Query.setMaxResults(int)</code> in JPA.
    *
    * @return the maximum hit-count or <code>null</code> for NO limit.
@@ -33,8 +33,8 @@ public interface SearchCriteria extends TransferObject {
 
   /**
    * This method gets the offset for the first hit. This is <code>0</code> by default. By providing a multiple
-   * of {@link #getMaximumHitCount()} you can simply implement paging.<br/>
-   * <b>Note:</b><br/>
+   * of {@link #getMaximumHitCount()} you can simply implement paging. <br>
+   * <b>Note:</b><br>
    * This feature is the same as <code>Query.setFirstResult(int)</code> in JPA.
    *
    * @return the offset of the first hit.
@@ -42,8 +42,8 @@ public interface SearchCriteria extends TransferObject {
   int getHitOffset();
 
   /**
-   * This method gets the maximum delay in milliseconds the search may last until it is canceled.<br/>
-   * <b>Note:</b><br/>
+   * This method gets the maximum delay in milliseconds the search may last until it is canceled. <br>
+   * <b>Note:</b><br>
    * This feature is the same as the query hint <code>"javax.persistence.query.timeout"</code> in JPA.
    *
    * @return the search timeout in milliseconds or <code>null</code> for NO timeout.

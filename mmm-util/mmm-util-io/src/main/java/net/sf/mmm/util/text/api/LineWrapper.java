@@ -87,7 +87,7 @@ public interface LineWrapper {
   /**
    * This method is like
    * {@link #wrap(Appendable, TextTableInfo, String, TextColumnInfo, String, TextColumnInfo, String, TextColumnInfo)}
-   * for any number of columns.<br>
+   * for any number of columns. <br>
    * 
    * @param appendable is the target where to {@link Appendable#append(CharSequence) append} to.
    * @param tableInfo is the {@link TextTableInfo} for the general layout.

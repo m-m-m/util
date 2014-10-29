@@ -63,7 +63,7 @@ public interface ContentType extends TreeNode<ContentType> {
   /**
    * This method determines if the current {@link ContentType} is abstract. If
    * concrete data has an exact {@link ContentType} that {@link ContentType}
-   * should NOT be abstract.<br>
+   * should NOT be abstract. <br>
    * An abstract {@link ContentType} should have {@link #getChildren()
    * sub-types}, a non abstract {@link ContentType} can have sub-types.
    * 
@@ -74,21 +74,21 @@ public interface ContentType extends TreeNode<ContentType> {
 
   /**
    * This method gets the technical parent of this {@link ContentType} as
-   * {@link TreeNode node}.<br>
+   * {@link TreeNode node}. <br>
    * While the {@link ContentType} as {@link TreeNode node} represents the
    * logical hierarchy of {@link ContentType}s, the
    * {@link #getTechnicalParent() technical parent} gives the technical view on
-   * the hierarchy.<br>
+   * the hierarchy. <br>
    * There is no <code>getTechnicalChildren()</code> method. The children are
    * always retrieved via {@link #getChildren()}. Therefore a
    * {@link ContentType} can have {@link #getChildren() children} that have it
    * as {@link #getTechnicalParent() technical parent} while
-   * {@link #getParent()} returns another {@link ContentType}.<br>
+   * {@link #getParent()} returns another {@link ContentType}. <br>
    * For instance the {@link ContentType#getParent() logical parent} of the type
    * <code>ODT</code> (Open Document Text) is the type office document. From a
    * technical point of view an ODT-file is a ZIP-file with a specific
    * structure. Therefore the {@link #getTechnicalParent() technical parent} is
-   * the type <code>ZIP</code> .<br>
+   * the type <code>ZIP</code> . <br>
    * Typically end-users will NOT be interested in the technical view. However
    * it is exposed for those that may find it useful.
    * 

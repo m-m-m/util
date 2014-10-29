@@ -86,9 +86,9 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   }
 
   /**
-   * This method gets the singleton instance of this {@link VersionUtilImpl}.<br>
+   * This method gets the singleton instance of this {@link VersionUtilImpl}. <br>
    * This design is the best compromise between easy access (via this indirection you have direct, static
-   * access to all offered functionality) and IoC-style design which allows extension and customization.<br>
+   * access to all offered functionality) and IoC-style design which allows extension and customization. <br>
    * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
    * the {@link net.sf.mmm.util.component.api.IocContainer container-framework} of your choice. To wire up the
    * dependent components everything is properly annotated using annotations (JSR-250 and JSR-330). If your

@@ -8,11 +8,11 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * This is the interface to {@link #serialize(Object) serialize} and {@link #deserialize(byte[]) deserialize}
  * arbitrary Java objects. As a default implementation we offer
  * {@link net.sf.mmm.util.serialization.base.JavaSerializer} but there can be many alternative implementations
- * like JSon, GWT RPC, etc.<br/>
+ * like JSon, GWT RPC, etc. <br>
  * The call {@link #deserialize(byte[]) deserialize}({@link #serialize(Object) serialize}(o)) should have
- * behave like creating a deep-{@link Cloneable clone}.<br/>
- * <br/>
- * <b>ATTENTION:</b><br/>
+ * behave like creating a deep-{@link Cloneable clone}. <br>
+ * <br>
+ * <b>ATTENTION:</b><br>
  * Not all objects can be {@link #serialize(Object) serialized}. By default they have to be compliant with
  * {@link java.io.Serializable}. However, specific implementations may have additional or alternate
  * requirements. E.g. for GWT (Google Web Toolkit) the object has to have a non-arg constructor (may be

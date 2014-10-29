@@ -10,7 +10,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * This is the interface for a {@link UiWidgetDynamicComposite dynamic composite widget} that represents a
  * <em>menu</em>. A menu is something that is displayed by its {@link #getLabel() label} and opens a list of
  * {@link UiWidgetMenuItem menu items} if it is clicked. The user can click on one of these
- * {@link UiWidgetMenuItem menu items} to execute a specific functionality.<br/>
+ * {@link UiWidgetMenuItem menu items} to execute a specific functionality. <br>
  * A {@link UiWidgetMenu} is also a {@link UiWidgetMenuItem} so you can add it to another menu as a
  * <em>sub menu</em>.
  * 

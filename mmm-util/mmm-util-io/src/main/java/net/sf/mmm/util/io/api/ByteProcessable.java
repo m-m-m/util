@@ -4,10 +4,10 @@ package net.sf.mmm.util.io.api;
 
 /**
  * This is the interface for an object providing data represented as sequence of <code>byte</code>s -
- * typically some sort of buffer.<br>
+ * typically some sort of buffer. <br>
  * Following the idiom <em>separations of concerns</em> the idea is to allow fast and easy
  * {@link ByteProcessor#process(byte[], int, int) processing} of the data without any dependency or knowledge
- * of the internals of this data-provider.<br>
+ * of the internals of this data-provider. <br>
  * The user of this API can implement a {@link ByteProcessor} (e.g. as anonymous or inner class) with its
  * custom logic. He is entirely independent from the underlying implementation of this interface that may use
  * one big byte-array to store the provided data or have it sliced into multiple smaller byte-arrays.

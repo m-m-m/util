@@ -13,12 +13,12 @@ import net.sf.mmm.client.ui.api.aria.role.Role;
 public abstract interface AttributeWriteAriaRole extends AttributeReadAriaRole {
 
   /**
-   * This method sets the {@link #getAriaRole() ARIA role} of this object.<br/>
-   * <b>NOTE:</b><br/>
+   * This method sets the {@link #getAriaRole() ARIA role} of this object. <br>
+   * <b>NOTE:</b><br>
    * If you are using the UI-Toolkit (<code>UiWidget</code>) the roles are automatically set for according
    * widgets. There is no need to e.g. manually set {@link net.sf.mmm.client.ui.api.aria.role.RoleCombobox} to
    * a <code>UiWidgetComboBox</code>. Therefore, you only need to set roles explicitly for specific custom
-   * features. <b>ATTENTION:</b><br/>
+   * features. <b>ATTENTION:</b><br>
    * This method will fail if an abstract {@link Role} is given.
    * 
    * @see #getAriaRole()

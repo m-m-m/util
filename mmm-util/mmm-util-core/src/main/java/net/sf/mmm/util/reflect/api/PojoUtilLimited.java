@@ -61,8 +61,8 @@ public interface PojoUtilLimited {
 
   /**
    * This method gets or creates the {@link ValueValidator} for the specified property derived from
-   * annotations (e.g. JSR 303 or JSR 308).<br/>
-   * <b>ATTENTION:</b><br/>
+   * annotations (e.g. JSR 303 or JSR 308). <br>
+   * <b>ATTENTION:</b><br>
    * This is NOT an implementation of JSR 303 (<code>javax.validation</code>) nor is it strictly compatible to
    * it. Instead this is an abstraction that may be implemented using JSR 303 or maybe not. However, we want
    * to be GWT compatible and we want to directly bind the validation to the UI widgets (see
@@ -79,8 +79,8 @@ public interface PojoUtilLimited {
   ValueValidator<?> getPropertyValidator(Class<?> pojoType, String propertyName);
 
   /**
-   * This method gets the value of the specified property.<br/>
-   * E.g. <code>getPropertyValue(pojo, "foo")</code> should return <code>pojo.getFoo()</code>.<br/>
+   * This method gets the value of the specified property. <br>
+   * E.g. <code>getPropertyValue(pojo, "foo")</code> should return <code>pojo.getFoo()</code>. <br>
    * 
    * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} owning the property.
    * @param propertyName is the
@@ -104,9 +104,9 @@ public interface PojoUtilLimited {
   <V> V getPropertyValue(Object pojo, TypedProperty<V> property);
 
   /**
-   * This method sets the value of the specified property.<br/>
+   * This method sets the value of the specified property. <br>
    * E.g. <code>setPropertyValue(pojo, "foo", value)</code> should have the same effect as
-   * <code>pojo.setFoo(value)</code>.<br/>
+   * <code>pojo.setFoo(value)</code>. <br>
    * 
    * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} owning the property.
    * @param propertyName is the

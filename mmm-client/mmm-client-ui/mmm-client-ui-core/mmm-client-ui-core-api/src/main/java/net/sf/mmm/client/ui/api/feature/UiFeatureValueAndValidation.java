@@ -18,8 +18,8 @@ public interface UiFeatureValueAndValidation<VALUE> extends UiFeatureValue<VALUE
    * This method is a combination of {@link #getValue()} and {@link #validate(ValidationState)}. It is
    * designed for API users implementing higher level dialog logic and is therefore easy to use. It performs a
    * {@link #validate(ValidationState) validation} and only on success it returns the {@link #getValue()
-   * value}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * value}. <br>
+   * <b>ATTENTION:</b><br>
    * The method design assumes that <code>null</code> is not a valid value. Never call this method with
    * <code>null</code> as argument if &lt;VALUE&gt; is {@link Void} or anything else that considers
    * <code>null</code> as a valid value. It should be used for high-level UI nodes such as entire input forms
@@ -40,8 +40,8 @@ public interface UiFeatureValueAndValidation<VALUE> extends UiFeatureValue<VALUE
    * the {@link #getValueOrException(Object) value} can be expensive. Saving changes requires validation AND
    * on success getting the value, while already validation requires getting the value. For composite UI
    * objects this effect would reinforce to multiply the number of calls to
-   * {@link #getValueOrException(Object)}.<br/>
-   * <b>NOTE:</b><br/>
+   * {@link #getValueOrException(Object)}. <br>
+   * <b>NOTE:</b><br>
    * This method is designed for implementors of composite UI objects. API users should only use
    * {@link #getValueAndValidate(ValidationState)}.
    * 

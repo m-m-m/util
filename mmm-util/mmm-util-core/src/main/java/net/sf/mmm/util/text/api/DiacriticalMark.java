@@ -11,15 +11,15 @@ import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
- * This enum contains the most important diacritical marks.<br>
+ * This enum contains the most important diacritical marks. <br>
  * If you are NOT familiar with unicode and languages that use non-ASCII characters, you should know that each
  * {@link DiacriticalMark} represents a specific shape like e.g. '~', '^', etc. that is added at a specific
  * position (on top, at bottom, etc.) to a letter. For instance if you add {@link #DIAERESIS two dots} to the
- * letter 'a' you get '&auml;'.<br>
+ * letter 'a' you get '&auml;'. <br>
  * To make things really complicated, unicode added {@link #getCombiningCharacter() combining characters}
  * representing the mark itself in addition to the precomposed characters (combination of a specific character
- * with the mark[s]).<br/>
- * <b>ATTENTION:</b><br/>
+ * with the mark[s]). <br>
+ * <b>ATTENTION:</b><br>
  * The unicode standard is extremely complex and sometimes it appears inconsistent in the first place. E.g.
  * there are {@link #getCombiningCharacter() combining characters} that have no equivalent
  * {@link #getSeparateCharacter() separate character}. Further the naming of {@link #getComposedCharacters()
@@ -27,7 +27,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * {@link #getCombiningCharacter() combining character}. E.g.
  * {@link UnicodeUtil#LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE} and
  * {@link UnicodeUtil#LATIN_SMALL_LETTER_O_WITH_STROKE} could be considered to be both a combination of the
- * diacritic "stroke". However, observing the glyphs and studying unicode indicated that this is wrong.<br/>
+ * diacritic "stroke". However, observing the glyphs and studying unicode indicated that this is wrong. <br>
  * Therefore this class and also {@link UnicodeUtil} should be considered as work in progress and we heavily
  * require your contribution to improve and support more diacritics. It may also be possible that characters
  * or diacritics get renamed in future versions if our understanding of unicode grows.
@@ -779,8 +779,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
 
   /**
    * This method gets the separate character for this {@link DiacriticalMark}. It represents the mark itself
-   * as a standalone character.<br/>
-   * <b>ATTENTION:</b><br/>
+   * as a standalone character. <br>
+   * <b>ATTENTION:</b><br>
    * For an unknown reason unicode does NOT define a proper separate character for each diacritic or for each
    * {@link #getCombiningCharacter() combining character}. Therefore this method may return a character that
    * looks similar to the diacritic mark, but is NOT the correct representation for it.

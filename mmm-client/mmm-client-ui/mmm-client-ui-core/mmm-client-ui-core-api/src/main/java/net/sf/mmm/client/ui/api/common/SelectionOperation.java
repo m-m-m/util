@@ -18,8 +18,8 @@ public enum SelectionOperation {
   SET,
 
   /**
-   * This operation will add the indicated items to the current selection. <br/>
-   * <b>ATTENTION:</b><br/>
+   * This operation will add the indicated items to the current selection. <br>
+   * <b>ATTENTION:</b><br>
    * This operation only makes sense in {@link SelectionMode#MULTIPLE_SELECTION}. Use {@link #SET} in case of
    * {@link SelectionMode#SINGLE_SELECTION}.
    */

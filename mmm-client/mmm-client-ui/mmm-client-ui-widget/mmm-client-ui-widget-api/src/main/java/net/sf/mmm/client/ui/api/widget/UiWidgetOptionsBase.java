@@ -20,7 +20,7 @@ public abstract interface UiWidgetOptionsBase<VALUE> extends UiWidget, Attribute
   /**
    * {@inheritDoc}
    * 
-   * <b>ATTENTION:</b><br/>
+   * <b>ATTENTION:</b><br>
    * The {@link Formatter} has to be set before the {@link #getOptions() options} are
    * {@link #setOptions(java.util.List) set} in order to reflect this change.
    */

@@ -3,7 +3,7 @@
 /**
  * Contains the base-implementations of the 
  * {@link net.sf.mmm.util.version.api Version API}.
- * <a name="documentation"/><h2>Version-Util Base</h2>
+ * <a name="documentation"></a><h2>Version-Util Base</h2>
  * Here you will find the abstract base-implementations of the 
  * {@link net.sf.mmm.util.version.api Version API}.
  */

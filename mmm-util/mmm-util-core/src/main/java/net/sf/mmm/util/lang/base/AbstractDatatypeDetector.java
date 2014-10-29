@@ -40,8 +40,8 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
 
   /**
    * This method registers a custom {@link net.sf.mmm.util.lang.api.Datatype} so it is recognized by
-   * {@link #isDatatype(Class)}.<br/>
-   * <b>NOTE:</b><br/>
+   * {@link #isDatatype(Class)}. <br>
+   * <b>NOTE:</b><br>
    * There is no need in registering {@link Enum} datatypes as they are detected as such automatically.
    *
    * @param datatype is the {@link net.sf.mmm.util.lang.api.Datatype} to register.

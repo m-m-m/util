@@ -9,7 +9,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * A {@link PojoPropertyAccessor} gives {@link #getAccessibleObject() access} to a specific {@link #getName()
- * property} of a POJO.<br>
+ * property} of a POJO. <br>
  * 
  * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
  * 
@@ -74,7 +74,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   GenericType<?> getReturnType();
 
   /**
-   * This method gets the {@link Class} of the object returned when this accessor is <code>invoked</code>.<br>
+   * This method gets the {@link Class} of the object returned when this accessor is <code>invoked</code>. <br>
    * is a convenience method for {@link #getReturnType()}.{@link GenericType#getRetrievalClass()
    * getRetrievalClass()}
    * 
@@ -86,7 +86,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   Class<?> getReturnClass();
 
   /**
-   * This method gets the {@link GenericType} of this property.<br>
+   * This method gets the {@link GenericType} of this property. <br>
    * For a {@link PojoPropertyAccessorNonArgMode#GET getter} this will be the {@link #getReturnType()
    * return-type} while a {@link PojoPropertyAccessorOneArgMode#SET setter} typically has <code>void</code> as
    * {@link #getReturnType() return-type} and this method will return the type of its argument. For mapped or
@@ -112,7 +112,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   /**
    * This method gets the class reflecting the type that declared this accessor. It may be the pojo-class this
    * accessor was created from but it may also be a super-class where the {@link #getAccessibleObject() field
-   * or method} of this accessor is inherited from and is NOT overridden.<br>
+   * or method} of this accessor is inherited from and is NOT overridden. <br>
    * E.g. the read-accessor for the property "class" will have the declaring-class {@link java.lang.Object}.
    * 
    * @return the class reflecting the type that declared this accessor.

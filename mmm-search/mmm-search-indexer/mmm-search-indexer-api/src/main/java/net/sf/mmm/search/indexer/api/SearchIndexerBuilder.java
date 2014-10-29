@@ -18,10 +18,10 @@ public interface SearchIndexerBuilder {
   String CDI_NAME = "net.sf.mmm.search.indexer.api.SearchIndexerBuilder";
 
   /**
-   * This method opens a new {@link SearchIndexer}.<br>
+   * This method opens a new {@link SearchIndexer}. <br>
    * <b>ATTENTION:</b><br>
    * Only one {@link SearchIndexer indexer} should be open at a time (for the same <code>dataSource</code>).
-   * You have to {@link SearchIndexer#close() close} the indexer before calling this method again.<br>
+   * You have to {@link SearchIndexer#close() close} the indexer before calling this method again. <br>
    * <b>WARNING:</b><br>
    * Be very careful when setting <code>update</code> to <code>false</code> to avoid loosing valuable data.
    * 
@@ -34,11 +34,11 @@ public interface SearchIndexerBuilder {
   SearchIndexer createIndexer(String dataSource, SearchIndexerOptions options) throws SearchException;
 
   /**
-   * This method opens a new {@link SearchIndexer}.<br>
+   * This method opens a new {@link SearchIndexer}. <br>
    * <b>ATTENTION:</b><br>
    * Only one {@link SearchIndexer indexer} should be open at a time (for the same
    * {@link net.sf.mmm.search.api.config.SearchIndexConfiguration#getLocation() location}). You have to
-   * {@link SearchIndexer#close() close} the indexer before calling this method again.<br>
+   * {@link SearchIndexer#close() close} the indexer before calling this method again. <br>
    * <b>ATTENTION:</b><br>
    * Be careful when overwriting the search-index. You may loose valuable data.
    * 
@@ -49,11 +49,11 @@ public interface SearchIndexerBuilder {
   SearchIndexer createIndexer(SearchIndexerConfigurationHolder configurationHolder) throws SearchException;
 
   /**
-   * This method opens a new {@link SearchIndexer}.<br>
+   * This method opens a new {@link SearchIndexer}. <br>
    * <b>ATTENTION:</b><br>
    * Only one {@link SearchIndexer indexer} should be open at a time (for the same
    * {@link net.sf.mmm.search.api.config.SearchIndexConfiguration#getLocation() location}). You have to
-   * {@link SearchIndexer#close() close} the indexer before calling this method again.<br>
+   * {@link SearchIndexer#close() close} the indexer before calling this method again. <br>
    * <b>ATTENTION:</b><br>
    * Be careful when overwriting the search-index. You may loose valuable data.
    * 

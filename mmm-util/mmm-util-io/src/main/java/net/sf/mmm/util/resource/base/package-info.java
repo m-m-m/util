@@ -3,7 +3,7 @@
 /**
  * Contains the base implementation of the 
  * {@link net.sf.mmm.util.resource.api resource-API}.
- * <a name="documentation"/><h2>Resource-Util Base</h2>
+ * <a name="documentation"></a><h2>Resource-Util Base</h2>
  * This package contains the common implementations of the 
  * {@link net.sf.mmm.util.resource.api.DataResource} interface such as
  * {@link net.sf.mmm.util.resource.base.ClasspathResource},

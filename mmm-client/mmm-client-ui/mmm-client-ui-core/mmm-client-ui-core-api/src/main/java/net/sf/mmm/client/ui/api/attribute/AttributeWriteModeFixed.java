@@ -17,7 +17,7 @@ public abstract interface AttributeWriteModeFixed extends AttributeReadModeFixed
    * {@link AttributeWriteMode#setMode(UiMode) set} the {@link AttributeReadMode#getMode() mode} to the given
    * mode (if not <code>null</code>, recursively) and then mark the mode as fixed so
    * {@link AttributeWriteMode#setMode(UiMode)} will have no effect anymore. The {@link #getModeFixed() fixed
-   * mode} itself will NOT be set recursively.<br/>
+   * mode} itself will NOT be set recursively. <br>
    * The typical use-case is to set the fixed mode to {@link UiMode#VIEW} in order to prevent a UI widget (a
    * field or even an entire sub-dialog) from switching to edit-mode ({@link UiMode#EDIT}) so the UI widget
    * will always remain read-only.

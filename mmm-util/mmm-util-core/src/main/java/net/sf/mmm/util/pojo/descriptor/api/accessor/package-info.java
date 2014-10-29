@@ -3,7 +3,7 @@
 /**
  * Provides the accessors of the API for introspection of 
  * {@link net.sf.mmm.util.pojo.api.Pojo}s.
- * <a name="documentation"/><h2>POJO Introspection API - Accessors</h2>
+ * <a name="documentation"></a><h2>POJO Introspection API - Accessors</h2>
  * For advanced introspection this package provides the API for various 
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor}s
  * with their 

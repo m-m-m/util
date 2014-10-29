@@ -35,7 +35,7 @@ public enum Filling {
   BOTH;
 
   /**
-   * This method returns the mirrored filling.<br>
+   * This method returns the mirrored filling. <br>
    * <code>({@link #NONE}.mirror == {@link #NONE}</code>
    * <code>({@link #HORIZONTAL}.mirror == {@link #VERTICAL}</code>
    * <code>({@link #VERTICAL}.mirror == {@link #HORIZONTAL}</code>

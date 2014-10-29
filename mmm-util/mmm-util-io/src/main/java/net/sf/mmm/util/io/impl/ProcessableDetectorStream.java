@@ -31,7 +31,7 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
   private DetectorStreamBufferImpl firstBuffer;
 
   /**
-   * The constructor.<br>
+   * The constructor. <br>
    * <b>ATTENTION:</b><br>
    * You have to call {@link #initialize(AbstractDetectorStreamProvider, DetectorStreamProcessor)} after
    * <code>super</code>-call in subclass-constructor.

@@ -3,10 +3,10 @@
 /**
  * Contains {@link net.sf.mmm.content.parser.api.ContentParser}-implementations 
  * for PDF files.
- * <a name="documentation"/><h2>Content-Parser Impl PDF</h2>
+ * <a name="documentation"></a><h2>Content-Parser Impl PDF</h2>
  * This package contains implementation of the 
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for PDF files 
- * using <code>pdfbox</code>.<br/>
+ * using <code>pdfbox</code>. <br>
  */
 package net.sf.mmm.content.parser.impl.pdf;
 

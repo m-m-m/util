@@ -3,7 +3,7 @@
 /**
  * Provides the SPI (service-provider-interface) for 
  * {@link net.sf.mmm.util.resource.api.DataResource data-resources}.
- * <a name="documentation"/><h2>Resource-Util SPI</h2>
+ * <a name="documentation"></a><h2>Resource-Util SPI</h2>
  * This package provides the {@link net.sf.mmm.util.resource.api.spi.DataResourceProvider} 
  * interface. You can write an implementation of this interface (annotated 
  * with @Named) to register a custom implementation of 

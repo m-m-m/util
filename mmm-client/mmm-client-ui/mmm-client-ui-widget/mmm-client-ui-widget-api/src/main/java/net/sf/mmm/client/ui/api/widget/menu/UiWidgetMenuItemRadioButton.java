@@ -8,7 +8,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 
 /**
  * This is the interface for a {@link UiWidgetMenuItem menu item widget} that has a {@link #getLabel() label}
- * and additionally a radio button.<br/>
+ * and additionally a radio button. <br>
  * All {@link UiWidgetMenuItemRadioButton radio menu items} within the same {@link UiWidgetMenu menu} will
  * automatically belong to the same group (so only one of them can be selected at a time).
  * 

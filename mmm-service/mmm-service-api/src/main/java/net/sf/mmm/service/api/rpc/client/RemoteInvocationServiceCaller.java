@@ -41,8 +41,8 @@ import net.sf.mmm.util.lang.api.function.Consumer;
  * non-primitive return types) that you should ignore. Instead the method invocation including its arguments
  * is recorded by the {@link RemoteInvocationServiceQueue}. It will be send to the server when the top-level
  * queue is {@link RemoteInvocationServiceQueue#commit() committed}. When the result is received from the
- * server, it will be {@link Consumer#accept(Object) passed to a callback function}. <br/>
- * <b>NOTE:</b><br/>
+ * server, it will be {@link Consumer#accept(Object) passed to a callback function}. <br>
+ * <b>NOTE:</b><br>
  * We have prepared everything for Java 1.8 so you can use lambdas. See
  * {@link net.sf.mmm.util.lang.api.function} for details. If you are using a java version less than 1.8, you
  * can NOT use lambdas and have to provide instances via anonymous classes.
@@ -60,8 +60,8 @@ public interface RemoteInvocationServiceCaller extends AbstractRemoteInvocationS
   /**
    * {@inheritDoc}
    *
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * This is a convenience method for simplicity. It will create an implicit
    * {@link RemoteInvocationServiceQueue queue} that gets {@link RemoteInvocationServiceQueue#commit()
    * committed} automatically after a service method has been called on the returned client-stub.

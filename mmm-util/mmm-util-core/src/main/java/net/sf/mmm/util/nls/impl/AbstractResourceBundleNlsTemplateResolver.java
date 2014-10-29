@@ -8,17 +8,17 @@ import net.sf.mmm.util.nls.base.NlsTemplateImplWithMessage;
 
 /**
  * This is an abstract base implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplateResolver}
- * interface.<br>
+ * interface. <br>
  * The localization is done by a reverse lookup of the message key from the given
  * {@link #resolveTemplate(String) internationalized message} using {@link NlsReversedResourceBundle}. With
  * that key and the name of the according {@link java.util.ResourceBundle} it is possible to create the
- * according {@link NlsTemplate}.<br>
+ * according {@link NlsTemplate}. <br>
  * The template does the localization by a forward
  * {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) lookup} for a regular
- * {@link java.util.ResourceBundle bundle} with the same {@link Class#getName() name}.<br>
+ * {@link java.util.ResourceBundle bundle} with the same {@link Class#getName() name}. <br>
  * This implementation allows localization of chained {@link net.sf.mmm.util.nls.api.NlsObject}s by injecting
  * itself into the {@link net.sf.mmm.util.nls.api.NlsFormatterManager} used by the
- * {@link #resolveTemplate(String) resolved} {@link NlsTemplate templates}.<br>
+ * {@link #resolveTemplate(String) resolved} {@link NlsTemplate templates}. <br>
  * 
  * @see net.sf.mmm.util.nls.api.NlsMessage
  * @see java.util.ResourceBundle

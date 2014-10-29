@@ -570,8 +570,8 @@ public abstract class AbstractUiWidgetAbstractDataSet<ADAPTER extends UiWidgetAd
 
   /**
    * Internal method to get the {@link Collection} with all items (currently) available in this widget. In
-   * case of lazy loading only those that have already been loaded. <br/>
-   * <b>ATTENTION:</b><br/>
+   * case of lazy loading only those that have already been loaded. <br>
+   * <b>ATTENTION:</b><br>
    * The {@link Collection} must NOT be modified if retrieved via this method. Implementations will provide
    * separate <code>addItem</code> and <code>removeItem</code> methods.
    *

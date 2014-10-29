@@ -7,7 +7,7 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This is the abstract base-class for all exceptions defined by this persistence API.<br>
+ * This is the abstract base-class for all exceptions defined by this persistence API. <br>
  * The {@link javax.persistence.PersistenceException} is NOT extended because of its strict rollback contract
  * and the better I18N support offered by {@link NlsRuntimeException}.
  *

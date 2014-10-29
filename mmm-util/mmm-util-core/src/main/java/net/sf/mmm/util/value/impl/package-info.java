@@ -3,7 +3,7 @@
 /**
  * Contains the implementation of the 
  * {@link net.sf.mmm.util.value.api Value-Util API}.
- * <a name="documentation"/><h2>Value-Util Impl</h2>
+ * <a name="documentation"></a><h2>Value-Util Impl</h2>
  * This is the implementation of the value API. Here you will find converters
  * of different types of values that are automatically plugged into the value
  * converter framework via injection.

@@ -14,8 +14,8 @@ import net.sf.mmm.util.lang.api.concern.Accessibility;
 public abstract interface AttributeReadAriaRole extends Accessibility {
 
   /**
-   * This method gets the {@link #WAI_ARIA} {@link Role role} of this object.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the {@link #WAI_ARIA} {@link Role role} of this object. <br>
+   * <b>ATTENTION:</b><br>
    * A reasonable UI framework (e.g. when using <code>UiWidget</code>) is supposed to provide high-level
    * widgets and support setting the according {@link Role} and their attributes automatically. Therefore
    * users should only use this for special situations e.g. for setting {@link Role#setHidden(boolean)

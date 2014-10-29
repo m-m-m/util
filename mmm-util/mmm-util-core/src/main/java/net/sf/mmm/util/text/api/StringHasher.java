@@ -4,7 +4,7 @@ package net.sf.mmm.util.text.api;
 
 /**
  * This is the interface for a hashing algorithm for strings (in form of <code>char[]</code> or
- * {@link CharSequence}.<br>
+ * {@link CharSequence}. <br>
  * <b>ATTENTION:</b><br>
  * The implementation may NOT be compatible to {@link String#hashCode()}. It only needs to guarantee, that all
  * method defined in this interface are compatible to each other. The purpose of this interface is to abstract
@@ -12,17 +12,17 @@ package net.sf.mmm.util.text.api;
  * In this context <em>performance</em> or <em>fast</em> is especially focused on methods such as
  * {@link #getHashCodes(char[], int, int, int)} rather than {@link #getHashCode(CharSequence)} which will NOT
  * be faster than {@link String#hashCode()} itself.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public interface StringHasher {
 
   /**
-   * This method gets the hash-code for the given <code>string</code>.<br>
-   * 
+   * This method gets the hash-code for the given <code>string</code>. <br>
+   *
    * @see #getHashCode(CharSequence, int, int)
-   * 
+   *
    * @param string is the {@link CharSequence} to hash.
    * @return the according hash-code.
    */
@@ -30,10 +30,10 @@ public interface StringHasher {
 
   /**
    * This method gets the hash-code for the specified {@link CharSequence#subSequence(int, int) subsequence}
-   * of the given <code>string</code>.<br>
-   * 
+   * of the given <code>string</code>. <br>
+   *
    * @see Object#hashCode()
-   * 
+   *
    * @param string is the {@link CharSequence} containing the {@link CharSequence#subSequence(int, int)
    *        subsequence} to hash.
    * @param start is the index of the first character to include into the hash.
@@ -44,10 +44,10 @@ public interface StringHasher {
 
   /**
    * This method gets the hash-code for the specified {@link CharSequence#subSequence(int, int) subsequence}
-   * of the given <code>string</code>.<br>
-   * 
+   * of the given <code>string</code>. <br>
+   *
    * @see Object#hashCode()
-   * 
+   *
    * @param string is the char-array containing the {@link String#String(char[], int, int) substring} to hash.
    * @param start is the index of the first character to include into the hash.
    * @param end is the index one before the last character to include into the hash.
@@ -58,9 +58,9 @@ public interface StringHasher {
   /**
    * This method gets the hash-codes for all {@link CharSequence#subSequence(int, int) subsequence} of
    * <code>string</code> that have the given <code>length</code>.
-   * 
+   *
    * @see #getHashCodes(char[], int, int, int)
-   * 
+   *
    * @param string is the string as char-array.
    * @param length is the {@link CharSequence#length() length} of the
    *        {@link CharSequence#subSequence(int, int) sub-sequences} of <code>string</code> to hash.
@@ -72,22 +72,22 @@ public interface StringHasher {
   /**
    * This method gets the hash-codes for all {@link CharSequence#subSequence(int, int) subsequence} of
    * <code>string</code> from <code>stringStart</code> (inclusive) until <code>stringEnd</code> (exclusive)
-   * that have the given <code>length</code>.<br>
+   * that have the given <code>length</code>. <br>
    * The implementation of this method needs to behave functionally equivalent to this code (but should be
    * more efficient):
-   * 
+   *
    * <pre>
    * int size = stringEnd - stringStart - length + 1;
-   * if (size <= 0) {
+   * if (size &lt;= 0) {
    *   return new int[0];
    * }
    * int[] result = new int[size];
-   * for (int i = 0; i < size; i++) {
+   * for (int i = 0; i &lt; size; i++) {
    *   result[i] = {@link #getHashCode(CharSequence) getHashCode}(string, i, i + length);
    * }
    * return result;
    * </pre>
-   * 
+   *
    * @param string is the string as char-array.
    * @param length is the {@link CharSequence#length() length} of the
    *        {@link CharSequence#subSequence(int, int) sub-sequences} of <code>string</code> to hash.
@@ -100,10 +100,10 @@ public interface StringHasher {
 
   /**
    * This method gets the hash-codes for all {@link CharSequence#subSequence(int, int) subsequence} of
-   * <code>string</code> that have the given <code>length</code>.<br>
-   * 
+   * <code>string</code> that have the given <code>length</code>. <br>
+   *
    * @see #getHashCodes(char[], int)
-   * 
+   *
    * @param string is the string as char-array.
    * @param length is the {@link CharSequence#length() length} of the
    *        {@link CharSequence#subSequence(int, int) sub-sequences} of <code>string</code> to hash.
@@ -115,10 +115,10 @@ public interface StringHasher {
   /**
    * This method gets the hash-codes for all {@link CharSequence#subSequence(int, int) subsequence} of
    * <code>string</code> from <code>stringStart</code> (inclusive) until <code>stringEnd</code> (exclusive)
-   * that have the given <code>length</code>.<br>
-   * 
+   * that have the given <code>length</code>. <br>
+   *
    * @see #getHashCodes(char[], int)
-   * 
+   *
    * @param string is the string as char-array.
    * @param length is the {@link CharSequence#length() length} of the
    *        {@link CharSequence#subSequence(int, int) sub-sequences} of <code>string</code> to hash.

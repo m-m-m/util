@@ -7,8 +7,8 @@ import java.security.Principal;
 /**
  * This is the interface for an {@link AuthorizationManager} that is is related
  * to the data object an operation is performed on. E.g. a user could be allowed
- * to modify customers but only if they are located in Germany.<br>
- * <b>ATTENTION:</b><br/>
+ * to modify customers but only if they are located in Germany. <br>
+ * <b>ATTENTION:</b><br>
  * Data related authorization should be avoided whenever possible. It makes
  * things complicated and can be a performance problem as it prevents from
  * caching strategies. Following the KISS ME (Keep It Small and Simple, Make it

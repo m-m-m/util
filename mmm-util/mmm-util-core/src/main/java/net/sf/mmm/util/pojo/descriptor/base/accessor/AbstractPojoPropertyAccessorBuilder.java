@@ -6,7 +6,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 
 /**
  * This is an abstract base implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder} interface.<br>
+ * {@link net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder} interface. <br>
  * It provides some helpful methods that make it easier to write implementations.
  * 
  * @param <ACCESSOR> is the type of the accessor
@@ -58,7 +58,7 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   /**
    * This method gets the according
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() property-name} for the given
-   * <code>methodName</code>.<br>
+   * <code>methodName</code>. <br>
    * This is the un-capitalized substring of the <code>methodName</code> after between the given
    * <code>prefix</code> and <code>suffix</code>.
    * 
@@ -100,7 +100,7 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   /**
    * This method gets the according
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() property-name} for the given
-   * <code>methodName</code>.<br>
+   * <code>methodName</code>. <br>
    * This is the un-capitalized substring of the <code>methodName</code> after between the given
    * <code>prefix</code> and <code>suffix</code>.
    * 
@@ -124,7 +124,7 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   /**
    * This method gets the according
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() property-name} for the given
-   * <code>methodName</code>.<br>
+   * <code>methodName</code>. <br>
    * This is the un-capitalized substring of the <code>methodName</code> after the prefix (given via
    * <code>prefixLength</code>).
    * 

@@ -4,9 +4,9 @@
  * Contains implementations of the 
  * {@link net.sf.mmm.util.reflect.api Reflection-Util API} and other internals 
  * of this reflection-util.
- * <a name="documentation"/><h2>Reflection-Util Impl</h2>
+ * <a name="documentation"></a><h2>Reflection-Util Impl</h2>
  * This package provides implementations of the 
- * {@link net.sf.mmm.util.reflect.api.GenericType} interface.<br>
+ * {@link net.sf.mmm.util.reflect.api.GenericType} interface. <br>
  * The Java generics introduced a fine grained type-system. It makes generic 
  * types available via the interface {@link java.lang.reflect.Type} and its 
  * sub-interfaces. Unlike {@link java.lang.Class#forName(String)} there is no 

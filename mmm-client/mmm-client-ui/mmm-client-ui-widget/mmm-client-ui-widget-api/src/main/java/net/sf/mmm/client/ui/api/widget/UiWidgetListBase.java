@@ -7,8 +7,8 @@ import net.sf.mmm.client.ui.api.feature.UiFeatureSelectedValue;
 /**
  * This is the interface for a {@link UiWidget widget} that presents a list of {@literal <ROW>} objects and
  * allows the end-user to select {@link #setSelectionMode(net.sf.mmm.client.ui.api.common.SelectionMode) one
- * or multiple} out of these objects.<br/>
- * <b>ATTENTION:</b><br/>
+ * or multiple} out of these objects. <br>
+ * <b>ATTENTION:</b><br>
  * At this level of abstraction the {@link #getValue() value} can mean totally different things. The available
  * sub-interfaces override {@link #getValue()} to specialize the JavaDoc.
  *

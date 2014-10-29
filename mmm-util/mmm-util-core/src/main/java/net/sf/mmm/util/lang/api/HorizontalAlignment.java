@@ -6,7 +6,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 /**
- * This enum represents a horizontal alignment (e.g. for {@link net.sf.mmm.util.text.api.Justification}).<br>
+ * This enum represents a horizontal alignment (e.g. for {@link net.sf.mmm.util.text.api.Justification}). <br>
  * The following table gives an example to illustrate the expected behavior of according to an
  * {@link HorizontalAlignment}.
  * <table border="1">

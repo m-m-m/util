@@ -24,7 +24,7 @@ public interface SearchEntryTypeContainer extends Iterable<SearchEntryType> {
    * This method determines if the internal default {@link #iterator() types} shall be extended, when
    * configuring {@link SearchEntryType}s. In this case existing types are replaced if overridden. This is the
    * default. If you want to reduce the number of {@link #iterator() types}, you need to set this to
-   * <code>false</code> and define only the types, you like to have.<br/>
+   * <code>false</code> and define only the types, you like to have. <br>
    * <b>NOTE:</b><br>
    * This method is only available in the API to document the configuration. It has no benefit for the
    * end-user of the API.

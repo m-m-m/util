@@ -33,7 +33,7 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
- * This is the implementation of the {@link ConfiguredSearchIndexer}.<br>
+ * This is the implementation of the {@link ConfiguredSearchIndexer}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -6,12 +6,12 @@ import java.util.Map;
 
 /**
  * This is the interface for a factory of {@link Map maps}. It allows to abstract from {@link Map}
- * implementations.<br>
+ * implementations. <br>
  * A {@link Map} instance can be used for different purposes such as a cache or with different aspects such as
  * a thread-safe map. If you write a generic component different users of that component may expect different
- * aspects of your component and therefore the underlying {@link Map}.<br>
+ * aspects of your component and therefore the underlying {@link Map}. <br>
  * If you use this interface and allow the user to {@link javax.inject.Inject inject} an instance of this
- * interface to override the default, your code will increase usability.<br>
+ * interface to override the default, your code will increase usability. <br>
  * <b>Why passing a {@link MapFactory} rather than a {@link Map} instance to the constructor?</b><br>
  * Since java 5 you want to use generics for type-safe code. If these generic types change slightly over the
  * time of development (e.g. from <code>Class</code> to <code>Class&lt;?&gt;</code>) you would break
@@ -42,7 +42,7 @@ public interface MapFactory<MAP extends Map> {
   Class<? extends MAP> getMapImplementation();
 
   /**
-   * This method creates a new {@link Map} instance.<br>
+   * This method creates a new {@link Map} instance. <br>
    * It is explicitly typed and respects the generic key and value type of the map. Therefore the type of the
    * {@link Map} can NOT be bound to the generic type <code>&lt;MAP&gt;</code> because of limitations in
    * Java's generic type system. You need to work on the actual sub-interface (e.g. {@link SortedMapFactory})

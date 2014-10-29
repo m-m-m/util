@@ -96,7 +96,7 @@ public class ByteArrayImpl extends AbstractByteArray {
 
   /**
    * This method sets the {@link #getMaximumIndex() maximumIndex}. This may be useful if the buffer should be
-   * reused.<br>
+   * reused. <br>
    * <b>ATTENTION:</b><br>
    * Be very careful and only use this method if you know what you are doing!
    * 

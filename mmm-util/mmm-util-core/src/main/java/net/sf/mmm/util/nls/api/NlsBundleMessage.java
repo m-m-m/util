@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * This {@link NlsBundleOptions#requireMessages() required} annotation is used to define the
  * {@link NlsMessage#getInternationalizedMessage() internationalized message} for a method of an
- * {@link NlsBundle} interface.<br/>
+ * {@link NlsBundle} interface. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

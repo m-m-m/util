@@ -3,7 +3,7 @@
 package net.sf.mmm.util.xml.path.api;
 
 /**
- * This is the interface for a parser of XPath expressions.<br>
+ * This is the interface for a parser of XPath expressions. <br>
  * See <a href="http://www.w3.org/TR/xpath">XML Path Language (XPath)</a>.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

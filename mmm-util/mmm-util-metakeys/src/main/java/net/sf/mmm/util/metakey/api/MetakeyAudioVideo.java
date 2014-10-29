@@ -4,14 +4,14 @@ package net.sf.mmm.util.metakey.api;
 
 /**
  * This interface is a collection of constants defining keys for
- * metadata-properties of audio/video content.<br>
+ * metadata-properties of audio/video content. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface MetakeyAudioVideo extends MetakeyMultimedia {
 
   /**
-   * The duration of the audio/video content.<br>
+   * The duration of the audio/video content. <br>
    * <b>ATTENTION:</b><br>
    * The value of this property is of the type {@link Long} and represents the
    * duration in milliseconds.
@@ -19,7 +19,7 @@ public interface MetakeyAudioVideo extends MetakeyMultimedia {
   String DURATION = "duration";
 
   /**
-   * The number of Beats Per Minute in the main-part of the audio.<br>
+   * The number of Beats Per Minute in the main-part of the audio. <br>
    * <b>ATTENTION:</b><br>
    * The value of this property is of the type {@link Integer}.
    */

@@ -9,7 +9,7 @@ package net.sf.mmm.util.transferobject.api;
  * For actual relations you will use {@link CompositeTo CTO}s to express what set of entities to transfer,
  * load, save, update, etc. without redundancies. It typically corresponds to an
  * {@link net.sf.mmm.util.entity.api.GenericEntity entity}. In such case consider {@link EntityTo}. Otherwise
- * if you derive from this class rather than {@link EntityTo} use the suffix <code>Dto</code>.<br/>
+ * if you derive from this class rather than {@link EntityTo} use the suffix <code>Dto</code>. <br>
  * For additional details and an example consult the {@link net.sf.mmm.util.transferobject.api package
  * JavaDoc}.
  *

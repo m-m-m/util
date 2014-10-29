@@ -74,10 +74,10 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
   /**
    * {@inheritDoc}
    *
-   * <br/>
-   * <br/>
+   * <br>
+   * <br>
    * If you do not want to use the advanced {@link #getDataBinding() data-binding} you could override this
-   * method and manually implement the binding like in the following example:<br/>
+   * method and manually implement the binding like in the following example:<br>
    *
    * <pre>
    * protected Person doGetValue(Person template, {@link ValidationState} state) {
@@ -107,10 +107,10 @@ public abstract class UiWidgetCustomComposite<VALUE, CHILD extends UiWidget, DEL
   /**
    * {@inheritDoc}
    *
-   * <br/>
-   * <br/>
+   * <br>
+   * <br>
    * If you do not want to use the advanced {@link #getDataBinding() data-binding} you could override this
-   * method and manually implement the binding like in the following example:<br/>
+   * method and manually implement the binding like in the following example:<br>
    *
    * <pre>
    * protected void doSetValue(Person value) {

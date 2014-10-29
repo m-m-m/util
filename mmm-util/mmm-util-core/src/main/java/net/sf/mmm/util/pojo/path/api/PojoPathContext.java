@@ -20,19 +20,19 @@ public interface PojoPathContext {
 
   /**
    * This method provides a cache that is used by the {@link PojoPathNavigator} to speed up repetitive calls
-   * with the same initial {@link net.sf.mmm.util.pojo.api.Pojo} and {@link PojoPath}s with a common prefix.<br>
+   * with the same initial {@link net.sf.mmm.util.pojo.api.Pojo} and {@link PojoPath}s with a common prefix. <br>
    * <b>WARNING:</b><br>
    * If caching is enabled and the initial or an intermediate {@link net.sf.mmm.util.pojo.api.Pojo} changed
    * outside the {@link PojoPathNavigator#set(Object, String, PojoPathMode, PojoPathContext, Object)
-   * navigator} the result will be wrong because the evaluation used an old value from the cache.<br>
+   * navigator} the result will be wrong because the evaluation used an old value from the cache. <br>
    * Please also note that the {@link PojoPathNavigator} only adds objects from the {@link #getCache() cache}.
    * It will never remove cached objects. To avoid memory-leaks, you should use a {@link PojoPathContext}
-   * instance only per transaction, per request, or whatever your grouping block will be.<br>
+   * instance only per transaction, per request, or whatever your grouping block will be. <br>
    * <b>ATTENTION:</b><br>
    * Never make assumptions about the content of this cache. It is provided here to allow the
    * {@link PojoPathNavigator} to be thread-safe and more efficient and NOT to expose it for external usage.
    * The internal structure of the cache may change in future releases. Use the {@link #getRecognizer()
-   * recognizer} to track visited {@link net.sf.mmm.util.pojo.api.Pojo}s.<br>
+   * recognizer} to track visited {@link net.sf.mmm.util.pojo.api.Pojo}s. <br>
    * 
    * @see java.util.HashMap
    * @see java.util.WeakHashMap

@@ -450,7 +450,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
 
   /**
    * This method gets the difference of the exactness of this {@link NumberTypeImpl} and the given
-   * <code>otherType</code>.<br>
+   * <code>otherType</code>. <br>
    * <b>ATTENTION:</b><br>
    * Some types such as {@link Double} and {@link BigInteger} are NOT really comparable so the exactness difference
    * might only make sense if the compared {@link NumberTypeImpl types} are both {@link #isDecimal() decimal} or both

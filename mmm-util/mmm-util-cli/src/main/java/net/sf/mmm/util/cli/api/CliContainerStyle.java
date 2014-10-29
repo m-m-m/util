@@ -23,7 +23,7 @@ public enum CliContainerStyle {
   /**
    * The {@link CliOption} or {@link CliArgument} may occur multiple times. The collection gets filled with
    * all these values in the order of their occurrence. This style is the default. For {@link CliArgument
-   * arguments} this style is only allowed for the last {@link CliArgument}.<br>
+   * arguments} this style is only allowed for the last {@link CliArgument}. <br>
    * Example:<br>
    * Assuming we have a CLI program called <code>Foo</code> with a property
    * <code>private List<String> listProperty</code> annotated with a {@link CliOption}

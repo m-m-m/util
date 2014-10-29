@@ -73,7 +73,7 @@ public class LuceneSearchQueryBuilder extends AbstractSearchQueryBuilder {
   }
 
   /**
-   * This method determines if leading wildcards will be ignored.<br>
+   * This method determines if leading wildcards will be ignored. <br>
    * <b>ATTENTION:</b><br>
    * Leading wildcards can cause performance problems. If you run a public accessible search-engine and you
    * want to avoid easy DOS-attacks, you should disable leading wildcards.

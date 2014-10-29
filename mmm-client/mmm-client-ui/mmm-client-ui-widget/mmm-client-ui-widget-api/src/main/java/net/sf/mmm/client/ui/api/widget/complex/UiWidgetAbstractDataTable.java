@@ -34,8 +34,8 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * double-clicking on cells or programmatically.</li>
  * <li>...</li>
  * </ul>
- * <br/>
- * <b>Note:</b><br/>
+ * <br>
+ * <b>Note:</b><br>
  * There are the following variants of this abstract list table widget:
  * <ul>
  * <li>{@link UiWidgetListTable}</li>
@@ -54,8 +54,8 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
   String STYLE_DATA_TABLE = CssStyles.DATA_TABLE;
 
   /**
-   * This method creates a new {@link UiWidgetTableColumn column} for this table. <br/>
-   * <b>ATTENTION:</b><br/>
+   * This method creates a new {@link UiWidgetTableColumn column} for this table. <br>
+   * <b>ATTENTION:</b><br>
    * The column is not automatically added to the table. You need to call {@link #setColumns(List)} for all
    * columns that should appear in the UI.
    *
@@ -78,8 +78,8 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
       UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator);
 
   /**
-   * This method creates a new {@link UiWidgetTableColumn column} for this table.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method creates a new {@link UiWidgetTableColumn column} for this table. <br>
+   * <b>ATTENTION:</b><br>
    * The column is not automatically added to the table. You need to call {@link #setColumns(List)} for all
    * columns that should appear in the UI.
    *
@@ -102,13 +102,13 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
       UiSingleWidgetFactory<? extends UiWidgetWithValue<CELL>> widgetFactory, Comparator<CELL> sortComparator);
 
   /**
-   * This method sets the {@link #getColumn(int) columns} for the table of this model.<br/>
+   * This method sets the {@link #getColumn(int) columns} for the table of this model. <br>
    * You typically will call this method like this:
    *
    * <pre>list.setColumns(Arrays.asList(column1, column2, column3))</pre>
    *
-   * Unfortunately varargs with generics cause trouble in interfaces.<br/>
-   * <b>ATTENTION:</b><br/>
+   * Unfortunately varargs with generics cause trouble in interfaces. <br>
+   * <b>ATTENTION:</b><br>
    * This method should typically be called only once during initialization of this table. Multiple calls of
    * this method for dynamic changes of the UI may NOT be completely supported by all underlying
    * implementations. We recommend to test your code with all relevant implementations before investing in
@@ -144,8 +144,8 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
 
   /**
    * Gets implicit {@link UiWidgetTableColumn column} that shows the checkboxes or radios for the selection of
-   * a row.<br/>
-   * <b>ATTENTION:</b><br/>
+   * a row. <br>
+   * <b>ATTENTION:</b><br>
    * This is available for advanced flexibility. Please avoid changing
    * {@link UiWidgetTableColumn#setTitle(String) title}, {@link UiWidgetTableColumn#setReorderable(boolean)
    * reorderable}, {@link UiWidgetTableColumn#setResizable(boolean) resizable}, or
@@ -157,12 +157,12 @@ public interface UiWidgetAbstractDataTable<ROW> extends UiWidgetAbstractDataSet<
   UiWidgetTableColumn<?, Boolean> getSelectionColumn();
 
   /**
-   * Gets implicit {@link UiWidgetTableColumn column} that shows the row-numbers.<br/>
-   * <b>ATTENTION:</b><br/>
+   * Gets implicit {@link UiWidgetTableColumn column} that shows the row-numbers. <br>
+   * <b>ATTENTION:</b><br>
    * This is available for advanced flexibility. Please avoid changing
    * {@link UiWidgetTableColumn#setTitle(String) title}, {@link UiWidgetTableColumn#setReorderable(boolean)
    * reorderable}, {@link UiWidgetTableColumn#setResizable(boolean) resizable}, or
-   * {@link UiWidgetTableColumn#setSortable(boolean) sortable}.<br/>
+   * {@link UiWidgetTableColumn#setSortable(boolean) sortable}. <br>
    * This column may be lazily created. Only use if you want to
    * {@link UiWidgetTableColumn#setVisible(boolean) make it visible}.
    *

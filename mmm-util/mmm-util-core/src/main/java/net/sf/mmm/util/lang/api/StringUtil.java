@@ -131,7 +131,7 @@ public interface StringUtil {
   /**
    * This method replaces the last <code>suffixLength</code> number of characters from <code>string</code>
    * with the lower-case string <code>newSuffixLowerCase</code> with respect to the original case of the given
-   * <code>string</code>.<br>
+   * <code>string</code>. <br>
    * Here are some examples for {@link Locale#ENGLISH}:<br>
    * <table border="1">
    * <tr>
@@ -259,7 +259,7 @@ public interface StringUtil {
 
   /**
    * This method formats a positive number to a string with at least the given number of digits padding it
-   * with leading zeros.<br>
+   * with leading zeros. <br>
    * Examples:
    * <ul>
    * <li><code>padNumber(5, 3)</code> will return <code>"005"</code></li>
@@ -277,7 +277,7 @@ public interface StringUtil {
 
   /**
    * This method formats a positive number to a string using the given <code>radix</code> with at least the
-   * given number of digits padding it with leading zeros.<br>
+   * given number of digits padding it with leading zeros. <br>
    * Examples:
    * <ul>
    * <li><code>padNumber(31, 3, 16)</code> will return <code>"01f"</code></li>
@@ -343,10 +343,10 @@ public interface StringUtil {
   String toCamlCase(String string);
 
   /**
-   * This method converts the given <code>string</code> to caml-case syntax.<br>
+   * This method converts the given <code>string</code> to caml-case syntax. <br>
    * In caml-case syntax words are written without a separator but each new word starts with a capitalized
    * letter. This method removes all characters from the given <code>string</code> that are in the list given
-   * by <code>separators</code> and capitalizes the first character of the following word.<br>
+   * by <code>separators</code> and capitalizes the first character of the following word. <br>
    * Examples for separators ' ', '-', '_', '.': <br>
    * <table border="1">
    * <tr>
@@ -375,7 +375,7 @@ public interface StringUtil {
 
   /**
    * This method converts the given <code>string</code> from caml-case syntax to lower-case using the given
-   * <code>separator</code> as word-boundary.<br>
+   * <code>separator</code> as word-boundary. <br>
    * Example:<br>
    * <table border="1">
    * <tr>
@@ -417,7 +417,7 @@ public interface StringUtil {
 
   /**
    * This method checks if the given <code>string</code> {@link String#contains(CharSequence) contains} the
-   * given <code>substring</code> at the given <code>offset</code>.<br>
+   * given <code>substring</code> at the given <code>offset</code>. <br>
    * This is an efficient implementation of
    *
    * <pre>string.indexOf(substring, offset) == offset</pre>
@@ -438,7 +438,7 @@ public interface StringUtil {
 
   /**
    * This method checks if the given <code>string</code> {@link String#contains(CharSequence) contains} the
-   * given <code>substring</code> at the given <code>offset</code>.<br>
+   * given <code>substring</code> at the given <code>offset</code>. <br>
    * This is an efficient implementation of
    *
    * <pre>string.indexOf(substring, offset) == offset</pre>
@@ -459,7 +459,7 @@ public interface StringUtil {
 
   /**
    * This method formats the elements given by <code>collection</code> to a string where each value is
-   * formatted to its {@link Object#toString() string representation} and separated by <code>separator</code>.<br/>
+   * formatted to its {@link Object#toString() string representation} and separated by <code>separator</code>. <br>
    * Examples:
    * <table border="1">
    * <tr>
@@ -591,7 +591,7 @@ public interface StringUtil {
   /**
    * This method parses the given <code>separatedString</code> that contains elements separated with
    * <code>separator</code> and the given <code>syntax</code> and {@link Collection#add(Object) adds} these
-   * elements to the given <code>collection</code>.<br/>
+   * elements to the given <code>collection</code>. <br>
    * This is the inverse operation of {@link #toSeparatedString(Collection, String, StringSyntax, Formatter)}.
    *
    * @param <E> is the generic type of the elements in the collection.
@@ -613,7 +613,7 @@ public interface StringUtil {
   /**
    * This method parses the given <code>separatedString</code> that contains elements separated with
    * <code>separator</code> and the given <code>syntax</code> and {@link Collection#add(Object) adds} these
-   * elements to the given <code>collection</code>.<br/>
+   * elements to the given <code>collection</code>. <br>
    * This is the inverse operation of {@link #toSeparatedString(Collection, String, StringSyntax, Formatter)}.
    *
    * @param <E> is the generic type of the elements in the collection.

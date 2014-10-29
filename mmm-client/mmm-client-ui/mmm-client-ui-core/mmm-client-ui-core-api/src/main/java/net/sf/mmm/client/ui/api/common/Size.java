@@ -29,10 +29,10 @@ import net.sf.mmm.client.ui.api.attribute.AttributeWriteSizeAdvanced;
  * </li>
  * </ul>
  * The most generic way to set the size is via {@link #setLength(LengthProperty, Length)}. For practical use
- * there are also methods such as {@link #setWidthInPixel(double)}.<br/>
+ * there are also methods such as {@link #setWidthInPixel(double)}. <br>
  * Getting the width or length typically returns the {@link Length} in the {@link LengthUnit unit} that has
- * been set or configured internally. <br/>
- * <b>ATTENTION:</b><br/>
+ * been set or configured internally. <br>
+ * <b>ATTENTION:</b><br>
  * Additionally, there is also {@link #getWidthInPixel()} and {@link #getHeightInPixel()} but these may only
  * return precise results if the object (widget) is actually attached to the screen. This is by the nature of
  * the concept as you can hardly tell how many pixels an object with a width of 80% will take. So use these

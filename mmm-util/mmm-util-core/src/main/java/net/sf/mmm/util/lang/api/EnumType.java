@@ -11,8 +11,8 @@ package net.sf.mmm.util.lang.api;
  * recommended but NOT technically required to implement this interface for your custom {@link Enum}s that
  * shall be supported by {@link EnumProvider}. If you have an {@link Enum} with a
  * {@link EnumTypeWithCategory#getCategory() category} you will need to implement {@link EnumTypeWithCategory}
- * for according support.<br/>
- * <b>NOTE:</b><br/>
+ * for according support. <br>
+ * <b>NOTE:</b><br>
  * It is strongly recommended to use a {@link Datatype} or at least a transfer-object to represent the
  * enumeration instances. Using an {@link javax.persistence.Entity} as {@link EnumType} should be avoided.
  * 

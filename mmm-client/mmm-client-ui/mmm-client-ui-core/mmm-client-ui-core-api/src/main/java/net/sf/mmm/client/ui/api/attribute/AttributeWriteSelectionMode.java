@@ -15,8 +15,8 @@ import net.sf.mmm.client.ui.api.common.SelectionMode;
 public abstract interface AttributeWriteSelectionMode extends AttributeReadSelectionMode {
 
   /**
-   * This method sets the {@link #getSelectionMode() selection mode}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method sets the {@link #getSelectionMode() selection mode}. <br>
+   * <b>ATTENTION:</b><br>
    * It is recommended to set the {@link SelectionMode} immediately after creating the object. The initial
    * default is always {@link SelectionMode#SINGLE_SELECTION}. Dynamically changing the {@link SelectionMode}
    * may be expensive or not be supported (in exotic implementations) and should therefore be avoided.

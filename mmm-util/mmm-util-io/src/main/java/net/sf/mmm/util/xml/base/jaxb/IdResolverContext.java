@@ -19,7 +19,7 @@ import net.sf.mmm.util.nls.api.NlsObject;
  * {@link Callable} for resolving {@link javax.xml.bind.annotation.XmlIDREF} but {@link Callable#call()
  * evaluates} it immediately instead of storing it until the initial processing phase has been completed. If
  * it returns <code>null</code> it will try again later but never complains if the ID could not be resolved in
- * the end.<br/>
+ * the end. <br>
  * This class solves the problem by tracking each {@link Callable} and check that in the
  * {@link #disposeAndValidate() end} all are resolved successfully.
  * 

@@ -27,8 +27,8 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
 
   /**
    * This is the default implementation to retrieve the {@link ValidationFailure#getCode() code} of this
-   * {@link ValueValidator}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link ValueValidator}. <br>
+   * <b>ATTENTION:</b><br>
    * This default implementation returns the {@link Class#getSimpleName() classname} of the actual
    * {@link ValueValidator} implementation. This strategy is chosen for simplicity when implementing a new validator. To
    * ensure stable codes override this method and return a string constant. This shall at least be done when the name of

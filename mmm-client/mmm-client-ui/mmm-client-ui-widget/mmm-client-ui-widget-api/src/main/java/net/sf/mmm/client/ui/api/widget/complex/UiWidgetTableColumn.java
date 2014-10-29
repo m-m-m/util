@@ -14,7 +14,7 @@ import net.sf.mmm.util.validation.api.HasValueValidators;
 
 /**
  * This is the interface for a virtual {@link UiWidget} that represents the
- * {@link UiWidgetAbstractDataTable#getColumn(int) column} of a {@link UiWidgetAbstractDataTable data table}.<br/>
+ * {@link UiWidgetAbstractDataTable#getColumn(int) column} of a {@link UiWidgetAbstractDataTable data table}. <br>
  * 
  * @param <ROW> is the generic type of the element representing a row of the grid. It should be a java-bean
  *        oriented object. Immutable objects (that have no setters) can also be used but only for read-only

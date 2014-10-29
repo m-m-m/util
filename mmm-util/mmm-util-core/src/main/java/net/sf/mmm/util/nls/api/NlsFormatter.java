@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * This is the interface for a formatter of an arbitrary object in a localized way.<br>
+ * This is the interface for a formatter of an arbitrary object in a localized way. <br>
  * 
  * @see java.text.Format
  * 

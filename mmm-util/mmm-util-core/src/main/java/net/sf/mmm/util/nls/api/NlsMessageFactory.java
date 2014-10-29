@@ -181,8 +181,8 @@ public interface NlsMessageFactory {
   NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments);
 
   /**
-   * This method creates a new instance of {@link NlsMessage} from the given arguments.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method creates a new instance of {@link NlsMessage} from the given arguments. <br>
+   * <b>ATTENTION:</b><br>
    * This us an uncommon way for creating an {@link NlsMessage}. It should only be used for specific cases
    * where both {@link NlsBundle} and {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} are NOT
    * suitable. Please read {@link net.sf.mmm.util.nls.api} as motivation and introduction.
@@ -199,8 +199,8 @@ public interface NlsMessageFactory {
   NlsMessage createDirect(String bundleName, String key);
 
   /**
-   * This method creates a new instance of {@link NlsMessage} from the given arguments.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method creates a new instance of {@link NlsMessage} from the given arguments. <br>
+   * <b>ATTENTION:</b><br>
    * This us an uncommon way for creating an {@link NlsMessage}. It should only be used for specific cases
    * where both {@link NlsBundle} and {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} are NOT
    * suitable. Please read {@link net.sf.mmm.util.nls.api} as motivation and introduction.

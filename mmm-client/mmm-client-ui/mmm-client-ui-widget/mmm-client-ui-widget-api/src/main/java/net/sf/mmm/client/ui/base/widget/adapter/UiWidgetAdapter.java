@@ -18,12 +18,12 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
  * This is the interface that adapts to the native {@link #getToplevelWidget() widget} of the underlying
- * toolkit implementation for a {@link net.sf.mmm.client.ui.api.widget.UiWidgetNative native widget}.<br/>
+ * toolkit implementation for a {@link net.sf.mmm.client.ui.api.widget.UiWidgetNative native widget}. <br>
  * It is a design trade-off as java does not have multi-inheritance (we would need scala traits here). This
  * way it is possible to implement an abstract base-implementation for the types of the
  * {@link net.sf.mmm.client.ui.api.widget.UiWidget}-hierarchy and inherit different implementations (Swing,
- * SWT, GWT, etc.) from that without creating redundant code.<br/>
- * <b>ATTENTION:</b><br/>
+ * SWT, GWT, etc.) from that without creating redundant code. <br>
+ * <b>ATTENTION:</b><br>
  * The getters (<code>AttributeRead*</code> methods) of attributes that cannot be changed by the end-user are
  * never used and therefore NOT implemented properly.
  *

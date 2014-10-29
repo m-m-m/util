@@ -9,8 +9,8 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
 /**
  * This is the interface for a normal {@link UiWidgetAbstractListTable list table widget}. Its
  * {@link #getValue() value} is the actual list that is displayed and may be modified by the end-user. For a
- * general feature list see {@link UiWidgetAbstractDataTable}.<br/>
- * <b>ATTENTION:</b><br/>
+ * general feature list see {@link UiWidgetAbstractDataTable}. <br>
+ * <b>ATTENTION:</b><br>
  * For small modifications of the list content please use the dedicated methods ({@link #addRow(Object, int)},
  * {@link #removeRow(Object)}, etc.) as they are a lot more efficient than {@link #setValue(Object, boolean)}.
  * 

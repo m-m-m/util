@@ -23,7 +23,7 @@ public interface GenericContextFactory {
   /**
    * This method creates a new instance of a {@link MutableGenericContext}. It will use a
    * {@link net.sf.mmm.util.collection.base.HashMapFactory} and delegate to {@link #createContext(MapFactory)}
-   * .<br>
+   * . <br>
    * <b>ATTENTION:</b><br>
    * Such context is usually suitable even if {@link GenericContext#createChildContext() child-contexts} are
    * created and passed to other threads while the original thread is modifying the original context as proved

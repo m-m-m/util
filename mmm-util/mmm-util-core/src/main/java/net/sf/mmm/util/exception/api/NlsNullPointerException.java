@@ -49,12 +49,12 @@ public class NlsNullPointerException extends NlsRuntimeException {
   }
 
   /**
-   * This method checks if the given <code>object</code> is <code>null</code>.<br>
+   * This method checks if the given <code>object</code> is <code>null</code>. <br>
    * <b>ATTENTION:</b><br>
    * This method is only intended to be used for specific types. It then not only saves you from a single
-   * <code>if</code>-statement, but also defines a common pattern that is refactoring-safe.<br>
+   * <code>if</code>-statement, but also defines a common pattern that is refactoring-safe. <br>
    * Anyhow you should never use this method with generic {@link Class}es for <code>type</code> such as
-   * {@link Object}, {@link String}, {@link Integer}, etc.<br>
+   * {@link Object}, {@link String}, {@link Integer}, etc. <br>
    * <br>
    * Here is an example:
    *
@@ -80,7 +80,7 @@ public class NlsNullPointerException extends NlsRuntimeException {
   }
 
   /**
-   * This method checks if the given <code>object</code> is <code>null</code>.<br>
+   * This method checks if the given <code>object</code> is <code>null</code>. <br>
    * Look at the following example:
    *
    * <pre>

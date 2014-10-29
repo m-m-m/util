@@ -66,8 +66,8 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
   }
 
   /**
-   * This method creates the {@link #getToplevelWidget() underlying widget}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method creates the {@link #getToplevelWidget() underlying widget}. <br>
+   * <b>ATTENTION:</b><br>
    * This method is called from the constructor but implemented in sub-classes. You should NOT access or even
    * modify member variables as they are NOT set at this point (even final members). However, this design is
    * done by intention instead of passing the widget as constructor argument to give more flexibility by
@@ -103,8 +103,8 @@ public abstract class AbstractUiWidgetAdapter<WIDGET> implements UiWidgetAdapter
 
   /**
    * This method gives access to the {@link AbstractUiWidgetNative native UI widget} wrapping this widget
-   * adapter. <br/>
-   * <b>ATTENTION:</b><br/>
+   * adapter. <br>
+   * <b>ATTENTION:</b><br>
    * For the most cases the call hierarchy should go from the widget to the widget adapter. Only access this
    * method when required (to avoid redundant storage of attributes, etc.).
    * 

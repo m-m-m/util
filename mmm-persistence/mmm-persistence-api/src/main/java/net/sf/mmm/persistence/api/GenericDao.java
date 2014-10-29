@@ -12,11 +12,11 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  * persistence operations on a {@link #getEntityClass() specific type} of {@link GenericEntity}. It is
  * responsible for {@link #find(Object) loading}, {@link #save(GenericEntity) saving} and
  * {@link net.sf.mmm.util.search.api.SearchQuery searching} {@link GenericEntity entities} of the
- * {@link #getEntityClass() according type}.<br>
+ * {@link #getEntityClass() according type}. <br>
  * For each (non-abstract) implementation of {@link GenericEntity} there should exist one instance of this
  * interface. Typically when you create a custom {@link GenericEntity entity} you will also create a custom
  * interface and implementation of an according {@link GenericDao}. If there is no custom implementation of a
- * {@link GenericDao} for some type of {@link GenericEntity}, a generic implementation is used as fallback.<br>
+ * {@link GenericDao} for some type of {@link GenericEntity}, a generic implementation is used as fallback. <br>
  * The {@link PersistenceManager} can be seen as the manager of all {@link GenericDao} and acts as front-end
  * to them.
  *
@@ -94,7 +94,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
    * persistent store (after commit). If the <code>entity</code> is configured to have a generated
    * {@link GenericEntity#getId() primary key} a unique ID is generated and assigned. Otherwise, if the
    * <code>entity</code> is already {@link net.sf.mmm.util.entity.api.PersistenceEntity#STATE_MANAGED managed}
-   * , the <code>entity</code> is updated in the persistent store.<br>
+   * , the <code>entity</code> is updated in the persistent store. <br>
    * <b>ATTENTION:</b><br>
    * Modifications to a {@link net.sf.mmm.util.entity.api.PersistenceEntity#STATE_MANAGED managed}
    * {@link GenericEntity entity} are automatically saved even if this method has NOT been invoked. However,
@@ -108,9 +108,9 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
   void save(ENTITY entity);
 
   /**
-   * This method deletes the given <code>entity</code> from the persistent store.<br>
+   * This method deletes the given <code>entity</code> from the persistent store. <br>
    * If the <code>entity</code> is {@link net.sf.mmm.util.entity.api.PersistenceEntity#STATE_NEW transient}
-   * this method has no effect.<br>
+   * this method has no effect. <br>
    *
    * @param entity is the {@link GenericEntity} to save.
    */
@@ -118,7 +118,7 @@ public interface GenericDao<ID, ENTITY extends GenericEntity<ID>> {
 
   /**
    * This method deletes the {@link GenericEntity entity} identified by the given <code>id</code> from the
-   * persistent store.<br>
+   * persistent store. <br>
    *
    * @param id is the {@link GenericEntity#getId() primary key} of the {@link GenericEntity entity} to delete.
    */

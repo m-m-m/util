@@ -17,8 +17,8 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
 
 /**
  * This is an implementation of {@link DetectorStreamProcessor} that allows to
- * detect a {@link ContentTypeBean} using {@link DecisionTreeNode}.<br/>
- * <b>ATTENTION:</b><br/>
+ * detect a {@link ContentTypeBean} using {@link DecisionTreeNode}. <br>
+ * <b>ATTENTION:</b><br>
  * This implementation is stateful and therefore NOT thread-safe.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -2,21 +2,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the API to build user-interfaces for an application client.
- * <a name="documentation"/><h2>Client UI API</h2>
+ * <a name="documentation"></a><h2>Client UI API</h2>
  * This package and its sub-packages contain the API to build user-interfaces for an application client.
  * It abstracts from underlying native UI toolkits and allows to build a portable cross-technology
- * client application.<br/>
- * The major part of this API is provided by {@link net.sf.mmm.client.ui.api.widget}.<br/>
+ * client application. <br>
+ * The major part of this API is provided by {@link net.sf.mmm.client.ui.api.widget}. <br>
  * <h3>Why?</h3>
  * There are various features and advantages of this layer:
  * <ul>
- * <li><b>Designed for testability</b><br/>
+ * <li><b>Designed for testability</b><br>
  * This framework is an abstraction layer to actual UI frameworks. Your client code will be written against
  * this API. The common part of the implementation is java bean like and works even without an underlying
  * native widget. By providing a test implementation of the API via <code>mmm-client-ui-wdiget-impl-test</code>, we offer
  * the ability for you to test your dialogs and client logic easily with unit-tests. Within the test you can easily
  * enter values and click on a button and assert the expected changes of the UI and underlying logic.</li>
- * <li><b>Cross-plattform and mutli-channel</b><br/>
+ * <li><b>Cross-plattform and mutli-channel</b><br>
  * Same client-code can run with all supported toolkits.
  * <ul>
  * <li>Web (via GWT) supporting HTML, Touch and Mobile</li>
@@ -33,7 +33,7 @@
  * objects in combination with a details section to view and edit these objects. This way the framework can
  * decide according to the device, orientation and screen-resolution if the details-section is below/beside
  * the list or if the UI switches between these two views showing only one at a time.
- * <li><b>Faster development</b><br/>
+ * <li><b>Faster development</b><br>
  * Many client frameworks deal with different artifacts and programming models. The worst case is the classic
  * web development with HTML, CSS, JavaScript, various JavaScript frameworks and a totally different
  * tool-stack on the server like Java, or the like. Also JSP, JSF, and many other approaches exist in this
@@ -56,7 +56,7 @@
  * large and complex clients as starting and refreshing takes very long. This layer allows to test parts of
  * your dialogs with JUnit or manually via JavaFx in order to improve the layout and find initial bugs.
  * Later you can start testing with GWT in order to find web related problems. This approach saves a lot of time.</li>
- * <li><b>Good Performance</b><br/>
+ * <li><b>Good Performance</b><br>
  * You think that an abstraction layer for UI toolkits that wraps all widgets is causing a large performance
  * overhead? Nope! Of course you can create widgets a lot faster if you directly create them with native code (e.g. write
  * JavaScript or JavaFx code) but the overall performance of an application is NOT dominated by the speed of creating
@@ -73,16 +73,16 @@
  * </ol>
  * To be honest a web client build with this framework based on GWT is still heavy load for a mobile device.
  * But on powerful smartphones the performance is fine.
- * <li><b>Integrated validation support</b><br/>
+ * <li><b>Integrated validation support</b><br>
  * Each {@link net.sf.mmm.client.ui.api.widget.UiWidgetWithValue value based widget} has build in support for
  * {@link net.sf.mmm.client.ui.api.feature.UiFeatureValidation validation}. Validation failures are automatically
  * visualized inside the according widgets supporting the user to fix all problems easily.
- * <li><b>Advanced data-binding</b><br/>
+ * <li><b>Advanced data-binding</b><br>
  * This framework offers advanced and comfortable {@link net.sf.mmm.client.ui.base.binding.UiDataBinding data-binding}.
  * Even in GWT-Environments where no reflection is available you can simply bind java bean properties to widgets
  * including JSR 303 annotation based validation. This massively increases your productivity as you save a lot of stupid
  * work that is done for you by the framework and makes maintenance of your code easier.
- * <li><b>Clean API</b><br/>
+ * <li><b>Clean API</b><br>
  * Simple, clear, well documented, and easy to use API. Native UI toolkits typically use java classes as API.
  * Due to lack of multi-inheritance and due to implementation specific decisions the API often sucks. There
  * are many inherited API methods in particular widgets that do NOT make sense there and will confuse the
@@ -91,16 +91,16 @@
  * consistent and maintainable. Finally, we have analyzed various native UI toolkits with their API and
  * internals. From this perspective and with the experience of building various large enterprise application
  * clients this API has been designed. Please have a look.</li>
- * <li><b>Consistent</b><br/>
+ * <li><b>Consistent</b><br>
  * Hide strange and touchy behaviors of existing toolkits.</li>
- * <li><b>Extensibility</b><br/>
+ * <li><b>Extensibility</b><br>
  * Even though we define widgets by interfaces and have support for multiple native UI toolkits, you can
  * extend this code. Either with UI toolkit independent widgets by composing existing ones (see
  * <code>UiWidgetCustom</code> in <code>uit-widget-base</code> and
  * {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryDatatype#createForDatatype(Class)}) or by replacing or adding
  * widgets for native toolkit support. We hope that the latter case will never be necessary or that you join this
  * project in this case.</li>
- * <li><b>Higher Level</b><br/>
+ * <li><b>Higher Level</b><br>
  * While the adoption of native UI toolkits takes place on a quite low level, there are many high level
  * features like
  * <ul>
@@ -116,19 +116,19 @@
  * </ul>
  * But you are still free to pick and choose: If you only want to use the lower level abstraction you can still ignore
  * the higher level stuff.</li>
- * <li><b>Dialogs not pages</b><br/>
+ * <li><b>Dialogs not pages</b><br>
  * Most client frameworks have a programming model that is page-oriented (e.g. you produce a web-page). However, for
  * a Rich (Internet) Application you need to think in dialogs and not in pages. So if you open a particular (main-)dialog
  * the result is a page that contains that dialog typically together with other things like header, footer, navigation,
  * etc. In this API all of these parts are dialogs that are composed and embedded to build a page. However, each of these
  * dialogs have a state and lifecycle rather than the page itself.</li>
- * <li><b>Usability</b><br/>
+ * <li><b>Usability</b><br>
  * By providing established UI patterns this framework supports you in creating a UI with high usability.
- * <li><b>Accessibility</b><br/>
+ * <li><b>Accessibility</b><br>
  * {@link net.sf.mmm.util.lang.api.concern.Accessibility} is an important but also complex topic. This layer
  * support standards such as {@link net.sf.mmm.util.lang.api.concern.Accessibility#WAI_ARIA WAI-ARIA} as well
  * as keyboard control and other features to increase accessibility.</li>
- * <li><b>Internationalization</b><br/>
+ * <li><b>Internationalization</b><br>
  * Of course everything is integrated with our great native language support provided by
  * {@link net.sf.mmm.util.nls.api.NlsMessage}. This offers a single, flexible and powerful mechanism for i18n and l10n
  * abstracting from the very different concepts of the underlying native toolkits that are supported. Further we expose
@@ -137,18 +137,18 @@
  * <h3>Limitations</h3>
  * Please also note the following limitations before you make your choice:
  * <ul>
- * <li><b>No gimmicks</b><br/>
+ * <li><b>No gimmicks</b><br>
  * This approach is focusing on functionality and is limited to a common sense of features that are offered by
  * all supported native UI toolkits. You will have less flexibility if you are using this layer. If you want
  * to offer a very fancy or extraordinary UI you should consider using a single UI technology directly and
  * stick to it. On the other hand you should also consider this as a feature as it helps you to build client
  * applications using common UI patterns that have good usability and accessibility. You can still style your UI with
  * CSS and give it some fancy look.</li>
- * <li><b>No magic</b><br/>
+ * <li><b>No magic</b><br>
  * You should NOT expect that switching from a web-application to e.g. JavaFx can be done by a single line of code and
  * the UI behaves and looks the same. However, this abstraction layer allows to switch from one supported toolkit to
  * another or to support multiple native toolkits on a single codebase with reasonable effort.</li>
- * <li><b>Not small</b><br/>
+ * <li><b>Not small</b><br>
  * This framework is designed for medium to large sized client applications. If you want a small client with
  * few screens, the overhead of setting up and learning this technology might be too high. However, we have a
  * strong focus on making your life easy. So also many things are much faster to implement. The choice is up to you:

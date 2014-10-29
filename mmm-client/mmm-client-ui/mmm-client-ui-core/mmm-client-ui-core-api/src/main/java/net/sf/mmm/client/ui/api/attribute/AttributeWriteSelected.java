@@ -11,7 +11,7 @@ package net.sf.mmm.client.ui.api.attribute;
 public abstract interface AttributeWriteSelected extends AttributeReadSelected {
 
   /**
-   * This method sets the selection status of this object.<br>
+   * This method sets the selection status of this object. <br>
    * 
    * @param selected - if <code>true</code> the object will be selected, else it will be de-selected.
    */

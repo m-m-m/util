@@ -23,12 +23,12 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * This value indicates that a {@link VersionIdentifier} is a <em>strict successor</em> of another
    * {@link VersionIdentifier}. A strict successor of {@link VersionIdentifier} <code>V1</code> is a
    * {@link VersionIdentifier} <code>V2</code> that identifies a <em>potential</em> next release after
-   * <code>V1</code>. <br/>
-   * <b>ATTENTION:</b><br/>
+   * <code>V1</code>. <br>
+   * <b>ATTENTION:</b><br>
    * An implementation can NOT predict the version history of a particular artifact. Therefore this is only an
-   * indicator whether a {@link VersionIdentifier} is a legal successor.<br/>
+   * indicator whether a {@link VersionIdentifier} is a legal successor. <br>
    * E.g. for the version "1.2.3-RC4" strict successors are "1.2.3-RC5", "1.2.3-GA", "1.2.4", etc. while
-   * "1.2.3-RC6" or "1.2.4-RC2" are NOT.<br/>
+   * "1.2.3-RC6" or "1.2.4-RC2" are NOT. <br>
    *
    * @see #compareTo(VersionIdentifier)
    */
@@ -77,9 +77,9 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
   /**
    * This method gets an arbitrary segment of the <em>version number</em>. The version number is a part of the
    * {@link VersionIdentifier} represented by the concatenation of {@link #getVersionSegmentCount() all}
-   * {@link #getVersionSegment(int) segments} separated by a separator (typically the dot sign).<br/>
+   * {@link #getVersionSegment(int) segments} separated by a separator (typically the dot sign). <br>
    * This method will return <code>0</code> if a segment is not {@link #getVersionSegmentCount() available}.
-   * However it will not throw an {@link IndexOutOfBoundsException} if the <code>index</code> is non negative.<br/>
+   * However it will not throw an {@link IndexOutOfBoundsException} if the <code>index</code> is non negative. <br>
    * Here are some examples
    * <table border="1">
    * <tr>
@@ -206,8 +206,8 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
   int getVersionMicroSegment();
 
   /**
-   * This method gets the {@link DevelopmentPhase} of this {@link VersionIdentifier}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the {@link DevelopmentPhase} of this {@link VersionIdentifier}. <br>
+   * <b>ATTENTION:</b><br>
    * If the {@link #getPhase() phase} is undefined (<code>null</code>), {@link DevelopmentPhase#RELEASE} will
    * be assumed for {@link #compareTo(VersionIdentifier)}.
    *
@@ -219,7 +219,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * This method gets the string representation of the {@link #getPhase() phase} for this
    * {@link VersionIdentifier}. This is ideally
    * <code>{@link #getPhase()}.{@link DevelopmentPhase#toString() toString()}</code> but may also be any other
-   * legal alias for the {@link #getPhase() phase}.<br/>
+   * legal alias for the {@link #getPhase() phase}. <br>
    * E.g. for {@link DevelopmentPhase#RELEASE} the {@link #getPhaseAlias() phase name} may also be "final",
    * "GA", "RTM", "REL", "gold", or "stable".
    *
@@ -232,11 +232,11 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * {@link #getPhase() phase}. It is typically <code>null</code> and will then be omitted in the
    * {@link #toString() string-representation}. However {@link DevelopmentPhase#RELEASE_CANDIDATE
    * release-candidates} and {@link DevelopmentPhase#UPDATE updates} are often numbered (e.g. like "u1", "u2",
-   * ... in Java-releases or "RC1"/"SR1", ... in Eclipse-releases).<br/>
+   * ... in Java-releases or "RC1"/"SR1", ... in Eclipse-releases). <br>
    * If {@link #getPhase()} returns <code>null</code> also this method should return <code>null</code>. Also
    * if {@link #getPhase()} is {@link DevelopmentPhase#RELEASE} this method should return <code>null</code>
-   * (there is just one official release - after that there are {@link DevelopmentPhase#UPDATE updates}).<br/>
-   * <b>ATTENTION:</b><br/>
+   * (there is just one official release - after that there are {@link DevelopmentPhase#UPDATE updates}). <br>
+   * <b>ATTENTION:</b><br>
    * If the {@link #getPhaseNumber() phase} is undefined (<code>null</code>), <code>0</code> will be assumed
    * for {@link #compareTo(VersionIdentifier)}.
    *
@@ -249,7 +249,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * informal pre-release. Multiple snapshot releases with different content can be published for snapshot
    * versions while this is strictly prohibited for non-snapshot versions. A snapshot version is a
    * {@link #COMPARE_TO_STRICT_PREDECESSOR strict predecessor} of the same {@link VersionIdentifier} without
-   * the snapshot.<br/>
+   * the snapshot. <br>
    * E.g. multiple "1.0.0-SNAPSHOT" versions can be published for testers. After all tests pass, the version
    * "1.0.0" gets released. This approach is orthogonal to the {@link #getPhase() phase} and can be combined
    * (e.g. "1.0.0-beta2-SNAPSHOT").

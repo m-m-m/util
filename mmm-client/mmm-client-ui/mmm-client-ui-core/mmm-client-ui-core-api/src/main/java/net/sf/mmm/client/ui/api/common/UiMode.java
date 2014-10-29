@@ -9,8 +9,8 @@ import java.util.Set;
 
 /**
  * This interface represents the available modes of a UI object. It can be either in the mode {@link #VIEW} or
- * in the mode {@link #EDIT}.<br/>
- * <b>NOTE:</b><br/>
+ * in the mode {@link #EDIT}. <br>
+ * <b>NOTE:</b><br>
  * This is intentionally NOT realized as an enum type in order to allow extension for custom needs.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

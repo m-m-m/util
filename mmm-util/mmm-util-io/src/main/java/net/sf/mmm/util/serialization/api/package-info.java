@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for utilities that help to deal with (de)serialization.
- * <a name="documentation"/><h2>Util Serialization API</h2>
+ * <a name="documentation"></a><h2>Util Serialization API</h2>
  * Java offers a seamless serialization mechanism that allows to serialize any
  * {@link java.io.Serializable serializable} object to binary data (<code>byte[]</code>) and vice versa.
  * However, there are alternative solutions to Java serialization that offer some advantages like

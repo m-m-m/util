@@ -21,7 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This is the test-case for the {@link LuceneSearchEngine}.<br/>
+ * This is the test-case for the {@link LuceneSearchEngine}. <br>
  * It uses a search-index that was created once by indexing the sources of
  * mmm-util-core.
  * 

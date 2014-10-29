@@ -47,7 +47,7 @@ public interface SearchIndexerSourceState {
 
   /**
    * This method gets the {@link SearchIndexerDataLocationState state} for the
-   * given <code>location</code>.<br/>
+   * given <code>location</code>. <br>
    * For each
    * {@link net.sf.mmm.search.indexer.api.config.SearchIndexerSource#getLocations()
    * configured data-location} a {@link SearchIndexerDataLocationState} will be

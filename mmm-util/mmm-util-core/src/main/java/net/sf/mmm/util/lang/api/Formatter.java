@@ -6,7 +6,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This is the interface for a formatter that allows to {@link #format(Object) format} a given object of a
- * generic type.<br/>
+ * generic type. <br>
  * Unlike {@link java.util.Formatter} this variant concentrates on an API rather than an implementation.
  * 
  * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
@@ -16,7 +16,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 public interface Formatter<V> {
 
   /**
-   * This method formats the given <code>value</code>.<br/>
+   * This method formats the given <code>value</code>. <br>
    * This is a shorthand of the following code:
    * 
    * <pre>

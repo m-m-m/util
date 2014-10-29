@@ -13,8 +13,8 @@ import net.sf.mmm.util.filter.api.Filter;
 /**
  * A {@link CliStyle} is used to annotated a Java-class that holds the parameters of a main-program that are
  * parsed from the commandline arguments. It declares the style of the CLI (command-line-interface) and
- * therefore can ensure conventions and common behavior of the CLI.<br>
- * This annotation is optional. If it is not present, the defaults will apply.<br>
+ * therefore can ensure conventions and common behavior of the CLI. <br>
+ * This annotation is optional. If it is not present, the defaults will apply. <br>
  * The defaults are rather strict and tries to follow GNU-like conventions.
  * 
  * @see CliClass
@@ -61,7 +61,7 @@ public @interface CliStyle {
   /**
    * A {@link Class} with a public non-arg constructor that implements a {@link Filter} of Strings in order to
    * decide if the {@link CliOption#name() name} or {@link CliOption#aliases() alias} of a {@link CliOption}
-   * is {@link Filter#accept(Object) acceptable}.<br>
+   * is {@link Filter#accept(Object) acceptable}. <br>
    * The default is {@link CliOptionNameDefaultFilter}.
    */
   Class<? extends Filter<String>> optionNameFilter() default CliOptionNameDefaultFilter.class;
@@ -86,7 +86,7 @@ public @interface CliStyle {
    * Determines how to {@link CliStyleHandling handle} a {@link CliMode mode} that is declared more than once.
    * If accepted, the deepest {@link CliMode} annotation is selected from the {@link Class}
    * {@link Class#getSuperclass() hierarchy} of the {@link net.sf.mmm.util.cli.base.CliState#getStateClass()
-   * state-class}. The default is {@link CliStyleHandling#DEBUG}.<br>
+   * state-class}. The default is {@link CliStyleHandling#DEBUG}. <br>
    * <b>ATTENTION:</b><br>
    * Please note that it can make sense to override a {@link CliMode}.
    * 

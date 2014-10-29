@@ -87,7 +87,7 @@ public class SearchIndexerSourceStateBean implements SearchIndexerSourceState {
 
   /**
    * This method gets the {@link List} of
-   * {@link SearchIndexerDataLocationStateBean}.<br/>
+   * {@link SearchIndexerDataLocationStateBean}. <br>
    * <b>ATTENTION:</b><br>
    * Do NOT modify this list externally.
    * 

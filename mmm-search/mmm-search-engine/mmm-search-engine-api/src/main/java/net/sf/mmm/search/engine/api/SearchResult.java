@@ -26,7 +26,7 @@ public interface SearchResult {
   int getHitCount();
 
   /**
-   * This method gets the hit at the given <code>index</code>.<br>
+   * This method gets the hit at the given <code>index</code>. <br>
    * 
    * @param index is the index of the requested hit. It has to be in the range from <code>0</code> to
    *        <code>{@link #getHitCount()} - 1</code>.
@@ -65,7 +65,7 @@ public interface SearchResult {
    * 
    * @param pageIndex is the {@link SearchResultPage#getPageIndex() page index} of the requested
    *        {@link SearchResultPage search result}. This should be in the range from <code>0</code> to
-   *        <code>{@link #getPageCount()} - 1</code>.<br>
+   *        <code>{@link #getPageCount()} - 1</code>. <br>
    *        It can NOT be guaranteed that the <code>pageIndex</code> is always valid in the sense as described
    *        above (the search index may have been modified in the meantime). An implementation has to be able
    *        to handle calls with a <code>pageIndex</code> greater or equal to
@@ -83,7 +83,7 @@ public interface SearchResult {
    * 
    * @param pageIndex is the {@link SearchResultPage#getPageIndex() page index} of the requested
    *        {@link SearchResultPage search result}. This should be in the range from <code>0</code> to
-   *        <code>{@link #getPageCount(int) getPageCount(hitsPerPage)} - 1</code> .<br>
+   *        <code>{@link #getPageCount(int) getPageCount(hitsPerPage)} - 1</code> . <br>
    *        It can NOT be guaranteed that the <code>pageIndex</code> is always valid in the sense as described
    *        above (the search index may have been modified in the meantime). An implementation has to be able
    *        to handle calls with a <code>pageIndex</code> greater or equal to

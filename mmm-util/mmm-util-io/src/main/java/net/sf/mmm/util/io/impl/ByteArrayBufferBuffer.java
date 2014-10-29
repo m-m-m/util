@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This is the regular implementation of the {@link AbstractByteArrayBufferBuffer}.<br>
+ * This is the regular implementation of the {@link AbstractByteArrayBufferBuffer}. <br>
  * <b>ATTENTION:</b><br>
  * This class is NOT intended to be exposed. It should only be used internally by some class or component.
  * 

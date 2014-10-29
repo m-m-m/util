@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for utilities that help to deal with exceptions.
- * <a name="documentation"/><h2>Util Exception API</h2>
+ * <a name="documentation"></a><h2>Util Exception API</h2>
  * This package contains the {@link net.sf.mmm.util.exception.api.NlsThrowable advanced exceptions}
  * with support for NLS (I18N/L10N), UUIDs, error codes, etc. - especially
  * {@link net.sf.mmm.util.exception.api.NlsRuntimeException}. Further it contains various exceptions for common errors

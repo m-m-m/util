@@ -13,7 +13,7 @@ import net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName;
  * attribute of a {@link net.sf.mmm.util.pojo.api.Pojo} that can be accessed directly via a
  * {@link java.lang.reflect.Field} or via a {@link java.lang.reflect.Method} (getter, setter, etc.). This
  * {@link PojoPropertyDescriptor} is an alternative to {@link java.beans.PropertyDescriptor} but only has
- * focus on reflectively accessing objects. Therefore it works on any {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+ * focus on reflectively accessing objects. Therefore it works on any {@link net.sf.mmm.util.pojo.api.Pojo}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

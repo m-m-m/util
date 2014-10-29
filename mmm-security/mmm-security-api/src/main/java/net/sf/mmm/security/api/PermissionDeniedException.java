@@ -4,7 +4,7 @@ package net.sf.mmm.security.api;
 
 /**
  * This exception is thrown if a <em>subject</em> (see e.g. {@link java.security.Principal}) tried to perform
- * an <em>operation</em> on an <code>object</code> without having the appropriate permissions.<br>
+ * an <em>operation</em> on an <code>object</code> without having the appropriate permissions. <br>
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

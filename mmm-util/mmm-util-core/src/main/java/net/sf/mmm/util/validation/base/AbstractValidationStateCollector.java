@@ -9,7 +9,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
 /**
  * This is the abstract base implementation of {@link ValidationState} that wraps an existing
  * {@link ValidationState} and allows to {@link #onFailure(ValidationFailure) collect the potential failures}
- * for a part of the validation process.<br/>
+ * for a part of the validation process. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -61,8 +61,8 @@ public abstract class AbstractValidationStateCollector implements ValidationStat
   /**
    * {@inheritDoc}
    * 
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * This method only returns <code>false</code> if a {@link ValidationFailure} has been
    * {@link #onFailure(ValidationFailure) collected} by this instance. It may therefore return
    * <code>true</code> even if the {@link #getDelegate() delegate} would return <code>false</code>.

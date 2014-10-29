@@ -9,7 +9,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 
 /**
  * This is the interface for a {@link UiWidgetPanel panel widget} that shows a single {@link #getChild()
- * child} that is surrounded by a {@link #getLabel() labeled} border.<br/>
+ * child} that is surrounded by a {@link #getLabel() labeled} border. <br>
  * Here you can see an example (the options are the {@link #setChild(UiWidgetRegular) content} and not part of
  * the {@link UiWidgetAbstractBorderPanel} itself):
  * 

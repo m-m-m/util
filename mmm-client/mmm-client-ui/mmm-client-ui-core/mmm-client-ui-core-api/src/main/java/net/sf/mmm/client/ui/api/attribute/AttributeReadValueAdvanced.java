@@ -16,8 +16,8 @@ public abstract interface AttributeReadValueAdvanced<VALUE> extends AttributeRea
   /**
    * {@inheritDoc}
    * 
-   * This will typically be a newly created object.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This will typically be a newly created object. <br>
+   * <b>ATTENTION:</b><br>
    * If the current value entered by the user can NOT be parsed, this method will catch and ignore the
    * exception and return <code>null</code> instead. If you want to do validation and give feedback to the
    * user please use {@link #getValueOrException(Object)} instead. However, there are higher-level ways to do
@@ -49,8 +49,8 @@ public abstract interface AttributeReadValueAdvanced<VALUE> extends AttributeRea
    * After calling {@link AttributeWriteValueAdvanced#setValue(Object)} the value can be modified (by the user
    * in case of a widget). Then calls to {@link #getValue()} will return the current value with its potential
    * modifications (as a new object). This method will ensure to get the value that was
-   * {@link AttributeWriteValueAdvanced#setValue(Object) set} before by the program.<br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link AttributeWriteValueAdvanced#setValue(Object) set} before by the program. <br>
+   * <b>ATTENTION:</b><br>
    * The original value shall never be modified to avoid undesired side effects. Various features such as
    * {@link AttributeWriteValueAdvanced#resetValue()} rely on this fact. Therefore {@link #getValue()} will
    * always return a new instance.

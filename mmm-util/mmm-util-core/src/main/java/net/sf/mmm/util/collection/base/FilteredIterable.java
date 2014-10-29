@@ -9,7 +9,7 @@ import net.sf.mmm.util.filter.api.Filter;
 /**
  * This is an implementation of an {@link Iterator} that adapts another {@link Iterator} but only
  * {@link #iterator() iterates} the elements that are {@link Filter#accept(Object) accepted} by a given
- * {@link Filter}.<br/>
+ * {@link Filter}. <br>
  * <b>ATTENTION:</b><br>
  * This implementation is using {@link FilteredIterator}. Please read according javadoc first.
  * 

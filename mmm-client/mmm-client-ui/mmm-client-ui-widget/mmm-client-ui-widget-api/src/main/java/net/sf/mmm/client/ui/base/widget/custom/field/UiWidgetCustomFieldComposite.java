@@ -13,8 +13,8 @@ import net.sf.mmm.client.ui.api.widget.field.UiWidgetField;
 /**
  * This is the abstract base class for a {@link UiWidgetCustomField custom field widget} that is composed out
  * of multiple {@link UiWidgetField field widgets} and potentially other widgets. Extend this class to create
- * a widget for a composite {@link net.sf.mmm.util.lang.api.Datatype}.<br/>
- * <b>ATTENTION:</b><br/>
+ * a widget for a composite {@link net.sf.mmm.util.lang.api.Datatype}. <br>
+ * <b>ATTENTION:</b><br>
  * This class assumes that you create and {@link #addChild(UiWidgetRegular) add} the child widgets in the
  * constructor (of your sub-class) and requires that at least one of them is a {@link UiWidgetField}.
  * 

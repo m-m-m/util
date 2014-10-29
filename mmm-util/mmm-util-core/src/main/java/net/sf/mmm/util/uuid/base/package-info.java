@@ -3,7 +3,7 @@
 /**
  * Contains the public implementation of the 
  * {@link net.sf.mmm.util.uuid.api UUID-Util API}. 
- * <a name="documentation"/><h2>UUID-Util Base</h2>
+ * <a name="documentation"></a><h2>UUID-Util Base</h2>
  * This package contains a simple implementation of the 
  * {@link net.sf.mmm.util.uuid.api.UuidFactory}. 
  */

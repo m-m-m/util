@@ -40,7 +40,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
   private PojoDescriptorBuilderFactory descriptorBuilderFactory;
 
   /**
-   * The constructor.<br>
+   * The constructor. <br>
    * <b>ATTENTION:</b><br>
    * You need to {@link #initialize()} this component before it can be used.
    */

@@ -80,7 +80,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
 
   /**
    * This method gets the optional {@link PojoPathFunctionManager} for {@link PojoPathFunction}s that are
-   * global for this {@link PojoPathNavigator} instance.<br>
+   * global for this {@link PojoPathNavigator} instance. <br>
    * <b>ATTENTION:</b><br>
    * {@link PojoPathFunction}s provided by this {@link PojoPathFunctionManager} need to be stateless /
    * thread-safe.
@@ -411,7 +411,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   /**
    * This method gets the value for the single {@link CachingPojoPath#getSegment() segment} of the given
    * <code>currentPath</code> from the {@link CachingPojoPath#getPojo() pojo} of its
-   * {@link CachingPojoPath#getParent() parent}.<br>
+   * {@link CachingPojoPath#getParent() parent}. <br>
    * If the <code>state</code> {@link PojoPathState#isGetType() indicates} an invocation from
    * {@link #getType(GenericType, String, boolean, PojoPathContext) getType}, only the
    * {@link CachingPojoPath#setPojoType(GenericType) pojo-type} should be determined. Otherwise if the result

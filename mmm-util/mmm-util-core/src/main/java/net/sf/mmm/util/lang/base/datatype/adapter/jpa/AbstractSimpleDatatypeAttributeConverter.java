@@ -8,7 +8,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This is the abstract base implementation of {@link AttributeConverter} to allow the usage of
- * {@link SimpleDatatype}s in JPA {@link javax.persistence.Entity} classes.<br/>
+ * {@link SimpleDatatype}s in JPA {@link javax.persistence.Entity} classes. <br>
  * If you create an implementation of {@link SimpleDatatype} that you want to use in persistent
  * {@link javax.persistence.Entity entities}, you need to:
  * <ol>

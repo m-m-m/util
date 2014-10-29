@@ -18,7 +18,7 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
 import net.sf.mmm.util.pool.api.ByteArrayPool;
 
 /**
- * This is the implementation of the {@link DetectorStreamBuffer} interface.<br>
+ * This is the implementation of the {@link DetectorStreamBuffer} interface. <br>
  * It is based on the idea that each {@link DetectorStreamProcessor} in the chain has its own
  * {@link DetectorStreamBuffer} instance. Therefore it holds the according {@link DetectorStreamProcessor}
  * building a pair of buffer+processor. Further it holds an instance of the predecessor and thereby represents

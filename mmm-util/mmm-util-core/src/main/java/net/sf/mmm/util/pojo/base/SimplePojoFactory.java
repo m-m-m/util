@@ -9,7 +9,7 @@ import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
- * This is the simplest implementation of the {@link PojoFactory} interface.<br>
+ * This is the simplest implementation of the {@link PojoFactory} interface. <br>
  * It uses {@link Class#newInstance()} to create {@link #newInstance(Class) new instances}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

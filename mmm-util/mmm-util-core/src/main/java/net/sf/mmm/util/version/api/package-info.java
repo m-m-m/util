@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for dealing with versions.
- * <a name="documentation"/><h2>Version-Util API</h2>
+ * <a name="documentation"></a><h2>Version-Util API</h2>
  * Versions are everywhere. From single java files to complex software products
  * you are dealing with version control and version identification.
  * Unfortunately versions are often treated as plain strings with unclear syntax

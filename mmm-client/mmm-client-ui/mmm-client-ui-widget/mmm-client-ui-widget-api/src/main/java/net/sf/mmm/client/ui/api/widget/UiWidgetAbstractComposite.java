@@ -13,7 +13,7 @@ public abstract interface UiWidgetAbstractComposite extends UiWidget {
 
   /**
    * This method determines the index of the given <code>child</code> in the list of {@link #getChild(int)
-   * children} of this composite.<br/>
+   * children} of this composite. <br>
    * The signature is by intention not using the generic to support delegation without suffering by the java
    * compiler.
    * 

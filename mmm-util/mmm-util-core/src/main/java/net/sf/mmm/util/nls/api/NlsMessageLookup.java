@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.api;
 import java.util.Map;
 
 /**
- * This interface provides a {@link #getMessage(String, Map) generic lookup} of a {@link NlsMessage}.<br/>
+ * This interface provides a {@link #getMessage(String, Map) generic lookup} of a {@link NlsMessage}. <br>
  * 
  * @see NlsBundleWithLookup
  * 

@@ -56,7 +56,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * This method converts the given <code>value</code> from the {@link #getDelegate() delegate widget} to the
    * value of this widget. This typically has to be implemented with your custom datatype conversion. In case
    * that {@literal <VALUE>} and {@literal <DELEGATE_VALUE>} are the same you can just return the given
-   * <code>value</code>.<br/>
+   * <code>value</code>. <br>
    * A typical implementation shall look like this:
    *
    * <pre>
@@ -74,7 +74,7 @@ public abstract class UiWidgetCustomFieldAtomic<VALUE, DELEGATE_VALUE, DELEGATE 
    * This method converts the given <code>value</code> that is going to be set in this widget to the value of
    * the {@link #getDelegate() delegate widget}. This typically has to be implemented with your custom
    * datatype conversion. In case that {@literal <VALUE>} and {@literal <DELEGATE_VALUE>} are the same you can
-   * just return the given <code>value</code>.<br/>
+   * just return the given <code>value</code>. <br>
    * A typical implementation shall look like this:
    *
    * <pre>

@@ -31,7 +31,7 @@ public interface PojoPathNavigator {
 
   /**
    * This method evaluates the given <code>pojoPath</code> for the given <code>pojo</code> using the given
-   * <code>mode</code> and <code>context</code>. It returns the result of the evaluation.<br>
+   * <code>mode</code> and <code>context</code>. It returns the result of the evaluation. <br>
    * <b>ATTENTION:</b><br>
    * If you use {@link PojoPathContext#getCache() caching} for repetitive calls on the same initial
    * <code>pojo</code>, you might get wrong results if intermediate objects have changed
@@ -56,7 +56,7 @@ public interface PojoPathNavigator {
 
   /**
    * This method evaluates the given <code>pojoPath</code> for the given <code>pojo</code> using the given
-   * <code>mode</code> and <code>context</code>. It returns the result of the evaluation.<br>
+   * <code>mode</code> and <code>context</code>. It returns the result of the evaluation. <br>
    * <b>ATTENTION:</b><br>
    * If you use {@link PojoPathContext#getCache() caching} for repetitive calls on the same initial
    * <code>pojo</code>, you might get wrong results if intermediate objects have changed
@@ -86,10 +86,10 @@ public interface PojoPathNavigator {
 
   /**
    * This method determines the result-type for the given <code>{@link PojoPath pojoPath}</code> starting at
-   * the given <code>pojoType</code> using the given <code>context</code>.<br>
+   * the given <code>pojoType</code> using the given <code>context</code>. <br>
    * In other words if {@link #get(Object, String, PojoPathMode, PojoPathContext) get} is invoked on this
    * navigator with an instance of <code>pojoType</code> the result will be an instance of the type returned
-   * by this method.<br>
+   * by this method. <br>
    * Please note that the given {@link PojoPath pojoPath} may be <em>unsafe</em> , what means that it has a
    * {@link PojoPath#getSegment() segment} that points to a property that does NOT exist for the {@link Class}
    * determined for the according {@link net.sf.mmm.util.pojo.api.Pojo}. In other words a {@link PojoPath} is
@@ -118,10 +118,10 @@ public interface PojoPathNavigator {
 
   /**
    * This method determines the result-type for the given <code>{@link PojoPath pojoPath}</code> starting at
-   * the given <code>pojoType</code> using the given <code>context</code>.<br>
+   * the given <code>pojoType</code> using the given <code>context</code>. <br>
    * In other words if {@link #get(Object, String, PojoPathMode, PojoPathContext) get} is invoked on this
    * navigator with an instance of <code>pojoType</code> the result will be an instance of the type returned
-   * by this method.<br>
+   * by this method. <br>
    * Please note that the given {@link PojoPath pojoPath} may be <em>unsafe</em> , what means that it has a
    * {@link PojoPath#getSegment() segment} that points to a property that does NOT exist for the {@link Class}
    * determined for the according {@link net.sf.mmm.util.pojo.api.Pojo}. In other words a {@link PojoPath} is
@@ -153,7 +153,7 @@ public interface PojoPathNavigator {
    * <code>pojo</code> using the given <code>mode</code> and <code>context</code>. It acts like a
    * {@link #get(Object, String, PojoPathMode, PojoPathContext) get} on the {@link PojoPath#getParentPath()
    * parent-path} and then setting the <code>value</code> for the remaining {@link PojoPath#getSegment()
-   * segment} on the result.<br>
+   * segment} on the result. <br>
    * The result of this method is defined as following:<br>
    * <ul>
    * <li>If the last {@link PojoPath#getSegment() segment} points to a {@link PojoPathFunction} the result of
@@ -192,7 +192,7 @@ public interface PojoPathNavigator {
 
   /**
    * This method creates a lazy, immutable {@link Map} reflecting the given
-   * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+   * {@link net.sf.mmm.util.pojo.api.Pojo}. <br>
    * <b>ATTENTION:</b><br>
    * The {@link Map} will be {@link net.sf.mmm.util.collection.base.AbstractSimpleMap simple} and will NOT
    * support {@link Map#size() size} or {@link Map#keySet() iteration}.
@@ -207,7 +207,7 @@ public interface PojoPathNavigator {
 
   /**
    * This method creates a lazy, immutable {@link Map} reflecting the given
-   * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+   * {@link net.sf.mmm.util.pojo.api.Pojo}. <br>
    * <b>ATTENTION:</b><br>
    * The {@link Map} will be {@link net.sf.mmm.util.collection.base.AbstractSimpleMap simple} and will NOT
    * support {@link Map#size() size} or {@link Map#keySet() iteration}.

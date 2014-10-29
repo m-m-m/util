@@ -16,12 +16,12 @@ public enum PojoPathMode {
    * This mode causes the {@link PojoPathNavigator} to
    * {@link net.sf.mmm.util.pojo.api.PojoFactory#newInstance(Class) create}
    * {@link net.sf.mmm.util.pojo.api.Pojo}s if they are <code>null</code>. This applies to intermediate
-   * {@link net.sf.mmm.util.pojo.api.Pojo}s as well as the final result of the {@link PojoPath}.<br>
+   * {@link net.sf.mmm.util.pojo.api.Pojo}s as well as the final result of the {@link PojoPath}. <br>
    * <ul>
    * <li>For a &#171;Property&#187; this is done via the {@link Class type} of the according setter.</li>
    * <li>For an &#171;Index&#187; this is done via the
    * {@link net.sf.mmm.util.reflect.api.GenericType#getComponentType() component-type} of the according
-   * getter.<br>
+   * getter. <br>
    * Therefore {@link java.util.List}s need to be declared using generics. If the &#171;Index&#187; is greater
    * or equal to the {@link net.sf.mmm.util.reflect.api.CollectionReflectionUtil#getSize(Object) size} of the
    * ordered container, its size is increased as necessary. For {@link java.util.List}s this is done by

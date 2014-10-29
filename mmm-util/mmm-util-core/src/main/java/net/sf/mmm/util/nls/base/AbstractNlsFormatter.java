@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is the abstract base implementation of the {@link NlsFormatter} interface.<br>
+ * This is the abstract base implementation of the {@link NlsFormatter} interface. <br>
  * You should extend this class rather than directly implementing the {@link NlsFormatter} interface to gain
  * compatibility with further releases.
  * 

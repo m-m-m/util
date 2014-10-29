@@ -10,19 +10,19 @@ import java.lang.annotation.Target;
 
 /**
  * A {@link CliOption} is used to annotate a property (member variable of some class or setter-method) that
- * should be set from a main-program via a commandline option.<br>
+ * should be set from a main-program via a commandline option. <br>
  * If the annotated property is a {@link java.lang.reflect.Field} it may NOT be
  * {@link java.lang.reflect.Modifier#STATIC static} or {@link java.lang.reflect.Modifier#FINAL final} and by
  * convention it should be {@link java.lang.reflect.Modifier#PRIVATE private}. Setters may NOT be
  * {@link java.lang.reflect.Modifier#STATIC static} and by convention they should be
- * {@link java.lang.reflect.Modifier#PUBLIC public}.<br>
+ * {@link java.lang.reflect.Modifier#PUBLIC public}. <br>
  * The annotated property should be initialized properly at construction in order to determine whether the
  * option was triggered or not. For non-primitive types the property should be initialized with
- * <code>null</code>.<br>
+ * <code>null</code>. <br>
  * When the main-program is invoked an {@link CliOption} can be triggered via its {@link #name() name} or one
  * of its {@link #aliases() aliases}. Options with a type other than <code>boolean</code> need to be followed
  * by a value as CLI parameter. This value has to be quoted in the commandline if it contains whitespaces or
- * other characters that are interpreted by the shell (e.g. backslash in Unix).<br>
+ * other characters that are interpreted by the shell (e.g. backslash in Unix). <br>
  * The type of the annotated property has to be supported by the CLI implementation so the value can be
  * converted properly. The following types are guaranteed to be supported:
  * <table border="1">
@@ -90,7 +90,7 @@ public @interface CliOption {
   String NAME_VERBOSE = "--verbose";
 
   /**
-   * The actual option (e.g. "--help").<br>
+   * The actual option (e.g. "--help"). <br>
    * By convention this should be a GNU long-named option starting with "--" followed by a self-explanatory
    * name where terms may with separated with hyphens (e.g. "--with-extra-option").
    */
@@ -129,10 +129,10 @@ public @interface CliOption {
 
   /**
    * The {@link CliMode#id() ID} of the {@link CliMode mode}. A typical main-program has different modes how
-   * it can be invoked.<br>
+   * it can be invoked. <br>
    * The {@link CliOption options} of a program can be split into groups that represent such mode. The options
    * are ordered by their mode in the help-usage-output and modes allow to express that an {@link CliOption
-   * option} is {@link #required() required} only in a specific mode.<br>
+   * option} is {@link #required() required} only in a specific mode. <br>
    * {@link CliOption Options} can only be combined as command-line arguments if their {@link #mode() modes}
    * are compatible. This means that the modes have to be identical or one mode {@link CliMode#parentIds()
    * extends} the other. In the latter case the most special mode is triggered. For each {@link #mode() mode}

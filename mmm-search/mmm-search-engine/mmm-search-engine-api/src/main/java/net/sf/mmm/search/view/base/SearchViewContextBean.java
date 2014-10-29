@@ -38,9 +38,9 @@ public class SearchViewContextBean implements SearchViewContext {
   private SearchViewConfiguration viewConfiguration;
 
   /**
-   * The constructor.<br>
+   * The constructor. <br>
    * It will fill all parameters except for {@link #setResultPage(SearchResultPage) result-page} and
-   * {@link #setException(NlsRuntimeException) exception}.<br>
+   * {@link #setException(NlsRuntimeException) exception}. <br>
    * ATTENTION: This constructor will automatically {@link ServletRequest#setAttribute(String, Object) set}
    * {@link SearchViewContextBean itself} (this) as attribute of the given <code>request</code>.
    * 

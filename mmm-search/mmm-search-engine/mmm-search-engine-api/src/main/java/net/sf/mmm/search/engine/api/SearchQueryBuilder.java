@@ -6,10 +6,10 @@ import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.util.component.api.Refreshable;
 
 /**
- * This is the interface used to build {@link SearchQuery search-queries}.<br>
+ * This is the interface used to build {@link SearchQuery search-queries}. <br>
  * You can either specify the query as string and
  * {@link #parseStandardQuery(String, SearchQueryBuilderOptions) parse} it or {@link #createComplexQuery()
- * create} your query constructively.<br>
+ * create} your query constructively. <br>
  * Here is an example:<br>
  * 
  * <pre>
@@ -56,7 +56,7 @@ public interface SearchQueryBuilder extends Refreshable {
 
   /**
    * This method parses the given <code>query</code> string in the standard query language of this
-   * specification.<br>
+   * specification. <br>
    * 
    * @see #parseStandardQuery(String, SearchQueryBuilderOptions)
    * 
@@ -69,7 +69,7 @@ public interface SearchQueryBuilder extends Refreshable {
 
   /**
    * This method parses the given <code>query</code> string in the standard query language of this
-   * specification.<br>
+   * specification. <br>
    * The standard query language is defined by the following EBNF grammar:
    * 
    * <pre>

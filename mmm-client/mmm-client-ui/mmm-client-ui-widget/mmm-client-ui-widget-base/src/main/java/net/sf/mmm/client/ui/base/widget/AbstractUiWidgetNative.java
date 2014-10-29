@@ -31,7 +31,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
 /**
  * This is the abstract base implementation of {@link UiWidget} or more precisely
  * {@link net.sf.mmm.client.ui.api.widget.UiWidgetNative}. It is independent of any native toolkit via
- * {@link UiWidgetAdapter} that is {@link #getWidgetAdapter() lazily created}.<br/>
+ * {@link UiWidgetAdapter} that is {@link #getWidgetAdapter() lazily created}. <br>
  * If you want to create an implementation of all the {@link UiWidget}s for a native UI toolkit, you are
  * strongly encouraged to extend from this class and its subclasses (all classes named
  * <code>AbstractUiWidget*</code>).
@@ -139,8 +139,8 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   }
 
   /**
-   * This method gives access to {@link #getWidgetAdapter()}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gives access to {@link #getWidgetAdapter()}. <br>
+   * <b>ATTENTION:</b><br>
    * This method is only for internal purposes when implementing {@link UiWidget}s. It shall never be used by
    * regular users (what also applies for all classes in this <code>base</code> packages).
    *
@@ -192,7 +192,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   }
 
   /**
-   * This method creates the {@link #getWidgetAdapter() widget adapter}.<br/>
+   * This method creates the {@link #getWidgetAdapter() widget adapter}. <br>
    * This design is done to give more flexibility by overriding and also for lazy initialization of the
    * widget.
    *
@@ -892,7 +892,7 @@ public abstract class AbstractUiWidgetNative<ADAPTER extends UiWidgetAdapter, VA
   /**
    * {@inheritDoc}
    *
-   * <br/>
+   * <br>
    * It performs the {@link #validate(ValidationState) validation} of this widget by delegating to
    * {@link #validateRecursive(ValidationState)}. It may be overridden to collect potential validation
    * failures and attach them to this widget. You should not forget the super-call in such case.

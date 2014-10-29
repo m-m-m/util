@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides common datatypes.
- * <a name="documentation"/><h2>Datatype API</h2> 
+ * <a name="documentation"></a><h2>Datatype API</h2> 
  * Java offers very generic datatypes like {@link java.lang.String}, 
  * {@link java.lang.Boolean}, or {@link java.lang.Number}. For structured data 
  * models it is often desired to use more specific 

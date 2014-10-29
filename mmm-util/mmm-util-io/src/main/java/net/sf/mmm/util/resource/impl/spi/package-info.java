@@ -3,7 +3,7 @@
 /**
  * Contains the implementations of the SPI (service-provider-interface) for 
  * {@link net.sf.mmm.util.resource.api.DataResource data-resources}.
- * <a name="documentation"/><h2>Resource-Util Impl SPI</h2>
+ * <a name="documentation"></a><h2>Resource-Util Impl SPI</h2>
  * Contains the {@link net.sf.mmm.util.resource.api.spi.DataResourceProvider} 
  * implementations for different types of 
  * {@link net.sf.mmm.util.resource.api.DataResource resources}.

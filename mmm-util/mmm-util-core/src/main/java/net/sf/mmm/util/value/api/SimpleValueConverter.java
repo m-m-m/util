@@ -4,7 +4,7 @@ package net.sf.mmm.util.value.api;
 
 /**
  * This is the interface for a converter that {@link #convert(Object, Object, Class) converts} a value of the
- * type &lt;SOURCE&gt; to the type &lt;TARGET&gt;.<br>
+ * type &lt;SOURCE&gt; to the type &lt;TARGET&gt;. <br>
  * <b>ATTENTION:</b><br>
  * An implementation of this interface should be stateless and thread-safe.
  * 

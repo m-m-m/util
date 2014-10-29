@@ -12,7 +12,7 @@ package net.sf.mmm.util.cli.api;
 public interface CliModeObject {
 
   /**
-   * The {@link CliMode#id() ID} of the {@link #getMode() mode}.<br>
+   * The {@link CliMode#id() ID} of the {@link #getMode() mode}. <br>
    * <b>ATTENTION:</b><br>
    * Please use this method to get the ID as {@link #getMode()} may return <code>null</code>.
    * 

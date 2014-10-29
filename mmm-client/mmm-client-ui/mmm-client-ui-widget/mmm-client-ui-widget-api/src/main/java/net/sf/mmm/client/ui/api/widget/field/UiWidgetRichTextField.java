@@ -26,8 +26,8 @@ public interface UiWidgetRichTextField extends UiWidgetTextualInputField<String>
   /**
    * {@inheritDoc}
    * 
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * This method will accept markup (html-fragment). Be careful to prevent XSS attacks by only providing verified
    * markup. This can be achieved in the following ways:
    * <ul>
@@ -38,7 +38,7 @@ public interface UiWidgetRichTextField extends UiWidgetTextualInputField<String>
    * <li>The value itself was verified to contain safe HTML or escaped to do so in the client before calling this method
    * (safest way).</li>
    * </ul>
-   * It is generally forbidden that the value contains JavasSript or CSS.<br/>
+   * It is generally forbidden that the value contains JavasSript or CSS. <br>
    * TODO: It would be nice to have a way that this method does the latter strategy automatically.
    */
   @Override

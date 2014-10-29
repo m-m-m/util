@@ -47,7 +47,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
 
   /**
    * An UTF-8 two-byte-sequence has the form <code>110xxxxx 10xxxxxx</code>. This is the lower bound to detect
-   * the first char of such sequence.<br>
+   * the first char of such sequence. <br>
    * <b>ATTENTION:</b><br>
    * The bytes <code>0xC0</code> or <code>0xC1</code> would indicate a two-byte-sequence with code-point <=
    * 127 what makes no sense.
@@ -80,7 +80,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
 
   /**
    * An UTF-8 four-byte-sequence has the form <code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code>. This is the
-   * upper bound to detect the first char of such sequence.<br>
+   * upper bound to detect the first char of such sequence. <br>
    * <b>ATTENTION:</b><br>
    * The bytes <code>0xF5</code>, <code>0xF6</code>, or <code>0xF7</code> would lead to a four-byte-sequence
    * with code-point greater than <code>10FFFF</code> which is restricted by <a
@@ -137,8 +137,8 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
   }
 
   /**
-   * This method gets the singleton instance of this {@link EncodingUtilImpl}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link EncodingUtilImpl}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    * 
    * @return the singleton instance.

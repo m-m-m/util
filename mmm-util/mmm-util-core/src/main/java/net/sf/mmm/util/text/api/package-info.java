@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the API for utilities that help with textual operations.
- * <a name="documentation"/><h2>Util Text API</h2>
+ * <a name="documentation"></a><h2>Util Text API</h2>
  * This package contains the API for various textual utilities.
  * {@link net.sf.mmm.util.text.api.Justification} allows simple justification of
- * a short string.<br/>
+ * a short string. <br>
  * For unicode support there is {@link net.sf.mmm.util.text.api.UnicodeUtil}
  * and also {@link net.sf.mmm.util.text.api.DiacriticalMark}.
  * The {@link net.sf.mmm.util.text.api.Singularizer} transforms a term in plural

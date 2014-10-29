@@ -15,7 +15,7 @@ import net.sf.mmm.client.ui.api.common.LengthProperty;
 public abstract interface AttributeWriteLengthProperty extends AttributeReadLengthProperty {
 
   /**
-   * This method sets the specified {@link #getLength(LengthProperty) length} of this object.<br/>
+   * This method sets the specified {@link #getLength(LengthProperty) length} of this object. <br>
    * E.g. the call of
    * <code>{@link #setLength(LengthProperty, Length) setLength}({@link LengthProperty#WIDTH}, value)</code>
    * will return the same result as <code>{@link AttributeWriteSize#setWidth(Length) setWidth}(value)</code>.

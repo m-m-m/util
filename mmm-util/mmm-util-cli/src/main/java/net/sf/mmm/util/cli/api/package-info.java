@@ -3,7 +3,7 @@
 /**
  * Provides the API for utilities that help to build
  * command-line-interfaces (CLI).
- * <a name="documentation"/><h2>CLI API</h2>
+ * <a name="documentation"></a><h2>CLI API</h2>
  * This package provides the API to create a command-line interface (CLI) for a main program
  * easily.
  * <h3>The Problem</h3>
@@ -14,7 +14,7 @@
  * an object-oriented language as java. A main-program often starts easy and
  * then over the time options and arguments are added. When you want to write
  * a maintainable main-program you want to have more infrastructure than just
- * having a string-array lost in a static method.<br>
+ * having a string-array lost in a static method. <br>
  * <h3>The Solution</h3>
  * As a solution we provide {@link net.sf.mmm.util.cli.api.AbstractMain} and
  * {@link net.sf.mmm.util.cli.api.AbstractVersionedMain} that you can extend to build your main program.

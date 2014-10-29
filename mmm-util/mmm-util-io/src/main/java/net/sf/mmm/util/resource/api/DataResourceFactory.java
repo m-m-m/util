@@ -3,7 +3,7 @@
 package net.sf.mmm.util.resource.api;
 
 /**
- * This is the interface for a factory used to create {@link DataResource}s.<br>
+ * This is the interface for a factory used to create {@link DataResource}s. <br>
  * If you want to read resources from configurable locations, you should use this factory. In situations where
  * you want to load a resource, for which you already know the location (e.g. from a specific classpath
  * location) and you are going to wire the location into your code, you can bypass this factory and simply

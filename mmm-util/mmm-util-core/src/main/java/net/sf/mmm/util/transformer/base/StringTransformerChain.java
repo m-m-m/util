@@ -40,7 +40,7 @@ public class StringTransformerChain implements Transformer<String> {
   private StringTransformerRule[] rules;
 
   /**
-   * The non-arg constructor.<br>
+   * The non-arg constructor. <br>
    * <b>NOTE:</b><br>
    * This constructor should not be called directly! It is only intended for reflective access (e.g. for
    * JAXB).
@@ -124,7 +124,7 @@ public class StringTransformerChain implements Transformer<String> {
   }
 
   /**
-   * This method extends this chain with <code>additionalRules</code>.<br>
+   * This method extends this chain with <code>additionalRules</code>. <br>
    * <b>ATTENTION:</b><br>
    * If you want to be able to marshall the chain with JAXB, you have to use
    * {@link StringTransformerChain#StringTransformerChain(String, StringTransformerChain, StringTransformerRule...)}

@@ -6,8 +6,8 @@ package net.sf.mmm.util.lang.api;
  * This (functional) interface allows to implement an external function to check if two objects are considered
  * as {@link #isEqual(Object, Object) equal} independent from the objects {@link Object#equals(Object) equals}
  * method. It allows to switch between {@link EqualsCheckerIsEqual equals}, {@link EqualsCheckerIsSame same}
- * or other implementations. Additionally it is <code>null</code>-aware.<br/>
- * <b>ATTENTION:</b><br/>
+ * or other implementations. Additionally it is <code>null</code>-aware. <br>
+ * <b>ATTENTION:</b><br>
  * For specific custom implementations also a corresponding {@link HashCodeFunction} has to be provided. Due
  * to lambda support we keep these aspects in separate functional interfaces. Containers that accept an
  * {@link EqualsChecker} should also accept a {@link HashCodeFunction} for customization. Unfortunately

@@ -15,16 +15,16 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * <li>A component receiving events only needs to know the {@link EventBus} but not the sender of the events.</li>
  * </ul>
  * This way components can communicate via {@link Event}s without compile time dependency between them. All
- * they need to see is the {@link EventBus} and the {@link Event} itself. <br/>
+ * they need to see is the {@link EventBus} and the {@link Event} itself. <br>
  * This interface exists only for the high abstraction needed for <code>mmm-client</code>. If you want to
  * write a portable client application that can run in different environments (GWT, JavaFx, etc.) then you
  * should use this simplified but normalized API. Otherwise you may want to use an external event bus
  * implementation directly such as <a
- * href="https://code.google.com/p/guava-libraries/wiki/EventBusExplained">guava event bus</a>.<br/>
- * <b>NOTE:</b><br/>
+ * href="https://code.google.com/p/guava-libraries/wiki/EventBusExplained">guava event bus</a>. <br>
+ * <b>NOTE:</b><br>
  * The loose coupling makes flows less easy to see, understand and debug. You should only consider this
  * approach for components that should be decoupled by design. Do not get confused by the beauty of the
- * event-bus pattern and avoid using it where straight method calls should be preferred.<br/>
+ * event-bus pattern and avoid using it where straight method calls should be preferred. <br>
  * E.g. if you have a user-interface with a navigation sub-dialog and various other dialogs they should
  * communicate via {@link EventBus} to update their views accordingly. However, a business component
  * responsible to read and write addresses may get the requirement that in case of a change of an address some

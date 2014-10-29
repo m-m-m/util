@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 
 /**
  * This class is like a {@link Map} to {@link #registerFormatter(NlsFormatter, String, String) register} and
- * {@link #getFormatter(String, String) retrieve} {@link NlsFormatter}s.<br>
+ * {@link #getFormatter(String, String) retrieve} {@link NlsFormatter}s. <br>
  * <b>ATTENTION:</b><br>
  * The {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default formatter} is NOT stored in
  * this map.

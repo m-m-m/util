@@ -7,7 +7,7 @@ import java.io.Writer;
 
 /**
  * This is a wrapper for a writer that allows to map specific characters to a escape sequences given a
- * strings.<br>
+ * strings. <br>
  * The mapping table for escaping is given as string array.
  * 
  * @see EscapeWriter#EscapeWriter(Object, String[], Writer)

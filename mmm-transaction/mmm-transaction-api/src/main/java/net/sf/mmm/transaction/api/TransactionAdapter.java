@@ -23,7 +23,7 @@ public interface TransactionAdapter {
    * This method commits the current transaction without opening a new
    * transaction. It allows to throw an exception in your
    * {@link TransactionCallable callable} but end with a commit rather than a
-   * {@link #rollback()}.<br>
+   * {@link #rollback()}. <br>
    * <b>ATTENTION:</b><br>
    * Please only use this method as end-user if there is no other way to solve
    * your problem.
@@ -33,7 +33,7 @@ public interface TransactionAdapter {
   /**
    * This method performs a rollback of the current transaction. It allows to
    * return from your {@link TransactionCallable callable} without
-   * {@link #commit() committing} and or throwing an exception.<br>
+   * {@link #commit() committing} and or throwing an exception. <br>
    * <b>ATTENTION:</b><br>
    * Please only use this method as end-user if there is no other way to solve
    * your problem.
@@ -41,7 +41,7 @@ public interface TransactionAdapter {
   void rollback();
 
   /**
-   * This method determines if this context holds an active transaction.<br>
+   * This method determines if this context holds an active transaction. <br>
    * This is the case until {@link #commit()} or {@link #rollback()} was called
    * explicitly.
    * 

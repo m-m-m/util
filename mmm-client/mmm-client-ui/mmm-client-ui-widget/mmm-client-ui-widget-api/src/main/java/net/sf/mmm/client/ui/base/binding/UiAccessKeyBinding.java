@@ -45,8 +45,8 @@ public interface UiAccessKeyBinding {
   boolean invokeAccessKey(char key);
 
   /**
-   * This method verifies that there are no conflicts with multiple bindings of the same access key.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method verifies that there are no conflicts with multiple bindings of the same access key. <br>
+   * <b>ATTENTION:</b><br>
    * It is totally legal to create multiple widgets with the same access key. However, there shall never be
    * two widgets visible on the screen at the same time with the same access key. This is what this method
    * verifies for the moment in time when it is called.

@@ -37,7 +37,7 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
 /**
  * This class is a little helper for the simple but common use of JAXB where you simply want to
  * {@link #loadXml(InputStream, Object) read} or {@link #saveXml(Object, OutputStream) write} the XML for a
- * single JAXB annotated java bean.<br/>
+ * single JAXB annotated java bean. <br>
  * <b>ATTENTION:</b><br>
  * This class uses an <code>IDValidator</code> to validate duplicate or unresolved
  * {@link javax.xml.bind.annotation.XmlID}s on {@link #getOrCreateUnmarshaller() un-marshaling}. This is
@@ -317,7 +317,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method saves the given <code>jaxbBean</code> as XML to the given <code>outputStream</code>.<br/>
+   * This method saves the given <code>jaxbBean</code> as XML to the given <code>outputStream</code>. <br>
    * <b>ATTENTION:</b><br>
    * The caller of this method has to {@link OutputStream#close() close} the <code>outputStream</code>.
    *
@@ -331,7 +331,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method saves the given <code>jaxbBean</code> as XML to the given <code>outputStream</code>.<br/>
+   * This method saves the given <code>jaxbBean</code> as XML to the given <code>outputStream</code>. <br>
    * <b>ATTENTION:</b><br>
    * The caller of this method has to {@link OutputStream#close() close} the <code>outputStream</code>.
    *
@@ -351,7 +351,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method saves the given <code>jaxbBean</code> as XML to the given <code>locationUrl</code>.<br/>
+   * This method saves the given <code>jaxbBean</code> as XML to the given <code>locationUrl</code>. <br>
    *
    * @param jaxbBean is the JAXB-bean to save as XML.
    * @param locationUrl is the location URL for the {@link BrowsableResource resource} where to write the XML

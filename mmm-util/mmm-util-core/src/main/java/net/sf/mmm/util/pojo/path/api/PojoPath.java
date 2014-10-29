@@ -4,7 +4,7 @@ package net.sf.mmm.util.pojo.path.api;
 
 /**
  * A {@link PojoPath} is a {@link String} that acts as expression to {@link PojoPathNavigator navigate}
- * (traverse) the object-web spanned by an initial {@link net.sf.mmm.util.pojo.api.Pojo} reflectively.<br>
+ * (traverse) the object-web spanned by an initial {@link net.sf.mmm.util.pojo.api.Pojo} reflectively. <br>
  * As part of the API this interface is mainly used for documentation of what a {@link PojoPath} is all about.
  * For the API-user a {@link PojoPath} is just a {@link #getPojoPath() String} with a specific syntax and
  * semantic. <h3>Syntax</h3> The syntax of a {@link PojoPath} is defined as follows:<br>
@@ -25,7 +25,7 @@ package net.sf.mmm.util.pojo.path.api;
  * of the actual {@link net.sf.mmm.util.pojo.api.Pojo}. If the actual {@link net.sf.mmm.util.pojo.api.Pojo}
  * does NOT have such property, the {@link PojoPath} will be illegal and cause a {@link PojoPathException}.</li>
  * </ul>
- * &#171;Index&#187; is an {@link Integer} that represents the position of an ordered container.<br>
+ * &#171;Index&#187; is an {@link Integer} that represents the position of an ordered container. <br>
  * <ul>
  * <li>If the actual {@link net.sf.mmm.util.pojo.api.Pojo} is an array, the &#171;Index&#187; represents the
  * array-index to access a contained value.</li>
@@ -107,9 +107,9 @@ public interface PojoPath extends PojoPropertyPath {
 
   /**
    * This method gets the <em>index</em> given by the {@link #getSegment() segment} or <code>null</code> if it
-   * is no index.<br>
+   * is no index. <br>
    * An <em>index</em> is an integer that represents the position of an ordered container (array or
-   * {@link java.util.List}).<br>
+   * {@link java.util.List}). <br>
    * If a {@link #getSegment() segment} starts with a Latin digit, it is treated as {@link #getIndex() index}
    * and has to be a {@link Integer#parseInt(String) valid} integer-value. However parsing should be done when
    * this object is constructed and therefore this method should never cause an exception.
@@ -120,9 +120,9 @@ public interface PojoPath extends PojoPropertyPath {
 
   /**
    * This method gets the name of the <em>function</em> given by the {@link #getSegment() segment} or
-   * <code>null</code> if it is no function.<br>
+   * <code>null</code> if it is no function. <br>
    * The <em>function</em>-name {@link PojoPathFunctionManager#getFunction(String) identifies} a
-   * {@link PojoPathFunction} that will be used to evaluate the {@link #getSegment() segment}.<br>
+   * {@link PojoPathFunction} that will be used to evaluate the {@link #getSegment() segment}. <br>
    * If a {@link #getSegment() segment} starts with the character
    * {@link PojoPathFunction#FUNCTION_NAME_PREFIX} (<code>'&#64;'</code>), it is treated as
    * {@link #getFunction() function}.

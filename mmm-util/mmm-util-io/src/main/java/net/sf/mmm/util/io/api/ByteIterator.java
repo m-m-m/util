@@ -23,7 +23,7 @@ public interface ByteIterator {
   /**
    * This method gets the current byte in the iteration. After the call of this method this
    * {@link ByteIterator} points to the next byte in the iteration or to the end if there is no such byte
-   * {@link #hasNext() available}.<br>
+   * {@link #hasNext() available}. <br>
    * <b>ATTENTION:</b><br>
    * You should only call this method if {@link #hasNext()} returns <code>true</code>.
    * 
@@ -37,7 +37,7 @@ public interface ByteIterator {
   /**
    * This method gets the current byte in the iteration. Unlike {@link #next()} this method does NOT modify
    * the state of this {@link ByteIterator}. Therefore the peeked byte does NOT get consumed and repetitive
-   * calls will return the same value.<br>
+   * calls will return the same value. <br>
    * <b>ATTENTION:</b><br>
    * You should only call this method if {@link #hasNext()} returns <code>true</code>.
    * 

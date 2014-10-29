@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.widget.core.UiWidgetTab;
  * contains a number of {@link #getChild(int) children} but only shows one of them at a time. On the top it
  * shows a tab header with the {@link UiWidgetTab#getLabel() labels} of its {@link #getChild(int) children}.
  * The user can click on one of these tabs in order to see the actual {@link UiWidgetTab#getChild() content}
- * of the according tab.<br/>
+ * of the according tab. <br>
  * This design might look a little complicated but gives a lot more flexibility for setting and changing
  * attributes of the {@link UiWidgetTab tab}. For convenience usage there is also
  * {@link #addChild(UiWidgetRegular, String)}.

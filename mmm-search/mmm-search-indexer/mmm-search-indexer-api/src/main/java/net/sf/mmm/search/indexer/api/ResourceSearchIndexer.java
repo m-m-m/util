@@ -23,7 +23,7 @@ public interface ResourceSearchIndexer {
    * This method creates a {@link MutableSearchEntry} for a single {@link DataResource}. It may be used for
    * specific situations when the {@link ConfiguredSearchIndexer} is NOT suitable. You can
    * {@link MutableSearchEntry#setField(String, Object) add} additional fields before
-   * {@link SearchIndexer#add(MutableSearchEntry) adding} it to the index.<br/>
+   * {@link SearchIndexer#add(MutableSearchEntry) adding} it to the index. <br>
    * <b>ATTENTION:</b><br>
    * This method will NOT {@link SearchIndexer#add(MutableSearchEntry) index} the given <code>resource</code>.
    * You have to do that manually after calling this method.
@@ -37,7 +37,7 @@ public interface ResourceSearchIndexer {
   MutableSearchEntry createEntry(SearchIndexer indexer, DataResource resource, String resourceUri);
 
   /**
-   * This method indexes a single {@link DataResource}.<br/>
+   * This method indexes a single {@link DataResource}. <br>
    * <b>ATTENTION:</b><br>
    * If you are indexing many {@link DataResource resources}, you should use
    * {@link #index(SearchIndexer, DataResource, ChangeType, SearchIndexerDataLocation, EntryUpdateVisitor, DataResource)}
@@ -57,8 +57,8 @@ public interface ResourceSearchIndexer {
   void index(SearchIndexer indexer, DataResource resource, ChangeType changeType, SearchIndexerDataLocation location);
 
   /**
-   * This method indexes a single {@link DataResource}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method indexes a single {@link DataResource}. <br>
+   * <b>ATTENTION:</b><br>
    * If you are indexing many {@link DataResource resources}, you should use
    * {@link #index(SearchIndexer, DataResource, ChangeType, SearchIndexerDataLocation, EntryUpdateVisitor, DataResource)}
    * to avoid performance-overhead.

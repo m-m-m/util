@@ -9,8 +9,8 @@ import net.sf.mmm.client.ui.api.event.UiEventExpand;
 
 /**
  * This is the {@link UiHandlerEvent} for the actions {@link #onCollapse(UiEventCollapse)} and
- * {@link #onCollapse(UiEventCollapse)}. <br/>
- * <b>ATTENTION:</b><br/>
+ * {@link #onCollapse(UiEventCollapse)}. <br>
+ * <b>ATTENTION:</b><br>
  * Implementations of this method should only
  * {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible#setVisible(boolean) change the visibility}
  * of objects. Do not misuse this feature for totally different things as this will cause confusion and bad
@@ -56,8 +56,8 @@ public abstract class UiHandlerEventCollapse implements UiHandlerEvent {
 
   // /**
   // * This method is invoked if an {@link UiFeatureCollapse collapsable object} is to be
-  // * {@link UiFeatureCollapse#setCollapsed(boolean) collapsed or expanded}.<br/>
-  // * <b>ATTENTION:</b><br/>
+  // * {@link UiFeatureCollapse#setCollapsed(boolean) collapsed or expanded}. <br>
+  // * <b>ATTENTION:</b><br>
   // * Implementations of this method should only
   // * {@link net.sf.mmm.client.ui.api.attribute.AttributeWriteVisible#setVisible(boolean) change the
   // * visibility} of objects. Do not misuse this feature for totally different things as this will cause

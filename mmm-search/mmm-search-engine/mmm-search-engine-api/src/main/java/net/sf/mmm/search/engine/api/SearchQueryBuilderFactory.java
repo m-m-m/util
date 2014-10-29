@@ -7,7 +7,7 @@ import net.sf.mmm.search.api.config.SearchConfigurationHolder;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a factory used to create a {@link SearchQueryBuilder}.<br/>
+ * This is the interface for a factory used to create a {@link SearchQueryBuilder}. <br>
  * End users should typically use {@link SearchEngine#getQueryBuilder()} instead.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides common datatypes related to phone numbers.
- * <a name="documentation"/><h2>Datatype Phone</h2> 
+ * <a name="documentation"></a><h2>Datatype Phone</h2> 
  * This package provides common datatypes related to phone numbers and 
  * telecommunication.
  */

@@ -150,7 +150,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   /**
    * This method gets the most specific {@link Class} available by the type-safe analyzation of the given
    * generic <code>type</code>. Unlike {@link #getClassBounds(Type)} this method resolves {@link TypeVariable}
-   * s with the proper type they have been bound with.<br>
+   * s with the proper type they have been bound with. <br>
    * 
    * Examples: <br>
    * <table border="1">

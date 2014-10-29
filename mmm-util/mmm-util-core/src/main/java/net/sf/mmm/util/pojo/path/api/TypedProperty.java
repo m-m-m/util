@@ -11,17 +11,17 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * properties of an object-web, then {@link #getParentPath()} will return the path to the parent object
  * containing the actual property identified by {@link #getSegment()}. The entire path including the
  * {@link #getSegment() segment} is accessible via {@link #getPojoPath()}. The actual type of the property may
- * be returned by {@link #getPropertyType()} (if provided at construction time) but is typically omitted.<br/>
- * <b>Example:</b><br/>
- * 
+ * be returned by {@link #getPropertyType()} (if provided at construction time) but is typically omitted. <br>
+ * <b>Example:</b><br>
+ *
  * <pre>
  * public interface MyObject {
  *
- *   {@link TypedProperty}&lt;String> PROPERTY_NAME = new {@link TypedProperty}&lt;>(String.class, "name");
+ *   {@link TypedProperty}&lt;String&gt; PROPERTY_NAME = new {@link TypedProperty}&lt;&gt;(String.class, "name");
  *
- *   {@link TypedProperty}&lt;Integer> PROPERTY_AGE = new {@link TypedProperty}&lt;>(Integer.class, "age");
+ *   {@link TypedProperty}&lt;Integer&gt; PROPERTY_AGE = new {@link TypedProperty}&lt;&gt;(Integer.class, "age");
  *
- *   {@link TypedProperty}&lt;String> PROPERTY_ADDRESS_CITY = new {@link TypedProperty}&lt;>(String.class, "address", MyAddress.TYPED_PROPERTY_CITY);
+ *   {@link TypedProperty}&lt;String&gt; PROPERTY_ADDRESS_CITY = new {@link TypedProperty}&lt;&gt;(String.class, "address", MyAddress.TYPED_PROPERTY_CITY);
  *
  *   String getName();
  *
@@ -31,31 +31,31 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  *   MyAddress getAddress();
  * }
  * </pre>
- * 
+ *
  * Now assuming that you have a generic signature like this:
- * 
+ *
  * <pre>
  * public interface Query {
- *   &lt;T> addCondition({@link TypedProperty}&lt;T> property, Operator operator, T value);
+ *   &lt;T> addCondition({@link TypedProperty}&lt;T&gt; property, Operator operator, T value);
  * }
  * </pre>
- * 
+ *
  * Then you can combine these two things as following:
- * 
+ *
  * <pre>
  * Query myQuery = newQuery();
  * myQuery.addCondition(MyObject.TYPED_PROPERTY_AGE, Operator.GREATER_THAN, Integer.valueOf(42));
  * </pre>
- * 
+ *
  * Now in case you have to change the type of the property "age" for whatever reason to some other type, then
  * you change the type of the getter in parallel with the according {@link TypedProperty} constant. In the
  * same moment the compiler will reject the above code to create the query and you will be able to fix all
  * places where generic access to the "age" property takes place. When using simple string references for
  * property access (<code>addCondition(String, Operator, Object)</code>) instead you would have to pray that
  * you did NOT miss anything in the code or you get errors in production at runtime.
- * 
+ *
  * @param <T> is the generic type of the property.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -78,7 +78,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
 
   /**
    * The constructor.
-   * 
+   *
    * @param segment is the {@link #getSegment() segment} and also the entire {@link #getPojoPath() pojo path}.
    */
   public TypedProperty(String segment) {
@@ -88,7 +88,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
 
   /**
    * The constructor.
-   * 
+   *
    * @param segment - see {@link #getSegment()}.
    * @param parentPath - see {@link #getParentPath()} and {@link #createPath(String...)}.
    */
@@ -99,7 +99,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyType - see {@link #getPropertyType()}.
    * @param segment is the {@link #getSegment() segment} and also the entire {@link #getPojoPath() pojo path}.
    */
@@ -110,7 +110,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
 
   /**
    * The constructor.
-   * 
+   *
    * @param title - see {@link #getTitle()}.
    * @param propertyType - see {@link #getPropertyType()}.
    * @param segment is the {@link #getSegment() segment} and also the entire {@link #getPojoPath() pojo path}.
@@ -127,7 +127,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
 
   /**
    * The constructor.
-   * 
+   *
    * @param property is the existing {@link TypedProperty} to create as nested property.
    * @param path is the parent path to the given <code>property</code>. See also
    *        {@link #createPath(String...)}.
@@ -150,7 +150,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyType - see {@link #getPropertyType()}.
    * @param segment - see {@link #getSegment()}.
    * @param parentPath - see {@link #getParentPath()} and {@link #createPath(String...)}.
@@ -162,7 +162,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
 
   /**
    * The constructor.
-   * 
+   *
    * @param title - see {@link #getTitle()}.
    * @param propertyType - see {@link #getPropertyType()}.
    * @param segment - see {@link #getSegment()}.
@@ -192,7 +192,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
    * same as the {@link #getSegment() segment}. For {@link net.sf.mmm.util.nls.api.NlsMessage NLS} the title
    * will be used as key for resource bundles (outside of this class) and should therefore be stable and not
    * contain special characters.
-   * 
+   *
    * {@inheritDoc}
    */
   @Override
@@ -220,13 +220,13 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
   }
 
   /**
-   * This method gets the type of this property.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the type of this property. <br>
+   * <b>ATTENTION:</b><br>
    * The actual type is optional. The major concept is the generic that ensures type safe access as compile
    * time check. If some API takes a {@link TypedProperty} and requires the property type to be set this must
    * be explicitly documented. By default the type will be omitted, to lower the barrier of defining a
    * {@link TypedProperty} for each property of an entity.
-   * 
+   *
    * @return the type or <code>null</code> if NOT available.
    */
   public Class<T> getPropertyType() {
@@ -246,7 +246,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
   /**
    * This method creates a {@link #getPojoPath() pojo property path} specified by the given
    * <code>segments</code>.
-   * 
+   *
    * @param segments is the array of properties to concat with dot (".").
    * @return the resulting property path as {@link String}.
    */
@@ -267,7 +267,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
   /**
    * This method {@link StringBuilder#append(String) appends} the {@link #getPojoPath() pojo property path}
    * specified by the given <code>segments</code> to the given <code>buffer</code>.
-   * 
+   *
    * @param buffer is the {@link StringBuilder} to append to.
    * @param segments are the path segments for the property.
    */

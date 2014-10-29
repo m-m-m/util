@@ -75,8 +75,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This method gets the singleton instance of this {@link StreamUtilImpl}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * This method gets the singleton instance of this {@link StreamUtilImpl}. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    * 
    * @return the singleton instance.
@@ -118,7 +118,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This method gets the byte-array {@link Pool} used to transfer streams.<br>
+   * This method gets the byte-array {@link Pool} used to transfer streams. <br>
    * The implementation should create byte-arrays with a suitable length (at least 512, suggested is 4096).
    * Override this method to use a real pool implementation.
    * 
@@ -143,7 +143,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method gets the char-array {@link Pool} used to transfer {@link Reader}s and {@link Writer}s. The
-   * implementation should create char-arrays with a suitable length (at least 512, suggested is 2048).<br>
+   * implementation should create char-arrays with a suitable length (at least 512, suggested is 2048). <br>
    * Override this method to use a real pool implementation.
    * 
    * @return the {@link Pool} instance.

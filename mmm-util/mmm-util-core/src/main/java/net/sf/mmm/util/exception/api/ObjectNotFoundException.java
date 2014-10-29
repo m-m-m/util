@@ -6,9 +6,9 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * An {@link ObjectNotFoundException} is thrown if an object was requested but does NOT exist or could NOT be
- * found.<br>
+ * found. <br>
  * This typically happens in situations where required objects are requested by a key (e.g. in a registry-
- * {@link java.util.Map}) but an expected object was NOT registered or the key is wrong for some reason.<br>
+ * {@link java.util.Map}) but an expected object was NOT registered or the key is wrong for some reason. <br>
  * If you design your API please always consider if you should return <code>null</code> or throw an
  * {@link ObjectNotFoundException}.
  *

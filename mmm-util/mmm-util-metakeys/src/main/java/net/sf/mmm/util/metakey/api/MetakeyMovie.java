@@ -4,7 +4,7 @@ package net.sf.mmm.util.metakey.api;
 
 /**
  * This interface is a collection of constants defining keys for
- * metadata-properties of a movie (video content).<br>
+ * metadata-properties of a movie (video content). <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

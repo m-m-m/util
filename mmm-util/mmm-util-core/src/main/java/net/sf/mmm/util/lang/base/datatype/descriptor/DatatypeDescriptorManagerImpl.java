@@ -80,12 +80,12 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   }
 
   /**
-   * This method gets the singleton instance of this {@link DatatypeDescriptorManager}.<br/>
+   * This method gets the singleton instance of this {@link DatatypeDescriptorManager}. <br>
    * Will only work after this class has been properly initialized (by an
    * {@link net.sf.mmm.util.component.api.IocContainer}). This method shall only be used for classes that can
    * not be managed by an {@link net.sf.mmm.util.component.api.IocContainer} e.g. for
-   * {@link javax.xml.bind.annotation.adapters.XmlAdapter}s.<br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link javax.xml.bind.annotation.adapters.XmlAdapter}s. <br>
+   * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    *
    * @return the singleton instance.

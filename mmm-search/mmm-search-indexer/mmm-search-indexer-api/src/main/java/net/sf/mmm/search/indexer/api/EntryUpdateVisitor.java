@@ -7,7 +7,7 @@ import net.sf.mmm.util.event.api.ChangeType;
 /**
  * This is the interface for a visitor that is
  * {@link #visitIndexedEntryUri(String, ChangeType) notified} about updates of
- * {@link net.sf.mmm.search.api.SearchEntry entries}.<br/>
+ * {@link net.sf.mmm.search.api.SearchEntry entries}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

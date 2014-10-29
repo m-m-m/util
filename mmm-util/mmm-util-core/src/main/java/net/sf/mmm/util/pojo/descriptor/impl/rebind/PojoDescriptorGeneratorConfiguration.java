@@ -20,8 +20,8 @@ public interface PojoDescriptorGeneratorConfiguration {
 
   /**
    * This method determines if the given <code>type</code> will be supported and a
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor} implementation shall be generated.<br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor} implementation shall be generated. <br>
+   * <b>ATTENTION:</b><br>
    * You need to require some base class or marker-interface for your {@link net.sf.mmm.util.pojo.api.Pojo}s.
    * Otherwise there is way too much clutter generated and your web-application will grow too big. So never
    * consider to return <code>true</code> for every given type.

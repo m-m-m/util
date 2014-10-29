@@ -29,15 +29,15 @@ import net.sf.mmm.util.lang.api.Orientation;
 /**
  * This interface is the central API for the end-user to create widgets via factory. The key to get started is
  * the {@link net.sf.mmm.client.ui.api.UiContext} that gives access to this {@link UiWidgetFactory} via
- * {@link net.sf.mmm.client.ui.api.UiContext#getWidgetFactory()}.<br/>
+ * {@link net.sf.mmm.client.ui.api.UiContext#getWidgetFactory()}. <br>
  * Besides fabrication there are also custom widgets at a higher level - see
- * <code>net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom</code> for details.<br/>
+ * <code>net.sf.mmm.client.ui.base.widget.custom.UiWidgetCustom</code> for details. <br>
  * While {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative} allows to create any
  * {@link UiWidget} via a generic and stable API this interface defines a higher-level factory that offers
  * more comfort. So {@link net.sf.mmm.client.ui.api.widget.factory.UiWidgetFactoryNative} is the low-level
  * factory to abstract from the underlying implementation this factory is the higher-level
  * {@link net.sf.mmm.util.component.api.Api API} for end-users and is implemented independent from the UI
- * toolkit.<br/>
+ * toolkit. <br>
  * For generic access you can do:
  *
  * <pre>
@@ -68,7 +68,7 @@ import net.sf.mmm.util.lang.api.Orientation;
  * higher level features such as e.g. the <em>editor pattern</em>. So see
  * <code>net.sf.mmm.client.ui.base.widget.custom.pattern.UiWidgetCustomEditor</code> for more.
  *
- * <b>ATTENTION:</b><br/>
+ * <b>ATTENTION:</b><br>
  * This is a {@link net.sf.mmm.util.component.api.Api#EXTENDABLE_INTERFACE extendable interface}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -96,8 +96,8 @@ public interface UiWidgetFactory extends AbstractUiWidgetFactoryNative, Abstract
    * instance of {@link net.sf.mmm.client.ui.api.handler.action.UiHandlerActionSave} will create a save-button
    * that invokes
    * {@link net.sf.mmm.client.ui.api.handler.action.UiHandlerActionSave#onSave(net.sf.mmm.client.ui.api.event.UiEvent)}
-   * if clicked.<br/>
-   * <b>ATTENTION:</b><br/>
+   * if clicked. <br>
+   * <b>ATTENTION:</b><br>
    * This method will fail with an exception if the given <code>handler</code> implements more than one known
    * {@link UiHandlerAction} interface. Use {@link #createButton(Class, UiHandlerAction)} to prevent this.
    *

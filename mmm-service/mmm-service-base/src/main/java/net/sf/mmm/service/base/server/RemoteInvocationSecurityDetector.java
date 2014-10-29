@@ -38,7 +38,7 @@ public interface RemoteInvocationSecurityDetector {
    * Determines if a {@link net.sf.mmm.service.api.RemoteInvocationCall} is <em>secured</em>. Here secured
    * means that it can not be invoked before the {@link #isLogin(AnnotatedElement) login operation} has been
    * invoked and a {@link net.sf.mmm.service.api.CsrfToken} has been
-   * {@link CsrfTokenManager#generateInitialToken() generated}.<br/>
+   * {@link CsrfTokenManager#generateInitialToken() generated}. <br>
    * A typical implementation shall honor common standards such as JSR 250 so
    * {@link net.sf.mmm.service.api.RemoteInvocationCall} will be considered as secured if annotated with
    * {@link javax.annotation.security.RolesAllowed} and will not be secured if annotated with

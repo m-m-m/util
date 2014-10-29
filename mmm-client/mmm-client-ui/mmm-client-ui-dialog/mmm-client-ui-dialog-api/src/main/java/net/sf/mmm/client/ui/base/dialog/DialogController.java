@@ -194,10 +194,10 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
    * This method gets called whenever this {@link DialogController} is to be shown. There are two cases to
    * distinguish:
    * <ul>
-   * <li><b>direct</b><br/>
+   * <li><b>direct</b><br>
    * This {@link DialogController} is identified by the given {@link DialogPlace}. It is the leaf of the
    * {@link DialogController}-hierarchy that is to be displayed.</li>
-   * <li><b>indirect</b><br/>
+   * <li><b>indirect</b><br>
    * Because of a direct request to {@link #doShow(DialogPlace) show} a dialog, its parent (and ancestors)
    * will be shown that will embed their child dialog in the {@link DialogSlot} returned by this method.</li>
    * </ul>
@@ -248,7 +248,7 @@ public abstract class DialogController<VIEW extends UiWidget> extends AbstractDi
   /**
    * This method has to be overridden with the custom logic to embed a given {@link DialogController} as
    * sub-dialog in a predefined slot. If this {@link DialogController} represents a leaf-dialog than can not
-   * have sub-dialogs this method will be never called.<br/>
+   * have sub-dialogs this method will be never called. <br>
    * Here is a typical example:
    *
    * <pre>

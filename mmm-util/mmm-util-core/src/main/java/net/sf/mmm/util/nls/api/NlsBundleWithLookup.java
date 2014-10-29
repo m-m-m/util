@@ -6,8 +6,8 @@ import java.util.Map;
 
 /**
  * This is the interface for {@link NlsBundle}s that require {@link #getMessage(String, Map) generic lookup} of a
- * {@link NlsMessage}.<br/>
- * <b>Note:</b><br/>
+ * {@link NlsMessage}. <br>
+ * <b>Note:</b><br>
  * Please only use this interface when the {@link #getMessage(String, Map)} is really required. Otherwise only extend
  * {@link NlsBundle}.
  * 

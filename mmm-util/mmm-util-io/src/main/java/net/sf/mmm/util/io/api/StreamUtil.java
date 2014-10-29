@@ -16,7 +16,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a collection of utility functions that help to deal with {@link InputStream}s,
- * {@link OutputStream}s, {@link Reader}s and {@link Writer}s.<br>
+ * {@link OutputStream}s, {@link Reader}s and {@link Writer}s. <br>
  * <b>Information:</b><br>
  * Whenever the javadoc of a method specifies that an object (stream, reader or writer) is closed, then this
  * means that it will be closed on successful return of the method as well as in an exceptional state. If it
@@ -34,7 +34,7 @@ public interface StreamUtil {
   String CDI_NAME = "net.sf.mmm.util.io.api.StreamUtil";
 
   /**
-   * This method reads the contents of the given <code>reader</code> into a string.<br>
+   * This method reads the contents of the given <code>reader</code> into a string. <br>
    * <b>ATTENTION:</b><br>
    * Only use this method if you know what you are doing. This method will cause that the complete content of
    * the given <code>reader</code> is read into memory.
@@ -165,7 +165,7 @@ public interface StreamUtil {
 
   /**
    * This method loads the {@link Properties} from the given <code>inStream</code> and
-   * {@link InputStream#close() closes} it.<br>
+   * {@link InputStream#close() closes} it. <br>
    * <b>ATTENTION:</b><br>
    * This method loads the properties using the encoding <code>ISO-8859-1</code> . Use
    * {@link #loadProperties(Reader)} instead to use an explicit encoding (e.g. <code>UTF-8</code>).
@@ -180,7 +180,7 @@ public interface StreamUtil {
 
   /**
    * This method loads the {@link Properties} from the given <code>reader</code> and {@link Reader#close()
-   * closes} it.<br>
+   * closes} it. <br>
    * 
    * @see Properties#load(Reader)
    * 

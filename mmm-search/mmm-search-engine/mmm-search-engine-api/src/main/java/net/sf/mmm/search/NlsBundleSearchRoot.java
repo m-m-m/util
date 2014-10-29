@@ -188,7 +188,7 @@ public interface NlsBundleSearchRoot extends NlsBundle {
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("No hits where found for your query.<br/><br/>Suggestions:"
+  @NlsBundleMessage("No hits where found for your query. <br><br>Suggestions:"
       + "<ul><li>Ensure that all terms are spelled correctly.</li><li>Try other search terms.</li></ul>")
   NlsMessage msgNoHitsHint();
 

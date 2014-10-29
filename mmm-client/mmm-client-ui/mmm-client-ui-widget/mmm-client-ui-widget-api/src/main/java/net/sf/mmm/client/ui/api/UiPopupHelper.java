@@ -9,8 +9,8 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.lang.api.function.Consumer;
 
 /**
- * This is the interface for a component that allows to open very simple popup dialogs.<br/>
- * <b>ATTENTION:</b><br/>
+ * This is the interface for a component that allows to open very simple popup dialogs. <br>
+ * <b>ATTENTION:</b><br>
  * Be aware of {@link net.sf.mmm.util.nls.api.NlsMessage internationalization} whenever you supply messages,
  * labels or titles of a popup. Please also note that this component is designed for a client that only needs
  * to deal with a single {@link java.util.Locale}.
@@ -70,8 +70,8 @@ public interface UiPopupHelper {
 
   /**
    * This method opens a confirmation popup dialog with the given <code>message</code> and two buttons for the
-   * options "Yes" and "No". It will use {@link MessageSeverity#QUESTION}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * options "Yes" and "No". It will use {@link MessageSeverity#QUESTION}. <br>
+   * <b>ATTENTION:</b><br>
    * This is a very common also also very often misused feature of UI toolkits or frameworks. A suitable
    * example is e.g. to use this with the message "Do you really want to delete this object?". However, it
    * would still be more explicit to have the buttons labeled with "Delete" and "Cancel" using

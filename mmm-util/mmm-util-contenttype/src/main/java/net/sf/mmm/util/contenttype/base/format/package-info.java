@@ -3,7 +3,7 @@
 /**
  * Provides the format representation for the base implementation of the
  * content-type API.
- * <a name="documentation"/><h2>Content-Type Base Format</h2>
+ * <a name="documentation"></a><h2>Content-Type Base Format</h2>
  * This package contains the POJOs for specifying and detecting the format of a
  * particular {@link net.sf.mmm.util.contenttype.api.ContentType}. These classes
  * are annotated so they can be serialized to XML and vice versa. The actual

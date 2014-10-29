@@ -67,7 +67,7 @@ public interface CollectionReflectionUtil {
   int getSize(Object arrayMapOrCollection) throws NlsIllegalArgumentException;
 
   /**
-   * This method gets the item at the given <code>index</code> from <code>arrayOrCollection</code>.<br>
+   * This method gets the item at the given <code>index</code> from <code>arrayOrCollection</code>. <br>
    * It sets <code>ignoreIndexOverflow</code> to <code>true</code>.
    * 
    * @see #get(Object, int, boolean)

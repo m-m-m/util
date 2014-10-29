@@ -9,7 +9,7 @@ import net.sf.mmm.search.indexer.base.AbstractConfiguredSearchIndexer;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer}.<br>
+ * {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

@@ -99,7 +99,7 @@ public interface ConfiguredSearchIndexer {
 
   // /**
   // * This method indexes the given {@link SearchIndexDataLocation
-  // location}.<br/>
+  // location}. <br>
   // * <b>NOTE:</b><br>
   // * Unlike
   // * {@link #index(SearchIndexerConfiguration, ConfiguredSearchIndexerOptions,

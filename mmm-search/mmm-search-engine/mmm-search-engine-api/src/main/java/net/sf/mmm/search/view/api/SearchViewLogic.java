@@ -95,7 +95,7 @@ public interface SearchViewLogic extends Refreshable {
 
   /**
    * This method reloads the {@link #getConfiguration() configuration} and the
-   * {@link net.sf.mmm.search.engine.api.SearchEngine} on the fly.<br/>
+   * {@link net.sf.mmm.search.engine.api.SearchEngine} on the fly. <br>
    * <b>ATTENTION:</b><br>
    * The search-engine will not be rebuild on reload so configuration-changes only reflect the view and NOT
    * the {@link #getSearchEngine() search-engine}.

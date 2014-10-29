@@ -21,7 +21,7 @@ import net.sf.mmm.util.xml.base.XmlUtilImpl;
 /**
  * This is the implementation of the
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for XML
- * documents (content with the mimetype "text/xml").<br>
+ * documents (content with the mimetype "text/xml"). <br>
  * It does NOT use a standard XML parser such as SAX or StAX to be fault
  * tolerant. Still it supports XML encoding declarations, entities, CDATA
  * sections, etc. Features like XInclude or entity-includes are (intentionally)

@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * This class is like a {@link Map} that maps elements (<code>&lt;E&gt;</code>) to an <code>int</code> value
- * that represents the {@link #getRank(Object) rank} of the according element.<br>
+ * that represents the {@link #getRank(Object) rank} of the according element. <br>
  * This is useful for heuristic decisions where specific detections indicate a {@link #addRank(Object, int)
  * gain or loss} of a specific element (representing a decision). Additionally an element can be
  * {@link #setUnacceptable(Object) declared} {@link #RANK_UNACCEPTABLE unacceptable} so it is out of the

@@ -3,10 +3,10 @@
 /**
  * Contains {@link net.sf.mmm.content.parser.api.ContentParser}-implementations 
  * for OO-XML files.
- * <a name="documentation"/><h2>Content-Parser Impl OpenDoc</h2>
+ * <a name="documentation"></a><h2>Content-Parser Impl OpenDoc</h2>
  * This package contains implementations of the 
  * {@link net.sf.mmm.content.parser.api.ContentParser} interface for 
- * OpenOffice-XML files.<br/>
+ * OpenOffice-XML files. <br>
  */
 package net.sf.mmm.content.parser.impl.opendoc;
 

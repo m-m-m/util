@@ -9,7 +9,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the interface used to {@link #getDescriptor(Class) get} (or create) the {@link PojoDescriptor
- * descriptor} for a given {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+ * descriptor} for a given {@link net.sf.mmm.util.pojo.api.Pojo}. <br>
  * This functionality is an advanced alternative to {@link java.beans.Introspector} or <a
  * href="http://commons.apache.org/beanutils">commons-beanutils</a>.
  * 
@@ -53,7 +53,7 @@ public interface PojoDescriptorBuilder {
 
   /**
    * This method creates a lazy, immutable {@link Map} reflecting the given
-   * {@link net.sf.mmm.util.pojo.api.Pojo}.<br>
+   * {@link net.sf.mmm.util.pojo.api.Pojo}. <br>
    * <b>ATTENTION:</b><br>
    * The {@link Map} may be {@link net.sf.mmm.util.collection.base.AbstractSimpleMap simple}.
    * 

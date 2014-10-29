@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * This class represents a {@link Segment} that can have a
- * {@link #getMaximumLength() variable length}.<br/>
+ * {@link #getMaximumLength() variable length}. <br>
  * By default the length is unbound ([0, {@link Long#MAX_VALUE}]). If only the
  * "length" attribute is specified in XML, then both {@link #getMinimumLength()}
  * and {@link #getMaximumLength()} will return that value. If additionally the

@@ -20,7 +20,7 @@ public interface UiWidgetGridCell extends UiWidgetSingleMutableComposite<UiWidge
   /**
    * This method creates a {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetHorizontalPanel} adds the
    * given <code>children</code> to it and {@link #setChild(UiWidgetRegular) sets} it it as child of this
-   * cell.<br/>
+   * cell. <br>
    * 
    * @see #setChild(UiWidgetRegular)
    * 

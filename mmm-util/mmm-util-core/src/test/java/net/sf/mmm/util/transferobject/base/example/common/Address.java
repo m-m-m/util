@@ -80,8 +80,8 @@ public interface Address extends GenericEntity<Long> {
    * within a country. Different countries have different systems for their postal codes. Some are numeric
    * some are alphanumeric. In any case the postal codes aim to optimize the logistics of mail delivery and
    * typically allow sorting mail for different regions. In most cases the (major) city can be determined from
-   * country and postal code.<br/>
-   * <b>ATTENTION:</b><br/>
+   * country and postal code. <br>
+   * <b>ATTENTION:</b><br>
    * Please note that some countries (e.g. Panama) do not have the concept of postal codes.
    *
    * @return the zip.

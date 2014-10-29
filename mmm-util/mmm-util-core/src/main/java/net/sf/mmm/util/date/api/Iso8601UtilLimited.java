@@ -119,7 +119,7 @@ public interface Iso8601UtilLimited {
   void formatTime(Date date, boolean extended, Appendable buffer);
 
   /**
-   * This method formats the given <code>timezone</code> according to {@link Iso8601Util ISO 8601}.<br>
+   * This method formats the given <code>timezone</code> according to {@link Iso8601Util ISO 8601}. <br>
    * 
    * @param timezoneOffset is the timezone-offset in milliseconds.
    * @param extended - if <code>false</code> the basic timezone format ("&#177;HHmm[ss]") is used, if

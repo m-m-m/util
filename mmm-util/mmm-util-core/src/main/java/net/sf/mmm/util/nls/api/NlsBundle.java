@@ -7,12 +7,12 @@ package net.sf.mmm.util.nls.api;
  * {@link java.util.ResourceBundle} you create a custom interface extending this one in order to define the
  * {@link NlsMessage#getInternationalizedMessage() messages}. This is done by defining methods with
  * {@link NlsMessage} as return type and the {@link NlsMessage#getArgument(String) NLS arguments} as
- * parameter.<br/>
- * <b>NOTE:</b><br/>
+ * parameter. <br>
+ * <b>NOTE:</b><br>
  * You should NOT create an implementation of that interface as this is created for you automatically via
  * {@link NlsBundleFactory#createBundle(Class)}. This is the recommended approach for defining and binding
  * {@link NlsMessage}s. In order to make your {@link NlsBundle} work even in limited environments such as GWT
- * (google web toolkit) clients, we had to define the following convention:<br/>
+ * (google web toolkit) clients, we had to define the following convention:<br>
  * <ul>
  * <li>For your bundle you define a {@link Package} and a base name (e.g.
  * <code>my.package.NlsBundleExample</code>). This namespace must not be occupied by an existing type.</li>
@@ -47,12 +47,12 @@ package net.sf.mmm.util.nls.api;
  * errorValueOutOfRange = Der Wert {value} muss innerhalb des Wertebereichs von {min} bis {max} liegen!
  * </pre>
  *
- * For a real example see {@link net.sf.mmm.util.NlsBundleUtilCoreRoot}.<br/>
- * <b>IMPORTANT:</b><br/>
+ * For a real example see {@link net.sf.mmm.util.NlsBundleUtilCoreRoot}. <br>
+ * <b>IMPORTANT:</b><br>
  * Unless annotated with {@link NlsBundleKey} the {@link java.util.ResourceBundle#getString(String) key} is
  * derived from the name of the method. You have to ensure that the keys are unique as otherwise the
- * localization is NOT possible. Please strictly avoid having methods with the same name.<br/>
- * <br/>
+ * localization is NOT possible. Please strictly avoid having methods with the same name. <br>
+ * <br>
  * For maintenance and better support of localizers it is strongly recommended to use
  * {@link NlsMessage#getArgument(String) named arguments} instead of {@link NlsMessage#getArgument(int)
  * indexed arguments}. Unfortunately Java does not include names of parameters in abstract methods (including
@@ -64,7 +64,7 @@ package net.sf.mmm.util.nls.api;
  *
  * <pre>sed -i -r 's/([(]|, )((Object|Type|int|Number|String|boolean)([.]{3})?) ([a-z][a-zA-Z0-9]*)/\1@Named("\5") \2 \5/g' NlsBundleExampleRoot.java</pre>
  *
- * <b>ATTENTION:</b><br/>
+ * <b>ATTENTION:</b><br>
  * It is strongly recommended NOT to use inheritance for {@link NlsBundle} interfaces. Instead create an
  * interface that directly extends {@link NlsBundle} (and nothing else). However, for purpose of abstraction
  * feel free to add an empty custom extension of {@link NlsBundle} as intermediate interface for your project

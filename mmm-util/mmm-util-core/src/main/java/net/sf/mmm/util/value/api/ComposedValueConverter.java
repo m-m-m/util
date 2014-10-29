@@ -11,7 +11,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * These individual {@link ValueConverter}s are combined to one generic converter following the
  * composition-pattern. Therefore this generic converter needs to choose the individual {@link ValueConverter}
  * that is appropriate for a specific
- * {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType) conversion}.<br>
+ * {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType) conversion}. <br>
  * <br>
  * The meaning of <em>appropriate</em> here can depend on the implementation. However it needs to guarantee
  * that the {@link #getSourceType() source-type} of the chosen {@link ValueConverter}
@@ -103,7 +103,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * However the chosen converter may {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType)
  * return} <code>null</code> to indicate that conversion is NOT possible. This {@link ComposedValueConverter}
  * should therefore try all applicable converters starting from most to least specific until conversion
- * succeeds. If all applicable converters fail it will also fail and return <code>null</code>.<br>
+ * succeeds. If all applicable converters fail it will also fail and return <code>null</code>. <br>
  * 
  * @see net.sf.mmm.util.value.impl.DefaultComposedValueConverter#getInstance()
  * 

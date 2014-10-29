@@ -15,11 +15,11 @@ import java.lang.annotation.Target;
  * first commandline parameter that is no {@link CliOption option} or occurs after the argument "--" is
  * treated as the first argument and further parameters can also only be {@link CliArgument arguments}.
  * Additionally the last {@link CliArgument} -property can have the type {@link java.util.List} if a proper
- * generic is used to declare the item-type.<br>
+ * generic is used to declare the item-type. <br>
  * E.g. a program <code>Foo</code> may have one {@link CliArgument argument} of type
  * <code>{@link java.util.List}&lt;{@link java.io.File}&gt;</code> and you invoke
  * <code>Foo file1 file2 file3</code> then the property is set to a {@link java.util.List} equivalent to
- * <code>{new File("file1"), new File("file2"), new File("file3")}</code>.<br>
+ * <code>{new File("file1"), new File("file2"), new File("file3")}</code>. <br>
  * <b>ATTENTION:</b><br>
  * Whenever possible prefer a {@link CliOption} over a {@link CliArgument}. However having a single
  * {@link CliArgument} is just fine. But having multiple {@link CliArgument arguments} together in some
@@ -88,7 +88,7 @@ public @interface CliArgument {
 
   /**
    * The flag that indicates if this argument is required. The default value is <code>true</code>. Use a value
-   * of <code>false</code> to make this argument optional within it's {@link #mode() mode}.<br>
+   * of <code>false</code> to make this argument optional within it's {@link #mode() mode}. <br>
    * <b>ATTENTION:</b><br>
    * Avoid optional arguments and use {@link CliOption options} instead. If you use optional arguments anyway,
    * please note that potentially following options also need to be optional then.

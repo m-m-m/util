@@ -13,8 +13,8 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
 /**
  * This interface describes the {@link PojoPropertyDescriptor properties} of a
  * {@link net.sf.mmm.util.pojo.api.Pojo}. A {@link net.sf.mmm.util.pojo.api.Pojo} in this manner is more or
- * less any java object.<br>
- * This interface is an alternative to {@link java.beans.BeanInfo}.<br>
+ * less any java object. <br>
+ * This interface is an alternative to {@link java.beans.BeanInfo}. <br>
  * Look at the following example:
  * 
  * <pre>

@@ -54,7 +54,7 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
    * that calls the current application via a remote interface. This can be a user-interface client, a
    * different server application, or the like. If the exception would be send to the client as is, then all
    * exception classes have to be available on the client side for de-serialization and all error details are
-   * exposed to the client violating the OWASP principle <em>sensitive data exposure</em>.<br/>
+   * exposed to the client violating the OWASP principle <em>sensitive data exposure</em>. <br>
    * The suggested implementation should behave as following:
    * <ul>
    * <li>Details are removed according to the current {@link net.sf.mmm.util.lang.api.EnvironmentDetector
@@ -68,8 +68,8 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
    * <li>Potentially exceptions are {@link #convertForSerialization(Throwable, ExceptionTruncation) converted
    * for serialization}.</li>
    * </ul>
-   * <br/>
-   * <b>ATTENTION:</b><br/>
+   * <br>
+   * <b>ATTENTION:</b><br>
    * It is not the task of this utility to log exceptions. Instead this shall be done before this method is
    * invoked. To make use of the features of {@link net.sf.mmm.util.exception.api.NlsThrowable} such as the
    * {@link net.sf.mmm.util.exception.api.NlsThrowable#getUuid() UUID} that is logged and transferred to the client,

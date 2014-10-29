@@ -49,7 +49,7 @@ public interface XmlSet extends XmlSelector {
      * This is the conjunction used to combine the results of multiple
      * {@link XmlSelector}s with a logical <code>OR</code>. Each result that
      * is accepted by any of the {@link XmlSelector}s is added to the result of
-     * the according {@link XmlSet}.<br>
+     * the according {@link XmlSet}. <br>
      * E.g. if the {@link XmlSelector} <code>A</code> accepts the XML nodes
      * <code>n1</code> and <code>n2</code> with the {@link XmlSelector}
      * <code>B</code> accepts <code>n2</code> and <code>n3</code> then the
@@ -62,7 +62,7 @@ public interface XmlSet extends XmlSelector {
      * This is the conjunction used to combine the results of multiple
      * {@link XmlSelector}s with a logical <code>AND</code>. Only results
      * that are accepted by all of the {@link XmlSelector}s are added to the
-     * result of the according {@link XmlSet}.<br>
+     * result of the according {@link XmlSet}. <br>
      * E.g. if the {@link XmlSelector} <code>A</code> accepts the XML nodes
      * <code>n1</code> and <code>n2</code> with the {@link XmlSelector}
      * <code>B</code> accepts <code>n2</code> and <code>n3</code> then the

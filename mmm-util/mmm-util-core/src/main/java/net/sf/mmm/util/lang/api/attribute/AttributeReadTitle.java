@@ -14,7 +14,7 @@ package net.sf.mmm.util.lang.api.attribute;
 public abstract interface AttributeReadTitle<TITLE> {
 
   /**
-   * This method gets the title of this object.<br>
+   * This method gets the title of this object. <br>
    * <b>NOTE:</b><br>
    * For generic usage you need to use {@link Object#toString()} of the result if NOT <code>null</code>
    * 

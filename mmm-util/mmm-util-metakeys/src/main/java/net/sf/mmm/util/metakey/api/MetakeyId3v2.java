@@ -4,7 +4,7 @@ package net.sf.mmm.util.metakey.api;
 
 /**
  * This interface is a collection of constants defining keys for
- * metadata-properties according to <a href="id3.com">ID3v2</a>.<br>
+ * metadata-properties according to <a href="id3.com">ID3v2</a>. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */

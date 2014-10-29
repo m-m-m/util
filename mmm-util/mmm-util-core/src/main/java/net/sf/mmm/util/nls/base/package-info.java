@@ -4,7 +4,7 @@
  * Contains the basis for implementations of the native language support (NLS) API.
  * <a name="documentation/"><h2>NLS Base</h2>
  * This package contains the public implementation of the 
- * {@link net.sf.mmm.util.nls.api NLS API}.<br>
+ * {@link net.sf.mmm.util.nls.api NLS API}. <br>
  */
 package net.sf.mmm.util.nls.base;
 

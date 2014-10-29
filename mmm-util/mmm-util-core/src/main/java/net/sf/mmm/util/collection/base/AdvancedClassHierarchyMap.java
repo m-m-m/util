@@ -9,7 +9,7 @@ import net.sf.mmm.util.collection.api.MapFactory;
 /**
  * This class extends {@link AbstractClassHierarchyMap} with the ability to replace elements (
  * <code>&lt;E&gt;</code>) on recursive {@link #put(Class, Object) puts} if the new element has a
- * {@link Class#isAssignableFrom(Class) more general} {@link Class type}.<br>
+ * {@link Class#isAssignableFrom(Class) more general} {@link Class type}. <br>
  * Therefore an according sub-class has to implement the abstract method {@link #getClass(Object)}.
  * 
  * @param <E> is the generic type of the elements contained in this map.

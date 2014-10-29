@@ -10,7 +10,7 @@ import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
- * This is the default implementation of the {@link net.sf.mmm.util.pojo.api.PojoFactory} interface.<br>
+ * This is the default implementation of the {@link net.sf.mmm.util.pojo.api.PojoFactory} interface. <br>
  * In advance to {@link DefaultPojoFactory} it tries to find implementations for interfaces by guessing
  * according to conventions:<br>
  * For an interface <code>some.package.api.Foo</code> it will try to find the following classes...

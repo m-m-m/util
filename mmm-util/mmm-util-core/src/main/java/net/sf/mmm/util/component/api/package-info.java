@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains API to help implementing components.
- * <a name="documentation"/><h2>Component-Util API</h2>
+ * <a name="documentation"></a><h2>Component-Util API</h2>
  * With JSR 250 (commons-annotations) it is very easy to write components and
- * therefore component-oriented applications.<br>
+ * therefore component-oriented applications. <br>
  * This package provides some common runtime exceptions for typical errors
  * of components (or whatever you call it).
  */

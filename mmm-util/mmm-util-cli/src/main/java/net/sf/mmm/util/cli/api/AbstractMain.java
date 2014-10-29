@@ -13,7 +13,7 @@ import net.sf.mmm.util.io.base.AppendableWriter;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
 
 /**
- * This is the abstract base class for a main-program.<br>
+ * This is the abstract base class for a main-program. <br>
  * You simple need to derive from this class or more likely from {@link AbstractVersionedMain}. For an example
  * read the {@link net.sf.mmm.util.cli.api package javadoc}.
  *
@@ -120,7 +120,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
 
   /**
    * This method gets the {@link IocContainer} used to manage components with their implementation. It should
-   * be created and initialized on the first call of this method.<br/>
+   * be created and initialized on the first call of this method. <br>
    * This default implementation simply returns <code>null</code> to avoid dependencies on a
    * {@link IocContainer} implementation. Override this method to use proper component management.
    *
@@ -135,7 +135,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
 
   /**
    * This method gets the {@link CliParserBuilder} used to {@link CliParserBuilder#build(Object) build} the
-   * {@link CliParser}.<br>
+   * {@link CliParser}. <br>
    * To extend with custom functionality you should use an {@link #getIocContainer() IoC container} in advance
    * to overriding this method.
    *
@@ -186,7 +186,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
 
   /**
    * This method gets the standard output where to {@link PrintWriter#println() print} information for the
-   * end-user.<br>
+   * end-user. <br>
    * Default is {@link System#out}.
    *
    * @return the standard output.
@@ -209,7 +209,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
 
   /**
    * This method gets the standard error where to {@link Appendable#append(CharSequence) print} errors for the
-   * end-user.<br>
+   * end-user. <br>
    * Default is {@link System#err}.
    *
    * @return the output stream.

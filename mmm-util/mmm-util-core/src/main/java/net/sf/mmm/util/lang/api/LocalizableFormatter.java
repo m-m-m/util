@@ -17,7 +17,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 public interface LocalizableFormatter<V> extends Formatter<V> {
 
   /**
-   * This method formats the given <code>value</code> for the given <code>locale</code>.<br/>
+   * This method formats the given <code>value</code> for the given <code>locale</code>. <br>
    * This is a shorthand of the following code:
    * 
    * <pre>

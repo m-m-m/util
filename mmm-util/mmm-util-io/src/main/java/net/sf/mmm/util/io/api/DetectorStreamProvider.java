@@ -44,12 +44,12 @@ public interface DetectorStreamProvider {
    * This method gets a {@link DetectorInputStream} that wraps the given <code>stream</code>. In addition to
    * {@link #wrapInputStream(InputStream)} an additional parameter <code>metadata</code> is supplied. If this
    * context contains metadata values, that are mutable, the stream wrapper manipulates the data such that the
-   * given values correspond to the data.<br>
+   * given values correspond to the data. <br>
    * E.g. if the metadata contains a title and a genre and the stream points to the data of an mp3 song, the
-   * given title and genre are "written" to the ID3 tag of the song (if supported by the implementation).<br>
+   * given title and genre are "written" to the ID3 tag of the song (if supported by the implementation). <br>
    * If the metadata contains values that are immutable and NOT compatible with the detected values (e.g.
    * mimetype=text/plain is supplied, but mimetype is audio/midi) then the value will simple be overridden in
-   * the detected {@link DetectorStream#getMetadata() metadata}.<br>
+   * the detected {@link DetectorStream#getMetadata() metadata}. <br>
    * If the metadata contains values that are unknown to the detector implementation (e.g. foo=bar), these
    * values will also be untouched and are also available in the detected {@link DetectorStream#getMetadata()
    * metadata}.
@@ -74,12 +74,12 @@ public interface DetectorStreamProvider {
    * This method gets a {@link DetectorOutputStream} that wraps the given <code>stream</code>. In addition to
    * {@link #wrapOutputStream(OutputStream)} an additional parameter <code>metadata</code> is supplied. If
    * this context contains metadata values, that are mutable, the stream wrapper manipulates the data such
-   * that the given values correspond to the data.<br>
+   * that the given values correspond to the data. <br>
    * E.g. if the metadata contains a title and a genre and the stream points to the data of an mp3 song, the
-   * given title and genre are written to the ID3 tag of the song (if supported by the implementation).<br>
+   * given title and genre are written to the ID3 tag of the song (if supported by the implementation). <br>
    * If the metadata contains values that are immutable and NOT compatible with the detected values (e.g.
    * mimetype=text/plain is supplied, but mimetype is audio/midi) then the value will simple be overridden in
-   * the detected {@link DetectorStream#getMetadata() metadata}.<br>
+   * the detected {@link DetectorStream#getMetadata() metadata}. <br>
    * If the metadata contains values that are unknown to the detector implementation (e.g. foo=bar), these
    * values will also be untouched and are also available in the detected {@link DetectorStream#getMetadata()
    * metadata}.

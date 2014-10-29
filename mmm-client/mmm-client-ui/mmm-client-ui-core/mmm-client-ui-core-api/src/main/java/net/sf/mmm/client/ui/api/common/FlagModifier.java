@@ -7,8 +7,8 @@ package net.sf.mmm.client.ui.api.common;
  * {@link net.sf.mmm.client.ui.api.attribute.AttributeReadFlagAdvanced#getFlag(FlagModifier) flag modifier}.
  * As an implementation you should define well documented constants that typically just extends from
  * {@link Object}. For debugging purposes it is recommended to provide a proper implementation of
- * {@link #toString()}.<br/>
- * <b>ATTENTION:</b><br/>
+ * {@link #toString()}. <br>
+ * <b>ATTENTION:</b><br>
  * A {@link FlagModifier} is matched by object identify (<code>==</code>).
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

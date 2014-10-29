@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Provides the base-implementation of transformer-util API.
- * <a name="documentation"/><h2>Transformer-Util Base</h2>
+ * <a name="documentation"></a><h2>Transformer-Util Base</h2>
  * Provides transformers for strings including parsers for XML-based 
  * configuration of chains. 
  */

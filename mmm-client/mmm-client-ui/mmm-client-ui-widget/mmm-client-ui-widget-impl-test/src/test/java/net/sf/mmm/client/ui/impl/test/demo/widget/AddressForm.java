@@ -15,8 +15,8 @@ import net.sf.mmm.util.datatype.api.address.PostalCode;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
- * This is a UI form for testing the {@link UiWidget}-framework.<br/>
- * <b>ATTENTION:</b><br/>
+ * This is a UI form for testing the {@link UiWidget}-framework. <br>
+ * <b>ATTENTION:</b><br>
  * This class combines various approaches how to create fields and to do the data-binding. It is therefore NOT
  * a best-practice that should be followed rather than a showcase of the different ways to use the
  * infrastructure.

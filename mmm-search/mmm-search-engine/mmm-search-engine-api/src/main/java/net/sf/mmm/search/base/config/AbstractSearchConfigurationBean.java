@@ -14,7 +14,7 @@ import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.util.xml.base.jaxb.XmlAdapterProperties;
 
 /**
- * This is the abstract base-implementation of {@link SearchConfiguration} as JAXB-ready Java-Bean.<br/>
+ * This is the abstract base-implementation of {@link SearchConfiguration} as JAXB-ready Java-Bean. <br>
  * Unfortunately JAXB does not properly support generics so we cannot use a generic for polymorphism of
  * {@link SearchSourceBean}.
  * 

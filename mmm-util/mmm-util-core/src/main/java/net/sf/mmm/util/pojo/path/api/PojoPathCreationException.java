@@ -7,7 +7,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 /**
  * A {@link PojoPathCreationException} is thrown by the {@link PojoPathNavigator} if the supplied
  * {@link PojoPathMode mode} is {@link PojoPathMode#CREATE_IF_NULL} and an intermediate
- * {@link net.sf.mmm.util.pojo.api.Pojo} was <code>null</code> but could NOT be created.<br>
+ * {@link net.sf.mmm.util.pojo.api.Pojo} was <code>null</code> but could NOT be created. <br>
  * This can happen because the {@link net.sf.mmm.util.pojo.api.PojoFactory#newInstance(Class) instantiation}
  * failed or there is insufficient information about what to create (e.g. the current object is a
  * {@link java.util.Map} was NOT accessed via an generic method signature).

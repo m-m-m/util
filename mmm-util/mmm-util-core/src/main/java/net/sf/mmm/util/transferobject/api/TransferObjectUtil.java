@@ -105,15 +105,15 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
 
   /**
    * This method recursively updates all {@link EntityTo#getModificationCounter() modification counters} of
-   * the {@link EntityTo ETO}s contained in the given <code>container</code>.<br/>
+   * the {@link EntityTo ETO}s contained in the given <code>container</code>. <br>
    * The method {@link #convertFromEntity(PersistenceEntity, Class)} is typically used before the transaction
    * has been closed (by the logic layer of the application). However, JPA implementations like hibernate only
    * update the {@link PersistenceEntity#getModificationCounter() modification counter} after the transaction
    * has been closed and the new modification counters are available from the DB. {@link EntityTo} and this
    * method offer the perfect solution to this problem. All you have to do is call this method once for the
    * transfer object you want to send to the client after the transaction has been committed and before the
-   * object gets serialized.<br/>
-   * <b>ATTENTION:</b><br/>
+   * object gets serialized. <br>
+   * <b>ATTENTION:</b><br>
    * This method (or better its current default implementation) assumes that you do not have cyclic
    * dependencies in your {@link TransferObjectUtil}. Otherwise this can lead to an infinity loop. However,
    * having cycles in {@link TransferObject}s is typically a design flaw. If you think different you can try

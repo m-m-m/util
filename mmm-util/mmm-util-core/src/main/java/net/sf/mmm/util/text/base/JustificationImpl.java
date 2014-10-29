@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.HorizontalAlignment;
 import net.sf.mmm.util.text.api.Justification;
 
 /**
- * This is the implementation of a {@link Justification}.<br>
+ * This is the implementation of a {@link Justification}. <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1

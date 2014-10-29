@@ -11,15 +11,15 @@ import net.sf.mmm.util.lang.api.AbstractDatatype;
 import net.sf.mmm.util.lang.api.GwtHelper;
 
 /**
- * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color} based on {@link Factor factors}. <br/>
- * <b>Note:</b><br/>
+ * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color} based on {@link Factor factors}. <br>
+ * <b>Note:</b><br>
  * Use {@link Color} for simple and efficient representation and transport of color information. However, if
  * precision is required or for transformation between different {@link ColorModel color models} use this
- * class instead. <br/>
- * <b>Credits:</b><br/>
+ * class instead. <br>
+ * <b>Credits:</b><br>
  * The algorithms for transformation of the color models are mainly taken from <a
- * href="http://en.wikipedia.org/wiki/HSL_and_HSV">HSL and HSV on wikipedia</a>. <br/>
- * <b>ATTENTION:</b><br/>
+ * href="http://en.wikipedia.org/wiki/HSL_and_HSV">HSL and HSV on wikipedia</a>. <br>
+ * <b>ATTENTION:</b><br>
  * This implementation does not support color profiles or the Adobe RGB color space.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

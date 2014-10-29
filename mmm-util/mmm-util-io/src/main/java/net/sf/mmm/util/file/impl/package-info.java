@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 /**
  * Contains the implementation of file utilities.
- * <a name="documentation"/><h2>Util File Impl</h2>
+ * <a name="documentation"></a><h2>Util File Impl</h2>
  * This package contains public implementations that help to deal with
- * {@link java.io.File}s, {@link java.nio.file.Path}s, and other related stuff.<br>
+ * {@link java.io.File}s, {@link java.nio.file.Path}s, and other related stuff. <br>
  */
 package net.sf.mmm.util.file.impl;
 

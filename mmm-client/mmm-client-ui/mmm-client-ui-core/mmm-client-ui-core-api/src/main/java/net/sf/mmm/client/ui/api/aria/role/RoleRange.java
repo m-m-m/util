@@ -8,8 +8,8 @@ import net.sf.mmm.client.ui.api.aria.attribute.AttributeWriteAriaValueNow;
 import net.sf.mmm.client.ui.api.aria.attribute.AttributeWriteAriaValueText;
 
 /**
- * This interface represents the abstract <a href="http://www.w3.org/TR/wai-aria/roles#range">range</a> role.<br/>
- * <b>ATTENTION:</b><br/>
+ * This interface represents the abstract <a href="http://www.w3.org/TR/wai-aria/roles#range">range</a> role. <br>
+ * <b>ATTENTION:</b><br>
  * For some reason the specification defined both {@link #getValueNow()} and {@link #getValueText()} that are
  * different representations of the same value. When using both properties please be careful to keep them in
  * sync and consistent.

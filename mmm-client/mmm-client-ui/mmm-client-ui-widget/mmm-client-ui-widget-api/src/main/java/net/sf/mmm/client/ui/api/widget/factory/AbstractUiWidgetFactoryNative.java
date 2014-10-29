@@ -28,14 +28,14 @@ public abstract interface AbstractUiWidgetFactoryNative {
 
   /**
    * This method creates a new {@link net.sf.mmm.client.ui.api.widget.UiWidget} instance of the given type (
-   * <code>widgetInterface</code>).<br/>
-   * <b>IMPORTANT:</b><br/>
+   * <code>widgetInterface</code>). <br>
+   * <b>IMPORTANT:</b><br>
    * When creating a large (enterprise) application client you should NOT (directly) use this method to create
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetField field widgets} such as
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetLocalDateField} or
    * {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetTextField}. Instead use
-   * {@link UiWidgetFactoryDatatype#createForDatatype(Class)}.<br/>
-   * <b>ATTENTION:</b><br/>
+   * {@link UiWidgetFactoryDatatype#createForDatatype(Class)}. <br>
+   * <b>ATTENTION:</b><br>
    * The {@link net.sf.mmm.util.component.api.Api API} of {@link net.sf.mmm.client.ui.api.widget.UiWidget}
    * defines base interfaces marks as <code>abstract</code>. These interfaces cannot be used as argument to
    * this method. Further some widget interfaces are NOT abstract but will not be created via this method but
