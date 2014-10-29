@@ -10,13 +10,16 @@ import net.sf.mmm.persistence.base.jpa.AbstractJpaEntity;
 import org.hibernate.envers.Audited;
 
 /**
- * TODO: this class ...
+ * Dummy revisioned entity for testing.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Entity
 @Audited
 public class DummyRevisionedFooEntity extends AbstractJpaEntity<Long> {
+
+  /** UID for serialization. */
+  private static final long serialVersionUID = 1L;
 
   /** @see #getValue() */
   private String value;

@@ -9,16 +9,21 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 /**
  * This is the abstract base implementation of {@link org.hibernate.usertype.UserType} to map a {@link String}
  * based {@link SimpleDatatype}.
- * 
+ *
  * @param <T> the generic for the adapted {@link SimpleDatatype}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
+ *
+ * @deprecated use
+ *             {@link net.sf.mmm.util.lang.base.datatype.adapter.jpa.AbstractSimpleDatatypeAttributeConverter}
+ *             instead.
  */
+@Deprecated
 public class StringDatatypeUserType<T extends SimpleDatatype<String>> extends DatatypeUserType<String, T> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param datatype is the {@link #returnedClass() java class} representing the adapted
    *        {@link SimpleDatatype}.
    */

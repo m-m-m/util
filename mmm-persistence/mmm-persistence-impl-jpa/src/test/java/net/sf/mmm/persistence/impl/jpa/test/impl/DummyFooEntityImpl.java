@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 import net.sf.mmm.persistence.base.jpa.AbstractJpaEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyBarEntity;
 import net.sf.mmm.persistence.impl.jpa.test.api.DummyFooEntity;
+import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
  * This is a simple entity for testing.
@@ -22,6 +23,9 @@ public class DummyFooEntityImpl extends AbstractJpaEntity<Integer> implements Du
 
   /** @see #getNumber() */
   private int number;
+
+  /** @see #getVersionIdentifier() */
+  private VersionIdentifier versionIdentifier;
 
   /** @see #getBar() */
   private DummyBarEntityImpl bar;
@@ -50,6 +54,24 @@ public class DummyFooEntityImpl extends AbstractJpaEntity<Integer> implements Du
   public void setNumber(int number) {
 
     this.number = number;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public VersionIdentifier getVersionIdentifier() {
+
+    return this.versionIdentifier;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setVersionIdentifier(VersionIdentifier version) {
+
+    this.versionIdentifier = version;
   }
 
   /**

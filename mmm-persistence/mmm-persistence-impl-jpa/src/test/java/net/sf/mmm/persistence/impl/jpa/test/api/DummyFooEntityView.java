@@ -4,10 +4,11 @@ package net.sf.mmm.persistence.impl.jpa.test.api;
 
 import net.sf.mmm.util.entity.api.GenericEntity;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
  * This is the read only interface for the {@link DummyFooEntity}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
  */
@@ -31,5 +32,13 @@ public interface DummyFooEntityView extends GenericEntity<Integer> {
    * @return the number.
    */
   int getNumber();
+
+  /**
+   * NOTE: This is actually a test of
+   * {@link net.sf.mmm.util.lang.base.datatype.adapter.jpa.VersionIdentifierAttributeConverter}.
+   *
+   * @return the {@link VersionIdentifier}.
+   */
+  VersionIdentifier getVersionIdentifier();
 
 }

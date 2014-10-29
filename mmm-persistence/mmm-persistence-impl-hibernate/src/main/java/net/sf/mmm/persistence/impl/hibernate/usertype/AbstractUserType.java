@@ -16,13 +16,16 @@ import org.slf4j.Logger;
 
 /**
  * This is the abstract base implementation of {@link UserType}.
- * 
+ *
  * @see org.hibernate.annotations.Type
- * 
+ *
  * @param <T> the generic for the adapted datatype.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
+ *
+ * @deprecated use {@link javax.persistence.AttributeConverter} instead.
  */
+@Deprecated
 public abstract class AbstractUserType<T> extends AbstractLoggableComponent implements UserType {
 
   /** @see #sqlTypes */
@@ -33,7 +36,7 @@ public abstract class AbstractUserType<T> extends AbstractLoggableComponent impl
 
   /**
    * The constructor.
-   * 
+   *
    * @param sqlType is the {@link #sqlTypes() SQL type} used to store the adapted datatype.
    * @param javaType is the {@link #returnedClass() java class} representing the adapted datatype.
    */

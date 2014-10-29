@@ -6,13 +6,12 @@ package net.sf.mmm.persistence.impl.hibernate;
 import javax.inject.Named;
 
 /**
- * TODO: this class ...
- * 
+ * DAO for {@link DummyRevisionedFooEntity}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Named
-public class DummyRevisionedFooEntityDao extends
-    AbstractRevisionedDaoEnvers<Long, DummyRevisionedFooEntity> {
+public class DummyRevisionedFooEntityDao extends AbstractRevisionedDaoEnvers<Long, DummyRevisionedFooEntity> {
 
   /**
    * The constructor.

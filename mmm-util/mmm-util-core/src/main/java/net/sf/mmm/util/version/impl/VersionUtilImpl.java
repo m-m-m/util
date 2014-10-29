@@ -182,7 +182,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   /**
    * @return the defaultFormatter
    */
-  protected VersionIdentifierFormatter getDefaultFormatter() {
+  public VersionIdentifierFormatter getDefaultFormatter() {
 
     return this.defaultFormatter;
   }

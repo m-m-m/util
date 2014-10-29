@@ -2,9 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.persistence.impl.jpa.test.api;
 
+import net.sf.mmm.util.version.api.VersionIdentifier;
+
 /**
  * This is a test entity.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 0.9.0
  */
@@ -19,6 +21,11 @@ public interface DummyFooEntity extends DummyFooEntityView {
    * @param number the number to set.
    */
   void setNumber(int number);
+
+  /**
+   * @param version is the new value of {@link #getVersionIdentifier()}.
+   */
+  void setVersionIdentifier(VersionIdentifier version);
 
   /**
    * {@inheritDoc}

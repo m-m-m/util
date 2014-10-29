@@ -45,6 +45,12 @@ public interface VersionUtil {
   VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat) throws NlsParseException;
 
   /**
+   * @return the default {@link VersionIdentifierFormatter}.
+   * @since 6.0.0
+   */
+  VersionIdentifierFormatter getDefaultFormatter();
+
+  /**
    * Variant of {@link #createFormatter(String, boolean)} with <code>strict</code> mode.
    *
    * @see #createFormatter(String, boolean)

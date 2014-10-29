@@ -14,6 +14,7 @@ import net.sf.mmm.persistence.impl.jpa.test.impl.DummyBarEntityImpl;
 import net.sf.mmm.persistence.impl.jpa.test.impl.DummyFooEntityImpl;
 import net.sf.mmm.transaction.api.TransactionExecutor;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
+import net.sf.mmm.util.version.impl.VersionUtilImpl;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +26,11 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class PersistenceTest {
+public class PersistenceTest extends Assert {
+
+  private static final String VERSION_INITIAL = "1.0.0-beta1";
+
+  private static final String VERSION_UPDATED = "1.0.1-rc2";
 
   private static final String SPRING_XML = "/net/sf/mmm/persistence/impl/jpa/beans-test-persistence-jpa.xml";
 
@@ -79,15 +84,18 @@ public class PersistenceTest {
 
   protected void readAndUpdate(Integer fooId) {
 
-    Assert.assertNotNull(fooId);
+    assertNotNull(fooId);
     PersistenceManager persistenceManager = getPersistenceManager();
     DummyFooEntityDao fooManager = (DummyFooEntityDao) persistenceManager.getDao(DummyFooEntity.class);
     DummyFooEntity foo = fooManager.find(fooId);
-    Assert.assertEquals(42, foo.getNumber());
+    assertEquals(42, foo.getNumber());
+    assertEquals(VERSION_INITIAL, foo.getVersionIdentifier().toString());
+
     DummyBarEntity bar = foo.getBar();
-    Assert.assertNotNull(bar);
-    Assert.assertEquals("value42", bar.getValue());
+    assertNotNull(bar);
+    assertEquals("value42", bar.getValue());
     foo.setNumber(24);
+    foo.setVersionIdentifier(VersionUtilImpl.getInstance().createVersionIdentifier(VERSION_UPDATED));
     DummyBarEntityDao barManager = (DummyBarEntityDao) persistenceManager.getDao(DummyBarEntity.class);
     DummyBarEntity bar2 = barManager.create();
     bar2.setValue("24value");
@@ -98,18 +106,19 @@ public class PersistenceTest {
 
   protected void readAgainAndDelete(Integer fooId, Long barId) {
 
-    Assert.assertNotNull(fooId);
+    assertNotNull(fooId);
     PersistenceManager persistenceManager = getPersistenceManager();
     DummyFooEntityDao fooManager = (DummyFooEntityDao) persistenceManager.getDao(DummyFooEntity.class);
     DummyFooEntity foo = fooManager.find(fooId);
-    Assert.assertEquals(24, foo.getNumber());
+    assertEquals(24, foo.getNumber());
+    assertEquals(VERSION_UPDATED, foo.getVersionIdentifier().toString());
     DummyBarEntity bar2 = foo.getBar();
-    Assert.assertNotNull(bar2);
-    Assert.assertEquals("24value", bar2.getValue());
+    assertNotNull(bar2);
+    assertEquals("24value", bar2.getValue());
     DummyBarEntityDao barManager = (DummyBarEntityDao) persistenceManager.getDao(DummyBarEntity.class);
-    Assert.assertNotNull(barId);
+    assertNotNull(barId);
     DummyBarEntity bar = barManager.find(barId);
-    Assert.assertEquals("value42", bar.getValue());
+    assertEquals("value42", bar.getValue());
     barManager.delete(bar);
     fooManager.delete(foo);
   }
@@ -118,18 +127,19 @@ public class PersistenceTest {
 
     PersistenceManager persistenceManager = getPersistenceManager();
     GenericDao<Integer, DummyFooEntity> fooDao = persistenceManager.getDao(DummyFooEntity.class);
-    Assert.assertTrue(fooDao instanceof DummyFooEntityDao);
-    Assert.assertSame(DummyFooEntityImpl.class, fooDao.getEntityClass());
-    Assert.assertSame(fooDao, persistenceManager.getDao(DummyFooEntityImpl.class));
+    assertTrue(fooDao instanceof DummyFooEntityDao);
+    assertSame(DummyFooEntityImpl.class, fooDao.getEntityClass());
+    assertSame(fooDao, persistenceManager.getDao(DummyFooEntityImpl.class));
     GenericDao<Long, DummyBarEntity> barDao = persistenceManager.getDao(DummyBarEntity.class);
-    Assert.assertTrue(barDao instanceof DummyBarEntityDao);
-    Assert.assertSame(DummyBarEntityImpl.class, barDao.getEntityClass());
-    Assert.assertSame(barDao, persistenceManager.getDao(DummyBarEntityImpl.class));
+    assertTrue(barDao instanceof DummyBarEntityDao);
+    assertSame(DummyBarEntityImpl.class, barDao.getEntityClass());
+    assertSame(barDao, persistenceManager.getDao(DummyBarEntityImpl.class));
     DummyBarEntity bar = barDao.create();
     bar.setValue("value42");
     barDao.save(bar);
     DummyFooEntity foo = fooDao.create();
     foo.setNumber(42);
+    foo.setVersionIdentifier(VersionUtilImpl.getInstance().createVersionIdentifier(VERSION_INITIAL));
     foo.setBar(bar);
     fooDao.save(foo);
     return foo;

@@ -7,6 +7,7 @@ import java.util.Date;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
+import net.sf.mmm.util.version.impl.VersionUtilImpl;
 
 /**
  * This is the abstract base implementation of {@link VersionIdentifier}.
@@ -425,7 +426,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   public String getValue() {
 
     if (this.stringRepresentation == null) {
-      return super.toString();
+      return VersionUtilImpl.getInstance().getDefaultFormatter().format(this);
     } else {
       return this.stringRepresentation;
     }
