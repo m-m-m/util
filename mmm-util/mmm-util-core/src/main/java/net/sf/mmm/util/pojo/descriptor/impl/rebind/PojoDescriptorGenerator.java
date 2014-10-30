@@ -28,9 +28,10 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**
- * This is the {@link net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator incremental GWT generator} to
- * generate implementations of {@link PojoDescriptor} for a particular {@link net.sf.mmm.util.pojo.api.Pojo POJO}.
- * 
+ * This is the {@link net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator incremental GWT generator}
+ * to generate implementations of {@link PojoDescriptor} for a particular
+ * {@link net.sf.mmm.util.pojo.api.Pojo POJO}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -101,18 +102,17 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
   /**
    * Generates the method {@link AbstractPojoDescriptorImpl#newInstance()}.
-   * 
+   *
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
-   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the source code
-   *        to.
+   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the
+   *        source code to.
    * @param pojoDescriptor is the {@link PojoDescriptor}.
    */
   private void generateMethodNewInstance(JClassType inputType, SourceWriter sourceWriter,
       PojoDescriptor<?> pojoDescriptor) {
 
-    generateSourcePublicMethodDeclaration(sourceWriter, inputType.getQualifiedSourceName(), "newInstance", "",
-        false);
+    generateSourcePublicMethodDeclaration(sourceWriter, inputType.getQualifiedSourceName(), "newInstance", "", false);
 
     if (inputType.isInterface() != null) {
       sourceWriter.print("throw new ");
@@ -129,9 +129,9 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
   /**
    * Generates the constructor of the {@link Class} to generate.
-   * 
-   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the source code
-   *        to.
+   *
+   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the
+   *        source code to.
    * @param simpleName is the {@link Class#getSimpleName() simple name} of the {@link Class} to generate.
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
@@ -164,9 +164,9 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
   }
 
   /**
-   * This method determines the property descriptors of the {@link net.sf.mmm.util.pojo.api.Pojo} identified by
-   * <code>inputType</code>.
-   * 
+   * This method determines the property descriptors of the {@link net.sf.mmm.util.pojo.api.Pojo} identified
+   * by <code>inputType</code>.
+   *
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @return the {@link PojoDescriptor} for the given <code>inputType</code>.
@@ -200,13 +200,13 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
    */
   protected static class StatefulPropertyGenerator {
 
-    /** @see #StatefulPropertyGenerator(SourceWriter, JClassType) */
+    /** @see StatefulPropertyGenerator#StatefulPropertyGenerator(SourceWriter, JClassType) */
     private final SourceWriter sourceWriter;
 
-    /** @see #StatefulPropertyGenerator(SourceWriter, JClassType) */
+    /** @see StatefulPropertyGenerator#StatefulPropertyGenerator(SourceWriter, JClassType) */
     private final JClassType superType;
 
-    /** @see #StatefulPropertyGenerator(SourceWriter, JClassType) */
+    /** @see StatefulPropertyGenerator#StatefulPropertyGenerator(SourceWriter, JClassType) */
     private final PojoDescriptor<?> superDescriptor;
 
     /** @see #generateSuperDescriptorBlockIfNotAlreadyDone() */
@@ -220,11 +220,11 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
     /**
      * The constructor.
-     * 
-     * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the source code
-     *        to.
-     * @param superType is the supported super-type for which the descriptor may be reused in the generated code or
-     *        <code>null</code> for none.
+     *
+     * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the
+     *        source code to.
+     * @param superType is the supported super-type for which the descriptor may be reused in the generated
+     *        code or <code>null</code> for none.
      */
     public StatefulPropertyGenerator(SourceWriter sourceWriter, JClassType superType) {
 
@@ -239,8 +239,8 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
     }
 
     /**
-     * This method generates the source-code block to get the {@link PojoDescriptor} for the <code>superType</code> so
-     * things can be reused from super-classes to reduce memory consumption.
+     * This method generates the source-code block to get the {@link PojoDescriptor} for the
+     * <code>superType</code> so things can be reused from super-classes to reduce memory consumption.
      */
     protected void generateSuperDescriptorBlockIfNotAlreadyDone() {
 
@@ -257,7 +257,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
     /**
      * This method generates the source-code block to get the {@link PojoPropertyDescriptor} for the
      * <code>superType</code> so things can be reused from super-classes to reduce memory consumption.
-     * 
+     *
      * @param propertyDescriptor is the {@link PojoPropertyDescriptor}.
      */
     protected void generateSuperPropertyDescriptorBlockIfNotAlreadyDone(PojoPropertyDescriptor propertyDescriptor) {
@@ -279,7 +279,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
     /**
      * Generates the source-code to rebuild the given {@link PojoPropertyDescriptor}.
-     * 
+     *
      * @param propertyDescriptor is the {@link PojoPropertyDescriptor}.
      */
     public void generatePropertyDescriptorBlock(PojoPropertyDescriptor propertyDescriptor) {
@@ -309,12 +309,12 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
     /**
      * Generates the source-code of the statement to register a {@link PojoPropertyAccessor}.
-     * 
+     *
      * @param propertyDescriptor is the {@link PojoPropertyDescriptor} to generate in the source.
-     * @param superPropertyDescriptor is the {@link PojoPropertyDescriptor} of the super-type or <code>null</code> if
-     *        NOT available.
-     * @param mode is the {@link PojoPropertyAccessorMode} - either {@link PojoPropertyAccessorNonArgMode#GET} or
-     *        {@link PojoPropertyAccessorOneArgMode#SET}.
+     * @param superPropertyDescriptor is the {@link PojoPropertyDescriptor} of the super-type or
+     *        <code>null</code> if NOT available.
+     * @param mode is the {@link PojoPropertyAccessorMode} - either {@link PojoPropertyAccessorNonArgMode#GET}
+     *        or {@link PojoPropertyAccessorOneArgMode#SET}.
      */
     protected void generateAccessorStatement(PojoPropertyDescriptor propertyDescriptor,
         PojoPropertyAccessorMode<?> mode, PojoPropertyDescriptor superPropertyDescriptor) {
@@ -350,7 +350,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
     /**
      * Generates the source-code of the statement to register a {@link PojoPropertyAccessor}.
-     * 
+     *
      * @param accessor is the {@link PojoPropertyAccessor}.
      */
     protected void generateAccessorRegistrationStatement(PojoPropertyAccessor accessor) {
@@ -393,8 +393,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
         this.sourceWriter.print(accessor.getAccessibleObjectName());
         this.sourceWriter.print("((");
         if (propertyClass.isPrimitive()) {
-          this.sourceWriter.print(ReflectionUtilImpl.getInstance().getNonPrimitiveType(propertyClass)
-              .getSimpleName());
+          this.sourceWriter.print(ReflectionUtilImpl.getInstance().getNonPrimitiveType(propertyClass).getSimpleName());
         } else {
           this.sourceWriter.print(propertyClass.getName());
         }

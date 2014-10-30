@@ -6,7 +6,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface to create an {@link NlsFormatter}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -16,9 +16,9 @@ public interface NlsMessageFormatterFactory {
   /**
    * This method creates a new {@link NlsMessageFormatter} for the given <code>message</code>. <br>
    * The format of the <code>message</code> is described in {@link NlsMessage}.
-   * 
+   *
    * @param message is the template for the message where potential
-   *        {@link NlsMessageFormatter#format(Void, java.util.Locale, java.util.Map, NlsTemplateResolver)
+   *        {@link net.sf.mmm.util.nls.api.NlsFormatter#format(Object, java.util.Locale, java.util.Map, NlsTemplateResolver)
    *        arguments will be filled in}.
    * @return the {@link NlsMessageFormatter} for the given <code>message</code>.
    */

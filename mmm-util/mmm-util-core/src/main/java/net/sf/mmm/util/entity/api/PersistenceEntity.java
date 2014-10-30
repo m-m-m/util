@@ -14,8 +14,8 @@ package net.sf.mmm.util.entity.api;
  * modifications (e.g. invoke setters or sort list properties) that are NOT intended to be persisted. <br>
  * Further the underlying persistence-code may create dynamic proxies for your entity. Therefore you should
  * NOT declare methods (getters and setters) as <code>final</code> except you exactly know what you are doing.
- * Additionally {@link #getClass()} may return a subclass of your entity that you never created (see
- * <code>PersistenceManager</code> in <code>mmm-persistence</code> for additional information and
+ * Additionally {@link Object#getClass() getClass()} may return a subclass of your entity that you never
+ * created (see <code>PersistenceManager</code> in <code>mmm-persistence</code> for additional information and
  * support).</li>
  *
  *

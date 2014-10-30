@@ -39,7 +39,7 @@ package net.sf.mmm.util.nls.api;
  * </pre>
  *
  * For localization you create <code>*.properties</code> files (see
- * {@link net.sf.mmm.util.nls.base.ResourceBundleSynchronizer}) in the same package for each supported
+ * <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>) in the same package for each supported
  * {@link java.util.Locale}. In the example above e.g. <code>NlsBundleMyname_de.properties</code> with this
  * content:
  *
@@ -70,7 +70,6 @@ package net.sf.mmm.util.nls.api;
  * feel free to add an empty custom extension of {@link NlsBundle} as intermediate interface for your project
  * to decouple dependencies.
  *
- * @see NlsBundleLocation
  * @see NlsBundleMessage
  * @see NlsBundleKey
  *

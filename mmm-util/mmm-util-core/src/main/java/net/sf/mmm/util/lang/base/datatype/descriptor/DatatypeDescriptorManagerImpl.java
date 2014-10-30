@@ -37,8 +37,8 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   /** @see #getInstance() */
   private static DatatypeDescriptorManagerImpl instance;
 
-  /** Lazy filled {@link Map} for {@link DatatypeInfo}. */
-  private final Map<Class<?>, DatatypeDescriptor<?>> datatypeInfoMap;
+  /** Lazy filled {@link Map} for {@link DatatypeDescriptor}. */
+  private final Map<Class<?>, DatatypeDescriptor<?>> datatypeDescriptorMap;
 
   /** @see #setDatatypeDetector(DatatypeDetector) */
   private DatatypeDetector datatypeDetector;
@@ -65,7 +65,7 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   public DatatypeDescriptorManagerImpl(MapFactory<?> mapFactory) {
 
     super();
-    this.datatypeInfoMap = mapFactory.createGeneric(64);
+    this.datatypeDescriptorMap = mapFactory.createGeneric(64);
     registerDatatypeDescriptor(new DatatypeDescriptorAtomicJavaDatatype<>(String.class));
     registerDatatypeDescriptor(new DatatypeDescriptorAtomicJavaDatatype<>(Integer.class));
     registerDatatypeDescriptor(new DatatypeDescriptorAtomicJavaDatatype<>(Long.class));
@@ -160,14 +160,14 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   protected void registerDatatypeDescriptor(DatatypeDescriptor<?> descriptor) {
 
     Class<?> datatype = descriptor.getDatatype();
-    DatatypeDescriptor<?> existing = this.datatypeInfoMap.get(datatype);
+    DatatypeDescriptor<?> existing = this.datatypeDescriptorMap.get(datatype);
     if (existing == descriptor) {
       getLogger().info("Ignoring duplicate descriptor for {}", datatype);
     } else {
       if (existing != null) {
         throw new DuplicateObjectException(descriptor, datatype, existing);
       }
-      this.datatypeInfoMap.put(descriptor.getDatatype(), descriptor);
+      this.datatypeDescriptorMap.put(descriptor.getDatatype(), descriptor);
     }
   }
 
@@ -185,10 +185,10 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
       // Java is sometimes insane
       datatype = (Class) datatype.getSuperclass();
     }
-    DatatypeDescriptor<T> datatypeDescriptor = (DatatypeDescriptor<T>) this.datatypeInfoMap.get(datatype);
+    DatatypeDescriptor<T> datatypeDescriptor = (DatatypeDescriptor<T>) this.datatypeDescriptorMap.get(datatype);
     if (datatypeDescriptor == null) {
       datatypeDescriptor = createDatatypeDescriptor(datatype);
-      this.datatypeInfoMap.put(datatype, datatypeDescriptor);
+      this.datatypeDescriptorMap.put(datatype, datatypeDescriptor);
     }
     return datatypeDescriptor;
   }

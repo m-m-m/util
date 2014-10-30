@@ -4622,15 +4622,13 @@ public interface UnicodeUtil {
    * This method determines if the given character is a hyphen. A hyphen is a character used to separate
    * syllables in words or to join words.
    *
-   * @see net.sf.mmm.util.text.api.Hyphenator
-   *
    * @see #HYPHEN_MINUS
    * @see #HYPHEN
    * @see #HYPHEN_BULLET
    * @see #HYPHENATION_POINT
    *
    * @param character is the character to check.
-   * @return <code>true</code> if <code>character</code> is a hypen.
+   * @return <code>true</code> if <code>character</code> is a hyphen.
    */
   boolean isHyphen(char character);
 

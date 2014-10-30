@@ -22,17 +22,16 @@ package net.sf.mmm.util.entity.api;
  * actually revision controlled. In case of envers you can see this by looking for <code>&#64;Audited</code>
  * annotations. Also in case of <code>mmm-persistence</code> you will notice this by looking at the
  * <code>DAO</code>.
- * 
+ *
  * @param <ID> is the type of the {@link #getId() primary key}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public interface RevisionedEntity<ID> extends GenericEntity<ID> {
 
   /**
-   * The latest {@link #getRevision() revision} of an {@link GenericEntity entity}. <br>
-   * Value is: {@value}
+   * The latest {@link #getRevision() revision} of an {@link GenericEntity entity}.
    */
   Number LATEST_REVISION = null;
 
@@ -40,7 +39,7 @@ public interface RevisionedEntity<ID> extends GenericEntity<ID> {
    * This method gets the revision of this entity. The {@link RevisionedEntity#LATEST_REVISION latest
    * revision} of an entity will always return <code>null</code>. Otherwise this object is a
    * <em>historic entity</em> and it will be read-only so modifications are NOT permitted.
-   * 
+   *
    * @return the revision or {@link #LATEST_REVISION} (<code>null</code>) if this is the latest revision.
    */
   Number getRevision();

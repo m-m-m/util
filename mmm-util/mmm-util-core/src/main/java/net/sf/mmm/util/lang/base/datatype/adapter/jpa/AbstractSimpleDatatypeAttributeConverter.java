@@ -21,6 +21,16 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  *
  * For an example how to implement such a converter see e.g. {@link VersionIdentifierAttributeConverter}.
  *
+ * <br/>
+ * <b>ATTENTION:</b><br/>
+ * JPA 2.1 (officially) supports the conversion of all basic types except:
+ * <ul>
+ * <li>Id attributes (including the attributes of embedded ids and derived identities)</li>
+ * <li>version attributes</li>
+ * <li>relationship attributes</li>
+ * <li>attributes explicitly annotated as Enumerated or Temporal or designated as such in the XML descriptor.</li>
+ * </ul>
+ *
  * @param <V> the generic for the basic java type representing the {@link SimpleDatatype#getValue() value}.
  * @param <T> the generic for the adapted {@link SimpleDatatype}.
  *

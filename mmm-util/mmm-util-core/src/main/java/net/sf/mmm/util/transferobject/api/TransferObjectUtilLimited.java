@@ -22,15 +22,15 @@ public interface TransferObjectUtilLimited {
    *
    * @param <TO> is the generic type of the {@link AbstractTransferObject}.
    * @param template is the {@link AbstractTransferObject} to clone. Must NOT be <code>null</code>.
-   * @return a new instance with the same {@link #getClass() type} as the given <code>template</code>.
+   * @return a new instance with the same {@link Object#getClass() type} as the given <code>template</code>.
    */
   <TO extends AbstractTransferObject> TO clone(TO template);
 
   /**
    * This method creates a new instance of the {@link AbstractTransferObject} given as <code>template</code>.
    * A simple implementation my just return
-   * <code>template.{@link #getClass()}.{@link Class#newInstance() newInstance()}</code>. However, an
-   * implementation may also be generated to be GWT compatible.
+   * <code>template.{@link Object#getClass() getClass()}.{@link Class#newInstance() newInstance()}</code>.
+   * However, an implementation may also be generated to be GWT compatible.
    *
    * @param <TO> is the generic type of the {@link AbstractTransferObject}.
    * @param template is the {@link AbstractTransferObject} to create a new instance of. Must NOT be

@@ -13,8 +13,9 @@ import java.io.Serializable;
  * <li>It is <em>immutable</em> and therefore stateless (its value assigned at construction time and can not
  * be modified).</li>
  * <li>It is {@link Serializable}.</li>
- * <li>It implements {@link #equals(Object)} and {@link #hashCode()} properly (two different instances with
- * the same value are {@link #equals(Object) equal} and have the same {@link #hashCode() hash}).</li>
+ * <li>It implements {@link Object#equals(Object) equals} and {@link Object#hashCode() hashCode} properly (two
+ * different instances with the same value are {@link Object#equals(Object) equal} and have the same
+ * {@link Object#hashCode() hash}).</li>
  * <li>It shall ensure syntactical validation so it is NOT possible to create an instance with an invalid
  * value.</li>
  * <li>It is responsible for formatting its value to a {@link #toString() string representation} suitable for
@@ -50,9 +51,9 @@ import java.io.Serializable;
  * </ul>
  * It is suitable and in most cases also recommended to use the class implementing the datatype as API
  * omitting a dedicated interface.
- * 
+ *
  * @see AbstractSimpleDatatype
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -67,7 +68,7 @@ public interface Datatype extends Serializable {
    * This method is not supposed to do internationalization (I18N). See
    * {@link net.sf.mmm.util.nls.api.NlsMessage} for this purpose and implement
    * {@link net.sf.mmm.util.nls.api.NlsObject} if you want to support I18N/L10N.
-   * 
+   *
    * @return the official {@link String} representation to display the value of this {@link Datatype}.
    */
   @Override
