@@ -291,8 +291,8 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * <ul>
    * <li><code>{@link #COMPARE_TO_INCOMPARABLE}</code> if both versions are incompatible to each other (e.g.
    * ).</li>
-   * <li><code>0</code> if both versions are historically equivalent (but may NOT be {@link #equals(Object)
-   * equal})</li>
+   * <li><code>0</code> if both versions are historically equivalent (but may NOT be
+   * {@link Object#equals(Object) equal})</li>
    * <li>a negative value if this version is a predecessor of <code>otherVersion</code>. The value -1
    * indicates a <em>{@link #COMPARE_TO_STRICT_PREDECESSOR strict predecessor}</em>.</li>
    * <li>a positive value if this version is a successor of <code>otherVersion</code>. The value +1 indicates

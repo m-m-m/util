@@ -20,7 +20,7 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.validation.api.ValueValidator} that adapts to
- * {@link javax.validation} (JSR 303).
+ * <code>javax.validation</code> (JSR 303).
  *
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
  *

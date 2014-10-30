@@ -200,13 +200,13 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
    */
   protected static class StatefulPropertyGenerator {
 
-    /** @see StatefulPropertyGenerator#StatefulPropertyGenerator(SourceWriter, JClassType) */
+    /** @see #PojoDescriptorGenerator.StatefulPropertyGenerator(SourceWriter, JClassType) */
     private final SourceWriter sourceWriter;
 
-    /** @see StatefulPropertyGenerator#StatefulPropertyGenerator(SourceWriter, JClassType) */
+    /** @see #PojoDescriptorGenerator.StatefulPropertyGenerator(SourceWriter, JClassType) */
     private final JClassType superType;
 
-    /** @see StatefulPropertyGenerator#StatefulPropertyGenerator(SourceWriter, JClassType) */
+    /** @see #PojoDescriptorGenerator.StatefulPropertyGenerator(SourceWriter, JClassType) */
     private final PojoDescriptor<?> superDescriptor;
 
     /** @see #generateSuperDescriptorBlockIfNotAlreadyDone() */

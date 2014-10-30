@@ -22,7 +22,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 public abstract class AbstractValueConverterToSimilarPojo<SOURCE, TARGET> extends
     AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> {
 
-  /** @see #handleNoGetterForSetter(PojoPropertyAccessorOneArg, Object, Class) */
+  /** @see #handleNoGetterForSetter(PojoPropertyAccessorOneArg, Class, Object, Class) */
   private final Set<PojoPropertyAccessorOneArg> unmatchedSetters;
 
   /**

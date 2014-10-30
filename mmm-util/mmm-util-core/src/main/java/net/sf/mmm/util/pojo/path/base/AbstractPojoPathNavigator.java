@@ -1202,7 +1202,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     }
 
     /**
-     * This method disables further {@link PojoPathState#setCachedPath(String, CachingPojoPath) caching}.
+     * This method disables further
+     * {@link AbstractPojoPathNavigator.PojoPathState#setCachedPath(String, CachingPojoPath) caching}.
      */
     public void setCachingDisabled() {
 

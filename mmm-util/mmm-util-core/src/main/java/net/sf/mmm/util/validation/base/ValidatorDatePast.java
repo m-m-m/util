@@ -8,9 +8,10 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that {@link #validate(Date, Object)
- * validates that a value} lies in the past.
- * 
+ * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that
+ * {@link net.sf.mmm.util.validation.api.ValueValidator#validate(Object, Object) validates that a date} lies
+ * in the past.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */

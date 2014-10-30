@@ -35,7 +35,7 @@ public interface TransferObjectUtilLimited {
    * @param <TO> is the generic type of the {@link AbstractTransferObject}.
    * @param template is the {@link AbstractTransferObject} to create a new instance of. Must NOT be
    *        <code>null</code>.
-   * @return a new instance with the same {@link #getClass() type} as the given <code>template</code>.
+   * @return a new instance with the same {@link Object#getClass() type} as the given <code>template</code>.
    */
   <TO extends AbstractTransferObject> TO newInstance(TO template);
 

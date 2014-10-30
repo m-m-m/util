@@ -12,10 +12,10 @@
  * <pre>
  * public class InvalidCustomerNumberException extends {@link net.sf.mmm.util.exception.api.NlsRuntimeException} {
  *   public InvalidCustomerNumberException(String customerNumber) {
- *     super({@link #createBundle(Class) createBundle}(My{@link NlsBundle}Root.class).errorInvalidCustomerNumber(customerNumber);
+ *     super({@link net.sf.mmm.util.exception.api.NlsRuntimeException#createBundle(Class) createBundle}(My{@link net.sf.mmm.util.nls.api.NlsBundle}Root.class).errorInvalidCustomerNumber(customerNumber);
  *   }
  *
- *   public {@link #getCode()} { // optional method
+ *   public {@link net.sf.mmm.util.exception.api.NlsRuntimeException#getCode() getCode()} { // optional method
  *     return "CUST0001"; // maybe use a constant
  *   }
  * }
