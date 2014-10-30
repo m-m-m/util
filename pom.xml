@@ -429,7 +429,7 @@
             <docfilessubdirs>true</docfilessubdirs>
             <additionalparam>-Xdoclint:none</additionalparam>
             <links>
-              <link>http://docs.oracle.com/javase/7/docs/api/</link>
+              <link>http://docs.oracle.com/javase/8/docs/api/</link>
               <link>http://m-m-m.sourceforge.net/apidocs/</link>
             </links>
             <doctitle>JavaDocs for ${project.name} ${project.version}</doctitle>
