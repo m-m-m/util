@@ -4545,6 +4545,7 @@ public interface UnicodeUtil {
    * given <code>character</code>.
    *
    * @see java.text.Normalizer
+   * @see #transliterate(String)
    *
    * @param character is the character to convert.
    * @return a sequence of characters with the transliteration of the given character or <code>null</code> if
@@ -4554,7 +4555,11 @@ public interface UnicodeUtil {
 
   /**
    * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the
-   * given <code>text</code>.
+   * given <code>text</code>. This method will support common transliteration standards such as ISO 843
+   * (greek), ISO 9 (cyrillic), etc. However, for some writing systems there are multiple ways of
+   * transliteration and some things done by this method may not officially be called transliteration. So
+   * please consider it as a pragmatic way to convert text to the Latin alphabet. We are looking for help in
+   * supporting additional writing systems but not for scientific discussion about linguistic.
    *
    * @see java.text.Normalizer
    *
