@@ -12,7 +12,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
  * child} that is surrounded by a {@link #getLabel() labeled} border. <br>
  * Here you can see an example (the options are the {@link #setChild(UiWidgetRegular) content} and not part of
  * the {@link UiWidgetAbstractBorderPanel} itself):
- * 
+ *
  * <pre>
  * <fieldset>
  * <legend>What is your choice?</legend>
@@ -21,7 +21,7 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
  * <input type="radio">Option3</input>
  * </fieldset>
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -30,5 +30,11 @@ public interface UiWidgetAbstractBorderPanel extends UiWidgetPanel<UiWidgetRegul
 
   /** The default {@link #getPrimaryStyle() primary style} of this widget. */
   String STYLE_BORDER_PANEL = CssStyles.BORDER_PANEL;
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  void setChild(UiWidgetRegular child);
 
 }

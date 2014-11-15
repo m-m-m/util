@@ -1,5 +1,4 @@
-/* $Id: $
- * Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.contenttype.base;
 
@@ -23,9 +22,8 @@ import net.sf.mmm.util.contenttype.base.format.SegmentContainerSequence;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
- * This is the abstract base implementation of the {@link ContentType}
- * interface.
- * 
+ * This is the abstract base implementation of the {@link ContentType} interface.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @XmlRootElement(name = "content-type")
@@ -78,7 +76,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
 
   /**
    * The constructor.
-   * 
+   *
    * @param parent is the {@link #getParent() parent node}.
    */
   public ContentTypeBean(ContentType parent) {
@@ -97,11 +95,9 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method sets the {@link #getTechnicalParent() technical parent} of this
-   * {@link ContentType}.
-   * 
-   * @param technicalParent is the {@link #getTechnicalParent() technical
-   *        parent} to set.
+   * This method sets the {@link #getTechnicalParent() technical parent} of this {@link ContentType}.
+   *
+   * @param technicalParent is the {@link #getTechnicalParent() technical parent} to set.
    */
   protected void setTechnicalParent(ContentTypeBean technicalParent) {
 
@@ -137,9 +133,9 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   /**
    * This method sets the {@link #getDefaultExtension() default extension}. <br>
    * <b>ATTENTION:</b><br>
-   * You should also {@link #addExtension(String) add} the
-   * <code>defaultExtension</code> to the {@link #getExtensions() extensions}.
-   * 
+   * You should also {@link #addExtension(String) add} the <code>defaultExtension</code> to the
+   * {@link #getExtensions() extensions}.
+   *
    * @param defaultExtension is the defaultExtension to set.
    */
   protected void setDefaultExtension(String defaultExtension) {
@@ -156,9 +152,8 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method adds the given <code>extension</code> to the
-   * {@link #getExtensions() extensions}.
-   * 
+   * This method adds the given <code>extension</code> to the {@link #getExtensions() extensions}.
+   *
    * @param extension is the extension to add.
    */
   protected void addExtension(String extension) {
@@ -220,7 +215,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
 
   /**
    * This method sets the {@link #isAbstract() abstract} flag.
-   * 
+   *
    * @param abstractFlag is the new {@link #isAbstract() abstract} flag.
    */
   protected void setAbstract(boolean abstractFlag) {
@@ -229,9 +224,9 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method gets the {@link SegmentContainerSequence} representing the actual
-   * format of the {@link ContentType}.
-   * 
+   * This method gets the {@link SegmentContainerSequence} representing the actual format of the
+   * {@link ContentType}.
+   *
    * @return the format.
    */
   public SegmentContainerSequence getFormat() {
@@ -259,12 +254,11 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method is required for JAXB. As there is no way than the return type
-   * to specify the type of a {@link XmlIDREF} of a getter, we also need a
-   * specialized setter with that type to satisfy JAXB.
-   * 
-   * @see #setParent(ContentType)
-   * 
+   * This method is required for JAXB. As there is no way than the return type to specify the type of a
+   * {@link XmlIDREF} of a getter, we also need a specialized setter with that type to satisfy JAXB.
+   *
+   * @see net.sf.mmm.util.collection.base.AbstractGenericTreeNode#setParent(net.sf.mmm.util.collection.api.GenericTreeNode)
+   *
    * @param parent is the new {@link #getParent() parent}.
    */
   protected void setParent(ContentTypeBean parent) {

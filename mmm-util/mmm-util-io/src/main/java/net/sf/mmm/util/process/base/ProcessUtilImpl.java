@@ -36,7 +36,7 @@ import net.sf.mmm.util.process.api.ProcessUtil;
  * terminates. When writing a server-application or library, that makes such calls repetitive, you should
  * create your own instance and {@link #setExecutor(Executor) configure} a thread-pool as
  * {@link java.util.concurrent.Executor}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -65,7 +65,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
    * This method gets the singleton instance of this {@link ProcessUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static ProcessUtil getInstance() {
@@ -99,7 +99,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
 
   /**
    * This method gets the {@link Executor} used to run asynchronous tasks. It may use a thread-pool.
-   * 
+   *
    * @return the executor.
    */
   protected Executor getExecutor() {
@@ -109,7 +109,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
 
   /**
    * This method sets the {@link #getExecutor() executor}.
-   * 
+   *
    * @param executor the executor to set.
    */
   @Inject
@@ -121,7 +121,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
 
   /**
    * This method gets the stream-util that is used by this process-util.
-   * 
+   *
    * @return the streamUtil
    */
   protected StreamUtil getStreamUtil() {
@@ -131,7 +131,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
 
   /**
    * This method sets the {@link #getStreamUtil() stream-util}.
-   * 
+   *
    * @param streamUtil the streamUtil to set
    */
   @Inject
@@ -195,7 +195,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
 
     /**
      * The constructor.
-     * 
+     *
      * @param executor is the process-executor to call.
      */
     public AsyncProcessExecutorImpl(ProcessExecutor executor) {
@@ -221,18 +221,18 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
    */
   protected class ProcessExecutor implements Callable<Integer>, Stoppable {
 
-    /** @see ProcessExecutor#ProcessExecutor(ProcessContext, ProcessBuilder[]) */
+    /** @see #ProcessUtilImpl.ProcessExecutor(ProcessContext, ProcessBuilder[]) */
     private final ProcessContext context;
 
-    /** @see ProcessExecutor#ProcessExecutor(ProcessContext, ProcessBuilder[]) */
+    /** @see #ProcessUtilImpl.ProcessExecutor(ProcessContext, ProcessBuilder[]) */
     private final Process[] processes;
 
-    /** @see ProcessExecutor#ProcessExecutor(ProcessContext, ProcessBuilder[]) */
+    /** @see #ProcessUtilImpl.ProcessExecutor(ProcessContext, ProcessBuilder[]) */
     private final AsyncTransferrer[] transferrers;
 
     /**
      * The constructor.
-     * 
+     *
      * @param context is the context of the process pipe.
      * @param builders are the configurations of the {@link Process}(es) to execute. The array needs to have a
      *        length greater than zero.
@@ -319,9 +319,9 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * This method executes the {@link Process}(es).
-     * 
+     *
      * @return the return-code of the (last) process.
      * @throws InterruptedException if a process was interrupted.
      */

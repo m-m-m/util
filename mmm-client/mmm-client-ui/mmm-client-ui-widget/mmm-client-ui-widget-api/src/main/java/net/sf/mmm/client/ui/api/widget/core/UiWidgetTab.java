@@ -12,15 +12,15 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetSingleMutableComposite;
 /**
  * This is the interface for a {@link UiWidgetSingleMutableComposite single composite widget} that represents
  * a single <code>tab</code>. In order to
- * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel#addChild(UiWidgetTab) add} a something like a
- * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel panel} to a
+ * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetDynamicPanel#addChild(net.sf.mmm.client.ui.api.widget.UiWidget)
+ * add} a something like a {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetPanel panel} to a
  * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel tab panel}, you need to create an
  * {@link UiWidgetTab} {@link #getChild() containing} that
  * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel panel} and add it to the
  * {@link net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel tab panel}.
- * 
+ *
  * @see net.sf.mmm.client.ui.api.widget.panel.UiWidgetTabPanel
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

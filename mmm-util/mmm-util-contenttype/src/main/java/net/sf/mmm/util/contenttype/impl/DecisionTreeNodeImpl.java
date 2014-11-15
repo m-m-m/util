@@ -10,7 +10,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -19,7 +19,6 @@ public class DecisionTreeNodeImpl implements DecisionTreeNode {
   /** @see #getContentType() */
   private ContentType contentType;
 
-  /** @see */
   private Map<Byte, DecisionTreeNodeImpl> byte2childNodeMap;
 
   /**
@@ -49,8 +48,7 @@ public class DecisionTreeNodeImpl implements DecisionTreeNode {
   /**
    * {@inheritDoc}
    */
-  public DecisionTreeNode detect(DetectorStreamBuffer buffer, Map<String, Object> metadata,
-      boolean eos) {
+  public DecisionTreeNode detect(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) {
 
     // TODO Auto-generated method stub
     return null;

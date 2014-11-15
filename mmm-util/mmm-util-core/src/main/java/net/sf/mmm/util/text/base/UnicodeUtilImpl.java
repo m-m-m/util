@@ -61,7 +61,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
 
     TRANSLITERATION_MAP = new HashMap<>();
     initIso9(TRANSLITERATION_MAP);
-    initGreek(TRANSLITERATION_MAP);
+    initIso843(TRANSLITERATION_MAP);
 
     // musical symbols
     CHARACTER_TO_ASCII_MAP.put(MUSIC_FLAT_SIGN, "b");
@@ -310,14 +310,13 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   }
 
   /**
-   * Implementation of <a href="http://de.wikipedia.org/wiki/ISO_9">ISO 9</a>.
+   * Implementation of <a href="http://en.wikipedia.org/wiki/ISO_843">ISO 843</a>.
    *
    * @param map is where to add the transliteration mapping.
    */
-  private static void initGreek(Map<Character, String> map) {
+  private static void initIso843(Map<Character, String> map) {
 
     // Greek letters
-
     map.put(GREEK_CAPITAL_LETTER_ALPHA, "A");
     map.put(GREEK_CAPITAL_LETTER_BETA, "B");
     map.put(GREEK_CAPITAL_LETTER_GAMMA, "G");

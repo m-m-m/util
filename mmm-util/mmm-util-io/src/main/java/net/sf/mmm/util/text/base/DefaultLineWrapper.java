@@ -732,13 +732,13 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /** The {@link Hyphenator} to use. */
     private final Hyphenator hyphenator;
 
-    /** @see #next(TextSegment) */
+    /** @see #next(DefaultLineWrapper.TextSegment) */
     private final BreakIterator breakIterator;
 
-    /** @see #next(TextSegment) */
+    /** @see #next(DefaultLineWrapper.TextSegment) */
     private int breakIteratorIndex;
 
-    /** @see #next(TextSegment) */
+    /** @see #next(DefaultLineWrapper.TextSegment) */
     private int segmentIndex;
 
     /** @see #getTextIndex() */
@@ -857,8 +857,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
 
     /**
-     * This method {@link TextSegment#initialize(int, int, TextSegmentType) initializes} the given
-     * {@link TextSegment} with the next segment-data from the {@link #getText() text}.
+     * This method {@link TextSegment#initialize(int, int, DefaultLineWrapper.TextSegmentType) initializes}
+     * the given {@link TextSegment} with the next segment-data from the {@link #getText() text}.
      *
      * @param textSegment a previous {@link TextSegment} that can be reused.
      * @return the {@link TextSegment} with the next segment-data or <code>null</code> if the

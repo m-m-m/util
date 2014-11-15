@@ -13,12 +13,18 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetNative;
  * {@link UiWidgetMenuItem menu items} to execute a specific functionality. <br>
  * A {@link UiWidgetMenu} is also a {@link UiWidgetMenuItem} so you can add it to another menu as a
  * <em>sub menu</em>.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface UiWidgetMenu extends UiWidgetDynamicComposite<UiWidgetMenuItem>, UiWidgetMenuItem,
     AttributeWriteLabel, UiWidgetNative {
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  void addChild(UiWidgetMenuItem child);
 
   /**
    * This method {@link #addChild(UiWidgetMenuItem) adds} a {@link UiWidgetMenuItemSeparator separator} to
@@ -28,7 +34,7 @@ public interface UiWidgetMenu extends UiWidgetDynamicComposite<UiWidgetMenuItem>
 
   /**
    * This method {@link #addChild(UiWidgetMenuItem) adds} a sub-{@link UiWidgetMenu menu} to this menu.
-   * 
+   *
    * @param label is the {@link #getLabel() label} of the sub-menu.
    * @return the new sub-menu.
    */

@@ -11,9 +11,10 @@ import net.sf.mmm.client.ui.api.widget.UiWidgetWithValue;
  * <em>toggle button</em>. It is a {@link #getValue() stateful} {@link UiWidgetButton button} that toggles
  * between <em>up</em> and <em>down</em> state with each click. So it is some sort of hybrid mixture of a
  * {@link UiWidgetButton button} and a {@link net.sf.mmm.client.ui.api.widget.field.UiWidgetCheckboxField
- * checkbox}. Such widget commonly has an {@link #setImage(UiWidgetImage) icon} and a
+ * checkbox}. Such widget commonly has an
+ * {@link net.sf.mmm.client.ui.api.widget.UiWidgetClickable#setImage(UiWidgetImage) icon} and a
  * {@link #setTooltip(String) tooltip}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
