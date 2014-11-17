@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.api;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
@@ -37,5 +38,14 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
    * @return a collection with all {@link PojoPropertyDescriptor property descriptor}s
    */
   Collection<? extends PojoPropertyAccessor> getAccessors();
+  
+  /**
+   * This method returns the {@link Field} this {@link PojoPropertyDescriptor descriptor} represents or 
+   * <code>null</code> if this {@link PojoPropertyDescriptor descriptor} does not represent any {@link Field field}
+   *   
+   * @return the {@link Field}, which is part of this {@link PojoPropertyDescriptor} or <code>null</code> 
+   * if this {@link PojoPropertyDescriptor} is not related to a {@link Field}
+   */
+  Field getField();
 
 }

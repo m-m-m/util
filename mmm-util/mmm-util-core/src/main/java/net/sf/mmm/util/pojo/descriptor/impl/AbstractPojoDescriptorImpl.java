@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -147,6 +148,19 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
       descriptor = new PojoPropertyDescriptorImpl(propertyName);
       this.propertyMap.put(propertyName, descriptor);
     }
+    return descriptor;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public PojoPropertyDescriptorImpl getOrCreatePropertyDescriptor(Field field) {
+	PojoPropertyDescriptorImpl descriptor = this.propertyMap.get(field.getName());
+	if (descriptor == null) {
+	  descriptor = new PojoPropertyDescriptorImpl(field);
+	  this.propertyMap.put(field.getName(), descriptor);
+	}
     return descriptor;
   }
 

@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
+import java.lang.reflect.Field;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 
@@ -15,6 +17,9 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
 
   /** @see #getName() */
   private final String name;
+  
+  /** @see #getField() */
+  private final Field field;
 
   /**
    * The constructor.
@@ -25,6 +30,18 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
 
     super();
     this.name = propertyName;
+    this.field = null;
+  }
+
+  /**
+   * This constructor interconnects this {@link PojoPropertyDescriptor} with the given field
+   * @param field sets the {@link Field} for and the property's {@link #getName() name}
+   */
+  public AbstractPojoPropertyDescriptor(Field field) {
+	
+	super();
+	this.name = field.getName();
+	this.field = field;
   }
 
   /**
@@ -34,6 +51,13 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   public String getName() {
 
     return this.name;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Field getField() {
+	return field;
   }
 
   /**
