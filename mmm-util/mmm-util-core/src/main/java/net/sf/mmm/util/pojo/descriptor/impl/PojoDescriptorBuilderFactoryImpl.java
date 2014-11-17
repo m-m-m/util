@@ -48,9 +48,9 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
       synchronized (PojoDescriptorBuilderFactoryImpl.class) {
         if (instance == null) {
           PojoDescriptorBuilderFactoryImpl impl = new PojoDescriptorBuilderFactoryImpl();
-          impl.initialize();
           instance = impl;
           setInstance(impl);
+          impl.initialize();
         }
       }
     }
