@@ -19,7 +19,7 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   private final String name;
   
   /** @see #getField() */
-  private final Field field;
+  private Field field;
 
   /**
    * The constructor.
@@ -56,8 +56,18 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   /**
    * {@inheritDoc}
    */
+  @Override
   public Field getField() {
 	return field;
+  }
+  
+  /**
+   * Sets the {@link Field} represented by this {@link PojoPropertyDescriptor descriptor}. 
+   * Necessary in case of {@link Field field} gets introspected after methods.
+   * @param field {@link Field} represented by this {@link PojoPropertyDescriptor descriptor}
+   */
+  public void setField(Field field) {
+	  this.field = field;
   }
 
   /**

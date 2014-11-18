@@ -161,6 +161,10 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
 	  descriptor = new PojoPropertyDescriptorImpl(field);
 	  this.propertyMap.put(field.getName(), descriptor);
 	}
+	// enrich descriptor if necessary
+	if(descriptor.getField() == null) {
+		descriptor.setField(field);
+	}
     return descriptor;
   }
 
