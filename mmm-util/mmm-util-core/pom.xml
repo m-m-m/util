@@ -9,7 +9,8 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-core</artifactId>
-  <version>${net.sf.mmm.util.core.version}</version>
+  <!-- <version>${net.sf.mmm.util.core.version}</version> -->
+  <version>7.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>provides core utilities that fill gaps in the jdk.</description>
