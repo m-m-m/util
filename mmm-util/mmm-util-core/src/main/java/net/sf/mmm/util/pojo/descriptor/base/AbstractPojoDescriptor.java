@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
@@ -91,6 +92,15 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    *         <code>propertyName</code>.
    */
   public abstract PojoPropertyDescriptorImpl getOrCreatePropertyDescriptor(String propertyName);
+  
+  /**
+   * This method gets the property-descriptor for the given <code>field</code>.
+   * 
+   * @param field of the requested property-descriptor.
+   * @return the requested property-descriptor or <code>null</code> if NO property exists with the given
+   *         <code>field</code>.
+   */
+  public abstract PojoPropertyDescriptorImpl getOrCreatePropertyDescriptor(Field field);
 
   /**
    * {@inheritDoc}
