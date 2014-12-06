@@ -40,13 +40,23 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
    * @return a collection with all {@link PojoPropertyDescriptor property descriptor}s
    */
   Collection<? extends PojoPropertyAccessor> getAccessors();
-  
+
   /**
-   * This method returns the {@link Field} this {@link PojoPropertyDescriptor descriptor} represents or 
-   * <code>null</code> if this {@link PojoPropertyDescriptor descriptor} does not represent any {@link Field field}
-   *   
-   * @return the {@link Field}, which is part of this {@link PojoPropertyDescriptor} or <code>null</code> 
-   * if this {@link PojoPropertyDescriptor} is not related to a {@link Field}
+   * This method returns the {@link Field} this {@link PojoPropertyDescriptor descriptor} represents or
+   * <code>null</code> if this {@link PojoPropertyDescriptor descriptor} does not represent any {@link Field
+   * field}. <br/>
+   * <b>ATTENTION:</b><br/>
+   * {@link PojoPropertyAccessor#getAccessibleObject()} will return the accessible object for the
+   * {@link #getAccessor(PojoPropertyAccessorMode) according accessor}. Depending on the introspection variant
+   * this will represent the actual method or field used to access the property. Therefore if you want to
+   * evaluate annotations of a property you should by default use
+   * {@link PojoPropertyAccessor#getAccessibleObject()} of the
+   * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter}. However,
+   * if you are using method introspection and want to additionally access the field with the same property
+   * name if available in the {@link net.sf.mmm.util.pojo.api.Pojo} then this method is the right one.
+   *
+   * @return the {@link Field}, which is part of this {@link PojoPropertyDescriptor} or <code>null</code> if
+   *         this {@link PojoPropertyDescriptor} is not related to a {@link Field}
    */
   Field getField();
 

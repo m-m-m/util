@@ -32,7 +32,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 /**
  * This is the generic implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}
  * interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -61,7 +61,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * The constructor. By default it only introspects {@link Method methods} that are public and NOT static. <br>
    * <b>ATTENTION:</b><br>
    * You need to {@link #initialize()} this component before it can be used.
-   * 
+   *
    * @param mapFactory is the factory used to create the descriptor cache.
    */
   @SuppressWarnings("rawtypes")
@@ -92,7 +92,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the introspector used to find potential {@link Method methods} for
    * {@link PojoPropertyAccessor accessing} {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
    * properties} of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
-   * 
+   *
    * @return the introspector to use.
    */
   protected PojoMethodIntrospector getMethodIntrospector() {
@@ -102,7 +102,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /**
    * This method sets the {@link #getMethodIntrospector() method-introspector}.
-   * 
+   *
    * @param introspector the introspector to set.
    */
   @Inject
@@ -116,7 +116,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the introspector used to find potential {@link Field fields} for
    * {@link PojoPropertyAccessor accessing} {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
    * properties} of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
-   * 
+   *
    * @return the introspector to use.
    */
   protected PojoFieldIntrospector getFieldIntrospector() {
@@ -126,7 +126,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /**
    * This method sets the {@link #getFieldIntrospector() field-introspector}.
-   * 
+   *
    * @param introspector the introspector to set.
    */
   public void setFieldIntrospector(PojoFieldIntrospector introspector) {
@@ -139,7 +139,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * This method gets the accessor-builders used to create the {@link PojoPropertyAccessor accessors} for
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties} of a
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
-   * 
+   *
    * @return the accessorBuilders.
    */
   protected Collection<PojoPropertyAccessorBuilder<?>> getAccessorBuilders() {
@@ -149,7 +149,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /**
    * This method gets the {@link ExtendedPojoDescriptorDependenciesImpl}.
-   * 
+   *
    * @return the {@link ExtendedPojoDescriptorDependenciesImpl}.
    */
   protected ExtendedPojoDescriptorDependenciesImpl getDependencies() {
@@ -168,7 +168,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /**
    * This method sets the {@link ExtendedPojoDescriptorDependenciesImpl}.
-   * 
+   *
    * @param configuration is the {@link ExtendedPojoDescriptorDependenciesImpl} .
    */
   @Inject
@@ -177,31 +177,18 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
     getInitializationState().requireNotInitilized();
     this.configuration = configuration;
   }
-  
-  /**
-   * @see #registerAccessor(PojoDescriptorImpl, PojoPropertyAccessor, Field)
-   */
-  protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor) {
-	  return registerAccessor(descriptor, accessor, null);
-  }
 
   /**
    * This method registers the given <code>accessor</code> for the given <code>descriptor</code>.
-   * 
+   *
    * @param descriptor is the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}.
    * @param accessor is the {@link PojoPropertyAccessor} to register.
-   * @param field of the property to register the accessor for (default <code>null</code>)
    * @return <code>true</code> if the given <code>accessor</code> has been registered or <code>false</code> if
    *         it has been ignored (it is a duplicate).
    */
-  protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor, Field field) {
-	
-	PojoPropertyDescriptorImpl propertyDescriptor;
-	if(field == null) {
-		propertyDescriptor = descriptor.getOrCreatePropertyDescriptor(accessor.getName());		
-	} else {
-		propertyDescriptor = descriptor.getOrCreatePropertyDescriptor(field);
-	}
+  protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor) {
+
+    PojoPropertyDescriptorImpl propertyDescriptor = descriptor.getOrCreatePropertyDescriptor(accessor.getName());
     boolean added = false;
     PojoPropertyAccessor existing = propertyDescriptor.getAccessor(accessor.getMode());
     if (existing == null) {
@@ -260,7 +247,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * Makes all {@link AccessibleObject}s in the given {@link List}
    * {@link AccessibleObject#setAccessible(boolean) accessible}.
-   * 
+   *
    * @param nonPublicAccessibleObjects is the {@link List} where the non-public {@link AccessibleObject}s have
    *        been collected.
    */
@@ -286,7 +273,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * Introspects the {@link Field}s of the given {@link Class} and adds them to the given
    * {@link PojoDescriptorImpl}.
-   * 
+   *
    * @param <P> is the generic type of <code>pojoClass</code>.
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
    * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for
@@ -304,7 +291,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         for (PojoPropertyAccessorBuilder<?> builder : getAccessorBuilders()) {
           PojoPropertyAccessor accessor = builder.create(field, descriptor, getDependencies());
           if (accessor != null) {
-            boolean registered = registerAccessor(descriptor, accessor, field);
+            boolean registered = registerAccessor(descriptor, accessor);
             if (registered) {
               fieldUsed = true;
             }
@@ -314,6 +301,10 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
           // reflective access that violates visibility
           nonPublicAccessibleObjects.add(field);
         }
+        PojoPropertyDescriptorImpl propertyDescriptor = descriptor.getPropertyDescriptor(field.getName());
+        if (propertyDescriptor != null) { // should actually never be null here...
+          propertyDescriptor.setField(field);
+        }
       }
     }
   }
@@ -321,7 +312,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * Introspects the {@link Method}s of the given {@link Class} and adds them to the given
    * {@link PojoDescriptorImpl}.
-   * 
+   *
    * @param <P> is the generic type of <code>pojoClass</code>.
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
    * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for
@@ -356,7 +347,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * This method creates the {@link PojoDescriptorImpl} for the {@link Class#getSuperclass() superclass} of
    * <code>pojoClass</code> and merges {@link PojoPropertyDescriptorImpl} from inherited properties.
-   * 
+   *
    * @param <P> is the generic type of <code>pojoClass</code>.
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
    * @param descriptor is the {@link PojoDescriptorImpl} to merge.
@@ -383,7 +374,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /**
    * This method merges the <code>superPropertyDescriptor</code> into the <code>propertyDescriptor</code>.
-   * 
+   *
    * @param propertyDescriptor is the {@link PojoPropertyDescriptorImpl} to build for the
    *        {@link net.sf.mmm.util.pojo.api.Pojo}.
    * @param superPropertyDescriptor is the super {@link PojoPropertyDescriptorImpl} to "inherit" from.
@@ -398,12 +389,16 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         propertyDescriptor.putAccessor(superPropertyAccessor);
       }
     }
+    Field field = superPropertyDescriptor.getField();
+    if ((field != null) && (propertyDescriptor.getField() == null)) {
+      propertyDescriptor.setField(field);
+    }
   }
 
   /**
    * This method determines if the given {@link Member} is {@link AccessibleObject#isAccessible() accessible}
    * or <code>public</code> (declared as public in a public class).
-   * 
+   *
    * @param member is the {@link Member} to check.
    * @return <code>true</code> if it can be accessed, <code>false</code> if it needs to be made accessible.
    */
@@ -426,7 +421,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * ignored because it has the same {@link PojoPropertyAccessor#getName() name} and
    * {@link PojoPropertyAccessor#getMode() mode} as the given <code>accessor</code> that is already
    * registered. This method does nothing. It may be overridden to do some debug logging.
-   * 
+   *
    * @param accessor is the accessor that is already registered.
    * @param duplicate is the duplicate that has been ignored.
    */

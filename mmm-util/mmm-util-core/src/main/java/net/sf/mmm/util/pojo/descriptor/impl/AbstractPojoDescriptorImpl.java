@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
-import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,9 +32,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is an abstract but mostly complete implementation of the
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor} interface.
- * 
+ *
  * @param <POJO> is the templated type of the {@link #getPojoClass() POJO}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -49,7 +48,7 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
 
   /**
    * The constructor.
-   * 
+   *
    * @param pojoType is the {@link #getPojoType() pojo-type}.
    * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder}.
    */
@@ -73,7 +72,7 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
   /**
    * This method gets the {@link PojoPropertyDescriptorImpl descriptor}s of all properties of the according
    * {@link #getPojoClass() pojo}.
-   * 
+   *
    * @return a collection with all {@link PojoPropertyDescriptorImpl property descriptor}s
    */
   @Override
@@ -150,27 +149,10 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
     }
     return descriptor;
   }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public PojoPropertyDescriptorImpl getOrCreatePropertyDescriptor(Field field) {
-	PojoPropertyDescriptorImpl descriptor = this.propertyMap.get(field.getName());
-	if (descriptor == null) {
-	  descriptor = new PojoPropertyDescriptorImpl(field);
-	  this.propertyMap.put(field.getName(), descriptor);
-	}
-	// enrich descriptor if necessary
-	if(descriptor.getField() == null) {
-		descriptor.setField(field);
-	}
-    return descriptor;
-  }
 
   /**
    * This method adds the given {@link PojoPropertyDescriptorImpl}.
-   * 
+   *
    * @param descriptor is the {@link PojoPropertyDescriptorImpl} to add.
    */
   protected void addPropertyDescriptor(PojoPropertyDescriptorImpl descriptor) {

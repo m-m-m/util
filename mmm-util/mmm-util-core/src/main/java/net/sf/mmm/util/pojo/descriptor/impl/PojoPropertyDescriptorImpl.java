@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
-import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,7 +19,7 @@ import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
  * @since 1.1.0
  */
 public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
-	
+
   /** @see #getAccessor(PojoPropertyAccessorMode) */
   private final Map<PojoPropertyAccessorMode<?>, PojoPropertyAccessor> accessorMap;
 
@@ -37,17 +36,6 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
     super(propertyName);
     this.accessorMap = new HashMap<PojoPropertyAccessorMode<?>, PojoPropertyAccessor>();
     this.accessors = Collections.unmodifiableCollection(this.accessorMap.values());
-  }
-  
-  /**
-   * The constructor connecting the propertydes
-   * @param field
-   */
-  public PojoPropertyDescriptorImpl(Field field) {
-	  
-	super(field);
-	this.accessorMap = new HashMap<>();
-	this.accessors = Collections.unmodifiableCollection(this.accessorMap.values());
   }
 
   /**

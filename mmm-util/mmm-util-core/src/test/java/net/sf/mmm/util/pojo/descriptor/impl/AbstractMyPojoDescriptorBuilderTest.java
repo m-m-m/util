@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +10,10 @@ import java.util.Map;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
+import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorModes;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
@@ -25,15 +28,19 @@ import org.junit.Test;
 /**
  * This is the abstract test-case for {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}
  * implementations using {@link MyPojo}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDescriptorBuilderTest {
 
+  private static final String PORT = "port";
+
+  private static final String RENAMED_PROPERTY = "renamedProperty";
+
   /**
    * This method creates the {@link PojoDescriptorBuilder} to test.
-   * 
+   *
    * @return the {@link PojoDescriptorBuilder}.
    */
   protected abstract PojoDescriptorBuilder getPojoDescriptorBuilder();
@@ -60,6 +67,40 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     checkPojoDescriptor(new MyPojo(), MyPojo.class);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void checkProperty(PojoDescriptor<?> pojoDescriptor, String propertyName, Class<?> readType,
+      Class<?> writeType) {
+
+    super.checkProperty(pojoDescriptor, propertyName, readType, writeType);
+    PojoPropertyDescriptor propertyDescriptor = pojoDescriptor.getPropertyDescriptor(propertyName);
+    Field propertyField = propertyDescriptor.getField();
+    if (isFieldIntrostection() && isRegularFieldBasedProperty(pojoDescriptor, propertyName)) {
+      assertNotNull(propertyField);
+      assertEquals(propertyName, propertyField.getName());
+      PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorModes.GET);
+      assertEquals(getter.getPropertyType().getAssignmentClass(), propertyField.getType());
+      if (!isMethodIntrostection()) {
+        assertSame(getter.getAccessibleObject(), propertyField);
+      }
+    } else {
+      assertNull(propertyField);
+    }
+  }
+
+  private boolean isRegularFieldBasedProperty(PojoDescriptor<?> pojoDescriptor, String propertyName) {
+
+    if (propertyName.equals(RENAMED_PROPERTY)) {
+      return false;
+    }
+    if (propertyName.equals(PORT) && pojoDescriptor.getPojoClass().equals(AbstractPojo.class)) {
+      return false;
+    }
+    return true;
+  }
+
   protected <POJO extends MyPojo> void checkPojo(PojoDescriptor<POJO> pojoDescriptor, POJO pojoInstance,
       PojoDescriptorBuilder builder) {
 
@@ -72,9 +113,9 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
 
     // test property "port"
     Integer port = Integer.valueOf(4242);
-    assertNull(pojoDescriptor.getProperty(pojoInstance, "port"));
-    pojoDescriptor.setProperty(pojoInstance, "port", port);
-    Integer retrievedPort = (Integer) pojoDescriptor.getProperty(pojoInstance, "port");
+    assertNull(pojoDescriptor.getProperty(pojoInstance, PORT));
+    pojoDescriptor.setProperty(pojoInstance, PORT, port);
+    Integer retrievedPort = (Integer) pojoDescriptor.getProperty(pojoInstance, PORT);
     assertEquals(port, retrievedPort);
     // test using TypedProperty
     port = Integer.valueOf(42);
@@ -124,7 +165,7 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     }
     // test property "renamedProperty"
     if (isMethodIntrostection()) {
-      checkProperty(pojoDescriptor, "renamedProperty", String.class, String.class);
+      checkProperty(pojoDescriptor, RENAMED_PROPERTY, String.class, String.class);
     }
     // test property "string"
     if (isFieldIntrostection()) {
@@ -132,7 +173,7 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
       secret = "h5g/{h%k$z";
       pojoDescriptor.setProperty(pojoInstance, "string", secret);
       if (isMethodIntrostection()) {
-        assertSame(secret, pojoDescriptor.getProperty(pojoInstance, "renamedProperty"));
+        assertSame(secret, pojoDescriptor.getProperty(pojoInstance, RENAMED_PROPERTY));
       }
     }
 
@@ -271,8 +312,8 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
       checkPropertyPort(abstractPojoDescriptor);
 
       Integer port = Integer.valueOf(99);
-      pojoDescriptor.setProperty(pojoInstance, "port", port);
-      Integer retrievedPort = (Integer) pojoDescriptor.getProperty(pojoInstance, "port");
+      pojoDescriptor.setProperty(pojoInstance, PORT, port);
+      Integer retrievedPort = (Integer) pojoDescriptor.getProperty(pojoInstance, PORT);
       assertEquals(port, retrievedPort);
     }
 

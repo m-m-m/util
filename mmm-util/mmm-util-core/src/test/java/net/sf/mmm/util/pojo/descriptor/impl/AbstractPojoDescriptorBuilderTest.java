@@ -14,7 +14,7 @@ import org.junit.Assert;
 /**
  * This is the abstract test-case for implementations of
  * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractPojoDescriptorBuilderTest extends Assert {
@@ -22,7 +22,7 @@ public abstract class AbstractPojoDescriptorBuilderTest extends Assert {
   /**
    * This method checks read/write accessors to the property <code>propertyName</code> of the
    * <code>pojoDescriptor</code> according to the given <code>readType</code> and <code>writeType</code>.
-   * 
+   *
    * @param pojoDescriptor is the descriptor.
    * @param propertyName is the name of the property to check.
    * @param readType is the expected read-type or <code>null</code> if NOT to check.

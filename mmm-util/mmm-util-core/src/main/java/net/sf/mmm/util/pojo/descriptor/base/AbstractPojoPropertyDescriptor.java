@@ -9,7 +9,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 
 /**
  * This is the abstract base implementation of the {@link PojoPropertyDescriptor} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -17,13 +17,13 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
 
   /** @see #getName() */
   private final String name;
-  
+
   /** @see #getField() */
   private Field field;
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    */
   public AbstractPojoPropertyDescriptor(String propertyName) {
@@ -34,17 +34,6 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   }
 
   /**
-   * This constructor interconnects this {@link PojoPropertyDescriptor} with the given field
-   * @param field sets the {@link Field} for and the property's {@link #getName() name}
-   */
-  public AbstractPojoPropertyDescriptor(Field field) {
-	
-	super();
-	this.name = field.getName();
-	this.field = field;
-  }
-
-  /**
    * {@inheritDoc}
    */
   @Override
@@ -52,22 +41,25 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
 
     return this.name;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @Override
   public Field getField() {
-	return field;
+
+    return this.field;
   }
-  
+
   /**
-   * Sets the {@link Field} represented by this {@link PojoPropertyDescriptor descriptor}. 
-   * Necessary in case of {@link Field field} gets introspected after methods.
+   * Sets the {@link Field} represented by this {@link PojoPropertyDescriptor descriptor}. Necessary in case
+   * of {@link Field field} gets introspected after methods.
+   *
    * @param field {@link Field} represented by this {@link PojoPropertyDescriptor descriptor}
    */
   public void setField(Field field) {
-	  this.field = field;
+
+    this.field = field;
   }
 
   /**
@@ -75,9 +67,9 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
    * <b>ATTENTION:</b><br>
    * This method may only be used during creation and initialization of this object. Be careful NOT to
    * accidently replace existing {@link PojoPropertyAccessor accessors}.
-   * 
+   *
    * @see #getAccessor(net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode)
-   * 
+   *
    * @param accessor is the accessor to add.
    * @return the {@link PojoPropertyAccessor} with the same {@link PojoPropertyAccessor#getMode() mode} as the
    *         given <code>accessor</code> that has been replaced by <code>accessor</code> or <code>null</code>
