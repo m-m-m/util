@@ -177,18 +177,31 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
     getInitializationState().requireNotInitilized();
     this.configuration = configuration;
   }
+  
+  /**
+   * @see #registerAccessor(PojoDescriptorImpl, PojoPropertyAccessor, Field)
+   */
+  protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor) {
+	  return registerAccessor(descriptor, accessor, null);
+  }
 
   /**
    * This method registers the given <code>accessor</code> for the given <code>descriptor</code>.
    * 
    * @param descriptor is the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}.
    * @param accessor is the {@link PojoPropertyAccessor} to register.
+   * @param field of the property to register the accessor for (default <code>null</code>)
    * @return <code>true</code> if the given <code>accessor</code> has been registered or <code>false</code> if
    *         it has been ignored (it is a duplicate).
    */
-  protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor) {
-
-    PojoPropertyDescriptorImpl propertyDescriptor = descriptor.getOrCreatePropertyDescriptor(accessor.getName());
+  protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor, Field field) {
+	
+	PojoPropertyDescriptorImpl propertyDescriptor;
+	if(field == null) {
+		propertyDescriptor = descriptor.getOrCreatePropertyDescriptor(accessor.getName());		
+	} else {
+		propertyDescriptor = descriptor.getOrCreatePropertyDescriptor(field);
+	}
     boolean added = false;
     PojoPropertyAccessor existing = propertyDescriptor.getAccessor(accessor.getMode());
     if (existing == null) {
@@ -291,7 +304,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
         for (PojoPropertyAccessorBuilder<?> builder : getAccessorBuilders()) {
           PojoPropertyAccessor accessor = builder.create(field, descriptor, getDependencies());
           if (accessor != null) {
-            boolean registered = registerAccessor(descriptor, accessor);
+            boolean registered = registerAccessor(descriptor, accessor, field);
             if (registered) {
               fieldUsed = true;
             }
