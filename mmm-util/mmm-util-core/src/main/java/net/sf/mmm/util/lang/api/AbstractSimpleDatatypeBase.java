@@ -4,7 +4,7 @@ package net.sf.mmm.util.lang.api;
 
 /**
  * This is the abstract base implementation of a simple {@link Datatype}.
- * 
+ *
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
@@ -76,6 +76,21 @@ public abstract class AbstractSimpleDatatypeBase<V> extends AbstractDatatype imp
     } else {
       return value.toString();
     }
+  }
+
+  /**
+   * @param <V> is the generic type of the contained {@link #getValue() value}.
+   * @param datatype is the {@link SimpleDatatype} to get the {@link #getValue() value} from.
+   * @return the {@link #getValue() value} of the given <code>datatype</code> or <code>null</code> if
+   *         <code>datatype</code> is <code>null</code>.
+   * @since 7.0.0
+   */
+  public static <V> V getValue(SimpleDatatype<V> datatype) {
+
+    if (datatype == null) {
+      return null;
+    }
+    return datatype.getValue();
   }
 
 }
