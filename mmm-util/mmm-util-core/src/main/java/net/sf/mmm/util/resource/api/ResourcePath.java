@@ -83,26 +83,14 @@ public class ResourcePath<D> implements Serializable {
    * The constructor for a root {@link ResourcePath}.
    *
    * @param name - see {@link #getName()}.
-   * @param data - see {@link #getData()}.
-   */
-  protected ResourcePath(String name, D data) {
-
-    super();
-    this.parent = null;
-    this.name = name;
-    this.data = data;
-  }
-
-  /**
-   * The constructor for a root {@link ResourcePath}.
-   *
-   * @param name - see {@link #getName()}.
    * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the
    *        {@link #getData() data}.
    */
   protected ResourcePath(String name, Function<ResourcePath<D>, D> dataFunction) {
 
     super();
+    Objects.requireNonNull(name, "name");
+    Objects.requireNonNull(dataFunction, "dataFunction");
     this.parent = null;
     this.name = name;
     this.data = dataFunction.apply(this);
@@ -141,6 +129,7 @@ public class ResourcePath<D> implements Serializable {
     super();
     Objects.requireNonNull(parent, "parent");
     Objects.requireNonNull(name, "name");
+    Objects.requireNonNull(dataFunction, "dataFunction");
     if (name.isEmpty()) {
       throw new IllegalArgumentException("name");
     }
@@ -195,6 +184,14 @@ public class ResourcePath<D> implements Serializable {
   }
 
   /**
+   * @return {@code true} if {@link #getName() name} is "..", <code>false</code> otherwise.
+   */
+  public boolean isSegmentParent() {
+
+    return PATH_SEGMENT_PARENT.equals(this.name);
+  }
+
+  /**
    * @return <code>true</code> if this is the root {@link ResourcePath}, <code>false</code> otherwise.
    */
   public boolean isRoot() {
@@ -233,6 +230,63 @@ public class ResourcePath<D> implements Serializable {
       return patternPath.name.equals(this.name);
     } else {
       return patternPath.data.matcher(this.name).matches();
+    }
+  }
+
+  /**
+   * @param path is the path to navigate to from {@code this} path.
+   * @return the given {@code path} if {@link #isAbsolute() absolute}, otherwise the normalized path of
+   *         {@code this} path with the given path appended.
+   */
+  public ResourcePath<D> navigateTo(ResourcePath<D> path) {
+
+    Objects.requireNonNull(path, "path");
+    if (path.isAbsolute()) {
+      return path;
+    }
+    return path.navigateFrom(this);
+  }
+
+  /**
+   * @return {@code this} instance if this is the {@link #isRoot() root} or is {@link #PATH_SEGMENT_PARENT},
+   *         the {@link #getParent() parent} otherwise.
+   */
+  private ResourcePath<D> navigateUp() {
+
+    if (this.parent == null) {
+      return this;
+    }
+    if (PATH_SEGMENT_PARENT.equals(this.name)) {
+      return this;
+    }
+    return this.parent;
+  }
+
+  /**
+   * Recursive and inverted implementation of {@link #navigateTo(ResourcePath)}.
+   *
+   * @param resourcePath is the {@link ResourcePath} to navigate from.
+   * @return the resulting {@link ResourcePath}.
+   */
+  private ResourcePath<D> navigateFrom(ResourcePath<D> resourcePath) {
+
+    if (isSegmentParent()) {
+      ResourcePath<D> result = resourcePath;
+      ResourcePath<D> segment = this;
+      do {
+        assert (segment.isSegmentParent());
+        if (result.isSegmentParent()) {
+          return new ResourcePath<D>(result, segment.name, segment.data);
+        } else {
+          result = result.navigateUp();
+        }
+        segment = segment.parent;
+      } while (segment.parent != null);
+      return result;
+    } else if (this.parent == null) {
+      return resourcePath;
+    } else {
+      return new ResourcePath<D>(this.parent.navigateFrom(resourcePath), this.name, this.data);
     }
   }
 

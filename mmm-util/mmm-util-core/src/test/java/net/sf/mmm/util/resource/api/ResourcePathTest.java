@@ -4,6 +4,8 @@ package net.sf.mmm.util.resource.api;
 
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.lang.api.function.Function;
+import net.sf.mmm.util.lang.api.function.VoidFunction;
 import net.sf.mmm.util.resource.api.ResourcePath.ResourcePathRootHome;
 import net.sf.mmm.util.resource.api.ResourcePath.ResourcePathRootUnc;
 import net.sf.mmm.util.resource.api.ResourcePath.ResourcePathRootUrl;
@@ -267,6 +269,46 @@ public class ResourcePathTest extends Assertions {
     assertThat(path1Matches).isTrue();
     assertThat(path2Matches).isTrue();
     assertThat(path3Matches).isFalse();
+  }
+
+  /** Test of {@link ResourcePath#navigateTo(ResourcePath)} with relative paths. */
+  @Test
+  public void testNavigateToRelative() {
+
+    ResourcePath<Void> base = ResourcePath.create("../../foo/bar");
+    ResourcePath<Void> navigator = ResourcePath.create("../../../some");
+    ResourcePath<Void> result = base.navigateTo(navigator);
+    assertThat(result.toString()).isEqualTo("../../../some");
+  }
+
+  /** Test of {@link ResourcePath#navigateTo(ResourcePath)} with absolute path. */
+  @Test
+  public void testNavigateToAbsolute() {
+
+    ResourcePath<Void> base = ResourcePath.create("https://github.com/foo/bar");
+    ResourcePath<Void> navigator = ResourcePath.create("/some");
+    ResourcePath<Void> result = base.navigateTo(navigator);
+
+    navigator = ResourcePath.create("../../../some");
+    result = base.navigateTo(navigator);
+    assertThat(result.toString()).isEqualTo("https://github.com/some");
+
+    assertThat(base.navigateTo(ResourcePath.ROOT_RELATIVE)).isSameAs(base);
+  }
+
+  /** Test of {@link ResourcePath#ResourcePath(ResourcePath, String, Object)} with empty name. */
+  @Test(expected = IllegalArgumentException.class)
+  public void testConstructorWithEmptyName() {
+
+    new ResourcePath<Void>(ResourcePath.ROOT_ABSOLUTE, "", (Void) null);
+  }
+
+  /** Test of {@link ResourcePath#ResourcePath(ResourcePath, String, Function)} with empty name. */
+  @Test(expected = IllegalArgumentException.class)
+  public void testConstructorWithEmptyNameFunction() {
+
+    Function<ResourcePath<Void>, Void> function = VoidFunction.getInstance();
+    new ResourcePath<Void>(ResourcePath.ROOT_ABSOLUTE, "", function);
   }
 
 }
