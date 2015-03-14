@@ -158,6 +158,17 @@ public class ResourcePath<D> implements Serializable {
   }
 
   /**
+   * @return the {@link #isRoot() root} {@link #getParent() ancestor} of this {@link ResourcePath}.
+   */
+  public ResourcePath<D> getRoot() {
+
+    if (this.parent == null) {
+      return this;
+    }
+    return this.parent.getRoot();
+  }
+
+  /**
    * @return the name of this {@link ResourcePath} as segment (this "folder" or "file").
    */
   public String getName() {

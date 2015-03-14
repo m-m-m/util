@@ -2,20 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.file.base;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Objects;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.file.api.FileUtilLimited;
-import net.sf.mmm.util.scanner.base.CharSequenceScanner;
+import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.resource.api.ResourcePath;
 
 /**
- * This class is a collection of utility functions for {@link File} handling and manipulation.
+ * This class is a collection of utility functions for {@link java.io.File} handling and manipulation.
  *
  * @see #getInstance()
  *
@@ -26,16 +22,6 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
 
   /** The typical home directory of the user "root" under Unix/Linux. */
   protected static final String HOME_ROOT = "/root";
-
-  /**
-   * The prefix of an UNC (Uniform Naming Convention) path (e.g. <code>\\10.0.0.1\share</code>).
-   */
-  protected static final String UNC_PATH_PREFIX = "\\\\";
-
-  /**
-   * The {@link Pattern} for an URL schema such as <code>http://</code> or <code>ftp://</code>.
-   */
-  protected static final Pattern URL_SCHEMA_PATTERN = Pattern.compile("([a-zA-Z]+://)(.*)");
 
   /** @see #getInstance() */
   private static FileUtilLimited instance;
@@ -75,7 +61,7 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
   @Override
   public String normalizePath(String path) {
 
-    return normalizePath(path, File.separatorChar);
+    return normalizePath(path, ResourcePath.PATH_SEGMENT_SEPARATOR_CHAR);
   }
 
   /**
@@ -84,23 +70,51 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
   @Override
   public String normalizePath(String path, char separator) {
 
-    if (path == null) {
-      throw new NlsNullPointerException("path");
-    }
-    int len = path.length();
-    if (len == 0) {
+    Objects.requireNonNull(path, "path");
+    if (path.isEmpty()) {
       return path;
     }
-    if (path.startsWith(UNC_PATH_PREFIX)) {
-      return path;
+    String inputPath = normalizeHome(path);
+    ResourcePath<Void> resourcePath = ResourcePath.create(inputPath);
+    return resourcePath.toString(separator);
+  }
+
+  /**
+   * Normalize the potential home segment of the path (if starts with ~ such as "~/.ssh", "~root/" or
+   * "~admin/..").
+   *
+   * @param path is the path where to normalize the home segment.
+   * @return the normalized path.
+   */
+  protected String normalizeHome(String path) {
+
+    if (path.charAt(0) == ResourcePath.HOME_PATH_CHAR) {
+      // normalize home directory
+      int len = path.length();
+      int userEnd = 1;
+      while (userEnd < len) {
+        if (CharFilter.FILE_SEPARATOR_FILTER.accept(path.charAt(userEnd))) {
+          break;
+        }
+        userEnd++;
+      }
+      String user = path.substring(1, userEnd);
+      String userHome;
+      if (user.isEmpty() || (user.equals(getUserLogin()))) {
+        userHome = getUserHomeDirectoryPath();
+      } else if (user.equals("root")) {
+        userHome = HOME_ROOT;
+      } else {
+        // ~<user> can not be resolved properly
+        // we would need to do OS-specific assumptions and look into
+        // /etc/passwd or whatever what might fail by missing read permissions
+        // This is just a hack that might work in most cases:
+        // we use the user.home dir get the dirname and append the user
+        userHome = getUserHomeDirectoryPath() + "/../" + user;
+      }
+      return userHome + path.substring(userEnd);
     }
-    // char systemSlash = File.separatorChar;
-    Matcher matcher = URL_SCHEMA_PATTERN.matcher(path);
-    if (matcher.matches()) {
-      String urlPath = normalizePath(matcher.group(2), '/');
-      return matcher.group(1) + urlPath;
-    }
-    return normalizePathInternal(path, separator);
+    return path;
   }
 
   /**
@@ -117,119 +131,6 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
   protected String getUserLogin() {
 
     return "anonymous";
-  }
-
-  /**
-   * This method handles {@link #normalizePath(String)} internally.
-   *
-   * @param path is the path.
-   * @param slash is the character used to to separate folders.
-   * @return the resolved path.
-   */
-  private String normalizePathInternal(String path, char slash) {
-
-    if (path.length() == 0) {
-      return path;
-    }
-    char wrongSlash;
-    if (slash == '/') {
-      wrongSlash = '\\';
-    } else {
-      wrongSlash = '/';
-    }
-    String pathWithHome = path.replace(wrongSlash, slash);
-    if (path.startsWith("~")) {
-      StringBuilder sb = new StringBuilder(getUserHomeDirectoryPath().length() + path.length());
-      int slashIndex = pathWithHome.indexOf(slash, 1);
-      String user;
-      if (slashIndex > 1) {
-        user = pathWithHome.substring(1, slashIndex);
-      } else if (slashIndex < 0) {
-        user = pathWithHome.substring(1);
-      } else {
-        user = "";
-      }
-      if (user.length() == 0) {
-        sb.append(getUserHomeDirectoryPath());
-      } else {
-        // ~<user> can not be resolved properly
-        // we would need to do OS-specific assumptions and look into
-        // /etc/passwd or whatever what might fail by missing read permissions
-        // This is just a hack that might work in most cases:
-        // we use the user.home dir get the dirname and append the user
-        if ("root".equals(user)) {
-          if ("root".equals(getUserLogin())) {
-            sb.append(getUserHomeDirectoryPath());
-          } else {
-            sb.append(HOME_ROOT);
-          }
-        } else {
-          if (HOME_ROOT.equals(getUserHomeDirectoryPath())) {
-            sb.append("/home");
-          } else {
-            sb.append(getUserHomeDirectoryPath());
-            sb.append(slash);
-            sb.append(PATH_SEGMENT_PARENT);
-          }
-          sb.append(slash);
-          sb.append(user);
-          sb.append(slash);
-        }
-      }
-      if (slashIndex > 0) {
-        sb.append(pathWithHome.substring(slashIndex));
-      }
-      pathWithHome = sb.toString();
-    }
-    StringBuilder buffer = new StringBuilder(pathWithHome.length());
-    CharSequenceScanner scanner = new CharSequenceScanner(pathWithHome);
-    int segmentStart = 0;
-    List<String> segments = new ArrayList<String>();
-    boolean absolutePath = false;
-    char c = scanner.peek();
-    if (c == slash) {
-      scanner.next();
-      buffer.append(slash);
-      absolutePath = true;
-    }
-    if (absolutePath) {
-      segmentStart = -1;
-    }
-    while (scanner.hasNext()) {
-      String segment = scanner.readUntil(slash, true);
-      int segmentLength = segment.length();
-      if (PATH_SEGMENT_PARENT.equals(segment)) {
-        int size = segments.size();
-        if (size == segmentStart) {
-          segmentStart++;
-          segments.add(segment);
-        } else if (size > 0) {
-          segments.remove(segments.size() - 1);
-        }
-      } else if ((segmentLength > 0) && !(PATH_SEGMENT_CURRENT.equals(segment))) {
-        // ignore "" (duplicated slashes) and "."
-        segments.add(segment);
-      }
-    }
-    boolean appendSlash = false;
-    for (String segment : segments) {
-      if (appendSlash) {
-        buffer.append(slash);
-      } else {
-        appendSlash = true;
-      }
-      buffer.append(segment);
-    }
-    if (path.endsWith(Character.toString(slash))) {
-      int index = buffer.length() - 1;
-      if (index > 0) {
-        char last = buffer.charAt(index);
-        if (last != slash) {
-          buffer.append(slash);
-        }
-      }
-    }
-    return buffer.toString();
   }
 
   /**

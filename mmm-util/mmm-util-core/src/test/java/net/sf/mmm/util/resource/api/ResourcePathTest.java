@@ -30,6 +30,7 @@ public class ResourcePathTest extends Assertions {
     assertThat(ResourcePath.ROOT_RELATIVE.isAbsolute()).isFalse();
     assertThat(ResourcePath.ROOT_RELATIVE.getParent()).isNull();
     assertThat(ResourcePath.ROOT_RELATIVE.getData()).isNull();
+    assertThat(ResourcePath.ROOT_RELATIVE.getRoot()).isSameAs(ResourcePath.ROOT_RELATIVE);
   }
 
   /** Test of {@link ResourcePath#ROOT_ABSOLUTE}. */
@@ -42,6 +43,7 @@ public class ResourcePathTest extends Assertions {
     assertThat(ResourcePath.ROOT_ABSOLUTE.isAbsolute()).isTrue();
     assertThat(ResourcePath.ROOT_ABSOLUTE.getParent()).isNull();
     assertThat(ResourcePath.ROOT_ABSOLUTE.getData()).isNull();
+    assertThat(ResourcePath.ROOT_ABSOLUTE.getRoot()).isSameAs(ResourcePath.ROOT_ABSOLUTE);
   }
 
   /** Test of {@link ResourcePath#ROOT_HOME}. */
@@ -54,6 +56,7 @@ public class ResourcePathTest extends Assertions {
     assertThat(ResourcePath.ROOT_HOME.isAbsolute()).isTrue();
     assertThat(ResourcePath.ROOT_HOME.getParent()).isNull();
     assertThat(ResourcePath.ROOT_HOME.getData()).isNull();
+    assertThat(ResourcePath.ROOT_HOME.getRoot()).isSameAs(ResourcePath.ROOT_HOME);
   }
 
   /** Test of {@link ResourcePath#create(String)} with {@code null}. */
@@ -90,6 +93,7 @@ public class ResourcePathTest extends Assertions {
     assertThat(relativePath.toString()).isEqualTo(segment);
     assertThat(relativePath.isAbsolute()).isFalse();
     assertThat(relativePath.getParent()).isSameAs(ResourcePath.ROOT_RELATIVE);
+    assertThat(relativePath.getRoot()).isSameAs(relativePath.getParent());
 
     String segmentAbsoulte = "/" + segment;
     ResourcePath<Void> absolutePath = ResourcePath.create(segmentAbsoulte);
@@ -97,6 +101,7 @@ public class ResourcePathTest extends Assertions {
     assertThat(absolutePath.toString()).isEqualTo(segmentAbsoulte);
     assertThat(absolutePath.isAbsolute()).isTrue();
     assertThat(absolutePath.getParent()).isSameAs(ResourcePath.ROOT_ABSOLUTE);
+    assertThat(absolutePath.getRoot()).isSameAs(absolutePath.getParent());
   }
 
   /** Test of {@link ResourcePath#create(String)} with a complex relative path. */
@@ -108,10 +113,15 @@ public class ResourcePathTest extends Assertions {
     assertThat(path.toString()).isEqualTo("../../b/.foo");
     assertThat(path.getName()).isEqualTo(".foo");
     assertThat(path.isRoot()).isFalse();
-    assertThat(path.getParent().getName()).isEqualTo("b");
-    assertThat(path.getParent().getParent().getName()).isEqualTo("..");
-    assertThat(path.getParent().getParent().getParent().getName()).isEqualTo("..");
-    assertThat(path.getParent().getParent().getParent().getParent()).isSameAs(ResourcePath.ROOT_RELATIVE);
+    ResourcePath<Void> p1 = path.getParent();
+    assertThat(p1.getName()).isEqualTo("b");
+    ResourcePath<Void> p2 = p1.getParent();
+    assertThat(p2.getName()).isEqualTo("..");
+    ResourcePath<Void> p3 = p2.getParent();
+    assertThat(p3.getName()).isEqualTo("..");
+    ResourcePath<Void> p4 = p3.getParent();
+    assertThat(p4).isSameAs(ResourcePath.ROOT_RELATIVE);
+    assertThat(path.getRoot()).isSameAs(p4);
   }
 
   /** Test of {@link ResourcePath#create(String)} with a complex relative path. */
@@ -123,8 +133,11 @@ public class ResourcePathTest extends Assertions {
     assertThat(path.toString()).isEqualTo("/b/.foo");
     assertThat(path.getName()).isEqualTo(".foo");
     assertThat(path.isRoot()).isFalse();
-    assertThat(path.getParent().getName()).isEqualTo("b");
-    assertThat(path.getParent().getParent()).isSameAs(ResourcePath.ROOT_ABSOLUTE);
+    ResourcePath<Void> p1 = path.getParent();
+    assertThat(p1.getName()).isEqualTo("b");
+    ResourcePath<Void> p2 = p1.getParent();
+    assertThat(p2).isSameAs(ResourcePath.ROOT_ABSOLUTE);
+    assertThat(path.getRoot()).isSameAs(p2);
   }
 
   /** Test of {@link ResourcePath#create(String)} with an absolute home path. */
@@ -140,6 +153,7 @@ public class ResourcePathTest extends Assertions {
     assertThat(root.isRoot()).isTrue();
     assertThat(root).isSameAs(ResourcePath.ROOT_HOME);
     assertThat(root.getName()).isEqualTo("~");
+    assertThat(path.getRoot()).isSameAs(root);
   }
 
   /** Test of {@link ResourcePath#create(String)} with an absolute home path. */
@@ -157,10 +171,11 @@ public class ResourcePathTest extends Assertions {
     ResourcePath<Void> p2 = p1.getParent();
     assertThat(p2.getName()).isEqualTo("..");
     assertThat(p2.isRoot()).isFalse();
-    ResourcePath<Void> root = p2.getParent();
-    assertThat(root.isRoot()).isTrue();
-    assertThat(root).isInstanceOf(ResourcePathRootHome.class);
-    assertThat(root.getName()).isEqualTo("~admin");
+    ResourcePath<Void> p3 = p2.getParent();
+    assertThat(p3.isRoot()).isTrue();
+    assertThat(p3).isInstanceOf(ResourcePathRootHome.class);
+    assertThat(p3.getName()).isEqualTo("~admin");
+    assertThat(path.getRoot()).isSameAs(p3);
   }
 
   /** Test of {@link ResourcePath#create(String)} with an absolute UNC path. */
@@ -177,6 +192,7 @@ public class ResourcePathTest extends Assertions {
     assertThat(root.isRoot()).isTrue();
     assertThat(root).isInstanceOf(ResourcePathRootUnc.class);
     assertThat(root.getName()).isEqualTo("\\\\fileserver.org");
+    assertThat(path.getRoot()).isSameAs(root);
   }
 
   /** Test of {@link ResourcePath#create(String)} with an absolute windows drive letter path. */
@@ -196,6 +212,7 @@ public class ResourcePathTest extends Assertions {
     assertThat(root.isRoot()).isTrue();
     assertThat(root).isInstanceOf(ResourcePathRootWindows.class);
     assertThat(root.getName()).isEqualTo("C:");
+    assertThat(path.getRoot()).isSameAs(root);
 
     root = ResourcePath.create("C:");
     assertThat(root.isRoot()).isTrue();
@@ -223,6 +240,7 @@ public class ResourcePathTest extends Assertions {
     ResourcePath<Void> root = m_m_mPath.getParent();
     assertThat(root.isRoot()).isTrue();
     assertThat(root).isInstanceOf(ResourcePathRootUrl.class);
+    assertThat(path.getRoot()).isSameAs(root);
     ResourcePathRootUrl<Void> rootUrl = (ResourcePathRootUrl<Void>) root;
     assertThat(rootUrl.getScheme()).isEqualTo("https");
     assertThat(rootUrl.getAuthority()).isEqualTo("github.com");
