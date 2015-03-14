@@ -12,7 +12,7 @@ import net.sf.mmm.test.TestResourceHelper;
 import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class FileUtilTest extends Assert {
+public class FileUtilTest extends Assertions {
 
   protected FileUtil getFileUtil() {
 
@@ -35,27 +35,27 @@ public class FileUtilTest extends Assert {
   public void testNormalizePath() {
 
     FileUtil util = getFileUtil();
-    assertEquals("/", util.normalizePath("/\\///.//", '/'));
-    assertEquals("/", util.normalizePath("/foo/../bar/..", '/'));
-    assertEquals("/foo", util.normalizePath("/foo/bar/../bar/..", '/'));
-    assertEquals("/foo", util.normalizePath("/foo\\bar/..\\bar/..", '/'));
-    assertEquals("/foo", util.normalizePath("/foo\\//.\\./bar/..\\bar/..", '/'));
-    assertEquals("foo/bar", util.normalizePath("foo\\//.\\./bar/.", '/'));
+    assertThat("/").isEqualTo(util.normalizePath("/\\///.//", '/'));
+    assertThat("/").isEqualTo(util.normalizePath("/foo/../bar/..", '/'));
+    assertThat("/foo").isEqualTo(util.normalizePath("/foo/bar/../bar/..", '/'));
+    assertThat("/foo").isEqualTo(util.normalizePath("/foo\\bar/..\\bar/..", '/'));
+    assertThat("/foo").isEqualTo(util.normalizePath("/foo\\//.\\./bar/..\\bar/..", '/'));
+    assertThat("foo/bar").isEqualTo(util.normalizePath("foo\\//.\\./bar/.", '/'));
     String homeDir = System.getProperty("user.home").replace('\\', '/');
-    assertEquals(homeDir, util.normalizePath("~", '/'));
-    assertEquals(homeDir + "/", util.normalizePath("~/", '/'));
-    assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
-    assertEquals(homeDir, util.normalizePath("~/foo/./..", '/'));
-    assertEquals(homeDir + "/.mmm/search.xml", util.normalizePath("~/.mmm/search.xml", '/'));
-    assertEquals("/root/.ssh/authorized_keys", util.normalizePath("~root/.ssh/authorized_keys", '/'));
+    assertThat(homeDir).isEqualTo(util.normalizePath("~", '/'));
+    assertThat(homeDir + "/").isEqualTo(util.normalizePath("~/", '/'));
+    assertThat(homeDir).isEqualTo(util.normalizePath("~/foo/./..", '/'));
+    assertThat(homeDir).isEqualTo(util.normalizePath("~/foo/./..", '/'));
+    assertThat(homeDir + "/.mmm/search.xml").isEqualTo(util.normalizePath("~/.mmm/search.xml", '/'));
+    assertThat("/root/.ssh/authorized_keys").isEqualTo(util.normalizePath("~root/.ssh/authorized_keys", '/'));
     if ("/root".equals(homeDir)) {
       homeDir = "/home/nobody";
     }
-    assertEquals(util.normalizePath(homeDir + "/../someuser", '/'), util.normalizePath("~someuser", '/'));
+    assertThat(util.normalizePath(homeDir + "/../someuser", '/')).isEqualTo(util.normalizePath("~someuser", '/'));
     String uncPath = "\\\\10.0.0.1\\share";
-    assertEquals(uncPath, util.normalizePath(uncPath, '/'));
-    assertEquals("http://www.host.com/foo", util.normalizePath("http://www.host.com/foo/bar/./test/.././.."));
-    assertEquals("../../bar/some", util.normalizePath("../..\\foo/../bar\\.\\some", '/'));
+    assertThat(uncPath).isEqualTo(util.normalizePath(uncPath, '/'));
+    assertThat("http://www.host.com/foo").isEqualTo(util.normalizePath("http://www.host.com/foo/bar/./test/.././.."));
+    assertThat("../../bar/some").isEqualTo(util.normalizePath("../..\\foo/../bar\\.\\some", '/'));
   }
 
   /**
@@ -70,18 +70,18 @@ public class FileUtilTest extends Assert {
     impl.setUserHomeDirectoryPath(rootHome);
     impl.initialize();
     FileUtil util = impl;
-    assertEquals(rootHome, util.normalizePath("~root", '/'));
+    assertThat(rootHome).isEqualTo(util.normalizePath("~root", '/'));
   }
 
   protected void checkTestdata(File originalFile, File copyFile) throws IOException {
 
-    assertEquals(originalFile.length(), copyFile.length());
+    assertThat(originalFile.length()).isEqualTo(copyFile.length());
     Properties copyProperties = new Properties();
     FileInputStream in = new FileInputStream(copyFile);
     copyProperties.load(in);
     in.close();
-    assertEquals("This is only a test", copyProperties.get("Message1"));
-    assertEquals("The second test", copyProperties.get("Message2"));
+    assertThat("This is only a test").isEqualTo(copyProperties.get("Message1"));
+    assertThat("The second test").isEqualTo(copyProperties.get("Message2"));
   }
 
   /**
@@ -98,9 +98,7 @@ public class FileUtilTest extends Assert {
     copyFile.delete();
   }
 
-  /**
-   * Tests {@link FileUtil#copyFile(File, File)}.
-   */
+  /** Tests {@link FileUtil#copyFile(File, File)}. */
   @Test
   public void testDirectoryTree() throws IOException {
 
@@ -108,28 +106,24 @@ public class FileUtilTest extends Assert {
     File tempDir = util.getTemporaryDirectory();
     String uidName = "mmm-" + UUID.randomUUID();
     File subdir = new File(tempDir, uidName);
-    boolean success = subdir.mkdir();
-    assertTrue(success);
-    assertTrue(subdir.isDirectory());
+    assertThat(subdir.mkdir()).isTrue();
+    assertThat(subdir.isDirectory()).isTrue();
     File originalFile = new File(TestResourceHelper.getTestPath("net/sf/mmm/util/file/testdata.properties"));
     File copyFile = new File(subdir, originalFile.getName());
     util.copyFile(originalFile, copyFile);
     checkTestdata(originalFile, copyFile);
     File testFile = new File(subdir, "test.properties");
-    success = testFile.createNewFile();
-    assertTrue(success);
+    assertThat(testFile.createNewFile()).isTrue();
     File subsubdir = new File(subdir, "folder");
-    success = subsubdir.mkdir();
-    assertTrue(success);
+    assertThat(subsubdir.mkdir()).isTrue();
     File fooFile = new File(subsubdir, "foo.properties");
-    success = fooFile.createNewFile();
-    assertTrue(success);
+    assertThat(fooFile.createNewFile()).isTrue();
     // test matching files
     File[] matchingFiles = util.getMatchingFiles(subdir, "*/*.properties", FileType.FILE);
-    assertEquals(1, matchingFiles.length);
-    assertEquals(matchingFiles[0], fooFile);
+    assertThat(1).isEqualTo(matchingFiles.length);
+    assertThat(matchingFiles[0]).isEqualTo(fooFile);
     matchingFiles = util.getMatchingFiles(subdir, "**/*.properties", FileType.FILE);
-    assertEquals(3, matchingFiles.length);
+    assertThat(3).isEqualTo(matchingFiles.length);
     int magic = 0;
     for (File file : matchingFiles) {
       if (file.equals(fooFile)) {
@@ -140,7 +134,7 @@ public class FileUtilTest extends Assert {
         magic += 4;
       }
     }
-    assertEquals(7, magic);
+    assertThat(7).isEqualTo(magic);
     matchingFiles = util.getMatchingFiles(subdir, "**/fo*", null);
     magic = 0;
     for (File file : matchingFiles) {
@@ -150,16 +144,16 @@ public class FileUtilTest extends Assert {
         magic += 2;
       }
     }
-    assertEquals(3, magic);
+    assertThat(3).isEqualTo(magic);
     // copy recursive
     File copyDir = new File(tempDir, uidName + "-copy");
     util.copyRecursive(subdir, copyDir, false);
     // collect matching files of copy
     matchingFiles = util.getMatchingFiles(copyDir, "*/*.properties", FileType.FILE);
-    assertEquals(1, matchingFiles.length);
-    assertEquals(matchingFiles[0].getName(), fooFile.getName());
+    assertThat(1).isEqualTo(matchingFiles.length);
+    assertThat(matchingFiles[0].getName()).isEqualTo(fooFile.getName());
     matchingFiles = util.getMatchingFiles(copyDir, "**/*.properties", FileType.FILE);
-    assertEquals(3, matchingFiles.length);
+    assertThat(3).isEqualTo(matchingFiles.length);
     magic = 0;
     for (File file : matchingFiles) {
       String filename = file.getName();
@@ -171,12 +165,11 @@ public class FileUtilTest extends Assert {
         magic += 4;
       }
     }
-    assertEquals(7, magic);
+    assertThat(7).isEqualTo(magic);
     // delete recursive
     util.deleteRecursive(subdir);
     util.deleteRecursive(copyDir);
-    assertFalse(subdir.exists());
-    assertFalse(copyDir.exists());
+    assertThat(subdir.exists()).isFalse();
+    assertThat(copyDir.exists()).isFalse();
   }
-
 }
