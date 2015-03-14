@@ -2,9 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
+import java.util.Objects;
+
 /**
  * This is the abstract base implementation of a simple {@link Datatype}.
- * 
+ *
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -27,12 +29,13 @@ public abstract class AbstractSimpleDatatype<V> extends AbstractSimpleDatatypeBa
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the actual {@link #getValue() value}.
    */
   public AbstractSimpleDatatype(V value) {
 
     super();
+    Objects.requireNonNull(value, "value");
     this.value = value;
   }
 
