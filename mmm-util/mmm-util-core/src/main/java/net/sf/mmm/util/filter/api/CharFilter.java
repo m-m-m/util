@@ -8,7 +8,7 @@ package net.sf.mmm.util.filter.api;
  * It is used by {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} and avoids conversion of
  * <code>char</code> to {@link Character} for performance reasons. In other cases please prefer to use
  * {@link Filter}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -18,7 +18,7 @@ public interface CharFilter {
    * A filter that only {@link #accept(char) accepts} characters valid for a technical identifier-string (e.g.
    * literal oder variable-name). This means accepted characters are Latin digits, ASCII letters or one of
    * '.', '_' or '-'.
-   * 
+   *
    * @since 1.1.1
    */
   CharFilter IDENTIFIER_FILTER = new CharFilter() {
@@ -33,7 +33,7 @@ public interface CharFilter {
   /**
    * A filter that only {@link #accept(char) accepts} the Latin digits '0'-'9' or ASCII letters 'a'-'z' and
    * 'A'-'Z'.
-   * 
+   *
    * @since 1.1.0
    */
   CharFilter LATIN_DIGIT_OR_LETTER_FILTER = new CharFilter() {
@@ -68,7 +68,7 @@ public interface CharFilter {
 
   /**
    * A filter that only {@link #accept(char) accepts} the lower case Latin ASCII letters 'a'-'z'.
-   * 
+   *
    * @since 2.0.0
    */
   CharFilter ASCII_LOWER_CASE_LETTER_FILTER = new CharFilter() {
@@ -81,7 +81,7 @@ public interface CharFilter {
 
   /**
    * A filter that only {@link #accept(char) accepts} the upper case Latin ASCII letters 'A'-'Z'.
-   * 
+   *
    * @since 2.0.0
    */
   CharFilter ASCII_UPPER_CASE_LETTER_FILTER = new CharFilter() {
@@ -105,7 +105,7 @@ public interface CharFilter {
 
   /**
    * A filter that {@link #accept(char) accepts} any charater.
-   * 
+   *
    * @since 3.0.0
    */
   CharFilter ACCEPT_ALL_FILTER = new CharFilter() {
@@ -118,8 +118,25 @@ public interface CharFilter {
   };
 
   /**
+   * A filter that only {@link #accept(char) accepts} the file separator characters '/' and '\\'.
+   *
+   * @since 7.0.0
+   */
+  CharFilter FILE_SEPARATOR_FILTER = new CharFilter() {
+
+    @Override
+    public boolean accept(char c) {
+
+      if ((c == '/') || (c == '\\')) {
+        return true;
+      }
+      return false;
+    }
+  };
+
+  /**
    * This method determines if the given character <code>c</code> should be accepted.
-   * 
+   *
    * @param c is the character to check.
    * @return <code>true</code> if the given character <code>c</code> is acceptable, <code>false</code> if it
    *         should be filtered.
