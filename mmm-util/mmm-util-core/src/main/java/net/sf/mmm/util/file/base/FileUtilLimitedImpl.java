@@ -8,7 +8,7 @@ import java.util.Objects;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.file.api.FileUtilLimited;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.resource.api.ResourcePath;
+import net.sf.mmm.util.resource.api.ResourcePathNode;
 
 /**
  * This class is a collection of utility functions for {@link java.io.File} handling and manipulation.
@@ -61,7 +61,7 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
   @Override
   public String normalizePath(String path) {
 
-    return normalizePath(path, ResourcePath.PATH_SEGMENT_SEPARATOR_CHAR);
+    return normalizePath(path, ResourcePathNode.PATH_SEGMENT_SEPARATOR_CHAR);
   }
 
   /**
@@ -75,7 +75,7 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
       return path;
     }
     String inputPath = normalizeHome(path);
-    ResourcePath<Void> resourcePath = ResourcePath.create(inputPath);
+    ResourcePathNode<Void> resourcePath = ResourcePathNode.create(inputPath);
     return resourcePath.toString(separator);
   }
 
@@ -88,7 +88,7 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
    */
   protected String normalizeHome(String path) {
 
-    if (path.charAt(0) == ResourcePath.HOME_PATH_CHAR) {
+    if (path.charAt(0) == ResourcePathNode.HOME_PATH_CHAR) {
       // normalize home directory
       int len = path.length();
       int userEnd = 1;

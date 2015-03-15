@@ -28,7 +28,7 @@ public interface BrowsableResource extends DataResource {
    *
    * @return an {@link Iterable} of the child-{@link BrowsableResource resources}.
    */
-  Iterable<BrowsableResource> getChildResources();
+  Iterable<? extends BrowsableResource> getChildResources();
 
   /**
    * This method iterates the immediate child-{@link BrowsableResource resources} contained in this
@@ -38,7 +38,7 @@ public interface BrowsableResource extends DataResource {
    * @param filter is the {@link Filter} applied to the {@link #getChildResources() child-resources}.
    * @return an {@link Iterable} of the child-{@link BrowsableResource resources}.
    */
-  Iterable<BrowsableResource> getChildResources(Filter<BrowsableResource> filter);
+  Iterable<? extends BrowsableResource> getChildResources(Filter<BrowsableResource> filter);
 
   /**
    * This method determines if this {@link BrowsableResource} is a <em>folder</em> that potentially contains

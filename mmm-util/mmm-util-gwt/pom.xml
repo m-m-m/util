@@ -86,14 +86,6 @@
             <additionalClasspathElement>${project.build.sourceDirectory}</additionalClasspathElement>
             <additionalClasspathElement>${project.build.testSourceDirectory}</additionalClasspathElement>
           </additionalClasspathElements>
-          <!--<useManifestOnlyJar>false</useManifestOnlyJar>
-          <forkMode>always</forkMode>
-          <systemProperties>
-            <property>
-              <name>gwt.args</name>
-              <value>-out \${webAppDirectory}</value>
-            </property>
-          </systemProperties>-->
         </configuration>
     </plugin>
   </plugins>

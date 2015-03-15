@@ -12,27 +12,27 @@ import net.sf.mmm.util.filter.api.Filter;
  * {@link Filter}. <br>
  * <b>ATTENTION:</b><br>
  * This implementation is using {@link FilteredIterator}. Please read according javadoc first.
- * 
+ *
  * @param <E> is the generic type of the {@link #iterator() iterated} elements.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public class FilteredIterable<E> implements Iterable<E> {
 
   /** The actual {@link Iterable} instance to adapt. */
-  private final Iterable<E> delegate;
+  private final Iterable<? extends E> delegate;
 
   /** @see #iterator() */
   private final Filter<E> filter;
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link Iterable} to adapt.
    * @param filter is the {@link Filter} that {@link Filter#accept(Object) filters} the iterated elements.
    */
-  public FilteredIterable(Iterable<E> delegate, Filter<E> filter) {
+  public FilteredIterable(Iterable<? extends E> delegate, Filter<E> filter) {
 
     super();
     this.delegate = delegate;

@@ -429,6 +429,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     if ((path == null) || (path.length() == 0)) {
       throw new IllegalArgumentException("Path must not be empty");
     }
+    // ResourcePath path = PatternResourcePath.create(path);
     List<PathSegment> segmentList = new ArrayList<PathSegment>();
     // TODO initialize cwd according to absolute or relative path
     boolean pathIsPattern = tokenizePath(path, segmentList, WildcardGlobPatternCompiler.INSTANCE);

@@ -11,7 +11,7 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
 /**
  * This is an implementation of the {@link ResourceVisitor} interface that collects the names of all resources
  * {@link Filter#accept(Object) accepted} by a given filter in a {@link Set}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -21,15 +21,15 @@ public class ResourceCollector implements ResourceVisitor {
   private final Set<DataResource> resourceSet;
 
   /** {@link Filter} to accept resource-names. */
-  private final Filter<String> filter;
+  private final Filter<? super String> filter;
 
   /**
    * The constructor.
-   * 
+   *
    * @param resourceSet is the {@link Set} where collected resources will be added.
    * @param filter is used to {@link Filter#accept(Object) filter} resources by name.
    */
-  public ResourceCollector(Set<DataResource> resourceSet, Filter<String> filter) {
+  public ResourceCollector(Set<DataResource> resourceSet, Filter<? super String> filter) {
 
     super();
     this.resourceSet = resourceSet;

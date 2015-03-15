@@ -117,6 +117,7 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public URL getUrl() throws ResourceNotAvailableException {
 
     try {
@@ -147,15 +148,16 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isData() {
 
-    // todo works for symlinks to files???
-    return this.file.isFile();
+    return !this.file.isDirectory();
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isFolder() {
 
     return this.file.isDirectory();
@@ -164,6 +166,7 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Date getLastModificationDate() {
 
     long lastModified = this.file.lastModified();
@@ -176,14 +179,17 @@ public class FileResource extends AbstractBrowsableResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public BrowsableResource navigate(String resourcePath) {
 
-    return new FileResource(new File(this.file.getParentFile(), resourcePath));
+    File parent = this.file.getParentFile();
+    return new FileResource(new File(parent, resourcePath));
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterable<BrowsableResource> getChildResources() {
 
     return new FileResourceIterable();
@@ -205,6 +211,7 @@ public class FileResource extends AbstractBrowsableResource {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Iterator<BrowsableResource> iterator() {
 
       File[] files;
@@ -243,6 +250,7 @@ public class FileResource extends AbstractBrowsableResource {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean hasNext() {
 
       return (this.index < this.files.length);
@@ -251,6 +259,7 @@ public class FileResource extends AbstractBrowsableResource {
     /**
      * {@inheritDoc}
      */
+    @Override
     public FileResource next() {
 
       if (!hasNext()) {
@@ -262,6 +271,7 @@ public class FileResource extends AbstractBrowsableResource {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void remove() {
 
       // we better do NOT delete the file here...

@@ -738,7 +738,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter) {
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
 
     Set<String> result = new HashSet<String>();
     findClassNames(packageName, includeSubPackages, result, filter, getDefaultClassLoader(filter.getClass()));
@@ -749,7 +749,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter,
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) {
 
     Set<String> result = new HashSet<String>();
@@ -771,7 +771,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * @throws RuntimeIoException if the operation failed with an I/O error.
    */
   protected void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet,
-      Filter<String> filter, ClassLoader classLoader) throws RuntimeIoException {
+      Filter<? super String> filter, ClassLoader classLoader) throws RuntimeIoException {
 
     ResourceVisitor visitor = new ClassNameCollector(classSet, filter);
     visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
@@ -781,7 +781,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<String> filter) {
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
 
     return findResourceNames(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
@@ -790,7 +790,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<String> filter,
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) {
 
     Set<String> result = new HashSet<String>();
@@ -803,7 +803,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter) {
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
 
     return findResources(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
@@ -831,7 +831,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter,
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) {
 
     Set<DataResource> result = new HashSet<DataResource>();

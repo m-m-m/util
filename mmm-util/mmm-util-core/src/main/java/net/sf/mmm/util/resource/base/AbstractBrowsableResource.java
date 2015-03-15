@@ -8,7 +8,7 @@ import net.sf.mmm.util.resource.api.BrowsableResource;
 
 /**
  * This is the abstract base-implementation of {@link BrowsableResource}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -25,7 +25,7 @@ public abstract class AbstractBrowsableResource extends AbstractDataResource imp
   /**
    * {@inheritDoc}
    */
-  public Iterable<BrowsableResource> getChildResources(Filter<BrowsableResource> filter) {
+  public Iterable<? extends BrowsableResource> getChildResources(Filter<BrowsableResource> filter) {
 
     return new FilteredIterable<BrowsableResource>(getChildResources(), filter);
   }

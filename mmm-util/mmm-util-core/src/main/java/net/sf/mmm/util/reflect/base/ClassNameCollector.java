@@ -9,7 +9,7 @@ import net.sf.mmm.util.filter.api.Filter;
 /**
  * This is an implementation of the {@link ResourceVisitor} interface that collects the names of all classes
  * {@link Filter#accept(Object) accepted} by a given filter in a {@link Set}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -22,15 +22,15 @@ public class ClassNameCollector implements ResourceVisitor {
   private final Set<String> classNameSet;
 
   /** {@link Filter} to accept class-names. */
-  private final Filter<String> filter;
+  private final Filter<? super String> filter;
 
   /**
    * The constructor.
-   * 
+   *
    * @param classNameSet is the {@link Set} where collected {@link Class}-names will be added.
    * @param filter is used to {@link Filter#accept(Object) filter} classes by name.
    */
-  public ClassNameCollector(Set<String> classNameSet, Filter<String> filter) {
+  public ClassNameCollector(Set<String> classNameSet, Filter<? super String> filter) {
 
     super();
     this.classNameSet = classNameSet;

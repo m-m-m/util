@@ -17,7 +17,7 @@ import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
 
 /**
  * This is the abstract base implementation of the {@link BrowsableResourceFactory} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -38,7 +38,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
 
   /**
    * This method registers the given <code>provider</code>.
-   * 
+   *
    * @param provider is the {@link DataResourceProvider} to register.
    * @throws DuplicateObjectException if a {@link DataResourceProvider} is already registered for one of the
    *         {@link DataResourceProvider#getSchemePrefixes() scheme-prefixes}.
@@ -69,11 +69,11 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
 
   /**
    * This method registers the given <code>provider</code> for the given <code>schemaPrefix</code>.
-   * 
+   *
    * @param provider is the {@link DataResourceProvider} to register.
    * @param schemaPrefix is the {@link ResourceUriImpl#getSchemePrefix() scheme-prefix} for which the provider
    *        shall be registered.
-   * 
+   *
    * @throws DuplicateObjectException if a {@link DataResourceProvider} is already registered with the same
    *         {@link DataResourceProvider#getSchemePrefixes() scheme-prefix}.
    */
@@ -95,7 +95,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
 
   /**
    * This method gets the {@link DataResourceProvider provider} for the given <code>resourceUri</code>.
-   * 
+   *
    * @param resourceUri is the {@link ResourceUriImpl}.
    * @return the {@link DataResourceProvider} {@link DataResourceProvider#getSchemePrefixes() responsible} for
    *         the given <code>resourceUri</code>.
@@ -128,7 +128,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
 
   /**
    * This method {@link #createBrowsableResource(String) creates} the actual raw {@link BrowsableResource}.
-   * 
+   *
    * @param resourceUri is the parsed and qualified {@link ResourceUriImpl}.
    * @return the created {@link BrowsableResource}.
    * @throws ResourceUriUndefinedException if the given <code>resourceUri</code> is undefined, e.g. the
@@ -147,6 +147,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   /**
    * {@inheritDoc}
    */
+  @Override
   public BrowsableResource createBrowsableResource(String resourceUri) throws ResourceUriUndefinedException {
 
     ResourceUri uri = new ResourceUriImpl(resourceUri);
@@ -158,7 +159,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    * This is an implementation of the {@link BrowsableResource} interface, that adapts {@link #getDelegate()
    * another} {@link BrowsableResource} and enhances the {@link #navigate(String)}-method to support switching
    * schemes via the {@link BrowsableResourceFactory} that created this {@link BrowsableResource}.
-   * 
+   *
    * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
    */
   protected class BrowsableResourceAdapter extends AbstractBrowsableResourceProxy {
@@ -168,7 +169,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
 
     /**
      * The constructor.
-     * 
+     *
      * @param delegate is the {@link BrowsableResource} to adapt.
      */
     public BrowsableResourceAdapter(BrowsableResource delegate) {

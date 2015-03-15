@@ -119,9 +119,9 @@ public interface DataResource {
       RuntimeIoException;
 
   /**
-   * This method creates a new {@link DataResource} pointing to the given <code>resourcePath</code> based on
-   * this resource. <br>
-   * E.g. if this resource points to the file "/etc/init.d/rc" and <code>relativePath</code> would be
+   * This method retrieves a {@link DataResource} pointing to the given <code>resourcePath</code> based on
+   * this resource.<br>
+   * E.g. if this resource points to the file "/etc/init.d/rc" and <code>resourcePath</code> would be
    * "../apt/sources.list" the resulting resource would point to "/etc/apt/sources.list".
    *
    * @param resourcePath is the absolute or relative path pointing to a new resource. If it is a relative

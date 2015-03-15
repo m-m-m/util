@@ -252,7 +252,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
-  Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter)
+  Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter)
       throws RuntimeIoException;
 
   /**
@@ -273,7 +273,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
-  Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<String> filter,
+  Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) throws RuntimeIoException;
 
   /**
@@ -354,7 +354,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
-  Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<String> filter)
+  Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<? super String> filter)
       throws RuntimeIoException;
 
   /**
@@ -378,7 +378,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
-  Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<String> filter,
+  Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) throws RuntimeIoException;
 
   /**
@@ -398,7 +398,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
-  Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter)
+  Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter)
       throws RuntimeIoException;
 
   /**
@@ -432,7 +432,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * @throws RuntimeIoException if the operation failed with an I/O error.
    * @since 1.1.0
    */
-  Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<String> filter,
+  Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) throws RuntimeIoException;
 
   /**
