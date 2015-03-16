@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.resource.impl;
+package net.sf.mmm.util.resource.base;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,19 +14,19 @@ import net.sf.mmm.util.resource.api.ClasspathScanner;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.api.ResourcePathNode;
-import net.sf.mmm.util.resource.base.ClasspathResource;
+import net.sf.mmm.util.resource.impl.ClasspathScannerImpl;
 
 import org.assertj.core.api.Assertions;
 import org.junit.AfterClass;
 import org.junit.Test;
 
 /**
- * Test-case for {@link ClasspathScannerImpl}.
+ * Test-case for {@link ClasspathScanner}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.0.0
  */
-public class ClasspathScannerImplTest extends Assertions {
+public class ClasspathScannerTest extends Assertions {
 
   private static final String CLASSPATH_NLS_BUNDLES = "META-INF/net.sf.mmm/nls-bundles";
 
