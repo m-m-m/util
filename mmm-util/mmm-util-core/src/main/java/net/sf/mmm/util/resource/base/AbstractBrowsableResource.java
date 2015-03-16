@@ -25,7 +25,7 @@ public abstract class AbstractBrowsableResource extends AbstractDataResource imp
   /**
    * {@inheritDoc}
    */
-  public Iterable<? extends BrowsableResource> getChildResources(Filter<BrowsableResource> filter) {
+  public Iterable<? extends BrowsableResource> getChildResources(Filter<? super BrowsableResource> filter) {
 
     return new FilteredIterable<BrowsableResource>(getChildResources(), filter);
   }

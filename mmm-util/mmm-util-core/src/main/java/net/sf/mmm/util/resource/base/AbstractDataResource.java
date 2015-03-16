@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.Objects;
 
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
@@ -15,7 +16,7 @@ import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 
 /**
  * This is the abstract base implementation of the {@link DataResource} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -30,20 +31,52 @@ public abstract class AbstractDataResource implements DataResource {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    AbstractDataResource other = (AbstractDataResource) obj;
+    if (!Objects.equals(getPath(), other.getPath())) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+
+    return Objects.hashCode(getSchemePrefix() + getPath());
+  }
+
+  /**
    * This method gets the <em>scheme-prefix</em> of absolute {@link #getUri() URIs} for this type of
    * {@link DataResource}. The scheme-prefix has the following form:
    * <code>{@link java.net.URI#getScheme() &lt;scheme&gt;}:&lt;suffix&gt;</code> where
    * <code>&lt;suffix&gt;</code> is the empty string or something like <code>//</code>.
-   * 
+   *
    * @return the scheme-prefix of this resource.
    */
   public abstract String getSchemePrefix();
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * This is a default implementation. Override if there is a more performing way to implement this.
    */
+  @Override
   public long getSize() throws ResourceNotAvailableException {
 
     try {
@@ -56,9 +89,10 @@ public abstract class AbstractDataResource implements DataResource {
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * This is a default implementation. Override if there is a more performing way to implement this.
    */
+  @Override
   public InputStream openStream() {
 
     try {
@@ -71,6 +105,7 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getPath() {
 
     return getUrl().getPath();
@@ -79,6 +114,7 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getUri() {
 
     return getUrl().toString();
@@ -87,6 +123,7 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isAvailable() {
 
     return isData();
@@ -95,6 +132,7 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Boolean isModifiedSince(Date date) {
 
     Date lastModified = getLastModificationDate();
@@ -107,6 +145,7 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public OutputStream openOutputStream() throws ResourceNotAvailableException, ResourceNotWritableException,
       RuntimeIoException {
 
@@ -116,6 +155,7 @@ public abstract class AbstractDataResource implements DataResource {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getName() {
 
     String path = getPath();

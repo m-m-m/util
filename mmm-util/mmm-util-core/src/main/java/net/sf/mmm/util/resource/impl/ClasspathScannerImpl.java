@@ -12,8 +12,9 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import net.sf.mmm.util.collection.base.FilteredIterable;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.resource.api.BrowsableResource;
@@ -38,8 +39,8 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
   /** @see #getReflectionUtil() */
   private ReflectionUtil reflectionUtil;
 
-  /** The {@link ClasspathFolder} for the top-level (default) package. */
-  private ClasspathFolder root;
+  /** @see #getCache() */
+  private Cache cache;
 
   /**
    * The constructor.
@@ -50,21 +51,45 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
   }
 
   /**
+   * @return the {@link Cache}. Will be created lazily.
+   */
+  protected final Cache getCache() {
+
+    Cache currentCache = this.cache;
+    if (currentCache == null) {
+      initCache();
+      currentCache = this.cache;
+    }
+    return currentCache;
+  }
+
+  /**
    * Scans the entire classpath and initializes the {@link #getReflectionUtil() root}.
    */
-  private synchronized void initRoot() {
+  private synchronized void initCache() {
 
-    if (this.root == null) {
+    if (this.cache == null) {
       ClasspathFolder rootFolder = new ClasspathFolder(null, "");
       Set<String> resourceNames = this.reflectionUtil.findResourceNames("", true, ConstantFilter.getInstance(true));
+      List<ClasspathFile> fileList = new ArrayList<>(resourceNames.size());
       for (String resource : resourceNames) {
         ResourcePathNode<Void> path = ResourcePathNode.create(resource);
         ClasspathFolder parent = createFolderRecursive(path.getParent(), rootFolder);
         ClasspathFile file = new ClasspathFile(parent, path.getName());
         parent.children.add(file);
+        fileList.add(file);
       }
-      this.root = rootFolder;
+      this.cache = new Cache(rootFolder, fileList);
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public synchronized void clearCaches() {
+
+    this.cache = null;
   }
 
   /**
@@ -85,12 +110,9 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
    * {@inheritDoc}
    */
   @Override
-  public BrowsableResource getClasspathResource() {
+  public ClasspathFolder getClasspathResource() {
 
-    if (this.root == null) {
-      initRoot();
-    }
-    return this.root;
+    return getCache().getRoot();
   }
 
   /**
@@ -99,7 +121,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
   @Override
   public BrowsableResource getClasspathResource(String classpath) {
 
-    return (BrowsableResource) getClasspathResource().navigate(classpath);
+    return (BrowsableResource) getClasspathResource().navigate(classpath, true);
   }
 
   /**
@@ -109,6 +131,24 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
   public BrowsableResource getClasspathResource(Package pkg) {
 
     return getClasspathResource(pkg.getName().replace('.', '/'));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Iterable<? extends BrowsableResource> getClasspathResourceFiles() {
+
+    return getCache().getClasspathResourceFiles();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Iterable<? extends BrowsableResource> getClasspathResourceFiles(Filter<? super BrowsableResource> filter) {
+
+    return new FilteredIterable<>(getCache().getClasspathResourceFiles(), filter);
   }
 
   /**
@@ -257,10 +297,28 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
     protected void getPath(StringBuilder buffer) {
 
       if (this.parent != null) {
-        this.parent.getPath(buffer);
-        buffer.append('/');
+        if (!this.parent.isRoot()) {
+          this.parent.getPath(buffer);
+          buffer.append('/');
+        }
       }
       buffer.append(this.name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract Iterable<? extends AbstractBrowsableClasspathResource> getChildResources();
+
+    /**
+     * Initializes this resource after it has been properly initialzed.
+     */
+    protected void init() {
+
+      for (AbstractBrowsableClasspathResource child : getChildResources()) {
+        child.init();
+      }
     }
 
   }
@@ -283,6 +341,16 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
 
       super(parent, name);
       this.children = new ArrayList<AbstractBrowsableClasspathResource>();
+    }
+
+    /**
+     * Initializes this resource after it has been properly completed.
+     */
+    @Override
+    protected void init() {
+
+      this.children = Collections.unmodifiableList(this.children);
+      super.init();
     }
 
     /**
@@ -322,11 +390,8 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
      * {@inheritDoc}
      */
     @Override
-    public Iterable<? extends BrowsableResource> getChildResources() {
+    public Iterable<? extends AbstractBrowsableClasspathResource> getChildResources() {
 
-      if (this.children == null) {
-        return Collections.EMPTY_LIST;
-      }
       return this.children;
     }
 
@@ -354,7 +419,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
     @Override
     public URL getUrl() throws ResourceNotAvailableException {
 
-      throw new ResourceNotAvailableException("this.resourcePath");
+      throw new ResourceNotAvailableException(getPath());
     }
 
     /**
@@ -377,8 +442,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
             if (node == ResourcePathNode.ROOT_ABSOLUTE) {
               folder = getRoot();
             } else {
-              // TODO
-              throw new IllegalCaseException("" + node);
+              throw new IllegalArgumentException(node.getName());
             }
           }
         } else if (node.isParentDirectory()) {
@@ -409,37 +473,35 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
     @Override
     public DataResource navigate(String resourcePath) throws ResourceUriUndefinedException {
 
+      return navigate(resourcePath, false);
+    }
+
+    /**
+     * @see #navigate(ResourcePathNode)
+     *
+     * @param resourcePath the path to navigate to.
+     * @param returnNullIfNotExists - if <code>true</code> then <code>null</code> is returned for non-existent
+     *        resources, otherwise a {@link ClasspathResource} is created and returned.
+     * @return the requested {@link DataResource}.
+     */
+    public DataResource navigate(String resourcePath, boolean returnNullIfNotExists) {
+
       ResourcePathNode<Void> path = ResourcePathNode.create(resourcePath);
       DataResource result = navigate(path);
-      if (result == null) {
-        String parentPath = "/";
+      if ((result == null) && !returnNullIfNotExists) {
+        String parentPath = "";
         if (!isRoot()) {
           parentPath = getParent().getPath();
         }
         ResourcePathNode<Void> targetPath = ResourcePathNode.create(parentPath).navigateTo(path);
-        return new ClasspathResource(targetPath.toString());
+        String classpath = targetPath.toString();
+        if (targetPath.isAbsolute()) {
+          classpath = classpath.substring(1);
+        }
+        return new ClasspathResource(classpath);
       }
       return result;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Date getLastModificationDate() {
-
-      return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getSchemePrefix() {
-
-      return ClasspathResource.SCHEME_PREFIX;
-    }
-
   }
 
   /**
@@ -465,7 +527,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
      * {@inheritDoc}
      */
     @Override
-    public Iterable<? extends BrowsableResource> getChildResources() {
+    public Iterable<? extends AbstractBrowsableClasspathResource> getChildResources() {
 
       return Collections.emptyList();
     }
@@ -498,6 +560,48 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
         this.url = Thread.currentThread().getContextClassLoader().getResource(getPath());
       }
       return this.url;
+    }
+  }
+
+  /**
+   * Container with all cached data.
+   */
+  protected static class Cache {
+
+    /** @see #getClasspathResource() */
+    private final ClasspathFolder root;
+
+    /** @see #getClasspathResourceFiles() */
+    private final List<ClasspathFile> classpathResourceFiles;
+
+    /**
+     * The constructor.
+     *
+     * @param root - see {@link #getRoot()}.
+     * @param fileList - see {@link #getClasspathResourceFiles()}.
+     */
+    public Cache(ClasspathFolder root, List<ClasspathFile> fileList) {
+
+      super();
+      root.init();
+      this.root = root;
+      this.classpathResourceFiles = Collections.unmodifiableList(fileList);
+    }
+
+    /**
+     * @return the {@link ClasspathScanner#getClasspathResource() root folder}.
+     */
+    public ClasspathFolder getRoot() {
+
+      return this.root;
+    }
+
+    /**
+     * @return the {@link ClasspathScanner#getClasspathResourceFiles() classpath files}.
+     */
+    public List<ClasspathFile> getClasspathResourceFiles() {
+
+      return this.classpathResourceFiles;
     }
 
   }

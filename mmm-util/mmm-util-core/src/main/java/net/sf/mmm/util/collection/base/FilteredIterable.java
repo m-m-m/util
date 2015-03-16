@@ -24,7 +24,7 @@ public class FilteredIterable<E> implements Iterable<E> {
   private final Iterable<? extends E> delegate;
 
   /** @see #iterator() */
-  private final Filter<E> filter;
+  private final Filter<? super E> filter;
 
   /**
    * The constructor.
@@ -32,7 +32,7 @@ public class FilteredIterable<E> implements Iterable<E> {
    * @param delegate is the {@link Iterable} to adapt.
    * @param filter is the {@link Filter} that {@link Filter#accept(Object) filters} the iterated elements.
    */
-  public FilteredIterable(Iterable<? extends E> delegate, Filter<E> filter) {
+  public FilteredIterable(Iterable<? extends E> delegate, Filter<? super E> filter) {
 
     super();
     this.delegate = delegate;
@@ -42,6 +42,7 @@ public class FilteredIterable<E> implements Iterable<E> {
   /**
    * {@inheritDoc}
    */
+  @Override
   public Iterator<E> iterator() {
 
     return new FilteredIterator<E>(this.delegate.iterator(), this.filter);

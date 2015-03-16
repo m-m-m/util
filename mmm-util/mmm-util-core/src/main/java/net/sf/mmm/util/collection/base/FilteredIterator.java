@@ -28,7 +28,7 @@ public class FilteredIterator<E> extends AbstractIterator<E> {
   private final Iterator<? extends E> delegate;
 
   /** @see #findNext() */
-  private final Filter<E> filter;
+  private final Filter<? super E> filter;
 
   /**
    * The constructor.
@@ -36,7 +36,7 @@ public class FilteredIterator<E> extends AbstractIterator<E> {
    * @param delegate is the {@link Iterator} to adapt.
    * @param filter is the {@link Filter} that {@link Filter#accept(Object) filters} the iterated elements.
    */
-  public FilteredIterator(Iterator<? extends E> delegate, Filter<E> filter) {
+  public FilteredIterator(Iterator<? extends E> delegate, Filter<? super E> filter) {
 
     super();
     this.delegate = delegate;

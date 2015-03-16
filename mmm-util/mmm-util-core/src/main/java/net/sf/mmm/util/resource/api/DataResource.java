@@ -122,7 +122,16 @@ public interface DataResource {
    * This method retrieves a {@link DataResource} pointing to the given <code>resourcePath</code> based on
    * this resource.<br>
    * E.g. if this resource points to the file "/etc/init.d/rc" and <code>resourcePath</code> would be
-   * "../apt/sources.list" the resulting resource would point to "/etc/apt/sources.list".
+   * "../apt/sources.list" the resulting resource would point to "/etc/apt/sources.list". <br/>
+   * <b>ATTENTION:</b><br/>
+   * As you can see by the example above this method always navigates relative to the <b><i>parent</i></b>
+   * {@link BrowsableResource#isFolder() folder} of this resource. This will also be the case if this resource
+   * itself is a {@link BrowsableResource#isFolder() folder}. Due to this generic API this is the only
+   * consistent way as there are implementations that can not easily know if they represent a
+   * {@link BrowsableResource#isFolder() folder} or a {@link BrowsableResource#isData() file} or maybe even
+   * both at the same time. However, please be aware of this and do not get confused as you might expect this
+   * to be a {@code cd} command if invoked on a {@link BrowsableResource#isFolder() folder} what is not
+   * exactly not the case (instead it is a {@code cd} on the parent folder).
    *
    * @param resourcePath is the absolute or relative path pointing to a new resource. If it is a relative
    *        path, it is interpreted relative to the parent URI (directory) of this resource.
