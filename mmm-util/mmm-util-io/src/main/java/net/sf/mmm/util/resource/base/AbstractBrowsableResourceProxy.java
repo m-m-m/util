@@ -11,7 +11,7 @@ import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 /**
  * This is an abstract implementation of the {@link BrowsableResource} interface that {@link #getDelegate()
  * delegates to another} {@link BrowsableResource}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -19,7 +19,7 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
 
   /**
    * The constructor.
-   * 
+   *
    */
   public AbstractBrowsableResourceProxy() {
 
@@ -35,7 +35,8 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
   /**
    * {@inheritDoc}
    */
-  public Iterable<BrowsableResource> getChildResources() {
+  @Override
+  public Iterable<? extends BrowsableResource> getChildResources() {
 
     return getDelegate().getChildResources();
   }
@@ -43,7 +44,8 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
   /**
    * {@inheritDoc}
    */
-  public Iterable<BrowsableResource> getChildResources(Filter<BrowsableResource> filter) {
+  @Override
+  public Iterable<? extends BrowsableResource> getChildResources(Filter<? super BrowsableResource> filter) {
 
     return getDelegate().getChildResources(filter);
   }
@@ -51,6 +53,7 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean isFolder() {
 
     return getDelegate().isFolder();
