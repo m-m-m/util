@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.lang.api.function.Function;
 import net.sf.mmm.util.lang.api.function.VoidFunction;
-import net.sf.mmm.util.pattern.base.GlobPatternCompiler;
+import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
@@ -40,7 +40,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     @Override
     public Pattern apply(ResourcePathNode<Pattern> path) {
 
-      return GlobPatternCompiler.INSTANCE.compile(path.getName());
+      return WildcardGlobPatternCompiler.INSTANCE.compile(path.getName());
     };
   };
 
@@ -440,7 +440,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
 
   /**
    * Calls {@link #create(String, Function)} with {@link #getData() data} function delegating to
-   * {@link GlobPatternCompiler}.
+   * {@link WildcardGlobPatternCompiler}.
    *
    * @see #create(String)
    * @see #matches(ResourcePathNode)

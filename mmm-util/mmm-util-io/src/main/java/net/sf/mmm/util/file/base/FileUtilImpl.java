@@ -28,9 +28,7 @@ import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
-import net.sf.mmm.util.pattern.api.PatternCompiler;
-import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
-import net.sf.mmm.util.scanner.base.CharSequenceScanner;
+import net.sf.mmm.util.resource.api.ResourcePathNode;
 
 /**
  * This class is a collection of utility functions for {@link File} handling and manipulation.
@@ -429,19 +427,22 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     if ((path == null) || (path.length() == 0)) {
       throw new IllegalArgumentException("Path must not be empty");
     }
-    // ResourcePath path = PatternResourcePath.create(path);
-    List<PathSegment> segmentList = new ArrayList<PathSegment>();
-    // TODO initialize cwd according to absolute or relative path
-    boolean pathIsPattern = tokenizePath(path, segmentList, WildcardGlobPatternCompiler.INSTANCE);
-    PathSegment[] segments = segmentList.toArray(new PathSegment[segmentList.size()]);
-    collectMatchingFiles(cwd, segments, 0, fileType, list);
-    return pathIsPattern;
+    ResourcePathNode<Pattern> patternPath = ResourcePathNode.createPattern(path);
+    List<ResourcePathNode<Pattern>> segments = patternPath.asList();
+    collectMatchingFiles(cwd, segments, 1, fileType, list);
+    boolean hasPattern = false;
+    for (ResourcePathNode<Pattern> segment : segments) {
+      if (segment.getData() != null) {
+        hasPattern = true;
+        break;
+      }
+    }
+    return hasPattern;
   }
 
   /**
-   * This method adds all files matching to the given <code>path</code> and <code>fileType</code> to the
-   * <code>list</code>. The <code>path</code> may contain
-   * {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
+   * This method adds all files matching with the given <code>path</code> and <code>fileType</code> to the
+   * <code>list</code>.
    *
    * @param cwd is the current working directory and should therefore point to an existing
    *        {@link File#isDirectory() directory}. If the given <code>path</code> is NOT
@@ -454,18 +455,19 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
    *        acceptable.
    * @param list is the list where to {@link List#add(Object) add} the collected files.
    */
-  private void collectMatchingFiles(File cwd, PathSegment[] segments, int segmentIndex, FileType fileType,
-      List<File> list) {
+  private void collectMatchingFiles(File cwd, List<ResourcePathNode<Pattern>> segments, int segmentIndex,
+      FileType fileType, List<File> list) {
 
     boolean lastSegment;
-    if ((segmentIndex + 1) < segments.length) {
+    if ((segmentIndex + 1) < segments.size()) {
       lastSegment = false;
     } else {
       lastSegment = true;
     }
-    Pattern pattern = segments[segmentIndex].pattern;
+    ResourcePathNode<Pattern> currentSegment = segments.get(segmentIndex);
+    Pattern pattern = currentSegment.getData();
     if (pattern == null) {
-      File newCwd = new File(cwd, segments[segmentIndex].string);
+      File newCwd = new File(cwd, currentSegment.getName());
       if (newCwd.exists()) {
         if (lastSegment) {
           if ((fileType == null) || (FileType.getType(newCwd) == fileType)) {
@@ -475,7 +477,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
           collectMatchingFiles(newCwd, segments, segmentIndex + 1, fileType, list);
         }
       }
-    } else if ("**".equals(segments[segmentIndex].string)) {
+    } else if ("**".equals(currentSegment.getName())) {
       collectMatchingFiles(cwd, segments, segmentIndex + 1, fileType, list);
       File[] children = cwd.listFiles(DirectoryFilter.getInstance());
       for (File file : children) {
@@ -497,111 +499,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
           collectMatchingFiles(file, segments, segmentIndex + 1, fileType, list);
         }
       }
-    }
-  }
-
-  /**
-   * This method tokenized the given <code>path</code> by adding {@link PathSegment}s to the given
-   * <code>list</code>.
-   *
-   * @param path is the path to tokenized
-   * @param list is the list where to add the segment tokens.
-   * @param patternCompiler is the {@link PatternCompiler} used to compile the individual {@link PathSegment
-   *        segments} of the given <code>path</code>.
-   * @return <code>true</code> if the path is a glob-pattern (contains '*' or '?'), <code>false</code>
-   *         otherwise.
-   */
-  private boolean tokenizePath(String path, List<PathSegment> list, PatternCompiler patternCompiler) {
-
-    char[] chars = path.toCharArray();
-    getStringUtil().replace(chars, '\\', '/');
-    boolean pathIsPattern = false;
-    CharSequenceScanner scanner = new CharSequenceScanner(chars);
-    while (scanner.hasNext()) {
-      String segmentString = scanner.readUntil('/', true);
-      // ignore double slashes ("//") and segment "."
-      if ((segmentString.length() > 0) && (!PATH_SEGMENT_CURRENT.equals(segmentString))) {
-        if (PATH_SEGMENT_PARENT.equals(segmentString)) {
-          // ".." --> remove last segment from list...
-          int lastIndex = list.size() - 1;
-          if (lastIndex >= 0) {
-            list.remove(lastIndex);
-          }
-        } else {
-          Pattern segmentPattern = patternCompiler.compile(segmentString);
-          if (segmentPattern != null) {
-            pathIsPattern = true;
-          }
-          PathSegment segment = new PathSegment(segmentString, segmentPattern);
-          list.add(segment);
-        }
-      }
-    }
-    return pathIsPattern;
-  }
-
-  /**
-   * This inner class represents a segment of a glob-matching path. It is a simple container for a string and
-   * a pattern.
-   */
-  protected static class PathSegment {
-
-    /** @see #getString() */
-    private final String string;
-
-    /** @see #getPattern() */
-    private final Pattern pattern;
-
-    /**
-     * The constructor.
-     *
-     * @param string is the {@link #getString() string} of the segment.
-     */
-    public PathSegment(String string) {
-
-      this(string, null);
-    }
-
-    /**
-     * The constructor.
-     *
-     * @param string is the {@link #getString() string} of the segment.
-     * @param pattern is the <code>string</code> parsed as {@link #getPattern() pattern}.
-     */
-    public PathSegment(String string, Pattern pattern) {
-
-      super();
-      this.pattern = pattern;
-      this.string = string;
-    }
-
-    /**
-     * This method gets the segment as raw string. This may be a {@link #getPattern() pattern}.
-     *
-     * @return the string.
-     */
-    public String getString() {
-
-      return this.string;
-    }
-
-    /**
-     * This method gets the pattern.
-     *
-     * @return the pattern or <code>null</code> if the {@link #getString() string} is to be matched exactly.
-     */
-    public Pattern getPattern() {
-
-      return this.pattern;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-
-      return this.string;
     }
   }
 

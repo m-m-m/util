@@ -5,6 +5,8 @@ package net.sf.mmm.util.file.base;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -162,4 +164,32 @@ public class FileUtilTest extends Assertions {
     assertThat(subdir.exists()).isFalse();
     assertThat(copyDir.exists()).isFalse();
   }
+
+  /** Tests {@link FileUtil#collectMatchingFiles(File, String, FileType, java.util.List)}. */
+  @Test
+  public void testCollectMatchingFiles() {
+
+    FileUtil util = getFileUtil();
+    List<File> list = new ArrayList<File>();
+    String testPath = TestResourceHelper.getTestPath() + "../java";
+    boolean hasPattern = util.collectMatchingFiles(new File(testPath), "net/sf/mmm/ut?l/**/impl/*.java", FileType.FILE,
+        list);
+    assertThat(hasPattern).isTrue();
+    assertThat(list).contains(
+        create(testPath, net.sf.mmm.util.resource.impl.BrowsableResourceFactoryTest.class,
+            net.sf.mmm.util.resource.impl.BrowsableResourceFactorySpringTest.class,
+            net.sf.mmm.util.io.impl.DetectorStreamTest.class));
+    assertThat(list).doesNotContain(create(testPath, net.sf.mmm.util.xml.impl.stax.XIncludeStreamReaderTest.class));
+  }
+
+  private File[] create(String testPath, Class<?>... classes) {
+
+    File[] files = new File[classes.length];
+    int i = 0;
+    for (Class<?> c : classes) {
+      files[i++] = new File(testPath, c.getName().replace('.', '/') + ".java");
+    }
+    return files;
+  }
+
 }
