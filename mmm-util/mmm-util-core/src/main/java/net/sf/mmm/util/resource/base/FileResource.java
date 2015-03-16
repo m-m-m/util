@@ -151,7 +151,7 @@ public class FileResource extends AbstractBrowsableResource {
   @Override
   public boolean isData() {
 
-    return this.file.isFile();
+    return this.file.exists() && !this.file.isDirectory();
   }
 
   /**
