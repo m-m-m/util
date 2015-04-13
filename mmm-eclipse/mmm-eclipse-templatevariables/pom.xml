@@ -5,67 +5,13 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-eclipse</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-eclipse-templatevariables</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+
+  <artifactId>net.sf.mmm.eclipse.templatevariables</artifactId>
   <packaging>eclipse-plugin</packaging>
   <name>${project.artifactId}</name>
   <description>Eclipse plugin to register additional variables for java templates like project_version.</description>
-  <!--
-  <dependencies>
-    <dependency>
-      <groupId>org.eclipse.ui</groupId>
-      <artifactId>org.eclipse.ui</artifactId>
-      <version>3.104.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.core</groupId>
-      <artifactId>org.eclipse.core.runtime</artifactId>
-      <version>3.8.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.m2e</groupId>
-      <artifactId>org.eclipse.m2e.core</artifactId>
-      <version>1.2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jdt</groupId>
-      <artifactId>org.eclipse.jdt.core</artifactId>
-      <version>3.8.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jdt</groupId>
-      <artifactId>org.eclipse.jdt.ui</artifactId>
-      <version>3.8.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.core</groupId>
-      <artifactId>org.eclipse.core.resources</artifactId>
-      <version>3.8.1</version>
-    </dependency>
-  </dependencies>
-  -->
-  <!--
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>1.4.0</version>
-        <extensions>true</extensions>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>net.sf.mmm.eclipse.templatevariables</Bundle-SymbolicName>
-            <Bundle-Name>TemplateVariables</Bundle-Name>
-            <Bundle-Version>${project.version}</Bundle-Version>
-            <Bundle-Activator>net.sf.mmm.eclipse.templatevariables.Activator</Bundle-Activator>
-            <Private-Package>net.sf.mmm.eclipse.templatevariables</Private-Package>
-          </instructions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  -->
+
 </project>

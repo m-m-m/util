@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site pack200="true" digestURL="http://www.agilereview.org/development_update/">
+   <feature url="features/net.sf.mmm.eclipse.templatevariables.feature_0.0.0.jar" id="net.sf.mmm.eclipse.templatevariables.feature" version="0.0.0">
+      <category name="net.sf.mmm.eclipse.templatevariables.updates"/>
+   </feature>
+   <category-def name="net.sf.mmm.eclipse.updates" label="M-M-M Tools"/>
+</site>
