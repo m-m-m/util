@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: TemplateVariables
+Bundle-Name: net.sf.mmm.eclipse.templatevariables
 Bundle-SymbolicName: net.sf.mmm.eclipse.templatevariables;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: net.sf.mmm.eclipse.templatevariables.Activator
 Bundle-Vendor: Jörg Hohwiller
 Require-Bundle: org.eclipse.ui,
@@ -13,7 +13,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources,
  org.eclipse.jface.text,
  org.eclipse.core.variables
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
- JavaSE-1.7,
- J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
