@@ -8,13 +8,18 @@ import net.sf.mmm.util.filter.api.Filter;
  * This is the interface for a {@link DataResource} that has higher-level features and may contain other
  * resources. You can think of a {@link BrowsableResource} as a {@link java.io.File file} that is a
  * {@link java.io.File#isDirectory() directory} or a {@link java.io.File#isFile() regular file}. However it
- * may be both and it can originate from other sources than the filesystem. <br>
+ * may be both and it can originate from other sources than the filesystem. It was created before
+ * {@link java.nio.file.Path} was available and a migration was started but failed due to design restrictions
+ * of NIO. However, this API is more lightweight than {@link java.nio.file.Path} and especially
+ * {@link java.nio.file.FileSystem} that also prevents some scenarios such as creating a sub-filesystem where
+ * the root is some sub-folder of the main filesystem.<br>
  * <b>ATTENTION:</b><br>
  * This API has a high level of abstraction. It is possible that the underlying implementation e.g. forms a
  * web-crawler where a HTML-page is {@link #isData() data} containing the HTML-content as well as a
  * {@link #isFolder() folder} containing the linked sites. Further you have to be careful when recursively
  * scanning {@link BrowsableResource}s that you avoid infinity loops. E.g. create a {@link java.util.Set}
- * holding the {@link #getUri() URIs} of the {@link BrowsableResource}s that have already been visited.
+ * holding the {@link #getUri() URIs} of the {@link BrowsableResource}s that have already been visited in case
+ * you are completely abstracting from the source of the data.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

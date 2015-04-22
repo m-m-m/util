@@ -169,11 +169,14 @@ public class FileUtilTest extends Assertions {
   @Test
   public void testCollectMatchingFiles() {
 
+    // given
     FileUtil util = getFileUtil();
     List<File> list = new ArrayList<File>();
     String testPath = TestResourceHelper.getTestPath() + "../java";
+    // when
     boolean hasPattern = util.collectMatchingFiles(new File(testPath), "net/sf/mmm/ut?l/**/impl/*.java", FileType.FILE,
         list);
+    // then
     assertThat(hasPattern).isTrue();
     assertThat(list).contains(
         create(testPath, net.sf.mmm.util.resource.impl.BrowsableResourceFactoryTest.class,

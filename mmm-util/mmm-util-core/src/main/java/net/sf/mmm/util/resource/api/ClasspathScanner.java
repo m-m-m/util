@@ -14,7 +14,9 @@ import net.sf.mmm.util.filter.api.Filter;
  * cached further invocations are relatively cheap. Please note that only the "directory structure" is kept in
  * cache but not any content. Invocations to read file contents from the classpath will always return the
  * recent data without caching. If you have a dynamic classpath where resources can be added at runtime see
- * {@link #clearCaches()}.
+ * {@link #clearCaches()}. If you create and initialize the implementation (manually or via
+ * {@link net.sf.mmm.util.component.api.Ioc}) it shall not scan the classpath or build any caches before any
+ * of the actual {@code getClasspathResource*()} methods are invoked.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.0.0

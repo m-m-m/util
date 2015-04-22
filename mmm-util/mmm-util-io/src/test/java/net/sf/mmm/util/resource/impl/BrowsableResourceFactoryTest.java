@@ -4,13 +4,14 @@ package net.sf.mmm.util.resource.impl;
 
 import java.util.Date;
 
+import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
@@ -19,7 +20,7 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class BrowsableResourceFactoryTest extends Assert {
+public class BrowsableResourceFactoryTest extends Assertions {
 
   /**
    * This method gets the {@link BrowsableResourceFactory} instance to test.
@@ -40,19 +41,19 @@ public class BrowsableResourceFactoryTest extends Assert {
     String path = "/" + filename;
     String resourceUri = "file://" + path;
     BrowsableResource resource = getBrowsableResourceFactory().createBrowsableResource(resourceUri);
-    assertEquals(filename, resource.getName());
+    assertThat(resource.getName()).isEqualTo(filename);
     // will not work on windows by intention - see javadoc...
     // assertEquals(path, resource.getPath());
     // assertEquals(resourceUri, resource.getUri());
-    assertFalse(resource.isAvailable());
-    assertFalse(resource.isFolder());
-    assertNull(resource.isModifiedSince(new Date()));
+    assertThat(resource.isAvailable()).isFalse();
+    assertThat(resource.isFolder()).isFalse();
+    assertThat(resource.isModifiedSince(new Date())).isNull();
     try {
       resource.getSize();
-      fail("Exception expected");
+      ExceptionHelper.failExceptionExpected();
     } catch (ResourceNotAvailableException e) {
       // OK
-      assertTrue(e.getMessage().contains(filename));
+      assertThat(e).hasMessageContaining(filename);
     }
   }
 
@@ -64,17 +65,10 @@ public class BrowsableResourceFactoryTest extends Assert {
     String host = "foo.bar.xyz";
     String resourceUri = "http://" + host + path;
     DataResource resource = getBrowsableResourceFactory().createDataResource(resourceUri);
-    assertEquals(filename, resource.getName());
-    assertEquals(path, resource.getPath());
-    assertEquals(resourceUri, resource.getUri());
-    assertFalse(resource.isAvailable());
-    // try {
-    // resource.getSize();
-    // Assert.fail("Exception expected");
-    // } catch (ResourceNotAvailableException e) {
-    // // OK
-    // assertTrue(e.getMessage().contains(filename));
-    // }
+    assertThat(resource.getName()).isEqualTo(filename);
+    assertThat(resource.getPath()).isEqualTo(path);
+    assertThat(resource.getUri()).isEqualTo(resourceUri);
+    assertThat(resource.isAvailable()).isFalse();
   }
 
   @Test
@@ -82,11 +76,11 @@ public class BrowsableResourceFactoryTest extends Assert {
 
     BrowsableResourceFactory factory = getBrowsableResourceFactory();
     DataResource resource = factory.createDataResource("file:///test");
-    assertEquals("test", resource.getName());
+    assertThat(resource.getName()).isEqualTo("test");
     resource = resource.navigate("foo/bar.txt");
-    assertEquals("bar.txt", resource.getName());
+    assertThat(resource.getName()).isEqualTo("bar.txt");
     resource = resource.navigate("classpath:META-INF/maven/org.slf4j/slf4j-api/pom.properties");
-    assertTrue(resource.isAvailable());
-    assertEquals(108, resource.getSize());
+    assertThat(resource.isAvailable()).isTrue();
+    assertThat(resource.getSize()).isEqualTo(108);
   }
 }
