@@ -14,9 +14,7 @@
   <modules>
     <module>mmm-util</module>
     <module>mmm-client</module>
-    <module>mmm-search</module>
     <module>mmm-service</module>
-    <module>mmm-content-parser</module>
     <module>mmm-transaction</module>
     <module>mmm-persistence</module>
     <module>mmm-security</module>

@@ -1,1 +1,0 @@
-<span class="foo">Hel</span>lo <b>W</b><em>or<a href="l">l</a>d</em>!
