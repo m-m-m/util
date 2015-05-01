@@ -5,12 +5,11 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-util</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-core</artifactId>
-  <!-- <version>${net.sf.mmm.util.core.version}</version> -->
-  <version>7.0.0-SNAPSHOT</version>
+  <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>provides core utilities that fill gaps in the jdk.</description>

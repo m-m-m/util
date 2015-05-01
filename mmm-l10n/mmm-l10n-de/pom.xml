@@ -5,14 +5,15 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-l10n</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-l10n-de</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
-  <description>Localization for Germany (de_DE).</description>
+  <description>Localization for Germany (de_DE).</description>  
+  
   <dependencies>
   </dependencies>  
 </project>

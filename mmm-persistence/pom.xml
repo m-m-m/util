@@ -5,11 +5,10 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-persistence</artifactId>
-  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>This project provides an API and base-implementations for persistence-layers (e.g. based on JPA).</description>
