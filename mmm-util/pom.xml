@@ -5,11 +5,10 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util</artifactId>
-  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>provides basic utilities used by various other projects.</description>
@@ -30,7 +29,6 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-test</artifactId>
-      <version>0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

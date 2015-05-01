@@ -5,11 +5,10 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-l10n</artifactId>
-  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>localization (l10n) contains the texts and configuraitons for various locales (languages and contries).</description>

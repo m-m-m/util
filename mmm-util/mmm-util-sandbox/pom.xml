@@ -4,11 +4,10 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-util</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-sandbox</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project provides additional utilities that are in development and unclear or experimental state. It will never be released but code can move from here to other utilities after getting mature.</description>

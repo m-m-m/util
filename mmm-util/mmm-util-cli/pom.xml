@@ -5,12 +5,11 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-util</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-cli</artifactId>
-  <!--<version>${net.sf.mmm.util.cli.version}</version>-->
-  <version>5.0.1-SNAPSHOT</version>
+  <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>Build commandline-interfaces (CLI) easily</description>

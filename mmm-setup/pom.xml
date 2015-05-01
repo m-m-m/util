@@ -5,11 +5,11 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-setup</artifactId>
-  <version>0-SNAPSHOT</version>
+  <version>dev</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>infrastructure for project setup</description>
@@ -21,7 +21,7 @@
     <resources>
       <resource>
         <directory>src/main/resources</directory>
-		<filtering>true</filtering>
+        <filtering>true</filtering>
       </resource>
     </resources>
   </build>
