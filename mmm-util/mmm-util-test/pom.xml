@@ -8,7 +8,7 @@
     <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-test</artifactId>
+  <artifactId>mmm-util-test</artifactId>
   <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>

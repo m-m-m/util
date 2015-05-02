@@ -13,8 +13,6 @@
 
   <modules>
     <module>mmm-l10n</module>
-    <module>mmm-setup</module>
-    <module>mmm-test</module>
     <module>mmm-util</module>
   </modules>
 
@@ -254,7 +252,7 @@
       <!-- Internal dependencies -->
       <dependency>
         <groupId>net.sf.m-m-m</groupId>
-        <artifactId>mmm-test</artifactId>
+        <artifactId>mmm-util-test</artifactId>
         <version>${net.sf.mmm.util.version}</version>
       </dependency>
       <dependency>
@@ -709,15 +707,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-      	<configuration>
-      	</configuration>
-        <dependencies>
-          <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mmm-setup</artifactId>
-            <version>dev</version>
-          </dependency>
-        </dependencies>
       </plugin>
       <!-- genercate jacoco coverage report-->
       <plugin>
