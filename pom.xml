@@ -3,7 +3,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.m-m-m</groupId>
-  <artifactId>mmm</artifactId>
+  <artifactId>mmm-util</artifactId>
   <version>dev</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
@@ -12,8 +12,17 @@
   <inceptionYear>2001</inceptionYear>
 
   <modules>
-    <module>mmm-util</module>
-  </modules>
+    <module>mmm-util-test</module>
+    <module>mmm-util-core</module>
+    <module>mmm-util-gwt</module>
+    <module>mmm-util-cli</module>
+    <module>mmm-util-io</module>
+    <module>mmm-util-http</module>
+    <module>mmm-util-contenttype</module>
+    <module>mmm-util-metakeys</module>
+    <module>mmm-util-datatype</module>
+    <module>mmm-util-sandbox</module>
+  </modules>  
 
   <properties>
     <!-- argLine needs to be set in sonar build otherwise it remains as unresolved class ${argLine} in surefire -->
