@@ -16,7 +16,6 @@
     <module>mmm-setup</module>
     <module>mmm-test</module>
     <module>mmm-util</module>
-    <module>mmm-client</module>
     <module>mmm-transaction</module>
     <module>mmm-persistence</module>
   </modules>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module>
-  <inherits name="net.sf.mmm.client.ui.ClientUi"/>
-
-  <!-- <source path=""/> -->
-  <source path="api"/>
-  <source path="base"/>
-  <source path="impl"/>
-</module>
