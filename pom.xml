@@ -12,7 +12,6 @@
   <inceptionYear>2001</inceptionYear>
 
   <modules>
-    <module>mmm-l10n</module>
     <module>mmm-util</module>
   </modules>
 
@@ -37,6 +36,7 @@
     <!--<org.slf4j.version>1.5.6</org.slf4j.version>-->
     <jacoco.version>0.6.4.201312101107</jacoco.version>
     <!-- Internal project versions -->
+    <net.sf.mmm.l10n.version>1.0.0-SNAPSHOT</net.sf.mmm.l10n.version>
     <net.sf.mmm.util.version>7.0.0-SNAPSHOT</net.sf.mmm.util.version>
     <net.sf.mmm.service.version>1.0.0-SNAPSHOT</net.sf.mmm.service.version>
     <net.sf.mmm.persistence.version>1.0.1-SNAPSHOT</net.sf.mmm.persistence.version>
@@ -259,22 +259,22 @@
         <groupId>net.sf.m-m-m</groupId>
         <artifactId>mmm-l10n-ALL</artifactId>
         <type>pom</type>
-        <version>${net.sf.mmm.util.version}</version>
+        <version>${net.sf.mmm.l10n.version}</version>
       </dependency>
       <dependency>
         <groupId>net.sf.m-m-m</groupId>
         <artifactId>mmm-l10n-de</artifactId>
-        <version>${net.sf.mmm.util.version}</version>
+        <version>${net.sf.mmm.l10n.version}</version>
       </dependency>
       <dependency>
         <groupId>net.sf.m-m-m</groupId>
         <artifactId>mmm-l10n-en-GB</artifactId>
-        <version>${net.sf.mmm.util.version}</version>
+        <version>${net.sf.mmm.l10n.version}</version>
       </dependency>
       <dependency>
         <groupId>net.sf.m-m-m</groupId>
         <artifactId>mmm-l10n-fr</artifactId>
-        <version>${net.sf.mmm.util.version}</version>
+        <version>${net.sf.mmm.l10n.version}</version>
       </dependency>
       <dependency>
         <groupId>net.sf.m-m-m</groupId>
