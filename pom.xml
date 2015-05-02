@@ -15,16 +15,16 @@
   <description>Reusable utilities for general purpose.</description>
   <url>http://m-m-m.sourceforge.net/</url>
 
-  <modules>
-    <module>mmm-util-bom</module>
-    <module>mmm-util-modules</module>
-  </modules>  
-
   <properties>
     <!-- Internal project versions -->
     <net.sf.mmm.l10n.version>1.0.0-SNAPSHOT</net.sf.mmm.l10n.version>
     <net.sf.mmm.util.version>7.0.0-SNAPSHOT</net.sf.mmm.util.version>
   </properties>
+
+  <modules>
+    <module>mmm-util-bom</module>
+    <module>mmm-util-modules</module>
+  </modules>  
 
   <issueManagement>
     <system>GitHub</system>
