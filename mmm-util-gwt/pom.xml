@@ -4,9 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-util</artifactId>
+    <artifactId>mmm-util-modules</artifactId>
     <version>dev</version>
-    <relativePath>../pom.xml</relativePath>
+    <relativePath>../mmm-util-modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-gwt</artifactId>
   <version>${net.sf.mmm.util.version}</version>
