@@ -14,7 +14,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -36,6 +35,8 @@ import net.sf.mmm.util.file.api.FileCreationFailedException;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
+import net.sf.mmm.util.nls.api.NlsBundleOptions;
+import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocator;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
@@ -43,8 +44,8 @@ import net.sf.mmm.util.reflect.base.AssignableFromFilter;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This class can be used to create and update the localized bundles (properties) from an
- * {@link AbstractResourceBundle} . <br>
+ * This class can be used to create and update the localized bundles (properties) from an {@link AbstractResourceBundle}
+ * . <br>
  * It is a main-program. Simply call it with the parameter "--help" to get help. <b>ATTENTION:</b><br>
  * This class only works with java 6 or above.
  *
@@ -110,8 +111,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
   private List<Class<?>> bundleClasses;
 
-  /** @see #getResourceBundleFinder() */
-  private NlsResourceBundleLocator resourceBundleFinder;
+  /** @see #getResourceBundleLocator() */
+  private NlsResourceBundleLocator resourceBundleLocator;
 
   /** @see #getReflectionUtil() */
   private ReflectionUtil reflectionUtil;
@@ -153,8 +154,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the locales of the bundles that should be {@link #synchronize(NlsBundleContainer)
-   * synchronized}. Examples for locales (entries of the returned array) are <code>""</code>, <code></code>
+   * This method gets the locales of the bundles that should be {@link #synchronize(NlsBundleContainer) synchronized}.
+   * Examples for locales (entries of the returned array) are <code>""</code>, <code></code>
    *
    * @return the locales to create/update.
    */
@@ -187,8 +188,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the base-path where the bundles are written to. They will appear there under their
-   * appropriate classpath. The default is {@link #DEFAULT_BASE_PATH}.
+   * This method gets the base-path where the bundles are written to. They will appear there under their appropriate
+   * classpath. The default is {@link #DEFAULT_BASE_PATH}.
    *
    * @return the basePath is the base path where the resource bundles are written to.
    */
@@ -257,20 +258,6 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method sets the {@link #getBundleClasses() bundle-class}.
-   *
-   * @param bundleClass is the bundle-class to set
-   * @deprecated use {@link #setBundleClasses(List)}
-   */
-  @Deprecated
-  public void setBundleClass(Class<?> bundleClass) {
-
-    List<Class<?>> list = new ArrayList<Class<?>>();
-    list.add(bundleClass);
-    setBundleClasses(list);
-  }
-
-  /**
    * This method sets the {@link #getBundleClasses() bundle-classes}.
    *
    * @param bundleClasses is the {@link List} of bundle-classes to set
@@ -285,27 +272,27 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    *
    * @return the {@link NlsResourceBundleLocator}.
    */
-  public NlsResourceBundleLocator getResourceBundleFinder() {
+  public NlsResourceBundleLocator getResourceBundleLocator() {
 
-    if (this.resourceBundleFinder == null) {
+    if (this.resourceBundleLocator == null) {
       IocContainer container = getIocContainer();
       if (container == null) {
         NlsResourceBundleLocatorImpl impl = new NlsResourceBundleLocatorImpl();
         impl.initialize();
-        this.resourceBundleFinder = impl;
+        this.resourceBundleLocator = impl;
       } else {
-        this.resourceBundleFinder = container.get(NlsResourceBundleLocator.class);
+        this.resourceBundleLocator = container.get(NlsResourceBundleLocator.class);
       }
     }
-    return this.resourceBundleFinder;
+    return this.resourceBundleLocator;
   }
 
   /**
    * @param resourceBundleFinder is the resourceBundleFinder to set
    */
-  public void setResourceBundleFinder(NlsResourceBundleLocator resourceBundleFinder) {
+  public void setResourceBundleLocator(NlsResourceBundleLocator resourceBundleFinder) {
 
-    this.resourceBundleFinder = resourceBundleFinder;
+    this.resourceBundleLocator = resourceBundleFinder;
   }
 
   /**
@@ -354,9 +341,9 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method synchronizes (creates or updates) the localized bundles (properties). If a bundle already
-   * exists, it will NOT just be overwritten but the missing keys are appended to the end of the file. If no
-   * keys are missing, the existing file remains untouched.
+   * This method synchronizes (creates or updates) the localized bundles (properties). If a bundle already exists, it
+   * will NOT just be overwritten but the missing keys are appended to the end of the file. If no keys are missing, the
+   * existing file remains untouched.
    *
    * @param bundle is the bundle instance as java object.
    * @throws IOException if the operation failed with an input/output error.
@@ -372,9 +359,11 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     String date = sdf.format(new Date());
     String propertyPath = this.path + File.separatorChar + bundle.getName().replace('.', File.separatorChar);
     File directory = new File(propertyPath).getParentFile();
-    boolean success = directory.mkdirs();
-    if (!success) {
-      throw new FileCreationFailedException(directory);
+    if (!directory.exists()) {
+      boolean success = directory.mkdirs();
+      if (!success) {
+        throw new FileCreationFailedException(directory);
+      }
     }
     // synchronize(bundle, "", propertyPath, date);
     for (String locale : this.locales) {
@@ -463,16 +452,22 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   protected int runDefaultMode() throws Exception {
 
     if (this.bundleClasses == null) {
-      List<ResourceBundle> bundleList = getResourceBundleFinder().findBundles();
+      List<ResourceBundle> bundleList = getResourceBundleLocator().findBundles();
       for (ResourceBundle resourceBundle : bundleList) {
-        synchronize(new NlsBundleContainer(resourceBundle));
+        if (isProductive(resourceBundle.getClass())) {
+          synchronize(new NlsBundleContainer(resourceBundle));
+        }
       }
       Set<String> allClasses = getReflectionUtil().findClassNames("", true);
       Filter<? super Class<?>> filter = new AssignableFromFilter(NlsBundle.class, true);
       @SuppressWarnings({ "unchecked", "rawtypes" })
       Set<Class<? extends NlsBundle>> nlsBundleClasses = (Set) getReflectionUtil().loadClasses(allClasses, filter);
       for (Class<? extends NlsBundle> bundleClass : nlsBundleClasses) {
-        synchronize(new NlsBundleContainer(bundleClass));
+        if (bundleClass != NlsBundleWithLookup.class) {
+          if (isProductive(bundleClass)) {
+            synchronize(new NlsBundleContainer(bundleClass));
+          }
+        }
       }
     } else {
       for (Class<?> bundleClass : this.bundleClasses) {
@@ -491,6 +486,21 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
       }
     }
     return EXIT_CODE_OK;
+  }
+
+  /**
+   * Determines if the given {@code bundleClass} is {@link NlsBundleOptions#productive() productive}.
+   *
+   * @param bundleClass is the {@link Class} to test.
+   * @return <code>true</code> if {@link NlsBundleOptions#productive() productive}, <code>false</code> otherwise.
+   */
+  private boolean isProductive(Class<?> bundleClass) {
+
+    NlsBundleOptions options = bundleClass.getAnnotation(NlsBundleOptions.class);
+    if (options != null) {
+      return options.productive();
+    }
+    return true;
   }
 
   /**
@@ -559,7 +569,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     public Map<String, String> getProperties() {
 
       if (this.properties == null) {
-        this.properties = new HashMap<String, String>();
+        this.properties = new HashMap<>();
         if (this.resourceBundle == null) {
           for (Method method : this.nlsBundleInterface.getMethods()) {
             if (getBundleHelper().isNlsBundleMethod(method, false)) {

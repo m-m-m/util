@@ -2,7 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
+import net.sf.mmm.util.nls.api.NlsBundleOptions;
+
 @SuppressWarnings("all")
+@NlsBundleOptions(productive = false)
 public class MyResourceBundle extends AbstractResourceBundle {
 
   public static final String ERR_NULL = "NullPointerException caused by \"{0}\"!";

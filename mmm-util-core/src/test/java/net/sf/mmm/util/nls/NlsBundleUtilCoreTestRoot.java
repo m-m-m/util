@@ -5,6 +5,7 @@ package net.sf.mmm.util.nls;
 import javax.inject.Named;
 
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
+import net.sf.mmm.util.nls.api.NlsBundleOptions;
 import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
@@ -14,6 +15,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
  */
+@NlsBundleOptions(productive = false)
 public interface NlsBundleUtilCoreTestRoot extends NlsBundleWithLookup {
 
   /**

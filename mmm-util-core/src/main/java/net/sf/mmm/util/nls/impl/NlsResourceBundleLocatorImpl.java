@@ -102,11 +102,12 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
     super.doInitialize();
     Logger logger = getLogger();
     if (this.nlsBundles == null) {
-      this.nlsBundles = new ArrayList<ResourceBundle>();
+      this.nlsBundles = new ArrayList<>();
       if (this.reflectionUtil == null) {
         this.reflectionUtil = ReflectionUtilImpl.getInstance();
       }
-      Set<DataResource> bundleResources = this.reflectionUtil.findResources(NlsTemplateResolver.CLASSPATH_NLS_BUNDLE);
+      Set<DataResource> bundleResources = this.reflectionUtil
+          .findResources(NlsTemplateResolver.CLASSPATH_NLS_BUNDLE);
       for (DataResource dataResource : bundleResources) {
         if (logger.isTraceEnabled()) {
           logger.trace("Loading " + dataResource.getUri());
