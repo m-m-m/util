@@ -9,7 +9,7 @@
     <relativePath>../mmm-util-modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-contenttype</artifactId>
-  <version>${net.sf.mmm.util.version}</version>
+  <!--<version>${net.sf.mmm.util.version}</version>-->
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>library to detect metadata while streaming</description>

@@ -9,7 +9,7 @@
     <relativePath>../mmm-util-modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-datatype</artifactId>
-  <version>${net.sf.mmm.util.version}</version>
+  <!--<version>${net.sf.mmm.util.version}</version>-->
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>provides common datatypes that fill gaps in the jdk.</description>

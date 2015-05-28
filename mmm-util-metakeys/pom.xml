@@ -9,7 +9,7 @@
     <relativePath>../mmm-util-modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-metakeys</artifactId>
-  <version>${net.sf.mmm.util.version}</version>
+  <!--<version>${net.sf.mmm.util.version}</version>-->
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project provides property-keys for common metadata.</description>
