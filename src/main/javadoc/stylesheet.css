@@ -33,7 +33,6 @@ a[name]:hover {
 }
 pre {
     font-family:'DejaVu Sans Mono', monospace;
-    font-size:1.3em;
     white-space: pre-wrap;
     background: #F6F6F6;
     border-left: 5px solid #6CE26C;
@@ -63,7 +62,6 @@ ul {
 }
 code, tt {
     font-family:'DejaVu Sans Mono', monospace;
-    font-size:14px;
     padding-top:4px;
     margin-top:8px;
     line-height:1.4em;
