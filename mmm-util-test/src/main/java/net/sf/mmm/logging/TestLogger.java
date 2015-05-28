@@ -11,7 +11,7 @@ import org.slf4j.helpers.MarkerIgnoringBase;
 /**
  * This is an implementation of the {@link org.slf4j.Logger} interface that stores all log-entries in a
  * {@link #getEventList() list}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class TestLogger extends MarkerIgnoringBase {
@@ -28,7 +28,7 @@ public class TestLogger extends MarkerIgnoringBase {
   public TestLogger() {
 
     super();
-    this.eventList = new ArrayList<LogEvent>();
+    this.eventList = new ArrayList<>();
   }
 
   /**
@@ -58,7 +58,7 @@ public class TestLogger extends MarkerIgnoringBase {
   /**
    * {@inheritDoc}
    */
-  public void debug(String s, Object[] aobj) {
+  public void debug(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.DEBUG, s, null, aobj));
   }
@@ -98,7 +98,7 @@ public class TestLogger extends MarkerIgnoringBase {
   /**
    * {@inheritDoc}
    */
-  public void error(String s, Object[] aobj) {
+  public void error(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.ERROR, s, null, aobj));
   }
@@ -138,7 +138,7 @@ public class TestLogger extends MarkerIgnoringBase {
   /**
    * {@inheritDoc}
    */
-  public void info(String s, Object[] aobj) {
+  public void info(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.INFO, s, null, aobj));
   }
@@ -218,7 +218,7 @@ public class TestLogger extends MarkerIgnoringBase {
   /**
    * {@inheritDoc}
    */
-  public void trace(String s, Object[] aobj) {
+  public void trace(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.TRACE, s, null, aobj));
   }
@@ -258,7 +258,7 @@ public class TestLogger extends MarkerIgnoringBase {
   /**
    * {@inheritDoc}
    */
-  public void warn(String s, Object[] aobj) {
+  public void warn(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.WARNING, s, null, aobj));
   }
@@ -322,7 +322,7 @@ public class TestLogger extends MarkerIgnoringBase {
 
     /**
      * The constructor.
-     * 
+     *
      * @param arguments are the {@link #arguments}.
      * @param level is the {@link #level}.
      * @param message is the {@link #message}.

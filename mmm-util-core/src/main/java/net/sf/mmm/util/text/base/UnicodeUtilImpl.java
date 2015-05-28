@@ -37,7 +37,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   private static final Map<Character, String> TRANSLITERATION_MAP;
 
   static {
-    CHARACTER_TO_ASCII_MAP = new HashMap<Character, String>();
+    CHARACTER_TO_ASCII_MAP = new HashMap<>();
     CHARACTER_TO_ASCII_MAP.put(NO_BREAK_SPACE, " ");
     CHARACTER_TO_ASCII_MAP.put(SOFT_HYPHEN, "-");
     CHARACTER_TO_ASCII_MAP.put(MINUS_SIGN, "-");
@@ -156,7 +156,8 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     map.put(CYRILLIC_CAPITAL_LETTER_ABKHASIAN_DZE, Character.toString(LATIN_CAPITAL_LETTER_Z_WITH_ACUTE));
     map.put(CYRILLIC_CAPITAL_LETTER_I, "I");
     map.put(CYRILLIC_CAPITAL_LETTER_I_WITH_DIAERESIS, Character.toString(LATIN_CAPITAL_LETTER_I_WITH_CIRCUMFLEX));
-    map.put(CYRILLIC_CAPITAL_LETTER_BYELORUSSIAN_UKRAINIAN_I, Character.toString(LATIN_CAPITAL_LETTER_I_WITH_GRAVE));
+    map.put(CYRILLIC_CAPITAL_LETTER_BYELORUSSIAN_UKRAINIAN_I,
+        Character.toString(LATIN_CAPITAL_LETTER_I_WITH_GRAVE));
     map.put(CYRILLIC_CAPITAL_LETTER_YI, Character.toString(LATIN_CAPITAL_LETTER_I_WITH_DIAERESIS));
     map.put(CYRILLIC_CAPITAL_LETTER_SHORT_I, "J");
     map.put(CYRILLIC_CAPITAL_LETTER_JE, "J" + COMBINING_CARON);
@@ -187,7 +188,8 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     map.put(CYRILLIC_CAPITAL_LETTER_U, "U");
     map.put(CYRILLIC_CAPITAL_LETTER_SHORT_U, Character.toString(LATIN_CAPITAL_LETTER_U_WITH_BREVE));
     map.put(CYRILLIC_CAPITAL_LETTER_U_WITH_DIAERESIS, Character.toString(LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS));
-    map.put(CYRILLIC_CAPITAL_LETTER_U_WITH_DOUBLE_ACUTE, Character.toString(LATIN_CAPITAL_LETTER_U_WITH_DOUBLE_ACUTE));
+    map.put(CYRILLIC_CAPITAL_LETTER_U_WITH_DOUBLE_ACUTE,
+        Character.toString(LATIN_CAPITAL_LETTER_U_WITH_DOUBLE_ACUTE));
     map.put(CYRILLIC_CAPITAL_LETTER_STRAIGHT_U, Character.toString(LATIN_CAPITAL_LETTER_U_WITH_GRAVE));
     map.put(CYRILLIC_CAPITAL_LETTER_EF, "F");
     map.put(CYRILLIC_CAPITAL_LETTER_HA, "H");
@@ -233,8 +235,8 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     map.put(CYRILLIC_SMALL_LETTER_IO, Character.toString(LATIN_SMALL_LETTER_E_WITH_DIAERESIS));
     map.put(CYRILLIC_SMALL_LETTER_UKRAINIAN_IE, Character.toString(LATIN_SMALL_LETTER_E_WITH_CIRCUMFLEX));
     map.put(CYRILLIC_SMALL_LETTER_ABKHASIAN_CHE, "c" + COMBINING_BREVE);
-    map.put(CYRILLIC_SMALL_LETTER_ABKHASIAN_CHE_WITH_DESCENDER, Character.toString(LATIN_SMALL_LETTER_C_WITH_CEDILLA)
-        + COMBINING_BREVE);
+    map.put(CYRILLIC_SMALL_LETTER_ABKHASIAN_CHE_WITH_DESCENDER,
+        Character.toString(LATIN_SMALL_LETTER_C_WITH_CEDILLA) + COMBINING_BREVE);
     map.put(CYRILLIC_SMALL_LETTER_ZHE, Character.toString(LATIN_SMALL_LETTER_Z_WITH_CARON));
     map.put(CYRILLIC_SMALL_LETTER_ZHE_WITH_BREVE, "z" + COMBINING_BREVE);
     map.put(CYRILLIC_SMALL_LETTER_ZHE_WITH_DIAERESIS, "z" + COMBINING_MACRON);
@@ -310,7 +312,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
   }
 
   /**
-   * Implementation of <a href="http://en.wikipedia.org/wiki/ISO_843">ISO 843</a>.
+   * Implementation of <a href="http://en.wikipedia.org/wiki/ISO_843">ISO 843</a> (Greek transliteration).
    *
    * @param map is where to add the transliteration mapping.
    */
@@ -396,11 +398,11 @@ public class UnicodeUtilImpl implements UnicodeUtil {
    * @see #normalize2Ascii(char)
    *
    * @param character is the character to convert.
-   * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have
-   *        no {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove
-   *        these characters. A typical character to use is <code>?</code>.
-   * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the
-   *         character is already ASCII or there is no ASCII-representation available.
+   * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have no
+   *        {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove these
+   *        characters. A typical character to use is <code>?</code>.
+   * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the character is
+   *         already ASCII or there is no ASCII-representation available.
    */
   public String normalize2Ascii(char character, char nonNormalizableCharaterReplacement) {
 
@@ -481,7 +483,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
       return null;
     }
     int length = text.length();
-    StringBuilder buffer = new StringBuilder(length);
+    StringBuilder buffer = new StringBuilder(length + 4);
     for (int i = 0; i < length; i++) {
       char c = text.charAt(i);
       if (c <= 127) {

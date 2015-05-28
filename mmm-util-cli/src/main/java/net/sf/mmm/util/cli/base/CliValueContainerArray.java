@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 
 /**
- * This is an implementation of {@link CliValueContainer} for an array. It uses a {@link ArrayList} that is
- * dynamically converted to an array if {@link #getValue()} gets called.
+ * This is an implementation of {@link CliValueContainer} for an array. It uses a {@link ArrayList} that is dynamically
+ * converted to an array if {@link #getValue()} gets called.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -29,7 +29,7 @@ public class CliValueContainerArray extends CliValueContainerCollection {
   public CliValueContainerArray(CliParameterContainer parameterContainer, CliState cliState,
       CliParserDependencies dependencies, Logger logger) {
 
-    super(parameterContainer, cliState, dependencies, logger, new ArrayList<Object>());
+    super(parameterContainer, cliState, dependencies, logger, new ArrayList<>());
   }
 
   /**

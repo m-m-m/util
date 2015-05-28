@@ -25,8 +25,8 @@ import net.sf.mmm.util.value.api.ValueException;
 import org.slf4j.Logger;
 
 /**
- * A {@link CliClassContainer} determines and holds the class-specific CLI-informations of a
- * {@link #getStateClass() state-class}.
+ * A {@link CliClassContainer} determines and holds the class-specific CLI-informations of a {@link #getStateClass()
+ * state-class}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -62,7 +62,7 @@ public class CliClassContainer {
     super();
     this.stateClass = stateClass;
     this.logger = logger;
-    this.id2ModeMap = new HashMap<String, CliModeContainer>();
+    this.id2ModeMap = new HashMap<>();
     CliStyle cliStyleAnnotation = null;
     CliClass cliClassAnnotation = null;
     Class<?> currentClass = stateClass;
@@ -131,8 +131,8 @@ public class CliClassContainer {
    * This method initializes the given {@link CliModeContainer}.
    *
    * @param mode is the {@link CliModeContainer} to initialize.
-   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or
-   *         <code>null</code> if the initialization was successful.
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or <code>null</code>
+   *         if the initialization was successful.
    * @throws NodeCycleException if a cyclic dependency was detected and completed.
    */
   protected NodeCycle<CliModeContainer> initializeModeRecursive(CliModeContainer mode) throws NodeCycleException {
@@ -141,7 +141,7 @@ public class CliClassContainer {
     if (initState != InitializationState.INITIALIZED) {
       if (initState == InitializationState.INITIALIZING) {
         // cycle detected
-        return new NodeCycle<CliModeContainer>(mode, CliModeFormatter.INSTANCE);
+        return new NodeCycle<>(mode, CliModeFormatter.INSTANCE);
       } else {
         mode.setState(InitializationState.INITIALIZING);
       }
@@ -205,8 +205,8 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliStyle style} configured for the {@link #getStateClass() state-class}. If
-   * no such annotation is present, a default instance is returned.
+   * This method gets the {@link CliStyle style} configured for the {@link #getStateClass() state-class}. If no such
+   * annotation is present, a default instance is returned.
    *
    * @return the {@link CliStyle}.
    */
@@ -249,8 +249,7 @@ public class CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliClass#name() name} configured for the {@link #getStateClass() state-class}
-   * .
+   * This method gets the {@link CliClass#name() name} configured for the {@link #getStateClass() state-class} .
    *
    * @return the annotated {@link CliClass#name() name} or the {@link Class#getName() class-name} of the
    *         {@link #getStateClass() state-class} if NOT configured.

@@ -66,7 +66,7 @@ public class CliModeContainer implements CliModeObject {
     this.mode = mode;
     this.id = id;
     this.annotatedClass = annotatedClass;
-    this.extendedModes = new HashSet<CliModeContainer>();
+    this.extendedModes = new HashSet<>();
     this.extendedModes.add(this);
     this.state = InitializationState.UNINITIALIZED;
   }
@@ -114,8 +114,8 @@ public class CliModeContainer implements CliModeObject {
   }
 
   /**
-   * This method gets the {@link Set} of {@link CliModeObject modes} that are {@link CliMode#parentIds()
-   * extended} by this {@link #getMode() mode}.
+   * This method gets the {@link Set} of {@link CliModeObject modes} that are {@link CliMode#parentIds() extended} by
+   * this {@link #getMode() mode}.
    *
    * @return the extended {@link CliModeObject modes} including this {@link CliModeObject mode} itself.
    */

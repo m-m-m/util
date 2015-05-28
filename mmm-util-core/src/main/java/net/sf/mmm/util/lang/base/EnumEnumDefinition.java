@@ -85,8 +85,8 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
    * @param stringUtil is the {@link StringUtil} instance to use.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  private EnumEnumDefinition(Class<TYPE> enumType, NodeCycle<Class<?>> cycle, EnumDefinition<CATEGORY, ?> category,
-      StringUtil stringUtil) {
+  private EnumEnumDefinition(Class<TYPE> enumType, NodeCycle<Class<?>> cycle,
+      EnumDefinition<CATEGORY, ?> category, StringUtil stringUtil) {
 
     super();
     this.enumType = enumType;
@@ -107,7 +107,7 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
       }
     }
     TYPE[] enumConstants = enumType.getEnumConstants();
-    this.enumValues = new ArrayList<TYPE>(enumConstants.length);
+    this.enumValues = new ArrayList<>(enumConstants.length);
     for (TYPE constant : enumConstants) {
       if (hasCategory == null) {
         hasCategory = Boolean.valueOf(constant instanceof EnumTypeWithCategory);
@@ -136,6 +136,7 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
       if (inverseCycle.contains(categoryType)) {
         throw new NodeCycleException(cycle, EnumTypeWithCategory.class);
       }
+      inverseCycle.add(categoryType);
       this.category = new EnumEnumDefinition(categoryType, cycle, null, this.stringUtil);
     } else {
       throw new ObjectMismatchException(categoryType, Enum.class, enumType);
@@ -143,8 +144,8 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
   }
 
   /**
-   * This method is called from the constructor to set the {@link #getValue() value}. By default it returns
-   * the {@link Class#getName() qualified name} of {@link #getEnumType()}. Override to change (e.g. to
+   * This method is called from the constructor to set the {@link #getValue() value}. By default it returns the
+   * {@link Class#getName() qualified name} of {@link #getEnumType()}. Override to change (e.g. to
    * {@link Class#getSimpleName() simple name}).
    *
    * @param type is the {@link #getEnumType()}.
@@ -220,8 +221,7 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
   }
 
   /**
-   * The default {@link net.sf.mmm.util.lang.api.Formatter} for {@link Enum}s that implement
-   * {@link SimpleDatatype}.
+   * The default {@link net.sf.mmm.util.lang.api.Formatter} for {@link Enum}s that implement {@link SimpleDatatype}.
    */
   protected class EnumTypeFormatter extends AbstractFormatter<TYPE> {
 

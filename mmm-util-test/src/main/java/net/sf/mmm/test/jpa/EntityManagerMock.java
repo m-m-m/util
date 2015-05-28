@@ -259,7 +259,7 @@ public class EntityManagerMock implements EntityManager {
   @Override
   public <T> TypedQuery<T> createQuery(String query, Class<T> resultType) {
 
-    return new TypedQueryMock<T>(query, resultType);
+    return new TypedQueryMock<>(query, resultType);
   }
 
   /**

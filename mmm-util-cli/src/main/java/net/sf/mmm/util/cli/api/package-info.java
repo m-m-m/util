@@ -45,7 +45,7 @@
  *   }
  *
  *   public static void main(String[] args) {
- *     new MyCoolMain().{@link #runAndExit(String...) runAndExit}(args);
+ *     new MyCoolMain().{@link net.sf.mmm.util.cli.api.AbstractMain#runAndExit(String...) runAndExit}(args);
  *   }
  * }
  * </pre>

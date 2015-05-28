@@ -120,8 +120,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   }
 
   /**
-   * This method handles a {@link CliOption} with an {@link CliState#getMode(String) undefined}
-   * {@link CliOption#mode()}.
+   * This method handles a {@link CliOption} with an {@link CliState#getMode(String) undefined} {@link CliOption#mode()}
+   * .
    *
    * @param option is the {@link CliOptionContainer}.
    */
@@ -146,8 +146,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   }
 
   /**
-   * This method gets the instance of the state where the command-line arguments should be applied to. The
-   * class of this object should be properly annotated.
+   * This method gets the instance of the state where the command-line arguments should be applied to. The class of this
+   * object should be properly annotated.
    *
    * @see net.sf.mmm.util.cli.api.CliClass
    *
@@ -163,8 +163,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    *
    * @param parserState is the {@link CliParserState}.
    * @param option is the command-line parameter that triggered the given <code>optionContainer</code>.
-   * @param optionContainer is the {@link CliOptionContainer} for the current option that has already been
-   *        detected.
+   * @param optionContainer is the {@link CliOptionContainer} for the current option that has already been detected.
    * @param parameterConsumer is the {@link CliParameterConsumer}.
    */
   protected void parseOption(CliParserState parserState, String option, CliOptionContainer optionContainer,
@@ -207,8 +206,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    * @param argumentContainer is the {@link CliArgumentContainer} for the current argument.
    * @param parameterConsumer is the {@link CliParameterConsumer}.
    */
-  protected void parseArgument(CliParserState parserState, String argument, CliArgumentContainer argumentContainer,
-      CliParameterConsumer parameterConsumer) {
+  protected void parseArgument(CliParserState parserState, String argument,
+      CliArgumentContainer argumentContainer, CliParameterConsumer parameterConsumer) {
 
     CliValueContainer valueContainer = this.valueMap.getOrCreate(argumentContainer);
     valueContainer.setValue(argument);
@@ -239,8 +238,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   }
 
   /**
-   * This method checks that all {@link CliOption#required() required} {@link CliOption options} are present
-   * if they are triggered by the {@link CliParserState#getCurrentMode() current mode}.
+   * This method checks that all {@link CliOption#required() required} {@link CliOption options} are present if they are
+   * triggered by the {@link CliParserState#getCurrentMode() current mode}.
    *
    * @param parserState is the current {@link CliParserState}.
    */
@@ -270,7 +269,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    * @param parserState is the {@link CliParserState}.
    * @param parameterConsumer is the {@link CliParameterConsumer}.
    */
-  protected void parseParameter(String parameter, CliParserState parserState, CliParameterConsumer parameterConsumer) {
+  protected void parseParameter(String parameter, CliParserState parserState,
+      CliParameterConsumer parameterConsumer) {
 
     if (parserState.isOptionsComplete()) {
       // no more options (e.g. --foo), only arguments from here
@@ -383,7 +383,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     if (mainUsage.length() > 0) {
       writer.printText(mainUsage);
     }
-    Map<CliOption, CliOptionHelpInfo> option2HelpMap = new HashMap<CliOption, AbstractCliParser.CliOptionHelpInfo>();
+    Map<CliOption, CliOptionHelpInfo> option2HelpMap = new HashMap<>();
     StringBuilder parameters = new StringBuilder();
     for (String modeId : this.cliState.getModeIds()) {
       writer.println();
@@ -402,7 +402,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
         if (argumentList.isEmpty()) {
           argumentHelpList = Collections.emptyList();
         } else {
-          argumentHelpList = new ArrayList<AbstractCliParser.CliArgumentHelpInfo>(argumentList.size());
+          argumentHelpList = new ArrayList<>(argumentList.size());
           boolean requiredArgument = true;
           CliArgument cliArgument = null;
           for (CliArgumentContainer argumentContainer : argumentList) {
@@ -460,8 +460,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    *
    * @param settings are the {@link CliOutputSettings}.
    * @param option2HelpMap is the {@link Map} with the {@link CliOptionHelpInfo}.
-   * @param parameters is the {@link StringBuilder} where to {@link StringBuilder#append(String) append} the
-   *        options help output.
+   * @param parameters is the {@link StringBuilder} where to {@link StringBuilder#append(String) append} the options
+   *        help output.
    * @param modeOptions the {@link Collection} with the options to print for the current mode.
    * @return the maximum width in characters of the option column in the text output.
    */
@@ -490,7 +490,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
             case MULTIPLE_OCCURRENCE:
               parameters.append("*");
               break;
-            default :
+            default:
               throw new IllegalCaseException(CliContainerStyle.class, containerStyle);
           }
         }
@@ -519,8 +519,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   }
 
   /**
-   * This inner class holds the state of the {@link AbstractCliParser#parseParameters(String...) argument
-   * parsing}.
+   * This inner class holds the state of the {@link AbstractCliParser#parseParameters(String...) argument parsing}.
    */
   protected static class CliParserState {
 
@@ -555,8 +554,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * Like {@link #getCurrentMode()} but initializes to {@link CliMode#ID_DEFAULT default} if
-     * <code>null</code>.
+     * Like {@link #getCurrentMode()} but initializes to {@link CliMode#ID_DEFAULT default} if <code>null</code>.
      *
      * @param cliState is the {@link CliState}.
      * @return the current {@link CliModeObject}.
@@ -596,8 +594,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method determines if the {@link CliOption options} are completed and further command-line
-     * parameters have to be {@link net.sf.mmm.util.cli.api.CliArgument arguments}.
+     * This method determines if the {@link CliOption options} are completed and further command-line parameters have to
+     * be {@link net.sf.mmm.util.cli.api.CliArgument arguments}.
      *
      * @see AbstractCliParser#END_OPTIONS
      *
@@ -640,8 +638,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     private final String syntax;
 
     /**
-     * {@link NlsMessage#getLocalizedMessage(java.util.Locale) Localized message} for
-     * {@link CliOption#operand() operand}.
+     * {@link NlsMessage#getLocalizedMessage(java.util.Locale) Localized message} for {@link CliOption#operand()
+     * operand}.
      */
     private final String operand;
 
@@ -656,7 +654,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
      * @param settings are the {@link CliOutputSettings}.
      */
     @SuppressWarnings("deprecation")
-    public CliOptionHelpInfo(CliOptionContainer option, CliParserDependencies dependencies, CliOutputSettings settings) {
+    public CliOptionHelpInfo(CliOptionContainer option, CliParserDependencies dependencies,
+        CliOutputSettings settings) {
 
       super();
       this.option = option;
@@ -837,7 +836,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       this.parameterColumnInfo.setIndent("  ");
       this.parameterColumnInfo.setBorderRight("  ");
 
-      this.arguments = new HashMap<String, Object>();
+      this.arguments = new HashMap<>();
       this.arguments.put("mainClass", cliState.getName());
       this.arguments.put("optionCount", Integer.valueOf(cliState.getOptions().size()));
       this.arguments.put("argumentCount", Integer.valueOf(cliState.getArguments().size()));
@@ -855,8 +854,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
 
     /**
      * This method performs localization of the given NLS-text (see
-     * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle}) and performs {@link LineWrapper line-wrapping}
-     * while writing it to the {@link Appendable} for help-usage output.
+     * {@link net.sf.mmm.util.nls.base.AbstractResourceBundle}) and performs {@link LineWrapper line-wrapping} while
+     * writing it to the {@link Appendable} for help-usage output.
      *
      * @param nlsText is the internationalized text to print.
      */
@@ -869,8 +868,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method prints the help for the {@link CliArgument arguments} given by <code>argumentList</code>.
-     * It prints them with localized usage texts in a two column-layout via {@link LineWrapper}.
+     * This method prints the help for the {@link CliArgument arguments} given by <code>argumentList</code>. It prints
+     * them with localized usage texts in a two column-layout via {@link LineWrapper}.
      *
      * @param argumentList is the {@link List} with the according {@link CliArgumentHelpInfo help infos}.
      * @param maxArgumentColumnWidth is the maximum width of the argument-name column.
@@ -890,8 +889,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
             defaultValue = argumentContainer.getGetter().invoke(this.state);
           }
           this.arguments.put(NlsObject.KEY_DEFAULT, defaultValue);
-          NlsMessage usageMessage = this.dependencies.getNlsMessageFactory()
-              .create(cliArgument.usage(), this.arguments);
+          NlsMessage usageMessage = this.dependencies.getNlsMessageFactory().create(cliArgument.usage(),
+              this.arguments);
           String usageText = usageMessage.getLocalizedMessage(this.mainColumnInfo.getLocale());
 
           lineWrapper.wrap(this.appendable, this.tableInfo, helpInfo.name, this.parameterColumnInfo, usageText,
@@ -901,8 +900,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method prints the help for the {@link CliOption options} given by <code>modeOptions</code>. It
-     * prints them with localized usage texts in a two column-layout via {@link LineWrapper}.
+     * This method prints the help for the {@link CliOption options} given by <code>modeOptions</code>. It prints them
+     * with localized usage texts in a two column-layout via {@link LineWrapper}.
      *
      * @param modeOptions is the {@link Collection} with the options to print.
      * @param option2HelpMap is the {@link Map} with the according {@link CliOptionHelpInfo help infos}.
@@ -918,13 +917,12 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method is like {@link #printOptions(Collection, Map, int)} but only prints required or additional
-     * options.
+     * This method is like {@link #printOptions(Collection, Map, int)} but only prints required or additional options.
      *
      * @param modeOptions is the {@link Collection} with the options to print.
      * @param option2HelpMap is the {@link Map} with the according {@link CliOptionHelpInfo help infos}.
-     * @param required - <code>true</code> if required options should be printed, <code>false</code> if
-     *        additional options should be printed.
+     * @param required - <code>true</code> if required options should be printed, <code>false</code> if additional
+     *        options should be printed.
      */
     private void printOptions(Collection<CliOptionContainer> modeOptions,
         Map<CliOption, CliOptionHelpInfo> option2HelpMap, boolean required) {
@@ -952,7 +950,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
             defaultValue = option.getGetter().invoke(this.state);
           }
           this.arguments.put(NlsObject.KEY_DEFAULT, defaultValue);
-          NlsMessage usageMessage = this.dependencies.getNlsMessageFactory().create(cliOption.usage(), this.arguments);
+          NlsMessage usageMessage = this.dependencies.getNlsMessageFactory().create(cliOption.usage(),
+              this.arguments);
           String usageText = usageMessage.getLocalizedMessage(this.mainColumnInfo.getLocale());
 
           lineWrapper.wrap(this.appendable, this.tableInfo, helpInfo.syntax, this.parameterColumnInfo, usageText,

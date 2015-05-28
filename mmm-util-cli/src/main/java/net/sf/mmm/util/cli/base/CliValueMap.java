@@ -42,7 +42,7 @@ public class CliValueMap {
   public CliValueMap(CliState cliState, CliParserDependencies dependencies, Logger logger) {
 
     super();
-    this.map = new HashMap<CliParameterContainer, CliValueContainer>();
+    this.map = new HashMap<>();
     this.cliState = cliState;
     this.dependencies = dependencies;
     this.logger = logger;
@@ -62,15 +62,14 @@ public class CliValueMap {
 
   /**
    * This method gets the {@link CliValueContainer} for the given {@link CliParameterContainer}. In advance to
-   * {@link #get(CliParameterContainer)} this method will create an according {@link CliValueContainerObject}
-   * if not present and the {@link CliParameterContainer} has a {@link CliParameterContainer#getSetter()
-   * setter} with a {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} reflecting an array,
-   * {@link Collection} or {@link Map}.
+   * {@link #get(CliParameterContainer)} this method will create an according {@link CliValueContainerObject} if not
+   * present and the {@link CliParameterContainer} has a {@link CliParameterContainer#getSetter() setter} with a
+   * {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} reflecting an array, {@link Collection} or
+   * {@link Map}.
    *
    * @param parameterContainer is the {@link CliParameterContainer} that acts as key to the requested
    *        {@link CliValueContainerObject}.
-   * @return the requested {@link CliValueContainerObject} or <code>null</code> if NOT present and NOT
-   *         created.
+   * @return the requested {@link CliValueContainerObject} or <code>null</code> if NOT present and NOT created.
    */
   @SuppressWarnings("unchecked")
   public CliValueContainer getOrCreate(CliParameterContainer parameterContainer) {
@@ -85,12 +84,14 @@ public class CliValueMap {
         Class<? extends Collection<?>> collectionClass = (Class<? extends Collection<?>>) propertyClass;
         Collection<Object> collection = this.dependencies.getCollectionFactoryManager()
             .getCollectionFactory(collectionClass).create();
-        result = new CliValueContainerCollection(parameterContainer, this.cliState, this.dependencies, this.logger,
-            collection);
+        result = new CliValueContainerCollection(parameterContainer, this.cliState, this.dependencies,
+            this.logger, collection);
       } else if (Map.class.isAssignableFrom(propertyClass)) {
         Class<? extends Map<?, ?>> mapClass = (Class<? extends Map<?, ?>>) propertyClass;
-        Map<Object, Object> mapValue = this.dependencies.getCollectionFactoryManager().getMapFactory(mapClass).create();
-        result = new CliValueContainerMap(parameterContainer, this.cliState, this.dependencies, this.logger, mapValue);
+        Map<Object, Object> mapValue = this.dependencies.getCollectionFactoryManager().getMapFactory(mapClass)
+            .create();
+        result = new CliValueContainerMap(parameterContainer, this.cliState, this.dependencies, this.logger,
+            mapValue);
       } else {
         result = new CliValueContainerObject(parameterContainer, this.cliState, this.dependencies, this.logger);
       }
@@ -111,7 +112,8 @@ public class CliValueMap {
     for (CliParameterContainer parameter : this.map.keySet()) {
       CliValueContainer valueContainer = this.map.get(parameter);
       Object value = valueContainer.getValue();
-      ValueValidator validator = ((AbstractCliValueContainer) valueContainer).getParameterContainer().getValidator();
+      ValueValidator validator = ((AbstractCliValueContainer) valueContainer).getParameterContainer()
+          .getValidator();
       if (validator != null) {
         validator.validate(value);
       }

@@ -46,7 +46,7 @@ public class DummyLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void debug(String s, Object[] aobj) {
+  public void debug(String s, Object... aobj) {
 
     // ignore
   }
@@ -91,7 +91,7 @@ public class DummyLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void error(String s, Object[] aobj) {
+  public void error(String s, Object... aobj) {
 
     // ignore
   }
@@ -136,7 +136,7 @@ public class DummyLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void info(String s, Object[] aobj) {
+  public void info(String s, Object... aobj) {
 
     // ignore
   }
@@ -226,7 +226,7 @@ public class DummyLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void trace(String s, Object[] aobj) {
+  public void trace(String s, Object... aobj) {
 
     // ignore
   }
@@ -271,7 +271,7 @@ public class DummyLogger extends MarkerIgnoringBase {
    * {@inheritDoc}
    */
   @Override
-  public void warn(String s, Object[] aobj) {
+  public void warn(String s, Object... aobj) {
 
     // ignore
   }

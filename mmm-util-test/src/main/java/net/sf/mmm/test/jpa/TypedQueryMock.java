@@ -18,9 +18,9 @@ import javax.persistence.TypedQuery;
 
 /**
  * This is a mock implementation of {@link TypedQuery}.
- * 
+ *
  * @param <X> is the generic type of the result objects of this query.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class TypedQueryMock<X> implements TypedQuery<X> {
@@ -39,7 +39,7 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param query - see {@link #getQuery()}.
    * @param resultType - see {@link #getResultType()}.
    */
@@ -48,8 +48,8 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     super();
     this.query = query;
     this.resultType = resultType;
-    this.parameterList = new LinkedList<Object>();
-    this.parameterMap = new HashMap<String, Object>();
+    this.parameterList = new LinkedList<>();
+    this.parameterMap = new HashMap<>();
   }
 
   /**
