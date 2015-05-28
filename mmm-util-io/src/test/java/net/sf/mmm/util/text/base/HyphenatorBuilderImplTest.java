@@ -4,7 +4,6 @@ package net.sf.mmm.util.text.base;
 
 import java.util.Locale;
 
-import junit.framework.Assert;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.text.api.Hyphenator;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
@@ -13,7 +12,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link HyphenatorBuilderImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -21,7 +20,7 @@ public class HyphenatorBuilderImplTest extends AbstractHyphenatorTest {
 
   /**
    * This method gets the {@link HyphenatorBuilder} instance to test.
-   * 
+   *
    * @return the {@link HyphenatorBuilder}.
    */
   protected HyphenatorBuilder getHyphenatorBuilder() {
@@ -31,19 +30,19 @@ public class HyphenatorBuilderImplTest extends AbstractHyphenatorTest {
 
   /**
    * This method gets the hyphenator for the given {@link Locale}.
-   * 
+   *
    * @see HyphenatorBuilder#getHyphenator(Locale)
-   * 
+   *
    * @param locale is the {@link Locale}.
    * @return the requested {@link Hyphenator}.
    */
   protected Hyphenator getHyphenator(Locale locale) {
 
     Hyphenator hyphenator = getHyphenatorBuilder().getHyphenator(locale);
-    Assert.assertNotNull(hyphenator);
+    assertThat(hyphenator).isNotNull();
     // load again to test caching...
     hyphenator = getHyphenatorBuilder().getHyphenator(locale);
-    Assert.assertNotNull(hyphenator);
+    assertThat(hyphenator).isNotNull();
     return hyphenator;
   }
 
@@ -57,9 +56,9 @@ public class HyphenatorBuilderImplTest extends AbstractHyphenatorTest {
     Hyphenator hyphenatorGermany = getHyphenator(Locale.GERMANY);
     Locale locale = Locale.GERMAN;
     Hyphenator hyphenator = getHyphenator(locale);
-    Assert.assertEquals(locale, hyphenator.getLocale());
+    assertThat(hyphenator.getLocale()).isEqualTo(locale);
     // test proper caching
-    Assert.assertSame(hyphenatorGermany, hyphenator);
+    assertThat(hyphenator).isSameAs(hyphenatorGermany);
     checkHyphenations(hyphenator, "Zer-streu-ung");
   }
 
@@ -70,7 +69,7 @@ public class HyphenatorBuilderImplTest extends AbstractHyphenatorTest {
   public void testEnUs() {
 
     Hyphenator hyphenator = getHyphenator(Locale.US);
-    Assert.assertEquals(AbstractNlsMessage.LOCALE_ROOT, hyphenator.getLocale());
+    assertThat(hyphenator.getLocale()).isEqualTo(AbstractNlsMessage.LOCALE_ROOT);
 
     checkHyphenations(hyphenator, "word", "this", "a",
         "con-struc-tion",

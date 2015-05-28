@@ -4,20 +4,19 @@ package net.sf.mmm.util.text.base;
 
 import net.sf.mmm.util.text.api.Hyphenation;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
  * This is the test-case for {@link HyphenationImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class HyphenationImplTest {
+public class HyphenationImplTest extends Assertions {
 
   /**
-   * This method performs general tests on {@link HyphenationImpl}, especially
-   * {@link HyphenationImpl#toString()}.
+   * This method performs general tests on {@link HyphenationImpl}, especially {@link HyphenationImpl#toString()}.
    */
   @Test
   public void testToStringAndGetWord() {
@@ -30,22 +29,22 @@ public class HyphenationImplTest {
     int end = text.length() - suffix.length();
     char hyphen = '-';
     Hyphenation hyphenation = new HyphenationImpl(text.substring(start, end), hyphen, new int[] {});
-    Assert.assertEquals(word, hyphenation.toString());
-    Assert.assertEquals(word, hyphenation.getWord());
-    Assert.assertEquals(hyphen, hyphenation.getHyphen());
-    Assert.assertEquals(0, hyphenation.getHyphenationCount());
-    Assert.assertEquals(-1, hyphenation.getHyphenationBefore(0));
-    Assert.assertEquals(-1, hyphenation.getHyphenationBefore(word.length()));
+    assertThat(hyphenation.toString()).isEqualTo(word);
+    assertThat(hyphenation.getWord()).isEqualTo(word);
+    assertThat(hyphenation.getHyphen()).isEqualTo(hyphen);
+    assertThat(hyphenation.getHyphenationCount()).isEqualTo(0);
+    assertThat(hyphenation.getHyphenationBefore(0)).isEqualTo(-1);
+    assertThat(hyphenation.getHyphenationBefore(word.length())).isEqualTo(-1);
     hyphenation = new HyphenationImpl(text.substring(start, end), hyphen, new int[] { 1, 5, 7 });
-    Assert.assertEquals("e-very-bo-dy", hyphenation.toString());
-    Assert.assertEquals(word, hyphenation.getWord());
-    Assert.assertEquals(3, hyphenation.getHyphenationCount());
-    Assert.assertEquals(-1, hyphenation.getHyphenationBefore(0));
-    Assert.assertEquals(7, hyphenation.getHyphenationBefore(word.length()));
-    Assert.assertEquals(5, hyphenation.getHyphenationBefore(7));
-    Assert.assertEquals(1, hyphenation.getHyphenationBefore(5));
-    Assert.assertEquals(1, hyphenation.getHyphenation(0));
-    Assert.assertEquals(5, hyphenation.getHyphenation(1));
-    Assert.assertEquals(7, hyphenation.getHyphenation(2));
+    assertThat(hyphenation.toString()).isEqualTo("e-very-bo-dy");
+    assertThat(hyphenation.getWord()).isEqualTo(word);
+    assertThat(hyphenation.getHyphenationCount()).isEqualTo(3);
+    assertThat(hyphenation.getHyphenationBefore(0)).isEqualTo(-1);
+    assertThat(hyphenation.getHyphenationBefore(word.length())).isEqualTo(7);
+    assertThat(hyphenation.getHyphenationBefore(7)).isEqualTo(5);
+    assertThat(hyphenation.getHyphenationBefore(5)).isEqualTo(1);
+    assertThat(hyphenation.getHyphenation(0)).isEqualTo(1);
+    assertThat(hyphenation.getHyphenation(1)).isEqualTo(5);
+    assertThat(hyphenation.getHyphenation(2)).isEqualTo(7);
   }
 }
