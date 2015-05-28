@@ -9,7 +9,7 @@
     <relativePath>../mmm-parent/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util</artifactId>
-  <version>dev</version>
+  <version>dev-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
   <description>Reusable utilities for general purpose.</description>
