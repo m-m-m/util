@@ -434,7 +434,8 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Failed to parse \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} as value of the type \"{type}\"!")
-  NlsMessage errorParseType(@Named("value") Object value, @Named("type") Object type, @Named("source") Object source);
+  NlsMessage errorParseType(@Named("value") Object value, @Named("type") Object type,
+      @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.exception.api.NlsParseException
@@ -446,8 +447,8 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Failed to parse \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} as \"{type}\" - required format is \"{format}\"!")
-  NlsMessage errorParseFormat(@Named("value") Object value, @Named("format") Object format, @Named("type") Object type,
-      @Named("source") Object source);
+  NlsMessage errorParseFormat(@Named("value") Object value, @Named("format") Object format,
+      @Named("type") Object type, @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.value.api.ValueOutOfRangeException
@@ -459,8 +460,8 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value {value}{source,choice,(?==null)''(else)' from \"'{source}'\"'} needs to be in the range from {min} to {max}.")
-  NlsMessage errorValueOutOfRange(@Named("value") Object value, @Named("min") Object min, @Named("max") Object max,
-      @Named("source") Object source);
+  NlsMessage errorValueOutOfRange(@Named("value") Object value, @Named("min") Object min,
+      @Named("max") Object max, @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.validation.base.ValidatorCompare
@@ -496,7 +497,8 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} could NOT be converted to \"{type}\"!")
-  NlsMessage errorValueConvert(@Named("value") Object value, @Named("type") Type type, @Named("source") Object source);
+  NlsMessage errorValueConvert(@Named("value") Object value, @Named("type") Type type,
+      @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.component.api.ResourceMissingException
@@ -585,7 +587,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage("An unexpected input/output error has ocurred!")
+  @NlsBundleMessage("An unexpected input/output error has occurred!")
   NlsMessage errorIo();
 
   /**
