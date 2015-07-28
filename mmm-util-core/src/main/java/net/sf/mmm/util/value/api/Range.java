@@ -9,19 +9,20 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadMaximumValue;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
 
 /**
- * This class represents a range of two values, {@link #getMin() minimum} and {@link #getMax() maximum}.
- * Validation is performed at {@link #Range(Comparable, Comparable) construction} so a given {@link Range}
- * should always be valid (unless created via reflection or de-serialization). <br>
+ * This class represents a range of two values, {@link #getMin() minimum} and {@link #getMax() maximum}. Validation is
+ * performed at {@link #Range(Comparable, Comparable) construction} so a given {@link Range} should always be valid
+ * (unless created via reflection or de-serialization). <br>
  * <b>ATTENTION:</b><br>
- * Since version 4.0.0 the {@link #getMinimumValue() minimum} and {@link #getMaximumValue() maximum value} may
- * be <code>null</code> for unbounded ranges. It is still recommended to use fixed bounds such as
- * {@link Long#MAX_VALUE}. However, for types such as {@link java.math.BigDecimal} this is not possible.
- * 
+ * Since version 4.0.0 the {@link #getMinimumValue() minimum} and {@link #getMaximumValue() maximum value} may be
+ * <code>null</code> for unbounded ranges. It is still recommended to use fixed bounds such as {@link Long#MAX_VALUE}.
+ * However, for types such as {@link java.math.BigDecimal} this is not possible.
+ *
  * @param <V> is the generic type of the contained values.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class Range<V extends Comparable<V>> implements Serializable, AttributeReadMinimumValue<V>,
+@SuppressWarnings("rawtypes")
+public class Range<V extends Comparable> implements Serializable, AttributeReadMinimumValue<V>,
     AttributeReadMaximumValue<V> {
 
   /** UID for serialization. */
@@ -49,10 +50,11 @@ public class Range<V extends Comparable<V>> implements Serializable, AttributeRe
 
   /**
    * The constructor.
-   * 
+   *
    * @param min - see {@link #getMin()}. To create an open range use the minimum value.
    * @param max - see {@link #getMax()}. To create an open range use the maximum value.
    */
+  @SuppressWarnings("unchecked")
   public Range(V min, V max) {
 
     super();
@@ -68,9 +70,8 @@ public class Range<V extends Comparable<V>> implements Serializable, AttributeRe
 
   /**
    * Shorthand form for {@link #getMinimumValue()}.
-   * 
-   * @return the lower bound of this range. Must NOT be <code>null</code> and NOT be less than
-   *         {@link #getMax() max}.
+   *
+   * @return the lower bound of this range. Must NOT be <code>null</code> and NOT be less than {@link #getMax() max}.
    */
   public V getMin() {
 
@@ -79,9 +80,8 @@ public class Range<V extends Comparable<V>> implements Serializable, AttributeRe
 
   /**
    * Shorthand form for {@link #getMaximumValue()}.
-   * 
-   * @return the upper bound of this range. Must NOT be <code>null</code> and NOT be greater than
-   *         {@link #getMin() min}.
+   *
+   * @return the upper bound of this range. Must NOT be <code>null</code> and NOT be greater than {@link #getMin() min}.
    */
   public V getMax() {
 
@@ -90,9 +90,9 @@ public class Range<V extends Comparable<V>> implements Serializable, AttributeRe
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @see #getMin()
-   * 
+   *
    * @since 4.0.0
    */
   @Override
@@ -103,9 +103,9 @@ public class Range<V extends Comparable<V>> implements Serializable, AttributeRe
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @see #getMax()
-   * 
+   *
    * @since 4.0.0
    */
   @Override
@@ -115,13 +115,14 @@ public class Range<V extends Comparable<V>> implements Serializable, AttributeRe
   }
 
   /**
-   * This method determines if the given <code>value</code> is within this {@link Range} from
-   * {@link #getMin() minimum} to {@link #getMax() maximum}.
-   * 
+   * This method determines if the given <code>value</code> is within this {@link Range} from {@link #getMin() minimum}
+   * to {@link #getMax() maximum}.
+   *
    * @param value is the vale to check.
-   * @return <code>true</code> if contained ({@link #getMin() minimum} &lt;= <code>value</code> &lt;=
-   *         {@link #getMax() maximum}).
+   * @return <code>true</code> if contained ({@link #getMin() minimum} &lt;= <code>value</code> &lt;= {@link #getMax()
+   *         maximum}).
    */
+  @SuppressWarnings("unchecked")
   public boolean isContained(V value) {
 
     NlsNullPointerException.checkNotNull("value", value);
@@ -145,9 +146,8 @@ public class Range<V extends Comparable<V>> implements Serializable, AttributeRe
   }
 
   /**
-   * This method verifies that the given <code>value</code> is {@link #isContained(Comparable) contained in
-   * this range}.
-   * 
+   * This method verifies that the given <code>value</code> is {@link #isContained(Comparable) contained in this range}.
+   *
    * @param value is the value to check.
    * @throws ValueOutOfRangeException if not {@link #isContained(Comparable) contained}.
    */
