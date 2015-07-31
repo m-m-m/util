@@ -13,22 +13,21 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color}. It is based on values for
- * {@link #getRed() red}, {@link #getGreen() green}, {@link #getBlue()}, and {@link #getAlpha() alpha}.
- * Internally these values are encoded in a single {@link #getValue() ARGB value}. This class is similar to
- * AWT {@link java.awt.Color} but GWT compatible (AWT color is linked with AWT, see e.g.
+ * {@link #getRed() red}, {@link #getGreen() green}, {@link #getBlue()}, and {@link #getAlpha() alpha}. Internally these
+ * values are encoded in a single {@link #getValue() ARGB value}. This class is similar to AWT {@link java.awt.Color}
+ * but GWT compatible (AWT color is linked with AWT, see e.g.
  * {@link java.awt.Color#createContext(java.awt.image.ColorModel, java.awt.Rectangle, java.awt.geom.Rectangle2D, java.awt.geom.AffineTransform, java.awt.RenderingHints)
  * createContext}) and especially compatible to CSS. <br>
  * For transformations and other {@link ColorModel}s use {@link GenericColor}. <br>
  * <b>ATTENTION:</b><br>
- * Unfortunately the {@link #getAlpha() alpha} value has NOT been designed as a transparency value (inverse
- * logic so <code>0</code> means no transparency or in other words a regular color). Then if encoding in
- * A/R/G/B the hexadecimal RGB notation would be compatible with transparency because #2F4F8F would be the
- * same as #002F4F8F. Unfortunately pain is on our side and we have to keep with existing standards. Therefore
- * #2F4F8F is actually the same as #FF2F4F8F. To avoid confusion and to be compatible with CSS,
- * {@link #toString()} will print the hexadecimal RGB form (e.g. #2F4F8F) in case {@link #getAlpha() alpha}
- * has its maximum value (255/FF). Otherwise the CSS RGBA notation is used (e.g. rgba(47,79,143,0.5) instead
- * of #7F2F4F8F).
- * 
+ * Unfortunately the {@link #getAlpha() alpha} value has NOT been designed as a transparency value (inverse logic so
+ * <code>0</code> means no transparency or in other words a regular color). Then if encoding in A/R/G/B the hexadecimal
+ * RGB notation would be compatible with transparency because #2F4F8F would be the same as #002F4F8F. Unfortunately pain
+ * is on our side and we have to keep with existing standards. Therefore #2F4F8F is actually the same as #FF2F4F8F. To
+ * avoid confusion and to be compatible with CSS, {@link #toString()} will print the hexadecimal RGB form (e.g. #2F4F8F)
+ * in case {@link #getAlpha() alpha} has its maximum value (255/FF). Otherwise the CSS RGBA notation is used (e.g.
+ * rgba(47,79,143,0.5) instead of #7F2F4F8F).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -146,7 +145,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   public static final Color BROWN = new Color(0x0FFA52A2A);
 
   /** Maps CSS names to {@link Color}s. */
-  private static final Map<String, Color> NAME_TO_COLOR_MAP = new HashMap<String, Color>();
+  private static final Map<String, Color> NAME_TO_COLOR_MAP = new HashMap<>();
 
   static {
     NAME_TO_COLOR_MAP.put("TRANSPARENT", TRANSPARENT);
@@ -182,7 +181,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param red is the {@link #getRed() red} value.
    * @param green is the {@link #getGreen() green} value.
    * @param blue is the {@link #getBlue() blue} value.
@@ -194,7 +193,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param red is the {@link #getRed() red} value.
    * @param green is the {@link #getGreen() green} value.
    * @param blue is the {@link #getBlue() blue} value.
@@ -207,7 +206,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the actual color value.
    */
   public Color(int value) {
@@ -217,7 +216,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the actual {@link #getValue() color value} .
    */
   public Color(Integer value) {
@@ -227,7 +226,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /**
    * Parses the {@link Color} given as {@link String} representation.
-   * 
+   *
    * @param color is the {@link Color} given as {@link String} representation.
    * @return the parsed {@link Color}.
    * @throws NlsParseException if the syntax is invalid.
@@ -261,8 +260,8 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * @param uppercaseColor is the {@link Color} in rgb(a) notation in
-   *        {@link String#toUpperCase(java.util.Locale) upper case}.
+   * @param uppercaseColor is the {@link Color} in rgb(a) notation in {@link String#toUpperCase(java.util.Locale) upper
+   *        case}.
    * @return the parsed {@link Color} or <code>null</code> if NOT valid.
    */
   private static Color parseRgb(String uppercaseColor) {
@@ -364,22 +363,21 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /**
    * Verifies that the given segment is in the valid range from {@link #MIN_VALUE} to {@link #MAX_SEGMENT}.
-   * 
+   *
    * @param segment is the segment to check.
    * @param type is the {@link ColorSegmentType type} of the <code>segment</code>.
    */
   private static void verifySegment(int segment, ColorSegmentType type) {
 
     if ((segment < 0) || (segment > MASK)) {
-      throw new ValueOutOfRangeException(Integer.valueOf(segment), MIN_VALUE, MAX_SEGMENT, type);
+      throw new ValueOutOfRangeException(Integer.valueOf(segment), (Number) MIN_VALUE, MAX_SEGMENT, type);
     }
   }
 
   /**
-   * @param name is the name of the {@link Color} (e.g. as defined in CSS). Case is ignored. Examples are
-   *        "white", "maroon", "orange", "transparent", etc.
-   * @return the {@link Color} for the given <code>name</code> or <code>null</code> if no such {@link Color}
-   *         is defined.
+   * @param name is the name of the {@link Color} (e.g. as defined in CSS). Case is ignored. Examples are "white",
+   *        "maroon", "orange", "transparent", etc.
+   * @return the {@link Color} for the given <code>name</code> or <code>null</code> if no such {@link Color} is defined.
    */
   public static Color fromName(String name) {
 
@@ -387,8 +385,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * @return the {@link Alpha} part of the {@link #getValue() color value} as {@link Alpha#getValueAsByte()
-   *         byte value}.
+   * @return the {@link Alpha} part of the {@link #getValue() color value} as {@link Alpha#getValueAsByte() byte value}.
    */
   public int getAlpha() {
 
@@ -396,8 +393,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * @return the {@link Red} part of the {@link #getValue() color value} as {@link Alpha#getValueAsByte() byte
-   *         value}.
+   * @return the {@link Red} part of the {@link #getValue() color value} as {@link Alpha#getValueAsByte() byte value}.
    */
   public int getRed() {
 
@@ -405,8 +401,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * @return the {@link Green} part of the {@link #getValue() color value} as {@link Alpha#getValueAsByte()
-   *         byte value}.
+   * @return the {@link Green} part of the {@link #getValue() color value} as {@link Alpha#getValueAsByte() byte value}.
    */
   public int getGreen() {
 
@@ -414,8 +409,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * @return the {@link Blue} part of the {@link #getValue() color value} as {@link Alpha#getValueAsByte()
-   *         byte value}.
+   * @return the {@link Blue} part of the {@link #getValue() color value} as {@link Alpha#getValueAsByte() byte value}.
    */
   public int getBlue() {
 
