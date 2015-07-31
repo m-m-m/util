@@ -101,8 +101,8 @@ public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescripto
               Integer.valueOf(this.segmentDescriptorList.size()), "segments.length");
         } else if (segments.length < this.requiredSegmentCount) {
           throw new ValueOutOfRangeException(Integer.valueOf(segments.length),
-              Integer.valueOf(this.requiredSegmentCount), Integer.valueOf(this.segmentDescriptorList.size()),
-              "segments.length");
+              (Number) Integer.valueOf(this.requiredSegmentCount), Integer.valueOf(this.segmentDescriptorList
+                  .size()), "segments.length");
         }
       }
       return doCreate(segments);
@@ -112,8 +112,8 @@ public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescripto
   }
 
   /**
-   * Called from {@link #create(Object...)} after input validation has been performed. Implement this method
-   * and do not worry about null values, wrong array size, etc.
+   * Called from {@link #create(Object...)} after input validation has been performed. Implement this method and do not
+   * worry about null values, wrong array size, etc.
    *
    * @param segments are the {@link #getSegment(Object, int) segment values}.
    * @return the new datatype instance.
