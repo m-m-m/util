@@ -150,8 +150,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * @param pojoDescriptorBuilderFactory is the instance of {@link PojoDescriptorBuilderFactory} to
-   *        {@link Inject}.
+   * @param pojoDescriptorBuilderFactory is the instance of {@link PojoDescriptorBuilderFactory} to {@link Inject}.
    */
   @Inject
   public void setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
@@ -240,10 +239,10 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code>
-   * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path. <br>
-   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
-   * NOT be unique. In such case it will be unspecified which of the possible paths is used.
+   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code> and
+   * returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path. <br>
+   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may NOT be
+   * unique. In such case it will be unspecified which of the possible paths is used.
    *
    * @param ancestor is the super-class or super-interface of <code>descendant</code>.
    * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
@@ -281,10 +280,10 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code>
-   * and returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path. <br>
-   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may
-   * NOT be unique. In such case it will be unspecified which of the possible paths is used.
+   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code> and
+   * returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path. <br>
+   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may NOT be
+   * unique. In such case it will be unspecified which of the possible paths is used.
    *
    * @param ancestor is the super-class or super-interface of <code>descendant</code>.
    * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
@@ -368,8 +367,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    *
    * @param parser is the string-parser on the type string to parse.
    * @param resolver is used to resolve classes.
-   * @param owner is the {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type} or
-   *        <code>null</code>.
+   * @param owner is the {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type} or <code>null</code>.
    * @return the parsed type.
    */
   private Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner) {
@@ -492,7 +490,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
         actualType = ((GenericType<?>) type).getType();
       }
       if (actualType instanceof Class<?>) {
-        classFormatter.visit((Class<?>) type);
+        classFormatter.visit((Class<?>) actualType);
       } else if (actualType instanceof ParameterizedType) {
         ParameterizedType parameterizedType = (ParameterizedType) actualType;
         Type ownerType = parameterizedType.getOwnerType();
@@ -688,8 +686,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * This method scans the given <code>packageDirectory</code> recursively for resources.
    *
    * @param packageDirectory is the directory representing the {@link Package}.
-   * @param qualifiedNameBuilder is a {@link StringBuilder} containing the qualified prefix (the
-   *        {@link Package} with a trailing dot).
+   * @param qualifiedNameBuilder is a {@link StringBuilder} containing the qualified prefix (the {@link Package} with a
+   *        trailing dot).
    * @param qualifiedNamePrefixLength the length of the prefix used to rest the string-builder after reuse.
    * @param visitor is the {@link ResourceVisitor}.
    */
@@ -761,12 +759,12 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * @see #findClassNames(String, boolean, Filter, ClassLoader)
    *
    * @param packageName is the name of the {@link Package} to scan.
-   * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
-   *        be included in the search.
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will be included
+   *        in the search.
    * @param classSet is where to add the classes.
-   * @param filter is used to {@link Filter#accept(Object) filter} the {@link Class}-names to be added to the
-   *        resulting {@link Set}. The {@link Filter} will receive {@link Class#getName() fully qualified
-   *        class-names} as argument (e.g. "net.sf.mmm.reflect.api.ReflectionUtil").
+   * @param filter is used to {@link Filter#accept(Object) filter} the {@link Class}-names to be added to the resulting
+   *        {@link Set}. The {@link Filter} will receive {@link Class#getName() fully qualified class-names} as argument
+   *        (e.g. "net.sf.mmm.reflect.api.ReflectionUtil").
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @throws RuntimeIoException if the operation failed with an I/O error.
    */
@@ -781,7 +779,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
+      Filter<? super String> filter) {
 
     return findResourceNames(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
@@ -790,8 +789,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<? super String> filter,
-      ClassLoader classLoader) {
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
+      Filter<? super String> filter, ClassLoader classLoader) {
 
     Set<String> result = new HashSet<String>();
     ResourceNameCollector visitor = new ResourceNameCollector(result, filter);
@@ -803,7 +802,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
+      Filter<? super String> filter) {
 
     return findResources(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
@@ -831,8 +831,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter,
-      ClassLoader classLoader) {
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
+      Filter<? super String> filter, ClassLoader classLoader) {
 
     Set<DataResource> result = new HashSet<DataResource>();
     ResourceVisitor visitor = new ResourceCollector(result, filter);
@@ -843,10 +843,10 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   /**
    * This method does the actual magic to locate resources on the classpath.
    *
-   * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator
-   *        (e.g. "net.sf.mmm.util.reflect).
-   * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will
-   *        be included in the search.
+   * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator (e.g.
+   *        "net.sf.mmm.util.reflect).
+   * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will be included
+   *        in the search.
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @param visitor is the {@link ResourceVisitor}.
    * @throws RuntimeIoException if the operation failed with an I/O error.
@@ -931,7 +931,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   @Override
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames) {
 
-    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, ConstantFilter.getInstance(true));
+    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
+        ConstantFilter.getInstance(true));
   }
 
   /**
@@ -966,9 +967,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method gets the default {@link ClassLoader} to use. This should be the
-   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to alternatives if no such
-   * {@link ClassLoader} is available.
+   * This method gets the default {@link ClassLoader} to use. This should be the {@link Thread#getContextClassLoader()
+   * ContextClassLoader} but falls back to alternatives if no such {@link ClassLoader} is available.
    *
    * @return the default {@link ClassLoader} to use.
    */
@@ -978,12 +978,11 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method gets the default {@link ClassLoader} to use. This should be the
-   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to alternatives if no such
-   * {@link ClassLoader} is available.
+   * This method gets the default {@link ClassLoader} to use. This should be the {@link Thread#getContextClassLoader()
+   * ContextClassLoader} but falls back to alternatives if no such {@link ClassLoader} is available.
    *
-   * @param fallbackClass is used to {@link Class#getClassLoader() retrieve} a {@link ClassLoader} as fallback
-   *        if the {@link Thread#getContextClassLoader() ContextClassLoader} is not available.
+   * @param fallbackClass is used to {@link Class#getClassLoader() retrieve} a {@link ClassLoader} as fallback if the
+   *        {@link Thread#getContextClassLoader() ContextClassLoader} is not available.
    * @return the default {@link ClassLoader} to use.
    */
   protected ClassLoader getDefaultClassLoader(Class<?> fallbackClass) {
@@ -1026,11 +1025,11 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * @see #visitObjectRecursive(Object, Filter, boolean)
    *
    * @param object is the {@link Object} to traverse recursively.
-   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed
-   *        {@link Object}s. If an {@link Object} is not {@link Filter#accept(Object) accepted} by this
-   *        {@link Filter} the recursion stops at this point.
-   * @param visitedSet is the {@link Set} where to collect all object to visit in order to prevent infinity
-   *        loops or <code>null</code> to disable.
+   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed {@link Object}s. If an
+   *        {@link Object} is not {@link Filter#accept(Object) accepted} by this {@link Filter} the recursion stops at
+   *        this point.
+   * @param visitedSet is the {@link Set} where to collect all object to visit in order to prevent infinity loops or
+   *        <code>null</code> to disable.
    */
   protected void visitObjectRecursive(Object object, Filter<Object> visitor, Set<HashKey<Object>> visitedSet) {
 
