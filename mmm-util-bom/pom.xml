@@ -24,8 +24,6 @@
     -->
     <org.slf4j.version>1.7.6</org.slf4j.version>
     <!-- Internal project versions -->
-    <net.sf.mmm.l10n.version>1.0.0-SNAPSHOT</net.sf.mmm.l10n.version>
-    <net.sf.mmm.util.version>7.0.0-SNAPSHOT</net.sf.mmm.util.version>
   </properties>
 
   <dependencyManagement>
@@ -95,7 +93,7 @@
       <dependency>
         <groupId>org.javamoney</groupId>
         <artifactId>moneta</artifactId>
-        <version>0.8</version>
+        <version>1.0</version>
       </dependency>
 
       <dependency>
@@ -132,6 +130,7 @@
         <version>${net.sf.mmm.util.version}</version>
         <classifier>sources</classifier>
       </dependency>
+      <!--
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-datatype</artifactId>
@@ -143,6 +142,7 @@
         <version>${net.sf.mmm.util.version}</version>
         <classifier>sources</classifier>
       </dependency>
+      -->
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-io</artifactId>
