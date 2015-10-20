@@ -4,7 +4,7 @@
 
 **Welcome to the wonderful world of [mmm](http://m-m-m.sourceforge.net/index.html)!**
 
-![build-status](https://travis-ci.org/m-m-m/util.svg?branch=master)
+[![build-status](https://travis-ci.org/m-m-m/util.svg?branch=master)](https://travis-ci.org/m-m-m/util)
 
 ## Utilities
 
