@@ -37,7 +37,7 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
   public AbstractPojoDescriptorBuilderLimited() {
 
     super();
-    this.pojoMap = new HashMap<Class<?>, AbstractPojoDescriptorImpl<?>>();
+    this.pojoMap = new HashMap<>();
   }
 
   /**
@@ -93,8 +93,8 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
   }
 
   /**
-   * This method creates the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor pojo descriptor} for
-   * the given <code>pojoType</code>.
+   * This method creates the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor pojo descriptor} for the given
+   * <code>pojoType</code>.
    *
    * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder#getDescriptor(java.lang.Class)
    *

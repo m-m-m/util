@@ -8,9 +8,9 @@ import java.util.Queue;
 import net.sf.mmm.util.collection.api.QueueFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.QueueFactory} interface that creates
- * instances of {@link LinkedList}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.QueueFactory} interface that creates instances
+ * of {@link LinkedList}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -33,7 +33,7 @@ public class LinkedListQueueFactory extends AbstractQueueFactory {
    */
   public <E> Queue<E> create() {
 
-    return new LinkedList<E>();
+    return new LinkedList<>();
   }
 
   /**
@@ -42,6 +42,6 @@ public class LinkedListQueueFactory extends AbstractQueueFactory {
   public <E> Queue<E> create(int capacity) {
 
     // capacity does NOT make sense here...
-    return new LinkedList<E>();
+    return new LinkedList<>();
   }
 }

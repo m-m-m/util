@@ -8,9 +8,9 @@ import java.util.TreeMap;
 import net.sf.mmm.util.collection.api.SortedMapFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.SortedMapFactory} interface that
- * creates instances of {@link TreeMap}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.SortedMapFactory} interface that creates
+ * instances of {@link TreeMap}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -33,7 +33,7 @@ public class TreeMapFactory extends AbstractSortedMapFactory {
    */
   public <K, V> SortedMap<K, V> create() {
 
-    return new TreeMap<K, V>();
+    return new TreeMap<>();
   }
 
   /**
@@ -42,6 +42,6 @@ public class TreeMapFactory extends AbstractSortedMapFactory {
   public <K, V> SortedMap<K, V> create(int capacity) {
 
     // capacity ignored...
-    return new TreeMap<K, V>();
+    return new TreeMap<>();
   }
 }

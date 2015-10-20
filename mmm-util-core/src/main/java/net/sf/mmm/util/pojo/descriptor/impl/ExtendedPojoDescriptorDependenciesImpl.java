@@ -30,7 +30,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBui
 
 /**
  * This class extends {@link PojoDescriptorDependenciesImpl} with additional components to inject.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (renamed, 1.1.0)
  */
@@ -60,7 +60,7 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
 
     super.doInitialize();
     if (this.accessorBuilders == null) {
-      this.accessorBuilders = new ArrayList<PojoPropertyAccessorBuilder<?>>();
+      this.accessorBuilders = new ArrayList<>();
       this.accessorBuilders.add(new PojoPropertyAccessorGetBuilder());
       this.accessorBuilders.add(new PojoPropertyAccessorSetBuilder());
       this.accessorBuilders.add(new PojoPropertyAccessorAddBuilder());
@@ -85,7 +85,7 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
    * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor accessors} for
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties} of a
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
-   * 
+   *
    * @return the accessorBuilders.
    */
   public Collection<PojoPropertyAccessorBuilder<?>> getAccessorBuilders() {
@@ -95,16 +95,16 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
 
   /**
    * This method sets the {@link #getAccessorBuilders() accessor-builders}.
-   * 
-   * @param accessorBuilders is a collection with the accessorBuilders to use. It must NOT contain two entries
-   *        with the same {@link PojoPropertyAccessorBuilder#getMode() mode}.
+   *
+   * @param accessorBuilders is a collection with the accessorBuilders to use. It must NOT contain two entries with the
+   *        same {@link PojoPropertyAccessorBuilder#getMode() mode}.
    */
   @Inject
   public void setAccessorBuilders(Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders) {
 
     getInitializationState().requireNotInitilized();
-    Set<PojoPropertyAccessorMode<?>> modeSet = new HashSet<PojoPropertyAccessorMode<?>>();
-    List<PojoPropertyAccessorBuilder<?>> builderList = new ArrayList<PojoPropertyAccessorBuilder<?>>();
+    Set<PojoPropertyAccessorMode<?>> modeSet = new HashSet<>();
+    List<PojoPropertyAccessorBuilder<?>> builderList = new ArrayList<>();
     for (PojoPropertyAccessorBuilder<?> builder : accessorBuilders) {
       PojoPropertyAccessorMode<?> mode = builder.getMode();
       boolean added = modeSet.add(mode);

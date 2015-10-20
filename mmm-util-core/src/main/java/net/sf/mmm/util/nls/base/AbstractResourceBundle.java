@@ -14,15 +14,15 @@ import java.util.Set;
 /**
  * This is the abstract base class for {@link ResourceBundle} implementations using this NLS support. <br>
  * <b>ATTENTION:</b><br>
- * The preferred approach to define messages for the root locale is via
- * {@link net.sf.mmm.util.nls.api.NlsBundle} instead of using this class. <br>
+ * The preferred approach to define messages for the root locale is via {@link net.sf.mmm.util.nls.api.NlsBundle}
+ * instead of using this class. <br>
  * <br>
- * Create your {@link ResourceBundle}s by sub-classing this class and simply define some public static final
- * fields that will be automatically added to the bundle using reflection (only from constructor). <br>
- * Please note that your sub-class must also be public or you need to set privileges in the security manager
- * to allow this class reading the fields via reflection. <br>
- * Please also follow the convention using the following prefixes followed by a suffix that properly explains
- * what the text is about:
+ * Create your {@link ResourceBundle}s by sub-classing this class and simply define some public static final fields that
+ * will be automatically added to the bundle using reflection (only from constructor). <br>
+ * Please note that your sub-class must also be public or you need to set privileges in the security manager to allow
+ * this class reading the fields via reflection. <br>
+ * Please also follow the convention using the following prefixes followed by a suffix that properly explains what the
+ * text is about:
  * <table border="1">
  * <tr>
  * <th>Prefix</th>
@@ -54,15 +54,14 @@ import java.util.Set;
  * <code>INT_MAIN_OPTION_NAME_VERSION = "--version"</code></td>
  * </tr>
  * </table>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class AbstractResourceBundle extends ResourceBundle {
 
   /**
-   * Fields that start with this prefix ({@value} ), will be ignored as {@link #getString(String) bundle
-   * properties}.
+   * Fields that start with this prefix ({@value} ), will be ignored as {@link #getString(String) bundle properties}.
    */
   private static final String PREFIX_INTERNAL_FIELD = "INT_";
 
@@ -82,8 +81,8 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
     super();
     try {
       Field[] fields = getClass().getFields();
-      this.bundle = new Hashtable<String, Object>(fields.length);
-      this.reverse = new HashMap<Object, String>(fields.length);
+      this.bundle = new Hashtable<>(fields.length);
+      this.reverse = new HashMap<>(fields.length);
       for (int i = 0; i < fields.length; i++) {
         int modifiers = fields[i].getModifiers();
         if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers) && !Modifier.isPrivate(modifiers)) {
@@ -106,7 +105,7 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
 
   /**
    * This method is the inverse of {@link #getObject(String)}.
-   * 
+   *
    * @param object is the object (potentially) retrieved via {@link #getObject(String)}.
    * @return the key for the given <code>object</code> or <code>null</code> if it was NOT retrieved via
    *         {@link #getObject(String)} from this instance.

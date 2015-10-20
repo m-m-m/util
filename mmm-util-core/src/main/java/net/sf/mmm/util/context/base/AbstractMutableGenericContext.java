@@ -14,7 +14,7 @@ import net.sf.mmm.util.value.api.ValueNotSetException;
 
 /**
  * This class is the basic implementation of the {@link GenericContext} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -35,7 +35,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
 
   /**
    * The constructor for a {@link #createChildContext() sub-context}.
-   * 
+   *
    * @param mapFactory is used to create the map for storing variables.
    * @param parentContext is the context the created one will derive from.
    */
@@ -51,11 +51,11 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
 
   /**
    * This method gets the variable-name (key) for the given <code>type</code>.
-   * 
+   *
    * @see #setVariable(Object)
    * @see #getVariable(Class)
    * @see #requireVariable(Class)
-   * 
+   *
    * @param type is the {@link Class} reflecting the type of some variable.
    * @return the generic variable-name for the given <code>type</code>.
    */
@@ -139,7 +139,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
 
     Set<String> result;
     if (this.parent == null) {
-      result = new HashSet<String>();
+      result = new HashSet<>();
     } else {
       result = this.parent.getVariableNames();
     }
@@ -199,7 +199,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
 
   /**
    * This method gets the {@link MapFactory}.
-   * 
+   *
    * @return the {@link MapFactory} to use.
    */
   @SuppressWarnings("rawtypes")

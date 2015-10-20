@@ -471,7 +471,7 @@ public class StringUtilImpl implements StringUtil {
   @Override
   public List<String> fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax) {
 
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
     fromSeparatedString(separatedString, separator, syntax, result);
     return result;
   }
@@ -483,7 +483,7 @@ public class StringUtilImpl implements StringUtil {
   public void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<String> collection) {
 
-    ValueConverterIdentity<String> identityConverter = new ValueConverterIdentity<String>(String.class);
+    ValueConverterIdentity<String> identityConverter = new ValueConverterIdentity<>(String.class);
     fromSeparatedString(separatedString, separator, syntax, collection, identityConverter);
   }
 

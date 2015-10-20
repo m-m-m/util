@@ -8,9 +8,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import net.sf.mmm.util.collection.api.QueueFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.QueueFactory} interface that creates
- * instances of {@link ConcurrentLinkedQueue}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.QueueFactory} interface that creates instances
+ * of {@link ConcurrentLinkedQueue}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -33,7 +33,7 @@ public class ConcurrentLinkedQueueFactory extends AbstractQueueFactory {
    */
   public <E> Queue<E> create() {
 
-    return new ConcurrentLinkedQueue<E>();
+    return new ConcurrentLinkedQueue<>();
   }
 
   /**
@@ -42,6 +42,6 @@ public class ConcurrentLinkedQueueFactory extends AbstractQueueFactory {
   public <E> Queue<E> create(int capacity) {
 
     // capacity does NOT make sense here...
-    return new ConcurrentLinkedQueue<E>();
+    return new ConcurrentLinkedQueue<>();
   }
 }

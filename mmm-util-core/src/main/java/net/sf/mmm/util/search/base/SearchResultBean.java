@@ -9,9 +9,9 @@ import net.sf.mmm.util.search.api.SearchResult;
 
 /**
  * This is the implementation of {@link SearchResult}.
- * 
+ *
  * @param <HIT> is the type of the individual items contained in this result.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -36,13 +36,12 @@ public class SearchResultBean<HIT> implements SearchResult<HIT> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param hitList is the {@link #getHits() hit-list} that may return more hits than the given
-   *        <code>maximumHitCount</code>. In that case the {@link #getHits() hits} will be created as a
-   *        truncated copy of the given <code>hitList</code>. Otherwise {@link #getHits()} will return the
-   *        given <code>hitList</code>.
-   * @param maximumHitCount is the {@link net.sf.mmm.util.search.api.SearchCriteria#getMaximumHitCount()
-   *        maximum hit-count}.
+   *        <code>maximumHitCount</code>. In that case the {@link #getHits() hits} will be created as a truncated copy
+   *        of the given <code>hitList</code>. Otherwise {@link #getHits()} will return the given <code>hitList</code>.
+   * @param maximumHitCount is the {@link net.sf.mmm.util.search.api.SearchCriteria#getMaximumHitCount() maximum
+   *        hit-count}.
    */
   public SearchResultBean(List<HIT> hitList, int maximumHitCount) {
 
@@ -51,7 +50,7 @@ public class SearchResultBean<HIT> implements SearchResult<HIT> {
       this.hits = hitList;
       this.complete = true;
     } else {
-      this.hits = new ArrayList<HIT>(maximumHitCount);
+      this.hits = new ArrayList<>(maximumHitCount);
       this.hits.addAll(hitList.subList(0, maximumHitCount + 1));
       this.complete = false;
     }

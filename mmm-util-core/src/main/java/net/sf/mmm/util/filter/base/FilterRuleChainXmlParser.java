@@ -23,26 +23,26 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * This class allows to parse a list of including and excluding regex {@link PatternFilterRule}s from XML and
- * build an according {@link FilterRuleChain}. The rules (include/exclude patterns) are proceeded in the order
- * of their appearance in the list. <br>
+ * This class allows to parse a list of including and excluding regex {@link PatternFilterRule}s from XML and build an
+ * according {@link FilterRuleChain}. The rules (include/exclude patterns) are proceeded in the order of their
+ * appearance in the list. <br>
  * Here is an example of a configuration (rule list) parsed by this class:
- * 
+ *
  * <pre>
  * &lt;filter-chain id="default-filter" default-result="true"&gt;
  * &lt;!-- 1. rule says that all strings that start (^) with "/doc/" will be accepted --&gt;
  * &lt;include pattern="^/doc/"/&gt;
- * &lt;!-- 2. rule says that all strings that end ($) with ".pdf" ignoring the case  
+ * &lt;!-- 2. rule says that all strings that end ($) with ".pdf" ignoring the case
  * of the characters will be rejected --&gt;
  * &lt;exclude pattern="(?i)\.pdf$"/&gt;
  * &lt;!-- 3. rule says that all strings that start with "/data/" will be accepted --&gt;
  * &lt;include pattern="^/data/"/&gt;
- * &lt;!-- 4. rule says that all string that end ($) with ".xml" or ".xsl" ignoring 
+ * &lt;!-- 4. rule says that all string that end ($) with ".xml" or ".xsl" ignoring
  * the case (?i) of the characters will be rejected: --&gt;
  * &lt;exclude pattern="(?i)\.(xml|xsl)$"/&gt;
  * &lt;/filter-chain&gt;
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -88,7 +88,7 @@ public class FilterRuleChainXmlParser {
 
   /**
    * The constructor.
-   * 
+   *
    * @param domUtil is the {@link DomUtil} to use.
    */
   public FilterRuleChainXmlParser(DomUtil domUtil) {
@@ -98,13 +98,12 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses the chain from the given <code>inStream</code>. The XML contained in
-   * <code>inStream</code> needs to contain the chain rules as child-nodes of the
-   * {@link Document#getDocumentElement() root-element}. The name of the root-element is ignored (use e.g.
-   * "chain").
-   * 
-   * @param inStream is the stream containing the XML to parse. It will be closed by this method (on success
-   *        as well as in an exceptional state).
+   * This method parses the chain from the given <code>inStream</code>. The XML contained in <code>inStream</code> needs
+   * to contain the chain rules as child-nodes of the {@link Document#getDocumentElement() root-element}. The name of
+   * the root-element is ignored (use e.g. "chain").
+   *
+   * @param inStream is the stream containing the XML to parse. It will be closed by this method (on success as well as
+   *        in an exceptional state).
    * @return the parsed filter rule.
    * @throws IOException if an input/output error occurred.
    * @throws SAXException if the <code>inStream</code> contains invalid XML.
@@ -123,15 +122,15 @@ public class FilterRuleChainXmlParser {
 
   /**
    * This method parses a map of {@link FilterRuleChain chain}s given by <code>xmlElement</code>.
-   * 
-   * @param xmlElement is the XML element containing the filter-chains (see {@link #XML_TAG_CHAIN}) as
-   *        children and puts them into a map with the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child
-   *        elements or attributes are simply ignored.
+   *
+   * @param xmlElement is the XML element containing the filter-chains (see {@link #XML_TAG_CHAIN}) as children and puts
+   *        them into a map with the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child elements or attributes are
+   *        simply ignored.
    * @return the map of all parsed chains.
    */
   public Map<String, FilterRuleChain<String>> parseChains(Element xmlElement) {
 
-    Map<String, FilterRuleChain<String>> chainMap = new HashMap<String, FilterRuleChain<String>>();
+    Map<String, FilterRuleChain<String>> chainMap = new HashMap<>();
     NodeList childNodes = xmlElement.getChildNodes();
     for (int i = 0; i < childNodes.getLength(); i++) {
       Node child = childNodes.item(i);
@@ -161,9 +160,9 @@ public class FilterRuleChainXmlParser {
 
   /**
    * This method parses a {@link FilterRuleChain chain} given by <code>xmlElement</code>.
-   * 
+   *
    * @see #XML_TAG_CHAIN
-   * 
+   *
    * @param xmlElement is the XML element containing the filter-rules (see {@link #XML_TAG_RULE_INCLUDE} and
    *        {@link #XML_TAG_RULE_EXCLUDE}) as children.
    * @return the parsed filter-chain.
@@ -175,17 +174,16 @@ public class FilterRuleChainXmlParser {
 
   /**
    * This method parses a {@link FilterRuleChain chain} given as XML via <code>xmlElement</code>.
-   * 
+   *
    * @param xmlElement is the XML element containing the filter-rules (see {@link #XML_TAG_RULE_INCLUDE} and
-   *        {@link #XML_TAG_RULE_EXCLUDE}) as children. Unknown child elements or attributes are simply
-   *        ignored.
+   *        {@link #XML_TAG_RULE_EXCLUDE}) as children. Unknown child elements or attributes are simply ignored.
    * @param parent is the parent chain that is to be extended by the chain to parse.
    * @return the parsed filter-chain.
    */
   public FilterRuleChain<String> parseChain(Element xmlElement, FilterRuleChain<String> parent) {
 
     boolean defaultResult = this.domUtil.getAttributeAsBoolean(xmlElement, XML_ATR_CHAIN_DEFAULT, true);
-    List<FilterRule<String>> rules = new ArrayList<FilterRule<String>>();
+    List<FilterRule<String>> rules = new ArrayList<>();
     NodeList childList = xmlElement.getChildNodes();
     for (int childIndex = 0; childIndex < childList.getLength(); childIndex++) {
       Node node = childList.item(childIndex);
@@ -217,7 +215,7 @@ public class FilterRuleChainXmlParser {
     FilterRule<String>[] ruleArray = rules.toArray(new FilterRule[rules.size()]);
     FilterRuleChain<String> chain;
     if (parent == null) {
-      chain = new FilterRuleChain<String>(defaultResult, ruleArray);
+      chain = new FilterRuleChain<>(defaultResult, ruleArray);
     } else {
       chain = parent.extend(defaultResult, ruleArray);
     }

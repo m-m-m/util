@@ -14,7 +14,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
  * This is the implementation of the {@link PojoMethodIntrospector} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -30,7 +30,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
 
   /**
    * The constructor. Configures and {@link #initialize() initializes} the component.
-   * 
+   *
    * @param visibility is the {@link #getVisibility() visibility}.
    * @param acceptStatic is the {@link #isAcceptStatic() accept-static} flag.
    */
@@ -50,15 +50,12 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
   }
 
   /**
-   * Recursively collects all {@link Class#getInterfaces() interfaces} starting from the given
-   * <code>type</code>.
-   * 
-   * @param type is the {@link Class} for which all {@link Class#getInterfaces() interfaces} shall be
-   *        collected.
+   * Recursively collects all {@link Class#getInterfaces() interfaces} starting from the given <code>type</code>.
+   *
+   * @param type is the {@link Class} for which all {@link Class#getInterfaces() interfaces} shall be collected.
    * @param interfaceSet is the {@link Set} where the {@link Class#getInterfaces() interfaces} will be
    *        {@link Set#add(Object) added}.
-   * @param excludeSet is a {@link Set} with {@link Class}es (interfaces) to omit. May be <code>null</code>
-   *        for none.
+   * @param excludeSet is a {@link Set} with {@link Class}es (interfaces) to omit. May be <code>null</code> for none.
    */
   private static void collectInterfaces(Class<?> type, Set<Class<?>> interfaceSet, Set<Class<?>> excludeSet) {
 
@@ -87,7 +84,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
 
     /**
      * The constructor.
-     * 
+     *
      * @param pojoClass is the class for which the property-accessors should be iterated.
      */
     protected PojoMethodIterator(Class<?> pojoClass) {
@@ -99,10 +96,10 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
         Set<Class<?>> superInterfaceSet = null;
         Class<?> superClass = pojoClass.getSuperclass();
         if (superClass != null) {
-          superInterfaceSet = new HashSet<Class<?>>();
+          superInterfaceSet = new HashSet<>();
           collectInterfaces(superClass, superInterfaceSet, null);
         }
-        Set<Class<?>> interfaceSet = new HashSet<Class<?>>();
+        Set<Class<?>> interfaceSet = new HashSet<>();
         collectInterfaces(pojoClass, interfaceSet, superInterfaceSet);
         this.interfaces = interfaceSet.iterator();
       } else {

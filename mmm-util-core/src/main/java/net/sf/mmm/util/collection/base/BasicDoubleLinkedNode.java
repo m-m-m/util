@@ -6,9 +6,9 @@ import net.sf.mmm.util.collection.api.DoubleLinkedNode;
 
 /**
  * This is a basic implementation of the {@link DoubleLinkedNode} interface.
- * 
+ *
  * @param <V> is the generic type of the {@link #getValue() value} of this node.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -36,9 +36,9 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
 
   /**
    * This method sets the {@link #getPrevious() previous node}.
-   * 
-   * @param previous is the {@link #getPrevious() previous node} to set. May be <code>null</code> to indicate
-   *        that this is the first node of the list.
+   *
+   * @param previous is the {@link #getPrevious() previous node} to set. May be <code>null</code> to indicate that this
+   *        is the first node of the list.
    */
   public void setPrevious(BasicDoubleLinkedNode<V> previous) {
 
@@ -46,18 +46,20 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given <code>value</code> into the list at the position represented by this node.
-   * It will typically create a new node containing the given <code>value</code> and
-   * {@link #setNext(AbstractLinkedNode) set it as next}. It will guarantee the following equation:
-   * 
-   * <pre>this.{@link #getNext()}.{@link #getPrevious()} == this</pre>
-   * 
+   * This method inserts the given <code>value</code> into the list at the position represented by this node. It will
+   * typically create a new node containing the given <code>value</code> and {@link #setNext(AbstractLinkedNode) set it
+   * as next}. It will guarantee the following equation:
+   *
+   * <pre>
+   * this.{@link #getNext()}.{@link #getPrevious()} == this
+   * </pre>
+   *
    * If <code>overrideNullValue</code> is <code>true</code> and the {@link #getValue() value} of this node is
    * <code>null</code>, then its value is set to the given <code>value</code> instead of creating a new node.
-   * 
+   *
    * @param value is the value to insert.
-   * @param overrideNullValue - <code>true</code> if a {@link #getValue() value} of <code>null</code> should
-   *        be replaced with the given <code>value</code>, <code>false</code> otherwise.
+   * @param overrideNullValue - <code>true</code> if a {@link #getValue() value} of <code>null</code> should be replaced
+   *        with the given <code>value</code>, <code>false</code> otherwise.
    * @return the node containing the given <code>value</code>.
    */
   public BasicDoubleLinkedNode<V> insertAsNext(V value, boolean overrideNullValue) {
@@ -66,7 +68,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
       setValue(value);
       return this;
     } else {
-      BasicDoubleLinkedNode<V> node = new BasicDoubleLinkedNode<V>();
+      BasicDoubleLinkedNode<V> node = new BasicDoubleLinkedNode<>();
       node.setValue(value);
       node.previous = this;
       setNext(node);
@@ -75,9 +77,9 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given <code>node</code> into the list immediately after the position represented
-   * by this node.
-   * 
+   * This method inserts the given <code>node</code> into the list immediately after the position represented by this
+   * node.
+   *
    * @param node is the {@link BasicDoubleLinkedNode node} to add.
    */
   public void insertAsNext(BasicDoubleLinkedNode<V> node) {
@@ -92,9 +94,9 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given <code>node</code> into the list immediately before the position represented
-   * by this node.
-   * 
+   * This method inserts the given <code>node</code> into the list immediately before the position represented by this
+   * node.
+   *
    * @param node is the {@link BasicDoubleLinkedNode node} to add.
    */
   public void insertAsPrevious(BasicDoubleLinkedNode<V> node) {
@@ -108,18 +110,20 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given <code>value</code> into the list at the position represented by this node.
-   * It will typically create a new node containing the given <code>value</code> and
-   * {@link #setNext(AbstractLinkedNode) set it as next}. It will guarantee the following equation:
-   * 
-   * <pre>this.{@link #getNext()}.{@link #getPrevious()} == this</pre>
-   * 
+   * This method inserts the given <code>value</code> into the list at the position represented by this node. It will
+   * typically create a new node containing the given <code>value</code> and {@link #setNext(AbstractLinkedNode) set it
+   * as next}. It will guarantee the following equation:
+   *
+   * <pre>
+   * this.{@link #getNext()}.{@link #getPrevious()} == this
+   * </pre>
+   *
    * If <code>overrideNullValue</code> is <code>true</code> and the {@link #getValue() value} of this node is
    * <code>null</code>, then its value is set to the given <code>value</code> instead of creating a new node.
-   * 
+   *
    * @param value is the value to insert.
-   * @param overrideNullValue - <code>true</code> if a {@link #getValue() value} of <code>null</code> should
-   *        be replaced with the given <code>value</code>, <code>false</code> otherwise.
+   * @param overrideNullValue - <code>true</code> if a {@link #getValue() value} of <code>null</code> should be replaced
+   *        with the given <code>value</code>, <code>false</code> otherwise.
    * @return the node containing the given <code>value</code>.
    */
   public BasicDoubleLinkedNode<V> insertAsPrevious(V value, boolean overrideNullValue) {
@@ -128,7 +132,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
       setValue(value);
       return this;
     } else {
-      BasicDoubleLinkedNode<V> node = new BasicDoubleLinkedNode<V>();
+      BasicDoubleLinkedNode<V> node = new BasicDoubleLinkedNode<>();
       node.setValue(value);
       node.setNext(this);
       this.previous = node;

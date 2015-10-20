@@ -8,9 +8,9 @@ import java.util.TreeSet;
 import net.sf.mmm.util.collection.api.SortedSetFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.SortedSetFactory} interface that
- * creates instances of {@link TreeSet}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.SortedSetFactory} interface that creates
+ * instances of {@link TreeSet}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -33,7 +33,7 @@ public class TreeSetFactory extends AbstractSortedSetFactory {
    */
   public <E> SortedSet<E> create() {
 
-    return new TreeSet<E>();
+    return new TreeSet<>();
   }
 
   /**
@@ -42,6 +42,6 @@ public class TreeSetFactory extends AbstractSortedSetFactory {
   public <E> SortedSet<E> create(int capacity) {
 
     // capacity does NOT make sense here...
-    return new TreeSet<E>();
+    return new TreeSet<>();
   }
 }

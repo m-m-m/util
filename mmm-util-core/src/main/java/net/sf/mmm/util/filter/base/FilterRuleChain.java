@@ -14,9 +14,9 @@ import net.sf.mmm.util.filter.api.FilterRule;
 
 /**
  * This class implements a {@link Filter} that is based on a chain of {@link FilterRule}s.
- * 
+ *
  * @param <V> is the generic type of the value to check.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -44,8 +44,7 @@ public class FilterRuleChain<V> implements Filter<V> {
   /**
    * The non-arg constructor. <br>
    * <b>NOTE:</b><br>
-   * This constructor should not be called directly! It is only intended for reflective access (e.g. for
-   * JAXB).
+   * This constructor should not be called directly! It is only intended for reflective access (e.g. for JAXB).
    */
   public FilterRuleChain() {
 
@@ -54,7 +53,7 @@ public class FilterRuleChain<V> implements Filter<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param defaultResult is the {@link #accept(Object) result} if none of the <code>rules</code> match.
    * @param rules is the chain of rules.
    */
@@ -68,10 +67,9 @@ public class FilterRuleChain<V> implements Filter<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param id is the {@link #getId() ID}.
-   * @param parent is the parent-{@link FilterRuleChain chain} to extend or <code>null</code> for a
-   *        root-chain.
+   * @param parent is the parent-{@link FilterRuleChain chain} to extend or <code>null</code> for a root-chain.
    * @param rules is the chain of rules.
    * @param defaultResult is the {@link #accept(Object) result} if none of the <code>rules</code> match.
    */
@@ -87,7 +85,7 @@ public class FilterRuleChain<V> implements Filter<V> {
 
   /**
    * This method gets the default {@link #accept(Object) result} used if none of the rules matched.
-   * 
+   *
    * @return the default result.
    */
   public boolean getDefaultResult() {
@@ -97,9 +95,9 @@ public class FilterRuleChain<V> implements Filter<V> {
 
   /**
    * {@inheritDoc}
-   * 
-   * This method checks all rules in the chain and returns the result of the first matching rule. If no rule
-   * matches, <code>{@link #getDefaultResult()}</code> is returned.
+   *
+   * This method checks all rules in the chain and returns the result of the first matching rule. If no rule matches,
+   * <code>{@link #getDefaultResult()}</code> is returned.
    */
   @Override
   public boolean accept(V value) {
@@ -114,7 +112,7 @@ public class FilterRuleChain<V> implements Filter<V> {
 
   /**
    * This method implements {@link #accept(Object)} recursively.
-   * 
+   *
    * @param value is the value to filter.
    * @return <code>true</code> if the value is accepted, <code>false</code> if the value is NOT accepted, or
    *         <code>null</code> if no decision is made.
@@ -139,7 +137,7 @@ public class FilterRuleChain<V> implements Filter<V> {
 
   /**
    * This method extends this chain with <code>additionalRules</code>.
-   * 
+   *
    * @param newDefaultResult is the result of the new extended chain if none of the rules match.
    * @param additionalRules are the rules to add.
    * @return the chain that also checks the <code>additionalRules</code> if none of this rules match.
@@ -150,12 +148,12 @@ public class FilterRuleChain<V> implements Filter<V> {
     FilterRule<V>[] newRules = new FilterRule[this.rules.length + additionalRules.length];
     System.arraycopy(this.rules, 0, newRules, 0, this.rules.length);
     System.arraycopy(additionalRules, 0, newRules, this.rules.length, additionalRules.length);
-    return new FilterRuleChain<V>(newDefaultResult, newRules);
+    return new FilterRuleChain<>(newDefaultResult, newRules);
   }
 
   /**
    * This method gets the ID used to identify this chain.
-   * 
+   *
    * @return the ID or <code>null</code> if undefined.
    */
   public String getId() {

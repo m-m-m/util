@@ -7,11 +7,11 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that validates that a given value is within
- * a specific {@link Range}.
- * 
+ * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that validates that a given value is within a
+ * specific {@link Range}.
+ *
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -22,7 +22,7 @@ public class ValidatorRange<V extends Comparable<V>> extends AbstractValueValida
 
   /**
    * The constructor.
-   * 
+   *
    * @param range is the {@link Range} the value has to be within.
    */
   public ValidatorRange(Range<V> range) {
@@ -33,14 +33,14 @@ public class ValidatorRange<V extends Comparable<V>> extends AbstractValueValida
 
   /**
    * The constructor.
-   * 
+   *
    * @param min is the {@link Range#getMin() minimum} value allowed.
    * @param max is the {@link Range#getMax() maximum} value allowed.
    */
   public ValidatorRange(V min, V max) {
 
     super();
-    this.range = new Range<V>(min, max);
+    this.range = new Range<>(min, max);
   }
 
   /**

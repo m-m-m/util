@@ -25,7 +25,7 @@ public abstract class AbstractNlsBundleFactoryGwt implements NlsBundleFactory {
   public AbstractNlsBundleFactoryGwt() {
 
     super();
-    this.bundleMap = new HashMap<Class<? extends NlsBundle>, NlsBundle>();
+    this.bundleMap = new HashMap<>();
   }
 
   /**

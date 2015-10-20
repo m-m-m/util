@@ -8,9 +8,9 @@ import java.util.Map;
 import net.sf.mmm.util.collection.api.MapFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.MapFactory} interface that creates
- * instances of {@link HashMap}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.MapFactory} interface that creates instances
+ * of {@link HashMap}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -34,7 +34,7 @@ public class HashMapFactory extends AbstractMapFactory {
    */
   public <K, V> Map<K, V> create() {
 
-    return new HashMap<K, V>();
+    return new HashMap<>();
   }
 
   /**
@@ -42,6 +42,6 @@ public class HashMapFactory extends AbstractMapFactory {
    */
   public <K, V> Map<K, V> create(int capacity) {
 
-    return new HashMap<K, V>(capacity);
+    return new HashMap<>(capacity);
   }
 }

@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * This is just an ugly static pool used to simplify testing. It might cause memory holes and should never be used in
  * productive code.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public final class SpringContainerPool {
@@ -31,7 +31,7 @@ public final class SpringContainerPool {
 
   /**
    * This method gets the singleton instance of the {@link IocContainer}.
-   * 
+   *
    * @return the requested container.
    */
   public static IocContainer getInstance() {
@@ -54,14 +54,14 @@ public final class SpringContainerPool {
 
   /**
    * This method gets the {@link IocContainer} for the given <code>xmlClasspath</code>.
-   * 
+   *
    * @param xmlClasspath is the classpath to the XML configuration.
    * @return the requested container.
    */
   public static IocContainer getInstance(String xmlClasspath) {
 
     if (xml2containerMap == null) {
-      xml2containerMap = new HashMap<String, SpringContainer>();
+      xml2containerMap = new HashMap<>();
     }
     SpringContainer container = xml2containerMap.get(xmlClasspath);
     if (container == null) {
@@ -74,7 +74,7 @@ public final class SpringContainerPool {
   /**
    * This method disposes the {@link #getInstance(String) instance} identified by the given <code>xmlClasspath</code>
    * (if it exists).
-   * 
+   *
    * @param xmlClasspath is the classpath to the XML configuration.
    */
   public static void dispose(String xmlClasspath) {

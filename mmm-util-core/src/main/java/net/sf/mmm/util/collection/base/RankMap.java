@@ -10,24 +10,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This class is like a {@link Map} that maps elements (<code>&lt;E&gt;</code>) to an <code>int</code> value
- * that represents the {@link #getRank(Object) rank} of the according element. <br>
- * This is useful for heuristic decisions where specific detections indicate a {@link #addRank(Object, int)
- * gain or loss} of a specific element (representing a decision). Additionally an element can be
- * {@link #setUnacceptable(Object) declared} {@link #RANK_UNACCEPTABLE unacceptable} so it is out of the
- * decision.
- * 
+ * This class is like a {@link Map} that maps elements (<code>&lt;E&gt;</code>) to an <code>int</code> value that
+ * represents the {@link #getRank(Object) rank} of the according element. <br>
+ * This is useful for heuristic decisions where specific detections indicate a {@link #addRank(Object, int) gain or
+ * loss} of a specific element (representing a decision). Additionally an element can be
+ * {@link #setUnacceptable(Object) declared} {@link #RANK_UNACCEPTABLE unacceptable} so it is out of the decision.
+ *
  * @param <E> is the type of the elements (decisions) to rank.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
 public class RankMap<E> {
 
   /**
-   * The rank that represents an element that has been disqualified. If an element has this rank it can NOT
-   * change it again and calls to {@link #addRank(Object, int)} will have no effect.
-   * 
+   * The rank that represents an element that has been disqualified. If an element has this rank it can NOT change it
+   * again and calls to {@link #addRank(Object, int)} will have no effect.
+   *
    * @see #setUnacceptable(Object)
    */
   public static final int RANK_UNACCEPTABLE = Integer.MIN_VALUE;
@@ -44,14 +43,14 @@ public class RankMap<E> {
   public RankMap() {
 
     super();
-    this.map = new HashMap<E, Ranking>();
+    this.map = new HashMap<>();
     this.elements = Collections.unmodifiableCollection(this.map.keySet());
   }
 
   /**
    * This method gets all elements in this {@link RankMap} that have been actively ranked (by
    * {@link #addRank(Object, int)} or {@link #setUnacceptable(Object)}).
-   * 
+   *
    * @return a {@link Collection} with the ranked elements.
    */
   public Collection<E> getElements() {
@@ -61,12 +60,12 @@ public class RankMap<E> {
 
   /**
    * This method gets the current rank for the given <code>element</code>. The rank is in the range from
-   * <code>{@link #RANK_UNACCEPTABLE -1}</code> to <code>{@link Integer#MAX_VALUE}</code>. If the
-   * <code>element</code> has no rank, a value of <code>0</code> will be returned.
-   * 
+   * <code>{@link #RANK_UNACCEPTABLE -1}</code> to <code>{@link Integer#MAX_VALUE}</code>. If the <code>element</code>
+   * has no rank, a value of <code>0</code> will be returned.
+   *
    * @see #RANK_UNACCEPTABLE
    * @see #addRank(Object, int)
-   * 
+   *
    * @param element is the element for which the rank is requested.
    * @return the current rank of the given <code>element</code>.
    */
@@ -81,10 +80,10 @@ public class RankMap<E> {
   }
 
   /**
-   * This method ranks the given <code>element</code> as {@link #RANK_UNACCEPTABLE unacceptable}. After the
-   * call of this method the {@link #getRank(Object) rank} of the given <code>element</code> is set to
-   * {@link #RANK_UNACCEPTABLE} and can NOT be changed again.
-   * 
+   * This method ranks the given <code>element</code> as {@link #RANK_UNACCEPTABLE unacceptable}. After the call of this
+   * method the {@link #getRank(Object) rank} of the given <code>element</code> is set to {@link #RANK_UNACCEPTABLE} and
+   * can NOT be changed again.
+   *
    * @param element is the unacceptable element.
    */
   public void setUnacceptable(E element) {
@@ -98,12 +97,12 @@ public class RankMap<E> {
   }
 
   /**
-   * This method determines if the given <code>element</code> has been {@link #setUnacceptable(Object)
-   * declared} {@link #RANK_UNACCEPTABLE unacceptable}.
-   * 
+   * This method determines if the given <code>element</code> has been {@link #setUnacceptable(Object) declared}
+   * {@link #RANK_UNACCEPTABLE unacceptable}.
+   *
    * @param element is the element to check.
-   * @return <code>true</code> if the given <code>element</code> is unacceptable, <code>false</code> if the
-   *         given element is acceptable.
+   * @return <code>true</code> if the given <code>element</code> is unacceptable, <code>false</code> if the given
+   *         element is acceptable.
    */
   public boolean isUnacceptable(E element) {
 
@@ -116,10 +115,9 @@ public class RankMap<E> {
 
   /**
    * This method adds the given <code>gain</code> to the current {@link #getRank(Object) rank} of the given
-   * <code>element</code>. If the <code>element</code> is {@link #setUnacceptable(Object) unacceptable}, this
-   * method will have no effect. This method guarantees that there will be no overflow of the
-   * {@link #getRank(Object) rank}.
-   * 
+   * <code>element</code>. If the <code>element</code> is {@link #setUnacceptable(Object) unacceptable}, this method
+   * will have no effect. This method guarantees that there will be no overflow of the {@link #getRank(Object) rank}.
+   *
    * @param element is the element to rank.
    * @param gain is the value to add to the current rank. It may be negative to reduce the rank. A value of
    *        <code>0</code> will have no effect.
@@ -140,13 +138,12 @@ public class RankMap<E> {
   }
 
   /**
-   * This method gets the element that has currently the best (highest) positive {@link #getRank(Object) rank}
-   * . If there are multiple best elements, it is unspecified which one is returned.
-   * 
+   * This method gets the element that has currently the best (highest) positive {@link #getRank(Object) rank} . If
+   * there are multiple best elements, it is unspecified which one is returned.
+   *
    * @see #getBests()
-   * 
-   * @return the element with the best positive rank or <code>null</code> if there is no element with a
-   *         positive rank.
+   *
+   * @return the element with the best positive rank or <code>null</code> if there is no element with a positive rank.
    */
   public E getBest() {
 
@@ -154,15 +151,14 @@ public class RankMap<E> {
   }
 
   /**
-   * This method gets the element that has currently the best (highest) {@link #getRank(Object) rank} greater
-   * or equal to the given <code>threshold</code>. If there are multiple best elements, it is unspecified
-   * which one is returned.
-   * 
+   * This method gets the element that has currently the best (highest) {@link #getRank(Object) rank} greater or equal
+   * to the given <code>threshold</code>. If there are multiple best elements, it is unspecified which one is returned.
+   *
    * @see #getBests()
-   * 
+   *
    * @param threshold is the minimum rank accepted for the best element.
-   * @return the element with the best rank greater or equal to the given <code>threshold</code> or
-   *         <code>null</code> if there is no such element.
+   * @return the element with the best rank greater or equal to the given <code>threshold</code> or <code>null</code> if
+   *         there is no such element.
    */
   public E getBest(int threshold) {
 
@@ -182,15 +178,15 @@ public class RankMap<E> {
 
   /**
    * This method gets a {@link List} containing the element(s) that has currently the best (highest)
-   * {@link #getRank(Object) rank}. If there is no element with a positive rank, an empty {@link List} will be
-   * returned. If there are multiple elements with the (same) {@link #getBest() best} rank, they will all be
-   * contained in the returned {@link List}.
-   * 
+   * {@link #getRank(Object) rank}. If there is no element with a positive rank, an empty {@link List} will be returned.
+   * If there are multiple elements with the (same) {@link #getBest() best} rank, they will all be contained in the
+   * returned {@link List}.
+   *
    * @return the {@link List} with the best element(s).
    */
   public List<E> getBests() {
 
-    List<E> bests = new ArrayList<E>();
+    List<E> bests = new ArrayList<>();
     int bestRank = RANK_UNACCEPTABLE + 1;
     for (E element : this.map.keySet()) {
       Ranking ranking = this.map.get(element);
@@ -210,13 +206,13 @@ public class RankMap<E> {
   /**
    * This method gets all elements with a {@link #getRank(Object) rank} greater or equal to the given
    * <code>threshold</code>.
-   * 
+   *
    * @param threshold is the minimum accepted {@link #getRank(Object) rank}.
    * @return the list with all elements better or equal to the given <code>threshold</code>.
    */
   public List<E> getBetterOrEqual(int threshold) {
 
-    List<E> bests = new ArrayList<E>();
+    List<E> bests = new ArrayList<>();
     for (E element : this.map.keySet()) {
       Ranking ranking = this.map.get(element);
       if ((ranking != null) && (ranking.rank >= threshold)) {
@@ -252,7 +248,7 @@ public class RankMap<E> {
 
     /**
      * @see RankMap#addRank(Object, int)
-     * 
+     *
      * @param gain is the amount by which to increase the rank.
      */
     public void addRank(int gain) {

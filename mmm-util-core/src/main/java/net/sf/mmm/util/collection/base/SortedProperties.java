@@ -11,7 +11,7 @@ import java.util.TreeSet;
 /**
  * This class extends {@link Properties} and makes them sorted by their {@link #keys() keys}. Sorting the properties is
  * useful when changes shall be compared using diff-algorithms.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -30,7 +30,7 @@ public class SortedProperties extends Properties {
 
   /**
    * The constructor.
-   * 
+   *
    * @param defaults are the {@link Properties} to inherit as defaults.
    */
   public SortedProperties(Properties defaults) {
@@ -52,7 +52,7 @@ public class SortedProperties extends Properties {
     }
     assert (i == keys.length);
     Arrays.sort(keys);
-    return new ArrayIterator<Object>(keys);
+    return new ArrayIterator<>(keys);
   }
 
   /**
@@ -61,6 +61,6 @@ public class SortedProperties extends Properties {
   @Override
   public Set<Object> keySet() {
 
-    return new TreeSet<Object>(super.keySet());
+    return new TreeSet<>(super.keySet());
   }
 }

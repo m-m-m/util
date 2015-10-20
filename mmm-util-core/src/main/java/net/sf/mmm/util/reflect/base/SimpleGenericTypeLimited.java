@@ -15,21 +15,21 @@ import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is a very simple implementation of {@link GenericType} that is GWT compatible and therefore limited to
- * core features.
- * 
+ * This is a very simple implementation of {@link GenericType} that is GWT compatible and therefore limited to core
+ * features.
+ *
  * @param <T> is the generic type of the {@link #getRetrievalClass() retrieval class}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
 public class SimpleGenericTypeLimited<T> implements GenericType<T> {
 
   /** The {@link GenericType} for {@link Object}. */
-  public static final GenericType<Object> TYPE_OBJECT = new SimpleGenericTypeLimited<Object>(Object.class);
+  public static final GenericType<Object> TYPE_OBJECT = new SimpleGenericTypeLimited<>(Object.class);
 
   /** The {@link GenericType} for {@link Void}. */
-  public static final GenericType<Void> TYPE_VOID = new SimpleGenericTypeLimited<Void>(Void.class);
+  public static final GenericType<Void> TYPE_VOID = new SimpleGenericTypeLimited<>(Void.class);
 
   /** @see #getType() */
   private final Class<T> type;
@@ -42,7 +42,7 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param type is the {@link #getType() type} to represent.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -68,7 +68,7 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
 
   /**
    * This method determines if the given type is a {@link List}.
-   * 
+   *
    * @param rawType is the {@link Class} to check.
    * @return <code>true</code> if the given type is assignable to {@link List}.
    */
@@ -97,7 +97,7 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
 
   /**
    * This method determines if the given type is a {@link Map}.
-   * 
+   *
    * @param rawType is the {@link Class} to check.
    * @return <code>true</code> if the given type is assignable to {@link Map}.
    */

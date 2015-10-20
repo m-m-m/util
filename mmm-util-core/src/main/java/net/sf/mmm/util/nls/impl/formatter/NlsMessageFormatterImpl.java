@@ -21,11 +21,11 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * This is the implementation of the {@link net.sf.mmm.util.nls.api.NlsMessageFormatter} interface. <br>
  * <b>NOTE:</b><br>
  * This is more or less a rewrite of {@link java.text.MessageFormat} and is syntax-compatible with the
- * {@link java.text.MessageFormat#applyPattern(String) MessageFormat-pattern} -format. Some special (and
- * somewhat sick) features as modifying internal {@link java.text.Format}s or {@link java.text.FieldPosition}
- * are NOT supported. Currently also parsing is NOT supported. <br>
- * Instead this implementation is immutable and thread-safe. Further it works on any {@link Appendable} rather
- * than only on {@link StringBuffer}. It also uses the same {@link Appendable} for recursive invocations.
+ * {@link java.text.MessageFormat#applyPattern(String) MessageFormat-pattern} -format. Some special (and somewhat sick)
+ * features as modifying internal {@link java.text.Format}s or {@link java.text.FieldPosition} are NOT supported.
+ * Currently also parsing is NOT supported. <br>
+ * Instead this implementation is immutable and thread-safe. Further it works on any {@link Appendable} rather than only
+ * on {@link StringBuffer}. It also uses the same {@link Appendable} for recursive invocations.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -53,7 +53,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
     super();
     NlsNullPointerException.checkNotNull(NlsDependencies.class, nlsDependencies);
     this.nlsDependnecies = nlsDependencies;
-    List<PatternSegment> segmentList = new ArrayList<PatternSegment>();
+    List<PatternSegment> segmentList = new ArrayList<>();
     CharSequenceScanner scanner = new CharSequenceScanner(pattern);
     String prefix = scanner.readUntil(NlsArgumentParser.START_EXPRESSION, true, SYNTAX);
     while (scanner.hasNext()) {
@@ -75,8 +75,8 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
   /**
    * {@inheritDoc}
    */
-  public final void format(Void nothing, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
-      Appendable buffer) throws IOException {
+  public final void format(Void nothing, Locale locale, Map<String, Object> arguments,
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
     for (PatternSegment segment : this.segments) {
       buffer.append(segment.prefix);
@@ -96,12 +96,11 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
 
   /**
    * This inner class represents a segment out of the parsed message-pattern. <br>
-   * E.g. if the message-pattern is "Hi {0} you have {1} items!" then it is parsed into two
-   * {@link PatternSegment}s. The first has a {@link #getPrefix() prefix} of <code>"Hi "</code> and
-   * {@link #getArgument() argument} of <code>{0}</code> and the second has <code>" you have "</code> as
-   * {@link #getPrefix() prefix} and {@link #getArgument() argument} of <code>{1}</code>. The rest of the
-   * pattern which is <code>" items!"</code> will be stored in {@link NlsMessageFormatterImpl#getSuffix()
-   * suffix}.
+   * E.g. if the message-pattern is "Hi {0} you have {1} items!" then it is parsed into two {@link PatternSegment}s. The
+   * first has a {@link #getPrefix() prefix} of <code>"Hi "</code> and {@link #getArgument() argument} of
+   * <code>{0}</code> and the second has <code>" you have "</code> as {@link #getPrefix() prefix} and
+   * {@link #getArgument() argument} of <code>{1}</code>. The rest of the pattern which is <code>" items!"</code> will
+   * be stored in {@link NlsMessageFormatterImpl#getSuffix() suffix}.
    */
   protected static class PatternSegment {
 
@@ -125,8 +124,8 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
     }
 
     /**
-     * This method gets the prefix. This is the raw part of the message-pattern (until the next '{') that will
-     * be taken as is.
+     * This method gets the prefix. This is the raw part of the message-pattern (until the next '{') that will be taken
+     * as is.
      *
      * @return the prefix
      */

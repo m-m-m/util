@@ -54,8 +54,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   /**
    * The constructor.
    *
-   * @param mapFactory is the {@link MapFactory} used to create internal {@link Map}s for cache or
-   *        registration.
+   * @param mapFactory is the {@link MapFactory} used to create internal {@link Map}s for cache or registration.
    */
   public AbstractEnumProvider(MapFactory<?> mapFactory) {
 
@@ -95,8 +94,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
 
   /**
    * Registers the enum definitions to support. Override this method to
-   * {@link #registerEnumDefinition(AbstractEnumDefinition) add} custom {@link EnumDefinition}s or replace
-   * defaults.
+   * {@link #registerEnumDefinition(AbstractEnumDefinition) add} custom {@link EnumDefinition}s or replace defaults.
    */
   protected void registerEnumDefinitions() {
 
@@ -130,7 +128,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
    */
   protected <ENUM extends Enum<ENUM>> void registerEnum(Class<ENUM> enumClass) {
 
-    registerEnumDefinition(new EnumEnumDefinition<ENUM, Object>(enumClass, this.stringUtil));
+    registerEnumDefinition(new EnumEnumDefinition<>(enumClass, this.stringUtil));
   }
 
   /**
@@ -190,8 +188,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   }
 
   /**
-   * @return <code>true</code> to automatically {@link #registerEnum(Class)} requested {@link Enum} types
-   *         (default), <code>false</code> otherwise (override to disable).
+   * @return <code>true</code> to automatically {@link #registerEnum(Class)} requested {@link Enum} types (default),
+   *         <code>false</code> otherwise (override to disable).
    */
   protected boolean isSupportEnumAutoRegistration() {
 
@@ -239,7 +237,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
    * {@inheritDoc}
    */
   @Override
-  public <ENUM> ENUM getEnumValue(Class<ENUM> enumType, String value, boolean required) throws IllegalCaseException {
+  public <ENUM> ENUM getEnumValue(Class<ENUM> enumType, String value, boolean required)
+      throws IllegalCaseException {
 
     return getEnumValue(getEnumDefinition(enumType), value, required);
   }
@@ -319,8 +318,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   }
 
   /**
-   * @param container is the {@link EnumContainer} for which the {@link #getEnumValues(EnumDefinition)} should
-   *        be loaded.
+   * @param container is the {@link EnumContainer} for which the {@link #getEnumValues(EnumDefinition)} should be
+   *        loaded.
    */
   protected abstract void loadEnumValues(EnumContainer container);
 
@@ -334,9 +333,9 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
 
     assert (enumDefinition.getCategory() != null);
     List<?> allEnumValues = getEnumValues(enumDefinition);
-    List<EnumTypeWithCategory<?, CATEGORY>> result = new LinkedList<EnumTypeWithCategory<?, CATEGORY>>();
+    List<EnumTypeWithCategory<?, CATEGORY>> result = new LinkedList<>();
 
-    Set<CATEGORY> categorySet = new HashSet<CATEGORY>();
+    Set<CATEGORY> categorySet = new HashSet<>();
     for (CATEGORY currentCategory : categories) {
       categorySet.add(currentCategory);
     }
@@ -416,7 +415,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
       if (values == null) {
         this.activeValues = null;
       } else {
-        List<Object> nonDeprecatedValues = new ArrayList<Object>(this.allValues.size());
+        List<Object> nonDeprecatedValues = new ArrayList<>(this.allValues.size());
         Boolean implementsDeprecated = null;
         for (Object value : this.allValues) {
           if (implementsDeprecated == null) {
@@ -435,8 +434,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     }
 
     /**
-     * @return the {@link EnumProvider#getEnumValues(EnumDefinition) enum values} or <code>null</code> if NOT
-     *         the {@link EnumProvider#isAvailable(EnumDefinition) available}.
+     * @return the {@link EnumProvider#getEnumValues(EnumDefinition) enum values} or <code>null</code> if NOT the
+     *         {@link EnumProvider#isAvailable(EnumDefinition) available}.
      */
     public List<?> getValues() {
 

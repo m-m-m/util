@@ -5,8 +5,8 @@ package net.sf.mmm.util.text.api;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a collection of utility functions that help with unicode characters and texts. It
- * also contains constants for many unicode characters.
+ * This is the interface for a collection of utility functions that help with unicode characters and texts. It also
+ * contains constants for many unicode characters.
  *
  * @see DiacriticalMark
  * @see net.sf.mmm.util.xml.api.XmlUtil#resolveEntity(String)
@@ -15,6 +15,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * @since 2.0.0
  */
 @ComponentSpecification
+@SuppressWarnings("javadoc")
 public interface UnicodeUtil {
 
   /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
@@ -29,10 +30,10 @@ public interface UnicodeUtil {
   char CHARACTER_TABULATION = 0x00009;
 
   /**
-   * The character indicating a move of the cursor to the next line. Originally the cursor was only moved down
-   * but remained in the same column (horizontal position). On linux/unix systems this also includes a move of
-   * the cursor to the beginning of the next line (see {@link #CARRIAGE_RETURN}). This is the origin of the
-   * differences for newlines on different operating systems (windows vs. linux vs. mac).
+   * The character indicating a move of the cursor to the next line. Originally the cursor was only moved down but
+   * remained in the same column (horizontal position). On linux/unix systems this also includes a move of the cursor to
+   * the beginning of the next line (see {@link #CARRIAGE_RETURN}). This is the origin of the differences for newlines
+   * on different operating systems (windows vs. linux vs. mac).
    */
   char LINE_FEED = 0x0000A;
 
@@ -101,8 +102,8 @@ public interface UnicodeUtil {
   char FULL_STOP = 0x0002E;
 
   /**
-   * The slash sign also commonly used for divisions (where actually {@link #DIVISION_SIGN} shall be used).
-   * Looks like this: {@value}
+   * The slash sign also commonly used for divisions (where actually {@link #DIVISION_SIGN} shall be used). Looks like
+   * this: {@value}
    */
   char SOLIDUS = 0x0002F;
 
@@ -140,14 +141,14 @@ public interface UnicodeUtil {
   char COLON = 0x0003A;
 
   /**
-   * The semi-colon sign used as separator for various cases (e.g. for connected sentences instead of
-   * {@link #FULL_STOP}). Looks like this: {@value}
+   * The semi-colon sign used as separator for various cases (e.g. for connected sentences instead of {@link #FULL_STOP}
+   * ). Looks like this: {@value}
    */
   char SEMICOLON = 0x0003B;
 
   /**
-   * The less-than sign for the according mathematical relation. Also used as opening brace in markup
-   * languages. Looks like this: {@value}
+   * The less-than sign for the according mathematical relation. Also used as opening brace in markup languages. Looks
+   * like this: {@value}
    */
   char LESS_THAN_SIGN = 0x0003C;
 
@@ -158,8 +159,8 @@ public interface UnicodeUtil {
 
   // char EQUALS_SIGN_WITH_REVERSE_SLASH=0x0003D-020E5;
   /**
-   * The greater-than sign for the according mathematical relation. Also used as closing brace in markup
-   * languages. Looks like this: {@value}
+   * The greater-than sign for the according mathematical relation. Also used as closing brace in markup languages.
+   * Looks like this: {@value}
    */
   char GREATER_THAN_SIGN = 0x0003E;
 
@@ -169,8 +170,8 @@ public interface UnicodeUtil {
   char QUESTION_MARK = 0x0003F;
 
   /**
-   * The at sign used as separator in email addresses. Looks like a small letter <code>a</code> in a circle: *
-   * * {@value}
+   * The at sign used as separator in email addresses. Looks like a small letter <code>a</code> in a circle: * *
+   * {@value}
    */
   char COMMERCIAL_AT = 0x00040;
 
@@ -368,8 +369,7 @@ public interface UnicodeUtil {
   char RIGHT_CURLY_BRACKET = 0x0007D;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
-   * {@link DiacriticalMark#TILDE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for {@link DiacriticalMark#TILDE}.
    */
   char TILDE = 0x007E;
 
@@ -386,14 +386,14 @@ public interface UnicodeUtil {
   char NO_BREAK_SPACE = 0x000A0;
 
   /**
-   * An inverted (upside-down) {@link #EXCLAMATION_MARK exclamation mark} (!) used at the beginning of an
-   * exclamation in Spanish. Looks like this: {@value}
+   * An inverted (upside-down) {@link #EXCLAMATION_MARK exclamation mark} (!) used at the beginning of an exclamation in
+   * Spanish. Looks like this: {@value}
    */
   char INVERTED_EXCLAMATION_MARK = 0x000A1;
 
   /**
-   * The sign for the currency unit cent. A cent is the 1/100 part of a {@link #DOLLAR_SIGN dollar}. Looks
-   * like this: {@value}
+   * The sign for the currency unit cent. A cent is the 1/100 part of a {@link #DOLLAR_SIGN dollar}. Looks like this:
+   * {@value}
    */
   char CENT_SIGN = 0x00A2;
 
@@ -433,8 +433,8 @@ public interface UnicodeUtil {
   char NOT_SIGN = 0x000AC;
 
   /**
-   * The soft hyphen that indicates a word-wrap position (for hyphenation). Similar to ASCII hyphen-minus
-   * ('-'). It has no visual glyph as representation.
+   * The soft hyphen that indicates a word-wrap position (for hyphenation). Similar to ASCII hyphen-minus ('-'). It has
+   * no visual glyph as representation.
    */
   char SOFT_HYPHEN = 0x000AD;
 
@@ -442,14 +442,13 @@ public interface UnicodeUtil {
   char REGISTERED_SIGN = 0x000AE;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
-   * {@link DiacriticalMark#MACRON}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for {@link DiacriticalMark#MACRON}.
    */
   char MACRON = 0x000AF;
 
   /**
-   * The symbol indicating degrees for angles or temperature. It looks like a small superscript circle as you
-   * can see here: {@value}
+   * The symbol indicating degrees for angles or temperature. It looks like a small superscript circle as you can see
+   * here: {@value}
    */
   char DEGREE_SIGN = 0x000B0;
 
@@ -463,8 +462,7 @@ public interface UnicodeUtil {
   char SUPERSCRIPT_THREE = 0x000B3;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
-   * {@link DiacriticalMark#ACUTE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for {@link DiacriticalMark#ACUTE}.
    */
   char ACUTE_ACCENT = 0x000B4;
 
@@ -478,8 +476,7 @@ public interface UnicodeUtil {
   char MIDDLE_DOT = 0x000B7;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
-   * {@link DiacriticalMark#CEDILLA}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for {@link DiacriticalMark#CEDILLA}.
    */
   char CEDILLA = 0x000B8;
 
@@ -502,8 +499,8 @@ public interface UnicodeUtil {
   char VULGAR_FRACTION_THREE_QUARTERS = 0x000BE;
 
   /**
-   * An inverted (upside-down) {@link #QUESTION_MARK question mark} (?) used at the beginning of a question in
-   * Spanish. Looks like this: {@value}
+   * An inverted (upside-down) {@link #QUESTION_MARK question mark} (?) used at the beginning of a question in Spanish.
+   * Looks like this: {@value}
    */
   char INVERTED_QUESTION_MARK = 0x000BF;
 
@@ -1346,8 +1343,8 @@ public interface UnicodeUtil {
 
   /**
    * The small <em>schwa</em> letter is used in the International Phonetic Alphabet to represent the
-   * "mid central unrounded vowel". It is used for instance in the second syllable of the English word
-   * "harmony". This letter uses the same glyph as {@link #LATIN_SMALL_LETTER_TURNED_E}.
+   * "mid central unrounded vowel". It is used for instance in the second syllable of the English word "harmony". This
+   * letter uses the same glyph as {@link #LATIN_SMALL_LETTER_TURNED_E}.
    */
   char LATIN_SMALL_LETTER_SCHWA = 0x0259;
 
@@ -1606,26 +1603,22 @@ public interface UnicodeUtil {
   char MODIFIER_LETTER_MINUS_SIGN = 0x02D7;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
-   * {@link DiacriticalMark#BREVE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for {@link DiacriticalMark#BREVE}.
    */
   char BREVE = 0x02D8;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
-   * {@link DiacriticalMark#DOT_ABOVE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for {@link DiacriticalMark#DOT_ABOVE}.
    */
   char DOT_ABOVE = 0x02D9;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
-   * {@link DiacriticalMark#RING_ABOVE}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for {@link DiacriticalMark#RING_ABOVE}.
    */
   char RING_ABOVE = 0x02DA;
 
   /**
-   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for
-   * {@link DiacriticalMark#OGONEK}.
+   * {@link DiacriticalMark#getSeparateCharacter() Diacritical mark character} for {@link DiacriticalMark#OGONEK}.
    */
   char OGONEK = 0x02DB;
 
@@ -2117,8 +2110,8 @@ public interface UnicodeUtil {
   char CYRILLIC_CAPITAL_LETTER_IO = 0x00401;
 
   /**
-   * The capital Cyrillic letter <em>Dje</em>. Looks like an 'b' that is open at the bottom and has a bar on
-   * top: {@value}
+   * The capital Cyrillic letter <em>Dje</em>. Looks like an 'b' that is open at the bottom and has a bar on top:
+   * {@value}
    */
   char CYRILLIC_CAPITAL_LETTER_DJE = 0x00402;
 
@@ -2164,8 +2157,8 @@ public interface UnicodeUtil {
   char CYRILLIC_CAPITAL_LETTER_VE = 0x00412;
 
   /**
-   * The capital Cyrillic letter <em>Ghe</em>. Looks like a vertical and a horizontal bar crossing in the top
-   * left edge: {@value}
+   * The capital Cyrillic letter <em>Ghe</em>. Looks like a vertical and a horizontal bar crossing in the top left edge:
+   * {@value}
    */
   char CYRILLIC_CAPITAL_LETTER_GHE = 0x00413;
 
@@ -4541,31 +4534,30 @@ public interface UnicodeUtil {
   char HORN = '\0';
 
   /**
-   * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the
-   * given <code>character</code>.
+   * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the given
+   * <code>character</code>.
    *
    * @see java.text.Normalizer
    * @see #transliterate(String)
    *
    * @param character is the character to convert.
-   * @return a sequence of characters with the transliteration of the given character or <code>null</code> if
-   *         no such transliteration is available.
+   * @return a sequence of characters with the transliteration of the given character or <code>null</code> if no such
+   *         transliteration is available.
    */
   String transliterate(char character);
 
   /**
-   * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the
-   * given <code>text</code>. This method will support common transliteration standards such as ISO 843
-   * (greek), ISO 9 (cyrillic), etc. However, for some writing systems there are multiple ways of
-   * transliteration and some things done by this method may not officially be called transliteration. So
-   * please consider it as a pragmatic way to convert text to the Latin alphabet. We are looking for help in
-   * supporting additional writing systems but not for scientific discussion about linguistic.
+   * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the given
+   * <code>text</code>. This method will support common transliteration standards such as ISO 843 (greek), ISO 9
+   * (cyrillic), etc. However, for some writing systems there are multiple ways of transliteration and some things done
+   * by this method may not officially be called transliteration. So please consider it as a pragmatic way to convert
+   * text to the Latin alphabet. We are looking for help in supporting additional writing systems but not for scientific
+   * discussion about linguistic.
    *
    * @see java.text.Normalizer
    *
    * @param text is the {@link String} to convert.
-   * @return the transliteration of the given text. All characters that have no transliteration will remain
-   *         unmodified.
+   * @return the transliteration of the given text. All characters that have no transliteration will remain unmodified.
    */
   String transliterate(String text);
 
@@ -4575,15 +4567,14 @@ public interface UnicodeUtil {
    * @see java.text.Normalizer
    *
    * @param character is the character to convert.
-   * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the
-   *         character is already ASCII or there is no ASCII-representation available.
+   * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the character is
+   *         already ASCII or there is no ASCII-representation available.
    */
   String normalize2Ascii(char character);
 
   /**
-   * This method converts the given <code>text</code> to the best possible ASCII-representation. All
-   * ASCII-characters will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized
-   * to ASCII}.
+   * This method converts the given <code>text</code> to the best possible ASCII-representation. All ASCII-characters
+   * will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized to ASCII}.
    *
    * @see #normalize2Ascii(CharSequence, char)
    * @see java.text.Normalizer
@@ -4594,16 +4585,16 @@ public interface UnicodeUtil {
   String normalize2Ascii(CharSequence text);
 
   /**
-   * This method converts the given <code>text</code> to the best possible ASCII-representation. All
-   * ASCII-characters will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized
-   * to ASCII} and if not possible replaced by <code>nonNormalizableCharaterReplacement</code>.
+   * This method converts the given <code>text</code> to the best possible ASCII-representation. All ASCII-characters
+   * will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized to ASCII} and if not
+   * possible replaced by <code>nonNormalizableCharaterReplacement</code>.
    *
    * @see java.text.Normalizer
    *
    * @param text is the text to convert.
-   * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have
-   *        no {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove
-   *        these characters. A typical character to use is <code>?</code>.
+   * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have no
+   *        {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove these
+   *        characters. A typical character to use is <code>?</code>.
    * @return the converted text.
    */
   String normalize2Ascii(CharSequence text, char nonNormalizableCharaterReplacement);
@@ -4624,8 +4615,8 @@ public interface UnicodeUtil {
   boolean isDash(char character);
 
   /**
-   * This method determines if the given character is a hyphen. A hyphen is a character used to separate
-   * syllables in words or to join words.
+   * This method determines if the given character is a hyphen. A hyphen is a character used to separate syllables in
+   * words or to join words.
    *
    * @see #HYPHEN_MINUS
    * @see #HYPHEN

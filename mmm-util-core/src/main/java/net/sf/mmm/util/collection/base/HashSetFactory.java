@@ -8,9 +8,9 @@ import java.util.Set;
 import net.sf.mmm.util.collection.api.SetFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.SetFactory} interface that creates
- * instances of {@link HashSet}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.SetFactory} interface that creates instances
+ * of {@link HashSet}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -33,7 +33,7 @@ public class HashSetFactory extends AbstractSetFactory {
    */
   public <E> Set<E> create() {
 
-    return new HashSet<E>();
+    return new HashSet<>();
   }
 
   /**
@@ -41,6 +41,6 @@ public class HashSetFactory extends AbstractSetFactory {
    */
   public <E> Set<E> create(int capacity) {
 
-    return new HashSet<E>(capacity);
+    return new HashSet<>(capacity);
   }
 }

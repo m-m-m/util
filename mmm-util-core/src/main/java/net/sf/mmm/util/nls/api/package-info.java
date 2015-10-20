@@ -84,7 +84,7 @@
  * public class LoginAlreadyInUseException extends {@link net.sf.mmm.util.exception.api.NlsRuntimeException} {
  *   public LoginAlreadyInUseException(String usedLogin) {
  *
- *     super({@link net.sf.mmm.util.exception.api.NlsRuntimeException#createBundle(Class)
+ *     super({@link net.sf.mmm.util.exception.api.NlsRuntimeException
  *     createBundle}(NlsBundleFooBarRoot.class).errorLoginInUse(usedLogin));
  *   }
  * }

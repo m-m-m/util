@@ -8,9 +8,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import net.sf.mmm.util.collection.api.BlockingQueueFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.BlockingQueueFactory} interface that
- * creates instances of {@link java.util.concurrent.LinkedBlockingQueue}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.BlockingQueueFactory} interface that creates
+ * instances of {@link java.util.concurrent.LinkedBlockingQueue}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -33,7 +33,7 @@ public class LinkedBlockingQueueFactory extends AbstractBlockingQueueFactory {
    */
   public <E> BlockingQueue<E> create() {
 
-    return new LinkedBlockingQueue<E>();
+    return new LinkedBlockingQueue<>();
   }
 
   /**
@@ -42,6 +42,6 @@ public class LinkedBlockingQueueFactory extends AbstractBlockingQueueFactory {
   public <E> BlockingQueue<E> create(int capacity) {
 
     // ATTENTION: capacity is the fixed capacity here, so does NOT make sense
-    return new LinkedBlockingQueue<E>();
+    return new LinkedBlockingQueue<>();
   }
 }

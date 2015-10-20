@@ -17,9 +17,9 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
 
 /**
  * This is the implementation of the {@link GenericType} interface.
- * 
+ *
  * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -51,7 +51,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param type is the {@link #getType() type}.
    */
   public GenericTypeImpl(Type type) {
@@ -61,7 +61,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param valueType is the {@link #getType() value-type}.
    * @param definingType is the {@link #getDefiningType() defining-type}.
    */
@@ -130,13 +130,12 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   @Override
   protected GenericType<?> create(Type genericType) {
 
-    return new GenericTypeImpl<Object>(genericType);
+    return new GenericTypeImpl<>(genericType);
   }
 
   /**
-   * This method creates a new instance of this class. It may be overridden to create the appropriate
-   * sub-type.
-   * 
+   * This method creates a new instance of this class. It may be overridden to create the appropriate sub-type.
+   *
    * @param genericType is the {@link #getType() value-type}.
    * @param genericDefiningType is the {@link #getDefiningType() defining-type}.
    * @return a new {@link GenericType} instance.
@@ -148,10 +147,10 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   }
 
   /**
-   * This method gets the most specific {@link Class} available by the type-safe analyzation of the given
-   * generic <code>type</code>. Unlike {@link #getClassBounds(Type)} this method resolves {@link TypeVariable}
-   * s with the proper type they have been bound with. <br>
-   * 
+   * This method gets the most specific {@link Class} available by the type-safe analyzation of the given generic
+   * <code>type</code>. Unlike {@link #getClassBounds(Type)} this method resolves {@link TypeVariable} s with the proper
+   * type they have been bound with. <br>
+   *
    * Examples: <br>
    * <table border="1">
    * <tr>
@@ -164,11 +163,10 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    * <td>E</td>
    * <td>{@link java.util.List}&lt;Foo&gt;</td>
    * <td>Foo</td>
-   * <td>E is a {@link TypeVariable} representing the generic return-type of the method
-   * {@link java.util.List#get(int)}</td>
+   * <td>E is a {@link TypeVariable} representing the generic return-type of the method {@link java.util.List#get(int)}</td>
    * </tr>
    * </table>
-   * 
+   *
    * @param currentType is the type to convert.
    * @return the closest class representing the given <code>type</code>.
    */
@@ -228,7 +226,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   /**
    * This method creates the {@link Class} reflecting an {@link Class#isArray() array} of the given
    * <code>{@link Class#getComponentType() componentType}</code>.
-   * 
+   *
    * @param componentClass is the {@link Class#getComponentType() component type}.
    * @return the according {@link Class#isArray() array}-class.
    */
@@ -256,7 +254,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
   /**
    * This method gets the defining type.
-   * 
+   *
    * @return the defining type or <code>null</code> if NOT available.
    */
   @Override
@@ -323,9 +321,9 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
     /**
      * The constructor.
-     * 
-     * @param bound is the {@link Class} for {@link #getAssignmentClass() assignment} and
-     *        {@link #getRetrievalClass() retrieval}.
+     *
+     * @param bound is the {@link Class} for {@link #getAssignmentClass() assignment} and {@link #getRetrievalClass()
+     *        retrieval}.
      */
     public ClassBounds(Class<?> bound) {
 
@@ -334,7 +332,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
     /**
      * The constructor.
-     * 
+     *
      * @param assignmentClass is the {@link #getAssignmentClass() assignment class}.
      * @param retrievalClass is the {@link #getRetrievalClass() retrieval class} .
      */
@@ -347,7 +345,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
     /**
      * @see GenericType#getAssignmentClass()
-     * 
+     *
      * @return the {@link Class} for assignment.
      */
     public Class<?> getAssignmentClass() {
@@ -357,7 +355,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
     /**
      * @see GenericType#getRetrievalClass()
-     * 
+     *
      * @return the {@link Class} for retrieval.
      */
     public Class<?> getRetrievalClass() {

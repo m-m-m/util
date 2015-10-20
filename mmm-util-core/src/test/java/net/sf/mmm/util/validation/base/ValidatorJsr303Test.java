@@ -15,7 +15,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link ValidatorJsr303}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -28,7 +28,7 @@ public class ValidatorJsr303Test extends Assert {
   public void testValidatorJsr303() {
 
     Validator validator = getValidator();
-    ValidatorJsr303<String> mandatoryStringValidator = new ValidatorJsr303<String>(validator, TestBean.class,
+    ValidatorJsr303<String> mandatoryStringValidator = new ValidatorJsr303<>(validator, TestBean.class,
         "mandatoryString");
     ValidationFailure failure = mandatoryStringValidator.validate(null);
     assertNotNull(failure);

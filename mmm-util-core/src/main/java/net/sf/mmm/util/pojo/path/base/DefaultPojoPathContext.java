@@ -7,7 +7,7 @@ import java.util.Properties;
 
 /**
  * This is the default implementation of the {@link net.sf.mmm.util.pojo.path.api.PojoPathContext} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -19,7 +19,7 @@ public class DefaultPojoPathContext extends PojoPathContextBean {
   public DefaultPojoPathContext() {
 
     super();
-    setCache(new HashMap<Object, Object>());
+    setCache(new HashMap<>());
     setProperties(new Properties());
   }
 }

@@ -56,7 +56,7 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
 
     super(pojoType, pojoDescriptorBuilder);
     // we do NOT want MapFactory here: no need for cache or to be thread-safe
-    this.propertyMap = new HashMap<String, PojoPropertyDescriptorImpl>();
+    this.propertyMap = new HashMap<>();
     this.properties = Collections.unmodifiableCollection(this.propertyMap.values());
   }
 
@@ -104,15 +104,15 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
         PojoPropertyAccessorIndexedNonArg indexedGetAccessor = descriptor
             .getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED);
         if (indexedGetAccessor != null) {
-          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByIndex(indexedGetAccessor, pojoProperty.getIndex()
-              .intValue());
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByIndex(indexedGetAccessor, pojoProperty
+              .getIndex().intValue());
         }
       } else if (mode == PojoPropertyAccessorOneArgMode.SET) {
         PojoPropertyAccessorIndexedOneArg indexedSetAccessor = descriptor
             .getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED);
         if (indexedSetAccessor != null) {
-          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByIndex(indexedSetAccessor, pojoProperty.getIndex()
-              .intValue());
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByIndex(indexedSetAccessor, pojoProperty
+              .getIndex().intValue());
         }
       }
     } else if (pojoProperty.getKey() != null) {

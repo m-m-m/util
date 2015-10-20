@@ -13,7 +13,7 @@ import javax.inject.Named;
  * @since 6.0.0
  */
 @Named
-@SuppressWarnings("deprecation")
+@SuppressWarnings({ "deprecation", "javadoc" })
 public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
 
   /**
@@ -21,8 +21,8 @@ public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
    */
   public DatatypeDescriptorDate() {
 
-    super(Date.class, new YearSegment(), new MonthSegment(), new DaySegment(), new HourSegment(), new MinuteSegment(),
-        new SecondSegment());
+    super(Date.class, new YearSegment(), new MonthSegment(), new DaySegment(), new HourSegment(),
+        new MinuteSegment(), new SecondSegment());
   }
 
   /**

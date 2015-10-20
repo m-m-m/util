@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  * This class represents {@link java.util.Properties} as JAXB bean.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -28,12 +28,12 @@ public class PropertyList {
   public PropertyList() {
 
     super();
-    this.propertyList = new ArrayList<Property>();
+    this.propertyList = new ArrayList<>();
   }
 
   /**
    * This method gets the {@link List} of {@link Property properties}.
-   * 
+   *
    * @return the the {@link List} of {@link Property properties}.
    */
   public List<Property> getPropertyList() {

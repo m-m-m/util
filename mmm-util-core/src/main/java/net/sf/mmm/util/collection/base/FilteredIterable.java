@@ -7,9 +7,8 @@ import java.util.Iterator;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This is an implementation of an {@link Iterator} that adapts another {@link Iterator} but only
- * {@link #iterator() iterates} the elements that are {@link Filter#accept(Object) accepted} by a given
- * {@link Filter}. <br>
+ * This is an implementation of an {@link Iterator} that adapts another {@link Iterator} but only {@link #iterator()
+ * iterates} the elements that are {@link Filter#accept(Object) accepted} by a given {@link Filter}. <br>
  * <b>ATTENTION:</b><br>
  * This implementation is using {@link FilteredIterator}. Please read according javadoc first.
  *
@@ -45,7 +44,7 @@ public class FilteredIterable<E> implements Iterable<E> {
   @Override
   public Iterator<E> iterator() {
 
-    return new FilteredIterator<E>(this.delegate.iterator(), this.filter);
+    return new FilteredIterator<>(this.delegate.iterator(), this.filter);
   }
 
 }

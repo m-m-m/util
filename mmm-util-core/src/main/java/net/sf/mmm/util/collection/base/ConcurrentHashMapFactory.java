@@ -8,8 +8,8 @@ import java.util.concurrent.ConcurrentMap;
 import net.sf.mmm.util.collection.api.ConcurrentMapFactory;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.collection.api.ConcurrentMapFactory} that creates
- * instances of {@link ConcurrentHashMap}.
+ * This is an implementation of {@link net.sf.mmm.util.collection.api.ConcurrentMapFactory} that creates instances of
+ * {@link ConcurrentHashMap}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -33,7 +33,7 @@ public class ConcurrentHashMapFactory extends AbstractConcurrentMapFactory {
    */
   public <K, V> ConcurrentMap<K, V> create() {
 
-    return new ConcurrentHashMap<K, V>();
+    return new ConcurrentHashMap<>();
   }
 
   /**
@@ -41,6 +41,6 @@ public class ConcurrentHashMapFactory extends AbstractConcurrentMapFactory {
    */
   public <K, V> ConcurrentMap<K, V> create(int capacity) {
 
-    return new ConcurrentHashMap<K, V>(capacity);
+    return new ConcurrentHashMap<>(capacity);
   }
 }

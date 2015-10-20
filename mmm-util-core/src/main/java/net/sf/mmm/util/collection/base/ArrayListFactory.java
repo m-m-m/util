@@ -8,9 +8,9 @@ import java.util.List;
 import net.sf.mmm.util.collection.api.ListFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.ListFactory} interface that creates
- * instances of {@link ArrayList}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.ListFactory} interface that creates instances
+ * of {@link ArrayList}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -33,7 +33,7 @@ public class ArrayListFactory extends AbstractListFactory {
    */
   public <E> List<E> create() {
 
-    return new ArrayList<E>();
+    return new ArrayList<>();
   }
 
   /**
@@ -41,6 +41,6 @@ public class ArrayListFactory extends AbstractListFactory {
    */
   public <E> List<E> create(int capacity) {
 
-    return new ArrayList<E>(capacity);
+    return new ArrayList<>(capacity);
   }
 }

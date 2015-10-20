@@ -87,12 +87,12 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
 
   /**
    * This method gets the singleton instance of this {@link VersionUtilImpl}. <br>
-   * This design is the best compromise between easy access (via this indirection you have direct, static
-   * access to all offered functionality) and IoC-style design which allows extension and customization. <br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
-   * the {@link net.sf.mmm.util.component.api.IocContainer container-framework} of your choice. To wire up the
-   * dependent components everything is properly annotated using annotations (JSR-250 and JSR-330). If your
-   * container does NOT support this, you should consider using a better one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static access to all
+   * offered functionality) and IoC-style design which allows extension and customization. <br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via the
+   * {@link net.sf.mmm.util.component.api.IocContainer container-framework} of your choice. To wire up the dependent
+   * components everything is properly annotated using annotations (JSR-250 and JSR-330). If your container does NOT
+   * support this, you should consider using a better one.
    *
    * @return the singleton instance.
    */
@@ -216,7 +216,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
       this.phaseMap = createDefaultPhaseMap();
     }
     if (this.phasePrefixSet == null) {
-      this.phasePrefixSet = new HashSet<String>();
+      this.phasePrefixSet = new HashSet<>();
       for (String key : this.phaseMap.keySet()) {
         int index = key.indexOf('-');
         if (index > 0) {
@@ -227,8 +227,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   }
 
   /**
-   * This method puts the given <code>phase</code> in the given <code>map</code> using normalized variants of
-   * the given <code>key</code>.
+   * This method puts the given <code>phase</code> in the given <code>map</code> using normalized variants of the given
+   * <code>key</code>.
    *
    * @param map is the {@link #getPhaseMap()}.
    * @param key is the key.
@@ -258,7 +258,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
    */
   protected Map<String, DevelopmentPhase> createDefaultPhaseMap() {
 
-    Map<String, DevelopmentPhase> map = new HashMap<String, DevelopmentPhase>();
+    Map<String, DevelopmentPhase> map = new HashMap<>();
     for (DevelopmentPhase phase : DevelopmentPhase.values()) {
       putPhase(map, phase.toString(), phase);
       putPhase(map, phase.getValue(), phase);
@@ -285,7 +285,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   public VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat)
       throws NlsParseException {
 
-    List<Integer> versionSegmentList = new ArrayList<Integer>();
+    List<Integer> versionSegmentList = new ArrayList<>();
     CharSequenceScanner scanner = new CharSequenceScanner(versionString);
     String label = null;
     Date timestamp = null;
@@ -376,14 +376,15 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
           }
           if (currentPhase == null) {
             if (label != null) {
-              throw new NlsParseException(new DuplicateObjectException(phaseOrLabel, "label", label), versionString,
-                  VersionIdentifier.class);
+              throw new NlsParseException(new DuplicateObjectException(phaseOrLabel, "label", label),
+                  versionString, VersionIdentifier.class);
             }
             label = phaseOrLabel;
           } else {
             if (phase != null) {
-              throw new NlsParseException(new DuplicateObjectException(currentPhase, DevelopmentPhase.class, phase),
-                  versionString, VersionIdentifier.class);
+              throw new NlsParseException(
+                  new DuplicateObjectException(currentPhase, DevelopmentPhase.class, phase), versionString,
+                  VersionIdentifier.class);
             }
             phase = currentPhase;
             phaseAlias = phaseOrLabel;
@@ -450,8 +451,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
         scanner.require('}');
       }
       status.versionSegmentsCount++;
-      return new VersionIdentifierFormatterVersionSegments(this.stringUtil, infixBuffer.toString(), segmentSeparator,
-          minimumSegmentCount, maximumSegmentCount, segmentPadding);
+      return new VersionIdentifierFormatterVersionSegments(this.stringUtil, infixBuffer.toString(),
+          segmentSeparator, minimumSegmentCount, maximumSegmentCount, segmentPadding);
     } else if ((c == 'P') || (c == 'A') || (c == 'L')) {
       int maximumLength = 0;
       if (scanner.expect('{')) {
@@ -501,7 +502,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
       infixBuffer.append(snapshotIndicator);
       return new VersionIdentifierFormatterSnapshot(infixBuffer.toString());
     } else if (c == '$') {
-      return new StaticFormatter<VersionIdentifier>(infixBuffer.toString());
+      return new StaticFormatter<>(infixBuffer.toString());
     } else if ((c == '(') && (!status.inBrace)) {
       status.inBrace = true;
       return null;
@@ -521,7 +522,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   public VersionIdentifierFormatter createFormatter(String formatPattern, boolean strict) {
 
     CharSequenceScanner scanner = new CharSequenceScanner(formatPattern);
-    List<Formatter<VersionIdentifier>> subFormatterList = new ArrayList<Formatter<VersionIdentifier>>();
+    List<Formatter<VersionIdentifier>> subFormatterList = new ArrayList<>();
     FormatPatternStatus status = new FormatPatternStatus();
     StringBuilder infixBuffer = new StringBuilder();
     while (scanner.hasNext()) {
@@ -549,8 +550,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   }
 
   /**
-   * This inner class holds the status used to determine if a
-   * {@link VersionUtilImpl#createFormatter(String, boolean) formatPattern} is {@link #isStrict() strict}.
+   * This inner class holds the status used to determine if a {@link VersionUtilImpl#createFormatter(String, boolean)
+   * formatPattern} is {@link #isStrict() strict}.
    */
   protected static class FormatPatternStatus {
 

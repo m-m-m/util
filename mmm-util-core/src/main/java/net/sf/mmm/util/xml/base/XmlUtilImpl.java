@@ -24,9 +24,9 @@ import net.sf.mmm.util.xml.api.XmlUtil;
 
 /**
  * This utility class contains methods that help to deal with XML.
- * 
+ *
  * @see net.sf.mmm.util.xml.base.DomUtilImpl
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -42,7 +42,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
 
   // CHECKSTYLE:OFF (documentation out in the web)
   static {
-    ENTITY_MAP = new HashMap<String, Character>(256);
+    ENTITY_MAP = new HashMap<>(256);
     // XML
     ENTITY_MAP.put("quot", Character.valueOf((char) 34));
     ENTITY_MAP.put("amp", Character.valueOf((char) 38));
@@ -315,7 +315,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
    * This method gets the singleton instance of this {@link XmlUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static XmlUtil getInstance() {

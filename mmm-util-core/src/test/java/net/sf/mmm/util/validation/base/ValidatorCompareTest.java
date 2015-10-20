@@ -16,7 +16,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link ValidatorCompare}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ValidatorCompareTest extends AbstractValidatorTest {
@@ -27,7 +27,7 @@ public class ValidatorCompareTest extends AbstractValidatorTest {
   @Test
   public void testIntegers() {
 
-    ValidatorCompare<Integer> validator = new ValidatorCompare<Integer>(CompareOperator.LESS_THAN, Integer.valueOf(42));
+    ValidatorCompare<Integer> validator = new ValidatorCompare<>(CompareOperator.LESS_THAN, Integer.valueOf(42));
     verifyPositiveValidation(validator, null);
     verifyPositiveValidation(validator, Integer.valueOf(0));
     verifyPositiveValidation(validator, Integer.valueOf(41));
@@ -44,7 +44,7 @@ public class ValidatorCompareTest extends AbstractValidatorTest {
 
     Iso8601Util isoUtil = Iso8601UtilImpl.getInstance();
     Date date = isoUtil.parseDate("2000-01-31T23:59:59");
-    ValidatorCompare<Date> validator = new ValidatorCompare<Date>(CompareOperator.GREATER_OR_EQUAL, date);
+    ValidatorCompare<Date> validator = new ValidatorCompare<>(CompareOperator.GREATER_OR_EQUAL, date);
     verifyPositiveValidation(validator, null);
     verifyPositiveValidation(validator, date);
     verifyPositiveValidation(validator, new Date());

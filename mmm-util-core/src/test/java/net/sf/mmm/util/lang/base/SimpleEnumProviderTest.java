@@ -19,7 +19,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link SimpleEnumProvider}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -83,7 +83,7 @@ public class SimpleEnumProviderTest extends Assert {
 
     List<IncompleteCountry> enumValues = provider.getEnumValues(testDefinition);
     assertNotNull(enumValues);
-    List<IncompleteCountry> expected = new ArrayList<IncompleteCountry>();
+    List<IncompleteCountry> expected = new ArrayList<>();
     for (IncompleteCountry country : IncompleteCountry.values()) {
       if (!country.isDeprecated()) {
         expected.add(country);
@@ -143,7 +143,7 @@ public class SimpleEnumProviderTest extends Assert {
 
     /**
      * The constructor.
-     * 
+     *
      * @param continent - see {@link #getCategory()}.
      * @param isoCode - see {@link #getValue()}.
      */

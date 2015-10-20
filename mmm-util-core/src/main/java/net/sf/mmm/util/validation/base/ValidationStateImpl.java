@@ -11,9 +11,9 @@ import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
  * This class represents the state of a validation.
- * 
+ *
  * @see ValidationStateFailureCollector
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -31,7 +31,7 @@ public class ValidationStateImpl implements ValidationState {
   public ValidationStateImpl() {
 
     super();
-    this.failureList = new LinkedList<ValidationFailure>();
+    this.failureList = new LinkedList<>();
     this.failureView = Collections.unmodifiableList(this.failureList);
   }
 
@@ -57,7 +57,7 @@ public class ValidationStateImpl implements ValidationState {
    * This method gets an {@link Collections#unmodifiableList(List) unmodifiable} {@link List} with the
    * {@link ValidationFailure}s {@link #onFailure(ValidationFailure) collected} during
    * {@link net.sf.mmm.util.validation.api.AbstractValidatableObject#validate(ValidationState) validation}.
-   * 
+   *
    * @return the {@link List} of {@link ValidationFailure}s.
    */
   public List<ValidationFailure> getFailureList() {

@@ -10,9 +10,9 @@ import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
  * This is an implementation of {@link ValueValidator} that is composed out of a set of individual
- * {@link #getValidator(int) validators} given at {@link #ComposedValidator(AbstractValidator...)
- * construction}. It will always invoke <em>all</em> {@link #getValidator(int) contained validators} when a
- * {@link #validate(Object, Object) validation} is performed.
+ * {@link #getValidator(int) validators} given at {@link #ComposedValidator(AbstractValidator...) construction}. It will
+ * always invoke <em>all</em> {@link #getValidator(int) contained validators} when a {@link #validate(Object, Object)
+ * validation} is performed.
  *
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
  *
@@ -74,7 +74,7 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
       ValidationFailure failure = validator.validate(value, valueSource);
       if (failure != null) {
         if (failureList == null) {
-          failureList = new ArrayList<ValidationFailure>();
+          failureList = new ArrayList<>();
         }
         failureList.add(failure);
       }

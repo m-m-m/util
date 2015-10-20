@@ -126,7 +126,7 @@ public class TransferObjectUtilTest extends Assert {
     fillAddress(addressEntity);
     PersonEntity personEntity = new PersonEntity();
     personEntity.setAddress(addressEntity);
-    List<ContactInfoEntity> contactInfos = new ArrayList<ContactInfoEntity>();
+    List<ContactInfoEntity> contactInfos = new ArrayList<>();
     ContactInfoEntity contactInfoEntity = new ContactInfoEntity();
     fillContactInfo(contactInfoEntity);
     personEntity.setContactInfos(contactInfos);

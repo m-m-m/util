@@ -77,7 +77,7 @@ public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent impleme
   @Override
   public <T> GenericType<T> createGenericType(Class<T> type) {
 
-    return new SimpleGenericTypeLimited<T>(type);
+    return new SimpleGenericTypeLimited<>(type);
   }
 
   /**

@@ -56,7 +56,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   private static final String REQUIRED_FORMAT_COMPARATOR = "(==|!=|>=|>|<=|<)";
 
   /** The format of a condition. */
-  private static final String REQUIRED_FORMAT_CONDITION = "(else|?" + REQUIRED_FORMAT_COMPARATOR + "[0-9a-zA-Z+-.:])";
+  private static final String REQUIRED_FORMAT_CONDITION = "(else|?" + REQUIRED_FORMAT_COMPARATOR
+      + "[0-9a-zA-Z+-.:])";
 
   /** The character used to indicate the start of a Choice condition. */
   public static final char CONDITION_START = '(';
@@ -100,7 +101,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
 
     super();
     this.nlsDependencies = nlsDependencies;
-    this.choices = new ArrayList<Choice>();
+    this.choices = new ArrayList<>();
     boolean hasElse = false;
     char c = scanner.forceNext();
     while ((c == CONDITION_START) && (!hasElse)) {
@@ -129,7 +130,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   private Choice parseChoice(CharSequenceScanner scanner) {
 
     Filter<Object> condition = parseCondition(scanner);
-    List<Segment> segments = new ArrayList<NlsFormatterChoice.Segment>();
+    List<Segment> segments = new ArrayList<>();
     while (scanner.hasNext()) {
       int index = scanner.getCurrentIndex();
       char c = scanner.peek();
@@ -138,8 +139,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
         scanner.next();
         literal = scanner.readUntil(c, false, c);
         if (literal == null) {
-          throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), REQUIRED_FORMAT_SEGMENTS,
-              NlsArgument.class);
+          throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
+              REQUIRED_FORMAT_SEGMENTS, NlsArgument.class);
         }
         c = scanner.peek();
       }
@@ -217,8 +218,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     } else {
       String argument = scanner.readWhile(FILTER_COMPARATOR_ARGUMENT);
       if (argument.length() == 0) {
-        throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), REQUIRED_FORMAT_CONDITION,
-            getType());
+        throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
+            REQUIRED_FORMAT_CONDITION, getType());
       }
       if ("null".equals(argument)) {
         comparatorArgument = null;
@@ -247,7 +248,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
         for (Segment segment : choice.segments) {
           buffer.append(segment.literal);
           if (segment.argument != null) {
-            this.nlsDependencies.getArgumentFormatter().format(segment.argument, locale, arguments, resolver, buffer);
+            this.nlsDependencies.getArgumentFormatter().format(segment.argument, locale, arguments, resolver,
+                buffer);
           }
         }
         return;

@@ -22,7 +22,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
  * This is the default implementation of the {@link CollectionFactoryManager} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -46,8 +46,8 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   public CollectionFactoryManagerImpl() {
 
     super();
-    this.mapFactoryMap = new HashMap<Class<? extends Map>, MapFactory>();
-    this.collectionFactoryMap = new HashMap<Class<? extends Collection>, CollectionFactory>();
+    this.mapFactoryMap = new HashMap<>();
+    this.collectionFactoryMap = new HashMap<>();
   }
 
   /**
@@ -69,14 +69,15 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
     try {
       registerCollectionFactory(net.sf.mmm.util.collection.base.LinkedListDequeFactory.INSTANCE);
       /*
-       * Class dequeFactoryClass = Class.forName("net.sf.mmm.util.collection.api.DequeFactory");
-       * CollectionFactory dequeFactory = (CollectionFactory) dequeFactoryClass.getField(
-       * "INSTANCE_LINKED_LIST").get(null); registerCollectionFactory(dequeFactory);
+       * Class dequeFactoryClass = Class.forName("net.sf.mmm.util.collection.api.DequeFactory"); CollectionFactory
+       * dequeFactory = (CollectionFactory) dequeFactoryClass.getField( "INSTANCE_LINKED_LIST").get(null);
+       * registerCollectionFactory(dequeFactory);
        */
     } catch (Throwable e) {
       // Deque not available before java6, ignore...
       getLogger().info(
-          "Deque is NOT available before java 6 - support disabled: " + e.getClass().getName() + ": " + e.getMessage());
+          "Deque is NOT available before java 6 - support disabled: " + e.getClass().getName() + ": "
+              + e.getMessage());
     }
   }
 
@@ -84,7 +85,7 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
    * This method gets the singleton instance of this {@link CollectionFactoryManager} implementation. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static CollectionFactoryManager getInstance() {
@@ -120,14 +121,13 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   }
 
   /**
-   * This method registers the given <code>factory</code> using its {@link MapFactory#getMapInterface()
-   * map-interface}.
-   * 
+   * This method registers the given <code>factory</code> using its {@link MapFactory#getMapInterface() map-interface}.
+   *
    * @see #registerMapFactory(MapFactory, Class)
-   * 
+   *
    * @param factory is the {@link MapFactory} to register.
-   * @return the {@link MapFactory} that has been replaced with <code>factory</code> or <code>null</code> if
-   *         none was replaced.
+   * @return the {@link MapFactory} that has been replaced with <code>factory</code> or <code>null</code> if none was
+   *         replaced.
    */
   protected MapFactory registerMapFactory(MapFactory factory) {
 
@@ -136,29 +136,30 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
 
   /**
    * This method registers the given <code>factory</code> for the given <code>mapInterface</code>.
-   * 
+   *
    * @param <MAP> is the generic type of the <code>mapInterface</code>.
    * @param factory is the {@link MapFactory} to register.
    * @param mapInterface is the interface of the associated {@link Map}. It has to be
-   *        {@link Class#isAssignableFrom(Class) assignable from} the {@link MapFactory#getMapInterface()
-   *        map-interface} of the given <code>factory</code>.
-   * @return the {@link MapFactory} that was registered for the given <code>mapInterface</code> before and has
-   *         now been replaced with <code>factory</code> or <code>null</code> if none was replaced.
+   *        {@link Class#isAssignableFrom(Class) assignable from} the {@link MapFactory#getMapInterface() map-interface}
+   *        of the given <code>factory</code>.
+   * @return the {@link MapFactory} that was registered for the given <code>mapInterface</code> before and has now been
+   *         replaced with <code>factory</code> or <code>null</code> if none was replaced.
    */
-  protected <MAP extends Map> MapFactory registerMapFactory(MapFactory<? extends MAP> factory, Class<MAP> mapInterface) {
+  protected <MAP extends Map> MapFactory registerMapFactory(MapFactory<? extends MAP> factory,
+      Class<MAP> mapInterface) {
 
     return this.mapFactoryMap.put(mapInterface, factory);
   }
 
   /**
-   * This method registers the given <code>factory</code> using its
-   * {@link CollectionFactory#getCollectionInterface() collection-interface}.
-   * 
+   * This method registers the given <code>factory</code> using its {@link CollectionFactory#getCollectionInterface()
+   * collection-interface}.
+   *
    * @see #registerCollectionFactory(CollectionFactory, Class)
-   * 
+   *
    * @param factory is the {@link CollectionFactory} to register.
-   * @return the {@link CollectionFactory} that has been replaced with <code>factory</code> or
-   *         <code>null</code> if none was replaced.
+   * @return the {@link CollectionFactory} that has been replaced with <code>factory</code> or <code>null</code> if none
+   *         was replaced.
    */
   protected CollectionFactory registerCollectionFactory(CollectionFactory factory) {
 
@@ -167,16 +168,14 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
 
   /**
    * This method registers the given <code>factory</code> for the given <code>collectionInterface</code>.
-   * 
+   *
    * @param <COLLECTION> is the generic type of the <code>collectionInterface</code>.
    * @param factory is the {@link CollectionFactory} to register.
    * @param collectionInterface is the interface of the associated {@link Collection}. It has to be
-   *        {@link Class#isAssignableFrom(Class) assignable from} the
-   *        {@link CollectionFactory#getCollectionInterface() collection-interface} of the given
-   *        <code>factory</code>.
-   * @return the {@link CollectionFactory} that was registered for the given <code>collectionInterface</code>
-   *         before and has now been replaced with <code>factory</code> or <code>null</code> if none was
-   *         replaced.
+   *        {@link Class#isAssignableFrom(Class) assignable from} the {@link CollectionFactory#getCollectionInterface()
+   *        collection-interface} of the given <code>factory</code>.
+   * @return the {@link CollectionFactory} that was registered for the given <code>collectionInterface</code> before and
+   *         has now been replaced with <code>factory</code> or <code>null</code> if none was replaced.
    */
   protected <COLLECTION extends Collection> CollectionFactory registerCollectionFactory(
       CollectionFactory<? extends COLLECTION> factory, Class<COLLECTION> collectionInterface) {

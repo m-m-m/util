@@ -74,7 +74,6 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("javadoc")
   // Java8 support
   public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
 
@@ -84,7 +83,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings({ "javadoc", "unchecked" })
+  @SuppressWarnings({ "unchecked" })
   // Java8 support
   public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
 
@@ -94,7 +93,6 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("javadoc")
   // Java8 support
   public Annotation[] getAnnotations() {
 
@@ -104,7 +102,6 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("javadoc")
   // Java8 support
   public <T extends Annotation> T getDeclaredAnnotation(Class<T> annotationClass) {
 
@@ -114,7 +111,7 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings({ "javadoc", "unchecked" })
+  @SuppressWarnings({ "unchecked" })
   // Java8 support
   public <T extends Annotation> T[] getDeclaredAnnotationsByType(Class<T> annotationClass) {
 

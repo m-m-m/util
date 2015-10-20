@@ -12,9 +12,9 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.text.api.Singularizer;
 
 /**
- * This is the implementation of the {@link Singularizer} interface for English language. It aims for
- * simplicity rather than linguistic perfection.
- * 
+ * This is the implementation of the {@link Singularizer} interface for English language. It aims for simplicity rather
+ * than linguistic perfection.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -29,7 +29,7 @@ public class EnglishSingularizer extends AbstractTextTransformer implements Sing
   private static final List<TransformerRule> RULES;
 
   static {
-    List<TransformerRule> rules = new ArrayList<TransformerRule>();
+    List<TransformerRule> rules = new ArrayList<>();
 
     // SECTION: rules for complete words (excuses)
 

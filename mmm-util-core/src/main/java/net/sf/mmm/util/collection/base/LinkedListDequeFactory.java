@@ -8,9 +8,9 @@ import java.util.LinkedList;
 import net.sf.mmm.util.collection.api.DequeFactory;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.collection.api.DequeFactory} interface that creates
- * instances of {@link LinkedList}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.collection.api.DequeFactory} interface that creates instances
+ * of {@link LinkedList}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -33,7 +33,7 @@ public class LinkedListDequeFactory extends AbstractDequeFactory {
    */
   public <E> Deque<E> create() {
 
-    return new LinkedList<E>();
+    return new LinkedList<>();
   }
 
   /**
@@ -42,6 +42,6 @@ public class LinkedListDequeFactory extends AbstractDequeFactory {
   public <E> Deque<E> create(int capacity) {
 
     // capacity does NOT make sense here...
-    return new LinkedList<E>();
+    return new LinkedList<>();
   }
 }

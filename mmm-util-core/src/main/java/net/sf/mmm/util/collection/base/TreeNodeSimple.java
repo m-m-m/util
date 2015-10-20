@@ -8,8 +8,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 import net.sf.mmm.util.pojo.api.Pojo;
 
 /**
- * This is a simple but generic implementation of {@link net.sf.mmm.util.collection.api.TreeNode}. It can
- * carry any kind of {@link #getValue() value} that can be {@link #setValue(Object) set} externally.
+ * This is a simple but generic implementation of {@link net.sf.mmm.util.collection.api.TreeNode}. It can carry any kind
+ * of {@link #getValue() value} that can be {@link #setValue(Object) set} externally.
  *
  * @param <VALUE> is the generic type of the {@link #getValue() value} contained in each node.
  *
@@ -111,14 +111,14 @@ public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE
   }
 
   /**
-   * Creates a new {@link TreeNodeSimple} with the given <code>childValue</code> and
-   * {@link #addChild(TreeNodeSimple) adds it as child} of this node.
+   * Creates a new {@link TreeNodeSimple} with the given <code>childValue</code> and {@link #addChild(TreeNodeSimple)
+   * adds it as child} of this node.
    *
    * @param childValue is the {@link #getValue() value} of the new child node.
    */
   public void addChildValue(VALUE childValue) {
 
-    addChild(new TreeNodeSimple<VALUE>(this, childValue));
+    addChild(new TreeNodeSimple<>(this, childValue));
   }
 
   /**
@@ -126,12 +126,12 @@ public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE
    * {@link #addChild(TreeNodeSimple, int) inserts it as child} of this node at the given <code>index</code>.
    *
    * @param childValue is the {@link #getValue() value} of the new child node.
-   * @param index is the {@link java.util.List#get(int) index} where to
-   *        {@link java.util.List#add(int, Object) insert} the new child.
+   * @param index is the {@link java.util.List#get(int) index} where to {@link java.util.List#add(int, Object) insert}
+   *        the new child.
    */
   public void addChildValue(VALUE childValue, int index) {
 
-    addChild(new TreeNodeSimple<VALUE>(this, childValue), index);
+    addChild(new TreeNodeSimple<>(this, childValue), index);
   }
 
   /**

@@ -12,8 +12,7 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor}
- * interface.
+ * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor} interface.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
@@ -34,7 +33,7 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
   public PojoPropertyDescriptorImpl(String propertyName) {
 
     super(propertyName);
-    this.accessorMap = new HashMap<PojoPropertyAccessorMode<?>, PojoPropertyAccessor>();
+    this.accessorMap = new HashMap<>();
     this.accessors = Collections.unmodifiableCollection(this.accessorMap.values());
   }
 

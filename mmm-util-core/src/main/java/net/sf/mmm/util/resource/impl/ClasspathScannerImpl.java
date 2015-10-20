@@ -70,7 +70,8 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
 
     if (this.cache == null) {
       ClasspathFolder rootFolder = new ClasspathFolder(null, "");
-      Set<String> resourceNames = this.reflectionUtil.findResourceNames("", true, ConstantFilter.getInstance(true));
+      Set<String> resourceNames = this.reflectionUtil
+          .findResourceNames("", true, ConstantFilter.getInstance(true));
       List<ClasspathFile> fileList = new ArrayList<>(resourceNames.size());
       for (String resource : resourceNames) {
         ResourcePathNode<Void> path = ResourcePathNode.create(resource);
@@ -170,8 +171,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
   }
 
   /**
-   * Abstract base implementation of {@link BrowsableResource} for {@link ClasspathFile} or
-   * {@link ClasspathFolder}.
+   * Abstract base implementation of {@link BrowsableResource} for {@link ClasspathFile} or {@link ClasspathFolder}.
    */
   protected abstract static class AbstractBrowsableClasspathResource extends AbstractBrowsableResource implements
       ResourcePath {
@@ -340,7 +340,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
     public ClasspathFolder(ClasspathFolder parent, String name) {
 
       super(parent, name);
-      this.children = new ArrayList<AbstractBrowsableClasspathResource>();
+      this.children = new ArrayList<>();
     }
 
     /**
@@ -355,8 +355,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
 
     /**
      * @param name is the name of the requested {@link #getChildResources() child} folder.
-     * @return the existing {@link #getChildResources() child} folder or a new one created and added
-     *         otherwise.
+     * @return the existing {@link #getChildResources() child} folder or a new one created and added otherwise.
      */
     public AbstractBrowsableClasspathResource getChildResource(String name) {
 
@@ -370,8 +369,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
 
     /**
      * @param name is the name of the requested {@link #getChildResources() child} folder.
-     * @return the existing {@link #getChildResources() child} folder or a new one created and added
-     *         otherwise.
+     * @return the existing {@link #getChildResources() child} folder or a new one created and added otherwise.
      */
     public ClasspathFolder getOrCreateChildFolder(String name) {
 

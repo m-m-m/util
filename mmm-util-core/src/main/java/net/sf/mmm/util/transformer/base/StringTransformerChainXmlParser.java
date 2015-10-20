@@ -22,20 +22,21 @@ import org.w3c.dom.NodeList;
  * This class allows to parse a list of {@link StringTransformerRule}s from XML and build an according
  * {@link StringTransformerChain}. The rules are proceeded in the order of their appearance in the list. <br>
  * Here is an example of a configuration (rule list) parsed by this class:
- * 
+ *
  * <pre>
  * &lt;transformer-chain id="default-transformer"&gt;
  * &lt;regex pattern="\.txt" replacement=""/&gt;
  * &lt;regex pattern="/.foo/" replacement="" replace-all="true" stop-on-match="true"/&gt;
  * &lt;/transformer-chain&gt;
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  * @deprecated - use JAXB directly:
- * 
- * <pre>
+ *
+ *             <pre>
  * JAXBContext context = JAXBContext.newInstance(StringTransformerList.class);
+ * 
  * StringTransformerList chains = (StringTransformerList) context.createUnmarshaller().unmarshal(source);
  * </pre>
  */
@@ -96,7 +97,7 @@ public class StringTransformerChainXmlParser {
 
   /**
    * The constructor.
-   * 
+   *
    * @param domUtil is the {@link DomUtil} to use.
    */
   public StringTransformerChainXmlParser(DomUtil domUtil) {
@@ -106,7 +107,7 @@ public class StringTransformerChainXmlParser {
 
   /**
    * The constructor.
-   * 
+   *
    * @param domUtil is the {@link DomUtil} to use.
    * @param patternCompiler is the {@link PatternCompiler} to use.
    */
@@ -119,9 +120,9 @@ public class StringTransformerChainXmlParser {
 
   /**
    * This method parses a {@link StringTransformerRule rule} given by <code>xmlElement</code>.
-   * 
+   *
    * @see #XML_TAG_RULE
-   * 
+   *
    * @param xmlElement is the XML element with the transformer-rule.
    * @return the parsed rule.
    */
@@ -141,17 +142,16 @@ public class StringTransformerChainXmlParser {
 
   /**
    * This method parses a {@link StringTransformerChain chain} given by <code>xmlElement</code>.
-   * 
+   *
    * @see #XML_TAG_CHAIN
-   * 
-   * @param xmlElement is the XML element containing the transformer-rules (see {@link #XML_TAG_RULE}) as
-   *        children.
+   *
+   * @param xmlElement is the XML element containing the transformer-rules (see {@link #XML_TAG_RULE}) as children.
    * @param parent is the parent chain to extend or <code>null</code> if no rules should be inherited.
    * @return the parsed filter-chain.
    */
   public StringTransformerChain parseChain(Element xmlElement, StringTransformerChain parent) {
 
-    List<StringTransformerRule> rules = new ArrayList<StringTransformerRule>();
+    List<StringTransformerRule> rules = new ArrayList<>();
     NodeList childList = xmlElement.getChildNodes();
     for (int childIndex = 0; childIndex < childList.getLength(); childIndex++) {
       Node node = childList.item(childIndex);
@@ -170,15 +170,15 @@ public class StringTransformerChainXmlParser {
 
   /**
    * This method parses a map of {@link StringTransformerChain chain}s given by <code>xmlElement</code>.
-   * 
-   * @param xmlElement is the XML element containing the transformer-chains (see {@link #XML_TAG_CHAIN}) as
-   *        children and puts them into a map with the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child
-   *        elements or attributes are simply ignored.
+   *
+   * @param xmlElement is the XML element containing the transformer-chains (see {@link #XML_TAG_CHAIN}) as children and
+   *        puts them into a map with the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child elements or attributes are
+   *        simply ignored.
    * @return the map of all parsed chains.
    */
   public Map<String, StringTransformerChain> parseChains(Element xmlElement) {
 
-    Map<String, StringTransformerChain> chainMap = new HashMap<String, StringTransformerChain>();
+    Map<String, StringTransformerChain> chainMap = new HashMap<>();
     NodeList childNodes = xmlElement.getChildNodes();
     for (int i = 0; i < childNodes.getLength(); i++) {
       Node child = childNodes.item(i);

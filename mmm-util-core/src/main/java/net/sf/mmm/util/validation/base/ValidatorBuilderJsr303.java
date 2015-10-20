@@ -10,7 +10,7 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**
  * This is a builder to create multiple instances of {@link ValidatorJsr303}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -32,7 +32,7 @@ public class ValidatorBuilderJsr303 extends AbstractValidatorBuilder {
 
   /**
    * The constructor.
-   * 
+   *
    * @param validator is the {@link Validator} instance to use.
    */
   public ValidatorBuilderJsr303(Validator validator) {
@@ -72,7 +72,7 @@ public class ValidatorBuilderJsr303 extends AbstractValidatorBuilder {
   @Override
   public <V> AbstractValidator<V> newValidator(Class<V> pojoType) {
 
-    return new ValidatorJsr303<V>(this.validator, pojoType, this.groups);
+    return new ValidatorJsr303<>(this.validator, pojoType, this.groups);
   }
 
   /**
@@ -91,6 +91,6 @@ public class ValidatorBuilderJsr303 extends AbstractValidatorBuilder {
   @Override
   public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property, Class<T> propertyType) {
 
-    return new ValidatorJsr303<T>(this.validator, pojoType, property.getPojoPath(), propertyType, this.groups);
+    return new ValidatorJsr303<>(this.validator, pojoType, property.getPojoPath(), propertyType, this.groups);
   }
 }

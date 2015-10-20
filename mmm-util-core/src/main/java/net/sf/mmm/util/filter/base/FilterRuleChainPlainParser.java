@@ -11,50 +11,50 @@ import java.util.List;
 import net.sf.mmm.util.filter.api.FilterRule;
 
 /**
- * This class allows to parse a list of including and excluding regex {@link PatternFilterRule}s and build an
- * according {@link FilterRuleChain}. The rules (include/exclude patterns) are proceeded in the order of their
- * appearance in the list. <br>
+ * This class allows to parse a list of including and excluding regex {@link PatternFilterRule}s and build an according
+ * {@link FilterRuleChain}. The rules (include/exclude patterns) are proceeded in the order of their appearance in the
+ * list. <br>
  * Here is an example of a configuration (rule list) parsed by this class:
- * 
+ *
  * <pre>
- * # This file contains a filter-chain. Such chain is build of a list of 
- * # filter-rules. Each rule starts with a character that determines if an 
+ * # This file contains a filter-chain. Such chain is build of a list of
+ * # filter-rules. Each rule starts with a character that determines if an
  * # inclusion (+) or an exclusion (-) is defined. This character must be followed
- * # by a regex pattern. To make it easier for you a simple pre-processing is 
- * # performed on the pattern string before it is compiled as 
+ * # by a regex pattern. To make it easier for you a simple pre-processing is
+ * # performed on the pattern string before it is compiled as
  * # java.util.regex.Pattern:
- * # If the pattern does NOT start with "^" or ".*" the prefix ".*" is 
+ * # If the pattern does NOT start with "^" or ".*" the prefix ".*" is
  * # automatically added. If the pattern does NOT end with "$" or ".*" the suffix
  * # ".*" is automatically appended.
  * # The pre-processing should safe you some typing and make it a little easier for
  * # users of the GNU command "grep".
  * #
  * # The filter-rules in the chain are processed in the order of their occurrence.
- * # The first rule that matches makes the decision according to the first 
+ * # The first rule that matches makes the decision according to the first
  * # character (+/-).
- * # A list starting with the '#' character indicates a comment and is therefore 
+ * # A list starting with the '#' character indicates a comment and is therefore
  * # ignored. The same applies for empty lines.
- *  
+ * 
  * # 1. rule says that all strings that start with "/doc/" will be accepted:
  * +^/doc/
- *  
- * # 2. rule says that all strings that end ($) with ".pdf" ignoring the case (?i)  
+ * 
+ * # 2. rule says that all strings that end ($) with ".pdf" ignoring the case (?i)
  * # of the characters will be rejected:
  * -(?i)\.pdf$
  * 
  * # 3. rule says that all string that start with "/data/" will be accepted:
  * +^/data/
  * 
- * # 4. rule says that all string that end ($) with ".xml" or ".xsl" ignoring the 
+ * # 4. rule says that all string that end ($) with ".xml" or ".xsl" ignoring the
  * # case (?i) of the characters will be rejected:
  * -(?i)\.(xml|xsl)$
  * 
  * # 5. rule says that everything else is accepted
  * +.*
  * </pre>
- * 
+ *
  * @see FilterRuleChainXmlParser
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -82,7 +82,7 @@ public class FilterRuleChainPlainParser {
 
   /**
    * This method gets the character used to identify an accept pattern. The default value is <code>'+'</code>.
-   * 
+   *
    * @return the accept character
    */
   public char getAcceptChar() {
@@ -100,7 +100,7 @@ public class FilterRuleChainPlainParser {
 
   /**
    * This method gets the character used to identify a deny pattern. The default value is <code>'-'</code>.
-   * 
+   *
    * @return the deny character
    */
   public char getDenyChar() {
@@ -117,9 +117,9 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method gets the character used to identify a comment. If a line starts with this character it is
-   * ignored. The default value is <code>'#'</code>.
-   * 
+   * This method gets the character used to identify a comment. If a line starts with this character it is ignored. The
+   * default value is <code>'#'</code>.
+   *
    * @return the comment character
    */
   public char getCommentChar() {
@@ -138,9 +138,9 @@ public class FilterRuleChainPlainParser {
   /**
    * This method parses the content of the given <code>reader</code> as {@link FilterRuleChain} as described
    * {@link FilterRuleChainPlainParser above}.
-   * 
-   * @param reader is where to read from. It will be closed at the end of this method (on success and in an
-   *        exceptional state).
+   *
+   * @param reader is where to read from. It will be closed at the end of this method (on success and in an exceptional
+   *        state).
    * @param defaultResult is the {@link FilterRuleChain#getDefaultResult() default-result} of the chain.
    * @return the parsed configuration as filter-chain.
    * @throws IOException if an I/O error occurred while parsing.
@@ -153,9 +153,9 @@ public class FilterRuleChainPlainParser {
   /**
    * This method parses the content of the given <code>reader</code> as {@link FilterRuleChain} as described
    * {@link FilterRuleChainPlainParser above}.
-   * 
-   * @param reader is where to read from. It will be closed at the end of this method (on success and in an
-   *        exceptional state).
+   *
+   * @param reader is where to read from. It will be closed at the end of this method (on success and in an exceptional
+   *        state).
    * @param defaultResult is the {@link FilterRuleChain#getDefaultResult() default-result} of the chain.
    * @return the parsed configuration as filter-chain.
    * @throws IOException if an I/O error occurred while parsing.
@@ -164,7 +164,7 @@ public class FilterRuleChainPlainParser {
 
     try {
       int lineCount = 0;
-      List<FilterRule<String>> rules = new ArrayList<FilterRule<String>>();
+      List<FilterRule<String>> rules = new ArrayList<>();
       String line = reader.readLine();
       while (line != null) {
         line = line.trim();
@@ -179,13 +179,14 @@ public class FilterRuleChainPlainParser {
           } else if (first == this.commentChar) {
             // ignore line
           } else {
-            throw new IllegalArgumentException("Illegal start character '" + first + "' in line " + lineCount + "!");
+            throw new IllegalArgumentException("Illegal start character '" + first + "' in line " + lineCount
+                + "!");
           }
         }
         line = reader.readLine();
       }
       FilterRule<String>[] ruleArray = rules.toArray(new FilterRule[rules.size()]);
-      return new FilterRuleChain<String>(defaultResult, ruleArray);
+      return new FilterRuleChain<>(defaultResult, ruleArray);
     } finally {
       reader.close();
     }

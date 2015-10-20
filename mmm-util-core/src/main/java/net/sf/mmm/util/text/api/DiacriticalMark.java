@@ -13,24 +13,22 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 /**
  * This enum contains the most important diacritical marks. <br>
  * If you are NOT familiar with unicode and languages that use non-ASCII characters, you should know that each
- * {@link DiacriticalMark} represents a specific shape like e.g. '~', '^', etc. that is added at a specific
- * position (on top, at bottom, etc.) to a letter. For instance if you add {@link #DIAERESIS two dots} to the
- * letter 'a' you get '&auml;'. <br>
- * To make things really complicated, unicode added {@link #getCombiningCharacter() combining characters}
- * representing the mark itself in addition to the precomposed characters (combination of a specific character
- * with the mark[s]). <br>
+ * {@link DiacriticalMark} represents a specific shape like e.g. '~', '^', etc. that is added at a specific position (on
+ * top, at bottom, etc.) to a letter. For instance if you add {@link #DIAERESIS two dots} to the letter 'a' you get
+ * '&auml;'. <br>
+ * To make things really complicated, unicode added {@link #getCombiningCharacter() combining characters} representing
+ * the mark itself in addition to the precomposed characters (combination of a specific character with the mark[s]). <br>
  * <b>ATTENTION:</b><br>
- * The unicode standard is extremely complex and sometimes it appears inconsistent in the first place. E.g.
- * there are {@link #getCombiningCharacter() combining characters} that have no equivalent
- * {@link #getSeparateCharacter() separate character}. Further the naming of {@link #getComposedCharacters()
- * composed characters} in the unicode standard are not always precise enough to determine the according
- * {@link #getCombiningCharacter() combining character}. E.g.
- * {@link UnicodeUtil#LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE} and
- * {@link UnicodeUtil#LATIN_SMALL_LETTER_O_WITH_STROKE} could be considered to be both a combination of the
- * diacritic "stroke". However, observing the glyphs and studying unicode indicated that this is wrong. <br>
- * Therefore this class and also {@link UnicodeUtil} should be considered as work in progress and we heavily
- * require your contribution to improve and support more diacritics. It may also be possible that characters
- * or diacritics get renamed in future versions if our understanding of unicode grows.
+ * The unicode standard is extremely complex and sometimes it appears inconsistent in the first place. E.g. there are
+ * {@link #getCombiningCharacter() combining characters} that have no equivalent {@link #getSeparateCharacter() separate
+ * character}. Further the naming of {@link #getComposedCharacters() composed characters} in the unicode standard are
+ * not always precise enough to determine the according {@link #getCombiningCharacter() combining character}. E.g.
+ * {@link UnicodeUtil#LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE} and {@link UnicodeUtil#LATIN_SMALL_LETTER_O_WITH_STROKE}
+ * could be considered to be both a combination of the diacritic "stroke". However, observing the glyphs and studying
+ * unicode indicated that this is wrong. <br>
+ * Therefore this class and also {@link UnicodeUtil} should be considered as work in progress and we heavily require
+ * your contribution to improve and support more diacritics. It may also be possible that characters or diacritics get
+ * renamed in future versions if our understanding of unicode grows.
  *
  * @see java.text.Normalizer
  *
@@ -40,8 +38,8 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 public enum DiacriticalMark implements SimpleDatatype<Character> {
 
   /**
-   * A mark that can be placed on top of some Latin, Cyrillic or Greek characters. It looks like a stroke
-   * directing to the upper right corner. If your environment supports unicode, you can see it here: &#180;
+   * A mark that can be placed on top of some Latin, Cyrillic or Greek characters. It looks like a stroke directing to
+   * the upper right corner. If your environment supports unicode, you can see it here: &#180;
    */
   ACUTE(UnicodeUtil.ACUTE_ACCENT, UnicodeUtil.COMBINING_ACUTE_ACCENT, "acute accent") {
 
@@ -98,14 +96,15 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
           UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_DIAERESIS_AND_ACUTE);
       addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS,
           UnicodeUtil.LATIN_CAPITAL_LETTER_U_WITH_DIAERESIS_AND_ACUTE);
-      addComposition(UnicodeUtil.GREEK_UPSILON_WITH_HOOK_SYMBOL, UnicodeUtil.GREEK_UPSILON_WITH_ACUTE_AND_HOOK_SYMBOL);
+      addComposition(UnicodeUtil.GREEK_UPSILON_WITH_HOOK_SYMBOL,
+          UnicodeUtil.GREEK_UPSILON_WITH_ACUTE_AND_HOOK_SYMBOL);
     }
 
   },
 
   /**
-   * A mark that can be placed on top of some Latin, ... characters. It looks like an arc as the lower third
-   * of a circle. the If your environment supports unicode, you can see it here: &#728;
+   * A mark that can be placed on top of some Latin, ... characters. It looks like an arc as the lower third of a
+   * circle. the If your environment supports unicode, you can see it here: &#728;
    */
   BREVE(UnicodeUtil.BREVE, UnicodeUtil.COMBINING_BREVE, "breve") {
 
@@ -138,8 +137,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A mark that can be placed on top of some Latin, ... characters. It looks like a little 'v'. If your
-   * environment supports unicode, you can see it here: &#711;
+   * A mark that can be placed on top of some Latin, ... characters. It looks like a little 'v'. If your environment
+   * supports unicode, you can see it here: &#711;
    */
   CARON(UnicodeUtil.CARON, UnicodeUtil.COMBINING_CARON, "caron") {
 
@@ -195,8 +194,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A mark that can be placed at the bottom of some Latin characters. If your environment supports unicode,
-   * you can see it here: &#184;
+   * A mark that can be placed at the bottom of some Latin characters. If your environment supports unicode, you can see
+   * it here: &#184;
    */
   CEDILLA(UnicodeUtil.CEDILLA, UnicodeUtil.COMBINING_CEDILLA, "cedilla") {
 
@@ -230,8 +229,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A mark that can be placed on top of some Latin characters (e.g. in French). It looks like a small '^'. If
-   * your environment supports unicode, you can see it here: &#770;
+   * A mark that can be placed on top of some Latin characters (e.g. in French). It looks like a small '^'. If your
+   * environment supports unicode, you can see it here: &#770;
    */
   CIRCUMFLEX(UnicodeUtil.CIRCUMFLEX_ACCENT, UnicodeUtil.COMBINING_CIRCUMFLEX_ACCENT, "circumflex accent") {
 
@@ -273,8 +272,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * Two small dots placed on top of Latin vowels, called trema, diaeresis, or umlaut. If your environment
-   * supports unicode, you can see it here: &#168;
+   * Two small dots placed on top of Latin vowels, called trema, diaeresis, or umlaut. If your environment supports
+   * unicode, you can see it here: &#168;
    */
   DIAERESIS(UnicodeUtil.DIAERESIS, UnicodeUtil.COMBINING_DIAERESIS, "diaeresis") {
 
@@ -329,8 +328,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A small dot placed to the top of some Latin letters used in some European languages and Vietnamese. If
-   * your environment supports unicode, you can see it here: &#729;
+   * A small dot placed to the top of some Latin letters used in some European languages and Vietnamese. If your
+   * environment supports unicode, you can see it here: &#729;
    */
   DOT_ABOVE(UnicodeUtil.DOT_ABOVE, UnicodeUtil.COMBINING_DOT_ABOVE, "dot above") {
 
@@ -369,8 +368,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A small dot placed to the bottom of some Latin letters used in some European languages and Vietnamese. If
-   * your environment supports unicode, you can see it here: &#803;&#32;
+   * A small dot placed to the bottom of some Latin letters used in some European languages and Vietnamese. If your
+   * environment supports unicode, you can see it here: &#803;&#32;
    */
   DOT_BELOW(UnicodeUtil.DOT_BELOW, UnicodeUtil.COMBINING_DOT_BELOW, "dot below") {
 
@@ -435,8 +434,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A mark that can be placed on top of some Latin, Cyrillic or Greek characters. It looks like a stroke
-   * directing to the lower right. If your environment supports unicode, you can see it here: &#96;
+   * A mark that can be placed on top of some Latin, Cyrillic or Greek characters. It looks like a stroke directing to
+   * the lower right. If your environment supports unicode, you can see it here: &#96;
    */
   GRAVE(UnicodeUtil.GRAVE_ACCENT, UnicodeUtil.COMBINING_GRAVE_ACCENT, "grave accent") {
 
@@ -467,8 +466,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A little question mark without the dot, that is placed on top of Vietnamese letters. If your environment
-   * supports unicode, you can see it here: &#x3D2; &#x253;
+   * A little question mark without the dot, that is placed on top of Vietnamese letters. If your environment supports
+   * unicode, you can see it here: &#x3D2; &#x253;
    */
   HOOK_ABOVE(UnicodeUtil.HOOK_ABOVE, UnicodeUtil.COMBINING_HOOK_ABOVE, "hook above") {
 
@@ -512,8 +511,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A mark similar to a comma (,) that is placed to the top right of Vietnamese vowels. If your environment
-   * supports unicode, you can see it here: &#795;&#32;
+   * A mark similar to a comma (,) that is placed to the top right of Vietnamese vowels. If your environment supports
+   * unicode, you can see it here: &#795;&#32;
    */
   HORN_ABOVE(UnicodeUtil.HORN, UnicodeUtil.COMBINING_HORN, "horn") {
 
@@ -532,8 +531,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A long horizontal stroke placed on top of letters. If your environment supports unicode, you can see it
-   * here: &#175;
+   * A long horizontal stroke placed on top of letters. If your environment supports unicode, you can see it here:
+   * &#175;
    */
   MACRON(UnicodeUtil.MACRON, UnicodeUtil.COMBINING_MACRON, "macron") {
 
@@ -592,8 +591,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A little hook placed to the bottom right of Latin vowels. If your environment supports unicode, you can
-   * see it here: &#731;
+   * A little hook placed to the bottom right of Latin vowels. If your environment supports unicode, you can see it
+   * here: &#731;
    */
   OGONEK(UnicodeUtil.OGONEK, UnicodeUtil.COMBINING_OGONEK, "ogonek") {
 
@@ -622,8 +621,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   },
 
   /**
-   * A small ring placed to the top of some Latin letters. If your environment supports unicode, you can see
-   * it here: &#730;
+   * A small ring placed to the top of some Latin letters. If your environment supports unicode, you can see it here:
+   * &#730;
    */
   RING_ABOVE(UnicodeUtil.RING_ABOVE, UnicodeUtil.COMBINING_RING_ABOVE, "ring above") {
 
@@ -679,13 +678,13 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
     @Override
     protected void initialize() {
 
-      addComposition(UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J, UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE);
+      addComposition(UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J,
+          UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE);
     }
   },
 
   /**
-   * A small tilde (~) placed on top of some letters. If your environment supports unicode, you can see it
-   * here: &#126;
+   * A small tilde (~) placed on top of some letters. If your environment supports unicode, you can see it here: &#126;
    */
   TILDE(UnicodeUtil.TILDE, UnicodeUtil.COMBINING_TILDE, "tilde") {
 
@@ -746,8 +745,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
     this.separateCharacter = separateCharacter;
     this.combiningCharacter = combiningChar;
     this.title = title;
-    this.composeMap = new HashMap<Character, Character>();
-    this.decomposeMap = new HashMap<Character, Character>();
+    this.composeMap = new HashMap<>();
+    this.decomposeMap = new HashMap<>();
     initialize();
     this.composedCharacters = Collections.unmodifiableCollection(this.composeMap.values());
   }
@@ -778,12 +777,12 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   }
 
   /**
-   * This method gets the separate character for this {@link DiacriticalMark}. It represents the mark itself
-   * as a standalone character. <br>
+   * This method gets the separate character for this {@link DiacriticalMark}. It represents the mark itself as a
+   * standalone character. <br>
    * <b>ATTENTION:</b><br>
    * For an unknown reason unicode does NOT define a proper separate character for each diacritic or for each
-   * {@link #getCombiningCharacter() combining character}. Therefore this method may return a character that
-   * looks similar to the diacritic mark, but is NOT the correct representation for it.
+   * {@link #getCombiningCharacter() combining character}. Therefore this method may return a character that looks
+   * similar to the diacritic mark, but is NOT the correct representation for it.
    *
    * @see #getCombiningCharacter()
    *
@@ -796,8 +795,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
 
   /**
    * This method gets the combining character for this {@link DiacriticalMark}. Unlike the
-   * {@link #getSeparateCharacter() separate character} this character gets combined with the following
-   * character to a single glyph.
+   * {@link #getSeparateCharacter() separate character} this character gets combined with the following character to a
+   * single glyph.
    *
    * @return the combining character.
    */
@@ -819,8 +818,8 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    * This method composes the given <code>character</code> with this {@link DiacriticalMark}.
    *
    * @param character is the character to compose (e.g. 'a').
-   * @return the composed character (e.g. '&auml;' or '&aacute;') or <code>null</code> if no such composition
-   *         exists in unicode.
+   * @return the composed character (e.g. '&auml;' or '&aacute;') or <code>null</code> if no such composition exists in
+   *         unicode.
    */
   public Character compose(char character) {
 
@@ -828,13 +827,13 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   }
 
   /**
-   * This method de-composes the given <code>character</code> with this {@link DiacriticalMark}. In other
-   * words this {@link DiacriticalMark} is removed from the given <code>character</code> if it is
-   * {@link #compose(char) composed}. It is the inverse operation of {@link #compose(char)}.
+   * This method de-composes the given <code>character</code> with this {@link DiacriticalMark}. In other words this
+   * {@link DiacriticalMark} is removed from the given <code>character</code> if it is {@link #compose(char) composed}.
+   * It is the inverse operation of {@link #compose(char)}.
    *
    * @param character is the character to de-compose (e.g. '&auml;' or '&aacute;').
-   * @return the de-composed character (e.g. 'a') or <code>null</code> if the given <code>character</code>
-   *         does is not {@link #compose(char) composed} with this {@link DiacriticalMark}.
+   * @return the de-composed character (e.g. 'a') or <code>null</code> if the given <code>character</code> does is not
+   *         {@link #compose(char) composed} with this {@link DiacriticalMark}.
    */
   public Character decompose(char character) {
 
@@ -842,8 +841,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   }
 
   /**
-   * This method gets a {@link Collection} with all precomposed {@link Character characters} containing this
-   * mark.
+   * This method gets a {@link Collection} with all precomposed {@link Character characters} containing this mark.
    *
    * @return the composed characters.
    */

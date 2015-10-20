@@ -18,12 +18,11 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.NlsResourceBundleProvider;
 
 /**
- * This is the default implementation of the {@link NlsTemplateResolver}. It locates all
- * {@link ResourceBundle}s declared in the {@link NlsTemplateResolver#CLASSPATH_NLS_BUNDLE
- * bundle-declaration-files}.
- * 
+ * This is the default implementation of the {@link NlsTemplateResolver}. It locates all {@link ResourceBundle}s
+ * declared in the {@link NlsTemplateResolver#CLASSPATH_NLS_BUNDLE bundle-declaration-files}.
+ *
  * @see AbstractResourceBundleNlsTemplateResolver
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -79,7 +78,7 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
 
   /**
    * This method gets the {@link NlsResourceBundleLocator}.
-   * 
+   *
    * @return the {@link NlsResourceBundleLocator}.
    */
   public NlsResourceBundleLocator getResourceBundleFinder() {
@@ -112,7 +111,7 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
   @Override
   public Collection<NlsResourceBundle> getBundles() {
 
-    List<NlsResourceBundle> result = new ArrayList<NlsResourceBundle>(this.nlsBundles.length);
+    List<NlsResourceBundle> result = new ArrayList<>(this.nlsBundles.length);
     for (NlsResourceBundle bundle : this.nlsBundles) {
       result.add(bundle);
     }

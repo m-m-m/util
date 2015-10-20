@@ -250,8 +250,7 @@ public class ResourcePathNodeTest extends Assertions {
   }
 
   /**
-   * Test of {@link ResourcePathNode#createPattern(String)} and
-   * {@link ResourcePathNode#matches(ResourcePathNode)}.
+   * Test of {@link ResourcePathNode#createPattern(String)} and {@link ResourcePathNode#matches(ResourcePathNode)}.
    */
   @Test
   public void testCreatePatternAndMatches() {
@@ -303,7 +302,7 @@ public class ResourcePathNodeTest extends Assertions {
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorWithEmptyName() {
 
-    new ResourcePathNode<Void>(ResourcePathNode.ROOT_ABSOLUTE, "", (Void) null);
+    new ResourcePathNode<>(ResourcePathNode.ROOT_ABSOLUTE, "", (Void) null);
   }
 
   /** Test of {@link ResourcePathNode#ResourcePathNode(ResourcePathNode, String, Function)} with empty name. */
@@ -311,7 +310,7 @@ public class ResourcePathNodeTest extends Assertions {
   public void testConstructorWithEmptyNameFunction() {
 
     Function<ResourcePathNode<Void>, Void> function = VoidFunction.getInstance();
-    new ResourcePathNode<Void>(ResourcePathNode.ROOT_ABSOLUTE, "", function);
+    new ResourcePathNode<>(ResourcePathNode.ROOT_ABSOLUTE, "", function);
   }
 
 }

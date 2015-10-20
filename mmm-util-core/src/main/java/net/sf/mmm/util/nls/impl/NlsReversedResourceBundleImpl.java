@@ -9,9 +9,9 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * This class is contains the reversed {@link Map} for a {@link ResourceBundle}. It allows to get the key for
- * a {@link ResourceBundle#getString(String) message}.
- * 
+ * This class is contains the reversed {@link Map} for a {@link ResourceBundle}. It allows to get the key for a
+ * {@link ResourceBundle#getString(String) message}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -28,7 +28,7 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
 
   /**
    * The constructor.
-   * 
+   *
    * @param resourceBundle is the {@link ResourceBundle}.
    */
   public NlsReversedResourceBundleImpl(ResourceBundle resourceBundle) {
@@ -36,7 +36,7 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
     super();
     this.resourceBundle = resourceBundle;
     this.name = resourceBundle.getClass().getName();
-    this.message2KeyMap = new HashMap<String, String>();
+    this.message2KeyMap = new HashMap<>();
     Enumeration<String> keyEnum = resourceBundle.getKeys();
     while (keyEnum.hasMoreElements()) {
       String key = keyEnum.nextElement();
@@ -58,10 +58,10 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
 
   /**
    * This method is the inverse of {@link ResourceBundle#getString(String)}.
-   * 
+   *
    * @param message is the {@link ResourceBundle#getString(String) message} for which the key is requested.
-   * @return the key for the given <code>message</code> or <code>null</code> if no such message is contained
-   *         in the associated {@link ResourceBundle}.
+   * @return the key for the given <code>message</code> or <code>null</code> if no such message is contained in the
+   *         associated {@link ResourceBundle}.
    */
   @Override
   public String getKey(String message) {

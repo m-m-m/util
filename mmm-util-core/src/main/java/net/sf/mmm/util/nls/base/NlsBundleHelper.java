@@ -43,12 +43,11 @@ public class NlsBundleHelper extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the location of the {@link java.util.ResourceBundle} base name for the given
-   * {@link NlsBundle} interface.
+   * This method gets the location of the {@link java.util.ResourceBundle} base name for the given {@link NlsBundle}
+   * interface.
    *
    * @param nlsBundleInterface is the {@link NlsBundle} interface.
-   * @return the fully qualified {@link java.util.ResourceBundle} base name for the given {@link NlsBundle}
-   *         interface.
+   * @return the fully qualified {@link java.util.ResourceBundle} base name for the given {@link NlsBundle} interface.
    */
   public ClassName getQualifiedLocation(Class<? extends NlsBundle> nlsBundleInterface) {
 
@@ -107,7 +106,7 @@ public class NlsBundleHelper extends AbstractLoggableObject {
    */
   public ResourceBundle toResourceBundle(Class<? extends NlsBundle> bundleClass) {
 
-    Hashtable<String, String> bundleProperties = new Hashtable<String, String>();
+    Hashtable<String, String> bundleProperties = new Hashtable<>();
     for (Method method : bundleClass.getMethods()) {
       if (isNlsBundleMethod(method, false)) {
         String key = getKey(method);
@@ -123,11 +122,10 @@ public class NlsBundleHelper extends AbstractLoggableObject {
    * This method determines if the given {@link Method} is a regular {@link NlsBundle}-method.
    *
    * @param method the {@link Method} to check.
-   * @param ignoreIllegalMethods - <code>true</code> if illegal methods (non NlsBundleMethods other than those
-   *        defined by {@link Object}) should be ignored, <code>false</code> if they should cause an
-   *        exception.
-   * @return <code>true</code> if the given {@link Method} is a legal {@link NlsBundle} method,
-   *         <code>false</code> otherwise (e.g. for <code>toString()</code>).
+   * @param ignoreIllegalMethods - <code>true</code> if illegal methods (non NlsBundleMethods other than those defined
+   *        by {@link Object}) should be ignored, <code>false</code> if they should cause an exception.
+   * @return <code>true</code> if the given {@link Method} is a legal {@link NlsBundle} method, <code>false</code>
+   *         otherwise (e.g. for <code>toString()</code>).
    */
   public boolean isNlsBundleMethod(Method method, boolean ignoreIllegalMethods) {
 

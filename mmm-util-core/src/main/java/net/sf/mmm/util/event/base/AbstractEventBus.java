@@ -23,8 +23,7 @@ import net.sf.mmm.util.exception.api.GlobalExceptionHandler;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
- * This is the default implementation of {@link EventBus}. It is compatible to work in limited environments
- * such as GWT.
+ * This is the default implementation of {@link EventBus}. It is compatible to work in limited environments such as GWT.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0
@@ -57,8 +56,8 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
   /**
    * The constructor.
    *
-   * @param queueFactory is the factory used to create simple {@link Queue}s for
-   *        {@link net.sf.mmm.util.event.api.Event}s and {@link EventListener}s.
+   * @param queueFactory is the factory used to create simple {@link Queue}s for {@link net.sf.mmm.util.event.api.Event}
+   *        s and {@link EventListener}s.
    * @param mapFactory is the factory used to create {@link Map}s.
    */
   public AbstractEventBus(QueueFactory queueFactory, MapFactory<?> mapFactory) {
@@ -117,7 +116,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
       if (event == null) {
         return;
       }
-      Collection<Throwable> errors = new LinkedList<Throwable>();
+      Collection<Throwable> errors = new LinkedList<>();
       dispatchEvent(event, errors);
       if (!errors.isEmpty()) {
         handleErrors(errors, event);
@@ -147,8 +146,8 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
   }
 
   /**
-   * Called if an {@link net.sf.mmm.util.event.api.Event} was {@link #sendEvent(Object) send} but not
-   * dispatched to any {@link #addListener(Class, EventListener) registered listener}.
+   * Called if an {@link net.sf.mmm.util.event.api.Event} was {@link #sendEvent(Object) send} but not dispatched to any
+   * {@link #addListener(Class, EventListener) registered listener}.
    *
    * @param event is the un-dispatched event.
    */
@@ -192,9 +191,9 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
    *
    * @param <E> is the generic type of <code>eventType</code>.
    * @param eventType is the {@link Class} reflecting the {@link net.sf.mmm.util.event.api.Event event}.
-   * @return the most specific {@link EventDispatcher} responsible for the given <code>eventType</code>. May
-   *         be <code>null</code> if no {@link EventListener} is {@link #addListener(Class, EventListener)
-   *         registered} for a compatible <code>eventType</code>.
+   * @return the most specific {@link EventDispatcher} responsible for the given <code>eventType</code>. May be
+   *         <code>null</code> if no {@link EventListener} is {@link #addListener(Class, EventListener) registered} for
+   *         a compatible <code>eventType</code>.
    */
   @SuppressWarnings("unchecked")
   protected <E> EventDispatcher<? super E> getEventDispatcherOptional(Class<E> eventType) {
@@ -206,11 +205,10 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
    * Gets or creates the {@link EventDispatcher} for the given <code>eventType</code>.
    *
    * @param eventType is the {@link Class} reflecting the {@link net.sf.mmm.util.event.api.Event event}.
-   * @param createIfNotExists - if <code>true</code> the requested {@link EventDispatcher} will be created if
-   *        it does not exists, if <code>false</code> this method will return <code>null</code> if it does not
-   *        exist.
-   * @return the {@link EventDispatcher} responsible for the given <code>eventType</code>. May be
-   *         <code>null</code> if <code>createIfNotExists</code> is <code>null</code> and not available.
+   * @param createIfNotExists - if <code>true</code> the requested {@link EventDispatcher} will be created if it does
+   *        not exists, if <code>false</code> this method will return <code>null</code> if it does not exist.
+   * @return the {@link EventDispatcher} responsible for the given <code>eventType</code>. May be <code>null</code> if
+   *         <code>createIfNotExists</code> is <code>null</code> and not available.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   private EventDispatcher getEventDispatcher(Class<?> eventType, boolean createIfNotExists) {
@@ -246,7 +244,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     if (eventType.isInterface()) {
       throw new IllegalArgumentException(eventType.getName());
     }
-    EventListenerContainer<E> container = new EventListenerContainer<E>(eventType, listener);
+    EventListenerContainer<E> container = new EventListenerContainer<>(eventType, listener);
     EventDispatcher<E> eventDispatcher = getEventDispatcherRequired(eventType);
     // concurrent collection used in real environments...
     eventDispatcher.containerList.add(container);
@@ -271,8 +269,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
   }
 
   /**
-   * A simple container for a {@link EventBus#addListener(Class, EventListener) registered}
-   * {@link EventListener}.
+   * A simple container for a {@link EventBus#addListener(Class, EventListener) registered} {@link EventListener}.
    *
    * @param <E> is the generic {@link #getEventType() event type}.
    */
@@ -298,8 +295,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     }
 
     /**
-     * Clears this event adapter. This will replace the actual listener with a dummy instance that ignores all
-     * events.
+     * Clears this event adapter. This will replace the actual listener with a dummy instance that ignores all events.
      */
     protected void clear() {
 
@@ -307,8 +303,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     }
 
     /**
-     * @return <code>true</code> if this adapter has been {@link #clear() cleared}, <code>false</code>
-     *         otherwise.
+     * @return <code>true</code> if this adapter has been {@link #clear() cleared}, <code>false</code> otherwise.
      */
     protected boolean isCleared() {
 
@@ -337,8 +332,8 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
 
   /**
    *
-   * A dispatcher for all {@link EventListener}s of a particular {@link EventListenerContainer#getEventType()
-   * event type}.
+   * A dispatcher for all {@link EventListener}s of a particular {@link EventListenerContainer#getEventType() event
+   * type}.
    *
    * @param <E> is the generic {@link EventListenerContainer#getEventType() event type}.
    */
@@ -353,10 +348,10 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     /**
      * The constructor.
      *
-     * @param parent is the {@link EventDispatcher} responsible for the super-class or <code>null</code> if
-     *        this is the root {@link EventDispatcher} responsible for {@link Object}.
-     * @param collectionFactory is the {@link CollectionFactory} used to create {@link Collection}s e.g. for
-     *        the {@link EventListenerContainer}s.
+     * @param parent is the {@link EventDispatcher} responsible for the super-class or <code>null</code> if this is the
+     *        root {@link EventDispatcher} responsible for {@link Object}.
+     * @param collectionFactory is the {@link CollectionFactory} used to create {@link Collection}s e.g. for the
+     *        {@link EventListenerContainer}s.
      */
     public EventDispatcher(EventDispatcher<? super E> parent, CollectionFactory<?> collectionFactory) {
 
@@ -370,8 +365,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
      *
      * @param event is the {@link net.sf.mmm.util.event.api.Event} to dispatch.
      * @param errors is a {@link Collection} where potential exceptions thrown by
-     *        {@link EventListener#handleEvent(Object) event handlers} will be {@link Collection#add(Object)
-     *        added}.
+     *        {@link EventListener#handleEvent(Object) event handlers} will be {@link Collection#add(Object) added}.
      * @return <code>true</code> if the event has actually been dispatched, <code>false</code> otherwise.
      */
     public boolean handleEvent(E event, Collection<Throwable> errors) {

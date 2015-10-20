@@ -14,10 +14,10 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 public interface Person extends GenericEntity<Long> {
 
   /** {@link TypedProperty} for {@link #getFirstName()}. */
-  TypedProperty<String> PROPERTY_FIRST_NAME = new TypedProperty<String>("First Name", String.class, "firstName");
+  TypedProperty<String> PROPERTY_FIRST_NAME = new TypedProperty<>("First Name", String.class, "firstName");
 
   /** {@link TypedProperty} for {@link #getLastName()}. */
-  TypedProperty<String> PROPERTY_LAST_NAME = new TypedProperty<String>("lastName");
+  TypedProperty<String> PROPERTY_LAST_NAME = new TypedProperty<>("lastName");
 
   /**
    * @return the firstName
@@ -40,8 +40,7 @@ public interface Person extends GenericEntity<Long> {
   void setLastName(String lastName);
 
   /**
-   * @return the {@link #getId() ID} of the {@link Address} of this {@link Person} or <code>null</code> if not
-   *         present.
+   * @return the {@link #getId() ID} of the {@link Address} of this {@link Person} or <code>null</code> if not present.
    */
   Long getAddressId();
 

@@ -61,7 +61,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
     super();
     this.classLoader = classLoader;
-    this.bundleMap = new ConcurrentHashMap<Class<? extends NlsBundle>, NlsBundle>();
+    this.bundleMap = new ConcurrentHashMap<>();
   }
 
   /**
@@ -84,12 +84,12 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   }
 
   /**
-   * This method gets the {@link NlsBundleOptions} for the given <code>bundleInterface</code>. If NOT present
-   * a default instance is returned.
+   * This method gets the {@link NlsBundleOptions} for the given <code>bundleInterface</code>. If NOT present a default
+   * instance is returned.
    *
    * @param bundleInterface is the {@link Class} reflecting the {@link NlsBundle} interface.
-   * @return the annotated {@link NlsBundleOptions} or the default if <code>bundleInterface</code> is NOT
-   *         annotated accordingly.
+   * @return the annotated {@link NlsBundleOptions} or the default if <code>bundleInterface</code> is NOT annotated
+   *         accordingly.
    */
   protected NlsBundleOptions getBundleOptions(Class<? extends NlsBundle> bundleInterface) {
 
@@ -146,7 +146,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       super();
       this.bundleName = bundleName;
       this.options = options;
-      this.method2BundleInfoMap = new ConcurrentHashMap<String, NlsBundleMethodInfo>();
+      this.method2BundleInfoMap = new ConcurrentHashMap<>();
     }
 
     /**
@@ -158,9 +158,10 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @param arguments are the arguments for the call of the {@link Method}.
      * @return the {@link Map} with the {@link NlsMessage#getArgument(String) arguments}.
      */
-    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo, Object[] arguments) {
+    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo,
+        Object[] arguments) {
 
-      Map<String, Object> map = new HashMap<String, Object>();
+      Map<String, Object> map = new HashMap<>();
       String[] argumentNames = methodInfo.argumentNames;
       for (int i = 0; i < arguments.length; i++) {
         Object old = map.put(argumentNames[i], arguments[i]);
@@ -172,8 +173,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given
-     * {@link Method}.
+     * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given {@link Method}.
      *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @return an array with the {@link NlsMessage#getArgument(String) argument-names}.
@@ -247,8 +247,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * Gets {@link NlsBundleMethodInfo} for <code>methodName</code> from cache or creates it and puts it into
-     * the cache.
+     * Gets {@link NlsBundleMethodInfo} for <code>methodName</code> from cache or creates it and puts it into the cache.
      *
      * @param method is the {@link Method} or <code>null</code> for generic invocation (lookup).
      * @param args are the method arguments or <code>null</code> for generic invocation (lookup).
