@@ -199,7 +199,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   @Override
   public <T> GenericType<T> createGenericType(Class<T> type) {
 
-    return new SimpleGenericTypeImpl<T>(type);
+    return new SimpleGenericTypeImpl<>(type);
   }
 
   /**
@@ -427,7 +427,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
       Class<?> segmentClass = resolver.resolveClass(segment);
       result = segmentClass;
       if (c == '<') {
-        List<Type> typeArgList = new ArrayList<Type>();
+        List<Type> typeArgList = new ArrayList<>();
         while (true) {
           Type arg = toType(parser, resolver, null);
           typeArgList.add(arg);
@@ -717,7 +717,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   @Override
   public Set<String> findClassNames(String packageName, boolean includeSubPackages) {
 
-    Set<String> classSet = new HashSet<String>();
+    Set<String> classSet = new HashSet<>();
     findClassNames(packageName, includeSubPackages, classSet);
     return classSet;
   }
@@ -738,7 +738,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   @Override
   public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
 
-    Set<String> result = new HashSet<String>();
+    Set<String> result = new HashSet<>();
     findClassNames(packageName, includeSubPackages, result, filter, getDefaultClassLoader(filter.getClass()));
     return result;
   }
@@ -750,7 +750,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) {
 
-    Set<String> result = new HashSet<String>();
+    Set<String> result = new HashSet<>();
     findClassNames(packageName, includeSubPackages, result, filter, classLoader);
     return result;
   }
@@ -792,7 +792,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
       Filter<? super String> filter, ClassLoader classLoader) {
 
-    Set<String> result = new HashSet<String>();
+    Set<String> result = new HashSet<>();
     ResourceNameCollector visitor = new ResourceNameCollector(result, filter);
     visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
     return result;
@@ -815,7 +815,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   public Set<DataResource> findResources(String absoluteClasspath) throws RuntimeIoException {
 
     try {
-      Set<DataResource> result = new HashSet<DataResource>();
+      Set<DataResource> result = new HashSet<>();
       Enumeration<URL> resourceUrlEnumeration = getDefaultClassLoader().getResources(absoluteClasspath);
       while (resourceUrlEnumeration.hasMoreElements()) {
         URL url = resourceUrlEnumeration.nextElement();
@@ -834,7 +834,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
       Filter<? super String> filter, ClassLoader classLoader) {
 
-    Set<DataResource> result = new HashSet<DataResource>();
+    Set<DataResource> result = new HashSet<>();
     ResourceVisitor visitor = new ResourceCollector(result, filter);
     visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
     return result;
@@ -951,7 +951,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   public Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver,
       Filter<? super Class<?>> filter) {
 
-    Set<Class<?>> classesSet = new HashSet<Class<?>>();
+    Set<Class<?>> classesSet = new HashSet<>();
     for (String className : classNames) {
       try {
         Class<?> clazz = classResolver.resolveClass(className);
@@ -1037,7 +1037,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
       return;
     }
     if (visitedSet != null) {
-      HashKey<Object> hashKey = new HashKey<Object>(object);
+      HashKey<Object> hashKey = new HashKey<>(object);
       boolean added = visitedSet.add(hashKey);
       if (!added) {
         // already visited same object...
