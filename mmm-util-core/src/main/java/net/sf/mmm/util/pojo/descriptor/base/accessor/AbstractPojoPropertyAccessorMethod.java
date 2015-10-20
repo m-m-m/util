@@ -12,10 +12,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
- * This is the abstract implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} interface used to access a
- * {@link Method}.
- * 
+ * This is the abstract implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor}
+ * interface used to access a {@link Method}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -29,7 +28,7 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the property.
    * @param descriptor is the descriptor this accessor is intended for.
@@ -49,19 +48,11 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
       ReflectionUtil util = dependencies.getReflectionUtil();
       this.returnType = util.createGenericType(type, descriptor.getPojoType());
     }
-    // if (mode.isReading()) {
-    // this.returnType = getPropertyType();
-    // } else {
-    // ReflectionUtil util = configuration.getReflectionUtil();
-    // this.returnType = util.createGenericType(method.getGenericReturnType(),
-    // descriptor
-    // .getPojoType());
-    // }
   }
 
   /**
    * @see #getAccessibleObject()
-   * 
+   *
    * @return the method to access.
    */
   protected Method getMethod() {

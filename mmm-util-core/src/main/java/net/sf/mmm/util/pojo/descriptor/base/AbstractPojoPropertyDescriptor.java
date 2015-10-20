@@ -52,8 +52,8 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   }
 
   /**
-   * Sets the {@link Field} represented by this {@link PojoPropertyDescriptor descriptor}. Necessary in case
-   * of {@link Field field} gets introspected after methods.
+   * Sets the {@link Field} represented by this {@link PojoPropertyDescriptor descriptor}. Necessary in case of
+   * {@link Field field} gets introspected after methods.
    *
    * @param field {@link Field} represented by this {@link PojoPropertyDescriptor descriptor}
    */
@@ -65,15 +65,15 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
   /**
    * This method puts the given <code>accessor</code> into this property-descriptor. <br>
    * <b>ATTENTION:</b><br>
-   * This method may only be used during creation and initialization of this object. Be careful NOT to
-   * accidently replace existing {@link PojoPropertyAccessor accessors}.
+   * This method may only be used during creation and initialization of this object. Be careful NOT to accidently
+   * replace existing {@link PojoPropertyAccessor accessors}.
    *
    * @see #getAccessor(net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode)
    *
    * @param accessor is the accessor to add.
-   * @return the {@link PojoPropertyAccessor} with the same {@link PojoPropertyAccessor#getMode() mode} as the
-   *         given <code>accessor</code> that has been replaced by <code>accessor</code> or <code>null</code>
-   *         if none has been replaced.
+   * @return the {@link PojoPropertyAccessor} with the same {@link PojoPropertyAccessor#getMode() mode} as the given
+   *         <code>accessor</code> that has been replaced by <code>accessor</code> or <code>null</code> if none has been
+   *         replaced.
    */
   public abstract PojoPropertyAccessor putAccessor(PojoPropertyAccessor accessor);
 

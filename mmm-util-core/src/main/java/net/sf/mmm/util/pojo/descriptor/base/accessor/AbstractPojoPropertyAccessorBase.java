@@ -12,7 +12,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 /**
  * This is the major base-implementation of the
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -26,7 +26,7 @@ public abstract class AbstractPojoPropertyAccessorBase extends AbstractPojoPrope
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the property.
    * @param descriptor is the descriptor this accessor is intended for.
