@@ -16,13 +16,12 @@ import net.sf.mmm.util.nls.api.NlsObject;
 
 /**
  * This class is a context for {@link InternalValidatingIdResolver}. JAXB is a little strange: It is using a
- * {@link Callable} for resolving {@link javax.xml.bind.annotation.XmlIDREF} but {@link Callable#call()
- * evaluates} it immediately instead of storing it until the initial processing phase has been completed. If
- * it returns <code>null</code> it will try again later but never complains if the ID could not be resolved in
- * the end. <br>
- * This class solves the problem by tracking each {@link Callable} and check that in the
- * {@link #disposeAndValidate() end} all are resolved successfully.
- * 
+ * {@link Callable} for resolving {@link javax.xml.bind.annotation.XmlIDREF} but {@link Callable#call() evaluates} it
+ * immediately instead of storing it until the initial processing phase has been completed. If it returns
+ * <code>null</code> it will try again later but never complains if the ID could not be resolved in the end. <br>
+ * This class solves the problem by tracking each {@link Callable} and check that in the {@link #disposeAndValidate()
+ * end} all are resolved successfully.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
  */
@@ -46,16 +45,16 @@ public class IdResolverContext {
   public IdResolverContext() {
 
     super();
-    this.id2valueMap = new HashMap<String, Object>();
-    this.id2callableMap = new HashMap<String, IdResolverContext.Resolver>();
-    this.duplicateIdErrors = new ArrayList<NlsObject>();
+    this.id2valueMap = new HashMap<>();
+    this.id2callableMap = new HashMap<>();
+    this.duplicateIdErrors = new ArrayList<>();
     this.bundle = NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
   }
 
   /**
-   * This method {@link com.sun.xml.bind.IDResolver#bind(String, Object) binds} the given <code>value</code>
-   * with the given <code>id</code>.
-   * 
+   * This method {@link com.sun.xml.bind.IDResolver#bind(String, Object) binds} the given <code>value</code> with the
+   * given <code>id</code>.
+   *
    * @param id is the {@link javax.xml.bind.annotation.XmlID}.
    * @param value is the JAXB bean to bind.
    */
@@ -70,9 +69,9 @@ public class IdResolverContext {
   /**
    * This method {@link com.sun.xml.bind.IDResolver#resolve(String, Class) resolves} the value with the given
    * <code>id</code>.
-   * 
-   * @param id is the {@link javax.xml.bind.annotation.XmlIDREF} of the requested object. This object should
-   *        be {@link #put(String, Object) bound}. This may also happen after it has been requested.
+   *
+   * @param id is the {@link javax.xml.bind.annotation.XmlIDREF} of the requested object. This object should be
+   *        {@link #put(String, Object) bound}. This may also happen after it has been requested.
    * @param type is the expected type of the object.
    * @return a {@link Callable} that {@link Callable#call() resolves} the requested value.
    */
@@ -88,7 +87,7 @@ public class IdResolverContext {
 
   /**
    * This method disposes this context and performs a validation that all IDs have been resolved.
-   * 
+   *
    * @throws ObjectNotFoundException if a single ID was NOT resolved.
    * @throws ComposedException if multiple IDs have NOT been resolved.
    */
@@ -126,7 +125,7 @@ public class IdResolverContext {
 
     /**
      * The constructor.
-     * 
+     *
      * @param id is the ID to resolve.
      * @param type is the expected type of the object to resolve.
      */
@@ -149,7 +148,7 @@ public class IdResolverContext {
 
     /**
      * This method determines if this {@link Resolver} has been {@link #call() resolved} successfully.
-     * 
+     *
      * @return <code>true</code> if resolved successfully, <code>false</code> otherwise.
      */
     public boolean isResolved() {

@@ -20,10 +20,9 @@ import net.sf.mmm.util.pool.api.ByteArrayPool;
 /**
  * This is the implementation of the {@link DetectorStreamBuffer} interface. <br>
  * It is based on the idea that each {@link DetectorStreamProcessor} in the chain has its own
- * {@link DetectorStreamBuffer} instance. Therefore it holds the according {@link DetectorStreamProcessor}
- * building a pair of buffer+processor. Further it holds an instance of the predecessor and thereby represents
- * the chain itself.
- * 
+ * {@link DetectorStreamBuffer} instance. Therefore it holds the according {@link DetectorStreamProcessor} building a
+ * pair of buffer+processor. Further it holds an instance of the predecessor and thereby represents the chain itself.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
@@ -73,17 +72,17 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
 
   /**
    * The constructor.
-   * 
+   *
    * @param processor is the {@link DetectorStreamProcessor} served by this buffer.
-   * @param successor is the successor in the chain or <code>null</code> if this is the last buffer/processor
-   *        pair in the chain.
+   * @param successor is the successor in the chain or <code>null</code> if this is the last buffer/processor pair in
+   *        the chain.
    * @param byteArrayPool is the {@link ByteArrayPool} to use.
    */
   public DetectorStreamBufferImpl(DetectorStreamProcessor processor, DetectorStreamBufferImpl successor,
       ByteArrayPool byteArrayPool) {
 
     super();
-    this.arrayQueue = new LinkedList<ByteArray>();
+    this.arrayQueue = new LinkedList<>();
     this.chainSuccessor = successor;
     this.byteArrayPool = byteArrayPool;
     this.processor = processor;
@@ -109,7 +108,8 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     }
     int bytesAvailable = this.currentArrayMax - this.currentArrayIndex + 1;
     if (this.chainSuccessor != null) {
-      this.chainSuccessor.append(this.currentByteArray.createSubArray(this.currentArrayIndex, this.currentArrayMax));
+      this.chainSuccessor.append(this.currentByteArray
+          .createSubArray(this.currentArrayIndex, this.currentArrayMax));
     }
     release(this.currentByteArray);
     this.currentArray = null;
@@ -182,7 +182,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
 
   /**
    * This method is called when a {@link ByteArray} is wiped out of the chain.
-   * 
+   *
    * @param byteArray is the array to release.
    */
   protected void release(ByteArray byteArray) {
@@ -197,7 +197,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
 
   /**
    * This method switches over to the next internal {@link #getByteArray(int) byte-array}.
-   * 
+   *
    * @return <code>true</code> if a new buffer is available, <code>false</code> if the buffer queue is empty.
    */
   private boolean nextArray() {
@@ -310,7 +310,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
 
   /**
    * This method {@link #remove(long) removes} or {@link #skip(long) skips} the given number of bytes.
-   * 
+   *
    * @param byteCount is the number of bytes to seek.
    * @param mode is the {@link SeekMode}.
    */
@@ -330,7 +330,8 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
         if (this.currentArrayMin < this.currentArrayIndex) {
           // there are bytes that have been consumed before remove was
           // invoked...
-          ByteArray subArray = this.currentByteArray.createSubArray(this.currentArrayMin, this.currentArrayIndex - 1);
+          ByteArray subArray = this.currentByteArray.createSubArray(this.currentArrayMin,
+              this.currentArrayIndex - 1);
           this.chainSuccessor.append(subArray);
           this.currentArrayMin = this.currentArrayIndex;
         }
@@ -371,7 +372,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
 
   /**
    * This method queues the given {@link ByteArray} at the end of this buffer.
-   * 
+   *
    * @param nextArray is the {@link ByteArray} to append.
    */
   protected void append(ByteArray nextArray) {
@@ -384,10 +385,10 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
 
   /**
    * @see DetectorStreamProcessor#process(DetectorStreamBuffer, Map, boolean)
-   * 
+   *
    * @param metadata is the {@link Map} with the meta-data.
-   * @param eos - <code>true</code> if the end of the stream has been reached and the given
-   *        <code>buffer</code> has to be
+   * @param eos - <code>true</code> if the end of the stream has been reached and the given <code>buffer</code> has to
+   *        be
    * @throws IOException in case of an Input/Output error. Should only be used internally.
    */
   public void process(Map<String, Object> metadata, boolean eos) throws IOException {
@@ -439,7 +440,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
 
   /**
    * This inner class is a view on the current {@link ByteArray}.
-   * 
+   *
    * @see DetectorStreamBufferImpl#getByteArray(int)
    */
   protected class CurrentByteArray extends AbstractByteArray {

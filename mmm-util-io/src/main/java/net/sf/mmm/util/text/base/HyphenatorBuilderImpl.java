@@ -33,7 +33,7 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**
  * The implementation of {@link HyphenatorBuilder}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -107,7 +107,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
    * This method gets the singleton instance of this {@link HyphenatorBuilderImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static HyphenatorBuilder getInstance() {
@@ -142,7 +142,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   /**
    * This method creates a new {@link Hyphenator} instance from the XML-configuration identified by the given
    * {@link DataResource}.
-   * 
+   *
    * @param locale is the {@link Hyphenator#getLocale() locale}.
    * @param resource is the {@link DataResource} with the XML-configuration.
    * @return the {@link Hyphenator} instance.
@@ -223,7 +223,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   /**
    * This method parses a list of strings enclosed by elements with the given <code>elementName</code> until the current
    * element ends. E.g. if you have this XML:
-   * 
+   *
    * <pre>
    * &lt;foo>
    *   &lt;bar>text1&lt;/bar>
@@ -231,10 +231,10 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
    *   &lt;bar>text3&lt;/bar>
    * &lt;/foo>
    * </pre>
-   * 
+   *
    * And your XML-reader is pointing after the opening &lt;foo> and you call this method, you will get a list with
    * "text1", "text2", and "text3".
-   * 
+   *
    * @param reader is the XMLEventReader pointing after the {@link StartElement} of the surrounding element.
    * @param elementName is the name of the element containing a single string.
    * @return the List of strings encountered until the surrounding element was closed.
@@ -242,7 +242,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
    */
   private List<String> parseStringList(XMLEventReader reader, QName elementName) throws XMLStreamException {
 
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
     XMLEvent event = this.staxUtil.nextElement(reader);
     while (event.getEventType() == XMLStreamConstants.START_ELEMENT) {
       StartElement startElementEvent = (StartElement) event;

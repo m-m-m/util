@@ -15,9 +15,9 @@ import net.sf.mmm.util.text.api.Hyphenation;
 import net.sf.mmm.util.text.api.StringHasher;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.text.api.Hyphenator} interface. It uses a list of
- * rules to determine hyphenation-points.
- * 
+ * This is the implementation of the {@link net.sf.mmm.util.text.api.Hyphenator} interface. It uses a list of rules to
+ * determine hyphenation-points.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -40,7 +40,7 @@ public class HyphenatorImpl extends AbstractHyphenator {
 
   /**
    * The constructor.
-   * 
+   *
    * @param locale is the {@link #getLocale() locale}.
    * @param hyphen is the {@link #getHyphen() hyphen-character}.
    * @param patternList is the {@link List} of {@link HyphenationPattern patterns}.
@@ -54,7 +54,7 @@ public class HyphenatorImpl extends AbstractHyphenator {
     super(locale, hyphen);
     this.hasher = hasher;
     this.stringUtil = stringUtil;
-    this.exceptionMap = new HashMap<String, HyphenationImpl>(exceptionList.size());
+    this.exceptionMap = new HashMap<>(exceptionList.size());
     for (String exception : exceptionList) {
       HyphenationImpl hypenation = new HyphenationImpl(exception, hyphen);
       this.exceptionMap.put(hypenation.getWord(), hypenation);
@@ -75,9 +75,9 @@ public class HyphenatorImpl extends AbstractHyphenator {
   }
 
   /**
-   * This method sorts the given {@link HyphenationPattern patterns} according to the {@link String#length()
-   * length} of their {@link HyphenationPattern#getWordPart() word-part}.
-   * 
+   * This method sorts the given {@link HyphenationPattern patterns} according to the {@link String#length() length} of
+   * their {@link HyphenationPattern#getWordPart() word-part}.
+   *
    * @param patternArray are the unsorted {@link HyphenationPattern patterns}.
    * @return the sorted {@link HyphenationPattern patterns}.
    */
@@ -96,7 +96,7 @@ public class HyphenatorImpl extends AbstractHyphenator {
 
   /**
    * This method normalizes the given <code>word</code>.
-   * 
+   *
    * @param word is the word to normalize.
    * @return the normalized form of <code>word</code>.
    */
@@ -120,8 +120,8 @@ public class HyphenatorImpl extends AbstractHyphenator {
       hyphenation = new HyphenationImpl(word, getHyphen(), exception.getHyphenationPoints());
     } else {
       String newWord = HyphenationPattern.TERMINATOR + normalizedWord + HyphenationPattern.TERMINATOR;
-      HyphenationState state = new HyphenationState(word, newWord, getHyphen(), this.maxPatternLength, 0, this.hasher,
-          this.stringUtil);
+      HyphenationState state = new HyphenationState(word, newWord, getHyphen(), this.maxPatternLength, 0,
+          this.hasher, this.stringUtil);
       for (HyphenationPattern pattern : this.patterns) {
         state.apply(pattern);
       }

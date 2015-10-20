@@ -18,7 +18,7 @@ import net.sf.mmm.util.text.api.HyphenatorBuilder;
  * This is the abstract base-implementation of the {@link HyphenatorBuilder} interface. <br>
  * It uses a cache with {@link WeakReference}s to the {@link Hyphenator}s that have already been build. If a
  * {@link Hyphenator} is requested several times, it can typically be served from the cache.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -36,7 +36,7 @@ public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponen
   public AbstractHyphenatorBuilder() {
 
     super();
-    this.hyphenatorCache = new ConcurrentHashMap<String, WeakReference<Hyphenator>>();
+    this.hyphenatorCache = new ConcurrentHashMap<>();
   }
 
   /**
@@ -76,7 +76,7 @@ public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponen
       if (hyphenator == null) {
         hyphenator = createHyphenator(localeInfixes[i]);
         if (hyphenator != null) {
-          reference = new WeakReference<Hyphenator>(hyphenator);
+          reference = new WeakReference<>(hyphenator);
           // put to cache including cache misses...
           for (int j = i; j >= 0; j--) {
             this.hyphenatorCache.put(localeInfixes[j], reference);
@@ -92,13 +92,13 @@ public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponen
 
   /**
    * This method creates a new {@link Hyphenator}.
-   * 
+   *
    * @see #getHyphenator(Locale)
-   * 
-   * @param localeInfix is the {@link NlsResourceLocator#getLocaleInfixes(Locale) locale-infix} of the
-   *        requested {@link Hyphenator}.
-   * @return the requested {@link Hyphenator} or <code>null</code> if no hyphenation configuration is
-   *         available for the given <code>localeInfix</code>.
+   *
+   * @param localeInfix is the {@link NlsResourceLocator#getLocaleInfixes(Locale) locale-infix} of the requested
+   *        {@link Hyphenator}.
+   * @return the requested {@link Hyphenator} or <code>null</code> if no hyphenation configuration is available for the
+   *         given <code>localeInfix</code>.
    */
   protected abstract Hyphenator createHyphenator(String localeInfix);
 

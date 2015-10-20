@@ -14,9 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import net.sf.mmm.util.io.api.DetectorInputStream;
 import net.sf.mmm.util.io.api.DetectorOutputStream;
 import net.sf.mmm.util.io.api.DetectorStreamProvider;
@@ -27,11 +24,14 @@ import net.sf.mmm.util.pool.api.ByteArrayPool;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * This is the test-case for the detector-stream-framework.
- * 
+ *
  * @see DetectorStreamProvider
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -39,7 +39,7 @@ public class DetectorStreamTest {
 
   /**
    * Gets (creates) a {@link DetectorStreamProvider} for this test.
-   * 
+   *
    * @param pool is the {@link ByteArrayPool} to use.
    * @return the {@link DetectorStreamProvider}.
    */
@@ -47,7 +47,7 @@ public class DetectorStreamTest {
 
     DetectorStreamProviderImpl provider = new DetectorStreamProviderImpl();
     provider.setByteArrayPool(pool);
-    List<DetectorStreamProcessorFactory> processorFactoryList = new ArrayList<DetectorStreamProcessorFactory>();
+    List<DetectorStreamProcessorFactory> processorFactoryList = new ArrayList<>();
     processorFactoryList.add(new SimpleDetectorStreamProcessorFactory(DetectorStreamProcessorCountX.class));
     processorFactoryList.add(new SimpleDetectorStreamProcessorFactory(DetectorStreamProcessorReplaceXx.class));
     provider.setProcessorFactoryList(processorFactoryList);
@@ -57,7 +57,7 @@ public class DetectorStreamTest {
 
   /**
    * Gets (creates) a {@link DummyByteArrayPool}.
-   * 
+   *
    * @return the {@link ByteArrayPool}.
    */
   protected DummyByteArrayPool getByteArrayPool() {
@@ -66,11 +66,11 @@ public class DetectorStreamTest {
   }
 
   /**
-   * Test that a text file is properly read while scanned by {@link DetectorStreamProcessorCountX} and
-   * afterwards manipulated by {@link DetectorStreamProcessorReplaceXx}.
-   * 
+   * Test that a text file is properly read while scanned by {@link DetectorStreamProcessorCountX} and afterwards
+   * manipulated by {@link DetectorStreamProcessorReplaceXx}.
+   *
    * @see DetectorStreamProvider#wrapInputStream(InputStream)
-   * 
+   *
    * @throws Exception on error.
    */
   @Test
@@ -110,11 +110,11 @@ public class DetectorStreamTest {
   }
 
   /**
-   * Test that a text file is properly written while scanned by {@link DetectorStreamProcessorCountX} and
-   * afterwards manipulated by {@link DetectorStreamProcessorReplaceXx}.
-   * 
+   * Test that a text file is properly written while scanned by {@link DetectorStreamProcessorCountX} and afterwards
+   * manipulated by {@link DetectorStreamProcessorReplaceXx}.
+   *
    * @see DetectorStreamProvider#wrapOutputStream(java.io.OutputStream)
-   * 
+   *
    * @throws Exception on error.
    */
   @Test
@@ -158,12 +158,11 @@ public class DetectorStreamTest {
   }
 
   /**
-   * Test that some data is properly written byte-per-byte while scanned by
-   * {@link DetectorStreamProcessorCountX} and afterwards manipulated by
-   * {@link DetectorStreamProcessorReplaceXx}.
-   * 
+   * Test that some data is properly written byte-per-byte while scanned by {@link DetectorStreamProcessorCountX} and
+   * afterwards manipulated by {@link DetectorStreamProcessorReplaceXx}.
+   *
    * @see DetectorStreamProvider#wrapOutputStream(java.io.OutputStream)
-   * 
+   *
    * @throws Exception on error.
    */
   @Test
@@ -185,8 +184,8 @@ public class DetectorStreamTest {
   }
 
   /**
-   * This inner class is a {@link ByteArrayPool} that can be used to test that {@link #borrow() borrowed}
-   * buffers get {@link #release(byte[]) released} properly.
+   * This inner class is a {@link ByteArrayPool} that can be used to test that {@link #borrow() borrowed} buffers get
+   * {@link #release(byte[]) released} properly.
    */
   protected static class DummyByteArrayPool implements ByteArrayPool {
 
@@ -198,13 +197,13 @@ public class DetectorStreamTest {
 
     /**
      * The constructor.
-     * 
+     *
      * @param arraySize is the size of the {@link #borrow() byte-arrays}.
      */
     public DummyByteArrayPool(int arraySize) {
 
       super();
-      this.bufferSet = new HashSet<byte[]>();
+      this.bufferSet = new HashSet<>();
       this.arraySize = arraySize;
     }
 
