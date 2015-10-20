@@ -26,8 +26,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import org.junit.Test;
 
 /**
- * This is the abstract test-case for {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}
- * implementations using {@link MyPojo}.
+ * This is the abstract test-case for {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder} implementations
+ * using {@link MyPojo}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -305,6 +305,9 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
 
     // test property "genericPojo"
     checkProperty(pojoDescriptor, "genericPojo", GenericPojo.class, GenericPojo.class);
+
+    // test inherited specialized generic property
+    checkProperty(pojoDescriptor, "id", Long.class, Long.class);
 
     // test polymorphism
     if (isMethodIntrostection()) {

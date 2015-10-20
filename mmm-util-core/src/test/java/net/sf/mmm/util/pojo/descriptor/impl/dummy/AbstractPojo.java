@@ -2,13 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.dummy;
 
+import net.sf.mmm.util.transferobject.api.EntityTo;
+
 /**
  * This is a dummy pojo for testing.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public abstract class AbstractPojo implements PojoInterface {
+public abstract class AbstractPojo extends EntityTo<Long> implements PojoInterface {
 
   private String name;
 
