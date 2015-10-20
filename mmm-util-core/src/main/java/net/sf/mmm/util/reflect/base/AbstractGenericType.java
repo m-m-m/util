@@ -243,35 +243,46 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
     if (genericDeclaration instanceof Class<?>) {
       Class<?> declaringClass = (Class<?>) genericDeclaration;
-      List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getRetrievalClass());
-      if (hierarchy != null) {
-        TypeVariable<?> currentVariable = typeVariable;
-        for (int i = hierarchy.size() - 1; i >= -1; i--) {
-          Type hierarchyType;
-          if (i >= 0) {
-            hierarchyType = hierarchy.get(i);
-          } else {
-            hierarchyType = declaringType.getType();
-          }
-          if (hierarchyType instanceof ParameterizedType) {
-            ParameterizedType pt = (ParameterizedType) hierarchyType;
-            Type[] typeArguments = pt.getActualTypeArguments();
-            int variableIndex = getDeclarationIndex(currentVariable);
-            if (variableIndex >= 0) {
-              Type typeArgument = typeArguments[variableIndex];
-              if (typeArgument instanceof TypeVariable<?>) {
-                currentVariable = (TypeVariable<?>) typeArgument;
-              } else {
-                return typeArgument;
-              }
+      return resolveTypeVariable(typeVariable, declaringType, declaringClass);
+    }
+    return null;
+  }
+
+  private Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType,
+      Class<?> declaringClass) {
+
+    List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getRetrievalClass());
+    if (hierarchy != null) {
+      TypeVariable<?> currentVariable = typeVariable;
+      for (int i = hierarchy.size() - 1; i >= -1; i--) {
+        Type hierarchyType;
+        if (i >= 0) {
+          hierarchyType = hierarchy.get(i);
+        } else {
+          hierarchyType = declaringType.getType();
+        }
+        if (hierarchyType instanceof ParameterizedType) {
+          ParameterizedType pt = (ParameterizedType) hierarchyType;
+          Type[] typeArguments = pt.getActualTypeArguments();
+          int variableIndex = getDeclarationIndex(currentVariable);
+          if (variableIndex >= 0) {
+            Type typeArgument = typeArguments[variableIndex];
+            if (typeArgument instanceof TypeVariable<?>) {
+              currentVariable = (TypeVariable<?>) typeArgument;
+            } else {
+              return typeArgument;
             }
           }
         }
-        if (currentVariable != typeVariable) {
-          // NOT really resolved, but maybe bounds are more specific...
-          return currentVariable;
-        }
       }
+      if (currentVariable != typeVariable) {
+        // NOT really resolved, but maybe bounds are more specific...
+        return currentVariable;
+      }
+    }
+    GenericType<?> definingType = ((AbstractGenericType<?>) declaringType).getDefiningType();
+    if (definingType != null) {
+      return resolveTypeVariable(typeVariable, definingType, declaringClass);
     }
     return null;
   }
