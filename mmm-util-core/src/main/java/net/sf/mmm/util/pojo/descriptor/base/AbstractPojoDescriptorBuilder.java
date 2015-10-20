@@ -19,10 +19,11 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent implements PojoDescriptorBuilder {
+public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent implements
+    PojoDescriptorBuilder {
 
   /** @see #getDescriptor(Class) */
-  private final Map<Class<?>, PojoDescriptorImpl<?>> pojoMap;
+  private final Map<GenericType<?>, PojoDescriptorImpl<?>> pojoMap;
 
   /**
    * The constructor.
@@ -78,25 +79,17 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
   @Override
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
 
-    Class<?> pojoClass = pojoType.getAssignmentClass();
-    PojoDescriptorImpl<POJO> descriptor = null;
-    // is simple class type with no additional generic information?
-    boolean isClassType = (pojoType.getType() == pojoClass);
-    if (isClassType) {
-      descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoClass);
-    }
+    PojoDescriptorImpl<POJO> descriptor = (PojoDescriptorImpl<POJO>) this.pojoMap.get(pojoType);
     if (descriptor == null) {
       descriptor = createDescriptor(pojoType);
-      if (isClassType) {
-        this.pojoMap.put(pojoClass, descriptor);
-      }
+      this.pojoMap.put(pojoType, descriptor);
     }
     return descriptor;
   }
 
   /**
-   * This method creates the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor pojo descriptor} for
-   * the given <code>pojoType</code>.
+   * This method creates the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor pojo descriptor} for the given
+   * <code>pojoType</code>.
    *
    * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder#getDescriptor(java.lang.Class)
    *
