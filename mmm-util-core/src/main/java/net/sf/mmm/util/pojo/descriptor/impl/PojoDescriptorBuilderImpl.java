@@ -28,7 +28,6 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
-import net.sf.mmm.util.reflect.base.AbstractGenericType;
 
 /**
  * This is the generic implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}
@@ -351,21 +350,13 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
    * @param descriptor is the {@link PojoDescriptorImpl} to merge.
    */
-  @SuppressWarnings("unchecked")
   private <P> void mergeDescriptorWithSuperClass(Class<P> pojoClass, PojoDescriptorImpl<P> descriptor) {
 
     // create descriptor for super-class to reuse information (#55)
     Class<? super P> superClass = pojoClass.getSuperclass();
-    PojoDescriptorImpl<? super P> superDescriptor = null;
+    PojoDescriptorImpl<?> superDescriptor = null;
     if (superClass != null) {
-      AbstractGenericType<P> pojoType = (AbstractGenericType<P>) descriptor.getPojoType();
-      GenericType<?> definingType = pojoType.getDefiningType();
-      GenericType<? super P> superType;
-      if (definingType == null) {
-        superType = (GenericType<? super P>) getReflectionUtil().createGenericType(superClass, pojoType);
-      } else {
-        superType = (GenericType<? super P>) getReflectionUtil().createGenericType(superClass, definingType);
-      }
+      GenericType<?> superType = getReflectionUtil().createGenericType(superClass, descriptor.getPojoType());
       superDescriptor = createDescriptor(superType);
       for (PojoPropertyDescriptorImpl superPropertyDescriptor : superDescriptor.getPropertyDescriptors()) {
         PojoPropertyDescriptorImpl propertyDescriptor = descriptor.getPropertyDescriptor(superPropertyDescriptor
