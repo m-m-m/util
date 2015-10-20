@@ -81,7 +81,8 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
       assertNotNull(propertyField);
       assertEquals(propertyName, propertyField.getName());
       PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorModes.GET);
-      assertEquals(getter.getPropertyType().getAssignmentClass(), propertyField.getType());
+      // due to generic type variables the derived property type can be a sub-type of the field type
+      assertTrue(propertyField.getType().isAssignableFrom(getter.getPropertyType().getAssignmentClass()));
       if (!isMethodIntrostection()) {
         assertSame(getter.getAccessibleObject(), propertyField);
       }
