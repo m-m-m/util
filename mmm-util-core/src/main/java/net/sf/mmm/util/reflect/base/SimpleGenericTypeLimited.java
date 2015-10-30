@@ -218,4 +218,22 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
     return this.type.equals(other.type);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+
+    return this.type.getName();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toStringSimple() {
+
+    return this.type.getSimpleName();
+  }
+
 }

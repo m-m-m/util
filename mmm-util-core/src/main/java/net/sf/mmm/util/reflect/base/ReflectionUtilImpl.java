@@ -130,6 +130,18 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
+  protected void doInitialized() {
+
+    super.doInitialized();
+    if (instance == null) {
+      instance = this;
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   protected void doInitialize() {
 
     super.doInitialize();
@@ -232,10 +244,9 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings({ "rawtypes", "unchecked" })
   public GenericType<?> createGenericType(Type type, Class<?> definingType) {
 
-    return new GenericTypeImpl(type, createGenericType(definingType));
+    return createGenericType(type, createGenericType(definingType));
   }
 
   /**

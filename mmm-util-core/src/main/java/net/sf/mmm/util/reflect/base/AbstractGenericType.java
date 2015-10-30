@@ -317,4 +317,13 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toStringSimple() {
+
+    return ReflectionUtilImpl.getInstance().toStringSimple(this);
+  }
+
 }

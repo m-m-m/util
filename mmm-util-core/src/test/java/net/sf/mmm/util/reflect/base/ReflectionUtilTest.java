@@ -122,6 +122,8 @@ public class ReflectionUtilTest extends Assertions {
     type = getReturnType(AssignableFromTestClass.class, "getMapSubType");
     assertThat(type.getComponentType().getRetrievalClass()).isEqualTo(String.class);
     assertThat(type.getKeyType().getRetrievalClass()).isEqualTo(Integer.class);
+    assertThat(type.toStringSimple()).isEqualTo("HashMap<Integer, String>");
+    assertThat(type.toString()).isEqualTo("java.util.HashMap<java.lang.Integer, java.lang.String>");
   }
 
   @Test
@@ -154,6 +156,9 @@ public class ReflectionUtilTest extends Assertions {
     assertThat(subType.isAssignableFrom(subType)).isTrue();
     assertThat(superType.isAssignableFrom(superType)).isTrue();
     assertThat(superType.isAssignableFrom(subType)).isTrue();
+    assertThat(superType.toStringSimple()).isEqualTo("Map<? extends Number, ? extends CharSequence>");
+    assertThat(superType.toString()).isEqualTo(
+        "java.util.Map<? extends java.lang.Number, ? extends java.lang.CharSequence>");
 
     subType = getReturnType(AssignableFromTestClass.class, "getListSubType");
     superType = getReturnType(AssignableFromTestClass.class, "getListSuperType");
