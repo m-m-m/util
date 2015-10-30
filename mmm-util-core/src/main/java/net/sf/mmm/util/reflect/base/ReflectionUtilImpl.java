@@ -479,6 +479,24 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
+  public String toStringSimple(Type type) {
+
+    final StringBuilder buffer = new StringBuilder();
+    Visitor<Class<?>> formatter = new Visitor<Class<?>>() {
+      @Override
+      public void visit(Class<?> clazz) {
+
+        buffer.append(clazz.getSimpleName());
+      }
+    };
+    toString(type, buffer, formatter);
+    return buffer.toString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void toString(Type type, Appendable appendable, Visitor<Class<?>> classFormatter) {
 
     NlsNullPointerException.checkNotNull(Type.class, type);

@@ -232,8 +232,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   /**
    * This method resolves the given <code>typeVariable</code> in the context of the given <code>declaringType</code>.
    *
-   * @param typeVariable is the {@link TypeVariable} to resolve.
-   * @param declaringType is the {@link GenericType} where the given <code>typeVariable</code> occurs or is replaced.
+   * @param typeVariable the {@link TypeVariable} to resolve.
+   * @param declaringType the {@link GenericType} where the given <code>typeVariable</code> occurs or is replaced.
    * @return the resolved {@link Type} or <code>null</code> if the given <code>typeVariable</code> could NOT be resolved
    *         (e.g. it was {@link TypeVariable#getGenericDeclaration() declared} in a {@link Class} that is NOT
    *         {@link Class#isAssignableFrom(Class) assignable from} the given <code>declaringType</code>) .
@@ -248,6 +248,17 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     return null;
   }
 
+  /**
+   * This method recursively resolves the given <code>typeVariable</code> in the context of the given
+   * <code>declaringType</code>.
+   *
+   * @param typeVariable the {@link TypeVariable} to resolve.
+   * @param declaringType the {@link GenericType} where the given <code>typeVariable</code> occurs or is replaced.
+   * @param declaringClass the {@link TypeVariable#getGenericDeclaration() declaring class}.
+   * @return the resolved {@link Type} or <code>null</code> if the given <code>typeVariable</code> could NOT be resolved
+   *         (e.g. it was {@link TypeVariable#getGenericDeclaration() declared} in a {@link Class} that is NOT
+   *         {@link Class#isAssignableFrom(Class) assignable from} the given <code>declaringType</code>) .
+   */
   private Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType,
       Class<?> declaringClass) {
 
