@@ -7,9 +7,9 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.util.validation.api.ValueValidator}.
- * 
+ *
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -46,7 +46,7 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
    * This method performs the validation in case <code>null</code> was provided as value. By default <code>null</code>
    * should be considered as a legal value. Only for validators such as {@link ValidatorMandatory} this method should be
    * overridden.
-   * 
+   *
    * @return the {@link ValidationFailure#getMessage() failure message} or <code>null</code> if the <code>null</code>
    *         -value is valid.
    */
@@ -62,7 +62,7 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
    * <b>ATTENTION:</b><br>
    * For internationalization you should not directly return string literals but use
    * {@link net.sf.mmm.util.nls.api.NlsMessage} instead.
-   * 
+   *
    * @param value is the value to validate.
    * @return the {@link ValidationFailure#getMessage() failure message} or <code>null</code> if the the given
    *         <code>value</code> is valid.

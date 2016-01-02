@@ -5,6 +5,7 @@ package net.sf.mmm.util.validation.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
 
@@ -20,9 +21,6 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @since 3.1.0
  */
 public class ComposedValidator<V> extends AbstractValidator<V> {
-
-  /** @see #getCode() */
-  private static final String CODE = "ComposedValidator";
 
   /** The child validators. */
   private final AbstractValidator<? super V>[] validators;
@@ -43,23 +41,9 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
    * {@inheritDoc}
    */
   @Override
-  public boolean isMandatory() {
-
-    for (AbstractValidator<? super V> validator : this.validators) {
-      if (validator.isMandatory()) {
-        return true;
-      }
-    }
-    return super.isMandatory();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   protected String getCode() {
 
-    return CODE;
+    return ComposedValidationFailure.CODE;
   }
 
   /**
@@ -83,7 +67,7 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
       if (failureList.size() == 1) {
         result = failureList.get(0);
       } else {
-        result = new ComposedValidationFailure(getCode(), valueSource,
+        result = new ComposedValidationFailure(valueSource,
             failureList.toArray(new ValidationFailure[failureList.size()]));
       }
     }
@@ -112,5 +96,18 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
   public ValueValidator<? super V> getValidator(int index) {
 
     return this.validators[index];
+  }
+
+  @Override
+  public <P> P getProperty(TypedProperty<P> property) {
+
+    P value = null;
+    for (AbstractValidator<? super V> validator : this.validators) {
+      value = validator.getProperty(property);
+      if (value != null) {
+        break;
+      }
+    }
+    return value;
   }
 }

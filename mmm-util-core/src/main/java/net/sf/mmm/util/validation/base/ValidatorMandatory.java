@@ -7,12 +7,13 @@ import java.util.Map;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**
- * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that validates that a mandatory value is
- * filled. It will produce a {@link net.sf.mmm.util.validation.api.ValidationFailure} if the value is not
- * provided (empty, blank, <code>null</code>).
- * 
+ * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that validates that a mandatory value is filled. It
+ * will produce a {@link net.sf.mmm.util.validation.api.ValidationFailure} if the value is not provided (empty, blank,
+ * <code>null</code>).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -30,15 +31,6 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
   public ValidatorMandatory() {
 
     super();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isMandatory() {
-
-    return true;
   }
 
   /**
@@ -98,6 +90,16 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
       }
     }
     return null;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public <P> P getProperty(TypedProperty<P> property) {
+
+    if (property == PROPERTY_MANDATORY) {
+      return (P) Boolean.TRUE;
+    }
+    return super.getProperty(property);
   }
 
 }

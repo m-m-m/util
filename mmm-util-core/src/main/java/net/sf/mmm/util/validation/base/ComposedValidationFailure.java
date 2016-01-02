@@ -16,6 +16,9 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
  */
 public class ComposedValidationFailure extends AbstractValidationFailure {
 
+  /** @see #getCode() */
+  static final String CODE = "ComposedValidator";
+
   /** UID for serialization. */
   private static final long serialVersionUID = -5191509274230075436L;
 
@@ -28,6 +31,17 @@ public class ComposedValidationFailure extends AbstractValidationFailure {
   protected ComposedValidationFailure() {
 
     super();
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param source is the {@link #getSource() source}.
+   * @param failures are the individual {@link ValidationFailure}s.
+   */
+  public ComposedValidationFailure(Object source, ValidationFailure[] failures) {
+
+    this(CODE, source, failures);
   }
 
   /**

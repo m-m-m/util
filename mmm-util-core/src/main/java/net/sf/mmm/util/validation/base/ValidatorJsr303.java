@@ -16,6 +16,7 @@ import javax.validation.metadata.PropertyDescriptor;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
@@ -122,13 +123,17 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
     this.mandatory = calculateMandatoryFlag();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @SuppressWarnings("unchecked")
   @Override
-  public boolean isMandatory() {
+  public <P> P getProperty(TypedProperty<P> typedProperty) {
 
-    return this.mandatory;
+    if (typedProperty == PROPERTY_MANDATORY) {
+      if (this.mandatory) {
+        return (P) Boolean.TRUE;
+      }
+      return null;
+    }
+    return super.getProperty(typedProperty);
   }
 
   /**
@@ -171,8 +176,8 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   public ValidationFailure validate(V value, Object valueSource) {
 
     if ((value == null) && (this.propertyType != null) && this.propertyType.isPrimitive()) {
-      return new ValidationFailureImpl(Mandatory.class.getSimpleName(), valueSource, createBundle(
-          NlsBundleUtilCoreRoot.class).errorMandatory());
+      return new ValidationFailureImpl(Mandatory.class.getSimpleName(), valueSource,
+          createBundle(NlsBundleUtilCoreRoot.class).errorMandatory());
     }
     Set<ConstraintViolation<?>> violationSet = validateJsr303(value);
     int size = violationSet.size();
@@ -194,8 +199,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
    * Validates the given <code>value</code>.
    *
    * @param value is the value to validate.
-   * @return the {@link Set} of {@link ConstraintViolation}s. Will be empty if the given <code>value</code> is
-   *         valid.
+   * @return the {@link Set} of {@link ConstraintViolation}s. Will be empty if the given <code>value</code> is valid.
    */
   private Set<ConstraintViolation<?>> validateJsr303(V value) {
 
@@ -251,8 +255,8 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   }
 
   /**
-   * @return the name of the property to validate or <code>null</code> to validate the entire
-   *         {@link #getPojoType() POJO}.
+   * @return the name of the property to validate or <code>null</code> to validate the entire {@link #getPojoType()
+   *         POJO}.
    */
   public String getProperty() {
 
@@ -261,8 +265,8 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
   /**
    * @return the {@link Class} reflecting the type of the {@link #getProperty() property} to validate or
-   *         <code>null</code> if undefined. May be used for additional support currently missing in JSR 303
-   *         such as primitive types that are implicitly mandatory but implementations of JSR 303 cause
+   *         <code>null</code> if undefined. May be used for additional support currently missing in JSR 303 such as
+   *         primitive types that are implicitly mandatory but implementations of JSR 303 cause
    *         {@link NullPointerException} or similar effects on property validation.
    */
   public Class<?> getPropertyType() {
