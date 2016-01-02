@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.value.api.Range;
 
 /**
@@ -16,10 +13,7 @@ import net.sf.mmm.util.value.api.Range;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class ValidatorRange<V extends Comparable<V>> extends AbstractValueValidator<V> {
-
-  /** @see #validateNotNull(Comparable) */
-  private final Range<V> range;
+public class ValidatorRange<V extends Comparable<V>> extends AbstractValidatorRange<V, V> {
 
   /**
    * The constructor.
@@ -28,8 +22,7 @@ public class ValidatorRange<V extends Comparable<V>> extends AbstractValueValida
    */
   public ValidatorRange(Range<V> range) {
 
-    super();
-    this.range = range;
+    super(range);
   }
 
   /**
@@ -41,32 +34,6 @@ public class ValidatorRange<V extends Comparable<V>> extends AbstractValueValida
   public ValidatorRange(V min, V max) {
 
     this(new Range<>(min, max));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected NlsMessage validateNotNull(V value) {
-
-    if (this.range.isContained(value)) {
-      return null;
-    } else {
-      return createBundle(NlsBundleUtilCoreRoot.class).errorValueOutOfRange(value, this.range.getMin(),
-          this.range.getMax(), null);
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public <P> P getProperty(TypedProperty<P> property) {
-
-    if (property == PROPERTY_MINIMUM) {
-      return (P) this.range.getMin();
-    } else if (property == PROPERTY_MAXIMUM) {
-      return (P) this.range.getMax();
-    }
-    return super.getProperty(property);
   }
 
 }

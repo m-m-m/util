@@ -460,8 +460,8 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value {value}{source,choice,(?==null)''(else)' from \"'{source}'\"'} needs to be in the range from {min} to {max}.")
-  NlsMessage errorValueOutOfRange(@Named("value") Object value, @Named("min") Object min,
-      @Named("max") Object max, @Named("source") Object source);
+  NlsMessage errorValueOutOfRange(@Named("value") Object value, @Named("min") Object min, @Named("max") Object max,
+      @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.validation.base.ValidatorCompare
@@ -499,6 +499,17 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} could NOT be converted to \"{type}\"!")
   NlsMessage errorValueConvert(@Named("value") Object value, @Named("type") Type type,
       @Named("source") Object source);
+
+  /**
+   * @see net.sf.mmm.util.validation.base.ValidatorPattern
+   *
+   * @param value is the value that does NOT match the expected format.
+   * @param format is the expected format.
+   * @param source is the source of the value.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The value{value,choice,(?==null)''(else)' \"'{value}'\"'} has to match the format \"{format}\"!")
+  NlsMessage errorValueFormat(@Named("value") Object value, @Named("format") Object format);
 
   /**
    * @see net.sf.mmm.util.component.api.ResourceMissingException
@@ -760,7 +771,8 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The operation \"{operation}\" was invoked{source,choice,(?==null)''(else)' on \"'{source}'\"'} but is NOT supported!")
-  NlsMessage errorUnsupportedOperationWithName(@Named("operation") Object operation, @Named("source") Object source);
+  NlsMessage errorUnsupportedOperationWithName(@Named("operation") Object operation,
+      @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.reflect.base.IllegalWildcardSequenceException
