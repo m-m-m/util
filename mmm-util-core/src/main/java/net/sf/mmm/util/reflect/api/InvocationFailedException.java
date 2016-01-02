@@ -9,9 +9,9 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * An {@link InvocationFailedException} is thrown if an invocation failed. Typically invocation means a
- * {@link java.lang.reflect reflective} call of an {@link AccessibleObject}. Unlike
- * {@link InvocationTargetException} this is a {@link RuntimeException} and has
- * {@link net.sf.mmm.util.exception.api.NlsThrowable native-language-support}.
+ * {@link java.lang.reflect reflective} call of an {@link AccessibleObject}. Unlike {@link InvocationTargetException}
+ * this is a {@link RuntimeException} and has {@link net.sf.mmm.util.exception.api.NlsThrowable native-language-support}
+ * .
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -27,21 +27,11 @@ public class InvocationFailedException extends ReflectionException {
   /**
    * The constructor.
    *
-   * @param nested is the exception to adapt.
-   */
-  public InvocationFailedException(InvocationTargetException nested) {
-
-    super(nested.getCause(), createBundle(NlsBundleUtilCoreRoot.class).errorInvocationFailed());
-  }
-
-  /**
-   * The constructor.
-   *
    * @param nested is the {@link #getCause() cause} of this exception.
    */
-  public InvocationFailedException(Exception nested) {
+  public InvocationFailedException(Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorInvocationFailed());
+    super(getInvocationTargetCause(nested), createBundle(NlsBundleUtilCoreRoot.class).errorInvocationFailed());
   }
 
   /**
@@ -52,24 +42,33 @@ public class InvocationFailedException extends ReflectionException {
    *        {@link java.lang.reflect.Constructor}) that was invoked and caused the exception.
    * @since 6.0.0
    */
-  public InvocationFailedException(InvocationTargetException nested, AccessibleObject accessible) {
+  public InvocationFailedException(Throwable nested, AccessibleObject accessible) {
 
-    super(nested.getCause(), createBundle(NlsBundleUtilCoreRoot.class).errorInvocationFailedOf(accessible));
+    super(getInvocationTargetCause(nested),
+        createBundle(NlsBundleUtilCoreRoot.class).errorInvocationFailedOf(accessible));
   }
 
   /**
    * The constructor.
    *
-   * @param nested is the exception to adapt.
+   * @param nested is the exception to adapt. Typically {@link InvocationTargetException}.
    * @param accessible is the {@link AccessibleObject} ({@link java.lang.reflect.Method} or
    *        {@link java.lang.reflect.Constructor}) that was invoked and caused the exception.
    * @param instance is the instance on which the invocation took place and caused the exception. It may be
-   *        <code>null</code> if the <code>accessible</code> is
-   *        {@link java.lang.reflect.Modifier#isStatic(int) static}.
+   *        <code>null</code> if the <code>accessible</code> is {@link java.lang.reflect.Modifier#isStatic(int) static}.
    */
-  public InvocationFailedException(InvocationTargetException nested, AccessibleObject accessible, Object instance) {
+  public InvocationFailedException(Throwable nested, AccessibleObject accessible, Object instance) {
 
-    super(nested.getCause(), createBundle(NlsBundleUtilCoreRoot.class).errorInvocationFailedOn(instance, accessible));
+    super(getInvocationTargetCause(nested),
+        createBundle(NlsBundleUtilCoreRoot.class).errorInvocationFailedOn(instance, accessible));
+  }
+
+  private static Throwable getInvocationTargetCause(Throwable error) {
+
+    if (error instanceof InvocationTargetException) {
+      return error.getCause();
+    }
+    return error;
   }
 
   /**
