@@ -12,9 +12,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * This class implements both {@link Iterator} and {@link Enumeration} to iterate/enumerate a given array. For
  * performance the array is NOT copied so please note that modifications of the array given at construction will
  * directly be reflected by this {@link ArrayIterator}.
- * 
+ *
  * @param <E> is the generic type of the elements to iterate/enumerate.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -31,7 +31,7 @@ public class ArrayIterator<E> implements Enumeration<E>, Iterator<E> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param array is the array to iterate/enumerate.
    */
   public ArrayIterator(E[] array) {
@@ -41,7 +41,7 @@ public class ArrayIterator<E> implements Enumeration<E>, Iterator<E> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param array is the array to iterate/enumerate.
    * @param start is the index of the first item to iterate/enumerate in <code>array</code>.
    * @param end is the index of the last item to iterate/enumerate in <code>array</code>.
@@ -49,8 +49,6 @@ public class ArrayIterator<E> implements Enumeration<E>, Iterator<E> {
   public ArrayIterator(E[] array, int start, int end) {
 
     super();
-    Integer startInteger = Integer.valueOf(start);
-    ValueOutOfRangeException.checkRange(startInteger, Integer.valueOf(0), Integer.valueOf(end), "start");
     Integer max;
     if (array == null) {
       this.array = null;
@@ -63,7 +61,11 @@ public class ArrayIterator<E> implements Enumeration<E>, Iterator<E> {
       this.stopIndex = end + 1;
       max = Integer.valueOf(array.length - 1);
     }
-    ValueOutOfRangeException.checkRange(Integer.valueOf(end), Integer.valueOf(start), max, "end");
+    if ((start > 0) || (end > -1)) {
+      Integer startInteger = Integer.valueOf(start);
+      ValueOutOfRangeException.checkRange(startInteger, Integer.valueOf(0), Integer.valueOf(end), "start");
+      ValueOutOfRangeException.checkRange(Integer.valueOf(end), Integer.valueOf(start), max, "end");
+    }
   }
 
   /**
