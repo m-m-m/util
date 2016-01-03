@@ -15,13 +15,13 @@ import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.process.api.AsyncProcessExecutor;
 import net.sf.mmm.util.process.api.ProcessContext;
 import net.sf.mmm.util.process.api.ProcessUtil;
-
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link ProcessUtilImpl}.
@@ -88,6 +88,7 @@ public class ProcessUtilTest {
     }
   }
 
+  @Ignore("manual test, cannot run headless")
   @Test
   public void testExecuteAsyncStop() throws Exception {
 
