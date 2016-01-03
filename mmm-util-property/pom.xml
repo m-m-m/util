@@ -8,7 +8,8 @@
     <version>dev-SNAPSHOT</version>
     <relativePath>../mmm-util-modules/pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-util-sandbox</artifactId>
+  <artifactId>mmm-util-property</artifactId>
+  <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project provides additional utilities that are in development and unclear or experimental state. It will never be released but code can move from here to other utilities after getting mature.</description>
