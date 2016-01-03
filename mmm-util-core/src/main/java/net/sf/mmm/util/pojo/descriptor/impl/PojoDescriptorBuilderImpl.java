@@ -359,8 +359,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
       GenericType<?> superType = getReflectionUtil().createGenericType(superClass, descriptor.getPojoType());
       superDescriptor = createDescriptor(superType);
       for (PojoPropertyDescriptorImpl superPropertyDescriptor : superDescriptor.getPropertyDescriptors()) {
-        PojoPropertyDescriptorImpl propertyDescriptor = descriptor.getPropertyDescriptor(superPropertyDescriptor
-            .getName());
+        PojoPropertyDescriptorImpl propertyDescriptor = descriptor
+            .getPropertyDescriptor(superPropertyDescriptor.getName());
         if (propertyDescriptor == null) {
           descriptor.addPropertyDescriptor(superPropertyDescriptor);
         } else {
@@ -425,7 +425,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    */
   protected void logDuplicateAccessor(PojoPropertyAccessor accessor, PojoPropertyAccessor duplicate) {
 
-    getLogger().warn("accessor '" + duplicate + "' - is a duplicate of '" + accessor + "'!");
+    getLogger().debug("accessor '{}' - is a duplicate of '{}'!", duplicate, accessor);
   }
 
 }
