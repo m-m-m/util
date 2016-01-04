@@ -28,6 +28,9 @@ public interface BooleanProperty extends GenericProperty<Boolean>, ObservableBoo
   }
 
   @Override
+  void setValue(Boolean value);
+
+  @Override
   default void set(boolean value) {
 
     setValue(Boolean.valueOf(value));
