@@ -17,6 +17,10 @@ public interface ExamplePojo {
 
   void setCountryCode(String countryCode);
 
+  int getAge();
+
+  void setAge(int age);
+
   String getName();
 
   void setName(String name);

@@ -20,7 +20,7 @@ import net.sf.mmm.util.property.impl.BooleanPropertyImpl;
 import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 import net.sf.mmm.util.property.impl.StringPropertyImpl;
 import net.sf.mmm.util.validation.api.ValidationFailure;
-import net.sf.mmm.util.validation.base.ValidatorPattern;
+import net.sf.mmm.util.validation.base.text.ValidatorPattern;
 
 /**
  * This is the test-case for {@link BeanFactoryImpl}.
@@ -95,8 +95,9 @@ public class BeanFactoryImplTest extends Assertions {
     assertThat(access.isReadOnly()).isFalse();
     assertThat(access.isPrototype()).isFalse();
     assertThat(access.isDynamic()).isFalse();
-    assertThat(access.getProperties()).hasSize(4).contains(bean.CountryCode(), bean.Name(), bean.Friend(),
-        bean.Orientation());
+    GenericProperty<?>[] properties = new GenericProperty<?>[] { bean.CountryCode(), bean.Name(), bean.Age(),
+    bean.Friend(), bean.Orientation() };
+    assertThat(access.getProperties()).hasSize(properties.length).contains(properties);
 
     String name = "magicName";
     bean.Name().setValue(name);
@@ -104,6 +105,7 @@ public class BeanFactoryImplTest extends Assertions {
 
     // validation
     bean.CountryCode().set("DE");
+    bean.Age().set(5);
     ValidationFailure failure = access.validate();
     assertThat(failure).isNull();
     bean.CountryCode().set("xyz");
@@ -123,7 +125,7 @@ public class BeanFactoryImplTest extends Assertions {
     assertThat(access.isReadOnly()).isFalse();
     assertThat(access.isPrototype()).isFalse();
     assertThat(access.isDynamic()).isFalse();
-    String[] properties = new String[] { "CountryCode", "Name", "Friend", "Orientation" };
+    String[] properties = new String[] { "CountryCode", "Name", "Age", "Friend", "Orientation" };
     int expectedSize = properties.length;
     assertThat(access.getProperties()).hasSize(expectedSize);
     Set<String> propertyNames = new HashSet<>();

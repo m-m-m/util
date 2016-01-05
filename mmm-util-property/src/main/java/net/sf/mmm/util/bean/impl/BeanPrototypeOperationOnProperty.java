@@ -3,6 +3,7 @@
 package net.sf.mmm.util.bean.impl;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.GenericProperty;
@@ -27,6 +28,9 @@ public abstract class BeanPrototypeOperationOnProperty extends BeanPrototypeOper
   public BeanPrototypeOperationOnProperty(BeanAccessPrototype<?> prototype, Method method,
       BeanPrototypeProperty property) {
     super(prototype, method);
+    if (property == null) {
+      Objects.requireNonNull(property, "property");
+    }
     this.prototypeProperty = property;
   }
 

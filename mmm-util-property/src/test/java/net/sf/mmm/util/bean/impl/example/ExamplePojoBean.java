@@ -12,4 +12,6 @@ import net.sf.mmm.util.bean.api.Bean;
  */
 public interface ExamplePojoBean extends ExamplePojo, Bean {
 
+  // nothing to add...
+
 }

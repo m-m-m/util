@@ -71,11 +71,11 @@ final class LookupHelper {
     }
   }
 
-  public Object invokeDefaultMethod(Method method, Object... args) {
+  public Object invokeDefaultMethod(Object instance, Method method, Object... args) {
 
     MethodHandle methodHandle = newMethodHandle(method);
     try {
-      return methodHandle.invoke(args);
+      return methodHandle.bindTo(instance).invokeWithArguments(args);
     } catch (Throwable e) {
       throw new InvocationFailedException(e);
     }

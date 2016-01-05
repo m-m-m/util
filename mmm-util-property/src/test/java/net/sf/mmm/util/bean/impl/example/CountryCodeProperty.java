@@ -5,11 +5,12 @@ package net.sf.mmm.util.bean.impl.example;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 import net.sf.mmm.util.property.impl.StringPropertyImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidator;
 import net.sf.mmm.util.validation.base.ValidatorMandatory;
-import net.sf.mmm.util.validation.base.ValidatorPattern;
+import net.sf.mmm.util.validation.base.text.ValidatorPattern;
 
 /**
  * This is a {@link StringPropertyImpl} for a country code.
@@ -27,26 +28,29 @@ public class CountryCodeProperty extends StringPropertyImpl {
   /**
    * The constructor.
    *
-   * @param name
-   */
-  public CountryCodeProperty(String name) {
-    this(name, null);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param name
-   * @param bean
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    */
   public CountryCodeProperty(String name, Bean bean) {
     super(name, bean, VALIDATOR);
   }
 
-  @Override
-  public StringPropertyImpl createFor(Bean newBean) {
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param validator - see {@link #validate()}.
+   */
+  protected CountryCodeProperty(String name, Bean bean, AbstractValidator<? super String> validator) {
+    super(name, bean, validator);
+  }
 
-    return new CountryCodeProperty(getName(), newBean);
+  @Override
+  public GenericPropertyImpl<String> copy(String newName, Bean newBean,
+      AbstractValidator<? super String> newValidator) {
+
+    return new CountryCodeProperty(newName, newBean, newValidator);
   }
 
 }

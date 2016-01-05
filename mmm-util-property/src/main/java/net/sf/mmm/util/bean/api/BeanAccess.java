@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.property.api.GenericProperty;
@@ -12,7 +9,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
-import net.sf.mmm.util.validation.base.ComposedValidationFailure;
+import net.sf.mmm.util.validation.base.ValidationFailureComposer;
 
 /**
  * This is the interface for all generic operations on a {@link Bean}.
@@ -55,28 +52,12 @@ public interface BeanAccess {
    */
   default ValidationFailure validate() {
 
-    ValidationFailure result = null;
-    List<ValidationFailure> failureList = null;
+    ValidationFailureComposer composer = new ValidationFailureComposer();
     for (GenericProperty<?> property : getProperties()) {
       ValidationFailure failure = property.validate();
-      if (failure != null) {
-        if (failureList == null) {
-          if (result == null) {
-            result = failure;
-          } else {
-            failureList = new ArrayList<>();
-            failureList.add(result);
-          }
-        }
-        if (failureList != null) {
-          failureList.add(failure);
-        }
-      }
+      composer.add(failure);
     }
-    if (failureList != null) {
-      result = new ComposedValidationFailure(this, failureList.toArray(new ValidationFailure[failureList.size()]));
-    }
-    return result;
+    return composer.get(this);
   }
 
   /**

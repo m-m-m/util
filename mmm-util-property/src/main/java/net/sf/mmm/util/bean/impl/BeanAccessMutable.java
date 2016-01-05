@@ -20,7 +20,7 @@ class BeanAccessMutable extends BeanAccessInstance {
   protected GenericProperty<?> createProperty(BeanPrototypeProperty prototypeProperty) {
 
     GenericPropertyImpl<?> property = prototypeProperty.getProperty();
-    return property.createFor(getBean());
+    return property.copy(getBean());
   }
 
 }

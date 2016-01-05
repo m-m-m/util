@@ -13,6 +13,9 @@ import net.sf.mmm.util.bean.impl.BeanFactoryImpl;
  */
 public interface ExampleBean extends ExamplePojoBean, ExamplePropertyBean {
 
+  /**
+   * @return a new instance of {@link ExampleBean}.
+   */
   static ExampleBean create() {
 
     return BeanFactoryImpl.getInstance().create(ExampleBean.class);

@@ -21,12 +21,15 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.property.api.GenericProperty;
 import net.sf.mmm.util.property.impl.BooleanPropertyImpl;
 import net.sf.mmm.util.property.impl.GenericPropertyImpl;
+import net.sf.mmm.util.property.impl.IntegerPropertyImpl;
+import net.sf.mmm.util.property.impl.LongPropertyImpl;
 import net.sf.mmm.util.property.impl.StringPropertyImpl;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ValidatorNone;
@@ -187,8 +190,9 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     Method method = beanMethod.getMethod();
     GenericPropertyImpl<?> property = null;
     if (method.isDefault()) {
-      property = (GenericPropertyImpl<?>) LookupHelper.INSTANCE.invokeDefaultMethod(method,
-          ReflectionUtil.NO_ARGUMENTS);
+      property = (GenericPropertyImpl<?>) LookupHelper.INSTANCE.invokeDefaultMethod(bean, method,
+          ReflectionUtilLimited.NO_ARGUMENTS);
+      property = property.copy(beanMethod.getPropertyName(), bean);
     }
     if (property == null) {
       GenericType<?> propertyType = this.reflectionUtil.createGenericType(beanMethod.getPropertyType(), beanType);
@@ -207,7 +211,9 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param <V> the generic property type.
    * @param name the {@link GenericPropertyImpl#getName() property name}.
    * @param type the {@link GenericPropertyImpl#getType() property type}.
-   * @param bean
+   * @param bean the {@link GenericPropertyImpl#getBean() bean}.
+   * @param propertyClass the {@link Class} reflecting the {@link GenericProperty} or <code>null</code> if no property
+   *        method exists and this method is called for plain getter or setter.
    * @return the new instance of {@link GenericPropertyImpl}.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -223,6 +229,10 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         result = new StringPropertyImpl(name, bean);
       } else if (valueClass == Boolean.class) {
         result = new BooleanPropertyImpl(name, bean);
+      } else if (valueClass == Integer.class) {
+        result = new IntegerPropertyImpl(name, bean);
+      } else if (valueClass == Long.class) {
+        result = new LongPropertyImpl(name, bean);
       } else {
         result = new GenericPropertyImpl<>(name, type, bean);
       }

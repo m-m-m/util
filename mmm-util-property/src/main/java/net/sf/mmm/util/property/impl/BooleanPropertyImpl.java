@@ -7,9 +7,10 @@ import net.sf.mmm.util.property.api.BooleanProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
+import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link BooleanProperty}.
  *
  * @author hohwille
  * @since 7.1.0
@@ -21,19 +22,8 @@ public class BooleanPropertyImpl extends GenericPropertyImpl<Boolean> implements
   /**
    * The constructor.
    *
-   * @param name
-   * @param type
-   */
-  public BooleanPropertyImpl(String name) {
-    super(name, TYPE);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param name
-   * @param type
-   * @param bean
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    */
   public BooleanPropertyImpl(String name, Bean bean) {
     super(name, TYPE, bean);
@@ -42,30 +32,24 @@ public class BooleanPropertyImpl extends GenericPropertyImpl<Boolean> implements
   /**
    * The constructor.
    *
-   * @param name
-   * @param type
-   * @param validator
-   */
-  public BooleanPropertyImpl(String name, AbstractValidator<? super Boolean> validator) {
-    super(name, TYPE, validator);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param name
-   * @param type
-   * @param bean
-   * @param validator
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param validator - see {@link #validate()}.
    */
   public BooleanPropertyImpl(String name, Bean bean, AbstractValidator<? super Boolean> validator) {
     super(name, TYPE, bean, validator);
   }
 
   @Override
-  public BooleanPropertyImpl createFor(Bean newBean) {
+  public BooleanPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super Boolean> newValidator) {
 
-    return new BooleanPropertyImpl(getName(), newBean, getValidator());
+    return new BooleanPropertyImpl(newName, newBean, newValidator);
+  }
+
+  @Override
+  public ValidatorBuilderBoolean<PropertyBuilder<BooleanPropertyImpl>> withValdidator() {
+
+    return withValdidator(x -> new ValidatorBuilderBoolean<>(x));
   }
 
 }

@@ -7,9 +7,10 @@ import net.sf.mmm.util.property.api.StringProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
+import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
 
 /**
- * TODO: this class ...
+ * This is the implementation of {@link StringProperty}.
  *
  * @author hohwille
  * @since 7.1.0
@@ -21,19 +22,8 @@ public class StringPropertyImpl extends GenericPropertyImpl<String> implements S
   /**
    * The constructor.
    *
-   * @param name
-   * @param type
-   */
-  public StringPropertyImpl(String name) {
-    super(name, TYPE);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param name
-   * @param type
-   * @param bean
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    */
   public StringPropertyImpl(String name, Bean bean) {
     super(name, TYPE, bean);
@@ -42,30 +32,25 @@ public class StringPropertyImpl extends GenericPropertyImpl<String> implements S
   /**
    * The constructor.
    *
-   * @param name
-   * @param type
-   * @param validator
-   */
-  public StringPropertyImpl(String name, AbstractValidator<? super String> validator) {
-    super(name, TYPE, validator);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param name
-   * @param type
-   * @param bean
-   * @param validator
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param validator - see {@link #validate()}.
    */
   public StringPropertyImpl(String name, Bean bean, AbstractValidator<? super String> validator) {
     super(name, TYPE, bean, validator);
   }
 
   @Override
-  public StringPropertyImpl createFor(Bean newBean) {
+  public GenericPropertyImpl<String> copy(String newName, Bean newBean,
+      AbstractValidator<? super String> newValidator) {
 
-    return new StringPropertyImpl(getName(), newBean, getValidator());
+    return new StringPropertyImpl(newName, newBean, newValidator);
+  }
+
+  @Override
+  public ValidatorBuilderString<PropertyBuilder<StringPropertyImpl>> withValdidator() {
+
+    return withValdidator(x -> new ValidatorBuilderString<>(x));
   }
 
 }
