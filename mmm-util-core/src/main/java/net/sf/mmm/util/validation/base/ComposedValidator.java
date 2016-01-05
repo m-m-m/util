@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
@@ -20,7 +17,7 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class ComposedValidator<V> extends AbstractValidator<V> {
+public class ComposedValidator<V> extends AbstractValidator<V> implements ComposedValueValidator<V> {
 
   /** The child validators. */
   private final AbstractValidator<? super V>[] validators;
@@ -52,26 +49,12 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
   @Override
   public ValidationFailure validate(V value, Object valueSource) {
 
-    ValidationFailure result = null;
-    List<ValidationFailure> failureList = null;
-    for (ValueValidator<? super V> validator : this.validators) {
-      ValidationFailure failure = validator.validate(value, valueSource);
-      if (failure != null) {
-        if (failureList == null) {
-          failureList = new ArrayList<>();
-        }
-        failureList.add(failure);
-      }
+    ValidationFailureComposer composer = new ValidationFailureComposer();
+    for (ValueValidator<? super V> v : this.validators) {
+      ValidationFailure failure = v.validate(value, valueSource);
+      composer.add(failure);
     }
-    if (failureList != null) {
-      if (failureList.size() == 1) {
-        result = failureList.get(0);
-      } else {
-        result = new ComposedValidationFailure(valueSource,
-            failureList.toArray(new ValidationFailure[failureList.size()]));
-      }
-    }
-    return result;
+    return composer.get(valueSource);
   }
 
   /**
@@ -93,7 +76,7 @@ public class ComposedValidator<V> extends AbstractValidator<V> {
    * @param index is the index of the {@link ValueValidator} to get.
    * @return the requested {@link ValueValidator}.
    */
-  public ValueValidator<? super V> getValidator(int index) {
+  public AbstractValidator<? super V> getValidator(int index) {
 
     return this.validators[index];
   }

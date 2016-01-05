@@ -1,9 +1,10 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.validation.base;
+package net.sf.mmm.util.validation.base.collection;
 
 import java.util.Collection;
 
+import net.sf.mmm.util.validation.base.AbstractValidatorRange;
 import net.sf.mmm.util.value.api.Range;
 
 /**

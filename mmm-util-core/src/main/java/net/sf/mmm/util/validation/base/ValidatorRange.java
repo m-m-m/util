@@ -13,7 +13,8 @@ import net.sf.mmm.util.value.api.Range;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class ValidatorRange<V extends Comparable<V>> extends AbstractValidatorRange<V, V> {
+@SuppressWarnings("rawtypes")
+public class ValidatorRange<V extends Comparable> extends AbstractValidatorRange<V, V> {
 
   /**
    * The constructor.

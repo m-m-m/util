@@ -18,7 +18,8 @@ import net.sf.mmm.util.value.api.Range;
  * @author hohwille
  * @since 7.1.0
  */
-public class AbstractValidatorRange<V, R extends Comparable<R>> extends AbstractValueValidator<V> {
+@SuppressWarnings("rawtypes")
+public class AbstractValidatorRange<V, R extends Comparable> extends AbstractValueValidator<V> {
 
   /** @see #validateNotNull(Comparable) */
   private final Range<R> range;

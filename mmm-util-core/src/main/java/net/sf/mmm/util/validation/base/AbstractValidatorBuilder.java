@@ -6,7 +6,7 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**
  * This is the abstract base implementation of {@link ValidatorBuilder}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */

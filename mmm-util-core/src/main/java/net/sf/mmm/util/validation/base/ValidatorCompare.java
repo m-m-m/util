@@ -10,8 +10,8 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that {@link #validate(Object, Object) validates that
- * a value} is {@link CompareOperator#eval(double, double) satisfies} a given {@link CompareOperator} -operation for
- * given value to compare to.
+ * a value} {@link CompareOperator#eval(double, double) satisfies} a given {@link CompareOperator} -operation for given
+ * value to compare to.
  *
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
  *

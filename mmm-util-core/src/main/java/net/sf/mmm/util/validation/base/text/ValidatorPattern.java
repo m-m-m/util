@@ -1,11 +1,12 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.validation.base;
+package net.sf.mmm.util.validation.base.text;
 
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.validation.base.AbstractValueValidator;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that a given {@link CharSequence}
