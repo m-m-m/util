@@ -12,7 +12,7 @@ package net.sf.mmm.util.validation.api;
  * validate entire objects to the end collecting all {@link ValidationFailure failures} so the end-user can see and fix
  * all problems at once.
  *
- * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
+ * @param <V> the generic type of the value to {@link #validate(Object) validate}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

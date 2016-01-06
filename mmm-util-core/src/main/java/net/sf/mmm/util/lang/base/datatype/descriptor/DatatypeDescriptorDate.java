@@ -13,7 +13,7 @@ import javax.inject.Named;
  * @since 6.0.0
  */
 @Named
-@SuppressWarnings({ "deprecation", "javadoc" })
+@SuppressWarnings("deprecation")
 public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
 
   /**
