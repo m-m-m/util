@@ -10,7 +10,7 @@ import javafx.beans.value.WritableLongValue;
 
 /**
  * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
- * {@link Integer}.
+ * {@link Long}.
  *
  * @author hohwille
  * @since 7.1.0
