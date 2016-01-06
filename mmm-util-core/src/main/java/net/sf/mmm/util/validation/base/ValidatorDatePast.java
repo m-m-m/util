@@ -9,13 +9,16 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that
- * {@link net.sf.mmm.util.validation.api.ValueValidator#validate(Object, Object) validates that a date} lies
- * in the past.
+ * {@link net.sf.mmm.util.validation.api.ValueValidator#validate(Object, Object) validates that a date} lies in the
+ * past.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
 public class ValidatorDatePast extends AbstractValueValidator<Date> {
+
+  /** @see #getCode() */
+  public static final String CODE = "Past";
 
   /**
    * The constructor.
@@ -23,6 +26,12 @@ public class ValidatorDatePast extends AbstractValueValidator<Date> {
   public ValidatorDatePast() {
 
     super();
+  }
+
+  @Override
+  protected String getCode() {
+
+    return CODE;
   }
 
   /**

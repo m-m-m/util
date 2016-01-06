@@ -21,6 +21,9 @@ import net.sf.mmm.util.value.api.Range;
 @SuppressWarnings("rawtypes")
 public class AbstractValidatorRange<V, R extends Comparable> extends AbstractValueValidator<V> {
 
+  /** @see #getCode() */
+  public static final String CODE = "Range";
+
   /** @see #validateNotNull(Comparable) */
   private final Range<R> range;
 
@@ -32,6 +35,12 @@ public class AbstractValidatorRange<V, R extends Comparable> extends AbstractVal
   public AbstractValidatorRange(Range<R> range) {
     super();
     this.range = range;
+  }
+
+  @Override
+  protected String getCode() {
+
+    return CODE;
   }
 
   /**

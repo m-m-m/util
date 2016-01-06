@@ -9,13 +9,16 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that
- * {@link net.sf.mmm.util.validation.api.ValueValidator#validate(Object, Object) validates that a date} lies
- * in the future.
+ * {@link net.sf.mmm.util.validation.api.ValueValidator#validate(Object, Object) validates that a date} lies in the
+ * future.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
 public class ValidatorDateFuture extends AbstractValueValidator<Date> {
+
+  /** @see #getCode() */
+  public static final String CODE = "Future";
 
   /**
    * The constructor.
@@ -23,6 +26,12 @@ public class ValidatorDateFuture extends AbstractValueValidator<Date> {
   public ValidatorDateFuture() {
 
     super();
+  }
+
+  @Override
+  protected String getCode() {
+
+    return CODE;
   }
 
   /**

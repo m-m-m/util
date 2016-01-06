@@ -18,7 +18,7 @@ import net.sf.mmm.util.validation.base.AbstractValueValidator;
 public class ValidatorPattern extends AbstractValueValidator<CharSequence> {
 
   /** @see #getCode() */
-  public static final String CODE = "ValdiatorPattern";
+  public static final String CODE = "Pattern";
 
   private final Pattern pattern;
 

@@ -20,7 +20,7 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 public class ValidatorMandatory extends AbstractValueValidator<Object> {
 
   /** @see #getCode() */
-  public static final String CODE = "ValdiatorMandatory";
+  public static final String CODE = "Mandatory";
 
   /** @see #getInstance() */
   private static final ValidatorMandatory INSTANCE = new ValidatorMandatory();

@@ -19,6 +19,9 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  */
 public class ComposedValidator<V> extends AbstractValidator<V> implements ComposedValueValidator<V> {
 
+  /** @see #getCode() */
+  public static final String CODE = "ComposedValidator";
+
   /** The child validators. */
   private final AbstractValidator<? super V>[] validators;
 

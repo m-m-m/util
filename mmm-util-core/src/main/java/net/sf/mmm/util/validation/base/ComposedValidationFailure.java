@@ -2,8 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.util.Iterator;
 import java.util.Locale;
 
+import net.sf.mmm.util.collection.base.ArrayIterator;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
@@ -14,10 +16,10 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class ComposedValidationFailure extends AbstractValidationFailure {
+public class ComposedValidationFailure extends AbstractValidationFailure implements Iterable<ValidationFailure> {
 
   /** @see #getCode() */
-  static final String CODE = "ComposedValidator";
+  public static final String CODE = ComposedValidator.CODE;
 
   /** UID for serialization. */
   private static final long serialVersionUID = -5191509274230075436L;
@@ -63,6 +65,12 @@ public class ComposedValidationFailure extends AbstractValidationFailure {
   protected String getSeparator() {
 
     return "\n";
+  }
+
+  @Override
+  public Iterator<ValidationFailure> iterator() {
+
+    return new ArrayIterator<>(this.failures);
   }
 
   /**

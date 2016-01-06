@@ -9,8 +9,8 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * TODO: this class ...
- * 
+ * This is an implementation of {@link ConstraintValidator} for {@link Mandatory}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
