@@ -501,7 +501,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
       @Named("source") Object source);
 
   /**
-   * @see net.sf.mmm.util.validation.base.ValidatorPattern
+   * @see net.sf.mmm.util.validation.base.text.ValidatorPattern
    *
    * @param value is the value that does NOT match the expected format.
    * @param format is the expected format.
