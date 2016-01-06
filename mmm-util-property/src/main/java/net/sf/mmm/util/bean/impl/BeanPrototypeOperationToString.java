@@ -32,10 +32,10 @@ public class BeanPrototypeOperationToString extends BeanPrototypeOperation {
     buffer.append('{');
     String indent = "";
     for (GenericProperty<?> property : access.getProperties()) {
-      buffer.append(indent);
-      indent = ",\n";
       Object value = property.getValue();
       if (value != null) {
+        buffer.append(indent);
+        indent = ",\n";
         buffer.append(property.toString());
       }
     }

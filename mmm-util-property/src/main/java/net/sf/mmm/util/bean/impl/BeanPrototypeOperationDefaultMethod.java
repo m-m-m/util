@@ -13,7 +13,7 @@ import net.sf.mmm.util.bean.api.Bean;
  * @author hohwille
  * @since 7.1.0
  */
-public class BeanPrototypeOperationDefault extends BeanPrototypeOperation {
+public class BeanPrototypeOperationDefaultMethod extends BeanPrototypeOperation {
 
   private final MethodHandle methodHandle;
 
@@ -23,15 +23,21 @@ public class BeanPrototypeOperationDefault extends BeanPrototypeOperation {
    * @param prototype the {@link BeanAccessPrototype}.
    * @param method the {@link Method#isDefault() default} {@link Method}.
    */
-  public BeanPrototypeOperationDefault(BeanAccessPrototype<?> prototype, Method method) {
+  public BeanPrototypeOperationDefaultMethod(BeanAccessPrototype<?> prototype, Method method) {
     super(prototype, method);
     this.methodHandle = LookupHelper.INSTANCE.newMethodHandle(method);
   }
 
   @Override
-  public Object invoke(BeanAccessBase access, final Object[] args) throws Throwable {
+  public Object invoke(BeanAccessBase access, Object[] args) throws Throwable {
 
-    return this.methodHandle.invoke(args);
+    if (args == null) {
+      return this.methodHandle.invoke(access.getBean());
+    }
+    Object[] array = new Object[args.length + 1];
+    array[0] = access.getBean();
+    System.arraycopy(args, 0, array, 1, args.length);
+    return this.methodHandle.invokeWithArguments(array);
   }
 
 }

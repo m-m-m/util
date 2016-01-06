@@ -94,8 +94,8 @@ public abstract class BeanPrototypeOperation {
           return new BeanPrototypeOperationHashCode(prototype, method);
         case TO_STRING:
           return new BeanPrototypeOperationToString(prototype, method);
-        case DEFAULT:
-          return new BeanPrototypeOperationDefault(prototype, method);
+        case DEFAULT_METHOD:
+          return new BeanPrototypeOperationDefaultMethod(prototype, method);
       }
     }
     return null;

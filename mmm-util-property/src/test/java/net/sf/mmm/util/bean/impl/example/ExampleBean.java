@@ -21,4 +21,14 @@ public interface ExampleBean extends ExamplePojoBean, ExamplePropertyBean {
     return BeanFactoryImpl.getInstance().create(ExampleBean.class);
   }
 
+  default ExampleBean self() {
+
+    return this;
+  }
+
+  default String sayHi(String name) {
+
+    return "Hi " + name;
+  }
+
 }

@@ -69,9 +69,9 @@ public enum BeanMethodType {
 
   /**
    * Unmapped {@link Method#isDefault() default method}.
-   * 
-   * @see BeanPrototypeOperationDefault
+   *
+   * @see BeanPrototypeOperationDefaultMethod
    */
-  DEFAULT
+  DEFAULT_METHOD
 
 }

@@ -46,17 +46,11 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   /** @see #getInstance() */
   private static BeanFactory instance;
 
+  private static final Type PROPERTY_VALUE_TYPE_VARIABLE = Property.class.getTypeParameters()[0];
+
   private final ClassLoader classLoader;
 
   private ReflectionUtil reflectionUtil;
-
-  private static final Type PROPERTY_VALUE_TYPE_VARIABLE;
-
-  private static final Class<?>[] PROPERTY_CONSTRUCTOR_ARGS = new Class<?>[] { String.class, Bean.class };
-
-  static {
-    PROPERTY_VALUE_TYPE_VARIABLE = Property.class.getTypeParameters()[0];
-  }
 
   /**
    * The constructor.
@@ -111,17 +105,17 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
     BeanAccessPrototype<BEAN> prototype = new BeanAccessPrototype<>(type, dynamic, this);
     BEAN bean = (BEAN) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { type }, prototype);
+    prototype.setBean(bean);
     GenericType<BEAN> beanType = this.reflectionUtil.createGenericType(type);
     Collection<BeanMethod> methods = new ArrayList<>();
     collectMethods(type, prototype, beanType, bean, methods);
     processMethods(methods, prototype, beanType, bean);
-    // TODO Auto-generated method stub
     return bean;
   }
 
   /**
-   * Recursively introspects, creates and collects the {@link BeanMethod}s for a {@link Bean} {@link Class}. Also
-   * creates the {@link GenericPropertyImpl properties} for the {@link BeanMethodType#PROPERTY property} methods.
+   * Recursively introspect, create and collect the {@link BeanMethod}s for a {@link Bean} {@link Class}. Also creates
+   * the {@link GenericPropertyImpl properties} for the {@link BeanMethodType#PROPERTY property} methods.
    *
    * @param type is the current {@link Bean} {@link Class} to introspect.
    * @param prototype the {@link BeanAccessPrototype}.
@@ -136,7 +130,9 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
       BeanMethod beanMethod = new BeanMethod(method);
       BeanMethodType methodType = beanMethod.getMethodType();
       if (methodType == null) {
-        getLogger().warn("Unmapped bean method {}", method);
+        if (!Modifier.isStatic(method.getModifiers())) {
+          getLogger().warn("Unmapped bean method {}", method);
+        }
       } else {
         methods.add(beanMethod);
         if (methodType == BeanMethodType.PROPERTY) {
@@ -145,7 +141,16 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         }
       }
     }
-    if (type != Bean.class) {
+    if (type == Bean.class) {
+      for (Method method : Object.class.getDeclaredMethods()) {
+        BeanMethod beanMethod = new BeanMethod(method);
+        BeanMethodType methodType = beanMethod.getMethodType();
+        if (methodType != null) {
+          methods.add(beanMethod);
+        }
+
+      }
+    } else {
       for (Class<?> superInterface : type.getInterfaces()) {
         collectMethods(superInterface, prototype, beanType, bean, methods);
       }
@@ -153,10 +158,12 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
-   * TODO: javadoc
-   *
-   * @param methods
-   * @param prototype
+   * @param methods the {@link Collection} with all the
+   *        {@link #collectMethods(Class, BeanAccessPrototype, GenericType, Bean, Collection) collected}
+   *        {@link BeanMethod}s.
+   * @param prototype the {@link BeanAccessPrototype} to process and complete.
+   * @param beanType the {@link GenericType} reflecting the {@link Bean}.
+   * @param bean the {@link Bean} proxy instance.
    */
   private void processMethods(Collection<BeanMethod> methods, BeanAccessPrototype<?> prototype,
       GenericType<?> beanType, Bean bean) {
@@ -181,9 +188,11 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
-   * TODO: javadoc
-   *
-   * @param beanMethod
+   * @param beanMethod the {@link BeanMethod}.
+   * @param beanType the {@link GenericType} reflecting the {@link GenericProperty#getBean() bean owning the property}
+   *        to create.
+   * @param bean the {@link Bean} instance to create this property for.
+   * @return the new property instance.
    */
   private GenericPropertyImpl<?> createProperty(BeanMethod beanMethod, GenericType<?> beanType, Bean bean) {
 
@@ -202,6 +211,13 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     return property;
   }
 
+  /**
+   * @param <V> the generic type of {@code type}.
+   * @param name the {@link GenericProperty#getName() property name}.
+   * @param type the {@link GenericProperty#getType() property type}.
+   * @param bean the {@link GenericProperty#getBean() property bean}.
+   * @return the new property instance.
+   */
   protected <V> GenericPropertyImpl<V> createProperty(String name, GenericType<V> type, Bean bean) {
 
     return createProperty(name, type, bean, GenericProperty.class);
@@ -211,7 +227,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param <V> the generic property type.
    * @param name the {@link GenericPropertyImpl#getName() property name}.
    * @param type the {@link GenericPropertyImpl#getType() property type}.
-   * @param bean the {@link GenericPropertyImpl#getBean() bean}.
+   * @param bean the {@link GenericPropertyImpl#getBean() property bean}.
    * @param propertyClass the {@link Class} reflecting the {@link GenericProperty} or <code>null</code> if no property
    *        method exists and this method is called for plain getter or setter.
    * @return the new instance of {@link GenericPropertyImpl}.

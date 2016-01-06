@@ -3,10 +3,13 @@
 package net.sf.mmm.util.bean.impl;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
@@ -20,6 +23,10 @@ import net.sf.mmm.util.property.impl.BooleanPropertyImpl;
 import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 import net.sf.mmm.util.property.impl.StringPropertyImpl;
 import net.sf.mmm.util.validation.api.ValidationFailure;
+import net.sf.mmm.util.validation.base.AbstractValidatorRange;
+import net.sf.mmm.util.validation.base.ComposedValidationFailure;
+import net.sf.mmm.util.validation.base.ComposedValidator;
+import net.sf.mmm.util.validation.base.ValidatorMandatory;
 import net.sf.mmm.util.validation.base.text.ValidatorPattern;
 
 /**
@@ -61,11 +68,16 @@ public class BeanFactoryImplTest extends Assertions {
     verifyBean(bean);
     verifyExamplePojoBean(bean);
     verifyExamplePropertyBean(bean);
+
+    assertThat(bean.self()).isSameAs(bean);
+    assertThat(bean.sayHi("Peter")).isEqualTo("Hi Peter");
   }
 
   private void verifyBean(Bean bean) {
 
     BeanAccess access = bean.access();
+    assertThat(access).isNotNull();
+    assertThat(((BeanAccessBase) access).getBean()).isSameAs(bean);
     String undefinedProperty = "UndefinedProperty";
     assertThat(access.getProperty(undefinedProperty)).isNull();
     PojoPropertyNotFoundException error = null;
@@ -95,8 +107,8 @@ public class BeanFactoryImplTest extends Assertions {
     assertThat(access.isReadOnly()).isFalse();
     assertThat(access.isPrototype()).isFalse();
     assertThat(access.isDynamic()).isFalse();
-    GenericProperty<?>[] properties = new GenericProperty<?>[] { bean.CountryCode(), bean.Name(), bean.Age(),
-    bean.Friend(), bean.Orientation() };
+    GenericProperty<?>[] properties = { bean.CountryCode(), bean.Name(), bean.Age(), bean.Friend(),
+    bean.Orientation() };
     assertThat(access.getProperties()).hasSize(properties.length).contains(properties);
 
     String name = "magicName";
@@ -104,14 +116,59 @@ public class BeanFactoryImplTest extends Assertions {
     assertThat(bean.Name().get()).isEqualTo(name);
 
     // validation
+    // invalid mandatory fields
+    ValidationFailure failure = access.validate();
+    assertThat(failure).isNotNull();
+    assertThat(failure.getCode()).isEqualTo(ComposedValidator.CODE);
+    ComposedValidationFailure composedFailure = (ComposedValidationFailure) failure;
+    assertThat(composedFailure.getFailureCount()).isEqualTo(2);
+    for (ValidationFailure subFailure : composedFailure) {
+      assertThat(subFailure.getCode()).isSameAs(ValidatorMandatory.CODE);
+    }
+
+    // valid
     bean.CountryCode().set("DE");
     bean.Age().set(5);
-    ValidationFailure failure = access.validate();
+    failure = access.validate();
     assertThat(failure).isNull();
+
+    // invalid country code
     bean.CountryCode().set("xyz");
     failure = access.validate();
     assertThat(failure).isNotNull();
     assertThat(failure.getCode()).isEqualTo(ValidatorPattern.CODE);
+
+    // and also invalid age
+    bean.Age().set(500);
+    failure = access.validate();
+    assertThat(failure).isNotNull();
+    assertThat(failure.getCode()).isEqualTo(ComposedValidator.CODE);
+    composedFailure = (ComposedValidationFailure) failure;
+    Set<String> failureCodes = new HashSet<>();
+    for (ValidationFailure subFailure : composedFailure) {
+      failureCodes.add(subFailure.getCode());
+    }
+    String[] codes = { ValidatorPattern.CODE, AbstractValidatorRange.CODE };
+    assertThat(failureCodes).hasSize(codes.length).contains(codes);
+
+    // toString()
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, ?> beanJsonMap = null;
+    String json = bean.toString();
+    try {
+      beanJsonMap = mapper.readValue(json, Map.class);
+    } catch (Exception e) {
+      fail("Failed to parse bean.toString() as JSON: " + json, e);
+    }
+    for (GenericProperty<?> property : access.getProperties()) {
+      Object valueProperty = property.getValue();
+      if (valueProperty == null) {
+        assertThat(beanJsonMap.containsKey(property.getName())).isFalse();
+      } else {
+        Object valueJson = beanJsonMap.get(property.getName());
+        assertThat(valueJson).isEqualTo(valueProperty);
+      }
+    }
   }
 
   private void verifyExamplePojoBean(ExamplePojoBean bean) {
@@ -125,7 +182,7 @@ public class BeanFactoryImplTest extends Assertions {
     assertThat(access.isReadOnly()).isFalse();
     assertThat(access.isPrototype()).isFalse();
     assertThat(access.isDynamic()).isFalse();
-    String[] properties = new String[] { "CountryCode", "Name", "Age", "Friend", "Orientation" };
+    String[] properties = { "CountryCode", "Name", "Age", "Friend", "Orientation" };
     int expectedSize = properties.length;
     assertThat(access.getProperties()).hasSize(expectedSize);
     Set<String> propertyNames = new HashSet<>();
