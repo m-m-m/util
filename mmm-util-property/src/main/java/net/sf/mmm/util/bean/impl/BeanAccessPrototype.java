@@ -40,12 +40,12 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   /**
    * The constructor.
    *
-   * @param beanType - see {@link #getBeanType()}.
+   * @param beanClass - see {@link #getBeanClass()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    */
-  public BeanAccessPrototype(Class<BEAN> beanType, BeanFactoryImpl beanFactory) {
-    super(beanType, beanFactory);
-    this.beanType = beanType;
+  public BeanAccessPrototype(Class<BEAN> beanClass, BeanFactoryImpl beanFactory) {
+    super(beanClass, beanFactory);
+    this.beanType = beanClass;
     this.name2PropertyMap = new HashMap<>();
     this.method2OperationMap = new HashMap<>();
     this.dynamic = false;
@@ -137,7 +137,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
    * @return the type
    */
   @Override
-  public Class<BEAN> getBeanType() {
+  public Class<BEAN> getBeanClass() {
 
     return this.beanType;
   }

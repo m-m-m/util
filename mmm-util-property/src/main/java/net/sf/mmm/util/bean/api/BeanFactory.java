@@ -73,4 +73,14 @@ public interface BeanFactory {
    */
   <BEAN extends Bean> BEAN getReadOnlyBean(BEAN bean);
 
+  /**
+   * Creates a copy of the given {@link Bean}.
+   *
+   * @param <BEAN> the generic type of the {@link Bean}.
+   * @param bean the bean to make {@link BeanAccess#isReadOnly() read-only}.
+   * @return the {@link BeanAccess#isReadOnly() read-only} view on the given bean. Will be the given instance if already
+   *         {@link BeanAccess#isReadOnly() read-only}.
+   */
+  <BEAN extends Bean> BEAN copy(BEAN bean);
+
 }

@@ -12,7 +12,6 @@ import org.springframework.security.core.GrantedAuthority;
  * This is a simple user for testing. It acts as {@link java.security.Principal} and {@link Authentication}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 0
  */
 public class TestUser implements Authentication {
 

@@ -20,28 +20,26 @@ import net.sf.mmm.util.property.api.GenericProperty;
 public abstract class BeanAccessBase<BEAN extends Bean>
     implements InvocationHandler, BeanAccess, Iterable<GenericProperty<?>> {
 
-  private final Class<BEAN> beanType;
+  private final Class<BEAN> beanClass;
 
   private final BEAN bean;
 
   /**
    * The constructor.
    *
-   * @param beanType - see {@link #getBeanType()}.
+   * @param beanClass - see {@link #getBeanClass()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    */
-  public BeanAccessBase(Class<BEAN> beanType, BeanFactoryImpl beanFactory) {
+  public BeanAccessBase(Class<BEAN> beanClass, BeanFactoryImpl beanFactory) {
     super();
-    this.beanType = beanType;
-    this.bean = beanFactory.createProxy(this, beanType);
+    this.beanClass = beanClass;
+    this.bean = beanFactory.createProxy(this, beanClass);
   }
 
-  /**
-   * @return the {@link Class} reflecting the {@link #getBean() bean}.
-   */
-  public Class<BEAN> getBeanType() {
+  @Override
+  public Class<BEAN> getBeanClass() {
 
-    return this.beanType;
+    return this.beanClass;
   }
 
   /**
@@ -68,7 +66,7 @@ public abstract class BeanAccessBase<BEAN extends Bean>
 
     BeanPrototypeProperty prototypeProperty = getPrototype().getName2PropertyMap().get(name);
     if (prototypeProperty != null) {
-      return getProperty(prototypeProperty, false);
+      return getProperty(prototypeProperty, true);
     }
     return null;
   }
@@ -77,11 +75,11 @@ public abstract class BeanAccessBase<BEAN extends Bean>
    * Gets the {@link GenericProperty} for the given <code>index</code>.
    *
    * @param prototypeProperty is the {@link BeanPrototypeProperty}.
-   * @param required - <code>true</code> if the property is required and shall be created if it {@link #isDynamic() does
+   * @param create - <code>true</code> if the property is required and shall be created if it {@link #isDynamic() does
    *        not already exist}, <code>false</code> otherwise.
    * @return the requested {@link GenericProperty}. May be <code>null</code>.
    */
-  protected abstract GenericProperty<?> getProperty(BeanPrototypeProperty prototypeProperty, boolean required);
+  protected abstract GenericProperty<?> getProperty(BeanPrototypeProperty prototypeProperty, boolean create);
 
   @Override
   public boolean isReadOnly() {

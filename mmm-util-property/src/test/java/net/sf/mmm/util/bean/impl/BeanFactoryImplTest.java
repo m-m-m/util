@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import net.sf.mmm.test.ObjectHelper;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
@@ -47,8 +48,8 @@ public class BeanFactoryImplTest extends Assertions {
 
     BeanFactory beanFactory = getBeanFactory();
     ExamplePropertyBean bean = beanFactory.create(ExamplePropertyBean.class);
-    verifyBean(bean);
-    verifyExamplePropertyBean(bean);
+    verifyBean(bean, beanFactory);
+    verifyExamplePropertyBean(bean, beanFactory);
   }
 
   @Test
@@ -56,7 +57,7 @@ public class BeanFactoryImplTest extends Assertions {
 
     BeanFactory beanFactory = getBeanFactory();
     ExamplePojoBean bean = beanFactory.create(ExamplePojoBean.class);
-    verifyBean(bean);
+    verifyBean(bean, beanFactory);
     verifyExamplePojoBean(bean);
   }
 
@@ -65,19 +66,19 @@ public class BeanFactoryImplTest extends Assertions {
 
     BeanFactory beanFactory = getBeanFactory();
     ExampleBean bean = beanFactory.create(ExampleBean.class);
-    verifyBean(bean);
+    verifyBean(bean, beanFactory);
     verifyExamplePojoBean(bean);
-    verifyExamplePropertyBean(bean);
+    verifyExamplePropertyBean(bean, beanFactory);
 
     assertThat(bean.self()).isSameAs(bean);
     assertThat(bean.sayHi("Peter")).isEqualTo("Hi Peter");
   }
 
-  private void verifyBean(Bean bean) {
+  private void verifyBean(Bean bean, BeanFactory beanFactory) {
 
     BeanAccess access = bean.access();
     assertThat(access).isNotNull();
-    assertThat(((BeanAccessBase) access).getBean()).isSameAs(bean);
+    assertThat(((BeanAccessBase<?>) access).getBean()).isSameAs(bean);
     String undefinedProperty = "UndefinedProperty";
     assertThat(access.getProperty(undefinedProperty)).isNull();
     PojoPropertyNotFoundException error = null;
@@ -93,9 +94,12 @@ public class BeanFactoryImplTest extends Assertions {
           .isSameAs(access.getRequiredProperty(name))
           .isSameAs(access.getOrCreateProperty(name, property.getType()));
     }
+
+    // test equals
+    ObjectHelper.checkEqualsAndHashCode(bean, beanFactory.copy(bean), true);
   }
 
-  private void verifyExamplePropertyBean(ExamplePropertyBean bean) {
+  private void verifyExamplePropertyBean(ExamplePropertyBean bean, BeanFactory beanFactory) {
 
     assertThat(bean).isNotNull();
     assertThat(bean.Name()).isInstanceOf(StringPropertyImpl.class);
@@ -169,6 +173,11 @@ public class BeanFactoryImplTest extends Assertions {
     } catch (Exception e) {
       fail("Failed to parse bean.toString() as JSON: " + json, e);
     }
+
+    // equals and hashCode
+    ExamplePropertyBean copy = beanFactory.copy(bean);
+    copy.Name().setValue("Heinz");
+    ObjectHelper.checkEqualsAndHashCode(bean, copy, false);
   }
 
   private void verifyExamplePojoBean(ExamplePojoBean bean) {

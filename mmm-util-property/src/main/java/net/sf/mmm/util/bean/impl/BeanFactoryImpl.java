@@ -19,6 +19,7 @@ import javax.inject.Named;
 
 import javafx.beans.property.Property;
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.property.api.GenericProperty;
@@ -113,6 +114,51 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
     BEAN bean = (BEAN) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { beanType }, access);
     return bean;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public <BEAN extends Bean> BEAN create(BEAN bean) {
+
+    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) bean.access();
+    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
+    BeanAccessMutable<BEAN> interceptor = new BeanAccessMutable<>(access.getBeanClass(), this, beanPrototype);
+    return interceptor.getBean();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public <BEAN extends Bean> BEAN getReadOnlyBean(BEAN bean) {
+
+    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) bean.access();
+    if (access.isReadOnly()) {
+      return bean;
+    }
+    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
+    BeanAccessReadOnly<BEAN> interceptor = new BeanAccessReadOnly<>(this, beanPrototype, access);
+    return interceptor.getBean();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public <BEAN extends Bean> BEAN getPrototype(BEAN bean) {
+
+    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) bean.access();
+    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
+    return beanPrototype.getBean();
+  }
+
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @Override
+  public <BEAN extends Bean> BEAN copy(BEAN bean) {
+
+    BEAN copy = create(bean);
+    BeanAccess access = copy.access();
+    for (GenericProperty<?> property : bean.access().getProperties()) {
+      GenericProperty copyProperty = access.getRequiredProperty(property.getName());
+      copyProperty.setValue(property.getValue());
+    }
+    return copy;
   }
 
   @Override
@@ -343,38 +389,6 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     } catch (InvocationTargetException e) {
       throw new InvocationFailedException(e, constructor);
     }
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public <BEAN extends Bean> BEAN create(BEAN prototype) {
-
-    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) prototype.access();
-    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
-    BeanAccessMutable<BEAN> interceptor = new BeanAccessMutable<>(access.getBeanType(), this, beanPrototype);
-    return interceptor.getBean();
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public <BEAN extends Bean> BEAN getReadOnlyBean(BEAN beanProxy) {
-
-    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) beanProxy.access();
-    if (access.isReadOnly()) {
-      return beanProxy;
-    }
-    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
-    BeanAccessReadOnly<BEAN> interceptor = new BeanAccessReadOnly<>(this, beanPrototype, access);
-    return interceptor.getBean();
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public <BEAN extends Bean> BEAN getPrototype(BEAN bean) {
-
-    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) bean.access();
-    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
-    return beanPrototype.getBean();
   }
 
 }

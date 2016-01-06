@@ -29,14 +29,14 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   /**
    * The constructor.
    *
-   * @param beanType - see {@link #getBeanType()}.
+   * @param beanClass - see {@link #getBeanClass()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    * @param prototype the {@link BeanAccessPrototype}.
    */
-  public BeanAccessInstance(Class<BEAN> beanType, BeanFactoryImpl beanFactory,
+  public BeanAccessInstance(Class<BEAN> beanClass, BeanFactoryImpl beanFactory,
       BeanAccessPrototype<BEAN> prototype) {
 
-    super(beanType, beanFactory);
+    super(beanClass, beanFactory);
     this.prototype = prototype;
     this.properties = GenericProperty.NO_PROPERTIES;
   }

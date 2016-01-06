@@ -31,6 +31,11 @@ public interface BeanAccess {
   GenericProperty<?> getProperty(String name);
 
   /**
+   * @return the {@link Class} reflecting the owning {@link Bean}.
+   */
+  Class<? extends Bean> getBeanClass();
+
+  /**
    * @param name the {@link GenericProperty#getName() name} of the requested property.
    * @return the requested {@link GenericProperty}.
    * @throws PojoPropertyNotFoundException if the requested property does not exist.
@@ -39,7 +44,7 @@ public interface BeanAccess {
 
     GenericProperty<?> property = getProperty(name);
     if (property == null) {
-      throw new PojoPropertyNotFoundException(getClass(), name);
+      throw new PojoPropertyNotFoundException(getBeanClass(), name);
     }
     return property;
   }
@@ -158,8 +163,8 @@ public interface BeanAccess {
   boolean isDynamic();
 
   /**
-   * @return <code>true</code> if this {@link BeanAccess} belongs to a {@link BeanFactory#createPrototype(Class) prototype}
-   *         , <code>false</code> otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
+   * @return <code>true</code> if this {@link BeanAccess} belongs to a {@link BeanFactory#createPrototype(Class)
+   *         prototype} , <code>false</code> otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
    */
   boolean isPrototype();
 

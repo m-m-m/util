@@ -28,7 +28,7 @@ public class BeanAccessReadOnly<BEAN extends Bean> extends BeanAccessInstance<BE
    */
   public BeanAccessReadOnly(BeanFactoryImpl beanFactory, BeanAccessPrototype<BEAN> prototype,
       BeanAccessBase<BEAN> delegate) {
-    super(prototype.getBeanType(), beanFactory, prototype);
+    super(prototype.getBeanClass(), beanFactory, prototype);
     this.delegate = delegate;
   }
 
