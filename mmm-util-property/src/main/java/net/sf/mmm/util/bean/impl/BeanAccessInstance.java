@@ -9,33 +9,40 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.collection.base.ArrayIterator;
 import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * The abstract base implementation of {@link BeanAccess} for a regular {@link Bean} instance.
  *
+ * @param <BEAN> the generic type of the intercepted {@link #getBean() bean}.
+ *
  * @author hohwille
  * @since 7.1.0
  */
-abstract class BeanAccessInstance extends BeanAccessBase {
+public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBase<BEAN> {
 
-  private final BeanAccessPrototype<?> prototype;
+  private final BeanAccessPrototype<BEAN> prototype;
 
   private GenericProperty<?>[] properties;
 
   /**
    * The constructor.
    *
+   * @param beanType - see {@link #getBeanType()}.
+   * @param beanFactory the owning {@link BeanFactoryImpl}.
    * @param prototype the {@link BeanAccessPrototype}.
    */
-  public BeanAccessInstance(BeanAccessPrototype<?> prototype) {
-    super();
+  public BeanAccessInstance(Class<BEAN> beanType, BeanFactoryImpl beanFactory,
+      BeanAccessPrototype<BEAN> prototype) {
+
+    super(beanType, beanFactory);
     this.prototype = prototype;
     this.properties = GenericProperty.NO_PROPERTIES;
   }
 
   @Override
-  public BeanAccessPrototype<?> getPrototype() {
+  public BeanAccessPrototype<BEAN> getPrototype() {
 
     return this.prototype;
   }
@@ -86,6 +93,12 @@ abstract class BeanAccessInstance extends BeanAccessBase {
     this.properties = newProperties;
   }
 
+  /**
+   * @param prototypeProperty the {@link BeanPrototypeProperty}.
+   * @return a new {@link GenericProperty} instance
+   *         {@link GenericPropertyImpl#copy(net.sf.mmm.util.validation.base.AbstractValidator) copied} from the given
+   *         {@link BeanPrototypeProperty}.
+   */
   protected abstract GenericProperty<?> createProperty(BeanPrototypeProperty prototypeProperty);
 
   @Override

@@ -27,7 +27,7 @@ public class BeanPrototypeOperationEquals extends BeanPrototypeOperation {
   }
 
   @Override
-  public Object invoke(BeanAccessBase access, Object[] args) {
+  public Object invoke(BeanAccessBase<?> access, Object[] args) {
 
     Object other = args[0];
     if (other == null) {

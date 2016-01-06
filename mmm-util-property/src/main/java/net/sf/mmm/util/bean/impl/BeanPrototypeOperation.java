@@ -40,7 +40,7 @@ public abstract class BeanPrototypeOperation {
    * @return the result of the invocation.
    * @throws Throwable if something goes wrong.
    */
-  public abstract Object invoke(BeanAccessBase access, Object[] args) throws Throwable;
+  public abstract Object invoke(BeanAccessBase<?> access, Object[] args) throws Throwable;
 
   /**
    * @return <code>true</code> if the {@link GenericProperty} is required for this operation, <code>false</code>

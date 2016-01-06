@@ -45,7 +45,7 @@ public abstract class BeanPrototypeOperationOnProperty extends BeanPrototypeOper
   }
 
   @Override
-  public Object invoke(BeanAccessBase instance, Object[] args) {
+  public Object invoke(BeanAccessBase<?> instance, Object[] args) {
 
     return doInvoke(instance.getProperty(this.prototypeProperty, isPropertyRequired()), args);
   }

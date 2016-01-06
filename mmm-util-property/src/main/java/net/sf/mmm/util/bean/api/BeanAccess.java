@@ -158,7 +158,7 @@ public interface BeanAccess {
   boolean isDynamic();
 
   /**
-   * @return <code>true</code> if this {@link BeanAccess} belongs to a {@link BeanFactory#getPrototype(Class) prototype}
+   * @return <code>true</code> if this {@link BeanAccess} belongs to a {@link BeanFactory#createPrototype(Class) prototype}
    *         , <code>false</code> otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
    */
   boolean isPrototype();

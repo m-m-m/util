@@ -17,7 +17,7 @@ import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the implementation of {@link BeanAccess} for the {@link BeanFactory#getPrototype(Class) prototype} of a
+ * This is the implementation of {@link BeanAccess} for the {@link BeanFactory#createPrototype(Class) prototype} of a
  * {@link Bean}.
  *
  * @param <BEAN> the generic type of the {@link Bean}.
@@ -25,7 +25,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author hohwille
  * @since 7.1.0
  */
-public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase {
+public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN> {
 
   private final Map<String, BeanPrototypeProperty> name2PropertyMap;
 
@@ -40,21 +40,42 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase {
   /**
    * The constructor.
    *
-   * @param type - see {@link #getBeanType()}.
-   * @param dynamic - see {@link #isDynamic()}.
+   * @param beanType - see {@link #getBeanType()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    */
-  public BeanAccessPrototype(Class<BEAN> type, boolean dynamic, BeanFactoryImpl beanFactory) {
-    super();
-    this.beanType = type;
+  public BeanAccessPrototype(Class<BEAN> beanType, BeanFactoryImpl beanFactory) {
+    super(beanType, beanFactory);
+    this.beanType = beanType;
     this.name2PropertyMap = new HashMap<>();
     this.method2OperationMap = new HashMap<>();
-    this.dynamic = dynamic;
+    this.dynamic = false;
     this.beanFactory = beanFactory;
   }
 
+  /**
+   * The constructor.
+   *
+   * @param master the {@link BeanAccessPrototype} to copy.
+   * @param dynamic - see {@link #isDynamic()}.
+   */
+  public BeanAccessPrototype(BeanAccessPrototype<BEAN> master, boolean dynamic) {
+
+    super(master.beanType, master.beanFactory);
+    this.beanType = master.beanType;
+    this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
+    for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {
+      GenericPropertyImpl<?> property = prototypeProperty.getProperty();
+      BeanPrototypeProperty copy = new BeanPrototypeProperty(property.copy(getBean()),
+          prototypeProperty.getIndex());
+      this.name2PropertyMap.put(property.getName(), copy);
+    }
+    this.method2OperationMap = master.method2OperationMap;
+    this.dynamic = dynamic;
+    this.beanFactory = master.beanFactory;
+  }
+
   @Override
-  protected BeanAccessPrototype<?> getPrototype() {
+  protected BeanAccessPrototype<BEAN> getPrototype() {
 
     return this;
   }
@@ -115,6 +136,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase {
   /**
    * @return the type
    */
+  @Override
   public Class<BEAN> getBeanType() {
 
     return this.beanType;

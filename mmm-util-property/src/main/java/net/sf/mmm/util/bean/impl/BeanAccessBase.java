@@ -12,17 +12,50 @@ import net.sf.mmm.util.property.api.GenericProperty;
 /**
  * This is the abstract base implementation of {@link BeanAccess}.
  *
+ * @param <BEAN> the generic type of the intercepted {@link #getBean() bean}.
+ *
  * @author hohwille
  * @since 7.1.0
  */
-abstract class BeanAccessBase implements InvocationHandler, BeanAccess, Iterable<GenericProperty<?>> {
+public abstract class BeanAccessBase<BEAN extends Bean>
+    implements InvocationHandler, BeanAccess, Iterable<GenericProperty<?>> {
 
-  private Bean bean;
+  private final Class<BEAN> beanType;
+
+  private final BEAN bean;
+
+  /**
+   * The constructor.
+   *
+   * @param beanType - see {@link #getBeanType()}.
+   * @param beanFactory the owning {@link BeanFactoryImpl}.
+   */
+  public BeanAccessBase(Class<BEAN> beanType, BeanFactoryImpl beanFactory) {
+    super();
+    this.beanType = beanType;
+    this.bean = beanFactory.createProxy(this, beanType);
+  }
+
+  /**
+   * @return the {@link Class} reflecting the {@link #getBean() bean}.
+   */
+  public Class<BEAN> getBeanType() {
+
+    return this.beanType;
+  }
+
+  /**
+   * @return the {@link Bean} proxy instance to {@link #invoke(Object, Method, Object[]) intercept}.
+   */
+  public BEAN getBean() {
+
+    return this.bean;
+  }
 
   /**
    * @return the {@link BeanAccessPrototype}.
    */
-  protected abstract BeanAccessPrototype<?> getPrototype();
+  protected abstract BeanAccessPrototype<BEAN> getPrototype();
 
   @Override
   public Iterable<GenericProperty<?>> getProperties() {
@@ -56,22 +89,14 @@ abstract class BeanAccessBase implements InvocationHandler, BeanAccess, Iterable
     return false;
   }
 
-  /**
-   * @return the bean
-   */
-  public Bean getBean() {
-
-    return this.bean;
-  }
-
-  /**
-   * @param bean is the bean to set
-   */
-  void setBean(Bean bean) {
-
-    assert ((this.bean == null) || (this.bean == bean));
-    this.bean = bean;
-  }
+  // /**
+  // * @param bean is the bean to set
+  // */
+  // void setBean(Bean bean) {
+  //
+  // assert ((this.bean == null) || (this.bean == bean));
+  // this.bean = bean;
+  // }
 
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

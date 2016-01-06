@@ -2,21 +2,33 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.impl;
 
+import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.property.api.GenericProperty;
 import net.sf.mmm.util.property.impl.ReadOnlyPropertyImpl;
 
-class BeanAccessReadOnly extends BeanAccessInstance {
+/**
+ * The implementation of {@link BeanAccess} for a regular {@link #isReadOnly() read-only} {@link Bean} instance.
+ *
+ * @param <BEAN> the generic type of the {@link Bean}.
+ *
+ * @author hohwille
+ * @since 7.1.0
+ */
+public class BeanAccessReadOnly<BEAN extends Bean> extends BeanAccessInstance<BEAN> {
 
-  private final BeanAccessBase delegate;
+  private final BeanAccessBase<BEAN> delegate;
 
   /**
    * The constructor.
    *
    * @param prototype the {@link BeanAccessPrototype}.
+   * @param beanFactory the owning {@link BeanFactoryImpl}.
    * @param delegate the original intercepter instance to adapt.
    */
-  public BeanAccessReadOnly(BeanAccessPrototype<?> prototype, BeanAccessBase delegate) {
-    super(prototype);
+  public BeanAccessReadOnly(BeanFactoryImpl beanFactory, BeanAccessPrototype<BEAN> prototype,
+      BeanAccessBase<BEAN> delegate) {
+    super(prototype.getBeanType(), beanFactory, prototype);
     this.delegate = delegate;
   }
 

@@ -25,7 +25,7 @@ public class BeanPrototypeOperationAccess extends BeanPrototypeOperation {
   }
 
   @Override
-  public Object invoke(BeanAccessBase access, Object[] args) {
+  public Object invoke(BeanAccessBase<?> access, Object[] args) {
 
     return access;
   }

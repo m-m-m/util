@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
+import net.sf.mmm.util.property.api.GenericProperty;
+
 /**
  * This is the factory used to {@link #create(Class) create} instances of {@link Bean}.
  *
@@ -11,32 +13,42 @@ package net.sf.mmm.util.bean.api;
 public interface BeanFactory {
 
   /**
-   * @see #getPrototype(Class, boolean)
+   * @see #createPrototype(Class, boolean)
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
    * @return the prototype instance of the specified {@link Bean}.
    */
-  default <BEAN extends Bean> BEAN getPrototype(Class<BEAN> type) {
+  default <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type) {
 
-    return getPrototype(type, false);
+    return createPrototype(type, false);
   }
 
   /**
-   * Gets the prototype of the given {@link Bean}.
+   * Creates a prototype of the given {@link Bean}. A prototype is used as template to {@link #create(Bean) create}
+   * regular {@link Bean}s. Such beans will inherit the defaults from the prototype what are the
+   * {@link BeanAccess#getProperties() available properties} as well as their default {@link GenericProperty#getValue()
+   * value}.
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
    * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
    * @return the prototype instance of the specified {@link Bean}.
    */
-  <BEAN extends Bean> BEAN getPrototype(Class<BEAN> type, boolean dynamic);
+  <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic);
+
+  /**
+   * @param <BEAN> the generic type of the {@link Bean}.
+   * @param bean the {@link Bean}.
+   * @return the {@link #createPrototype(Class, boolean) prototype} of the given {@link Bean}.
+   */
+  <BEAN extends Bean> BEAN getPrototype(BEAN bean);
 
   /**
    * @see #create(Class)
    *
    * @param <BEAN> the generic type of the {@link Bean}.
-   * @param prototype the {@link #getPrototype(Class, boolean) prototype} of the {@link Bean} to create.
+   * @param prototype the {@link #createPrototype(Class, boolean) prototype} of the {@link Bean} to create.
    * @return the new {@link Bean} instance.
    */
   <BEAN extends Bean> BEAN create(BEAN prototype);
@@ -50,7 +62,7 @@ public interface BeanFactory {
    */
   default <BEAN extends Bean> BEAN create(Class<BEAN> type) {
 
-    return create(getPrototype(type));
+    return create(createPrototype(type));
   }
 
   /**

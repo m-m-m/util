@@ -26,7 +26,7 @@ public class BeanPrototypeOperationToString extends BeanPrototypeOperation {
   }
 
   @Override
-  public Object invoke(BeanAccessBase access, Object[] args) {
+  public Object invoke(BeanAccessBase<?> access, Object[] args) {
 
     StringBuilder buffer = new StringBuilder();
     buffer.append('{');

@@ -26,7 +26,7 @@ public class BeanPrototypeOperationHashCode extends BeanPrototypeOperation {
   }
 
   @Override
-  public Object invoke(BeanAccessBase access, Object[] args) {
+  public Object invoke(BeanAccessBase<?> access, Object[] args) {
 
     int hashCode = 1;
 

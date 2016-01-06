@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.impl;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -11,6 +12,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.WeakHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.inject.Named;
 
@@ -50,7 +53,11 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
   private final ClassLoader classLoader;
 
+  private final ReentrantLock lock;
+
   private ReflectionUtil reflectionUtil;
+
+  private Map<Class<? extends Bean>, WeakReference<BeanAccessPrototype<?>>> class2prototypeMap;
 
   /**
    * The constructor.
@@ -67,6 +74,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   public BeanFactoryImpl(ClassLoader classLoader) {
     super();
     this.classLoader = classLoader;
+    this.lock = new ReentrantLock();
+    this.class2prototypeMap = new WeakHashMap<>();
   }
 
   /**
@@ -100,17 +109,62 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   @SuppressWarnings("unchecked")
-  @Override
-  public <BEAN extends Bean> BEAN getPrototype(Class<BEAN> type, boolean dynamic) {
+  <BEAN extends Bean> BEAN createProxy(BeanAccessBase<BEAN> access, Class<BEAN> beanType) {
 
-    BeanAccessPrototype<BEAN> prototype = new BeanAccessPrototype<>(type, dynamic, this);
-    BEAN bean = (BEAN) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { type }, prototype);
-    prototype.setBean(bean);
+    BEAN bean = (BEAN) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { beanType }, access);
+    return bean;
+  }
+
+  @Override
+  public <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic) {
+
+    BeanAccessPrototype<BEAN> prototype = getPrototypeInternal(type);
+    BeanAccessPrototype<BEAN> copy = new BeanAccessPrototype<>(prototype, dynamic);
+    return copy.getBean();
+  }
+
+  /**
+   * Gets the initial internal and not-{@link BeanAccessPrototype#isDynamic() dynamic} {@link BeanAccessPrototype}.
+   * Using a {@link WeakHashMap} as cache to avoid memory leaking and a {@link ReentrantLock} to be thread-safe.
+   *
+   * @param <BEAN> the generic type of the {@link Bean}.
+   * @param type the {@link Class} reflecting the {@link Bean}.
+   * @return the {@link BeanAccessPrototype} instance of the specified {@link Bean}.
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  protected <BEAN extends Bean> BeanAccessPrototype<BEAN> getPrototypeInternal(final Class<BEAN> type) {
+
+    this.lock.lock();
+    try {
+      WeakReference<BeanAccessPrototype<?>> prototypeReference = this.class2prototypeMap.computeIfAbsent(type,
+          x -> new WeakReference<>(createPrototypeInternal(type)));
+      BeanAccessPrototype<BEAN> prototype = (BeanAccessPrototype) prototypeReference.get();
+      if (prototype == null) {
+        prototype = createPrototypeInternal(type);
+        prototypeReference = new WeakReference<>(prototype);
+        this.class2prototypeMap.put(type, prototypeReference);
+      }
+      return prototype;
+    } finally {
+      this.lock.unlock();
+    }
+  }
+
+  /**
+   * Creates the initial internal and not-{@link BeanAccessPrototype#isDynamic() dynamic} {@link BeanAccessPrototype}.
+   *
+   * @param <BEAN> the generic type of the {@link Bean}.
+   * @param type the {@link Class} reflecting the {@link Bean}.
+   * @return the {@link BeanAccessPrototype} instance of the specified {@link Bean}.
+   */
+  protected <BEAN extends Bean> BeanAccessPrototype<BEAN> createPrototypeInternal(Class<BEAN> type) {
+
+    BeanAccessPrototype<BEAN> prototype = new BeanAccessPrototype<>(type, this);
     GenericType<BEAN> beanType = this.reflectionUtil.createGenericType(type);
     Collection<BeanMethod> methods = new ArrayList<>();
-    collectMethods(type, prototype, beanType, bean, methods);
-    processMethods(methods, prototype, beanType, bean);
-    return bean;
+    collectMethods(type, prototype, beanType, methods);
+    processMethods(methods, prototype, beanType);
+    return prototype;
   }
 
   /**
@@ -120,11 +174,10 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param type is the current {@link Bean} {@link Class} to introspect.
    * @param prototype the {@link BeanAccessPrototype}.
    * @param beanType the {@link GenericType} of the initial {@link Bean}.
-   * @param bean the {@link Bean} instance.
    * @param methods the {@link Collection} where to {@link Collection#add(Object) add} the {@link BeanMethod}.
    */
   protected void collectMethods(Class<?> type, BeanAccessPrototype<?> prototype, GenericType<?> beanType,
-      Bean bean, Collection<BeanMethod> methods) {
+      Collection<BeanMethod> methods) {
 
     for (Method method : type.getDeclaredMethods()) {
       BeanMethod beanMethod = new BeanMethod(method);
@@ -136,7 +189,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
       } else {
         methods.add(beanMethod);
         if (methodType == BeanMethodType.PROPERTY) {
-          GenericPropertyImpl<?> property = createProperty(beanMethod, beanType, bean);
+          GenericPropertyImpl<?> property = createProperty(beanMethod, beanType, prototype.getBean());
           prototype.addProperty(property);
         }
       }
@@ -152,7 +205,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
       }
     } else {
       for (Class<?> superInterface : type.getInterfaces()) {
-        collectMethods(superInterface, prototype, beanType, bean, methods);
+        collectMethods(superInterface, prototype, beanType, methods);
       }
     }
   }
@@ -163,10 +216,9 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    *        {@link BeanMethod}s.
    * @param prototype the {@link BeanAccessPrototype} to process and complete.
    * @param beanType the {@link GenericType} reflecting the {@link Bean}.
-   * @param bean the {@link Bean} proxy instance.
    */
   private void processMethods(Collection<BeanMethod> methods, BeanAccessPrototype<?> prototype,
-      GenericType<?> beanType, Bean bean) {
+      GenericType<?> beanType) {
 
     Map<Method, BeanPrototypeOperation> method2OperationMap = prototype.getMethod2OperationMap();
     Map<String, BeanPrototypeProperty> name2PropertyMap = prototype.getName2PropertyMap();
@@ -178,7 +230,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         if (prototypeProperty == null) {
           GenericType<?> propertyType = this.reflectionUtil.createGenericType(beanMethod.getPropertyType(),
               beanType);
-          GenericPropertyImpl<?> property = createProperty(propertyName, propertyType, bean);
+          GenericPropertyImpl<?> property = createProperty(propertyName, propertyType, prototype.getBean());
           prototype.addProperty(property);
         }
       }
@@ -297,29 +349,32 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   @Override
   public <BEAN extends Bean> BEAN create(BEAN prototype) {
 
-    BeanAccessBase access = (BeanAccessBase) prototype.access();
-    BeanAccessPrototype<?> beanPrototype = access.getPrototype();
-    BeanAccessMutable interceptor = new BeanAccessMutable(beanPrototype);
-    BEAN bean = (BEAN) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { beanPrototype.getBeanType() },
-        interceptor);
-    interceptor.setBean(bean);
-    return bean;
+    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) prototype.access();
+    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
+    BeanAccessMutable<BEAN> interceptor = new BeanAccessMutable<>(access.getBeanType(), this, beanPrototype);
+    return interceptor.getBean();
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public <BEAN extends Bean> BEAN getReadOnlyBean(BEAN beanProxy) {
 
-    BeanAccessBase access = (BeanAccessBase) beanProxy.access();
+    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) beanProxy.access();
     if (access.isReadOnly()) {
       return beanProxy;
     }
-    BeanAccessPrototype<?> beanPrototype = access.getPrototype();
-    BeanAccessReadOnly interceptor = new BeanAccessReadOnly(beanPrototype, access);
-    BEAN bean = (BEAN) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { beanPrototype.getBeanType() },
-        interceptor);
-    interceptor.setBean(bean);
-    return bean;
+    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
+    BeanAccessReadOnly<BEAN> interceptor = new BeanAccessReadOnly<>(this, beanPrototype, access);
+    return interceptor.getBean();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public <BEAN extends Bean> BEAN getPrototype(BEAN bean) {
+
+    BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) bean.access();
+    BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
+    return beanPrototype.getBean();
   }
 
 }

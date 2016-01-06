@@ -153,21 +153,21 @@ public class BeanFactoryImplTest extends Assertions {
 
     // toString()
     ObjectMapper mapper = new ObjectMapper();
-    Map<String, ?> beanJsonMap = null;
+    Map<String, ?> beanJsonMap;
     String json = bean.toString();
     try {
       beanJsonMap = mapper.readValue(json, Map.class);
+      for (GenericProperty<?> property : access.getProperties()) {
+        Object valueProperty = property.getValue();
+        if (valueProperty == null) {
+          assertThat(beanJsonMap.containsKey(property.getName())).isFalse();
+        } else {
+          Object valueJson = beanJsonMap.get(property.getName());
+          assertThat(valueJson).isEqualTo(valueProperty);
+        }
+      }
     } catch (Exception e) {
       fail("Failed to parse bean.toString() as JSON: " + json, e);
-    }
-    for (GenericProperty<?> property : access.getProperties()) {
-      Object valueProperty = property.getValue();
-      if (valueProperty == null) {
-        assertThat(beanJsonMap.containsKey(property.getName())).isFalse();
-      } else {
-        Object valueJson = beanJsonMap.get(property.getName());
-        assertThat(valueJson).isEqualTo(valueProperty);
-      }
     }
   }
 

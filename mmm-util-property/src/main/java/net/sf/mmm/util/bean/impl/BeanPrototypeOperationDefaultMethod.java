@@ -29,7 +29,7 @@ public class BeanPrototypeOperationDefaultMethod extends BeanPrototypeOperation 
   }
 
   @Override
-  public Object invoke(BeanAccessBase access, Object[] args) throws Throwable {
+  public Object invoke(BeanAccessBase<?> access, Object[] args) throws Throwable {
 
     if (args == null) {
       return this.methodHandle.invoke(access.getBean());
