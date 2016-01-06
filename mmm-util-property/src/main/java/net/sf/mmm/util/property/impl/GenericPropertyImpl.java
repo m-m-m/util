@@ -365,7 +365,7 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
    *         {@link ObjectValidatorBuilder#and() parent-builder} to create a {@link #copy(AbstractValidator)} of this
    *         property with the configured validator.
    */
-  protected <PROPERTY extends GenericPropertyImpl<? extends VALUE>, BUILDER extends ObjectValidatorBuilder<?, PropertyBuilder<PROPERTY>, ?>> BUILDER withValdidator(
+  protected <PROPERTY extends GenericPropertyImpl<? extends VALUE>, BUILDER extends ObjectValidatorBuilder<? extends VALUE, PropertyBuilder<PROPERTY>, ?>> BUILDER withValdidator(
       Function<PropertyBuilder<PROPERTY>, BUILDER> factory) {
 
     PropertyBuilder<PROPERTY> parentBuilder = new PropertyBuilder<>();
@@ -379,7 +379,7 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
    *         {@link ObjectValidatorBuilder#and() parent-builder} to create a {@link #copy(AbstractValidator)} of this
    *         property with the configured validator.
    */
-  public ObjectValidatorBuilder<?, ? extends PropertyBuilder<? extends GenericPropertyImpl<? extends VALUE>>, ?> withValdidator() {
+  public ObjectValidatorBuilder<? extends VALUE, ? extends PropertyBuilder<? extends GenericPropertyImpl<? extends VALUE>>, ?> withValdidator() {
 
     Function<PropertyBuilder<GenericPropertyImpl<VALUE>>, ObjectValidatorBuilder<VALUE, PropertyBuilder<GenericPropertyImpl<VALUE>>, ?>> factory = new Function<PropertyBuilder<GenericPropertyImpl<VALUE>>, ObjectValidatorBuilder<VALUE, PropertyBuilder<GenericPropertyImpl<VALUE>>, ?>>() {
 
