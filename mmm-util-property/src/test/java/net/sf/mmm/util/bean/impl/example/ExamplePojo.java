@@ -9,7 +9,6 @@ import net.sf.mmm.util.validation.base.Mandatory;
  * TODO: this class ...
  *
  * @author hohwille
- * @since 7.1.0
  */
 public interface ExamplePojo {
 

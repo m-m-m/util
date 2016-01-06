@@ -16,7 +16,6 @@ import net.sf.mmm.util.validation.base.text.ValidatorPattern;
  * This is a {@link StringPropertyImpl} for a country code.
  *
  * @author hohwille
- * @since 7.1.0
  */
 public class CountryCodeProperty extends StringPropertyImpl {
 
