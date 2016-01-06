@@ -21,9 +21,6 @@ import javafx.beans.value.ObservableNumberValue;
 public interface NumberProperty extends GenericProperty<Number>, javafx.beans.binding.NumberExpression {
 
   @Override
-  void setValue(Number value);
-
-  @Override
   default NumberBinding negate() {
 
     return Bindings.negate(this);

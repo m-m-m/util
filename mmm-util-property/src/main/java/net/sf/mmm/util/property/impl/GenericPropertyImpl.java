@@ -365,7 +365,7 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
    *         {@link ObjectValidatorBuilder#and() parent-builder} to create a {@link #copy(AbstractValidator)} of this
    *         property with the configured validator.
    */
-  protected <PROPERTY extends GenericPropertyImpl<VALUE>, BUILDER extends ObjectValidatorBuilder<? extends VALUE, ? extends PropertyBuilder<PROPERTY>, ?>> BUILDER withValdidator(
+  protected <PROPERTY extends GenericPropertyImpl<? extends VALUE>, BUILDER extends ObjectValidatorBuilder<?, PropertyBuilder<PROPERTY>, ?>> BUILDER withValdidator(
       Function<PropertyBuilder<PROPERTY>, BUILDER> factory) {
 
     PropertyBuilder<PROPERTY> parentBuilder = new PropertyBuilder<>();
@@ -379,7 +379,7 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
    *         {@link ObjectValidatorBuilder#and() parent-builder} to create a {@link #copy(AbstractValidator)} of this
    *         property with the configured validator.
    */
-  public ObjectValidatorBuilder<? extends VALUE, ? extends PropertyBuilder<? extends GenericPropertyImpl<VALUE>>, ?> withValdidator() {
+  public ObjectValidatorBuilder<?, ? extends PropertyBuilder<? extends GenericPropertyImpl<? extends VALUE>>, ?> withValdidator() {
 
     Function<PropertyBuilder<GenericPropertyImpl<VALUE>>, ObjectValidatorBuilder<VALUE, PropertyBuilder<GenericPropertyImpl<VALUE>>, ?>> factory = new Function<PropertyBuilder<GenericPropertyImpl<VALUE>>, ObjectValidatorBuilder<VALUE, PropertyBuilder<GenericPropertyImpl<VALUE>>, ?>>() {
 
@@ -420,9 +420,9 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
    * @author hohwille
    * @since 7.1.0
    */
-  public class PropertyBuilder<T extends GenericPropertyImpl<VALUE>> implements Builder<T> {
+  public class PropertyBuilder<T extends GenericPropertyImpl<? extends VALUE>> implements Builder<T> {
 
-    private ObjectValidatorBuilder<? extends VALUE, ? extends PropertyBuilder<? extends T>, ?> builder;
+    private ObjectValidatorBuilder<?, ? extends PropertyBuilder<? extends T>, ?> builder;
 
     private boolean copyValue;
 

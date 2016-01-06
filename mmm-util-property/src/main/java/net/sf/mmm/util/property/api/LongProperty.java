@@ -18,6 +18,9 @@ import javafx.beans.value.WritableLongValue;
 public interface LongProperty extends NumberProperty, ObservableLongValue, WritableLongValue {
 
   @Override
+  void setValue(Number value);
+
+  @Override
   default long get() {
 
     Number value = getValue();

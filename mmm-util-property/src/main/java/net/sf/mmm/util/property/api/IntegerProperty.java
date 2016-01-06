@@ -19,6 +19,9 @@ import javafx.beans.value.WritableIntegerValue;
 public interface IntegerProperty extends NumberProperty, ObservableIntegerValue, WritableIntegerValue {
 
   @Override
+  void setValue(Number value);
+
+  @Override
   default int get() {
 
     Number value = getValue();
