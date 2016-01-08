@@ -17,13 +17,7 @@
   <properties>
     <mmm.flatten.mode>bom</mmm.flatten.mode>
     <javax.validation.version>1.1.0.Final</javax.validation.version>
-    <org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>
-    <!--
-    <org.hibernate.validator.version>4.2.0.Final</org.hibernate.validator.version>
-    <javax.validation.version>1.0.0.GA</javax.validation.version>
-    -->
     <org.slf4j.version>1.7.6</org.slf4j.version>
-    <!-- Internal project versions -->
   </properties>
 
   <dependencyManagement>
@@ -40,7 +34,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>1.1.11.RELEASE</version>
+        <version>1.3.1.RELEASE</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
