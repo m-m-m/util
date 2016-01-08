@@ -19,6 +19,7 @@
     <module>../mmm-util-cli</module>
     <module>../mmm-util-io</module>
     <module>../mmm-util-context</module>
+    <module>../mmm-util-event</module>
     <module>../mmm-util-validation</module>
     <module>../mmm-util-property</module>
     <!--
