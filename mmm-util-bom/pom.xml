@@ -121,6 +121,11 @@
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-validation</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-gwt</artifactId>
         <version>${net.sf.mmm.util.version}</version>
       </dependency>

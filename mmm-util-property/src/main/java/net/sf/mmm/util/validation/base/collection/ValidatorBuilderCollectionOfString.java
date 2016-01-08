@@ -14,10 +14,9 @@ import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public class ValidatorBuilderCollectionOfString<PARENT> extends
-    CollectionValidatorBuilder<String, PARENT, ValidatorBuilderCollectionOfString<PARENT>, ValidatorBuilderString<ValidatorBuilderCollectionOfString<PARENT>>> {
+public class ValidatorBuilderCollectionOfString<PARENT> extends ValidatorBuilderCollection<String, PARENT> {
 
   /**
    * The constructor.
@@ -28,10 +27,12 @@ public class ValidatorBuilderCollectionOfString<PARENT> extends
     super(parent);
   }
 
-  @Override
-  protected ValidatorBuilderString<ValidatorBuilderCollectionOfString<PARENT>> createSubBuilder() {
+  /**
+   * @return the {@link #with(java.util.function.BiFunction) sub-validator builder} for the {@link Collection} elements.
+   */
+  public ValidatorBuilderString<ValidatorBuilderCollection<String, PARENT>> with() {
 
-    return new ValidatorBuilderString<>(this);
+    return with((f, v) -> f.create(v));
   }
 
 }

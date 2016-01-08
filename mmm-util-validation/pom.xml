@@ -8,39 +8,27 @@
     <version>dev-SNAPSHOT</version>
     <relativePath>../mmm-util-modules/pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-util-property</artifactId>
+  <artifactId>mmm-util-validation</artifactId>
   <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
-  <description>This project provides advanced property and bean support to make your life a lot easier.</description>
+  <description>This project provides advanced validation support.</description>
 
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-validation</artifactId>
+      <artifactId>mmm-util-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

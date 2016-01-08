@@ -54,14 +54,22 @@ public abstract class ObjectValidatorBuilder<V, PARENT, SELF extends ObjectValid
   }
 
   /**
-   * @param validator the {@link AbstractValidator} to add to this builder.
    * @return this build instance for fluent API calls.
    */
   @SuppressWarnings("unchecked")
+  protected SELF self() {
+
+    return (SELF) this;
+  }
+
+  /**
+   * @param validator the {@link AbstractValidator} to add to this builder.
+   * @return this build instance for fluent API calls.
+   */
   public SELF add(AbstractValidator<? super V> validator) {
 
     this.validators.add(validator);
-    return (SELF) this;
+    return self();
   }
 
   /**

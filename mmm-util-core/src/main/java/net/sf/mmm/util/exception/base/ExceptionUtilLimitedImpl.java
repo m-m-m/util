@@ -5,14 +5,10 @@ package net.sf.mmm.util.exception.base;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import javax.validation.ValidationException;
-
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.ExceptionUtilLimited;
-import net.sf.mmm.util.exception.api.NlsThrowable;
 import net.sf.mmm.util.exception.api.TechnicalErrorUserException;
 import net.sf.mmm.util.security.api.SecurityErrorUserException;
-import net.sf.mmm.util.validation.api.ValidationErrorUserException;
 
 /**
  * This is the default implementation of {@link ExceptionUtilLimited}.
@@ -49,16 +45,11 @@ public class ExceptionUtilLimitedImpl extends AbstractLoggableComponent implemen
   @Override
   public Throwable convertForUser(Throwable exception) {
 
-    if (exception instanceof NlsThrowable) {
-      NlsThrowable nlsThrowable = (NlsThrowable) exception;
-      if (nlsThrowable.isForUser()) {
-        return exception;
-      }
-    } else if (exception instanceof ValidationException) {
-      return new ValidationErrorUserException(exception);
-    } else if (exception instanceof SecurityException) {
+    if (exception instanceof SecurityException) {
       return new SecurityErrorUserException(exception);
     }
-    return new TechnicalErrorUserException(exception);
+    // } else if (exception instanceof ValidationException) {
+    // return new ValidationErrorUserException(exception);
+    return TechnicalErrorUserException.getOrCreateUserException(exception);
   }
 }
