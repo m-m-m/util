@@ -52,4 +52,10 @@ public class NumberPropertyImpl extends GenericPropertyImpl<Number> implements N
     return new NumberPropertyImpl(newName, newBean, newValidator);
   }
 
+  @Override
+  protected final boolean useEqualsInternal() {
+
+    return true;
+  }
+
 }

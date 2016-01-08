@@ -34,6 +34,8 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
 @SuppressWarnings("restriction")
 public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
 
+  private ExpressionHelper<VALUE> helper;
+
   private final Bean bean;
 
   private final String name;
@@ -47,8 +49,6 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
   private ObservableValue<? extends VALUE> binding;
 
   private InvalidationListener bindingListener;
-
-  private ExpressionHelper<VALUE> helper;
 
   private ReadOnlyPropertyImpl<VALUE> readOnlyProperty;
 
@@ -191,9 +191,6 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
     Bindings.unbindBidirectional(this, other);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Bean getBean() {
 
@@ -219,37 +216,48 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
   }
 
   @Override
-  public VALUE getValue() {
-
-    return this.value;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public void addListener(InvalidationListener listener) {
 
     this.helper = ExpressionHelper.addListener(this.helper, this, listener);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void removeListener(InvalidationListener listener) {
 
     this.helper = ExpressionHelper.removeListener(this.helper, listener);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
+  public VALUE getValue() {
+
+    return this.value;
+  }
+
   @Override
   public void setValue(VALUE value) {
 
-    markInvalid();
-    this.value = value;
+    if (isBound()) {
+      throw new RuntimeException((getBean() != null && getName() != null
+          ? getBean().getClass().getSimpleName() + "." + getName() + " : " : "") + "A bound value cannot be set.");
+    }
+    if (this.value != value) {
+      if ((this.value != null) && (value != null) && useEqualsInternal()) {
+        if (this.value.equals(value)) {
+          return;
+        }
+      }
+      markInvalid();
+      this.value = value;
+    }
+  }
+
+  /**
+   * @return <code>true</code> if the {@link #getValue() values} of this property should be compared using
+   *         {@link #equals(Object)} in {@link #setValue(Object)}, <code>false</code> otherwise.
+   */
+  protected boolean useEqualsInternal() {
+
+    return false;
   }
 
   /**
@@ -284,9 +292,6 @@ public class GenericPropertyImpl<VALUE> implements GenericProperty<VALUE> {
     ExpressionHelper.fireValueChangedEvent(this.helper);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<VALUE> getType() {
 

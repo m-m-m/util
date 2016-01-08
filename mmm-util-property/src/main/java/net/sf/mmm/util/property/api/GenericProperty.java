@@ -11,6 +11,7 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * This is the interface for a generic property.
  *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ *
  * @author hohwille
  * @since 7.1.0
  */

@@ -52,4 +52,10 @@ public class BooleanPropertyImpl extends GenericPropertyImpl<Boolean> implements
     return withValdidator(x -> new ValidatorBuilderBoolean<>(x));
   }
 
+  @Override
+  protected boolean useEqualsInternal() {
+
+    return true;
+  }
+
 }

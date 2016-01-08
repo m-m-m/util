@@ -53,4 +53,10 @@ public class StringPropertyImpl extends GenericPropertyImpl<String> implements S
     return withValdidator(x -> new ValidatorBuilderString<>(x));
   }
 
+  @Override
+  protected boolean useEqualsInternal() {
+
+    return true;
+  }
+
 }
