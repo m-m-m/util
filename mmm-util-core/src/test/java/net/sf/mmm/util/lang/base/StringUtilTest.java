@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.value.impl.ValueConverterToNumber;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.value.api.ValueConverter;
+import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This is the test-case for {@link StringUtilImpl}.
@@ -23,13 +25,6 @@ public class StringUtilTest extends Assert {
   public StringUtil getStringUtil() {
 
     return StringUtilImpl.getInstance();
-  }
-
-  protected ValueConverterToNumber getValueConverterToNumber() {
-
-    ValueConverterToNumber converter = new ValueConverterToNumber();
-    converter.initialize();
-    return converter;
   }
 
   @Test
@@ -140,7 +135,34 @@ public class StringUtilTest extends Assert {
     assertEquals("ef", list.get(3));
 
     List<Integer> collection = new ArrayList<Integer>();
-    ValueConverterToNumber converter = getValueConverterToNumber();
+    ValueConverter<String, Integer> converter = new ValueConverter<String, Integer>() {
+
+      @Override
+      public Class<String> getSourceType() {
+
+        return String.class;
+      }
+
+      @Override
+      public Class<Integer> getTargetType() {
+
+        return Integer.class;
+      }
+
+      @Override
+      public <T extends Integer> T convert(String value, Object valueSource, Class<T> targetClass)
+          throws ValueException {
+
+        return (T) Integer.valueOf(value);
+      }
+
+      @Override
+      public <T extends Integer> T convert(String value, Object valueSource, GenericType<T> targetType)
+          throws ValueException {
+
+        return convert(value, valueSource, targetType.getAssignmentClass());
+      }
+    };
     getStringUtil().fromSeparatedString("1; 42; 3; 99", "; ", syntax, collection, converter, Integer.class);
     assertEquals(4, collection.size());
     assertEquals(Integer.valueOf(1), collection.get(0));

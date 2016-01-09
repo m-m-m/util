@@ -16,12 +16,12 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-test</artifactId>
-      <scope>test</scope>
+      <artifactId>mmm-util-pojo</artifactId>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-core</artifactId>
+      <artifactId>mmm-util-test</artifactId>
+      <scope>test</scope>
     </dependency>
     <!--
     This dependency exists here in order to support jaxb-impl (com.sun.xml.bind). When this is on your classpath it will

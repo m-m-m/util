@@ -171,8 +171,7 @@ public class ValueOutOfRangeException extends ValueException {
   public static <V> NlsMessage createMessage(V value, V minimum, V maximum, Object valueSource) {
 
     return createBundle(NlsBundleUtilCoreRoot.class).errorValueOutOfRange(value,
-        (minimum == null) ? Range.MIN_UNBOUND : minimum, (maximum == null) ? Range.MAX_UNBOUND : maximum,
-        valueSource);
+        (minimum == null) ? "\u2212\u221E" : minimum, (maximum == null) ? "+\u221E" : maximum, valueSource);
   }
 
   /**

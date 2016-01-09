@@ -5,7 +5,6 @@ package net.sf.mmm.util.collection.base;
 import net.sf.mmm.util.collection.api.ListFactory;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
-import net.sf.mmm.util.pojo.api.Pojo;
 
 /**
  * This is a simple but generic implementation of {@link net.sf.mmm.util.collection.api.TreeNode}. It can carry any kind
@@ -16,8 +15,8 @@ import net.sf.mmm.util.pojo.api.Pojo;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE>> implements
-    AttributeWriteValue<VALUE>, Pojo {
+public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE>>
+    implements AttributeWriteValue<VALUE> {
 
   /** @see #getValue() */
   private VALUE value;

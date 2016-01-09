@@ -23,16 +23,13 @@ import java.util.Enumeration;
 import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.collection.base.HashKey;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
@@ -44,13 +41,6 @@ import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.Visitor;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
-import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
-import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 import net.sf.mmm.util.reflect.api.ClassResolver;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
@@ -85,12 +75,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   /** @see #toType(CharSequenceScanner, ClassResolver, Type) */
   private static final CharFilter CHAR_FILTER = new ListCharFilter(false, '<', '[', ',', '?', '>');
-
-  /** @see #getPojoDescriptorBuilderFactory() */
-  private PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
-
-  /** @see #getPojoDescriptorBuilder() */
-  private PojoDescriptorBuilder pojoDescriptorBuilder;
 
   /**
    * The constructor.
@@ -136,55 +120,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     if (instance == null) {
       instance = this;
     }
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected void doInitialize() {
-
-    super.doInitialize();
-    if (this.pojoDescriptorBuilderFactory == null) {
-      this.pojoDescriptorBuilderFactory = PojoDescriptorBuilderFactoryImpl.getInstance();
-    }
-    if (this.pojoDescriptorBuilder == null) {
-      this.pojoDescriptorBuilder = this.pojoDescriptorBuilderFactory.createPrivateFieldDescriptorBuilder();
-    }
-  }
-
-  /**
-   * @return the instance of {@link PojoDescriptorBuilderFactory}.
-   */
-  protected PojoDescriptorBuilderFactory getPojoDescriptorBuilderFactory() {
-
-    return this.pojoDescriptorBuilderFactory;
-  }
-
-  /**
-   * @param pojoDescriptorBuilderFactory is the instance of {@link PojoDescriptorBuilderFactory} to {@link Inject}.
-   */
-  @Inject
-  public void setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
-
-    getInitializationState().requireNotInitilized();
-    this.pojoDescriptorBuilderFactory = pojoDescriptorBuilderFactory;
-  }
-
-  /**
-   * @return the {@link PojoDescriptorBuilder}.
-   */
-  protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
-
-    return this.pojoDescriptorBuilder;
-  }
-
-  /**
-   * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder} to set.
-   */
-  public void setPojoDescriptorBuilder(PojoDescriptorBuilder pojoDescriptorBuilder) {
-
-    this.pojoDescriptorBuilder = pojoDescriptorBuilder;
   }
 
   /**
@@ -620,8 +555,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
-      boolean mustBeFinal, boolean inherit) throws NoSuchFieldException, IllegalAccessException,
-      IllegalArgumentException {
+      boolean mustBeFinal, boolean inherit)
+          throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException {
 
     Field field = type.getField(fieldName);
     int modifiers = field.getModifiers();
@@ -765,7 +700,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * {@inheritDoc}
    */
   @Override
-  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages,
+      Filter<? super String> filter) {
 
     Set<String> result = new HashSet<>();
     findClassNames(packageName, includeSubPackages, result, filter, getDefaultClassLoader(filter.getClass()));
@@ -1028,90 +964,4 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void visitObjectRecursive(Object object, Filter<Object> visitor) {
-
-    visitObjectRecursive(object, visitor, true);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void visitObjectRecursive(Object object, Filter<Object> visitor, boolean loopProtection) {
-
-    Set<HashKey<Object>> visitedSet = null;
-    if (loopProtection) {
-      visitedSet = new HashSet<>();
-    }
-    visitObjectRecursive(object, visitor, visitedSet);
-  }
-
-  /**
-   * @see #visitObjectRecursive(Object, Filter, boolean)
-   *
-   * @param object is the {@link Object} to traverse recursively.
-   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed {@link Object}s. If an
-   *        {@link Object} is not {@link Filter#accept(Object) accepted} by this {@link Filter} the recursion stops at
-   *        this point.
-   * @param visitedSet is the {@link Set} where to collect all object to visit in order to prevent infinity loops or
-   *        <code>null</code> to disable.
-   */
-  protected void visitObjectRecursive(Object object, Filter<Object> visitor, Set<HashKey<Object>> visitedSet) {
-
-    if (object == null) {
-      return;
-    }
-    if (visitedSet != null) {
-      HashKey<Object> hashKey = new HashKey<>(object);
-      boolean added = visitedSet.add(hashKey);
-      if (!added) {
-        // already visited same object...
-        return;
-      }
-    }
-    boolean accepted = visitor.accept(object);
-    if (!accepted) {
-      return;
-    }
-    if (object instanceof Collection) {
-      Collection<?> collection = (Collection<?>) object;
-      for (Object element : collection) {
-        visitObjectRecursive(element, visitor, visitedSet);
-      }
-    } else if (object instanceof Map) {
-      Map<?, ?> map = (Map<?, ?>) object;
-      // ETOs should only be used as values and not as keys...
-      for (Map.Entry<?, ?> entry : map.entrySet()) {
-        visitObjectRecursive(entry.getKey(), visitor, visitedSet);
-        visitObjectRecursive(entry.getValue(), visitor, visitedSet);
-      }
-    } else if (object instanceof Object[]) {
-      Object[] array = (Object[]) object;
-      for (Object element : array) {
-        visitObjectRecursive(element, visitor, visitedSet);
-      }
-    } else if (object instanceof Type) {
-      // we do not traverse types (Class, ParameterizedType, TypeVariable, ...)
-      return;
-    } else {
-      Class<?> objectClass = object.getClass();
-      if (objectClass.isArray()) {
-        return;
-      }
-      PojoDescriptor<?> descriptor = this.pojoDescriptorBuilder.getDescriptor(objectClass);
-      for (PojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
-        if (!"class".equals(propertyDescriptor.getName())) {
-          PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
-          if (getter != null) {
-            Object propertyValue = getter.invoke(object);
-            visitObjectRecursive(propertyValue, visitor, visitedSet);
-          }
-        }
-      }
-    }
-  }
 }

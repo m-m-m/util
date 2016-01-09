@@ -16,7 +16,9 @@ import net.sf.mmm.util.lang.api.Visitor;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
- * This is the interface for a collection of utility functions to deal with {@link java.lang.reflect reflection}.
+ * This is the interface for a collection of utility functions to deal with {@link java.lang.reflect reflection}. <br/>
+ * <b>Note:</b><br/>
+ * If you are looking for a method called <code>visitObjectRecursive</code> see <code>PojoUtil</code> instead.
  *
  * @see AnnotationUtil
  * @see net.sf.mmm.util.reflect.base.ReflectionUtilImpl
@@ -127,7 +129,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    *
    * @param class1 is the first class.
    * @param class2 is the second class.
-   * @return <ul>
+   * @return
+   *         <ul>
    *         <li><code>0</code> if both classes are equal to each other.</li>
    *         <li><code>1</code> if <code>class1</code> inherits from <code>class2</code>.</li>
    *         <li><code>-1</code> if <code>class2</code> inherits from <code>class1</code>.</li>
@@ -170,8 +173,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    * @throws IllegalArgumentException if the field is NOT static (or final) or has the wrong type.
    */
   <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
-      boolean mustBeFinal, boolean inherit) throws NoSuchFieldException, IllegalAccessException,
-      IllegalArgumentException;
+      boolean mustBeFinal, boolean inherit)
+          throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException;
 
   /**
    *
@@ -224,7 +227,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
       throws SecurityException;
 
   /**
-   * This method finds all classes that are located in the package identified by the given <code>packageName</code>. <br>
+   * This method finds all classes that are located in the package identified by the given <code>packageName</code>.
+   * <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and WAR-files may
    * need to be scanned.
@@ -238,7 +242,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   Set<String> findClassNames(String packageName, boolean includeSubPackages) throws RuntimeIoException;
 
   /**
-   * This method finds all classes that are located in the package identified by the given <code>packageName</code>. <br>
+   * This method finds all classes that are located in the package identified by the given <code>packageName</code>.
+   * <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and WAR-files may
    * need to be scanned.
@@ -257,7 +262,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
       throws RuntimeIoException;
 
   /**
-   * This method finds all classes that are located in the package identified by the given <code>packageName</code>. <br>
+   * This method finds all classes that are located in the package identified by the given <code>packageName</code>.
+   * <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and WAR-files may
    * need to be scanned.
@@ -277,7 +283,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
       ClassLoader classLoader) throws RuntimeIoException;
 
   /**
-   * This method finds all classes that are located in the package identified by the given <code>packageName</code>. <br>
+   * This method finds all classes that are located in the package identified by the given <code>packageName</code>.
+   * <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and WAR-files may
    * need to be scanned.
@@ -335,7 +342,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
       Filter<? super Class<?>> filter) throws TypeNotFoundException;
 
   /**
-   * This method finds all resources that are located in the package identified by the given <code>packageName</code>. <br>
+   * This method finds all resources that are located in the package identified by the given <code>packageName</code>.
+   * <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and WAR-files may
    * need to be scanned.
@@ -356,7 +364,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
       throws RuntimeIoException;
 
   /**
-   * This method finds all resources that are located in the package identified by the given <code>packageName</code>. <br>
+   * This method finds all resources that are located in the package identified by the given <code>packageName</code>.
+   * <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and WAR-files may
    * need to be scanned.
@@ -378,7 +387,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
       ClassLoader classLoader) throws RuntimeIoException;
 
   /**
-   * This method finds all resources that are located in the package identified by the given <code>packageName</code>. <br>
+   * This method finds all resources that are located in the package identified by the given <code>packageName</code>.
+   * <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and WAR-files may
    * need to be scanned.
@@ -410,7 +420,8 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
   Set<DataResource> findResources(String absoluteClasspath) throws RuntimeIoException;
 
   /**
-   * This method finds all resources that are located in the package identified by the given <code>packageName</code>. <br>
+   * This method finds all resources that are located in the package identified by the given <code>packageName</code>.
+   * <br>
    * <b>ATTENTION:</b><br>
    * This is a relative expensive operation. Depending on your classpath multiple directories, JAR-, and WAR-files may
    * need to be scanned.
@@ -428,35 +439,5 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    */
   Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) throws RuntimeIoException;
-
-  /**
-   * This method recursively traverses all objects starting from the given {@link Object} via all properties and
-   * contents. It simply delegates to {@link #visitObjectRecursive(Object, Filter, boolean)} using <code>true</code> for
-   * <code>loopProtection</code>.
-   *
-   * @param object is the {@link Object} to traverse recursively.
-   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed {@link Object}s. If an
-   *        {@link Object} is not {@link Filter#accept(Object) accepted} by this {@link Filter} the recursion stops at
-   *        this point.
-   */
-  void visitObjectRecursive(Object object, Filter<Object> visitor);
-
-  /**
-   * This method recursively traverses all objects starting from the given {@link Object} via all properties and
-   * contents. It supports {@link java.util.Collection}s, {@link java.util.Map}s, {@link Object} {@link Class#isArray()
-   * arrays}, and {@link net.sf.mmm.util.pojo.api.Pojo}s. <br>
-   * <b>ATTENTION:</b><br>
-   * This method will NOT traverse into {@link Class#isPrimitive() primitive} {@link Class#isArray() arrays} for
-   * performance reasons. Simply realize this inside your <code>visitor</code> if you need it.
-   *
-   * @param object is the {@link Object} to traverse recursively.
-   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed {@link Object}s. If an
-   *        {@link Object} is not {@link Filter#accept(Object) accepted} by this {@link Filter} the recursion stops at
-   *        this point.
-   * @param loopProtection - <code>true</code> to collect all visited {@link Object}s in a {@link Set} in order to
-   *        prevent infinity loops, <code>false</code> otherwise (to save performance if no loops are possible for the
-   *        given {@link Object}).
-   */
-  void visitObjectRecursive(Object object, Filter<Object> visitor, boolean loopProtection);
 
 }

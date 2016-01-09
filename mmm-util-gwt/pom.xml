@@ -29,7 +29,16 @@
       <artifactId>mmm-util-core</artifactId>
       <classifier>sources</classifier>
     </dependency>
-    <!-- 
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-pojo</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-pojo</artifactId>
+      <classifier>sources</classifier>
+    </dependency>
+    <!--
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
@@ -80,7 +89,7 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <plugin>

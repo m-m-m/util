@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.assertj.core.api.Assertions;
+import org.junit.AfterClass;
+import org.junit.Test;
+
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
@@ -15,10 +19,6 @@ import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.api.ResourcePathNode;
 import net.sf.mmm.util.resource.impl.ClasspathScannerImpl;
-
-import org.assertj.core.api.Assertions;
-import org.junit.AfterClass;
-import org.junit.Test;
 
 /**
  * Test-case for {@link ClasspathScanner}.
@@ -133,8 +133,8 @@ public class ClasspathScannerTest extends Assertions {
     assertThat(packageResource.isData()).isFalse();
     assertThat(packageResource.getPath()).isEqualTo(clazz.getPackage().getName().replace('.', '/'));
     assertThat(packageResource.isAvailable()).isFalse();
-    assertThat(packageResource.getChildResources()).contains(
-        scanner.getClasspathResource(clazz.getName().replace('.', '/') + ".class"));
+    assertThat(packageResource.getChildResources())
+        .contains(scanner.getClasspathResource(clazz.getName().replace('.', '/') + ".class"));
 
   }
 
@@ -149,7 +149,7 @@ public class ClasspathScannerTest extends Assertions {
     // then
     assertThat(files).isInstanceOf(List.class);
     List<? extends BrowsableResource> fileList = (List<? extends BrowsableResource>) files;
-    assertThat(fileList.size()).isBetween(Integer.valueOf(1000), Integer.valueOf(2000));
+    assertThat(fileList.size()).isBetween(Integer.valueOf(600), Integer.valueOf(1200));
     assertThat(fileList).contains(scanner.getClasspathResource(CLASSPATH_HYPHENATION_XML),
         scanner.getClasspathResource(CLASSPATH_NLS_BUNDLES));
   }
