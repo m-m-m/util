@@ -6,7 +6,7 @@
 
 ## mmm-util-pojo
 
-This module is part of the [mmm-util project](../) and brings extended POJO features such as 
+This module is part of the [mmm-util project](../README.md) and brings extended POJO features such as 
 POJO introspection and value conversion
 * [POJO API](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/api/package-summary.html#package.description) including generic fabrication API.
 * [POJO Descriptor](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html#package.description) for reflective introspection of POJOs.
