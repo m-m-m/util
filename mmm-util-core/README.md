@@ -6,7 +6,7 @@
 
 ## mmm-util-core
 
-This module is part of the [mmm-util project](../) and brings many fundamental features missing in JDK like 
+This module is part of the [mmm-util project](../README.md) and brings many fundamental features missing in JDK like 
 * [NLS/I18N](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/nls/api/package-summary.html#package.description)
 * [Advanced Reflection](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/reflect/api/package-summary.html#package.description)
 * [Powerful resource abstraction](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/resource/api/package-summary.html#package.description) (see also [mmm-util-io](../mmm-util-io))
