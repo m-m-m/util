@@ -16,6 +16,9 @@ import javafx.beans.value.WritableFloatValue;
  */
 public interface FloatProperty extends NumberProperty, ObservableFloatValue, WritableFloatValue {
 
+  // @Override
+  // Float getValue();
+
   @Override
   void setValue(Number value);
 

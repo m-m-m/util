@@ -5,7 +5,6 @@ package net.sf.mmm.util.bean.impl.example;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 import net.sf.mmm.util.property.impl.StringPropertyImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidator;
@@ -46,8 +45,7 @@ public class CountryCodeProperty extends StringPropertyImpl {
   }
 
   @Override
-  public GenericPropertyImpl<String> copy(String newName, Bean newBean,
-      AbstractValidator<? super String> newValidator) {
+  public StringPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super String> newValidator) {
 
     return new CountryCodeProperty(newName, newBean, newValidator);
   }

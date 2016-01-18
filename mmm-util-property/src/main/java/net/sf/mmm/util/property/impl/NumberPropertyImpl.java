@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.impl;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.NumberProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -11,10 +13,13 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 /**
  * This is the implementation of {@link NumberProperty}.
  *
+ * @param <V> the generic type of the actual {@link #getValue() value}.
+ *
  * @author hohwille
  * @since 7.1.0
  */
-public class NumberPropertyImpl extends GenericPropertyImpl<Number> implements NumberProperty {
+public abstract class NumberPropertyImpl<V extends Number> extends AbstractRegularPropertyImpl<Number>
+    implements NumberProperty {
 
   private static final GenericType<Number> TYPE = new SimpleGenericTypeImpl<>(Number.class);
 
@@ -46,16 +51,20 @@ public class NumberPropertyImpl extends GenericPropertyImpl<Number> implements N
     super(name, TYPE, bean, validator);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public NumberPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
+  protected final boolean doSetValue(Number newValue) {
 
-    return new NumberPropertyImpl(newName, newBean, newValidator);
-  }
-
-  @Override
-  protected final boolean useEqualsInternal() {
-
+    if (Objects.equals(getValue(), newValue)) {
+      return false;
+    }
+    doSetNumber((V) newValue);
     return true;
   }
+
+  /**
+   * @param newValue the new {@link #getValue() value} to set.
+   */
+  protected abstract void doSetNumber(V newValue);
 
 }

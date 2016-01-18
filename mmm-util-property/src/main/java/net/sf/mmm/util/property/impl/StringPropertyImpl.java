@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.impl;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.StringProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -15,9 +17,11 @@ import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
  * @author hohwille
  * @since 7.1.0
  */
-public class StringPropertyImpl extends GenericPropertyImpl<String> implements StringProperty {
+public class StringPropertyImpl extends AbstractRegularPropertyImpl<String> implements StringProperty {
 
   private static final GenericType<String> TYPE = new SimpleGenericTypeImpl<>(String.class);
+
+  private String value;
 
   /**
    * The constructor.
@@ -41,8 +45,23 @@ public class StringPropertyImpl extends GenericPropertyImpl<String> implements S
   }
 
   @Override
-  public GenericPropertyImpl<String> copy(String newName, Bean newBean,
-      AbstractValidator<? super String> newValidator) {
+  protected String doGetValue() {
+
+    return this.value;
+  }
+
+  @Override
+  protected boolean doSetValue(String newValue) {
+
+    if (Objects.equals(this.value, newValue)) {
+      return false;
+    }
+    this.value = newValue;
+    return true;
+  }
+
+  @Override
+  public StringPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super String> newValidator) {
 
     return new StringPropertyImpl(newName, newBean, newValidator);
   }
@@ -51,12 +70,6 @@ public class StringPropertyImpl extends GenericPropertyImpl<String> implements S
   public ValidatorBuilderString<PropertyBuilder<StringPropertyImpl>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderString<>(x));
-  }
-
-  @Override
-  protected boolean useEqualsInternal() {
-
-    return true;
   }
 
 }

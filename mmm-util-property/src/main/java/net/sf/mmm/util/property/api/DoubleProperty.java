@@ -16,6 +16,9 @@ import javafx.beans.value.WritableDoubleValue;
  */
 public interface DoubleProperty extends NumberProperty, ObservableDoubleValue, WritableDoubleValue {
 
+  // @Override
+  // Double getValue();
+
   @Override
   void setValue(Number value);
 

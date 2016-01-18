@@ -23,6 +23,7 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.base.AbstractGenericProperty;
 import net.sf.mmm.util.property.impl.BooleanPropertyImpl;
 import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 import net.sf.mmm.util.property.impl.IntegerPropertyImpl;
@@ -215,7 +216,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
   /**
    * Recursively introspect, create and collect the {@link BeanMethod}s for a {@link Bean} {@link Class}. Also creates
-   * the {@link GenericPropertyImpl properties} for the {@link BeanMethodType#PROPERTY property} methods.
+   * the {@link AbstractGenericProperty properties} for the {@link BeanMethodType#PROPERTY property} methods.
    *
    * @param type is the current {@link Bean} {@link Class} to introspect.
    * @param prototype the {@link BeanAccessPrototype}.
@@ -235,7 +236,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
       } else {
         methods.add(beanMethod);
         if (methodType == BeanMethodType.PROPERTY) {
-          GenericPropertyImpl<?> property = createProperty(beanMethod, beanType, prototype.getBean());
+          AbstractGenericProperty<?> property = createProperty(beanMethod, beanType, prototype.getBean());
           prototype.addProperty(property);
         }
       }
@@ -276,7 +277,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         if (prototypeProperty == null) {
           GenericType<?> propertyType = this.reflectionUtil.createGenericType(beanMethod.getPropertyType(),
               beanType);
-          GenericPropertyImpl<?> property = createProperty(propertyName, propertyType, prototype.getBean());
+          AbstractGenericProperty<?> property = createProperty(propertyName, propertyType, prototype.getBean());
           prototype.addProperty(property);
         }
       }
@@ -292,12 +293,12 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param bean the {@link Bean} instance to create this property for.
    * @return the new property instance.
    */
-  private GenericPropertyImpl<?> createProperty(BeanMethod beanMethod, GenericType<?> beanType, Bean bean) {
+  private AbstractGenericProperty<?> createProperty(BeanMethod beanMethod, GenericType<?> beanType, Bean bean) {
 
     Method method = beanMethod.getMethod();
-    GenericPropertyImpl<?> property = null;
+    AbstractGenericProperty<?> property = null;
     if (method.isDefault()) {
-      property = (GenericPropertyImpl<?>) LookupHelper.INSTANCE.invokeDefaultMethod(bean, method,
+      property = (AbstractGenericProperty<?>) LookupHelper.INSTANCE.invokeDefaultMethod(bean, method,
           ReflectionUtilLimited.NO_ARGUMENTS);
       property = property.copy(beanMethod.getPropertyName(), bean);
     }
@@ -316,25 +317,25 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param bean the {@link GenericProperty#getBean() property bean}.
    * @return the new property instance.
    */
-  protected <V> GenericPropertyImpl<V> createProperty(String name, GenericType<V> type, Bean bean) {
+  protected <V> AbstractGenericProperty<V> createProperty(String name, GenericType<V> type, Bean bean) {
 
     return createProperty(name, type, bean, GenericProperty.class);
   }
 
   /**
    * @param <V> the generic property type.
-   * @param name the {@link GenericPropertyImpl#getName() property name}.
-   * @param type the {@link GenericPropertyImpl#getType() property type}.
-   * @param bean the {@link GenericPropertyImpl#getBean() property bean}.
+   * @param name the {@link GenericProperty#getName() property name}.
+   * @param type the {@link GenericProperty#getType() property type}.
+   * @param bean the {@link GenericProperty#getBean() property bean}.
    * @param propertyClass the {@link Class} reflecting the {@link GenericProperty} or <code>null</code> if no property
    *        method exists and this method is called for plain getter or setter.
-   * @return the new instance of {@link GenericPropertyImpl}.
+   * @return the new instance of {@link AbstractGenericProperty}.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  protected <V> GenericPropertyImpl<V> createProperty(String name, GenericType<V> type, Bean bean,
+  protected <V> AbstractGenericProperty<V> createProperty(String name, GenericType<V> type, Bean bean,
       Class<?> propertyClass) {
 
-    GenericPropertyImpl result;
+    AbstractGenericProperty result;
     if ((!propertyClass.isInterface()) && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
       result = createPropertyFromSpecifiedClass(name, type, bean, propertyClass);
     } else {
@@ -354,7 +355,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     return result;
   }
 
-  private GenericPropertyImpl<?> createPropertyFromSpecifiedClass(String name, GenericType<?> type, Bean bean,
+  private AbstractGenericProperty<?> createPropertyFromSpecifiedClass(String name, GenericType<?> type, Bean bean,
       Class<?> propertyClass) {
 
     Constructor<?> constructor = null;
@@ -365,17 +366,17 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         if ((parameterTypes.length >= 2) && (parameterTypes.length <= 4) && (parameterTypes[0] == String.class)) {
           if (parameterTypes[1] == Bean.class) {
             if (parameterTypes.length == 2) {
-              return (GenericPropertyImpl<?>) constructor.newInstance(new Object[] { name, bean });
+              return (AbstractGenericProperty<?>) constructor.newInstance(new Object[] { name, bean });
             } else if ((parameterTypes.length == 3) && (parameterTypes[2] == AbstractValidator.class)) {
-              return (GenericPropertyImpl<?>) constructor
+              return (AbstractGenericProperty<?>) constructor
                   .newInstance(new Object[] { name, bean, ValidatorNone.getInstance() });
             }
           } else if ((parameterTypes[1] == GenericType.class) && (parameterTypes.length >= 3)
               && (parameterTypes[2] == Bean.class)) {
             if (parameterTypes.length == 3) {
-              return (GenericPropertyImpl<?>) constructor.newInstance(new Object[] { name, type, bean });
+              return (AbstractGenericProperty<?>) constructor.newInstance(new Object[] { name, type, bean });
             } else if (parameterTypes[3] == AbstractValidator.class) {
-              return (GenericPropertyImpl<?>) constructor
+              return (AbstractGenericProperty<?>) constructor
                   .newInstance(new Object[] { name, type, bean, ValidatorNone.getInstance() });
             }
           }

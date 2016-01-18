@@ -13,7 +13,9 @@ import net.sf.mmm.util.validation.base.number.ValidatorBuilderFloat;
  * @author hohwille
  * @since 7.1.0
  */
-public class FloatPropertyImpl extends NumberPropertyImpl implements FloatProperty {
+public class FloatPropertyImpl extends NumberPropertyImpl<Float> implements FloatProperty {
+
+  private Float value;
 
   /**
    * The constructor.
@@ -51,6 +53,18 @@ public class FloatPropertyImpl extends NumberPropertyImpl implements FloatProper
     } else {
       super.setValue(Float.valueOf(value.floatValue()));
     }
+  }
+
+  @Override
+  protected Float doGetValue() {
+
+    return this.value;
+  }
+
+  @Override
+  protected void doSetNumber(Float newValue) {
+
+    this.value = newValue;
   }
 
   @Override

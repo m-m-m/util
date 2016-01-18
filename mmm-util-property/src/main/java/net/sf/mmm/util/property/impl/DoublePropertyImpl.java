@@ -13,7 +13,9 @@ import net.sf.mmm.util.validation.base.number.ValidatorBuilderDouble;
  * @author hohwille
  * @since 7.1.0
  */
-public class DoublePropertyImpl extends NumberPropertyImpl implements DoubleProperty {
+public class DoublePropertyImpl extends NumberPropertyImpl<Double> implements DoubleProperty {
+
+  private Double value;
 
   /**
    * The constructor.
@@ -51,6 +53,18 @@ public class DoublePropertyImpl extends NumberPropertyImpl implements DoubleProp
     } else {
       super.setValue(Double.valueOf(value.doubleValue()));
     }
+  }
+
+  @Override
+  protected Double doGetValue() {
+
+    return this.value;
+  }
+
+  @Override
+  protected void doSetNumber(Double newValue) {
+
+    this.value = newValue;
   }
 
   @Override

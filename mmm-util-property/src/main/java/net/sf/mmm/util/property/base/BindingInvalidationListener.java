@@ -1,11 +1,13 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.impl;
+package net.sf.mmm.util.property.base;
 
 import java.lang.ref.WeakReference;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 
 /**
  * This is an implementation of {@link InvalidationListener} for
@@ -14,23 +16,23 @@ import javafx.beans.Observable;
  * @author hohwille
  * @since 7.1.0
  */
-public class BindingInvalidationListener implements InvalidationListener {
+class BindingInvalidationListener implements InvalidationListener {
 
-  private final WeakReference<GenericPropertyImpl<?>> weakReference;
+  private final WeakReference<AbstractGenericProperty<?>> weakReference;
 
   /**
    * The constructor.
    *
-   * @param property the property to {@link GenericPropertyImpl#bind(javafx.beans.value.ObservableValue) bind}.
+   * @param property the property to {@link GenericProperty#bind(javafx.beans.value.ObservableValue) bind}.
    */
-  public BindingInvalidationListener(GenericPropertyImpl<?> property) {
+  public BindingInvalidationListener(AbstractGenericProperty<?> property) {
     this.weakReference = new WeakReference<>(property);
   }
 
   @Override
   public void invalidated(Observable observable) {
 
-    GenericPropertyImpl<?> property = this.weakReference.get();
+    AbstractGenericProperty<?> property = this.weakReference.get();
     if (property == null) {
       observable.removeListener(this);
     } else {

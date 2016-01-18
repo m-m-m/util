@@ -13,7 +13,9 @@ import net.sf.mmm.util.validation.base.number.ValidatorBuilderLong;
  * @author hohwille
  * @since 7.1.0
  */
-public class LongPropertyImpl extends NumberPropertyImpl implements LongProperty {
+public class LongPropertyImpl extends NumberPropertyImpl<Long> implements LongProperty {
+
+  private Long value;
 
   /**
    * The constructor.
@@ -51,6 +53,18 @@ public class LongPropertyImpl extends NumberPropertyImpl implements LongProperty
     } else {
       super.setValue(Long.valueOf(value.longValue()));
     }
+  }
+
+  @Override
+  protected Long doGetValue() {
+
+    return this.value;
+  }
+
+  @Override
+  protected void doSetNumber(Long newValue) {
+
+    this.value = newValue;
   }
 
   @Override

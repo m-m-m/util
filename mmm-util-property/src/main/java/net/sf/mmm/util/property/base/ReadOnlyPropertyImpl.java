@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.impl;
+package net.sf.mmm.util.property.base;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.Property;
@@ -42,7 +42,7 @@ public class ReadOnlyPropertyImpl<VALUE> implements GenericProperty<VALUE> {
   }
 
   @Override
-  public boolean isReadOnly() {
+  public final boolean isReadOnly() {
 
     return true;
   }
@@ -56,13 +56,13 @@ public class ReadOnlyPropertyImpl<VALUE> implements GenericProperty<VALUE> {
   @Override
   public void bind(ObservableValue<? extends VALUE> observable) {
 
-    this.property.bind(observable);
+    throw new ReadOnlyException(getBean(), getName());
   }
 
   @Override
   public void unbind() {
 
-    this.property.unbind();
+    throw new ReadOnlyException(getBean(), getName());
   }
 
   @Override
@@ -74,13 +74,13 @@ public class ReadOnlyPropertyImpl<VALUE> implements GenericProperty<VALUE> {
   @Override
   public void bindBidirectional(Property<VALUE> other) {
 
-    this.property.bindBidirectional(other);
+    throw new ReadOnlyException(getBean(), getName());
   }
 
   @Override
   public void unbindBidirectional(Property<VALUE> other) {
 
-    this.property.unbindBidirectional(other);
+    throw new ReadOnlyException(getBean(), getName());
   }
 
   @Override

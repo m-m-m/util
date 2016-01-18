@@ -13,7 +13,9 @@ import net.sf.mmm.util.validation.base.number.ValidatorBuilderInteger;
  * @author hohwille
  * @since 7.1.0
  */
-public class IntegerPropertyImpl extends NumberPropertyImpl implements IntegerProperty {
+public class IntegerPropertyImpl extends NumberPropertyImpl<Integer> implements IntegerProperty {
+
+  private Integer value;
 
   /**
    * The constructor.
@@ -51,6 +53,18 @@ public class IntegerPropertyImpl extends NumberPropertyImpl implements IntegerPr
     } else {
       super.setValue(Integer.valueOf(value.intValue()));
     }
+  }
+
+  @Override
+  protected Integer doGetValue() {
+
+    return this.value;
+  }
+
+  @Override
+  protected void doSetNumber(Integer newValue) {
+
+    this.value = newValue;
   }
 
   @Override

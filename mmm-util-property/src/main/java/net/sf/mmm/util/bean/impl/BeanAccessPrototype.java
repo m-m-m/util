@@ -13,7 +13,7 @@ import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
 import net.sf.mmm.util.property.api.GenericProperty;
-import net.sf.mmm.util.property.impl.GenericPropertyImpl;
+import net.sf.mmm.util.property.base.AbstractGenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -64,7 +64,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     this.beanType = master.beanType;
     this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
     for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {
-      GenericPropertyImpl<?> property = prototypeProperty.getProperty();
+      AbstractGenericProperty<?> property = prototypeProperty.getProperty();
       BeanPrototypeProperty copy = new BeanPrototypeProperty(property.copy(getBean()),
           prototypeProperty.getIndex());
       this.name2PropertyMap.put(property.getName(), copy);
@@ -97,7 +97,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     if (prototypeProperty != null) {
       throw new DuplicateObjectException(this, name, prototypeProperty);
     }
-    GenericPropertyImpl<V> property = this.beanFactory.createProperty(name, propertyType, getBean());
+    AbstractGenericProperty<V> property = this.beanFactory.createProperty(name, propertyType, getBean());
     addProperty(property);
     return property;
   }
@@ -125,9 +125,9 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   }
 
   /**
-   * @param property the {@link GenericPropertyImpl} to add.
+   * @param property the {@link GenericProperty} to add.
    */
-  protected void addProperty(GenericPropertyImpl<?> property) {
+  protected void addProperty(AbstractGenericProperty<?> property) {
 
     BeanPrototypeProperty prototypeProperty = new BeanPrototypeProperty(property, this.name2PropertyMap.size());
     this.name2PropertyMap.put(property.getName(), prototypeProperty);

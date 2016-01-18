@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.impl;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.BooleanProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -15,9 +17,11 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
  * @author hohwille
  * @since 7.1.0
  */
-public class BooleanPropertyImpl extends GenericPropertyImpl<Boolean> implements BooleanProperty {
+public class BooleanPropertyImpl extends AbstractRegularPropertyImpl<Boolean> implements BooleanProperty {
 
   private static final GenericType<Boolean> TYPE = new SimpleGenericTypeImpl<>(Boolean.class);
+
+  private Boolean value;
 
   /**
    * The constructor.
@@ -41,6 +45,22 @@ public class BooleanPropertyImpl extends GenericPropertyImpl<Boolean> implements
   }
 
   @Override
+  protected Boolean doGetValue() {
+
+    return this.value;
+  }
+
+  @Override
+  protected boolean doSetValue(Boolean newValue) {
+
+    if (Objects.equals(this.value, newValue)) {
+      return false;
+    }
+    this.value = newValue;
+    return true;
+  }
+
+  @Override
   public BooleanPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super Boolean> newValidator) {
 
     return new BooleanPropertyImpl(newName, newBean, newValidator);
@@ -50,12 +70,6 @@ public class BooleanPropertyImpl extends GenericPropertyImpl<Boolean> implements
   public ValidatorBuilderBoolean<PropertyBuilder<BooleanPropertyImpl>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderBoolean<>(x));
-  }
-
-  @Override
-  protected boolean useEqualsInternal() {
-
-    return true;
   }
 
 }

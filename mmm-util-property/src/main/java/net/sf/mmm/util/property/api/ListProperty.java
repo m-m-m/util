@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.value.ObservableListValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +23,18 @@ import javafx.collections.ObservableList;
  * @since 7.1.0
  */
 public interface ListProperty<E> extends CollectionProperty<E, ObservableList<E>>, ObservableListValue<E> {
+
+  /**
+   * @return an {@link ReadOnlyIntegerProperty} that represents the {@link #size()} property of the {@link #getValue()
+   *         list}.
+   */
+  ReadOnlyIntegerProperty sizeProperty();
+
+  /**
+   * @return an {@link ReadOnlyBooleanProperty} that represents the {@link #isEmpty() empty} property of the
+   *         {@link #getValue() list}.
+   */
+  ReadOnlyBooleanProperty emptyProperty();
 
   @Override
   default ObservableList<E> getValueNotNull() {

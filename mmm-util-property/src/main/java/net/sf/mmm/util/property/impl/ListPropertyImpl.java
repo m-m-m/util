@@ -8,11 +8,16 @@ import java.util.function.Function;
 import com.sun.javafx.binding.ListExpressionHelper;
 
 import javafx.beans.InvalidationListener;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanPropertyBase;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerPropertyBase;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ListProperty;
+import net.sf.mmm.util.property.base.AbstractGenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -28,12 +33,24 @@ import net.sf.mmm.util.validation.base.collection.ValidatorBuilderCollection;
  * @since 7.1.0
  */
 @SuppressWarnings("restriction")
-public class ListPropertyImpl<E> extends GenericPropertyImpl<ObservableList<E>> implements ListProperty<E> {
+public class ListPropertyImpl<E> extends AbstractGenericProperty<ObservableList<E>> implements ListProperty<E> {
 
   @SuppressWarnings("rawtypes")
   private static final GenericType TYPE = new SimpleGenericTypeImpl<>(ObservableList.class);
 
+  private final ListChangeListener<E> listChangeListener = change -> {
+    invalidateProperties();
+    invalidated();
+    fireValueChangedEvent(change);
+  };
+
   private ListExpressionHelper<E> helper;
+
+  private ObservableList<E> value;
+
+  private SizeProperty sizeProperty;
+
+  private EmptyProperty emptyProperty;
 
   /**
    * The constructor.
@@ -67,6 +84,72 @@ public class ListPropertyImpl<E> extends GenericPropertyImpl<ObservableList<E>> 
   }
 
   @Override
+  protected ObservableList<E> doGetValue() {
+
+    return this.value;
+  }
+
+  @Override
+  protected boolean doSetValue(ObservableList<E> newValue) {
+
+    if (this.value == newValue) {
+      return false;
+    }
+    if (this.value != null) {
+      this.value.removeListener(this.listChangeListener);
+    }
+    this.value = newValue;
+    if (this.value != null) {
+      this.value.addListener(this.listChangeListener);
+    }
+    return true;
+  }
+
+  /**
+   * Invalidates internal properties such as {@link #sizeProperty()} and {@link #emptyProperty()}.
+   */
+  private void invalidateProperties() {
+
+    if (this.sizeProperty != null) {
+      this.sizeProperty.fireValueChangedEvent();
+    }
+    if (this.emptyProperty != null) {
+      this.emptyProperty.fireValueChangedEvent();
+    }
+  }
+
+  /**
+   * Sends notifications to all attached {@link javafx.beans.InvalidationListener InvalidationListeners},
+   * {@link javafx.beans.value.ChangeListener ChangeListeners}, and {@link javafx.collections.ListChangeListener}.
+   *
+   * This method is called when the content of the list changes.
+   *
+   * @param change the change that needs to be propagated
+   */
+  protected void fireValueChangedEvent(ListChangeListener.Change<? extends E> change) {
+
+    ListExpressionHelper.fireValueChangedEvent(this.helper, change);
+  }
+
+  @Override
+  public ReadOnlyIntegerProperty sizeProperty() {
+
+    if (this.sizeProperty == null) {
+      this.sizeProperty = new SizeProperty();
+    }
+    return this.sizeProperty;
+  }
+
+  @Override
+  public ReadOnlyBooleanProperty emptyProperty() {
+
+    if (this.emptyProperty == null) {
+      this.emptyProperty = new EmptyProperty();
+    }
+    return this.emptyProperty;
+  }
+
+  @Override
   public ListPropertyImpl<E> copy(String newName, Bean newBean,
       AbstractValidator<? super ObservableList<E>> newValidator) {
 
@@ -87,12 +170,6 @@ public class ListPropertyImpl<E> extends GenericPropertyImpl<ObservableList<E>> 
       }
     };
     return (ValidatorBuilderCollection) withValdidator(factory);
-  }
-
-  @Override
-  protected boolean useEqualsInternal() {
-
-    return true;
   }
 
   @Override
@@ -135,6 +212,59 @@ public class ListPropertyImpl<E> extends GenericPropertyImpl<ObservableList<E>> 
   protected void fireValueChangedEvent() {
 
     ListExpressionHelper.fireValueChangedEvent(this.helper);
+  }
+
+  private class SizeProperty extends ReadOnlyIntegerPropertyBase {
+    @Override
+    public int get() {
+
+      return size();
+    }
+
+    @Override
+    public Object getBean() {
+
+      return ListPropertyImpl.this;
+    }
+
+    @Override
+    public String getName() {
+
+      return "size";
+    }
+
+    @Override
+    protected void fireValueChangedEvent() {
+
+      super.fireValueChangedEvent();
+    }
+  }
+
+  private class EmptyProperty extends ReadOnlyBooleanPropertyBase {
+
+    @Override
+    public boolean get() {
+
+      return isEmpty();
+    }
+
+    @Override
+    public Object getBean() {
+
+      return ListPropertyImpl.this;
+    }
+
+    @Override
+    public String getName() {
+
+      return "empty";
+    }
+
+    @Override
+    protected void fireValueChangedEvent() {
+
+      super.fireValueChangedEvent();
+    }
   }
 
 }

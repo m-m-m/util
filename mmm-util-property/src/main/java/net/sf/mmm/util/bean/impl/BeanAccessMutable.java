@@ -5,7 +5,7 @@ package net.sf.mmm.util.bean.impl;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.property.api.GenericProperty;
-import net.sf.mmm.util.property.impl.GenericPropertyImpl;
+import net.sf.mmm.util.property.base.AbstractGenericProperty;
 
 /**
  * The implementation of {@link BeanAccess} for a regular mutable {@link Bean} instance.
@@ -33,7 +33,7 @@ public class BeanAccessMutable<BEAN extends Bean> extends BeanAccessInstance<BEA
   @Override
   protected GenericProperty<?> createProperty(BeanPrototypeProperty prototypeProperty) {
 
-    GenericPropertyImpl<?> property = prototypeProperty.getProperty();
+    AbstractGenericProperty<?> property = prototypeProperty.getProperty();
     return property.copy(getBean());
   }
 

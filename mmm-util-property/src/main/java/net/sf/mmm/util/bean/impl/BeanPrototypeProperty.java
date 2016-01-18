@@ -3,6 +3,7 @@
 package net.sf.mmm.util.bean.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.property.base.AbstractGenericProperty;
 import net.sf.mmm.util.property.impl.GenericPropertyImpl;
 
 /**
@@ -14,7 +15,7 @@ import net.sf.mmm.util.property.impl.GenericPropertyImpl;
  */
 public class BeanPrototypeProperty {
 
-  private final GenericPropertyImpl<?> property;
+  private final AbstractGenericProperty<?> property;
 
   private final int index;
 
@@ -24,7 +25,7 @@ public class BeanPrototypeProperty {
    * @param property - see {@link #getProperty()}.
    * @param index - see {@link #getIndex()}.
    */
-  public BeanPrototypeProperty(GenericPropertyImpl<?> property, int index) {
+  public BeanPrototypeProperty(AbstractGenericProperty<?> property, int index) {
 
     super();
     this.property = property;
@@ -34,7 +35,7 @@ public class BeanPrototypeProperty {
   /**
    * @return the property
    */
-  public GenericPropertyImpl<?> getProperty() {
+  public AbstractGenericProperty<?> getProperty() {
 
     return this.property;
   }
