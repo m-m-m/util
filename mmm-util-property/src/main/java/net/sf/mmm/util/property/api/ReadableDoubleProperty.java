@@ -5,22 +5,18 @@ package net.sf.mmm.util.property.api;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.value.ObservableDoubleValue;
-import javafx.beans.value.WritableDoubleValue;
 
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link ReadableNumberProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Double}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public interface DoubleProperty extends NumberProperty, ObservableDoubleValue, WritableDoubleValue {
+public interface ReadableDoubleProperty extends ReadableNumberProperty, ObservableDoubleValue {
 
   // @Override
   // Double getValue();
-
-  @Override
-  void setValue(Number value);
 
   @Override
   default double get() {
@@ -30,12 +26,6 @@ public interface DoubleProperty extends NumberProperty, ObservableDoubleValue, W
       return 0;
     }
     return value.doubleValue();
-  }
-
-  @Override
-  default void set(double value) {
-
-    setValue(Double.valueOf(value));
   }
 
   @Override

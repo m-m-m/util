@@ -4,14 +4,14 @@ package net.sf.mmm.util.bean.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.base.AbstractGenericProperty;
-import net.sf.mmm.util.property.impl.GenericPropertyImpl;
+import net.sf.mmm.util.property.impl.GenericProperty;
 
 /**
- * This class is a container for a {@link GenericPropertyImpl} and its according {@link #getIndex() index} for a
+ * This class is a container for a {@link GenericProperty} and its according {@link #getIndex() index} for a
  * specific {@link Bean}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanPrototypeProperty {
 

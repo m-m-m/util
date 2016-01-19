@@ -5,7 +5,7 @@ package net.sf.mmm.util.bean.impl;
 import java.lang.reflect.Method;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
  * {@link Enum} with the available types of {@link Bean} methods.
@@ -14,26 +14,26 @@ import net.sf.mmm.util.property.api.GenericProperty;
  * @see BeanPrototypeOperation
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public enum BeanMethodType {
 
   /**
-   * Getter for {@link GenericProperty#getValue() property value}.
+   * Getter for {@link WriteableProperty#getValue() property value}.
    *
    * @see BeanPrototypeOperationGet
    */
   GET,
 
   /**
-   * Setter for {@link GenericProperty#setValue(Object) property value}.
+   * Setter for {@link WriteableProperty#setValue(Object) property value}.
    *
    * @see BeanPrototypeOperationSet
    */
   SET,
 
   /**
-   * Getter for {@link GenericProperty property}.
+   * Getter for {@link WriteableProperty property}.
    *
    * @see BeanPrototypeOperationProperty
    */

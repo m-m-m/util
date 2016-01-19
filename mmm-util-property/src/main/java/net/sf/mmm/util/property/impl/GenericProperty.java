@@ -5,20 +5,21 @@ package net.sf.mmm.util.property.impl;
 import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
 import net.sf.mmm.util.validation.base.ValidatorBuilderObject;
 
 /**
- * This is the implementation of {@link GenericProperty}.
+ * This is the implementation of {@link WritableProperty}.
  *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public class GenericPropertyImpl<VALUE> extends AbstractRegularPropertyImpl<VALUE> {
+public class GenericProperty<VALUE> extends AbstractRegularPropertyImpl<VALUE> {
 
   private VALUE value;
 
@@ -29,7 +30,7 @@ public class GenericPropertyImpl<VALUE> extends AbstractRegularPropertyImpl<VALU
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public GenericPropertyImpl(String name, GenericType<VALUE> type, Bean bean) {
+  public GenericProperty(String name, GenericType<VALUE> type, Bean bean) {
     this(name, type, bean, null);
   }
 
@@ -41,7 +42,7 @@ public class GenericPropertyImpl<VALUE> extends AbstractRegularPropertyImpl<VALU
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public GenericPropertyImpl(String name, GenericType<VALUE> type, Bean bean,
+  public GenericProperty(String name, GenericType<VALUE> type, Bean bean,
       AbstractValidator<? super VALUE> validator) {
     super(name, type, bean);
   }
@@ -55,10 +56,10 @@ public class GenericPropertyImpl<VALUE> extends AbstractRegularPropertyImpl<VALU
    * @return the new property instance.
    */
   @Override
-  public GenericPropertyImpl<VALUE> copy(String newName, Bean newBean,
+  public GenericProperty<VALUE> copy(String newName, Bean newBean,
       AbstractValidator<? super VALUE> newValidator) {
 
-    return new GenericPropertyImpl<>(newName, getType(), newBean, newValidator);
+    return new GenericProperty<>(newName, getType(), newBean, newValidator);
   }
 
   @Override
@@ -84,7 +85,7 @@ public class GenericPropertyImpl<VALUE> extends AbstractRegularPropertyImpl<VALU
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public ObjectValidatorBuilder<? extends VALUE, ? extends PropertyBuilder<? extends GenericPropertyImpl<? extends VALUE>>, ?> withValdidator() {
+  public ObjectValidatorBuilder<? extends VALUE, ? extends PropertyBuilder<? extends GenericProperty<? extends VALUE>>, ?> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderObject(x));
   }

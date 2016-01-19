@@ -6,13 +6,13 @@ import java.lang.reflect.Method;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
- * Operation on a {@link Bean} {@link GenericProperty property}.
+ * Operation on a {@link Bean} {@link WritableProperty property}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public abstract class BeanPrototypeOperation {
 
@@ -43,7 +43,7 @@ public abstract class BeanPrototypeOperation {
   public abstract Object invoke(BeanAccessBase<?> access, Object[] args) throws Throwable;
 
   /**
-   * @return <code>true</code> if the {@link GenericProperty} is required for this operation, <code>false</code>
+   * @return <code>true</code> if the {@link WritableProperty} is required for this operation, <code>false</code>
    *         otherwise.
    */
   public boolean isPropertyRequired() {

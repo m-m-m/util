@@ -5,13 +5,14 @@ package net.sf.mmm.util.bean.impl;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
- * TODO: this class ...
+ * This is a container for a {@link Method} of a {@link Bean} with additional introspection information.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanMethod {
 
@@ -138,7 +139,7 @@ public class BeanMethod {
 
   /**
    * @return the generic {@link Type} of the property or <code>null</code> if no property. Will be the {@link Type} of
-   *         the {@link GenericProperty} for {@link BeanMethodType#PROPERTY}.
+   *         the {@link WritableProperty} for {@link BeanMethodType#PROPERTY}.
    */
   public Type getPropertyType() {
 

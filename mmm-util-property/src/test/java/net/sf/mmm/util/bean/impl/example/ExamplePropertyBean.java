@@ -4,11 +4,11 @@ package net.sf.mmm.util.bean.impl.example;
 
 import javafx.geometry.Orientation;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.BooleanProperty;
-import net.sf.mmm.util.property.api.GenericProperty;
-import net.sf.mmm.util.property.api.IntegerProperty;
-import net.sf.mmm.util.property.api.StringProperty;
-import net.sf.mmm.util.property.impl.IntegerPropertyImpl;
+import net.sf.mmm.util.property.api.WritableBooleanProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.api.WritableIntegerProperty;
+import net.sf.mmm.util.property.api.WritableStringProperty;
+import net.sf.mmm.util.property.impl.IntegerProperty;
 import net.sf.mmm.util.validation.base.Mandatory;
 
 /**
@@ -21,15 +21,15 @@ public interface ExamplePropertyBean extends Bean {
   CountryCodeProperty CountryCode();
 
   @Mandatory
-  StringProperty Name();
+  WritableStringProperty Name();
 
-  default IntegerProperty Age() {
+  default WritableIntegerProperty Age() {
 
-    return new IntegerPropertyImpl(null, null).withValdidator().mandatory().size(0, 200).and().build();
+    return new IntegerProperty(null, null).withValdidator().mandatory().size(0, 200).and().build();
   }
 
-  BooleanProperty Friend();
+  WritableBooleanProperty Friend();
 
-  GenericProperty<Orientation> Orientation();
+  WritableProperty<Orientation> Orientation();
 
 }

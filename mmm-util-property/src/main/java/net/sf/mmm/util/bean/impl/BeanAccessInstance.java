@@ -8,8 +8,8 @@ import java.util.Map;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.collection.base.ArrayIterator;
-import net.sf.mmm.util.property.api.GenericProperty;
-import net.sf.mmm.util.property.impl.GenericPropertyImpl;
+import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.impl.GenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -18,13 +18,13 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @param <BEAN> the generic type of the intercepted {@link #getBean() bean}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBase<BEAN> {
 
   private final BeanAccessPrototype<BEAN> prototype;
 
-  private GenericProperty<?>[] properties;
+  private WritableProperty<?>[] properties;
 
   /**
    * The constructor.
@@ -38,7 +38,7 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
 
     super(beanClass, beanFactory);
     this.prototype = prototype;
-    this.properties = GenericProperty.NO_PROPERTIES;
+    this.properties = WritableProperty.NO_PROPERTIES;
   }
 
   @Override
@@ -48,14 +48,14 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   }
 
   @Override
-  public Iterator<GenericProperty<?>> iterator() {
+  public Iterator<WritableProperty<?>> iterator() {
 
     createProperties();
     return new ArrayIterator<>(this.properties);
   }
 
   @Override
-  protected GenericProperty<?> getProperty(BeanPrototypeProperty prototypeProperty, boolean required) {
+  protected WritableProperty<?> getProperty(BeanPrototypeProperty prototypeProperty, boolean required) {
 
     int length = this.properties.length;
     int index = prototypeProperty.getIndex();
@@ -69,7 +69,7 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   }
 
   @Override
-  public <V> GenericProperty<V> createProperty(String name, GenericType<V> type) {
+  public <V> WritableProperty<V> createProperty(String name, GenericType<V> type) {
 
     return null;
   }
@@ -82,7 +82,7 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
     if (length == size) {
       return;
     }
-    GenericProperty<?>[] newProperties = new GenericProperty<?>[size];
+    WritableProperty<?>[] newProperties = new WritableProperty<?>[size];
     System.arraycopy(this.properties, 0, newProperties, 0, length);
     for (BeanPrototypeProperty prototypeProperty : name2PropertyMap.values()) {
       int i = prototypeProperty.getIndex();
@@ -95,11 +95,11 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
 
   /**
    * @param prototypeProperty the {@link BeanPrototypeProperty}.
-   * @return a new {@link GenericProperty} instance
-   *         {@link GenericPropertyImpl#copy(net.sf.mmm.util.validation.base.AbstractValidator) copied} from the given
+   * @return a new {@link WritableProperty} instance
+   *         {@link GenericProperty#copy(net.sf.mmm.util.validation.base.AbstractValidator) copied} from the given
    *         {@link BeanPrototypeProperty}.
    */
-  protected abstract GenericProperty<?> createProperty(BeanPrototypeProperty prototypeProperty);
+  protected abstract WritableProperty<?> createProperty(BeanPrototypeProperty prototypeProperty);
 
   @Override
   public boolean isDynamic() {

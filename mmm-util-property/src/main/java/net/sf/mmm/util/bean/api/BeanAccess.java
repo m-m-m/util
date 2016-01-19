@@ -4,7 +4,7 @@ package net.sf.mmm.util.bean.api;
 
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.validation.api.ValidationFailure;
@@ -15,20 +15,20 @@ import net.sf.mmm.util.validation.base.ValidationFailureComposer;
  * This is the interface for all generic operations on a {@link Bean}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public interface BeanAccess {
 
   /**
    * @return an {@link Iterable} with all the properties of this {@link Bean}.
    */
-  Iterable<GenericProperty<?>> getProperties();
+  Iterable<WritableProperty<?>> getProperties();
 
   /**
-   * @param name the {@link GenericProperty#getName() name} of the requested property.
-   * @return the requested {@link GenericProperty} or <code>null</code> if no such property exists.
+   * @param name the {@link WritableProperty#getName() name} of the requested property.
+   * @return the requested {@link WritableProperty} or <code>null</code> if no such property exists.
    */
-  GenericProperty<?> getProperty(String name);
+  WritableProperty<?> getProperty(String name);
 
   /**
    * @return the {@link Class} reflecting the owning {@link Bean}.
@@ -36,13 +36,13 @@ public interface BeanAccess {
   Class<? extends Bean> getBeanClass();
 
   /**
-   * @param name the {@link GenericProperty#getName() name} of the requested property.
-   * @return the requested {@link GenericProperty}.
+   * @param name the {@link WritableProperty#getName() name} of the requested property.
+   * @return the requested {@link WritableProperty}.
    * @throws PojoPropertyNotFoundException if the requested property does not exist.
    */
-  default GenericProperty<?> getRequiredProperty(String name) throws PojoPropertyNotFoundException {
+  default WritableProperty<?> getRequiredProperty(String name) throws PojoPropertyNotFoundException {
 
-    GenericProperty<?> property = getProperty(name);
+    WritableProperty<?> property = getProperty(name);
     if (property == null) {
       throw new PojoPropertyNotFoundException(getBeanClass(), name);
     }
@@ -58,7 +58,7 @@ public interface BeanAccess {
   default ValidationFailure validate() {
 
     ValidationFailureComposer composer = new ValidationFailureComposer();
-    for (GenericProperty<?> property : getProperties()) {
+    for (WritableProperty<?> property : getProperties()) {
       ValidationFailure failure = property.validate();
       composer.add(failure);
     }
@@ -67,18 +67,18 @@ public interface BeanAccess {
 
   /**
    * {@link #getProperty(String) Gets} or {@link #createProperty(String, GenericType) creates} the specified property.
-   * If the property already exists also the {@link GenericProperty#getType() type} has to match the given {@code type}
-   * or an exception will be thrown.
+   * If the property already exists also the {@link WritableProperty#getType() type} has to match the given
+   * {@code type} or an exception will be thrown.
    *
-   * @param <V> the generic type of the {@link GenericProperty#getValue() property value}.
-   * @param name the {@link GenericProperty#getName() property name}.
-   * @param type the {@link GenericProperty#getType() property type}.
+   * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
+   * @param name the {@link WritableProperty#getName() property name}.
+   * @param type the {@link WritableProperty#getType() property type}.
    * @return the requested property.
    */
   @SuppressWarnings("unchecked")
-  default <V> GenericProperty<V> getOrCreateProperty(String name, GenericType<V> type) {
+  default <V> WritableProperty<V> getOrCreateProperty(String name, GenericType<V> type) {
 
-    GenericProperty<?> property = getProperty(name);
+    WritableProperty<?> property = getProperty(name);
     if (property == null) {
       property = createProperty(name, type);
     } else {
@@ -86,16 +86,16 @@ public interface BeanAccess {
         throw new ObjectMismatchException(type, property.getType(), name + ".type");
       }
     }
-    return (GenericProperty<V>) property;
+    return (WritableProperty<V>) property;
   }
 
   /**
-   * @param name the {@link GenericProperty#getName() name} of the property.
-   * @return the {@link GenericProperty#getValue() value} of the specified property.
+   * @param name the {@link WritableProperty#getName() name} of the property.
+   * @return the {@link WritableProperty#getValue() value} of the specified property.
    */
   default Object getPropertyValue(String name) {
 
-    GenericProperty<?> property = getProperty(name);
+    WritableProperty<?> property = getProperty(name);
     if (property == null) {
       return null;
     }
@@ -104,8 +104,8 @@ public interface BeanAccess {
 
   /**
    * @param bean the {@link Bean} instance.
-   * @param name the {@link GenericProperty#getName() name} of the property.
-   * @param value new {@link GenericProperty#getValue() value} of the specified property.
+   * @param name the {@link WritableProperty#getName() name} of the property.
+   * @param value new {@link WritableProperty#getValue() value} of the specified property.
    */
   default void setPropertyValue(String name, Object value) {
 
@@ -113,18 +113,18 @@ public interface BeanAccess {
   }
 
   /**
-   * This method sets the {@link GenericProperty property} with the given {@link GenericProperty#getName() name} to the
-   * specified {@code value}.
+   * This method sets the {@link WritableProperty property} with the given {@link WritableProperty#getName() name} to
+   * the specified {@code value}.
    *
-   * @param <V> the generic type of the {@link GenericProperty#getValue() property value}.
-   * @param name the {@link GenericProperty#getName() property name}.
-   * @param value new {@link GenericProperty#getValue() value} of the specified property.
-   * @param type the {@link GenericProperty#getType() property type}.
+   * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
+   * @param name the {@link WritableProperty#getName() property name}.
+   * @param value new {@link WritableProperty#getValue() value} of the specified property.
+   * @param type the {@link WritableProperty#getType() property type}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   default <V> void setPropertyValue(String name, V value, GenericType<V> type) {
 
-    GenericProperty property = getProperty(name);
+    WritableProperty property = getProperty(name);
     if (property == null) {
       GenericType<V> genericType = type;
       if (genericType == null) {
@@ -139,15 +139,15 @@ public interface BeanAccess {
   }
 
   /**
-   * Creates and adds the specified {@link GenericProperty} on the fly. Creating and adding new properties is only
+   * Creates and adds the specified {@link WritableProperty} on the fly. Creating and adding new properties is only
    * possible for {@link #isDynamic() dynamic} beans.
    *
-   * @param <V> the generic type of the {@link GenericProperty#getValue() property value}.
-   * @param name the {@link GenericProperty#getName() property name}.
-   * @param type the {@link GenericProperty#getType() property type}.
+   * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
+   * @param name the {@link WritableProperty#getName() property name}.
+   * @param type the {@link WritableProperty#getType() property type}.
    * @return the newly created property.
    */
-  <V> GenericProperty<V> createProperty(String name, GenericType<V> type);
+  <V> WritableProperty<V> createProperty(String name, GenericType<V> type);
 
   /**
    * @see BeanFactory#getReadOnlyBean(Bean)

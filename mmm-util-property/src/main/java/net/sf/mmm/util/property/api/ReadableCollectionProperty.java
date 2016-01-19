@@ -5,22 +5,38 @@ package net.sf.mmm.util.property.api;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Collection}.
  *
  * @param <E> the generic type of the {@link Collection#contains(Object) elements contained in the collection}.
  * @param <VALUE> the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public interface CollectionProperty<E, VALUE extends Collection<E>> extends GenericProperty<VALUE>, Collection<E> {
+public interface ReadableCollectionProperty<E, VALUE extends Collection<E>>
+    extends ReadableProperty<VALUE>, Collection<E> {
 
   /**
    * @return the result of {@link #getValue()} but an empty collection instead of <code>null</code>.
    */
   VALUE getValueNotNull();
+
+  /**
+   * @return an {@link ReadOnlyIntegerProperty} that represents the {@link #size()} property of the {@link #getValue()
+   *         collection}.
+   */
+  ReadOnlyIntegerProperty sizeProperty();
+
+  /**
+   * @return an {@link ReadOnlyBooleanProperty} that represents the {@link #isEmpty() empty} property of the
+   *         {@link #getValue() collection}.
+   */
+  ReadOnlyBooleanProperty emptyProperty();
 
   @Override
   default int size() {

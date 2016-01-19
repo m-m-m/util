@@ -6,15 +6,15 @@ import java.lang.ref.WeakReference;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import net.sf.mmm.util.property.api.GenericProperty;
-import net.sf.mmm.util.property.impl.GenericPropertyImpl;
+import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.impl.GenericProperty;
 
 /**
  * This is an implementation of {@link InvalidationListener} for
- * {@link GenericPropertyImpl#bind(javafx.beans.value.ObservableValue) binding}.
+ * {@link GenericProperty#bind(javafx.beans.value.ObservableValue) binding}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 class BindingInvalidationListener implements InvalidationListener {
 
@@ -23,7 +23,7 @@ class BindingInvalidationListener implements InvalidationListener {
   /**
    * The constructor.
    *
-   * @param property the property to {@link GenericProperty#bind(javafx.beans.value.ObservableValue) bind}.
+   * @param property the property to {@link WritableProperty#bind(javafx.beans.value.ObservableValue) bind}.
    */
   public BindingInvalidationListener(AbstractGenericProperty<?> property) {
     this.weakReference = new WeakReference<>(property);

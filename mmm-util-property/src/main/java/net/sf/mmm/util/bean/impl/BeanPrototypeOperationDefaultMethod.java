@@ -11,7 +11,7 @@ import net.sf.mmm.util.bean.api.Bean;
  * Operation for {@link Bean#equals(Object)}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanPrototypeOperationDefaultMethod extends BeanPrototypeOperation {
 

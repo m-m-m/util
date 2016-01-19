@@ -5,18 +5,18 @@ package net.sf.mmm.util.bean.impl.example;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.impl.StringPropertyImpl;
+import net.sf.mmm.util.property.impl.StringProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidator;
 import net.sf.mmm.util.validation.base.ValidatorMandatory;
 import net.sf.mmm.util.validation.base.text.ValidatorPattern;
 
 /**
- * This is a {@link StringPropertyImpl} for a country code.
+ * This is a {@link StringProperty} for a country code.
  *
  * @author hohwille
  */
-public class CountryCodeProperty extends StringPropertyImpl {
+public class CountryCodeProperty extends StringProperty {
 
   private static final Pattern PATTERN = Pattern.compile("[A-Z]{2}");
 
@@ -45,7 +45,7 @@ public class CountryCodeProperty extends StringPropertyImpl {
   }
 
   @Override
-  public StringPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super String> newValidator) {
+  public StringProperty copy(String newName, Bean newBean, AbstractValidator<? super String> newValidator) {
 
     return new CountryCodeProperty(newName, newBean, newValidator);
   }

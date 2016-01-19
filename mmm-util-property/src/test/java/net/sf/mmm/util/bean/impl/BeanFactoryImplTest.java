@@ -19,10 +19,10 @@ import net.sf.mmm.util.bean.impl.example.ExampleBean;
 import net.sf.mmm.util.bean.impl.example.ExamplePojoBean;
 import net.sf.mmm.util.bean.impl.example.ExamplePropertyBean;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
-import net.sf.mmm.util.property.api.GenericProperty;
-import net.sf.mmm.util.property.impl.BooleanPropertyImpl;
-import net.sf.mmm.util.property.impl.GenericPropertyImpl;
-import net.sf.mmm.util.property.impl.StringPropertyImpl;
+import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.impl.BooleanProperty;
+import net.sf.mmm.util.property.impl.GenericProperty;
+import net.sf.mmm.util.property.impl.StringProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidatorRange;
 import net.sf.mmm.util.validation.base.ComposedValidationFailure;
@@ -88,7 +88,7 @@ public class BeanFactoryImplTest extends Assertions {
       error = e;
     }
     assertThat(error).isNotNull().hasMessageContaining(undefinedProperty);
-    for (GenericProperty<?> property : access.getProperties()) {
+    for (WritableProperty<?> property : access.getProperties()) {
       String name = property.getName();
       assertThat(property).isSameAs(access.getProperty(property.getName()))
           .isSameAs(access.getRequiredProperty(name))
@@ -102,16 +102,16 @@ public class BeanFactoryImplTest extends Assertions {
   private void verifyExamplePropertyBean(ExamplePropertyBean bean, BeanFactory beanFactory) {
 
     assertThat(bean).isNotNull();
-    assertThat(bean.Name()).isInstanceOf(StringPropertyImpl.class);
-    assertThat(bean.Friend()).isInstanceOf(BooleanPropertyImpl.class);
-    assertThat(bean.Orientation()).isInstanceOf(GenericPropertyImpl.class);
+    assertThat(bean.Name()).isInstanceOf(StringProperty.class);
+    assertThat(bean.Friend()).isInstanceOf(BooleanProperty.class);
+    assertThat(bean.Orientation()).isInstanceOf(GenericProperty.class);
 
     BeanAccess access = bean.access();
     assertThat(access).isNotNull();
     assertThat(access.isReadOnly()).isFalse();
     assertThat(access.isPrototype()).isFalse();
     assertThat(access.isDynamic()).isFalse();
-    GenericProperty<?>[] properties = { bean.CountryCode(), bean.Name(), bean.Age(), bean.Friend(),
+    WritableProperty<?>[] properties = { bean.CountryCode(), bean.Name(), bean.Age(), bean.Friend(),
     bean.Orientation() };
     assertThat(access.getProperties()).hasSize(properties.length).contains(properties);
 
@@ -161,7 +161,7 @@ public class BeanFactoryImplTest extends Assertions {
     String json = bean.toString();
     try {
       beanJsonMap = mapper.readValue(json, Map.class);
-      for (GenericProperty<?> property : access.getProperties()) {
+      for (WritableProperty<?> property : access.getProperties()) {
         Object valueProperty = property.getValue();
         if (valueProperty == null) {
           assertThat(beanJsonMap.containsKey(property.getName())).isFalse();
@@ -195,7 +195,7 @@ public class BeanFactoryImplTest extends Assertions {
     int expectedSize = properties.length;
     assertThat(access.getProperties()).hasSize(expectedSize);
     Set<String> propertyNames = new HashSet<>();
-    for (GenericProperty<?> property : access.getProperties()) {
+    for (WritableProperty<?> property : access.getProperties()) {
       propertyNames.add(property.getName());
     }
     assertThat(propertyNames).hasSize(expectedSize).contains(properties);

@@ -7,7 +7,7 @@ import net.sf.mmm.util.io.api.EncodingUtil;
 
 /**
  * This is the test-case for {@link EncodingUtil} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class EncodingUtilSpringTest extends EncodingUtilTest {

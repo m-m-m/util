@@ -2,13 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
  * This is the factory used to {@link #create(Class) create} instances of {@link Bean}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public interface BeanFactory {
 
@@ -27,8 +27,8 @@ public interface BeanFactory {
   /**
    * Creates a prototype of the given {@link Bean}. A prototype is used as template to {@link #create(Bean) create}
    * regular {@link Bean}s. Such beans will inherit the defaults from the prototype what are the
-   * {@link BeanAccess#getProperties() available properties} as well as their default {@link GenericProperty#getValue()
-   * value}.
+   * {@link BeanAccess#getProperties() available properties} as well as their default
+   * {@link WritableProperty#getValue() value}.
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.

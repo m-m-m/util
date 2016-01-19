@@ -11,11 +11,12 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the interface for a generic property.
  *
- * @author hohwille
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
- * @since 7.1.0
+ *
+ * @author hohwille
+ * @since 8.0.0
  */
-public interface GenericReadOnlyProperty<VALUE>
+public interface ReadableProperty<VALUE>
     extends ReadOnlyProperty<VALUE>, AttributeReadValue<VALUE>, AttributeReadName {
 
   /**

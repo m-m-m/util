@@ -5,7 +5,7 @@ package net.sf.mmm.util.property.impl;
 import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.BooleanProperty;
+import net.sf.mmm.util.property.api.WritableBooleanProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -15,9 +15,9 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
  * This is the implementation of {@link BooleanProperty}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public class BooleanPropertyImpl extends AbstractRegularPropertyImpl<Boolean> implements BooleanProperty {
+public class BooleanProperty extends AbstractRegularPropertyImpl<Boolean> implements WritableBooleanProperty {
 
   private static final GenericType<Boolean> TYPE = new SimpleGenericTypeImpl<>(Boolean.class);
 
@@ -29,7 +29,7 @@ public class BooleanPropertyImpl extends AbstractRegularPropertyImpl<Boolean> im
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public BooleanPropertyImpl(String name, Bean bean) {
+  public BooleanProperty(String name, Bean bean) {
     super(name, TYPE, bean);
   }
 
@@ -40,7 +40,7 @@ public class BooleanPropertyImpl extends AbstractRegularPropertyImpl<Boolean> im
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public BooleanPropertyImpl(String name, Bean bean, AbstractValidator<? super Boolean> validator) {
+  public BooleanProperty(String name, Bean bean, AbstractValidator<? super Boolean> validator) {
     super(name, TYPE, bean, validator);
   }
 
@@ -61,13 +61,13 @@ public class BooleanPropertyImpl extends AbstractRegularPropertyImpl<Boolean> im
   }
 
   @Override
-  public BooleanPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super Boolean> newValidator) {
+  public BooleanProperty copy(String newName, Bean newBean, AbstractValidator<? super Boolean> newValidator) {
 
-    return new BooleanPropertyImpl(newName, newBean, newValidator);
+    return new BooleanProperty(newName, newBean, newValidator);
   }
 
   @Override
-  public ValidatorBuilderBoolean<PropertyBuilder<BooleanPropertyImpl>> withValdidator() {
+  public ValidatorBuilderBoolean<PropertyBuilder<BooleanProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderBoolean<>(x));
   }

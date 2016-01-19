@@ -3,24 +3,24 @@
 package net.sf.mmm.util.property.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.LongProperty;
+import net.sf.mmm.util.property.api.WritableLongProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderLong;
 
 /**
- * This is the implementation of {@link LongProperty}.
+ * This is the implementation of {@link WritableLongProperty}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public class LongPropertyImpl extends NumberPropertyImpl<Long> implements LongProperty {
+public class LongProperty extends NumberProperty<Long> implements WritableLongProperty {
 
   private Long value;
 
   /**
    * The constructor.
    */
-  public LongPropertyImpl() {
+  public LongProperty() {
     super();
   }
 
@@ -30,7 +30,7 @@ public class LongPropertyImpl extends NumberPropertyImpl<Long> implements LongPr
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public LongPropertyImpl(String name, Bean bean) {
+  public LongProperty(String name, Bean bean) {
     super(name, bean);
   }
 
@@ -41,7 +41,7 @@ public class LongPropertyImpl extends NumberPropertyImpl<Long> implements LongPr
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public LongPropertyImpl(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public LongProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -68,13 +68,13 @@ public class LongPropertyImpl extends NumberPropertyImpl<Long> implements LongPr
   }
 
   @Override
-  public LongPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
+  public LongProperty copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
 
-    return new LongPropertyImpl(newName, newBean, newValidator);
+    return new LongProperty(newName, newBean, newValidator);
   }
 
   @Override
-  public ValidatorBuilderLong<PropertyBuilder<LongPropertyImpl>> withValdidator() {
+  public ValidatorBuilderLong<PropertyBuilder<LongProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderLong<>(x));
   }

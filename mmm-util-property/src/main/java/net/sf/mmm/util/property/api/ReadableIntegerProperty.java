@@ -7,22 +7,18 @@ import javafx.beans.binding.FloatBinding;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.LongBinding;
 import javafx.beans.value.ObservableIntegerValue;
-import javafx.beans.value.WritableIntegerValue;
 
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link ReadableNumberProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Integer}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public interface IntegerProperty extends NumberProperty, ObservableIntegerValue, WritableIntegerValue {
+public interface ReadableIntegerProperty extends ReadableNumberProperty, ObservableIntegerValue {
 
   // @Override
   // Integer getValue();
-
-  @Override
-  void setValue(Number value);
 
   @Override
   default int get() {
@@ -32,12 +28,6 @@ public interface IntegerProperty extends NumberProperty, ObservableIntegerValue,
       return 0;
     }
     return value.intValue();
-  }
-
-  @Override
-  default void set(int value) {
-
-    setValue(Integer.valueOf(value));
   }
 
   @Override

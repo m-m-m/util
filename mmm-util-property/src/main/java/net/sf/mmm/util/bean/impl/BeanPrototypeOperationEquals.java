@@ -6,13 +6,13 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
  * Operation for {@link Bean#equals(Object)}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanPrototypeOperationEquals extends BeanPrototypeOperation {
 
@@ -40,8 +40,8 @@ public class BeanPrototypeOperationEquals extends BeanPrototypeOperation {
       return Boolean.FALSE;
     }
     Bean otherBean = (Bean) other;
-    for (GenericProperty<?> property : access.getProperties()) {
-      GenericProperty<?> otherProperty = otherBean.access().getProperty(property.getName());
+    for (WritableProperty<?> property : access.getProperties()) {
+      WritableProperty<?> otherProperty = otherBean.access().getProperty(property.getName());
       if (otherProperty == null) {
         return Boolean.FALSE;
       }

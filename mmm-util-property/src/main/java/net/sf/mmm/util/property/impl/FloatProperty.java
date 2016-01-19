@@ -3,24 +3,24 @@
 package net.sf.mmm.util.property.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.FloatProperty;
+import net.sf.mmm.util.property.api.WritableFloatProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderFloat;
 
 /**
- * This is the implementation of {@link FloatProperty}.
+ * This is the implementation of {@link WritableFloatProperty}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public class FloatPropertyImpl extends NumberPropertyImpl<Float> implements FloatProperty {
+public class FloatProperty extends NumberProperty<Float> implements WritableFloatProperty {
 
   private Float value;
 
   /**
    * The constructor.
    */
-  public FloatPropertyImpl() {
+  public FloatProperty() {
     super();
   }
 
@@ -30,7 +30,7 @@ public class FloatPropertyImpl extends NumberPropertyImpl<Float> implements Floa
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public FloatPropertyImpl(String name, Bean bean) {
+  public FloatProperty(String name, Bean bean) {
     super(name, bean);
   }
 
@@ -41,7 +41,7 @@ public class FloatPropertyImpl extends NumberPropertyImpl<Float> implements Floa
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public FloatPropertyImpl(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public FloatProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -68,13 +68,13 @@ public class FloatPropertyImpl extends NumberPropertyImpl<Float> implements Floa
   }
 
   @Override
-  public FloatPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
+  public FloatProperty copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
 
-    return new FloatPropertyImpl(newName, newBean, newValidator);
+    return new FloatProperty(newName, newBean, newValidator);
   }
 
   @Override
-  public ValidatorBuilderFloat<PropertyBuilder<FloatPropertyImpl>> withValdidator() {
+  public ValidatorBuilderFloat<PropertyBuilder<FloatProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderFloat<>(x));
   }

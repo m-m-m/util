@@ -3,24 +3,24 @@
 package net.sf.mmm.util.property.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.IntegerProperty;
+import net.sf.mmm.util.property.api.WritableIntegerProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderInteger;
 
 /**
- * This is the implementation of {@link IntegerProperty}.
+ * This is the implementation of {@link WritableIntegerProperty}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public class IntegerPropertyImpl extends NumberPropertyImpl<Integer> implements IntegerProperty {
+public class IntegerProperty extends NumberProperty<Integer> implements WritableIntegerProperty {
 
   private Integer value;
 
   /**
    * The constructor.
    */
-  public IntegerPropertyImpl() {
+  public IntegerProperty() {
     super();
   }
 
@@ -30,7 +30,7 @@ public class IntegerPropertyImpl extends NumberPropertyImpl<Integer> implements 
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public IntegerPropertyImpl(String name, Bean bean) {
+  public IntegerProperty(String name, Bean bean) {
     super(name, bean);
   }
 
@@ -41,7 +41,7 @@ public class IntegerPropertyImpl extends NumberPropertyImpl<Integer> implements 
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public IntegerPropertyImpl(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public IntegerProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -68,13 +68,13 @@ public class IntegerPropertyImpl extends NumberPropertyImpl<Integer> implements 
   }
 
   @Override
-  public IntegerPropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
+  public IntegerProperty copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
 
-    return new IntegerPropertyImpl(newName, newBean, newValidator);
+    return new IntegerProperty(newName, newBean, newValidator);
   }
 
   @Override
-  public ValidatorBuilderInteger<PropertyBuilder<IntegerPropertyImpl>> withValdidator() {
+  public ValidatorBuilderInteger<PropertyBuilder<IntegerProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderInteger<>(x));
   }

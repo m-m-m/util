@@ -6,13 +6,13 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
- * Operation on a {@link Bean} {@link GenericProperty property}.
+ * Operation on a {@link Bean} {@link WritableProperty property}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public abstract class BeanPrototypeOperationOnProperty extends BeanPrototypeOperation {
 
@@ -35,7 +35,7 @@ public abstract class BeanPrototypeOperationOnProperty extends BeanPrototypeOper
   }
 
   /**
-   * @return <code>true</code> if the {@link GenericProperty} is required for this operation, <code>false</code>
+   * @return <code>true</code> if the {@link WritableProperty} is required for this operation, <code>false</code>
    *         otherwise.
    */
   @Override
@@ -53,10 +53,10 @@ public abstract class BeanPrototypeOperationOnProperty extends BeanPrototypeOper
   /**
    * @see #invoke(BeanAccessBase, Object[])
    *
-   * @param property the {@link GenericProperty}.
+   * @param property the {@link WritableProperty}.
    * @param args the given method arguments.
    * @return the result of the invocation.
    */
-  protected abstract Object doInvoke(GenericProperty<?> property, Object[] args);
+  protected abstract Object doInvoke(WritableProperty<?> property, Object[] args);
 
 }

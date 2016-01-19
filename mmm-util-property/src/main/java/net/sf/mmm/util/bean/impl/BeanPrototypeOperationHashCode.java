@@ -5,13 +5,13 @@ package net.sf.mmm.util.bean.impl;
 import java.lang.reflect.Method;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
  * Operation for {@link Bean#hashCode()}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanPrototypeOperationHashCode extends BeanPrototypeOperation {
 
@@ -30,7 +30,7 @@ public class BeanPrototypeOperationHashCode extends BeanPrototypeOperation {
 
     int hashCode = 1;
 
-    for (GenericProperty<?> property : access.getProperties()) {
+    for (WritableProperty<?> property : access.getProperties()) {
       Object value = property.getValue();
       int hash = 0;
       if (value != null) {

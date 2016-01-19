@@ -22,13 +22,13 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.base.AbstractGenericProperty;
-import net.sf.mmm.util.property.impl.BooleanPropertyImpl;
-import net.sf.mmm.util.property.impl.GenericPropertyImpl;
-import net.sf.mmm.util.property.impl.IntegerPropertyImpl;
-import net.sf.mmm.util.property.impl.LongPropertyImpl;
-import net.sf.mmm.util.property.impl.StringPropertyImpl;
+import net.sf.mmm.util.property.impl.BooleanProperty;
+import net.sf.mmm.util.property.impl.GenericProperty;
+import net.sf.mmm.util.property.impl.IntegerProperty;
+import net.sf.mmm.util.property.impl.LongProperty;
+import net.sf.mmm.util.property.impl.StringProperty;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
@@ -43,7 +43,7 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
  * This is the implementation of {@link BeanFactory}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 @Named
 public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFactory {
@@ -155,8 +155,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
     BEAN copy = create(bean);
     BeanAccess access = copy.access();
-    for (GenericProperty<?> property : bean.access().getProperties()) {
-      GenericProperty copyProperty = access.getRequiredProperty(property.getName());
+    for (WritableProperty<?> property : bean.access().getProperties()) {
+      WritableProperty copyProperty = access.getRequiredProperty(property.getName());
       copyProperty.setValue(property.getValue());
     }
     return copy;
@@ -288,7 +288,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
   /**
    * @param beanMethod the {@link BeanMethod}.
-   * @param beanType the {@link GenericType} reflecting the {@link GenericProperty#getBean() bean owning the property}
+   * @param beanType the {@link GenericType} reflecting the {@link WritableProperty#getBean() bean owning the property}
    *        to create.
    * @param bean the {@link Bean} instance to create this property for.
    * @return the new property instance.
@@ -312,22 +312,22 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
   /**
    * @param <V> the generic type of {@code type}.
-   * @param name the {@link GenericProperty#getName() property name}.
-   * @param type the {@link GenericProperty#getType() property type}.
-   * @param bean the {@link GenericProperty#getBean() property bean}.
+   * @param name the {@link WritableProperty#getName() property name}.
+   * @param type the {@link WritableProperty#getType() property type}.
+   * @param bean the {@link WritableProperty#getBean() property bean}.
    * @return the new property instance.
    */
   protected <V> AbstractGenericProperty<V> createProperty(String name, GenericType<V> type, Bean bean) {
 
-    return createProperty(name, type, bean, GenericProperty.class);
+    return createProperty(name, type, bean, WritableProperty.class);
   }
 
   /**
    * @param <V> the generic property type.
-   * @param name the {@link GenericProperty#getName() property name}.
-   * @param type the {@link GenericProperty#getType() property type}.
-   * @param bean the {@link GenericProperty#getBean() property bean}.
-   * @param propertyClass the {@link Class} reflecting the {@link GenericProperty} or <code>null</code> if no property
+   * @param name the {@link WritableProperty#getName() property name}.
+   * @param type the {@link WritableProperty#getType() property type}.
+   * @param bean the {@link WritableProperty#getBean() property bean}.
+   * @param propertyClass the {@link Class} reflecting the {@link WritableProperty} or <code>null</code> if no property
    *        method exists and this method is called for plain getter or setter.
    * @return the new instance of {@link AbstractGenericProperty}.
    */
@@ -341,15 +341,15 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     } else {
       Class<?> valueClass = type.getRetrievalClass();
       if (valueClass == String.class) {
-        result = new StringPropertyImpl(name, bean);
+        result = new StringProperty(name, bean);
       } else if (valueClass == Boolean.class) {
-        result = new BooleanPropertyImpl(name, bean);
+        result = new BooleanProperty(name, bean);
       } else if (valueClass == Integer.class) {
-        result = new IntegerPropertyImpl(name, bean);
+        result = new IntegerProperty(name, bean);
       } else if (valueClass == Long.class) {
-        result = new LongPropertyImpl(name, bean);
+        result = new LongProperty(name, bean);
       } else {
-        result = new GenericPropertyImpl<>(name, type, bean);
+        result = new GenericProperty<>(name, type, bean);
       }
     }
     return result;

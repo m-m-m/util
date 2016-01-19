@@ -10,7 +10,7 @@ import net.sf.mmm.util.bean.api.Bean;
  * Operation for {@link Bean#access()}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanPrototypeOperationAccess extends BeanPrototypeOperation {
 

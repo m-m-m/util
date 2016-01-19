@@ -9,13 +9,14 @@ import javafx.beans.value.ObservableStringValue;
 import javafx.beans.value.WritableStringValue;
 
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link WritableProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Boolean}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public interface StringProperty extends GenericProperty<String>, ObservableStringValue, WritableStringValue {
+public interface WritableStringProperty
+    extends WritableProperty<String>, ObservableStringValue, WritableStringValue {
 
   @Override
   default String get() {

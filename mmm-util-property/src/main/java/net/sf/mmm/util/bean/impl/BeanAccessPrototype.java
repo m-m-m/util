@@ -12,7 +12,7 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.base.AbstractGenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 
@@ -23,7 +23,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @param <BEAN> the generic type of the {@link Bean}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN> {
 
@@ -82,13 +82,13 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public Iterator<GenericProperty<?>> iterator() {
+  public Iterator<WritableProperty<?>> iterator() {
 
     return (Iterator) this.name2PropertyMap.values().stream().map(x -> x.getProperty()).iterator();
   }
 
   @Override
-  public <V> GenericProperty<V> createProperty(String name, GenericType<V> propertyType) {
+  public <V> WritableProperty<V> createProperty(String name, GenericType<V> propertyType) {
 
     if (!this.dynamic) {
       throw new ReadOnlyException(this.beanType.getSimpleName(), "access.properties");
@@ -103,7 +103,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   }
 
   @Override
-  protected GenericProperty<?> getProperty(BeanPrototypeProperty prototypeProperty, boolean required) {
+  protected WritableProperty<?> getProperty(BeanPrototypeProperty prototypeProperty, boolean required) {
 
     return prototypeProperty.getProperty();
   }
@@ -125,7 +125,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   }
 
   /**
-   * @param property the {@link GenericProperty} to add.
+   * @param property the {@link WritableProperty} to add.
    */
   protected void addProperty(AbstractGenericProperty<?> property) {
 

@@ -6,22 +6,18 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.FloatBinding;
 import javafx.beans.binding.LongBinding;
 import javafx.beans.value.ObservableLongValue;
-import javafx.beans.value.WritableLongValue;
 
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link ReadableNumberProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Long}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public interface LongProperty extends NumberProperty, ObservableLongValue, WritableLongValue {
+public interface ReadableLongProperty extends ReadableNumberProperty, ObservableLongValue {
 
   // @Override
   // Long getValue();
-
-  @Override
-  void setValue(Number value);
 
   @Override
   default long get() {
@@ -31,12 +27,6 @@ public interface LongProperty extends NumberProperty, ObservableLongValue, Writa
       return 0;
     }
     return value.longValue();
-  }
-
-  @Override
-  default void set(long value) {
-
-    setValue(Long.valueOf(value));
   }
 
   @Override

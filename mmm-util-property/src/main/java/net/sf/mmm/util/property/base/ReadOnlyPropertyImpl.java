@@ -8,35 +8,35 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
- * This is a {@link #isReadOnly() read-only} view on a {@link GenericProperty}.
+ * This is a {@link #isReadOnly() read-only} view on a {@link WritableProperty}.
  *
  * @see #getReadOnly()
  *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public class ReadOnlyPropertyImpl<VALUE> implements GenericProperty<VALUE> {
+public class ReadOnlyPropertyImpl<VALUE> implements WritableProperty<VALUE> {
 
-  private final GenericProperty<VALUE> property;
+  private final WritableProperty<VALUE> property;
 
   /**
    * The constructor.
    *
-   * @param property the {@link GenericProperty} to give {@link #isReadOnly() read-only} access to.
+   * @param property the {@link WritableProperty} to give {@link #isReadOnly() read-only} access to.
    */
-  public ReadOnlyPropertyImpl(GenericProperty<VALUE> property) {
+  public ReadOnlyPropertyImpl(WritableProperty<VALUE> property) {
     super();
     this.property = property;
   }
 
   @Override
-  public GenericProperty<VALUE> getReadOnly() {
+  public WritableProperty<VALUE> getReadOnly() {
 
     return this;
   }

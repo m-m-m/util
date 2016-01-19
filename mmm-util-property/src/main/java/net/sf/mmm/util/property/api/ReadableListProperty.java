@@ -7,34 +7,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.value.ObservableListValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link WritableProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link List}{@literal<E>}.
  *
  * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public interface ListProperty<E> extends CollectionProperty<E, ObservableList<E>>, ObservableListValue<E> {
-
-  /**
-   * @return an {@link ReadOnlyIntegerProperty} that represents the {@link #size()} property of the {@link #getValue()
-   *         list}.
-   */
-  ReadOnlyIntegerProperty sizeProperty();
-
-  /**
-   * @return an {@link ReadOnlyBooleanProperty} that represents the {@link #isEmpty() empty} property of the
-   *         {@link #getValue() list}.
-   */
-  ReadOnlyBooleanProperty emptyProperty();
+public interface ReadableListProperty<E>
+    extends ReadableCollectionProperty<E, ObservableList<E>>, ObservableListValue<E> {
 
   @Override
   default ObservableList<E> getValueNotNull() {
@@ -159,75 +146,75 @@ public interface ListProperty<E> extends CollectionProperty<E, ObservableList<E>
   }
 
   @Override
+  default Iterator<E> iterator() {
+
+    return ReadableCollectionProperty.super.iterator();
+  }
+
+  @Override
   default int size() {
 
-    return CollectionProperty.super.size();
+    return ReadableCollectionProperty.super.size();
   }
 
   @Override
   default boolean isEmpty() {
 
-    return CollectionProperty.super.isEmpty();
+    return ReadableCollectionProperty.super.isEmpty();
   }
 
   @Override
   default boolean contains(Object o) {
 
-    return CollectionProperty.super.contains(o);
+    return ReadableCollectionProperty.super.contains(o);
   }
 
   @Override
   default boolean containsAll(Collection<?> c) {
 
-    return CollectionProperty.super.containsAll(c);
-  }
-
-  @Override
-  default Iterator<E> iterator() {
-
-    return CollectionProperty.super.iterator();
-  }
-
-  @Override
-  default boolean remove(Object o) {
-
-    return CollectionProperty.super.remove(o);
-  }
-
-  @Override
-  default boolean removeAll(Collection<?> c) {
-
-    return CollectionProperty.super.removeAll(c);
+    return ReadableCollectionProperty.super.containsAll(c);
   }
 
   @Override
   default boolean add(E e) {
 
-    return CollectionProperty.super.add(e);
+    return ReadableCollectionProperty.super.add(e);
   }
 
   @Override
   default boolean addAll(Collection<? extends E> c) {
 
-    return CollectionProperty.super.addAll(c);
+    return ReadableCollectionProperty.super.addAll(c);
+  }
+
+  @Override
+  default boolean remove(Object o) {
+
+    return ReadableCollectionProperty.super.remove(o);
+  }
+
+  @Override
+  default boolean removeAll(Collection<?> c) {
+
+    return ReadableCollectionProperty.super.removeAll(c);
   }
 
   @Override
   default void clear() {
 
-    CollectionProperty.super.clear();
+    ReadableCollectionProperty.super.clear();
   }
 
   @Override
   default Object[] toArray() {
 
-    return CollectionProperty.super.toArray();
+    return ReadableCollectionProperty.super.toArray();
   }
 
   @Override
   default <T> T[] toArray(T[] a) {
 
-    return CollectionProperty.super.toArray(a);
+    return ReadableCollectionProperty.super.toArray(a);
   }
 
 }

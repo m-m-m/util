@@ -8,17 +8,20 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.NumberExpression;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.value.ObservableNumberValue;
 
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
- * {@link Integer}.
+ * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * {@link Number}.
+ *
+ * @see WritableNumberProperty
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public interface NumberProperty extends GenericProperty<Number>, javafx.beans.binding.NumberExpression {
+public interface ReadableNumberProperty extends ReadableProperty<Number>, NumberExpression {
 
   @Override
   default NumberBinding negate() {

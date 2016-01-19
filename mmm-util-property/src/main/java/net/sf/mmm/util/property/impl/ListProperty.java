@@ -16,7 +16,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.ListProperty;
+import net.sf.mmm.util.property.api.WritableListProperty;
 import net.sf.mmm.util.property.base.AbstractGenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
@@ -25,15 +25,15 @@ import net.sf.mmm.util.validation.base.collection.AbstractCollectionValidatorBui
 import net.sf.mmm.util.validation.base.collection.ValidatorBuilderCollection;
 
 /**
- * This is the implementation of {@link ListProperty}.
+ * This is the implementation of {@link WritableListProperty}.
  *
  * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 @SuppressWarnings("restriction")
-public class ListPropertyImpl<E> extends AbstractGenericProperty<ObservableList<E>> implements ListProperty<E> {
+public class ListProperty<E> extends AbstractGenericProperty<ObservableList<E>> implements WritableListProperty<E> {
 
   @SuppressWarnings("rawtypes")
   private static final GenericType TYPE = new SimpleGenericTypeImpl<>(ObservableList.class);
@@ -55,7 +55,7 @@ public class ListPropertyImpl<E> extends AbstractGenericProperty<ObservableList<
   /**
    * The constructor.
    */
-  public ListPropertyImpl() {
+  public ListProperty() {
     super(null, TYPE, null);
   }
 
@@ -66,7 +66,7 @@ public class ListPropertyImpl<E> extends AbstractGenericProperty<ObservableList<
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public ListPropertyImpl(String name, GenericType<ObservableList<E>> type, Bean bean) {
+  public ListProperty(String name, GenericType<ObservableList<E>> type, Bean bean) {
     super(name, type, bean);
   }
 
@@ -78,7 +78,7 @@ public class ListPropertyImpl<E> extends AbstractGenericProperty<ObservableList<
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public ListPropertyImpl(String name, GenericType<ObservableList<E>> type, Bean bean,
+  public ListProperty(String name, GenericType<ObservableList<E>> type, Bean bean,
       AbstractValidator<? super ObservableList<E>> validator) {
     super(name, type, bean, validator);
   }
@@ -150,21 +150,21 @@ public class ListPropertyImpl<E> extends AbstractGenericProperty<ObservableList<
   }
 
   @Override
-  public ListPropertyImpl<E> copy(String newName, Bean newBean,
+  public ListProperty<E> copy(String newName, Bean newBean,
       AbstractValidator<? super ObservableList<E>> newValidator) {
 
-    return new ListPropertyImpl<>(newName, getType(), newBean, newValidator);
+    return new ListProperty<>(newName, getType(), newBean, newValidator);
   }
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public AbstractCollectionValidatorBuilder<E, ObservableList<E>, PropertyBuilder<ListPropertyImpl<E>>, ?> withValdidator() {
+  public AbstractCollectionValidatorBuilder<E, ObservableList<E>, PropertyBuilder<ListProperty<E>>, ?> withValdidator() {
 
-    Function factory = new Function<PropertyBuilder<ListPropertyImpl<E>>, ValidatorBuilderCollection<E, PropertyBuilder<ListPropertyImpl<E>>>>() {
+    Function factory = new Function<PropertyBuilder<ListProperty<E>>, ValidatorBuilderCollection<E, PropertyBuilder<ListProperty<E>>>>() {
 
       @Override
-      public ValidatorBuilderCollection<E, PropertyBuilder<ListPropertyImpl<E>>> apply(
-          PropertyBuilder<ListPropertyImpl<E>> t) {
+      public ValidatorBuilderCollection<E, PropertyBuilder<ListProperty<E>>> apply(
+          PropertyBuilder<ListProperty<E>> t) {
 
         return new ValidatorBuilderCollection<>(t);
       }
@@ -224,7 +224,7 @@ public class ListPropertyImpl<E> extends AbstractGenericProperty<ObservableList<
     @Override
     public Object getBean() {
 
-      return ListPropertyImpl.this;
+      return ListProperty.this;
     }
 
     @Override
@@ -251,7 +251,7 @@ public class ListPropertyImpl<E> extends AbstractGenericProperty<ObservableList<
     @Override
     public Object getBean() {
 
-      return ListPropertyImpl.this;
+      return ListProperty.this;
     }
 
     @Override

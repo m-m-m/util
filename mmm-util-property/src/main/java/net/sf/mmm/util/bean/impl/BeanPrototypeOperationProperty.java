@@ -5,13 +5,13 @@ package net.sf.mmm.util.bean.impl;
 import java.lang.reflect.Method;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
- * Operation on a {@link Bean} the get the raw {@link GenericProperty property}.
+ * Operation on a {@link Bean} the get the raw {@link WritableProperty property}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanPrototypeOperationProperty extends BeanPrototypeOperationOnProperty {
 
@@ -28,7 +28,7 @@ public class BeanPrototypeOperationProperty extends BeanPrototypeOperationOnProp
   }
 
   @Override
-  protected Object doInvoke(GenericProperty<?> property, Object[] args) {
+  protected Object doInvoke(WritableProperty<?> property, Object[] args) {
 
     if (property == null) {
       return null;

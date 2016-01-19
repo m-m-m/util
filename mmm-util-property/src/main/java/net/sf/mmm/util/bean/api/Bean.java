@@ -5,11 +5,11 @@ package net.sf.mmm.util.bean.api;
 import javax.inject.Inject;
 
 import javafx.beans.property.Property;
-import net.sf.mmm.util.property.api.GenericProperty;
-import net.sf.mmm.util.property.api.StringProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.api.WritableStringProperty;
 
 /**
- * This is the interface for a generic bean based on {@link GenericProperty generic properties}. Unlike plain old Java
+ * This is the interface for a generic bean based on {@link WritableProperty generic properties}. Unlike plain old Java
  * Beans this offers a lot of advanced features:
  * <ul>
  * <li>Simplicity - just create your interface, no need to write boiler-plate code for implementation.</li>
@@ -23,8 +23,8 @@ import net.sf.mmm.util.property.api.StringProperty;
  * {@link #toString()}. Also general getters and setters are automatically implemented.</li>
  * <li>ReadOnly-Support - {@link BeanFactory#getReadOnlyBean(Bean) create} a {@link BeanAccess#isReadOnly() read-only}
  * view of your object to pass by reference without side-effects.</li>
- * <li>Powerful properties - {@link GenericProperty} is based on JavaFx {@link Property} supporting listeners and
- * bindings but also additional features such as {@link GenericProperty#getType() generic type information}.</li>
+ * <li>Powerful properties - {@link WritableProperty} is based on JavaFx {@link Property} supporting listeners and
+ * bindings but also additional features such as {@link WritableProperty#getType() generic type information}.</li>
  * <li>Validation - build-in {@link BeanAccess#validate() validation support}. This can be configured via
  * Bean-Validation standard (JSR303) or even more efficient and reusable via custom properties or in default methods for
  * the properties of your {@link Bean} interface.</li>
@@ -35,11 +35,11 @@ import net.sf.mmm.util.property.api.StringProperty;
  *
  * <pre>
  * public interface AddressBean extends {@link Bean} {
- *   {@link StringProperty} Street();
- *   {@link StringProperty} HouseNumber();
- *   {@link StringProperty} PostalCode();
- *   {@link StringProperty} City();
- *   {@link StringProperty} Country();
+ *   {@link WritableStringProperty} Street();
+ *   {@link WritableStringProperty} HouseNumber();
+ *   {@link WritableStringProperty} PostalCode();
+ *   {@link WritableStringProperty} City();
+ *   {@link WritableStringProperty} Country();
  *   // if you want you may also define regular getters and setters as well
  *   String getStreet();
  *   void setStreet(String street);
@@ -62,14 +62,14 @@ import net.sf.mmm.util.property.api.StringProperty;
  *     address.City().setValue("Rafferty");
  *     address.Country().setValue("Gerryland");
  *     for (Property{@literal <?>} property: address.{@link #access()}.{@link BeanAccess#getProperties() getProperties()}) {
- *       System.out.println("Property '" + property.{@link GenericProperty#getName() getName()} + "' of type ' + property.{@link GenericProperty#getType() getType()} + ' has value '" + property.{@link GenericProperty#getValue() getValue()} + "'.");
+ *       System.out.println("Property '" + property.{@link WritableProperty#getName() getName()} + "' of type ' + property.{@link WritableProperty#getType() getType()} + ' has value '" + property.{@link WritableProperty#getValue() getValue()} + "'.");
  *     }
  *   }
  * }
  * </pre>
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public interface Bean {
 

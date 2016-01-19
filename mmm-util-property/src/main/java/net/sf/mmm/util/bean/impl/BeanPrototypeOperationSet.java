@@ -5,14 +5,14 @@ package net.sf.mmm.util.bean.impl;
 import java.lang.reflect.Method;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
- * Operation on a {@link Bean} to {@link GenericProperty#setValue(Object) set} the {@link GenericProperty#getValue()
- * value} of a {@link GenericProperty property}.
+ * Operation on a {@link Bean} to {@link WritableProperty#setValue(Object) set} the {@link WritableProperty#getValue()
+ * value} of a {@link WritableProperty property}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanPrototypeOperationSet extends BeanPrototypeOperationOnProperty {
 
@@ -30,9 +30,9 @@ public class BeanPrototypeOperationSet extends BeanPrototypeOperationOnProperty 
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  protected Object doInvoke(GenericProperty<?> property, Object[] args) {
+  protected Object doInvoke(WritableProperty<?> property, Object[] args) {
 
-    ((GenericProperty) property).setValue(args[0]);
+    ((WritableProperty) property).setValue(args[0]);
     return null;
   }
 

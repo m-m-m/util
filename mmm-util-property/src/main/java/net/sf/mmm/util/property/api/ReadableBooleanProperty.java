@@ -6,16 +6,15 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.BooleanExpression;
 import javafx.beans.value.ObservableBooleanValue;
-import javafx.beans.value.WritableBooleanValue;
 
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link WritableProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Boolean}.
  *
  * @author hohwille
  * @since 7.1.0
  */
-public interface BooleanProperty extends GenericProperty<Boolean>, ObservableBooleanValue, WritableBooleanValue {
+public interface ReadableBooleanProperty extends ReadableProperty<Boolean>, ObservableBooleanValue {
 
   @Override
   default boolean get() {
@@ -27,20 +26,12 @@ public interface BooleanProperty extends GenericProperty<Boolean>, ObservableBoo
     return value.booleanValue();
   }
 
-  @Override
-  void setValue(Boolean value);
-
-  @Override
-  default void set(boolean value) {
-
-    setValue(Boolean.valueOf(value));
-  }
-
   /**
    * @see BooleanExpression#and(ObservableBooleanValue)
    *
    * @param other the {@link ObservableBooleanValue} to build the conjunction with.
-   * @return a new {@link BooleanBinding} that performs the conditional AND-operation on this {@link BooleanProperty}.
+   * @return a new {@link BooleanBinding} that performs the conditional AND-operation on this
+   *         {@link ReadableBooleanProperty}.
    */
   default BooleanBinding and(ObservableBooleanValue other) {
 
@@ -51,7 +42,8 @@ public interface BooleanProperty extends GenericProperty<Boolean>, ObservableBoo
    * @see BooleanExpression#or(ObservableBooleanValue)
    *
    * @param other the {@link ObservableBooleanValue} to build the conjunction with.
-   * @return a new {@link BooleanBinding} that performs the conditional OR-operation on this {@link BooleanProperty}.
+   * @return a new {@link BooleanBinding} that performs the conditional OR-operation on this
+   *         {@link ReadableBooleanProperty}.
    */
   default BooleanBinding or(ObservableBooleanValue other) {
 
@@ -61,7 +53,7 @@ public interface BooleanProperty extends GenericProperty<Boolean>, ObservableBoo
   /**
    * @see BooleanExpression#not()
    *
-   * @return a new {@link BooleanBinding} that performs the negation of this {@link BooleanProperty}.
+   * @return a new {@link BooleanBinding} that performs the negation of this {@link ReadableBooleanProperty}.
    */
   default BooleanBinding not() {
 

@@ -3,24 +3,24 @@
 package net.sf.mmm.util.property.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.DoubleProperty;
+import net.sf.mmm.util.property.api.WritableDoubleProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderDouble;
 
 /**
- * This is the implementation of {@link DoubleProperty}.
+ * This is the implementation of {@link WritableDoubleProperty}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public class DoublePropertyImpl extends NumberPropertyImpl<Double> implements DoubleProperty {
+public class DoubleProperty extends NumberProperty<Double> implements WritableDoubleProperty {
 
   private Double value;
 
   /**
    * The constructor.
    */
-  public DoublePropertyImpl() {
+  public DoubleProperty() {
     super();
   }
 
@@ -30,7 +30,7 @@ public class DoublePropertyImpl extends NumberPropertyImpl<Double> implements Do
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public DoublePropertyImpl(String name, Bean bean) {
+  public DoubleProperty(String name, Bean bean) {
     super(name, bean);
   }
 
@@ -41,7 +41,7 @@ public class DoublePropertyImpl extends NumberPropertyImpl<Double> implements Do
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public DoublePropertyImpl(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public DoubleProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -68,13 +68,13 @@ public class DoublePropertyImpl extends NumberPropertyImpl<Double> implements Do
   }
 
   @Override
-  public DoublePropertyImpl copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
+  public DoubleProperty copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
 
-    return new DoublePropertyImpl(newName, newBean, newValidator);
+    return new DoubleProperty(newName, newBean, newValidator);
   }
 
   @Override
-  public ValidatorBuilderDouble<PropertyBuilder<DoublePropertyImpl>> withValdidator() {
+  public ValidatorBuilderDouble<PropertyBuilder<DoubleProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderDouble<>(x));
   }

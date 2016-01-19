@@ -13,13 +13,13 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public interface GenericProperty<VALUE>
-    extends Property<VALUE>, AttributeWriteValue<VALUE>, GenericReadOnlyProperty<VALUE> {
+public interface WritableProperty<VALUE>
+    extends Property<VALUE>, AttributeWriteValue<VALUE>, ReadableProperty<VALUE> {
 
   /** Empty array instance. */
-  GenericProperty<?>[] NO_PROPERTIES = new GenericProperty<?>[0];
+  WritableProperty<?>[] NO_PROPERTIES = new WritableProperty<?>[0];
 
   /**
    * @return <code>true</code> if this property is read-only and {@link #setValue(Object)} will fail with an exception,
@@ -30,7 +30,7 @@ public interface GenericProperty<VALUE>
   /**
    * @return the {@link #isReadOnly() read only} view on this property.
    */
-  GenericProperty<VALUE> getReadOnly();
+  WritableProperty<VALUE> getReadOnly();
 
   /**
    * @return <code>true</code> if this property is mandatory (a {@link #getValue() value} of <code>null</code> is NOT

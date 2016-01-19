@@ -4,7 +4,7 @@ package net.sf.mmm.util.bean.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.base.AbstractGenericProperty;
 
 /**
@@ -13,7 +13,7 @@ import net.sf.mmm.util.property.base.AbstractGenericProperty;
  * @param <BEAN> the generic type of the intercepted {@link #getBean() bean}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public class BeanAccessMutable<BEAN extends Bean> extends BeanAccessInstance<BEAN> {
 
@@ -31,7 +31,7 @@ public class BeanAccessMutable<BEAN extends Bean> extends BeanAccessInstance<BEA
   }
 
   @Override
-  protected GenericProperty<?> createProperty(BeanPrototypeProperty prototypeProperty) {
+  protected WritableProperty<?> createProperty(BeanPrototypeProperty prototypeProperty) {
 
     AbstractGenericProperty<?> property = prototypeProperty.getProperty();
     return property.copy(getBean());

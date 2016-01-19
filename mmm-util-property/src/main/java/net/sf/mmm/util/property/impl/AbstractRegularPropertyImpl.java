@@ -7,17 +7,17 @@ import com.sun.javafx.binding.ExpressionHelper;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.base.AbstractGenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
- * This is the implementation of {@link GenericProperty}.
+ * This is the implementation of {@link WritableProperty}.
  *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 @SuppressWarnings("restriction")
 public abstract class AbstractRegularPropertyImpl<VALUE> extends AbstractGenericProperty<VALUE> {

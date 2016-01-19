@@ -11,7 +11,7 @@ import javafx.beans.property.Property;
 import javafx.beans.value.ObservableValue;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.lang.api.Builder;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -21,13 +21,13 @@ import net.sf.mmm.util.validation.base.ValidationFailureSuccess;
 import net.sf.mmm.util.validation.base.ValidatorNone;
 
 /**
- * This is the implementation of {@link GenericProperty}.
+ * This is the implementation of {@link WritableProperty}.
  *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
-public abstract class AbstractGenericProperty<VALUE> implements GenericProperty<VALUE> {
+public abstract class AbstractGenericProperty<VALUE> implements WritableProperty<VALUE> {
 
   private final Bean bean;
 
@@ -146,7 +146,7 @@ public abstract class AbstractGenericProperty<VALUE> implements GenericProperty<
       AbstractValidator<? super VALUE> newValidator);
 
   /**
-   * Assigns the {@link #getValue() value} from the {@link ObservableValue} (typically a {@link GenericProperty}) to
+   * Assigns the {@link #getValue() value} from the {@link ObservableValue} (typically a {@link WritableProperty}) to
    * this property. Can be overridden to avoid boxing overhead.
    *
    * @param observableValue the property to assign the value from.
@@ -328,7 +328,7 @@ public abstract class AbstractGenericProperty<VALUE> implements GenericProperty<
   }
 
   @Override
-  public GenericProperty<VALUE> getReadOnly() {
+  public WritableProperty<VALUE> getReadOnly() {
 
     if (this.readOnlyProperty == null) {
       this.readOnlyProperty = new ReadOnlyPropertyImpl<>(this);
@@ -422,8 +422,8 @@ public abstract class AbstractGenericProperty<VALUE> implements GenericProperty<
     /**
      * Also assign the {@link #getValue() value} from the original property. <br/>
      * <b>ATTENTION:</b><br/>
-     * A {@link GenericProperty} may hold any kind of {@link #getValue() value} so the value may be mutable. If you are
-     * using this builder to create a copy of the property this might have undesired effects.
+     * A {@link WritableProperty} may hold any kind of {@link #getValue() value} so the value may be mutable. If you
+     * are using this builder to create a copy of the property this might have undesired effects.
      *
      * @return this build instance for fluent API calls.
      */

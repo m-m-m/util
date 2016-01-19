@@ -5,22 +5,18 @@ package net.sf.mmm.util.property.api;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.FloatBinding;
 import javafx.beans.value.ObservableFloatValue;
-import javafx.beans.value.WritableFloatValue;
 
 /**
- * This is the interface for a {@link GenericProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link ReadableNumberProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Float}.
  *
  * @author hohwille
  * @since 7.1.0
  */
-public interface FloatProperty extends NumberProperty, ObservableFloatValue, WritableFloatValue {
+public interface ReadableFloatProperty extends ReadableNumberProperty, ObservableFloatValue {
 
   // @Override
   // Float getValue();
-
-  @Override
-  void setValue(Number value);
 
   @Override
   default float get() {
@@ -30,12 +26,6 @@ public interface FloatProperty extends NumberProperty, ObservableFloatValue, Wri
       return 0;
     }
     return value.floatValue();
-  }
-
-  @Override
-  default void set(float value) {
-
-    setValue(Float.valueOf(value));
   }
 
   @Override
