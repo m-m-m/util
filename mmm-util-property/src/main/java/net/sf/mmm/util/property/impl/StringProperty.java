@@ -17,7 +17,7 @@ import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
  * @author hohwille
  * @since 8.0.0
  */
-public class StringProperty extends AbstractRegularPropertyImpl<String> implements WritableStringProperty {
+public class StringProperty extends AbstractRegularProperty<String> implements WritableStringProperty {
 
   private static final GenericType<String> TYPE = new SimpleGenericTypeImpl<>(String.class);
 

@@ -24,8 +24,20 @@ public class BeanPrototypeOperationDefaultMethod extends BeanPrototypeOperation 
    * @param method the {@link Method#isDefault() default} {@link Method}.
    */
   public BeanPrototypeOperationDefaultMethod(BeanAccessPrototype<?> prototype, Method method) {
+    this(prototype, method, method);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param prototype the {@link BeanAccessPrototype}.
+   * @param method the {@link Method} to handle.
+   * @param defaultMethod the {@link Method#isDefault() default} {@link Method} to delegate to.
+   */
+  public BeanPrototypeOperationDefaultMethod(BeanAccessPrototype<?> prototype, Method method,
+      Method defaultMethod) {
     super(prototype, method);
-    this.methodHandle = LookupHelper.INSTANCE.newMethodHandle(method);
+    this.methodHandle = LookupHelper.INSTANCE.newMethodHandle(defaultMethod);
   }
 
   @Override

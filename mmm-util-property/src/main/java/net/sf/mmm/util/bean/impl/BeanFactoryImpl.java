@@ -11,7 +11,9 @@ import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -23,7 +25,7 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.base.AbstractGenericProperty;
+import net.sf.mmm.util.property.base.AbstractProperty;
 import net.sf.mmm.util.property.impl.BooleanProperty;
 import net.sf.mmm.util.property.impl.GenericProperty;
 import net.sf.mmm.util.property.impl.IntegerProperty;
@@ -33,6 +35,7 @@ import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
+import net.sf.mmm.util.reflect.api.NamedSignature;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
@@ -208,68 +211,50 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
     BeanAccessPrototype<BEAN> prototype = new BeanAccessPrototype<>(type, this);
     GenericType<BEAN> beanType = this.reflectionUtil.createGenericType(type);
-    Collection<BeanMethod> methods = new ArrayList<>();
-    collectMethods(type, prototype, beanType, methods);
-    processMethods(methods, prototype, beanType);
+    BeanIntrospectionData introspectionData = new BeanIntrospectionData(beanType, prototype);
+    collectMethods(type, introspectionData);
+    processMethods(introspectionData, prototype, beanType);
     return prototype;
   }
 
   /**
    * Recursively introspect, create and collect the {@link BeanMethod}s for a {@link Bean} {@link Class}. Also creates
-   * the {@link AbstractGenericProperty properties} for the {@link BeanMethodType#PROPERTY property} methods.
+   * the {@link AbstractProperty properties} for the {@link BeanMethodType#PROPERTY property} methods.
    *
    * @param type is the current {@link Bean} {@link Class} to introspect.
-   * @param prototype the {@link BeanAccessPrototype}.
-   * @param beanType the {@link GenericType} of the initial {@link Bean}.
-   * @param methods the {@link Collection} where to {@link Collection#add(Object) add} the {@link BeanMethod}.
+   * @param introspectionData the {@link BeanIntrospectionData}.
    */
-  protected void collectMethods(Class<?> type, BeanAccessPrototype<?> prototype, GenericType<?> beanType,
-      Collection<BeanMethod> methods) {
+  protected void collectMethods(Class<?> type, BeanIntrospectionData introspectionData) {
 
+    if (!introspectionData.visitType(type)) {
+      return;
+    }
     for (Method method : type.getDeclaredMethods()) {
-      BeanMethod beanMethod = new BeanMethod(method);
-      BeanMethodType methodType = beanMethod.getMethodType();
-      if (methodType == null) {
-        if (!Modifier.isStatic(method.getModifiers())) {
-          getLogger().warn("Unmapped bean method {}", method);
-        }
-      } else {
-        methods.add(beanMethod);
-        if (methodType == BeanMethodType.PROPERTY) {
-          AbstractGenericProperty<?> property = createProperty(beanMethod, beanType, prototype.getBean());
-          prototype.addProperty(property);
-        }
-      }
+      introspectionData.addMethod(method, type);
     }
     if (type == Bean.class) {
       for (Method method : Object.class.getDeclaredMethods()) {
-        BeanMethod beanMethod = new BeanMethod(method);
-        BeanMethodType methodType = beanMethod.getMethodType();
-        if (methodType != null) {
-          methods.add(beanMethod);
-        }
+        introspectionData.addMethod(method, Object.class);
 
       }
     } else {
       for (Class<?> superInterface : type.getInterfaces()) {
-        collectMethods(superInterface, prototype, beanType, methods);
+        collectMethods(superInterface, introspectionData);
       }
     }
   }
 
   /**
-   * @param methods the {@link Collection} with all the
-   *        {@link #collectMethods(Class, BeanAccessPrototype, GenericType, Bean, Collection) collected}
-   *        {@link BeanMethod}s.
+   * @param introspectionData the {@link BeanIntrospectionData}.
    * @param prototype the {@link BeanAccessPrototype} to process and complete.
    * @param beanType the {@link GenericType} reflecting the {@link Bean}.
    */
-  private void processMethods(Collection<BeanMethod> methods, BeanAccessPrototype<?> prototype,
+  private void processMethods(BeanIntrospectionData introspectionData, BeanAccessPrototype<?> prototype,
       GenericType<?> beanType) {
 
     Map<Method, BeanPrototypeOperation> method2OperationMap = prototype.getMethod2OperationMap();
     Map<String, BeanPrototypeProperty> name2PropertyMap = prototype.getName2PropertyMap();
-    for (BeanMethod beanMethod : methods) {
+    for (BeanMethod beanMethod : introspectionData.methods) {
       BeanMethodType methodType = beanMethod.getMethodType();
       if ((methodType == BeanMethodType.GET) || (methodType == BeanMethodType.SET)) {
         String propertyName = beanMethod.getPropertyName();
@@ -277,11 +262,20 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         if (prototypeProperty == null) {
           GenericType<?> propertyType = this.reflectionUtil.createGenericType(beanMethod.getPropertyType(),
               beanType);
-          AbstractGenericProperty<?> property = createProperty(propertyName, propertyType, prototype.getBean());
+          AbstractProperty<?> property = createProperty(propertyName, propertyType, prototype.getBean());
           prototype.addProperty(property);
         }
       }
-      BeanPrototypeOperation operation = BeanPrototypeOperation.create(beanMethod, prototype);
+      BeanPrototypeOperation operation;
+      if ((methodType == BeanMethodType.EQUALS) && (introspectionData.customEquals != null)) {
+        operation = new BeanPrototypeOperationCustomEquals(prototype, beanMethod.getMethod(),
+            introspectionData.customEquals.getMethod(), this.reflectionUtil);
+      } else if ((methodType == BeanMethodType.HASH_CODE) && (introspectionData.customHashCode != null)) {
+        operation = new BeanPrototypeOperationDefaultMethod(prototype, beanMethod.getMethod(),
+            introspectionData.customHashCode.getMethod());
+      } else {
+        operation = BeanPrototypeOperation.create(beanMethod, prototype);
+      }
       method2OperationMap.put(beanMethod.getMethod(), operation);
     }
   }
@@ -293,12 +287,12 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param bean the {@link Bean} instance to create this property for.
    * @return the new property instance.
    */
-  private AbstractGenericProperty<?> createProperty(BeanMethod beanMethod, GenericType<?> beanType, Bean bean) {
+  private AbstractProperty<?> createProperty(BeanMethod beanMethod, GenericType<?> beanType, Bean bean) {
 
     Method method = beanMethod.getMethod();
-    AbstractGenericProperty<?> property = null;
+    AbstractProperty<?> property = null;
     if (method.isDefault()) {
-      property = (AbstractGenericProperty<?>) LookupHelper.INSTANCE.invokeDefaultMethod(bean, method,
+      property = (AbstractProperty<?>) LookupHelper.INSTANCE.invokeDefaultMethod(bean, method,
           ReflectionUtilLimited.NO_ARGUMENTS);
       property = property.copy(beanMethod.getPropertyName(), bean);
     }
@@ -317,7 +311,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param bean the {@link WritableProperty#getBean() property bean}.
    * @return the new property instance.
    */
-  protected <V> AbstractGenericProperty<V> createProperty(String name, GenericType<V> type, Bean bean) {
+  protected <V> AbstractProperty<V> createProperty(String name, GenericType<V> type, Bean bean) {
 
     return createProperty(name, type, bean, WritableProperty.class);
   }
@@ -329,13 +323,13 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param bean the {@link WritableProperty#getBean() property bean}.
    * @param propertyClass the {@link Class} reflecting the {@link WritableProperty} or <code>null</code> if no property
    *        method exists and this method is called for plain getter or setter.
-   * @return the new instance of {@link AbstractGenericProperty}.
+   * @return the new instance of {@link AbstractProperty}.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  protected <V> AbstractGenericProperty<V> createProperty(String name, GenericType<V> type, Bean bean,
+  protected <V> AbstractProperty<V> createProperty(String name, GenericType<V> type, Bean bean,
       Class<?> propertyClass) {
 
-    AbstractGenericProperty result;
+    AbstractProperty result;
     if ((!propertyClass.isInterface()) && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
       result = createPropertyFromSpecifiedClass(name, type, bean, propertyClass);
     } else {
@@ -355,7 +349,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     return result;
   }
 
-  private AbstractGenericProperty<?> createPropertyFromSpecifiedClass(String name, GenericType<?> type, Bean bean,
+  private AbstractProperty<?> createPropertyFromSpecifiedClass(String name, GenericType<?> type, Bean bean,
       Class<?> propertyClass) {
 
     Constructor<?> constructor = null;
@@ -366,17 +360,17 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         if ((parameterTypes.length >= 2) && (parameterTypes.length <= 4) && (parameterTypes[0] == String.class)) {
           if (parameterTypes[1] == Bean.class) {
             if (parameterTypes.length == 2) {
-              return (AbstractGenericProperty<?>) constructor.newInstance(new Object[] { name, bean });
+              return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, bean });
             } else if ((parameterTypes.length == 3) && (parameterTypes[2] == AbstractValidator.class)) {
-              return (AbstractGenericProperty<?>) constructor
+              return (AbstractProperty<?>) constructor
                   .newInstance(new Object[] { name, bean, ValidatorNone.getInstance() });
             }
           } else if ((parameterTypes[1] == GenericType.class) && (parameterTypes.length >= 3)
               && (parameterTypes[2] == Bean.class)) {
             if (parameterTypes.length == 3) {
-              return (AbstractGenericProperty<?>) constructor.newInstance(new Object[] { name, type, bean });
+              return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, type, bean });
             } else if (parameterTypes[3] == AbstractValidator.class) {
-              return (AbstractGenericProperty<?>) constructor
+              return (AbstractProperty<?>) constructor
                   .newInstance(new Object[] { name, type, bean, ValidatorNone.getInstance() });
             }
           }
@@ -390,6 +384,99 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     } catch (InvocationTargetException e) {
       throw new InvocationFailedException(e, constructor);
     }
+  }
+
+  /**
+   * A container for the methods of a {@link Bean} and related introspection data.
+   */
+  protected class BeanIntrospectionData {
+
+    private final GenericType<?> beanType;
+
+    private final String beanTypeName;
+
+    private final BeanAccessPrototype<?> prototype;
+
+    private final Collection<BeanMethod> methods;
+
+    private final Set<Class<?>> typesVisited;
+
+    private final Set<NamedSignature> signatures;
+
+    private BeanMethod customHashCode;
+
+    private BeanMethod customEquals;
+
+    /**
+     * The constructor.
+     *
+     * @param beanType the {@link GenericType} of the {@link Bean} to introspect.
+     * @param prototype the corresponding {@link BeanAccessPrototype}.
+     */
+    public BeanIntrospectionData(GenericType<?> beanType, BeanAccessPrototype<?> prototype) {
+      super();
+      this.beanType = beanType;
+      this.prototype = prototype;
+      this.methods = new ArrayList<>();
+      this.typesVisited = new HashSet<>();
+      this.signatures = new HashSet<>();
+      this.beanTypeName = this.beanType.getAssignmentClass().getSimpleName();
+    }
+
+    /**
+     * @param type the {@link Class} reflecting the {@link Bean} or one of its parent types to visit.
+     * @return <code>true</code> if the given {@link Class} should be visited (introspected), <code>false</code> if it
+     *         has already been visited.
+     */
+    public boolean visitType(Class<?> type) {
+
+      boolean added = this.typesVisited.add(type);
+      if (added) {
+        getLogger().trace("{}: Introspecting type {}", this.beanTypeName, type);
+      } else {
+        getLogger().trace("{}: Already visited type {}", this.beanTypeName, type);
+      }
+      return added;
+    }
+
+    /**
+     * Analyze and add the given {@link Method}.
+     *
+     * @param method the {@link Method} to analyze and add if relevant.
+     * @param type the {@link Class} (or mainly interface) declaring the {@link Method}.
+     */
+    public void addMethod(Method method, Class<?> type) {
+
+      BeanMethod beanMethod = new BeanMethod(method);
+      BeanMethodType methodType = beanMethod.getMethodType();
+      if (methodType == null) {
+        if ((type != Object.class) && !Modifier.isStatic(method.getModifiers())) {
+          NamedSignature signature = new NamedSignature(method);
+          if (!this.signatures.contains(signature)) {
+            getLogger().warn("{}: Unmapped bean method {}", this.beanTypeName, method);
+          }
+        }
+      } else {
+        NamedSignature signature = new NamedSignature(method);
+        boolean added = this.signatures.add(signature);
+        if (added) {
+          getLogger().trace("{}: Added signature {} for method {}", this.beanTypeName, signature, method);
+        } else {
+          getLogger().warn("{}: Duplicate signature {} ignoring method {}", this.beanTypeName, signature, method);
+          return;
+        }
+        this.methods.add(beanMethod);
+        if (methodType == BeanMethodType.PROPERTY) {
+          AbstractProperty<?> property = createProperty(beanMethod, this.beanType, this.prototype.getBean());
+          this.prototype.addProperty(property);
+        } else if (methodType == BeanMethodType.CUSTOM_EQUALS) {
+          this.customEquals = beanMethod;
+        } else if (methodType == BeanMethodType.CUSTOM_HASH_CODE) {
+          this.customHashCode = beanMethod;
+        }
+      }
+    }
+
   }
 
 }

@@ -21,6 +21,8 @@ import net.sf.mmm.util.property.api.WritableStringProperty;
  * and send back when the bean is marshaled again.</li>
  * <li>Automatic - no need to implement methods such as {@link #equals(Object)}, {@link #hashCode()}, or
  * {@link #toString()}. Also general getters and setters are automatically implemented.</li>
+ * <li>Flexibility - add any custom logic to your {@link Bean} interface via default methods including custom
+ * implementations of {@link CustomEquals equals} and {@link CustomHashCode hashCode} if needed.</li>
  * <li>ReadOnly-Support - {@link BeanFactory#getReadOnlyBean(Bean) create} a {@link BeanAccess#isReadOnly() read-only}
  * view of your object to pass by reference without side-effects.</li>
  * <li>Powerful properties - {@link WritableProperty} is based on JavaFx {@link Property} supporting listeners and

@@ -5,6 +5,8 @@ package net.sf.mmm.util.bean.impl;
 import java.lang.reflect.Method;
 
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.bean.api.CustomEquals;
+import net.sf.mmm.util.bean.api.CustomHashCode;
 import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
@@ -19,21 +21,21 @@ import net.sf.mmm.util.property.api.WritableProperty;
 public enum BeanMethodType {
 
   /**
-   * Getter for {@link WriteableProperty#getValue() property value}.
+   * Getter for {@link WritableProperty#getValue() property value}.
    *
    * @see BeanPrototypeOperationGet
    */
   GET,
 
   /**
-   * Setter for {@link WriteableProperty#setValue(Object) property value}.
+   * Setter for {@link WritableProperty#setValue(Object) property value}.
    *
    * @see BeanPrototypeOperationSet
    */
   SET,
 
   /**
-   * Getter for {@link WriteableProperty property}.
+   * Getter for {@link WritableProperty property}.
    *
    * @see BeanPrototypeOperationProperty
    */
@@ -72,6 +74,20 @@ public enum BeanMethodType {
    *
    * @see BeanPrototypeOperationDefaultMethod
    */
-  DEFAULT_METHOD
+  DEFAULT_METHOD,
+
+  /**
+   * {@link Method#isDefault() default method} for {@link Object#hashCode()}.
+   *
+   * @see CustomHashCode
+   */
+  CUSTOM_HASH_CODE,
+
+  /**
+   * {@link Method#isDefault() default method} for {@link Object#equals(Object)}.
+   *
+   * @see CustomEquals
+   */
+  CUSTOM_EQUALS
 
 }

@@ -18,7 +18,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class NumberProperty<V extends Number> extends AbstractRegularPropertyImpl<Number>
+public abstract class NumberProperty<V extends Number> extends AbstractRegularProperty<Number>
     implements WritableNumberProperty {
 
   private static final GenericType<Number> TYPE = new SimpleGenericTypeImpl<>(Number.class);

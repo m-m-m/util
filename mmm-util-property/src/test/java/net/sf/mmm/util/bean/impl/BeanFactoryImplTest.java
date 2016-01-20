@@ -15,6 +15,9 @@ import net.sf.mmm.test.ObjectHelper;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
+import net.sf.mmm.util.bean.api.CustomEquals;
+import net.sf.mmm.util.bean.api.CustomHashCode;
+import net.sf.mmm.util.bean.impl.example.CustomEqHcBean;
 import net.sf.mmm.util.bean.impl.example.ExampleBean;
 import net.sf.mmm.util.bean.impl.example.ExamplePojoBean;
 import net.sf.mmm.util.bean.impl.example.ExamplePropertyBean;
@@ -199,6 +202,21 @@ public class BeanFactoryImplTest extends Assertions {
       propertyNames.add(property.getName());
     }
     assertThat(propertyNames).hasSize(expectedSize).contains(properties);
+  }
+
+  /**
+   * Test of {@link CustomEquals} and {@link CustomHashCode}.
+   */
+  @Test
+  public void testCustomEqualsAndHashCode() {
+
+    BeanFactory beanFactory = getBeanFactory();
+    CustomEqHcBean bean1 = beanFactory.create(CustomEqHcBean.class);
+    int magic = 42;
+    bean1.Value().set(magic);
+    assertThat(bean1.hashCode()).isEqualTo(-magic).isEqualTo(bean1.hash());
+    CustomEqHcBean bean2 = beanFactory.copy(bean1);
+    ObjectHelper.checkEqualsAndHashCode(bean1, bean2, true);
   }
 
 }

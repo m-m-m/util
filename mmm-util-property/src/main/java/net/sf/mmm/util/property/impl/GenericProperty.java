@@ -19,7 +19,7 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderObject;
  * @author hohwille
  * @since 8.0.0
  */
-public class GenericProperty<VALUE> extends AbstractRegularPropertyImpl<VALUE> {
+public class GenericProperty<VALUE> extends AbstractRegularProperty<VALUE> {
 
   private VALUE value;
 

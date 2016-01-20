@@ -17,7 +17,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.WritableListProperty;
-import net.sf.mmm.util.property.base.AbstractGenericProperty;
+import net.sf.mmm.util.property.base.AbstractProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -33,7 +33,7 @@ import net.sf.mmm.util.validation.base.collection.ValidatorBuilderCollection;
  * @since 8.0.0
  */
 @SuppressWarnings("restriction")
-public class ListProperty<E> extends AbstractGenericProperty<ObservableList<E>> implements WritableListProperty<E> {
+public class ListProperty<E> extends AbstractProperty<ObservableList<E>> implements WritableListProperty<E> {
 
   @SuppressWarnings("rawtypes")
   private static final GenericType TYPE = new SimpleGenericTypeImpl<>(ObservableList.class);

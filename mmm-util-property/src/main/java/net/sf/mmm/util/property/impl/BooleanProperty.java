@@ -17,7 +17,7 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
  * @author hohwille
  * @since 8.0.0
  */
-public class BooleanProperty extends AbstractRegularPropertyImpl<Boolean> implements WritableBooleanProperty {
+public class BooleanProperty extends AbstractRegularProperty<Boolean> implements WritableBooleanProperty {
 
   private static final GenericType<Boolean> TYPE = new SimpleGenericTypeImpl<>(Boolean.class);
 

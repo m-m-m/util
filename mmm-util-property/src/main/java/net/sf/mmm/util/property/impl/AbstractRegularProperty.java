@@ -8,7 +8,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.base.AbstractGenericProperty;
+import net.sf.mmm.util.property.base.AbstractProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
@@ -20,7 +20,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @since 8.0.0
  */
 @SuppressWarnings("restriction")
-public abstract class AbstractRegularPropertyImpl<VALUE> extends AbstractGenericProperty<VALUE> {
+public abstract class AbstractRegularProperty<VALUE> extends AbstractProperty<VALUE> {
 
   private ExpressionHelper<VALUE> helper;
 
@@ -31,7 +31,7 @@ public abstract class AbstractRegularPropertyImpl<VALUE> extends AbstractGeneric
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractRegularPropertyImpl(String name, GenericType<VALUE> type, Bean bean) {
+  public AbstractRegularProperty(String name, GenericType<VALUE> type, Bean bean) {
     this(name, type, bean, null);
   }
 
@@ -43,7 +43,7 @@ public abstract class AbstractRegularPropertyImpl<VALUE> extends AbstractGeneric
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractRegularPropertyImpl(String name, GenericType<VALUE> type, Bean bean,
+  public AbstractRegularProperty(String name, GenericType<VALUE> type, Bean bean,
       AbstractValidator<? super VALUE> validator) {
     super(name, type, bean, validator);
   }

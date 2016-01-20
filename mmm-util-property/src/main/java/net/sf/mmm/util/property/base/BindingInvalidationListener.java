@@ -18,21 +18,21 @@ import net.sf.mmm.util.property.impl.GenericProperty;
  */
 class BindingInvalidationListener implements InvalidationListener {
 
-  private final WeakReference<AbstractGenericProperty<?>> weakReference;
+  private final WeakReference<AbstractProperty<?>> weakReference;
 
   /**
    * The constructor.
    *
    * @param property the property to {@link WritableProperty#bind(javafx.beans.value.ObservableValue) bind}.
    */
-  public BindingInvalidationListener(AbstractGenericProperty<?> property) {
+  public BindingInvalidationListener(AbstractProperty<?> property) {
     this.weakReference = new WeakReference<>(property);
   }
 
   @Override
   public void invalidated(Observable observable) {
 
-    AbstractGenericProperty<?> property = this.weakReference.get();
+    AbstractProperty<?> property = this.weakReference.get();
     if (property == null) {
       observable.removeListener(this);
     } else {

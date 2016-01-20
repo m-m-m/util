@@ -26,6 +26,18 @@ public class BeanMethod {
 
   private static final String PREFIX_HAS = "has";
 
+  private static final String NAME_ACCESS = "access";
+
+  private static final String NAME_EQUALS = "equals";
+
+  private static final String NAME_IS_EQUAL_TO = "isEqualTo";
+
+  private static final String NAME_HASH_CODE = "hashCode";
+
+  private static final String NAME_HASH = "hash";
+
+  private static final String NAME_TO_STRING = "toString";
+
   private final Method method;
 
   private final BeanMethodType methodType;
@@ -44,21 +56,24 @@ public class BeanMethod {
     this.method = method;
     String name = this.method.getName();
     char first = name.charAt(0);
-    Type[] parameterTypes = this.method.getGenericParameterTypes();
+    boolean defaultMethod = method.isDefault();
+    Class<?>[] parameterTypes = this.method.getParameterTypes();
     BeanMethodType mType = null;
     String pName = null;
     Type pType = null;
     if (parameterTypes.length == 0) {
-      if (name.equals("access")) {
+      if (name.equals(NAME_ACCESS)) {
         mType = BeanMethodType.ACCESS;
+      } else if (name.equals(NAME_HASH) && defaultMethod) {
+        mType = BeanMethodType.CUSTOM_HASH_CODE;
       } else if (name.equals("getClass")) {
         // ignore getClass()
       } else if (Character.isUpperCase(first)) {
         mType = BeanMethodType.PROPERTY;
         pName = name;
-      } else if (name.equals("hashCode")) {
+      } else if (name.equals(NAME_HASH_CODE)) {
         mType = BeanMethodType.HASH_CODE;
-      } else if (name.equals("toString")) {
+      } else if (name.equals(NAME_TO_STRING)) {
         mType = BeanMethodType.TO_STRING;
       } else if (name.endsWith(SUFFIX_PROPERTY)) {
         mType = BeanMethodType.PROPERTY;
@@ -76,12 +91,15 @@ public class BeanMethod {
       pName = getCapitalSuffixAfterPrefix(name, PREFIX_SET);
       if (pName != null) {
         mType = BeanMethodType.SET;
-        pType = parameterTypes[0];
-      } else if ((name.equals("equals")) && (parameterTypes[0] == Object.class)) {
+        pType = method.getGenericParameterTypes()[0];
+      } else if (name.equals(NAME_IS_EQUAL_TO) && defaultMethod
+          && Bean.class.isAssignableFrom(parameterTypes[0])) {
+        mType = BeanMethodType.CUSTOM_EQUALS;
+      } else if (name.equals(NAME_EQUALS) && (parameterTypes[0] == Object.class)) {
         mType = BeanMethodType.EQUALS;
       }
     }
-    if ((mType == null) && method.isDefault()) {
+    if ((mType == null) && defaultMethod) {
       mType = BeanMethodType.DEFAULT_METHOD;
     }
     this.methodType = mType;
