@@ -5,7 +5,6 @@ package net.sf.mmm.util.property.api;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.StringExpression;
-import javafx.beans.value.ObservableStringValue;
 import javafx.beans.value.WritableStringValue;
 
 /**
@@ -16,7 +15,7 @@ import javafx.beans.value.WritableStringValue;
  * @since 8.0.0
  */
 public interface WritableStringProperty
-    extends WritableProperty<String>, ObservableStringValue, WritableStringValue {
+    extends ReadableStringProperty, WritableProperty<String>, WritableStringValue {
 
   @Override
   default String get() {

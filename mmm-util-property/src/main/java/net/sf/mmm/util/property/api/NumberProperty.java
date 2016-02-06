@@ -20,19 +20,12 @@ public abstract class NumberProperty<V extends Number> extends AbstractRegularPr
 
   /**
    * The constructor.
-   */
-  public NumberProperty() {
-    this(null, null);
-  }
-
-  /**
-   * The constructor.
    *
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
   public NumberProperty(String name, Bean bean) {
-    super(name, TYPE, bean);
+    super(name, bean);
   }
 
   /**
@@ -43,7 +36,7 @@ public abstract class NumberProperty<V extends Number> extends AbstractRegularPr
    * @param validator - see {@link #validate()}.
    */
   public NumberProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
-    super(name, TYPE, bean, validator);
+    super(name, bean, validator);
   }
 
   @SuppressWarnings("unchecked")

@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
 
@@ -16,18 +17,23 @@ public abstract class BooleanPropertyExpression extends AbstractRegularPropertyE
 
   /**
    * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param validator - see {@link #validate()}.
    */
-  public BooleanPropertyExpression() {
-    super();
+  public BooleanPropertyExpression(String name, Bean bean, AbstractValidator<? super Boolean> validator) {
+    super(name, bean, validator);
   }
 
   /**
    * The constructor.
    *
-   * @param validator - see {@link #validate()}.
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    */
-  public BooleanPropertyExpression(AbstractValidator<? super Boolean> validator) {
-    super(validator);
+  public BooleanPropertyExpression(String name, Bean bean) {
+    super(name, bean);
   }
 
   @Override

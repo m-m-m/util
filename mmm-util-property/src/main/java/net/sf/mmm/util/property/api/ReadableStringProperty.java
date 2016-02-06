@@ -7,6 +7,8 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.StringExpression;
 import javafx.beans.value.ObservableStringValue;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
  * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}
@@ -16,6 +18,14 @@ import javafx.beans.value.ObservableStringValue;
  * @since 8.0.0
  */
 public interface ReadableStringProperty extends ReadableProperty<String>, ObservableStringValue {
+  /** @see #getType */
+  GenericType<String> TYPE = new SimpleGenericTypeImpl<>(String.class);
+
+  @Override
+  default GenericType<String> getType() {
+
+    return TYPE;
+  }
 
   @Override
   default String get() {

@@ -20,6 +20,8 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderObject;
  */
 public class GenericProperty<VALUE> extends AbstractRegularProperty<VALUE> {
 
+  private final GenericType<VALUE> type;
+
   private VALUE value;
 
   /**
@@ -43,22 +45,14 @@ public class GenericProperty<VALUE> extends AbstractRegularProperty<VALUE> {
    */
   public GenericProperty(String name, GenericType<VALUE> type, Bean bean,
       AbstractValidator<? super VALUE> validator) {
-    super(name, type, bean);
+    super(name, bean, validator);
+    this.type = type;
   }
 
-  /**
-   * Creates a new empty instance of this property with the given new parameters.
-   *
-   * @param newName the new {@link #getName() name}.
-   * @param newBean the new {@link #getBean() bean}.
-   * @param newValidator the new {@link #getValidator() validator}.
-   * @return the new property instance.
-   */
   @Override
-  public GenericProperty<VALUE> copy(String newName, Bean newBean,
-      AbstractValidator<? super VALUE> newValidator) {
+  public GenericType<VALUE> getType() {
 
-    return new GenericProperty<>(newName, getType(), newBean, newValidator);
+    return this.type;
   }
 
   @Override

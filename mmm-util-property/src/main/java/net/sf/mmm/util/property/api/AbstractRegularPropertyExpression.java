@@ -31,19 +31,23 @@ public abstract class AbstractRegularPropertyExpression<VALUE> extends AbstractP
 
   /**
    * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    */
-  public AbstractRegularPropertyExpression() {
-    this(null);
+  public AbstractRegularPropertyExpression(String name, Bean bean) {
+    super(name, bean);
   }
 
   /**
    * The constructor.
    *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractRegularPropertyExpression(AbstractValidator<? super VALUE> validator) {
-
-    super(validator);
+  public AbstractRegularPropertyExpression(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
+    super(name, bean, validator);
   }
 
   @Override
@@ -144,14 +148,6 @@ public abstract class AbstractRegularPropertyExpression<VALUE> extends AbstractP
   public boolean isValid() {
 
     return validate() == null;
-  }
-
-  @Override
-  public AbstractProperty<VALUE> copy(String newName, Bean newBean,
-      AbstractValidator<? super VALUE> newValidator) {
-
-    // TODO
-    return this;
   }
 
 }

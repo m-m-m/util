@@ -25,7 +25,7 @@ public class BooleanProperty extends AbstractRegularProperty<Boolean> implements
    * @param bean - see {@link #getBean()}.
    */
   public BooleanProperty(String name, Bean bean) {
-    super(name, TYPE, bean);
+    super(name, bean);
   }
 
   /**
@@ -36,7 +36,7 @@ public class BooleanProperty extends AbstractRegularProperty<Boolean> implements
    * @param validator - see {@link #validate()}.
    */
   public BooleanProperty(String name, Bean bean, AbstractValidator<? super Boolean> validator) {
-    super(name, TYPE, bean, validator);
+    super(name, bean, validator);
   }
 
   @Override
@@ -53,12 +53,6 @@ public class BooleanProperty extends AbstractRegularProperty<Boolean> implements
     }
     this.value = newValue;
     return true;
-  }
-
-  @Override
-  public BooleanProperty copy(String newName, Bean newBean, AbstractValidator<? super Boolean> newValidator) {
-
-    return new BooleanProperty(newName, newBean, newValidator);
   }
 
   @Override

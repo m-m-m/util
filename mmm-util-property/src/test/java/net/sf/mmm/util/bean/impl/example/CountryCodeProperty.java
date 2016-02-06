@@ -44,10 +44,4 @@ public class CountryCodeProperty extends StringProperty {
     super(name, bean, validator);
   }
 
-  @Override
-  public StringProperty copy(String newName, Bean newBean, AbstractValidator<? super String> newValidator) {
-
-    return new CountryCodeProperty(newName, newBean, newValidator);
-  }
-
 }

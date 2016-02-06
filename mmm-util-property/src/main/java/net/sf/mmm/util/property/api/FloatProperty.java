@@ -18,13 +18,6 @@ public class FloatProperty extends NumberProperty<Float> implements WritableFloa
 
   /**
    * The constructor.
-   */
-  public FloatProperty() {
-    super();
-  }
-
-  /**
-   * The constructor.
    *
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
@@ -64,12 +57,6 @@ public class FloatProperty extends NumberProperty<Float> implements WritableFloa
   protected void doSetNumber(Float newValue) {
 
     this.value = newValue;
-  }
-
-  @Override
-  public FloatProperty copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
-
-    return new FloatProperty(newName, newBean, newValidator);
   }
 
   @Override

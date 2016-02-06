@@ -17,6 +17,8 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 public abstract class AbstractContainerProperty<VALUE> extends AbstractGenericProperty<VALUE>
     implements ReadableContainerProperty<VALUE> {
 
+  private final GenericType<VALUE> type;
+
   private SizeProperty sizeProperty;
 
   private EmptyProperty emptyProperty;
@@ -29,7 +31,7 @@ public abstract class AbstractContainerProperty<VALUE> extends AbstractGenericPr
    * @param bean - see {@link #getBean()}.
    */
   public AbstractContainerProperty(String name, GenericType<VALUE> type, Bean bean) {
-    super(name, type, bean);
+    this(name, type, bean, null);
   }
 
   /**
@@ -42,7 +44,14 @@ public abstract class AbstractContainerProperty<VALUE> extends AbstractGenericPr
    */
   public AbstractContainerProperty(String name, GenericType<VALUE> type, Bean bean,
       AbstractValidator<? super VALUE> validator) {
-    super(name, type, bean, validator);
+    super(name, bean, validator);
+    this.type = type;
+  }
+
+  @Override
+  public GenericType<VALUE> getType() {
+
+    return this.type;
   }
 
   @Override
@@ -77,22 +86,18 @@ public abstract class AbstractContainerProperty<VALUE> extends AbstractGenericPr
   }
 
   private class SizeProperty extends IntegerPropertyExpression {
+
+    /**
+     * The constructor.
+     */
+    public SizeProperty() {
+      super(AbstractContainerProperty.this.getName() + ".size", AbstractContainerProperty.this.getBean());
+    }
+
     @Override
     public Integer getValue() {
 
       return Integer.valueOf(size());
-    }
-
-    @Override
-    public Bean getBean() {
-
-      return AbstractContainerProperty.this.getBean();
-    }
-
-    @Override
-    public String getName() {
-
-      return AbstractContainerProperty.this.getName() + ".size";
     }
 
     @Override
@@ -104,22 +109,17 @@ public abstract class AbstractContainerProperty<VALUE> extends AbstractGenericPr
 
   private class EmptyProperty extends BooleanPropertyExpression {
 
+    /**
+     * The constructor.
+     */
+    public EmptyProperty() {
+      super(AbstractContainerProperty.this.getName() + ".empty", AbstractContainerProperty.this.getBean());
+    }
+
     @Override
     public Boolean getValue() {
 
       return Boolean.valueOf(isEmpty());
-    }
-
-    @Override
-    public Bean getBean() {
-
-      return AbstractContainerProperty.this.getBean();
-    }
-
-    @Override
-    public String getName() {
-
-      return AbstractContainerProperty.this.getName() + ".empty";
     }
 
     @Override

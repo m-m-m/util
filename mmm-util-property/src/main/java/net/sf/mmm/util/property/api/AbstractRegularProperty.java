@@ -7,7 +7,6 @@ import com.sun.javafx.binding.ExpressionHelper;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
@@ -28,24 +27,21 @@ public abstract class AbstractRegularProperty<VALUE> extends AbstractGenericProp
    * The constructor.
    *
    * @param name - see {@link #getName()}.
-   * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractRegularProperty(String name, GenericType<VALUE> type, Bean bean) {
-    this(name, type, bean, null);
+  public AbstractRegularProperty(String name, Bean bean) {
+    this(name, bean, null);
   }
 
   /**
    * The constructor.
    *
    * @param name - see {@link #getName()}.
-   * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractRegularProperty(String name, GenericType<VALUE> type, Bean bean,
-      AbstractValidator<? super VALUE> validator) {
-    super(name, type, bean, validator);
+  public AbstractRegularProperty(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
+    super(name, bean, validator);
   }
 
   @Override

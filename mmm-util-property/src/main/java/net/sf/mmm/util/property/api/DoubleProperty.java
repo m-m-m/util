@@ -18,13 +18,6 @@ public class DoubleProperty extends NumberProperty<Double> implements WritableDo
 
   /**
    * The constructor.
-   */
-  public DoubleProperty() {
-    super();
-  }
-
-  /**
-   * The constructor.
    *
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
@@ -64,12 +57,6 @@ public class DoubleProperty extends NumberProperty<Double> implements WritableDo
   protected void doSetNumber(Double newValue) {
 
     this.value = newValue;
-  }
-
-  @Override
-  public DoubleProperty copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
-
-    return new DoubleProperty(newName, newBean, newValidator);
   }
 
   @Override

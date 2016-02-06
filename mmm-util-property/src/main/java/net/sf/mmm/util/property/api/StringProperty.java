@@ -5,8 +5,6 @@ package net.sf.mmm.util.property.api;
 import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
 
@@ -18,8 +16,6 @@ import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
  */
 public class StringProperty extends AbstractRegularProperty<String> implements WritableStringProperty {
 
-  private static final GenericType<String> TYPE = new SimpleGenericTypeImpl<>(String.class);
-
   private String value;
 
   /**
@@ -29,7 +25,7 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
    * @param bean - see {@link #getBean()}.
    */
   public StringProperty(String name, Bean bean) {
-    super(name, TYPE, bean);
+    super(name, bean);
   }
 
   /**
@@ -40,7 +36,7 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
    * @param validator - see {@link #validate()}.
    */
   public StringProperty(String name, Bean bean, AbstractValidator<? super String> validator) {
-    super(name, TYPE, bean, validator);
+    super(name, bean, validator);
   }
 
   @Override
@@ -57,12 +53,6 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
     }
     this.value = newValue;
     return true;
-  }
-
-  @Override
-  public StringProperty copy(String newName, Bean newBean, AbstractValidator<? super String> newValidator) {
-
-    return new StringProperty(newName, newBean, newValidator);
   }
 
   @Override

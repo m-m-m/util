@@ -109,13 +109,6 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
     ListExpressionHelper.fireValueChangedEvent(this.helper, change);
   }
 
-  @Override
-  public ListProperty<E> copy(String newName, Bean newBean,
-      AbstractValidator<? super ObservableList<E>> newValidator) {
-
-    return new ListProperty<>(newName, getType(), newBean, newValidator);
-  }
-
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
   public AbstractCollectionValidatorBuilder<E, ObservableList<E>, PropertyBuilder<ListProperty<E>>, ?> withValdidator() {

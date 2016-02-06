@@ -18,13 +18,6 @@ public class LongProperty extends NumberProperty<Long> implements WritableLongPr
 
   /**
    * The constructor.
-   */
-  public LongProperty() {
-    super();
-  }
-
-  /**
-   * The constructor.
    *
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
@@ -64,12 +57,6 @@ public class LongProperty extends NumberProperty<Long> implements WritableLongPr
   protected void doSetNumber(Long newValue) {
 
     this.value = newValue;
-  }
-
-  @Override
-  public LongProperty copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
-
-    return new LongProperty(newName, newBean, newValidator);
   }
 
   @Override

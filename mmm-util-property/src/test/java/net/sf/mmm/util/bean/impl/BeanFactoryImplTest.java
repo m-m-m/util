@@ -99,7 +99,9 @@ public class BeanFactoryImplTest extends Assertions {
     }
 
     // test equals
-    ObjectHelper.checkEqualsAndHashCode(bean, beanFactory.copy(bean), true);
+    Bean copy = beanFactory.copy(bean);
+    assertThat(copy).isNotSameAs(bean);
+    ObjectHelper.checkEqualsAndHashCode(bean, copy, true);
   }
 
   private void verifyExamplePropertyBean(ExamplePropertyBean bean, BeanFactory beanFactory) {

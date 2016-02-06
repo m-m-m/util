@@ -114,13 +114,6 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
     MapExpressionHelper.fireValueChangedEvent(this.helper, change);
   }
 
-  @Override
-  public MapProperty<K, V> copy(String newName, Bean newBean,
-      AbstractValidator<? super ObservableMap<K, V>> newValidator) {
-
-    return new MapProperty<>(newName, getType(), newBean, newValidator);
-  }
-
   // @SuppressWarnings({ "unchecked", "rawtypes" })
   // @Override
   // public AbstractMapValidatorBuilder<K, V, ObservableMap<K, V>, PropertyBuilder<MapProperty<K, V>>, ?>

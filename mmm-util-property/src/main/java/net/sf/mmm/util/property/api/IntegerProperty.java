@@ -18,13 +18,6 @@ public class IntegerProperty extends NumberProperty<Integer> implements Writable
 
   /**
    * The constructor.
-   */
-  public IntegerProperty() {
-    super();
-  }
-
-  /**
-   * The constructor.
    *
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
@@ -64,12 +57,6 @@ public class IntegerProperty extends NumberProperty<Integer> implements Writable
   protected void doSetNumber(Integer newValue) {
 
     this.value = newValue;
-  }
-
-  @Override
-  public IntegerProperty copy(String newName, Bean newBean, AbstractValidator<? super Number> newValidator) {
-
-    return new IntegerProperty(newName, newBean, newValidator);
   }
 
   @Override

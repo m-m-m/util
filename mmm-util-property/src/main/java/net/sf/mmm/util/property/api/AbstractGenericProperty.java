@@ -9,7 +9,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.value.ObservableValue;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidationFailure;
@@ -24,12 +23,6 @@ import net.sf.mmm.util.validation.base.ValidationFailureSuccess;
  */
 public abstract class AbstractGenericProperty<VALUE> extends AbstractProperty<VALUE> {
 
-  private final Bean bean;
-
-  private final String name;
-
-  private final GenericType<VALUE> type;
-
   private ValidationFailure validationResult;
 
   private ReadOnlyPropertyImpl<VALUE> readOnlyProperty;
@@ -42,27 +35,32 @@ public abstract class AbstractGenericProperty<VALUE> extends AbstractProperty<VA
    * The constructor.
    *
    * @param name - see {@link #getName()}.
-   * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractGenericProperty(String name, GenericType<VALUE> type, Bean bean) {
-    this(name, type, bean, null);
+  public AbstractGenericProperty(String name, Bean bean) {
+    this(name, bean, null);
   }
 
   /**
    * The constructor.
    *
    * @param name - see {@link #getName()}.
-   * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractGenericProperty(String name, GenericType<VALUE> type, Bean bean,
-      AbstractValidator<? super VALUE> validator) {
-    super(validator);
-    this.name = name;
-    this.type = type;
-    this.bean = bean;
+  public AbstractGenericProperty(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
+    super(name, bean, validator);
+  }
+
+  @Override
+  protected AbstractGenericProperty<VALUE> copy() {
+
+    AbstractGenericProperty<VALUE> copy = (AbstractGenericProperty<VALUE>) super.copy();
+    copy.binding = null;
+    copy.bindingListener = null;
+    copy.readOnlyProperty = null;
+    copy.validationResult = null;
+    return copy;
   }
 
   @Override
@@ -122,24 +120,6 @@ public abstract class AbstractGenericProperty<VALUE> extends AbstractProperty<VA
   public void unbindBidirectional(Property<VALUE> other) {
 
     Bindings.unbindBidirectional(this, other);
-  }
-
-  @Override
-  public Bean getBean() {
-
-    return this.bean;
-  }
-
-  @Override
-  public String getName() {
-
-    return this.name;
-  }
-
-  @Override
-  public GenericType<VALUE> getType() {
-
-    return this.type;
   }
 
   @Override

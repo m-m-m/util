@@ -107,13 +107,6 @@ public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> 
     SetExpressionHelper.fireValueChangedEvent(this.helper, change);
   }
 
-  @Override
-  public SetProperty<E> copy(String newName, Bean newBean,
-      AbstractValidator<? super ObservableSet<E>> newValidator) {
-
-    return new SetProperty<>(newName, getType(), newBean, newValidator);
-  }
-
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
   public AbstractCollectionValidatorBuilder<E, ObservableSet<E>, PropertyBuilder<SetProperty<E>>, ?> withValdidator() {

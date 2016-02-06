@@ -18,29 +18,71 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE> {
+public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>, Cloneable {
+
+  private String name;
+
+  private Bean bean;
 
   private AbstractValidator<? super VALUE> validator;
 
   /**
    * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    */
-  public AbstractProperty() {
-    this(null);
+  public AbstractProperty(String name, Bean bean) {
+    this(name, bean, null);
   }
 
   /**
    * The constructor.
    *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractProperty(AbstractValidator<? super VALUE> validator) {
+  public AbstractProperty(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
     super();
+    this.name = name;
+    this.bean = bean;
     if (validator == null) {
       this.validator = ValidatorNone.getInstance();
     } else {
       this.validator = validator;
     }
+  }
+
+  @Override
+  public String getName() {
+
+    return this.name;
+  }
+
+  @Override
+  public Bean getBean() {
+
+    return this.bean;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  protected AbstractProperty<VALUE> clone() {
+
+    try {
+      return (AbstractProperty<VALUE>) super.clone();
+    } catch (CloneNotSupportedException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
+  /**
+   * @return a new empty instance of this property.
+   */
+  protected AbstractProperty<VALUE> copy() {
+
+    return clone();
   }
 
   /**
@@ -51,7 +93,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    */
   public final AbstractProperty<VALUE> copy(Bean newBean) {
 
-    return copy(getName(), newBean, this.validator);
+    return copy(this.name, newBean, this.validator);
   }
 
   /**
@@ -62,7 +104,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    */
   public final AbstractProperty<VALUE> copy(AbstractValidator<? super VALUE> newValidator) {
 
-    return copy(getName(), getBean(), newValidator);
+    return copy(this.name, this.bean, newValidator);
   }
 
   /**
@@ -74,7 +116,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    */
   public final AbstractProperty<VALUE> copy(Bean newBean, AbstractValidator<? super VALUE> newValidator) {
 
-    return copy(getName(), newBean, newValidator);
+    return copy(this.name, newBean, newValidator);
   }
 
   /**
@@ -97,8 +139,15 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    * @param newValidator the new {@link #getValidator() validator}.
    * @return the new property instance.
    */
-  public abstract AbstractProperty<VALUE> copy(String newName, Bean newBean,
-      AbstractValidator<? super VALUE> newValidator);
+  public final AbstractProperty<VALUE> copy(String newName, Bean newBean,
+      AbstractValidator<? super VALUE> newValidator) {
+
+    AbstractProperty<VALUE> copy = clone();
+    copy.name = newName;
+    copy.bean = newBean;
+    copy.validator = newValidator;
+    return copy;
+  }
 
   /**
    * Assigns the {@link #getValue() value} from the {@link ObservableValue} (typically a {@link WritableProperty}) to

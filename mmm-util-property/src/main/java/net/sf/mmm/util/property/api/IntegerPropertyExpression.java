@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderInteger;
 
@@ -16,18 +17,23 @@ public abstract class IntegerPropertyExpression extends AbstractRegularPropertyE
 
   /**
    * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    */
-  public IntegerPropertyExpression() {
-    super();
+  public IntegerPropertyExpression(String name, Bean bean) {
+    super(name, bean);
   }
 
   /**
    * The constructor.
    *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public IntegerPropertyExpression(AbstractValidator<? super Number> validator) {
-    super(validator);
+  public IntegerPropertyExpression(String name, Bean bean, AbstractValidator<? super Number> validator) {
+    super(name, bean, validator);
   }
 
   @Override

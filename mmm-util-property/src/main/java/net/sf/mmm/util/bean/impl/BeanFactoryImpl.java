@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import javafx.beans.property.Property;
@@ -29,8 +30,12 @@ import net.sf.mmm.util.property.api.BooleanProperty;
 import net.sf.mmm.util.property.api.GenericProperty;
 import net.sf.mmm.util.property.api.IntegerProperty;
 import net.sf.mmm.util.property.api.LongProperty;
+import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.StringProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.property.api.factory.PropertyFactoryManager;
+import net.sf.mmm.util.property.impl.factory.PropertyFactoryManagerImpl;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
@@ -60,9 +65,11 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
   private final ReentrantLock lock;
 
+  private final Map<Class<? extends Bean>, WeakReference<BeanAccessPrototype<?>>> class2prototypeMap;
+
   private ReflectionUtil reflectionUtil;
 
-  private Map<Class<? extends Bean>, WeakReference<BeanAccessPrototype<?>>> class2prototypeMap;
+  private PropertyFactoryManager propertyFactoryManager;
 
   /**
    * The constructor.
@@ -84,6 +91,42 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
+   * @return the {@link PropertyFactoryManager}.
+   */
+  protected PropertyFactoryManager getPropertyFactoryManager() {
+
+    return this.propertyFactoryManager;
+  }
+
+  /**
+   * @param propertyFactoryManager the {@link PropertyFactoryManager} to {@link Inject}.
+   */
+  @Inject
+  public void setPropertyFactoryManager(PropertyFactoryManager propertyFactoryManager) {
+
+    getInitializationState().requireNotInitilized();
+    this.propertyFactoryManager = propertyFactoryManager;
+  }
+
+  /**
+   * @return the {@link ReflectionUtil}.
+   */
+  protected ReflectionUtil getReflectionUtil() {
+
+    return this.reflectionUtil;
+  }
+
+  /**
+   * @param reflectionUtil is the reflectionUtil to set
+   */
+  @Inject
+  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
+
+    getInitializationState().requireNotInitilized();
+    this.reflectionUtil = reflectionUtil;
+  }
+
+  /**
    * This method gets the singleton instance of this {@link BeanFactory}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
@@ -97,7 +140,6 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         if (instance == null) {
           BeanFactoryImpl impl = new BeanFactoryImpl();
           impl.initialize();
-          instance = impl;
         }
       }
     }
@@ -110,7 +152,19 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     if (this.reflectionUtil == null) {
       this.reflectionUtil = ReflectionUtilImpl.getInstance();
     }
+    if (this.propertyFactoryManager == null) {
+      this.propertyFactoryManager = PropertyFactoryManagerImpl.getInstance();
+    }
     super.doInitialize();
+  }
+
+  @Override
+  protected void doInitialized() {
+
+    super.doInitialized();
+    if (instance == null) {
+      instance = this;
+    }
   }
 
   @SuppressWarnings("unchecked")
@@ -302,6 +356,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param bean the {@link Bean} instance to create this property for.
    * @return the new property instance.
    */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   private AbstractProperty<?> createProperty(BeanMethod beanMethod, GenericType<?> beanType, Bean bean) {
 
     Method method = beanMethod.getMethod();
@@ -314,7 +369,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     if (property == null) {
       GenericType<?> propertyType = this.reflectionUtil.createGenericType(beanMethod.getPropertyType(), beanType);
       GenericType<?> valueType = this.reflectionUtil.createGenericType(PROPERTY_VALUE_TYPE_VARIABLE, propertyType);
-      property = createProperty(beanMethod.getPropertyName(), valueType, bean, propertyType.getRetrievalClass());
+      property = createProperty(beanMethod.getPropertyName(), valueType, bean,
+          (Class) propertyType.getRetrievalClass());
     }
     return property;
   }
@@ -342,10 +398,13 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   protected <V> AbstractProperty<V> createProperty(String name, GenericType<V> type, Bean bean,
-      Class<?> propertyClass) {
+      Class<? extends ReadableProperty> propertyClass) {
 
     AbstractProperty result;
-    if ((!propertyClass.isInterface()) && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
+    PropertyFactory<V, ?> factory = this.propertyFactoryManager.getFactory(propertyClass);
+    if (factory != null) {
+      result = (AbstractProperty) factory.create(name, type, bean, null);
+    } else if ((!propertyClass.isInterface()) && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
       result = createPropertyFromSpecifiedClass(name, type, bean, propertyClass);
     } else {
       Class<?> valueClass = type.getRetrievalClass();
