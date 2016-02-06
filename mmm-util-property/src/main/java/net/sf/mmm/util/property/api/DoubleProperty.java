@@ -1,9 +1,8 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.impl;
+package net.sf.mmm.util.property.api;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.WritableDoubleProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderDouble;
 

@@ -1,26 +1,26 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.impl;
+package net.sf.mmm.util.property.api;
 
 import com.sun.javafx.binding.ExpressionHelper;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.base.AbstractProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
- * This is the implementation of {@link WritableProperty}.
+ * This is the abstract base implementation of a regular {@link WritableProperty}. Here regular means that the
+ * {@link #getValue() value} type is not special such as a {@link java.util.Collection}.
  *
  * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ *
  * @author hohwille
  * @since 8.0.0
  */
 @SuppressWarnings("restriction")
-public abstract class AbstractRegularProperty<VALUE> extends AbstractProperty<VALUE> {
+public abstract class AbstractRegularProperty<VALUE> extends AbstractGenericProperty<VALUE> {
 
   private ExpressionHelper<VALUE> helper;
 
@@ -72,13 +72,6 @@ public abstract class AbstractRegularProperty<VALUE> extends AbstractProperty<VA
     this.helper = ExpressionHelper.removeListener(this.helper, listener);
   }
 
-  /**
-   * Sends notifications to all attached {@link javafx.beans.InvalidationListener}s and
-   * {@link javafx.beans.value.ChangeListener}s.
-   *
-   * This method is called when the value is changed, either manually by calling {@link #setValue(Object)} or in case of
-   * a bound property, if the binding becomes invalid.
-   */
   @Override
   protected void fireValueChangedEvent() {
 

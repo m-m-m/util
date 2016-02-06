@@ -4,8 +4,8 @@ package net.sf.mmm.util.bean.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
+import net.sf.mmm.util.property.api.ReadOnlyPropertyImpl;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.base.ReadOnlyPropertyImpl;
 
 /**
  * The implementation of {@link BeanAccess} for a regular {@link #isReadOnly() read-only} {@link Bean} instance.

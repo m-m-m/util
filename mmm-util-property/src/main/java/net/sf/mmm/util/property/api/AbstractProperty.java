@@ -1,23 +1,14 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.base;
+package net.sf.mmm.util.property.api;
 
-import java.util.Objects;
 import java.util.function.Function;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.Property;
 import javafx.beans.value.ObservableValue;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.lang.api.Builder;
-import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidator;
-import net.sf.mmm.util.validation.base.ComposedValidationFailure;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
-import net.sf.mmm.util.validation.base.ValidationFailureSuccess;
 import net.sf.mmm.util.validation.base.ValidatorNone;
 
 /**
@@ -29,67 +20,28 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
  */
 public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE> {
 
-  private final Bean bean;
-
-  private final String name;
-
-  private final GenericType<VALUE> type;
-
   private AbstractValidator<? super VALUE> validator;
-
-  private ValidationFailure validationResult;
-
-  private ReadOnlyPropertyImpl<VALUE> readOnlyProperty;
-
-  private ObservableValue<? extends VALUE> binding;
-
-  private InvalidationListener bindingListener;
 
   /**
    * The constructor.
-   *
-   * @param name - see {@link #getName()}.
-   * @param type - see {@link #getType()}.
-   * @param bean - see {@link #getBean()}.
    */
-  public AbstractProperty(String name, GenericType<VALUE> type, Bean bean) {
-    this(name, type, bean, null);
+  public AbstractProperty() {
+    this(null);
   }
 
   /**
    * The constructor.
    *
-   * @param name - see {@link #getName()}.
-   * @param type - see {@link #getType()}.
-   * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractProperty(String name, GenericType<VALUE> type, Bean bean,
-      AbstractValidator<? super VALUE> validator) {
+  public AbstractProperty(AbstractValidator<? super VALUE> validator) {
     super();
-    this.name = name;
-    this.type = type;
-    this.bean = bean;
     if (validator == null) {
       this.validator = ValidatorNone.getInstance();
     } else {
       this.validator = validator;
     }
   }
-
-  @Override
-  public final VALUE getValue() {
-
-    if (this.binding != null) {
-      return this.binding.getValue();
-    }
-    return doGetValue();
-  }
-
-  /**
-   * @return the internal {@link #getValue() value}.
-   */
-  protected abstract VALUE doGetValue();
 
   /**
    * Creates a new empty instance of this property with the given new parameters.
@@ -99,7 +51,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    */
   public final AbstractProperty<VALUE> copy(Bean newBean) {
 
-    return copy(this.name, newBean, this.validator);
+    return copy(getName(), newBean, this.validator);
   }
 
   /**
@@ -110,7 +62,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    */
   public final AbstractProperty<VALUE> copy(AbstractValidator<? super VALUE> newValidator) {
 
-    return copy(this.name, this.bean, newValidator);
+    return copy(getName(), getBean(), newValidator);
   }
 
   /**
@@ -122,7 +74,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    */
   public final AbstractProperty<VALUE> copy(Bean newBean, AbstractValidator<? super VALUE> newValidator) {
 
-    return copy(this.name, newBean, newValidator);
+    return copy(getName(), newBean, newValidator);
   }
 
   /**
@@ -159,110 +111,6 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
     setValue(observableValue.getValue());
   }
 
-  @Override
-  public void bind(ObservableValue<? extends VALUE> observable) {
-
-    Objects.requireNonNull(observable, "observable");
-    if (!observable.equals(this.binding)) {
-      unbind();
-      this.binding = observable;
-      if (this.bindingListener == null) {
-        this.bindingListener = new BindingInvalidationListener(this);
-      }
-      observable.addListener(this.bindingListener);
-      markInvalid();
-    }
-  }
-
-  @Override
-  public void unbind() {
-
-    if (this.binding != null) {
-
-      assignValueFrom(this.binding);
-      this.binding.removeListener(this.bindingListener);
-      this.binding = null;
-      this.bindingListener = null;
-    }
-  }
-
-  @Override
-  public boolean isBound() {
-
-    return (this.binding != null);
-  }
-
-  @Override
-  public void bindBidirectional(Property<VALUE> other) {
-
-    Bindings.bindBidirectional(this, other);
-  }
-
-  @Override
-  public void unbindBidirectional(Property<VALUE> other) {
-
-    Bindings.unbindBidirectional(this, other);
-  }
-
-  @Override
-  public Bean getBean() {
-
-    return this.bean;
-  }
-
-  @Override
-  public String getName() {
-
-    return this.name;
-  }
-
-  @Override
-  public GenericType<VALUE> getType() {
-
-    return this.type;
-  }
-
-  @Override
-  public void setValue(VALUE value) {
-
-    if (isBound()) {
-      throw new RuntimeException((getBean() != null && getName() != null
-          ? getBean().getClass().getSimpleName() + "." + getName() + " : " : "") + "A bound value cannot be set.");
-    }
-    boolean changed = doSetValue(value);
-    if (changed) {
-      markInvalid();
-    }
-  }
-
-  /**
-   * Called from {@link #setValue(Object)}.
-   *
-   * @param newValue the new {@link #getValue() value} to set.
-   * @return <code>true</code> if the {@link #getValue() value} has changed, <code>false</code> otherwise.
-   */
-  protected abstract boolean doSetValue(VALUE newValue);
-
-  /**
-   * Invalidates this property.
-   */
-  protected void markInvalid() {
-
-    if (this.validationResult != null) {
-      this.validationResult = null;
-      invalidated();
-    }
-    fireValueChangedEvent();
-  }
-
-  /**
-   * May be overridden to receive invalidation notifications.
-   */
-  protected void invalidated() {
-
-    // nothing by default...
-  }
-
   /**
    * Sends notifications to all attached {@link javafx.beans.InvalidationListener}s and
    * {@link javafx.beans.value.ChangeListener}s.
@@ -275,74 +123,15 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
   /**
    * @return the {@link AbstractValidator}.
    */
-  public AbstractValidator<? super VALUE> getValidator() {
+  public final AbstractValidator<? super VALUE> getValidator() {
 
     return this.validator;
   }
 
   @Override
-  public boolean isMandatory() {
+  public final boolean isMandatory() {
 
     return this.validator.isMandatory();
-  }
-
-  @Override
-  public boolean isValid() {
-
-    if (this.validationResult == null) {
-      validate();
-    }
-    return (this.validationResult == ValidationFailureSuccess.INSTANCE);
-  }
-
-  /**
-   * Clears the cached internal {@link #validate() validation} result. Has to be called if the {@link #getValue() value}
-   * has changed (from an external call).
-   */
-  protected void clearValidationResult() {
-
-    this.validationResult = null;
-  }
-
-  @Override
-  public ValidationFailure validate() {
-
-    if (this.validationResult == null) {
-      VALUE v = getValue();
-      String source = getName();
-      ValidationFailure failure = this.validator.validate(v, source);
-      if (v instanceof Bean) {
-        ValidationFailure failure2 = ((Bean) v).access().validate();
-        if (failure == null) {
-          failure = failure2;
-        } else if (failure2 != null) {
-          failure = new ComposedValidationFailure(source, new ValidationFailure[] { failure, failure2 });
-        }
-      }
-      if (failure == null) {
-        failure = ValidationFailureSuccess.INSTANCE;
-      }
-      this.validationResult = failure;
-    }
-    if (this.validationResult == ValidationFailureSuccess.INSTANCE) {
-      return null;
-    }
-    return this.validationResult;
-  }
-
-  @Override
-  public WritableProperty<VALUE> getReadOnly() {
-
-    if (this.readOnlyProperty == null) {
-      this.readOnlyProperty = new ReadOnlyPropertyImpl<>(this);
-    }
-    return this.readOnlyProperty;
-  }
-
-  @Override
-  public final boolean isReadOnly() {
-
-    return false;
   }
 
   /**
@@ -374,7 +163,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
 
     StringBuilder sb = new StringBuilder();
     sb.append('\"');
-    sb.append(this.name);
+    sb.append(getName());
     sb.append("\": ");
     VALUE value = getValue();
     if (value == null) {
@@ -390,13 +179,9 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
   }
 
   /**
-   * Implementation of {@link Builder} to {@link #build() build} a copy of the {@link AbstractProperty
-   * property}.
+   * Implementation of {@link Builder} to {@link #build() build} a copy of the {@link AbstractProperty property}.
    *
    * @param <T> the generic type of the {@link AbstractProperty property}.
-   *
-   * @author hohwille
-   * @since 7.1.0
    */
   public class PropertyBuilder<T extends AbstractProperty<? extends VALUE>> implements Builder<T> {
 

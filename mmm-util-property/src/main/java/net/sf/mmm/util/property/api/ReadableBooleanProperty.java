@@ -6,15 +6,26 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.BooleanExpression;
 import javafx.beans.value.ObservableBooleanValue;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
- * This is the interface for a {@link WritableProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Boolean}.
  *
  * @author hohwille
  * @since 7.1.0
  */
 public interface ReadableBooleanProperty extends ReadableProperty<Boolean>, ObservableBooleanValue {
+
+  /** @see #getType() */
+  GenericType<Boolean> TYPE = new SimpleGenericTypeImpl<>(Boolean.class);
+
+  @Override
+  default GenericType<Boolean> getType() {
+
+    return TYPE;
+  }
 
   @Override
   default boolean get() {

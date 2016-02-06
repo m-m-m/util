@@ -1,0 +1,51 @@
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.property.impl.factory;
+
+import javax.inject.Named;
+
+import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.property.api.ReadableProperty;
+import net.sf.mmm.util.property.api.ReadableStringProperty;
+import net.sf.mmm.util.property.api.StringProperty;
+import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.api.WritableStringProperty;
+import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.validation.base.AbstractValidator;
+
+/**
+ * This is the implementation of {@link PropertyFactory} for {@link StringProperty}.
+ *
+ * @author hohwille
+ * @since 8.0.0
+ */
+@Named
+public class StringPropertyFactory extends AbstractPropertyFactory<String, StringProperty> {
+
+  @Override
+  public Class<? extends ReadableProperty<String>> getReadableInterface() {
+
+    return ReadableStringProperty.class;
+  }
+
+  @Override
+  public Class<? extends WritableProperty<String>> getWritableInterface() {
+
+    return WritableStringProperty.class;
+  }
+
+  @Override
+  public Class<StringProperty> getImplementationClass() {
+
+    return StringProperty.class;
+  }
+
+  @Override
+  public StringProperty create(String name, GenericType<String> valueType, Bean bean,
+      AbstractValidator<? super String> validator) {
+
+    return new StringProperty(name, bean, validator);
+  }
+
+}

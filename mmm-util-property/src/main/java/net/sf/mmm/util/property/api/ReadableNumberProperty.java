@@ -11,6 +11,8 @@ import javafx.beans.binding.NumberBinding;
 import javafx.beans.binding.NumberExpression;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.value.ObservableNumberValue;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
  * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}
@@ -22,6 +24,15 @@ import javafx.beans.value.ObservableNumberValue;
  * @since 8.0.0
  */
 public interface ReadableNumberProperty extends ReadableProperty<Number>, NumberExpression {
+
+  /** @see #getType() */
+  GenericType<Number> TYPE = new SimpleGenericTypeImpl<>(Number.class);
+
+  @Override
+  default GenericType<Number> getType() {
+
+    return TYPE;
+  }
 
   @Override
   default NumberBinding negate() {

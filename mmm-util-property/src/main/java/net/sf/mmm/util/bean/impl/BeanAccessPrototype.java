@@ -12,8 +12,8 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
+import net.sf.mmm.util.property.api.AbstractProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.base.AbstractProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -101,6 +101,21 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     AbstractProperty<V> property = this.beanFactory.createProperty(name, propertyType, getBean());
     addProperty(property);
     return property;
+  }
+
+  @Override
+  public <PROPERTY extends WritableProperty<?>> PROPERTY createProperty(String name, Class<PROPERTY> type) {
+
+    if (!this.dynamic) {
+      throw new ReadOnlyException(this.beanType.getSimpleName(), "access.properties");
+    }
+    BeanPrototypeProperty prototypeProperty = this.name2PropertyMap.get(name);
+    if (prototypeProperty != null) {
+      throw new DuplicateObjectException(this, name, prototypeProperty);
+    }
+    AbstractProperty<?> property = this.beanFactory.createProperty(name, null, getBean(), type);
+    addProperty(property);
+    return type.cast(property);
   }
 
   @Override

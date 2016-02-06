@@ -1,13 +1,11 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.base;
+package net.sf.mmm.util.property.api;
 
 import java.lang.ref.WeakReference;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.impl.GenericProperty;
 
 /**
  * This is an implementation of {@link InvalidationListener} for
@@ -18,21 +16,21 @@ import net.sf.mmm.util.property.impl.GenericProperty;
  */
 class BindingInvalidationListener implements InvalidationListener {
 
-  private final WeakReference<AbstractProperty<?>> weakReference;
+  private final WeakReference<AbstractGenericProperty<?>> weakReference;
 
   /**
    * The constructor.
    *
    * @param property the property to {@link WritableProperty#bind(javafx.beans.value.ObservableValue) bind}.
    */
-  public BindingInvalidationListener(AbstractProperty<?> property) {
+  public BindingInvalidationListener(AbstractGenericProperty<?> property) {
     this.weakReference = new WeakReference<>(property);
   }
 
   @Override
   public void invalidated(Observable observable) {
 
-    AbstractProperty<?> property = this.weakReference.get();
+    AbstractGenericProperty<?> property = this.weakReference.get();
     if (property == null) {
       observable.removeListener(this);
     } else {

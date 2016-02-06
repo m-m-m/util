@@ -3,8 +3,8 @@
 package net.sf.mmm.util.bean.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.base.AbstractProperty;
-import net.sf.mmm.util.property.impl.GenericProperty;
+import net.sf.mmm.util.property.api.AbstractProperty;
+import net.sf.mmm.util.property.api.GenericProperty;
 
 /**
  * This class is a container for a {@link GenericProperty} and its according {@link #getIndex() index} for a

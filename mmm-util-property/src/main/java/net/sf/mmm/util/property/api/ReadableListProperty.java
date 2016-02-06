@@ -12,8 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * This is the interface for a {@link WritableProperty} of the {@link #getValue() value}-{@link #getType() type}
- * {@link List}{@literal<E>}.
+ * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * {@link ObservableList}{@literal<E>}.
  *
  * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
  *

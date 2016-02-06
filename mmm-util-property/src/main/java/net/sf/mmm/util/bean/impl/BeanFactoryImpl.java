@@ -24,13 +24,13 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.property.api.AbstractProperty;
+import net.sf.mmm.util.property.api.BooleanProperty;
+import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.IntegerProperty;
+import net.sf.mmm.util.property.api.LongProperty;
+import net.sf.mmm.util.property.api.StringProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.base.AbstractProperty;
-import net.sf.mmm.util.property.impl.BooleanProperty;
-import net.sf.mmm.util.property.impl.GenericProperty;
-import net.sf.mmm.util.property.impl.IntegerProperty;
-import net.sf.mmm.util.property.impl.LongProperty;
-import net.sf.mmm.util.property.impl.StringProperty;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
@@ -382,6 +382,9 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
             }
           } else if ((parameterTypes[1] == GenericType.class) && (parameterTypes.length >= 3)
               && (parameterTypes[2] == Bean.class)) {
+            if (type == null) {
+              throw new IllegalStateException(constructor.toGenericString());
+            }
             if (parameterTypes.length == 3) {
               return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, type, bean });
             } else if (parameterTypes[3] == AbstractValidator.class) {

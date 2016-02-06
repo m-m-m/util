@@ -1,13 +1,10 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.impl;
+package net.sf.mmm.util.property.api;
 
 import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.WritableNumberProperty;
-import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
@@ -20,8 +17,6 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  */
 public abstract class NumberProperty<V extends Number> extends AbstractRegularProperty<Number>
     implements WritableNumberProperty {
-
-  private static final GenericType<Number> TYPE = new SimpleGenericTypeImpl<>(Number.class);
 
   /**
    * The constructor.

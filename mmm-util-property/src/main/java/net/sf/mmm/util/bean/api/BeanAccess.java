@@ -88,14 +88,35 @@ public interface BeanAccess {
   default <V> WritableProperty<V> getOrCreateProperty(String name, GenericType<V> type) {
 
     WritableProperty<?> property = getProperty(name);
-    if (property == null) {
-      property = createProperty(name, type);
-    } else {
+    if (property != null) {
       if (!property.getType().equals(type)) {
-        throw new ObjectMismatchException(type, property.getType(), name + ".type");
+        throw new ObjectMismatchException(type, property.getType(), getBeanClass(), name + ".type");
+      }
+      return (WritableProperty<V>) property;
+    }
+    return createProperty(name, type);
+  }
+
+  /**
+   * {@link #getProperty(String) Gets} or {@link #createProperty(String, Class) creates} the specified property. If the
+   * property already exists it also has to match the given {@code type} or an exception will be thrown.
+   *
+   * @param <PROPERTY> the generic type of the {@link WritableProperty property}.
+   * @param name the {@link WritableProperty#getName() property name}.
+   * @param type the Class reflecting the {@link WritableProperty} to create.
+   * @return the requested property.
+   */
+  default <PROPERTY extends WritableProperty<?>> PROPERTY getOrCreateProperty(String name, Class<PROPERTY> type) {
+
+    WritableProperty<?> property = getProperty(name);
+    if (property != null) {
+      try {
+        return type.cast(property);
+      } catch (ClassCastException e) {
+        throw new ObjectMismatchException(e, type, property.getClass(), getBeanClass(), name + ".class");
       }
     }
-    return (WritableProperty<V>) property;
+    return createProperty(name, type);
   }
 
   /**
@@ -157,6 +178,17 @@ public interface BeanAccess {
    * @return the newly created property.
    */
   <V> WritableProperty<V> createProperty(String name, GenericType<V> type);
+
+  /**
+   * Creates and adds the specified {@link WritableProperty} on the fly. Creating and adding new properties is only
+   * possible for {@link #isDynamic() dynamic} beans.
+   *
+   * @param <PROPERTY> the generic type of the {@link WritableProperty property}.
+   * @param name the {@link WritableProperty#getName() property name}.
+   * @param type the Class reflecting the {@link WritableProperty} to create.
+   * @return the newly created property.
+   */
+  <PROPERTY extends WritableProperty<?>> PROPERTY createProperty(String name, Class<PROPERTY> type);
 
   /**
    * @see BeanFactory#getReadOnlyBean(Bean)

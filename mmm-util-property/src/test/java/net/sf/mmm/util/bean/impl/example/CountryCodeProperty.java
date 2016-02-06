@@ -5,7 +5,7 @@ package net.sf.mmm.util.bean.impl.example;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.impl.StringProperty;
+import net.sf.mmm.util.property.api.StringProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidator;
 import net.sf.mmm.util.validation.base.ValidatorMandatory;

@@ -1,13 +1,10 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.impl;
+package net.sf.mmm.util.property.api;
 
 import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.WritableBooleanProperty;
-import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
 
@@ -18,8 +15,6 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
  * @since 8.0.0
  */
 public class BooleanProperty extends AbstractRegularProperty<Boolean> implements WritableBooleanProperty {
-
-  private static final GenericType<Boolean> TYPE = new SimpleGenericTypeImpl<>(Boolean.class);
 
   private Boolean value;
 

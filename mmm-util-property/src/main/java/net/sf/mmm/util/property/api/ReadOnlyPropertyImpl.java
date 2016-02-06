@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.property.base;
+package net.sf.mmm.util.property.api;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.Property;
@@ -8,7 +8,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
-import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 

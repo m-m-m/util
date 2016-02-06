@@ -8,8 +8,8 @@ import java.util.Map;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.collection.base.ArrayIterator;
+import net.sf.mmm.util.property.api.GenericProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.impl.GenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -69,10 +69,25 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
     return null;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public <V> WritableProperty<V> createProperty(String name, GenericType<V> type) {
 
-    return null;
+    if (isReadOnly()) {
+      throw new UnsupportedOperationException();
+    }
+    getPrototype().createProperty(name, type);
+    return (WritableProperty<V>) getProperty(name);
+  }
+
+  @Override
+  public <PROPERTY extends WritableProperty<?>> PROPERTY createProperty(String name, Class<PROPERTY> type) {
+
+    if (isReadOnly()) {
+      throw new UnsupportedOperationException();
+    }
+    getPrototype().createProperty(name, type);
+    return type.cast(getProperty(name));
   }
 
   void createProperties() {

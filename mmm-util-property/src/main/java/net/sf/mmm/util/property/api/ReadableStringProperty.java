@@ -9,7 +9,7 @@ import javafx.beans.binding.StringExpression;
 import javafx.beans.value.ObservableStringValue;
 
 /**
- * This is the interface for a {@link WritableProperty} of the {@link #getValue() value}-{@link #getType() type}
+ * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Boolean}.
  *
  * @author hohwille
