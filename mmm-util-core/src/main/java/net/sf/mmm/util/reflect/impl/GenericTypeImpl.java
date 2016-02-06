@@ -18,7 +18,7 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
 /**
  * This is the implementation of the {@link GenericType} interface.
  *
- * @param <T> is the templated type of the {@link #getRetrievalClass() upper bound}.
+ * @param <T> the generic type of the {@link #getRetrievalClass() upper bound}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -37,17 +37,17 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   /** @see #getRetrievalClass() */
   private final Class<T> retrievalClass;
 
-  /** @see #getComponentType() */
-  private final GenericType<?> componentType;
-
-  /** @see #getKeyType() */
-  private final GenericType<?> keyType;
-
   /** @see #getTypeArgument(int) */
   private final Type[] typeArgs;
 
   /** @see #getTypeArgument(int) */
   private final GenericType<?>[] typesArguments;
+
+  /** @see #getComponentType() */
+  private GenericType<?> componentType;
+
+  /** @see #getKeyType() */
+  private GenericType<?> keyType;
 
   /**
    * The constructor.
@@ -65,8 +65,21 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    * @param valueType is the {@link #getType() value-type}.
    * @param definingType is the {@link #getDefiningType() defining-type}.
    */
-  @SuppressWarnings("unchecked")
   public GenericTypeImpl(Type valueType, GenericType<?> definingType) {
+
+    this(valueType, definingType, true);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param valueType is the {@link #getType() value-type}.
+   * @param definingType is the {@link #getDefiningType() defining-type}.
+   * @param init - {@code true} if {@link #init()} shall be called, {@code false} if you want to call it from
+   *        constructor of your sub-class.
+   */
+  @SuppressWarnings("unchecked")
+  protected GenericTypeImpl(Type valueType, GenericType<?> definingType, boolean init) {
 
     super();
     this.type = valueType;
@@ -74,8 +87,6 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     ClassBounds bounds = getClassBounds(this.type);
     this.assignmentClass = (Class<? extends T>) bounds.assignmentClass;
     this.retrievalClass = (Class<T>) bounds.retrievalClass;
-    Type genericComponentType = null;
-    Type genericKeyType = null;
     if (valueType instanceof ParameterizedType) {
       ParameterizedType parameterizedType = (ParameterizedType) valueType;
       this.typeArgs = parameterizedType.getActualTypeArguments();
@@ -83,10 +94,22 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     } else {
       this.typeArgs = ReflectionUtil.NO_TYPES;
       this.typesArguments = NO_TYPES;
-      if (valueType instanceof GenericArrayType) {
-        GenericArrayType arrayType = (GenericArrayType) valueType;
-        genericComponentType = arrayType.getGenericComponentType();
-      }
+    }
+    if (init) {
+      init();
+    }
+  }
+
+  /**
+   * Initializes this class.
+   */
+  protected final void init() {
+
+    Type genericComponentType = null;
+    Type genericKeyType = null;
+    if (this.type instanceof GenericArrayType) {
+      GenericArrayType arrayType = (GenericArrayType) this.type;
+      genericComponentType = arrayType.getGenericComponentType();
     }
     if (genericComponentType == null) {
       TypeVariable<?> keyTypeVariable = null;
@@ -115,12 +138,12 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     if (genericComponentType == null) {
       this.componentType = null;
     } else {
-      this.componentType = create(genericComponentType, definingType);
+      this.componentType = create(genericComponentType, this.definingType);
     }
     if (genericKeyType == null) {
       this.keyType = null;
     } else {
-      this.keyType = create(genericKeyType, definingType);
+      this.keyType = create(genericKeyType, this.definingType);
     }
   }
 
@@ -130,7 +153,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   @Override
   protected GenericType<?> create(Type genericType) {
 
-    return new GenericTypeImpl<>(genericType);
+    return create(genericType, null);
   }
 
   /**
@@ -163,7 +186,8 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    * <td>E</td>
    * <td>{@link java.util.List}&lt;Foo&gt;</td>
    * <td>Foo</td>
-   * <td>E is a {@link TypeVariable} representing the generic return-type of the method {@link java.util.List#get(int)}</td>
+   * <td>E is a {@link TypeVariable} representing the generic return-type of the method {@link java.util.List#get(int)}
+   * </td>
    * </tr>
    * </table>
    *

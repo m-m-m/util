@@ -13,16 +13,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.Result;
+
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.impl.GenericTypeImpl;
 import net.sf.mmm.util.reflect.impl.TypeVariableImpl;
-
-import org.assertj.core.api.Assertions;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.Result;
 
 /**
  * This is the test for {@link ReflectionUtilImpl}.
@@ -157,8 +157,8 @@ public class ReflectionUtilTest extends Assertions {
     assertThat(superType.isAssignableFrom(superType)).isTrue();
     assertThat(superType.isAssignableFrom(subType)).isTrue();
     assertThat(superType.toStringSimple()).isEqualTo("Map<? extends Number, ? extends CharSequence>");
-    assertThat(superType.toString()).isEqualTo(
-        "java.util.Map<? extends java.lang.Number, ? extends java.lang.CharSequence>");
+    assertThat(superType.toString())
+        .isEqualTo("java.util.Map<? extends java.lang.Number, ? extends java.lang.CharSequence>");
 
     subType = getReturnType(AssignableFromTestClass.class, "getListSubType");
     superType = getReturnType(AssignableFromTestClass.class, "getListSuperType");
@@ -215,6 +215,33 @@ public class ReflectionUtilTest extends Assertions {
     assertThat(componentType.getRetrievalClass()).isEqualTo(String.class);
     assertThat(componentType.getTypeArgumentCount()).isEqualTo(0);
     assertThat(componentType.getComponentType()).isNull();
+  }
+
+  @Test
+  public void testGenericTypeCreateCollections() throws Exception {
+
+    ReflectionUtil util = getReflectionUtil();
+
+    GenericType<List<String>> listType = util.createGenericTypeOfList(util.createGenericType(String.class));
+    assertThat(listType.getAssignmentClass()).isEqualTo(List.class);
+    assertThat(listType.getRetrievalClass()).isEqualTo(List.class);
+    assertThat(listType.getTypeArgumentCount()).isEqualTo(1);
+    assertThat(listType.getTypeArgument(0).getRetrievalClass()).isEqualTo(String.class);
+    assertThat(listType.getComponentType().getRetrievalClass()).isEqualTo(String.class);
+    GenericType<Set<Long>> setType = util.createGenericTypeOfSet(util.createGenericType(Long.class));
+    assertThat(setType.getAssignmentClass()).isEqualTo(Set.class);
+    assertThat(setType.getRetrievalClass()).isEqualTo(Set.class);
+    assertThat(setType.getTypeArgumentCount()).isEqualTo(1);
+    assertThat(setType.getTypeArgument(0).getRetrievalClass()).isEqualTo(Long.class);
+    assertThat(setType.getComponentType().getRetrievalClass()).isEqualTo(Long.class);
+    GenericType<Map<Set<Long>, List<String>>> mapType = util.createGenericTypeOfMap(setType, listType);
+    assertThat(mapType.getAssignmentClass()).isEqualTo(Map.class);
+    assertThat(mapType.getRetrievalClass()).isEqualTo(Map.class);
+    assertThat(mapType.getTypeArgumentCount()).isEqualTo(2);
+    assertThat(mapType.getTypeArgument(0)).isEqualTo(setType);
+    assertThat(mapType.getTypeArgument(1)).isEqualTo(listType);
+    assertThat(mapType.getKeyType()).isEqualTo(setType);
+    assertThat(mapType.getComponentType()).isEqualTo(listType);
   }
 
   @Test

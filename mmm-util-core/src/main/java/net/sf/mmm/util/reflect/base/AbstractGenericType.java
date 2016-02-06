@@ -48,6 +48,15 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   public abstract GenericType<?> getDefiningType();
 
   /**
+   * @param typeVariable the {@link TypeVariable} to wrap.
+   * @return the {@link TypeVariable} wrapped as {@link GenericTypeVariable}.
+   */
+  protected GenericTypeVariable<?> wrap(TypeVariable<?> typeVariable) {
+
+    return new WrappedTypeVariable(typeVariable);
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

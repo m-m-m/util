@@ -23,6 +23,7 @@ import java.util.Enumeration;
 import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -182,6 +183,31 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   public GenericType<?> createGenericType(Type type, Class<?> definingType) {
 
     return createGenericType(type, createGenericType(definingType));
+  }
+
+  @Override
+  public <E> GenericType<List<E>> createGenericTypeOfList(GenericType<E> elementType) {
+
+    return new GenericTypeBuilder<List<E>>() {
+    }.with(new GenericTypeVariable<E>() {
+    }, elementType).build();
+  }
+
+  @Override
+  public <K, V> GenericType<Map<K, V>> createGenericTypeOfMap(GenericType<K> keyType, GenericType<V> valueType) {
+
+    return new GenericTypeBuilder<Map<K, V>>() {
+    }.with(new GenericTypeVariable<K>() {
+    }, keyType).with(new GenericTypeVariable<V>() {
+    }, valueType).build();
+  }
+
+  @Override
+  public <E> GenericType<Set<E>> createGenericTypeOfSet(GenericType<E> elementType) {
+
+    return new GenericTypeBuilder<Set<E>>() {
+    }.with(new GenericTypeVariable<E>() {
+    }, elementType).build();
   }
 
   /**

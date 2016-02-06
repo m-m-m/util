@@ -3,6 +3,9 @@
 package net.sf.mmm.util.reflect.base;
 
 import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
@@ -113,6 +116,27 @@ public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent impleme
   public GenericType<?> createGenericType(Type type, Class<?> definingType) {
 
     return createGenericType(type);
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
+  public <E> GenericType<List<E>> createGenericTypeOfList(GenericType<E> elementType) {
+
+    return (GenericType) createGenericType(List.class);
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
+  public <K, V> GenericType<Map<K, V>> createGenericTypeOfMap(GenericType<K> keyType, GenericType<V> valueType) {
+
+    return (GenericType) createGenericType(Map.class);
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
+  public <E> GenericType<Set<E>> createGenericTypeOfSet(GenericType<E> elementType) {
+
+    return (GenericType) createGenericType(Set.class);
   }
 
 }
