@@ -41,10 +41,11 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
    * The constructor.
    *
    * @param beanClass - see {@link #getBeanClass()}.
+   * @param name - see {@link #getName()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    */
-  public BeanAccessPrototype(Class<BEAN> beanClass, BeanFactoryImpl beanFactory) {
-    super(beanClass, beanFactory);
+  public BeanAccessPrototype(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory) {
+    super(beanClass, name, beanFactory);
     this.beanType = beanClass;
     this.name2PropertyMap = new HashMap<>();
     this.method2OperationMap = new HashMap<>();
@@ -60,7 +61,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
    */
   public BeanAccessPrototype(BeanAccessPrototype<BEAN> master, boolean dynamic) {
 
-    super(master.beanType, master.beanFactory);
+    super(master.beanType, master.getName(), master.beanFactory);
     this.beanType = master.beanType;
     this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
     for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {

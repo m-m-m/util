@@ -24,15 +24,19 @@ public abstract class BeanAccessBase<BEAN extends Bean>
 
   private final BEAN bean;
 
+  private final String name;
+
   /**
    * The constructor.
    *
    * @param beanClass - see {@link #getBeanClass()}.
+   * @param name - see {@link #getName()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    */
-  public BeanAccessBase(Class<BEAN> beanClass, BeanFactoryImpl beanFactory) {
+  public BeanAccessBase(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory) {
     super();
     this.beanClass = beanClass;
+    this.name = name;
     this.bean = beanFactory.createProxy(this, beanClass);
   }
 
@@ -40,6 +44,12 @@ public abstract class BeanAccessBase<BEAN extends Bean>
   public Class<BEAN> getBeanClass() {
 
     return this.beanClass;
+  }
+
+  @Override
+  public String getName() {
+
+    return this.name;
   }
 
   /**
@@ -62,9 +72,9 @@ public abstract class BeanAccessBase<BEAN extends Bean>
   }
 
   @Override
-  public WritableProperty<?> getProperty(String name) {
+  public WritableProperty<?> getProperty(String propertyName) {
 
-    BeanPrototypeProperty prototypeProperty = getPrototype().getName2PropertyMap().get(name);
+    BeanPrototypeProperty prototypeProperty = getPrototype().getName2PropertyMap().get(propertyName);
     if (prototypeProperty != null) {
       return getProperty(prototypeProperty, true);
     }

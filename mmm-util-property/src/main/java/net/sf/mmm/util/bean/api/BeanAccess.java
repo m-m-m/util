@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
+import javax.inject.Named;
+
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.property.api.WritableProperty;
@@ -36,6 +38,13 @@ public interface BeanAccess {
   Class<? extends Bean> getBeanClass();
 
   /**
+   * @return the {@link Named#value() value} of the {@link Bean}s {@link Named} annotation or the
+   *         {@link Class#getSimpleName() simple name} of the {@link #getBeanClass() bean class} if no such annotation
+   *         is present.
+   */
+  String getName();
+
+  /**
    * @param name the {@link WritableProperty#getName() name} of the requested property.
    * @return the requested {@link WritableProperty}.
    * @throws PojoPropertyNotFoundException if the requested property does not exist.
@@ -67,8 +76,8 @@ public interface BeanAccess {
 
   /**
    * {@link #getProperty(String) Gets} or {@link #createProperty(String, GenericType) creates} the specified property.
-   * If the property already exists also the {@link WritableProperty#getType() type} has to match the given
-   * {@code type} or an exception will be thrown.
+   * If the property already exists also the {@link WritableProperty#getType() type} has to match the given {@code type}
+   * or an exception will be thrown.
    *
    * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
    * @param name the {@link WritableProperty#getName() property name}.

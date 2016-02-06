@@ -126,7 +126,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
     BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) bean.access();
     BeanAccessPrototype<BEAN> beanPrototype = access.getPrototype();
-    BeanAccessMutable<BEAN> interceptor = new BeanAccessMutable<>(access.getBeanClass(), this, beanPrototype);
+    BeanAccessMutable<BEAN> interceptor = new BeanAccessMutable<>(access.getBeanClass(), access.getName(), this,
+        beanPrototype);
     return interceptor.getBean();
   }
 
@@ -209,12 +210,26 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    */
   protected <BEAN extends Bean> BeanAccessPrototype<BEAN> createPrototypeInternal(Class<BEAN> type) {
 
-    BeanAccessPrototype<BEAN> prototype = new BeanAccessPrototype<>(type, this);
+    String name = getName(type);
+    BeanAccessPrototype<BEAN> prototype = new BeanAccessPrototype<>(type, name, this);
     GenericType<BEAN> beanType = this.reflectionUtil.createGenericType(type);
     BeanIntrospectionData introspectionData = new BeanIntrospectionData(beanType, prototype);
     collectMethods(type, introspectionData);
     processMethods(introspectionData, prototype, beanType);
     return prototype;
+  }
+
+  /**
+   * @param type the {@link Class} reflecting the {@link Bean}.
+   * @return the {@link BeanAccess#getName() name}.
+   */
+  protected String getName(Class<? extends Bean> type) {
+
+    Named named = type.getAnnotation(Named.class);
+    if (named != null) {
+      return named.value();
+    }
+    return type.getSimpleName();
   }
 
   /**
