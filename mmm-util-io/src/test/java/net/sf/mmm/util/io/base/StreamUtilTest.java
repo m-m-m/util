@@ -11,6 +11,10 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.concurrent.ExecutionException;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+import org.slf4j.Logger;
+
 import net.sf.mmm.logging.TestLogger;
 import net.sf.mmm.logging.TestLogger.LogEvent;
 import net.sf.mmm.logging.TestLogger.LogLevel;
@@ -19,19 +23,14 @@ import net.sf.mmm.util.io.api.AsyncTransferrer;
 import net.sf.mmm.util.io.api.DevZero;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.api.TransferCallback;
-import net.sf.mmm.util.lang.base.BasicUtilImpl;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.slf4j.Logger;
 
 /**
  * This is the test-case for {@link StreamUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StreamUtilTest extends Assert {
+public class StreamUtilTest extends Assertions {
 
   protected StreamUtil getStreamUtil() {
 
@@ -50,8 +49,8 @@ public class StreamUtilTest extends Assert {
     StringReader reader = new StringReader(s);
     StringWriter writer = new StringWriter();
     long bytes = getStreamUtil().transfer(reader, writer, true);
-    assertEquals(len, bytes);
-    assertEquals(s, writer.toString());
+    assertThat(bytes).isEqualTo(len);
+    assertThat(writer.toString()).isEqualTo(s);
   }
 
   @Test
@@ -65,8 +64,8 @@ public class StreamUtilTest extends Assert {
     ByteArrayInputStream inStream = new ByteArrayInputStream(data);
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     long bytes = getStreamUtil().transfer(inStream, outStream, false);
-    assertEquals(len, bytes);
-    assertTrue(BasicUtilImpl.getInstance().isDeepEqual(data, outStream.toByteArray()));
+    assertThat(bytes).isEqualTo(len);
+    assertThat(outStream.toByteArray()).containsExactly(data);
   }
 
   @Test
@@ -81,8 +80,8 @@ public class StreamUtilTest extends Assert {
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(inStream, outStream, true);
     Long bytes = transferrer.get();
-    assertEquals(len, bytes.longValue());
-    assertTrue(BasicUtilImpl.getInstance().isDeepEqual(data, outStream.toByteArray()));
+    assertThat(bytes.longValue()).isEqualTo(len);
+    assertThat(outStream.toByteArray()).containsExactly(data);
   }
 
   @Test
@@ -98,9 +97,9 @@ public class StreamUtilTest extends Assert {
     Callback callback = new Callback();
     AsyncTransferrer transferrer = getStreamUtil().transferAsync(inStream, outStream, true, callback);
     Long bytes = transferrer.get();
-    assertEquals(len, bytes.longValue());
-    assertEquals(len, callback.bytesCompleted.longValue());
-    assertTrue(BasicUtilImpl.getInstance().isDeepEqual(data, outStream.toByteArray()));
+    assertThat(bytes.longValue()).isEqualTo(len);
+    assertThat(callback.bytesCompleted.longValue()).isEqualTo(len);
+    assertThat(outStream.toByteArray()).containsExactly(data);
   }
 
   @Test
@@ -111,11 +110,11 @@ public class StreamUtilTest extends Assert {
     Thread.sleep(200);
     long size = outStream.size();
     transferrer.cancel(true);
-    assertTrue(size > 0);
+    assertThat(size).isPositive();
     Thread.sleep(10);
     size = outStream.size();
     Thread.sleep(10);
-    assertEquals(size, outStream.size());
+    assertThat(outStream.size()).isEqualTo((int) size);
   }
 
   @Test
@@ -127,11 +126,11 @@ public class StreamUtilTest extends Assert {
     Thread.sleep(200);
     long size = writer.getBuffer().length();
     transferrer.cancel(true);
-    assertTrue(size > 0);
+    assertThat(size).isPositive();
     Thread.sleep(10);
     size = writer.getBuffer().length();
     Thread.sleep(10);
-    assertEquals(size, writer.getBuffer().length());
+    assertThat(writer.getBuffer().length()).isEqualTo((int) size);
   }
 
   @Test
@@ -143,12 +142,11 @@ public class StreamUtilTest extends Assert {
     Thread.sleep(200);
     long size = outStream.size();
     transferrer.cancel(true);
-    assertTrue(size > 0);
+    assertThat(size).isPositive();
     Thread.sleep(10);
     size = outStream.size();
     Long bytesStopped = callback.bytesStopped;
-    assertNotNull(bytesStopped);
-    assertEquals(size, bytesStopped.longValue());
+    assertThat(bytesStopped).isNotNull().isEqualTo(size);
   }
 
   @Test
@@ -178,18 +176,18 @@ public class StreamUtilTest extends Assert {
       }
       ExceptionHelper.assertCause(e, error);
     }
-    assertEquals(0, outStream.size());
+    assertThat(outStream.size()).isZero();
     ExceptionHelper.assertCause(callback.exception, error);
     boolean errorWasLogged = false;
     for (LogEvent logEvent : logger.getEventList()) {
       if (logEvent.getThrowable() != null) {
         if (ExceptionHelper.isCause(logEvent.getThrowable(), error)) {
-          assertEquals(LogLevel.ERROR, logEvent.getLevel());
+          assertThat(logEvent.getLevel()).isEqualTo(LogLevel.ERROR);
           errorWasLogged = true;
         }
       }
     }
-    assertTrue(errorWasLogged);
+    assertThat(errorWasLogged).isTrue();
   }
 
   private static class Callback implements TransferCallback {
@@ -202,9 +200,9 @@ public class StreamUtilTest extends Assert {
 
     public void expectEmpty() {
 
-      assertTrue(this.exception == null);
-      assertTrue(this.bytesCompleted == null);
-      assertTrue(this.bytesStopped == null);
+      assertThat(this.exception).isNull();
+      assertThat(this.bytesCompleted).isNull();
+      assertThat(this.bytesStopped).isNull();
     }
 
     /**
