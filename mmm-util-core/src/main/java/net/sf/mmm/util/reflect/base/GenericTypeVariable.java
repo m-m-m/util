@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.Objects;
@@ -15,7 +14,7 @@ import java.util.Objects;
  * @author hohwille
  * @since 7.1.0
  */
-public abstract class GenericTypeVariable<T> {
+public abstract class GenericTypeVariable<T> extends GenericTypeCapture<T> {
 
   private final TypeVariable<?> typeVariable;
 
@@ -23,9 +22,7 @@ public abstract class GenericTypeVariable<T> {
    * The constructor.
    */
   public GenericTypeVariable() {
-    Type superType = getClass().getGenericSuperclass();
-    assert (superType instanceof ParameterizedType);
-    Type typeArgument = ((ParameterizedType) superType).getActualTypeArguments()[0];
+    Type typeArgument = resolve();
     assert (typeArgument instanceof TypeVariable);
     this.typeVariable = (TypeVariable<?>) typeArgument;
   }

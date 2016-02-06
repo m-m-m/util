@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.base;
 
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ import net.sf.mmm.util.reflect.impl.RuntimeGenericType;
  * @author hohwille
  * @since 7.1.0
  */
-public abstract class GenericTypeBuilder<T> {
+public abstract class GenericTypeBuilder<T> extends GenericTypeCapture<T> {
 
   private final Type typeArgument;
 
@@ -40,9 +39,8 @@ public abstract class GenericTypeBuilder<T> {
    */
   public GenericTypeBuilder() {
     super();
-    Type superType = getClass().getGenericSuperclass();
-    assert (superType instanceof ParameterizedType);
-    this.typeArgument = ((ParameterizedType) superType).getActualTypeArguments()[0];
+    this.typeArgument = resolve();
+    assert !(this.typeArgument instanceof TypeVariable);
     this.variable2typeMap = new HashMap<>();
   }
 
