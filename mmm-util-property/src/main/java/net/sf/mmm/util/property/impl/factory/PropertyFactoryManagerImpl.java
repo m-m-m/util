@@ -180,6 +180,7 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
     return (PropertyFactory) factory;
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public <V, PROPERTY extends ReadableProperty<V>> PROPERTY create(Class<PROPERTY> propertyType,
       GenericType<V> valueType, boolean polymorphic, String name, Bean bean,
@@ -189,8 +190,8 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
     if (valueType != null) {
       valueClass = valueType.getRetrievalClass();
     }
-    PropertyFactory<V, ? extends PROPERTY> factory = getRequiredFactory(propertyType, valueClass, polymorphic);
-    return factory.create(name, valueType, bean, validator);
+    PropertyFactory factory = getRequiredFactory(propertyType, valueClass, polymorphic);
+    return (PROPERTY) factory.create(name, valueType, bean, validator);
   }
 
 }

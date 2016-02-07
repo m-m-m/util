@@ -15,8 +15,8 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * such as {@link net.sf.mmm.util.bean.api.BeanAccess#createProperty(String, Class)} according types have to be
  * registered via an implementation of this interface.
  *
- * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
- * @param <PROPERTY> the generic type of the {@link WritableProperty property}.
+ * @param <V> the generic type of the {@link ReadableProperty#getValue() property value}.
+ * @param <PROPERTY> the generic type of the {@link #getImplementationClass() property implementation}.
  *
  * @see PropertyFactoryManager
  *
@@ -24,10 +24,10 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @since 8.0.0
  */
 @ComponentSpecification(plugin = true)
-public interface PropertyFactory<V, PROPERTY extends WritableProperty<V>> {
+public interface PropertyFactory<V, PROPERTY extends ReadableProperty<V>> {
 
   /**
-   * @return the {@link Class} of the {@link WritableProperty#getValue() property value}. May be <code>null</code> for
+   * @return the {@link Class} of the {@link ReadableProperty#getValue() property value}. May be <code>null</code> for
    *         {@link net.sf.mmm.util.property.api.GenericProperty}.
    */
   Class<? extends V> getValueClass();
