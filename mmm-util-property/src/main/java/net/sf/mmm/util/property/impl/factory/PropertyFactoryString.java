@@ -21,7 +21,13 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @since 8.0.0
  */
 @Named
-public class StringPropertyFactory extends AbstractPropertyFactory<String, StringProperty> {
+public class PropertyFactoryString extends AbstractPropertyFactory<String, StringProperty> {
+
+  @Override
+  public Class<? extends String> getValueClass() {
+
+    return String.class;
+  }
 
   @Override
   public Class<? extends ReadableProperty<String>> getReadableInterface() {

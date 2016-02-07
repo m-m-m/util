@@ -5,6 +5,7 @@ package net.sf.mmm.util.property.impl.factory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,7 +13,6 @@ import javax.inject.Named;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
-import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
@@ -31,14 +31,17 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
 
   private static PropertyFactoryManagerImpl instance;
 
-  private final Map<Class<?>, PropertyFactory<?, ?>> type2factoryMap;
+  private final Map<Class<?>, PropertyFactory<?, ?>> propertyType2factoryMap;
+
+  private final Map<Class<?>, PropertyFactory<?, ?>> valueType2factoryMap;
 
   /**
    * The constructor.
    */
   public PropertyFactoryManagerImpl() {
     super();
-    this.type2factoryMap = new HashMap<>();
+    this.propertyType2factoryMap = new HashMap<>();
+    this.valueType2factoryMap = new HashMap<>();
   }
 
   /**
@@ -57,19 +60,41 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
    */
   public void registerFactory(PropertyFactory<?, ?> factory) {
 
-    getInitializationState().requireNotInitilized();
-    register(factory.getReadableInterface(), factory);
-    register(factory.getWritableInterface(), factory);
-    register(factory.getImplementationClass(), factory);
+    registerFactory(factory, false);
   }
 
-  private void register(Class<?> type, PropertyFactory<?, ?> factory) {
+  /**
+   * @param factory the {@link PropertyFactory} to register.
+   * @param allowOverride - {@code true} if the given {@link PropertyFactory} may override (replace) a previously
+   *        {@link #registerFactory(PropertyFactory, boolean) registered} one.
+   */
+  protected void registerFactory(PropertyFactory<?, ?> factory, boolean allowOverride) {
+
+    getInitializationState().requireNotInitilized();
+    registerPropertyType(factory.getReadableInterface(), factory, allowOverride);
+    registerPropertyType(factory.getWritableInterface(), factory, allowOverride);
+    registerPropertyType(factory.getImplementationClass(), factory, allowOverride);
+    registerValueType(factory.getValueClass(), factory, allowOverride);
+  }
+
+  private void registerValueType(Class<?> type, PropertyFactory<?, ?> factory, boolean allowOverride) {
+
+    register(this.valueType2factoryMap, type, factory, allowOverride);
+  }
+
+  private void registerPropertyType(Class<?> type, PropertyFactory<?, ?> factory, boolean allowOverride) {
+
+    register(this.propertyType2factoryMap, type, factory, allowOverride);
+  }
+
+  private static void register(Map<Class<?>, PropertyFactory<?, ?>> map, Class<?> type,
+      PropertyFactory<?, ?> factory, boolean allowOverride) {
 
     if (type == null) {
       return;
     }
-    PropertyFactory<?, ?> old = this.type2factoryMap.put(type, factory);
-    if (old != null) {
+    PropertyFactory<?, ?> old = map.put(type, factory);
+    if ((old != null) && !allowOverride) {
       throw new DuplicateObjectException(factory, type, old);
     }
   }
@@ -78,7 +103,7 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.type2factoryMap.isEmpty()) {
+    if (this.propertyType2factoryMap.isEmpty()) {
       registerDefaults();
     }
   }
@@ -89,16 +114,16 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
   @SuppressWarnings("rawtypes")
   protected void registerDefaults() {
 
-    registerFactory(new StringPropertyFactory());
-    registerFactory(new GenericPropertyFactory());
-    registerFactory(new BooleanPropertyFactory());
-    registerFactory(new DoublePropertyFactory());
-    registerFactory(new FloatPropertyFactory());
-    registerFactory(new IntegerPropertyFactory());
-    registerFactory(new ListPropertyFactory());
-    registerFactory(new LongPropertyFactory());
-    registerFactory(new SetPropertyFactory());
-    registerFactory(new MapPropertyFactory());
+    registerFactory(new PropertyFactoryString());
+    registerFactory(new PropertyFactoryGeneric());
+    registerFactory(new PropertyFactoryBoolean());
+    registerFactory(new PropertyFactoryDouble());
+    registerFactory(new PropertyFactoryFloat());
+    registerFactory(new PropertyFactoryInteger());
+    registerFactory(new PropertyFactoryList());
+    registerFactory(new PropertyFactoryLong());
+    registerFactory(new PropertyFactorySet());
+    registerFactory(new PropertyFactoryMap());
   }
 
   /**
@@ -132,20 +157,39 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactory(
+  public <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactoryForPropertyType(
       Class<PROPERTY> propertyType) {
 
-    return (PropertyFactory) this.type2factoryMap.get(propertyType);
+    return (PropertyFactory) this.propertyType2factoryMap.get(propertyType);
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
+  public <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<V> valueType,
+      boolean polymorphic) {
+
+    PropertyFactory<?, ?> factory = this.valueType2factoryMap.get(valueType);
+    if ((factory == null) && polymorphic) {
+      for (Entry<Class<?>, PropertyFactory<?, ?>> entry : this.valueType2factoryMap.entrySet()) {
+        if (entry.getKey().isAssignableFrom(valueType)) {
+          factory = entry.getValue();
+          break;
+        }
+      }
+    }
+    return (PropertyFactory) factory;
   }
 
   @Override
-  public <V, PROPERTY extends ReadableProperty<V>> PROPERTY create(Class<PROPERTY> propertyType, String name,
-      GenericType<V> valueType, Bean bean, AbstractValidator<? super V> validator) {
+  public <V, PROPERTY extends ReadableProperty<V>> PROPERTY create(Class<PROPERTY> propertyType,
+      GenericType<V> valueType, boolean polymorphic, String name, Bean bean,
+      AbstractValidator<? super V> validator) {
 
-    PropertyFactory<V, ? extends PROPERTY> factory = getFactory(propertyType);
-    if (factory == null) {
-      throw new ObjectNotFoundException(PropertyFactory.class, propertyType);
+    Class<V> valueClass = null;
+    if (valueType != null) {
+      valueClass = valueType.getRetrievalClass();
     }
+    PropertyFactory<V, ? extends PROPERTY> factory = getRequiredFactory(propertyType, valueClass, polymorphic);
     return factory.create(name, valueType, bean, validator);
   }
 

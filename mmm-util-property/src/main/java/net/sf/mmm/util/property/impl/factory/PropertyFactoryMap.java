@@ -27,7 +27,13 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  */
 @Named
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class MapPropertyFactory<K, V> extends AbstractPropertyFactory<ObservableMap<K, V>, MapProperty<K, V>> {
+public class PropertyFactoryMap<K, V> extends AbstractPropertyFactory<ObservableMap<K, V>, MapProperty<K, V>> {
+
+  @Override
+  public Class<? extends ObservableMap<K, V>> getValueClass() {
+
+    return (Class) ObservableMap.class;
+  }
 
   @Override
   public Class<? extends ReadableProperty<ObservableMap<K, V>>> getReadableInterface() {

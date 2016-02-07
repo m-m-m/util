@@ -57,11 +57,12 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
    * The constructor.
    *
    * @param master the {@link BeanAccessPrototype} to copy.
+   * @param name - see {@link #getName()}.
    * @param dynamic - see {@link #isDynamic()}.
    */
-  public BeanAccessPrototype(BeanAccessPrototype<BEAN> master, boolean dynamic) {
+  public BeanAccessPrototype(BeanAccessPrototype<BEAN> master, boolean dynamic, String name) {
 
-    super(master.beanType, master.getName(), master.beanFactory);
+    super(master.beanType, name, master.beanFactory);
     this.beanType = master.beanType;
     this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
     for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {
@@ -103,8 +104,10 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     return property;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public <PROPERTY extends WritableProperty<?>> PROPERTY createProperty(String name, Class<PROPERTY> type) {
+  public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<V> valueType,
+      Class<PROPERTY> propertyType) {
 
     if (!this.dynamic) {
       throw new ReadOnlyException(this.beanType.getSimpleName(), "access.properties");
@@ -113,9 +116,9 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     if (prototypeProperty != null) {
       throw new DuplicateObjectException(this, name, prototypeProperty);
     }
-    AbstractProperty<?> property = this.beanFactory.createProperty(name, null, getBean(), type);
+    AbstractProperty<?> property = this.beanFactory.createProperty(name, valueType, getBean(), propertyType);
     addProperty(property);
-    return type.cast(property);
+    return (PROPERTY) property;
   }
 
   @Override

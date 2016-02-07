@@ -21,7 +21,13 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @since 8.0.0
  */
 @Named
-public class IntegerPropertyFactory extends AbstractPropertyFactory<Number, IntegerProperty> {
+public class PropertyFactoryInteger extends AbstractPropertyFactory<Number, IntegerProperty> {
+
+  @Override
+  public Class<? extends Number> getValueClass() {
+
+    return Integer.class;
+  }
 
   @Override
   public Class<? extends ReadableProperty<Number>> getReadableInterface() {

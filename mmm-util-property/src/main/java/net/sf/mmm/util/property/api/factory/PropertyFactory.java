@@ -27,6 +27,12 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 public interface PropertyFactory<V, PROPERTY extends WritableProperty<V>> {
 
   /**
+   * @return the {@link Class} of the {@link WritableProperty#getValue() property value}. May be <code>null</code> for
+   *         {@link net.sf.mmm.util.property.api.GenericProperty}.
+   */
+  Class<? extends V> getValueClass();
+
+  /**
    * @return the {@link Class} reflecting the {@link ReadableProperty} interface.
    */
   Class<? extends ReadableProperty<V>> getReadableInterface();
@@ -43,6 +49,7 @@ public interface PropertyFactory<V, PROPERTY extends WritableProperty<V>> {
 
   /**
    * Creates a new instance of the property.
+   *
    * @param name the {@link ReadableProperty#getName() property name}.
    * @param valueType is the {@link GenericType} of the value. Only needed for generic properties such as
    *        {@link net.sf.mmm.util.property.api.GenericProperty} or {@link net.sf.mmm.util.property.api.ListProperty}.

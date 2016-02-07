@@ -5,47 +5,53 @@ package net.sf.mmm.util.property.impl.factory;
 import javax.inject.Named;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.FloatProperty;
-import net.sf.mmm.util.property.api.ReadableFloatProperty;
+import net.sf.mmm.util.property.api.LongProperty;
+import net.sf.mmm.util.property.api.ReadableLongProperty;
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.WritableFloatProperty;
+import net.sf.mmm.util.property.api.WritableLongProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
- * This is the implementation of {@link PropertyFactory} for {@link FloatProperty}.
+ * This is the implementation of {@link PropertyFactory} for {@link LongProperty}.
  *
  * @author hohwille
  * @since 8.0.0
  */
 @Named
-public class FloatPropertyFactory extends AbstractPropertyFactory<Number, FloatProperty> {
+public class PropertyFactoryLong extends AbstractPropertyFactory<Number, LongProperty> {
+
+  @Override
+  public Class<? extends Number> getValueClass() {
+
+    return Long.class;
+  }
 
   @Override
   public Class<? extends ReadableProperty<Number>> getReadableInterface() {
 
-    return ReadableFloatProperty.class;
+    return ReadableLongProperty.class;
   }
 
   @Override
   public Class<? extends WritableProperty<Number>> getWritableInterface() {
 
-    return WritableFloatProperty.class;
+    return WritableLongProperty.class;
   }
 
   @Override
-  public Class<FloatProperty> getImplementationClass() {
+  public Class<LongProperty> getImplementationClass() {
 
-    return FloatProperty.class;
+    return LongProperty.class;
   }
 
   @Override
-  public FloatProperty create(String name, GenericType<Number> valueType, Bean bean,
+  public LongProperty create(String name, GenericType<Number> valueType, Bean bean,
       AbstractValidator<? super Number> validator) {
 
-    return new FloatProperty(name, bean, validator);
+    return new LongProperty(name, bean, validator);
   }
 
 }

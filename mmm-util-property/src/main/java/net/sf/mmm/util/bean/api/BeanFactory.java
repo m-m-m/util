@@ -27,15 +27,32 @@ public interface BeanFactory {
   /**
    * Creates a prototype of the given {@link Bean}. A prototype is used as template to {@link #create(Bean) create}
    * regular {@link Bean}s. Such beans will inherit the defaults from the prototype what are the
-   * {@link BeanAccess#getProperties() available properties} as well as their default
-   * {@link WritableProperty#getValue() value}.
+   * {@link BeanAccess#getProperties() available properties} as well as their default {@link WritableProperty#getValue()
+   * value}.
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
    * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
    * @return the prototype instance of the specified {@link Bean}.
    */
-  <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic);
+  default <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic) {
+
+    return createPrototype(type, dynamic, null);
+  }
+
+  /**
+   * Creates a prototype of the given {@link Bean}. A prototype is used as template to {@link #create(Bean) create}
+   * regular {@link Bean}s. Such beans will inherit the defaults from the prototype what are the
+   * {@link BeanAccess#getProperties() available properties} as well as their default {@link WritableProperty#getValue()
+   * value}.
+   *
+   * @param <BEAN> the generic type of the {@link Bean}.
+   * @param type the {@link Class} reflecting the {@link Bean}.
+   * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
+   * @param name the explicit {@link BeanAccess#getName() name} of the {@link Bean}.
+   * @return the prototype instance of the specified {@link Bean}.
+   */
+  <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic, String name);
 
   /**
    * @param <BEAN> the generic type of the {@link Bean}.

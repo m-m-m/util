@@ -25,7 +25,13 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  */
 @Named
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ListPropertyFactory<E> extends AbstractPropertyFactory<ObservableList<E>, ListProperty<E>> {
+public class PropertyFactoryList<E> extends AbstractPropertyFactory<ObservableList<E>, ListProperty<E>> {
+
+  @Override
+  public Class<? extends ObservableList<E>> getValueClass() {
+
+    return (Class) ObservableList.class;
+  }
 
   @Override
   public Class<? extends ReadableProperty<ObservableList<E>>> getReadableInterface() {

@@ -21,7 +21,13 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @since 8.0.0
  */
 @Named
-public class BooleanPropertyFactory extends AbstractPropertyFactory<Boolean, BooleanProperty> {
+public class PropertyFactoryBoolean extends AbstractPropertyFactory<Boolean, BooleanProperty> {
+
+  @Override
+  public Class<? extends Boolean> getValueClass() {
+
+    return Boolean.class;
+  }
 
   @Override
   public Class<? extends ReadableProperty<Boolean>> getReadableInterface() {

@@ -80,14 +80,16 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
     return (WritableProperty<V>) getProperty(name);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public <PROPERTY extends WritableProperty<?>> PROPERTY createProperty(String name, Class<PROPERTY> type) {
+  public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<V> valueType,
+      Class<PROPERTY> propertyType) {
 
     if (isReadOnly()) {
       throw new UnsupportedOperationException();
     }
-    getPrototype().createProperty(name, type);
-    return type.cast(getProperty(name));
+    getPrototype().createProperty(name, valueType, propertyType);
+    return (PROPERTY) getProperty(name);
   }
 
   void createProperties() {

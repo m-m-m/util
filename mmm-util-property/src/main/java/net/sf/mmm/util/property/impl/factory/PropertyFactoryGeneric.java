@@ -23,7 +23,13 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  */
 @Named
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class GenericPropertyFactory<V> extends AbstractPropertyFactory<V, GenericProperty<V>> {
+public class PropertyFactoryGeneric<V> extends AbstractPropertyFactory<V, GenericProperty<V>> {
+
+  @Override
+  public Class<? extends V> getValueClass() {
+
+    return null;
+  }
 
   @Override
   public Class<? extends ReadableProperty<V>> getReadableInterface() {

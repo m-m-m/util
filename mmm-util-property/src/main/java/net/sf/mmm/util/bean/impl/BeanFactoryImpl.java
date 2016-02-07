@@ -26,12 +26,8 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.property.api.AbstractProperty;
-import net.sf.mmm.util.property.api.BooleanProperty;
 import net.sf.mmm.util.property.api.GenericProperty;
-import net.sf.mmm.util.property.api.IntegerProperty;
-import net.sf.mmm.util.property.api.LongProperty;
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.StringProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
 import net.sf.mmm.util.property.api.factory.PropertyFactoryManager;
@@ -221,10 +217,14 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   @Override
-  public <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic) {
+  public <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic, String name) {
 
     BeanAccessPrototype<BEAN> prototype = getPrototypeInternal(type);
-    BeanAccessPrototype<BEAN> copy = new BeanAccessPrototype<>(prototype, dynamic);
+    String prototypeName = name;
+    if (prototypeName == null) {
+      prototypeName = prototype.getName();
+    }
+    BeanAccessPrototype<BEAN> copy = new BeanAccessPrototype<>(prototype, dynamic, prototypeName);
     return copy.getBean();
   }
 
@@ -382,6 +382,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param bean the {@link WritableProperty#getBean() property bean}.
    * @return the new property instance.
    */
+  @SuppressWarnings("unchecked")
   protected <V> AbstractProperty<V> createProperty(String name, GenericType<V> type, Bean bean) {
 
     return createProperty(name, type, bean, WritableProperty.class);
@@ -389,36 +390,33 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
   /**
    * @param <V> the generic property type.
+   * @param <PROPERTY> the generic type of the {@link ReadableProperty property}.
    * @param name the {@link WritableProperty#getName() property name}.
-   * @param type the {@link WritableProperty#getType() property type}.
+   * @param valueType the {@link WritableProperty#getType() property type}.
    * @param bean the {@link WritableProperty#getBean() property bean}.
    * @param propertyClass the {@link Class} reflecting the {@link WritableProperty} or <code>null</code> if no property
    *        method exists and this method is called for plain getter or setter.
    * @return the new instance of {@link AbstractProperty}.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  protected <V> AbstractProperty<V> createProperty(String name, GenericType<V> type, Bean bean,
-      Class<? extends ReadableProperty> propertyClass) {
+  protected <V, PROPERTY extends ReadableProperty<V>> AbstractProperty<V> createProperty(String name,
+      GenericType<V> valueType, Bean bean, Class<PROPERTY> propertyClass) {
 
     AbstractProperty result;
-    PropertyFactory<V, ?> factory = this.propertyFactoryManager.getFactory(propertyClass);
+    Class<V> valueClass = null;
+    if (valueType != null) {
+      valueClass = valueType.getRetrievalClass();
+    }
+    PropertyFactory<V, ?> factory = this.propertyFactoryManager.getFactory(propertyClass, valueClass, false);
     if (factory != null) {
-      result = (AbstractProperty) factory.create(name, type, bean, null);
+      result = (AbstractProperty) factory.create(name, valueType, bean, null);
     } else if ((!propertyClass.isInterface()) && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
-      result = createPropertyFromSpecifiedClass(name, type, bean, propertyClass);
+      result = createPropertyFromSpecifiedClass(name, valueType, bean, propertyClass);
     } else {
-      Class<?> valueClass = type.getRetrievalClass();
-      if (valueClass == String.class) {
-        result = new StringProperty(name, bean);
-      } else if (valueClass == Boolean.class) {
-        result = new BooleanProperty(name, bean);
-      } else if (valueClass == Integer.class) {
-        result = new IntegerProperty(name, bean);
-      } else if (valueClass == Long.class) {
-        result = new LongProperty(name, bean);
-      } else {
-        result = new GenericProperty<>(name, type, bean);
-      }
+      getLogger().debug(
+          "Could not resolve specific property for class '{}' and value-type '{}'. Using GenericProperty as fallback.",
+          propertyClass, valueType);
+      result = new GenericProperty<>(name, valueType, bean);
     }
     return result;
   }
