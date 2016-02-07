@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import java.util.function.Function;
+
 import com.sun.javafx.binding.MapExpressionHelper;
 
 import javafx.beans.InvalidationListener;
@@ -12,7 +14,8 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
-import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
+import net.sf.mmm.util.validation.base.collection.AbstractMapValidatorBuilder;
+import net.sf.mmm.util.validation.base.collection.ValidatorBuilderMap;
 
 /**
  * This is the implementation of {@link WritableListProperty}.
@@ -114,29 +117,20 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
     MapExpressionHelper.fireValueChangedEvent(this.helper, change);
   }
 
-  // @SuppressWarnings({ "unchecked", "rawtypes" })
-  // @Override
-  // public AbstractMapValidatorBuilder<K, V, ObservableMap<K, V>, PropertyBuilder<MapProperty<K, V>>, ?>
-  // withValdidator() {
-  //
-  // Function factory = new Function<PropertyBuilder<MapProperty<K, V>>, ValidatorBuilderCollection<E,
-  // PropertyBuilder<MapProperty<K, V>>>>() {
-  //
-  // @Override
-  // public ValidatorBuilderMap<K, V, PropertyBuilder<MapProperty<K, V>>> apply(
-  // PropertyBuilder<MapProperty<K, V>> t) {
-  //
-  // return new ValidatorBuilderMap<>(t);
-  // }
-  // };
-  // return (ValidatorBuilderMap) withValdidator(factory);
-  // }
-
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public ObjectValidatorBuilder<? extends ObservableMap<K, V>, ? extends AbstractProperty<ObservableMap<K, V>>.PropertyBuilder<? extends AbstractProperty<? extends ObservableMap<K, V>>>, ?> withValdidator() {
+  public AbstractMapValidatorBuilder<K, V, ObservableMap<K, V>, PropertyBuilder<MapProperty<K, V>>, ?> withValdidator() {
 
-    // TODO Auto-generated method stub
-    return null;
+    Function factory = new Function<PropertyBuilder<MapProperty<K, V>>, ValidatorBuilderMap<K, V, PropertyBuilder<MapProperty<K, V>>>>() {
+
+      @Override
+      public ValidatorBuilderMap<K, V, PropertyBuilder<MapProperty<K, V>>> apply(
+          PropertyBuilder<MapProperty<K, V>> t) {
+
+        return new ValidatorBuilderMap<>(t);
+      }
+    };
+    return (ValidatorBuilderMap) withValdidator(factory);
   }
 
   @Override

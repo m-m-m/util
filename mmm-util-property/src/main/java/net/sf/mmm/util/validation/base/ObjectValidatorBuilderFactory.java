@@ -3,8 +3,10 @@
 package net.sf.mmm.util.validation.base;
 
 import java.util.Collection;
+import java.util.Map;
 
 import net.sf.mmm.util.validation.base.collection.ValidatorBuilderCollection;
+import net.sf.mmm.util.validation.base.collection.ValidatorBuilderMap;
 import net.sf.mmm.util.validation.base.text.ValidatorBuilderCharSequence;
 import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
 
@@ -76,6 +78,17 @@ public class ObjectValidatorBuilderFactory<PARENT> {
   public <E> ValidatorBuilderCollection<E, PARENT> create(Collection<E> v) {
 
     return new ValidatorBuilderCollection<>(getParent());
+  }
+
+  /**
+   * @param <K> the generic type of the {@link java.util.Map.Entry#getKey() keys}.
+   * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
+   * @param v the value for type inference. Will be ignored and may be <code>null</code>.
+   * @return the {@link ValidatorBuilderCollection}.
+   */
+  public <K, V> ValidatorBuilderMap<K, V, PARENT> create(Map<K, V> v) {
+
+    return new ValidatorBuilderMap<>(getParent());
   }
 
   /**

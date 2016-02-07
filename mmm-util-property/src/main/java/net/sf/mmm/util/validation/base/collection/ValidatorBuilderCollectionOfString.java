@@ -9,7 +9,7 @@ import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
 import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
 
 /**
- * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for {@link Collection} of {@link String}s.
+ * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for a {@link Collection} of {@link String}s.
  *
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  *

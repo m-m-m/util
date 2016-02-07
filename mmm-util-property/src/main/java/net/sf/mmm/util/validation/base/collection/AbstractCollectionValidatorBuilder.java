@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.function.BiFunction;
 
 import net.sf.mmm.util.validation.base.AbstractValidator;
+import net.sf.mmm.util.validation.base.ComplexValidatorBuilder;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilderFactory;
 import net.sf.mmm.util.value.api.Range;
@@ -23,9 +24,7 @@ import net.sf.mmm.util.value.api.Range;
  * @since 8.0.0
  */
 public abstract class AbstractCollectionValidatorBuilder<E, V extends Collection<E>, PARENT, SELF extends AbstractCollectionValidatorBuilder<E, V, PARENT, SELF>>
-    extends ObjectValidatorBuilder<V, PARENT, SELF> {
-
-  private ObjectValidatorBuilderFactory<SELF> subFactory;
+    extends ComplexValidatorBuilder<V, PARENT, SELF> {
 
   private ObjectValidatorBuilder<E, ? extends SELF, ?> subBuilder;
 
@@ -73,17 +72,6 @@ public abstract class AbstractCollectionValidatorBuilder<E, V extends Collection
   }
 
   /**
-   * @return the subFactory
-   */
-  public ObjectValidatorBuilderFactory<SELF> getSubFactory() {
-
-    if (this.subFactory == null) {
-      this.subFactory = new ObjectValidatorBuilderFactory<>(self());
-    }
-    return this.subFactory;
-  }
-
-  /**
    * Creates a new {@link ObjectValidatorBuilder builder} for the {@link AbstractValidator validators} to invoke for
    * each {@link Collection#contains(Object) element contained} in the {@link Collection}.<br/>
    * Use {@link #and()} to return to this builder after the sub-builder is complete.<br/>
@@ -113,7 +101,7 @@ public abstract class AbstractCollectionValidatorBuilder<E, V extends Collection
   @Override
   public AbstractValidator<? super V> build() {
 
-    if (this.subBuilder == null) {
+    if (this.subBuilder != null) {
       add(new ValidatorCollectionElements(getValidators(this.subBuilder)));
     }
     return super.build();

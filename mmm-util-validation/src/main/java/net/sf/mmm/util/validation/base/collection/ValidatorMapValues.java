@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base.collection;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -11,20 +11,20 @@ import net.sf.mmm.util.validation.base.ComposedValueValidator;
 import net.sf.mmm.util.validation.base.ValidationFailureComposer;
 
 /**
- * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} {@link #validate(Collection, Object) validating}
- * {@link Collection#iterator() all elements} of a given {@link Collection} using the
- * {@link #ValidatorCollectionElements(AbstractValidator...) given} validators.
+ * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} {@link #validate(Map, Object) validating}
+ * {@link Map#values() all values} of a given {@link Map} using the {@link #ValidatorMapValues(AbstractValidator...)
+ * given} validators.
  *
- * @param <E> the generic type of the {@link Collection#contains(Object) elements contained} in the collection.
+ * @param <V> the generic type of the {@link Map#values() values} in the collection.
  *
  * @author hohwille
  * @since 7.1.0
  */
-public class ValidatorCollectionElements<E> extends AbstractValidator<Collection<E>>
-    implements ComposedValueValidator<Collection<E>> {
+public class ValidatorMapValues<V> extends AbstractValidator<Map<?, V>>
+    implements ComposedValueValidator<Map<?, V>> {
 
   /** The child validators. */
-  private final AbstractValidator<? super E>[] validators;
+  private final AbstractValidator<? super V>[] validators;
 
   /**
    * The constructor.
@@ -33,7 +33,7 @@ public class ValidatorCollectionElements<E> extends AbstractValidator<Collection
    *        validate} each element.
    */
   @SafeVarargs
-  public ValidatorCollectionElements(AbstractValidator<? super E>... validators) {
+  public ValidatorMapValues(AbstractValidator<? super V>... validators) {
 
     super();
     this.validators = validators;
@@ -45,7 +45,7 @@ public class ValidatorCollectionElements<E> extends AbstractValidator<Collection
    * @param validators the {@link AbstractValidator}s used to {@link AbstractValidator#validate(Object, Object)
    *        validate} each element.
    */
-  public ValidatorCollectionElements(List<AbstractValidator<? super E>> validators) {
+  public ValidatorMapValues(List<AbstractValidator<? super V>> validators) {
     this(validators.toArray(new AbstractValidator[validators.size()]));
   }
 
@@ -62,20 +62,20 @@ public class ValidatorCollectionElements<E> extends AbstractValidator<Collection
   }
 
   @Override
-  public ValidationFailure validate(Collection<E> value, Object valueSource) {
+  public ValidationFailure validate(Map<?, V> map, Object valueSource) {
 
     ValidationFailureComposer composer = new ValidationFailureComposer();
-    if (value != null) {
+    if (map != null) {
       int i = 0;
-      for (E element : value) {
-        for (AbstractValidator<? super E> validator : this.validators) {
+      for (V value : map.values()) {
+        for (AbstractValidator<? super V> validator : this.validators) {
           Object source;
           if (valueSource == null) {
             source = Integer.toString(i);
           } else {
             source = valueSource.toString() + "." + i;
           }
-          ValidationFailure failure = validator.validate(element, source);
+          ValidationFailure failure = validator.validate(value, source);
           composer.add(failure);
         }
         i++;
