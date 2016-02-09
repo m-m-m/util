@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
 import net.sf.mmm.util.validation.base.ValidatorBuilderObject;
@@ -19,6 +20,9 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderObject;
  * @since 8.0.0
  */
 public class GenericProperty<VALUE> extends AbstractRegularProperty<VALUE> {
+
+  /** The {@link #getType() type} of {@link Object}. */
+  public static final GenericType<Object> TYPE_DEFAULT = new SimpleGenericTypeImpl<>(Object.class);
 
   private final GenericType<VALUE> type;
 
