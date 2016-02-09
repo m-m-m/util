@@ -35,7 +35,7 @@ public class BeanAccessReadOnly<BEAN extends Bean> extends BeanAccessInstance<BE
   @Override
   protected WritableProperty<?> createProperty(BeanPrototypeProperty prototypeProperty) {
 
-    WritableProperty<?> property = this.delegate.getProperty(prototypeProperty, true);
+    WritableProperty<?> property = this.delegate.getProperty(prototypeProperty.getProperty().getName());
     return new ReadOnlyPropertyImpl<>(property);
   }
 

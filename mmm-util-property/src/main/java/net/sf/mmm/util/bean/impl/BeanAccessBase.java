@@ -71,16 +71,6 @@ public abstract class BeanAccessBase<BEAN extends Bean>
     return this;
   }
 
-  @Override
-  public WritableProperty<?> getProperty(String propertyName) {
-
-    BeanPrototypeProperty prototypeProperty = getPrototype().getName2PropertyMap().get(propertyName);
-    if (prototypeProperty != null) {
-      return getProperty(prototypeProperty, true);
-    }
-    return null;
-  }
-
   /**
    * Gets the {@link WritableProperty} for the given <code>index</code>.
    *
@@ -97,20 +87,11 @@ public abstract class BeanAccessBase<BEAN extends Bean>
     return false;
   }
 
-  // /**
-  // * @param bean is the bean to set
-  // */
-  // void setBean(Bean bean) {
-  //
-  // assert ((this.bean == null) || (this.bean == bean));
-  // this.bean = bean;
-  // }
-
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
     Object result = null;
-    BeanPrototypeOperation operation = getPrototype().getMethod2OperationMap().get(method);
+    BeanPrototypeOperation operation = getPrototype().getOperation(method);
     if (operation != null) {
       result = operation.invoke(this, args);
     }

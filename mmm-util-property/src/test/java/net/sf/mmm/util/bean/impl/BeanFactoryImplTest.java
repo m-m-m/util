@@ -53,6 +53,8 @@ public class BeanFactoryImplTest extends Assertions {
     ExamplePropertyBean bean = beanFactory.create(ExamplePropertyBean.class);
     verifyBean(bean, beanFactory);
     verifyExamplePropertyBean(bean, beanFactory);
+    assertThat(bean.access().getBeanClass()).isEqualTo(ExamplePropertyBean.class);
+    assertThat(bean.access().getName()).isEqualTo("RenamedBean");
   }
 
   @Test
@@ -119,6 +121,9 @@ public class BeanFactoryImplTest extends Assertions {
     WritableProperty<?>[] properties = { bean.CountryCode(), bean.Name(), bean.Age(), bean.Friend(),
     bean.Orientation() };
     assertThat(access.getProperties()).hasSize(properties.length).contains(properties);
+
+    assertThat(access.getPropertyNameForAlias("Alias")).isEqualTo("Name");
+    assertThat(access.getRequiredProperty("Alias")).isSameAs(access.getRequiredProperty("Name"));
 
     String name = "magicName";
     bean.Name().setValue(name);

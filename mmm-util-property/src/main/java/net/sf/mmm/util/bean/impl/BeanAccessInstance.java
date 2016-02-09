@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.impl;
 
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.Map;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
@@ -49,10 +49,32 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   }
 
   @Override
+  public WritableProperty<?> getProperty(String propertyName) {
+
+    BeanPrototypeProperty prototypeProperty = getPrototype().getPrototypeProperty(propertyName);
+    if (prototypeProperty != null) {
+      return getProperty(prototypeProperty, true);
+    }
+    return null;
+  }
+
+  @Override
   public Iterator<WritableProperty<?>> iterator() {
 
     createProperties();
     return new ArrayIterator<>(this.properties);
+  }
+
+  @Override
+  public Iterable<String> getAliases() {
+
+    return this.prototype.getAliases();
+  }
+
+  @Override
+  public String getPropertyNameForAlias(String alias) {
+
+    return this.prototype.getPropertyNameForAlias(alias);
   }
 
   @Override
@@ -94,15 +116,15 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
 
   void createProperties() {
 
-    Map<String, BeanPrototypeProperty> name2PropertyMap = getPrototype().getName2PropertyMap();
-    int size = name2PropertyMap.size();
+    Collection<BeanPrototypeProperty> prototypeProperties = this.prototype.getPrototypeProperties();
+    int size = prototypeProperties.size();
     int length = this.properties.length;
     if (length == size) {
       return;
     }
     WritableProperty<?>[] newProperties = new WritableProperty<?>[size];
     System.arraycopy(this.properties, 0, newProperties, 0, length);
-    for (BeanPrototypeProperty prototypeProperty : name2PropertyMap.values()) {
+    for (BeanPrototypeProperty prototypeProperty : prototypeProperties) {
       int i = prototypeProperty.getIndex();
       if (i >= length) {
         newProperties[i] = createProperty(prototypeProperty);

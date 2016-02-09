@@ -27,7 +27,24 @@ public interface BeanAccess {
   Iterable<WritableProperty<?>> getProperties();
 
   /**
-   * @param name the {@link WritableProperty#getName() name} of the requested property.
+   * @return an {@link Iterable} with all defined {@link #getPropertyNameForAlias(String) aliases}.
+   */
+  Iterable<String> getAliases();
+
+  /**
+   * An alias is an alternative for a {@link #getProperty(String) property} {@link WritableProperty#getName() name}. It
+   * is defined by annotating the property method with {@link Named} and allows to support a property under a legacy
+   * name after it has been renamed as well as to use a technical name containing special characters (e.g. "@" or ".")
+   * for very specific cases.
+   *
+   * @param alias the alias name.
+   * @return the resolved {@link WritableProperty#getName() property name} or {@code null} if no such alias is defined.
+   */
+  String getPropertyNameForAlias(String alias);
+
+  /**
+   * @param name the {@link WritableProperty#getName() name} of the requested property or a potential
+   *        {@link #getPropertyNameForAlias(String) alias} of the property.
    * @return the requested {@link WritableProperty} or <code>null</code> if no such property exists.
    */
   WritableProperty<?> getProperty(String name);

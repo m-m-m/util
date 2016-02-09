@@ -78,7 +78,7 @@ public abstract class BeanPrototypeOperation {
     if (methodType != null) {
       String propertyName = beanMethod.getPropertyName();
       Method method = beanMethod.getMethod();
-      BeanPrototypeProperty prototypeProperty = prototype.getName2PropertyMap().get(propertyName);
+      BeanPrototypeProperty prototypeProperty = prototype.getPrototypeProperty(propertyName);
       switch (methodType) {
         case GET:
           return new BeanPrototypeOperationGet(prototype, method, prototypeProperty);

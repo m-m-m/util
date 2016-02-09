@@ -21,7 +21,7 @@ public interface BeanFactory {
    */
   default <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type) {
 
-    return createPrototype(type, false);
+    return createPrototype(type, false, null);
   }
 
   /**

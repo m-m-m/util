@@ -321,13 +321,11 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   private void processMethods(BeanIntrospectionData introspectionData, BeanAccessPrototype<?> prototype,
       GenericType<?> beanType) {
 
-    Map<Method, BeanPrototypeOperation> method2OperationMap = prototype.getMethod2OperationMap();
-    Map<String, BeanPrototypeProperty> name2PropertyMap = prototype.getName2PropertyMap();
     for (BeanMethod beanMethod : introspectionData.methods) {
       BeanMethodType methodType = beanMethod.getMethodType();
       if ((methodType == BeanMethodType.GET) || (methodType == BeanMethodType.SET)) {
         String propertyName = beanMethod.getPropertyName();
-        BeanPrototypeProperty prototypeProperty = name2PropertyMap.get(propertyName);
+        BeanPrototypeProperty prototypeProperty = prototype.getPrototypeProperty(propertyName);
         if (prototypeProperty == null) {
           GenericType<?> propertyType = this.reflectionUtil.createGenericType(beanMethod.getPropertyType(),
               beanType);
@@ -335,6 +333,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
           prototype.addProperty(property);
         }
       }
+
       BeanPrototypeOperation operation;
       if ((methodType == BeanMethodType.EQUALS) && (introspectionData.customEquals != null)) {
         operation = new BeanPrototypeOperationCustomEquals(prototype, beanMethod.getMethod(),
@@ -345,7 +344,14 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
       } else {
         operation = BeanPrototypeOperation.create(beanMethod, prototype);
       }
-      method2OperationMap.put(beanMethod.getMethod(), operation);
+      prototype.registerOperation(operation);
+
+      if ((methodType == BeanMethodType.GET) || (methodType == BeanMethodType.PROPERTY)) {
+        Named alias = beanMethod.getMethod().getAnnotation(Named.class);
+        if (alias != null) {
+          prototype.registerAlias(alias.value(), beanMethod.getPropertyName());
+        }
+      }
     }
   }
 

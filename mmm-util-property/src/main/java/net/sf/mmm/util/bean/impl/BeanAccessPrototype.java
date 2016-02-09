@@ -3,9 +3,14 @@
 package net.sf.mmm.util.bean.impl;
 
 import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
@@ -27,11 +32,15 @@ import net.sf.mmm.util.reflect.api.GenericType;
  */
 public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN> {
 
+  private static final Logger LOG = LoggerFactory.getLogger(BeanAccessPrototype.class);
+
   private final Map<String, BeanPrototypeProperty> name2PropertyMap;
 
   private final Map<Method, BeanPrototypeOperation> method2OperationMap;
 
-  private final Class<BEAN> beanType;
+  private final Map<String, String> aliasMap;
+
+  private final Collection<String> aliases;
 
   private final boolean dynamic;
 
@@ -46,9 +55,10 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
    */
   public BeanAccessPrototype(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory) {
     super(beanClass, name, beanFactory);
-    this.beanType = beanClass;
     this.name2PropertyMap = new HashMap<>();
     this.method2OperationMap = new HashMap<>();
+    this.aliasMap = new HashMap<>();
+    this.aliases = Collections.unmodifiableSet(this.aliasMap.keySet());
     this.dynamic = false;
     this.beanFactory = beanFactory;
   }
@@ -62,9 +72,10 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
    */
   public BeanAccessPrototype(BeanAccessPrototype<BEAN> master, boolean dynamic, String name) {
 
-    super(master.beanType, name, master.beanFactory);
-    this.beanType = master.beanType;
+    super(master.getBeanClass(), name, master.beanFactory);
     this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
+    this.aliasMap = master.aliasMap;
+    this.aliases = master.aliases;
     for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {
       AbstractProperty<?> property = prototypeProperty.getProperty();
       BeanPrototypeProperty copy = new BeanPrototypeProperty(property.copy(getBean()),
@@ -89,28 +100,13 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     return (Iterator) this.name2PropertyMap.values().stream().map(x -> x.getProperty()).iterator();
   }
 
-  @Override
-  public <V> WritableProperty<V> createProperty(String name, GenericType<V> propertyType) {
-
-    if (!this.dynamic) {
-      throw new ReadOnlyException(this.beanType.getSimpleName(), "access.properties");
-    }
-    BeanPrototypeProperty prototypeProperty = this.name2PropertyMap.get(name);
-    if (prototypeProperty != null) {
-      throw new DuplicateObjectException(this, name, prototypeProperty);
-    }
-    AbstractProperty<V> property = this.beanFactory.createProperty(name, propertyType, getBean());
-    addProperty(property);
-    return property;
-  }
-
   @SuppressWarnings("unchecked")
   @Override
   public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<V> valueType,
       Class<PROPERTY> propertyType) {
 
     if (!this.dynamic) {
-      throw new ReadOnlyException(this.beanType.getSimpleName(), "access.properties");
+      throw new ReadOnlyException(getBeanClass().getSimpleName(), "access.properties");
     }
     BeanPrototypeProperty prototypeProperty = this.name2PropertyMap.get(name);
     if (prototypeProperty != null) {
@@ -128,19 +124,77 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   }
 
   /**
-   * @return the method2operationMap
+   * @see #getOperation(Method)
+   * @param operation the {@link BeanPrototypeOperation} to register.
    */
-  protected Map<Method, BeanPrototypeOperation> getMethod2OperationMap() {
+  protected void registerOperation(BeanPrototypeOperation operation) {
 
-    return this.method2OperationMap;
+    this.method2OperationMap.put(operation.getMethod(), operation);
   }
 
   /**
-   * @return the name2propertyMap
+   * @param method the {@link Method} to lookup.
+   * @return the {@link BeanPrototypeOperation} for the given {@link Method} or {@code null} if not defined.
    */
-  protected Map<String, BeanPrototypeProperty> getName2PropertyMap() {
+  protected BeanPrototypeOperation getOperation(Method method) {
 
-    return this.name2PropertyMap;
+    return this.method2OperationMap.get(method);
+  }
+
+  /**
+   * @see #getPropertyNameForAlias(String)
+   *
+   * @param alias the new {@link #getPropertyNameForAlias(String) alias} to register.
+   * @param propertyName the {@link WritableProperty#getName() property name} to map to.
+   */
+  protected void registerAlias(String alias, String propertyName) {
+
+    String old = this.aliasMap.put(alias, propertyName);
+    if ((old != null) && !propertyName.equals(old)) {
+      LOG.warn("Replaced alias {} to {} with {}.", alias, old, propertyName);
+    }
+  }
+
+  @Override
+  public WritableProperty<?> getProperty(String propertyName) {
+
+    BeanPrototypeProperty prototypeProperty = getPrototypeProperty(propertyName);
+    if (prototypeProperty != null) {
+      return prototypeProperty.getProperty();
+    }
+    return null;
+  }
+
+  /**
+   * @param name the {@link WritableProperty#getName() property name}.
+   * @return the corresponding {@link BeanPrototypeProperty} or {@code null} if not defined.
+   */
+  protected BeanPrototypeProperty getPrototypeProperty(String name) {
+
+    BeanPrototypeProperty result = this.name2PropertyMap.get(name);
+    if (result == null) {
+      String propertyName = this.aliasMap.get(name);
+      if (propertyName != null) {
+        result = this.name2PropertyMap.get(propertyName);
+      }
+    }
+    return result;
+  }
+
+  /**
+   * @return the current number of {@link #getProperties() properties} defined in this prototype.
+   */
+  protected int getPropertyCount() {
+
+    return this.name2PropertyMap.size();
+  }
+
+  /**
+   * @return a {@link Collection} with all {@link BeanPrototypeProperty properties} defined in this prototype.
+   */
+  protected Collection<BeanPrototypeProperty> getPrototypeProperties() {
+
+    return this.name2PropertyMap.values();
   }
 
   /**
@@ -152,13 +206,16 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     this.name2PropertyMap.put(property.getName(), prototypeProperty);
   }
 
-  /**
-   * @return the type
-   */
   @Override
-  public Class<BEAN> getBeanClass() {
+  public String getPropertyNameForAlias(String alias) {
 
-    return this.beanType;
+    return this.aliasMap.get(alias);
+  }
+
+  @Override
+  public Iterable<String> getAliases() {
+
+    return this.aliases;
   }
 
   @Override
