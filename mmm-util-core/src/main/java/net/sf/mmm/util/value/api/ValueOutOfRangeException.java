@@ -54,7 +54,7 @@ public class ValueOutOfRangeException extends ValueException {
   @Deprecated
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
 
-    this((Object) value, (Object) minimum, (Object) maximum, null);
+    this((Object) value, (Object) minimum, (Object) maximum, valueSource);
   }
 
   /**
