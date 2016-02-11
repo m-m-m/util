@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
@@ -95,5 +97,54 @@ public class ComposedValidator<V> extends AbstractValidator<V> implements Compos
       }
     }
     return value;
+  }
+
+  @Override
+  public boolean contains(AbstractValidator<?> validator) {
+
+    if (super.contains(validator)) {
+      return true;
+    }
+    for (AbstractValidator<? super V> childValidator : this.validators) {
+      if (childValidator.contains(validator)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public ComposedValidator<V> append(AbstractValidator<? super V> validator) {
+
+    AbstractValidator<? super V>[] composed = new AbstractValidator[this.validators.length + 1];
+    System.arraycopy(this.validators, 0, composed, 0, this.validators.length);
+    composed[this.validators.length] = validator;
+    return new ComposedValidator<>(composed);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return 97531;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    ComposedValidator<?> other = (ComposedValidator<?>) obj;
+    if (!Objects.equals(this.validators, other.validators)) {
+      return false;
+    }
+    return true;
   }
 }

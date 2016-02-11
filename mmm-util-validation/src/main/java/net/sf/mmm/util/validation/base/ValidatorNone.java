@@ -7,11 +7,11 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
 /**
  * This is an implementation of {@link net.sf.mmm.util.validation.api.ValueValidator} that always validates
  * successfully.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class ValidatorNone extends AbstractValidator<Object> {
+public final class ValidatorNone extends AbstractValidator<Object> {
 
   /** @see #getInstance() */
   private static final ValidatorNone INSTANCE = new ValidatorNone();
@@ -41,6 +41,27 @@ public class ValidatorNone extends AbstractValidator<Object> {
   public ValidationFailure validate(Object value, Object valueSource) {
 
     return null;
+  }
+
+  @Override
+  public int hashCode() {
+
+    return 0;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    return true;
   }
 
 }

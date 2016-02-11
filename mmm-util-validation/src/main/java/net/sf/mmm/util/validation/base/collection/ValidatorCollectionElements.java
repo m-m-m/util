@@ -4,6 +4,7 @@ package net.sf.mmm.util.validation.base.collection;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -82,6 +83,31 @@ public class ValidatorCollectionElements<E> extends AbstractValidator<Collection
       }
     }
     return composer.get(valueSource);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return 8420;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    ValidatorCollectionElements<?> other = (ValidatorCollectionElements<?>) obj;
+    if (!Objects.equals(this.validators, other.validators)) {
+      return false;
+    }
+    return true;
   }
 
 }

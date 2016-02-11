@@ -3,6 +3,8 @@
 package net.sf.mmm.util.validation.base;
 
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -273,4 +275,36 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
     return this.propertyType;
   }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(this.pojoType, this.property);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    ValidatorJsr303<?> other = (ValidatorJsr303<?>) obj;
+    if (!Objects.equals(this.pojoType, other.pojoType)) {
+      return false;
+    }
+    if (!Objects.equals(this.property, other.property)) {
+      return false;
+    }
+    if (!Arrays.equals(this.groups, other.groups)) {
+      return false;
+    }
+    return true;
+  }
+
 }

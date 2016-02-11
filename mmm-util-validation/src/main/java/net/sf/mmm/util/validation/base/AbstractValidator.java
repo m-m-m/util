@@ -116,4 +116,30 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
     return null;
   }
 
+  /**
+   * @param validator the {@link AbstractValidator validator} to check.
+   * @return {@code true} if the given {@link AbstractValidator validator} is {@link #equals(Object) equal} to this
+   *         validator or one of its descendents, {@code false} otherwise.
+   */
+  public boolean contains(AbstractValidator<?> validator) {
+
+    return equals(validator);
+  }
+
+  /**
+   * @param validator the {@link AbstractValidator validator} to append.
+   * @return a new {@link ComposedValidator} instance composing the current validator ({@code this}) with the given
+   *         validator.
+   */
+  public ComposedValidator<V> append(AbstractValidator<? super V> validator) {
+
+    return new ComposedValidator<>(this, validator);
+  }
+
+  @Override
+  public abstract boolean equals(Object obj);
+
+  @Override
+  public abstract int hashCode();
+
 }

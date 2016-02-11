@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
@@ -10,7 +12,7 @@ import net.sf.mmm.util.value.api.Range;
 
 /**
  * This is the abstract implementation of a {@link ValueValidator} {@link #validate(Object) validating} that a given
- * value {@link Range#isContained(Comparable) is contained} in a given {@link Range}.
+ * value {@link Range#isContained(Object) is contained} in a given {@link Range}.
  *
  * @param <V> the generic type of the value to {@link #validate(Object) validate}.
  * @param <R> the generic type of the {@link Range}-bounds.
@@ -19,7 +21,7 @@ import net.sf.mmm.util.value.api.Range;
  * @since 7.1.0
  */
 @SuppressWarnings("rawtypes")
-public class AbstractValidatorRange<V, R extends Comparable> extends AbstractValueValidator<V> {
+public class AbstractValidatorRange<V, R> extends AbstractValueValidator<V> {
 
   /** @see #getCode() */
   public static final String CODE = "Range";
@@ -30,7 +32,7 @@ public class AbstractValidatorRange<V, R extends Comparable> extends AbstractVal
   /**
    * The constructor.
    *
-   * @param range is the {@link Range} the value has to be {@link Range#isContained(Comparable) contained in}.
+   * @param range is the {@link Range} the value has to be {@link Range#isContained(Object) contained in}.
    */
   public AbstractValidatorRange(Range<R> range) {
     super();
@@ -77,6 +79,31 @@ public class AbstractValidatorRange<V, R extends Comparable> extends AbstractVal
       return (P) this.range.getMax();
     }
     return super.getProperty(property);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hashCode(this.range);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    AbstractValidatorRange other = (AbstractValidatorRange) obj;
+    if (!Objects.equals(this.range, other.range)) {
+      return false;
+    }
+    return true;
   }
 
 }

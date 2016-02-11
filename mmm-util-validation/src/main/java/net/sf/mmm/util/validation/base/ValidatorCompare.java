@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.lang.api.GenericBean;
@@ -92,6 +94,34 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
       return createBundle(NlsBundleUtilCoreRoot.class).errorValueComparisonWithSource(value, this.comparator,
           value2, this.source);
     }
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(this.comparator, this.valueSource);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    ValidatorCompare<?> other = (ValidatorCompare<?>) obj;
+    if (!Objects.equals(this.comparator, other.comparator)) {
+      return false;
+    }
+    if (!Objects.equals(this.valueSource, other.valueSource)) {
+      return false;
+    }
+    return true;
   }
 
 }

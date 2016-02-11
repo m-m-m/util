@@ -102,4 +102,25 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
     return super.getProperty(property);
   }
 
+  @Override
+  public int hashCode() {
+
+    return CODE.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    return true;
+  }
+
 }
