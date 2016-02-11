@@ -22,9 +22,8 @@ import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 
 /**
- * This is an abstract base implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface
- * that converts an POJO to a POJO with the same properties. E.g. this can be useful when you convert to
- * {@link net.sf.mmm.util.transferobject.api.TransferObject}s.
+ * This is an abstract base implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that
+ * converts an POJO to a POJO with the same properties. E.g. this can be useful when you convert to transfer-objects.
  *
  * @param <SOURCE> is the generic {@link #getSourceType() source-type}.
  * @param <TARGET> is the generic {@link #getTargetType() target-type}.
@@ -32,8 +31,8 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> extends
-    AbstractRecursiveValueConverter<SOURCE, TARGET> {
+public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET>
+    extends AbstractRecursiveValueConverter<SOURCE, TARGET> {
 
   /** @see #setPojoFactory(PojoFactory) */
   private PojoFactory pojoFactory;
@@ -91,8 +90,8 @@ public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> ext
       if (setter != null) {
         try {
           // NOTE: This cast is actually a bug in compiler handling for generics...
-          PojoPropertyAccessorNonArg getter = (PojoPropertyAccessorNonArg) sourceDescriptor.getAccessor(
-              targetPropertyDescriptor.getName(), PojoPropertyAccessorNonArgMode.GET);
+          PojoPropertyAccessorNonArg getter = (PojoPropertyAccessorNonArg) sourceDescriptor
+              .getAccessor(targetPropertyDescriptor.getName(), PojoPropertyAccessorNonArgMode.GET);
           if (getter == null) {
             handleNoGetterForSetter(setter, targetClass, value, sourceClass);
           } else {
@@ -112,16 +111,16 @@ public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> ext
   }
 
   /**
-   * Called if the target object of the conversion has a setter that has no corresponding getter in the source
-   * object to convert.
+   * Called if the target object of the conversion has a setter that has no corresponding getter in the source object to
+   * convert.
    *
    * @param setter is the existing setter.
    * @param targetClass is the {@link Class} reflecting the target object to convert to.
    * @param sourceObject is the source object to convert that has no corresponding getter.
    * @param sourceClass is the {@link Class} reflecting the source object.
    */
-  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass, Object sourceObject,
-      Class<?> sourceClass) {
+  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass,
+      Object sourceObject, Class<?> sourceClass) {
 
     throw new PojoPropertyNotFoundException(sourceClass, setter.getName());
   }
@@ -148,8 +147,8 @@ public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> ext
 
   /**
    * This method sets the {@link PojoDescriptorBuilder} instance to use. If no such instance is set, the
-   * {@link #setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory) factory} has to be set and an
-   * individual instance will be created automatically on {@link #initialize() initialization}.
+   * {@link #setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory) factory} has to be set and an individual
+   * instance will be created automatically on {@link #initialize() initialization}.
    *
    * @param pojoDescriptorBuilder is the {@link PojoDescriptorBuilder} to use.
    */
