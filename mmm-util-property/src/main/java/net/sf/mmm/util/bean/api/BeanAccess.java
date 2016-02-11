@@ -267,11 +267,11 @@ public interface BeanAccess {
    * @param <PROPERTY> the generic type of the {@link WritableProperty property}.
    * @param property the {@link WritableProperty property} to update. Has to be owned by the {@link Bean#access()
    *        owning} {@link Bean}.
-   * @param validator the {@link AbstractValidator validator} to add. The implementation tries its best to be idempotent
-   *        so adding the same validator again should have no effect.
+   * @param validators are the {@link AbstractValidator validators} to add. The implementation tries its best to be
+   *        idempotent so adding the same validator again should have no effect.
    */
   <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
-      AbstractValidator<? super V> validator);
+      @SuppressWarnings("unchecked") AbstractValidator<? super V>... validators);
 
   /**
    * @see BeanFactory#getReadOnlyBean(Bean)

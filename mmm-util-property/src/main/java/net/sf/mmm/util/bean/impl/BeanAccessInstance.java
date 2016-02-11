@@ -156,7 +156,7 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
 
   @Override
   public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
-      AbstractValidator<? super V> validator) {
+      @SuppressWarnings("unchecked") AbstractValidator<? super V>... validators) {
 
     throw new UnsupportedOperationException("No prototype!");
   }

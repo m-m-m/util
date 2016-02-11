@@ -3,6 +3,7 @@
 package net.sf.mmm.util.bean.impl;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import net.sf.mmm.util.property.api.AbstractProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
+import net.sf.mmm.util.validation.base.ComposedValidator;
 
 /**
  * This is the implementation of {@link BeanAccess} for the {@link BeanFactory#createPrototype(Class) prototype} of a
@@ -236,10 +238,10 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
   public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
-      AbstractValidator<? super V> validator) {
+      AbstractValidator<? super V>... validators) {
 
     Objects.requireNonNull(property, "property");
-    Objects.requireNonNull(validator, "validator");
+    Objects.requireNonNull(validators, "validators");
     if (!this.dynamic) {
       throw new IllegalStateException("Bean not dynamic");
     }
@@ -253,13 +255,38 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     }
     AbstractProperty<V> p = (AbstractProperty<V>) property;
     AbstractValidator<? super V> currentValidator = p.getValidator();
-    if (currentValidator.contains(validator)) {
+    Collection<AbstractValidator<? super V>> validatorsToAdd = new ArrayList<>(validators.length);
+    for (int i = 0; i < validators.length; i++) {
+      AbstractValidator<? super V> validator = validators[i];
+      if (validator == null) {
+        Objects.requireNonNull(validator, "validators[" + i + "]");
+      }
+      addValidator(currentValidator, validatorsToAdd, validator);
+    }
+    if (validatorsToAdd.isEmpty()) {
       return;
     }
-    AbstractValidator<? super V> newValidator = ((AbstractValidator) currentValidator).append(validator);
+    AbstractValidator<? super V> newValidator = ((AbstractValidator) currentValidator)
+        .append(validatorsToAdd.toArray(new AbstractValidator[validatorsToAdd.size()]));
     AbstractProperty<V> newProperty = ((AbstractProperty<V>) property).copy(newValidator);
     prototypeProperty.setProperty(newProperty);
     LOG.info("Added validator to property {} of protoype for bean {}", propertyName, getBeanClass());
+  }
+
+  private static <V> void addValidator(AbstractValidator<? super V> currentValidator,
+      Collection<AbstractValidator<? super V>> validatorsToAdd, AbstractValidator<? super V> validator) {
+
+    if (!currentValidator.contains(validator)) {
+      if (validator.getClass() == ComposedValidator.class) {
+        ComposedValidator<? super V> composedValidator = (ComposedValidator<? super V>) validator;
+        int count = composedValidator.getValidatorCount();
+        for (int i = 0; i < count; i++) {
+          addValidator(currentValidator, validatorsToAdd, composedValidator.getValidator(i));
+        }
+      } else {
+        validatorsToAdd.add(validator);
+      }
+    }
   }
 
 }

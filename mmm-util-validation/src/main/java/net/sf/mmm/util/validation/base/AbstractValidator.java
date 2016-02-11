@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
@@ -127,13 +129,24 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
   }
 
   /**
-   * @param validator the {@link AbstractValidator validator} to append.
+   * @param validators the {@link AbstractValidator validators} to append.
    * @return a new {@link ComposedValidator} instance composing the current validator ({@code this}) with the given
    *         validator.
    */
-  public ComposedValidator<V> append(AbstractValidator<? super V> validator) {
+  @SuppressWarnings("unchecked")
+  public AbstractValidator<V> append(AbstractValidator<? super V>... validators) {
 
-    return new ComposedValidator<>(this, validator);
+    Objects.requireNonNull(validators, "validators");
+    if (validators.length == 0) {
+      return this;
+    }
+    if (validators.length == 1) {
+      return new ComposedValidator<>(this, validators[0]);
+    }
+    AbstractValidator<? super V>[] array = new AbstractValidator[validators.length + 1];
+    array[0] = this;
+    System.arraycopy(validators, 0, validators, 1, validators.length);
+    return new ComposedValidator<>(array);
   }
 
   @Override

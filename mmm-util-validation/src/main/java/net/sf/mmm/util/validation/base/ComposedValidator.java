@@ -115,11 +115,16 @@ public class ComposedValidator<V> extends AbstractValidator<V> implements Compos
 
   @SuppressWarnings("unchecked")
   @Override
-  public ComposedValidator<V> append(AbstractValidator<? super V> validator) {
+  public ComposedValidator<V> append(AbstractValidator<? super V>... additionalValidators) {
 
-    AbstractValidator<? super V>[] composed = new AbstractValidator[this.validators.length + 1];
+    Objects.requireNonNull(additionalValidators, "validators");
+    if (additionalValidators.length == 0) {
+      return this;
+    }
+    AbstractValidator<? super V>[] composed = new AbstractValidator[this.validators.length
+        + additionalValidators.length];
     System.arraycopy(this.validators, 0, composed, 0, this.validators.length);
-    composed[this.validators.length] = validator;
+    System.arraycopy(additionalValidators, 0, composed, this.validators.length, additionalValidators.length);
     return new ComposedValidator<>(composed);
   }
 
