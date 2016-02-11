@@ -22,4 +22,10 @@ public class ValidatorBuilderBoolean<PARENT>
     super(parent);
   }
 
+  @Override
+  public ValidatorBuilderBoolean<PARENT> range(String min, String max) {
+
+    throw new UnsupportedOperationException("Min/max constraints not avilable for Boolean");
+  }
+
 }

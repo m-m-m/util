@@ -25,4 +25,10 @@ public class ValidatorBuilderCharSequence<PARENT>
     super(parent);
   }
 
+  @Override
+  public ValidatorBuilderCharSequence<PARENT> range(String min, String max) {
+
+    throw new UnsupportedOperationException();
+  }
+
 }

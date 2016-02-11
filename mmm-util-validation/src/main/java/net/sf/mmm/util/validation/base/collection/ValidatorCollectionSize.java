@@ -20,7 +20,7 @@ public class ValidatorCollectionSize extends AbstractValidatorRange<Collection<?
   /**
    * The constructor.
    *
-   * @param range is the {@link Range} the value has to be {@link Range#isContained(Comparable) contained in}.
+   * @param range is the {@link Range} the value has to be {@link Range#isContained(Object) contained in}.
    */
   public ValidatorCollectionSize(Range<Integer> range) {
     super(range);

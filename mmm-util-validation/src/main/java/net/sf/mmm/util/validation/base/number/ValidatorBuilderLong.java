@@ -29,15 +29,15 @@ public class ValidatorBuilderLong<PARENT>
   }
 
   /**
-   * @see #size(Range)
+   * @see #range(Range)
    *
    * @param min the minimum {@link Collection#size() size} allowed.
    * @param max the maximum {@link Collection#size() size} allowed.
    * @return this build instance for fluent API calls.
    */
-  public ValidatorBuilderLong<PARENT> size(long min, long max) {
+  public ValidatorBuilderLong<PARENT> range(long min, long max) {
 
-    return size(new Range<>(Long.valueOf(min), Long.valueOf(max)));
+    return range(new Range<>(Long.valueOf(min), Long.valueOf(max)));
   }
 
 }

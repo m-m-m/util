@@ -22,4 +22,10 @@ public class ValidatorBuilderObject<PARENT>
     super(parent);
   }
 
+  @Override
+  public ValidatorBuilderObject<PARENT> range(String min, String max) {
+
+    throw new UnsupportedOperationException("Min/max constraints not avilable for Object");
+  }
+
 }

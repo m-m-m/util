@@ -29,7 +29,7 @@ public interface ExamplePropertyBean extends Bean {
 
   default WritableIntegerProperty Age() {
 
-    return new IntegerProperty(null, null).withValdidator().mandatory().size(0, 200).and().build();
+    return new IntegerProperty(null, null).withValdidator().mandatory().range(0, 200).and().build();
   }
 
   WritableBooleanProperty Friend();

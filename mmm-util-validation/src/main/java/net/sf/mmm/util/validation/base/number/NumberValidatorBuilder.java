@@ -5,6 +5,8 @@ package net.sf.mmm.util.validation.base.number;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.CompareableValidatorBuilder;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
+import net.sf.mmm.util.validation.base.ValidatorRange;
+import net.sf.mmm.util.value.api.NumberRange;
 
 /**
  * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for {@link Number} values.
@@ -27,6 +29,21 @@ public class NumberValidatorBuilder<V extends Number & Comparable, PARENT, SELF 
    */
   public NumberValidatorBuilder(PARENT parent) {
     super(parent);
+  }
+
+  @Override
+  public SELF range(String min, String max) {
+
+    Double dMin = null;
+    if (min != null) {
+      dMin = Double.valueOf(min);
+    }
+    Double dMax = null;
+    if (max != null) {
+      dMax = Double.valueOf(max);
+    }
+    add(new ValidatorRange<>(new NumberRange(dMin, dMax)));
+    return self();
   }
 
 }

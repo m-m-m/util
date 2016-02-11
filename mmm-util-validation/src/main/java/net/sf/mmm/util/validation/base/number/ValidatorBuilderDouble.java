@@ -29,15 +29,15 @@ public class ValidatorBuilderDouble<PARENT>
   }
 
   /**
-   * @see #size(Range)
+   * @see #range(Range)
    *
    * @param min the minimum {@link Collection#size() size} allowed.
    * @param max the maximum {@link Collection#size() size} allowed.
    * @return this build instance for fluent API calls.
    */
-  public ValidatorBuilderDouble<PARENT> size(double min, double max) {
+  public ValidatorBuilderDouble<PARENT> range(double min, double max) {
 
-    return size(new Range<>(Double.valueOf(min), Double.valueOf(max)));
+    return range(new Range<>(Double.valueOf(min), Double.valueOf(max)));
   }
 
 }

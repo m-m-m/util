@@ -4,6 +4,8 @@ package net.sf.mmm.util.validation.base.text;
 
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
+import net.sf.mmm.util.validation.base.ValidatorRange;
+import net.sf.mmm.util.value.api.Range;
 
 /**
  * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for {@link String} values.
@@ -25,4 +27,10 @@ public class ValidatorBuilderString<PARENT>
     super(parent);
   }
 
+  @Override
+  public ValidatorBuilderString<PARENT> range(String min, String max) {
+
+    add(new ValidatorRange<>(new Range<>(min, max)));
+    return self();
+  }
 }

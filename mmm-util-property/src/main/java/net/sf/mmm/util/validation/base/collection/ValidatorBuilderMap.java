@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
+import net.sf.mmm.util.value.api.Range;
 
 /**
  * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for a {@link Map}.
@@ -27,6 +28,21 @@ public class ValidatorBuilderMap<K, V, PARENT>
    */
   public ValidatorBuilderMap(PARENT parent) {
     super(parent);
+  }
+
+  @Override
+  public ValidatorBuilderMap<K, V, PARENT> range(String min, String max) {
+
+    Integer iMin = null;
+    if (min != null) {
+      iMin = Integer.valueOf(min);
+    }
+    Integer iMax = null;
+    if (max != null) {
+      iMax = Integer.valueOf(max);
+    }
+    add(new ValidatorMapSize(new Range<>(iMin, iMax)));
+    return self();
   }
 
 }

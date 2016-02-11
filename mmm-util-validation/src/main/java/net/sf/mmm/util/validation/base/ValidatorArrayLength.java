@@ -20,7 +20,7 @@ public class ValidatorArrayLength extends AbstractValidatorRange<Object, Integer
   /**
    * The constructor.
    *
-   * @param range is the {@link Range} the value has to be {@link Range#isContained(Comparable) contained in}.
+   * @param range is the {@link Range} the value has to be {@link Range#isContained(Object) contained in}.
    */
   public ValidatorArrayLength(Range<Integer> range) {
     super(range);

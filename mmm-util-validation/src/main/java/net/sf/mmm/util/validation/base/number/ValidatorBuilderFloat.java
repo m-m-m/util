@@ -29,15 +29,15 @@ public class ValidatorBuilderFloat<PARENT>
   }
 
   /**
-   * @see #size(Range)
+   * @see #range(Range)
    *
    * @param min the minimum {@link Collection#size() size} allowed.
    * @param max the maximum {@link Collection#size() size} allowed.
    * @return this build instance for fluent API calls.
    */
-  public ValidatorBuilderFloat<PARENT> size(float min, float max) {
+  public ValidatorBuilderFloat<PARENT> range(float min, float max) {
 
-    return size(new Range<>(Float.valueOf(min), Float.valueOf(max)));
+    return range(new Range<>(Float.valueOf(min), Float.valueOf(max)));
   }
 
 }

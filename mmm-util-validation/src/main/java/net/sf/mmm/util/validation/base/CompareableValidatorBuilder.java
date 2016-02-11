@@ -36,7 +36,7 @@ public abstract class CompareableValidatorBuilder<V extends Comparable, PARENT, 
    * @param range the {@link Range} to limit the {@link Collection#size() size} of the {@link Collection}.
    * @return this build instance for fluent API calls.
    */
-  public SELF size(Range<V> range) {
+  public SELF range(Range<V> range) {
 
     return add(new ValidatorRange<>(range));
   }

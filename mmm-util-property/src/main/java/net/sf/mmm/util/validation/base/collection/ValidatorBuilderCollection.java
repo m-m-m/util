@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
+import net.sf.mmm.util.value.api.Range;
 
 /**
  * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for a {@link Collection} of {@link Object}s.
@@ -26,6 +27,21 @@ public class ValidatorBuilderCollection<E, PARENT>
    */
   public ValidatorBuilderCollection(PARENT parent) {
     super(parent);
+  }
+
+  @Override
+  public ValidatorBuilderCollection<E, PARENT> range(String min, String max) {
+
+    Integer iMin = null;
+    if (min != null) {
+      iMin = Integer.valueOf(min);
+    }
+    Integer iMax = null;
+    if (max != null) {
+      iMax = Integer.valueOf(max);
+    }
+    add(new ValidatorCollectionSize(new Range<>(iMin, iMax)));
+    return self();
   }
 
 }

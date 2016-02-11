@@ -83,6 +83,16 @@ public abstract class ObjectValidatorBuilder<V, PARENT, SELF extends ObjectValid
   }
 
   /**
+   * This method allows to define a range in a generic way. If you have a properly typed builder please use more
+   * specific methods such as {@link CompareableValidatorBuilder#range(net.sf.mmm.util.value.api.Range)} instead.
+   *
+   * @param min the minimum value allowed or {@code null} for no lower bound.
+   * @param max the maximum value allowed or {@code null} for no upper bound.
+   * @return this build instance for fluent API calls.
+   */
+  public abstract SELF range(String min, String max);
+
+  /**
    * @return the {@link AbstractValidator}
    */
   public AbstractValidator<? super V> build() {
