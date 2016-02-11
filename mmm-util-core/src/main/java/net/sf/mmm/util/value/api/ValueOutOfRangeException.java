@@ -191,7 +191,7 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * Creates a new error {@link NlsMessage} that the given <code>value</code> is not in the {@link Range} from
+   * Creates a new error {@link NlsMessage} that the given <code>value</code> is not in the range from
    * <code>minimum</code> to <code>maximum</code>.
    *
    * @param <V> is the generic type of the values. Needs to be an instance of {@link Number} or {@link Comparable}.
