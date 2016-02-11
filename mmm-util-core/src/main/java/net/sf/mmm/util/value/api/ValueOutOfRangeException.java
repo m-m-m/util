@@ -2,8 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
+import java.util.Comparator;
+import java.util.Objects;
+
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.lang.base.ComparableComparator;
+import net.sf.mmm.util.lang.base.NumberComparator;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
@@ -65,6 +70,7 @@ public class ValueOutOfRangeException extends ValueException {
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
+   * @since 7.1.0
    */
   public <V> ValueOutOfRangeException(V value, V minimum, V maximum) {
 
@@ -82,6 +88,7 @@ public class ValueOutOfRangeException extends ValueException {
    * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
    *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
    *        wrong. This will help to find the problem easier.
+   * @since 7.1.0
    */
   @SuppressWarnings("rawtypes")
   public <V> ValueOutOfRangeException(V value, V minimum, V maximum, Object valueSource) {
@@ -167,6 +174,8 @@ public class ValueOutOfRangeException extends ValueException {
    * This method checks that the given <code>value</code> is in the inclusive range from <code>minimum</code> to
    * <code>maximum</code>.
    *
+   * @param <V> the generic type of the {@code value} to check.
+   *
    * @param value is the value to check.
    * @param minimum is the minimum number allowed.
    * @param maximum is the maximum number allowed.
@@ -176,7 +185,58 @@ public class ValueOutOfRangeException extends ValueException {
    *        available.
    * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT in the range from <code>minimum</code> to
    *         <code>maximum</code>.
+   * @since 7.1.0
    */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public static <V> void checkRange(V value, V minimum, V maximum, Object valueSource)
+      throws ValueOutOfRangeException {
+
+    Objects.requireNonNull(value, "value");
+    Comparator comparator;
+    if (value instanceof Comparable) {
+      comparator = ComparableComparator.getInstance();
+    } else if (value instanceof Number) {
+      comparator = NumberComparator.getInstance();
+    } else {
+      throw new IllegalArgumentException(value.getClass().getName());
+    }
+    boolean valid = true;
+    int delta;
+    if (minimum != null) {
+      delta = comparator.compare(value, minimum);
+      if (delta < 0) {
+        // value < min
+        valid = false;
+      }
+    }
+    if (maximum != null) {
+      delta = comparator.compare(value, maximum);
+      if (delta > 0) {
+        // value > max
+        valid = false;
+      }
+    }
+    if (!valid) {
+      throw new ValueOutOfRangeException(value, minimum, maximum, valueSource);
+    }
+  }
+
+  /**
+   * This method checks that the given <code>value</code> is in the inclusive range from <code>minimum</code> to
+   * <code>maximum</code>.
+   *
+   * @param value is the value to check.
+   * @param minimum is the minimum number allowed.
+   * @param maximum is the maximum number allowed.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier. It may be <code>null</code> if there is no helpful source
+   *        available.
+   * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT in the range from <code>minimum</code> to
+   *         <code>maximum</code>.
+   * @deprecated - will be removed - use {@link #checkRange(Object, Object, Object, Object)} instead.
+   */
+  @Deprecated
   public static void checkRange(Number value, Number minimum, Number maximum, Object valueSource)
       throws ValueOutOfRangeException {
 

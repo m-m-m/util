@@ -18,8 +18,8 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggableComponent implements
-    GenericValueConverter<SOURCE> {
+public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggableComponent
+    implements GenericValueConverter<SOURCE> {
 
   /**
    * The constructor.
@@ -54,8 +54,8 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   /**
    * {@inheritDoc}
    */
-  public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass, TARGET defaultValue)
-      throws WrongValueTypeException {
+  public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass,
+      TARGET defaultValue) throws WrongValueTypeException {
 
     return convertValue(value, valueSource, targetClass, targetClass, defaultValue);
   }
@@ -63,11 +63,11 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   /**
    * {@inheritDoc}
    */
-  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum, TARGET maximum,
-      TARGET defaultValue) throws WrongValueTypeException, ValueOutOfRangeException {
+  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum,
+      TARGET maximum, TARGET defaultValue) throws WrongValueTypeException, ValueOutOfRangeException {
 
     if (defaultValue != null) {
-      ValueOutOfRangeException.checkRange(defaultValue, minimum, maximum, valueSource);
+      ValueOutOfRangeException.checkRange((Object) defaultValue, minimum, maximum, valueSource);
     }
     if (value == null) {
       return defaultValue;
@@ -79,13 +79,13 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   /**
    * {@inheritDoc}
    */
-  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum, TARGET maximum)
-      throws ValueNotSetException, WrongValueTypeException, ValueOutOfRangeException {
+  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum,
+      TARGET maximum) throws ValueNotSetException, WrongValueTypeException, ValueOutOfRangeException {
 
     Class<? extends Number> targetClass = minimum.getClass();
     @SuppressWarnings("unchecked")
     TARGET result = (TARGET) convertValue(value, valueSource, targetClass, targetClass);
-    ValueOutOfRangeException.checkRange(result, minimum, maximum, valueSource);
+    ValueOutOfRangeException.checkRange((Object) result, minimum, maximum, valueSource);
     return result;
   }
 
