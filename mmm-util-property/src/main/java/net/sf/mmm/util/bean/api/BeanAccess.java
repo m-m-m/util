@@ -11,6 +11,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ValidationFailureComposer;
 
 /**
@@ -256,6 +257,21 @@ public interface BeanAccess {
    */
   <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<V> valueType,
       Class<PROPERTY> propertyType);
+
+  /**
+   * This method updates a given {@link WritableProperty property} such that the provided {@link AbstractValidator
+   * validator} is added. Therefore the {@link Bean} has to be a {@link #isDynamic() dynamic} {@link #isPrototype()
+   * prototype} that is not {@link #isReadOnly() read-only}.
+   *
+   * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
+   * @param <PROPERTY> the generic type of the {@link WritableProperty property}.
+   * @param property the {@link WritableProperty property} to update. Has to be owned by the {@link Bean#access()
+   *        owning} {@link Bean}.
+   * @param validator the {@link AbstractValidator validator} to add. The implementation tries its best to be idempotent
+   *        so adding the same validator again should have no effect.
+   */
+  <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
+      AbstractValidator<? super V> validator);
 
   /**
    * @see BeanFactory#getReadOnlyBean(Bean)

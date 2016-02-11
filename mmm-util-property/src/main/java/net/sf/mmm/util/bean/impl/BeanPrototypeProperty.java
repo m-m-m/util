@@ -7,17 +7,17 @@ import net.sf.mmm.util.property.api.AbstractProperty;
 import net.sf.mmm.util.property.api.GenericProperty;
 
 /**
- * This class is a container for a {@link GenericProperty} and its according {@link #getIndex() index} for a
- * specific {@link Bean}.
+ * This class is a container for a {@link GenericProperty} and its according {@link #getIndex() index} for a specific
+ * {@link Bean}.
  *
  * @author hohwille
  * @since 8.0.0
  */
 public class BeanPrototypeProperty {
 
-  private final AbstractProperty<?> property;
-
   private final int index;
+
+  private AbstractProperty<?> property;
 
   /**
    * The constructor.
@@ -33,11 +33,22 @@ public class BeanPrototypeProperty {
   }
 
   /**
-   * @return the property
+   * @return the {@link AbstractProperty property}.
    */
   public AbstractProperty<?> getProperty() {
 
     return this.property;
+  }
+
+  /**
+   * @param property the new value of {@link #getProperty()}.
+   */
+  void setProperty(AbstractProperty<?> property) {
+
+    assert (property.getName().equals(this.property.getName()));
+    assert (property.getBean() == this.property.getBean());
+    assert (property.getType() == this.property.getType());
+    this.property = property;
   }
 
   /**

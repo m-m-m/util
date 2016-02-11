@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +18,11 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
+import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.property.api.AbstractProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
  * This is the implementation of {@link BeanAccess} for the {@link BeanFactory#createPrototype(Class) prototype} of a
@@ -228,6 +231,35 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   public boolean isPrototype() {
 
     return true;
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
+  public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
+      AbstractValidator<? super V> validator) {
+
+    Objects.requireNonNull(property, "property");
+    Objects.requireNonNull(validator, "validator");
+    if (!this.dynamic) {
+      throw new IllegalStateException("Bean not dynamic");
+    }
+    String propertyName = property.getName();
+    BeanPrototypeProperty prototypeProperty = this.name2PropertyMap.get(propertyName);
+    if (prototypeProperty == null) {
+      throw new PojoPropertyNotFoundException(getBeanClass(), propertyName);
+    }
+    if (prototypeProperty.getProperty() != property) {
+      throw new IllegalArgumentException("Given property '" + propertyName + "' is not owned by this bean!");
+    }
+    AbstractProperty<V> p = (AbstractProperty<V>) property;
+    AbstractValidator<? super V> currentValidator = p.getValidator();
+    if (currentValidator.contains(validator)) {
+      return;
+    }
+    AbstractValidator<? super V> newValidator = ((AbstractValidator) currentValidator).append(validator);
+    AbstractProperty<V> newProperty = ((AbstractProperty<V>) property).copy(newValidator);
+    prototypeProperty.setProperty(newProperty);
+    LOG.info("Added validator to property {} of protoype for bean {}", propertyName, getBeanClass());
   }
 
 }

@@ -11,6 +11,7 @@ import net.sf.mmm.util.collection.base.ArrayIterator;
 import net.sf.mmm.util.property.api.GenericProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
  * The abstract base implementation of {@link BeanAccess} for a regular {@link Bean} instance.
@@ -151,6 +152,13 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   public boolean isPrototype() {
 
     return false;
+  }
+
+  @Override
+  public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
+      AbstractValidator<? super V> validator) {
+
+    throw new UnsupportedOperationException("No prototype!");
   }
 
 }
