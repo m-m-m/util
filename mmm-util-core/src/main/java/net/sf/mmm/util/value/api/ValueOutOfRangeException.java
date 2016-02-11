@@ -9,8 +9,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 /**
  * This is the exception thrown if a numeric value is not in the expected range.
  *
- * @see GenericValueConverter#convertValue(Object, Object, Number, Number)
- *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -36,14 +34,47 @@ public class ValueOutOfRangeException extends ValueException {
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
+   * @deprecated - will be removed soon - use {@link #ValueOutOfRangeException(Object, Object, Object)} instead.
    */
+  @Deprecated
   public ValueOutOfRangeException(Number value, Number minimum, Number maximum) {
+
+    this((Object) value, (Object) minimum, (Object) maximum, null);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param value is the number that is out of range.
+   * @param minimum is the minimum value allowed
+   * @param maximum is the maximum value allowed.
+   * @param valueSource describes the source of the value.
+   * @deprecated - will be removed soon - use {@link #ValueOutOfRangeException(Object, Object, Object, Object)} instead.
+   */
+  @Deprecated
+  public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
+
+    this((Object) value, (Object) minimum, (Object) maximum, null);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param <V> the generic type of the value that is out of range.
+   *
+   * @param value is the number that is out of range.
+   * @param minimum is the minimum value allowed
+   * @param maximum is the maximum value allowed.
+   */
+  public <V> ValueOutOfRangeException(V value, V minimum, V maximum) {
 
     this(value, minimum, maximum, null);
   }
 
   /**
    * The constructor.
+   *
+   * @param <V> the generic type of the value that is out of range.
    *
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
@@ -53,14 +84,14 @@ public class ValueOutOfRangeException extends ValueException {
    *        wrong. This will help to find the problem easier.
    */
   @SuppressWarnings("rawtypes")
-  public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
+  public <V> ValueOutOfRangeException(V value, V minimum, V maximum, Object valueSource) {
 
     super(createMessage(value, minimum, maximum, valueSource));
     if (value instanceof Comparable) {
       // Comparable is preferred as verifyNumber is incorrect for BigInteger or BigDecimal
       verifyComparable((Comparable) value, (Comparable) minimum, (Comparable) maximum);
-    } else {
-      verifyNumber(value, minimum, maximum);
+    } else if (value instanceof Number) {
+      verifyNumber((Number) value, (Number) minimum, (Number) maximum);
     }
   }
 
@@ -76,7 +107,9 @@ public class ValueOutOfRangeException extends ValueException {
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
    * @since 3.0.0
+   * @deprecated - will be removed soon - use {@link #ValueOutOfRangeException(Object, Object, Object, Object)} instead.
    */
+  @Deprecated
   @SuppressWarnings("rawtypes")
   public <V extends Comparable> ValueOutOfRangeException(Object valueSource, V value, V minimum, V maximum) {
 

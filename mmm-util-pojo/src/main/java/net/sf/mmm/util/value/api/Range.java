@@ -3,15 +3,17 @@
 package net.sf.mmm.util.value.api;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadMaximumValue;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
+import net.sf.mmm.util.lang.base.ComparableComparator;
 
 /**
  * This class represents a range of two values, {@link #getMin() minimum} and {@link #getMax() maximum}. Validation is
- * performed at {@link #Range(Comparable, Comparable) construction} so a given {@link Range} should always be valid
- * (unless created via reflection or de-serialization). <br>
+ * performed at {@link #Range(Object, Object) construction} so a given {@link Range} should always be valid (unless
+ * created via reflection or de-serialization). <br>
  * <b>ATTENTION:</b><br>
  * Since version 4.0.0 the {@link #getMinimumValue() minimum} and {@link #getMaximumValue() maximum value} may be
  * <code>null</code> for unbounded ranges. It is still recommended to use fixed bounds such as {@link Long#MAX_VALUE}.
@@ -22,8 +24,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
  * @since 3.0.0
  */
 @SuppressWarnings("rawtypes")
-public class Range<V extends Comparable> implements Serializable, AttributeReadMinimumValue<V>,
-    AttributeReadMaximumValue<V> {
+public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, AttributeReadMaximumValue<V> {
 
   /** UID for serialization. */
   private static final long serialVersionUID = 6426261544538415827L;
@@ -54,14 +55,13 @@ public class Range<V extends Comparable> implements Serializable, AttributeReadM
    * @param min - see {@link #getMin()}. To create an open range use the minimum value.
    * @param max - see {@link #getMax()}. To create an open range use the maximum value.
    */
-  @SuppressWarnings("unchecked")
   public Range(V min, V max) {
 
     super();
     if ((min != null) && (max != null)) {
-      int delta = min.compareTo(max);
+      int delta = getComparator().compare(min, max);
       if (delta > 0) {
-        throw new ValueOutOfRangeException(null, min, min, max);
+        throw new ValueOutOfRangeException(min, min, max);
       }
     }
     this.min = min;
@@ -115,6 +115,17 @@ public class Range<V extends Comparable> implements Serializable, AttributeReadM
   }
 
   /**
+   * @return the {@link Comparator} used to {@link Comparator#compare(Object, Object) compare} values of this
+   *         {@link Range}. The default implementation assumes that the value type implements {@link Comparable}. If you
+   *         want to use other value types you need to create a sub-class of {@link Range} and override this method.
+   */
+  @SuppressWarnings("unchecked")
+  protected Comparator<? super V> getComparator() {
+
+    return (Comparator) ComparableComparator.getInstance();
+  }
+
+  /**
    * This method determines if the given <code>value</code> is within this {@link Range} from {@link #getMin() minimum}
    * to {@link #getMax() maximum}.
    *
@@ -122,21 +133,21 @@ public class Range<V extends Comparable> implements Serializable, AttributeReadM
    * @return <code>true</code> if contained ({@link #getMin() minimum} &lt;= <code>value</code> &lt;= {@link #getMax()
    *         maximum}).
    */
-  @SuppressWarnings("unchecked")
   public boolean isContained(V value) {
 
     NlsNullPointerException.checkNotNull("value", value);
 
+    Comparator<? super V> comparator = getComparator();
     int delta;
     if (this.min != null) {
-      delta = value.compareTo(this.min);
+      delta = comparator.compare(value, this.min);
       if (delta < 0) {
         // value < min
         return false;
       }
     }
     if (this.max != null) {
-      delta = value.compareTo(this.max);
+      delta = comparator.compare(value, this.max);
       if (delta > 0) {
         // value > max
         return false;
@@ -146,10 +157,10 @@ public class Range<V extends Comparable> implements Serializable, AttributeReadM
   }
 
   /**
-   * This method verifies that the given <code>value</code> is {@link #isContained(Comparable) contained in this range}.
+   * This method verifies that the given <code>value</code> is {@link #isContained(Object) contained in this range}.
    *
    * @param value is the value to check.
-   * @throws ValueOutOfRangeException if not {@link #isContained(Comparable) contained}.
+   * @throws ValueOutOfRangeException if not {@link #isContained(Object) contained}.
    */
   public void verifyContained(V value) throws ValueOutOfRangeException {
 
