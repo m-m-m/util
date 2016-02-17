@@ -57,7 +57,7 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public MapProperty(String name, GenericType<ObservableMap<K, V>> type, Bean bean) {
+  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Bean bean) {
     super(name, requireType(type), bean);
   }
 
@@ -69,12 +69,13 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public MapProperty(String name, GenericType<ObservableMap<K, V>> type, Bean bean,
+  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Bean bean,
       AbstractValidator<? super ObservableMap<K, V>> validator) {
     super(name, requireType(type), bean, validator);
   }
 
-  private static <K, V> GenericType<ObservableMap<K, V>> requireType(GenericType<ObservableMap<K, V>> type) {
+  private static <K, V> GenericType<? extends ObservableMap<K, V>> requireType(
+      GenericType<? extends ObservableMap<K, V>> type) {
 
     if (type != null) {
       return type;

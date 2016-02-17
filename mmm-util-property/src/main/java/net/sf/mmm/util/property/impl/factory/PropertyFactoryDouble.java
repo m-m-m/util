@@ -24,7 +24,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 public class PropertyFactoryDouble extends AbstractPropertyFactory<Number, DoubleProperty> {
 
   @Override
-  public Class<? extends Number> getValueClass() {
+  public Class<Double> getValueClass() {
 
     return Double.class;
   }
@@ -48,7 +48,7 @@ public class PropertyFactoryDouble extends AbstractPropertyFactory<Number, Doubl
   }
 
   @Override
-  public DoubleProperty create(String name, GenericType<Number> valueType, Bean bean,
+  public DoubleProperty create(String name, GenericType<? extends Number> valueType, Bean bean,
       AbstractValidator<? super Number> validator) {
 
     return new DoubleProperty(name, bean, validator);

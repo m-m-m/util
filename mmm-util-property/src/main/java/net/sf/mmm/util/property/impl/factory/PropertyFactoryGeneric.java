@@ -50,10 +50,10 @@ public class PropertyFactoryGeneric<V> extends AbstractPropertyFactory<V, Generi
   }
 
   @Override
-  public GenericProperty<V> create(String name, GenericType<V> valueType, Bean bean,
+  public GenericProperty<V> create(String name, GenericType<? extends V> valueType, Bean bean,
       AbstractValidator<? super V> validator) {
 
-    return new GenericProperty<>(name, valueType, bean, validator);
+    return new GenericProperty(name, valueType, bean, validator);
   }
 
 }

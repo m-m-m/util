@@ -60,6 +60,7 @@ public interface PropertyFactory<V, PROPERTY extends ReadableProperty<V>> {
    *
    * @return the new instance of the property.
    */
-  PROPERTY create(String name, GenericType<V> valueType, Bean bean, AbstractValidator<? super V> validator);
+  PROPERTY create(String name, GenericType<? extends V> valueType, Bean bean,
+      AbstractValidator<? super V> validator);
 
 }

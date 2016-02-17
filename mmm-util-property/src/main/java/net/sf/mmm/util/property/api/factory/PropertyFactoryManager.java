@@ -41,7 +41,7 @@ public interface PropertyFactoryManager {
    *        otherwise (more efficient).
    * @return the according {@link PropertyFactory} or {@code null} if no such factory is registered.
    */
-  <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<V> valueType,
+  <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<? extends V> valueType,
       boolean polymorphic);
 
   /**
@@ -57,7 +57,7 @@ public interface PropertyFactoryManager {
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   default <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactory(
-      Class<PROPERTY> propertyType, Class<V> valueType, boolean polymorphic) {
+      Class<PROPERTY> propertyType, Class<? extends V> valueType, boolean polymorphic) {
 
     PropertyFactory/* <V, ? extends PROPERTY> */ factory = getFactoryForPropertyType(propertyType);
     if (valueType != null) {

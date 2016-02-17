@@ -48,7 +48,7 @@ public class PropertyFactoryString extends AbstractPropertyFactory<String, Strin
   }
 
   @Override
-  public StringProperty create(String name, GenericType<String> valueType, Bean bean,
+  public StringProperty create(String name, GenericType<? extends String> valueType, Bean bean,
       AbstractValidator<? super String> validator) {
 
     return new StringProperty(name, bean, validator);

@@ -54,7 +54,7 @@ public class PropertyFactoryMap<K, V> extends AbstractPropertyFactory<Observable
   }
 
   @Override
-  public MapProperty<K, V> create(String name, GenericType<ObservableMap<K, V>> valueType, Bean bean,
+  public MapProperty<K, V> create(String name, GenericType<? extends ObservableMap<K, V>> valueType, Bean bean,
       AbstractValidator<? super ObservableMap<K, V>> validator) {
 
     return new MapProperty<>(name, valueType, bean, validator);

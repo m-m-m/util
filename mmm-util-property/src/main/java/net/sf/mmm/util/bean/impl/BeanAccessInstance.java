@@ -4,6 +4,7 @@ package net.sf.mmm.util.bean.impl;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
@@ -79,6 +80,12 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   }
 
   @Override
+  public Set<String> getPropertyNames() {
+
+    return this.prototype.getPropertyNames();
+  }
+
+  @Override
   protected WritableProperty<?> getProperty(BeanPrototypeProperty prototypeProperty, boolean required) {
 
     int length = this.properties.length;
@@ -105,8 +112,8 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
 
   @SuppressWarnings("unchecked")
   @Override
-  public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<V> valueType,
-      Class<PROPERTY> propertyType) {
+  public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name,
+      GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
 
     if (isReadOnly()) {
       throw new UnsupportedOperationException();
@@ -156,9 +163,16 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
 
   @Override
   public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
-      @SuppressWarnings("unchecked") AbstractValidator<? super V>... validators) {
+      AbstractValidator<? super V> validator) {
 
     throw new UnsupportedOperationException("No prototype!");
+  }
+
+  @Override
+  public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidators(WritableProperty<?> property,
+      Collection<AbstractValidator<? super V>> validators) {
+
+    addPropertyValidator(property, null);
   }
 
 }

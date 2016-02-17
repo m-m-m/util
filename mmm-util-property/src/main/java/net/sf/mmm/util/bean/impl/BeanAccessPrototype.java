@@ -4,12 +4,14 @@ package net.sf.mmm.util.bean.impl;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +49,8 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
 
   private final Collection<String> aliases;
 
+  private final Set<String> propertyNames;
+
   private final boolean dynamic;
 
   private final BeanFactoryImpl beanFactory;
@@ -59,13 +63,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    */
   public BeanAccessPrototype(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory) {
-    super(beanClass, name, beanFactory);
-    this.name2PropertyMap = new HashMap<>();
-    this.method2OperationMap = new HashMap<>();
-    this.aliasMap = new HashMap<>();
-    this.aliases = Collections.unmodifiableSet(this.aliasMap.keySet());
-    this.dynamic = false;
-    this.beanFactory = beanFactory;
+    this(beanClass, name, beanFactory, null, false);
   }
 
   /**
@@ -77,25 +75,46 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
    */
   public BeanAccessPrototype(BeanAccessPrototype<BEAN> master, boolean dynamic, String name) {
 
-    super(master.getBeanClass(), name, master.beanFactory);
-    this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
-    this.aliasMap = master.aliasMap;
-    this.aliases = master.aliases;
-    for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {
-      AbstractProperty<?> property = prototypeProperty.getProperty();
-      BeanPrototypeProperty copy = new BeanPrototypeProperty(property.copy(getBean()),
-          prototypeProperty.getIndex());
-      this.name2PropertyMap.put(property.getName(), copy);
+    this(master.getBeanClass(), name, master.beanFactory, master, dynamic);
+  }
+
+  private BeanAccessPrototype(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory,
+      BeanAccessPrototype<BEAN> master, boolean dynamic) {
+
+    super(beanClass, name, beanFactory);
+    if (master == null) {
+      this.name2PropertyMap = new HashMap<>();
+      this.aliasMap = new HashMap<>();
+      this.aliases = Collections.unmodifiableSet(this.aliasMap.keySet());
+      this.method2OperationMap = new HashMap<>();
+    } else {
+      this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
+      this.aliasMap = master.aliasMap;
+      this.aliases = master.aliases;
+      this.method2OperationMap = master.method2OperationMap;
+      // copy properties from master to new prototype
+      for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {
+        AbstractProperty<?> property = prototypeProperty.getProperty();
+        BeanPrototypeProperty copy = new BeanPrototypeProperty(property.copy(getBean()),
+            prototypeProperty.getIndex());
+        this.name2PropertyMap.put(property.getName(), copy);
+      }
     }
-    this.method2OperationMap = master.method2OperationMap;
+    this.propertyNames = Collections.unmodifiableSet(this.name2PropertyMap.keySet());
     this.dynamic = dynamic;
-    this.beanFactory = master.beanFactory;
+    this.beanFactory = beanFactory;
   }
 
   @Override
   protected BeanAccessPrototype<BEAN> getPrototype() {
 
     return this;
+  }
+
+  @Override
+  public Set<String> getPropertyNames() {
+
+    return this.propertyNames;
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -107,8 +126,8 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
 
   @SuppressWarnings("unchecked")
   @Override
-  public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<V> valueType,
-      Class<PROPERTY> propertyType) {
+  public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name,
+      GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
 
     if (!this.dynamic) {
       throw new ReadOnlyException(getBeanClass().getSimpleName(), "access.properties");
@@ -235,10 +254,17 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     return true;
   }
 
-  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
   public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
-      AbstractValidator<? super V>... validators) {
+      AbstractValidator<? super V> validator) {
+
+    addPropertyValidators(property, Arrays.asList(validator));
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
+  public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidators(WritableProperty<?> property,
+      Collection<AbstractValidator<? super V>> validators) {
 
     Objects.requireNonNull(property, "property");
     Objects.requireNonNull(validators, "validators");
@@ -255,13 +281,14 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     }
     AbstractProperty<V> p = (AbstractProperty<V>) property;
     AbstractValidator<? super V> currentValidator = p.getValidator();
-    Collection<AbstractValidator<? super V>> validatorsToAdd = new ArrayList<>(validators.length);
-    for (int i = 0; i < validators.length; i++) {
-      AbstractValidator<? super V> validator = validators[i];
+    Collection<AbstractValidator<? super V>> validatorsToAdd = new ArrayList<>(validators.size());
+    int i = 0;
+    for (AbstractValidator<? super V> validator : validators) {
       if (validator == null) {
         Objects.requireNonNull(validator, "validators[" + i + "]");
       }
       addValidator(currentValidator, validatorsToAdd, validator);
+      i++;
     }
     if (validatorsToAdd.isEmpty()) {
       return;

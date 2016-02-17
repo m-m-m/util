@@ -52,7 +52,7 @@ public class PropertyFactoryList<E> extends AbstractPropertyFactory<ObservableLi
   }
 
   @Override
-  public ListProperty<E> create(String name, GenericType<ObservableList<E>> valueType, Bean bean,
+  public ListProperty<E> create(String name, GenericType<? extends ObservableList<E>> valueType, Bean bean,
       AbstractValidator<? super ObservableList<E>> validator) {
 
     return new ListProperty<>(name, valueType, bean, validator);

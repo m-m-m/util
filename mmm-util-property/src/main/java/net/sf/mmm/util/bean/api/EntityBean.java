@@ -19,6 +19,12 @@ import net.sf.mmm.util.property.api.WritableProperty;
  */
 public interface EntityBean<ID> extends Bean {
 
+  /** {@link WritableProperty#getName() Property name} of {@link #Id()}. */
+  String PROPERTY_NAME_ID = "Id";
+
+  /** {@link WritableProperty#getName() Property name} of {@link #Version()}. */
+  String PROPERTY_NAME_VERSION = "Version";
+
   /**
    * @return the {@link WritableProperty property} containing the unique ID (primary key).
    */

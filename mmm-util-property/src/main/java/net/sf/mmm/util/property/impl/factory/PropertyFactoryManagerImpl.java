@@ -165,7 +165,7 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<V> valueType,
+  public <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<? extends V> valueType,
       boolean polymorphic) {
 
     PropertyFactory<?, ?> factory = this.valueType2factoryMap.get(valueType);

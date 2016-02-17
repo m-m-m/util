@@ -24,7 +24,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 public class PropertyFactoryFloat extends AbstractPropertyFactory<Number, FloatProperty> {
 
   @Override
-  public Class<? extends Number> getValueClass() {
+  public Class<Float> getValueClass() {
 
     return Float.class;
   }
@@ -48,7 +48,7 @@ public class PropertyFactoryFloat extends AbstractPropertyFactory<Number, FloatP
   }
 
   @Override
-  public FloatProperty create(String name, GenericType<Number> valueType, Bean bean,
+  public FloatProperty create(String name, GenericType<? extends Number> valueType, Bean bean,
       AbstractValidator<? super Number> validator) {
 
     return new FloatProperty(name, bean, validator);

@@ -6,6 +6,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.FloatBinding;
 import javafx.beans.binding.LongBinding;
 import javafx.beans.value.ObservableLongValue;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
  * This is the interface for a {@link ReadableNumberProperty} of the {@link #getValue() value}-{@link #getType() type}
@@ -15,6 +17,15 @@ import javafx.beans.value.ObservableLongValue;
  * @since 8.0.0
  */
 public interface ReadableLongProperty extends ReadableNumberProperty, ObservableLongValue {
+
+  /** @see #getType() */
+  GenericType<Long> TYPE = new SimpleGenericTypeImpl<>(Long.class);
+
+  @Override
+  default GenericType<Long> getType() {
+
+    return TYPE;
+  }
 
   // @Override
   // Long getValue();

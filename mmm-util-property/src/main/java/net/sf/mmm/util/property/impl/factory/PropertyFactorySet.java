@@ -52,7 +52,7 @@ public class PropertyFactorySet<E> extends AbstractPropertyFactory<ObservableSet
   }
 
   @Override
-  public SetProperty<E> create(String name, GenericType<ObservableSet<E>> valueType, Bean bean,
+  public SetProperty<E> create(String name, GenericType<? extends ObservableSet<E>> valueType, Bean bean,
       AbstractValidator<? super ObservableSet<E>> validator) {
 
     return new SetProperty<>(name, valueType, bean, validator);

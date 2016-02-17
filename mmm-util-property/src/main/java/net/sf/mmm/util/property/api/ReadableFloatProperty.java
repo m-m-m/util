@@ -5,6 +5,8 @@ package net.sf.mmm.util.property.api;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.FloatBinding;
 import javafx.beans.value.ObservableFloatValue;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
  * This is the interface for a {@link ReadableNumberProperty} of the {@link #getValue() value}-{@link #getType() type}
@@ -14,6 +16,15 @@ import javafx.beans.value.ObservableFloatValue;
  * @since 7.1.0
  */
 public interface ReadableFloatProperty extends ReadableNumberProperty, ObservableFloatValue {
+
+  /** @see #getType() */
+  GenericType<Float> TYPE = new SimpleGenericTypeImpl<>(Float.class);
+
+  @Override
+  default GenericType<Float> getType() {
+
+    return TYPE;
+  }
 
   // @Override
   // Float getValue();

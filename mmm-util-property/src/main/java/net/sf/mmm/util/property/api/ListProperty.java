@@ -13,6 +13,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.base.GenericTypeBuilder;
+import net.sf.mmm.util.reflect.base.GenericTypeVariable;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.collection.AbstractCollectionValidatorBuilder;
@@ -57,7 +59,7 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public ListProperty(String name, GenericType<ObservableList<E>> type, Bean bean) {
+  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Bean bean) {
     super(name, type, bean);
   }
 
@@ -69,7 +71,7 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public ListProperty(String name, GenericType<ObservableList<E>> type, Bean bean,
+  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Bean bean,
       AbstractValidator<? super ObservableList<E>> validator) {
     super(name, type, bean, validator);
   }
@@ -165,6 +167,18 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
   protected void fireValueChangedEvent() {
 
     ListExpressionHelper.fireValueChangedEvent(this.helper);
+  }
+
+  /**
+   * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
+   * @param elementType the {@link GenericType} reflecting the {@link List#get(int) elements} of the {@link List}.
+   * @return the {@link GenericType} for an {@link ObservableList} with the given element type.
+   */
+  public static <E> GenericType<ObservableList<E>> createListType(GenericType<E> elementType) {
+
+    return new GenericTypeBuilder<ObservableList<E>>() {
+    }.with(new GenericTypeVariable<E>() {
+    }, elementType).build();
   }
 
 }

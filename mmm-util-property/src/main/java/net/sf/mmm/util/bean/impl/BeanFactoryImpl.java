@@ -406,10 +406,10 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   protected <V, PROPERTY extends ReadableProperty<V>> AbstractProperty<V> createProperty(String name,
-      GenericType<V> valueType, Bean bean, Class<PROPERTY> propertyClass) {
+      GenericType<? extends V> valueType, Bean bean, Class<PROPERTY> propertyClass) {
 
     AbstractProperty result;
-    Class<V> valueClass = null;
+    Class<? extends V> valueClass = null;
     if (valueType != null) {
       valueClass = valueType.getRetrievalClass();
     }

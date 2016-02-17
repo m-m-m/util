@@ -16,21 +16,21 @@ import javafx.beans.Observable;
  */
 class BindingInvalidationListener implements InvalidationListener {
 
-  private final WeakReference<AbstractGenericProperty<?>> weakReference;
+  private final WeakReference<AbstractValueProperty<?>> weakReference;
 
   /**
    * The constructor.
    *
    * @param property the property to {@link WritableProperty#bind(javafx.beans.value.ObservableValue) bind}.
    */
-  public BindingInvalidationListener(AbstractGenericProperty<?> property) {
+  public BindingInvalidationListener(AbstractValueProperty<?> property) {
     this.weakReference = new WeakReference<>(property);
   }
 
   @Override
   public void invalidated(Observable observable) {
 
-    AbstractGenericProperty<?> property = this.weakReference.get();
+    AbstractValueProperty<?> property = this.weakReference.get();
     if (property == null) {
       observable.removeListener(this);
     } else {

@@ -21,7 +21,7 @@ import net.sf.mmm.util.validation.base.ValidationFailureSuccess;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractGenericProperty<VALUE> extends AbstractProperty<VALUE> {
+public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALUE> {
 
   private ValidationFailure validationResult;
 
@@ -37,7 +37,7 @@ public abstract class AbstractGenericProperty<VALUE> extends AbstractProperty<VA
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractGenericProperty(String name, Bean bean) {
+  public AbstractValueProperty(String name, Bean bean) {
     this(name, bean, null);
   }
 
@@ -48,14 +48,14 @@ public abstract class AbstractGenericProperty<VALUE> extends AbstractProperty<VA
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractGenericProperty(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
+  public AbstractValueProperty(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
     super(name, bean, validator);
   }
 
   @Override
-  protected AbstractGenericProperty<VALUE> copy() {
+  protected AbstractValueProperty<VALUE> copy() {
 
-    AbstractGenericProperty<VALUE> copy = (AbstractGenericProperty<VALUE>) super.copy();
+    AbstractValueProperty<VALUE> copy = (AbstractValueProperty<VALUE>) super.copy();
     copy.binding = null;
     copy.bindingListener = null;
     copy.readOnlyProperty = null;

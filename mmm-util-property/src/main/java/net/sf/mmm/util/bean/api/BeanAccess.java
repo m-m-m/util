@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
+import java.util.Collection;
+import java.util.Set;
+
 import javax.inject.Named;
 
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
@@ -26,6 +29,12 @@ public interface BeanAccess {
    * @return an {@link Iterable} with all the properties of this {@link Bean}.
    */
   Iterable<WritableProperty<?>> getProperties();
+
+  /**
+   * @return an {@link java.util.Collections#unmodifiableSet(Set) immutable} {@link Set} with the
+   *         {@link WritableProperty#getName() names} of the {@link #getProperties() properties}.
+   */
+  Set<String> getPropertyNames();
 
   /**
    * @return an {@link Iterable} with all defined {@link #getPropertyNameForAlias(String) aliases}.
@@ -144,7 +153,7 @@ public interface BeanAccess {
    * @return the requested property.
    */
   default <V, PROPERTY extends WritableProperty<V>> PROPERTY getOrCreateProperty(String name,
-      GenericType<V> valueType, Class<PROPERTY> propertyType) {
+      GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
 
     WritableProperty<?> property = getProperty(name);
     if (property != null) {
@@ -255,8 +264,8 @@ public interface BeanAccess {
    * @param propertyType the Class reflecting the {@link WritableProperty} to create.
    * @return the newly created property.
    */
-  <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<V> valueType,
-      Class<PROPERTY> propertyType);
+  <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name,
+      GenericType<? extends V> valueType, Class<PROPERTY> propertyType);
 
   /**
    * This method updates a given {@link WritableProperty property} such that the provided {@link AbstractValidator
@@ -267,11 +276,26 @@ public interface BeanAccess {
    * @param <PROPERTY> the generic type of the {@link WritableProperty property}.
    * @param property the {@link WritableProperty property} to update. Has to be owned by the {@link Bean#access()
    *        owning} {@link Bean}.
-   * @param validators are the {@link AbstractValidator validators} to add. The implementation tries its best to be
+   * @param validator is the {@link AbstractValidator validator} to add. The implementation tries its best to be
    *        idempotent so adding the same validator again should have no effect.
    */
   <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
-      @SuppressWarnings("unchecked") AbstractValidator<? super V>... validators);
+      AbstractValidator<? super V> validator);
+
+  /**
+   * This method updates a given {@link WritableProperty property} such that the provided {@link AbstractValidator
+   * validator} is added. Therefore the {@link Bean} has to be a {@link #isDynamic() dynamic} {@link #isPrototype()
+   * prototype} that is not {@link #isReadOnly() read-only}.
+   *
+   * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
+   * @param <PROPERTY> the generic type of the {@link WritableProperty property}.
+   * @param property the {@link WritableProperty property} to update. Has to be owned by the {@link Bean#access()
+   *        owning} {@link Bean}.
+   * @param validators is the {@link Collection} with the {@link AbstractValidator validators} to add. The
+   *        implementation tries its best to be idempotent so adding the same validator again should have no effect.
+   */
+  <V, PROPERTY extends WritableProperty<V>> void addPropertyValidators(WritableProperty<?> property,
+      Collection<AbstractValidator<? super V>> validators);
 
   /**
    * @see BeanFactory#getReadOnlyBean(Bean)

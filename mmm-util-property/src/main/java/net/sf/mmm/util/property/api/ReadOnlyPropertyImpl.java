@@ -47,7 +47,7 @@ public class ReadOnlyPropertyImpl<VALUE> implements WritableProperty<VALUE> {
   }
 
   @Override
-  public GenericType<VALUE> getType() {
+  public GenericType<? extends VALUE> getType() {
 
     return this.property.getType();
   }

@@ -20,9 +20,13 @@ public interface ReadableProperty<VALUE>
     extends ReadOnlyProperty<VALUE>, AttributeReadValue<VALUE>, AttributeReadName {
 
   /**
-   * @return the type of the property.
+   * @return the type of the property. Please note that the generic signature of this method is returning the type
+   *         {@link GenericType}{@literal <? extends VALUE>} instead of {@link GenericType}{@literal <VALUE>} because
+   *         JavaFx is binding the type {@link Number} for all numeric properties while e.g. {@link IntegerProperty}
+   *         should be able to return {@link GenericType}{@literal <Integer>} what is compatible with
+   *         {@link GenericType}{@literal <? extends Number>}.
    */
-  GenericType<VALUE> getType();
+  GenericType<? extends VALUE> getType();
 
   @Override
   Bean getBean();

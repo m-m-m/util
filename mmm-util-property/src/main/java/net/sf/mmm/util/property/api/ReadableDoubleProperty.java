@@ -5,6 +5,8 @@ package net.sf.mmm.util.property.api;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.value.ObservableDoubleValue;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
  * This is the interface for a {@link ReadableNumberProperty} of the {@link #getValue() value}-{@link #getType() type}
@@ -14,6 +16,15 @@ import javafx.beans.value.ObservableDoubleValue;
  * @since 8.0.0
  */
 public interface ReadableDoubleProperty extends ReadableNumberProperty, ObservableDoubleValue {
+
+  /** @see #getType() */
+  GenericType<Double> TYPE = new SimpleGenericTypeImpl<>(Double.class);
+
+  @Override
+  default GenericType<Double> getType() {
+
+    return TYPE;
+  }
 
   // @Override
   // Double getValue();

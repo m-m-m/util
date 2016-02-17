@@ -14,10 +14,10 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractContainerProperty<VALUE> extends AbstractGenericProperty<VALUE>
+public abstract class AbstractContainerProperty<VALUE> extends AbstractValueProperty<VALUE>
     implements ReadableContainerProperty<VALUE> {
 
-  private final GenericType<VALUE> type;
+  private final GenericType<? extends VALUE> type;
 
   private SizeProperty sizeProperty;
 
@@ -30,7 +30,7 @@ public abstract class AbstractContainerProperty<VALUE> extends AbstractGenericPr
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractContainerProperty(String name, GenericType<VALUE> type, Bean bean) {
+  public AbstractContainerProperty(String name, GenericType<? extends VALUE> type, Bean bean) {
     this(name, type, bean, null);
   }
 
@@ -42,14 +42,14 @@ public abstract class AbstractContainerProperty<VALUE> extends AbstractGenericPr
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractContainerProperty(String name, GenericType<VALUE> type, Bean bean,
+  public AbstractContainerProperty(String name, GenericType<? extends VALUE> type, Bean bean,
       AbstractValidator<? super VALUE> validator) {
     super(name, bean, validator);
     this.type = type;
   }
 
   @Override
-  public GenericType<VALUE> getType() {
+  public GenericType<? extends VALUE> getType() {
 
     return this.type;
   }

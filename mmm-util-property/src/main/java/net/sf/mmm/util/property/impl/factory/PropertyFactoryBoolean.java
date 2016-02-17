@@ -48,7 +48,7 @@ public class PropertyFactoryBoolean extends AbstractPropertyFactory<Boolean, Boo
   }
 
   @Override
-  public BooleanProperty create(String name, GenericType<Boolean> valueType, Bean bean,
+  public BooleanProperty create(String name, GenericType<? extends Boolean> valueType, Bean bean,
       AbstractValidator<? super Boolean> validator) {
 
     return new BooleanProperty(name, bean, validator);

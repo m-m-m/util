@@ -19,7 +19,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @since 8.0.0
  */
 @SuppressWarnings("restriction")
-public abstract class AbstractRegularProperty<VALUE> extends AbstractGenericProperty<VALUE> {
+public abstract class AbstractRegularProperty<VALUE> extends AbstractValueProperty<VALUE> {
 
   private ExpressionHelper<VALUE> helper;
 

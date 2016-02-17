@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
+
 /**
  * This is the interface for a {@link ReadableNumberProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Byte}.
@@ -10,6 +13,15 @@ package net.sf.mmm.util.property.api;
  * @since 8.0.0
  */
 public interface ReadableByteProperty extends ReadableIntegerBindingProperty {
+
+  /** @see #getType() */
+  GenericType<Byte> TYPE = new SimpleGenericTypeImpl<>(Byte.class);
+
+  @Override
+  default GenericType<Byte> getType() {
+
+    return TYPE;
+  }
 
   // @Override
   // Byte getValue();
