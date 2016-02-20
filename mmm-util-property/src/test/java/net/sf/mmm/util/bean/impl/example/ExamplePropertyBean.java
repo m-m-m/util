@@ -6,11 +6,11 @@ import javax.inject.Named;
 
 import javafx.geometry.Orientation;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.IntegerProperty;
-import net.sf.mmm.util.property.api.WritableBooleanProperty;
-import net.sf.mmm.util.property.api.WritableIntegerProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.api.WritableStringProperty;
+import net.sf.mmm.util.property.api.lang.IntegerProperty;
+import net.sf.mmm.util.property.api.lang.WritableBooleanProperty;
+import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
+import net.sf.mmm.util.property.api.lang.WritableStringProperty;
 import net.sf.mmm.util.validation.base.Mandatory;
 
 /**

@@ -6,12 +6,12 @@ import javax.inject.Named;
 
 import javafx.collections.ObservableList;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.ListProperty;
-import net.sf.mmm.util.property.api.ReadableListProperty;
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.WritableListProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.property.api.util.ListProperty;
+import net.sf.mmm.util.property.api.util.ReadableListProperty;
+import net.sf.mmm.util.property.api.util.WritableListProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 

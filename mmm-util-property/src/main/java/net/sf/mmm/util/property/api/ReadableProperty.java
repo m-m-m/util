@@ -6,6 +6,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadName;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
+import net.sf.mmm.util.property.api.lang.IntegerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**

@@ -6,11 +6,11 @@ import javax.inject.Named;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.ReadableStringProperty;
-import net.sf.mmm.util.property.api.StringProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.api.WritableStringProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.property.api.lang.ReadableStringProperty;
+import net.sf.mmm.util.property.api.lang.StringProperty;
+import net.sf.mmm.util.property.api.lang.WritableStringProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
@@ -24,7 +24,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 public class PropertyFactoryString extends AbstractPropertyFactory<String, StringProperty> {
 
   @Override
-  public Class<? extends String> getValueClass() {
+  public Class<String> getValueClass() {
 
     return String.class;
   }

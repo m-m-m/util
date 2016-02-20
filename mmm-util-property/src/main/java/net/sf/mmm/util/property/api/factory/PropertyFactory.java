@@ -11,7 +11,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
  * This is the interface for the factory of a specific {@link ReadableProperty property} type. You can directly
- * instantiate implementations such as {@link net.sf.mmm.util.property.api.StringProperty}. However for generic support
+ * instantiate implementations such as {@link net.sf.mmm.util.property.api.lang.StringProperty}. However for generic support
  * such as {@link net.sf.mmm.util.bean.api.BeanAccess#createProperty(String, Class)} according types have to be
  * registered via an implementation of this interface.
  *
@@ -28,7 +28,7 @@ public interface PropertyFactory<V, PROPERTY extends ReadableProperty<V>> {
 
   /**
    * @return the {@link Class} of the {@link ReadableProperty#getValue() property value}. May be <code>null</code> for
-   *         {@link net.sf.mmm.util.property.api.GenericProperty}.
+   *         {@link net.sf.mmm.util.property.api.lang.GenericProperty}.
    */
   Class<? extends V> getValueClass();
 
@@ -52,7 +52,7 @@ public interface PropertyFactory<V, PROPERTY extends ReadableProperty<V>> {
    *
    * @param name the {@link ReadableProperty#getName() property name}.
    * @param valueType is the {@link GenericType} of the value. Only needed for generic properties such as
-   *        {@link net.sf.mmm.util.property.api.GenericProperty} or {@link net.sf.mmm.util.property.api.ListProperty}.
+   *        {@link net.sf.mmm.util.property.api.lang.GenericProperty} or {@link net.sf.mmm.util.property.api.util.ListProperty}.
    *        Can be {@code null} if the generic value type is already bound and should be ignored then.
    * @param bean the {@link ReadableProperty#getBean() property bean}.
    * @param validator the {@link AbstractValidator validator} used for {@link WritableProperty#validate() validation}.

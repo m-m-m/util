@@ -10,8 +10,8 @@ import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.ReadableSetProperty;
 import net.sf.mmm.util.property.api.SetProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.api.WritableSetProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.property.api.util.WritableSetProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 

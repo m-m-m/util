@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
-import net.sf.mmm.util.property.api.WritableIntegerProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
 
 /**
  * This is the interface for an entity that may be loaded from or saved to a database. Each such entity has the

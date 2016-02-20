@@ -6,6 +6,7 @@ import java.lang.ref.WeakReference;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import net.sf.mmm.util.property.api.lang.GenericProperty;
 
 /**
  * This is an implementation of {@link InvalidationListener} for

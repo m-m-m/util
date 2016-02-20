@@ -5,12 +5,12 @@ package net.sf.mmm.util.property.impl.factory;
 import javax.inject.Named;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.BooleanProperty;
-import net.sf.mmm.util.property.api.ReadableBooleanProperty;
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.WritableBooleanProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.property.api.lang.BooleanProperty;
+import net.sf.mmm.util.property.api.lang.ReadableBooleanProperty;
+import net.sf.mmm.util.property.api.lang.WritableBooleanProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 

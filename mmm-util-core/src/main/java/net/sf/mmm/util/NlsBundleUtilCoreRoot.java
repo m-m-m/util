@@ -3,7 +3,6 @@
 package net.sf.mmm.util;
 
 import java.lang.reflect.Type;
-import java.util.Date;
 
 import javax.inject.Named;
 
@@ -1051,13 +1050,29 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
    * @return the {@link NlsMessage}.
    */
   @NlsBundleMessage("The value has to be in the past.")
-  NlsMessage errorValueNotInPast(@Named("value") Date value);
+  NlsMessage errorValueNotInPast(@Named("value") Object value);
 
   /**
    * @param value is the invalid value.
    * @return the {@link NlsMessage}.
    */
   @NlsBundleMessage("The value has to be in the future.")
-  NlsMessage errorValueNotInFuture(@Named("value") Date value);
+  NlsMessage errorValueNotInFuture(@Named("value") Object value);
+
+  /**
+   * @param value is the invalid value.
+   * @param other the upper bound.
+   * @return the {@link NlsMessage}.
+   */
+  @NlsBundleMessage("The value has to be after \"{other}\".")
+  NlsMessage errorValueNotAfter(@Named("value") Object value, @Named("other") Object other);
+
+  /**
+   * @param value is the invalid value.
+   * @param other the lower bound.
+   * @return the {@link NlsMessage}.
+   */
+  @NlsBundleMessage("The value has to be before \"{other}\".")
+  NlsMessage errorValueNotBefore(@Named("value") Object value, @Named("other") Object other);
 
 }

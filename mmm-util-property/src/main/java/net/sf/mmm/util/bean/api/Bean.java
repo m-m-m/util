@@ -37,11 +37,11 @@ import net.sf.mmm.util.property.api.WritableProperty;
  *
  * <pre>
  * public interface AddressBean extends {@link Bean} {
- *   {@link net.sf.mmm.util.property.api.WritableStringProperty} Street();
- *   {@link net.sf.mmm.util.property.api.WritableStringProperty} HouseNumber();
- *   {@link net.sf.mmm.util.property.api.WritableStringProperty} PostalCode();
- *   {@link net.sf.mmm.util.property.api.WritableStringProperty} City();
- *   {@link net.sf.mmm.util.property.api.WritableStringProperty} Country();
+ *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} Street();
+ *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} HouseNumber();
+ *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} PostalCode();
+ *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} City();
+ *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} Country();
  *   // if you want you may also define regular getters and setters as well
  *   String getStreet();
  *   void setStreet(String street);

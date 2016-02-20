@@ -105,7 +105,7 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
   @Override
   public int hashCode() {
 
-    return CODE.hashCode();
+    return 1;
   }
 
   @Override

@@ -4,7 +4,7 @@ package net.sf.mmm.util.bean.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractProperty;
-import net.sf.mmm.util.property.api.GenericProperty;
+import net.sf.mmm.util.property.api.lang.GenericProperty;
 
 /**
  * This class is a container for a {@link GenericProperty} and its according {@link #getIndex() index} for a specific

@@ -8,6 +8,7 @@ import java.util.Iterator;
 import javafx.beans.value.ObservableSetValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+import net.sf.mmm.util.property.api.util.ReadableCollectionProperty;
 
 /**
  * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}

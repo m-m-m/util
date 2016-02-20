@@ -5,12 +5,12 @@ package net.sf.mmm.util.property.impl.factory;
 import javax.inject.Named;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.FloatProperty;
-import net.sf.mmm.util.property.api.ReadableFloatProperty;
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.WritableFloatProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.property.api.lang.FloatProperty;
+import net.sf.mmm.util.property.api.lang.ReadableFloatProperty;
+import net.sf.mmm.util.property.api.lang.WritableFloatProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 

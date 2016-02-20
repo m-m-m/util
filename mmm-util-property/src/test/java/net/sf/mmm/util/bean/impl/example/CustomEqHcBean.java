@@ -7,7 +7,7 @@ import java.util.Objects;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.CustomEquals;
 import net.sf.mmm.util.bean.api.CustomHashCode;
-import net.sf.mmm.util.property.api.IntegerProperty;
+import net.sf.mmm.util.property.api.lang.IntegerProperty;
 
 /**
  * TODO: this class ...

@@ -6,11 +6,11 @@ import javax.inject.Named;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.ReadableShortProperty;
-import net.sf.mmm.util.property.api.ShortProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
-import net.sf.mmm.util.property.api.WritableShortProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.property.api.lang.ReadableShortProperty;
+import net.sf.mmm.util.property.api.lang.ShortProperty;
+import net.sf.mmm.util.property.api.lang.WritableShortProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 

@@ -11,6 +11,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.property.api.util.WritableSetProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;

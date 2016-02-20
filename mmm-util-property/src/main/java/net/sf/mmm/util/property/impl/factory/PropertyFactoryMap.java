@@ -6,13 +6,13 @@ import javax.inject.Named;
 
 import javafx.collections.ObservableMap;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.MapProperty;
-import net.sf.mmm.util.property.api.ReadableMapProperty;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.SetProperty;
-import net.sf.mmm.util.property.api.WritableMapProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
+import net.sf.mmm.util.property.api.util.MapProperty;
+import net.sf.mmm.util.property.api.util.ReadableMapProperty;
+import net.sf.mmm.util.property.api.util.WritableMapProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
