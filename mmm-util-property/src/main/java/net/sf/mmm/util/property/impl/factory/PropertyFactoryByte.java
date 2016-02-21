@@ -24,9 +24,9 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 public class PropertyFactoryByte extends AbstractPropertyFactory<Number, ByteProperty> {
 
   @Override
-  public Class<Short> getValueClass() {
+  public Class<Byte> getValueClass() {
 
-    return Short.class;
+    return Byte.class;
   }
 
   @Override
