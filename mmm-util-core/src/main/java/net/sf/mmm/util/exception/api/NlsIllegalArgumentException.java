@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * A {@link NlsIllegalArgumentException} is analog to an {@link IllegalArgumentException} but with true native
- * language support.
+ * A {@link NlsIllegalArgumentException} is analog to an {@link IllegalArgumentException} but with true native language
+ * support.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -57,7 +57,7 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
    */
   public NlsIllegalArgumentException(Object value, Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIllegalArgument(value));
+    super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorIllegalArgument(value));
   }
 
   /**
@@ -70,7 +70,7 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
    */
   public NlsIllegalArgumentException(Object value, String name, Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIllegalArgumentWithName(value, name));
+    super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorIllegalArgumentWithName(value, name));
   }
 
   /**

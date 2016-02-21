@@ -4,11 +4,10 @@ package net.sf.mmm.util.exception.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * A {@link NlsClassCastException} is analog to an {@link ClassCastException} but with native language
- * support.
+ * A {@link NlsClassCastException} is analog to an {@link ClassCastException} but with native language support.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -49,14 +48,13 @@ public class NlsClassCastException extends NlsRuntimeException {
    */
   public NlsClassCastException(Throwable nested, Object object, Type expectedType) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorCast(object, getType(object), expectedType));
+    super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorCast(object, getType(object), expectedType));
   }
 
   /**
    * This method gets the {@link #getClass() class} of an object in a null-safe way.
    *
-   * @param object is the object for which the {@link #getClass() class} is requested. May be
-   *        <code>null</code>
+   * @param object is the object for which the {@link #getClass() class} is requested. May be <code>null</code>
    * @return the class reflecting the given <code>object</code> or <code>null</code> if <code>object</code> is
    *         <code>null</code>.
    */

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
  * An {@link ObjectMismatchException} is thrown if an object or value do NOT match as expected.
@@ -55,8 +55,8 @@ public class ObjectMismatchException extends NlsRuntimeException {
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
    * @param source is the source of the mismatching <code>object</code>.
-   * @param property is the property or key of the <code>container</code> containing the mismatching
-   *        <code>object</code>.
+   * @param property is the property or key of the <code>container</code> containing the mismatching <code>object</code>
+   *        .
    */
   public ObjectMismatchException(Object object, Object expected, Object source, Object property) {
 
@@ -95,12 +95,14 @@ public class ObjectMismatchException extends NlsRuntimeException {
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
    * @param source is the source of the mismatching <code>object</code>.
-   * @param property is the property or key of the <code>container</code> containing the mismatching
-   *        <code>object</code>.
+   * @param property is the property or key of the <code>container</code> containing the mismatching <code>object</code>
+   *        .
    */
-  public ObjectMismatchException(Throwable nested, Object object, Object expected, Object source, Object property) {
+  public ObjectMismatchException(Throwable nested, Object object, Object expected, Object source,
+      Object property) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorObjectMismatch(object, expected, source, property));
+    super(nested,
+        createBundle(NlsBundleUtilExceptionRoot.class).errorObjectMismatch(object, expected, source, property));
   }
 
   /**

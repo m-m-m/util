@@ -29,8 +29,8 @@ public interface PojoUtilLimited {
    * If the given <code>value</code> is immutable (like {@link String}, {@link Long}, etc.) it is legal to return the
    * same given instance.
    *
-   * @param <V> is the generic type of the value to copy. Typically a
-   *        {@link net.sf.mmm.util.transferobject.api.TransferObject} or a {@link net.sf.mmm.util.lang.api.Datatype}.
+   * @param <V> is the generic type of the value to copy. Typically a {@code TransferObject} or a
+   *        {@link net.sf.mmm.util.lang.api.Datatype}.
    * @param value is the value to copy.
    * @return the copy of the value.
    */

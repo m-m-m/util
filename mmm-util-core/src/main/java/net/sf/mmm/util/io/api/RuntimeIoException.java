@@ -2,13 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
+import net.sf.mmm.util.io.NlsBundleUtilIoRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * A {@link RuntimeIoException} is like an {@link java.io.IOException} but as a {@link RuntimeException}.
- * Besides it has native language support build in.
+ * A {@link RuntimeIoException} is like an {@link java.io.IOException} but as a {@link RuntimeException}. Besides it has
+ * native language support build in.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -42,19 +42,19 @@ public class RuntimeIoException extends NlsRuntimeException {
   /**
    * The constructor.
    *
-   * @param nested is the {@link #getCause() cause} of this exception. This should be an
-   *        {@link java.io.IOException}. However it may also be an {@link java.io.IOError}.
+   * @param nested is the {@link #getCause() cause} of this exception. This should be an {@link java.io.IOException}.
+   *        However it may also be an {@link java.io.IOError}.
    */
   public RuntimeIoException(Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIo());
+    super(nested, createBundle(NlsBundleUtilIoRoot.class).errorIo());
   }
 
   /**
    * The constructor.
    *
-   * @param nested is the {@link #getCause() cause} of this exception. This should be an
-   *        {@link java.io.IOException}. However it may also be an {@link java.io.IOError}.
+   * @param nested is the {@link #getCause() cause} of this exception. This should be an {@link java.io.IOException}.
+   *        However it may also be an {@link java.io.IOError}.
    * @param mode is the {@link IoMode}.
    */
   public RuntimeIoException(Throwable nested, IoMode mode) {
@@ -86,15 +86,15 @@ public class RuntimeIoException extends NlsRuntimeException {
   }
 
   /**
-   * This method gets the {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() message}
-   * according to the given <code>mode</code>.
+   * This method gets the {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() message} according to
+   * the given <code>mode</code>.
    *
    * @param mode is the {@link IoMode} or <code>null</code> if unknown.
    * @return the message according to <code>mode</code>.
    */
   private static NlsMessage getMessage(IoMode mode) {
 
-    NlsBundleUtilCoreRoot bundle = createBundle(NlsBundleUtilCoreRoot.class);
+    NlsBundleUtilIoRoot bundle = createBundle(NlsBundleUtilIoRoot.class);
     switch (mode) {
       case READ:
         return bundle.errorIoRead();
@@ -106,7 +106,7 @@ public class RuntimeIoException extends NlsRuntimeException {
         return bundle.errorIoFlush();
       case COPY:
         return bundle.errorIoCopy();
-      default :
+      default:
         assert (false) : "IoMode is null!";
         return bundle.errorIo();
     }

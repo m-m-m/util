@@ -4,7 +4,7 @@ package net.sf.mmm.util.value.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.value.NlsBundleUtilValueRoot;
 
 /**
  * This exception is thrown if a value has the wrong type (a different value type was expected).
@@ -55,9 +55,9 @@ public class WrongValueTypeException extends ValueException {
    * The constructor.
    *
    * @param value is the wrong value.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier.
    * @param expectedType is the expected type of the value.
    */
   public WrongValueTypeException(Object value, Object valueSource, Type expectedType) {
@@ -70,15 +70,15 @@ public class WrongValueTypeException extends ValueException {
    *
    * @param nested is the throwable that caused this exception.
    * @param value is the wrong value.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier.
    * @param expectedType is the expected type of the value.
    */
   public WrongValueTypeException(Throwable nested, Object value, Object valueSource, Type expectedType) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorValueWrongType(value, getType(value), expectedType,
-        valueSource));
+    super(nested, createBundle(NlsBundleUtilValueRoot.class).errorValueWrongType(value, getType(value),
+        expectedType, valueSource));
   }
 
   /**

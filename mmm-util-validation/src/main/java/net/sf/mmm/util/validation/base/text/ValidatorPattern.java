@@ -5,8 +5,8 @@ package net.sf.mmm.util.validation.base.text;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 import net.sf.mmm.util.validation.base.AbstractValueValidator;
 
 /**
@@ -53,7 +53,7 @@ public class ValidatorPattern extends AbstractValueValidator<CharSequence> {
 
     boolean matches = this.pattern.matcher(value).matches();
     if (!matches) {
-      return createBundle(NlsBundleUtilCoreRoot.class).errorValueFormat(null, this.pattern);
+      return createBundle(NlsBundleUtilValidationRoot.class).errorValueFormat(null, this.pattern);
     }
     return null;
   }

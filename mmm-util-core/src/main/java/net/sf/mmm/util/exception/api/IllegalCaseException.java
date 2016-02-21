@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * A {@link IllegalCaseException} is thrown if a specific case occurred that should never happen. It is
- * typically thrown in the <code>default</code> -section of a <code>switch</code>-statement where all
- * <code>case</code>s should have been covered.
+ * A {@link IllegalCaseException} is thrown if a specific case occurred that should never happen. It is typically thrown
+ * in the <code>default</code> -section of a <code>switch</code>-statement where all <code>case</code>s should have been
+ * covered.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -35,7 +35,7 @@ public class IllegalCaseException extends NlsRuntimeException {
    */
   public IllegalCaseException(String illegalCase) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorIllegalCase(illegalCase));
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorIllegalCase(illegalCase));
   }
 
   /**

@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * An {@link ObjectNotFoundException} is thrown if an object was requested but does NOT exist or could NOT be
- * found. <br>
+ * An {@link ObjectNotFoundException} is thrown if an object was requested but does NOT exist or could NOT be found.
+ * <br>
  * This typically happens in situations where required objects are requested by a key (e.g. in a registry-
  * {@link java.util.Map}) but an expected object was NOT registered or the key is wrong for some reason. <br>
  * If you design your API please always consider if you should return <code>null</code> or throw an
@@ -34,8 +34,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
   /**
    * The constructor.
    *
-   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
-   *        found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be found.
    */
   public ObjectNotFoundException(Object object) {
 
@@ -45,8 +44,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
   /**
    * The constructor.
    *
-   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
-   *        found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be found.
    * @param key is the key to the required object.
    */
   public ObjectNotFoundException(Object object, Object key) {
@@ -58,8 +56,7 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    * The constructor.
    *
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
-   *        found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be found.
    * @since 3.0.0
    */
   public ObjectNotFoundException(Throwable nested, Object object) {
@@ -71,14 +68,13 @@ public class ObjectNotFoundException extends NlsRuntimeException {
    * The constructor.
    *
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
-   *        found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be found.
    * @param key is the key to the required object.
    * @since 3.0.0
    */
   public ObjectNotFoundException(Throwable nested, Object object, Object key) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorObjectNotFound(object, key));
+    super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorObjectNotFound(object, key));
   }
 
   /**

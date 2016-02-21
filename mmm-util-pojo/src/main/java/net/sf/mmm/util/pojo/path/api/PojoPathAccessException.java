@@ -4,12 +4,12 @@ package net.sf.mmm.util.pojo.path.api;
 
 import java.lang.reflect.Type;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.pojo.NlsBundleUtilPojoRoot;
 
 /**
- * A {@link PojoPathAccessException} is thrown if a {@link PojoPath} could NOT be evaluated because it lead to
- * an invalid access on some object.
- * 
+ * A {@link PojoPathAccessException} is thrown if a {@link PojoPath} could NOT be evaluated because it lead to an
+ * invalid access on some object.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -23,7 +23,7 @@ public class PojoPathAccessException extends PojoPathException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param pojoPath is the {@link PojoPath} that could NOT be accessed in the intended way.
    * @param currentPojoType is the type of the current {@link net.sf.mmm.util.pojo.api.Pojo} for which the
    *        {@link PojoPath#getSegment() segment} of the given <code>pojoPath</code> could NOT be accessed.
@@ -35,7 +35,7 @@ public class PojoPathAccessException extends PojoPathException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param pojoPath is the {@link PojoPath} that could NOT be accessed in the intended way.
    * @param currentPojoType is the type of the current {@link net.sf.mmm.util.pojo.api.Pojo} for which the
@@ -43,7 +43,7 @@ public class PojoPathAccessException extends PojoPathException {
    */
   public PojoPathAccessException(Throwable nested, String pojoPath, Type currentPojoType) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathAccess(pojoPath, currentPojoType));
+    super(nested, createBundle(NlsBundleUtilPojoRoot.class).errorPojoPathAccess(pojoPath, currentPojoType));
   }
 
   /**

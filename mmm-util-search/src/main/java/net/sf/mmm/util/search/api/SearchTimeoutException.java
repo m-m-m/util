@@ -2,16 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.search.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
+import net.sf.mmm.util.search.NlsBundleUtilSearchRoot;
 
 /**
- * This is the exception thrown if an operation (typically a query) in the persistence exceeded a configured
- * timeout. <br>
+ * This is the exception thrown if an operation (typically a query) in the persistence exceeded a configured timeout.
+ * <br>
  * This typically means that the end-user should refine his query and rerun the search.
- * 
+ *
  * @see net.sf.mmm.util.search.api.SearchCriteria#getSearchTimeout()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -28,7 +28,7 @@ public class SearchTimeoutException extends NlsRuntimeException {
    */
   public SearchTimeoutException() {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorSearchTimeout());
+    super(createBundle(NlsBundleUtilSearchRoot.class).errorSearchTimeout());
   }
 
   /**

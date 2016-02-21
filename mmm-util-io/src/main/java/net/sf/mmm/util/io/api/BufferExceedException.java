@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-import net.sf.mmm.util.NlsBundleUtilIoRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
+import net.sf.mmm.util.io.NlsBundleUtilIoRoot;
 
 /**
- * A {@link BufferExceedException} is thrown if a buffer (typically array of bytes or chars) is exceeded (e.g.
- * offset or length are out of range).
+ * A {@link BufferExceedException} is thrown if a buffer (typically array of bytes or chars) is exceeded (e.g. offset or
+ * length are out of range).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

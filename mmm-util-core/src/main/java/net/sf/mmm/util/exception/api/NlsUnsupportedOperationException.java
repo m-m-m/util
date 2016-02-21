@@ -2,17 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * An {@link NlsUnsupportedOperationException} is thrown if an operation was invoked that is NOT implemented
- * or generally NOT supported. <br>
+ * An {@link NlsUnsupportedOperationException} is thrown if an operation was invoked that is NOT implemented or
+ * generally NOT supported. <br>
  * <b>ATTENTION:</b><br>
- * Please always consider to avoid APIs that throw such exception and use inheritance instead (e.g. if there
- * was a <code>ReadOnlyIterator</code> such as <code>Enumeration</code> that <code>Iterator</code> extends).
- * 
+ * Please always consider to avoid APIs that throw such exception and use inheritance instead (e.g. if there was a
+ * <code>ReadOnlyIterator</code> such as <code>Enumeration</code> that <code>Iterator</code> extends).
+ *
  * @see UnsupportedOperationException
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -29,14 +29,14 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
    */
   public NlsUnsupportedOperationException() {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorUnsupportedOperation());
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorUnsupportedOperation());
   }
 
   /**
    * The constructor.
-   * 
-   * @param operation is a description (e.g. the {@link java.lang.reflect.Method} or a string with the name of
-   *        the class and method) of the operation that is NOT supported.
+   *
+   * @param operation is a description (e.g. the {@link java.lang.reflect.Method} or a string with the name of the class
+   *        and method) of the operation that is NOT supported.
    */
   public NlsUnsupportedOperationException(Object operation) {
 
@@ -45,14 +45,14 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
 
   /**
    * The constructor.
-   * 
-   * @param operation is a description (e.g. the {@link java.lang.reflect.Method} or a string with the name of
-   *        the class and method) of the operation that is NOT supported.
+   *
+   * @param operation is a description (e.g. the {@link java.lang.reflect.Method} or a string with the name of the class
+   *        and method) of the operation that is NOT supported.
    * @param source is the source object that does not support the operation.
    */
   public NlsUnsupportedOperationException(Object operation, Object source) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorUnsupportedOperationWithName(operation, source));
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorUnsupportedOperationWithName(operation, source));
   }
 
   /**

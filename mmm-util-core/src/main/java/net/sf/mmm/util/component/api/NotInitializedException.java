@@ -2,15 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.component.NlsBundleUtilComponentRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
- * This is the exception thrown if an operation was invoked before the object was initialized but has to be
- * called after initialization. <br>
- * Typical this exception is thrown by a component if it was used (a method declared in the component API was
- * called) before the {@link javax.annotation.PostConstruct initialization}.
- * 
+ * This is the exception thrown if an operation was invoked before the object was initialized but has to be called after
+ * initialization. <br>
+ * Typical this exception is thrown by a component if it was used (a method declared in the component API was called)
+ * before the {@link javax.annotation.PostConstruct initialization}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -27,7 +27,7 @@ public class NotInitializedException extends NlsRuntimeException {
    */
   public NotInitializedException() {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorNotInitialized());
+    super(createBundle(NlsBundleUtilComponentRoot.class).errorNotInitialized());
   }
 
   /**

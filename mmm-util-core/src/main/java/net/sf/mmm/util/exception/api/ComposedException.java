@@ -7,18 +7,16 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Locale;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.base.ComposedNlsMessage;
 
 /**
- * An {@link ComposedException} combines a list of exceptions in one single exception. This is helpful if you
- * are validating something and want to collect all errors and throw them as one exception with all
- * information. <br>
- * Otherwise you would stop at the first error, the user could fix it, restart and end up with the next error
- * and so on.
+ * An {@link ComposedException} combines a list of exceptions in one single exception. This is helpful if you are
+ * validating something and want to collect all errors and throw them as one exception with all information. <br>
+ * Otherwise you would stop at the first error, the user could fix it, restart and end up with the next error and so on.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
@@ -41,7 +39,7 @@ public class ComposedException extends NlsRuntimeException {
    */
   public ComposedException(Throwable... errors) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorComposed(createSubMessage(errors)));
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorComposed(createSubMessage(errors)));
     this.errors = errors;
   }
 
@@ -52,7 +50,7 @@ public class ComposedException extends NlsRuntimeException {
    */
   public ComposedException(NlsObject... errors) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorComposed(createSubMessage(errors)));
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorComposed(createSubMessage(errors)));
     this.errors = null;
   }
 

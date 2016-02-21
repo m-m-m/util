@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.pojo.NlsBundleUtilPojoRoot;
 
 /**
- * An {@link IllegalPojoPathException} is thrown by the {@link PojoPathNavigator} if the supplied
- * {@link PojoPath} is illegal. <br>
+ * An {@link IllegalPojoPathException} is thrown by the {@link PojoPathNavigator} if the supplied {@link PojoPath} is
+ * illegal. <br>
  * Here are some examples of illegal POJO-paths:
  * <ul>
  * <li><code>null</code></li>
@@ -15,7 +15,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  * <li><code>".foo"</code></li>
  * <li><code>"bar."</code></li>
  * </ul>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -29,7 +29,7 @@ public class IllegalPojoPathException extends PojoPathException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param pojoPath is the {@link PojoPath} that is illegal.
    */
   public IllegalPojoPathException(String pojoPath) {
@@ -39,13 +39,13 @@ public class IllegalPojoPathException extends PojoPathException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param pojoPath is the {@link PojoPath} that is illegal.
    */
   public IllegalPojoPathException(Throwable nested, String pojoPath) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorPojoPathIllegal(pojoPath));
+    super(nested, createBundle(NlsBundleUtilPojoRoot.class).errorPojoPathIllegal(pojoPath));
   }
 
   /**

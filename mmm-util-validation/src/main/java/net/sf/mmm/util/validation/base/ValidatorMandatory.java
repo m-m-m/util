@@ -5,9 +5,9 @@ package net.sf.mmm.util.validation.base;
 import java.util.Collection;
 import java.util.Map;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that validates that a mandatory value is filled. It
@@ -64,7 +64,7 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
    */
   private NlsMessage getFailureMessage() {
 
-    return createBundle(NlsBundleUtilCoreRoot.class).errorMandatory();
+    return createBundle(NlsBundleUtilValidationRoot.class).errorMandatory();
   }
 
   /**

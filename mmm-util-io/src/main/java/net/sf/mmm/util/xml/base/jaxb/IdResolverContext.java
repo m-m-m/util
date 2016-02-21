@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 import net.sf.mmm.util.exception.api.ComposedException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -28,7 +28,7 @@ import net.sf.mmm.util.nls.api.NlsObject;
 public class IdResolverContext {
 
   /** The bundle for creating error messages. */
-  private final NlsBundleUtilCoreRoot bundle;
+  private final NlsBundleUtilExceptionRoot bundle;
 
   /** @see #put(String, Object) */
   private Map<String, Object> id2valueMap;
@@ -48,7 +48,7 @@ public class IdResolverContext {
     this.id2valueMap = new HashMap<>();
     this.id2callableMap = new HashMap<>();
     this.duplicateIdErrors = new ArrayList<>();
-    this.bundle = NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
+    this.bundle = NlsAccess.getBundleFactory().createBundle(NlsBundleUtilExceptionRoot.class);
   }
 
   /**

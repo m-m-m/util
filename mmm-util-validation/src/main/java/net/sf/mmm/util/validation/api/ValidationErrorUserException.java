@@ -8,9 +8,9 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.ExceptionTruncation;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
+import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 
 /**
  * This exception is thrown if a validation failed unexpectedly. You may just use
@@ -18,13 +18,12 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  * {@link net.sf.mmm.util.exception.api.NlsThrowable} will all features and allows
  * {@link net.sf.mmm.util.exception.api.ExceptionTruncation}. <br>
  * <b>ATTENTION:</b><br>
- * Regular validation should not use exceptions. E.g. in a rich client validation happens for usability to
- * give early feedback to the end-user in case his data is incomplete or wrong and to prevent sending requests
- * to the server that can only fail. Fur such purpose bean validation (JSR303) does a great job and can be
- * used without exceptions. However on the server-side validation has to be performed again for
- * {@link net.sf.mmm.util.lang.api.concern.Security} reasons. In case a validation fails for a remote request,
- * the caller has to be informed by an exception. This is an abnormal situation where an exception is
- * suitable.
+ * Regular validation should not use exceptions. E.g. in a rich client validation happens for usability to give early
+ * feedback to the end-user in case his data is incomplete or wrong and to prevent sending requests to the server that
+ * can only fail. Fur such purpose bean validation (JSR303) does a great job and can be used without exceptions. However
+ * on the server-side validation has to be performed again for {@link net.sf.mmm.util.lang.api.concern.Security}
+ * reasons. In case a validation fails for a remote request, the caller has to be informed by an exception. This is an
+ * abnormal situation where an exception is suitable.
  *
  * @see javax.validation.ValidationException
  * @see javax.validation.ConstraintViolationException
@@ -59,7 +58,7 @@ public class ValidationErrorUserException extends NlsRuntimeException {
    */
   public ValidationErrorUserException(Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorValidation());
+    super(nested, createBundle(NlsBundleUtilValidationRoot.class).errorValidation());
     if (nested instanceof ConstraintViolationException) {
       this.constraintViolations = ((ConstraintViolationException) nested).getConstraintViolations();
     } else {

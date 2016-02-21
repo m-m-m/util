@@ -4,8 +4,8 @@ package net.sf.mmm.util.validation.base;
 
 import java.util.Date;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that
@@ -43,7 +43,7 @@ public class ValidatorDatePast extends AbstractValueValidator<Date> {
     if (value.before(new Date())) {
       return null;
     }
-    return createBundle(NlsBundleUtilCoreRoot.class).errorValueNotInPast(value);
+    return createBundle(NlsBundleUtilValidationRoot.class).errorValueNotInPast(value);
   }
 
   @Override

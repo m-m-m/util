@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
  * An {@link ObjectDisposedException} is thrown if an object or value is already
- * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadDisposed#isDisposed() disposed} and therefore an
- * operation failed that has been invoked on it.
+ * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadDisposed#isDisposed() disposed} and therefore an operation
+ * failed that has been invoked on it.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -36,7 +36,7 @@ public class ObjectDisposedException extends NlsRuntimeException {
    */
   public ObjectDisposedException(Object object) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorObjectDisposed(object));
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorObjectDisposed(object));
   }
 
   /**

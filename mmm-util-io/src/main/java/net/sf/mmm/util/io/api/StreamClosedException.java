@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.io.api;
 
-import net.sf.mmm.util.NlsBundleUtilIoRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
+import net.sf.mmm.util.io.NlsBundleUtilIoRoot;
 
 /**
- * A {@link StreamClosedException} is thrown if a stream is used that has already been
- * {@link java.io.Closeable#close() closed}.
+ * A {@link StreamClosedException} is thrown if a stream is used that has already been {@link java.io.Closeable#close()
+ * closed}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

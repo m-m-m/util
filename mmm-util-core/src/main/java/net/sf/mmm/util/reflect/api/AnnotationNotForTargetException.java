@@ -5,16 +5,15 @@ package net.sf.mmm.util.reflect.api;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.reflect.NlsBundleUtilReflectRoot;
 
 /**
- * A {@link AnnotationNotForTargetException} is thrown if an {@link java.lang.annotation.Annotation} should be
- * resolved for a specific {@link ElementType} that it is NOT {@link java.lang.annotation.Target targeted}
- * for.
- * 
+ * A {@link AnnotationNotForTargetException} is thrown if an {@link java.lang.annotation.Annotation} should be resolved
+ * for a specific {@link ElementType} that it is NOT {@link java.lang.annotation.Target targeted} for.
+ *
  * @see AnnotationUtil#isRuntimeAnnotation(Class)
  * @see AnnotationUtil#getTypeAnnotation(Class, Class)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -28,14 +27,14 @@ public class AnnotationNotForTargetException extends ReflectionException {
 
   /**
    * The constructor.
-   * 
+   *
    * @param annotation is the {@link Class} reflecting the {@link Annotation}.
    * @param target is the {@link ElementType} not {@link java.lang.annotation.Target targeted} by the given
    *        <code>annotation</code>.
    */
   public AnnotationNotForTargetException(Class<? extends Annotation> annotation, ElementType target) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorAnnotationNotForTarget(annotation, target));
+    super(createBundle(NlsBundleUtilReflectRoot.class).errorAnnotationNotForTarget(annotation, target));
   }
 
   /**

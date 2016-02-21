@@ -5,11 +5,11 @@ package net.sf.mmm.util.value.api;
 import java.util.Comparator;
 import java.util.Objects;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.base.ComparableComparator;
 import net.sf.mmm.util.lang.base.NumberComparator;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.value.NlsBundleUtilValueRoot;
 
 /**
  * This is the exception thrown if a numeric value is not in the expected range.
@@ -263,7 +263,7 @@ public class ValueOutOfRangeException extends ValueException {
    */
   public static <V> NlsMessage createMessage(V value, V minimum, V maximum, Object valueSource) {
 
-    return createBundle(NlsBundleUtilCoreRoot.class).errorValueOutOfRange(value,
+    return createBundle(NlsBundleUtilValueRoot.class).errorValueOutOfRange(value,
         (minimum == null) ? "\u2212\u221E" : minimum, (maximum == null) ? "+\u221E" : maximum, valueSource);
   }
 

@@ -2,12 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.component.NlsBundleUtilComponentRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
- * This is the exception thrown if a {@link javax.annotation.Resource resource} is required but is NOT
- * available.
+ * This is the exception thrown if a {@link javax.annotation.Resource resource} is required but is NOT available.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -46,7 +45,7 @@ public class ResourceMissingException extends NlsRuntimeException {
    */
   public ResourceMissingException(String resourceName, Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorResourceMissing(resourceName));
+    super(nested, createBundle(NlsBundleUtilComponentRoot.class).errorResourceMissing(resourceName));
   }
 
   /**

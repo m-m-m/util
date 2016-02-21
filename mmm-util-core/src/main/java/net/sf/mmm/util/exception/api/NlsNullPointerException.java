@@ -2,11 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * A {@link NlsNullPointerException} is analog to an {@link NullPointerException} but with native language
- * support.
+ * A {@link NlsNullPointerException} is analog to an {@link NullPointerException} but with native language support.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -45,7 +44,7 @@ public class NlsNullPointerException extends NlsRuntimeException {
    */
   public NlsNullPointerException(String argument, Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorArgumentNull(argument));
+    super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorArgumentNull(argument));
   }
 
   /**
@@ -53,8 +52,8 @@ public class NlsNullPointerException extends NlsRuntimeException {
    * <b>ATTENTION:</b><br>
    * This method is only intended to be used for specific types. It then not only saves you from a single
    * <code>if</code>-statement, but also defines a common pattern that is refactoring-safe. <br>
-   * Anyhow you should never use this method with generic {@link Class}es for <code>type</code> such as
-   * {@link Object}, {@link String}, {@link Integer}, etc. <br>
+   * Anyhow you should never use this method with generic {@link Class}es for <code>type</code> such as {@link Object},
+   * {@link String}, {@link Integer}, etc. <br>
    * <br>
    * Here is an example:
    *
@@ -67,8 +66,8 @@ public class NlsNullPointerException extends NlsRuntimeException {
    * </pre>
    *
    * @param <O> is the generic type of the <code>object</code>.
-   * @param type is the class reflecting the <code>object</code>. Its {@link Class#getSimpleName() simple
-   *        name} will be used in the exception-message if <code>object</code> is <code>null</code>.
+   * @param type is the class reflecting the <code>object</code>. Its {@link Class#getSimpleName() simple name} will be
+   *        used in the exception-message if <code>object</code> is <code>null</code>.
    * @param object is the object that is checked and should NOT be <code>null</code>.
    * @throws NlsNullPointerException if the given <code>object</code> is <code>null</code>.
    */

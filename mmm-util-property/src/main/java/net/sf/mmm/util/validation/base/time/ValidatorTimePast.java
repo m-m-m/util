@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base.time;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 import net.sf.mmm.util.validation.base.AbstractValueValidator;
 
 /**
@@ -44,7 +44,7 @@ public abstract class ValidatorTimePast<V> extends AbstractValueValidator<V> {
     if (isPast(value)) {
       return null;
     }
-    return createBundle(NlsBundleUtilCoreRoot.class).errorValueNotInPast(value);
+    return createBundle(NlsBundleUtilValidationRoot.class).errorValueNotInPast(value);
   }
 
   /**

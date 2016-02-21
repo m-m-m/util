@@ -6,19 +6,13 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
-import net.sf.mmm.util.nls.NlsBundleUtilCoreTestRoot;
-import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsBundle;
-import net.sf.mmm.util.nls.api.NlsBundleFactory;
-import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
-import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.api.NlsMessageFactory;
-import net.sf.mmm.util.nls.api.NlsObject;
-import net.sf.mmm.util.nls.base.AbstractNlsMessage;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
+import net.sf.mmm.util.nls.NlsBundleUtilCoreTestRoot;
+import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 
 /**
  * This is the test-case for {@link NlsMessage} and {@link NlsMessageFactory}.
@@ -37,14 +31,22 @@ public class NlsBundleTest {
    * This method tests {@link NlsBundleFactory#createBundle(Class)} for a regular {@link NlsBundle}.
    */
   @Test
-  public void testNlsBundle() {
+  public void testNlsBundleInfo() {
 
     NlsBundleUtilCoreRoot bundle = getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
 
     // test without arguments
     NlsMessage infoAnd = bundle.infoAnd();
     verifyInfoAnd(infoAnd);
+  }
 
+  /**
+   * This method tests {@link NlsBundleFactory#createBundle(Class)} for a regular {@link NlsBundle}.
+   */
+  @Test
+  public void testNlsBundleError() {
+
+    NlsBundleUtilExceptionRoot bundle = getBundleFactory().createBundle(NlsBundleUtilExceptionRoot.class);
     // test with arguments
     String object = "myObject";
     String key = "myKey";

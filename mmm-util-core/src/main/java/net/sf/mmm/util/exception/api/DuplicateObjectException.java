@@ -4,12 +4,12 @@ package net.sf.mmm.util.exception.api;
 
 import java.util.Map;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * An {@link DuplicateObjectException} is thrown if an object was rejected because it is a duplicate. This
- * typically happens if objects are registered (e.g. in a {@link java.util.Map}) and two objects should be
- * associated with the same key.
+ * An {@link DuplicateObjectException} is thrown if an object was rejected because it is a duplicate. This typically
+ * happens if objects are registered (e.g. in a {@link java.util.Map}) and two objects should be associated with the
+ * same key.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -37,7 +37,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
    */
   public DuplicateObjectException(Object object) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorDuplicateObject(object));
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorDuplicateObject(object));
   }
 
   /**
@@ -48,7 +48,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
    */
   public DuplicateObjectException(Object object, Object key) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorDuplicateObjectWithKey(object, key));
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorDuplicateObjectWithKey(object, key));
   }
 
   /**
@@ -61,12 +61,13 @@ public class DuplicateObjectException extends NlsRuntimeException {
    */
   public DuplicateObjectException(Object object, Object key, Object existing) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorDuplicateObjectWithKeyAndExisting(object, key, existing));
+    super(createBundle(NlsBundleUtilExceptionRoot.class).errorDuplicateObjectWithKeyAndExisting(object, key,
+        existing));
   }
 
   /**
-   * This method {@link Map#put(Object, Object) puts} the given <code>value</code> into the given
-   * <code>map</code> using the given <code>key</code>.
+   * This method {@link Map#put(Object, Object) puts} the given <code>value</code> into the given <code>map</code> using
+   * the given <code>key</code>.
    *
    * @param <KEY> is the generic type of the <code>key</code>.
    * @param <VALUE> is the generic type of the <code>value</code>.

@@ -4,10 +4,10 @@ package net.sf.mmm.util.validation.base;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValueValidator;
+import net.sf.mmm.util.value.NlsBundleUtilValueRoot;
 import net.sf.mmm.util.value.api.Range;
 
 /**
@@ -64,7 +64,7 @@ public class AbstractValidatorRange<V, R> extends AbstractValueValidator<V> {
     if (this.range.isContained(convertedValue)) {
       return null;
     } else {
-      return createBundle(NlsBundleUtilCoreRoot.class).errorValueOutOfRange(convertedValue, this.range.getMin(),
+      return createBundle(NlsBundleUtilValueRoot.class).errorValueOutOfRange(convertedValue, this.range.getMin(),
           this.range.getMax(), null);
     }
   }

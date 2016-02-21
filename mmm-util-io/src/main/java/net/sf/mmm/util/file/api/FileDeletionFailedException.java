@@ -4,7 +4,7 @@ package net.sf.mmm.util.file.api;
 
 import java.io.File;
 
-import net.sf.mmm.util.NlsBundleUtilIoRoot;
+import net.sf.mmm.util.file.NlsBundleUtilFileRoot;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
@@ -48,7 +48,7 @@ public class FileDeletionFailedException extends RuntimeIoException {
    */
   public FileDeletionFailedException(String file, boolean directory) {
 
-    super(createBundle(NlsBundleUtilIoRoot.class).errorFileDeletionFailed(file, directory));
+    super(createBundle(NlsBundleUtilFileRoot.class).errorFileDeletionFailed(file, directory));
   }
 
 }

@@ -15,10 +15,10 @@ import javax.validation.metadata.BeanDescriptor;
 import javax.validation.metadata.ConstraintDescriptor;
 import javax.validation.metadata.PropertyDescriptor;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
@@ -179,7 +179,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
 
     if ((value == null) && (this.propertyType != null) && this.propertyType.isPrimitive()) {
       return new ValidationFailureImpl(Mandatory.class.getSimpleName(), valueSource,
-          createBundle(NlsBundleUtilCoreRoot.class).errorMandatory());
+          createBundle(NlsBundleUtilValidationRoot.class).errorMandatory());
     }
     Set<ConstraintViolation<?>> violationSet = validateJsr303(value);
     int size = violationSet.size();

@@ -4,11 +4,11 @@ package net.sf.mmm.util.validation.base;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that {@link #validate(Object, Object) validates that
@@ -89,9 +89,9 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
       return null;
     }
     if (this.source == null) {
-      return createBundle(NlsBundleUtilCoreRoot.class).errorValueComparison(value, this.comparator, value2);
+      return createBundle(NlsBundleUtilValidationRoot.class).errorValueComparison(value, this.comparator, value2);
     } else {
-      return createBundle(NlsBundleUtilCoreRoot.class).errorValueComparisonWithSource(value, this.comparator,
+      return createBundle(NlsBundleUtilValidationRoot.class).errorValueComparisonWithSource(value, this.comparator,
           value2, this.source);
     }
   }

@@ -4,7 +4,7 @@ package net.sf.mmm.util.file.api;
 
 import java.io.File;
 
-import net.sf.mmm.util.NlsBundleUtilIoRoot;
+import net.sf.mmm.util.file.NlsBundleUtilFileRoot;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
@@ -51,7 +51,7 @@ public class FileAttributeModificationFailedException extends RuntimeIoException
    */
   public FileAttributeModificationFailedException(String file, boolean directory) {
 
-    super(createBundle(NlsBundleUtilIoRoot.class).errorFileAttributeModificationFailed(file, directory));
+    super(createBundle(NlsBundleUtilFileRoot.class).errorFileAttributeModificationFailed(file, directory));
   }
 
 }

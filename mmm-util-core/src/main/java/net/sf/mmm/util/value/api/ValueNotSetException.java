@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.value.NlsBundleUtilValueRoot;
 
 /**
  * This is the exception thrown if a required value was not set.
@@ -29,13 +29,13 @@ public class ValueNotSetException extends ValueException {
   /**
    * The constructor.
    *
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier.
    */
   public ValueNotSetException(Object valueSource) {
 
-    super(createBundle(NlsBundleUtilCoreRoot.class).errorValueNotSet(valueSource));
+    super(createBundle(NlsBundleUtilValueRoot.class).errorValueNotSet(valueSource));
   }
 
   /**

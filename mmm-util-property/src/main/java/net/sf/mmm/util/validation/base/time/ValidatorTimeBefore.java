@@ -4,9 +4,9 @@ package net.sf.mmm.util.validation.base.time;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 import net.sf.mmm.util.validation.base.AbstractValueValidator;
 
 /**
@@ -79,7 +79,7 @@ public abstract class ValidatorTimeBefore<V> extends AbstractValueValidator<V> {
     if (isBefore(value, limit)) {
       return null;
     }
-    return createBundle(NlsBundleUtilCoreRoot.class).errorValueNotBefore(value, limit);
+    return createBundle(NlsBundleUtilValidationRoot.class).errorValueNotBefore(value, limit);
   }
 
   /**

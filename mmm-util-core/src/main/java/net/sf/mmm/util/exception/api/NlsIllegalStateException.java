@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * A {@link NlsIllegalStateException} is analog to an {@link IllegalStateException} but with true native
- * language support.
+ * A {@link NlsIllegalStateException} is analog to an {@link IllegalStateException} but with true native language
+ * support.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -34,7 +34,7 @@ public class NlsIllegalStateException extends NlsRuntimeException {
    */
   public NlsIllegalStateException(Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIllegalState());
+    super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorIllegalState());
   }
 
   /**
