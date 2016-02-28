@@ -160,7 +160,7 @@ public interface BeanAccess {
       try {
         return propertyType.cast(property);
       } catch (ClassCastException e) {
-        throw new ObjectMismatchException(e, propertyType, property.getClass(), getBeanClass(), name + ".class");
+        throw new ObjectMismatchException(e, propertyType, property.getClass(), getBeanClass(), name);
       }
     }
     return createProperty(name, valueType, propertyType);
