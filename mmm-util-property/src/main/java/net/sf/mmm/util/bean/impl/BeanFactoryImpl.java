@@ -416,7 +416,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     PropertyFactory<V, ?> factory = this.propertyFactoryManager.getFactory(propertyClass, valueClass, false);
     if (factory != null) {
       result = (AbstractProperty) factory.create(name, valueType, bean, null);
-    } else if ((!propertyClass.isInterface()) && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
+    } else if ((propertyClass != null) && (!propertyClass.isInterface())
+        && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
       result = createPropertyFromSpecifiedClass(name, valueType, bean, propertyClass);
     } else {
       getLogger().debug(
