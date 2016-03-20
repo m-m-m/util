@@ -12,4 +12,5 @@
   <root level="warn">
     <appender-ref ref="STDOUT" />
   </root>
+  <logger name="net.sf.mmm" level="DEBUG"/>
 </configuration>

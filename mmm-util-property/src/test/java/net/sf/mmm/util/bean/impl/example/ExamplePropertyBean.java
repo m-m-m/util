@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.impl.example;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import javafx.geometry.Orientation;
@@ -27,6 +28,7 @@ public interface ExamplePropertyBean extends Bean {
   @Named("Alias")
   WritableStringProperty Name();
 
+  @Inject
   default WritableIntegerProperty Age() {
 
     return new IntegerProperty(null, null).withValdidator().mandatory().range(0, 200).and().build();

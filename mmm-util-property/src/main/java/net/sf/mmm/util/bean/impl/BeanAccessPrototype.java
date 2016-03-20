@@ -8,10 +8,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +39,15 @@ import net.sf.mmm.util.validation.base.ComposedValidator;
  * @author hohwille
  * @since 8.0.0
  */
-public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN> {
+public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN> {
 
   private static final Logger LOG = LoggerFactory.getLogger(BeanAccessPrototype.class);
+
+  private final String simpleName;
+
+  private final String qualifiedName;
+
+  private final String packageName;
 
   private final Map<String, BeanPrototypeProperty> name2PropertyMap;
 
@@ -51,44 +59,66 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
 
   private final Set<String> propertyNames;
 
-  private final boolean dynamic;
+  private final Set<String> declaredPropertyNamesMutable;
+
+  private final Set<String> declaredPropertyNames;
 
   private final BeanFactoryImpl beanFactory;
+
+  private final Class<?>[] interfaces;
 
   /**
    * The constructor.
    *
    * @param beanClass - see {@link #getBeanClass()}.
-   * @param name - see {@link #getName()}.
+   * @param qualifiedName - see {@link #getQualifiedName()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    */
-  public BeanAccessPrototype(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory) {
-    this(beanClass, name, beanFactory, null, false);
+  protected BeanAccessPrototype(Class<BEAN> beanClass, String qualifiedName, BeanFactoryImpl beanFactory) {
+    this(beanClass, qualifiedName, beanFactory, null, false, beanClass);
   }
 
   /**
    * The constructor.
    *
    * @param master the {@link BeanAccessPrototype} to copy.
-   * @param name - see {@link #getName()}.
+   * @param qualifiedName - see {@link #getQualifiedName()}.
    * @param dynamic - see {@link #isDynamic()}.
+   * @param interfaces - the interfaces to be implemented by the {@link #getBean() dynamic proxy}.
    */
-  public BeanAccessPrototype(BeanAccessPrototype<BEAN> master, boolean dynamic, String name) {
+  protected BeanAccessPrototype(BeanAccessPrototype<BEAN> master, String qualifiedName, boolean dynamic,
+      Class<?>... interfaces) {
 
-    this(master.getBeanClass(), name, master.beanFactory, master, dynamic);
+    this(master.getBeanClass(), qualifiedName, master.beanFactory, master, dynamic, interfaces);
   }
 
-  private BeanAccessPrototype(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory,
-      BeanAccessPrototype<BEAN> master, boolean dynamic) {
+  private BeanAccessPrototype(Class<BEAN> beanClass, String qualifiedName, BeanFactoryImpl beanFactory,
+      BeanAccessPrototype<BEAN> master, boolean dynamic, Class<?>... interfaces) {
 
-    super(beanClass, name, beanFactory);
+    super(beanClass, beanFactory);
+
+    this.qualifiedName = qualifiedName;
+    int lastDot = qualifiedName.lastIndexOf('.');
+    if (lastDot < 0) {
+      this.simpleName = qualifiedName;
+      this.packageName = "";
+    } else {
+      this.simpleName = qualifiedName.substring(lastDot + 1);
+      this.packageName = qualifiedName.substring(0, lastDot);
+    }
     if (master == null) {
       this.name2PropertyMap = new HashMap<>();
       this.aliasMap = new HashMap<>();
       this.aliases = Collections.unmodifiableSet(this.aliasMap.keySet());
       this.method2OperationMap = new HashMap<>();
+      this.declaredPropertyNamesMutable = new HashSet<>();
     } else {
-      this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
+      if (dynamic) {
+        this.name2PropertyMap = new ConcurrentHashMap<>(master.name2PropertyMap.size());
+      } else {
+        this.name2PropertyMap = new HashMap<>(master.name2PropertyMap.size());
+      }
+      this.declaredPropertyNamesMutable = new HashSet<>(master.declaredPropertyNamesMutable);
       this.aliasMap = master.aliasMap;
       this.aliases = master.aliases;
       this.method2OperationMap = master.method2OperationMap;
@@ -101,8 +131,17 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
       }
     }
     this.propertyNames = Collections.unmodifiableSet(this.name2PropertyMap.keySet());
-    this.dynamic = dynamic;
+    this.declaredPropertyNames = Collections.unmodifiableSet(this.declaredPropertyNamesMutable);
     this.beanFactory = beanFactory;
+    this.interfaces = interfaces;
+  }
+
+  /**
+   * @return a new {@link Map} instance such as {@link HashMap} or {@link ConcurrentHashMap} for the properties.
+   */
+  protected Map<String, BeanPrototypeProperty> createPropertyMap() {
+
+    return new HashMap<>();
   }
 
   @Override
@@ -111,10 +150,39 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     return this;
   }
 
+  Class<?>[] getInterfaces() {
+
+    return this.interfaces;
+  }
+
+  @Override
+  public String getSimpleName() {
+
+    return this.simpleName;
+  }
+
+  @Override
+  public String getQualifiedName() {
+
+    return this.qualifiedName;
+  }
+
+  @Override
+  public String getPackageName() {
+
+    return this.packageName;
+  }
+
   @Override
   public Set<String> getPropertyNames() {
 
     return this.propertyNames;
+  }
+
+  @Override
+  public Set<String> getDeclaredPropertyNames() {
+
+    return this.declaredPropertyNames;
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -129,15 +197,11 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name,
       GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
 
-    if (!this.dynamic) {
+    if (!isDynamic()) {
       throw new ReadOnlyException(getBeanClass().getSimpleName(), "access.properties");
     }
-    BeanPrototypeProperty prototypeProperty = this.name2PropertyMap.get(name);
-    if (prototypeProperty != null) {
-      throw new DuplicateObjectException(this, name, prototypeProperty);
-    }
     AbstractProperty<?> property = this.beanFactory.createProperty(name, valueType, getBean(), propertyType);
-    addProperty(property);
+    addProperty(property, true);
     return (PROPERTY) property;
   }
 
@@ -223,11 +287,34 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
 
   /**
    * @param property the {@link WritableProperty} to add.
+   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property}, {@code false}
+   *        otherwise (inherited).
    */
-  protected void addProperty(AbstractProperty<?> property) {
+  protected void addProperty(AbstractProperty<?> property, boolean declared) {
 
-    BeanPrototypeProperty prototypeProperty = new BeanPrototypeProperty(property, this.name2PropertyMap.size());
-    this.name2PropertyMap.put(property.getName(), prototypeProperty);
+    addPropertyInternal(property, declared);
+  }
+
+  /**
+   * Internal implementation of {@link #addProperty(AbstractProperty, boolean)} (e.g. recursive and without locking).
+   *
+   * @param property the {@link WritableProperty} to add.
+   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property}, {@code false}
+   *        otherwise (inherited).
+   */
+  protected void addPropertyInternal(AbstractProperty<?> property, boolean declared) {
+
+    String name = property.getName();
+    this.name2PropertyMap.compute(name, (k, v) -> {
+      if (v != null) {
+        throw new DuplicateObjectException(property, name, v);
+      }
+      return new BeanPrototypeProperty(property, this.name2PropertyMap.size());
+    });
+
+    if (declared) {
+      this.declaredPropertyNamesMutable.add(name);
+    }
   }
 
   @Override
@@ -243,15 +330,15 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
   }
 
   @Override
-  public boolean isDynamic() {
-
-    return this.dynamic;
-  }
-
-  @Override
   public boolean isPrototype() {
 
     return true;
+  }
+
+  @Override
+  public boolean isVirtual() {
+
+    return false;
   }
 
   @Override
@@ -268,7 +355,7 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
 
     Objects.requireNonNull(property, "property");
     Objects.requireNonNull(validators, "validators");
-    if (!this.dynamic) {
+    if (!isDynamic()) {
       throw new IllegalStateException("Bean not dynamic");
     }
     String propertyName = property.getName();
@@ -298,6 +385,12 @@ public class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN>
     AbstractProperty<V> newProperty = ((AbstractProperty<V>) property).copy(newValidator);
     prototypeProperty.setProperty(newProperty);
     LOG.info("Added validator to property {} of protoype for bean {}", propertyName, getBeanClass());
+  }
+
+  @SuppressWarnings("unchecked")
+  static <BEAN extends Bean> BeanAccessPrototype<BEAN> get(BEAN bean) {
+
+    return ((BeanAccessBase<BEAN>) bean.access()).getPrototype();
   }
 
   private static <V> void addValidator(AbstractValidator<? super V> currentValidator,

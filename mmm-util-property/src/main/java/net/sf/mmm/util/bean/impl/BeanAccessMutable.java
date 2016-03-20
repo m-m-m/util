@@ -20,15 +20,12 @@ public class BeanAccessMutable<BEAN extends Bean> extends BeanAccessInstance<BEA
   /**
    * The constructor.
    *
-   * @param beanClass - see {@link #getBeanClass()}.
-   * @param name - see {@link #getName()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    * @param prototype the {@link BeanAccessPrototype}.
    */
-  public BeanAccessMutable(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory,
-      BeanAccessPrototype<BEAN> prototype) {
+  public BeanAccessMutable(BeanFactoryImpl beanFactory, BeanAccessPrototype<BEAN> prototype) {
 
-    super(beanClass, name, beanFactory, prototype);
+    super(beanFactory, prototype);
   }
 
   @Override

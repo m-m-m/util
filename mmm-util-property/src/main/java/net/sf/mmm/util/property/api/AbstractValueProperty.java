@@ -222,4 +222,32 @@ public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALU
     return false;
   }
 
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(getClass(), getName());
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (!super.equals(obj)) {
+      return false;
+    }
+    AbstractValueProperty<?> other = (AbstractValueProperty<?>) obj;
+    if (!Objects.equals(this.binding, other.binding)) {
+      return false;
+    }
+    if (!Objects.equals(getValue(), other.getValue())) {
+      return false;
+    }
+    return true;
+  }
+
 }

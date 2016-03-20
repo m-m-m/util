@@ -37,6 +37,17 @@ public interface BeanAccess {
   Set<String> getPropertyNames();
 
   /**
+   * @see Class#getDeclaredFields()
+   *
+   * @return an {@link java.util.Collections#unmodifiableSet(Set) immutable} {@link Set} with the
+   *         {@link WritableProperty#getName() names} of the {@link #getProperties() properties} declared by this
+   *         {@link #getBeanClass() bean class}. In other words a sub-set of {@link #getPropertyNames()} is returned
+   *         that excludes the {@link WritableProperty#getName() names} of the inherited {@link #getProperties()
+   *         properties}.
+   */
+  Set<String> getDeclaredPropertyNames();
+
+  /**
    * @return an {@link Iterable} with all defined {@link #getPropertyNameForAlias(String) aliases}.
    */
   Iterable<String> getAliases();
@@ -65,11 +76,32 @@ public interface BeanAccess {
   Class<? extends Bean> getBeanClass();
 
   /**
-   * @return the {@link Named#value() value} of the {@link Bean}s {@link Named} annotation or the
-   *         {@link Class#getSimpleName() simple name} of the {@link #getBeanClass() bean class} if no such annotation
-   *         is present.
+   * @see #getQualifiedName()
+   * @return the {@link Class#getSimpleName() simple name} of the {@link Bean}. The last segment of the
+   *         {@link #getQualifiedName()} (excluding the {@link #getPackageName() package name}).
    */
-  String getName();
+  String getSimpleName();
+
+  /**
+   * @return the {@link Class#getName() qualified name} of the {@link #getBeanClass() bean interface}. By default
+   *         derived from {@link Class#getName()} of the {@link #getBeanClass() bean-interface}. Will be overridden if a
+   *         {@link Named} annotation is present at the interface. If the {@link Named#value()} of the {@link Named}
+   *         annotation is unqualified (contains no dot) then the {@link Class#getPackage() package} of the
+   *         {@link #getBeanClass() bean interface} is appended. Further the name can be provided when
+   *         {@link BeanPrototypeBuilder#createPrototype(Class, String, Bean...) dynamic bean prototypes} are created.
+   *         Again if an unqualified name is provided as argument, the {@link Class#getPackage() package} of the
+   *         {@link #getBeanClass() bean interface} is appended.
+   */
+  String getQualifiedName();
+
+  /**
+   * @see #getQualifiedName()
+   * @return the {@link Package#getName() package name} of the {@link #getBeanClass() bean class}. The
+   *         {@link #getQualifiedName() qualified name} excluding the {@link #getSimpleName() simple name}. Will be the
+   *         empty string for the default package (then {@link #getQualifiedName()} is {@link String#equals(Object)
+   *         equal} to {@link #getSimpleName()}).
+   */
+  String getPackageName();
 
   /**
    * @param name the {@link WritableProperty#getName() name} of the requested property.
@@ -300,20 +332,40 @@ public interface BeanAccess {
   /**
    * @see BeanFactory#getReadOnlyBean(Bean)
    *
-   * @return <code>true</code> if this {@link Bean} is read-only (immutable), <code>false</code> otherwise.
+   * @return <code>true</code> if this {@link BeanAccess} belongs to a {@link Bean} that is read-only (immutable),
+   *         <code>false</code> otherwise.
    */
   boolean isReadOnly();
 
   /**
-   * @return <code>true</code> if this is a dynamic bean that is not strictly typed and can create properties on the
-   *         fly, <code>false</code> otherwise.
+   * @see BeanPrototypeBuilder#isDynamic()
+   * @see BeanPrototypeBuilder#getOrCreatePrototype(Class)
+   *
+   * @return <code>true</code> if this {@link BeanAccess} belongs to a dynamic {@link Bean}. Dynamic means that the
+   *         {@link Bean} is not strictly typed and allows to {@link #createProperty(String, GenericType, Class) create
+   *         and add properties} on the fly, <code>false</code> otherwise.
    */
   boolean isDynamic();
 
   /**
+   * @see BeanFactory#createPrototype(Class)
+   * @see BeanFactory#getPrototype(Bean)
+   * @see BeanPrototypeBuilder#getOrCreatePrototype(Class)
+   * @see BeanPrototypeBuilder#createPrototype(Class, String, Bean...)
+   *
    * @return <code>true</code> if this {@link BeanAccess} belongs to a {@link BeanFactory#createPrototype(Class)
-   *         prototype} , <code>false</code> otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
+   *         prototype}, <code>false</code> otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
    */
   boolean isPrototype();
+
+  /**
+   * @see BeanPrototypeBuilder#createPrototype(Class, String, Bean...)
+   *
+   * @return {@code true} if this {@link BeanAccess} belongs to a virtual {@link Bean}. Virtual means that the
+   *         {@link #isPrototype() prototype} of the bean has been created via
+   *         {@link BeanPrototypeBuilder#createPrototype(Class, String, Bean...)} and represents a class (interface)
+   *         that does not exist as Java {@link Class}, {@code false} otherwise.
+   */
+  boolean isVirtual();
 
 }

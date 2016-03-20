@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 import javafx.beans.value.ObservableValue;
@@ -286,6 +287,37 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
       }
       return (T) copy;
     }
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(getClass(), this.name, this.validator);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    AbstractProperty<?> other = (AbstractProperty<?>) obj;
+    // if (this.bean != other.bean) {
+    // return false;
+    // }
+    if (!Objects.equals(this.name, other.name)) {
+      return false;
+    }
+    if (!Objects.equals(this.validator, other.validator)) {
+      return false;
+    }
+    return true;
   }
 
 }

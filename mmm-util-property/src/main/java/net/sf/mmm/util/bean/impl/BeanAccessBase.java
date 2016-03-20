@@ -24,32 +24,33 @@ public abstract class BeanAccessBase<BEAN extends Bean>
 
   private final BEAN bean;
 
-  private final String name;
+  /**
+   * The constructor.
+   *
+   * @param beanClass - see {@link #getBeanClass()}.
+   * @param beanFactory the owning {@link BeanFactoryImpl}.
+   */
+  public BeanAccessBase(Class<BEAN> beanClass, BeanFactoryImpl beanFactory) {
+    this(beanClass, beanFactory, beanClass);
+  }
 
   /**
    * The constructor.
    *
    * @param beanClass - see {@link #getBeanClass()}.
-   * @param name - see {@link #getName()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
+   * @param interfaces an array with optional {@link Bean} interfaces to be implemented by the dynamic proxy.
    */
-  public BeanAccessBase(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory) {
+  public BeanAccessBase(Class<BEAN> beanClass, BeanFactoryImpl beanFactory, Class<?>... interfaces) {
     super();
     this.beanClass = beanClass;
-    this.name = name;
-    this.bean = beanFactory.createProxy(this, beanClass);
+    this.bean = beanFactory.createProxy(this, interfaces);
   }
 
   @Override
   public Class<BEAN> getBeanClass() {
 
     return this.beanClass;
-  }
-
-  @Override
-  public String getName() {
-
-    return this.name;
   }
 
   /**
@@ -96,6 +97,12 @@ public abstract class BeanAccessBase<BEAN extends Bean>
       result = operation.invoke(this, args);
     }
     return result;
+  }
+
+  @SuppressWarnings("unchecked")
+  static <BEAN extends Bean> BeanAccessBase<BEAN> get(BEAN bean) {
+
+    return (BeanAccessBase<BEAN>) bean.access();
   }
 
 }

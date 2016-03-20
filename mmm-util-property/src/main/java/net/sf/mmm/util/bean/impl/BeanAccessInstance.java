@@ -31,15 +31,12 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   /**
    * The constructor.
    *
-   * @param beanClass - see {@link #getBeanClass()}.
-   * @param name - see {@link #getName()}.
    * @param beanFactory the owning {@link BeanFactoryImpl}.
    * @param prototype the {@link BeanAccessPrototype}.
    */
-  public BeanAccessInstance(Class<BEAN> beanClass, String name, BeanFactoryImpl beanFactory,
-      BeanAccessPrototype<BEAN> prototype) {
+  public BeanAccessInstance(BeanFactoryImpl beanFactory, BeanAccessPrototype<BEAN> prototype) {
 
-    super(beanClass, name, beanFactory);
+    super(prototype.getBeanClass(), beanFactory, prototype.getInterfaces());
     this.prototype = prototype;
     this.properties = WritableProperty.NO_PROPERTIES;
   }
@@ -48,6 +45,18 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   public BeanAccessPrototype<BEAN> getPrototype() {
 
     return this.prototype;
+  }
+
+  @Override
+  public String getSimpleName() {
+
+    return getPrototype().getSimpleName();
+  }
+
+  @Override
+  public String getQualifiedName() {
+
+    return getPrototype().getQualifiedName();
   }
 
   @Override
@@ -83,6 +92,18 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   public Set<String> getPropertyNames() {
 
     return this.prototype.getPropertyNames();
+  }
+
+  @Override
+  public Set<String> getDeclaredPropertyNames() {
+
+    return this.prototype.getDeclaredPropertyNames();
+  }
+
+  @Override
+  public String getPackageName() {
+
+    return this.prototype.getPackageName();
   }
 
   @Override
@@ -153,6 +174,12 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
   public boolean isDynamic() {
 
     return this.prototype.isDynamic();
+  }
+
+  @Override
+  public boolean isVirtual() {
+
+    return this.prototype.isVirtual();
   }
 
   @Override

@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
+import javax.inject.Named;
+
+import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
@@ -10,65 +13,63 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * @author hohwille
  * @since 8.0.0
  */
-public interface BeanFactory {
+@ComponentSpecification
+public interface BeanFactory extends AbstractBeanFactory {
 
   /**
-   * @see #createPrototype(Class, boolean)
-   *
-   * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
-   * @return the prototype instance of the specified {@link Bean}.
+   * @return the {@link BeanAccess#getQualifiedName() qualified name}.
    */
-  default <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type) {
+  default String getQualifiedName(Class<? extends Bean> type) {
 
-    return createPrototype(type, false, null);
+    return getQualifiedName(type, null);
   }
+
+  /**
+   * @param type the {@link Class} reflecting the {@link Bean}.
+   * @param name the optional name given at runtime or <code>null</code>.
+   * @return the {@link BeanAccess#getQualifiedName() qualified name}.
+   */
+  default String getQualifiedName(Class<? extends Bean> type, String name) {
+
+    String overridenName = name;
+    if (overridenName == null) {
+      Named named = type.getAnnotation(Named.class);
+      if (named != null) {
+        overridenName = named.value();
+      }
+    }
+    if (overridenName == null) {
+      return type.getName();
+    } else if (overridenName.indexOf('.') >= 0) {
+      return overridenName;
+    } else {
+      return type.getPackage().getName() + "." + overridenName;
+    }
+  }
+
+  /**
+   * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}s to build.
+   * @return a new {@link BeanPrototypeBuilder} instance.
+   */
+  BeanPrototypeBuilder createPrototypeBuilder(boolean dynamic);
 
   /**
    * Creates a prototype of the given {@link Bean}. A prototype is used as template to {@link #create(Bean) create}
    * regular {@link Bean}s. Such beans will inherit the defaults from the prototype what are the
    * {@link BeanAccess#getProperties() available properties} as well as their default {@link WritableProperty#getValue()
-   * value}.
+   * value}.<br>
+   * While in regular Java there is a separation between a {@link Class} for reflection and its {@link Object} instance,
+   * this approach makes it a lot easier. The prototype is like the {@link Class} where {@link Bean}-instances can be
+   * {@link #create(Bean) created} of that are of the same type.
+   *
+   * @see BeanPrototypeBuilder#createPrototype(Class, String, Bean...)
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
-   * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
    * @return the prototype instance of the specified {@link Bean}.
    */
-  default <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic) {
-
-    return createPrototype(type, dynamic, null);
-  }
-
-  /**
-   * Creates a prototype of the given {@link Bean}. A prototype is used as template to {@link #create(Bean) create}
-   * regular {@link Bean}s. Such beans will inherit the defaults from the prototype what are the
-   * {@link BeanAccess#getProperties() available properties} as well as their default {@link WritableProperty#getValue()
-   * value}.
-   *
-   * @param <BEAN> the generic type of the {@link Bean}.
-   * @param type the {@link Class} reflecting the {@link Bean}.
-   * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
-   * @param name the explicit {@link BeanAccess#getName() name} of the {@link Bean}.
-   * @return the prototype instance of the specified {@link Bean}.
-   */
-  <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, boolean dynamic, String name);
-
-  /**
-   * @param <BEAN> the generic type of the {@link Bean}.
-   * @param bean the {@link Bean}.
-   * @return the {@link #createPrototype(Class, boolean) prototype} of the given {@link Bean}.
-   */
-  <BEAN extends Bean> BEAN getPrototype(BEAN bean);
-
-  /**
-   * @see #create(Class)
-   *
-   * @param <BEAN> the generic type of the {@link Bean}.
-   * @param prototype the {@link #createPrototype(Class, boolean) prototype} of the {@link Bean} to create.
-   * @return the new {@link Bean} instance.
-   */
-  <BEAN extends Bean> BEAN create(BEAN prototype);
+  <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type);
 
   /**
    * Creates a new simple instance of the specified {@link Bean}.
@@ -81,23 +82,5 @@ public interface BeanFactory {
 
     return create(createPrototype(type));
   }
-
-  /**
-   * @param <BEAN> the generic type of the {@link Bean}.
-   * @param bean the bean to make {@link BeanAccess#isReadOnly() read-only}.
-   * @return the {@link BeanAccess#isReadOnly() read-only} view on the given bean. Will be the given instance if already
-   *         {@link BeanAccess#isReadOnly() read-only}.
-   */
-  <BEAN extends Bean> BEAN getReadOnlyBean(BEAN bean);
-
-  /**
-   * Creates a copy of the given {@link Bean}.
-   *
-   * @param <BEAN> the generic type of the {@link Bean}.
-   * @param bean the bean to make {@link BeanAccess#isReadOnly() read-only}.
-   * @return the {@link BeanAccess#isReadOnly() read-only} view on the given bean. Will be the given instance if already
-   *         {@link BeanAccess#isReadOnly() read-only}.
-   */
-  <BEAN extends Bean> BEAN copy(BEAN bean);
 
 }
