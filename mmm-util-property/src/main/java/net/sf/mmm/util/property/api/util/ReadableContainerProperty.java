@@ -10,18 +10,18 @@ import net.sf.mmm.util.property.api.lang.ReadableIntegerProperty;
  * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link java.util.Collection} or {@link java.util.Map}.
  *
- * @param <VALUE> the generic type of the {@link #getValue() value}.
+ * @param <V> the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableContainerProperty<VALUE> extends ReadableProperty<VALUE> {
+public interface ReadableContainerProperty<V> extends ReadableProperty<V> {
 
   /**
    * @return the result of {@link #getValue()} but an empty container ({@link java.util.Collection} or
    *         {@link java.util.Map}) instead of <code>null</code>.
    */
-  VALUE getValueNotNull();
+  V getValueNotNull();
 
   /**
    * @return the {@link java.util.Collection#size()} of the {@link #getValueNotNull() container}.

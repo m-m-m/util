@@ -16,15 +16,15 @@ import net.sf.mmm.util.value.api.Range;
  *
  * @param <K> the generic type of the {@link java.util.Map.Entry#getKey() keys}.
  * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
- * @param <VALUE> the generic type of the value to {@link AbstractValidator#validate(Object) validate}.
+ * @param <M> the generic type of the value to {@link AbstractValidator#validate(Object) validate}.
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  * @param <SELF> the generic type of this builder itself (this).
  *
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractMapValidatorBuilder<K, V, VALUE extends Map<K, V>, PARENT, SELF extends AbstractMapValidatorBuilder<K, V, VALUE, PARENT, SELF>>
-    extends ComplexValidatorBuilder<VALUE, PARENT, SELF> {
+public abstract class AbstractMapValidatorBuilder<K, V, M extends Map<K, V>, PARENT, SELF extends AbstractMapValidatorBuilder<K, V, M, PARENT, SELF>>
+    extends ComplexValidatorBuilder<M, PARENT, SELF> {
 
   private ObjectValidatorBuilder<K, ? extends SELF, ?> keySubBuilder;
 
@@ -127,7 +127,7 @@ public abstract class AbstractMapValidatorBuilder<K, V, VALUE extends Map<K, V>,
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public AbstractValidator<? super VALUE> build() {
+  public AbstractValidator<? super M> build() {
 
     if (this.keySubBuilder != null) {
       add(new ValidatorMapKeys(getValidators(this.keySubBuilder)));

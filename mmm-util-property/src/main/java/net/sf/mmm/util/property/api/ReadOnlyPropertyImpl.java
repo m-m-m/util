@@ -16,26 +16,26 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
  *
  * @see #getReadOnly()
  *
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <V> is the generic type of the {@link #getValue() value}.
  * @author hohwille
  * @since 8.0.0
  */
-public class ReadOnlyPropertyImpl<VALUE> implements WritableProperty<VALUE> {
+public class ReadOnlyPropertyImpl<V> implements WritableProperty<V> {
 
-  private final WritableProperty<VALUE> property;
+  private final WritableProperty<V> property;
 
   /**
    * The constructor.
    *
    * @param property the {@link WritableProperty} to give {@link #isReadOnly() read-only} access to.
    */
-  public ReadOnlyPropertyImpl(WritableProperty<VALUE> property) {
+  public ReadOnlyPropertyImpl(WritableProperty<V> property) {
     super();
     this.property = property;
   }
 
   @Override
-  public WritableProperty<VALUE> getReadOnly() {
+  public WritableProperty<V> getReadOnly() {
 
     return this;
   }
@@ -47,13 +47,13 @@ public class ReadOnlyPropertyImpl<VALUE> implements WritableProperty<VALUE> {
   }
 
   @Override
-  public GenericType<? extends VALUE> getType() {
+  public GenericType<? extends V> getType() {
 
     return this.property.getType();
   }
 
   @Override
-  public void bind(ObservableValue<? extends VALUE> observable) {
+  public void bind(ObservableValue<? extends V> observable) {
 
     throw new ReadOnlyException(getBean(), getName());
   }
@@ -71,13 +71,13 @@ public class ReadOnlyPropertyImpl<VALUE> implements WritableProperty<VALUE> {
   }
 
   @Override
-  public void bindBidirectional(Property<VALUE> other) {
+  public void bindBidirectional(Property<V> other) {
 
     throw new ReadOnlyException(getBean(), getName());
   }
 
   @Override
-  public void unbindBidirectional(Property<VALUE> other) {
+  public void unbindBidirectional(Property<V> other) {
 
     throw new ReadOnlyException(getBean(), getName());
   }
@@ -95,19 +95,19 @@ public class ReadOnlyPropertyImpl<VALUE> implements WritableProperty<VALUE> {
   }
 
   @Override
-  public void addListener(ChangeListener<? super VALUE> listener) {
+  public void addListener(ChangeListener<? super V> listener) {
 
     this.property.addListener(listener);
   }
 
   @Override
-  public void removeListener(ChangeListener<? super VALUE> listener) {
+  public void removeListener(ChangeListener<? super V> listener) {
 
     this.property.removeListener(listener);
   }
 
   @Override
-  public VALUE getValue() {
+  public V getValue() {
 
     return this.property.getValue();
   }
@@ -125,7 +125,7 @@ public class ReadOnlyPropertyImpl<VALUE> implements WritableProperty<VALUE> {
   }
 
   @Override
-  public void setValue(VALUE value) {
+  public void setValue(V value) {
 
     throw new ReadOnlyException(getBean(), getName());
   }

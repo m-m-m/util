@@ -12,13 +12,13 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the interface for a generic property.
  *
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <V> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableProperty<VALUE>
-    extends ReadOnlyProperty<VALUE>, AttributeReadValue<VALUE>, AttributeReadName {
+public interface ReadableProperty<V>
+    extends ReadOnlyProperty<V>, AttributeReadValue<V>, AttributeReadName {
 
   /**
    * @return the type of the property. Please note that the generic signature of this method is returning the type
@@ -27,7 +27,7 @@ public interface ReadableProperty<VALUE>
    *         should be able to return {@link GenericType}{@literal <Integer>} what is compatible with
    *         {@link GenericType}{@literal <? extends Number>}.
    */
-  GenericType<? extends VALUE> getType();
+  GenericType<? extends V> getType();
 
   @Override
   Bean getBean();

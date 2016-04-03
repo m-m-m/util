@@ -16,19 +16,19 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderObject;
 /**
  * This is the implementation of {@link WritableProperty}.
  *
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <V> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public class GenericProperty<VALUE> extends AbstractRegularProperty<VALUE> {
+public class GenericProperty<V> extends AbstractRegularProperty<V> {
 
   /** The {@link #getType() type} of {@link Object}. */
   public static final GenericType<Object> TYPE_DEFAULT = new SimpleGenericTypeImpl<>(Object.class);
 
-  private final GenericType<VALUE> type;
+  private final GenericType<V> type;
 
-  private VALUE value;
+  private V value;
 
   /**
    * The constructor.
@@ -37,7 +37,7 @@ public class GenericProperty<VALUE> extends AbstractRegularProperty<VALUE> {
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public GenericProperty(String name, GenericType<VALUE> type, Bean bean) {
+  public GenericProperty(String name, GenericType<V> type, Bean bean) {
     this(name, type, bean, null);
   }
 
@@ -49,26 +49,26 @@ public class GenericProperty<VALUE> extends AbstractRegularProperty<VALUE> {
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public GenericProperty(String name, GenericType<VALUE> type, Bean bean,
-      AbstractValidator<? super VALUE> validator) {
+  public GenericProperty(String name, GenericType<V> type, Bean bean,
+      AbstractValidator<? super V> validator) {
     super(name, bean, validator);
     this.type = type;
   }
 
   @Override
-  public GenericType<VALUE> getType() {
+  public GenericType<V> getType() {
 
     return this.type;
   }
 
   @Override
-  protected VALUE doGetValue() {
+  protected V doGetValue() {
 
     return this.value;
   }
 
   @Override
-  protected boolean doSetValue(VALUE newValue) {
+  protected boolean doSetValue(V newValue) {
 
     if (Objects.equals(this.value, newValue)) {
       return false;
@@ -84,7 +84,7 @@ public class GenericProperty<VALUE> extends AbstractRegularProperty<VALUE> {
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public ObjectValidatorBuilder<? extends VALUE, ? extends PropertyBuilder<? extends GenericProperty<? extends VALUE>>, ?> withValdidator() {
+  public ObjectValidatorBuilder<? extends V, ? extends PropertyBuilder<? extends GenericProperty<? extends V>>, ?> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderObject(x));
   }

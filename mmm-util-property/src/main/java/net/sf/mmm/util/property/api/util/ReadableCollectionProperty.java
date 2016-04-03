@@ -12,13 +12,13 @@ import net.sf.mmm.util.property.api.ReadableProperty;
  * {@link Collection}.
  *
  * @param <E> the generic type of the {@link Collection#contains(Object) elements contained in the collection}.
- * @param <VALUE> the generic type of the {@link #getValue() value}.
+ * @param <V> the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableCollectionProperty<E, VALUE extends Collection<E>>
-    extends ReadableContainerProperty<VALUE>, Collection<E> {
+public interface ReadableCollectionProperty<E, V extends Collection<E>>
+    extends ReadableContainerProperty<V>, Collection<E> {
 
   @Override
   default int size() {

@@ -14,15 +14,15 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 /**
  * This is the abstract base implementation of {@link WritableProperty} and {@link ReadableContainerProperty}.
  *
- * @param <VALUE> the generic type of the {@link #getValue() value}.
+ * @param <V> the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractContainerProperty<VALUE> extends AbstractValueProperty<VALUE>
-    implements ReadableContainerProperty<VALUE> {
+public abstract class AbstractContainerProperty<V> extends AbstractValueProperty<V>
+    implements ReadableContainerProperty<V> {
 
-  private final GenericType<? extends VALUE> type;
+  private final GenericType<? extends V> type;
 
   private SizeProperty sizeProperty;
 
@@ -35,7 +35,7 @@ public abstract class AbstractContainerProperty<VALUE> extends AbstractValueProp
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractContainerProperty(String name, GenericType<? extends VALUE> type, Bean bean) {
+  public AbstractContainerProperty(String name, GenericType<? extends V> type, Bean bean) {
     this(name, type, bean, null);
   }
 
@@ -47,14 +47,14 @@ public abstract class AbstractContainerProperty<VALUE> extends AbstractValueProp
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractContainerProperty(String name, GenericType<? extends VALUE> type, Bean bean,
-      AbstractValidator<? super VALUE> validator) {
+  public AbstractContainerProperty(String name, GenericType<? extends V> type, Bean bean,
+      AbstractValidator<? super V> validator) {
     super(name, bean, validator);
     this.type = type;
   }
 
   @Override
-  public GenericType<? extends VALUE> getType() {
+  public GenericType<? extends V> getType() {
 
     return this.type;
   }

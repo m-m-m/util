@@ -16,7 +16,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * registered via an implementation of this interface.
  *
  * @param <V> the generic type of the {@link ReadableProperty#getValue() property value}.
- * @param <PROPERTY> the generic type of the {@link #getImplementationClass() property implementation}.
+ * @param <P> the generic type of the {@link #getImplementationClass() property implementation}.
  *
  * @see PropertyFactoryManager
  *
@@ -24,7 +24,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @since 8.0.0
  */
 @ComponentSpecification(plugin = true)
-public interface PropertyFactory<V, PROPERTY extends ReadableProperty<V>> {
+public interface PropertyFactory<V, P extends ReadableProperty<V>> {
 
   /**
    * @return the {@link Class} of the {@link ReadableProperty#getValue() property value}. May be <code>null</code> for
@@ -45,7 +45,7 @@ public interface PropertyFactory<V, PROPERTY extends ReadableProperty<V>> {
   /**
    * @return the {@link Class} reflecting the {@link WritableProperty} implementation.
    */
-  Class<PROPERTY> getImplementationClass();
+  Class<P> getImplementationClass();
 
   /**
    * Creates a new instance of the property.
@@ -60,7 +60,7 @@ public interface PropertyFactory<V, PROPERTY extends ReadableProperty<V>> {
    *
    * @return the new instance of the property.
    */
-  PROPERTY create(String name, GenericType<? extends V> valueType, Bean bean,
+  P create(String name, GenericType<? extends V> valueType, Bean bean,
       AbstractValidator<? super V> validator);
 
 }

@@ -15,17 +15,17 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
 /**
  * This is the implementation of {@link WritableProperty}.
  *
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <V> is the generic type of the {@link #getValue() value}.
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>, Cloneable {
+public abstract class AbstractProperty<V> implements WritableProperty<V>, Cloneable {
 
   private String name;
 
   private Bean bean;
 
-  private AbstractValidator<? super VALUE> validator;
+  private AbstractValidator<? super V> validator;
 
   /**
    * The constructor.
@@ -44,7 +44,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractProperty(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
+  public AbstractProperty(String name, Bean bean, AbstractValidator<? super V> validator) {
     super();
     this.name = name;
     this.bean = bean;
@@ -69,10 +69,10 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
 
   @SuppressWarnings("unchecked")
   @Override
-  protected AbstractProperty<VALUE> clone() {
+  protected AbstractProperty<V> clone() {
 
     try {
-      return (AbstractProperty<VALUE>) super.clone();
+      return (AbstractProperty<V>) super.clone();
     } catch (CloneNotSupportedException e) {
       throw new IllegalStateException(e);
     }
@@ -81,7 +81,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
   /**
    * @return a new empty instance of this property.
    */
-  protected AbstractProperty<VALUE> copy() {
+  protected AbstractProperty<V> copy() {
 
     return clone();
   }
@@ -92,7 +92,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    * @param newBean the new {@link #getBean() bean}.
    * @return the new property instance.
    */
-  public final AbstractProperty<VALUE> copy(Bean newBean) {
+  public final AbstractProperty<V> copy(Bean newBean) {
 
     return copy(this.name, newBean, this.validator);
   }
@@ -103,7 +103,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    * @param newValidator the new {@link #getValidator() validator}.
    * @return the new property instance.
    */
-  public final AbstractProperty<VALUE> copy(AbstractValidator<? super VALUE> newValidator) {
+  public final AbstractProperty<V> copy(AbstractValidator<? super V> newValidator) {
 
     return copy(this.name, this.bean, newValidator);
   }
@@ -115,7 +115,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    * @param newValidator the new {@link #getValidator() validator}.
    * @return the new property instance.
    */
-  public final AbstractProperty<VALUE> copy(Bean newBean, AbstractValidator<? super VALUE> newValidator) {
+  public final AbstractProperty<V> copy(Bean newBean, AbstractValidator<? super V> newValidator) {
 
     return copy(this.name, newBean, newValidator);
   }
@@ -127,7 +127,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    * @param newBean the new {@link #getBean() bean}.
    * @return the new property instance.
    */
-  public final AbstractProperty<VALUE> copy(String newName, Bean newBean) {
+  public final AbstractProperty<V> copy(String newName, Bean newBean) {
 
     return copy(newName, newBean, this.validator);
   }
@@ -140,10 +140,10 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    * @param newValidator the new {@link #getValidator() validator}.
    * @return the new property instance.
    */
-  public final AbstractProperty<VALUE> copy(String newName, Bean newBean,
-      AbstractValidator<? super VALUE> newValidator) {
+  public final AbstractProperty<V> copy(String newName, Bean newBean,
+      AbstractValidator<? super V> newValidator) {
 
-    AbstractProperty<VALUE> copy = clone();
+    AbstractProperty<V> copy = clone();
     copy.name = newName;
     copy.bean = newBean;
     copy.validator = newValidator;
@@ -156,7 +156,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    *
    * @param observableValue the property to assign the value from.
    */
-  protected void assignValueFrom(ObservableValue<? extends VALUE> observableValue) {
+  protected void assignValueFrom(ObservableValue<? extends V> observableValue) {
 
     setValue(observableValue.getValue());
   }
@@ -173,7 +173,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
   /**
    * @return the {@link AbstractValidator}.
    */
-  public final AbstractValidator<? super VALUE> getValidator() {
+  public final AbstractValidator<? super V> getValidator() {
 
     return this.validator;
   }
@@ -192,7 +192,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    *         {@link ObjectValidatorBuilder#and() parent-builder} to create a {@link #copy(AbstractValidator)} of this
    *         property with the configured validator.
    */
-  protected <PROPERTY extends AbstractProperty<? extends VALUE>, BUILDER extends ObjectValidatorBuilder<? extends VALUE, PropertyBuilder<PROPERTY>, ?>> BUILDER withValdidator(
+  protected <PROPERTY extends AbstractProperty<? extends V>, BUILDER extends ObjectValidatorBuilder<? extends V, PropertyBuilder<PROPERTY>, ?>> BUILDER withValdidator(
       Function<PropertyBuilder<PROPERTY>, BUILDER> factory) {
 
     PropertyBuilder<PROPERTY> parentBuilder = new PropertyBuilder<>();
@@ -206,7 +206,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    *         {@link ObjectValidatorBuilder#and() parent-builder} to create a {@link #copy(AbstractValidator)} of this
    *         property with the configured validator.
    */
-  public abstract ObjectValidatorBuilder<? extends VALUE, ? extends PropertyBuilder<? extends AbstractProperty<? extends VALUE>>, ?> withValdidator();
+  public abstract ObjectValidatorBuilder<? extends V, ? extends PropertyBuilder<? extends AbstractProperty<? extends V>>, ?> withValdidator();
 
   @Override
   public String toString() {
@@ -215,7 +215,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
     sb.append('\"');
     sb.append(getName());
     sb.append("\": ");
-    VALUE value = getValue();
+    V value = getValue();
     if (value == null) {
       sb.append("null");
     } else if ((value instanceof CharSequence) || ((value instanceof Enum))) {
@@ -233,7 +233,7 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
    *
    * @param <T> the generic type of the {@link AbstractProperty property}.
    */
-  public class PropertyBuilder<T extends AbstractProperty<? extends VALUE>> implements Builder<T> {
+  public class PropertyBuilder<T extends AbstractProperty<? extends V>> implements Builder<T> {
 
     private ObjectValidatorBuilder<?, ? extends PropertyBuilder<? extends T>, ?> builder;
 
@@ -275,8 +275,8 @@ public abstract class AbstractProperty<VALUE> implements WritableProperty<VALUE>
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public T build() {
 
-      AbstractValidator<? super VALUE> newValidator = (AbstractValidator) this.builder.build();
-      AbstractProperty<VALUE> copy;
+      AbstractValidator<? super V> newValidator = (AbstractValidator) this.builder.build();
+      AbstractProperty<V> copy;
       if (this.newBean == null) {
         copy = copy(newValidator);
       } else {

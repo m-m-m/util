@@ -13,15 +13,15 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * This is the abstract base implementation of a regular {@link WritableProperty}. Here regular means that the
  * {@link #getValue() value} type is not special such as a {@link java.util.Collection}.
  *
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <V> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
  * @since 8.0.0
  */
 @SuppressWarnings("restriction")
-public abstract class AbstractRegularProperty<VALUE> extends AbstractValueProperty<VALUE> {
+public abstract class AbstractRegularProperty<V> extends AbstractValueProperty<V> {
 
-  private ExpressionHelper<VALUE> helper;
+  private ExpressionHelper<V> helper;
 
   /**
    * The constructor.
@@ -40,18 +40,18 @@ public abstract class AbstractRegularProperty<VALUE> extends AbstractValueProper
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractRegularProperty(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
+  public AbstractRegularProperty(String name, Bean bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
   }
 
   @Override
-  public void addListener(ChangeListener<? super VALUE> listener) {
+  public void addListener(ChangeListener<? super V> listener) {
 
     this.helper = ExpressionHelper.addListener(this.helper, this, listener);
   }
 
   @Override
-  public void removeListener(ChangeListener<? super VALUE> listener) {
+  public void removeListener(ChangeListener<? super V> listener) {
 
     this.helper = ExpressionHelper.removeListener(this.helper, listener);
   }

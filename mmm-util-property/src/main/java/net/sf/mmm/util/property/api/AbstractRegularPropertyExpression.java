@@ -19,15 +19,15 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
  * that is dynamically calculated. Here regular means that the {@link #getValue() value} type is not special such as a
  * {@link java.util.Collection}.
  *
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <V> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
  * @since 8.0.0
  */
 @SuppressWarnings("restriction")
-public abstract class AbstractRegularPropertyExpression<VALUE> extends AbstractProperty<VALUE> {
+public abstract class AbstractRegularPropertyExpression<V> extends AbstractProperty<V> {
 
-  private ExpressionHelper<VALUE> helper;
+  private ExpressionHelper<V> helper;
 
   /**
    * The constructor.
@@ -46,18 +46,18 @@ public abstract class AbstractRegularPropertyExpression<VALUE> extends AbstractP
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractRegularPropertyExpression(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
+  public AbstractRegularPropertyExpression(String name, Bean bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
   }
 
   @Override
-  public void addListener(ChangeListener<? super VALUE> listener) {
+  public void addListener(ChangeListener<? super V> listener) {
 
     this.helper = ExpressionHelper.addListener(this.helper, this, listener);
   }
 
   @Override
-  public void removeListener(ChangeListener<? super VALUE> listener) {
+  public void removeListener(ChangeListener<? super V> listener) {
 
     this.helper = ExpressionHelper.removeListener(this.helper, listener);
   }
@@ -88,13 +88,13 @@ public abstract class AbstractRegularPropertyExpression<VALUE> extends AbstractP
   }
 
   @Override
-  public void setValue(VALUE value) {
+  public void setValue(V value) {
 
     throw new ReadOnlyException(getBean(), getName());
   }
 
   @Override
-  public void bind(ObservableValue<? extends VALUE> observable) {
+  public void bind(ObservableValue<? extends V> observable) {
 
     throw new ReadOnlyException(getBean(), getName());
   }
@@ -111,13 +111,13 @@ public abstract class AbstractRegularPropertyExpression<VALUE> extends AbstractP
   }
 
   @Override
-  public void bindBidirectional(Property<VALUE> other) {
+  public void bindBidirectional(Property<V> other) {
 
     throw new ReadOnlyException(getBean(), getName());
   }
 
   @Override
-  public void unbindBidirectional(Property<VALUE> other) {
+  public void unbindBidirectional(Property<V> other) {
 
     throw new ReadOnlyException(getBean(), getName());
   }
@@ -129,7 +129,7 @@ public abstract class AbstractRegularPropertyExpression<VALUE> extends AbstractP
   }
 
   @Override
-  public WritableProperty<VALUE> getReadOnly() {
+  public WritableProperty<V> getReadOnly() {
 
     return this;
   }
@@ -137,7 +137,7 @@ public abstract class AbstractRegularPropertyExpression<VALUE> extends AbstractP
   @Override
   public ValidationFailure validate() {
 
-    AbstractValidator<? super VALUE> validator = getValidator();
+    AbstractValidator<? super V> validator = getValidator();
     if (validator == ValidatorNone.getInstance()) {
       return null;
     }

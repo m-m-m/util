@@ -17,17 +17,17 @@ import net.sf.mmm.util.validation.base.ValidationFailureSuccess;
 /**
  * This is the implementation of {@link WritableProperty}.
  *
- * @param <VALUE> is the generic type of the {@link #getValue() value}.
+ * @param <V> is the generic type of the {@link #getValue() value}.
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALUE> {
+public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
 
   private ValidationFailure validationResult;
 
-  private ReadOnlyPropertyImpl<VALUE> readOnlyProperty;
+  private ReadOnlyPropertyImpl<V> readOnlyProperty;
 
-  private ObservableValue<? extends VALUE> binding;
+  private ObservableValue<? extends V> binding;
 
   private InvalidationListener bindingListener;
 
@@ -48,14 +48,14 @@ public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALU
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractValueProperty(String name, Bean bean, AbstractValidator<? super VALUE> validator) {
+  public AbstractValueProperty(String name, Bean bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
   }
 
   @Override
-  protected AbstractValueProperty<VALUE> copy() {
+  protected AbstractValueProperty<V> copy() {
 
-    AbstractValueProperty<VALUE> copy = (AbstractValueProperty<VALUE>) super.copy();
+    AbstractValueProperty<V> copy = (AbstractValueProperty<V>) super.copy();
     copy.binding = null;
     copy.bindingListener = null;
     copy.readOnlyProperty = null;
@@ -64,7 +64,7 @@ public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALU
   }
 
   @Override
-  public final VALUE getValue() {
+  public final V getValue() {
 
     if (this.binding != null) {
       return this.binding.getValue();
@@ -75,10 +75,10 @@ public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALU
   /**
    * @return the internal {@link #getValue() value}.
    */
-  protected abstract VALUE doGetValue();
+  protected abstract V doGetValue();
 
   @Override
-  public void bind(ObservableValue<? extends VALUE> observable) {
+  public void bind(ObservableValue<? extends V> observable) {
 
     Objects.requireNonNull(observable, "observable");
     if (!observable.equals(this.binding)) {
@@ -111,19 +111,19 @@ public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALU
   }
 
   @Override
-  public void bindBidirectional(Property<VALUE> other) {
+  public void bindBidirectional(Property<V> other) {
 
     Bindings.bindBidirectional(this, other);
   }
 
   @Override
-  public void unbindBidirectional(Property<VALUE> other) {
+  public void unbindBidirectional(Property<V> other) {
 
     Bindings.unbindBidirectional(this, other);
   }
 
   @Override
-  public void setValue(VALUE value) {
+  public void setValue(V value) {
 
     if (isBound()) {
       throw new RuntimeException((getBean() != null && getName() != null
@@ -141,7 +141,7 @@ public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALU
    * @param newValue the new {@link #getValue() value} to set.
    * @return <code>true</code> if the {@link #getValue() value} has changed, <code>false</code> otherwise.
    */
-  protected abstract boolean doSetValue(VALUE newValue);
+  protected abstract boolean doSetValue(V newValue);
 
   /**
    * Invalidates this property.
@@ -185,7 +185,7 @@ public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALU
   public ValidationFailure validate() {
 
     if (this.validationResult == null) {
-      VALUE v = getValue();
+      V v = getValue();
       String source = getName();
       ValidationFailure failure = getValidator().validate(v, source);
       if (v instanceof Bean) {
@@ -208,7 +208,7 @@ public abstract class AbstractValueProperty<VALUE> extends AbstractProperty<VALU
   }
 
   @Override
-  public WritableProperty<VALUE> getReadOnly() {
+  public WritableProperty<V> getReadOnly() {
 
     if (this.readOnlyProperty == null) {
       this.readOnlyProperty = new ReadOnlyPropertyImpl<>(this);

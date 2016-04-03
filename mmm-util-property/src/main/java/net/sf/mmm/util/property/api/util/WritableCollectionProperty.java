@@ -11,13 +11,13 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * {@link Collection}.
  *
  * @param <E> the generic type of the {@link Collection#contains(Object) elements contained in the collection}.
- * @param <VALUE> the generic type of the {@link #getValue() value}.
+ * @param <V> the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableCollectionProperty<E, VALUE extends Collection<E>>
-    extends ReadableCollectionProperty<E, VALUE>, WritableProperty<VALUE> {
+public interface WritableCollectionProperty<E, V extends Collection<E>>
+    extends ReadableCollectionProperty<E, V>, WritableProperty<V> {
 
   // nothing to add...
 
