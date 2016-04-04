@@ -7,11 +7,11 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 
 /**
  * This class represents a typed property (typically from a java bean). The raw property name is called
- * {@link #getSegment() segment}. In case the property is not directly accessed but via traversing multiple
- * properties of an object-web, then {@link #getParentPath()} will return the path to the parent object
- * containing the actual property identified by {@link #getSegment()}. The entire path including the
- * {@link #getSegment() segment} is accessible via {@link #getPojoPath()}. The actual type of the property may
- * be returned by {@link #getPropertyType()} (if provided at construction time) but is typically omitted. <br>
+ * {@link #getSegment() segment}. In case the property is not directly accessed but via traversing multiple properties
+ * of an object-web, then {@link #getParentPath()} will return the path to the parent object containing the actual
+ * property identified by {@link #getSegment()}. The entire path including the {@link #getSegment() segment} is
+ * accessible via {@link #getPojoPath()}. The actual type of the property may be returned by {@link #getPropertyType()}
+ * (if provided at construction time) but is typically omitted. <br>
  * <b>Example:</b><br>
  *
  * <pre>
@@ -47,19 +47,19 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * myQuery.addCondition(MyObject.TYPED_PROPERTY_AGE, Operator.GREATER_THAN, Integer.valueOf(42));
  * </pre>
  *
- * Now in case you have to change the type of the property "age" for whatever reason to some other type, then
- * you change the type of the getter in parallel with the according {@link TypedProperty} constant. In the
- * same moment the compiler will reject the above code to create the query and you will be able to fix all
- * places where generic access to the "age" property takes place. When using simple string references for
- * property access (<code>addCondition(String, Operator, Object)</code>) instead you would have to pray that
- * you did NOT miss anything in the code or you get errors in production at runtime.
+ * Now in case you have to change the type of the property "age" for whatever reason to some other type, then you change
+ * the type of the getter in parallel with the according {@link TypedProperty} constant. In the same moment the compiler
+ * will reject the above code to create the query and you will be able to fix all places where generic access to the
+ * "age" property takes place. When using simple string references for property access (
+ * <code>addCondition(String, Operator, Object)</code>) instead you would have to pray that you did NOT miss anything in
+ * the code or you get errors in production at runtime.
  *
  * @param <T> is the generic type of the property.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<String> {
+public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String> {
 
   /** @see #getSegment() */
   private final String segment;
@@ -129,8 +129,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
    * The constructor.
    *
    * @param property is the existing {@link TypedProperty} to create as nested property.
-   * @param path is the parent path to the given <code>property</code>. See also
-   *        {@link #createPath(String...)}.
+   * @param path is the parent path to the given <code>property</code>. See also {@link #createPath(String...)}.
    */
   public TypedProperty(TypedProperty<T> property, String path) {
 
@@ -188,10 +187,9 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
   }
 
   /**
-   * This title is used to display the property name to end-users. If not explicitly specified, it will be the
-   * same as the {@link #getSegment() segment}. For {@link net.sf.mmm.util.nls.api.NlsMessage NLS} the title
-   * will be used as key for resource bundles (outside of this class) and should therefore be stable and not
-   * contain special characters.
+   * This title is used to display the property name to end-users. If not explicitly specified, it will be the same as
+   * the {@link #getSegment() segment}. For {@link net.sf.mmm.util.nls.api.NlsMessage NLS} the title will be used as key
+   * for resource bundles (outside of this class) and should therefore be stable and not contain special characters.
    *
    * {@inheritDoc}
    */
@@ -222,10 +220,10 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
   /**
    * This method gets the type of this property. <br>
    * <b>ATTENTION:</b><br>
-   * The actual type is optional. The major concept is the generic that ensures type safe access as compile
-   * time check. If some API takes a {@link TypedProperty} and requires the property type to be set this must
-   * be explicitly documented. By default the type will be omitted, to lower the barrier of defining a
-   * {@link TypedProperty} for each property of an entity.
+   * The actual type is optional. The major concept is the generic that ensures type safe access as compile time check.
+   * If some API takes a {@link TypedProperty} and requires the property type to be set this must be explicitly
+   * documented. By default the type will be omitted, to lower the barrier of defining a {@link TypedProperty} for each
+   * property of an entity.
    *
    * @return the type or <code>null</code> if NOT available.
    */
@@ -244,8 +242,7 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
   }
 
   /**
-   * This method creates a {@link #getPojoPath() pojo property path} specified by the given
-   * <code>segments</code>.
+   * This method creates a {@link #getPojoPath() pojo property path} specified by the given <code>segments</code>.
    *
    * @param segments is the array of properties to concat with dot (".").
    * @return the resulting property path as {@link String}.
@@ -265,8 +262,8 @@ public class TypedProperty<T> implements PojoPropertyPath, AttributeReadTitle<St
   }
 
   /**
-   * This method {@link StringBuilder#append(String) appends} the {@link #getPojoPath() pojo property path}
-   * specified by the given <code>segments</code> to the given <code>buffer</code>.
+   * This method {@link StringBuilder#append(String) appends} the {@link #getPojoPath() pojo property path} specified by
+   * the given <code>segments</code> to the given <code>buffer</code>.
    *
    * @param buffer is the {@link StringBuilder} to append to.
    * @param segments are the path segments for the property.
