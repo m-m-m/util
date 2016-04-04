@@ -4,9 +4,8 @@ package net.sf.mmm.util.property.api;
 
 import javafx.beans.property.ReadOnlyProperty;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.lang.api.attribute.AttributeReadName;
-import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 import net.sf.mmm.util.property.api.lang.IntegerProperty;
+import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -17,8 +16,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableProperty<V>
-    extends ReadOnlyProperty<V>, AttributeReadValue<V>, AttributeReadName {
+public interface ReadableProperty<V> extends ReadOnlyProperty<V>, PropertyPath<V> {
 
   /**
    * @return the type of the property. Please note that the generic signature of this method is returning the type
