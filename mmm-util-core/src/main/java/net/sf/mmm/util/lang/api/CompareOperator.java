@@ -16,138 +16,138 @@ import net.sf.mmm.util.nls.api.NlsObject;
 public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
 
   /** {@link CompareOperator} to check if some value is greater than another. */
-  GREATER_THAN(">", NlsBundleUtilCoreRoot.INF_GREATER_THAN, false, Boolean.FALSE) {
+  GREATER_THAN(">", NlsBundleUtilCoreRoot.INF_GREATER_THAN) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 > arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
       return getBundle().infoGreaterThan();
     }
+
+    @Override
+    public CompareOperator negate() {
+
+      return LESS_OR_EQUAL;
+    }
   },
 
   /** {@link CompareOperator} to check if some value is greater or equal to another. */
-  GREATER_OR_EQUAL(">=", NlsBundleUtilCoreRoot.INF_GREATER_OR_EQUAL, true, Boolean.FALSE) {
+  GREATER_OR_EQUAL(">=", NlsBundleUtilCoreRoot.INF_GREATER_OR_EQUAL) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 >= arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
       return getBundle().infoGreaterOrEqual();
     }
+
+    @Override
+    public CompareOperator negate() {
+
+      return LESS_THAN;
+    }
   },
 
   /** {@link CompareOperator} to check if some value is less than another. */
-  LESS_THAN("<", NlsBundleUtilCoreRoot.INF_LESS_THAN, false, Boolean.TRUE) {
+  LESS_THAN("<", NlsBundleUtilCoreRoot.INF_LESS_THAN) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 < arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
       return getBundle().infoLessThan();
     }
+
+    @Override
+    public CompareOperator negate() {
+
+      return GREATER_OR_EQUAL;
+    }
   },
 
   /** {@link CompareOperator} to check if some value is less or equal than another. */
-  LESS_OR_EQUAL("<=", NlsBundleUtilCoreRoot.INF_LESS_OR_EQUAL, true, Boolean.TRUE) {
+  LESS_OR_EQUAL("<=", NlsBundleUtilCoreRoot.INF_LESS_OR_EQUAL) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 <= arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
       return getBundle().infoLessOrEqual();
+    }
+
+    @Override
+    public CompareOperator negate() {
+
+      return GREATER_THAN;
     }
   },
 
   /**
    * {@link CompareOperator} to check if objects are {@link Object#equals(Object) equal}.
    */
-  EQUAL("==", NlsBundleUtilCoreRoot.INF_EQUAL, true, null) {
+  EQUAL("==", NlsBundleUtilCoreRoot.INF_EQUAL) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 == arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
       return getBundle().infoEqual();
+    }
+
+    @Override
+    public CompareOperator negate() {
+
+      return NOT_EQUAL;
     }
   },
 
   /**
    * {@link CompareOperator} to check if objects are NOT {@link Object#equals(Object) equal}.
    */
-  NOT_EQUAL("!=", NlsBundleUtilCoreRoot.INF_NOT_EQUAL, false, null) {
+  NOT_EQUAL("!=", NlsBundleUtilCoreRoot.INF_NOT_EQUAL) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 != arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
       return getBundle().infoNotEqual();
+    }
+
+    @Override
+    public CompareOperator negate() {
+
+      return EQUAL;
     }
   };
 
@@ -157,29 +157,21 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   /** @see #toString() */
   private final String title;
 
-  /** @see #eval(Object, Object) */
-  // private final boolean evalTrueIfEquals;
-
-  /** @see #evalComparable(Comparable, Comparable) */
-  // private final Boolean less;
-
   /**
    * The constructor.
    *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
-   * @param evalTrueIfEquals - <code>true</code> if {@link CompareOperator} {@link #eval(Object, Object)
-   *        evaluates} to <code>true</code> if arguments are equal, <code>false</code> otherwise.
+   * @param evalTrueIfEquals - <code>true</code> if {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
+   *        <code>true</code> if arguments are equal, <code>false</code> otherwise.
    * @param less - {@link Boolean#TRUE} if {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *        <code>true</code> if first argument is less than second, {@link Boolean#FALSE} on greater,
-   *        <code>null</code> otherwise.
+   *        <code>true</code> if first argument is less than second, {@link Boolean#FALSE} on greater, <code>null</code>
+   *        otherwise.
    */
-  private CompareOperator(String value, String title, boolean evalTrueIfEquals, Boolean less) {
+  private CompareOperator(String value, String title) {
 
     this.value = value;
     this.title = title;
-    // this.evalTrueIfEquals = evalTrueIfEquals;
-    // this.less = less;
   }
 
   /**
@@ -194,8 +186,7 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
 
   /**
    * @return <code>true</code> if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *         <code>true</code> in case the first argument is less than the second, <code>false</code>
-   *         otherwise.
+   *         <code>true</code> in case the first argument is less than the second, <code>false</code> otherwise.
    */
   boolean isTrueIfLess() {
 
@@ -204,8 +195,7 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
 
   /**
    * @return <code>true</code> if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *         <code>true</code> in case the first argument is greater than the second, <code>false</code>
-   *         otherwise.
+   *         <code>true</code> in case the first argument is greater than the second, <code>false</code> otherwise.
    */
   boolean isTrueIfGreater() {
 
@@ -241,12 +231,18 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   public abstract boolean eval(double arg1, double arg2);
 
   /**
+   * @since 7.1.0
+   * @return the negation of this {@link CompareOperator} that {@link #eval(double, double) evaluates} to the negated
+   *         result.
+   */
+  public abstract CompareOperator negate();
+
+  /**
    * @see ComparatorHelper#convert(Object, Class)
    *
    * @param object is the value to convert.
    * @param otherType the type of the value to compare that differs from the type
-   * @return a simpler representation of <code>value</code> or the same <code>value</code> if on simpler type
-   *         is known.
+   * @return a simpler representation of <code>value</code> or the same <code>value</code> if on simpler type is known.
    */
   private Object convert(Object object, Class<?> otherType) {
 
@@ -314,8 +310,7 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
    * This method gets the {@link CompareOperator} for the given <code>symbol</code>.
    *
    * @param value is the {@link #getValue() symbol} of the requested {@link CompareOperator}.
-   * @return the requested {@link CompareOperator} or <code>null</code> if no such {@link CompareOperator}
-   *         exists.
+   * @return the requested {@link CompareOperator} or <code>null</code> if no such {@link CompareOperator} exists.
    */
   public static CompareOperator fromValue(String value) {
 
