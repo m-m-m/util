@@ -8,7 +8,7 @@ import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.property.api.expression.Expression;
 
 /**
- * This is the implementation of {@link Expression}.
+ * This is the implementation of {@link Expression} for a single {@link SqlOperator operation} on given arguments.
  *
  * @param <L> the generic type of the {@link #getArg1() left hand}.
  * @param <R> the generic type of the {@link #getArg1() right hand}.
@@ -16,7 +16,7 @@ import net.sf.mmm.util.property.api.expression.Expression;
  * @author hohwille
  * @since 8.0.0
  */
-public class ExpressionImpl<L, R> implements Expression {
+public class SingleExpression<L, R> implements Expression {
 
   private final Arg<L> arg1;
 
@@ -31,7 +31,7 @@ public class ExpressionImpl<L, R> implements Expression {
    * @param operator - see {@link #getOperator()}.
    * @param arg2 - see {@link #getArg2()}.
    */
-  public ExpressionImpl(Arg<L> arg1, SqlOperator<? super L, ? super R> operator, Arg<R> arg2) {
+  private SingleExpression(Arg<L> arg1, SqlOperator<? super L, ? super R> operator, Arg<R> arg2) {
     super();
     this.arg1 = arg1;
     this.operator = operator;
@@ -41,7 +41,7 @@ public class ExpressionImpl<L, R> implements Expression {
   @Override
   public Expression negate() {
 
-    return new ExpressionImpl<>(this.arg1, this.operator.negate(), this.arg2);
+    return new SingleExpression<>(this.arg1, this.operator.negate(), this.arg2);
   }
 
   /**
@@ -77,17 +77,31 @@ public class ExpressionImpl<L, R> implements Expression {
   @Override
   public Expression combine(Conjunction conjunction, Collection<Expression> expressions) {
 
-    int size = expressions.size();
-    Expression[] children = new Expression[size + 1];
-    expressions.toArray(children);
-    children[size] = this;
-    return new ConjectionExpression(conjunction, children);
+    return ConjunctionExpression.valueOf(this, conjunction, expressions);
   }
 
   @Override
-  public boolean isStatic() {
+  public boolean isConstant() {
 
-    return (this.arg1.isStatic() && this.arg2.isStatic());
+    return false;
+  }
+
+  /**
+   * @param <L> the generic type of the {@link #getArg1() left hand}.
+   * @param <R> the generic type of the {@link #getArg1() right hand}.
+   * @param arg1 - see {@link #getArg1()}.
+   * @param operator - see {@link #getOperator()}.
+   * @param arg2 - see {@link #getArg2()}.
+   * @return a new {@link Expression} for a single {@link SqlOperator operation} on given arguments. Will be reduced to
+   *         a {@link ConstantExpression} if both {@link Arg}s are {@link Arg#isConstant() constant} and therefore does
+   *         not have to be an instance of {@link SingleExpression}.
+   */
+  public static <L, R> Expression valueOf(Arg<L> arg1, SqlOperator<? super L, ? super R> operator, Arg<R> arg2) {
+
+    if (arg1.isConstant() && arg2.isConstant()) {
+      return ConstantExpression.valueOf(operator.evaluate(arg1.evaluate(), arg2.evaluate()));
+    }
+    return new SingleExpression<>(arg1, operator, arg2);
   }
 
 }

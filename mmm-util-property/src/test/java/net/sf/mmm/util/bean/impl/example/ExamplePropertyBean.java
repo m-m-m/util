@@ -5,8 +5,8 @@ package net.sf.mmm.util.bean.impl.example;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import javafx.geometry.Orientation;
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.IntegerProperty;
 import net.sf.mmm.util.property.api.lang.WritableBooleanProperty;

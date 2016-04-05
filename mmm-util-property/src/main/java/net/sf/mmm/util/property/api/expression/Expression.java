@@ -70,9 +70,9 @@ public interface Expression {
   }
 
   /**
-   * @return {@code true} if this is a static expression that only consists of literal value {@link Argument}s,
-   *         {@code false} otherwise.
+   * @return {@code true} if this is a {@link net.sf.mmm.util.property.base.expression.ConstantExpression constant
+   *         expression} that {@link #evaluate() evaluates} to a fixed result, {@code false} otherwise.
    */
-  boolean isStatic();
+  boolean isConstant();
 
 }

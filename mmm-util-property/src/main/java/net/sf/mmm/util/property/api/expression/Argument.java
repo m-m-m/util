@@ -55,6 +55,6 @@ public interface Argument<V> {
   /**
    * @return {@code true} if this is a literal value argument, {@code false} otherwise.
    */
-  boolean isStatic();
+  boolean isConstant();
 
 }

@@ -67,7 +67,7 @@ public interface SqlDialect {
    */
   default String from() {
 
-    return "FROM ";
+    return " FROM ";
   }
 
   /**
@@ -75,7 +75,7 @@ public interface SqlDialect {
    */
   default String where() {
 
-    return "WHERE ";
+    return " WHERE ";
   }
 
   /**
@@ -83,7 +83,7 @@ public interface SqlDialect {
    */
   default String orderBy() {
 
-    return "ORDER BY ";
+    return " ORDER BY ";
   }
 
   /**
@@ -91,7 +91,7 @@ public interface SqlDialect {
    */
   default String groupBy() {
 
-    return "GROUP BY ";
+    return " GROUP BY ";
   }
 
   /**
@@ -99,7 +99,7 @@ public interface SqlDialect {
    */
   default String having() {
 
-    return "HAVING ";
+    return " HAVING ";
   }
 
   /**
@@ -107,7 +107,7 @@ public interface SqlDialect {
    */
   default String forUpdate() {
 
-    return "FOR UPDATE ";
+    return " FOR UPDATE";
   }
 
   /**
@@ -115,7 +115,7 @@ public interface SqlDialect {
    */
   default String set() {
 
-    return "SET ";
+    return " SET ";
   }
 
   /**
@@ -123,7 +123,7 @@ public interface SqlDialect {
    */
   default Object setAssignment() {
 
-    return "=";
+    return " = ";
   }
 
   /**
@@ -131,7 +131,7 @@ public interface SqlDialect {
    */
   default String like() {
 
-    return "LIKE ";
+    return " LIKE ";
   }
 
   /**
@@ -147,7 +147,7 @@ public interface SqlDialect {
    */
   default String is() {
 
-    return "IS ";
+    return " IS ";
   }
 
   /**
@@ -188,7 +188,7 @@ public interface SqlDialect {
    */
   default String escape() {
 
-    return "ESCAPE ";
+    return " ESCAPE ";
   }
 
   /**
@@ -203,9 +203,9 @@ public interface SqlDialect {
       return sql;
     }
     if (escape == '\'') {
-      return sql + "\"" + escape + "\" ";
+      return sql + "\"" + escape + "\"";
     }
-    return sql + "'" + escape + "' ";
+    return sql + "'" + escape + "'";
   }
 
   /**
@@ -214,7 +214,7 @@ public interface SqlDialect {
    */
   default String limit() {
 
-    return "LIMIT ";
+    return " LIMIT ";
   }
 
   /**
@@ -240,7 +240,7 @@ public interface SqlDialect {
    */
   default String offset() {
 
-    return "OFFSET ";
+    return " OFFSET ";
   }
 
   /**
@@ -248,7 +248,7 @@ public interface SqlDialect {
    */
   default String empty() {
 
-    return "EMPTY ";
+    return " EMPTY";
   }
 
   /**
@@ -256,7 +256,7 @@ public interface SqlDialect {
    */
   default String in() {
 
-    return "IN ";
+    return " IN ";
   }
 
   /**
@@ -288,7 +288,7 @@ public interface SqlDialect {
    */
   default String and() {
 
-    return "AND ";
+    return " AND ";
   }
 
   /**
@@ -296,7 +296,7 @@ public interface SqlDialect {
    */
   default String or() {
 
-    return "OR ";
+    return " OR ";
   }
 
   /**
@@ -334,7 +334,7 @@ public interface SqlDialect {
    */
   default String endExpression() {
 
-    return ") ";
+    return ")";
   }
 
   /**
@@ -374,7 +374,7 @@ public interface SqlDialect {
       return and();
     } else {
       // fallback, should never happen
-      return c.name() + " ";
+      return " " + c.name() + " ";
     }
   }
 
@@ -384,14 +384,14 @@ public interface SqlDialect {
    */
   default String operator(SqlOperator<?, ?> operator) {
 
-    return operator.getSql();
+    return " " + operator.getSql() + " ";
   }
 
   /**
    * @param index the zero-based index of the current parameter.
    * @return the SQL for the parameter as bind variable.
    */
-  default String parameter(int index) {
+  default String variable(int index) {
 
     return "?";
   }

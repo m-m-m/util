@@ -5,7 +5,6 @@ package net.sf.mmm.util.property.base.query;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.path.PropertyPath;
@@ -27,8 +26,6 @@ public abstract class AbstractSelectStatement<E, SELF extends AbstractSelectStat
 
   private final List<PropertyPath<?>> groupByList;
 
-  private Expression where;
-
   private long limit;
 
   private long offset;
@@ -44,6 +41,12 @@ public abstract class AbstractSelectStatement<E, SELF extends AbstractSelectStat
     this.groupByList = new ArrayList<>();
     this.limit = Long.MAX_VALUE;
     this.offset = 0;
+  }
+
+  @Override
+  public SELF where(Expression... expressions) {
+
+    return super.where(expressions);
   }
 
   @Override
@@ -78,17 +81,10 @@ public abstract class AbstractSelectStatement<E, SELF extends AbstractSelectStat
   protected void build(SqlBuilder builder) {
 
     builder.addFrom(getSource());
-    builder.addWhere(this.where);
+    super.build(builder);
     builder.addGroupBy(this.groupByList);
     builder.addOrderBy(this.orderByList);
     builder.addPaging(this.offset, this.limit);
-  }
-
-  @Override
-  public SELF where(Expression... expressions) {
-
-    this.where = combine(this.where, Conjunction.AND, expressions);
-    return self();
   }
 
   /**

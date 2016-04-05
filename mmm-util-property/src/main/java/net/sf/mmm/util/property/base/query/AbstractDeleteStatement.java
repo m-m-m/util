@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.base.query;
 
-import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.query.DeleteStatement;
 
@@ -18,8 +17,6 @@ import net.sf.mmm.util.property.api.query.DeleteStatement;
 public abstract class AbstractDeleteStatement<E, SELF extends AbstractDeleteStatement<E, SELF>>
     extends AbstractModifyStatement<E, SELF> implements DeleteStatement<E, SELF> {
 
-  private Expression where;
-
   private long limit;
 
   /**
@@ -34,8 +31,7 @@ public abstract class AbstractDeleteStatement<E, SELF extends AbstractDeleteStat
   @Override
   public SELF where(Expression... expressions) {
 
-    this.where = combine(this.where, Conjunction.AND, expressions);
-    return self();
+    return super.where(expressions);
   }
 
   @Override
@@ -49,7 +45,7 @@ public abstract class AbstractDeleteStatement<E, SELF extends AbstractDeleteStat
   protected void build(SqlBuilder builder) {
 
     builder.addDeleteFrom(getSource());
-    builder.addWhere(this.where);
+    super.build(builder);
     builder.addPaging(0, this.limit);
   }
 

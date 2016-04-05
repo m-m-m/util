@@ -21,7 +21,7 @@ public class JpqlDialect extends Object implements SqlDialect {
   }
 
   @Override
-  public String parameter(int index) {
+  public String variable(int index) {
 
     return "?" + (index + 1);
   }

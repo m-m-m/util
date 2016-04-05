@@ -66,43 +66,43 @@ public class Arg<V> implements Argument<V> {
 
   /**
    * @param operator the {@link SqlOperator}.
-   * @param arg2 the {@link ExpressionImpl#getArg2() second argument}.
+   * @param arg2 the {@link SingleExpression#getArg2() second argument}.
    * @return the resulting {@link Expression}.
    */
   protected Expression exp(SqlOperator<? super V, ? super V> operator, V arg2) {
 
-    return new ExpressionImpl<>(this, operator, new Arg<>(arg2));
+    return SingleExpression.valueOf(this, operator, new Arg<>(arg2));
   }
 
   /**
-   * @param <R> the generic type of the {@link ExpressionImpl#getArg2() second argument} (right hand).
+   * @param <R> the generic type of the {@link SingleExpression#getArg2() second argument} (right hand).
    * @param operator the {@link SqlOperator}.
-   * @param arg2 the {@link ExpressionImpl#getArg2() second argument}.
+   * @param arg2 the {@link SingleExpression#getArg2() second argument}.
    * @return the resulting {@link Expression}.
    */
   protected <R> Expression expRight(SqlOperator<? super V, ? super R> operator, R arg2) {
 
-    return new ExpressionImpl<>(this, operator, new Arg<>(arg2));
+    return SingleExpression.valueOf(this, operator, new Arg<>(arg2));
   }
 
   /**
    * @param operator the {@link SqlOperator}.
-   * @param arg2 the {@link ExpressionImpl#getArg2() second argument}.
+   * @param arg2 the {@link SingleExpression#getArg2() second argument}.
    * @return the resulting {@link Expression}.
    */
   protected Expression exp(SqlOperator<? super V, ? super V> operator, PropertyPath<V> arg2) {
 
-    return new ExpressionImpl<>(this, operator, new Arg<>(arg2));
+    return SingleExpression.valueOf(this, operator, new Arg<>(arg2));
   }
 
   /**
    * @param operator the {@link SqlOperator}.
-   * @param arg2 the {@link ExpressionImpl#getArg2() second argument}.
+   * @param arg2 the {@link SingleExpression#getArg2() second argument}.
    * @return the resulting {@link Expression}.
    */
   protected Expression exp(SqlOperator<? super V, ? super V> operator, Arg<V> arg2) {
 
-    return new ExpressionImpl<>(this, operator, arg2);
+    return SingleExpression.valueOf(this, operator, arg2);
   }
 
   @Override
@@ -153,7 +153,7 @@ public class Arg<V> implements Argument<V> {
   }
 
   @Override
-  public boolean isStatic() {
+  public boolean isConstant() {
 
     return (this.path == null);
   }

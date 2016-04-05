@@ -36,7 +36,7 @@ public class Expressions {
 
   public static Expression combine(Conjunction conjunction, Expression... expressions) {
 
-    return new ConjectionExpression(conjunction, expressions);
+    return ConjunctionExpression.valueOf(conjunction, expressions);
   }
 
   public static BooleanArgument of(Boolean value) {

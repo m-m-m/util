@@ -2,9 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.base.query;
 
+import java.util.List;
+
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.query.Statement;
+import net.sf.mmm.util.property.api.query.feature.FeatureWhere;
 import net.sf.mmm.util.property.base.expression.Expressions;
 
 /**
@@ -21,6 +24,8 @@ public abstract class AbstractStatement<E, SELF extends AbstractStatement<E, SEL
   private SqlDialect dialect;
 
   private SqlBuilder sqlContext;
+
+  private Expression where;
 
   /**
    * The constructor.
@@ -53,6 +58,21 @@ public abstract class AbstractStatement<E, SELF extends AbstractStatement<E, SEL
 
     this.sqlContext = null;
     return (SELF) this;
+  }
+
+  /**
+   * @see FeatureWhere#where(Expression...)
+   * @param expressions the {@link Expression}s to add.
+   * @return this query instance for fluent API calls.
+   */
+  protected SELF where(Expression... expressions) {
+
+    Expression expression = combine(this.where, Conjunction.AND, expressions);
+    if (expression.isConstant() && !expression.evaluate()) {
+      throw new IllegalArgumentException("Expression can never match!");
+    }
+    this.where = expression;
+    return self();
   }
 
   /**
@@ -103,7 +123,22 @@ public abstract class AbstractStatement<E, SELF extends AbstractStatement<E, SEL
   /**
    * @param builder the {@link SqlBuilder} with the query context to build the SQL and bind variables.
    */
-  protected abstract void build(SqlBuilder builder);
+  protected void build(SqlBuilder builder) {
+
+    builder.addWhere(this.where);
+  }
+
+  @Override
+  public List<Object> getVariables() {
+
+    return getBuilder().getVariables();
+  }
+
+  @Override
+  public String getSql() {
+
+    return getBuilder().toString();
+  }
 
   @Override
   public String toString() {

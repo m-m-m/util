@@ -4,14 +4,15 @@ package net.sf.mmm.util.property.base.query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.property.base.expression.Arg;
-import net.sf.mmm.util.property.base.expression.ConjectionExpression;
-import net.sf.mmm.util.property.base.expression.ExpressionImpl;
+import net.sf.mmm.util.property.base.expression.ConjunctionExpression;
+import net.sf.mmm.util.property.base.expression.SingleExpression;
 import net.sf.mmm.util.property.base.expression.SqlOperator;
 import net.sf.mmm.util.property.base.expression.SqlOperator.SqlOperatorLike;
 import net.sf.mmm.util.property.base.query.AbstractSelectStatement.OrderByExpression;
@@ -30,6 +31,8 @@ public class SqlBuilder {
 
   private final StringBuilder sql;
 
+  private final List<Object> variablesInternal;
+
   private final List<Object> variables;
 
   /**
@@ -41,7 +44,8 @@ public class SqlBuilder {
     super();
     this.dialect = dialect;
     this.sql = new StringBuilder(32);
-    this.variables = new ArrayList<>();
+    this.variablesInternal = new ArrayList<>();
+    this.variables = Collections.unmodifiableList(this.variablesInternal);
   }
 
   /**
@@ -68,8 +72,10 @@ public class SqlBuilder {
     if (where == null) {
       return;
     }
-    if (where.isStatic()) {
-
+    if (where.isConstant()) {
+      if (!where.evaluate()) {
+        throw new IllegalStateException();
+      }
     } else {
       this.sql.append(this.dialect.where());
       addExpression(where);
@@ -78,28 +84,22 @@ public class SqlBuilder {
 
   /**
    * @param expression the {@link Expression} to add.
-   * @return {@link Expression#evaluate()} if the {@link Expression} is {@link Expression#isStatic()}, {@code null}
-   *         otherwise (regular case).
    */
-  protected Boolean addExpression(Expression expression) {
+  protected void addExpression(Expression expression) {
 
-    if (expression instanceof ConjectionExpression) {
-      return addExpression((ConjectionExpression) expression);
+    if (expression instanceof ConjunctionExpression) {
+      ConjunctionExpression conjunctionExpression = (ConjunctionExpression) expression;
+      addConjunctionExpression(conjunctionExpression);
     } else {
-      if (expression.isStatic()) {
-        return Boolean.valueOf(expression.evaluate());
-      }
-      ExpressionImpl<?, ?> expressionImpl = (ExpressionImpl<?, ?>) expression;
-      return addExpression(expressionImpl);
+      SingleExpression<?, ?> singleExpression = (SingleExpression<?, ?>) expression;
+      addSingleExpression(singleExpression);
     }
   }
 
   /**
    * @param expression the {@link Expression} to add.
-   * @return {@link Expression#evaluate()} if the {@link Expression} is {@link Expression#isStatic()}, {@code null}
-   *         otherwise (regular case).
    */
-  protected Boolean addExpression(ExpressionImpl<?, ?> expression) {
+  protected void addSingleExpression(SingleExpression<?, ?> expression) {
 
     addArg(expression.getArg1());
     SqlOperator<?, ?> operator = expression.getOperator();
@@ -107,56 +107,39 @@ public class SqlBuilder {
     if (arg2 == Arg.NULL) {
       if (operator == SqlOperator.EQUAL) {
         this.sql.append(this.dialect.isNull());
-        return null;
       } else if (operator == SqlOperator.NOT_EQUAL) {
         this.sql.append(this.dialect.isNotNull());
-        return null;
+      }
+    } else {
+      this.sql.append(this.dialect.operator(operator));
+      addArg(arg2);
+      if (operator instanceof SqlOperatorLike) {
+        char escape = ((SqlOperatorLike) operator).getEscape();
+        if (escape != '\0') {
+          this.sql.append(this.dialect.escape(escape));
+        }
       }
     }
-    this.sql.append(this.dialect.operator(operator));
-    addArg(arg2);
-    if (operator instanceof SqlOperatorLike) {
-      char escape = ((SqlOperatorLike) operator).getEscape();
-      if (escape != '\0') {
-        this.sql.append(this.dialect.escape(escape));
-      }
-    }
-    return null;
   }
 
   /**
    * @param expression the {@link Expression} to add.
-   * @return {@link Expression#evaluate()} if the {@link Expression} is {@link Expression#isStatic()}, {@code null}
-   *         otherwise (regular case).
    */
-  protected Boolean addExpression(ConjectionExpression expression) {
+  protected void addConjunctionExpression(ConjunctionExpression expression) {
 
     Conjunction conjunction = expression.getConjunction();
     this.sql.append(this.dialect.startConjunction(conjunction));
-    int termCount = expression.getTermCount();
-    int argCount = 0;
+    String conjunctionSql = null;
     // builder.sql.append(this.dialect.startExpressions()));
-    for (int i = 0; i < termCount; i++) {
-      if (argCount > 0) {
-        this.sql.append(this.dialect.conjuction(conjunction));
-        this.sql.append(" ");
-      }
-      Boolean literalMatch = addExpression(expression.getTerm(i));
-      if (literalMatch != null) {
-        Boolean singleMatch = conjunction.evalSingle(literalMatch.booleanValue());
-        if (singleMatch != null) {
-          return singleMatch;
-        }
+    for (Expression term : expression.getTerms()) {
+      if (conjunctionSql == null) {
+        conjunctionSql = this.dialect.conjuction(conjunction);
       } else {
-        argCount++;
+        this.sql.append(conjunctionSql);
       }
+      addExpression(term);
     }
-    if (argCount == 0) {
-      return Boolean.valueOf(conjunction.evalEmpty());
-    } else {
-      this.sql.append(this.dialect.endConjunction(conjunction));
-      return null;
-    }
+    this.sql.append(this.dialect.endConjunction(conjunction));
   }
 
   /**
@@ -177,7 +160,6 @@ public class SqlBuilder {
         }
       } else if (value instanceof Range) {
         Range<?> range = (Range<?>) value;
-        this.sql.append(this.dialect.literalFalse());
         addVariable(range.getMin());
         this.sql.append(this.dialect.and());
         addVariable(range.getMax());
@@ -194,8 +176,8 @@ public class SqlBuilder {
    */
   protected void addVariable(Object value) {
 
-    this.sql.append(this.dialect.parameter(this.variables.size()));
-    this.variables.add(value);
+    this.sql.append(this.dialect.variable(this.variablesInternal.size()));
+    this.variablesInternal.add(value);
   }
 
   /**

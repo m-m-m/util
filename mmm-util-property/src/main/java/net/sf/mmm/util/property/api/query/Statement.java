@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.query;
 
+import java.util.List;
+
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 
@@ -23,9 +25,21 @@ import net.sf.mmm.util.property.api.path.PropertyPath;
 public abstract interface Statement<E, SELF extends Statement<E, SELF>> {
 
   /**
+   * @return an {@link java.util.Collections#unmodifiableList(List) unmodifiable} {@link List} with the bind variables.
+   */
+  List<Object> getVariables();
+
+  /**
    * @return the current SQL {@link String} of this {@link Statement}. May only be an SQL fragment as the final
    *         operation such as {@link SelectStatement#fetch()} will complete the statement. Has to be rebuild after
    *         every modification to the {@link Statement}.
+   */
+  String getSql();
+
+  /**
+   * @see #getSql()
+   *
+   * @return the same as {@link #getSql()}.
    */
   @Override
   String toString();

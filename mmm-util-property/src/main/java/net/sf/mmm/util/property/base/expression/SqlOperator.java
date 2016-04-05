@@ -13,8 +13,8 @@ import net.sf.mmm.util.value.api.Range;
  * clauses).
  *
  * @param <T> the generic type of the {@link #getType() comparison type}.
- * @param <S> the generic type of the {@link #evaluate(Object, Object) second comparison argument} - typically same as first
- *        ({@literal <T>}).
+ * @param <S> the generic type of the {@link #evaluate(Object, Object) second comparison argument} - typically same as
+ *        first ({@literal <T>}).
  * @author hohwille
  * @since 8.0.0
  */
@@ -89,7 +89,7 @@ public abstract class SqlOperator<T, S> {
   };
 
   /** {@link SqlOperator} to check if objects are {@link Object#equals(Object) equal}. */
-  public static final SqlOperator<Object, Object> EQUAL = new SqlOperator<Object, Object>("==", Object.class) {
+  public static final SqlOperator<Object, Object> EQUAL = new SqlOperator<Object, Object>("=", Object.class) {
 
     @Override
     public boolean evaluate(Object arg1, Object arg2) {
@@ -220,8 +220,8 @@ public abstract class SqlOperator<T, S> {
   public abstract boolean evaluate(T arg1, S arg2);
 
   /**
-   * @return the negation of this {@link CompareOperator} that {@link #evaluate(Object, Object) evaluates} to the negated
-   *         result.
+   * @return the negation of this {@link CompareOperator} that {@link #evaluate(Object, Object) evaluates} to the
+   *         negated result.
    */
   public abstract SqlOperator<T, S> negate();
 

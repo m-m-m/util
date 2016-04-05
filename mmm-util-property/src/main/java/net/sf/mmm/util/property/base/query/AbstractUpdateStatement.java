@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.base.query;
 
-import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.query.UpdateStatement;
 
@@ -18,8 +17,6 @@ import net.sf.mmm.util.property.api.query.UpdateStatement;
 public abstract class AbstractUpdateStatement<E, SELF extends AbstractUpdateStatement<E, SELF>>
     extends AbstractStoreStatement<E, SELF> implements UpdateStatement<E, SELF> {
 
-  private Expression where;
-
   private long limit;
 
   /**
@@ -34,8 +31,7 @@ public abstract class AbstractUpdateStatement<E, SELF extends AbstractUpdateStat
   @Override
   public SELF where(Expression... expressions) {
 
-    this.where = combine(this.where, Conjunction.AND, expressions);
-    return self();
+    return super.where(expressions);
   }
 
   @Override
@@ -49,7 +45,7 @@ public abstract class AbstractUpdateStatement<E, SELF extends AbstractUpdateStat
   protected void build(SqlBuilder builder) {
 
     builder.addUpdate(getSource());
-    builder.addWhere(this.where);
+    super.build(builder);
     builder.addPaging(0, this.limit);
   }
 
