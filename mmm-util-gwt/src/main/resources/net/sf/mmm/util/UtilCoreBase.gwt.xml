@@ -29,7 +29,7 @@
   <source path="reflect/base" includes="ReflectionUtilLimitedImpl.java,SimpleGenericTypeLimited.java"/>
   <source path="pojo" includes="NlsBundleUtilPojoRoot.java"/>
   <source path="pojo/api"/>
-  <source path="pojo/path/api" includes="PojoPropertyPath.java,TypedProperty.java"/>
+  <source path="pojo/path/api" includes="PojoPropertyPath.java,TypedProperty.java,TypedPath.java"/>
   <source path="pojo/descriptor/api"/>
   <source path="pojo/descriptor/base" includes="AbstractPojoDescriptor.java,AbstractPojoPropertyDescriptor.java,AbstractPojoDescriptorBuilderLimited.java,AbstractPojoDescriptorBuilderFactory.java,PojoDescriptorBuilderFactoryLimited.java,PojoProperty.java,PojoMap.java,accessor/AbstractPojoPropertyAccessor.java,accessor/AbstractPojoPropertyAccessorProxy.java"/>
   <source path="pojo/descriptor/impl" includes="AbstractPojoDescriptorImpl.java,PojoPropertyDescriptorImpl.java,accessor/AbstractPojoPropertyAccessorGetMethod.java,accessor/AbstractPojoPropertyAccessorMethodLimited.java,accessor/AbstractPojoPropertyAccessorSetMethod.java,accessor/PojoPropertyAccessorProxy*By*.java"/>
