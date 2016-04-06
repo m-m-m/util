@@ -83,11 +83,12 @@ public class NumberArg<V extends Number & Comparable<?>> extends ComparableArg<V
     return exp(SqlOperator.LESS_THAN, path);
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
   public Expression between(Range<V> range) {
 
-    return expRight(SqlOperator.BETWEEN, (Range<Number>) range);
+    Range r = range;
+    return expRight(SqlOperator.BETWEEN, (Range<Number>) r);
   }
 
 }
