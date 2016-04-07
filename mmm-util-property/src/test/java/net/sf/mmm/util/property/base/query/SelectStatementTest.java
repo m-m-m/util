@@ -34,22 +34,22 @@ public class SelectStatementTest extends Assertions {
 
     // test "empty" statement
     TestSelectStatement<ExampleBean> statement = createSelectStatement(ExampleBean.class);
-    assertThat(statement.getSql()).isEqualTo(" FROM \"ExampleBean\"");
+    String sqlFrom = " FROM \"ExampleBean\"";
+    assertThat(statement.getSql()).isEqualTo(sqlFrom);
     assertThat(statement.getVariables()).isEmpty();
 
     // add regular equals condition to where clause
     ExampleBean prototype = statement.getPrototype();
     String countryCode = "DE";
     statement.where(Expressions.of(prototype.CountryCode()).eq(countryCode));
-    assertThat(statement.getSql()).isEqualTo(" FROM \"ExampleBean\" WHERE \"CountryCode\" = ?");
+    assertThat(statement.getSql()).isEqualTo(sqlFrom + " WHERE \"CountryCode\" = ?");
     assertThat(statement.getVariables()).containsExactly(countryCode);
 
     // add between expression to where clause
     Integer min = 16;
     Integer max = 21;
     statement.where(Expressions.ofNumber((PropertyPath) prototype.Age()).between(min, max));
-    assertThat(statement.getSql())
-        .isEqualTo(" FROM \"ExampleBean\" WHERE (\"CountryCode\" = ? AND \"Age\" BETWEEN ? AND ?)");
+    assertThat(statement.getSql()).isEqualTo(sqlFrom + " WHERE (\"CountryCode\" = ? AND \"Age\" BETWEEN ? AND ?)");
     assertThat(statement.getVariables()).containsExactly(countryCode, min, max);
 
     // add like expression to where clause
@@ -57,21 +57,62 @@ public class SelectStatementTest extends Assertions {
     char escape = '\\';
     statement.where(Expressions.ofString(prototype.Name()).like(pattern, escape));
     assertThat(statement.getSql()).isEqualTo(
-        " FROM \"ExampleBean\" WHERE (\"CountryCode\" = ? AND \"Age\" BETWEEN ? AND ? AND \"Name\" LIKE ? ESCAPE '\\')");
+        sqlFrom + " WHERE (\"CountryCode\" = ? AND \"Age\" BETWEEN ? AND ? AND \"Name\" LIKE ? ESCAPE '\\')");
     assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern);
 
     // add 2 expressions combined with OR to where clause
     Orientation orientation = Orientation.HORIZONTAL;
     statement.where(Expressions.ofBoolean(prototype.Friend()).isFalse()
         .or(Expressions.of(prototype.Orientation()).eq(orientation)));
-    assertThat(statement.getSql()).isEqualTo(
-        " FROM \"ExampleBean\" WHERE (\"CountryCode\" = ? AND \"Age\" BETWEEN ? AND ? AND \"Name\" LIKE ? ESCAPE '\\' AND (\"Friend\" = FALSE OR \"Orientation\" = ?))");
+    String sqlWhere = sqlFrom
+        + " WHERE (\"CountryCode\" = ? AND \"Age\" BETWEEN ? AND ? AND \"Name\" LIKE ? ESCAPE '\\' AND (\"Friend\" = FALSE OR \"Orientation\" = ?))";
+    assertThat(statement.getSql()).isEqualTo(sqlWhere);
     assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation);
 
     // add pointless expression to where clause
     statement.where(Expressions.of(Boolean.FALSE).isFalse());
-    assertThat(statement.getSql()).isEqualTo(
-        " FROM \"ExampleBean\" WHERE (\"CountryCode\" = ? AND \"Age\" BETWEEN ? AND ? AND \"Name\" LIKE ? ESCAPE '\\' AND (\"Friend\" = FALSE OR \"Orientation\" = ?))");
+    assertThat(statement.getSql()).isEqualTo(sqlWhere);
+    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation);
+
+    // add first property to group by clause
+    statement.groupBy(prototype.Age());
+    String sqlGroupBy = sqlWhere + " GROUP BY \"Age\"";
+    assertThat(statement.getSql()).isEqualTo(sqlGroupBy);
+    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation);
+
+    // add second property to group by clause
+    statement.groupBy(prototype.CountryCode());
+    sqlGroupBy += ", \"CountryCode\"";
+    assertThat(statement.getSql()).isEqualTo(sqlGroupBy);
+    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation);
+
+    // add first property to order by clause
+    statement.orderBy(prototype.Age());
+    String sqlOrderBy = sqlGroupBy + " ORDER BY \"Age\"";
+    assertThat(statement.getSql()).isEqualTo(sqlOrderBy);
+    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation);
+
+    // add second property to order by clause
+    statement.orderBy(prototype.CountryCode());
+    sqlOrderBy += ", \"CountryCode\"";
+    assertThat(statement.getSql()).isEqualTo(sqlOrderBy);
+    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation);
+
+    // add offset
+    long offset = 500;
+    statement.offset(offset);
+    String sqlPaging = sqlOrderBy + " OFFSET ?";
+    assertThat(statement.getSql()).isEqualTo(sqlPaging);
+    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation, offset);
+
+    // add limit
+    long limit = 100;
+    statement.limit(limit);
+    sqlPaging += " LIMIT ?";
+    assertThat(statement.getSql()).isEqualTo(sqlPaging);
+    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation, offset,
+        limit);
+
   }
 
   @Test

@@ -218,23 +218,6 @@ public interface SqlDialect {
   }
 
   /**
-   * @param limit the maximum number of results.
-   * @return the {@code LIMIT} clause to supply the maximum number of results. Will be the empty {@link String} if NOT
-   *         supported via this {@link SqlDialect} (maybe only via query metadata).
-   */
-  default String limit(long limit) {
-
-    if (limit == Long.MAX_VALUE) {
-      return "";
-    }
-    String sql = limit();
-    if (sql.isEmpty()) {
-      return sql;
-    }
-    return sql + limit;
-  }
-
-  /**
    * @return the {@code OFFSET} (or SKIP) keyword to supply an offset. Will be the empty {@link String} if NOT support
    *         via SQL (maybe only via query metadata).
    */
@@ -402,7 +385,7 @@ public interface SqlDialect {
    */
   default String separator() {
 
-    return ",";
+    return ", ";
   }
 
   /**

@@ -248,7 +248,7 @@ public class SqlBuilder {
       } else {
         this.sql.append(separator);
       }
-      this.sql.append(orderBy.getPath().getName());
+      this.sql.append(this.dialect.ref(orderBy.getPath().getName()));
       this.sql.append(this.dialect.order(orderBy.getOrder()));
     }
   }
@@ -316,10 +316,16 @@ public class SqlBuilder {
       String sqlOffset = this.dialect.offset();
       if (!sqlOffset.isEmpty()) {
         this.sql.append(sqlOffset);
-        this.sql.append(offset);
+        addVariable(Long.valueOf(offset));
       }
     }
-    this.sql.append(this.dialect.limit(limit));
+    if (limit != Long.MAX_VALUE) {
+      String sqlLimit = this.dialect.limit();
+      if (!sqlLimit.isEmpty()) {
+        this.sql.append(sqlLimit);
+        addVariable(Long.valueOf(limit));
+      }
+    }
   }
 
   /**
