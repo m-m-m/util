@@ -19,7 +19,7 @@ public interface SqlDialect {
    */
   default String select() {
 
-    return "SELECT";
+    return "SELECT ";
   }
 
   /**
@@ -51,7 +51,7 @@ public interface SqlDialect {
    */
   default String update() {
 
-    return "UPDATE";
+    return "UPDATE ";
   }
 
   /**
@@ -59,7 +59,7 @@ public interface SqlDialect {
    */
   default String delete() {
 
-    return "DELETE";
+    return "DELETE ";
   }
 
   /**
@@ -67,7 +67,7 @@ public interface SqlDialect {
    */
   default String from() {
 
-    return " FROM ";
+    return "FROM ";
   }
 
   /**

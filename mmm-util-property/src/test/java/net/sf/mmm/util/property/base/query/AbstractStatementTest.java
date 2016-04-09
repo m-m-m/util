@@ -21,6 +21,8 @@ import net.sf.mmm.util.property.api.query.feature.FeatureGroupBy;
 import net.sf.mmm.util.property.api.query.feature.FeatureLimit;
 import net.sf.mmm.util.property.api.query.feature.FeatureOrderBy;
 import net.sf.mmm.util.property.api.query.feature.FeaturePaging;
+import net.sf.mmm.util.property.api.query.feature.FeatureSet;
+import net.sf.mmm.util.property.api.query.feature.FeatureValues;
 import net.sf.mmm.util.property.api.query.feature.FeatureWhere;
 import net.sf.mmm.util.property.api.query.feature.StatementFeature;
 import net.sf.mmm.util.property.base.expression.Expressions;
@@ -80,160 +82,11 @@ public abstract class AbstractStatementTest<S extends Statement<ExampleBean, S>>
 
   protected abstract String getSqlStart();
 
-  protected String quote(S statement, String name) {
+  @Test
+  public void testSql() {
 
-    SqlDialect dialect = statement.getSqlDialect();
-    return dialect.quoteReference() + name + dialect.quoteReference();
-  }
-
-  protected String variable(S statement) {
-
-    return variable(statement, 0);
-  }
-
-  protected String variable(S statement, int offset) {
-
-    return statement.getSqlDialect().variable(statement.getVariables().size() + offset);
-  }
-
-  protected String checkWhere(S statement, String sql) {
-
-    FeatureWhere<?> where = asFeature(FeatureWhere.class, statement);
-    if (where == null) {
-      return sql;
-    }
-    // add regular equals condition to where clause
-    String sqlWhere = sql + " WHERE ";
-    String countryCode = "DE";
-    String condCountryCode = quote(statement, "CountryCode") + " = " + variable(statement);
-    where.where(Expressions.of(this.prototype.CountryCode()).eq(countryCode));
-
-    assertThat(statement.getSql()).isEqualTo(sqlWhere + condCountryCode);
-    assertThat(statement.getVariables()).containsExactly(countryCode);
-
-    // add between expression to where clause
-    Integer min = 16;
-    Integer max = 21;
-    String condAge = quote(statement, "Age") + " BETWEEN " + variable(statement) + " AND "
-        + variable(statement, 1);
-    where.where(Expressions.ofNumber((PropertyPath) this.prototype.Age()).between(min, max));
-    assertThat(statement.getSql()).isEqualTo(sqlWhere + "(" + condCountryCode + " AND " + condAge + ")");
-    assertThat(statement.getVariables()).containsExactly(countryCode, min, max);
-
-    // add like expression to where clause
-    String pattern = "%\\%";
-    char escape = '\\';
-    String condName = quote(statement, "Name") + " LIKE " + variable(statement) + " ESCAPE '\\'";
-    where.where(Expressions.ofString(this.prototype.Name()).like(pattern, escape));
-    assertThat(statement.getSql())
-        .isEqualTo(sqlWhere + "(" + condCountryCode + " AND " + condAge + " AND " + condName + ")");
-    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern);
-
-    // add 2 expressions combined with OR to where clause
-    Orientation orientation = Orientation.HORIZONTAL;
-    sqlWhere = sqlWhere + "(" + condCountryCode + " AND " + condAge + " AND " + condName + " AND ("
-        + quote(statement, "Friend") + " = FALSE OR " + quote(statement, "Orientation") + " = "
-        + variable(statement) + "))";
-    where.where(Expressions.ofBoolean(this.prototype.Friend()).isFalse()
-        .or(Expressions.of(this.prototype.Orientation()).eq(orientation)));
-    assertThat(statement.getSql()).isEqualTo(sqlWhere);
-    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation);
-
-    // add pointless expression to where clause
-    where.where(Expressions.of(Boolean.FALSE).isFalse());
-    assertThat(statement.getSql()).isEqualTo(sqlWhere);
-    assertThat(statement.getVariables()).containsExactly(countryCode, min, max, pattern, orientation);
-    return sqlWhere;
-  }
-
-  protected String checkGroupBy(S statement, String sql) {
-
-    FeatureGroupBy<?> groupBy = asFeature(FeatureGroupBy.class, statement);
-    if (groupBy == null) {
-      return sql;
-    }
-
-    List<Object> variables = new ArrayList<>(statement.getVariables());
-
-    // add first property to group by clause
-    groupBy.groupBy(this.prototype.Age());
-    String sqlGroupBy = sql + " GROUP BY " + quote(statement, "Age");
-    assertThat(statement.getSql()).isEqualTo(sqlGroupBy);
-    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
-
-    // add second property to group by clause
-    groupBy.groupBy(this.prototype.CountryCode());
-    sqlGroupBy += ", " + quote(statement, "CountryCode");
-    assertThat(statement.getSql()).isEqualTo(sqlGroupBy);
-    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
-    return sqlGroupBy;
-  }
-
-  protected String checkOrderBy(S statement, String sql) {
-
-    FeatureOrderBy<?> orderBy = asFeature(FeatureOrderBy.class, statement);
-    if (orderBy == null) {
-      return sql;
-    }
-
-    List<Object> variables = new ArrayList<>(statement.getVariables());
-
-    // add first property to order by clause
-    orderBy.orderBy(this.prototype.Age());
-    String sqlOrderBy = sql + " ORDER BY " + quote(statement, "Age");
-    assertThat(statement.getSql()).isEqualTo(sqlOrderBy);
-    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
-
-    // add second property to order by clause
-    orderBy.orderBy(this.prototype.CountryCode());
-    sqlOrderBy += ", " + quote(statement, "CountryCode");
-    assertThat(statement.getSql()).isEqualTo(sqlOrderBy);
-    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
-    return sqlOrderBy;
-  }
-
-  protected String checkLimit(S statement, String sql) {
-
-    FeatureLimit<?> sLimit = asFeature(FeatureLimit.class, statement);
-    if (sLimit == null) {
-      return sql;
-    }
-
-    List<Object> variables = new ArrayList<>(statement.getVariables());
-
-    // add limit
-    long limit = 100;
-    sLimit.limit(limit);
-    String sqlLimit = sql;
-    if (!statement.getSqlDialect().limit().isEmpty()) {
-      sqlLimit = sqlLimit + " LIMIT " + variable(statement);
-      variables.add(limit);
-    }
-    assertThat(statement.getSql()).isEqualTo(sqlLimit);
-    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
-    return sqlLimit;
-  }
-
-  protected String checkOffset(S statement, String sql) {
-
-    FeaturePaging<?> paging = asFeature(FeaturePaging.class, statement);
-    if (paging == null) {
-      return sql;
-    }
-
-    List<Object> variables = new ArrayList<>(statement.getVariables());
-
-    // add offset
-    long offset = 500;
-    paging.offset(offset);
-    String sqlOffset = sql;
-    if (!statement.getSqlDialect().offset().isEmpty()) {
-      sqlOffset = sqlOffset + " OFFSET " + variable(statement);
-      variables.add(offset);
-    }
-    assertThat(statement.getSql()).isEqualTo(sqlOffset);
-    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
-    return sqlOffset;
+    checkSql(DefaultSqlDialect.INSTANCE);
+    checkSql(JpqlDialect.INSTANCE);
   }
 
   protected void checkSql(SqlDialect dialect) {
@@ -246,19 +99,15 @@ public abstract class AbstractStatementTest<S extends Statement<ExampleBean, S>>
     assertThat(statement.getSql()).isEqualTo(sql);
     assertThat(statement.getVariables()).isEmpty();
 
+    List<Object> variables = new ArrayList<>();
     // do the additional tests...
-    sql = checkWhere(statement, sql);
-    sql = checkGroupBy(statement, sql);
-    sql = checkOrderBy(statement, sql);
-    sql = checkOffset(statement, sql);
-    sql = checkLimit(statement, sql);
-  }
-
-  @Test
-  public void testSql() {
-
-    checkSql(DefaultSqlDialect.INSTANCE);
-    checkSql(JpqlDialect.INSTANCE);
+    sql = checkValues(statement, sql, variables);
+    sql = checkSet(statement, sql, variables);
+    sql = checkWhere(statement, sql, variables);
+    sql = checkGroupBy(statement, sql, variables);
+    sql = checkOrderBy(statement, sql, variables);
+    sql = checkOffset(statement, sql, variables);
+    sql = checkLimit(statement, sql, variables);
   }
 
   @Test
@@ -286,6 +135,177 @@ public abstract class AbstractStatementTest<S extends Statement<ExampleBean, S>>
       assertThat(statement.getSql()).isEqualTo(sql);
       assertThat(statement.getVariables()).isEmpty();
     }
+  }
+
+  protected String quote(S statement, String name) {
+
+    SqlDialect dialect = statement.getSqlDialect();
+    return dialect.quoteReference() + name + dialect.quoteReference();
+  }
+
+  protected String variable(S statement, List<Object> variables, Object value) {
+
+    String variable = statement.getSqlDialect().variable(variables.size());
+    variables.add(value);
+    return variable;
+  }
+
+  protected String checkSet(S statement, String sql, List<Object> variables) {
+
+    FeatureSet<?> set = asFeature(FeatureSet.class, statement);
+    if (set == null) {
+      return sql;
+    }
+    // add assignment to SET clause
+    ExampleBean prototpye = getPrototype();
+    Long age = 18L;
+    String sqlSet = sql + " SET " + quote(statement, "Age") + " = " + variable(statement, variables, age);
+    set.set(prototpye.Age(), age);
+    assertThat(statement.getSql()).isEqualTo(sqlSet);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+    return sqlSet;
+  }
+
+  protected String checkValues(S statement, String sql, List<Object> variables) {
+
+    FeatureValues<?> values = asFeature(FeatureValues.class, statement);
+    if (values == null) {
+      return sql;
+    }
+
+    return sql;
+  }
+
+  protected String checkWhere(S statement, String sql, List<Object> variables) {
+
+    FeatureWhere<?> where = asFeature(FeatureWhere.class, statement);
+    if (where == null) {
+      return sql;
+    }
+
+    // add regular equals condition to where clause
+    String sqlWhere = sql + " WHERE ";
+    String countryCode = "DE";
+    String condCountryCode = quote(statement, "CountryCode") + " = " + variable(statement, variables, countryCode);
+    where.where(Expressions.of(this.prototype.CountryCode()).eq(countryCode));
+
+    assertThat(statement.getSql()).isEqualTo(sqlWhere + condCountryCode);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+
+    // add between expression to where clause
+    Integer min = 16;
+    Integer max = 21;
+    String condAge = quote(statement, "Age") + " BETWEEN " + variable(statement, variables, min) + " AND "
+        + variable(statement, variables, max);
+    where.where(Expressions.ofNumber((PropertyPath) this.prototype.Age()).between(min, max));
+    assertThat(statement.getSql()).isEqualTo(sqlWhere + "(" + condCountryCode + " AND " + condAge + ")");
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+
+    // add like expression to where clause
+    String pattern = "%\\%";
+    char escape = '\\';
+    String condName = quote(statement, "Name") + " LIKE " + variable(statement, variables, pattern)
+        + " ESCAPE '\\'";
+    where.where(Expressions.ofString(this.prototype.Name()).like(pattern, escape));
+    assertThat(statement.getSql())
+        .isEqualTo(sqlWhere + "(" + condCountryCode + " AND " + condAge + " AND " + condName + ")");
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+
+    // add 2 expressions combined with OR to where clause
+    Orientation orientation = Orientation.HORIZONTAL;
+    sqlWhere = sqlWhere + "(" + condCountryCode + " AND " + condAge + " AND " + condName + " AND ("
+        + quote(statement, "Friend") + " = FALSE OR " + quote(statement, "Orientation") + " = "
+        + variable(statement, variables, orientation) + "))";
+    where.where(Expressions.ofBoolean(this.prototype.Friend()).isFalse()
+        .or(Expressions.of(this.prototype.Orientation()).eq(orientation)));
+    assertThat(statement.getSql()).isEqualTo(sqlWhere);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+
+    // add pointless expression to where clause
+    where.where(Expressions.of(Boolean.FALSE).isFalse());
+    assertThat(statement.getSql()).isEqualTo(sqlWhere);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+    return sqlWhere;
+  }
+
+  protected String checkGroupBy(S statement, String sql, List<Object> variables) {
+
+    FeatureGroupBy<?> groupBy = asFeature(FeatureGroupBy.class, statement);
+    if (groupBy == null) {
+      return sql;
+    }
+
+    // add first property to group by clause
+    groupBy.groupBy(this.prototype.Age());
+    String sqlGroupBy = sql + " GROUP BY " + quote(statement, "Age");
+    assertThat(statement.getSql()).isEqualTo(sqlGroupBy);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+
+    // add second property to group by clause
+    groupBy.groupBy(this.prototype.CountryCode());
+    sqlGroupBy += ", " + quote(statement, "CountryCode");
+    assertThat(statement.getSql()).isEqualTo(sqlGroupBy);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+    return sqlGroupBy;
+  }
+
+  protected String checkOrderBy(S statement, String sql, List<Object> variables) {
+
+    FeatureOrderBy<?> orderBy = asFeature(FeatureOrderBy.class, statement);
+    if (orderBy == null) {
+      return sql;
+    }
+
+    // add first property to order by clause
+    orderBy.orderBy(this.prototype.Age());
+    String sqlOrderBy = sql + " ORDER BY " + quote(statement, "Age");
+    assertThat(statement.getSql()).isEqualTo(sqlOrderBy);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+
+    // add second property to order by clause
+    orderBy.orderBy(this.prototype.CountryCode());
+    sqlOrderBy += ", " + quote(statement, "CountryCode");
+    assertThat(statement.getSql()).isEqualTo(sqlOrderBy);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+    return sqlOrderBy;
+  }
+
+  protected String checkLimit(S statement, String sql, List<Object> variables) {
+
+    FeatureLimit<?> sLimit = asFeature(FeatureLimit.class, statement);
+    if (sLimit == null) {
+      return sql;
+    }
+
+    // add limit
+    long limit = 100L;
+    sLimit.limit(limit);
+    String sqlLimit = sql;
+    if (!statement.getSqlDialect().limit().isEmpty()) {
+      sqlLimit = sqlLimit + " LIMIT " + variable(statement, variables, Long.valueOf(limit));
+    }
+    assertThat(statement.getSql()).isEqualTo(sqlLimit);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+    return sqlLimit;
+  }
+
+  protected String checkOffset(S statement, String sql, List<Object> variables) {
+
+    FeaturePaging<?> paging = asFeature(FeaturePaging.class, statement);
+    if (paging == null) {
+      return sql;
+    }
+
+    // add offset
+    long offset = 500;
+    paging.offset(offset);
+    String sqlOffset = sql;
+    if (!statement.getSqlDialect().offset().isEmpty()) {
+      sqlOffset = sqlOffset + " OFFSET " + variable(statement, variables, Long.valueOf(offset));
+    }
+    assertThat(statement.getSql()).isEqualTo(sqlOffset);
+    assertThat(statement.getVariables()).containsExactlyElementsOf(variables);
+    return sqlOffset;
   }
 
   public static class TestSelectStatement<E extends Bean>

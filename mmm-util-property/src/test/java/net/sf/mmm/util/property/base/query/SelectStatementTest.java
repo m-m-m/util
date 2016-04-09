@@ -40,7 +40,7 @@ public class SelectStatementTest
   @Override
   protected String getSqlStart() {
 
-    return " FROM ";
+    return "FROM ";
   }
 
   public static class TestSelectStatement<E extends Bean>

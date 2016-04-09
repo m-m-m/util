@@ -29,7 +29,7 @@ public abstract class AbstractInsertStatement<E, SELF extends AbstractInsertStat
   protected void buildStart(SqlBuilder builder) {
 
     builder.addInsertInto(getSource());
-    super.build(builder);
+    super.buildStart(builder);
   }
 
 }
