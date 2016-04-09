@@ -13,7 +13,7 @@ import net.sf.mmm.util.property.api.expression.Expression;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface FeatureHaving<SELF extends FeatureHaving<SELF>> {
+public abstract interface FeatureHaving<SELF extends FeatureHaving<SELF>> extends StatementFeature {
 
   /**
    * Adds the given {@link Expression}s as filter criteria to the WHERE-clause. Multiple invocations will combine

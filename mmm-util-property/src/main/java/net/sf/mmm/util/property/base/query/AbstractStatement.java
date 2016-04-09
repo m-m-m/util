@@ -7,7 +7,6 @@ import java.util.List;
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.query.Statement;
-import net.sf.mmm.util.property.api.query.feature.FeatureWhere;
 import net.sf.mmm.util.property.base.expression.Expressions;
 
 /**
@@ -27,6 +26,10 @@ public abstract class AbstractStatement<E, SELF extends AbstractStatement<E, SEL
 
   private Expression where;
 
+  private long limit;
+
+  private long offset;
+
   /**
    * The constructor.
    *
@@ -35,12 +38,12 @@ public abstract class AbstractStatement<E, SELF extends AbstractStatement<E, SEL
   public AbstractStatement(SqlDialect dialect) {
     super();
     this.dialect = dialect;
+    this.limit = Long.MAX_VALUE;
+    this.offset = 0;
   }
 
-  /**
-   * @return the {@link SqlDialect} to use.
-   */
-  public SqlDialect getDialect() {
+  @Override
+  public SqlDialect getSqlDialect() {
 
     return this.dialect;
   }
@@ -61,7 +64,7 @@ public abstract class AbstractStatement<E, SELF extends AbstractStatement<E, SEL
   }
 
   /**
-   * @see FeatureWhere#where(Expression...)
+   * @see net.sf.mmm.util.property.api.query.feature.FeatureWhere#where(Expression...)
    * @param expressions the {@link Expression}s to add.
    * @return this query instance for fluent API calls.
    */
@@ -72,6 +75,28 @@ public abstract class AbstractStatement<E, SELF extends AbstractStatement<E, SEL
       throw new IllegalArgumentException("Expression can never match!");
     }
     this.where = expression;
+    return self();
+  }
+
+  /**
+   * @see net.sf.mmm.util.property.api.query.feature.FeatureLimit#limit(long)
+   * @param newLimit the maximum number of matches.
+   * @return this query instance for fluent API calls.
+   */
+  protected SELF limit(long newLimit) {
+
+    this.limit = newLimit;
+    return self();
+  }
+
+  /**
+   * @see net.sf.mmm.util.property.api.query.feature.FeaturePaging#offset(long)
+   * @param newOffset the number of records to skip.
+   * @return this query instance for fluent API calls.
+   */
+  protected SELF offset(long newOffset) {
+
+    this.offset = newOffset;
     return self();
   }
 
@@ -123,9 +148,34 @@ public abstract class AbstractStatement<E, SELF extends AbstractStatement<E, SEL
   /**
    * @param builder the {@link SqlBuilder} with the query context to build the SQL and bind variables.
    */
-  protected void build(SqlBuilder builder) {
+  protected final void build(SqlBuilder builder) {
+
+    buildStart(builder);
+    buildMain(builder);
+    buildEnd(builder);
+  }
+
+  /**
+   * @param builder the {@link SqlBuilder} with the query context to build the SQL and bind variables.
+   */
+  protected void buildStart(SqlBuilder builder) {
+
+  }
+
+  /**
+   * @param builder the {@link SqlBuilder} with the query context to build the SQL and bind variables.
+   */
+  protected void buildMain(SqlBuilder builder) {
 
     builder.addWhere(this.where);
+  }
+
+  /**
+   * @param builder the {@link SqlBuilder} with the query context to build the SQL and bind variables.
+   */
+  protected void buildEnd(SqlBuilder builder) {
+
+    builder.addPaging(this.offset, this.limit);
   }
 
   @Override

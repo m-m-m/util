@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.path.PropertyPath;
+import net.sf.mmm.util.property.base.query.SqlDialect;
 
 /**
  * This interface allows to build and execute type-safe query statements using a fluent API based on
@@ -35,6 +36,11 @@ public abstract interface Statement<E, SELF extends Statement<E, SELF>> {
    *         every modification to the {@link Statement}.
    */
   String getSql();
+
+  /**
+   * @return the {@link SqlDialect} to use.
+   */
+  SqlDialect getSqlDialect();
 
   /**
    * @see #getSql()

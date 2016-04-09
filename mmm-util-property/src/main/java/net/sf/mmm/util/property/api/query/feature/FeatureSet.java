@@ -13,7 +13,7 @@ import net.sf.mmm.util.property.api.path.PropertyPath;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface FeatureSet<SELF extends FeatureSet<SELF>> {
+public abstract interface FeatureSet<SELF extends FeatureSet<SELF>> extends StatementFeature {
 
   /**
    * Adds a value binding setting the given {@link PropertyPath} to the given {@code value}.

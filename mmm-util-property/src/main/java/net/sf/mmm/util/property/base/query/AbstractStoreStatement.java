@@ -48,9 +48,10 @@ public abstract class AbstractStoreStatement<E, SELF extends AbstractStoreStatem
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  protected void buildMain(SqlBuilder builder) {
 
     builder.addSet(this.setExpressionList);
+    super.buildMain(builder);
   }
 
   /**

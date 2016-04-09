@@ -26,7 +26,7 @@ public abstract class AbstractInsertStatement<E, SELF extends AbstractInsertStat
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  protected void buildStart(SqlBuilder builder) {
 
     builder.addInsertInto(getSource());
     super.build(builder);

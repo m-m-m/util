@@ -14,7 +14,7 @@ import net.sf.mmm.util.property.api.path.PropertyPath;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface FeatureOrderBy<SELF extends FeatureOrderBy<SELF>> {
+public abstract interface FeatureOrderBy<SELF extends FeatureOrderBy<SELF>> extends StatementFeature {
 
   /**
    * Adds the given {@link PropertyPath} to the {@code ORDER BY} clause using default {@link SortOrder} (what should be

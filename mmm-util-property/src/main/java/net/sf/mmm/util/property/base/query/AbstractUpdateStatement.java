@@ -17,8 +17,6 @@ import net.sf.mmm.util.property.api.query.UpdateStatement;
 public abstract class AbstractUpdateStatement<E, SELF extends AbstractUpdateStatement<E, SELF>>
     extends AbstractStoreStatement<E, SELF> implements UpdateStatement<E, SELF> {
 
-  private long limit;
-
   /**
    * The constructor.
    *
@@ -37,16 +35,14 @@ public abstract class AbstractUpdateStatement<E, SELF extends AbstractUpdateStat
   @Override
   public SELF limit(long newLimit) {
 
-    this.limit = newLimit;
-    return self();
+    return super.limit(newLimit);
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  protected void buildStart(SqlBuilder builder) {
 
     builder.addUpdate(getSource());
-    super.build(builder);
-    builder.addPaging(0, this.limit);
+    super.buildStart(builder);
   }
 
 }

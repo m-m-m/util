@@ -12,7 +12,7 @@ import net.sf.mmm.util.property.api.query.Statement;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface FeatuerModify {
+public abstract interface FeatureModify extends StatementFeature {
 
   /**
    * Execute the clause and return the amount of affected rows

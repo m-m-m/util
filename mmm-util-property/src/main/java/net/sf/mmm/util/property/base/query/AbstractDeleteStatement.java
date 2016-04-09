@@ -17,8 +17,6 @@ import net.sf.mmm.util.property.api.query.DeleteStatement;
 public abstract class AbstractDeleteStatement<E, SELF extends AbstractDeleteStatement<E, SELF>>
     extends AbstractModifyStatement<E, SELF> implements DeleteStatement<E, SELF> {
 
-  private long limit;
-
   /**
    * The constructor.
    *
@@ -37,16 +35,14 @@ public abstract class AbstractDeleteStatement<E, SELF extends AbstractDeleteStat
   @Override
   public SELF limit(long newLimit) {
 
-    this.limit = newLimit;
-    return self();
+    return super.limit(newLimit);
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  protected void buildStart(SqlBuilder builder) {
 
     builder.addDeleteFrom(getSource());
-    super.build(builder);
-    builder.addPaging(0, this.limit);
+    super.buildStart(builder);
   }
 
 }

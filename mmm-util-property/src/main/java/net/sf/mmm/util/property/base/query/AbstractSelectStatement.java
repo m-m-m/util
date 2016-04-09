@@ -26,10 +26,6 @@ public abstract class AbstractSelectStatement<E, SELF extends AbstractSelectStat
 
   private final List<PropertyPath<?>> groupByList;
 
-  private long limit;
-
-  private long offset;
-
   /**
    * The constructor.
    *
@@ -39,8 +35,6 @@ public abstract class AbstractSelectStatement<E, SELF extends AbstractSelectStat
     super(dialect);
     this.orderByList = new ArrayList<>();
     this.groupByList = new ArrayList<>();
-    this.limit = Long.MAX_VALUE;
-    this.offset = 0;
   }
 
   @Override
@@ -66,25 +60,22 @@ public abstract class AbstractSelectStatement<E, SELF extends AbstractSelectStat
   @Override
   public SELF limit(long newLimit) {
 
-    this.limit = newLimit;
-    return self();
+    return super.limit(newLimit);
   }
 
   @Override
   public SELF offset(long newOffset) {
 
-    this.offset = newOffset;
-    return self();
+    return super.offset(newOffset);
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  protected void buildMain(SqlBuilder builder) {
 
     builder.addFrom(getSource());
-    super.build(builder);
+    super.buildMain(builder);
     builder.addGroupBy(this.groupByList);
     builder.addOrderBy(this.orderByList);
-    builder.addPaging(this.offset, this.limit);
   }
 
   /**

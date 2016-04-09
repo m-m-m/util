@@ -11,7 +11,7 @@ package net.sf.mmm.util.property.api.query.feature;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface FeatureLimit<SELF extends FeatureLimit<SELF>> {
+public abstract interface FeatureLimit<SELF extends FeatureLimit<SELF>> extends StatementFeature {
 
   /**
    * Set the limit for the query matches. Should be called only once per query.

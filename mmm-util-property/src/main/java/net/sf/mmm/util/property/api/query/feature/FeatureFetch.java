@@ -15,7 +15,7 @@ import java.util.List;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface FeatureFetch<E> {
+public abstract interface FeatureFetch<E> extends StatementFeature {
 
   /**
    * Executes this query to fetch all matching results.

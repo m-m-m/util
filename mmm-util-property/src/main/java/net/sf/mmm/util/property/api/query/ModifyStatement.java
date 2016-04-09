@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.query;
 
-import net.sf.mmm.util.property.api.query.feature.FeatuerModify;
+import net.sf.mmm.util.property.api.query.feature.FeatureModify;
 
 /**
  * Extends {@link Statement} for modifying data.
@@ -18,6 +18,6 @@ import net.sf.mmm.util.property.api.query.feature.FeatuerModify;
  * @since 8.0.0
  */
 public abstract interface ModifyStatement<E, SELF extends ModifyStatement<E, SELF>>
-    extends Statement<E, SELF>, FeatuerModify {
+    extends Statement<E, SELF>, FeatureModify {
 
 }
