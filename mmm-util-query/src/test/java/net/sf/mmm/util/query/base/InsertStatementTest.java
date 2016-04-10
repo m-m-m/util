@@ -7,25 +7,22 @@ import java.util.List;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
-import net.sf.mmm.util.bean.impl.example.ExampleBean;
 import net.sf.mmm.util.query.api.SelectStatement;
 import net.sf.mmm.util.query.api.feature.FeatureModify;
 import net.sf.mmm.util.query.api.feature.FeatureSet;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.base.AbstractInsertStatement;
-import net.sf.mmm.util.query.base.AbstractSelectStatement;
-import net.sf.mmm.util.query.base.SqlDialect;
 import net.sf.mmm.util.query.base.InsertStatementTest.TestInsertStatement;
+import net.sf.mmm.util.query.base.example.QueryTestBean;
 
 /**
  * Test of {@link SelectStatement} and {@link AbstractSelectStatement}.
  *
  * @author hohwille
  */
-public class InsertStatementTest extends AbstractStatementTest<TestInsertStatement<ExampleBean>> {
+public class InsertStatementTest extends AbstractStatementTest<TestInsertStatement<QueryTestBean>> {
 
   @Override
-  protected TestInsertStatement<ExampleBean> createStatement(SqlDialect dialect) {
+  protected TestInsertStatement<QueryTestBean> createStatement(SqlDialect dialect) {
 
     return new TestInsertStatement<>(getPrototype(), dialect);
   }

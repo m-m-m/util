@@ -4,6 +4,8 @@ package net.sf.mmm.util.query.base;
 
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.query.api.DeleteStatement;
+import net.sf.mmm.util.query.base.feature.FeaturePagingImpl;
+import net.sf.mmm.util.query.base.feature.FeatureWhereImpl;
 
 /**
  * This is the abstract base-implementation of {@link DeleteStatement}.
@@ -14,7 +16,7 @@ import net.sf.mmm.util.query.api.DeleteStatement;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractDeleteStatement<E, SELF extends AbstractDeleteStatement<E, SELF>>
+public abstract class AbstractDeleteStatement<E, SELF extends DeleteStatement<E, SELF>>
     extends AbstractModifyStatement<E, SELF> implements DeleteStatement<E, SELF> {
 
   /**
@@ -29,20 +31,22 @@ public abstract class AbstractDeleteStatement<E, SELF extends AbstractDeleteStat
   @Override
   public SELF where(Expression... expressions) {
 
-    return super.where(expressions);
+    feature(FeatureWhereImpl.class).where(expressions);
+    return self();
   }
 
   @Override
-  public SELF limit(long newLimit) {
+  public SELF limit(int limit) {
 
-    return super.limit(newLimit);
+    feature(FeaturePagingImpl.class).limit(limit);
+    return self();
   }
 
   @Override
-  protected void buildStart(SqlBuilder builder) {
+  protected void build(SqlBuilder builder) {
 
-    builder.addDeleteFrom(getSource());
-    super.buildStart(builder);
+    builder.getBuffer().append(getSqlDialect().deleteFrom());
+    super.build(builder);
   }
 
 }

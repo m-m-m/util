@@ -7,7 +7,6 @@ import java.util.List;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
-import net.sf.mmm.util.bean.impl.example.ExampleBean;
 import net.sf.mmm.util.query.api.SelectStatement;
 import net.sf.mmm.util.query.api.feature.FeatureFetch;
 import net.sf.mmm.util.query.api.feature.FeatureGroupBy;
@@ -15,8 +14,7 @@ import net.sf.mmm.util.query.api.feature.FeatureOrderBy;
 import net.sf.mmm.util.query.api.feature.FeaturePaging;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.base.AbstractSelectStatement;
-import net.sf.mmm.util.query.base.SqlDialect;
+import net.sf.mmm.util.query.base.example.QueryTestBean;
 
 /**
  * Test of {@link SelectStatement} and {@link AbstractSelectStatement}.
@@ -24,10 +22,10 @@ import net.sf.mmm.util.query.base.SqlDialect;
  * @author hohwille
  */
 public class SelectStatementTest
-    extends AbstractStatementTest<SelectStatementTest.TestSelectStatement<ExampleBean>> {
+    extends AbstractStatementTest<SelectStatementTest.TestSelectStatement<QueryTestBean>> {
 
   @Override
-  protected TestSelectStatement<ExampleBean> createStatement(SqlDialect dialect) {
+  protected TestSelectStatement<QueryTestBean> createStatement(SqlDialect dialect) {
 
     return new TestSelectStatement<>(getPrototype(), dialect);
   }

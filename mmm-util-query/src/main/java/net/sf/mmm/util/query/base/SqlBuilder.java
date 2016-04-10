@@ -15,8 +15,7 @@ import net.sf.mmm.util.property.base.expression.ConjunctionExpression;
 import net.sf.mmm.util.property.base.expression.SingleExpression;
 import net.sf.mmm.util.property.base.expression.SqlOperator;
 import net.sf.mmm.util.property.base.expression.SqlOperator.SqlOperatorLike;
-import net.sf.mmm.util.query.base.AbstractSelectStatement.OrderByExpression;
-import net.sf.mmm.util.query.base.AbstractStoreStatement.SetExpression;
+import net.sf.mmm.util.query.api.Statement;
 import net.sf.mmm.util.value.api.Range;
 
 /**
@@ -29,7 +28,7 @@ public class SqlBuilder {
 
   private final SqlDialect dialect;
 
-  private final StringBuilder sql;
+  private final StringBuilder sqlBuilder;
 
   private final List<Object> variablesInternal;
 
@@ -43,17 +42,33 @@ public class SqlBuilder {
   public SqlBuilder(SqlDialect dialect) {
     super();
     this.dialect = dialect;
-    this.sql = new StringBuilder(32);
+    this.sqlBuilder = new StringBuilder(32);
     this.variablesInternal = new ArrayList<>();
     this.variables = Collections.unmodifiableList(this.variablesInternal);
   }
 
   /**
-   * @return the sql
+   * @return the {@link Statement#getSql() SQL}.
    */
   public String getSql() {
 
-    return this.sql.toString();
+    return this.sqlBuilder.toString();
+  }
+
+  /**
+   * @return the {@link StringBuilder} for the {@link #getSql() SQL}.
+   */
+  public StringBuilder getBuffer() {
+
+    return this.sqlBuilder;
+  }
+
+  /**
+   * @return the {@link SqlDialect}.
+   */
+  public SqlDialect getDialect() {
+
+    return this.dialect;
   }
 
   /**
@@ -65,27 +80,9 @@ public class SqlBuilder {
   }
 
   /**
-   * @param where the {@link Expression} to add as {@code WHERE} clause. May be {@code null}.
-   */
-  public void addWhere(Expression where) {
-
-    if (where == null) {
-      return;
-    }
-    if (where.isConstant()) {
-      if (!where.evaluate()) {
-        throw new IllegalStateException();
-      }
-    } else {
-      this.sql.append(this.dialect.where());
-      addExpression(where);
-    }
-  }
-
-  /**
    * @param expression the {@link Expression} to add.
    */
-  protected void addExpression(Expression expression) {
+  public void addExpression(Expression expression) {
 
     if (expression instanceof ConjunctionExpression) {
       ConjunctionExpression conjunctionExpression = (ConjunctionExpression) expression;
@@ -106,17 +103,17 @@ public class SqlBuilder {
     Arg<?> arg2 = expression.getArg2();
     if (arg2 == Arg.NULL) {
       if (operator == SqlOperator.EQUAL) {
-        this.sql.append(this.dialect.isNull());
+        this.sqlBuilder.append(this.dialect.isNull());
       } else if (operator == SqlOperator.NOT_EQUAL) {
-        this.sql.append(this.dialect.isNotNull());
+        this.sqlBuilder.append(this.dialect.isNotNull());
       }
     } else {
-      this.sql.append(this.dialect.operator(operator));
+      this.sqlBuilder.append(this.dialect.operator(operator));
       addArg(arg2);
       if (operator instanceof SqlOperatorLike) {
         char escape = ((SqlOperatorLike) operator).getEscape();
         if (escape != '\0') {
-          this.sql.append(this.dialect.escape(escape));
+          this.sqlBuilder.append(this.dialect.escape(escape));
         }
       }
     }
@@ -128,40 +125,40 @@ public class SqlBuilder {
   protected void addConjunctionExpression(ConjunctionExpression expression) {
 
     Conjunction conjunction = expression.getConjunction();
-    this.sql.append(this.dialect.startConjunction(conjunction));
+    this.sqlBuilder.append(this.dialect.startConjunction(conjunction));
     String conjunctionSql = null;
     // builder.sql.append(this.dialect.startExpressions()));
     for (Expression term : expression.getTerms()) {
       if (conjunctionSql == null) {
         conjunctionSql = this.dialect.conjuction(conjunction);
       } else {
-        this.sql.append(conjunctionSql);
+        this.sqlBuilder.append(conjunctionSql);
       }
       addExpression(term);
     }
-    this.sql.append(this.dialect.endConjunction(conjunction));
+    this.sqlBuilder.append(this.dialect.endConjunction(conjunction));
   }
 
   /**
    * @param arg the {@link Arg} to add.
    */
-  protected void addArg(Arg<?> arg) {
+  public void addArg(Arg<?> arg) {
 
     PropertyPath<?> path = arg.getPath();
     if (path == null) {
       Object value = arg.getValue();
       if (value == null) {
-        this.sql.append(this.dialect.literalNull());
+        this.sqlBuilder.append(this.dialect.literalNull());
       } else if (value instanceof Boolean) {
         if (((Boolean) value).booleanValue()) {
-          this.sql.append(this.dialect.literalTrue());
+          this.sqlBuilder.append(this.dialect.literalTrue());
         } else {
-          this.sql.append(this.dialect.literalFalse());
+          this.sqlBuilder.append(this.dialect.literalFalse());
         }
       } else if (value instanceof Range) {
         Range<?> range = (Range<?>) value;
         addVariable(range.getMin());
-        this.sql.append(this.dialect.and());
+        this.sqlBuilder.append(this.dialect.and());
         addVariable(range.getMax());
       } else {
         addVariable(value);
@@ -174,9 +171,9 @@ public class SqlBuilder {
   /**
    * @param value the value to add as bind variable.
    */
-  protected void addVariable(Object value) {
+  public void addVariable(Object value) {
 
-    this.sql.append(this.dialect.variable(this.variablesInternal.size()));
+    this.sqlBuilder.append(this.dialect.variable(this.variablesInternal.size()));
     this.variablesInternal.add(value);
   }
 
@@ -185,20 +182,20 @@ public class SqlBuilder {
    */
   protected void addPath(PropertyPath<?> path) {
 
-    this.sql.append(this.dialect.ref(path.getName()));
+    this.sqlBuilder.append(this.dialect.ref(path.getName()));
   }
 
   /**
    * @param paths the {@link PropertyPath}s to add.
    */
-  protected void addPaths(List<PropertyPath<?>> paths) {
+  public void addPaths(List<PropertyPath<?>> paths) {
 
     String separator = null;
     for (PropertyPath<?> path : paths) {
       if (separator == null) {
         separator = this.dialect.separator();
       } else {
-        this.sql.append(separator);
+        this.sqlBuilder.append(separator);
       }
       addPath(path);
     }
@@ -215,7 +212,7 @@ public class SqlBuilder {
   @Override
   public String toString() {
 
-    return this.sql.toString();
+    return this.sqlBuilder.toString();
   }
 
   /**
@@ -227,30 +224,8 @@ public class SqlBuilder {
     if ((groupByList == null) || (groupByList.isEmpty())) {
       return;
     }
-    this.sql.append(this.dialect.groupBy());
+    this.sqlBuilder.append(this.dialect.groupBy());
     addPaths(groupByList);
-  }
-
-  /**
-   * @param orderByList the {@link List} of {@link OrderByExpression}s to add as {@code  ORDER BY} clause. It may be
-   *        {@code null}.
-   */
-  public void addOrderBy(List<OrderByExpression> orderByList) {
-
-    if ((orderByList == null) || (orderByList.isEmpty())) {
-      return;
-    }
-    this.sql.append(this.dialect.orderBy());
-    String separator = null;
-    for (OrderByExpression orderBy : orderByList) {
-      if (separator == null) {
-        separator = this.dialect.separator();
-      } else {
-        this.sql.append(separator);
-      }
-      this.sql.append(this.dialect.ref(orderBy.getPath().getName()));
-      this.sql.append(this.dialect.order(orderBy.getOrder()));
-    }
   }
 
   /**
@@ -258,7 +233,7 @@ public class SqlBuilder {
    */
   public void addSelectFrom(String source) {
 
-    this.sql.append(this.dialect.select());
+    this.sqlBuilder.append(this.dialect.select());
     addFrom(source);
   }
 
@@ -267,8 +242,16 @@ public class SqlBuilder {
    */
   public void addDeleteFrom(String source) {
 
-    this.sql.append(this.dialect.delete());
+    this.sqlBuilder.append(this.dialect.delete());
     addFrom(source);
+  }
+
+  /**
+   * Adds {@link SqlDialect#from()}.
+   */
+  public void addFrom() {
+
+    this.sqlBuilder.append(this.dialect.from());
   }
 
   /**
@@ -276,7 +259,7 @@ public class SqlBuilder {
    */
   public void addFrom(String source) {
 
-    this.sql.append(this.dialect.from());
+    this.sqlBuilder.append(this.dialect.from());
     addSource(source);
   }
 
@@ -285,7 +268,7 @@ public class SqlBuilder {
    */
   public void addInsertInto(String source) {
 
-    this.sql.append(this.dialect.insertInto());
+    this.sqlBuilder.append(this.dialect.insertInto());
     addSource(source);
   }
 
@@ -294,7 +277,7 @@ public class SqlBuilder {
    */
   protected void addSource(String source) {
 
-    this.sql.append(this.dialect.ref(source));
+    this.sqlBuilder.append(this.dialect.ref(source));
   }
 
   /**
@@ -302,51 +285,8 @@ public class SqlBuilder {
    */
   public void addUpdate(String source) {
 
-    this.sql.append(this.dialect.update());
+    this.sqlBuilder.append(this.dialect.update());
     addSource(source);
   }
 
-  /**
-   * @param offset the number of rows to skip.
-   * @param limit the maximum number of rows to retrieve.
-   */
-  public void addPaging(long offset, long limit) {
-
-    if (offset != 0) {
-      String sqlOffset = this.dialect.offset();
-      if (!sqlOffset.isEmpty()) {
-        this.sql.append(sqlOffset);
-        addVariable(Long.valueOf(offset));
-      }
-    }
-    if (limit != Long.MAX_VALUE) {
-      String sqlLimit = this.dialect.limit();
-      if (!sqlLimit.isEmpty()) {
-        this.sql.append(sqlLimit);
-        addVariable(Long.valueOf(limit));
-      }
-    }
-  }
-
-  /**
-   * @param setExpressionList the {@link List} of {@link SetExpression}s.
-   */
-  public void addSet(List<SetExpression<?>> setExpressionList) {
-
-    if ((setExpressionList == null) || (setExpressionList.isEmpty())) {
-      return;
-    }
-    this.sql.append(this.dialect.set());
-    String separator = null;
-    for (SetExpression<?> setExp : setExpressionList) {
-      if (separator == null) {
-        separator = this.dialect.separator();
-      } else {
-        this.sql.append(separator);
-      }
-      this.sql.append(this.dialect.ref(setExp.getPath().getName()));
-      this.sql.append(this.dialect.setAssignment());
-      addArg(setExp.getAssignment());
-    }
-  }
 }

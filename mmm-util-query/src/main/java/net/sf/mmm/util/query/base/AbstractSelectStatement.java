@@ -2,13 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.SelectStatement;
+import net.sf.mmm.util.query.base.feature.FeatureGroupByImpl;
+import net.sf.mmm.util.query.base.feature.FeatureOrderByImpl;
+import net.sf.mmm.util.query.base.feature.FeaturePagingImpl;
+import net.sf.mmm.util.query.base.feature.FeatureWhereImpl;
 
 /**
  * This is the abstract base-implementation of {@link SelectStatement}.
@@ -19,12 +20,8 @@ import net.sf.mmm.util.query.api.SelectStatement;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractSelectStatement<E, SELF extends AbstractSelectStatement<E, SELF>>
+public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E, SELF>>
     extends AbstractStatement<E, SELF> implements SelectStatement<E, SELF> {
-
-  private final List<OrderByExpression> orderByList;
-
-  private final List<PropertyPath<?>> groupByList;
 
   /**
    * The constructor.
@@ -33,88 +30,48 @@ public abstract class AbstractSelectStatement<E, SELF extends AbstractSelectStat
    */
   public AbstractSelectStatement(SqlDialect dialect) {
     super(dialect);
-    this.orderByList = new ArrayList<>();
-    this.groupByList = new ArrayList<>();
   }
 
   @Override
   public SELF where(Expression... expressions) {
 
-    return super.where(expressions);
+    feature(FeatureWhereImpl.class).where(expressions);
+    return self();
   }
 
   @Override
   public SELF orderBy(PropertyPath<?> path, SortOrder order) {
 
-    this.orderByList.add(new OrderByExpression(path, order));
+    feature(FeatureOrderByImpl.class).orderBy(path, order);
     return self();
   }
 
   @Override
   public SELF groupBy(PropertyPath<?> path) {
 
-    this.groupByList.add(path);
+    feature(FeatureGroupByImpl.class).groupBy(path);
     return self();
   }
 
   @Override
-  public SELF limit(long newLimit) {
+  public SELF limit(int limit) {
 
-    return super.limit(newLimit);
+    feature(FeaturePagingImpl.class).limit(limit);
+    return self();
   }
 
   @Override
-  public SELF offset(long newOffset) {
+  public SELF offset(long offset) {
 
-    return super.offset(newOffset);
+    feature(FeaturePagingImpl.class).offset(offset);
+    return self();
   }
 
   @Override
-  protected void buildMain(SqlBuilder builder) {
+  protected void build(SqlBuilder builder) {
 
-    builder.addFrom(getSource());
-    super.buildMain(builder);
-    builder.addGroupBy(this.groupByList);
-    builder.addOrderBy(this.orderByList);
-  }
-
-  /**
-   * A single expression of an {@code ORDER BY} clause.
-   */
-  protected static class OrderByExpression {
-
-    private final PropertyPath<?> path;
-
-    private final SortOrder order;
-
-    /**
-     * The constructor.
-     *
-     * @param path the {@link PropertyPath}.
-     * @param order the {@link SortOrder}.
-     */
-    public OrderByExpression(PropertyPath<?> path, SortOrder order) {
-      super();
-      this.path = path;
-      this.order = order;
-    }
-
-    /**
-     * @return the {@link PropertyPath}.
-     */
-    public PropertyPath<?> getPath() {
-
-      return this.path;
-    }
-
-    /**
-     * @return the {@link SortOrder}.
-     */
-    public SortOrder getOrder() {
-
-      return this.order;
-    }
-
+    builder.getBuffer().append(getSqlDialect().from());
+    super.build(builder);
   }
 
 }

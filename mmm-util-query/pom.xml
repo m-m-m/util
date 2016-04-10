@@ -31,6 +31,12 @@
       <optional>true</optional>
     </dependency>
     <dependency>
+      <groupId>com.orientechnologies</groupId>
+      <artifactId>orientdb-server</artifactId>
+      <version>2.1.9</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
       <scope>test</scope>

@@ -13,7 +13,6 @@ import org.junit.Test;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.impl.BeanFactoryImpl;
-import net.sf.mmm.util.bean.impl.example.ExampleBean;
 import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.property.base.expression.Expressions;
@@ -26,10 +25,7 @@ import net.sf.mmm.util.query.api.feature.FeatureSet;
 import net.sf.mmm.util.query.api.feature.FeatureValues;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.base.AbstractSelectStatement;
-import net.sf.mmm.util.query.base.AbstractStatement;
-import net.sf.mmm.util.query.base.DefaultSqlDialect;
-import net.sf.mmm.util.query.base.SqlDialect;
+import net.sf.mmm.util.query.base.example.QueryTestBean;
 import net.sf.mmm.util.query.base.jpql.JpqlDialect;
 
 /**
@@ -37,9 +33,9 @@ import net.sf.mmm.util.query.base.jpql.JpqlDialect;
  *
  * @author hohwille
  */
-public abstract class AbstractStatementTest<S extends Statement<ExampleBean, S>> extends Assertions {
+public abstract class AbstractStatementTest<S extends Statement<QueryTestBean, S>> extends Assertions {
 
-  private ExampleBean prototype;
+  private QueryTestBean prototype;
 
   private Set<Class<? extends StatementFeature>> features;
 
@@ -50,10 +46,10 @@ public abstract class AbstractStatementTest<S extends Statement<ExampleBean, S>>
 
   protected abstract S createStatement(SqlDialect dialect);
 
-  protected ExampleBean getPrototype() {
+  protected QueryTestBean getPrototype() {
 
     if (this.prototype == null) {
-      this.prototype = BeanFactoryImpl.getInstance().createPrototype(ExampleBean.class);
+      this.prototype = BeanFactoryImpl.getInstance().createPrototype(QueryTestBean.class);
     }
     return this.prototype;
   }
@@ -100,7 +96,7 @@ public abstract class AbstractStatementTest<S extends Statement<ExampleBean, S>>
     S statement = createStatement(dialect);
 
     // test "empty" statement
-    String sql = getSqlStart() + quote(statement, ExampleBean.class.getSimpleName());
+    String sql = getSqlStart() + quote(statement, QueryTestBean.class.getSimpleName());
     assertThat(statement.getSql()).isEqualTo(sql);
     assertThat(statement.getVariables()).isEmpty();
 
@@ -120,9 +116,9 @@ public abstract class AbstractStatementTest<S extends Statement<ExampleBean, S>>
 
     // given
     S statement = createStatement();
-    ExampleBean prototype = getPrototype();
+    QueryTestBean prototype = getPrototype();
 
-    String sql = getSqlStart() + quote(statement, ExampleBean.class.getSimpleName());
+    String sql = getSqlStart() + quote(statement, QueryTestBean.class.getSimpleName());
 
     FeatureWhere<?> where = asFeature(FeatureWhere.class, statement);
     if (where != null) {
@@ -306,11 +302,11 @@ public abstract class AbstractStatementTest<S extends Statement<ExampleBean, S>>
     }
 
     // add limit
-    long limit = 100L;
+    int limit = 100;
     sLimit.limit(limit);
     String sqlLimit = sql;
     if (!statement.getSqlDialect().limit().isEmpty()) {
-      sqlLimit = sqlLimit + " LIMIT " + variable(statement, variables, Long.valueOf(limit));
+      sqlLimit = sqlLimit + " LIMIT " + variable(statement, variables, Integer.valueOf(limit));
     }
     assertThat(statement.getSql()).isEqualTo(sqlLimit);
     assertThat(statement.getVariables()).containsExactlyElementsOf(variables);

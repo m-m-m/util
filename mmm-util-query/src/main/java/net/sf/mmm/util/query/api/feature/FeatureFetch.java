@@ -4,9 +4,11 @@ package net.sf.mmm.util.query.api.feature;
 
 import java.util.List;
 
+import net.sf.mmm.util.exception.api.ObjectNotFoundException;
+
 /**
- * A {@link FeatureFetch} is for a regular query {@link net.sf.mmm.util.query.api.Statement} to fetch and
- * retrieve results.
+ * A {@link FeatureFetch} is for a regular query {@link net.sf.mmm.util.query.api.Statement} to fetch and retrieve
+ * results.
  *
  * @see net.sf.mmm.util.query.api.SelectStatement
  *
@@ -33,11 +35,39 @@ public abstract interface FeatureFetch<E> extends StatementFeature {
   E fetchFirst();
 
   /**
+   * Executes this query to fetch the first matching result.
+   *
+   * @return the first matching result or {@code null} if no result is found.
+   */
+  default E fetchFirstRequired() {
+
+    E result = fetchFirst();
+    if (result == null) {
+      throw new ObjectNotFoundException(toString());
+    }
+    return result;
+  }
+
+  /**
    * Executes this query to fetch a unique result.
    *
    * @return the unique result or {@code null} if no result is found.
    */
   E fetchOne();
+
+  /**
+   * Executes this query to fetch a unique result.
+   *
+   * @return the unique result or {@code null} if no result is found.
+   */
+  default E fetchOneRequired() {
+
+    E result = fetchOne();
+    if (result == null) {
+      throw new ObjectNotFoundException(toString());
+    }
+    return result;
+  }
 
   /**
    * Executes this query as a COUNT-query.

@@ -7,27 +7,24 @@ import java.util.List;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
-import net.sf.mmm.util.bean.impl.example.ExampleBean;
 import net.sf.mmm.util.query.api.SelectStatement;
 import net.sf.mmm.util.query.api.feature.FeatureLimit;
 import net.sf.mmm.util.query.api.feature.FeatureModify;
 import net.sf.mmm.util.query.api.feature.FeatureSet;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.base.AbstractSelectStatement;
-import net.sf.mmm.util.query.base.AbstractUpdateStatement;
-import net.sf.mmm.util.query.base.SqlDialect;
 import net.sf.mmm.util.query.base.UpdateStatementTest.TestUpdateStatement;
+import net.sf.mmm.util.query.base.example.QueryTestBean;
 
 /**
  * Test of {@link SelectStatement} and {@link AbstractSelectStatement}.
  *
  * @author hohwille
  */
-public class UpdateStatementTest extends AbstractStatementTest<TestUpdateStatement<ExampleBean>> {
+public class UpdateStatementTest extends AbstractStatementTest<TestUpdateStatement<QueryTestBean>> {
 
   @Override
-  protected TestUpdateStatement<ExampleBean> createStatement(SqlDialect dialect) {
+  protected TestUpdateStatement<QueryTestBean> createStatement(SqlDialect dialect) {
 
     return new TestUpdateStatement<>(getPrototype(), dialect);
   }

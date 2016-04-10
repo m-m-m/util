@@ -5,6 +5,8 @@ package net.sf.mmm.util.property.api.path;
 import javafx.beans.property.ReadOnlyProperty;
 import net.sf.mmm.util.pojo.path.api.TypedPath;
 import net.sf.mmm.util.property.api.ReadableProperty;
+import net.sf.mmm.util.query.api.variable.Variable;
+import net.sf.mmm.util.query.base.SqlDialect;
 
 /**
  * This is an implementation of {@link TypedPath} that can be build from any {@link ReadOnlyProperty}.
@@ -93,4 +95,21 @@ public class SimplePropertyPath<V> implements PropertyPath<V>, TypedPath<V> {
     return new SimplePropertyPath<>(null, readableProperty);
   }
 
+  /**
+   * @param <V> the generic type of the {@link ReadOnlyProperty property} {@link ReadOnlyProperty#getValue() value}.
+   * @param variable the {@link Variable} to start the path with.
+   * @param dialect the {@link SqlDialect}.
+   * @param path the {@link PropertyPath} to join to the given {@link Variable}.
+   * @return the {@link SimplePropertyPath} joining the {@link Variable} with the {@link PropertyPath}.
+   */
+  public static <V> SimplePropertyPath<V> of(Variable<?> variable, SqlDialect dialect, PropertyPath<V> path) {
+
+    String var = dialect.variable(variable);
+    if (path instanceof ReadableProperty) {
+      return new SimplePropertyPath<>(var, (ReadableProperty<V>) path);
+    } else {
+      SimplePropertyPath<V> spp = (SimplePropertyPath<V>) path;
+      return new SimplePropertyPath<>(var + "." + spp.parentPath, spp.property);
+    }
+  }
 }

@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.api.ModifyStatement;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractModifyStatement<E, SELF extends AbstractModifyStatement<E, SELF>>
+public abstract class AbstractModifyStatement<E, SELF extends ModifyStatement<E, SELF>>
     extends AbstractStatement<E, SELF> implements ModifyStatement<E, SELF> {
 
   /**

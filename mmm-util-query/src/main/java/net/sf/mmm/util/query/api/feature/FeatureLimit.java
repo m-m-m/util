@@ -4,7 +4,7 @@ package net.sf.mmm.util.query.api.feature;
 
 /**
  * This is the abstract interface for a query {@link net.sf.mmm.util.query.api.Statement} with support for
- * {@link #limit(long)}.
+ * {@link #limit(int)}.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
@@ -19,6 +19,6 @@ public abstract interface FeatureLimit<SELF extends FeatureLimit<SELF>> extends 
    * @param limit the limit for the maximum number of matches for the query.
    * @return this query instance for fluent API calls.
    */
-  SELF limit(long limit);
+  SELF limit(int limit);
 
 }

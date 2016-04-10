@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base.orientdb;
 
+import net.sf.mmm.util.query.api.variable.Variable;
 import net.sf.mmm.util.query.base.SqlDialect;
 
 /**
@@ -26,6 +27,12 @@ public class OrientDbDialect extends Object implements SqlDialect {
   public String quoteReference() {
 
     return "";
+  }
+
+  @Override
+  public String variable(Variable<?> variable) {
+
+    return "$" + variable.getName();
   }
 
 }

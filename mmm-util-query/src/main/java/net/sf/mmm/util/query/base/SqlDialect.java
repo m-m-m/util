@@ -5,6 +5,7 @@ package net.sf.mmm.util.query.base;
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.property.base.expression.SqlOperator;
+import net.sf.mmm.util.query.api.variable.Variable;
 
 /**
  * This is the interface for an SQL dialect.
@@ -23,7 +24,23 @@ public interface SqlDialect {
   }
 
   /**
-   * @return the {@code INSERT} statement keyword.
+   * @return {@link #select()} {@link #countAll()}.
+   */
+  default String selectCountAll() {
+
+    return select() + countAll();
+  }
+
+  /**
+   * @return the {@code COUNT(*)} selector.
+   */
+  default String countAll() {
+
+    return " COUNT (*)";
+  }
+
+  /**
+   * @return {@link #insert()} {@link #into()}.
    */
   default String insertInto() {
 
@@ -60,6 +77,14 @@ public interface SqlDialect {
   default String delete() {
 
     return "DELETE ";
+  }
+
+  /**
+   * @return {@link #delete()} {@link #from()}.
+   */
+  default String deleteFrom() {
+
+    return delete() + from();
   }
 
   /**
@@ -119,9 +144,17 @@ public interface SqlDialect {
   }
 
   /**
-   * @return the assignment of a {@link #set() SET} expression.
+   * @return the {@code LET} keyword.
    */
-  default Object setAssignment() {
+  default String let() {
+
+    return " LET ";
+  }
+
+  /**
+   * @return the assignment of a {@link #set() SET} or {@link #let() LET} expression.
+   */
+  default Object assignment() {
 
     return " = ";
   }
@@ -377,6 +410,15 @@ public interface SqlDialect {
   default String variable(int index) {
 
     return "?";
+  }
+
+  /**
+   * @param variable the {@link Variable}.
+   * @return the SQL for the {@link Variable}.
+   */
+  default String variable(Variable<?> variable) {
+
+    return ":" + variable.getName();
   }
 
   /**

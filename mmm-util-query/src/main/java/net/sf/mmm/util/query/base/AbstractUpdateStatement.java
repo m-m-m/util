@@ -4,6 +4,8 @@ package net.sf.mmm.util.query.base;
 
 import net.sf.mmm.util.property.api.expression.Expression;
 import net.sf.mmm.util.query.api.UpdateStatement;
+import net.sf.mmm.util.query.base.feature.FeaturePagingImpl;
+import net.sf.mmm.util.query.base.feature.FeatureWhereImpl;
 
 /**
  * This is the abstract base-implementation of {@link UpdateStatement}.
@@ -14,7 +16,7 @@ import net.sf.mmm.util.query.api.UpdateStatement;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractUpdateStatement<E, SELF extends AbstractUpdateStatement<E, SELF>>
+public abstract class AbstractUpdateStatement<E, SELF extends UpdateStatement<E, SELF>>
     extends AbstractStoreStatement<E, SELF> implements UpdateStatement<E, SELF> {
 
   /**
@@ -29,20 +31,22 @@ public abstract class AbstractUpdateStatement<E, SELF extends AbstractUpdateStat
   @Override
   public SELF where(Expression... expressions) {
 
-    return super.where(expressions);
+    feature(FeatureWhereImpl.class).where(expressions);
+    return self();
   }
 
   @Override
-  public SELF limit(long newLimit) {
+  public SELF limit(int limit) {
 
-    return super.limit(newLimit);
+    feature(FeaturePagingImpl.class).limit(limit);
+    return self();
   }
 
   @Override
-  protected void buildStart(SqlBuilder builder) {
+  protected void build(SqlBuilder builder) {
 
-    builder.addUpdate(getSource());
-    super.buildStart(builder);
+    builder.getBuffer().append(getSqlDialect().update());
+    super.build(builder);
   }
 
 }

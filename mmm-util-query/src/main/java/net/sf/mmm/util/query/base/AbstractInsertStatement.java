@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.api.InsertStatement;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractInsertStatement<E, SELF extends AbstractInsertStatement<E, SELF>>
+public abstract class AbstractInsertStatement<E, SELF extends InsertStatement<E, SELF>>
     extends AbstractStoreStatement<E, SELF> implements InsertStatement<E, SELF> {
 
   /**
@@ -26,10 +26,10 @@ public abstract class AbstractInsertStatement<E, SELF extends AbstractInsertStat
   }
 
   @Override
-  protected void buildStart(SqlBuilder builder) {
+  protected void build(SqlBuilder builder) {
 
-    builder.addInsertInto(getSource());
-    super.buildStart(builder);
+    builder.getBuffer().append(getSqlDialect().insertInto());
+    super.build(builder);
   }
 
 }
