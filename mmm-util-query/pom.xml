@@ -9,7 +9,7 @@
     <relativePath>../mmm-util-modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-query</artifactId>
-  <version>${net.sf.mmm.util.version}</version>
+  <version>${net.sf.mmm.util8.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project allows to build queries with a fluent and type-safe API.</description>
@@ -18,7 +18,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-property</artifactId>
-      <version>${net.sf.mmm.util.version}</version>
+      <version>${net.sf.mmm.util8.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>

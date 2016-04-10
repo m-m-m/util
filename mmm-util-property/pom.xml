@@ -9,7 +9,7 @@
     <relativePath>../mmm-util-modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-property</artifactId>
-  <version>${net.sf.mmm.util.version}</version>
+  <version>${net.sf.mmm.util8.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project provides advanced property and bean support to make your life a lot easier.</description>
