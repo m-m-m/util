@@ -7,10 +7,10 @@ import java.util.List;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
- * A {@link FeatureFetch} is for a regular query {@link net.sf.mmm.util.query.api.Statement} to fetch and retrieve
+ * A {@link FeatureFetch} is for a regular query {@link net.sf.mmm.util.query.api.statement.Statement} to fetch and retrieve
  * results.
  *
- * @see net.sf.mmm.util.query.api.SelectStatement
+ * @see net.sf.mmm.util.query.api.statement.SelectStatement
  *
  * @param <E> the generic type of the entity to fetch.
  *

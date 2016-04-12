@@ -3,8 +3,8 @@
 package net.sf.mmm.util.query.api.feature;
 
 /**
- * This is the abstract interface for a query {@link net.sf.mmm.util.query.api.Statement} with paging support
- * via {@link #limit(long)} and {@link #offset(long)}.
+ * This is the abstract interface for a query {@link net.sf.mmm.util.query.api.statement.Statement} with paging support via
+ * {@link #limit(int)} and {@link #offset(long)}.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
@@ -15,7 +15,7 @@ public abstract interface FeaturePaging<SELF extends FeaturePaging<SELF>> extend
 
   /**
    * Set the offset for the query results. Should be called only once per query. The offset is useful for paging results
-   * in combination with {@link #limit(long)}).
+   * in combination with {@link #limit(int)}).
    *
    * @param offset the number of results to skip.
    * @return this query instance for fluent API calls.

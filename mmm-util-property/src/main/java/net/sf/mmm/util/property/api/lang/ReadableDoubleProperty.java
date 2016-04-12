@@ -15,7 +15,7 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableDoubleProperty extends ReadableNumberProperty, ObservableDoubleValue {
+public interface ReadableDoubleProperty extends ReadableNumberProperty<Double>, ObservableDoubleValue {
 
   /** @see #getType() */
   GenericType<Double> TYPE = new SimpleGenericTypeImpl<>(Double.class);

@@ -121,13 +121,17 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
       this.declaredPropertyNamesMutable = new HashSet<>(master.declaredPropertyNamesMutable);
       this.aliasMap = master.aliasMap;
       this.aliases = master.aliases;
-      this.method2OperationMap = master.method2OperationMap;
       // copy properties from master to new prototype
       for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {
         AbstractProperty<?> property = prototypeProperty.getProperty();
         BeanPrototypeProperty copy = new BeanPrototypeProperty(property.copy(getBean()),
             prototypeProperty.getIndex());
         this.name2PropertyMap.put(property.getName(), copy);
+      }
+      this.method2OperationMap = new HashMap<>(master.method2OperationMap.size());
+      for (BeanPrototypeOperation prototypeOperation : master.method2OperationMap.values()) {
+        BeanPrototypeOperation copy = prototypeOperation.forPrototype(this);
+        this.method2OperationMap.put(copy.getMethod(), copy);
       }
     }
     this.propertyNames = Collections.unmodifiableSet(this.name2PropertyMap.keySet());

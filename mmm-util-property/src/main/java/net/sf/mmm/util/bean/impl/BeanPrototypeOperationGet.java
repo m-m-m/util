@@ -66,4 +66,11 @@ public class BeanPrototypeOperationGet extends BeanPrototypeOperationOnProperty 
     return value;
   }
 
+  @Override
+  public BeanPrototypeOperation forPrototype(BeanAccessPrototype<?> prototype) {
+
+    return new BeanPrototypeOperationGet(prototype, getMethod(),
+        prototype.getPrototypeProperty(getProperty().getProperty().getName()));
+  }
+
 }

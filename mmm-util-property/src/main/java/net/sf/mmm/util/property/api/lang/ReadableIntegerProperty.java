@@ -13,7 +13,7 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableIntegerProperty extends ReadableIntegerBindingProperty, ObservableIntegerValue {
+public interface ReadableIntegerProperty extends ReadableIntegerBindingProperty<Integer>, ObservableIntegerValue {
 
   /** @see #getType() */
   GenericType<Integer> TYPE = new SimpleGenericTypeImpl<>(Integer.class);

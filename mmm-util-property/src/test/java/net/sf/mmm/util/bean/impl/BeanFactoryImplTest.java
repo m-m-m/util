@@ -22,6 +22,20 @@ import net.sf.mmm.util.bean.impl.example.ExtendedExampleBean;
 public class BeanFactoryImplTest extends AbstractBeanTest {
 
   @Test
+  public void testPrototype() {
+
+    BeanFactory beanFactory = getBeanFactory();
+    ExamplePropertyBean prototype = beanFactory.createPrototype(ExamplePropertyBean.class);
+    assertThat(prototype.Name().getBean()).isSameAs(prototype);
+    assertThat(prototype.access().isPrototype()).isTrue();
+    assertThat(prototype.access().isDynamic()).isFalse();
+    assertThat(prototype.access().getBeanClass()).isEqualTo(ExamplePropertyBean.class);
+    assertThat(prototype.access().getSimpleName()).isEqualTo("RenamedBean");
+    assertThat(prototype.access().getDeclaredPropertyNames()).containsOnly("CountryCode", "Name", "Age", "Friend",
+        "Orientation");
+  }
+
+  @Test
   public void testExamplePropertyBean() {
 
     BeanFactory beanFactory = getBeanFactory();

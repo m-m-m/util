@@ -19,10 +19,12 @@ import net.sf.mmm.util.property.api.ReadableProperty;
  *
  * @see WritableNumberProperty
  *
+ * @param <N> is the generic type of the internal numeric {@link #getValue() value} representation.
+ *
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableNumberProperty extends ReadableProperty<Number>, NumberExpression {
+public interface ReadableNumberProperty<N extends Number> extends ReadableProperty<Number>, NumberExpression {
 
   @Override
   default NumberBinding negate() {

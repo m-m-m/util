@@ -3,7 +3,7 @@
 package net.sf.mmm.util.query.api.feature;
 
 /**
- * Marker interface for a feature on a {@link net.sf.mmm.util.query.api.Statement}.
+ * Marker interface for a feature on a {@link net.sf.mmm.util.query.api.statement.Statement}.
  *
  * @author hohwille
  * @since 8.0.0

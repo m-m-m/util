@@ -111,4 +111,9 @@ public abstract class BeanPrototypeOperation {
     return true;
   }
 
+  public BeanPrototypeOperation forPrototype(BeanAccessPrototype<?> prototype) {
+
+    return this;
+  }
+
 }

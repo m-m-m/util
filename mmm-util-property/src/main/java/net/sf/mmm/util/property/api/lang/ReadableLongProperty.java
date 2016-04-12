@@ -16,7 +16,7 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableLongProperty extends ReadableNumberProperty, ObservableLongValue {
+public interface ReadableLongProperty extends ReadableNumberProperty<Long>, ObservableLongValue {
 
   /** @see #getType() */
   GenericType<Long> TYPE = new SimpleGenericTypeImpl<>(Long.class);

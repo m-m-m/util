@@ -15,7 +15,7 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableFloatProperty extends ReadableNumberProperty, ObservableFloatValue {
+public interface ReadableFloatProperty extends ReadableNumberProperty<Float>, ObservableFloatValue {
 
   /** @see #getType() */
   GenericType<Float> TYPE = new SimpleGenericTypeImpl<>(Float.class);

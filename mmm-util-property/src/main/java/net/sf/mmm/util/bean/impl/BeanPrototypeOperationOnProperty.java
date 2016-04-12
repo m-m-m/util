@@ -35,6 +35,14 @@ public abstract class BeanPrototypeOperationOnProperty extends BeanPrototypeOper
   }
 
   /**
+   * @return the {@link BeanPrototypeProperty}.
+   */
+  public BeanPrototypeProperty getProperty() {
+
+    return this.prototypeProperty;
+  }
+
+  /**
    * @return <code>true</code> if the {@link WritableProperty} is required for this operation, <code>false</code>
    *         otherwise.
    */
@@ -58,5 +66,8 @@ public abstract class BeanPrototypeOperationOnProperty extends BeanPrototypeOper
    * @return the result of the invocation.
    */
   protected abstract Object doInvoke(WritableProperty<?> property, Object[] args);
+
+  @Override
+  public abstract BeanPrototypeOperation forPrototype(BeanAccessPrototype<?> prototype);
 
 }

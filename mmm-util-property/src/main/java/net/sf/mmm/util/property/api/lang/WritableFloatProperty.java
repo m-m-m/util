@@ -12,7 +12,8 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableFloatProperty extends ReadableFloatProperty, WritableNumberProperty, WritableFloatValue {
+public interface WritableFloatProperty
+    extends ReadableFloatProperty, WritableNumberProperty<Float>, WritableFloatValue {
 
   @Override
   default float get() {

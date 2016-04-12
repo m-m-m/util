@@ -19,11 +19,11 @@ import net.sf.mmm.util.reflect.api.GenericType;
 public interface ReadableProperty<V> extends ReadOnlyProperty<V>, PropertyPath<V> {
 
   /**
-   * @return the type of the property. Please note that the generic signature of this method is returning the type
-   *         {@link GenericType}{@literal <? extends VALUE>} instead of {@link GenericType}{@literal <VALUE>} because
-   *         JavaFx is binding the type {@link Number} for all numeric properties while e.g. {@link IntegerProperty}
-   *         should be able to return {@link GenericType}{@literal <Integer>} what is compatible with
-   *         {@link GenericType}{@literal <? extends Number>}.
+   * @return the type of the property {@link #getValue() value}. Please note that the generic signature of this method
+   *         is returning the type {@link GenericType}{@literal <? extends V>} instead of {@link GenericType}
+   *         {@literal <V>} because JavaFx is binding the type {@link Number} for all numeric properties while e.g.
+   *         {@link IntegerProperty} should be able to return {@link GenericType}{@literal <Integer>} what is compatible
+   *         with {@link GenericType}{@literal <? extends Number>}.
    */
   GenericType<? extends V> getType();
 

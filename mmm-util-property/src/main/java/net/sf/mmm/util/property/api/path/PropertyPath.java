@@ -10,7 +10,6 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  *
  * @see net.sf.mmm.util.pojo.path.api.PojoPropertyPath
  * @see net.sf.mmm.util.property.api.ReadableProperty
- * @see SimplePropertyPath
  *
  * @param <V> the generic type of the property value identified by this path.
  *

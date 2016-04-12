@@ -9,11 +9,13 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * This is the interface for a {@link WritableProperty} of the {@link #getValue() value}-{@link #getType() type}
  * {@link Number}.
  *
+ * @param <N> is the generic type of the internal numeric {@link #getValue() value} representation.
+ *
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableNumberProperty
-    extends ReadableNumberProperty, WritableProperty<Number>, WritableNumberValue {
+public interface WritableNumberProperty<N extends Number>
+    extends ReadableNumberProperty<N>, WritableProperty<Number>, WritableNumberValue {
 
   // nothing to add...
 

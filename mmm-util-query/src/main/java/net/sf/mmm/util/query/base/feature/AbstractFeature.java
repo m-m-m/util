@@ -3,10 +3,15 @@
 package net.sf.mmm.util.query.base.feature;
 
 import net.sf.mmm.util.lang.api.Conjunction;
-import net.sf.mmm.util.property.api.expression.Expression;
-import net.sf.mmm.util.property.base.expression.Expressions;
+import net.sf.mmm.util.property.api.ReadableProperty;
+import net.sf.mmm.util.property.api.path.PropertyPath;
+import net.sf.mmm.util.query.api.argument.Argument;
+import net.sf.mmm.util.query.api.expression.Expression;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.base.SqlBuilder;
+import net.sf.mmm.util.query.api.statement.Statement;
+import net.sf.mmm.util.query.base.expression.Expressions;
+import net.sf.mmm.util.query.base.statement.AbstractStatement;
+import net.sf.mmm.util.query.base.statement.SqlBuilder;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
@@ -59,6 +64,8 @@ public abstract class AbstractFeature implements StatementFeature, Comparable<Ab
 
   private final int sortIndex;
 
+  private AbstractStatement<?, ?> statement;
+
   /**
    * The constructor.
    *
@@ -76,6 +83,40 @@ public abstract class AbstractFeature implements StatementFeature, Comparable<Ab
   public int getSortIndex() {
 
     return this.sortIndex;
+  }
+
+  /**
+   * @return the {@link Statement}.
+   */
+  public AbstractStatement<?, ?> getStatement() {
+
+    return this.statement;
+  }
+
+  /**
+   * @param statement is the {@link Statement} to set.
+   */
+  public void setStatement(AbstractStatement<?, ?> statement) {
+
+    if (this.statement != null) {
+      throw new IllegalStateException();
+    }
+    this.statement = statement;
+  }
+
+  /**
+   * @param <V> the generic type of the property value identified by path.
+   * @param path the {@link PropertyPath}.
+   * @return the given {@code path} as {@link Argument}.
+   */
+  @SuppressWarnings("unchecked")
+  protected <V> Argument<V> asArg(PropertyPath<V> path) {
+
+    if (path instanceof Argument) {
+      return (Argument<V>) path;
+    } else {
+      return this.statement.getAlias().to((ReadableProperty<V>) path);
+    }
   }
 
   /**

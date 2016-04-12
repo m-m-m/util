@@ -3,9 +3,9 @@
 package net.sf.mmm.util.query.base.feature;
 
 import net.sf.mmm.util.lang.api.Conjunction;
-import net.sf.mmm.util.property.api.expression.Expression;
+import net.sf.mmm.util.query.api.expression.Expression;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
-import net.sf.mmm.util.query.base.SqlBuilder;
+import net.sf.mmm.util.query.base.statement.SqlBuilder;
 
 /**
  * Implementation of {@link AbstractFeature} for {@link FeatureWhere}.

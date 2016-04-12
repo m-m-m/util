@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.mmm.util.property.api.path.PropertyPath;
-import net.sf.mmm.util.property.base.expression.Arg;
+import net.sf.mmm.util.query.api.argument.Argument;
 import net.sf.mmm.util.query.api.feature.FeatureSet;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
-import net.sf.mmm.util.query.base.SqlBuilder;
-import net.sf.mmm.util.query.base.SqlDialect;
+import net.sf.mmm.util.query.base.argument.ConstantArgument;
+import net.sf.mmm.util.query.base.statement.SqlBuilder;
+import net.sf.mmm.util.query.base.statement.SqlDialect;
 
 /**
  * Implementation of {@link AbstractFeature} for {@link FeatureWhere}.
@@ -38,9 +39,9 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
   }
 
   @Override
-  public <V> FeatureSetImpl set(PropertyPath<V> path, PropertyPath<V> valuePath) {
+  public <V> FeatureSetImpl set(PropertyPath<V> path, PropertyPath<V> valuePropertyPath) {
 
-    this.setExpressionList.add(new SetExpression<>(path, valuePath));
+    this.setExpressionList.add(new SetExpression<>(path, asArg(valuePropertyPath)));
     return this;
   }
 
@@ -75,7 +76,7 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
 
     private final PropertyPath<V> path;
 
-    private final Arg<V> assignment;
+    private final Argument<V> assignment;
 
     /**
      * The constructor.
@@ -83,10 +84,10 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
      * @param path - see {@link #getPath()}.
      * @param assignment - see {@link #getAssignment()}.
      */
-    public SetExpression(PropertyPath<V> path, PropertyPath<V> assignment) {
+    public SetExpression(PropertyPath<V> path, Argument<V> assignment) {
       super();
       this.path = path;
-      this.assignment = new Arg<>(assignment);
+      this.assignment = assignment;
     }
 
     /**
@@ -98,11 +99,11 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
     public SetExpression(PropertyPath<V> path, V assignment) {
       super();
       this.path = path;
-      this.assignment = new Arg<>(assignment);
+      this.assignment = new ConstantArgument<>(assignment);
     }
 
     /**
-     * @return the path
+     * @return the {@link PropertyPath}.
      */
     public PropertyPath<V> getPath() {
 
@@ -110,9 +111,9 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
     }
 
     /**
-     * @return the assignment
+     * @return the {@link Argument} to assign.
      */
-    public Arg<V> getAssignment() {
+    public Argument<V> getAssignment() {
 
       return this.assignment;
     }

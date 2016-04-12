@@ -8,7 +8,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadName;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 
 /**
- * This class represents a simple variable to be used in query {@link net.sf.mmm.util.query.api.Statement}s.
+ * This class represents a simple variable to be used in query {@link net.sf.mmm.util.query.api.statement.Statement}s.
  *
  * @param <V> the generic type of the value represented by this variable.
  *

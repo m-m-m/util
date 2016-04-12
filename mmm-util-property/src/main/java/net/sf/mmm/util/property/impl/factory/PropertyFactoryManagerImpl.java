@@ -129,6 +129,7 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
     registerFactory(new PropertyFactoryList());
     registerFactory(new PropertyFactorySet());
     registerFactory(new PropertyFactoryMap());
+    registerFactory(new PropertyFactoryLink());
   }
 
   /**

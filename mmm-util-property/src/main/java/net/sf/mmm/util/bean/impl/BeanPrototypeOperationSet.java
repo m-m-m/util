@@ -42,4 +42,11 @@ public class BeanPrototypeOperationSet extends BeanPrototypeOperationOnProperty 
     return false;
   }
 
+  @Override
+  public BeanPrototypeOperation forPrototype(BeanAccessPrototype<?> prototype) {
+
+    return new BeanPrototypeOperationSet(prototype, getMethod(),
+        prototype.getPrototypeProperty(getProperty().getProperty().getName()));
+  }
+
 }

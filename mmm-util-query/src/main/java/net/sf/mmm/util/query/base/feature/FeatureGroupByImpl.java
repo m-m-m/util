@@ -8,8 +8,8 @@ import java.util.List;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.feature.FeatureGroupBy;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
-import net.sf.mmm.util.query.base.SqlBuilder;
-import net.sf.mmm.util.query.base.SqlDialect;
+import net.sf.mmm.util.query.base.statement.SqlBuilder;
+import net.sf.mmm.util.query.base.statement.SqlDialect;
 
 /**
  * Implementation of {@link AbstractFeature} for {@link FeatureWhere}.

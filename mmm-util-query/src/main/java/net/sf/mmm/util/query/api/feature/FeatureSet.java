@@ -5,7 +5,7 @@ package net.sf.mmm.util.query.api.feature;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 
 /**
- * This is the abstract interface for a query {@link net.sf.mmm.util.query.api.Statement} allowing a
+ * This is the abstract interface for a query {@link net.sf.mmm.util.query.api.statement.Statement} allowing a
  * {@link #set(PropertyPath, Object) SET clause}.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
@@ -26,11 +26,11 @@ public abstract interface FeatureSet<SELF extends FeatureSet<SELF>> extends Stat
   <V> SELF set(PropertyPath<V> path, V value);
 
   /**
-   * Adds a value binding setting the given {@link PropertyPath} to the value of the given {@code valuePath}.
+   * Adds a value binding setting the given {@link PropertyPath} to the value of the given {@code valuePropertyPath}.
    *
    * @param <V> the generic type of the {@code value}.
    * @param path the {@link PropertyPath} to set.
-   * @param valuePath the {@link PropertyPath} pointing to the value to set the given {@code path} to.
+   * @param valuePath the {@link PropertyPath} pointing to the value to set the given {@code PropertyPath} to.
    * @return this query instance for fluent API calls.
    */
   <V> SELF set(PropertyPath<V> path, PropertyPath<V> valuePath);

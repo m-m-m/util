@@ -4,7 +4,7 @@ package net.sf.mmm.util.query.base.feature;
 
 import net.sf.mmm.util.query.api.feature.FeaturePaging;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
-import net.sf.mmm.util.query.base.SqlBuilder;
+import net.sf.mmm.util.query.base.statement.SqlBuilder;
 
 /**
  * Implementation of {@link AbstractFeature} for {@link FeatureWhere}.
@@ -64,14 +64,14 @@ public class FeaturePagingImpl extends AbstractFeature implements FeaturePaging<
       String sqlOffset = builder.getDialect().offset();
       if (!sqlOffset.isEmpty()) {
         builder.getBuffer().append(sqlOffset);
-        builder.addVariable(Long.valueOf(this.offset));
+        builder.addParameter(Long.valueOf(this.offset));
       }
     }
     if (this.limit != Integer.MAX_VALUE) {
       String sqlLimit = builder.getDialect().limit();
       if (!sqlLimit.isEmpty()) {
         builder.getBuffer().append(sqlLimit);
-        builder.addVariable(Integer.valueOf(this.limit));
+        builder.addParameter(Integer.valueOf(this.limit));
       }
     }
   }

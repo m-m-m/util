@@ -3,11 +3,12 @@
 package net.sf.mmm.util.query.api.feature;
 
 import net.sf.mmm.util.property.api.path.PropertyPath;
-import net.sf.mmm.util.query.api.Statement;
+import net.sf.mmm.util.query.api.statement.Statement;
 import net.sf.mmm.util.query.api.variable.Variable;
 
 /**
- * Extends {@link Statement} for a query {@link net.sf.mmm.util.query.api.Statement} with support for #let block.
+ * Extends {@link Statement} for a query {@link net.sf.mmm.util.query.api.statement.Statement} with support for #let
+ * block.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *

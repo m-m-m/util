@@ -5,27 +5,28 @@ package net.sf.mmm.util.query.base.example;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.bean.api.EntityBean;
 import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.IntegerProperty;
 import net.sf.mmm.util.property.api.lang.WritableBooleanProperty;
 import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
 import net.sf.mmm.util.property.api.lang.WritableStringProperty;
+import net.sf.mmm.util.property.api.link.LinkProperty;
 import net.sf.mmm.util.validation.base.Mandatory;
 
 /**
- * TODO: this class ...
+ * A dummy {@link EntityBean} for testing.
  *
  * @author hohwille
  */
-public interface QueryTestBean extends Bean {
+public interface QueryTestBean extends EntityBean<String> {
 
-  CountryCodeProperty CountryCode();
+  WritableStringProperty FirstName();
 
   @Mandatory
   @Named("Alias")
-  WritableStringProperty Name();
+  WritableStringProperty LastName();
 
   @Inject
   default WritableIntegerProperty Age() {
@@ -36,5 +37,7 @@ public interface QueryTestBean extends Bean {
   WritableBooleanProperty Friend();
 
   WritableProperty<Orientation> Orientation();
+
+  LinkProperty<String, QueryTestBean> Parent();
 
 }

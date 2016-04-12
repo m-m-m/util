@@ -12,7 +12,7 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableShortProperty extends ReadableIntegerBindingProperty {
+public interface ReadableShortProperty extends ReadableIntegerBindingProperty<Short> {
 
   /** @see #getType() */
   GenericType<Short> TYPE = new SimpleGenericTypeImpl<>(Short.class);

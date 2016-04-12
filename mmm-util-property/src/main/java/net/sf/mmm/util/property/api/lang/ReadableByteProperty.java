@@ -12,7 +12,7 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableByteProperty extends ReadableIntegerBindingProperty {
+public interface ReadableByteProperty extends ReadableIntegerBindingProperty<Byte> {
 
   /** @see #getType() */
   GenericType<Byte> TYPE = new SimpleGenericTypeImpl<>(Byte.class);

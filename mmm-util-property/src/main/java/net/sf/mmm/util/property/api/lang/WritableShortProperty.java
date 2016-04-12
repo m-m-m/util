@@ -9,7 +9,7 @@ package net.sf.mmm.util.property.api.lang;
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableShortProperty extends ReadableShortProperty, WritableNumberProperty {
+public interface WritableShortProperty extends ReadableShortProperty, WritableNumberProperty<Short> {
 
   @Override
   default short get() {

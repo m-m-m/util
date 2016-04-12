@@ -11,7 +11,8 @@ import javafx.beans.value.WritableIntegerValue;
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableIntegerProperty extends ReadableIntegerProperty, WritableNumberProperty, WritableIntegerValue {
+public interface WritableIntegerProperty
+    extends ReadableIntegerProperty, WritableNumberProperty<Integer>, WritableIntegerValue {
 
   @Override
   default int get() {

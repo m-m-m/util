@@ -12,7 +12,8 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableDoubleProperty extends ReadableDoubleProperty, WritableNumberProperty, WritableDoubleValue {
+public interface WritableDoubleProperty
+    extends ReadableDoubleProperty, WritableNumberProperty<Double>, WritableDoubleValue {
 
   @Override
   default double get() {

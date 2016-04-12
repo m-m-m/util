@@ -11,13 +11,13 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 /**
  * This is the implementation of {@link WritableNumberProperty}.
  *
- * @param <V> the generic type of the actual {@link #getValue() value}.
+ * @param <N> is the generic type of the internal numeric {@link #getValue() value} representation.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class NumberProperty<V extends Number> extends AbstractRegularProperty<Number>
-    implements WritableNumberProperty {
+public abstract class NumberProperty<N extends Number> extends AbstractRegularProperty<Number>
+    implements WritableNumberProperty<N> {
 
   /**
    * The constructor.
@@ -47,13 +47,13 @@ public abstract class NumberProperty<V extends Number> extends AbstractRegularPr
     if (Objects.equals(getValue(), newValue)) {
       return false;
     }
-    doSetNumber((V) newValue);
+    doSetNumber((N) newValue);
     return true;
   }
 
   /**
    * @param newValue the new {@link #getValue() value} to set.
    */
-  protected abstract void doSetNumber(V newValue);
+  protected abstract void doSetNumber(N newValue);
 
 }

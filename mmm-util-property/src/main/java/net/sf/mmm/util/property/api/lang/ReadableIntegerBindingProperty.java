@@ -11,10 +11,12 @@ import javafx.beans.binding.LongBinding;
  * This is the interface for a {@link ReadableNumberProperty} with a {@link #getValue() value}-{@link #getType() type}
  * with {@link Integer}, {@link Short}, or {@link Byte}.
  *
+ * @param <N> is the generic type of the internal numeric {@link #getValue() value} representation.
+ *
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface ReadableIntegerBindingProperty extends ReadableNumberProperty {
+public abstract interface ReadableIntegerBindingProperty<N extends Number> extends ReadableNumberProperty<N> {
 
   @Override
   default IntegerBinding negate() {

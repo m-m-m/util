@@ -1,0 +1,73 @@
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.property.api.link;
+
+import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.link.Link;
+import net.sf.mmm.util.property.api.lang.GenericProperty;
+import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.base.GenericTypeBuilder;
+import net.sf.mmm.util.reflect.base.GenericTypeVariable;
+import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
+import net.sf.mmm.util.validation.base.AbstractValidator;
+
+/**
+ * This class represents a {@link GenericProperty property} containing a {@link Link} that {@link Link#getTarget()
+ * points to} an {@link EntityBean}.
+ *
+ * @param <ID> the generic type of the {@link Link#getId() unique ID}.
+ * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
+ *
+ * @author hohwille
+ * @since 1.0.0
+ */
+public class LinkProperty<ID, E extends EntityBean<ID>> extends GenericProperty<Link<ID, E>> {
+
+  /** The fallback for {@link #getType()} if linked class is unknown. */
+  @SuppressWarnings("rawtypes")
+  private static final GenericType<Link> TYPE = new SimpleGenericTypeImpl<>(Link.class);
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   */
+  public LinkProperty(String name, GenericType<Link<ID, E>> type, Bean bean) {
+    super(name, type, bean);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   * @param validator - see {@link #validate()}.
+   */
+  public LinkProperty(String name, GenericType<Link<ID, E>> type, Bean bean,
+      AbstractValidator<? super Link<ID, E>> validator) {
+    super(name, type, bean, validator);
+  }
+
+  /**
+   * @param <ID> the generic type of the {@link Link#getId() unique ID}.
+   * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
+   * @param beanClass the class reflecting the linked {@link EntityBean}.
+   * @return the {@link GenericType} for an {@link Link} {@link Link#getTarget() pointing to} an {@link EntityBean} of
+   *         the given {@link Class}.
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  public static <ID, E extends EntityBean<ID>> GenericType<Link<ID, E>> createLinkType(Class<E> beanClass) {
+
+    if (beanClass == null) {
+      return (GenericType) TYPE;
+    }
+    return new GenericTypeBuilder<Link<ID, E>>() {
+    }.with(new GenericTypeVariable<E>() {
+    }, beanClass).build();
+  }
+
+}

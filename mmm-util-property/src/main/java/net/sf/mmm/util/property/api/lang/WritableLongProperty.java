@@ -11,7 +11,8 @@ import javafx.beans.value.WritableLongValue;
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableLongProperty extends ReadableLongProperty, WritableNumberProperty, WritableLongValue {
+public interface WritableLongProperty
+    extends ReadableLongProperty, WritableNumberProperty<Long>, WritableLongValue {
 
   @Override
   default long get() {

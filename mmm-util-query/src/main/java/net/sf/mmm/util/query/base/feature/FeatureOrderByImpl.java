@@ -9,8 +9,8 @@ import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.feature.FeatureOrderBy;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
-import net.sf.mmm.util.query.base.SqlBuilder;
-import net.sf.mmm.util.query.base.SqlDialect;
+import net.sf.mmm.util.query.base.statement.SqlBuilder;
+import net.sf.mmm.util.query.base.statement.SqlDialect;
 
 /**
  * Implementation of {@link AbstractFeature} for {@link FeatureWhere}.

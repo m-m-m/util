@@ -9,7 +9,7 @@ package net.sf.mmm.util.property.api.lang;
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableByteProperty extends ReadableByteProperty, WritableNumberProperty {
+public interface WritableByteProperty extends ReadableByteProperty, WritableNumberProperty<Byte> {
 
   @Override
   default byte get() {
