@@ -20,6 +20,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
  */
 public class PathImpl<V> extends AbstractPathFactory implements Path<V>, AbstractArgument<V> {
 
+  /** The character that separates the segments of a {@link #getPath() path}. */
+  private static char SEPARATOR = '.';
+
   private final PathRoot<?> root;
 
   private final PathImpl<?> parent;
@@ -56,11 +59,22 @@ public class PathImpl<V> extends AbstractPathFactory implements Path<V>, Abstrac
    * @param property - see {@link #getProperty()}.
    */
   public PathImpl(PathImpl<?> parent, ReadableProperty<?> property) {
+    this(parent, property, parent.getName() + SEPARATOR + property.getName());
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param parent - {@link #getParent()}.
+   * @param property - see {@link #getProperty()}.
+   * @param pathName - see {@link #getName()}.
+   */
+  protected PathImpl(PathImpl<?> parent, ReadableProperty<?> property, String pathName) {
     super();
     this.parent = parent;
     this.property = property;
     this.root = parent.root;
-    this.pojoPath = parent.getPojoPath() + SEPARATOR + property.getName();
+    this.pojoPath = pathName;
     assert verify();
   }
 
@@ -86,7 +100,7 @@ public class PathImpl<V> extends AbstractPathFactory implements Path<V>, Abstrac
 
   private void fail(String expectedType, Bean bean) {
 
-    throw new IllegalArgumentException("Path " + getParentPath() + " leads to type " + expectedType
+    throw new IllegalArgumentException("Path " + getParentName() + " leads to type " + expectedType
         + " but property " + this.property.getName() + " belongs to " + bean.access().getSimpleName());
   }
 
@@ -120,7 +134,7 @@ public class PathImpl<V> extends AbstractPathFactory implements Path<V>, Abstrac
   }
 
   /**
-   * @return the property
+   * @return the {@link ReadableProperty property}.
    */
   public ReadableProperty<?> getProperty() {
 
@@ -136,7 +150,15 @@ public class PathImpl<V> extends AbstractPathFactory implements Path<V>, Abstrac
   }
 
   @Override
-  public String getParentPath() {
+  public String getName() {
+
+    return this.pojoPath;
+  }
+
+  /**
+   * @return the {@link #getName() name} of {@link #getParent() parent} or {@link #getRoot() root}.
+   */
+  public String getParentName() {
 
     if (this.parent == null) {
       return this.root.getName();
@@ -146,27 +168,9 @@ public class PathImpl<V> extends AbstractPathFactory implements Path<V>, Abstrac
   }
 
   @Override
-  public String getName() {
-
-    return this.pojoPath;
-  }
-
-  @Override
-  public String getPojoPath() {
-
-    return this.pojoPath;
-  }
-
-  @Override
-  public Path<V> getPath() {
+  public Path<V> getValuePath() {
 
     return this;
-  }
-
-  @Override
-  public String getSegment() {
-
-    return this.property.getName();
   }
 
   @SuppressWarnings("unchecked")

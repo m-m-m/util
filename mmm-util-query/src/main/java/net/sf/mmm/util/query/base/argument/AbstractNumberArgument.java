@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base.argument;
 
-import net.sf.mmm.util.query.api.argument.BooleanArgument;
 import net.sf.mmm.util.query.api.argument.NumberArgument;
 import net.sf.mmm.util.query.api.expression.Expression;
 import net.sf.mmm.util.query.api.path.Path;
@@ -10,7 +9,7 @@ import net.sf.mmm.util.query.base.expression.SqlOperator;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * The abstract base implementation of {@link BooleanArgument}.
+ * The abstract base implementation of {@link NumberArgument}.
  *
  * @param <V> the generic type of the value to check by the {@link Expression} to build.
  *

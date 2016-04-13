@@ -9,7 +9,7 @@
 This module is part of the [mmm-util project](../README.md) and allows to build query statements in a type-safe and secure way with a fluent API
 * [Generic Query API](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/api/package-summary.html#package.description) with the basic features of all SQL dialects.
 * [Feature API](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/api/feature/package-summary.html#package.description) for ultimate flexibility, extension and reuse.
-* Support for many databases and [SQL dialects](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/base/SqlDialect.html) such as [JPQL](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/api/jpql/package-summary.html#package.description), [OrientDB](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/api/orientdb/package-summary.html#package.description), etc.
+* Support for many databases and [SQL dialects](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/base/statement/SqlDialect.html) such as [JPQL](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/api/statement/jpql/package-summary.html#package.description), [OrientDB](http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/api/orientdb/package-summary.html#package.description), etc.
 * and much more...
 
 In general you might want to use [QueryDSL](http://www.querydsl.com/).

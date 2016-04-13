@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base.argument;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import net.sf.mmm.util.query.api.argument.Argument;
 import net.sf.mmm.util.query.api.expression.Expression;
 import net.sf.mmm.util.query.api.path.Path;
@@ -53,9 +56,17 @@ public interface AbstractArgument<V> extends Argument<V> {
    * @param operator the {@link SqlOperator}.
    * @param arg2 the {@link SingleExpression#getArg2() second argument}.
    * @return the resulting {@link Expression}.
-   * @deprecated double check first
    */
-  @Deprecated
+  default Expression exp(SqlOperator<? super V, Void> operator) {
+
+    return SingleExpression.valueOf(this, operator, null);
+  }
+
+  /**
+   * @param operator the {@link SqlOperator}.
+   * @param arg2 the {@link SingleExpression#getArg2() second argument}.
+   * @return the resulting {@link Expression}.
+   */
   default Expression exp(SqlOperator<? super V, ? super V> operator, ConstantArgument<V> arg2) {
 
     return SingleExpression.valueOf(this, operator, arg2);
@@ -95,6 +106,32 @@ public interface AbstractArgument<V> extends Argument<V> {
   default Expression isNull() {
 
     return exp(SqlOperator.EQUAL, ConstantArgument.NULL);
+  }
+
+  @Override
+  default Expression in(Collection<? extends V> values) {
+
+    return expRight(SqlOperator.IN, values);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  default Expression in(V... values) {
+
+    return in(Arrays.asList(values));
+  }
+
+  @Override
+  default Expression notIn(Collection<? extends V> values) {
+
+    return expRight(SqlOperator.NOT_IN, values);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  default Expression notIn(V... values) {
+
+    return notIn(Arrays.asList(values));
   }
 
 }

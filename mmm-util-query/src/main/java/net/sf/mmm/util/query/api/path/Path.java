@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.api.path;
 
-import net.sf.mmm.util.pojo.path.api.TypedPath;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.argument.Argument;
 
@@ -14,10 +13,19 @@ import net.sf.mmm.util.query.api.argument.Argument;
  *
  * @param <V> the generic type of the property value identified by this path.
  *
+ * @see PathFactory
+ *
  * @author hohwille
  * @since 8.0.0
  */
-public interface Path<V> extends PathFactory, PropertyPath<V>, TypedPath<V>, Argument<V> {
+public interface Path<V> extends PathFactory, PropertyPath<V>, Argument<V> {
+
+  /**
+   * @return this entire {@link Path} as {@link String} (e.g. "alias.property", "size(alias.children)", or
+   *         "$variable.link.property").
+   */
+  @Override
+  String getName();
 
   /**
    * @return the {@link PathRoot root} of this {@link Path}. Will e.g. be an

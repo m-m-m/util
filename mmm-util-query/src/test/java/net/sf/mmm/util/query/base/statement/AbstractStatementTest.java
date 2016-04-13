@@ -21,7 +21,7 @@ import net.sf.mmm.util.query.api.feature.FeatureSet;
 import net.sf.mmm.util.query.api.feature.FeatureValues;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.api.path.SimplePropertyPath;
+import net.sf.mmm.util.query.api.path.Path;
 import net.sf.mmm.util.query.api.statement.Statement;
 import net.sf.mmm.util.query.api.variable.Variable;
 import net.sf.mmm.util.query.base.argument.Args;
@@ -187,8 +187,7 @@ public abstract class AbstractStatementTest<S extends Statement<QueryTestBean, S
       return sql;
     }
     // add variable to LET clause
-    SimplePropertyPath<QueryTestBean> path = SimplePropertyPath.ofLink(this.prototype.Parent())
-        .toLink(this.prototype.Parent());
+    Path<QueryTestBean> path = this.alias.to(this.prototype.Parent()).to(this.prototype.Parent());
     Variable<QueryTestBean> variable = let.let(path, "pp");
     String sqlLet = sql + " LET " + statement.getSqlDialect().variable(variable) + " = "
         + quote(statement, "Parent.Parent");

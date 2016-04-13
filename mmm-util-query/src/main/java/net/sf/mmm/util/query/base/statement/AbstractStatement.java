@@ -30,6 +30,8 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
 
   private final Map<Class<? extends StatementFeature>, AbstractFeature> featureMap;
 
+  private final List<Alias<?>> aliases;
+
   private SqlBuilder builder;
 
   /**
@@ -43,6 +45,8 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
     this.dialect = dialect;
     this.alias = alias;
     this.featureMap = new HashMap<>();
+    this.aliases = new ArrayList<>();
+    this.aliases.add(alias);
   }
 
   @Override

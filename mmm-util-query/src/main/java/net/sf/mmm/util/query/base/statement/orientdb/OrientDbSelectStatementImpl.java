@@ -11,6 +11,7 @@ import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
+import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.api.EntityBean;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.property.api.path.PropertyPath;
@@ -37,6 +38,7 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
    * The constructor.
    *
    * @param alias the name of the {@link com.orientechnologies.orient.core.metadata.schema.OClass} to query.
+   * @param mapper the {@link Function} to {@link Function#apply(Object) map} from {@link ODocument} to {@literal <E>}.
    */
   protected OrientDbSelectStatementImpl(Alias<E> alias, Function<ODocument, E> mapper) {
     super(OrientDbDialect.INSTANCE, alias);
@@ -63,7 +65,6 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
     return (List<E>) query(getSqlDialect().select());
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public E fetchFirst() {
 
@@ -74,7 +75,6 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
     return this.mapper.apply(result.get(0));
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public E fetchOne() {
 
@@ -116,6 +116,12 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
     return feature(FeatureLetImpl.class).let(path, variable);
   }
 
+  /**
+   * @param <E> the generic type of the {@link EntityBean}.
+   * @param prototype the {@link BeanFactory#createPrototype(Class) prototype} of the {@link EntityBean}.
+   * @param mapper the {@link Function} to {@link Function#apply(Object) map} from {@link ODocument} to {@literal <E>}.
+   * @return the new {@link OrientDbSelectStatement}.
+   */
   public static <E extends EntityBean<?>> OrientDbSelectStatementImpl<E> ofBean(E prototype,
       Function<ODocument, E> mapper) {
 
@@ -123,6 +129,10 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
     return new OrientDbSelectStatementImpl<>(source, mapper);
   }
 
+  /**
+   * @param oClass the {@link OClass}.
+   * @return the new {@link OrientDbSelectStatement}.
+   */
   public static OrientDbSelectStatementImpl<ODocument> of(OClass oClass) {
 
     Alias<ODocument> source = new Alias<>(oClass.getName());

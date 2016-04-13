@@ -2,13 +2,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.api.argument;
 
+import java.util.Collection;
+
 import net.sf.mmm.util.query.api.expression.Expression;
 import net.sf.mmm.util.query.api.path.Path;
 
 /**
  * This is the interface for a builder of an {@link Expression} checking one argument or comparing two arguments.
  *
- * @param <V> the generic type of the value the check by the {@link Expression} to build.
+ * @param <V> the generic type of the value to check by the {@link Expression} to build.
+ *
+ * @see net.sf.mmm.util.query.base.argument.Args
+ * @see net.sf.mmm.util.query.api.path.Path
  *
  * @author hohwille
  * @since 8.0.0
@@ -19,10 +24,10 @@ public interface Argument<V> {
    * @return the {@link Path} of this builder. Will be {@code null} if {@link #getValue() value} is NOT {@code null} and
    *         vice versa.
    */
-  Path<V> getPath();
+  Path<V> getValuePath();
 
   /**
-   * @return the literal value of this {@link Argument}. Will be {@code null} if {@link #getPath() path} is NOT
+   * @return the literal value of this {@link Argument}. Will be {@code null} if {@link #getValuePath() path} is NOT
    *         {@code null} and vice versa.
    */
   V getValue();
@@ -35,7 +40,7 @@ public interface Argument<V> {
     if (isConstant()) {
       return getValue();
     } else {
-      return getPath().getValue();
+      return getValuePath().getValue();
     }
   }
 
@@ -64,25 +69,51 @@ public interface Argument<V> {
   Expression neq(Path<V> property);
 
   /**
-   * Create a {@code this is not null} expression
-   *
-   * @return this is not null
-   */
-  Expression isNotNull();
-
-  /**
-   * Create a {@code this is null} expression
-   *
-   * @return this is null
+   * @return an {@link Expression} for {@code this IS NULL}.
    */
   Expression isNull();
 
   /**
-   * @return {@code true} if this is a literal {@link #getValue() value} argument, {@code false} otherwise.
+   * @return an {@link Expression} for {@code this IS NOT NULL}.
+   */
+  Expression isNotNull();
+
+  /**
+   * @param values the {@link Collection} with the values the {@link Argument} shall be
+   *        {@link Collection#contains(Object) contained} in.
+   * @return an {@link Expression} for {@code this IN (values)}.
+   */
+  Expression in(Collection<? extends V> values);
+
+  /**
+   * @param values the array with the values the {@link Argument} shall be {@link Collection#contains(Object) contained}
+   *        in.
+   * @return an {@link Expression} for {@code this IN (values)}.
+   */
+  @SuppressWarnings("unchecked")
+  Expression in(V... values);
+
+  /**
+   * @param values the {@link Collection} with the values the {@link Argument} shall NOT be
+   *        {@link Collection#contains(Object) contained} in.
+   * @return an {@link Expression} for {@code this NOT IN (values)}.
+   */
+  Expression notIn(Collection<? extends V> values);
+
+  /**
+   * @param values the array with the values the {@link Argument} shall NOT be {@link Collection#contains(Object)
+   *        contained} in.
+   * @return an {@link Expression} for {@code this NOT IN (values)}.
+   */
+  @SuppressWarnings("unchecked")
+  Expression notIn(V... values);
+
+  /**
+   * @return {@code true} if this is a literal {@link #getValue() value} {@link Argument}, {@code false} otherwise.
    */
   default boolean isConstant() {
 
-    return (getPath() == null);
+    return (getValuePath() == null);
   }
 
 }

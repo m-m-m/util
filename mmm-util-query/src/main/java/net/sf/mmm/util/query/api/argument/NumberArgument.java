@@ -9,7 +9,7 @@ import net.sf.mmm.util.value.api.Range;
 /**
  * Extends {@link Argument} to build an {@link Expression} for {@link Number} value(s).
  *
- * @param <V> the generic type of the value the check by the {@link Expression} to build.
+ * @param <V> the generic type of the value to check by the {@link Expression} to build.
  *
  * @author hohwille
  * @since 8.0.0

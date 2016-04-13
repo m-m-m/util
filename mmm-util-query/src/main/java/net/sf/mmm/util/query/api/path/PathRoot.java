@@ -6,8 +6,8 @@ import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadName;
 
 /**
- * This is the root element of a {@link Path}. It is typically an {@link net.sf.mmm.util.query.base.path.Alias} or a
- * {@link net.sf.mmm.util.query.api.variable.Variable}. A {@link PathRoot} itself is NOT an instance of {@link Path}.
+ * This is the root element of a {@link Path}. It is typically an {@link net.sf.mmm.util.query.api.path.EntityAlias} or
+ * a {@link net.sf.mmm.util.query.api.variable.Variable}. A {@link PathRoot} itself is NOT an instance of {@link Path}.
  *
  * @param <E> the generic type of the {@link #getPrototype() prototype}.
  *

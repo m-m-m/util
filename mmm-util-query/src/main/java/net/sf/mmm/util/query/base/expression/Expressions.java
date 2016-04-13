@@ -20,16 +20,34 @@ public class Expressions {
   private Expressions() {
   }
 
+  /**
+   * @param expressions the {@link Expression}s to {@link #combine(Conjunction, Expression...)} using
+   *        {@link Conjunction#OR}.
+   * @return an {@link Expression} that {@link Expression#evaluate() evaluates} to {@code true} if any of the given
+   *         {@link Expression}s does.
+   */
   public static Expression or(Expression... expressions) {
 
     return combine(Conjunction.OR, expressions);
   }
 
+  /**
+   * @param expressions the {@link Expression}s to {@link #combine(Conjunction, Expression...)} using
+   *        {@link Conjunction#AND}.
+   * @return an {@link Expression} that {@link Expression#evaluate() evaluates} to {@code true} if all of the given
+   *         {@link Expression}s do.
+   */
   public static Expression and(Expression... expressions) {
 
     return combine(Conjunction.AND, expressions);
   }
 
+  /**
+   * @see Conjunction#eval(boolean...)
+   * @param conjunction the {@link Conjunction} used to combine the given {@link Expression}s.
+   * @param expressions the {@link Expression}s to combine using the given {@link Conjunction}.
+   * @return an {@link Expression} that combines the given {@link Expression}s with the given {@link Conjunction}.
+   */
   public static Expression combine(Conjunction conjunction, Expression... expressions) {
 
     return ConjunctionExpression.valueOf(conjunction, expressions);

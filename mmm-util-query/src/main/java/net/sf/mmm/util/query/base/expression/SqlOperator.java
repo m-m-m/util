@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base.expression;
 
+import java.util.Collection;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -149,7 +150,7 @@ public abstract class SqlOperator<T, S> {
     @Override
     public boolean evaluate(Number arg1, Range<Number> arg2) {
 
-      return false;
+      return arg2.isContained(arg1);
     }
 
     @Override
@@ -166,13 +167,85 @@ public abstract class SqlOperator<T, S> {
     @Override
     public boolean evaluate(Number arg1, Range<Number> arg2) {
 
-      return false;
+      return !arg2.isContained(arg1);
     }
 
     @Override
     public SqlOperator<Number, Range<Number>> negate() {
 
       return BETWEEN;
+    }
+  };
+
+  /** {@link SqlOperator} to check if objects match using SQL EMPTY operation. */
+  @SuppressWarnings("rawtypes")
+  public static final SqlOperator<Collection, Void> EMPTY = new SqlOperatorEmptyness("IS EMPTY") {
+
+    @Override
+    public boolean evaluate(Collection arg1, Void arg2) {
+
+      return ((arg1 == null) || arg1.isEmpty());
+    }
+
+    @Override
+    public SqlOperator<Collection, Void> negate() {
+
+      return NOT_EMPTY;
+    }
+  };
+
+  /** {@link SqlOperator} to check if objects do NOT match using SQL EMPTY operation. */
+  @SuppressWarnings("rawtypes")
+  public static final SqlOperator<Collection, Void> NOT_EMPTY = new SqlOperatorEmptyness("IS NOT EMPTY") {
+
+    @Override
+    public boolean evaluate(Collection arg1, Void arg2) {
+
+      return !((arg1 == null) || arg1.isEmpty());
+    }
+
+    @Override
+    public SqlOperator<Collection, Void> negate() {
+
+      return EMPTY;
+    }
+  };
+
+  /** {@link SqlOperator} to check if objects match using SQL IN operation. */
+  public static final SqlOperator<Object, Collection<?>> IN = new SqlOperatorContainment("IN") {
+
+    @Override
+    public boolean evaluate(Object arg1, Collection<?> arg2) {
+
+      if (arg2 == null) {
+        return false;
+      }
+      return arg2.contains(arg1);
+    }
+
+    @Override
+    public SqlOperator<Object, Collection<?>> negate() {
+
+      return NOT_IN;
+    }
+  };
+
+  /** {@link SqlOperator} to check if objects do NOT match using SQL IN operation. */
+  public static final SqlOperator<Object, Collection<?>> NOT_IN = new SqlOperatorContainment("NOT IN") {
+
+    @Override
+    public boolean evaluate(Object arg1, Collection<?> arg2) {
+
+      if (arg2 == null) {
+        return true;
+      }
+      return !arg2.contains(arg1);
+    }
+
+    @Override
+    public SqlOperator<Object, Collection<?>> negate() {
+
+      return IN;
     }
   };
 
@@ -301,6 +374,38 @@ public abstract class SqlOperator<T, S> {
      */
     public SqlOperatorString(String sql) {
       super(sql, String.class);
+    }
+  }
+
+  /**
+   * Abstract base implementation of {@link SqlOperator} for {@link Collection} {@link Collection#isEmpty() emptyness}
+   * check operations.
+   */
+  @SuppressWarnings("rawtypes")
+  public static abstract class SqlOperatorEmptyness extends SqlOperator<Collection, Void> {
+
+    /**
+     * The constructor.
+     *
+     * @param sql - see {@link #getSql()}.
+     */
+    public SqlOperatorEmptyness(String sql) {
+      super(sql, Collection.class);
+    }
+  }
+
+  /**
+   * Abstract base implementation of {@link SqlOperator} for {@link String} comparison operations.
+   */
+  public static abstract class SqlOperatorContainment extends SqlOperator<Object, Collection<?>> {
+
+    /**
+     * The constructor.
+     *
+     * @param sql - see {@link #getSql()}.
+     */
+    public SqlOperatorContainment(String sql) {
+      super(sql, Object.class);
     }
   }
 

@@ -2,16 +2,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.api.argument;
 
+import java.util.List;
+import java.util.Set;
+
 import net.sf.mmm.util.query.api.expression.Expression;
 
 /**
- * Extends {@link Argument} to build an {@link Expression} for {@link Comparable} value(s).
+ * Extends {@link Argument} to build an {@link Expression} of {@link Set} values.
  *
- * @param <V> the generic type of the value to check by the {@link Expression} to build.
+ * @param <E> the generic type of the {@link List}-{@link List#get(int) elements}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public interface ComparableArgument<V extends Comparable<?>> extends Argument<V> {
+public interface SetArgument<E> extends CollectionArgument<Set<E>, E> {
 
 }

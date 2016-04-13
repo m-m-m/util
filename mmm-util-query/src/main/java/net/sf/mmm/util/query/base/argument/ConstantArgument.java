@@ -32,19 +32,13 @@ public class ConstantArgument<V> implements AbstractArgument<V> {
     this.value = value;
   }
 
-  /**
-   * @return the {@link Path} of this builder. Will be {@code null} if {@link #getValue() value} is NOT {@code null} and
-   *         vice versa.
-   */
-  public Path<V> getPath() {
+  @Override
+  public Path<V> getValuePath() {
 
     return null;
   }
 
-  /**
-   * @return the literal value of this builder. Will be {@code null} if {@link #getPath() path} is NOT {@code null} and
-   *         vice versa.
-   */
+  @Override
   public V getValue() {
 
     return this.value;

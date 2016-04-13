@@ -41,8 +41,6 @@ public class SqlBuilder {
 
   private final List<Variable<?>> variables;
 
-  private final List<Alias<?>> sources;
-
   /**
    * The constructor.
    *
@@ -56,7 +54,6 @@ public class SqlBuilder {
     this.parameters = Collections.unmodifiableList(this.parametersInternal);
     this.paths = new ArrayList<>();
     this.variables = new ArrayList<>();
-    this.sources = new ArrayList<>();
   }
 
   /**
@@ -127,6 +124,12 @@ public class SqlBuilder {
       } else if (operator == SqlOperator.NOT_EQUAL) {
         this.sqlBuilder.append(this.dialect.isNotNull());
       }
+    } else if (arg2 == null) {
+      if (operator == SqlOperator.EMPTY) {
+        this.sqlBuilder.append(this.dialect.isEmpty());
+      } else if (operator == SqlOperator.NOT_EMPTY) {
+        this.sqlBuilder.append(this.dialect.isNotEmpty());
+      }
     } else {
       this.sqlBuilder.append(this.dialect.operator(operator));
       addArg(arg2);
@@ -164,7 +167,7 @@ public class SqlBuilder {
    */
   public void addArg(Argument<?> arg) {
 
-    PropertyPath<?> path = arg.getPath();
+    PropertyPath<?> path = arg.getValuePath();
     if (path == null) {
       Object value = arg.getValue();
       if (value == null) {
@@ -300,7 +303,6 @@ public class SqlBuilder {
 
     this.sqlBuilder.append(this.dialect.ref(alias.getSource()));
     this.sqlBuilder.append(this.dialect.as(alias.getName()));
-    this.sources.add(alias);
   }
 
   /**

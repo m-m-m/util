@@ -38,4 +38,15 @@ public class NumberPathImpl<V extends Number & Comparable<?>> extends PathImpl<V
     super(root, property);
   }
 
+  /**
+   * The constructor.
+   *
+   * @param parent - {@link #getParent()}.
+   * @param property - see {@link #getProperty()}.
+   * @param pathName - see {@link #getName()}.
+   */
+  protected NumberPathImpl(PathImpl<?> parent, ReadableProperty<?> property, String pathName) {
+    super(parent, property, pathName);
+  }
+
 }

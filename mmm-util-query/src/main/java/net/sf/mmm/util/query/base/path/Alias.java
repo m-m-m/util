@@ -4,19 +4,18 @@ package net.sf.mmm.util.query.base.path;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
-import net.sf.mmm.util.query.base.statement.AbstractStatement;
-import net.sf.mmm.util.query.base.statement.SqlDialect;
+import net.sf.mmm.util.query.api.path.EntityAlias;
 
 /**
- * This class represents an {@link Alias} used in a {@link SqlDialect#from() FROM} block of an {@link AbstractStatement
- * SQL statement}.
+ * This class represents an {@link Alias} used in a {@link net.sf.mmm.util.query.base.statement.SqlDialect#from() FROM}
+ * block of an {@link net.sf.mmm.util.query.base.statement.AbstractStatement SQL statement}.
  *
  * @param <E> the generic type of the {@link #getType() type} of this {@link Alias}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public class Alias<E> extends AbstractPathRoot<E> {
+public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
 
   private final String source;
 
@@ -92,38 +91,34 @@ public class Alias<E> extends AbstractPathRoot<E> {
     }
   }
 
-  /**
-   * @return the actual source of this {@link Alias}. Typically the name of a table, entity, class, etc. Shall NOT be
-   *         {@code null}.
-   */
+  @Override
   public String getSource() {
 
     return this.source;
   }
 
-  /**
-   * @return the alias of this source. May be {@code null}.
-   */
+  @Override
   public String getName() {
 
     return this.name;
   }
 
-  /**
-   * @return the {@link BeanFactory#createPrototype(Class) prototype} of this source. May be {@code null}.
-   */
   @Override
   public E getPrototype() {
 
     return this.prototype;
   }
 
-  /**
-   * @return the {@link Class} reflecting the entity of this source. May be {@code null}
-   */
+  @Override
   public Class<E> getType() {
 
     return this.type;
+  }
+
+  @Override
+  public Alias<E> as(String aliasName) {
+
+    return new Alias<>(this.source, aliasName, this.type, this.prototype);
   }
 
   @Override
