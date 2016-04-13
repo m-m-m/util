@@ -7,7 +7,7 @@ import net.sf.mmm.util.query.api.statement.SelectStatement;
 
 /**
  * Extends a regular {@link SelectStatement} with advanced features like
- * {@link #having(net.sf.mmm.util.property.api.expression.Expression...) HAVING clause}.
+ * {@link #having(net.sf.mmm.util.query.api.expression.Expression...) HAVING clause}.
  *
  * @param <E> the generic type of the queried object (typically a {@link net.sf.mmm.util.bean.api.Bean}).
  *

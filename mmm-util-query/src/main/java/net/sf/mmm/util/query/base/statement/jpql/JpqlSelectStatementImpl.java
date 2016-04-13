@@ -4,7 +4,6 @@ package net.sf.mmm.util.query.base.statement.jpql;
 
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -36,20 +35,12 @@ public class JpqlSelectStatementImpl<E> extends AbstractSelectStatement<E, JpqlS
    * The constructor.
    *
    * @param entityManager the {@link EntityManager} instance.
-   * @param entityClass the {@link Class} reflecting the {@link Entity}.
+   * @param alias the {@link Alias}.
    */
   public JpqlSelectStatementImpl(EntityManager entityManager, Alias<E> alias) {
     super(JpqlDialect.INSTANCE, alias);
     this.entityManager = entityManager;
-    this.entityClass = this.entityClass;
-    String entityName = this.entityClass.getSimpleName();
-    Entity entity = this.entityClass.getAnnotation(Entity.class);
-    if (entity != null) {
-      String name = entity.name();
-      if (!name.isEmpty()) {
-        entityName = name;
-      }
-    }
+    this.entityClass = alias.getType();
   }
 
   private Query query(String prefix) {
