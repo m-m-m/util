@@ -74,6 +74,6 @@ public abstract interface PathFactory {
    * @param property the {@link ReadableProperty property} to append.
    * @return the new {@link Path} resulting from joining the given {@link ReadableProperty property}.
    */
-  <V extends EntityBean<?>> Path<V> to(LinkProperty<?, V> property);
+  <V extends EntityBean<ID>, ID> Path<V> to(LinkProperty<ID, V> property);
 
 }
