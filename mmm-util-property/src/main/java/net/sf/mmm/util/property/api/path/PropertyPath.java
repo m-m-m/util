@@ -18,4 +18,12 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  */
 public interface PropertyPath<V> extends AttributeReadName, AttributeReadValue<V> {
 
+  /**
+   * @return the name what is the {@link String} representation of this path. In case of a
+   *         {@link net.sf.mmm.util.property.api.ReadableProperty single property} the name of the property. Otherwise
+   *         an entire path (such as e.g. "entity.property").
+   */
+  @Override
+  String getName();
+
 }

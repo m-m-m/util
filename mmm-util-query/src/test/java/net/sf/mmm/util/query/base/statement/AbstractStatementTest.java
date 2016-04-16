@@ -115,6 +115,7 @@ public abstract class AbstractStatementTest<S extends Statement<QueryTestBean, S
     sql = checkOrderBy(statement, sql, variables);
     sql = checkOffset(statement, sql, variables);
     sql = checkLimit(statement, sql, variables);
+    checkExtended(statement, sql, variables);
   }
 
   @Test
@@ -353,6 +354,11 @@ public abstract class AbstractStatementTest<S extends Statement<QueryTestBean, S
     assertThat(statement.getSql()).isEqualTo(sqlOffset);
     assertThat(statement.getParameters()).containsExactlyElementsOf(variables);
     return sqlOffset;
+  }
+
+  protected void checkExtended(S statement, String sql, List<Object> variables) {
+
+    // nothing by default, override for additional tests...
   }
 
 }

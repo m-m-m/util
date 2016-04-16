@@ -4,6 +4,7 @@ package net.sf.mmm.util.query.base.statement;
 
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.lang.api.SortOrder;
+import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.variable.Variable;
 import net.sf.mmm.util.query.base.expression.SqlOperator;
 
@@ -24,19 +25,21 @@ public interface SqlDialect {
   }
 
   /**
-   * @return {@link #select()} {@link #countAll()}.
+   * @param alias the {@link EntityAlias}.
+   * @return {@link #select()} {@link #countAll(EntityAlias)}.
    */
-  default String selectCountAll() {
+  default String selectCountAll(EntityAlias<?> alias) {
 
-    return select() + countAll();
+    return select() + countAll(alias);
   }
 
   /**
+   * @param alias the {@link EntityAlias}.
    * @return the {@code COUNT(*)} selector.
    */
-  default String countAll() {
+  default String countAll(EntityAlias<?> alias) {
 
-    return " COUNT (*)";
+    return "COUNT(*) ";
   }
 
   /**
@@ -96,7 +99,7 @@ public interface SqlDialect {
   }
 
   /**
-   * @see #as(String)
+   * @see #as(EntityAlias)
    * @return the {@code AS} keyword to define an alias for a {@link #from() FROM source}.
    */
   default String as() {
@@ -105,18 +108,33 @@ public interface SqlDialect {
   }
 
   /**
-   * @param alias the alias.
-   * @return {@link #as()} {@code alias}.
+   * @param alias the {@link EntityAlias}.
+   * @return {@link #as()} {@code alias.name}.
    */
-  default String as(String alias) {
+  default String as(EntityAlias<?> alias) {
 
-    if (alias == null) {
+    String name = alias(alias);
+    if (name.isEmpty()) {
+      return name;
+    }
+    return as() + name;
+  }
+
+  /**
+   * @param alias the {@link EntityAlias}.
+   * @return the {@link EntityAlias#getName()}. In case {@link EntityAlias#getName()} is {@code null} according to the
+   *         dialect either the empty string or the {@link EntityAlias#getSource() source} is used as fallback.
+   */
+  default String alias(EntityAlias<?> alias) {
+
+    String name = alias.getName();
+    if (name == null) {
       return "";
     }
-    if (alias.isEmpty()) {
-      throw new IllegalArgumentException(alias);
+    if (name.isEmpty()) {
+      throw new IllegalArgumentException(name);
     }
-    return as() + alias;
+    return name;
   }
 
   /**

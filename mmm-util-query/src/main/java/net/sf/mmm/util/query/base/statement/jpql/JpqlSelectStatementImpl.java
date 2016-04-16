@@ -6,11 +6,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
+import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.expression.Expression;
+import net.sf.mmm.util.query.api.path.EntityAlias;
+import net.sf.mmm.util.query.api.path.Path;
 import net.sf.mmm.util.query.api.statement.orientdb.OrientDbSelectStatement;
 import net.sf.mmm.util.query.api.statenent.jpql.JpqlSelectStatement;
+import net.sf.mmm.util.query.base.QueryMode;
 import net.sf.mmm.util.query.base.feature.FeatureHavingImpl;
 import net.sf.mmm.util.query.base.feature.FeaturePagingImpl;
 import net.sf.mmm.util.query.base.path.Alias;
@@ -29,35 +32,52 @@ public class JpqlSelectStatementImpl<E> extends AbstractSelectStatement<E, JpqlS
 
   private final EntityManager entityManager;
 
-  private final Class<E> entityClass;
+  /**
+   * The constructor.
+   *
+   * @param entityManager the {@link EntityManager} instance.
+   * @param dialect - see {@link #getSqlDialect()}. Typically {@link JpqlDialect#INSTANCE}.
+   * @param alias the {@link Alias}.
+   */
+  public JpqlSelectStatementImpl(EntityManager entityManager, JpqlDialect dialect, EntityAlias<E> alias) {
+    super(dialect, alias);
+    this.entityManager = entityManager;
+  }
 
   /**
    * The constructor.
    *
    * @param entityManager the {@link EntityManager} instance.
-   * @param alias the {@link Alias}.
+   * @param dialect - see {@link #getSqlDialect()}. Typically {@link JpqlDialect#INSTANCE}.
+   * @param alias - see {@link #getAlias()}.
+   * @param paths - see
+   *        {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, PropertyPath...)}
+   *        .
    */
-  public JpqlSelectStatementImpl(EntityManager entityManager, Alias<E> alias) {
-    super(JpqlDialect.INSTANCE, alias);
+  public JpqlSelectStatementImpl(EntityManager entityManager, JpqlDialect dialect, EntityAlias<?> alias,
+      PropertyPath<?>... paths) {
+    super(dialect, alias, paths);
     this.entityManager = entityManager;
-    this.entityClass = alias.getType();
   }
 
-  private Query query(String prefix) {
-
-    Query query = this.entityManager.createQuery(prefix + getSql());
-    assignVariables(query);
-    return query;
+  /**
+   * The constructor.
+   *
+   * @param entityManager the {@link EntityManager} instance.
+   * @param dialect - see {@link #getSqlDialect()}. Typically {@link JpqlDialect#INSTANCE}.
+   * @param alias - see {@link #getAlias()}.
+   * @param toClass - see
+   *        {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, Path...)}.
+   * @param constructorArgs - see
+   *        {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, Path...)}.
+   */
+  public JpqlSelectStatementImpl(EntityManager entityManager, JpqlDialect dialect, EntityAlias<?> alias,
+      Class<E> toClass, PropertyPath<?>... constructorArgs) {
+    super(dialect, alias, toClass, constructorArgs);
+    this.entityManager = entityManager;
   }
 
-  private TypedQuery<E> typedQuery(String prefix) {
-
-    TypedQuery<E> query = this.entityManager.createQuery(prefix + getSql(), this.entityClass);
-    assignVariables(query);
-    return query;
-  }
-
-  private void assignVariables(Query query) {
+  private void assignParameters(Query query) {
 
     FeaturePagingImpl paging = feature(FeaturePagingImpl.class);
     query.setFirstResult((int) paging.getOffset());
@@ -69,28 +89,15 @@ public class JpqlSelectStatementImpl<E> extends AbstractSelectStatement<E, JpqlS
   }
 
   @Override
-  public List<E> fetch() {
+  public Object executeQuery(String sql, QueryMode mode) {
 
-    return typedQuery(getSqlDialect().select()).getResultList();
-  }
-
-  @Override
-  public E fetchFirst() {
-
-    return typedQuery(getSqlDialect().select()).getSingleResult();
-  }
-
-  @Override
-  public E fetchOne() {
-
-    return typedQuery(getSqlDialect().select()).getSingleResult();
-  }
-
-  @Override
-  public long fetchCount() {
-
-    Long count = (Long) query(getSqlDialect().selectCountAll()).getSingleResult();
-    return count.longValue();
+    Query query = this.entityManager.createQuery(sql);
+    assignParameters(query);
+    if (mode == QueryMode.NORMAL) {
+      return query.getResultList();
+    } else {
+      return query.getSingleResult();
+    }
   }
 
   @Override

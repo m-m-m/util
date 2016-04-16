@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.mmm.util.query.api.feature.StatementFeature;
+import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.Statement;
 import net.sf.mmm.util.query.base.feature.AbstractFeature;
-import net.sf.mmm.util.query.base.path.Alias;
 
 /**
  * This is the abstract base-implementation of {@link Statement}.
@@ -26,11 +26,13 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
 
   private final SqlDialect dialect;
 
-  private final Alias<E> alias;
+  private final EntityAlias<?> alias;
+
+  private final Class<E> resultClass;
 
   private final Map<Class<? extends StatementFeature>, AbstractFeature> featureMap;
 
-  private final List<Alias<?>> aliases;
+  private final List<EntityAlias<?>> aliases;
 
   private SqlBuilder builder;
 
@@ -40,10 +42,22 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
    * @param dialect - see {@link #getSqlDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
-  public AbstractStatement(SqlDialect dialect, Alias<E> alias) {
+  public AbstractStatement(SqlDialect dialect, EntityAlias<E> alias) {
+    this(dialect, alias, alias.getType());
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param dialect - see {@link #getSqlDialect()}.
+   * @param alias - see {@link #getAlias()}.
+   * @param resultClass - see {@link #getResultClass()}.
+   */
+  public AbstractStatement(SqlDialect dialect, EntityAlias<?> alias, Class<E> resultClass) {
     super();
     this.dialect = dialect;
     this.alias = alias;
+    this.resultClass = resultClass;
     this.featureMap = new HashMap<>();
     this.aliases = new ArrayList<>();
     this.aliases.add(alias);
@@ -56,11 +70,27 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
   }
 
   /**
-   * @return the name of the source (table, object, class, etc.) to select from.
+   * @return the {@link EntityAlias} to select from. For regular {@link Statement}s this will be <code>
+   *         {@link EntityAlias}{@literal <E>}</code> but for special queries such as
+   *         {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, net.sf.mmm.util.property.api.path.PropertyPath...)
+   *         tuple} or
+   *         {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, net.sf.mmm.util.query.api.path.Path...)
+   *         constructor} queries this is not the
    */
-  public Alias<E> getAlias() {
+  public EntityAlias<?> getAlias() {
 
     return this.alias;
+  }
+
+  /**
+   * @return the {@link Class} reflecting the result or destination of this {@link Statement}. For a regular
+   *         {@link Statement} this is {@link #getAlias()}.{@link EntityAlias#getType() getType()} but e.g. for
+   *         {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, net.sf.mmm.util.query.api.path.Path...)
+   *         constructor} queries this will the top-level class to return.
+   */
+  protected Class<E> getResultClass() {
+
+    return this.resultClass;
   }
 
   /**

@@ -5,7 +5,7 @@ package net.sf.mmm.util.query.api.feature;
 import net.sf.mmm.util.query.api.expression.Expression;
 
 /**
- * This is the abstract interface for a query {@link net.sf.mmm.util.query.api.statement.Statement} allowing a
+ * This is the abstract interface for a {@link net.sf.mmm.util.query.api.statement.Statement} allowing a
  * {@link #where(Expression...) WHERE clause}.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.

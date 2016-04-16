@@ -5,6 +5,7 @@ package net.sf.mmm.util.query.api.statement;
 import java.util.List;
 
 import net.sf.mmm.util.property.api.path.PropertyPath;
+import net.sf.mmm.util.query.api.Command;
 import net.sf.mmm.util.query.api.expression.Expression;
 import net.sf.mmm.util.query.base.statement.SqlDialect;
 
@@ -23,7 +24,7 @@ import net.sf.mmm.util.query.base.statement.SqlDialect;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface Statement<E, SELF extends Statement<E, SELF>> {
+public abstract interface Statement<E, SELF extends Statement<E, SELF>> extends Command {
 
   /**
    * @return an {@link java.util.Collections#unmodifiableList(List) unmodifiable} {@link List} with the bind variables.

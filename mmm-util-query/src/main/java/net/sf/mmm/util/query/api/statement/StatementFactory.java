@@ -2,21 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.api.statement;
 
-import net.sf.mmm.util.query.base.path.Alias;
+import net.sf.mmm.util.query.api.feature.FeatureSelect;
 
 /**
- * TODO: this class ...
+ * This is the interface for the factory used to create SQL {@link Statement}s using a type-safe and fluent builder API.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public interface StatementFactory {
-
-  /**
-   * @param <E> the generic type of the queried object (typically a {@link net.sf.mmm.util.bean.api.EntityBean}).
-   * @param alias the {@link Alias} for the queried object. See {@link Alias#ofBean(net.sf.mmm.util.bean.api.Bean)}.
-   * @return the {@link SelectStatement}.
-   */
-  <E> SelectStatement<E, ?> selectFrom(Alias<E> alias);
+public interface StatementFactory extends FeatureSelect {
 
 }

@@ -3,11 +3,11 @@
 package net.sf.mmm.util.query.api.feature;
 
 /**
- * Marker interface for a feature of a {@link net.sf.mmm.util.query.api.statement.Statement}.
+ * Marker interface for a feature of a {@link net.sf.mmm.util.query.api.statement.StatementFactory}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface StatementFeature {
+public abstract interface StatementFactoryFeature {
 
 }

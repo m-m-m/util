@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 
 /**
- * This is the abstract interface for a query {@link net.sf.mmm.util.query.api.statement.Statement} allowing an
+ * This is the abstract interface for a {@link net.sf.mmm.util.query.api.statement.Statement} allowing an
  * {@link #orderBy(PropertyPath, SortOrder) ORDER BY clause}.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.

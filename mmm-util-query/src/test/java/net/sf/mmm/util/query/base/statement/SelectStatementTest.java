@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.query.api.ListQuery;
+import net.sf.mmm.util.query.api.NumberQuery;
 import net.sf.mmm.util.query.api.feature.FeatureFetch;
 import net.sf.mmm.util.query.api.feature.FeatureGroupBy;
 import net.sf.mmm.util.query.api.feature.FeatureOrderBy;
@@ -13,6 +15,7 @@ import net.sf.mmm.util.query.api.feature.FeaturePaging;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
 import net.sf.mmm.util.query.api.statement.SelectStatement;
+import net.sf.mmm.util.query.base.QueryMode;
 import net.sf.mmm.util.query.base.example.QueryTestBean;
 import net.sf.mmm.util.query.base.path.Alias;
 
@@ -43,6 +46,16 @@ public class SelectStatementTest
     return "FROM ";
   }
 
+  @Override
+  protected void checkExtended(TestSelectStatement<QueryTestBean> statement, String sql, List<Object> variables) {
+
+    super.checkExtended(statement, sql, variables);
+    ListQuery<QueryTestBean> query = statement.query();
+    assertThat(query.getSql()).isEqualTo("SELECT " + sql);
+    NumberQuery<Long> countQuery = statement.queryCount();
+    assertThat(countQuery.getSql()).isEqualTo("SELECT COUNT(*) " + sql);
+  }
+
   public static class TestSelectStatement<E extends Bean>
       extends AbstractSelectStatement<E, TestSelectStatement<E>> {
 
@@ -51,29 +64,10 @@ public class SelectStatementTest
     }
 
     @Override
-    public List<E> fetch() {
+    public Object executeQuery(String sql, QueryMode mode) {
 
       throw new UnsupportedOperationException();
     }
-
-    @Override
-    public E fetchFirst() {
-
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public E fetchOne() {
-
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public long fetchCount() {
-
-      throw new UnsupportedOperationException();
-    }
-
   }
 
 }

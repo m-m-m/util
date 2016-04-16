@@ -3,9 +3,9 @@
 package net.sf.mmm.util.query.base.statement;
 
 import net.sf.mmm.util.property.api.path.PropertyPath;
+import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.StoreStatement;
 import net.sf.mmm.util.query.base.feature.FeatureSetImpl;
-import net.sf.mmm.util.query.base.path.Alias;
 
 /**
  * This is the abstract base-implementation of {@link StoreStatement}.
@@ -25,7 +25,7 @@ public abstract class AbstractStoreStatement<E, SELF extends StoreStatement<E, S
    * @param dialect - see {@link #getSqlDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
-  public AbstractStoreStatement(SqlDialect dialect, Alias<E> alias) {
+  public AbstractStoreStatement(SqlDialect dialect, EntityAlias<E> alias) {
     super(dialect, alias);
   }
 

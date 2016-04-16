@@ -3,10 +3,10 @@
 package net.sf.mmm.util.query.base.statement;
 
 import net.sf.mmm.util.query.api.expression.Expression;
+import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.DeleteStatement;
 import net.sf.mmm.util.query.base.feature.FeaturePagingImpl;
 import net.sf.mmm.util.query.base.feature.FeatureWhereImpl;
-import net.sf.mmm.util.query.base.path.Alias;
 
 /**
  * This is the abstract base-implementation of {@link DeleteStatement}.
@@ -26,7 +26,7 @@ public abstract class AbstractDeleteStatement<E, SELF extends DeleteStatement<E,
    * @param dialect - see {@link #getSqlDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
-  public AbstractDeleteStatement(SqlDialect dialect, Alias<E> alias) {
+  public AbstractDeleteStatement(SqlDialect dialect, EntityAlias<E> alias) {
     super(dialect, alias);
   }
 

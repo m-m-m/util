@@ -11,6 +11,7 @@ import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.argument.Argument;
 import net.sf.mmm.util.query.api.expression.Expression;
+import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.Statement;
 import net.sf.mmm.util.query.api.variable.Variable;
 import net.sf.mmm.util.query.base.argument.ConstantArgument;
@@ -279,36 +280,36 @@ public class SqlBuilder {
   }
 
   /**
-   * @param alias the {@link Alias}.
+   * @param alias the {@link EntityAlias}.
    */
-  public void addFrom(Alias<?> alias) {
+  public void addFrom(EntityAlias<?> alias) {
 
     this.sqlBuilder.append(this.dialect.from());
     addAlias(alias);
   }
 
   /**
-   * @param alias the {@link Alias}.
+   * @param alias the {@link EntityAlias}.
    */
-  public void addInsertInto(Alias<?> alias) {
+  public void addInsertInto(EntityAlias<?> alias) {
 
     this.sqlBuilder.append(this.dialect.insertInto());
     addAlias(alias);
   }
 
   /**
-   * @param alias the {@link Alias}.
+   * @param alias the {@link EntityAlias}.
    */
-  protected void addAlias(Alias<?> alias) {
+  protected void addAlias(EntityAlias<?> alias) {
 
     this.sqlBuilder.append(this.dialect.ref(alias.getSource()));
-    this.sqlBuilder.append(this.dialect.as(alias.getName()));
+    this.sqlBuilder.append(this.dialect.as(alias));
   }
 
   /**
-   * @param alias the {@link Alias}.
+   * @param alias the {@link EntityAlias}.
    */
-  public void addUpdate(Alias<?> alias) {
+  public void addUpdate(EntityAlias<?> alias) {
 
     this.sqlBuilder.append(this.dialect.update());
     addAlias(alias);

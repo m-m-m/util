@@ -2,8 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base.statement;
 
+import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.ModifyStatement;
-import net.sf.mmm.util.query.base.path.Alias;
 
 /**
  * This is the abstract base-implementation of {@link ModifyStatement}.
@@ -23,7 +23,7 @@ public abstract class AbstractModifyStatement<E, SELF extends ModifyStatement<E,
    * @param dialect - see {@link #getSqlDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
-  public AbstractModifyStatement(SqlDialect dialect, Alias<E> alias) {
+  public AbstractModifyStatement(SqlDialect dialect, EntityAlias<E> alias) {
     super(dialect, alias);
   }
 

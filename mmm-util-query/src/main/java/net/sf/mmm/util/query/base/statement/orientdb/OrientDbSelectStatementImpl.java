@@ -13,10 +13,10 @@ import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.api.EntityBean;
-import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.statement.orientdb.OrientDbSelectStatement;
 import net.sf.mmm.util.query.api.variable.Variable;
+import net.sf.mmm.util.query.base.QueryMode;
 import net.sf.mmm.util.query.base.feature.FeatureLetImpl;
 import net.sf.mmm.util.query.base.path.Alias;
 import net.sf.mmm.util.query.base.statement.AbstractSelectStatement;
@@ -45,55 +45,19 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
     this.mapper = mapper;
   }
 
-  private List<ODocument> query(String prefix) {
+  @Override
+  public Object executeQuery(String sql, QueryMode mode) {
 
-    OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<>(prefix + getSql());
-    List<Object> variables = getParameters();
+    OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<>(sql);
     ODatabaseRecordThreadLocal singleton = ODatabaseRecordThreadLocal.INSTANCE;
     // if (!singleton.isDefined()) {
     // throw new IllegalStateException("No transaction");
     // }
-    Object[] variablesArray = variables.toArray(new Object[variables.size()]);
     ODatabaseInternal<?> connection = singleton.get().getDatabaseOwner();
+
+    List<Object> variables = getParameters();
+    Object[] variablesArray = variables.toArray(new Object[variables.size()]);
     return connection.command(query).execute(variablesArray);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public List<E> fetch() {
-
-    return (List<E>) query(getSqlDialect().select());
-  }
-
-  @Override
-  public E fetchFirst() {
-
-    List<ODocument> result = query(getSqlDialect().select());
-    if (result.isEmpty()) {
-      return null;
-    }
-    return this.mapper.apply(result.get(0));
-  }
-
-  @Override
-  public E fetchOne() {
-
-    List<ODocument> result = query(getSqlDialect().select());
-    if (result.isEmpty()) {
-      return null;
-    }
-    if (result.size() > 1) {
-      throw new DuplicateObjectException(getAlias());
-    }
-    return this.mapper.apply(result.get(0));
-  }
-
-  @Override
-  public long fetchCount() {
-
-    List<ODocument> result = query(getSqlDialect().selectCountAll());
-    Long count = result.get(0).field("count");
-    return count.longValue();
   }
 
   @Override
@@ -136,7 +100,7 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
   public static OrientDbSelectStatementImpl<ODocument> of(OClass oClass) {
 
     Alias<ODocument> source = new Alias<>(oClass.getName());
-    return new OrientDbSelectStatementImpl<>(source, x -> x);
+    return new OrientDbSelectStatementImpl<>(source, null);
   }
 
 }

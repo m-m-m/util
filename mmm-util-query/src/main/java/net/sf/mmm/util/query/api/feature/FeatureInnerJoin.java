@@ -9,8 +9,8 @@ import net.sf.mmm.util.query.api.statement.Statement;
 import net.sf.mmm.util.query.base.path.Alias;
 
 /**
- * Extends {@link Statement} for a query {@link net.sf.mmm.util.query.api.statement.Statement} with support for
- * #innerJoin block.
+ * Extends {@link Statement} for a {@link net.sf.mmm.util.query.api.statement.Statement} with support for #innerJoin
+ * block.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
