@@ -47,7 +47,7 @@ public class InsertStatementTest extends AbstractStatementTest<TestInsertStateme
     }
 
     @Override
-    public long execute() {
+    protected long doExecute(String sql, Integer limit) {
 
       throw new UnsupportedOperationException();
     }

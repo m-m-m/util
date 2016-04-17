@@ -29,10 +29,8 @@ import net.sf.mmm.util.query.base.statement.AbstractSelectStatement;
  * @author hohwille
  * @since 8.0.0
  */
-public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, OrientDbSelectStatement<E>>
-    implements OrientDbSelectStatement<E> {
-
-  private final Function<ODocument, E> mapper;
+public class OrientDbSelectStatementImpl<E> extends
+    AbstractSelectStatement<E, OrientDbSelectStatement<E>, ODocument> implements OrientDbSelectStatement<E> {
 
   /**
    * The constructor.
@@ -41,12 +39,11 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
    * @param mapper the {@link Function} to {@link Function#apply(Object) map} from {@link ODocument} to {@literal <E>}.
    */
   protected OrientDbSelectStatementImpl(Alias<E> alias, Function<ODocument, E> mapper) {
-    super(OrientDbDialect.INSTANCE, alias);
-    this.mapper = mapper;
+    super(OrientDbDialect.INSTANCE, alias, mapper);
   }
 
   @Override
-  public Object executeQuery(String sql, QueryMode mode) {
+  protected Object doExecute(String sql, QueryMode mode, Long offset, Integer limit) {
 
     OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<>(sql);
     ODatabaseRecordThreadLocal singleton = ODatabaseRecordThreadLocal.INSTANCE;
@@ -57,7 +54,8 @@ public class OrientDbSelectStatementImpl<E> extends AbstractSelectStatement<E, O
 
     List<Object> variables = getParameters();
     Object[] variablesArray = variables.toArray(new Object[variables.size()]);
-    return connection.command(query).execute(variablesArray);
+    Object result = connection.command(query).execute(variablesArray);
+    return result;
   }
 
   @Override

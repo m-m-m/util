@@ -8,14 +8,16 @@ import net.sf.mmm.util.query.base.statement.AbstractSelectStatement;
 /**
  * This is the implementation of {@link Query}.
  *
- * @param <E> the generic type of the {@link #execute() result}.
+ * @param <R> the generic type of the {@link #execute() result}.
+ * @param <E> the generic type of a single selection of the {@link AbstractSelectStatement}.
+ * @param <T> the generic type of the {@link AbstractSelectStatement#execute(String, QueryMode) internal results}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public class QueryImpl<E> implements Query<E> {
+public class QueryImpl<R, E, T> implements Query<R> {
 
-  private final AbstractSelectStatement<?, ?> statement;
+  private final AbstractSelectStatement<E, ?, T> statement;
 
   private final String sql;
 
@@ -29,7 +31,7 @@ public class QueryImpl<E> implements Query<E> {
    * @param sql the {@link AbstractSelectStatement#getSql() SQL of the statement}.
    * @param mode the {@link QueryMode}.
    */
-  public QueryImpl(AbstractSelectStatement<?, ?> statement, String sql, QueryMode mode) {
+  public QueryImpl(AbstractSelectStatement<E, ?, T> statement, String sql, QueryMode mode) {
     super();
     this.statement = statement;
     this.sql = sql;
@@ -43,20 +45,39 @@ public class QueryImpl<E> implements Query<E> {
   }
 
   /**
+   * @return the {@link QueryMode}.
+   */
+  public QueryMode getMode() {
+
+    return this.mode;
+  }
+
+  /**
    * @return the original {@link AbstractSelectStatement} that created this {@link Query}. Please note that the
    *         statement can be modified after creating this {@link Query} and can also create additional queries. Hence
    *         use {@link #getSql()} from this {@link Query} instead of retrieving the SQL from this statement.
    */
-  protected AbstractSelectStatement<?, ?> getStatement() {
+  protected AbstractSelectStatement<E, ?, T> getStatement() {
 
     return this.statement;
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public E execute() {
+  public R execute() {
 
-    return (E) this.statement.executeQuery(this.sql, this.mode);
+    Object result = executeInternal();
+    return (R) result;
+  }
+
+  /**
+   * @see #execute()
+   * @return the untyped result of {@link #execute()}.
+   */
+  protected Object executeInternal() {
+
+    Object result = this.statement.execute(this.sql, this.mode);
+    return result;
   }
 
   @Override

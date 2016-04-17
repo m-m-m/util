@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base.statement;
 
+import java.util.function.Function;
+
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.ListQuery;
@@ -25,23 +27,27 @@ import net.sf.mmm.util.query.base.feature.FeatureWhereImpl;
  *
  * @param <E> the generic type of the queried object (typically a {@link net.sf.mmm.util.bean.api.Bean}).
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
+ * @param <T> the generic type of the {@link #execute(String, QueryMode) internal results}. See {@link #getMapper()}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E, SELF>>
+public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E, SELF>, T>
     extends AbstractStatement<E, SELF> implements SelectStatement<E, SELF> {
 
   private final PropertyPath<?>[] selectionPaths;
 
+  private final Function<T, E> mapper;
+
   /**
    * The constructor.
    *
    * @param dialect - see {@link #getSqlDialect()}.
    * @param alias - see {@link #getAlias()}.
+   * @param mapper the {@link Function} to map the results.
    */
-  public AbstractSelectStatement(SqlDialect dialect, EntityAlias<E> alias) {
-    this(dialect, alias, null, (PropertyPath<?>[]) null);
+  public AbstractSelectStatement(SqlDialect dialect, EntityAlias<E> alias, Function<T, E> mapper) {
+    this(dialect, alias, mapper, null, (PropertyPath<?>[]) null);
   }
 
   /**
@@ -49,12 +55,14 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
    *
    * @param dialect - see {@link #getSqlDialect()}.
    * @param alias - see {@link #getAlias()}.
+   * @param mapper the {@link Function} to map the results.
    * @param paths - see
    *        {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, PropertyPath...)}
    *        .
    */
-  public AbstractSelectStatement(SqlDialect dialect, EntityAlias<?> alias, PropertyPath<?>... paths) {
-    this(dialect, alias, null, paths);
+  public AbstractSelectStatement(SqlDialect dialect, EntityAlias<?> alias, Function<T, E> mapper,
+      PropertyPath<?>... paths) {
+    this(dialect, alias, mapper, null, paths);
   }
 
   /**
@@ -62,15 +70,26 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
    *
    * @param dialect - see {@link #getSqlDialect()}.
    * @param alias - see {@link #getAlias()}.
+   * @param mapper the {@link Function} to map the results.
    * @param toClass - see
    *        {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, Path...)}.
    * @param constructorArgs - see
    *        {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, Path...)}.
    */
-  public AbstractSelectStatement(SqlDialect dialect, EntityAlias<?> alias, Class<E> toClass,
+  public AbstractSelectStatement(SqlDialect dialect, EntityAlias<?> alias, Function<T, E> mapper, Class<E> toClass,
       PropertyPath<?>... constructorArgs) {
     super(dialect, alias, toClass);
+    this.mapper = mapper;
     this.selectionPaths = constructorArgs;
+  }
+
+  /**
+   * @return the {@link Function} to {@link Function#apply(Object) map} the original query results to the external
+   *         result type. May be {@code null} for the identity function if {@literal <T>=<E>}.
+   */
+  public Function<T, E> getMapper() {
+
+    return this.mapper;
   }
 
   /**
@@ -129,14 +148,36 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
   }
 
   /**
-   * Creates a select query with the given {@code SQL} with parameters from the given {@link AbstractStatement
-   * statement}.
+   * Creates a select query with the given {@code SQL} and the given {@link QueryMode}.
    *
    * @param sql the SQL to execute.
    * @param mode the {@link QueryMode}.
    * @return the result of the SQL execution.
    */
-  public abstract Object executeQuery(String sql, QueryMode mode);
+  public Object execute(String sql, QueryMode mode) {
+
+    FeaturePagingImpl paging = feature(FeaturePagingImpl.class);
+    Integer limit;
+    if (mode == QueryMode.FIRST) {
+      limit = Integer.valueOf(1);
+    } else if (mode == QueryMode.UNIQUE) {
+      limit = Integer.valueOf(2);
+    } else {
+      limit = paging.getLimit();
+    }
+    return doExecute(sql, mode, paging.getOffset(), limit);
+  }
+
+  /**
+   * Creates a select query with the given {@code SQL} and the given arguments.
+   *
+   * @param sql the SQL to execute.
+   * @param mode the {@link QueryMode}.
+   * @param offset the {@link net.sf.mmm.util.query.api.feature.FeaturePaging#offset(long) offset}.
+   * @param limit the {@link net.sf.mmm.util.query.api.feature.FeaturePaging#limit(int) limit}.
+   * @return the result of the SQL execution.
+   */
+  protected abstract Object doExecute(String sql, QueryMode mode, Long offset, Integer limit);
 
   @Override
   public ListQuery<E> query() {
@@ -159,7 +200,7 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
       }
     }
     sqlBuilder.append(statementSql);
-    return new ListQueryImpl<>(this, sqlBuilder.toString(), QueryMode.NORMAL);
+    return new ListQueryImpl<>(this, sqlBuilder.toString(), QueryMode.NORMAL, this.mapper);
   }
 
   @Override
@@ -177,9 +218,25 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
    */
   protected SingleQuery<E> querySingle(QueryMode mode) {
 
-    ListQueryImpl<E> listQuery = new ListQueryImpl<>(this, getSqlDialect().select() + getSql(), mode);
-    SingleQueryImpl<E> query = new SingleQueryImpl<>(this, listQuery);
+    String sql = createSqlSingleQuery(mode);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    ListQuery<T> listQuery = new ListQueryImpl(this, sql, mode, null);
+    SingleQueryImpl<E, T> query = new SingleQueryImpl<>(this, listQuery, mode, this.mapper);
     return query;
+  }
+
+  /**
+   * @param mode the {@link QueryMode} for a single SELECT query what is {@link QueryMode#FIRST} or
+   *        {@link QueryMode#UNIQUE}.
+   * @return the complete {@link #getSql() SQL} for a single query.
+   */
+  protected String createSqlSingleQuery(QueryMode mode) {
+
+    if (mode == QueryMode.UNIQUE) {
+      return getSqlDialect().selectDistinct() + getSql();
+    } else {
+      return getSqlDialect().select() + getSql();
+    }
   }
 
   @Override

@@ -14,30 +14,35 @@ import net.sf.mmm.util.query.base.statement.SqlBuilder;
  */
 public class FeaturePagingImpl extends AbstractFeature implements FeaturePaging<FeaturePagingImpl> {
 
-  private int limit;
+  private Integer limit;
 
-  private long offset;
+  private Long offset;
 
   /**
    * The constructor.
    */
   public FeaturePagingImpl() {
     super(SORT_INDEX_PAGING);
-    this.limit = Integer.MAX_VALUE;
-    this.offset = 0;
   }
 
   @Override
   public FeaturePagingImpl limit(int newLimit) {
 
-    this.limit = newLimit;
+    if (newLimit < 0) {
+      throw new IllegalArgumentException(Long.toString(newLimit));
+    }
+    if (newLimit == Integer.MAX_VALUE) {
+      this.limit = null;
+    } else {
+      this.limit = Integer.valueOf(newLimit);
+    }
     return this;
   }
 
   /**
-   * @return the limit
+   * @return the {@link #limit(int) limit}-
    */
-  public int getLimit() {
+  public Integer getLimit() {
 
     return this.limit;
   }
@@ -45,14 +50,21 @@ public class FeaturePagingImpl extends AbstractFeature implements FeaturePaging<
   @Override
   public FeaturePagingImpl offset(long newOffset) {
 
-    this.offset = newOffset;
+    if (newOffset < 0) {
+      throw new IllegalArgumentException(Long.toString(newOffset));
+    }
+    if (newOffset == 0) {
+      this.offset = null;
+    } else {
+      this.offset = Long.valueOf(newOffset);
+    }
     return this;
   }
 
   /**
-   * @return the offset
+   * @return the {@link #offset(long) offset}.
    */
-  public long getOffset() {
+  public Long getOffset() {
 
     return this.offset;
   }
@@ -60,18 +72,18 @@ public class FeaturePagingImpl extends AbstractFeature implements FeaturePaging<
   @Override
   public void build(SqlBuilder builder) {
 
-    if (this.offset != 0) {
+    if (this.offset != null) {
       String sqlOffset = builder.getDialect().offset();
       if (!sqlOffset.isEmpty()) {
         builder.getBuffer().append(sqlOffset);
-        builder.addParameter(Long.valueOf(this.offset));
+        builder.addParameter(this.offset);
       }
     }
-    if (this.limit != Integer.MAX_VALUE) {
+    if (this.limit != null) {
       String sqlLimit = builder.getDialect().limit();
       if (!sqlLimit.isEmpty()) {
         builder.getBuffer().append(sqlLimit);
-        builder.addParameter(Integer.valueOf(this.limit));
+        builder.addParameter(this.limit);
       }
     }
   }

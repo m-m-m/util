@@ -25,6 +25,14 @@ public interface SqlDialect {
   }
 
   /**
+   * @return {@link #select()} #distinct() (as supported by dialect or regular select).
+   */
+  default String selectDistinct() {
+
+    return select() + distinct();
+  }
+
+  /**
    * @param alias the {@link EntityAlias}.
    * @return {@link #select()} {@link #countAll(EntityAlias)}.
    */
@@ -135,6 +143,14 @@ public interface SqlDialect {
       throw new IllegalArgumentException(name);
     }
     return name;
+  }
+
+  /**
+   * @return the {@code DISTINCT} keyword.
+   */
+  default String distinct() {
+
+    return "DISTINCT ";
   }
 
   /**

@@ -96,6 +96,18 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
   /**
    * @param <F> the generic type of the requested {@link AbstractFeature feature}.
    * @param featureClass the {@link Class} reflecting the requested {@link AbstractFeature feature}.
+   * @return the requested {@link AbstractFeature feature} or {@code null} if NOT yet {@link #feature(Class) created}.
+   */
+  protected <F extends AbstractFeature> F getFeature(Class<F> featureClass) {
+
+    @SuppressWarnings("unchecked")
+    F feature = (F) this.featureMap.get(featureClass);
+    return feature;
+  }
+
+  /**
+   * @param <F> the generic type of the requested {@link AbstractFeature feature}.
+   * @param featureClass the {@link Class} reflecting the requested {@link AbstractFeature feature}.
    * @return the requested {@link AbstractFeature feature}.
    */
   protected <F extends AbstractFeature> F feature(Class<F> featureClass) {

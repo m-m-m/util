@@ -16,7 +16,7 @@ import net.sf.mmm.util.query.api.statement.SelectStatement;
 public abstract interface FeatureSelect extends StatementFactoryFeature {
 
   /**
-   * Creates a regular {@link SelectStatement} ({@code SELECT FROM alias ...}).
+   * Creates a regular {@link SelectStatement} ({@code SELECT FROM alias.source [AS alias.name] ...}).
    *
    * @param <E> the generic type of the entity to select.
    * @param alias the {@link EntityAlias} to select from.
@@ -26,7 +26,7 @@ public abstract interface FeatureSelect extends StatementFactoryFeature {
 
   /**
    * Creates {@link SelectStatement} for a tuple of the given {{@code paths} (
-   * {@code SELECT path1, path2, ... FROM alias ...}).
+   * {@code SELECT path1, path2, ... FROM alias.source [AS alias.name] ...}).
    *
    * @param alias the {@link EntityAlias} to select from.
    * @param paths the {@link PropertyPath}s to select.
@@ -36,9 +36,10 @@ public abstract interface FeatureSelect extends StatementFactoryFeature {
 
   /**
    * Creates {@link SelectStatement} for a projection to a transfer-object having an according constructor. In JPA this
-   * is called a constructor query ({@code SELECT NEW package.Classname(arg1, arg2, ...) FROM alias ...}). If not
-   * natively supported this is implemented as a projection based on a {@link #selectFrom(EntityAlias, PropertyPath...)
-   * tuple selection}.
+   * is called a constructor query (
+   * {@code SELECT NEW package.Classname(arg1, arg2, ...) FROM alias.source [AS alias.name] ...}). If not natively
+   * supported this is implemented as a projection based on a {@link #selectFrom(EntityAlias, PropertyPath...) tuple
+   * selection}.
    *
    * @param <E> the generic type of the transfer-object to select.
    * @param alias the {@link EntityAlias} to select from.

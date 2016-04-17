@@ -35,4 +35,10 @@ public class OrientDbDialect extends Object implements SqlDialect {
     return "$" + variable.getName();
   }
 
+  @Override
+  public String selectDistinct() {
+
+    return select();
+  }
+
 }

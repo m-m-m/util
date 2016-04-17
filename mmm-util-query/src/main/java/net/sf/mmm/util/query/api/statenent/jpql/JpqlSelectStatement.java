@@ -9,7 +9,7 @@ import net.sf.mmm.util.query.api.statement.SelectStatement;
  * Extends a regular {@link SelectStatement} with advanced features like
  * {@link #having(net.sf.mmm.util.query.api.expression.Expression...) HAVING clause}.
  *
- * @param <E> the generic type of the queried object (typically a {@link net.sf.mmm.util.bean.api.Bean}).
+ * @param <E> the generic type of the queried object (an {@link javax.persistence.Entity}).
  *
  * @author hohwille
  * @since 8.0.0

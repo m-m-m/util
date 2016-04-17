@@ -49,7 +49,7 @@ public class UpdateStatementTest extends AbstractStatementTest<TestUpdateStateme
     }
 
     @Override
-    public long execute() {
+    protected long doExecute(String sql, Integer limit) {
 
       throw new UnsupportedOperationException();
     }

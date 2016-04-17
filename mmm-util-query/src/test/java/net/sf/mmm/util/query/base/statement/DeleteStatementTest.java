@@ -48,7 +48,7 @@ public class DeleteStatementTest extends AbstractStatementTest<TestDeleteStateme
     }
 
     @Override
-    public long execute() {
+    protected long doExecute(String sql, Integer limit) {
 
       throw new UnsupportedOperationException();
     }

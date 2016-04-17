@@ -9,12 +9,15 @@ import net.sf.mmm.util.query.base.statement.AbstractSelectStatement;
 /**
  * This is the implementation of {@link NumberQuery}.
  *
- * @param <E> the generic type of the {@link #execute() result}.
+ * @param <R> the generic type of the {@link #execute() result}.
+ * @param <E> the generic type of a single selection of the {@link AbstractSelectStatement}.
+ * @param <T> the generic type of the {@link AbstractSelectStatement#execute(String, QueryMode) internal results}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public class NumberQueryImpl<E extends Number & Comparable<?>> extends QueryImpl<E> implements NumberQuery<E> {
+public class NumberQueryImpl<R extends Number & Comparable<?>, E, T> extends QueryImpl<R, E, T>
+    implements NumberQuery<R> {
 
   /**
    * The constructor.
@@ -23,7 +26,7 @@ public class NumberQueryImpl<E extends Number & Comparable<?>> extends QueryImpl
    *        {@link Query}.
    * @param sql the {@link AbstractSelectStatement#getSql() SQL of the statement}.
    */
-  public NumberQueryImpl(AbstractSelectStatement<?, ?> statement, String sql) {
+  public NumberQueryImpl(AbstractSelectStatement<E, ?, T> statement, String sql) {
     super(statement, sql, QueryMode.NORMAL);
   }
 

@@ -57,14 +57,14 @@ public class SelectStatementTest
   }
 
   public static class TestSelectStatement<E extends Bean>
-      extends AbstractSelectStatement<E, TestSelectStatement<E>> {
+      extends AbstractSelectStatement<E, TestSelectStatement<E>, E> {
 
     public TestSelectStatement(SqlDialect dialect, Alias<E> alias) {
-      super(dialect, alias);
+      super(dialect, alias, null);
     }
 
     @Override
-    public Object executeQuery(String sql, QueryMode mode) {
+    protected Object doExecute(String sql, QueryMode mode, Long offset, Integer limit) {
 
       throw new UnsupportedOperationException();
     }

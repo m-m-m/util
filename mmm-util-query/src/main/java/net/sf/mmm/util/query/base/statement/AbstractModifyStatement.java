@@ -4,6 +4,7 @@ package net.sf.mmm.util.query.base.statement;
 
 import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.ModifyStatement;
+import net.sf.mmm.util.query.base.feature.FeaturePagingImpl;
 
 /**
  * This is the abstract base-implementation of {@link ModifyStatement}.
@@ -26,5 +27,25 @@ public abstract class AbstractModifyStatement<E, SELF extends ModifyStatement<E,
   public AbstractModifyStatement(SqlDialect dialect, EntityAlias<E> alias) {
     super(dialect, alias);
   }
+
+  @Override
+  public long execute() {
+
+    Integer limit = null;
+    FeaturePagingImpl paging = getFeature(FeaturePagingImpl.class);
+    if (paging != null) {
+      limit = paging.getLimit();
+    }
+    return doExecute(getSql(), limit);
+  }
+
+  /**
+   * @see #execute()
+   *
+   * @param sql the {@link #getSql()} to execute.
+   * @param limit the {@link net.sf.mmm.util.query.api.feature.FeatureLimit#limit(int) limit}.
+   * @return amount of affected rows
+   */
+  protected abstract long doExecute(String sql, Integer limit);
 
 }

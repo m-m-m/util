@@ -15,7 +15,7 @@ import net.sf.mmm.util.query.api.statement.Statement;
 public abstract interface FeatureModify extends StatementFeature {
 
   /**
-   * Execute the clause and return the amount of affected rows
+   * Execute the SQL and return the amount of affected rows
    *
    * @return amount of affected rows
    */

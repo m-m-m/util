@@ -17,7 +17,7 @@ import net.sf.mmm.util.query.base.feature.FeatureSetImpl;
  * @since 8.0.0
  */
 public abstract class AbstractStoreStatement<E, SELF extends StoreStatement<E, SELF>>
-    extends AbstractStatement<E, SELF> implements StoreStatement<E, SELF> {
+    extends AbstractModifyStatement<E, SELF> implements StoreStatement<E, SELF> {
 
   /**
    * The constructor.
