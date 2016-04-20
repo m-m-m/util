@@ -26,15 +26,16 @@ public interface EntityAlias<E> extends PathRoot<E> {
   String getSource();
 
   /**
-   * @return the alias name of this {@link EntityAlias} (what is "alias" in "SELECT FROM Foo AS alias"). May be
-   *         {@code null} to omit or use canonical alias.
+   * @return the alias name of this {@link EntityAlias} (what is "alias" in "SELECT FROM Foo AS alias").
    */
   String getName();
 
   /**
-   * @return the optional {@link Class} reflecting the entity of this source. May be {@code null}
+   * @return the optional {@link Class} reflecting the internal entity of the {@link #getSource() source}. It is not
+   *         bound to {@literal <E>} as the internal entity does not necessarily have to be the queried result entity.
+   *         May be {@code null}.
    */
-  Class<E> getType();
+  Class<?> getType();
 
   /**
    * @return optional the {@link BeanFactory#createPrototype(Class) prototype} of this source. May be {@code null}.

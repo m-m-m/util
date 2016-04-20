@@ -9,20 +9,19 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.query.api.feature.FeatureModify;
 import net.sf.mmm.util.query.api.feature.FeatureSet;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.api.statement.SelectStatement;
-import net.sf.mmm.util.query.base.example.QueryTestBean;
+import net.sf.mmm.util.query.base.example.QueryTestPropertyBean;
 import net.sf.mmm.util.query.base.path.Alias;
 import net.sf.mmm.util.query.base.statement.InsertStatementTest.TestInsertStatement;
 
 /**
- * Test of {@link SelectStatement} and {@link AbstractSelectStatement}.
+ * Test of {@link InsertStatement} and {@link AbstractInsertStatement}.
  *
  * @author hohwille
  */
-public class InsertStatementTest extends AbstractStatementTest<TestInsertStatement<QueryTestBean>> {
+public class InsertStatementTest extends AbstractStatementTest<TestInsertStatement<QueryTestPropertyBean>> {
 
   @Override
-  protected TestInsertStatement<QueryTestBean> createStatement(SqlDialect dialect) {
+  protected TestInsertStatement<QueryTestPropertyBean> createStatement(SqlDialect dialect) {
 
     return new TestInsertStatement<>(dialect, getAlias());
   }
@@ -37,6 +36,12 @@ public class InsertStatementTest extends AbstractStatementTest<TestInsertStateme
   protected String getSqlStart() {
 
     return "INSERT INTO ";
+  }
+
+  @Override
+  protected boolean isSupportingAlias() {
+
+    return false;
   }
 
   public static class TestInsertStatement<E extends Bean>

@@ -46,7 +46,7 @@ public class FeatureHavingImpl extends AbstractFeature implements FeatureHaving<
         throw new IllegalStateException();
       }
     } else {
-      builder.getBuffer().append(builder.getDialect().having());
+      builder.append(getDialect().having());
       builder.addExpression(this.having);
     }
   }

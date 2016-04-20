@@ -5,7 +5,9 @@ package net.sf.mmm.util.query.base.expression;
 import java.util.Collection;
 
 import net.sf.mmm.util.lang.api.Conjunction;
+import net.sf.mmm.util.query.api.expression.Bracketing;
 import net.sf.mmm.util.query.api.expression.Expression;
+import net.sf.mmm.util.query.api.expression.ExpressionFormatter;
 
 /**
  * This is an implementation of {@link Expression} that is constant and will always {@link #evaluate() evaluate} to a
@@ -69,6 +71,12 @@ public class ConstantExpression implements Expression {
     } else {
       return FALSE;
     }
+  }
+
+  @Override
+  public void format(ExpressionFormatter formatter, Bracketing bracketing) {
+
+    formatter.getBuffer().append(Boolean.toString(evaluate()));
   }
 
 }

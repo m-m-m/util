@@ -9,6 +9,7 @@ import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.feature.FeatureOrderBy;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
+import net.sf.mmm.util.query.api.path.ComparablePath;
 import net.sf.mmm.util.query.base.statement.SqlBuilder;
 import net.sf.mmm.util.query.base.statement.SqlDialect;
 
@@ -31,7 +32,7 @@ public class FeatureOrderByImpl extends AbstractFeature implements FeatureOrderB
   }
 
   @Override
-  public FeatureOrderByImpl orderBy(PropertyPath<?> path, SortOrder order) {
+  public FeatureOrderByImpl orderBy(ComparablePath<?> path, SortOrder order) {
 
     this.orderByList.add(new OrderByExpression(path, order));
     return this;
@@ -43,18 +44,18 @@ public class FeatureOrderByImpl extends AbstractFeature implements FeatureOrderB
     if (this.orderByList.isEmpty()) {
       return;
     }
-    StringBuilder sqlBuilder = builder.getBuffer();
-    SqlDialect dialect = builder.getDialect();
-    sqlBuilder.append(dialect.orderBy());
+    StringBuilder buffer = builder.getBuffer();
+    SqlDialect dialect = getDialect();
+    buffer.append(dialect.orderBy());
     String separator = null;
     for (OrderByExpression orderBy : this.orderByList) {
       if (separator == null) {
         separator = dialect.separator();
       } else {
-        sqlBuilder.append(separator);
+        buffer.append(separator);
       }
-      sqlBuilder.append(dialect.ref(orderBy.getPath().getName()));
-      sqlBuilder.append(dialect.order(orderBy.getOrder()));
+      builder.addPath(orderBy.getPath());
+      buffer.append(dialect.order(orderBy.getOrder()));
     }
   }
 
@@ -63,7 +64,7 @@ public class FeatureOrderByImpl extends AbstractFeature implements FeatureOrderB
    */
   protected static class OrderByExpression {
 
-    private final PropertyPath<?> path;
+    private final ComparablePath<?> path;
 
     private final SortOrder order;
 
@@ -73,7 +74,7 @@ public class FeatureOrderByImpl extends AbstractFeature implements FeatureOrderB
      * @param path the {@link PropertyPath}.
      * @param order the {@link SortOrder}.
      */
-    public OrderByExpression(PropertyPath<?> path, SortOrder order) {
+    public OrderByExpression(ComparablePath<?> path, SortOrder order) {
       super();
       this.path = path;
       this.order = order;
@@ -82,7 +83,7 @@ public class FeatureOrderByImpl extends AbstractFeature implements FeatureOrderB
     /**
      * @return the {@link PropertyPath}.
      */
-    public PropertyPath<?> getPath() {
+    public ComparablePath<?> getPath() {
 
       return this.path;
     }

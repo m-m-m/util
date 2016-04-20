@@ -7,6 +7,7 @@ import java.util.List;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.Command;
 import net.sf.mmm.util.query.api.expression.Expression;
+import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.base.statement.SqlDialect;
 
 /**
@@ -27,6 +28,16 @@ import net.sf.mmm.util.query.base.statement.SqlDialect;
 public abstract interface Statement<E, SELF extends Statement<E, SELF>> extends Command {
 
   /**
+   * @return the {@link EntityAlias} to work on (select from, insert into, etc.). For regular {@link Statement}s this
+   *         will be <code>{@link EntityAlias}{@literal <E>}</code> but for special queries such as
+   *         {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, net.sf.mmm.util.property.api.path.PropertyPath...)
+   *         tuple} or
+   *         {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, net.sf.mmm.util.query.api.path.Path...)
+   *         constructor} queries this is not bound to the generic {@literal <E>}.
+   */
+  EntityAlias<?> getAlias();
+
+  /**
    * @return an {@link java.util.Collections#unmodifiableList(List) unmodifiable} {@link List} with the bind variables.
    */
   List<Object> getParameters();
@@ -41,7 +52,7 @@ public abstract interface Statement<E, SELF extends Statement<E, SELF>> extends 
   /**
    * @return the {@link SqlDialect} to use.
    */
-  SqlDialect getSqlDialect();
+  SqlDialect getDialect();
 
   /**
    * @see #getSql()

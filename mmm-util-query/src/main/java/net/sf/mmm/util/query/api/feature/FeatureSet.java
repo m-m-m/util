@@ -5,7 +5,7 @@ package net.sf.mmm.util.query.api.feature;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 
 /**
- * This is the abstract interface for a {@link net.sf.mmm.util.query.api.statement.Statement} allowing a
+ * {@link StatementFeature} for a {@link net.sf.mmm.util.query.api.statement.Statement} allowing a
  * {@link #set(PropertyPath, Object) SET clause}.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.

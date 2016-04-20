@@ -23,7 +23,7 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
 
   private final E prototype;
 
-  private final Class<E> type;
+  private final Class<?> type;
 
   /**
    * The constructor.
@@ -78,14 +78,17 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
    * @param type - see {@link #getType()}.
    * @param prototype - see {@link #getPrototype()}.
    */
-  @SuppressWarnings({ "unchecked", "rawtypes" })
-  private Alias(String source, String name, Class<E> type, E prototype) {
+  public Alias(String source, String name, Class<?> type, E prototype) {
     super();
     this.source = source;
-    this.name = name;
+    if (name == null) {
+      this.name = Character.toLowerCase(source.charAt(0)) + source.substring(1);
+    } else {
+      this.name = name;
+    }
     this.prototype = prototype;
     if ((type == null) && (prototype != null)) {
-      this.type = (Class) ((Bean) prototype).access().getBeanClass();
+      this.type = ((Bean) prototype).access().getBeanClass();
     } else {
       this.type = type;
     }
@@ -110,7 +113,7 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
   }
 
   @Override
-  public Class<E> getType() {
+  public Class<?> getType() {
 
     return this.type;
   }

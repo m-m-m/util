@@ -4,10 +4,11 @@ package net.sf.mmm.util.query.api.feature;
 
 import net.sf.mmm.util.lang.api.SortOrder;
 import net.sf.mmm.util.property.api.path.PropertyPath;
+import net.sf.mmm.util.query.api.path.ComparablePath;
 
 /**
- * This is the abstract interface for a {@link net.sf.mmm.util.query.api.statement.Statement} allowing an
- * {@link #orderBy(PropertyPath, SortOrder) ORDER BY clause}.
+ * {@link StatementFeature} for a {@link net.sf.mmm.util.query.api.statement.Statement} allowing an
+ * {@link #orderBy(ComparablePath, SortOrder) ORDER BY clause}.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
@@ -24,7 +25,7 @@ public abstract interface FeatureOrderBy<SELF extends FeatureOrderBy<SELF>> exte
    * @param order the {@link SortOrder}.
    * @return this query instance for fluent API calls.
    */
-  default SELF orderBy(PropertyPath<?> path) {
+  default SELF orderBy(ComparablePath<?> path) {
 
     return orderBy(path, null);
   }
@@ -36,6 +37,6 @@ public abstract interface FeatureOrderBy<SELF extends FeatureOrderBy<SELF>> exte
    * @param order the {@link SortOrder}.
    * @return this query instance for fluent API calls.
    */
-  SELF orderBy(PropertyPath<?> path, SortOrder order);
+  SELF orderBy(ComparablePath<?> path, SortOrder order);
 
 }

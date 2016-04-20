@@ -9,6 +9,7 @@ import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.argument.Argument;
 import net.sf.mmm.util.query.api.feature.FeatureSet;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
+import net.sf.mmm.util.query.api.path.Path;
 import net.sf.mmm.util.query.base.argument.ConstantArgument;
 import net.sf.mmm.util.query.base.statement.SqlBuilder;
 import net.sf.mmm.util.query.base.statement.SqlDialect;
@@ -31,17 +32,25 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
     this.setExpressionList = new ArrayList<>();
   }
 
+  /**
+   * @return the {@link List} of {@link SetExpression}s.
+   */
+  public List<SetExpression<?>> getSetExpressionList() {
+
+    return this.setExpressionList;
+  }
+
   @Override
   public <V> FeatureSetImpl set(PropertyPath<V> path, V value) {
 
-    this.setExpressionList.add(new SetExpression<>(path, value));
+    this.setExpressionList.add(new SetExpression<>(asPath(path), value));
     return this;
   }
 
   @Override
   public <V> FeatureSetImpl set(PropertyPath<V> path, PropertyPath<V> valuePropertyPath) {
 
-    this.setExpressionList.add(new SetExpression<>(path, asArg(valuePropertyPath)));
+    this.setExpressionList.add(new SetExpression<>(asPath(path), asPath(valuePropertyPath)));
     return this;
   }
 
@@ -51,19 +60,18 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
     if (this.setExpressionList.isEmpty()) {
       return;
     }
-    StringBuilder sqlBuilder = builder.getBuffer();
-    SqlDialect dialect = builder.getDialect();
-    sqlBuilder.append(dialect.set());
+    SqlDialect dialect = getDialect();
+    builder.append(dialect.set());
     String separator = null;
     for (SetExpression<?> expression : this.setExpressionList) {
       if (separator == null) {
         separator = dialect.separator();
       } else {
-        sqlBuilder.append(separator);
+        builder.append(separator);
       }
-      sqlBuilder.append(dialect.ref(expression.path.getName()));
-      sqlBuilder.append(dialect.assignment());
-      builder.addArg(expression.assignment);
+      builder.addPath(expression.path);
+      builder.append(dialect.assignment());
+      builder.append(expression.assignment);
     }
   }
 
@@ -74,7 +82,7 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
    */
   protected static class SetExpression<V> {
 
-    private final PropertyPath<V> path;
+    private final Path<V> path;
 
     private final Argument<V> assignment;
 
@@ -84,7 +92,7 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
      * @param path - see {@link #getPath()}.
      * @param assignment - see {@link #getAssignment()}.
      */
-    public SetExpression(PropertyPath<V> path, Argument<V> assignment) {
+    public SetExpression(Path<V> path, Argument<V> assignment) {
       super();
       this.path = path;
       this.assignment = assignment;
@@ -96,16 +104,14 @@ public class FeatureSetImpl extends AbstractFeature implements FeatureSet<Featur
      * @param path - see {@link #getPath()}.
      * @param assignment - see {@link #getAssignment()}.
      */
-    public SetExpression(PropertyPath<V> path, V assignment) {
-      super();
-      this.path = path;
-      this.assignment = new ConstantArgument<>(assignment);
+    public SetExpression(Path<V> path, V assignment) {
+      this(path, new ConstantArgument<>(assignment));
     }
 
     /**
-     * @return the {@link PropertyPath}.
+     * @return the {@link Path}.
      */
-    public PropertyPath<V> getPath() {
+    public Path<V> getPath() {
 
       return this.path;
     }

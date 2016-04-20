@@ -2,10 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.api.feature;
 
-import net.sf.mmm.util.query.api.statement.Statement;
-
 /**
- * Extends {@link Statement} for a {@link net.sf.mmm.util.query.api.statement.Statement} that modifies data.
+ * {@link StatementFeature} for a {@link net.sf.mmm.util.query.api.statement.Statement} that modifies data.
  *
  * @see net.sf.mmm.util.query.api.statement.ModifyStatement
  *

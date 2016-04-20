@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
 import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.Statement;
@@ -32,24 +33,25 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
 
   private final Map<Class<? extends StatementFeature>, AbstractFeature> featureMap;
 
-  private final List<EntityAlias<?>> aliases;
+  private final Map<String, EntityAlias<?>> aliasMap;
 
   private SqlBuilder builder;
 
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
+  @SuppressWarnings("unchecked")
   public AbstractStatement(SqlDialect dialect, EntityAlias<E> alias) {
-    this(dialect, alias, alias.getType());
+    this(dialect, alias, (Class<E>) alias.getType());
   }
 
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
    * @param resultClass - see {@link #getResultClass()}.
    */
@@ -59,27 +61,29 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
     this.alias = alias;
     this.resultClass = resultClass;
     this.featureMap = new HashMap<>();
-    this.aliases = new ArrayList<>();
-    this.aliases.add(alias);
+    this.aliasMap = new HashMap<>();
+    this.aliasMap.put(alias.getName(), alias);
   }
 
   @Override
-  public SqlDialect getSqlDialect() {
+  public SqlDialect getDialect() {
 
     return this.dialect;
   }
 
-  /**
-   * @return the {@link EntityAlias} to select from. For regular {@link Statement}s this will be <code>
-   *         {@link EntityAlias}{@literal <E>}</code> but for special queries such as
-   *         {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, net.sf.mmm.util.property.api.path.PropertyPath...)
-   *         tuple} or
-   *         {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, net.sf.mmm.util.query.api.path.Path...)
-   *         constructor} queries this is not the
-   */
+  @Override
   public EntityAlias<?> getAlias() {
 
     return this.alias;
+  }
+
+  /**
+   * @return {@code true} if this {@link Statement} supports {@link EntityAlias#getName() aliasing}, {@code false}
+   *         otherwise (if aliasing has to be omitted).
+   */
+  public boolean isSupportingAlias() {
+
+    return true;
   }
 
   /**
@@ -160,15 +164,26 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
    */
   protected SqlBuilder createSqlBuilder() {
 
-    return new SqlBuilder(this.dialect);
+    return new SqlBuilder(this);
   }
 
   /**
    * @param sqlBuilder the {@link SqlBuilder} with the query context to build the SQL and bind variables.
    */
-  protected void build(SqlBuilder sqlBuilder) {
+  protected void buildStart(SqlBuilder sqlBuilder) {
 
-    this.builder.addAlias(getAlias());
+    this.builder.getBuffer().append(this.dialect.ref(this.alias.getSource()));
+    if (isSupportingAlias()) {
+      this.builder.getBuffer().append(this.dialect.as(this.alias, false));
+    }
+  }
+
+  /**
+   * @param sqlBuilder the {@link SqlBuilder} with the query context to build the SQL and bind variables.
+   */
+  protected final void build(SqlBuilder sqlBuilder) {
+
+    buildStart(sqlBuilder);
     List<AbstractFeature> orderedFeatures = new ArrayList<>(this.featureMap.values());
     Collections.sort(orderedFeatures);
     for (AbstractFeature feature : orderedFeatures) {
@@ -192,6 +207,28 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
   public String toString() {
 
     return getSql();
+  }
+
+  /**
+   * @param entityAlias the {@link EntityAlias} to add.
+   */
+  public void addAlias(EntityAlias<?> entityAlias) {
+
+    String key = entityAlias.getName();
+    EntityAlias<?> duplicate = this.aliasMap.put(key, entityAlias);
+    if (duplicate != null) {
+      throw new DuplicateObjectException(entityAlias, key, duplicate);
+    }
+  }
+
+  /**
+   * @param aliases the {@link EntityAlias}es to add.
+   */
+  public void addAliases(EntityAlias<?>... aliases) {
+
+    for (EntityAlias<?> entityAlias : aliases) {
+      addAlias(entityAlias);
+    }
   }
 
 }

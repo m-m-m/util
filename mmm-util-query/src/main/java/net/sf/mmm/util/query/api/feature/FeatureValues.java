@@ -5,7 +5,7 @@ package net.sf.mmm.util.query.api.feature;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 
 /**
- * This is the abstract interface for a {@link net.sf.mmm.util.query.api.statement.Statement} allowing a
+ * {@link StatementFeature} for a {@link net.sf.mmm.util.query.api.statement.Statement} allowing a
  * {@link #value(PropertyPath, Object) VALUES clause}. For each invocation of {@link #value(PropertyPath, Object)
  * value(pI, vI)} a value binding is added so in the end the resulting SQL fragment will be:
  *

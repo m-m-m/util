@@ -21,7 +21,7 @@ public abstract class AbstractModifyStatement<E, SELF extends ModifyStatement<E,
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
   public AbstractModifyStatement(SqlDialect dialect, EntityAlias<E> alias) {

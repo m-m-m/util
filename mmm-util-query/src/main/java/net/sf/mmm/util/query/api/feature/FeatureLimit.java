@@ -3,7 +3,7 @@
 package net.sf.mmm.util.query.api.feature;
 
 /**
- * This is the abstract interface for a {@link net.sf.mmm.util.query.api.statement.Statement} with support for
+ * {@link StatementFeature} for a {@link net.sf.mmm.util.query.api.statement.Statement} with support for
  * {@link #limit(int)}.
  *
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.

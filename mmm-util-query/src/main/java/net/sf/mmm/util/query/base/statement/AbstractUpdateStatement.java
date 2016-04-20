@@ -23,7 +23,7 @@ public abstract class AbstractUpdateStatement<E, SELF extends UpdateStatement<E,
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
   public AbstractUpdateStatement(SqlDialect dialect, EntityAlias<E> alias) {
@@ -45,10 +45,10 @@ public abstract class AbstractUpdateStatement<E, SELF extends UpdateStatement<E,
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  protected void buildStart(SqlBuilder builder) {
 
-    builder.getBuffer().append(getSqlDialect().update());
-    super.build(builder);
+    builder.getBuffer().append(getDialect().update());
+    super.buildStart(builder);
   }
 
 }

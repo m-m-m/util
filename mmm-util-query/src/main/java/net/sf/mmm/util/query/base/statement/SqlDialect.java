@@ -4,6 +4,7 @@ package net.sf.mmm.util.query.base.statement;
 
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.lang.api.SortOrder;
+import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.variable.Variable;
 import net.sf.mmm.util.query.base.expression.SqlOperator;
@@ -107,7 +108,7 @@ public interface SqlDialect {
   }
 
   /**
-   * @see #as(EntityAlias)
+   * @see #as(EntityAlias, boolean)
    * @return the {@code AS} keyword to define an alias for a {@link #from() FROM source}.
    */
   default String as() {
@@ -117,11 +118,12 @@ public interface SqlDialect {
 
   /**
    * @param alias the {@link EntityAlias}.
+   * @param space {@code true} if a space should be appended at the end of the alias, {@code false} otherwise.
    * @return {@link #as()} {@code alias.name}.
    */
-  default String as(EntityAlias<?> alias) {
+  default String as(EntityAlias<?> alias, boolean space) {
 
-    String name = alias(alias);
+    String name = alias(alias, space);
     if (name.isEmpty()) {
       return name;
     }
@@ -130,10 +132,11 @@ public interface SqlDialect {
 
   /**
    * @param alias the {@link EntityAlias}.
+   * @param space {@code true} if a space should be appended at the end of the alias, {@code false} otherwise.
    * @return the {@link EntityAlias#getName()}. In case {@link EntityAlias#getName()} is {@code null} according to the
    *         dialect either the empty string or the {@link EntityAlias#getSource() source} is used as fallback.
    */
-  default String alias(EntityAlias<?> alias) {
+  default String alias(EntityAlias<?> alias, boolean space) {
 
     String name = alias.getName();
     if (name == null) {
@@ -142,7 +145,21 @@ public interface SqlDialect {
     if (name.isEmpty()) {
       throw new IllegalArgumentException(name);
     }
-    return name;
+    if (space) {
+      return name + " ";
+    } else {
+      return name;
+    }
+  }
+
+  /**
+   * @see net.sf.mmm.util.query.api.feature.FeatureUpsert
+   * @return the {@code UPSERT} keyword.
+   * @throws UnsupportedOperationException if not supported by this dialect.
+   */
+  default String upsert() throws UnsupportedOperationException {
+
+    throw new UnsupportedOperationException();
   }
 
   /**
@@ -489,12 +506,53 @@ public interface SqlDialect {
   }
 
   /**
-   * @return the SQL separator for paths in {@link #groupBy() GROUP BY} clause, {@link #orderBy() ORDER BY} expressions,
-   *         etc.
+   * @return the SQL separator for {@link net.sf.mmm.util.query.api.path.Path paths} in {@link #groupBy() GROUP BY}
+   *         clause, {@link #orderBy() ORDER BY} expressions, etc. or {@link EntityAlias aliases} in {@link #from()
+   *         FROM}, {@link #join() JOIN}, etc.
    */
   default String separator() {
 
     return ", ";
+  }
+
+  /**
+   * @return the {@code FETCH} keyword.
+   */
+  default String fetch() {
+
+    return "FETCH ";
+  }
+
+  /**
+   * @return the {@code JOIN} keyword.
+   */
+  default String join() {
+
+    return "JOIN ";
+  }
+
+  /**
+   * @return the {@code LEFT} {@link #join()} keyword.
+   */
+  default String leftJoin() {
+
+    return "LEFT " + join();
+  }
+
+  /**
+   * @return the {@code LEFT OUTER} {@link #join()} keyword.
+   */
+  default String leftOuterJoin() {
+
+    return "LEFT OUTER " + join();
+  }
+
+  /**
+   * @return the {@code INNER} {@link #join()} keyword.
+   */
+  default String innerJoin() {
+
+    return "INNER " + join();
   }
 
   /**
@@ -510,6 +568,15 @@ public interface SqlDialect {
     } else {
       return "";
     }
+  }
+
+  /**
+   * @param property the {@link ReadableProperty property} to format.
+   * @return the formatter {@link ReadableProperty#getName() property name}.
+   */
+  default String property(ReadableProperty<?> property) {
+
+    return property.getName();
   }
 
 }

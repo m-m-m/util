@@ -6,7 +6,9 @@ import java.util.Collection;
 
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.query.api.argument.Argument;
+import net.sf.mmm.util.query.api.expression.Bracketing;
 import net.sf.mmm.util.query.api.expression.Expression;
+import net.sf.mmm.util.query.api.expression.ExpressionFormatter;
 import net.sf.mmm.util.query.base.argument.ConstantArgument;
 
 /**
@@ -95,8 +97,8 @@ public class SingleExpression<L, R> implements Expression {
    * @param operator - see {@link #getOperator()}.
    * @param arg2 - see {@link #getArg2()}.
    * @return a new {@link Expression} for a single {@link SqlOperator operation} on given arguments. Will be reduced to
-   *         a {@link ConstantExpression} if both {@link ConstantArgument}s are {@link ConstantArgument#isConstant() constant} and therefore does
-   *         not have to be an instance of {@link SingleExpression}.
+   *         a {@link ConstantExpression} if both {@link ConstantArgument}s are {@link ConstantArgument#isConstant()
+   *         constant} and therefore does not have to be an instance of {@link SingleExpression}.
    */
   public static <L, R> Expression valueOf(Argument<L> arg1, SqlOperator<? super L, ? super R> operator,
       Argument<R> arg2) {
@@ -105,6 +107,13 @@ public class SingleExpression<L, R> implements Expression {
       return ConstantExpression.valueOf(operator.evaluate(arg1.evaluate(), arg2.evaluate()));
     }
     return new SingleExpression<>(arg1, operator, arg2);
+  }
+
+  @Override
+  public void format(ExpressionFormatter formatter, Bracketing bracketing) {
+
+    formatter.append(this.arg1);
+    formatter.append(this.operator, this.arg2);
   }
 
 }

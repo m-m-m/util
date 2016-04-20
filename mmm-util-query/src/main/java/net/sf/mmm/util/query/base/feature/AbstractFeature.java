@@ -8,10 +8,12 @@ import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.argument.Argument;
 import net.sf.mmm.util.query.api.expression.Expression;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
+import net.sf.mmm.util.query.api.path.Path;
 import net.sf.mmm.util.query.api.statement.Statement;
 import net.sf.mmm.util.query.base.expression.Expressions;
 import net.sf.mmm.util.query.base.statement.AbstractStatement;
 import net.sf.mmm.util.query.base.statement.SqlBuilder;
+import net.sf.mmm.util.query.base.statement.SqlDialect;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
@@ -23,8 +25,14 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  */
 public abstract class AbstractFeature implements StatementFeature, Comparable<AbstractFeature> {
 
+  /** {@link #getSortIndex() Sort index} for {@link FeatureAndFromImpl}. */
+  protected static final int SORT_INDEX_AND_FROM = 0;
+
   /** {@link #getSortIndex() Sort index} for {@link FeatureSetImpl}. */
   protected static final int SORT_INDEX_SET = 10;
+
+  /** {@link #getSortIndex() Sort index} for {@link FeatureUpsertImpl}. */
+  protected static final int SORT_INDEX_UPSERT = 11;
 
   /** {@link #getSortIndex() Sort index} for {@link FeatureWhereImpl}. */
   protected static final int SORT_INDEX_WHERE = 20;
@@ -94,6 +102,14 @@ public abstract class AbstractFeature implements StatementFeature, Comparable<Ab
   }
 
   /**
+   * @return the {@link SqlDialect}.
+   */
+  protected SqlDialect getDialect() {
+
+    return this.statement.getDialect();
+  }
+
+  /**
    * @param statement is the {@link Statement} to set.
    */
   public void setStatement(AbstractStatement<?, ?> statement) {
@@ -114,6 +130,20 @@ public abstract class AbstractFeature implements StatementFeature, Comparable<Ab
 
     if (path instanceof Argument) {
       return (Argument<V>) path;
+    } else {
+      return this.statement.getAlias().to((ReadableProperty<V>) path);
+    }
+  }
+
+  /**
+   * @param <V> the generic type of the property value identified by path.
+   * @param path the {@link PropertyPath}.
+   * @return the given {@code path} as {@link Argument}.
+   */
+  protected <V> Path<V> asPath(PropertyPath<V> path) {
+
+    if (path instanceof Path) {
+      return (Path<V>) path;
     } else {
       return this.statement.getAlias().to((ReadableProperty<V>) path);
     }

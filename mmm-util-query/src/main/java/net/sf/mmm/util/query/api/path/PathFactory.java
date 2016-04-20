@@ -71,6 +71,7 @@ public abstract interface PathFactory {
 
   /**
    * @param <V> the generic type of the {@link ReadableProperty#getValue() property value}.
+   * @param <ID> the generic type of the {@link EntityBean#Id() primary key}.
    * @param property the {@link ReadableProperty property} to append.
    * @return the new {@link Path} resulting from joining the given {@link ReadableProperty property}.
    */

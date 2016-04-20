@@ -23,7 +23,7 @@ public abstract class AbstractDeleteStatement<E, SELF extends DeleteStatement<E,
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
   public AbstractDeleteStatement(SqlDialect dialect, EntityAlias<E> alias) {
@@ -45,10 +45,10 @@ public abstract class AbstractDeleteStatement<E, SELF extends DeleteStatement<E,
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  protected void buildStart(SqlBuilder builder) {
 
-    builder.getBuffer().append(getSqlDialect().deleteFrom());
-    super.build(builder);
+    builder.getBuffer().append(getDialect().deleteFrom());
+    super.buildStart(builder);
   }
 
 }

@@ -10,20 +10,19 @@ import net.sf.mmm.util.query.api.feature.FeatureLimit;
 import net.sf.mmm.util.query.api.feature.FeatureModify;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.api.statement.SelectStatement;
-import net.sf.mmm.util.query.base.example.QueryTestBean;
+import net.sf.mmm.util.query.base.example.QueryTestPropertyBean;
 import net.sf.mmm.util.query.base.path.Alias;
 import net.sf.mmm.util.query.base.statement.DeleteStatementTest.TestDeleteStatement;
 
 /**
- * Test of {@link SelectStatement} and {@link AbstractSelectStatement}.
+ * Test of {@link DeleteStatement} and {@link AbstractDeleteStatement}.
  *
  * @author hohwille
  */
-public class DeleteStatementTest extends AbstractStatementTest<TestDeleteStatement<QueryTestBean>> {
+public class DeleteStatementTest extends AbstractStatementTest<TestDeleteStatement<QueryTestPropertyBean>> {
 
   @Override
-  protected TestDeleteStatement<QueryTestBean> createStatement(SqlDialect dialect) {
+  protected TestDeleteStatement<QueryTestPropertyBean> createStatement(SqlDialect dialect) {
 
     return new TestDeleteStatement<>(dialect, getAlias());
   }

@@ -17,16 +17,10 @@ import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
  * @author hohwille
  * @since 8.0.0
  */
-public interface EntityBean<ID> extends Bean {
-
-  /** {@link WritableProperty#getName() Property name} of {@link #Id()}. */
-  String PROPERTY_NAME_ID = "Id";
-
-  /** {@link WritableProperty#getName() Property name} of {@link #Version()}. */
-  String PROPERTY_NAME_VERSION = "Version";
+public interface EntityBean<ID> extends Bean, Entity<ID> {
 
   /**
-   * @return the {@link WritableProperty property} containing the unique ID (primary key).
+   * @return the {@link WritableProperty property} containing the {@link #getId() unique ID}.
    */
   WritableProperty<ID> Id();
 
@@ -41,11 +35,7 @@ public interface EntityBean<ID> extends Bean {
   void setId(ID id);
 
   /**
-   * @return the {@link WritableProperty property} containing the version. Whenever the {@link EntityBean} gets updated
-   *         (a modification is saved and the transaction is committed), this counter is increased. The initial value of
-   *         a new {@link EntityBean} is <code>0</code>. The version acts as a modification counter for optimistic
-   *         locking. On each update it will be verified that the version has not been increased already by another
-   *         transaction. The version may also act as revision for auditing.
+   * @return the {@link WritableProperty property} containing the {@link #getVersion() version}.
    */
   WritableIntegerProperty Version();
 

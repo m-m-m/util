@@ -7,7 +7,7 @@ import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.SelectStatement;
 
 /**
- * This is the abstract interface for a {@link net.sf.mmm.util.query.api.statement.StatementFactory} supporting a
+ * {@link StatementFactoryFeature} for a {@link net.sf.mmm.util.query.api.statement.StatementFactory} supporting a
  * {@link SelectStatement}.
  *
  * @author hohwille

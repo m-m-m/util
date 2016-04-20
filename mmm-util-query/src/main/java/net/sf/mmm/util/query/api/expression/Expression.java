@@ -75,4 +75,14 @@ public interface Expression {
    */
   boolean isConstant();
 
+  /**
+   * @param formatter the {@link ExpressionFormatter} where to {@link ExpressionFormatter#append(CharSequence) append}
+   *        this {@link Expression}.
+   * @param bracketing the {@link Bracketing}.
+   * @param resolveNegativeConjunctions {@code true} if {@link Conjunction#isNegation() negative} {@link Conjunction}s
+   *        should be resolved via negation (e.g. {@code !(a OR b)} instead of {@code a NOR b}), {@code false}
+   *        otherwise.
+   */
+  void format(ExpressionFormatter formatter, Bracketing bracketing);
+
 }

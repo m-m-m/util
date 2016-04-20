@@ -20,7 +20,7 @@ public abstract class AbstractInsertStatement<E, SELF extends InsertStatement<E,
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
   public AbstractInsertStatement(SqlDialect dialect, EntityAlias<E> alias) {
@@ -28,10 +28,16 @@ public abstract class AbstractInsertStatement<E, SELF extends InsertStatement<E,
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  public boolean isSupportingAlias() {
 
-    builder.getBuffer().append(getSqlDialect().insertInto());
-    super.build(builder);
+    return false;
+  }
+
+  @Override
+  protected void buildStart(SqlBuilder builder) {
+
+    builder.getBuffer().append(getDialect().insertInto());
+    super.buildStart(builder);
   }
 
 }

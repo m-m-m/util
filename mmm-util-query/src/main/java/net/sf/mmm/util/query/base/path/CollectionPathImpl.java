@@ -5,7 +5,6 @@ package net.sf.mmm.util.query.base.path;
 import java.util.Collection;
 
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.lang.IntegerProperty;
 import net.sf.mmm.util.query.api.path.CollectionPath;
 import net.sf.mmm.util.query.api.path.NumberPath;
 import net.sf.mmm.util.query.api.path.PathRoot;
@@ -22,8 +21,6 @@ import net.sf.mmm.util.query.base.argument.AbstractCollectionArgument;
  */
 public class CollectionPathImpl<V extends Collection<E>, E> extends PathImpl<V>
     implements CollectionPath<V, E>, AbstractCollectionArgument<V, E> {
-
-  private static final IntegerProperty SIZE_PROPERTY = new IntegerProperty("size", null);
 
   /**
    * The constructor.
@@ -48,7 +45,7 @@ public class CollectionPathImpl<V extends Collection<E>, E> extends PathImpl<V>
   @Override
   public NumberPath<Integer> size() {
 
-    return new NumberPathImpl<>(this, SIZE_PROPERTY, "size(" + getName() + ")");
+    return new NumberPathImpl<>(this, SIZE_PROPERTY);
   }
 
 }

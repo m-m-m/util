@@ -73,14 +73,14 @@ public class FeaturePagingImpl extends AbstractFeature implements FeaturePaging<
   public void build(SqlBuilder builder) {
 
     if (this.offset != null) {
-      String sqlOffset = builder.getDialect().offset();
+      String sqlOffset = getDialect().offset();
       if (!sqlOffset.isEmpty()) {
         builder.getBuffer().append(sqlOffset);
         builder.addParameter(this.offset);
       }
     }
     if (this.limit != null) {
-      String sqlLimit = builder.getDialect().limit();
+      String sqlLimit = getDialect().limit();
       if (!sqlLimit.isEmpty()) {
         builder.getBuffer().append(sqlLimit);
         builder.addParameter(this.limit);

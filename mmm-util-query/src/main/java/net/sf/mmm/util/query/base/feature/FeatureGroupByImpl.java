@@ -8,8 +8,8 @@ import java.util.List;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.feature.FeatureGroupBy;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
+import net.sf.mmm.util.query.api.path.Path;
 import net.sf.mmm.util.query.base.statement.SqlBuilder;
-import net.sf.mmm.util.query.base.statement.SqlDialect;
 
 /**
  * Implementation of {@link AbstractFeature} for {@link FeatureWhere}.
@@ -19,7 +19,7 @@ import net.sf.mmm.util.query.base.statement.SqlDialect;
  */
 public class FeatureGroupByImpl extends AbstractFeature implements FeatureGroupBy<FeatureGroupByImpl> {
 
-  private final List<PropertyPath<?>> groupByList;
+  private final List<Path<?>> groupByList;
 
   /**
    * The constructor.
@@ -32,7 +32,7 @@ public class FeatureGroupByImpl extends AbstractFeature implements FeatureGroupB
   @Override
   public FeatureGroupByImpl groupBy(PropertyPath<?> path) {
 
-    this.groupByList.add(path);
+    this.groupByList.add(asPath(path));
     return this;
   }
 
@@ -42,9 +42,7 @@ public class FeatureGroupByImpl extends AbstractFeature implements FeatureGroupB
     if (this.groupByList.isEmpty()) {
       return;
     }
-    StringBuilder sqlBuilder = builder.getBuffer();
-    SqlDialect dialect = builder.getDialect();
-    sqlBuilder.append(dialect.groupBy());
+    builder.append(getDialect().groupBy());
     builder.addPaths(this.groupByList);
   }
 }

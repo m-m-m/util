@@ -8,6 +8,7 @@ import java.util.List;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.feature.FeatureLet;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
+import net.sf.mmm.util.query.api.path.Path;
 import net.sf.mmm.util.query.api.variable.Variable;
 import net.sf.mmm.util.query.base.statement.SqlBuilder;
 import net.sf.mmm.util.query.base.statement.SqlDialect;
@@ -41,14 +42,14 @@ public class FeatureLetImpl extends AbstractFeature implements FeatureLet<Featur
   @Override
   public FeatureLetImpl let(String variable, PropertyPath<?> path) {
 
-    this.letExpressionList.add(new LetExpression<>(variable, path));
+    this.letExpressionList.add(new LetExpression<>(variable, asPath(path)));
     return this;
   }
 
   @Override
   public <V> FeatureLetImpl let(Variable<V> variable, PropertyPath<V> path) {
 
-    this.letExpressionList.add(new LetExpression<>(variable, path));
+    this.letExpressionList.add(new LetExpression<>(variable, asPath(path)));
     return this;
   }
 
@@ -58,19 +59,17 @@ public class FeatureLetImpl extends AbstractFeature implements FeatureLet<Featur
     if (this.letExpressionList.isEmpty()) {
       return;
     }
-    StringBuilder sqlBuilder = builder.getBuffer();
-    SqlDialect dialect = builder.getDialect();
-    sqlBuilder.append(dialect.let());
+    SqlDialect dialect = getDialect();
+    builder.append(dialect.let());
     String separator = null;
     for (LetExpression<?> expression : this.letExpressionList) {
       if (separator == null) {
         separator = dialect.separator();
       } else {
-        sqlBuilder.append(separator);
+        builder.append(separator);
       }
       builder.addVariable(expression.variable);
-      sqlBuilder.append(dialect.variable(expression.variable));
-      sqlBuilder.append(dialect.assignment());
+      builder.append(dialect.assignment());
       builder.addPath(expression.path);
     }
   }
@@ -84,7 +83,7 @@ public class FeatureLetImpl extends AbstractFeature implements FeatureLet<Featur
 
     private final Variable<V> variable;
 
-    private final PropertyPath<V> path;
+    private final Path<V> path;
 
     /**
      * The constructor.
@@ -92,7 +91,7 @@ public class FeatureLetImpl extends AbstractFeature implements FeatureLet<Featur
      * @param variable - see {@link #getVariable()}
      * @param path - see {@link #getPath()}.
      */
-    public LetExpression(Variable<V> variable, PropertyPath<V> path) {
+    public LetExpression(Variable<V> variable, Path<V> path) {
       super();
       this.variable = variable;
       this.path = path;
@@ -104,7 +103,7 @@ public class FeatureLetImpl extends AbstractFeature implements FeatureLet<Featur
      * @param variable - see {@link #getVariable()}
      * @param path - see {@link #getPath()}.
      */
-    public LetExpression(String variable, PropertyPath<V> path) {
+    public LetExpression(String variable, Path<V> path) {
       this(Variable.valueOf(variable, path), path);
     }
 

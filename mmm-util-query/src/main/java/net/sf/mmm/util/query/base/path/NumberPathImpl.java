@@ -15,7 +15,7 @@ import net.sf.mmm.util.query.base.argument.AbstractNumberArgument;
  * @author hohwille
  * @since 8.0.0
  */
-public class NumberPathImpl<V extends Number & Comparable<?>> extends PathImpl<V>
+public class NumberPathImpl<V extends Number & Comparable<?>> extends ComparablePathImpl<V>
     implements NumberPath<V>, AbstractNumberArgument<V> {
 
   /**
@@ -36,17 +36,6 @@ public class NumberPathImpl<V extends Number & Comparable<?>> extends PathImpl<V
    */
   public NumberPathImpl(PathRoot<?> root, ReadableProperty<?> property) {
     super(root, property);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param parent - {@link #getParent()}.
-   * @param property - see {@link #getProperty()}.
-   * @param pathName - see {@link #getName()}.
-   */
-  protected NumberPathImpl(PathImpl<?> parent, ReadableProperty<?> property, String pathName) {
-    super(parent, property, pathName);
   }
 
 }

@@ -12,6 +12,6 @@ import net.sf.mmm.util.query.api.argument.NumberArgument;
  * @author hohwille
  * @since 8.0.0
  */
-public interface NumberPath<V extends Number & Comparable<?>> extends Path<V>, NumberArgument<V> {
+public interface NumberPath<V extends Number & Comparable<?>> extends ComparablePath<V>, NumberArgument<V> {
 
 }

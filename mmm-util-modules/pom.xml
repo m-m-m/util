@@ -24,6 +24,8 @@
     <module>../mmm-util-validation</module>
     <module>../mmm-util-property</module>
     <module>../mmm-util-query</module>
+    <module>../mmm-util-query-jpql</module>
+    <module>../mmm-util-query-orientdb</module>
     <module>../mmm-util-search</module>
     <module>../mmm-util-gwt</module>
   </modules>

@@ -6,7 +6,7 @@ import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statement.InsertStatement;
 
 /**
- * This is the abstract interface for a {@link net.sf.mmm.util.query.api.statement.StatementFactory} supporting a
+ * {@link StatementFactoryFeature} for a {@link net.sf.mmm.util.query.api.statement.StatementFactory} supporting a
  * {@link InsertStatement}.
  *
  * @author hohwille

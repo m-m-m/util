@@ -45,7 +45,7 @@ public class FeatureWhereImpl extends AbstractFeature implements FeatureWhere<Fe
         throw new IllegalStateException();
       }
     } else {
-      builder.getBuffer().append(builder.getDialect().where());
+      builder.getBuffer().append(getDialect().where());
       builder.addExpression(this.where);
     }
   }

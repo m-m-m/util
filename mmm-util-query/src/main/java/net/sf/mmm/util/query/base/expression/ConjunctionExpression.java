@@ -9,7 +9,9 @@ import java.util.Collections;
 import java.util.List;
 
 import net.sf.mmm.util.lang.api.Conjunction;
+import net.sf.mmm.util.query.api.expression.Bracketing;
 import net.sf.mmm.util.query.api.expression.Expression;
+import net.sf.mmm.util.query.api.expression.ExpressionFormatter;
 
 /**
  * Implementation of {@link Expression} for logical {@link Conjunction} of a list of {@link Expression}s.
@@ -155,6 +157,48 @@ public class ConjunctionExpression implements Expression {
       return ConstantExpression.valueOf(conjunction.evalEmpty());
     }
     return new ConjunctionExpression(conjunction, children);
+  }
+
+  @Override
+  public void format(ExpressionFormatter formatter, Bracketing bracketing) {
+
+    Bracketing subBracketing = bracketing;
+    boolean brackets;
+    switch (bracketing) {
+      case INNER:
+        brackets = false;
+        subBracketing = Bracketing.ALL;
+        break;
+      case MINIMAL:
+        brackets = (this.conjunction != Conjunction.AND);
+        break;
+      default:
+        brackets = true;
+    }
+    StringBuilder buffer = formatter.getBuffer();
+    Conjunction c = this.conjunction;
+    if (formatter.isResolveNegativeConjunctions()) {
+      if (c.isNegation()) {
+        buffer.append('!');
+        brackets = true;
+        c = c.negate();
+      }
+    }
+    if (brackets) {
+      buffer.append('(');
+    }
+    String conjunctionString = null;
+    for (Expression term : this.terms) {
+      if (conjunctionString == null) {
+        conjunctionString = formatter.format(c);
+      } else {
+        buffer.append(conjunctionString);
+      }
+      term.format(formatter, subBracketing);
+    }
+    if (brackets) {
+      buffer.append(')');
+    }
   }
 
 }

@@ -11,20 +11,19 @@ import net.sf.mmm.util.query.api.feature.FeatureModify;
 import net.sf.mmm.util.query.api.feature.FeatureSet;
 import net.sf.mmm.util.query.api.feature.FeatureWhere;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
-import net.sf.mmm.util.query.api.statement.SelectStatement;
-import net.sf.mmm.util.query.base.example.QueryTestBean;
+import net.sf.mmm.util.query.base.example.QueryTestPropertyBean;
 import net.sf.mmm.util.query.base.path.Alias;
 import net.sf.mmm.util.query.base.statement.UpdateStatementTest.TestUpdateStatement;
 
 /**
- * Test of {@link SelectStatement} and {@link AbstractSelectStatement}.
+ * Test of {@link UpdateStatement} and {@link AbstractUpdateStatement}.
  *
  * @author hohwille
  */
-public class UpdateStatementTest extends AbstractStatementTest<TestUpdateStatement<QueryTestBean>> {
+public class UpdateStatementTest extends AbstractStatementTest<TestUpdateStatement<QueryTestPropertyBean>> {
 
   @Override
-  protected TestUpdateStatement<QueryTestBean> createStatement(SqlDialect dialect) {
+  protected TestUpdateStatement<QueryTestPropertyBean> createStatement(SqlDialect dialect) {
 
     return new TestUpdateStatement<>(dialect, getAlias());
   }

@@ -10,6 +10,7 @@ import net.sf.mmm.util.query.api.ListQuery;
 import net.sf.mmm.util.query.api.NumberQuery;
 import net.sf.mmm.util.query.api.SingleQuery;
 import net.sf.mmm.util.query.api.expression.Expression;
+import net.sf.mmm.util.query.api.path.ComparablePath;
 import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.path.Path;
 import net.sf.mmm.util.query.api.statement.SelectStatement;
@@ -42,9 +43,9 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
-   * @param mapper the {@link Function} to map the results.
+   * @param mapper - see {@link #getMapper()}.
    */
   public AbstractSelectStatement(SqlDialect dialect, EntityAlias<E> alias, Function<T, E> mapper) {
     this(dialect, alias, mapper, null, (PropertyPath<?>[]) null);
@@ -53,9 +54,9 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
-   * @param mapper the {@link Function} to map the results.
+   * @param mapper - see {@link #getMapper()}.
    * @param paths - see
    *        {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, PropertyPath...)}
    *        .
@@ -68,9 +69,9 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
-   * @param mapper the {@link Function} to map the results.
+   * @param mapper - see {@link #getMapper()}.
    * @param toClass - see
    *        {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, Path...)}.
    * @param constructorArgs - see
@@ -113,7 +114,7 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
   }
 
   @Override
-  public SELF orderBy(PropertyPath<?> path, SortOrder order) {
+  public SELF orderBy(ComparablePath<?> path, SortOrder order) {
 
     feature(FeatureOrderByImpl.class).orderBy(path, order);
     return self();
@@ -141,10 +142,10 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
   }
 
   @Override
-  protected void build(SqlBuilder builder) {
+  protected void buildStart(SqlBuilder builder) {
 
-    builder.getBuffer().append(getSqlDialect().from());
-    super.build(builder);
+    builder.getBuffer().append(getDialect().from());
+    super.buildStart(builder);
   }
 
   /**
@@ -184,10 +185,10 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
 
     String statementSql = getSql();
     StringBuilder sqlBuilder = new StringBuilder(statementSql.length() + 12);
-    SqlDialect dialect = getSqlDialect();
+    SqlDialect dialect = getDialect();
     sqlBuilder.append(dialect.select());
     if (this.selectionPaths == null) {
-      sqlBuilder.append(dialect.alias(getAlias()));
+      sqlBuilder.append(dialect.alias(getAlias(), true));
     } else {
       String separator = null;
       for (PropertyPath<?> path : this.selectionPaths) {
@@ -206,7 +207,7 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
   @Override
   public NumberQuery<Long> queryCount() {
 
-    return new NumberQueryImpl<>(this, getSqlDialect().selectCountAll(getAlias()) + getSql());
+    return new NumberQueryImpl<>(this, getDialect().selectCountAll(getAlias()) + getSql());
   }
 
   /**
@@ -233,9 +234,9 @@ public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E,
   protected String createSqlSingleQuery(QueryMode mode) {
 
     if (mode == QueryMode.UNIQUE) {
-      return getSqlDialect().selectDistinct() + getSql();
+      return getDialect().selectDistinct() + getSql();
     } else {
-      return getSqlDialect().select() + getSql();
+      return getDialect().select() + getSql();
     }
   }
 

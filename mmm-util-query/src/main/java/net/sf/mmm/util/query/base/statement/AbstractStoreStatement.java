@@ -22,7 +22,7 @@ public abstract class AbstractStoreStatement<E, SELF extends StoreStatement<E, S
   /**
    * The constructor.
    *
-   * @param dialect - see {@link #getSqlDialect()}.
+   * @param dialect - see {@link #getDialect()}.
    * @param alias - see {@link #getAlias()}.
    */
   public AbstractStoreStatement(SqlDialect dialect, EntityAlias<E> alias) {

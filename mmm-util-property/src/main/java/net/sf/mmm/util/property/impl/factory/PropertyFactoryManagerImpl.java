@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -26,7 +25,6 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @author hohwille
  * @since 8.0.0
  */
-@Named
 public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implements PropertyFactoryManager {
 
   private static PropertyFactoryManagerImpl instance;

@@ -16,7 +16,7 @@ import net.sf.mmm.util.query.api.feature.FeatureWhere;
 import net.sf.mmm.util.query.api.feature.StatementFeature;
 import net.sf.mmm.util.query.api.statement.SelectStatement;
 import net.sf.mmm.util.query.base.QueryMode;
-import net.sf.mmm.util.query.base.example.QueryTestBean;
+import net.sf.mmm.util.query.base.example.QueryTestPropertyBean;
 import net.sf.mmm.util.query.base.path.Alias;
 
 /**
@@ -25,10 +25,10 @@ import net.sf.mmm.util.query.base.path.Alias;
  * @author hohwille
  */
 public class SelectStatementTest
-    extends AbstractStatementTest<SelectStatementTest.TestSelectStatement<QueryTestBean>> {
+    extends AbstractStatementTest<SelectStatementTest.TestSelectStatement<QueryTestPropertyBean>> {
 
   @Override
-  protected TestSelectStatement<QueryTestBean> createStatement(SqlDialect dialect) {
+  protected TestSelectStatement<QueryTestPropertyBean> createStatement(SqlDialect dialect) {
 
     return new TestSelectStatement<>(dialect, getAlias());
   }
@@ -47,11 +47,12 @@ public class SelectStatementTest
   }
 
   @Override
-  protected void checkExtended(TestSelectStatement<QueryTestBean> statement, String sql, List<Object> variables) {
+  protected void checkExtended(TestSelectStatement<QueryTestPropertyBean> statement, String sql,
+      List<Object> variables) {
 
     super.checkExtended(statement, sql, variables);
-    ListQuery<QueryTestBean> query = statement.query();
-    assertThat(query.getSql()).isEqualTo("SELECT " + sql);
+    ListQuery<QueryTestPropertyBean> query = statement.query();
+    assertThat(query.getSql()).isEqualTo("SELECT " + getAlias().getName() + " " + sql);
     NumberQuery<Long> countQuery = statement.queryCount();
     assertThat(countQuery.getSql()).isEqualTo("SELECT COUNT(*) " + sql);
   }

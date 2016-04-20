@@ -13,15 +13,17 @@ import net.sf.mmm.util.query.api.expression.Expression;
 public interface StringArgument extends Argument<String> {
 
   /**
-   * @param pattern the like value pattern to match.
+   * @param pattern the like value pattern to match. Use percent (%) to match any substring (including empty string) and
+   *        underscore (_) to match any single character.
    * @param escape the escape character.
    * @return an {@link Expression} for {@code this == true}.
    */
   Expression like(String pattern);
 
   /**
-   * @param pattern the like value pattern to match.
-   * @param escape the escape character.
+   * @param pattern the like value pattern to match. Use percent (%) to match any substring (including empty string) and
+   *        underscore (_) to match any single character.
+   * @param escape the escape character to escape % and _ (e.g. the backslash '\\').
    * @return an {@link Expression} for {@code this == true}.
    */
   Expression like(String pattern, char escape);
