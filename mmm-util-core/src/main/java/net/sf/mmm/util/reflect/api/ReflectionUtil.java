@@ -29,9 +29,6 @@ import net.sf.mmm.util.resource.api.DataResource;
 @ComponentSpecification
 public interface ReflectionUtil extends ReflectionUtilLimited {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.reflect.api.ReflectionUtil";
-
   /** an empty {@link Type}-array */
   Type[] NO_TYPES = new Type[0];
 
@@ -174,7 +171,7 @@ public interface ReflectionUtil extends ReflectionUtilLimited {
    */
   <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
       boolean mustBeFinal, boolean inherit)
-          throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException;
+      throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException;
 
   /**
    *

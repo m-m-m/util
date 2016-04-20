@@ -28,9 +28,6 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
@@ -64,8 +61,6 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@Singleton
-@Named(ReflectionUtil.CDI_NAME)
 public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements ReflectionUtil {
 
   /** The prefix of resources in WAR-files. */
@@ -582,7 +577,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
       boolean mustBeFinal, boolean inherit)
-          throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException {
+      throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException {
 
     Field field = type.getField(fieldName);
     int modifiers = field.getModifiers();
