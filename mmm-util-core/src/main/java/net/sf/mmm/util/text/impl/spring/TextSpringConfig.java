@@ -6,7 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import net.sf.mmm.util.text.api.JustificationBuilder;
+import net.sf.mmm.util.text.api.Singularizer;
 import net.sf.mmm.util.text.api.UnicodeUtil;
+import net.sf.mmm.util.text.base.EnglishSingularizer;
 import net.sf.mmm.util.text.base.JustificationBuilderImpl;
 import net.sf.mmm.util.text.base.UnicodeUtilImpl;
 
@@ -26,9 +28,16 @@ public class TextSpringConfig {
     return new JustificationBuilderImpl();
   }
 
+  @Bean
   public UnicodeUtil unicodeUtil() {
 
     return new UnicodeUtilImpl();
+  }
+
+  @Bean
+  public Singularizer singularizer() {
+
+    return EnglishSingularizer.INSTANCE;
   }
 
 }
