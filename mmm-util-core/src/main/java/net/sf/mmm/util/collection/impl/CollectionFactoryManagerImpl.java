@@ -6,17 +6,19 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.ArrayListFactory;
+import net.sf.mmm.util.collection.base.ConcurrentHashMapFactory;
+import net.sf.mmm.util.collection.base.ConcurrentSkipListMapFactory;
 import net.sf.mmm.util.collection.base.HashMapFactory;
 import net.sf.mmm.util.collection.base.HashSetFactory;
 import net.sf.mmm.util.collection.base.LinkedBlockingQueueFactory;
+import net.sf.mmm.util.collection.base.LinkedListDequeFactory;
 import net.sf.mmm.util.collection.base.LinkedListQueueFactory;
+import net.sf.mmm.util.collection.base.NavigableTreeMapFactory;
+import net.sf.mmm.util.collection.base.NavigableTreeSetFactory;
 import net.sf.mmm.util.collection.base.TreeSetFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
@@ -26,8 +28,6 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@Singleton
-@Named(CollectionFactoryManager.CDI_NAME)
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CollectionFactoryManagerImpl extends AbstractLoggableComponent implements CollectionFactoryManager {
 
@@ -57,28 +57,28 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   protected void doInitialize() {
 
     super.doInitialize();
-    registerMapFactory(HashMapFactory.INSTANCE);
     registerCollectionFactory(ArrayListFactory.INSTANCE, Collection.class);
     registerCollectionFactory(ArrayListFactory.INSTANCE);
     registerCollectionFactory(HashSetFactory.INSTANCE);
     registerCollectionFactory(TreeSetFactory.INSTANCE);
     registerCollectionFactory(LinkedListQueueFactory.INSTANCE);
     registerCollectionFactory(LinkedBlockingQueueFactory.INSTANCE);
-    // Deque is only available since java6, allow this class to work with
-    // java5 as well...
-    try {
-      registerCollectionFactory(net.sf.mmm.util.collection.base.LinkedListDequeFactory.INSTANCE);
-      /*
-       * Class dequeFactoryClass = Class.forName("net.sf.mmm.util.collection.api.DequeFactory"); CollectionFactory
-       * dequeFactory = (CollectionFactory) dequeFactoryClass.getField( "INSTANCE_LINKED_LIST").get(null);
-       * registerCollectionFactory(dequeFactory);
-       */
-    } catch (Throwable e) {
-      // Deque not available before java6, ignore...
-      getLogger().info(
-          "Deque is NOT available before java 6 - support disabled: " + e.getClass().getName() + ": "
-              + e.getMessage());
-    }
+    registerCollectionFactory(LinkedListDequeFactory.INSTANCE);
+    registerCollectionFactory(NavigableTreeSetFactory.INSTANCE);
+
+    registerMapFactory(HashMapFactory.INSTANCE);
+    registerMapFactory(ConcurrentHashMapFactory.INSTANCE);
+    registerMapFactory(NavigableTreeMapFactory.INSTANCE);
+    registerMapFactory(ConcurrentSkipListMapFactory.INSTANCE);
+
+    // ObservableList, ObservableSet and ObservableMap are only available since java 1.8,
+    // allow this class to work with java 1.7 as well...
+    // try {
+    // } catch (Throwable e) {
+    // // Deque not available before java6, ignore...
+    // getLogger().info("Deque is NOT available before java 6 - support disabled: " + e.getClass().getName() + ": "
+    // + e.getMessage());
+    // }
   }
 
   /**

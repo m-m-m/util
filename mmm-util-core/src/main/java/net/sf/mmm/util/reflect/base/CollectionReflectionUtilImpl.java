@@ -3,42 +3,55 @@
 package net.sf.mmm.util.reflect.base;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.Queue;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentNavigableMap;
+import java.util.concurrent.TransferQueue;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
+import javassist.Modifier;
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.GenericBean;
+import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
 /**
  * This is the implementation of the {@link CollectionReflectionUtil} interface.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@Singleton
-@Named(CollectionReflectionUtil.CDI_NAME)
 public class CollectionReflectionUtilImpl extends AbstractLoggableComponent implements CollectionReflectionUtil {
 
   /**
-   * The default value for the maximum growth of the {@link #getSize(Object) size} of an array or {@link List}
-   * : {@value}
+   * The default value for the maximum growth of the {@link #getSize(Object) size} of an array or {@link List} :
+   * {@value}
    */
   public static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
+
+  private static final Class<?>[] CAPACITY_CONSTRUCTOR_ARGS = new Class<?>[] { int.class };
 
   /** @see #getInstance() */
   private static CollectionReflectionUtilImpl instance;
@@ -52,7 +65,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
   /**
    * The constructor.
    */
-  protected CollectionReflectionUtilImpl() {
+  public CollectionReflectionUtilImpl() {
 
     super();
     this.maximumListGrowth = DEFAULT_MAXIMUM_LIST_GROWTH;
@@ -62,7 +75,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
    * This method gets the singleton instance of this {@link CollectionReflectionUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static CollectionReflectionUtilImpl getInstance() {
@@ -102,7 +115,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
 
   /**
    * This method sets the {@link CollectionFactoryManager} instance to use.
-   * 
+   *
    * @param collectionFactoryManager is the {@link CollectionFactoryManager} instance.
    */
   @Inject
@@ -114,10 +127,10 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
 
   /**
    * This method gets the maximum growth for arrays or {@link List}s.
-   * 
+   *
    * @see #set(Object, int, Object, GenericBean)
    * @see #setMaximumListGrowth(int)
-   * 
+   *
    * @return the maximumListGrowth
    */
   public int getMaximumListGrowth() {
@@ -127,7 +140,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
 
   /**
    * This method sets the {@link #getMaximumListGrowth() maximumListGrowth}.
-   * 
+   *
    * @param maximumListGrowth is the maximumListGrowth to set.
    */
   public void setMaximumListGrowth(int maximumListGrowth) {
@@ -136,30 +149,188 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     this.maximumListGrowth = maximumListGrowth;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   @SuppressWarnings("rawtypes")
+  @Override
   public <C extends Collection> C create(Class<C> type) {
+
+    return create(type, null);
+  }
+
+  @SuppressWarnings("rawtypes")
+  @Override
+  public <C extends Collection> C create(Class<C> type, int capacity) {
+
+    return create(type, Integer.valueOf(capacity));
+  }
+
+  /**
+   * @see #create(Class, int)
+   *
+   * @param <C> is the generic type of the collection.
+   * @param type is the type of collection to create. This is either an interface ({@link java.util.List},
+   *        {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract implementation of a
+   *        {@link Collection}.
+   * @param capacity is the initial capacity of the collection or {@code null} if unspecified.
+   * @return the new instance of the given <code>type</code>.
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  protected <C extends Collection<?>> C create(Class<C> type, Integer capacity) {
 
     if (type.isInterface()) {
       CollectionFactory<C> factory = getCollectionFactoryManager().getCollectionFactory(type);
       if (factory == null) {
         throw new UnknownCollectionInterfaceException(type);
       }
-      return factory.createGeneric();
+      if (capacity == null) {
+        return factory.createGeneric();
+      } else {
+        return factory.createGeneric(capacity.intValue());
+      }
+    } else if (Modifier.isAbstract(type.getModifiers())) {
+      Class<? extends Collection> collectionInterface = findCollectionInterface(type);
+      if (collectionInterface != Collection.class) {
+        return (C) create(collectionInterface, capacity);
+      }
     }
+
     try {
+      if (capacity != null) {
+        try {
+          Constructor<C> constructor = type.getConstructor(CAPACITY_CONSTRUCTOR_ARGS);
+          return constructor.newInstance(capacity);
+        } catch (Exception e) {
+          getLogger().debug("Failed to create collection via capacitory constructor.", e);
+        }
+      }
       return type.newInstance();
+    } catch (IllegalAccessException e) {
+      throw new AccessFailedException(e, type);
     } catch (Exception e) {
       throw new InstantiationFailedException(e, type);
     }
   }
 
   /**
-   * {@inheritDoc}
+   * @param type {@link Class} reflecting the {@link Collection}.
+   * @return to most specific {@link Collection} {@link Class#isInterface() interface}
+   *         {@link Class#isAssignableFrom(Class) assignable from} the given {@code type}.
    */
+  @SuppressWarnings("rawtypes")
+  protected Class<? extends Collection> findCollectionInterface(Class<? extends Collection> type) {
+
+    // actually a generic approach based on the registered CollectionFactory instances would be better to support
+    // additional collection types in a pluggable way (e.g. ObservableList or ObservableSet would already require Java8
+    // if hardcoded here).
+    if (type.isInterface()) {
+      return type;
+    } else if (List.class.isAssignableFrom(type)) {
+      return List.class;
+    } else if (Queue.class.isAssignableFrom(type)) {
+      if (BlockingDeque.class.isAssignableFrom(type)) {
+        return BlockingDeque.class;
+      } else if (Deque.class.isAssignableFrom(type)) {
+        return Deque.class;
+      } else if (BlockingQueue.class.isAssignableFrom(type)) {
+        return BlockingQueue.class;
+      } else if (TransferQueue.class.isAssignableFrom(type)) {
+        return TransferQueue.class;
+      } else {
+        return Queue.class;
+      }
+    } else if (Set.class.isAssignableFrom(type)) {
+      if (NavigableSet.class.isAssignableFrom(type)) {
+        return NavigableSet.class;
+      } else if (SortedSet.class.isAssignableFrom(type)) {
+        return SortedSet.class;
+      } else {
+        return Set.class;
+      }
+    }
+    return Collection.class;
+  }
+
+  @SuppressWarnings("rawtypes")
+  @Override
+  public <C extends Map> C createMap(Class<C> type) {
+
+    return createMap(type, null);
+  }
+
+  @SuppressWarnings("rawtypes")
+  @Override
+  public <C extends Map> C createMap(Class<C> type, int capacity) {
+
+    return createMap(type, Integer.valueOf(capacity));
+  }
+
+  /**
+   * @see #create(Class, int)
+   *
+   * @param <C> is the generic type of the collection.
+   * @param type is the type of collection to create. This is either an interface ({@link java.util.List},
+   *        {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract implementation of a
+   *        {@link Collection}.
+   * @param capacity is the initial capacity of the collection or {@code null} if unspecified.
+   * @return the new instance of the given <code>type</code>.
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  protected <C extends Map<?, ?>> C createMap(Class<C> type, Integer capacity) {
+
+    if (type.isInterface()) {
+      MapFactory<C> factory = getCollectionFactoryManager().getMapFactory(type);
+      if (factory == null) {
+        throw new UnknownCollectionInterfaceException(type);
+      }
+      if (capacity == null) {
+        return factory.createGeneric();
+      } else {
+        return factory.createGeneric(capacity.intValue());
+      }
+    } else if (Modifier.isAbstract(type.getModifiers())) {
+      Class<? extends Map> collectionInterface = findMapInterface(type);
+      return (C) createMap(collectionInterface, capacity);
+    }
+
+    try {
+      if (capacity != null) {
+        try {
+          Constructor<C> constructor = type.getConstructor(CAPACITY_CONSTRUCTOR_ARGS);
+          return constructor.newInstance(capacity);
+        } catch (Exception e) {
+          getLogger().debug("Failed to create map via capacitory constructor.", e);
+        }
+      }
+      return type.newInstance();
+    } catch (IllegalAccessException e) {
+      throw new AccessFailedException(e, type);
+    } catch (Exception e) {
+      throw new InstantiationFailedException(e, type);
+    }
+  }
+
+  /**
+   * @param type {@link Class} reflecting the {@link Map}.
+   * @return to most specific {@link Map} {@link Class#isInterface() interface} {@link Class#isAssignableFrom(Class)
+   *         assignable from} the given {@code type}.
+   */
+  @SuppressWarnings("rawtypes")
+  protected Class<? extends Map> findMapInterface(Class<? extends Map> type) {
+
+    // actually a generic approach based on the registered CollectionFactory instances would be better to support
+    // additional collection types in a pluggable way (e.g. ObservableList or ObservableSet would already require Java8
+    // if hardcoded here).
+    if (type.isInterface()) {
+      return type;
+    } else if (ConcurrentNavigableMap.class.isAssignableFrom(type)) {
+      return ConcurrentNavigableMap.class;
+    } else if (NavigableMap.class.isAssignableFrom(type)) {
+      return NavigableMap.class;
+    } else if (ConcurrentMap.class.isAssignableFrom(type)) {
+      return ConcurrentMap.class;
+    }
+    return Map.class;
+  }
+
   @Override
   public boolean isArrayOrList(Object object) {
 
@@ -209,7 +380,8 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
    * {@inheritDoc}
    */
   @Override
-  public Object get(Object arrayOrList, int index, boolean ignoreIndexOverflow) throws NlsIllegalArgumentException {
+  public Object get(Object arrayOrList, int index, boolean ignoreIndexOverflow)
+      throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
       throw new NlsNullPointerException("arrayOrList");
@@ -260,8 +432,8 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
    */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked", "null" })
-  public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver, int maximumGrowth)
-      throws NlsIllegalArgumentException {
+  public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver,
+      int maximumGrowth) throws NlsIllegalArgumentException {
 
     if (arrayOrList == null) {
       throw new NlsNullPointerException("arrayOrList");
