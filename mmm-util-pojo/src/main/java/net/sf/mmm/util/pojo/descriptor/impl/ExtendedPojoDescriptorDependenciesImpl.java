@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
+import net.sf.mmm.util.pojo.descriptor.base.ExtendedPojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependenciesImpl;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer;
 import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder;
@@ -34,9 +33,8 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBui
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (renamed, 1.1.0)
  */
-@Singleton
-@Named
-public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDependenciesImpl {
+public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDependenciesImpl
+    implements ExtendedPojoDescriptorDependencies {
 
   /** @see #getAccessorBuilders() */
   private Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders;
@@ -99,7 +97,7 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
    * @param accessorBuilders is a collection with the accessorBuilders to use. It must NOT contain two entries with the
    *        same {@link PojoPropertyAccessorBuilder#getMode() mode}.
    */
-  @Inject
+  // @Inject
   public void setAccessorBuilders(Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders) {
 
     getInitializationState().requireNotInitilized();

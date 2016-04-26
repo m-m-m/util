@@ -5,14 +5,12 @@ package net.sf.mmm.util.text.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
+import org.slf4j.LoggerFactory;
 
+import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.text.api.DiacriticalMark;
 import net.sf.mmm.util.text.api.UnicodeUtil;
-
-import org.slf4j.LoggerFactory;
 
 /**
  * This is the implementation of the {@link UnicodeUtil} interface.
@@ -23,9 +21,7 @@ import org.slf4j.LoggerFactory;
  * @since 2.0.0
  */
 @SuppressWarnings("boxing")
-@Singleton
-@Named(UnicodeUtil.CDI_NAME)
-public class UnicodeUtilImpl implements UnicodeUtil {
+public class UnicodeUtilImpl extends AbstractLoggableComponent implements UnicodeUtil {
 
   /** @see #getInstance() */
   private static UnicodeUtil instance;
@@ -72,8 +68,8 @@ public class UnicodeUtilImpl implements UnicodeUtil {
         if (!CHARACTER_TO_ASCII_MAP.containsKey(composed)) {
           Character decomposed = mark.decompose(composed);
           if (decomposed == null) {
-            LoggerFactory.getLogger(UnicodeUtilImpl.class).error(
-                "Illegal diacritic '" + mark + "' could NOT decomposed '" + composed + "'!");
+            LoggerFactory.getLogger(UnicodeUtilImpl.class)
+                .error("Illegal diacritic '" + mark + "' could NOT decomposed '" + composed + "'!");
           } else {
             char normalized = decomposed.charValue();
             String ascii = null;
@@ -94,8 +90,8 @@ public class UnicodeUtilImpl implements UnicodeUtil {
                   }
                 }
                 if (decomposeFailed2Ascii) {
-                  LoggerFactory.getLogger(UnicodeUtilImpl.class).debug(
-                      "Decomposed form '" + normalized + "' is not ASCII!");
+                  LoggerFactory.getLogger(UnicodeUtilImpl.class)
+                      .debug("Decomposed form '" + normalized + "' is not ASCII!");
                   break;
                 }
               }
@@ -148,8 +144,8 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     map.put(CYRILLIC_CAPITAL_LETTER_ZHE, Character.toString(LATIN_CAPITAL_LETTER_Z_WITH_CARON));
     map.put(CYRILLIC_CAPITAL_LETTER_ZHE_WITH_BREVE, "Z" + COMBINING_BREVE);
     map.put(CYRILLIC_CAPITAL_LETTER_ZHE_WITH_DIAERESIS, "Z" + COMBINING_MACRON);
-    map.put(CYRILLIC_CAPITAL_LETTER_ZHE_WITH_DESCENDER, Character.toString(LATIN_CAPITAL_LETTER_Z_WITH_CARON)
-        + COMBINING_CEDILLA);
+    map.put(CYRILLIC_CAPITAL_LETTER_ZHE_WITH_DESCENDER,
+        Character.toString(LATIN_CAPITAL_LETTER_Z_WITH_CARON) + COMBINING_CEDILLA);
     map.put(CYRILLIC_CAPITAL_LETTER_ZE, "Z");
     map.put(CYRILLIC_CAPITAL_LETTER_ZE_WITH_DIAERESIS, "Z" + COMBINING_DIAERESIS);
     map.put(CYRILLIC_CAPITAL_LETTER_DZE, Character.toString(LATIN_CAPITAL_LETTER_Z_WITH_CIRCUMFLEX));
@@ -205,8 +201,10 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     map.put(CYRILLIC_CAPITAL_LETTER_SHCHA, Character.toString(LATIN_CAPITAL_LETTER_S_WITH_CIRCUMFLEX));
     map.put(CYRILLIC_CAPITAL_LETTER_HARD_SIGN, Character.toString(MODIFIER_LETTER_DOUBLE_PRIME));
     map.put(CYRILLIC_CAPITAL_LETTER_YERU, "Y");
-    map.put(CYRILLIC_CAPITAL_LETTER_YERU_WITH_DIAERESIS, Character.toString(LATIN_CAPITAL_LETTER_Y_WITH_DIAERESIS));
-    map.put(CYRILLIC_CAPITAL_LETTER_YERU_WITH_DIAERESIS, Character.toString(LATIN_CAPITAL_LETTER_Y_WITH_DIAERESIS));
+    map.put(CYRILLIC_CAPITAL_LETTER_YERU_WITH_DIAERESIS,
+        Character.toString(LATIN_CAPITAL_LETTER_Y_WITH_DIAERESIS));
+    map.put(CYRILLIC_CAPITAL_LETTER_YERU_WITH_DIAERESIS,
+        Character.toString(LATIN_CAPITAL_LETTER_Y_WITH_DIAERESIS));
     map.put(CYRILLIC_CAPITAL_LETTER_SOFT_SIGN, Character.toString(MODIFIER_LETTER_PRIME));
     map.put(CYRILLIC_CAPITAL_LETTER_E, Character.toString(LATIN_CAPITAL_LETTER_E_WITH_GRAVE));
     map.put(CYRILLIC_CAPITAL_LETTER_YU, Character.toString(LATIN_CAPITAL_LETTER_U_WITH_CIRCUMFLEX));
@@ -240,8 +238,8 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     map.put(CYRILLIC_SMALL_LETTER_ZHE, Character.toString(LATIN_SMALL_LETTER_Z_WITH_CARON));
     map.put(CYRILLIC_SMALL_LETTER_ZHE_WITH_BREVE, "z" + COMBINING_BREVE);
     map.put(CYRILLIC_SMALL_LETTER_ZHE_WITH_DIAERESIS, "z" + COMBINING_MACRON);
-    map.put(CYRILLIC_SMALL_LETTER_ZHE_WITH_DESCENDER, Character.toString(LATIN_SMALL_LETTER_Z_WITH_CARON)
-        + COMBINING_CEDILLA);
+    map.put(CYRILLIC_SMALL_LETTER_ZHE_WITH_DESCENDER,
+        Character.toString(LATIN_SMALL_LETTER_Z_WITH_CARON) + COMBINING_CEDILLA);
     map.put(CYRILLIC_SMALL_LETTER_ZE, "z");
     map.put(CYRILLIC_SMALL_LETTER_ZE_WITH_DIAERESIS, "z" + COMBINING_DIAERESIS);
     map.put(CYRILLIC_SMALL_LETTER_DZE, Character.toString(LATIN_SMALL_LETTER_Z_WITH_CIRCUMFLEX));
@@ -382,7 +380,13 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     map.put(GREEK_SMALL_LETTER_KOPPA, "q");
     map.put(GREEK_SMALL_LETTER_SAN, "s");
     map.put(GREEK_SMALL_LETTER_SAMPI, "ss");
+  }
 
+  @Override
+  protected void doInitialized() {
+
+    super.doInitialized();
+    instance = this;
   }
 
   /**
@@ -566,7 +570,7 @@ public class UnicodeUtilImpl implements UnicodeUtil {
     if (instance == null) {
       synchronized (UnicodeUtilImpl.class) {
         if (instance == null) {
-          instance = new UnicodeUtilImpl();
+          new UnicodeUtilImpl().initialize();
         }
       }
     }

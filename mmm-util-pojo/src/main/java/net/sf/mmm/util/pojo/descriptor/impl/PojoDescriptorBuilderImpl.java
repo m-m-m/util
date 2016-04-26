@@ -17,10 +17,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import net.sf.mmm.util.collection.api.MapFactory;
-import net.sf.mmm.util.collection.base.HashMapFactory;
+import net.sf.mmm.util.collection.base.ConcurrentHashMapFactory;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilder;
+import net.sf.mmm.util.pojo.descriptor.base.ExtendedPojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoFieldIntrospector;
 import net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector;
 import net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector;
@@ -39,7 +40,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /** @see #getDependencies() */
-  private ExtendedPojoDescriptorDependenciesImpl configuration;
+  private ExtendedPojoDescriptorDependencies configuration;
 
   /** @see #getMethodIntrospector() */
   private PojoMethodIntrospector methodIntrospector;
@@ -54,7 +55,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    */
   public PojoDescriptorBuilderImpl() {
 
-    this(HashMapFactory.INSTANCE);
+    this(ConcurrentHashMapFactory.INSTANCE);
   }
 
   /**
@@ -83,8 +84,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
       this.fieldIntrospector = new NoPojoFieldIntrospector();
     }
     if (this.configuration == null) {
-      this.configuration = new ExtendedPojoDescriptorDependenciesImpl();
-      this.configuration.initialize();
+      ExtendedPojoDescriptorDependenciesImpl impl = new ExtendedPojoDescriptorDependenciesImpl();
+      impl.initialize();
+      this.configuration = impl;
     }
   }
 
@@ -148,11 +150,11 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method gets the {@link ExtendedPojoDescriptorDependenciesImpl}.
+   * This method gets the {@link ExtendedPojoDescriptorDependencies}.
    *
-   * @return the {@link ExtendedPojoDescriptorDependenciesImpl}.
+   * @return the {@link ExtendedPojoDescriptorDependencies}.
    */
-  protected ExtendedPojoDescriptorDependenciesImpl getDependencies() {
+  protected ExtendedPojoDescriptorDependencies getDependencies() {
 
     return this.configuration;
   }
@@ -167,12 +169,10 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method sets the {@link ExtendedPojoDescriptorDependenciesImpl}.
-   *
-   * @param configuration is the {@link ExtendedPojoDescriptorDependenciesImpl} .
+   * @param configuration are the {@link ExtendedPojoDescriptorDependencies} .
    */
   @Inject
-  public void setConfiguration(ExtendedPojoDescriptorDependenciesImpl configuration) {
+  public void setConfiguration(ExtendedPojoDescriptorDependencies configuration) {
 
     getInitializationState().requireNotInitilized();
     this.configuration = configuration;

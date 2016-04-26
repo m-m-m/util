@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.text.api.Singularizer;
 
 /**
@@ -18,8 +15,6 @@ import net.sf.mmm.util.text.api.Singularizer;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named(Singularizer.CDI_NAME)
 public class EnglishSingularizer extends AbstractTextTransformer implements Singularizer {
 
   /** The singleton instance. */

@@ -3,28 +3,25 @@
 package net.sf.mmm.util.pojo.descriptor.impl;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderFactory;
+import net.sf.mmm.util.pojo.descriptor.base.ExtendedPojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoFieldIntrospector;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoMethodIntrospector;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
  * This is the implementation of {@link PojoDescriptorBuilderFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@Singleton
-@Named(PojoDescriptorBuilderFactory.CDI_NAME)
 public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuilderFactory {
 
   /** @see #getDependencies() */
-  private ExtendedPojoDescriptorDependenciesImpl dependencies;
+  private ExtendedPojoDescriptorDependencies dependencies;
 
   /**
    * The constructor.
@@ -38,7 +35,7 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
    * This method gets the singleton instance of this {@link PojoDescriptorBuilderFactory}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static PojoDescriptorBuilderFactory getInstance() {
@@ -87,18 +84,19 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
   protected void doInitialize() {
 
     if (this.dependencies == null) {
-      this.dependencies = new ExtendedPojoDescriptorDependenciesImpl();
-      this.dependencies.initialize();
+      ExtendedPojoDescriptorDependenciesImpl impl = new ExtendedPojoDescriptorDependenciesImpl();
+      impl.initialize();
+      this.dependencies = impl;
     }
   }
 
   /**
-   * This method sets the {@link ExtendedPojoDescriptorDependenciesImpl}.
-   * 
-   * @param dependencies are the {@link ExtendedPojoDescriptorDependenciesImpl} .
+   * This method sets the {@link ExtendedPojoDescriptorDependencies}.
+   *
+   * @param dependencies are the {@link ExtendedPojoDescriptorDependencies} .
    */
   @Inject
-  public void setDependencies(ExtendedPojoDescriptorDependenciesImpl dependencies) {
+  public void setDependencies(ExtendedPojoDescriptorDependencies dependencies) {
 
     getInitializationState().requireNotInitilized();
     this.dependencies = dependencies;
@@ -106,10 +104,10 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
 
   /**
    * This method gets the {@link ExtendedPojoDescriptorDependenciesImpl}.
-   * 
+   *
    * @return the {@link ExtendedPojoDescriptorDependenciesImpl}.
    */
-  protected ExtendedPojoDescriptorDependenciesImpl getDependencies() {
+  protected ExtendedPojoDescriptorDependencies getDependencies() {
 
     return this.dependencies;
   }

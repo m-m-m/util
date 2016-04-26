@@ -18,9 +18,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 @SuppressWarnings("javadoc")
 public interface UnicodeUtil {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.text.api.UnicodeUtil";
-
   // ** C0 controls **
 
   /** The null character typically used for termination. */
@@ -2168,7 +2165,10 @@ public interface UnicodeUtil {
   /** The capital Cyrillic letter <em>Ie</em>. Looks like an 'E': {@value} */
   char CYRILLIC_CAPITAL_LETTER_IE = 0x00415;
 
-/** The capital Cyrillic letter <em>Zhe</em>. Looks like an 'X' with a vertical bar through the center or the combination of {@literal '>|<'}: {@value} */
+  /**
+   * The capital Cyrillic letter <em>Zhe</em>. Looks like an 'X' with a vertical bar through the center or the
+   * combination of {@literal '>|<'}: {@value}
+   */
   char CYRILLIC_CAPITAL_LETTER_ZHE = 0x00416;
 
   /** The capital Cyrillic letter <em>Ze</em>. Looks like a '3': {@value} */

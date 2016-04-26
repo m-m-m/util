@@ -20,11 +20,9 @@ import net.sf.mmm.util.reflect.impl.spring.ReflectSpringConfig;
 @Configuration
 @ComponentScan(basePackageClasses = PropertyFactoryManagerImpl.class)
 @Import(ReflectSpringConfig.class)
+@SuppressWarnings("javadoc")
 public class PropertySpringConfig {
 
-  /**
-   * @return the {@link PropertyFactoryManager}.
-   */
   @Bean
   public PropertyFactoryManager propertyFactoryManager() {
 
