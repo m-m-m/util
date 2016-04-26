@@ -10,7 +10,7 @@ import net.sf.mmm.util.query.api.path.EntityAlias;
  * This class represents an {@link Alias} used in a {@link net.sf.mmm.util.query.base.statement.SqlDialect#from() FROM}
  * block of an {@link net.sf.mmm.util.query.base.statement.AbstractStatement SQL statement}.
  *
- * @param <E> the generic type of the {@link #getType() type} of this {@link Alias}.
+ * @param <E> the generic type of the {@link #getEntityType() type} of this {@link Alias}.
  *
  * @author hohwille
  * @since 8.0.0
@@ -23,7 +23,9 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
 
   private final E prototype;
 
-  private final Class<?> type;
+  private final Class<?> entityType;
+
+  private final Class<E> resultType;
 
   /**
    * The constructor.
@@ -32,7 +34,7 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
    */
   public Alias(String source) {
 
-    this(source, null, null, null);
+    this(source, null, null, null, null);
   }
 
   /**
@@ -43,7 +45,7 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
    */
   public Alias(String source, String name) {
 
-    this(source, name, null, null);
+    this(source, name, null, null, null);
   }
 
   /**
@@ -51,11 +53,11 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
    *
    * @param source - see {@link #getSource()}.
    * @param name - see {@link #getName()}.
-   * @param type - see {@link #getType()}.
+   * @param type - see {@link #getEntityType()}.
    */
   public Alias(String source, String name, Class<E> type) {
 
-    this(source, name, type, null);
+    this(source, name, type, null, type);
   }
 
   /**
@@ -67,7 +69,7 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
    */
   public Alias(String source, String name, E prototype) {
 
-    this(source, name, null, prototype);
+    this(source, name, null, prototype, null);
   }
 
   /**
@@ -75,10 +77,12 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
    *
    * @param source - see {@link #getSource()}.
    * @param name - see {@link #getName()}.
-   * @param type - see {@link #getType()}.
+   * @param entityType - see {@link #getEntityType()}.
    * @param prototype - see {@link #getPrototype()}.
+   * @param resultType - see {@link #getResultType()}.
    */
-  public Alias(String source, String name, Class<?> type, E prototype) {
+  @SuppressWarnings("unchecked")
+  public Alias(String source, String name, Class<?> entityType, E prototype, Class<E> resultType) {
     super();
     this.source = source;
     if (name == null) {
@@ -87,10 +91,15 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
       this.name = name;
     }
     this.prototype = prototype;
-    if ((type == null) && (prototype != null)) {
-      this.type = ((Bean) prototype).access().getBeanClass();
+    if ((resultType == null) && (prototype != null)) {
+      this.resultType = (Class<E>) ((Bean) prototype).access().getBeanClass();
     } else {
-      this.type = type;
+      this.resultType = resultType;
+    }
+    if (entityType == null) {
+      this.entityType = this.resultType;
+    } else {
+      this.entityType = entityType;
     }
   }
 
@@ -113,15 +122,21 @@ public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
   }
 
   @Override
-  public Class<?> getType() {
+  public Class<?> getEntityType() {
 
-    return this.type;
+    return this.entityType;
+  }
+
+  @Override
+  public Class<E> getResultType() {
+
+    return this.resultType;
   }
 
   @Override
   public Alias<E> as(String aliasName) {
 
-    return new Alias<>(this.source, aliasName, this.type, this.prototype);
+    return new Alias<>(this.source, aliasName, this.entityType, this.prototype, this.resultType);
   }
 
   @Override

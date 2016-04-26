@@ -45,7 +45,7 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
    */
   @SuppressWarnings("unchecked")
   public AbstractStatement(SqlDialect dialect, EntityAlias<E> alias) {
-    this(dialect, alias, (Class<E>) alias.getType());
+    this(dialect, alias, (Class<E>) alias.getEntityType());
   }
 
   /**
@@ -88,7 +88,7 @@ public abstract class AbstractStatement<E, SELF extends Statement<E, SELF>> impl
 
   /**
    * @return the {@link Class} reflecting the result or destination of this {@link Statement}. For a regular
-   *         {@link Statement} this is {@link #getAlias()}.{@link EntityAlias#getType() getType()} but e.g. for
+   *         {@link Statement} this is {@link #getAlias()}.{@link EntityAlias#getEntityType() getType()} but e.g. for
    *         {@link net.sf.mmm.util.query.api.statement.StatementFactory#selectFrom(EntityAlias, Class, net.sf.mmm.util.query.api.path.Path...)
    *         constructor} queries this will the top-level class to return.
    */

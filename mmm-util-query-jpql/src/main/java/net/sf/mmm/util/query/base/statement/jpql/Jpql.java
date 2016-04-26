@@ -42,7 +42,7 @@ public final class Jpql {
   public static <T, E extends T, B extends T> EntityAlias<B> alias(Class<E> entityClass, B beanPrototype) {
 
     String entityName = getEntityName(entityClass);
-    return new Alias<>(entityName, null, entityClass, beanPrototype);
+    return new Alias<>(entityName, null, entityClass, beanPrototype, null);
   }
 
   /**
@@ -58,7 +58,7 @@ public final class Jpql {
       B beanPrototype) {
 
     String entityName = getEntityName(entityClass);
-    return new Alias<>(entityName, null, entityClass, beanPrototype);
+    return new Alias<>(entityName, null, entityClass, beanPrototype, entityInterface);
   }
 
   private static String getEntityName(Class<?> entityClass) {

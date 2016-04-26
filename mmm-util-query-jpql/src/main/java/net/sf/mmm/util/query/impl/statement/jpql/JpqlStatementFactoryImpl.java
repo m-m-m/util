@@ -3,12 +3,16 @@
 package net.sf.mmm.util.query.impl.statement.jpql;
 
 import java.util.List;
+import java.util.function.Function;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.bean.api.mapping.GenericPojoBeanMapper;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.statenent.jpql.JpqlDeleteStatement;
@@ -31,6 +35,8 @@ public class JpqlStatementFactoryImpl extends AbstractStatementFactory implement
   private EntityManager entityManager;
 
   private JpqlDialect dialect;
+
+  private GenericPojoBeanMapper beanMapper;
 
   /**
    * The constructor.
@@ -78,10 +84,44 @@ public class JpqlStatementFactoryImpl extends AbstractStatementFactory implement
     this.entityManager = entityManager;
   }
 
+  /**
+   * @return the {@link EntityManager}.
+   */
+  protected EntityManager getEntityManager() {
+
+    return this.entityManager;
+  }
+
+  /**
+   * @param beanMapper is the {@link GenericPojoBeanMapper} to {@link Inject}.
+   */
+  @Inject
+  public void setBeanMapper(GenericPojoBeanMapper beanMapper) {
+
+    this.beanMapper = beanMapper;
+  }
+
+  /**
+   * @return the {@link GenericPojoBeanMapper}.
+   */
+  protected GenericPojoBeanMapper getBeanMapper() {
+
+    return this.beanMapper;
+  }
+
+  @SuppressWarnings("unchecked")
   @Override
   public <E> JpqlSelectStatement<E> selectFrom(EntityAlias<E> alias) {
 
-    return new JpqlSelectStatementImpl<>(this.entityManager, this.dialect, alias, null);
+    Function<?, E> mapper = null;
+    Class<E> resultType = alias.getResultType();
+    Class<?> entityType = alias.getEntityType();
+    E prototype = alias.getPrototype();
+    if ((resultType != null) && (prototype != null) && (entityType != resultType)
+        && (!resultType.isAssignableFrom(entityType))) {
+      mapper = x -> (E) this.beanMapper.toBean(x, (Bean) prototype);
+    }
+    return new JpqlSelectStatementImpl<>(this.entityManager, this.dialect, alias, mapper);
   }
 
   @Override

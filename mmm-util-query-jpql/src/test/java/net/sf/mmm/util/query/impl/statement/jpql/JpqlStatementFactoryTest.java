@@ -63,6 +63,7 @@ public class JpqlStatementFactoryTest extends Assertions {
     checkUpdate(prototype, contact2Id, contact3Id);
     checkDelete(prototype, contact2Id, contact3Id);
     checkSelect(prototype, contact1Id);
+    checkSelectMapped(prototype, contact1Id);
   }
 
   private ContactEntity insertContact(String firstName, String lastName, boolean friend, int age) {
@@ -103,23 +104,36 @@ public class JpqlStatementFactoryTest extends Assertions {
   private void checkSelect(ContactBean prototype, Long contactId) {
 
     EntityAlias<Contact> contact = Jpql.alias(Contact.class, ContactEntity.class, prototype).as("c");
+    checkSelect(prototype, contactId, contact, Contact.class);
+  }
+
+  private void checkSelectMapped(ContactBean prototype, Long contactId) {
+
+    EntityAlias<ContactBean> contact = Jpql.alias(ContactEntity.class, prototype).as("c");
+    checkSelect(prototype, contactId, contact, ContactBean.class);
+  }
+
+  private <C extends Contact> void checkSelect(ContactBean prototype, Long contactId, EntityAlias<C> contact,
+      Class<C> type) {
+
     String firstName = "Peter";
     String lastNamePattern = "%Pan";
     Integer minAge = Integer.valueOf(18);
     Integer maxAge = Integer.valueOf(42);
-    JpqlSelectStatement<Contact> selectStatement = this.statementFactory.selectFrom(contact)
+    JpqlSelectStatement<C> selectStatement = this.statementFactory.selectFrom(contact)
         .where(
             contact.to(prototype.FirstName()).eq(firstName)
                 .and(contact.to(prototype.LastName()).like(lastNamePattern)
                     .or(contact.to(prototype.Age()).between(minAge, maxAge))))
         .orderBy(contact.to(prototype.Age()));
-    ListQuery<Contact> query = selectStatement.query();
+    ListQuery<C> query = selectStatement.query();
     assertThat(query.getSql()).isEqualTo(
         "SELECT c FROM ContactEntity AS c WHERE c.firstName = ?1 AND (c.lastName LIKE ?2 OR c.age BETWEEN ?3 AND ?4) ORDER BY c.age");
     assertThat(selectStatement.getParameters()).containsExactly(firstName, lastNamePattern, minAge, maxAge);
-    List<Contact> hits = query.execute();
+    List<C> hits = query.execute();
     assertThat(hits).hasSize(1);
-    Contact hit = hits.get(0);
+    C hit = hits.get(0);
+    assertThat(hit).isInstanceOf(type);
     assertThat(hit.getId()).isEqualTo(contactId);
     assertThat(hit.getFirstName()).isEqualTo("Peter");
     assertThat(hit.getLastName()).isEqualTo("Pan");

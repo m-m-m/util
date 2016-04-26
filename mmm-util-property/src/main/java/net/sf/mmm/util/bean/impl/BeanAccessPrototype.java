@@ -315,6 +315,11 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
       }
       return new BeanPrototypeProperty(property, this.name2PropertyMap.size());
     });
+    char first = name.charAt(0);
+    char lower = Character.toLowerCase(first);
+    if (lower != first) {
+      this.aliasMap.put(lower + name.substring(1), name);
+    }
 
     if (declared) {
       this.declaredPropertyNamesMutable.add(name);

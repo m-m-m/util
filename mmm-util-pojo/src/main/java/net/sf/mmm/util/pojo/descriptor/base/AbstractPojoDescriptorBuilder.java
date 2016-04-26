@@ -6,7 +6,6 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 import net.sf.mmm.util.collection.api.MapFactory;
-import net.sf.mmm.util.collection.base.HashMapFactory;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorImpl;
@@ -19,19 +18,11 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent implements
-    PojoDescriptorBuilder {
+public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent
+    implements PojoDescriptorBuilder {
 
   /** @see #getDescriptor(Class) */
   private final Map<GenericType<?>, PojoDescriptorImpl<?>> pojoMap;
-
-  /**
-   * The constructor.
-   */
-  public AbstractPojoDescriptorBuilder() {
-
-    this(HashMapFactory.INSTANCE);
-  }
 
   /**
    * The constructor.

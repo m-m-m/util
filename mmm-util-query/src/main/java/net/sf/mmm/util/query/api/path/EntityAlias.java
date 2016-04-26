@@ -10,7 +10,7 @@ import net.sf.mmm.util.query.base.path.Alias;
  * {@link net.sf.mmm.util.query.base.statement.AbstractStatement SQL statement} e.g. inside a a
  * {@link net.sf.mmm.util.query.base.statement.SqlDialect#from() FROM} block.
  *
- * @param <E> the generic type of the {@link #getType() type} of this {@link EntityAlias}.
+ * @param <E> the generic type of the {@link #getEntityType() type} of this {@link EntityAlias}.
  *
  * @see net.sf.mmm.util.query.base.path.Alias
  *
@@ -32,10 +32,15 @@ public interface EntityAlias<E> extends PathRoot<E> {
 
   /**
    * @return the optional {@link Class} reflecting the internal entity of the {@link #getSource() source}. It is not
-   *         bound to {@literal <E>} as the internal entity does not necessarily have to be the queried result entity.
-   *         May be {@code null}.
+   *         bound to {@literal <E>} as the internal entity does not necessarily have to be the queried
+   *         {@link #getResultType() result type}. May be {@code null}.
    */
-  Class<?> getType();
+  Class<?> getEntityType();
+
+  /**
+   * @return the optional {@link Class} reflecting the external result when this {@link EntityAlias} gets queried.
+   */
+  Class<E> getResultType();
 
   /**
    * @return optional the {@link BeanFactory#createPrototype(Class) prototype} of this source. May be {@code null}.

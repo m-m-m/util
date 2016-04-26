@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.base.link;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.bean.api.EntityBean;
 
 /**
@@ -43,6 +45,22 @@ public class EntityBeanLink<ID, E extends EntityBean<ID>> extends AbstractLink<I
   public E getTarget() {
 
     return this.bean;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (!super.equals(obj)) {
+      return false;
+    }
+    EntityBeanLink<?, ?> other = (EntityBeanLink<?, ?>) obj;
+    if (!Objects.equals(this.bean, other.bean)) {
+      return false;
+    }
+    return true;
   }
 
   /**

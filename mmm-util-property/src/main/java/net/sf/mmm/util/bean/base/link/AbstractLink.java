@@ -26,7 +26,7 @@ public abstract class AbstractLink<ID, E extends EntityBean<ID>> implements Link
   }
 
   @Override
-  public final int hashCode() {
+  public int hashCode() {
 
     ID id = getId();
     if (id == null) {
@@ -36,7 +36,7 @@ public abstract class AbstractLink<ID, E extends EntityBean<ID>> implements Link
   }
 
   @Override
-  public final boolean equals(Object obj) {
+  public boolean equals(Object obj) {
 
     if ((obj == null) || (obj.getClass() != getClass())) {
       return false;
