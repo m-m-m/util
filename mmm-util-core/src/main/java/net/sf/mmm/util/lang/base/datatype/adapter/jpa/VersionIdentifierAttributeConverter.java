@@ -10,17 +10,16 @@ import net.sf.mmm.util.version.api.VersionUtil;
 import net.sf.mmm.util.version.impl.VersionUtilImpl;
 
 /**
- * This is the implementation of {@link AbstractSimpleDatatypeAttributeConverter} for
- * {@link VersionIdentifier}.
+ * This is the implementation of {@link AbstractSimpleDatatypeAttributeConverter} for {@link VersionIdentifier}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
  */
 @SuppressWarnings("unused")
 @Converter(autoApply = true)
-public class VersionIdentifierAttributeConverter extends
-    AbstractSimpleDatatypeAttributeConverter<VersionIdentifier, String> implements
-// https://hibernate.atlassian.net/browse/HHH-8854
+public class VersionIdentifierAttributeConverter
+    extends AbstractSimpleDatatypeAttributeConverter<VersionIdentifier, String> implements
+    // https://hibernate.atlassian.net/browse/HHH-8854
     AttributeConverter<VersionIdentifier, String> {
 
   /** @see #convertToEntityAttribute(String) */

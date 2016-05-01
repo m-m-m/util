@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.sf.mmm.util.collection.impl.spring.CollectionSpringConfig;
+import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
@@ -19,9 +19,9 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  * @since 8.0.0
  */
 @Configuration
-@Import(CollectionSpringConfig.class)
+@Import(UtilCollectionSpringConfig.class)
 @SuppressWarnings("javadoc")
-public class ReflectSpringConfig {
+public class UtilReflectSpringConfig {
 
   @Bean
   public ReflectionUtil reflectionUtil() {

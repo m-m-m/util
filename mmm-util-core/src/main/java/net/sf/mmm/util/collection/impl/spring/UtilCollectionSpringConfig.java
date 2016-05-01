@@ -16,7 +16,7 @@ import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
  */
 @Configuration
 @SuppressWarnings("javadoc")
-public class CollectionSpringConfig {
+public class UtilCollectionSpringConfig {
 
   @Bean
   public CollectionFactoryManager collectionFactoryManager() {

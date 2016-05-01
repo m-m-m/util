@@ -8,9 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.NlsParseException;
@@ -33,8 +30,6 @@ import net.sf.mmm.util.value.base.ValueConverterIdentity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named(StringUtil.CDI_NAME)
 public class StringUtilImpl implements StringUtil {
 
   /** @see #getInstance() */

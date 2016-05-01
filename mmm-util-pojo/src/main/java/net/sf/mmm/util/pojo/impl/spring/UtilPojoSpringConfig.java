@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.sf.mmm.util.collection.impl.spring.CollectionSpringConfig;
+import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.base.GuessingPojoFactory;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
@@ -23,9 +23,9 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
  * @since 8.0.0
  */
 @Configuration
-@Import(CollectionSpringConfig.class)
+@Import(UtilCollectionSpringConfig.class)
 @SuppressWarnings("javadoc")
-public class PojoSpringConfig {
+public class UtilPojoSpringConfig {
 
   @Bean
   public PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory() {

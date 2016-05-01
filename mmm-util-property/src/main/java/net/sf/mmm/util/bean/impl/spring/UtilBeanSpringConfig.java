@@ -10,8 +10,8 @@ import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.api.mapping.GenericPojoBeanMapper;
 import net.sf.mmm.util.bean.impl.BeanFactoryImpl;
 import net.sf.mmm.util.bean.impl.mapping.GenericPojoBeanMapperImpl;
-import net.sf.mmm.util.pojo.impl.spring.PojoSpringConfig;
-import net.sf.mmm.util.property.impl.spring.PropertySpringConfig;
+import net.sf.mmm.util.pojo.impl.spring.UtilPojoSpringConfig;
+import net.sf.mmm.util.property.impl.spring.UtilPropertySpringConfig;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.bean}.
@@ -20,9 +20,9 @@ import net.sf.mmm.util.property.impl.spring.PropertySpringConfig;
  * @since 8.0.0
  */
 @Configuration
-@Import({ PropertySpringConfig.class, PojoSpringConfig.class })
+@Import({ UtilPropertySpringConfig.class, UtilPojoSpringConfig.class })
 @SuppressWarnings("javadoc")
-public class BeanSpringConfig {
+public class UtilBeanSpringConfig {
 
   @Bean
   public BeanFactory beanFactory() {

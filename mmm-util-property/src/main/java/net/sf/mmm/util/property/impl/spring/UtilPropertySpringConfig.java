@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 
 import net.sf.mmm.util.property.api.factory.PropertyFactoryManager;
 import net.sf.mmm.util.property.impl.factory.PropertyFactoryManagerImpl;
-import net.sf.mmm.util.reflect.impl.spring.ReflectSpringConfig;
+import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.property}.
@@ -19,9 +19,9 @@ import net.sf.mmm.util.reflect.impl.spring.ReflectSpringConfig;
  */
 @Configuration
 @ComponentScan(basePackageClasses = PropertyFactoryManagerImpl.class)
-@Import(ReflectSpringConfig.class)
+@Import(UtilReflectSpringConfig.class)
 @SuppressWarnings("javadoc")
-public class PropertySpringConfig {
+public class UtilPropertySpringConfig {
 
   @Bean
   public PropertyFactoryManager propertyFactoryManager() {

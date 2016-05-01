@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import net.sf.mmm.util.entity.api.PersistenceEntity;
 import net.sf.mmm.util.filter.api.Filter;
@@ -33,7 +32,6 @@ import net.sf.mmm.util.value.impl.ValueConverterEtoToEntity;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-@Named
 public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implements TransferObjectUtil {
 
   /** The singleton instance of {@link EtoHelper}. */

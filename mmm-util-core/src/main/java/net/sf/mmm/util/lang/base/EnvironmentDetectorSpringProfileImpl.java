@@ -6,18 +6,17 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.api.ResourceMissingException;
-
 import org.springframework.core.env.Environment;
 
+import net.sf.mmm.util.component.api.ResourceMissingException;
+
 /**
- * This is the default implementation of {@link net.sf.mmm.util.lang.api.EnvironmentDetector}. It is based on
- * spring profiles.
+ * This is the default implementation of {@link net.sf.mmm.util.lang.api.EnvironmentDetector}. It is based on spring
+ * profiles.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-// @Named(EnvironmentDetector.CDI_NAME)
 public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDetector {
 
   /** The {@link Environment} used to determine if we are running in production. */
@@ -104,9 +103,8 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
     super.logEnvironmentStatus();
     if (isDevelopmentEnvironment()) {
       getLogger().warn("ATTENTION: You are currently running in DEVELOPMENT mode.");
-      getLogger()
-          .warn(
-              "Ensure to manage your environments properly via spring profiles (e.g. by setting the system property 'spring.profiles.active'");
+      getLogger().warn(
+          "Ensure to manage your environments properly via spring profiles (e.g. by setting the system property 'spring.profiles.active'");
     }
   }
 
@@ -139,14 +137,14 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
 
   /**
    * @param name is the name of an actual environment or a configuration profile.
-   * @return the {@link #getEnvironmentType() environment type} that has been detected by naming convention,
-   *         or <code>null</code> if nothing could be detected.
+   * @return the {@link #getEnvironmentType() environment type} that has been detected by naming convention, or
+   *         <code>null</code> if nothing could be detected.
    */
   protected String detectEnvironmentType(String name) {
 
     String lowercaseName = name.toLowerCase(Locale.US);
-    if (lowercaseName.contains("pre-live") || lowercaseName.contains("pre-prod") || lowercaseName.contains("prelive")
-        || lowercaseName.contains("preprod")) {
+    if (lowercaseName.contains("pre-live") || lowercaseName.contains("pre-prod")
+        || lowercaseName.contains("prelive") || lowercaseName.contains("preprod")) {
       return ENVIRONMENT_TYPE_PRE_PRODUCTION;
     } else if (lowercaseName.contains("prod") || lowercaseName.contains("live")) {
       return ENVIRONMENT_TYPE_PRODUCTION;

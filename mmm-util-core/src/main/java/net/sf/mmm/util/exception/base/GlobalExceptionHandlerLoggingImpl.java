@@ -2,16 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.base;
 
-import javax.inject.Named;
-
 /**
- * This is the default implementation of the {@link net.sf.mmm.util.exception.api.GlobalExceptionHandler}
- * interface. It simply logs all errors.
+ * This is the default implementation of the {@link net.sf.mmm.util.exception.api.GlobalExceptionHandler} interface. It
+ * simply logs all errors.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0
  */
-@Named
 public class GlobalExceptionHandlerLoggingImpl extends AbstractGlobalExceptionHandler {
 
   /**

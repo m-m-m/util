@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.UUID;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import net.sf.mmm.util.exception.api.BusinessErrorUserException;
 import net.sf.mmm.util.exception.api.ExceptionTruncation;
@@ -25,7 +24,6 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named(ExceptionUtil.CDI_NAME)
 public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements ExceptionUtil {
 
   /** @see #getInstance() */
