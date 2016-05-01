@@ -63,7 +63,8 @@ public class SinglePropertyBuilderLinkList extends SinglePropertyBuilderLinkBase
   protected OClass getLinkedClass(WritableProperty<ObservableList<Link>> property) {
 
     GenericType<? extends ObservableList<Link>> type = property.getType();
-    assert (type.getRetrievalClass() == ObservableList.class);
+    Class<? extends ObservableList> retrievalClass = type.getRetrievalClass();
+    assert (retrievalClass == ObservableList.class);
     int typeCount = type.getTypeArgumentCount();
     if (typeCount == 1) {
       GenericType<?> linkType = type.getTypeArgument(0);
