@@ -8,6 +8,7 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.api.BeanPrototypeBuilder;
 import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.impl.BeanFactoryImpl;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
 /**
@@ -38,7 +39,10 @@ public abstract class AbstractBeanMapper<P, B extends Bean> extends AbstractLogg
   protected void doInitialize() {
 
     super.doInitialize();
-    if ((this.beanPrototypeBuilder == null) && (this.beanFactory != null)) {
+    if (this.beanFactory == null) {
+      this.beanFactory = BeanFactoryImpl.getInstance();
+    }
+    if (this.beanPrototypeBuilder == null) {
       this.beanPrototypeBuilder = this.beanFactory.createPrototypeBuilder(true);
     }
   }

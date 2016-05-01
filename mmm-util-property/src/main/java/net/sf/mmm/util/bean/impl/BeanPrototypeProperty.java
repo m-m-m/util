@@ -59,4 +59,20 @@ public class BeanPrototypeProperty {
     return this.index;
   }
 
+  @Override
+  public String toString() {
+
+    StringBuilder buffer = new StringBuilder();
+    Bean bean = this.property.getBean();
+    if (bean != null) {
+      buffer.append(bean.access().getSimpleName());
+      buffer.append('.');
+    }
+    buffer.append(this.property.getName());
+    buffer.append('[');
+    buffer.append(this.index);
+    buffer.append(']');
+    return buffer.toString();
+  }
+
 }

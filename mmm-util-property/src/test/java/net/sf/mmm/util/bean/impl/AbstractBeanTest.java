@@ -15,13 +15,17 @@ import net.sf.mmm.util.bean.api.AbstractBeanFactory;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
+import net.sf.mmm.util.bean.impl.example.CountryCodeProperty;
 import net.sf.mmm.util.bean.impl.example.ExamplePojoBean;
 import net.sf.mmm.util.bean.impl.example.ExamplePropertyBean;
+import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.BooleanProperty;
 import net.sf.mmm.util.property.api.lang.GenericProperty;
 import net.sf.mmm.util.property.api.lang.StringProperty;
+import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
+import net.sf.mmm.util.property.api.lang.WritableStringProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidatorRange;
 import net.sf.mmm.util.validation.base.ComposedValidationFailure;
@@ -71,24 +75,30 @@ public abstract class AbstractBeanTest extends Assertions {
   protected void verifyExamplePropertyBean(ExamplePropertyBean bean, AbstractBeanFactory beanFactory) {
 
     assertThat(bean).isNotNull();
-    assertThat(bean.Name()).isInstanceOf(StringProperty.class);
-    assertThat(bean.Friend()).isInstanceOf(BooleanProperty.class);
-    assertThat(bean.Orientation()).isInstanceOf(GenericProperty.class);
+    WritableStringProperty propertyName = bean.Name();
+    assertThat(propertyName).isInstanceOf(StringProperty.class);
+    BooleanProperty propertyFriend = bean.Friend();
+    assertThat(propertyFriend).isInstanceOf(BooleanProperty.class);
+    WritableProperty<Orientation> propertyOrientation = bean.Orientation();
+    assertThat(propertyOrientation).isInstanceOf(GenericProperty.class);
 
     BeanAccess access = bean.access();
     assertThat(access).isNotNull();
     assertThat(access.isReadOnly()).isFalse();
     assertThat(access.isPrototype()).isFalse();
-    WritableProperty<?>[] properties = { bean.CountryCode(), bean.Name(), bean.Age(), bean.Friend(),
-    bean.Orientation() };
+    assertThat(access.isVirtual()).isFalse();
+    CountryCodeProperty countryCode = bean.CountryCode();
+    WritableIntegerProperty propertyAge = bean.Age();
+    WritableProperty<?>[] properties = { countryCode, propertyName, propertyAge, propertyFriend,
+    propertyOrientation };
     assertThat(access.getProperties()).contains(properties);
 
     assertThat(access.getPropertyNameForAlias("Alias")).isEqualTo("Name");
     assertThat(access.getRequiredProperty("Alias")).isSameAs(access.getRequiredProperty("Name"));
 
     String name = "magicName";
-    bean.Name().setValue(name);
-    assertThat(bean.Name().get()).isEqualTo(name);
+    propertyName.setValue(name);
+    assertThat(propertyName.get()).isEqualTo(name);
 
     // validation
     // invalid mandatory fields
@@ -102,19 +112,19 @@ public abstract class AbstractBeanTest extends Assertions {
     }
 
     // valid
-    bean.CountryCode().set("DE");
-    bean.Age().set(5);
+    countryCode.set("DE");
+    propertyAge.set(5);
     failure = access.validate();
     assertThat(failure).isNull();
 
     // invalid country code
-    bean.CountryCode().set("xyz");
+    countryCode.set("xyz");
     failure = access.validate();
     assertThat(failure).isNotNull();
     assertThat(failure.getCode()).isEqualTo(ValidatorPattern.CODE);
 
     // and also invalid age
-    bean.Age().set(500);
+    propertyAge.set(500);
     failure = access.validate();
     assertThat(failure).isNotNull();
     assertThat(failure.getCode()).isEqualTo(ComposedValidator.CODE);

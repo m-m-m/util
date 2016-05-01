@@ -311,7 +311,8 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
     String name = property.getName();
     this.name2PropertyMap.compute(name, (k, v) -> {
       if (v != null) {
-        throw new DuplicateObjectException(property, name, v);
+        throw new DuplicateObjectException(property.getBean().access().getSimpleName() + "." + property.getName(),
+            name, v);
       }
       return new BeanPrototypeProperty(property, this.name2PropertyMap.size());
     });

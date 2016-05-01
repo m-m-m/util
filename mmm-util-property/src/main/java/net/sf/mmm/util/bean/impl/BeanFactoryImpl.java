@@ -522,7 +522,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         if (added) {
           getLogger().trace("{}: Added signature {} for method {}", this.beanTypeName, signature, method);
         } else {
-          getLogger().warn("{}: Duplicate signature {} ignoring method {}", this.beanTypeName, signature, method);
+          getLogger().debug("{}: Duplicate signature {} ignoring method {}", this.beanTypeName, signature, method);
           return;
         }
         this.methods.add(beanMethod);

@@ -8,8 +8,8 @@ import javax.inject.Named;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.api.lang.BooleanProperty;
 import net.sf.mmm.util.property.api.lang.IntegerProperty;
-import net.sf.mmm.util.property.api.lang.WritableBooleanProperty;
 import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
 import net.sf.mmm.util.property.api.lang.WritableStringProperty;
 import net.sf.mmm.util.validation.base.Mandatory;
@@ -34,7 +34,7 @@ public interface ExamplePropertyBean extends Bean {
     return new IntegerProperty(null, null).withValdidator().mandatory().range(0, 200).and().build();
   }
 
-  WritableBooleanProperty Friend();
+  BooleanProperty Friend();
 
   WritableProperty<Orientation> Orientation();
 
