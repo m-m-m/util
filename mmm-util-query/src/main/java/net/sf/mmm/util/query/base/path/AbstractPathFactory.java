@@ -77,7 +77,7 @@ public abstract class AbstractPathFactory implements PathFactory {
   }
 
   @Override
-  public <V extends EntityBean<ID>, ID> Path<V> to(LinkProperty<ID, V> property) {
+  public <V extends EntityBean> Path<V> to(LinkProperty<V> property) {
 
     if (this instanceof PathImpl) {
       return new EntityBeanPathImpl<>((PathImpl<?>) this, property);

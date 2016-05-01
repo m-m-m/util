@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract interface AbstractEntityBeanArgument<V extends EntityBean<?>>
+public abstract interface AbstractEntityBeanArgument<V extends EntityBean>
     extends AbstractArgument<V>, EntityBeanArgument<V> {
 
 }

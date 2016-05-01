@@ -2,8 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.base.mapping;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
@@ -39,13 +41,13 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
   /**
    * @param mapping the {@link Mapping} to register (put into concurrent map to cache).
    */
-  protected void registerMapping(M mapping) {
+  protected void addMapping(M mapping) {
 
-    addMapping(mapping.qualifiedName, mapping);
+    addMapping(getKey(mapping.prototype), mapping);
   }
 
   /**
-   * @see #registerMapping(Mapping)
+   * @see #addMapping(Mapping)
    * @param key the key used to store the {@link Mapping}.
    * @param mapping the {@link Mapping} to store.
    */
@@ -57,26 +59,60 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
     }
   }
 
+  /**
+   * @param key the {@link #getKey(Bean) key} of the requested {@link Mapping}.
+   * @return the requested {@link Mapping}. May be {@code null}.
+   */
+  protected final M getMapping(String key) {
+
+    return this.beanMap.get(key);
+  }
+
+  /**
+   * @return the {@link Collection} of {@link Mapping}s.
+   */
+  protected final Collection<M> getMappings() {
+
+    return this.beanMap.values();
+  }
+
   @Override
   public D fromBean(B bean) {
 
     if (bean == null) {
       return null;
     }
-    BeanAccess access = bean.access();
-    String key = access.getQualifiedName();
-    M mapping = this.beanMap.computeIfAbsent(key, k -> createMapping(bean));
+    M mapping = getOrCreateMapping(bean);
     D document = mapping.newDocument(bean);
-    mapPropertiesFromBean(bean, access, document);
+    mapPropertiesFromBean(bean, document);
     return document;
+  }
+
+  /**
+   * @param bean the {@link Bean} to get the {@link Mapping} for.
+   * @return the requested {@link Mapping}. Will be created by {@link #createMapping(Bean)} if not yet exists.
+   */
+  protected final M getOrCreateMapping(B bean) {
+
+    String key = getKey(bean);
+    return getOrCreateMapping(key, k -> createMapping(bean));
+  }
+
+  /**
+   * @param bean the {@link Bean}.
+   * @return the corresponding key used for {@link #getMapping(String)}.
+   */
+  protected String getKey(B bean) {
+
+    return bean.access().getQualifiedName();
   }
 
   /**
    * Override to create dynamic {@link Mapping}s on the fly.
    *
    * @param bean the {@link Bean} to map.
-   * @return the {@link Mapping} that is not yet defined and will be {@link #registerMapping(Mapping) registered} and
-   *         cached for further invocations.
+   * @return the {@link Mapping} that is not yet defined and will be {@link #addMapping(Mapping) registered} and cached
+   *         for further invocations.
    */
   protected M createMapping(B bean) {
 
@@ -85,10 +121,9 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
 
   /**
    * @param bean the {@link Bean} to map.
-   * @param access the {@link Bean#access() according} {@link BeanAccess}.
    * @param document the document to map to.
    */
-  protected abstract void mapPropertiesFromBean(B bean, BeanAccess access, D document);
+  protected abstract void mapPropertiesFromBean(B bean, D document);
 
   @SuppressWarnings("unchecked")
   @Override
@@ -97,11 +132,23 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
     if (document == null) {
       return null;
     }
-    String key = getQualifiedName(document);
-    M mapping = this.beanMap.computeIfAbsent(key, k -> createMapping(key, document));
+    String key = getKey(document);
+    M mapping = getOrCreateMapping(key, k -> createMapping(key, document));
     B bean = getBeanPrototypeBuilder().create(mapping.prototype);
     mapPropertiesToBean(document, bean);
     return (T) bean;
+  }
+
+  /**
+   * @param key the {@link #getKey(Bean) key} of the requested {@link Mapping}.
+   * @param function the {@link Function} to {@link Function#apply(Object) create} the {@link Mapping} in case it does
+   *        not already exist.
+   * @return the requested {@link Mapping}.
+   */
+  protected final M getOrCreateMapping(String key, Function<String, M> function) {
+
+    M mapping = this.beanMap.computeIfAbsent(key, function);
+    return mapping;
   }
 
   /**
@@ -113,10 +160,10 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
   /**
    * Override to create dynamic {@link Mapping}s on the fly.
    *
-   * @param key the {@link #getQualifiedName(Object) qualified name} for the {@code document}.
+   * @param key the {@link #getKey(Object) qualified name} for the {@code document}.
    * @param document the document to map.
-   * @return the {@link Mapping} that is not yet defined and will be {@link #registerMapping(Mapping) registered} and
-   *         cached for further invocations.
+   * @return the {@link Mapping} that is not yet defined and will be {@link #addMapping(Mapping) registered} and cached
+   *         for further invocations.
    */
   protected M createMapping(String key, D document) {
 
@@ -127,7 +174,7 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
    * @param document the document to map.
    * @return the {@link BeanAccess#getQualifiedName() qualified name} of the corresponding {@link Bean}.
    */
-  protected abstract String getQualifiedName(D document);
+  protected abstract String getKey(D document);
 
   /**
    * Simple container for {@link Bean} meta-data.
@@ -136,9 +183,6 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
    * @param <B> the base type of the {@link Bean} to map.
    */
   public abstract static class Mapping<D, B extends Bean> {
-
-    /** @see BeanAccess#getQualifiedName() */
-    public final String qualifiedName;
 
     /** The {@link Bean} {@link BeanFactory#createPrototype(Class) prototype}. */
     public final B prototype;
@@ -151,7 +195,6 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
     public Mapping(B prototype) {
       super();
       this.prototype = prototype;
-      this.qualifiedName = prototype.access().getQualifiedName();
     }
 
     /**
@@ -159,6 +202,13 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
      * @return a new document instance of the type {@literal <D>}.
      */
     public abstract D newDocument(B bean);
+
+    @Override
+    public String toString() {
+
+      BeanAccess access = this.prototype.access();
+      return access.getSimpleName() + "(" + access.getBeanClass().getName() + ")";
+    }
   }
 
 }

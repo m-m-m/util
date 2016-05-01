@@ -202,7 +202,7 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
       GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
 
     if (!isDynamic()) {
-      throw new ReadOnlyException(getBeanClass().getSimpleName(), "access.properties");
+      throw new ReadOnlyException(getBeanClass().getSimpleName(), name);
     }
     AbstractProperty<?> property = this.beanFactory.createProperty(name, valueType, getBean(), propertyType);
     addProperty(property, true);

@@ -65,7 +65,7 @@ public final class Args {
    * @param value the value to use as parameter.
    * @return the {@link Argument#isConstant() constant} {@link EntityBeanArgument} for the given {@code value}.
    */
-  public static <V extends EntityBean<?>> EntityBeanArgument<V> of(V value) {
+  public static <V extends EntityBean> EntityBeanArgument<V> of(V value) {
 
     return new ConstantEntityBeanArgument<>(value);
   }

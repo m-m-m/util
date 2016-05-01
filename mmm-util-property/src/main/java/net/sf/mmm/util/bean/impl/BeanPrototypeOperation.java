@@ -111,7 +111,11 @@ public abstract class BeanPrototypeOperation {
     return true;
   }
 
-  public BeanPrototypeOperation forPrototype(BeanAccessPrototype<?> prototype) {
+  /**
+   * @param accessPrototype the {@link BeanAccessPrototype} to get this operation for.
+   * @return this operation or a copy of it for the given {@link BeanAccessPrototype}.
+   */
+  public BeanPrototypeOperation forPrototype(BeanAccessPrototype<?> accessPrototype) {
 
     return this;
   }

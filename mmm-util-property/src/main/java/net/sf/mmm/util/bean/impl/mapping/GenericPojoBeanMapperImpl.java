@@ -148,14 +148,20 @@ public class GenericPojoBeanMapperImpl extends AbstractPojoBeanMapper<Object, Be
         if (!name.equals("class")) {
           WritableProperty property = access.getProperty(name);
           if (property == null) {
-            GenericType<?> propertyType = getter.getPropertyType();
-            getLogger().debug("Dynamically creating property {}.{} of type {}.", access.getQualifiedName(), name,
-                propertyType);
-            property = access.createProperty(name, propertyType);
+            if (access.isDynamic()) {
+              GenericType<?> propertyType = getter.getPropertyType();
+              getLogger().debug("Dynamically creating property {}.{} of type {}.", access.getQualifiedName(), name,
+                  propertyType);
+              property = access.createProperty(name, propertyType);
+            } else {
+              getLogger().trace("Ignoring missing property {}.{}", access.getQualifiedName(), name);
+            }
           }
-          Object value = getter.invoke(pojo);
-          value = toBeanValue(pojo, prototypeBuilder, bean, value, property.getType());
-          property.setValue(value);
+          if (property != null) {
+            Object value = getter.invoke(pojo);
+            value = toBeanValue(pojo, prototypeBuilder, bean, value, property.getType());
+            property.setValue(value);
+          }
         }
       }
     }

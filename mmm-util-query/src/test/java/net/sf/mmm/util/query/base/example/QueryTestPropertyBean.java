@@ -20,7 +20,7 @@ import net.sf.mmm.util.validation.base.Mandatory;
  *
  * @author hohwille
  */
-public interface QueryTestPropertyBean extends EntityBean<String> {
+public interface QueryTestPropertyBean extends EntityBean {
 
   WritableStringProperty FirstName();
 
@@ -38,6 +38,6 @@ public interface QueryTestPropertyBean extends EntityBean<String> {
 
   WritableProperty<Orientation> Orientation();
 
-  LinkProperty<String, QueryTestPropertyBean> Parent();
+  LinkProperty<QueryTestPropertyBean> Parent();
 
 }

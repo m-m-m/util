@@ -18,7 +18,6 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 /**
  * This is the implementation of {@link PropertyFactory} for {@link IntegerProperty}.
  *
- * @param <ID> the generic type of the {@link Link#getId() unique ID}.
  * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
  *
  * @author hohwille
@@ -26,36 +25,35 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  */
 @Named
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class PropertyFactoryLink<ID, E extends EntityBean<ID>>
-    extends AbstractPropertyFactory<Link<ID, E>, LinkProperty<ID, E>> {
+public class PropertyFactoryLink<E extends EntityBean> extends AbstractPropertyFactory<Link<E>, LinkProperty<E>> {
 
   @Override
-  public Class<Link<ID, E>> getValueClass() {
+  public Class<Link<E>> getValueClass() {
 
     return (Class) Link.class;
   }
 
   @Override
-  public Class<? extends ReadableProperty<Link<ID, E>>> getReadableInterface() {
+  public Class<? extends ReadableProperty<Link<E>>> getReadableInterface() {
 
     return null;
   }
 
   @Override
-  public Class<? extends WritableProperty<Link<ID, E>>> getWritableInterface() {
+  public Class<? extends WritableProperty<Link<E>>> getWritableInterface() {
 
     return null;
   }
 
   @Override
-  public Class<LinkProperty<ID, E>> getImplementationClass() {
+  public Class<LinkProperty<E>> getImplementationClass() {
 
     return (Class) LinkProperty.class;
   }
 
   @Override
-  public LinkProperty<ID, E> create(String name, GenericType<? extends Link<ID, E>> valueType, Bean bean,
-      AbstractValidator<? super Link<ID, E>> validator) {
+  public LinkProperty<E> create(String name, GenericType<? extends Link<E>> valueType, Bean bean,
+      AbstractValidator<? super Link<E>> validator) {
 
     return new LinkProperty<>(name, (GenericType) valueType, bean, validator);
   }

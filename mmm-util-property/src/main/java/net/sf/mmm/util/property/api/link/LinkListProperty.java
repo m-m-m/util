@@ -17,13 +17,12 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * This class represents a {@link GenericProperty property} containing a {@link List} of {@link Link}s that each
  * {@link Link#getTarget() point to} an {@link EntityBean}.
  *
- * @param <ID> the generic type of the {@link Link#getId() unique ID}.
  * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
  *
  * @author hohwille
  * @since 1.0.0
  */
-public class LinkListProperty<ID, E extends EntityBean<ID>> extends ListProperty<Link<ID, E>> {
+public class LinkListProperty<E extends EntityBean> extends ListProperty<Link<E>> {
 
   /**
    * The constructor.
@@ -32,7 +31,7 @@ public class LinkListProperty<ID, E extends EntityBean<ID>> extends ListProperty
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public LinkListProperty(String name, GenericType<ObservableList<Link<ID, E>>> type, Bean bean) {
+  public LinkListProperty(String name, GenericType<ObservableList<Link<E>>> type, Bean bean) {
     super(name, type, bean);
   }
 
@@ -44,20 +43,18 @@ public class LinkListProperty<ID, E extends EntityBean<ID>> extends ListProperty
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public LinkListProperty(String name, GenericType<ObservableList<Link<ID, E>>> type, Bean bean,
-      AbstractValidator<? super ObservableList<Link<ID, E>>> validator) {
+  public LinkListProperty(String name, GenericType<ObservableList<Link<E>>> type, Bean bean,
+      AbstractValidator<? super ObservableList<Link<E>>> validator) {
     super(name, type, bean, validator);
   }
 
   /**
-   * @param <ID> the generic type of the {@link Link#getId() unique ID}.
    * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
    * @param beanClass the class reflecting the linked {@link EntityBean}.
    * @return the {@link GenericType} for an {@link Link} {@link Link#getTarget() pointing to} an {@link EntityBean} of
    *         the given {@link Class}.
    */
-  public static <ID, E extends EntityBean<ID>> GenericType<ObservableList<Link<ID, E>>> createLinkType(
-      Class<E> beanClass) {
+  public static <E extends EntityBean> GenericType<ObservableList<Link<E>>> createLinkType(Class<E> beanClass) {
 
     return createListType(LinkProperty.createLinkType(beanClass));
   }

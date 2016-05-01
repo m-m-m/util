@@ -3,21 +3,14 @@
 package net.sf.mmm.util.query.base.example;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 /**
  * Implementation of {@link Contact} as JPA {@link Entity}.
  *
  * @author hohwille
- * @since 8.0.0
  */
 @Entity
-public class ContactEntity implements Contact {
-
-  private Long id;
-
-  private int version;
+public class ContactEntity extends AbstractEntity implements Contact {
 
   private String firstName;
 
@@ -28,32 +21,6 @@ public class ContactEntity implements Contact {
   private boolean friend;
 
   private ContactType type;
-
-  @Id
-  @GeneratedValue
-  @Override
-  public Long getId() {
-
-    return this.id;
-  }
-
-  @Override
-  public void setId(Long id) {
-
-    this.id = id;
-  }
-
-  @Override
-  public int getVersion() {
-
-    return this.version;
-  }
-
-  @Override
-  public void setVersion(int version) {
-
-    this.version = version;
-  }
 
   @Override
   public String getFirstName() {

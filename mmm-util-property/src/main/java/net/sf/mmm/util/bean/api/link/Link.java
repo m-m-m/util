@@ -4,25 +4,28 @@ package net.sf.mmm.util.bean.api.link;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.lang.api.Id;
 
 /**
  * This is the interface for a link to an {@link EntityBean}. It acts as a reference that can be evaluated lazily. It
  * will hold the {@link #getId() primary key} of the linked bean.
  *
- * @param <ID> the generic type of the {@link #getId() unique ID}.
  * @param <E> the generic type of the {@link #getTarget() linked} {@link EntityBean}.
+ *
+ * @see net.sf.mmm.util.bean.base.link.EntityBeanLink
+ * @see net.sf.mmm.util.bean.base.link.IdLink
  *
  * @author hohwille
  * @since 8.0.0
  */
-public interface Link<ID, E extends EntityBean<ID>> {
+public interface Link<E extends EntityBean> {
 
   /**
-   * @return the {@link EntityBean#Id() primary key} of the linked {@link #getTarget() bean}. When creating new
+   * @return the {@link EntityBean#Id() unique identifier} of the linked {@link #getTarget() bean}. When creating new
    *         {@link Bean}s a link may hold a transient {@link EntityBean} as {@link #getTarget() target} that has no ID
    *         assigned, yet. In such case this method will return <code>null</code>.
    */
-  ID getId();
+  Id<E> getId();
 
   /**
    * @return {@code true} if the {@link #getTarget() link target} is already resolved, {@code false} otherwise (if

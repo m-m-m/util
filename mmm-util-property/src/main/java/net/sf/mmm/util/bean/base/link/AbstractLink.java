@@ -6,17 +6,17 @@ import java.util.Objects;
 
 import net.sf.mmm.util.bean.api.EntityBean;
 import net.sf.mmm.util.bean.api.link.Link;
+import net.sf.mmm.util.lang.api.Id;
 
 /**
  * Abstract base implementation of {@link Link}.
  *
- * @param <ID> the generic type of the {@link #getId() unique ID}.
  * @param <E> the generic type of the {@link #getTarget() linked} {@link EntityBean}.
  *
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractLink<ID, E extends EntityBean<ID>> implements Link<ID, E> {
+public abstract class AbstractLink<E extends EntityBean> implements Link<E> {
 
   /**
    * The constructor.
@@ -28,7 +28,7 @@ public abstract class AbstractLink<ID, E extends EntityBean<ID>> implements Link
   @Override
   public int hashCode() {
 
-    ID id = getId();
+    Id<E> id = getId();
     if (id == null) {
       return 0;
     }
@@ -44,7 +44,7 @@ public abstract class AbstractLink<ID, E extends EntityBean<ID>> implements Link
     if (obj == this) {
       return true;
     }
-    Object id = ((AbstractLink<?, ?>) obj).getId();
+    Object id = ((AbstractLink<?>) obj).getId();
     if (!Objects.equals(getId(), id)) {
       return false;
     }

@@ -19,10 +19,10 @@ public interface ListQuery<E> extends Query<List<E>>, Iterable<E> {
 
   /**
    * {@link #execute() Executes} the query and returns the matching objects as {@link Iterator}. This method may be
-   * overridden for database technology implementations that have native support for {@link Iterator} (unlike
-   * {@link net.sf.mmm.util.query.base.statement.jpql.Jpql}). In such case this method is way more efficient if you only
-   * need to iterate the results to a specific point without the need to know the {@link List#size() number of matches}.
-   * If possible you shall prefer this method over {@link #execute()}.
+   * overridden for database technology implementations that have native support for {@link Iterator} (unlike JPA). In
+   * such case this method is way more efficient if you only need to iterate the results to a specific point without the
+   * need to know the {@link List#size() number of matches}. If possible you shall prefer this method over
+   * {@link #execute()}.
    *
    * @return an {@link Iterator} of the {@link #execute() results}.
    */

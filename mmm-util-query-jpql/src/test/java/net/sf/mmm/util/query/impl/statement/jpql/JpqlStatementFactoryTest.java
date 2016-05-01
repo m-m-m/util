@@ -18,18 +18,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import net.sf.mmm.jpa.query.api.statenent.jpql.JpqlDeleteStatement;
+import net.sf.mmm.jpa.query.api.statenent.jpql.JpqlSelectStatement;
+import net.sf.mmm.jpa.query.api.statenent.jpql.JpqlStatementFactory;
+import net.sf.mmm.jpa.query.api.statenent.jpql.JpqlUpdateStatement;
+import net.sf.mmm.jpa.query.base.statement.jpql.Jpql;
 import net.sf.mmm.util.bean.api.BeanFactory;
+import net.sf.mmm.util.lang.api.Id;
 import net.sf.mmm.util.query.SpringTestConfig;
 import net.sf.mmm.util.query.api.ListQuery;
 import net.sf.mmm.util.query.api.path.EntityAlias;
-import net.sf.mmm.util.query.api.statenent.jpql.JpqlDeleteStatement;
-import net.sf.mmm.util.query.api.statenent.jpql.JpqlSelectStatement;
-import net.sf.mmm.util.query.api.statenent.jpql.JpqlStatementFactory;
-import net.sf.mmm.util.query.api.statenent.jpql.JpqlUpdateStatement;
 import net.sf.mmm.util.query.base.example.Contact;
 import net.sf.mmm.util.query.base.example.ContactBean;
 import net.sf.mmm.util.query.base.example.ContactEntity;
-import net.sf.mmm.util.query.base.statement.jpql.Jpql;
 
 /**
  * This is the test of {@link JpqlStatementFactory}.
@@ -56,9 +57,9 @@ public class JpqlStatementFactoryTest extends Assertions {
   @Test
   public void testStatements() {
 
-    Long contact1Id = insertContact("Peter", "Pan", true, 20).getId();
-    Long contact2Id = insertContact("Peter", "Pan2", false, 21).getId();
-    Long contact3Id = insertContact("Peter", "Pan3", false, 22).getId();
+    Id contact1Id = insertContact("Peter", "Pan", true, 20).getId();
+    Id contact2Id = insertContact("Peter", "Pan2", false, 21).getId();
+    Id contact3Id = insertContact("Peter", "Pan3", false, 22).getId();
     ContactBean prototype = this.beanFactory.createPrototype(ContactBean.class);
     checkUpdate(prototype, contact2Id, contact3Id);
     checkDelete(prototype, contact2Id, contact3Id);
@@ -77,7 +78,7 @@ public class JpqlStatementFactoryTest extends Assertions {
     return entity;
   }
 
-  private void checkUpdate(ContactBean prototype, Long contact2Id, Long contact3Id) {
+  private void checkUpdate(ContactBean prototype, Id contact2Id, Id contact3Id) {
 
     EntityAlias<Contact> contact = Jpql.alias(Contact.class, ContactEntity.class, prototype).as("c");
     JpqlUpdateStatement<Contact> updateStatement = this.statementFactory.update(contact)
@@ -89,7 +90,7 @@ public class JpqlStatementFactoryTest extends Assertions {
     assertThat(changes).isEqualTo(2);
   }
 
-  private void checkDelete(ContactBean prototype, Long contact2Id, Long contact3Id) {
+  private void checkDelete(ContactBean prototype, Id contact2Id, Id contact3Id) {
 
     EntityAlias<Contact> contact = Jpql.alias(Contact.class, ContactEntity.class, prototype).as("c");
     JpqlDeleteStatement<Contact> deleteStatement = this.statementFactory.deleteFrom(contact)
@@ -101,19 +102,19 @@ public class JpqlStatementFactoryTest extends Assertions {
     assertThat(changes).isEqualTo(2);
   }
 
-  private void checkSelect(ContactBean prototype, Long contactId) {
+  private void checkSelect(ContactBean prototype, Id contactId) {
 
     EntityAlias<Contact> contact = Jpql.alias(Contact.class, ContactEntity.class, prototype).as("c");
     checkSelect(prototype, contactId, contact, Contact.class);
   }
 
-  private void checkSelectMapped(ContactBean prototype, Long contactId) {
+  private void checkSelectMapped(ContactBean prototype, Id contactId) {
 
     EntityAlias<ContactBean> contact = Jpql.alias(ContactEntity.class, prototype).as("c");
     checkSelect(prototype, contactId, contact, ContactBean.class);
   }
 
-  private <C extends Contact> void checkSelect(ContactBean prototype, Long contactId, EntityAlias<C> contact,
+  private <C extends Contact> void checkSelect(ContactBean prototype, Id contactId, EntityAlias<C> contact,
       Class<C> type) {
 
     String firstName = "Peter";

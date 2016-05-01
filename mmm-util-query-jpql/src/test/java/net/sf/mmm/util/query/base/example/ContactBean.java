@@ -18,7 +18,7 @@ import net.sf.mmm.util.validation.base.Mandatory;
  *
  * @author hohwille
  */
-public interface ContactBean extends EntityBean<Long>, Contact {
+public interface ContactBean extends EntityBean, Contact {
 
   WritableStringProperty FirstName();
 

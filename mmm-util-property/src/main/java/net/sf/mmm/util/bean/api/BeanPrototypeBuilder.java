@@ -46,6 +46,24 @@ public interface BeanPrototypeBuilder extends AbstractBeanFactory {
    * @see BeanFactory#createPrototype(Class)
    *
    * @param <BEAN> the generic type of the {@link Bean}.
+   * @param prototype the main prototype of the {@link Bean}.
+   * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
+   * @param name the explicit {@link BeanAccess#getSimpleName() name} of the {@link Bean}.
+   * @param superBeanPrototypes the additional prototypes of the {@link Bean}s (mixins) that will also be inherited from
+   *        the prototype to create in addition to the given {@code prototype}. They have to be
+   *        {@link #getPrototype(Bean) prototypes}. The prototype to create must not result in cyclic inheritance or
+   *        inconsistent properties in case of multi-inheritance.
+   * @return the prototype instance of the specified {@link Bean}.
+   */
+  <BEAN extends Bean> BEAN createPrototype(BEAN prototype, String name, Bean... superBeanPrototypes);
+
+  /**
+   * Creates a {@link BeanAccess#isVirtual() virtual} prototype that allows dynamic beans at runtime (without an
+   * corresponding sub-interface existing as Java code).
+   *
+   * @see BeanFactory#createPrototype(Class)
+   *
+   * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
    * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
    * @param name the explicit {@link BeanAccess#getSimpleName() name} of the {@link Bean}.
@@ -55,6 +73,10 @@ public interface BeanPrototypeBuilder extends AbstractBeanFactory {
    *        or inconsistent properties in case of multi-inheritance.
    * @return the prototype instance of the specified {@link Bean}.
    */
-  <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, String name, Bean... superBeanPrototypes);
+  default <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, String name, Bean... superBeanPrototypes) {
+
+    BEAN superPrototypeBean = getOrCreatePrototype(type);
+    return createPrototype(superPrototypeBean, name, superBeanPrototypes);
+  }
 
 }

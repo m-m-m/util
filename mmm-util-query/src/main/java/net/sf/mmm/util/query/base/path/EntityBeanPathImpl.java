@@ -16,7 +16,7 @@ import net.sf.mmm.util.query.base.argument.AbstractEntityBeanArgument;
  * @author hohwille
  * @since 8.0.0
  */
-public class EntityBeanPathImpl<V extends EntityBean<?>> extends PathImpl<V>
+public class EntityBeanPathImpl<V extends EntityBean> extends PathImpl<V>
     implements EntityBeanPath<V>, AbstractEntityBeanArgument<V> {
 
   /**

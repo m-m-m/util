@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * @author hohwille
  * @since 8.0.0
  */
-public class ConstantEntityBeanArgument<V extends EntityBean<?>> extends ConstantArgument<V>
+public class ConstantEntityBeanArgument<V extends EntityBean> extends ConstantArgument<V>
     implements AbstractEntityBeanArgument<V> {
 
   /**

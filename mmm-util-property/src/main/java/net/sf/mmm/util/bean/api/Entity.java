@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
+import net.sf.mmm.util.lang.api.Id;
+
 /**
  * This is the interface for an entity that may be loaded from or saved to a database. Typically you may want to use
  * {@link EntityBean} but for legacy technologies such as JPA you have to use standard Java Beans that can directly
@@ -11,11 +13,10 @@ package net.sf.mmm.util.bean.api;
  * <li>A {@link #getVersion() version}.</li>
  * </ul>
  *
- * @param <ID> the generic type of the {@link #getId() primary key}.
  * @author hohwille
  * @since 8.0.0
  */
-public interface Entity<ID> {
+public interface Entity {
 
   /** {@link net.sf.mmm.util.property.api.WritableProperty#getName() Property name} of {@link #getId() ID}. */
   String PROPERTY_NAME_ID = "Id";
@@ -27,12 +28,12 @@ public interface Entity<ID> {
    * @return the unique ID (primary key) of this entity or {@code null} if not available (e.g. entity is not
    *         persistent).
    */
-  ID getId();
+  Id<?> getId();
 
   /**
    * @param id the new {@link #getId() ID}.
    */
-  void setId(ID id);
+  void setId(Id<?> id);
 
   /**
    * @return the {@code version} of this entity. Whenever the {@link Entity} gets updated (a modification is saved and

@@ -13,6 +13,6 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * @author hohwille
  * @since 8.0.0
  */
-public interface EntityBeanArgument<V extends EntityBean<?>> extends Argument<V> {
+public interface EntityBeanArgument<V extends EntityBean> extends Argument<V> {
 
 }

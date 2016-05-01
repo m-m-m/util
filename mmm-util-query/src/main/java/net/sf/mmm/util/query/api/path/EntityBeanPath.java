@@ -13,6 +13,6 @@ import net.sf.mmm.util.query.api.argument.EntityBeanArgument;
  * @author hohwille
  * @since 8.0.0
  */
-public interface EntityBeanPath<V extends EntityBean<?>> extends Path<V>, EntityBeanArgument<V> {
+public interface EntityBeanPath<V extends EntityBean> extends Path<V>, EntityBeanArgument<V> {
 
 }

@@ -8,9 +8,8 @@ import net.sf.mmm.util.bean.api.Entity;
  * Interface for a contact as an {@link Entity} for testing.
  *
  * @author hohwille
- * @since 8.0.0
  */
-public interface Contact extends Entity<Long> {
+public interface Contact extends Entity {
 
   String getFirstName();
 

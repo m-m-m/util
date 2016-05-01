@@ -214,7 +214,7 @@ public class PathImpl<V> extends AbstractPathFactory implements Path<V>, Abstrac
 
     Object value = this.property.getValue();
     if (value instanceof Link) {
-      value = ((Link<?, ?>) value).getTarget();
+      value = ((Link<?>) value).getTarget();
     }
     return (V) value;
   }

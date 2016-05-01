@@ -119,18 +119,21 @@ public class BeanPrototypeBuilderImpl extends AbstractLoggableObject implements 
     return prototypeExternal.getBean();
   }
 
-  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type, String name, Bean... superBeanPrototypes) {
+  public <BEAN extends Bean> BEAN createPrototype(BEAN superPrototypeBean, String name,
+      Bean... superBeanPrototypes) {
 
-    BEAN superPrototypeBean = getOrCreatePrototype(type);
-    Set<Class<?>> interfaceSet = new HashSet<>();
+    Class<? extends Bean> type = superPrototypeBean.access().getBeanClass();
+    Set<Class<?>> interfaceSet = new HashSet<>(superBeanPrototypes.length + 20);
     interfaceSet.add(type);
-    for (Bean prototypeBean : superBeanPrototypes) {
+    // List<>
+    for (int i = 0; i < superBeanPrototypes.length; i++) {
+      Bean prototypeBean = superBeanPrototypes[i];
       BeanAccessPrototype<?> prototype = BeanAccessPrototype.get(prototypeBean);
       Class<?> beanClass = prototype.getBeanClass();
       if (beanClass.isAssignableFrom(type) && !prototype.isVirtual()) {
         getLogger().warn("Redundant super-type {} for {}.", beanClass, type);
+        superBeanPrototypes[i] = null;
       } else {
         for (Class<?> beanInterface : prototype.getInterfaces()) {
           interfaceSet.add(beanInterface);
@@ -152,8 +155,10 @@ public class BeanPrototypeBuilderImpl extends AbstractLoggableObject implements 
       }
       superPrototype.addChild(prototype);
       for (Bean prototypeBean : superBeanPrototypes) {
-        BeanAccessPrototypePolymorphic<?> superProto = BeanAccessPrototypePolymorphic.get(prototypeBean);
-        superProto.addChild((BeanAccessPrototype) prototype);
+        if (prototypeBean != null) {
+          BeanAccessPrototypePolymorphic<?> superProto = BeanAccessPrototypePolymorphic.get(prototypeBean);
+          superProto.addChild((BeanAccessPrototype) prototype);
+        }
       }
     } finally {
       this.lock.unlock();

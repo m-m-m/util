@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api;
 
+import net.sf.mmm.util.lang.api.Id;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
 
@@ -13,40 +14,19 @@ import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
  * <li>A {@link #Version() version}.</li>
  * </ul>
  *
- * @param <ID> the generic type of the {@link #Id() primary key}.
  * @author hohwille
  * @since 8.0.0
  */
-public interface EntityBean<ID> extends Bean, Entity<ID> {
+public interface EntityBean extends Bean, Entity {
 
   /**
    * @return the {@link WritableProperty property} containing the {@link #getId() unique ID}.
    */
-  WritableProperty<ID> Id();
-
-  /**
-   * @return the {@link #getId() ID}.
-   */
-  ID getId();
-
-  /**
-   * @param id the {@link #getId() ID}.
-   */
-  void setId(ID id);
+  WritableProperty<Id<?>> Id();
 
   /**
    * @return the {@link WritableProperty property} containing the {@link #getVersion() version}.
    */
   WritableIntegerProperty Version();
-
-  /**
-   * @return the {@link #Version() version}.
-   */
-  int getVersion();
-
-  /**
-   * @param version the {@link #Version() version}.
-   */
-  void setVersion(int version);
 
 }
