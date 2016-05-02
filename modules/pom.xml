@@ -13,31 +13,31 @@
   <description>The actual utility modules of mmm.</description>
 
   <modules>
-    <module>../mmm-util-test</module>
-    <module>../mmm-util-core</module>
-    <module>../mmm-util-entity</module>
-    <module>../mmm-util-cli</module>
-    <module>../mmm-util-io</module>
-    <module>../mmm-util-context</module>
-    <module>../mmm-util-event</module>
-    <module>../mmm-util-pojo</module>
-    <module>../mmm-util-validation</module>
-    <module>../mmm-util-property</module>
-    <module>../mmm-util-query</module>
-    <module>../mmm-util-query-jpql</module>
-    <module>../mmm-util-search</module>
-    <module>../mmm-util-gwt</module>
+    <module>../test</module>
+    <module>../core</module>
+    <module>../entity</module>
+    <module>../cli</module>
+    <module>../io</module>
+    <module>../context</module>
+    <module>../event</module>
+    <module>../pojo</module>
+    <module>../validation</module>
+    <module>../property</module>
+    <module>../query</module>
+    <module>../jpa</module>
+    <module>../search</module>
+    <module>../gwt</module>
   </modules>
 
   <profiles>
     <profile>
       <id>dev</id>
       <modules>
-        <module>../mmm-util-http</module>
-        <module>../mmm-util-contenttype</module>
-        <module>../mmm-util-metakeys</module>
-        <module>../mmm-util-datatype</module>
-        <module>../mmm-util-sandbox</module>
+        <module>../http</module>
+        <module>../contenttype</module>
+        <module>../metakeys</module>
+        <module>../datatype</module>
+        <module>../sandbox</module>
       </modules>
     </profile>
   </profiles>

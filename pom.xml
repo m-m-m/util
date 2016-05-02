@@ -23,8 +23,8 @@
   </properties>
 
   <modules>
-    <module>mmm-util-bom</module>
-    <module>mmm-util-modules</module>
+    <module>bom</module>
+    <module>modules</module>
   </modules>  
 
   <issueManagement>
