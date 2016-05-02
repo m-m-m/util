@@ -137,6 +137,7 @@ public class ProcessUtilTest {
     ProcessBuilder app2Builder = new ProcessBuilder("java", "-classpath", CLASSPATH, PipeApp2.class.getName());
     int exitCode = getProcessUtil().execute(context, app1Builder, app2Builder);
     assertEquals(0, exitCode);
+    Thread.sleep(10);
     // test output of stdout
     byte[] outBytes = outStream.toByteArray();
     String outString = new String(outBytes);
