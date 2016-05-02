@@ -143,7 +143,7 @@ public class StreamUtilTest extends Assertions {
     long size = outStream.size();
     transferrer.cancel(true);
     assertThat(size).isPositive();
-    Thread.sleep(10);
+    Thread.sleep(100);
     size = outStream.size();
     Long bytesStopped = callback.bytesStopped;
     assertThat(bytesStopped).isNotNull().isEqualTo(size);
