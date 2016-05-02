@@ -171,14 +171,14 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
   /**
    * This method gets the most specific {@link Class} available by the type-safe analyzation of the given generic
-   * <code>type</code>. Unlike {@link #getClassBounds(Type)} this method resolves {@link TypeVariable} s with the proper
+   * {@code type}. Unlike {@link #getClassBounds(Type)} this method resolves {@link TypeVariable} s with the proper
    * type they have been bound with. <br>
    *
    * Examples: <br>
    * <table border="1">
    * <tr>
-   * <th><code>type</code></th>
-   * <th><code>owningType</code></th>
+   * <th>{@code type}</th>
+   * <th>{@code owningType}</th>
    * <th><code>{@link #getClassBounds(Type) getClass}(type, owningType)</code></th>
    * <th>comment</th>
    * </tr>
@@ -192,7 +192,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    * </table>
    *
    * @param currentType is the type to convert.
-   * @return the closest class representing the given <code>type</code>.
+   * @return the closest class representing the given {@code type}.
    */
   protected ClassBounds getClassBounds(Type currentType) {
 
@@ -249,7 +249,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
   /**
    * This method creates the {@link Class} reflecting an {@link Class#isArray() array} of the given
-   * <code>{@link Class#getComponentType() componentType}</code>.
+   * {@link Class#getComponentType() componentType}.
    *
    * @param componentClass is the {@link Class#getComponentType() component type}.
    * @return the according {@link Class#isArray() array}-class.
@@ -279,7 +279,7 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
   /**
    * This method gets the defining type.
    *
-   * @return the defining type or <code>null</code> if NOT available.
+   * @return the defining type or {@code null} if NOT available.
    */
   @Override
   public GenericType<?> getDefiningType() {

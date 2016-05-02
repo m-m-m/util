@@ -34,8 +34,8 @@ public class ErrorMessage extends AbstractErrorMessage {
    * @param message - see {@link #getMessage()}.
    * @param uuid - see {@link #getUuid()}.
    * @param details - see {@link #getDetails()}.
-   * @param technical - <code>true</code> in case of {@link NlsThrowable#isTechnical() technical error} with
-   *        {@link #TYPE_TECHNICAL_ERROR}, <code>false</code> otherwise (business error).
+   * @param technical - {@code true} in case of {@link NlsThrowable#isTechnical() technical error} with
+   *        {@link #TYPE_TECHNICAL_ERROR}, {@code false} otherwise (business error).
    */
   public ErrorMessage(String code, Object source, String message, UUID uuid, String details, boolean technical) {
 
@@ -50,8 +50,8 @@ public class ErrorMessage extends AbstractErrorMessage {
    * @param message - see {@link #getMessage()}.
    * @param uuid - see {@link #getUuid()}.
    * @param details - see {@link #getDetails()}.
-   * @param technical - <code>true</code> in case of {@link NlsThrowable#isTechnical() technical error} with
-   *        {@link #TYPE_TECHNICAL_ERROR}, <code>false</code> otherwise (business error).
+   * @param technical - {@code true} in case of {@link NlsThrowable#isTechnical() technical error} with
+   *        {@link #TYPE_TECHNICAL_ERROR}, {@code false} otherwise (business error).
    */
   public ErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details, boolean technical) {
 

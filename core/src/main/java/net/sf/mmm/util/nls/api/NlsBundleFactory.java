@@ -20,7 +20,7 @@ public interface NlsBundleFactory {
   String CDI_NAME = "net.sf.mmm.util.nls.api.NlsBundleFactory";
 
   /**
-   * This method dynamically creates an instance for the given <code>bundleInterface</code>.
+   * This method dynamically creates an instance for the given {@code bundleInterface}.
    * 
    * @param <BUNDLE> is the generic type of the requested {@link NlsBundle}.
    * @param bundleInterface the interface of the requested {@link NlsBundle}. Has to be a sub-interface of

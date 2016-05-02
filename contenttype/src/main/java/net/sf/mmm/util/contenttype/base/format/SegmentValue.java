@@ -45,12 +45,12 @@ public class SegmentValue extends SegmentVariableLength {
    * This method gets the key to associate this value in the
    * {@link net.sf.mmm.util.io.api.DetectorStream#getMetadata() detected
    * metadata}. <br>
-   * The key may also be <code>null</code> to indicate a variable key depending
+   * The key may also be {@code null} to indicate a variable key depending
    * on the streamed data. Then the last {@link SegmentKey} that matched before
    * is used to determine the key. If there is no such {@link SegmentKey} the
    * format specification is invalid.
    * 
-   * @return the key or <code>null</code>.
+   * @return the key or {@code null}.
    */
   public String getKey() {
 

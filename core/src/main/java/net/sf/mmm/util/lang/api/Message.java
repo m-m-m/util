@@ -45,7 +45,7 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
    * This method gets the (optional) source of the message. E.g. the name or a field or file that is invalid. It can be
    * used to enrich {@link #getMessage() messages} displayed to end-users. This will help to find the problem easier.
    *
-   * @return the source or <code>null</code> if NOT available.
+   * @return the source or {@code null} if NOT available.
    */
   String getSource();
 
@@ -64,7 +64,7 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
   /**
    * This method gets optional details for this message. E.g. in case of an exception this can be the stacktrace.
    *
-   * @return the details or <code>null</code> if no additional details are available.
+   * @return the details or {@code null} if no additional details are available.
    */
   String getDetails();
 
@@ -91,7 +91,7 @@ public interface Message extends Serializable, AttributeReadUuid, AttributeReadM
    * {@inheritDoc}
    *
    * @return the {@link UUID} if this {@link Message}. Will typically only be available if {@link #getType() type} is
-   *         {@link #TYPE_TECHNICAL_ERROR} or {@link #TYPE_USER_ERROR}. Will be <code>null</code> if not available.
+   *         {@link #TYPE_TECHNICAL_ERROR} or {@link #TYPE_USER_ERROR}. Will be {@code null} if not available.
    */
   @Override
   UUID getUuid();

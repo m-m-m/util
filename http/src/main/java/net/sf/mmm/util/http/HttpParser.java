@@ -51,14 +51,14 @@ public final class HttpParser {
   }
 
   /**
-   * This method parses a single line of an HTTP header from the given <code>stream</code>. It (re)uses the
-   * given <code>buffer</code> to cache bytes while reading. To convert the read bytes to a string the given
-   * <code>charset</code> is used.
+   * This method parses a single line of an HTTP header from the given {@code stream}. It (re)uses the
+   * given {@code buffer} to cache bytes while reading. To convert the read bytes to a string the given
+   * {@code charset} is used.
    * 
    * @param stream is the input stream to read from.
    * @param buffer is where the bytes can be cached.
    * @param charset is used to convert the bytes to a string.
-   * @return the parsed string or <code>null</code> if the <code>stream</code> is already at EOF.
+   * @return the parsed string or {@code null} if the {@code stream} is already at EOF.
    * @throws IOException if the operation failes with an I/O problem.
    */
   private static String parseLine(InputStream stream, byte[] buffer, Charset charset) throws IOException {
@@ -96,7 +96,7 @@ public final class HttpParser {
   }
 
   /**
-   * This method parses the HTTP header properties from the given <code>stream</code>. This method should be
+   * This method parses the HTTP header properties from the given {@code stream}. This method should be
    * called after the first line has been read and an HTTP-version greator or equal to "1.0" has been
    * detected.
    * 
@@ -136,8 +136,8 @@ public final class HttpParser {
   }
 
   /**
-   * This method parses the HTTP-header from the given <code>stream</code> and applies all information to the
-   * given <code>request</code>. After this method has been called, the given <code>stream</code> is pointing
+   * This method parses the HTTP-header from the given {@code stream} and applies all information to the
+   * given {@code request}. After this method has been called, the given {@code stream} is pointing
    * to the beginning of the HTTP-body (or EOF if empty). <br>
    * 
    * @param stream is the input-stream to read the header from. Only the header is read so the stream is NOT
@@ -151,8 +151,8 @@ public final class HttpParser {
   }
 
   /**
-   * This method parses the HTTP-header from the given <code>stream</code> and applies all information to the
-   * given <code>request</code>. After this method has been called, the given <code>stream</code> is pointing
+   * This method parses the HTTP-header from the given {@code stream} and applies all information to the
+   * given {@code request}. After this method has been called, the given {@code stream} is pointing
    * to the beginning of the HTTP-body (or EOF if empty). <br>
    * 
    * @param stream is the input-stream to read the header from. Only the header is read so the stream is NOT

@@ -24,7 +24,7 @@ public class ConjunctionCharFilter implements CharFilter {
   /**
    * The constructor.
    * 
-   * @param conjunction is the {@link Conjunction} used to combine the <code>filters</code>.
+   * @param conjunction is the {@link Conjunction} used to combine the {@code filters}.
    * @param filters are the filters to combine.
    */
   public ConjunctionCharFilter(Conjunction conjunction, CharFilter... filters) {

@@ -140,7 +140,7 @@ public class BeanMethod {
   }
 
   /**
-   * @return the {@link BeanMethodType} or <code>null</code> for undefined {@link Method}.
+   * @return the {@link BeanMethodType} or {@code null} for undefined {@link Method}.
    */
   public BeanMethodType getMethodType() {
 
@@ -148,7 +148,7 @@ public class BeanMethod {
   }
 
   /**
-   * @return the capitalized name of the property or <code>null</code> if no property.
+   * @return the capitalized name of the property or {@code null} if no property.
    */
   public String getPropertyName() {
 
@@ -156,7 +156,7 @@ public class BeanMethod {
   }
 
   /**
-   * @return the generic {@link Type} of the property or <code>null</code> if no property. Will be the {@link Type} of
+   * @return the generic {@link Type} of the property or {@code null} if no property. Will be the {@link Type} of
    *         the {@link WritableProperty} for {@link BeanMethodType#PROPERTY}.
    */
   public Type getPropertyType() {

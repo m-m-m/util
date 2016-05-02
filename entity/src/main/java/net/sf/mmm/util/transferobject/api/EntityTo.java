@@ -12,7 +12,7 @@ import net.sf.mmm.util.entity.api.PersistenceEntity;
 /**
  * This is the abstract base class for an {@link DataTo DTO} corresponding to a
  * {@link net.sf.mmm.util.entity.api.PersistenceEntity}. Classes derived from this class should carry the
- * suffix <code>Eto</code>. <br>
+ * suffix {@code Eto}. <br>
  * For additional details and an example consult the {@link net.sf.mmm.util.transferobject.api package
  * JavaDoc}.
  *

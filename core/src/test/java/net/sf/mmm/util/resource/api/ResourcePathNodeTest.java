@@ -86,7 +86,7 @@ public class ResourcePathNodeTest extends Assertions {
   /**
    * Verifies {@link ResourcePathNode#create(String)} with a single segment both absolute and relative.
    *
-   * @param segment is the segment. Must not be <code>null</code>, empty, ".", ".." or contain "/" or "\\".
+   * @param segment is the segment. Must not be {@code null}, empty, ".", ".." or contain "/" or "\\".
    */
   public void verifySimplePath(String segment) {
 

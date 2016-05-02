@@ -28,7 +28,7 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
   private final PojoPropertyAccessorIndexedOneArgMode mode;
 
   /**
-   * <code>false</code> if index is first argument, <code>true</code> if second.
+   * {@code false} if index is first argument, {@code true} if second.
    */
   private final boolean inverted;
 
@@ -41,8 +41,8 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
    * @param descriptor is the descriptor this accessor is intended for.
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param method is the {@link #getMethod() method} to access.
-   * @param inverted - <code>false</code> if the index is first <code>method</code>-argument,
-   *        <code>true</code> if it is the second argument.
+   * @param inverted - {@code false} if the index is first {@code method}-argument,
+   *        {@code true} if it is the second argument.
    */
   public PojoPropertyAccessorIndexedOneArgMethod(String propertyName, Type propertyType,
       PojoPropertyAccessorIndexedOneArgMode mode, PojoDescriptor<?> descriptor,

@@ -41,7 +41,7 @@ public class NodeCycle<V> {
    *
    * @param startNode is the {@link #getStartNode() start-node}.
    * @param formatter is the {@link SimpleValueConverter} used to get a custom string-representation of the nodes. If
-   *        <code>null</code> {@link Object#toString()} is used as fallback.
+   *        {@code null} {@link Object#toString()} is used as fallback.
    */
   public NodeCycle(V startNode, SimpleValueConverter<V, String> formatter) {
 

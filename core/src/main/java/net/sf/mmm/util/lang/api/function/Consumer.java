@@ -3,7 +3,7 @@
 package net.sf.mmm.util.lang.api.function;
 
 /**
- * This is the back-port for the Java 1.8+ interface <code>java.util.function.Consumer</code>.
+ * This is the back-port for the Java 1.8+ interface {@code java.util.function.Consumer}.
  *
  * @see net.sf.mmm.util.lang.api.function
  *

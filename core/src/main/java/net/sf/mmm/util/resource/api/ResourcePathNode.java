@@ -168,7 +168,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   }
 
   /**
-   * @return {@code true} if {@link #getName() name} is "..", <code>false</code> otherwise.
+   * @return {@code true} if {@link #getName() name} is "..", {@code false} otherwise.
    */
   public boolean isParentDirectory() {
 
@@ -185,8 +185,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   }
 
   /**
-   * @return <code>true</code> if {@link #toString(StringBuilder, char)} needs to append a separator after this segment,
-   *         <code>false</code> otherwise.
+   * @return {@code true} if {@link #toString(StringBuilder, char)} needs to append a separator after this segment,
+   *         {@code false} otherwise.
    */
   protected boolean isAppendSeparator() {
 
@@ -197,7 +197,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * Checks if this {@link ResourcePathNode} matches to the given {@link #createPattern(String) pattern path}.
    *
    * @param patternPath the {@link #createPattern(String) pattern path} to match.
-   * @return <code>true</code> if this path matches the given the given {@code patternPath}.
+   * @return {@code true} if this path matches the given the given {@code patternPath}.
    */
   public boolean matches(ResourcePathNode<Pattern> patternPath) {
 
@@ -428,7 +428,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * </table>
    *
    * @param path is the path to parse (e.g. "/foo/bar.txt" or "a/../b/./c").
-   * @return the parsed {@code path} as {@link ResourcePathNode} or <code>null</code> if empty.
+   * @return the parsed {@code path} as {@link ResourcePathNode} or {@code null} if empty.
    */
   public static ResourcePathNode<Void> create(String path) {
 

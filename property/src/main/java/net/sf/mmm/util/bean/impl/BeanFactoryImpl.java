@@ -368,7 +368,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param name the {@link WritableProperty#getName() property name}.
    * @param valueType the {@link WritableProperty#getType() property type}.
    * @param bean the {@link WritableProperty#getBean() property bean}.
-   * @param propertyClass the {@link Class} reflecting the {@link WritableProperty} or <code>null</code> if no property
+   * @param propertyClass the {@link Class} reflecting the {@link WritableProperty} or {@code null} if no property
    *        method exists and this method is called for plain getter or setter.
    * @return the new instance of {@link AbstractProperty}.
    */
@@ -475,7 +475,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
     /**
      * @param type the {@link Class} reflecting the {@link Bean} or one of its parent types to visit.
-     * @return <code>true</code> if the given {@link Class} should be visited (introspected), <code>false</code> if it
+     * @return {@code true} if the given {@link Class} should be visited (introspected), {@code false} if it
      *         has already been visited.
      */
     public boolean visitType(Class<?> type) {

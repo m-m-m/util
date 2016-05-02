@@ -145,7 +145,7 @@ public class JavaScriptUtil {
    *
    * @param inputElement is the input {@link Element} that has been validated.
    * @param message - the empty string to mark as valid, the validation failure message otherwise.
-   * @return <code>true</code> if the browser supports custom validity and it has been set, <code>false</code>
+   * @return {@code true} if the browser supports custom validity and it has been set, {@code false}
    *         otherwise.
    */
   public native boolean setCustomValidity(Element inputElement, String message) /*-{
@@ -161,7 +161,7 @@ public class JavaScriptUtil {
    * directly provide a way to create HTML5 input elements.
    *
    * @param type is the requested {@link InputElement#getType() type} (e.g. "range", "date", etc.).
-   * @return the requested {@link InputElement} of the given <code>type</code>.
+   * @return the requested {@link InputElement} of the given {@code type}.
    */
   public native InputElement createInputElement(String type) /*-{
     var result = $doc.createElement("INPUT");
@@ -180,7 +180,7 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method creates a {@link Object#clone() clone} of the given <code>template</code>.
+   * This method creates a {@link Object#clone() clone} of the given {@code template}.
    *
    * @param template is the object to clone.
    * @return the cloned object.
@@ -200,7 +200,7 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method creates a {@link Class#newInstance() new instance} of the given <code>template</code>.
+   * This method creates a {@link Class#newInstance() new instance} of the given {@code template}.
    *
    * @param template is the object create a new instance of.
    * @return the new instance.
@@ -238,7 +238,7 @@ public class JavaScriptUtil {
    * receive the {@link JsFileList} here.
    *
    * @param event is the {@link Event}.
-   * @return the {@link JsFileList} or <code>null</code> if no files are available.
+   * @return the {@link JsFileList} or {@code null} if no files are available.
    */
   public native JsFileList getFileList(Event event) /*-{
     if (event.dataTransfer && event.dataTransfer.files) {
@@ -305,11 +305,11 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method gets the {@link JsSelection} of the given <code>&lt;iframe&gt;</code> {@link Element}.
-   * The given <code>iframe</code> needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
+   * This method gets the {@link JsSelection} of the given {@code <iframe>} {@link Element}.
+   * The given {@code iframe} needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
    * to ensure.
    *
-   * @param iframe is the <code>&lt;iframe&gt;</code> {@link Element}.
+   * @param iframe is the {@code <iframe>} {@link Element}.
    * @return the corresponding {@link JsSelection}.
    */
   public native JsSelection getSelection(Element iframe) /*-{
@@ -334,9 +334,9 @@ public class JavaScriptUtil {
    * Determines if the given {@link Element} is focusable or tab-able.
    *
    * @param element is the {@link Element} to check.
-   * @param tabable - <code>true</code> if the check should only consider tab-able {@link Element}s (so if tabindex is
-   *        negative, the result is <code>false</code>), <code>false</code> otherwise.
-   * @return <code>true</code> if focusable/tab-able, <code>false</code> otherwise.
+   * @param tabable - {@code true} if the check should only consider tab-able {@link Element}s (so if tabindex is
+   *        negative, the result is {@code false}), {@code false} otherwise.
+   * @return {@code true} if focusable/tab-able, {@code false} otherwise.
    */
   public native boolean isFocusable(Element element, boolean tabable) /*-{
     if (element.style.display == 'none') {
@@ -359,7 +359,7 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * @return the {@link Element} that is currently focused or <code>null</code> if focus is outside the current document.
+   * @return the {@link Element} that is currently focused or {@code null} if focus is outside the current document.
    */
   public native Element getFocusedElement() /*-{
     return $doc.activeElement;
@@ -369,10 +369,10 @@ public class JavaScriptUtil {
    * Get the first/last focusable or tab-able (child) {@link Element}.
    *
    * @param element is the {@link Element} to scan recursively.
-   * @param tabable - <code>true</code> if the check should only consider tab-able {@link Element}s (so if tabindex is
-   *        negative, the result is <code>false</code>), <code>false</code> otherwise.
-   * @param last - <code>true</code> if the last focusable/tab-able element shall be returned, <code>false</code> for the last focusable/tab-able element.
-   * @return the first/last focusable or tab-able {@link Element} or <code>null</code> if none exists.
+   * @param tabable - {@code true} if the check should only consider tab-able {@link Element}s (so if tabindex is
+   *        negative, the result is {@code false}), {@code false} otherwise.
+   * @param last - {@code true} if the last focusable/tab-able element shall be returned, {@code false} for the last focusable/tab-able element.
+   * @return the first/last focusable or tab-able {@link Element} or {@code null} if none exists.
    */
   public native Element getFocusable(Element element, boolean tabable, boolean last) /*-{
 
@@ -409,11 +409,11 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method gets the {@link Document} of a given <code>&lt;iframe&gt;</code> {@link Element}.
-   * The given <code>iframe</code> needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
+   * This method gets the {@link Document} of a given {@code <iframe>} {@link Element}.
+   * The given {@code iframe} needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
    * to ensure.
    *
-   * @param iframe is the <code>&lt;iframe&gt;</code> {@link Element}.
+   * @param iframe is the {@code <iframe>} {@link Element}.
    * @return the corresponding {@link Document}.
    */
   public native Document getFrameDocument(Element iframe) /*-{
@@ -424,10 +424,10 @@ public class JavaScriptUtil {
   }-*/;
 
   /**
-   * This method {@link Runnable#run() executes} the given <code>callback</code> when the given <code>iframe</code> is
+   * This method {@link Runnable#run() executes} the given {@code callback} when the given {@code iframe} is
    * loaded.
    *
-   * @param iframe is the <code>&lt;iframe&gt;</code> {@link Element}.
+   * @param iframe is the {@code <iframe>} {@link Element}.
    * @param callback is the callback to {@link Runnable#run() execute}.
    */
   public native void onLoadFrame(Element iframe, Runnable callback) /*-{

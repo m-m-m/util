@@ -98,7 +98,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
 
   /**
    * This method gets the {@link Iso8601Util} used to parse and format date and time according to the standard
-   * <code>ISO-8601</code>.
+   * {@code ISO-8601}.
    *
    * @return the iso8601Util
    */
@@ -241,25 +241,25 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   }
 
   /**
-   * This method converts the given {@link String}-<code>value</code> to the given <code>type</code>. It is
-   * called from {@link #convertValue(String, Object, Class, Type)} if the given <code>type</code> is unknown.
+   * This method converts the given {@link String}-{@code value} to the given {@code type}. It is
+   * called from {@link #convertValue(String, Object, Class, Type)} if the given {@code type} is unknown.
    * This default implementation simply throws a new {@link WrongValueTypeException}. You can extend this
    * class and override this method in order to support the conversion for additional types. You should first
    * handle the conversion for all value types you like. Then for all other types you should delegate to the
-   * <code>super</code> method implementation.
+   * {@code super} method implementation.
    *
    * @param value is the value to convert.
-   * @param type is the type the <code>value</code> should be converted to.
+   * @param type is the type the {@code value} should be converted to.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
    *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
    *        thrown if something goes wrong. This will help to find the problem easier.
    *
-   * @param <V> is the type the <code>value</code> should be converted to.
-   * @return the <code>value</code> converted to <code>type</code>.
-   * @throws ValueNotSetException if the given <code>value</code> is <code>null</code>.
-   * @throws WrongValueTypeException if the given <code>value</code> is NOT <code>null</code> but can NOT be
-   *         converted to the given <code>type</code> (e.g. if <code>value</code> is "12x" and
-   *         <code>type</code> is <code>Integer.class</code>).
+   * @param <V> is the type the {@code value} should be converted to.
+   * @return the {@code value} converted to {@code type}.
+   * @throws ValueNotSetException if the given {@code value} is {@code null}.
+   * @throws WrongValueTypeException if the given {@code value} is NOT {@code null} but can NOT be
+   *         converted to the given {@code type} (e.g. if {@code value} is "12x" and
+   *         {@code type} is {@code Integer.class}).
    */
   protected <V> V convertUnknownValue(String value, Class<V> type, Object valueSource) throws ValueNotSetException,
       WrongValueTypeException {

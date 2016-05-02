@@ -58,7 +58,7 @@ public class ValidatorRangeTest extends AbstractValidatorTest {
   }
 
   /**
-   * Verifies that the given <code>valueOutOfRange</code> is out of range.
+   * Verifies that the given {@code valueOutOfRange} is out of range.
    *
    * @param <V> is the generic type of the value.
    * @param min is the minimum value.

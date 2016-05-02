@@ -84,8 +84,8 @@ public class EqualsCheckerCollection extends AbstractEqualsChecker<Object> {
    *
    * @param collection1 is the first {@link Collection}.
    * @param collection2 is the second {@link Collection}.
-   * @return <code>true</code> if the {@link Object#getClass() type} of the given {@link Collection}s is
-   *         considered as equal, <code>false</code> otherwise.
+   * @return {@code true} if the {@link Object#getClass() type} of the given {@link Collection}s is
+   *         considered as equal, {@code false} otherwise.
    */
   protected boolean isEqualCollectionType(Collection<?> collection1, Collection<?> collection2) {
 

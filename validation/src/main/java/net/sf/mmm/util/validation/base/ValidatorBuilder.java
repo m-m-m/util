@@ -17,7 +17,7 @@ public interface ValidatorBuilder {
    * Creates a new instance of {@link net.sf.mmm.util.validation.api.ValueValidator} validating the specified
    * {@link net.sf.mmm.util.pojo.api.Pojo}.
    * 
-   * @param <V> is the generic type of <code>pojoType</code>.
+   * @param <V> is the generic type of {@code pojoType}.
    * @param pojoType is the {@link Class} reflecting to {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    * @return the new {@link net.sf.mmm.util.validation.api.ValueValidator} instance.
    */
@@ -25,7 +25,7 @@ public interface ValidatorBuilder {
 
   /**
    * Creates a new instance of {@link net.sf.mmm.util.validation.api.ValueValidator} validating the given
-   * <code>property</code> of the specified {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * {@code property} of the specified {@link net.sf.mmm.util.pojo.api.Pojo}.
    * 
    * @param pojoType is the {@link Class} reflecting to {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    * @param property is the property to validate.
@@ -35,7 +35,7 @@ public interface ValidatorBuilder {
 
   /**
    * Creates a new instance of {@link net.sf.mmm.util.validation.api.ValueValidator} validating the given
-   * <code>property</code> of the specified {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * {@code property} of the specified {@link net.sf.mmm.util.pojo.api.Pojo}.
    * 
    * @param pojoType is the {@link Class} reflecting to {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
    * @param property is the property to validate.
@@ -46,7 +46,7 @@ public interface ValidatorBuilder {
 
   /**
    * Creates a new instance of {@link net.sf.mmm.util.validation.api.ValueValidator} validating the given
-   * <code>property</code> of the specified {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * {@code property} of the specified {@link net.sf.mmm.util.pojo.api.Pojo}.
    * 
    * @param <T> is the generic {@link TypedProperty#getPropertyType() type of the property}.
    * @param pojoType is the {@link Class} reflecting to {@link net.sf.mmm.util.pojo.api.Pojo} to validate.
@@ -57,7 +57,7 @@ public interface ValidatorBuilder {
 
   /**
    * Creates a new instance of {@link net.sf.mmm.util.validation.api.ValueValidator} validating the given
-   * <code>property</code> of the specified {@link net.sf.mmm.util.pojo.api.Pojo}.
+   * {@code property} of the specified {@link net.sf.mmm.util.pojo.api.Pojo}.
    * 
    * @param <T> is the generic {@link TypedProperty#getPropertyType() type of the property}.
    * @param pojoType is the {@link Class} reflecting to {@link net.sf.mmm.util.pojo.api.Pojo} to validate.

@@ -23,7 +23,7 @@ public interface ComposedValueValidator<V> extends ValueValidator<V> {
   int getValidatorCount();
 
   /**
-   * Gets the {@link ValueValidator} at the given <code>index</code>.
+   * Gets the {@link ValueValidator} at the given {@code index}.
    *
    * @see java.util.List#get(int)
    *

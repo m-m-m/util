@@ -20,7 +20,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileAlreadyExistsException
    *
    * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code> otherwise or
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
    *        if unknown.
    * @return the {@link NlsMessage}
    */
@@ -31,7 +31,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileNotExistsException
    *
    * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code> otherwise or
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
    *        if unknown.
    * @return the {@link NlsMessage}
    */
@@ -42,7 +42,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileCreationFailedException
    *
    * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code> otherwise or
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
    *        if unknown.
    * @return the {@link NlsMessage}
    */
@@ -53,7 +53,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileAttributeModificationFailedException
    *
    * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code> otherwise or
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
    *        if unknown.
    * @return the {@link NlsMessage}
    */
@@ -65,7 +65,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileDeletionFailedException
    *
    * @param file is the name or path of the file.
-   * @param directory <code>true</code> if the given <code>file</code> is a directory, <code>false</code> otherwise or
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
    *        if unknown.
    * @return the {@link NlsMessage}
    */

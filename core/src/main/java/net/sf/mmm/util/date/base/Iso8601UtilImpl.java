@@ -213,10 +213,10 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   }
 
   /**
-   * This method parses the timezone from the given <code>parser</code>.
+   * This method parses the timezone from the given {@code parser}.
    *
    * @param scanner is the parser pointing to the timezone or at the end of the string
-   * @return the parsed timezone or <code>null</code> if parser already at the end of the string.
+   * @return the parsed timezone or {@code null} if parser already at the end of the string.
    */
   private TimeZone parseTimezone(CharSequenceScanner scanner) {
 

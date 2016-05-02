@@ -15,7 +15,7 @@ package net.sf.mmm.util.component.api;
 public interface PeriodicRefresher {
 
   /**
-   * This method will register the given <code>refreshable</code> so it will be {@link Refreshable#refresh()
+   * This method will register the given {@code refreshable} so it will be {@link Refreshable#refresh()
    * refreshed} periodically. <br>
    * A common implementation will use a central thread that is started if the first {@link Refreshable} is
    * added here. <br>
@@ -32,10 +32,10 @@ public interface PeriodicRefresher {
   void addRefreshable(Refreshable refreshable);
 
   /**
-   * This method removes the given <code>refreshable</code> from this {@link PeriodicRefresher}. This will
+   * This method removes the given {@code refreshable} from this {@link PeriodicRefresher}. This will
    * typically happen when the according {@link Refreshable} shall be {@link java.io.Closeable#close() closed}
    * or disposed. <br>
-   * If the given <code>searchEngine</code> has never been {@link #addRefreshable(Refreshable) registered},
+   * If the given {@code searchEngine} has never been {@link #addRefreshable(Refreshable) registered},
    * this method has no effect.
    * 
    * @param refreshable is the {@link Refreshable} to de-register.

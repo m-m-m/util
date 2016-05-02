@@ -21,7 +21,7 @@ public class ValidatorMandatoryTest extends AbstractValidatorTest {
   private static final String FAILURE_MESSAGE = "The value has to be filled.";
 
   /**
-   * Tests {@link ValidatorMandatory} fails for <code>null</code>.
+   * Tests {@link ValidatorMandatory} fails for {@code null}.
    */
   @Test
   public void testNull() {
@@ -31,7 +31,7 @@ public class ValidatorMandatoryTest extends AbstractValidatorTest {
   }
 
   /**
-   * Tests {@link ValidatorMandatory} fails for <code>""</code>.
+   * Tests {@link ValidatorMandatory} fails for {@code ""}.
    */
   @Test
   public void testEmptyString() {
@@ -49,7 +49,7 @@ public class ValidatorMandatoryTest extends AbstractValidatorTest {
   }
 
   /**
-   * Tests {@link ValidatorMandatory} succeeds for <code>"some value"</code>.
+   * Tests {@link ValidatorMandatory} succeeds for {@code "some value"}.
    */
   @Test
   public void testFilledString() {

@@ -27,8 +27,8 @@ public interface NlsResourceBundleRequestor {
    * {@link java.util.ResourceBundle#getBundle(String) base-name}. In a GWT environment this will cause that
    * these {@link java.util.ResourceBundle} are loaded from the server (if not already available) in the
    * {@link java.util.Locale} of the user so they are available for dictionaries. After the last bundle has
-   * been loaded the given <code>callback</code> will be invoked. In other environments this method will do
-   * nothing but synchronously invoking the <code>callback</code>.
+   * been loaded the given {@code callback} will be invoked. In other environments this method will do
+   * nothing but synchronously invoking the {@code callback}.
    *
    * @param callback is the {@link Runnable} that is {@link Runnable#run() called} when all bundles are loaded
    *        and available.

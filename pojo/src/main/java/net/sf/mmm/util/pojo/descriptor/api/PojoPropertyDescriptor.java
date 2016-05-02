@@ -23,13 +23,13 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
 
   /**
    * This method gets the {@link PojoPropertyAccessor accessor} to access the represented property in the way
-   * given by <code>mode</code>.
+   * given by {@code mode}.
    *
    * @param <ACCESSOR> is the type of the requested accessor.
    * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the requested accessor. Use
    *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorModes} for available
    *        modes.
-   * @return the accessor for the given <code>mode</code> or <code>null</code> if no such accessor exists.
+   * @return the accessor for the given {@code mode} or {@code null} if no such accessor exists.
    */
   <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(PojoPropertyAccessorMode<ACCESSOR> mode);
 
@@ -43,7 +43,7 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
 
   /**
    * This method returns the {@link Field} this {@link PojoPropertyDescriptor descriptor} represents or
-   * <code>null</code> if this {@link PojoPropertyDescriptor descriptor} does not represent any {@link Field
+   * {@code null} if this {@link PojoPropertyDescriptor descriptor} does not represent any {@link Field
    * field}. <br/>
    * <b>ATTENTION:</b><br/>
    * {@link PojoPropertyAccessor#getAccessibleObject()} will return the accessible object for the
@@ -55,7 +55,7 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
    * if you are using method introspection and want to additionally access the field with the same property
    * name if available in the {@link net.sf.mmm.util.pojo.api.Pojo} then this method is the right one.
    *
-   * @return the {@link Field}, which is part of this {@link PojoPropertyDescriptor} or <code>null</code> if
+   * @return the {@link Field}, which is part of this {@link PojoPropertyDescriptor} or {@code null} if
    *         this {@link PojoPropertyDescriptor} is not related to a {@link Field}
    */
   Field getField();

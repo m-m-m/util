@@ -53,7 +53,7 @@ public class CliValueMap {
    *
    * @param parameterContainer is the {@link CliParameterContainer} that acts as key to the requested
    *        {@link CliValueContainerObject}.
-   * @return the requested {@link CliValueContainerObject} or <code>null</code> if NOT present.
+   * @return the requested {@link CliValueContainerObject} or {@code null} if NOT present.
    */
   public CliValueContainer get(CliParameterContainer parameterContainer) {
 
@@ -69,7 +69,7 @@ public class CliValueMap {
    *
    * @param parameterContainer is the {@link CliParameterContainer} that acts as key to the requested
    *        {@link CliValueContainerObject}.
-   * @return the requested {@link CliValueContainerObject} or <code>null</code> if NOT present and NOT created.
+   * @return the requested {@link CliValueContainerObject} or {@code null} if NOT present and NOT created.
    */
   @SuppressWarnings("unchecked")
   public CliValueContainer getOrCreate(CliParameterContainer parameterContainer) {
@@ -101,7 +101,7 @@ public class CliValueMap {
   }
 
   /**
-   * This method applies the parsed CLI values to the given <code>state</code>.
+   * This method applies the parsed CLI values to the given {@code state}.
    *
    * @param state is the {@link AbstractCliParser#getState() state-object} where to apply the values of this
    *        {@link CliValueMap}.

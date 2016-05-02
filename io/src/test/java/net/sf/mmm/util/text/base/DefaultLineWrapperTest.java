@@ -107,7 +107,7 @@ public class DefaultLineWrapperTest extends Assertions {
 
   /**
    * This method counts the number of newlines by scanning the given text in reverse order starting at the given
-   * <code>index</code>.
+   * {@code index}.
    *
    * @param text is the text to scan for newlines.
    * @param index is the index where to start from in reverse direction (to the start of the text).
@@ -331,7 +331,7 @@ public class DefaultLineWrapperTest extends Assertions {
     private int textIndex;
 
     /**
-     * <code>true</code> if line is expected to be indented, <code>false</code> otherwise.
+     * {@code true} if line is expected to be indented, {@code false} otherwise.
      */
     private boolean indent;
 

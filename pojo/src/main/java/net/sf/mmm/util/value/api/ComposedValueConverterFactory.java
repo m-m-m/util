@@ -27,10 +27,10 @@ public interface ComposedValueConverterFactory {
   /**
    * Creates a new custom instance of {@link ComposedValueConverter} with the given configuration.
    *
-   * @param addDefaultConverters - <code>true</code> if all {@link ValueConverter}s of the
+   * @param addDefaultConverters - {@code true} if all {@link ValueConverter}s of the
    *        {@link #getDefaultConverter() default converter} (technically all those registered via
    *        {@link net.sf.mmm.util.component.api.Cdi}) should be added to the new requested
-   *        {@link ComposedValueConverter}, <code>false</code> otherwise (if only the given converters should
+   *        {@link ComposedValueConverter}, {@code false} otherwise (if only the given converters should
    *        be added).
    * @param converterList is the {@link List} of the {@link ValueConverter}s to add (register as plugin) to
    *        the new requested {@link ComposedValueConverter}.

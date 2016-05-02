@@ -83,7 +83,7 @@ public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefi
   }
 
   /**
-   * @return the {@link List} of the {@link Class#getEnumConstants() enum values} or <code>null</code> if the
+   * @return the {@link List} of the {@link Class#getEnumConstants() enum values} or {@code null} if the
    *         values are NOT static and have to be loaded asynchronous via
    *         {@link net.sf.mmm.util.lang.api.EnumProvider}.
    */

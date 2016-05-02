@@ -25,7 +25,7 @@ public abstract interface AttributeReadUuid {
    * {@link net.sf.mmm.util.lang.api.Message}), he can provide it with the problem report so an administrator
    * or software developer can easily find the stacktrace in the log-files.
    *
-   * @return the {@link UUID} of this object. It may be <code>null</code> if this feature is NOT supported by
+   * @return the {@link UUID} of this object. It may be {@code null} if this feature is NOT supported by
    *         the type of this object or turned of (it is turned on by default).
    */
   UUID getUuid();

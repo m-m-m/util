@@ -21,7 +21,7 @@ public class CliOptionNameDefaultFilter implements Filter<String> {
    * naming style}.
    * 
    * @param c is the character to check.
-   * @return <code>true</code> if the given character is acceptable, <code>false</code> otherwise.
+   * @return {@code true} if the given character is acceptable, {@code false} otherwise.
    */
   protected boolean accept(char c) {
 

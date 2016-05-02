@@ -33,7 +33,7 @@ public abstract class BeanPrototypeOperation {
   }
 
   /**
-   * Invokes this operation of the given <code>access</code> using the given arguments.
+   * Invokes this operation of the given {@code access} using the given arguments.
    *
    * @param access the {@link BeanAccess}.
    * @param args the arguments of the reflective method invocation.
@@ -43,7 +43,7 @@ public abstract class BeanPrototypeOperation {
   public abstract Object invoke(BeanAccessBase<?> access, Object[] args) throws Throwable;
 
   /**
-   * @return <code>true</code> if the {@link WritableProperty} is required for this operation, <code>false</code>
+   * @return {@code true} if the {@link WritableProperty} is required for this operation, {@code false}
    *         otherwise.
    */
   public boolean isPropertyRequired() {
@@ -104,7 +104,7 @@ public abstract class BeanPrototypeOperation {
   }
 
   /**
-   * @return <code>true</code> if this is a read-only operation, <code>false</code> otherwise.
+   * @return {@code true} if this is a read-only operation, {@code false} otherwise.
    */
   public boolean isReadOnly() {
 

@@ -11,7 +11,7 @@ import net.sf.mmm.util.nls.api.NlsMessageLookup;
 
 /**
  * This class combines multiple instances of {@link NlsMessageLookup} to a single instance. It will call the delegate
- * instances in the given order and return the first result that is not <code>null</code>.
+ * instances in the given order and return the first result that is not {@code null}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0

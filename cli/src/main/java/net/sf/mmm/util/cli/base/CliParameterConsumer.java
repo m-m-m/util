@@ -38,7 +38,7 @@ public class CliParameterConsumer {
    * @see java.util.Iterator#hasNext()
    * @see java.util.Enumeration#hasMoreElements()
    *
-   * @return <code>true</code> if {@link #getNext() element is available}, <code>false</code> otherwise.
+   * @return {@code true} if {@link #getNext() element is available}, {@code false} otherwise.
    */
   public boolean hasNext() {
 
@@ -62,7 +62,7 @@ public class CliParameterConsumer {
    * This method gets the current element. It is the same as {@link #getNext()} except that it does NOT step
    * on to the next element.
    *
-   * @return the current element or <code>null</code> if no {@link #hasNext() next} is available.
+   * @return the current element or {@code null} if no {@link #hasNext() next} is available.
    */
   public String getCurrent() {
 

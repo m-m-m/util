@@ -22,7 +22,7 @@ public final class Array {
    * @see java.lang.reflect.Array#getLength(Object)
    * 
    * @param array is the supposed array.
-   * @return the length of the given <code>array</code>.
+   * @return the length of the given {@code array}.
    */
   public static int getLength(Object array) {
 
@@ -33,8 +33,8 @@ public final class Array {
    * @see java.lang.reflect.Array#get(Object, int)
    * 
    * @param array is the supposed array.
-   * @param index is the index in <code>array</code> to get the value for.
-   * @return the value at <code>index</code> in the given <code>array</code>.
+   * @param index is the index in {@code array} to get the value for.
+   * @return the value at {@code index} in the given {@code array}.
    */
   public static Object get(Object array, int index) {
 
@@ -45,8 +45,8 @@ public final class Array {
    * @see java.lang.reflect.Array#set(Object, int, Object)
    * 
    * @param array is the supposed array.
-   * @param index is the index in <code>array</code> to get the value for.
-   * @param value is the value to set at <code>index</code> in the given <code>array</code>.
+   * @param index is the index in {@code array} to get the value for.
+   * @param value is the value to set at {@code index} in the given {@code array}.
    */
   public static void set(Object array, int index, Object value) {
 

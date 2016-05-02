@@ -44,7 +44,7 @@ public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, N
   /**
    * This method sets the {@link #getNext() next} node.
    *
-   * @param next is the next to set. May be <code>null</code> to indicate that this is the last node of the list.
+   * @param next is the next to set. May be {@code null} to indicate that this is the last node of the list.
    */
   public void setNext(NODE next) {
 
@@ -62,7 +62,7 @@ public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, N
   /**
    * This method sets the {@link #getValue() value}.
    *
-   * @param value is the value to set. May be <code>null</code>.
+   * @param value is the value to set. May be {@code null}.
    */
   public void setValue(V value) {
 

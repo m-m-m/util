@@ -66,7 +66,7 @@ public interface BeanAccess {
   /**
    * @param name the {@link WritableProperty#getName() name} of the requested property or a potential
    *        {@link #getPropertyNameForAlias(String) alias} of the property.
-   * @return the requested {@link WritableProperty} or <code>null</code> if no such property exists.
+   * @return the requested {@link WritableProperty} or {@code null} if no such property exists.
    */
   WritableProperty<?> getProperty(String name);
 
@@ -120,7 +120,7 @@ public interface BeanAccess {
   /**
    * @see ValueValidator#validate(Object)
    *
-   * @return the {@link ValidationFailure} or <code>null</code> if this {@link Bean} is valid according to this
+   * @return the {@link ValidationFailure} or {@code null} if this {@link Bean} is valid according to this
    *         {@link ValueValidator}.
    */
   default ValidationFailure validate() {
@@ -233,7 +233,7 @@ public interface BeanAccess {
    * @param value new {@link WritableProperty#getValue() value} of the specified property. Maybe {@code null} and in
    *        such case a missing {@link WritableProperty property} will NOT be
    *        {@link #createProperty(String, GenericType) created}.
-   * @param type the {@link WritableProperty#getType() property type}. May be <code>null</code> if the
+   * @param type the {@link WritableProperty#getType() property type}. May be {@code null} if the
    *        {@link WritableProperty property} has to be {@link #createProperty(String, GenericType) created} then the
    *        type will be derived from {@code value} as fallback.
    */
@@ -332,8 +332,8 @@ public interface BeanAccess {
   /**
    * @see BeanFactory#getReadOnlyBean(Bean)
    *
-   * @return <code>true</code> if this {@link BeanAccess} belongs to a {@link Bean} that is read-only (immutable),
-   *         <code>false</code> otherwise.
+   * @return {@code true} if this {@link BeanAccess} belongs to a {@link Bean} that is read-only (immutable),
+   *         {@code false} otherwise.
    */
   boolean isReadOnly();
 
@@ -341,9 +341,9 @@ public interface BeanAccess {
    * @see BeanPrototypeBuilder#isDynamic()
    * @see BeanPrototypeBuilder#getOrCreatePrototype(Class)
    *
-   * @return <code>true</code> if this {@link BeanAccess} belongs to a dynamic {@link Bean}. Dynamic means that the
+   * @return {@code true} if this {@link BeanAccess} belongs to a dynamic {@link Bean}. Dynamic means that the
    *         {@link Bean} is not strictly typed and allows to {@link #createProperty(String, GenericType, Class) create
-   *         and add properties} on the fly, <code>false</code> otherwise.
+   *         and add properties} on the fly, {@code false} otherwise.
    */
   boolean isDynamic();
 
@@ -353,8 +353,8 @@ public interface BeanAccess {
    * @see BeanPrototypeBuilder#getOrCreatePrototype(Class)
    * @see BeanPrototypeBuilder#createPrototype(Class, String, Bean...)
    *
-   * @return <code>true</code> if this {@link BeanAccess} belongs to a {@link BeanFactory#createPrototype(Class)
-   *         prototype}, <code>false</code> otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
+   * @return {@code true} if this {@link BeanAccess} belongs to a {@link BeanFactory#createPrototype(Class)
+   *         prototype}, {@code false} otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
    */
   boolean isPrototype();
 

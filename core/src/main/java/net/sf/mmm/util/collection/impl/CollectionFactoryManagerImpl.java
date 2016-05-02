@@ -121,12 +121,12 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   }
 
   /**
-   * This method registers the given <code>factory</code> using its {@link MapFactory#getMapInterface() map-interface}.
+   * This method registers the given {@code factory} using its {@link MapFactory#getMapInterface() map-interface}.
    *
    * @see #registerMapFactory(MapFactory, Class)
    *
    * @param factory is the {@link MapFactory} to register.
-   * @return the {@link MapFactory} that has been replaced with <code>factory</code> or <code>null</code> if none was
+   * @return the {@link MapFactory} that has been replaced with {@code factory} or {@code null} if none was
    *         replaced.
    */
   protected MapFactory registerMapFactory(MapFactory factory) {
@@ -135,15 +135,15 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   }
 
   /**
-   * This method registers the given <code>factory</code> for the given <code>mapInterface</code>.
+   * This method registers the given {@code factory} for the given {@code mapInterface}.
    *
-   * @param <MAP> is the generic type of the <code>mapInterface</code>.
+   * @param <MAP> is the generic type of the {@code mapInterface}.
    * @param factory is the {@link MapFactory} to register.
    * @param mapInterface is the interface of the associated {@link Map}. It has to be
    *        {@link Class#isAssignableFrom(Class) assignable from} the {@link MapFactory#getMapInterface() map-interface}
-   *        of the given <code>factory</code>.
-   * @return the {@link MapFactory} that was registered for the given <code>mapInterface</code> before and has now been
-   *         replaced with <code>factory</code> or <code>null</code> if none was replaced.
+   *        of the given {@code factory}.
+   * @return the {@link MapFactory} that was registered for the given {@code mapInterface} before and has now been
+   *         replaced with {@code factory} or {@code null} if none was replaced.
    */
   protected <MAP extends Map> MapFactory registerMapFactory(MapFactory<? extends MAP> factory,
       Class<MAP> mapInterface) {
@@ -152,13 +152,13 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   }
 
   /**
-   * This method registers the given <code>factory</code> using its {@link CollectionFactory#getCollectionInterface()
+   * This method registers the given {@code factory} using its {@link CollectionFactory#getCollectionInterface()
    * collection-interface}.
    *
    * @see #registerCollectionFactory(CollectionFactory, Class)
    *
    * @param factory is the {@link CollectionFactory} to register.
-   * @return the {@link CollectionFactory} that has been replaced with <code>factory</code> or <code>null</code> if none
+   * @return the {@link CollectionFactory} that has been replaced with {@code factory} or {@code null} if none
    *         was replaced.
    */
   protected CollectionFactory registerCollectionFactory(CollectionFactory factory) {
@@ -167,15 +167,15 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   }
 
   /**
-   * This method registers the given <code>factory</code> for the given <code>collectionInterface</code>.
+   * This method registers the given {@code factory} for the given {@code collectionInterface}.
    *
-   * @param <COLLECTION> is the generic type of the <code>collectionInterface</code>.
+   * @param <COLLECTION> is the generic type of the {@code collectionInterface}.
    * @param factory is the {@link CollectionFactory} to register.
    * @param collectionInterface is the interface of the associated {@link Collection}. It has to be
    *        {@link Class#isAssignableFrom(Class) assignable from} the {@link CollectionFactory#getCollectionInterface()
-   *        collection-interface} of the given <code>factory</code>.
-   * @return the {@link CollectionFactory} that was registered for the given <code>collectionInterface</code> before and
-   *         has now been replaced with <code>factory</code> or <code>null</code> if none was replaced.
+   *        collection-interface} of the given {@code factory}.
+   * @return the {@link CollectionFactory} that was registered for the given {@code collectionInterface} before and
+   *         has now been replaced with {@code factory} or {@code null} if none was replaced.
    */
   protected <COLLECTION extends Collection> CollectionFactory registerCollectionFactory(
       CollectionFactory<? extends COLLECTION> factory, Class<COLLECTION> collectionInterface) {

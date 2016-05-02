@@ -19,24 +19,24 @@ import java.util.Map;
 public interface NlsFormatter<O> {
 
   /**
-   * This method formats the given <code>object</code> according to the given <code>locale</code>.
+   * This method formats the given {@code object} according to the given {@code locale}.
    * 
    * @param object is the object to format.
    * @param locale is the locale used for localized formatting.
    * @param arguments is the {@link Map} of arguments.
    * @param resolver is the {@link NlsTemplateResolver}.
-   * @return the formatted and localized string for the given <code>object</code>.
+   * @return the formatted and localized string for the given {@code object}.
    */
   String format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver);
 
   /**
-   * This method formats the given <code>object</code> according to the given <code>locale</code>.
+   * This method formats the given {@code object} according to the given {@code locale}.
    * 
    * @param object is the object to format.
    * @param locale is the locale used for localized formatting.
    * @param arguments is the {@link Map} of {@link NlsMessage#getArgument(String) arguments}.
    * @param resolver is the {@link NlsTemplateResolver}.
-   * @param buffer is where to append the formatted <code>object</code>.
+   * @param buffer is where to append the formatted {@code object}.
    * @throws IOException if the given {@link Appendable} caused such exception.
    */
   void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver, Appendable buffer)

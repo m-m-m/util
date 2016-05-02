@@ -22,8 +22,8 @@ public class ListCharFilter implements CharFilter {
   /**
    * The constructor.
    * 
-   * @param accept - if <code>true</code> exactly the chars given by <code>charArray</code> are accepted
-   *        (whitelist), if <code>false</code> exactly these chars are NOT accepted (blacklist).
+   * @param accept - if {@code true} exactly the chars given by {@code charArray} are accepted
+   *        (whitelist), if {@code false} exactly these chars are NOT accepted (blacklist).
    * @param charArray are the chars to accept or to reject.
    */
   public ListCharFilter(boolean accept, char... charArray) {

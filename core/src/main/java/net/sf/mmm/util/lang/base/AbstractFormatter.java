@@ -53,7 +53,7 @@ public abstract class AbstractFormatter<V> implements Formatter<V> {
   }
 
   /**
-   * Returns the (static) string representation for the undefined value <code>null</code>.
+   * Returns the (static) string representation for the undefined value {@code null}.
    * 
    * @return the null string.
    */
@@ -65,7 +65,7 @@ public abstract class AbstractFormatter<V> implements Formatter<V> {
   /**
    * @see #format(Object, Appendable)
    * 
-   * @param value is the value to format (not <code>null</code>).
+   * @param value is the value to format (not {@code null}).
    * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
    *        value to.
    * @throws IOException if caused by {@link Appendable#append(CharSequence) append}.

@@ -46,8 +46,8 @@ public class Password extends AbstractSimpleDatatype<String> implements Security
   }
 
   /**
-   * @param value the password as {@link String}. May be <code>null</code>.
-   * @return the {@link Password} or <code>null</code> if the given {@code value} is {@code null} or
+   * @param value the password as {@link String}. May be {@code null}.
+   * @return the {@link Password} or {@code null} if the given {@code value} is {@code null} or
    *         {@link String#isEmpty() empty}.
    */
   public static Password valueOf(String value) {

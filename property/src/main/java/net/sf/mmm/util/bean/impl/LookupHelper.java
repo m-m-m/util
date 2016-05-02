@@ -41,7 +41,7 @@ final class LookupHelper {
 
   /**
    * @param type the {@link Class} to create the {@link Lookup} for.
-   * @return a new instance of {@link Lookup} for the given <code>type</code>.
+   * @return a new instance of {@link Lookup} for the given {@code type}.
    */
   public Lookup newLookup(Class<?> type) {
 

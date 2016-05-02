@@ -3,7 +3,7 @@
 package java.lang;
 
 /**
- * This makes <code>CloneNotSupportedException</code> available to GWT clients.
+ * This makes {@code CloneNotSupportedException} available to GWT clients.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

@@ -20,7 +20,7 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
   StackTraceElement[] NO_STACKTRACE = new StackTraceElement[0];
 
   /**
-   * Converts the given <code>exception</code> so it is ensured to be serializable.
+   * Converts the given {@code exception} so it is ensured to be serializable.
    *
    * @see net.sf.mmm.util.exception.api.GenericSerializableException
    * @see net.sf.mmm.util.exception.api.NlsThrowable#createCopy(ExceptionTruncation)
@@ -28,14 +28,14 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
    * @param exception is the {@link Throwable} to convert.
    * @param truncation the {@link ExceptionTruncation} to configure if details shall be removed. E.g.
    *        {@link ExceptionTruncation#REMOVE_ALL}.
-   * @return a serializable variant of the given <code>exception</code>. Guaranteed to implement
+   * @return a serializable variant of the given {@code exception}. Guaranteed to implement
    *         {@link net.sf.mmm.util.exception.api.NlsThrowable}. By default an instance of
    *         {@link net.sf.mmm.util.exception.api.GenericSerializableException}.
    */
   Throwable convertForSerialization(Throwable exception, ExceptionTruncation truncation);
 
   /**
-   * Converts the given <code>exception</code> for end-users with potential truncation.
+   * Converts the given {@code exception} for end-users with potential truncation.
    *
    * @see #convertForUser(Throwable)
    *
@@ -47,7 +47,7 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
   Throwable convertForUser(Throwable exception, ExceptionTruncation truncation);
 
   /**
-   * Converts the given <code>exception</code> for the <em>client</em>. With client we mean any kind of system that
+   * Converts the given {@code exception} for the <em>client</em>. With client we mean any kind of system that
    * calls the current application via a remote interface. This can be a user-interface client, a different server
    * application, or the like. If the exception would be send to the client as is, then all exception classes have to be
    * available on the client side for de-serialization and all error details are exposed to the client violating the

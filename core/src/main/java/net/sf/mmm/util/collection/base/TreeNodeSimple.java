@@ -110,7 +110,7 @@ public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE
   }
 
   /**
-   * Creates a new {@link TreeNodeSimple} with the given <code>childValue</code> and {@link #addChild(TreeNodeSimple)
+   * Creates a new {@link TreeNodeSimple} with the given {@code childValue} and {@link #addChild(TreeNodeSimple)
    * adds it as child} of this node.
    *
    * @param childValue is the {@link #getValue() value} of the new child node.
@@ -121,8 +121,8 @@ public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE
   }
 
   /**
-   * Creates a new {@link TreeNodeSimple} with the given <code>childValue</code> and
-   * {@link #addChild(TreeNodeSimple, int) inserts it as child} of this node at the given <code>index</code>.
+   * Creates a new {@link TreeNodeSimple} with the given {@code childValue} and
+   * {@link #addChild(TreeNodeSimple, int) inserts it as child} of this node at the given {@code index}.
    *
    * @param childValue is the {@link #getValue() value} of the new child node.
    * @param index is the {@link java.util.List#get(int) index} where to {@link java.util.List#add(int, Object) insert}

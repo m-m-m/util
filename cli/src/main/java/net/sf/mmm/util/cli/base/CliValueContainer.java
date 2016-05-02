@@ -28,8 +28,8 @@ public interface CliValueContainer {
   void setValue(String argument);
 
   /**
-   * @return <code>true</code> if this is a container for a value of the type array,
-   *         {@link java.util.Collection} or {@link java.util.Map} - <code>false</code> otherwise.
+   * @return {@code true} if this is a container for a value of the type array,
+   *         {@link java.util.Collection} or {@link java.util.Map} - {@code false} otherwise.
    */
   boolean isArrayMapOrCollection();
 

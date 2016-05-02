@@ -32,7 +32,7 @@ public interface ClasspathScanner {
   /**
    * @param classpath is the classpath location pointing to a {@link Package} or
    *        {@link net.sf.mmm.util.resource.base.ClasspathResource}.
-   * @return the {@link BrowsableResource} for the given <code>classpath</code>.
+   * @return the {@link BrowsableResource} for the given {@code classpath}.
    */
   BrowsableResource getClasspathResource(String classpath);
 

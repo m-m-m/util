@@ -37,7 +37,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   }
 
   /**
-   * This method registers the given <code>provider</code>.
+   * This method registers the given {@code provider}.
    *
    * @param provider is the {@link DataResourceProvider} to register.
    * @throws DuplicateObjectException if a {@link DataResourceProvider} is already registered for one of the
@@ -69,7 +69,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   }
 
   /**
-   * This method registers the given <code>provider</code> for the given <code>schemaPrefix</code>.
+   * This method registers the given {@code provider} for the given {@code schemaPrefix}.
    *
    * @param provider is the {@link DataResourceProvider} to register.
    * @param schemaPrefix is the {@link ResourceUriImpl#getSchemePrefix() scheme-prefix} for which the provider shall be
@@ -95,11 +95,11 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
   }
 
   /**
-   * This method gets the {@link DataResourceProvider provider} for the given <code>resourceUri</code>.
+   * This method gets the {@link DataResourceProvider provider} for the given {@code resourceUri}.
    *
    * @param resourceUri is the {@link ResourceUriImpl}.
    * @return the {@link DataResourceProvider} {@link DataResourceProvider#getSchemePrefixes() responsible} for the given
-   *         <code>resourceUri</code>.
+   *         {@code resourceUri}.
    * @throws ResourceUriUndefinedException if no {@link DataResourceProvider provider} is
    *         {@link #registerProvider(DataResourceProvider) registered} that is responsible.
    */
@@ -132,7 +132,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    *
    * @param resourceUri is the parsed and qualified {@link ResourceUriImpl}.
    * @return the created {@link BrowsableResource}.
-   * @throws ResourceUriUndefinedException if the given <code>resourceUri</code> is undefined, e.g. the
+   * @throws ResourceUriUndefinedException if the given {@code resourceUri} is undefined, e.g. the
    *         {@link ResourceUriImpl#getSchemePrefix() scheme-prefix} is NOT supported by this factory.
    */
   protected BrowsableResource createBrowsableResource(ResourceUri resourceUri)

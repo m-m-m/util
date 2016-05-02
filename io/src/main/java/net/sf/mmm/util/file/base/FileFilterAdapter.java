@@ -9,10 +9,10 @@ import net.sf.mmm.util.filter.api.Filter;
 
 /**
  * This class implements the {@link FileFilter} interface by simply delegating to a
- * <code>{@link Filter}&lt;{@link File}&gt;</code>.
- * 
+ * <code>{@link Filter}{@literal <File>}</code>.
+ *
  * @see FileStringFilterAdapter
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -23,7 +23,7 @@ public final class FileFilterAdapter implements FileFilter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param filter is the filter to adapt.
    */
   public FileFilterAdapter(Filter<File> filter) {

@@ -15,7 +15,7 @@
  * filename. However, this causes imprecise or even wrong results and is 
  * sometimes NOT applicable because no filename is present. Another approach is
  * to read the data and seek for characteristic patterns. This approach is done
- * by the GNU linux program <code>file</code>. <br>
+ * by the GNU linux program {@code file}. <br>
  * This utility also detects the
  * {@link net.sf.mmm.util.contenttype.api.ContentType} of arbitrary data by
  * pattern based detection. However, it allows detection on the fly while

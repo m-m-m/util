@@ -18,7 +18,7 @@ public interface DetectorStreamProcessorFactory {
    * required lookahead of all registered {@link DetectorStreamProcessorFactory processor-factories}. <br>
    * <b>NOTE:</b><br>
    * To prevent waste of memory, you should NOT use a lookahead higher than necessary. However you should NOT
-   * worry about values below <code>1024</code>. <br>
+   * worry about values below {@code 1024}. <br>
    * As a stupid example we assume a {@link DetectorStreamProcessor} wants to figure out if some file contains
    * the ASCII-bytes '&lt;?xml' or '&lt;html'. Therefore he requires a lookahead of 5. If he consumes all data
    * until a '&lt;' is reached (@see {@link DetectorStreamBuffer#peek()}), he can check if 4 more bytes are

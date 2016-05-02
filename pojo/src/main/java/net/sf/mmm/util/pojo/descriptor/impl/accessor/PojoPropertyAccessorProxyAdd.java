@@ -30,7 +30,7 @@ public class PojoPropertyAccessorProxyAdd extends AbstractPojoPropertyAccessorPr
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array, or list property.
    * @param containerSetAccessor is the accessor that sets the array, or {@link java.util.Collection}
-   *        property. May be <code>null</code> if NOT available.
+   *        property. May be {@code null} if NOT available.
    */
   public PojoPropertyAccessorProxyAdd(PojoDescriptorDependencies dependencies,
       PojoPropertyAccessorNonArg containerGetAccessor, PojoPropertyAccessorOneArg containerSetAccessor) {

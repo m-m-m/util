@@ -21,7 +21,7 @@ public class SingleElementIterator<E> implements Iterator<E> {
   /**
    * The constructor.
    * 
-   * @param element is the single element to iterate. If <code>null</code> the iterator will be entirely
+   * @param element is the single element to iterate. If {@code null} the iterator will be entirely
    *        empty.
    */
   public SingleElementIterator(E element) {

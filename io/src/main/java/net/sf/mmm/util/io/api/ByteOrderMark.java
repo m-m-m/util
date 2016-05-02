@@ -14,7 +14,7 @@ public enum ByteOrderMark {
 
   /**
    * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_8 UTF-8}:<br>
-   * <code>0xef 0xbb 0xbf</code>
+   * {@code 0xef 0xbb 0xbf}
    */
   UTF_8() {
 
@@ -40,7 +40,7 @@ public enum ByteOrderMark {
 
   /**
    * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_16_BE UTF-16BE}:<br>
-   * <code>0xfe 0xff</code>
+   * {@code 0xfe 0xff}
    */
   UTF_16_BE() {
 
@@ -66,7 +66,7 @@ public enum ByteOrderMark {
 
   /**
    * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_16_LE UTF16-LE}:<br>
-   * <code>0xff 0xfe</code>
+   * {@code 0xff 0xfe}
    */
   UTF_16_LE() {
 
@@ -92,7 +92,7 @@ public enum ByteOrderMark {
 
   /**
    * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_32_BE UTF-32BE}:<br>
-   * <code>0x00 0x00 0xfe 0xff</code>
+   * {@code 0x00 0x00 0xfe 0xff}
    */
   UTF_32_BE() {
 
@@ -118,7 +118,7 @@ public enum ByteOrderMark {
 
   /**
    * The {@link ByteOrderMark} for {@link EncodingUtil#ENCODING_UTF_32_LE UTF-32LE}:<br>
-   * <code>0xff 0xfe 0x00 0x00</code>
+   * {@code 0xff 0xfe 0x00 0x00}
    */
   UTF_32_LE() {
 
@@ -175,19 +175,19 @@ public enum ByteOrderMark {
   }
 
   /**
-   * This method detects if this {@link ByteOrderMark} is present in the given <code>bytes</code>. <br>
+   * This method detects if this {@link ByteOrderMark} is present in the given {@code bytes}. <br>
    * <b>NOTE:</b><br>
    * A BOM may only occur at the head of your data (file, payload, etc.). <br>
    * <b>ATTENTION:</b><br>
    * Please note that binary data may accidently have header bytes that represent this {@link ByteOrderMark}.
-   * This method can NOT know this and will return <code>true</code> even if the data is NOT encoded with the
+   * This method can NOT know this and will return {@code true} even if the data is NOT encoded with the
    * {@link #getEncoding() according encoding}. Therefore you should only use this method for the header of
    * textual data.
    * 
    * @param bytes is the buffer with the bytes to check.
-   * @param offset is the index of the first data-byte in <code>bytes</code>. Will typically be <code>0</code>
+   * @param offset is the index of the first data-byte in {@code bytes}. Will typically be {@code 0}
    *        .
-   * @return <code>true</code> if this {@link ByteOrderMark BOM} was detected in the
+   * @return {@code true} if this {@link ByteOrderMark BOM} was detected in the
    */
   public final boolean isPresent(byte[] bytes, int offset) {
 
@@ -212,7 +212,7 @@ public enum ByteOrderMark {
 
   /**
    * This method detects the {@link ByteOrderMark} that may be {@link #isPresent(byte[], int) present} in the
-   * given <code>bytes</code> starting at <code>offset</code>. <br>
+   * given {@code bytes} starting at {@code offset}. <br>
    * <b>ATTENTION:</b><br>
    * Please note that binary data may accidently have header bytes that represent a {@link ByteOrderMark}.
    * This method can NOT know this and will return that {@link ByteOrderMark} even if the data is NOT encoded
@@ -220,9 +220,9 @@ public enum ByteOrderMark {
    * header of textual data.
    * 
    * @param bytes is the buffer with the bytes to check.
-   * @param offset is the index of the first data-byte in <code>bytes</code>. Will typically be <code>0</code>
+   * @param offset is the index of the first data-byte in {@code bytes}. Will typically be {@code 0}
    *        .
-   * @return the detected {@link ByteOrderMark} or <code>null</code> if the given <code>bytes</code> have no
+   * @return the detected {@link ByteOrderMark} or {@code null} if the given {@code bytes} have no
    *         BOM.
    */
   public static ByteOrderMark detect(byte[] bytes, int offset) {

@@ -40,7 +40,7 @@ public abstract class AbstractCharIterator implements CharIterator {
   /**
    * This method tries to find the {@link #next() next} element.
    * 
-   * @return the next element or <code>null</code> if {@link #hasNext() done}.
+   * @return the next element or {@code null} if {@link #hasNext() done}.
    */
   protected abstract char findNext();
 

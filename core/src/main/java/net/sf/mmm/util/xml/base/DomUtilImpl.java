@@ -213,8 +213,8 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * This method creates a new transformer.
    * 
-   * @param indent - <code>true</code> if the XML should be indented (automatically add linebreaks before
-   *        opening tags), <code>false</code> otherwise.
+   * @param indent - {@code true} if the XML should be indented (automatically add linebreaks before
+   *        opening tags), {@code false} otherwise.
    * @return the new transformer.
    */
   private Transformer createTransformer(boolean indent) {
@@ -457,7 +457,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
    * 
    * @param node1 is the first node.
    * @param node2 is the second node.
-   * @return <code>true</code> if both nodes have equal {@link #getLocalName(Node) name} and
+   * @return {@code true} if both nodes have equal {@link #getLocalName(Node) name} and
    *         {@link Node#getNamespaceURI() namespace}.
    */
   private boolean isEqualName(Node node1, Node node2) {
@@ -551,7 +551,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
    * @param charIterator1 is the first {@link CharIterator}.
    * @param charIterator2 is the second {@link CharIterator}.
    * @param mode is the mode of comparison.
-   * @return <code>true</code> if equal, <code>false</code> otherwise.
+   * @return {@code true} if equal, {@code false} otherwise.
    */
   protected boolean isEqual(CharIterator charIterator1, CharIterator charIterator2, XmlCompareMode mode) {
 
@@ -574,7 +574,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
    * @param element1 is the first {@link Element}.
    * @param element2 is the second {@link Element}.
    * @param mode is the mode of comparison.
-   * @return <code>true</code> if equal, <code>false</code> otherwise.
+   * @return {@code true} if equal, {@code false} otherwise.
    */
   protected boolean isEqual(Element element1, Element element2, XmlCompareMode mode) {
 
@@ -617,7 +617,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
    * @param nodeList1 is the first {@link NodeList}.
    * @param nodeList2 is the second {@link NodeList}.
    * @param mode is the mode of comparison.
-   * @return <code>true</code> if equal, <code>false</code> otherwise.
+   * @return {@code true} if equal, {@code false} otherwise.
    */
   protected boolean isEqual(NodeList nodeList1, NodeList nodeList2, XmlCompareMode mode) {
 

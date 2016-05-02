@@ -39,12 +39,12 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
  * {@link #loadXml(InputStream, Object) read} or {@link #saveXml(Object, OutputStream) write} the XML for a
  * single JAXB annotated java bean. <br>
  * <b>ATTENTION:</b><br>
- * This class uses an <code>IDValidator</code> to validate duplicate or unresolved
+ * This class uses an {@code IDValidator} to validate duplicate or unresolved
  * {@link javax.xml.bind.annotation.XmlID}s on {@link #getOrCreateUnmarshaller() un-marshaling}. This is
  * unfortunately not the default for JAXB and also NOT part of the JAXB-API. So this feature depends on the
  * actual JAXB implementation you are using. We support the default implementation build into the JRE
- * (com.sun.internal.xml.bind). However if <code>jaxb-impl</code> (com.sun.xml.bind) is NOT on your classpath
- * it will replace the default implementation. For this reason we also support <code>jaxb-impl</code> as
+ * (com.sun.internal.xml.bind). However if {@code jaxb-impl} (com.sun.xml.bind) is NOT on your classpath
+ * it will replace the default implementation. For this reason we also support {@code jaxb-impl} as
  * fallback. Other implementations are NOT supported (everything should work but ID-validation is turned off
  * then).
  *
@@ -140,9 +140,9 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * @return <code>true</code> if undefined tags and attributes should be ignored (may be useful for
-   *         compatibility), <code>false</code> if they shall cause an exception (default is
-   *         <code>false</code>).
+   * @return {@code true} if undefined tags and attributes should be ignored (may be useful for
+   *         compatibility), {@code false} if they shall cause an exception (default is
+   *         {@code false}).
    */
   protected boolean isIgnoreUndefinedNodes() {
 
@@ -150,8 +150,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * @return <code>true</code> if {@link #loadXml(DataResource)} should support XIncludes when reading the
-   *         XML, <code>false</code> otherwise.
+   * @return {@code true} if {@link #loadXml(DataResource)} should support XIncludes when reading the
+   *         XML, {@code false} otherwise.
    */
   public boolean isXIncludeAware() {
 
@@ -221,7 +221,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method is invoked after the <code>jaxbBean</code> has been loaded and before it is saved. It does
+   * This method is invoked after the {@code jaxbBean} has been loaded and before it is saved. It does
    * nothing by default but can be overridden to implement custom validation logic.
    *
    * @param jaxbBean is the JAXB bean to validate.
@@ -232,7 +232,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method loads the JAXB-bean as XML from the given <code>inputStream</code>.
+   * This method loads the JAXB-bean as XML from the given {@code inputStream}.
    *
    * @param inputStream is the {@link InputStream} with the XML to parse.
    * @return the parsed XML converted to the according JAXB-bean.
@@ -252,7 +252,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method loads the JAXB-bean as XML from the given <code>location</code> .
+   * This method loads the JAXB-bean as XML from the given {@code location} .
    *
    * @param locationUrl is the location URL for the {@link DataResource resource} pointing to the XML to
    *        parse.
@@ -265,7 +265,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method loads the JAXB-bean as XML from the given <code>inputStream</code>.
+   * This method loads the JAXB-bean as XML from the given {@code inputStream}.
    *
    * @param file is the {@link File} with the XML to parse.
    * @return the parsed XML converted to the according JAXB-bean.
@@ -277,7 +277,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method loads the JAXB-bean as XML from the given <code>resource</code> .
+   * This method loads the JAXB-bean as XML from the given {@code resource} .
    *
    * @param resource is the {@link DataResource} with the XML to parse.
    * @return the parsed XML converted to the according JAXB-bean.
@@ -317,9 +317,9 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method saves the given <code>jaxbBean</code> as XML to the given <code>outputStream</code>. <br>
+   * This method saves the given {@code jaxbBean} as XML to the given {@code outputStream}. <br>
    * <b>ATTENTION:</b><br>
-   * The caller of this method has to {@link OutputStream#close() close} the <code>outputStream</code>.
+   * The caller of this method has to {@link OutputStream#close() close} the {@code outputStream}.
    *
    * @param jaxbBean is the JAXB-bean to save as XML.
    * @param resource is the {@link DataResource} where to {@link DataResource#openOutputStream() write} to.
@@ -331,9 +331,9 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method saves the given <code>jaxbBean</code> as XML to the given <code>outputStream</code>. <br>
+   * This method saves the given {@code jaxbBean} as XML to the given {@code outputStream}. <br>
    * <b>ATTENTION:</b><br>
-   * The caller of this method has to {@link OutputStream#close() close} the <code>outputStream</code>.
+   * The caller of this method has to {@link OutputStream#close() close} the {@code outputStream}.
    *
    * @param jaxbBean is the JAXB-bean to save as XML.
    * @param outputStream is the {@link OutputStream} where to write the XML to.
@@ -351,7 +351,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method saves the given <code>jaxbBean</code> as XML to the given <code>locationUrl</code>. <br>
+   * This method saves the given {@code jaxbBean} as XML to the given {@code locationUrl}. <br>
    *
    * @param jaxbBean is the JAXB-bean to save as XML.
    * @param locationUrl is the location URL for the {@link BrowsableResource resource} where to write the XML

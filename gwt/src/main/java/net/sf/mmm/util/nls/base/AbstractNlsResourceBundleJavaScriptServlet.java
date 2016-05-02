@@ -75,12 +75,12 @@ public abstract class AbstractNlsResourceBundleJavaScriptServlet extends Abstrac
   }
 
   /**
-   * This method writes the given {@link ResourceBundle} to the <code>writer</code>.
+   * This method writes the given {@link ResourceBundle} to the {@code writer}.
    * 
    * @param writer is the {@link PrintWriter} to use.
    * @param name is the {@link ResourceBundle#getBundle(String) bundle name}.
    * @param bundle is the {@link ResourceBundle} for the users locale to write to the given
-   *        <code>writer</code>.
+   *        {@code writer}.
    */
   protected void writeBundle(PrintWriter writer, String name, ResourceBundle bundle) {
 

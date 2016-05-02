@@ -9,10 +9,10 @@
  * For unicode support there is {@link net.sf.mmm.util.text.api.UnicodeUtil}
  * and also {@link net.sf.mmm.util.text.api.DiacriticalMark}.
  * The {@link net.sf.mmm.util.text.api.Singularizer} transforms a term in plural
- * form to its according singular form (e.g. <code>"children"</code> to
- * <code>"child"</code>). It is mainly intended for technical reasons (e.g. to
- * determine relations between <code>getChildren()</code> and
- * <code>addChild()</code>) and less for linguistic purposes.
+ * form to its according singular form (e.g. {@code "children"} to
+ * {@code "child"}). It is mainly intended for technical reasons (e.g. to
+ * determine relations between {@code getChildren()} and
+ * {@code addChild()}) and less for linguistic purposes.
  */
 package net.sf.mmm.util.text.api;
 

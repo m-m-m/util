@@ -98,7 +98,7 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses the chain from the given <code>inStream</code>. The XML contained in <code>inStream</code> needs
+   * This method parses the chain from the given {@code inStream}. The XML contained in {@code inStream} needs
    * to contain the chain rules as child-nodes of the {@link Document#getDocumentElement() root-element}. The name of
    * the root-element is ignored (use e.g. "chain").
    *
@@ -106,7 +106,7 @@ public class FilterRuleChainXmlParser {
    *        in an exceptional state).
    * @return the parsed filter rule.
    * @throws IOException if an input/output error occurred.
-   * @throws SAXException if the <code>inStream</code> contains invalid XML.
+   * @throws SAXException if the {@code inStream} contains invalid XML.
    */
   public FilterRuleChain<String> parseChain(InputStream inStream) throws IOException, SAXException {
 
@@ -121,7 +121,7 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses a map of {@link FilterRuleChain chain}s given by <code>xmlElement</code>.
+   * This method parses a map of {@link FilterRuleChain chain}s given by {@code xmlElement}.
    *
    * @param xmlElement is the XML element containing the filter-chains (see {@link #XML_TAG_CHAIN}) as children and puts
    *        them into a map with the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child elements or attributes are
@@ -159,7 +159,7 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses a {@link FilterRuleChain chain} given by <code>xmlElement</code>.
+   * This method parses a {@link FilterRuleChain chain} given by {@code xmlElement}.
    *
    * @see #XML_TAG_CHAIN
    *
@@ -173,7 +173,7 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses a {@link FilterRuleChain chain} given as XML via <code>xmlElement</code>.
+   * This method parses a {@link FilterRuleChain chain} given as XML via {@code xmlElement}.
    *
    * @param xmlElement is the XML element containing the filter-rules (see {@link #XML_TAG_RULE_INCLUDE} and
    *        {@link #XML_TAG_RULE_EXCLUDE}) as children. Unknown child elements or attributes are simply ignored.

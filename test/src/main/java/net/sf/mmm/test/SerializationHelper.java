@@ -28,7 +28,7 @@ public final class SerializationHelper {
    * Method to {@link #serialize(Serializable)} and {@link #deserialize(byte[])} an {@link Object} to create a
    * clone and test serialization.
    * 
-   * @param <S> is the generic type of the <code>serializable</code> {@link Object}.
+   * @param <S> is the generic type of the {@code serializable} {@link Object}.
    * @param serializable is the {@link Object} to {@link #serialize(Serializable) serialize}.
    * @return the {@link #deserialize(byte[]) de-serialized} clone.
    */
@@ -58,7 +58,7 @@ public final class SerializationHelper {
 
   /**
    * @param serializable is the {@link Serializable} {@link Object} to serialize.
-   * @return the given <code>serializable</code> as byte-array.
+   * @return the given {@code serializable} as byte-array.
    */
   public static byte[] serialize(Serializable serializable) {
 

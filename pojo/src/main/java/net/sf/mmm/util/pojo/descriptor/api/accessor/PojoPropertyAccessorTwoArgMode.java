@@ -15,7 +15,7 @@ public class PojoPropertyAccessorTwoArgMode extends PojoPropertyAccessorMode<Poj
 
   /**
    * The mode for the {@link PojoPropertyAccessorOneArg setter} of a mapped property. The suggested argument
-   * order is <code>key, value</code>.
+   * order is {@code key, value}.
    */
   public static final PojoPropertyAccessorTwoArgMode SET_MAPPED = new PojoPropertyAccessorTwoArgMode("set-mapped",
       false);

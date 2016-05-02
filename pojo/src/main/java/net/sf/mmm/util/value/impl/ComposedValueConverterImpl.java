@@ -71,7 +71,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method registers the given <code>converter</code> to this composed converter.
+   * This method registers the given {@code converter} to this composed converter.
    *
    * @param converter is the converter to add.
    */
@@ -85,12 +85,12 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method registers the given <code>converter</code> to this composed converter.
+   * This method registers the given {@code converter} to this composed converter.
    *
    * @param converter is the converter to add.
    * @return the converter with the same {@link ValueConverter#getSourceType() source-type} and
-   *         {@link ValueConverter#getTargetType() target-type} that has been replaced by <code>converter</code> or
-   *         <code>null</code> if no converter has been replaced.
+   *         {@link ValueConverter#getTargetType() target-type} that has been replaced by {@code converter} or
+   *         {@code null} if no converter has been replaced.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   private ValueConverter<?, ?> addConverterInternal(ValueConverter<?, ?> converter) {
@@ -220,13 +220,13 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method determines if the given <code>converter</code> is applicable for the given <code>targetType</code>.
+   * This method determines if the given {@code converter} is applicable for the given {@code targetType}.
    *
    * @see ValueConverter#getTargetType()
    *
    * @param converter is the {@link ValueConverter} to check.
    * @param targetType is the {@link GenericType} to match with {@link ValueConverter#getTargetType()}.
-   * @return <code>true</code> if the given <code>converter</code> is applicable, <code>false</code> otherwise.
+   * @return {@code true} if the given {@code converter} is applicable, {@code false} otherwise.
    */
   protected boolean isApplicable(ValueConverter<?, ?> converter, GenericType<?> targetType) {
 
@@ -238,13 +238,13 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method determines if the given <code>converterTargetClass</code> is applicable for the
-   * <code>expectedTargetClass</code>.
+   * This method determines if the given {@code converterTargetClass} is applicable for the
+   * {@code expectedTargetClass}.
    *
    * @param converterTargetClass is the {@link ValueConverter#getTargetType() target-class} of the
    *        {@link ValueConverter} to check.
    * @param expectedTargetClass is the target-class to convert to.
-   * @return <code>true</code> if the conversion is applicable.
+   * @return {@code true} if the conversion is applicable.
    */
   protected boolean isApplicable(Class<?> converterTargetClass, Class<?> expectedTargetClass) {
 
@@ -263,18 +263,18 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method determines if the given <code>type</code> is accepted as significant type for registration and lookup
+   * This method determines if the given {@code type} is accepted as significant type for registration and lookup
    * of {@link ValueConverter}s. E.g. interfaces such as {@link Cloneable} or {@link java.io.Serializable} are not more
    * significant than {@link Object} in order to choose the appropriate {@link ValueConverter} and should therefore be
    * skipped when the {@link Class}-hierarchy is recursively traversed. <br>
    * <b>ATTENTION:</b><br>
-   * If this method returns <code>false</code> the behaviour differs between {@link Class#isInterface() interfaces} and
+   * If this method returns {@code false} the behaviour differs between {@link Class#isInterface() interfaces} and
    * regular classes. For an interface the entire traversal of super-interfaces is skipped, while for a regular class,
    * just that class is skipped, but {@link Class#getSuperclass() super-classes} are recursively traversed.
    *
    * @param type is the {@link Class} reflecting the type to check.
-   * @return <code>true</code> if the given <code>type</code> is acceptable, <code>false</code> if the given
-   *         <code>type</code> should be ignored.
+   * @return {@code true} if the given {@code type} is acceptable, {@code false} if the given
+   *         {@code type} should be ignored.
    */
   protected boolean isAccepted(Class<?> type) {
 
@@ -294,13 +294,13 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
    *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
    *        wrong. This will help to find the problem easier.
-   * @param targetType is the {@link GenericType} to convert the <code>value</code> to.
+   * @param targetType is the {@link GenericType} to convert the {@code value} to.
    * @param currentTargetClass is the current {@link ValueConverter#getTargetType() target-type} to try.
    * @param previousConverter is the converter that has been tried last time without success. It is used to avoid trying
-   *        the same converter again. Will initially be <code>null</code>.
+   *        the same converter again. Will initially be {@code null}.
    * @param converterMap is the {@link TargetClass2ConverterMap}.
-   * @return the converted <code>value</code> or <code>null</code> if the conversion is NOT possible. The returned value
-   *         has to be an {@link Class#isInstance(Object) instance} of the given <code>targetType</code>.
+   * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value
+   *         has to be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object convertRecursive(Object value, Object valueSource, GenericType<?> targetType,
@@ -404,11 +404,11 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     }
 
     /**
-     * This method registers the given <code>converter</code> to this composed converter.
+     * This method registers the given {@code converter} to this composed converter.
      *
      * @param converter is the converter to add.
      * @return the converter with the same {@link ValueConverter#getSourceType() source-type} that has been replaced by
-     *         <code>converter</code> or <code>null</code> if no converter has been replaced.
+     *         {@code converter} or {@code null} if no converter has been replaced.
      */
     public ValueConverter<?, TARGET> addConverter(ValueConverter<?, TARGET> converter) {
 
@@ -440,15 +440,15 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     /**
      * This method performs the {@link #convert(Object, Object, GenericType) conversion} recursive.
      *
-     * @param <T> is the generic type of <code>genericTargetType</code>.
+     * @param <T> is the generic type of {@code genericTargetType}.
      * @param value is the value to convert.
      * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
      *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something
      *        goes wrong. This will help to find the problem easier.
-     * @param genericTargetType is the {@link GenericType} to convert the <code>value</code> to.
+     * @param genericTargetType is the {@link GenericType} to convert the {@code value} to.
      * @param sourceClass is the current {@link ValueConverter#getSourceType() source-type} to try.
-     * @return the converted <code>value</code> or <code>null</code> if the conversion is NOT possible. The returned
-     *         value has to be an {@link Class#isInstance(Object) instance} of the given <code>targetType</code>.
+     * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned
+     *         value has to be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
      */
     @SuppressWarnings("unchecked")
     protected <T extends TARGET> T convertRecursive(Object value, Object valueSource,

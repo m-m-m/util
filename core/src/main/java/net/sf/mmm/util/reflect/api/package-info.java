@@ -20,7 +20,7 @@
  * Further the interface {@link net.sf.mmm.util.reflect.api.ClassResolver} allows
  * to retrieve {@link java.lang.Class}es by name in order to abstract from 
  * {@link java.lang.ClassLoader}s as well as to do name mappings (e.g. 
- * <code>Object</code> to <code>java.lang.Object</code>).
+ * {@code Object} to {@code java.lang.Object}).
  */
 package net.sf.mmm.util.reflect.api;
 

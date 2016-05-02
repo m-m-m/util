@@ -31,10 +31,10 @@ public abstract class AbstractNlsTemplate extends AbstractLoggableObject impleme
   }
 
   /**
-   * This method creates an {@link NlsMessageFormatter} for the given <code>messageTemplate</code> and
-   * <code>locale</code>.
+   * This method creates an {@link NlsMessageFormatter} for the given {@code messageTemplate} and
+   * {@code locale}.
    *
-   * @param messageTemplate is the template of the message for the given <code>locale</code>.
+   * @param messageTemplate is the template of the message for the given {@code locale}.
    * @param locale is the locale to use. The implementation may ignore it here because it is also supplied to
    *        {@link net.sf.mmm.util.nls.api.NlsFormatter#format(Object, Locale, Map, NlsTemplateResolver)
    *        format}. Anyhow it allows the implementation to do smart caching of the parsed formatter in

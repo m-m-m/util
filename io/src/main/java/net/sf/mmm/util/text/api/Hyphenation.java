@@ -13,7 +13,7 @@ public interface Hyphenation {
   /**
    * This method gets the number of hyphenation-points in the word.
    * 
-   * @return the number of hyphenation-points (e.g. <code>0</code> for "I" or "egg" or <code>1</code> for
+   * @return the number of hyphenation-points (e.g. {@code 0} for "I" or "egg" or {@code 1} for
    *         "im-pact").
    */
   int getHyphenationCount();
@@ -21,7 +21,7 @@ public interface Hyphenation {
   /**
    * This method gets the index of the given hyphenation-point.
    * 
-   * @param hyphenationIndex is the index of the hyphenation-point in the range from <code>0</code> to
+   * @param hyphenationIndex is the index of the hyphenation-point in the range from {@code 0} to
    *        <code>{@link #getHyphenationCount()} - 1</code>.
    * @return the index of the position in the {@link #getWord() word}.
    */
@@ -29,11 +29,11 @@ public interface Hyphenation {
 
   /**
    * This method gets the greatest {@link #getHyphenation(int) hyphenation position} that is less to the given
-   * <code>offset</code>.
+   * {@code offset}.
    * 
    * @param offset is the offset in the {@link #getWord() word} where a hyphenation is desired.
-   * @return the {@link #getHyphenation(int) hyphenation position} just before the given <code>offset</code>
-   *         or <code>-1</code> if there is no such position.
+   * @return the {@link #getHyphenation(int) hyphenation position} just before the given {@code offset}
+   *         or {@code -1} if there is no such position.
    */
   int getHyphenationBefore(int offset);
 

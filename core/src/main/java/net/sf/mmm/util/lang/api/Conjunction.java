@@ -12,7 +12,7 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
  */
 public enum Conjunction implements EnumType<String> {
   /**
-   * This conjunction is <code>true</code> if and only if all arguments are <code>true</code>.
+   * This conjunction is {@code true} if and only if all arguments are {@code true}.
    */
   AND("&&", NlsBundleUtilCoreRoot.INF_AND) {
 
@@ -39,7 +39,7 @@ public enum Conjunction implements EnumType<String> {
   },
 
   /**
-   * This conjunction is <code>true</code> if and only if at least one argument is <code>true</code>.
+   * This conjunction is {@code true} if and only if at least one argument is {@code true}.
    */
   OR("||", NlsBundleUtilCoreRoot.INF_OR) {
 
@@ -66,7 +66,7 @@ public enum Conjunction implements EnumType<String> {
   },
 
   /**
-   * This is the negation of {@link #AND}. It is only <code>true</code> if at least one argument is <code>false</code>.
+   * This is the negation of {@link #AND}. It is only {@code true} if at least one argument is {@code false}.
    */
   NAND("!&", NlsBundleUtilCoreRoot.INF_NAND) {
 
@@ -93,7 +93,7 @@ public enum Conjunction implements EnumType<String> {
   },
 
   /**
-   * This is the negation of {@link #OR}. It is only <code>true</code> if all arguments are <code>false</code> .
+   * This is the negation of {@link #OR}. It is only {@code true} if all arguments are {@code false} .
    */
   NOR("!|", NlsBundleUtilCoreRoot.INF_NOR) {
 
@@ -138,10 +138,10 @@ public enum Conjunction implements EnumType<String> {
   }
 
   /**
-   * This method evaluates this conjunction for the given boolean <code>arguments</code>.
+   * This method evaluates this conjunction for the given boolean {@code arguments}.
    *
    * @param arguments are the boolean values to evaluate.
-   * @return the result of this conjunction applied to the given <code>arguments</code>.
+   * @return the result of this conjunction applied to the given {@code arguments}.
    * @since 2.0.0
    */
   public final boolean eval(boolean... arguments) {
@@ -181,7 +181,7 @@ public enum Conjunction implements EnumType<String> {
   }
 
   /**
-   * @return <code>true</code> if {@link #NOR} or {@link #NAND}, <code>false</code> otherwise.
+   * @return {@code true} if {@link #NOR} or {@link #NAND}, {@code false} otherwise.
    * @since 3.0.0
    */
   public boolean isNegation() {
@@ -205,7 +205,7 @@ public enum Conjunction implements EnumType<String> {
   }
 
   /**
-   * This method gets the {@link Conjunction} with the given <code>{@link #getValue() value}</code>.
+   * This method gets the {@link Conjunction} with the given {@link #getValue() value}.
    *
    * @param value is the {@link #getValue() value} of the requested {@link Conjunction}.
    * @return the requested {@link Conjunction}.

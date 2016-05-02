@@ -17,19 +17,19 @@ package net.sf.mmm.util.value.api;
 public interface SimpleValueConverter<SOURCE, TARGET> {
 
   /**
-   * This method converts the given <code>pojo</code> to the &lt;TARGET&gt;-type.
+   * This method converts the given {@code pojo} to the &lt;TARGET&gt;-type.
    * 
-   * @param <T> is the generic type of <code>targetClass</code>.
+   * @param <T> is the generic type of {@code targetClass}.
    * @param value is the value to convert.
    * @param valueSource describes the source of the value. This may be the filename where the value was read
    *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
    *        thrown if something goes wrong. This will help to find the problem easier.
-   * @param targetClass is the type to convert the <code>value</code> to.
-   * @return the converted <code>value</code> or <code>null</code> if the conversion is NOT possible. The
+   * @param targetClass is the type to convert the {@code value} to.
+   * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The
    *         returned value has to be an {@link Class#isInstance(Object) instance} of the given
-   *         <code>targetType</code>.
-   * @throws ValueException if the conversion failed (e.g. the given <code>value</code> is illegal for the
-   *         given <code>targetClass</code>).
+   *         {@code targetType}.
+   * @throws ValueException if the conversion failed (e.g. the given {@code value} is illegal for the
+   *         given {@code targetClass}).
    */
   <T extends TARGET> T convert(SOURCE value, Object valueSource, Class<T> targetClass) throws ValueException;
 

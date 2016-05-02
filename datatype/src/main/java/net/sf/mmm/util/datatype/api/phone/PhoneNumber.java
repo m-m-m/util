@@ -12,7 +12,7 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
  * This is the interface for a <em>phone number</em>. In this context phone number means an international
  * number that potentially connects to an end-point via the phone network (PTSIN, VoIP, etc.) from anywhere in
  * the world. This means that some numbers accepted by your phone may NOT be valid in the sense of this
- * datatype (e.g. <code>"**6#1"</code>). On the other hand a phone number that is syntactically correct but
+ * datatype (e.g. {@code "**6#1"}). On the other hand a phone number that is syntactically correct but
  * does not point to an existing line, will still be accepted (e.g. "+49 69 987654321"). <br>
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -68,7 +68,7 @@ public class PhoneNumber extends AbstractSimpleDatatypeBase<String> {
    * 
    * @param phoneNumber is the phone number as string {@link #getValue() value}.
    * @param countryCode is the {@link #getCountryCode() country code} to use if none is supplied by
-   *        <code>phoneNumber</code>.
+   *        {@code phoneNumber}.
    */
   public PhoneNumber(String phoneNumber, PhoneCountryCode countryCode) {
 

@@ -38,7 +38,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * </tr>
  * </table>
  * <br>
- * Please note that the special timezone character <code>Z</code> means UTC. <br>
+ * Please note that the special timezone character {@code Z} means UTC. <br>
  * Out of these forms the following combinations are supported:
  * <ul>
  * <li>&lt;Date&gt;</li>
@@ -58,7 +58,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * The {@link #parseCalendar(String) parse} methods support all formats described above. For
  * {@link #formatDateTime(Calendar) formatting} various methods exist for different format combinations. <br>
  * <b>ATTENTION:</b><br>
- * If you are using java 8+ please use <code>java.time</code> where everything is build in and APIs are clean.
+ * If you are using java 8+ please use {@code java.time} where everything is build in and APIs are clean.
  *
  * @see net.sf.mmm.util.date.base.Iso8601UtilImpl
  *
@@ -75,98 +75,98 @@ public interface Iso8601Util extends Iso8601UtilLimited {
   Pattern PATTERN_ALL = Pattern.compile(PATTERN_STRING_ALL);
 
   /**
-   * This method formats the given <code>calendar</code> as a date in the format "yyyy-MM-dd" according to
+   * This method formats the given {@code calendar} as a date in the format "yyyy-MM-dd" according to
    * {@link Iso8601Util ISO 8601}.
    *
    * @param calendar is the date to format.
-   * @return the given <code>calendar</code> as date string.
+   * @return the given {@code calendar} as date string.
    */
   String formatDate(Calendar calendar);
 
   /**
-   * This method formats the given <code>calendar</code> as a date in the format "yyyy-MM-dd" according to
+   * This method formats the given {@code calendar} as a date in the format "yyyy-MM-dd" according to
    * {@link Iso8601Util ISO 8601}.
    *
    * @param calendar is the date to format.
-   * @return the given <code>calendar</code> as date string.
-   * @param extended if <code>false</code> the basic format ("yyyyMMdd") is used, if <code>true</code> the
+   * @return the given {@code calendar} as date string.
+   * @param extended if {@code false} the basic format ("yyyyMMdd") is used, if {@code true} the
    *        extended format ("yyyy-MM-dd") is used.
    */
   String formatDate(Calendar calendar, boolean extended);
 
   /**
-   * This method formats the given <code>calendar</code> as a date according to {@link Iso8601Util ISO 8601}.
+   * This method formats the given {@code calendar} as a date according to {@link Iso8601Util ISO 8601}.
    *
    * @param calendar is the date to format.
-   * @param extended if <code>false</code> the basic date format ("yyyyMMdd") is used, if <code>true</code>
+   * @param extended if {@code false} the basic date format ("yyyyMMdd") is used, if {@code true}
    *        the extended date format ("yyyy-MM-dd") is used.
    * @param buffer is where to append the formatted date.
    */
   void formatDate(Calendar calendar, boolean extended, Appendable buffer);
 
   /**
-   * This method formats the given <code>calendar</code> as a date and time in the format
+   * This method formats the given {@code calendar} as a date and time in the format
    * "yyyy-MM-ddTHH:mm:ss&#177;hh:mm" according to {@link Iso8601Util ISO 8601}.
    *
    * @param calendar is the date to format.
-   * @return the given <code>calendar</code> as date string.
+   * @return the given {@code calendar} as date string.
    */
   String formatDateTime(Calendar calendar);
 
   /**
-   * This method formats the given <code>calendar</code> as a date and time according to {@link Iso8601Util
+   * This method formats the given {@code calendar} as a date and time according to {@link Iso8601Util
    * ISO 8601}.
    *
    * @param calendar is the {@link Calendar} to format.
-   * @param extendedDate if <code>false</code> the basic date format ("yyyyMMdd") is used, if
-   *        <code>true</code> the extended date format ("yyyy-MM-dd") is used.
-   * @param extendedTime if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code>
+   * @param extendedDate if {@code false} the basic date format ("yyyyMMdd") is used, if
+   *        {@code true} the extended date format ("yyyy-MM-dd") is used.
+   * @param extendedTime if {@code false} the basic time format ("HHmmss") is used, if {@code true}
    *        the extended time format ("HH:mm:ss") is used.
-   * @param extendedTimezone if <code>false</code> the basic timezone format ("&#177;HHmm[ss]") is used, if
-   *        <code>true</code> the extended timezone format ("&#177;HH:mm[:ss]") is used.
-   * @return the given <code>calendar</code> as date string.
+   * @param extendedTimezone if {@code false} the basic timezone format ("&#177;HHmm[ss]") is used, if
+   *        {@code true} the extended timezone format ("&#177;HH:mm[:ss]") is used.
+   * @return the given {@code calendar} as date string.
    */
   String formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone);
 
   /**
-   * This method formats the given <code>calendar</code> as a date and time according to {@link Iso8601Util
+   * This method formats the given {@code calendar} as a date and time according to {@link Iso8601Util
    * ISO 8601}.
    *
    * @param calendar is the {@link Calendar} to format.
-   * @param extendedDate if <code>false</code> the basic date format ("yyyyMMdd") is used, if
-   *        <code>true</code> the extended date format ("yyyy-MM-dd") is used.
-   * @param extendedTime if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code>
+   * @param extendedDate if {@code false} the basic date format ("yyyyMMdd") is used, if
+   *        {@code true} the extended date format ("yyyy-MM-dd") is used.
+   * @param extendedTime if {@code false} the basic time format ("HHmmss") is used, if {@code true}
    *        the extended time format ("HH:mm:ss") is used.
-   * @param extendedTimezone if <code>false</code> the basic timezone format ("&#177;HHmm[ss]") is used, if
-   *        <code>true</code> the extended timezone format ("&#177;HH:mm[:ss]") is used.
+   * @param extendedTimezone if {@code false} the basic timezone format ("&#177;HHmm[ss]") is used, if
+   *        {@code true} the extended timezone format ("&#177;HH:mm[:ss]") is used.
    * @param buffer is where to append the formatted date and time.
    */
   void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone,
       Appendable buffer);
 
   /**
-   * This method formats the given <code>calendar</code> as time according to {@link Iso8601Util ISO 8601}.
+   * This method formats the given {@code calendar} as time according to {@link Iso8601Util ISO 8601}.
    *
    * @param calendar is the {@link Calendar} to format.
-   * @param extended if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code> the
+   * @param extended if {@code false} the basic time format ("HHmmss") is used, if {@code true} the
    *        extended time format ("HH:mm:ss") is used.
    * @param buffer is where to append the formatted date.
    */
   void formatTime(Calendar calendar, boolean extended, Appendable buffer);
 
   /**
-   * This method formats the given <code>timezone</code> according to {@link Iso8601Util ISO 8601}. <br>
+   * This method formats the given {@code timezone} according to {@link Iso8601Util ISO 8601}. <br>
    *
    * @param calendar is the {@link Calendar} to format.
-   * @param extended - if <code>false</code> the basic timezone format ("&#177;HHmm[ss]") is used, if
-   *        <code>true</code> the extended timezone format ("&#177;HH:mm[:ss]") is used.
+   * @param extended - if {@code false} the basic timezone format ("&#177;HHmm[ss]") is used, if
+   *        {@code true} the extended timezone format ("&#177;HH:mm[:ss]") is used.
    * @param buffer is where to append the formatted timezone.
    * @since 2.0.0
    */
   void formatTimeZone(Calendar calendar, boolean extended, Appendable buffer);
 
   /**
-   * This method parses the given string <code>date</code> according to {@link Iso8601Util ISO 8601}.
+   * This method parses the given string {@code date} according to {@link Iso8601Util ISO 8601}.
    *
    * @param date is the date to parse.
    * @return the parsed date.
@@ -174,9 +174,9 @@ public interface Iso8601Util extends Iso8601UtilLimited {
   Calendar parseCalendar(String date);
 
   /**
-   * This method parses the given <code>date</code> according to {@link Iso8601Util ISO 8601} using the given
-   * <code>calendar</code>. If the given <code>date</code> does NOT specify the time or timezone, the values
-   * from the given <code>calendar</code> will be kept.
+   * This method parses the given {@code date} according to {@link Iso8601Util ISO 8601} using the given
+   * {@code calendar}. If the given {@code date} does NOT specify the time or timezone, the values
+   * from the given {@code calendar} will be kept.
    *
    * @param date is the date to parse.
    * @param calendar is the calendar where the parsed date will be set.

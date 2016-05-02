@@ -3,7 +3,7 @@
 package net.sf.mmm.util.text.api;
 
 /**
- * This is the interface for a hashing algorithm for strings (in form of <code>char[]</code> or
+ * This is the interface for a hashing algorithm for strings (in form of {@code char[]} or
  * {@link CharSequence}. <br>
  * <b>ATTENTION:</b><br>
  * The implementation may NOT be compatible to {@link String#hashCode()}. It only needs to guarantee, that all
@@ -19,7 +19,7 @@ package net.sf.mmm.util.text.api;
 public interface StringHasher {
 
   /**
-   * This method gets the hash-code for the given <code>string</code>. <br>
+   * This method gets the hash-code for the given {@code string}. <br>
    *
    * @see #getHashCode(CharSequence, int, int)
    *
@@ -30,7 +30,7 @@ public interface StringHasher {
 
   /**
    * This method gets the hash-code for the specified {@link CharSequence#subSequence(int, int) subsequence}
-   * of the given <code>string</code>. <br>
+   * of the given {@code string}. <br>
    *
    * @see Object#hashCode()
    *
@@ -44,7 +44,7 @@ public interface StringHasher {
 
   /**
    * This method gets the hash-code for the specified {@link CharSequence#subSequence(int, int) subsequence}
-   * of the given <code>string</code>. <br>
+   * of the given {@code string}. <br>
    *
    * @see Object#hashCode()
    *
@@ -57,22 +57,22 @@ public interface StringHasher {
 
   /**
    * This method gets the hash-codes for all {@link CharSequence#subSequence(int, int) subsequence} of
-   * <code>string</code> that have the given <code>length</code>.
+   * {@code string} that have the given {@code length}.
    *
    * @see #getHashCodes(char[], int, int, int)
    *
    * @param string is the string as char-array.
    * @param length is the {@link CharSequence#length() length} of the
-   *        {@link CharSequence#subSequence(int, int) sub-sequences} of <code>string</code> to hash.
-   * @return the requested hash-codes. An empty array if the length of <code>string</code> is less than the
-   *         given <code>length</code>.
+   *        {@link CharSequence#subSequence(int, int) sub-sequences} of {@code string} to hash.
+   * @return the requested hash-codes. An empty array if the length of {@code string} is less than the
+   *         given {@code length}.
    */
   int[] getHashCodes(char[] string, int length);
 
   /**
    * This method gets the hash-codes for all {@link CharSequence#subSequence(int, int) subsequence} of
-   * <code>string</code> from <code>stringStart</code> (inclusive) until <code>stringEnd</code> (exclusive)
-   * that have the given <code>length</code>. <br>
+   * {@code string} from {@code stringStart} (inclusive) until {@code stringEnd} (exclusive)
+   * that have the given {@code length}. <br>
    * The implementation of this method needs to behave functionally equivalent to this code (but should be
    * more efficient):
    *
@@ -90,42 +90,42 @@ public interface StringHasher {
    *
    * @param string is the string as char-array.
    * @param length is the {@link CharSequence#length() length} of the
-   *        {@link CharSequence#subSequence(int, int) sub-sequences} of <code>string</code> to hash.
-   * @param stringStart is the index where to start in <code>string</code>.
-   * @param stringEnd is the index where to stop in <code>string</code>.
-   * @return the requested hash-codes. An empty array if the length of <code>string</code> is less than the
-   *         given <code>length</code>.
+   *        {@link CharSequence#subSequence(int, int) sub-sequences} of {@code string} to hash.
+   * @param stringStart is the index where to start in {@code string}.
+   * @param stringEnd is the index where to stop in {@code string}.
+   * @return the requested hash-codes. An empty array if the length of {@code string} is less than the
+   *         given {@code length}.
    */
   int[] getHashCodes(char[] string, int length, int stringStart, int stringEnd);
 
   /**
    * This method gets the hash-codes for all {@link CharSequence#subSequence(int, int) subsequence} of
-   * <code>string</code> that have the given <code>length</code>. <br>
+   * {@code string} that have the given {@code length}. <br>
    *
    * @see #getHashCodes(char[], int)
    *
    * @param string is the string as char-array.
    * @param length is the {@link CharSequence#length() length} of the
-   *        {@link CharSequence#subSequence(int, int) sub-sequences} of <code>string</code> to hash.
-   * @return the requested hash-codes. An empty array if the length of <code>string</code> is less than the
-   *         given <code>length</code>.
+   *        {@link CharSequence#subSequence(int, int) sub-sequences} of {@code string} to hash.
+   * @return the requested hash-codes. An empty array if the length of {@code string} is less than the
+   *         given {@code length}.
    */
   int[] getHashCodes(CharSequence string, int length);
 
   /**
    * This method gets the hash-codes for all {@link CharSequence#subSequence(int, int) subsequence} of
-   * <code>string</code> from <code>stringStart</code> (inclusive) until <code>stringEnd</code> (exclusive)
-   * that have the given <code>length</code>. <br>
+   * {@code string} from {@code stringStart} (inclusive) until {@code stringEnd} (exclusive)
+   * that have the given {@code length}. <br>
    *
    * @see #getHashCodes(char[], int)
    *
    * @param string is the string as char-array.
    * @param length is the {@link CharSequence#length() length} of the
-   *        {@link CharSequence#subSequence(int, int) sub-sequences} of <code>string</code> to hash.
-   * @param stringStart is the index where to start in <code>string</code>.
-   * @param stringEnd is the index where to stop in <code>string</code>.
-   * @return the requested hash-codes. An empty array if the length of <code>string</code> is less than the
-   *         given <code>length</code>.
+   *        {@link CharSequence#subSequence(int, int) sub-sequences} of {@code string} to hash.
+   * @param stringStart is the index where to start in {@code string}.
+   * @param stringEnd is the index where to stop in {@code string}.
+   * @return the requested hash-codes. An empty array if the length of {@code string} is less than the
+   *         given {@code length}.
    */
   int[] getHashCodes(CharSequence string, int length, int stringStart, int stringEnd);
 

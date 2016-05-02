@@ -55,7 +55,7 @@ public interface GenericEntity<ID> extends AttributeReadId<ID>, Entity {
    * value you can still use {@link Long} here and provide a transient getter method that returns the your
    * custom {@link net.sf.mmm.util.lang.api.Datatype} from the {@link Long}.
    *
-   * @return the ID of this entity. It may be <code>null</code> if the object is
+   * @return the ID of this entity. It may be {@code null} if the object is
    *         {@link PersistenceEntity#STATE_NEW new} and no ID has manually been assigned.
    */
   @Override
@@ -64,8 +64,8 @@ public interface GenericEntity<ID> extends AttributeReadId<ID>, Entity {
   /**
    * This method gets the current modification-counter of this entity. Whenever the object gets modified and
    * {@link javax.persistence.EntityManager#persist(Object) saved}, this counter will be increased. The
-   * initial value after construction is <code>0</code>. <br>
-   * If this feature is NOT supported for some reason, this method should always return <code>0</code>.
+   * initial value after construction is {@code 0}. <br>
+   * If this feature is NOT supported for some reason, this method should always return {@code 0}.
    *
    * @see javax.persistence.Version
    *

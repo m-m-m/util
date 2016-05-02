@@ -85,7 +85,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   /**
    * This method sets the {@link #getParent() parent} of this {@link GenericTreeNode}.
    *
-   * @param parent is the {@link #getParent() parent} to set. It may be <code>null</code>. However you should
+   * @param parent is the {@link #getParent() parent} to set. It may be {@code null}. However you should
    *        typically only call this method once with a non-null argument. It is still legal to re-arrange the
    *        tree-structure on existing {@link GenericTreeNode}s.
    */
@@ -111,7 +111,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method adds the given <code>child</code> to the {@link #getChildren() children} of this
+   * This method adds the given {@code child} to the {@link #getChildren() children} of this
    * {@link GenericTreeNode}.
    *
    * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be
@@ -129,7 +129,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method adds the given <code>child</code> to the {@link #getChildren() children} of this
+   * This method adds the given {@code child} to the {@link #getChildren() children} of this
    * {@link GenericTreeNode}.
    *
    * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be
@@ -149,12 +149,12 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method removes the given <code>child</code> from the {@link #getChildren() children} of this
+   * This method removes the given {@code child} from the {@link #getChildren() children} of this
    * {@link GenericTreeNode}.
    *
    * @param child is the {@link #getChildren() child} to remove.
-   * @return <code>true</code> if the given <code>child</code> was contained in this {@link GenericTreeNode}s
-   *         {@link #getChildren() children} and has been removed successfully, <code>false</code> otherwise.
+   * @return {@code true} if the given {@code child} was contained in this {@link GenericTreeNode}s
+   *         {@link #getChildren() children} and has been removed successfully, {@code false} otherwise.
    */
   protected boolean removeChild(CHILD child) {
 
@@ -166,7 +166,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
 
   /**
    * This method removes the {@link #getChildren() child} from the {@link #getChildren() children} of this
-   * {@link GenericTreeNode} at the given <code>index</code>.
+   * {@link GenericTreeNode} at the given {@code index}.
    *
    * @param index is {@link List#get(int) index} of the {@link #getChildren() child} to remove.
    * @return the {@link #getChildren() child} that has actually been removed.

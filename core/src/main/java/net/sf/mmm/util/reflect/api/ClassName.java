@@ -79,7 +79,7 @@ public class ClassName {
   }
 
   /**
-   * @return the {@link Class#getEnclosingClass() enclosing} {@link ClassName} or <code>null</code> if for a
+   * @return the {@link Class#getEnclosingClass() enclosing} {@link ClassName} or {@code null} if for a
    *         top-level {@link Class}.
    */
   public ClassName getEnclosingClass() {

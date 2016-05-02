@@ -65,7 +65,7 @@ public class DatatypeJsonSerializer<T> extends JsonSerializer<T> {
   /**
    * Generic and recursive implementation of {@link #serialize(Object, JsonGenerator, SerializerProvider)}.
    *
-   * @param <V> is the generic type of <code>value</code>.
+   * @param <V> is the generic type of {@code value}.
    * @param value is the value to serialize.
    * @param jgen is the {@link JsonGenerator}.
    * @param provider is the {@link SerializerProvider}.

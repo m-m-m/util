@@ -70,7 +70,7 @@ public final class UserSessionAccess {
   }
 
   /**
-   * @return the login of the current user (e.g. "john.doe"). Will be <code>null</code> if called outside the
+   * @return the login of the current user (e.g. "john.doe"). Will be {@code null} if called outside the
    *         scope of a current user session.
    */
   public static String getUserLogin() {

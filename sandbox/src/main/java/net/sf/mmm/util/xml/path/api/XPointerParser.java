@@ -11,11 +11,11 @@ package net.sf.mmm.util.xml.path.api;
 public interface XPointerParser {
 
   /**
-   * This method parses the given <code>xpointer</code> expression.
+   * This method parses the given {@code xpointer} expression.
    * 
    * @param xpointer is the XPointer expression as string.
-   * @return the parsed <code>xpointer</code> expression.
-   * @throws XmlParseException if the given <code>xpointer</code> expression
+   * @return the parsed {@code xpointer} expression.
+   * @throws XmlParseException if the given {@code xpointer} expression
    *         is illegal.
    */
   XmlPath parseXPointer(String xpointer) throws XmlParseException;

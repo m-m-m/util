@@ -32,7 +32,7 @@ public class PojoPropertyAccessorProxySetIndexed extends AbstractPojoPropertyAcc
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array, or {@link java.util.List} property.
    * @param containerSetAccessor is the accessor that sets the array, or {@link java.util.List} property. May be
-   *        <code>null</code> if NOT available.
+   *        {@code null} if NOT available.
    */
   public PojoPropertyAccessorProxySetIndexed(PojoDescriptorDependencies dependencies,
       PojoPropertyAccessorNonArg containerGetAccessor, PojoPropertyAccessorOneArg containerSetAccessor) {

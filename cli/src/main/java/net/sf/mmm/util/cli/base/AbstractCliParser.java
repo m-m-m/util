@@ -109,7 +109,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   }
 
   /**
-   * This method checks the given <code>name</code> of the given {@link CliOptionContainer option}.
+   * This method checks the given {@code name} of the given {@link CliOptionContainer option}.
    *
    * @param name is the {@link CliOption#name() name} or {@link CliOption#aliases() alias}.
    * @param optionContainer is the {@link CliOptionContainer}.
@@ -162,7 +162,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    * This method parses the value of a {@link CliOption}.
    *
    * @param parserState is the {@link CliParserState}.
-   * @param option is the command-line parameter that triggered the given <code>optionContainer</code>.
+   * @param option is the command-line parameter that triggered the given {@code optionContainer}.
    * @param optionContainer is the {@link CliOptionContainer} for the current option that has already been detected.
    * @param parameterConsumer is the {@link CliParameterConsumer}.
    */
@@ -315,7 +315,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   }
 
   /**
-   * Parses the given commandline <code>parameter</code> that is no defined {@link CliOption}.
+   * Parses the given commandline {@code parameter} that is no defined {@link CliOption}.
    *
    * @param parameter is the commandline argument.
    * @param parserState is the current {@link CliParserState}.
@@ -546,7 +546,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     /**
      * This method gets the current mode that was detected so far.
      *
-     * @return the currentMode or <code>null</code> if no mode has been detected, yet.
+     * @return the currentMode or {@code null} if no mode has been detected, yet.
      */
     public CliModeObject getCurrentMode() {
 
@@ -554,7 +554,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * Like {@link #getCurrentMode()} but initializes to {@link CliMode#ID_DEFAULT default} if <code>null</code>.
+     * Like {@link #getCurrentMode()} but initializes to {@link CliMode#ID_DEFAULT default} if {@code null}.
      *
      * @param cliState is the {@link CliState}.
      * @return the current {@link CliModeObject}.
@@ -617,7 +617,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method sets the {@link #isOptionsComplete() options-complete flag} to <code>true</code>.
+     * This method sets the {@link #isOptionsComplete() options-complete flag} to {@code true}.
      */
     public void setOptionsComplete() {
 
@@ -868,7 +868,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method prints the help for the {@link CliArgument arguments} given by <code>argumentList</code>. It prints
+     * This method prints the help for the {@link CliArgument arguments} given by {@code argumentList}. It prints
      * them with localized usage texts in a two column-layout via {@link LineWrapper}.
      *
      * @param argumentList is the {@link List} with the according {@link CliArgumentHelpInfo help infos}.
@@ -900,7 +900,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method prints the help for the {@link CliOption options} given by <code>modeOptions</code>. It prints them
+     * This method prints the help for the {@link CliOption options} given by {@code modeOptions}. It prints them
      * with localized usage texts in a two column-layout via {@link LineWrapper}.
      *
      * @param modeOptions is the {@link Collection} with the options to print.
@@ -921,7 +921,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
      *
      * @param modeOptions is the {@link Collection} with the options to print.
      * @param option2HelpMap is the {@link Map} with the according {@link CliOptionHelpInfo help infos}.
-     * @param required - <code>true</code> if required options should be printed, <code>false</code> if additional
+     * @param required - {@code true} if required options should be printed, {@code false} if additional
      *        options should be printed.
      */
     private void printOptions(Collection<CliOptionContainer> modeOptions,

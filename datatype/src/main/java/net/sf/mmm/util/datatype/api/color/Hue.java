@@ -20,7 +20,7 @@ public class Hue extends AbstractDoubleSegment<Hue> {
   private static final long serialVersionUID = 3822877998535396427L;
 
   /**
-   * If {@link Chroma} is <code>0</code> then {@link Hue} is actually undefined. This value represent this
+   * If {@link Chroma} is {@code 0} then {@link Hue} is actually undefined. This value represent this
    * undefined value. For convenience a {@link #getValue() value} of 0° is used as representation.
    */
   public static final Hue UNDEFINED = new Hue(0);

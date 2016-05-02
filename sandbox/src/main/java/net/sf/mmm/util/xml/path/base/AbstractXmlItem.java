@@ -12,7 +12,7 @@ public abstract class AbstractXmlItem {
 
   /**
    * This method is like {@link #toString()} using the given
-   * <code>stringBuilder</code>.
+   * {@code stringBuilder}.
    * 
    * @param stringBuilder is where to append the string representation to.
    */

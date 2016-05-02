@@ -35,7 +35,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
   }
 
   /**
-   * @return the parent builder or <code>null</code> if {@link Void}.
+   * @return the parent builder or {@code null} if {@link Void}.
    */
   protected PARENT getParent() {
 
@@ -43,7 +43,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
   }
 
   /**
-   * @param v the value for type inference. Will be ignored and may be <code>null</code>.
+   * @param v the value for type inference. Will be ignored and may be {@code null}.
    * @return the {@link ValidatorBuilderCharSequence}.
    */
   public ValidatorBuilderCharSequence<PARENT> create(CharSequence v) {
@@ -52,7 +52,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
   }
 
   /**
-   * @param v the value for type inference. Will be ignored and may be <code>null</code>.
+   * @param v the value for type inference. Will be ignored and may be {@code null}.
    * @return the {@link ValidatorBuilderString}.
    */
   public ValidatorBuilderString<PARENT> create(String v) {
@@ -61,7 +61,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
   }
 
   /**
-   * @param v the value for type inference. Will be ignored and may be <code>null</code>.
+   * @param v the value for type inference. Will be ignored and may be {@code null}.
    * @return the {@link ValidatorBuilderBoolean}.
    */
   public ValidatorBuilderBoolean<PARENT> create(Boolean v) {
@@ -72,7 +72,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
   /**
    * @param <E> the generic type of the {@link Collection#contains(Object) elements contained} in the {@link Collection}
    *        to validate.
-   * @param v the value for type inference. Will be ignored and may be <code>null</code>.
+   * @param v the value for type inference. Will be ignored and may be {@code null}.
    * @return the {@link ValidatorBuilderCollection}.
    */
   public <E> ValidatorBuilderCollection<E, PARENT> create(Collection<E> v) {
@@ -83,7 +83,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
   /**
    * @param <K> the generic type of the {@link java.util.Map.Entry#getKey() keys}.
    * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
-   * @param v the value for type inference. Will be ignored and may be <code>null</code>.
+   * @param v the value for type inference. Will be ignored and may be {@code null}.
    * @return the {@link ValidatorBuilderCollection}.
    */
   public <K, V> ValidatorBuilderMap<K, V, PARENT> create(Map<K, V> v) {
@@ -94,7 +94,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
   /**
    * @param <E> the generic type of the {@link Collection#contains(Object) elements contained} in the {@link Collection}
    *        to validate.
-   * @param v the value for type inference. Will be ignored and may be <code>null</code>.
+   * @param v the value for type inference. Will be ignored and may be {@code null}.
    * @return the {@link ValidatorBuilderCollection}.
    */
   public <E> ValidatorBuilderCollection<E, PARENT> createCollection(E v) {

@@ -69,7 +69,7 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
   }
 
   /**
-   * Generates the <code>createBundle</code> method.
+   * Generates the {@code createBundle} method.
    * 
    * @param sourceWriter is the {@link SourceWriter}.
    * @param logger is the {@link TreeLogger}.

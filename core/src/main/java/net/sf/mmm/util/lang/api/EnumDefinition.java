@@ -5,10 +5,10 @@ package net.sf.mmm.util.lang.api;
 /**
  * This is the interface for the definition of an {@link EnumType}. <br>
  * As an example we can think of an instance of this interface called <em>country</em> defined as {@link EnumDefinition}
- * {@literal <Iso2CountryCode, Void>}. This defines an enumeration based on the type <code>Iso2CountryCode</code> that
- * has no {@link #getCategory() category}. Next, we define another instance of this interface called <code>state</code>
- * defined as {@link EnumDefinition} {@literal <StateDatatype, Iso2CountryCode>}. The method {@link #getCategory()} will
- * return the <em>country</em> instance we defined earlier. This means that a state is classified by a county. <br>
+ * {@literal <Iso2CountryCode, Void>}. This defines an enumeration based on the type {@code Iso2CountryCode} that has no
+ * {@link #getCategory() category}. Next, we define another instance of this interface called {@code state} defined as
+ * {@link EnumDefinition} {@literal <StateDatatype, Iso2CountryCode>}. The method {@link #getCategory()} will return the
+ * <em>country</em> instance we defined earlier. This means that a state is classified by a county. <br>
  * <b>ATTENTION:</b><br>
  * The {@link #getValue() value} is used as identifier key and has to be unique.
  *
@@ -21,8 +21,8 @@ package net.sf.mmm.util.lang.api;
 public interface EnumDefinition<TYPE, CATEGORY> extends SimpleDatatype<String> {
 
   /**
-   * @return the {@link EnumDefinition} this {@link EnumDefinition} is categorized by or <code>null</code> for no
-   *         category (then {@literal <CATEGORY>} shall be bound to {@link Void}).
+   * @return the {@link EnumDefinition} this {@link EnumDefinition} is categorized by or {@code null} for no category
+   *         (then {@literal <CATEGORY>} shall be bound to {@link Void}).
    */
   EnumDefinition<CATEGORY, ?> getCategory();
 
@@ -33,10 +33,10 @@ public interface EnumDefinition<TYPE, CATEGORY> extends SimpleDatatype<String> {
    * {@link EnumDefinition} for {@link Boolean} that displays as "all" or "none". Further, also I18N (see
    * {@link net.sf.mmm.util.nls.api.NlsMessage}) can be addressed by this {@link Formatter}.<br/>
    * <b>ATTENTION:</b><br>
-   * A {@link EnumDefinition} may be used with or without allowing a <code>null</code> value. Therefore, this
-   * {@link Formatter} should be able to properly format <code>null</code> (see
-   * <code>AbstractFormatter#formatNull()</code>). E.g. a {@link Boolean} option in a search form may be optional and
-   * displayed as "any".
+   * A {@link EnumDefinition} may be used with or without allowing a {@code null} value. Therefore, this
+   * {@link Formatter} should be able to properly format {@code null} (see
+   * {@link net.sf.mmm.util.lang.base.AbstractFormatter#formatNull()}). E.g. a {@link Boolean} option in a search form
+   * may be optional and displayed as "any".
    *
    * @return the {@link Formatter}.
    */
@@ -48,14 +48,14 @@ public interface EnumDefinition<TYPE, CATEGORY> extends SimpleDatatype<String> {
   Class<TYPE> getEnumType();
 
   /**
-   * @return <code>true</code> if {@link EnumType}-instances of {@link #getEnumType() this type} can be added or
-   *         removed, <code>false</code> otherwise (e.g. if implemented by a {@link Enum}).
+   * @return {@code true} if {@link EnumType}-instances of {@link #getEnumType() this type} can be added or removed,
+   *         {@code false} otherwise (e.g. if implemented by a {@link Enum}).
    */
   boolean isMutable();
 
   /**
-   * @return <code>true</code> if all {@link EnumType}-instances of {@link #getEnumType() this type} can cached
-   *         (default) or <code>false</code> if there are too many of them (e.g. for entities like cities of the world).
+   * @return {@code true} if all {@link EnumType}-instances of {@link #getEnumType() this type} can cached (default) or
+   *         {@code false} if there are too many of them (e.g. for entities like cities of the world).
    */
   boolean isCachable();
 

@@ -5,7 +5,7 @@ package net.sf.mmm.util.io.api;
 import java.util.NoSuchElementException;
 
 /**
- * This is the interface for an {@link java.util.Iterator} of <code>byte</code> -values.
+ * This is the interface for an {@link java.util.Iterator} of {@code byte} -values.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -15,7 +15,7 @@ public interface ByteIterator {
   /**
    * This method determines if there is a {@link #next() next byte} available.
    * 
-   * @return <code>true</code> if there is a {@link #next() next byte} available, <code>false</code> otherwise
+   * @return {@code true} if there is a {@link #next() next byte} available, {@code false} otherwise
    *         (if the end of this buffer has been reached).
    */
   boolean hasNext();
@@ -25,7 +25,7 @@ public interface ByteIterator {
    * {@link ByteIterator} points to the next byte in the iteration or to the end if there is no such byte
    * {@link #hasNext() available}. <br>
    * <b>ATTENTION:</b><br>
-   * You should only call this method if {@link #hasNext()} returns <code>true</code>.
+   * You should only call this method if {@link #hasNext()} returns {@code true}.
    * 
    * @see java.util.Iterator#next()
    * 
@@ -39,7 +39,7 @@ public interface ByteIterator {
    * the state of this {@link ByteIterator}. Therefore the peeked byte does NOT get consumed and repetitive
    * calls will return the same value. <br>
    * <b>ATTENTION:</b><br>
-   * You should only call this method if {@link #hasNext()} returns <code>true</code>.
+   * You should only call this method if {@link #hasNext()} returns {@code true}.
    * 
    * @see #next()
    * 
@@ -49,15 +49,15 @@ public interface ByteIterator {
   byte peek() throws NoSuchElementException;
 
   /**
-   * This method skips the number of bytes given by <code>byteCount</code>.
+   * This method skips the number of bytes given by {@code byteCount}.
    * 
    * @see java.io.InputStream#skip(long)
    * 
    * @param byteCount is the expected number of bytes to skip.
    * @return the number of bytes that have actually been skipped. This will typically be equal to
-   *         <code>byteCount</code>. However the value may be less if the end of this iterator has been
+   *         {@code byteCount}. However the value may be less if the end of this iterator has been
    *         reached before the according number of bytes have been skipped. The value will always be greater
-   *         or equal to <code>0</code>.
+   *         or equal to {@code 0}.
    */
   long skip(long byteCount);
 

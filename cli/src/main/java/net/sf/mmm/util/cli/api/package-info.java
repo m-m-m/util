@@ -21,7 +21,7 @@
  * For each {@link net.sf.mmm.util.cli.api.CliOption option} and
  * {@link net.sf.mmm.util.cli.api.CliArgument argument} there are {@link java.lang.annotation.Annotation}s to annotate
  * your regular {@link java.lang.reflect.Field}s. Via {@link net.sf.mmm.util.cli.api.CliMode} multiple modes can be
- * defined to realize complex scenarios. Everything integrates with <code>javax.validation</code> (BV) and our excellent
+ * defined to realize complex scenarios. Everything integrates with {@code javax.validation} (BV) and our excellent
  * {@link net.sf.mmm.util.nls.api.NlsMessage native-language-support} including
  * {@link net.sf.mmm.util.text.api.LineWrapper text wrapping} and
  * {@link net.sf.mmm.util.text.api.Hyphenator hyphenation}. So you do not have to maintain any usage or help output that
@@ -57,12 +57,12 @@
  * we created this library that brings the best ideas together (with most from args4j).
  * <br>
  * In the context of CLI we use the term <em>parameter</em> for a string given
- * on the commandline (out of <code>String[] args</code>). Such parameter is
+ * on the commandline (out of {@code String[] args}). Such parameter is
  * either an <em>{@link net.sf.mmm.util.cli.api.CliOption option}</em> or a
  * <em>value</em>. A value can belong to an {@link net.sf.mmm.util.cli.api.CliOption option}
  * or an <em>{@link net.sf.mmm.util.cli.api.CliArgument argument}</em>.
- * E.g. the parameters <code>--port 8080 start</code> consist of the option <code>--port</code>
- * with its value <code>8080</code> and the argument <code>start</code>.
+ * E.g. the parameters {@code --port 8080 start} consist of the option {@code --port}
+ * with its value {@code 8080} and the argument {@code start}.
  */
 package net.sf.mmm.util.cli.api;
 

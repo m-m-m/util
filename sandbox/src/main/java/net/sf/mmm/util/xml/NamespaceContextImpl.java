@@ -19,7 +19,7 @@ import net.sf.mmm.util.collection.base.AbstractIterator;
  */
 public class NamespaceContextImpl implements NamespaceContext {
 
-  /** the parent context to inherit from or <code>null</code>. */
+  /** the parent context to inherit from or {@code null}. */
   private final NamespaceContext parentContext;
 
   /** maps prefix to namespace-URI. */

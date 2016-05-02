@@ -88,7 +88,7 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
   /**
    * This method creates a new {@link UUID}.
    *
-   * @return the new {@link UUID} or <code>null</code> to turn this feature off.
+   * @return the new {@link UUID} or {@code null} to turn this feature off.
    */
   protected UUID createUuid() {
 

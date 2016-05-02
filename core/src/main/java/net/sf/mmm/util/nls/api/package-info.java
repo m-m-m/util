@@ -24,7 +24,7 @@
  * You will typically store your messages in a
  * {@link java.util.ResourceBundle}. Now if you store the
  * technical key of the bundle in a message or exception the receiver needs the
- * proper <code>{@link java.util.ResourceBundle}</code> to decode it or he ends
+ * proper {@link java.util.ResourceBundle} to decode it or he ends
  * up with a cryptic message he can NOT understand (e.g. as illustrated by the
  * screenshot). <br>
  * On the other hand you need to know the locale of the receiver to do the l10n when creating the message or exception
@@ -42,9 +42,9 @@
  * The solution is quite simple:<br>
  * We simply bundle the message in default language together with the separated
  * dynamic arguments in one container object that is called
- * <code>{@link net.sf.mmm.util.nls.api.NlsMessage}</code>.
- * For exceptions there is additional support via <code>{@link net.sf.mmm.util.exception.api.NlsException}</code> and
- * <code>{@link net.sf.mmm.util.exception.api.NlsRuntimeException}</code>.
+ * {@link net.sf.mmm.util.nls.api.NlsMessage}.
+ * For exceptions there is additional support via {@link net.sf.mmm.util.exception.api.NlsException} and
+ * {@link net.sf.mmm.util.exception.api.NlsRuntimeException}.
  * Here is an example to clarify the idea of {@link net.sf.mmm.util.nls.api.NlsMessage}:
  * The i18n message is "Hi {name}! How are you?" and the dynamic argument is the users name e.g. "Lilli".
  * Now if we store these informations together we have all we need. To get the localized message we simply translate the
@@ -92,7 +92,7 @@
  * For further details see {@link net.sf.mmm.util.nls.api.NlsBundle}. <br>
  * <br>
  * For localization you can create property files with the translations of your NLS-bundle.
- * E.g. <code>foo/bar/NlsBundleFooBar_de.properties</code> with this content:
+ * E.g. {@code foo/bar/NlsBundleFooBar_de.properties} with this content:
  * <pre>
  * messageSayHi = Hallo {name}! Wie geht es Dir?
  * errorLoginInUse = Es tut uns leid. Das Login "{login}" ist bereits vergeben. Bitte wählen Sie ein anderes Login.
@@ -104,10 +104,10 @@
  *
  * In order to support you with creating and maintaining the localized
  * properties, this solution also comes with the
- * <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>.
+ * {@code net.sf.mmm.util.nls.base.ResourceBundleSynchronizer}.
  * <br>
  * The advantage is that also the bundle name and key are available in the {@link net.sf.mmm.util.nls.api.NlsMessage}
- * and that this approach is GWT compatible when using <code>mmm-util-gwt</code>. However, there is still our legacy
+ * and that this approach is GWT compatible when using {@code mmm-util-gwt}. However, there is still our legacy
  * approach.
  * <h4>Alternate Approach (legacy): {@link net.sf.mmm.util.nls.base.AbstractResourceBundle}</h4>
  * Simply create a subclass of {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} that declares public string
@@ -143,14 +143,14 @@
  * }
  * </pre>
  * For the automatic reverse-lookup create the file
- * <code>META-INF/net.sf.mmm/nls-bundles</code> with the fully qualified name
+ * {@code META-INF/net.sf.mmm/nls-bundles} with the fully qualified name
  * of your bundle-class (foo.bar.FooBarResourceBundle) as content.
  * <br>
  * For localization you can create property files as described above in the recommended approach.
  *
  * In order to support you with creating and maintaining the localized
  * properties, this solution also comes with the
- * <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>.
+ * {@code net.sf.mmm.util.nls.base.ResourceBundleSynchronizer}.
  * <h3>Conclusion</h3>
  * As we have seen the NLS provided here makes it very easy for developers to write and maintain internationalized code.
  * While messages are created throughout the code they only need to be localized for the end-user in the client and at

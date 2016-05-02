@@ -20,13 +20,13 @@ import org.junit.Assert;
 public abstract class AbstractPojoDescriptorBuilderTest extends Assert {
 
   /**
-   * This method checks read/write accessors to the property <code>propertyName</code> of the
-   * <code>pojoDescriptor</code> according to the given <code>readType</code> and <code>writeType</code>.
+   * This method checks read/write accessors to the property {@code propertyName} of the
+   * {@code pojoDescriptor} according to the given {@code readType} and {@code writeType}.
    *
    * @param pojoDescriptor is the descriptor.
    * @param propertyName is the name of the property to check.
-   * @param readType is the expected read-type or <code>null</code> if NOT to check.
-   * @param writeType is the expected write-type or <code>null</code> if NOT to check.
+   * @param readType is the expected read-type or {@code null} if NOT to check.
+   * @param writeType is the expected write-type or {@code null} if NOT to check.
    */
   protected void checkProperty(PojoDescriptor<?> pojoDescriptor, String propertyName, Class<?> readType,
       Class<?> writeType) {

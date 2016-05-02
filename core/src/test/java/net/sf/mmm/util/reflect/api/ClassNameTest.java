@@ -63,7 +63,7 @@ public class ClassNameTest extends Assert {
   }
 
   /**
-   * Instantiates {@link ClassName} for given <code>type</code> and assert equals for all name related
+   * Instantiates {@link ClassName} for given {@code type} and assert equals for all name related
    * methods.
    * 
    * @param type the {@link Class} to check.
@@ -104,7 +104,7 @@ public class ClassNameTest extends Assert {
 
   /**
    * @param type is the {@link Class}.
-   * @return the {@link ClassName} for the given <code>type</code>.
+   * @return the {@link ClassName} for the given {@code type}.
    */
   private ClassName createRecursive(Class<?> type) {
 

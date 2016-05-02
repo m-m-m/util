@@ -13,14 +13,14 @@ package net.sf.mmm.util.transformer.api;
 public interface Transformer<V> {
 
   /**
-   * This method transforms a given <code>original</code> value. This value must NOT be modified by this
-   * method. To change the <code>original</code> value a new value has to be created and returned instead. If
-   * the value should NOT be changed, the <code>original</code> value (the exact same instance) should be
+   * This method transforms a given {@code original} value. This value must NOT be modified by this
+   * method. To change the {@code original} value a new value has to be created and returned instead. If
+   * the value should NOT be changed, the {@code original} value (the exact same instance) should be
    * returned.
    * 
    * @param original is the original value.
-   * @return the transformed value. May only be <code>null</code> if explicitly documented by the
-   *         implementation. The receiver of a {@link Transformer} should also document if <code>null</code>
+   * @return the transformed value. May only be {@code null} if explicitly documented by the
+   *         implementation. The receiver of a {@link Transformer} should also document if {@code null}
    *         is a legal result.
    */
   V transform(V original);

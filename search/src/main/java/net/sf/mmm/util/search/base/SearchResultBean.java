@@ -38,8 +38,8 @@ public class SearchResultBean<HIT> implements SearchResult<HIT> {
    * The constructor.
    *
    * @param hitList is the {@link #getHits() hit-list} that may return more hits than the given
-   *        <code>maximumHitCount</code>. In that case the {@link #getHits() hits} will be created as a truncated copy
-   *        of the given <code>hitList</code>. Otherwise {@link #getHits()} will return the given <code>hitList</code>.
+   *        {@code maximumHitCount}. In that case the {@link #getHits() hits} will be created as a truncated copy
+   *        of the given {@code hitList}. Otherwise {@link #getHits()} will return the given {@code hitList}.
    * @param maximumHitCount is the {@link net.sf.mmm.util.search.api.SearchCriteria#getMaximumHitCount() maximum
    *        hit-count}.
    */

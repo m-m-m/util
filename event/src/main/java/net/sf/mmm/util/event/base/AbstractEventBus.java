@@ -127,7 +127,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
   /**
    * Dispatches the given {@link net.sf.mmm.util.event.api.Event}.
    *
-   * @param <E> is the generic type of <code>event</code>.
+   * @param <E> is the generic type of {@code event}.
    * @param event is the {@link net.sf.mmm.util.event.api.Event} to dispatch.
    * @param errors is a {@link Collection} where errors are collected.
    */
@@ -174,11 +174,11 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
   }
 
   /**
-   * Gets or creates the {@link EventDispatcher} for the given <code>eventType</code>.
+   * Gets or creates the {@link EventDispatcher} for the given {@code eventType}.
    *
-   * @param <E> is the generic type of <code>eventType</code>.
+   * @param <E> is the generic type of {@code eventType}.
    * @param eventType is the {@link Class} reflecting the {@link net.sf.mmm.util.event.api.Event event}.
-   * @return the {@link EventDispatcher} responsible for the given <code>eventType</code>.
+   * @return the {@link EventDispatcher} responsible for the given {@code eventType}.
    */
   @SuppressWarnings("unchecked")
   protected <E> EventDispatcher<E> getEventDispatcherRequired(Class<E> eventType) {
@@ -187,13 +187,13 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
   }
 
   /**
-   * Gets the most specific {@link EventDispatcher} responsible the given <code>eventType</code>.
+   * Gets the most specific {@link EventDispatcher} responsible the given {@code eventType}.
    *
-   * @param <E> is the generic type of <code>eventType</code>.
+   * @param <E> is the generic type of {@code eventType}.
    * @param eventType is the {@link Class} reflecting the {@link net.sf.mmm.util.event.api.Event event}.
-   * @return the most specific {@link EventDispatcher} responsible for the given <code>eventType</code>. May be
-   *         <code>null</code> if no {@link EventListener} is {@link #addListener(Class, EventListener) registered} for
-   *         a compatible <code>eventType</code>.
+   * @return the most specific {@link EventDispatcher} responsible for the given {@code eventType}. May be
+   *         {@code null} if no {@link EventListener} is {@link #addListener(Class, EventListener) registered} for
+   *         a compatible {@code eventType}.
    */
   @SuppressWarnings("unchecked")
   protected <E> EventDispatcher<? super E> getEventDispatcherOptional(Class<E> eventType) {
@@ -202,13 +202,13 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
   }
 
   /**
-   * Gets or creates the {@link EventDispatcher} for the given <code>eventType</code>.
+   * Gets or creates the {@link EventDispatcher} for the given {@code eventType}.
    *
    * @param eventType is the {@link Class} reflecting the {@link net.sf.mmm.util.event.api.Event event}.
-   * @param createIfNotExists - if <code>true</code> the requested {@link EventDispatcher} will be created if it does
-   *        not exists, if <code>false</code> this method will return <code>null</code> if it does not exist.
-   * @return the {@link EventDispatcher} responsible for the given <code>eventType</code>. May be <code>null</code> if
-   *         <code>createIfNotExists</code> is <code>null</code> and not available.
+   * @param createIfNotExists - if {@code true} the requested {@link EventDispatcher} will be created if it does
+   *        not exists, if {@code false} this method will return {@code null} if it does not exist.
+   * @return the {@link EventDispatcher} responsible for the given {@code eventType}. May be {@code null} if
+   *         {@code createIfNotExists} is {@code null} and not available.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   private EventDispatcher getEventDispatcher(Class<?> eventType, boolean createIfNotExists) {
@@ -303,7 +303,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     }
 
     /**
-     * @return <code>true</code> if this adapter has been {@link #clear() cleared}, <code>false</code> otherwise.
+     * @return {@code true} if this adapter has been {@link #clear() cleared}, {@code false} otherwise.
      */
     protected boolean isCleared() {
 
@@ -348,7 +348,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     /**
      * The constructor.
      *
-     * @param parent is the {@link EventDispatcher} responsible for the super-class or <code>null</code> if this is the
+     * @param parent is the {@link EventDispatcher} responsible for the super-class or {@code null} if this is the
      *        root {@link EventDispatcher} responsible for {@link Object}.
      * @param collectionFactory is the {@link CollectionFactory} used to create {@link Collection}s e.g. for the
      *        {@link EventListenerContainer}s.
@@ -366,7 +366,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
      * @param event is the {@link net.sf.mmm.util.event.api.Event} to dispatch.
      * @param errors is a {@link Collection} where potential exceptions thrown by
      *        {@link EventListener#handleEvent(Object) event handlers} will be {@link Collection#add(Object) added}.
-     * @return <code>true</code> if the event has actually been dispatched, <code>false</code> otherwise.
+     * @return {@code true} if the event has actually been dispatched, {@code false} otherwise.
      */
     public boolean handleEvent(E event, Collection<Throwable> errors) {
 

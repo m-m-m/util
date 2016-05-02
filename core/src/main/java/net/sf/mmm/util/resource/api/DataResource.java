@@ -12,7 +12,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 /**
  * This is the interface for a resource {@link #isData() potentially} containing data. You can think of a
  * {@link DataResource} as a {@link java.io.File file} but it may come from other sources than the filesystem. <br>
- * The major reason for naming it {@link DataResource} is that <code>Resource</code> is a very general name
+ * The major reason for naming it {@link DataResource} is that {@code Resource} is a very general name
  * already occupied by {@link javax.annotation.Resource}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -28,25 +28,25 @@ public interface DataResource {
    * resource points to a remote URL this method has to open a network connection in order to verify if the
    * resource is available. Use {@link #isData()} to prevent such expensive operaitons.
    *
-   * @return <code>true</code> if this resource is available, <code>false</code> otherwise.
+   * @return {@code true} if this resource is available, {@code false} otherwise.
    */
   boolean isAvailable();
 
   /**
    * This method determines if this resource has potentially data {@link #isAvailable() available}. Unlike
    * {@link #isAvailable()} this method will not invoke expensive operations like connecting to remote URLs.
-   * If this method will return <code>false</code>, then {@link #isAvailable()} would also have returned
-   * <code>false</code>. However in case of <code>true</code> only {@link #isAvailable()} can guarantee if a
+   * If this method will return {@code false}, then {@link #isAvailable()} would also have returned
+   * {@code false}. However in case of {@code true} only {@link #isAvailable()} can guarantee if a
    * resource really exists and contains data. E.g. if the resource points to a {@link java.io.File} then this
    * method can check if it is a {@link java.io.File#isFile() data-file}. So in case it points to a directory
-   * or does not exist at all in the filesystem, this method will return <code>false</code>. Please also note
+   * or does not exist at all in the filesystem, this method will return {@code false}. Please also note
    * that this may invoke expensive operations if the according directory path points to something like a
    * network share. You should also be aware that the state of {@link #isData()} and {@link #isAvailable()}
    * can change at any time so you never have a full guarantee if some data exists or NOT. However in most
    * cases it is very improbable that this status changes when you {@link #openStream() read} the resource
    * immediately after the check.
    *
-   * @return <code>true</code> if this resource points to potential data, <code>false</code> otherwise.
+   * @return {@code true} if this resource points to potential data, {@code false} otherwise.
    * @since 2.0.0
    */
   boolean isData();
@@ -119,9 +119,9 @@ public interface DataResource {
       RuntimeIoException;
 
   /**
-   * This method retrieves a {@link DataResource} pointing to the given <code>resourcePath</code> based on
+   * This method retrieves a {@link DataResource} pointing to the given {@code resourcePath} based on
    * this resource.<br>
-   * E.g. if this resource points to the file "/etc/init.d/rc" and <code>resourcePath</code> would be
+   * E.g. if this resource points to the file "/etc/init.d/rc" and {@code resourcePath} would be
    * "../apt/sources.list" the resulting resource would point to "/etc/apt/sources.list". <br/>
    * <b>ATTENTION:</b><br/>
    * As you can see by the example above this method always navigates relative to the <b><i>parent</i></b>
@@ -136,7 +136,7 @@ public interface DataResource {
    * @param resourcePath is the absolute or relative path pointing to a new resource. If it is a relative
    *        path, it is interpreted relative to the parent URI (directory) of this resource.
    * @return is the resource pointing to the given path (relative to this resource).
-   * @throws ResourceUriUndefinedException if the given <code>resourcePath</code> leads to an undefined or
+   * @throws ResourceUriUndefinedException if the given {@code resourcePath} leads to an undefined or
    *         illegal URI.
    */
   DataResource navigate(String resourcePath) throws ResourceUriUndefinedException;
@@ -145,18 +145,18 @@ public interface DataResource {
    * This method gets the last modification date of the {@link DataResource} if {@link #isAvailable()
    * available} and supported.
    *
-   * @return the last modification {@link Date} or <code>null</code> if not available or supported.
+   * @return the last modification {@link Date} or {@code null} if not available or supported.
    * @since 2.0.0
    */
   Date getLastModificationDate();
 
   /**
-   * This method determines if this resource has been been modified since the given <code>data</code>.
+   * This method determines if this resource has been been modified since the given {@code data}.
    *
    * @param date is the {@link Date} to check for.
-   * @return <code>true</code> if the resource has been modified after the given <code>date</code>,
-   *         <code>false</code> if it has NOT been modified after the given <code>date</code> and
-   *         <code>null</code> if this can NOT be determined (resource not {@link #isAvailable() available} or
+   * @return {@code true} if the resource has been modified after the given {@code date},
+   *         {@code false} if it has NOT been modified after the given {@code date} and
+   *         {@code null} if this can NOT be determined (resource not {@link #isAvailable() available} or
    *         operation NOT supported by this resource).
    * @since 2.0.0
    */

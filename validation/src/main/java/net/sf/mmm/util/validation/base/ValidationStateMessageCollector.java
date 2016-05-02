@@ -104,7 +104,7 @@ public class ValidationStateMessageCollector extends AbstractValidationStateColl
    * This method gets the {@link #onFailure(ValidationFailure) collected}
    * {@link ValidationFailure#getMessage() messages} separated with the {@link #getSeparator() separator}.
    * 
-   * @return the {@link ValidationFailure#getMessage() failure messages} or <code>null</code> if valid.
+   * @return the {@link ValidationFailure#getMessage() failure messages} or {@code null} if valid.
    */
   public String getFailureMessages() {
 

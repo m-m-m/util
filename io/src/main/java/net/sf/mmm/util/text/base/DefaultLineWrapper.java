@@ -275,7 +275,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    *
    * @param columnStates are the {@link ColumnState}s.
    * @param tableInfo is the {@link TextTableInfo}.
-   * @return <code>true</code> if the width is sane, <code>false</code> otherwise.
+   * @return {@code true} if the width is sane, {@code false} otherwise.
    */
   private boolean verifyWithOfColumns(ColumnState[] columnStates, TextTableInfo tableInfo) {
 
@@ -298,11 +298,11 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
   }
 
   /**
-   * This method determines if the given character <code>c</code> is contained in <code>chars</code>.
+   * This method determines if the given character {@code c} is contained in {@code chars}.
    *
    * @param c is the character to check.
    * @param chars is the array with the matching characters.
-   * @return <code>true</code> if <code>c</code> is contained in <code>chars</code>, <code>false</code> otherwise.
+   * @return {@code true} if {@code c} is contained in {@code chars}, {@code false} otherwise.
    */
   private static boolean isIn(char c, char[] chars) {
 
@@ -487,8 +487,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    *
    * @param appendable is where to append to.
    * @param state is the current {@link ColumnState}.
-   * @param doIndentThisLine - <code>true</code> if the current cell should be {@link TextColumnInfo#getIndent()
-   *        indented}, <code>false</code> otherwise.
+   * @param doIndentThisLine - {@code true} if the current cell should be {@link TextColumnInfo#getIndent()
+   *        indented}, {@code false} otherwise.
    * @param cellBuffer is the text to align and append.
    * @throws IOException if throw by the {@link Appendable}.
    */
@@ -538,11 +538,11 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
   }
 
   /**
-   * This method fills the {@link Appendable} with the given <code>count</code> of <code>filler</code> characters.
+   * This method fills the {@link Appendable} with the given {@code count} of {@code filler} characters.
    *
    * @param appendable is the {@link Appendable} to fill.
    * @param filler is the {@link TextColumnInfo#getFiller() fill-character}.
-   * @param count is the number of fill-characters (<code>filler</code>) to add.
+   * @param count is the number of fill-characters ({@code filler}) to add.
    * @throws IOException if caused by the {@link Appendable}.
    */
   protected void fill(Appendable appendable, char filler, int count) throws IOException {
@@ -685,7 +685,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      *
      * @see #getHyphenatedWord()
      *
-     * @return <code>true</code> if segment is word, <code>false</code> otherwise (special characters, etc.)
+     * @return {@code true} if segment is word, {@code false} otherwise (special characters, etc.)
      */
     public TextSegmentType getType() {
 
@@ -696,7 +696,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      * This method gets the {@link Hyphenation} if this {@link TextSegment} has the {@link #getType() type}
      * {@link TextSegmentType#WORD}. The {@link Hyphenation} will be build lazy on the first call of this method.
      *
-     * @return the {@link Hyphenation} or <code>null</code> if this is no word.
+     * @return the {@link Hyphenation} or {@code null} if this is no word.
      */
     public Hyphenation getHyphenatedWord() {
 
@@ -789,7 +789,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      *
      * @see #proceedTextSegment()
      *
-     * @return the current {@link TextSegment} or <code>null</code> if all {@link TextSegment}s are proceeded.
+     * @return the current {@link TextSegment} or {@code null} if all {@link TextSegment}s are proceeded.
      */
     public TextSegment getCurrentSegment() {
 
@@ -800,8 +800,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      * This method gets the next {@link TextSegment} after the {@link #getCurrentSegment() current}. This method exists
      * for lookahead decisions.
      *
-     * @return the next {@link TextSegment} or <code>null</code> if NOT available ( {@link #getCurrentSegment() current
-     *         segment} is the last segment or also <code>null</code>).
+     * @return the next {@link TextSegment} or {@code null} if NOT available ( {@link #getCurrentSegment() current
+     *         segment} is the last segment or also {@code null}).
      */
     public TextSegment getNextSegment() {
 
@@ -812,10 +812,10 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      * This method gets the current number of subsequent newlines. If {@link #getCurrentSegment() current segment} is a
      * {@link TextSegmentType#NEWLINE}, this method will return the number of {@link TextSegmentType#NEWLINE} segments
      * (including the current) that occurred since the last other segment. Otherwise it will always return
-     * <code>0</code>.
+     * {@code 0}.
      *
      * @return the subsequentNewlineCount the number of subsequent {@link TextSegmentType#NEWLINE} segments including
-     *         the {@link #getCurrentSegment() current segment} or <code>0</code> if the {@link #getCurrentSegment()
+     *         the {@link #getCurrentSegment() current segment} or {@code 0} if the {@link #getCurrentSegment()
      *         current segment} is no {@link TextSegmentType#NEWLINE}.
      */
     public int getSubsequentNewlineCount() {
@@ -828,7 +828,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      * the {@link #getNextSegment() next segment} and the {@link #getNextSegment() next segment} is set to the next
      * determined segment.
      *
-     * @return <code>true</code> if a new {@link #getCurrentSegment() current segment} is available, <code>false</code>
+     * @return {@code true} if a new {@link #getCurrentSegment() current segment} is available, {@code false}
      *         if the entire text has been proceeded.
      */
     public boolean proceedTextSegment() {
@@ -856,7 +856,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      * {@link TextSegment} with the next segment-data from the {@link #getText() text}.
      *
      * @param textSegment a previous {@link TextSegment} that can be reused.
-     * @return the {@link TextSegment} with the next segment-data or <code>null</code> if the {@link #getText() text} is
+     * @return the {@link TextSegment} with the next segment-data or {@code null} if the {@link #getText() text} is
      *         completed.
      */
     private TextSegment next(TextSegment textSegment) {
@@ -987,7 +987,7 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /**
      * This method determines if this column is complete (all {@link #getText() text} is appended).
      *
-     * @return <code>true</code> if complete, <code>false</code> otherwise.
+     * @return {@code true} if complete, {@code false} otherwise.
      */
     public boolean isComplete() {
 

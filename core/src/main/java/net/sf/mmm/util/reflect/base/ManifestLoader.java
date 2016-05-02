@@ -85,7 +85,7 @@ public class ManifestLoader {
   }
 
   /**
-   * This method adds dynamic attributes to the given <code>manifest</code>.
+   * This method adds dynamic attributes to the given {@code manifest}.
    *
    * @param manifest is the {@link Manifest} to modify.
    * @param url is the {@link URL} with the source of the manifest.
@@ -130,7 +130,7 @@ public class ManifestLoader {
    * from a {@link JarFile} the {@link JarFile#getManifest() Manifest} of that {@link JarFile} is returned.
    *
    * @param type is the {@link Class} for which the according {@link Manifest} is requested.
-   * @return the according {@link Manifest} or <code>null</code> if NOT available.
+   * @return the according {@link Manifest} or {@code null} if NOT available.
    * @since 2.0.0
    */
   public static Manifest loadManifest(Class<?> type) {
@@ -177,7 +177,7 @@ public class ManifestLoader {
    *
    * @param manifest is the {@link Manifest} where to get the attribute-value from.
    * @param name is the {@link java.util.jar.Attributes.Name} of the requested attribute.
-   * @return the requested value or <code>null</code> if NOT available.
+   * @return the requested value or {@code null} if NOT available.
    * @since 2.0.0
    */
   public static String getValue(Manifest manifest, Attributes.Name name) {

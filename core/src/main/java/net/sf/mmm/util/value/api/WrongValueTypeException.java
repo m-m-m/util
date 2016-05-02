@@ -85,7 +85,7 @@ public class WrongValueTypeException extends ValueException {
    * This method gets the type reflecting the actual value.
    *
    * @param value is the value for which the type is requested.
-   * @return the type of the given <code>value</code>.
+   * @return the type of the given {@code value}.
    */
   private static Type getType(Object value) {
 

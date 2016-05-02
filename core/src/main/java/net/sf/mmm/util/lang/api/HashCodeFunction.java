@@ -16,8 +16,8 @@ public interface HashCodeFunction<VALUE> {
 
   /**
    * @param value is the object to hash.
-   * @return the custom {@link Object#hashCode() hash code} of the given <code>value</code>. The default
-   *         implementation will simply return <code>value.hashCode()</code>.
+   * @return the custom {@link Object#hashCode() hash code} of the given {@code value}. The default
+   *         implementation will simply return {@code value.hashCode()}.
    */
   int hashCode(VALUE value);
 

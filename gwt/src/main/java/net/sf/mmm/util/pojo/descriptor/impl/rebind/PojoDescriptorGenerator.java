@@ -165,11 +165,11 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
   /**
    * This method determines the property descriptors of the {@link net.sf.mmm.util.pojo.api.Pojo} identified
-   * by <code>inputType</code>.
+   * by {@code inputType}.
    *
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
-   * @return the {@link PojoDescriptor} for the given <code>inputType</code>.
+   * @return the {@link PojoDescriptor} for the given {@code inputType}.
    */
   private static PojoDescriptor<?> getPojoDescriptor(JClassType inputType) {
 
@@ -224,7 +224,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
      * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the
      *        source code to.
      * @param superType is the supported super-type for which the descriptor may be reused in the generated
-     *        code or <code>null</code> for none.
+     *        code or {@code null} for none.
      */
     public StatefulPropertyGenerator(SourceWriter sourceWriter, JClassType superType) {
 
@@ -240,7 +240,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
     /**
      * This method generates the source-code block to get the {@link PojoDescriptor} for the
-     * <code>superType</code> so things can be reused from super-classes to reduce memory consumption.
+     * {@code superType} so things can be reused from super-classes to reduce memory consumption.
      */
     protected void generateSuperDescriptorBlockIfNotAlreadyDone() {
 
@@ -256,7 +256,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
 
     /**
      * This method generates the source-code block to get the {@link PojoPropertyDescriptor} for the
-     * <code>superType</code> so things can be reused from super-classes to reduce memory consumption.
+     * {@code superType} so things can be reused from super-classes to reduce memory consumption.
      *
      * @param propertyDescriptor is the {@link PojoPropertyDescriptor}.
      */
@@ -312,7 +312,7 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
      *
      * @param propertyDescriptor is the {@link PojoPropertyDescriptor} to generate in the source.
      * @param superPropertyDescriptor is the {@link PojoPropertyDescriptor} of the super-type or
-     *        <code>null</code> if NOT available.
+     *        {@code null} if NOT available.
      * @param mode is the {@link PojoPropertyAccessorMode} - either {@link PojoPropertyAccessorNonArgMode#GET}
      *        or {@link PojoPropertyAccessorOneArgMode#SET}.
      */

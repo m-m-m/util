@@ -28,7 +28,7 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
   /**
    * The constructor.
    * 
-   * @param capacity is the <code>length</code> of the internal {@link #getBytes() buffer}.
+   * @param capacity is the {@code length} of the internal {@link #getBytes() buffer}.
    */
   public ByteArrayBufferImpl(int capacity) {
 

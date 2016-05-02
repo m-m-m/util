@@ -55,7 +55,7 @@ public class ComposedException extends NlsRuntimeException {
   }
 
   /**
-   * This method creates the {@link NlsMessage} wrapping the given <code>errors</code>.
+   * This method creates the {@link NlsMessage} wrapping the given {@code errors}.
    *
    * @param errors are the {@link Throwable errors} that have been collected.
    * @return the combined {@link NlsMessage}.

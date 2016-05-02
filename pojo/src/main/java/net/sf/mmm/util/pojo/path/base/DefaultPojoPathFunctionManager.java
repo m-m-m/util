@@ -49,14 +49,14 @@ public class DefaultPojoPathFunctionManager extends AbstractComponent implements
   }
 
   /**
-   * This method registers the given <code>function</code> for the given <code>functionName</code> so it is
+   * This method registers the given {@code function} for the given {@code functionName} so it is
    * available via {@link #getFunction(String)}.
    * 
    * @see #getFunction(String)
    * 
    * @param function is the {@link PojoPathFunction} to register.
    * @param functionName is the {@link #getFunction(String) associated name}.
-   * @return the {@link PojoPathFunction} that was registered before for the given <code>functionName</code>
+   * @return the {@link PojoPathFunction} that was registered before for the given {@code functionName}
    *         and has now been replaced.
    */
   public PojoPathFunction registerFunction(PojoPathFunction function, String functionName) {

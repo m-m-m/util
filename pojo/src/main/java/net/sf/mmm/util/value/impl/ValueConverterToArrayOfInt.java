@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 /**
  * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to <code>int[]</code>.
+ * an {@link Object} to {@code int[]}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

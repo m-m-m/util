@@ -85,7 +85,7 @@ public class ComposedValidationFailure extends AbstractValidationFailure impleme
   }
 
   /**
-   * Gets the {@link ValidationFailure} at the given <code>index</code>.
+   * Gets the {@link ValidationFailure} at the given {@code index}.
    *
    * @see java.util.List#get(int)
    *

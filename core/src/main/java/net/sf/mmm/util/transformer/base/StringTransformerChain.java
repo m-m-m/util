@@ -31,7 +31,7 @@ public class StringTransformerChain implements Transformer<String> {
   @XmlAttribute(name = "id")
   private String id;
 
-  /** The parent that is extended by this chain or <code>null</code>. */
+  /** The parent that is extended by this chain or {@code null}. */
   @XmlIDREF
   private StringTransformerChain parent;
 
@@ -65,7 +65,7 @@ public class StringTransformerChain implements Transformer<String> {
    * The constructor.
    * 
    * @param id the {@link #getId() ID} of this chain.
-   * @param parent is the parent {@link StringTransformerChain chain} to extend or <code>null</code> for a
+   * @param parent is the parent {@link StringTransformerChain chain} to extend or {@code null} for a
    *        root-chain.
    * @param rules are the rules of this chain.
    */
@@ -116,7 +116,7 @@ public class StringTransformerChain implements Transformer<String> {
   /**
    * This method gets the ID used to identify this chain.
    * 
-   * @return the ID or <code>null</code> if undefined.
+   * @return the ID or {@code null} if undefined.
    */
   public String getId() {
 
@@ -124,14 +124,14 @@ public class StringTransformerChain implements Transformer<String> {
   }
 
   /**
-   * This method extends this chain with <code>additionalRules</code>. <br>
+   * This method extends this chain with {@code additionalRules}. <br>
    * <b>ATTENTION:</b><br>
    * If you want to be able to marshall the chain with JAXB, you have to use
    * {@link StringTransformerChain#StringTransformerChain(String, StringTransformerChain, StringTransformerRule...)}
    * instead.
    * 
    * @param additionalRules are the rules to add.
-   * @return the chain that also checks the <code>additionalRules</code> if none of this rules match.
+   * @return the chain that also checks the {@code additionalRules} if none of this rules match.
    */
   public StringTransformerChain extend(StringTransformerRule... additionalRules) {
 
@@ -149,7 +149,7 @@ public class StringTransformerChain implements Transformer<String> {
   protected static class State {
 
     /**
-     * <code>true</code> if the chain should be stopped, <code>false</code> otherwise.
+     * {@code true} if the chain should be stopped, {@code false} otherwise.
      */
     private boolean stop;
 

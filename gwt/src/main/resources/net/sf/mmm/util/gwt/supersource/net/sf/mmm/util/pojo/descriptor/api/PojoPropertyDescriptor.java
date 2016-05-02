@@ -22,13 +22,13 @@ public interface PojoPropertyDescriptor extends PojoAttributeName {
 
   /**
    * This method gets the {@link PojoPropertyAccessor accessor} to access the represented property in the way
-   * given by <code>mode</code>.
+   * given by {@code mode}.
    *
    * @param <ACCESSOR> is the type of the requested accessor.
    * @param mode is the {@link PojoPropertyAccessor#getMode() mode} of the requested accessor. Use
    *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorModes} for available
    *        modes.
-   * @return the accessor for the given <code>mode</code> or <code>null</code> if no such accessor exists.
+   * @return the accessor for the given {@code mode} or {@code null} if no such accessor exists.
    */
   <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(PojoPropertyAccessorMode<ACCESSOR> mode);
 

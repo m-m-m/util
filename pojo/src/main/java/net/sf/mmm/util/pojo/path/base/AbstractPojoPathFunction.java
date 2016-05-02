@@ -31,7 +31,7 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
   /**
    * {@inheritDoc}
    * 
-   * This implementation always returns <code>true</code>. Override for indeterministic implementations.
+   * This implementation always returns {@code true}. Override for indeterministic implementations.
    */
   @Override
   public boolean isDeterministic() {

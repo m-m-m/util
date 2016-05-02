@@ -166,7 +166,7 @@ public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil 
    *        {@link Object} is not {@link Filter#accept(Object) accepted} by this {@link Filter} the recursion stops at
    *        this point.
    * @param visitedSet is the {@link Set} where to collect all object to visit in order to prevent infinity loops or
-   *        <code>null</code> to disable.
+   *        {@code null} to disable.
    */
   protected void visitObjectRecursive(Object object, Filter<Object> visitor, Set<HashKey<Object>> visitedSet) {
 

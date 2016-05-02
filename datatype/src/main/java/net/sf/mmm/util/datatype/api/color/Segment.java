@@ -17,14 +17,14 @@ public interface Segment<V extends Number> extends SimpleDatatype<V>, AttributeR
     AttributeReadMaximumValue<V> {
 
   /**
-   * @return the value in the range from <code>0</code> to <code>1</code> (<code>[0, 1]</code>).
+   * @return the value in the range from {@code 0} to {@code 1} ({@code [0, 1]}).
    */
   double getValueAsFactor();
 
   /**
-   * @return the value in percent in the range from <code>0</code> to <code>100</code>. Will be rounded to an
-   *         <code>int</code>. If you want to keep (potential) precision, use {@link #getValueAsFactor()} and
-   *         divide by <code>100</code>.
+   * @return the value in percent in the range from {@code 0} to {@code 100}. Will be rounded to an
+   *         {@code int}. If you want to keep (potential) precision, use {@link #getValueAsFactor()} and
+   *         divide by {@code 100}.
    */
   int getValueAsPercent();
 
@@ -44,7 +44,7 @@ public interface Segment<V extends Number> extends SimpleDatatype<V>, AttributeR
    * 
    * @return the default {@link String} representation. Depending on the type this might be the same as
    *         {@link #toStringAsFactor()} but it might also be an absolute integer (e.g. in the range
-   *         <code>[0, 255]</code> for RGBA segments).
+   *         {@code [0, 255]} for RGBA segments).
    */
   String toString();
 }

@@ -23,7 +23,7 @@ public abstract class AbstractValidatorTest extends Assert {
   /**
    * This method verifies a negative {@link ValueValidator#validate(Object, Object) validation}.
    * 
-   * @param <V> is the generic type of the <code>value</code>.
+   * @param <V> is the generic type of the {@code value}.
    * 
    * @param validator is the {@link ValueValidator} to test.
    * @param value is the value expected to be invalid.
@@ -47,7 +47,7 @@ public abstract class AbstractValidatorTest extends Assert {
   /**
    * This method verifies a positive {@link ValueValidator#validate(Object, Object) validation}.
    * 
-   * @param <V> is the generic type of the <code>value</code>.
+   * @param <V> is the generic type of the {@code value}.
    * 
    * @param validator is the {@link ValueValidator} to test.
    * @param value is the value expected to be invalid.

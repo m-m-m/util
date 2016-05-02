@@ -206,15 +206,15 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code> and
-   * returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path. <br>
-   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may NOT be
+   * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and
+   * returns the sub-class or sub-interface of {@code ancestor} on that hierarchy-path. <br>
+   * Please note that if {@code ancestor} is an {@link Class#isInterface() interface}, the hierarchy may NOT be
    * unique. In such case it will be unspecified which of the possible paths is used.
    *
-   * @param ancestor is the super-class or super-interface of <code>descendant</code>.
-   * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
-   * @return the sub-class or sub-interface on the hierarchy-path from <code>descendant</code> up to
-   *         <code>ancestor</code>.
+   * @param ancestor is the super-class or super-interface of {@code descendant}.
+   * @param descendant is the sub-class or sub-interface of {@code ancestor}.
+   * @return the sub-class or sub-interface on the hierarchy-path from {@code descendant} up to
+   *         {@code ancestor}.
    */
   protected Class<?> getSubClass(Class<?> ancestor, Class<?> descendant) {
 
@@ -247,15 +247,15 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from <code>descendant</code> up to <code>ancestor</code> and
-   * returns the sub-class or sub-interface of <code>ancestor</code> on that hierarchy-path. <br>
-   * Please note that if <code>ancestor</code> is an {@link Class#isInterface() interface}, the hierarchy may NOT be
+   * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and
+   * returns the sub-class or sub-interface of {@code ancestor} on that hierarchy-path. <br>
+   * Please note that if {@code ancestor} is an {@link Class#isInterface() interface}, the hierarchy may NOT be
    * unique. In such case it will be unspecified which of the possible paths is used.
    *
-   * @param ancestor is the super-class or super-interface of <code>descendant</code>.
-   * @param descendant is the sub-class or sub-interface of <code>ancestor</code>.
-   * @return the sub-class or sub-interface on the hierarchy-path from <code>descendant</code> up to
-   *         <code>ancestor</code>.
+   * @param ancestor is the super-class or super-interface of {@code descendant}.
+   * @param descendant is the sub-class or sub-interface of {@code ancestor}.
+   * @return the sub-class or sub-interface on the hierarchy-path from {@code descendant} up to
+   *         {@code ancestor}.
    */
   protected Type getGenericDeclaration(Class<?> ancestor, Class<?> descendant) {
 
@@ -328,13 +328,13 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method parses the given <code>type</code> as generic {@link Type}. <br>
-   * This would be easier when using <code>StringParser</code> but we want to avoid the dependency on
-   * <code>util-misc</code>.
+   * This method parses the given {@code type} as generic {@link Type}. <br>
+   * This would be easier when using {@code StringParser} but we want to avoid the dependency on
+   * {@code util-misc}.
    *
    * @param parser is the string-parser on the type string to parse.
    * @param resolver is used to resolve classes.
-   * @param owner is the {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type} or <code>null</code>.
+   * @param owner is the {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type} or {@code null}.
    * @return the parsed type.
    */
   private Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner) {
@@ -668,7 +668,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method scans the given <code>packageDirectory</code> recursively for resources.
+   * This method scans the given {@code packageDirectory} recursively for resources.
    *
    * @param packageDirectory is the directory representing the {@link Package}.
    * @param qualifiedNameBuilder is a {@link StringBuilder} containing the qualified prefix (the {@link Package} with a
@@ -745,7 +745,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * @see #findClassNames(String, boolean, Filter, ClassLoader)
    *
    * @param packageName is the name of the {@link Package} to scan.
-   * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will be included
+   * @param includeSubPackages - if {@code true} all sub-packages of the specified {@link Package} will be included
    *        in the search.
    * @param classSet is where to add the classes.
    * @param filter is used to {@link Filter#accept(Object) filter} the {@link Class}-names to be added to the resulting
@@ -831,7 +831,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    *
    * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator (e.g.
    *        "net.sf.mmm.util.reflect).
-   * @param includeSubPackages - if <code>true</code> all sub-packages of the specified {@link Package} will be included
+   * @param includeSubPackages - if {@code true} all sub-packages of the specified {@link Package} will be included
    *        in the search.
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @param visitor is the {@link ResourceVisitor}.

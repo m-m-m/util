@@ -4,8 +4,8 @@ package net.sf.mmm.util.lang.api;
 
 /**
  * A {@link BooleanEnum} represents a {@link Boolean} as enum type. This may seem pointless in the first place
- * but is usable for annotations that can not have <code>null</code> values. However, in this case it is often
- * desirable to express a default that is neither <code>true</code> nor <code>false</code> e.g. if the default
+ * but is usable for annotations that can not have {@code null} values. However, in this case it is often
+ * desirable to express a default that is neither {@code true} nor {@code false} e.g. if the default
  * can be determined from other values. In such case you can use {@link BooleanEnum} instead and
  * {@link BooleanEnum#NULL} as default.
  * 
@@ -25,7 +25,7 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
   FALSE(Boolean.FALSE),
 
   /**
-   * Repesents <code>null</code>.
+   * Repesents {@code null}.
    */
   NULL(null);
 
@@ -53,7 +53,7 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
   /**
    * This method determines if this instance is {@link #TRUE}.
    * 
-   * @return <code>true</code> if {@link #TRUE}, <code>false</code> otherwise.
+   * @return {@code true} if {@link #TRUE}, {@code false} otherwise.
    */
   public boolean isTrue() {
 
@@ -63,7 +63,7 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
   /**
    * This method determines if this instance is {@link #FALSE}.
    * 
-   * @return <code>true</code> if {@link #FALSE}, <code>false</code> otherwise.
+   * @return {@code true} if {@link #FALSE}, {@code false} otherwise.
    */
   public boolean isFalse() {
 
@@ -71,7 +71,7 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
   }
 
   /**
-   * This method gets the {@link BooleanEnum} for the given <code>value</code>.
+   * This method gets the {@link BooleanEnum} for the given {@code value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link BooleanEnum}.
    * @return the requested {@link BooleanEnum}.

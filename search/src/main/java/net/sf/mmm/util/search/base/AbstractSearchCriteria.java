@@ -159,9 +159,9 @@ public abstract class AbstractSearchCriteria extends AbstractTransferObject impl
   }
 
   /**
-   * Limits the {@link #getMaximumHitCount() maximum hit count} by the given <code>limit</code>. If current
-   * {@link #getMaximumHitCount() maximum hit count} is <code>null</code> or greater than the given
-   * <code>limit</code>, the value is replaced by <code>limit</code>.
+   * Limits the {@link #getMaximumHitCount() maximum hit count} by the given {@code limit}. If current
+   * {@link #getMaximumHitCount() maximum hit count} is {@code null} or greater than the given
+   * {@code limit}, the value is replaced by {@code limit}.
    *
    * @param limit is the maximum allowed value for {@link #getMaximumHitCount() maximum hit count}.
    * @since 6.0.0

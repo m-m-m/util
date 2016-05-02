@@ -6,7 +6,7 @@ package net.sf.mmm.util.lang.api;
  * This is the interface for a particular <em>enumeration</em>. An enumeration has a finite set of
  * characteristics. This can be a java {@link Enum} but also something more complex such as a dynamic
  * enumeration that is configured via a database. For this reason it is called {@link EnumType} rather than
- * <code>EnumDatatype</code>. However, for convenience and simplicity it extends {@link Datatype}. For being
+ * {@code EnumDatatype}. However, for convenience and simplicity it extends {@link Datatype}. For being
  * less invasive, also standard java {@link Enum}s are supported by {@link EnumDefinition}. Therefore it is
  * recommended but NOT technically required to implement this interface for your custom {@link Enum}s that
  * shall be supported by {@link EnumProvider}. If you have an {@link Enum} with a

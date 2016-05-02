@@ -26,7 +26,7 @@ public class ArrayIterator<E> implements Enumeration<E>, Iterator<E> {
   /** The index where iteration stops. The item with this index will NOT be iterated. */
   private final int stopIndex;
 
-  /** The current index in <code>array</code>. */
+  /** The current index in {@code array}. */
   private int index;
 
   /**
@@ -43,8 +43,8 @@ public class ArrayIterator<E> implements Enumeration<E>, Iterator<E> {
    * The constructor.
    *
    * @param array is the array to iterate/enumerate.
-   * @param start is the index of the first item to iterate/enumerate in <code>array</code>.
-   * @param end is the index of the last item to iterate/enumerate in <code>array</code>.
+   * @param start is the index of the first item to iterate/enumerate in {@code array}.
+   * @param end is the index of the last item to iterate/enumerate in {@code array}.
    */
   public ArrayIterator(E[] array, int start, int end) {
 

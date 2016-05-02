@@ -81,7 +81,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method gets the character used to identify an accept pattern. The default value is <code>'+'</code>.
+   * This method gets the character used to identify an accept pattern. The default value is {@code '+'}.
    *
    * @return the accept character
    */
@@ -99,7 +99,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method gets the character used to identify a deny pattern. The default value is <code>'-'</code>.
+   * This method gets the character used to identify a deny pattern. The default value is {@code '-'}.
    *
    * @return the deny character
    */
@@ -118,7 +118,7 @@ public class FilterRuleChainPlainParser {
 
   /**
    * This method gets the character used to identify a comment. If a line starts with this character it is ignored. The
-   * default value is <code>'#'</code>.
+   * default value is {@code '#'}.
    *
    * @return the comment character
    */
@@ -136,7 +136,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method parses the content of the given <code>reader</code> as {@link FilterRuleChain} as described
+   * This method parses the content of the given {@code reader} as {@link FilterRuleChain} as described
    * {@link FilterRuleChainPlainParser above}.
    *
    * @param reader is where to read from. It will be closed at the end of this method (on success and in an exceptional
@@ -151,7 +151,7 @@ public class FilterRuleChainPlainParser {
   }
 
   /**
-   * This method parses the content of the given <code>reader</code> as {@link FilterRuleChain} as described
+   * This method parses the content of the given {@code reader} as {@link FilterRuleChain} as described
    * {@link FilterRuleChainPlainParser above}.
    *
    * @param reader is where to read from. It will be closed at the end of this method (on success and in an exceptional

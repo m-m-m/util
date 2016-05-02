@@ -815,10 +815,10 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   }
 
   /**
-   * This method composes the given <code>character</code> with this {@link DiacriticalMark}.
+   * This method composes the given {@code character} with this {@link DiacriticalMark}.
    *
    * @param character is the character to compose (e.g. 'a').
-   * @return the composed character (e.g. '&auml;' or '&aacute;') or <code>null</code> if no such composition exists in
+   * @return the composed character (e.g. '&auml;' or '&aacute;') or {@code null} if no such composition exists in
    *         unicode.
    */
   public Character compose(char character) {
@@ -827,12 +827,12 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   }
 
   /**
-   * This method de-composes the given <code>character</code> with this {@link DiacriticalMark}. In other words this
-   * {@link DiacriticalMark} is removed from the given <code>character</code> if it is {@link #compose(char) composed}.
+   * This method de-composes the given {@code character} with this {@link DiacriticalMark}. In other words this
+   * {@link DiacriticalMark} is removed from the given {@code character} if it is {@link #compose(char) composed}.
    * It is the inverse operation of {@link #compose(char)}.
    *
    * @param character is the character to de-compose (e.g. '&auml;' or '&aacute;').
-   * @return the de-composed character (e.g. 'a') or <code>null</code> if the given <code>character</code> does is not
+   * @return the de-composed character (e.g. 'a') or {@code null} if the given {@code character} does is not
    *         {@link #compose(char) composed} with this {@link DiacriticalMark}.
    */
   public Character decompose(char character) {

@@ -110,7 +110,7 @@ public class CliStateTest extends Assert {
   }
 
   /**
-   * This method gets the {@link CliModeCycle} in the hierarchy of the given <code>exception</code>.
+   * This method gets the {@link CliModeCycle} in the hierarchy of the given {@code exception}.
    *
    * @param exception the {@link CliException}
    * @return the {@link CliModeCycle}.

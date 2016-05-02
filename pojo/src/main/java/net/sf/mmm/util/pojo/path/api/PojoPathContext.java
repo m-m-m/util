@@ -37,7 +37,7 @@ public interface PojoPathContext {
    * @see java.util.HashMap
    * @see java.util.WeakHashMap
    *
-   * @return a mutable {@link Map} to use as cache or <code>null</code> to disable caching.
+   * @return a mutable {@link Map} to use as cache or {@code null} to disable caching.
    */
   Map<Object, Object> getCache();
 
@@ -55,7 +55,7 @@ public interface PojoPathContext {
    * Therefore all POJOs traversed by the {@link PojoPathNavigator} are
    * {@link PojoPathRecognizer#recognize(Object, PojoPath) recognized} by the returned object.
    *
-   * @return the {@link PojoPathRecognizer} or <code>null</code> to turn this feature off.
+   * @return the {@link PojoPathRecognizer} or {@code null} to turn this feature off.
    */
   PojoPathRecognizer getRecognizer();
 
@@ -66,7 +66,7 @@ public interface PojoPathContext {
    * registered globally in the {@link PojoPathNavigator} should be stateless and thread-safe, the
    * {@link PojoPathFunction}s provided here may be stateful depending on the usage of this context.
    *
-   * @return the {@link PojoPathFunctionManager} of this context or <code>null</code> if no context-specific
+   * @return the {@link PojoPathFunctionManager} of this context or {@code null} if no context-specific
    *         {@link PojoPathFunction}s should be provided.
    */
   PojoPathFunctionManager getAdditionalFunctionManager();
@@ -75,7 +75,7 @@ public interface PojoPathContext {
    * This method gets an optional {@link ComposedValueConverter} that is used in favor to {@link ComposedValueConverter}
    * registered to the {@link PojoPathNavigator} itself.
    *
-   * @return the {@link ComposedValueConverter} of this context or <code>null</code> if no context-specific
+   * @return the {@link ComposedValueConverter} of this context or {@code null} if no context-specific
    *         {@link ComposedValueConverter} is provided.
    */
   ComposedValueConverter getAdditionalConverter();
@@ -85,7 +85,7 @@ public interface PojoPathContext {
    * the {@link PojoPathNavigator} itself. The {@link PojoFactory} is used to {@link PojoPathMode#CREATE_IF_NULL create}
    * new {@link net.sf.mmm.util.pojo.api.Pojo}s.
    *
-   * @return the {@link PojoFactory} or <code>null</code> if no context-specific {@link PojoFactory} is provided.
+   * @return the {@link PojoFactory} or {@code null} if no context-specific {@link PojoFactory} is provided.
    */
   PojoFactory getPojoFactory();
 

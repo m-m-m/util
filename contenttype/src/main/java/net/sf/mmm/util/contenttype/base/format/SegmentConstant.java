@@ -13,10 +13,9 @@ import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**
- * This class represents a {@link Segment} that has a constant value. The stream
- * data has to contain these {@link #getBytes() bytes} in order to match the
- * according {@link net.sf.mmm.util.contenttype.api.ContentType}.
- * 
+ * This class represents a {@link Segment} that has a constant value. The stream data has to contain these
+ * {@link #getBytes() bytes} in order to match the according {@link net.sf.mmm.util.contenttype.api.ContentType}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -59,7 +58,7 @@ public class SegmentConstant extends Segment {
 
   /**
    * The constructor.
-   * 
+   *
    * @param bytes are the bytes.
    */
   public SegmentConstant(byte... bytes) {
@@ -89,14 +88,12 @@ public class SegmentConstant extends Segment {
   }
 
   /**
-   * This method parses the given <code>bytes</code> from <code>source</code> to
-   * <code>byte[]</code>.
-   * 
-   * @param bytes are the bytes encoded as {@link String} in the form
-   *        <code>HH([-]HH)*</code> where <code>HH</code> is a hex encoded byte
-   *        ([0-9A-F]{2}). Example: "FE-7A-32-BB".
-   * @param source describes where the given <code>bytes</code> origin from.
-   *        This is only used in case of an error for the exception message.
+   * This method parses the given {@code bytes} from {@code source} to {@code byte[]}.
+   *
+   * @param bytes are the bytes encoded as {@link String} in the form {@code HH([-]HH)*} where {@code HH} is a hex
+   *        encoded byte ([0-9A-F]{2}). Example: "FE-7A-32-BB".
+   * @param source describes where the given {@code bytes} origin from. This is only used in case of an error for the
+   *        exception message.
    * @return the converted byte array.
    */
   static byte[] parseBytes(String bytes, String source) {
@@ -122,7 +119,7 @@ public class SegmentConstant extends Segment {
 
   /**
    * This method initializes the internal byte array.
-   * 
+   *
    * @param source describes the source.
    */
   protected void initBytes(StringBuilder source) {
@@ -139,8 +136,8 @@ public class SegmentConstant extends Segment {
       } else if (this.hex != null) {
         this.bytes = parseBytes(this.hex, "hex");
       } else {
-        throw new XmlInvalidException(new NlsParseException(XML_TAG, XML_ATTRIBUTE_HEX + "|"
-            + XML_ATTRIBUTE_STRING, source.toString()));
+        throw new XmlInvalidException(
+            new NlsParseException(XML_TAG, XML_ATTRIBUTE_HEX + "|" + XML_ATTRIBUTE_STRING, source.toString()));
       }
     }
   }
@@ -175,10 +172,9 @@ public class SegmentConstant extends Segment {
   }
 
   /**
-   * This method gets the encoding used to convert a {@link #getString() string
-   * provided in XML} to {@link #getBytes() bytes}. The encoding defaults to
-   * {@link EncodingUtil#ENCODING_UTF_8 UTF-8} if not explicitly set.
-   * 
+   * This method gets the encoding used to convert a {@link #getString() string provided in XML} to {@link #getBytes()
+   * bytes}. The encoding defaults to {@link EncodingUtil#ENCODING_UTF_8 UTF-8} if not explicitly set.
+   *
    * @return the encoding
    */
   public String getEncoding() {

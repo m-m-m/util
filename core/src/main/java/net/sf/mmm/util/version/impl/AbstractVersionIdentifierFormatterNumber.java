@@ -33,9 +33,9 @@ public abstract class AbstractVersionIdentifierFormatterNumber extends AbstractF
    * 
    * @param stringUtil is the {@link StringUtil} instance.
    * @param prefix is the static prefix to append before the number. Will be omitted if the number is
-   *        <code>null</code>.
+   *        {@code null}.
    * @param padding is the padding (minimum number of digits) for the number to format. The default is
-   *        <code>0</code>.
+   *        {@code 0}.
    */
   public AbstractVersionIdentifierFormatterNumber(StringUtil stringUtil, String prefix, int padding) {
 

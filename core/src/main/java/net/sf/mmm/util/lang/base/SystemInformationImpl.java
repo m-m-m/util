@@ -84,9 +84,9 @@ public class SystemInformationImpl implements SystemInformation {
    * @see #getSystemType()
    * 
    * @param osName - see {@link #getSystemName()}.
-   * @param currentSystem - <code>true</code> if the value should be determined for the system and JVM
+   * @param currentSystem - {@code true} if the value should be determined for the system and JVM
    *        currently running (in this case additional system-properties might be evaluated),
-   *        <code>false</code> otherwise.
+   *        {@code false} otherwise.
    * @return the value for {@link #isLimitedDevice()}.
    */
   private static String detectSystemType(String osName, boolean currentSystem) {
@@ -119,9 +119,9 @@ public class SystemInformationImpl implements SystemInformation {
    * 
    * @param osName - see {@link #getSystemName()}.
    * @param osArchitecture - see {@link #getSystemArchitecture()}.
-   * @param currentSystem - <code>true</code> if the value should be determined for the system and JVM
+   * @param currentSystem - {@code true} if the value should be determined for the system and JVM
    *        currently running (in this case additional system-properties might be evaluated),
-   *        <code>false</code> otherwise.
+   *        {@code false} otherwise.
    * @return the value for {@link #isLimitedDevice()}.
    */
   private static boolean detectLimitedDevice(String osName, String osArchitecture, boolean currentSystem) {

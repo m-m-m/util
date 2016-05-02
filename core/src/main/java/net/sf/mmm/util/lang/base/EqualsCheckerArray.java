@@ -75,7 +75,7 @@ public class EqualsCheckerArray extends AbstractEqualsChecker<Object> {
    *
    * @param value1 is the first value to check.
    * @param value2 is the first value to check.
-   * @return <code>true</code> if the given values are considered as equal, <code>false</code> otherwise.
+   * @return {@code true} if the given values are considered as equal, {@code false} otherwise.
    */
   protected boolean isEqualPrimitiveArray(Object value1, Object value2) {
 

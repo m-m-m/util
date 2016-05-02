@@ -20,7 +20,7 @@ public abstract interface NlsBundleWithLookup extends NlsBundle, NlsMessageLooku
    * {@inheritDoc}
    * 
    * This allows generic access to invoke a specific method of your bundle. E.g. assume you have an interface
-   * <code>NlsBundleMyExampleRoot</code> extending {@link NlsMessageLookup} that declares the following method:
+   * {@code NlsBundleMyExampleRoot} extending {@link NlsMessageLookup} that declares the following method:
    * 
    * <pre>
    * &#064;NlsBundleMessage(&quot;The object \&quot;{object}\&quot; is null!&quot;)
@@ -36,7 +36,7 @@ public abstract interface NlsBundleWithLookup extends NlsBundle, NlsMessageLooku
    * {@link NlsMessage} message = myBundle.getMessage("errorArgumentNull", parameters);
    * </pre>
    * 
-   * This would have the same result as <code>myBundle.errorArgumentNull(myObject)</code>.
+   * This would have the same result as {@code myBundle.errorArgumentNull(myObject)}.
    */
   // ATTENTION: parameter names must NOT be changed!
   NlsMessage getMessage(String methodName, Map<String, Object> nlsArguments);

@@ -106,7 +106,7 @@ public class TechnicalErrorUserException extends NlsRuntimeException {
    * converts it to such.
    *
    * @param exception is the {@link Throwable} to convert.
-   * @return the {@link NlsRuntimeException} with {@link NlsThrowable#isForUser()} returning <code>true</code> .
+   * @return the {@link NlsRuntimeException} with {@link NlsThrowable#isForUser()} returning {@code true} .
    */
   public static NlsRuntimeException getOrCreateUserException(Throwable exception) {
 

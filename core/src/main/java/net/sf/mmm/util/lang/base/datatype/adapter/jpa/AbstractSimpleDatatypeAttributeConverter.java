@@ -13,10 +13,10 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * {@link javax.persistence.Entity entities}, you need to:
  * <ol>
  * <li>Create a converter implementation derived from {@link AbstractSimpleDatatypeAttributeConverter}.</li>
- * <li>Annotate that converter implementation with <code>{@literal @Converter(autoApply = true)}</code></li>
+ * <li>Annotate that converter implementation with {@code @Converter(autoApply = true)}</li>
  * <li>Ensure that the package containing your converter(s) will actually be scanned. When using spring this
  * is configured in
- * <code>org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.setPackagesToScan</code>.</li>
+ * {@code org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.setPackagesToScan}.</li>
  * </ol>
  *
  * For an example how to implement such a converter see e.g. {@link VersionIdentifierAttributeConverter}.

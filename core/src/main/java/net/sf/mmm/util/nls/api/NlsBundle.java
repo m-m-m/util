@@ -15,18 +15,18 @@ package net.sf.mmm.util.nls.api;
  * (google web toolkit) clients, we had to define the following convention:<br>
  * <ul>
  * <li>For your bundle you define a {@link Package} and a base name (e.g.
- * <code>my.package.NlsBundleExample</code>). This namespace must not be occupied by an existing type.</li>
+ * {@code my.package.NlsBundleExample}). This namespace must not be occupied by an existing type.</li>
  * <li>The interface you create and extend from {@link NlsBundle} has to be named using the base name followed
- * by the suffix {@link #INTERFACE_NAME_SUFFIX Root} (e.g. <code>my.package.NlsBundleExampleRoot</code>). This
+ * by the suffix {@link #INTERFACE_NAME_SUFFIX Root} (e.g. {@code my.package.NlsBundleExampleRoot}). This
  * interface defines the {@link NlsMessage}es for the {@link java.util.Locale#ROOT root locale} what is the
  * reason for the suffix.</li>
- * <li>Your localized <code>*.properties</code> files have to be named using the base name followed by the
+ * <li>Your localized {@code *.properties} files have to be named using the base name followed by the
  * according locale suffix as for a regular {@link java.util.ResourceBundle} (e.g.
- * <code>my/package/NlsBundleExample_de.properties</code> or
- * <code>my/package/NlsBundleExample_zh_HK.properties</code>). To override the message texts for the root
+ * {@code my/package/NlsBundleExample_de.properties} or
+ * {@code my/package/NlsBundleExample_zh_HK.properties}). To override the message texts for the root
  * locale (e.g. as customization of a {@link NlsBundle} provided by a third-party library) you could also
  * create a properties file without the locale suffix (e.g.
- * <code>my/package/NlsBundleExample.properties</code>)</li>
+ * {@code my/package/NlsBundleExample.properties})</li>
  * </ul>
  * Here is an example:
  *
@@ -38,9 +38,9 @@ package net.sf.mmm.util.nls.api;
  * }
  * </pre>
  *
- * For localization you create <code>*.properties</code> files (see
- * <code>net.sf.mmm.util.nls.base.ResourceBundleSynchronizer</code>) in the same package for each supported
- * {@link java.util.Locale}. In the example above e.g. <code>NlsBundleMyname_de.properties</code> with this
+ * For localization you create {@code *.properties} files (see
+ * {@code net.sf.mmm.util.nls.base.ResourceBundleSynchronizer}) in the same package for each supported
+ * {@link java.util.Locale}. In the example above e.g. {@code NlsBundleMyname_de.properties} with this
  * content:
  *
  * <pre>

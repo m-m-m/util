@@ -227,8 +227,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   }
 
   /**
-   * This method puts the given <code>phase</code> in the given <code>map</code> using normalized variants of the given
-   * <code>key</code>.
+   * This method puts the given {@code phase} in the given {@code map} using normalized variants of the given
+   * {@code key}.
    *
    * @param map is the {@link #getPhaseMap()}.
    * @param key is the key.
@@ -427,7 +427,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
    * @param formatPattern is the format pattern.
    * @param infixBuffer is a {@link StringBuilder} containing the current infix.
    * @param status is the {@link FormatPatternStatus}.
-   * @return the sub {@link Formatter} or <code>null</code> to continue parsing the infix.
+   * @return the sub {@link Formatter} or {@code null} to continue parsing the infix.
    */
   protected Formatter<VersionIdentifier> parseSubFormatter(CharSequenceScanner scanner, String formatPattern,
       StringBuilder infixBuffer, FormatPatternStatus status) {
@@ -555,7 +555,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
    */
   protected static class FormatPatternStatus {
 
-    /** <code>true</code> if in open brace ('('), <code>false</code> otherwise. */
+    /** {@code true} if in open brace ('('), {@code false} otherwise. */
     private boolean inBrace;
 
     /** Counter for version segments in format pattern. */
@@ -571,7 +571,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
     private int snapshotCount;
 
     /**
-     * @return <code>true</code> if valid for strict mode, <code>false</code> otherwise.
+     * @return {@code true} if valid for strict mode, {@code false} otherwise.
      */
     public boolean isStrict() {
 

@@ -16,10 +16,10 @@ public abstract interface AttributeReadTitle<TITLE> {
   /**
    * This method gets the title of this object. <br>
    * <b>NOTE:</b><br>
-   * For generic usage you need to use {@link Object#toString()} of the result if NOT <code>null</code>
+   * For generic usage you need to use {@link Object#toString()} of the result if NOT {@code null}
    * 
-   * @return the title or <code>null</code> if not set. The {@link Object#toString() string-representation} of
-   *         the result (if NOT <code>null</code>) needs to be suitable for end-users.
+   * @return the title or {@code null} if not set. The {@link Object#toString() string-representation} of
+   *         the result (if NOT {@code null}) needs to be suitable for end-users.
    */
   TITLE getTitle();
 

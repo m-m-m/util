@@ -15,7 +15,7 @@ import net.sf.mmm.util.io.api.ComposedByteBuffer;
 public interface DetectorStreamBuffer extends ComposedByteBuffer {
 
   /**
-   * This method removes the number of bytes given by <code>byteCount</code> from the stream starting at the
+   * This method removes the number of bytes given by {@code byteCount} from the stream starting at the
    * current position.
    * 
    * @see #skip(long)
@@ -27,7 +27,7 @@ public interface DetectorStreamBuffer extends ComposedByteBuffer {
   void remove(long byteCount);
 
   /**
-   * This method skips the number of bytes given by <code>byteCount</code> in the stream starting at the
+   * This method skips the number of bytes given by {@code byteCount} in the stream starting at the
    * current position. The given number of bytes will be untouched in stream (queued for the next
    * {@link DetectorStreamProcessor processor} in the chain).
    * 
@@ -36,7 +36,7 @@ public interface DetectorStreamBuffer extends ComposedByteBuffer {
    * @param byteCount is the number of bytes to ignore. This value can be greater than the currently
    *        {@link #getBytesAvailable() available bytes}. You may supply {@link Long#MAX_VALUE} to ignore to
    *        the end of the stream.
-   * @return the given <code>byteCount</code>.
+   * @return the given {@code byteCount}.
    */
   long skip(long byteCount);
 
@@ -57,7 +57,7 @@ public interface DetectorStreamBuffer extends ComposedByteBuffer {
   void insert(byte... data);
 
   /**
-   * This method inserts the given <code>data</code> at the current position into the stream.
+   * This method inserts the given {@code data} at the current position into the stream.
    * 
    * @param data is a {@link ByteArray} with the data to insert.
    */

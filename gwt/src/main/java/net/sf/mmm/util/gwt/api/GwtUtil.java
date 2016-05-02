@@ -39,7 +39,7 @@ public class GwtUtil {
   }
 
   /**
-   * Shorthand for <code>{@link #getId(Element) getId}(widget.getElement())</code>.
+   * Shorthand for {@link #getId(Element) getId(widget.getElement())}.
    * 
    * @param widget is the {@link Widget} to get the ID from.
    * @return the (unique) ID of the {@link Widget}. Created if not set.

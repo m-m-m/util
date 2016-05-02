@@ -55,9 +55,9 @@ public interface Api {
    * This is used to mark interfaces of the {@link Api API} that may potentially be <em>extended</em>. With
    * extended we mean that new methods will be added. This is no problem for the user of the interface but for
    * implementors. To prevent implementors from incompatibilities on updates of components provided by this
-   * project, we provide abstract base implementations in the <code>base</code> packages that are located as
-   * siblings of the <code>api</code> packages. Typically that {@link Class} is named like the interface with
-   * the prefix <code>Abstract</code>. You are strongly encouraged to extend these base implementations rather
+   * project, we provide abstract base implementations in the {@code base} packages that are located as
+   * siblings of the {@code api} packages. Typically that {@link Class} is named like the interface with
+   * the prefix {@code Abstract}. You are strongly encouraged to extend these base implementations rather
    * than directly implementing the interface to gain compatibility in case of an extension. The latter is
    * still allowed but you have to be aware of the consequences that you may have to fix compile errors after
    * upgrading and your code may NOT work across different releases. <br>

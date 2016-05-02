@@ -20,7 +20,7 @@ class JoiningNodeIterator extends NodeIterator {
   /** The mode of comparison. */
   private final XmlCompareMode compareMode;
 
-  /** Buffer for lookahead or <code>null</code>. */
+  /** Buffer for lookahead or {@code null}. */
   private Node next;
 
   /**

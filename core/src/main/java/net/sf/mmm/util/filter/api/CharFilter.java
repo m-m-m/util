@@ -6,7 +6,7 @@ package net.sf.mmm.util.filter.api;
  * This is the interface for a filter that {@link #accept(char) decides} if a given character is acceptable or
  * should be filtered. <br>
  * It is used by {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} and avoids conversion of
- * <code>char</code> to {@link Character} for performance reasons. In other cases please prefer to use
+ * {@code char} to {@link Character} for performance reasons. In other cases please prefer to use
  * {@link Filter}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -135,10 +135,10 @@ public interface CharFilter {
   };
 
   /**
-   * This method determines if the given character <code>c</code> should be accepted.
+   * This method determines if the given character {@code c} should be accepted.
    *
    * @param c is the character to check.
-   * @return <code>true</code> if the given character <code>c</code> is acceptable, <code>false</code> if it
+   * @return {@code true} if the given character {@code c} is acceptable, {@code false} if it
    *         should be filtered.
    */
   boolean accept(char c);

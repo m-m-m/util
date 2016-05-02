@@ -25,7 +25,7 @@ public interface ReadableMapProperty<K, V>
     extends ReadableContainerProperty<ObservableMap<K, V>>, ObservableMapValue<K, V> {
 
   /**
-   * @return the result of {@link #getValue()} but an empty {@link Map} instead of <code>null</code>.
+   * @return the result of {@link #getValue()} but an empty {@link Map} instead of {@code null}.
    */
   default ObservableMap<K, V> getValueNotNull() {
 

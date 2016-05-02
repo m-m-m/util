@@ -501,7 +501,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     /**
      * This method determines if this transferrer was {@link #stop() stopped}.
      * 
-     * @return <code>true</code> if stopped, <code>false</code> otherwise.
+     * @return {@code true} if stopped, {@code false} otherwise.
      */
     public final boolean isStopped() {
 
@@ -511,7 +511,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     /**
      * This method determines if the transfer has been completed successfully.
      * 
-     * @return <code>true</code> if successfully completed, <code>false</code> if still running,
+     * @return {@code true} if successfully completed, {@code false} if still running,
      *         {@link #isStopped() stopped} or an exception occurred.
      */
     public final boolean isCompleted() {
@@ -537,20 +537,20 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
    */
   protected abstract class BaseTransferrer<BUFFER> extends AbstractAsyncTransferrer {
 
-    /** The callback or <code>null</code>. */
+    /** The callback or {@code null}. */
     private final TransferCallback callback;
 
     /**
-     * <code>true</code> if {@link #getDestination() destination} should be closed.
+     * {@code true} if {@link #getDestination() destination} should be closed.
      */
     private final boolean keepDestinationOpen;
 
     /**
      * The constructor.
      * 
-     * @param callback is the callback or <code>null</code>.
-     * @param keepDestinationOpen <code>true</code> if the {@link #getDestination() destination} should be
-     *        closed, <code>false</code> otherwise.
+     * @param callback is the callback or {@code null}.
+     * @param keepDestinationOpen {@code true} if the {@link #getDestination() destination} should be
+     *        closed, {@code false} otherwise.
      */
     public BaseTransferrer(TransferCallback callback, boolean keepDestinationOpen) {
 
@@ -693,8 +693,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
      * 
      * @param source is {@link InputStream} to read from.
      * @param destination the {@link OutputStream} to write to.
-     * @param keepDestinationOpen <code>true</code> if the <code>destination</code> should be closed.
-     * @param callback is the callback or <code>null</code>.
+     * @param keepDestinationOpen {@code true} if the {@code destination} should be closed.
+     * @param callback is the callback or {@code null}.
      */
     public StreamTransferrer(InputStream source, OutputStream destination, boolean keepDestinationOpen,
         TransferCallback callback) {
@@ -769,8 +769,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
      * 
      * @param source is {@link Reader} to read from.
      * @param destination the {@link Writer} to write to.
-     * @param keepDestinationOpen <code>true</code> if the <code>destination</code> should be closed.
-     * @param callback is the callback or <code>null</code>.
+     * @param keepDestinationOpen {@code true} if the {@code destination} should be closed.
+     * @param callback is the callback or {@code null}.
      */
     public ReaderTransferrer(Reader source, Writer destination, boolean keepDestinationOpen, TransferCallback callback) {
 

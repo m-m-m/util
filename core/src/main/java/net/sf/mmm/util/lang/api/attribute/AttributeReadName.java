@@ -12,7 +12,7 @@ package net.sf.mmm.util.lang.api.attribute;
 public abstract interface AttributeReadName {
 
   /**
-   * @return the name of this object or <code>null</code> if not set. The name is used to represent the object and might
+   * @return the name of this object or {@code null} if not set. The name is used to represent the object and might
    *         be displayed to end-users.
    */
   String getName();

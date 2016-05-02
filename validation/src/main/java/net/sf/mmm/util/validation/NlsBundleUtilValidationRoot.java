@@ -59,7 +59,7 @@ public interface NlsBundleUtilValidationRoot extends NlsBundle {
    * @param value is the invalid value.
    * @param comparator is the {@link net.sf.mmm.util.lang.api.CompareOperator}.
    * @param value2 is the value to compare to (second argument).
-   * @param source is the source of the value or <code>null</code> if NOT available.
+   * @param source is the source of the value or {@code null} if NOT available.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value needs to be {comparator} the value from \"{source}\" ({value2})!")

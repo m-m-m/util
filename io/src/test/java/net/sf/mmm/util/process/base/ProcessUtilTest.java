@@ -160,7 +160,7 @@ public class ProcessUtilTest {
     private volatile boolean closed;
 
     /**
-     * @return <code>true</code> if this stream was {@link #close() closed}.
+     * @return {@code true} if this stream was {@link #close() closed}.
      */
     public boolean isClosed() {
 
@@ -193,7 +193,7 @@ public class ProcessUtilTest {
     private volatile boolean closed;
 
     /**
-     * @return <code>true</code> if this stream was {@link #close() closed}.
+     * @return {@code true} if this stream was {@link #close() closed}.
      */
     public boolean isClosed() {
 

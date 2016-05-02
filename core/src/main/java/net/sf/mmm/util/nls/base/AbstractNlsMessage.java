@@ -36,7 +36,7 @@ public abstract class AbstractNlsMessage implements NlsMessage {
    * This method gets the {@link #getArgument(String) Argument} for the given index.
    *
    * @param index is the index of the requested argument.
-   * @return the argument at the given index or <code>null</code> if no such argument exists.
+   * @return the argument at the given index or {@code null} if no such argument exists.
    * @deprecated use {@link #getArgument(String)}
    */
   @Deprecated

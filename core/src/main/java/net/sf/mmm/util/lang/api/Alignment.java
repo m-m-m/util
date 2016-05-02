@@ -240,7 +240,7 @@ public enum Alignment implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link Alignment} with the given <code>{@link #getValue() value}</code>.
+   * This method gets the {@link Alignment} with the given {@link #getValue() value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link Alignment}.
    * @return the requested {@link Alignment}.
@@ -313,7 +313,7 @@ public enum Alignment implements SimpleDatatype<String> {
   public abstract Alignment getMirrored();
 
   /**
-   * @return the corresponding {@link Direction} or <code>null</code> for {@link #CENTER}.
+   * @return the corresponding {@link Direction} or {@code null} for {@link #CENTER}.
    * @since 4.0.0
    */
   public Direction toDirection() {
@@ -345,7 +345,7 @@ public enum Alignment implements SimpleDatatype<String> {
   /**
    * This is the inverse operation for {@link #toDirection()}.
    * 
-   * @param direction is the {@link Direction}. May be <code>null</code> for {@link #CENTER}.
+   * @param direction is the {@link Direction}. May be {@code null} for {@link #CENTER}.
    * @return the corresponding {@link Alignment}.
    * @since 4.0.0
    */

@@ -84,7 +84,7 @@ public class NlsBundleHelper extends AbstractLoggableObject {
    * This method gets the {@link NlsBundleMessage message} of an {@link NlsBundle}-method.
    *
    * @param method is the {@link Method} of a {@link NlsBundle}.
-   * @return the {@link NlsBundleMessage#value() bundle message} or <code>null</code> if not present.
+   * @return the {@link NlsBundleMessage#value() bundle message} or {@code null} if not present.
    * @since 4.0.0
    */
   public String getMessage(Method method) {
@@ -100,7 +100,7 @@ public class NlsBundleHelper extends AbstractLoggableObject {
    * Converts the given {@link NlsBundle} class to a {@link ResourceBundle}.
    *
    * @param bundleClass is the class reflecting a {@link NlsBundle}.
-   * @return a {@link ResourceBundle} with the key/value pairs of the given <code>bundleClass</code> for
+   * @return a {@link ResourceBundle} with the key/value pairs of the given {@code bundleClass} for
    *         {@link java.util.Locale#ROOT}.
    * @since 4.0.0
    */
@@ -122,10 +122,10 @@ public class NlsBundleHelper extends AbstractLoggableObject {
    * This method determines if the given {@link Method} is a regular {@link NlsBundle}-method.
    *
    * @param method the {@link Method} to check.
-   * @param ignoreIllegalMethods - <code>true</code> if illegal methods (non NlsBundleMethods other than those defined
-   *        by {@link Object}) should be ignored, <code>false</code> if they should cause an exception.
-   * @return <code>true</code> if the given {@link Method} is a legal {@link NlsBundle} method, <code>false</code>
-   *         otherwise (e.g. for <code>toString()</code>).
+   * @param ignoreIllegalMethods - {@code true} if illegal methods (non NlsBundleMethods other than those defined
+   *        by {@link Object}) should be ignored, {@code false} if they should cause an exception.
+   * @return {@code true} if the given {@link Method} is a legal {@link NlsBundle} method, {@code false}
+   *         otherwise (e.g. for {@code toString()}).
    */
   public boolean isNlsBundleMethod(Method method, boolean ignoreIllegalMethods) {
 

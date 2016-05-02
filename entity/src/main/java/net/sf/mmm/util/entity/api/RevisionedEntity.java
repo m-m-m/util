@@ -19,9 +19,9 @@ package net.sf.mmm.util.entity.api;
  * <b>ATTENTION:</b><br>
  * Due to the lack of multi-inheritance and for simplicity one will typically implement this interface in
  * base-classes of the data-model. However, maybe only some classes of the hierarchy (or even not at all) are
- * actually revision controlled. In case of envers you can see this by looking for <code>&#64;Audited</code>
- * annotations. Also in case of <code>mmm-persistence</code> you will notice this by looking at the
- * <code>DAO</code>.
+ * actually revision controlled. In case of envers you can see this by looking for {@code @Audited}
+ * annotations. Also in case of {@code mmm-persistence} you will notice this by looking at the
+ * {@code DAO}.
  *
  * @param <ID> is the type of the {@link #getId() primary key}.
  *
@@ -37,10 +37,10 @@ public interface RevisionedEntity<ID> extends GenericEntity<ID> {
 
   /**
    * This method gets the revision of this entity. The {@link RevisionedEntity#LATEST_REVISION latest
-   * revision} of an entity will always return <code>null</code>. Otherwise this object is a
+   * revision} of an entity will always return {@code null}. Otherwise this object is a
    * <em>historic entity</em> and it will be read-only so modifications are NOT permitted.
    *
-   * @return the revision or {@link #LATEST_REVISION} (<code>null</code>) if this is the latest revision.
+   * @return the revision or {@link #LATEST_REVISION} ({@code null}) if this is the latest revision.
    */
   Number getRevision();
 

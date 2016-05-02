@@ -11,8 +11,8 @@ package net.sf.mmm.util.pojo.api;
  * limited by such restrictions. However the following conventions should be considered:
  * <ul>
  * <li>You should NOT have two setter-methods with the same name in the same class. If you have
- * <code>setFoo(Foo foo)</code> do NOT add <code>setFoo(String foo)</code>. Simply add
- * <code>setFooAsString(String fooAsString)</code> instead.</li>
+ * {@code setFoo(Foo foo)} do NOT add {@code setFoo(String foo)}. Simply add
+ * {@code setFooAsString(String fooAsString)} instead.</li>
  * <li>A {@link Pojo} should have a public non-argument constructor. Otherwise consider
  * {@link net.sf.mmm.util.lang.api.Datatype} or use {@link PojoFactory} to provide custom-logic to the
  * implementation in order to create instances of your {@link Pojo} with the utilities offered here.</li>

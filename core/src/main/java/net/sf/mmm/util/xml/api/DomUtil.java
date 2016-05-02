@@ -73,8 +73,8 @@ public interface DomUtil {
    * 
    * @param xmlNode is the "root" node of the XML tree to write (e.g. the Document or just a single Element).
    * @param outputStream is where the serialized XML is written to.
-   * @param indent - <code>true</code> if the XML should be indented (automatically add line-breaks before
-   *        opening tags), <code>false</code> otherwise.
+   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before
+   *        opening tags), {@code false} otherwise.
    * @throws XmlException if XML is inconsistent.
    */
   void writeXml(Node xmlNode, OutputStream outputStream, boolean indent) throws XmlException;
@@ -84,8 +84,8 @@ public interface DomUtil {
    * 
    * @param xmlNode is the "root" node of the XML tree to write (e.g. the Document or just a single Element).
    * @param writer is where the serialized XML is written to.
-   * @param indent - <code>true</code> if the XML should be indented (automatically add line-breaks before
-   *        opening tags), <code>false</code> otherwise.
+   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before
+   *        opening tags), {@code false} otherwise.
    * @throws XmlException if XML is inconsistent.
    */
   void writeXml(Node xmlNode, Writer writer, boolean indent) throws XmlException;
@@ -95,16 +95,16 @@ public interface DomUtil {
    * 
    * @param source is a source (e.g. DomSource, etc.)
    * @param result is a result (e.g. DomResult, StreamResult, etc.)
-   * @param indent - <code>true</code> if the XML should be indented (automatically add line-breaks before
-   *        opening tags), <code>false</code> otherwise.
+   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before
+   *        opening tags), {@code false} otherwise.
    * @throws XmlException if the transformation failed (e.g. invalid XML).
    */
   void transformXml(Source source, Result result, boolean indent) throws XmlException;
 
   /**
-   * This method gets the local name of a given <code>element</code>. This is the name of the element without
+   * This method gets the local name of a given {@code element}. This is the name of the element without
    * any namespace prefix. <br>
-   * The method {@link Node#getLocalName()} will return <code>null</code> if the {@link Node} has no
+   * The method {@link Node#getLocalName()} will return {@code null} if the {@link Node} has no
    * {@link Node#getNamespaceURI() namespace}. Therefore this method makes your life a little easier.
    * 
    * @param node the {@link Node} to get the local name from.
@@ -120,7 +120,7 @@ public interface DomUtil {
    * @param node1 is the first {@link Node} to compare.
    * @param node2 is the second {@link Node} to compare.
    * @param mode is the {@link XmlCompareMode mode} that determines how to do the comparison.
-   * @return <code>true</code> if the XML fragment represented by the given nodes equals, <code>false</code>
+   * @return {@code true} if the XML fragment represented by the given nodes equals, {@code false}
    *         otherwise.
    */
   boolean isEqual(Node node1, Node node2, XmlCompareMode mode);
@@ -131,7 +131,7 @@ public interface DomUtil {
    * @see #getFirstElement(NodeList, String)
    * 
    * @param nodeList is the node-list (potentially) containing the requested element.
-   * @return the first element in the node-list or <code>null</code>, if the node-list contains NO element.
+   * @return the first element in the node-list or {@code null}, if the node-list contains NO element.
    */
   Element getFirstElement(NodeList nodeList);
 
@@ -139,33 +139,33 @@ public interface DomUtil {
    * This method gets the first element of the given node-list with the specified tag-name.
    * 
    * @param nodeList is the node-list (potentially) containing the requested element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or <code>null</code>
+   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null}
    *        if any element is acceptable.
    * @return the first element in the node-list with the given tag-name (or at all if tag-name is
-   *         <code>null</code>). If no such element exists in the node-list, <code>null</code> is returned.
+   *         {@code null}). If no such element exists in the node-list, {@code null} is returned.
    */
   Element getFirstElement(NodeList nodeList, String tagName);
 
   /**
-   * This method gets the first child-element of the given <code>element</code> with the specified
-   * <code>tagName</code>.
+   * This method gets the first child-element of the given {@code element} with the specified
+   * {@code tagName}.
    * 
    * @param element is the element (potentially) containing the requested child-element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or <code>null</code>
+   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null}
    *        if any element is acceptable.
    * @return the first element in the node-list with the given tag-name (or at all if tag-name is
-   *         <code>null</code>). If no such element exists in the node-list, <code>null</code> is returned.
+   *         {@code null}). If no such element exists in the node-list, {@code null} is returned.
    */
   Element getFirstChildElement(Element element, String tagName);
 
   /**
-   * This method gets the value of the <code>attribute</code> from the given <code>element</code> as a boolean
+   * This method gets the value of the {@code attribute} from the given {@code element} as a boolean
    * value.
    * 
    * @param element is the element potentially containing the requested boolean attribute.
    * @param attribute is the name of the requested attribute.
    * @param defaultValue is the default returned if the attribute is NOT present.
-   * @return the value of the specified <code>attribute</code> or the <code>defaultValue</code> if the
+   * @return the value of the specified {@code attribute} or the {@code defaultValue} if the
    *         attribute is NOT present.
    * @throws IllegalArgumentException if the value of the specified attribute does NOT represent a boolean
    *         value.
@@ -200,14 +200,14 @@ public interface DomUtil {
    * between the opening and the closing tag of the element including the text of CDATA sections. The text of
    * child elements is only appended according to the given depth. If the depth is less than 1, child elements
    * are ignored, if equal to 1, the text of child elements is included without their child elements. For an
-   * infinite depth use <code>Integer.MAX_VALUE</code>. E.g. for the a element <code>a</code> in <br>
+   * infinite depth use {@code Integer.MAX_VALUE}. E.g. for the a element {@code a} in <br>
    * 
    * <pre>
-   * <code>&lt;a&gt;123&lt;b/&gt;4&lt;c&gt;5&lt;d&gt;6&lt;/d&gt;&lt;/c&gt;&lt;![CDATA[7]]&gt;8&lt;/a&gt;</code>
+   * {@code <a>123<b/>4<c>5<d>6</d></c><![CDATA[7]]>8</a>}
    * </pre>
    * 
    * <br>
-   * the call of <code>getNodeText(a, buffer, depth)</code> will append the following text to the buffer
+   * the call of {@code getNodeText(a, buffer, depth)} will append the following text to the buffer
    * according to the given depth.
    * <ol start="0">
    * <li>"123478"</li>
@@ -223,14 +223,14 @@ public interface DomUtil {
   void getNodeText(Node node, Appendable buffer, int depth);
 
   /**
-   * This method requires the first child-element of the given <code>element</code> with the specified
-   * <code>tagName</code>.
+   * This method requires the first child-element of the given {@code element} with the specified
+   * {@code tagName}.
    * 
    * @param element is the element (potentially) containing the requested child-element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or <code>null</code>
+   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null}
    *        if any element is acceptable.
    * @return the first element in the node-list with the given tag-name (or at all if tag-name is
-   *         <code>null</code>).
+   *         {@code null}).
    * @throws IllegalArgumentException if the requested child element does NOT exist.
    */
   Element requireFirstChildElement(Element element, String tagName) throws IllegalArgumentException;

@@ -4,7 +4,7 @@
  * Provides the API for generic handling of values.
  * <a name="documentation"></a><h2>Value-Util API</h2>
  * When reading values from sources like configuration data or user input you
- * always need to handle failure situations. The value can be <code>null</code>
+ * always need to handle failure situations. The value can be {@code null}
  * and often has to be converted to a specific type (e.g. from
  * {@link java.lang.String} to {@link java.lang.Integer}) but may have an
  * invalid format. If you write this sort of code again and again you get tired

@@ -14,8 +14,8 @@
  * <b>NOTE:</b><br>
  * For high performance IO you should have a look at <a href="http://netty.io/">netty</a><br>
  * <b>ATTENTION:</b><br>
- * The most types from this package have been moved from <code>mmm-util-core</code> (from 4.0.0 to 5.0.0) to
- * <code>mmm-util-io</code> (1.0.0).
+ * The most types from this package have been moved from {@code mmm-util-core} (from 4.0.0 to 5.0.0) to
+ * {@code mmm-util-io} (1.0.0).
  */
 package net.sf.mmm.util.io.api;
 

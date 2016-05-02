@@ -19,17 +19,17 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 public interface PojoDescriptorGeneratorConfiguration {
 
   /**
-   * This method determines if the given <code>type</code> will be supported and a
+   * This method determines if the given {@code type} will be supported and a
    * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor} implementation shall be generated. <br>
    * <b>ATTENTION:</b><br>
    * You need to require some base class or marker-interface for your {@link net.sf.mmm.util.pojo.api.Pojo}s.
    * Otherwise there is way too much clutter generated and your web-application will grow too big. So never
-   * consider to return <code>true</code> for every given type.
+   * consider to return {@code true} for every given type.
    * 
    * @param type is the {@link net.sf.mmm.util.pojo.api.Pojo} to check.
    * @param typeOracle is the {@link TypeOracle} that may be used to {@link TypeOracle#findType(String)
    *        resolve} additional types (e.g. a marker interface).
-   * @return <code>true</code> if the given <code>type</code> is supported, <code>false</code> otherwise.
+   * @return {@code true} if the given {@code type} is supported, {@code false} otherwise.
    */
   boolean isPojoTypeSupported(JClassType type, TypeOracle typeOracle);
 
@@ -41,7 +41,7 @@ public interface PojoDescriptorGeneratorConfiguration {
    *        resolve} additional types (e.g. a marker interface).
    * @return the direct {@link JClassType#isAssignableFrom(JClassType) super-type} (typically
    *         {@link JClassType#getSuperclass()}) that is still
-   *         {@link #isPojoTypeSupported(JClassType, TypeOracle) supported} or <code>null</code> if no such
+   *         {@link #isPojoTypeSupported(JClassType, TypeOracle) supported} or {@code null} if no such
    *         type exists.
    */
   JClassType getSupportedSuperType(JClassType type, TypeOracle typeOracle);

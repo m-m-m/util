@@ -14,7 +14,7 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
  * component is generic support for enumerations of any kind. This may e.g. be used for user-interfaces in
  * radio-groups, drop-downs, combo-boxes, or the like. More advanced cases are implementations that
  * dynamically load the {@link #getEnumValues(EnumDefinition) enum values} from a file, database or a service.
- * Within <code>mmm-util-core</code> you will only find simple implementations of this interface. Dynamic
+ * Within {@code mmm-util-core} you will only find simple implementations of this interface. Dynamic
  * enumerations are provided by higher-level components of the project.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -42,7 +42,7 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
   Iterator<EnumDefinition<?, ?>> getEnumDefinitions();
 
   /**
-   * This method gets the {@link EnumDefinition} with the given <code>key</code>. To get the default
+   * This method gets the {@link EnumDefinition} with the given {@code key}. To get the default
    * {@link EnumDefinition} for a particular {@link EnumDefinition#getEnumType() enum type} you should use
    * {@link #getEnumDefinition(Class)} instead. However, for the same enum type multiple
    * {@link EnumDefinition}s can exists. The default definition should have the {@link Class#getName()
@@ -56,7 +56,7 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
   EnumDefinition<?, ?> getEnumDefinition(String key) throws ObjectNotFoundException;
 
   /**
-   * This method gets the {@link EnumDefinition} with the given <code>enumType</code>.
+   * This method gets the {@link EnumDefinition} with the given {@code enumType}.
    *
    * @param <TYPE> is the generic for the {@link EnumDefinition#getEnumType() enum type}.
    *
@@ -67,7 +67,7 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
   <TYPE> EnumDefinition<TYPE, ?> getEnumDefinition(Class<TYPE> enumType) throws ObjectNotFoundException;
 
   /**
-   * This method gets the {@link EnumDefinition} with the given <code>enumType</code>.
+   * This method gets the {@link EnumDefinition} with the given {@code enumType}.
    *
    * @param <CATEGORY> is the generic for the {@link EnumDefinition#getCategory() category}.
    * @param <ENUM> is the generic for the {@link EnumDefinition#getEnumType() enum type}.
@@ -84,8 +84,8 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
    * {@link #getEnumValues(EnumDefinition) enum values} can be retrieved.
    *
    * @param enumDefinition is the {@link EnumDefinition} to check.
-   * @return <code>true</code> if the {@link #getEnumValues(EnumDefinition) enum values} for the given
-   *         {@link EnumDefinition} are available (already loaded / in cache), <code>false</code> otherwise.
+   * @return {@code true} if the {@link #getEnumValues(EnumDefinition) enum values} for the given
+   *         {@link EnumDefinition} are available (already loaded / in cache), {@code false} otherwise.
    */
   boolean isAvailable(EnumDefinition<?, ?> enumDefinition);
 
@@ -126,19 +126,19 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
 
   /**
    * This method gets the {@link EnumType}-instance of the given {@link EnumDefinition} identified by the
-   * given <code>value</code>.
+   * given {@code value}.
    *
    * @param <ENUM> is the generic for the {@link EnumDefinition#getEnumType() enum type}.
    *
    * @param enumDefinition is the {@link EnumDefinition} for which the value is requested.
    * @param value is the {@link Formatter#format(Object) string representation} of the requested
    *        {@link EnumType} instance based on {@link EnumDefinition#getFormatter()}.
-   * @param required - <code>true</code> if the requested {@link EnumType}-instance is required,
-   *        <code>false</code> otherwise.
-   * @return the {@link EnumType}-instance. Will be <code>null</code> if <code>value</code> is
-   *         <code>null</code> or if <code>required</code> is <code>false</code> and no such {@link EnumType}
+   * @param required - {@code true} if the requested {@link EnumType}-instance is required,
+   *        {@code false} otherwise.
+   * @return the {@link EnumType}-instance. Will be {@code null} if {@code value} is
+   *         {@code null} or if {@code required} is {@code false} and no such {@link EnumType}
    *         instance exists.
-   * @throws IllegalCaseException if <code>required</code> is <code>true</code> and no such {@link EnumType}
+   * @throws IllegalCaseException if {@code required} is {@code true} and no such {@link EnumType}
    *         instance exists.
    */
   <ENUM> ENUM getEnumValue(EnumDefinition<ENUM, ?> enumDefinition, String value, boolean required)
@@ -146,19 +146,19 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
 
   /**
    * This method gets the {@link EnumType}-instance of the given {@link EnumDefinition} identified by the
-   * given <code>value</code>.
+   * given {@code value}.
    *
    * @param <ENUM> is the generic for the {@link EnumDefinition#getEnumType() enum type}.
    *
    * @param enumType is the {@link EnumType} for which the value is requested.
    * @param value is the {@link Formatter#format(Object) string representation} of the requested
    *        {@link EnumType} instance based on {@link EnumDefinition#getFormatter()}.
-   * @param required - <code>true</code> if the requested {@link EnumType}-instance is required,
-   *        <code>false</code> otherwise.
-   * @return the {@link EnumType}-instance. Will be <code>null</code> if <code>value</code> is
-   *         <code>null</code> or if <code>required</code> is <code>false</code> and no such {@link EnumType}
+   * @param required - {@code true} if the requested {@link EnumType}-instance is required,
+   *        {@code false} otherwise.
+   * @return the {@link EnumType}-instance. Will be {@code null} if {@code value} is
+   *         {@code null} or if {@code required} is {@code false} and no such {@link EnumType}
    *         instance exists.
-   * @throws IllegalCaseException if <code>required</code> is <code>true</code> and no such {@link EnumType}
+   * @throws IllegalCaseException if {@code required} is {@code true} and no such {@link EnumType}
    *         instance exists.
    */
   <ENUM> ENUM getEnumValue(Class<ENUM> enumType, String value, boolean required) throws IllegalCaseException;

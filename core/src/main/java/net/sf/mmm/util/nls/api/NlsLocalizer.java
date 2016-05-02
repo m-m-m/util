@@ -16,8 +16,8 @@ import java.util.Map;
 public interface NlsLocalizer {
 
   /**
-   * This method localizes the given <code>internationalizedMessage</code> with the given
-   * <code>arguments</code> filled in to the given target <code>locale</code>.
+   * This method localizes the given {@code internationalizedMessage} with the given
+   * {@code arguments} filled in to the given target {@code locale}.
    * 
    * @param locale is the {@link Locale} to translate to.
    * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
@@ -28,8 +28,8 @@ public interface NlsLocalizer {
   String localize(Locale locale, String internationalizedMessage, Map<String, Object> arguments);
 
   /**
-   * This method localizes the given <code>internationalizedMessage</code> to the given target
-   * <code>locale</code>.
+   * This method localizes the given {@code internationalizedMessage} to the given target
+   * {@code locale}.
    * 
    * @param locale is the {@link Locale} to translate to.
    * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized

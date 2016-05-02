@@ -15,7 +15,7 @@ import org.slf4j.Logger;
  */
 public class CliValueContainerArray extends CliValueContainerCollection {
 
-  /** The array or <code>null</code> if NOT yet set. */
+  /** The array or {@code null} if NOT yet set. */
   private Object array;
 
   /**

@@ -15,27 +15,27 @@ public interface TransferObjectUtilLimited {
 
   /**
    * This method creates a {@link Object#clone() clone} of the {@link AbstractTransferObject} given as
-   * <code>template</code>. It should create a deep-copy that does NOT contain references to the original
-   * <code>template</code> objects so that modifications of the returned object will NOT have side-effects on
-   * the original <code>template</code> object(s).
+   * {@code template}. It should create a deep-copy that does NOT contain references to the original
+   * {@code template} objects so that modifications of the returned object will NOT have side-effects on
+   * the original {@code template} object(s).
    *
    *
    * @param <TO> is the generic type of the {@link AbstractTransferObject}.
-   * @param template is the {@link AbstractTransferObject} to clone. Must NOT be <code>null</code>.
-   * @return a new instance with the same {@link Object#getClass() type} as the given <code>template</code>.
+   * @param template is the {@link AbstractTransferObject} to clone. Must NOT be {@code null}.
+   * @return a new instance with the same {@link Object#getClass() type} as the given {@code template}.
    */
   <TO extends AbstractTransferObject> TO clone(TO template);
 
   /**
-   * This method creates a new instance of the {@link AbstractTransferObject} given as <code>template</code>.
+   * This method creates a new instance of the {@link AbstractTransferObject} given as {@code template}.
    * A simple implementation my just return
    * <code>template.{@link Object#getClass() getClass()}.{@link Class#newInstance() newInstance()}</code>.
    * However, an implementation may also be generated to be GWT compatible.
    *
    * @param <TO> is the generic type of the {@link AbstractTransferObject}.
    * @param template is the {@link AbstractTransferObject} to create a new instance of. Must NOT be
-   *        <code>null</code>.
-   * @return a new instance with the same {@link Object#getClass() type} as the given <code>template</code>.
+   *        {@code null}.
+   * @return a new instance with the same {@link Object#getClass() type} as the given {@code template}.
    */
   <TO extends AbstractTransferObject> TO newInstance(TO template);
 

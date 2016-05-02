@@ -16,7 +16,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 public interface Formatter<V> {
 
   /**
-   * This method formats the given <code>value</code>. <br>
+   * This method formats the given {@code value}. <br>
    * This is a shorthand of the following code:
    * 
    * <pre>
@@ -25,17 +25,17 @@ public interface Formatter<V> {
    * return buffer.toString();
    * </pre>
    * 
-   * @param value is the value to format. May be <code>null</code>.
-   * @return the formatted value. If the given <code>value</code> is <code>null</code>, a legal implementation
+   * @param value is the value to format. May be {@code null}.
+   * @return the formatted value. If the given {@code value} is {@code null}, a legal implementation
    *         will return "null" or "".
    */
   String format(V value);
 
   /**
-   * This method formats the given <code>value</code> and directly {@link Appendable#append(CharSequence)
-   * appends} to the given <code>buffer</code>.
+   * This method formats the given {@code value} and directly {@link Appendable#append(CharSequence)
+   * appends} to the given {@code buffer}.
    * 
-   * @param value is the value to format. May be <code>null</code>.
+   * @param value is the value to format. May be {@code null}.
    * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
    *        value to.
    * @throws RuntimeIoException if {@link Appendable#append(CharSequence) append} caused a

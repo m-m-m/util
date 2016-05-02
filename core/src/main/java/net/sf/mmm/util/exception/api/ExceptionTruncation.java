@@ -52,8 +52,8 @@ public class ExceptionTruncation {
   }
 
   /**
-   * @return <code>true</code> if the {@link Throwable#getSuppressed() suppressed exceptions} shall be
-   *         removed, <code>false</code> otherwise.
+   * @return {@code true} if the {@link Throwable#getSuppressed() suppressed exceptions} shall be
+   *         removed, {@code false} otherwise.
    */
   public boolean isRemoveSuppressed() {
 
@@ -61,7 +61,7 @@ public class ExceptionTruncation {
   }
 
   /**
-   * @return <code>true</code> if the {@link Throwable#getCause() cause} shall be removed, <code>false</code>
+   * @return {@code true} if the {@link Throwable#getCause() cause} shall be removed, {@code false}
    *         otherwise.
    */
   public boolean isRemoveCause() {
@@ -70,8 +70,8 @@ public class ExceptionTruncation {
   }
 
   /**
-   * @return <code>true</code> if the {@link Throwable#getStackTrace() stacktrace} shall be removed,
-   *         <code>false</code> otherwise.
+   * @return {@code true} if the {@link Throwable#getStackTrace() stacktrace} shall be removed,
+   *         {@code false} otherwise.
    */
   public boolean isRemoveStacktrace() {
 
@@ -83,7 +83,7 @@ public class ExceptionTruncation {
    * @see #isRemoveCause()
    * @see #isRemoveSuppressed()
    *
-   * @return <code>true</code> if all details shall be removed, <code>false</code> otherwise.
+   * @return {@code true} if all details shall be removed, {@code false} otherwise.
    */
   public boolean isRemoveAll() {
 
@@ -95,8 +95,8 @@ public class ExceptionTruncation {
    * @see #isRemoveCause()
    * @see #isRemoveSuppressed()
    *
-   * @return <code>true</code> if no details shall be removed (all information is retained),
-   *         <code>false</code> otherwise.
+   * @return {@code true} if no details shall be removed (all information is retained),
+   *         {@code false} otherwise.
    */
   public boolean isRetainAll() {
 

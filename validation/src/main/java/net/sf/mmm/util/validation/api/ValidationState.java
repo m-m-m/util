@@ -17,8 +17,8 @@ public interface ValidationState extends ValidationCollector {
    * {@link net.sf.mmm.util.validation.api.AbstractValidatableObject#validate(ValidationState) validation} has
    * been successful.
    * 
-   * @return <code>true</code> if no {@link ValidationFailure} has been {@link #onFailure(ValidationFailure)
-   *         collected}, <code>false</code> otherwise.
+   * @return {@code true} if no {@link ValidationFailure} has been {@link #onFailure(ValidationFailure)
+   *         collected}, {@code false} otherwise.
    */
   boolean isValid();
 

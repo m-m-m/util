@@ -53,7 +53,7 @@ public final class SpringContainerPool {
   }
 
   /**
-   * This method gets the {@link IocContainer} for the given <code>xmlClasspath</code>.
+   * This method gets the {@link IocContainer} for the given {@code xmlClasspath}.
    *
    * @param xmlClasspath is the classpath to the XML configuration.
    * @return the requested container.
@@ -72,7 +72,7 @@ public final class SpringContainerPool {
   }
 
   /**
-   * This method disposes the {@link #getInstance(String) instance} identified by the given <code>xmlClasspath</code>
+   * This method disposes the {@link #getInstance(String) instance} identified by the given {@code xmlClasspath}
    * (if it exists).
    *
    * @param xmlClasspath is the classpath to the XML configuration.

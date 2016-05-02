@@ -30,7 +30,7 @@ public class VersionUtilTest extends Assert {
 
   /**
    * This method {@link VersionUtil#createVersionIdentifier(String) parses} a {@link VersionIdentifier} given
-   * by <code>versionString</code>. It also does some sanity checks.
+   * by {@code versionString}. It also does some sanity checks.
    *
    * @param versionString is the {@link String} to parse.
    * @return the parsed {@link VersionIdentifier}.

@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 /**
  * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to <code>boolean[]</code>.
+ * an {@link Object} to {@code boolean[]}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

@@ -75,7 +75,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
   /**
    * @see net.sf.mmm.util.exception.api.NlsNullPointerException
    *
-   * @param object is the name of the object that is <code>null</code>.
+   * @param object is the name of the object that is {@code null}.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The object \"{object}\" is null!")
@@ -113,7 +113,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    *
    * @param object is the duplicate object.
    * @param key is the key associated with the object (e.g. in a {@link java.util.Map}).
-   * @param existing is the object already associated with the given <code>key</code>.
+   * @param existing is the object already associated with the given {@code key}.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Duplicate object \"{object}\" for key \"{key}\" - already mapped to \"{existing}\"!")
@@ -125,8 +125,8 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    *
    * @param object is the mismatching object.
    * @param expected is the expected object (e.g. type).
-   * @param source is the source of the mismatching object or <code>null</code> if unknown.
-   * @param property is the property holding the mismatching object or <code>null</code> if undefined.
+   * @param source is the source of the mismatching object or {@code null} if unknown.
+   * @param property is the property holding the mismatching object or {@code null} if undefined.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Mismatch detected{source,choice,(?==null)''(else)' in \"'{source}'\"'}"
@@ -193,7 +193,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    * @see net.sf.mmm.util.exception.api.ReadOnlyException
    *
    * @param object is the object that is read-only and can not be modified.
-   * @param attribute is the attribute that is read-only or <code>null</code> for the entire object.
+   * @param attribute is the attribute that is read-only or {@code null} for the entire object.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Failed to modify{attribute,choice,(?==null)''(else)' attribute \"'{attribute}'\" of'} \"{object}\" as it is read-only!")
@@ -203,8 +203,8 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    * @see net.sf.mmm.util.exception.api.NlsClassCastException
    *
    * @param object is the object that should be cased.
-   * @param source is the actual type of the <code>object</code>.
-   * @param target is the type the <code>object</code> should be casted to.
+   * @param source is the actual type of the {@code object}.
+   * @param target is the type the {@code object} should be casted to.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Can NOT cast \"{object}\" from \"{source}\" to \"{target}\"!")

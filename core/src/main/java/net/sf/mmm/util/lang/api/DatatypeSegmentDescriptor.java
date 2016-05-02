@@ -54,8 +54,8 @@ public interface DatatypeSegmentDescriptor<T, V> {
   Class<V> getType();
 
   /**
-   * @return <code>true</code> if this segment is optional and can be omitted, <code>false</code> otherwise.
-   *         Serialization is suggested to omit optional segments if their value is <code>null</code>.
+   * @return {@code true} if this segment is optional and can be omitted, {@code false} otherwise.
+   *         Serialization is suggested to omit optional segments if their value is {@code null}.
    *         Further, {@link DatatypeDescriptor#create(Object...) creation} shall accept less arguments if any
    *         number of optional arguments are skipped what requires that
    *         {@link DatatypeDescriptor#getSegmentDescriptors() segment descriptors are ordered} such that

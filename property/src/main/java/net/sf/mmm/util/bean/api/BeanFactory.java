@@ -27,7 +27,7 @@ public interface BeanFactory extends AbstractBeanFactory {
 
   /**
    * @param type the {@link Class} reflecting the {@link Bean}.
-   * @param name the optional name given at runtime or <code>null</code>.
+   * @param name the optional name given at runtime or {@code null}.
    * @return the {@link BeanAccess#getQualifiedName() qualified name}.
    */
   default String getQualifiedName(Class<? extends Bean> type, String name) {

@@ -276,10 +276,10 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   }
 
   /**
-   * This method copies the file or directory given by <code>source</code> into the given <code>destination</code>. <br>
+   * This method copies the file or directory given by {@code source} into the given {@code destination}. <br>
    * <b>ATTENTION:</b><br>
-   * In order to allow giving the copy of <code>source</code> a new {@link File#getName() name}, the
-   * <code>destination</code> has to point to the final place where the copy should appear rather than the directory
+   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the
+   * {@code destination} has to point to the final place where the copy should appear rather than the directory
    * where the copy will be located in. <br>
    * <br>
    * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory "/tmp". The
@@ -438,16 +438,16 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   }
 
   /**
-   * This method adds all files matching with the given <code>path</code> and <code>fileType</code> to the
-   * <code>list</code>.
+   * This method adds all files matching with the given {@code path} and {@code fileType} to the
+   * {@code list}.
    *
    * @param cwd is the current working directory and should therefore point to an existing {@link File#isDirectory()
-   *        directory}. If the given <code>path</code> is NOT {@link File#isAbsolute() absolute} it is interpreted
+   *        directory}. If the given {@code path} is NOT {@link File#isAbsolute() absolute} it is interpreted
    *        relative to this directory.
    * @param segments is the path the files to collect must match. If this path is NOT {@link File#isAbsolute() absolute}
-   *        it is interpreted relative to the {@link File#isDirectory() directory} given by <code>cwd</code>.
-   * @param segmentIndex is the current index in <code>pathChars</code> for the collection process.
-   * @param fileType is the type of the files to collect or <code>null</code> if files of any type are acceptable.
+   *        it is interpreted relative to the {@link File#isDirectory() directory} given by {@code cwd}.
+   * @param segmentIndex is the current index in {@code pathChars} for the collection process.
+   * @param fileType is the type of the files to collect or {@code null} if files of any type are acceptable.
    * @param list is the list where to {@link List#add(Object) add} the collected files.
    */
   private void collectMatchingFiles(File cwd, List<ResourcePathNode<Pattern>> segments, int segmentIndex,

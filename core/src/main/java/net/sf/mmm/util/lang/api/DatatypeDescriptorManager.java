@@ -21,7 +21,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface DatatypeDescriptorManager {
 
   /**
-   * Gets the {@link DatatypeDescriptor} for the specified <code>datatype</code>.
+   * Gets the {@link DatatypeDescriptor} for the specified {@code datatype}.
    *
    * @param <T> is the generic type of the {@link Datatype}.
    * @param datatype is the {@link Class} reflecting the {@link Datatype}.

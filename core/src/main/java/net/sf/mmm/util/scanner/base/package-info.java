@@ -6,7 +6,7 @@
  * <a name="documentation"></a><h2>Character Scanner Base</h2>
  * This package contains the basic implementation of the 
  * {@link net.sf.mmm.util.scanner.api Character Scanner API}. It is available 
- * for end-users and therefore NOT located in an <code>impl</code>-package.
+ * for end-users and therefore NOT located in an {@code impl}-package.
  */
 package net.sf.mmm.util.scanner.base;
 

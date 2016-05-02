@@ -30,7 +30,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   /** The actual processor served by this buffer. */
   private DetectorStreamProcessor processor;
 
-  /** The successor in the chain or <code>null</code> if this is the last. */
+  /** The successor in the chain or {@code null} if this is the last. */
   private DetectorStreamBufferImpl chainSuccessor;
 
   /** @see #getStreamPosition() */
@@ -74,7 +74,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    * The constructor.
    *
    * @param processor is the {@link DetectorStreamProcessor} served by this buffer.
-   * @param successor is the successor in the chain or <code>null</code> if this is the last buffer/processor pair in
+   * @param successor is the successor in the chain or {@code null} if this is the last buffer/processor pair in
    *        the chain.
    * @param byteArrayPool is the {@link ByteArrayPool} to use.
    */
@@ -198,7 +198,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   /**
    * This method switches over to the next internal {@link #getByteArray(int) byte-array}.
    *
-   * @return <code>true</code> if a new buffer is available, <code>false</code> if the buffer queue is empty.
+   * @return {@code true} if a new buffer is available, {@code false} if the buffer queue is empty.
    */
   private boolean nextArray() {
 
@@ -387,7 +387,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    * @see DetectorStreamProcessor#process(DetectorStreamBuffer, Map, boolean)
    *
    * @param metadata is the {@link Map} with the meta-data.
-   * @param eos - <code>true</code> if the end of the stream has been reached and the given <code>buffer</code> has to
+   * @param eos - {@code true} if the end of the stream has been reached and the given {@code buffer} has to
    *        be
    * @throws IOException in case of an Input/Output error. Should only be used internally.
    */

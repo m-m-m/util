@@ -27,7 +27,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 public interface PropertyFactory<V, P extends ReadableProperty<V>> {
 
   /**
-   * @return the {@link Class} of the {@link ReadableProperty#getValue() property value}. May be <code>null</code> for
+   * @return the {@link Class} of the {@link ReadableProperty#getValue() property value}. May be {@code null} for
    *         {@link net.sf.mmm.util.property.api.lang.GenericProperty}.
    */
   Class<? extends V> getValueClass();

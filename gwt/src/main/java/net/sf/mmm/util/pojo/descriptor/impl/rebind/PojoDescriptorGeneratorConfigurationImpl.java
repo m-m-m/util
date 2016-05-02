@@ -80,8 +80,8 @@ public class PojoDescriptorGeneratorConfigurationImpl implements PojoDescriptorG
    * {@link #isPojoTypeSupported(JClassType, TypeOracle) supported}. This method does NOT affect the
    * {@link #getMarkerType() marker type} that may also be an interface.
    * 
-   * @return <code>true</code> if {@link Class#isInterface() interfaces} are
-   *         {@link #isPojoTypeSupported(JClassType, TypeOracle) supported}, <code>false</code> otherwise.
+   * @return {@code true} if {@link Class#isInterface() interfaces} are
+   *         {@link #isPojoTypeSupported(JClassType, TypeOracle) supported}, {@code false} otherwise.
    */
   protected boolean isInterfaceSupported() {
 

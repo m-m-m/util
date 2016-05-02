@@ -40,7 +40,7 @@ public abstract class SegmentContainer extends Segment {
 
   /**
    * This method gets the contained child {@link Segment} with the given
-   * <code>index</code>.
+   * {@code index}.
    * 
    * @see java.util.List#get(int)
    * 
@@ -91,11 +91,11 @@ public abstract class SegmentContainer extends Segment {
   }
 
   /**
-   * This method aggregates the current <code>aggregated</code>
-   * {@link #getMaximumLength() minimum length} with the given <code>next</code>
+   * This method aggregates the current {@code aggregated}
+   * {@link #getMaximumLength() minimum length} with the given {@code next}
    * value. The default implementation is a simple summation.
    * 
-   * @param aggregated is the current <code>aggregated</code> result, initially
+   * @param aggregated is the current {@code aggregated} result, initially
    *        {@link #getMinimumLength()} of the first {@link #getSegment(int)
    *        child}.
    * @param next is the next length to aggregate.
@@ -130,15 +130,15 @@ public abstract class SegmentContainer extends Segment {
   }
 
   /**
-   * This method aggregates the current <code>aggregated</code>
-   * {@link #getMaximumLength() maximum length} with the given <code>next</code>
+   * This method aggregates the current {@code aggregated}
+   * {@link #getMaximumLength() maximum length} with the given {@code next}
    * value. The default implementation is a simple summation. <br>
    * <b>ATTENTION:</b><br>
    * Please note that {@link Long#MAX_VALUE} is already handled by
    * {@link #getMaximumLength()}. In that case this method is NOT invoked
    * anymore.
    * 
-   * @param aggregated is the current <code>aggregated</code> result, initially
+   * @param aggregated is the current {@code aggregated} result, initially
    *        {@link #getMaximumLength()} of the first {@link #getSegment(int)
    *        child}.
    * @param next is the next length to aggregate.

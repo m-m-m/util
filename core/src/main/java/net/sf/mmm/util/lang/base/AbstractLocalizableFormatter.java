@@ -84,7 +84,7 @@ public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<
   /**
    * @see #format(Object, Appendable, Locale)
    * 
-   * @param value is the value to format (not <code>null</code>).
+   * @param value is the value to format (not {@code null}).
    * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
    *        value to.
    * @param locale is the {@link Locale}.

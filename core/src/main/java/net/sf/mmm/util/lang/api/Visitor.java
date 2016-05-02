@@ -12,10 +12,10 @@ package net.sf.mmm.util.lang.api;
 public interface Visitor<V> {
 
   /**
-   * This method is called to let the visitor inspect the given <code>value</code>.
+   * This method is called to let the visitor inspect the given {@code value}.
    * 
    * @param value is the value to visit. An API that offers a {@link Visitor} as argument should specify
-   *        further details about the value - especially if it may be <code>null</code>.
+   *        further details about the value - especially if it may be {@code null}.
    */
   void visit(V value);
 

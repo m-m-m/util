@@ -14,10 +14,9 @@ public interface StringSyntax {
    * This method gets the character used to start a quotation that should be terminated by a
    * {@link #getQuoteEnd() quote-end} character. The text inside the quote is taken as is (without the quote
    * characters). <br>
-   * Common examples for quote characters are the single quotes (<code>'</code>) and double quotes (
-   * <code>"</code>).
+   * Common examples for quote characters are the single quotes ({@code '}) and double quotes ({@code "}).
    * 
-   * @return the character used to start a quotation or <code>'\0'</code> to disable.
+   * @return the character used to start a quotation or {@code '\0'} to disable.
    */
   char getQuoteStart();
 
@@ -26,7 +25,7 @@ public interface StringSyntax {
    * 
    * @see #getQuoteStart()
    * 
-   * @return the character used to end a quotation or <code>'\0'</code> to disable.
+   * @return the character used to end a quotation or {@code '\0'} to disable.
    */
   char getQuoteEnd();
 
@@ -34,7 +33,7 @@ public interface StringSyntax {
    * This method gets the character used as escape. It is used to mark special characters like
    * {@link #getQuoteStart()} to allow these characters also in the payload. The escape itself is removed on
    * decoding while the next character is taken as is without any special interpretation. <br>
-   * The most common escape character is the backslash (<code>\</code>). <br>
+   * The most common escape character is the backslash ({@code \}). <br>
    * Here are some examples for decoding:
    * <table border="1">
    * <tr>
@@ -54,7 +53,7 @@ public interface StringSyntax {
    * </tr>
    * </table>
    * 
-   * @return the escape character or <code>'\0'</code> for no escaping.
+   * @return the escape character or {@code '\0'} for no escaping.
    */
   char getEscape();
 

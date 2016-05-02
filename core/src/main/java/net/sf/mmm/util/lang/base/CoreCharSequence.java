@@ -10,7 +10,7 @@ package net.sf.mmm.util.lang.base;
  */
 public abstract class CoreCharSequence implements CharSequence {
 
-  /** the hash of this sequence or <code>0</code> if not cached */
+  /** the hash of this sequence or {@code 0} if not cached */
   private int cachedHash;
 
   /**

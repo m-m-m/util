@@ -30,7 +30,7 @@ import net.sf.mmm.util.process.api.ProcessUtil;
 /**
  * This is the implementation of the {@link ProcessUtil} interface. <br>
  * <b>ATTENTION:</b><br>
- * The <code>execute</code>-methods spin up multiple {@link Thread threads}, especially when multiple
+ * The {@code execute}-methods spin up multiple {@link Thread threads}, especially when multiple
  * processes are piped (2*n+1[+1] threads). Therefore you should NOT use the {@link #getInstance() singleton}
  * variant of this util except you are writing a simple command-line client that does a simple job and then
  * terminates. When writing a server-application or library, that makes such calls repetitive, you should

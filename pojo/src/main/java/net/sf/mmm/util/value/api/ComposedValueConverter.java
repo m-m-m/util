@@ -101,9 +101,9 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * </table>
  * <br>
  * However the chosen converter may {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType)
- * return} <code>null</code> to indicate that conversion is NOT possible. This {@link ComposedValueConverter}
+ * return} {@code null} to indicate that conversion is NOT possible. This {@link ComposedValueConverter}
  * should therefore try all applicable converters starting from most to least specific until conversion
- * succeeds. If all applicable converters fail it will also fail and return <code>null</code>. <br>
+ * succeeds. If all applicable converters fail it will also fail and return {@code null}. <br>
  * 
  * @see net.sf.mmm.util.value.impl.DefaultComposedValueConverter#getInstance()
  * 

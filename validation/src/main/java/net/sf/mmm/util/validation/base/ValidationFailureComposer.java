@@ -51,7 +51,7 @@ public class ValidationFailureComposer {
   /**
    * @param valueSource the {@link ValidationFailure#getSource() source}.
    * @return the {@link ValidationFailure} representing the {@link #add(ValidationFailure) collected} failures or
-   *         <code>null</code> if none were collected.
+   *         {@code null} if none were collected.
    */
   public ValidationFailure get(Object valueSource) {
 

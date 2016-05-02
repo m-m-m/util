@@ -16,13 +16,13 @@ import net.sf.mmm.util.transformer.api.Transformer;
 public interface Singularizer extends Transformer<String> {
 
   /**
-   * This method gets the singular form of the given term (some word) <code>pluralForm</code> that is (potentially) in
+   * This method gets the singular form of the given term (some word) {@code pluralForm} that is (potentially) in
    * plural form. Additionally it preserves the case of the term. <br>
    * The following table illustrates some examples how an implementation for English language could behave:<br>
    * <table border="1">
    * <tr>
-   * <th><code>term</code></th>
-   * <th><code>toSingular(term)</code></th>
+   * <th>{@code term}</th>
+   * <th>{@code toSingular(term)}</th>
    * </tr>
    * <tr>
    * <td>children</td>
@@ -60,7 +60,7 @@ public interface Singularizer extends Transformer<String> {
    *
    * @param plural is a term (potentially) in plural form.
    * @return the according singular form. This will be {@link Object#equals(Object) equal} to the given string
-   *         <code>plural</code> if already singular or no singular form is known.
+   *         {@code plural} if already singular or no singular form is known.
    */
   @Override
   String transform(String plural);

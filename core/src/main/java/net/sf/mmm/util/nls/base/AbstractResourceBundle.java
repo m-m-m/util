@@ -33,25 +33,25 @@ import java.util.Set;
  * <td>ERR_</td>
  * <td>Text for an exception message.</td>
  * <td>
- * <code>ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!"</code></td>
+ * {@code ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!"}</td>
  * </tr>
  * <tr>
  * <td>MSG_</td>
  * <td>Text for a complete information message.</td>
  * <td>
- * <code>MSG_MAIN_OPTION_VERSION_USAGE = "Print the program-version."</code></td>
+ * {@code MSG_MAIN_OPTION_VERSION_USAGE = "Print the program-version."}</td>
  * </tr>
  * <tr>
  * <td>INF_</td>
  * <td>Text for a single information term.</td>
  * <td>
- * <code>INF_MAIN_MODE_DEFAULT = "default"</code></td>
+ * {@code INF_MAIN_MODE_DEFAULT = "default"}</td>
  * </tr>
  * <tr>
  * <td>INT_</td>
  * <td>Reserved for internal constants not to be localized.</td>
  * <td>
- * <code>INT_MAIN_OPTION_NAME_VERSION = "--version"</code></td>
+ * {@code INT_MAIN_OPTION_NAME_VERSION = "--version"}</td>
  * </tr>
  * </table>
  *
@@ -107,7 +107,7 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
    * This method is the inverse of {@link #getObject(String)}.
    *
    * @param object is the object (potentially) retrieved via {@link #getObject(String)}.
-   * @return the key for the given <code>object</code> or <code>null</code> if it was NOT retrieved via
+   * @return the key for the given {@code object} or {@code null} if it was NOT retrieved via
    *         {@link #getObject(String)} from this instance.
    */
   public String getKey(Object object) {

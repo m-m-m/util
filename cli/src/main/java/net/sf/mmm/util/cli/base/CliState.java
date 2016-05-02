@@ -220,7 +220,7 @@ public class CliState extends CliClassContainer {
    *
    * @param node is the node to initialize (link into the node-list).
    * @param argumentMap maps the {@link CliArgumentContainer#getId() id} to the according argument-node.
-   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or <code>null</code>
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or {@code null}
    *         if the initialization was successful.
    * @throws NodeCycleException if a cyclic dependency was detected and completed.
    */
@@ -266,7 +266,7 @@ public class CliState extends CliClassContainer {
    * This method finds the properties annotated with {@link CliOption} or {@link CliArgument}.
    *
    * @param descriptorBuilder is the {@link PojoDescriptorBuilder} to use (determines if fields or setters are used).
-   * @return <code>true</code> if at least one annotated property has been found, <code>false</code> otherwise.
+   * @return {@code true} if at least one annotated property has been found, {@code false} otherwise.
    */
   protected boolean findPropertyAnnotations(PojoDescriptorBuilder descriptorBuilder) {
 
@@ -355,7 +355,7 @@ public class CliState extends CliClassContainer {
 
   /**
    * This method {@link #getOption(String) registers} the given {@link CliOptionContainer option} with the given
-   * <code>name</code>.
+   * {@code name}.
    *
    * @param nameOrAlias is the {@link CliOption#name()} or {@link CliOption#aliases() alias} of the option.
    * @param option is the {@link CliOptionContainer option} to register.
@@ -369,11 +369,11 @@ public class CliState extends CliClassContainer {
   }
 
   /**
-   * This method gets the {@link CliOptionContainer option} associated with the given <code>nameOrAlias</code> .
+   * This method gets the {@link CliOptionContainer option} associated with the given {@code nameOrAlias} .
    *
    * @param nameOrAlias is the {@link CliOption#name()} or {@link CliOption#aliases() alias} of the requested
    *        {@link CliOptionContainer option}.
-   * @return the requested {@link CliOptionContainer option} or <code>null</code> if no such {@link CliOptionContainer
+   * @return the requested {@link CliOptionContainer option} or {@code null} if no such {@link CliOptionContainer
    *         option} exists.
    */
   public CliOptionContainer getOption(String nameOrAlias) {
@@ -426,7 +426,7 @@ public class CliState extends CliClassContainer {
   // * CLI-arguments} for the given {@link CliModeObject mode}.
   // *
   // * @param mode is the according {@link CliModeContainer mode}.
-  // * @return the arguments or <code>null</code> if no arguments are defined
+  // * @return the arguments or {@code null} if no arguments are defined
   // for
   // * this mode.
   // */
@@ -455,7 +455,7 @@ public class CliState extends CliClassContainer {
    *
    * @param mode is the {@link CliModeObject} for which the {@link CliOption options} are required.
    * @return a {@link Collection} with all {@link CliOption options} that are {@link CliOption#mode() compatible} with
-   *         the given <code>mode</code>.
+   *         the given {@code mode}.
    */
   public Collection<CliOptionContainer> getOptions(CliModeObject mode) {
 

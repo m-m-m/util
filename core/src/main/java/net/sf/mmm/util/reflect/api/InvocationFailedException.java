@@ -54,7 +54,7 @@ public class InvocationFailedException extends ReflectionException {
    * @param accessible is the {@link AccessibleObject} ({@link java.lang.reflect.Method} or
    *        {@link java.lang.reflect.Constructor}) that was invoked and caused the exception.
    * @param instance is the instance on which the invocation took place and caused the exception. It may be
-   *        <code>null</code> if the <code>accessible</code> is {@link java.lang.reflect.Modifier#isStatic(int) static}.
+   *        {@code null} if the {@code accessible} is {@link java.lang.reflect.Modifier#isStatic(int) static}.
    */
   public InvocationFailedException(Throwable nested, AccessibleObject accessible, Object instance) {
 

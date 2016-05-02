@@ -5,7 +5,7 @@ package net.sf.mmm.util.gwt.api;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * This is the {@link JavaScriptObject} representing a <code>FileList</code> what is an array of
+ * This is the {@link JavaScriptObject} representing a {@code FileList} what is an array of
  * {@link JsFile files}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -34,7 +34,7 @@ public class JsFileList extends JavaScriptObject {
    * @see java.util.List#get(int)
    *
    * @param index is the index of the {@link JsFile file} to get.
-   * @return the {@link JsFile file} at the given <code>index</code>.
+   * @return the {@link JsFile file} at the given {@code index}.
    */
   public final native JsFile item(int index) /*-{
     return this.item(index);

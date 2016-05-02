@@ -18,7 +18,7 @@ public class VersionIdentifierFormatterPhaseValue extends AbstractVersionIdentif
    * The constructor.
    * 
    * @param prefix is the static prefix to append before the {@link VersionIdentifier#getPhase() phase}. Will
-   *        be omitted if {@link VersionIdentifier#getPhase() phase} is <code>null</code>.
+   *        be omitted if {@link VersionIdentifier#getPhase() phase} is {@code null}.
    * @param maximumLength is the maximum number of letters for the {@link VersionIdentifier#getPhase() phase}.
    *        The default is {@link Integer#MAX_VALUE}.
    */

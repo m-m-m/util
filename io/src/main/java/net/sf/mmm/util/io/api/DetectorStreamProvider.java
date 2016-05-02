@@ -32,7 +32,7 @@ import java.util.Map;
 public interface DetectorStreamProvider {
 
   /**
-   * This method gets a {@link DetectorInputStream} that wrapps the given <code>stream</code>.
+   * This method gets a {@link DetectorInputStream} that wrapps the given {@code stream}.
    * 
    * @param stream is the stream to wrap. This stream must be a fresh stream that is untouched since it was
    *        opened.
@@ -41,8 +41,8 @@ public interface DetectorStreamProvider {
   DetectorInputStream wrapInputStream(InputStream stream);
 
   /**
-   * This method gets a {@link DetectorInputStream} that wraps the given <code>stream</code>. In addition to
-   * {@link #wrapInputStream(InputStream)} an additional parameter <code>metadata</code> is supplied. If this
+   * This method gets a {@link DetectorInputStream} that wraps the given {@code stream}. In addition to
+   * {@link #wrapInputStream(InputStream)} an additional parameter {@code metadata} is supplied. If this
    * context contains metadata values, that are mutable, the stream wrapper manipulates the data such that the
    * given values correspond to the data. <br>
    * E.g. if the metadata contains a title and a genre and the stream points to the data of an mp3 song, the
@@ -62,7 +62,7 @@ public interface DetectorStreamProvider {
   DetectorInputStream wrapInputStream(InputStream stream, Map<String, Object> metadata);
 
   /**
-   * This method gets a {@link DetectorOutputStream} that wraps the given <code>stream</code>.
+   * This method gets a {@link DetectorOutputStream} that wraps the given {@code stream}.
    * 
    * @param stream is the stream to wrap. This stream must be a fresh stream that is untouched since it was
    *        opened.
@@ -71,8 +71,8 @@ public interface DetectorStreamProvider {
   DetectorOutputStream wrapOutputStream(OutputStream stream);
 
   /**
-   * This method gets a {@link DetectorOutputStream} that wraps the given <code>stream</code>. In addition to
-   * {@link #wrapOutputStream(OutputStream)} an additional parameter <code>metadata</code> is supplied. If
+   * This method gets a {@link DetectorOutputStream} that wraps the given {@code stream}. In addition to
+   * {@link #wrapOutputStream(OutputStream)} an additional parameter {@code metadata} is supplied. If
    * this context contains metadata values, that are mutable, the stream wrapper manipulates the data such
    * that the given values correspond to the data. <br>
    * E.g. if the metadata contains a title and a genre and the stream points to the data of an mp3 song, the

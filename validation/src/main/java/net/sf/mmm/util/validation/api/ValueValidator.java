@@ -20,25 +20,25 @@ package net.sf.mmm.util.validation.api;
 public interface ValueValidator<V> {
 
   /**
-   * This method validates the given <code>value</code>.
+   * This method validates the given {@code value}.
    *
    * @param value is the value to validate.
-   * @return the {@link ValidationFailure} or <code>null</code> if the given <code>value</code> is valid according to
+   * @return the {@link ValidationFailure} or {@code null} if the given {@code value} is valid according to
    *         this {@link ValueValidator}.
    */
   ValidationFailure validate(V value);
 
   /**
-   * This method validates the given <code>value</code>.
+   * This method validates the given {@code value}.
    *
    * @param value is the value to validate.
    * @param valueSource is the {@link ValidationFailure#getSource() source} describing the origin of the given
-   *        <code>value</code>. This may be the filename where the value was read from, an XPath where the value was
+   *        {@code value}. This may be the filename where the value was read from, an XPath where the value was
    *        located in an XML document, the label of a widget of the UI containing the value, etc. This will help to
    *        find the problem easier. The source needs to have a reasonable {@link Object#toString()
    *        string-representation} as this may be displayed to the end-user to locate the source of the failure. In most
    *        cases it is suitable to directly pass a {@link String}.
-   * @return the {@link ValidationFailure} or <code>null</code> if the given <code>value</code> is valid according to
+   * @return the {@link ValidationFailure} or {@code null} if the given {@code value} is valid according to
    *         this {@link ValueValidator}.
    */
   ValidationFailure validate(V value, Object valueSource);

@@ -14,7 +14,7 @@ public interface AttributeReadDeprecated {
    * This method determines if this object is <em>deprecated</em>. Like in Java deprecated means that the
    * object may not be used anymore.
    * 
-   * @return <code>true</code> if active, <code>false</code> otherwise.
+   * @return {@code true} if active, {@code false} otherwise.
    */
   boolean isDeprecated();
 

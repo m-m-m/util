@@ -3,9 +3,9 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} represents the alpha value of a color what is its opacity. A value of <code>0</code>
- * stands for fully transparent (color not visible), while <code>1.0</code> stands for a regular color (color
- * fully visible). An alpha value of <code>0.5</code> will be 50% transparent so you can see the color but the
+ * This {@link Segment} represents the alpha value of a color what is its opacity. A value of {@code 0}
+ * stands for fully transparent (color not visible), while {@code 1.0} stands for a regular color (color
+ * fully visible). An alpha value of {@code 0.5} will be 50% transparent so you can see the color but the
  * background shines through.
  * 
  * @see Color#getAlpha()

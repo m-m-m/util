@@ -23,11 +23,11 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
   /** {@link #getProperty(TypedProperty) Property} for {@link #isMandatory() mandatory flag}. */
   public static final TypedProperty<Boolean> PROPERTY_MANDATORY = new TypedProperty<>(Boolean.class, "mandatory");
 
-  /** {@link #getProperty(TypedProperty) Property} for minimum value (<code>null</code> if unbounded). */
+  /** {@link #getProperty(TypedProperty) Property} for minimum value ({@code null} if unbounded). */
   @SuppressWarnings("rawtypes")
   public static final TypedProperty<Comparable> PROPERTY_MINIMUM = new TypedProperty<>(Comparable.class, "min");
 
-  /** {@link #getProperty(TypedProperty) Property} for maximum value (<code>null</code> if unbounded). */
+  /** {@link #getProperty(TypedProperty) Property} for maximum value ({@code null} if unbounded). */
   @SuppressWarnings("rawtypes")
   public static final TypedProperty<Comparable> PROPERTY_MAXIMUM = new TypedProperty<>(Comparable.class, "max");
 
@@ -69,7 +69,7 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
    * of the same input may not always return the same validation result (e.g. it holds references to instances that have
    * dynamic impact on the validation).
    *
-   * @return <code>true</code> if this {@link ValueValidator} is dynamic, <code>false</code> otherwise.
+   * @return {@code true} if this {@link ValueValidator} is dynamic, {@code false} otherwise.
    */
   public boolean isDynamic() {
 
@@ -77,8 +77,8 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
   }
 
   /**
-   * @return <code>true</code> if this is a validator for mandatory fields (that will not accept <code>null</code> or
-   *         empty values), <code>false</code> otherwise.
+   * @return {@code true} if this is a validator for mandatory fields (that will not accept {@code null} or
+   *         empty values), {@code false} otherwise.
    */
   public final boolean isMandatory() {
 
@@ -110,7 +110,7 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
    *        <P>
    *        the generic type of the requested property.
    * @param property the {@link TypedProperty}.
-   * @return the requested value or <code>null</code> if undefined.
+   * @return the requested value or {@code null} if undefined.
    * @since 7.1.0
    */
   public <P> P getProperty(TypedProperty<P> property) {

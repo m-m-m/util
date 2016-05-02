@@ -10,7 +10,7 @@ import net.sf.mmm.util.value.api.ValueNotSetException;
 /**
  * This is the interface for a context of variables. It allows to read all variables as well as to
  * {@link #createChildContext() create a child-context} this is {@link MutableGenericContext mutable}. <br>
- * <b>Note:</b> Initially the name of this interface should be just <code>Context</code>. However there are
+ * <b>Note:</b> Initially the name of this interface should be just {@code Context}. However there are
  * tons of common java projects shipped with a type of this name so to avoid confusion a longer name was
  * chosen.
  * 
@@ -20,7 +20,7 @@ import net.sf.mmm.util.value.api.ValueNotSetException;
 public interface GenericContext {
 
   /**
-   * This method gets the variable associated with the given <code>variableName</code>.
+   * This method gets the variable associated with the given {@code variableName}.
    * 
    * @param variableName is the name of the requested variable.
    * @return the value of the variable.
@@ -29,7 +29,7 @@ public interface GenericContext {
   Object requireVariable(String variableName) throws ValueNotSetException;
 
   /**
-   * This method gets the variable associated with the given <code>variableName</code>.
+   * This method gets the variable associated with the given {@code variableName}.
    * 
    * @param <T> the generic type of the variable.
    * @param variableName is the name of the requested variable.
@@ -40,11 +40,11 @@ public interface GenericContext {
   <T> T requireVariable(String variableName, Class<T> type) throws ValueNotSetException;
 
   /**
-   * This method gets the variable associated with the given <code>type</code>. It will use the
+   * This method gets the variable associated with the given {@code type}. It will use the
    * {@link Class#getName() classname} as {@link #getVariable(String, Class) variable-name}. <br>
    * <b>ATTENTION:</b><br>
    * Only use this method in combination with expressive types. E.g. types like {@link String} or
-   * {@link Integer} are bad candidates while <code>MySpecificSingletonComponentInterface</code> might be a
+   * {@link Integer} are bad candidates while {@code MySpecificSingletonComponentInterface} might be a
    * good option.
    * 
    * @see MutableGenericContext#setVariable(String, Object)
@@ -58,48 +58,48 @@ public interface GenericContext {
   <T> T requireVariable(Class<T> type) throws ValueNotSetException;
 
   /**
-   * This method gets the variable associated with the given <code>variableName</code>.
+   * This method gets the variable associated with the given {@code variableName}.
    * 
    * @param variableName is the name of the requested variable.
-   * @return the value of the variable or <code>null</code> if the variable is NOT set.
+   * @return the value of the variable or {@code null} if the variable is NOT set.
    */
   Object getVariable(String variableName);
 
   /**
-   * This method gets the variable associated with the given <code>variableName</code> as the given
-   * <code>type</code>. If the <code>type</code> does NOT match the actual type of the variable it may
+   * This method gets the variable associated with the given {@code variableName} as the given
+   * {@code type}. If the {@code type} does NOT match the actual type of the variable it may
    * automatically be converted as possible.
    * 
    * @param <T> the generic type of the variable.
    * @param variableName is the name of the requested variable.
    * @param type is the class reflecting the type of the variable.
-   * @return the value of the variable or <code>null</code> if the variable is NOT set.
+   * @return the value of the variable or {@code null} if the variable is NOT set.
    */
   <T> T getVariable(String variableName, Class<T> type);
 
   /**
-   * This method gets the variable associated with the given <code>type</code>. It will use the
+   * This method gets the variable associated with the given {@code type}. It will use the
    * {@link Class#getName() classname} as {@link #getVariable(String, Class) variable-name}. <br>
    * <b>ATTENTION:</b><br>
    * Only use this method in combination with expressive types. E.g. types like {@link String} or
-   * {@link Integer} are bad candidates while <code>MySpecificSingletonComponentInterface</code> might be a
+   * {@link Integer} are bad candidates while {@code MySpecificSingletonComponentInterface} might be a
    * good option.
    * 
    * @see MutableGenericContext#setVariable(String, Object)
    * 
    * @param <T> the generic type of the variable.
    * @param type is the class reflecting the type of the variable.
-   * @return the value of the variable or <code>null</code> if the variable is NOT set.
+   * @return the value of the variable or {@code null} if the variable is NOT set.
    * @since 2.0.0
    */
   <T> T getVariable(Class<T> type);
 
   /**
    * This method determines if the {@link #getVariable(String) variable} for the given
-   * <code>variableName</code> exists.
+   * {@code variableName} exists.
    * 
    * @param variableName is the name of the requested variable.
-   * @return <code>true</code> if a value exists for the given <code>variableName</code>, <code>false</code>
+   * @return {@code true} if a value exists for the given {@code variableName}, {@code false}
    *         otherwise.
    */
   boolean hasVariable(String variableName);

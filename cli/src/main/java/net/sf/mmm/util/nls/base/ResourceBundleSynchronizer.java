@@ -155,7 +155,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /**
    * This method gets the locales of the bundles that should be {@link #synchronize(NlsBundleContainer) synchronized}.
-   * Examples for locales (entries of the returned array) are <code>""</code>, <code></code>
+   * Examples for locales (entries of the returned array) are {@code ""}, {@code "en"}, or {@code "en_GB"}.
    *
    * @return the locales to create/update.
    */
@@ -209,7 +209,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the encoding used to read and write the bundles. The default is <code>UTF-8</code>.
+   * This method gets the encoding used to read and write the bundles. The default is {@code UTF-8}.
    *
    * @return the encoding.
    */
@@ -229,8 +229,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method sets the newline string used to terminate a line in the resource bundle. The default is LF (
-   * <code>\n</code>).
+   * This method sets the newline string used to terminate a line in the resource bundle.
+   * The default is LF ({@code \n}).
    *
    * @return the newline
    */
@@ -492,7 +492,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    * Determines if the given {@code bundleClass} is {@link NlsBundleOptions#productive() productive}.
    *
    * @param bundleClass is the {@link Class} to test.
-   * @return <code>true</code> if {@link NlsBundleOptions#productive() productive}, <code>false</code> otherwise.
+   * @return {@code true} if {@link NlsBundleOptions#productive() productive}, {@code false} otherwise.
    */
   private boolean isProductive(Class<?> bundleClass) {
 
@@ -519,10 +519,10 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
    */
   public class NlsBundleContainer {
 
-    /** The {@link ResourceBundle} or <code>null</code> if {@link #nlsBundleInterface} is given. */
+    /** The {@link ResourceBundle} or {@code null} if {@link #nlsBundleInterface} is given. */
     private final ResourceBundle resourceBundle;
 
-    /** The {@link NlsBundle}-interface or <code>null</code> if {@link #resourceBundle} is given. */
+    /** The {@link NlsBundle}-interface or {@code null} if {@link #resourceBundle} is given. */
     private final Class<? extends NlsBundle> nlsBundleInterface;
 
     /** @see #getProperties() */

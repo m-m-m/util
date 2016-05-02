@@ -13,8 +13,8 @@ import java.io.IOException;
 public interface Justification {
 
   /**
-   * This method applies the justification to the given <code>value</code> and
-   * {@link Appendable#append(CharSequence) appends} the result to the given <code>target</code>.
+   * This method applies the justification to the given {@code value} and
+   * {@link Appendable#append(CharSequence) appends} the result to the given {@code target}.
    * 
    * @param value is the string to justify.
    * @param target is where to {@link Appendable#append(CharSequence) append} the justified data.
@@ -23,7 +23,7 @@ public interface Justification {
   void justify(CharSequence value, Appendable target) throws IOException;
 
   /**
-   * This method applies the justification to the given <code>value</code> and returns the result.
+   * This method applies the justification to the given {@code value} and returns the result.
    * 
    * @param value is the string to justify.
    * @return the justified string.

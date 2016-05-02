@@ -435,7 +435,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   /**
    * @see net.sf.mmm.util.xml.base.XmlInvalidException
    *
-   * @param source is the source of the XML or <code>null</code> if unknown.
+   * @param source is the source of the XML or {@code null} if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The XML{source,choice,(?==null)''(else)' from \"'{source}'\"'} is invalid!")

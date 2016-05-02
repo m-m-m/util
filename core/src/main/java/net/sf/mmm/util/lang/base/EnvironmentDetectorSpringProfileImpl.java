@@ -138,7 +138,7 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
   /**
    * @param name is the name of an actual environment or a configuration profile.
    * @return the {@link #getEnvironmentType() environment type} that has been detected by naming convention, or
-   *         <code>null</code> if nothing could be detected.
+   *         {@code null} if nothing could be detected.
    */
   protected String detectEnvironmentType(String name) {
 

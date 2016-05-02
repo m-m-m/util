@@ -16,14 +16,14 @@ public interface DatatypeDetector {
 
   /**
    * This method determines if the given {@link Class} reflects an (immutable) {@link net.sf.mmm.util.lang.api.Datatype}
-   * . It will return <code>true</code> if the given <code>value</code> is a {@link String}, {@link Boolean},
+   * . It will return {@code true} if the given {@code value} is a {@link String}, {@link Boolean},
    * {@link Character}, anything derived from {@link Number}, an {@link Enum}, an instance of
    * {@link net.sf.mmm.util.lang.api.Datatype}, a {@link java.util.Date} (even though not immutable) or anything
    * similar.
    *
    * @param type is the {@link Class} to check.
-   * @return <code>true</code> if the given {@link Class} represents a {@link net.sf.mmm.util.lang.api.Datatype},
-   *         <code>false</code> otherwise.
+   * @return {@code true} if the given {@link Class} represents a {@link net.sf.mmm.util.lang.api.Datatype},
+   *         {@code false} otherwise.
    */
   boolean isDatatype(Class<?> type);
 
@@ -39,8 +39,8 @@ public interface DatatypeDetector {
    * {@link java.time.ZoneOffset}.
    *
    * @param type is the {@link Class} to check.
-   * @return <code>true</code> if the given {@link Class} represents a Java standard
-   *         {@link net.sf.mmm.util.lang.api.Datatype}, <code>false</code> otherwise.
+   * @return {@code true} if the given {@link Class} represents a Java standard
+   *         {@link net.sf.mmm.util.lang.api.Datatype}, {@code false} otherwise.
    * @since 6.0.0
    */
   boolean isJavaStandardDatatype(Class<?> type);

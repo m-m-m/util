@@ -133,7 +133,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   /**
    * This method sets the {@link #getDefaultExtension() default extension}. <br>
    * <b>ATTENTION:</b><br>
-   * You should also {@link #addExtension(String) add} the <code>defaultExtension</code> to the
+   * You should also {@link #addExtension(String) add} the {@code defaultExtension} to the
    * {@link #getExtensions() extensions}.
    *
    * @param defaultExtension is the defaultExtension to set.
@@ -152,7 +152,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method adds the given <code>extension</code> to the {@link #getExtensions() extensions}.
+   * This method adds the given {@code extension} to the {@link #getExtensions() extensions}.
    *
    * @param extension is the extension to add.
    */

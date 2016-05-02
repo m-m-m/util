@@ -21,7 +21,7 @@ final class WhitespaceHelper {
 
   /**
    * @param c is the character to check.
-   * @return <code>true</code> if {@link Character#isWhitespace(char) whitespace}, <code>false</code>
+   * @return {@code true} if {@link Character#isWhitespace(char) whitespace}, {@code false}
    *         otherwise.
    */
   public static boolean isWhitespace(char c) {

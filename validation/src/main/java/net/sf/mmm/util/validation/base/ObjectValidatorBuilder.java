@@ -46,7 +46,7 @@ public abstract class ObjectValidatorBuilder<V, PARENT, SELF extends ObjectValid
   }
 
   /**
-   * @return the parent {@link Builder} or <code>null</code> if {@literal <PARENT>} is void.
+   * @return the parent {@link Builder} or {@code null} if {@literal <PARENT>} is void.
    */
   public PARENT and() {
 

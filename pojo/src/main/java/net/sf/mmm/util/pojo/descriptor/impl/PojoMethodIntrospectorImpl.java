@@ -50,12 +50,12 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
   }
 
   /**
-   * Recursively collects all {@link Class#getInterfaces() interfaces} starting from the given <code>type</code>.
+   * Recursively collects all {@link Class#getInterfaces() interfaces} starting from the given {@code type}.
    *
    * @param type is the {@link Class} for which all {@link Class#getInterfaces() interfaces} shall be collected.
    * @param interfaceSet is the {@link Set} where the {@link Class#getInterfaces() interfaces} will be
    *        {@link Set#add(Object) added}.
-   * @param excludeSet is a {@link Set} with {@link Class}es (interfaces) to omit. May be <code>null</code> for none.
+   * @param excludeSet is a {@link Set} with {@link Class}es (interfaces) to omit. May be {@code null} for none.
    */
   private static void collectInterfaces(Class<?> type, Set<Class<?>> interfaceSet, Set<Class<?>> excludeSet) {
 

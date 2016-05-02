@@ -35,7 +35,7 @@ public interface SearchResult<HIT> extends Serializable {
    * {@link SearchCriteria#getMaximumHitCount() maximum hit-count} of your {@link SearchCriteria} even though
    * more hits are available.
    * 
-   * @return <code>true</code> if this result is complete, <code>false</code> if there are more matches
+   * @return {@code true} if this result is complete, {@code false} if there are more matches
    *         available than {@link #getHits() contained} in this result.
    */
   boolean isComplete();

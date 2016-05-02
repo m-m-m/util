@@ -64,7 +64,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
 
   /**
    * This method gets the {@link GenericType} of the object returned when this accessor is
-   * <code>invoked</code>.
+   * {@code invoked}.
    * 
    * @see java.lang.reflect.Method#getGenericReturnType()
    * @see java.lang.reflect.Field#getGenericType()
@@ -74,7 +74,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   GenericType<?> getReturnType();
 
   /**
-   * This method gets the {@link Class} of the object returned when this accessor is <code>invoked</code>. <br>
+   * This method gets the {@link Class} of the object returned when this accessor is {@code invoked}. <br>
    * is a convenience method for {@link #getReturnType()}.{@link GenericType#getRetrievalClass()
    * getRetrievalClass()}
    * 
@@ -88,7 +88,7 @@ public abstract interface PojoPropertyAccessor extends PojoAttributeName {
   /**
    * This method gets the {@link GenericType} of this property. <br>
    * For a {@link PojoPropertyAccessorNonArgMode#GET getter} this will be the {@link #getReturnType()
-   * return-type} while a {@link PojoPropertyAccessorOneArgMode#SET setter} typically has <code>void</code> as
+   * return-type} while a {@link PojoPropertyAccessorOneArgMode#SET setter} typically has {@code void} as
    * {@link #getReturnType() return-type} and this method will return the type of its argument. For mapped or
    * indexed getters/setters this method will return the item type.
    * 

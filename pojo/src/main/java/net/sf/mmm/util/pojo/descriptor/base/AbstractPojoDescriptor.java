@@ -84,11 +84,11 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   public abstract Collection<? extends AbstractPojoPropertyDescriptor> getPropertyDescriptors();
 
   /**
-   * This method gets the property-descriptor for the given <code>propertyName</code>.
+   * This method gets the property-descriptor for the given {@code propertyName}.
    *
    * @param propertyName is the name of the requested property-descriptor.
-   * @return the requested property-descriptor or <code>null</code> if NO property exists with the given
-   *         <code>propertyName</code>.
+   * @return the requested property-descriptor or {@code null} if NO property exists with the given
+   *         {@code propertyName}.
    */
   public abstract PojoPropertyDescriptorImpl getOrCreatePropertyDescriptor(String propertyName);
 
@@ -178,8 +178,8 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    * @param pojo is the {@link #getPojoClass() POJO} instance where to access the property.
    * @param propertyPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPropertyPath#getPojoPath() POJO
    *        property path}.
-   * @param required - <code>true</code> if the result is required, <code>false</code> if any intermediate or
-   *        the end result may be <code>null</code> resulting in <code>null</code> being returned.
+   * @param required - {@code true} if the result is required, {@code false} if any intermediate or
+   *        the end result may be {@code null} resulting in {@code null} being returned.
    * @return the requested property value.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })

@@ -38,7 +38,7 @@ public interface Entity {
   /**
    * @return the {@code version} of this entity. Whenever the {@link Entity} gets updated (a modification is saved and
    *         the transaction is committed), this counter is increased. The initial value of a new {@link EntityBean} is
-   *         <code>0</code>. The version acts as a modification counter for optimistic locking. On each update it will
+   *         {@code 0}. The version acts as a modification counter for optimistic locking. On each update it will
    *         be verified that the version has not been increased already by another transaction. The version may also
    *         act as revision for auditing.
    */

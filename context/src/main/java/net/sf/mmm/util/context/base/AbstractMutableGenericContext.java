@@ -50,14 +50,14 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
   }
 
   /**
-   * This method gets the variable-name (key) for the given <code>type</code>.
+   * This method gets the variable-name (key) for the given {@code type}.
    *
    * @see #setVariable(Object)
    * @see #getVariable(Class)
    * @see #requireVariable(Class)
    *
    * @param type is the {@link Class} reflecting the type of some variable.
-   * @return the generic variable-name for the given <code>type</code>.
+   * @return the generic variable-name for the given {@code type}.
    */
   protected String getVariableName(Class<?> type) {
 

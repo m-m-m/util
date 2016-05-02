@@ -94,7 +94,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   /**
    * The constructor.
    *
-   * @param scanner is the {@link CharSequenceScanner} pointing to the choice- <code>formatStyle</code>.
+   * @param scanner is the {@link CharSequenceScanner} pointing to the choice- {@code formatStyle}.
    * @param nlsDependencies are the {@link NlsDependencies} to use.
    */
   public NlsFormatterChoice(CharSequenceScanner scanner, NlsDependencies nlsDependencies) {
@@ -308,7 +308,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     private final String literal;
 
     /**
-     * The {@link NlsArgument} to use as result or <code>null</code> if this is the last {@link Segment}.
+     * The {@link NlsArgument} to use as result or {@code null} if this is the last {@link Segment}.
      */
     private final NlsArgument argument;
 
@@ -316,7 +316,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
      * The constructor.
      *
      * @param literal is the literal (prefix).
-     * @param argument is the {@link NlsArgument} or <code>null</code> if this is the last {@link Segment}.
+     * @param argument is the {@link NlsArgument} or {@code null} if this is the last {@link Segment}.
      */
     public Segment(String literal, NlsArgument argument) {
 

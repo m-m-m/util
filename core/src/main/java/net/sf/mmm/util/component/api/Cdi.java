@@ -4,14 +4,14 @@ package net.sf.mmm.util.component.api;
 
 /**
  * This interface only exists for documentation purpose!<br>
- * <em>CDI</em> is a shortcut for <em>Context and Dependency Injection</em> and is a java standard supporting
- * the {@link Ioc IoC} pattern. The annotations from JSR 250 and JSR 330 are combined to configure component
- * implementations. A {@link IocContainer CDI framework} can understand these standardized annotations and
- * assembles your components performing the dependency injection. We strongly recommend to use <a
- * href="http://www.springframework.org">spring</a> as {@link IocContainer} but there are also other
- * implementations like JBoss Seam, Google Guice (GIN for GWT)/Eclipse SiSu, etc. <br>
+ * <em>CDI</em> is a shortcut for <em>Context and Dependency Injection</em> and is a java standard supporting the
+ * {@link Ioc IoC} pattern. The annotations from JSR 250 and JSR 330 are combined to configure component
+ * implementations. A {@link IocContainer CDI framework} can understand these standardized annotations and assembles
+ * your components performing the dependency injection. We strongly recommend to use
+ * <a href="http://www.springframework.org">spring</a> as {@link IocContainer} but there are also other implementations
+ * like JBoss Seam, Google Guice (GIN for GWT)/Eclipse SiSu, etc. <br>
  * Here is an example how everything works together:
- * 
+ *
  * <pre>
  * public interface MyComponent {
  *   void doSomething();
@@ -64,12 +64,11 @@ package net.sf.mmm.util.component.api;
  *
  * }
  * </pre>
- * 
- * Even though there are different variants how to do it, we strongly recommend using public setter injection
- * as it is the best approach for testability, debugging and getting most helpful messages in case of an
- * error. Also we provide {@link net.sf.mmm.util.component.base.AbstractLoggableComponent} that you can extend
- * from.
- * 
+ *
+ * Even though there are different variants how to do it, we strongly recommend using public setter injection as it is
+ * the best approach for testability, debugging and getting most helpful messages in case of an error. Also we provide
+ * {@link net.sf.mmm.util.component.base.AbstractLoggableComponent} that you can extend from.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -78,44 +77,43 @@ public interface Cdi {
   /**
    * A <em>CDI name</em> is the {@link javax.inject.Named name} of a
    * {@link net.sf.mmm.util.component.api.ComponentSpecification component} for {@link Cdi CDI}. <br>
-   * The regular implementation will be annotated with &#64;{@link javax.inject.Named}
-   * (MyComponentInterface.CDI_NAME). <br>
-   * If you want to replace this implementation you can do so by defining your own spring-bean with the same
-   * bean-id at a higher level (in a spring-XML file directly or indirectly importing the component-scan for
-   * the default implementation) or even using the same annotation (if you know what you are doing). Your
-   * replacement may or may not extend the default implementation. <br>
+   * The regular implementation will be annotated with &#64;{@link javax.inject.Named} (MyComponentInterface.CDI_NAME).
+   * <br>
+   * If you want to replace this implementation you can do so by defining your own spring-bean with the same bean-id at
+   * a higher level (in a spring-XML file directly or indirectly importing the component-scan for the default
+   * implementation) or even using the same annotation (if you know what you are doing). Your replacement may or may not
+   * extend the default implementation. <br>
    * <b>NOTE:</b><br>
    * This constant is only for documentation purpose. Please never use it in your code.
    */
   String CDI_NAME = null;
 
   /**
-   * We strongly believe in the {@link Ioc} pattern and try to avoid the keyword <em>static</em> except for
-   * constants (in combination with <em>final</em>). Books like
+   * We strongly believe in the {@link Ioc} pattern and try to avoid the keyword <em>static</em> except for constants
+   * (in combination with <em>final</em>). Books like
    * <em>Design Patterns. Elements of Reusable Object-Oriented Software.</em> introduced various patterns like
-   * <em>Singleton</em> (or maybe <em>AbstractFactory</em>) that make use of <em>static</em> access and lead
-   * to inflexible and bad design. Instead {@link Ioc} is the pattern of choice to get access to singletons or
-   * factories. However, the problem is that Java does NOT support {@link Ioc} in its core. So for a small and
-   * simple application it might be over-complicated to use it. <br>
+   * <em>Singleton</em> (or maybe <em>AbstractFactory</em>) that make use of <em>static</em> access and lead to
+   * inflexible and bad design. Instead {@link Ioc} is the pattern of choice to get access to singletons or factories.
+   * However, the problem is that Java does NOT support {@link Ioc} in its core. So for a small and simple application
+   * it might be over-complicated to use it. <br>
    * <br>
    * Therefore we picked a design that is the best compromise between easy access and flexibility:
    * <ul>
    * <li>We strictly follow the {@link Ioc} design which allows extension and customization.</li>
-   * <li>Additionally we provide static <code>getInstance()</code> methods for convenience.</li>
+   * <li>Additionally we provide static {@code getInstance()} methods for convenience.</li>
    * </ul>
-   * You have the choice. If you just want to use {@link net.sf.mmm.util.lang.api.StringUtil} it is fine to
-   * use {@link net.sf.mmm.util.lang.base.StringUtilImpl#getInstance()}. However if you want to make use of
-   * many components of this project and decide for {@link Ioc} you can get all utilities and other components
-   * {@link javax.inject.Inject injected}. This gives you the final freedom to replace or extend components
-   * without patching our code. <br>
-   * A special case are GWT (Google Web Toolkit) specific utilities, because GWT allows rebinding that we are
-   * using to create the singleton instance. You can configure your <code>*.gwt.xml</code> to replace the
-   * default implementation with a derived custom class extending the default and overriding methods to add
-   * changed behavior. <br>
+   * You have the choice. If you just want to use {@link net.sf.mmm.util.lang.api.StringUtil} it is fine to use
+   * {@link net.sf.mmm.util.lang.base.StringUtilImpl#getInstance()}. However if you want to make use of many components
+   * of this project and decide for {@link Ioc} you can get all utilities and other components
+   * {@link javax.inject.Inject injected}. This gives you the final freedom to replace or extend components without
+   * patching our code. <br>
+   * A special case are GWT (Google Web Toolkit) specific utilities, because GWT allows rebinding that we are using to
+   * create the singleton instance. You can configure your {@code *.gwt.xml} to replace the default implementation with
+   * a derived custom class extending the default and overriding methods to add changed behavior. <br>
    * <b>ATTENTION:</b><br>
-   * You always have to be aware of what you are actually doing when you are replacing central components.
-   * Changing behavior will NOT only have impact on your code using the component but on everybody else in
-   * your JVM what is the actual idea of the approach. <br>
+   * You always have to be aware of what you are actually doing when you are replacing central components. Changing
+   * behavior will NOT only have impact on your code using the component but on everybody else in your JVM what is the
+   * actual idea of the approach. <br>
    * <b>NOTE:</b><br>
    * This constant is only for documentation purpose. Please never use it in your code.
    */

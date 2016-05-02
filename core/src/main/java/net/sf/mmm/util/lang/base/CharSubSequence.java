@@ -26,8 +26,8 @@ public class CharSubSequence extends CoreCharSequence {
    * The constructor.
    * 
    * @param originalSequence is the underlying sequence.
-   * @param startPosition is the start-index in <code>originalSequence</code>.
-   * @param endPosition is the end-index in <code>originalSequence</code>.
+   * @param startPosition is the start-index in {@code originalSequence}.
+   * @param endPosition is the end-index in {@code originalSequence}.
    */
   public CharSubSequence(CharSequence originalSequence, int startPosition, int endPosition) {
 

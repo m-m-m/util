@@ -70,7 +70,7 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
   /**
    * This method determines if this implementation allows to {@link #flush() save}.
    * 
-   * @return <code>true</code> if {@link #flush() saving} is allowed, <code>false</code> otherwise.
+   * @return {@code true} if {@link #flush() saving} is allowed, {@code false} otherwise.
    */
   public boolean isAllowSave() {
 

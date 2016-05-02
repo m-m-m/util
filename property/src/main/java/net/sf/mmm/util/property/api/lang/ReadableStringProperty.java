@@ -31,7 +31,7 @@ public interface ReadableStringProperty extends ReadableObjectProperty<String>, 
 
   /**
    * @return the {@link #getValue() value} or the empty {@link String} if the {@link #getValue() value} is
-   *         <code>null</code>.
+   *         {@code null}.
    */
   default String getValueSafe() {
 

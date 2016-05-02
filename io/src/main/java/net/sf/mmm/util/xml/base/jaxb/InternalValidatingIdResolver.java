@@ -15,7 +15,7 @@ import com.sun.xml.internal.bind.IDResolver;
  * pointing to an undefined ID). <br>
  * <b>ATTENTION:</b><br>
  * This class only works for the default implementation of JAXB included in the JDK. You have to ensure that
- * <code>jaxb-impl</code> (com.sun.xml.bind) is NOT on your classpath!
+ * {@code jaxb-impl} (com.sun.xml.bind) is NOT on your classpath!
  * 
  * @see XmlBeanMapper#getOrCreateUnmarshaller()
  * 

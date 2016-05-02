@@ -14,10 +14,10 @@ import java.nio.charset.Charset;
  */
 final class XmlInputStream extends InputStream {
 
-  /** the start of the XML header (<code>"<?xml"</code>). */
+  /** the start of the XML header ({@code "<?xml"}). */
   private static final byte[] XML_HEADER_START = new byte[] { '<', '?', 'x', 'm', 'l', ' ' };
 
-  /** the start of the XML encoding attribute (<code>"encoding="</code>). */
+  /** the start of the XML encoding attribute ({@code "encoding="}). */
   private static final byte[] XML_ENCODING_ATRIBUTE = new byte[] { 'e', 'n', 'c', 'o', 'd', 'i', 'n', 'g', '=' };
 
   /** The original input-stream to adapt. */
@@ -33,7 +33,7 @@ final class XmlInputStream extends InputStream {
   private int index;
 
   /**
-   * The encoding detected from the XML header or <code>null</code> if it was NOT specified.
+   * The encoding detected from the XML header or {@code null} if it was NOT specified.
    */
   private Charset charset;
 
@@ -42,7 +42,7 @@ final class XmlInputStream extends InputStream {
    * 
    * @param delegate is the input-stream to adapt.
    * @param defaultCharset is the {@link Charset} used if NO encoding was specified via an XML header.
-   * @throws IOException if an I/O error was caused by <code>delegate</code> when trying to read the XML
+   * @throws IOException if an I/O error was caused by {@code delegate} when trying to read the XML
    *         header.
    */
   public XmlInputStream(InputStream delegate, Charset defaultCharset) throws IOException {

@@ -48,7 +48,7 @@ public class XmlPathImpl extends AbstractXmlSelector implements XmlPath {
   }
 
   /**
-   * This method adds the given <code>segment</code> to this path.
+   * This method adds the given {@code segment} to this path.
    * 
    * @param segment is the segment to add.
    */

@@ -29,7 +29,7 @@ public abstract class AbstractNlsBundleFactoryGwt implements NlsBundleFactory {
   }
 
   /**
-   * Registers the given <code>bundle</code> for the given <code>bundleInterface</code>.
+   * Registers the given {@code bundle} for the given {@code bundleInterface}.
    *
    * @param bundleInterface is the interface of the {@link NlsBundle}.
    * @param bundle is the actual {@link NlsBundle} instance.
@@ -56,12 +56,12 @@ public abstract class AbstractNlsBundleFactoryGwt implements NlsBundleFactory {
   }
 
   /**
-   * This method gets the {@link NlsBundle} for the given <code>bundleInterface</code> from the internal map.
+   * This method gets the {@link NlsBundle} for the given {@code bundleInterface} from the internal map.
    *
    * @param <BUNDLE> is the generic type of the {@link NlsBundle}.
    *
    * @param bundleInterface is the class reflecting the {@link NlsBundle} interface.
-   * @return the {@link NlsBundle} implementation or <code>null</code> if NOT registered.
+   * @return the {@link NlsBundle} implementation or {@code null} if NOT registered.
    */
   @SuppressWarnings("unchecked")
   protected <BUNDLE extends NlsBundle> BUNDLE getBundle(Class<BUNDLE> bundleInterface) {

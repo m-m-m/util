@@ -27,8 +27,8 @@ public abstract class AbstractHyphenatorTest extends Assertions {
   }
 
   /**
-   * This method checks if a given <code>hyphenatedWord</code> is properly hyphenated using the given
-   * <code>hyphenator</code>.
+   * This method checks if a given {@code hyphenatedWord} is properly hyphenated using the given
+   * {@code hyphenator}.
    *
    * @param hyphenator is the {@link Hyphenator} to test.
    * @param hyphenatedWord is the hyphenated word.

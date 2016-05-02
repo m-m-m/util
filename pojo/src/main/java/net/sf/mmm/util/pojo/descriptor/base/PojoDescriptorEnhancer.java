@@ -17,7 +17,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface PojoDescriptorEnhancer {
 
   /**
-   * This method performs the generic enhancements on the given <code>descriptor</code>.
+   * This method performs the generic enhancements on the given {@code descriptor}.
    * 
    * @param descriptor is the descriptor to enhance.
    */

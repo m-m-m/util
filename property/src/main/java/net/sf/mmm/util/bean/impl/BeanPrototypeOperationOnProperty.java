@@ -43,7 +43,7 @@ public abstract class BeanPrototypeOperationOnProperty extends BeanPrototypeOper
   }
 
   /**
-   * @return <code>true</code> if the {@link WritableProperty} is required for this operation, <code>false</code>
+   * @return {@code true} if the {@link WritableProperty} is required for this operation, {@code false}
    *         otherwise.
    */
   @Override

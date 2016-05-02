@@ -74,7 +74,7 @@ public class StringListProperty extends StringProperty {
    * @see List#remove(Object)
    *
    * @param element the element to remove from the {@link #getValueAsList() value as list}.
-   * @return <code>true</code> if the given element was previously present and is now removed so the value actually has
+   * @return {@code true} if the given element was previously present and is now removed so the value actually has
    *         changed, {@code false} otherwise (if not present and no change).
    */
   public boolean remove(String element) {

@@ -14,12 +14,12 @@ package net.sf.mmm.util.filter.api;
 public interface FilterRule<V> {
 
   /**
-   * This method checks if the given <code>string</code> is accepted, denied or ignored by this rule.
+   * This method checks if the given {@code string} is accepted, denied or ignored by this rule.
    * 
    * @param string is the string to check.
-   * @return <code>true</code> if the file should be accepted, <code>false</code> if the file should NOT be
-   *         accepted or <code>null</code> if this rule does NOT make a decision about the given
-   *         <code>string</code>.
+   * @return {@code true} if the file should be accepted, {@code false} if the file should NOT be
+   *         accepted or {@code null} if this rule does NOT make a decision about the given
+   *         {@code string}.
    */
   Boolean accept(V string);
 

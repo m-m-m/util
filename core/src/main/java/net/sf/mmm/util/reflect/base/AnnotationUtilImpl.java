@@ -148,21 +148,21 @@ public class AnnotationUtilImpl implements AnnotationUtil {
 
   /**
    * This method gets the first {@link Class#getAnnotation(Class) annotation} of the type given by
-   * <code>annotation</code> in the {@link Class#getInterfaces() hierarchy} of the given
-   * <code>annotatedInterface</code>. <br>
-   * This method is only useful if the given <code>annotation</code> is a {@link #isRuntimeAnnotation(Class)
+   * {@code annotation} in the {@link Class#getInterfaces() hierarchy} of the given
+   * {@code annotatedInterface}. <br>
+   * This method is only useful if the given {@code annotation} is a {@link #isRuntimeAnnotation(Class)
    * runtime annotation} that is {@link #isAnnotationForType(Class, ElementType) applicable} for
    * {@link ElementType#TYPE classes}.
    * 
    * @param <A> is the type of the requested annotation.
    * @param annotatedType is the type potentially implementing an interface annotated with the given
-   *        <code>annotation</code>. This should NOT be an {@link Class#isPrimitive() primitive},
+   *        {@code annotation}. This should NOT be an {@link Class#isPrimitive() primitive},
    *        {@link Class#isArray() array}, {@link Class#isEnum() enum}, or {@link Class#isAnnotation()
    *        annotation}.
    * @param annotation is the type of the requested annotation.
-   * @return the requested annotation or <code>null</code> if neither the <code>annotatedInterface</code> nor
+   * @return the requested annotation or {@code null} if neither the {@code annotatedInterface} nor
    *         one of its {@link Class#getInterfaces() super-interfaces} are {@link Class#getAnnotation(Class)
-   *         annotated} with the given <code>annotation</code>.
+   *         annotated} with the given {@code annotation}.
    */
   private <A extends Annotation> A getInterfacesAnnotation(Class<?> annotatedType, Class<A> annotation) {
 

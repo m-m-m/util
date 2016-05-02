@@ -95,10 +95,10 @@ public class HyphenatorImpl extends AbstractHyphenator {
   }
 
   /**
-   * This method normalizes the given <code>word</code>.
+   * This method normalizes the given {@code word}.
    *
    * @param word is the word to normalize.
-   * @return the normalized form of <code>word</code>.
+   * @return the normalized form of {@code word}.
    */
   protected String normalize(String word) {
 

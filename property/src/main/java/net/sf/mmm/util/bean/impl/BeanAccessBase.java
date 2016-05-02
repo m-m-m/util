@@ -73,12 +73,12 @@ public abstract class BeanAccessBase<BEAN extends Bean>
   }
 
   /**
-   * Gets the {@link WritableProperty} for the given <code>index</code>.
+   * Gets the {@link WritableProperty} for the given {@code index}.
    *
    * @param prototypeProperty is the {@link BeanPrototypeProperty}.
-   * @param create - <code>true</code> if the property is required and shall be created if it {@link #isDynamic() does
-   *        not already exist}, <code>false</code> otherwise.
-   * @return the requested {@link WritableProperty}. May be <code>null</code>.
+   * @param create - {@code true} if the property is required and shall be created if it {@link #isDynamic() does
+   *        not already exist}, {@code false} otherwise.
+   * @return the requested {@link WritableProperty}. May be {@code null}.
    */
   protected abstract WritableProperty<?> getProperty(BeanPrototypeProperty prototypeProperty, boolean create);
 

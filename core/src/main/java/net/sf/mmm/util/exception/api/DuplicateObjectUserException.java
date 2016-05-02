@@ -48,7 +48,7 @@ public class DuplicateObjectUserException extends DuplicateObjectException {
    *
    * @param object is the object that was rejected because it is a duplicate.
    * @param key is the key the object could NOT be associated with because it already leads to another object.
-   * @param existing is the object that is already registered for the given <code>key</code>.
+   * @param existing is the object that is already registered for the given {@code key}.
    */
   public DuplicateObjectUserException(Object object, Object key, Object existing) {
 

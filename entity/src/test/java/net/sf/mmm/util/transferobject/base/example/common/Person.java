@@ -40,7 +40,7 @@ public interface Person extends GenericEntity<Long> {
   void setLastName(String lastName);
 
   /**
-   * @return the {@link #getId() ID} of the {@link Address} of this {@link Person} or <code>null</code> if not present.
+   * @return the {@link #getId() ID} of the {@link Address} of this {@link Person} or {@code null} if not present.
    */
   Long getAddressId();
 

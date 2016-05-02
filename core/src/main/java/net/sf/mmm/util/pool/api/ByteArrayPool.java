@@ -5,7 +5,7 @@ package net.sf.mmm.util.pool.api;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a {@link Pool} of <code>byte[]</code>.
+ * This is the interface for a {@link Pool} of {@code byte[]}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

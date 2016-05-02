@@ -23,27 +23,27 @@ public interface LinkedNode<V, NODE extends LinkedNode<V, NODE>> {
   /**
    * This method gets the next node of the linked list.
    * 
-   * @return the next {@link LinkedNode node} or <code>null</code> if this is the last node (tail).
+   * @return the next {@link LinkedNode node} or {@code null} if this is the last node (tail).
    */
   NODE getNext();
 
   /**
    * This method gets the actual value of this node.
    * 
-   * @return the value, may be <code>null</code>.
+   * @return the value, may be {@code null}.
    */
   V getValue();
 
   /**
    * This method determines if this node is linked. A node is linked if it has a {@link #getNext() next node}.
    * 
-   * @return <code>true</code> if linked, <code>false</code> otherwise.
+   * @return {@code true} if linked, {@code false} otherwise.
    */
   boolean isLinked();
 
   /**
    * This method appends the {@link #getValue() values} of the list represented by this node to the given
-   * <code>list</code>. <br>
+   * {@code list}. <br>
    * Call this method on the head-node with an empty {@link List} to convert a {@link LinkedNode}-list to a
    * regular {@link List}.
    * 

@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.collection.api.ConcurrentMapFactory} that creates
- * instances of a <code>ConcurrentHashSet</code>. Since no such class exists in JDK, we provide it via
+ * instances of a {@code ConcurrentHashSet}. Since no such class exists in JDK, we provide it via
  * {@link ConcurrentHashMap}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

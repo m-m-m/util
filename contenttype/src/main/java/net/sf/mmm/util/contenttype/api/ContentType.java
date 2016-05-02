@@ -39,7 +39,7 @@ public interface ContentType extends TreeNode<ContentType> {
    * This method gets the default extension associated with this
    * {@link ContentType} (e.g. ".jpg").
    * 
-   * @return the default file-extension or <code>null</code> if not defined.
+   * @return the default file-extension or {@code null} if not defined.
    */
   String getDefaultExtension();
 
@@ -67,8 +67,8 @@ public interface ContentType extends TreeNode<ContentType> {
    * An abstract {@link ContentType} should have {@link #getChildren()
    * sub-types}, a non abstract {@link ContentType} can have sub-types.
    * 
-   * @return <code>true</code> if the {@link ContentType} is abstract,
-   *         <code>false</code> otherwise.
+   * @return {@code true} if the {@link ContentType} is abstract,
+   *         {@code false} otherwise.
    */
   boolean isAbstract();
 
@@ -79,21 +79,21 @@ public interface ContentType extends TreeNode<ContentType> {
    * logical hierarchy of {@link ContentType}s, the
    * {@link #getTechnicalParent() technical parent} gives the technical view on
    * the hierarchy. <br>
-   * There is no <code>getTechnicalChildren()</code> method. The children are
+   * There is no {@code getTechnicalChildren()} method. The children are
    * always retrieved via {@link #getChildren()}. Therefore a
    * {@link ContentType} can have {@link #getChildren() children} that have it
    * as {@link #getTechnicalParent() technical parent} while
    * {@link #getParent()} returns another {@link ContentType}. <br>
    * For instance the {@link ContentType#getParent() logical parent} of the type
-   * <code>ODT</code> (Open Document Text) is the type office document. From a
+   * {@code ODT} (Open Document Text) is the type office document. From a
    * technical point of view an ODT-file is a ZIP-file with a specific
    * structure. Therefore the {@link #getTechnicalParent() technical parent} is
-   * the type <code>ZIP</code> . <br>
+   * the type {@code ZIP} . <br>
    * Typically end-users will NOT be interested in the technical view. However
    * it is exposed for those that may find it useful.
    * 
    * @return the technical {@link #getParent() parent} of this
-   *         {@link ContentType} or <code>null</code> if this is the
+   *         {@link ContentType} or {@code null} if this is the
    *         {@link ContentTypeManager#getTechnicalRootType() technical root
    *         node}.
    */
@@ -101,15 +101,15 @@ public interface ContentType extends TreeNode<ContentType> {
 
   /**
    * This method determines if this {@link ContentType} is an ancestor of the
-   * given <code>technicalType</code>. In other words this method checks if this
+   * given {@code technicalType}. In other words this method checks if this
    * {@link ContentType} is the direct or indirect {@link #getTechnicalParent()
-   * technical parent} of the given <code>technicalType</code>.
+   * technical parent} of the given {@code technicalType}.
    * 
    * @see TreeNode#isAncestor(net.sf.mmm.util.collection.api.GenericTreeNode)
    * 
    * @param technicalType is the {@link ContentType} to check.
-   * @return <code>true</code> if this {@link ContentType} is a technical
-   *         ancestor of the given <code>technicalType</code>.
+   * @return {@code true} if this {@link ContentType} is a technical
+   *         ancestor of the given {@code technicalType}.
    */
   boolean isTechnicalAncestor(ContentType technicalType);
 

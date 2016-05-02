@@ -404,8 +404,8 @@ public class UnicodeUtilImpl extends AbstractLoggableComponent implements Unicod
    * @param character is the character to convert.
    * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have no
    *        {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove these
-   *        characters. A typical character to use is <code>?</code>.
-   * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the character is
+   *        characters. A typical character to use is {@code ?}.
+   * @return a sequence of ASCII-characters that represent the given character or {@code null} if the character is
    *         already ASCII or there is no ASCII-representation available.
    */
   public String normalize2Ascii(char character, char nonNormalizableCharaterReplacement) {

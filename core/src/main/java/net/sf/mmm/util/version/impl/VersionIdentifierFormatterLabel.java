@@ -17,7 +17,7 @@ public class VersionIdentifierFormatterLabel extends AbstractVersionIdentifierFo
    * The constructor.
    * 
    * @param prefix is the static prefix to append before the {@link VersionIdentifier#getLabel() label}. Will
-   *        be omitted if {@link VersionIdentifier#getLabel() label} is <code>null</code>.
+   *        be omitted if {@link VersionIdentifier#getLabel() label} is {@code null}.
    * @param maximumLength is the maximum number of letters for the {@link VersionIdentifier#getLabel() label}.
    *        The default is {@link Integer#MAX_VALUE}.
    */

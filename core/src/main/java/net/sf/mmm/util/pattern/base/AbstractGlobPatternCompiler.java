@@ -43,11 +43,11 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
 
   /**
    * This method gets the flag that determines if wildcards are required. <br>
-   * This implementation always returns <code>false</code>. Override to change.
+   * This implementation always returns {@code false}. Override to change.
    * 
-   * @return <code>true</code> if wildcards are required. In that case <code>null</code> is
-   *         {@link #compile(String) returned} if the given <code>pattern</code> contains no wildcard ('*' or
-   *         '?'). <code>false</code> otherwise.
+   * @return {@code true} if wildcards are required. In that case {@code null} is
+   *         {@link #compile(String) returned} if the given {@code pattern} contains no wildcard ('*' or
+   *         '?'). {@code false} otherwise.
    */
   protected boolean isRequireWildcard() {
 
@@ -55,11 +55,11 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
   }
 
   /**
-   * This method converts the given <code>pattern</code> to a {@link Pattern#compile(String) regex-pattern}.
+   * This method converts the given {@code pattern} to a {@link Pattern#compile(String) regex-pattern}.
    * 
    * @param pattern is the pattern to convert.
-   * @return the converted regex-pattern or <code>null</code> if {@link #isRequireWildcard()} is
-   *         <code>true</code> and the given <code>pattern</code> contains no wildcard ('*' or '?').
+   * @return the converted regex-pattern or {@code null} if {@link #isRequireWildcard()} is
+   *         {@code true} and the given {@code pattern} contains no wildcard ('*' or '?').
    */
   protected String convertPattern(String pattern) {
 
@@ -84,14 +84,13 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
   }
 
   /**
-   * This method processes one or many characters from <code>chars</code> starting at the given
-   * <code>charIndex</code> and adds the translated regexp-sequence to <code>buffer</code>.
+   * This method processes one or many characters from {@code chars} starting at the given
+   * {@code charIndex} and adds the translated regexp-sequence to {@code buffer}.
    * 
    * @param chars are the characters of the original pattern string.
-   * @param charIndex is the current index in <code>chars</code>.
+   * @param charIndex is the current index in {@code chars}.
    * @param buffer is where the translated regexp-pattern is appended to.
-   * @return the index of the next character that has NOT yet been consumed (typically
-   *         <code>charIndex + 1</code>).
+   * @return the index of the next character that has NOT yet been consumed (typically {@code charIndex + 1}).
    */
   protected int process(char[] chars, int charIndex, StringBuilder buffer) {
 

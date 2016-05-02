@@ -9,7 +9,7 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
  * Placeholder implementation of {@link ValidationFailure} representing success used as internal representation where
- * <code>null</code> is not suitable.
+ * {@code null} is not suitable.
  *
  * @author hohwille
  * @since 7.1.0

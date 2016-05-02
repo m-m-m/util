@@ -133,7 +133,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * This method creates a new {@link UUID}.
    *
-   * @return the new {@link UUID} or <code>null</code> to turn this feature off.
+   * @return the new {@link UUID} or {@code null} to turn this feature off.
    */
   protected UUID createUuid() {
 
@@ -217,7 +217,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
    * @param cause is the {@link Throwable} to print.
    * @param locale is the {@link Locale} to translate to.
    * @param buffer is where to write the stack trace to.
-   * @throws IOException if caused by <code>buffer</code>.
+   * @throws IOException if caused by {@code buffer}.
    */
   private static void printStackTraceCause(Throwable cause, Locale locale, Appendable buffer) throws IOException {
 

@@ -478,7 +478,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
      * @see #navigate(ResourcePathNode)
      *
      * @param resourcePath the path to navigate to.
-     * @param returnNullIfNotExists - if <code>true</code> then <code>null</code> is returned for non-existent
+     * @param returnNullIfNotExists - if {@code true} then {@code null} is returned for non-existent
      *        resources, otherwise a {@link ClasspathResource} is created and returned.
      * @return the requested {@link DataResource}.
      */

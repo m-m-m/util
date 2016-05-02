@@ -62,7 +62,7 @@ public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
   }
 
   /**
-   * This method adds the given <code>selector</code> to this {@link XmlSet}.
+   * This method adds the given {@code selector} to this {@link XmlSet}.
    * 
    * @param selector is the selector to add.
    */

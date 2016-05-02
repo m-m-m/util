@@ -20,12 +20,12 @@ public interface XmlSet extends XmlSelector {
   Conjunction getConjunction();
 
   /**
-   * This method gets the child-selector at the given <code>index</code>.
+   * This method gets the child-selector at the given {@code index}.
    * 
    * @param index is the index of the requested selector. It has to be in the
-   *        range from <code>0</code> to
+   *        range from {@code 0} to
    *        <code>{@link #getSelectorCount()}-1</code>.
-   * @return the selector at the given <code>index</code>.
+   * @return the selector at the given {@code index}.
    */
   XmlSelector getSelector(int index);
 
@@ -47,27 +47,27 @@ public interface XmlSet extends XmlSelector {
 
     /**
      * This is the conjunction used to combine the results of multiple
-     * {@link XmlSelector}s with a logical <code>OR</code>. Each result that
+     * {@link XmlSelector}s with a logical {@code OR}. Each result that
      * is accepted by any of the {@link XmlSelector}s is added to the result of
      * the according {@link XmlSet}. <br>
-     * E.g. if the {@link XmlSelector} <code>A</code> accepts the XML nodes
-     * <code>n1</code> and <code>n2</code> with the {@link XmlSelector}
-     * <code>B</code> accepts <code>n2</code> and <code>n3</code> then the
-     * {@link #UNION} of <code>A</code> and <code>B</code> will accept
-     * <code>n1</code>, <code>n2</code> and <code>n3</code>.
+     * E.g. if the {@link XmlSelector} {@code A} accepts the XML nodes
+     * {@code n1} and {@code n2} with the {@link XmlSelector}
+     * {@code B} accepts {@code n2} and {@code n3} then the
+     * {@link #UNION} of {@code A} and {@code B} will accept
+     * {@code n1}, {@code n2} and {@code n3}.
      */
     UNION,
 
     /**
      * This is the conjunction used to combine the results of multiple
-     * {@link XmlSelector}s with a logical <code>AND</code>. Only results
+     * {@link XmlSelector}s with a logical {@code AND}. Only results
      * that are accepted by all of the {@link XmlSelector}s are added to the
      * result of the according {@link XmlSet}. <br>
-     * E.g. if the {@link XmlSelector} <code>A</code> accepts the XML nodes
-     * <code>n1</code> and <code>n2</code> with the {@link XmlSelector}
-     * <code>B</code> accepts <code>n2</code> and <code>n3</code> then the
-     * {@link #INTERSECTION} of <code>A</code> and <code>B</code> will only
-     * accept <code>n2</code>.
+     * E.g. if the {@link XmlSelector} {@code A} accepts the XML nodes
+     * {@code n1} and {@code n2} with the {@link XmlSelector}
+     * {@code B} accepts {@code n2} and {@code n3} then the
+     * {@link #INTERSECTION} of {@code A} and {@code B} will only
+     * accept {@code n2}.
      */
     INTERSECTION;
 

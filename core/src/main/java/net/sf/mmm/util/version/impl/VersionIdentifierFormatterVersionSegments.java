@@ -40,14 +40,14 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
    * 
    * @param stringUtil is the {@link StringUtil} instance.
    * @param prefix is the static prefix to append before the number. Will be omitted if the number is
-   *        <code>null</code>.
+   *        {@code null}.
    * @param segmentSeparator is the separator for {@link VersionIdentifier#getVersionSegment(int) segments}.
    *        The typical value is the dot sign (".").
-   * @param minimumSegmentCount is the minimum number of segments to format. The default is <code>0</code>.
+   * @param minimumSegmentCount is the minimum number of segments to format. The default is {@code 0}.
    * @param maximumSegmentCount is maximum number of segments to format. The default is
-   *        <code>{@link Integer#MAX_VALUE}</code>.
+   *        {@link Integer#MAX_VALUE}.
    * @param segmentPadding is the padding (minimum number of digits) for each
-   *        {@link VersionIdentifier#getVersionSegment(int) segment}. The default is <code>0</code>.
+   *        {@link VersionIdentifier#getVersionSegment(int) segment}. The default is {@code 0}.
    */
   public VersionIdentifierFormatterVersionSegments(StringUtil stringUtil, String prefix, String segmentSeparator,
       int minimumSegmentCount, int maximumSegmentCount, int segmentPadding) {
@@ -87,7 +87,7 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
 
   /**
    * This method formats the {@link VersionIdentifier#getVersionSegment(int) segment} at the given
-   * <code>index</code>.
+   * {@code index}.
    * 
    * @param value is the {@link VersionIdentifier}.
    * @param index is the index of the {@link VersionIdentifier#getVersionSegment(int) segment} to format.

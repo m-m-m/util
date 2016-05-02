@@ -50,8 +50,8 @@ public class InitializationState {
    * thread-safe and atomic way. After the initialization has completed, the method {@link #setInitialized()}
    * should be invoked.
    * 
-   * @return <code>true</code> if the state was NOT {@link #isInitialized() initialized} and is now
-   *         {@link #isInitialized() initialized}, <code>false</code> if the state is already
+   * @return {@code true} if the state was NOT {@link #isInitialized() initialized} and is now
+   *         {@link #isInitialized() initialized}, {@code false} if the state is already
    *         {@link #isInitialized() initialized}.
    */
   public boolean setInitializing() {
@@ -79,8 +79,8 @@ public class InitializationState {
   /**
    * This method gets the status of the {@link #setInitialized() initialization} .
    * 
-   * @return <code>true</code> if this component has been {@link #setInitializing() initialized},
-   *         <code>false</code> otherwise.
+   * @return {@code true} if this component has been {@link #setInitializing() initialized},
+   *         {@code false} otherwise.
    */
   public boolean isInitialized() {
 

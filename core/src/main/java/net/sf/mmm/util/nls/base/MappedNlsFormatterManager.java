@@ -37,14 +37,14 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
   }
 
   /**
-   * This method creates the {@link NlsFormatter} for the given <code>formatType</code> and the custom
-   * <code>subformat</code>. It is called if no formatter is
+   * This method creates the {@link NlsFormatter} for the given {@code formatType} and the custom
+   * {@code subformat}. It is called if no formatter is
    * {@link NlsFormatterMap#registerFormatter(NlsFormatter, String, String) registered} for the given
    * arguments. <br>
    * 
    * @param formatType is the type to be formatted.
    * @param subformat is the custom formatStyle for which no static formatter is registered.
-   * @return the according custom formatter or <code>null</code> if no such formatter is could be created.
+   * @return the according custom formatter or {@code null} if no such formatter is could be created.
    */
   protected NlsFormatter<Object> getSubFormatter(String formatType, String subformat) {
 

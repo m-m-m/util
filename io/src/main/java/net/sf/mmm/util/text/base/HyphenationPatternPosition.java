@@ -14,7 +14,7 @@ public class HyphenationPatternPosition {
   // CHECKSTYLE:OFF (no Getters for Performance)
 
   /**
-   * the index of the hyphenation-position in the pattern (without numbers). A value of <code>0</code>
+   * the index of the hyphenation-position in the pattern (without numbers). A value of {@code 0}
    * indicates a hyphenation before the first character.
    */
   public final int index;

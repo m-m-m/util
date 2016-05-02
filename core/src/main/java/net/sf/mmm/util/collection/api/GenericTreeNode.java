@@ -24,7 +24,7 @@ public interface GenericTreeNode<CHILD extends Node<PARENT>, PARENT extends Gene
   /**
    * This method gets the parent of this {@link GenericTreeNode}.
    * 
-   * @return the parent {@link GenericTreeNode} or <code>null</code> if this is the root-
+   * @return the parent {@link GenericTreeNode} or {@code null} if this is the root-
    *         {@link GenericTreeNode}.
    */
   PARENT getParent();
@@ -41,25 +41,25 @@ public interface GenericTreeNode<CHILD extends Node<PARENT>, PARENT extends Gene
   List<? extends CHILD> getChildren();
 
   /**
-   * This method determines if this {@link GenericTreeNode} is a descendant of the given <code>node</code>. In
+   * This method determines if this {@link GenericTreeNode} is a descendant of the given {@code node}. In
    * other words this method checks if this {@link GenericTreeNode} is the direct or indirect
-   * {@link #getChildren() child} of the given <code>node</code>.
+   * {@link #getChildren() child} of the given {@code node}.
    * 
    * @param node is the {@link GenericTreeNode} to check (the potential {@link #isAncestor(GenericTreeNode)
    *        ancestor}).
-   * @return <code>true</code> if this {@link GenericTreeNode} is an descendant of the given <code>node</code>
+   * @return {@code true} if this {@link GenericTreeNode} is an descendant of the given {@code node}
    *         .
    */
   boolean isDescendant(CHILD node);
 
   /**
-   * This method determines if this {@link GenericTreeNode} is an ancestor of the given <code>node</code>. In
+   * This method determines if this {@link GenericTreeNode} is an ancestor of the given {@code node}. In
    * other words this method checks if this {@link GenericTreeNode} is the direct or indirect
-   * {@link #getParent() parent} of the given <code>node</code>.
+   * {@link #getParent() parent} of the given {@code node}.
    * 
    * @param node is the {@link GenericTreeNode} to check (the potential {@link #isDescendant(Node) descendant}
    *        ).
-   * @return <code>true</code> if this {@link GenericTreeNode} is an ancestor of the given <code>node</code>.
+   * @return {@code true} if this {@link GenericTreeNode} is an ancestor of the given {@code node}.
    */
   boolean isAncestor(PARENT node);
 

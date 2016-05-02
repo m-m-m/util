@@ -28,7 +28,7 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
    * @param <TO> is the generic type of the {@link EntityTo transfer-object} to create.
    * @param entity is the {@link PersistenceEntity} to convert.
    * @param toType is the {@link Class} reflecting the {@link EntityTo ETO} to create.
-   * @return an instance of <code>toType</code> with the values of the given <code>entity</code>.
+   * @return an instance of {@code toType} with the values of the given {@code entity}.
    */
   <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> TO convertFromEntity(ENTITY entity,
       Class<TO> toType);
@@ -41,8 +41,8 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
    * @param <TO> is the generic type of the {@link EntityTo transfer-object} to create.
    * @param entityList is the {@link List} of {@link PersistenceEntity entities} to convert.
    * @param toType is the {@link Class} reflecting the {@link EntityTo ETO} to create.
-   * @return a {@link List} with all {@link PersistenceEntity entities} from <code>entityList</code>
-   *         {@link #convertFromEntity(PersistenceEntity, Class) converted} to the given <code>toType</code>.
+   * @return a {@link List} with all {@link PersistenceEntity entities} from {@code entityList}
+   *         {@link #convertFromEntity(PersistenceEntity, Class) converted} to the given {@code toType}.
    */
   <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> List<TO> convertFromEntityList(
       List<ENTITY> entityList, Class<TO> toType);
@@ -55,8 +55,8 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
    * @param <TO> is the generic type of the {@link EntityTo transfer-object} to create.
    * @param entitySet is the {@link Set} of {@link PersistenceEntity entities} to convert.
    * @param toType is the {@link Class} reflecting the {@link EntityTo ETO} to create.
-   * @return a {@link Set} with all {@link PersistenceEntity entities} from <code>entitySet</code>
-   *         {@link #convertFromEntity(PersistenceEntity, Class) converted} to the given <code>toType</code>.
+   * @return a {@link Set} with all {@link PersistenceEntity entities} from {@code entitySet}
+   *         {@link #convertFromEntity(PersistenceEntity, Class) converted} to the given {@code toType}.
    */
   <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> Set<TO> convertFromEntitySet(
       Set<ENTITY> entitySet, Class<TO> toType);
@@ -70,7 +70,7 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
    * @param <TO> is the generic type of the {@link EntityTo ETO} to convert.
    * @param transferObject is the {@link EntityTo ETO} to convert.
    * @param entityType is the {@link Class} reflecting the {@link PersistenceEntity} to create.
-   * @return an instance of <code>entityType</code> with the values of the given <code>transferObject</code>.
+   * @return an instance of {@code entityType} with the values of the given {@code transferObject}.
    */
   <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> ENTITY convertToEntity(TO transferObject,
       Class<ENTITY> entityType);
@@ -83,8 +83,8 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
    * @param <TO> is the generic type of the {@link EntityTo ETO} to convert.
    * @param transferObjects is the {@link List} of {@link EntityTo ETO}s to convert.
    * @param entityType is the {@link Class} reflecting the {@link PersistenceEntity} to create.
-   * @return a {@link List} with all {@link EntityTo ETO}s from <code>transferObjects</code>
-   *         {@link #convertToEntity(EntityTo, Class) converted} to the given <code>entityType</code>.
+   * @return a {@link List} with all {@link EntityTo ETO}s from {@code transferObjects}
+   *         {@link #convertToEntity(EntityTo, Class) converted} to the given {@code entityType}.
    */
   <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> List<ENTITY> convertToEntityList(
       List<TO> transferObjects, Class<ENTITY> entityType);
@@ -97,15 +97,15 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
    * @param <TO> is the generic type of the {@link EntityTo ETO} to convert.
    * @param transferObjects is the {@link Set} of {@link EntityTo ETO}s to convert.
    * @param entityType is the {@link Class} reflecting the {@link PersistenceEntity} to create.
-   * @return a {@link Set} with all {@link EntityTo ETO}s from <code>transferObjects</code>
-   *         {@link #convertToEntity(EntityTo, Class) converted} to the given <code>entityType</code>.
+   * @return a {@link Set} with all {@link EntityTo ETO}s from {@code transferObjects}
+   *         {@link #convertToEntity(EntityTo, Class) converted} to the given {@code entityType}.
    */
   <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> Set<ENTITY> convertToEntitySet(
       Set<TO> transferObjects, Class<ENTITY> entityType);
 
   /**
    * This method recursively updates all {@link EntityTo#getModificationCounter() modification counters} of
-   * the {@link EntityTo ETO}s contained in the given <code>container</code>. <br>
+   * the {@link EntityTo ETO}s contained in the given {@code container}. <br>
    * The method {@link #convertFromEntity(PersistenceEntity, Class)} is typically used before the transaction
    * has been closed (by the logic layer of the application). However, JPA implementations like hibernate only
    * update the {@link PersistenceEntity#getModificationCounter() modification counter} after the transaction
@@ -123,8 +123,8 @@ public interface TransferObjectUtil extends TransferObjectUtilLimited {
    *
    * @param container is the {@link EntityTo} to update or any other {@link TransferObject}, bean,
    *        {@link java.util.Collection}, or {@link java.util.Map} potentially containing an {@link EntityTo}.
-   * @param remove - <code>true</code> to remove any internal references from {@link EntityTo ETO}s so they
-   *        get dereferences and garbage-collected, <code>false</code> otherwise.
+   * @param remove - {@code true} to remove any internal references from {@link EntityTo ETO}s so they
+   *        get dereferences and garbage-collected, {@code false} otherwise.
    */
   void updateModificationCounter(Object container, boolean remove);
 

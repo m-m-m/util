@@ -13,7 +13,7 @@ import net.sf.mmm.util.transferobject.api.TransferObject;
  * {@link #getMaximumHitCount()}, and {@link #getSearchTimeout()}. For your individual search, you can extend
  * {@link net.sf.mmm.util.search.base.AbstractSearchCriteria} to create a java bean with all the fields for
  * your search. For searches in a database using JPA there is additional support provided by
- * <code>mmm-persistence</code>.
+ * {@code mmm-persistence}.
  *
  * @see SearchResult
  *
@@ -25,17 +25,17 @@ public interface SearchCriteria extends TransferObject {
   /**
    * This method gets the maximum number of hits that will be received as result for this query. <br>
    * <b>Note:</b><br>
-   * This feature is the same as <code>Query.setMaxResults(int)</code> in JPA.
+   * This feature is the same as {@code Query.setMaxResults(int)} in JPA.
    *
-   * @return the maximum hit-count or <code>null</code> for NO limit.
+   * @return the maximum hit-count or {@code null} for NO limit.
    */
   Integer getMaximumHitCount();
 
   /**
-   * This method gets the offset for the first hit. This is <code>0</code> by default. By providing a multiple
+   * This method gets the offset for the first hit. This is {@code 0} by default. By providing a multiple
    * of {@link #getMaximumHitCount()} you can simply implement paging. <br>
    * <b>Note:</b><br>
-   * This feature is the same as <code>Query.setFirstResult(int)</code> in JPA.
+   * This feature is the same as {@code Query.setFirstResult(int)} in JPA.
    *
    * @return the offset of the first hit.
    */
@@ -44,9 +44,9 @@ public interface SearchCriteria extends TransferObject {
   /**
    * This method gets the maximum delay in milliseconds the search may last until it is canceled. <br>
    * <b>Note:</b><br>
-   * This feature is the same as the query hint <code>"javax.persistence.query.timeout"</code> in JPA.
+   * This feature is the same as the query hint {@code "javax.persistence.query.timeout"} in JPA.
    *
-   * @return the search timeout in milliseconds or <code>null</code> for NO timeout.
+   * @return the search timeout in milliseconds or {@code null} for NO timeout.
    */
   Long getSearchTimeout();
 
@@ -56,7 +56,7 @@ public interface SearchCriteria extends TransferObject {
    * a search-engine does not support this feature (e.g. for full-text search this makes no sense), it will be
    * ignored.
    *
-   * @return <code>true</code> if read-only, <code>false</code> otherwise (default).
+   * @return {@code true} if read-only, {@code false} otherwise (default).
    * @since 3.1.0
    */
   boolean isReadOnly();

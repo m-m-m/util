@@ -14,7 +14,7 @@ public interface Node<PARENT> {
   /**
    * This method gets the parent of this node.
    * 
-   * @return the parent node. May be <code>null</code> (e.g. for the root node of a tree).
+   * @return the parent node. May be {@code null} (e.g. for the root node of a tree).
    */
   PARENT getParent();
 

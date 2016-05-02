@@ -9,11 +9,11 @@ import net.sf.mmm.util.pojo.NlsBundleUtilPojoRoot;
  * illegal. <br>
  * Here are some examples of illegal POJO-paths:
  * <ul>
- * <li><code>null</code></li>
- * <li><code>""</code></li>
- * <li><code>"."</code></li>
- * <li><code>".foo"</code></li>
- * <li><code>"bar."</code></li>
+ * <li>{@code null}</li>
+ * <li>{@code ""}</li>
+ * <li>{@code "."}</li>
+ * <li>{@code ".foo"}</li>
+ * <li>{@code "bar."}</li>
  * </ul>
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

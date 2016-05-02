@@ -19,7 +19,7 @@ public interface ByteArrayBuffer extends ByteArray, ByteBuffer {
    * Be very careful and only use this method if you know what you are doing!
    * 
    * @param currentIndex is the {@link #getCurrentIndex() currentIndex} to set. It has to be in the range from
-   *        <code>{@link #getMinimumIndex() minimumIndex}</code> to
+   *        {@link #getMinimumIndex() minimumIndex} to
    *        <code>{@link #getMaximumIndex() maximumIndex} + 1</code>. A value of
    *        <code>{@link #getMaximumIndex() maximumIndex} + 1</code> indicates that the buffer is consumed.
    */

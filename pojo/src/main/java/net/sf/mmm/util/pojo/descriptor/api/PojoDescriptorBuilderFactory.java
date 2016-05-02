@@ -40,9 +40,9 @@ public interface PojoDescriptorBuilderFactory {
    * @see #createPublicMethodDescriptorBuilder()
    *
    * @param methodVisibility is the minimum {@link VisibilityModifier visibility} of the methods to introspect or
-   *        <code>null</code> to ignore all methods.
+   *        {@code null} to ignore all methods.
    * @param fieldVisibility is the minimum {@link VisibilityModifier visibility} of the fields to introspect or
-   *        <code>null</code> to ignore all fields.
+   *        {@code null} to ignore all fields.
    * @return the new {@link PojoDescriptorBuilder} instance.
    */
   PojoDescriptorBuilder createDescriptorBuilder(VisibilityModifier methodVisibility,

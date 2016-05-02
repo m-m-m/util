@@ -16,12 +16,12 @@ import java.util.Map;
 public interface NlsMessageFormatter extends NlsFormatter<Void> {
 
   /**
-   * This method formats the underlying pattern by filling in the given <code>arguments</code> and writing the
-   * result into the given <code>buffer</code>.
+   * This method formats the underlying pattern by filling in the given {@code arguments} and writing the
+   * result into the given {@code buffer}.
    * 
    * {@inheritDoc}
    * 
-   * @param nothing has to be <code>null</code>. Only for generic compatibility.
+   * @param nothing has to be {@code null}. Only for generic compatibility.
    */
   void format(Void nothing, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException;

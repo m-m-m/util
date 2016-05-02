@@ -27,7 +27,7 @@ public interface PathFactory {
   String CDI_NAME = "net.sf.mmm.util.file.api.PathFactory";
 
   /**
-   * This method creates a new {@link Path} for the given <code>resourceUri</code>. The following URI-schemes
+   * This method creates a new {@link Path} for the given {@code resourceUri}. The following URI-schemes
    * are guaranteed to be supported:
    * <table border="1">
    * <tr>
@@ -59,12 +59,12 @@ public interface PathFactory {
   Path createPath(String resourceUri);
 
   /**
-   * This method creates a new {@link Path} for the given parameters. If the given <code>resourcePath</code>
+   * This method creates a new {@link Path} for the given parameters. If the given {@code resourcePath}
    * is absolute (including {@link PathUri#getSchemePrefix() scheme}), then this method returns the same
-   * result as <code>{@link #createPath(String) createPath}(resourcePath)</code>. Otherwise the resource path
-   * will be treated relative to the given <code>basePath</code>.
+   * result as {@link #createPath(String) createPath}{@code (resourcePath)}. Otherwise the resource path
+   * will be treated relative to the given {@code basePath}.
    *
-   * @param basePath is the {@link Path} to use if <code>resourcePath</code> is relative. You typically want
+   * @param basePath is the {@link Path} to use if {@code resourcePath} is relative. You typically want
    *        to provide the {@link Path#getParent() parent directory} of a resource to navigate from.
    * @param resourcePath is the absolute or relative path to the requested resource.
    * @return the new path.

@@ -38,7 +38,7 @@ public abstract class AbstractContentTypeManager extends AbstractLoggableCompone
   }
 
   /**
-   * This method registers the given <code>contentType</code> in this {@link ContentTypeManager}.
+   * This method registers the given {@code contentType} in this {@link ContentTypeManager}.
    *
    * @see #getContentType(String)
    *

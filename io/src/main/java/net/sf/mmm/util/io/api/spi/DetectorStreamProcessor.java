@@ -31,18 +31,18 @@ public interface DetectorStreamProcessor {
 
   /**
    * This method performs the actual detection and optionally manipulates the data. All this happens via the
-   * given <code>buffer</code> that provides access to read buffered parts of the stream. As streams are
+   * given {@code buffer} that provides access to read buffered parts of the stream. As streams are
    * typically larger pieces of data, this method will be called repetitive in order to process the entire
    * stream. <br>
    * <b>ATTENTION:</b><br>
-   * A legal implementation of this interface has to consume data from the given <code>buffer</code> whenever
+   * A legal implementation of this interface has to consume data from the given {@code buffer} whenever
    * it is invoked. To ensure your implementation can always make an appropriate decision it may have to
    * ensure a specific {@link DetectorStreamProcessorFactory#getLookaheadCount() lookahead}.
    * 
    * @param buffer allows you to read parts of the streamed data as well as to manipulate the data.
    * @param metadata is the {@link Map} with the meta-data.
-   * @param eos - <code>true</code> if the end of the stream has been reached and the given
-   *        <code>buffer</code> has to be
+   * @param eos - {@code true} if the end of the stream has been reached and the given
+   *        {@code buffer} has to be
    * @throws IOException in case of an Input/Output error. Should only be used internally.
    */
   void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException;

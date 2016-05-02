@@ -90,7 +90,7 @@ public interface ResourceUri {
 
   /**
    * This method gets the <em>scheme-prefix</em> of a qualified {@link ResourceUri}. The scheme-prefix has the
-   * following form: <code>[a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?</code>. The part before the colon (:) is called
+   * following form: {@code [a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?}. The part before the colon (:) is called
    * the {@link java.net.URI#getScheme() scheme}. <br>
    * Examples for scheme-prefixes are:
    * <ul>
@@ -101,7 +101,7 @@ public interface ResourceUri {
    * <li>ftp://</li>
    * </ul>
    *
-   * @return the schemePrefix or <code>null</code> if this {@link ResourceUri} is unqualified.
+   * @return the schemePrefix or {@code null} if this {@link ResourceUri} is unqualified.
    */
   String getSchemePrefix();
 

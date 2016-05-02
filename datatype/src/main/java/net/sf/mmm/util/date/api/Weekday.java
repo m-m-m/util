@@ -123,7 +123,7 @@ public enum Weekday implements SimpleDatatype<String> {
   }
 
   /**
-   * This method {@link Calendar#set(int, int) sets} this {@link Weekday} in the given <code>calendar</code>.
+   * This method {@link Calendar#set(int, int) sets} this {@link Weekday} in the given {@code calendar}.
    * 
    * @param calendar is the {@link Calendar}.
    */
@@ -137,7 +137,7 @@ public enum Weekday implements SimpleDatatype<String> {
    * This method gets the ID constant of {@link java.util.Calendar} representing this {@link Weekday}. This is
    * the Christian representation where {@link #SUNDAY} is the first day of the week represented with 1. The
    * enum constants of {@link Weekday} are ordered such that {@link #MONDAY} comes first, so you can use
-   * {@link #ordinal()} for other representation. Please note that {@link #ordinal()} is <code>0</code> based
+   * {@link #ordinal()} for other representation. Please note that {@link #ordinal()} is {@code 0} based
    * so you might want to increment the result.
    * 
    * @return the calendar ID.
@@ -148,12 +148,12 @@ public enum Weekday implements SimpleDatatype<String> {
   }
 
   /**
-   * This method returns the {@link Weekday} resulting if the given number of <code>days</code> are elapsed
+   * This method returns the {@link Weekday} resulting if the given number of {@code days} are elapsed
    * after the current {@link Weekday} (this). The {@link Weekday} will wrap so {@link #add(int) add(7)} will
    * return the {@link Weekday} itself (this) just like {@link #add(int) add(0)} or e.g. {@link #add(int)
    * add(-14)}.
    * 
-   * @param days are the number of days to add. May be negative to subtract or zero (<code>0</code>) for no
+   * @param days are the number of days to add. May be negative to subtract or zero ({@code 0}) for no
    *        change.
    * @return the resulting {@link Weekday}.
    */
@@ -178,10 +178,10 @@ public enum Weekday implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link Weekday} for the given <code>value</code>.
+   * This method gets the {@link Weekday} for the given {@code value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link Weekday}.
-   * @return the requested {@link Weekday} or <code>null</code> if no such {@link Weekday} exists.
+   * @return the requested {@link Weekday} or {@code null} if no such {@link Weekday} exists.
    */
   public static Weekday fromValue(String value) {
 
@@ -194,7 +194,7 @@ public enum Weekday implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link Weekday} from the given <code>calendar</code>.
+   * This method gets the {@link Weekday} from the given {@code calendar}.
    * 
    * @param calendar is the {@link Calendar}.
    * @return the {@link Weekday} representing the {@link Calendar#DAY_OF_WEEK weekday} of the given
@@ -213,11 +213,11 @@ public enum Weekday implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link Weekday} from the given <code>calendar</code>.
+   * This method gets the {@link Weekday} from the given {@code calendar}.
    * 
    * @param calendarId is the {@link #getCalendarId() calendar ID}.
-   * @return the {@link Weekday} representing the {@link #getCalendarId() calendar ID} or <code>null</code> if
-   *         no such {@link Weekday} exists (illegal <code>calendarId</code>).
+   * @return the {@link Weekday} representing the {@link #getCalendarId() calendar ID} or {@code null} if
+   *         no such {@link Weekday} exists (illegal {@code calendarId}).
    */
   public static Weekday fromCalendarId(int calendarId) {
 

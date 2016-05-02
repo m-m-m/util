@@ -19,7 +19,7 @@ public interface DataResourceFactory {
   String CDI_NAME = "net.sf.mmm.util.resource.api.DataResourceFactory";
 
   /**
-   * This method creates a new {@link DataResource} from the given <code>resourceUri</code>. The following
+   * This method creates a new {@link DataResource} from the given {@code resourceUri}. The following
    * URI-schemes are guaranteed to be supported:
    * <table border="1">
    * <tr>
@@ -47,7 +47,7 @@ public interface DataResourceFactory {
    * @param resourceUri is the {@link DataResource#getUri() absolute URI} pointing to the location of the
    *        requested {@link DataResource}.
    * @return the requested {@link DataResource}.
-   * @throws ResourceUriUndefinedException if the given <code>resourceUri</code> is undefined (e.g. the scheme
+   * @throws ResourceUriUndefinedException if the given {@code resourceUri} is undefined (e.g. the scheme
    *         is NOT supported).
    */
   DataResource createDataResource(String resourceUri) throws ResourceUriUndefinedException;

@@ -82,7 +82,7 @@ public @interface CliMode {
   };
 
   /**
-   * <code>true</code> if this mode is <em>abstract</em>, <code>false</code> otherwise (default). <br>
+   * {@code true} if this mode is <em>abstract</em>, {@code false} otherwise (default). <br>
    * An abstract mode needs to have one or multiple child modes (that {@link #parentIds() extend} the abstract
    * mode). If an {@link CliOption option} {@link CliOption#mode() has a mode}, that is {@link #isAbstract()
    * abstract}, then this {@link CliOption option} can only be used together with another {@link CliOption

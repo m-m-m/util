@@ -28,7 +28,7 @@ public class FilterRuleChain<V> implements Filter<V> {
   @XmlAttribute(name = "id")
   private String id;
 
-  /** The parent that is extended by this chain or <code>null</code>. */
+  /** The parent that is extended by this chain or {@code null}. */
   @XmlIDREF
   @XmlAttribute(name = "parent")
   private FilterRuleChain<V> parent;
@@ -54,7 +54,7 @@ public class FilterRuleChain<V> implements Filter<V> {
   /**
    * The constructor.
    *
-   * @param defaultResult is the {@link #accept(Object) result} if none of the <code>rules</code> match.
+   * @param defaultResult is the {@link #accept(Object) result} if none of the {@code rules} match.
    * @param rules is the chain of rules.
    */
   @SafeVarargs
@@ -69,9 +69,9 @@ public class FilterRuleChain<V> implements Filter<V> {
    * The constructor.
    *
    * @param id is the {@link #getId() ID}.
-   * @param parent is the parent-{@link FilterRuleChain chain} to extend or <code>null</code> for a root-chain.
+   * @param parent is the parent-{@link FilterRuleChain chain} to extend or {@code null} for a root-chain.
    * @param rules is the chain of rules.
-   * @param defaultResult is the {@link #accept(Object) result} if none of the <code>rules</code> match.
+   * @param defaultResult is the {@link #accept(Object) result} if none of the {@code rules} match.
    */
   @SafeVarargs
   public FilterRuleChain(String id, FilterRuleChain<V> parent, boolean defaultResult, FilterRule<V>... rules) {
@@ -97,7 +97,7 @@ public class FilterRuleChain<V> implements Filter<V> {
    * {@inheritDoc}
    *
    * This method checks all rules in the chain and returns the result of the first matching rule. If no rule matches,
-   * <code>{@link #getDefaultResult()}</code> is returned.
+   * {@link #getDefaultResult()} is returned.
    */
   @Override
   public boolean accept(V value) {
@@ -114,8 +114,8 @@ public class FilterRuleChain<V> implements Filter<V> {
    * This method implements {@link #accept(Object)} recursively.
    *
    * @param value is the value to filter.
-   * @return <code>true</code> if the value is accepted, <code>false</code> if the value is NOT accepted, or
-   *         <code>null</code> if no decision is made.
+   * @return {@code true} if the value is accepted, {@code false} if the value is NOT accepted, or
+   *         {@code null} if no decision is made.
    */
   private Boolean acceptRecursive(V value) {
 
@@ -136,11 +136,11 @@ public class FilterRuleChain<V> implements Filter<V> {
   }
 
   /**
-   * This method extends this chain with <code>additionalRules</code>.
+   * This method extends this chain with {@code additionalRules}.
    *
    * @param newDefaultResult is the result of the new extended chain if none of the rules match.
    * @param additionalRules are the rules to add.
-   * @return the chain that also checks the <code>additionalRules</code> if none of this rules match.
+   * @return the chain that also checks the {@code additionalRules} if none of this rules match.
    */
   @SuppressWarnings("unchecked")
   public FilterRuleChain<V> extend(boolean newDefaultResult, FilterRule<V>... additionalRules) {
@@ -154,7 +154,7 @@ public class FilterRuleChain<V> implements Filter<V> {
   /**
    * This method gets the ID used to identify this chain.
    *
-   * @return the ID or <code>null</code> if undefined.
+   * @return the ID or {@code null} if undefined.
    */
   public String getId() {
 

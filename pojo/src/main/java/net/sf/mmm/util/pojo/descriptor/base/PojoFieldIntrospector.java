@@ -22,7 +22,7 @@ import java.util.Iterator;
 public interface PojoFieldIntrospector {
 
   /**
-   * This method finds the {@link Field fields} of the given <code>pojoType</code>.
+   * This method finds the {@link Field fields} of the given {@code pojoType}.
    * 
    * @param pojoType is the type reflecting the POJO for which the {@link Field fields} are requested.
    * @return a read-only iterator of all the {@link Field}s.

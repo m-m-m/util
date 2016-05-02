@@ -15,9 +15,9 @@ public abstract class TransformerRule {
    * @see net.sf.mmm.util.text.api.Singularizer#transform(String)
    * 
    * @param string is the original string to modify.
-   * @param stringLowerCase is the <code>string</code> in {@link String#toLowerCase() lower-case}.
-   * @return the replaced <code>string</code> or <code>null</code> if this rule does NOT apply and the
-   *         <code>string</code> should NOT be replaced.
+   * @param stringLowerCase is the {@code string} in {@link String#toLowerCase() lower-case}.
+   * @return the replaced {@code string} or {@code null} if this rule does NOT apply and the
+   *         {@code string} should NOT be replaced.
    */
   public abstract String transform(String string, String stringLowerCase);
 

@@ -13,7 +13,7 @@ import net.sf.mmm.util.entity.api.GenericEntity;
 public interface ContactInfo extends GenericEntity<Long> {
 
   /**
-   * @return the email address or <code>null</code> if undefined.
+   * @return the email address or {@code null} if undefined.
    */
   String getEmail();
 
@@ -23,7 +23,7 @@ public interface ContactInfo extends GenericEntity<Long> {
   void setEmail(String email);
 
   /**
-   * @return the phone number or <code>null</code> if undefined.
+   * @return the phone number or {@code null} if undefined.
    */
   String getPhone();
 
@@ -33,7 +33,7 @@ public interface ContactInfo extends GenericEntity<Long> {
   void setPhone(String phone);
 
   /**
-   * @return the fax number or <code>null</code> if undefined.
+   * @return the fax number or {@code null} if undefined.
    */
   String getFax();
 

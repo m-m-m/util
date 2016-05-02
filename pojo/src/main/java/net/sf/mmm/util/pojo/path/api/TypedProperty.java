@@ -51,7 +51,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * the type of the getter in parallel with the according {@link TypedProperty} constant. In the same moment the compiler
  * will reject the above code to create the query and you will be able to fix all places where generic access to the
  * "age" property takes place. When using simple string references for property access (
- * <code>addCondition(String, Operator, Object)</code>) instead you would have to pray that you did NOT miss anything in
+ * {@code addCondition(String, Operator, Object)}) instead you would have to pray that you did NOT miss anything in
  * the code or you get errors in production at runtime.
  *
  * @param <T> is the generic type of the property.
@@ -129,7 +129,7 @@ public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String
    * The constructor.
    *
    * @param property is the existing {@link TypedProperty} to create as nested property.
-   * @param path is the parent path to the given <code>property</code>. See also {@link #createPath(String...)}.
+   * @param path is the parent path to the given {@code property}. See also {@link #createPath(String...)}.
    */
   public TypedProperty(TypedProperty<T> property, String path) {
 
@@ -225,7 +225,7 @@ public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String
    * documented. By default the type will be omitted, to lower the barrier of defining a {@link TypedProperty} for each
    * property of an entity.
    *
-   * @return the type or <code>null</code> if NOT available.
+   * @return the type or {@code null} if NOT available.
    */
   public Class<T> getPropertyType() {
 
@@ -242,7 +242,7 @@ public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String
   }
 
   /**
-   * This method creates a {@link #getPojoPath() pojo property path} specified by the given <code>segments</code>.
+   * This method creates a {@link #getPojoPath() pojo property path} specified by the given {@code segments}.
    *
    * @param segments is the array of properties to concat with dot (".").
    * @return the resulting property path as {@link String}.
@@ -263,7 +263,7 @@ public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String
 
   /**
    * This method {@link StringBuilder#append(String) appends} the {@link #getPojoPath() pojo property path} specified by
-   * the given <code>segments</code> to the given <code>buffer</code>.
+   * the given {@code segments} to the given {@code buffer}.
    *
    * @param buffer is the {@link StringBuilder} to append to.
    * @param segments are the path segments for the property.

@@ -44,7 +44,7 @@ public class SimplePojoFactory extends AbstractLoggableComponent implements Pojo
    * 
    * @param <POJO> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
    * @param pojoType is the {@link Class} reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
-   * @return the new instance of the given <code>pojoType</code>.
+   * @return the new instance of the given {@code pojoType}.
    * @throws InstantiationFailedException if the instantiation failed.
    */
   protected <POJO> POJO newInstanceForClass(Class<POJO> pojoType) throws InstantiationFailedException {
@@ -62,7 +62,7 @@ public class SimplePojoFactory extends AbstractLoggableComponent implements Pojo
    * 
    * @param <POJO> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
    * @param pojoInterface is the interface reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
-   * @return the new instance of the given <code>pojoType</code> or <code>null</code> if no implementation
+   * @return the new instance of the given {@code pojoType} or {@code null} if no implementation
    *         could be found.
    * @throws InstantiationFailedException if the instantiation failed.
    */

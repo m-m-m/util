@@ -58,13 +58,13 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    *
    * @see #isForUser()
    *
-   * @return <code>true</code> if this is a technical exception, <code>false</code> if this is a user error.
+   * @return {@code true} if this is a technical exception, {@code false} if this is a user error.
    */
   boolean isTechnical();
 
   /**
-   * @return <code>true</code> if the {@link #getMessage() message} of this exception is for end-users (or
-   *         clients), <code>false</code> otherwise (for internal {@link #isTechnical() technical} errors).
+   * @return {@code true} if the {@link #getMessage() message} of this exception is for end-users (or
+   *         clients), {@code false} otherwise (for internal {@link #isTechnical() technical} errors).
    */
   boolean isForUser();
 
@@ -100,7 +100,7 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    *
    * @param locale is the locale to translate to.
    * @param buffer is where to write the stack trace to.
-   * @throws IllegalStateException if the given <code>buffer</code> produced an {@link java.io.IOException}.
+   * @throws IllegalStateException if the given {@code buffer} produced an {@link java.io.IOException}.
    * @since 2.0.0
    */
   void printStackTrace(Locale locale, Appendable buffer) throws IllegalStateException;
@@ -119,7 +119,7 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    *
    * @param truncation the {@link ExceptionTruncation} to configure what to remove. E.g.
    *        {@link ExceptionTruncation#REMOVE_ALL}.
-   * @return a truncated copy of this <code>exception</code>.
+   * @return a truncated copy of this {@code exception}.
    */
   Throwable createCopy(ExceptionTruncation truncation);
 
@@ -148,8 +148,8 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    *
    * @param locale is the {@link Locale} used for {@link #getLocalizedMessage(Locale)}.
    * @param appendable is the buffer to {@link Appendable#append(CharSequence) append} to. Will be created as
-   *        {@link StringBuilder} if <code>null</code> is provided.
-   * @return the provided {@link Appendable} or the created one if <code>null</code> was given.
+   *        {@link StringBuilder} if {@code null} is provided.
+   * @return the provided {@link Appendable} or the created one if {@code null} was given.
    * @since 6.0.0
    */
   Appendable toString(Locale locale, Appendable appendable);

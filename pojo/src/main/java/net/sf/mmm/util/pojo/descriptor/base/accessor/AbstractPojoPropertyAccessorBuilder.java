@@ -8,14 +8,14 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
  * This is an abstract base implementation of the
  * {@link net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorBuilder} interface. <br>
  * It provides some helpful methods that make it easier to write implementations.
- * 
+ *
  * @param <ACCESSOR> is the type of the accessor
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoPropertyAccessor> implements
-    PojoPropertyAccessorBuilder<ACCESSOR> {
+public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoPropertyAccessor>
+    implements PojoPropertyAccessorBuilder<ACCESSOR> {
 
   /**
    * The constructor.
@@ -26,11 +26,10 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   }
 
   /**
-   * This method determines if the given <code>type</code> is a boolean type ( <code>boolean.class</code> or
-   * <code>{@link Boolean}.class</code>).
-   * 
+   * This method determines if the given {@code type} is a boolean type ({@code boolean.class} or {@code Boolean.class}.
+   *
    * @param type is the class to check.
-   * @return <code>true</code> if type represents a boolean, <code>false</code> otherwise.
+   * @return {@code true} if type represents a boolean, {@code false} otherwise.
    */
   protected static boolean isBooleanType(Class<?> type) {
 
@@ -41,11 +40,10 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   }
 
   /**
-   * This method determines if the given <code>type</code> is an integer type ( <code>int.class</code> or
-   * <code>{@link Integer}.class</code>).
-   * 
+   * This method determines if the given {@code type} is an integer type ({@code int.class} or {@code Integer.class}).
+   *
    * @param type is the class to check.
-   * @return <code>true</code> if type represents an integer, <code>false</code> otherwise.
+   * @return {@code true} if type represents an integer, {@code false} otherwise.
    */
   protected static boolean isIntegerType(Class<?> type) {
 
@@ -56,22 +54,21 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   }
 
   /**
-   * This method gets the according
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() property-name} for the given
-   * <code>methodName</code>. <br>
-   * This is the un-capitalized substring of the <code>methodName</code> after between the given
-   * <code>prefix</code> and <code>suffix</code>.
-   * 
+   * This method gets the according {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName()
+   * property-name} for the given {@code methodName}. <br>
+   * This is the un-capitalized substring of the {@code methodName} after between the given {@code prefix} and
+   * {@code suffix}.
+   *
    * @param methodName is the {@link java.lang.reflect.Method#getName() name} of the
    *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getAccessibleObject()
    *        accessor-method}.
-   * @param prefixes is an array with all possible prefixes (e.g. <code>"get", "is", "has"</code>). May also
-   *        be empty array instead of <code>{""}</code>.
-   * @param suffixes is an array with all possible suffixes (e.g. <code>"Size", "Length", "Count"</code>). May
-   *        also be empty array instead of <code>{""}</code>.
-   * @return the requested property-name or <code>null</code> if NOT available. (<code>methodName</code> does
-   *         NOT {@link String#startsWith(String) start with} one of the <code>prefixes</code> or does NOT
-   *         {@link String#endsWith(String) end with} one of the <code>suffixes</code>).
+   * @param prefixes is an array with all possible prefixes (e.g. {@code "get", "is", "has"}). May also be empty array
+   *        instead of <code>{""}</code>.
+   * @param suffixes is an array with all possible suffixes (e.g. {@code "Size", "Length", "Count"}). May also be empty
+   *        array instead of <code>{""}</code>.
+   * @return the requested property-name or {@code null} if NOT available. ({@code methodName} does NOT
+   *         {@link String#startsWith(String) start with} one of the {@code prefixes} or does NOT
+   *         {@link String#endsWith(String) end with} one of the {@code suffixes}).
    */
   protected String getPropertyName(String methodName, String[] prefixes, String[] suffixes) {
 
@@ -98,20 +95,19 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   }
 
   /**
-   * This method gets the according
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() property-name} for the given
-   * <code>methodName</code>. <br>
-   * This is the un-capitalized substring of the <code>methodName</code> after between the given
-   * <code>prefix</code> and <code>suffix</code>.
-   * 
+   * This method gets the according {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName()
+   * property-name} for the given {@code methodName}. <br>
+   * This is the un-capitalized substring of the {@code methodName} after between the given {@code prefix} and
+   * {@code suffix}.
+   *
    * @param methodName is the {@link java.lang.reflect.Method#getName() name} of the
    *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getAccessibleObject()
    *        accessor-method}.
    * @param prefix is the prefix (e.g. "get", "set" or "is").
    * @param suffix is the suffix (e.g. "" or "Size").
-   * @return the requested property-name or <code>null</code> if NOT available. (<code>methodName</code> does
-   *         NOT {@link String#startsWith(String) start with} <code>prefix</code> or does NOT
-   *         {@link String#endsWith(String) end with} <code>suffix</code>).
+   * @return the requested property-name or {@code null} if NOT available. ({@code methodName} does NOT
+   *         {@link String#startsWith(String) start with} {@code prefix} or does NOT {@link String#endsWith(String) end
+   *         with} {@code suffix}).
    */
   protected String getPropertyName(String methodName, String prefix, String suffix) {
 
@@ -122,19 +118,17 @@ public abstract class AbstractPojoPropertyAccessorBuilder<ACCESSOR extends PojoP
   }
 
   /**
-   * This method gets the according
-   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName() property-name} for the given
-   * <code>methodName</code>. <br>
-   * This is the un-capitalized substring of the <code>methodName</code> after the prefix (given via
-   * <code>prefixLength</code>).
-   * 
+   * This method gets the according {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor#getName()
+   * property-name} for the given {@code methodName}. <br>
+   * This is the un-capitalized substring of the {@code methodName} after the prefix (given via {@code prefixLength}).
+   *
    * @param methodName is the {@link java.lang.reflect.Method#getName() name} of the
    *        {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getAccessibleObject()
    *        accessor-method}.
    * @param prefixLength is the length of the method prefix (e.g. 3 for "get"/"set" or 2 for "is").
    * @param suffixLength is the length of the method suffix (e.g. 4 for "Size").
-   * @return the requested property-name or <code>null</code> if NOT available <br>
-   *         (<code>methodName</code>.{@link String#length() length()} &lt;= <code>prefixLength</code>).
+   * @return the requested property-name or {@code null} if NOT available <br>
+   *         ({@code methodName}.{@link String#length() length()} &lt;= {@code prefixLength}).
    */
   protected String getPropertyName(String methodName, int prefixLength, int suffixLength) {
 

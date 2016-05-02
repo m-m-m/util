@@ -19,7 +19,7 @@ public interface ReadableContainerProperty<V> extends ReadableProperty<V> {
 
   /**
    * @return the result of {@link #getValue()} but an empty container ({@link java.util.Collection} or
-   *         {@link java.util.Map}) instead of <code>null</code>.
+   *         {@link java.util.Map}) instead of {@code null}.
    */
   V getValueNotNull();
 

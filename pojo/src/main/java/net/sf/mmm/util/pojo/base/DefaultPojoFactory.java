@@ -89,7 +89,7 @@ public class DefaultPojoFactory extends SimplePojoFactory {
    * 
    * @param <POJO> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
    * @param pojoInterface is the interface reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
-   * @return the new instance of the given <code>pojoType</code>.
+   * @return the new instance of the given {@code pojoType}.
    * @throws InstantiationFailedException if the instantiation failed.
    */
   @Override

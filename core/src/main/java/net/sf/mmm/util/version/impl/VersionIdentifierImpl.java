@@ -73,14 +73,14 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
    * The constructor.
    * 
    * @param stringRepresentation - see {@link #toString()}.
-   * @param label - see {@link #getLabel()}. May be <code>null</code>.
-   * @param timestamp - see {@link #getTimestamp()}. May be <code>null</code>.
-   * @param revision - see {@link #getRevision()}. May be <code>null</code>.
-   * @param phase - see {@link #getPhase()}. May be <code>null</code>.
-   * @param phaseAlias - see {@link #getPhase()}. May be <code>null</code> (only if <code>phase</code> is
-   *        <code>null</code>).
-   * @param phaseNumber - see {@link #getPhaseNumber()}. May be <code>null</code> (only if <code>phase</code>
-   *        is <code>null</code>).
+   * @param label - see {@link #getLabel()}. May be {@code null}.
+   * @param timestamp - see {@link #getTimestamp()}. May be {@code null}.
+   * @param revision - see {@link #getRevision()}. May be {@code null}.
+   * @param phase - see {@link #getPhase()}. May be {@code null}.
+   * @param phaseAlias - see {@link #getPhase()}. May be {@code null} (only if {@code phase} is
+   *        {@code null}).
+   * @param phaseNumber - see {@link #getPhaseNumber()}. May be {@code null} (only if {@code phase}
+   *        is {@code null}).
    * @param snapshot - see {@link #isSnapshot()}.
    * @param versionSegments - see {@link #getVersionSegment(int)}. At least one segment is required if no
    *        {@link #isSnapshot() snapshot}.

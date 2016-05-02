@@ -70,7 +70,7 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
    * This method determines if the given type is a {@link List}.
    *
    * @param rawType is the {@link Class} to check.
-   * @return <code>true</code> if the given type is assignable to {@link List}.
+   * @return {@code true} if the given type is assignable to {@link List}.
    */
   private boolean isCollection(Class<?> rawType) {
 
@@ -99,7 +99,7 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
    * This method determines if the given type is a {@link Map}.
    *
    * @param rawType is the {@link Class} to check.
-   * @return <code>true</code> if the given type is assignable to {@link Map}.
+   * @return {@code true} if the given type is assignable to {@link Map}.
    */
   private boolean isMap(Class<?> rawType) {
 

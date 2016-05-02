@@ -9,7 +9,7 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  * generally NOT supported. <br>
  * <b>ATTENTION:</b><br>
  * Please always consider to avoid APIs that throw such exception and use inheritance instead (e.g. if there was a
- * <code>ReadOnlyIterator</code> such as <code>Enumeration</code> that <code>Iterator</code> extends).
+ * {@code ReadOnlyIterator} such as {@code Enumeration} that {@code Iterator} extends).
  *
  * @see UnsupportedOperationException
  *

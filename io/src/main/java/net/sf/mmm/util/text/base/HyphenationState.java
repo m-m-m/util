@@ -55,7 +55,7 @@ public class HyphenationState {
    * @param hyphen is the {@link net.sf.mmm.util.text.api.Hyphenator#getHyphen() hyphen}.
    * @param maxPatternLength is the maximum {@link String#length() length} of all {@link HyphenationPattern
    *        patterns}.
-   * @param offset is the start-position in word. Typically <code>0</code>.
+   * @param offset is the start-position in word. Typically {@code 0}.
    * @param hasher is the {@link StringHasher hash-algorithm}. It should be fast. The same
    *        {@link StringHasher} needs to be used for {@link HyphenationPattern#getWordPartHash()}.
    * @param stringUtil is the {@link StringUtil} to use.
@@ -134,7 +134,7 @@ public class HyphenationState {
   }
 
   /**
-   * This method applies the {@link HyphenationPattern pattern} matching at the given <code>offset</code>.
+   * This method applies the {@link HyphenationPattern pattern} matching at the given {@code offset}.
    * 
    * @param pattern is the matching {@link HyphenationPattern pattern}.
    * @param pos is the offset in the word to hyphenate.
@@ -213,7 +213,7 @@ public class HyphenationState {
   }
 
   /**
-   * This method generates a string with the given <code>word</code> including the
+   * This method generates a string with the given {@code word} including the
    * {@link HyphenationPatternPosition#ranking ranked} hyphenation points. It is intended for debugging
    * purposes.
    * 

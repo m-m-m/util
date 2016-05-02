@@ -149,7 +149,7 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
 
   /**
    * This method creates the {@link Class#getSimpleName() simple name} of the {@link Class} to generate.
-   * Typically derived from {@link JClassType#getName()} of the given <code>inputType</code> with a static
+   * Typically derived from {@link JClassType#getName()} of the given {@code inputType} with a static
    * suffix or prefix that is specific enough to avoid clashing with existing classes.
    * 
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
@@ -219,7 +219,7 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
    * @param methodName is the name of the method (or the {@link Class#getSimpleName() simple class name} for a
    *        constructor}.
    * @param arguments is the source line with the arguments to the method or constructor.
-   * @param override - <code>true</code> if an {@link Override} annotation shall be added.
+   * @param override - {@code true} if an {@link Override} annotation shall be added.
    */
   protected final void generateSourcePublicMethodDeclaration(SourceWriter sourceWriter, String returnType,
       String methodName, String arguments, boolean override) {
@@ -256,8 +256,8 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
    * 
    * @param cachedGeneratorResult is the {@link CachedGeneratorResult}.
    * @param typeName is the full-qualified name of the {@link Class} to generate.
-   * @return <code>true</code> if the {@link CachedGeneratorResult} is obsolete and has to be re-generated,
-   *         <code>false</code> otherwise (if it can be reused).
+   * @return {@code true} if the {@link CachedGeneratorResult} is obsolete and has to be re-generated,
+   *         {@code false} otherwise (if it can be reused).
    */
   protected boolean isCachedResultObsolete(CachedGeneratorResult cachedGeneratorResult, String typeName) {
 

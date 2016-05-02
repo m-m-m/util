@@ -31,7 +31,7 @@ public interface WritableStringProperty
   }
 
   /**
-   * @return the {@link #getValue() value} or the empty {@link String} if {@link #getValue() value} is <code>null</code>
+   * @return the {@link #getValue() value} or the empty {@link String} if {@link #getValue() value} is {@code null}
    *         .
    */
   default String getValueSafe() {

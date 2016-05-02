@@ -69,13 +69,13 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    *
    * @param string is the string to be tokenized.
    * @param escapeStart is the string used to start escaping of a token. The string has to be free of
-   *        <code>delimiters</code>.
+   *        {@code delimiters}.
    * @param escapeEnd is the string used to end escaping of a token. The string has to be free of
-   *        <code>delimiters</code>.
+   *        {@code delimiters}.
    * @param delimiters are the characters that will be detected as delimiters.
-   * @throws NlsIllegalArgumentException if <code>escapeStart</code> or <code>escapeEnd</code> is an empty
-   *         string or contains a character of <code>delimiters</code>, or one of them is <code>null</code>
-   *         while the other is not, or both are not <code>null</code> but {@link Object#equals(Object) equal}
+   * @throws NlsIllegalArgumentException if {@code escapeStart} or {@code escapeEnd} is an empty
+   *         string or contains a character of {@code delimiters}, or one of them is {@code null}
+   *         while the other is not, or both are not {@code null} but {@link Object#equals(Object) equal}
    *         to each other.
    *
    * @since 2.0.0
@@ -93,13 +93,13 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    *
    * @param string is the string to be tokenized.
    * @param escapeStart is the string used to start escaping of a token. May NOT be the empty string. The
-   *        string has to be free of <code>delimiters</code>.
+   *        string has to be free of {@code delimiters}.
    * @param escapeEnd is the string used to end escaping of a token. May NOT be the empty string.The string
-   *        has to be free of <code>delimiters</code>.
+   *        has to be free of {@code delimiters}.
    * @param delimiters are the characters that will be detected as delimiters.
-   * @throws NlsIllegalArgumentException if <code>escapeStart</code> or <code>escapeEnd</code> is an empty
-   *         string or contains a character of <code>delimiters</code>, or one of them is <code>null</code>
-   *         while the other is not, or both are not <code>null</code> but {@link Object#equals(Object) equal}
+   * @throws NlsIllegalArgumentException if {@code escapeStart} or {@code escapeEnd} is an empty
+   *         string or contains a character of {@code delimiters}, or one of them is {@code null}
+   *         while the other is not, or both are not {@code null} but {@link Object#equals(Object) equal}
    *         to each other.
    *
    * @since 2.0.0
@@ -151,13 +151,13 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   }
 
   /**
-   * This method checks that the given <code>escape</code> sequence does NOT contain any of the
-   * <code>delimiters</code>.
+   * This method checks that the given {@code escape} sequence does NOT contain any of the
+   * {@code delimiters}.
    *
    * @param escape is the escape-sequence to check.
-   * @param delimiters are the delimiters that should NOT be contained in <code>escape</code>.
-   * @return <code>true</code> if <code>escape</code> contains a character of <code>delimiters</code>,
-   *         <code>false</code> otherwise.
+   * @param delimiters are the delimiters that should NOT be contained in {@code escape}.
+   * @return {@code true} if {@code escape} contains a character of {@code delimiters},
+   *         {@code false} otherwise.
    */
   private static boolean containsDelimiter(char[] escape, char[] delimiters) {
 
@@ -264,12 +264,12 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   }
 
   /**
-   * This method tests if the string to tokenize contains the given <code>substring</code> starting at the
-   * given <code>index</code>.
+   * This method tests if the string to tokenize contains the given {@code substring} starting at the
+   * given {@code index}.
    *
    * @param substring is the substring to check for.
    * @param startIndex is the start index in the string to tokenize.
-   * @return <code>true</code> if the given <code>substring</code> was found at <code>index</code>.
+   * @return {@code true} if the given {@code substring} was found at {@code index}.
    */
   protected boolean containsSubstring(char[] substring, int startIndex) {
 
@@ -287,7 +287,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   /**
    * @see java.util.StringTokenizer#hasMoreTokens()
    *
-   * @return <code>true</code> if {@link #next()} is available, <code>false</code> otherwise.
+   * @return {@code true} if {@link #next()} is available, {@code false} otherwise.
    */
   public boolean hasMoreTokens() {
 

@@ -81,10 +81,10 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
    * @param node is the {@link JsonNode} containing the value as child.
    * @param fieldName is the {@link JsonNode#get(String) field name} of the requested value.
    * @param type is the {@link Class} reflecting the requested type to convert to.
-   * @param required - <code>true</code> if the value is mandatory and an exception will be thrown if the
-   *        value is not present, <code>false</code> otherwise.
-   * @return the requested and converted value. May be <code>null</code> if not set and <code>required</code>
-   *         is <code>false</code>.
+   * @param required - {@code true} if the value is mandatory and an exception will be thrown if the
+   *        value is not present, {@code false} otherwise.
+   * @return the requested and converted value. May be {@code null} if not set and {@code required}
+   *         is {@code false}.
    */
   protected <V> V getValue(JsonNode node, String fieldName, Class<V> type, boolean required) {
 
@@ -105,7 +105,7 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
    * @param <V> is the generic type of the requested value.
    * @param valueNode is the {@link JsonNode} containing the value.
    * @param type is the {@link Class} reflecting the requested type to convert to.
-   * @return the requested and converted value. May be <code>null</code> if not set.
+   * @return the requested and converted value. May be {@code null} if not set.
    */
   @SuppressWarnings("unchecked")
   protected <V> V getValue(JsonNode valueNode, Class<V> type) {
@@ -189,9 +189,9 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
    * @param context is the {@link DeserializationContext}.
    * @param type is the {@link Class} reflecting the expected type of the value to deserialize.
    * @param parentNode is the {@link JsonNode} that has already been parsed (recursive call) or
-   *        <code>null</code> if the value has to be read from {@link JsonParser}.
+   *        {@code null} if the value has to be read from {@link JsonParser}.
    * @param segment is the {@link DatatypeSegmentDescriptor} with the segment to deserialize as child of
-   *        parentNode (recursive call) or <code>null</code> if the value has to be read from
+   *        parentNode (recursive call) or {@code null} if the value has to be read from
    *        {@link JsonParser}.
    * @return the deserialized value.
    * @throws IOException if reading from {@link JsonParser} causes an I/O problem.

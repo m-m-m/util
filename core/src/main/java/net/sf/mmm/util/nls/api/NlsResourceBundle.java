@@ -25,7 +25,7 @@ public interface NlsResourceBundle {
    * @see NlsBundle
    * 
    * @param key is the key of the localized string to get.
-   * @return the localized {@link String} for the given <code>key</code>.
+   * @return the localized {@link String} for the given {@code key}.
    * @throws MissingResourceException if the requested object does NOT exist.
    */
   String getString(String key) throws MissingResourceException;

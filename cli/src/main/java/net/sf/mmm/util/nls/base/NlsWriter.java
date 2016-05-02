@@ -195,7 +195,7 @@ public class NlsWriter extends AppendableWriter {
   }
 
   /**
-   * This method {@link #write(String) writes} the raw <code>text</code> without internationalization. It may
+   * This method {@link #write(String) writes} the raw {@code text} without internationalization. It may
    * be used for text that is language independent or already internationalized.
    *
    * @param text is the raw text to write.
@@ -208,7 +208,7 @@ public class NlsWriter extends AppendableWriter {
   }
 
   /**
-   * This method {@link #write(String) writes} the raw <code>text</code> without internationalization. It may
+   * This method {@link #write(String) writes} the raw {@code text} without internationalization. It may
    * be used for text that is language independent or already internationalized.
    *
    * @param text is the raw text to write.

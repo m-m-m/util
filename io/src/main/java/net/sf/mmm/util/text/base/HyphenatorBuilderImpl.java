@@ -47,22 +47,22 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   /** @see #createHyphenator(String) */
   public static final String HYPHENATION_XML_CONFIG_SUFFIX = ".xml";
 
-  /** The XML root tag (<code>hyphenation</code>). */
+  /** The XML root tag ({@code hyphenation}). */
   private static final QName XML_TAG_HYPHENATION = new QName("hyphenation");
 
-  /** The XML attribute for the hyphen character (<code>hyphen</code>). */
+  /** The XML attribute for the hyphen character ({@code hyphen}). */
   private static final QName XML_ATR_HYPHEN = new QName("hyphen");
 
-  /** The XML tag for the list of exceptions to hyphenation rules (<code>exceptions</code>). */
+  /** The XML tag for the list of exceptions to hyphenation rules ({@code exceptions}). */
   private static final QName XML_TAG_EXCEPTION_LIST = new QName("exceptions");
 
-  /** The XML tag for the list of patterns (<code>patterns</code>). */
+  /** The XML tag for the list of patterns ({@code patterns}). */
   private static final QName XML_TAG_PATTERN_LIST = new QName("patterns");
 
-  /** The XML tag for an exception (<code>e</code>). */
+  /** The XML tag for an exception ({@code e}). */
   private static final QName XML_TAG_EXCEPTION = new QName("e");
 
-  /** The XML tag for a pattern (<code>p</code>). */
+  /** The XML tag for a pattern ({@code p}). */
   private static final QName XML_TAG_PATTERN = new QName("p");
 
   /** @see #getInstance() */
@@ -221,7 +221,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   }
 
   /**
-   * This method parses a list of strings enclosed by elements with the given <code>elementName</code> until the current
+   * This method parses a list of strings enclosed by elements with the given {@code elementName} until the current
    * element ends. E.g. if you have this XML:
    *
    * <pre>

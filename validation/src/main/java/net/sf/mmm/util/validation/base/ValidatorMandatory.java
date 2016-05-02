@@ -12,7 +12,7 @@ import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 /**
  * This is a {@link net.sf.mmm.util.validation.api.ValueValidator} that validates that a mandatory value is filled. It
  * will produce a {@link net.sf.mmm.util.validation.api.ValidationFailure} if the value is not provided (empty, blank,
- * <code>null</code>).
+ * {@code null}).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

@@ -74,7 +74,7 @@ public enum Month implements SimpleDatatype<Integer> {
    * 
    * <b>ATTENTION:</b><br>
    * Unlike java {@link java.util.Calendar} this will return the natural representation of a {@link Month} in
-   * the range from <code>1-12</code>.
+   * the range from {@code 1-12}.
    */
   @Override
   public Integer getValue() {
@@ -117,10 +117,10 @@ public enum Month implements SimpleDatatype<Integer> {
   }
 
   /**
-   * This method gets the {@link DateUnit} for the given <code>value</code>.
+   * This method gets the {@link DateUnit} for the given {@code value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link DateUnit}.
-   * @return the requested {@link DateUnit} or <code>null</code> if no such {@link DateUnit} exists.
+   * @return the requested {@link DateUnit} or {@code null} if no such {@link DateUnit} exists.
    */
   public static Month fromValue(Integer value) {
 
@@ -133,7 +133,7 @@ public enum Month implements SimpleDatatype<Integer> {
   }
 
   /**
-   * This method gets the {@link Month} from the given <code>date</code>.
+   * This method gets the {@link Month} from the given {@code date}.
    * 
    * @param date is the {@link Date}.
    * @return the {@link Month} of the given {@link Date}.

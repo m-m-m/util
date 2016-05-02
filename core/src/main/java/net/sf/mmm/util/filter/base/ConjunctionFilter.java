@@ -26,7 +26,7 @@ public class ConjunctionFilter<V> implements Filter<V> {
   /**
    * The constructor.
    * 
-   * @param conjunction is the {@link Conjunction} used to combine the <code>filters</code>.
+   * @param conjunction is the {@link Conjunction} used to combine the {@code filters}.
    * @param filters are the filters to combine.
    */
   @SafeVarargs

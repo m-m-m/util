@@ -17,7 +17,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 public interface LocalizableFormatter<V> extends Formatter<V> {
 
   /**
-   * This method formats the given <code>value</code> for the given <code>locale</code>. <br>
+   * This method formats the given {@code value} for the given {@code locale}. <br>
    * This is a shorthand of the following code:
    * 
    * <pre>
@@ -26,18 +26,18 @@ public interface LocalizableFormatter<V> extends Formatter<V> {
    * return buffer.toString();
    * </pre>
    * 
-   * @param value is the value to format. May be <code>null</code>.
+   * @param value is the value to format. May be {@code null}.
    * @param locale is the {@link Locale}.
-   * @return the formatted value. If the given <code>value</code> is <code>null</code>, a legal implementation
+   * @return the formatted value. If the given {@code value} is {@code null}, a legal implementation
    *         will return "null" or "".
    */
   String format(V value, Locale locale);
 
   /**
-   * This method formats the given <code>value</code> for the given <code>locale</code> and directly
-   * {@link Appendable#append(CharSequence) appends} to the given <code>buffer</code>.
+   * This method formats the given {@code value} for the given {@code locale} and directly
+   * {@link Appendable#append(CharSequence) appends} to the given {@code buffer}.
    * 
-   * @param value is the value to format. May be <code>null</code>.
+   * @param value is the value to format. May be {@code null}.
    * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
    *        value to.
    * @param locale is the {@link Locale} to use.

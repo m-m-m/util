@@ -26,7 +26,7 @@ public final class LoggerFactory {
   }
 
   /**
-   * This method creates a {@link Logger} for the given <code>name</code>.
+   * This method creates a {@link Logger} for the given {@code name}.
    *
    * @param name is the {@link Logger#getName() name} of the new logger.
    * @return the new {@link Logger}.

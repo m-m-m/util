@@ -20,7 +20,7 @@ package net.sf.mmm.util.lang.api;
  * {@link Variant} such as an {@link Enum} or {@link String} (from a constant). Then you can do something like
  * <code>if (MyVariantEnum.SPECIAL == variant) { doSomethingSpecial(); } ...</code>. <br>
  * <b>ATTENTION:</b><br>
- * If not documented otherwise a {@link Variant} may always be <code>null</code> what is typically the default.
+ * If not documented otherwise a {@link Variant} may always be {@code null} what is typically the default.
  *
  * @author hohwille
  * @since 3.1.0

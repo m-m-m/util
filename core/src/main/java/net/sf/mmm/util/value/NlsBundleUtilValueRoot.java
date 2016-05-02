@@ -47,7 +47,7 @@ public interface NlsBundleUtilValueRoot extends NlsBundle {
    * @param value is the invalid value.
    * @param min is the minimum value.
    * @param max is the maximum value.
-   * @param source is the source of the value or <code>null</code> if NOT available.
+   * @param source is the source of the value or {@code null} if NOT available.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value {value}{source,choice,(?==null)''(else)' from \"'{source}'\"'} needs to be in the range from {min} to {max}.")

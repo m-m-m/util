@@ -3,7 +3,7 @@
 package net.sf.mmm.util.io.api;
 
 /**
- * This is the interface for a provider of data bytes (a <code>byte[]</code> -Buffer) that is
+ * This is the interface for a provider of data bytes (a {@code byte[]} -Buffer) that is
  * {@link ByteIterator iterable} and {@link ByteProcessable processable}. <br>
  * Bytes that are {@link #process(ByteProcessor, long) processed} will be consumed (as if they were
  * {@link #next() iterated}).

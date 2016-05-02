@@ -4,7 +4,7 @@
  * Provides the API for utilities of general purpose.
  * <a name="documentation"></a><h2>Util Lang API</h2>
  * This is the package of very general utilities (analog to
- * <code>java.lang</code>). This package contains utilities for dealing with the
+ * {@code java.lang}). This package contains utilities for dealing with the
  * basic types {@link java.lang.Object}, {@link java.lang.String},
  * and with arrays.
  */

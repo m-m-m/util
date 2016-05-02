@@ -85,7 +85,7 @@ public class PooledByteArray extends ByteArrayImpl {
   /**
    * This method marks this array to be released.
    * 
-   * @return <code>true</code> if this array can be released, <code>false</code> if there are references left
+   * @return {@code true} if this array can be released, {@code false} if there are references left
    *         that have to be released before.
    */
   public boolean release() {

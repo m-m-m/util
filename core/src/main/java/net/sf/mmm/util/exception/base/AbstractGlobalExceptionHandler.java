@@ -25,7 +25,7 @@ public abstract class AbstractGlobalExceptionHandler extends AbstractLoggableCom
   }
 
   /**
-   * Returns a single exception containing all information of the given <code>errors</code>.
+   * Returns a single exception containing all information of the given {@code errors}.
    *
    * @param errors are the errors to compose.
    * @return a single exception containing all errors.

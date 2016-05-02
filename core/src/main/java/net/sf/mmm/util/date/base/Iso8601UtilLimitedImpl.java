@@ -100,7 +100,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
    * @param year is the {@link java.util.Calendar#YEAR year}
    * @param month is the month (1-12).
    * @param day is the {@link java.util.Calendar#DAY_OF_MONTH day}.
-   * @param extended if <code>false</code> the basic date format ("yyyyMMdd") is used, if <code>true</code>
+   * @param extended if {@code false} the basic date format ("yyyyMMdd") is used, if {@code true}
    *        the extended date format ("yyyy-MM-dd") is used.
    * @param buffer is where to append the formatted date.
    */
@@ -190,7 +190,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
    * @param hours are the {@link java.util.Calendar#HOUR_OF_DAY hours}.
    * @param minutes are the {@link java.util.Calendar#MINUTE minutes}.
    * @param seconds are the {@link java.util.Calendar#SECOND seconds}.
-   * @param extended if <code>false</code> the basic time format ("HHmmss") is used, if <code>true</code> the
+   * @param extended if {@code false} the basic time format ("HHmmss") is used, if {@code true} the
    *        extended time format ("HH:mm:ss") is used.
    * @param buffer is where to append the formatted date.
    */
@@ -303,10 +303,10 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   }
 
   /**
-   * This method parses the timezone offset from the given <code>scanner</code>.
+   * This method parses the timezone offset from the given {@code scanner}.
    *
    * @param scanner is the parser pointing to the timezone or at the end of the string.
-   * @return the parsed timezone offset or <code>null</code> for UTC (Z) or if no timezone is present.
+   * @return the parsed timezone offset or {@code null} for UTC (Z) or if no timezone is present.
    */
   protected Integer parseTimezoneOffset(CharSequenceScanner scanner) {
 
@@ -332,8 +332,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   }
 
   /**
-   * This method parses the date from the given <code>scanner</code>. The format is
-   * <code>yyyy[-]MM[-]dd</code>
+   * This method parses the date from the given {@code scanner}. The format is {@code yyyy[-]MM[-]dd}.
    *
    * @param scanner is the parser pointing to the date.
    * @return an array containing the year, month, and day in that order.
@@ -378,12 +377,12 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   }
 
   /**
-   * This method reads two digits from the given <code>scanner</code>.
+   * This method reads two digits from the given {@code scanner}.
    *
    * @param scanner is the scanner potentially pointing to the digits.
-   * @return <code>-1</code> if the <code>scanner</code> does NOT point to a digit or the number represented
-   *         by the two digits consumed from the <code>scanner</code>.
-   * @throws IllegalDateFormatException if the <code>scanner</code> only contained a single digit.
+   * @return {@code -1} if the {@code scanner} does NOT point to a digit or the number represented
+   *         by the two digits consumed from the {@code scanner}.
+   * @throws IllegalDateFormatException if the {@code scanner} only contained a single digit.
    */
   private int read2Digits(CharSequenceScanner scanner) throws IllegalDateFormatException {
 
@@ -399,8 +398,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   }
 
   /**
-   * This method parses the time (or timezone offset) from the given <code>scanner</code>. The format is
-   * <code>hh[[:]mm[[:]ss]]</code>
+   * This method parses the time (or timezone offset) from the given {@code scanner}. The format is {@code hh[[:]mm[[:]ss]]}.
    *
    * @param scanner is the parser pointing to the time.
    * @return an int-array containing the hour, minute and second in that order.

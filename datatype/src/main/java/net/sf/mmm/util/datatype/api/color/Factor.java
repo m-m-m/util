@@ -3,7 +3,7 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * The implementation of {@link Segment} for a factor in the range from <code>0</code> to <code>1</code> such
+ * The implementation of {@link Segment} for a factor in the range from {@code 0} to {@code 1} such
  * as {@link Saturation}, {@link Lightness}, or {@link Brightness}. <br>
  * <b>ATTENTION:</b><br>
  * Beside {@link #toStringAsPercent() percent} notation the {@link String} constructor both accepts
@@ -110,7 +110,7 @@ public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSe
   }
 
   /**
-   * @return the {@link #getValue()} as <code>int</code> in the range from <code>0</code> to <code>255</code>.
+   * @return the {@link #getValue()} as {@code int} in the range from {@code 0} to {@code 255}.
    */
   public int getValueAsByte() {
 

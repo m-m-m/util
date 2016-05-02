@@ -66,7 +66,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   }
 
   /**
-   * This method sends the given <code>event</code> to all {@link #addListener(EventListener) registered}
+   * This method sends the given {@code event} to all {@link #addListener(EventListener) registered}
    * listeners.
    *
    * @param event the event to set.
@@ -83,10 +83,10 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   }
 
   /**
-   * This method sends the given <code>event</code> to the given <code>listener</code>.
+   * This method sends the given {@code event} to the given {@code listener}.
    *
    * @param event the event to set.
-   * @param listener the listener that should receive the <code>event</code>.
+   * @param listener the listener that should receive the {@code event}.
    */
   protected void fireEvent(E event, L listener) {
 
@@ -100,7 +100,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
    *
    * @param listener is the listener that caused the error.
    * @param event is the event that could not be handled.
-   * @param error is the throwable caused by the <code>listener</code> while handling the <code>event</code>.
+   * @param error is the throwable caused by the {@code listener} while handling the {@code event}.
    */
   protected void handleListenerError(L listener, E event, Throwable error) {
 

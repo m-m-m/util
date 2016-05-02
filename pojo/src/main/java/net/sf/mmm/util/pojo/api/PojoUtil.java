@@ -24,8 +24,8 @@ public interface PojoUtil {
 
   /**
    * This method recursively traverses all objects starting from the given {@link Object} via all properties and
-   * contents. It simply delegates to {@link #visitObjectRecursive(Object, Filter, boolean)} using <code>true</code> for
-   * <code>loopProtection</code>.
+   * contents. It simply delegates to {@link #visitObjectRecursive(Object, Filter, boolean)} using {@code true} for
+   * {@code loopProtection}.
    *
    * @param object is the {@link Object} to traverse recursively.
    * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed {@link Object}s. If an
@@ -40,14 +40,14 @@ public interface PojoUtil {
    * arrays}, and {@link net.sf.mmm.util.pojo.api.Pojo}s. <br>
    * <b>ATTENTION:</b><br>
    * This method will NOT traverse into {@link Class#isPrimitive() primitive} {@link Class#isArray() arrays} for
-   * performance reasons. Simply realize this inside your <code>visitor</code> if you need it.
+   * performance reasons. Simply realize this inside your {@code visitor} if you need it.
    *
    * @param object is the {@link Object} to traverse recursively.
    * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed {@link Object}s. If an
    *        {@link Object} is not {@link Filter#accept(Object) accepted} by this {@link Filter} the recursion stops at
    *        this point.
-   * @param loopProtection - <code>true</code> to collect all visited {@link Object}s in a {@link Set} in order to
-   *        prevent infinity loops, <code>false</code> otherwise (to save performance if no loops are possible for the
+   * @param loopProtection - {@code true} to collect all visited {@link Object}s in a {@link Set} in order to
+   *        prevent infinity loops, {@code false} otherwise (to save performance if no loops are possible for the
    *        given {@link Object}).
    */
   void visitObjectRecursive(Object object, Filter<Object> visitor, boolean loopProtection);

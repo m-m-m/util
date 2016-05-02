@@ -36,13 +36,13 @@ public final class ExceptionHelper {
   /**
    * This method should be invoked in catch-block of tests that catched a given exception and expect that this
    * exception or one of its {@link Throwable#getCause() causes} are an {@link Class#isInstance(Object)
-   * instance of} the given <code>expectedType</code>.
+   * instance of} the given {@code expectedType}.
    * 
    * @param <T> is the generic type of the expected cause.
    * @param catched is the {@link Throwable} that has been catched.
    * @param expectedType is the {@link Class} of the {@link Throwable} that is expected.
-   * @return the first {@link Throwable} in the hierarchy of <code>catched</code> matching to the given
-   *         <code>expectedType</code>.
+   * @return the first {@link Throwable} in the hierarchy of {@code catched} matching to the given
+   *         {@code expectedType}.
    */
   public static <T extends Throwable> T assertCause(Throwable catched, Class<T> expectedType) {
 
@@ -57,12 +57,12 @@ public final class ExceptionHelper {
 
   /**
    * This method checks if a catched exception or one of its {@link Throwable#getCause() causes} is an
-   * {@link Class#isInstance(Object) instance of} the given <code>expectedType</code>.
+   * {@link Class#isInstance(Object) instance of} the given {@code expectedType}.
    * 
    * @param catched is the {@link Throwable} that has been catched.
    * @param expectedType is the {@link Class} of the {@link Throwable} that is expected.
-   * @return <code>true</code> if the given <code>catched</code> or one of its {@link Throwable#getCause()
-   *         causes} is an {@link Class#isInstance(Object) instance of} the given <code>expectedType</code>.
+   * @return {@code true} if the given {@code catched} or one of its {@link Throwable#getCause()
+   *         causes} is an {@link Class#isInstance(Object) instance of} the given {@code expectedType}.
    */
   public static boolean isCause(Throwable catched, Class<? extends Throwable> expectedType) {
 
@@ -72,13 +72,13 @@ public final class ExceptionHelper {
 
   /**
    * This method gets a catched exception or one of its {@link Throwable#getCause() causes} that is an
-   * {@link Class#isInstance(Object) instance of} the given <code>expectedType</code>.
+   * {@link Class#isInstance(Object) instance of} the given {@code expectedType}.
    * 
    * @param <T> is the generic type of the expected cause.
    * @param catched is the {@link Throwable} that has been catched.
    * @param expectedType is the {@link Class} of the {@link Throwable} that is expected.
-   * @return <code>true</code> if the given <code>catched</code> or one of its {@link Throwable#getCause()
-   *         causes} is an {@link Class#isInstance(Object) instance of} the given <code>expectedType</code>.
+   * @return {@code true} if the given {@code catched} or one of its {@link Throwable#getCause()
+   *         causes} is an {@link Class#isInstance(Object) instance of} the given {@code expectedType}.
    */
   @SuppressWarnings("unchecked")
   public static <T extends Throwable> T getCause(Throwable catched, Class<T> expectedType) {
@@ -97,7 +97,7 @@ public final class ExceptionHelper {
   /**
    * This method should be invoked in catch-block of tests that catched a given exception and expect that this
    * exception or one of its {@link Throwable#getCause() causes} is the same as the given
-   * <code>expectedCause</code>.
+   * {@code expectedCause}.
    * 
    * @param catched is the {@link Throwable} that has been catched.
    * @param expectedCause is the {@link Throwable} that is expected as .
@@ -112,11 +112,11 @@ public final class ExceptionHelper {
   /**
    * This method should be invoked in catch-block of tests that catched a given exception and expect that this
    * exception or one of its {@link Throwable#getCause() causes} is the same as the given
-   * <code>expectedCause</code>.
+   * {@code expectedCause}.
    * 
    * @param catched is the {@link Throwable} that has been catched.
    * @param expectedCause is the {@link Throwable} that is expected as .
-   * @return <code>true</code> if the given <code>expectedCause</code> is the same as <code>catched</code> or
+   * @return {@code true} if the given {@code expectedCause} is the same as {@code catched} or
    *         one of its {@link Throwable#getCause() causes}.
    */
   public static boolean isCause(Throwable catched, Throwable expectedCause) {

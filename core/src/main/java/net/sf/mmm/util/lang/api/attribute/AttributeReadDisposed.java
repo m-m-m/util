@@ -16,7 +16,7 @@ public interface AttributeReadDisposed {
    * 
    * @see AttributeWriteDisposed#dispose()
    * 
-   * @return <code>true</code> if this object has been disposed.
+   * @return {@code true} if this object has been disposed.
    */
   boolean isDisposed();
 

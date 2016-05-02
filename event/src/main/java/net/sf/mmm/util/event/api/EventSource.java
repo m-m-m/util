@@ -29,8 +29,8 @@ public interface EventSource<E extends Event, L extends EventListener<E>> {
    * change.
    *
    * @param listener is the listener to remove.
-   * @return <code>true</code> if the given <code>listener</code> has successfully been removed,
-   *         <code>false</code> if the <code>listener</code> was NOT {@link #addListener(EventListener)
+   * @return {@code true} if the given {@code listener} has successfully been removed,
+   *         {@code false} if the {@code listener} was NOT {@link #addListener(EventListener)
    *         registered}.
    */
   boolean removeListener(L listener);

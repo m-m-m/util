@@ -27,13 +27,13 @@ public class VersionIdentifierFormatterTimestamp extends AbstractVersionIdentifi
   /**
    * The constructor.
    * 
-   * @param iso8601Util is the {@link Iso8601Util} instance. May be <code>null</code> is
-   *        <code>dateFormat</code> is given.
-   * @param dateFormat is the {@link DateFormat} to use. If <code>null</code> <code>iso8601Util</code> will be
+   * @param iso8601Util is the {@link Iso8601Util} instance. May be {@code null} is
+   *        {@code dateFormat} is given.
+   * @param dateFormat is the {@link DateFormat} to use. If {@code null} {@code iso8601Util} will be
    *        used instead.
    * @param prefix is the static prefix to append before the {@link VersionIdentifier#getTimestamp()
    *        timestamp}. Will be omitted if {@link VersionIdentifier#getTimestamp() timestamp} is
-   *        <code>null</code>.
+   *        {@code null}.
    */
   public VersionIdentifierFormatterTimestamp(Iso8601Util iso8601Util, DateFormat dateFormat, String prefix) {
 

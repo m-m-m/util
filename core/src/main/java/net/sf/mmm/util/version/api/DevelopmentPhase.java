@@ -60,7 +60,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   /**
    * This {@link DevelopmentPhase} is like {@link #RELEASE} but may be used for bugfixes or tiny improvements
    * of the {@link #RELEASE released} product version. <br>
-   * This is sometimes called <em>service release (SR)</em> or <code>service pack (SP)</code>.
+   * This is sometimes called <em>service release (SR)</em> or {@code service pack (SP)}.
    */
   UPDATE("update", "u", "SR", "service-release", "SP", "service-pack");
 
@@ -109,12 +109,12 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   }
 
   /**
-   * This method determines if this {@link DevelopmentPhase} is before the given <code>phase</code>. Here
+   * This method determines if this {@link DevelopmentPhase} is before the given {@code phase}. Here
    * <em>before</em> means that it is earlier and typically less stable.
    *
    * @param phase is the {@link DevelopmentPhase} to compare with.
-   * @return <code>true</code> if this phase is before the given <code>phase</code>, <code>false</code>
-   *         otherwise (also if <code>phase</code> is <code>null</code>).
+   * @return {@code true} if this phase is before the given {@code phase}, {@code false}
+   *         otherwise (also if {@code phase} is {@code null}).
    */
   public boolean isBefore(DevelopmentPhase phase) {
 
@@ -125,12 +125,12 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   }
 
   /**
-   * This method determines if this {@link DevelopmentPhase} is after the given <code>phase</code>. Here
+   * This method determines if this {@link DevelopmentPhase} is after the given {@code phase}. Here
    * <em>after</em> means that it is later and typically more stable.
    *
    * @param phase is the {@link DevelopmentPhase} to compare with.
-   * @return <code>true</code> if this phase is after the given <code>phase</code>, <code>false</code>
-   *         otherwise (also if <code>phase</code> is <code>null</code>).
+   * @return {@code true} if this phase is after the given {@code phase}, {@code false}
+   *         otherwise (also if {@code phase} is {@code null}).
    */
   public boolean isAfter(DevelopmentPhase phase) {
 
@@ -141,10 +141,10 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link DevelopmentPhase} with the given <code>value</code>.
+   * This method gets the {@link DevelopmentPhase} with the given {@code value}.
    *
    * @param value is the {@link #getValue() value} of the requested {@link DevelopmentPhase}.
-   * @return the requested {@link DevelopmentPhase} or <code>null</code> if it does not exists.
+   * @return the requested {@link DevelopmentPhase} or {@code null} if it does not exists.
    */
   public static DevelopmentPhase fromValue(String value) {
 

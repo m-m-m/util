@@ -167,7 +167,7 @@ public interface UnicodeUtil {
   char QUESTION_MARK = 0x0003F;
 
   /**
-   * The at sign used as separator in email addresses. Looks like a small letter <code>a</code> in a circle: * *
+   * The at sign used as separator in email addresses. Looks like a small letter {@code a} in a circle: * *
    * {@value}
    */
   char COMMERCIAL_AT = 0x00040;
@@ -435,7 +435,7 @@ public interface UnicodeUtil {
    */
   char SOFT_HYPHEN = 0x000AD;
 
-  /** The symbol for a registered trademark. Looks like the letter <code>R</code> in a circle: {@value} */
+  /** The symbol for a registered trademark. Looks like the letter {@code R} in a circle: {@value} */
   char REGISTERED_SIGN = 0x000AE;
 
   /**
@@ -4535,20 +4535,20 @@ public interface UnicodeUtil {
 
   /**
    * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the given
-   * <code>character</code>.
+   * {@code character}.
    *
    * @see java.text.Normalizer
    * @see #transliterate(String)
    *
    * @param character is the character to convert.
-   * @return a sequence of characters with the transliteration of the given character or <code>null</code> if no such
+   * @return a sequence of characters with the transliteration of the given character or {@code null} if no such
    *         transliteration is available.
    */
   String transliterate(char character);
 
   /**
    * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the given
-   * <code>text</code>. This method will support common transliteration standards such as ISO 843 (greek), ISO 9
+   * {@code text}. This method will support common transliteration standards such as ISO 843 (greek), ISO 9
    * (cyrillic), etc. However, for some writing systems there are multiple ways of transliteration and some things done
    * by this method may not officially be called transliteration. So please consider it as a pragmatic way to convert
    * text to the Latin alphabet. We are looking for help in supporting additional writing systems but not for scientific
@@ -4567,13 +4567,13 @@ public interface UnicodeUtil {
    * @see java.text.Normalizer
    *
    * @param character is the character to convert.
-   * @return a sequence of ASCII-characters that represent the given character or <code>null</code> if the character is
+   * @return a sequence of ASCII-characters that represent the given character or {@code null} if the character is
    *         already ASCII or there is no ASCII-representation available.
    */
   String normalize2Ascii(char character);
 
   /**
-   * This method converts the given <code>text</code> to the best possible ASCII-representation. All ASCII-characters
+   * This method converts the given {@code text} to the best possible ASCII-representation. All ASCII-characters
    * will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized to ASCII}.
    *
    * @see #normalize2Ascii(CharSequence, char)
@@ -4585,16 +4585,16 @@ public interface UnicodeUtil {
   String normalize2Ascii(CharSequence text);
 
   /**
-   * This method converts the given <code>text</code> to the best possible ASCII-representation. All ASCII-characters
+   * This method converts the given {@code text} to the best possible ASCII-representation. All ASCII-characters
    * will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized to ASCII} and if not
-   * possible replaced by <code>nonNormalizableCharaterReplacement</code>.
+   * possible replaced by {@code nonNormalizableCharaterReplacement}.
    *
    * @see java.text.Normalizer
    *
    * @param text is the text to convert.
    * @param nonNormalizableCharaterReplacement is the character used to replace unicode characters that have no
    *        {@link #normalize2Ascii(char) corresponding ASCII representation}. Use {@link #NULL} to remove these
-   *        characters. A typical character to use is <code>?</code>.
+   *        characters. A typical character to use is {@code ?}.
    * @return the converted text.
    */
   String normalize2Ascii(CharSequence text, char nonNormalizableCharaterReplacement);
@@ -4610,7 +4610,7 @@ public interface UnicodeUtil {
    * @see #SWUNG_DASH
    *
    * @param character is the character to check.
-   * @return <code>true</code> if <code>character</code> is a dash.
+   * @return {@code true} if {@code character} is a dash.
    */
   boolean isDash(char character);
 
@@ -4624,7 +4624,7 @@ public interface UnicodeUtil {
    * @see #HYPHENATION_POINT
    *
    * @param character is the character to check.
-   * @return <code>true</code> if <code>character</code> is a hyphen.
+   * @return {@code true} if {@code character} is a hyphen.
    */
   boolean isHyphen(char character);
 
@@ -4635,7 +4635,7 @@ public interface UnicodeUtil {
    * @see #MINUS_SIGN
    *
    * @param character is the character to check.
-   * @return <code>true</code> if <code>character</code> is a minus sign.
+   * @return {@code true} if {@code character} is a minus sign.
    */
   boolean isMinus(char character);
 

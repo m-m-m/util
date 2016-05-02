@@ -71,7 +71,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method encodes the given <code>set</code> to a bit-mask for {@link #getValue()}.
+   * This method encodes the given {@code set} to a bit-mask for {@link #getValue()}.
    * 
    * @param weekdays are the {@link Weekday}s.
    * @return the encoded {@link #getValue() value}.
@@ -86,7 +86,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method encodes the given <code>set</code> to a bit-mask for {@link #getValue()}.
+   * This method encodes the given {@code set} to a bit-mask for {@link #getValue()}.
    * 
    * @param set is the {@link Set} of {@link Weekday}s.
    * @return the encoded {@link #getValue() value}.
@@ -118,8 +118,8 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
    * <pre>{@link #getSet()}.{@link Set#contains(Object) contains}(weekday)</pre>
    * 
    * @param weekday is the {@link Weekday} to check.
-   * @return <code>true</code> if the given <code>weekday</code> is contained in this {@link #getSet() set},
-   *         <code>false</code> otherwise.
+   * @return {@code true} if the given {@code weekday} is contained in this {@link #getSet() set},
+   *         {@code false} otherwise.
    */
   public boolean contains(Weekday weekday) {
 
@@ -150,12 +150,12 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
 
   /**
    * This method gets the next {@link Weekday} {@link #contains(Weekday) contained} in this {@link WeekdaySet}
-   * starting with the given <code>weekday</code>. If the given <code>weekday</code> is
+   * starting with the given {@code weekday}. If the given {@code weekday} is
    * {@link #contains(Weekday) contained}, it will be returned. Otherwise the {@link Weekday#getNext() next}
    * successor is determined.
    * 
    * @param weekday is the {@link Weekday} to start with.
-   * @return the next {@link Weekday} starting with the given <code>weekday</code> or <code>null</code> if
+   * @return the next {@link Weekday} starting with the given {@code weekday} or {@code null} if
    *         this {@link WeekdaySet} is {@link Set#isEmpty() empty}.
    */
   public Weekday getNextMatch(Weekday weekday) {

@@ -27,14 +27,14 @@ public interface ResourcePath {
   /** The path segment separator. */
   char HOME_PATH_CHAR = '~';
 
-  /** The prefix of an UNC (Uniform Naming Convention) path (e.g. <code>\\10.0.0.1\share</code>). */
+  /** The prefix of an UNC (Uniform Naming Convention) path (e.g. {@code \\10.0.0.1\share}). */
   String UNC_PATH_PREFIX = "\\\\";
 
   /** The separator infix between scheme and authority in an URL. */
   String URL_SCHEME_AUTHORITY_SEPARATOR = "://";
 
   /**
-   * @return the parent {@link ResourcePathNode} or <code>null</code> if this is the {@link #isRoot()}
+   * @return the parent {@link ResourcePathNode} or {@code null} if this is the {@link #isRoot()}
    *         segment.
    */
   ResourcePath getParent();
@@ -50,12 +50,12 @@ public interface ResourcePath {
   String getName();
 
   /**
-   * @return <code>true</code> if this path is absolute, <code>false</code> if it is relative.
+   * @return {@code true} if this path is absolute, {@code false} if it is relative.
    */
   boolean isAbsolute();
 
   /**
-   * @return <code>true</code> if this is the root {@link ResourcePathNode}, <code>false</code> otherwise.
+   * @return {@code true} if this is the root {@link ResourcePathNode}, {@code false} otherwise.
    */
   boolean isRoot();
 

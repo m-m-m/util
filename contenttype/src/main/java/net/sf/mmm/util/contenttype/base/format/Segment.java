@@ -38,7 +38,7 @@ public abstract class Segment {
   /**
    * This method gets the parent {@link SegmentContainer} containing this segment.
    * 
-   * @return the parent {@link SegmentContainer} or <code>null</code> if this is the top-level sequence.
+   * @return the parent {@link SegmentContainer} or {@code null} if this is the top-level sequence.
    */
   public SegmentContainer getParent() {
 

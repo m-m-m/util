@@ -80,8 +80,8 @@ public final class AreaCode extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method gets the raw value (the actual area code). E.g. <code>69</code> for the city Frankfurt in
-   * Germany or <code>718</code> for New York City in USA.
+   * This method gets the raw value (the actual area code). E.g. {@code 69} for the city Frankfurt in
+   * Germany or {@code 718} for New York City in USA.
    * 
    * @return the country code.
    */

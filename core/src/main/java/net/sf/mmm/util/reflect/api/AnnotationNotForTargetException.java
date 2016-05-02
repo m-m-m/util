@@ -30,7 +30,7 @@ public class AnnotationNotForTargetException extends ReflectionException {
    *
    * @param annotation is the {@link Class} reflecting the {@link Annotation}.
    * @param target is the {@link ElementType} not {@link java.lang.annotation.Target targeted} by the given
-   *        <code>annotation</code>.
+   *        {@code annotation}.
    */
   public AnnotationNotForTargetException(Class<? extends Annotation> annotation, ElementType target) {
 

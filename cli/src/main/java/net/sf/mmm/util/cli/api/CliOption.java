@@ -18,9 +18,9 @@ import java.lang.annotation.Target;
  * {@link java.lang.reflect.Modifier#PUBLIC public}. <br>
  * The annotated property should be initialized properly at construction in order to determine whether the
  * option was triggered or not. For non-primitive types the property should be initialized with
- * <code>null</code>. <br>
+ * {@code null}. <br>
  * When the main-program is invoked an {@link CliOption} can be triggered via its {@link #name() name} or one
- * of its {@link #aliases() aliases}. Options with a type other than <code>boolean</code> need to be followed
+ * of its {@link #aliases() aliases}. Options with a type other than {@code boolean} need to be followed
  * by a value as CLI parameter. This value has to be quoted in the commandline if it contains whitespaces or
  * other characters that are interpreted by the shell (e.g. backslash in Unix). <br>
  * The type of the annotated property has to be supported by the CLI implementation so the value can be
@@ -36,18 +36,18 @@ import java.lang.annotation.Target;
  * </tr>
  * <tr>
  * <td>boolean</td>
- * <td>Set to <code>true</code> if {@link CliOption} is present. Should be initialized with <code>false</code>
+ * <td>Set to {@code true} if {@link CliOption} is present. Should be initialized with {@code false}
  * at construction.</td>
  * </tr>
  * <tr>
  * <td>{@link Boolean}</td>
- * <td>If the option is present with a value of <code>true</code> or <code>false</code> the according
+ * <td>If the option is present with a value of {@code true} or {@code false} the according
  * {@link Boolean} is applied. Otherwise values are treated as invalid. According to {@link CliStyle},
- * <code>true</code> may be omitted.</td>
+ * {@code true} may be omitted.</td>
  * </tr>
  * <tr>
  * <td>{@link Number}</td>
- * <td>The subclasses of {@link Number} from the package <code>java.lang</code> are always supported.</td>
+ * <td>The subclasses of {@link Number} from the package {@code java.lang} are always supported.</td>
  * </tr>
  * <tr>
  * <td>{@link java.io.File}</td>
@@ -120,7 +120,7 @@ public @interface CliOption {
   String usage();
 
   /**
-   * The flag that indicates if this option is required. Use a value of <code>true</code> to make this option
+   * The flag that indicates if this option is required. Use a value of {@code true} to make this option
    * required within it's {@link #mode() mode}.
    * 
    * @see CliMode#parentIds()

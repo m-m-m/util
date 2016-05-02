@@ -28,7 +28,7 @@ public abstract class AbstractVersionIdentifierFormatterString extends AbstractF
    * The constructor.
    * 
    * @param prefix is the static prefix to append before the number. Will be omitted if the number is
-   *        <code>null</code>.
+   *        {@code null}.
    * @param maximumLength is the maximum number of letters for the {@link String} to format. The default is
    *        {@link Integer#MAX_VALUE}.
    */

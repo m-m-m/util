@@ -18,7 +18,7 @@ public interface NlsReversedResourceBundle extends NlsResourceBundle {
    * {@link java.util.ResourceBundle#getString(String)}.
    * 
    * @param message is the {@link java.util.ResourceBundle#getString(String) message}.
-   * @return the key for the given <code>message</code>.
+   * @return the key for the given {@code message}.
    */
   String getKey(String message);
 

@@ -139,7 +139,7 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
    * Called from {@link #setValue(Object)}.
    *
    * @param newValue the new {@link #getValue() value} to set.
-   * @return <code>true</code> if the {@link #getValue() value} has changed, <code>false</code> otherwise.
+   * @return {@code true} if the {@link #getValue() value} has changed, {@code false} otherwise.
    */
   protected abstract boolean doSetValue(V newValue);
 

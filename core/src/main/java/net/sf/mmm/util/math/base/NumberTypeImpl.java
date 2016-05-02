@@ -381,7 +381,7 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   }
 
   /**
-   * This method converts the given <code>number</code> to the {@link #getNumberClass() number-class} represented by
+   * This method converts the given {@code number} to the {@link #getNumberClass() number-class} represented by
    * this object. Like a cast this operation may loose precision (e.g. when converting a {@link Double} to
    * {@link Integer}) without warning. Use {@link #valueOf(Number, boolean)} instead to avoid this.
    * 
@@ -438,19 +438,19 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
 
   /**
    * This method gets an instance of the {@link #getNumberClass() represented number-class} with the numeric value
-   * identified by the given string <code>number</code>.
+   * identified by the given string {@code number}.
    * 
    * @param number is the string to be parsed as number.
    * @return the parsed number of the according type.
-   * @throws NumberConversionException if the given <code>number</code> has an illegal format.
-   * @throws NumberFormatException if the given <code>number</code> has an illegal format. This exception will be
+   * @throws NumberConversionException if the given {@code number} has an illegal format.
+   * @throws NumberFormatException if the given {@code number} has an illegal format. This exception will be
    *         converted to a {@link NumberConversionException}.
    */
   protected abstract NUMBER parse(String number) throws NumberConversionException, NumberFormatException;
 
   /**
    * This method gets the difference of the exactness of this {@link NumberTypeImpl} and the given
-   * <code>otherType</code>. <br>
+   * {@code otherType}. <br>
    * <b>ATTENTION:</b><br>
    * Some types such as {@link Double} and {@link BigInteger} are NOT really comparable so the exactness difference
    * might only make sense if the compared {@link NumberTypeImpl types} are both {@link #isDecimal() decimal} or both
@@ -467,9 +467,9 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
    * </ol>
    * 
    * @param otherType is the {@link NumberTypeImpl} to compare with.
-   * @return the difference of the exactness. Will be <code>0</code> if this {@link NumberTypeImpl} is equal to
-   *         <code>otherType</code>, positive if this {@link NumberTypeImpl} is more exact (later in the examples above)
-   *         and negative if <code>otherType</code> is more exact.
+   * @return the difference of the exactness. Will be {@code 0} if this {@link NumberTypeImpl} is equal to
+   *         {@code otherType}, positive if this {@link NumberTypeImpl} is more exact (later in the examples above)
+   *         and negative if {@code otherType} is more exact.
    */
   @Override
   public int getExactnessDifference(NumberType<?> otherType) {

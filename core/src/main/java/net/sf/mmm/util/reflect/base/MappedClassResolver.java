@@ -43,7 +43,7 @@ public class MappedClassResolver implements ClassResolver {
   }
 
   /**
-   * This method adds a mapping for the given <code>type</code> using the {@link Class#getSimpleName()
+   * This method adds a mapping for the given {@code type} using the {@link Class#getSimpleName()
    * simple-name}.
    * 
    * @param type is the type to add.
@@ -54,7 +54,7 @@ public class MappedClassResolver implements ClassResolver {
   }
 
   /**
-   * This method adds a mapping for the given <code>type</code> using the given <code>name</code>.
+   * This method adds a mapping for the given {@code type} using the given {@code name}.
    * 
    * @param name is the name under which the class is {@link #resolveClass(String) mapped}.
    * @param type is the mapped class.

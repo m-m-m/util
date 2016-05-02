@@ -30,7 +30,7 @@ public class ProcessContext {
   private boolean keepStreamsOpen;
 
   /**
-   * The constructor. All streams are initialized to act like <code>/dev/null</code>.
+   * The constructor. All streams are initialized to act like {@code /dev/null}.
    */
   public ProcessContext() {
 
@@ -73,7 +73,7 @@ public class ProcessContext {
   }
 
   /**
-   * This method gets the input stream that is transferred to the process as <code>stdin</code>.
+   * This method gets the input stream that is transferred to the process as {@code stdin}.
    * 
    * @return the inStream.
    */

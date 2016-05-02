@@ -61,10 +61,10 @@ public enum Gender implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link Gender} for the given <code>value</code>.
+   * This method gets the {@link Gender} for the given {@code value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link Gender}.
-   * @return the requested {@link Gender} or <code>null</code> if no such {@link Gender} exists.
+   * @return the requested {@link Gender} or {@code null} if no such {@link Gender} exists.
    */
   public static Gender fromValue(String value) {
 

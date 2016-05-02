@@ -22,11 +22,11 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
   /** The {@link GenericType} for {@link Object}. */
   public static final GenericType<Object> TYPE_OBJECT = new SimpleGenericTypeImpl<>(Object.class);
 
-  /** The {@link GenericType} for <code>void</code>. */
+  /** The {@link GenericType} for {@code void}. */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public static final GenericType<?> TYPE_VOID = new SimpleGenericTypeImpl(void.class);
 
-  /** The {@link GenericType} for <code>int</code>. */
+  /** The {@link GenericType} for {@code int}. */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public static final GenericType<?> TYPE_INT = new SimpleGenericTypeImpl(int.class);
 

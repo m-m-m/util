@@ -14,7 +14,7 @@ import net.sf.mmm.util.io.api.ByteArray;
 public abstract class AbstractByteArray implements ByteArray {
 
   /**
-   * This method checks that the given <code>minimum</code> and <code>maximum</code> are valid for
+   * This method checks that the given {@code minimum} and {@code maximum} are valid for
    * {@link #createSubArray(int, int)}.
    * 
    * @param minimum is the new {@link #getMinimumIndex() minimumIndex}.

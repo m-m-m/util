@@ -24,7 +24,7 @@ public class SpaceNormalizingCharIterator implements CharIterator {
   private final boolean trim;
 
   /**
-   * <code>true</code> if {@link #next()} has already been called, initially <code>false</code>.
+   * {@code true} if {@link #next()} has already been called, initially {@code false}.
    */
   private boolean nextCalled;
 
@@ -49,7 +49,7 @@ public class SpaceNormalizingCharIterator implements CharIterator {
    * @param delegate is the {@link CharIterator} to adapt.
    * @param spaceFilter is the {@link CharFilter} that defines what is {@link CharFilter#accept(char)
    *        accepted} as space. It needs to {@link CharFilter#accept(char) accept} at least ' '.
-   * @param trim - if <code>true</code> leading and trailing spaces are entirely consumed.
+   * @param trim - if {@code true} leading and trailing spaces are entirely consumed.
    */
   public SpaceNormalizingCharIterator(CharIterator delegate, CharFilter spaceFilter, boolean trim) {
 

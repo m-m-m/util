@@ -81,7 +81,7 @@ public enum VerticalAlignment implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link VerticalAlignment} with the given <code>{@link #getValue() value}</code>.
+   * This method gets the {@link VerticalAlignment} with the given {@link #getValue() value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link VerticalAlignment}.
    * @return the requested {@link VerticalAlignment}.

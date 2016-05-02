@@ -19,9 +19,9 @@ public class VersionIdentifierFormatterRevision extends AbstractVersionIdentifie
    * 
    * @param stringUtil is the {@link StringUtil} instance.
    * @param prefix is the static prefix to append before the {@link VersionIdentifier#getRevision() revision}.
-   *        Will be omitted if {@link VersionIdentifier#getRevision() revision} is <code>null</code>.
+   *        Will be omitted if {@link VersionIdentifier#getRevision() revision} is {@code null}.
    * @param padding is the padding (minimum number of digits) for the {@link VersionIdentifier#getRevision()
-   *        revision}. The default is <code>0</code>.
+   *        revision}. The default is {@code 0}.
    */
   public VersionIdentifierFormatterRevision(StringUtil stringUtil, String prefix, int padding) {
 

@@ -23,7 +23,7 @@ public interface Link<E extends EntityBean> {
   /**
    * @return the {@link EntityBean#Id() unique identifier} of the linked {@link #getTarget() bean}. When creating new
    *         {@link Bean}s a link may hold a transient {@link EntityBean} as {@link #getTarget() target} that has no ID
-   *         assigned, yet. In such case this method will return <code>null</code>.
+   *         assigned, yet. In such case this method will return {@code null}.
    */
   Id<E> getId();
 

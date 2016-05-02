@@ -31,7 +31,7 @@ public class TimeMeasure {
   private long duration;
 
   /**
-   * The {@link Result} if {@link #duration} time has been set and measure is completed or <code>null</code>
+   * The {@link Result} if {@link #duration} time has been set and measure is completed or {@code null}
    * if still in progress.
    */
   private Result result;
@@ -73,7 +73,7 @@ public class TimeMeasure {
   }
 
   /**
-   * @return <code>true</code> if {@link #fail() failed}, <code>false</code> otherwise.
+   * @return {@code true} if {@link #fail() failed}, {@code false} otherwise.
    */
   public boolean isFailure() {
 
@@ -81,7 +81,7 @@ public class TimeMeasure {
   }
 
   /**
-   * @return <code>true</code> if {@link #succeed() succeeded}, <code>false</code> otherwise.
+   * @return {@code true} if {@link #succeed() succeeded}, {@code false} otherwise.
    */
   public boolean isSuccess() {
 
@@ -89,7 +89,7 @@ public class TimeMeasure {
   }
 
   /**
-   * @return <code>true</code> if completed ({@link #isSuccess()} or {@link #isFailure()}), <code>false</code>
+   * @return {@code true} if completed ({@link #isSuccess()} or {@link #isFailure()}), {@code false}
    *         otherwise.
    */
   public boolean isCompleted() {

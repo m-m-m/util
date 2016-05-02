@@ -33,7 +33,7 @@ public class NlsParseException extends NlsRuntimeException {
    * The constructor.
    *
    * @param value is the value that could NOT be parsed.
-   * @param expected is the string or character that was expected but not found at the end of <code>value</code>.
+   * @param expected is the string or character that was expected but not found at the end of {@code value}.
    */
   public NlsParseException(CharSequence value, CharSequence expected) {
 
@@ -45,7 +45,7 @@ public class NlsParseException extends NlsRuntimeException {
    *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
-   * @param expected is the string or character that was expected but not found at the end of <code>value</code>.
+   * @param expected is the string or character that was expected but not found at the end of {@code value}.
    * @since 3.0.0
    */
   public NlsParseException(Throwable nested, CharSequence value, CharSequence expected) {
@@ -58,7 +58,7 @@ public class NlsParseException extends NlsRuntimeException {
    *
    * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g. "[+-][0-9]*[.][0-9]+")
-   * @param type is type the given <code>value</code> should be converted to.
+   * @param type is type the given {@code value} should be converted to.
    */
   public NlsParseException(CharSequence value, CharSequence requiredFormat, Object type) {
 
@@ -70,7 +70,7 @@ public class NlsParseException extends NlsRuntimeException {
    *
    * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g. "[+-][0-9]*[.][0-9]+")
-   * @param type is type the given <code>value</code> should be converted to.
+   * @param type is type the given {@code value} should be converted to.
    * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
    *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
    *        wrong. This will help to find the problem easier.
@@ -86,7 +86,7 @@ public class NlsParseException extends NlsRuntimeException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g. "[+-][0-9]*[.][0-9]+")
-   * @param type is type the given <code>value</code> should be converted to.
+   * @param type is type the given {@code value} should be converted to.
    */
   public NlsParseException(Throwable nested, CharSequence value, CharSequence requiredFormat, Object type) {
 
@@ -99,7 +99,7 @@ public class NlsParseException extends NlsRuntimeException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
    * @param requiredFormat describes the expected format (e.g. "[+-][0-9]*[.][0-9]+")
-   * @param type is type the given <code>value</code> should be converted to.
+   * @param type is type the given {@code value} should be converted to.
    * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
    *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
    *        wrong. This will help to find the problem easier.
@@ -115,7 +115,7 @@ public class NlsParseException extends NlsRuntimeException {
    * The constructor.
    *
    * @param value is the value that could NOT be parsed.
-   * @param targetType is type the given <code>value</code> should be converted to.
+   * @param targetType is type the given {@code value} should be converted to.
    * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
    *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
    *        wrong. This will help to find the problem easier.
@@ -130,7 +130,7 @@ public class NlsParseException extends NlsRuntimeException {
    *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
-   * @param targetType is type the given <code>value</code> should be converted to.
+   * @param targetType is type the given {@code value} should be converted to.
    * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
    *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
    *        wrong. This will help to find the problem easier.
@@ -144,7 +144,7 @@ public class NlsParseException extends NlsRuntimeException {
    * The constructor.
    *
    * @param value is the value that could NOT be parsed.
-   * @param targetType is type the given <code>value</code> should be converted to.
+   * @param targetType is type the given {@code value} should be converted to.
    */
   public NlsParseException(Object value, Type targetType) {
 
@@ -156,7 +156,7 @@ public class NlsParseException extends NlsRuntimeException {
    *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be parsed.
-   * @param targetType is type the given <code>value</code> should be converted to.
+   * @param targetType is type the given {@code value} should be converted to.
    */
   public NlsParseException(Throwable nested, Object value, Type targetType) {
 

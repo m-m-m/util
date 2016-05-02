@@ -131,7 +131,7 @@ public class CliClassContainer {
    * This method initializes the given {@link CliModeContainer}.
    *
    * @param mode is the {@link CliModeContainer} to initialize.
-   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or <code>null</code>
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or {@code null}
    *         if the initialization was successful.
    * @throws NodeCycleException if a cyclic dependency was detected and completed.
    */
@@ -230,7 +230,7 @@ public class CliClassContainer {
    * This method gets the {@link CliModeContainer mode} associated with the given {@link CliMode#id() ID}.
    *
    * @param id the {@link CliMode#id() ID} of the requested {@link CliMode}.
-   * @return the requested {@link CliMode} or <code>null</code> if no such {@link CliMode} exists.
+   * @return the requested {@link CliMode} or {@code null} if no such {@link CliMode} exists.
    */
   public CliModeObject getMode(String id) {
 

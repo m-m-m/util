@@ -5,27 +5,27 @@ package net.sf.mmm.util.lang.api;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+
 /**
  * This is the test-case for {@link CompareOperator}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public class ComparatorTest {
 
   /**
-   * This method checks the {@link CompareOperator#eval(Object, Object)} for the given <code>comparator</code> and
-   * according {@link CompareOperator}s.
-   * 
+   * This method checks the {@link CompareOperator#eval(Object, Object)} for the given {@code comparator} and according
+   * {@link CompareOperator}s.
+   *
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
-   * @param comparator - {@link CompareOperator#EQUAL} if <code>arg1 == arg2</code>, {@link CompareOperator#LESS_THAN}
-   *        if <code>arg1 < arg2</code>, {@link CompareOperator#GREATER_THAN} if <code>arg1 > arg2</code> and
+   * @param comparator - {@link CompareOperator#EQUAL} if {@code arg1 == arg2}, {@link CompareOperator#LESS_THAN} if
+   *        {@code arg1 < arg2}, {@link CompareOperator#GREATER_THAN} if {@code arg1 > arg2} and
    *        {@link CompareOperator#NOT_EQUAL} otherwise.
    */
   protected void checkEvalTrue(Object arg1, Object arg2, CompareOperator comparator) {
@@ -58,7 +58,7 @@ public class ComparatorTest {
         Assert.assertFalse(CompareOperator.GREATER_THAN.eval(arg1, arg2));
         Assert.assertFalse(CompareOperator.EQUAL.eval(arg1, arg2));
         break;
-      default :
+      default:
         throw new IllegalCaseException(CompareOperator.class, comparator);
     }
   }

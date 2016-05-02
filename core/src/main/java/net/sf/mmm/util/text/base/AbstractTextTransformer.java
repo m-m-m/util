@@ -24,7 +24,7 @@ public abstract class AbstractTextTransformer implements Transformer<String> {
 
   /**
    * This method gets the list of rules. These rules are processed in the order of occurrence. If a rule
-   * matches (does NOT {@link TransformerRule#transform(String, String) return} <code>null</code> ), that
+   * matches (does NOT {@link TransformerRule#transform(String, String) return} {@code null} ), that
    * result is taken as singular form and no further rule is invoked.
    * 
    * @return the rules.
@@ -35,7 +35,7 @@ public abstract class AbstractTextTransformer implements Transformer<String> {
    * {@inheritDoc}
    * 
    * This implementation processes the {@link #getRules() rules} in the order of occurrence. If a rule matches
-   * (does NOT {@link TransformerRule#transform(String, String) return} <code>null</code> ), that result is
+   * (does NOT {@link TransformerRule#transform(String, String) return} {@code null} ), that result is
    * taken as result and no further rule is invoked.
    */
   public String transform(String string) {

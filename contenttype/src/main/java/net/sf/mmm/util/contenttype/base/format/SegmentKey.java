@@ -40,7 +40,7 @@ public class SegmentKey extends SegmentVariableLength {
   /**
    * This method gets the prefix for the metadata key. You can also use this as
    * entire key if the {@link #getMinimumLength() length} is set to
-   * <code>0</code>.
+   * {@code 0}.
    * 
    * @return the prefix.
    */

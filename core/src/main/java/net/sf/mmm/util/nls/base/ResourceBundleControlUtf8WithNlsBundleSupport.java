@@ -17,7 +17,7 @@ import net.sf.mmm.util.nls.api.NlsBundle;
  * take place, we use this control class with the following strategy:<br>
  * If {@link #newBundle(String, Locale, String, ClassLoader, boolean)} is called with
  * {@link java.util.Locale#ROOT} and there is no regular {@link ResourceBundle} available, but an
- * {@link NlsBundle} with the given <code>baseName</code> it is
+ * {@link NlsBundle} with the given {@code baseName} it is
  * {@link NlsBundleHelper#toResourceBundle(Class) converted} to a {@link ResourceBundle} and returned.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

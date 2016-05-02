@@ -81,7 +81,7 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
    *
    * @param enumType - see {@link #getEnumType()}.
    * @param cycle is a {@link NodeCycle} instance to detect cyclic {@link #getCategory() categories}.
-   * @param category is the {@link #getCategory() category} or <code>null</code> for auto-detect / none.
+   * @param category is the {@link #getCategory() category} or {@code null} for auto-detect / none.
    * @param stringUtil is the {@link StringUtil} instance to use.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })

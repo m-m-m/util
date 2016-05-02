@@ -40,7 +40,7 @@ public class PojoPathContextBean implements PojoPathContext {
   private PojoFactory pojoFactory;
 
   /**
-   * The constructor. All fields are initially <code>null</code>.
+   * The constructor. All fields are initially {@code null}.
    */
   public PojoPathContextBean() {
 

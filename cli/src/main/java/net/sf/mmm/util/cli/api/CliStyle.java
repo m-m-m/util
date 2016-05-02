@@ -29,7 +29,7 @@ public @interface CliStyle {
 
   /**
    * Determines how to {@link CliStyleHandling handle} a {@link CliOption} that is supplied as separate CLI
-   * parameter (e.g. <code>--file=/foo/bar.txt</code>). The default is {@link CliStyleHandling#EXCEPTION}.
+   * parameter (e.g. {@code --file=/foo/bar.txt}). The default is {@link CliStyleHandling#EXCEPTION}.
    * 
    * @see #optionSyntaxSeparated()
    */
@@ -37,7 +37,7 @@ public @interface CliStyle {
 
   /**
    * Determines how to {@link CliStyleHandling handle} a {@link CliOption} that is supplied as separate CLI
-   * parameter (e.g. <code>--file /foo/bar.txt<code>). The default is {@link CliStyleHandling#OK}.
+   * parameter (e.g. {@code --file /foo/bar.txt}). The default is {@link CliStyleHandling#OK}.
    * 
    * @see #optionSyntaxAssignment()
    */

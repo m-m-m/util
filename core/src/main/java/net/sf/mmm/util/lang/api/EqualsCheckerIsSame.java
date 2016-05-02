@@ -4,7 +4,7 @@ package net.sf.mmm.util.lang.api;
 
 /**
  * This is an implementation of {@link EqualsChecker} that simply checks if two objects are same (identical
- * instances, checked via <code>==</code> operator).
+ * instances, checked via {@code ==} operator).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

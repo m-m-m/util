@@ -6,7 +6,7 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
  * A {@link IllegalCaseException} is thrown if a specific case occurred that should never happen. It is typically thrown
- * in the <code>default</code> -section of a <code>switch</code>-statement where all <code>case</code>s should have been
+ * in the {@code default} -section of a {@code switch}-statement where all {@code case}s should have been
  * covered.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -41,9 +41,9 @@ public class IllegalCaseException extends NlsRuntimeException {
   /**
    * The constructor.
    *
-   * @param <E> is the generic type of <code>enumType</code>.
+   * @param <E> is the generic type of {@code enumType}.
    *
-   * @param enumType is the enum-{@link Class} of <code>enumValue</code>.
+   * @param enumType is the enum-{@link Class} of {@code enumValue}.
    * @param enumValue is the value of the enum that was NOT covered.
    */
   public <E extends Enum<E>> IllegalCaseException(Class<E> enumType, E enumValue) {

@@ -64,17 +64,17 @@ public interface EnvironmentDetector {
   String getEnvironmentType();
 
   /**
-   * @return the result of <code>{@link #getEnvironmentType()}.equals({@link #ENVIRONMENT_TYPE_DEVELOPMENT})</code>.
+   * @return the result of {@link #getEnvironmentType()}{@code .equals(}{@link #ENVIRONMENT_TYPE_DEVELOPMENT}{@code )}.
    */
   boolean isDevelopmentEnvironment();
 
   /**
-   * @return the result of <code>{@link #getEnvironmentType()}.equals({@link #ENVIRONMENT_TYPE_PRODUCTION})</code>.
+   * @return the result of {@link #getEnvironmentType()}{@code .equals(}{@link #ENVIRONMENT_TYPE_PRODUCTION}{@code )}.
    */
   boolean isProductionEnvironment();
 
   /**
-   * @return <code>true</code> if the {@link #getEnvironmentType() environment type} is
+   * @return {@code true} if the {@link #getEnvironmentType() environment type} is
    *         {@link #ENVIRONMENT_TYPE_PRODUCTION} or close to production such as
    *         {@link #ENVIRONMENT_TYPE_PRE_PRODUCTION}, {@link #ENVIRONMENT_TYPE_ACCEPTANCE}, or
    *         {@link #ENVIRONMENT_TYPE_STAGING}.

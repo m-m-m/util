@@ -49,8 +49,8 @@ public enum SortOrder implements SimpleDatatype<String> {
    * {@link java.util.Collections#sort(java.util.List, java.util.Comparator)}. In other words *
    *
    * @param compareTo is the result of a regular {@link Comparable#compareTo(Object) compare to} operation.
-   * @return the given value (<code>compareTo</code>) for {@link #ASCENDING} and the negation (
-   *         <code>-compareTo</code>) otherwise (for {@link #DESCENDING}).
+   * @return the given value ({@code compareTo}) for {@link #ASCENDING} and the negation (
+   *         {@code -compareTo}) otherwise (for {@link #DESCENDING}).
    */
   public int adjustSignum(int compareTo) {
 

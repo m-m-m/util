@@ -107,7 +107,7 @@ public class ValueOutOfRangeException extends ValueException {
    *
    * @param <V> is the generic type of the values.
    *
-   * @param valueSource describes the source of the value or <code>null</code> if NOT available. This may be the
+   * @param valueSource describes the source of the value or {@code null} if NOT available. This may be the
    *        filename where the value was read from, an XPath where the value was located in an XML document, etc. It is
    *        used in exceptions thrown if something goes wrong. This will help to find the problem easier.
    * @param value is the number that is out of range.
@@ -125,7 +125,7 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * Verifies that the <code>value</code> is actually out of range.
+   * Verifies that the {@code value} is actually out of range.
    *
    * @param <V> is the generic type of the values.
    * @param value is the number that is out of range.
@@ -149,7 +149,7 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * Verifies that the <code>value</code> is actually out of range.
+   * Verifies that the {@code value} is actually out of range.
    *
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
@@ -171,8 +171,8 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * This method checks that the given <code>value</code> is in the inclusive range from <code>minimum</code> to
-   * <code>maximum</code>.
+   * This method checks that the given {@code value} is in the inclusive range from {@code minimum} to
+   * {@code maximum}.
    *
    * @param <V> the generic type of the {@code value} to check.
    *
@@ -181,10 +181,10 @@ public class ValueOutOfRangeException extends ValueException {
    * @param maximum is the maximum number allowed.
    * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
    *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
-   *        wrong. This will help to find the problem easier. It may be <code>null</code> if there is no helpful source
+   *        wrong. This will help to find the problem easier. It may be {@code null} if there is no helpful source
    *        available.
-   * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT in the range from <code>minimum</code> to
-   *         <code>maximum</code>.
+   * @throws ValueOutOfRangeException - if the given {@code value} is NOT in the range from {@code minimum} to
+   *         {@code maximum}.
    * @since 7.1.0
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -222,18 +222,18 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * This method checks that the given <code>value</code> is in the inclusive range from <code>minimum</code> to
-   * <code>maximum</code>.
+   * This method checks that the given {@code value} is in the inclusive range from {@code minimum} to
+   * {@code maximum}.
    *
    * @param value is the value to check.
    * @param minimum is the minimum number allowed.
    * @param maximum is the maximum number allowed.
    * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
    *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
-   *        wrong. This will help to find the problem easier. It may be <code>null</code> if there is no helpful source
+   *        wrong. This will help to find the problem easier. It may be {@code null} if there is no helpful source
    *        available.
-   * @throws ValueOutOfRangeException - if the given <code>value</code> is NOT in the range from <code>minimum</code> to
-   *         <code>maximum</code>.
+   * @throws ValueOutOfRangeException - if the given {@code value} is NOT in the range from {@code minimum} to
+   *         {@code maximum}.
    * @deprecated - will be removed - use {@link #checkRange(Object, Object, Object, Object)} instead.
    */
   @Deprecated
@@ -251,14 +251,14 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * Creates a new error {@link NlsMessage} that the given <code>value</code> is not in the range from
-   * <code>minimum</code> to <code>maximum</code>.
+   * Creates a new error {@link NlsMessage} that the given {@code value} is not in the range from
+   * {@code minimum} to {@code maximum}.
    *
    * @param <V> is the generic type of the values. Needs to be an instance of {@link Number} or {@link Comparable}.
    * @param value is the invalid value.
-   * @param minimum is the minimum value or <code>null</code> if unbounded.
-   * @param maximum is the maximum value or <code>null</code> if unbounded.
-   * @param valueSource describes the source of <code>value</code> or <code>null</code> if unknown.
+   * @param minimum is the minimum value or {@code null} if unbounded.
+   * @param maximum is the maximum value or {@code null} if unbounded.
+   * @param valueSource describes the source of {@code value} or {@code null} if unknown.
    * @return the error {@link NlsMessage}.
    */
   public static <V> NlsMessage createMessage(V value, V minimum, V maximum, Object valueSource) {

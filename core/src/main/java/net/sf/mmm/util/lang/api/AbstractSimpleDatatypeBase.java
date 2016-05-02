@@ -81,8 +81,8 @@ public abstract class AbstractSimpleDatatypeBase<V> extends AbstractDatatype imp
   /**
    * @param <V> is the generic type of the contained {@link #getValue() value}.
    * @param datatype is the {@link SimpleDatatype} to get the {@link #getValue() value} from.
-   * @return the {@link #getValue() value} of the given <code>datatype</code> or <code>null</code> if
-   *         <code>datatype</code> is <code>null</code>.
+   * @return the {@link #getValue() value} of the given {@code datatype} or {@code null} if
+   *         {@code datatype} is {@code null}.
    * @since 7.0.0
    */
   public static <V> V getValue(SimpleDatatype<V> datatype) {

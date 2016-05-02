@@ -59,7 +59,7 @@ public class NlsArgument {
   /**
    * This method gets the optional {@link Justification}.
    * 
-   * @return the justification or <code>null</code> for none.
+   * @return the justification or {@code null} for none.
    */
   public Justification getJustification() {
 

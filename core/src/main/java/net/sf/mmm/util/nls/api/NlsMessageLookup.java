@@ -15,12 +15,12 @@ import java.util.Map;
 public abstract interface NlsMessageLookup {
 
   /**
-   * This method create the {@link NlsMessage} for the given <code>key</code> with the given <code>nlsArguments</code>.
+   * This method create the {@link NlsMessage} for the given {@code key} with the given {@code nlsArguments}.
    * 
    * @param key is the {@link java.lang.reflect.Method#getName() method name}.
-   * @param nlsArguments are the {@link NlsMessage#getArgument(String) arguments}. May be <code>null</code> for no
+   * @param nlsArguments are the {@link NlsMessage#getArgument(String) arguments}. May be {@code null} for no
    *        arguments.
-   * @return the {@link NlsMessage} or <code>null</code> if no message exists for the given <code>methodName</code> (no
+   * @return the {@link NlsMessage} or {@code null} if no message exists for the given {@code methodName} (no
    *         such method exists).
    */
   NlsMessage getMessage(String key, Map<String, Object> nlsArguments);

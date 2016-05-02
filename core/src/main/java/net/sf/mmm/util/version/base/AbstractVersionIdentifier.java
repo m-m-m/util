@@ -127,10 +127,10 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method gets {@link #getPhaseNumber()} as <code>int</code>.
+   * This method gets {@link #getPhaseNumber()} as {@code int}.
    *
    * @param version is the {@link VersionIdentifier}.
-   * @return the {@link #getPhaseNumber()} as <code>int</code>, using <code>0</code> for <code>null</code>.
+   * @return the {@link #getPhaseNumber()} as {@code int}, using {@code 0} for {@code null}.
    */
   private static int getPhaseNumberAsInt(VersionIdentifier version) {
 

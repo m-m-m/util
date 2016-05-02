@@ -118,7 +118,7 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
   /**
    * This method gets the {@link NlsTemplate} of this message.
    *
-   * @return the text the {@link NlsTemplate} or <code>null</code> if NOT yet
+   * @return the text the {@link NlsTemplate} or {@code null} if NOT yet
    *         {@link NlsTemplateResolver#resolveTemplate(String) resolved}.
    */
   public NlsTemplate getTemplate() {

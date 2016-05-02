@@ -87,10 +87,10 @@ public class RuntimeIoException extends NlsRuntimeException {
 
   /**
    * This method gets the {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() message} according to
-   * the given <code>mode</code>.
+   * the given {@code mode}.
    *
-   * @param mode is the {@link IoMode} or <code>null</code> if unknown.
-   * @return the message according to <code>mode</code>.
+   * @param mode is the {@link IoMode} or {@code null} if unknown.
+   * @return the message according to {@code mode}.
    */
   private static NlsMessage getMessage(IoMode mode) {
 

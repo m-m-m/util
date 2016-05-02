@@ -11,11 +11,11 @@ package net.sf.mmm.util.xml.path.api;
 public interface XPathParser {
 
   /**
-   * This method parses the given <code>xpath</code> expression.
+   * This method parses the given {@code xpath} expression.
    * 
    * @param xpath is the XPath expression as string.
-   * @return the parsed <code>xpath</code> expression.
-   * @throws XmlParseException if the given <code>xpath</code> expression is
+   * @return the parsed {@code xpath} expression.
+   * @throws XmlParseException if the given {@code xpath} expression is
    *         illegal.
    */
   XmlSelector parseXPath(String xpath) throws XmlParseException;

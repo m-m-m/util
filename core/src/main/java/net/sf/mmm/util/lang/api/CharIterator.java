@@ -5,7 +5,7 @@ package net.sf.mmm.util.lang.api;
 /**
  * This is the interface for an {@link java.util.Iterator} of primitive char values. <br>
  * The intention of {@link CharIterator} is to allow faster processing of large streams of characters by using
- * the primitive type <code>char</code> and by making calls of {@link #hasNext()} unnecessary.
+ * the primitive type {@code char} and by making calls of {@link #hasNext()} unnecessary.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -25,8 +25,8 @@ public interface CharIterator {
    * @see #next()
    * @see java.util.Iterator#hasNext()
    * 
-   * @return <code>true</code> if there is at least one {@link #next() next} char available, or
-   *         <code>false</code> if the end of this iterator has been reached and further calls of
+   * @return {@code true} if there is at least one {@link #next() next} char available, or
+   *         {@code false} if the end of this iterator has been reached and further calls of
    *         {@link #next()} will return {@link #END_OF_ITERATOR}.
    */
   boolean hasNext();

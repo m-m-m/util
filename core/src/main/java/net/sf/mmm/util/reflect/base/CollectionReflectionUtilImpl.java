@@ -171,7 +171,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
    *        {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract implementation of a
    *        {@link Collection}.
    * @param capacity is the initial capacity of the collection or {@code null} if unspecified.
-   * @return the new instance of the given <code>type</code>.
+   * @return the new instance of the given {@code type}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected <C extends Collection<?>> C create(Class<C> type, Integer capacity) {
@@ -271,7 +271,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
    *        {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract implementation of a
    *        {@link Collection}.
    * @param capacity is the initial capacity of the collection or {@code null} if unspecified.
-   * @return the new instance of the given <code>type</code>.
+   * @return the new instance of the given {@code type}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected <C extends Map<?, ?>> C createMap(Class<C> type, Integer capacity) {

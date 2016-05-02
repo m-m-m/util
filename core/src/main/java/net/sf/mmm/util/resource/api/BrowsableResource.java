@@ -37,7 +37,7 @@ public interface BrowsableResource extends DataResource {
 
   /**
    * This method iterates the immediate child-{@link BrowsableResource resources} contained in this
-   * {@link BrowsableResource} and are {@link Filter#accept(Object) accepted} by the given <code>filter</code>
+   * {@link BrowsableResource} and are {@link Filter#accept(Object) accepted} by the given {@code filter}
    * . <br>
    *
    * @param filter is the {@link Filter} applied to the {@link #getChildResources() child-resources}.
@@ -52,9 +52,9 @@ public interface BrowsableResource extends DataResource {
    * if this is a folder. <br>
    * In order to determine if this {@link BrowsableResource} is {@link #openStream() containing data}, please
    * use {@link #isAvailable()}. Please note that {@link #isFolder()} and {@link #isAvailable()} can both
-   * return <code>true</code> or both return <code>false</code>.
+   * return {@code true} or both return {@code false}.
    *
-   * @return <code>true</code> if this is a folder, <code>false</code> otherwise.
+   * @return {@code true} if this is a folder, {@code false} otherwise.
    */
   boolean isFolder();
 

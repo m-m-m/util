@@ -32,10 +32,10 @@ public interface DataResourceProvider<R extends DataResource> {
   Class<R> getResourceType();
 
   /**
-   * This method creates a new {@link DataResource resource} for the given <code>resourceUri</code>.
+   * This method creates a new {@link DataResource resource} for the given {@code resourceUri}.
    *
    * @param resourceUri is the {@link ResourceUri}.
-   * @return the {@link DataResource resource} for the given <code>resourceUri</code>.
+   * @return the {@link DataResource resource} for the given {@code resourceUri}.
    */
   R createResource(ResourceUri resourceUri);
 

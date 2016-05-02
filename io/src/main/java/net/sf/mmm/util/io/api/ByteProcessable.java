@@ -3,7 +3,7 @@
 package net.sf.mmm.util.io.api;
 
 /**
- * This is the interface for an object providing data represented as sequence of <code>byte</code>s -
+ * This is the interface for an object providing data represented as sequence of {@code byte}s -
  * typically some sort of buffer. <br>
  * Following the idiom <em>separations of concerns</em> the idea is to allow fast and easy
  * {@link ByteProcessor#process(byte[], int, int) processing} of the data without any dependency or knowledge
@@ -18,17 +18,17 @@ package net.sf.mmm.util.io.api;
 public interface ByteProcessable {
 
   /**
-   * This method processes the number of bytes given by <code>length</code> (as far as available) using the
-   * given <code>processor</code>.
+   * This method processes the number of bytes given by {@code length} (as far as available) using the
+   * given {@code processor}.
    * 
    * @param processor is the {@link ByteProcessor} called to process the bytes. It may be called multiple
    *        types if the data is sliced into multiple byte-arrays.
    * @param length is the desired number of bytes to process. The value has to be greater or equal to
-   *        <code>0</code>. A value of <code>0</code> will have no effect. If you want to process all
+   *        {@code 0}. A value of {@code 0} will have no effect. If you want to process all
    *        available data to the end of stream or buffer you may use {@link Long#MAX_VALUE}.
-   * @return the number of bytes that have actually been processed. For a sufficient <code>length</code> this
-   *         will typically be equal to <code>length</code>. However if the end of the data has been reached,
-   *         a smaller value is returned. The value will always be greater or equal to <code>0</code>.
+   * @return the number of bytes that have actually been processed. For a sufficient {@code length} this
+   *         will typically be equal to {@code length}. However if the end of the data has been reached,
+   *         a smaller value is returned. The value will always be greater or equal to {@code 0}.
    */
   long process(ByteProcessor processor, long length);
 

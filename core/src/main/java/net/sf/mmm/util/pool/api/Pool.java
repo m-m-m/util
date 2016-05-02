@@ -26,17 +26,17 @@ public interface Pool<E> {
    * If this pool is {@link #isEmpty() empty}, a new instance is created for you. Otherwise a existing
    * instance (that has been {@link #release(Object) released} before) will be returned so it can be reused.
    * 
-   * @return an element from the pool. Typically this method never returns <code>null</code>. This may only
+   * @return an element from the pool. Typically this method never returns {@code null}. This may only
    *         happen if explicitly documented by the chosen implementation.
    */
   E borrow();
 
   /**
-   * This method releases the given <code>element</code>. It will be put back into the pool. <br>
+   * This method releases the given {@code element}. It will be put back into the pool. <br>
    * <b>ATTENTION:</b><br>
-   * Only call this method if you are sure that the given <code>element</code> is NOT in use anymore.
-   * Therefore no reference should exist on the <code>element</code> and you should NOT have passed the
-   * <code>element</code> to a third-party library that may keep it in some cache.
+   * Only call this method if you are sure that the given {@code element} is NOT in use anymore.
+   * Therefore no reference should exist on the {@code element} and you should NOT have passed the
+   * {@code element} to a third-party library that may keep it in some cache.
    * 
    * @see java.util.Collection#add(Object)
    * 
@@ -49,7 +49,7 @@ public interface Pool<E> {
    * 
    * @see java.util.Collection#isEmpty()
    * 
-   * @return <code>true</code> if the pool is empty.
+   * @return {@code true} if the pool is empty.
    */
   boolean isEmpty();
 

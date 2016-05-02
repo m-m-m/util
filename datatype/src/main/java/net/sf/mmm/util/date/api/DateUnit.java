@@ -122,10 +122,10 @@ public enum DateUnit implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link DateUnit} for the given <code>value</code>.
+   * This method gets the {@link DateUnit} for the given {@code value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link DateUnit}.
-   * @return the requested {@link DateUnit} or <code>null</code> if no such {@link DateUnit} exists.
+   * @return the requested {@link DateUnit} or {@code null} if no such {@link DateUnit} exists.
    */
   public static DateUnit fromValue(String value) {
 

@@ -33,8 +33,8 @@ public interface Hyphenator {
   Hyphenation hyphenate(String text, int start);
 
   /**
-   * This method hyphenates the word from the given <code>text</code> from <code>start</code> to
-   * <code>end</code>. <br>
+   * This method hyphenates the word from the given {@code text} from {@code start} to
+   * {@code end}. <br>
    * <b>ATTENTION:</b><br>
    * To ensure correct results you need to invoke this method for a single word of text. Please also note that
    * word detection is far from trivial for specific languages such as Thai. You should use
@@ -43,7 +43,7 @@ public interface Hyphenator {
    * @param text is the text containing the word to hyphenate.
    * @param start is the {@link String#indexOf(int) index} of the words first character.
    * @param end is the exclusive end-index. The {@link String#indexOf(int) index} of the words last character
-   *        is <code>end - 1</code>.
+   *        is {@code end - 1}.
    * @return the {@link Hyphenation} for the word given by
    *         <code>text.{@link String#substring(int, int) substring}(start, end)</code>
    */

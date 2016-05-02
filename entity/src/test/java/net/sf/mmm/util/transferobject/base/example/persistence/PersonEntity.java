@@ -103,7 +103,7 @@ public class PersonEntity extends AbstractEntity<Long> implements Person {
   }
 
   /**
-   * @return the {@link Address} or <code>null</code> if not defined.
+   * @return the {@link Address} or {@code null} if not defined.
    */
   public AddressEntity getAddress() {
 

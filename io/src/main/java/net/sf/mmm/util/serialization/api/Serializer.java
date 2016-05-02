@@ -28,8 +28,8 @@ public interface Serializer {
   /**
    * Serializes (or marshals) the given {@link Object} to serialized data.
    *
-   * @param object is the {@link Object} to serialize. May be <code>null</code>.
-   * @return the serialized data (payload) representing the given {@link Object}. We use <code>byte[]</code>
+   * @param object is the {@link Object} to serialize. May be {@code null}.
+   * @return the serialized data (payload) representing the given {@link Object}. We use {@code byte[]}
    *         to allow arbitrary data including any binary format. However, this can also be a {@link String}
    *         encoded e.g. in UTF-8.
    */

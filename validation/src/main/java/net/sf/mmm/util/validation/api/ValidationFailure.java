@@ -16,11 +16,11 @@ public interface ValidationFailure extends Message {
 
   /**
    * This method gets the (optional) {@link ValueValidator#validate(Object, Object) source} of the validation.
-   * It describes the origin of the given <code>value</code>. This may be the filename where the value was
+   * It describes the origin of the given {@code value}. This may be the filename where the value was
    * read from, an XPath where the value was located in an XML document, etc. It can be used to enrich
    * {@link #getMessage() messages} displayed to end-users. This will help to find the problem easier.
    * 
-   * @return the source or <code>null</code> if NOT available.
+   * @return the source or {@code null} if NOT available.
    */
   String getSource();
 

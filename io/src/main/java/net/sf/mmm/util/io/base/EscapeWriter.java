@@ -32,7 +32,7 @@ public class EscapeWriter extends Writer {
    * 
    * @param charEscapeTable is a String array that maps characters by to escape sequences. If the numeric
    *        representation of a character is a legal index for the given array and the String at that index is
-   *        <code>null</code> that string is written instead of the character. In all other cases, the
+   *        {@code null} that string is written instead of the character. In all other cases, the
    *        character is written without change.
    * @param plainWriter is the writer that is wrapped.
    */
@@ -50,7 +50,7 @@ public class EscapeWriter extends Writer {
    *        {@link Writer#Writer(java.lang.Object)}).
    * @param charEscapeTable is a String array that maps characters by to escape sequences. If the numeric
    *        representation of a character is a legal index for the given array and the String at that index is
-   *        NOT <code>null</code> that string is written instead of the character. In all other cases, the
+   *        NOT {@code null} that string is written instead of the character. In all other cases, the
    *        character is written without change.
    * @param plainWriter is the writer that is wrapped.
    */

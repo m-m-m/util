@@ -17,8 +17,8 @@ public interface EnumTypeWithCategory<V, CATEGORY> extends SimpleDatatype<V> {
    * This method gets the {@link EnumType} of the category of this enum instance. The category typically
    * expresses a <em>belongs to</em> relationship. <br>
    * E.g. a <em>state</em> could be an {@link EnumType} that has another {@link EnumType} called
-   * <em>country</em> as category. Further, a <code>city</code> could be another {@link EnumType} that has
-   * <code>state</code> as category.
+   * <em>country</em> as category. Further, a {@code city} could be another {@link EnumType} that has
+   * {@code state} as category.
    * 
    * @see EnumDefinition#getCategory()
    * 

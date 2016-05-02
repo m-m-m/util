@@ -39,7 +39,7 @@ public class BooleanFormatter extends AbstractFormatter<Boolean> {
   /**
    * The constructor.
    * 
-   * @param locale is the fixed {@link Locale} to use or <code>null</code> for default locale.
+   * @param locale is the fixed {@link Locale} to use or {@code null} for default locale.
    */
   public BooleanFormatter(Locale locale) {
 

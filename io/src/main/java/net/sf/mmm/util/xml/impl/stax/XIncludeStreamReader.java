@@ -39,7 +39,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   /** The {@link Logger} to use. */
   private static final Logger LOGGER = LoggerFactory.getLogger(XIncludeStreamReader.class);
 
-  /** the parent reader or <code>null</code> if this is the root. */
+  /** the parent reader or {@code null} if this is the root. */
   private final XIncludeStreamReader parent;
 
   /** The factory used to create additional readers. */
@@ -57,18 +57,18 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   private final InputStream inputStream;
 
   /**
-   * The reader to the current XInclude document or <code>null</code> if we currently have no active XInclude.
+   * The reader to the current XInclude document or {@code null} if we currently have no active XInclude.
    */
   private XMLStreamReader includeReader;
 
   /**
-   * The included text or <code>null</code> if currently no text is to be included.
+   * The included text or {@code null} if currently no text is to be included.
    */
   private String includeText;
 
   /**
    * The current depth in the XML tree relative to the first "include" tag of the XInclude namespace that is
-   * currently active. Will be <code>0</code> if we are outside of an XInclude.
+   * currently active. Will be {@code 0} if we are outside of an XInclude.
    */
   private int depth;
 
@@ -128,7 +128,7 @@ public class XIncludeStreamReader extends StreamReaderProxy {
    * using different XPointer expressions.
    *
    * @param dataResource is the current data-resource to include.
-   * @throws XMLStreamException if the given <code>dataResource</code> has already been included causing an
+   * @throws XMLStreamException if the given {@code dataResource} has already been included causing an
    *         infinity loop.
    */
   protected void detectRecursiveInclusion(DataResource dataResource) throws XMLStreamException {

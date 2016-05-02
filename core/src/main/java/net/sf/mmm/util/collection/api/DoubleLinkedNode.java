@@ -20,7 +20,7 @@ public interface DoubleLinkedNode<V, NODE extends DoubleLinkedNode<V, NODE>> ext
   /**
    * This method gets the previous node of the double linked list.
    * 
-   * @return the previous node or <code>null</code> if this is the first node (head).
+   * @return the previous node or {@code null} if this is the first node (head).
    */
   NODE getPrevious();
 

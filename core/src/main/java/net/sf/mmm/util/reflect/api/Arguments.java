@@ -51,9 +51,9 @@ public class Arguments {
   }
 
   /**
-   * This method gets the argument at the given <code>position</code>.
+   * This method gets the argument at the given {@code position}.
    * 
-   * @param position is the index of the requested type. This value must be in the range from <code>0</code> to
+   * @param position is the index of the requested type. This value must be in the range from {@code 0} to
    *        <code>{@link #getArgumentCount()} - 1</code>.
    * @return the argument at the given index.
    */

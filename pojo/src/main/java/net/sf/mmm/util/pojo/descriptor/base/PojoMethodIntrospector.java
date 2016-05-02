@@ -22,7 +22,7 @@ import java.util.Iterator;
 public interface PojoMethodIntrospector {
 
   /**
-   * This method finds all {@link Method}s of the given <code>pojoType</code>.
+   * This method finds all {@link Method}s of the given {@code pojoType}.
    * 
    * @param pojoType is the type reflecting the POJO for which the {@link Method}s are requested.
    * @return a read-only iterator of all the {@link Method}s.

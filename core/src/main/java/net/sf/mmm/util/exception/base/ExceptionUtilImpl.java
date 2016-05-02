@@ -64,9 +64,9 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
   }
 
   /**
-   * @return <code>true</code> if {@link #convertForClient(Throwable)} shall
+   * @return {@code true} if {@link #convertForClient(Throwable)} shall
    *         {@link #convertForSerialization(Throwable, ExceptionTruncation) enforce serializable exceptions},
-   *         <code>false</code> otherwise.
+   *         {@code false} otherwise.
    */
   public boolean isEnforceSerializableForClient() {
 
@@ -181,7 +181,7 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
   }
 
   /**
-   * @return <code>true</code> if {@link #obfuscateException(Throwable)} shall remove the
+   * @return {@code true} if {@link #obfuscateException(Throwable)} shall remove the
    *         {@link Throwable#getStackTrace() stacktrace} of the resulting exception.
    */
   protected boolean isRemoveStacktrace() {
@@ -190,7 +190,7 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
   }
 
   /**
-   * @return <code>true</code> if exceptions shall be obfuscated, <code>false</code> otherwise.
+   * @return {@code true} if exceptions shall be obfuscated, {@code false} otherwise.
    */
   protected ExceptionTruncation getTruncationForClient() {
 

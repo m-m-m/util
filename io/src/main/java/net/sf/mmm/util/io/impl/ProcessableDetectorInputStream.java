@@ -60,7 +60,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     private DetectorStreamBuffer targetBuffer;
 
     /**
-     * <code>true</code> if end of detection-stream, <code>false</code> otherwise.
+     * {@code true} if end of detection-stream, {@code false} otherwise.
      */
     private boolean endOfStream;
 

@@ -21,7 +21,7 @@ public abstract class EncodingDetectionReader extends Reader {
    * This method gets the encoding if already detected. The detection may last until the end of this
    * {@link Reader} has been reached.
    * 
-   * @return the encoding or <code>null</code> if NOT yet detected (then typically
+   * @return the encoding or {@code null} if NOT yet detected (then typically
    *         {@link net.sf.mmm.util.io.base.EncodingUtilImpl#ENCODING_US_ASCII ASCII} is assumed so far).
    */
   public abstract String getEncoding();

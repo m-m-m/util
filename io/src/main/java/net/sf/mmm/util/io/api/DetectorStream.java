@@ -33,7 +33,7 @@ public abstract interface DetectorStream {
    * This method gets the context with the detected metadata. It is immutable and should NOT be modified. This
    * method should NOT be called, before this detector stream is {@link #isDone() done}. <br>
    * For the keys to use in the metadata {@link Map} have a look at
-   * <code>net.sf.mmm.util.metakey.api.MetakeyCore</code>.
+   * {@code net.sf.mmm.util.metakey.api.MetakeyCore}.
    * 
    * @return the metadata.
    */
@@ -41,10 +41,10 @@ public abstract interface DetectorStream {
 
   /**
    * This method determines if the detection is done. If the stream has been processed to the end this method
-   * will always return <code>true</code>. However the detection may be done before the end of the stream was
+   * will always return {@code true}. However the detection may be done before the end of the stream was
    * reached (e.g. because all {@link #getMetadata() metadata} comes from the header of the data).
    * 
-   * @return <code>true</code> if the metadata has been completely been collected, <code>false</code>
+   * @return {@code true} if the metadata has been completely been collected, {@code false}
    *         otherwise.
    */
   boolean isDone();

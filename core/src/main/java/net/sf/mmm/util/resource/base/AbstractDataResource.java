@@ -63,9 +63,8 @@ public abstract class AbstractDataResource implements DataResource {
 
   /**
    * This method gets the <em>scheme-prefix</em> of absolute {@link #getUri() URIs} for this type of
-   * {@link DataResource}. The scheme-prefix has the following form:
-   * <code>{@link java.net.URI#getScheme() &lt;scheme&gt;}:&lt;suffix&gt;</code> where
-   * <code>&lt;suffix&gt;</code> is the empty string or something like <code>//</code>.
+   * {@link DataResource}. The scheme-prefix has the following form: {@link java.net.URI#getScheme() &lt;scheme&gt;}
+   * {@code :<suffix>} where {@code <suffix>} is the empty string or something like {@code //}.
    *
    * @return the scheme-prefix of this resource.
    */
@@ -146,8 +145,8 @@ public abstract class AbstractDataResource implements DataResource {
    * {@inheritDoc}
    */
   @Override
-  public OutputStream openOutputStream() throws ResourceNotAvailableException, ResourceNotWritableException,
-      RuntimeIoException {
+  public OutputStream openOutputStream()
+      throws ResourceNotAvailableException, ResourceNotWritableException, RuntimeIoException {
 
     throw new ResourceNotWritableException(getUri());
   }

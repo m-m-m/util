@@ -29,7 +29,7 @@ public class PojoPathConversionException extends PojoPathException {
    * @param pojoPath is the {@link PojoPath} pointing to the {@link PojoPath#getSegment() segment} that could NOT be
    *        converted.
    * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo}.
-   * @param targetType is the required type for the given <code>pojoPath</code>.
+   * @param targetType is the required type for the given {@code pojoPath}.
    */
   public PojoPathConversionException(String pojoPath, Type pojoType, Type targetType) {
 
@@ -43,7 +43,7 @@ public class PojoPathConversionException extends PojoPathException {
    * @param pojoPath is the {@link PojoPath} pointing to the {@link PojoPath#getSegment() segment} that could NOT be
    *        converted.
    * @param pojoType is the type of the {@link net.sf.mmm.util.pojo.api.Pojo}.
-   * @param targetType is the required type for the given <code>pojoPath</code>.
+   * @param targetType is the required type for the given {@code pojoPath}.
    */
   public PojoPathConversionException(Throwable nested, String pojoPath, Type pojoType, Object targetType) {
 

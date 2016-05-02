@@ -19,11 +19,11 @@ public interface LineWrapper {
   String CDI_NAME = "net.sf.mmm.util.text.api.LineWrapper";
 
   /**
-   * This method {@link Appendable#append(CharSequence) appends} the given <code>text</code> to the
-   * <code>appendable</code>. If the text is longer than the {@link TextColumnInfo#getWidth() number of
-   * characters} left in the current line, the <code>text</code> is wrapped. This means the current line is
-   * filled with parts of the <code>text</code>, a newline is {@link Appendable#append(CharSequence) added}
-   * and the next line is filled with the same procedure until the entire <code>text</code> is processed. The
+   * This method {@link Appendable#append(CharSequence) appends} the given {@code text} to the
+   * {@code appendable}. If the text is longer than the {@link TextColumnInfo#getWidth() number of
+   * characters} left in the current line, the {@code text} is wrapped. This means the current line is
+   * filled with parts of the {@code text}, a newline is {@link Appendable#append(CharSequence) added}
+   * and the next line is filled with the same procedure until the entire {@code text} is processed. The
    * last line is NOT terminated with a newline but ends with the last character of the text.
    * 
    * @param appendable is the target where to {@link Appendable#append(CharSequence) append} to.

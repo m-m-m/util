@@ -18,7 +18,7 @@ public interface HasValueValidators<V> {
    * {@link ValueValidator#validate(Object) invoked} in the same order as they are added by this method. They
    * are {@link ValueValidator#validate(Object) invoked} no matter if the previous {@link ValueValidator}s
    * failed or succeeded. You should always design {@link ValueValidator}s in a robust and reusable way (e.g.
-   * a range validator should accept <code>null</code> as valid input so it can be used for both mandatory and
+   * a range validator should accept {@code null} as valid input so it can be used for both mandatory and
    * optional fields).
    * 
    * @param validator is the {@link ValueValidator} to add.
@@ -32,7 +32,7 @@ public interface HasValueValidators<V> {
    * recommended.
    * 
    * @param validator is the {@link ValueValidator} to remove.
-   * @return <code>true</code> if the {@link ValueValidator} has actually been removed, <code>false</code>
+   * @return {@code true} if the {@link ValueValidator} has actually been removed, {@code false}
    *         otherwise (it has NOT previously been {@link #addValidator(ValueValidator) added}).
    */
   boolean removeValidator(ValueValidator<? super V> validator);

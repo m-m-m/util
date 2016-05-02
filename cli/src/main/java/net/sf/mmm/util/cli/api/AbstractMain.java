@@ -95,7 +95,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    *
    * @param exception is the actual error that occurred.
    * @param parser is the {@link CliParser}.
-   * @return the error-code (NOT <code>0</code>).
+   * @return the error-code (NOT {@code 0}).
    */
   protected int handleError(Exception exception, CliParser parser) {
 
@@ -121,7 +121,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   /**
    * This method gets the {@link IocContainer} used to manage components with their implementation. It should
    * be created and initialized on the first call of this method. <br>
-   * This default implementation simply returns <code>null</code> to avoid dependencies on a
+   * This default implementation simply returns {@code null} to avoid dependencies on a
    * {@link IocContainer} implementation. Override this method to use proper component management.
    *
    * @see net.sf.mmm.util.component.impl.SpringContainer
@@ -256,7 +256,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    * This method should be invoked from the static main-method.
    *
    * @param args are the commandline-arguments.
-   * @return the exit code or <code>0</code> on success.
+   * @return the exit code or {@code 0} on success.
    */
   public int run(String... args) {
 
@@ -278,7 +278,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
 
   /**
    * This method delegates to {@link #run(String...)} and then calls {@link System#exit(int)} with the
-   * returned exit code. You can easily call this additional statement from your regular <code>main</code>
+   * returned exit code. You can easily call this additional statement from your regular {@code main}
    * method, but this allows us to concentrate the "evil" {@link System#out} statement at a single place.
    *
    * @param args are the commandline arguments.

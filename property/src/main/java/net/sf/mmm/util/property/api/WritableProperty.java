@@ -22,8 +22,8 @@ public interface WritableProperty<V>
   WritableProperty<?>[] NO_PROPERTIES = new WritableProperty<?>[0];
 
   /**
-   * @return <code>true</code> if this property is read-only and {@link #setValue(Object)} will fail with an exception,
-   *         <code>false</code> otherwise.
+   * @return {@code true} if this property is read-only and {@link #setValue(Object)} will fail with an exception,
+   *         {@code false} otherwise.
    */
   boolean isReadOnly();
 
@@ -33,7 +33,7 @@ public interface WritableProperty<V>
   WritableProperty<V> getReadOnly();
 
   /**
-   * @return <code>true</code> if this property is mandatory (a {@link #getValue() value} of <code>null</code> is NOT
+   * @return {@code true} if this property is mandatory (a {@link #getValue() value} of {@code null} is NOT
    *         {@link #isValid() valid}.
    */
   boolean isMandatory();
@@ -41,7 +41,7 @@ public interface WritableProperty<V>
   /**
    * @see ValueValidator#validate(Object)
    *
-   * @return the {@link ValidationFailure} or <code>null</code> if the {@link #getValue() value} is {@link #isValid()
+   * @return the {@link ValidationFailure} or {@code null} if the {@link #getValue() value} is {@link #isValid()
    *         valid}.
    */
   ValidationFailure validate();
@@ -49,7 +49,7 @@ public interface WritableProperty<V>
   /**
    * @see #validate()
    *
-   * @return <code>true</code> if valid, <code>false</code> otherwise.
+   * @return {@code true} if valid, {@code false} otherwise.
    */
   boolean isValid();
 

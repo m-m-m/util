@@ -8,7 +8,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageLookup;
 
 /**
- * This is a dummy implementation of {@link NlsMessageLookup} that will always return <code>null</code>.
+ * This is a dummy implementation of {@link NlsMessageLookup} that will always return {@code null}.
  * 
  * @see #INSTANCE
  * 

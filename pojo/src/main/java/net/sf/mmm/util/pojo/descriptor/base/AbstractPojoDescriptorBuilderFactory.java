@@ -43,7 +43,7 @@ public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLogga
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
    * 
-   * @return the static instance of this class. May be <code>null</code> if not initialized.
+   * @return the static instance of this class. May be {@code null} if not initialized.
    */
   public static PojoDescriptorBuilderFactory getInstance() {
 

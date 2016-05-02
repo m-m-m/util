@@ -14,7 +14,7 @@ public abstract interface AttributeWriteValue<VALUE> extends AttributeReadValue<
   /**
    * This method sets the {@link #getValue() value}.
    * 
-   * @param value is the new {@link #getValue() value}. May be <code>null</code> unless otherwise stated.
+   * @param value is the new {@link #getValue() value}. May be {@code null} unless otherwise stated.
    */
   void setValue(VALUE value);
 

@@ -56,7 +56,7 @@ public class DuplicateObjectException extends NlsRuntimeException {
    *
    * @param object is the object that was rejected because it is a duplicate.
    * @param key is the key the object could NOT be associated with because it already leads to another object.
-   * @param existing is the object that is already registered for the given <code>key</code>.
+   * @param existing is the object that is already registered for the given {@code key}.
    * @since 3.0.0
    */
   public DuplicateObjectException(Object object, Object key, Object existing) {
@@ -66,16 +66,16 @@ public class DuplicateObjectException extends NlsRuntimeException {
   }
 
   /**
-   * This method {@link Map#put(Object, Object) puts} the given <code>value</code> into the given <code>map</code> using
-   * the given <code>key</code>.
+   * This method {@link Map#put(Object, Object) puts} the given {@code value} into the given {@code map} using
+   * the given {@code key}.
    *
-   * @param <KEY> is the generic type of the <code>key</code>.
-   * @param <VALUE> is the generic type of the <code>value</code>.
+   * @param <KEY> is the generic type of the {@code key}.
+   * @param <VALUE> is the generic type of the {@code value}.
    * @param map is the {@link Map}.
    * @param key is the {@link Map#get(Object) key}.
    * @param value is the value to {@link Map#put(Object, Object) put}.
-   * @throws DuplicateObjectException if the given <code>map</code> already contains a value for the given
-   *         <code>key</code> that is NOT equal to the given <code>value</code>.
+   * @throws DuplicateObjectException if the given {@code map} already contains a value for the given
+   *         {@code key} that is NOT equal to the given {@code value}.
    * @since 3.0.0
    */
   public static <KEY, VALUE> void put(Map<KEY, VALUE> map, KEY key, VALUE value) throws DuplicateObjectException {

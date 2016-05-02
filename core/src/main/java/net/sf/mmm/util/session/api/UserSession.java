@@ -14,12 +14,12 @@ import java.util.Locale;
 public interface UserSession {
 
   /**
-   * @return the current user logged in or <code>null</code> as {@link #isFallback() fallback}.
+   * @return the current user logged in or {@code null} as {@link #isFallback() fallback}.
    */
   Principal getUser();
 
   /**
-   * @return the login of the current user or <code>null</code> as {@link #isFallback() fallback}.
+   * @return the login of the current user or {@code null} as {@link #isFallback() fallback}.
    */
   String getLogin();
 
@@ -33,10 +33,10 @@ public interface UserSession {
    * This method determines if this {@link UserSession} was {@link UserSessionAccess#getSession() received} or
    * is currently called outside the scope of a current user session. On the server side a {@link UserSession}
    * typically exists in the context of a servlet container or JEE application server. If the context is not
-   * available this method will return <code>true</code>. This may be because the user is currently not logged in (anonymous access) or the context is not available for technical reasons (e.g. misconfiguration).
+   * available this method will return {@code true}. This may be because the user is currently not logged in (anonymous access) or the context is not available for technical reasons (e.g. misconfiguration).
    *
-   * @return <code>true</code> if {@link UserSessionAccess#getSession() received} or called outside the scope
-   *         of a current user session, <code>false</code> otherwise.
+   * @return {@code true} if {@link UserSessionAccess#getSession() received} or called outside the scope
+   *         of a current user session, {@code false} otherwise.
    */
   boolean isFallback();
 

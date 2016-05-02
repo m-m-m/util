@@ -18,7 +18,7 @@ public interface StringTransformerRule extends Transformer<String> {
    * {@link Transformer#transform(Object) transform} if it did NOT match. <br>
    * If you are familiar with apache httpd you can think of this flag as the "L" in a rewrite rule.
    *
-   * @return <code>true</code> if the rule should stop further proceeding after successful transformation.
+   * @return {@code true} if the rule should stop further proceeding after successful transformation.
    */
   boolean isStopOnMatch();
 

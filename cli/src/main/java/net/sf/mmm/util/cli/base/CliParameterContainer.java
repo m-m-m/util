@@ -70,7 +70,7 @@ public abstract class CliParameterContainer {
    * This method gets the {@link PojoPropertyAccessorOneArg accessor} used to get the value of the according
    * {@link net.sf.mmm.util.cli.api.CliOption option} or {@link net.sf.mmm.util.cli.api.CliArgument argument}.
    *
-   * @return the {@link PojoPropertyAccessorNonArg getter} or <code>null</code> if NOT available.
+   * @return the {@link PojoPropertyAccessorNonArg getter} or {@code null} if NOT available.
    */
   public PojoPropertyAccessorNonArg getGetter() {
 
@@ -109,7 +109,7 @@ public abstract class CliParameterContainer {
    *
    * @see CliValueContainer#isArrayMapOrCollection()
    *
-   * @return <code>true</code> if the {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} is a
+   * @return {@code true} if the {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} is a
    *         container-type.
    */
   public boolean isArrayMapOrCollection() {
@@ -119,13 +119,13 @@ public abstract class CliParameterContainer {
   }
 
   /**
-   * This method determines if the given <code>type</code> is a container-type (an array, {@link Collection}
+   * This method determines if the given {@code type} is a container-type (an array, {@link Collection}
    * or {@link Map}).
    *
    * @see CliValueContainer#isArrayMapOrCollection()
    *
    * @param type is the {@link Class} to check.
-   * @return <code>true</code> if the given <code>type</code> is a container-type.
+   * @return {@code true} if the given {@code type} is a container-type.
    */
   protected static boolean isArrayMapOrCollection(Class<?> type) {
 

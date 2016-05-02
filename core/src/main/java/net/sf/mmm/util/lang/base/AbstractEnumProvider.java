@@ -120,7 +120,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   }
 
   /**
-   * This method registers the given <code>enumClass</code> as {@link EnumDefinition}.
+   * This method registers the given {@code enumClass} as {@link EnumDefinition}.
    *
    * @param <ENUM> is the generic type of the {@link Enum}.
    *
@@ -188,8 +188,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   }
 
   /**
-   * @return <code>true</code> to automatically {@link #registerEnum(Class)} requested {@link Enum} types (default),
-   *         <code>false</code> otherwise (override to disable).
+   * @return {@code true} to automatically {@link #registerEnum(Class)} requested {@link Enum} types (default),
+   *         {@code false} otherwise (override to disable).
    */
   protected boolean isSupportEnumAutoRegistration() {
 
@@ -434,7 +434,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     }
 
     /**
-     * @return the {@link EnumProvider#getEnumValues(EnumDefinition) enum values} or <code>null</code> if NOT the
+     * @return the {@link EnumProvider#getEnumValues(EnumDefinition) enum values} or {@code null} if NOT the
      *         {@link EnumProvider#isAvailable(EnumDefinition) available}.
      */
     public List<?> getValues() {

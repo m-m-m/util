@@ -38,7 +38,7 @@ import java.util.Locale;
  * </tr>
  * <tr>
  * <td>FormatStyle</td>
- * <td>a style according to <code>FormatType</code> (see below).</td>
+ * <td>a style according to {@code FormatType} (see below).</td>
  * </tr>
  * <tr>
  * <td>Justification</td>
@@ -47,7 +47,7 @@ import java.util.Locale;
  * </table>
  *
  * <br>
- * The following table shows the supported variants of <code>FormatType</code> and <code>FormatStyle</code>:
+ * The following table shows the supported variants of {@code FormatType} and {@code FormatStyle}:
  * <table border="1">
  * <tr>
  * <th>FormatType</th>
@@ -214,7 +214,7 @@ import java.util.Locale;
  * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
  * <td>-</td>
  * <td>java.util.List</td>
- * <td>{@link java.lang.reflect.Type} medium representation (omit <code>java.lang</code>)</td>
+ * <td>{@link java.lang.reflect.Type} medium representation (omit {@code java.lang})</td>
  * </tr>
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
@@ -226,7 +226,7 @@ import java.util.Locale;
  * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
  * <td>{@link NlsFormatterManager#STYLE_MEDIUM medium}</td>
  * <td>java.util.List</td>
- * <td>{@link java.lang.reflect.Type} medium representation (omit <code>java.lang</code>)</td>
+ * <td>{@link java.lang.reflect.Type} medium representation (omit {@code java.lang})</td>
  * </tr>
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_TYPE type}</td>
@@ -278,9 +278,9 @@ public interface NlsMessage extends NlsObject, Serializable {
    * {@link NlsTemplateResolver#resolveTemplate(String) translated} to a native language. The language
    * independent arguments are filled into the message after the translation process. <br>
    * E.g. the i18n message may be <code>"Welcome {name}!"</code> and there is one argument that is the string
-   * <code>"Joelle"</code>. The final result will then be <code>"Welcome Joelle!"</code>. If the message is
+   * {@code "Joelle"}. The final result will then be {@code "Welcome Joelle!"}. If the message is
    * translated to German as <code>"Willkommen {name}!"</code> the final result will be
-   * <code>"Willkommen Joelle!"</code>.
+   * {@code "Willkommen Joelle!"}.
    *
    * @see NlsMessage
    * @see #getArgument(String)
@@ -300,15 +300,15 @@ public interface NlsMessage extends NlsObject, Serializable {
   int getArgumentCount();
 
   /**
-   * This method gets the language independent argument for the given <code>key</code>.
+   * This method gets the language independent argument for the given {@code key}.
    *
    * @param key is the name of the requested argument.
-   * @return the argument for the given key or <code>null</code> if NOT defined.
+   * @return the argument for the given key or {@code null} if NOT defined.
    */
   Object getArgument(String key);
 
   /**
-   * This method gets the language independent argument at the given <code>index</code>.
+   * This method gets the language independent argument at the given {@code index}.
    *
    * @param index is the index of the requested argument.
    * @return the argument for the given key.
@@ -351,11 +351,11 @@ public interface NlsMessage extends NlsObject, Serializable {
   String getLocalizedMessage(Locale locale);
 
   /**
-   * This method writes the localized message to the given <code>buffer</code>. <br>
+   * This method writes the localized message to the given {@code buffer}. <br>
    * The actual localization is done by a {@link NlsTemplate template} that is provided via the given
-   * <code>resolver</code>. If this fails, the {@link #getInternationalizedMessage() original message} will be
+   * {@code resolver}. If this fails, the {@link #getInternationalizedMessage() original message} will be
    * used. After translation is done, the language independent arguments will be filled in the translated
-   * message string according to the given <code>locale</code>.
+   * message string according to the given {@code locale}.
    *
    * @param locale is the locale to translate to.
    * @param buffer is the buffer where to write the message to.
@@ -377,11 +377,11 @@ public interface NlsMessage extends NlsObject, Serializable {
   String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver);
 
   /**
-   * This method writes the localized message to the given <code>buffer</code>. <br>
+   * This method writes the localized message to the given {@code buffer}. <br>
    * The actual localization is done by a {@link NlsTemplate template} that is provided via the given
-   * <code>resolver</code>. If this fails, the {@link #getInternationalizedMessage() original message} will be
+   * {@code resolver}. If this fails, the {@link #getInternationalizedMessage() original message} will be
    * used. After translation is done, the language independent arguments will be filled in the translated
-   * message string according to the given <code>locale</code>.
+   * message string according to the given {@code locale}.
    *
    * @param locale is the locale to translate to.
    * @param resolver is used to resolve the template required to translate the

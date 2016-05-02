@@ -16,14 +16,14 @@ import net.sf.mmm.util.xml.api.XmlException;
 public interface XPointerStreamBuilder {
 
   /**
-   * This method creates a {@link XMLStreamReader} facade that adapts the given <code>xmlReader</code> so only
-   * the contents pointed by the given <code>xpointerExpression</code> are visible.
+   * This method creates a {@link XMLStreamReader} facade that adapts the given {@code xmlReader} so only
+   * the contents pointed by the given {@code xpointerExpression} are visible.
    * 
    * @param xmlReader is the original reader to adapt.
    * @param xpointerExpression is the XPointer expression.
    * @param namespaceContext is the namespace-context to inherit from when parsing the XPointer expression.
    * @return the requested {@link XMLStreamReader} facade.
-   * @throws XmlException if the given <code>xpointerExpression</code> is illegal or NOT supported.
+   * @throws XmlException if the given {@code xpointerExpression} is illegal or NOT supported.
    */
   XMLStreamReader createStreamReader(XMLStreamReader xmlReader, String xpointerExpression,
       NamespaceContext namespaceContext) throws XmlException;

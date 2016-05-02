@@ -15,16 +15,16 @@ public interface ExceptionUtilLimited {
 
   /**
    * Gets the {@link Throwable#printStackTrace(java.io.PrintWriter) complete stacktrace} of the given
-   * <code>exception</code> as {@link String}. Ensured to work also in limited environments such as GWT.
+   * {@code exception} as {@link String}. Ensured to work also in limited environments such as GWT.
    *
    * @param exception is the {@link Throwable} to get the stacktrace from.
    * @return the {@link Throwable#printStackTrace(java.io.PrintWriter) complete stacktrace} of the given
-   *         <code>exception</code>.
+   *         {@code exception}.
    */
   String getStacktrace(Throwable exception);
 
   /**
-   * Converts the given <code>exception</code> for end-users. Technical exceptions are converted to
+   * Converts the given {@code exception} for end-users. Technical exceptions are converted to
    * {@link net.sf.mmm.util.exception.api.TechnicalErrorUserException}.
    *
    * @see net.sf.mmm.util.exception.api.TechnicalErrorUserException#getOrCreateUserException(Throwable)

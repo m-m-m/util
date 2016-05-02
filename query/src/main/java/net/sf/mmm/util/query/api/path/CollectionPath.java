@@ -18,7 +18,7 @@ import net.sf.mmm.util.query.api.argument.CollectionArgument;
 public interface CollectionPath<V extends Collection<E>, E> extends Path<V>, CollectionArgument<V, E> {
 
   /**
-   * @return a {@link NumberPath} for <code>this.{@link Collection#size() size()}</code>.
+   * @return a {@link NumberPath} for {@code this.}{@link Collection#size() size()}.
    */
   NumberPath<Integer> size();
 

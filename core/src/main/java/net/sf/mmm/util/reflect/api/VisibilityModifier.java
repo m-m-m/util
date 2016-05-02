@@ -55,7 +55,7 @@ public enum VisibilityModifier {
   }
 
   /**
-   * This method gets the <code>{@link java.lang.reflect.Modifier bit-mask}</code> of this
+   * This method gets the {@link java.lang.reflect.Modifier bit-mask} of this
    * visibility-modifier.
    * 
    * @return the bit-mask.
@@ -83,7 +83,7 @@ public enum VisibilityModifier {
 
   /**
    * This method gets the {@link VisibilityModifier} for the given
-   * <code>{@link java.lang.reflect.Modifier modifiers}</code>.
+   * {@link java.lang.reflect.Modifier modifiers}.
    * 
    * @see java.lang.Class#getModifiers()
    * @see java.lang.reflect.Method#getModifiers()

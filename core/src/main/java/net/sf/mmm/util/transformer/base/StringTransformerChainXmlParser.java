@@ -71,13 +71,13 @@ public class StringTransformerChainXmlParser {
 
   /**
    * The name of the XML attribute for {@link RegexStringTransformerRule#isReplaceAll()}. Default value is
-   * <code>false</code>.
+   * {@code false}.
    */
   public static final String XML_ATR_RULE_REPLACEALL = "replace-all";
 
   /**
    * The name of the XML attribute for {@link RegexStringTransformerRule#isStopOnMatch()}. Default value is
-   * <code>false</code>.
+   * {@code false}.
    */
   public static final String XML_ATR_RULE_STOPONMATCH = "stop-on-match";
 
@@ -119,7 +119,7 @@ public class StringTransformerChainXmlParser {
   }
 
   /**
-   * This method parses a {@link StringTransformerRule rule} given by <code>xmlElement</code>.
+   * This method parses a {@link StringTransformerRule rule} given by {@code xmlElement}.
    *
    * @see #XML_TAG_RULE
    *
@@ -141,12 +141,12 @@ public class StringTransformerChainXmlParser {
   }
 
   /**
-   * This method parses a {@link StringTransformerChain chain} given by <code>xmlElement</code>.
+   * This method parses a {@link StringTransformerChain chain} given by {@code xmlElement}.
    *
    * @see #XML_TAG_CHAIN
    *
    * @param xmlElement is the XML element containing the transformer-rules (see {@link #XML_TAG_RULE}) as children.
-   * @param parent is the parent chain to extend or <code>null</code> if no rules should be inherited.
+   * @param parent is the parent chain to extend or {@code null} if no rules should be inherited.
    * @return the parsed filter-chain.
    */
   public StringTransformerChain parseChain(Element xmlElement, StringTransformerChain parent) {
@@ -169,7 +169,7 @@ public class StringTransformerChainXmlParser {
   }
 
   /**
-   * This method parses a map of {@link StringTransformerChain chain}s given by <code>xmlElement</code>.
+   * This method parses a map of {@link StringTransformerChain chain}s given by {@code xmlElement}.
    *
    * @param xmlElement is the XML element containing the transformer-chains (see {@link #XML_TAG_CHAIN}) as children and
    *        puts them into a map with the {@link #XML_ATR_CHAIN_ID ID} as key. Unknown child elements or attributes are

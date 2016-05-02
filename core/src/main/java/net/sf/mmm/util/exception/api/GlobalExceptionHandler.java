@@ -25,7 +25,7 @@ public interface GlobalExceptionHandler {
    * @param context is an Object with information about the context when the error occurred. Its
    *        {@link Object#toString() string representation} should be human readable and give additional hints
    *        to track down the error. E.g. the source or parameters of an operation where the error occurred.
-   *        This parameter may also be <code>null</code> if no context information is available.
+   *        This parameter may also be {@code null} if no context information is available.
    * @param errors are the errors that have been catched. Has to contain at least one {@link Throwable}.
    */
   void handleErrors(Object context, Throwable... errors);

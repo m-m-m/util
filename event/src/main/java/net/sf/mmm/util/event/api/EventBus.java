@@ -16,7 +16,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * </ul>
  * This way components can communicate via {@link Event}s without compile time dependency between them. All
  * they need to see is the {@link EventBus} and the {@link Event} itself. <br>
- * This interface exists only for the high abstraction needed for <code>mmm-client</code>. If you want to
+ * This interface exists only for the high abstraction needed for {@code mmm-client}. If you want to
  * write a portable client application that can run in different environments (GWT, JavaFx, etc.) then you
  * should use this simplified but normalized API. Otherwise you may want to use an external event bus
  * implementation directly such as <a
@@ -63,8 +63,8 @@ public interface EventBus {
    * effect.
    *
    * @param listener is the listener to remove.
-   * @return <code>true</code> if the given <code>listener</code> has successfully been removed,
-   *         <code>false</code> if the <code>listener</code> was NOT
+   * @return {@code true} if the given {@code listener} has successfully been removed,
+   *         {@code false} if the {@code listener} was NOT
    *         {@link #addListener(Class, EventListener) registered}.
    */
   boolean removeListener(EventListener<?> listener);

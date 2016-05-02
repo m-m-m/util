@@ -4,8 +4,8 @@
  * Provides the API to help with security.
  * <a name="documentation"></a><h2>Util Security API</h2>
  * This is NOT another security framework for authentication and authorization.
- * Beyond few useful things that can be found in the packages <code>java.security</code> and
- * <code>javax.security</code> there are existing solutions like spring-security. <br>
+ * Beyond few useful things that can be found in the packages {@code java.security} and
+ * {@code javax.security} there are existing solutions like spring-security. <br>
  * This package just provides some very few helpful add-ons.
  */
 package net.sf.mmm.util.security.api;

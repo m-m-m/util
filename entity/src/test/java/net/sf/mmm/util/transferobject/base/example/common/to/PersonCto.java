@@ -37,7 +37,7 @@ public class PersonCto extends CompositeTo {
   }
 
   /**
-   * @return the {@link PersonEto person} or <code>null</code> if not set.
+   * @return the {@link PersonEto person} or {@code null} if not set.
    */
   public PersonEto getPerson() {
 
@@ -53,7 +53,7 @@ public class PersonCto extends CompositeTo {
   }
 
   /**
-   * @return the {@link AddressEto address} or <code>null</code> if not set.
+   * @return the {@link AddressEto address} or {@code null} if not set.
    */
   public AddressEto getAddress() {
 

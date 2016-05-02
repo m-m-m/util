@@ -31,87 +31,87 @@ public abstract class HttpMessage {
   public static final String VERSION_1_1 = "1.1";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Content-Encoding</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Content-Encoding}.
    */
   public static final String HEADER_PROPERTY_CONTENT_ENCODING = "Content-Encoding";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Content-Length</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Content-Length}.
    */
   public static final String HEADER_PROPERTY_CONTENT_LENGTH = "Content-Length";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Content-Type</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Content-Type}.
    */
   public static final String HEADER_PROPERTY_CONTENT_TYPE = "Content-Type";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Cache-Control</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Cache-Control}.
    */
   public static final String HEADER_PROPERTY_CACHE_CONTROL = "Cache-Control";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Date</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Date}.
    */
   public static final String HEADER_PROPERTY_DATE = "Date";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Expires</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Expires}.
    */
   public static final String HEADER_PROPERTY_EXPIRES = "Expires";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>From</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code From}.
    */
   public static final String HEADER_PROPERTY_FROM = "From";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>If-Modified-Since</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code If-Modified-Since}.
    */
   public static final String HEADER_PROPERTY_IF_MODIFIED_SINCE = "If-Modified-Since";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Last-Modified</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Last-Modified}.
    */
   public static final String HEADER_PROPERTY_LAST_MODIFIED = "Last-Modified";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Location</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Location}.
    */
   public static final String HEADER_PROPERTY_LOCATION = "Location";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Pragma</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Pragma}.
    */
   public static final String HEADER_PROPERTY_PRAGMA = "Pragma";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Referer</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Referer}.
    */
   public static final String HEADER_PROPERTY_REFERER = "Referer";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Server</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Server}.
    */
   public static final String HEADER_PROPERTY_SERVER = "Server";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>User-Agent</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code User-Agent}.
    */
   public static final String HEADER_PROPERTY_USER_AGENT = "User-Agent";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>WWW-Authenticate</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code WWW-Authenticate}.
    */
   public static final String HEADER_PROPERTY_WWW_AUTHENTICATE = "WWW-Authenticate";
 
   /**
-   * The {@link #getHeaderProperty(String) header-property} <code>Host</code>.
+   * The {@link #getHeaderProperty(String) header-property} {@code Host}.
    */
   public static final String HEADER_PROPERTY_HOST = "Host";
 
   /**
-   * The {@link #getHeaderPropertyAttribute(String, String) header-property} <code>max-age</code>.
+   * The {@link #getHeaderPropertyAttribute(String, String) header-property} {@code max-age}.
    * 
    * @see #HEADER_PROPERTY_CACHE_CONTROL
    */
@@ -169,14 +169,14 @@ public abstract class HttpMessage {
   /**
    * This method converts the header property to an hash key. <br>
    * The result must ensure that its {@link Object#toString() string-representation} is
-   * {@link String#equalsIgnoreCase(String) case in-sensitive equal} to the given <code>name</code>. Additionally it
+   * {@link String#equalsIgnoreCase(String) case in-sensitive equal} to the given {@code name}. Additionally it
    * needs to have compliant implementations for {@link Object#equals(Object) equals} and {@link Object#hashCode()
    * hashCode}. <br>
-   * This implementations ensures that the original case of the header <code>name</code> is NOT modified while
+   * This implementations ensures that the original case of the header {@code name} is NOT modified while
    * {@link #getHeaderProperty(String)} acts case in-sensitive.
    * 
    * @param name is the {@link #getHeaderProperty(String) header-name} to convert.
-   * @return an object that will be used as hash-key for the header with the given <code>name</code>.
+   * @return an object that will be used as hash-key for the header with the given {@code name}.
    */
   protected Object createHeaderNameHash(String name) {
 
@@ -184,10 +184,10 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method gets the property with the given <code>name</code> from the header of this HTTP message.
+   * This method gets the property with the given {@code name} from the header of this HTTP message.
    * 
    * @param name is the name of the requested property.
-   * @return the requested property or <code>null</code> if NOT set.
+   * @return the requested property or {@code null} if NOT set.
    */
   public String getHeaderProperty(String name) {
 
@@ -195,7 +195,7 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method sets a single attribute of the property with the given <code>name</code> in the header of this HTTP
+   * This method sets a single attribute of the property with the given {@code name} in the header of this HTTP
    * message. <br>
    * 
    * @param name is the name of the property to manipulate.
@@ -268,10 +268,10 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method gets a single attribute of the property with the given <code>name</code> from the header of this HTTP
+   * This method gets a single attribute of the property with the given {@code name} from the header of this HTTP
    * message. <br>
    * E.g. the property {@link #HEADER_PROPERTY_CACHE_CONTROL Cache-Control} may have the value
-   * <code>no-cache,no-store,max-age=0</code>. Then the following code snipplet would return "0":
+   * {@code no-cache,no-store,max-age=0}. Then the following code snipplet would return "0":
    * 
    * <pre>
    * {@link #getHeaderPropertyAttribute(String, String) getHeaderPropertyAttribute}({@link #HEADER_PROPERTY_CACHE_CONTROL
@@ -280,7 +280,7 @@ public abstract class HttpMessage {
    * 
    * @param name is the name of the requested property.
    * @param attributeName the name of the requested attribute.
-   * @return the value of the requested attribute or <code>null</code> if the property is NOT set or does NOT contain
+   * @return the value of the requested attribute or {@code null} if the property is NOT set or does NOT contain
    *         the attribute. If the property is set but has no value, the empty string ("") is returned.
    */
   public String getHeaderPropertyAttribute(String name, String attributeName) {
@@ -314,7 +314,7 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method sets the HTTP header-property with the given <code>name</code> to the given <code>value</code>.
+   * This method sets the HTTP header-property with the given {@code name} to the given {@code value}.
    * 
    * @see #appendHeaderProperty(String, String)
    * 
@@ -327,7 +327,7 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method appends the given <code>value</code> to the HTTP header-property with the given <code>name</code>.
+   * This method appends the given {@code value} to the HTTP header-property with the given {@code name}.
    * 
    * @see #appendHeaderProperty(String, String, String)
    * 
@@ -340,14 +340,14 @@ public abstract class HttpMessage {
   }
 
   /**
-   * This method appends the given <code>value</code> to the HTTP header-property with the given <code>name</code>. If
+   * This method appends the given {@code value} to the HTTP header-property with the given {@code name}. If
    * the header-property is NOT yet set, this method behaves like {@link #setHeaderProperty(String, String)
    * setHeaderProperty}(name, appendValue).
    * 
    * @param name is the name of the property to append to.
    * @param appendValue is the value to append to the header-property.
-   * @param separator if NOT <code>null</code> and the header property is already set, this string will be appended
-   *        after the current value and before the given <code>appendValue</code>.
+   * @param separator if NOT {@code null} and the header property is already set, this string will be appended
+   *        after the current value and before the given {@code appendValue}.
    */
   public void appendHeaderProperty(String name, String appendValue, String separator) {
 
@@ -371,7 +371,7 @@ public abstract class HttpMessage {
   /**
    * This method gets the {@link #HEADER_PROPERTY_CONTENT_TYPE content-type}.
    * 
-   * @return the content-type or <code>null</code> if NOT set.
+   * @return the content-type or {@code null} if NOT set.
    */
   public String getContentType() {
 
@@ -391,7 +391,7 @@ public abstract class HttpMessage {
   /**
    * This method gets the {@link #HEADER_PROPERTY_CONTENT_LENGTH content-length}.
    * 
-   * @return the content-length or <code>null</code> if NOT set.
+   * @return the content-length or {@code null} if NOT set.
    */
   public Long getContentLength() {
 
@@ -415,7 +415,7 @@ public abstract class HttpMessage {
   /**
    * This method gets the {@link #HEADER_PROPERTY_CONTENT_ENCODING content-encoding}.
    * 
-   * @return the content-encoding or <code>null</code> if NOT set.
+   * @return the content-encoding or {@code null} if NOT set.
    */
   public String getContentEncoding() {
 
@@ -445,7 +445,7 @@ public abstract class HttpMessage {
   /**
    * This method gets the {@link #HEADER_ATTRIBUTE_MAX_AGE maximum age} (lease time) in seconds.
    * 
-   * @return the maximum age in seconds or <code>-1</code> if the max-age is NOT set (properly).
+   * @return the maximum age in seconds or {@code -1} if the max-age is NOT set (properly).
    */
   public int getCacheControlMaxAge() {
 
@@ -466,7 +466,7 @@ public abstract class HttpMessage {
    * 
    * TODO: implement HTTP date parser
    * 
-   * @return the date or <code>null</code> if NOT set.
+   * @return the date or {@code null} if NOT set.
    */
   public String getDate() {
 

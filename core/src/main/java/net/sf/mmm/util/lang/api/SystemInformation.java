@@ -138,8 +138,7 @@ public interface SystemInformation {
    * @see #SYSTEM_TYPE_UNIX
    * @see #SYSTEM_TYPE_OTHER
    * 
-   * @return the type of the operating system as one of the <code>SYSTEM_TYPE_*</code> constants defined in
-   *         this interface.
+   * @return the type of the operating system as one of the {@code SYSTEM_TYPE_*} constants defined in this interface.
    */
   String getSystemType();
 
@@ -148,7 +147,7 @@ public interface SystemInformation {
    * embedded devices or maybe tablets but not for full-fledged PC or server machines. In such case you can
    * assume that you are running on a mobile or embedded device. Please note that this is NOT a guarantee.
    * 
-   * @return <code>true</code> if operating system is for limited device, <code>false</code> otherwise.
+   * @return {@code true} if operating system is for limited device, {@code false} otherwise.
    */
   boolean isLimitedDevice();
 

@@ -54,7 +54,7 @@ public interface CliParserDependencies {
   NlsMessageFactory getNlsMessageFactory();
 
   /**
-   * @return the {@link NlsTemplateResolver} instance to use or <code>null</code> to use the default instance.
+   * @return the {@link NlsTemplateResolver} instance to use or {@code null} to use the default instance.
    */
   NlsTemplateResolver getNlsTemplateResolver();
 

@@ -14,13 +14,13 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface NlsMessageFormatterFactory {
 
   /**
-   * This method creates a new {@link NlsMessageFormatter} for the given <code>message</code>. <br>
-   * The format of the <code>message</code> is described in {@link NlsMessage}.
+   * This method creates a new {@link NlsMessageFormatter} for the given {@code message}. <br>
+   * The format of the {@code message} is described in {@link NlsMessage}.
    *
    * @param message is the template for the message where potential
    *        {@link net.sf.mmm.util.nls.api.NlsFormatter#format(Object, java.util.Locale, java.util.Map, NlsTemplateResolver)
    *        arguments will be filled in}.
-   * @return the {@link NlsMessageFormatter} for the given <code>message</code>.
+   * @return the {@link NlsMessageFormatter} for the given {@code message}.
    */
   NlsMessageFormatter create(String message);
 

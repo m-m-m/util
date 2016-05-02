@@ -27,7 +27,7 @@ public class PatternFileFilter implements FileFilter {
   private final Pattern pattern;
 
   /**
-   * The type of the {@link #accept(File) acceptable} files or <code>null</code> if any type is acceptable.
+   * The type of the {@link #accept(File) acceptable} files or {@code null} if any type is acceptable.
    */
   private final FileType fileType;
 
@@ -47,7 +47,7 @@ public class PatternFileFilter implements FileFilter {
    * 
    * @param filenamePattern is the {@link GlobPatternCompiler glob-pattern} that must match in order to
    *        {@link #accept(File) accept} a file by its {@link File#getName() name}.
-   * @param type the type of the {@link #accept(File) acceptable} files or <code>null</code> if any type is
+   * @param type the type of the {@link #accept(File) acceptable} files or {@code null} if any type is
    *        acceptable.
    */
   public PatternFileFilter(String filenamePattern, FileType type) {
@@ -60,7 +60,7 @@ public class PatternFileFilter implements FileFilter {
    * 
    * @param filenamePattern is the pattern that must match in order to {@link #accept(File) accept} a file by
    *        its {@link File#getName() name}.
-   * @param type the type of the {@link #accept(File) acceptable} files or <code>null</code> if any type is
+   * @param type the type of the {@link #accept(File) acceptable} files or {@code null} if any type is
    *        acceptable.
    */
   public PatternFileFilter(Pattern filenamePattern, FileType type) {

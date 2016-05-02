@@ -84,7 +84,7 @@ public abstract class AbstractMapValidatorBuilder<K, V, M extends Map<K, V>, PAR
    * </pre>
    *
    * @param <SUB> the generic type of the returned sub-builder.
-   * @param factory lambda function used to create the returned sub-builder by calling the according <code>create</code>
+   * @param factory lambda function used to create the returned sub-builder by calling the according {@code create}
    *        method on the supplied {@link ObjectValidatorBuilderFactory} with the given dummy element.
    * @return the new sub-builder.
    */
@@ -110,7 +110,7 @@ public abstract class AbstractMapValidatorBuilder<K, V, M extends Map<K, V>, PAR
    * </pre>
    *
    * @param <SUB> the generic type of the returned sub-builder.
-   * @param factory lambda function used to create the returned sub-builder by calling the according <code>create</code>
+   * @param factory lambda function used to create the returned sub-builder by calling the according {@code create}
    *        method on the supplied {@link ObjectValidatorBuilderFactory} with the given dummy element.
    * @return the new sub-builder.
    */

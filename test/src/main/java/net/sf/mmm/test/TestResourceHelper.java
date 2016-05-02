@@ -55,7 +55,7 @@ public final class TestResourceHelper {
   }
 
   /**
-   * This method gets the filesystem path to test-resource with the given <code>relativePath</code>.
+   * This method gets the filesystem path to test-resource with the given {@code relativePath}.
    *
    * @param relativePath is the path relative to the {@link #getTestPath() test resources path}.
    * @return the path to the test resources.
@@ -66,10 +66,10 @@ public final class TestResourceHelper {
   }
 
   /**
-   * This method gets the filesystem path to some test-resource named after the given <code>testClass</code>.
+   * This method gets the filesystem path to some test-resource named after the given {@code testClass}.
    *
    * @param testClass is the {@link Class} reflecting the path to the test-resource.
-   * @param suffix is the suffix to append after the <code>testClass</code> (e.g. ".xml").
+   * @param suffix is the suffix to append after the {@code testClass} (e.g. ".xml").
    * @return the filesystem path to the test-resource.
    */
   public static String getTestPath(Class<?> testClass, String suffix) {
@@ -78,10 +78,10 @@ public final class TestResourceHelper {
   }
 
   /**
-   * This method gets the filesystem path to some test-resource located in the given <code>testPackage</code>.
+   * This method gets the filesystem path to some test-resource located in the given {@code testPackage}.
    *
    * @param testPackage is the {@link Package} reflecting the path to the test-resource.
-   * @param suffix is the suffix to append after the <code>testPackage</code> (e.g. ".xml").
+   * @param suffix is the suffix to append after the {@code testPackage} (e.g. ".xml").
    * @return the filesystem path to the test-resource.
    */
   public static String getTestPath(Package testPackage, String suffix) {

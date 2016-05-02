@@ -27,12 +27,12 @@ public interface NlsTemplateResolver {
 
   /**
    * This method is used to create the {@link NlsTemplate} from information that is found by the given
-   * <code>internationalizedMessage</code>. <br>
+   * {@code internationalizedMessage}. <br>
    * This may happen via a reverse lookup from {@link net.sf.mmm.util.nls.base.AbstractResourceBundle}(s).
    * 
    * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
    *        message}.
-   * @return the according {@link NlsTemplate} or <code>null</code> if this implementation failed to resolve
+   * @return the according {@link NlsTemplate} or {@code null} if this implementation failed to resolve
    *         the according template.
    */
   NlsTemplate resolveTemplate(String internationalizedMessage);

@@ -162,10 +162,10 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
    *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
-   * @param evalTrueIfEquals - <code>true</code> if {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *        <code>true</code> if arguments are equal, <code>false</code> otherwise.
+   * @param evalTrueIfEquals - {@code true} if {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
+   *        {@code true} if arguments are equal, {@code false} otherwise.
    * @param less - {@link Boolean#TRUE} if {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *        <code>true</code> if first argument is less than second, {@link Boolean#FALSE} on greater, <code>null</code>
+   *        {@code true} if first argument is less than second, {@link Boolean#FALSE} on greater, {@code null}
    *        otherwise.
    */
   private CompareOperator(String value, String title) {
@@ -175,9 +175,9 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *         <code>true</code> for {@link Object}s that are {@link Object#equals(Object) equal} to each other,
-   *         <code>false</code> otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
+   *         {@code true} for {@link Object}s that are {@link Object#equals(Object) equal} to each other,
+   *         {@code false} otherwise.
    */
   boolean isTrueIfEquals() {
 
@@ -185,8 +185,8 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *         <code>true</code> in case the first argument is less than the second, <code>false</code> otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
+   *         {@code true} in case the first argument is less than the second, {@code false} otherwise.
    */
   boolean isTrueIfLess() {
 
@@ -194,8 +194,8 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *         <code>true</code> in case the first argument is greater than the second, <code>false</code> otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
+   *         {@code true} in case the first argument is greater than the second, {@code false} otherwise.
    */
   boolean isTrueIfGreater() {
 
@@ -242,7 +242,7 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
    *
    * @param object is the value to convert.
    * @param otherType the type of the value to compare that differs from the type
-   * @return a simpler representation of <code>value</code> or the same <code>value</code> if on simpler type is known.
+   * @return a simpler representation of {@code value} or the same {@code value} if on simpler type is known.
    */
   private Object convert(Object object, Class<?> otherType) {
 
@@ -307,10 +307,10 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * This method gets the {@link CompareOperator} for the given <code>symbol</code>.
+   * This method gets the {@link CompareOperator} for the given {@code symbol}.
    *
    * @param value is the {@link #getValue() symbol} of the requested {@link CompareOperator}.
-   * @return the requested {@link CompareOperator} or <code>null</code> if no such {@link CompareOperator} exists.
+   * @return the requested {@link CompareOperator} or {@code null} if no such {@link CompareOperator} exists.
    */
   public static CompareOperator fromValue(String value) {
 

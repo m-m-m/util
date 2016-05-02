@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 import java.util.ResourceBundle.Control;
 
 /**
- * Adds UTF-8 support for {@link ResourceBundle} <code>*.properties</code> files.
+ * Adds UTF-8 support for {@link ResourceBundle} {@code *.properties} files.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

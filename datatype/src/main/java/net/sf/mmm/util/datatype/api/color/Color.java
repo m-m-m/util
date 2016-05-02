@@ -21,7 +21,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * For transformations and other {@link ColorModel}s use {@link GenericColor}. <br>
  * <b>ATTENTION:</b><br>
  * Unfortunately the {@link #getAlpha() alpha} value has NOT been designed as a transparency value (inverse logic so
- * <code>0</code> means no transparency or in other words a regular color). Then if encoding in A/R/G/B the hexadecimal
+ * {@code 0} means no transparency or in other words a regular color). Then if encoding in A/R/G/B the hexadecimal
  * RGB notation would be compatible with transparency because #2F4F8F would be the same as #002F4F8F. Unfortunately pain
  * is on our side and we have to keep with existing standards. Therefore #2F4F8F is actually the same as #FF2F4F8F. To
  * avoid confusion and to be compatible with CSS, {@link #toString()} will print the hexadecimal RGB form (e.g. #2F4F8F)
@@ -262,7 +262,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   /**
    * @param uppercaseColor is the {@link Color} in rgb(a) notation in {@link String#toUpperCase(java.util.Locale) upper
    *        case}.
-   * @return the parsed {@link Color} or <code>null</code> if NOT valid.
+   * @return the parsed {@link Color} or {@code null} if NOT valid.
    */
   private static Color parseRgb(String uppercaseColor) {
 
@@ -314,7 +314,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /**
    * @param hexColor the {@link Color} given as hexadecimal {@link String} pattern.
-   * @return the parsed {@link Color} or <code>null</code> if not in HEX notation.
+   * @return the parsed {@link Color} or {@code null} if not in HEX notation.
    */
   static Color parseHexString(String hexColor) {
 
@@ -365,7 +365,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
    * Verifies that the given segment is in the valid range from {@link #MIN_VALUE} to {@link #MAX_SEGMENT}.
    *
    * @param segment is the segment to check.
-   * @param type is the {@link ColorSegmentType type} of the <code>segment</code>.
+   * @param type is the {@link ColorSegmentType type} of the {@code segment}.
    */
   private static void verifySegment(int segment, ColorSegmentType type) {
 
@@ -377,7 +377,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   /**
    * @param name is the name of the {@link Color} (e.g. as defined in CSS). Case is ignored. Examples are "white",
    *        "maroon", "orange", "transparent", etc.
-   * @return the {@link Color} for the given <code>name</code> or <code>null</code> if no such {@link Color} is defined.
+   * @return the {@link Color} for the given {@code name} or {@code null} if no such {@link Color} is defined.
    */
   public static Color fromName(String name) {
 

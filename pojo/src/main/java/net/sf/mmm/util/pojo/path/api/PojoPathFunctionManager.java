@@ -27,8 +27,8 @@ public interface PojoPathFunctionManager {
    * 
    * @param functionName is the name of the requested {@link PojoPathFunction} excluding the
    *        {@link PojoPathFunction#FUNCTION_NAME_PREFIX prefix}.
-   * @return the requested {@link PojoPathFunction} or <code>null</code> if no {@link PojoPathFunction} is
-   *         registered for the given <code>functionName</code>.
+   * @return the requested {@link PojoPathFunction} or {@code null} if no {@link PojoPathFunction} is
+   *         registered for the given {@code functionName}.
    */
   @SuppressWarnings("rawtypes")
   PojoPathFunction getFunction(String functionName);

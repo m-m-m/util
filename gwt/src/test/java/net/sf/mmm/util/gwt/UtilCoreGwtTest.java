@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * This is the test-case to test GWT compatibility of <code>mmm-util-core</code>.
+ * This is the test-case to test GWT compatibility of {@code mmm-util-core}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0

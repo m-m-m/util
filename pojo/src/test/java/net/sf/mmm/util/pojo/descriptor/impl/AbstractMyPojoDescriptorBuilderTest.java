@@ -46,12 +46,12 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
   protected abstract PojoDescriptorBuilder getPojoDescriptorBuilder();
 
   /**
-   * @return <code>true</code> if methods are introspected, <code>false</code> otherwise.
+   * @return {@code true} if methods are introspected, {@code false} otherwise.
    */
   protected abstract boolean isMethodIntrostection();
 
   /**
-   * @return <code>true</code> if fields are introspected, <code>false</code> otherwise.
+   * @return {@code true} if fields are introspected, {@code false} otherwise.
    */
   protected boolean isFieldIntrostection() {
 

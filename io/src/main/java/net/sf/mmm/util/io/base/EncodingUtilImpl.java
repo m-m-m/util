@@ -34,81 +34,81 @@ import net.sf.mmm.util.io.impl.BufferInputStream;
 public class EncodingUtilImpl extends AbstractLoggableComponent implements EncodingUtil {
 
   /**
-   * In an UTF-8 multi-byte-sequence all bytes except the first one have the from <code>10xxxxxx</code>. This is the
+   * In an UTF-8 multi-byte-sequence all bytes except the first one have the from {@code 10xxxxxx}. This is the
    * lower bound to detect such char.
    */
   public static final byte UTF_8_CONTINUATION_BYTE_MIN = (byte) 0x80;
 
   /**
-   * In an UTF-8 multi-byte-sequence all bytes except the first one have the from <code>10xxxxxx</code>. This is the
+   * In an UTF-8 multi-byte-sequence all bytes except the first one have the from {@code 10xxxxxx}. This is the
    * upper bound to detect such char.
    */
   public static final byte UTF_8_CONTINUATION_BYTE_MAX = (byte) 0xBF;
 
   /**
-   * An UTF-8 two-byte-sequence has the form <code>110xxxxx 10xxxxxx</code>. This is the lower bound to detect the first
+   * An UTF-8 two-byte-sequence has the form {@code 110xxxxx 10xxxxxx}. This is the lower bound to detect the first
    * char of such sequence. <br>
    * <b>ATTENTION:</b><br>
-   * The bytes <code>0xC0</code> or <code>0xC1</code> would indicate a two-byte-sequence with code-point <= 127 what
+   * The bytes {@code 0xC0} or {@code 0xC1} would indicate a two-byte-sequence with code-point <= 127 what
    * makes no sense.
    */
   public static final byte UTF_8_TWO_BYTE_MIN = (byte) 0xC2;
 
   /**
-   * An UTF-8 two-byte-sequence has the form <code>110xxxxx 10xxxxxx</code>. This is the upper bound to detect the first
+   * An UTF-8 two-byte-sequence has the form {@code 110xxxxx 10xxxxxx}. This is the upper bound to detect the first
    * char of such sequence.
    */
   public static final byte UTF_8_TWO_BYTE_MAX = (byte) 0xDF;
 
   /**
-   * An UTF-8 thee-byte-sequence has the form <code>1110xxxx 10xxxxxx 10xxxxxx</code>. This is the lower bound to detect
+   * An UTF-8 thee-byte-sequence has the form {@code 1110xxxx 10xxxxxx 10xxxxxx}. This is the lower bound to detect
    * the first char of such sequence.
    */
   public static final byte UTF_8_THREE_BYTE_MIN = (byte) 0xE0;
 
   /**
-   * An UTF-8 thee-byte-sequence has the form <code>1110xxxx 10xxxxxx 10xxxxxx</code>. This is the upper bound to detect
+   * An UTF-8 thee-byte-sequence has the form {@code 1110xxxx 10xxxxxx 10xxxxxx}. This is the upper bound to detect
    * the first char of such sequence.
    */
   public static final byte UTF_8_THREE_BYTE_MAX = (byte) 0xEF;
 
   /**
-   * An UTF-8 four-byte-sequence has the form <code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code>. This is the lower bound
+   * An UTF-8 four-byte-sequence has the form {@code 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx}. This is the lower bound
    * to detect the first char of such sequence.
    */
   public static final byte UTF_8_FOUR_BYTE_MIN = (byte) 0xF0;
 
   /**
-   * An UTF-8 four-byte-sequence has the form <code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code>. This is the upper bound
+   * An UTF-8 four-byte-sequence has the form {@code 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx}. This is the upper bound
    * to detect the first char of such sequence. <br>
    * <b>ATTENTION:</b><br>
-   * The bytes <code>0xF5</code>, <code>0xF6</code>, or <code>0xF7</code> would lead to a four-byte-sequence with
-   * code-point greater than <code>10FFFF</code> which is restricted by <a
+   * The bytes {@code 0xF5}, {@code 0xF6}, or {@code 0xF7} would lead to a four-byte-sequence with
+   * code-point greater than {@code 10FFFF} which is restricted by <a
    * href="http://tools.ietf.org/html/rfc3629">rfc3629</a>.
    */
   public static final byte UTF_8_FOUR_BYTE_MAX = (byte) 0xF4;
 
   /**
    * An UTF-16 four-byte-sequence consists of 2 two-byte-sequences called <em>surrogate</em>. The first has the form
-   * <code>110110xx xxxxxxxx</code>. This is the lower bound to detect the first char of such sequence.
+   * {@code 110110xx xxxxxxxx}. This is the lower bound to detect the first char of such sequence.
    */
   public static final byte UTF_16_FIRST_SURROGATE_MIN = (byte) 0xD8;
 
   /**
    * An UTF-16 four-byte-sequence consists of 2 two-byte-sequences called <em>surrogate</em>. The first has the form
-   * <code>110110xx xxxxxxxx</code>. This is the upper bound to detect the first char of such sequence.
+   * {@code 110110xx xxxxxxxx}. This is the upper bound to detect the first char of such sequence.
    */
   public static final byte UTF_16_FIRST_SURROGATE_MAX = (byte) 0xDB;
 
   /**
    * An UTF-16 four-byte-sequence consists of 2 two-byte-sequences called <em>surrogate</em>. The second has the form
-   * <code>110111xx xxxxxxxx</code>. This is the lower bound to detect the first char of such sequence.
+   * {@code 110111xx xxxxxxxx}. This is the lower bound to detect the first char of such sequence.
    */
   public static final byte UTF_16_SECOND_SURROGATE_MIN = (byte) 0xDC;
 
   /**
    * An UTF-16 four-byte-sequence consists of 2 two-byte-sequences called <em>surrogate</em>. The second has the form
-   * <code>110111xx xxxxxxxx</code>. This is the upper bound to detect the first char of such sequence.
+   * {@code 110111xx xxxxxxxx}. This is the upper bound to detect the first char of such sequence.
    */
   public static final byte UTF_16_SECOND_SURROGATE_MAX = (byte) 0xDF;
 
@@ -179,7 +179,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
    * This enum contains represents the type of a {@link Surrogate} from an UTF-16 sequence.
    */
   protected static enum Surrogate {
-    /** The first, most significant surrogate. Starts with byte <code></code> */
+    /** The first, most significant surrogate. Starts with byte {@code } */
     FIRST,
     /** The second, least significant surrogate. */
     SECOND;
@@ -232,7 +232,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     private RankMap<String> encodingRankMap;
 
     /**
-     * The {@link ByteOrderMark} or <code>null</code> if NOT present (or detection NOT started).
+     * The {@link ByteOrderMark} or {@code null} if NOT present (or detection NOT started).
      */
     private ByteOrderMark bom;
 
@@ -240,17 +240,17 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     private final String nonUtfEncoding;
 
     /**
-     * <code>false</code> if the data can NOT be ASCII, <code>true</code> otherwise.
+     * {@code false} if the data can NOT be ASCII, {@code true} otherwise.
      */
     private boolean maybeAscii;
 
     /**
-     * <code>false</code> if the data can NOT be UTF-8, <code>true</code> otherwise.
+     * {@code false} if the data can NOT be UTF-8, {@code true} otherwise.
      */
     private boolean maybeUtf8;
 
     /**
-     * <code>false</code> if the data can NOT be UTF-16, <code>true</code> otherwise.
+     * {@code false} if the data can NOT be UTF-16, {@code true} otherwise.
      */
     private boolean maybeUtf16;
 
@@ -261,7 +261,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     private long firstNonAsciiPosition;
 
     /**
-     * The number of bytes that have been <code>0</code> for each of the {@link #bytePosition positions} modulo 4.
+     * The number of bytes that have been {@code 0} for each of the {@link #bytePosition positions} modulo 4.
      */
     private int[] zeroByteCounts;
 
@@ -271,7 +271,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     private Surrogate[] surrogates;
 
     /**
-     * The expected number of UTF-8 continuation bytes to come or <code>0</code> if no UTF-8 multi-byte-sequence is
+     * The expected number of UTF-8 continuation bytes to come or {@code 0} if no UTF-8 multi-byte-sequence is
      * currently processed.
      */
     private int utf8ContinuationByteCount;
@@ -409,7 +409,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
      * @param buffer is the buffer of the raw data.
      * @param offset is the current offset
      * @param i is the current index.
-     * @return the new index. Will be the same as <code>i</code> or greater if bytes (for detected BOM) have been
+     * @return the new index. Will be the same as {@code i} or greater if bytes (for detected BOM) have been
      *         consumed.
      */
     private int processBom(byte[] buffer, int offset, int i) {
@@ -455,7 +455,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     /**
      * This method gets the encoding without taking high-bytes (non-ASCII) into account.
      *
-     * @return the low-byte encoding or <code>null</code> if it looks like ASCII so far.
+     * @return the low-byte encoding or {@code null} if it looks like ASCII so far.
      */
     public String getLowByteEncoding() {
 
@@ -487,7 +487,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     /**
      * This method gets the detected encoding from the currently processed data.
      *
-     * @return the detected encoding or <code>null</code> if the encoding has NOT yet been detected and it looks like
+     * @return the detected encoding or {@code null} if the encoding has NOT yet been detected and it looks like
      *         ASCII so far.
      */
     public String getEncoding() {
@@ -532,14 +532,14 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     private String encoding;
 
     /**
-     * The {@link Reader} to delegate to. Will be <code>null</code> until the first non ASCII-Character is detected.
+     * The {@link Reader} to delegate to. Will be {@code null} until the first non ASCII-Character is detected.
      */
     private Reader reader;
 
     /** The number of ASCII bytes available to read from {@link #inputStream}. */
     private int asciiBytesAvailable;
 
-    /** <code>true</code> if end of stream is reached. */
+    /** {@code true} if end of stream is reached. */
     private boolean eos;
 
     /**

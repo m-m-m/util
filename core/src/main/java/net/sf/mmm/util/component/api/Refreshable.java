@@ -19,8 +19,8 @@ public interface Refreshable {
    * The implementation of this method should be thread-safe if the object itself is to be used by separate
    * consumers at all.
    * 
-   * @return <code>true</code> if something has changed, <code>false</code> otherwise. If the implementation
-   *         can not determine the change it should return <code>true</code>.
+   * @return {@code true} if something has changed, {@code false} otherwise. If the implementation
+   *         can not determine the change it should return {@code true}.
    */
   boolean refresh();
 

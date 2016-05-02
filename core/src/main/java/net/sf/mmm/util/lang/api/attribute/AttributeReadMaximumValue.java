@@ -17,10 +17,10 @@ public abstract interface AttributeReadMaximumValue<VALUE> {
   /**
    * This method gets the <em>maximum</em> {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue()
    * value} of this object. A legal {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value} has
-   * to be less or equal to this <code>maximum</code>.
+   * to be less or equal to this {@code maximum}.
    * 
    * @return the maximum allowed for {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value} or
-   *         <code>null</code> if unbounded.
+   *         {@code null} if unbounded.
    */
   VALUE getMaximumValue();
 

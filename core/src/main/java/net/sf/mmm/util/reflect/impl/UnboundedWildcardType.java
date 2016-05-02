@@ -8,8 +8,7 @@ import java.lang.reflect.WildcardType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
- * This is an implementation of the {@link WildcardType} interface for the unbounded wildcard (<code>?</code>
- * ).
+ * This is an implementation of the {@link WildcardType} interface for the unbounded wildcard ({@code ?}).
  * 
  * @see ReflectionUtil#toType(String)
  * 

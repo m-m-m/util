@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * This is the abstract base implementation of {@link EqualsChecker}. It contains the handling of
- * <code>null</code> values.
+ * {@code null} values.
  *
  * @param <VALUE> is the generic type of the values to {@link #isEqual(Object, Object) check}.
  *
@@ -45,7 +45,7 @@ public abstract class AbstractEqualsChecker<VALUE> implements EqualsChecker<VALU
    *
    * @param value1 is the first value to check.
    * @param value2 is the first value to check.
-   * @return <code>true</code> if the given values are considered as equal, <code>false</code> otherwise.
+   * @return {@code true} if the given values are considered as equal, {@code false} otherwise.
    */
   protected abstract boolean isEqualNotNull(VALUE value1, VALUE value2);
 

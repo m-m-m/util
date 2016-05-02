@@ -76,8 +76,7 @@ public class DurationUtilImpl implements DurationUtil {
 
   /**
    * @param duration is the duration to format.
-   * @param unitPerSeconds is the number of units per second (<code>duration/unitsPerSecond</code> is the
-   *        duration in seconds).
+   * @param unitPerSeconds is the number of units per second ({@code duration/unitsPerSecond} is the duration in seconds).
    * @return the formatted duration.
    */
   private String formatDuration(long duration, long unitPerSeconds) {
@@ -109,7 +108,7 @@ public class DurationUtilImpl implements DurationUtil {
   /**
    * @param buffer is the {@link StringBuilder} to {@link StringBuilder#append(String) append} to.
    * @param segment is the segment to append (hours, minutes, or seconds).
-   * @param seconds - <code>true</code> if segment are seconds, <code>false</code> otherwise.
+   * @param seconds - {@code true} if segment are seconds, {@code false} otherwise.
    */
   private void appendSegment(StringBuilder buffer, long segment, boolean seconds) {
 

@@ -26,7 +26,7 @@ public class PojoPathAccessException extends PojoPathException {
    *
    * @param pojoPath is the {@link PojoPath} that could NOT be accessed in the intended way.
    * @param currentPojoType is the type of the current {@link net.sf.mmm.util.pojo.api.Pojo} for which the
-   *        {@link PojoPath#getSegment() segment} of the given <code>pojoPath</code> could NOT be accessed.
+   *        {@link PojoPath#getSegment() segment} of the given {@code pojoPath} could NOT be accessed.
    */
   public PojoPathAccessException(String pojoPath, Type currentPojoType) {
 
@@ -39,7 +39,7 @@ public class PojoPathAccessException extends PojoPathException {
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param pojoPath is the {@link PojoPath} that could NOT be accessed in the intended way.
    * @param currentPojoType is the type of the current {@link net.sf.mmm.util.pojo.api.Pojo} for which the
-   *        {@link PojoPath#getSegment() segment} of the given <code>pojoPath</code> could NOT be accessed.
+   *        {@link PojoPath#getSegment() segment} of the given {@code pojoPath} could NOT be accessed.
    */
   public PojoPathAccessException(Throwable nested, String pojoPath, Type currentPojoType) {
 

@@ -37,7 +37,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   /**
    * This method sets the {@link #getPrevious() previous node}.
    *
-   * @param previous is the {@link #getPrevious() previous node} to set. May be <code>null</code> to indicate that this
+   * @param previous is the {@link #getPrevious() previous node} to set. May be {@code null} to indicate that this
    *        is the first node of the list.
    */
   public void setPrevious(BasicDoubleLinkedNode<V> previous) {
@@ -46,21 +46,21 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given <code>value</code> into the list at the position represented by this node. It will
-   * typically create a new node containing the given <code>value</code> and {@link #setNext(AbstractLinkedNode) set it
+   * This method inserts the given {@code value} into the list at the position represented by this node. It will
+   * typically create a new node containing the given {@code value} and {@link #setNext(AbstractLinkedNode) set it
    * as next}. It will guarantee the following equation:
    *
    * <pre>
    * this.{@link #getNext()}.{@link #getPrevious()} == this
    * </pre>
    *
-   * If <code>overrideNullValue</code> is <code>true</code> and the {@link #getValue() value} of this node is
-   * <code>null</code>, then its value is set to the given <code>value</code> instead of creating a new node.
+   * If {@code overrideNullValue} is {@code true} and the {@link #getValue() value} of this node is
+   * {@code null}, then its value is set to the given {@code value} instead of creating a new node.
    *
    * @param value is the value to insert.
-   * @param overrideNullValue - <code>true</code> if a {@link #getValue() value} of <code>null</code> should be replaced
-   *        with the given <code>value</code>, <code>false</code> otherwise.
-   * @return the node containing the given <code>value</code>.
+   * @param overrideNullValue - {@code true} if a {@link #getValue() value} of {@code null} should be replaced
+   *        with the given {@code value}, {@code false} otherwise.
+   * @return the node containing the given {@code value}.
    */
   public BasicDoubleLinkedNode<V> insertAsNext(V value, boolean overrideNullValue) {
 
@@ -77,7 +77,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given <code>node</code> into the list immediately after the position represented by this
+   * This method inserts the given {@code node} into the list immediately after the position represented by this
    * node.
    *
    * @param node is the {@link BasicDoubleLinkedNode node} to add.
@@ -94,7 +94,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given <code>node</code> into the list immediately before the position represented by this
+   * This method inserts the given {@code node} into the list immediately before the position represented by this
    * node.
    *
    * @param node is the {@link BasicDoubleLinkedNode node} to add.
@@ -110,21 +110,21 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given <code>value</code> into the list at the position represented by this node. It will
-   * typically create a new node containing the given <code>value</code> and {@link #setNext(AbstractLinkedNode) set it
+   * This method inserts the given {@code value} into the list at the position represented by this node. It will
+   * typically create a new node containing the given {@code value} and {@link #setNext(AbstractLinkedNode) set it
    * as next}. It will guarantee the following equation:
    *
    * <pre>
    * this.{@link #getNext()}.{@link #getPrevious()} == this
    * </pre>
    *
-   * If <code>overrideNullValue</code> is <code>true</code> and the {@link #getValue() value} of this node is
-   * <code>null</code>, then its value is set to the given <code>value</code> instead of creating a new node.
+   * If {@code overrideNullValue} is {@code true} and the {@link #getValue() value} of this node is
+   * {@code null}, then its value is set to the given {@code value} instead of creating a new node.
    *
    * @param value is the value to insert.
-   * @param overrideNullValue - <code>true</code> if a {@link #getValue() value} of <code>null</code> should be replaced
-   *        with the given <code>value</code>, <code>false</code> otherwise.
-   * @return the node containing the given <code>value</code>.
+   * @param overrideNullValue - {@code true} if a {@link #getValue() value} of {@code null} should be replaced
+   *        with the given {@code value}, {@code false} otherwise.
+   * @return the node containing the given {@code value}.
    */
   public BasicDoubleLinkedNode<V> insertAsPrevious(V value, boolean overrideNullValue) {
 

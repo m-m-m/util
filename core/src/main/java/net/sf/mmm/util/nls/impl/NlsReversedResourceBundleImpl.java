@@ -60,7 +60,7 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
    * This method is the inverse of {@link ResourceBundle#getString(String)}.
    *
    * @param message is the {@link ResourceBundle#getString(String) message} for which the key is requested.
-   * @return the key for the given <code>message</code> or <code>null</code> if no such message is contained in the
+   * @return the key for the given {@code message} or {@code null} if no such message is contained in the
    *         associated {@link ResourceBundle}.
    */
   @Override

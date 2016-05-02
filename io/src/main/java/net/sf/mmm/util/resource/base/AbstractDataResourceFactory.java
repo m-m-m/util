@@ -39,7 +39,7 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggableCompon
    *
    * @param resourceUri is the parsed and qualified {@link ResourceUri}.
    * @return the created {@link DataResource}.
-   * @throws ResourceUriUndefinedException if the given <code>resourceUri</code> is undefined, e.g. the
+   * @throws ResourceUriUndefinedException if the given {@code resourceUri} is undefined, e.g. the
    *         {@link ResourceUriImpl#getSchemePrefix() scheme-prefix} is NOT supported by this factory.
    */
   protected abstract DataResource createDataResource(ResourceUri resourceUri) throws ResourceUriUndefinedException;

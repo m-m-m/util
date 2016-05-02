@@ -97,9 +97,9 @@ public interface Recurrence {
 
   /**
    * This method gets the step of this {@link Recurrence}. The
-   * {@link Recurrence} will happen every <code>{@link #getStep() step}</code>
+   * {@link Recurrence} will happen every {@link #getStep() step}
    * {@link #getUnit() units} (e.g. every day or every 2 weeks). The returned
-   * value has to be greater or equal to <code>1</code>.
+   * value has to be greater or equal to {@code 1}.
    * 
    * @return the step.
    */
@@ -121,14 +121,14 @@ public interface Recurrence {
    * will recurre on the <em>first</em> match of the weekdays according to the
    * value of {@link #getWeekOfMonth()}.
    * 
-   * @return the {@link WeekdaySet} or <code>null</code>.
+   * @return the {@link WeekdaySet} or {@code null}.
    */
   WeekdaySet getWeekdays();
 
   /**
    * This method gets the {@link WeekOfMonth} of a {@link DateUnit#MONTH
    * monthly} or {@link DateUnit#YEAR yearly} recurrence. By default (if this
-   * method returns <code>null</code> and {@link #getWeekdays()} returns
+   * method returns {@code null} and {@link #getWeekdays()} returns
    * {@link WeekdaySet#ALL}) such recurrence always takes place on a fixed day
    * of the month based on the initial occurrence. However, to specify a
    * {@link DateUnit#MONTH monthly} or {@link DateUnit#YEAR yearly}
@@ -139,7 +139,7 @@ public interface Recurrence {
    * {@link #getUnit() is} NOT a {@link DateUnit#MONTH monthly} or
    * {@link DateUnit#YEAR yearly} {@link Recurrence}.
    * 
-   * @return the {@link WeekOfMonth} or <code>null</code>.
+   * @return the {@link WeekOfMonth} or {@code null}.
    */
   WeekOfMonth getWeekOfMonth();
 

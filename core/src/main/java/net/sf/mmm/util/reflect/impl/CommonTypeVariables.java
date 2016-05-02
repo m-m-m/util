@@ -18,14 +18,14 @@ import org.slf4j.LoggerFactory;
 public final class CommonTypeVariables {
 
   /**
-   * The {@link TypeVariable} <code>E</code> of <code>Collection&lt;E&gt;</code> .
+   * The {@link TypeVariable} {@code E} of {@code Collection<E>}.
    */
   public static final TypeVariable<Class<Collection>> TYPE_VARIABLE_COLLECTION_ELEMENT;
 
-  /** The {@link TypeVariable} <code>K</code> of <code>Map&lt;K, V&gt;</code>. */
+  /** The {@link TypeVariable} {@code K} of {@code Map<K, V>}. */
   public static final TypeVariable<Class<Map>> TYPE_VARIABLE_MAP_KEY;
 
-  /** The {@link TypeVariable} <code>V</code> of <code>Map&lt;K, V&gt;</code>. */
+  /** The {@link TypeVariable} {@code V} of {@code Map<K, V>}. */
   public static final TypeVariable<Class<Map>> TYPE_VARIABLE_MAP_VALUE;
 
   static {

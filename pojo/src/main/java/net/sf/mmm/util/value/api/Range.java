@@ -16,7 +16,7 @@ import net.sf.mmm.util.lang.base.ComparableComparator;
  * created via reflection or de-serialization). <br>
  * <b>ATTENTION:</b><br>
  * Since version 4.0.0 the {@link #getMinimumValue() minimum} and {@link #getMaximumValue() maximum value} may be
- * <code>null</code> for unbounded ranges. It is still recommended to use fixed bounds such as {@link Long#MAX_VALUE}.
+ * {@code null} for unbounded ranges. It is still recommended to use fixed bounds such as {@link Long#MAX_VALUE}.
  * However, for types such as {@link java.math.BigDecimal} this is not possible.
  *
  * @param <V> is the generic type of the contained values.
@@ -71,7 +71,7 @@ public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, Att
   /**
    * Shorthand form for {@link #getMinimumValue()}.
    *
-   * @return the lower bound of this range. Must NOT be <code>null</code> and NOT be less than {@link #getMax() max}.
+   * @return the lower bound of this range. Must NOT be {@code null} and NOT be less than {@link #getMax() max}.
    */
   public V getMin() {
 
@@ -81,7 +81,7 @@ public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, Att
   /**
    * Shorthand form for {@link #getMaximumValue()}.
    *
-   * @return the upper bound of this range. Must NOT be <code>null</code> and NOT be greater than {@link #getMin() min}.
+   * @return the upper bound of this range. Must NOT be {@code null} and NOT be greater than {@link #getMin() min}.
    */
   public V getMax() {
 
@@ -126,11 +126,11 @@ public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, Att
   }
 
   /**
-   * This method determines if the given <code>value</code> is within this {@link Range} from {@link #getMin() minimum}
+   * This method determines if the given {@code value} is within this {@link Range} from {@link #getMin() minimum}
    * to {@link #getMax() maximum}.
    *
    * @param value is the vale to check.
-   * @return <code>true</code> if contained ({@link #getMin() minimum} &lt;= <code>value</code> &lt;= {@link #getMax()
+   * @return {@code true} if contained ({@link #getMin() minimum} &lt;= {@code value} &lt;= {@link #getMax()
    *         maximum}).
    */
   public boolean isContained(V value) {
@@ -157,7 +157,7 @@ public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, Att
   }
 
   /**
-   * This method verifies that the given <code>value</code> is {@link #isContained(Object) contained in this range}.
+   * This method verifies that the given {@code value} is {@link #isContained(Object) contained in this range}.
    *
    * @param value is the value to check.
    * @throws ValueOutOfRangeException if not {@link #isContained(Object) contained}.

@@ -14,7 +14,7 @@ public abstract interface PojoAttributeName {
   /**
    * This method gets the programmatic (technical) name of the according property. <br>
    * E.g. for the {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET read}
-   * accessor <code>public String getFooBar()</code> the property name would be <code>fooBar</code>.
+   * accessor {@code public String getFooBar()} the property name would be {@code fooBar}.
    * 
    * @see java.beans.PropertyDescriptor#getName()
    * 

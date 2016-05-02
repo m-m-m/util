@@ -53,7 +53,7 @@ public interface CliParser {
 
   /**
    * This method prints the help (program usage) generated from the annotations to the given
-   * {@link Appendable} using the given <code>settings</code>.
+   * {@link Appendable} using the given {@code settings}.
    * 
    * @param target is the {@link Appendable} where to print to.
    * @param settings are the {@link CliOutputSettings} used to configure the output.
@@ -67,7 +67,7 @@ public interface CliParser {
    * 
    * @param parameters are the command-line arguments of the main-program.
    * @return the {@link CliOption#mode() mode} that was triggered.
-   * @throws CliException if the given <code>arguments</code> are invalid.
+   * @throws CliException if the given {@code arguments} are invalid.
    */
   CliModeObject parseParameters(String... parameters) throws CliException;
 

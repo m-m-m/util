@@ -18,7 +18,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the abstract base implementation of the {@link ProcessableByteArrayBuffer} interface for a
- * <code>byte[]</code>-Buffer that represents the concatenation of multiple {@link ByteArrayBufferImpl}s. It
+ * {@code byte[]}-Buffer that represents the concatenation of multiple {@link ByteArrayBufferImpl}s. It
  * has its own state (read-pointer) and does NOT modify a contained {@link ByteArrayBufferImpl buffer} when
  * reading. If one of the underlying {@link ByteArrayBufferImpl buffers} has been read to the
  * {@link ByteArrayBufferImpl#getMaximumIndex() end} this class steps to the next one in a rotating way until
@@ -91,7 +91,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   }
 
   /**
-   * The constructor used to copy from the given <code>template</code>.
+   * The constructor used to copy from the given {@code template}.
    * 
    * @param template is the buffer to copy.
    */
@@ -132,9 +132,9 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
    * method is called when the last buffer has already been reached, the {@link #getCurrentBufferIndex()
    * index} will be set to
    * <code>{@link #getCurrentBuffer()}.{@link ByteArrayBufferImpl#getMaximumIndex() getMaximumIndex()}+1</code>
-   * so the end of this buffer is reached and {@link #hasNext()} will return <code>false</code>.
+   * so the end of this buffer is reached and {@link #hasNext()} will return {@code false}.
    * 
-   * @return <code>true</code> if there was a next buffer to switch to, <code>false</code> if the
+   * @return {@code true} if there was a next buffer to switch to, {@code false} if the
    *         {@link #getCurrentBuffer() current buffer} is already the last one.
    */
   protected boolean nextBuffer() {
@@ -267,7 +267,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   }
 
   /**
-   * This method synchronizes the buffer with the given <code>master</code>.
+   * This method synchronizes the buffer with the given {@code master}.
    * 
    * @param master is the buffer this buffer was created from.
    */
@@ -286,13 +286,13 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   }
 
   /**
-   * This method fills this buffer using the given <code>inputStream</code>. If the buffer is already filled,
-   * this method will have no effect and return <code>false</code>.
+   * This method fills this buffer using the given {@code inputStream}. If the buffer is already filled,
+   * this method will have no effect and return {@code false}.
    * 
    * @param inputStream is the {@link InputStream} providing the data to fill this buffer with.
-   * @throws IOException if caused by the <code>inputStream</code> whilst reading.
-   * @return <code>true</code> if the end of the stream was encountered while (re)filling this buffer,
-   *         <code>false</code> otherwise.
+   * @throws IOException if caused by the {@code inputStream} whilst reading.
+   * @return {@code true} if the end of the stream was encountered while (re)filling this buffer,
+   *         {@code false} otherwise.
    */
   protected boolean fill(InputStream inputStream) throws IOException {
 

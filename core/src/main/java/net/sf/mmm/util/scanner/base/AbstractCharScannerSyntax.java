@@ -7,7 +7,7 @@ import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 
 /**
  * This is the abstract base implementation of the {@link CharScannerSyntax} interface. <br>
- * The actual <code>char</code>s like {@link #getEscape() escape} are realized as simple bean-properties and
+ * The actual {@code char}s like {@link #getEscape() escape} are realized as simple bean-properties and
  * initialized with <code>'\0'</code> so they are disabled by default.
  * 
  * @see net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean, CharScannerSyntax)
@@ -88,8 +88,7 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
    * 
    * @see #getQuoteStart()
    * 
-   * @return the alternative character used to start a quotation or <code>0</code> (<code>'\0'</code>) for no
-   *         quotation.
+   * @return the alternative character used to start a quotation or {@code '\0'} for no quotation.
    */
   public char getAltQuoteStart() {
 

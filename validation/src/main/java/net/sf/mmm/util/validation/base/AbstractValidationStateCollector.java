@@ -63,9 +63,9 @@ public abstract class AbstractValidationStateCollector implements ValidationStat
    * 
    * <br>
    * <b>ATTENTION:</b><br>
-   * This method only returns <code>false</code> if a {@link ValidationFailure} has been
+   * This method only returns {@code false} if a {@link ValidationFailure} has been
    * {@link #onFailure(ValidationFailure) collected} by this instance. It may therefore return
-   * <code>true</code> even if the {@link #getDelegate() delegate} would return <code>false</code>.
+   * {@code true} even if the {@link #getDelegate() delegate} would return {@code false}.
    */
   @Override
   public boolean isValid() {

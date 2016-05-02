@@ -16,7 +16,7 @@ import net.sf.mmm.util.xml.base.jaxb.XmlAdapterInfixPattern;
 
 /**
  * This is an implementation of the {@link FilterRule} interface that matches using a regex {@link Pattern}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -35,8 +35,7 @@ public class PatternFilterRule implements FilterRule<String> {
   /**
    * The non-arg constructor. <br>
    * <b>NOTE:</b><br>
-   * This constructor should not be called directly! It is only intended for reflective access (e.g. for
-   * JAXB).
+   * This constructor should not be called directly! It is only intended for reflective access (e.g. for JAXB).
    */
   public PatternFilterRule() {
 
@@ -45,12 +44,11 @@ public class PatternFilterRule implements FilterRule<String> {
 
   /**
    * The constructor.
-   * 
-   * @param pattern is the pattern a file has to match in order to activate this rule. Before this given
-   *        string is compiled via {@link Pattern#compile(String)} the following manipulation is performed: If
-   *        the pattern string does NOT start with the character <code>^</code> the implicit prefix
-   *        <code>.*</code> is added. If the pattern does NOT end with the character <code>$</code> the
-   *        implicit suffix <code>.*</code> is appended.
+   *
+   * @param pattern is the pattern a file has to match in order to activate this rule. Before this given string is
+   *        compiled via {@link Pattern#compile(String)} the following manipulation is performed: If the pattern string
+   *        does NOT start with the character {@code ^} the implicit prefix {@code .*} is added. If the pattern does NOT
+   *        end with the character {@code $} the implicit suffix {@code .*} is appended.
    * @param resultOnMatch is the result {@link #accept(String) returned} if the pattern matches.
    */
   public PatternFilterRule(String pattern, boolean resultOnMatch) {
@@ -60,7 +58,7 @@ public class PatternFilterRule implements FilterRule<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param pattern is the pattern a file has to match in order to activate this rule.
    * @param resultOnMatch is the result {@link #accept(String) returned} if the pattern matches.
    */

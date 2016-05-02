@@ -60,7 +60,7 @@ public enum Orientation implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link Orientation} with the given <code>{@link #getValue() value}</code>.
+   * This method gets the {@link Orientation} with the given {@link #getValue() value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link Orientation}.
    * @return the requested {@link Orientation}.

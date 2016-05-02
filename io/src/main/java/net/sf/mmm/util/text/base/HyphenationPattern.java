@@ -12,7 +12,7 @@ import net.sf.mmm.util.text.api.StringHasher;
  * set of {@link HyphenationPattern patterns} is extracted. To allow correct results with a reasonable small
  * set of patterns, these patterns form a chain of positive rules and exceptions. Therefore a pattern can
  * {@link HyphenationPatternPosition#ranking rank} a potential hyphenation-position with a number from
- * <code>1</code> to <code>9</code>. If two patterns apply for a hyphenation-position the higher number wins.
+ * {@code 1} to {@code 9}. If two patterns apply for a hyphenation-position the higher number wins.
  * Odd numbers indicate a hyphenation while even values indicate an exception that should NOT be hyphenated.
  * The character '.' is used at the beginning and/or end of a pattern to indicate that it should only match at
  * the beginning/end of the word to hyphenate. <br>
@@ -23,7 +23,7 @@ import net.sf.mmm.util.text.api.StringHasher;
  * applied. <br>
  * <br>
  * Here is an example to illustrate the algorithm:<br>
- * The string <code>"Computer"</code> will be transformed to <code>".computer."</code> that matches the
+ * The string {@code "Computer"} will be transformed to {@code ".computer."} that matches the
  * following patterns:
  * <ul>
  * <li>4m1p</li>
@@ -31,7 +31,7 @@ import net.sf.mmm.util.text.api.StringHasher;
  * <li>5pute</li>
  * <li>put3er</li>
  * </ul>
- * This results to <code>co4m5pu2t3er</code> so the hyphenated input String is finally
+ * This results to {@code co4m5pu2t3er} so the hyphenated input String is finally
  * <code>"Com-put-er"</code>. The challenge is to implement this algorithm in an efficient way.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

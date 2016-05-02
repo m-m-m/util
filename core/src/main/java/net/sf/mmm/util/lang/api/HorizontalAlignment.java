@@ -27,7 +27,7 @@ import net.sf.mmm.util.exception.api.IllegalCaseException;
  * <td><code>&nbsp;&nbsp;&nbsp;&nbsp;Hello</code></td>
  * </tr>
  * </table>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -52,7 +52,7 @@ public enum HorizontalAlignment implements SimpleDatatype<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
    */
@@ -72,7 +72,7 @@ public enum HorizontalAlignment implements SimpleDatatype<String> {
 
   /**
    * This method gets the corresponding {@link Alignment}.
-   * 
+   *
    * @return the corresponding {@link Alignment}.
    */
   public Alignment getAlignment() {
@@ -84,7 +84,7 @@ public enum HorizontalAlignment implements SimpleDatatype<String> {
         return Alignment.CENTER;
       case RIGHT:
         return Alignment.RIGHT;
-      default :
+      default:
         throw new IllegalCaseException(HorizontalAlignment.class, this);
     }
   }
@@ -99,8 +99,8 @@ public enum HorizontalAlignment implements SimpleDatatype<String> {
   }
 
   /**
-   * This method gets the {@link HorizontalAlignment} with the given <code>{@link #getValue() value}</code>.
-   * 
+   * This method gets the {@link HorizontalAlignment} with the given {@link #getValue() value}.
+   *
    * @param value is the {@link #getValue() value} of the requested {@link HorizontalAlignment}.
    * @return the requested {@link HorizontalAlignment}.
    */

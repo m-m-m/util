@@ -18,17 +18,17 @@ public interface ReflectionUtilLimited extends GenericTypeFactory {
 
   /**
    * This method gets the according non-{@link Class#isPrimitive() primitive} type for the class given by
-   * <code>type</code>. <br>
-   * E.g. <code>{@link #getNonPrimitiveType(Class) getNonPrimitiveType}(int.class)</code> will return
-   * <code>Integer.class</code>.
+   * {@code type}. <br>
+   * E.g. {@link #getNonPrimitiveType(Class) getNonPrimitiveType}{@code (int.class)} will return
+   * {@code Integer.class}.
    *
    *
    * @see Class#isPrimitive()
    *
-   * @param <T> is the generic type of the given <code>type</code> {@link Class}.
+   * @param <T> is the generic type of the given {@code type} {@link Class}.
    * @param type is the (potentially) {@link Class#isPrimitive() primitive} type.
-   * @return the according object-type for the given <code>type</code>. This will be the given
-   *         <code>type</code> itself if it is NOT {@link Class#isPrimitive() primitive}.
+   * @return the according object-type for the given {@code type}. This will be the given
+   *         {@code type} itself if it is NOT {@link Class#isPrimitive() primitive}.
    * @since 1.0.2
    */
   <T> Class<T> getNonPrimitiveType(Class<T> type);

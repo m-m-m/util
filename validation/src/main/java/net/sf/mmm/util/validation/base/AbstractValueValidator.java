@@ -43,11 +43,11 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
   }
 
   /**
-   * This method performs the validation in case <code>null</code> was provided as value. By default <code>null</code>
+   * This method performs the validation in case {@code null} was provided as value. By default {@code null}
    * should be considered as a legal value. Only for validators such as {@link ValidatorMandatory} this method should be
    * overridden.
    *
-   * @return the {@link ValidationFailure#getMessage() failure message} or <code>null</code> if the <code>null</code>
+   * @return the {@link ValidationFailure#getMessage() failure message} or {@code null} if the {@code null}
    *         -value is valid.
    */
   protected NlsMessage validateNull() {
@@ -56,7 +56,7 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
   }
 
   /**
-   * This method performs the validation in case <code>value</code> is NOT <code>null</code>. This method contains the
+   * This method performs the validation in case {@code value} is NOT {@code null}. This method contains the
    * actual custom logic for the validation. It is therefore designed in a way that makes it most simple to implement
    * custom validators. <br>
    * <b>ATTENTION:</b><br>
@@ -64,8 +64,8 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
    * {@link net.sf.mmm.util.nls.api.NlsMessage} instead.
    *
    * @param value is the value to validate.
-   * @return the {@link ValidationFailure#getMessage() failure message} or <code>null</code> if the the given
-   *         <code>value</code> is valid.
+   * @return the {@link ValidationFailure#getMessage() failure message} or {@code null} if the the given
+   *         {@code value} is valid.
    */
   protected abstract NlsMessage validateNotNull(V value);
 

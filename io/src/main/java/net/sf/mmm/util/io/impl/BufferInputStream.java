@@ -27,7 +27,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
   private static final int DEFAULT_CAPACITY = 2048;
 
   /**
-   * The adapted {@link InputStream} to buffer or <code>null</code> if {@link #close() closed}.
+   * The adapted {@link InputStream} to buffer or {@code null} if {@link #close() closed}.
    */
   private InputStream inStream;
 
@@ -35,7 +35,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
   private final ByteArrayBufferBuffer buffer;
 
   /**
-   * <code>true</code> if the end of the stream has been reached, <code>false</code> otherwise.
+   * {@code true} if the end of the stream has been reached, {@code false} otherwise.
    */
   private boolean eos;
 
@@ -116,8 +116,8 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
    * {@link InputStream} without {@link #read() consuming} data from the stream. If the internal buffer is
    * already filled, the call of this method will have no effect. <br>
    * 
-   * @return <code>true</code> if the end of the stream was encountered while (re)filling the internal buffer,
-   *         <code>false</code> otherwise.
+   * @return {@code true} if the end of the stream was encountered while (re)filling the internal buffer,
+   *         {@code false} otherwise.
    * @throws IOException if the operation fails.
    */
   public boolean fill() throws IOException {
@@ -265,7 +265,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
      * The constructor.
      * 
      * @param targetBuffer the buffer to copy to.
-     * @param targetOffset the offset in <code>targetBuffer</code>.
+     * @param targetOffset the offset in {@code targetBuffer}.
      */
     public CopyProcessor(byte[] targetBuffer, int targetOffset) {
 

@@ -45,7 +45,7 @@ public class FileNotExistsException extends RuntimeIoException {
    * The constructor.
    *
    * @param file is the name of the file that does NOT exist.
-   * @param directory - <code>true</code> if the exception is about a directory, <code>false</code> if the
+   * @param directory - {@code true} if the exception is about a directory, {@code false} if the
    *        exception is about a file.
    */
   public FileNotExistsException(String file, boolean directory) {

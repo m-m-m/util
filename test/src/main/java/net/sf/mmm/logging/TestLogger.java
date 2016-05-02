@@ -355,7 +355,7 @@ public class TestLogger extends MarkerIgnoringBase {
     }
 
     /**
-     * @return the {@link Throwable} or <code>null</code>.
+     * @return the {@link Throwable} or {@code null}.
      */
     public Throwable getThrowable() {
 

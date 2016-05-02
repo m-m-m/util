@@ -57,7 +57,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     /** The delegate adapted by this wrapper. */
     private final OutputStream delegate;
 
-    /** An array of buffered bytes or <code>null</code>. */
+    /** An array of buffered bytes or {@code null}. */
     private byte[] bytes;
 
     /** The number of bytes buffered in {@link #bytes}. */

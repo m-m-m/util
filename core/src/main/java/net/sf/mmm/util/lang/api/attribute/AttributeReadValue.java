@@ -14,7 +14,7 @@ public abstract interface AttributeReadValue<VALUE> {
   /**
    * This method gets the value of this object.
    * 
-   * @return the value of this object. May be <code>null</code> unless otherwise stated.
+   * @return the value of this object. May be {@code null} unless otherwise stated.
    */
   VALUE getValue();
 

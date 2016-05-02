@@ -179,11 +179,11 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method registers the given <code>accessor</code> for the given <code>descriptor</code>.
+   * This method registers the given {@code accessor} for the given {@code descriptor}.
    *
    * @param descriptor is the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}.
    * @param accessor is the {@link PojoPropertyAccessor} to register.
-   * @return <code>true</code> if the given <code>accessor</code> has been registered or <code>false</code> if it has
+   * @return {@code true} if the given {@code accessor} has been registered or {@code false} if it has
    *         been ignored (it is a duplicate).
    */
   protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor) {
@@ -273,7 +273,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * Introspects the {@link Field}s of the given {@link Class} and adds them to the given {@link PojoDescriptorImpl}.
    *
-   * @param <P> is the generic type of <code>pojoClass</code>.
+   * @param <P> is the generic type of {@code pojoClass}.
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
    * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for detected
    *        properties.
@@ -311,7 +311,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   /**
    * Introspects the {@link Method}s of the given {@link Class} and adds them to the given {@link PojoDescriptorImpl}.
    *
-   * @param <P> is the generic type of <code>pojoClass</code>.
+   * @param <P> is the generic type of {@code pojoClass}.
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
    * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for detected
    *        properties.
@@ -344,9 +344,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /**
    * This method creates the {@link PojoDescriptorImpl} for the {@link Class#getSuperclass() superclass} of
-   * <code>pojoClass</code> and merges {@link PojoPropertyDescriptorImpl} from inherited properties.
+   * {@code pojoClass} and merges {@link PojoPropertyDescriptorImpl} from inherited properties.
    *
-   * @param <P> is the generic type of <code>pojoClass</code>.
+   * @param <P> is the generic type of {@code pojoClass}.
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
    * @param descriptor is the {@link PojoDescriptorImpl} to merge.
    */
@@ -371,7 +371,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method merges the <code>superPropertyDescriptor</code> into the <code>propertyDescriptor</code>.
+   * This method merges the {@code superPropertyDescriptor} into the {@code propertyDescriptor}.
    *
    * @param propertyDescriptor is the {@link PojoPropertyDescriptorImpl} to build for the
    *        {@link net.sf.mmm.util.pojo.api.Pojo}.
@@ -395,10 +395,10 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
   /**
    * This method determines if the given {@link Member} is {@link AccessibleObject#isAccessible() accessible} or
-   * <code>public</code> (declared as public in a public class).
+   * {@code public} (declared as public in a public class).
    *
    * @param member is the {@link Member} to check.
-   * @return <code>true</code> if it can be accessed, <code>false</code> if it needs to be made accessible.
+   * @return {@code true} if it can be accessed, {@code false} if it needs to be made accessible.
    */
   private boolean isPublicAccessible(Member member) {
 
@@ -415,9 +415,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method is called if the {@link PojoPropertyAccessor accessor} given by <code>duplicate</code> was ignored
+   * This method is called if the {@link PojoPropertyAccessor accessor} given by {@code duplicate} was ignored
    * because it has the same {@link PojoPropertyAccessor#getName() name} and {@link PojoPropertyAccessor#getMode() mode}
-   * as the given <code>accessor</code> that is already registered. This method does nothing. It may be overridden to do
+   * as the given {@code accessor} that is already registered. This method does nothing. It may be overridden to do
    * some debug logging.
    *
    * @param accessor is the accessor that is already registered.

@@ -17,7 +17,7 @@ public class ObjectHelper extends Assertions {
    * @param <T> the generic type of the object to test.
    * @param x the first instance of the object to test.
    * @param y the second instance of the object to test.
-   * @param equal - <code>true</code> if <code>x.equals(y)</code> is expected, <code>false</code> otherwise.
+   * @param equal - {@code true} if {@code x.equals(y)} is expected, {@code false} otherwise.
    */
   public static <T> void checkEqualsAndHashCode(T x, T y, boolean equal) {
 
@@ -31,7 +31,7 @@ public class ObjectHelper extends Assertions {
    * @param <T> the generic type of the object to test.
    * @param x the first instance of the object to test.
    * @param y the second instance of the object to test.
-   * @param equal - <code>true</code> if <code>x.equals(y)</code> is expected, <code>false</code> otherwise.
+   * @param equal - {@code true} if {@code x.equals(y)} is expected, {@code false} otherwise.
    */
   public static <T> void checkEquals(T x, T y, boolean equal) {
 

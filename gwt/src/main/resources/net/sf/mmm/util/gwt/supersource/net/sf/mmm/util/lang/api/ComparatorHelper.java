@@ -16,7 +16,7 @@ class ComparatorHelper {
    * 
    * @param object is the value to convert.
    * @param otherType the type of the value to compare that differs from the type
-   * @return a simpler representation of <code>value</code> or the same <code>value</code> if on simpler type
+   * @return a simpler representation of {@code value} or the same {@code value} if on simpler type
    *         is known.
    */
   static Object convert(Object object, Class<?> otherType) {

@@ -5,7 +5,7 @@
  * <a name="documentation"></a><h2>Datatype Address</h2> 
  * This package provides common datatypes related to addresses. If you are 
  * looking for a datatype representing an Email address then use 
- * <code>javax.mail.internet.InternetAddress</code>.
+ * {@code javax.mail.internet.InternetAddress}.
  */
 package net.sf.mmm.util.datatype.api.address;
 

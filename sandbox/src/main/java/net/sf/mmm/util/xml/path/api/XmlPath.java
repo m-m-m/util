@@ -10,12 +10,12 @@ package net.sf.mmm.util.xml.path.api;
 public interface XmlPath extends XmlSelector {
 
   /**
-   * This method gets the segment at the given <code>index</code>.
+   * This method gets the segment at the given {@code index}.
    * 
    * @param index is the index of the requested segment. It has to be in the
-   *        range from <code>0</code> to
+   *        range from {@code 0} to
    *        <code>{@link #getSegmentCount()}-1</code>.
-   * @return the segment at the given <code>index</code>.
+   * @return the segment at the given {@code index}.
    */
   XmlPathSegment getSegment(int index);
 

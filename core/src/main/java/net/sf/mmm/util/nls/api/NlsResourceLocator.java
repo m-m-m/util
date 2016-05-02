@@ -60,17 +60,17 @@ public interface NlsResourceLocator {
    * This method gets the {@link Locale} for the given {@link #getLocaleInfixes(Locale) locale-infix}.
    * 
    * @param localeInfix is the locale-infix (e.g. "en_US").
-   * @return the Locale for the given <code>localeInfix</code>. {@link Locale#ROOT} if the given
-   *         <code>localeInfix</code> is invalid.
+   * @return the Locale for the given {@code localeInfix}. {@link Locale#ROOT} if the given
+   *         {@code localeInfix} is invalid.
    */
   Locale getLocaleForInfix(String localeInfix);
 
   /**
    * Like {@link #findResource(String, String, Locale)} but using a {@link Class} as
-   * <code>pathAndBasicName</code>.
+   * {@code pathAndBasicName}.
    * 
    * @param type is the {@link Class} identifying the path of the resource including the filename without
-   *        locale-part (<code>infix</code>) or <code>extension</code>.
+   *        locale-part ({@code infix}) or {@code extension}.
    * @param extension is the final suffix of the requested {@link DataResource}. Typically ".properties" or
    *        ".xml".
    * @param locale is the locale for which the {@link DataResource resource} is requested.
@@ -89,11 +89,11 @@ public interface NlsResourceLocator {
    * <pre>&lt;infix&gt; = [_&lt;locale.getLanguage()&gt;[_&lt;locale.getCountry()&gt;[_&lt;locale.getVariant()&gt;]]]</pre>
    * 
    * If a locale-specific part is NOT defined, the according part of the path is omitted. E.g. for
-   * {@link Locale#GERMANY} the following values are tried for <code>&lt;infix&gt;</code>:<br>
-   * <code>"de_DE", "de", ""</code>
+   * {@link Locale#GERMANY} the following values are tried for {@literal <infix>}:<br>
+   * {@code "de_DE", "de", ""}
    * 
    * @param pathAndBasicName is the path of the resource including the filename without locale-part or
-   *        <code>extension</code>. Folders (or packages) need to be separated with '/' and NOT with '.'. E.g.
+   *        {@code extension}. Folders (or packages) need to be separated with '/' and NOT with '.'. E.g.
    *        "net/sf/mmm/util/nls/text/Hypenator".
    * @param extension is the suffix of the requested {@link DataResource}. Typically ".properties" or ".xml".
    *        May be the empty string.

@@ -87,8 +87,8 @@ public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<S
   }
 
   /**
-   * @param factor is the {@link ColorFactor} to increase by. E.g. <code>0.0</code> will cause no change,
-   *        <code>1.0</code> will lead to {@link #getMaximumValue() maximum value}.
+   * @param factor is the {@link ColorFactor} to increase by. E.g. {@code 0.0} will cause no change,
+   *        {@code 1.0} will lead to {@link #getMaximumValue() maximum value}.
    * @return a new segment with the value increased by the given factor through linear interpolation.
    */
   public SELF increase(ColorFactor factor) {
@@ -98,8 +98,8 @@ public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<S
   }
 
   /**
-   * @param factor is the {@link ColorFactor} to decrease by. E.g. <code>0.0</code> will cause no change,
-   *        <code>1.0</code> will lead to {@link #getMinimumValue() minimum value} (0).
+   * @param factor is the {@link ColorFactor} to decrease by. E.g. {@code 0.0} will cause no change,
+   *        {@code 1.0} will lead to {@link #getMinimumValue() minimum value} (0).
    * @return a new segment with the value decreased by the given factor through linear interpolation.
    */
   public SELF decrease(ColorFactor factor) {

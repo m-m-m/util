@@ -57,7 +57,7 @@ import java.lang.annotation.Target;
 public @interface ComponentSpecification {
 
   /**
-   * <code>true</code> if multiple implementations of this "component" are (potentially) expected at a time.
+   * {@code true} if multiple implementations of this "component" are (potentially) expected at a time.
    * In this case it is typically some sort of plugin that should be {@link javax.inject.Inject injected} to a
    * list of the annotated type.
    */

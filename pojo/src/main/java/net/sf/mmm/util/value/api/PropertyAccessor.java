@@ -20,16 +20,16 @@ public interface PropertyAccessor<POJO, VALUE> {
 
   /**
    * This method gets the value of the property represented by this {@link PropertyAccessor} from the given
-   * <code>element</code>.
+   * {@code element}.
    * 
    * @param element is the element where to get the value from.
-   * @return the value of the property from the given <code>element</code>.
+   * @return the value of the property from the given {@code element}.
    */
   VALUE getValue(POJO element);
 
   /**
    * This method sets the value of the property represented by this {@link PropertyAccessor} in the given
-   * <code>element</code>.
+   * {@code element}.
    * 
    * @param element is the element where to set the value.
    * @param value is the new value for the property.

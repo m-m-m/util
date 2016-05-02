@@ -70,11 +70,11 @@ public final class UUID implements Serializable, Comparable<UUID> {
 
   /**
    * <b>ATTENTION:</b><br>
-   * This method is not supported and returns <code>null</code>.
+   * This method is not supported and returns {@code null}.
    *
    * @see java.util.UUID#randomUUID()
    *
-   * @return <code>null</code>.
+   * @return {@code null}.
    */
   public static UUID randomUUID() {
 
@@ -206,11 +206,11 @@ public final class UUID implements Serializable, Comparable<UUID> {
   }
 
   /**
-   * Returns the given <code>value</code> represented by the specified number of hex <code>digits</code>.
+   * Returns the given {@code value} represented by the specified number of hex {@code digits}.
    *
    * @param value is the number to format.
    * @param digits are the number of digits requested.
-   * @return the given <code>value</code> as hex {@link String} with the given number of digits.
+   * @return the given {@code value} as hex {@link String} with the given number of digits.
    */
   private static String digits(long value, int digits) {
 

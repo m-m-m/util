@@ -164,8 +164,8 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if pointing to the east ({@link #EAST}, {@link #SOUTH_EAST}, or
-   *         {@link #NORTH_EAST}), <code>false</code> otherwise.
+   * @return {@code true} if pointing to the east ({@link #EAST}, {@link #SOUTH_EAST}, or
+   *         {@link #NORTH_EAST}), {@code false} otherwise.
    */
   public boolean isToEast() {
 
@@ -173,8 +173,8 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if pointing to the west ({@link #WEST}, {@link #SOUTH_WEST}, or
-   *         {@link #NORTH_WEST}), <code>false</code> otherwise.
+   * @return {@code true} if pointing to the west ({@link #WEST}, {@link #SOUTH_WEST}, or
+   *         {@link #NORTH_WEST}), {@code false} otherwise.
    */
   public boolean isToWest() {
 
@@ -182,8 +182,8 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if pointing to the south ({@link #SOUTH}, {@link #SOUTH_EAST}, or
-   *         {@link #SOUTH_WEST}), <code>false</code> otherwise.
+   * @return {@code true} if pointing to the south ({@link #SOUTH}, {@link #SOUTH_EAST}, or
+   *         {@link #SOUTH_WEST}), {@code false} otherwise.
    */
   public boolean isToSouth() {
 
@@ -191,8 +191,8 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return <code>true</code> if pointing to the north ({@link #NORTH}, {@link #NORTH_EAST}, or
-   *         {@link #NORTH_WEST}), <code>false</code> otherwise.
+   * @return {@code true} if pointing to the north ({@link #NORTH}, {@link #NORTH_EAST}, or
+   *         {@link #NORTH_WEST}), {@code false} otherwise.
    */
   public boolean isToNorth() {
 

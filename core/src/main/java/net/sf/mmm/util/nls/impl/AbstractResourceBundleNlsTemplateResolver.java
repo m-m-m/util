@@ -41,10 +41,10 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
    * {@link NlsReversedResourceBundle}.
    * 
    * @param reversedBundle is the resource-bundle that potentially declare the
-   *        <code>internationalizedMessage</code>.
+   *        {@code internationalizedMessage}.
    * @param internationalizedMessage is the message for which the {@link NlsTemplate} is required.
-   * @return the according {@link NlsTemplate} or <code>null</code> if the
-   *         <code>internationalizedMessage</code> is NOT declared in <code>resourceBundle</code>.
+   * @return the according {@link NlsTemplate} or {@code null} if the
+   *         {@code internationalizedMessage} is NOT declared in {@code resourceBundle}.
    */
   protected NlsTemplate resolveTemplate(NlsReversedResourceBundle reversedBundle, String internationalizedMessage) {
 
@@ -62,9 +62,9 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
    * 
    * @param internationalizedMessage is the message for which the {@link NlsTemplate} is required.
    * @param bundles are the {@link NlsReversedResourceBundle reversed bundles} that potentially declare the
-   *        <code>internationalizedMessage</code>.
-   * @return the according {@link NlsTemplate} or <code>null</code> if the
-   *         <code>internationalizedMessage</code> is NOT declared in <code>resourceBundle</code>.
+   *        {@code internationalizedMessage}.
+   * @return the according {@link NlsTemplate} or {@code null} if the
+   *         {@code internationalizedMessage} is NOT declared in {@code resourceBundle}.
    */
   public NlsTemplate resolveTemplate(String internationalizedMessage, NlsReversedResourceBundle... bundles) {
 

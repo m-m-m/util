@@ -19,12 +19,12 @@ public @interface NlsBundleOptions {
 
   /**
    * Flag indicating if the {@link NlsBundleMessage} annotation has to be present for all methods of the annotated
-   * {@link NlsBundle}. The default is <code>true</code> to ensure the message is always present.
+   * {@link NlsBundle}. The default is {@code true} to ensure the message is always present.
    */
   boolean requireMessages() default false;
 
   /**
-   * Flag indicating if the ResourceBundle is productive. Set to <code>false</code> for bundles that are used for
+   * Flag indicating if the ResourceBundle is productive. Set to {@code false} for bundles that are used for
    * testing only and should be ignored e.g. by ResourceBundleSynchronizer.
    *
    * @since 7.0.0

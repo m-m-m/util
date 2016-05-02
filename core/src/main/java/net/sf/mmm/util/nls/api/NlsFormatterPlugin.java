@@ -8,7 +8,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * This interface extends {@link NlsFormatter} with the methods required to register this automatically as
  * plugin via {@link javax.inject.Inject injection}. <br>
  * All subclasses annotated with &#64;{@link javax.inject.Named} will automatically be registered. If no
- * {@link NlsFormatterPlugin} with default {@link #getStyle() style} (<code>null</code>) is found for some
+ * {@link NlsFormatterPlugin} with default {@link #getStyle() style} ({@code null}) is found for some
  * {@link #getType() type} the one with {@link NlsFormatterManager#STYLE_MEDIUM medium} style is used as
  * default.
  * 
@@ -23,22 +23,22 @@ public interface NlsFormatterPlugin<O> extends NlsFormatter<O> {
 
   /**
    * This method gets the {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter(String) type} of
-   * this formatter. See <code>TYPE_*</code> constants of {@link net.sf.mmm.util.nls.api.NlsFormatterManager}
+   * this formatter. See {@code TYPE_*} constants of {@link net.sf.mmm.util.nls.api.NlsFormatterManager}
    * e.g. {@link net.sf.mmm.util.nls.api.NlsFormatterManager#TYPE_NUMBER}.
    * 
-   * @return the type or <code>null</code> for the
+   * @return the type or {@code null} for the
    *         {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default formatter}. If type is
-   *         <code>null</code> then also {@link #getStyle() style} needs to be <code>null</code>.
+   *         {@code null} then also {@link #getStyle() style} needs to be {@code null}.
    */
   String getType();
 
   /**
    * This method gets the {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter(String, String)
-   * style} of this formatter. See <code>STYLE_*</code> constants of
+   * style} of this formatter. See {@code STYLE_*} constants of
    * {@link net.sf.mmm.util.nls.api.NlsFormatterManager} e.g.
    * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_LONG}.
    * 
-   * @return the style or <code>null</code> for no style.
+   * @return the style or {@code null} for no style.
    */
   String getStyle();
 

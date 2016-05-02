@@ -14,7 +14,7 @@ public interface CliModeObject {
   /**
    * The {@link CliMode#id() ID} of the {@link #getMode() mode}. <br>
    * <b>ATTENTION:</b><br>
-   * Please use this method to get the ID as {@link #getMode()} may return <code>null</code>.
+   * Please use this method to get the ID as {@link #getMode()} may return {@code null}.
    * 
    * @return the ID.
    */
@@ -24,7 +24,7 @@ public interface CliModeObject {
    * The {@link CliMode#title() title} of the {@link #getMode() mode}. If the title is NOT set, the
    * {@link #getId() ID} is returned<br>
    * <b>ATTENTION:</b><br>
-   * Please use this method to get the title as {@link #getMode()} may return <code>null</code>.
+   * Please use this method to get the title as {@link #getMode()} may return {@code null}.
    * 
    * @return the title or the {@link #getId() ID} if title is NOT set.
    */
@@ -33,36 +33,36 @@ public interface CliModeObject {
   /**
    * This method gets the actual {@link CliMode}.
    * 
-   * @return the {@link CliMode} or <code>null</code> if no {@link CliMode} annotation was present.
+   * @return the {@link CliMode} or {@code null} if no {@link CliMode} annotation was present.
    */
   CliMode getMode();
 
   /**
    * This method gets the {@link Class} that was annotated with the {@link #getMode() mode}.
    * 
-   * @return the annotated {@link Class} or <code>null</code> if {@link #getMode()} is <code>null</code>.
+   * @return the annotated {@link Class} or {@code null} if {@link #getMode()} is {@code null}.
    */
   Class<?> getAnnotatedClass();
 
   /**
-   * Determines if this {@link CliModeObject} is an ancestor of the given <code>childMode</code>. So if the
-   * given <code>childMode</code> extends this {@link CliModeObject} directly or indirect, this method will
-   * return <code>true</code>.
+   * Determines if this {@link CliModeObject} is an ancestor of the given {@code childMode}. So if the
+   * given {@code childMode} extends this {@link CliModeObject} directly or indirect, this method will
+   * return {@code true}.
    * 
    * @param childMode is the {@link CliModeObject} to relate to.
-   * @return <code>true</code> this {@link CliModeObject} is an ancestor of the given <code>childMode</code>,
-   *         <code>false</code> otherwise.
+   * @return {@code true} this {@link CliModeObject} is an ancestor of the given {@code childMode},
+   *         {@code false} otherwise.
    */
   boolean isAncestorOf(CliModeObject childMode);
 
   /**
-   * Determines if this {@link CliModeObject} is a descendant of the given <code>parentMode</code>. So if this
-   * {@link CliModeObject} extends the given <code>childMode</code> directly or indirect, this method will
-   * return <code>true</code>.
+   * Determines if this {@link CliModeObject} is a descendant of the given {@code parentMode}. So if this
+   * {@link CliModeObject} extends the given {@code childMode} directly or indirect, this method will
+   * return {@code true}.
    * 
    * @param parentMode is the {@link CliModeObject} to relate to.
-   * @return <code>true</code> this {@link CliModeObject} is a descendant of the given <code>parentMode</code>
-   *         , <code>false</code> otherwise.
+   * @return {@code true} this {@link CliModeObject} is a descendant of the given {@code parentMode}
+   *         , {@code false} otherwise.
    */
   boolean isDescendantOf(CliModeObject parentMode);
 

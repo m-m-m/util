@@ -57,7 +57,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
 
   /**
    * This method gets the {@link java.util.ResourceBundle#getString(String) key} of the string to lookup from
-   * the {@link #getName() bundle}. The key is a technical UID like (<code>ERR_VALUE_OUT_OF_RANGE</code>).
+   * the {@link #getName() bundle}. The key is a technical UID like ({@code ERR_VALUE_OUT_OF_RANGE}).
    *
    * @return the bundleKey is the key used to lookup the string from the bundle.
    */

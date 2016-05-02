@@ -82,7 +82,7 @@ public abstract class AbstractCollectionValidatorBuilder<E, V extends Collection
    * </pre>
    *
    * @param <SUB> the generic type of the returned sub-builder.
-   * @param factory lambda function used to create the returned sub-builder by calling the according <code>create</code>
+   * @param factory lambda function used to create the returned sub-builder by calling the according {@code create}
    *        method on the supplied {@link ObjectValidatorBuilderFactory} with the given dummy element.
    * @return the new sub-builder.
    */

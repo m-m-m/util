@@ -38,11 +38,11 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
    * The constructor.
    *
    * @param comparator is the {@link CompareOperator comparison operator} used to compare the {@link #validate(Object)
-   *        value to validate} (first argument) with the value of the given <code>valueSource</code>.
+   *        value to validate} (first argument) with the value of the given {@code valueSource}.
    * @param valueSource is a reference to something that {@link AttributeReadValue#getValue() provides a value} and will
    *        be evaluated {@link #isDynamic() dynamically} on every {@link #validate(Object) validation}.
-   * @param source is a brief description of the <code>valueSource</code> for potential failure messages. E.g. in case
-   *        of a user interface the label of the field providing the value. May be <code>null</code>.
+   * @param source is a brief description of the {@code valueSource} for potential failure messages. E.g. in case
+   *        of a user interface the label of the field providing the value. May be {@code null}.
    */
   public ValidatorCompare(CompareOperator comparator, AttributeReadValue<V> valueSource, String source) {
 
@@ -57,7 +57,7 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
    * The constructor.
    *
    * @param comparator is the {@link CompareOperator comparison operator} used to compare the {@link #validate(Object)
-   *        value to validate} (first argument) with the value of the given <code>value</code>.
+   *        value to validate} (first argument) with the value of the given {@code value}.
    * @param value is the fixed value to compare to.
    */
   public ValidatorCompare(CompareOperator comparator, V value) {

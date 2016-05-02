@@ -21,9 +21,9 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
 
   /**
    * This value indicates that a {@link VersionIdentifier} is a <em>strict successor</em> of another
-   * {@link VersionIdentifier}. A strict successor of {@link VersionIdentifier} <code>V1</code> is a
-   * {@link VersionIdentifier} <code>V2</code> that identifies a <em>potential</em> next release after
-   * <code>V1</code>. <br>
+   * {@link VersionIdentifier}. A strict successor of {@link VersionIdentifier} {@code V1} is a
+   * {@link VersionIdentifier} {@code V2} that identifies a <em>potential</em> next release after
+   * {@code V1}. <br>
    * <b>ATTENTION:</b><br>
    * An implementation can NOT predict the version history of a particular artifact. Therefore this is only an
    * indicator whether a {@link VersionIdentifier} is a legal successor. <br>
@@ -65,12 +65,12 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
   int VERSION_SEGMENT_INDEX_MICRO = 3;
 
   /**
-   * The {@link #getVersionSegment(int) segment index} of the <code>nanno</code> version-number.
+   * The {@link #getVersionSegment(int) segment index} of the {@code nanno} version-number.
    */
   int VERSION_SEGMENT_INDEX_NANNO = 4;
 
   /**
-   * The {@link #getVersionSegment(int) segment index} of the <code>pico</code> version number.
+   * The {@link #getVersionSegment(int) segment index} of the {@code pico} version number.
    */
   int VERSION_SEGMENT_INDEX_PICO = 5;
 
@@ -78,8 +78,8 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * This method gets an arbitrary segment of the <em>version number</em>. The version number is a part of the
    * {@link VersionIdentifier} represented by the concatenation of {@link #getVersionSegmentCount() all}
    * {@link #getVersionSegment(int) segments} separated by a separator (typically the dot sign). <br>
-   * This method will return <code>0</code> if a segment is not {@link #getVersionSegmentCount() available}.
-   * However it will not throw an {@link IndexOutOfBoundsException} if the <code>index</code> is non negative. <br>
+   * This method will return {@code 0} if a segment is not {@link #getVersionSegmentCount() available}.
+   * However it will not throw an {@link IndexOutOfBoundsException} if the {@code index} is non negative. <br>
    * Here are some examples
    * <table border="1">
    * <tr>
@@ -131,7 +131,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * <td>0</td>
    * </tr>
    * </table>
-   * E.g. if the version number is "1.2.3.42", then <code>{@link #getVersionSegment(int) getSegment}()</code>
+   * E.g. if the version number is "1.2.3.42", then {@link #getVersionSegment(int) getSegment()}
    *
    * @see #VERSION_SEGMENT_INDEX_MAJOR
    * @see #VERSION_SEGMENT_INDEX_MINOR
@@ -141,9 +141,9 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * @see #VERSION_SEGMENT_INDEX_PICO
    *
    * @param index is the 0-based index of the requested segment. It shall not be negative.
-   * @return the requested segment. If not available (in other words if <code>index</code> is greater or equal
-   *         to {@link #getVersionSegmentCount()}) the value <code>0</code> is returned.
-   * @throws IndexOutOfBoundsException if the given <code>index</code> is negative.
+   * @return the requested segment. If not available (in other words if {@code index} is greater or equal
+   *         to {@link #getVersionSegmentCount()}) the value {@code 0} is returned.
+   * @throws IndexOutOfBoundsException if the given {@code index} is negative.
    */
   int getVersionSegment(int index) throws IndexOutOfBoundsException;
 
@@ -208,10 +208,10 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
   /**
    * This method gets the {@link DevelopmentPhase} of this {@link VersionIdentifier}. <br>
    * <b>ATTENTION:</b><br>
-   * If the {@link #getPhase() phase} is undefined (<code>null</code>), {@link DevelopmentPhase#RELEASE} will
+   * If the {@link #getPhase() phase} is undefined ({@code null}), {@link DevelopmentPhase#RELEASE} will
    * be assumed for {@link #compareTo(VersionIdentifier)}.
    *
-   * @return the {@link DevelopmentPhase} or <code>null</code> if NOT defined.
+   * @return the {@link DevelopmentPhase} or {@code null} if NOT defined.
    */
   DevelopmentPhase getPhase();
 
@@ -229,18 +229,18 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
 
   /**
    * This method gets the subsequent number of this {@link VersionIdentifier} within a particular
-   * {@link #getPhase() phase}. It is typically <code>null</code> and will then be omitted in the
+   * {@link #getPhase() phase}. It is typically {@code null} and will then be omitted in the
    * {@link #toString() string-representation}. However {@link DevelopmentPhase#RELEASE_CANDIDATE
    * release-candidates} and {@link DevelopmentPhase#UPDATE updates} are often numbered (e.g. like "u1", "u2",
    * ... in Java-releases or "RC1"/"SR1", ... in Eclipse-releases). <br>
-   * If {@link #getPhase()} returns <code>null</code> also this method should return <code>null</code>. Also
-   * if {@link #getPhase()} is {@link DevelopmentPhase#RELEASE} this method should return <code>null</code>
+   * If {@link #getPhase()} returns {@code null} also this method should return {@code null}. Also
+   * if {@link #getPhase()} is {@link DevelopmentPhase#RELEASE} this method should return {@code null}
    * (there is just one official release - after that there are {@link DevelopmentPhase#UPDATE updates}). <br>
    * <b>ATTENTION:</b><br>
-   * If the {@link #getPhaseNumber() phase} is undefined (<code>null</code>), <code>0</code> will be assumed
+   * If the {@link #getPhaseNumber() phase} is undefined ({@code null}), {@code 0} will be assumed
    * for {@link #compareTo(VersionIdentifier)}.
    *
-   * @return the phase number or <code>null</code> if NOT defined.
+   * @return the phase number or {@code null} if NOT defined.
    */
   Integer getPhaseNumber();
 
@@ -254,8 +254,8 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * "1.0.0" gets released. This approach is orthogonal to the {@link #getPhase() phase} and can be combined
    * (e.g. "1.0.0-beta2-SNAPSHOT").
    *
-   * @return <code>true</code> if this {@link VersionIdentifier} represents a snapshot release,
-   *         <code>false</code> in case of an official release.
+   * @return {@code true} if this {@link VersionIdentifier} represents a snapshot release,
+   *         {@code false} in case of an official release.
    */
   boolean isSnapshot();
 
@@ -263,7 +263,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * This method gets the revision of the {@link VersionIdentifier}. It typically has a technical nature and
    * might be derived from the underlying version control system.
    *
-   * @return the revision or <code>null</code> if NOT defined.
+   * @return the revision or {@code null} if NOT defined.
    */
   Long getRevision();
 
@@ -273,7 +273,7 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * <em>release date</em>. The value is optional but is best practice to assign a timestamp to a
    * {@link VersionIdentifier}.
    *
-   * @return the timestamp or <code>null</code> if NOT defined.
+   * @return the timestamp or {@code null} if NOT defined.
    */
   Date getTimestamp();
 
@@ -281,21 +281,21 @@ public interface VersionIdentifier extends Comparable<VersionIdentifier>, Simple
    * This method gets the optional label of the {@link VersionIdentifier}. A label is a non-technical
    * identifier also called code name (e.g. "Tiger" or "Dolphin").
    *
-   * @return the label or <code>null</code> if NOT defined.
+   * @return the label or {@code null} if NOT defined.
    */
   String getLabel();
 
   /**
-   * This method determines a (non-linear) distance from this version to the given <code>otherVersion</code>.
+   * This method determines a (non-linear) distance from this version to the given {@code otherVersion}.
    * It will return
    * <ul>
-   * <li><code>{@link #COMPARE_TO_INCOMPARABLE}</code> if both versions are incompatible to each other (e.g.
+   * <li>{@link #COMPARE_TO_INCOMPARABLE} if both versions are incompatible to each other (e.g.
    * ).</li>
-   * <li><code>0</code> if both versions are historically equivalent (but may NOT be
+   * <li>{@code 0} if both versions are historically equivalent (but may NOT be
    * {@link Object#equals(Object) equal})</li>
-   * <li>a negative value if this version is a predecessor of <code>otherVersion</code>. The value -1
+   * <li>a negative value if this version is a predecessor of {@code otherVersion}. The value -1
    * indicates a <em>{@link #COMPARE_TO_STRICT_PREDECESSOR strict predecessor}</em>.</li>
-   * <li>a positive value if this version is a successor of <code>otherVersion</code>. The value +1 indicates
+   * <li>a positive value if this version is a successor of {@code otherVersion}. The value +1 indicates
    * a <em>{@link #COMPARE_TO_STRICT_SUCCESSOR strict successor}</em>.</li>
    * </ul>
    * The following table gives some examples:

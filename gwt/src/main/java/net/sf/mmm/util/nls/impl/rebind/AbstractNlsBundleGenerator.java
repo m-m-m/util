@@ -233,8 +233,8 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
    * Generates the source code block to create a new {@link NlsMessage}.
    * 
    * @param sourceWriter is the {@link SourceWriter}.
-   * @param hasArguments - <code>true</code> if {@link NlsMessage#getArgument(String) arguments} are given,
-   *        <code>false</code> otherwise.
+   * @param hasArguments - {@code true} if {@link NlsMessage#getArgument(String) arguments} are given,
+   *        {@code false} otherwise.
    */
   private void generateCreateMessageBlock(SourceWriter sourceWriter, boolean hasArguments) {
 
@@ -289,7 +289,7 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
    * @see NlsBundleWithLookup#getMessage(String, Map)
    * 
    * @param method is the {@link JMethod} to test.
-   * @return <code>true</code> if the given method is from {@link NlsBundleWithLookup}, <code>false</code>
+   * @return {@code true} if the given method is from {@link NlsBundleWithLookup}, {@code false}
    *         otherwise.
    */
   protected boolean isLookupMethod(JMethod method) {

@@ -39,10 +39,10 @@ public class DefaultNlsResourceBundleRequestor implements NlsResourceBundleReque
   }
 
   /**
-   * This method verifies that the given <code>bundleNames</code> are available {@link ResourceBundle}s.
+   * This method verifies that the given {@code bundleNames} are available {@link ResourceBundle}s.
    * 
    * @param bundleNames are the {@link ResourceBundle#getBundle(String) bundle names}.
-   * @return <code>true</code>.
+   * @return {@code true}.
    */
   private boolean isAvailable(String... bundleNames) {
 

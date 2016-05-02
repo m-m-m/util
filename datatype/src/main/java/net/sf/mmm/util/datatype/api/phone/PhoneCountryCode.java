@@ -90,7 +90,7 @@ public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
   }
 
   /**
-   * This method gets the raw value (the actual country code). E.g. <code>49</code> for the country code of
+   * This method gets the raw value (the actual country code). E.g. {@code 49} for the country code of
    * Germany.
    * 
    * @return the country code.

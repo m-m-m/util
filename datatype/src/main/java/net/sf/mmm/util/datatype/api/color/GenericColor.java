@@ -69,7 +69,7 @@ public final class GenericColor extends AbstractDatatype {
   private Green green;
 
   /**
-   * The constructor. Use <code>valueOf</code> methods to instantiate.
+   * The constructor. Use {@code valueOf} methods to instantiate.
    */
   protected GenericColor() {
 
@@ -479,7 +479,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * @param type is the {@link ColorSegmentType} identifying the requested {@link Segment}.
-   * @return the {@link Segment} of the given <code>type</code>.
+   * @return the {@link Segment} of the given {@code type}.
    */
   public AbstractDoubleSegment<?> getSegment(ColorSegmentType type) {
 
@@ -539,11 +539,11 @@ public final class GenericColor extends AbstractDatatype {
   }
 
   /**
-   * Lightens this color by the given <code>factor</code>.
+   * Lightens this color by the given {@code factor}.
    * 
-   * @param factor is the factor to increase by. E.g. <code>0.0</code> will cause no change, while
-   *        <code>1.0</code> will return {@link Color#WHITE white}.
-   * @return a new color lighter by the given <code>factor</code>.
+   * @param factor is the factor to increase by. E.g. {@code 0.0} will cause no change, while
+   *        {@code 1.0} will return {@link Color#WHITE white}.
+   * @return a new color lighter by the given {@code factor}.
    */
   public GenericColor lighten(ColorFactor factor) {
 
@@ -551,11 +551,11 @@ public final class GenericColor extends AbstractDatatype {
   }
 
   /**
-   * Darkens this color by the given <code>factor</code>.
+   * Darkens this color by the given {@code factor}.
    * 
-   * @param factor is the factor to decrease by. E.g. <code>0.0</code> will cause no change, while
-   *        <code>1.0</code> will return {@link Color#BLACK black}.
-   * @return a new color darker by the given <code>factor</code>.
+   * @param factor is the factor to decrease by. E.g. {@code 0.0} will cause no change, while
+   *        {@code 1.0} will return {@link Color#BLACK black}.
+   * @return a new color darker by the given {@code factor}.
    */
   public GenericColor darken(ColorFactor factor) {
 

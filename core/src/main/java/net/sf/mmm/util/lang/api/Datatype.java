@@ -38,7 +38,7 @@ import java.io.Serializable;
  * confusing APIs. Therefore, use JSR-310 or jodatime instead. <br>
  * Even if a datatype is technically nothing but a {@link String} or a {@link Number} but logically something
  * special it is worth to define it as a dedicated datatype class already for the purpose of having a central
- * javadoc to explain it. On the other side avoid to introduce technical datatypes like <code>String32</code>
+ * javadoc to explain it. On the other side avoid to introduce technical datatypes like {@code String32}
  * for a {@link String} with a maximum length of 32 characters as this is not adding value in the sense of a
  * real {@link Datatype}. <br>
  * An implementation of this interface should usually declare its {@link java.lang.reflect.Field}s as final to

@@ -63,10 +63,10 @@ public enum WeekOfMonth implements SimpleDatatype<Integer> {
   }
 
   /**
-   * This method gets the {@link WeekOfMonth} for the given <code>value</code>.
+   * This method gets the {@link WeekOfMonth} for the given {@code value}.
    * 
    * @param value is the {@link #getValue() value} of the requested {@link WeekOfMonth}.
-   * @return the requested {@link WeekOfMonth} or <code>null</code> if no such {@link WeekOfMonth} exists.
+   * @return the requested {@link WeekOfMonth} or {@code null} if no such {@link WeekOfMonth} exists.
    */
   public static WeekOfMonth fromValue(Integer value) {
 

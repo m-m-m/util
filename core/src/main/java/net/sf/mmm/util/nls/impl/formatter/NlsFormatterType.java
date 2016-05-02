@@ -26,7 +26,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  */
 public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
 
-  /** The package <code>java.lang</code>. */
+  /** The package {@code java.lang}. */
   private static final Package PACKAGE_JAVA_LANG = Package.class.getPackage();
 
   /** @see #getStyle() */

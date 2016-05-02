@@ -21,33 +21,33 @@ import net.sf.mmm.util.reflect.api.GenericType;
 public interface PojoDescriptorBuilder {
 
   /**
-   * This method gets (or creates) the {@link PojoDescriptor descriptor} for the given <code>pojoClass</code>.
+   * This method gets (or creates) the {@link PojoDescriptor descriptor} for the given {@code pojoClass}.
    * 
-   * @param <POJO> is the templated type of the <code>pojoType</code>.
+   * @param <POJO> is the templated type of the {@code pojoType}.
    * 
    * @param pojoClass is the {@link Class} reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to introspect.
-   * @return the descriptor used to get information about the properties of the given <code>pojoClass</code>.
+   * @return the descriptor used to get information about the properties of the given {@code pojoClass}.
    */
   <POJO> PojoDescriptor<POJO> getDescriptor(Class<POJO> pojoClass);
 
   /**
-   * This method gets (or creates) the {@link PojoDescriptor descriptor} for the given <code>pojoType</code>.
+   * This method gets (or creates) the {@link PojoDescriptor descriptor} for the given {@code pojoType}.
    * 
    * @see #getDescriptor(GenericType)
    * 
    * @param pojoType is the {@link Type} reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to introspect.
-   * @return the descriptor used to get information about the properties of the given <code>pojoType</code>.
+   * @return the descriptor used to get information about the properties of the given {@code pojoType}.
    */
   PojoDescriptor<?> getDescriptor(Type pojoType);
 
   /**
-   * This method gets (or creates) the {@link PojoDescriptor descriptor} for the given <code>pojoType</code>.
+   * This method gets (or creates) the {@link PojoDescriptor descriptor} for the given {@code pojoType}.
    * 
-   * @param <POJO> is the templated type of the <code>pojoType</code>.
+   * @param <POJO> is the templated type of the {@code pojoType}.
    * 
    * @param pojoType is the {@link GenericType} reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to
    *        introspect.
-   * @return the descriptor used to get information about the properties of the given <code>pojoType</code>.
+   * @return the descriptor used to get information about the properties of the given {@code pojoType}.
    */
   <POJO> PojoDescriptor<POJO> getDescriptor(GenericType<POJO> pojoType);
 

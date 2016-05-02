@@ -23,10 +23,10 @@ public class GenericColorTest extends Assert {
   private static final double PRECISION_CLOSE_MATCH = 0.0000001;
 
   /**
-   * Checks that the given {@link Segment}s match according to <code>matchType</code>.
+   * Checks that the given {@link Segment}s match according to {@code matchType}.
    * 
    * @param expected is the expected {@link Segment}.
-   * @param actual is the current {@link Segment} to compare with <code>expected</code>.
+   * @param actual is the current {@link Segment} to compare with {@code expected}.
    * @param matchType is the {@link MatchType}.
    */
   private void checkSegment(Segment<?> expected, Segment<?> actual, MatchType matchType) {
@@ -51,8 +51,8 @@ public class GenericColorTest extends Assert {
   /**
    * Checks that all {@link Segment}s of the given {@link GenericColor} match to the given values. This method
    * expects that the four {@link Segment}s used to create the {@link GenericColor} via the given
-   * {@link ColorModel} have to be same. The others have to be equal (if <code>allEqual</code> is
-   * <code>true</code>) or at least match with {@link #PRECISION_CLOSE_MATCH}.
+   * {@link ColorModel} have to be same. The others have to be equal (if {@code allEqual} is
+   * {@code true}) or at least match with {@link #PRECISION_CLOSE_MATCH}.
    * 
    * @param color is the {@link GenericColor} to test.
    * @param red is the expected {@link Red} value.
@@ -65,10 +65,10 @@ public class GenericColorTest extends Assert {
    * @param lightness is the expected {@link Lightness} value.
    * @param chroma is the expected {@link Chroma} value.
    * @param alpha is the expected {@link Alpha} value.
-   * @param allEqual - <code>true</code> if all {@link Segment}s have to be equal, <code>false</code> if
+   * @param allEqual - {@code true} if all {@link Segment}s have to be equal, {@code false} if
    *        {@link #PRECISION_CLOSE_MATCH} is sufficient for all {@link Segment}s except the four used to
    *        create the color.
-   * @param model is the {@link ColorModel} that was used to create the given <code>color</code>.
+   * @param model is the {@link ColorModel} that was used to create the given {@code color}.
    */
   private void checkColor(GenericColor color, Red red, Green green, Blue blue, Hue hue, Saturation saturationHsb,
       Saturation saturationHsl, Brightness brightness, Lightness lightness, Chroma chroma, Alpha alpha,
@@ -516,7 +516,7 @@ public class GenericColorTest extends Assert {
   }
 
   /**
-   * Tests {@link GenericColor#getSegment(ColorSegmentType)} with an invalid segment (<code>null</code>).
+   * Tests {@link GenericColor#getSegment(ColorSegmentType)} with an invalid segment ({@code null}).
    */
   @Test
   public void testInvalidSegment() {
@@ -530,7 +530,7 @@ public class GenericColorTest extends Assert {
   }
 
   /**
-   * @param <T> is the generic type of <code>expectedException</code>.
+   * @param <T> is the generic type of {@code expectedException}.
    * @param colorString is the invalid {@link GenericColor#valueOf(String) color string}.
    * @param expectedException the expected exception.
    * @return the expected exception.

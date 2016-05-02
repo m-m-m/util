@@ -35,7 +35,7 @@ public interface DecisionTreeNode {
   ContentType getContentType();
 
   /**
-   * This method processes the given <code>buffer</code> to proceed with the
+   * This method processes the given {@code buffer} to proceed with the
    * detection of the content-type.
    * 
    * @see net.sf.mmm.util.io.api.spi.DetectorStreamProcessor#process(DetectorStreamBuffer,
@@ -46,12 +46,12 @@ public interface DecisionTreeNode {
    * @param metadata is a {@link Map} with metadata. New metadata read from the
    *        stream is added to this {@link Map} if NOT already defined. If
    *        metadata in this {@link Map} is already present before it is
-   *        detected, the <code>buffer</code> shall be modified to reflect this
+   *        detected, the {@code buffer} shall be modified to reflect this
    *        metadata value.
-   * @param eos - <code>true</code> if the end of the stream has been reached
-   *        and the given <code>buffer</code> contains the remaining data.
+   * @param eos - {@code true} if the end of the stream has been reached
+   *        and the given {@code buffer} contains the remaining data.
    * @return the {@link DecisionTreeNode} representing the current state of
-   *         detection or <code>null</code> if the stream does NOT match any
+   *         detection or {@code null} if the stream does NOT match any
    *         known filetype.
    */
   DecisionTreeNode detect(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos);

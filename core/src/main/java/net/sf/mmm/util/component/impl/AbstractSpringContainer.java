@@ -15,8 +15,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 /**
  * This is the abstract base implementation of the {@link IocContainer} using spring. <br>
  * <b>ATTENTION:</b><br>
- * Please check your dependencies as <code>spring</code> is an optional dependency in
- * <code>mmm-util-core</code>.
+ * Please check your dependencies as {@code spring} is an optional dependency in
+ * {@code mmm-util-core}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

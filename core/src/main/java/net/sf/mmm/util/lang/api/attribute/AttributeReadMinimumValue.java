@@ -19,10 +19,10 @@ public abstract interface AttributeReadMinimumValue<VALUE> {
   /**
    * This method gets the <em>minimum</em> {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue()
    * value} of this object. A legal {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value} has
-   * to be greater or equal to this <code>minimum</code>.
+   * to be greater or equal to this {@code minimum}.
    * 
    * @return the minimum allowed for {@link net.sf.mmm.util.lang.api.attribute.AttributeReadValue#getValue() value} or
-   *         <code>null</code> if unbounded.
+   *         {@code null} if unbounded.
    */
   VALUE getMinimumValue();
 

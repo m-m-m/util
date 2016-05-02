@@ -30,7 +30,7 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   /**
    * The constructor.
    *
-   * @param value is the illegal argument-value. May be <code>null</code>.
+   * @param value is the illegal argument-value. May be {@code null}.
    */
   public NlsIllegalArgumentException(Object value) {
 
@@ -40,7 +40,7 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   /**
    * The constructor.
    *
-   * @param value is the illegal argument-value. May be <code>null</code>.
+   * @param value is the illegal argument-value. May be {@code null}.
    * @param name is the name of the argument (name of parameter).
    * @since 2.0.0
    */
@@ -52,7 +52,7 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   /**
    * The constructor.
    *
-   * @param value is the illegal argument-value. May be <code>null</code>.
+   * @param value is the illegal argument-value. May be {@code null}.
    * @param nested is the {@link #getCause() cause} of this exception.
    */
   public NlsIllegalArgumentException(Object value, Throwable nested) {
@@ -63,7 +63,7 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
   /**
    * The constructor.
    *
-   * @param value is the illegal argument-value. May be <code>null</code>.
+   * @param value is the illegal argument-value. May be {@code null}.
    * @param name is the name of the argument (name of parameter).
    * @param nested is the {@link #getCause() cause} of this exception.
    * @since 2.0.0

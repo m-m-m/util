@@ -16,7 +16,7 @@ public interface Address extends GenericEntity<Long> {
    * This method gets the city (or village) the address is located in. This is a very important information.
    * However, it may be possible to derive the city from the {@link #getZip() zip code}.
    *
-   * @return the city or <code>null</code> if not defined.
+   * @return the city or {@code null} if not defined.
    */
   String getCity();
 
@@ -33,7 +33,7 @@ public interface Address extends GenericEntity<Long> {
    * However, in some locations the house number starts with a letter (e.g. "N123") or is a name and no number
    * at all.
    *
-   * @return the house number or <code>null</code> if not defined.
+   * @return the house number or {@code null} if not defined.
    */
   String getHouseNumber();
 
@@ -49,7 +49,7 @@ public interface Address extends GenericEntity<Long> {
    * for a valid address depends on the {@link #getCountry() country}. E.g. in the USA the state is important
    * to identify an address while e.g. in Germany it is optional.
    *
-   * @return the state/province or <code>null</code> if not defined.
+   * @return the state/province or {@code null} if not defined.
    */
   String getState();
 
@@ -98,7 +98,7 @@ public interface Address extends GenericEntity<Long> {
   /**
    * This method gets the country where the address is located.
    *
-   * @return the country or <code>null</code> if not defined.
+   * @return the country or {@code null} if not defined.
    */
   String getCountry();
 

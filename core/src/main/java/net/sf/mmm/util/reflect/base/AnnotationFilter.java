@@ -23,7 +23,7 @@ public class AnnotationFilter implements Filter<Class<?>> {
   private final Class<? extends Annotation> annotationType;
 
   /**
-   * If <code>true</code> then also types are accepted if one of their super-types (including implemented
+   * If {@code true} then also types are accepted if one of their super-types (including implemented
    * interfaces) is properly annotated (see {@link AnnotationUtilImpl#getTypeAnnotation(Class, Class)}).
    */
   private final boolean forceInheritence;
@@ -33,7 +33,7 @@ public class AnnotationFilter implements Filter<Class<?>> {
    * 
    * @param annotationType is the annotation that has to be {@link Class#isAnnotationPresent(Class) present}
    *        if a type should be {@link #accept(Class) accepted}.
-   * @throws IllegalArgumentException if the given <code>annotationType</code> is NO
+   * @throws IllegalArgumentException if the given {@code annotationType} is NO
    *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType) throws IllegalArgumentException {
@@ -46,10 +46,10 @@ public class AnnotationFilter implements Filter<Class<?>> {
    * 
    * @param annotationType is the annotation that has to be {@link Class#isAnnotationPresent(Class) present}
    *        if a type should be {@link #accept(Class) accepted}.
-   * @param forceInheritence if <code>true</code> then also types are accepted if one of their super-types
+   * @param forceInheritence if {@code true} then also types are accepted if one of their super-types
    *        (including implemented interfaces) is properly annotated (see
    *        {@link AnnotationUtilImpl#getTypeAnnotation(Class, Class)}).
-   * @throws IllegalArgumentException if the given <code>annotationType</code> is NO
+   * @throws IllegalArgumentException if the given {@code annotationType} is NO
    *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType, boolean forceInheritence)
@@ -63,11 +63,11 @@ public class AnnotationFilter implements Filter<Class<?>> {
    * 
    * @param annotationType is the annotation that has to be {@link Class#isAnnotationPresent(Class) present}
    *        if a type should be {@link #accept(Class) accepted}.
-   * @param forceInheritence if <code>true</code> then also types are accepted if one of their super-types
+   * @param forceInheritence if {@code true} then also types are accepted if one of their super-types
    *        (including implemented interfaces) is properly annotated (see
    *        {@link AnnotationUtilImpl#getTypeAnnotation(Class, Class)}).
    * @param annotationUtil is the {@link AnnotationUtilImpl} instance to use.
-   * @throws IllegalArgumentException if the given <code>annotationType</code> is NO
+   * @throws IllegalArgumentException if the given {@code annotationType} is NO
    *         {@link AnnotationUtilImpl#isRuntimeAnnotation(Class) runtime annotation}.
    */
   public AnnotationFilter(Class<? extends Annotation> annotationType, boolean forceInheritence,
@@ -85,8 +85,8 @@ public class AnnotationFilter implements Filter<Class<?>> {
   /**
    * {@inheritDoc}
    * 
-   * @return <code>true</code> if the specified {@link Class#isAnnotationPresent(Class) annotation is present}
-   *         for the given <code>type</code>, <code>false</code> otherwise.
+   * @return {@code true} if the specified {@link Class#isAnnotationPresent(Class) annotation is present}
+   *         for the given {@code type}, {@code false} otherwise.
    */
   public boolean accept(Class<?> type) {
 

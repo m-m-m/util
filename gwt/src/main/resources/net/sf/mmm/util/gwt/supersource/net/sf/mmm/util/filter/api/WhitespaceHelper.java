@@ -3,7 +3,7 @@
 package net.sf.mmm.util.filter.api;
 
 /**
- * GWT compatible variant of <code>net.sf.mmm.util.filter.api.WhitespaceHelper</code>.
+ * GWT compatible variant of {@code net.sf.mmm.util.filter.api.WhitespaceHelper}.
  * 
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -24,7 +24,7 @@ final class WhitespaceHelper {
 
   /**
    * @param c is the character to check.
-   * @return <code>true</code> if {@link Character#isWhitespace(char) whitespace}, <code>false</code>
+   * @return {@code true} if {@link Character#isWhitespace(char) whitespace}, {@code false}
    *         otherwise.
    */
   public static boolean isWhitespace(char c) {
