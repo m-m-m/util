@@ -10,16 +10,16 @@
 
 The mmm-util project brings generic utilities that make your life easier.
 
-* [mmm-util-core](mmm-util-core) brings many fundamental features missing in JDK like NLS/I18N, reflection and introspection, etc.
-* [mmm-util-pojo](mmm-util-pojo) brings powerful POJO introspection and value conversion
-* [mmm-util-entity](mmm-util-entity) brings API and base implementation for generic entities and according transfer-objects.
-* [mmm-util-validation](mmm-util-validation) brings advanced validation support.
-* [mmm-util-event](mmm-util-event) brings generic event infrastructure including an event-bus.
-* [mmm-util-property](mmm-util-property) brings extended JavaFx properties and Java bean simplification.
-* [mmm-util-query](mmm-util-query) allows to build type-safe queries for properties and beans in pure java with easy and fluent API.
-* [mmm-util-cli](mmm-util-cli) brings support to build powerful and flexible command-line clients with automatic help and version options, NLS/I18N, etc.
-* [mmm-util-search](mmm-util-search) brings generic search API for search criteria and search result supporting pagination.
-* [mmm-util-gwt](mmm-util-gwt) brings most of this project into your GWT based application.
+* [core](mmm-util-core) brings many fundamental features missing in JDK like NLS/I18N, reflection and introspection, etc.
+* [pojo](mmm-util-pojo) brings powerful POJO introspection and value conversion
+* [entity](mmm-util-entity) brings API and base implementation for generic entities and according transfer-objects.
+* [validation](mmm-util-validation) brings advanced validation support.
+* [event](mmm-util-event) brings generic event infrastructure including an event-bus.
+* [property](mmm-util-property) brings extended JavaFx properties and Java bean simplification.
+* [query](mmm-util-query) allows to build type-safe queries for properties and beans in pure java with easy and fluent API.
+* [cli](mmm-util-cli) brings support to build powerful and flexible command-line clients with automatic help and version options, NLS/I18N, etc.
+* [search](mmm-util-search) brings generic search API for search criteria and search result supporting pagination.
+* [gwt](mmm-util-gwt) brings most of this project into your GWT based application.
 * and much more...
 
 ## Links
