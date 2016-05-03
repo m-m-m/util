@@ -1,0 +1,16 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-entity
+
+This module is part of the link:../[mmm-util project] and brings generic support for dealing with (JPA) entities:
+
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/entity/api/package-summary.html#package.description[Entity API] containg well-documented interfaces for entities.
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/entity/base/package-summary.html#package.description[Entity Base] brings abstract base implementations of the API to extend your entities from.
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/transferobject/api/package-summary.html#package.description[Transferobject API] brings an API and concept to use the JPA in a reasonable architecture and solves problems such as sending the correct version (modification counter) even if the entity gets converted to a transfer object (ETO) before the transaction was committed.
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/value/impl/package-summary.html[Value converter implementations] to integrate with link:../pojo[mmm-util-pojo].
+
+If you like the concepts but not the details of the implementation feel free to copy the ideas (as done in http://oasp.io/[OASP]).
