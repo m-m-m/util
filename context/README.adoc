@@ -1,0 +1,15 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-context
+
+This module is part of the link:../README.adoc[mmm-util project] and brings generic support for variable and hierarchical contexts:
+
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/context/api/package-summary.html#package.description[Context API]
+providing interfaces to read and write to contexts as well as a factory to create contexts.
+* Support to create http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/context/api/GenericContext.html#createChildContext--[child contexts] for forked tasks that inherit from their parent context.
+* Build in http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/context/api/GenericContext.html#getVariable-java.lang.String-java.lang.Class-[value conversion].
+* An http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/context/impl/package-summary.html#package.description[Implementation] that is entirely thread-safe.
