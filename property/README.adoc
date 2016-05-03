@@ -6,7 +6,7 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 == mmm-util-property
 
-This module is part of the link:../../..#mmm-util[mmm-util project] and brings extended property and bean support including:
+This module is part of link:../../..#mmm-util[mmm-util] and brings extended property and bean support including:
 
 * http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/property/api/package-summary.html#package.description[Properties API] extending JavaFx properties with build in type reflection and validation support.
 * http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/bean/api/package-summary.html#package.description[Bean API] to implement beans as interface without writing any boiler-plate code (equals, hashCode, getter/setter implementation, creation of properties, etc.).
