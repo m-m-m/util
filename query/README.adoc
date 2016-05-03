@@ -1,0 +1,17 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-query
+
+This module is part of the link:../README.adoc[mmm-util project] and allows to build query statements in a type-safe and secure way with a fluent API:
+
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/api/package-summary.html#package.description[Generic Query API] with the basic features of all SQL dialects.
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/api/feature/package-summary.html#package.description[Feature API] for ultimate flexibility, extension and reuse.
+* Support for many databases and http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/query/base/statement/SqlDialect.html[SQL dialects]. See e.g. https://github.com/m-m-m/orient/[mmm-orient] or https://github.com/m-m-m/jpa/[mmm-jpa] for specific dialect and database support.
+* http://m-m-m.github.io/maven/apidocs/[and much more... ]
+
+In general you might want to use http://www.querydsl.com/[QueryDSL].
+However, if you are using link:../mmm-util-property[mmm-util-property] then `mmm-util-query` will make your life easier as you neither need code-generation nor dynamic asm code using `Alias.$`.
