@@ -6,7 +6,7 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 == mmm-util-pojo
 
-This module is part of the link:../[mmm-util project] and brings GWT support for various of the `mmm-util-*` modules:
+This module is part of the link:../../..[mmm-util project] and brings GWT support for various of the `mmm-util-*` modules:
 
 * GWT support for our great native-language-support (NLS) from link:../core[mmm-util-core].
 * GWT support for http://www.slf4j.org/[SLF4J] briding to https://github.com/fredsa/gwt-log[gwt-log] to use logging in shared code without depending on GWT.
