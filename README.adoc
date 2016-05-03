@@ -6,7 +6,7 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status","https://travis-ci.org/m-m-m/util"]
 
-== Utilities
+== mmm-util
 
 The mmm-util project brings generic utilities that make your life easier.
 
