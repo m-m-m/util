@@ -6,7 +6,7 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 == mmm-util-entity
 
-This module is part of the link:../../..[mmm-util project] and brings generic support for dealing with (JPA) entities:
+This module is part of link:../../..#mmm-util[mmm-util] and brings generic support for dealing with (JPA) entities:
 
 * http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/entity/api/package-summary.html#package.description[Entity API] containg well-documented interfaces for entities.
 * http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/entity/base/package-summary.html#package.description[Entity Base] brings abstract base implementations of the API to extend your entities from.
