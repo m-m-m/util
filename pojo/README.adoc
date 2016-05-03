@@ -1,0 +1,15 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-pojo
+
+This module is part of the link:../[mmm-util project] and brings extended features for dealing wiht POJOs including introspection and value conversion:
+
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/api/package-summary.html#package.description[POJO API] including generic fabrication API.
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html#package.description[POJO Descriptor] for reflective introspection of POJOs.
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/path/api/package-summary.html#package.description[POJO Path] for reflective navigation on POJOs.
+* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/value/api/package-summary.html#package.description[Value conversion] for generic and powerful conversion between any kind of values.
+* http://m-m-m.github.io/maven/apidocs/[and much more... ]
