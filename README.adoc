@@ -10,16 +10,16 @@ image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status","https:/
 
 The mmm-util project brings generic utilities that make your life easier.
 
-* link:../mmm-util-core[core] brings many fundamental features missing in JDK like NLS/I18N, reflection and introspection, etc.
-* link:../mmm-util-pojo[pojo] brings powerful POJO introspection and value conversion
-* link:../mmm-util-entity[entity] brings API and base implementation for generic entities and according transfer-objects.
-* link:../mmm-util-validation[validation] brings advanced validation support.
-* link:../mmm-util-event[event] brings generic event infrastructure including an event-bus.
-* link:../mmm-util-property[property] brings extended JavaFx properties and Java bean simplification.
-* link:../mmm-util-query[query] allows to build type-safe queries for properties and beans in pure java with easy and fluent API.
-* link:../mmm-util-cli[cli] brings support to build powerful and flexible command-line clients with automatic help and version options, NLS/I18N, etc.
-* link:../mmm-util-search[search] brings generic search API for search criteria and search result supporting pagination.
-* link:../mmm-util-gwt[gwt] brings most of this project into your GWT based application.
+* link:../../mmm-util-core[core] brings many fundamental features missing in JDK like NLS/I18N, reflection and introspection, etc.
+* link:../../mmm-util-pojo[pojo] brings powerful POJO introspection and value conversion
+* link:../../mmm-util-entity[entity] brings API and base implementation for generic entities and according transfer-objects.
+* link:../../mmm-util-validation[validation] brings advanced validation support.
+* link:../../mmm-util-event[event] brings generic event infrastructure including an event-bus.
+* link:../../mmm-util-property[property] brings extended JavaFx properties and Java bean simplification.
+* link:../../mmm-util-query[query] allows to build type-safe queries for properties and beans in pure java with easy and fluent API.
+* link:../../mmm-util-cli[cli] brings support to build powerful and flexible command-line clients with automatic help and version options, NLS/I18N, etc.
+* link:../../mmm-util-search[search] brings generic search API for search criteria and search result supporting pagination.
+* link:../../mmm-util-gwt[gwt] brings most of this project into your GWT based application.
 * and much more...
 
 == Links
