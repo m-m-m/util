@@ -33,9 +33,6 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getCode() {
 
@@ -50,9 +47,6 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
     return INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsMessage validateNull() {
 
@@ -67,9 +61,6 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
     return createBundle(NlsBundleUtilValidationRoot.class).errorMandatory();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsMessage validateNotNull(Object value) {
 

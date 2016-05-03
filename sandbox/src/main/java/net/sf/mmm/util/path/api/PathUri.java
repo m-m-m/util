@@ -112,9 +112,6 @@ public interface PathUri {
    */
   String getPath();
 
-  /**
-   * {@inheritDoc}
-   */
   String toString();
 
 }

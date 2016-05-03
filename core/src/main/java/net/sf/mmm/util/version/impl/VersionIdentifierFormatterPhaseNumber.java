@@ -29,9 +29,6 @@ public class VersionIdentifierFormatterPhaseNumber extends AbstractVersionIdenti
     super(stringUtil, prefix, phaseNumberPadding);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Number getNumber(VersionIdentifier value) {
 

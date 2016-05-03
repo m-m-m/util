@@ -484,11 +484,7 @@ public class CliState extends CliClassContainer {
     /** The singleton instance. */
     private static final CliArgumentFormatter INSTANCE = new CliArgumentFormatter();
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("all")
+    @Override    @SuppressWarnings("all")
     public <T extends String> T convert(CliArgumentContainer value, Object valueSource, Class<T> targetClass)
         throws ValueException {
 

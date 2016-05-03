@@ -36,9 +36,6 @@ public class InternalValidatingIdResolver extends IDResolver {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void startDocument(ValidationEventHandler eventHandler) throws SAXException {
 
@@ -46,9 +43,6 @@ public class InternalValidatingIdResolver extends IDResolver {
     this.context = new IdResolverContext();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void endDocument() throws SAXException {
 
@@ -57,18 +51,12 @@ public class InternalValidatingIdResolver extends IDResolver {
     this.context = null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void bind(String id, Object value) throws SAXException {
 
     this.context.put(id, value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Callable<?> resolve(String id, Class targetType) throws SAXException {
 

@@ -32,9 +32,6 @@ public class UnknownCollectionInterfaceException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilReflectRoot.class).errorUnknownCollectionInterface(collectionInterface));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

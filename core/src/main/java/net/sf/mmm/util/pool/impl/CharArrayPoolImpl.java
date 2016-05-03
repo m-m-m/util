@@ -40,18 +40,12 @@ public class CharArrayPoolImpl extends AbstractPool<char[]> implements CharArray
     this.arrayLength = arrayLength;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected char[] create() {
 
     return new char[this.arrayLength];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean reset(char[] element) {
 

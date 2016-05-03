@@ -48,18 +48,12 @@ public abstract class SegmentVariableLength extends Segment {
     this.maximumLength = maximumLength;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMinimumLength() {
 
     return this.length;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMaximumLength() {
 

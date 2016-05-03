@@ -205,9 +205,6 @@ public class StreamUtilTest extends Assertions {
       assertThat(this.bytesStopped).isNull();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void transferCompleted(long bytesTransferred) {
 
@@ -215,9 +212,6 @@ public class StreamUtilTest extends Assertions {
       this.bytesCompleted = Long.valueOf(bytesTransferred);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void transferFailed(Exception e) {
 
@@ -225,9 +219,6 @@ public class StreamUtilTest extends Assertions {
       this.exception = e;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void transferStopped(long bytesTransferred) {
 
@@ -239,20 +230,12 @@ public class StreamUtilTest extends Assertions {
 
   public static class StreamUtilImplWithTestLogger extends StreamUtilImpl {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Logger createLogger() {
+    @Override    protected Logger createLogger() {
 
       return new TestLogger();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected TestLogger getLogger() {
+    @Override    protected TestLogger getLogger() {
 
       return (TestLogger) super.getLogger();
     }

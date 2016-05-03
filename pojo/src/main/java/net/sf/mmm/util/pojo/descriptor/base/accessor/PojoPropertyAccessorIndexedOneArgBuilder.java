@@ -14,9 +14,6 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedO
 public interface PojoPropertyAccessorIndexedOneArgBuilder extends
     PojoPropertyAccessorBuilder<PojoPropertyAccessorIndexedOneArg> {
 
-  /**
-   * {@inheritDoc}
-   */
   PojoPropertyAccessorIndexedOneArgMode getMode();
 
 }

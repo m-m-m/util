@@ -43,9 +43,6 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
    */
   protected abstract ReflectionUtilLimited getReflectionUtil();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass) {
 
@@ -53,9 +50,6 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
     return getDescriptor(genericType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoDescriptorImpl<?> getDescriptor(Type pojoType) {
 
@@ -63,9 +57,6 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
     return getDescriptor(genericType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public <POJO> PojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
@@ -91,9 +82,6 @@ public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComp
    */
   protected abstract <POJO> PojoDescriptorImpl<POJO> createDescriptor(GenericType<POJO> pojoType);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Map<String, Object> pojo2Map(Object pojo) {
 

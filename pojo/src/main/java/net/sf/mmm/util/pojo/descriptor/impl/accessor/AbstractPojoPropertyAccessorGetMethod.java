@@ -30,36 +30,24 @@ public abstract class AbstractPojoPropertyAccessorGetMethod extends AbstractPojo
     super(propertyName, propertyType, declaringClass);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AccessibleObject getAccessibleObject() {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorNonArgMode getMode() {
 
     return PojoPropertyAccessorNonArgMode.GET;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
     return getPropertyType();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 

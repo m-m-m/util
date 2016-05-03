@@ -41,9 +41,6 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapter extends AbstractP
     this.dependencies = dependencies;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected final PojoPropertyAccessorNonArg getDelegate() {
 

@@ -27,9 +27,6 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
     this.name = propertyName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
@@ -51,9 +48,6 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
    */
   public abstract PojoPropertyAccessor putAccessor(PojoPropertyAccessor accessor);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

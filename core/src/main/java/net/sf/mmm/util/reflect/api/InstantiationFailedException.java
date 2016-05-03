@@ -43,9 +43,6 @@ public class InstantiationFailedException extends ReflectionException {
     super(nested, createBundle(NlsBundleUtilReflectRoot.class).errorInstantiationFailed(type));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

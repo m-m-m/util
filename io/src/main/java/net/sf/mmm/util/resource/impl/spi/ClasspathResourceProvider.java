@@ -28,25 +28,19 @@ public class ClasspathResourceProvider extends AbstractDataResourceProvider<Clas
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String[] getSchemePrefixes() {
 
     return new String[] { ClasspathResource.SCHEME_PREFIX };
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<ClasspathResource> getResourceType() {
 
     return ClasspathResource.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ClasspathResource createResource(ResourceUri resourceUri) {
 
     return new ClasspathResource(resourceUri.getPath());

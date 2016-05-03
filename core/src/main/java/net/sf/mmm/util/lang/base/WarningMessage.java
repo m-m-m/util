@@ -78,9 +78,6 @@ public class WarningMessage extends AbstractMessage {
     super(code, source, message, null, null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getDetails() {
 
@@ -88,18 +85,12 @@ public class WarningMessage extends AbstractMessage {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 
     return TYPE_WARNING;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public UUID getUuid() {
 

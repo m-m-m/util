@@ -28,9 +28,6 @@ public abstract class AbstractComposedValueConverterFactory extends AbstractLogg
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ComposedValueConverter getDefaultConverter() {
 

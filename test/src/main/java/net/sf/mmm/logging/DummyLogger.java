@@ -24,270 +24,180 @@ public class DummyLogger extends MarkerIgnoringBase {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String s) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String s, Object obj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String s, Object... aobj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String s, Throwable throwable) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String s, Object obj, Object obj1) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String s) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String s, Object obj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String s, Object... aobj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String s, Throwable throwable) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String s, Object obj, Object obj1) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String s) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String s, Object obj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String s, Object... aobj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String s, Throwable throwable) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String s, Object obj, Object obj1) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDebugEnabled() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isErrorEnabled() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isInfoEnabled() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTraceEnabled() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isWarnEnabled() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String s) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String s, Object obj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String s, Object... aobj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String s, Throwable throwable) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String s, Object obj, Object obj1) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String s) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String s, Object obj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String s, Object... aobj) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String s, Throwable throwable) {
 
     // ignore
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String s, Object obj, Object obj1) {
 

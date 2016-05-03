@@ -41,9 +41,6 @@ public class EventBusImpl extends AbstractEventBus {
     super(queueFactory, mapFactory);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void triggerDispatchEvents() {
 

@@ -79,9 +79,6 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     this.descriptorBuilderFactory = descriptorBuilderFactory;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -97,9 +94,6 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked", "null" })
   protected Object getFromPojo(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state) {
@@ -144,9 +138,6 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Object setInPojo(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state,
       Object parentPojo, Object value) {

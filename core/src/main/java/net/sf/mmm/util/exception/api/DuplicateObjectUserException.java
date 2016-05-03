@@ -55,9 +55,6 @@ public class DuplicateObjectUserException extends DuplicateObjectException {
     super(object, key, existing);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

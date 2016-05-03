@@ -52,18 +52,12 @@ public class CliArgumentContainer extends CliParameterContainer {
     return this.argument;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Annotation getParameterAnnotation() {
 
     return this.argument;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getName() {
 
@@ -100,9 +94,6 @@ public class CliArgumentContainer extends CliParameterContainer {
     this.state = state;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public CliContainerStyle getContainerStyle(CliStyle cliStyle) {
 

@@ -142,9 +142,6 @@ public class ClasspathResource extends AbstractDataResource {
     this(somePackage.getName().replace('.', '/') + '/' + filename);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getSchemePrefix() {
 
@@ -172,26 +169,19 @@ public class ClasspathResource extends AbstractDataResource {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isData() {
 
     return (this.url != null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPath() {
 
     return this.path;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public URL getUrl() throws ResourceNotAvailableException {
 
     if (this.url == null) {
@@ -200,26 +190,19 @@ public class ClasspathResource extends AbstractDataResource {
     return this.url;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Date getLastModificationDate() {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getUri() {
 
     return SCHEME_PREFIX + this.path;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DataResource navigate(String resourcePath) {
 
     String newPath;

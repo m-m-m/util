@@ -29,9 +29,6 @@ public class PojoDescriptorImpl<POJO> extends AbstractPojoDescriptorImpl<POJO> {
     super(pojoType, pojoDescriptorBuilder);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public POJO newInstance() {
 

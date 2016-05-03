@@ -122,18 +122,12 @@ public class NlsWriter extends AppendableWriter {
     this.resolver = resolver;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsWriter append(CharSequence csq, int start, int end) throws RuntimeIoException {
 
     return append(csq.subSequence(start, end));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("deprecation")
   @Override
   public NlsWriter append(CharSequence csq) throws RuntimeIoException {

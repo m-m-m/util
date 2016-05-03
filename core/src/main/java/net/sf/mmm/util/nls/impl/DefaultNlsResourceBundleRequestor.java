@@ -28,9 +28,6 @@ public class DefaultNlsResourceBundleRequestor implements NlsResourceBundleReque
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void requestBundlesAsynchron(Runnable callback, String... bundleNames) {
 

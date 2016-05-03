@@ -153,9 +153,6 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public EncodingDetectionReader createUtfDetectionReader(InputStream inputStream, String nonUtfEncoding) {
 
@@ -207,9 +204,6 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
       this.charOffset = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int process(byte[] buffer, int offset, int length) {
 
@@ -293,9 +287,6 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
       this.maybeUtf16 = true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int process(byte[] buffer, int offset, int length) {
 
@@ -561,9 +552,6 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
       this.detectionBuffer = this.inputStream.createLookaheadBuffer();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getEncoding() {
 
@@ -573,9 +561,6 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
       return this.encoding;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() throws IOException {
 
@@ -585,9 +570,6 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int read(char[] buffer, int offset, int length) throws IOException {
 

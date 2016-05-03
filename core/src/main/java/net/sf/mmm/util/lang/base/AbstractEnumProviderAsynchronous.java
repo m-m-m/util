@@ -22,9 +22,6 @@ public abstract class AbstractEnumProviderAsynchronous extends AbstractEnumProvi
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void loadEnumValues(EnumContainer container) {
 

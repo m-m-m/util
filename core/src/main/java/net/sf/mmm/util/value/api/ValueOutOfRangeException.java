@@ -267,9 +267,6 @@ public class ValueOutOfRangeException extends ValueException {
         (minimum == null) ? "\u2212\u221E" : minimum, (maximum == null) ? "+\u221E" : maximum, valueSource);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

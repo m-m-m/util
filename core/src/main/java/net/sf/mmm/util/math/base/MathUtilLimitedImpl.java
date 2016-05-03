@@ -25,9 +25,6 @@ public class MathUtilLimitedImpl extends AbstractLoggableComponent implements Ma
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NumberType<? extends Number> getNumberType(Class<?> numericType) {
 
@@ -52,9 +49,6 @@ public class MathUtilLimitedImpl extends AbstractLoggableComponent implements Ma
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <NUMBER extends Number> NumberType<NUMBER> getNumberTypeGeneric(Class<NUMBER> numericType) {
@@ -62,9 +56,6 @@ public class MathUtilLimitedImpl extends AbstractLoggableComponent implements Ma
     return (NumberType<NUMBER>) getNumberType(numericType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Number toSimplestNumber(Number value) {
 

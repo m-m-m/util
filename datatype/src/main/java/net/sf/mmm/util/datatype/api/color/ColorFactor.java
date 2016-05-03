@@ -53,9 +53,6 @@ public class ColorFactor extends Factor<ColorFactor> {
     super(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected ColorFactor newInstance(double value) {
 

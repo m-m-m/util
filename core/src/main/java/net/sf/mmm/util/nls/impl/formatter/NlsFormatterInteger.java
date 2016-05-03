@@ -30,27 +30,18 @@ public final class NlsFormatterInteger extends SimpleNlsFormatter<Object> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Formatter<Object> createFormatter(Locale locale) {
 
     return FormatterProvider.getIntegerFormatter(locale);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_NUMBER;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStyle() {
 

@@ -24,9 +24,7 @@ public class ValueConverterToArrayOfBoolean extends AbstractConverterToArray<boo
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<boolean[]> getTargetType() {
 
     return boolean[].class;

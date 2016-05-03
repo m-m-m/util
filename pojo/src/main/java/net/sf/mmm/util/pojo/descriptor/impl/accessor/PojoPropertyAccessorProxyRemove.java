@@ -39,36 +39,25 @@ public class PojoPropertyAccessorProxyRemove extends AbstractPojoPropertyAccesso
     this.containerSetAccessor = containerSetAccessor;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorOneArgMode getMode() {
 
     return PojoPropertyAccessorOneArgMode.REMOVE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
     return SimpleGenericTypeImpl.TYPE_VOID;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 
     return void.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, Object argument) {
 
     Object arrayOrCollection = getDelegate().invoke(pojoInstance);

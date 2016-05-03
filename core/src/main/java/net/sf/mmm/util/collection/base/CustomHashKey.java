@@ -63,18 +63,12 @@ public class CustomHashKey<T> extends AbstractHashKey<T> {
     this.hashCodeFunction = hashCodeFunction;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected EqualsChecker<T> getEqualsChecker() {
 
     return this.equalsChecker;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected HashCodeFunction<T> getHashCodeFunction() {
 

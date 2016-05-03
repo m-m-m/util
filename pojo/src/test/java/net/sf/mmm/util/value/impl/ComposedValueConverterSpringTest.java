@@ -13,9 +13,6 @@ import net.sf.mmm.util.value.api.StringValueConverter;
  */
 public class ComposedValueConverterSpringTest extends ComposedValueConverterTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected ComposedValueConverter getComposedValueConverter() {
 

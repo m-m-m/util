@@ -17,14 +17,8 @@ import java.util.Queue;
 @SuppressWarnings("rawtypes")
 public interface QueueFactory extends CollectionFactory<Queue> {
 
-  /**
-   * {@inheritDoc}
-   */
   <E> Queue<E> create();
 
-  /**
-   * {@inheritDoc}
-   */
   <E> Queue<E> create(int capacity);
 
 }

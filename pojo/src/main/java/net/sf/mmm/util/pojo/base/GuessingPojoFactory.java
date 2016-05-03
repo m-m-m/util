@@ -49,9 +49,6 @@ public class GuessingPojoFactory extends DefaultPojoFactory {
     super(collectionFactoryManager);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected <POJO> POJO newInstanceForInterface(Class<POJO> pojoInterface) throws InstantiationFailedException {
 

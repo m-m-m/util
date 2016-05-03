@@ -416,9 +416,6 @@ public class Color extends AbstractSimpleDatatype<Integer> {
     return (getValue().intValue() >> SHIFT_BLUE) & MASK;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -16,14 +16,8 @@ import java.util.SortedSet;
 @SuppressWarnings("rawtypes")
 public interface SortedSetFactory extends CollectionFactory<SortedSet> {
 
-  /**
-   * {@inheritDoc}
-   */
   <E> SortedSet<E> create();
 
-  /**
-   * {@inheritDoc}
-   */
   <E> SortedSet<E> create(int capacity);
 
 }

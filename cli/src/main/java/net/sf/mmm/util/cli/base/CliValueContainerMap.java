@@ -40,17 +40,12 @@ public class CliValueContainerMap extends AbstractCliValueContainerContainer {
     this.map = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object getValue() {
 
     return this.map;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   protected void setValueInternal(Object containerValue) {

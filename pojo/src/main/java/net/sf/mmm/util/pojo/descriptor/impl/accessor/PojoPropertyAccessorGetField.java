@@ -33,9 +33,7 @@ public class PojoPropertyAccessorGetField extends AbstractPojoPropertyAccessorFi
     super(descriptor, dependencies, field);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance) {
 
     try {
@@ -45,9 +43,7 @@ public class PojoPropertyAccessorGetField extends AbstractPojoPropertyAccessorFi
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorNonArgMode getMode() {
 
     return PojoPropertyAccessorNonArgMode.GET;

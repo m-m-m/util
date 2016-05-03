@@ -28,9 +28,7 @@ public class NlsBundleFactoryImpl extends AbstractComponent implements NlsBundle
     this.delegate = GWT.create(NlsBundleFactory.class);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
 
     return this.delegate.createBundle(bundleInterface);

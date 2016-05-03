@@ -52,9 +52,7 @@ public class DetectorStreamProcessorCountX implements DetectorStreamProcessor {
     return this.countX;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException {
 
     while (buffer.hasNext()) {

@@ -89,18 +89,14 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     this.currentArrayView = new CurrentByteArray();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public long skip(long byteCount) {
 
     seek(byteCount, SeekMode.SKIP);
     return byteCount;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public long skip() {
 
     if (this.currentArray == null) {
@@ -127,9 +123,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     return bytesAvailable;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ByteArray getByteArray(int index) {
 
     if (index == 0) {
@@ -139,9 +133,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getByteArrayCount() {
 
     int arrayCount = this.arrayQueue.size();
@@ -151,9 +143,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     return arrayCount;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getBytesAvailable() {
 
     if (this.currentArray == null) {
@@ -166,9 +156,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     return bytesAvailable;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     if (this.currentArray == null) {
@@ -257,9 +245,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public byte next() throws NoSuchElementException {
 
     if (this.currentArray == null) {
@@ -273,9 +259,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public byte peek() throws NoSuchElementException {
 
     if (this.currentArray == null) {
@@ -285,17 +269,13 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void insert(byte... data) {
 
     insert(new ByteArrayImpl(data));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void insert(ByteArray data) {
 
     if (this.currentArray != null) {
@@ -354,17 +334,13 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void remove(long byteCount) {
 
     seek(byteCount, SeekMode.REMOVE);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public long getStreamPosition() {
 
     return this.streamPosition;
@@ -399,9 +375,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int fill(byte[] buffer, int offset, int length) {
 
     if (offset >= buffer.length) {
@@ -445,42 +419,27 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    */
   protected class CurrentByteArray extends AbstractByteArray {
 
-    /**
-     * {@inheritDoc}
-     */
     public byte[] getBytes() {
 
       return DetectorStreamBufferImpl.this.currentArray;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getBytesAvailable() {
 
       return DetectorStreamBufferImpl.this.currentArrayMax - DetectorStreamBufferImpl.this.currentArrayIndex + 1;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public int getMinimumIndex() {
 
       return DetectorStreamBufferImpl.this.currentArrayIndex;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public int getCurrentIndex() {
 
       return DetectorStreamBufferImpl.this.currentArrayIndex;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public int getMaximumIndex() {
 
       return DetectorStreamBufferImpl.this.currentArrayMax;

@@ -36,27 +36,18 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
     this.style = style;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStyle() {
 
     return this.style;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_TYPE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException {

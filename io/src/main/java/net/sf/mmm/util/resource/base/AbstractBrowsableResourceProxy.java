@@ -26,42 +26,27 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected abstract BrowsableResource getDelegate();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterable<? extends BrowsableResource> getChildResources() {
 
     return getDelegate().getChildResources();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterable<? extends BrowsableResource> getChildResources(Filter<? super BrowsableResource> filter) {
 
     return getDelegate().getChildResources(filter);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isFolder() {
 
     return getDelegate().isFolder();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public OutputStream openOutputStream() throws ResourceNotWritableException {
 

@@ -51,9 +51,6 @@ public abstract class AbstractDatatypeSegmentDescriptor<T, V> implements Datatyp
     this.optional = optional;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public V getSegment(T datatype) {
 
@@ -71,36 +68,24 @@ public abstract class AbstractDatatypeSegmentDescriptor<T, V> implements Datatyp
    */
   protected abstract V doGetSegment(T datatype);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
     return this.name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<V> getType() {
 
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isOptional() {
 
     return this.optional;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

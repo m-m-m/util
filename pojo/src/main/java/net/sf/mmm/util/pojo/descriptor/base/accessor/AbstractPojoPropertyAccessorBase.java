@@ -41,17 +41,13 @@ public abstract class AbstractPojoPropertyAccessorBase extends AbstractPojoPrope
     this.propertyType = util.createGenericType(propertyType, descriptor.getPojoType());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getName() {
 
     return this.name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public GenericType<?> getPropertyType() {
 
     return this.propertyType;

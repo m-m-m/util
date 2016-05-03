@@ -38,9 +38,6 @@ public class FilteredIterable<E> implements Iterable<E> {
     this.filter = filter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterator<E> iterator() {
 

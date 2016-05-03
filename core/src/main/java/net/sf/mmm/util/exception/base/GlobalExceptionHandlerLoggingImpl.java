@@ -20,9 +20,6 @@ public class GlobalExceptionHandlerLoggingImpl extends AbstractGlobalExceptionHa
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void handleErrors(Object context, Throwable... errors) {
 

@@ -32,9 +32,6 @@ public class DatatypeDescriptorEnum<T extends Enum<T>> extends AbstractDatatypeD
     this.stringUtil = stringUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected T doCreate(Object... segments) {
 

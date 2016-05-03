@@ -46,9 +46,6 @@ public class PojoPathAccessException extends PojoPathException {
     super(nested, createBundle(NlsBundleUtilPojoRoot.class).errorPojoPathAccess(pojoPath, currentPojoType));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

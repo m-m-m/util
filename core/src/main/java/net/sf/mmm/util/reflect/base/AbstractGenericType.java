@@ -56,9 +56,6 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     return new WrappedTypeVariable(typeVariable);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final boolean equals(Object other) {
 
@@ -82,9 +79,6 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final int hashCode() {
 
@@ -96,9 +90,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     return hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isAssignableFrom(GenericType<?> subType) {
 
     Class<?> upperBound = getRetrievalClass();
@@ -307,9 +299,6 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final String toString() {
 
@@ -326,9 +315,6 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toStringSimple() {
 

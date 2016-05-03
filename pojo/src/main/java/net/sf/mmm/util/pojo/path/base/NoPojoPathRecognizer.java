@@ -25,9 +25,7 @@ public final class NoPojoPathRecognizer implements PojoPathRecognizer {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void recognize(Object pojo, PojoPath currentPath) {
 
     // nothing to do

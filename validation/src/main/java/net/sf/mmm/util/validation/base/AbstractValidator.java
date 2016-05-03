@@ -55,9 +55,6 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
     return getClass().getSimpleName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final ValidationFailure validate(V value) {
 

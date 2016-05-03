@@ -31,9 +31,6 @@ public class CliArgumentReferenceMissingException extends CliException {
         argumentContainer));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

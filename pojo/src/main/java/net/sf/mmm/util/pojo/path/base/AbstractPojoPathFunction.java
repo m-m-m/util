@@ -57,18 +57,12 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VALUE create(IN actual, String functionName, PojoPathContext context) {
 
     throw new NlsUnsupportedOperationException("create", getFunctionDescription(functionName));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VALUE get(IN actual, String functionName, PojoPathContext context) {
 
@@ -76,18 +70,12 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
     throw new NlsUnsupportedOperationException("get", getFunctionDescription(functionName));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VALUE set(IN actual, String functionName, VALUE value, PojoPathContext context) {
 
     throw new NlsUnsupportedOperationException("set", getFunctionDescription(functionName));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   @Override
   public String toString() {

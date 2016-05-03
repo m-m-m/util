@@ -20,9 +20,6 @@ public enum CliStyleHandling {
   /** Accept the according style as normal. */
   OK {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle(Logger logger, RuntimeException exception) {
 
@@ -33,9 +30,6 @@ public enum CliStyleHandling {
   /** Log a debug message on occurrence. */
   DEBUG {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle(Logger logger, RuntimeException exception) {
 
@@ -48,9 +42,6 @@ public enum CliStyleHandling {
   /** Log a warning on occurrence. */
   WARNING {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle(Logger logger, RuntimeException exception) {
 
@@ -61,9 +52,6 @@ public enum CliStyleHandling {
   /** Cause an exception on occurrence. */
   EXCEPTION {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handle(Logger logger, RuntimeException exception) {
 

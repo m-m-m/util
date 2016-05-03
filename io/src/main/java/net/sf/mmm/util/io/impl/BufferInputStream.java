@@ -98,9 +98,6 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close() throws IOException {
 
@@ -128,9 +125,6 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
     return this.eos;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long skip(long skipCount) throws IOException {
 
@@ -148,9 +142,6 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
     return skipped;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read() throws IOException {
 
@@ -166,9 +157,6 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read(byte[] bytes, int offset, int length) throws IOException {
 
@@ -197,18 +185,13 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
     return processed;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int available() throws IOException {
 
     return this.buffer.getBytesAvailable() + this.inStream.available();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public long process(ByteProcessor processor, long length) {
 
     try {
@@ -274,9 +257,6 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
       this.targetOffset = targetOffset;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public int process(byte[] buffer, int offset, int length) {
 
       System.arraycopy(buffer, offset, this.targetBuffer, this.targetOffset, length);

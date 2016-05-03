@@ -63,9 +63,6 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Date getNextDate(Date date, Recurrence recurrence) {
 
@@ -75,9 +72,6 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
     return result.getTime();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Calendar getNextDate(Calendar calendar, Recurrence recurrence) {
 

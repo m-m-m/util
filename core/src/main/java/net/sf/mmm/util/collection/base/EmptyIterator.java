@@ -38,25 +38,19 @@ public class EmptyIterator implements Iterator<Object> {
     return (Iterator<E>) INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object next() {
 
     throw new NoSuchElementException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void remove() {
 
     throw new IllegalStateException();

@@ -65,9 +65,6 @@ public class Red extends Factor<Red> {
     super(byteValue);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Red newInstance(double value) {
 

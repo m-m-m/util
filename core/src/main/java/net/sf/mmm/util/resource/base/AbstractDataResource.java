@@ -30,9 +30,6 @@ public abstract class AbstractDataResource implements DataResource {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -52,9 +49,6 @@ public abstract class AbstractDataResource implements DataResource {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -101,36 +95,24 @@ public abstract class AbstractDataResource implements DataResource {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPath() {
 
     return getUrl().getPath();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getUri() {
 
     return getUrl().toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAvailable() {
 
     return isData();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Boolean isModifiedSince(Date date) {
 
@@ -141,9 +123,6 @@ public abstract class AbstractDataResource implements DataResource {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public OutputStream openOutputStream()
       throws ResourceNotAvailableException, ResourceNotWritableException, RuntimeIoException {
@@ -151,9 +130,6 @@ public abstract class AbstractDataResource implements DataResource {
     throw new ResourceNotWritableException(getUri());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
@@ -182,9 +158,6 @@ public abstract class AbstractDataResource implements DataResource {
     return path.substring(startIndex, endIndex + 1);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

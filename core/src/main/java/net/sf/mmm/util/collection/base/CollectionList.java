@@ -45,9 +45,6 @@ public class CollectionList<E> extends ArrayList<E> {
     return this.delegate;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public E set(int index, E element) {
 
@@ -57,9 +54,6 @@ public class CollectionList<E> extends ArrayList<E> {
     return old;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean add(E element) {
 
@@ -70,9 +64,6 @@ public class CollectionList<E> extends ArrayList<E> {
     return added;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void add(int index, E element) {
 
@@ -80,9 +71,6 @@ public class CollectionList<E> extends ArrayList<E> {
     super.add(index, element);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public E remove(int index) {
 
@@ -91,9 +79,6 @@ public class CollectionList<E> extends ArrayList<E> {
     return element;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean remove(Object o) {
 
@@ -101,9 +86,6 @@ public class CollectionList<E> extends ArrayList<E> {
     return super.remove(o);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean addAll(Collection<? extends E> collection) {
 
@@ -111,9 +93,6 @@ public class CollectionList<E> extends ArrayList<E> {
     return super.addAll(collection);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterator<E> iterator() {
 
@@ -142,17 +121,11 @@ public class CollectionList<E> extends ArrayList<E> {
      */
     private int expectedModCount = CollectionList.this.modCount;
 
-    /**
-     * {@inheritDoc}
-     */
     public boolean hasNext() {
 
       return this.cursor != size();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public E next() {
 
       checkForComodification();
@@ -166,9 +139,6 @@ public class CollectionList<E> extends ArrayList<E> {
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void remove() {
 
       if (this.lastRet == -1) {

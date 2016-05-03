@@ -45,27 +45,18 @@ public class NlsMessagePlain implements NlsMessage {
     this.message = message;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage toNlsMessage() {
 
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getInternationalizedMessage() {
 
     return this.message;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @Deprecated
   public int getArgumentCount() {
@@ -73,18 +64,12 @@ public class NlsMessagePlain implements NlsMessage {
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getArgument(String key) {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @Deprecated
   public Object getArgument(int index) {
@@ -92,54 +77,36 @@ public class NlsMessagePlain implements NlsMessage {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getMessage() {
 
     return this.message;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage() {
 
     return this.message;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage(Locale locale) {
 
     return this.message;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void getLocalizedMessage(Locale locale, Appendable buffer) {
 
     getLocalizedMessage(locale, null, buffer);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
     return this.message;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
@@ -150,9 +117,6 @@ public class NlsMessagePlain implements NlsMessage {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

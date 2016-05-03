@@ -44,9 +44,6 @@ public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefi
     return type.getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final Formatter<TYPE> getFormatter() {
 
@@ -64,18 +61,12 @@ public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefi
     this.formatter = formatter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getValue() {
 
     return getEnumType().getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -92,18 +83,12 @@ public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefi
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isMutable() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isCachable() {
 

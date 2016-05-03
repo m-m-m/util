@@ -17,9 +17,6 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class FieldPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
@@ -30,9 +27,6 @@ public class FieldPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuil
     return builder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isMethodIntrostection() {
 

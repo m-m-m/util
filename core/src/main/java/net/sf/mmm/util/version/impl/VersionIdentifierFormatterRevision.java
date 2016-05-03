@@ -28,9 +28,6 @@ public class VersionIdentifierFormatterRevision extends AbstractVersionIdentifie
     super(stringUtil, prefix, padding);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Number getNumber(VersionIdentifier value) {
 

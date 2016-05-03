@@ -60,45 +60,30 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
     return this.method;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getModifiers() {
 
     return this.method.getModifiers();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AccessibleObject getAccessibleObject() {
 
     return this.method;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getAccessibleObjectName() {
 
     return this.method.getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getDeclaringClass() {
 
     return this.method.getDeclaringClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
@@ -109,9 +94,6 @@ public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPro
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 

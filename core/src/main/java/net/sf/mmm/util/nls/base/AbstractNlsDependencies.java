@@ -38,9 +38,6 @@ public abstract class AbstractNlsDependencies extends AbstractLoggableComponent 
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialized() {
 

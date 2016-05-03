@@ -50,18 +50,12 @@ public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLogga
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoDescriptorBuilder createPrivateFieldDescriptorBuilder() {
 
     return createDescriptorBuilder(null, VisibilityModifier.PRIVATE);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoDescriptorBuilder createPublicMethodDescriptorBuilder() {
 

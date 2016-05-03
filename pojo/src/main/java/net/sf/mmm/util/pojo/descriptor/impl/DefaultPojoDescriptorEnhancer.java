@@ -187,9 +187,6 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
     this.dependencies = dependencies;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -219,9 +216,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
     propertyDescriptor.putAccessor(accessor);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void enhanceDescriptor(AbstractPojoDescriptor<?> descriptor) {
 
     for (AbstractPojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {

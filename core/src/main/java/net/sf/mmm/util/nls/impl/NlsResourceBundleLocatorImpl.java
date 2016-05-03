@@ -93,9 +93,6 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
     this.reflectionUtil = reflectionUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -146,9 +143,6 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<ResourceBundle> findBundles() {
 

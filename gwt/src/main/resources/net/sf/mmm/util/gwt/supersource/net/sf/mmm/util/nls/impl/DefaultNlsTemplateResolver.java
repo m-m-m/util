@@ -29,9 +29,7 @@ public class DefaultNlsTemplateResolver extends AbstractNlsTemplateResolver {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
     // just a dummy, message is already localized by GWT.

@@ -193,9 +193,6 @@ public class PhoneNumber extends AbstractSimpleDatatypeBase<String> {
     return this.phoneNumber;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

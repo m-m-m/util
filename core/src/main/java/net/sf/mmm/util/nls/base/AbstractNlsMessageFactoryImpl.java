@@ -26,36 +26,24 @@ public abstract class AbstractNlsMessageFactoryImpl extends AbstractNlsMessageFa
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments) {
 
     return new NlsMessageImpl(template, messageArguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments) {
 
     return new NlsMessageImpl(internationalizedMessage, messageArguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
     super.doInitialize();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialized() {
 

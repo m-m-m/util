@@ -16,13 +16,7 @@ import java.util.Deque;
 @SuppressWarnings("rawtypes")
 public interface DequeFactory extends CollectionFactory<Deque> {
 
-  /**
-   * {@inheritDoc}
-   */
   <E> Deque<E> create();
 
-  /**
-   * {@inheritDoc}
-   */
   <E> Deque<E> create(int capacity);
 }

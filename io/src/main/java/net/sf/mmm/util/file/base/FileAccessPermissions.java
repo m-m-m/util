@@ -587,18 +587,12 @@ public class FileAccessPermissions implements Cloneable {
     this.maskBits = mask;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
     return this.maskBits;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -615,9 +609,6 @@ public class FileAccessPermissions implements Cloneable {
     return (this.maskBits == otherMask.maskBits);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public FileAccessPermissions clone() {
 
@@ -628,9 +619,6 @@ public class FileAccessPermissions implements Cloneable {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

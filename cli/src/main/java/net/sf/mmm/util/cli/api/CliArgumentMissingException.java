@@ -29,9 +29,6 @@ public class CliArgumentMissingException extends CliException {
     super(createBundle().errorCliArgumentMissing(argument, mode));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

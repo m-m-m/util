@@ -32,9 +32,6 @@ public class ComposedLocalizableFormatter<V> extends AbstractLocalizableFormatte
     this.subFormatters = subFormatters;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(V value, Appendable buffer, Locale locale) throws IOException {
 

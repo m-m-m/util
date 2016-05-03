@@ -39,27 +39,19 @@ public class PojoPropertyAccessorProxySetByKey extends AbstractPojoPropertyAcces
     this.key = key;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorOneArgMode getMode() {
 
     return PojoPropertyAccessorOneArgMode.SET;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected PojoPropertyAccessorTwoArg getDelegate() {
 
     return this.delegate;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, Object argument) throws ReflectionException {
 
     return this.delegate.invoke(pojoInstance, this.key, argument);

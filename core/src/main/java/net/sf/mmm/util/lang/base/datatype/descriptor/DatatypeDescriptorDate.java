@@ -25,9 +25,6 @@ public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
         new MinuteSegment(), new SecondSegment());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Date doCreate(Object... segments) {
 
@@ -61,11 +58,7 @@ public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
       super("year", Integer.class);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Integer doGetSegment(Date datatype) {
+    @Override    protected Integer doGetSegment(Date datatype) {
 
       return Integer.valueOf(datatype.getYear() + 1900);
     }
@@ -83,11 +76,7 @@ public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
       super("month", Integer.class);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Integer doGetSegment(Date datatype) {
+    @Override    protected Integer doGetSegment(Date datatype) {
 
       return Integer.valueOf(datatype.getMonth() + 1);
     }
@@ -105,11 +94,7 @@ public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
       super("day", Integer.class);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Integer doGetSegment(Date datatype) {
+    @Override    protected Integer doGetSegment(Date datatype) {
 
       return Integer.valueOf(datatype.getDate());
     }
@@ -127,11 +112,7 @@ public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
       super("hour", Integer.class, true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Integer doGetSegment(Date datatype) {
+    @Override    protected Integer doGetSegment(Date datatype) {
 
       return Integer.valueOf(datatype.getHours());
     }
@@ -149,11 +130,7 @@ public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
       super("minute", Integer.class, true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Integer doGetSegment(Date datatype) {
+    @Override    protected Integer doGetSegment(Date datatype) {
 
       return Integer.valueOf(datatype.getMinutes());
     }
@@ -171,11 +148,7 @@ public class DatatypeDescriptorDate extends AbstractDatatypeDescriptor<Date> {
       super("second", Integer.class, true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Integer doGetSegment(Date datatype) {
+    @Override    protected Integer doGetSegment(Date datatype) {
 
       return Integer.valueOf(datatype.getSeconds());
     }

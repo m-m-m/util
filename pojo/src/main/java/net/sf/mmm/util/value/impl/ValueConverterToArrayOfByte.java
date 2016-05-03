@@ -24,9 +24,7 @@ public class ValueConverterToArrayOfByte extends AbstractConverterToArray<byte[]
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<byte[]> getTargetType() {
 
     return byte[].class;

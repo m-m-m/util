@@ -115,36 +115,24 @@ public abstract class AbstractResourceBundle extends ResourceBundle {
     return this.reverse.get(object);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Enumeration<String> getKeys() {
 
     return this.bundle.keys();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean containsKey(String key) {
 
     return this.bundle.containsKey(key);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<String> keySet() {
 
     return this.bundle.keySet();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Object handleGetObject(String key) {
 

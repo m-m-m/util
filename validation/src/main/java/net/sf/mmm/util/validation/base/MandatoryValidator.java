@@ -24,18 +24,12 @@ public class MandatoryValidator implements ConstraintValidator<Mandatory, Object
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void initialize(Mandatory constraintAnnotation) {
 
     // nothing to do...
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isValid(Object value, ConstraintValidatorContext context) {
 

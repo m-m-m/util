@@ -37,9 +37,6 @@ public class NodeIterator extends AbstractIterator<Node> {
     // this.index = 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Node findNext() {
 

@@ -18,9 +18,7 @@ public abstract class AbstractCharSequence extends CoreCharSequence {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public CharSequence subSequence(int startPosition, int endPosition) {
 
     if (startPosition < 0) {

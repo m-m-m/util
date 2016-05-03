@@ -39,9 +39,6 @@ public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

@@ -31,25 +31,18 @@ public final class UnboundedWildcardType implements WildcardType {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type[] getLowerBounds() {
 
     return ReflectionUtil.NO_TYPES;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type[] getUpperBounds() {
 
     return ReflectionUtil.NO_TYPES;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object other) {
 
@@ -65,9 +58,6 @@ public final class UnboundedWildcardType implements WildcardType {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -76,9 +66,6 @@ public final class UnboundedWildcardType implements WildcardType {
     return 22474412;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

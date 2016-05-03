@@ -35,9 +35,6 @@ public class SimpleClassHierarchyMap<E> extends AbstractClassHierarchyMap<E> {
     super(mapFactory);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public E put(Class<?> type, E element) {
 

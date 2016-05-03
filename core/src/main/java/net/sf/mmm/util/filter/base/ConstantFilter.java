@@ -31,9 +31,7 @@ public final class ConstantFilter<V> implements Filter<V> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(V value) {
 
     if (this == ACCEPT_ALL_FILTER) {

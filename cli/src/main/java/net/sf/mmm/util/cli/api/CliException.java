@@ -40,9 +40,6 @@ public abstract class CliException extends NlsRuntimeException {
     super(nested, message);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

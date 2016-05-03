@@ -22,9 +22,6 @@ public final class VoidFunction implements Function<Object, Void> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Void apply(Object input) {
 

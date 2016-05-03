@@ -23,17 +23,13 @@ public abstract class AbstractNoPool<E> implements Pool<E> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isEmpty() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void release(E element) {
 
     // do nothing by default

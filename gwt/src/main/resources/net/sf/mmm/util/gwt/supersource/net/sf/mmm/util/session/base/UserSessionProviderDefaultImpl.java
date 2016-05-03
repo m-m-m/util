@@ -33,36 +33,24 @@ public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public UserSession getCurrentSession() {
 
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Principal getUser() {
 
     return this.user;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setUser(Principal user) {
 
     this.user = user;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLogin() {
 
@@ -72,27 +60,18 @@ public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider 
     return this.user.getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Locale getLocale() {
 
     return Locale.getDefault();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setLocale(Locale locale) {
 
     Locale.setDefault(locale);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isFallback() {
 

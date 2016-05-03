@@ -52,9 +52,6 @@ public class BasicUtilImpl implements BasicUtil {
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isEqual(Object o1, Object o2) {
 
@@ -65,9 +62,6 @@ public class BasicUtilImpl implements BasicUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isEqual(Object[] array1, Object[] array2) {
 
@@ -84,9 +78,6 @@ public class BasicUtilImpl implements BasicUtil {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDeepEqual(Object o1, Object o2) {
 
@@ -181,9 +172,6 @@ public class BasicUtilImpl implements BasicUtil {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int findInArray(Object value, Object[] array, boolean checkEqual) {
 
@@ -198,9 +186,6 @@ public class BasicUtilImpl implements BasicUtil {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int findInArray(Object value, Object array, boolean checkEqual) {
 
@@ -218,27 +203,18 @@ public class BasicUtilImpl implements BasicUtil {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isInArray(Object value, Object[] array, boolean checkEqual) {
 
     return (findInArray(value, array, checkEqual) >= 0);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isInArray(Object value, Object array, boolean checkEqual) {
 
     return (findInArray(value, array, checkEqual) >= 0);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean compare(CharIterator charIterator1, CharIterator charIterator2) {
 

@@ -28,9 +28,6 @@ public class RandomUuidFactory implements UuidFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public UUID createUuid() {
 

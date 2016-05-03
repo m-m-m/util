@@ -57,17 +57,13 @@ class NodeValueCharIterator implements CharIterator {
     this.valueLength = this.value.length();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char next() {
 
     while (true) {

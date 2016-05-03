@@ -71,9 +71,6 @@ public class Alpha extends Factor<Alpha> {
     super(byteValue);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Alpha newInstance(double value) {
 

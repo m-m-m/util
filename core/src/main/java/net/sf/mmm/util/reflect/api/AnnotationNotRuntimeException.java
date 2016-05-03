@@ -34,9 +34,6 @@ public class AnnotationNotRuntimeException extends ReflectionException {
     super(createBundle(NlsBundleUtilReflectRoot.class).errorAnnotationNotRuntime(annotation));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -562,9 +562,6 @@ public final class GenericColor extends AbstractDatatype {
     return valueOf(this.red.decrease(factor), this.green.decrease(factor), this.blue.decrease(factor), this.alpha);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -591,9 +588,6 @@ public final class GenericColor extends AbstractDatatype {
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -612,9 +606,6 @@ public final class GenericColor extends AbstractDatatype {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 

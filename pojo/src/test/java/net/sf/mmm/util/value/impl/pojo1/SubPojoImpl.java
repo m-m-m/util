@@ -17,9 +17,7 @@ public class SubPojoImpl implements SubPojo {
 
   private String string;
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public FooEnum getFoo() {
 
     return this.foo;
@@ -30,9 +28,7 @@ public class SubPojoImpl implements SubPojo {
     this.foo = foo;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getInteger() {
 
     return this.integer;
@@ -43,9 +39,7 @@ public class SubPojoImpl implements SubPojo {
     this.integer = integer;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getString() {
 
     return this.string;

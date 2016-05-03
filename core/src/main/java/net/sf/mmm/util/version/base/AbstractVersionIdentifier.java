@@ -38,33 +38,25 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
     this.stringRepresentation = stringRepresentation;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getVersionMajorSegment() {
 
     return getVersionSegment(VERSION_SEGMENT_INDEX_MAJOR);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getVersionMinorSegment() {
 
     return getVersionSegment(VERSION_SEGMENT_INDEX_MINOR);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getVersionMilliSegment() {
 
     return getVersionSegment(VERSION_SEGMENT_INDEX_MILLI);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getVersionMicroSegment() {
 
     return getVersionSegment(VERSION_SEGMENT_INDEX_MICRO);
@@ -307,9 +299,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public final int compareTo(VersionIdentifier otherVersion) {
 
     NlsNullPointerException.checkNotNull(VersionIdentifier.class, otherVersion);
@@ -321,9 +311,6 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final boolean equals(Object other) {
 
@@ -380,9 +367,6 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final int hashCode() {
 
@@ -420,9 +404,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
     return this.hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getValue() {
 
     if (this.stringRepresentation == null) {
@@ -432,9 +414,6 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

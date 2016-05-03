@@ -53,9 +53,6 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     this.targetArrayClass2converterMap = new TargetClass2ConverterMap();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -136,9 +133,6 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     return this.converters;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T> T convert(Object value, Object valueSource, GenericType<T> targetType) {
@@ -385,18 +379,12 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       this.targetType = targetType;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<Object> getSourceType() {
 
       return Object.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<TARGET> getTargetType() {
 
@@ -415,9 +403,6 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       return this.sourceClass2converterMap.put(converter.getSourceType(), converter);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public <T extends TARGET> T convert(Object value, Object valueSource, Class<T> targetClass)
         throws ValueException {
@@ -425,9 +410,6 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       return convert(value, valueSource, getReflectionUtil().createGenericType(targetClass));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public <T extends TARGET> T convert(Object value, Object valueSource, GenericType<T> genericTargetType) {
 
@@ -521,29 +503,18 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       super(mapFactory);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Class<?> getClass(ComposedTargetTypeConverter<?> element) {
+    @Override    protected Class<?> getClass(ComposedTargetTypeConverter<?> element) {
 
       return element.getTargetType();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ComposedTargetTypeConverter<?> put(Class<?> type, ComposedTargetTypeConverter<?> element) {
 
       return super.put(type, element);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isAccepted(Class<?> type) {
+    @Override    protected boolean isAccepted(Class<?> type) {
 
       if (!ComposedValueConverterImpl.this.isAccepted(type)) {
         return false;

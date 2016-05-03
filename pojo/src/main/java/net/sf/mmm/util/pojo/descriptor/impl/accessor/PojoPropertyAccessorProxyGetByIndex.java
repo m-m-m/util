@@ -39,27 +39,19 @@ public class PojoPropertyAccessorProxyGetByIndex extends AbstractPojoPropertyAcc
     this.index = index;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorNonArgMode getMode() {
 
     return PojoPropertyAccessorNonArgMode.GET;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected PojoPropertyAccessorIndexedNonArg getDelegate() {
 
     return this.delegate;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance) throws ReflectionException {
 
     return this.delegate.invoke(pojoInstance, this.index);

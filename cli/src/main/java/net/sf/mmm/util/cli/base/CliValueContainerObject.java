@@ -42,9 +42,7 @@ public class CliValueContainerObject extends AbstractCliValueContainer {
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setValue(String argument) {
 
     CliParameterContainer parameterContainer = getParameterContainer();

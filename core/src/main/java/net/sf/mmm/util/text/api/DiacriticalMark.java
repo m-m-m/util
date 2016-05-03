@@ -43,11 +43,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   ACUTE(UnicodeUtil.ACUTE_ACCENT, UnicodeUtil.COMBINING_ACUTE_ACCENT, "acute accent") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_ACUTE);
       addComposition(UnicodeUtil.LATIN_SMALL_LETTER_AE, UnicodeUtil.LATIN_SMALL_LETTER_AE_WITH_ACUTE);
@@ -108,11 +104,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   BREVE(UnicodeUtil.BREVE, UnicodeUtil.COMBINING_BREVE, "breve") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_BREVE);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_BREVE);
@@ -142,11 +134,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   CARON(UnicodeUtil.CARON, UnicodeUtil.COMBINING_CARON, "caron") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_CARON);
       addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_CARON);
@@ -199,11 +187,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   CEDILLA(UnicodeUtil.CEDILLA, UnicodeUtil.COMBINING_CEDILLA, "cedilla") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_CEDILLA);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_CEDILLA);
@@ -234,11 +218,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   CIRCUMFLEX(UnicodeUtil.CIRCUMFLEX_ACCENT, UnicodeUtil.COMBINING_CIRCUMFLEX_ACCENT, "circumflex accent") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_CIRCUMFLEX);
       addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_CIRCUMFLEX);
@@ -277,11 +257,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   DIAERESIS(UnicodeUtil.DIAERESIS, UnicodeUtil.COMBINING_DIAERESIS, "diaeresis") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_DIAERESIS);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_DIAERESIS);
@@ -333,11 +309,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   DOT_ABOVE(UnicodeUtil.DOT_ABOVE, UnicodeUtil.COMBINING_DOT_ABOVE, "dot above") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_DOT_ABOVE);
       addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_DOT_ABOVE);
@@ -373,11 +345,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   DOT_BELOW(UnicodeUtil.DOT_BELOW, UnicodeUtil.COMBINING_DOT_BELOW, "dot below") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('n', UnicodeUtil.LATIN_SMALL_LETTER_N_WITH_DOT_BELOW);
       addComposition('N', UnicodeUtil.LATIN_CAPITAL_LETTER_N_WITH_DOT_BELOW);
@@ -391,11 +359,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   DOUBLE_ACUTE(UnicodeUtil.DOUBLE_ACUTE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_ACUTE_ACCENT, "double acute accent") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('o', UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_DOUBLE_ACUTE);
       addComposition('u', UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_DOUBLE_ACUTE);
@@ -410,11 +374,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   DOUBLE_GRAVE(UnicodeUtil.DOUBLE_GRAVE_ACCENT, UnicodeUtil.COMBINING_DOUBLE_GRAVE_ACCENT, "double grave accent") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_DOUBLE_GRAVE);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_DOUBLE_GRAVE);
@@ -439,11 +399,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   GRAVE(UnicodeUtil.GRAVE_ACCENT, UnicodeUtil.COMBINING_GRAVE_ACCENT, "grave accent") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_GRAVE);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_GRAVE);
@@ -471,11 +427,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   HOOK_ABOVE(UnicodeUtil.HOOK_ABOVE, UnicodeUtil.COMBINING_HOOK_ABOVE, "hook above") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('b', UnicodeUtil.LATIN_SMALL_LETTER_B_WITH_HOOK);
       addComposition('c', UnicodeUtil.LATIN_SMALL_LETTER_C_WITH_HOOK);
@@ -516,11 +468,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   HORN_ABOVE(UnicodeUtil.HORN, UnicodeUtil.COMBINING_HORN, "horn") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('o', UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_HORN);
       addComposition('u', UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_HORN);
@@ -536,11 +484,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   MACRON(UnicodeUtil.MACRON, UnicodeUtil.COMBINING_MACRON, "macron") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_MACRON);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_MACRON);
@@ -596,11 +540,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   OGONEK(UnicodeUtil.OGONEK, UnicodeUtil.COMBINING_OGONEK, "ogonek") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_OGONEK);
       addComposition('e', UnicodeUtil.LATIN_SMALL_LETTER_E_WITH_OGONEK);
@@ -626,11 +566,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   RING_ABOVE(UnicodeUtil.RING_ABOVE, UnicodeUtil.COMBINING_RING_ABOVE, "ring above") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_RING_ABOVE);
       addComposition('u', UnicodeUtil.LATIN_SMALL_LETTER_U_WITH_RING_ABOVE);
@@ -651,11 +587,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   // SOLIDUS is just an approach for the missing separate character
   SHORT_SOLIDUS_OVERLAY(UnicodeUtil.SOLIDUS, UnicodeUtil.COMBINING_SHORT_SOLIDUS_OVERLAY, "short solidus") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition(UnicodeUtil.LATIN_SMALL_LETTER_O, UnicodeUtil.LATIN_SMALL_LETTER_O_WITH_STROKE);
       addComposition(UnicodeUtil.LATIN_CAPITAL_LETTER_O, UnicodeUtil.LATIN_CAPITAL_LETTER_O_WITH_STROKE);
@@ -672,11 +604,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
   // EN_DASH is just a rough approach for the missing separate character
   SHORT_STROKE_OVERLAY(UnicodeUtil.EN_DASH, UnicodeUtil.COMBINING_SHORT_STROKE_OVERLAY, "short stroke") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition(UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J,
           UnicodeUtil.LATIN_SMALL_LETTER_DOTLESS_J_WITH_STROKE);
@@ -688,11 +616,7 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
    */
   TILDE(UnicodeUtil.TILDE, UnicodeUtil.COMBINING_TILDE, "tilde") {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initialize() {
+    @Override    protected void initialize() {
 
       addComposition('a', UnicodeUtil.LATIN_SMALL_LETTER_A_WITH_TILDE);
       addComposition('i', UnicodeUtil.LATIN_SMALL_LETTER_I_WITH_TILDE);
@@ -805,9 +729,6 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
     return this.combiningCharacter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Character getValue() {
 
@@ -850,9 +771,6 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
     return this.composedCharacters;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

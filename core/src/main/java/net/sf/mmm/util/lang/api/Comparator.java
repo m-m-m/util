@@ -20,18 +20,12 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   /** {@link Comparator} to check if some value is greater than another. */
   GREATER_THAN(">", NlsBundleUtilCoreRoot.INF_GREATER_THAN, false, Boolean.FALSE) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 > arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -42,18 +36,12 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   /** {@link Comparator} to check if some value is greater or equal to another. */
   GREATER_OR_EQUAL(">=", NlsBundleUtilCoreRoot.INF_GREATER_OR_EQUAL, true, Boolean.FALSE) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 >= arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -64,18 +52,12 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   /** {@link Comparator} to check if some value is less than another. */
   LESS_THAN("<", NlsBundleUtilCoreRoot.INF_LESS_THAN, false, Boolean.TRUE) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 < arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -86,18 +68,12 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   /** {@link Comparator} to check if some value is less or equal than another. */
   LESS_OR_EQUAL("<=", NlsBundleUtilCoreRoot.INF_LESS_OR_EQUAL, true, Boolean.TRUE) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 <= arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -110,18 +86,12 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
    */
   EQUAL("==", NlsBundleUtilCoreRoot.INF_EQUAL, true, null) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 == arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -134,18 +104,12 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
    */
   NOT_EQUAL("!=", NlsBundleUtilCoreRoot.INF_NOT_EQUAL, false, null) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean eval(double arg1, double arg2) {
 
       return arg1 != arg2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -303,9 +267,6 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -42,18 +42,12 @@ public final class HashKey<T> extends AbstractHashKey<T> {
     super(object);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected HashCodeFunction<T> getHashCodeFunction() {
 
     return HashCodeFunctionSystemIdentity.getInstance();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected EqualsChecker<T> getEqualsChecker() {
 

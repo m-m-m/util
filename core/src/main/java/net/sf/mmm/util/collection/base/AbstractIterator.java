@@ -49,18 +49,12 @@ public abstract class AbstractIterator<E> implements Iterator<E> {
    */
   protected abstract E findNext();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final boolean hasNext() {
 
     return (this.next != null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final E next() {
 

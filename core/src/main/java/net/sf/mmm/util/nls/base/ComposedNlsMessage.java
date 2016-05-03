@@ -46,9 +46,6 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
     this.arguments = arguments;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getArgument(int index) {
 
@@ -58,27 +55,18 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
     return this.arguments[index];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getArgumentCount() {
 
     return this.arguments.length;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getInternationalizedMessage() {
 
     return "";
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getArgument(String key) {
 
@@ -90,9 +78,6 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("deprecation")
   @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer)

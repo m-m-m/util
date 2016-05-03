@@ -39,9 +39,6 @@ public class ObjectDisposedException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilExceptionRoot.class).errorObjectDisposed(object));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

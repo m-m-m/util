@@ -27,9 +27,6 @@ public class VersionIdentifierFormatterPhase extends AbstractVersionIdentifierFo
     super(prefix, maximumLength);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getString(VersionIdentifier value) {
 

@@ -196,9 +196,6 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
     this.defaultFormatter = defaultFormatter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -269,18 +266,12 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
     return map;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VersionIdentifier createVersionIdentifier(String versionString) throws NlsParseException {
 
     return createVersionIdentifier(versionString, false);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat)
       throws NlsParseException {
@@ -410,9 +401,6 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VersionIdentifierFormatter createFormatter(String formatPattern) {
 
@@ -515,9 +503,6 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VersionIdentifierFormatter createFormatter(String formatPattern, boolean strict) {
 

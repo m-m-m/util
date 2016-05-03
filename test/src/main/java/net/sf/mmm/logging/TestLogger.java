@@ -39,241 +39,181 @@ public class TestLogger extends MarkerIgnoringBase {
     return this.eventList;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void debug(String s) {
 
     this.eventList.add(new LogEvent(LogLevel.DEBUG, s, null));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void debug(String s, Object obj) {
 
     this.eventList.add(new LogEvent(LogLevel.DEBUG, s, null, obj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void debug(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.DEBUG, s, null, aobj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void debug(String s, Throwable throwable) {
 
     this.eventList.add(new LogEvent(LogLevel.DEBUG, s, throwable));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void debug(String s, Object obj, Object obj1) {
 
     this.eventList.add(new LogEvent(LogLevel.DEBUG, s, null, obj, obj1));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void error(String s) {
 
     this.eventList.add(new LogEvent(LogLevel.ERROR, s, null));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void error(String s, Object obj) {
 
     this.eventList.add(new LogEvent(LogLevel.ERROR, s, null, obj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void error(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.ERROR, s, null, aobj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void error(String s, Throwable throwable) {
 
     this.eventList.add(new LogEvent(LogLevel.ERROR, s, throwable));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void error(String s, Object obj, Object obj1) {
 
     this.eventList.add(new LogEvent(LogLevel.ERROR, s, null, obj, obj1));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void info(String s) {
 
     this.eventList.add(new LogEvent(LogLevel.INFO, s, null));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void info(String s, Object obj) {
 
     this.eventList.add(new LogEvent(LogLevel.INFO, s, null, obj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void info(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.INFO, s, null, aobj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void info(String s, Throwable throwable) {
 
     this.eventList.add(new LogEvent(LogLevel.INFO, s, throwable));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void info(String s, Object obj, Object obj1) {
 
     this.eventList.add(new LogEvent(LogLevel.INFO, s, null, obj, obj1));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isDebugEnabled() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isErrorEnabled() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isInfoEnabled() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isTraceEnabled() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isWarnEnabled() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void trace(String s) {
 
     this.eventList.add(new LogEvent(LogLevel.TRACE, s, null));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void trace(String s, Object obj) {
 
     this.eventList.add(new LogEvent(LogLevel.TRACE, s, null, obj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void trace(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.TRACE, s, null, aobj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void trace(String s, Throwable throwable) {
 
     this.eventList.add(new LogEvent(LogLevel.TRACE, s, throwable));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void trace(String s, Object obj, Object obj1) {
 
     this.eventList.add(new LogEvent(LogLevel.TRACE, s, null, obj, obj1));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void warn(String s) {
 
     this.eventList.add(new LogEvent(LogLevel.WARNING, s, null));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void warn(String s, Object obj) {
 
     this.eventList.add(new LogEvent(LogLevel.WARNING, s, null, obj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void warn(String s, Object... aobj) {
 
     this.eventList.add(new LogEvent(LogLevel.WARNING, s, null, aobj));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void warn(String s, Throwable throwable) {
 
     this.eventList.add(new LogEvent(LogLevel.WARNING, s, throwable));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void warn(String s, Object obj, Object obj1) {
 
     this.eventList.add(new LogEvent(LogLevel.WARNING, s, null, obj, obj1));

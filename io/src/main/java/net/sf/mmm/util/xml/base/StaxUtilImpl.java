@@ -138,9 +138,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     this.xmlInputFactory = xmlInputFactory;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -156,9 +153,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public XMLEventReader createXmlEventReader(InputStream inputStream) {
 
@@ -169,9 +163,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public XMLStreamReader createXmlStreamReader(InputStream inputStream) {
 
@@ -182,9 +173,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public XMLStreamReader createXmlStreamReader(DataResource resource, boolean xIncludeAware) throws XmlException {
 
@@ -198,9 +186,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public XMLStreamWriter createXmlStreamWriter(OutputStream out) {
 
@@ -211,9 +196,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public XMLStreamWriter createXmlStreamWriter(Writer writer) {
 
@@ -224,9 +206,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type)
       throws ValueException {
@@ -236,9 +215,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     return getValueConverter().convertValue(value, valueSource, type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type,
       V defaultValue) throws ValueException {
@@ -247,9 +223,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     return getValueConverter().convertValue(value, localAttributeName, type, type, defaultValue);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String readText(XMLStreamReader xmlReader) {
 
@@ -273,9 +246,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void skipOpenElement(XMLStreamReader xmlReader) {
 
@@ -295,9 +265,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void skipOpenElement(XMLEventReader xmlReader) {
 
@@ -317,9 +284,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public XMLEvent nextElement(XMLEventReader xmlReader) {
 
@@ -338,9 +302,6 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getEventTypeName(int eventType) {
 

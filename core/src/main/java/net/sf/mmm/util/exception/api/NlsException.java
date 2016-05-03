@@ -95,27 +95,18 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
     return UuidAccess.getFactory().createUuid();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final UUID getUuid() {
 
     return this.uuid;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final NlsMessage getNlsMessage() {
 
     return this.nlsMessage;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void printStackTrace(Locale locale, Appendable buffer) {
 
@@ -152,9 +143,6 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
     return createCopyViaClone(truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getMessage() {
 
@@ -169,45 +157,30 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage() {
 
     return getNlsMessage().getLocalizedMessage();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage(Locale locale) {
 
     return getNlsMessage().getLocalizedMessage(locale);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void getLocalizedMessage(Locale locale, Appendable appendable) {
 
     getNlsMessage().getLocalizedMessage(locale, appendable);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage toNlsMessage() {
 
     return getNlsMessage();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 
@@ -216,27 +189,18 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isForUser() {
 
     return !isTechnical();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return getClass().getSimpleName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -244,17 +208,13 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
     return toString(Locale.getDefault(), null).toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String toString(Locale locale) {
 
     return toString(locale, null).toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Appendable toString(Locale locale, Appendable appendable) {
 
     Appendable buffer = appendable;

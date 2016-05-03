@@ -82,9 +82,6 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
     this.enforceSerializableForClient = enforceSerializableForClient;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Throwable convertForSerialization(Throwable exception, ExceptionTruncation truncation) {
 
@@ -125,9 +122,6 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
     return serializableException;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Throwable convertForUser(Throwable exception, ExceptionTruncation truncation) {
 
@@ -145,9 +139,6 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
     return nlsThrowable.createCopy(truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Throwable convertForClient(Throwable exception) {
 

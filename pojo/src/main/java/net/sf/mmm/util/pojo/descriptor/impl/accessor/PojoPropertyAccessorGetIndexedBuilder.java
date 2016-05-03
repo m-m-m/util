@@ -45,9 +45,7 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorIndexedNonArg create(Method method, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
@@ -75,18 +73,14 @@ public class PojoPropertyAccessorGetIndexedBuilder extends
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorIndexedNonArg create(Field field, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorIndexedNonArgMode getMode() {
 
     return PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED;

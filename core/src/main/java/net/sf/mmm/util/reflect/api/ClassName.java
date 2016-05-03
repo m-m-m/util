@@ -145,9 +145,6 @@ public class ClassName {
     buffer.append(enclosingSeparator);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -171,9 +168,6 @@ public class ClassName {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -211,9 +205,6 @@ public class ClassName {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

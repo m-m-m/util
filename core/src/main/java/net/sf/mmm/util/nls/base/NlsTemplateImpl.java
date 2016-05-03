@@ -66,9 +66,6 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
     return this.key;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String translate(Locale locale) {
 
@@ -105,9 +102,6 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
     return "unresolved (" + messageId + ")";
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

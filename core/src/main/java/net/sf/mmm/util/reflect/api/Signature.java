@@ -128,18 +128,12 @@ public class Signature {
     return this.signature[position];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
     return this.hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object other) {
 
@@ -160,9 +154,6 @@ public class Signature {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

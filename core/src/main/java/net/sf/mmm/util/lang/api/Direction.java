@@ -18,9 +18,6 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** Direction to the south (down/bottom). */
   SOUTH("S", NlsBundleUtilCoreRoot.INF_SOUTH) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -31,9 +28,6 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** Direction to the east (right). */
   EAST("E", NlsBundleUtilCoreRoot.INF_EAST) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -44,9 +38,6 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** Direction the the west (left). */
   WEST("W", NlsBundleUtilCoreRoot.INF_WEST) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -57,9 +48,6 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** Direction the the north (up/top). */
   NORTH("N", NlsBundleUtilCoreRoot.INF_NORTH) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -70,9 +58,6 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** Direction to the south-east (down/bottom and right). */
   SOUTH_EAST("SE", NlsBundleUtilCoreRoot.INF_SOUTH_EAST) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -83,9 +68,6 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** Direction to the south-west (down/bottom and left). */
   SOUTH_WEST("SW", NlsBundleUtilCoreRoot.INF_SOUTH_WEST) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -96,9 +78,6 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** Direction to the north-east (up/top and right). */
   NORTH_EAST("NE", NlsBundleUtilCoreRoot.INF_NORTH_EAST) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -109,9 +88,6 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   /** Direction to the north-west (up/top and left). */
   NORTH_WEST("NW", NlsBundleUtilCoreRoot.INF_NORTH_WEST) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public NlsMessage toNlsMessage() {
 
@@ -137,18 +113,12 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
     this.title = title;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

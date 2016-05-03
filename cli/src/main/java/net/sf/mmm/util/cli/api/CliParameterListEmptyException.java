@@ -26,9 +26,6 @@ public class CliParameterListEmptyException extends CliException {
     super(createBundle().errorCliParameterListEmpty());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -23,25 +23,19 @@ public abstract class AbstractListFactory implements ListFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<List> getCollectionInterface() {
 
     return List.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public List createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public List createGeneric(int capacity) {
 
     return create(capacity);

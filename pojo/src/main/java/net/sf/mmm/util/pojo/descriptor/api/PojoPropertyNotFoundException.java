@@ -47,9 +47,6 @@ public class PojoPropertyNotFoundException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilPojoRoot.class).errorPojoPropertyNotAccessible(propertyName, pojoType, mode));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

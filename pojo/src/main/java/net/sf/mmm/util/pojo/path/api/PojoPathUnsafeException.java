@@ -33,9 +33,6 @@ public class PojoPathUnsafeException extends PojoPathException {
     super(createBundle(NlsBundleUtilPojoRoot.class).errorPojoPathUnsafe(pojoPath, initialPojoType));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

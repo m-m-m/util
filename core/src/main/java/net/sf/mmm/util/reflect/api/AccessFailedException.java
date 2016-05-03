@@ -46,9 +46,6 @@ public class AccessFailedException extends ReflectionException {
     super(nested, createBundle(NlsBundleUtilReflectRoot.class).errorAccessFailed(type));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

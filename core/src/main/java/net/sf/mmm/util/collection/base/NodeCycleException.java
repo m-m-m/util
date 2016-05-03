@@ -53,9 +53,6 @@ public class NodeCycleException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilCoreRoot.class).errorNodeCycle(cycle, type));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

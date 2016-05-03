@@ -38,9 +38,6 @@ public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFacto
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

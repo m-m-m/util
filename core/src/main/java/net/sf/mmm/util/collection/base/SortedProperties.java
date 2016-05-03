@@ -38,9 +38,6 @@ public class SortedProperties extends Properties {
     super(defaults);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public synchronized Enumeration<Object> keys() {
 
@@ -55,9 +52,6 @@ public class SortedProperties extends Properties {
     return new ArrayIterator<>(keys);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<Object> keySet() {
 

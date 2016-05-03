@@ -35,9 +35,7 @@ public class ConjunctionCharFilter implements CharFilter {
     this.conjunction = conjunction;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(char c) {
 
     for (CharFilter filter : this.filterList) {

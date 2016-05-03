@@ -45,33 +45,24 @@ public abstract class AbstractNlsMessage implements NlsMessage {
     return getArgument(Integer.toString(index));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getArgumentCount() {
 
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getLocalizedMessage() {
 
     return getLocalizedMessage(UserSessionAccess.getUserLocale());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getLocalizedMessage(Locale locale) {
 
     return getLocalizedMessage(locale, (NlsTemplateResolver) null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("deprecation")
   @Override
   public void getLocalizedMessage(Locale locale, Appendable buffer) {
@@ -79,9 +70,6 @@ public abstract class AbstractNlsMessage implements NlsMessage {
     getLocalizedMessage(locale, null, buffer);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("deprecation")
   public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
@@ -90,25 +78,18 @@ public abstract class AbstractNlsMessage implements NlsMessage {
     return result.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getMessage() {
 
     return getLocalizedMessage(LOCALE_ROOT, (NlsTemplateResolver) null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NlsMessage toNlsMessage() {
 
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -42,9 +42,6 @@ public abstract class AbstractNlsBundleFactoryGwt implements NlsBundleFactory {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
 

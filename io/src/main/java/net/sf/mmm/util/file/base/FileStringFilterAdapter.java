@@ -34,9 +34,7 @@ public final class FileStringFilterAdapter implements FileFilter {
     this.filter = filter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(File file) {
 
     String filename = file.getPath().replace('\\', '/');

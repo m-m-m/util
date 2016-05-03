@@ -28,9 +28,6 @@ public class NlsFormatterChoiceNoElseConditionException extends NlsRuntimeExcept
     super(createBundle(NlsBundleUtilCoreRoot.class).errorNlsChoiceNoElse());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

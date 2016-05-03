@@ -57,9 +57,6 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
     this.stringUtil = stringUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -69,25 +66,19 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Enum> getTargetType() {
 
     return Enum.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T extends Enum> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {

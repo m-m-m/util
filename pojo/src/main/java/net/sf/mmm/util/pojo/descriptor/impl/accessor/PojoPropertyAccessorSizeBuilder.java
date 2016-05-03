@@ -44,9 +44,7 @@ public class PojoPropertyAccessorSizeBuilder extends AbstractPojoPropertyAccesso
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
@@ -68,9 +66,7 @@ public class PojoPropertyAccessorSizeBuilder extends AbstractPojoPropertyAccesso
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
@@ -78,9 +74,7 @@ public class PojoPropertyAccessorSizeBuilder extends AbstractPojoPropertyAccesso
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorNonArgMode getMode() {
 
     return PojoPropertyAccessorNonArgMode.GET_SIZE;

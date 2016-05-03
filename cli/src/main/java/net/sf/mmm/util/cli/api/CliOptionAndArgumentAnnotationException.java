@@ -28,18 +28,12 @@ public class CliOptionAndArgumentAnnotationException extends CliException {
     super(createBundle().errorCliOptionAndArgumentAnnotation(property));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return MESSAGE_CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

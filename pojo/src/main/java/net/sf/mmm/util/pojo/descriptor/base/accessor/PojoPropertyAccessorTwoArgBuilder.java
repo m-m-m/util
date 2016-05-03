@@ -13,9 +13,6 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMo
  */
 public interface PojoPropertyAccessorTwoArgBuilder extends PojoPropertyAccessorBuilder<PojoPropertyAccessorTwoArg> {
 
-  /**
-   * {@inheritDoc}
-   */
   PojoPropertyAccessorTwoArgMode getMode();
 
 }

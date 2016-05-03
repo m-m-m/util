@@ -71,9 +71,6 @@ public class DatatypeJsonDeserializers extends SimpleDeserializers {
     this.enumProvider = enumProvider;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public JsonDeserializer<?> findEnumDeserializer(Class<?> type, DeserializationConfig config, BeanDescription beanDesc)
       throws JsonMappingException {
@@ -81,9 +78,6 @@ public class DatatypeJsonDeserializers extends SimpleDeserializers {
     return new EnumTypeJsonDeserializer<>(type, this.enumProvider);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public JsonDeserializer<?> findBeanDeserializer(JavaType type, DeserializationConfig config, BeanDescription beanDesc)

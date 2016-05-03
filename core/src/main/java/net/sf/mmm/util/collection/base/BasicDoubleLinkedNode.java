@@ -26,9 +26,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public BasicDoubleLinkedNode<V> getPrevious() {
 
     return this.previous;
@@ -154,9 +152,6 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isLinked() {
 

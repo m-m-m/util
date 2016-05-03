@@ -22,9 +22,6 @@ public abstract class AbstractSimpleDatatypeBase<V> extends AbstractDatatype imp
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public boolean equals(Object obj) {
@@ -47,9 +44,6 @@ public abstract class AbstractSimpleDatatypeBase<V> extends AbstractDatatype imp
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -64,9 +58,6 @@ public abstract class AbstractSimpleDatatypeBase<V> extends AbstractDatatype imp
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -51,18 +51,12 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     this.pojoDescriptorBuilder = pojoDescriptorBuilder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<POJO> getPojoClass() {
 
     return this.pojoType.getRetrievalClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<POJO> getPojoType() {
 
@@ -77,9 +71,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     return this.pojoDescriptorBuilder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public abstract Collection<? extends AbstractPojoPropertyDescriptor> getPropertyDescriptors();
 
@@ -92,9 +83,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    */
   public abstract PojoPropertyDescriptorImpl getOrCreatePropertyDescriptor(String propertyName);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
       PojoPropertyAccessorMode<ACCESSOR> mode) {
@@ -102,9 +90,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     return getAccessor(property, mode, false);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getProperty(POJO pojo, String property) {
 
@@ -120,9 +105,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public <V> V getProperty(POJO pojo, TypedProperty<V> property) throws PojoPropertyNotFoundException,
@@ -135,9 +117,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object setProperty(POJO pojo, String propertyName, Object value) {
 
@@ -153,9 +132,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public <V> void setProperty(POJO pojo, TypedProperty<V> property, V value) throws PojoPropertyNotFoundException,
@@ -209,9 +185,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     return currentPojo;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getPropertySize(POJO pojo, String propertyName) {
 
@@ -225,18 +198,12 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object addPropertyItem(POJO pojo, String propertyName, Object item) {
 
     return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.ADD, true).invoke(pojo, item);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Boolean removePropertyItem(POJO pojo, String propertyName, Object item) {
 
@@ -247,27 +214,18 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getPropertyItem(POJO pojo, String propertyName, int index) {
 
     return getAccessor(propertyName, PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED).invoke(pojo, index);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object setPropertyItem(POJO pojo, String propertyName, int index, Object item) {
 
     return getAccessor(propertyName, PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED).invoke(pojo, index, item);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyDescriptor getPropertyDescriptor(TypedProperty<?> property) {
 
@@ -297,9 +255,6 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
     return propertyDescriptor;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

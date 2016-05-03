@@ -24,18 +24,12 @@ public class BooleanEnumDefinition extends AbstractSimpleEnumDefinition<Boolean>
     setFormatter(BooleanFormatter.getInstance());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Boolean> getEnumValues() {
 
     return super.getEnumValues();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<Boolean> getEnumType() {
 

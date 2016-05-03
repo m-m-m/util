@@ -31,9 +31,6 @@ public class NonClosingInputStream extends FilterInputStream {
     NlsNullPointerException.checkNotNull(InputStream.class, delegate);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close() throws IOException {
 
@@ -56,11 +53,7 @@ public class NonClosingInputStream extends FilterInputStream {
       super();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void causeException() throws RuntimeException {
+    @Override    protected void causeException() throws RuntimeException {
 
       throw new StreamClosedException();
     }

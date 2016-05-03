@@ -59,9 +59,6 @@ public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

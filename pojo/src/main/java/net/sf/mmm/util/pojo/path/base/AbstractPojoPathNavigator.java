@@ -191,9 +191,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     this.pojoFactory = pojoFactory;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -272,9 +269,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     return masterCache.createState(mode, pojoPath);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object get(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context) {
 
@@ -306,9 +300,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     return getRecursive(pojoPath, context, state);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <TYPE> TYPE get(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context,
@@ -651,9 +642,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     return function;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getType(Type pojoType, String pojoPath, boolean failOnUnsafePath, PojoPathContext context)
       throws PojoPathException, IllegalPojoPathException, PojoPathUnsafeException {
@@ -662,9 +650,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     return getType(genericType, pojoPath, failOnUnsafePath, context);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getType(GenericType<?> pojoType, String pojoPath, boolean failOnUnsafePath,
       PojoPathContext context) {
@@ -683,9 +668,6 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     return path.pojoType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object set(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context, Object value) {
 
@@ -953,18 +935,12 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Map<String, Object> pojo2Map(Object pojo) {
 
     return new PojoPathMap(this, pojo);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Map<String, Object> pojo2Map(Object pojo, PojoPathContext context) {
 

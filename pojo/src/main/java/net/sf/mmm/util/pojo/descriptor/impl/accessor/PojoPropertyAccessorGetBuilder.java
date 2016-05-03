@@ -48,9 +48,7 @@ public class PojoPropertyAccessorGetBuilder extends AbstractPojoPropertyAccessor
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
@@ -74,18 +72,14 @@ public class PojoPropertyAccessorGetBuilder extends AbstractPojoPropertyAccessor
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
     return new PojoPropertyAccessorGetField(descriptor, dependencies, field);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorNonArgMode getMode() {
 
     return PojoPropertyAccessorNonArgMode.GET;

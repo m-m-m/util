@@ -31,27 +31,18 @@ public class ValueConverterEtoToEntity extends AbstractValueConverterToSimilarPo
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<EntityTo> getSourceType() {
 
     return EntityTo.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<PersistenceEntity> getTargetType() {
 
     return PersistenceEntity.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass, Object sourceObject,
       Class<?> sourceClass) {

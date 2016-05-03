@@ -12,9 +12,6 @@ import net.sf.mmm.util.lang.api.BasicUtil;
  */
 public class BasicUtilSpringTest extends BasicUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public BasicUtil getBasicUtil() {
 

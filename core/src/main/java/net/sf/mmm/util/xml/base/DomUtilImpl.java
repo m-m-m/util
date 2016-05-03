@@ -166,9 +166,6 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -231,18 +228,12 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Element getFirstElement(NodeList nodeList) {
 
     return getFirstElement(nodeList, null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Element getFirstElement(NodeList nodeList, String tagName) {
 
@@ -259,18 +250,12 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Element getFirstChildElement(Element element, String tagName) {
 
     return getFirstElement(element.getChildNodes(), tagName);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Element requireFirstChildElement(Element element, String tagName) throws IllegalArgumentException {
 
@@ -282,9 +267,6 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue)
       throws IllegalArgumentException {
@@ -303,18 +285,12 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getNodeText(Node node) {
 
     return getNodeText(node, 0);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getNodeText(Node node, int depth) {
 
@@ -323,9 +299,6 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void getNodeText(Node node, Appendable buffer, int depth) {
 
@@ -359,18 +332,12 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Document createDocument() {
 
     return createDocumentBuilder().newDocument();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Document parseDocument(InputStream inputStream) throws XmlException, IOException {
 
@@ -383,18 +350,12 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Document parseDocument(Reader reader) throws XmlException {
 
     return parseDocument(new InputSource(reader));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Document parseDocument(InputSource inputSource) throws XmlException {
 
@@ -407,27 +368,18 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void writeXml(Node xmlNode, OutputStream outputStream, boolean indent) throws XmlException {
 
     transformXml(new DOMSource(xmlNode), new StreamResult(outputStream), indent);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void writeXml(Node xmlNode, Writer writer, boolean indent) throws XmlException {
 
     transformXml(new DOMSource(xmlNode), new StreamResult(writer), indent);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void transformXml(Source source, Result result, boolean indent) throws XmlException {
 
@@ -438,9 +390,6 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalName(Node node) {
 
@@ -471,9 +420,6 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isEqual(Node node1, Node node2, XmlCompareMode mode) {
 

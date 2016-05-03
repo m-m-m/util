@@ -32,81 +32,61 @@ public abstract class AbstractGenericContextProxy implements GenericContext {
    */
   protected abstract GenericContext getContext();
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object requireVariable(String variableName) throws ValueNotSetException {
 
     return getContext().requireVariable(variableName);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T> T requireVariable(String variableName, Class<T> type) throws ValueNotSetException {
 
     return getContext().requireVariable(variableName, type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T> T requireVariable(Class<T> type) throws ValueNotSetException {
 
     return getContext().requireVariable(type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object getVariable(String variableName) {
 
     return getContext().getVariable(variableName);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T> T getVariable(String variableName, Class<T> type) {
 
     return getContext().getVariable(variableName, type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T> T getVariable(Class<T> type) {
 
     return getContext().getVariable(type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasVariable(String variableName) {
 
     return getContext().hasVariable(variableName);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Set<String> getVariableNames() {
 
     return getContext().getVariableNames();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public MutableGenericContext createChildContext() {
 
     return getContext().createChildContext();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Map<String, Object> toMap() {
 
     return getContext().toMap();

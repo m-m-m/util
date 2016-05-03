@@ -35,9 +35,6 @@ public class DefaultVersionIdentifierFormatter extends AbstractFormatter<Version
     this.iso8601Util = iso8601Util;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(VersionIdentifier value, Appendable buffer) throws IOException {
 

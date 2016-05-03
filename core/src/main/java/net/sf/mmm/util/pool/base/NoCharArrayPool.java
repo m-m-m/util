@@ -26,9 +26,7 @@ public final class NoCharArrayPool extends AbstractNoPool<char[]> implements Cha
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char[] borrow() {
 
     return new char[ARRAY_LENGTH];

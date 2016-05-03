@@ -77,9 +77,6 @@ public class ObjectNotFoundException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorObjectNotFound(object, key));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

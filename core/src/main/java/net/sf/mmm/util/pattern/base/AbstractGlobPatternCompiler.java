@@ -29,9 +29,7 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Pattern compile(String pattern) throws IllegalArgumentException {
 
     String regexPattern = convertPattern(pattern);

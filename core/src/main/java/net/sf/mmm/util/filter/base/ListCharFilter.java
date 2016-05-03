@@ -33,9 +33,7 @@ public class ListCharFilter implements CharFilter {
     this.blacklist = !accept;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(char c) {
 
     for (char currentChar : this.chars) {

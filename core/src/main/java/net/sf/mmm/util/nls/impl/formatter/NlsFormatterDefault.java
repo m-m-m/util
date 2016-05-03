@@ -35,9 +35,6 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("deprecation")
   @Override
   public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
@@ -68,18 +65,12 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
     buffer.append(result);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStyle() {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 

@@ -12,9 +12,6 @@ import net.sf.mmm.util.io.api.EncodingUtil;
  */
 public class EncodingUtilSpringTest extends EncodingUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected EncodingUtil getEncodingUtil() {
 

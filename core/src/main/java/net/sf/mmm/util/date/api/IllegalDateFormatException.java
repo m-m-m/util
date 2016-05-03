@@ -48,9 +48,6 @@ public class IllegalDateFormatException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorIllegalDate(dateString));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

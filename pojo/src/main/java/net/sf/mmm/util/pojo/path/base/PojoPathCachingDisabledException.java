@@ -31,9 +31,6 @@ public class PojoPathCachingDisabledException extends PojoPathException {
     super(createBundle(NlsBundleUtilPojoRoot.class).errorPojoPathCachingDisabled(pojoPath));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

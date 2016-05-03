@@ -69,18 +69,12 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
     this.source = null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDynamic() {
 
     return this.dynamic;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsMessage validateNotNull(V value) {
 

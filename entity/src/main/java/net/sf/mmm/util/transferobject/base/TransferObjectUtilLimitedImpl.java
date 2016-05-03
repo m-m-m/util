@@ -26,9 +26,6 @@ public class TransferObjectUtilLimitedImpl extends AbstractLoggableComponent imp
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <TO extends AbstractTransferObject> TO clone(TO template) {
@@ -37,9 +34,6 @@ public class TransferObjectUtilLimitedImpl extends AbstractLoggableComponent imp
     return (TO) template.clone();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public <TO extends AbstractTransferObject> TO newInstance(TO template) {

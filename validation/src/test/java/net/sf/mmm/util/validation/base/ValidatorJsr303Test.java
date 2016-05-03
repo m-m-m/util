@@ -42,9 +42,6 @@ public class ValidatorJsr303Test extends Assert {
 
     MessageInterpolator interpolator = new ResourceBundleMessageInterpolator() {
 
-      /**
-       * {@inheritDoc}
-       */
       @Override
       public String interpolate(String messageTemplate, Context context) {
 

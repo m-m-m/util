@@ -188,9 +188,6 @@ public class HttpResponse extends HttpMessage {
     this.reasonPhrase = reason;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void writeFirstLine(StringBuffer buffer) {
 

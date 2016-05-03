@@ -26,9 +26,6 @@ public class ImmutableGenericContext extends AbstractGenericContextProxy {
     this.delegate = environment;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected GenericContext getContext() {
 

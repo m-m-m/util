@@ -49,9 +49,7 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getQuoteEscape() {
 
     return this.quoteEscape;
@@ -65,9 +63,7 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
     this.quoteEscape = quoteEscape;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isQuoteEscapeLazy() {
 
     return this.quoteEscapeLazy;
@@ -137,9 +133,7 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
     this.altQuoteEnd = altQuote;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getAltQuoteEscape() {
 
     return this.altQuoteEscape;
@@ -153,9 +147,7 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
     this.altQuoteEscape = altQuoteEscape;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isAltQuoteEscapeLazy() {
 
     return this.altQuoteEscapeLazy;
@@ -169,9 +161,7 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
     this.altQuoteEscapeLazy = altQuoteEscapeLazy;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getEntityStart() {
 
     return this.entityStart;
@@ -185,9 +175,7 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
     this.entityStart = entityStart;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getEntityEnd() {
 
     return this.entityEnd;

@@ -47,9 +47,7 @@ public class PojoPathContextBean implements PojoPathContext {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPathFunctionManager getAdditionalFunctionManager() {
 
     return this.additionalFunctionManager;
@@ -65,9 +63,7 @@ public class PojoPathContextBean implements PojoPathContext {
     this.additionalFunctionManager = additionalFunctionManager;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ComposedValueConverter getAdditionalConverter() {
 
     return this.additionalConverter;
@@ -83,9 +79,7 @@ public class PojoPathContextBean implements PojoPathContext {
     this.additionalConverter = additionalConverter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Map<Object, Object> getCache() {
 
     return this.cache;
@@ -101,9 +95,7 @@ public class PojoPathContextBean implements PojoPathContext {
     this.cache = cache;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Properties getProperties() {
 
     return this.properties;
@@ -119,9 +111,7 @@ public class PojoPathContextBean implements PojoPathContext {
     this.properties = properties;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPathRecognizer getRecognizer() {
 
     return this.recognizer;
@@ -137,9 +127,7 @@ public class PojoPathContextBean implements PojoPathContext {
     this.recognizer = recognizer;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoFactory getPojoFactory() {
 
     return this.pojoFactory;

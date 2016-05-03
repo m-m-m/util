@@ -135,9 +135,6 @@ public class EnglishSingularizer extends AbstractTextTransformer implements Sing
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected List<TransformerRule> getRules() {
 

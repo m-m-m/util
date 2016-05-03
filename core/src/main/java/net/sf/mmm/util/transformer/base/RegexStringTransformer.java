@@ -88,9 +88,7 @@ public class RegexStringTransformer implements Transformer<String> {
     return this.replacement;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String transform(String original) {
 
     Matcher matcher = this.pattern.matcher(original);

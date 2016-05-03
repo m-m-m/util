@@ -18,18 +18,12 @@ public enum ByteOrderMark {
    */
   UTF_8() {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getEncoding() {
 
       return EncodingUtil.ENCODING_UTF_8;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public byte[] getBytes() {
 
@@ -44,18 +38,12 @@ public enum ByteOrderMark {
    */
   UTF_16_BE() {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getEncoding() {
 
       return EncodingUtil.ENCODING_UTF_16_BE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public byte[] getBytes() {
 
@@ -70,18 +58,12 @@ public enum ByteOrderMark {
    */
   UTF_16_LE() {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getEncoding() {
 
       return EncodingUtil.ENCODING_UTF_16_LE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public byte[] getBytes() {
 
@@ -96,18 +78,12 @@ public enum ByteOrderMark {
    */
   UTF_32_BE() {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getEncoding() {
 
       return EncodingUtil.ENCODING_UTF_32_BE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public byte[] getBytes() {
 
@@ -122,18 +98,12 @@ public enum ByteOrderMark {
    */
   UTF_32_LE() {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getEncoding() {
 
       return EncodingUtil.ENCODING_UTF_32_LE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public byte[] getBytes() {
 

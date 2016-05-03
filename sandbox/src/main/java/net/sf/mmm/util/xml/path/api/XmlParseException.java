@@ -39,9 +39,6 @@ public class XmlParseException extends NlsRuntimeException {
     super(cause, message);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

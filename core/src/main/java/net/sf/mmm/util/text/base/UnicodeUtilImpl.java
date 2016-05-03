@@ -389,9 +389,6 @@ public class UnicodeUtilImpl extends AbstractLoggableComponent implements Unicod
     instance = this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String normalize2Ascii(char character) {
 
@@ -436,18 +433,12 @@ public class UnicodeUtilImpl extends AbstractLoggableComponent implements Unicod
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String transliterate(char character) {
 
     return TRANSLITERATION_MAP.get(character);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String transliterate(String text) {
 
@@ -468,18 +459,12 @@ public class UnicodeUtilImpl extends AbstractLoggableComponent implements Unicod
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String normalize2Ascii(CharSequence text) {
 
     return normalize2Ascii(text, '?');
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String normalize2Ascii(CharSequence text, char nonNormalizableCharaterReplacement) {
 
@@ -504,9 +489,6 @@ public class UnicodeUtilImpl extends AbstractLoggableComponent implements Unicod
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDash(char character) {
 
@@ -526,9 +508,6 @@ public class UnicodeUtilImpl extends AbstractLoggableComponent implements Unicod
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isHyphen(char character) {
 
@@ -544,9 +523,6 @@ public class UnicodeUtilImpl extends AbstractLoggableComponent implements Unicod
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isMinus(char character) {
 

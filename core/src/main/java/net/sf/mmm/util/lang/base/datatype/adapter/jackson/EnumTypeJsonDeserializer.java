@@ -66,9 +66,6 @@ public class EnumTypeJsonDeserializer<T> extends JsonDeserializer<T> {
     this.enumProvider = enumProvider;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public T deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 

@@ -36,9 +36,6 @@ public class ResourceBundleControlUtf8WithNlsBundleSupport extends ResourceBundl
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)

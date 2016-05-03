@@ -27,9 +27,6 @@ public class PojoDescriptorGeneratorConfigurationImpl implements PojoDescriptorG
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isPojoTypeSupported(JClassType type, TypeOracle typeOracle) {
 
@@ -54,9 +51,6 @@ public class PojoDescriptorGeneratorConfigurationImpl implements PojoDescriptorG
     return this.markerType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public JClassType getSupportedSuperType(JClassType type, TypeOracle typeOracle) {
 
@@ -88,9 +82,6 @@ public class PojoDescriptorGeneratorConfigurationImpl implements PojoDescriptorG
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPojoTypeDescription() {
 

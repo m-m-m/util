@@ -27,9 +27,7 @@ public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> extends Abstr
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public final <T extends TARGET> T convert(SOURCE value, Object valueSource, GenericType<T> targetType) {
 
     return convert(value, valueSource, targetType.getRetrievalClass());

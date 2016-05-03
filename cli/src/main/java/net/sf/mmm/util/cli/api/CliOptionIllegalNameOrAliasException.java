@@ -30,18 +30,12 @@ public class CliOptionIllegalNameOrAliasException extends CliException {
     super(createBundle().errorCliOptionNameIllegal(option, nameOrAlias));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return MESSAGE_CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

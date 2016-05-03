@@ -24,54 +24,34 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
   /** The {@link NumberTypeImpl} for {@link AtomicLong}. */
   public static final NumberTypeImpl<AtomicLong> ATOMIC_LONG = new NumberTypeImpl<AtomicLong>(4, null, null) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<AtomicLong> getNumberClass() {
 
       return AtomicLong.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AtomicLong convert(Number number) {
+    @Override    protected AtomicLong convert(Number number) {
 
       return new AtomicLong(number.longValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AtomicLong parse(String number) throws NumberFormatException {
+    @Override    protected AtomicLong parse(String number) throws NumberFormatException {
 
       return new AtomicLong(Long.parseLong(number));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public AtomicLong getMinimumValue() {
 
       return new AtomicLong(Long.MIN_VALUE);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public AtomicLong getMaximumValue() {
 
@@ -83,54 +63,34 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
   /** The {@link NumberTypeImpl} for {@link AtomicInteger}. */
   public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3, null, null) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<AtomicInteger> getNumberClass() {
 
       return AtomicInteger.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AtomicInteger convert(Number number) {
+    @Override    protected AtomicInteger convert(Number number) {
 
       return new AtomicInteger(number.intValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected AtomicInteger parse(String number) throws NumberFormatException {
+    @Override    protected AtomicInteger parse(String number) throws NumberFormatException {
 
       return new AtomicInteger(Integer.parseInt(number));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public AtomicInteger getMinimumValue() {
 
       return new AtomicInteger(Integer.MIN_VALUE);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public AtomicInteger getMaximumValue() {
 
@@ -171,9 +131,6 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NumberType<? extends Number> getNumberType(Class<?> numericType) {
 

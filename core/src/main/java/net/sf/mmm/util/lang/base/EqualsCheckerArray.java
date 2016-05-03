@@ -36,9 +36,6 @@ public class EqualsCheckerArray extends AbstractEqualsChecker<Object> {
     this.delegate = delegate;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isEqualNotNull(Object value1, Object value2) {
 

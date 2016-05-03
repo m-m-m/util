@@ -45,18 +45,12 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String createClassName(JClassType inputType) {
 
     return inputType.getName() + "_PojoDescriptorGwt";
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateImportStatements(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -72,9 +66,6 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
     sourceComposerFactory.addImport(PojoPropertyDescriptorImpl.class.getName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateClassDeclaration(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -82,9 +73,6 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
     sourceComposerFactory.setSuperclass(AbstractPojoDescriptorImpl.class.getSimpleName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateClassContents(JClassType inputType, TreeLogger logger, SourceWriter sourceWriter,
       String simpleName, GeneratorContext context) {
@@ -185,9 +173,6 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
     return descriptor;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getVersionId() {
 

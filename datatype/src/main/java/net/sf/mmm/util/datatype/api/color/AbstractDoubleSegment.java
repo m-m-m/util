@@ -51,18 +51,12 @@ public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<S
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public double getValueAsFactor() {
 
     return getValue().doubleValue() / getMaximumValue().doubleValue();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Double getMinimumValue() {
 

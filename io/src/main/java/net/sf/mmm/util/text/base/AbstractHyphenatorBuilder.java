@@ -39,9 +39,6 @@ public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponen
     this.hyphenatorCache = new ConcurrentHashMap<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -53,17 +50,13 @@ public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponen
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Hyphenator getHyphenator() {
 
     return getHyphenator(Locale.getDefault());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Hyphenator getHyphenator(Locale locale) {
 
     Hyphenator hyphenator = null;

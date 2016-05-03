@@ -65,9 +65,6 @@ public class Blue extends Factor<Blue> {
     super(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Blue newInstance(double value) {
 

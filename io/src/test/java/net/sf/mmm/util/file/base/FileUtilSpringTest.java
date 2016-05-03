@@ -12,9 +12,6 @@ import net.sf.mmm.util.file.api.FileUtil;
  */
 public class FileUtilSpringTest extends FileUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected FileUtil getFileUtil() {
 

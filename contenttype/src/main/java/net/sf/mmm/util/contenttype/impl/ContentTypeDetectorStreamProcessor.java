@@ -41,9 +41,7 @@ public class ContentTypeDetectorStreamProcessor implements DetectorStreamProcess
     this.contentTypes = contentTypes;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos)
       throws IOException {
 

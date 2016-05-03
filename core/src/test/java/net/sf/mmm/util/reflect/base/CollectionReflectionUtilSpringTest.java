@@ -13,9 +13,6 @@ import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 @SuppressWarnings("all")
 public class CollectionReflectionUtilSpringTest extends CollectionReflectionUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public CollectionReflectionUtil getCollectionReflectionUtil() {
 

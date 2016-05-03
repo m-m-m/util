@@ -49,9 +49,6 @@ public class ValidationStateFailureCollector extends AbstractValidationStateColl
     this.failureList = new LinkedList<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void onFailure(ValidationFailure failure) {
 
@@ -59,9 +56,6 @@ public class ValidationStateFailureCollector extends AbstractValidationStateColl
     this.failureList.add(failure);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isValid() {
 
@@ -80,9 +74,6 @@ public class ValidationStateFailureCollector extends AbstractValidationStateColl
     return this.failureList;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

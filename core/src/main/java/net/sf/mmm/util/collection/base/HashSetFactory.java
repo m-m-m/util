@@ -19,26 +19,19 @@ public class HashSetFactory extends AbstractSetFactory {
   /** The singleton instance. */
   public static final SetFactory INSTANCE = new HashSetFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<HashSet> getCollectionImplementation() {
 
     return HashSet.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> Set<E> create() {
 
     return new HashSet<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> Set<E> create(int capacity) {
 
     return new HashSet<>(capacity);

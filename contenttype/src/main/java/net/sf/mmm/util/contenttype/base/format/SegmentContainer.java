@@ -70,9 +70,6 @@ public abstract class SegmentContainer extends Segment {
     return this.segments.size();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMinimumLength() {
 
@@ -106,9 +103,6 @@ public abstract class SegmentContainer extends Segment {
     return aggregated + next;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMaximumLength() {
 
@@ -149,9 +143,6 @@ public abstract class SegmentContainer extends Segment {
     return aggregated + next;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doValidate(StringBuilder source) {
 
@@ -167,9 +158,6 @@ public abstract class SegmentContainer extends Segment {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void validateNonRecursive(StringBuilder source) {
 

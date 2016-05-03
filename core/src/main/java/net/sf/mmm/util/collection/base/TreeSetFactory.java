@@ -19,26 +19,19 @@ public class TreeSetFactory extends AbstractSortedSetFactory {
   /** The singleton instance. */
   public static final SortedSetFactory INSTANCE = new TreeSetFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<TreeSet> getCollectionImplementation() {
 
     return TreeSet.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> SortedSet<E> create() {
 
     return new TreeSet<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> SortedSet<E> create(int capacity) {
 
     // capacity does NOT make sense here...

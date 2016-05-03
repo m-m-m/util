@@ -31,45 +31,30 @@ public abstract class AbstractGenericEntity<ID> implements MutableGenericEntity<
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ID getId() {
 
     return this.id;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setId(ID id) {
 
     this.id = id;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getModificationCounter() {
 
     return this.modificationCounter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setModificationCounter(int version) {
 
     this.modificationCounter = version;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -80,9 +65,6 @@ public abstract class AbstractGenericEntity<ID> implements MutableGenericEntity<
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 

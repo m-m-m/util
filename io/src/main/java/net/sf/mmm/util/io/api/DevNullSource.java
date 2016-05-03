@@ -26,9 +26,6 @@ public final class DevNullSource extends InputStream {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read() throws IOException {
 

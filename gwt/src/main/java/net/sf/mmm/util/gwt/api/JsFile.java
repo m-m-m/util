@@ -22,18 +22,12 @@ public class JsFile extends JsBlob implements FileItem {
 
   //formatter:off
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final Object getId() {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final native String getName() /*-{
     return this.name;

@@ -23,9 +23,7 @@ public class FastStringHasher extends AbstractStringHasher {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getHashCode(char[] string, int start, int end) {
 
     int hash = 0;
@@ -35,9 +33,6 @@ public class FastStringHasher extends AbstractStringHasher {
     return hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getHashCode(CharSequence string, int start, int end) {
 
@@ -50,9 +45,6 @@ public class FastStringHasher extends AbstractStringHasher {
     return hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int[] getHashCodes(char[] string, int length, int stringStart, int stringEnd) {
 

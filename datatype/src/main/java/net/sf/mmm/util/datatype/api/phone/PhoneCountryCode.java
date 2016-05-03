@@ -100,9 +100,6 @@ public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
     return getValue().intValue();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

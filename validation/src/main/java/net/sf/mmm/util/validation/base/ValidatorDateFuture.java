@@ -34,9 +34,6 @@ public class ValidatorDateFuture extends AbstractValueValidator<Date> {
     return CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsMessage validateNotNull(Date value) {
 

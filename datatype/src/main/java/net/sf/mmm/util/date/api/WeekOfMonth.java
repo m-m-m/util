@@ -45,17 +45,12 @@ public enum WeekOfMonth implements SimpleDatatype<Integer> {
     this.title = title;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Integer getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

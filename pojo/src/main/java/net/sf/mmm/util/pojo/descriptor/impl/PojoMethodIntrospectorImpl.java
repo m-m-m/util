@@ -39,9 +39,6 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
     super(visibility, acceptStatic);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterator<Method> findMethods(Class<?> pojoType) {
 
@@ -108,11 +105,7 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
       findFirst();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Method findNext() {
+    @Override    protected Method findNext() {
 
       Method next = null;
       while (this.index < this.methods.length) {

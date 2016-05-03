@@ -68,36 +68,24 @@ public class ArrayIterator<E> implements Enumeration<E>, Iterator<E> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean hasMoreElements() {
 
     return hasNext();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean hasNext() {
 
     return this.index < this.stopIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public E nextElement() {
 
     return next();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public E next() {
 
@@ -107,9 +95,6 @@ public class ArrayIterator<E> implements Enumeration<E>, Iterator<E> {
     return this.array[this.index++];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void remove() {
 

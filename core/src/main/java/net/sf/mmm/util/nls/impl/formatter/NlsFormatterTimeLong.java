@@ -26,9 +26,6 @@ public class NlsFormatterTimeLong extends NlsFormatterTime {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStyle() {
 

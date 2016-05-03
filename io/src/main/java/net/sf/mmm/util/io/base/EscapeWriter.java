@@ -61,9 +61,6 @@ public class EscapeWriter extends Writer {
     this.characterEscapingTable = charEscapeTable;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
 
@@ -99,18 +96,12 @@ public class EscapeWriter extends Writer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void flush() throws IOException {
 
     this.writer.flush();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close() throws IOException {
 

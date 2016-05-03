@@ -31,9 +31,6 @@ public class EventListenerIgnore implements EventListener<Object> {
     return (EventListener<E>) INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void handleEvent(Object event) {
 

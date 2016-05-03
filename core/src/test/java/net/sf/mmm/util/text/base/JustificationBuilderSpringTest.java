@@ -13,9 +13,6 @@ import net.sf.mmm.util.text.api.JustificationBuilder;
  */
 public class JustificationBuilderSpringTest extends JustificationBuilderTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected JustificationBuilder getJustificationBuilder() {
 

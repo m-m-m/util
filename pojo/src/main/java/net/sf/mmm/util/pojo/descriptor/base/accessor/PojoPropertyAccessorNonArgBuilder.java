@@ -13,9 +13,6 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
  */
 public interface PojoPropertyAccessorNonArgBuilder extends PojoPropertyAccessorBuilder<PojoPropertyAccessorNonArg> {
 
-  /**
-   * {@inheritDoc}
-   */
   PojoPropertyAccessorNonArgMode getMode();
 
 }

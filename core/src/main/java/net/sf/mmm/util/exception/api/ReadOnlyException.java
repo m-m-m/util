@@ -78,9 +78,6 @@ public class ReadOnlyException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorReadOnly(object, attribute));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

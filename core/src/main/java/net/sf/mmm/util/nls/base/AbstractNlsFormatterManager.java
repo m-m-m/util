@@ -66,9 +66,6 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialized() {
 
@@ -82,9 +79,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NlsArgument parse(CharSequenceScanner scanner) {
 
     String key = scanner.readWhile(CharFilter.IDENTIFIER_FILTER);
@@ -141,9 +136,6 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
     return getFormatter(formatType, formatStyle);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -174,18 +166,13 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
     this.justificationBuilder = justificationBuilder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   public NlsFormatter<Object> getFormatter() {
 
     return (NlsFormatter<Object>) getFormatter(null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NlsFormatter<?> getFormatter(String formatType) {
 
     return getFormatter(formatType, null);

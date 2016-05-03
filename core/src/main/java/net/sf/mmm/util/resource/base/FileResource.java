@@ -58,27 +58,18 @@ public class FileResource extends AbstractBrowsableResource {
     this(new File(filePath));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getSchemePrefix() {
 
     return SCHEME_PREFIX;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPath() {
 
     return this.file.getAbsolutePath();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getSize() throws ResourceNotAvailableException {
 
@@ -88,9 +79,6 @@ public class FileResource extends AbstractBrowsableResource {
     return this.file.length();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public InputStream openStream() {
 
@@ -101,9 +89,6 @@ public class FileResource extends AbstractBrowsableResource {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public OutputStream openOutputStream() throws ResourceNotWritableException {
 
@@ -114,9 +99,6 @@ public class FileResource extends AbstractBrowsableResource {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public URL getUrl() throws ResourceNotAvailableException {
 
@@ -127,45 +109,30 @@ public class FileResource extends AbstractBrowsableResource {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getUri() {
 
     return SCHEME_PREFIX + this.file.getAbsolutePath();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
     return this.file.getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isData() {
 
     return this.file.exists() && !this.file.isDirectory();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isFolder() {
 
     return this.file.isDirectory();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Date getLastModificationDate() {
 
@@ -176,9 +143,6 @@ public class FileResource extends AbstractBrowsableResource {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public BrowsableResource navigate(String resourcePath) {
 
@@ -186,9 +150,6 @@ public class FileResource extends AbstractBrowsableResource {
     return new FileResource(new File(parent, resourcePath));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterable<BrowsableResource> getChildResources() {
 
@@ -208,9 +169,6 @@ public class FileResource extends AbstractBrowsableResource {
       super();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Iterator<BrowsableResource> iterator() {
 
@@ -247,18 +205,12 @@ public class FileResource extends AbstractBrowsableResource {
       this.index = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean hasNext() {
 
       return (this.index < this.files.length);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public FileResource next() {
 
@@ -268,9 +220,6 @@ public class FileResource extends AbstractBrowsableResource {
       return new FileResource(this.files[this.index++]);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void remove() {
 

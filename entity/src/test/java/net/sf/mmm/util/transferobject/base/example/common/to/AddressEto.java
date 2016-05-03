@@ -42,134 +42,78 @@ public class AddressEto extends EntityTo<Long> implements Address {
     super();
   }
 
-  //
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // protected void copyFrom(Object source) {
-  //
-  // super.copyFrom(source);
-  // Address sourceAddress = (Address) source;
-  // this.city = sourceAddress.getCity();
-  // this.country = sourceAddress.getCountry();
-  // this.houseNumber = sourceAddress.getHouseNumber();
-  // this.state = sourceAddress.getState();
-  // this.street = sourceAddress.getStreet();
-  // this.zip = sourceAddress.getZip();
-  // }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCity() {
 
     return this.city;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setCity(String city) {
 
     this.city = city;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getHouseNumber() {
 
     return this.houseNumber;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setHouseNumber(String houseNumber) {
 
     this.houseNumber = houseNumber;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getState() {
 
     return this.state;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setState(String state) {
 
     this.state = state;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStreet() {
 
     return this.street;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setStreet(String street) {
 
     this.street = street;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getZip() {
 
     return this.zip;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setZip(String zip) {
 
     this.zip = zip;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCountry() {
 
     return this.country;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setCountry(String country) {
 
     this.country = country;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -184,9 +128,6 @@ public class AddressEto extends EntityTo<Long> implements Address {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 

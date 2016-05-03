@@ -413,25 +413,16 @@ public class ComposedValueConverterTest {
 
     public static final Integer MAGIC = Integer.valueOf(42);
 
-    /**
-     * {@inheritDoc}
-     */
     public Class<Foo> getSourceType() {
 
       return Foo.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Class<Object> getTargetType() {
 
       return Object.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public <T> T convert(Foo value, Object valueSource, Class<T> targetClass) {
 
       if ((value != null) && (Integer.class.equals(targetClass))) {

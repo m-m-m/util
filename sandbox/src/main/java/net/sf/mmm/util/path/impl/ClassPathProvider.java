@@ -30,18 +30,12 @@ public class ClassPathProvider extends AbstractLoggableComponent implements Path
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String[] getSchemePrefixes() {
 
     return new String[] { PathUri.SCHEME_PREFIX_CLASSPATH };
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Path createResource(PathUri pathUri) {
 

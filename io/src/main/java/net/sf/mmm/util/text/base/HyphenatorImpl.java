@@ -105,9 +105,7 @@ public class HyphenatorImpl extends AbstractHyphenator {
     return word.toLowerCase(getLocale());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Hyphenation hyphenate(String word) {
 
     if (word.length() <= 1) {
@@ -133,9 +131,6 @@ public class HyphenatorImpl extends AbstractHyphenator {
     return hyphenation;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

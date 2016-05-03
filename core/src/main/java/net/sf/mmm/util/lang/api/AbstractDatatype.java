@@ -21,9 +21,6 @@ public abstract class AbstractDatatype implements Datatype {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public abstract String toString();
 

@@ -50,9 +50,6 @@ public class SystemUtilImpl extends AbstractLoggableComponent implements SystemU
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public SystemInformation getSystemInformation() {
 

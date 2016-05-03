@@ -67,9 +67,6 @@ public abstract class AbstractSpringContainer extends AbstractLoggableComponent 
     this.applicationContext = context;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public <COMPONENT_API> COMPONENT_API get(Class<COMPONENT_API> apiClass) {
@@ -89,9 +86,6 @@ public abstract class AbstractSpringContainer extends AbstractLoggableComponent 
     return component;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <COMPONENT_API> COMPONENT_API get(Class<COMPONENT_API> apiClass, String componentId) {
 
@@ -107,9 +101,6 @@ public abstract class AbstractSpringContainer extends AbstractLoggableComponent 
     return component;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void dispose() {
 
@@ -123,9 +114,6 @@ public abstract class AbstractSpringContainer extends AbstractLoggableComponent 
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDisposed() {
 

@@ -35,9 +35,6 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
     return (AbstractTransferObject) JavaScriptUtil.getInstance().clone(this);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -51,9 +48,6 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -61,9 +55,6 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
     return 1;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final String toString() {
 

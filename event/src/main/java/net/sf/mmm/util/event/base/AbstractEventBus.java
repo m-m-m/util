@@ -86,9 +86,6 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     this.globalExceptionHandler = errorHandler;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <E> void sendEvent(E event) {
 
@@ -233,9 +230,6 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     return dispatcher;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <E> void addListener(Class<E> eventType, EventListener<E> listener) {
 
@@ -250,9 +244,6 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     eventDispatcher.containerList.add(container);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean removeListener(EventListener<?> listener) {
 

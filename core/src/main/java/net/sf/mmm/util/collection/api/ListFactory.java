@@ -16,14 +16,8 @@ import java.util.List;
 @SuppressWarnings("rawtypes")
 public interface ListFactory extends CollectionFactory<List> {
 
-  /**
-   * {@inheritDoc}
-   */
   <E> List<E> create();
 
-  /**
-   * {@inheritDoc}
-   */
   <E> List<E> create(int capacity);
 
 }

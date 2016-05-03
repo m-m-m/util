@@ -44,9 +44,6 @@ public class VersionIdentifierAttributeConverter
     this.versionUtil = versionUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VersionIdentifier convertToEntityAttribute(String value) {
 

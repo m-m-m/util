@@ -65,36 +65,24 @@ public class SecurityErrorUserException extends NlsRuntimeException implements S
     super(copySource, truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public SecurityErrorUserException createCopy(ExceptionTruncation truncation) {
 
     return new SecurityErrorUserException(this, truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isForUser() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

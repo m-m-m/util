@@ -28,9 +28,6 @@ public class FormatterToString<V> extends AbstractFormatter<V> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(V value, Appendable buffer) throws IOException {
 

@@ -96,9 +96,6 @@ public class WrongValueTypeException extends ValueException {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -47,9 +47,7 @@ public abstract class AbstractNlsTemplate extends AbstractLoggableObject impleme
     return nlsDependencies.getMessageFormatterFactory().create(messageTemplate);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer,
       NlsTemplateResolver resolver, NlsDependencies nlsDependencies) throws IOException {
 

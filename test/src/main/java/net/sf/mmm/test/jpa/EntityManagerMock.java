@@ -35,9 +35,6 @@ public class EntityManagerMock implements EntityManager {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Query createQuery(CriteriaUpdate updateQuery) {
 
@@ -45,9 +42,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Query createQuery(CriteriaDelete deleteQuery) {
 
@@ -55,9 +49,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public StoredProcedureQuery createNamedStoredProcedureQuery(String name) {
 
@@ -65,9 +56,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public StoredProcedureQuery createStoredProcedureQuery(String procedureName) {
 
@@ -75,9 +63,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public StoredProcedureQuery createStoredProcedureQuery(String procedureName, Class... resultClasses) {
 
@@ -85,9 +70,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public StoredProcedureQuery createStoredProcedureQuery(String procedureName, String... resultSetMappings) {
 
@@ -95,9 +77,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isJoinedToTransaction() {
 
@@ -105,9 +84,6 @@ public class EntityManagerMock implements EntityManager {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> EntityGraph<T> createEntityGraph(Class<T> rootType) {
 
@@ -115,9 +91,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public EntityGraph<?> createEntityGraph(String graphName) {
 
@@ -125,9 +98,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public EntityGraph<?> getEntityGraph(String graphName) {
 
@@ -135,9 +105,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> List<EntityGraph<? super T>> getEntityGraphs(Class<T> entityClass) {
 
@@ -145,18 +112,12 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void flush() {
 
     // mock
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void clear() {
 
@@ -164,9 +125,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean contains(Object entity) {
 
@@ -174,18 +132,12 @@ public class EntityManagerMock implements EntityManager {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Query createQuery(String qlString) {
 
     return createQuery(qlString, Object.class);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Query createNamedQuery(String name) {
 
@@ -193,9 +145,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Query createNativeQuery(String sqlString, Class resultClass) {
 
@@ -203,9 +152,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close() {
 
@@ -213,9 +159,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> TypedQuery<T> createNamedQuery(String arg0, Class<T> arg1) {
 
@@ -223,9 +166,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Query createNativeQuery(String sqlString) {
 
@@ -233,9 +173,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Query createNativeQuery(String sqlString, String resultSetMapping) {
 
@@ -243,9 +180,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> TypedQuery<T> createQuery(CriteriaQuery<T> arg0) {
 
@@ -253,18 +187,12 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> TypedQuery<T> createQuery(String query, Class<T> resultType) {
 
     return new TypedQueryMock<>(query, resultType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void detach(Object arg0) {
 
@@ -272,9 +200,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T find(Class<T> entityClass, Object primaryKey) {
 
@@ -282,9 +207,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T find(Class<T> arg0, Object arg1, Map<String, Object> arg2) {
 
@@ -292,9 +214,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T find(Class<T> arg0, Object arg1, LockModeType arg2) {
 
@@ -302,9 +221,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T find(Class<T> arg0, Object arg1, LockModeType arg2, Map<String, Object> arg3) {
 
@@ -312,9 +228,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public CriteriaBuilder getCriteriaBuilder() {
 
@@ -322,9 +235,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getDelegate() {
 
@@ -332,9 +242,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public EntityManagerFactory getEntityManagerFactory() {
 
@@ -342,9 +249,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public FlushModeType getFlushMode() {
 
@@ -352,9 +256,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LockModeType getLockMode(Object arg0) {
 
@@ -362,9 +263,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Metamodel getMetamodel() {
 
@@ -372,9 +270,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Map<String, Object> getProperties() {
 
@@ -382,9 +277,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void persist(Object entity) {
 
@@ -392,9 +284,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T merge(T entity) {
 
@@ -402,9 +291,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void remove(Object entity) {
 
@@ -412,9 +298,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T getReference(Class<T> entityClass, Object primaryKey) {
 
@@ -422,9 +305,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setFlushMode(FlushModeType flushMode) {
 
@@ -432,9 +312,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void lock(Object entity, LockModeType lockMode) {
 
@@ -442,9 +319,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void refresh(Object entity) {
 
@@ -452,9 +326,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void joinTransaction() {
 
@@ -462,9 +333,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isOpen() {
 
@@ -472,9 +340,6 @@ public class EntityManagerMock implements EntityManager {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public EntityTransaction getTransaction() {
 
@@ -482,9 +347,6 @@ public class EntityManagerMock implements EntityManager {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void lock(Object arg0, LockModeType arg1, Map<String, Object> arg2) {
 
@@ -492,9 +354,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void refresh(Object arg0, Map<String, Object> arg1) {
 
@@ -502,9 +361,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void refresh(Object arg0, LockModeType arg1) {
 
@@ -512,9 +368,6 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void refresh(Object arg0, LockModeType arg1, Map<String, Object> arg2) {
 
@@ -522,18 +375,12 @@ public class EntityManagerMock implements EntityManager {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setProperty(String arg0, Object arg1) {
 
     // mock
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T unwrap(Class<T> arg0) {
 

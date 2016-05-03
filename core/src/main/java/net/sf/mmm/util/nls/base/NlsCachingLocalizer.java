@@ -117,9 +117,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String localize(Locale locale, String internationalizedMessage, Map<String, Object> arguments) {
 
     NlsTemplate template = this.templatesMap.get(internationalizedMessage);
@@ -134,9 +132,6 @@ public class NlsCachingLocalizer implements NlsLocalizer {
     return message.getLocalizedMessage(locale);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("deprecation")
   public String localize(Locale locale, String internationalizedMessage) {
 

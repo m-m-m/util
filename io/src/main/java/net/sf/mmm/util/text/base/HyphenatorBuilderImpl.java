@@ -85,9 +85,6 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -124,9 +121,6 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Hyphenator createHyphenator(String localeInfix) {
 

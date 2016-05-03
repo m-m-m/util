@@ -71,9 +71,6 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
     super(mapFactory);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -159,9 +156,6 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
     return this.configuration;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected ReflectionUtilLimited getReflectionUtil() {
 
@@ -214,9 +208,6 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
     return added;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected <P> PojoDescriptorImpl<P> createDescriptor(GenericType<P> pojoType) {
 

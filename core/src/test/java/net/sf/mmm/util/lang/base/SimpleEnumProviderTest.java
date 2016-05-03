@@ -153,27 +153,18 @@ public class SimpleEnumProviderTest extends Assert {
       this.isoCode = isoCode;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
 
       return toString();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Continent getCategory() {
 
       return this.continent;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDeprecated() {
 

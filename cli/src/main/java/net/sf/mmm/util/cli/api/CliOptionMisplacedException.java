@@ -28,9 +28,6 @@ public class CliOptionMisplacedException extends CliException {
     super(createBundle().errorCliOptionMisplaced(option));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

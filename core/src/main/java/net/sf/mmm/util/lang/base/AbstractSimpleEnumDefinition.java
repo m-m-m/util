@@ -36,18 +36,12 @@ public abstract class AbstractSimpleEnumDefinition<TYPE> extends AbstractEnumDef
     this.enumValues = Arrays.asList(enumValues);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final EnumDefinition<Void, ?> getCategory() {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<TYPE> getEnumValues() {
 

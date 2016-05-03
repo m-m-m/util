@@ -41,9 +41,6 @@ public class RegexInfixPatternCompiler extends RegexPatternCompiler {
     super(flags);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Pattern compile(String pattern) throws IllegalArgumentException {
 

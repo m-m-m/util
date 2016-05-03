@@ -56,18 +56,12 @@ public class Lightness extends Factor<Lightness> {
     super(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Lightness newInstance(double value) {
 
     return new Lightness(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

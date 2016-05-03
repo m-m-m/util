@@ -60,36 +60,24 @@ public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescripto
     this.requiredSegmentCount = requiredCount;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<T> getDatatype() {
 
     return this.datatype;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<DatatypeSegmentDescriptor<T, ?>> getSegmentDescriptors() {
 
     return this.segmentDescriptorList;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getSegment(T datatypeInstance, int index) {
 
     return this.segmentDescriptorList.get(index).getSegment(datatypeInstance);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public T create(Object... segments) {
 
@@ -120,9 +108,6 @@ public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescripto
    */
   protected abstract T doCreate(Object... segments);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

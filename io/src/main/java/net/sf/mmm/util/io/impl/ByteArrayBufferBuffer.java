@@ -25,9 +25,6 @@ public class ByteArrayBufferBuffer extends AbstractByteArrayBufferBuffer {
     super(buffers);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean fill(InputStream inputStream) throws IOException {
 

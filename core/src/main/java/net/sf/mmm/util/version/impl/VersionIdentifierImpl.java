@@ -129,9 +129,6 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void setStringRepresentation(String stringRepresentation) {
 
@@ -139,9 +136,7 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
     super.setStringRepresentation(stringRepresentation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getVersionSegment(int index) throws IndexOutOfBoundsException {
 
     if (index < 0) {
@@ -152,65 +147,49 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getVersionSegmentCount() {
 
     return this.segments.length;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DevelopmentPhase getPhase() {
 
     return this.phase;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Integer getPhaseNumber() {
 
     return this.phaseNumber;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getPhaseAlias() {
 
     return this.phaseAlias;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isSnapshot() {
 
     return this.snapshot;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Long getRevision() {
 
     return this.revision;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Date getTimestamp() {
 
     return this.timestamp;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getLabel() {
 
     return this.label;

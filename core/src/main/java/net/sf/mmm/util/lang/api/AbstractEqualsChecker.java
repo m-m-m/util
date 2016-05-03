@@ -26,9 +26,6 @@ public abstract class AbstractEqualsChecker<VALUE> implements EqualsChecker<VALU
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final boolean isEqual(VALUE value1, VALUE value2) {
 

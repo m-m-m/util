@@ -57,18 +57,12 @@ public class Saturation extends Factor<Saturation> {
     super(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Saturation newInstance(double value) {
 
     return new Saturation(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

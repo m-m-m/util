@@ -32,36 +32,25 @@ public class PojoPropertyAccessorProxyGetIndexed extends AbstractPojoPropertyAcc
     super(dependencies, containerGetAccessor);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorIndexedNonArgMode getMode() {
 
     return PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
     return getPropertyType();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 
     return getPropertyClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, int index) {
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);

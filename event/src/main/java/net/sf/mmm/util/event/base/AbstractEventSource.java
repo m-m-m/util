@@ -49,17 +49,13 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
     this.listeners = collectionFactory.create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void addListener(L listener) {
 
     this.listeners.add(listener);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean removeListener(L listener) {
 
     return this.listeners.remove(listener);

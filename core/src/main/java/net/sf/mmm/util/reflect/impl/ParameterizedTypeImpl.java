@@ -42,33 +42,24 @@ public class ParameterizedTypeImpl implements ParameterizedType {
     this.actualTypeArguments = typeArguments;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type[] getActualTypeArguments() {
 
     return this.actualTypeArguments.clone();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type getOwnerType() {
 
     return this.ownerType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type getRawType() {
 
     return this.rawType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object other) {
 
@@ -93,9 +84,6 @@ public class ParameterizedTypeImpl implements ParameterizedType {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -109,9 +97,6 @@ public class ParameterizedTypeImpl implements ParameterizedType {
     return hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

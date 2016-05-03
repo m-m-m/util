@@ -57,9 +57,6 @@ public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, D
     this.iso8601Util = iso8601Util;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -69,25 +66,18 @@ public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, D
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Date> getTargetType() {
 
     return Date.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   public <T extends Date> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

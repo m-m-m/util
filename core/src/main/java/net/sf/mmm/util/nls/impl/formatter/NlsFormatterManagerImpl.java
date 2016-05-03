@@ -34,9 +34,6 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -51,9 +48,6 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsFormatter<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
 
@@ -64,9 +58,6 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsFormatter<Object> getSubFormatter(String formatType, String subformat) {
 

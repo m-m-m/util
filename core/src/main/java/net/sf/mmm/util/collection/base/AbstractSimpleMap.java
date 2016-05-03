@@ -27,89 +27,67 @@ public abstract class AbstractSimpleMap<KEY, VALUE> implements Map<KEY, VALUE> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void clear() {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean containsKey(Object key) {
 
     return (get(key) != null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean containsValue(Object value) {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Set<Entry<KEY, VALUE>> entrySet() {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isEmpty() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Set<KEY> keySet() {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public VALUE put(KEY key, VALUE value) {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void putAll(Map<? extends KEY, ? extends VALUE> m) {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public VALUE remove(Object key) {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int size() {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Collection<VALUE> values() {
 
     throw new UnsupportedOperationException();

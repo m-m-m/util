@@ -23,9 +23,6 @@ public abstract class AbstractAttributeReadId<T> implements AttributeReadId<T> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -37,9 +34,6 @@ public abstract class AbstractAttributeReadId<T> implements AttributeReadId<T> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object object) {
 
@@ -61,9 +55,6 @@ public abstract class AbstractAttributeReadId<T> implements AttributeReadId<T> {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

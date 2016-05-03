@@ -75,9 +75,6 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
     this.valueConverter = valueConverter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings(CompilerWarnings.UNCHECKED)
   public <T> T getVariable(String variableName, Class<T> type) {
@@ -92,9 +89,6 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
     throw new WrongValueTypeException(variable, variableName, type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public MutableGenericContext createChildContext() {
 

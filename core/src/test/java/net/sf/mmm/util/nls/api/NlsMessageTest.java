@@ -383,9 +383,6 @@ public class NlsMessageTest {
       this.msgDe = msgDe;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String translate(Locale locale) {
 

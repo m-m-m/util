@@ -33,105 +33,78 @@ public abstract class AbstractDataResourceProxy implements DataResource {
    */
   protected abstract DataResource getDelegate();
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getPath() {
 
     return getDelegate().getPath();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getName() {
 
     return getDelegate().getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public long getSize() {
 
     return getDelegate().getSize();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public URL getUrl() {
 
     return getDelegate().getUrl();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getUri() {
 
     return getDelegate().getUri();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isAvailable() {
 
     return getDelegate().isAvailable();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isData() {
 
     return getDelegate().isData();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DataResource navigate(String relativePath) {
 
     return getDelegate().navigate(relativePath);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public InputStream openStream() {
 
     return getDelegate().openStream();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public OutputStream openOutputStream() {
 
     return getDelegate().openOutputStream();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Boolean isModifiedSince(Date date) {
 
     return getDelegate().isModifiedSince(date);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Date getLastModificationDate() {
 
     return getDelegate().getLastModificationDate();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

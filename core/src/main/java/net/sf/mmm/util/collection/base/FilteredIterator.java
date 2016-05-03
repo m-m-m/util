@@ -44,9 +44,6 @@ public class FilteredIterator<E> extends AbstractIterator<E> {
     findFirst();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected E findNext() {
 

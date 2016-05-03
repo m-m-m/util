@@ -24,9 +24,7 @@ public class NoPojoFieldIntrospector implements PojoFieldIntrospector {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Iterator<Field> findFields(Class<?> pojoType) {
 
     return EmptyIterator.getInstance();

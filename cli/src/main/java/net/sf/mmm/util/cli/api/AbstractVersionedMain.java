@@ -47,9 +47,6 @@ public abstract class AbstractVersionedMain extends AbstractMain {
     return versionNumber;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected int run(CliModeObject mode) throws Exception {
 

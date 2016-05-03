@@ -12,9 +12,6 @@ import net.sf.mmm.util.lang.api.Formatter;
  */
 public interface VersionIdentifierFormatter extends Formatter<VersionIdentifier> {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   String format(VersionIdentifier value);
 

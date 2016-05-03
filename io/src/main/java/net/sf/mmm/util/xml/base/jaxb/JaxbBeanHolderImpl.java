@@ -97,9 +97,7 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
     return this.dataResource;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public synchronized void flush() {
 
     if (!this.allowSave) {
@@ -110,9 +108,7 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public synchronized boolean refresh() {
 
     // Date modificationDate = jaxbBean.getModificationDate();

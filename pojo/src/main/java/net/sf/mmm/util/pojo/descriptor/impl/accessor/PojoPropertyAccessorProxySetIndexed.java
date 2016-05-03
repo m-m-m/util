@@ -41,36 +41,25 @@ public class PojoPropertyAccessorProxySetIndexed extends AbstractPojoPropertyAcc
     this.containerSetAccessor = containerSetAccessor;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorIndexedOneArgMode getMode() {
 
     return PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
     return SimpleGenericTypeImpl.TYPE_VOID;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 
     return void.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, int index, Object item) {
 
     Object arrayOrList = getDelegate().invoke(pojoInstance);

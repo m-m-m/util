@@ -19,26 +19,19 @@ public class ArrayListFactory extends AbstractListFactory {
   /** The default instance creating an {@link java.util.ArrayList}. */
   public static final ListFactory INSTANCE = new ArrayListFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<ArrayList> getCollectionImplementation() {
 
     return ArrayList.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> List<E> create() {
 
     return new ArrayList<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> List<E> create(int capacity) {
 
     return new ArrayList<>(capacity);

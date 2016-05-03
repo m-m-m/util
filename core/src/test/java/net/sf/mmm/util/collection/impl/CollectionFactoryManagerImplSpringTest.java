@@ -12,9 +12,6 @@ import net.sf.mmm.util.component.impl.SpringContainerPool;
  */
 public class CollectionFactoryManagerImplSpringTest extends CollectionFactoryManagerImplTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected CollectionFactoryManager getCollectionFactoryManager() {
 

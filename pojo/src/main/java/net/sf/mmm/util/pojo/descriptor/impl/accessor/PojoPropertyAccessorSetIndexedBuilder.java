@@ -42,9 +42,7 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorIndexedOneArg create(Method method, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
@@ -68,18 +66,14 @@ public class PojoPropertyAccessorSetIndexedBuilder extends
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorIndexedOneArg create(Field field, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorIndexedOneArgMode getMode() {
 
     return PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED;

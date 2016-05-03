@@ -19,26 +19,19 @@ public class ConcurrentLinkedQueueFactory extends AbstractQueueFactory {
   /** The singleton instance. */
   public static final QueueFactory INSTANCE = new ConcurrentLinkedQueueFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<LinkedList> getCollectionImplementation() {
 
     return LinkedList.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> Queue<E> create() {
 
     return new LinkedList<E>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> Queue<E> create(int capacity) {
 
     return new LinkedList<E>(capacity);

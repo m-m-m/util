@@ -22,18 +22,12 @@ public class SegmentEndOfStream extends Segment {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getTagName() {
 
     return XML_TAG;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMinimumLength() {
 

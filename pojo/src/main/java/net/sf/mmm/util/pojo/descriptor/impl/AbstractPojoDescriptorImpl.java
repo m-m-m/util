@@ -60,9 +60,6 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
     this.properties = Collections.unmodifiableCollection(this.propertyMap.values());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyDescriptorImpl getPropertyDescriptor(String propertyName) {
 
@@ -81,9 +78,6 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
     return this.properties;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
@@ -136,9 +130,6 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
     return accessor;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyDescriptorImpl getOrCreatePropertyDescriptor(String propertyName) {
 

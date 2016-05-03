@@ -77,9 +77,7 @@ public class StringTransformerChain implements Transformer<String> {
     this.rules = rules;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String transform(String original) {
 
     return transformRecursive(original, new State());

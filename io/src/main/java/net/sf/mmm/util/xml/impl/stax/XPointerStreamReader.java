@@ -38,9 +38,6 @@ public class XPointerStreamReader extends StreamReaderProxy {
     this.depth = 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int next() throws XMLStreamException {
 

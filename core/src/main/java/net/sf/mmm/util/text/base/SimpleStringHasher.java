@@ -19,9 +19,7 @@ public class SimpleStringHasher extends AbstractStringHasher {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getHashCode(char[] string, int start, int end) {
 
     int hash = 0;

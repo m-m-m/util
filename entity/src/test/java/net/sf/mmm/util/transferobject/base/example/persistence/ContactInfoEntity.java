@@ -40,52 +40,37 @@ public class ContactInfoEntity extends AbstractEntity<Long> implements ContactIn
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getEmail() {
 
     return this.email;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setEmail(String email) {
 
     this.email = email;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPhone() {
 
     return this.phone;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setPhone(String phone) {
 
     this.phone = phone;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getFax() {
 
     return this.fax;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setFax(String fax) {
 
     this.fax = fax;

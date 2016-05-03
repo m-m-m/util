@@ -24,9 +24,7 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggableCompon
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DataResource createDataResource(String resourceUri) throws ResourceUriUndefinedException {
 
     ResourceUri uri = new ResourceUriImpl(resourceUri);
@@ -67,18 +65,11 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggableCompon
       this.delegate = delegate;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected DataResource getDelegate() {
+    @Override    protected DataResource getDelegate() {
 
       return this.delegate;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public DataResource navigate(String relativePath) throws ResourceUriUndefinedException {
 

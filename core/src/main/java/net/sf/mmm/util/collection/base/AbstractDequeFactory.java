@@ -23,25 +23,19 @@ public abstract class AbstractDequeFactory implements DequeFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Deque> getCollectionInterface() {
 
     return Deque.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Deque createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Deque createGeneric(int capacity) {
 
     return create(capacity);

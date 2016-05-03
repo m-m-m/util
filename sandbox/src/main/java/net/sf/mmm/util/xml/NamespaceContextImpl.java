@@ -49,9 +49,6 @@ public class NamespaceContextImpl implements NamespaceContext {
     this.namespace2prefix = new HashMap<String, String>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getNamespaceURI(String prefix) {
 
@@ -62,9 +59,6 @@ public class NamespaceContextImpl implements NamespaceContext {
     return uri;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPrefix(String namespaceURI) {
 
@@ -75,9 +69,6 @@ public class NamespaceContextImpl implements NamespaceContext {
     return prefix;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterator getPrefixes(String namespaceURI) {
 
@@ -126,11 +117,7 @@ public class NamespaceContextImpl implements NamespaceContext {
       findFirst();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String findNext() {
+    @Override    protected String findNext() {
 
       if ((this.parentIterator != null) && (this.parentIterator.hasNext())) {
         return this.parentIterator.next();

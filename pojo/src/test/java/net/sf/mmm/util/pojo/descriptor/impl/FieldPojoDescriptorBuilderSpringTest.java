@@ -14,9 +14,6 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
  */
 public class FieldPojoDescriptorBuilderSpringTest extends FieldPojoDescriptorBuilderTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 

@@ -33,9 +33,7 @@ public class CliOptionNameDefaultFilter implements Filter<String> {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(String name) {
 
     if ((name == null) || (name.length() == 0)) {

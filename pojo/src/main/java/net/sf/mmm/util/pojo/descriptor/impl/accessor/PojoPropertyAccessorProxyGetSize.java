@@ -32,54 +32,37 @@ public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccess
     super(dependencies, containerGetAccessor);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorNonArgMode getMode() {
 
     return PojoPropertyAccessorNonArgMode.GET_SIZE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getPropertyType() {
 
     return SimpleGenericTypeImpl.TYPE_INT;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getPropertyClass() {
 
     return int.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
     return getPropertyType();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 
     return getPropertyClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance) {
 
     Object arrayMapOrCollection = getDelegate().invoke(pojoInstance);

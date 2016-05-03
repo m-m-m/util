@@ -51,9 +51,6 @@ public class PojoPathConversionException extends PojoPathException {
         createBundle(NlsBundleUtilPojoRoot.class).errorPojoPathConversion(pojoPath, pojoType, targetType));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

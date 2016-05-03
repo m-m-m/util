@@ -67,9 +67,6 @@ public class NlsClassCastException extends NlsRuntimeException {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -21,9 +21,6 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getPropertyClass() {
 
@@ -35,9 +32,6 @@ public abstract class AbstractPojoPropertyAccessor implements PojoPropertyAccess
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

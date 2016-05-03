@@ -31,27 +31,18 @@ public final class NlsFormatterNumberPattern extends SimpleNlsFormatter<Object> 
     this.pattern = pattern;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Formatter<Object> createFormatter(Locale locale) {
 
     return FormatterProvider.getNumberFormatter(locale, this.pattern);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_NUMBER;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStyle() {
 

@@ -28,9 +28,6 @@ public class CliOptionDuplicateException extends CliException {
     super(createBundle().errorCliOptionDuplicate(option));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -33,9 +33,6 @@ public class ComposedFormatter<V> extends AbstractFormatter<V> {
     this.subFormatters = subFormatters;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(V value, Appendable buffer) throws IOException {
 

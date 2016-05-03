@@ -38,9 +38,6 @@ public class ConjunctionFilter<V> implements Filter<V> {
     this.conjunction = conjunction;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean accept(V value) {
 

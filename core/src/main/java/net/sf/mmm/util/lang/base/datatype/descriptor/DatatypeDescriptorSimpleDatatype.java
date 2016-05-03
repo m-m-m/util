@@ -53,9 +53,6 @@ public class DatatypeDescriptorSimpleDatatype<T extends SimpleDatatype<?>> exten
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected T doCreate(Object... segments) {
 

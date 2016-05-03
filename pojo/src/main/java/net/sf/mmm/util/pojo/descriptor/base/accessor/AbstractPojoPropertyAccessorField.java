@@ -62,54 +62,36 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
     return this.field;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getModifiers() {
 
     return this.field.getModifiers();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AccessibleObject getAccessibleObject() {
 
     return this.field;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getAccessibleObjectName() {
 
     return this.field.getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getDeclaringClass() {
 
     return this.field.getDeclaringClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
     return getPropertyType();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 

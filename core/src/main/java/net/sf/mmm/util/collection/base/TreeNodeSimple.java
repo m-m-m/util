@@ -73,36 +73,24 @@ public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE
     this.value = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VALUE getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setValue(VALUE value) {
 
     this.value = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void addChild(TreeNodeSimple<VALUE> child) {
 
     super.addChild(child);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void addChild(TreeNodeSimple<VALUE> child, int index) {
 
@@ -133,27 +121,18 @@ public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE
     addChild(new TreeNodeSimple<>(this, childValue), index);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TreeNodeSimple<VALUE> removeChild(int index) {
 
     return super.removeChild(index);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean removeChild(TreeNodeSimple<VALUE> child) {
 
     return super.removeChild(child);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

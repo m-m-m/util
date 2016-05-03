@@ -65,18 +65,12 @@ public class StringUtilImpl implements StringUtil {
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLineSeparator() {
 
     return GwtHelper.getSystemProperty(SYSTEM_PROPERTY_LINE_SEPARATOR);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Boolean parseBoolean(String booleanValue) {
 
@@ -89,9 +83,6 @@ public class StringUtilImpl implements StringUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void replace(char[] string, char oldChar, char newChar) {
 
@@ -102,9 +93,6 @@ public class StringUtilImpl implements StringUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String replace(String string, String match, String replace) {
 
@@ -135,9 +123,6 @@ public class StringUtilImpl implements StringUtil {
     return result.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isSubstring(String string, String substring, int offset) {
 
@@ -151,9 +136,6 @@ public class StringUtilImpl implements StringUtil {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isSubstring(char[] string, String substring, int offset) {
 
@@ -169,18 +151,12 @@ public class StringUtilImpl implements StringUtil {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase) {
 
     return replaceSuffixWithCase(string, suffixLength, newSuffixLowerCase, Locale.ENGLISH);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String replaceSuffixWithCase(String string, int suffixLength, String newSuffixLowerCase, Locale locale) {
 
@@ -225,18 +201,12 @@ public class StringUtilImpl implements StringUtil {
     return result.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isEmpty(String string) {
 
     return isEmpty(string, true);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isEmpty(String string, boolean trim) {
 
@@ -252,9 +222,6 @@ public class StringUtilImpl implements StringUtil {
     return (s.length() == 0);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAllLowerCase(String string) {
 
@@ -268,9 +235,6 @@ public class StringUtilImpl implements StringUtil {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAllUpperCase(String string) {
 
@@ -284,18 +248,12 @@ public class StringUtilImpl implements StringUtil {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String padNumber(long number, int digits) {
 
     return padNumber(number, digits, 10);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String padNumber(long number, int digits, int radix) {
 
@@ -314,18 +272,12 @@ public class StringUtilImpl implements StringUtil {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toCamlCase(String string) {
 
     return toCamlCase(string, SEPARATORS);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toCamlCase(String string, char... separators) {
 
@@ -360,9 +312,6 @@ public class StringUtilImpl implements StringUtil {
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String fromCamlCase(String string, char separator) {
 
@@ -385,9 +334,6 @@ public class StringUtilImpl implements StringUtil {
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public String toSeparatedString(Collection<?> collection, String separator, StringSyntax syntax) {
@@ -396,9 +342,6 @@ public class StringUtilImpl implements StringUtil {
     return toSeparatedString(collection, separator, syntax, formatter);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
       Formatter<E> formatter) {
@@ -408,9 +351,6 @@ public class StringUtilImpl implements StringUtil {
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
       Formatter<E> formatter, Appendable buffer) {
@@ -460,9 +400,6 @@ public class StringUtilImpl implements StringUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<String> fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax) {
 
@@ -471,9 +408,6 @@ public class StringUtilImpl implements StringUtil {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<String> collection) {
@@ -482,9 +416,6 @@ public class StringUtilImpl implements StringUtil {
     fromSeparatedString(separatedString, separator, syntax, collection, identityConverter);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<E> collection, ValueConverter<String, E> converter) {
@@ -492,9 +423,6 @@ public class StringUtilImpl implements StringUtil {
     fromSeparatedString(separatedString, separator, syntax, collection, converter, converter.getTargetType());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
       Collection<E> collection, ValueConverter<? super String, ? super E> converter, Class<E> type) {

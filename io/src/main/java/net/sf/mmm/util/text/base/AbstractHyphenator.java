@@ -35,33 +35,25 @@ public abstract class AbstractHyphenator extends AbstractLoggableComponent imple
     this.hyphen = hyphen;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Hyphenation hyphenate(String text, int start) {
 
     return hyphenate(text.substring(start));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Hyphenation hyphenate(String text, int start, int end) {
 
     return hyphenate(text.substring(start, end));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Locale getLocale() {
 
     return this.locale;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getHyphen() {
 
     return this.hyphen;

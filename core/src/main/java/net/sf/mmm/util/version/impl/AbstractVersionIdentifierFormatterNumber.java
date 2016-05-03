@@ -53,9 +53,6 @@ public abstract class AbstractVersionIdentifierFormatterNumber extends AbstractF
    */
   protected abstract Number getNumber(VersionIdentifier value);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(VersionIdentifier value, Appendable buffer) throws IOException {
 

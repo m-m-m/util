@@ -69,9 +69,7 @@ public class PatternFilterRule implements FilterRule<String> {
     this.result = Boolean.valueOf(resultOnMatch);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Boolean accept(String string) {
 
     Matcher matcher = this.pattern.matcher(string);

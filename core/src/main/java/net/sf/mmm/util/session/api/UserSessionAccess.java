@@ -101,11 +101,7 @@ public final class UserSessionAccess {
       super();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doInitialized() {
+    @Override    protected void doInitialized() {
 
       super.doInitialized();
       setProvider(this);

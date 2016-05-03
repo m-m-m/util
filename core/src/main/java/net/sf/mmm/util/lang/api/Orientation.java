@@ -42,17 +42,12 @@ public enum Orientation implements SimpleDatatype<String> {
     this.title = title;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

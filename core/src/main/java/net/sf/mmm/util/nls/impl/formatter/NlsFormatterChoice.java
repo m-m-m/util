@@ -237,9 +237,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     return comparatorArgument;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException {
 
@@ -258,17 +256,13 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     buffer.append(toString());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_CHOICE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getStyle() {
 
     return null;
@@ -355,9 +349,6 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
       this.comparatorArgument = comparatorArgument;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public boolean accept(Object value) {
 
       if (this.comparator == null) {

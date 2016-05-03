@@ -42,9 +42,6 @@ public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
     super(classLoader);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialized() {
 
@@ -52,9 +49,6 @@ public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
     NlsAccess.setBundleFactory(this);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsMessageFactory getMessageFactory() {
 

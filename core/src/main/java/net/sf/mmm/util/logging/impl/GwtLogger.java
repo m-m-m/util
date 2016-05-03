@@ -28,18 +28,12 @@ public class GwtLogger extends MarkerIgnoringBase {
     this.name = name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTraceEnabled() {
 
     return Log.isTraceEnabled();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String message) {
 
@@ -84,9 +78,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String format, Object arg) {
 
@@ -95,9 +86,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String format, Object arg1, Object arg2) {
 
@@ -106,9 +94,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String format, Object... argArray) {
 
@@ -117,36 +102,24 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void trace(String message, Throwable t) {
 
     Log.trace(message, t);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDebugEnabled() {
 
     return Log.isDebugEnabled();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String message) {
 
     Log.debug(message);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String format, Object arg) {
 
@@ -155,9 +128,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String format, Object arg1, Object arg2) {
 
@@ -166,9 +136,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String format, Object... argArray) {
 
@@ -177,36 +144,24 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void debug(String message, Throwable t) {
 
     Log.debug(message, t);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isInfoEnabled() {
 
     return Log.isInfoEnabled();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String message) {
 
     Log.info(message);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String format, Object arg) {
 
@@ -215,9 +170,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String format, Object arg1, Object arg2) {
 
@@ -226,9 +178,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String format, Object... argArray) {
 
@@ -237,36 +186,24 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void info(String message, Throwable t) {
 
     Log.info(message, t);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isWarnEnabled() {
 
     return Log.isWarnEnabled();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String message) {
 
     Log.warn(message);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String format, Object arg) {
 
@@ -275,9 +212,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String format, Object... argArray) {
 
@@ -286,9 +220,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String format, Object arg1, Object arg2) {
 
@@ -297,36 +228,24 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void warn(String message, Throwable t) {
 
     Log.warn(message, t);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isErrorEnabled() {
 
     return Log.isErrorEnabled();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String message) {
 
     Log.error(message);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String format, Object arg) {
 
@@ -335,9 +254,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String format, Object arg1, Object arg2) {
 
@@ -346,9 +262,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String format, Object... argArray) {
 
@@ -357,9 +270,6 @@ public class GwtLogger extends MarkerIgnoringBase {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void error(String message, Throwable t) {
 

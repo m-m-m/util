@@ -110,9 +110,6 @@ final class XmlInputStream extends InputStream {
     return this.charset;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read() throws IOException {
 
@@ -123,9 +120,6 @@ final class XmlInputStream extends InputStream {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read(byte[] b, int off, int len) throws IOException {
 
@@ -137,9 +131,6 @@ final class XmlInputStream extends InputStream {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close() throws IOException {
 

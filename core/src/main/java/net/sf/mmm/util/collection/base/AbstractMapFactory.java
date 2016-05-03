@@ -23,25 +23,19 @@ public abstract class AbstractMapFactory implements MapFactory<Map> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Map> getMapInterface() {
 
     return Map.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Map createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Map createGeneric(int capacity) {
 
     return create(capacity);

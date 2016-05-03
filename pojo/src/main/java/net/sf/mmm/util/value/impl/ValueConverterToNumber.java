@@ -59,9 +59,6 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
     this.mathUtil = mathUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -84,25 +81,18 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Number> getTargetType() {
 
     return Number.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   public <T extends Number> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

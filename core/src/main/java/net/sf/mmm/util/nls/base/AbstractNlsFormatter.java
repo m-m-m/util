@@ -32,9 +32,7 @@ public abstract class AbstractNlsFormatter<O> extends AbstractLoggableComponent 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver) {
 
     try {

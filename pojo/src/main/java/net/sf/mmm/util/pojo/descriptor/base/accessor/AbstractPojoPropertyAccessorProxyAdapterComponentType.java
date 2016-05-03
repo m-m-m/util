@@ -39,18 +39,12 @@ public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType exte
     assert (this.propertyType != null) : "propertyType is null";
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getPropertyType() {
 
     return this.propertyType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getPropertyClass() {
 

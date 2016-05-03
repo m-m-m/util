@@ -67,75 +67,55 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected GenericType<?> create(Type genericType) {
 
     return new GenericTypeImpl<>(genericType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getDefiningType() {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public GenericType<?> getComponentType() {
 
     return this.componentType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public GenericType<?> getKeyType() {
 
     return this.keyType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type getType() {
 
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<T> getAssignmentClass() {
 
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<T> getRetrievalClass() {
 
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public GenericType<?> getTypeArgument(int index) {
 
     throw new IndexOutOfBoundsException(Integer.toString(index));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getTypeArgumentCount() {
 
     return 0;

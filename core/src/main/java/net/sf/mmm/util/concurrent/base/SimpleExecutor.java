@@ -45,9 +45,6 @@ public class SimpleExecutor implements Executor {
     this.threadFactory = factory;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void execute(Runnable command) {
 

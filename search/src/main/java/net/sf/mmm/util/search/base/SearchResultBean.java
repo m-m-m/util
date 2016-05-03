@@ -56,9 +56,6 @@ public class SearchResultBean<HIT> implements SearchResult<HIT> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isComplete() {
 
@@ -73,9 +70,6 @@ public class SearchResultBean<HIT> implements SearchResult<HIT> {
     this.complete = complete;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<HIT> getHits() {
 

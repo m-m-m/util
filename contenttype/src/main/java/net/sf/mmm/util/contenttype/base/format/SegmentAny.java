@@ -23,9 +23,6 @@ public class SegmentAny extends SegmentVariableLength {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getTagName() {
 

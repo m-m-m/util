@@ -41,9 +41,6 @@ public class ResourceNotWritableException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilResourceRoot.class).errorResourceNotWritable(resourceUri));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

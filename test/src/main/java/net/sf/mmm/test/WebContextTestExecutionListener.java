@@ -25,9 +25,6 @@ public class WebContextTestExecutionListener extends AbstractTestExecutionListen
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void prepareTestInstance(TestContext testContext) throws Exception {
 

@@ -26,38 +26,24 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   public static final NumberTypeImpl<Byte> BYTE = new NumberTypeImpl<Byte>(1, Byte.valueOf(Byte.MIN_VALUE),
       Byte.valueOf(Byte.MAX_VALUE)) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<Byte> getNumberClass() {
 
       return Byte.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Byte convert(Number number) {
+    @Override    protected Byte convert(Number number) {
 
       return Byte.valueOf(number.byteValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Byte parse(String number) throws NumberFormatException {
+    @Override    protected Byte parse(String number) throws NumberFormatException {
 
       return Byte.valueOf(number);
     }
@@ -68,38 +54,24 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   public static final NumberTypeImpl<Short> SHORT = new NumberTypeImpl<Short>(2, Short.valueOf(Short.MIN_VALUE),
       Short.valueOf(Short.MAX_VALUE)) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<Short> getNumberClass() {
 
       return Short.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Short convert(Number number) {
+    @Override    protected Short convert(Number number) {
 
       return Short.valueOf(number.shortValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Short parse(String number) throws NumberFormatException {
+    @Override    protected Short parse(String number) throws NumberFormatException {
 
       return Short.valueOf(number);
     }
@@ -110,38 +82,24 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   public static final NumberTypeImpl<Integer> INTEGER = new NumberTypeImpl<Integer>(3,
       Integer.valueOf(Integer.MIN_VALUE), Integer.valueOf(Integer.MAX_VALUE)) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<Integer> getNumberClass() {
 
       return Integer.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Integer convert(Number number) {
+    @Override    protected Integer convert(Number number) {
 
       return Integer.valueOf(number.intValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Integer parse(String number) throws NumberFormatException {
+    @Override    protected Integer parse(String number) throws NumberFormatException {
 
       return Integer.valueOf(number);
     }
@@ -152,38 +110,24 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   public static final NumberTypeImpl<Long> LONG = new NumberTypeImpl<Long>(4, Long.valueOf(Long.MIN_VALUE),
       Long.valueOf(Long.MAX_VALUE)) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<Long> getNumberClass() {
 
       return Long.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Long convert(Number number) {
+    @Override    protected Long convert(Number number) {
 
       return Long.valueOf(number.longValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Long parse(String number) throws NumberFormatException {
+    @Override    protected Long parse(String number) throws NumberFormatException {
 
       return Long.valueOf(number);
     }
@@ -194,38 +138,24 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   public static final NumberTypeImpl<Float> FLOAT = new NumberTypeImpl<Float>(5, Float.valueOf(Float.MIN_VALUE),
       Float.valueOf(Float.MAX_VALUE)) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<Float> getNumberClass() {
 
       return Float.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Float convert(Number number) {
+    @Override    protected Float convert(Number number) {
 
       return Float.valueOf(number.floatValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Float parse(String number) throws NumberFormatException {
+    @Override    protected Float parse(String number) throws NumberFormatException {
 
       return Float.valueOf(number);
     }
@@ -236,38 +166,24 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   public static final NumberTypeImpl<Double> DOUBLE = new NumberTypeImpl<Double>(6,
       Double.valueOf(Double.MIN_VALUE), Double.valueOf(Double.MAX_VALUE)) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<Double> getNumberClass() {
 
       return Double.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Double convert(Number number) {
+    @Override    protected Double convert(Number number) {
 
       return Double.valueOf(number.doubleValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Double parse(String number) throws NumberFormatException {
+    @Override    protected Double parse(String number) throws NumberFormatException {
 
       return Double.valueOf(number);
     }
@@ -277,38 +193,24 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   /** The {@link NumberTypeImpl} for {@link BigInteger}. */
   public static final NumberTypeImpl<BigInteger> BIG_INTEGER = new NumberTypeImpl<BigInteger>(7, null, null) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<BigInteger> getNumberClass() {
 
       return BigInteger.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected BigInteger convert(Number number) {
+    @Override    protected BigInteger convert(Number number) {
 
       return BigInteger.valueOf(number.longValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected BigInteger parse(String number) throws NumberFormatException {
+    @Override    protected BigInteger parse(String number) throws NumberFormatException {
 
       return new BigInteger(number);
     }
@@ -318,38 +220,24 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   /** The {@link NumberTypeImpl} for {@link BigDecimal}. */
   public static final NumberTypeImpl<BigDecimal> BIG_DECIMAL = new NumberTypeImpl<BigDecimal>(8, null, null) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Class<BigDecimal> getNumberClass() {
 
       return BigDecimal.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDecimal() {
 
       return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected BigDecimal convert(Number number) {
+    @Override    protected BigDecimal convert(Number number) {
 
       return BigDecimal.valueOf(number.doubleValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected BigDecimal parse(String number) throws NumberFormatException {
+    @Override    protected BigDecimal parse(String number) throws NumberFormatException {
 
       return new BigDecimal(number);
     }
@@ -390,9 +278,6 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
    */
   protected abstract NUMBER convert(Number number);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public NUMBER valueOf(Number number, boolean failIfUnprecise) throws NumberConversionException {
@@ -423,9 +308,6 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     return converted;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NUMBER valueOf(String number) throws NumberConversionException {
 
@@ -477,18 +359,12 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
     return this.exactness - ((NumberTypeImpl<?>) otherType).exactness;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NUMBER getMinimumValue() {
 
     return this.minimumValue;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NUMBER getMaximumValue() {
 

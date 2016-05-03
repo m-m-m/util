@@ -38,9 +38,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     initialize(provider, this.wrapperInputStream);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public InputStream getStream() {
 
     return this.wrapperInputStream;
@@ -77,18 +75,12 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
       this.endOfStream = false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() throws IOException {
 
       this.delegate.close();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int read() throws IOException {
 
@@ -100,9 +92,6 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int read(byte[] buffer, int offset, int length) throws IOException {
 
@@ -110,9 +99,6 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
       return this.targetBuffer.fill(buffer, offset, length);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long skip(long n) throws IOException {
 
@@ -183,9 +169,6 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException {
 
       if (this.endOfStream) {

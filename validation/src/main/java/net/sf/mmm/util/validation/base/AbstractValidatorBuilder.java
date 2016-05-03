@@ -20,18 +20,12 @@ public abstract class AbstractValidatorBuilder implements ValidatorBuilder {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AbstractValidator<?> newValidator(Class<?> pojoType, String property) {
 
     return newValidator(pojoType, property, null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property) {
 

@@ -33,9 +33,6 @@ public abstract class XmlAdapterEnum<E extends Enum<E>> extends XmlAdapter<Strin
    */
   protected abstract Class<E> getEnumClass();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String marshal(E value) throws Exception {
 
@@ -57,9 +54,6 @@ public abstract class XmlAdapterEnum<E extends Enum<E>> extends XmlAdapter<Strin
     return enumName.toLowerCase(Locale.US).replace('_', '-');
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public E unmarshal(String value) throws Exception {
 

@@ -28,9 +28,6 @@ public class CliOptionMissingValueException extends CliException {
     super(createBundle().errorCliOptionMissingValue(option));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

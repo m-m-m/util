@@ -66,9 +66,6 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
     this.shutdown = false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -105,26 +102,19 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void addRefreshable(Refreshable refreshable) {
 
     this.refreshableSet.add(refreshable);
     startup();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void removeRefreshable(Refreshable refreshable) {
 
     this.refreshableSet.remove(refreshable);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @PreDestroy
   public void close() {
 
@@ -144,9 +134,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
     return PeriodicRefresherImpl.class.getSimpleName() + "-Thread";
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void run() {
 
     this.refreshThread = Thread.currentThread();

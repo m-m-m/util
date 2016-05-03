@@ -27,9 +27,6 @@ public class XmlGenericException extends XmlException {
     super(nested, nested.getMessage());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

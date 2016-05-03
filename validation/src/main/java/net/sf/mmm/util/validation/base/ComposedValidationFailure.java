@@ -97,9 +97,6 @@ public class ComposedValidationFailure extends AbstractValidationFailure impleme
     return this.failures[index];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getDetails() {
 
@@ -119,9 +116,6 @@ public class ComposedValidationFailure extends AbstractValidationFailure impleme
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getMessage(Locale locale) {
 

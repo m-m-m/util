@@ -35,18 +35,12 @@ public class ValidationStateImpl implements ValidationState {
     this.failureView = Collections.unmodifiableList(this.failureList);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isValid() {
 
     return this.failureList.isEmpty();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void onFailure(ValidationFailure failure) {
 
@@ -65,9 +59,6 @@ public class ValidationStateImpl implements ValidationState {
     return this.failureView;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getFailureCount() {
 

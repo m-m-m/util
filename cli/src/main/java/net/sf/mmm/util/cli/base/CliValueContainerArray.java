@@ -32,9 +32,6 @@ public class CliValueContainerArray extends CliValueContainerCollection {
     super(parameterContainer, cliState, dependencies, logger, new ArrayList<>());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void setValueInternal(Object containerValue) {
 
@@ -42,9 +39,6 @@ public class CliValueContainerArray extends CliValueContainerCollection {
     this.array = containerValue;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getValue() {
 

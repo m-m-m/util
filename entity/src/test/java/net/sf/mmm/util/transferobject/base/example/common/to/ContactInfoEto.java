@@ -36,60 +36,42 @@ public class ContactInfoEto extends EntityTo<Long> implements ContactInfo {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getEmail() {
 
     return this.email;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setEmail(String email) {
 
     this.email = email;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPhone() {
 
     return this.phone;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setPhone(String phone) {
 
     this.phone = phone;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getFax() {
 
     return this.fax;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setFax(String fax) {
 
     this.fax = fax;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -101,9 +83,6 @@ public class ContactInfoEto extends EntityTo<Long> implements ContactInfo {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 

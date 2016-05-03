@@ -79,9 +79,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     this.stringUtil = stringUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -101,18 +98,12 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     registerEnumDefinition(new BooleanEnumDefinition());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final Iterator<EnumDefinition<?, ?>> iterator() {
 
     return getEnumDefinitions();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterator<EnumDefinition<?, ?>> getEnumDefinitions() {
 
@@ -156,9 +147,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     this.enumContainerMap.put(key, container);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> EnumDefinition<ENUM, CATEGORY> getEnumDefinitionWithCategory(
@@ -167,9 +155,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     return (EnumDefinition<ENUM, CATEGORY>) getEnumDefinition(enumType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public <TYPE> EnumDefinition<TYPE, ?> getEnumDefinition(Class<TYPE> enumType) throws ObjectNotFoundException {
@@ -209,9 +194,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     return container;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public EnumDefinition<?, ?> getEnumDefinition(String key) throws ObjectNotFoundException {
 
@@ -219,9 +201,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     return container.enumDefinition;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAvailable(EnumDefinition<?, ?> enumDefinition) {
 
@@ -233,9 +212,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <ENUM> ENUM getEnumValue(Class<ENUM> enumType, String value, boolean required)
       throws IllegalCaseException {
@@ -243,9 +219,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     return getEnumValue(getEnumDefinition(enumType), value, required);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <ENUM> ENUM getEnumValue(EnumDefinition<ENUM, ?> enumDefinition, String value, boolean required) {
 
@@ -301,9 +274,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     return GwtHelper.toLowerCase(value.replaceAll("[-_ .]", ""));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <ENUM> List<ENUM> getEnumValues(EnumDefinition<ENUM, ?> enumDefinition) {
@@ -323,9 +293,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
    */
   protected abstract void loadEnumValues(EnumContainer container);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> List<ENUM> getEnumValues(
@@ -350,9 +317,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     return (List<ENUM>) result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void clear(EnumDefinition<?, ?> enumDefinition) {
 
@@ -364,9 +328,6 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void require(EnumDefinition<?, ?>... enumDefinitions) {
 
@@ -463,11 +424,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
       findFirst();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected EnumDefinition<?, ?> findNext() {
+    @Override    protected EnumDefinition<?, ?> findNext() {
 
       if (this.containerIterator.hasNext()) {
         return this.containerIterator.next().enumDefinition;

@@ -20,26 +20,19 @@ public class ConcurrentHashMapFactory extends AbstractConcurrentMapFactory {
   /** The singleton instance. */
   public static final ConcurrentMapFactory INSTANCE = new ConcurrentHashMapFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<HashMap> getMapImplementation() {
 
     return HashMap.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <K, V> Map<K, V> create() {
 
     return new HashMap<K, V>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <K, V> Map<K, V> create(int capacity) {
 
     return new HashMap<K, V>(capacity);

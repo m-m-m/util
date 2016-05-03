@@ -34,9 +34,6 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getEnvironmentType() {
 
@@ -82,9 +79,6 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
     this.environment = environment;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -94,9 +88,6 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void logEnvironmentStatus() {
 

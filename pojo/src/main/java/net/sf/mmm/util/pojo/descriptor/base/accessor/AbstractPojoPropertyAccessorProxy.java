@@ -32,90 +32,60 @@ public abstract class AbstractPojoPropertyAccessorProxy extends AbstractPojoProp
    */
   protected abstract PojoPropertyAccessor getDelegate();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AccessibleObject getAccessibleObject() {
 
     return getDelegate().getAccessibleObject();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getAccessibleObjectName() {
 
     return getDelegate().getAccessibleObjectName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getDeclaringClass() {
 
     return getDelegate().getDeclaringClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getModifiers() {
 
     return getDelegate().getModifiers();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 
     return getDelegate().getReturnClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
     return getDelegate().getReturnType();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getPropertyClass() {
 
     return getDelegate().getPropertyClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getPropertyType() {
 
     return getDelegate().getPropertyType();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
     return getDelegate().getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorMode<? extends PojoPropertyAccessor> getMode() {
 

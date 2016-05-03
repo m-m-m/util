@@ -56,9 +56,6 @@ public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Objec
     this.iso8601Util = iso8601Util;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -68,25 +65,18 @@ public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Objec
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Calendar> getTargetType() {
 
     return Calendar.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("all")
   public <T extends Calendar> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

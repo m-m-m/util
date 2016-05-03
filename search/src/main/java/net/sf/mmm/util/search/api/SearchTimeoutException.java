@@ -31,9 +31,6 @@ public class SearchTimeoutException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilSearchRoot.class).errorSearchTimeout());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

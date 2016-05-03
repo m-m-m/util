@@ -80,36 +80,24 @@ public abstract class AbstractMessage implements Message {
     this.details = details;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return this.code;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getSource() {
 
     return this.source;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final String getMessage() {
 
     return getMessage(null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getMessage(Locale locale) {
 
@@ -120,27 +108,18 @@ public abstract class AbstractMessage implements Message {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getDetails() {
 
     return this.details;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public UUID getUuid() {
 
     return this.uuid;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

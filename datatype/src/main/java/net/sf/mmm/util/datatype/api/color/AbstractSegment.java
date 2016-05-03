@@ -34,27 +34,18 @@ public abstract class AbstractSegment<V extends Number> extends AbstractSimpleDa
     super(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getValueAsPercent() {
 
     return (int) Math.round(getValueAsFactor() * 100);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toStringAsFactor() {
 
     return formatDouble(getValueAsFactor());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toStringAsPercent() {
 

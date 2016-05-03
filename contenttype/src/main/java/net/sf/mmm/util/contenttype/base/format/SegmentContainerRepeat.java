@@ -57,9 +57,6 @@ public class SegmentContainerRepeat extends SegmentContainerSequence {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getTagName() {
 
@@ -85,18 +82,12 @@ public class SegmentContainerRepeat extends SegmentContainerSequence {
     return this.maximumOccurrence;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMinimumLength() {
 
     return super.getMinimumLength() * getMinimumOccurrence();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMaximumLength() {
 
@@ -106,9 +97,6 @@ public class SegmentContainerRepeat extends SegmentContainerSequence {
     return super.getMaximumLength() * getMaximumOccurrence();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void validateNonRecursive(StringBuilder source) {
 

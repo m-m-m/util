@@ -76,9 +76,6 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -176,9 +173,6 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "unchecked" })
   public final <TARGET> TARGET convertValue(String value, Object valueSource, Class<TARGET> type, Type targetType)

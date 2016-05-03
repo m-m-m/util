@@ -32,9 +32,7 @@ public final class FileFilterAdapter implements FileFilter {
     this.filter = filter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(File file) {
 
     return this.filter.accept(file);

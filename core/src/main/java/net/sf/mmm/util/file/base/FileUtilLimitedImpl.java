@@ -56,18 +56,12 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String normalizePath(String path) {
 
     return normalizePath(path, ResourcePath.PATH_SEGMENT_SEPARATOR_CHAR);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String normalizePath(String path, char separator) {
 
@@ -134,9 +128,6 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
     return "anonymous";
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getExtension(String filename) {
 
@@ -150,9 +141,6 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
     return extension;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getBasename(String filename) {
 
@@ -180,9 +168,6 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
     return filename.substring(start + 1, end + 1);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getDirname(String filename) {
 

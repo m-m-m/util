@@ -44,45 +44,30 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
     this.bounds = bounds;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Type[] getBounds() {
 
     return this.bounds;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public DECLARATION getGenericDeclaration() {
 
     return this.genericDeclaration;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
     return this.name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   // Java8 support
   public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings({ "unchecked" })
   // Java8 support
   public <T extends Annotation> T[] getAnnotationsByType(Class<T> annotationClass) {
@@ -90,27 +75,18 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
     return (T[]) Array.newInstance(annotationClass, 0);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   // Java8 support
   public Annotation[] getAnnotations() {
 
     return ReflectionUtil.NO_ANNOTATIONS;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   // Java8 support
   public <T extends Annotation> T getDeclaredAnnotation(Class<T> annotationClass) {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings({ "unchecked" })
   // Java8 support
   public <T extends Annotation> T[] getDeclaredAnnotationsByType(Class<T> annotationClass) {
@@ -118,18 +94,12 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
     return (T[]) Array.newInstance(annotationClass, 0);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   // Java8 support
   public Annotation[] getDeclaredAnnotations() {
 
     return getAnnotations();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   // Java8 support
   public java.lang.reflect.AnnotatedType[] getAnnotatedBounds() {
 
@@ -137,9 +107,6 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
     return new java.lang.reflect.AnnotatedType[0];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object other) {
 
@@ -154,18 +121,12 @@ public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
     return this.genericDeclaration.hashCode() ^ this.name.hashCode();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

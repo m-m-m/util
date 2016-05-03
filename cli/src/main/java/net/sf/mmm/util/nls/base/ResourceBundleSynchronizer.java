@@ -445,9 +445,6 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected int runDefaultMode() throws Exception {
 

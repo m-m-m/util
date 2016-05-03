@@ -16,14 +16,8 @@ import java.util.concurrent.ConcurrentMap;
 @SuppressWarnings("rawtypes")
 public interface ConcurrentMapFactory extends MapFactory<ConcurrentMap> {
 
-  /**
-   * {@inheritDoc}
-   */
   <K, V> ConcurrentMap<K, V> create();
 
-  /**
-   * {@inheritDoc}
-   */
   <K, V> ConcurrentMap<K, V> create(int capacity);
 
 }

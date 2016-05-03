@@ -30,18 +30,12 @@ public class CliModeUndefinedException extends CliException {
     super(createBundle().errorCliModeUndefined(mode, annotation));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return MESSAGE_CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

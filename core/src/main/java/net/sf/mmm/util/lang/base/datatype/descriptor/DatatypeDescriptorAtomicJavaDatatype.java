@@ -25,9 +25,6 @@ public class DatatypeDescriptorAtomicJavaDatatype<T> extends AbstractDatatypeDes
     super(datatype);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected T doCreate(Object... segments) {
 

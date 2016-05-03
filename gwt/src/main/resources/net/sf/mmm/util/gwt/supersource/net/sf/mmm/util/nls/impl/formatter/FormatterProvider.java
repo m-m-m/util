@@ -196,9 +196,6 @@ public final class FormatterProvider {
       return date;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @SuppressWarnings("deprecation")
     @Override
     protected void doFormat(Object value, Appendable buffer) throws IOException {
@@ -241,11 +238,7 @@ public final class FormatterProvider {
       this.format = format;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doFormat(Object value, Appendable buffer) throws IOException {
+    @Override    protected void doFormat(Object value, Appendable buffer) throws IOException {
 
       if (value instanceof Number) {
         buffer.append(this.format.format((Number) value));
@@ -275,11 +268,7 @@ public final class FormatterProvider {
       this.format = format;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doFormat(Object value, Appendable buffer) throws IOException {
+    @Override    protected void doFormat(Object value, Appendable buffer) throws IOException {
 
       if (value instanceof Date) {
         buffer.append(this.format.format((Date) value));

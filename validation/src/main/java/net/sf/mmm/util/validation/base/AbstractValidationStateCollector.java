@@ -40,18 +40,12 @@ public abstract class AbstractValidationStateCollector implements ValidationStat
     return this.delegate;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void onFailure(ValidationFailure failure) {
 
     this.delegate.onFailure(failure);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getFailureCount() {
 

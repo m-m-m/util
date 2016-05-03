@@ -39,9 +39,7 @@ public abstract class AbstractCliValueContainerContainer extends AbstractCliValu
     this.valueAlreadySet = false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setValue(String argument) {
 
     PojoPropertyAccessorOneArg setter = getParameterContainer().getSetter();
@@ -98,9 +96,6 @@ public abstract class AbstractCliValueContainerContainer extends AbstractCliValu
    */
   protected abstract void setValueEntry(String entry, GenericType<?> propertyType);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final boolean isArrayMapOrCollection() {
 

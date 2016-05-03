@@ -27,9 +27,6 @@ public class SegmentContainerSequence extends SegmentContainer {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getTagName() {
 

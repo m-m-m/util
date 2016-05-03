@@ -19,26 +19,19 @@ public class LinkedBlockingQueueFactory extends AbstractBlockingQueueFactory {
   /** The singleton instance. */
   public static final BlockingQueueFactory INSTANCE = new LinkedBlockingQueueFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<LinkedBlockingQueue> getCollectionImplementation() {
 
     return LinkedBlockingQueue.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> BlockingQueue<E> create() {
 
     return new LinkedBlockingQueue<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> BlockingQueue<E> create(int capacity) {
 
     // ATTENTION: capacity is the fixed capacity here, so does NOT make sense

@@ -24,9 +24,7 @@ public class ValueConverterToArrayOfInt extends AbstractConverterToArray<int[]> 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<int[]> getTargetType() {
 
     return int[].class;

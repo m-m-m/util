@@ -34,27 +34,18 @@ public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
     // assert (new SimpleDateFormat(this.pattern, Locale.ROOT) != null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Formatter<Object> createFormatter(Locale locale) {
 
     return FormatterProvider.getDateFormatter(locale, this.pattern);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_DATE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStyle() {
 

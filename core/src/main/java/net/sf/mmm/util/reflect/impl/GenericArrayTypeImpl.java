@@ -29,17 +29,12 @@ public class GenericArrayTypeImpl implements GenericArrayType {
     this.genericComponentType = componentType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type getGenericComponentType() {
 
     return this.genericComponentType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

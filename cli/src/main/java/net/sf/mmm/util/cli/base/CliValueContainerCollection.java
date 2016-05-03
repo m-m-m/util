@@ -36,9 +36,7 @@ public class CliValueContainerCollection extends AbstractCliValueContainerContai
     this.collection = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object getValue() {
 
     return this.collection;
@@ -52,9 +50,6 @@ public class CliValueContainerCollection extends AbstractCliValueContainerContai
     return this.collection;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   protected void setValueInternal(Object containerValue) {
@@ -62,9 +57,6 @@ public class CliValueContainerCollection extends AbstractCliValueContainerContai
     this.collection = (Collection<Object>) containerValue;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void setValueEntry(String entry, GenericType<?> propertyType) {
 

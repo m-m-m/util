@@ -145,9 +145,6 @@ public enum Month implements SimpleDatatype<Integer> {
     return fromValue(Integer.valueOf(date.getMonth() + 1));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -19,26 +19,19 @@ public class LinkedListDequeFactory extends AbstractDequeFactory {
   /** The singleton instance. */
   public static final DequeFactory INSTANCE = new LinkedListDequeFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<LinkedList> getCollectionImplementation() {
 
     return LinkedList.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> Deque<E> create() {
 
     return new LinkedList<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> Deque<E> create(int capacity) {
 
     // capacity does NOT make sense here...

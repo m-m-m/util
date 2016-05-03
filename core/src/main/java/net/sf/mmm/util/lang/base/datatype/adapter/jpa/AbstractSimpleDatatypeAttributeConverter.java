@@ -48,9 +48,6 @@ public abstract class AbstractSimpleDatatypeAttributeConverter<T extends SimpleD
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public V convertToDatabaseColumn(T datatype) {
 

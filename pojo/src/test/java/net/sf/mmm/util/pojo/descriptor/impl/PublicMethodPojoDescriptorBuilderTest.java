@@ -15,9 +15,6 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
 
-  /**
-   * {@inheritDoc}
-   */
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
     PojoDescriptorBuilderImpl builder = new PojoDescriptorBuilderImpl();
@@ -25,9 +22,6 @@ public class PublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescrip
     return builder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isMethodIntrostection() {
 

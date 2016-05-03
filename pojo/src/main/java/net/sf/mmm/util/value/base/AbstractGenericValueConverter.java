@@ -29,18 +29,14 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass)
       throws ValueNotSetException, WrongValueTypeException {
 
     return convertValue(value, valueSource, targetClass, targetClass);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public final <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> type, Type targetType,
       TARGET defaultValue) throws WrongValueTypeException {
 
@@ -51,18 +47,14 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass,
       TARGET defaultValue) throws WrongValueTypeException {
 
     return convertValue(value, valueSource, targetClass, targetClass, defaultValue);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum,
       TARGET maximum, TARGET defaultValue) throws WrongValueTypeException, ValueOutOfRangeException {
 
@@ -76,9 +68,7 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum,
       TARGET maximum) throws ValueNotSetException, WrongValueTypeException, ValueOutOfRangeException {
 

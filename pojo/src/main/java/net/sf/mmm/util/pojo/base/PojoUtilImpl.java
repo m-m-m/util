@@ -75,9 +75,6 @@ public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil 
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialized() {
 
@@ -87,9 +84,6 @@ public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil 
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -136,18 +130,12 @@ public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil 
     this.pojoDescriptorBuilder = pojoDescriptorBuilder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void visitObjectRecursive(Object object, Filter<Object> visitor) {
 
     visitObjectRecursive(object, visitor, true);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void visitObjectRecursive(Object object, Filter<Object> visitor, boolean loopProtection) {
 

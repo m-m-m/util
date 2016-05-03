@@ -27,27 +27,18 @@ public class ConcurrentHashSetFactory extends AbstractSetFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <E> Set<E> create() {
 
     return create(16);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <E> Set<E> create(int capacity) {
 
     return Collections.newSetFromMap(new ConcurrentHashMap<E, Boolean>(capacity));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   @Override
   public Class<? extends Set> getCollectionImplementation() {

@@ -54,9 +54,6 @@ public abstract class AbstractLoggableComponent extends AbstractComponent {
     return this.logger;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

@@ -101,27 +101,18 @@ public class EntityIdImpl extends AbstractEntityId {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Number getRevision() {
 
     return this.revision;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getTypeId() {
 
     return this.typeId;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getObjectId() {
 

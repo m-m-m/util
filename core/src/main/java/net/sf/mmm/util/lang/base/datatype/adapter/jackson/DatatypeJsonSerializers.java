@@ -60,9 +60,6 @@ public class DatatypeJsonSerializers extends SimpleSerializers {
     this.datatypeDetector = datatypeDetector;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public JsonSerializer<?> findSerializer(SerializationConfig config, JavaType type, BeanDescription beanDesc) {
 

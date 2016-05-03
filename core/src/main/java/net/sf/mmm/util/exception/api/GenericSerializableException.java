@@ -75,9 +75,6 @@ public class GenericSerializableException extends RuntimeException implements Nl
     this.uuid = uuid;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericSerializableException createCopy(ExceptionTruncation truncation) {
 
@@ -132,63 +129,42 @@ public class GenericSerializableException extends RuntimeException implements Nl
   // return new StackTraceElement[0];
   // }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return this.code;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public UUID getUuid() {
 
     return this.uuid;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage toNlsMessage() {
 
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getInternationalizedMessage() {
 
     return getMessage();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getArgumentCount() {
 
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getArgument(String key) {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getArgument(int index) {
 
@@ -196,63 +172,42 @@ public class GenericSerializableException extends RuntimeException implements Nl
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 
     return this.technical;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isForUser() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage getNlsMessage() {
 
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage(Locale locale) {
 
     return getLocalizedMessage();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void getLocalizedMessage(Locale locale, Appendable appendable) {
 
     getLocalizedMessage(locale, null, appendable);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 
     return getLocalizedMessage();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer)
       throws IllegalStateException {
@@ -264,9 +219,6 @@ public class GenericSerializableException extends RuntimeException implements Nl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void printStackTrace(Locale locale, Appendable buffer) throws IllegalStateException {
 
@@ -287,9 +239,6 @@ public class GenericSerializableException extends RuntimeException implements Nl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -297,18 +246,13 @@ public class GenericSerializableException extends RuntimeException implements Nl
     return toString(Locale.getDefault(), null).toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString(Locale locale) {
 
     return toString(locale, null).toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Appendable toString(Locale locale, Appendable appendable) {
 
     Appendable buffer = appendable;

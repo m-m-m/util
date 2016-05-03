@@ -58,9 +58,6 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
     return ReflectionUtilLimitedImpl.getInstance();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <POJO> AbstractPojoDescriptorImpl<POJO> getDescriptor(Class<POJO> pojoClass) {
 
@@ -73,9 +70,6 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
     return descriptor;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AbstractPojoDescriptorImpl<?> getDescriptor(Type pojoType) {
 
@@ -83,9 +77,6 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
     return getDescriptor(genericType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <POJO> AbstractPojoDescriptorImpl<POJO> getDescriptor(GenericType<POJO> pojoType) {
 
@@ -108,9 +99,6 @@ public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLogga
     throw new NlsUnsupportedOperationException("createDescriptor(" + pojoType.getName() + ")");
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Map<String, Object> pojo2Map(Object pojo) {
 

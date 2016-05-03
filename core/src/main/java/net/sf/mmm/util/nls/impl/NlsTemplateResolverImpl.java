@@ -51,9 +51,7 @@ public class NlsTemplateResolverImpl extends AbstractResourceBundleNlsTemplateRe
     this.nlsBundles = reversedBundles;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
     return resolveTemplate(internationalizedMessage, this.nlsBundles);

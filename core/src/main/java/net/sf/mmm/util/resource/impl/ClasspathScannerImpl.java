@@ -84,9 +84,6 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public synchronized void clearCaches() {
 
@@ -107,45 +104,30 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
     return parent.getOrCreateChildFolder(path.getName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ClasspathFolder getClasspathResource() {
 
     return getCache().getRoot();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public BrowsableResource getClasspathResource(String classpath) {
 
     return (BrowsableResource) getClasspathResource().navigate(classpath, true);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public BrowsableResource getClasspathResource(Package pkg) {
 
     return getClasspathResource(pkg.getName().replace('.', '/'));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterable<? extends BrowsableResource> getClasspathResourceFiles() {
 
     return getCache().getClasspathResourceFiles();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterable<? extends BrowsableResource> getClasspathResourceFiles(Filter<? super BrowsableResource> filter) {
 
@@ -195,9 +177,6 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
       this.name = name;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getName() {
 
@@ -213,18 +192,12 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
       return this.parent;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public DataResource navigate(String resourcePath) throws ResourceUriUndefinedException {
 
       return this.parent.navigate(resourcePath);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Date getLastModificationDate() {
 
@@ -232,27 +205,18 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
       return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getSchemePrefix() {
 
       return ClasspathResource.SCHEME_PREFIX;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getUri() {
 
       return getSchemePrefix() + getPath();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ClasspathFolder getRoot() {
 
@@ -262,27 +226,18 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
       return this.parent.getRoot();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAbsolute() {
 
       return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isRoot() {
 
       return this.parent == null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getPath() {
 
@@ -305,9 +260,6 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
       buffer.append(this.name);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public abstract Iterable<? extends AbstractBrowsableClasspathResource> getChildResources();
 
@@ -384,36 +336,24 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
       return newChild;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Iterable<? extends AbstractBrowsableClasspathResource> getChildResources() {
 
       return this.children;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isFolder() {
 
       return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isData() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public URL getUrl() throws ResourceNotAvailableException {
 
@@ -465,9 +405,6 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
       return folder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public DataResource navigate(String resourcePath) throws ResourceUriUndefinedException {
 
@@ -521,36 +458,24 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
       super(parent, name);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Iterable<? extends AbstractBrowsableClasspathResource> getChildResources() {
 
       return Collections.emptyList();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isFolder() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isData() {
 
       return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public URL getUrl() throws ResourceNotAvailableException {
 

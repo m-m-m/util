@@ -119,18 +119,12 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     this.data = dataFunction.apply(this);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ResourcePathNode<D> getParent() {
 
     return this.parent;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ResourcePathNode<D> getRoot() {
 
@@ -140,9 +134,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     return this.parent.getRoot();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
@@ -157,9 +148,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     return this.data;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAbsolute() {
 
@@ -175,9 +163,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     return PATH_SEGMENT_PARENT_DIRECTORY.equals(this.name);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isRoot() {
 
@@ -318,9 +303,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     buffer.append(this.name);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -590,20 +572,13 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
       super(ResourcePath.PATH_SEGMENT_SEPARATOR, dataFunction);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAbsolute() {
 
       return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isAppendSeparator() {
+    @Override    protected boolean isAppendSeparator() {
 
       return false;
     }
@@ -630,9 +605,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
       super(drive + WINDOWS_DRIVE_LETTER_SUFFIX, dataFunction);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAbsolute() {
 
@@ -660,20 +632,13 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
       super("", dataFunction);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAbsolute() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isAppendSeparator() {
+    @Override    protected boolean isAppendSeparator() {
 
       return false;
     }
@@ -710,9 +675,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
       super(HOME_PATH_CHAR + user, dataFunction);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAbsolute() {
 
@@ -741,9 +703,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
       super(UNC_PATH_PREFIX + uncAuthority, dataFunction);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAbsolute() {
 
@@ -797,9 +756,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
       return this.authority;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAbsolute() {
 

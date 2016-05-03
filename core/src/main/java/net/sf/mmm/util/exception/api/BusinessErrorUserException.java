@@ -76,27 +76,18 @@ public class BusinessErrorUserException extends NlsRuntimeException {
     super(copySource, truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public BusinessErrorUserException createCopy(ExceptionTruncation truncation) {
 
     return new BusinessErrorUserException(this, truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

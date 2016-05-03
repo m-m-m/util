@@ -42,9 +42,6 @@ public class TestUser implements Authentication {
     this.authenticated = true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -54,9 +51,6 @@ public class TestUser implements Authentication {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -80,72 +74,48 @@ public class TestUser implements Authentication {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
     return this.name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
 
     return Collections.EMPTY_LIST;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getCredentials() {
 
     return "password";
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getDetails() {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getPrincipal() {
 
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAuthenticated() {
 
     return this.authenticated;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 
     this.authenticated = isAuthenticated;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

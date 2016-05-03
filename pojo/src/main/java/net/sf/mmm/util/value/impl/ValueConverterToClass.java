@@ -30,25 +30,18 @@ public class ValueConverterToClass extends AbstractValueConverter<CharSequence, 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<CharSequence> getSourceType() {
 
     return CharSequence.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Class> getTargetType() {
 
     return Class.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("all")
   public <T extends Class> T convert(CharSequence value, Object valueSource, GenericType<T> targetType)
       throws ValueException {

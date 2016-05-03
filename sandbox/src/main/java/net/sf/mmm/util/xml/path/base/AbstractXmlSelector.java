@@ -29,9 +29,7 @@ public abstract class AbstractXmlSelector extends AbstractXmlItem implements Xml
     this.namespaceContext = namespaceContext;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NamespaceContext getNamespaceContext() {
 
     return this.namespaceContext;

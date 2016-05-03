@@ -16,14 +16,8 @@ import java.util.SortedMap;
 @SuppressWarnings("rawtypes")
 public interface SortedMapFactory extends MapFactory<SortedMap> {
 
-  /**
-   * {@inheritDoc}
-   */
   <K, V> SortedMap<K, V> create();
 
-  /**
-   * {@inheritDoc}
-   */
   <K, V> SortedMap<K, V> create(int capacity);
 
 }

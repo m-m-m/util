@@ -58,9 +58,6 @@ public abstract class AdvancedClassHierarchyMap<E> extends AbstractClassHierarch
     return put(getClass(element), element);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isPreferable(E element, Class<?> elementType, E existing, Class<?> currentType) {
 

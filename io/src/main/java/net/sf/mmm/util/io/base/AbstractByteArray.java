@@ -30,18 +30,14 @@ public abstract class AbstractByteArray implements ByteArray {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ByteArray createSubArray(int minimum, int maximum) {
 
     checkSubArray(minimum, maximum);
     return new ByteArrayImpl(getBytes(), minimum, maximum);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getBytesAvailable() {
 
     return getMaximumIndex() - getCurrentIndex() + 1;

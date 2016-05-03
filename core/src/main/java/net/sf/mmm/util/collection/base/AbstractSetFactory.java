@@ -23,25 +23,19 @@ public abstract class AbstractSetFactory implements SetFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Set> getCollectionInterface() {
 
     return Set.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Set createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Set createGeneric(int capacity) {
 
     return create(capacity);

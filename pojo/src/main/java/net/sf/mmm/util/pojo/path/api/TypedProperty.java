@@ -177,9 +177,6 @@ public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String
     this.pojoPath = parentPath + SEPARATOR + segment;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getSegment() {
 
@@ -199,18 +196,12 @@ public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String
     return this.segment;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPojoPath() {
 
     return this.pojoPath;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getParentPath() {
 
@@ -232,9 +223,6 @@ public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String
     return this.propertyType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

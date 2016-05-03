@@ -55,9 +55,6 @@ public abstract class AbstractValidationFailure extends AbstractMessage implemen
     super(code, source, message, uuid, details);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 

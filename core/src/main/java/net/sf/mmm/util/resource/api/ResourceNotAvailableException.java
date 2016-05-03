@@ -40,9 +40,6 @@ public class ResourceNotAvailableException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilResourceRoot.class).errorResourceNotAvailable(resourceUri));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

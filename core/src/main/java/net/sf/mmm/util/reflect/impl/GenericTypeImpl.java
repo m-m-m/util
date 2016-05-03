@@ -147,9 +147,6 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected GenericType<?> create(Type genericType) {
 
@@ -260,17 +257,13 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     return Array.newInstance(componentClass, 0).getClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public GenericType<?> getComponentType() {
 
     return this.componentType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public GenericType<?> getKeyType() {
 
     return this.keyType;
@@ -287,41 +280,31 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
     return this.definingType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<? extends T> getAssignmentClass() {
 
     return this.assignmentClass;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<T> getRetrievalClass() {
 
     return this.retrievalClass;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type getType() {
 
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getTypeArgumentCount() {
 
     return this.typesArguments.length;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public GenericType<?> getTypeArgument(int index) {
 
     GenericType<?> result = this.typesArguments[index];

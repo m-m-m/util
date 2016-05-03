@@ -47,27 +47,18 @@ public class NlsRuntimeWrapperException extends NlsRuntimeException {
     this.cause = e;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return this.cause.getCode();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isForUser() {
 
     return this.cause.isForUser();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

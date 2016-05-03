@@ -80,54 +80,36 @@ public class BasicPojoPath implements PojoPath {
     this.index = pIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPojoPath() {
 
     return this.pojoPath;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getParentPath() {
 
     return this.parentPath;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getSegment() {
 
     return this.segment;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getFunction() {
 
     return this.function;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Integer getIndex() {
 
     return this.index;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

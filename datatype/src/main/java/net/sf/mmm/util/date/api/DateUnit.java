@@ -57,17 +57,12 @@ public enum DateUnit implements SimpleDatatype<String> {
     this.calendarId = calendarId;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -24,9 +24,7 @@ public class ValueConverterToArrayOfDouble extends AbstractConverterToArray<doub
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<double[]> getTargetType() {
 
     return double[].class;

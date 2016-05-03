@@ -99,9 +99,6 @@ public class HttpRequest extends HttpMessage {
     this.uri = requestUri;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void writeFirstLine(StringBuffer buffer) {
 

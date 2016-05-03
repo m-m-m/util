@@ -37,9 +37,7 @@ public class CharSubSequence extends CoreCharSequence {
     this.length = endPosition - startPosition;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public CharSequence subSequence(int startPosition, int endPosition) {
 
     if (startPosition < 0) {
@@ -58,17 +56,13 @@ public class CharSubSequence extends CoreCharSequence {
     return new CharSubSequence(this.original, this.start + startPosition, endPosition);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int length() {
 
     return this.length;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char charAt(int index) {
 
     return this.original.charAt(index + this.start);

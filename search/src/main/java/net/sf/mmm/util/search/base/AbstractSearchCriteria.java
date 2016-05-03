@@ -36,9 +36,6 @@ public abstract class AbstractSearchCriteria extends AbstractTransferObject impl
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -51,9 +48,6 @@ public abstract class AbstractSearchCriteria extends AbstractTransferObject impl
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -90,27 +84,18 @@ public abstract class AbstractSearchCriteria extends AbstractTransferObject impl
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Integer getMaximumHitCount() {
 
     return this.maximumHitCount;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getHitOffset() {
 
     return this.hitOffset;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Long getSearchTimeout() {
 
@@ -141,9 +126,6 @@ public abstract class AbstractSearchCriteria extends AbstractTransferObject impl
     this.searchTimeout = searchTimeout;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isReadOnly() {
 

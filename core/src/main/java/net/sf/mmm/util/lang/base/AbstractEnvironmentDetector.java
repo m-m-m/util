@@ -21,27 +21,18 @@ public abstract class AbstractEnvironmentDetector extends AbstractLoggableCompon
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDevelopmentEnvironment() {
 
     return ENVIRONMENT_TYPE_DEVELOPMENT.equals(getEnvironmentType());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isProductionEnvironment() {
 
     return ENVIRONMENT_TYPE_PRODUCTION.equals(getEnvironmentType());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isEnvironmentCloseToProduction() {
 

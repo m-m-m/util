@@ -44,9 +44,6 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateImportStatements(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -56,9 +53,6 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
     sourceComposerFactory.addImport(GWT.class.getName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateFields(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context,
       JClassType bundleClass) {
@@ -77,9 +71,6 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
     sourceWriter.println();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateMethodMessageBlock(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context,
       String methodName) {
@@ -180,9 +171,6 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
     return sourceComposerFactory.getCreatedClassName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getVersionId() {
 

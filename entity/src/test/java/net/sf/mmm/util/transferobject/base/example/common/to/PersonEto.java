@@ -33,54 +33,36 @@ public class PersonEto extends EntityTo<Long> implements Person {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getFirstName() {
 
     return this.firstName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setFirstName(String firstName) {
 
     this.firstName = firstName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLastName() {
 
     return this.lastName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setLastName(String lastName) {
 
     this.lastName = lastName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Long getAddressId() {
 
     return this.addressId;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setAddressId(Long addressId) {
 

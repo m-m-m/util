@@ -22,9 +22,6 @@ public class XmlAdapterInfixPattern extends XmlAdapterPattern {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Pattern unmarshal(String pattern) throws Exception {
 

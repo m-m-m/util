@@ -29,9 +29,7 @@ public abstract class AbstractContentTypeManager extends AbstractLoggableCompone
     this.id2contentTypeMap = new HashMap<String, ContentType>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ContentType getContentType(String id) {
 
     return this.id2contentTypeMap.get(id);

@@ -21,9 +21,7 @@ public final class PojoDescriptorNoEnhancer implements PojoDescriptorEnhancer {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void enhanceDescriptor(AbstractPojoDescriptor<?> descriptor) {
 
     // nothing to do.

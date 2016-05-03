@@ -23,49 +23,37 @@ public abstract class AbstractStringHasher implements StringHasher {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getHashCode(CharSequence string) {
 
     return getHashCode(string, 0, string.length());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getHashCode(CharSequence string, int start, int end) {
 
     return getHashCode(string.toString().toCharArray(), start, end);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int[] getHashCodes(CharSequence string, int length) {
 
     return getHashCodes(string, length, 0, string.length());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int[] getHashCodes(char[] string, int length) {
 
     return getHashCodes(string, length, 0, string.length);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int[] getHashCodes(CharSequence string, int length, int stringStart, int stringEnd) {
 
     return getHashCodes(string.subSequence(stringStart, stringEnd).toString().toCharArray(), length);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int[] getHashCodes(char[] string, int length, int stringStart, int stringEnd) {
 
     int size = stringEnd - stringStart - length + 1;

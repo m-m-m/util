@@ -74,9 +74,6 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
     this(error.getCode(), null, error.getNlsMessage(), error.getUuid(), null, error.isTechnical());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 

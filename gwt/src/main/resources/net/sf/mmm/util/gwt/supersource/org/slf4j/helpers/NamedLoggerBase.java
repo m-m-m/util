@@ -22,9 +22,7 @@ abstract class NamedLoggerBase implements Logger, Serializable {
   /** @see #getName() */
   protected String name;
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getName() {
     return this.name;
   }

@@ -70,9 +70,6 @@ public class ObjectNotFoundUserException extends ObjectNotFoundException {
     super(nested, object, key);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

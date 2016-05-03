@@ -72,9 +72,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
     this.segments = segmentList.toArray(new PatternSegment[segmentList.size()]);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public final void format(Void nothing, Locale locale, Map<String, Object> arguments,
       NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
@@ -144,9 +142,6 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
       return this.argument;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
 

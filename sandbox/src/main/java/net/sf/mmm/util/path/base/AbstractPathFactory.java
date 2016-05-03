@@ -104,9 +104,6 @@ public abstract class AbstractPathFactory extends AbstractLoggableComponent impl
     return provider;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Path createPath(String resourceUri) {
 
@@ -137,9 +134,6 @@ public abstract class AbstractPathFactory extends AbstractLoggableComponent impl
     return provider.createResource(uri);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Path createPath(Path basePath, String resourcePath) {
 

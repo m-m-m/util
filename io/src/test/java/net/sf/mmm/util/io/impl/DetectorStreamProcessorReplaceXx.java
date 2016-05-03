@@ -30,9 +30,7 @@ public class DetectorStreamProcessorReplaceXx implements DetectorStreamProcessor
     this.xFound = 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException {
 
     while (buffer.getByteArrayCount() > 0) {

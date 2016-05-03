@@ -54,9 +54,6 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoDescriptorBuilder createDescriptorBuilder(VisibilityModifier methodVisibility,
       VisibilityModifier fieldVisibility) {
@@ -77,9 +74,6 @@ public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuil
     return descriptorBuilder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

@@ -45,9 +45,6 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -66,9 +63,6 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialized() {
 
@@ -96,18 +90,12 @@ public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplat
     this.resourceBundleFinder = resourceBundleFinder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
     return resolveTemplate(internationalizedMessage, this.nlsBundles);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Collection<NlsResourceBundle> getBundles() {
 

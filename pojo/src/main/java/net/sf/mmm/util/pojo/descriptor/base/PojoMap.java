@@ -45,9 +45,6 @@ public class PojoMap extends AbstractSimpleMap<String, Object> {
     this.keySet = null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   public Object get(Object key) {
 
@@ -55,9 +52,6 @@ public class PojoMap extends AbstractSimpleMap<String, Object> {
     return this.pojoDescriptor.getProperty(this.pojo, pojoPath);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<String> keySet() {
 

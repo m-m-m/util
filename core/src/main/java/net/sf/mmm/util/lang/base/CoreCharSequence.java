@@ -58,9 +58,6 @@ public abstract class CoreCharSequence implements CharSequence {
     this.cachedHash = 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -76,9 +73,6 @@ public abstract class CoreCharSequence implements CharSequence {
     return hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

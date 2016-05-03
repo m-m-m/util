@@ -33,17 +33,12 @@ public class ValueConverterToMap extends AbstractValueConverterToContainer<Map> 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Map> getTargetType() {
 
     return Map.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void convertContainerEntry(Object element, int index, Map container, Object valueSource,
       GenericType<? extends Map> targetType, Object originalValue) {
@@ -79,9 +74,6 @@ public class ValueConverterToMap extends AbstractValueConverterToContainer<Map> 
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected <T extends Map> T createContainer(GenericType<T> targetType, int length) {
 

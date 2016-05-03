@@ -13,9 +13,6 @@ import net.sf.mmm.util.xml.api.DomUtil;
 @SuppressWarnings("all")
 public class DomUtilSpringTest extends DomUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public DomUtil getDomUtil() {
 

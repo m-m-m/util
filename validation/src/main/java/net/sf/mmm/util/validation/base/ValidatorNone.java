@@ -34,9 +34,6 @@ public final class ValidatorNone extends AbstractValidator<Object> {
     return (AbstractValidator<VALUE>) INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ValidationFailure validate(Object value, Object valueSource) {
 

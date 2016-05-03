@@ -44,17 +44,13 @@ public abstract class AbstractCharIterator implements CharIterator {
    */
   protected abstract char findNext();
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     return (this.next != END_OF_ITERATOR);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char next() {
 
     char c = this.next;

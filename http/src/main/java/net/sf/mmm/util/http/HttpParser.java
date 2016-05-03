@@ -22,9 +22,6 @@ public final class HttpParser {
   /** char-filter for a token as defined by the HTTP specification */
   private static final CharFilter TOKEN_FILTER = new CharFilter() {
 
-    /**
-     * {@inheritDoc}
-     */
     public boolean accept(char c) {
 
       if ((c < 31) || (c == 127)) {

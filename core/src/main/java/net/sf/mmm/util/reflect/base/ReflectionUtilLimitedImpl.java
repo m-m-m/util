@@ -40,9 +40,6 @@ public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent impleme
     return INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public <T> Class<T> getNonPrimitiveType(Class<T> type) {
@@ -74,18 +71,12 @@ public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent impleme
     return (Class<T>) result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> GenericType<T> createGenericType(Class<T> type) {
 
     return new SimpleGenericTypeLimited<>(type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public GenericType<?> createGenericType(Type type) {
@@ -100,18 +91,12 @@ public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent impleme
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> createGenericType(Type type, GenericType<?> definingType) {
 
     return createGenericType(type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> createGenericType(Type type, Class<?> definingType) {
 

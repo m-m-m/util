@@ -74,9 +74,7 @@ public abstract class AbstractCliValueContainer implements CliValueContainer {
     return this.logger;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isArrayMapOrCollection() {
 
     return false;

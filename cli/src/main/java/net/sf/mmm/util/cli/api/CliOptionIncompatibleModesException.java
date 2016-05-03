@@ -29,9 +29,6 @@ public class CliOptionIncompatibleModesException extends CliException {
     super(createBundle().errorCliOptionIncompatibleModes(option1, option2));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -32,9 +32,6 @@ public class DatatypeSegmentDescriptorEnum<T extends Enum<T>> extends AbstractDa
     this.stringUtil = stringUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String doGetSegment(T datatype) {
 

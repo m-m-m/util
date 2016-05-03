@@ -67,9 +67,6 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
     checkPojoDescriptor(new MyPojo(), MyPojo.class);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void checkProperty(PojoDescriptor<?> pojoDescriptor, String propertyName, Class<?> readType,
       Class<?> writeType) {

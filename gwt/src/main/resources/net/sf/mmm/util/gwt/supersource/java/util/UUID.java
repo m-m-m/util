@@ -194,9 +194,6 @@ public final class UUID implements Serializable, Comparable<UUID> {
     return this.node;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -218,9 +215,6 @@ public final class UUID implements Serializable, Comparable<UUID> {
     return Long.toHexString(hi | (value & (hi - 1))).substring(1);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -231,9 +225,6 @@ public final class UUID implements Serializable, Comparable<UUID> {
     return this.hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -250,9 +241,7 @@ public final class UUID implements Serializable, Comparable<UUID> {
     return ((this.mostSignificantBits == id.mostSignificantBits) && (this.leastSignificantBits == id.leastSignificantBits));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int compareTo(UUID val) {
 
     if (this.mostSignificantBits < val.mostSignificantBits) {

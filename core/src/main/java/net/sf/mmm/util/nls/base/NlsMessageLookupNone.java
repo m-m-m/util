@@ -28,9 +28,6 @@ public class NlsMessageLookupNone implements NlsMessageLookup {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage getMessage(String key, Map<String, Object> nlsArguments) {
 

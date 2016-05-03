@@ -64,9 +64,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
     return type.getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object getVariable(String variableName) {
 
     Object value = this.variableMap.get(variableName);
@@ -76,17 +74,13 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
     return value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T> T getVariable(Class<T> type) {
 
     return getVariable(getVariableName(type), type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object requireVariable(String variableName) throws ValueNotSetException {
 
     Object value = getVariable(variableName);
@@ -96,9 +90,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
     return value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T> T requireVariable(String variableName, Class<T> type) throws ValueNotSetException {
 
     T value = getVariable(variableName, type);
@@ -108,17 +100,13 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
     return value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T> T requireVariable(Class<T> type) throws ValueNotSetException {
 
     return requireVariable(getVariableName(type), type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasVariable(String variableName) {
 
     if (this.variableMap.containsKey(variableName)) {
@@ -132,9 +120,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Set<String> getVariableNames() {
 
     Set<String> result;
@@ -147,17 +133,13 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object setVariable(String variableName, Object value) {
 
     return this.variableMap.put(variableName, value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object setVariable(Object value) {
 
     if (value == null) {
@@ -166,17 +148,13 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
     return setVariable(getVariableName(value.getClass()), value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object removeVariable(String variableName) {
 
     return this.variableMap.remove(variableName);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Map<String, Object> toMap() {
 
     Map<String, Object> map;
@@ -189,9 +167,7 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
     return map;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public GenericContext getImmutableContext() {
 
     return this.immutableContext;

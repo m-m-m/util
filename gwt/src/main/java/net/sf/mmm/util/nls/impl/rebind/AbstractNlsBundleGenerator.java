@@ -49,9 +49,6 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateImportStatements(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -64,9 +61,6 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
     sourceComposerFactory.addImport(NlsAccess.class.getName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateClassDeclaration(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -74,9 +68,6 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
     sourceComposerFactory.addImplementedInterface(inputType.getQualifiedSourceName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateClassContents(JClassType inputType, TreeLogger logger, SourceWriter sourceWriter,
       String simpleName, GeneratorContext context) {

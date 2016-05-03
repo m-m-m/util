@@ -14,9 +14,6 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  */
 public interface PojoPropertyAccessorIndexedNonArg extends PojoPropertyAccessor {
 
-  /**
-   * {@inheritDoc}
-   */
   PojoPropertyAccessorIndexedNonArgMode getMode();
 
   /**

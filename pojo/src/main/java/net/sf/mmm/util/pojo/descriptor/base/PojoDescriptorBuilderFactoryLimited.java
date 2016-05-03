@@ -24,9 +24,6 @@ public class PojoDescriptorBuilderFactoryLimited extends AbstractPojoDescriptorB
     setInstance(this);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoDescriptorBuilder createDescriptorBuilder(VisibilityModifier methodVisibility,
       VisibilityModifier fieldVisibility) {

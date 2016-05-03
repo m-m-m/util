@@ -17,9 +17,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  */
 public class SimplePojoFactory extends AbstractLoggableComponent implements PojoFactory {
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <POJO> POJO newInstance(Class<POJO> pojoType) throws InstantiationFailedException {
 
     try {

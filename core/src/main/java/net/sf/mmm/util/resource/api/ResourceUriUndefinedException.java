@@ -41,9 +41,6 @@ public class ResourceUriUndefinedException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilResourceRoot.class).errorResourceUndefinedUri(uri));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

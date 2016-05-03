@@ -28,9 +28,6 @@ public class SampleComposedDatatypeDescriptor extends AbstractDatatypeDescriptor
     super(SampleComposedDatatype.class, new AmountSegment(), new CurrencySegment());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected SampleComposedDatatype doCreate(Object... segments) {
 
@@ -50,11 +47,7 @@ public class SampleComposedDatatypeDescriptor extends AbstractDatatypeDescriptor
       super("amount", BigDecimal.class);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected BigDecimal doGetSegment(SampleComposedDatatype datatype) {
+    @Override    protected BigDecimal doGetSegment(SampleComposedDatatype datatype) {
 
       return datatype.getAmount();
     }
@@ -72,11 +65,7 @@ public class SampleComposedDatatypeDescriptor extends AbstractDatatypeDescriptor
       super("currency", Currency.class);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Currency doGetSegment(SampleComposedDatatype datatype) {
+    @Override    protected Currency doGetSegment(SampleComposedDatatype datatype) {
 
       return datatype.getCurrency();
     }

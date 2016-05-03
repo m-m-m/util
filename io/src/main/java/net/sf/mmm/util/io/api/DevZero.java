@@ -27,18 +27,12 @@ public final class DevZero extends InputStream {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read() throws IOException {
 
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read(byte[] b, int off, int len) {
 
@@ -48,9 +42,6 @@ public final class DevZero extends InputStream {
     return len;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close() {
 

@@ -13,9 +13,6 @@ import net.sf.mmm.util.context.api.GenericContextFactory;
  */
 public class GenericContextFactorySpringTest extends GenericContextFactoryTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected GenericContextFactory getFactory() {
 

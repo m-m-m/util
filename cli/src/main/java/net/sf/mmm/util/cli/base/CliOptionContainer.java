@@ -37,18 +37,12 @@ public class CliOptionContainer extends CliParameterContainer {
     this.option = option;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getName() {
 
     return this.option.name();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Annotation getParameterAnnotation() {
 
@@ -77,9 +71,6 @@ public class CliOptionContainer extends CliParameterContainer {
     return boolean.class.equals(getSetter().getPropertyClass());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public CliContainerStyle getContainerStyle(CliStyle cliStyle) {
 

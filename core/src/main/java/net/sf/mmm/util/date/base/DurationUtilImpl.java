@@ -47,27 +47,18 @@ public class DurationUtilImpl implements DurationUtil {
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String formatNanoseconds(long nanos) {
 
     return formatDuration(nanos, 1000000000);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String formatMilliseconds(long millis) {
 
     return formatDuration(millis, 1000);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String formatSeconds(long seconds) {
 

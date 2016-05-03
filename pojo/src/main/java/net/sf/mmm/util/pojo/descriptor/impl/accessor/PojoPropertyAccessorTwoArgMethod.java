@@ -44,9 +44,7 @@ public class PojoPropertyAccessorTwoArgMethod extends AbstractPojoPropertyAccess
     this.mode = mode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, Object argument1, Object argument2) {
 
     try {
@@ -58,9 +56,7 @@ public class PojoPropertyAccessorTwoArgMethod extends AbstractPojoPropertyAccess
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorTwoArgMode getMode() {
 
     return this.mode;

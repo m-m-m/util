@@ -33,9 +33,6 @@ public class AppendingList<E> extends AbstractList<E> {
     this.lists = lists;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public E get(int index) {
 
@@ -51,9 +48,6 @@ public class AppendingList<E> extends AbstractList<E> {
     throw new IndexOutOfBoundsException(Integer.toString(index));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int size() {
 
@@ -63,15 +57,5 @@ public class AppendingList<E> extends AbstractList<E> {
     }
     return size;
   }
-
-  // /**
-  // * {@inheritDoc}
-  // */
-  // @Override
-  // public Spliterator<E> spliterator() {
-  //
-  // // TODO hohwille temporary workaround due to Bug in Eclipse/Kepler...
-  // return super.spliterator();
-  // }
 
 }

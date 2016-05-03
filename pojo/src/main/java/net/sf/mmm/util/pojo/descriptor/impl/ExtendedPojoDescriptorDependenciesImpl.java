@@ -50,9 +50,6 @@ public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDepend
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

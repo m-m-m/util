@@ -552,25 +552,16 @@ public abstract class PojoPathNavigatorTest {
    */
   public static class FooFunction extends AbstractPojoPathFunction<MyPojo, Integer> {
 
-    /**
-     * {@inheritDoc}
-     */
     public Class<MyPojo> getInputClass() {
 
       return MyPojo.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Class<Integer> getValueClass() {
 
       return Integer.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Integer get(MyPojo actual, String functionName, PojoPathContext context) {
 
       if (actual != null) {
@@ -579,9 +570,6 @@ public abstract class PojoPathNavigatorTest {
       return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Integer set(MyPojo actual, String functionName, Integer value, PojoPathContext context) {
 
@@ -597,25 +585,16 @@ public abstract class PojoPathNavigatorTest {
    */
   public static class FooOrBarFunction extends AbstractPojoPathFunction<MyPojo, Integer> {
 
-    /**
-     * {@inheritDoc}
-     */
     public Class<MyPojo> getInputClass() {
 
       return MyPojo.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Class<Integer> getValueClass() {
 
       return Integer.class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Integer get(MyPojo actual, String functionName, PojoPathContext context) {
 
       if (actual != null) {
@@ -628,9 +607,6 @@ public abstract class PojoPathNavigatorTest {
       return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public boolean isDeterministic() {
 
       // in this case it depends on the point of view whether this function

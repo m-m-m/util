@@ -16,14 +16,8 @@ import java.util.Set;
 @SuppressWarnings("rawtypes")
 public interface SetFactory extends CollectionFactory<Set> {
 
-  /**
-   * {@inheritDoc}
-   */
   <E> Set<E> create();
 
-  /**
-   * {@inheritDoc}
-   */
   <E> Set<E> create(int capacity);
 
 }

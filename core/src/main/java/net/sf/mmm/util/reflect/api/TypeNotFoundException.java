@@ -41,9 +41,6 @@ public class TypeNotFoundException extends ReflectionException {
     super(nested, createBundle(NlsBundleUtilReflectRoot.class).errorTypeNotFound(type));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -74,9 +74,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
     this.children = Collections.unmodifiableList(this.mutableChildList);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PARENT getParent() {
 
     return this.parent;
@@ -94,9 +92,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
     this.parent = parent;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public List<CHILD> getChildren() {
 
     return this.children;
@@ -176,9 +172,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
     return this.mutableChildList.remove(index);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isAncestor(PARENT node) {
 
     if (node == null) {
@@ -194,9 +188,7 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isDescendant(CHILD node) {
 
     if (node == null) {

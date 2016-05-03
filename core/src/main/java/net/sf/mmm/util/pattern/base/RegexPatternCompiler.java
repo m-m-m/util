@@ -37,9 +37,7 @@ public class RegexPatternCompiler implements PatternCompiler {
     this.flags = flags;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Pattern compile(String pattern) throws IllegalArgumentException {
 
     return Pattern.compile(pattern, this.flags);

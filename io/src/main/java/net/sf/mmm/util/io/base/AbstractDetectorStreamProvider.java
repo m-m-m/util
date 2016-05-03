@@ -106,9 +106,6 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggableCom
     return this.byteArrayPool;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -121,17 +118,13 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggableCom
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DetectorInputStream wrapInputStream(InputStream stream) {
 
     return wrapInputStream(stream, new HashMap<String, Object>());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DetectorOutputStream wrapOutputStream(OutputStream stream) {
 
     return wrapOutputStream(stream, new HashMap<String, Object>());

@@ -29,27 +29,18 @@ public class ValueConverterIdentity<V> extends AbstractSimpleValueConverter<V, V
     this.valueClass = valueClass;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<V> getSourceType() {
 
     return this.valueClass;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<V> getTargetType() {
 
     return this.valueClass;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <T extends V> T convert(V value, Object valueSource, Class<T> targetClass) throws ValueException {

@@ -34,17 +34,13 @@ public class SequenceCharIterator implements CharIterator {
     this.length = this.sequence.length();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     return (this.index < this.length);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char next() {
 
     if (this.index < this.length) {

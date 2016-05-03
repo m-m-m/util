@@ -105,9 +105,6 @@ public class ObjectMismatchException extends NlsRuntimeException {
         createBundle(NlsBundleUtilExceptionRoot.class).errorObjectMismatch(object, expected, source, property));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

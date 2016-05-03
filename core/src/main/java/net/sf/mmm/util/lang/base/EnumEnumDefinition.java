@@ -157,36 +157,24 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
     return type.getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
     return this.title;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public EnumDefinition<CATEGORY, ?> getCategory() {
 
     return this.category;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<TYPE> getEnumType() {
 
@@ -202,18 +190,12 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
     return this.enumValues;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isMutable() {
 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isCachable() {
 
@@ -233,11 +215,7 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
       super();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
+    @Override    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
 
       SimpleDatatype<?> datatype = (SimpleDatatype<?>) enumValue;
       Object result = datatype.getValue();
@@ -262,11 +240,7 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
       super();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
+    @Override    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
 
       String result = EnumEnumDefinition.this.stringUtil.toCamlCase(enumValue.name());
       buffer.append(result);

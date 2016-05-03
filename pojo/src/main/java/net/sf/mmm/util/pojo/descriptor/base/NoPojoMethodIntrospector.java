@@ -24,9 +24,7 @@ public class NoPojoMethodIntrospector implements PojoMethodIntrospector {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Iterator<Method> findMethods(Class<?> pojoType) {
 
     return EmptyIterator.getInstance();

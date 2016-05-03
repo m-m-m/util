@@ -199,9 +199,6 @@ public class GenericContextFactoryTest {
       this.name = name;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void run() {
 
       try {

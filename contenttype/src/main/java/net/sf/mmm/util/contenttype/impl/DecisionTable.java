@@ -30,9 +30,6 @@ public class DecisionTable extends AbstractDecision {
     this.table = new DecisionTreeNodeImpl[256];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public DecisionTreeNodeImpl detect(DetectorStreamBuffer buffer, Map<String, Object> metadata,
       boolean eos) {
@@ -41,9 +38,6 @@ public class DecisionTable extends AbstractDecision {
     return this.table[next];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AbstractDecision merge(ContentTypeBean contentType, SegmentContainerSequence segment,
       int segmentIndex) {

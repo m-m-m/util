@@ -37,9 +37,6 @@ public final class HashCodeFunctionDefault extends AbstractHashCodeFunction<Obje
     return (HashCodeFunction<V>) INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected int hashCodeNotNull(Object value) {
 

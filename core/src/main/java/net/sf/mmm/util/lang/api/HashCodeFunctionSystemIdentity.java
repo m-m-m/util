@@ -37,9 +37,6 @@ public final class HashCodeFunctionSystemIdentity extends AbstractHashCodeFuncti
     return (HashCodeFunction<V>) INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected int hashCodeNotNull(Object value) {
 

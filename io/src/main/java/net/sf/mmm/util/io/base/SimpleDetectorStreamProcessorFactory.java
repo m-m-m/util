@@ -47,9 +47,7 @@ public class SimpleDetectorStreamProcessorFactory extends AbstractDetectorStream
     this.processorImplementation = processorImplementation;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DetectorStreamProcessor createProcessor() {
 
     try {

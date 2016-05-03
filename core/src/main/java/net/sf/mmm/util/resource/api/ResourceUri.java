@@ -113,9 +113,6 @@ public interface ResourceUri {
    */
   String getPath();
 
-  /**
-   * {@inheritDoc}
-   */
   String toString();
 
 }

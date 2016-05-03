@@ -65,9 +65,6 @@ public class Chroma extends Factor<Chroma> {
     super(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Chroma newInstance(double value) {
 

@@ -43,9 +43,6 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public RebindResult generateIncrementally(TreeLogger logger, GeneratorContext context, String typeName)
       throws UnableToCompleteException {

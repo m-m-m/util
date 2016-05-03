@@ -167,9 +167,6 @@ public class ProcessUtilTest {
       return this.closed;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() throws IOException {
 
@@ -177,9 +174,6 @@ public class ProcessUtilTest {
       super.close();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int read() throws IOException {
 
@@ -200,9 +194,6 @@ public class ProcessUtilTest {
       return this.closed;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() throws IOException {
 
@@ -210,9 +201,6 @@ public class ProcessUtilTest {
       super.close();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void write(int b) throws IOException {
 

@@ -28,9 +28,6 @@ public class JavaSerializer implements Serializer {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object deserialize(byte[] data) {
 
@@ -44,9 +41,6 @@ public class JavaSerializer implements Serializer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public byte[] serialize(Object object) {
 

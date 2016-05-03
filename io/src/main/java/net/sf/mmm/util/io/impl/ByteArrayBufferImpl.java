@@ -59,18 +59,13 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
     this.currentIndex = currentIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getCurrentIndex() {
 
     return this.currentIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void setCurrentIndex(int currentIndex) {
 
     ValueOutOfRangeException.checkRange(Integer.valueOf(currentIndex), Integer.valueOf(getMinimumIndex()),
@@ -78,18 +73,13 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
     this.currentIndex = currentIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setMaximumIndex(int maximumIndex) {
 
     super.setMaximumIndex(maximumIndex);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public byte next() throws NoSuchElementException {
 
     if (this.currentIndex > getMaximumIndex()) {
@@ -98,9 +88,7 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
     return getBytes()[this.currentIndex++];
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public byte peek() throws NoSuchElementException {
 
     if (this.currentIndex > getMaximumIndex()) {
@@ -109,17 +97,13 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
     return getBytes()[this.currentIndex];
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     return (this.currentIndex <= getMaximumIndex());
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public long skip(long byteCount) {
 
     int bytesLeft = getMaximumIndex() - this.currentIndex + 1;
@@ -133,9 +117,6 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
     return skip;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ByteArrayImpl createSubArray(int minimum, int maximum) {
 

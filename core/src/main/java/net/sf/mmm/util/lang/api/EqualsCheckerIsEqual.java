@@ -35,9 +35,6 @@ public final class EqualsCheckerIsEqual extends AbstractEqualsChecker<Object> {
     return (EqualsChecker<VALUE>) INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isEqualNotNull(Object value1, Object value2) {
 

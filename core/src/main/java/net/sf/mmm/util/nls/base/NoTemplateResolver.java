@@ -25,9 +25,7 @@ public final class NoTemplateResolver extends AbstractNlsTemplateResolver {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NlsTemplate resolveTemplate(String internationalizedMessage) {
 
     return null;

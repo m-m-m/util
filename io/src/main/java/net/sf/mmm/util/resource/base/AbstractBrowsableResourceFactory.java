@@ -118,9 +118,6 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
     return provider;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected DataResource createDataResource(ResourceUri resourceUri) throws ResourceUriUndefinedException {
 
@@ -146,9 +143,6 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
     return (BrowsableResource) provider.createResource(resourceUri);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public BrowsableResource createBrowsableResource(String resourceUri) throws ResourceUriUndefinedException {
 
@@ -180,18 +174,11 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
       this.delegate = delegate;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected BrowsableResource getDelegate() {
+    @Override    protected BrowsableResource getDelegate() {
 
       return this.delegate;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public DataResource navigate(String relativePath) throws ResourceUriUndefinedException {
 

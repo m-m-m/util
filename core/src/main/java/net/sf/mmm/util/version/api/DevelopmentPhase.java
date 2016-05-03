@@ -87,9 +87,7 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
     this.alternatives = alternatives;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getValue() {
 
     return this.value;
@@ -156,9 +154,6 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

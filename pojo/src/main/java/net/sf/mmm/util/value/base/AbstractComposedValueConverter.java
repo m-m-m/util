@@ -53,9 +53,6 @@ public abstract class AbstractComposedValueConverter extends AbstractGenericValu
     this.reflectionUtil = reflectionUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -65,33 +62,24 @@ public abstract class AbstractComposedValueConverter extends AbstractGenericValu
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public final Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public final Class<Object> getTargetType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public final <T> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
     return convert(value, valueSource, getReflectionUtil().createGenericType(targetClass));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <TARGET> TARGET convertValue(Object value, Object valueSource, Class<TARGET> targetClass)
       throws ValueNotSetException, WrongValueTypeException {
@@ -106,9 +94,6 @@ public abstract class AbstractComposedValueConverter extends AbstractGenericValu
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   public <TARGET> TARGET convertValue(Object value, Object valueSource, Class<TARGET> targetClass, Type targetType)
       throws ValueNotSetException, WrongValueTypeException {

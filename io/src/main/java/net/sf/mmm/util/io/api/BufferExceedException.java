@@ -31,9 +31,6 @@ public class BufferExceedException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilIoRoot.class).errorBufferLengthExceed(length, capacity));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

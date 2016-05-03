@@ -31,17 +31,13 @@ public class XmlPathImpl extends AbstractXmlSelector implements XmlPath {
     this.segmentList = new ArrayList<AbstractXmlPathSegment>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public AbstractXmlPathSegment getSegment(int index) {
 
     return this.segmentList.get(index);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getSegmentCount() {
 
     return this.segmentList.size();
@@ -57,9 +53,6 @@ public class XmlPathImpl extends AbstractXmlSelector implements XmlPath {
     this.segmentList.add(segment);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void toString(StringBuilder stringBuilder) {
 

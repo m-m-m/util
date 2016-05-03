@@ -170,9 +170,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     buffer.append(this.chars, this.startIndex + start, end - start);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getCurrentIndex() {
 
     return this.pos - this.startIndex;
@@ -195,25 +193,19 @@ public class CharSequenceScanner implements CharStreamScanner {
     this.pos = this.startIndex + index;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     return (this.pos < this.endIndex);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char next() {
 
     return this.chars[this.pos++];
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char forceNext() {
 
     if (this.pos < this.endIndex) {
@@ -223,9 +215,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char peek() {
 
     return this.chars[this.pos];
@@ -254,9 +244,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char forcePeek() {
 
     if (this.pos < this.endIndex) {
@@ -278,9 +266,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean skipUntil(char stop) {
 
     while (this.pos < this.endIndex) {
@@ -291,9 +277,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String readUntil(char stop, boolean acceptEof) {
 
     int start = this.pos;
@@ -314,9 +298,6 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String readUntil(CharFilter filter, boolean acceptEof) {
 
@@ -338,9 +319,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String readUntil(char stop, boolean acceptEof, char escape) {
 
     StringBuilder result = new StringBuilder();
@@ -374,9 +353,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String readUntil(char stop, boolean acceptEof, CharScannerSyntax syntax) {
 
     StringBuilder result = new StringBuilder();
@@ -496,9 +473,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String read(int count) {
 
     int len = this.endIndex - this.pos;
@@ -510,9 +485,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int readDigit() {
 
     int result = -1;
@@ -526,9 +499,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public long readLong(int maxDigits) throws NumberFormatException {
 
     if (maxDigits <= 0) {
@@ -554,18 +525,14 @@ public class CharSequenceScanner implements CharStreamScanner {
     return Long.parseLong(number);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public double readDouble() throws NumberFormatException {
 
     String number = consumeDecimal();
     return Double.parseDouble(number);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public float readFloat() throws NumberFormatException {
 
     String number = consumeDecimal();
@@ -618,17 +585,13 @@ public class CharSequenceScanner implements CharStreamScanner {
     return number;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean skipOver(String substring, boolean ignoreCase) {
 
     return skipOver(substring, ignoreCase, null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean skipOver(String substring, boolean ignoreCase, CharFilter stopFilter) {
 
     int subLength = substring.length();
@@ -681,9 +644,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean expect(String expected, boolean ignoreCase) {
 
     int len = expected.length();
@@ -706,9 +667,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean expectStrict(String expected, boolean ignoreCase) {
 
     int len = expected.length();
@@ -733,9 +692,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean expect(char expected) {
 
     if (this.pos < this.endIndex) {
@@ -747,9 +704,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void require(char expected) throws NlsParseException {
 
     String value = "";
@@ -797,9 +752,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return tail;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void require(String expected, boolean ignoreCase) throws NlsParseException {
 
     if (!expectStrict(expected, ignoreCase)) {
@@ -807,9 +760,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean skipUntil(char stop, char escape) {
 
     boolean escapeActive = false;
@@ -827,9 +778,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int skipWhile(char c) {
 
     int currentPos = this.pos;
@@ -842,17 +791,13 @@ public class CharSequenceScanner implements CharStreamScanner {
     return this.pos - currentPos;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int skipWhile(CharFilter filter) {
 
     return skipWhile(filter, Integer.MAX_VALUE);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int skipWhile(CharFilter filter, int max) {
 
     if (max < 0) {
@@ -876,9 +821,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     return this.pos - currentPos;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String readWhile(CharFilter filter) {
 
     int currentPos = this.pos;
@@ -890,9 +833,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String readWhile(CharFilter filter, int max) {
 
     int currentPos = this.pos;
@@ -919,9 +860,6 @@ public class CharSequenceScanner implements CharStreamScanner {
     return this.str;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

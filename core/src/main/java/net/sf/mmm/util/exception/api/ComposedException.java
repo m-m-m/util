@@ -77,9 +77,6 @@ public class ComposedException extends NlsRuntimeException {
     return new ComposedNlsMessage(messages);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void printStackTrace(Locale locale, Appendable buffer) {
 
@@ -115,9 +112,6 @@ public class ComposedException extends NlsRuntimeException {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

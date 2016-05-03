@@ -34,9 +34,6 @@ public enum SortOrder implements SimpleDatatype<String> {
     this.title = title;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getValue() {
 
@@ -60,9 +57,6 @@ public enum SortOrder implements SimpleDatatype<String> {
     return compareTo;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

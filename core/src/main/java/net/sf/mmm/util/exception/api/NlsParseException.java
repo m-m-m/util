@@ -163,9 +163,6 @@ public class NlsParseException extends NlsRuntimeException {
     this(nested, value, targetType, null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

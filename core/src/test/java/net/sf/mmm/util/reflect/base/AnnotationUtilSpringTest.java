@@ -13,9 +13,6 @@ import net.sf.mmm.util.reflect.api.AnnotationUtil;
 @SuppressWarnings("all")
 public class AnnotationUtilSpringTest extends AnnotationUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AnnotationUtil getAnnotationUtil() {
 

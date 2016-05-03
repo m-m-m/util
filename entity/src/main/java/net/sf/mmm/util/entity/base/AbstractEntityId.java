@@ -23,18 +23,12 @@ public abstract class AbstractEntityId implements EntityId {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getValue() {
 
     return toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final boolean equals(Object obj) {
 
@@ -60,9 +54,6 @@ public abstract class AbstractEntityId implements EntityId {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final int hashCode() {
 
@@ -76,9 +67,6 @@ public abstract class AbstractEntityId implements EntityId {
     return hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

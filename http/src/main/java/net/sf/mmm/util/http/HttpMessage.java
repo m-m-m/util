@@ -509,9 +509,6 @@ public abstract class HttpMessage {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -558,18 +555,12 @@ public abstract class HttpMessage {
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int hashCode() {
 
       return this.hash;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
 

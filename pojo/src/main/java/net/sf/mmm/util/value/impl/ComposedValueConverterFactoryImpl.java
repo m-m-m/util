@@ -38,9 +38,6 @@ public class ComposedValueConverterFactoryImpl extends AbstractComposedValueConv
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ComposedValueConverter createConverter(boolean addDefaultConverters, List<ValueConverter<?, ?>> converterList) {
 
@@ -95,9 +92,6 @@ public class ComposedValueConverterFactoryImpl extends AbstractComposedValueConv
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

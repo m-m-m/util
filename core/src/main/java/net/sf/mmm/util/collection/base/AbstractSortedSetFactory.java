@@ -23,25 +23,19 @@ public abstract class AbstractSortedSetFactory implements SortedSetFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<SortedSet> getCollectionInterface() {
 
     return SortedSet.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public SortedSet createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public SortedSet createGeneric(int capacity) {
 
     return create(capacity);

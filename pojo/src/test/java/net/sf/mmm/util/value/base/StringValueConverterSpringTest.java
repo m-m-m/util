@@ -13,18 +13,12 @@ import net.sf.mmm.util.value.api.StringValueConverter;
  */
 public class StringValueConverterSpringTest extends StringValueConverterTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public StringValueConverter getStringValueConverter() {
 
     return SpringContainerPool.getInstance().get(StringValueConverter.class);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Iso8601Util getIso8601Util() {
 

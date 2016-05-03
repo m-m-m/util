@@ -16,9 +16,6 @@ import org.junit.Test;
  */
 public class SimpleStringHasherTest extends AbstractStringHasherTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected StringHasher getStringHasher() {
 

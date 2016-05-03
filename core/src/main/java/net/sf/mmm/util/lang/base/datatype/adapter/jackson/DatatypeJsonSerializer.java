@@ -102,9 +102,6 @@ public class DatatypeJsonSerializer<T> extends JsonSerializer<T> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
       JsonProcessingException {

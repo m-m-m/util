@@ -51,9 +51,6 @@ public class IllegalCaseException extends NlsRuntimeException {
     this(enumType.getSimpleName() + "." + enumValue.name());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -35,25 +35,18 @@ public class LowerBoundWildcardType implements WildcardType {
     this.lowerBound = lowerBound;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type[] getLowerBounds() {
 
     return new Type[] { this.lowerBound };
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Type[] getUpperBounds() {
 
     return ReflectionUtil.NO_TYPES;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object other) {
 
@@ -70,9 +63,6 @@ public class LowerBoundWildcardType implements WildcardType {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -81,9 +71,6 @@ public class LowerBoundWildcardType implements WildcardType {
     return ~(31 + this.lowerBound.hashCode());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

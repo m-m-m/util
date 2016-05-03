@@ -118,90 +118,60 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getComponentType() {
 
     return this.componentType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getKeyType() {
 
     return this.keyType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Type getType() {
 
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<T> getAssignmentClass() {
 
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<T> getRetrievalClass() {
 
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getTypeArgument(int index) {
 
     throw new IndexOutOfBoundsException(Integer.toString(index));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getTypeArgumentCount() {
 
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAssignableFrom(GenericType<?> subType) {
 
     throw new NlsUnsupportedOperationException("GWT:isAssignableFrom");
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
     return ~this.type.hashCode();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -218,18 +188,12 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
     return this.type.equals(other.type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
     return this.type.getName();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toStringSimple() {
 

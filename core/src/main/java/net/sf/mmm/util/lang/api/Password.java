@@ -36,9 +36,6 @@ public class Password extends AbstractSimpleDatatype<String> implements Security
     super(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

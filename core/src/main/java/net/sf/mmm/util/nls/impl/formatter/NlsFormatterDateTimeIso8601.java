@@ -37,9 +37,7 @@ public class NlsFormatterDateTimeIso8601 extends AbstractNlsFormatterDateIso8601
     super(iso8601Util);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getType() {
 
     return NlsFormatterManager.TYPE_DATETIME;

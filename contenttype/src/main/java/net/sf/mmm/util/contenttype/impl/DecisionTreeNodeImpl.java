@@ -29,9 +29,7 @@ public class DecisionTreeNodeImpl implements DecisionTreeNode {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ContentType getContentType() {
 
     return this.contentType;
@@ -45,9 +43,7 @@ public class DecisionTreeNodeImpl implements DecisionTreeNode {
     this.contentType = contentType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DecisionTreeNode detect(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) {
 
     // TODO Auto-generated method stub

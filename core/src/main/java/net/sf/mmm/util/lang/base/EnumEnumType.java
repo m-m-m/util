@@ -30,18 +30,12 @@ public final class EnumEnumType implements EnumType<Enum<?>> {
     this.value = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Enum<?> getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

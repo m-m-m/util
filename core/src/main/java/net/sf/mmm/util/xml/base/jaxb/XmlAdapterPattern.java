@@ -22,9 +22,6 @@ public class XmlAdapterPattern extends XmlAdapter<String, Pattern> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String marshal(Pattern pattern) throws Exception {
 
@@ -35,9 +32,6 @@ public class XmlAdapterPattern extends XmlAdapter<String, Pattern> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Pattern unmarshal(String pattern) throws Exception {
 

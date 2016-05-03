@@ -48,9 +48,6 @@ public class IllegalPojoPathException extends PojoPathException {
     super(nested, createBundle(NlsBundleUtilPojoRoot.class).errorPojoPathIllegal(pojoPath));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -26,9 +26,6 @@ public class DatatypeDetectorImpl extends AbstractDatatypeDetector {
     registerDefaultDatatypes();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDatatype(Class<?> type) {
 

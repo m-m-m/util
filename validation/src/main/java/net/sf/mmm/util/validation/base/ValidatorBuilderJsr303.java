@@ -66,18 +66,12 @@ public class ValidatorBuilderJsr303 extends AbstractValidatorBuilder {
     this.groups = groups;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <V> AbstractValidator<V> newValidator(Class<V> pojoType) {
 
     return new ValidatorJsr303<>(this.validator, pojoType, this.groups);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public AbstractValidator<?> newValidator(Class<?> pojoType, String property, Class<?> propertyType) {
@@ -85,9 +79,6 @@ public class ValidatorBuilderJsr303 extends AbstractValidatorBuilder {
     return new ValidatorJsr303(this.validator, pojoType, property, propertyType, this.groups);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property, Class<T> propertyType) {
 

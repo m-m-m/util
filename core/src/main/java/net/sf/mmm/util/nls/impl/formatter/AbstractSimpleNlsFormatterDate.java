@@ -23,9 +23,6 @@ public abstract class AbstractSimpleNlsFormatterDate extends SimpleNlsFormatter<
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Formatter<Object> createFormatter(Locale locale) {
 

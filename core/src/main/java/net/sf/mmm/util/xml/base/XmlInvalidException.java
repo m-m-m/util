@@ -44,9 +44,6 @@ public class XmlInvalidException extends XmlException {
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorXmlInvalid(source));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

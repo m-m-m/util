@@ -12,9 +12,6 @@ import net.sf.mmm.util.io.api.StreamUtil;
  */
 public class StreamUtilSpringTest extends StreamUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected StreamUtil getStreamUtil() {
 

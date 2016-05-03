@@ -62,33 +62,25 @@ public class ByteArrayImpl extends AbstractByteArray {
     this.maximumIndex = maximumIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public byte[] getBytes() {
 
     return this.buffer;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getCurrentIndex() {
 
     return this.minimumIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getMinimumIndex() {
 
     return this.minimumIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getMaximumIndex() {
 
     return this.maximumIndex;
@@ -109,9 +101,6 @@ public class ByteArrayImpl extends AbstractByteArray {
     this.maximumIndex = maximumIndex;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ByteArrayImpl createSubArray(int minimum, int maximum) {
 
@@ -119,9 +108,6 @@ public class ByteArrayImpl extends AbstractByteArray {
     return new ByteArrayImpl(this.buffer, minimum, maximum);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

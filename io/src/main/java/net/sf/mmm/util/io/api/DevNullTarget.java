@@ -24,27 +24,18 @@ public final class DevNullTarget extends OutputStream {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void write(int b) {
 
     // nothing to do
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void write(byte[] b, int off, int len) {
 
     // nothing to do
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close() {
 

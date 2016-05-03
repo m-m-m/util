@@ -47,9 +47,6 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
@@ -69,9 +66,6 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
     return this.message2KeyMap.get(message);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getString(String key) throws MissingResourceException {
 

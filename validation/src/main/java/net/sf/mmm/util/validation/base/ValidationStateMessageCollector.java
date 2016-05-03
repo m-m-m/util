@@ -76,9 +76,6 @@ public class ValidationStateMessageCollector extends AbstractValidationStateColl
     return this.separator;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void onFailure(ValidationFailure failure) {
 
@@ -91,9 +88,6 @@ public class ValidationStateMessageCollector extends AbstractValidationStateColl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isValid() {
 
@@ -114,9 +108,6 @@ public class ValidationStateMessageCollector extends AbstractValidationStateColl
     return this.failureMessages.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

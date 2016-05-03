@@ -93,9 +93,6 @@ public class AbstractEventSourceTest {
       throw EvilEventListener.error;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
 
@@ -133,20 +130,12 @@ public class AbstractEventSourceTest {
       super.fireEvent(event);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Logger createLogger() {
+    @Override    protected Logger createLogger() {
 
       return new TestLogger();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected TestLogger getLogger() {
+    @Override    protected TestLogger getLogger() {
 
       return (TestLogger) super.getLogger();
     }

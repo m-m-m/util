@@ -26,9 +26,7 @@ public abstract class AbstractFormatter<V> implements Formatter<V> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String format(V value) {
 
     StringBuilder buffer = new StringBuilder();
@@ -36,9 +34,7 @@ public abstract class AbstractFormatter<V> implements Formatter<V> {
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void format(V value, Appendable buffer) throws RuntimeIoException {
 
     try {

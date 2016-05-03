@@ -13,9 +13,6 @@ import net.sf.mmm.util.math.api.MathUtil;
 @SuppressWarnings("all")
 public class MathUtilSpringTest extends MathUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public MathUtil getMathUtil() {
 

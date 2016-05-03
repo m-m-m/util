@@ -24,9 +24,7 @@ public class ValueConverterToArrayOfLong extends AbstractConverterToArray<long[]
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<long[]> getTargetType() {
 
     return long[].class;

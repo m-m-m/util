@@ -49,9 +49,6 @@ public class ResourceAmbiguousException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilComponentRoot.class).errorResourceAmbiguousWithIds(resourceName, resourceIds));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -32,9 +32,6 @@ public class IllegalWildcardSequenceException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilReflectRoot.class).errorTypeIllegalWildcard(sequence));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

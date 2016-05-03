@@ -37,9 +37,6 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
     this.accessors = Collections.unmodifiableCollection(this.accessorMap.values());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(PojoPropertyAccessorMode<ACCESSOR> mode) {
@@ -47,18 +44,12 @@ public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
     return (ACCESSOR) this.accessorMap.get(mode);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Collection<? extends PojoPropertyAccessor> getAccessors() {
 
     return this.accessors;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessor putAccessor(PojoPropertyAccessor accessor) {
 

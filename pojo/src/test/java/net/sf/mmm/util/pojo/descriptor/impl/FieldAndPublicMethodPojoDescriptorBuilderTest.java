@@ -14,9 +14,6 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 @SuppressWarnings("all")
 public class FieldAndPublicMethodPojoDescriptorBuilderTest extends AbstractMyPojoDescriptorBuilderTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
@@ -27,18 +24,12 @@ public class FieldAndPublicMethodPojoDescriptorBuilderTest extends AbstractMyPoj
     return builder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isMethodIntrostection() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isFieldIntrostection() {
 

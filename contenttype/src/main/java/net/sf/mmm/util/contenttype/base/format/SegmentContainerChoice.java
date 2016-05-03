@@ -24,9 +24,6 @@ public class SegmentContainerChoice extends SegmentContainer {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected long aggregateMaximumLength(long aggregated, long next) {
 
@@ -38,9 +35,6 @@ public class SegmentContainerChoice extends SegmentContainer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected long aggregateMinimumLength(long aggregated, long next) {
 
@@ -52,9 +46,6 @@ public class SegmentContainerChoice extends SegmentContainer {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getTagName() {
 

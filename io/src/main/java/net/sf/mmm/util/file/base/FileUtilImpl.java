@@ -92,9 +92,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -144,18 +141,12 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     this.stringUtil = stringUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public File getUserHomeDirectory() {
 
     return this.userHomeDirectory;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getUserHomeDirectoryPath() {
 
@@ -174,9 +165,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     this.userHomeDirectoryPath = userHome;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public File getTemporaryDirectory() {
 
@@ -195,9 +183,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     this.temporaryDirectoryPath = tmpDir;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getUserLogin() {
 
@@ -213,9 +198,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     this.userLogin = userLogin;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void copyFile(File source, File destination) {
 
@@ -231,9 +213,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void copyFile(File source, File destination, boolean keepFlags) {
 
@@ -254,18 +233,12 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void copyRecursive(File source, File destination, boolean allowOverwrite) {
 
     copyRecursive(source, destination, allowOverwrite, null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter) {
 
@@ -317,9 +290,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public FileAccessPermissions getPermissions(File file, FileAccessClass accessClass) {
 
@@ -339,9 +309,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     return permissions;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setPermissions(File file, FileAccessPermissions permissions) {
 
@@ -359,9 +326,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int deleteRecursive(File path) {
 
@@ -380,9 +344,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     return deleteCount;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int deleteChildren(File directory) {
 
@@ -404,9 +365,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     return deleteCount;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public File[] getMatchingFiles(File cwd, String path, FileType fileType) {
 
@@ -415,9 +373,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     return list.toArray(new File[list.size()]);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean collectMatchingFiles(File cwd, String path, FileType fileType, List<File> list) {
 

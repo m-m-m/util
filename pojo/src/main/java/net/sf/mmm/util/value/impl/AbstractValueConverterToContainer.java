@@ -107,9 +107,6 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
     this.collectionReflectionUtil = collectionReflectionUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -119,17 +116,13 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <T extends CONTAINER> T convert(Object value, Object valueSource, GenericType<T> targetType) {
 
     if (value == null) {

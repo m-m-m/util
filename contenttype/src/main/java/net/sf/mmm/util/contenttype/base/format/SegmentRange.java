@@ -48,9 +48,6 @@ public class SegmentRange extends Segment {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getTagName() {
 
@@ -79,18 +76,12 @@ public class SegmentRange extends Segment {
     return this.bytesMaximum;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMinimumLength() {
 
     return getBytesMinimum().length;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void validateNonRecursive(StringBuilder source) {
 

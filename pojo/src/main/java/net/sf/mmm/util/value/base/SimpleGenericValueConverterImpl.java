@@ -75,9 +75,6 @@ public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent i
     this.mathUtil = mathUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -90,9 +87,6 @@ public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent i
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public <T> T convert(Object value, Object valueSource, Class<T> targetClass) throws ValueException {

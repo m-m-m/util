@@ -34,9 +34,6 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateImportStatements(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -46,9 +43,6 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
     sourceComposerFactory.addImport(NlsBundle.class.getName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateClassDeclaration(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -56,9 +50,6 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
     sourceComposerFactory.setSuperclass(AbstractNlsBundleFactoryGwt.class.getSimpleName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateClassContents(JClassType inputType, TreeLogger logger, SourceWriter sourceWriter,
       String simpleName, GeneratorContext context) {
@@ -150,9 +141,6 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
     logger.log(Type.INFO, "Found " + bundleCount + " NlsBundle interface(s).");
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getVersionId() {
 

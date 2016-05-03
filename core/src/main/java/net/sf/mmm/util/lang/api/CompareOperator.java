@@ -297,9 +297,6 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

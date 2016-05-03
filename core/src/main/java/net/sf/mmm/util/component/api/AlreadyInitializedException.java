@@ -30,9 +30,6 @@ public class AlreadyInitializedException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilComponentRoot.class).errorAlreadyInitialized());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

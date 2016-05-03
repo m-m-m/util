@@ -165,9 +165,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     this.charArrayPool = charArrayPool;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -183,9 +180,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String read(Reader reader) throws RuntimeIoException {
 
@@ -194,9 +188,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     return writer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long transfer(Reader reader, Writer writer, boolean keepWriterOpen) throws RuntimeIoException {
 
@@ -205,9 +196,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     return bytes;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long transfer(FileInputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
       throws RuntimeIoException {
@@ -234,9 +222,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen, long size)
       throws RuntimeIoException {
@@ -265,9 +250,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long transfer(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen)
       throws RuntimeIoException {
@@ -277,18 +259,12 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     return bytes;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen) {
 
     return transferAsync(inStream, outStream, keepOutStreamOpen, null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen,
       TransferCallback callback) {
@@ -299,18 +275,12 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     return task;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen) {
 
     return transferAsync(reader, writer, keepWriterOpen, null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen, TransferCallback callback) {
 
@@ -320,9 +290,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     return task;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Properties loadProperties(InputStream inStream) throws RuntimeIoException {
 
@@ -335,9 +302,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Properties loadProperties(Reader reader) throws RuntimeIoException {
 
@@ -350,9 +314,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PrintWriter toPrintWriter(Appendable appendable) {
 
@@ -364,9 +325,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Writer toWriter(Appendable appendable) {
 
@@ -378,9 +336,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close(InputStream inputStream) {
 
@@ -391,9 +346,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close(OutputStream outputStream) {
 
@@ -404,9 +356,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close(Writer writer) {
 
@@ -417,9 +366,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close(Reader reader) {
 
@@ -430,9 +376,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close(Channel channel) {
 
@@ -465,9 +408,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       this.transferrer = transferrer;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean cancel(boolean mayInterruptIfRunning) {
 
@@ -489,9 +429,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     /** @see #isCompleted() */
     private volatile boolean completed;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void stop() {
 
@@ -648,9 +585,6 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Long call() throws Exception {
 
@@ -704,36 +638,21 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       this.destination = destination;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected InputStream getSource() {
+    @Override    protected InputStream getSource() {
 
       return this.source;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected OutputStream getDestination() {
+    @Override    protected OutputStream getDestination() {
 
       return this.destination;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Pool<byte[]> getPool() {
+    @Override    protected Pool<byte[]> getPool() {
 
       return getByteArrayPool();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long transfer(byte[] buffer) throws IOException {
 
@@ -779,36 +698,21 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       this.destination = destination;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Reader getSource() {
+    @Override    protected Reader getSource() {
 
       return this.source;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Writer getDestination() {
+    @Override    protected Writer getDestination() {
 
       return this.destination;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Pool<char[]> getPool() {
+    @Override    protected Pool<char[]> getPool() {
 
       return getCharArrayPool();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long transfer(char[] buffer) throws IOException {
 

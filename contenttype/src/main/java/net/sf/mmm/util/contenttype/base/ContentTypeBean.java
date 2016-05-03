@@ -86,9 +86,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     this.extensions = Collections.unmodifiableCollection(this.mutableExtensions);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ContentTypeBean getTechnicalParent() {
 
     return this.technicalParent;
@@ -104,9 +102,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     this.technicalParent = technicalParent;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isTechnicalAncestor(ContentType technicalType) {
 
     if (technicalType == null) {
@@ -122,9 +118,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getDefaultExtension() {
 
     return this.defaultExtension;
@@ -143,9 +137,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     this.defaultExtension = defaultExtension;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Collection<String> getExtensions() {
 
     return this.extensions;
@@ -161,9 +153,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     this.mutableExtensions.add(extension);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getId() {
 
     return this.id;
@@ -177,9 +167,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     this.id = id;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getMimetype() {
 
     return this.mimetype;
@@ -193,9 +181,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     this.mimetype = mimetype;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getTitle() {
 
     if (this.title == null) {
@@ -205,9 +191,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isAbstract() {
 
     return this.isAbstract;
@@ -242,9 +226,6 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     this.format = format;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @XmlIDREF
   @XmlAttribute(name = "parent")
@@ -266,9 +247,6 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     super.setParent(parent);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void addChild(ContentType child) {
 
@@ -276,9 +254,6 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
     super.addChild(child);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

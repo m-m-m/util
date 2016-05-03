@@ -38,9 +38,6 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void format(NlsArgument argument, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException {

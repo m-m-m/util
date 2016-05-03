@@ -84,25 +84,19 @@ public class HyphenationImpl implements Hyphenation {
     this.word = wordBuilder.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getHyphenationCount() {
 
     return this.hyphenationPoints.length;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getHyphenation(int hyphenationIndex) {
 
     return this.hyphenationPoints[hyphenationIndex];
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getHyphenationBefore(int offset) {
 
     int result = -1;
@@ -123,25 +117,18 @@ public class HyphenationImpl implements Hyphenation {
     return this.hyphenationPoints;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getWord() {
 
     return this.word;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getHyphen() {
 
     return this.hyphen;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -12,9 +12,6 @@ import net.sf.mmm.util.text.api.StringHasher;
  */
 public class FastStringHasherTest extends AbstractStringHasherTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected StringHasher getStringHasher() {
 

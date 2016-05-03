@@ -28,9 +28,6 @@ public class SegmentKey extends SegmentVariableLength {
     this.prefix = "";
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getTagName() {
 

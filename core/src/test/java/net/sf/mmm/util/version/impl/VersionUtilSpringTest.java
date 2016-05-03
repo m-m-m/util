@@ -12,9 +12,6 @@ import net.sf.mmm.util.version.api.VersionUtil;
  */
 public class VersionUtilSpringTest extends VersionUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public VersionUtil getVersionUtil() {
 

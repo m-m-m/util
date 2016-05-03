@@ -19,26 +19,19 @@ public class TreeMapFactory extends AbstractSortedMapFactory {
   /** The singleton instance. */
   public static final SortedMapFactory INSTANCE = new TreeMapFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<TreeMap> getMapImplementation() {
 
     return TreeMap.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <K, V> SortedMap<K, V> create() {
 
     return new TreeMap<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <K, V> SortedMap<K, V> create(int capacity) {
 
     // capacity ignored...

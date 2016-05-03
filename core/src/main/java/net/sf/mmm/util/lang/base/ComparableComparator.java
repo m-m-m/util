@@ -28,9 +28,6 @@ public class ComparableComparator<T extends Comparable> implements Comparator<T>
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public int compare(T o1, T o2) {

@@ -73,9 +73,6 @@ public class NodeCycle<V> {
     return this.startNode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

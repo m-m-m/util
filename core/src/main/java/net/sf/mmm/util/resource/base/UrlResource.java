@@ -92,17 +92,12 @@ public class UrlResource extends AbstractDataResource {
     this.fileUtil = fileUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Date getLastModificationDate() {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getSchemePrefix() {
 
@@ -113,9 +108,6 @@ public class UrlResource extends AbstractDataResource {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAvailable() {
 
@@ -130,17 +122,12 @@ public class UrlResource extends AbstractDataResource {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isData() {
 
     return (this.url != null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPath() {
 
@@ -150,9 +137,7 @@ public class UrlResource extends AbstractDataResource {
     return this.url.getPath();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public URL getUrl() throws ResourceNotAvailableException {
 
     if (this.url == null) {
@@ -161,9 +146,6 @@ public class UrlResource extends AbstractDataResource {
     return this.url;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 
@@ -174,9 +156,7 @@ public class UrlResource extends AbstractDataResource {
     return this.fileUtil.getBasename(path);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DataResource navigate(String relativePath) {
 
     try {

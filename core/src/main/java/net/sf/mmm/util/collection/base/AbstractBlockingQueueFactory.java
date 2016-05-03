@@ -23,25 +23,19 @@ public abstract class AbstractBlockingQueueFactory implements BlockingQueueFacto
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<BlockingQueue> getCollectionInterface() {
 
     return BlockingQueue.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public BlockingQueue createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public BlockingQueue createGeneric(int capacity) {
 
     return create(capacity);

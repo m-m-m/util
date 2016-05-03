@@ -28,9 +28,6 @@ public class StaticFormatter<V> extends AbstractFormatter<V> {
     this.string = string;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(V value, Appendable buffer) throws IOException {
 

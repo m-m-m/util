@@ -81,9 +81,6 @@ public class ValueConvertException extends ValueException {
     super(nested, createBundle(NlsBundleUtilValueRoot.class).errorValueConvert(value, targetType, valueSource));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

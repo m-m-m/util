@@ -52,9 +52,6 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
     this.name2dictionaryContainerMap = new HashMap<String, DictionaryContainer>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments) {
 
@@ -64,9 +61,6 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
     return new NlsMessageImpl(template, messageArguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments) {
 
@@ -76,9 +70,6 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
     return new NlsMessageImpl(internationalizedMessage, messageArguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage createDirect(String bundleName, String key, Map<String, Object> messageArguments) {
 
@@ -97,9 +88,6 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
     return dictionaryContainer;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void requestBundlesAsynchron(Runnable callback, String... bundleNames) {
 
@@ -205,17 +193,11 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void onFailure(Exception error) {
 
       getLogger().warn("Failed to load NLS bundle '" + this.bundleName + "'.", error);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void onSuccess(Void result) {
 
       if ((this.callbackAdapters == null) || (this.callbackAdapters.isEmpty())) {

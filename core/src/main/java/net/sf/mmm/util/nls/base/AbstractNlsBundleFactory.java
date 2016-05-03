@@ -64,9 +64,6 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     this.bundleMap = new ConcurrentHashMap<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
@@ -198,9 +195,6 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       return names;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @SuppressWarnings("unchecked")
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

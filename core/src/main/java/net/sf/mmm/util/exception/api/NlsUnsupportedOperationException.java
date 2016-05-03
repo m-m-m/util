@@ -55,9 +55,6 @@ public class NlsUnsupportedOperationException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilExceptionRoot.class).errorUnsupportedOperationWithName(operation, source));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

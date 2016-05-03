@@ -50,9 +50,6 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
     this.collectionFactoryMap = new HashMap<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -102,18 +99,12 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <C extends Collection> CollectionFactory<C> getCollectionFactory(Class<C> collectionType) {
 
     return this.collectionFactoryMap.get(collectionType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <MAP extends Map> MapFactory getMapFactory(Class<MAP> mapType) {
 

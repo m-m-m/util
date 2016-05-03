@@ -34,9 +34,6 @@ public class PojoDescriptorDependenciesImpl extends AbstractComponent implements
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -49,9 +46,7 @@ public class PojoDescriptorDependenciesImpl extends AbstractComponent implements
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public CollectionReflectionUtil getCollectionReflectionUtil() {
 
     return this.collectionReflectionUtil;
@@ -67,9 +62,7 @@ public class PojoDescriptorDependenciesImpl extends AbstractComponent implements
     this.collectionReflectionUtil = collectionUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ReflectionUtil getReflectionUtil() {
 
     return this.reflectionUtil;

@@ -45,9 +45,6 @@ public abstract class EventBusTest extends Assert {
     final String eventLast = "terminate";
     EventListener<Object> listener = new EventListener<Object>() {
 
-      /**
-       * {@inheritDoc}
-       */
       @Override
       public void handleEvent(Object event) {
 
@@ -175,9 +172,6 @@ public abstract class EventBusTest extends Assert {
       this.eventBus.addListener(MyEvent.class, this);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handleEvent(MyEvent event) {
 
@@ -190,9 +184,6 @@ public abstract class EventBusTest extends Assert {
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void run() {
 
@@ -295,9 +286,6 @@ public abstract class EventBusTest extends Assert {
       return this.targetThreadId;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
 

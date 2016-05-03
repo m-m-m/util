@@ -43,45 +43,30 @@ public class PersonEntity extends AbstractEntity<Long> implements Person {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getFirstName() {
 
     return this.firstName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setFirstName(String firstName) {
 
     this.firstName = firstName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLastName() {
 
     return this.lastName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setLastName(String lastName) {
 
     this.lastName = lastName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Long getAddressId() {
 
@@ -91,9 +76,6 @@ public class PersonEntity extends AbstractEntity<Long> implements Person {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setAddressId(Long addressId) {
 

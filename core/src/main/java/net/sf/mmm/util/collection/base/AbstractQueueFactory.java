@@ -23,25 +23,19 @@ public abstract class AbstractQueueFactory implements QueueFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Queue> getCollectionInterface() {
 
     return Queue.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Queue createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Queue createGeneric(int capacity) {
 
     return create(capacity);

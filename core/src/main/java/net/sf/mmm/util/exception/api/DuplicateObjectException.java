@@ -87,9 +87,6 @@ public class DuplicateObjectException extends NlsRuntimeException {
     map.put(key, value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -35,27 +35,18 @@ public class ValueConverterEntityToEto extends AbstractValueConverterToSimilarPo
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<PersistenceEntity> getSourceType() {
 
     return PersistenceEntity.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<EntityTo> getTargetType() {
 
     return EntityTo.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public <T extends EntityTo> T convert(PersistenceEntity value, Object valueSource, GenericType<T> targetType)
@@ -71,11 +62,7 @@ public class ValueConverterEntityToEto extends AbstractValueConverterToSimilarPo
    */
   private static class EtoHelper extends PersistentEntityAccess {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected <ID> void setPersistentEntity(EntityTo<ID> eto, PersistenceEntity<ID> persistentEntity) {
+    @Override    protected <ID> void setPersistentEntity(EntityTo<ID> eto, PersistenceEntity<ID> persistentEntity) {
 
       super.setPersistentEntity(eto, persistentEntity);
     }

@@ -32,9 +32,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read() throws IOException {
 
@@ -42,9 +39,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read(byte[] b) throws IOException {
 
@@ -52,9 +46,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int read(byte[] b, int off, int len) throws IOException {
 
@@ -62,9 +53,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long skip(long n) throws IOException {
 
@@ -72,9 +60,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int available() throws IOException {
 
@@ -82,9 +67,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void close() throws IOException {
 
@@ -92,9 +74,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void mark(int readlimit) {
 
@@ -102,9 +81,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void reset() throws IOException {
 
@@ -112,9 +88,6 @@ public class FailingInputStream extends InputStream {
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean markSupported() {
 

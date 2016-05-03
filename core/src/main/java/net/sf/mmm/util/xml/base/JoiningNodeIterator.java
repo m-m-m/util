@@ -35,9 +35,6 @@ class JoiningNodeIterator extends NodeIterator {
     this.compareMode = mode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("null")
   @Override
   protected Node findNext() {

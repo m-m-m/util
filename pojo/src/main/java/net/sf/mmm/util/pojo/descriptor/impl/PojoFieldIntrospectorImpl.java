@@ -40,9 +40,6 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
     super(visibility, acceptStatic);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterator<Field> findFields(Class<?> pojoType) {
 
@@ -75,11 +72,7 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
       findFirst();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Field findNext() {
+    @Override    protected Field findNext() {
 
       while (this.index < this.fields.length) {
         Field field = this.fields[this.index++];

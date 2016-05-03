@@ -88,9 +88,6 @@ public class AnnotationUtilImpl implements AnnotationUtil {
     this.reflectionUtil = reflectionUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <A extends Annotation> boolean isRuntimeAnnotation(Class<A> annotationType) {
 
@@ -101,9 +98,6 @@ public class AnnotationUtilImpl implements AnnotationUtil {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <A extends Annotation> boolean isAnnotationForType(Class<A> annotationType, ElementType targetType) {
 
@@ -120,9 +114,6 @@ public class AnnotationUtilImpl implements AnnotationUtil {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <A extends Annotation> A getClassAnnotation(Class<?> annotatedClass, Class<A> annotation)
       throws IllegalArgumentException {
@@ -182,9 +173,6 @@ public class AnnotationUtilImpl implements AnnotationUtil {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <A extends Annotation> A getTypeAnnotation(Class<?> annotatedType, Class<A> annotation) {
 
@@ -200,9 +188,6 @@ public class AnnotationUtilImpl implements AnnotationUtil {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <A extends Annotation> A getMethodAnnotation(Method annotatedMethod, Class<A> annotation) {
 

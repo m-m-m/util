@@ -18,9 +18,6 @@ public abstract class AbstractXmlItem {
    */
   public abstract void toString(StringBuilder stringBuilder);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

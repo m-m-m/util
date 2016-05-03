@@ -45,9 +45,7 @@ public class PojoPropertyAccessorIndexedNonArgMethod extends AbstractPojoPropert
     this.mode = mode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, int index) {
 
     try {
@@ -59,9 +57,7 @@ public class PojoPropertyAccessorIndexedNonArgMethod extends AbstractPojoPropert
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorIndexedNonArgMode getMode() {
 
     return this.mode;

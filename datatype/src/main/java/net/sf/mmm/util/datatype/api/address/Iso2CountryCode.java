@@ -49,9 +49,6 @@ public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

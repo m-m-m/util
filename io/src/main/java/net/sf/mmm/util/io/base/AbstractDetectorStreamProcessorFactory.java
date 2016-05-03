@@ -20,9 +20,7 @@ public abstract class AbstractDetectorStreamProcessorFactory implements Detector
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getLookaheadCount() {
 
     return 1024;

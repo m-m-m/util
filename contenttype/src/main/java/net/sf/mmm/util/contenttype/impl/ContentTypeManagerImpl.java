@@ -34,9 +34,6 @@ public class ContentTypeManagerImpl extends AbstractContentTypeManager {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -66,17 +63,13 @@ public class ContentTypeManagerImpl extends AbstractContentTypeManager {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ContentType getRootType() {
 
     return this.rootType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ContentType getTechnicalRootType() {
 
     return this.technicalRootType;

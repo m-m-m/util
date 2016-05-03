@@ -15,9 +15,7 @@ public class MyPojoImpl implements MyPojo {
 
   private List<SubPojo> subPojos;
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public List<SubPojo> getSubPojos() {
 
     return this.subPojos;

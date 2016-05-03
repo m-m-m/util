@@ -21,9 +21,6 @@ public abstract class NlsFormatterDate extends AbstractSimpleNlsFormatterDate {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getType() {
 

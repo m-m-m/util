@@ -26,9 +26,6 @@ public class VersionIdentifierFormatterLabel extends AbstractVersionIdentifierFo
     super(prefix, maximumLength);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getString(VersionIdentifier value) {
 

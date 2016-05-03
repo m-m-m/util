@@ -33,9 +33,6 @@ public class ContainerGrowthException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilReflectRoot.class).errorIncreaseExceedsMaxGrowth(size, max));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

@@ -19,26 +19,19 @@ public class LinkedListQueueFactory extends AbstractQueueFactory {
   /** The singleton instance. */
   public static final QueueFactory INSTANCE = new LinkedListQueueFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<LinkedList> getCollectionImplementation() {
 
     return LinkedList.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> Queue<E> create() {
 
     return new LinkedList<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <E> Queue<E> create(int capacity) {
 
     // capacity does NOT make sense here...

@@ -44,9 +44,6 @@ public abstract class AbstractValueConverterToSimilarPojo<SOURCE, TARGET> extend
     this.unmatchedSetters = setFactory.create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass, Object sourceObject,
       Class<?> sourceClass) {

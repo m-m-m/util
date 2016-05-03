@@ -22,18 +22,12 @@ public class SimpleEnumProvider extends AbstractEnumProvider {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void require(Runnable callback, EnumDefinition<?, ?>... enumDefinitions) {
 
     callback.run();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void loadEnumValues(EnumContainer container) {
 

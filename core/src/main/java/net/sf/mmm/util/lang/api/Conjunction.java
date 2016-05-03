@@ -171,9 +171,6 @@ public enum Conjunction implements EnumType<String> {
    */
   public abstract boolean evalEmpty();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getValue() {
 
@@ -195,9 +192,6 @@ public enum Conjunction implements EnumType<String> {
    */
   public abstract Conjunction negate();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

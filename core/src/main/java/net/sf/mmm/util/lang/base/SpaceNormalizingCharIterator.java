@@ -60,18 +60,14 @@ public class SpaceNormalizingCharIterator implements CharIterator {
     this.nextNonSpace = ' ';
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     // TODO Auto-generated method stub
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char next() {
 
     char result;

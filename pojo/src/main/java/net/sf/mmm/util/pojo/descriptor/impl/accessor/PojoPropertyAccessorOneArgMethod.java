@@ -44,9 +44,7 @@ public class PojoPropertyAccessorOneArgMethod extends AbstractPojoPropertyAccess
     this.mode = mode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, Object argument) {
 
     try {
@@ -58,9 +56,7 @@ public class PojoPropertyAccessorOneArgMethod extends AbstractPojoPropertyAccess
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorOneArgMode getMode() {
 
     return this.mode;

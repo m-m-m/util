@@ -43,9 +43,6 @@ public class SimpleDatatypeAttributeConverter<T extends SimpleDatatype<V>, V> ex
     this.datatypeDescriptor = datatypeDescriptor;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public T convertToEntityAttribute(V value) {
 

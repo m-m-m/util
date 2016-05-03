@@ -48,9 +48,6 @@ public class ResourceMissingException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilComponentRoot.class).errorResourceMissing(resourceName));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

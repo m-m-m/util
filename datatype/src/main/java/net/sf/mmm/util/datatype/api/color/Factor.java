@@ -91,18 +91,12 @@ public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSe
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public double getValueAsFactor() {
 
     return getValue().doubleValue();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Double getMaximumValue() {
 

@@ -29,9 +29,6 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage createDirect(String bundleName, String key, Map<String, Object> messageArguments) {
 

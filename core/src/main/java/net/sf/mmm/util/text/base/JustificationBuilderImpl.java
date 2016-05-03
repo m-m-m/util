@@ -44,9 +44,6 @@ public class JustificationBuilderImpl extends AbstractComponent implements Justi
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Justification build(String format) {
 

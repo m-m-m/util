@@ -112,9 +112,6 @@ public class RuntimeIoException extends NlsRuntimeException {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

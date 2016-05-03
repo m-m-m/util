@@ -41,18 +41,12 @@ public abstract class AbstractPojoPropertyAccessorMethodLimited extends Abstract
     this.declaringClass = declaringClass;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getAccessibleObjectName() {
 
     throw new NlsUnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getModifiers() {
 
@@ -60,27 +54,18 @@ public abstract class AbstractPojoPropertyAccessorMethodLimited extends Abstract
     return 1;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getPropertyType() {
 
     return this.propertyType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getDeclaringClass() {
 
     return this.declaringClass;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName() {
 

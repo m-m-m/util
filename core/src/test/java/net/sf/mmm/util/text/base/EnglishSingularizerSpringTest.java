@@ -13,9 +13,6 @@ import net.sf.mmm.util.text.api.Singularizer;
 @SuppressWarnings("all")
 public class EnglishSingularizerSpringTest extends EnglishSingularizerTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Singularizer getEnglishSingularizer() {
 

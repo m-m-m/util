@@ -26,9 +26,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   CENTER("-~", NlsBundleUtilCoreRoot.INF_CENTER) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -46,9 +43,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   TOP("^~", NlsBundleUtilCoreRoot.INF_TOP) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -66,9 +60,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   BOTTOM("_~", NlsBundleUtilCoreRoot.INF_BOTTOM) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -87,9 +78,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   LEFT("--", NlsBundleUtilCoreRoot.INF_LEFT) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -108,9 +96,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   RIGHT("-+", NlsBundleUtilCoreRoot.INF_RIGHT) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -129,9 +114,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   TOP_LEFT("^-", NlsBundleUtilCoreRoot.INF_TOP_LEFT) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -150,9 +132,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   TOP_RIGHT("^+", NlsBundleUtilCoreRoot.INF_TOP_RIGHT) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -171,9 +150,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   BOTTOM_LEFT("_-", NlsBundleUtilCoreRoot.INF_BOTTOM_LEFT) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -192,9 +168,6 @@ public enum Alignment implements SimpleDatatype<String> {
    */
   BOTTOM_RIGHT("_+", NlsBundleUtilCoreRoot.INF_BOTTOM_RIGHT) {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Alignment getMirrored() {
 
@@ -221,18 +194,12 @@ public enum Alignment implements SimpleDatatype<String> {
     this.title = title;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -146,41 +146,31 @@ public class SystemInformationImpl implements SystemInformation {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getSystemName() {
 
     return this.systemName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getSystemArchitecture() {
 
     return this.systemArchitecture;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getSystemVersion() {
 
     return this.systemVersion;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getSystemType() {
 
     return this.systemType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isLimitedDevice() {
 
     return this.limitedDevice;

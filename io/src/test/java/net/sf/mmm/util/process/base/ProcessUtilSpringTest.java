@@ -13,9 +13,6 @@ import net.sf.mmm.util.process.api.ProcessUtil;
 @SuppressWarnings("all")
 public class ProcessUtilSpringTest extends ProcessUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ProcessUtil getProcessUtil() {
 

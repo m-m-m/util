@@ -28,9 +28,6 @@ public class CliOptionUndefinedException extends CliException {
     super(createBundle().errorCliOptionUndefined(option));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

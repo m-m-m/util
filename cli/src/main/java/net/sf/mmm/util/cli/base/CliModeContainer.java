@@ -71,18 +71,12 @@ public class CliModeContainer implements CliModeObject {
     this.state = InitializationState.UNINITIALIZED;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getId() {
 
     return this.id;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getTitle() {
 
@@ -95,18 +89,12 @@ public class CliModeContainer implements CliModeObject {
     return this.id;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public CliMode getMode() {
 
     return this.mode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getAnnotatedClass() {
 
@@ -124,9 +112,6 @@ public class CliModeContainer implements CliModeObject {
     return this.extendedModes;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isAncestorOf(CliModeObject childMode) {
 
@@ -136,9 +121,6 @@ public class CliModeContainer implements CliModeObject {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDescendantOf(CliModeObject parentMode) {
 
@@ -161,9 +143,6 @@ public class CliModeContainer implements CliModeObject {
     this.state = state;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

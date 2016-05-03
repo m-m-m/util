@@ -88,18 +88,12 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
     this.context = context;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<VALUE> getValueType() {
 
     return this.valueType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public VALUE getValue(POJO element) {
@@ -111,9 +105,6 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setValue(POJO element, VALUE value) {
 

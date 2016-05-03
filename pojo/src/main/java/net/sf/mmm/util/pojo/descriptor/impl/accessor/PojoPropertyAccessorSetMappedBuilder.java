@@ -46,9 +46,7 @@ public class PojoPropertyAccessorSetMappedBuilder extends
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorTwoArg create(Method method, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
@@ -67,18 +65,14 @@ public class PojoPropertyAccessorSetMappedBuilder extends
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorTwoArg create(Field field, PojoDescriptor<?> descriptor,
       PojoDescriptorDependencies dependencies) {
 
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorTwoArgMode getMode() {
 
     return PojoPropertyAccessorTwoArgMode.SET_MAPPED;

@@ -34,9 +34,6 @@ public class LookaheadByteArrayBufferBuffer extends AbstractByteArrayBufferBuffe
     this.master = master;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public byte next() throws NoSuchElementException {
 
@@ -44,9 +41,6 @@ public class LookaheadByteArrayBufferBuffer extends AbstractByteArrayBufferBuffe
     return super.next();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean hasNext() {
 
@@ -54,9 +48,6 @@ public class LookaheadByteArrayBufferBuffer extends AbstractByteArrayBufferBuffe
     return super.hasNext();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long skip(long byteCount) {
 
@@ -64,9 +55,6 @@ public class LookaheadByteArrayBufferBuffer extends AbstractByteArrayBufferBuffe
     return super.skip(byteCount);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long process(ByteProcessor processor, long byteCount) {
 
@@ -74,9 +62,6 @@ public class LookaheadByteArrayBufferBuffer extends AbstractByteArrayBufferBuffe
     return super.process(processor, byteCount);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean fill(InputStream inputStream) throws IOException {
 

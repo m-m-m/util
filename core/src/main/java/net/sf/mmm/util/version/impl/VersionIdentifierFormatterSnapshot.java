@@ -24,9 +24,6 @@ public class VersionIdentifierFormatterSnapshot extends AbstractVersionIdentifie
     super(snapshotIndicator, snapshotIndicator.length());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getString(VersionIdentifier value) {
 

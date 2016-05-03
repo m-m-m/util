@@ -71,9 +71,6 @@ public class DefaultPojoFactory extends SimplePojoFactory {
     this.collectionFactoryManager = collectionFactoryManager;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

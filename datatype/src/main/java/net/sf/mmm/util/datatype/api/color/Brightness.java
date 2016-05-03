@@ -55,18 +55,12 @@ public class Brightness extends Factor<Brightness> {
     super(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Brightness newInstance(double value) {
 
     return new Brightness(value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

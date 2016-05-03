@@ -58,9 +58,6 @@ public class NlsMessageImpl extends BasicNlsMessage {
     super(internationalizedMessage, messageArguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void getLocalizedMessage(Locale locale, NlsTemplateResolver resolver, Appendable buffer) {
 
@@ -105,18 +102,12 @@ public class NlsMessageImpl extends BasicNlsMessage {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage toNlsMessage() {
 
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

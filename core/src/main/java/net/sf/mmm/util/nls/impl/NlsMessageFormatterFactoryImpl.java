@@ -33,9 +33,7 @@ public class NlsMessageFormatterFactoryImpl extends AbstractComponent implements
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NlsMessageFormatter create(String message) {
 
     return new NlsMessageFormatterImpl(message, this.dependencies);
@@ -59,9 +57,6 @@ public class NlsMessageFormatterFactoryImpl extends AbstractComponent implements
     this.dependencies = nlsDependencies;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

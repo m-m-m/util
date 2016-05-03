@@ -72,36 +72,24 @@ public class ResourceUriImpl implements ResourceUri {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getUri() {
 
     return this.uri;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getSchemePrefix() {
 
     return this.schemePrefix;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getPath() {
 
     return this.path;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

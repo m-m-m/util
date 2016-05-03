@@ -37,9 +37,6 @@ public class AnnotationNotForTargetException extends ReflectionException {
     super(createBundle(NlsBundleUtilReflectRoot.class).errorAnnotationNotForTarget(annotation, target));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

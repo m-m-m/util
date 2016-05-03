@@ -46,9 +46,6 @@ public class FileAttributes implements Cloneable {
     this.basicUtil = basicUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public FileAttributes clone() {
 
@@ -111,9 +108,6 @@ public class FileAttributes implements Cloneable {
     this.permissions = mask;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -139,9 +133,6 @@ public class FileAttributes implements Cloneable {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -158,9 +149,6 @@ public class FileAttributes implements Cloneable {
     return hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

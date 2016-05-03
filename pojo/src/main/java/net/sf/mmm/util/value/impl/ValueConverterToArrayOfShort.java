@@ -24,9 +24,7 @@ public class ValueConverterToArrayOfShort extends AbstractConverterToArray<short
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<short[]> getTargetType() {
 
     return short[].class;

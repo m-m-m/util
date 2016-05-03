@@ -38,9 +38,6 @@ public class PathPatternCompiler extends AbstractGlobPatternCompiler {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected int process(char[] chars, int charIndex, java.lang.StringBuilder buffer) {
 

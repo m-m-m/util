@@ -23,9 +23,6 @@ public abstract class AbstractValueValidator<V> extends AbstractValidator<V> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ValidationFailure validate(V value, Object valueSource) {
 

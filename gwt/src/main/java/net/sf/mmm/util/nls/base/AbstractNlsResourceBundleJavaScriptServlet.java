@@ -45,9 +45,6 @@ public abstract class AbstractNlsResourceBundleJavaScriptServlet extends Abstrac
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -65,9 +62,6 @@ public abstract class AbstractNlsResourceBundleJavaScriptServlet extends Abstrac
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

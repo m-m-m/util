@@ -13,9 +13,6 @@ import net.sf.mmm.util.resource.api.DataResourceFactory;
  */
 public class BrowsableResourceFactorySpringTest extends BrowsableResourceFactoryTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public BrowsableResourceFactory getBrowsableResourceFactory() {
 

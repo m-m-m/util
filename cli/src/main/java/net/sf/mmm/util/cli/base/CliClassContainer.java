@@ -289,11 +289,7 @@ public class CliClassContainer {
     /** The singleton instance. */
     private static final CliModeFormatter INSTANCE = new CliModeFormatter();
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("all")
+    @Override    @SuppressWarnings("all")
     public <T extends String> T convert(CliModeContainer value, Object valueSource, Class<T> targetClass)
         throws ValueException {
 

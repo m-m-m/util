@@ -34,9 +34,6 @@ public class PathFactoryImpl extends AbstractPathFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

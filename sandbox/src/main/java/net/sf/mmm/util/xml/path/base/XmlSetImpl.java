@@ -37,25 +37,19 @@ public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
     this.selectorList = new ArrayList<AbstractXmlSelector>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Conjunction getConjunction() {
 
     return this.conjunction;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public AbstractXmlSelector getSelector(int index) {
 
     return this.selectorList.get(index);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getSelectorCount() {
 
     return this.selectorList.size();
@@ -71,9 +65,6 @@ public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
     this.selectorList.add(selector);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void toString(StringBuilder stringBuilder) {
 

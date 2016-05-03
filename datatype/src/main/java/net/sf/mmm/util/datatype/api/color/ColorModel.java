@@ -22,27 +22,18 @@ public enum ColorModel implements EnumType<String> {
    */
   RGB {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getFirstSegmentType() {
 
       return ColorSegmentType.RED;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getSecondSegmentType() {
 
       return ColorSegmentType.GREEN;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getThirdSegmentType() {
 
@@ -56,27 +47,18 @@ public enum ColorModel implements EnumType<String> {
    */
   HSB {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getFirstSegmentType() {
 
       return ColorSegmentType.HUE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getSecondSegmentType() {
 
       return ColorSegmentType.SATURATION_HSB;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getThirdSegmentType() {
 
@@ -90,27 +72,18 @@ public enum ColorModel implements EnumType<String> {
    */
   HSV {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getFirstSegmentType() {
 
       return ColorSegmentType.HUE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getSecondSegmentType() {
 
       return ColorSegmentType.SATURATION_HSB;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getThirdSegmentType() {
 
@@ -124,27 +97,18 @@ public enum ColorModel implements EnumType<String> {
    */
   HSL {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getFirstSegmentType() {
 
       return ColorSegmentType.HUE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getSecondSegmentType() {
 
       return ColorSegmentType.SATURATION_HSL;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ColorSegmentType getThirdSegmentType() {
 
@@ -157,9 +121,6 @@ public enum ColorModel implements EnumType<String> {
   // */
   // CYM
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -185,9 +146,6 @@ public enum ColorModel implements EnumType<String> {
    */
   public abstract ColorSegmentType getThirdSegmentType();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getValue() {
 

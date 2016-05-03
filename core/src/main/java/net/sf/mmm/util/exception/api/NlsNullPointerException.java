@@ -107,9 +107,6 @@ public class NlsNullPointerException extends NlsRuntimeException {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

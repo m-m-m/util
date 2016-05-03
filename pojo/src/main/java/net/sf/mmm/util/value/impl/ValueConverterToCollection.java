@@ -32,17 +32,12 @@ public class ValueConverterToCollection extends AbstractValueConverterToContaine
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Collection> getTargetType() {
 
     return Collection.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void convertContainerEntry(Object element, int index, Collection container, Object valueSource,
       GenericType<? extends Collection> targetType, Object value) {
@@ -58,9 +53,6 @@ public class ValueConverterToCollection extends AbstractValueConverterToContaine
     container.add(resultElement);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   protected <T extends Collection> T createContainer(GenericType<T> targetType, int length) {

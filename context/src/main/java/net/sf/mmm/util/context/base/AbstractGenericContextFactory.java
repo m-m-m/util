@@ -23,9 +23,7 @@ public abstract class AbstractGenericContextFactory extends AbstractLoggableComp
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public MutableGenericContext createContext() {
 
     return createContext(HashMapFactory.INSTANCE);

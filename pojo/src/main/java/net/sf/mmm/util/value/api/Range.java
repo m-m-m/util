@@ -169,9 +169,6 @@ public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, Att
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

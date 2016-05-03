@@ -332,18 +332,12 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Reader createXmlReader(InputStream inputStream) {
 
     return createXmlReader(inputStream, Charset.defaultCharset());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Reader createXmlReader(InputStream inputStream, Charset defaultCharset) {
 
@@ -355,9 +349,6 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String escapeXml(String string, boolean escapeQuotations) {
 
@@ -369,9 +360,6 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     return writer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void escapeXml(String string, Writer writer, boolean escapeQuotations) {
 
@@ -408,18 +396,12 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Character resolveEntity(String entityName) {
 
     return ENTITY_MAP.get(entityName);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ParserState extractPlainText(String htmlFragment, StringBuilder buffer, ParserState parserState) {
 

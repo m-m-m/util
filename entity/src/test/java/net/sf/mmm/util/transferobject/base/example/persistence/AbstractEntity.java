@@ -50,9 +50,6 @@ public abstract class AbstractEntity<ID> extends AbstractRevisionedEntity<ID> im
     return super.getId();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @Version
   public int getModificationCounter() {
@@ -60,9 +57,6 @@ public abstract class AbstractEntity<ID> extends AbstractRevisionedEntity<ID> im
     return super.getModificationCounter();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @Transient
   public Number getRevision() {

@@ -144,11 +144,7 @@ public class AbstractVersionedMainTest {
     @CliArgument(name = "Argument", usage = "Some argument for testing.")
     private String argument;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected int runDefaultMode() throws Exception {
+    @Override    protected int runDefaultMode() throws Exception {
 
       if (this.foo) {
         getStandardOutput().print("foo ");

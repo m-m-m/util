@@ -29,33 +29,24 @@ public class PojoPathNamedFunctionToString extends AbstractPojoPathFunction<Obje
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getInputClass() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<String> getValueClass() {
 
     return String.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getName() {
 
     return "toString";
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String get(Object actual, String functionName, PojoPathContext context) {
 

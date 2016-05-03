@@ -35,9 +35,6 @@ public class DatatypeSegmentDescriptorSimpleDatatype<T extends SimpleDatatype<V>
     super(name, type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected V doGetSegment(T datatype) {
 

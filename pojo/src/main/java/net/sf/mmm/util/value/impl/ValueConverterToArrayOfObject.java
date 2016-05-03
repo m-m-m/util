@@ -24,9 +24,7 @@ public class ValueConverterToArrayOfObject extends AbstractConverterToArray<Obje
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object[]> getTargetType() {
 
     return Object[].class;

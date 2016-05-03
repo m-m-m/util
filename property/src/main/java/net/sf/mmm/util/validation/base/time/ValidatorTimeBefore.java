@@ -64,9 +64,6 @@ public abstract class ValidatorTimeBefore<V> extends AbstractValueValidator<V> {
     return CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsMessage validateNotNull(V value) {
 

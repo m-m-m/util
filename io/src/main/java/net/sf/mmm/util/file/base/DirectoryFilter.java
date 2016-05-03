@@ -26,9 +26,7 @@ public final class DirectoryFilter implements FileFilter {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(File file) {
 
     return file.isDirectory();

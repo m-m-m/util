@@ -122,9 +122,6 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
     this.resourceFactory = browsableResourceFactory;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -372,9 +369,6 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean handleEvent(ValidationEvent event) {
 

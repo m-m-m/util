@@ -68,18 +68,12 @@ public class SegmentConstant extends Segment {
     // TODO: format hex string...
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getTagName() {
 
     return XML_TAG;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void validateNonRecursive(StringBuilder source) {
 
@@ -154,9 +148,6 @@ public class SegmentConstant extends Segment {
     return this.bytes;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getMinimumLength() {
 

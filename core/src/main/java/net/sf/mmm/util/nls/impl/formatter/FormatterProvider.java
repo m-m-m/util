@@ -207,11 +207,7 @@ public final class FormatterProvider {
       return calendar;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doFormat(Object value, Appendable buffer) throws IOException {
+    @Override    protected void doFormat(Object value, Appendable buffer) throws IOException {
 
       Calendar calendar = convertObject(value);
       if (calendar == null) {
@@ -251,11 +247,7 @@ public final class FormatterProvider {
       this.format = format;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doFormat(Object value, Appendable buffer) throws IOException {
+    @Override    protected void doFormat(Object value, Appendable buffer) throws IOException {
 
       buffer.append(this.format.format(value));
     }

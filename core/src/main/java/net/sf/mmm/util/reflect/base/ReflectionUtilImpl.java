@@ -106,9 +106,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialized() {
 
@@ -118,9 +115,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?>[] getClasses(Object[] objects) {
 
@@ -136,18 +130,12 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> GenericType<T> createGenericType(Class<T> type) {
 
     return new SimpleGenericTypeImpl<>(type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("rawtypes")
   public GenericType<?> createGenericType(Type type) {
@@ -161,9 +149,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public GenericType<?> createGenericType(Type type, GenericType<?> definingType) {
@@ -171,9 +156,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return new GenericTypeImpl(type, definingType);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> createGenericType(Type type, Class<?> definingType) {
 
@@ -289,9 +271,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getArrayClass(Class<?> componentType) {
 
@@ -299,18 +278,12 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return Array.newInstance(componentType, 0).getClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Type toType(String type) {
 
     return toType(type, ClassResolver.CLASS_FOR_NAME_RESOLVER);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Type toType(String type, ClassResolver resolver) {
 
@@ -429,9 +402,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString(Type type) {
 
@@ -442,9 +412,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toStringSimple(Type type) {
 
@@ -460,9 +427,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void toString(Type type, Appendable appendable, Visitor<Class<?>> classFormatter) {
 
@@ -535,9 +499,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int compare(Class<?> class1, Class<?> class2) {
 
@@ -552,9 +513,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isMarkerInterface(Class<?> interfaceClass) {
 
@@ -570,9 +528,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
@@ -609,9 +564,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return (T) field.get(null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
       boolean mustBeFinal, boolean inherit) throws IllegalArgumentException {
@@ -625,18 +577,12 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Method getParentMethod(Method method) throws SecurityException {
 
     return getParentMethod(method.getDeclaringClass(), method.getName(), method.getParameterTypes());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Method getParentMethod(Class<?> inheritingClass, String methodName, Class<?>[] parameterTypes)
       throws SecurityException {
@@ -696,9 +642,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<String> findClassNames(String packageName, boolean includeSubPackages) {
 
@@ -707,9 +650,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return classSet;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet) {
 
@@ -717,9 +657,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     findClassNames(packageName, includeSubPackages, classSet, filter, getDefaultClassLoader());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<String> findClassNames(String packageName, boolean includeSubPackages,
       Filter<? super String> filter) {
@@ -729,9 +666,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter,
       ClassLoader classLoader) {
@@ -761,9 +695,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
       Filter<? super String> filter) {
@@ -771,9 +702,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return findResourceNames(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
       Filter<? super String> filter, ClassLoader classLoader) {
@@ -784,9 +712,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
       Filter<? super String> filter) {
@@ -794,9 +719,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     return findResources(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<DataResource> findResources(String absoluteClasspath) throws RuntimeIoException {
 
@@ -813,9 +735,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
       Filter<? super String> filter, ClassLoader classLoader) {
@@ -911,9 +830,6 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames) {
 
@@ -921,18 +837,12 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
         ConstantFilter.getInstance(true));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames, Filter<? super Class<?>> filter) {
 
     return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, filter);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver,
       Filter<? super Class<?>> filter) {

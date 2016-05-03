@@ -52,9 +52,6 @@ public class NumberConversionException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilCoreRoot.class).errorNumberConversion(value, targetType));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

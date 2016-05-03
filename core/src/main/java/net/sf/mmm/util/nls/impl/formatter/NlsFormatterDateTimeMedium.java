@@ -26,9 +26,6 @@ public class NlsFormatterDateTimeMedium extends NlsFormatterDateTime {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStyle() {
 

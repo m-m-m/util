@@ -51,9 +51,7 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NlsFormatter<?> getFormatter(String formatType, String formatStyle) {
 
     NlsFormatter<?> result = null;

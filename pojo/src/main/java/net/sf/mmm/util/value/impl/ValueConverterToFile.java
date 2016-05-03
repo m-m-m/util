@@ -29,25 +29,18 @@ public class ValueConverterToFile extends AbstractSimpleValueConverter<CharSeque
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<CharSequence> getSourceType() {
 
     return CharSequence.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<File> getTargetType() {
 
     return File.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   public <T extends File> T convert(CharSequence value, Object valueSource, Class<T> targetClass) {
 

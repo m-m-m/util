@@ -55,9 +55,6 @@ public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends Ab
     this.composedValueConverter = composedValueConverter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

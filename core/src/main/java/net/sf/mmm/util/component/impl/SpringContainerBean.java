@@ -25,9 +25,6 @@ public class SpringContainerBean extends AbstractSpringContainer implements Appl
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 

@@ -75,9 +75,7 @@ public class JustificationImpl implements Justification {
     this.width = Integer.parseInt(format.substring(2, endIndex));
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String justify(CharSequence value) {
 
     try {
@@ -89,9 +87,7 @@ public class JustificationImpl implements Justification {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void justify(CharSequence value, Appendable target) throws IOException {
 
     int space = this.width - value.length();
@@ -126,9 +122,6 @@ public class JustificationImpl implements Justification {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

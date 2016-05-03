@@ -48,9 +48,6 @@ public class NlsMessageLookupProxy implements NlsMessageLookup {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage getMessage(String key, Map<String, Object> nlsArguments) {
 

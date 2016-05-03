@@ -39,9 +39,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
     initialize(provider, this.wrapperOutputStream);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public OutputStream getStream() {
 
     return this.wrapperOutputStream;
@@ -76,9 +74,6 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
       this.count = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() throws IOException {
 
@@ -86,9 +81,6 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
       processInternal(null, true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void flush() throws IOException {
 
@@ -110,9 +102,6 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
       }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void write(byte[] b, int off, int len) throws IOException {
 
@@ -120,9 +109,6 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
       processInternal(new ByteArrayImpl(b, off, len - off - 1), false);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void write(byte[] b) throws IOException {
 
@@ -130,9 +116,6 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
       processInternal(new ByteArrayImpl(b), false);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void write(int b) throws IOException {
 
@@ -145,9 +128,6 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
       this.bytes[this.count++] = (byte) b;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException {
 
       int arrayCount = buffer.getByteArrayCount();

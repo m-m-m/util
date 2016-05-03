@@ -66,9 +66,6 @@ public class NlsArgument {
     return this.justification;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

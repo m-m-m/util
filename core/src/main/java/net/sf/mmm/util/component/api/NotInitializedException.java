@@ -30,9 +30,6 @@ public class NotInitializedException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilComponentRoot.class).errorNotInitialized());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

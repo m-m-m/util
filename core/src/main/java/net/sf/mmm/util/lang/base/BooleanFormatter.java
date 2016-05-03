@@ -48,9 +48,6 @@ public class BooleanFormatter extends AbstractFormatter<Boolean> {
     this.locale = null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String formatNull() {
 
@@ -65,9 +62,6 @@ public class BooleanFormatter extends AbstractFormatter<Boolean> {
     return INSTANCE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(Boolean value, Appendable buffer) throws IOException {
 

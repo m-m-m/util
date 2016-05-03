@@ -38,9 +38,6 @@ public class ValueNotSetException extends ValueException {
     super(createBundle(NlsBundleUtilValueRoot.class).errorValueNotSet(valueSource));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

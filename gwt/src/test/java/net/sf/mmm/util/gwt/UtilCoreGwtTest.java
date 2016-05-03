@@ -33,9 +33,6 @@ public class UtilCoreGwtTest extends GWTTestCase {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getModuleName() {
 

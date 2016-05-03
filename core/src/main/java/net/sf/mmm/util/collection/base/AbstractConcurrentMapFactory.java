@@ -23,25 +23,19 @@ public abstract class AbstractConcurrentMapFactory implements ConcurrentMapFacto
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<ConcurrentMap> getMapInterface() {
 
     return ConcurrentMap.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ConcurrentMap createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public ConcurrentMap createGeneric(int capacity) {
 
     return create(capacity);

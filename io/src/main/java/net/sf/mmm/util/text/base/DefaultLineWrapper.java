@@ -71,9 +71,6 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     this.hyphenatorBuilder = hyphenatorBuilder;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -226,9 +223,6 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int wrap(Appendable appendable, TextTableInfo tableInfo, TextColumn... columns) {
 
@@ -706,9 +700,6 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       return this.hyphenatedWord;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
 
@@ -1118,9 +1109,6 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       return this.buffer.length();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
 
@@ -1180,9 +1168,6 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       return this.lineCount;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int compareTo(AutoAdjustInfo other) {
 
@@ -1192,9 +1177,6 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       return this.columnState.width - other.columnState.width;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int hashCode() {
 
@@ -1206,9 +1188,6 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean equals(Object obj) {
 

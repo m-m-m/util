@@ -33,9 +33,7 @@ public class PojoPropertyAccessorSetField extends AbstractPojoPropertyAccessorFi
     super(descriptor, dependencies, field);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, Object argument) {
 
     Field field = getField();
@@ -48,9 +46,7 @@ public class PojoPropertyAccessorSetField extends AbstractPojoPropertyAccessorFi
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorOneArgMode getMode() {
 
     return PojoPropertyAccessorOneArgMode.SET;

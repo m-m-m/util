@@ -33,9 +33,7 @@ public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, N
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public NODE getNext() {
 
     return this.next;
@@ -51,9 +49,7 @@ public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, N
     this.next = next;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public V getValue() {
 
     return this.value;
@@ -69,17 +65,13 @@ public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, N
     this.value = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isLinked() {
 
     return (this.next != null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void addToList(List<V> list) {
 
     list.add(this.value);
@@ -91,9 +83,7 @@ public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, N
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public List<V> toList() {
 
     List<V> list = new ArrayList<>();
@@ -101,9 +91,6 @@ public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, N
     return list;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

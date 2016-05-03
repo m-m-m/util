@@ -64,9 +64,6 @@ public class PooledByteArray extends ByteArrayImpl {
     this.childCount = 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ByteArrayImpl createSubArray(int minimum, int maximum) {
 

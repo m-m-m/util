@@ -28,9 +28,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(String internationalizedMessage, Object... messageArguments) {
 
@@ -42,9 +39,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(internationalizedMessage, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(NlsTemplate template, Object... messageArguments) {
 
@@ -56,9 +50,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(template, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   // CHECKSTYLE:OFF (many arguments for convenience)
   @Override
   public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
@@ -74,9 +65,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(template, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
       String key3, Object argument3) {
@@ -88,9 +76,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(template, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2) {
 
@@ -100,9 +85,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(template, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(NlsTemplate template, String key1, Object argument1) {
 
@@ -111,9 +93,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(template, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   // CHECKSTYLE:OFF (many arguments for convenience)
   @Override
   public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
@@ -129,9 +108,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(internationalizedMessage, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
       Object argument2, String key3, Object argument3) {
@@ -143,9 +119,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(internationalizedMessage, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
       Object argument2) {
@@ -156,9 +129,6 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(internationalizedMessage, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(String internationalizedMessage, String key1, Object argument1) {
 
@@ -167,27 +137,18 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
     return create(internationalizedMessage, arguments);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(NlsTemplate template) {
 
     return create(template, ReflectionUtilLimited.NO_ARGUMENTS);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage create(String internationalizedMessage) {
 
     return create(internationalizedMessage, Collections.<String, Object> emptyMap());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage createDirect(String bundleName, String key) {
 

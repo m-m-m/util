@@ -35,36 +35,24 @@ public class PojoPropertyAccessorProxySetMapped extends AbstractPojoPropertyAcce
     assert (Map.class.isAssignableFrom(mapGetAccessor.getReturnClass()));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PojoPropertyAccessorTwoArgMode getMode() {
 
     return PojoPropertyAccessorTwoArgMode.SET_MAPPED;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public GenericType<?> getReturnType() {
 
     return getPropertyType();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Class<?> getReturnClass() {
 
     return getPropertyClass();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public Object invoke(Object pojoInstance, Object key, Object value) {
 

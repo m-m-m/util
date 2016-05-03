@@ -73,9 +73,6 @@ public class NlsIllegalArgumentException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorIllegalArgumentWithName(value, name));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

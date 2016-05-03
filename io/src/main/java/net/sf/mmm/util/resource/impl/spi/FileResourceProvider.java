@@ -34,9 +34,6 @@ public class FileResourceProvider extends AbstractDataResourceProvider<FileResou
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -56,25 +53,19 @@ public class FileResourceProvider extends AbstractDataResourceProvider<FileResou
     this.fileUtil = fileUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String[] getSchemePrefixes() {
 
     return new String[] { FileResource.SCHEME_PREFIX };
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<FileResource> getResourceType() {
 
     return FileResource.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public FileResource createResource(ResourceUri resourceUri) {
 
     String path = this.fileUtil.normalizePath(resourceUri.getPath());

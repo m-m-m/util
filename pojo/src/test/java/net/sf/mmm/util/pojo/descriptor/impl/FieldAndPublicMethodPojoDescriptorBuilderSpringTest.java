@@ -15,9 +15,6 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  */
 public class FieldAndPublicMethodPojoDescriptorBuilderSpringTest extends FieldAndPublicMethodPojoDescriptorBuilderTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 

@@ -44,9 +44,6 @@ public class NlsTemplateImplWithMessage extends NlsTemplateImpl {
     this.message = message;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String translate(Locale locale) {
 
@@ -56,9 +53,6 @@ public class NlsTemplateImplWithMessage extends NlsTemplateImpl {
     return super.translate(locale);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String translateFallback(String messageId) {
 

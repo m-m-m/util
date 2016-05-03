@@ -53,9 +53,7 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
     this.inverted = inverted;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object invoke(Object pojoInstance, int index, Object item) {
 
     try {
@@ -72,9 +70,7 @@ public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropert
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPropertyAccessorIndexedOneArgMode getMode() {
 
     return this.mode;

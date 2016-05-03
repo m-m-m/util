@@ -39,9 +39,6 @@ public abstract class AbstractSimpleDatatype<V> extends AbstractSimpleDatatypeBa
     this.value = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public V getValue() {
 

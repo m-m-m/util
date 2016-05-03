@@ -14,9 +14,6 @@ import net.sf.mmm.util.nls.api.NlsMessageFactory;
  */
 public class NlsMessageSpringTest extends NlsMessageTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected NlsMessageFactory getMessageFactory() {
 

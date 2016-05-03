@@ -26,9 +26,6 @@ public class XmlAdapterProperties extends XmlAdapter<PropertyList, Properties> {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public PropertyList marshal(Properties properties) throws Exception {
 
@@ -51,9 +48,6 @@ public class XmlAdapterProperties extends XmlAdapter<PropertyList, Properties> {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Properties unmarshal(PropertyList propertyList) throws Exception {
 

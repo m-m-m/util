@@ -39,18 +39,12 @@ public class ComposedValidator<V> extends AbstractValidator<V> implements Compos
     this.validators = validators;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getCode() {
 
     return ComposedValidationFailure.CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ValidationFailure validate(V value, Object valueSource) {
 

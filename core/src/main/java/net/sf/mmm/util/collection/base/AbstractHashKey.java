@@ -67,9 +67,6 @@ public abstract class AbstractHashKey<T> implements Serializable {
    */
   protected abstract HashCodeFunction<T> getHashCodeFunction();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -83,9 +80,6 @@ public abstract class AbstractHashKey<T> implements Serializable {
     return this.hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object other) {
 
@@ -109,9 +103,6 @@ public abstract class AbstractHashKey<T> implements Serializable {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -17,9 +17,6 @@ import net.sf.mmm.util.pojo.path.api.PojoPathContext;
  */
 public abstract class AbstractMapPojoPathFunction<VALUE> extends AbstractPojoPathFunction<Map<String, Object>, VALUE> {
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public VALUE get(Map<String, Object> current, String functionName, PojoPathContext context) {
@@ -27,9 +24,6 @@ public abstract class AbstractMapPojoPathFunction<VALUE> extends AbstractPojoPat
     return (VALUE) current.get(functionName);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
   @Override
   public VALUE set(Map<String, Object> current, String functionName, VALUE value, PojoPathContext context) {

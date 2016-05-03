@@ -31,9 +31,6 @@ public class PojoPathSegmentIsNullException extends PojoPathException {
     super(createBundle(NlsBundleUtilPojoRoot.class).errorPojoPathSegmentIsNull(pojoPath, initialPojo));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

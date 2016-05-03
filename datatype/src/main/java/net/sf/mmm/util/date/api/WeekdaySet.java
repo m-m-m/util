@@ -176,9 +176,6 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

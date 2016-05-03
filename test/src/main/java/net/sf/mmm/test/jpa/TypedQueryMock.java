@@ -68,9 +68,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return this.resultType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int executeUpdate() {
 
@@ -78,9 +75,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getFirstResult() {
 
@@ -88,9 +82,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public FlushModeType getFlushMode() {
 
@@ -98,9 +89,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Map<String, Object> getHints() {
 
@@ -108,9 +96,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LockModeType getLockMode() {
 
@@ -118,9 +103,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getMaxResults() {
 
@@ -128,9 +110,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Parameter<?> getParameter(String arg0) {
 
@@ -138,9 +117,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Parameter<?> getParameter(int arg0) {
 
@@ -148,9 +124,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> Parameter<T> getParameter(String arg0, Class<T> arg1) {
 
@@ -158,9 +131,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> Parameter<T> getParameter(int arg0, Class<T> arg1) {
 
@@ -168,9 +138,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T getParameterValue(Parameter<T> arg0) {
 
@@ -178,9 +145,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getParameterValue(String name) {
 
@@ -188,9 +152,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return this.parameterMap.get(name);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getParameterValue(int index) {
 
@@ -198,9 +159,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return this.parameterList.get(index);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<Parameter<?>> getParameters() {
 
@@ -208,9 +166,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isBound(Parameter<?> arg0) {
 
@@ -218,9 +173,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> T unwrap(Class<T> arg0) {
 
@@ -228,9 +180,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<X> getResultList() {
 
@@ -238,9 +187,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public X getSingleResult() {
 
@@ -248,9 +194,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setFirstResult(int arg0) {
 
@@ -258,9 +201,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setFlushMode(FlushModeType arg0) {
 
@@ -268,9 +208,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setHint(String arg0, Object arg1) {
 
@@ -278,9 +215,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setLockMode(LockModeType arg0) {
 
@@ -288,9 +222,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setMaxResults(int arg0) {
 
@@ -298,9 +229,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> TypedQuery<X> setParameter(Parameter<T> arg0, T arg1) {
 
@@ -308,9 +236,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setParameter(String name, Object parameter) {
 
@@ -319,9 +244,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setParameter(int index, Object parameter) {
 
@@ -333,9 +255,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setParameter(Parameter<Calendar> arg0, Calendar arg1, TemporalType arg2) {
 
@@ -343,9 +262,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setParameter(Parameter<Date> arg0, Date arg1, TemporalType arg2) {
 
@@ -353,9 +269,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setParameter(String arg0, Calendar arg1, TemporalType arg2) {
 
@@ -363,9 +276,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setParameter(String arg0, Date arg1, TemporalType arg2) {
 
@@ -373,9 +283,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setParameter(int arg0, Calendar arg1, TemporalType arg2) {
 
@@ -383,9 +290,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TypedQuery<X> setParameter(int arg0, Date arg1, TemporalType arg2) {
 
@@ -393,9 +297,6 @@ public class TypedQueryMock<X> implements TypedQuery<X> {
     return null;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

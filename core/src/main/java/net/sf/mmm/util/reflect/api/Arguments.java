@@ -62,18 +62,12 @@ public class Arguments {
     return this.args[position];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
     return this.hash;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -94,9 +88,6 @@ public class Arguments {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

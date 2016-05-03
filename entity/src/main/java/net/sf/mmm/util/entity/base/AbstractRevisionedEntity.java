@@ -30,27 +30,18 @@ public abstract class AbstractRevisionedEntity<ID> extends AbstractGenericEntity
     this.revision = LATEST_REVISION;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Number getRevision() {
 
     return this.revision;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setRevision(Number revision) {
 
     this.revision = revision;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -60,9 +51,6 @@ public abstract class AbstractRevisionedEntity<ID> extends AbstractGenericEntity
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 

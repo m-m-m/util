@@ -30,17 +30,13 @@ public class ReadOnlyIterator<E> implements Iterator<E> {
     this.delegate = iterator;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     return this.delegate.hasNext();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public E next() {
 
     return this.delegate.next();

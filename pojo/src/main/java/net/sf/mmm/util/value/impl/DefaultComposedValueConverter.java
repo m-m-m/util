@@ -66,9 +66,6 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
     addConverter(converter);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 

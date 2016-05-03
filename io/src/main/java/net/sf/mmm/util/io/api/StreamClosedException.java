@@ -28,9 +28,6 @@ public class StreamClosedException extends NlsRuntimeException {
     super(createBundle(NlsBundleUtilIoRoot.class).errorStreamClosed());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

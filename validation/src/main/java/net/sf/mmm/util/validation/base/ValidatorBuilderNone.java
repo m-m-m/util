@@ -21,27 +21,18 @@ public class ValidatorBuilderNone extends AbstractValidatorBuilder {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <V> AbstractValidator<V> newValidator(Class<V> pojoType) {
 
     return ValidatorNone.getInstance();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public AbstractValidator<?> newValidator(Class<?> pojoType, String property, Class<?> propertyType) {
 
     return ValidatorNone.getInstance();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property, Class<T> propertyType) {
 

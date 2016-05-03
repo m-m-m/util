@@ -103,9 +103,6 @@ public class ExceptionTruncation {
     return !this.removeCause && !this.removeStacktrace && !this.removeSuppressed;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

@@ -159,9 +159,6 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
     registerStandardDatatype("java.time.ZoneRegion");
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isDatatype(Class<?> type) {
 
@@ -174,9 +171,6 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
     return this.customDatatypeSet.contains(type.getName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isJavaStandardDatatype(Class<?> type) {
 

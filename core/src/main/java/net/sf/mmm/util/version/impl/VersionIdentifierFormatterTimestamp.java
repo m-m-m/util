@@ -42,9 +42,6 @@ public class VersionIdentifierFormatterTimestamp extends AbstractVersionIdentifi
     this.dateFormat = dateFormat;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getString(VersionIdentifier value) {
 

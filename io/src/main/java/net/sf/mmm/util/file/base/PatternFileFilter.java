@@ -70,9 +70,7 @@ public class PatternFileFilter implements FileFilter {
     this.fileType = type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(File file) {
 
     if (this.fileType != null) {

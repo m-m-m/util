@@ -65,9 +65,7 @@ public class StringSyntaxBean implements StringSyntax {
     this.quoteEnd = quoteEnd;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getEscape() {
 
     return this.escape;
@@ -81,9 +79,7 @@ public class StringSyntaxBean implements StringSyntax {
     this.escape = escape;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getQuoteStart() {
 
     return this.quoteStart;
@@ -97,9 +93,7 @@ public class StringSyntaxBean implements StringSyntax {
     this.quoteStart = quoteStart;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public char getQuoteEnd() {
 
     return this.quoteEnd;

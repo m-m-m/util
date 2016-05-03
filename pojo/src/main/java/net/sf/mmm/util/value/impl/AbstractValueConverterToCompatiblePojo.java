@@ -51,9 +51,6 @@ public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET>
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -69,9 +66,6 @@ public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET>
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public <T extends TARGET> T convert(SOURCE value, Object valueSource, GenericType<T> targetType)

@@ -21,9 +21,6 @@ public abstract class AbstractHashCodeFunction<VALUE> implements HashCodeFunctio
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode(VALUE value) {
 

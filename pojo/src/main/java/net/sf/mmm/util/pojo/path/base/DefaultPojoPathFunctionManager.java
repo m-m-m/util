@@ -40,9 +40,7 @@ public class DefaultPojoPathFunctionManager extends AbstractComponent implements
     this.functionMap = functionMap;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public PojoPathFunction getFunction(String functionName) {
 
     return this.functionMap.get(functionName);

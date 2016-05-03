@@ -46,9 +46,7 @@ public abstract class AbstractDetectorStream implements DetectorStream {
     this.done = false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Map<String, Object> getMetadata() {
 
     return this.metadata;
@@ -72,9 +70,7 @@ public abstract class AbstractDetectorStream implements DetectorStream {
     this.done = true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isDone() {
 
     return this.done;

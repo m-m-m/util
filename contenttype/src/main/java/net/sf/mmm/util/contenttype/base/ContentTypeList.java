@@ -58,9 +58,7 @@ public class ContentTypeList implements JaxbObject {
     this.contentTypes = contentTypes;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 
     for (ContentTypeBean contentType : this.contentTypes) {

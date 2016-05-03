@@ -20,26 +20,19 @@ public class HashMapFactory extends AbstractMapFactory {
   @SuppressWarnings("rawtypes")
   public static final MapFactory<Map> INSTANCE = new HashMapFactory();
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("rawtypes")
   public Class<HashMap> getMapImplementation() {
 
     return HashMap.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <K, V> Map<K, V> create() {
 
     return new HashMap<>();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public <K, V> Map<K, V> create(int capacity) {
 
     return new HashMap<>(capacity);

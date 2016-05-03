@@ -52,9 +52,7 @@ public class RecurrenceBean implements Recurrence {
     this.weekOfMonth = weekOfMonth;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DateUnit getUnit() {
 
     return this.unit;
@@ -68,9 +66,7 @@ public class RecurrenceBean implements Recurrence {
     this.unit = unit;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public int getStep() {
 
     return this.step;
@@ -84,9 +80,7 @@ public class RecurrenceBean implements Recurrence {
     this.step = step;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public WeekdaySet getWeekdays() {
 
     return this.weekdays;
@@ -100,9 +94,7 @@ public class RecurrenceBean implements Recurrence {
     this.weekdays = weekdays;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public WeekOfMonth getWeekOfMonth() {
 
     return this.weekOfMonth;

@@ -52,18 +52,12 @@ public class GwtEventBusAdapter extends com.google.web.bindery.event.shared.Even
     this.eventBus = eventBus;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <H> HandlerRegistration addHandler(final Type<H> type, final H handler) {
 
     @SuppressWarnings("rawtypes")
     final EventListener<Event> listener = new EventListener<Event>() {
 
-      /**
-       * {@inheritDoc}
-       */
       @SuppressWarnings("unchecked")
       @Override
       public void handleEvent(Event event) {
@@ -84,27 +78,18 @@ public class GwtEventBusAdapter extends com.google.web.bindery.event.shared.Even
     };
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public <H> HandlerRegistration addHandlerToSource(Type<H> type, Object source, H handler) {
 
     throw new UnsupportedOperationException();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void fireEvent(Event<?> event) {
 
     this.eventBus.sendEvent(event);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void fireEventFromSource(Event<?> event, Object source) {
 

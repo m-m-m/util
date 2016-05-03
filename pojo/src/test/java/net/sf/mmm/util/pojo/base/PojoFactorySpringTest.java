@@ -12,9 +12,6 @@ import net.sf.mmm.util.pojo.api.PojoFactory;
  */
 public class PojoFactorySpringTest extends PojoFactoryTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected PojoFactory getPojoFactory() {
 

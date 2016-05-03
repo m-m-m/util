@@ -207,9 +207,6 @@ public class DetectorStreamTest {
       this.arraySize = arraySize;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public byte[] borrow() {
 
       byte[] buffer = new byte[this.arraySize];
@@ -217,17 +214,11 @@ public class DetectorStreamTest {
       return buffer;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public boolean isEmpty() {
 
       return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void release(byte[] element) {
 
       boolean okay = this.bufferSet.remove(element);

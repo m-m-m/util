@@ -42,9 +42,7 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
     this.value = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Boolean getValue() {
 
     return this.value;
@@ -87,9 +85,6 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

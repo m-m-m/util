@@ -26,9 +26,7 @@ public final class NoByteArrayPool extends AbstractNoPool<byte[]> implements Byt
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public byte[] borrow() {
 
     return new byte[ARRAY_LENGTH];

@@ -28,9 +28,6 @@ public class SimpleValueConverterIdentity<V> implements SimpleValueConverter<V, 
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <T extends V> T convert(V value, Object valueSource, Class<T> targetClass) throws ValueException {

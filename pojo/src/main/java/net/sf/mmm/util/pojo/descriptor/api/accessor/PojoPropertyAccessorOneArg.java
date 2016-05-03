@@ -15,9 +15,6 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  */
 public interface PojoPropertyAccessorOneArg extends PojoPropertyAccessor {
 
-  /**
-   * {@inheritDoc}
-   */
   PojoPropertyAccessorOneArgMode getMode();
 
   /**

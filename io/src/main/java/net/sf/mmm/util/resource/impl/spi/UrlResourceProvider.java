@@ -28,26 +28,20 @@ public class UrlResourceProvider extends AbstractDataResourceProvider<UrlResourc
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String[] getSchemePrefixes() {
 
     return new String[] { UrlResource.SCHEME_PREFIX_HTTP, UrlResource.SCHEME_PREFIX_HTTPS,
         UrlResource.SCHEME_PREFIX_FTP };
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<UrlResource> getResourceType() {
 
     return UrlResource.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public UrlResource createResource(ResourceUri resourceUri) {
 
     return new UrlResource(resourceUri.getUri());

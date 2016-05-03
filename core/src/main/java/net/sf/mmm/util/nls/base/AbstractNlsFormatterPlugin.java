@@ -27,9 +27,6 @@ public abstract class AbstractNlsFormatterPlugin<O> extends AbstractNlsFormatter
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

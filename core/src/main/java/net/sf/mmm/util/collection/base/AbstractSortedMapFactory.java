@@ -23,25 +23,19 @@ public abstract class AbstractSortedMapFactory implements SortedMapFactory {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<SortedMap> getMapInterface() {
 
     return SortedMap.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public SortedMap createGeneric() {
 
     return create();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public SortedMap createGeneric(int capacity) {
 
     return create(capacity);

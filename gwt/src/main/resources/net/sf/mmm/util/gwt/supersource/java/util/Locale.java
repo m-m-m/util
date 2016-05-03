@@ -139,18 +139,12 @@ public final class Locale implements Serializable {
     defaultLocale = locale;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
     return (this.language.hashCode() << 8) ^ this.country.hashCode() ^ (this.variant.hashCode() << 4);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -188,9 +182,6 @@ public final class Locale implements Serializable {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

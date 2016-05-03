@@ -62,9 +62,6 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
     return this.executor;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -74,9 +71,6 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void fireEvent(final E event, final L listener) {
 

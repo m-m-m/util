@@ -29,18 +29,12 @@ public class CliParserExcepiton extends CliException {
     super(nested, createBundle().errorCliParser(type));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return MESSAGE_CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

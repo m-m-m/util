@@ -171,18 +171,12 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iterator<String> iterator() {
 
     return this;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String findNext() {
 
@@ -304,9 +298,6 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
     return next();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

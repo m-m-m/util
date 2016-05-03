@@ -54,9 +54,6 @@ public class SampleComposedDatatype extends AbstractDatatype {
     return this.currency;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -67,9 +64,6 @@ public class SampleComposedDatatype extends AbstractDatatype {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 
@@ -92,9 +86,6 @@ public class SampleComposedDatatype extends AbstractDatatype {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

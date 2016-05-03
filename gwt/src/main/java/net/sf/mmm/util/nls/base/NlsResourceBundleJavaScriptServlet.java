@@ -35,9 +35,6 @@ public class NlsResourceBundleJavaScriptServlet extends AbstractNlsResourceBundl
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 

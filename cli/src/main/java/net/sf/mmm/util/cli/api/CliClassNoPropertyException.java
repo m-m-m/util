@@ -28,18 +28,12 @@ public class CliClassNoPropertyException extends CliException {
     super(createBundle().errorCliClassNoProperty(cliStateClass));
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
     return MESSAGE_CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

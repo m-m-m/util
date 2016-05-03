@@ -26,9 +26,6 @@ public class ExceptionUtilLimitedImpl extends AbstractLoggableComponent implemen
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStacktrace(Throwable exception) {
 
@@ -39,9 +36,6 @@ public class ExceptionUtilLimitedImpl extends AbstractLoggableComponent implemen
     return writer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Throwable convertForUser(Throwable exception) {
 

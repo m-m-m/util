@@ -30,17 +30,13 @@ public class SingleElementIterator<E> implements Iterator<E> {
     this.element = element;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean hasNext() {
 
     return (this.element != null);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public E next() {
 
     if (this.element == null) {
@@ -51,9 +47,7 @@ public class SingleElementIterator<E> implements Iterator<E> {
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void remove() {
 
     throw new UnsupportedOperationException();

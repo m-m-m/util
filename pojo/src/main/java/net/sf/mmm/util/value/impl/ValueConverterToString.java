@@ -83,9 +83,6 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
     this.stringUtil = stringUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -98,25 +95,18 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<String> getTargetType() {
 
     return String.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("all")
   public <T extends String> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

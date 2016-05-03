@@ -41,18 +41,12 @@ public class ByteArrayPoolImpl extends AbstractPool<byte[]> implements ByteArray
     this.arrayLength = arrayLength;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected byte[] create() {
 
     return new byte[this.arrayLength];
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean reset(byte[] element) {
 

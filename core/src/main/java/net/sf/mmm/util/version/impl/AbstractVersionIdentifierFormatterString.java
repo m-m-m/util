@@ -47,9 +47,6 @@ public abstract class AbstractVersionIdentifierFormatterString extends AbstractF
    */
   protected abstract String getString(VersionIdentifier value);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(VersionIdentifier value, Appendable buffer) throws IOException {
 

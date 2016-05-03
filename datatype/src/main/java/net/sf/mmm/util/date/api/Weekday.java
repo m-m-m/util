@@ -114,9 +114,7 @@ public enum Weekday implements SimpleDatatype<String> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String getValue() {
 
     return this.value;
@@ -168,9 +166,6 @@ public enum Weekday implements SimpleDatatype<String> {
     throw new IllegalCaseException(this.title + "+" + days);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

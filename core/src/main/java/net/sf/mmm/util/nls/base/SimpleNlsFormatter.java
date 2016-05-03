@@ -36,18 +36,12 @@ public abstract class SimpleNlsFormatter<O> extends AbstractNlsFormatterPlugin<O
    */
   protected abstract Formatter<O> createFormatter(Locale locale);
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver) {
 
     return createFormatter(locale).format(object);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) {

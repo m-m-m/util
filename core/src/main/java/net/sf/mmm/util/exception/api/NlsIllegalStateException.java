@@ -37,9 +37,6 @@ public class NlsIllegalStateException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorIllegalState());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 

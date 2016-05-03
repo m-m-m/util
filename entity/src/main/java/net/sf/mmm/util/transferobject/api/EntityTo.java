@@ -49,18 +49,12 @@ public abstract class EntityTo<ID> extends DataTo implements MutableRevisionedEn
     this.revision = LATEST_REVISION;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ID getId() {
 
     return this.id;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setId(ID id) {
 
@@ -94,36 +88,24 @@ public abstract class EntityTo<ID> extends DataTo implements MutableRevisionedEn
     return this.modificationCounter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setModificationCounter(int version) {
 
     this.modificationCounter = version;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Number getRevision() {
 
     return this.revision;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setRevision(Number revision) {
 
     this.revision = revision;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
@@ -135,9 +117,6 @@ public abstract class EntityTo<ID> extends DataTo implements MutableRevisionedEn
     return result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 

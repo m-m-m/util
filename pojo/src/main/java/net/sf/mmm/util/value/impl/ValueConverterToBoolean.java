@@ -53,9 +53,6 @@ public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object
     this.stringUtil = stringUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -65,25 +62,18 @@ public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Boolean> getTargetType() {
 
     return Boolean.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("all")
   public <T extends Boolean> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

@@ -83,18 +83,12 @@ public class Hue extends AbstractDoubleSegment<Hue> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Double getMaximumValue() {
 
     return Double.valueOf(MAX_VALUE);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected Hue newInstance(double value) {
 

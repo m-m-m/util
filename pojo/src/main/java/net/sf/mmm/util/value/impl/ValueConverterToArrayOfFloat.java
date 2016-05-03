@@ -24,9 +24,7 @@ public class ValueConverterToArrayOfFloat extends AbstractConverterToArray<float
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<float[]> getTargetType() {
 
     return float[].class;

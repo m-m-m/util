@@ -21,9 +21,6 @@ public abstract class AbstractEnumProviderSynchronous extends AbstractEnumProvid
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void require(Runnable callback, EnumDefinition<?, ?>... enumDefinitions) {
 

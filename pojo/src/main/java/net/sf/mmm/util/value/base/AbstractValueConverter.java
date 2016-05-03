@@ -52,9 +52,6 @@ public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLog
     this.reflectionUtil = reflectionUtil;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -64,9 +61,7 @@ public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLog
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public final <T extends TARGET> T convert(SOURCE value, Object valueSource, Class<T> targetClass) {
 
     return convert(value, valueSource, getReflectionUtil().createGenericType(targetClass));

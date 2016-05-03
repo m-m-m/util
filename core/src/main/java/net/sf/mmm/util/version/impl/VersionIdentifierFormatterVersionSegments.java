@@ -61,9 +61,6 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
     this.segmentPadding = segmentPadding;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doFormat(VersionIdentifier value, Appendable buffer) throws IOException {
 

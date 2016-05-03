@@ -65,36 +65,24 @@ public class TechnicalErrorUserException extends NlsRuntimeException {
     super(copySource, truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TechnicalErrorUserException createCopy(ExceptionTruncation truncation) {
 
     return new TechnicalErrorUserException(this, truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final String getCode() {
 
     return CODE;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final boolean isTechnical() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final boolean isForUser() {
 

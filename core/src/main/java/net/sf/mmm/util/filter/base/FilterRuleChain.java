@@ -161,9 +161,6 @@ public class FilterRuleChain<V> implements Filter<V> {
     return this.id;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 

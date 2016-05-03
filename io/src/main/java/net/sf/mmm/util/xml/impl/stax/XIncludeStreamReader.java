@@ -275,9 +275,6 @@ public class XIncludeStreamReader extends StreamReaderProxy {
     LOGGER.trace("Closing xi:include complete");
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int next() throws XMLStreamException {
 
@@ -324,9 +321,6 @@ public class XIncludeStreamReader extends StreamReaderProxy {
     return eventType;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getText() {
 
@@ -337,9 +331,6 @@ public class XIncludeStreamReader extends StreamReaderProxy {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public char[] getTextCharacters() {
 
@@ -350,9 +341,6 @@ public class XIncludeStreamReader extends StreamReaderProxy {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getTextLength() {
 
@@ -363,9 +351,6 @@ public class XIncludeStreamReader extends StreamReaderProxy {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getTextStart() {
 

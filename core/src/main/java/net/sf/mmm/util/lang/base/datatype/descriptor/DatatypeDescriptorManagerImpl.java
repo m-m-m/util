@@ -99,9 +99,6 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialized() {
 
@@ -171,9 +168,6 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public <T> DatatypeDescriptor<T> getDatatypeDescriptor(Class<T> inputDatatype) throws IllegalArgumentException {

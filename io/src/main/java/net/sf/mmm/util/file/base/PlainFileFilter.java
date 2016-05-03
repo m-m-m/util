@@ -25,9 +25,7 @@ public final class PlainFileFilter implements FileFilter {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean accept(File file) {
 
     return file.isFile();

@@ -84,18 +84,12 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object getArgument(String key) {
 
     return this.arguments.get(key);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getInternationalizedMessage() {
 

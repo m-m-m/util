@@ -23,9 +23,6 @@ public class WildcardGlobPatternCompiler extends AbstractGlobPatternCompiler {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isRequireWildcard() {
 

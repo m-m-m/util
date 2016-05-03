@@ -81,18 +81,12 @@ public class ValidationErrorUserException extends NlsRuntimeException {
     this.constraintViolations = copySource.constraintViolations;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ValidationErrorUserException createCopy(ExceptionTruncation truncation) {
 
     return new ValidationErrorUserException(this, truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
@@ -110,18 +104,12 @@ public class ValidationErrorUserException extends NlsRuntimeException {
     return this.constraintViolations;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isForUser() {
 
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 

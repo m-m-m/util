@@ -24,17 +24,13 @@ public class ValueConverterToCompatiblePojo extends AbstractValueConverterToComp
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getSourceType() {
 
     return Object.class;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<Object> getTargetType() {
 
     return Object.class;

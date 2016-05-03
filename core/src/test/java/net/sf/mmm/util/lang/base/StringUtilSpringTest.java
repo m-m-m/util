@@ -13,9 +13,6 @@ import net.sf.mmm.util.lang.api.StringUtil;
  */
 public class StringUtilSpringTest extends StringUtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public StringUtil getStringUtil() {
 

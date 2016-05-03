@@ -64,9 +64,7 @@ public class MappedClassResolver implements ClassResolver {
     this.name2classMap.put(name, type);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Class<?> resolveClass(String name) {
 
     try {

@@ -12,9 +12,6 @@ import net.sf.mmm.util.date.api.Iso8601Util;
  */
 public class Iso8601UtilSpringTest extends Iso8601UtilTest {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Iso8601Util getIso8601Util() {
 

@@ -136,9 +136,6 @@ public class IdResolverContext {
       this.type = type;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Object call() throws Exception {
 
       Object result = IdResolverContext.this.id2valueMap.get(this.id);

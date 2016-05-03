@@ -34,18 +34,14 @@ public class ResourceNameCollector implements ResourceVisitor {
     this.filter = filter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean visitPackage(String classpath) {
 
     // return this.filter.accept(classpath);
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void visitResource(String classpath) {
 
     if (this.filter.accept(classpath)) {

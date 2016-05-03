@@ -140,27 +140,18 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     return UuidAccess.getFactory().createUuid();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final UUID getUuid() {
 
     return this.uuid;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public final NlsMessage getNlsMessage() {
 
     return this.nlsMessage;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void printStackTrace(Locale locale, Appendable buffer) {
 
@@ -238,9 +229,6 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getMessage() {
 
@@ -255,36 +243,24 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     return buffer.toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage() {
 
     return getNlsMessage().getLocalizedMessage();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLocalizedMessage(Locale locale) {
 
     return getNlsMessage().getLocalizedMessage(locale);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void getLocalizedMessage(Locale locale, Appendable appendable) {
 
     getNlsMessage().getLocalizedMessage(locale, appendable);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public NlsMessage toNlsMessage() {
 
@@ -303,9 +279,6 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     return NlsAccess.getBundleFactory().createBundle(bundleInterface);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isTechnical() {
 
@@ -313,18 +286,12 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean isForUser() {
 
     return !isTechnical();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
@@ -361,9 +328,6 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     return createCopyViaClone(truncation);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString() {
 
@@ -371,17 +335,13 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
     return toString(Locale.getDefault(), null).toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public String toString(Locale locale) {
 
     return toString(locale, null).toString();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Appendable toString(Locale locale, Appendable appendable) {
 
     Appendable buffer = appendable;

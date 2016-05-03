@@ -171,9 +171,6 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ValidationFailure validate(V value, Object valueSource) {
 
@@ -233,9 +230,6 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
     return new ValidationFailureImpl(code, valueSource, violation.getMessage());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected String getCode() {
 

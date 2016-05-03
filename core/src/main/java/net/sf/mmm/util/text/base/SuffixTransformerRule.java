@@ -35,9 +35,6 @@ public class SuffixTransformerRule extends TransformerRule {
     this.destinationSuffix = destinationSuffix;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String transform(String string, String stringLowerCase) {
 

@@ -92,9 +92,6 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     return instance;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void doInitialize() {
 
@@ -104,9 +101,6 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public CollectionFactoryManager getCollectionFactoryManager() {
 
@@ -346,9 +340,6 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getSize(Object arrayMapOrCollection) throws NlsIllegalArgumentException {
 
@@ -367,18 +358,12 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object get(Object arrayOrList, int index) throws NlsIllegalArgumentException {
 
     return get(arrayOrList, index, true);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object get(Object arrayOrList, int index, boolean ignoreIndexOverflow)
       throws NlsIllegalArgumentException {
@@ -408,18 +393,12 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object set(Object arrayOrList, int index, Object item) throws NlsIllegalArgumentException {
 
     return set(arrayOrList, index, item, null, this.maximumListGrowth);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver)
       throws NlsIllegalArgumentException {
@@ -427,9 +406,6 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     return set(arrayOrList, index, item, arrayReceiver, this.maximumListGrowth);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked", "null" })
   public Object set(Object arrayOrList, int index, Object item, GenericBean<Object> arrayReceiver,
@@ -492,9 +468,6 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public Object add(Object arrayOrCollection, Object item) {
@@ -518,9 +491,6 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     return arrayOrCollection;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("rawtypes")
   public Object remove(Object arrayOrCollection, Object item) {
@@ -555,9 +525,6 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Object toArray(Collection<?> collection, Class<?> componentType) throws ClassCastException {
 
@@ -584,9 +551,6 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     return array;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   @SuppressWarnings("unchecked")
   public <T> T[] toArrayTyped(Collection<T> collection, Class<T> componentType) {

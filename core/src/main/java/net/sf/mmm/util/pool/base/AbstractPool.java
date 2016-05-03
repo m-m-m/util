@@ -87,9 +87,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
     this.pool = new Object[capacity];
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public E borrow() {
 
     if (this.lock == null) {
@@ -141,9 +139,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public boolean isEmpty() {
 
     return this.size == 0;
@@ -175,9 +171,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
     return this.pool.length;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public void release(E element) {
 
     if (this.size < this.pool.length) {

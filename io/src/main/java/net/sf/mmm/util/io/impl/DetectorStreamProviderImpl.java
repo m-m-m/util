@@ -26,17 +26,13 @@ public class DetectorStreamProviderImpl extends AbstractDetectorStreamProvider {
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DetectorInputStream wrapInputStream(InputStream stream, Map<String, Object> metadata) {
 
     return new ProcessableDetectorInputStream(stream, metadata, this);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DetectorOutputStream wrapOutputStream(OutputStream stream, Map<String, Object> metadata) {
 
     return new ProcessableDetectorOutputStream(stream, metadata, this);

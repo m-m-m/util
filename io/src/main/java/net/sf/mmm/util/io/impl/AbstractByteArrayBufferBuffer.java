@@ -154,9 +154,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getBytesAvailable() {
 
@@ -173,9 +170,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     return count;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean hasNext() {
 
@@ -185,9 +179,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     return nextBuffer();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public byte next() throws NoSuchElementException {
 
@@ -202,9 +193,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public byte peek() throws NoSuchElementException {
 
@@ -215,18 +203,12 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long skip(long byteCount) {
 
     return process(null, byteCount);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long process(ByteProcessor processor, long byteCount) {
 
@@ -335,9 +317,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int fill(byte[] buffer, int offset, int length) {
 
@@ -375,9 +354,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     return (length - bytesLeft);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public ByteArray getByteArray(int index) {
 
@@ -402,9 +378,6 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getByteArrayCount() {
 

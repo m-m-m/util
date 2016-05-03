@@ -68,9 +68,7 @@ public class PojoPathMap extends AbstractSimpleMap<String, Object> {
     this.mode = mode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public Object get(Object key) {
 
     String pojoPath = (String) key;

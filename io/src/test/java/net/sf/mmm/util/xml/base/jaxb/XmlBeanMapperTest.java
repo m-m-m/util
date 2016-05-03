@@ -157,11 +157,7 @@ public class XmlBeanMapperTest {
 
   protected static class XmlAdapterTestEnum extends XmlAdapterEnum<TestEnum> {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Class<TestEnum> getEnumClass() {
+    @Override    protected Class<TestEnum> getEnumClass() {
 
       return TestEnum.class;
     }

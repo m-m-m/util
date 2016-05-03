@@ -37,18 +37,13 @@ public class ContentTypeDetectorStreamProcessorFactory extends AbstractDetectorS
     this.lookaheadCount = lookaheadCount;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int getLookaheadCount() {
 
     return this.lookaheadCount;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  @Override
   public DetectorStreamProcessor createProcessor() {
 
     List<ContentTypeBean> contentTypes = null;

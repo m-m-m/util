@@ -32,9 +32,6 @@ public class PojoDescriptorBuilderGenerator extends AbstractPojoDescriptorGenera
     super();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected boolean isCachedResultObsolete(CachedGeneratorResult cachedGeneratorResult, String typeName) {
 
@@ -43,9 +40,6 @@ public class PojoDescriptorBuilderGenerator extends AbstractPojoDescriptorGenera
     return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateImportStatements(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -55,9 +49,6 @@ public class PojoDescriptorBuilderGenerator extends AbstractPojoDescriptorGenera
     sourceComposerFactory.addImport(AbstractPojoDescriptorBuilderLimited.class.getName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateClassDeclaration(JClassType inputType, TreeLogger logger,
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
@@ -65,9 +56,6 @@ public class PojoDescriptorBuilderGenerator extends AbstractPojoDescriptorGenera
     sourceComposerFactory.setSuperclass(AbstractPojoDescriptorBuilderLimited.class.getSimpleName());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   protected void generateClassContents(JClassType inputType, TreeLogger logger, SourceWriter sourceWriter,
       String simpleName, GeneratorContext context) {
@@ -135,9 +123,6 @@ public class PojoDescriptorBuilderGenerator extends AbstractPojoDescriptorGenera
     generateSourceCloseBlock(sourceWriter);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public long getVersionId() {
 

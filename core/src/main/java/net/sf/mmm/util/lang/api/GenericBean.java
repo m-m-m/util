@@ -40,36 +40,24 @@ public class GenericBean<TYPE> implements AttributeWriteValue<TYPE> {
     this.value = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public TYPE getValue() {
 
     return this.value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setValue(TYPE value) {
 
     this.value = value;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode() {
 
     return ~Objects.hashCode(this.value);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals(Object obj) {
 

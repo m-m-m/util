@@ -70,9 +70,6 @@ public class InvocationFailedException extends ReflectionException {
     return error;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getCode() {
 
