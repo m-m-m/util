@@ -18,7 +18,6 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public final class AreaCode extends AbstractSimpleDatatype<Integer> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -4095519482392043680L;
 
   /**

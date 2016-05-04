@@ -21,15 +21,12 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
  */
 public class PojoMap extends AbstractSimpleMap<String, Object> {
 
-  /** @see #get(Object) */
   @SuppressWarnings("rawtypes")
   private final PojoDescriptor pojoDescriptor;
 
-  /** @see #get(Object) */
-  private final Object pojo;
+  private  final Object pojo;
 
-  /** @see #keySet() */
-  private Set<String> keySet;
+  private  Set<String> keySet;
 
   /**
    * The constructor.

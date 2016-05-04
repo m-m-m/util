@@ -26,14 +26,11 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
   /** The {@link XmlBeanMapper}. */
   private final XmlBeanMapper<BEAN> beanMapper;
 
-  /** @see #isAllowSave() */
-  private final boolean allowSave;
+  private  final boolean allowSave;
 
-  /** @see #getBean() */
-  private BEAN bean;
+  private  BEAN bean;
 
-  /** @see #refresh() */
-  private Date modificationDate;
+  private  Date modificationDate;
 
   /**
    * The constructor.

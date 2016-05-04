@@ -14,7 +14,6 @@ import com.google.gwt.i18n.client.LocaleInfo;
  */
 public final class Locale implements Serializable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 9149081749638150636L;
 
   /** English {@link Locale}. */
@@ -26,17 +25,13 @@ public final class Locale implements Serializable {
   /** @see java.util.Locale#ROOT */
   public static final Locale ROOT = new Locale("");
 
-  /** @see #getDefault() */
-  private static Locale defaultLocale;
+  private  static Locale defaultLocale;
 
-  /** @see #getLanguage() */
-  private final String language;
+  private  final String language;
 
-  /** @see #getCountry() */
-  private final String country;
+  private  final String country;
 
-  /** @see #getVariant() */
-  private final String variant;
+  private  final String variant;
 
   /**
    * The constructor.

@@ -16,11 +16,9 @@ public class CliParameterConsumer {
   /** An empty instance. */
   static final CliParameterConsumer EMPTY_INSTANCE = new CliParameterConsumer();
 
-  /** @see #getNext() */
-  private final String[] parameters;
+  private  final String[] parameters;
 
-  /** @see #getNext() */
-  private int index;
+  private  int index;
 
   /**
    * The constructor.

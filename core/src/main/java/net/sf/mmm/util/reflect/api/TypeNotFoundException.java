@@ -14,7 +14,6 @@ import net.sf.mmm.util.reflect.NlsBundleUtilReflectRoot;
  */
 public class TypeNotFoundException extends ReflectionException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 8148127703407920465L;
 
   /** @see #getCode() */

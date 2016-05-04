@@ -15,7 +15,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public class RuntimeIoException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 5931918722203161328L;
 
   /** @see #getCode() */

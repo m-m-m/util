@@ -13,11 +13,9 @@ import net.sf.mmm.util.filter.api.CharFilter;
  */
 public class ListCharFilter implements CharFilter {
 
-  /** @see #accept(char) */
-  private boolean blacklist;
+  private  boolean blacklist;
 
-  /** @see #accept(char) */
-  private final char[] chars;
+  private  final char[] chars;
 
   /**
    * The constructor.

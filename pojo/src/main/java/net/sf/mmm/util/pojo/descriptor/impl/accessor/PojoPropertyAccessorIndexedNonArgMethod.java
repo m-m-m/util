@@ -24,8 +24,7 @@ import net.sf.mmm.util.reflect.api.InvocationFailedException;
 public class PojoPropertyAccessorIndexedNonArgMethod extends AbstractPojoPropertyAccessorMethod implements
     PojoPropertyAccessorIndexedNonArg {
 
-  /** @see #getMode() */
-  private final PojoPropertyAccessorIndexedNonArgMode mode;
+  private  final PojoPropertyAccessorIndexedNonArgMode mode;
 
   /**
    * The constructor.

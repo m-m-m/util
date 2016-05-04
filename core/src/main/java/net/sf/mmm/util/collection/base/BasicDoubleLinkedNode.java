@@ -15,8 +15,7 @@ import net.sf.mmm.util.collection.api.DoubleLinkedNode;
 public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleLinkedNode<V>> implements
     DoubleLinkedNode<V, BasicDoubleLinkedNode<V>> {
 
-  /** @see #getPrevious() */
-  private BasicDoubleLinkedNode<V> previous;
+  private  BasicDoubleLinkedNode<V> previous;
 
   /**
    * The constructor.

@@ -14,7 +14,6 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  */
 public class NlsFormatterChoiceNoElseConditionException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -6417256932637230995L;
 
   /** @see #getCode() */

@@ -12,7 +12,6 @@ package net.sf.mmm.util.transferobject.api;
  */
 public abstract class AbstractTransferObject implements TransferObject, Cloneable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -6842823766837505377L;
 
   /**

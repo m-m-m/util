@@ -30,39 +30,30 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ContentTypeBean extends AbstractTreeNode<ContentType> implements ContentType {
 
-  /** @see #getId() */
   @XmlID
   @XmlAttribute(name = "id")
   private String id;
 
-  /** @see #addExtension(String) */
   @XmlElementWrapper(name = "extensions")
   @XmlElement(name = "extension")
   private final Set<String> mutableExtensions;
 
-  /** @see #getExtensions() */
-  private final transient Collection<String> extensions;
+  private  final transient Collection<String> extensions;
 
-  /** @see #getTechnicalParent() */
   @XmlIDREF
   private ContentTypeBean technicalParent;
 
-  /** @see #getDefaultExtension() */
-  private String defaultExtension;
+  private  String defaultExtension;
 
-  /** @see #getTitle() */
   @XmlAttribute(name = "title")
   private String title;
 
-  /** @see #getMimetype() */
   @XmlAttribute(name = "mimetype")
   private String mimetype;
 
-  /** @see #isAbstract() */
   @XmlAttribute(name = "abstract")
   private boolean isAbstract;
 
-  /** @see #getFormat() */
   @XmlElement(name = "format")
   private SegmentContainerSequence format;
 

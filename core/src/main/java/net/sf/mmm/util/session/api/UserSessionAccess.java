@@ -29,8 +29,7 @@ public final class UserSessionAccess {
     super();
   }
 
-  /** @see #getProvider() */
-  private static UserSessionProvider provider;
+  private  static UserSessionProvider provider;
 
   /**
    * @return the {@link UserSessionProvider} instance.

@@ -48,11 +48,9 @@ public class ClasspathResource extends AbstractDataResource {
    */
   public static final String SCHEME_PREFIX = ResourceUri.SCHEME_PREFIX_CLASSPATH;
 
-  /** @see #getUrl() */
-  private final String path;
+  private  final String path;
 
-  /** @see #getUrl() */
-  private final URL url;
+  private  final URL url;
 
   /**
    * The constructor.

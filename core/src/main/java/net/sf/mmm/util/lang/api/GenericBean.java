@@ -17,8 +17,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
  */
 public class GenericBean<TYPE> implements AttributeWriteValue<TYPE> {
 
-  /** @see #getValue() */
-  private TYPE value;
+  private  TYPE value;
 
   /**
    * The constructor.

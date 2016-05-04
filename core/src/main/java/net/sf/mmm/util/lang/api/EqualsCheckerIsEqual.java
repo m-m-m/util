@@ -10,11 +10,9 @@ package net.sf.mmm.util.lang.api;
  */
 public final class EqualsCheckerIsEqual extends AbstractEqualsChecker<Object> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #getInstance() */
-  private static final EqualsCheckerIsEqual INSTANCE = new EqualsCheckerIsEqual();
+  private  static final EqualsCheckerIsEqual INSTANCE = new EqualsCheckerIsEqual();
 
   /**
    * The constructor. <br>

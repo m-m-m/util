@@ -16,7 +16,6 @@ package net.sf.mmm.util.transferobject.api;
  */
 public abstract class CompositeTo extends AbstractTransferObject {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5632071222008562903L;
 
   /**

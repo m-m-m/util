@@ -17,8 +17,7 @@ import net.sf.mmm.util.exception.api.DuplicateObjectException;
  */
 public abstract class AbstractContentTypeManager extends AbstractLoggableComponent implements ContentTypeManager {
 
-  /** @see #getContentType(String) */
-  private final Map<String, ContentType> id2contentTypeMap;
+  private  final Map<String, ContentType> id2contentTypeMap;
 
   /**
    * The constructor.

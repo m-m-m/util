@@ -37,11 +37,9 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated;
  */
 public abstract class AbstractEnumProvider extends AbstractLoggableComponent implements EnumProvider {
 
-  /** @see #getEnumDefinition(String) */
-  private final Map<String, EnumContainer> enumContainerMap;
+  private  final Map<String, EnumContainer> enumContainerMap;
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
   /**
    * The constructor.
@@ -339,14 +337,11 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
    */
   protected static class EnumContainer {
 
-    /** @see #getEnumDefinition() */
-    private final EnumDefinition<?, ?> enumDefinition;
+    private  final EnumDefinition<?, ?> enumDefinition;
 
-    /** @see #setAllValues(List) */
-    private volatile List<?> allValues;
+    private  volatile List<?> allValues;
 
-    /** @see #getValues() */
-    private volatile List<?> activeValues;
+    private  volatile List<?> activeValues;
 
     /**
      * The constructor.
@@ -409,8 +404,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
    */
   private static class EnumDefinitionIterator extends AbstractIterator<EnumDefinition<?, ?>> {
 
-    /** @see #findNext() */
-    private final Iterator<EnumContainer> containerIterator;
+    private  final Iterator<EnumContainer> containerIterator;
 
     /**
      * The constructor.

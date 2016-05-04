@@ -22,8 +22,7 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
   /** The package prefix <code>{@value}</code>. */
   private static final String PREFIX_JAVA_LANG = "java.lang.";
 
-  /** @see #getStyle() */
-  private final String style;
+  private  final String style;
 
   /**
    * The constructor.

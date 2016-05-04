@@ -32,11 +32,9 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
  */
 public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJO> {
 
-  /** @see #getPojoDescriptorBuilder() */
-  private final PojoDescriptorBuilder pojoDescriptorBuilder;
+  private  final PojoDescriptorBuilder pojoDescriptorBuilder;
 
-  /** @see #getPojoType() */
-  private final GenericType<POJO> pojoType;
+  private  final GenericType<POJO> pojoType;
 
   /**
    * The constructor.

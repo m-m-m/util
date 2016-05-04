@@ -22,11 +22,9 @@ import net.sf.mmm.util.lang.api.DatatypeDetector;
  */
 public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent implements DatatypeDetector {
 
-  /** @see #isDatatype(Class) */
-  private final Set<String> customDatatypeSet;
+  private  final Set<String> customDatatypeSet;
 
-  /** @see #isDatatype(Class) */
-  private final Set<String> standardDatatypeSet;
+  private  final Set<String> standardDatatypeSet;
 
   /**
    * The constructor.

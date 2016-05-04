@@ -51,8 +51,7 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
 @Named
 public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFactory {
 
-  /** @see #getInstance() */
-  private static BeanFactory instance;
+  private  static BeanFactory instance;
 
   private static final Type PROPERTY_VALUE_TYPE_VARIABLE = Property.class.getTypeParameters()[0];
 

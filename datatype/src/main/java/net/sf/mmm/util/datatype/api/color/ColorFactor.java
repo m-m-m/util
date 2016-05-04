@@ -11,7 +11,6 @@ package net.sf.mmm.util.datatype.api.color;
  */
 public class ColorFactor extends Factor<ColorFactor> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -6917422770605923183L;
 
   /**

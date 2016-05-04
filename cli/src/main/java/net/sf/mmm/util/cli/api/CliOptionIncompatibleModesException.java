@@ -12,7 +12,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliOptionIncompatibleModesException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1233209808038797353L;
 
   /** @see #getCode() */

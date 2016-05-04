@@ -23,7 +23,6 @@ import net.sf.mmm.util.nls.base.ComposedNlsMessage;
  */
 public class ComposedException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 3290876155391059885L;
 
   /** @see #getCode() */

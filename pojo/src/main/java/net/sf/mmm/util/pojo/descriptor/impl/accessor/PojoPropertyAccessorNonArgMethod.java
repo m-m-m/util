@@ -25,8 +25,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 public class PojoPropertyAccessorNonArgMethod extends AbstractPojoPropertyAccessorMethod implements
     PojoPropertyAccessorNonArg {
 
-  /** @see #getMode() */
-  private final PojoPropertyAccessorNonArgMode mode;
+  private  final PojoPropertyAccessorNonArgMode mode;
 
   /**
    * The constructor.

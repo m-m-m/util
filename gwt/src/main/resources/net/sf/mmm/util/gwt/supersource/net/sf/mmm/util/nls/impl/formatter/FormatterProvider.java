@@ -224,8 +224,7 @@ public final class FormatterProvider {
    */
   private static class NumberFormatFormatter extends AbstractFormatter<Object> {
 
-    /** @see #format(Object) */
-    private final NumberFormat format;
+    private  final NumberFormat format;
 
     /**
      * The constructor.
@@ -254,8 +253,7 @@ public final class FormatterProvider {
    */
   private static class DateTimeFormatFormatter extends AbstractFormatter<Object> {
 
-    /** @see #format(Object) */
-    private final DateTimeFormat format;
+    private  final DateTimeFormat format;
 
     /**
      * The constructor.

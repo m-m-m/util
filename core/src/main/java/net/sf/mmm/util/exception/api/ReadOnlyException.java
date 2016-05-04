@@ -16,7 +16,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class ReadOnlyException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -4118721668441129491L;
 
   /** @see #getCode() */

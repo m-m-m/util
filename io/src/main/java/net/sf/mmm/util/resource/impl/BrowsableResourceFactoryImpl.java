@@ -27,8 +27,7 @@ import net.sf.mmm.util.resource.impl.spi.UrlResourceProvider;
 @Named(DataResourceFactory.CDI_NAME)
 public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFactory {
 
-  /** @see #getProviders() */
-  private List<DataResourceProvider<? extends DataResource>> providers;
+  private  List<DataResourceProvider<? extends DataResource>> providers;
 
   /**
    * The constructor.

@@ -19,8 +19,7 @@ import net.sf.mmm.util.reflect.api.TypeNotFoundException;
  */
 public class MappedClassResolver implements ClassResolver {
 
-  /** @see #resolveClass(String) */
-  private final Map<String, Class<?>> name2classMap;
+  private  final Map<String, Class<?>> name2classMap;
 
   /**
    * The constructor.

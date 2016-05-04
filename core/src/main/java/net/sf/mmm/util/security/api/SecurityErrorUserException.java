@@ -30,7 +30,6 @@ public class SecurityErrorUserException extends NlsRuntimeException implements S
   /** @see #getCode() */
   public static final String CODE = "SecurityError";
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /**

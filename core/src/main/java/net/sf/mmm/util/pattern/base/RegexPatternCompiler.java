@@ -15,8 +15,7 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
  */
 public class RegexPatternCompiler implements PatternCompiler {
 
-  /** @see #RegexPatternCompiler(int) */
-  private final int flags;
+  private  final int flags;
 
   /**
    * The constructor.

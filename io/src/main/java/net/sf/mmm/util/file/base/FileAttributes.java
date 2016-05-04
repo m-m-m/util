@@ -14,14 +14,11 @@ import net.sf.mmm.util.lang.base.BasicUtilImpl;
  */
 public class FileAttributes implements Cloneable {
 
-  /** @see #getUser() */
-  private String user;
+  private  String user;
 
-  /** @see #getGroup() */
-  private String group;
+  private  String group;
 
-  /** @see #getPermissions() */
-  private FileAccessPermissions permissions;
+  private  FileAccessPermissions permissions;
 
   /** the {@link BasicUtilImpl} instance to use. */
   private BasicUtil basicUtil;

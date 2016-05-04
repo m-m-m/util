@@ -17,8 +17,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class GwtUtil {
 
-  /** @see #getInstance() */
-  private static final GwtUtil INSTANCE = GWT.create(GwtUtil.class);
+  private  static final GwtUtil INSTANCE = GWT.create(GwtUtil.class);
 
   /**
    * The constructor.

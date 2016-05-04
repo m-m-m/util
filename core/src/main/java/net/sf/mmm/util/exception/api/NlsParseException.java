@@ -15,7 +15,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class NlsParseException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5909310169818471597L;
 
   /** @see #getCode() */

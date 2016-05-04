@@ -35,17 +35,13 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
 @Named(StringValueConverter.CDI_NAME)
 public class StringValueConverterImpl extends AbstractGenericValueConverter<String> implements StringValueConverter {
 
-  /** @see #getInstance() */
-  private static StringValueConverterImpl instance;
+  private  static StringValueConverterImpl instance;
 
-  /** @see #getIso8601Util() */
-  private Iso8601Util iso8601Util;
+  private  Iso8601Util iso8601Util;
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
-  /** @see #getEnumProvider() */
-  private EnumProvider enumProvider;
+  private  EnumProvider enumProvider;
 
   /**
    * The constructor.

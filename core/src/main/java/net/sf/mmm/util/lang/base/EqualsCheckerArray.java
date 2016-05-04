@@ -19,7 +19,6 @@ import net.sf.mmm.util.lang.api.EqualsChecker;
  */
 public class EqualsCheckerArray extends AbstractEqualsChecker<Object> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /** The delegate to check regular objects. */

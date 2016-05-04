@@ -12,7 +12,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliOptionMisplacedException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -1935672231264852131L;
 
   /** @see #getCode() */

@@ -36,11 +36,9 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
 @Named
 public class ClasspathScannerImpl extends AbstractLoggableComponent implements ClasspathScanner {
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
-  /** @see #getCache() */
-  private Cache cache;
+  private  Cache cache;
 
   /**
    * The constructor.
@@ -158,11 +156,9 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
   protected abstract static class AbstractBrowsableClasspathResource extends AbstractBrowsableResource implements
       ResourcePath {
 
-    /** @see #getParent() */
-    private final ClasspathFolder parent;
+    private  final ClasspathFolder parent;
 
-    /** @see #getName() */
-    private final String name;
+    private  final String name;
 
     /**
      * The constructor.
@@ -280,8 +276,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
    */
   protected static class ClasspathFolder extends AbstractBrowsableClasspathResource {
 
-    /** @see #getChildResources() */
-    private List<AbstractBrowsableClasspathResource> children;
+    private  List<AbstractBrowsableClasspathResource> children;
 
     /**
      * The constructor.
@@ -444,8 +439,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
    */
   protected static class ClasspathFile extends AbstractBrowsableClasspathResource {
 
-    /** @see #getUrl() */
-    private URL url;
+    private  URL url;
 
     /**
      * The constructor.
@@ -491,11 +485,9 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
    */
   protected static class Cache {
 
-    /** @see #getClasspathResource() */
-    private final ClasspathFolder root;
+    private  final ClasspathFolder root;
 
-    /** @see #getClasspathResourceFiles() */
-    private final List<ClasspathFile> classpathResourceFiles;
+    private  final List<ClasspathFile> classpathResourceFiles;
 
     /**
      * The constructor.

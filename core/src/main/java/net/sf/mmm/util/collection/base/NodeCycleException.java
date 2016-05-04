@@ -13,7 +13,6 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  */
 public class NodeCycleException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 8888925901313417066L;
 
   /** @see #getCode() */

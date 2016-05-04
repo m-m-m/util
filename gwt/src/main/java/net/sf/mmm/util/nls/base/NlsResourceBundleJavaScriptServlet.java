@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.Controller;
 public class NlsResourceBundleJavaScriptServlet extends AbstractNlsResourceBundleJavaScriptServlet implements
     Controller {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 2060146216723588926L;
 
   /**

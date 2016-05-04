@@ -34,14 +34,11 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 public abstract class AbstractValueConverterToCompatiblePojo<SOURCE, TARGET>
     extends AbstractRecursiveValueConverter<SOURCE, TARGET> {
 
-  /** @see #setPojoFactory(PojoFactory) */
-  private PojoFactory pojoFactory;
+  private  PojoFactory pojoFactory;
 
-  /** @see #setPojoDescriptorBuilder(PojoDescriptorBuilder) */
-  private PojoDescriptorBuilder pojoDescriptorBuilder;
+  private  PojoDescriptorBuilder pojoDescriptorBuilder;
 
-  /** @see #setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory) */
-  private PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
+  private  PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
 
   /**
    * The constructor.

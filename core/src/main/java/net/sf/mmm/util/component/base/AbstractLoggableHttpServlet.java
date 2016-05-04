@@ -15,11 +15,9 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractLoggableHttpServlet extends HttpServlet {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1054107399519894261L;
 
-  /** @see #getLogger() */
-  private final Logger logger;
+  private  final Logger logger;
 
   /**
    * The constructor.

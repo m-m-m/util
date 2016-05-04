@@ -20,11 +20,9 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  */
 public class NlsMessagePlain implements NlsMessage {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #getMessage() */
-  private/* final */String message;
+  private /* final */String message;
 
   /**
    * The constructor for de-serialization in GWT.

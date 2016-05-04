@@ -11,14 +11,11 @@ package net.sf.mmm.util.xml.api;
  */
 public class ParserState {
 
-  /** @see #getTagStartIndex() */
-  private int tagStartIndex;
+  private  int tagStartIndex;
 
-  /** @see #getInAttribute() */
-  private char inAttribute;
+  private  char inAttribute;
 
-  /** @see #getCdataCloseCount() */
-  private int cdataCloseCount;
+  private  int cdataCloseCount;
 
   /**
    * The constructor.

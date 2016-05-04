@@ -66,8 +66,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   /** The prefix of resources in WAR-files. */
   private static final String WEB_INF_CLASSES = "WEB-INF/classes/";
 
-  /** @see #getInstance() */
-  private static ReflectionUtil instance;
+  private  static ReflectionUtil instance;
 
   /** @see #toType(CharSequenceScanner, ClassResolver, Type) */
   private static final CharFilter CHAR_FILTER = new ListCharFilter(false, '<', '[', ',', '?', '>');

@@ -15,20 +15,15 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  */
 public class FileAccessPermissions implements Cloneable {
 
-  /** @see #parseUGO(CharSequenceScanner) */
-  private static final int MASK_MAX = 07777;
+  private  static final int MASK_MAX = 07777;
 
-  /** @see #parseUGO(CharSequenceScanner) */
-  private static final int MASK_USER = 0100;
+  private  static final int MASK_USER = 0100;
 
-  /** @see #parseUGO(CharSequenceScanner) */
-  private static final int MASK_GROUP = 0010;
+  private  static final int MASK_GROUP = 0010;
 
-  /** @see #parseUGO(CharSequenceScanner) */
-  private static final int MASK_OTHERS = 0001;
+  private  static final int MASK_OTHERS = 0001;
 
-  /** @see #parseUGO(CharSequenceScanner) */
-  private static final int MASK_ALL = 0111;
+  private  static final int MASK_ALL = 0111;
 
   /** @see #isReadable(FileAccessClass) */
   public static final int MASK_READABLE = 4;
@@ -48,14 +43,11 @@ public class FileAccessPermissions implements Cloneable {
   /** @see #isSticky() */
   public static final int MASK_STICKY = 01000;
 
-  /** @see #chmod(String) */
-  private static final int MASK_USER_FLAGS = 00700;
+  private  static final int MASK_USER_FLAGS = 00700;
 
-  /** @see #chmod(String) */
-  private static final int MASK_GROUP_FLAGS = 00070;
+  private  static final int MASK_GROUP_FLAGS = 00070;
 
-  /** @see #chmod(String) */
-  private static final int MASK_OTHERS_FLAGS = 00007;
+  private  static final int MASK_OTHERS_FLAGS = 00007;
 
   /** @see #createByUmask(int, boolean) */
   private static final int MASK_FULL_FILE_ACCESS = 0666;
@@ -63,17 +55,13 @@ public class FileAccessPermissions implements Cloneable {
   /** @see #createByUmask(int, boolean) */
   private static final int MASK_FULL_DIRECTORY_ACCESS = 0777;
 
-  /** @see #setExecutable(boolean) */
-  private static final int MASK_ALL_EXECUTABLE = 0111;
+  private  static final int MASK_ALL_EXECUTABLE = 0111;
 
-  /** @see #setWritable(boolean) */
-  private static final int MASK_ALL_WRITABLE = 0222;
+  private  static final int MASK_ALL_WRITABLE = 0222;
 
-  /** @see #setReadable(boolean) */
-  private static final int MASK_ALL_READABLE = 0444;
+  private  static final int MASK_ALL_READABLE = 0444;
 
-  /** @see #getMaskBits() */
-  private int maskBits;
+  private  int maskBits;
 
   /**
    * The constructor.

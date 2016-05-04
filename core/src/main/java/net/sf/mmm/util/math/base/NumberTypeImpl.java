@@ -244,14 +244,11 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
 
   };
 
-  /** @see #getExactnessDifference(NumberType) */
-  private final int exactness;
+  private  final int exactness;
 
-  /** @see #getMinimumValue() */
-  private final NUMBER minimumValue;
+  private  final NUMBER minimumValue;
 
-  /** @see #getMaximumValue() */
-  private final NUMBER maximumValue;
+  private  final NUMBER maximumValue;
 
   /**
    * The constructor.

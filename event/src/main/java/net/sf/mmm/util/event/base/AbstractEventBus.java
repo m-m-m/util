@@ -30,20 +30,14 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
  */
 public abstract class AbstractEventBus extends AbstractLoggableComponent implements EventBus {
 
-  /**
-   * The {@link CollectionFactory} used to create regular {@link Collection}s e.g. for {@link EventListener}s.
-   */
   private final CollectionFactory<?> queueFactory;
 
-  /** @see #sendEvent(Object) */
   @SuppressWarnings("rawtypes")
   private final Map<Class<?>, EventDispatcher> eventType2dispatcherMap;
 
-  /** The {@link Queue} used to ensure the order of the events. */
   private final Queue<Object> eventQueue;
 
-  /** @see #getGlobalExceptionHandler() */
-  private GlobalExceptionHandler globalExceptionHandler;
+  private  GlobalExceptionHandler globalExceptionHandler;
 
   /**
    * The constructor.
@@ -266,11 +260,9 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
    */
   protected static class EventListenerContainer<E> {
 
-    /** @see #getEventType() */
-    private final Class<E> eventType;
+    private  final Class<E> eventType;
 
-    /** @see #getEventListener() */
-    private EventListener<E> eventListener;
+    private  EventListener<E> eventListener;
 
     /**
      * The constructor.

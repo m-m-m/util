@@ -14,7 +14,6 @@ import net.sf.mmm.util.resource.NlsBundleUtilResourceRoot;
  */
 public class ResourceNotWritableException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -7527198711344080897L;
 
   /** @see #getCode() */

@@ -10,8 +10,7 @@ package net.sf.mmm.util.filter.api;
  */
 final class WhitespaceHelper {
 
-  /** @see #isWhitespace(char) */
-  private static final char[] WHITESPACES = new char[] { 0x00009, 0x0000A, 0x0000B, 0x0000C, 0x0000D, 0x0001C, 0x0001D,
+  private  static final char[] WHITESPACES = new char[] { 0x00009, 0x0000A, 0x0000B, 0x0000C, 0x0000D, 0x0001C, 0x0001D,
       0x0001E, 0x0001F, 0x00020 };
 
   /**

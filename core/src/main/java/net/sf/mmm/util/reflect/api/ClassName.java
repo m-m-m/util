@@ -13,14 +13,11 @@ package net.sf.mmm.util.reflect.api;
  */
 public class ClassName {
 
-  /** @see #getPackageName() */
-  private final String packageName;
+  private  final String packageName;
 
-  /** @see #getEnclosingClass() */
-  private final ClassName enclosingClass;
+  private  final ClassName enclosingClass;
 
-  /** @see #getSimpleName() */
-  private final String simpleName;
+  private  final String simpleName;
 
   /**
    * The constructor.

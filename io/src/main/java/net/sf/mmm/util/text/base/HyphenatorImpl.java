@@ -32,11 +32,9 @@ public class HyphenatorImpl extends AbstractHyphenator {
   /** The maximum length of the {@link #patterns}. */
   private final int maxPatternLength;
 
-  /** @see StringHasher */
-  private final StringHasher hasher;
+  private  final StringHasher hasher;
 
-  /** @see StringUtil */
-  private final StringUtil stringUtil;
+  private  final StringUtil stringUtil;
 
   /**
    * The constructor.

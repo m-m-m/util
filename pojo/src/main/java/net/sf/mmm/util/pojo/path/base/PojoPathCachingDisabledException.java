@@ -14,7 +14,6 @@ import net.sf.mmm.util.pojo.path.api.PojoPathException;
  */
 public class PojoPathCachingDisabledException extends PojoPathException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -3185296481410849119L;
 
   /** @see #getCode() */

@@ -16,8 +16,7 @@ public class SegmentKey extends SegmentVariableLength {
   /** The XML tag name for this object. */
   public static final String XML_TAG = "key";
 
-  /** @see #getPrefix() */
-  private String prefix;
+  private  String prefix;
 
   /**
    * The constructor.

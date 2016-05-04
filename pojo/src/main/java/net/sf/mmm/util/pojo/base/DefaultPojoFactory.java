@@ -25,8 +25,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 @Singleton
 public class DefaultPojoFactory extends SimplePojoFactory {
 
-  /** @see #getCollectionFactoryManager() */
-  private CollectionFactoryManager collectionFactoryManager;
+  private  CollectionFactoryManager collectionFactoryManager;
 
   /**
    * The constructor.

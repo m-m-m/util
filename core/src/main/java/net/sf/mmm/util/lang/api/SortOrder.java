@@ -16,11 +16,9 @@ public enum SortOrder implements SimpleDatatype<String> {
   /** Indicating that values are in decreasing order (e.g. "3, 2, 1"). */
   DESCENDING("desc", "descending");
 
-  /** @see #getValue() */
-  private final String value;
+  private  final String value;
 
-  /** @see #toString() */
-  private final String title;
+  private  final String title;
 
   /**
    * The constructor.

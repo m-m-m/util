@@ -61,8 +61,7 @@ import org.xml.sax.SAXException;
 @Named(DomUtil.CDI_NAME)
 public final class DomUtilImpl extends AbstractLoggableComponent implements DomUtil {
 
-  /** @see #getInstance() */
-  private static DomUtil instance;
+  private  static DomUtil instance;
 
   /** the document builder factory used to read and parse XML */
   private DocumentBuilderFactory documentBuilderFactory;
@@ -70,8 +69,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /** the transformer factory used to transform or write XML */
   private TransformerFactory transformerFactory;
 
-  /** @see #getBasicUtil() */
-  private BasicUtil basicUtil;
+  private  BasicUtil basicUtil;
 
   /**
    * The constructor.

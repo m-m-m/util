@@ -24,8 +24,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
  */
 public class DatatypeDescriptorSimpleDatatype<T extends SimpleDatatype<?>> extends AbstractDatatypeDescriptor<T> {
 
-  /** @see #doCreate(Object...) */
-  private final Constructor<T> constructor;
+  private  final Constructor<T> constructor;
 
   /**
    * The constructor.

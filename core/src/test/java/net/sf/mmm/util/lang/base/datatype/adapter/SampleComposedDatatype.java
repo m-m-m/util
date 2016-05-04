@@ -16,7 +16,6 @@ import net.sf.mmm.util.lang.api.AbstractDatatype;
  */
 public class SampleComposedDatatype extends AbstractDatatype {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   private final BigDecimal amount;

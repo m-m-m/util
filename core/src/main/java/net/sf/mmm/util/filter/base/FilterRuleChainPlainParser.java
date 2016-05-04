@@ -60,14 +60,11 @@ import net.sf.mmm.util.filter.api.FilterRule;
  */
 public class FilterRuleChainPlainParser {
 
-  /** @see #getAcceptChar() */
-  private char acceptChar;
+  private  char acceptChar;
 
-  /** @see #getDenyChar() */
-  private char denyChar;
+  private  char denyChar;
 
-  /** @see #getCommentChar() */
-  private char commentChar;
+  private  char commentChar;
 
   /**
    * The constructor.

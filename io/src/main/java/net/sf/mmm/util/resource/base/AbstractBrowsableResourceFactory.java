@@ -24,8 +24,7 @@ import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
 public abstract class AbstractBrowsableResourceFactory extends AbstractDataResourceFactory implements
     BrowsableResourceFactory {
 
-  /** @see #createBrowsableResource(ResourceUri) */
-  private final Map<String, DataResourceProvider<? extends DataResource>> schema2providerMap;
+  private  final Map<String, DataResourceProvider<? extends DataResource>> schema2providerMap;
 
   /**
    * The constructor.
@@ -160,8 +159,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    */
   protected class BrowsableResourceAdapter extends AbstractBrowsableResourceProxy {
 
-    /** @see #getDelegate() */
-    private final BrowsableResource delegate;
+    private  final BrowsableResource delegate;
 
     /**
      * The constructor.

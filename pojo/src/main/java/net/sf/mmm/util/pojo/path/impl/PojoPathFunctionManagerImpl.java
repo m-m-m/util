@@ -25,11 +25,9 @@ import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
 @SuppressWarnings("rawtypes")
 public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager {
 
-  /** @see #setFunctionMap(Map) */
-  private Map<String, PojoPathFunction> functionMap;
+  private  Map<String, PojoPathFunction> functionMap;
 
-  /** @see #setFunctions(List) */
-  private List<PojoPathNamedFunction> functions;
+  private  List<PojoPathNamedFunction> functions;
 
   /**
    * The constructor.

@@ -23,11 +23,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescriptor<T> {
 
-  /** @see #getDatatype() */
-  private final Class<T> datatype;
+  private  final Class<T> datatype;
 
-  /** @see #getSegmentDescriptors() */
-  private final List<DatatypeSegmentDescriptor<T, ?>> segmentDescriptorList;
+  private  final List<DatatypeSegmentDescriptor<T, ?>> segmentDescriptorList;
 
   /** The number of {@link #getSegment(Object, int) segments} that are required. */
   private final int requiredSegmentCount;

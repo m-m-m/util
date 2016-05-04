@@ -15,8 +15,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  */
 public class SimpleDetectorStreamProcessorFactory extends AbstractDetectorStreamProcessorFactory {
 
-  /** @see #setProcessorImplementation(Class) */
-  private Class<? extends DetectorStreamProcessor> processorImplementation;
+  private  Class<? extends DetectorStreamProcessor> processorImplementation;
 
   /**
    * The constructor.

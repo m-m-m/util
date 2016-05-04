@@ -37,17 +37,13 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   /** The singleton instance of {@link EtoHelper}. */
   private static final EtoHelper HELPER = new EtoHelper();
 
-  /** @see #getInstance() */
-  private static TransferObjectUtil instance;
+  private  static TransferObjectUtil instance;
 
-  /** @see #getComposedValueConverter() */
-  private ComposedValueConverter composedValueConverter;
+  private  ComposedValueConverter composedValueConverter;
 
-  /** @see #getPojoUtil() */
-  private PojoUtil pojoUtil;
+  private  PojoUtil pojoUtil;
 
-  /** @see #getDatatypeDetector() */
-  private DatatypeDetector datatypeDetector;
+  private  DatatypeDetector datatypeDetector;
 
   /**
    * The constructor.

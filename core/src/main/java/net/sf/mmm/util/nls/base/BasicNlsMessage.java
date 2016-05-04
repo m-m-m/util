@@ -18,17 +18,14 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  */
 public abstract class BasicNlsMessage extends AbstractNlsMessage {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 7021159510028831610L;
 
   /** The {@link #message} as {@link NlsTemplate}. */
   private NlsTemplate template;
 
-  /** @see #getInternationalizedMessage() */
-  private String message;
+  private  String message;
 
-  /** @see #getArgument(String) */
-  private Map<String, Object> arguments;
+  private  Map<String, Object> arguments;
 
   /**
    * The constructor for de-serialization in GWT.

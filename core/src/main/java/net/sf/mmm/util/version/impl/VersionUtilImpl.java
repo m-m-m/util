@@ -59,23 +59,17 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   private static final CharFilter LETTER_FILTER = new ConjunctionCharFilter(Conjunction.NOR, SEPARATOR_FILTER,
       CharFilter.LATIN_DIGIT_FILTER);
 
-  /** @see #getInstance() */
-  private static VersionUtil instance;
+  private  static VersionUtil instance;
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
-  /** @see #getIso8601Util() */
-  private Iso8601Util iso8601Util;
+  private  Iso8601Util iso8601Util;
 
-  /** @see #getPhaseMap() */
-  private Map<String, DevelopmentPhase> phaseMap;
+  private  Map<String, DevelopmentPhase> phaseMap;
 
-  /** @see #getPhasePrefixSet() */
-  private Set<String> phasePrefixSet;
+  private  Set<String> phasePrefixSet;
 
-  /** @see #getDefaultFormatter() */
-  private VersionIdentifierFormatter defaultFormatter;
+  private  VersionIdentifierFormatter defaultFormatter;
 
   /**
    * The constructor.

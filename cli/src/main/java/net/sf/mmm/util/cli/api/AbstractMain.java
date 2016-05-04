@@ -46,20 +46,15 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    */
   protected static final int EXIT_CODE_UNEXPECTED = -1;
 
-  /** @see #getOutputSettings() */
-  private final CliOutputSettings outputSettings;
+  private  final CliOutputSettings outputSettings;
 
-  /** @see #getStandardOutput() */
-  private PrintWriter standardOutput;
+  private  PrintWriter standardOutput;
 
-  /** @see #getStandardError() */
-  private PrintWriter standardError;
+  private  PrintWriter standardError;
 
-  /** @see #getParserBuilder() */
-  private CliParserBuilder parserBuilder;
+  private  CliParserBuilder parserBuilder;
 
-  /** @see #getStreamUtil() */
-  private StreamUtil streamUtil;
+  private  StreamUtil streamUtil;
 
   /** Option to show the {@link #printHelp(CliParser) usage}. */
   @CliOption(name = CliOption.NAME_HELP, aliases = CliOption.ALIAS_HELP, //

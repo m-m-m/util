@@ -18,7 +18,6 @@ package net.sf.mmm.util.transferobject.api;
  */
 public abstract class DataTo extends AbstractTransferObject {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -3039958170310580721L;
 
   /**

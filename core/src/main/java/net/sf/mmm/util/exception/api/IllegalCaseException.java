@@ -14,7 +14,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class IllegalCaseException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5031356555598229511L;
 
   /** @see #getCode() */

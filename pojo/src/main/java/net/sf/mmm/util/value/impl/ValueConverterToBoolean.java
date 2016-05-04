@@ -21,8 +21,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @Named
 public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object, Boolean> {
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
   /**
    * The constructor.

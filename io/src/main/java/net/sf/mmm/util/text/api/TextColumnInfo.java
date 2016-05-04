@@ -34,35 +34,25 @@ public class TextColumnInfo {
    */
   public static final int WIDTH_AUTO_ADJUST = -1;
 
-  /** @see #getWidth() */
-  private int width;
+  private  int width;
 
-  /** @see #getBorderLeft() */
-  private String borderLeft;
+  private  String borderLeft;
 
-  /** @see #getBorderRight() */
-  private String borderRight;
+  private  String borderRight;
 
-  /** @see #getFiller() */
-  private char filler;
+  private  char filler;
 
-  /** @see #getIndent() */
-  private String indent;
+  private  String indent;
 
-  /** @see #getAlignment() */
-  private HorizontalAlignment alignment;
+  private  HorizontalAlignment alignment;
 
-  /** @see #getWrapChars() */
-  private char[] wrapChars;
+  private  char[] wrapChars;
 
-  /** @see #getOmitChars() */
-  private char[] omitChars;
+  private  char[] omitChars;
 
-  /** @see #getIndentationMode() */
-  private IndentationMode indentationMode;
+  private  IndentationMode indentationMode;
 
-  /** @see #getLocale() */
-  private Locale locale;
+  private  Locale locale;
 
   /**
    * The constructor.

@@ -27,11 +27,9 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @Named
 public class ValueConverterToString extends AbstractSimpleValueConverter<Object, String> {
 
-  /** @see #getIso8601Util() */
-  private Iso8601Util iso8601Util;
+  private  Iso8601Util iso8601Util;
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
   /**
    * The constructor.

@@ -14,17 +14,13 @@ import net.sf.mmm.util.exception.api.NlsParseException;
  */
 public class EntityIdImpl extends AbstractEntityId {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1553359087706129686L;
 
-  /** @see #getObjectId() */
-  private long objectId;
+  private  long objectId;
 
-  /** @see #getTypeId() */
-  private long typeId;
+  private  long typeId;
 
-  /** @see #getRevision() */
-  private Number revision;
+  private  Number revision;
 
   /**
    * The constructor for de-serialization in GWT.

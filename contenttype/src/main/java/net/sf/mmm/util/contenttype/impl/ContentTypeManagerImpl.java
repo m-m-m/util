@@ -20,11 +20,9 @@ import net.sf.mmm.util.contenttype.base.ContentTypeListLoader;
 @Named
 public class ContentTypeManagerImpl extends AbstractContentTypeManager {
 
-  /** @see #getRootType() */
-  private ContentType rootType;
+  private  ContentType rootType;
 
-  /** @see #getTechnicalRootType() */
-  private ContentType technicalRootType;
+  private  ContentType technicalRootType;
 
   /**
    * The constructor.

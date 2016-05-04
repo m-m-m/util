@@ -22,8 +22,7 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
 public abstract class AbstractComposedValueConverter extends AbstractGenericValueConverter<Object> implements
     ComposedValueConverter {
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.

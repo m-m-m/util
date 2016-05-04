@@ -21,8 +21,7 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
  */
 public class ProcessableDetectorOutputStream extends ProcessableDetectorStream implements DetectorOutputStream {
 
-  /** @see #getStream() */
-  private final WrapperOutputStream wrapperOutputStream;
+  private  final WrapperOutputStream wrapperOutputStream;
 
   /**
    * The constructor.

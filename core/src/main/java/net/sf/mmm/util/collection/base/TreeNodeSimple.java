@@ -18,8 +18,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeWriteValue;
 public class TreeNodeSimple<VALUE> extends AbstractTreeNode<TreeNodeSimple<VALUE>>
     implements AttributeWriteValue<VALUE> {
 
-  /** @see #getValue() */
-  private VALUE value;
+  private  VALUE value;
 
   /**
    * The constructor.

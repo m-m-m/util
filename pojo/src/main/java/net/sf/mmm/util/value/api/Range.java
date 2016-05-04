@@ -26,14 +26,11 @@ import net.sf.mmm.util.lang.base.ComparableComparator;
 @SuppressWarnings("rawtypes")
 public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, AttributeReadMaximumValue<V> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6426261544538415827L;
 
-  /** @see #getMin() */
-  private V min;
+  private  V min;
 
-  /** @see #getMax() */
-  private V max;
+  private  V max;
 
   /** The unbound minimum. */
   public static final String MIN_UNBOUND = "\u2212\u221E";

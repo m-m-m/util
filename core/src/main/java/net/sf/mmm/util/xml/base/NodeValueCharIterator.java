@@ -16,8 +16,7 @@ import org.w3c.dom.NodeList;
  */
 class NodeValueCharIterator implements CharIterator {
 
-  /** @see #NodeValueCharIterator(NodeList) */
-  private final NodeList nodeList;
+  private  final NodeList nodeList;
 
   /** The current {@link NodeList#item(int) index} in {@link #nodeList}. */
   private int nodeIndex;

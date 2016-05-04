@@ -77,48 +77,37 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   /** @see #getPath() */
   protected static final String DEFAULT_BASE_PATH = "src/main/resources";
 
-  /** @see #getEncoding() */
-  private static final String DEFAULT_ENCODING = "UTF-8";
+  private  static final String DEFAULT_ENCODING = "UTF-8";
 
-  /** @see #getEncoding() */
-  private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss Z";
+  private  static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss Z";
 
-  /** @see #getPath() */
   @CliOption(name = OPTION_PATH, aliases = "-p", operand = "DIR", //
   usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_PATH)
   private String path;
 
-  /** @see #getEncoding() */
   @CliOption(name = OPTION_ENCODING, aliases = "-e", operand = "ENC", //
   usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_ENCODING)
   private String encoding;
 
-  /** @see #getNewline() */
-  private String newline;
+  private  String newline;
 
-  /** @see #getDatePattern() */
   @CliOption(name = OPTION_DATE_PATTERN, aliases = "-d", operand = "PATTERN", //
   usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN)
   private String datePattern;
 
-  /** @see #getLocales() */
   @CliOption(name = OPTION_LOCALE, aliases = "-l", operand = "LOCALE", //
   required = true, usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_LOCALES)
   private String[] locales;
 
-  /** @see #getBundleClasses() */
   @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS", //
   usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
   private List<Class<?>> bundleClasses;
 
-  /** @see #getResourceBundleLocator() */
-  private NlsResourceBundleLocator resourceBundleLocator;
+  private  NlsResourceBundleLocator resourceBundleLocator;
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
-  /** @see #getBundleHelper() */
-  private NlsBundleHelper bundleHelper;
+  private  NlsBundleHelper bundleHelper;
 
   /**
    * The constructor.
@@ -522,8 +511,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     /** The {@link NlsBundle}-interface or {@code null} if {@link #resourceBundle} is given. */
     private final Class<? extends NlsBundle> nlsBundleInterface;
 
-    /** @see #getProperties() */
-    private Map<String, String> properties;
+    private  Map<String, String> properties;
 
     /**
      * The constructor.

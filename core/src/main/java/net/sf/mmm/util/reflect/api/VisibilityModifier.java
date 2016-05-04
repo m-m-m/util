@@ -41,8 +41,7 @@ public enum VisibilityModifier {
    */
   PUBLIC(1);
 
-  /** @see #getBits() */
-  private final int bits;
+  private  final int bits;
 
   /**
    * The constructor.

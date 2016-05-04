@@ -19,7 +19,6 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  */
 public class FileAttributeModificationFailedException extends RuntimeIoException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 64670818305399447L;
 
   /**

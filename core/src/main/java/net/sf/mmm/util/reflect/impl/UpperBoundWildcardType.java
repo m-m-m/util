@@ -21,8 +21,7 @@ public class UpperBoundWildcardType implements WildcardType {
   /** The prefix of the {@link #toString() string representation}. */
   public static final String PREFIX = "? extends ";
 
-  /** @see #getUpperBounds() */
-  private final Type upperBound;
+  private  final Type upperBound;
 
   /**
    * The constructor.

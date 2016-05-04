@@ -12,7 +12,6 @@ import org.slf4j.helpers.MarkerIgnoringBase;
  */
 public class DummyLogger extends MarkerIgnoringBase {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5472980908264693903L;
 
   /**

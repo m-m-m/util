@@ -18,7 +18,6 @@ import net.sf.mmm.util.reflect.NlsBundleUtilReflectRoot;
  */
 public class InvocationFailedException extends ReflectionException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5065495224197046745L;
 
   /** @see #getCode() */

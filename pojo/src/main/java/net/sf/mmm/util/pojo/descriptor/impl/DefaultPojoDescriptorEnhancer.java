@@ -114,8 +114,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   /** @see #DefaultPojoDescriptorEnhancer(boolean, boolean) */
   private final boolean addVirtualAccessors;
 
-  /** @see #getDependencies() */
-  private PojoDescriptorDependencies dependencies;
+  private  PojoDescriptorDependencies dependencies;
 
   /**
    * The constructor.

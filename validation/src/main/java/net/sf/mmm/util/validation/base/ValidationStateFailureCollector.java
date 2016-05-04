@@ -35,8 +35,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  */
 public class ValidationStateFailureCollector extends AbstractValidationStateCollector {
 
-  /** @see #onFailure(ValidationFailure) */
-  private final List<ValidationFailure> failureList;
+  private  final List<ValidationFailure> failureList;
 
   /**
    * The constructor.

@@ -27,14 +27,11 @@ public class ExceptionTruncation {
   /** Instance to remove no additional details. */
   public static final ExceptionTruncation REMOVE_NONE = new ExceptionTruncation(false, false, false);
 
-  /** @see #isRemoveCause() */
-  private final boolean removeCause;
+  private  final boolean removeCause;
 
-  /** @see #isRemoveSuppressed() */
-  private final boolean removeSuppressed;
+  private  final boolean removeSuppressed;
 
-  /** @see #isRemoveStacktrace() */
-  private final boolean removeStacktrace;
+  private  final boolean removeStacktrace;
 
   /**
    * The constructor.

@@ -22,14 +22,11 @@ public class PathUriImpl implements PathUri {
    */
   private static final Pattern URI_PATTERN = Pattern.compile("([a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?)(.*)");
 
-  /** @see #getUri() */
-  private final String uri;
+  private  final String uri;
 
-  /** @see #getSchemePrefix() */
-  private final String schemePrefix;
+  private  final String schemePrefix;
 
-  /** @see #getPath() */
-  private final String path;
+  private  final String path;
 
   /**
    * The constructor.

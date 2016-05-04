@@ -135,11 +135,9 @@ public class SimpleEnumProviderTest extends Assert {
 
     AUSTRALIA(Continent.AUSTRALIA, "AU");
 
-    /** @see #getValue() */
-    private final String isoCode;
+    private  final String isoCode;
 
-    /** @see #getCategory() */
-    private final Continent continent;
+    private  final Continent continent;
 
     /**
      * The constructor.

@@ -16,7 +16,6 @@ import net.sf.mmm.util.reflect.NlsBundleUtilReflectRoot;
  */
 public class IllegalWildcardSequenceException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5003374937127659992L;
 
   /** @see #getCode() */

@@ -37,11 +37,9 @@ import net.sf.mmm.util.validation.api.ValidationState;
  */
 public class ValidationStateMessageCollector extends AbstractValidationStateCollector {
 
-  /** @see #getSeparator() */
-  private final String separator;
+  private  final String separator;
 
-  /** @see #onFailure(ValidationFailure) */
-  private StringBuilder failureMessages;
+  private  StringBuilder failureMessages;
 
   /**
    * The constructor.

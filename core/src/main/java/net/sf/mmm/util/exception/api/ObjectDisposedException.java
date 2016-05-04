@@ -14,7 +14,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class ObjectDisposedException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6525822430606725507L;
 
   /** @see #getCode() */

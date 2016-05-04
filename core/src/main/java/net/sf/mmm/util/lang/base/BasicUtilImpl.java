@@ -22,8 +22,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
 @Named(BasicUtil.CDI_NAME)
 public class BasicUtilImpl implements BasicUtil {
 
-  /** @see #getInstance() */
-  private static BasicUtil instance;
+  private  static BasicUtil instance;
 
   /**
    * The constructor.

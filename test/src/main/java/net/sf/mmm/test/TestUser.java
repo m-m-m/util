@@ -15,7 +15,6 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class TestUser implements Authentication {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /** The {@link #getName() name} of {@link #DEFAULT_USER}. */
@@ -24,11 +23,9 @@ public class TestUser implements Authentication {
   /** The default instance of {@link TestUser} with {@link #DEFAULT_NAME}. */
   public static final TestUser DEFAULT_USER = new TestUser(DEFAULT_NAME);
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #isAuthenticated() */
-  private boolean authenticated;
+  private  boolean authenticated;
 
   /**
    * The constructor.

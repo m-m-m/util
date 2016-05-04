@@ -17,7 +17,6 @@ import net.sf.mmm.util.transformer.api.StringTransformerRule;
  */
 public class RegexStringTransformerRule extends RegexStringTransformer implements StringTransformerRule {
 
-  /** @see #isStopOnMatch() */
   @XmlAttribute(name = "stop-on-match")
   private boolean stopOnMatch;
 

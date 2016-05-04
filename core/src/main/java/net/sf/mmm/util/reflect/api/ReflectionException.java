@@ -14,7 +14,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public abstract class ReflectionException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6935836720426675909L;
 
   /** Key for the NLS message. */

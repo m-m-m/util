@@ -12,14 +12,11 @@ import net.sf.mmm.util.contenttype.base.format.Segment;
  */
 public class DecisionState {
 
-  /** @see #getSegment() */
-  private Segment segment;
+  private  Segment segment;
 
-  /** @see #getStreamOffset() */
-  private long streamOffset;
+  private  long streamOffset;
 
-  /** @see #getKey() */
-  private String key;
+  private  String key;
 
   /**
    * @return the segment

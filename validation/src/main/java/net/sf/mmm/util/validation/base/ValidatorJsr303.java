@@ -47,8 +47,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   /** @see #validate(Object, Object) */
   private final Class<?>[] groups;
 
-  /** @see #isMandatory() */
-  private final boolean mandatory;
+  private  final boolean mandatory;
 
   /**
    * The constructor.

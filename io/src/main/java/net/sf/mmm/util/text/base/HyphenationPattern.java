@@ -42,11 +42,9 @@ public class HyphenationPattern {
   /** The {@link HyphenationPattern pattern} without digits. */
   private final String wordPart;
 
-  /** @see #getWordPartHash() */
-  private final int wordPartHash;
+  private  final int wordPartHash;
 
-  /** @see #getHyphenationPositions() */
-  private final HyphenationPatternPosition[] hyphenationPositions;
+  private  final HyphenationPatternPosition[] hyphenationPositions;
 
   /** The word-terminator representing start end end of a word. */
   public static final char TERMINATOR = '.';

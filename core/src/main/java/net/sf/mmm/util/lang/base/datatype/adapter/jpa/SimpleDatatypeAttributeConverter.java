@@ -18,8 +18,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 public class SimpleDatatypeAttributeConverter<T extends SimpleDatatype<V>, V> extends
     AbstractSimpleDatatypeAttributeConverter<T, V> {
 
-  /** @see #convertToDatabaseColumn(SimpleDatatype) */
-  private final DatatypeDescriptor<T> datatypeDescriptor;
+  private  final DatatypeDescriptor<T> datatypeDescriptor;
 
   /**
    * The constructor.

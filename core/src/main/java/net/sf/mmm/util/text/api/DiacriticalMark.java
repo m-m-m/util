@@ -639,23 +639,17 @@ public enum DiacriticalMark implements SimpleDatatype<Character> {
 
   /* -------------------------------------- */
 
-  /** @see #getSeparateCharacter() */
-  private final char separateCharacter;
+  private  final char separateCharacter;
 
-  /** @see #getCombiningCharacter() */
-  private final char combiningCharacter;
+  private  final char combiningCharacter;
 
-  /** @see #toString() */
-  private final String title;
+  private  final String title;
 
-  /** @see #compose(char) */
-  private final Map<Character, Character> composeMap;
+  private  final Map<Character, Character> composeMap;
 
-  /** @see #decompose(char) */
-  private final Map<Character, Character> decomposeMap;
+  private  final Map<Character, Character> decomposeMap;
 
-  /** @see #getComposedCharacters() */
-  private final Collection<Character> composedCharacters;
+  private  final Collection<Character> composedCharacters;
 
   /**
    * The constructor.

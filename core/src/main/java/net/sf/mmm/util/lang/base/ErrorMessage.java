@@ -15,7 +15,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public class ErrorMessage extends AbstractErrorMessage {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /**

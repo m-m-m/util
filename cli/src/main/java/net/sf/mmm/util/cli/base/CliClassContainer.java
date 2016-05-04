@@ -33,23 +33,17 @@ import org.slf4j.Logger;
  */
 public class CliClassContainer {
 
-  /** @see #getStateClass() */
-  private final Class<?> stateClass;
+  private  final Class<?> stateClass;
 
-  /** @see #getCliStyle() */
-  private final CliStyle cliStyle;
+  private  final CliStyle cliStyle;
 
-  /** @see #getCliClass() */
-  private final CliClass cliClass;
+  private  final CliClass cliClass;
 
-  /** @see #getMode(String) */
-  private final Map<String, CliModeContainer> id2ModeMap;
+  private  final Map<String, CliModeContainer> id2ModeMap;
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #getLogger() */
-  private final Logger logger;
+  private  final Logger logger;
 
   /**
    * The constructor.

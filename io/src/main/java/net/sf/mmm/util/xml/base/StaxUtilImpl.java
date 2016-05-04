@@ -39,17 +39,13 @@ import net.sf.mmm.util.xml.impl.stax.XIncludeStreamReader;
 @Named(StaxUtil.CDI_NAME)
 public final class StaxUtilImpl extends AbstractLoggableComponent implements StaxUtil {
 
-  /** @see #getInstance() */
-  private static StaxUtil instance;
+  private  static StaxUtil instance;
 
-  /** @see #getXmlInputFactory() */
-  private XMLInputFactory xmlInputFactory;
+  private  XMLInputFactory xmlInputFactory;
 
-  /** @see #getXmlOutputFactory() */
-  private XMLOutputFactory xmlOutputFactory;
+  private  XMLOutputFactory xmlOutputFactory;
 
-  /** @see #getValueConverter() */
-  private StringValueConverter valueConverter;
+  private  StringValueConverter valueConverter;
 
   /**
    * The constructor.

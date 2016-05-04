@@ -126,11 +126,9 @@ public abstract class HttpMessage {
   /** char-filter accepting everything except ',' and ';' */
   protected static final CharFilter CHAR_FILTER_BLACKLIST_COMMA_OR_SEMICOLON = new ListCharFilter(false, ',', ';');
 
-  /** @see #getHeaderProperty(String) */
-  private final Map<Object, String> header;
+  private  final Map<Object, String> header;
 
-  /** @see #getVersion() */
-  private String version;
+  private  String version;
 
   /**
    * The constructor.
@@ -525,8 +523,7 @@ public abstract class HttpMessage {
     /** the name of the property */
     private final String name;
 
-    /** @see #hashCode() */
-    private int hash;
+    private  int hash;
 
     /**
      * The constructor.

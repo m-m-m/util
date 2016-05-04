@@ -20,11 +20,9 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
  */
 public abstract class AbstractPojoPropertyAccessorMethod extends AbstractPojoPropertyAccessorBase {
 
-  /** @see #getMethod() */
-  private final Method method;
+  private  final Method method;
 
-  /** @see #getReturnType() */
-  private final GenericType<?> returnType;
+  private  final GenericType<?> returnType;
 
   /**
    * The constructor.

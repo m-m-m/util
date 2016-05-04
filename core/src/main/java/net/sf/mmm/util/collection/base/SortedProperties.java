@@ -17,7 +17,6 @@ import java.util.TreeSet;
  */
 public class SortedProperties extends Properties {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -7676191449564478612L;
 
   /**

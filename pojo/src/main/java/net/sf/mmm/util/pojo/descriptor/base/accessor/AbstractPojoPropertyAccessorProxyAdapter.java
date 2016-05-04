@@ -21,11 +21,9 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
  */
 public abstract class AbstractPojoPropertyAccessorProxyAdapter extends AbstractPojoPropertyAccessorProxy {
 
-  /** @see #getDelegate() */
-  private final PojoPropertyAccessorNonArg containerGetAccessor;
+  private  final PojoPropertyAccessorNonArg containerGetAccessor;
 
-  /** @see #getDependencies() */
-  private final PojoDescriptorDependencies dependencies;
+  private  final PojoDescriptorDependencies dependencies;
 
   /**
    * The constructor.

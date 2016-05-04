@@ -19,7 +19,6 @@ import net.sf.mmm.util.value.NlsBundleUtilValueRoot;
  */
 public class ValueOutOfRangeException extends ValueException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 3363522277063736719L;
 
   /** @see #getCode() */

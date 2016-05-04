@@ -19,8 +19,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public class BooleanFormatter extends AbstractFormatter<Boolean> {
 
-  /** @see #getInstance() */
-  private static final Formatter<Boolean> INSTANCE = new BooleanFormatter();
+  private  static final Formatter<Boolean> INSTANCE = new BooleanFormatter();
 
   /** @see #doFormat(Boolean, Appendable) */
   private final NlsBundleUtilCoreRoot nlsBundle;

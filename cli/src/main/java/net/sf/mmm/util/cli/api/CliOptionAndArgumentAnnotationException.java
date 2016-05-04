@@ -12,7 +12,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliOptionAndArgumentAnnotationException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -3589470378509687716L;
 
   /** @see #getCode() */

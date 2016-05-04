@@ -14,7 +14,6 @@ import java.util.Locale;
  */
 public class NlsTemplateImplWithMessage extends NlsTemplateImpl {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 3682086732302203021L;
 
   /**

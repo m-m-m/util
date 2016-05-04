@@ -20,8 +20,7 @@ import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
  */
 public class ProcessableDetectorInputStream extends ProcessableDetectorStream implements DetectorInputStream {
 
-  /** @see #getStream() */
-  private final WrapperInputStream wrapperInputStream;
+  private  final WrapperInputStream wrapperInputStream;
 
   /**
    * The constructor.

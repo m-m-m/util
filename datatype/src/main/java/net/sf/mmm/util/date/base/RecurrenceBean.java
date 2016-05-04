@@ -15,17 +15,13 @@ import net.sf.mmm.util.date.api.WeekdaySet;
  */
 public class RecurrenceBean implements Recurrence {
 
-  /** @see #getUnit() */
-  private DateUnit unit;
+  private  DateUnit unit;
 
-  /** @see #getStep() */
-  private int step;
+  private  int step;
 
-  /** @see #getWeekdays() */
-  private WeekdaySet weekdays;
+  private  WeekdaySet weekdays;
 
-  /** @see #getWeekOfMonth() */
-  private WeekOfMonth weekOfMonth;
+  private  WeekOfMonth weekOfMonth;
 
   /**
    * The constructor.

@@ -17,20 +17,15 @@ import net.sf.mmm.util.transferobject.base.example.common.ContactInfo;
 @Entity
 public class ContactInfoEntity extends AbstractEntity<Long> implements ContactInfo {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1468867969942249329L;
 
-  /** @see #getPhone */
-  private String phone;
+  private  String phone;
 
-  /** @see #getEmail() */
-  private String email;
+  private  String email;
 
-  /** @see #getFax() */
-  private String fax;
+  private  String fax;
 
-  /** @see #getType() */
-  private String type;
+  private  String type;
 
   /**
    * The constructor.

@@ -26,8 +26,7 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
  */
 public abstract class AbstractPathFactory extends AbstractLoggableComponent implements PathFactory {
 
-  /** @see #createPath(String) */
-  private final Map<String, PathProvider> schema2providerMap;
+  private  final Map<String, PathProvider> schema2providerMap;
 
   /**
    * The constructor.

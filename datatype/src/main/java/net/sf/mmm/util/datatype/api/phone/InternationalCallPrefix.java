@@ -22,7 +22,6 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
  */
 public final class InternationalCallPrefix extends AbstractSimpleDatatype<String> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 8142361938232405037L;
 
   /**

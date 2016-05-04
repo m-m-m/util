@@ -38,8 +38,7 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
   /** The class reflecting the datatype to deserialize. */
   private final Class<T> datatype;
 
-  /** @see #setDatatypeDescriptorManager(DatatypeDescriptorManager) */
-  private DatatypeDescriptorManager datatypeDescriptorManager;
+  private  DatatypeDescriptorManager datatypeDescriptorManager;
 
   /**
    * The constructor.

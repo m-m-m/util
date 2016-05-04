@@ -24,7 +24,6 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  */
 public class ResourcePathNode<D> implements ResourcePath, Serializable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /** The suffix of a Windows drive letter. */
@@ -53,14 +52,11 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   /** The {@link #isAbsolute() absolute} home {@link #isRoot() root} {@link ResourcePathNode} (~). */
   public static final ResourcePathNode<Void> ROOT_HOME = new ResourcePathRootHome<>(VOID_FUNCTION);
 
-  /** @see #getParent() */
-  private final ResourcePathNode<D> parent;
+  private  final ResourcePathNode<D> parent;
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #getData() */
-  private final D data;
+  private  final D data;
 
   /**
    * The constructor for a root {@link ResourcePathNode}.
@@ -559,8 +555,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static final class ResourcePathRootAbsolute<D> extends ResourcePathNode<D> {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -591,8 +586,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static class ResourcePathRootWindows<D> extends ResourcePathNode<D> {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -619,8 +613,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static final class ResourcePathRootRelative<D> extends ResourcePathNode<D> {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -651,8 +644,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static class ResourcePathRootHome<D> extends ResourcePathNode<D> {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -689,8 +681,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static class ResourcePathRootUnc<D> extends ResourcePathNode<D> {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -717,14 +708,11 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static class ResourcePathRootUrl<D> extends ResourcePathNode<D> {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
 
-    /** @see #getScheme() */
-    private final String scheme;
+    private  final String scheme;
 
-    /** @see #getAuthority() */
-    private final String authority;
+    private  final String authority;
 
     /**
      * The constructor.

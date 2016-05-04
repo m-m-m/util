@@ -16,14 +16,11 @@ import net.sf.mmm.util.nls.impl.NlsBundleFactoryImpl;
  */
 public final class NlsAccess {
 
-  /** @see #getFactory() */
-  private static NlsMessageFactory factory;
+  private  static NlsMessageFactory factory;
 
-  /** @see #getTemplateResolver() */
-  private static NlsTemplateResolver templateResolver;
+  private  static NlsTemplateResolver templateResolver;
 
-  /** @see #getBundleFactory() */
-  private static NlsBundleFactory bundleFactory;
+  private  static NlsBundleFactory bundleFactory;
 
   /**
    * The constructor.

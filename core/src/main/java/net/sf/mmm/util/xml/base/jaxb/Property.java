@@ -18,11 +18,9 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Property {
 
-  /** @see #getKey() */
   @XmlAttribute(name = "key")
   private String key;
 
-  /** @see #getValue() */
   @XmlValue
   private String value;
 

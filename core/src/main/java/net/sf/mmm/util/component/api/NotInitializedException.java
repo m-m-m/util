@@ -16,7 +16,6 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  */
 public class NotInitializedException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2684272742410884991L;
 
   /** @see #getCode() */

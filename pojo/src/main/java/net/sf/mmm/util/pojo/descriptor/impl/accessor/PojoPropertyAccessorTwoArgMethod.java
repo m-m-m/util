@@ -24,8 +24,7 @@ import net.sf.mmm.util.reflect.api.InvocationFailedException;
 public class PojoPropertyAccessorTwoArgMethod extends AbstractPojoPropertyAccessorMethod implements
     PojoPropertyAccessorTwoArg {
 
-  /** @see #getMode() */
-  private final PojoPropertyAccessorTwoArgMode mode;
+  private  final PojoPropertyAccessorTwoArgMode mode;
 
   /**
    * The constructor.

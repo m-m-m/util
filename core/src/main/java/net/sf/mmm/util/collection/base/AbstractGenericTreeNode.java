@@ -23,14 +23,11 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT extends GenericTreeNode<CHILD, PARENT>>
     implements GenericTreeNode<CHILD, PARENT> {
 
-  /** @see #getMutableChildList() */
-  private final transient List<CHILD> mutableChildList;
+  private  final transient List<CHILD> mutableChildList;
 
-  /** @see #getChildren() */
-  private final List<CHILD> children;
+  private  final List<CHILD> children;
 
-  /** @see #getParent() */
-  private PARENT parent;
+  private  PARENT parent;
 
   /**
    * The constructor.

@@ -14,14 +14,11 @@ import net.sf.mmm.util.entity.api.MutableGenericEntity;
  */
 public abstract class AbstractGenericEntity<ID> implements MutableGenericEntity<ID> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 3293773825737626494L;
 
-  /** @see #getId() */
-  private ID id;
+  private  ID id;
 
-  /** @see #getModificationCounter() */
-  private int modificationCounter;
+  private  int modificationCounter;
 
   /**
    * The constructor.

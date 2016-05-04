@@ -14,7 +14,6 @@ import net.sf.mmm.util.resource.NlsBundleUtilResourceRoot;
  */
 public class ResourceUriUndefinedException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -1483011818509137119L;
 
   /** @see #getCode() */

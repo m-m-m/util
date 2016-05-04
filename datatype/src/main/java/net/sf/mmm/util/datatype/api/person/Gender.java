@@ -25,11 +25,9 @@ public enum Gender implements SimpleDatatype<String> {
    */
   FEMALE("F", "female");
 
-  /** @see #getValue() */
-  private final String value;
+  private  final String value;
 
-  /** @see #toString() */
-  private final String title;
+  private  final String title;
 
   /**
    * The constructor.

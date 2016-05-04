@@ -13,8 +13,7 @@ import net.sf.mmm.util.uuid.base.RandomUuidFactory;
  */
 public final class UuidAccess {
 
-  /** @see #getFactory() */
-  private static UuidFactory factory = new RandomUuidFactory();
+  private  static UuidFactory factory = new RandomUuidFactory();
 
   /**
    * The constructor.

@@ -18,8 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public final class SpringContainerPool {
 
-  /** @see #getInstance(String) */
-  private static Map<String, SpringContainer> xml2containerMap;
+  private  static Map<String, SpringContainer> xml2containerMap;
 
   /**
    * The constructor.

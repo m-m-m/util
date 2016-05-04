@@ -22,8 +22,7 @@ public class SimpleExecutor implements Executor {
    */
   public static final SimpleExecutor INSTANCE = new SimpleExecutor();
 
-  /** @see #execute(Runnable) */
-  private final ThreadFactory threadFactory;
+  private  final ThreadFactory threadFactory;
 
   /**
    * The constructor.

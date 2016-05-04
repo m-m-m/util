@@ -13,7 +13,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliOptionIllegalNameOrAliasException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2084363234149185718L;
 
   /** @see #getCode() */

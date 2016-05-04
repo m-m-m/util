@@ -21,11 +21,9 @@ public class ComposedValidationFailure extends AbstractValidationFailure impleme
   /** @see #getCode() */
   public static final String CODE = ComposedValidator.CODE;
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5191509274230075436L;
 
-  /** @see #getFailure(int) */
-  private ValidationFailure[] failures;
+  private  ValidationFailure[] failures;
 
   /**
    * The constructor for de-serialization in GWT.

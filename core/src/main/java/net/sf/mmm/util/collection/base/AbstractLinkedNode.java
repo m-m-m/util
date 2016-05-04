@@ -19,11 +19,9 @@ import net.sf.mmm.util.collection.api.LinkedNode;
 public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, NODE>> implements
     LinkedNode<V, NODE> {
 
-  /** @see #getValue() */
-  private V value;
+  private  V value;
 
-  /** @see #getNext() */
-  private NODE next;
+  private  NODE next;
 
   /**
    * The constructor.

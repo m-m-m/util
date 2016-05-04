@@ -21,8 +21,7 @@ public class LowerBoundWildcardType implements WildcardType {
   /** The prefix of the {@link #toString() string representation}. */
   public static final String PREFIX = "? super ";
 
-  /** @see #getLowerBounds() */
-  private final Type lowerBound;
+  private  final Type lowerBound;
 
   /**
    * The constructor.

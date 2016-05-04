@@ -15,7 +15,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 @Deprecated
 public class SimpleValidationFailure extends AbstractValidationFailure {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -6721660142697209055L;
 
   /**

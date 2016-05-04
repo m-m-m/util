@@ -18,14 +18,11 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 // TODO Hohwiller - why dont we just extends AbstractComponent here?
 public abstract class AbstractPojoIntrospector {
 
-  /** @see #initialize() */
-  private final InitializationState initializationState;
+  private  final InitializationState initializationState;
 
-  /** @see #getVisibility() */
-  private VisibilityModifier visibility;
+  private  VisibilityModifier visibility;
 
-  /** @see #isAcceptStatic() */
-  private boolean acceptStatic;
+  private  boolean acceptStatic;
 
   /**
    * The constructor.

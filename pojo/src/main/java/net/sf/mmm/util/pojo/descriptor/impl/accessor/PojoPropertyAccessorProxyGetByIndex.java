@@ -20,11 +20,9 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
 public class PojoPropertyAccessorProxyGetByIndex extends AbstractPojoPropertyAccessorProxy implements
     PojoPropertyAccessorNonArg {
 
-  /** @see #getDelegate() */
-  private final PojoPropertyAccessorIndexedNonArg delegate;
+  private  final PojoPropertyAccessorIndexedNonArg delegate;
 
-  /** @see #invoke(Object) */
-  private final int index;
+  private  final int index;
 
   /**
    * The constructor.

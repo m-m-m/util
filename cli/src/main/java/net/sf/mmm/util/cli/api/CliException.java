@@ -14,7 +14,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public abstract class CliException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 8814403183579508077L;
 
   /**

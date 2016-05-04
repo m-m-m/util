@@ -18,14 +18,11 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  */
 public class ParameterizedTypeImpl implements ParameterizedType {
 
-  /** @see #getRawType() */
-  private final Class<?> rawType;
+  private  final Class<?> rawType;
 
-  /** @see #getOwnerType() */
-  private final Type ownerType;
+  private  final Type ownerType;
 
-  /** @see #getActualTypeArguments() */
-  private final Type[] actualTypeArguments;
+  private  final Type[] actualTypeArguments;
 
   /**
    * The constructor.

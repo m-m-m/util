@@ -17,7 +17,6 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  */
 public class FileNotExistsException extends RuntimeIoException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 4648212905848792934L;
 
   /**

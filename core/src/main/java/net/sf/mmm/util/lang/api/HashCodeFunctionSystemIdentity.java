@@ -13,11 +13,9 @@ import java.io.Serializable;
  */
 public final class HashCodeFunctionSystemIdentity extends AbstractHashCodeFunction<Object> implements Serializable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 142095355155291498L;
 
-  /** @see #getInstance() */
-  private static final HashCodeFunctionSystemIdentity INSTANCE = new HashCodeFunctionSystemIdentity();
+  private  static final HashCodeFunctionSystemIdentity INSTANCE = new HashCodeFunctionSystemIdentity();
 
   /**
    * The constructor.

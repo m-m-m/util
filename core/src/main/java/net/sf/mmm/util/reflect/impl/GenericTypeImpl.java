@@ -25,29 +25,21 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
  */
 public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
-  /** @see #getDefiningType() */
-  private final GenericType<?> definingType;
+  private  final GenericType<?> definingType;
 
-  /** @see #getType() */
-  private final Type type;
+  private  final Type type;
 
-  /** @see #getAssignmentClass() */
-  private final Class<? extends T> assignmentClass;
+  private  final Class<? extends T> assignmentClass;
 
-  /** @see #getRetrievalClass() */
-  private final Class<T> retrievalClass;
+  private  final Class<T> retrievalClass;
 
-  /** @see #getTypeArgument(int) */
-  private final Type[] typeArgs;
+  private  final Type[] typeArgs;
 
-  /** @see #getTypeArgument(int) */
-  private final GenericType<?>[] typesArguments;
+  private  final GenericType<?>[] typesArguments;
 
-  /** @see #getComponentType() */
-  private GenericType<?> componentType;
+  private  GenericType<?> componentType;
 
-  /** @see #getKeyType() */
-  private GenericType<?> keyType;
+  private  GenericType<?> keyType;
 
   /**
    * The constructor.
@@ -320,11 +312,9 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    */
   protected static class ClassBounds {
 
-    /** @see #getAssignmentClass() */
-    private final Class<?> assignmentClass;
+    private  final Class<?> assignmentClass;
 
-    /** @see #getRetrievalClass() */
-    private final Class<?> retrievalClass;
+    private  final Class<?> retrievalClass;
 
     /**
      * The constructor.

@@ -21,8 +21,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 public abstract class AbstractPojoDescriptorBuilder extends AbstractLoggableComponent
     implements PojoDescriptorBuilder {
 
-  /** @see #getDescriptor(Class) */
-  private final Map<GenericType<?>, PojoDescriptorImpl<?>> pojoMap;
+  private  final Map<GenericType<?>, PojoDescriptorImpl<?>> pojoMap;
 
   /**
    * The constructor.

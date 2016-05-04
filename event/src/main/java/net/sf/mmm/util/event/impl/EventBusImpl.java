@@ -18,8 +18,7 @@ import net.sf.mmm.util.event.base.AbstractEventBus;
 @Named
 public class EventBusImpl extends AbstractEventBus {
 
-  /** @see #triggerDispatchEvents() */
-  private volatile boolean dispatching;
+  private  volatile boolean dispatching;
 
   /**
    * The constructor.

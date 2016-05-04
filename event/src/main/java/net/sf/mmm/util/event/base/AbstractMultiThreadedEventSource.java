@@ -26,8 +26,7 @@ import net.sf.mmm.util.event.api.EventListener;
 public abstract class AbstractMultiThreadedEventSource<E extends Event, L extends EventListener<E>> extends
     AbstractSynchronizedEventSource<E, L> {
 
-  /** @see #getExecutor() */
-  private Executor executor;
+  private  Executor executor;
 
   /**
    * The constructor.

@@ -12,7 +12,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public class XmlParseException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 339859320909087567L;
 
   /** @see #getCode() */

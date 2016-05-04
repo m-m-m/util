@@ -14,7 +14,6 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  */
 public class ResourceAmbiguousException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -6589910110649307658L;
 
   /** @see #getCode() */

@@ -12,7 +12,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class ObjectMismatchException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -6318098527301303965L;
 
   /** @see #getCode() */

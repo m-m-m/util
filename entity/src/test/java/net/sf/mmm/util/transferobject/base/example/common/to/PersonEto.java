@@ -13,17 +13,13 @@ import net.sf.mmm.util.transferobject.base.example.common.Person;
  */
 public class PersonEto extends EntityTo<Long> implements Person {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #getAddressId() */
-  private Long addressId;
+  private  Long addressId;
 
-  /** @see #getLastName() */
-  private String lastName;
+  private  String lastName;
 
-  /** @see #getFirstName() */
-  private String firstName;
+  private  String firstName;
 
   /**
    * The constructor.

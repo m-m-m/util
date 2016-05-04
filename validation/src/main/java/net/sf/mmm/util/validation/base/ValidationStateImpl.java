@@ -19,11 +19,9 @@ import net.sf.mmm.util.validation.api.ValidationState;
  */
 public class ValidationStateImpl implements ValidationState {
 
-  /** @see #onFailure(ValidationFailure) */
-  private final List<ValidationFailure> failureList;
+  private  final List<ValidationFailure> failureList;
 
-  /** @see #getFailureList() */
-  private final List<ValidationFailure> failureView;
+  private  final List<ValidationFailure> failureView;
 
   /**
    * The constructor.

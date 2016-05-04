@@ -17,14 +17,11 @@ import net.sf.mmm.util.search.api.SearchResult;
  */
 public class SearchResultBean<HIT> implements SearchResult<HIT> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -7872658532720661708L;
 
-  /** @see #isComplete() */
-  private boolean complete;
+  private  boolean complete;
 
-  /** @see #getHits() */
-  private List<HIT> hits;
+  private  List<HIT> hits;
 
   /**
    * The constructor.

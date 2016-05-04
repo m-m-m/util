@@ -21,8 +21,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
 @Singleton
 public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
 
-  /** @see #getMessageFactory() */
-  private NlsMessageFactory messageFactory;
+  private  NlsMessageFactory messageFactory;
 
   /**
    * The constructor.

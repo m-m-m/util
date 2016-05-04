@@ -16,11 +16,9 @@ import net.sf.mmm.util.xml.path.api.XmlSet;
  */
 public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
 
-  /** @see #getConjunction() */
-  private final Conjunction conjunction;
+  private  final Conjunction conjunction;
 
-  /** @see #getSelector(int) */
-  private final List<AbstractXmlSelector> selectorList;
+  private  final List<AbstractXmlSelector> selectorList;
 
   /**
    * The constructor.

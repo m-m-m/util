@@ -15,11 +15,9 @@ import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
 public abstract class AbstractRevisionedEntity<ID> extends AbstractGenericEntity<ID> implements
     MutableRevisionedEntity<ID> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -3138296535416100839L;
 
-  /** @see #getRevision() */
-  private Number revision;
+  private  Number revision;
 
   /**
    * The constructor.

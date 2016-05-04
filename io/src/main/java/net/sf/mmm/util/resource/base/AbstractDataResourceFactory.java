@@ -51,8 +51,7 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggableCompon
    */
   protected class DataResourceAdapter extends AbstractDataResourceProxy {
 
-    /** @see #getDelegate() */
-    private final DataResource delegate;
+    private  final DataResource delegate;
 
     /**
      * The constructor.

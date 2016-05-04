@@ -102,11 +102,9 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
    */
   protected static class PatternSegment {
 
-    /** @see #getPrefix() */
-    private final String prefix;
+    private  final String prefix;
 
-    /** @see #getArgument() */
-    private final NlsArgument argument;
+    private  final NlsArgument argument;
 
     /**
      * The constructor.

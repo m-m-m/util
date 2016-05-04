@@ -20,20 +20,15 @@ import net.sf.mmm.util.transferobject.base.example.common.Person;
 @Entity
 public class PersonEntity extends AbstractEntity<Long> implements Person {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #getFirstName() */
-  private String firstName;
+  private  String firstName;
 
-  /** @see #getLastName() */
-  private String lastName;
+  private  String lastName;
 
-  /** @see #getAddress() */
-  private AddressEntity address;
+  private  AddressEntity address;
 
-  /** @see #getContactInfos() */
-  private List<ContactInfoEntity> contactInfos;
+  private  List<ContactInfoEntity> contactInfos;
 
   /**
    * The constructor.

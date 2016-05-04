@@ -24,8 +24,7 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
   /** The typical home directory of the user "root" under Unix/Linux. */
   protected static final String HOME_ROOT = "/root";
 
-  /** @see #getInstance() */
-  private static FileUtilLimited instance;
+  private  static FileUtilLimited instance;
 
   /**
    * The constructor.

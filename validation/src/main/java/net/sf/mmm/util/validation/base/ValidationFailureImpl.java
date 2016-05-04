@@ -12,7 +12,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public class ValidationFailureImpl extends AbstractValidationFailure {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -7710863486871741334L;
 
   /**

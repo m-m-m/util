@@ -13,7 +13,6 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  */
 public class IllegalDateFormatException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5008989969842672695L;
 
   /** @see #getCode() */

@@ -26,14 +26,11 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  */
 public class DatatypeObjectMapperFactory extends AbstractLoggableComponent {
 
-  /** @see #setDatatypeDescriptorManager(DatatypeDescriptorManager) */
-  private DatatypeDescriptorManager datatypeDescriptorManager;
+  private  DatatypeDescriptorManager datatypeDescriptorManager;
 
-  /** @see #setDatatypeDetector(DatatypeDetector) */
-  private DatatypeDetector datatypeDetector;
+  private  DatatypeDetector datatypeDetector;
 
-  /** @see #setEnumProvider(EnumProvider) */
-  private EnumProvider enumProvider;
+  private  EnumProvider enumProvider;
 
   /**
    * The constructor.

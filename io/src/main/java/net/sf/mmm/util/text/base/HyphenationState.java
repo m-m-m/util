@@ -26,8 +26,7 @@ public class HyphenationState {
   /** The {@link StringUtil} to use. */
   private final StringUtil stringUtil;
 
-  /** @see #getWord() */
-  private final String word;
+  private  final String word;
 
   /** The normalized word. */
   private final char[] normalizedWord;
@@ -44,8 +43,7 @@ public class HyphenationState {
   /** The offset where to start hyphenation in {@link #word}. */
   private final int offset;
 
-  /** @see net.sf.mmm.util.text.api.Hyphenator#getHyphen() */
-  private final char hyphen;
+  private  final char hyphen;
 
   /**
    * The constructor.

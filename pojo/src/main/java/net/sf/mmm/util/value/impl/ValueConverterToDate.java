@@ -24,8 +24,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @Named
 public class ValueConverterToDate extends AbstractSimpleValueConverter<Object, Date> {
 
-  /** @see #getIso8601Util() */
-  private Iso8601Util iso8601Util;
+  private  Iso8601Util iso8601Util;
 
   /**
    * The constructor.

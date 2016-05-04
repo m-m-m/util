@@ -23,7 +23,6 @@ import net.sf.mmm.util.nls.impl.formatter.NlsMessageFormatterImpl;
  */
 public class NlsMessageImpl extends BasicNlsMessage {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -610175491381297549L;
 
   /**

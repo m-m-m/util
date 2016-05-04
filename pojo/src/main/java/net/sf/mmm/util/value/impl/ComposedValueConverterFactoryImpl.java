@@ -24,11 +24,9 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverterFactory;
 @Named
 public class ComposedValueConverterFactoryImpl extends AbstractComposedValueConverterFactory {
 
-  /** @see #setConverters(List) */
-  private List<ValueConverter<?, ?>> converters;
+  private  List<ValueConverter<?, ?>> converters;
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.

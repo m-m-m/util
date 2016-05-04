@@ -16,7 +16,6 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
  */
 public abstract class AbstractValidationFailure extends AbstractMessage implements ValidationFailure {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -882452608746200225L;
 
   /**

@@ -11,7 +11,6 @@ package net.sf.mmm.util.lang.api;
  */
 public abstract class AbstractSimpleDatatypeBase<V> extends AbstractDatatype implements SimpleDatatype<V> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2351955533173401204L;
 
   /**

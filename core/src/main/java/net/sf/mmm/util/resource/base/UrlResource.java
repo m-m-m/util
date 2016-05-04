@@ -33,8 +33,7 @@ public class UrlResource extends AbstractDataResource {
   /** The {@link #getSchemePrefix() scheme-prefix} for FTP. */
   public static final String SCHEME_PREFIX_FTP = ResourceUri.SCHEME_PREFIX_FTP;
 
-  /** @see #getUrl() */
-  private final URL url;
+  private  final URL url;
 
   /** The {@link FileUtilLimited} instance. */
   private final FileUtilLimited fileUtil;

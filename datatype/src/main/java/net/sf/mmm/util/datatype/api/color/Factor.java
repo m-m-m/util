@@ -15,7 +15,6 @@ package net.sf.mmm.util.datatype.api.color;
  */
 public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSegment<SELF> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 2276148174440077961L;
 
   /** @see #getMaximumValue() */

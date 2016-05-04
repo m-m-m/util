@@ -20,8 +20,7 @@ import org.slf4j.Logger;
  */
 public class CliValueContainerMap extends AbstractCliValueContainerContainer {
 
-  /** @see #getValue() */
-  private Map<Object, Object> map;
+  private  Map<Object, Object> map;
 
   /**
    * The constructor.

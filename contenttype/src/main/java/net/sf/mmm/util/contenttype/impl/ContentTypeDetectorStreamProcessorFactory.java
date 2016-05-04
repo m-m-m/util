@@ -21,8 +21,7 @@ public class ContentTypeDetectorStreamProcessorFactory extends AbstractDetectorS
   /** The top-level {@link DecisionTreeNode}. */
   private final DecisionTreeNode rootNode;
 
-  /** @see #getLookaheadCount() */
-  private final int lookaheadCount;
+  private  final int lookaheadCount;
 
   /**
    * The constructor.

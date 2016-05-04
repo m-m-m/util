@@ -39,14 +39,11 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  */
 public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
-  /** @see #getDependencies() */
-  private ExtendedPojoDescriptorDependencies configuration;
+  private  ExtendedPojoDescriptorDependencies configuration;
 
-  /** @see #getMethodIntrospector() */
-  private PojoMethodIntrospector methodIntrospector;
+  private  PojoMethodIntrospector methodIntrospector;
 
-  /** @see #getFieldIntrospector() */
-  private PojoFieldIntrospector fieldIntrospector;
+  private  PojoFieldIntrospector fieldIntrospector;
 
   /**
    * The constructor. By default it only introspects {@link Method methods} that are public and NOT static. <br>

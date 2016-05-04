@@ -38,11 +38,9 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   /** The name of the method {@link net.sf.mmm.util.nls.api.NlsBundleWithLookup#getMessage(String, Map)}. */
   public static final String METHOD_NAME_LOOKUP = "getMessage";
 
-  /** @see #createBundle(Class) */
-  private final ClassLoader classLoader;
+  private  final ClassLoader classLoader;
 
-  /** @see #createBundle(Class) */
-  private final Map<Class<? extends NlsBundle>, NlsBundle> bundleMap;
+  private  final Map<Class<? extends NlsBundle>, NlsBundle> bundleMap;
 
   /**
    * The constructor.
@@ -317,11 +315,9 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
    */
   protected static class NlsBundleMethodInfo {
 
-    /** @see #getTemplate() */
-    private final NlsTemplate template;
+    private  final NlsTemplate template;
 
-    /** @see #getArgumentNames() */
-    private final String[] argumentNames;
+    private  final String[] argumentNames;
 
     /**
      * The constructor.

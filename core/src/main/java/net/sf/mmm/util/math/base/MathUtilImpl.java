@@ -99,8 +99,7 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
 
   };
 
-  /** @see #getInstance() */
-  private static MathUtil instance;
+  private  static MathUtil instance;
 
   /**
    * The constructor.

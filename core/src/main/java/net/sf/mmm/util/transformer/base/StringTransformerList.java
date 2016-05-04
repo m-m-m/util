@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class StringTransformerList {
 
-  /** @see #getTransformers() */
   @XmlElement(name = "transformer-chain")
   private List<StringTransformerChain> transformers;
 

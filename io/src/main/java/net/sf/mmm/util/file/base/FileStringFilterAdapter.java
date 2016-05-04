@@ -20,8 +20,7 @@ import net.sf.mmm.util.filter.api.Filter;
  */
 public final class FileStringFilterAdapter implements FileFilter {
 
-  /** @see #accept(File) */
-  private final Filter<String> filter;
+  private  final Filter<String> filter;
 
   /**
    * The constructor.

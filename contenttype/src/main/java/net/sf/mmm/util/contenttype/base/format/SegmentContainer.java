@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.XmlElements;
  */
 public abstract class SegmentContainer extends Segment {
 
-  /** @see #getSegment(int) */
   @XmlElements(value = { @XmlElement(name = SegmentConstant.XML_TAG, type = SegmentConstant.class),
       @XmlElement(name = SegmentKey.XML_TAG, type = SegmentKey.class),
       @XmlElement(name = SegmentValue.XML_TAG, type = SegmentValue.class),

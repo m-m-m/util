@@ -13,8 +13,7 @@ import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
  */
 public abstract class AbstractPojoDescriptorGenerator extends AbstractIncrementalGenerator {
 
-  /** @see #getConfiguration() */
-  private PojoDescriptorGeneratorConfiguration configuration;
+  private  PojoDescriptorGeneratorConfiguration configuration;
 
   /**
    * The constructor.

@@ -17,14 +17,11 @@ import net.sf.mmm.util.version.impl.VersionUtilImpl;
  */
 public abstract class AbstractVersionIdentifier implements VersionIdentifier {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 681216451154445513L;
 
-  /** @see #hashCode() */
-  private transient int hash;
+  private  transient int hash;
 
-  /** @see #toString() */
-  private transient String stringRepresentation;
+  private  transient String stringRepresentation;
 
   /**
    * The constructor.

@@ -34,11 +34,9 @@ import net.sf.mmm.util.xml.api.XmlUtil;
 @Named(XmlUtil.CDI_NAME)
 public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
 
-  /** @see #getInstance() */
-  private static XmlUtil instance;
+  private  static XmlUtil instance;
 
-  /** @see #resolveEntity(String) */
-  private static final Map<String, Character> ENTITY_MAP;
+  private  static final Map<String, Character> ENTITY_MAP;
 
   // CHECKSTYLE:OFF (documentation out in the web)
   static {

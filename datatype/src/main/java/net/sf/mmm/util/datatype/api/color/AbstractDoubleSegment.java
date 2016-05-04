@@ -13,7 +13,6 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<SELF>> extends AbstractSegment<Double> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 9206218315093630999L;
 
   /**

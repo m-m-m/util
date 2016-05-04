@@ -23,12 +23,10 @@ import net.sf.mmm.util.xml.base.jaxb.XmlAdapterInfixPattern;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PatternFilterRule implements FilterRule<String> {
 
-  /** @see #accept(String) */
   @XmlAttribute(name = "pattern", required = true)
   @XmlJavaTypeAdapter(value = XmlAdapterInfixPattern.class)
   private Pattern pattern;
 
-  /** @see #accept(String) */
   @XmlAttribute(name = "include", required = true)
   private Boolean result;
 

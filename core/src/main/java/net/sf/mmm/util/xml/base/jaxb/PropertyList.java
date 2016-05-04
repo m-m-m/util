@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PropertyList {
 
-  /** @see #getPropertyList() */
   @XmlElement(name = "property")
   private List<Property> propertyList;
 

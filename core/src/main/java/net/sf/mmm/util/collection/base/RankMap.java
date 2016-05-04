@@ -31,11 +31,9 @@ public class RankMap<E> {
    */
   public static final int RANK_UNACCEPTABLE = Integer.MIN_VALUE;
 
-  /** @see #getRank(Object) */
-  private final Map<E, Ranking> map;
+  private  final Map<E, Ranking> map;
 
-  /** @see #getElements() */
-  private final Collection<E> elements;
+  private  final Collection<E> elements;
 
   /**
    * The constructor.

@@ -28,14 +28,11 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  */
 public abstract class CliParameterContainer {
 
-  /** @see #getSetter() */
-  private final PojoPropertyAccessorOneArg setter;
+  private  final PojoPropertyAccessorOneArg setter;
 
-  /** @see #getGetter() */
-  private final PojoPropertyAccessorNonArg getter;
+  private  final PojoPropertyAccessorNonArg getter;
 
-  /** @see #getValidator() */
-  private final ValueValidator<?> validator;
+  private  final ValueValidator<?> validator;
 
   /**
    * The constructor.

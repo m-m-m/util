@@ -20,7 +20,6 @@ public class SegmentValue extends SegmentVariableLength {
   /** The XML tag name for this object. */
   public static final String XML_TAG = "value";
 
-  /** @see #getKey() */
   @XmlAttribute(name = "key", required = false)
   private String key;
 

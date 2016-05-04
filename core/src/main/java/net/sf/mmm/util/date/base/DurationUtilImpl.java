@@ -17,8 +17,7 @@ import net.sf.mmm.util.date.api.DurationUtil;
 @Named(DurationUtil.CDI_NAME)
 public class DurationUtilImpl implements DurationUtil {
 
-  /** @see #getInstance() */
-  private static DurationUtil instance;
+  private  static DurationUtil instance;
 
   /**
    * The constructor.

@@ -24,17 +24,13 @@ import com.fasterxml.jackson.databind.module.SimpleDeserializers;
  */
 public class DatatypeJsonDeserializers extends SimpleDeserializers {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #setDatatypeDescriptorManager(DatatypeDescriptorManager) */
-  private DatatypeDescriptorManager datatypeDescriptorManager;
+  private  DatatypeDescriptorManager datatypeDescriptorManager;
 
-  /** @see #setDatatypeDetector(DatatypeDetector) */
-  private DatatypeDetector datatypeDetector;
+  private  DatatypeDetector datatypeDetector;
 
-  /** @see #setEnumProvider */
-  private EnumProvider enumProvider;
+  private  EnumProvider enumProvider;
 
   /**
    * The constructor.

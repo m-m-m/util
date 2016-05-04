@@ -58,17 +58,14 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    */
   private static final Pattern PATTERN_MIXED_SHORT_OPTIONS = Pattern.compile("-([a-zA-Z0-9]{2,})");
 
-  /** @see #getCliState() */
-  private final CliState cliState;
+  private  final CliState cliState;
 
-  /** @see #getDependencies() */
-  private final CliParserDependencies dependencies;
+  private  final CliParserDependencies dependencies;
 
   /** The {@link CliValueMap}. */
   private final CliValueMap valueMap;
 
-  /** @see #getState() */
-  private final Object state;
+  private  final Object state;
 
   /**
    * The constructor.
@@ -514,14 +511,11 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    */
   protected static class CliParserState {
 
-    /** @see #getCurrentMode() */
-    private CliModeObject currentMode;
+    private  CliModeObject currentMode;
 
-    /** @see #getModeOption() */
-    private String modeOption;
+    private  String modeOption;
 
-    /** @see #getArgumentIndex() */
-    private int argumentIndex;
+    private  int argumentIndex;
 
     /**
      * The constructor.
@@ -725,11 +719,9 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    */
   public static class CliArgumentHelpInfo {
 
-    /** @see #getArgument() */
-    private final CliArgumentContainer argument;
+    private  final CliArgumentContainer argument;
 
-    /** @see #getName() */
-    private final String name;
+    private  final String name;
 
     /**
      * The constructor.

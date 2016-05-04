@@ -19,14 +19,11 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
  */
 public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6243639424166029515L;
 
-  /** @see #Iso2CountryCode(String) */
-  private static final Pattern PATTERN_COUNTRY_CODE = Pattern.compile("[A-Z]{2}");
+  private  static final Pattern PATTERN_COUNTRY_CODE = Pattern.compile("[A-Z]{2}");
 
-  /** @see #toString() */
-  private String title;
+  private  String title;
 
   /**
    * The constructor for de-serialization in GWT.

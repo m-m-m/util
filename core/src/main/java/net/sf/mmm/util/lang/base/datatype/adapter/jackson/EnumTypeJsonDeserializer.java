@@ -30,8 +30,7 @@ public class EnumTypeJsonDeserializer<T> extends JsonDeserializer<T> {
   /** The class reflecting the datatype to deserialize. */
   private final Class<T> enumType;
 
-  /** @see #setEnumProvider(EnumProvider) */
-  private EnumProvider enumProvider;
+  private  EnumProvider enumProvider;
 
   /**
    * The constructor.

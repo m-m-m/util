@@ -22,8 +22,7 @@ public class FilteredIterable<E> implements Iterable<E> {
   /** The actual {@link Iterable} instance to adapt. */
   private final Iterable<? extends E> delegate;
 
-  /** @see #iterator() */
-  private final Filter<? super E> filter;
+  private  final Filter<? super E> filter;
 
   /**
    * The constructor.

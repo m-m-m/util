@@ -13,7 +13,6 @@ package net.sf.mmm.util.datatype.api.color;
  */
 public class Chroma extends Factor<Chroma> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
 
   /**

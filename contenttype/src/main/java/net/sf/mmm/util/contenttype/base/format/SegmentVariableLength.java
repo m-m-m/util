@@ -19,11 +19,9 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public abstract class SegmentVariableLength extends Segment {
 
-  /** @see #getMinimumLength() */
   @XmlAttribute(name = "length", required = true)
   private long length;
 
-  /** @see #getMaximumLength() */
   @XmlAttribute(name = "maxLength", required = false)
   private long maximumLength;
 

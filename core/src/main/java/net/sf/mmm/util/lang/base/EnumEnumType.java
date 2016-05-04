@@ -13,11 +13,9 @@ import net.sf.mmm.util.lang.api.EnumType;
  */
 public final class EnumEnumType implements EnumType<Enum<?>> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 271598316809053979L;
 
-  /** @see #getValue() */
-  private Enum<?> value;
+  private  Enum<?> value;
 
   /**
    * The constructor.

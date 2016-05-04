@@ -13,7 +13,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class NlsIllegalArgumentException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -1537683835966488723L;
 
   /** @see #getCode() */

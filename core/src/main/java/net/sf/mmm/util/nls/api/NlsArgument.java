@@ -12,14 +12,11 @@ import net.sf.mmm.util.text.api.Justification;
  */
 public class NlsArgument {
 
-  /** @see #getKey() */
-  private final String key;
+  private  final String key;
 
-  /** @see #getFormatter() */
-  private final NlsFormatter<?> formatter;
+  private  final NlsFormatter<?> formatter;
 
-  /** @see #getJustification() */
-  private final Justification justification;
+  private  final Justification justification;
 
   /**
    * The constructor.

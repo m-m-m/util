@@ -11,11 +11,9 @@ package net.sf.mmm.util.lang.api;
  */
 public final class EqualsCheckerIsSame extends AbstractEqualsChecker<Object> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #getInstance() */
-  private static final EqualsCheckerIsSame INSTANCE = new EqualsCheckerIsSame();
+  private  static final EqualsCheckerIsSame INSTANCE = new EqualsCheckerIsSame();
 
   /**
    * The constructor. <br>

@@ -17,20 +17,15 @@ import net.sf.mmm.util.pojo.path.api.PojoPropertyPath;
  */
 public class BasicPojoPath implements PojoPath {
 
-  /** @see #getPojoPath() */
-  private final String pojoPath;
+  private  final String pojoPath;
 
-  /** @see #getParentPath() */
-  private final String parentPath;
+  private  final String parentPath;
 
-  /** @see #getSegment() */
-  private final String segment;
+  private  final String segment;
 
-  /** @see #getFunction() */
-  private final String function;
+  private  final String function;
 
-  /** @see #getIndex() */
-  private final Integer index;
+  private  final Integer index;
 
   /**
    * The constructor.

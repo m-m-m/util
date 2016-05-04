@@ -18,7 +18,6 @@ import net.sf.mmm.util.reflect.NlsBundleUtilReflectRoot;
  */
 public class AnnotationNotRuntimeException extends ReflectionException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5375096243963460300L;
 
   /** @see #getCode() */

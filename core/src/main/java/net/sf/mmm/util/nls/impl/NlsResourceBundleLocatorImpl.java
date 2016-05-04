@@ -38,11 +38,9 @@ import org.slf4j.Logger;
 @Named
 public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent implements NlsResourceBundleLocator {
 
-  /** @see #findBundles() */
-  private List<ResourceBundle> nlsBundles;
+  private  List<ResourceBundle> nlsBundles;
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.

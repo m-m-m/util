@@ -16,7 +16,6 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  */
 public class FileDeletionFailedException extends RuntimeIoException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 2351628909914860156L;
 
   /**

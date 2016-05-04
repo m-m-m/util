@@ -18,8 +18,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
 @SuppressWarnings("rawtypes")
 public class DefaultPojoPathFunctionManager extends AbstractComponent implements PojoPathFunctionManager {
 
-  /** @see #getFunction(String) */
-  private final Map<String, PojoPathFunction> functionMap;
+  private  final Map<String, PojoPathFunction> functionMap;
 
   /**
    * The constructor.

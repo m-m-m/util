@@ -16,7 +16,6 @@ import net.sf.mmm.util.lang.api.StringUtil;
  */
 public class FormatterToString<V> extends AbstractFormatter<V> {
 
-  /** @see #getInstance() */
   @SuppressWarnings("rawtypes")
   private static final FormatterToString INSTANCE = new FormatterToString();
 

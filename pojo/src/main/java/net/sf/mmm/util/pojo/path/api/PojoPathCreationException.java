@@ -17,7 +17,6 @@ import net.sf.mmm.util.pojo.NlsBundleUtilPojoRoot;
  */
 public class PojoPathCreationException extends PojoPathException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 2315013832458974625L;
 
   /** @see #getCode() */

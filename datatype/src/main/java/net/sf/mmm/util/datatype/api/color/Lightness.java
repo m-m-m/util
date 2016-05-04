@@ -14,7 +14,6 @@ package net.sf.mmm.util.datatype.api.color;
  */
 public class Lightness extends Factor<Lightness> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
 
   /**

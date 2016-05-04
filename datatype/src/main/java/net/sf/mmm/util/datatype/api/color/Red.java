@@ -13,7 +13,6 @@ package net.sf.mmm.util.datatype.api.color;
  */
 public class Red extends Factor<Red> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
 
   /**

@@ -14,7 +14,6 @@ import net.sf.mmm.util.xml.api.XmlException;
  */
 public class XmlInvalidException extends XmlException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1309150847866589344L;
 
   /** @see #getCode() */

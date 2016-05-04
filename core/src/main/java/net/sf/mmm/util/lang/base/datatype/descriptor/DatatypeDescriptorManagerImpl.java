@@ -34,20 +34,16 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 @Named
 public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent implements DatatypeDescriptorManager {
 
-  /** @see #getInstance() */
-  private static DatatypeDescriptorManagerImpl instance;
+  private  static DatatypeDescriptorManagerImpl instance;
 
   /** Lazy filled {@link Map} for {@link DatatypeDescriptor}. */
   private final Map<Class<?>, DatatypeDescriptor<?>> datatypeDescriptorMap;
 
-  /** @see #setDatatypeDetector(DatatypeDetector) */
-  private DatatypeDetector datatypeDetector;
+  private  DatatypeDetector datatypeDetector;
 
-  /** @see #setReflectionUtil(ReflectionUtil) */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
-  /** @see #setStringUtil(StringUtil) */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
   /**
    * The constructor.

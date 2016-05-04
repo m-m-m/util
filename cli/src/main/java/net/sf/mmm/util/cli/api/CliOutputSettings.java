@@ -19,17 +19,13 @@ public class CliOutputSettings {
   /** The minimum value for {@link #getWidth() width}. */
   private static final int MIN_WIDTH = 5;
 
-  /** @see #getWidth() */
-  private int width;
+  private  int width;
 
-  /** @see #getLineSeparator() */
-  private String lineSeparator;
+  private  String lineSeparator;
 
-  /** @see #getLocale() */
-  private Locale locale;
+  private  Locale locale;
 
-  /** @see #getTemplateResolver() */
-  private NlsTemplateResolver templateResolver;
+  private  NlsTemplateResolver templateResolver;
 
   /**
    * The constructor.

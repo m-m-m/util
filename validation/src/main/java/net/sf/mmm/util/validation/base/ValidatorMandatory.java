@@ -22,8 +22,7 @@ public class ValidatorMandatory extends AbstractValueValidator<Object> {
   /** @see #getCode() */
   public static final String CODE = "Mandatory";
 
-  /** @see #getInstance() */
-  private static final ValidatorMandatory INSTANCE = new ValidatorMandatory();
+  private  static final ValidatorMandatory INSTANCE = new ValidatorMandatory();
 
   /**
    * The constructor.

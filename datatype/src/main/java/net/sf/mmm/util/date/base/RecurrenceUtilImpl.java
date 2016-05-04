@@ -31,8 +31,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 @Named
 public class RecurrenceUtilImpl extends AbstractLoggableComponent implements RecurrenceUtil {
 
-  /** @see #getInstance() */
-  private static RecurrenceUtil instance;
+  private  static RecurrenceUtil instance;
 
   /**
    * The constructor.

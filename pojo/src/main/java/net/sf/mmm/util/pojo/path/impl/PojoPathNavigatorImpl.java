@@ -33,11 +33,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
 @Named(PojoPathNavigator.CDI_NAME)
 public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
 
-  /** @see #getDescriptorBuilder() */
-  private PojoDescriptorBuilder descriptorBuilder;
+  private  PojoDescriptorBuilder descriptorBuilder;
 
-  /** @see #setDescriptorBuilderFactory(PojoDescriptorBuilderFactory) */
-  private PojoDescriptorBuilderFactory descriptorBuilderFactory;
+  private  PojoDescriptorBuilderFactory descriptorBuilderFactory;
 
   /**
    * The constructor. <br>

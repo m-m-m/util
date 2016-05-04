@@ -25,14 +25,12 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  */
 public abstract class NlsException extends Exception implements NlsThrowable, Cloneable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /** the internationalized message */
   private final NlsMessage nlsMessage;
 
-  /** @see #getUuid() */
-  private final UUID uuid;
+  private  final UUID uuid;
 
   /**
    * The constructor.

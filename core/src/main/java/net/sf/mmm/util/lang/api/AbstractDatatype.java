@@ -10,7 +10,6 @@ package net.sf.mmm.util.lang.api;
  */
 public abstract class AbstractDatatype implements Datatype {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2351955533173401204L;
 
   /**

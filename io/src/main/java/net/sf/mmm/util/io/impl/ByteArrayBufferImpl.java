@@ -22,8 +22,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffer {
 
-  /** @see #getCurrentIndex() */
-  private int currentIndex;
+  private  int currentIndex;
 
   /**
    * The constructor.

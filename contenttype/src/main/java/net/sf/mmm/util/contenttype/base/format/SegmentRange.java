@@ -20,25 +20,19 @@ public class SegmentRange extends Segment {
   /** The XML tag name for this object. */
   public static final String XML_TAG = "range";
 
-  /** The XML attribute for {@link #hexMin}. */
   private static final String XML_ATTRIBUTE_HEX_MIN = "hexMin";
 
-  /** The XML attribute for {@link #hexMax}. */
   private static final String XML_ATTRIBUTE_HEX_MAX = "hexMax";
 
-  /** @see #getBytesMinimum() */
   @XmlAttribute(name = XML_ATTRIBUTE_HEX_MIN)
   private String hexMin;
 
-  /** @see #getBytesMaximum() */
   @XmlAttribute(name = XML_ATTRIBUTE_HEX_MAX)
   private String hexMax;
 
-  /** @see #getBytesMinimum() */
-  private byte[] bytesMinimum;
+  private  byte[] bytesMinimum;
 
-  /** @see #getBytesMaximum() */
-  private byte[] bytesMaximum;
+  private  byte[] bytesMaximum;
 
   /**
    * The constructor.

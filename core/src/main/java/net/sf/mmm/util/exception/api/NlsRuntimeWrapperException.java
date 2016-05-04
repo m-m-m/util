@@ -11,7 +11,6 @@ package net.sf.mmm.util.exception.api;
  */
 public class NlsRuntimeWrapperException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -7836201532457130038L;
 
   /** The original cause as {@link NlsThrowable}. */

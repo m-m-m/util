@@ -20,14 +20,11 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
  */
 public class TypeVariableImpl<DECLARATION extends GenericDeclaration> implements TypeVariable<DECLARATION> {
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #getBounds() */
-  private final Type[] bounds;
+  private  final Type[] bounds;
 
-  /** @see #getGenericDeclaration() */
-  private final DECLARATION genericDeclaration;
+  private  final DECLARATION genericDeclaration;
 
   /**
    * The constructor.

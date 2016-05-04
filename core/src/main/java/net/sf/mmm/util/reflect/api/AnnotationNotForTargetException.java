@@ -19,7 +19,6 @@ import net.sf.mmm.util.reflect.NlsBundleUtilReflectRoot;
  */
 public class AnnotationNotForTargetException extends ReflectionException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2021750351215591596L;
 
   /** @see #getCode() */

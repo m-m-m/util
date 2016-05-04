@@ -14,7 +14,6 @@ import com.allen_sauer.gwt.log.client.Log;
  */
 public class GwtLogger extends MarkerIgnoringBase {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1715317043677185014L;
 
   /**

@@ -11,7 +11,6 @@ package net.sf.mmm.util.exception.api;
  */
 public class DuplicateObjectUserException extends DuplicateObjectException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2872400478804617675L;
 
   /**

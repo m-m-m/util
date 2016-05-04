@@ -15,7 +15,6 @@ package net.sf.mmm.util.datatype.api.color;
  */
 public class Saturation extends Factor<Saturation> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
 
   /**

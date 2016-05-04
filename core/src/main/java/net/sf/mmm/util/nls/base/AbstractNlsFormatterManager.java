@@ -37,11 +37,9 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
   protected static final CharFilter NO_EXPRESSION = new ListCharFilter(false, NlsArgumentParser.START_EXPRESSION,
       NlsArgumentParser.END_EXPRESSION);
 
-  /** @see #getInstance() */
-  private static AbstractNlsFormatterManager instance;
+  private  static AbstractNlsFormatterManager instance;
 
-  /** @see #getJustificationBuilder() */
-  private JustificationBuilder justificationBuilder;
+  private  JustificationBuilder justificationBuilder;
 
   /**
    * The constructor.

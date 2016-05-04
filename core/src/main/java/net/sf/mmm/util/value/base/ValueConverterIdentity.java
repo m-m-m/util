@@ -15,8 +15,7 @@ import net.sf.mmm.util.value.api.ValueException;
  */
 public class ValueConverterIdentity<V> extends AbstractSimpleValueConverter<V, V> {
 
-  /** @see #getSourceType() */
-  private final Class<V> valueClass;
+  private  final Class<V> valueClass;
 
   /**
    * The constructor.

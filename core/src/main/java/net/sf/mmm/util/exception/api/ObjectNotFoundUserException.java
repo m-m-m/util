@@ -11,7 +11,6 @@ package net.sf.mmm.util.exception.api;
  */
 public class ObjectNotFoundUserException extends ObjectNotFoundException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 336435569781263073L;
 
   /**

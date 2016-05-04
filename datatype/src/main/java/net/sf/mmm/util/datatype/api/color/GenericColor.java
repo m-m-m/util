@@ -27,7 +27,6 @@ import net.sf.mmm.util.lang.api.GwtHelper;
  */
 public final class GenericColor extends AbstractDatatype {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 3175467633850341788L;
 
   /**
@@ -38,35 +37,25 @@ public final class GenericColor extends AbstractDatatype {
    */
   private static final String PATTERN = "#RRGGBB|(rgb|hsl|hsv|hsb)[a](<num>,<num>,<num>[,<num>])";
 
-  /** @see #getAlpha() */
-  private Alpha alpha;
+  private  Alpha alpha;
 
-  /** @see #getHue() */
-  private Hue hue;
+  private  Hue hue;
 
-  /** @see #getSaturationHsb() */
-  private Saturation saturationHsb;
+  private  Saturation saturationHsb;
 
-  /** @see #getSaturationHsl() */
-  private Saturation saturationHsl;
+  private  Saturation saturationHsl;
 
-  /** @see #getBrightness() */
-  private Brightness brightness;
+  private  Brightness brightness;
 
-  /** @see #getLightness() */
-  private Lightness lightness;
+  private  Lightness lightness;
 
-  /** @see #getChroma() */
-  private Chroma chroma;
+  private  Chroma chroma;
 
-  /** @see #getRed() */
-  private Red red;
+  private  Red red;
 
-  /** @see #getBlue() */
-  private Blue blue;
+  private  Blue blue;
 
-  /** @see #getGreen() */
-  private Green green;
+  private  Green green;
 
   /**
    * The constructor. Use {@code valueOf} methods to instantiate.

@@ -19,7 +19,6 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  */
 public abstract class AbstractNlsTemplate extends AbstractLoggableObject implements NlsTemplate {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6922837208667754806L;
 
   /**

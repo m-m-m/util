@@ -12,7 +12,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliArgumentMissingException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -3181963192632167209L;
 
   /** @see #getCode() */

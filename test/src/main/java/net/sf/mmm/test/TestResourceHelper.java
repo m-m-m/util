@@ -21,8 +21,7 @@ public final class TestResourceHelper {
   /** The path to the base-dir of test-resources of the current module. */
   public static final String TEST_RESOURCES_PATH = "src/test/resources/";
 
-  /** @see #getTestPath() */
-  private static String testPath;
+  private  static String testPath;
 
   /**
    * Construction forbidden.

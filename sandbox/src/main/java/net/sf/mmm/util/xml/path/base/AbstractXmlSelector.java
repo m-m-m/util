@@ -13,8 +13,7 @@ import net.sf.mmm.util.xml.path.api.XmlSelector;
  */
 public abstract class AbstractXmlSelector extends AbstractXmlItem implements XmlSelector {
 
-  /** @see #getNamespaceContext() */
-  private final NamespaceContext namespaceContext;
+  private  final NamespaceContext namespaceContext;
 
   /**
    * The constructor.

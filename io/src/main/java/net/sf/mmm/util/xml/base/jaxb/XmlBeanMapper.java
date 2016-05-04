@@ -55,20 +55,16 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
 @SuppressWarnings("restriction")
 public class XmlBeanMapper<T> extends AbstractLoggableComponent implements ValidationEventHandler {
 
-  /** @see #getJaxbContext() */
-  private final JAXBContext jaxbContext;
+  private  final JAXBContext jaxbContext;
 
   /** @see #loadXml(InputStream, Object) */
   private final Class<T> xmlBeanClass;
 
-  /** @see #getResourceFactory() */
-  private BrowsableResourceFactory resourceFactory;
+  private  BrowsableResourceFactory resourceFactory;
 
-  /** @see #getStaxUtil() */
-  private StaxUtil staxUtil;
+  private  StaxUtil staxUtil;
 
-  /** @see #isXIncludeAware() */
-  private boolean xIncludeAware;
+  private  boolean xIncludeAware;
 
   /**
    * The constructor.

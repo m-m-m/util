@@ -21,8 +21,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType extends
     AbstractPojoPropertyAccessorProxyAdapter {
 
-  /** @see #getPropertyType() */
-  private final GenericType<?> propertyType;
+  private  final GenericType<?> propertyType;
 
   /**
    * The constructor.

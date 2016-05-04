@@ -23,7 +23,6 @@ import net.sf.mmm.util.entity.base.AbstractRevisionedEntity;
 @MappedSuperclass
 public abstract class AbstractEntity<ID> extends AbstractRevisionedEntity<ID> implements PersistenceEntity<ID> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 3256209723131574786L;
 
   /**

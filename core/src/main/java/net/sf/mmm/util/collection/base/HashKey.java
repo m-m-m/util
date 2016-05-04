@@ -21,7 +21,6 @@ import net.sf.mmm.util.lang.api.HashCodeFunctionSystemIdentity;
  */
 public final class HashKey<T> extends AbstractHashKey<T> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2492195114074688424L;
 
   /**

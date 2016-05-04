@@ -17,23 +17,17 @@ import net.sf.mmm.util.nls.base.NlsMessagePlain;
  */
 public abstract class AbstractMessage implements Message {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -88269463788978385L;
 
-  /** @see #getCode() */
-  private String code;
+  private  String code;
 
-  /** @see #getSource() */
-  private String source;
+  private  String source;
 
-  /** @see #getMessage(java.util.Locale) */
-  private NlsMessage message;
+  private  NlsMessage message;
 
-  /** @see #getUuid() */
-  private UUID uuid;
+  private  UUID uuid;
 
-  /** @see #getDetails() */
-  private String details;
+  private  String details;
 
   /**
    * The constructor for de-serialization in GWT.

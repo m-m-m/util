@@ -23,14 +23,12 @@ import net.sf.mmm.util.scanner.api.CharStreamScanner;
  */
 public class CharSequenceScanner implements CharStreamScanner {
 
-  /** @see #getOriginalString() */
-  private String str;
+  private  String str;
 
   /** the string to parse as char array */
   private char[] chars;
 
-  /** @see #getCurrentIndex() */
-  private int pos;
+  private  int pos;
 
   /** The start-index in {@link #chars}. */
   private final int startIndex;

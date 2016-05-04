@@ -16,8 +16,7 @@ public class AssignableFromFilter implements Filter<Class<?>> {
   /** The class */
   private final Class<?> superClass;
 
-  /** @see #accept(Class) */
-  private final boolean excludeSuperType;
+  private  final boolean excludeSuperType;
 
   /**
    * The constructor.

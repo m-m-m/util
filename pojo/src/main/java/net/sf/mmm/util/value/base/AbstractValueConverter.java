@@ -21,8 +21,7 @@ import net.sf.mmm.util.value.api.ValueConverter;
 public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLoggableComponent implements
     ValueConverter<SOURCE, TARGET> {
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.

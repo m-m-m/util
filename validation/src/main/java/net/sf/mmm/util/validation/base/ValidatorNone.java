@@ -13,8 +13,7 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
  */
 public final class ValidatorNone extends AbstractValidator<Object> {
 
-  /** @see #getInstance() */
-  private static final ValidatorNone INSTANCE = new ValidatorNone();
+  private  static final ValidatorNone INSTANCE = new ValidatorNone();
 
   /**
    * The constructor.

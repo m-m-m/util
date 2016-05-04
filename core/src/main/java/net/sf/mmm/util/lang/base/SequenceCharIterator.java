@@ -13,8 +13,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  */
 public class SequenceCharIterator implements CharIterator {
 
-  /** @see #SequenceCharIterator(CharSequence) */
-  private final CharSequence sequence;
+  private  final CharSequence sequence;
 
   /** The {@link CharSequence#length() length} of the {@link #sequence}. */
   private final int length;

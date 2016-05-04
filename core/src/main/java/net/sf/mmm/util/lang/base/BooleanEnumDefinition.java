@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class BooleanEnumDefinition extends AbstractSimpleEnumDefinition<Boolean> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5390849719342881758L;
 
   /**

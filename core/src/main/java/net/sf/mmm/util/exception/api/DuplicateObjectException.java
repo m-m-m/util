@@ -16,7 +16,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class DuplicateObjectException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -1754790439556739544L;
 
   /** @see #getCode() */

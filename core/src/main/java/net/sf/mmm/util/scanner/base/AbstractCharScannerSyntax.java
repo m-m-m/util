@@ -17,29 +17,21 @@ import net.sf.mmm.util.scanner.api.CharScannerSyntax;
  */
 public abstract class AbstractCharScannerSyntax extends StringSyntaxBean implements CharScannerSyntax {
 
-  /** @see #getQuoteEscape() */
-  private char quoteEscape;
+  private  char quoteEscape;
 
-  /** @see #isQuoteEscapeLazy() */
-  private boolean quoteEscapeLazy;
+  private  boolean quoteEscapeLazy;
 
-  /** @see #getAltQuoteStart() */
-  private char altQuoteStart;
+  private  char altQuoteStart;
 
-  /** @see #getAltQuoteEnd() */
-  private char altQuoteEnd;
+  private  char altQuoteEnd;
 
-  /** @see #getAltQuoteEscape() */
-  private char altQuoteEscape;
+  private  char altQuoteEscape;
 
-  /** @see #isAltQuoteEscapeLazy() */
-  private boolean altQuoteEscapeLazy;
+  private  boolean altQuoteEscapeLazy;
 
-  /** @see #getEntityStart() */
-  private char entityStart;
+  private  char entityStart;
 
-  /** @see #getEntityEnd() */
-  private char entityEnd;
+  private  char entityEnd;
 
   /**
    * The constructor.

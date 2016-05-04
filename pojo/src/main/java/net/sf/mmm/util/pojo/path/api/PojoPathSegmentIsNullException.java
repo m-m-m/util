@@ -14,7 +14,6 @@ import net.sf.mmm.util.pojo.NlsBundleUtilPojoRoot;
  */
 public class PojoPathSegmentIsNullException extends PojoPathException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 7635900006037144705L;
 
   /** @see #getCode() */

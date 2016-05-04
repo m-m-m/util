@@ -15,11 +15,9 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public abstract class AbstractErrorMessage extends AbstractMessage {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1997543457414946906L;
 
-  /** @see #getType() */
-  private boolean technical;
+  private  boolean technical;
 
   /**
    * The constructor for de-serialization in GWT.

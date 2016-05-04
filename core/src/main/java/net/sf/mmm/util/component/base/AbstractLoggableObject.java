@@ -14,8 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractLoggableObject {
 
-  /** @see #getLogger() */
-  private final Logger logger;
+  private  final Logger logger;
 
   /**
    * The constructor.

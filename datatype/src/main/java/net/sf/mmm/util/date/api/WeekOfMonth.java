@@ -27,11 +27,9 @@ public enum WeekOfMonth implements SimpleDatatype<Integer> {
   /** The according month. */
   LAST(5, "last");
 
-  /** @see #getValue() */
-  private final Integer value;
+  private  final Integer value;
 
-  /** @see #toString() */
-  private final String title;
+  private  final String title;
 
   /**
    * The constructor.

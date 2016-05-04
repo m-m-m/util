@@ -12,7 +12,6 @@ import net.sf.mmm.util.entity.api.EntityId;
  */
 public abstract class AbstractEntityId implements EntityId {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 3656414714052544118L;
 
   /**

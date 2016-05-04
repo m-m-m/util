@@ -18,7 +18,6 @@ import net.sf.mmm.util.session.api.UserSessionAccess;
  */
 public abstract class AbstractNlsMessage implements NlsMessage {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6426029827430286036L;
 
   /** Locale.ROOT is only available since java 6. */

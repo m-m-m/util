@@ -18,11 +18,9 @@ import net.sf.mmm.util.lang.api.Formatter;
  */
 public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefinition<TYPE, CATEGORY> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 5984869515955299731L;
 
-  /** @see #getFormatter() */
-  private Formatter<TYPE> formatter;
+  private  Formatter<TYPE> formatter;
 
   /**
    * The constructor.

@@ -24,39 +24,30 @@ import net.sf.mmm.util.version.base.AbstractVersionIdentifier;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class VersionIdentifierImpl extends AbstractVersionIdentifier {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -8419817492498401813L;
 
-  /** @see #getVersionSegment(int) */
   @XmlElementWrapper(name = "version-number")
   @XmlElement(name = "segment")
   private int[] segments;
 
-  /** @see #getPhase() */
   @XmlElement(name = "phase")
   private DevelopmentPhase phase;
 
-  /** @see #getPhaseNumber() */
   @XmlElement(name = "phase-number")
   private Integer phaseNumber;
 
-  /** @see #getPhaseAlias() */
   @XmlElement(name = "phase-alias")
   private String phaseAlias;
 
-  /** @see #isSnapshot() */
   @XmlElement(name = "snapshot")
   private boolean snapshot;
 
-  /** @see #getRevision() */
   @XmlElement(name = "revision")
   private Long revision;
 
-  /** @see #getTimestamp() */
   @XmlElement(name = "timestamp")
   private Date timestamp;
 
-  /** @see #getLabel() */
   @XmlElement(name = "label")
   private String label;
 

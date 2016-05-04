@@ -18,14 +18,11 @@ import net.sf.mmm.util.lang.api.HashCodeFunctionDefault;
  */
 public class CustomHashKey<T> extends AbstractHashKey<T> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1601614479939341307L;
 
-  /** @see #equals(Object) */
-  private EqualsChecker<T> equalsChecker;
+  private  EqualsChecker<T> equalsChecker;
 
-  /** @see #hashCode() */
-  private HashCodeFunction<T> hashCodeFunction;
+  private  HashCodeFunction<T> hashCodeFunction;
 
   /**
    * The constructor for de-serialization in GWT.

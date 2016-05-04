@@ -25,11 +25,9 @@ import net.sf.mmm.util.value.api.ValueException;
  */
 public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent implements SimpleGenericValueConverter {
 
-  /** @see #getIso8601Util() */
-  private Iso8601UtilLimited iso8601Util;
+  private  Iso8601UtilLimited iso8601Util;
 
-  /** @see #getMathUtil() */
-  private MathUtilLimited mathUtil;
+  private  MathUtilLimited mathUtil;
 
   /**
    * The constructor.

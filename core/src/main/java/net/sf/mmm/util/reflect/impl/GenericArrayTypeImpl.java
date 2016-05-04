@@ -15,8 +15,7 @@ import java.lang.reflect.Type;
  */
 public class GenericArrayTypeImpl implements GenericArrayType {
 
-  /** @see #getGenericComponentType() */
-  private final Type genericComponentType;
+  private  final Type genericComponentType;
 
   /**
    * The constructor.

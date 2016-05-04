@@ -27,7 +27,6 @@ import net.sf.mmm.util.xml.base.jaxb.JaxbObject;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ContentTypeList implements JaxbObject {
 
-  /** @see #getContentTypes() */
   @XmlElement(name = "content-type")
   private List<ContentTypeBean> contentTypes;
 

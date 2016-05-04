@@ -16,17 +16,13 @@ import net.sf.mmm.util.transferobject.base.example.common.Person;
  */
 public class PersonCto extends CompositeTo {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #getPerson() */
-  private PersonEto person;
+  private  PersonEto person;
 
-  /** @see #getAddress() */
-  private AddressEto address;
+  private  AddressEto address;
 
-  /** @see #getContactInfos() */
-  private List<ContactInfoEto> contactInfos;
+  private  List<ContactInfoEto> contactInfos;
 
   /**
    * The constructor.

@@ -10,20 +10,15 @@ package net.sf.mmm.util.xml.api;
  */
 public class XmlCompareMode {
 
-  /** @see #isCheckComments() */
-  private boolean checkComments;
+  private  boolean checkComments;
 
-  /** @see #isNormalizeSpaces() */
-  private boolean normalizeSpaces;
+  private  boolean normalizeSpaces;
 
-  /** @see #isJoinText() */
-  private boolean joinText;
+  private  boolean joinText;
 
-  /** @see #isJoinCData() */
-  private boolean joinCData;
+  private  boolean joinCData;
 
-  /** @see #isJoinComment() */
-  private boolean joinComment;
+  private  boolean joinComment;
 
   /**
    * The constructor.

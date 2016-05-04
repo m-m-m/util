@@ -20,8 +20,7 @@ import net.sf.mmm.util.reflect.api.ReflectionException;
 public class PojoPropertyAccessorProxySetByKey extends AbstractPojoPropertyAccessorProxy implements
     PojoPropertyAccessorOneArg {
 
-  /** @see #getDelegate() */
-  private final PojoPropertyAccessorTwoArg delegate;
+  private  final PojoPropertyAccessorTwoArg delegate;
 
   /** @see #invoke(Object, Object) */
   private final Object key;

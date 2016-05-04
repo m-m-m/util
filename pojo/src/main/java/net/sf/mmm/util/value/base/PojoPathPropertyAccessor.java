@@ -28,8 +28,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
   /** The {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property to access. */
   private final String pojoPath;
 
-  /** @see #getValueType() */
-  private final Class<VALUE> valueType;
+  private  final Class<VALUE> valueType;
 
   /** The {@link PojoPathMode} used for {@link #setValue(Object, Object) write access}. */
   private final PojoPathMode writeMode;

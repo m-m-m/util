@@ -16,8 +16,7 @@ import net.sf.mmm.util.collection.api.MapFactory;
  */
 public abstract class AbstractClassHierarchyMap<E> {
 
-  /** @see #get(Class) */
-  private final Map<Class<?>, E> classMap;
+  private  final Map<Class<?>, E> classMap;
 
   /**
    * The constructor.

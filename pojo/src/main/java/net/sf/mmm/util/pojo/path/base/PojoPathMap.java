@@ -16,17 +16,13 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
  */
 public class PojoPathMap extends AbstractSimpleMap<String, Object> {
 
-  /** @see #get(Object) */
-  private final PojoPathNavigator pojoPathNavigator;
+  private  final PojoPathNavigator pojoPathNavigator;
 
-  /** @see #get(Object) */
-  private final Object pojo;
+  private  final Object pojo;
 
-  /** @see #get(Object) */
-  private final PojoPathMode mode;
+  private  final PojoPathMode mode;
 
-  /** @see #get(Object) */
-  private final PojoPathContext context;
+  private  final PojoPathContext context;
 
   /**
    * The constructor.

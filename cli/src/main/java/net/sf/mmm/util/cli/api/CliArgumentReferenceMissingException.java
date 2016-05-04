@@ -13,7 +13,6 @@ import net.sf.mmm.util.cli.base.CliArgumentContainer;
  */
 public class CliArgumentReferenceMissingException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -4351735003857434632L;
 
   /** @see #getCode() */

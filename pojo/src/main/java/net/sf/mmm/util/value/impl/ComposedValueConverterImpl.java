@@ -34,14 +34,11 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
 @Named(ComposedValueConverter.CDI_NAME)
 public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
-  /** @see #addConverter(ValueConverter) */
-  private final TargetClass2ConverterMap targetClass2converterMap;
+  private  final TargetClass2ConverterMap targetClass2converterMap;
 
-  /** @see #addConverter(ValueConverter) */
-  private final TargetClass2ConverterMap targetArrayClass2converterMap;
+  private  final TargetClass2ConverterMap targetArrayClass2converterMap;
 
-  /** @see #setConverters(List) */
-  private List<ValueConverter<?, ?>> converters;
+  private  List<ValueConverter<?, ?>> converters;
 
   /**
    * The constructor.
@@ -361,11 +358,9 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    */
   protected class ComposedTargetTypeConverter<TARGET> implements ValueConverter<Object, TARGET> {
 
-    /** @see #getTargetType() */
-    private final Class<TARGET> targetType;
+    private  final Class<TARGET> targetType;
 
-    /** @see #addConverter(ValueConverter) */
-    private final Map<Class<?>, ValueConverter<?, TARGET>> sourceClass2converterMap;
+    private  final Map<Class<?>, ValueConverter<?, TARGET>> sourceClass2converterMap;
 
     /**
      * The constructor.

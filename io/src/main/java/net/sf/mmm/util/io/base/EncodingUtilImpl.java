@@ -121,8 +121,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
   /** The rank gain if an UTF-16 surrogate pair was detected. */
   private static final int RANK_UTF16_SURROGATE = 6;
 
-  /** @see #getInstance() */
-  private static EncodingUtil instance;
+  private  static EncodingUtil instance;
 
   /**
    * The constructor.
@@ -519,8 +518,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
     /** The lookahead buffer used to detect encoding. */
     private final ProcessableByteArrayBuffer detectionBuffer;
 
-    /** @see #getEncoding() */
-    private String encoding;
+    private  String encoding;
 
     /**
      * The {@link Reader} to delegate to. Will be {@code null} until the first non ASCII-Character is detected.

@@ -31,14 +31,11 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CollectionFactoryManagerImpl extends AbstractLoggableComponent implements CollectionFactoryManager {
 
-  /** @see #getInstance() */
-  private static CollectionFactoryManager instance;
+  private  static CollectionFactoryManager instance;
 
-  /** @see #getCollectionFactory(Class) */
-  private final Map<Class<? extends Collection>, CollectionFactory> collectionFactoryMap;
+  private  final Map<Class<? extends Collection>, CollectionFactory> collectionFactoryMap;
 
-  /** @see #getMapFactory(Class) */
-  private final Map<Class<? extends Map>, MapFactory> mapFactoryMap;
+  private  final Map<Class<? extends Map>, MapFactory> mapFactoryMap;
 
   /**
    * The constructor.

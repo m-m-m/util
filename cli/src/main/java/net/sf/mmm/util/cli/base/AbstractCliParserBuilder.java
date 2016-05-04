@@ -38,38 +38,27 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent implements CliParserBuilder,
     CliParserDependencies {
 
-  /** @see #getDescriptorBuilderFactory() */
-  private PojoDescriptorBuilderFactory descriptorBuilderFactory;
+  private  PojoDescriptorBuilderFactory descriptorBuilderFactory;
 
-  /** @see #getDescriptorBuilder() */
-  private PojoDescriptorBuilder descriptorBuilder;
+  private  PojoDescriptorBuilder descriptorBuilder;
 
-  /** @see #getNlsMessageFactory() */
-  private NlsMessageFactory nlsMessageFactory;
+  private  NlsMessageFactory nlsMessageFactory;
 
-  /** @see #getNlsTemplateResolver() */
-  private NlsTemplateResolver nlsTemplateResolver;
+  private  NlsTemplateResolver nlsTemplateResolver;
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
-  /** @see #getAnnotationUtil() */
-  private AnnotationUtil annotationUtil;
+  private  AnnotationUtil annotationUtil;
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
-  /** @see #getCollectionReflectionUtil() */
-  private CollectionReflectionUtil collectionReflectionUtil;
+  private  CollectionReflectionUtil collectionReflectionUtil;
 
-  /** @see #getCollectionFactoryManager() */
-  private CollectionFactoryManager collectionFactoryManager;
+  private  CollectionFactoryManager collectionFactoryManager;
 
-  /** @see #getConverter() */
-  private ComposedValueConverter converter;
+  private  ComposedValueConverter converter;
 
-  /** @see #getLineWrapper() */
-  private LineWrapper lineWrapper;
+  private  LineWrapper lineWrapper;
 
   /**
    * The constructor.

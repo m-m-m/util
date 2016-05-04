@@ -22,8 +22,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsMessageFormatterImpl;
 @Named
 public class NlsMessageFormatterFactoryImpl extends AbstractComponent implements NlsMessageFormatterFactory {
 
-  /** @see #getDependencies() */
-  private NlsDependencies dependencies;
+  private  NlsDependencies dependencies;
 
   /**
    * The constructor.

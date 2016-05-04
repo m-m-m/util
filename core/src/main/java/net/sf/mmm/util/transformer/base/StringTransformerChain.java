@@ -26,16 +26,13 @@ import net.sf.mmm.util.transformer.api.Transformer;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class StringTransformerChain implements Transformer<String> {
 
-  /** @see #getId() */
   @XmlID
   @XmlAttribute(name = "id")
   private String id;
 
-  /** The parent that is extended by this chain or {@code null}. */
   @XmlIDREF
   private StringTransformerChain parent;
 
-  /** The rules of this chain. */
   @XmlElement(name = "regex", type = RegexStringTransformerRule.class)
   private StringTransformerRule[] rules;
 

@@ -61,20 +61,15 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  */
 public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String> {
 
-  /** @see #getSegment() */
-  private final String segment;
+  private  final String segment;
 
-  /** @see #getPojoPath() */
-  private final String pojoPath;
+  private  final String pojoPath;
 
-  /** @see #getPropertyType() */
-  private final Class<T> propertyType;
+  private  final Class<T> propertyType;
 
-  /** @see #getParentPath() */
-  private final String parentPath;
+  private  final String parentPath;
 
-  /** @see #getTitle() */
-  private final String title;
+  private  final String title;
 
   /**
    * The constructor.

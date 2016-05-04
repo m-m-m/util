@@ -31,14 +31,11 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
   /** The {@link GenericType} for {@link Void}. */
   public static final GenericType<Void> TYPE_VOID = new SimpleGenericTypeLimited<>(Void.class);
 
-  /** @see #getType() */
-  private final Class<T> type;
+  private  final Class<T> type;
 
-  /** @see #getComponentType() */
-  private GenericType<?> componentType;
+  private  GenericType<?> componentType;
 
-  /** @see #getKeyType() */
-  private GenericType<?> keyType;
+  private  GenericType<?> keyType;
 
   /**
    * The constructor.

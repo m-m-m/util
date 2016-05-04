@@ -18,11 +18,9 @@ import java.util.NoSuchElementException;
  */
 public class CollectionList<E> extends ArrayList<E> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -8534525840753920810L;
 
-  /** @see #getDelegate() */
-  private Collection<E> delegate;
+  private  Collection<E> delegate;
 
   /**
    * The constructor.

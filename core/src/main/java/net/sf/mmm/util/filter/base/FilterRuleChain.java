@@ -23,21 +23,17 @@ import net.sf.mmm.util.filter.api.FilterRule;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FilterRuleChain<V> implements Filter<V> {
 
-  /** @see #getId() */
   @XmlID
   @XmlAttribute(name = "id")
   private String id;
 
-  /** The parent that is extended by this chain or {@code null}. */
   @XmlIDREF
   @XmlAttribute(name = "parent")
   private FilterRuleChain<V> parent;
 
-  /** the rules */
   @XmlElement(name = "rule", type = PatternFilterRule.class)
   private FilterRule<V>[] rules;
 
-  /** @see #getDefaultResult() */
   @XmlAttribute(name = "default-result", required = false)
   private boolean defaultResult;
 

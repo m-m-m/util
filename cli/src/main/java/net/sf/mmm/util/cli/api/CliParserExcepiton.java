@@ -12,7 +12,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliParserExcepiton extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 7576087965627428527L;
 
   /** @see #getCode() */

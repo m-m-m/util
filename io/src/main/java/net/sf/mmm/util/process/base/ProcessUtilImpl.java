@@ -44,14 +44,11 @@ import net.sf.mmm.util.process.api.ProcessUtil;
 @Named(ProcessUtil.CDI_NAME)
 public class ProcessUtilImpl extends AbstractLoggableComponent implements ProcessUtil {
 
-  /** @see #getInstance() */
-  private static ProcessUtil instance;
+  private  static ProcessUtil instance;
 
-  /** @see #getStreamUtil() */
-  private StreamUtil streamUtil;
+  private  StreamUtil streamUtil;
 
-  /** @see #getExecutor() */
-  private Executor executor;
+  private  Executor executor;
 
   /**
    * The constructor.

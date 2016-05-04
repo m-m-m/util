@@ -21,23 +21,17 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
  */
 public class PojoPathContextBean implements PojoPathContext {
 
-  /** @see #getCache() */
-  private Map<Object, Object> cache;
+  private  Map<Object, Object> cache;
 
-  /** @see #getProperties() */
-  private Properties properties;
+  private  Properties properties;
 
-  /** @see #getRecognizer() */
-  private PojoPathRecognizer recognizer;
+  private  PojoPathRecognizer recognizer;
 
-  /** @see #getAdditionalConverter() */
-  private ComposedValueConverter additionalConverter;
+  private  ComposedValueConverter additionalConverter;
 
-  /** @see #getAdditionalFunctionManager() */
-  private PojoPathFunctionManager additionalFunctionManager;
+  private  PojoPathFunctionManager additionalFunctionManager;
 
-  /** @see #getPojoFactory() */
-  private PojoFactory pojoFactory;
+  private  PojoFactory pojoFactory;
 
   /**
    * The constructor. All fields are initially {@code null}.

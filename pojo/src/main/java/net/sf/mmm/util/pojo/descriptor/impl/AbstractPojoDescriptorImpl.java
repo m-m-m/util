@@ -40,11 +40,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
  */
 public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
 
-  /** @see #getPropertyDescriptor(String) */
-  private final Map<String, PojoPropertyDescriptorImpl> propertyMap;
+  private  final Map<String, PojoPropertyDescriptorImpl> propertyMap;
 
-  /** @see #getPropertyDescriptor(String) */
-  private final Collection<PojoPropertyDescriptorImpl> properties;
+  private  final Collection<PojoPropertyDescriptorImpl> properties;
 
   /**
    * The constructor.

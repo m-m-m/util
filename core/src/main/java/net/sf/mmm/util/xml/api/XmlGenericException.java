@@ -11,7 +11,6 @@ package net.sf.mmm.util.xml.api;
  */
 public class XmlGenericException extends XmlException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 5597494957022339458L;
 
   /** @see #getCode() */

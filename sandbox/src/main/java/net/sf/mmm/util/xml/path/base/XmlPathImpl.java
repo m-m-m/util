@@ -16,8 +16,7 @@ import net.sf.mmm.util.xml.path.api.XmlPath;
  */
 public class XmlPathImpl extends AbstractXmlSelector implements XmlPath {
 
-  /** @see #getSegment(int) */
-  private final List<AbstractXmlPathSegment> segmentList;
+  private  final List<AbstractXmlPathSegment> segmentList;
 
   /**
    * The constructor.

@@ -36,11 +36,9 @@ import net.sf.mmm.util.pojo.descriptor.impl.accessor.PojoPropertyAccessorSizeBui
 public class ExtendedPojoDescriptorDependenciesImpl extends PojoDescriptorDependenciesImpl
     implements ExtendedPojoDescriptorDependencies {
 
-  /** @see #getAccessorBuilders() */
-  private Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders;
+  private  Collection<PojoPropertyAccessorBuilder<?>> accessorBuilders;
 
-  /** @see #getDescriptorEnhancer() */
-  private PojoDescriptorEnhancer descriptorEnhancer;
+  private  PojoDescriptorEnhancer descriptorEnhancer;
 
   /**
    * The constructor.

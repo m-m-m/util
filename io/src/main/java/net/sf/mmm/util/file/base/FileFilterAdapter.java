@@ -18,8 +18,7 @@ import net.sf.mmm.util.filter.api.Filter;
  */
 public final class FileFilterAdapter implements FileFilter {
 
-  /** @see #accept(File) */
-  private final Filter<File> filter;
+  private  final Filter<File> filter;
 
   /**
    * The constructor.

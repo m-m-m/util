@@ -12,35 +12,26 @@ import java.io.Serializable;
  */
 public final class UUID implements Serializable, Comparable<UUID> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -4856846361193249489L;
 
   /** Value that indicates that a field is NOT yet initialized. */
   private static final int NOT_INITIALIZED = -1;
 
-  /** @see #getMostSignificantBits() */
-  private long mostSignificantBits;
+  private  long mostSignificantBits;
 
-  /** @see #getLeastSignificantBits() */
-  private long leastSignificantBits;
+  private  long leastSignificantBits;
 
-  /** @see #version() */
-  private transient int version;
+  private  transient int version;
 
-  /** @see #variant() */
-  private transient int variant;
+  private  transient int variant;
 
-  /** @see #timestamp */
-  private transient volatile long timestamp;
+  private  transient volatile long timestamp;
 
-  /** @see #clockSequence() */
-  private transient int clockSequence;
+  private  transient int clockSequence;
 
-  /** @see #node() */
-  private transient long node;
+  private  transient long node;
 
-  /** @see #hashCode() */
-  private transient int hashCode;
+  private  transient int hashCode;
 
   /**
    * The constructor for de-serialization in GWT.

@@ -112,20 +112,15 @@ public enum ByteOrderMark {
 
   };
 
-  /** @see #UTF_8 */
-  private static final byte[] MAGIC_BYTES_UTF8 = new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
+  private  static final byte[] MAGIC_BYTES_UTF8 = new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
 
-  /** @see #UTF_16_BE */
-  private static final byte[] MAGIC_BYTES_UTF16_BE = new byte[] { (byte) 0xfe, (byte) 0xff };
+  private  static final byte[] MAGIC_BYTES_UTF16_BE = new byte[] { (byte) 0xfe, (byte) 0xff };
 
-  /** @see #UTF_16_LE */
-  private static final byte[] MAGIC_BYTES_UTF16_LE = new byte[] { (byte) 0xff, (byte) 0xfe };
+  private  static final byte[] MAGIC_BYTES_UTF16_LE = new byte[] { (byte) 0xff, (byte) 0xfe };
 
-  /** @see #UTF_32_BE */
-  private static final byte[] MAGIC_BYTES_UTF32_BE = new byte[] { 0x00, 0x00, (byte) 0xfe, (byte) 0xff };
+  private  static final byte[] MAGIC_BYTES_UTF32_BE = new byte[] { 0x00, 0x00, (byte) 0xfe, (byte) 0xff };
 
-  /** @see #UTF_32_LE */
-  private static final byte[] MAGIC_BYTES_UTF32_LE = new byte[] { (byte) 0xff, (byte) 0xfe, 0x00, 0x00 };
+  private  static final byte[] MAGIC_BYTES_UTF32_LE = new byte[] { (byte) 0xff, (byte) 0xfe, 0x00, 0x00 };
 
   /**
    * This method gets the encoding indicated by this {@link ByteOrderMark}.

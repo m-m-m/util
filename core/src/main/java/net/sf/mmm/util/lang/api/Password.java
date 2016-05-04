@@ -15,7 +15,6 @@ import net.sf.mmm.util.lang.api.concern.Security;
  */
 public class Password extends AbstractSimpleDatatype<String> implements Security {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 2487698739503641538L;
 
   /**

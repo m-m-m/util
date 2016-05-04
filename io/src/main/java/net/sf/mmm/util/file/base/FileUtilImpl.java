@@ -42,26 +42,19 @@ import net.sf.mmm.util.resource.api.ResourcePathNode;
 @Named(FileUtil.CDI_NAME)
 public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
 
-  /** @see #getInstance() */
-  private static FileUtil instance;
+  private  static FileUtil instance;
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
-  /** @see #setUserHomeDirectoryPath(String) */
-  private String userHomeDirectoryPath;
+  private  String userHomeDirectoryPath;
 
-  /** @see #getUserHomeDirectory() */
-  private File userHomeDirectory;
+  private  File userHomeDirectory;
 
-  /** @see #getUserLogin() */
-  private String userLogin;
+  private  String userLogin;
 
-  /** @see #setTemporaryDirectoryPath(String) */
-  private String temporaryDirectoryPath;
+  private  String temporaryDirectoryPath;
 
-  /** @see #getTemporaryDirectory() */
-  private File temporaryDirectory;
+  private  File temporaryDirectory;
 
   /**
    * The constructor.

@@ -33,8 +33,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   /** The successor in the chain or {@code null} if this is the last. */
   private DetectorStreamBufferImpl chainSuccessor;
 
-  /** @see #getStreamPosition() */
-  private long streamPosition;
+  private  long streamPosition;
 
   /** @see #seek(long, SeekMode) */
   private long seekCount;
@@ -42,8 +41,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
   /** @see #seek(long, SeekMode) */
   private SeekMode seekMode;
 
-  /** @see #getByteArray(int) */
-  private ByteArray currentByteArray;
+  private  ByteArray currentByteArray;
 
   /** The current {@link ByteArray} to work on. */
   private byte[] currentArray;
@@ -64,8 +62,7 @@ public class DetectorStreamBufferImpl implements DetectorStreamBuffer {
    */
   private final LinkedList<ByteArray> arrayQueue;
 
-  /** @see #getByteArray(int) */
-  private final ByteArray currentArrayView;
+  private  final ByteArray currentArrayView;
 
   /** The {@link ByteArrayPool}. */
   private ByteArrayPool byteArrayPool;

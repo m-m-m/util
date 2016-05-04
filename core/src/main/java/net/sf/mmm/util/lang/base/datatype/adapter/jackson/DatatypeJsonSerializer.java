@@ -30,8 +30,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  */
 public class DatatypeJsonSerializer<T> extends JsonSerializer<T> {
 
-  /** @see #setDatatypeDescriptorManager(DatatypeDescriptorManager) */
-  private DatatypeDescriptorManager datatypeDescriptorManager;
+  private  DatatypeDescriptorManager datatypeDescriptorManager;
 
   /**
    * The constructor.

@@ -12,14 +12,11 @@ import net.sf.mmm.util.lang.api.StringSyntax;
  */
 public class StringSyntaxBean implements StringSyntax {
 
-  /** @see #getEscape() */
-  private char escape;
+  private  char escape;
 
-  /** @see #getQuoteStart() */
-  private char quoteStart;
+  private  char quoteStart;
 
-  /** @see #getQuoteEnd() */
-  private char quoteEnd;
+  private  char quoteEnd;
 
   /**
    * The constructor.

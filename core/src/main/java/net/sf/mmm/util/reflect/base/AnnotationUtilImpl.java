@@ -31,11 +31,9 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 @Named(AnnotationUtil.CDI_NAME)
 public class AnnotationUtilImpl implements AnnotationUtil {
 
-  /** @see #getInstance() */
-  private static AnnotationUtilImpl instance;
+  private  static AnnotationUtilImpl instance;
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.

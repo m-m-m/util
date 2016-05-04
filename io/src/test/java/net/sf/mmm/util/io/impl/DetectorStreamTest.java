@@ -189,8 +189,7 @@ public class DetectorStreamTest {
    */
   protected static class DummyByteArrayPool implements ByteArrayPool {
 
-    /** @see #release(byte[]) */
-    private final Set<byte[]> bufferSet;
+    private  final Set<byte[]> bufferSet;
 
     /** the size of the byte-arrays. */
     private final int arraySize;

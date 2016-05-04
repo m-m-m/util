@@ -19,7 +19,6 @@ public class BusinessErrorUserException extends NlsRuntimeException {
   /** @see #getCode() */
   public static final String CODE = "BusinessError";
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 7301700837160217721L;
 
   /**

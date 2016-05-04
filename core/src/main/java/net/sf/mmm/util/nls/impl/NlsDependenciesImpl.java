@@ -26,17 +26,13 @@ import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
 @Named(NlsDependencies.CDI_NAME)
 public class NlsDependenciesImpl extends AbstractNlsDependencies {
 
-  /** @see #getArgumentParser() */
-  private NlsArgumentParser argumentParser;
+  private  NlsArgumentParser argumentParser;
 
-  /** @see #getArgumentFormatter() */
-  private NlsArgumentFormatter argumentFormatter;
+  private  NlsArgumentFormatter argumentFormatter;
 
-  /** @see #getMessageFormatterFactory() */
-  private NlsMessageFormatterFactory messageFormatterFactory;
+  private  NlsMessageFormatterFactory messageFormatterFactory;
 
-  /** @see #getIso8601Util() */
-  private Iso8601UtilLimited iso8601Util;
+  private  Iso8601UtilLimited iso8601Util;
 
   /**
    * The constructor.

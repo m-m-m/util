@@ -17,8 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 final class ThrowableHelper {
 
-  /** @see #getHelper() */
-  private static Helper helper;
+  private  static Helper helper;
 
   /**
    * Construction forbidden.

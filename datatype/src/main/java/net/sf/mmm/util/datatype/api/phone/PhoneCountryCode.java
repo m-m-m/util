@@ -25,7 +25,6 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6052425985912842711L;
 
   /** The maximum {@link #getValue() value}. */

@@ -15,11 +15,9 @@ import com.google.gwt.i18n.client.Dictionary;
  */
 public class NlsTemplateImpl extends AbstractNlsTemplate {
 
-  /** @see #getName() */
-  private /*final*/ String name;
+  private  /*final*/ String name;
 
-  /** @see #getKey() */
-  private /*final*/ String key;
+  private  /*final*/ String key;
 
   /**
    * The constructor for de-serialization in GWT.

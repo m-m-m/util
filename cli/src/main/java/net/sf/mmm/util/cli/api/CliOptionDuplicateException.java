@@ -12,7 +12,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliOptionDuplicateException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 5934504531477162386L;
 
   /** @see #getCode() */

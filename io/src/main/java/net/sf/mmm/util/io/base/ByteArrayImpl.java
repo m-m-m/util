@@ -14,14 +14,11 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
  */
 public class ByteArrayImpl extends AbstractByteArray {
 
-  /** @see #getBytes() */
-  private final byte[] buffer;
+  private  final byte[] buffer;
 
-  /** @see #getMinimumIndex() */
-  private int minimumIndex;
+  private  int minimumIndex;
 
-  /** @see #getMaximumIndex() */
-  private int maximumIndex;
+  private  int maximumIndex;
 
   /**
    * The constructor.

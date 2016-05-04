@@ -15,11 +15,9 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
  */
 public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDescriptor {
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #getField() */
-  private Field field;
+  private  Field field;
 
   /**
    * The constructor.

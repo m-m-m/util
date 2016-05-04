@@ -54,20 +54,15 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    */
   private static final String PATH_SUFFIX_COLLECTION_LIST = "._collection2list";
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
-  /** @see #getCollectionReflectionUtil() */
-  private CollectionReflectionUtil collectionReflectionUtil;
+  private  CollectionReflectionUtil collectionReflectionUtil;
 
-  /** @see #getFunctionManager() */
-  private PojoPathFunctionManager functionManager;
+  private  PojoPathFunctionManager functionManager;
 
-  /** @see #getValueConverter() */
-  private ComposedValueConverter valueConverter;
+  private  ComposedValueConverter valueConverter;
 
-  /** @see #getPojoFactory() */
-  private PojoFactory pojoFactory;
+  private  PojoFactory pojoFactory;
 
   /**
    * The constructor.
@@ -1032,14 +1027,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     /** The root path. */
     private CachingPojoPath rootPath;
 
-    /** @see #getMode() */
-    private final PojoPathMode mode;
+    private  final PojoPathMode mode;
 
-    /** @see #getPojoPath() */
-    private final String pojoPath;
+    private  final String pojoPath;
 
-    /** @see #setCachingDisabled() */
-    private boolean cachingDisabled;
+    private  boolean cachingDisabled;
 
     /**
      * The constructor for no caching.
@@ -1185,17 +1177,13 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    */
   protected static class CachingPojoPath extends BasicPojoPath {
 
-    /** @see #getParent() */
-    private CachingPojoPath parent;
+    private  CachingPojoPath parent;
 
-    /** @see #getPojoType() */
-    private GenericType<?> pojoType;
+    private  GenericType<?> pojoType;
 
-    /** @see #getPojoClass() */
-    private Class<?> pojoClass;
+    private  Class<?> pojoClass;
 
-    /** @see #getPojo() */
-    private Object pojo;
+    private  Object pojo;
 
     /**
      * The constructor.

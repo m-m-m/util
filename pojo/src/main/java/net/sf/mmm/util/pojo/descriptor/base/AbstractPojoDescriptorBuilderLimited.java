@@ -25,11 +25,9 @@ import com.google.gwt.core.shared.GWT;
 public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLoggableComponent implements
     PojoDescriptorBuilder {
 
-  /** @see #getInstance() */
-  private static final PojoDescriptorBuilder INSTANCE = GWT.create(PojoDescriptorBuilder.class);
+  private  static final PojoDescriptorBuilder INSTANCE = GWT.create(PojoDescriptorBuilder.class);
 
-  /** @see #getDescriptor(Class) */
-  private final Map<Class<?>, AbstractPojoDescriptorImpl<?>> pojoMap;
+  private  final Map<Class<?>, AbstractPojoDescriptorImpl<?>> pojoMap;
 
   /**
    * The constructor.

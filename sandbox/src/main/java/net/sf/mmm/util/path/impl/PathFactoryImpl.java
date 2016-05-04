@@ -23,8 +23,7 @@ import net.sf.mmm.util.path.base.AbstractPathFactory;
 @Named(PathFactory.CDI_NAME)
 public class PathFactoryImpl extends AbstractPathFactory {
 
-  /** @see #getProviders() */
-  private List<PathProvider> providers;
+  private  List<PathProvider> providers;
 
   /**
    * The constructor.

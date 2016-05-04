@@ -25,17 +25,13 @@ import javax.persistence.TypedQuery;
  */
 public class TypedQueryMock<X> implements TypedQuery<X> {
 
-  /** @see #getQuery() */
-  private final String query;
+  private  final String query;
 
-  /** @see #getResultType() */
-  private final Class<X> resultType;
+  private  final Class<X> resultType;
 
-  /** @see #getParameterValue(int) */
-  private final List<Object> parameterList;
+  private  final List<Object> parameterList;
 
-  /** @see #getParameterValue(String) */
-  private final Map<String, Object> parameterMap;
+  private  final Map<String, Object> parameterMap;
 
   /**
    * The constructor.

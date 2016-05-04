@@ -29,8 +29,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /** The maximum month of the year. */
   protected static final int MAX_MONTH = 12;
 
-  /** @see #getInstance() */
-  private static Iso8601UtilLimitedImpl instance;
+  private  static Iso8601UtilLimitedImpl instance;
 
   /**
    * The constructor.

@@ -14,7 +14,6 @@ import net.sf.mmm.util.exception.api.NlsIllegalStateException;
  */
 public abstract class AbstractTransferObject implements TransferObject, Cloneable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -6842823766837505377L;
 
   /**

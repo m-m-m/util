@@ -39,11 +39,9 @@ public class HttpRequest extends HttpMessage {
   /** the M-SEARCH method */
   public static final String METHOD_M_SEARCH = "M-SEARCH";
 
-  /** @see #getMethod() */
-  private String method;
+  private  String method;
 
-  /** @see #getUri() */
-  private String uri;
+  private  String uri;
 
   /**
    * The constructor.

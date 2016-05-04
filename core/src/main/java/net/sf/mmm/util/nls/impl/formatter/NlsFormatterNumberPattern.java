@@ -17,8 +17,7 @@ import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
  */
 public final class NlsFormatterNumberPattern extends SimpleNlsFormatter<Object> {
 
-  /** @see #createFormatter(Locale) */
-  private final String pattern;
+  private  final String pattern;
 
   /**
    * The constructor.

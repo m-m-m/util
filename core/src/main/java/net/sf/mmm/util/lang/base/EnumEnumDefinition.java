@@ -31,26 +31,19 @@ import net.sf.mmm.util.lang.api.StringUtil;
  */
 public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends AbstractEnumDefinition<TYPE, CATEGORY> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5796877491769409263L;
 
-  /** @see #getValue() */
-  private String value;
+  private  String value;
 
-  /** @see #toString() */
-  private String title;
+  private  String title;
 
-  /** @see #getCategory() */
-  private EnumDefinition<CATEGORY, ?> category;
+  private  EnumDefinition<CATEGORY, ?> category;
 
-  /** @see #getEnumType() */
-  private Class<TYPE> enumType;
+  private  Class<TYPE> enumType;
 
-  /** @see #getEnumValues() */
-  private List<TYPE> enumValues;
+  private  List<TYPE> enumValues;
 
-  /** @see EnumDefaultFormatter */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
   /**
    * The constructor. A potential {@link #getCategory() category} is automatically detected.

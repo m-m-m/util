@@ -30,20 +30,15 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  */
 public class GenericSerializableException extends RuntimeException implements NlsThrowable, NlsMessage {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -8387886697693002740L;
 
-  /** @see #getOriginalExceptionName() */
-  private String originalExceptionName;
+  private  String originalExceptionName;
 
-  /** @see #getCode() */
-  private String code;
+  private  String code;
 
-  /** @see #isTechnical() */
-  private boolean technical;
+  private  boolean technical;
 
-  /** @see #getUuid() */
-  private UUID uuid;
+  private  UUID uuid;
 
   /**
    * The constructor for de-serialization in GWT.

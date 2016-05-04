@@ -24,16 +24,13 @@ import net.sf.mmm.util.xml.base.jaxb.XmlAdapterPattern;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RegexStringTransformer implements Transformer<String> {
 
-  /** @see #getPattern() */
   @XmlAttribute(name = "pattern", required = true)
   @XmlJavaTypeAdapter(value = XmlAdapterPattern.class)
   private Pattern pattern;
 
-  /** @see #getReplacement() */
   @XmlAttribute(name = "replacement")
   private String replacement;
 
-  /** @see #isReplaceAll() */
   @XmlAttribute(name = "replace-all")
   private boolean replaceAll;
 

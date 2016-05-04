@@ -15,11 +15,9 @@ import net.sf.mmm.util.filter.api.Filter;
  */
 public final class ConstantFilter<V> implements Filter<V> {
 
-  /** @see #getInstance(boolean) */
   @SuppressWarnings("rawtypes")
   private static final ConstantFilter ACCEPT_ALL_FILTER = new ConstantFilter<>();
 
-  /** @see #getInstance(boolean) */
   @SuppressWarnings("rawtypes")
   private static final ConstantFilter REJECT_ALL_FILTER = new ConstantFilter<>();
 

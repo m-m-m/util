@@ -15,8 +15,7 @@ import java.util.Set;
  */
 public class GenericResourceBundle extends ResourceBundle {
 
-  /** @see #handleGetObject(String) */
-  private final Hashtable<String, String> bundle;
+  private  final Hashtable<String, String> bundle;
 
   /**
    * The constructor.

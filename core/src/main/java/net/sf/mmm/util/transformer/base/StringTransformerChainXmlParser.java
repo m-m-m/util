@@ -81,8 +81,7 @@ public class StringTransformerChainXmlParser {
    */
   public static final String XML_ATR_RULE_STOPONMATCH = "stop-on-match";
 
-  /** @see #StringTransformerChainXmlParser(DomUtil) */
-  private final DomUtil domUtil;
+  private  final DomUtil domUtil;
 
   /** @see #StringTransformerChainXmlParser(DomUtil, PatternCompiler) */
   private PatternCompiler patternCompiler;

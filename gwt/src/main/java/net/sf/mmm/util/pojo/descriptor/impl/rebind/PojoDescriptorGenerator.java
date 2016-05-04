@@ -194,14 +194,11 @@ public class PojoDescriptorGenerator extends AbstractPojoDescriptorGenerator {
     /** @see #PojoDescriptorGenerator.StatefulPropertyGenerator(SourceWriter, JClassType) */
     private final PojoDescriptor<?> superDescriptor;
 
-    /** @see #generateSuperDescriptorBlockIfNotAlreadyDone() */
-    private boolean superDescriptorBlockGenerated;
+    private  boolean superDescriptorBlockGenerated;
 
-    /** @see #generateSuperPropertyDescriptorBlockIfNotAlreadyDone(PojoPropertyDescriptor) */
-    private boolean superPropertyVariableDeclated;
+    private  boolean superPropertyVariableDeclated;
 
-    /** @see #generateSuperPropertyDescriptorBlockIfNotAlreadyDone(PojoPropertyDescriptor) */
-    private boolean superPropertyDescriptorBlockGenerated;
+    private  boolean superPropertyDescriptorBlockGenerated;
 
     /**
      * The constructor.

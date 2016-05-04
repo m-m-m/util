@@ -13,7 +13,6 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  */
 public class NumberConversionException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -7112183497163125178L;
 
   /** @see #getCode() */

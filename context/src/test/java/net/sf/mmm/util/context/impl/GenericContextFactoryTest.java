@@ -176,14 +176,11 @@ public class GenericContextFactoryTest {
     /** Name of variable to indicate stop. */
     private static final String DONE = "done";
 
-    /** @see #run() */
-    private final GenericContext context;
+    private  final GenericContext context;
 
-    /** @see #run() */
-    private final Logger logger;
+    private  final Logger logger;
 
-    /** @see #run() */
-    private final String name;
+    private  final String name;
 
     /**
      * The constructor.

@@ -14,7 +14,6 @@ import net.sf.mmm.util.io.NlsBundleUtilIoRoot;
  */
 public class StreamClosedException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 8196684815578319363L;
 
   /** @see #getCode() */

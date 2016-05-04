@@ -16,14 +16,11 @@ import net.sf.mmm.util.reflect.api.GenericType;
  */
 public abstract class AbstractPojoPropertyAccessorMethodLimited extends AbstractPojoPropertyAccessor {
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #getPropertyType() */
-  private final GenericType<?> propertyType;
+  private  final GenericType<?> propertyType;
 
-  /** @see #getDeclaringClass() */
-  private final Class<?> declaringClass;
+  private  final Class<?> declaringClass;
 
   /**
    * The constructor.

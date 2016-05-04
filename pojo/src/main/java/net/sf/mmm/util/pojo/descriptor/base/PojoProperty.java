@@ -15,14 +15,11 @@ import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
  */
 public class PojoProperty {
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #getIndex() */
-  private final Integer index;
+  private  final Integer index;
 
-  /** @see #getKey() */
-  private final String key;
+  private  final String key;
 
   /**
    * The constructor.

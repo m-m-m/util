@@ -31,11 +31,9 @@ import net.sf.mmm.util.nls.base.NlsResourceBundleProvider;
 public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplateResolver implements
     NlsResourceBundleProvider {
 
-  /** @see #getResourceBundleFinder() */
-  private NlsResourceBundleLocator resourceBundleFinder;
+  private  NlsResourceBundleLocator resourceBundleFinder;
 
-  /** @see #resolveTemplate(String) */
-  private NlsReversedResourceBundle[] nlsBundles;
+  private  NlsReversedResourceBundle[] nlsBundles;
 
   /**
    * The constructor.

@@ -18,11 +18,9 @@ import net.sf.mmm.util.lang.api.EnumDefinition;
  */
 public abstract class AbstractSimpleEnumDefinition<TYPE> extends AbstractEnumDefinition<TYPE, Void> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6132710595390153755L;
 
-  /** @see #getEnumValues() */
-  private List<TYPE> enumValues;
+  private  List<TYPE> enumValues;
 
   /**
    * The constructor.

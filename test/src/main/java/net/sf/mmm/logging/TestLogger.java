@@ -16,11 +16,9 @@ import org.slf4j.helpers.MarkerIgnoringBase;
  */
 public class TestLogger extends MarkerIgnoringBase {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1819143702149344952L;
 
-  /** @see #getEventList() */
-  private final List<LogEvent> eventList;
+  private  final List<LogEvent> eventList;
 
   /**
    * The constructor.
@@ -245,8 +243,7 @@ public class TestLogger extends MarkerIgnoringBase {
    */
   public static class LogEvent implements Serializable {
 
-    /** UID for serialization. */
-    private static final long serialVersionUID = 6499934887162891533L;
+      private static final long serialVersionUID = 6499934887162891533L;
 
     /** The {@link LogLevel}. */
     private final LogLevel level;

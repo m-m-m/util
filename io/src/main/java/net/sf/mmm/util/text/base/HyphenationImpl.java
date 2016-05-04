@@ -15,14 +15,11 @@ import net.sf.mmm.util.text.api.Hyphenation;
  */
 public class HyphenationImpl implements Hyphenation {
 
-  /** @see #getWord() */
-  private final String word;
+  private  final String word;
 
-  /** @see #getHyphenation(int) */
-  private final int[] hyphenationPoints;
+  private  final int[] hyphenationPoints;
 
-  /** @see #getHyphen() */
-  private final char hyphen;
+  private  final char hyphen;
 
   /**
    * The constructor.

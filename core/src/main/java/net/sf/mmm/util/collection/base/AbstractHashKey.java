@@ -19,14 +19,11 @@ import net.sf.mmm.util.lang.api.HashCodeFunction;
  */
 public abstract class AbstractHashKey<T> implements Serializable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2858598306180975505L;
 
-  /** @see #getDelegate() */
-  private T delegate;
+  private  T delegate;
 
-  /** @see #hashCode() */
-  private int hashCode;
+  private  int hashCode;
 
   /**
    * The constructor for de-serialization in GWT.

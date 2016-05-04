@@ -37,8 +37,7 @@ public class NlsWriter extends AppendableWriter {
   /** The {@link NlsTemplateResolver}. */
   private final NlsTemplateResolver resolver;
 
-  /** @see #getArguments() */
-  private Map<String, Object> arguments;
+  private  Map<String, Object> arguments;
 
   /**
    * The constructor.

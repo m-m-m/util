@@ -75,8 +75,7 @@ public class FilterRuleChainXmlParser {
    */
   public static final String XML_ATR_RULE_PATTERN = "pattern";
 
-  /** @see #FilterRuleChainXmlParser(DomUtil) */
-  private final DomUtil domUtil;
+  private  final DomUtil domUtil;
 
   /**
    * The constructor.

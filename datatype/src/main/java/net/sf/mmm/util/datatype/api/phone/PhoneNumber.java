@@ -20,30 +20,22 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
  */
 public class PhoneNumber extends AbstractSimpleDatatypeBase<String> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -6395551467951327196L;
 
-  /** @see #PhoneNumber(String) */
-  private static final Pattern PATTERN_PHONENUMBER = Pattern
+  private  static final Pattern PATTERN_PHONENUMBER = Pattern
       .compile("((([+]|00|011)([1-9][0-9]{1,3}))[/ -])?([(][01][)])?([0-9]{1,6})[/ -]([0-9/ -]{1,11})([-]([0-9]{1,8}))?");
 
-  /** @see #PhoneNumber(String) */
-  private static final Pattern PATTERN_PHONENUMBER_FREEFORM = Pattern.compile("[+]?[0-9*#~]+[0-9*#/ -]*[0-9*#]+");
+  private  static final Pattern PATTERN_PHONENUMBER_FREEFORM = Pattern.compile("[+]?[0-9*#~]+[0-9*#/ -]*[0-9*#]+");
 
-  /** @see #getCountryCode() */
-  private PhoneCountryCode countryCode;
+  private  PhoneCountryCode countryCode;
 
-  /** @see #getAreaCode() */
-  private AreaCode areaCode;
+  private  AreaCode areaCode;
 
-  /** @see #getLocalNumber() */
-  private String localNumber;
+  private  String localNumber;
 
-  /** @see #getExtension() */
-  private String extension;
+  private  String extension;
 
-  /** @see #getValue() */
-  private String phoneNumber;
+  private  String phoneNumber;
 
   /**
    * The constructor for de-serialization in GWT.

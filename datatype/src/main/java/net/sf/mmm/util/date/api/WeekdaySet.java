@@ -18,7 +18,6 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2431073569164463800L;
 
   /**
@@ -35,8 +34,7 @@ public class WeekdaySet extends AbstractSimpleDatatype<Integer> {
    */
   public static final WeekdaySet WORKDAYS = new WeekdaySet(Integer.valueOf(31));
 
-  /** @see #getSet() */
-  private transient Set<Weekday> set;
+  private  transient Set<Weekday> set;
 
   /**
    * The constructor.

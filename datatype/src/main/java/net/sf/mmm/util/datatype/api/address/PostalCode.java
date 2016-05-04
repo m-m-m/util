@@ -23,7 +23,6 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
  */
 public class PostalCode extends AbstractSimpleDatatype<String> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -7499247409257142127L;
 
   /**

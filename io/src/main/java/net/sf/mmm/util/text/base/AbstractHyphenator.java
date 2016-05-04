@@ -16,11 +16,9 @@ import net.sf.mmm.util.text.api.Hyphenator;
  */
 public abstract class AbstractHyphenator extends AbstractLoggableComponent implements Hyphenator {
 
-  /** @see #getLocale() */
-  private final Locale locale;
+  private  final Locale locale;
 
-  /** @see #getHyphen() */
-  private final char hyphen;
+  private  final char hyphen;
 
   /**
    * The constructor.

@@ -76,8 +76,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    */
   protected static final String ELEMENT_ESCAPE_END = "]}>";
 
-  /** @see #getCollectionReflectionUtil() */
-  private CollectionReflectionUtil collectionReflectionUtil;
+  private  CollectionReflectionUtil collectionReflectionUtil;
 
   /**
    * The constructor.

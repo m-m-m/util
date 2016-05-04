@@ -23,8 +23,7 @@ import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
 @Named
 public class FileResourceProvider extends AbstractDataResourceProvider<FileResource> {
 
-  /** @see #createResource(ResourceUri) */
-  private FileUtil fileUtil;
+  private  FileUtil fileUtil;
 
   /**
    * The constructor.

@@ -27,8 +27,7 @@ public class FilteredIterator<E> extends AbstractIterator<E> {
   /** The actual iterator instance to adapt. */
   private final Iterator<? extends E> delegate;
 
-  /** @see #findNext() */
-  private final Filter<? super E> filter;
+  private  final Filter<? super E> filter;
 
   /**
    * The constructor.

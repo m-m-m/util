@@ -12,17 +12,13 @@ import org.slf4j.Logger;
  */
 public abstract class AbstractCliValueContainer implements CliValueContainer {
 
-  /** @see #getParameterContainer() */
-  private final CliParameterContainer parameterContainer;
+  private  final CliParameterContainer parameterContainer;
 
-  /** @see #getCliState() */
-  private final CliState cliState;
+  private  final CliState cliState;
 
-  /** @see #getDependencies() */
-  private final CliParserDependencies dependencies;
+  private  final CliParserDependencies dependencies;
 
-  /** @see #getLogger() */
-  private final Logger logger;
+  private  final Logger logger;
 
   /**
    * The constructor.

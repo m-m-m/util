@@ -20,11 +20,9 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  */
 public class CliArgumentContainer extends CliParameterContainer {
 
-  /** @see #getArgument() */
-  private final CliArgument argument;
+  private  final CliArgument argument;
 
-  /** @see #getState() */
-  private InitializationState state;
+  private  InitializationState state;
 
   /**
    * The constructor.

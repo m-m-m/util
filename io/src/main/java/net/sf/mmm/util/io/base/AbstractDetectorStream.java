@@ -16,14 +16,11 @@ import net.sf.mmm.util.io.api.DetectorStream;
  */
 public abstract class AbstractDetectorStream implements DetectorStream {
 
-  /** @see #getMetadata() */
-  private final Map<String, Object> mutableMetadata;
+  private  final Map<String, Object> mutableMetadata;
 
-  /** @see #getMetadata() */
-  private final Map<String, Object> metadata;
+  private  final Map<String, Object> metadata;
 
-  /** @see #isDone() */
-  private boolean done;
+  private  boolean done;
 
   /**
    * The constructor.

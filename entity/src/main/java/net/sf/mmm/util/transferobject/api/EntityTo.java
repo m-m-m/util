@@ -23,17 +23,13 @@ import net.sf.mmm.util.entity.api.PersistenceEntity;
  */
 public abstract class EntityTo<ID> extends DataTo implements MutableRevisionedEntity<ID> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -3039958170310580721L;
 
-  /** @see #getId() */
-  private ID id;
+  private  ID id;
 
-  /** @see #getModificationCounter() */
-  private int modificationCounter;
+  private  int modificationCounter;
 
-  /** @see #getRevision() */
-  private Number revision;
+  private  Number revision;
 
   /**
    * @see #getModificationCounter()

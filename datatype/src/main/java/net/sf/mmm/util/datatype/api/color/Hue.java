@@ -16,7 +16,6 @@ public class Hue extends AbstractDoubleSegment<Hue> {
   /** The factor for percent values (360 / 100). */
   private static final double PERCENT_FACTOR = 3.6;
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 3822877998535396427L;
 
   /**

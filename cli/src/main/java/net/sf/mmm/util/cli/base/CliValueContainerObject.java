@@ -16,8 +16,7 @@ import org.slf4j.Logger;
  */
 public class CliValueContainerObject extends AbstractCliValueContainer {
 
-  /** @see #getValue() */
-  private Object value;
+  private  Object value;
 
   /**
    * The constructor.

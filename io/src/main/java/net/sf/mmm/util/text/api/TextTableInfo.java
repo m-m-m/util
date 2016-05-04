@@ -23,11 +23,9 @@ public class TextTableInfo {
    */
   public static final int DEFAULT_WIDTH = 80;
 
-  /** @see #getLineSeparator() */
-  private String lineSeparator;
+  private  String lineSeparator;
 
-  /** @see #getWidth() */
-  private int width;
+  private  int width;
 
   /**
    * The constructor.

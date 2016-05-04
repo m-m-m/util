@@ -51,17 +51,13 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
 @Named(StreamUtil.CDI_NAME)
 public class StreamUtilImpl extends AbstractLoggableComponent implements StreamUtil {
 
-  /** @see #getInstance() */
-  private static StreamUtil instance;
+  private  static StreamUtil instance;
 
-  /** @see #getExecutor() */
-  private Executor executor;
+  private  Executor executor;
 
-  /** @see #getByteArrayPool() */
-  private Pool<byte[]> byteArrayPool;
+  private  Pool<byte[]> byteArrayPool;
 
-  /** @see #getCharArrayPool() */
-  private Pool<char[]> charArrayPool;
+  private  Pool<char[]> charArrayPool;
 
   /**
    * The constructor.
@@ -423,11 +419,9 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
    */
   protected abstract static class AbstractAsyncTransferrer implements Callable<Long>, Stoppable {
 
-    /** @see #stop() */
-    private volatile boolean stopped;
+    private  volatile boolean stopped;
 
-    /** @see #isCompleted() */
-    private volatile boolean completed;
+    private  volatile boolean completed;
 
     @Override
     public void stop() {

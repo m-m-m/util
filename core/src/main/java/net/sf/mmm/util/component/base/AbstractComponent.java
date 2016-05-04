@@ -43,8 +43,7 @@ import javax.annotation.PostConstruct;
  */
 public abstract class AbstractComponent {
 
-  /** @see #getInitializationState() */
-  private final InitializationState initializationState;
+  private  final InitializationState initializationState;
 
   /**
    * The constructor.

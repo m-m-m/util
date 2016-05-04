@@ -20,8 +20,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  */
 public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoPropertyAccessorBase {
 
-  /** @see #getField() */
-  private final Field field;
+  private  final Field field;
 
   /**
    * The constructor.

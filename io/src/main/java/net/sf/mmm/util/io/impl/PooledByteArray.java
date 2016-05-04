@@ -22,8 +22,7 @@ public class PooledByteArray extends ByteArrayImpl {
   /** The number of {@link #createSubArray(int, int) children} created. */
   private int childCount;
 
-  /** @see #release() */
-  private boolean released;
+  private  boolean released;
 
   /**
    * The constructor.

@@ -64,14 +64,11 @@ public enum DevelopmentPhase implements SimpleDatatype<String> {
    */
   UPDATE("update", "u", "SR", "service-release", "SP", "service-pack");
 
-  /** @see #toString() */
-  private final String stringRepresentation;
+  private  final String stringRepresentation;
 
-  /** @see #getValue() */
-  private final String value;
+  private  final String value;
 
-  /** @see #getAlternatives() */
-  private final String[] alternatives;
+  private  final String[] alternatives;
 
   /**
    * The constructor.

@@ -37,14 +37,11 @@ public enum Weekday implements SimpleDatatype<String> {
   /** The according weekday. */
   SUNDAY("Su", "Sunday", Calendar.SUNDAY);
 
-  /** @see #getValue() */
-  private final String value;
+  private  final String value;
 
-  /** @see #toString() */
-  private final String title;
+  private  final String title;
 
-  /** @see #getCalendarId() */
-  private final int calendarId;
+  private  final int calendarId;
 
   /**
    * The constructor.

@@ -29,11 +29,9 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
   /** The package {@code java.lang}. */
   private static final Package PACKAGE_JAVA_LANG = Package.class.getPackage();
 
-  /** @see #getStyle() */
-  private final String style;
+  private  final String style;
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -117,8 +115,7 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
    */
   private class ClassFormatter implements Visitor<Class<?>> {
 
-    /** @see #visit(Class) */
-    private final Appendable buffer;
+    private  final Appendable buffer;
 
     /**
      * The constructor.

@@ -16,7 +16,6 @@ package net.sf.mmm.util.datatype.api.color;
  */
 public class Alpha extends Factor<Alpha> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 323656018661251252L;
 
   /** The maximum {@link Alpha} value for full opaque (no transparency). */

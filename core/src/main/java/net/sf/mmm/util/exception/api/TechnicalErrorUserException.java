@@ -17,7 +17,6 @@ public class TechnicalErrorUserException extends NlsRuntimeException {
   /** @see #getCode() */
   public static final String CODE = "TechnicalError";
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /**

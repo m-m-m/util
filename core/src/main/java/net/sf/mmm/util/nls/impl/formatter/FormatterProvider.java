@@ -233,8 +233,7 @@ public final class FormatterProvider {
    */
   private static class FormatFormatter extends AbstractFormatter<Object> {
 
-    /** @see #format(Object) */
-    private final Format format;
+    private  final Format format;
 
     /**
      * The constructor.

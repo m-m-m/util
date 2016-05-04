@@ -13,7 +13,6 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  */
 public class ResourceMissingException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -3065138916833672449L;
 
   /** @see #getCode() */

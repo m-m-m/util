@@ -19,8 +19,7 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  */
 public class CliOptionContainer extends CliParameterContainer {
 
-  /** @see #getOption() */
-  private final CliOption option;
+  private  final CliOption option;
 
   /**
    * The constructor.

@@ -42,8 +42,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 @Named(LineWrapper.CDI_NAME)
 public class DefaultLineWrapper extends AbstractLineWrapper {
 
-  /** @see #getHyphenatorBuilder() */
-  private HyphenatorBuilder hyphenatorBuilder;
+  private  HyphenatorBuilder hyphenatorBuilder;
 
   /**
    * The constructor.
@@ -587,23 +586,17 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    */
   protected static class TextSegment {
 
-    /** @see #getText() */
-    private final String text;
+    private  final String text;
 
-    /** @see #getHyphenatedWord() */
-    private final Hyphenator hyphenator;
+    private  final Hyphenator hyphenator;
 
-    /** @see #getStartIndex() */
-    private int startIndex;
+    private  int startIndex;
 
-    /** @see #getEndIndex() */
-    private int endIndex;
+    private  int endIndex;
 
-    /** @see #getType() */
-    private TextSegmentType type;
+    private  TextSegmentType type;
 
-    /** @see #getHyphenatedWord() */
-    private Hyphenation hyphenatedWord;
+    private  Hyphenation hyphenatedWord;
 
     /**
      * The constructor.
@@ -719,32 +712,23 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /** The {@link Hyphenator} to use. */
     private final Hyphenator hyphenator;
 
-    /** @see #next(DefaultLineWrapper.TextSegment) */
-    private final BreakIterator breakIterator;
+    private  final BreakIterator breakIterator;
 
-    /** @see #next(DefaultLineWrapper.TextSegment) */
-    private int breakIteratorIndex;
+    private  int breakIteratorIndex;
 
-    /** @see #next(DefaultLineWrapper.TextSegment) */
-    private int segmentIndex;
+    private  int segmentIndex;
 
-    /** @see #getTextIndex() */
-    private int textIndex;
+    private  int textIndex;
 
-    /** @see #getWidth() */
-    private int width;
+    private  int width;
 
-    /** @see #isIndent() */
-    private boolean indent;
+    private  boolean indent;
 
-    /** @see #getCurrentSegment() */
-    private TextSegment currentSegment;
+    private  TextSegment currentSegment;
 
-    /** @see #getNextSegment() */
-    private TextSegment nextSegment;
+    private  TextSegment nextSegment;
 
-    /** @see #getSubsequentNewlineCount() */
-    private int subsequentNewlineCount;
+    private  int subsequentNewlineCount;
 
     /**
      * The constructor.
@@ -993,14 +977,11 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    */
   protected static class CellBuffer {
 
-    /** @see #append(CharSequence) */
-    private final StringBuilder buffer;
+    private  final StringBuilder buffer;
 
-    /** @see #reset(int) */
-    private int maxLength;
+    private  int maxLength;
 
-    /** @see #getRest() */
-    private int rest;
+    private  int rest;
 
     /**
      * The constructor.

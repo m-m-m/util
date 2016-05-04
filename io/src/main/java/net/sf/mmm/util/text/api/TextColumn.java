@@ -13,11 +13,9 @@ package net.sf.mmm.util.text.api;
  */
 public class TextColumn {
 
-  /** @see #getText() */
-  private final String text;
+  private  final String text;
 
-  /** @see #getColumnInfo() */
-  private final TextColumnInfo columnInfo;
+  private  final TextColumnInfo columnInfo;
 
   /**
    * The constructor.

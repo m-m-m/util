@@ -35,18 +35,13 @@ public class SegmentContainerRepeat extends SegmentContainerSequence {
   @SuppressWarnings("hiding")
   public static final String XML_TAG = "repeat";
 
-  /** The XML attribute for {@link #minimumOccurrence}. */
   private static final String XML_ATTRIBUTE_MINIMUM_OCCURRENCE = "min";
 
-  /** The XML attribute for {@link #maximumOccurrence}. */
   private static final String XML_ATTRIBUTE_MAXIMUM_OCCURRENCE = "max";
 
-  /** @see #getMinimumOccurrence() */
   @XmlAttribute(name = "XML_ATTRIBUTE_MINIMUM_OCCURRENCE")
   private int minimumOccurrence;
 
-  /** @see #getMaximumOccurrence() */
-  @XmlAttribute(name = XML_ATTRIBUTE_MAXIMUM_OCCURRENCE)
   private int maximumOccurrence;
 
   /**

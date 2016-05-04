@@ -16,11 +16,9 @@ package net.sf.mmm.util.pojo.descriptor.api.accessor;
  */
 public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAccessor> {
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #isReading() */
-  private final boolean reading;
+  private  final boolean reading;
 
   /**
    * The constructor.

@@ -24,11 +24,9 @@ public enum Orientation implements SimpleDatatype<String> {
    */
   VERTICAL("|", NlsBundleUtilCoreRoot.INF_VERTICAL);
 
-  /** @see #getValue() */
-  private final String value;
+  private  final String value;
 
-  /** @see #toString() */
-  private final String title;
+  private  final String title;
 
   /**
    * The constructor.

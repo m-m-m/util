@@ -27,14 +27,12 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  */
 public abstract class NlsRuntimeException extends RuntimeException implements NlsThrowable, Cloneable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /** the internationalized message */
   private NlsMessage nlsMessage;
 
-  /** @see #getUuid() */
-  private UUID uuid;
+  private  UUID uuid;
 
   /**
    * The constructor for de-serialization in GWT.

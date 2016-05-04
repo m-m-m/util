@@ -23,8 +23,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 @Singleton
 public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
 
-  /** @see #setNlsDependencies(NlsDependencies) */
-  private NlsDependencies nlsDependencies;
+  private  NlsDependencies nlsDependencies;
 
   /**
    * The constructor.

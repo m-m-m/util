@@ -17,7 +17,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class ObjectNotFoundException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1008016155549441562L;
 
   /** @see #getCode() */

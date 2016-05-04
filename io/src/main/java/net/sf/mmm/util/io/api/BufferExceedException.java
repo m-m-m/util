@@ -14,7 +14,6 @@ import net.sf.mmm.util.io.NlsBundleUtilIoRoot;
  */
 public class BufferExceedException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -5375096243963460300L;
 
   /** @see #getCode() */

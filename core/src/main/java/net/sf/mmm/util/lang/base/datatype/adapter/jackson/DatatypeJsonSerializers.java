@@ -21,14 +21,11 @@ import com.fasterxml.jackson.databind.module.SimpleSerializers;
  */
 public class DatatypeJsonSerializers extends SimpleSerializers {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #setDatatypeDescriptorManager(DatatypeDescriptorManager) */
-  private DatatypeDescriptorManager datatypeDescriptorManager;
+  private  DatatypeDescriptorManager datatypeDescriptorManager;
 
-  /** @see #setDatatypeDetector(DatatypeDetector) */
-  private DatatypeDetector datatypeDetector;
+  private  DatatypeDetector datatypeDetector;
 
   /** @see #findSerializer(SerializationConfig, JavaType, BeanDescription) */
   private DatatypeJsonSerializer<?> datatypeJsonSerializer;

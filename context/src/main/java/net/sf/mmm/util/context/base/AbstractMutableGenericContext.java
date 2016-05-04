@@ -29,7 +29,6 @@ public abstract class AbstractMutableGenericContext implements MutableGenericCon
   /** the parent context */
   private final GenericContext immutableContext;
 
-  /** @see #getMapFactory() */
   @SuppressWarnings("rawtypes")
   private final MapFactory<? extends Map> mapFactory;
 

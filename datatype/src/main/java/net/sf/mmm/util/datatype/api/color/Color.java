@@ -33,7 +33,6 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public class Color extends AbstractSimpleDatatype<Integer> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 4307511006443832245L;
 
   /** The {@link Integer#parseInt(String, int) radix} for hexadecimal notation. */
@@ -63,8 +62,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   /** The separator for the the segments (e.g. in rgb(r,g,b) or rgba(r,g,b,a) syntax). */
   private static final char SEPARATOR = ',';
 
-  /** @see #Color(Integer) */
-  private static final Integer MIN_VALUE = Integer.valueOf(0);
+  private  static final Integer MIN_VALUE = Integer.valueOf(0);
 
   /** The length of an RGB value in hexadecimal notation (#RRGGBB). */
   private static final int LENGTH_HEX_RGB = 7;

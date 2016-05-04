@@ -13,11 +13,9 @@ import java.io.Serializable;
  */
 public final class HashCodeFunctionDefault extends AbstractHashCodeFunction<Object> implements Serializable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 142095355155291498L;
 
-  /** @see #getInstance() */
-  private static final HashCodeFunctionDefault INSTANCE = new HashCodeFunctionDefault();
+  private  static final HashCodeFunctionDefault INSTANCE = new HashCodeFunctionDefault();
 
   /**
    * The constructor.

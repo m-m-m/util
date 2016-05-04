@@ -29,8 +29,7 @@ public enum BooleanEnum implements SimpleDatatype<Boolean> {
    */
   NULL(null);
 
-  /** @see #getValue() */
-  private final Boolean value;
+  private  final Boolean value;
 
   /**
    * The constructor.

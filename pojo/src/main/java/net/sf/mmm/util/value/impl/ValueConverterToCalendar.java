@@ -24,8 +24,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @Named
 public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Object, Calendar> {
 
-  /** @see #getIso8601Util() */
-  private Iso8601Util iso8601Util;
+  private  Iso8601Util iso8601Util;
 
   /**
    * The constructor.

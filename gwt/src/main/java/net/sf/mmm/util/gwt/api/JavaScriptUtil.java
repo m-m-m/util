@@ -24,11 +24,9 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
  */
 public class JavaScriptUtil {
 
-  /** @see #getInstance() */
-  private static final JavaScriptUtil INSTANCE = GWT.create(JavaScriptUtil.class);
+  private  static final JavaScriptUtil INSTANCE = GWT.create(JavaScriptUtil.class);
 
-  /** @see #getFonts() */
-  private String[] fonts;
+  private  String[] fonts;
 
   /**
    * The constructor.

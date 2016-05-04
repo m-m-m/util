@@ -14,7 +14,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  */
 public abstract class ValueException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -8445209659250789499L;
 
   /**

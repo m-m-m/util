@@ -22,8 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class UserSessionProviderDefaultImpl extends AbstractUserSessionProvider implements MutableUserSession {
 
-  /** @see #getUser() */
-  private Principal user;
+  private  Principal user;
 
   /**
    * The constructor.

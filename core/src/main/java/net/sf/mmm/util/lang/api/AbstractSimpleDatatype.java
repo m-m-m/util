@@ -13,11 +13,9 @@ import java.util.Objects;
  */
 public abstract class AbstractSimpleDatatype<V> extends AbstractSimpleDatatypeBase<V> {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -7672725330000849564L;
 
-  /** @see #getValue() */
-  private V value;
+  private  V value;
 
   /**
    * The constructor for de-serialization in GWT.

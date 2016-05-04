@@ -20,11 +20,9 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 @Singleton
 public class PojoDescriptorDependenciesImpl extends AbstractComponent implements PojoDescriptorDependencies {
 
-  /** @see #getReflectionUtil() */
-  private ReflectionUtil reflectionUtil;
+  private  ReflectionUtil reflectionUtil;
 
-  /** @see #getCollectionReflectionUtil() */
-  private CollectionReflectionUtil collectionReflectionUtil;
+  private  CollectionReflectionUtil collectionReflectionUtil;
 
   /**
    * The constructor.

@@ -16,8 +16,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
 public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggableComponent implements
     PojoDescriptorBuilderFactory {
 
-  /** @see #getInstance() */
-  private static AbstractPojoDescriptorBuilderFactory instance;
+  private  static AbstractPojoDescriptorBuilderFactory instance;
 
   /**
    * The constructor.

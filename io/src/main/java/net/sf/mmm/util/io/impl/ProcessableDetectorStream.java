@@ -24,8 +24,7 @@ import net.sf.mmm.util.pool.api.ByteArrayPool;
  */
 public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
 
-  /** @see #getByteArrayPool() */
-  private final ByteArrayPool byteArrayPool;
+  private  final ByteArrayPool byteArrayPool;
 
   /** The first buffer of the chain. */
   private DetectorStreamBufferImpl firstBuffer;

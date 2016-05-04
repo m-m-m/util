@@ -24,8 +24,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class Segment {
 
-  /** @see #getParent() */
-  private SegmentContainer parent;
+  private  SegmentContainer parent;
 
   /**
    * The constructor.

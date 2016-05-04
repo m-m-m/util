@@ -26,11 +26,9 @@ public enum VerticalAlignment implements SimpleDatatype<String> {
    */
   CENTER("-", NlsBundleUtilCoreRoot.INF_CENTER);
 
-  /** @see #getValue() */
-  private final String value;
+  private  final String value;
 
-  /** @see #toString() */
-  private final String title;
+  private  final String title;
 
   /**
    * The constructor.

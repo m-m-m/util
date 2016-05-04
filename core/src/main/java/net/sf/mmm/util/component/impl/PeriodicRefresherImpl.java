@@ -37,23 +37,18 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   /** The minimum value allowed for {@link #refreshDelayInSeconds}. */
   private static final Integer MIN_DELAY = Integer.valueOf(1);
 
-  /** @see #getExecutor() */
-  private Executor executor;
+  private  Executor executor;
 
-  /** @see #getRefreshDelaySeconds() */
-  private int refreshDelayInSeconds;
+  private  int refreshDelayInSeconds;
 
-  /** @see #startup() */
-  private boolean active;
+  private  boolean active;
 
-  /** @see #close() */
-  private volatile boolean shutdown;
+  private  volatile boolean shutdown;
 
   /** The {@link Set} of {@link Refreshable}s. */
   private Set<Refreshable> refreshableSet;
 
-  /** @see #close() */
-  private Thread refreshThread;
+  private  Thread refreshThread;
 
   /**
    * The constructor.

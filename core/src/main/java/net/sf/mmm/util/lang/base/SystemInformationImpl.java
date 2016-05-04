@@ -15,20 +15,15 @@ import net.sf.mmm.util.lang.api.SystemUtil;
  */
 public class SystemInformationImpl implements SystemInformation {
 
-  /** @see #getSystemName() */
-  private final String systemName;
+  private  final String systemName;
 
-  /** @see #getSystemVersion() */
-  private final String systemVersion;
+  private  final String systemVersion;
 
-  /** @see #getSystemArchitecture() */
-  private final String systemArchitecture;
+  private  final String systemArchitecture;
 
-  /** @see #getSystemType() */
-  private final String systemType;
+  private  final String systemType;
 
-  /** @see #isLimitedDevice() */
-  private final boolean limitedDevice;
+  private  final boolean limitedDevice;
 
   /**
    * The constructor.

@@ -16,7 +16,6 @@ import net.sf.mmm.util.reflect.NlsBundleUtilReflectRoot;
  */
 public class UnknownCollectionInterfaceException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1094581788015698338L;
 
   /** @see #getCode() */

@@ -20,8 +20,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  */
 public class PojoDescriptorBuilderFactoryImpl extends AbstractPojoDescriptorBuilderFactory {
 
-  /** @see #getDependencies() */
-  private ExtendedPojoDescriptorDependencies dependencies;
+  private  ExtendedPojoDescriptorDependencies dependencies;
 
   /**
    * The constructor.

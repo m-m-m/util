@@ -25,14 +25,11 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
   /** The comparison operator. */
   private final CompareOperator comparator;
 
-  /** @see #validateNotNull(Comparable) */
-  private final AttributeReadValue<V> valueSource;
+  private  final AttributeReadValue<V> valueSource;
 
-  /** @see #validateNotNull(Comparable) */
-  private final String source;
+  private  final String source;
 
-  /** @see #isDynamic() */
-  private final boolean dynamic;
+  private  final boolean dynamic;
 
   /**
    * The constructor.

@@ -14,8 +14,7 @@ import java.util.NoSuchElementException;
  */
 public class EmptyIterator implements Iterator<Object> {
 
-  /** @see #getInstance() */
-  private static final EmptyIterator INSTANCE = new EmptyIterator();
+  private  static final EmptyIterator INSTANCE = new EmptyIterator();
 
   /**
    * The constructor.

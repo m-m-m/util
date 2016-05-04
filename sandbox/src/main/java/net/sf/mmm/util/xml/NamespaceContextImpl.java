@@ -97,11 +97,9 @@ public class NamespaceContextImpl implements NamespaceContext {
    */
   protected static class PrefixIterator extends AbstractIterator<String> {
 
-    /** @see #next() */
-    private final Iterator<String> parentIterator;
+    private  final Iterator<String> parentIterator;
 
-    /** @see #next() */
-    private final String prefix;
+    private  final String prefix;
 
     /**
      * The constructor.

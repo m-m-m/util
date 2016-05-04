@@ -51,11 +51,9 @@ public enum Month implements SimpleDatatype<Integer> {
   /** The according month. */
   DECEMBER(12, "December");
 
-  /** @see #getValue() */
-  private final Integer value;
+  private  final Integer value;
 
-  /** @see #toString() */
-  private final String title;
+  private  final String title;
 
   /**
    * The constructor.

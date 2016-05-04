@@ -25,8 +25,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, Enum> {
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
   /**
    * The constructor.

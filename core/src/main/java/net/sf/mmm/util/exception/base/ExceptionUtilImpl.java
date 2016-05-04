@@ -26,14 +26,11 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  */
 public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements ExceptionUtil {
 
-  /** @see #getInstance() */
-  private static ExceptionUtil instance;
+  private  static ExceptionUtil instance;
 
-  /** @see #getEnvironmentDetector() */
-  private EnvironmentDetector environmentDetector;
+  private  EnvironmentDetector environmentDetector;
 
-  /** @see #isEnforceSerializableForClient() */
-  private boolean enforceSerializableForClient;
+  private  boolean enforceSerializableForClient;
 
   /**
    * The constructor.

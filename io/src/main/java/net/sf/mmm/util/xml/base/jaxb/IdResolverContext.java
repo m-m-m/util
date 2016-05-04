@@ -114,14 +114,11 @@ public class IdResolverContext {
    */
   protected class Resolver implements Callable<Object> {
 
-    /** @see #call() */
-    private final String id;
+    private  final String id;
 
-    /** @see #call() */
-    private final Class<?> type;
+    private  final Class<?> type;
 
-    /** @see #isResolved() */
-    private boolean resolved;
+    private  boolean resolved;
 
     /**
      * The constructor.

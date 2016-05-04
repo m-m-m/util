@@ -16,7 +16,6 @@ import net.sf.mmm.util.value.api.ValueException;
  */
 public class SimpleValueConverterIdentity<V> implements SimpleValueConverter<V, V> {
 
-  /** @see #getInstance() */
   @SuppressWarnings("rawtypes")
   private static final SimpleValueConverterIdentity INSTANCE = new SimpleValueConverterIdentity();
 

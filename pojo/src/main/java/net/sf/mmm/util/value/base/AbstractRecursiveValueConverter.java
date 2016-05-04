@@ -20,8 +20,7 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
  */
 public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends AbstractValueConverter<SOURCE, TARGET> {
 
-  /** @see #getComposedValueConverter() */
-  private ComposedValueConverter composedValueConverter;
+  private  ComposedValueConverter composedValueConverter;
 
   /**
    * The constructor.

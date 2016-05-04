@@ -12,7 +12,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliClassNoPropertyException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 6430569870631737026L;
 
   /** @see #getCode() */

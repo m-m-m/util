@@ -17,14 +17,11 @@ import java.util.ResourceBundle;
  */
 public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle {
 
-  /** @see #getName() */
-  private final String name;
+  private  final String name;
 
-  /** @see #getKey(String) */
-  private final Map<String, String> message2KeyMap;
+  private  final Map<String, String> message2KeyMap;
 
-  /** @see #getString(String) */
-  private final ResourceBundle resourceBundle;
+  private  final ResourceBundle resourceBundle;
 
   /**
    * The constructor.

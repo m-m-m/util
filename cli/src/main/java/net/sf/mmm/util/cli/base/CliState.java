@@ -53,23 +53,17 @@ import org.slf4j.Logger;
  */
 public class CliState extends CliClassContainer {
 
-  /** @see #getReflectionUtil() */
-  private final ReflectionUtil reflectionUtil;
+  private  final ReflectionUtil reflectionUtil;
 
-  /** @see #getAnnotationUtil() */
-  private final AnnotationUtil annotationUtil;
+  private  final AnnotationUtil annotationUtil;
 
-  /** @see #getOption(String) */
-  private final Map<String, CliOptionContainer> name2OptionMap;
+  private  final Map<String, CliOptionContainer> name2OptionMap;
 
-  /** @see #getOptions() */
-  private final List<CliOptionContainer> optionList;
+  private  final List<CliOptionContainer> optionList;
 
-  /** @see #getArguments() */
-  private final List<CliArgumentContainer> arguments;
+  private  final List<CliArgumentContainer> arguments;
 
-  /** @see #findPropertyAnnotations(PojoDescriptorBuilder) */
-  private final ValidatorBuilder validatorBuilder;
+  private  final ValidatorBuilder validatorBuilder;
 
   /**
    * The constructor.

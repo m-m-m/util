@@ -20,11 +20,9 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  */
 public class ComposedNlsMessage extends AbstractNlsMessage {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
-  /** @see #getArgument(int) */
-  private Object[] arguments;
+  private  Object[] arguments;
 
   /**
    * The constructor for de-serialization in GWT.

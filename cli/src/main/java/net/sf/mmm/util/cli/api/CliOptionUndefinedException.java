@@ -12,7 +12,6 @@ package net.sf.mmm.util.cli.api;
  */
 public class CliOptionUndefinedException extends CliException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 7069859410875864942L;
 
   /** @see #getCode() */

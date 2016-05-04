@@ -12,7 +12,6 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  */
 public class NlsNullPointerException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 5746393435577207765L;
 
   /** @see #getCode() */

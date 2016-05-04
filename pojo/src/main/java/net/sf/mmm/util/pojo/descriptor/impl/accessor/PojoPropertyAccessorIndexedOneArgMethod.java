@@ -24,8 +24,7 @@ import net.sf.mmm.util.reflect.api.InvocationFailedException;
 public class PojoPropertyAccessorIndexedOneArgMethod extends AbstractPojoPropertyAccessorMethod implements
     PojoPropertyAccessorIndexedOneArg {
 
-  /** @see #getMode() */
-  private final PojoPropertyAccessorIndexedOneArgMode mode;
+  private  final PojoPropertyAccessorIndexedOneArgMode mode;
 
   /**
    * {@code false} if index is first argument, {@code true} if second.

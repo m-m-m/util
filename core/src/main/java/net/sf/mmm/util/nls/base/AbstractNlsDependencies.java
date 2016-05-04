@@ -13,8 +13,7 @@ import net.sf.mmm.util.nls.impl.NlsDependenciesImpl;
  */
 public abstract class AbstractNlsDependencies extends AbstractLoggableComponent implements NlsDependencies {
 
-  /** @see #getInstance() */
-  private static AbstractNlsDependencies instance;
+  private  static AbstractNlsDependencies instance;
 
   /**
    * The constructor.

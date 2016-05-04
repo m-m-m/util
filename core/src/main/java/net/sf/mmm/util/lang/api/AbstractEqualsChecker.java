@@ -15,7 +15,6 @@ import java.io.Serializable;
  */
 public abstract class AbstractEqualsChecker<VALUE> implements EqualsChecker<VALUE>, Serializable {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = 1L;
 
   /**

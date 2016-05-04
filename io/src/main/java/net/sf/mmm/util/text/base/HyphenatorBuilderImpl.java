@@ -65,17 +65,13 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   /** The XML tag for a pattern ({@code p}). */
   private static final QName XML_TAG_PATTERN = new QName("p");
 
-  /** @see #getInstance() */
-  private static HyphenatorBuilder instance;
+  private  static HyphenatorBuilder instance;
 
-  /** @see #getStaxUtil() */
-  private StaxUtil staxUtil;
+  private  StaxUtil staxUtil;
 
-  /** @see #getStringUtil() */
-  private StringUtil stringUtil;
+  private  StringUtil stringUtil;
 
-  /** @see #getStringHasher() */
-  private StringHasher stringHasher;
+  private  StringHasher stringHasher;
 
   /**
    * The constructor.

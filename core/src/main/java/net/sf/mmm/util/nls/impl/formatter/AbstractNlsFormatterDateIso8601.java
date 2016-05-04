@@ -22,8 +22,7 @@ import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
  */
 public abstract class AbstractNlsFormatterDateIso8601 extends SimpleNlsFormatter<Object> {
 
-  /** @see #createFormatter(Locale) */
-  private Iso8601Util iso8601Util;
+  private  Iso8601Util iso8601Util;
 
   /**
    * The constructor.

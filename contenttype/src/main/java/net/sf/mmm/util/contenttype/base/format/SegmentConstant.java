@@ -36,15 +36,12 @@ public class SegmentConstant extends Segment {
   /** The constant bytes. */
   private byte[] bytes;
 
-  /** @see #getHex() */
   @XmlAttribute(name = XML_ATTRIBUTE_HEX, required = false)
   private String hex;
 
-  /** @see #getString() */
   @XmlAttribute(name = XML_ATTRIBUTE_STRING, required = false)
   private String string;
 
-  /** @see #getEncoding() */
   @XmlAttribute(name = XML_ATTRIBUTE_ENCODING, required = false)
   private String encoding;
 

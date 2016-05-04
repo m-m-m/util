@@ -13,20 +13,15 @@ import net.sf.mmm.util.transferobject.api.AbstractTransferObject;
  */
 public abstract class AbstractSearchCriteria extends AbstractTransferObject implements SearchCriteria {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -8080276978548478955L;
 
-  /** @see #getMaximumHitCount() */
-  private Integer maximumHitCount;
+  private  Integer maximumHitCount;
 
-  /** @see #getHitOffset() */
-  private int hitOffset;
+  private  int hitOffset;
 
-  /** @see #getSearchTimeout() */
-  private Long searchTimeout;
+  private  Long searchTimeout;
 
-  /** @see #isReadOnly() */
-  private boolean readOnly;
+  private  boolean readOnly;
 
   /**
    * The constructor.

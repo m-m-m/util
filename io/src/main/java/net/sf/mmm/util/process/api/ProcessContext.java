@@ -17,17 +17,13 @@ import net.sf.mmm.util.io.api.DevNullTarget;
  */
 public class ProcessContext {
 
-  /** @see #getOutStream() */
-  private OutputStream outStream;
+  private  OutputStream outStream;
 
-  /** @see #getErrStream() */
-  private OutputStream errStream;
+  private  OutputStream errStream;
 
-  /** @see #getInStream() */
-  private InputStream inStream;
+  private  InputStream inStream;
 
-  /** @see #isKeepStreamsOpen() */
-  private boolean keepStreamsOpen;
+  private  boolean keepStreamsOpen;
 
   /**
    * The constructor. All streams are initialized to act like {@code /dev/null}.

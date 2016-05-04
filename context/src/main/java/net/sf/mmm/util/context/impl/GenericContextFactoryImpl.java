@@ -26,8 +26,7 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 @Named(GenericContextFactory.CDI_NAME)
 public class GenericContextFactoryImpl extends AbstractGenericContextFactory {
 
-  /** @see #setComposedValueConverter(ComposedValueConverter) */
-  private ComposedValueConverter composedValueConverter;
+  private  ComposedValueConverter composedValueConverter;
 
   /**
    * The constructor.

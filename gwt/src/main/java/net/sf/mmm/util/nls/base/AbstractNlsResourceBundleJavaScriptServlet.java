@@ -25,7 +25,6 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
  */
 public abstract class AbstractNlsResourceBundleJavaScriptServlet extends AbstractLoggableHttpServlet {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -2997745885840819492L;
 
   /** The URL path under which the bundle can be loaded. */

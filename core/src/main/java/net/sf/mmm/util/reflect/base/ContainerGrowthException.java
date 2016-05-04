@@ -16,7 +16,6 @@ import net.sf.mmm.util.reflect.NlsBundleUtilReflectRoot;
  */
 public class ContainerGrowthException extends NlsRuntimeException {
 
-  /** UID for serialization. */
   private static final long serialVersionUID = -9175146459502826035L;
 
   /** @see #getCode() */
