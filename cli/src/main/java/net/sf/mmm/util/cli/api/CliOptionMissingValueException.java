@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliOptionMissingValueException} is thrown if an option requires a value that is missing (no proper
- * value is specified as commandline argument).
+ * A {@link CliOptionMissingValueException} is thrown if an option requires a value that is missing (no proper value is
+ * specified as commandline argument).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

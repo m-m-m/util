@@ -42,8 +42,8 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   }
 
   /**
-   * This method gets the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} used
-   * to lookup the bundle (typically a {@link java.util.ResourceBundle}).
+   * This method gets the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} used to lookup
+   * the bundle (typically a {@link java.util.ResourceBundle}).
    *
    * @return the bundleName is the base-name of the associated bundle.
    */
@@ -53,8 +53,8 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   }
 
   /**
-   * This method gets the {@link java.util.ResourceBundle#getString(String) key} of the string to lookup from
-   * the {@link #getName() bundle}. The key is a technical UID like ({@code ERR_VALUE_OUT_OF_RANGE}).
+   * This method gets the {@link java.util.ResourceBundle#getString(String) key} of the string to lookup from the
+   * {@link #getName() bundle}. The key is a technical UID like ({@code ERR_VALUE_OUT_OF_RANGE}).
    *
    * @return the bundleKey is the key used to lookup the string from the bundle.
    */

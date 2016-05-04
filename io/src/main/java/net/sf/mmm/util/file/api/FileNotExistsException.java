@@ -8,9 +8,9 @@ import net.sf.mmm.util.file.NlsBundleUtilFileRoot;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * A {@link FileNotExistsException} is thrown if a file or directory is expected but was NOT found. The
- * exception is both for the case, that the {@link File file} does NOT {@link File#exists() exist} at all as
- * well as the {@link FileType type} differs (e.g. if a file was expected but a directory has been found).
+ * A {@link FileNotExistsException} is thrown if a file or directory is expected but was NOT found. The exception is
+ * both for the case, that the {@link File file} does NOT {@link File#exists() exist} at all as well as the
+ * {@link FileType type} differs (e.g. if a file was expected but a directory has been found).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -44,8 +44,8 @@ public class FileNotExistsException extends RuntimeIoException {
    * The constructor.
    *
    * @param file is the name of the file that does NOT exist.
-   * @param directory - {@code true} if the exception is about a directory, {@code false} if the
-   *        exception is about a file.
+   * @param directory - {@code true} if the exception is about a directory, {@code false} if the exception is about a
+   *        file.
    */
   public FileNotExistsException(String file, boolean directory) {
 

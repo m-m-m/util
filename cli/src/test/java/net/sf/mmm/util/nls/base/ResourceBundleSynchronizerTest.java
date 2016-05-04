@@ -13,17 +13,17 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import org.junit.Test;
+
 import junit.framework.Assert;
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
 
-import org.junit.Test;
-
 /**
  * This is the test-case for {@link ResourceBundleSynchronizer}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -75,8 +75,8 @@ public class ResourceBundleSynchronizerTest {
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
     int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
-        ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
-        bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
+    ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
+    bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
     MyResourceBundle bundle = new MyResourceBundle();
     String resultFileBase = targetPath + "/" + bundleClass.getName().replace('.', '/');
@@ -96,8 +96,8 @@ public class ResourceBundleSynchronizerTest {
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
     int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
-        ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
-        bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
+    ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
+    bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
 
     ResourceBundle bundle = bundleHelper.toResourceBundle(bundleClass);

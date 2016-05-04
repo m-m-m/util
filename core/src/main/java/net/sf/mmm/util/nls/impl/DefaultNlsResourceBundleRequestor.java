@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 
 /**
  * This is the default implementation of {@link NlsResourceBundleRequestor}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -37,7 +37,7 @@ public class DefaultNlsResourceBundleRequestor implements NlsResourceBundleReque
 
   /**
    * This method verifies that the given {@code bundleNames} are available {@link ResourceBundle}s.
-   * 
+   *
    * @param bundleNames are the {@link ResourceBundle#getBundle(String) bundle names}.
    * @return {@code true}.
    */

@@ -15,11 +15,10 @@ import org.junit.Test;
 
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
-import net.sf.mmm.util.math.base.MathUtilImpl;
 
 /**
  * This is the test-case for {@link MathUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

@@ -10,23 +10,23 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of the {@link ParameterizedType} interface.
- * 
+ *
  * @see ReflectionUtilImpl#toType(String)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
 public class ParameterizedTypeImpl implements ParameterizedType {
 
-  private  final Class<?> rawType;
+  private final Class<?> rawType;
 
-  private  final Type ownerType;
+  private final Type ownerType;
 
-  private  final Type[] actualTypeArguments;
+  private final Type[] actualTypeArguments;
 
   /**
    * The constructor.
-   * 
+   *
    * @param rawType is the {@link #getRawType() raw type}.
    * @param typeArguments are the {@link #getActualTypeArguments()}.
    * @param ownerType is the {@link #getOwnerType() owner type} (may be {@code null}).

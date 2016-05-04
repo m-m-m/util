@@ -11,18 +11,17 @@ import net.sf.mmm.util.xml.path.api.XmlPath;
 
 /**
  * This is the implementation of the {@link XmlPath} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XmlPathImpl extends AbstractXmlSelector implements XmlPath {
 
-  private  final List<AbstractXmlPathSegment> segmentList;
+  private final List<AbstractXmlPathSegment> segmentList;
 
   /**
    * The constructor.
-   * 
-   * @param namespaceContext is the
-   *        {@link #getNamespaceContext() namespace-context}.
+   *
+   * @param namespaceContext is the {@link #getNamespaceContext() namespace-context}.
    */
   public XmlPathImpl(NamespaceContext namespaceContext) {
 
@@ -44,7 +43,7 @@ public class XmlPathImpl extends AbstractXmlSelector implements XmlPath {
 
   /**
    * This method adds the given {@code segment} to this path.
-   * 
+   *
    * @param segment is the segment to add.
    */
   public void addSegment(AbstractXmlPathSegment segment) {
@@ -60,7 +59,7 @@ public class XmlPathImpl extends AbstractXmlSelector implements XmlPath {
       if (first) {
         first = false;
       } else {
-      //  stringBuilder.append('/');
+        // stringBuilder.append('/');
       }
       segment.toString(stringBuilder);
     }

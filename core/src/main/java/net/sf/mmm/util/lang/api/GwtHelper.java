@@ -5,8 +5,7 @@ package net.sf.mmm.util.lang.api;
 import java.util.Locale;
 
 /**
- * This class is used as indirection for code that is NOT GWT compatible. For GWT this code gets
- * super-sourced.
+ * This class is used as indirection for code that is NOT GWT compatible. For GWT this code gets super-sourced.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

@@ -5,8 +5,7 @@ package net.sf.mmm.util.validation.base;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 /**
- * This are the {@link ConstantsWithLookup} for the I18N/NLS of custom {@link javax.validation.Constraint}s
- * for GWT.
+ * This are the {@link ConstantsWithLookup} for the I18N/NLS of custom {@link javax.validation.Constraint}s for GWT.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0

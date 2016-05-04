@@ -14,7 +14,8 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public abstract class AbstractDataResourceFactory extends AbstractLoggableComponent implements DataResourceFactory {
+public abstract class AbstractDataResourceFactory extends AbstractLoggableComponent
+    implements DataResourceFactory {
 
   /**
    * The constructor.
@@ -43,15 +44,15 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggableCompon
   protected abstract DataResource createDataResource(ResourceUri resourceUri) throws ResourceUriUndefinedException;
 
   /**
-   * This is an implementation of the {@link DataResource} interface, that adapts {@link #getDelegate()
-   * another} {@link DataResource} and enhances the {@link #navigate(String)}-method to support switching
-   * schemes via the {@link DataResourceFactory} that created this {@link DataResource}.
+   * This is an implementation of the {@link DataResource} interface, that adapts {@link #getDelegate() another}
+   * {@link DataResource} and enhances the {@link #navigate(String)}-method to support switching schemes via the
+   * {@link DataResourceFactory} that created this {@link DataResource}.
    *
    * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
    */
   protected class DataResourceAdapter extends AbstractDataResourceProxy {
 
-    private  final DataResource delegate;
+    private final DataResource delegate;
 
     /**
      * The constructor.
@@ -64,7 +65,8 @@ public abstract class AbstractDataResourceFactory extends AbstractLoggableCompon
       this.delegate = delegate;
     }
 
-    @Override    protected DataResource getDelegate() {
+    @Override
+    protected DataResource getDelegate() {
 
       return this.delegate;
     }

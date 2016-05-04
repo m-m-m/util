@@ -32,9 +32,9 @@ public class HyphenatorImpl extends AbstractHyphenator {
   /** The maximum length of the {@link #patterns}. */
   private final int maxPatternLength;
 
-  private  final StringHasher hasher;
+  private final StringHasher hasher;
 
-  private  final StringUtil stringUtil;
+  private final StringUtil stringUtil;
 
   /**
    * The constructor.
@@ -83,6 +83,7 @@ public class HyphenatorImpl extends AbstractHyphenator {
 
     Comparator<HyphenationPattern> comparator = new Comparator<HyphenationPattern>() {
 
+      @Override
       public int compare(HyphenationPattern p1, HyphenationPattern p2) {
 
         return (p2.getWordPart().length() - p1.getWordPart().length());

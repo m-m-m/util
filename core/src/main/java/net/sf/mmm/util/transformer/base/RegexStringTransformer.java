@@ -15,9 +15,8 @@ import net.sf.mmm.util.xml.base.jaxb.XmlAdapterPattern;
 
 /**
  * This class converts a string by {@link Pattern#matcher(CharSequence) matching} a given regular expression
- * {@link Pattern} and if it {@link Matcher#find() partially matches} replacing the match(es) with a given
- * replacement.
- * 
+ * {@link Pattern} and if it {@link Matcher#find() partially matches} replacing the match(es) with a given replacement.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -37,8 +36,7 @@ public class RegexStringTransformer implements Transformer<String> {
   /**
    * The non-arg constructor. <br>
    * <b>NOTE:</b><br>
-   * This constructor should not be called directly! It is only intended for reflective access (e.g. for
-   * JAXB).
+   * This constructor should not be called directly! It is only intended for reflective access (e.g. for JAXB).
    */
   public RegexStringTransformer() {
 
@@ -47,11 +45,11 @@ public class RegexStringTransformer implements Transformer<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param pattern is the pattern used for conversion.
    * @param replacement is the replacement to fill in the string to convert.
-   * @param replaceAll - if {@code true} {@link Matcher#replaceAll(String)} will be used, else if
-   *        {@code false} {@link Matcher#replaceFirst(String)}.
+   * @param replaceAll - if {@code true} {@link Matcher#replaceAll(String)} will be used, else if {@code false}
+   *        {@link Matcher#replaceFirst(String)}.
    */
   public RegexStringTransformer(Pattern pattern, String replacement, boolean replaceAll) {
 

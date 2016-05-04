@@ -19,6 +19,7 @@ public class TreeMapFactory extends AbstractSortedMapFactory {
   /** The singleton instance. */
   public static final SortedMapFactory INSTANCE = new TreeMapFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<TreeMap> getMapImplementation() {
 

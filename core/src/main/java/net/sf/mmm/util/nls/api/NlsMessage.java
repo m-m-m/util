@@ -7,19 +7,20 @@ import java.util.Locale;
 
 /**
  * This is the interface for an internationalized message. It stores an {@link #getInternationalizedMessage()
- * internationalized-message} separated from language independent {@link #getArgument(String) arguments}. This
- * approach ensures that the message is always available in the internationalized language (should be English)
- * while it still allows to {@link #getLocalizedMessage(Locale, NlsTemplateResolver) translate} the message to
- * a native language. For an introduction first read {@link net.sf.mmm.util.nls.api here}<br>
+ * internationalized-message} separated from language independent {@link #getArgument(String) arguments}. This approach
+ * ensures that the message is always available in the internationalized language (should be English) while it still
+ * allows to {@link #getLocalizedMessage(Locale, NlsTemplateResolver) translate} the message to a native language. For
+ * an introduction first read {@link net.sf.mmm.util.nls.api here}<br>
  * The format of the {@link #getInternationalizedMessage() internationalized-message} is compatible to
- * {@link java.text.MessageFormat}. This allows to migrate existing code from {@link java.text.MessageFormat}
- * to {@link NlsMessage} easily. However there are some advanced features available. While using numbers to
- * identify the {@link #getArgument(int) argument} is a maintenance-hell for large messages, it is also
- * possible to use {@link #getArgument(String) named arguments}. Further there is also support for additional
- * styles as well as {@link net.sf.mmm.util.text.api.Justification}. The format specification for
- * parameter-syntax is as following:
+ * {@link java.text.MessageFormat}. This allows to migrate existing code from {@link java.text.MessageFormat} to
+ * {@link NlsMessage} easily. However there are some advanced features available. While using numbers to identify the
+ * {@link #getArgument(int) argument} is a maintenance-hell for large messages, it is also possible to use
+ * {@link #getArgument(String) named arguments}. Further there is also support for additional styles as well as
+ * {@link net.sf.mmm.util.text.api.Justification}. The format specification for parameter-syntax is as following:
  *
- * <pre>'{' ArgumentKey [ ',' FormatType [ ',' FormatStyle ] ] [ '{' Justification '}' ] '}'</pre>
+ * <pre>
+ * '{' ArgumentKey [ ',' FormatType [ ',' FormatStyle ] ] [ '{' Justification '}' ] '}'
+ * </pre>
  *
  * The literals are explained in this table.
  * <table border="1">
@@ -33,8 +34,8 @@ import java.util.Locale;
  * </tr>
  * <tr>
  * <td>FormatType</td>
- * <td>a type specifying how to format the value (see below). Should fit to the {@link Object#getClass() type}
- * of the value.
+ * <td>a type specifying how to format the value (see below). Should fit to the {@link Object#getClass() type} of the
+ * value.
  * </tr>
  * <tr>
  * <td>FormatStyle</td>
@@ -250,10 +251,10 @@ import java.util.Locale;
  * <td>{@link NlsFormatterManager#TYPE_CHOICE choice}</td>
  * <td>(?>=5){key,choice,(?==true)'a'(else){key2}}(else)'c'</td>
  * <td>a</td>
- * <td>A choice that results to 'c' if the value is NOT greater or equal to 5. Otherwise it results to 'a' if
- * the value of the argument "key" is {@link Boolean#TRUE}. Otherwise it results to the value of the argument
- * "key2". - This is a wired example. It shows the power of the choice format as well as how things turn out
- * unmaintainable if the power is missused.</td>
+ * <td>A choice that results to 'c' if the value is NOT greater or equal to 5. Otherwise it results to 'a' if the value
+ * of the argument "key" is {@link Boolean#TRUE}. Otherwise it results to the value of the argument "key2". - This is a
+ * wired example. It shows the power of the choice format as well as how things turn out unmaintainable if the power is
+ * missused.</td>
  * </tr>
  * </table>
  *
@@ -268,19 +269,17 @@ import java.util.Locale;
 public interface NlsMessage extends NlsObject, Serializable {
 
   /**
-   * The prefix appended to the {@link #getInternationalizedMessage() message} if the localization
-   * (translation) failed.
+   * The prefix appended to the {@link #getInternationalizedMessage() message} if the localization (translation) failed.
    */
   String LOCALIZATION_FAILURE_PREFIX = "#";
 
   /**
-   * This method gets the internationalized message that can be
-   * {@link NlsTemplateResolver#resolveTemplate(String) translated} to a native language. The language
-   * independent arguments are filled into the message after the translation process. <br>
+   * This method gets the internationalized message that can be {@link NlsTemplateResolver#resolveTemplate(String)
+   * translated} to a native language. The language independent arguments are filled into the message after the
+   * translation process. <br>
    * E.g. the i18n message may be <code>"Welcome {name}!"</code> and there is one argument that is the string
-   * {@code "Joelle"}. The final result will then be {@code "Welcome Joelle!"}. If the message is
-   * translated to German as <code>"Willkommen {name}!"</code> the final result will be
-   * {@code "Willkommen Joelle!"}.
+   * {@code "Joelle"}. The final result will then be {@code "Welcome Joelle!"}. If the message is translated to German
+   * as <code>"Willkommen {name}!"</code> the final result will be {@code "Willkommen Joelle!"}.
    *
    * @see NlsMessage
    * @see #getArgument(String)
@@ -312,8 +311,7 @@ public interface NlsMessage extends NlsObject, Serializable {
    *
    * @param index is the index of the requested argument.
    * @return the argument for the given key.
-   * @deprecated use {@link #getArgument(String)} instead (and use named keys instead of numbers where
-   *             possible).
+   * @deprecated use {@link #getArgument(String)} instead (and use named keys instead of numbers where possible).
    */
   @Deprecated
   Object getArgument(int index);
@@ -340,8 +338,8 @@ public interface NlsMessage extends NlsObject, Serializable {
   String getLocalizedMessage();
 
   /**
-   * This method gets the message localized to the given {@link Locale} as string. If this fails for whatever
-   * reason, the {@link #getMessage() untranslated} message will be returned as fallback.
+   * This method gets the message localized to the given {@link Locale} as string. If this fails for whatever reason,
+   * the {@link #getMessage() untranslated} message will be returned as fallback.
    *
    * @see net.sf.mmm.util.nls.api
    *
@@ -352,10 +350,10 @@ public interface NlsMessage extends NlsObject, Serializable {
 
   /**
    * This method writes the localized message to the given {@code buffer}. <br>
-   * The actual localization is done by a {@link NlsTemplate template} that is provided via the given
-   * {@code resolver}. If this fails, the {@link #getInternationalizedMessage() original message} will be
-   * used. After translation is done, the language independent arguments will be filled in the translated
-   * message string according to the given {@code locale}.
+   * The actual localization is done by a {@link NlsTemplate template} that is provided via the given {@code resolver}.
+   * If this fails, the {@link #getInternationalizedMessage() original message} will be used. After translation is done,
+   * the language independent arguments will be filled in the translated message string according to the given
+   * {@code locale}.
    *
    * @param locale is the locale to translate to.
    * @param buffer is the buffer where to write the message to.
@@ -378,14 +376,14 @@ public interface NlsMessage extends NlsObject, Serializable {
 
   /**
    * This method writes the localized message to the given {@code buffer}. <br>
-   * The actual localization is done by a {@link NlsTemplate template} that is provided via the given
-   * {@code resolver}. If this fails, the {@link #getInternationalizedMessage() original message} will be
-   * used. After translation is done, the language independent arguments will be filled in the translated
-   * message string according to the given {@code locale}.
+   * The actual localization is done by a {@link NlsTemplate template} that is provided via the given {@code resolver}.
+   * If this fails, the {@link #getInternationalizedMessage() original message} will be used. After translation is done,
+   * the language independent arguments will be filled in the translated message string according to the given
+   * {@code locale}.
    *
    * @param locale is the locale to translate to.
-   * @param resolver is used to resolve the template required to translate the
-   *        {@link #getInternationalizedMessage() internationalized message}.
+   * @param resolver is used to resolve the template required to translate the {@link #getInternationalizedMessage()
+   *        internationalized message}.
    * @param buffer is the buffer where to write the message to.
    * @deprecated providing external {@link NlsTemplateResolver} has been discouraged.
    */

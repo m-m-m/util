@@ -47,7 +47,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   /** @see #validate(Object, Object) */
   private final Class<?>[] groups;
 
-  private  final boolean mandatory;
+  private final boolean mandatory;
 
   /**
    * The constructor.
@@ -250,8 +250,7 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   }
 
   /**
-   * @return the name of the property to validate or {@code null} to validate the entire {@link #getPojoType()
-   *         POJO}.
+   * @return the name of the property to validate or {@code null} to validate the entire {@link #getPojoType() POJO}.
    */
   public String getProperty() {
 
@@ -259,10 +258,10 @@ public class ValidatorJsr303<V> extends AbstractValidator<V> {
   }
 
   /**
-   * @return the {@link Class} reflecting the type of the {@link #getProperty() property} to validate or
-   *         {@code null} if undefined. May be used for additional support currently missing in JSR 303 such as
-   *         primitive types that are implicitly mandatory but implementations of JSR 303 cause
-   *         {@link NullPointerException} or similar effects on property validation.
+   * @return the {@link Class} reflecting the type of the {@link #getProperty() property} to validate or {@code null} if
+   *         undefined. May be used for additional support currently missing in JSR 303 such as primitive types that are
+   *         implicitly mandatory but implementations of JSR 303 cause {@link NullPointerException} or similar effects
+   *         on property validation.
    */
   public Class<?> getPropertyType() {
 

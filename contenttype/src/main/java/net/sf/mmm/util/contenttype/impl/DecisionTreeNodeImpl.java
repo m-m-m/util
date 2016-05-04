@@ -16,7 +16,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
  */
 public class DecisionTreeNodeImpl implements DecisionTreeNode {
 
-  private  ContentType contentType;
+  private ContentType contentType;
 
   private Map<Byte, DecisionTreeNodeImpl> byte2childNodeMap;
 

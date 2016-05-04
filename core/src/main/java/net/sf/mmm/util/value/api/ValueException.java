@@ -6,8 +6,8 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This exception is thrown if a something goes wrong about values. This can be an invalid "casting", a parse
- * error, etc.
+ * This exception is thrown if a something goes wrong about values. This can be an invalid "casting", a parse error,
+ * etc.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

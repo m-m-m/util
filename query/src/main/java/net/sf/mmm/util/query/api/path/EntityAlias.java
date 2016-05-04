@@ -28,6 +28,7 @@ public interface EntityAlias<E> extends PathRoot<E> {
   /**
    * @return the alias name of this {@link EntityAlias} (what is "alias" in "SELECT FROM Foo AS alias").
    */
+  @Override
   String getName();
 
   /**
@@ -45,6 +46,7 @@ public interface EntityAlias<E> extends PathRoot<E> {
   /**
    * @return optional the {@link BeanFactory#createPrototype(Class) prototype} of this source. May be {@code null}.
    */
+  @Override
   E getPrototype();
 
   /**

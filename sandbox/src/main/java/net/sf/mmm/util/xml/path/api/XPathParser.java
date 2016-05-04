@@ -5,18 +5,17 @@ package net.sf.mmm.util.xml.path.api;
 /**
  * This is the interface for a parser of XPath expressions. <br>
  * See <a href="http://www.w3.org/TR/xpath">XML Path Language (XPath)</a>.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface XPathParser {
 
   /**
    * This method parses the given {@code xpath} expression.
-   * 
+   *
    * @param xpath is the XPath expression as string.
    * @return the parsed {@code xpath} expression.
-   * @throws XmlParseException if the given {@code xpath} expression is
-   *         illegal.
+   * @throws XmlParseException if the given {@code xpath} expression is illegal.
    */
   XmlSelector parseXPath(String xpath) throws XmlParseException;
 

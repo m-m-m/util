@@ -30,8 +30,7 @@ public interface ReadableStringProperty extends ReadableObjectProperty<String>, 
   }
 
   /**
-   * @return the {@link #getValue() value} or the empty {@link String} if the {@link #getValue() value} is
-   *         {@code null}.
+   * @return the {@link #getValue() value} or the empty {@link String} if the {@link #getValue() value} is {@code null}.
    */
   default String getValueSafe() {
 
@@ -82,6 +81,7 @@ public interface ReadableStringProperty extends ReadableObjectProperty<String>, 
    * @return a new {@link BooleanBinding} that holds {@code true} if the {@link #getValue() value} of this property and
    *         the given {@link String} are {@link Object#equals(Object) equal}.
    */
+  @Override
   default BooleanBinding isEqualTo(String other) {
 
     return Bindings.equal(this, other);
@@ -107,6 +107,7 @@ public interface ReadableStringProperty extends ReadableObjectProperty<String>, 
    * @return a new {@link BooleanBinding} that holds {@code true} if the {@link #getValue() value} of this property and
    *         the given {@link String} are NOT {@link Object#equals(Object) equal}.
    */
+  @Override
   default BooleanBinding isNotEqualTo(String other) {
 
     return Bindings.notEqual(this, other);
@@ -264,6 +265,7 @@ public interface ReadableStringProperty extends ReadableObjectProperty<String>, 
    * @return a new {@link BooleanBinding} that holds {@code true} if the {@link #getValue() value} of this property is
    *         {@code null}.
    */
+  @Override
   default BooleanBinding isNull() {
 
     return Bindings.isNull(this);
@@ -275,6 +277,7 @@ public interface ReadableStringProperty extends ReadableObjectProperty<String>, 
    * @return a new {@link BooleanBinding} that holds {@code true} if the {@link #getValue() value} of this property is
    *         NOT {@code null}.
    */
+  @Override
   default BooleanBinding isNotNull() {
 
     return Bindings.isNotNull(this);

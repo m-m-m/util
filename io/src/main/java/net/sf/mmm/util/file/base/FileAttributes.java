@@ -8,17 +8,17 @@ import net.sf.mmm.util.lang.base.BasicUtilImpl;
 /**
  * This class represents the attributes of a file as defined in a Unix/Posix Filesystem. They consist of a
  * {@link #getUser() user}, a {@link #getGroup() group} and a {@link #getPermissions() mode mask} (modifiers).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
 public class FileAttributes implements Cloneable {
 
-  private  String user;
+  private String user;
 
-  private  String group;
+  private String group;
 
-  private  FileAccessPermissions permissions;
+  private FileAccessPermissions permissions;
 
   /** the {@link BasicUtilImpl} instance to use. */
   private BasicUtil basicUtil;
@@ -34,7 +34,7 @@ public class FileAttributes implements Cloneable {
 
   /**
    * The constructor.
-   * 
+   *
    * @param basicUtil the instance of {@link BasicUtilImpl} to use.
    */
   public FileAttributes(BasicUtil basicUtil) {

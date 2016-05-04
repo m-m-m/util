@@ -14,7 +14,6 @@ import net.sf.mmm.util.property.api.factory.PropertyFactory;
  * @author hohwille
  * @since 8.0.0
  */
-public abstract class AbstractPropertyFactory<V, P extends WritableProperty<V>>
-    implements PropertyFactory<V, P> {
+public abstract class AbstractPropertyFactory<V, P extends WritableProperty<V>> implements PropertyFactory<V, P> {
 
 }

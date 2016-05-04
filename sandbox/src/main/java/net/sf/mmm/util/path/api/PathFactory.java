@@ -9,11 +9,10 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 /**
  * This is the interface for a factory used to create instance of {@link Path} across multiple
  * {@link java.nio.file.FileSystem}s. <br>
- * If you want to read resources from configurable locations, you should use this factory. In situations where
- * you want to load a resource, for which you already know the location (e.g. from a specific classpath
- * location) and you are going to wire the location into your code, you can bypass this factory and simply
- * create a new instance of the according {@link Path} directly (e.g.
- * {@link java.nio.file.Paths#get(java.net.URI)}).
+ * If you want to read resources from configurable locations, you should use this factory. In situations where you want
+ * to load a resource, for which you already know the location (e.g. from a specific classpath location) and you are
+ * going to wire the location into your code, you can bypass this factory and simply create a new instance of the
+ * according {@link Path} directly (e.g. {@link java.nio.file.Paths#get(java.net.URI)}).
  *
  * @see java.nio.file.Paths#get(java.net.URI)
  *
@@ -27,8 +26,8 @@ public interface PathFactory {
   String CDI_NAME = "net.sf.mmm.util.file.api.PathFactory";
 
   /**
-   * This method creates a new {@link Path} for the given {@code resourceUri}. The following URI-schemes
-   * are guaranteed to be supported:
+   * This method creates a new {@link Path} for the given {@code resourceUri}. The following URI-schemes are guaranteed
+   * to be supported:
    * <table border="1">
    * <tr>
    * <th>scheme</th>
@@ -52,20 +51,19 @@ public interface PathFactory {
    * </tr>
    * </table>
    *
-   * @param resourceUri is the {@link Path#toUri() absolute URI} pointing to the location of the requested
-   *        {@link Path}.
+   * @param resourceUri is the {@link Path#toUri() absolute URI} pointing to the location of the requested {@link Path}.
    * @return the requested {@link Path}.
    */
   Path createPath(String resourceUri);
 
   /**
-   * This method creates a new {@link Path} for the given parameters. If the given {@code resourcePath}
-   * is absolute (including {@link PathUri#getSchemePrefix() scheme}), then this method returns the same
-   * result as {@link #createPath(String) createPath}{@code (resourcePath)}. Otherwise the resource path
-   * will be treated relative to the given {@code basePath}.
+   * This method creates a new {@link Path} for the given parameters. If the given {@code resourcePath} is absolute
+   * (including {@link PathUri#getSchemePrefix() scheme}), then this method returns the same result as
+   * {@link #createPath(String) createPath}{@code (resourcePath)}. Otherwise the resource path will be treated relative
+   * to the given {@code basePath}.
    *
-   * @param basePath is the {@link Path} to use if {@code resourcePath} is relative. You typically want
-   *        to provide the {@link Path#getParent() parent directory} of a resource to navigate from.
+   * @param basePath is the {@link Path} to use if {@code resourcePath} is relative. You typically want to provide the
+   *        {@link Path#getParent() parent directory} of a resource to navigate from.
    * @param resourcePath is the absolute or relative path to the requested resource.
    * @return the new path.
    */

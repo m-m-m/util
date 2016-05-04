@@ -17,7 +17,7 @@ import net.sf.mmm.util.exception.api.DuplicateObjectException;
  */
 public abstract class AbstractContentTypeManager extends AbstractLoggableComponent implements ContentTypeManager {
 
-  private  final Map<String, ContentType> id2contentTypeMap;
+  private final Map<String, ContentType> id2contentTypeMap;
 
   /**
    * The constructor.
@@ -40,8 +40,8 @@ public abstract class AbstractContentTypeManager extends AbstractLoggableCompone
    * @see #getContentType(String)
    *
    * @param contentType is the {@link ContentType} to add.
-   * @throws DuplicateObjectException if a {@link ContentType} with the same {@link ContentType#getId() ID}
-   *         has already been registered.
+   * @throws DuplicateObjectException if a {@link ContentType} with the same {@link ContentType#getId() ID} has already
+   *         been registered.
    */
   protected void addContentType(ContentType contentType) throws DuplicateObjectException {
 

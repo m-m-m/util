@@ -14,7 +14,7 @@ import net.sf.mmm.util.text.api.JustificationBuilder;
  */
 public class JustificationBuilderImpl extends AbstractComponent implements JustificationBuilder {
 
-  private  static JustificationBuilder instance;
+  private static JustificationBuilder instance;
 
   /**
    * The constructor.

@@ -44,8 +44,8 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   String MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT = "Create and/or "
       + "update resource-bundle property-files from <bundle-class> for the given "
-      + "locales (including the root locale). Example:\n\n" + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample "
-      + "de de_DE en en_US en_GB fr zh ja_JP zh_TW\n\n"
+      + "locales (including the root locale). Example:\n\n"
+      + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample de de_DE en en_US en_GB fr zh ja_JP zh_TW\n\n"
       + "For each locale a property-file foo/bar/NlsBundleMyExample_<locale>.properties "
       + "will be created or updated in the base-path. In each property-file all "
       + "properties defined in <bundle-class> will be added with a TODO-marker "

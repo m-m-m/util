@@ -32,9 +32,9 @@ import net.sf.mmm.util.value.base.ValueConverterIdentity;
  */
 public class StringUtilImpl implements StringUtil {
 
-  private  static StringUtil instance;
+  private static StringUtil instance;
 
-  private  static final char[] SEPARATORS = new char[] { ' ', '-', '_', '.' };
+  private static final char[] SEPARATORS = new char[] { ' ', '-', '_', '.' };
 
   /**
    * The constructor.

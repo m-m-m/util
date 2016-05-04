@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * This is a JAXB-ready Container for {@link #getTransformers() Transformers}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net))
  * @since 2.0.0
  */

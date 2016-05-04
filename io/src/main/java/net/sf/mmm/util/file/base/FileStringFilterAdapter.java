@@ -9,22 +9,22 @@ import net.sf.mmm.util.filter.api.Filter;
 
 /**
  * This class implements the {@link FileFilter} interface by simply delegating to a
- * <code>{@link Filter}{@literal <String>}</code>. It will get the {@link File#getPath() path and filename}
- * of the {@link #accept(File) file to check} and normalizes all {@link File#separator separators} to
- * {@code '/'}. The resulting string is passed to the adapted {@link Filter}.
- * 
+ * <code>{@link Filter}{@literal <String>}</code>. It will get the {@link File#getPath() path and filename} of the
+ * {@link #accept(File) file to check} and normalizes all {@link File#separator separators} to {@code '/'}. The
+ * resulting string is passed to the adapted {@link Filter}.
+ *
  * @see FileFilterAdapter
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 public final class FileStringFilterAdapter implements FileFilter {
 
-  private  final Filter<String> filter;
+  private final Filter<String> filter;
 
   /**
    * The constructor.
-   * 
+   *
    * @param filter is the filter to adapt.
    */
   public FileStringFilterAdapter(Filter<String> filter) {

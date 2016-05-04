@@ -23,9 +23,9 @@ public class TestUser implements Authentication {
   /** The default instance of {@link TestUser} with {@link #DEFAULT_NAME}. */
   public static final TestUser DEFAULT_USER = new TestUser(DEFAULT_NAME);
 
-  private  final String name;
+  private final String name;
 
-  private  boolean authenticated;
+  private boolean authenticated;
 
   /**
    * The constructor.

@@ -10,11 +10,9 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.collection.base.EmptyIterator;
-
 /**
  * This is the test-case for {@link EmptyIterator}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

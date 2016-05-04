@@ -4,7 +4,7 @@ package net.sf.mmm.util.metakey.api;
 
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface MetakeyOffice extends MetakeyCore {

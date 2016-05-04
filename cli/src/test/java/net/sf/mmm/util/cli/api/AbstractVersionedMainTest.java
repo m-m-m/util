@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-import net.sf.mmm.util.lang.api.StringUtil;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
  * This is the test-case for {@link AbstractVersionedMain}.
@@ -144,7 +144,8 @@ public class AbstractVersionedMainTest {
     @CliArgument(name = "Argument", usage = "Some argument for testing.")
     private String argument;
 
-    @Override    protected int runDefaultMode() throws Exception {
+    @Override
+    protected int runDefaultMode() throws Exception {
 
       if (this.foo) {
         getStandardOutput().print("foo ");

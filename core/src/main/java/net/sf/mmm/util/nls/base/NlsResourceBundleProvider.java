@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.api.NlsResourceBundle;
 
 /**
  * This interface allows to {@link #getBundles() get} all registered bundles. <br>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -17,9 +17,9 @@ import net.sf.mmm.util.nls.api.NlsResourceBundle;
 public interface NlsResourceBundleProvider {
 
   /**
-   * This method gets all {@link net.sf.mmm.util.nls.api.NlsTemplateResolver#CLASSPATH_NLS_BUNDLE central
-   * registered} {@link NlsResourceBundle}s.
-   * 
+   * This method gets all {@link net.sf.mmm.util.nls.api.NlsTemplateResolver#CLASSPATH_NLS_BUNDLE central registered}
+   * {@link NlsResourceBundle}s.
+   *
    * @return a collection with the central {@link NlsResourceBundle}s.
    */
   Collection<NlsResourceBundle> getBundles();

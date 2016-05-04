@@ -5,10 +5,9 @@ package net.sf.mmm.util.component.api;
 import net.sf.mmm.util.lang.api.attribute.AttributeWriteDisposed;
 
 /**
- * This is the interface for the container of a {@link Cdi CDI}/{@link Ioc IoC} framework. It is just use as
- * abstraction layer for frameworks like spring, guice or seam - you will not find a native implementation
- * within this project.
- * 
+ * This is the interface for the container of a {@link Cdi CDI}/{@link Ioc IoC} framework. It is just use as abstraction
+ * layer for frameworks like spring, guice or seam - you will not find a native implementation within this project.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

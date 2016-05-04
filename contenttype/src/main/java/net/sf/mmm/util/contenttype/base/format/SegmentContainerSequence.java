@@ -5,11 +5,10 @@ package net.sf.mmm.util.contenttype.base.format;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * A {@link SegmentContainerSequence} is a {@link SegmentContainer} that matches
- * if all the {@link #getSegment(int) contained} {@link Segment}s match the
- * stream in the order of occurrence. It is used to concat smaller
- * {@link Segment}s to compose bigger parts up to the final format pattern.
- * 
+ * A {@link SegmentContainerSequence} is a {@link SegmentContainer} that matches if all the {@link #getSegment(int)
+ * contained} {@link Segment}s match the stream in the order of occurrence. It is used to concat smaller {@link Segment}
+ * s to compose bigger parts up to the final format pattern.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

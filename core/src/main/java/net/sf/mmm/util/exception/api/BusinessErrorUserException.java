@@ -5,9 +5,9 @@ package net.sf.mmm.util.exception.api;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This is a generic exception to transport an arbitrary {@link #isForUser() user} error
- * {@link #getNlsMessage() message}. It can be used for application barriers to avoid serializing
- * implementation specific exceptions that may not be available on the client and could not be de-serialized.
+ * This is a generic exception to transport an arbitrary {@link #isForUser() user} error {@link #getNlsMessage()
+ * message}. It can be used for application barriers to avoid serializing implementation specific exceptions that may
+ * not be available on the client and could not be de-serialized.
  *
  * @see TechnicalErrorUserException
  *

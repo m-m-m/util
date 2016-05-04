@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is a utility-class with static methods that help to write unit-tests that read test-resources from
- * filesystem or classpath.
+ * This is a utility-class with static methods that help to write unit-tests that read test-resources from filesystem or
+ * classpath.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -21,7 +21,7 @@ public final class TestResourceHelper {
   /** The path to the base-dir of test-resources of the current module. */
   public static final String TEST_RESOURCES_PATH = "src/test/resources/";
 
-  private  static String testPath;
+  private static String testPath;
 
   /**
    * Construction forbidden.

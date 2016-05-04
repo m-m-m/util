@@ -3,10 +3,10 @@
 package net.sf.mmm.util.pojo.descriptor.api.accessor;
 
 /**
- * This type contains the available {@link PojoPropertyAccessorMode}s to have them in one place and make the
- * API easier to use.<br/>
- * In case you want to extend and create your own {@link PojoPropertyAccessorMode mode} and
- * {@link PojoPropertyAccessor accessor} you need to reference it explicitly.
+ * This type contains the available {@link PojoPropertyAccessorMode}s to have them in one place and make the API easier
+ * to use.<br/>
+ * In case you want to extend and create your own {@link PojoPropertyAccessorMode mode} and {@link PojoPropertyAccessor
+ * accessor} you need to reference it explicitly.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.0.0
@@ -20,14 +20,12 @@ public interface PojoPropertyAccessorModes {
   PojoPropertyAccessorOneArgMode SET = PojoPropertyAccessorOneArgMode.SET;
 
   /**
-   * Mode to read the size of a container property (e.g. {@code getFooLength()} or
-   * {@code getFoos().size()}).
+   * Mode to read the size of a container property (e.g. {@code getFooLength()} or {@code getFoos().size()}).
    */
   PojoPropertyAccessorNonArgMode GET_SIZE = PojoPropertyAccessorNonArgMode.GET_SIZE;
 
   /**
-   * Mode to {@link java.util.Collection#add(Object) add} an element to a container property (e.g.
-   * {@code addFoo(Foo)}).
+   * Mode to {@link java.util.Collection#add(Object) add} an element to a container property (e.g. {@code addFoo(Foo)}).
    */
   PojoPropertyAccessorOneArgMode ADD = PojoPropertyAccessorOneArgMode.ADD;
 
@@ -44,14 +42,14 @@ public interface PojoPropertyAccessorModes {
   PojoPropertyAccessorIndexedOneArgMode SET_INDEXED = PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED;
 
   /**
-   * Mode to {@link java.util.Map#get(Object) read} an element from a {@link java.util.Map mapped} property
-   * (e.g. {@code getFoo(String)} or {@code getFoo().get(String)}).
+   * Mode to {@link java.util.Map#get(Object) read} an element from a {@link java.util.Map mapped} property (e.g.
+   * {@code getFoo(String)} or {@code getFoo().get(String)}).
    */
   PojoPropertyAccessorOneArgMode GET_MAPPED = PojoPropertyAccessorOneArgMode.GET_MAPPED;
 
   /**
-   * Mode to {@link java.util.Map#put(Object, Object) write} an element to a {@link java.util.Map mapped}
-   * property (e.g. {@code setFoo(String, Foo)} or {@code getFoo().put(String, Foo)}).
+   * Mode to {@link java.util.Map#put(Object, Object) write} an element to a {@link java.util.Map mapped} property (e.g.
+   * {@code setFoo(String, Foo)} or {@code getFoo().put(String, Foo)}).
    */
   PojoPropertyAccessorTwoArgMode SET_MAPPED = PojoPropertyAccessorTwoArgMode.SET_MAPPED;
 

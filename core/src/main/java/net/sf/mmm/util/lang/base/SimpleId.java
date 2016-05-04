@@ -14,6 +14,9 @@ import javax.persistence.Id;
  */
 public class SimpleId<E> extends AbstractId<E> {
 
+  /** TODO: javadoc. */
+  private static final long serialVersionUID = 1L;
+
   /**
    * The constructor.
    */

@@ -19,6 +19,7 @@ public class LinkedBlockingQueueFactory extends AbstractBlockingQueueFactory {
   /** The singleton instance. */
   public static final BlockingQueueFactory INSTANCE = new LinkedBlockingQueueFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<LinkedBlockingQueue> getCollectionImplementation() {
 

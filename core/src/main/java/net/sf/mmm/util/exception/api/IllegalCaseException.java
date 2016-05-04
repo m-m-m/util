@@ -6,8 +6,7 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
  * A {@link IllegalCaseException} is thrown if a specific case occurred that should never happen. It is typically thrown
- * in the {@code default} -section of a {@code switch}-statement where all {@code case}s should have been
- * covered.
+ * in the {@code default} -section of a {@code switch}-statement where all {@code case}s should have been covered.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

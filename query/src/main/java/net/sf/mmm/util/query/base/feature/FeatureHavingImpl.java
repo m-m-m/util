@@ -25,6 +25,7 @@ public class FeatureHavingImpl extends AbstractFeature implements FeatureHaving<
     super(SORT_INDEX_HAVING);
   }
 
+  @Override
   public FeatureHavingImpl having(Expression... expressions) {
 
     Expression expression = combine(this.having, Conjunction.AND, expressions);

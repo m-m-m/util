@@ -17,9 +17,9 @@ import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to a {@link String}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
+ * {@link Object} to a {@link String}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -27,9 +27,9 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @Named
 public class ValueConverterToString extends AbstractSimpleValueConverter<Object, String> {
 
-  private  Iso8601Util iso8601Util;
+  private Iso8601Util iso8601Util;
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
   /**
    * The constructor.
@@ -41,7 +41,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
 
   /**
    * This method gets the {@link Iso8601Util} to use.
-   * 
+   *
    * @return the {@link Iso8601Util} instance.
    */
   protected Iso8601Util getIso8601Util() {
@@ -51,7 +51,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
 
   /**
    * This method sets the {@link Iso8601Util} to use.
-   * 
+   *
    * @param iso8601Util is the {@link Iso8601Util} instance.
    */
   @Inject
@@ -62,7 +62,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
 
   /**
    * This method gets the {@link StringUtil} to use.
-   * 
+   *
    * @return the {@link StringUtil} instance.
    */
   protected StringUtil getStringUtil() {
@@ -72,7 +72,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
 
   /**
    * This method sets the {@link StringUtil} to use.
-   * 
+   *
    * @param stringUtil is the {@link StringUtil} instance.
    */
   @Inject
@@ -105,6 +105,7 @@ public class ValueConverterToString extends AbstractSimpleValueConverter<Object,
     return String.class;
   }
 
+  @Override
   @SuppressWarnings("all")
   public <T extends String> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

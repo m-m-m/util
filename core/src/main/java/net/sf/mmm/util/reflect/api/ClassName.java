@@ -3,25 +3,25 @@
 package net.sf.mmm.util.reflect.api;
 
 /**
- * This is a simple identifier for a {@link Class}. Unlike {@link Class} it can also identify non existent
- * classes (e.g. that should be generated). On the other hand passing the {@link Class#getName() qualified
- * classname} as {@link String} around for such purpose may lead to additional parsing e.g. to extract the
- * {@link #getSimpleName() simple name}.
- * 
+ * This is a simple identifier for a {@link Class}. Unlike {@link Class} it can also identify non existent classes (e.g.
+ * that should be generated). On the other hand passing the {@link Class#getName() qualified classname} as
+ * {@link String} around for such purpose may lead to additional parsing e.g. to extract the {@link #getSimpleName()
+ * simple name}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public class ClassName {
 
-  private  final String packageName;
+  private final String packageName;
 
-  private  final ClassName enclosingClass;
+  private final ClassName enclosingClass;
 
-  private  final String simpleName;
+  private final String simpleName;
 
   /**
    * The constructor.
-   * 
+   *
    * @param packageName - see {@link #getPackageName()}.
    * @param simpleName - see {@link #getSimpleName()}.
    */
@@ -32,7 +32,7 @@ public class ClassName {
 
   /**
    * The constructor.
-   * 
+   *
    * @param packageName - see {@link #getPackageName()}.
    * @param simpleName - see {@link #getSimpleName()}.
    * @param enclosingClass - see {@link #getEnclosingClass()}.
@@ -50,7 +50,7 @@ public class ClassName {
 
   /**
    * The constructor.
-   * 
+   *
    * @param type is the {@link Class} to represent.
    */
   public ClassName(Class<?> type) {
@@ -67,8 +67,7 @@ public class ClassName {
   }
 
   /**
-   * @return the {@link Package#getName() name} of the {@link Package} {@link Class#getPackage() of} the
-   *         {@link Class}.
+   * @return the {@link Package#getName() name} of the {@link Package} {@link Class#getPackage() of} the {@link Class}.
    */
   public String getPackageName() {
 
@@ -76,8 +75,8 @@ public class ClassName {
   }
 
   /**
-   * @return the {@link Class#getEnclosingClass() enclosing} {@link ClassName} or {@code null} if for a
-   *         top-level {@link Class}.
+   * @return the {@link Class#getEnclosingClass() enclosing} {@link ClassName} or {@code null} if for a top-level
+   *         {@link Class}.
    */
   public ClassName getEnclosingClass() {
 
@@ -126,9 +125,9 @@ public class ClassName {
   }
 
   /**
-   * {@link StringBuilder#append(String) Appends} the {@link #getEnclosingClass() enclosing class} in proper
-   * order (reverse hierarchy).
-   * 
+   * {@link StringBuilder#append(String) Appends} the {@link #getEnclosingClass() enclosing class} in proper order
+   * (reverse hierarchy).
+   *
    * @param buffer the {@link StringBuilder} to {@link StringBuilder#append(String) append} to.
    * @param enclosingSeparator the separator for enclosing types ('.' or '$').
    * @param enclosing the {@link #getEnclosingClass() enclosing class}.

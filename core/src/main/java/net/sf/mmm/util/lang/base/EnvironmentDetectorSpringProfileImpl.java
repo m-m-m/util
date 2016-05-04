@@ -23,7 +23,7 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
   @Inject
   private Environment environment;
 
-  private  String environmentType;
+  private String environmentType;
 
   /**
    * The constructor.

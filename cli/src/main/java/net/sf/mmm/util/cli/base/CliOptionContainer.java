@@ -19,7 +19,7 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  */
 public class CliOptionContainer extends CliParameterContainer {
 
-  private  final CliOption option;
+  private final CliOption option;
 
   /**
    * The constructor.
@@ -59,9 +59,8 @@ public class CliOptionContainer extends CliParameterContainer {
   }
 
   /**
-   * This method determines if the {@link #getOption() option} is a trigger. Trigger means that the type of
-   * the {@link #getSetter() setter} is a primitive boolean and the option is never followed by a value on the
-   * commandline.
+   * This method determines if the {@link #getOption() option} is a trigger. Trigger means that the type of the
+   * {@link #getSetter() setter} is a primitive boolean and the option is never followed by a value on the commandline.
    *
    * @return {@code true} if trigger, {@code false} otherwise.
    */

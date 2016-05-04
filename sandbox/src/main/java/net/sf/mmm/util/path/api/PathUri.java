@@ -3,9 +3,9 @@
 package net.sf.mmm.util.path.api;
 
 /**
- * This interface represents an URI pointing to the location of a {@link java.nio.file.Path}. A
- * {@link PathUri} can be {@link #getUri() represented as string} but consists of two parts: a
- * {@link #getSchemePrefix() scheme-prefix} and a {@link #getPath() path} . <br>
+ * This interface represents an URI pointing to the location of a {@link java.nio.file.Path}. A {@link PathUri} can be
+ * {@link #getUri() represented as string} but consists of two parts: a {@link #getSchemePrefix() scheme-prefix} and a
+ * {@link #getPath() path} . <br>
  * Here are some examples:
  * <table border="1">
  * <tr>
@@ -63,20 +63,17 @@ public interface PathUri {
   String SCHEME_PREFIX_CLASSPATH = "classpath:";
 
   /**
-   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the web accessed via
-   * HTTP.
+   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the web accessed via HTTP.
    */
   String SCHEME_PREFIX_HTTP = "http://";
 
   /**
-   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the web accessed via
-   * HTTPS.
+   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the web accessed via HTTPS.
    */
   String SCHEME_PREFIX_HTTPS = "https://";
 
   /**
-   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the network accessed via
-   * FTP.
+   * The {@link #getSchemePrefix() scheme prefix} for a {@link java.nio.file.Path} on the network accessed via FTP.
    */
   String SCHEME_PREFIX_FTP = "ftp://";
 
@@ -88,9 +85,9 @@ public interface PathUri {
   String getUri();
 
   /**
-   * This method gets the <em>scheme-prefix</em> of a qualified {@link PathUri}. The scheme-prefix has the
-   * following form: {@code [a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?}. The part before the colon (:) is called
-   * the {@link java.net.URI#getScheme() scheme}.<br>
+   * This method gets the <em>scheme-prefix</em> of a qualified {@link PathUri}. The scheme-prefix has the following
+   * form: {@code [a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?}. The part before the colon (:) is called the
+   * {@link java.net.URI#getScheme() scheme}.<br>
    * Examples for scheme-prefixes are:
    * <ul>
    * <li>classpath:</li>
@@ -112,6 +109,7 @@ public interface PathUri {
    */
   String getPath();
 
+  @Override
   String toString();
 
 }

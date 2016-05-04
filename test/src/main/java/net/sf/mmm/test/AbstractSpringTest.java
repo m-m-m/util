@@ -11,18 +11,18 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 /**
- * This is the abstract base class for tests using spring infrastructure. Tests derived from this class should
- * specify their configuration using {@link org.springframework.test.context.ContextConfiguration}. E.g.:
- * 
+ * This is the abstract base class for tests using spring infrastructure. Tests derived from this class should specify
+ * their configuration using {@link org.springframework.test.context.ContextConfiguration}. E.g.:
+ *
  * <pre>
  * {@literal @}{@link org.springframework.test.context.ContextConfiguration}(locations = { "classpath:net/sf/mmm/util/beans-util-core.xml" })
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({ WebContextTestExecutionListener.class, TransactionalTestExecutionListener.class,
-    DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class })
+DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class })
 public abstract class AbstractSpringTest extends Assert {
 
   /** Spring configuration location for mmm-util-core. */

@@ -16,11 +16,11 @@ public class EntityIdImpl extends AbstractEntityId {
 
   private static final long serialVersionUID = 1553359087706129686L;
 
-  private  long objectId;
+  private long objectId;
 
-  private  long typeId;
+  private long typeId;
 
-  private  Number revision;
+  private Number revision;
 
   /**
    * The constructor for de-serialization in GWT.

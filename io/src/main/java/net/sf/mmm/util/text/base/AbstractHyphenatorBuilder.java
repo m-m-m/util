@@ -90,8 +90,8 @@ public abstract class AbstractHyphenatorBuilder extends AbstractLoggableComponen
    *
    * @param localeInfix is the {@link NlsResourceLocator#getLocaleInfixes(Locale) locale-infix} of the requested
    *        {@link Hyphenator}.
-   * @return the requested {@link Hyphenator} or {@code null} if no hyphenation configuration is available for the
-   *         given {@code localeInfix}.
+   * @return the requested {@link Hyphenator} or {@code null} if no hyphenation configuration is available for the given
+   *         {@code localeInfix}.
    */
   protected abstract Hyphenator createHyphenator(String localeInfix);
 

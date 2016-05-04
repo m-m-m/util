@@ -8,7 +8,7 @@ import net.sf.mmm.util.collection.api.MapFactory;
 
 /**
  * This is the abstract base implementation of the {@link MapFactory} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */

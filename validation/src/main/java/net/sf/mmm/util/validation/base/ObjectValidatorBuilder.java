@@ -95,6 +95,7 @@ public abstract class ObjectValidatorBuilder<V, PARENT, SELF extends ObjectValid
   /**
    * @return the {@link AbstractValidator}
    */
+  @Override
   public AbstractValidator<? super V> build() {
 
     int size = this.validators.size();

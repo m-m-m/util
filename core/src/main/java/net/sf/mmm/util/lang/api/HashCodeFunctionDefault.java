@@ -5,9 +5,8 @@ package net.sf.mmm.util.lang.api;
 import java.io.Serializable;
 
 /**
- * This is the default implementation of {@link HashCodeFunction}. It just delegates to
- * {@link Object#hashCode()}.
- * 
+ * This is the default implementation of {@link HashCodeFunction}. It just delegates to {@link Object#hashCode()}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -15,7 +14,7 @@ public final class HashCodeFunctionDefault extends AbstractHashCodeFunction<Obje
 
   private static final long serialVersionUID = 142095355155291498L;
 
-  private  static final HashCodeFunctionDefault INSTANCE = new HashCodeFunctionDefault();
+  private static final HashCodeFunctionDefault INSTANCE = new HashCodeFunctionDefault();
 
   /**
    * The constructor.

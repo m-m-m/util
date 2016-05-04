@@ -9,8 +9,8 @@ import net.sf.mmm.util.collection.api.QueueFactory;
 import net.sf.mmm.util.event.base.AbstractEventBus;
 
 /**
- * This is the default implementation of {@link net.sf.mmm.util.event.api.EventBus}. It is compatible to work
- * in limited environments such as GWT.
+ * This is the default implementation of {@link net.sf.mmm.util.event.api.EventBus}. It is compatible to work in limited
+ * environments such as GWT.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0
@@ -18,7 +18,7 @@ import net.sf.mmm.util.event.base.AbstractEventBus;
 @Named
 public class EventBusImpl extends AbstractEventBus {
 
-  private  volatile boolean dispatching;
+  private volatile boolean dispatching;
 
   /**
    * The constructor.

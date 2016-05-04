@@ -35,9 +35,9 @@ public interface CollectionFactoryManager {
    * @param <COLLECTION> is the generic type of the {@link Collection}.
    * @param collectionType is the type of the {@link Collection}. This should be the {@link Collection} interface such
    *        as {@link java.util.List}{@code .class}.
-   * @return the {@link CollectionFactory} for the given {@code collectionType}. The {@code collectionType}
-   *         has to be {@link Class#isAssignableFrom(Class) assignable from}
-   *         {@link CollectionFactory#getCollectionInterface()} of the returned instance. Typically it will be equal.
+   * @return the {@link CollectionFactory} for the given {@code collectionType}. The {@code collectionType} has to be
+   *         {@link Class#isAssignableFrom(Class) assignable from} {@link CollectionFactory#getCollectionInterface()} of
+   *         the returned instance. Typically it will be equal.
    */
   <COLLECTION extends Collection> CollectionFactory<COLLECTION> getCollectionFactory(
       Class<COLLECTION> collectionType);

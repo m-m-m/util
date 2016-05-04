@@ -34,16 +34,16 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 @Named
 public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent implements DatatypeDescriptorManager {
 
-  private  static DatatypeDescriptorManagerImpl instance;
+  private static DatatypeDescriptorManagerImpl instance;
 
   /** Lazy filled {@link Map} for {@link DatatypeDescriptor}. */
   private final Map<Class<?>, DatatypeDescriptor<?>> datatypeDescriptorMap;
 
-  private  DatatypeDetector datatypeDetector;
+  private DatatypeDetector datatypeDetector;
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
   /**
    * The constructor.
@@ -78,8 +78,8 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   /**
    * This method gets the singleton instance of this {@link DatatypeDescriptorManager}. <br>
    * Will only work after this class has been properly initialized (by an
-   * {@link net.sf.mmm.util.component.api.IocContainer}). This method shall only be used for classes that can
-   * not be managed by an {@link net.sf.mmm.util.component.api.IocContainer} e.g. for
+   * {@link net.sf.mmm.util.component.api.IocContainer}). This method shall only be used for classes that can not be
+   * managed by an {@link net.sf.mmm.util.component.api.IocContainer} e.g. for
    * {@link javax.xml.bind.annotation.adapters.XmlAdapter}s. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
@@ -184,8 +184,8 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   }
 
   /**
-   * Creates a generic {@link DatatypeDescriptor} for the given {@link net.sf.mmm.util.lang.api.Datatype}
-   * {@link Class} dynamically.
+   * Creates a generic {@link DatatypeDescriptor} for the given {@link net.sf.mmm.util.lang.api.Datatype} {@link Class}
+   * dynamically.
    *
    * @param <T> is the generic type of the {@link net.sf.mmm.util.lang.api.Datatype}.
    * @param datatype is the {@link Class} reflecting the {@link net.sf.mmm.util.lang.api.Datatype}.
@@ -198,8 +198,8 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
       throw new IllegalArgumentException("Array is no datatype: " + datatype);
     }
     if (datatype.isInterface()) {
-      throw new IllegalArgumentException("Interface is no datatype (unless you register your own DatatypeDetector): "
-          + datatype);
+      throw new IllegalArgumentException(
+          "Interface is no datatype (unless you register your own DatatypeDetector): " + datatype);
     }
     if (SimpleDatatype.class.isAssignableFrom(datatype)) {
       return new DatatypeDescriptorSimpleDatatype(datatype, this.reflectionUtil);

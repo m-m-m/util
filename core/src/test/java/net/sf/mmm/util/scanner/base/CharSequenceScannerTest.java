@@ -6,14 +6,14 @@ import static org.junit.Assert.fail;
 
 import java.util.Locale;
 
-import net.sf.mmm.util.scanner.api.CharScannerSyntax;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import net.sf.mmm.util.scanner.api.CharScannerSyntax;
+
 /**
  * This is the test-case for {@link CharSequenceScanner}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -146,6 +146,7 @@ public class CharSequenceScannerTest {
     // full syntax
     syntax = new SimpleCharScannerSyntax() {
 
+      @Override
       public String resolveEntity(String entity) {
 
         if ("lt".equals(entity)) {
@@ -240,7 +241,7 @@ public class CharSequenceScannerTest {
       Assert.assertTrue(parser.hasNext());
       char c = parser.next();
       int expected = '0' + i;
-      Assert.assertEquals(expected, (int) c);
+      Assert.assertEquals(expected, c);
     }
     Assert.assertFalse(parser.hasNext());
     try {

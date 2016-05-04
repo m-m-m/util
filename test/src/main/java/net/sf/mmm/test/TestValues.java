@@ -4,7 +4,7 @@ package net.sf.mmm.test;
 
 /**
  * This interface contains arbitrary string for testing.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface TestValues {

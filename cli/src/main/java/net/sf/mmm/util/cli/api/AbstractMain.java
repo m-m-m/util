@@ -14,8 +14,8 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
 
 /**
  * This is the abstract base class for a main-program. <br>
- * You simple need to derive from this class or more likely from {@link AbstractVersionedMain}. For an example
- * read the {@link net.sf.mmm.util.cli.api package javadoc}.
+ * You simple need to derive from this class or more likely from {@link AbstractVersionedMain}. For an example read the
+ * {@link net.sf.mmm.util.cli.api package javadoc}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -23,7 +23,7 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
 @CliClass
 @CliModes(//
 { @CliMode(id = CliMode.ID_HELP, title = NlsBundleUtilCliRoot.INF_MAIN_MODE_HELP, //
-usage = NlsBundleUtilCliRoot.MSG_MAIN_MODE_HELP_USAGE) })
+    usage = NlsBundleUtilCliRoot.MSG_MAIN_MODE_HELP_USAGE) })
 public abstract class AbstractMain extends AbstractLoggableObject {
 
   /** The {@link #run(CliModeObject) exit-code} on success. */
@@ -46,19 +46,19 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    */
   protected static final int EXIT_CODE_UNEXPECTED = -1;
 
-  private  final CliOutputSettings outputSettings;
+  private final CliOutputSettings outputSettings;
 
-  private  PrintWriter standardOutput;
+  private PrintWriter standardOutput;
 
-  private  PrintWriter standardError;
+  private PrintWriter standardError;
 
-  private  CliParserBuilder parserBuilder;
+  private CliParserBuilder parserBuilder;
 
-  private  StreamUtil streamUtil;
+  private StreamUtil streamUtil;
 
   /** Option to show the {@link #printHelp(CliParser) usage}. */
   @CliOption(name = CliOption.NAME_HELP, aliases = CliOption.ALIAS_HELP, //
-  required = true, usage = NlsBundleUtilCliRoot.MSG_MAIN_OPTION_HELP_USAGE, mode = CliMode.ID_HELP)
+      required = true, usage = NlsBundleUtilCliRoot.MSG_MAIN_OPTION_HELP_USAGE, mode = CliMode.ID_HELP)
   private boolean help;
 
   /**
@@ -75,8 +75,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method is called after the options are parsed and injected. It has to be implemented and should do
-   * the actual job.
+   * This method is called after the options are parsed and injected. It has to be implemented and should do the actual
+   * job.
    *
    * @param mode is the {@link CliModeObject mode} of the invocation.
    * @return the error-code or {@link #EXIT_CODE_OK} on success.
@@ -85,8 +85,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   protected abstract int run(CliModeObject mode) throws Exception;
 
   /**
-   * This method is invoked if an {@link Exception} occurred. It implements how to handle the error. You may
-   * override to add a custom handling.
+   * This method is invoked if an {@link Exception} occurred. It implements how to handle the error. You may override to
+   * add a custom handling.
    *
    * @param exception is the actual error that occurred.
    * @param parser is the {@link CliParser}.
@@ -114,10 +114,10 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the {@link IocContainer} used to manage components with their implementation. It should
-   * be created and initialized on the first call of this method. <br>
-   * This default implementation simply returns {@code null} to avoid dependencies on a
-   * {@link IocContainer} implementation. Override this method to use proper component management.
+   * This method gets the {@link IocContainer} used to manage components with their implementation. It should be created
+   * and initialized on the first call of this method. <br>
+   * This default implementation simply returns {@code null} to avoid dependencies on a {@link IocContainer}
+   * implementation. Override this method to use proper component management.
    *
    * @see net.sf.mmm.util.component.impl.SpringContainer
    *
@@ -131,8 +131,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   /**
    * This method gets the {@link CliParserBuilder} used to {@link CliParserBuilder#build(Object) build} the
    * {@link CliParser}. <br>
-   * To extend with custom functionality you should use an {@link #getIocContainer() IoC container} in advance
-   * to overriding this method.
+   * To extend with custom functionality you should use an {@link #getIocContainer() IoC container} in advance to
+   * overriding this method.
    *
    * @return the {@link CliParserBuilder}.
    */
@@ -180,8 +180,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the standard output where to {@link PrintWriter#println() print} information for the
-   * end-user. <br>
+   * This method gets the standard output where to {@link PrintWriter#println() print} information for the end-user.
+   * <br>
    * Default is {@link System#out}.
    *
    * @return the standard output.
@@ -192,8 +192,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method sets the {@link #getStandardOutput() standard output}. It may be used by sub-classes or tests
-   * to redirect output.
+   * This method sets the {@link #getStandardOutput() standard output}. It may be used by sub-classes or tests to
+   * redirect output.
    *
    * @param output is the output to set
    */
@@ -203,8 +203,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the standard error where to {@link Appendable#append(CharSequence) print} errors for the
-   * end-user. <br>
+   * This method gets the standard error where to {@link Appendable#append(CharSequence) print} errors for the end-user.
+   * <br>
    * Default is {@link System#err}.
    *
    * @return the output stream.
@@ -215,8 +215,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method sets the {@link #getStandardError() standard error}. It may be used by sub-classes or tests
-   * to redirect errors.
+   * This method sets the {@link #getStandardError() standard error}. It may be used by sub-classes or tests to redirect
+   * errors.
    *
    * @param error is the error to set.
    */
@@ -236,8 +236,8 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method is called after the command-line arguments are checked for syntactically correctness and
-   * applied to this class in order to perform complex validations.
+   * This method is called after the command-line arguments are checked for syntactically correctness and applied to
+   * this class in order to perform complex validations.
    *
    * @param mode is the {@link CliModeObject mode} of the invocation.
    * @throws RuntimeException if the state is invalid.
@@ -272,9 +272,9 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method delegates to {@link #run(String...)} and then calls {@link System#exit(int)} with the
-   * returned exit code. You can easily call this additional statement from your regular {@code main}
-   * method, but this allows us to concentrate the "evil" {@link System#out} statement at a single place.
+   * This method delegates to {@link #run(String...)} and then calls {@link System#exit(int)} with the returned exit
+   * code. You can easily call this additional statement from your regular {@code main} method, but this allows us to
+   * concentrate the "evil" {@link System#out} statement at a single place.
    *
    * @param args are the commandline arguments.
    */

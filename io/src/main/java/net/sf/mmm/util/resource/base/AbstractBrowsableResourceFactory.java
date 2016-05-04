@@ -21,10 +21,10 @@ import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractBrowsableResourceFactory extends AbstractDataResourceFactory implements
-    BrowsableResourceFactory {
+public abstract class AbstractBrowsableResourceFactory extends AbstractDataResourceFactory
+    implements BrowsableResourceFactory {
 
-  private  final Map<String, DataResourceProvider<? extends DataResource>> schema2providerMap;
+  private final Map<String, DataResourceProvider<? extends DataResource>> schema2providerMap;
 
   /**
    * The constructor.
@@ -159,7 +159,7 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
    */
   protected class BrowsableResourceAdapter extends AbstractBrowsableResourceProxy {
 
-    private  final BrowsableResource delegate;
+    private final BrowsableResource delegate;
 
     /**
      * The constructor.
@@ -172,7 +172,8 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
       this.delegate = delegate;
     }
 
-    @Override    protected BrowsableResource getDelegate() {
+    @Override
+    protected BrowsableResource getDelegate() {
 
       return this.delegate;
     }

@@ -14,10 +14,10 @@ import net.sf.mmm.util.value.api.ComposedValueConverterFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public abstract class AbstractComposedValueConverterFactory extends AbstractLoggableComponent implements
-    ComposedValueConverterFactory {
+public abstract class AbstractComposedValueConverterFactory extends AbstractLoggableComponent
+    implements ComposedValueConverterFactory {
 
-  private  ComposedValueConverter defaultConverter;
+  private ComposedValueConverter defaultConverter;
 
   /**
    * The constructor.

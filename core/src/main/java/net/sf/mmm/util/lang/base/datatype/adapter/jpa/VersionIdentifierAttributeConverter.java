@@ -22,7 +22,7 @@ public class VersionIdentifierAttributeConverter
     // https://hibernate.atlassian.net/browse/HHH-8854
     AttributeConverter<VersionIdentifier, String> {
 
-  private  VersionUtil versionUtil;
+  private VersionUtil versionUtil;
 
   /**
    * The constructor.

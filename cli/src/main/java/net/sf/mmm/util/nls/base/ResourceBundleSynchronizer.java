@@ -54,7 +54,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  */
 @CliClass(usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE)
 @CliMode(id = CliMode.ID_DEFAULT, title = NlsBundleUtilCliRoot.INF_MAIN_MODE_DEFAULT, //
-usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT)
+    usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT)
 public class ResourceBundleSynchronizer extends AbstractVersionedMain {
 
   /**
@@ -77,37 +77,37 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   /** @see #getPath() */
   protected static final String DEFAULT_BASE_PATH = "src/main/resources";
 
-  private  static final String DEFAULT_ENCODING = "UTF-8";
+  private static final String DEFAULT_ENCODING = "UTF-8";
 
-  private  static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss Z";
+  private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss Z";
 
   @CliOption(name = OPTION_PATH, aliases = "-p", operand = "DIR", //
-  usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_PATH)
+      usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_PATH)
   private String path;
 
   @CliOption(name = OPTION_ENCODING, aliases = "-e", operand = "ENC", //
-  usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_ENCODING)
+      usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_ENCODING)
   private String encoding;
 
-  private  String newline;
+  private String newline;
 
   @CliOption(name = OPTION_DATE_PATTERN, aliases = "-d", operand = "PATTERN", //
-  usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN)
+      usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_DATE_PATTERN)
   private String datePattern;
 
   @CliOption(name = OPTION_LOCALE, aliases = "-l", operand = "LOCALE", //
-  required = true, usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_LOCALES)
+      required = true, usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_LOCALES)
   private String[] locales;
 
   @CliOption(name = OPTION_BUNDLE_CLASS, aliases = "-b", operand = "CLASS", //
-  usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
+      usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS)
   private List<Class<?>> bundleClasses;
 
-  private  NlsResourceBundleLocator resourceBundleLocator;
+  private NlsResourceBundleLocator resourceBundleLocator;
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
-  private  NlsBundleHelper bundleHelper;
+  private NlsBundleHelper bundleHelper;
 
   /**
    * The constructor.
@@ -218,8 +218,8 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
   }
 
   /**
-   * This method sets the newline string used to terminate a line in the resource bundle.
-   * The default is LF ({@code \n}).
+   * This method sets the newline string used to terminate a line in the resource bundle. The default is LF ({@code \n}
+   * ).
    *
    * @return the newline
    */
@@ -511,7 +511,7 @@ public class ResourceBundleSynchronizer extends AbstractVersionedMain {
     /** The {@link NlsBundle}-interface or {@code null} if {@link #resourceBundle} is given. */
     private final Class<? extends NlsBundle> nlsBundleInterface;
 
-    private  Map<String, String> properties;
+    private Map<String, String> properties;
 
     /**
      * The constructor.

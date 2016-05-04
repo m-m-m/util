@@ -6,10 +6,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.validation.api.ValueValidator;
-
-import org.slf4j.Logger;
 
 /**
  * This class is a container for the values for {@link net.sf.mmm.util.cli.api.CliOption options} and
@@ -20,7 +20,7 @@ import org.slf4j.Logger;
  */
 public class CliValueMap {
 
-  private  final Map<CliParameterContainer, CliValueContainer> map;
+  private final Map<CliParameterContainer, CliValueContainer> map;
 
   /** The {@link CliParserDependencies}. */
   private final CliParserDependencies dependencies;
@@ -83,8 +83,8 @@ public class CliValueMap {
         Class<? extends Collection<?>> collectionClass = (Class<? extends Collection<?>>) propertyClass;
         Collection<Object> collection = this.dependencies.getCollectionFactoryManager()
             .getCollectionFactory(collectionClass).create();
-        result = new CliValueContainerCollection(parameterContainer, this.cliState, this.dependencies,
-            this.logger, collection);
+        result = new CliValueContainerCollection(parameterContainer, this.cliState, this.dependencies, this.logger,
+            collection);
       } else if (Map.class.isAssignableFrom(propertyClass)) {
         Class<? extends Map<?, ?>> mapClass = (Class<? extends Map<?, ?>>) propertyClass;
         Map<Object, Object> mapValue = this.dependencies.getCollectionFactoryManager().getMapFactory(mapClass)

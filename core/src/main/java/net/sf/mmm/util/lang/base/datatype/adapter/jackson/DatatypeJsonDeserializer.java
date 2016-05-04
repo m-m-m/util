@@ -10,21 +10,21 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.lang.api.DatatypeDescriptor;
-import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
-import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
-import net.sf.mmm.util.value.api.ValueNotSetException;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import net.sf.mmm.util.lang.api.DatatypeDescriptor;
+import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
+import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
+import net.sf.mmm.util.value.api.ValueNotSetException;
+
 /**
- * This is a generic implementation of {@link JsonDeserializer} based on {@link DatatypeDescriptorManager} so
- * every {@link net.sf.mmm.util.lang.api.Datatype} supported by {@link DatatypeDescriptorManager} can be
- * deserialized from JSON.
+ * This is a generic implementation of {@link JsonDeserializer} based on {@link DatatypeDescriptorManager} so every
+ * {@link net.sf.mmm.util.lang.api.Datatype} supported by {@link DatatypeDescriptorManager} can be deserialized from
+ * JSON.
  *
  * @see DatatypeJsonSerializer
  *
@@ -38,7 +38,7 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
   /** The class reflecting the datatype to deserialize. */
   private final Class<T> datatype;
 
-  private  DatatypeDescriptorManager datatypeDescriptorManager;
+  private DatatypeDescriptorManager datatypeDescriptorManager;
 
   /**
    * The constructor.
@@ -80,10 +80,9 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
    * @param node is the {@link JsonNode} containing the value as child.
    * @param fieldName is the {@link JsonNode#get(String) field name} of the requested value.
    * @param type is the {@link Class} reflecting the requested type to convert to.
-   * @param required - {@code true} if the value is mandatory and an exception will be thrown if the
-   *        value is not present, {@code false} otherwise.
-   * @return the requested and converted value. May be {@code null} if not set and {@code required}
-   *         is {@code false}.
+   * @param required - {@code true} if the value is mandatory and an exception will be thrown if the value is not
+   *        present, {@code false} otherwise.
+   * @return the requested and converted value. May be {@code null} if not set and {@code required} is {@code false}.
    */
   protected <V> V getValue(JsonNode node, String fieldName, Class<V> type, boolean required) {
 
@@ -187,11 +186,10 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
    * @param parser is the {@link JsonParser}.
    * @param context is the {@link DeserializationContext}.
    * @param type is the {@link Class} reflecting the expected type of the value to deserialize.
-   * @param parentNode is the {@link JsonNode} that has already been parsed (recursive call) or
-   *        {@code null} if the value has to be read from {@link JsonParser}.
-   * @param segment is the {@link DatatypeSegmentDescriptor} with the segment to deserialize as child of
-   *        parentNode (recursive call) or {@code null} if the value has to be read from
-   *        {@link JsonParser}.
+   * @param parentNode is the {@link JsonNode} that has already been parsed (recursive call) or {@code null} if the
+   *        value has to be read from {@link JsonParser}.
+   * @param segment is the {@link DatatypeSegmentDescriptor} with the segment to deserialize as child of parentNode
+   *        (recursive call) or {@code null} if the value has to be read from {@link JsonParser}.
    * @return the deserialized value.
    * @throws IOException if reading from {@link JsonParser} causes an I/O problem.
    */
@@ -229,7 +227,8 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
   }
 
   @Override
-  public T deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+  public T deserialize(JsonParser parser, DeserializationContext context)
+      throws IOException, JsonProcessingException {
 
     return deserializeGeneric(parser, context, this.datatype, null, null);
   }

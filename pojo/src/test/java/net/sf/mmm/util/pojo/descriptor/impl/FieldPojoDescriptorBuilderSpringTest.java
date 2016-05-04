@@ -7,9 +7,8 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 
 /**
- * This is the test-case for {@link PojoDescriptorBuilderFactory#createPrivateFieldDescriptorBuilder()} using
- * spring.
- * 
+ * This is the test-case for {@link PojoDescriptorBuilderFactory#createPrivateFieldDescriptorBuilder()} using spring.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class FieldPojoDescriptorBuilderSpringTest extends FieldPojoDescriptorBuilderTest {
@@ -17,8 +16,8 @@ public class FieldPojoDescriptorBuilderSpringTest extends FieldPojoDescriptorBui
   @Override
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
-    PojoDescriptorBuilderFactory factory = SpringContainerPool.getInstance().get(
-        PojoDescriptorBuilderFactory.class);
+    PojoDescriptorBuilderFactory factory = SpringContainerPool.getInstance()
+        .get(PojoDescriptorBuilderFactory.class);
     return factory.createPrivateFieldDescriptorBuilder();
   }
 }

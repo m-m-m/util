@@ -132,6 +132,7 @@ public class NlsCachingLocalizer implements NlsLocalizer {
     return message.getLocalizedMessage(locale);
   }
 
+  @Override
   @SuppressWarnings("deprecation")
   public String localize(Locale locale, String internationalizedMessage) {
 

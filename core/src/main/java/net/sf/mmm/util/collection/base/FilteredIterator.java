@@ -7,15 +7,13 @@ import java.util.Iterator;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
- * This is an implementation of an {@link Iterator} that adapts another {@link Iterator} but only
- * {@link #next() iterates} the elements that are {@link Filter#accept(Object) accepted} by a given
- * {@link Filter}. <br>
+ * This is an implementation of an {@link Iterator} that adapts another {@link Iterator} but only {@link #next()
+ * iterates} the elements that are {@link Filter#accept(Object) accepted} by a given {@link Filter}. <br>
  * <b>ATTENTION:</b><br>
- * According to the design of the {@link Iterator} interface, it is NOT possible to implement the
- * {@link #remove()} method properly here. The method {@link #hasNext()} has to step forward in the adapted
- * {@link Iterator} and a call of {@link #remove()} would cause unintended and unpredictable results after
- * {@link #hasNext()} has been called. To prevent damage {@link #remove()} will always throw an
- * {@link UnsupportedOperationException}.
+ * According to the design of the {@link Iterator} interface, it is NOT possible to implement the {@link #remove()}
+ * method properly here. The method {@link #hasNext()} has to step forward in the adapted {@link Iterator} and a call of
+ * {@link #remove()} would cause unintended and unpredictable results after {@link #hasNext()} has been called. To
+ * prevent damage {@link #remove()} will always throw an {@link UnsupportedOperationException}.
  *
  * @param <E> is the generic type of the {@link #next() iterated} elements.
  *
@@ -27,7 +25,7 @@ public class FilteredIterator<E> extends AbstractIterator<E> {
   /** The actual iterator instance to adapt. */
   private final Iterator<? extends E> delegate;
 
-  private  final Filter<? super E> filter;
+  private final Filter<? super E> filter;
 
   /**
    * The constructor.

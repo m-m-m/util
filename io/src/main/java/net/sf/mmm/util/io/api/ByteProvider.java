@@ -3,9 +3,9 @@
 package net.sf.mmm.util.io.api;
 
 /**
- * This is an abstract interface for some object (typically some buffer) that provides bytes. The main impact
- * is to avoid redundant method declarations. It should not be used directly.
- * 
+ * This is an abstract interface for some object (typically some buffer) that provides bytes. The main impact is to
+ * avoid redundant method declarations. It should not be used directly.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -13,7 +13,7 @@ public abstract interface ByteProvider {
 
   /**
    * This method gets the number of bytes available.
-   * 
+   *
    * @return the bytes left.
    */
   int getBytesAvailable();

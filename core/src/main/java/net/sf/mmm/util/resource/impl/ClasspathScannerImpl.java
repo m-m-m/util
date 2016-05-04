@@ -36,9 +36,9 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
 @Named
 public class ClasspathScannerImpl extends AbstractLoggableComponent implements ClasspathScanner {
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
-  private  Cache cache;
+  private Cache cache;
 
   /**
    * The constructor.
@@ -68,8 +68,8 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
 
     if (this.cache == null) {
       ClasspathFolder rootFolder = new ClasspathFolder(null, "");
-      Set<String> resourceNames = this.reflectionUtil
-          .findResourceNames("", true, ConstantFilter.getInstance(true));
+      Set<String> resourceNames = this.reflectionUtil.findResourceNames("", true,
+          ConstantFilter.getInstance(true));
       List<ClasspathFile> fileList = new ArrayList<>(resourceNames.size());
       for (String resource : resourceNames) {
         ResourcePathNode<Void> path = ResourcePathNode.create(resource);
@@ -127,7 +127,8 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
   }
 
   @Override
-  public Iterable<? extends BrowsableResource> getClasspathResourceFiles(Filter<? super BrowsableResource> filter) {
+  public Iterable<? extends BrowsableResource> getClasspathResourceFiles(
+      Filter<? super BrowsableResource> filter) {
 
     return new FilteredIterable<>(getCache().getClasspathResourceFiles(), filter);
   }
@@ -153,12 +154,12 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
   /**
    * Abstract base implementation of {@link BrowsableResource} for {@link ClasspathFile} or {@link ClasspathFolder}.
    */
-  protected abstract static class AbstractBrowsableClasspathResource extends AbstractBrowsableResource implements
-      ResourcePath {
+  protected abstract static class AbstractBrowsableClasspathResource extends AbstractBrowsableResource
+      implements ResourcePath {
 
-    private  final ClasspathFolder parent;
+    private final ClasspathFolder parent;
 
-    private  final String name;
+    private final String name;
 
     /**
      * The constructor.
@@ -276,7 +277,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
    */
   protected static class ClasspathFolder extends AbstractBrowsableClasspathResource {
 
-    private  List<AbstractBrowsableClasspathResource> children;
+    private List<AbstractBrowsableClasspathResource> children;
 
     /**
      * The constructor.
@@ -410,8 +411,8 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
      * @see #navigate(ResourcePathNode)
      *
      * @param resourcePath the path to navigate to.
-     * @param returnNullIfNotExists - if {@code true} then {@code null} is returned for non-existent
-     *        resources, otherwise a {@link ClasspathResource} is created and returned.
+     * @param returnNullIfNotExists - if {@code true} then {@code null} is returned for non-existent resources,
+     *        otherwise a {@link ClasspathResource} is created and returned.
      * @return the requested {@link DataResource}.
      */
     public DataResource navigate(String resourcePath, boolean returnNullIfNotExists) {
@@ -439,7 +440,7 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
    */
   protected static class ClasspathFile extends AbstractBrowsableClasspathResource {
 
-    private  URL url;
+    private URL url;
 
     /**
      * The constructor.
@@ -485,9 +486,9 @@ public class ClasspathScannerImpl extends AbstractLoggableComponent implements C
    */
   protected static class Cache {
 
-    private  final ClasspathFolder root;
+    private final ClasspathFolder root;
 
-    private  final List<ClasspathFile> classpathResourceFiles;
+    private final List<ClasspathFile> classpathResourceFiles;
 
     /**
      * The constructor.

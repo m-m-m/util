@@ -18,8 +18,8 @@ final class Helper {
   }
 
   /**
-   * @return the current clock measure in nanoseconds. Will be {@link System#nanoTime()} or an emulation of it
-   *         in environments where not available.
+   * @return the current clock measure in nanoseconds. Will be {@link System#nanoTime()} or an emulation of it in
+   *         environments where not available.
    */
   public static long getNanoTime() {
 

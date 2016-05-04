@@ -19,6 +19,7 @@ public class HashSetFactory extends AbstractSetFactory {
   /** The singleton instance. */
   public static final SetFactory INSTANCE = new HashSetFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<HashSet> getCollectionImplementation() {
 

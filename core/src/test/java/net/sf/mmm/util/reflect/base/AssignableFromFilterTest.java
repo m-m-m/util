@@ -7,11 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.reflect.base.AssignableFromFilter;
-
 /**
  * This is the test-case for the class {@link AssignableFromFilter}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

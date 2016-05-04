@@ -4,7 +4,7 @@ package net.sf.mmm.util.lang.base;
 
 /**
  * This is an abstract base implementation of the {@link CharSequence} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -24,9 +24,9 @@ public abstract class CoreCharSequence implements CharSequence {
 
   /**
    * {@inheritDoc}
-   * 
-   * This implementation is to be discussed, because it can violate the contract of the equals method as
-   * defined by {@link Object}.
+   *
+   * This implementation is to be discussed, because it can violate the contract of the equals method as defined by
+   * {@link Object}.
    */
   @Override
   public boolean equals(Object other) {

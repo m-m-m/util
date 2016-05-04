@@ -10,14 +10,14 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.junit.Test;
+
 import junit.framework.Assert;
 import net.sf.mmm.util.resource.api.DataResource;
 
-import org.junit.Test;
-
 /**
  * This is the test-case for the class {@link ClasspathUtil}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -46,8 +46,8 @@ public class ClasspathResourceTest {
     verifyResource(resource);
     verifyResource(new ClasspathResource(ClasspathResource.class, //
         ClasspathResource.class.getSimpleName() + ".txt", false));
-    verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(), ClasspathResource.class.getSimpleName()
-        + ".txt"));
+    verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(),
+        ClasspathResource.class.getSimpleName() + ".txt"));
     String name = ClasspathResource.class.getSimpleName() + ".txt";
     String absoluteClasspath = ClasspathResource.class.getPackage().getName().replace('.', '/') + "/" + name;
     verifyResource(new ClasspathResource(absoluteClasspath));

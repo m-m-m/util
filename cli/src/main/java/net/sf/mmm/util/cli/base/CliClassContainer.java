@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+
 import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliMode;
@@ -22,8 +24,6 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 
-import org.slf4j.Logger;
-
 /**
  * A {@link CliClassContainer} determines and holds the class-specific CLI-informations of a {@link #getStateClass()
  * state-class}.
@@ -33,17 +33,17 @@ import org.slf4j.Logger;
  */
 public class CliClassContainer {
 
-  private  final Class<?> stateClass;
+  private final Class<?> stateClass;
 
-  private  final CliStyle cliStyle;
+  private final CliStyle cliStyle;
 
-  private  final CliClass cliClass;
+  private final CliClass cliClass;
 
-  private  final Map<String, CliModeContainer> id2ModeMap;
+  private final Map<String, CliModeContainer> id2ModeMap;
 
-  private  final String name;
+  private final String name;
 
-  private  final Logger logger;
+  private final Logger logger;
 
   /**
    * The constructor.
@@ -74,8 +74,8 @@ public class CliClassContainer {
       cliStyleAnnotation = CliDefaultAnnotations.CLI_STYLE;
     }
     if (cliStyleAnnotation.containerStyle() == CliContainerStyle.DEFAULT) {
-      throw new NlsIllegalArgumentException(CliContainerStyle.DEFAULT, "@" + CliStyle.class.getSimpleName()
-          + ".containerStyle()");
+      throw new NlsIllegalArgumentException(CliContainerStyle.DEFAULT,
+          "@" + CliStyle.class.getSimpleName() + ".containerStyle()");
     }
     this.cliStyle = cliStyleAnnotation;
     if (cliClassAnnotation == null) {
@@ -125,8 +125,8 @@ public class CliClassContainer {
    * This method initializes the given {@link CliModeContainer}.
    *
    * @param mode is the {@link CliModeContainer} to initialize.
-   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or {@code null}
-   *         if the initialization was successful.
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or {@code null} if the
+   *         initialization was successful.
    * @throws NodeCycleException if a cyclic dependency was detected and completed.
    */
   protected NodeCycle<CliModeContainer> initializeModeRecursive(CliModeContainer mode) throws NodeCycleException {
@@ -283,7 +283,8 @@ public class CliClassContainer {
     /** The singleton instance. */
     private static final CliModeFormatter INSTANCE = new CliModeFormatter();
 
-    @Override    @SuppressWarnings("all")
+    @Override
+    @SuppressWarnings("all")
     public <T extends String> T convert(CliModeContainer value, Object valueSource, Class<T> targetClass)
         throws ValueException {
 

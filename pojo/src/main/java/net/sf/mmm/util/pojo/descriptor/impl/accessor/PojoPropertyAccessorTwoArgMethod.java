@@ -15,20 +15,19 @@ import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorTwoArg} interface for accessing a
- * {@link Method}.
- * 
+ * This is the implementation of the {@link PojoPropertyAccessorTwoArg} interface for accessing a {@link Method}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorTwoArgMethod extends AbstractPojoPropertyAccessorMethod implements
-    PojoPropertyAccessorTwoArg {
+public class PojoPropertyAccessorTwoArgMethod extends AbstractPojoPropertyAccessorMethod
+    implements PojoPropertyAccessorTwoArg {
 
-  private  final PojoPropertyAccessorTwoArgMode mode;
+  private final PojoPropertyAccessorTwoArgMode mode;
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the property.
    * @param mode is the {@link #getMode() mode} of access.
@@ -36,8 +35,9 @@ public class PojoPropertyAccessorTwoArgMethod extends AbstractPojoPropertyAccess
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param method is the {@link #getMethod() method} to access.
    */
-  public PojoPropertyAccessorTwoArgMethod(String propertyName, Type propertyType, PojoPropertyAccessorTwoArgMode mode,
-      PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies, Method method) {
+  public PojoPropertyAccessorTwoArgMethod(String propertyName, Type propertyType,
+      PojoPropertyAccessorTwoArgMode mode, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies,
+      Method method) {
 
     super(propertyName, propertyType, descriptor, dependencies, method);
     this.mode = mode;

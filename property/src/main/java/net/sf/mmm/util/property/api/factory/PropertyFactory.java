@@ -11,8 +11,8 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
  * This is the interface for the factory of a specific {@link ReadableProperty property} type. You can directly
- * instantiate implementations such as {@link net.sf.mmm.util.property.api.lang.StringProperty}. However for generic support
- * such as {@link net.sf.mmm.util.bean.api.BeanAccess#createProperty(String, Class)} according types have to be
+ * instantiate implementations such as {@link net.sf.mmm.util.property.api.lang.StringProperty}. However for generic
+ * support such as {@link net.sf.mmm.util.bean.api.BeanAccess#createProperty(String, Class)} according types have to be
  * registered via an implementation of this interface.
  *
  * @param <V> the generic type of the {@link ReadableProperty#getValue() property value}.
@@ -52,15 +52,15 @@ public interface PropertyFactory<V, P extends ReadableProperty<V>> {
    *
    * @param name the {@link ReadableProperty#getName() property name}.
    * @param valueType is the {@link GenericType} of the value. Only needed for generic properties such as
-   *        {@link net.sf.mmm.util.property.api.lang.GenericProperty} or {@link net.sf.mmm.util.property.api.util.ListProperty}.
-   *        Can be {@code null} if the generic value type is already bound and should be ignored then.
+   *        {@link net.sf.mmm.util.property.api.lang.GenericProperty} or
+   *        {@link net.sf.mmm.util.property.api.util.ListProperty}. Can be {@code null} if the generic value type is
+   *        already bound and should be ignored then.
    * @param bean the {@link ReadableProperty#getBean() property bean}.
    * @param validator the {@link AbstractValidator validator} used for {@link WritableProperty#validate() validation}.
    *        May be {@code null}.
    *
    * @return the new instance of the property.
    */
-  P create(String name, GenericType<? extends V> valueType, Bean bean,
-      AbstractValidator<? super V> validator);
+  P create(String name, GenericType<? extends V> valueType, Bean bean, AbstractValidator<? super V> validator);
 
 }

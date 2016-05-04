@@ -8,11 +8,11 @@ import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 
-import junit.framework.TestCase;
-import net.sf.mmm.util.resource.base.ClasspathResource;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import junit.framework.TestCase;
+import net.sf.mmm.util.resource.base.ClasspathResource;
 
 /**
  * This is the {@link TestCase} for {@link StringTransformerChainXmlParser}.

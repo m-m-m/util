@@ -10,7 +10,7 @@ package net.sf.mmm.util.event.api;
  */
 public class EventListenerIgnore implements EventListener<Object> {
 
-  private  static final EventListenerIgnore INSTANCE = new EventListenerIgnore();
+  private static final EventListenerIgnore INSTANCE = new EventListenerIgnore();
 
   /**
    * The constructor.

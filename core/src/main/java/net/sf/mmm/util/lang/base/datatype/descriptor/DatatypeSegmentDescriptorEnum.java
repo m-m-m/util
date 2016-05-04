@@ -7,15 +7,15 @@ import java.util.Locale;
 import net.sf.mmm.util.lang.api.StringUtil;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor} for an
- * {@link Enum}.
+ * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor} for an {@link Enum}.
  *
  * @param <T> is the generic type of the described {@link Enum}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
  */
-public class DatatypeSegmentDescriptorEnum<T extends Enum<T>> extends AbstractDatatypeSegmentDescriptor<T, String> {
+public class DatatypeSegmentDescriptorEnum<T extends Enum<T>>
+    extends AbstractDatatypeSegmentDescriptor<T, String> {
 
   /** The {@link StringUtil} instance. */
   private final StringUtil stringUtil;

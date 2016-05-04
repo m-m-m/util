@@ -18,15 +18,15 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexed
 /**
  * This is the implementation of the {@link PojoPropertyAccessorIndexedNonArgBuilder} interface for
  * {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED indexed getter-access}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @Singleton
 @Named
-public class PojoPropertyAccessorGetIndexedBuilder extends
-    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorIndexedNonArg> implements
-    PojoPropertyAccessorIndexedNonArgBuilder {
+public class PojoPropertyAccessorGetIndexedBuilder
+    extends AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorIndexedNonArg>
+    implements PojoPropertyAccessorIndexedNonArgBuilder {
 
   /** method name prefix for classic getter. */
   private static final String METHOD_PREFIX_GET = "get";

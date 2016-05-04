@@ -8,7 +8,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a factory used to create instances of {@link NlsMessage}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -20,11 +20,10 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
-   *        message}.
-   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message
-   *        after nationalization.
+   *
+   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
+   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message after
+   *        nationalization.
    * @return the new {@link NlsMessage} instance.
    * @deprecated use {@link #create(String, Map)} instead.
    */
@@ -33,12 +32,11 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw
-   *        message}.
-   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message
-   *        after nationalization.
-   * 
+   *
+   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw message}.
+   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message after
+   *        nationalization.
+   *
    * @return the new {@link NlsMessage} instance.
    * @deprecated use {@link #create(NlsTemplate, Map)} instead.
    */
@@ -47,9 +45,8 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
-   *        message}.
+   *
+   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
    * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first argument.
    * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the first argument.
    * @return the new {@link NlsMessage} instance.
@@ -58,9 +55,8 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw
-   *        message}.
+   *
+   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw message}.
    * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first argument.
    * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the first argument.
    * @return the new {@link NlsMessage} instance.
@@ -69,9 +65,8 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
-   *        message}.
+   *
+   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
    * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first argument.
    * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the first argument.
    * @param key2 is the {@link NlsMessage#getArgument(String) key} of the second argument.
@@ -82,9 +77,8 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw
-   *        message}.
+   *
+   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw message}.
    * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first argument.
    * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the first argument.
    * @param key2 is the {@link NlsMessage#getArgument(String) key} of the second argument.
@@ -95,9 +89,8 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
-   *        message}.
+   *
+   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
    * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first argument.
    * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the first argument.
    * @param key2 is the {@link NlsMessage#getArgument(String) key} of the second argument.
@@ -111,9 +104,8 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw
-   *        message}.
+   *
+   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw message}.
    * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first argument.
    * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the first argument.
    * @param key2 is the {@link NlsMessage#getArgument(String) key} of the second argument.
@@ -122,14 +114,13 @@ public interface NlsMessageFactory {
    * @param argument3 is the {@link NlsMessage#getArgument(String) value} of the third argument.
    * @return the new {@link NlsMessage} instance.
    */
-  NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2, String key3,
-      Object argument3);
+  NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
+      String key3, Object argument3);
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
-   *        message}.
+   *
+   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
    * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first argument.
    * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the first argument.
    * @param key2 is the {@link NlsMessage#getArgument(String) key} of the second argument.
@@ -149,9 +140,8 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw
-   *        message}.
+   *
+   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw message}.
    * @param key1 is the {@link NlsMessage#getArgument(String) key} of the first argument.
    * @param argument1 is the {@link NlsMessage#getArgument(String) value} of the first argument.
    * @param key2 is the {@link NlsMessage#getArgument(String) key} of the second argument.
@@ -164,18 +154,17 @@ public interface NlsMessageFactory {
    * @since 1.1.1
    */
   // CHECKSTYLE:OFF (many arguments for convenience)
-  NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2, String key3,
-      Object argument3, String key4, Object argument4);
+  NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
+      String key3, Object argument3, String key4, Object argument4);
 
   // CHECKSTYLE:ON
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
-   *        message}.
-   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message
-   *        after nationalization.
+   *
+   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
+   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message after
+   *        nationalization.
    * @return the new {@link NlsMessage} instance.
    */
   NlsMessage create(String internationalizedMessage, Map<String, Object> messageArguments);
@@ -183,16 +172,16 @@ public interface NlsMessageFactory {
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments. <br>
    * <b>ATTENTION:</b><br>
-   * This us an uncommon way for creating an {@link NlsMessage}. It should only be used for specific cases
-   * where both {@link NlsBundle} and {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} are NOT
-   * suitable. Please read {@link net.sf.mmm.util.nls.api} as motivation and introduction.
-   * 
+   * This us an uncommon way for creating an {@link NlsMessage}. It should only be used for specific cases where both
+   * {@link NlsBundle} and {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} are NOT suitable. Please read
+   * {@link net.sf.mmm.util.nls.api} as motivation and introduction.
+   *
    * @see #createDirect(String, String, Map)
-   * 
-   * @param bundleName is the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name}
-   *        of the bundle containing the message.
-   * @param key is the {@link java.util.ResourceBundle#getString(String) key} for the lookup. Will be used as
-   *        fallback for the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
+   *
+   * @param bundleName is the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} of the
+   *        bundle containing the message.
+   * @param key is the {@link java.util.ResourceBundle#getString(String) key} for the lookup. Will be used as fallback
+   *        for the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
    * @return the new {@link NlsMessage} instance.
    * @since 3.1.0
    */
@@ -201,16 +190,16 @@ public interface NlsMessageFactory {
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments. <br>
    * <b>ATTENTION:</b><br>
-   * This us an uncommon way for creating an {@link NlsMessage}. It should only be used for specific cases
-   * where both {@link NlsBundle} and {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} are NOT
-   * suitable. Please read {@link net.sf.mmm.util.nls.api} as motivation and introduction.
-   * 
-   * @param bundleName is the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name}
-   *        of the bundle containing the message.
-   * @param key is the {@link java.util.ResourceBundle#getString(String) key} for the lookup. Will be used as
-   *        fallback for the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
-   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message
-   *        after nationalization.
+   * This us an uncommon way for creating an {@link NlsMessage}. It should only be used for specific cases where both
+   * {@link NlsBundle} and {@link net.sf.mmm.util.nls.base.AbstractResourceBundle} are NOT suitable. Please read
+   * {@link net.sf.mmm.util.nls.api} as motivation and introduction.
+   *
+   * @param bundleName is the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} of the
+   *        bundle containing the message.
+   * @param key is the {@link java.util.ResourceBundle#getString(String) key} for the lookup. Will be used as fallback
+   *        for the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
+   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message after
+   *        nationalization.
    * @return the new {@link NlsMessage} instance.
    * @since 3.1.0
    */
@@ -218,31 +207,28 @@ public interface NlsMessageFactory {
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw
-   *        message}.
-   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message
-   *        after nationalization.
+   *
+   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw message}.
+   * @param messageArguments are the {@link NlsMessage#getArgument(String) arguments} filled into the message after
+   *        nationalization.
    * @return the new {@link NlsMessage} instance.
    */
   NlsMessage create(NlsTemplate template, Map<String, Object> messageArguments);
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
-   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized
-   *        message}.
+   *
+   * @param internationalizedMessage is the {@link NlsMessage#getInternationalizedMessage() internationalized message}.
    * @return the new {@link NlsMessage} instance.
    */
   NlsMessage create(String internationalizedMessage);
 
   /**
    * This method creates a new instance of {@link NlsMessage} from the given arguments.
-   * 
+   *
    * @see #create(NlsTemplate, Map)
-   * 
-   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw
-   *        message}.
+   *
+   * @param template is the {@link NlsTemplate} for the {@link NlsMessage#getInternationalizedMessage() raw message}.
    * @return the new {@link NlsMessage} instance.
    */
   NlsMessage create(NlsTemplate template);

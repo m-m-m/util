@@ -4,7 +4,7 @@ package net.sf.mmm.util.component.base;
 
 /**
  * This type is a collection of spring XML configuration files for the entire project.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */

@@ -12,8 +12,8 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.transferobject.api.EntityTo;
 
 /**
- * This class extends {@link AbstractValueConverterToCompatiblePojo} for conversion from {@link EntityTo ETO}
- * to {@link PersistenceEntity}.
+ * This class extends {@link AbstractValueConverterToCompatiblePojo} for conversion from {@link EntityTo ETO} to
+ * {@link PersistenceEntity}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0
@@ -44,8 +44,8 @@ public class ValueConverterEtoToEntity extends AbstractValueConverterToSimilarPo
   }
 
   @Override
-  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass, Object sourceObject,
-      Class<?> sourceClass) {
+  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass,
+      Object sourceObject, Class<?> sourceClass) {
 
     Class<?> propertyClass = setter.getPropertyClass();
     if (GenericEntity.class.isAssignableFrom(propertyClass)) {

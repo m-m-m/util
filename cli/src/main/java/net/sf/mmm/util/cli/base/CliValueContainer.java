@@ -20,16 +20,16 @@ public interface CliValueContainer {
   Object getValue();
 
   /**
-   * This method sets the {@link #getValue() value} given as string. For the parameter-types array, collection
-   * or map this method may be called multiple times, one for each item.
+   * This method sets the {@link #getValue() value} given as string. For the parameter-types array, collection or map
+   * this method may be called multiple times, one for each item.
    *
    * @param argument is the argument from the commandline containing the value.
    */
   void setValue(String argument);
 
   /**
-   * @return {@code true} if this is a container for a value of the type array,
-   *         {@link java.util.Collection} or {@link java.util.Map} - {@code false} otherwise.
+   * @return {@code true} if this is a container for a value of the type array, {@link java.util.Collection} or
+   *         {@link java.util.Map} - {@code false} otherwise.
    */
   boolean isArrayMapOrCollection();
 

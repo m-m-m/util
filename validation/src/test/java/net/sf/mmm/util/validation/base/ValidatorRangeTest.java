@@ -5,12 +5,12 @@ package net.sf.mmm.util.validation.base;
 import java.util.Date;
 import java.util.Locale;
 
+import org.junit.Test;
+
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
-
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link ValidatorRange}.
@@ -70,9 +70,7 @@ public class ValidatorRangeTest extends AbstractValidatorTest {
       V valueOutOfRange) {
 
     Locale locale = AbstractNlsMessage.LOCALE_ROOT;
-    ValidationFailure failure = verifyNegativeValidation(
-        validator,
-        valueOutOfRange,
+    ValidationFailure failure = verifyNegativeValidation(validator, valueOutOfRange,
         "The value " + toString(valueOutOfRange, locale) + " needs to be in the range from "
             + toString(min, locale) + " to " + toString(max, locale) + ".");
     locale = Locale.GERMANY;

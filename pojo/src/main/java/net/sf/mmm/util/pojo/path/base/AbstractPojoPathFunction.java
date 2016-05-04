@@ -10,15 +10,15 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
 
 /**
  * This is the abstract base implementation of the {@link PojoPathFunction} interface.
- * 
+ *
  * @param <IN> is the generic {@link #getInputClass() input-type}.
  * @param <VALUE> is the generic {@link #getValueClass() value-type}
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggableComponent implements
-    PojoPathFunction<IN, VALUE> {
+public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggableComponent
+    implements PojoPathFunction<IN, VALUE> {
 
   /**
    * The constructor.
@@ -30,7 +30,7 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * This implementation always returns {@code true}. Override for indeterministic implementations.
    */
   @Override
@@ -41,7 +41,7 @@ public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggab
 
   /**
    * This method gets a description of this function.
-   * 
+   *
    * @param functionName is the name under which this function was invoked.
    * @return a string describing this function.
    */

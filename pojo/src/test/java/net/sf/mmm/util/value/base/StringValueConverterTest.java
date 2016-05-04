@@ -7,6 +7,9 @@ import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
@@ -16,9 +19,6 @@ import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueNotSetException;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 import net.sf.mmm.util.value.api.WrongValueTypeException;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link StringValueConverterImpl}.

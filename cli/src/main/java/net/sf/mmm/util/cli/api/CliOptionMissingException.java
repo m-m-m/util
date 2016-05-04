@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliOptionMissingException} is thrown if a {@link CliOption#required() required} {@link CliOption
- * option} is missing.
+ * A {@link CliOptionMissingException} is thrown if a {@link CliOption#required() required} {@link CliOption option} is
+ * missing.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

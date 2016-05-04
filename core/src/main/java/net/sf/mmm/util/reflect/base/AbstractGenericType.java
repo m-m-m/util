@@ -160,17 +160,17 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and
-   * collects the generic {@link Class#getGenericSuperclass() super-classes} or {@link Class#getGenericInterfaces()
-   * super-interfaces} of {@code ancestor} on that hierarchy-path. <br>
-   * Please note that if {@code ancestor} is an {@link Class#isInterface() interface}, the hierarchy may NOT be
-   * unique. In such case it will be unspecified which of the possible paths is used.
+   * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and collects the
+   * generic {@link Class#getGenericSuperclass() super-classes} or {@link Class#getGenericInterfaces() super-interfaces}
+   * of {@code ancestor} on that hierarchy-path. <br>
+   * Please note that if {@code ancestor} is an {@link Class#isInterface() interface}, the hierarchy may NOT be unique.
+   * In such case it will be unspecified which of the possible paths is used.
    *
    * @param ancestor is the super-class or super-interface of {@code descendant}.
    * @param descendant is the sub-class or sub-interface of {@code ancestor}.
-   * @return the {@link List} of the generic super-{@link Type}s from {@code descendant} up to
-   *         {@code ancestor}, where the first element represents the super-{@link Type} of {@code descendant}
-   *         and the last element represents the generic declaration of {@code ancestor} itself.
+   * @return the {@link List} of the generic super-{@link Type}s from {@code descendant} up to {@code ancestor}, where
+   *         the first element represents the super-{@link Type} of {@code descendant} and the last element represents
+   *         the generic declaration of {@code ancestor} itself.
    */
   protected List<Type> getGenericDeclarations(Class<?> ancestor, Class<?> descendant) {
 
@@ -215,8 +215,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
    * This method gets the declaration-index of the given {@code typeVariable}.
    *
    * @param typeVariable is the {@link TypeVariable}.
-   * @return the index of the given {@code typeVariable} in its {@link TypeVariable#getGenericDeclaration()
-   *         declaration}.
+   * @return the index of the given {@code typeVariable} in its {@link TypeVariable#getGenericDeclaration() declaration}
+   *         .
    */
   protected int getDeclarationIndex(TypeVariable<?> typeVariable) {
 
@@ -235,8 +235,8 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
    *
    * @param typeVariable the {@link TypeVariable} to resolve.
    * @param declaringType the {@link GenericType} where the given {@code typeVariable} occurs or is replaced.
-   * @return the resolved {@link Type} or {@code null} if the given {@code typeVariable} could NOT be resolved
-   *         (e.g. it was {@link TypeVariable#getGenericDeclaration() declared} in a {@link Class} that is NOT
+   * @return the resolved {@link Type} or {@code null} if the given {@code typeVariable} could NOT be resolved (e.g. it
+   *         was {@link TypeVariable#getGenericDeclaration() declared} in a {@link Class} that is NOT
    *         {@link Class#isAssignableFrom(Class) assignable from} the given {@code declaringType}) .
    */
   protected Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType) {
@@ -250,14 +250,13 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
   }
 
   /**
-   * This method recursively resolves the given {@code typeVariable} in the context of the given
-   * {@code declaringType}.
+   * This method recursively resolves the given {@code typeVariable} in the context of the given {@code declaringType}.
    *
    * @param typeVariable the {@link TypeVariable} to resolve.
    * @param declaringType the {@link GenericType} where the given {@code typeVariable} occurs or is replaced.
    * @param declaringClass the {@link TypeVariable#getGenericDeclaration() declaring class}.
-   * @return the resolved {@link Type} or {@code null} if the given {@code typeVariable} could NOT be resolved
-   *         (e.g. it was {@link TypeVariable#getGenericDeclaration() declared} in a {@link Class} that is NOT
+   * @return the resolved {@link Type} or {@code null} if the given {@code typeVariable} could NOT be resolved (e.g. it
+   *         was {@link TypeVariable#getGenericDeclaration() declared} in a {@link Class} that is NOT
    *         {@link Class#isAssignableFrom(Class) assignable from} the given {@code declaringType}) .
    */
   private Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType,

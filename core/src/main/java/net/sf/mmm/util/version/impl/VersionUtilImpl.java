@@ -59,17 +59,17 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   private static final CharFilter LETTER_FILTER = new ConjunctionCharFilter(Conjunction.NOR, SEPARATOR_FILTER,
       CharFilter.LATIN_DIGIT_FILTER);
 
-  private  static VersionUtil instance;
+  private static VersionUtil instance;
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
-  private  Iso8601Util iso8601Util;
+  private Iso8601Util iso8601Util;
 
-  private  Map<String, DevelopmentPhase> phaseMap;
+  private Map<String, DevelopmentPhase> phaseMap;
 
-  private  Set<String> phasePrefixSet;
+  private Set<String> phasePrefixSet;
 
-  private  VersionIdentifierFormatter defaultFormatter;
+  private VersionIdentifierFormatter defaultFormatter;
 
   /**
    * The constructor.
@@ -176,6 +176,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   /**
    * @return the defaultFormatter
    */
+  @Override
   public VersionIdentifierFormatter getDefaultFormatter() {
 
     return this.defaultFormatter;
@@ -554,7 +555,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
      */
     public boolean isStrict() {
 
-      return ((this.versionSegmentsCount == 1) && (this.phaseCount == 1) && (this.phaseNumberCount == 1) && (this.snapshotCount == 1));
+      return ((this.versionSegmentsCount == 1) && (this.phaseCount == 1) && (this.phaseNumberCount == 1)
+          && (this.snapshotCount == 1));
     }
 
   }

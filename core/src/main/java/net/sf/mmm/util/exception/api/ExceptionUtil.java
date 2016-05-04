@@ -47,11 +47,11 @@ public interface ExceptionUtil extends ExceptionUtilLimited, Security {
   Throwable convertForUser(Throwable exception, ExceptionTruncation truncation);
 
   /**
-   * Converts the given {@code exception} for the <em>client</em>. With client we mean any kind of system that
-   * calls the current application via a remote interface. This can be a user-interface client, a different server
-   * application, or the like. If the exception would be send to the client as is, then all exception classes have to be
-   * available on the client side for de-serialization and all error details are exposed to the client violating the
-   * OWASP principle <em>sensitive data exposure</em>. <br>
+   * Converts the given {@code exception} for the <em>client</em>. With client we mean any kind of system that calls the
+   * current application via a remote interface. This can be a user-interface client, a different server application, or
+   * the like. If the exception would be send to the client as is, then all exception classes have to be available on
+   * the client side for de-serialization and all error details are exposed to the client violating the OWASP principle
+   * <em>sensitive data exposure</em>. <br>
    * The suggested implementation should behave as following:
    * <ul>
    * <li>Details are removed according to the current {@link net.sf.mmm.util.lang.api.EnvironmentDetector environment}.

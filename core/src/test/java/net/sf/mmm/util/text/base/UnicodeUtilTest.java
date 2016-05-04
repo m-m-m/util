@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
-import net.sf.mmm.util.text.api.UnicodeUtil;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.sf.mmm.util.text.api.UnicodeUtil;
 
 /**
  * This is the test-case for {@link UnicodeUtil}

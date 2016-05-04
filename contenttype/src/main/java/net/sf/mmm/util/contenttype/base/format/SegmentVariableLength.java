@@ -5,15 +5,12 @@ package net.sf.mmm.util.contenttype.base.format;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- * This class represents a {@link Segment} that can have a
- * {@link #getMaximumLength() variable length}. <br>
- * By default the length is unbound ([0, {@link Long#MAX_VALUE}]). If only the
- * "length" attribute is specified in XML, then both {@link #getMinimumLength()}
- * and {@link #getMaximumLength()} will return that value. If additionally the
- * "maxLength" attribute is specified, then {@link #getMinimumLength()} will
- * return the value of "length" and {@link #getMaximumLength()} will return the
- * value of "maxLength".
- * 
+ * This class represents a {@link Segment} that can have a {@link #getMaximumLength() variable length}. <br>
+ * By default the length is unbound ([0, {@link Long#MAX_VALUE}]). If only the "length" attribute is specified in XML,
+ * then both {@link #getMinimumLength()} and {@link #getMaximumLength()} will return that value. If additionally the
+ * "maxLength" attribute is specified, then {@link #getMinimumLength()} will return the value of "length" and
+ * {@link #getMaximumLength()} will return the value of "maxLength".
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -35,7 +32,7 @@ public abstract class SegmentVariableLength extends Segment {
 
   /**
    * The constructor.
-   * 
+   *
    * @param length - see {@link #getMinimumLength()}.
    * @param maximumLength - see {@link #getMaximumLength()}.
    */

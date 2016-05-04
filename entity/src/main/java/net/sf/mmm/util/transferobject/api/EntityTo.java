@@ -11,10 +11,9 @@ import net.sf.mmm.util.entity.api.PersistenceEntity;
 
 /**
  * This is the abstract base class for an {@link DataTo DTO} corresponding to a
- * {@link net.sf.mmm.util.entity.api.PersistenceEntity}. Classes derived from this class should carry the
- * suffix {@code Eto}. <br>
- * For additional details and an example consult the {@link net.sf.mmm.util.transferobject.api package
- * JavaDoc}.
+ * {@link net.sf.mmm.util.entity.api.PersistenceEntity}. Classes derived from this class should carry the suffix
+ * {@code Eto}. <br>
+ * For additional details and an example consult the {@link net.sf.mmm.util.transferobject.api package JavaDoc}.
  *
  * @param <ID> is the type of the {@link #getId() primary key}.
  *
@@ -25,11 +24,11 @@ public abstract class EntityTo<ID> extends DataTo implements MutableRevisionedEn
 
   private static final long serialVersionUID = -3039958170310580721L;
 
-  private  ID id;
+  private ID id;
 
-  private  int modificationCounter;
+  private int modificationCounter;
 
-  private  Number revision;
+  private Number revision;
 
   /**
    * @see #getModificationCounter()
@@ -62,14 +61,12 @@ public abstract class EntityTo<ID> extends DataTo implements MutableRevisionedEn
    *
    * <br>
    * <b>NOTE:</b><br>
-   * {@link EntityTo} can carry a hidden reference to a {@link net.sf.mmm.util.entity.api.PersistenceEntity}.
-   * This is set by
-   * {@link TransferObjectUtil#convertFromEntity(net.sf.mmm.util.entity.api.PersistenceEntity, Class)} and
-   * related functions. In such case the modification counter is updated from that reference by this method as
-   * an intended side effect. This is done because JPA implementations will typically update the modification
-   * counter only after the transaction has been committed and the conversion of an entity to {@link EntityTo
-   * ETO} typically happens before. This approach is better and more robust than
-   * {@link javax.persistence.EntityManager#flush() flushing}.
+   * {@link EntityTo} can carry a hidden reference to a {@link net.sf.mmm.util.entity.api.PersistenceEntity}. This is
+   * set by {@link TransferObjectUtil#convertFromEntity(net.sf.mmm.util.entity.api.PersistenceEntity, Class)} and
+   * related functions. In such case the modification counter is updated from that reference by this method as an
+   * intended side effect. This is done because JPA implementations will typically update the modification counter only
+   * after the transaction has been committed and the conversion of an entity to {@link EntityTo ETO} typically happens
+   * before. This approach is better and more robust than {@link javax.persistence.EntityManager#flush() flushing}.
    */
   @Override
   public int getModificationCounter() {
@@ -149,8 +146,8 @@ public abstract class EntityTo<ID> extends DataTo implements MutableRevisionedEn
   /**
    * Method to extend {@link #toString()} logic.
    *
-   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the
-   *        string representation.
+   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the string
+   *        representation.
    */
   @Override
   protected void toString(StringBuilder buffer) {
@@ -183,8 +180,8 @@ public abstract class EntityTo<ID> extends DataTo implements MutableRevisionedEn
   }
 
   /**
-   * Inner class to grant access to internal {@link PersistenceEntity} reference of an {@link EntityTo}. Shall
-   * only be used internally and never be external users.
+   * Inner class to grant access to internal {@link PersistenceEntity} reference of an {@link EntityTo}. Shall only be
+   * used internally and never be external users.
    */
   public static class PersistentEntityAccess {
 

@@ -65,16 +65,16 @@ public class DuplicateObjectException extends NlsRuntimeException {
   }
 
   /**
-   * This method {@link Map#put(Object, Object) puts} the given {@code value} into the given {@code map} using
-   * the given {@code key}.
+   * This method {@link Map#put(Object, Object) puts} the given {@code value} into the given {@code map} using the given
+   * {@code key}.
    *
    * @param <KEY> is the generic type of the {@code key}.
    * @param <VALUE> is the generic type of the {@code value}.
    * @param map is the {@link Map}.
    * @param key is the {@link Map#get(Object) key}.
    * @param value is the value to {@link Map#put(Object, Object) put}.
-   * @throws DuplicateObjectException if the given {@code map} already contains a value for the given
-   *         {@code key} that is NOT equal to the given {@code value}.
+   * @throws DuplicateObjectException if the given {@code map} already contains a value for the given {@code key} that
+   *         is NOT equal to the given {@code value}.
    * @since 3.0.0
    */
   public static <KEY, VALUE> void put(Map<KEY, VALUE> map, KEY key, VALUE value) throws DuplicateObjectException {

@@ -4,17 +4,17 @@ package net.sf.mmm.util.lang.base;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.test.AbstractSpringTest;
-import net.sf.mmm.util.lang.api.EnvironmentDetector;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
+import net.sf.mmm.test.AbstractSpringTest;
+import net.sf.mmm.util.lang.api.EnvironmentDetector;
+
 /**
  * This is the test-case for {@link EnvironmentDetector} in simulated production mode.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -32,7 +32,8 @@ public class EnvironmentDetectorProductionTest extends AbstractSpringTest {
   @Test
   public void testEnvironmentDetected() {
 
-    Assert.assertEquals(EnvironmentDetector.ENVIRONMENT_TYPE_PRODUCTION, this.environmentDetector.getEnvironmentType());
+    Assert.assertEquals(EnvironmentDetector.ENVIRONMENT_TYPE_PRODUCTION,
+        this.environmentDetector.getEnvironmentType());
     Assert.assertTrue(this.environmentDetector.isProductionEnvironment());
     Assert.assertFalse(this.environmentDetector.isDevelopmentEnvironment());
   }

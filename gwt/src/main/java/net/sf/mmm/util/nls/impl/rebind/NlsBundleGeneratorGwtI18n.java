@@ -4,14 +4,6 @@ package net.sf.mmm.util.nls.impl.rebind;
 
 import java.io.PrintWriter;
 
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-import net.sf.mmm.util.nls.api.NlsBundleKey;
-import net.sf.mmm.util.nls.api.NlsBundleMessage;
-import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.base.NlsBundleHelper;
-import net.sf.mmm.util.reflect.api.ClassName;
-import net.sf.mmm.util.reflect.api.TypeNotFoundException;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -24,9 +16,17 @@ import com.google.gwt.i18n.rebind.format.PropertiesFormat;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.nls.api.NlsBundleKey;
+import net.sf.mmm.util.nls.api.NlsBundleMessage;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.base.NlsBundleHelper;
+import net.sf.mmm.util.reflect.api.ClassName;
+import net.sf.mmm.util.reflect.api.TypeNotFoundException;
+
 /**
- * This is the GWT {@link com.google.gwt.core.ext.Generator} for generation of
- * {@link net.sf.mmm.util.nls.api.NlsBundle} implementations.
+ * This is the GWT {@link com.google.gwt.core.ext.Generator} for generation of {@link net.sf.mmm.util.nls.api.NlsBundle}
+ * implementations.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -86,8 +86,7 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
   /**
    * This method generates the GWT-i18n-interface for the NLS-bundle.
    *
-   * @param bundleClass is the {@link JClassType class} of the {@link net.sf.mmm.util.nls.api.NlsBundle} to
-   *        generate.
+   * @param bundleClass is the {@link JClassType class} of the {@link net.sf.mmm.util.nls.api.NlsBundle} to generate.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
    * @return the name of the generated class.
@@ -112,7 +111,8 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
       simpleName = simpleName + "_Interface";
     }
     logger.log(TreeLogger.INFO, getClass().getSimpleName() + ": Generating " + simpleName);
-    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName, simpleName);
+    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName,
+        simpleName);
     sourceComposerFactory.makeInterface();
     // import statements
     sourceComposerFactory.addImport(Constants.class.getName());

@@ -9,12 +9,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
+
 import junit.framework.Assert;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.exception.api.NlsParseException;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
@@ -24,11 +26,9 @@ import net.sf.mmm.util.value.impl.pojo1.SubPojo;
 import net.sf.mmm.util.value.impl.pojo1.SubPojoImpl;
 import net.sf.mmm.util.value.impl.pojo2.MyPojo;
 
-import org.junit.Test;
-
 /**
  * This is the test-case for {@link ComposedValueConverterImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -154,9 +154,9 @@ public class ComposedValueConverterTest {
     // convert to string
     value = converter.convertValue("java.lang.String", valueSource, Class.class);
     Assert.assertEquals(String.class, value);
-    Type classOfNumber = Generic.class.getMethod("getClassOfNumber", ReflectionUtil.NO_PARAMETERS)
+    Type classOfNumber = Generic.class.getMethod("getClassOfNumber", ReflectionUtilLimited.NO_PARAMETERS)
         .getGenericReturnType();
-    Type classExtendsNumber = Generic.class.getMethod("getClassExtendsNumber", ReflectionUtil.NO_PARAMETERS)
+    Type classExtendsNumber = Generic.class.getMethod("getClassExtendsNumber", ReflectionUtilLimited.NO_PARAMETERS)
         .getGenericReturnType();
     value = converter.convertValue("java.lang.Number", valueSource, Class.class, classOfNumber);
     Assert.assertEquals(Number.class, value);
@@ -372,16 +372,19 @@ public class ComposedValueConverterTest {
 
     public static final Integer MAGIC = Integer.valueOf(4242);
 
+    @Override
     public Class<Object> getSourceType() {
 
       return Object.class;
     }
 
+    @Override
     public Class<Integer> getTargetType() {
 
       return Integer.class;
     }
 
+    @Override
     public <T extends Integer> T convert(Object value, Object valueSource, Class<T> targetClass) {
 
       if ((value != null) && (value instanceof String)) {
@@ -413,16 +416,19 @@ public class ComposedValueConverterTest {
 
     public static final Integer MAGIC = Integer.valueOf(42);
 
+    @Override
     public Class<Foo> getSourceType() {
 
       return Foo.class;
     }
 
+    @Override
     public Class<Object> getTargetType() {
 
       return Object.class;
     }
 
+    @Override
     public <T> T convert(Foo value, Object valueSource, Class<T> targetClass) {
 
       if ((value != null) && (Integer.class.equals(targetClass))) {

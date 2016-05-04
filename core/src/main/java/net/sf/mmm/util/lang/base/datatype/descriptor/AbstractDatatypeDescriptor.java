@@ -23,9 +23,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescriptor<T> {
 
-  private  final Class<T> datatype;
+  private final Class<T> datatype;
 
-  private  final List<DatatypeSegmentDescriptor<T, ?>> segmentDescriptorList;
+  private final List<DatatypeSegmentDescriptor<T, ?>> segmentDescriptorList;
 
   /** The number of {@link #getSegment(Object, int) segments} that are required. */
   private final int requiredSegmentCount;
@@ -50,8 +50,8 @@ public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescripto
           requiredCount = i;
         }
       } else if (requiredCount != segmentDescriptors.length) {
-        throw new IllegalArgumentException("segment[" + i + "] (" + segment.getName()
-            + ") is required but previous segment was optional!");
+        throw new IllegalArgumentException(
+            "segment[" + i + "] (" + segment.getName() + ") is required but previous segment was optional!");
       }
       i++;
     }
@@ -87,8 +87,8 @@ public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescripto
               Integer.valueOf(this.segmentDescriptorList.size()), "segments.length");
         } else if (segments.length < this.requiredSegmentCount) {
           throw new ValueOutOfRangeException(Integer.valueOf(segments.length),
-              (Number) Integer.valueOf(this.requiredSegmentCount), Integer.valueOf(this.segmentDescriptorList
-                  .size()), "segments.length");
+              (Number) Integer.valueOf(this.requiredSegmentCount),
+              Integer.valueOf(this.segmentDescriptorList.size()), "segments.length");
         }
       }
       return doCreate(segments);

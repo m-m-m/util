@@ -8,18 +8,18 @@ import net.sf.mmm.util.pattern.api.PatternCompiler;
 
 /**
  * This is an abstract base-implementation of the {@link PatternCompiler} interface for glob-patterns.
- * 
+ *
  * @see GlobPatternCompiler
  * @see PathPatternCompiler
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
 
   /** The characters that have to be escaped in a regular expression. */
-  private static final char[] CHARS_TO_ESCAPE = new char[] { '.', '\\', '(', ')', '{', '}', '[', ']', '|', '&', '$',
-      '+', '^' };
+  private static final char[] CHARS_TO_ESCAPE = new char[] { '.', '\\', '(', ')', '{', '}', '[', ']', '|', '&',
+  '$', '+', '^' };
 
   /**
    * The constructor.
@@ -42,10 +42,9 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
   /**
    * This method gets the flag that determines if wildcards are required. <br>
    * This implementation always returns {@code false}. Override to change.
-   * 
-   * @return {@code true} if wildcards are required. In that case {@code null} is
-   *         {@link #compile(String) returned} if the given {@code pattern} contains no wildcard ('*' or
-   *         '?'). {@code false} otherwise.
+   *
+   * @return {@code true} if wildcards are required. In that case {@code null} is {@link #compile(String) returned} if
+   *         the given {@code pattern} contains no wildcard ('*' or '?'). {@code false} otherwise.
    */
   protected boolean isRequireWildcard() {
 
@@ -54,10 +53,10 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
 
   /**
    * This method converts the given {@code pattern} to a {@link Pattern#compile(String) regex-pattern}.
-   * 
+   *
    * @param pattern is the pattern to convert.
-   * @return the converted regex-pattern or {@code null} if {@link #isRequireWildcard()} is
-   *         {@code true} and the given {@code pattern} contains no wildcard ('*' or '?').
+   * @return the converted regex-pattern or {@code null} if {@link #isRequireWildcard()} is {@code true} and the given
+   *         {@code pattern} contains no wildcard ('*' or '?').
    */
   protected String convertPattern(String pattern) {
 
@@ -82,9 +81,9 @@ public abstract class AbstractGlobPatternCompiler implements PatternCompiler {
   }
 
   /**
-   * This method processes one or many characters from {@code chars} starting at the given
-   * {@code charIndex} and adds the translated regexp-sequence to {@code buffer}.
-   * 
+   * This method processes one or many characters from {@code chars} starting at the given {@code charIndex} and adds
+   * the translated regexp-sequence to {@code buffer}.
+   *
    * @param chars are the characters of the original pattern string.
    * @param charIndex is the current index in {@code chars}.
    * @param buffer is where the translated regexp-pattern is appended to.

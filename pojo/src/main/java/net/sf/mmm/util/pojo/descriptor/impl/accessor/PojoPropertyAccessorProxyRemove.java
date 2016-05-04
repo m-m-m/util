@@ -12,25 +12,25 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorOneArg} interface for
- * {@link PojoPropertyAccessorOneArgMode#REMOVE removing} an element using the getter from another accessor
- * returning an array or {@link java.util.Collection}.
- * 
+ * {@link PojoPropertyAccessorOneArgMode#REMOVE removing} an element using the getter from another accessor returning an
+ * array or {@link java.util.Collection}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorProxyRemove extends AbstractPojoPropertyAccessorProxyAdapterComponentType implements
-    PojoPropertyAccessorOneArg {
+public class PojoPropertyAccessorProxyRemove extends AbstractPojoPropertyAccessorProxyAdapterComponentType
+    implements PojoPropertyAccessorOneArg {
 
   /** The according setter to use if array has to be resized. */
   private final PojoPropertyAccessorOneArg containerSetAccessor;
 
   /**
    * The constructor.
-   * 
+   *
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array, or list property.
-   * @param containerSetAccessor is the accessor that sets the array, or {@link java.util.Collection}
-   *        property. May be {@code null} if NOT available.
+   * @param containerSetAccessor is the accessor that sets the array, or {@link java.util.Collection} property. May be
+   *        {@code null} if NOT available.
    */
   public PojoPropertyAccessorProxyRemove(PojoDescriptorDependencies dependencies,
       PojoPropertyAccessorNonArg containerGetAccessor, PojoPropertyAccessorOneArg containerSetAccessor) {

@@ -3,8 +3,7 @@
 package net.sf.mmm.util.exception.api;
 
 /**
- * This is an {@link ObjectNotFoundException} that represents a user failure (is NOT {@link #isTechnical()
- * technical}).
+ * This is an {@link ObjectNotFoundException} that represents a user failure (is NOT {@link #isTechnical() technical}).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
@@ -24,8 +23,7 @@ public class ObjectNotFoundUserException extends ObjectNotFoundException {
   /**
    * The constructor.
    *
-   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
-   *        found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be found.
    */
   public ObjectNotFoundUserException(Object object) {
 
@@ -35,8 +33,7 @@ public class ObjectNotFoundUserException extends ObjectNotFoundException {
   /**
    * The constructor.
    *
-   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
-   *        found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be found.
    * @param key is the key to the required object.
    */
   public ObjectNotFoundUserException(Object object, Object key) {
@@ -48,8 +45,7 @@ public class ObjectNotFoundUserException extends ObjectNotFoundException {
    * The constructor.
    *
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
-   *        found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be found.
    */
   public ObjectNotFoundUserException(Throwable nested, Object object) {
 
@@ -60,8 +56,7 @@ public class ObjectNotFoundUserException extends ObjectNotFoundException {
    * The constructor.
    *
    * @param nested is the {@link #getCause() cause} of this exception.
-   * @param object is a description (e.g. the classname) of the object that was required but could NOT be
-   *        found.
+   * @param object is a description (e.g. the classname) of the object that was required but could NOT be found.
    * @param key is the key to the required object.
    */
   public ObjectNotFoundUserException(Throwable nested, Object object, Object key) {

@@ -26,11 +26,11 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  */
 public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements ExceptionUtil {
 
-  private  static ExceptionUtil instance;
+  private static ExceptionUtil instance;
 
-  private  EnvironmentDetector environmentDetector;
+  private EnvironmentDetector environmentDetector;
 
-  private  boolean enforceSerializableForClient;
+  private boolean enforceSerializableForClient;
 
   /**
    * The constructor.
@@ -169,8 +169,8 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
   }
 
   /**
-   * @return {@code true} if {@link #obfuscateException(Throwable)} shall remove the
-   *         {@link Throwable#getStackTrace() stacktrace} of the resulting exception.
+   * @return {@code true} if {@link #obfuscateException(Throwable)} shall remove the {@link Throwable#getStackTrace()
+   *         stacktrace} of the resulting exception.
    */
   protected boolean isRemoveStacktrace() {
 

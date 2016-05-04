@@ -6,9 +6,9 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
- * The {@link NlsFormatterChoiceOnlyElseConditionException} is thrown if a {@link NlsFormatterChoice
- * choice-format} starts with an (else)-condition.
- * 
+ * The {@link NlsFormatterChoiceOnlyElseConditionException} is thrown if a {@link NlsFormatterChoice choice-format}
+ * starts with an (else)-condition.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

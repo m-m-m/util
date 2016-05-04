@@ -24,8 +24,8 @@ public @interface NlsBundleOptions {
   boolean requireMessages() default false;
 
   /**
-   * Flag indicating if the ResourceBundle is productive. Set to {@code false} for bundles that are used for
-   * testing only and should be ignored e.g. by ResourceBundleSynchronizer.
+   * Flag indicating if the ResourceBundle is productive. Set to {@code false} for bundles that are used for testing
+   * only and should be ignored e.g. by ResourceBundleSynchronizer.
    *
    * @since 7.0.0
    */

@@ -8,9 +8,9 @@ import java.util.Iterator;
 import net.sf.mmm.util.collection.base.EmptyIterator;
 
 /**
- * This is a dummy implementation of the {@link PojoFieldIntrospector} interface that never
- * {@link #findFields(Class) finds} any field.
- * 
+ * This is a dummy implementation of the {@link PojoFieldIntrospector} interface that never {@link #findFields(Class)
+ * finds} any field.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */

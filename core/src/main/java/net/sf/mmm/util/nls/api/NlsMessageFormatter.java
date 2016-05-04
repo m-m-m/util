@@ -9,20 +9,21 @@ import java.util.Map;
 /**
  * This is the interface for a formatter of a message-text. It is a simplified view on something like
  * {@link java.text.MessageFormat}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface NlsMessageFormatter extends NlsFormatter<Void> {
 
   /**
-   * This method formats the underlying pattern by filling in the given {@code arguments} and writing the
-   * result into the given {@code buffer}.
-   * 
+   * This method formats the underlying pattern by filling in the given {@code arguments} and writing the result into
+   * the given {@code buffer}.
+   *
    * {@inheritDoc}
-   * 
+   *
    * @param nothing has to be {@code null}. Only for generic compatibility.
    */
+  @Override
   void format(Void nothing, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException;
 

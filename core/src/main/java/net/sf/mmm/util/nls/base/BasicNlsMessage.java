@@ -23,9 +23,9 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
   /** The {@link #message} as {@link NlsTemplate}. */
   private NlsTemplate template;
 
-  private  String message;
+  private String message;
 
-  private  Map<String, Object> arguments;
+  private Map<String, Object> arguments;
 
   /**
    * The constructor for de-serialization in GWT.
@@ -69,7 +69,8 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
    * @param messageArguments are the {@link #getArgument(String) arguments} filled into the message after
    *        nationalization.
    */
-  private BasicNlsMessage(NlsTemplate template, String internationalizedMessage, Map<String, Object> messageArguments) {
+  private BasicNlsMessage(NlsTemplate template, String internationalizedMessage,
+      Map<String, Object> messageArguments) {
 
     super();
     this.template = template;
@@ -120,9 +121,8 @@ public abstract class BasicNlsMessage extends AbstractNlsMessage {
   /**
    * This method gets the {@link NlsTemplate} of this message.
    *
-   * @param resolver is the {@link NlsTemplateResolver} used to
-   *        {@link NlsTemplateResolver#resolveTemplate(String) resolve} the {@link NlsTemplate} if NOT yet
-   *        available.
+   * @param resolver is the {@link NlsTemplateResolver} used to {@link NlsTemplateResolver#resolveTemplate(String)
+   *        resolve} the {@link NlsTemplate} if NOT yet available.
    * @return the text the {@link NlsTemplate}.
    */
   public NlsTemplate getTemplate(NlsTemplateResolver resolver) {

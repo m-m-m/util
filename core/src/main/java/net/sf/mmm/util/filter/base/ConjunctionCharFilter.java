@@ -7,9 +7,9 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.lang.api.Conjunction;
 
 /**
- * This is an implementation of the {@link CharFilter} interface that combines a given list of filters using a
- * boolean {@link Conjunction}.
- * 
+ * This is an implementation of the {@link CharFilter} interface that combines a given list of filters using a boolean
+ * {@link Conjunction}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -23,7 +23,7 @@ public class ConjunctionCharFilter implements CharFilter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param conjunction is the {@link Conjunction} used to combine the {@code filters}.
    * @param filters are the filters to combine.
    */
@@ -61,7 +61,7 @@ public class ConjunctionCharFilter implements CharFilter {
             return true;
           }
           break;
-        default :
+        default:
           throw new IllegalCaseException(Conjunction.class, this.conjunction);
       }
     }
@@ -72,7 +72,7 @@ public class ConjunctionCharFilter implements CharFilter {
       case AND:
       case NOR:
         return true;
-      default :
+      default:
         throw new IllegalCaseException(Conjunction.class, this.conjunction);
     }
   }

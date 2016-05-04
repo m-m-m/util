@@ -9,7 +9,7 @@ import net.sf.mmm.util.transferobject.base.example.common.Address;
 
 /**
  * This is the {@link PersistenceEntity} implementing {@link Address}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -18,17 +18,17 @@ public class AddressEntity extends AbstractEntity<Long> implements Address {
 
   private static final long serialVersionUID = 1468867969942249329L;
 
-  private  String city;
+  private String city;
 
-  private  String houseNumber;
+  private String houseNumber;
 
-  private  String state;
+  private String state;
 
-  private  String street;
+  private String street;
 
-  private  String zip;
+  private String zip;
 
-  private  String country;
+  private String country;
 
   /**
    * The constructor.

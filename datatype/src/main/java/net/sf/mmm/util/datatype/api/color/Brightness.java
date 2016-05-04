@@ -3,11 +3,11 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} represents the brightness of a {@link Color}. The brightness is a {@link Factor
- * factor} indicating the amount of light emitted by a {@link Color}.
- * 
+ * This {@link Segment} represents the brightness of a {@link Color}. The brightness is a {@link Factor factor}
+ * indicating the amount of light emitted by a {@link Color}.
+ *
  * @see GenericColor#getBrightness()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -25,7 +25,7 @@ public class Brightness extends Factor<Brightness> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Brightness(Double value) {
@@ -35,7 +35,7 @@ public class Brightness extends Factor<Brightness> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Brightness(double value) {
@@ -45,7 +45,7 @@ public class Brightness extends Factor<Brightness> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */

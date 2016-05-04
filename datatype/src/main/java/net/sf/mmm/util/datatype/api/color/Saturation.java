@@ -3,13 +3,13 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} is a {@link Factor factor} that represents the colorfulness of a stimulus relative to
- * its own brightness. <br>
+ * This {@link Segment} is a {@link Factor factor} that represents the colorfulness of a stimulus relative to its own
+ * brightness. <br>
  * <b>ATTENTION:</b><br>
- * The saturation has different definitions for {@link ColorModel#HSB} and {@link ColorModel#HSL}. Hence
- * transformation from other {@link ColorModel}s like {@link ColorModel#RGB} differs and will return different
- * results for {@link Saturation}.
- * 
+ * The saturation has different definitions for {@link ColorModel#HSB} and {@link ColorModel#HSL}. Hence transformation
+ * from other {@link ColorModel}s like {@link ColorModel#RGB} differs and will return different results for
+ * {@link Saturation}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -27,7 +27,7 @@ public class Saturation extends Factor<Saturation> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Saturation(Double value) {
@@ -37,7 +37,7 @@ public class Saturation extends Factor<Saturation> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Saturation(double value) {
@@ -47,7 +47,7 @@ public class Saturation extends Factor<Saturation> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */

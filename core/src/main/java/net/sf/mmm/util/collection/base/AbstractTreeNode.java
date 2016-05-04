@@ -7,10 +7,10 @@ import net.sf.mmm.util.collection.api.TreeNode;
 
 /**
  * This is the abstract base implementation of the {@link TreeNode} interface.
- * 
- * @param <NODE> is the generic type for self-references. Each sub-type of this class should specialize this
- *        type to itself.
- * 
+ *
+ * @param <NODE> is the generic type for self-references. Each sub-type of this class should specialize this type to
+ *        itself.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -27,7 +27,7 @@ public abstract class AbstractTreeNode<NODE extends TreeNode<NODE>> extends Abst
 
   /**
    * The constructor.
-   * 
+   *
    * @param parent is the {@link #getParent() parent} node.
    */
   public AbstractTreeNode(NODE parent) {
@@ -37,7 +37,7 @@ public abstract class AbstractTreeNode<NODE extends TreeNode<NODE>> extends Abst
 
   /**
    * The constructor.
-   * 
+   *
    * @param listFactory the factory used to create the internal {@link java.util.List}.
    */
   public AbstractTreeNode(ListFactory listFactory) {
@@ -47,7 +47,7 @@ public abstract class AbstractTreeNode<NODE extends TreeNode<NODE>> extends Abst
 
   /**
    * The constructor.
-   * 
+   *
    * @param parent is the {@link #getParent() parent} node.
    * @param listFactory the factory used to create the internal {@link java.util.List}.
    */

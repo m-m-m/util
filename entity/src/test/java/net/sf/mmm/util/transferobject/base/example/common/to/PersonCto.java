@@ -18,11 +18,11 @@ public class PersonCto extends CompositeTo {
 
   private static final long serialVersionUID = 1L;
 
-  private  PersonEto person;
+  private PersonEto person;
 
-  private  AddressEto address;
+  private AddressEto address;
 
-  private  List<ContactInfoEto> contactInfos;
+  private List<ContactInfoEto> contactInfos;
 
   /**
    * The constructor.
@@ -65,8 +65,7 @@ public class PersonCto extends CompositeTo {
   }
 
   /**
-   * @return the {@link List} of {@link ContactInfoEto} objects. Will be {@link List#isEmpty() empty} if not
-   *         set.
+   * @return the {@link List} of {@link ContactInfoEto} objects. Will be {@link List#isEmpty() empty} if not set.
    */
   public List<ContactInfoEto> getContactInfos() {
 

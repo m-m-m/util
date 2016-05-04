@@ -4,7 +4,7 @@ package net.sf.mmm.util.lang.base;
 
 /**
  * Reduced variant of {@link java.lang.reflect.Array} that is GWT compatible.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -20,7 +20,7 @@ public final class Array {
 
   /**
    * @see java.lang.reflect.Array#getLength(Object)
-   * 
+   *
    * @param array is the supposed array.
    * @return the length of the given {@code array}.
    */
@@ -31,7 +31,7 @@ public final class Array {
 
   /**
    * @see java.lang.reflect.Array#get(Object, int)
-   * 
+   *
    * @param array is the supposed array.
    * @param index is the index in {@code array} to get the value for.
    * @return the value at {@code index} in the given {@code array}.
@@ -43,7 +43,7 @@ public final class Array {
 
   /**
    * @see java.lang.reflect.Array#set(Object, int, Object)
-   * 
+   *
    * @param array is the supposed array.
    * @param index is the index in {@code array} to get the value for.
    * @param value is the value to set at {@code index} in the given {@code array}.

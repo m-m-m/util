@@ -8,10 +8,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This optional annotation is used to define a different {@link java.util.ResourceBundle#containsKey(String)
- * key} for a method of an {@link NlsBundle} interface. If NOT present, the
- * {@link java.lang.reflect.Method#getName() name of the method} is used as key.
- * 
+ * This optional annotation is used to define a different {@link java.util.ResourceBundle#containsKey(String) key} for a
+ * method of an {@link NlsBundle} interface. If NOT present, the {@link java.lang.reflect.Method#getName() name of the
+ * method} is used as key.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

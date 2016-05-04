@@ -15,10 +15,10 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
  */
-public class SimpleDatatypeAttributeConverter<T extends SimpleDatatype<V>, V> extends
-    AbstractSimpleDatatypeAttributeConverter<T, V> {
+public class SimpleDatatypeAttributeConverter<T extends SimpleDatatype<V>, V>
+    extends AbstractSimpleDatatypeAttributeConverter<T, V> {
 
-  private  final DatatypeDescriptor<T> datatypeDescriptor;
+  private final DatatypeDescriptor<T> datatypeDescriptor;
 
   /**
    * The constructor.

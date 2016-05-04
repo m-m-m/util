@@ -26,7 +26,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @Named
 public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object, Number> {
 
-  private  MathUtil mathUtil;
+  private MathUtil mathUtil;
 
   /**
    * The constructor.
@@ -92,6 +92,7 @@ public class ValueConverterToNumber extends AbstractSimpleValueConverter<Object,
     return Number.class;
   }
 
+  @Override
   @SuppressWarnings("unchecked")
   public <T extends Number> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

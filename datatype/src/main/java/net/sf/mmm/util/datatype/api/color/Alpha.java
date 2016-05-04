@@ -3,14 +3,13 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} represents the alpha value of a color what is its opacity. A value of {@code 0}
- * stands for fully transparent (color not visible), while {@code 1.0} stands for a regular color (color
- * fully visible). An alpha value of {@code 0.5} will be 50% transparent so you can see the color but the
- * background shines through.
- * 
+ * This {@link Segment} represents the alpha value of a color what is its opacity. A value of {@code 0} stands for fully
+ * transparent (color not visible), while {@code 1.0} stands for a regular color (color fully visible). An alpha value
+ * of {@code 0.5} will be 50% transparent so you can see the color but the background shines through.
+ *
  * @see Color#getAlpha()
  * @see GenericColor#getAlpha()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -31,7 +30,7 @@ public class Alpha extends Factor<Alpha> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Alpha(Double value) {
@@ -41,7 +40,7 @@ public class Alpha extends Factor<Alpha> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Alpha(double value) {
@@ -51,7 +50,7 @@ public class Alpha extends Factor<Alpha> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */
@@ -62,7 +61,7 @@ public class Alpha extends Factor<Alpha> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param byteValue is the {@link #getValueAsByte() value given as byte}.
    */
   public Alpha(int byteValue) {

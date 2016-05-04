@@ -10,11 +10,10 @@ import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is an abstract base implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} based on
- * {@link Formatter}.
- * 
+ * This is an abstract base implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} based on {@link Formatter}.
+ *
  * @param <O> is the generic type of the object to {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -30,7 +29,7 @@ public abstract class SimpleNlsFormatter<O> extends AbstractNlsFormatterPlugin<O
 
   /**
    * This method creates the underlying {@link Formatter} to delegate to.
-   * 
+   *
    * @param locale is the locale of the {@link Formatter} to create.
    * @return the according format.
    */

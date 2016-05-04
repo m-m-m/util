@@ -21,8 +21,8 @@ public class CliArgumentReferenceMissingException extends CliException {
   /**
    * The constructor.
    *
-   * @param argumentContainer is the {@link CliArgumentContainer} with the unresolved
-   *        {@link CliArgument#addCloseTo() reference}.
+   * @param argumentContainer is the {@link CliArgumentContainer} with the unresolved {@link CliArgument#addCloseTo()
+   *        reference}.
    */
   public CliArgumentReferenceMissingException(CliArgumentContainer argumentContainer) {
 

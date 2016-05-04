@@ -4,15 +4,15 @@ package net.sf.mmm.util.date.base;
 
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.logging.TestLogger;
 import net.sf.mmm.logging.TestLogger.LogEvent;
 import net.sf.mmm.logging.TestLogger.LogLevel;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.api.TimeMeasure;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test case for {@link TimeMeasure}.
@@ -59,8 +59,8 @@ public class TimeMeasureTest extends Assert {
   }
 
   /**
-   * Test of {@link TimeMeasure} with illegal usage of operations that require
-   * {@link TimeMeasure#isCompleted() completed state}.
+   * Test of {@link TimeMeasure} with illegal usage of operations that require {@link TimeMeasure#isCompleted()
+   * completed state}.
    */
   @Test
   public void testIllegalUseBeforeComplete() {

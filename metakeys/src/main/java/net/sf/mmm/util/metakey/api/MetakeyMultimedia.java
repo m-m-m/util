@@ -3,9 +3,8 @@
 package net.sf.mmm.util.metakey.api;
 
 /**
- * This interface is a collection of constants defining keys for
- * metadata-properties of multimedia content. <br>
- * 
+ * This interface is a collection of constants defining keys for metadata-properties of multimedia content. <br>
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface MetakeyMultimedia extends MetakeyCore {
@@ -26,9 +25,8 @@ public interface MetakeyMultimedia extends MetakeyCore {
   String PUBLISHER = "publisher";
 
   /**
-   * The number of the media if the content belongs to a whole that is divided
-   * into several media (e.g. several CDs, DVDs or BRs). It is the number of the
-   * media that contains the content and may be followed by a slash and the
+   * The number of the media if the content belongs to a whole that is divided into several media (e.g. several CDs,
+   * DVDs or BRs). It is the number of the media that contains the content and may be followed by a slash and the
    * maximum number of medias (e.g. "1/2").
    */
   String MEDIA = "media";

@@ -4,7 +4,7 @@ package net.sf.mmm.util.metakey.api;
 
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface MetakeyMusic extends MetakeyAudioVideo {
@@ -27,9 +27,8 @@ public interface MetakeyMusic extends MetakeyAudioVideo {
   /**
    * The album (CD) containing this musical content. <br>
    * <b>ATTENTION:</b><br>
-   * This property does NOT actually belong to the metadata of the content
-   * itself. The exact same song may be present on different CDs. Therefore this
-   * is an N:M relation from the album to the song.
+   * This property does NOT actually belong to the metadata of the content itself. The exact same song may be present on
+   * different CDs. Therefore this is an N:M relation from the album to the song.
    */
   String ALBUM = "album";
 

@@ -10,9 +10,9 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of the {@link WildcardType} interface for a single upper bound.
- * 
+ *
  * @see ReflectionUtilImpl#toType(String)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -21,11 +21,11 @@ public class UpperBoundWildcardType implements WildcardType {
   /** The prefix of the {@link #toString() string representation}. */
   public static final String PREFIX = "? extends ";
 
-  private  final Type upperBound;
+  private final Type upperBound;
 
   /**
    * The constructor.
-   * 
+   *
    * @param upperBound is the single {@link #getUpperBounds() upper-bound}.
    */
   public UpperBoundWildcardType(Type upperBound) {

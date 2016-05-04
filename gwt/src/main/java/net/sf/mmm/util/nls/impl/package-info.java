@@ -4,4 +4,3 @@
  * Provides the GWT compatible implementations for this package.
  */
 package net.sf.mmm.util.nls.impl;
-

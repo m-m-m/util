@@ -9,21 +9,20 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} using a custom date pattern
- * (typically using {@link java.text.SimpleDateFormat}).
- * 
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} using a custom date pattern (typically
+ * using {@link java.text.SimpleDateFormat}).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public final class NlsFormatterDatePattern extends SimpleNlsFormatter<Object> {
 
-  private  final String pattern;
+  private final String pattern;
 
   /**
    * The constructor.
-   * 
-   * @param pattern is the pattern for the {@link FormatterProvider#getDateFormatter(Locale, String) date
-   *        formatter}.
+   *
+   * @param pattern is the pattern for the {@link FormatterProvider#getDateFormatter(Locale, String) date formatter}.
    */
   public NlsFormatterDatePattern(String pattern) {
 

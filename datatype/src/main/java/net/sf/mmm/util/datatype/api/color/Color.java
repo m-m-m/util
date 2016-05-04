@@ -12,18 +12,18 @@ import net.sf.mmm.util.lang.api.GwtHelper;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color}. It is based on values for
- * {@link #getRed() red}, {@link #getGreen() green}, {@link #getBlue()}, and {@link #getAlpha() alpha}. Internally these
- * values are encoded in a single {@link #getValue() ARGB value}. This class is similar to AWT {@link java.awt.Color}
- * but GWT compatible (AWT color is linked with AWT, see e.g.
+ * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color}. It is based on values for {@link #getRed()
+ * red}, {@link #getGreen() green}, {@link #getBlue()}, and {@link #getAlpha() alpha}. Internally these values are
+ * encoded in a single {@link #getValue() ARGB value}. This class is similar to AWT {@link java.awt.Color} but GWT
+ * compatible (AWT color is linked with AWT, see e.g.
  * {@link java.awt.Color#createContext(java.awt.image.ColorModel, java.awt.Rectangle, java.awt.geom.Rectangle2D, java.awt.geom.AffineTransform, java.awt.RenderingHints)
  * createContext}) and especially compatible to CSS. <br>
  * For transformations and other {@link ColorModel}s use {@link GenericColor}. <br>
  * <b>ATTENTION:</b><br>
  * Unfortunately the {@link #getAlpha() alpha} value has NOT been designed as a transparency value (inverse logic so
- * {@code 0} means no transparency or in other words a regular color). Then if encoding in A/R/G/B the hexadecimal
- * RGB notation would be compatible with transparency because #2F4F8F would be the same as #002F4F8F. Unfortunately pain
- * is on our side and we have to keep with existing standards. Therefore #2F4F8F is actually the same as #FF2F4F8F. To
+ * {@code 0} means no transparency or in other words a regular color). Then if encoding in A/R/G/B the hexadecimal RGB
+ * notation would be compatible with transparency because #2F4F8F would be the same as #002F4F8F. Unfortunately pain is
+ * on our side and we have to keep with existing standards. Therefore #2F4F8F is actually the same as #FF2F4F8F. To
  * avoid confusion and to be compatible with CSS, {@link #toString()} will print the hexadecimal RGB form (e.g. #2F4F8F)
  * in case {@link #getAlpha() alpha} has its maximum value (255/FF). Otherwise the CSS RGBA notation is used (e.g.
  * rgba(47,79,143,0.5) instead of #7F2F4F8F).
@@ -62,7 +62,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   /** The separator for the the segments (e.g. in rgb(r,g,b) or rgba(r,g,b,a) syntax). */
   private static final char SEPARATOR = ',';
 
-  private  static final Integer MIN_VALUE = Integer.valueOf(0);
+  private static final Integer MIN_VALUE = Integer.valueOf(0);
 
   /** The length of an RGB value in hexadecimal notation (#RRGGBB). */
   private static final int LENGTH_HEX_RGB = 7;

@@ -7,9 +7,9 @@ import java.util.Calendar;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
- * This class contains the implementation of {@link CompareOperator#eval(Object, Object)} for {@link Comparable} arguments.
- * This allows the implementation to be replaced with a GWT compatible one.
- * 
+ * This class contains the implementation of {@link CompareOperator#eval(Object, Object)} for {@link Comparable}
+ * arguments. This allows the implementation to be replaced with a GWT compatible one.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -26,7 +26,7 @@ final class ComparatorHelper {
   /**
    * This method converts the given value to a more common type. E.g. instances of {@link Calendar} or
    * {@link XMLGregorianCalendar} will be converted to {@link java.util.Date}.
-   * 
+   *
    * @param object is the value to convert.
    * @param otherType the type of the value to compare that differs from the type
    * @return a simpler representation of {@code value} or the same {@code value} if on simpler type is known.
@@ -44,7 +44,7 @@ final class ComparatorHelper {
 
   /**
    * Logic for {@link CompareOperator#eval(Object, Object)} with {@link Comparable} arguments.
-   * 
+   *
    * @param comparator is the {@link CompareOperator}.
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.

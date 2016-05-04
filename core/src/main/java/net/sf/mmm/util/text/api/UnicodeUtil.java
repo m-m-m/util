@@ -167,8 +167,7 @@ public interface UnicodeUtil {
   char QUESTION_MARK = 0x0003F;
 
   /**
-   * The at sign used as separator in email addresses. Looks like a small letter {@code a} in a circle: * *
-   * {@value}
+   * The at sign used as separator in email addresses. Looks like a small letter {@code a} in a circle: * * {@value}
    */
   char COMMERCIAL_AT = 0x00040;
 
@@ -4548,10 +4547,10 @@ public interface UnicodeUtil {
 
   /**
    * This method gets the <a href="http://en.wikipedia.org/wiki/Transliteration">transliteration</a> of the given
-   * {@code text}. This method will support common transliteration standards such as ISO 843 (greek), ISO 9
-   * (cyrillic), etc. However, for some writing systems there are multiple ways of transliteration and some things done
-   * by this method may not officially be called transliteration. So please consider it as a pragmatic way to convert
-   * text to the Latin alphabet. We are looking for help in supporting additional writing systems but not for scientific
+   * {@code text}. This method will support common transliteration standards such as ISO 843 (greek), ISO 9 (cyrillic),
+   * etc. However, for some writing systems there are multiple ways of transliteration and some things done by this
+   * method may not officially be called transliteration. So please consider it as a pragmatic way to convert text to
+   * the Latin alphabet. We are looking for help in supporting additional writing systems but not for scientific
    * discussion about linguistic.
    *
    * @see java.text.Normalizer
@@ -4573,8 +4572,8 @@ public interface UnicodeUtil {
   String normalize2Ascii(char character);
 
   /**
-   * This method converts the given {@code text} to the best possible ASCII-representation. All ASCII-characters
-   * will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized to ASCII}.
+   * This method converts the given {@code text} to the best possible ASCII-representation. All ASCII-characters will
+   * remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized to ASCII}.
    *
    * @see #normalize2Ascii(CharSequence, char)
    * @see java.text.Normalizer
@@ -4585,9 +4584,9 @@ public interface UnicodeUtil {
   String normalize2Ascii(CharSequence text);
 
   /**
-   * This method converts the given {@code text} to the best possible ASCII-representation. All ASCII-characters
-   * will remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized to ASCII} and if not
-   * possible replaced by {@code nonNormalizableCharaterReplacement}.
+   * This method converts the given {@code text} to the best possible ASCII-representation. All ASCII-characters will
+   * remain unchanged. All other characters are {@link #normalize2Ascii(char) normalized to ASCII} and if not possible
+   * replaced by {@code nonNormalizableCharaterReplacement}.
    *
    * @see java.text.Normalizer
    *

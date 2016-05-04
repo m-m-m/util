@@ -23,7 +23,7 @@ public class ComposedValidationFailure extends AbstractValidationFailure impleme
 
   private static final long serialVersionUID = -5191509274230075436L;
 
-  private  ValidationFailure[] failures;
+  private ValidationFailure[] failures;
 
   /**
    * The constructor for de-serialization in GWT.

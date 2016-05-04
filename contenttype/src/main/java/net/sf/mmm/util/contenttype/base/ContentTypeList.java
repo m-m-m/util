@@ -17,9 +17,8 @@ import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.xml.base.jaxb.JaxbObject;
 
 /**
- * This is the container with all {@link ContentTypeBean}s. It allows to read
- * them from an XML configuration via JAXB.
- * 
+ * This is the container with all {@link ContentTypeBean}s. It allows to read them from an XML configuration via JAXB.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -75,7 +74,7 @@ public class ContentTypeList implements JaxbObject {
 
   /**
    * This method gets the root node of the tree of {@link ContentTypeBean}s.
-   * 
+   *
    * @return the root node.
    */
   public ContentTypeBean getRoot() {
@@ -95,12 +94,11 @@ public class ContentTypeList implements JaxbObject {
   }
 
   /**
-   * This method walks down the tree of {@link ContentTypeBean}s recursively
-   * adding them to the given {@link Collection}.
-   * 
+   * This method walks down the tree of {@link ContentTypeBean}s recursively adding them to the given {@link Collection}
+   * .
+   *
    * @param node is the current node to traverse.
-   * @param collection is where to {@link Collection#add(Object) add} the
-   *        {@link ContentTypeBean} objects.
+   * @param collection is where to {@link Collection#add(Object) add} the {@link ContentTypeBean} objects.
    */
   private void collectNodes(ContentTypeBean node, Collection<ContentTypeBean> collection) {
 

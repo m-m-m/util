@@ -4,10 +4,10 @@ package net.sf.mmm.util.datatype.api.color;
 
 /**
  * This {@link Segment} represents the <em>red</em> part of a {@link GenericColor color}.
- * 
+ *
  * @see Color#getRed()
  * @see GenericColor#getRed()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -25,7 +25,7 @@ public class Red extends Factor<Red> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Red(Double value) {
@@ -35,7 +35,7 @@ public class Red extends Factor<Red> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Red(double value) {
@@ -45,7 +45,7 @@ public class Red extends Factor<Red> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */
@@ -56,7 +56,7 @@ public class Red extends Factor<Red> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param byteValue is the {@link #getValueAsByte() value given as byte}.
    */
   public Red(int byteValue) {

@@ -16,7 +16,9 @@ import java.util.concurrent.BlockingQueue;
 @SuppressWarnings("rawtypes")
 public interface BlockingQueueFactory extends CollectionFactory<BlockingQueue> {
 
+  @Override
   <E> BlockingQueue<E> create();
 
+  @Override
   <E> BlockingQueue<E> create(int capacity);
 }

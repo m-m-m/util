@@ -10,25 +10,24 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * This is the abstract base implementation of a
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} that acts as proxy to a
  * {@link #getDelegate() delegate} allowing to add new ways to access a property. <br>
- * It extends {@link AbstractPojoPropertyAccessorProxyAdapter} implementing {@link #getPropertyType()} to
- * return the {@link GenericType#getComponentType() component-type} from the
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getReturnType() return-type} of
- * the {@link #getDelegate() delegate}.
- * 
+ * It extends {@link AbstractPojoPropertyAccessorProxyAdapter} implementing {@link #getPropertyType()} to return the
+ * {@link GenericType#getComponentType() component-type} from the
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor#getReturnType() return-type} of the
+ * {@link #getDelegate() delegate}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType extends
-    AbstractPojoPropertyAccessorProxyAdapter {
+public abstract class AbstractPojoPropertyAccessorProxyAdapterComponentType
+    extends AbstractPojoPropertyAccessorProxyAdapter {
 
-  private  final GenericType<?> propertyType;
+  private final GenericType<?> propertyType;
 
   /**
    * The constructor.
-   * 
+   *
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
-   * @param containerGetAccessor is the accessor delegate that gets an array or {@link java.util.Collection}
-   *        property.
+   * @param containerGetAccessor is the accessor delegate that gets an array or {@link java.util.Collection} property.
    */
   public AbstractPojoPropertyAccessorProxyAdapterComponentType(PojoDescriptorDependencies dependencies,
       PojoPropertyAccessorNonArg containerGetAccessor) {

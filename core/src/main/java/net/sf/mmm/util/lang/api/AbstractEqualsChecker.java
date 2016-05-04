@@ -5,8 +5,7 @@ package net.sf.mmm.util.lang.api;
 import java.io.Serializable;
 
 /**
- * This is the abstract base implementation of {@link EqualsChecker}. It contains the handling of
- * {@code null} values.
+ * This is the abstract base implementation of {@link EqualsChecker}. It contains the handling of {@code null} values.
  *
  * @param <VALUE> is the generic type of the values to {@link #isEqual(Object, Object) check}.
  *

@@ -16,8 +16,8 @@ public interface EventListener<E /* extends Event */> extends java.util.EventLis
    * This method is called if an event occurred. <br>
    * <b>WARNING:</b><br>
    * Depending on the implementation of {@link EventSource} it may NOT be legal to
-   * {@link EventSource#addListener(EventListener) add} or {@link EventSource#removeListener(EventListener)
-   * remove} listeners during the call of this method because this may lead to a dead-lock.
+   * {@link EventSource#addListener(EventListener) add} or {@link EventSource#removeListener(EventListener) remove}
+   * listeners during the call of this method because this may lead to a dead-lock.
    *
    * @param event is the event that notifies about something that happened.
    */

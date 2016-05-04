@@ -10,19 +10,19 @@ import net.sf.mmm.util.text.api.Hyphenator;
 
 /**
  * This is the abstract base implementation of the {@link Hyphenator} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public abstract class AbstractHyphenator extends AbstractLoggableComponent implements Hyphenator {
 
-  private  final Locale locale;
+  private final Locale locale;
 
-  private  final char hyphen;
+  private final char hyphen;
 
   /**
    * The constructor.
-   * 
+   *
    * @param locale is the {@link #getLocale() locale}.
    * @param hyphen is the {@link #getHyphen() hyphen-character}.
    */

@@ -11,15 +11,14 @@ import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This is the default implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the type
- * {@link Boolean}.
- * 
+ * This is the default implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the type {@link Boolean}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class BooleanFormatter extends AbstractFormatter<Boolean> {
 
-  private  static final Formatter<Boolean> INSTANCE = new BooleanFormatter();
+  private static final Formatter<Boolean> INSTANCE = new BooleanFormatter();
 
   /** @see #doFormat(Boolean, Appendable) */
   private final NlsBundleUtilCoreRoot nlsBundle;
@@ -37,7 +36,7 @@ public class BooleanFormatter extends AbstractFormatter<Boolean> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param locale is the fixed {@link Locale} to use or {@code null} for default locale.
    */
   public BooleanFormatter(Locale locale) {

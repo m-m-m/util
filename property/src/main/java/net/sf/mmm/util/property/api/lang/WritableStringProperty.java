@@ -31,9 +31,9 @@ public interface WritableStringProperty
   }
 
   /**
-   * @return the {@link #getValue() value} or the empty {@link String} if {@link #getValue() value} is {@code null}
-   *         .
+   * @return the {@link #getValue() value} or the empty {@link String} if {@link #getValue() value} is {@code null} .
    */
+  @Override
   default String getValueSafe() {
 
     final String value = getValue();
@@ -46,6 +46,7 @@ public interface WritableStringProperty
    * @return a new {@link IntegerBinding} that holds the {@link String#length() length} of the {@code String}
    *         {@link #getValue() value}.
    */
+  @Override
   default IntegerBinding length() {
 
     return Bindings.length(this);

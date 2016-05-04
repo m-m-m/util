@@ -17,11 +17,11 @@ import java.util.ResourceBundle;
  */
 public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle {
 
-  private  final String name;
+  private final String name;
 
-  private  final Map<String, String> message2KeyMap;
+  private final Map<String, String> message2KeyMap;
 
-  private  final ResourceBundle resourceBundle;
+  private final ResourceBundle resourceBundle;
 
   /**
    * The constructor.
@@ -54,8 +54,8 @@ public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle 
    * This method is the inverse of {@link ResourceBundle#getString(String)}.
    *
    * @param message is the {@link ResourceBundle#getString(String) message} for which the key is requested.
-   * @return the key for the given {@code message} or {@code null} if no such message is contained in the
-   *         associated {@link ResourceBundle}.
+   * @return the key for the given {@code message} or {@code null} if no such message is contained in the associated
+   *         {@link ResourceBundle}.
    */
   @Override
   public String getKey(String message) {

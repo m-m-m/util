@@ -110,8 +110,8 @@ public class FilterRuleChain<V> implements Filter<V> {
    * This method implements {@link #accept(Object)} recursively.
    *
    * @param value is the value to filter.
-   * @return {@code true} if the value is accepted, {@code false} if the value is NOT accepted, or
-   *         {@code null} if no decision is made.
+   * @return {@code true} if the value is accepted, {@code false} if the value is NOT accepted, or {@code null} if no
+   *         decision is made.
    */
   private Boolean acceptRecursive(V value) {
 

@@ -4,7 +4,7 @@ package net.sf.mmm.util.http;
 
 /**
  * This class represents an HTTP response message.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class HttpResponse extends HttpMessage {
@@ -145,7 +145,7 @@ public class HttpResponse extends HttpMessage {
 
   /**
    * This method gets the HTTP status code.
-   * 
+   *
    * @return the HTTP statusCode.
    */
   public int getStatusCode() {
@@ -155,9 +155,9 @@ public class HttpResponse extends HttpMessage {
 
   /**
    * This method sets the HTTP status code.
-   * 
+   *
    * @see #getStatusCode()
-   * 
+   *
    * @param httpStatusCode the HTTP statusCode to set.
    */
   public void setStatusCode(int httpStatusCode) {
@@ -166,9 +166,8 @@ public class HttpResponse extends HttpMessage {
   }
 
   /**
-   * This method gets the reason-phrase explaining the
-   * {@link #getStatusCode() status-code}.
-   * 
+   * This method gets the reason-phrase explaining the {@link #getStatusCode() status-code}.
+   *
    * @return the reason-phrase.
    */
   public String getReasonPhrase() {
@@ -178,9 +177,9 @@ public class HttpResponse extends HttpMessage {
 
   /**
    * This method sets the reason-phrase.
-   * 
+   *
    * @see #getReasonPhrase()
-   * 
+   *
    * @param reason the reason-phrase to set.
    */
   public void setReasonPhrase(String reason) {

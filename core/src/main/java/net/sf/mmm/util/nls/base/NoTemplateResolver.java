@@ -6,9 +6,9 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is a dummy implementation of the {@link NlsTemplateResolver} interface that performs no resolving
- * (always returns {@code null} for {@link #resolveTemplate(String)}).
- * 
+ * This is a dummy implementation of the {@link NlsTemplateResolver} interface that performs no resolving (always
+ * returns {@code null} for {@link #resolveTemplate(String)}).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

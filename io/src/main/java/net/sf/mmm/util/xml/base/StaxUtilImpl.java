@@ -31,7 +31,7 @@ import net.sf.mmm.util.xml.impl.stax.XIncludeStreamReader;
 
 /**
  * This utility class contains methods that help to work with the StAX API (JSR 173).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -39,13 +39,13 @@ import net.sf.mmm.util.xml.impl.stax.XIncludeStreamReader;
 @Named(StaxUtil.CDI_NAME)
 public final class StaxUtilImpl extends AbstractLoggableComponent implements StaxUtil {
 
-  private  static StaxUtil instance;
+  private static StaxUtil instance;
 
-  private  XMLInputFactory xmlInputFactory;
+  private XMLInputFactory xmlInputFactory;
 
-  private  XMLOutputFactory xmlOutputFactory;
+  private XMLOutputFactory xmlOutputFactory;
 
-  private  StringValueConverter valueConverter;
+  private StringValueConverter valueConverter;
 
   /**
    * The constructor.
@@ -59,7 +59,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
    * This method gets the singleton instance of this {@link StaxUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static StaxUtil getInstance() {
@@ -96,7 +96,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
 
   /**
    * This method gets the {@link XMLOutputFactory} to use.
-   * 
+   *
    * @return the xmlOutputFactory
    */
   protected XMLOutputFactory getXmlOutputFactory() {
@@ -106,7 +106,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
 
   /**
    * This method sets the {@link #getXmlOutputFactory() XML-output-factory}.
-   * 
+   *
    * @param xmlOutputFactory is the xmlOutputFactory to set.
    */
   public void setXmlOutputFactory(XMLOutputFactory xmlOutputFactory) {
@@ -117,7 +117,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
 
   /**
    * This method gets the {@link XMLInputFactory} to use.
-   * 
+   *
    * @return the xmlInputFactory
    */
   public XMLInputFactory getXmlInputFactory() {
@@ -203,8 +203,8 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   }
 
   @Override
-  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type)
-      throws ValueException {
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName,
+      Class<V> type) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
@@ -212,8 +212,8 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   }
 
   @Override
-  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type,
-      V defaultValue) throws ValueException {
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName,
+      Class<V> type, V defaultValue) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     return getValueConverter().convertValue(value, localAttributeName, type, type, defaultValue);
@@ -332,7 +332,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
         return "START_DOCUMENT";
       case XMLStreamConstants.START_ELEMENT:
         return "START_ELEMENT";
-      default :
+      default:
         return "UNKNOWN_EVENT_TYPE (" + String.valueOf(eventType) + ")";
     }
   }

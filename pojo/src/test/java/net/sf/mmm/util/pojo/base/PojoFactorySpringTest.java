@@ -7,7 +7,7 @@ import net.sf.mmm.util.pojo.api.PojoFactory;
 
 /**
  * This is the test-case for {@link PojoFactory} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class PojoFactorySpringTest extends PojoFactoryTest {

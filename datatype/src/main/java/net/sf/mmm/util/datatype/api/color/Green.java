@@ -4,10 +4,10 @@ package net.sf.mmm.util.datatype.api.color;
 
 /**
  * This {@link Segment} represents the <em>green</em> part of a {@link GenericColor color}.
- * 
+ *
  * @see Color#getGreen()
  * @see GenericColor#getGreen()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -25,7 +25,7 @@ public class Green extends Factor<Green> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Green(Double value) {
@@ -35,7 +35,7 @@ public class Green extends Factor<Green> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Green(double value) {
@@ -45,7 +45,7 @@ public class Green extends Factor<Green> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param byteValue is the {@link #getValueAsByte() value given as byte}.
    */
   public Green(int byteValue) {
@@ -55,7 +55,7 @@ public class Green extends Factor<Green> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */

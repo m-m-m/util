@@ -21,8 +21,8 @@ import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 import net.sf.mmm.util.resource.api.ResourceUri;
 
 /**
- * This is the implementation of the {@link BrowsableResource} interface for a resource that is a
- * {@link File#isFile() regular} {@link File}. <br>
+ * This is the implementation of the {@link BrowsableResource} interface for a resource that is a {@link File#isFile()
+ * regular} {@link File}. <br>
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

@@ -7,7 +7,7 @@ import net.sf.mmm.util.io.api.ByteArray;
 
 /**
  * This is the abstract base implementation of the {@link ByteArray} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -16,7 +16,7 @@ public abstract class AbstractByteArray implements ByteArray {
   /**
    * This method checks that the given {@code minimum} and {@code maximum} are valid for
    * {@link #createSubArray(int, int)}.
-   * 
+   *
    * @param minimum is the new {@link #getMinimumIndex() minimumIndex}.
    * @param maximum is the new {@link #getMaximumIndex() maximumIndex}.
    */

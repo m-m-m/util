@@ -5,11 +5,10 @@ package net.sf.mmm.util.pojo.descriptor.base;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a generic enhancer of a
- * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}.
- * 
+ * This is the interface for a generic enhancer of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}.
+ *
  * @see #enhanceDescriptor(AbstractPojoDescriptor)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -18,7 +17,7 @@ public interface PojoDescriptorEnhancer {
 
   /**
    * This method performs the generic enhancements on the given {@code descriptor}.
-   * 
+   *
    * @param descriptor is the descriptor to enhance.
    */
   void enhanceDescriptor(AbstractPojoDescriptor<?> descriptor);

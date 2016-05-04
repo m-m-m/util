@@ -16,6 +16,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.slf4j.Logger;
+
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
@@ -25,8 +27,6 @@ import net.sf.mmm.util.nls.base.ResourceBundleControlUtf8WithNlsBundleSupport;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.resource.api.DataResource;
-
-import org.slf4j.Logger;
 
 /**
  * This is the implementation of {@link NlsResourceBundleLocator}.
@@ -38,9 +38,9 @@ import org.slf4j.Logger;
 @Named
 public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent implements NlsResourceBundleLocator {
 
-  private  List<ResourceBundle> nlsBundles;
+  private List<ResourceBundle> nlsBundles;
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -124,8 +124,9 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
                     ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
                 this.nlsBundles.add(bundleInstance);
               } catch (Exception e) {
-                logger.error("Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line
-                    + "' is invalid!", e);
+                logger.error(
+                    "Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line + "' is invalid!",
+                    e);
               }
             }
             line = reader.readLine();

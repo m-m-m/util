@@ -9,13 +9,13 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import net.sf.mmm.util.path.api.PathFactory;
-import net.sf.mmm.util.path.api.PathUri;
-import net.sf.mmm.util.resource.base.ClasspathResource;
-
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import net.sf.mmm.util.path.api.PathFactory;
+import net.sf.mmm.util.path.api.PathUri;
+import net.sf.mmm.util.resource.base.ClasspathResource;
 
 /**
  * This is the test-case for {@link PathFactory}.
@@ -87,7 +87,8 @@ public class PathFactoryTest extends Assert {
   public void testClasspathResource() throws Exception {
 
     PathFactory pathFactory = getPathFactory();
-    String resourceUri = PathUri.SCHEME_PREFIX_CLASSPATH + ClasspathResource.class.getName().replace('.', '/') + ".txt";
+    String resourceUri = PathUri.SCHEME_PREFIX_CLASSPATH + ClasspathResource.class.getName().replace('.', '/')
+        + ".txt";
     Path resource = pathFactory.createPath(resourceUri);
     verifyResource(resource);
 

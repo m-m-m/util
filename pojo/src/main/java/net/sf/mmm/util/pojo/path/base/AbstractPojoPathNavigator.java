@@ -54,15 +54,15 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    */
   private static final String PATH_SUFFIX_COLLECTION_LIST = "._collection2list";
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
-  private  CollectionReflectionUtil collectionReflectionUtil;
+  private CollectionReflectionUtil collectionReflectionUtil;
 
-  private  PojoPathFunctionManager functionManager;
+  private PojoPathFunctionManager functionManager;
 
-  private  ComposedValueConverter valueConverter;
+  private ComposedValueConverter valueConverter;
 
-  private  PojoFactory pojoFactory;
+  private PojoFactory pojoFactory;
 
   /**
    * The constructor.
@@ -310,8 +310,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    * @param pojoPath is the current {@link net.sf.mmm.util.pojo.path.api.PojoPath} to navigate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the {@link #createState(Object, String, PojoPathMode, PojoPathContext) state} of this operation.
-   * @return the result of the navigation of the given {@code pojoPath} starting at the given {@code pojo}. It
-   *         may be {@code null} according to the given {@link PojoPathMode mode}.
+   * @return the result of the navigation of the given {@code pojoPath} starting at the given {@code pojo}. It may be
+   *         {@code null} according to the given {@link PojoPathMode mode}.
    */
   protected CachingPojoPath getRecursive(String pojoPath, PojoPathContext context, PojoPathState state) {
 
@@ -397,15 +397,15 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    * If the {@code state} {@link PojoPathState#isGetType() indicates} an invocation from
    * {@link #getType(GenericType, String, boolean, PojoPathContext) getType}, only the
    * {@link CachingPojoPath#setPojoType(GenericType) pojo-type} should be determined. Otherwise if the result is
-   * {@code null} and {@link PojoPathState#getMode() mode} is {@link PojoPathMode#CREATE_IF_NULL} it
-   * creates and attaches (sets) the missing object.
+   * {@code null} and {@link PojoPathState#getMode() mode} is {@link PojoPathMode#CREATE_IF_NULL} it creates and
+   * attaches (sets) the missing object.
    *
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the {@link #createState(Object, String, PojoPathMode, PojoPathContext) cache} to use or
    *        {@code null} to disable caching.
-   * @return the result of the evaluation of the given {@code pojoPath} starting at the given {@code pojo}. It
-   *         may be {@code null} according to the given {@link PojoPathMode mode}.
+   * @return the result of the evaluation of the given {@code pojoPath} starting at the given {@code pojo}. It may be
+   *         {@code null} according to the given {@link PojoPathMode mode}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object get(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state) {
@@ -461,8 +461,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the {@link #createState(Object, String, PojoPathMode, PojoPathContext) state} of this operation.
    * @param function is the {@link PojoPathFunction} for evaluation.
-   * @return the result of the evaluation. It might be {@code null} according to the
-   *         {@link PojoPathState#getMode() mode}.
+   * @return the result of the evaluation. It might be {@code null} according to the {@link PojoPathState#getMode()
+   *         mode}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object getFromFunction(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state,
@@ -486,16 +486,16 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
 
   /**
    * This method {@link Map#get(Object) gets} the single {@link CachingPojoPath#getSegment() segment} of the given
-   * {@code currentPath} from the {@link Map} given by {@code parentPojo}. If the result is {@code null}
-   * and {@link PojoPathState#getMode() mode} is {@link PojoPathMode#CREATE_IF_NULL} it creates and
+   * {@code currentPath} from the {@link Map} given by {@code parentPojo}. If the result is {@code null} and
+   * {@link PojoPathState#getMode() mode} is {@link PojoPathMode#CREATE_IF_NULL} it creates and
    * {@link Map#put(Object, Object) attaches} the missing object.
    *
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the {@link #createState(Object, String, PojoPathMode, PojoPathContext) state} of this operation.
    * @param parentPojo is the parent object to work on.
-   * @return the result of the evaluation. It might be {@code null} according to the
-   *         {@link PojoPathState#getMode() mode}.
+   * @return the result of the evaluation. It might be {@code null} according to the {@link PojoPathState#getMode()
+   *         mode}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object getFromMap(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state,
@@ -523,20 +523,20 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
 
   /**
    * This method {@link CollectionReflectionUtil#get(Object, int) gets} the single {@link CachingPojoPath#getIndex()
-   * segment} of the given {@code currentPath} from the array or {@link java.util.List} given by
-   * {@code parentPojo}. If the result is {@code null} and {@link PojoPathState#getMode() mode}
-   * is {@link PojoPathMode#CREATE_IF_NULL} it creates and {@link CollectionReflectionUtil#set(Object, int, Object)
-   * sets} the missing object. For arrays a new array has to be created and set in the parent of the
-   * {@code parentPojo}.
+   * segment} of the given {@code currentPath} from the array or {@link java.util.List} given by {@code parentPojo}. If
+   * the result is {@code null} and {@link PojoPathState#getMode() mode} is {@link PojoPathMode#CREATE_IF_NULL} it
+   * creates and {@link CollectionReflectionUtil#set(Object, int, Object) sets} the missing object. For arrays a new
+   * array has to be created and set in the parent of the {@code parentPojo}.
    *
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the {@link #createState(Object, String, PojoPathMode, PojoPathContext) state} of this operation.
    * @param index is the {@link java.util.List}-{@link java.util.List#get(int) index}.
-   * @return the result of the evaluation. It might be {@code null} according to the
-   *         {@link PojoPathState#getMode() mode}.
+   * @return the result of the evaluation. It might be {@code null} according to the {@link PojoPathState#getMode()
+   *         mode}.
    */
-  protected Object getFromList(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state, int index) {
+  protected Object getFromList(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state,
+      int index) {
 
     // handle indexed segment for collection/list or array...
     currentPath.pojoType = currentPath.parent.pojoType.getComponentType();
@@ -593,15 +593,15 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
 
   /**
    * This method reflectively gets the single {@link CachingPojoPath#getSegment() segment} of the given
-   * {@code currentPath} from the {@link net.sf.mmm.util.pojo.api.Pojo} given by {@code parentPojo}. If the
-   * result is {@code null} and {@code mode} is {@link PojoPathMode#CREATE_IF_NULL} it creates and attaches
-   * (sets) the missing object.
+   * {@code currentPath} from the {@link net.sf.mmm.util.pojo.api.Pojo} given by {@code parentPojo}. If the result is
+   * {@code null} and {@code mode} is {@link PojoPathMode#CREATE_IF_NULL} it creates and attaches (sets) the missing
+   * object.
    *
    * @param currentPath is the current {@link CachingPojoPath} to evaluate.
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the {@link #createState(Object, String, PojoPathMode, PojoPathContext) state} of this operation.
-   * @return the result of the evaluation. It might be {@code null} according to the
-   *         {@link PojoPathState#getMode() mode}.
+   * @return the result of the evaluation. It might be {@code null} according to the {@link PojoPathState#getMode()
+   *         mode}.
    */
   protected abstract Object getFromPojo(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state);
 
@@ -713,9 +713,9 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   }
 
   /**
-   * This method sets the single {@link CachingPojoPath#getSegment() segment} of the given {@code currentPath} from
-   * the {@link net.sf.mmm.util.pojo.api.Pojo} given by {@code parentPojo}. If the result is {@code null} and
-   * {@code mode} is {@link PojoPathMode#CREATE_IF_NULL} it creates and attaches (sets) the missing object.
+   * This method sets the single {@link CachingPojoPath#getSegment() segment} of the given {@code currentPath} from the
+   * {@link net.sf.mmm.util.pojo.api.Pojo} given by {@code parentPojo}. If the result is {@code null} and {@code mode}
+   * is {@link PojoPathMode#CREATE_IF_NULL} it creates and attaches (sets) the missing object.
    *
    * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
@@ -770,9 +770,9 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   }
 
   /**
-   * This method sets the single {@link CachingPojoPath#getSegment() segment} of the given {@code currentPath} from
-   * the {@link net.sf.mmm.util.pojo.api.Pojo} given by {@code parentPojo}. If the result is {@code null} and
-   * {@code mode} is {@link PojoPathMode#CREATE_IF_NULL} it creates and attaches (sets) the missing object.
+   * This method sets the single {@link CachingPojoPath#getSegment() segment} of the given {@code currentPath} from the
+   * {@link net.sf.mmm.util.pojo.api.Pojo} given by {@code parentPojo}. If the result is {@code null} and {@code mode}
+   * is {@link PojoPathMode#CREATE_IF_NULL} it creates and attaches (sets) the missing object.
    *
    * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
@@ -785,8 +785,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
       Object parentPojo, Object value);
 
   /**
-   * This method converts the given {@code pojo} to the given {@code targetClass} (or even
-   * {@code targetType}) as necessary.
+   * This method converts the given {@code pojo} to the given {@code targetClass} (or even {@code targetType}) as
+   * necessary.
    *
    * @param currentPath is the current {@link CachingPojoPath} that lead to {@code pojo}.
    * @param context is the {@link PojoPathContext context} for this operation.
@@ -796,8 +796,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    * @return the {@code pojo} converted to the {@code targetType} as necessary.
    * @throws PojoPathConversionException if the given {@code pojo} is NOT compatible and could NOT be converted.
    */
-  protected Object convert(CachingPojoPath currentPath, PojoPathContext context, Object pojo,
-      Class<?> targetClass, GenericType<?> targetType) throws PojoPathConversionException {
+  protected Object convert(CachingPojoPath currentPath, PojoPathContext context, Object pojo, Class<?> targetClass,
+      GenericType<?> targetType) throws PojoPathConversionException {
 
     Type type;
     if (targetType != null) {
@@ -854,8 +854,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    * @param context is the {@link PojoPathContext context} for this operation.
    * @param state is the {@link #createState(Object, String, PojoPathMode, PojoPathContext) state} to use.
    * @param arrayOrCollection is the object to be accessed at a given index.
-   * @return a {@link List} that adapts {@code arrayOrCollection} if it is a {@link Collection} but NOT a
-   *         {@link List}. Otherwise the given {@code arrayOrCollection} itself.
+   * @return a {@link List} that adapts {@code arrayOrCollection} if it is a {@link Collection} but NOT a {@link List}.
+   *         Otherwise the given {@code arrayOrCollection} itself.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object convertList(CachingPojoPath currentPath, PojoPathContext context, PojoPathState state,
@@ -888,8 +888,8 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
   /**
    * This method {@link CollectionReflectionUtil#set(Object, int, Object, GenericBean) sets} the single
    * {@link CachingPojoPath#getSegment() segment} of the given {@code currentPath} from the array or
-   * {@link java.util.List} given by {@code parentPojo}. If the result is {@code null} and {@code mode}
-   * is {@link PojoPathMode#CREATE_IF_NULL} it creates and attaches (sets) the missing object.
+   * {@link java.util.List} given by {@code parentPojo}. If the result is {@code null} and {@code mode} is
+   * {@link PojoPathMode#CREATE_IF_NULL} it creates and attaches (sets) the missing object.
    *
    * @param currentPath is the current {@link CachingPojoPath} to set.
    * @param context is the {@link PojoPathContext context} for this operation.
@@ -1027,11 +1027,11 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
     /** The root path. */
     private CachingPojoPath rootPath;
 
-    private  final PojoPathMode mode;
+    private final PojoPathMode mode;
 
-    private  final String pojoPath;
+    private final String pojoPath;
 
-    private  boolean cachingDisabled;
+    private boolean cachingDisabled;
 
     /**
      * The constructor for no caching.
@@ -1081,8 +1081,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
      * This method stored a {@link CachingPojoPath} in the cache. This method will do nothing if this state is
      * {@link #isCachingDisabled() disabled}.
      *
-     * @param currentPojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} leading to the given
-     *        {@code pojo}.
+     * @param currentPojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} leading to the given {@code pojo}.
      * @param evaluatedPojoPath is the {@link CachingPojoPath} that has been evaluated and should be cached.
      */
     public void setCachedPath(String currentPojoPath, CachingPojoPath evaluatedPojoPath) {
@@ -1135,8 +1134,7 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
      * This method determines if we have been invoked from
      * {@link PojoPathNavigator#getType(GenericType, String, boolean, PojoPathContext) getType}.
      *
-     * @return {@code true} if invoked via getType, {@code false} if invoked from {@code get} or
-     *         {@code set}.
+     * @return {@code true} if invoked via getType, {@code false} if invoked from {@code get} or {@code set}.
      */
     public boolean isGetType() {
 
@@ -1177,13 +1175,13 @@ public abstract class AbstractPojoPathNavigator extends AbstractLoggableComponen
    */
   protected static class CachingPojoPath extends BasicPojoPath {
 
-    private  CachingPojoPath parent;
+    private CachingPojoPath parent;
 
-    private  GenericType<?> pojoType;
+    private GenericType<?> pojoType;
 
-    private  Class<?> pojoClass;
+    private Class<?> pojoClass;
 
-    private  Object pojo;
+    private Object pojo;
 
     /**
      * The constructor.

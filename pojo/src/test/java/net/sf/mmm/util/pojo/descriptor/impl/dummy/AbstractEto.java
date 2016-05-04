@@ -11,7 +11,7 @@ package net.sf.mmm.util.pojo.descriptor.impl.dummy;
  */
 public abstract class AbstractEto<ID> {
 
-  private  ID id;
+  private ID id;
 
   /**
    * The constructor.

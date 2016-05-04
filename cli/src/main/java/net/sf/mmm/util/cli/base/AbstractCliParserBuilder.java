@@ -35,30 +35,30 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent implements CliParserBuilder,
-    CliParserDependencies {
+public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
+    implements CliParserBuilder, CliParserDependencies {
 
-  private  PojoDescriptorBuilderFactory descriptorBuilderFactory;
+  private PojoDescriptorBuilderFactory descriptorBuilderFactory;
 
-  private  PojoDescriptorBuilder descriptorBuilder;
+  private PojoDescriptorBuilder descriptorBuilder;
 
-  private  NlsMessageFactory nlsMessageFactory;
+  private NlsMessageFactory nlsMessageFactory;
 
-  private  NlsTemplateResolver nlsTemplateResolver;
+  private NlsTemplateResolver nlsTemplateResolver;
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
-  private  AnnotationUtil annotationUtil;
+  private AnnotationUtil annotationUtil;
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
-  private  CollectionReflectionUtil collectionReflectionUtil;
+  private CollectionReflectionUtil collectionReflectionUtil;
 
-  private  CollectionFactoryManager collectionFactoryManager;
+  private CollectionFactoryManager collectionFactoryManager;
 
-  private  ComposedValueConverter converter;
+  private ComposedValueConverter converter;
 
-  private  LineWrapper lineWrapper;
+  private LineWrapper lineWrapper;
 
   /**
    * The constructor.
@@ -112,8 +112,8 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
       throw new NlsNullPointerException("pojo");
     }
     try {
-      CliState state = new CliState(pojo.getClass(), this.descriptorBuilderFactory, getLogger(), getReflectionUtil(),
-          getAnnotationUtil());
+      CliState state = new CliState(pojo.getClass(), this.descriptorBuilderFactory, getLogger(),
+          getReflectionUtil(), getAnnotationUtil());
       CliParser parser = buildInternal(pojo, state);
       return parser;
     } catch (Exception e) {

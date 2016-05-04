@@ -2,21 +2,20 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.impl;
 
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.api.ResourceAmbiguousException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.ObjectDisposedException;
 
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-
 /**
  * This is the abstract base implementation of the {@link IocContainer} using spring. <br>
  * <b>ATTENTION:</b><br>
- * Please check your dependencies as {@code spring} is an optional dependency in
- * {@code mmm-util-core}.
+ * Please check your dependencies as {@code spring} is an optional dependency in {@code mmm-util-core}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

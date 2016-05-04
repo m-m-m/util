@@ -17,8 +17,8 @@ import net.sf.mmm.util.nls.api.NlsObject;
 /**
  * This class is a context for {@link InternalValidatingIdResolver}. JAXB is a little strange: It is using a
  * {@link Callable} for resolving {@link javax.xml.bind.annotation.XmlIDREF} but {@link Callable#call() evaluates} it
- * immediately instead of storing it until the initial processing phase has been completed. If it returns
- * {@code null} it will try again later but never complains if the ID could not be resolved in the end. <br>
+ * immediately instead of storing it until the initial processing phase has been completed. If it returns {@code null}
+ * it will try again later but never complains if the ID could not be resolved in the end. <br>
  * This class solves the problem by tracking each {@link Callable} and check that in the {@link #disposeAndValidate()
  * end} all are resolved successfully.
  *
@@ -52,8 +52,8 @@ public class IdResolverContext {
   }
 
   /**
-   * This method {@link com.sun.xml.bind.IDResolver#bind(String, Object) binds} the given {@code value} with the
-   * given {@code id}.
+   * This method {@link com.sun.xml.bind.IDResolver#bind(String, Object) binds} the given {@code value} with the given
+   * {@code id}.
    *
    * @param id is the {@link javax.xml.bind.annotation.XmlID}.
    * @param value is the JAXB bean to bind.
@@ -67,8 +67,8 @@ public class IdResolverContext {
   }
 
   /**
-   * This method {@link com.sun.xml.bind.IDResolver#resolve(String, Class) resolves} the value with the given
-   * {@code id}.
+   * This method {@link com.sun.xml.bind.IDResolver#resolve(String, Class) resolves} the value with the given {@code id}
+   * .
    *
    * @param id is the {@link javax.xml.bind.annotation.XmlIDREF} of the requested object. This object should be
    *        {@link #put(String, Object) bound}. This may also happen after it has been requested.
@@ -114,11 +114,11 @@ public class IdResolverContext {
    */
   protected class Resolver implements Callable<Object> {
 
-    private  final String id;
+    private final String id;
 
-    private  final Class<?> type;
+    private final Class<?> type;
 
-    private  boolean resolved;
+    private boolean resolved;
 
     /**
      * The constructor.
@@ -133,6 +133,7 @@ public class IdResolverContext {
       this.type = type;
     }
 
+    @Override
     public Object call() throws Exception {
 
       Object result = IdResolverContext.this.id2valueMap.get(this.id);

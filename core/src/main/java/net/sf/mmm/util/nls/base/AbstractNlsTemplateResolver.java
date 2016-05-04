@@ -7,9 +7,9 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
  * This is the abstract base implementation of the {@link NlsTemplateResolver} interface. <br>
- * You should extend this class rather than directly implementing the {@link NlsTemplateResolver} interface to
- * gain compatibility with further releases.
- * 
+ * You should extend this class rather than directly implementing the {@link NlsTemplateResolver} interface to gain
+ * compatibility with further releases.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

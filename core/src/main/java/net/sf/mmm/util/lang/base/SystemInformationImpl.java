@@ -9,21 +9,21 @@ import net.sf.mmm.util.lang.api.SystemUtil;
 
 /**
  * This is the implementation of the {@link SystemInformation} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public class SystemInformationImpl implements SystemInformation {
 
-  private  final String systemName;
+  private final String systemName;
 
-  private  final String systemVersion;
+  private final String systemVersion;
 
-  private  final String systemArchitecture;
+  private final String systemArchitecture;
 
-  private  final String systemType;
+  private final String systemType;
 
-  private  final boolean limitedDevice;
+  private final boolean limitedDevice;
 
   /**
    * The constructor.
@@ -40,7 +40,7 @@ public class SystemInformationImpl implements SystemInformation {
 
   /**
    * The constructor.
-   * 
+   *
    * @param systemName - see {@link #getSystemName()}.
    * @param systemVersion - see {@link #getSystemVersion()}.
    * @param systemArchitecture - see {@link #getSystemArchitecture()}.
@@ -57,15 +57,15 @@ public class SystemInformationImpl implements SystemInformation {
 
   /**
    * The constructor.
-   * 
+   *
    * @param systemName - see {@link #getSystemName()}.
    * @param systemVersion - see {@link #getSystemVersion()}.
    * @param systemArchitecture - see {@link #getSystemArchitecture()}.
    * @param systemType - see {@link #getSystemType()}.
    * @param mobileDevice - see {@link #isLimitedDevice()}.
    */
-  public SystemInformationImpl(String systemName, String systemVersion, String systemArchitecture, String systemType,
-      boolean mobileDevice) {
+  public SystemInformationImpl(String systemName, String systemVersion, String systemArchitecture,
+      String systemType, boolean mobileDevice) {
 
     super();
     this.systemName = systemName;
@@ -77,11 +77,10 @@ public class SystemInformationImpl implements SystemInformation {
 
   /**
    * @see #getSystemType()
-   * 
+   *
    * @param osName - see {@link #getSystemName()}.
-   * @param currentSystem - {@code true} if the value should be determined for the system and JVM
-   *        currently running (in this case additional system-properties might be evaluated),
-   *        {@code false} otherwise.
+   * @param currentSystem - {@code true} if the value should be determined for the system and JVM currently running (in
+   *        this case additional system-properties might be evaluated), {@code false} otherwise.
    * @return the value for {@link #isLimitedDevice()}.
    */
   private static String detectSystemType(String osName, boolean currentSystem) {
@@ -111,12 +110,11 @@ public class SystemInformationImpl implements SystemInformation {
 
   /**
    * @see #isLimitedDevice()
-   * 
+   *
    * @param osName - see {@link #getSystemName()}.
    * @param osArchitecture - see {@link #getSystemArchitecture()}.
-   * @param currentSystem - {@code true} if the value should be determined for the system and JVM
-   *        currently running (in this case additional system-properties might be evaluated),
-   *        {@code false} otherwise.
+   * @param currentSystem - {@code true} if the value should be determined for the system and JVM currently running (in
+   *        this case additional system-properties might be evaluated), {@code false} otherwise.
    * @return the value for {@link #isLimitedDevice()}.
    */
   private static boolean detectLimitedDevice(String osName, String osArchitecture, boolean currentSystem) {

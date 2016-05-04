@@ -5,9 +5,8 @@ package net.sf.mmm.util.gwt.api;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * This is the {@link JavaScriptObject} representing a {@code FileList} what is an array of
- * {@link JsFile files}.
- * 
+ * This is the {@link JavaScriptObject} representing a {@code FileList} what is an array of {@link JsFile files}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -21,14 +20,14 @@ public class JsFileList extends JavaScriptObject {
     super();
   }
 
-  //formatter:off
+  // formatter:off
 
   /**
    * @return the length of this list (the number of {@link JsFile files}).
    */
   public final native int length() /*-{
-    return this.length;
-  }-*/;
+                                   return this.length;
+                                   }-*/;
 
   /**
    * @see java.util.List#get(int)
@@ -37,10 +36,10 @@ public class JsFileList extends JavaScriptObject {
    * @return the {@link JsFile file} at the given {@code index}.
    */
   public final native JsFile item(int index) /*-{
-    return this.item(index);
-  }-*/;
+                                             return this.item(index);
+                                             }-*/;
 
-  //formatter:on
+  // formatter:on
 
   /**
    * @return this list as regular Java array.

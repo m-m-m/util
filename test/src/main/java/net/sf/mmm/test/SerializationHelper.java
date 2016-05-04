@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public final class SerializationHelper {
@@ -25,9 +25,9 @@ public final class SerializationHelper {
   }
 
   /**
-   * Method to {@link #serialize(Serializable)} and {@link #deserialize(byte[])} an {@link Object} to create a
-   * clone and test serialization.
-   * 
+   * Method to {@link #serialize(Serializable)} and {@link #deserialize(byte[])} an {@link Object} to create a clone and
+   * test serialization.
+   *
    * @param <S> is the generic type of the {@code serializable} {@link Object}.
    * @param serializable is the {@link Object} to {@link #serialize(Serializable) serialize}.
    * @return the {@link #deserialize(byte[]) de-serialized} clone.

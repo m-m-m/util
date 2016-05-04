@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This is an implementation of {@code /dev/null} as {@link InputStream}. In other words the
- * {@link DevNullTarget} is a dummy {@link InputStream} that always has reached its end. It will never change
- * its state so it can also be {@link InputStream#close() closed}.
- * 
+ * This is an implementation of {@code /dev/null} as {@link InputStream}. In other words the {@link DevNullTarget} is a
+ * dummy {@link InputStream} that always has reached its end. It will never change its state so it can also be
+ * {@link InputStream#close() closed}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

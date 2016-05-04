@@ -8,18 +8,17 @@ import net.sf.mmm.util.xml.path.api.XmlSelector;
 
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractXmlSelector extends AbstractXmlItem implements XmlSelector {
 
-  private  final NamespaceContext namespaceContext;
+  private final NamespaceContext namespaceContext;
 
   /**
    * The constructor.
-   * 
-   * @param namespaceContext is the
-   *        {@link #getNamespaceContext() namespace-context}.
+   *
+   * @param namespaceContext is the {@link #getNamespaceContext() namespace-context}.
    */
   public AbstractXmlSelector(final NamespaceContext namespaceContext) {
 

@@ -6,16 +6,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedOneArgMode;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorMode;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
-import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
-
 /**
  * This is the test-case for the class {@link PojoPropertyAccessorMode} and its subclasses.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

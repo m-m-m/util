@@ -2,15 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.reflect.api;
 
-import net.sf.mmm.util.reflect.api.ClassNameTest.Inner1.Inner2;
-import net.sf.mmm.util.reflect.api.ClassNameTest.Inner1.Inner2.Inner3;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import net.sf.mmm.util.reflect.api.ClassNameTest.Inner1.Inner2;
+import net.sf.mmm.util.reflect.api.ClassNameTest.Inner1.Inner2.Inner3;
+
 /**
  * This is the test-case for {@link ClassName}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ClassNameTest extends Assert {
@@ -63,9 +63,8 @@ public class ClassNameTest extends Assert {
   }
 
   /**
-   * Instantiates {@link ClassName} for given {@code type} and assert equals for all name related
-   * methods.
-   * 
+   * Instantiates {@link ClassName} for given {@code type} and assert equals for all name related methods.
+   *
    * @param type the {@link Class} to check.
    */
   private void check(Class<?> type) {
@@ -94,8 +93,9 @@ public class ClassNameTest extends Assert {
       assertFalse(other.equals(className));
       assertFalse(className.hashCode() == other.hashCode());
     } else {
-      other = new ClassName(className.getPackageName(), className.getSimpleName(), new ClassName(
-          enclosingClass.getPackageName(), enclosingClass.getSimpleName() + "x", enclosingClass.getEnclosingClass()));
+      other = new ClassName(className.getPackageName(), className.getSimpleName(),
+          new ClassName(enclosingClass.getPackageName(), enclosingClass.getSimpleName() + "x",
+              enclosingClass.getEnclosingClass()));
       assertFalse(className.equals(other));
       assertFalse(other.equals(className));
       assertFalse(className.hashCode() == other.hashCode());

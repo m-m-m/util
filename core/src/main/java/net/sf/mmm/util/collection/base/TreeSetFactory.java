@@ -19,6 +19,7 @@ public class TreeSetFactory extends AbstractSortedSetFactory {
   /** The singleton instance. */
   public static final SortedSetFactory INSTANCE = new TreeSetFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<TreeSet> getCollectionImplementation() {
 

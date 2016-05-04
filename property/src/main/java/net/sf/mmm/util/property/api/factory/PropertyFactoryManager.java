@@ -103,8 +103,9 @@ public interface PropertyFactoryManager {
    *        {@link PropertyFactory#getWritableInterface() writable interface}, or the
    *        {@link PropertyFactory#getImplementationClass() implementation}.
    * @param valueType is the {@link GenericType} of the value. Only needed for generic properties such as
-   *        {@link net.sf.mmm.util.property.api.lang.GenericProperty} or {@link net.sf.mmm.util.property.api.util.ListProperty}.
-   *        Can be {@code null} if the generic value type is already bound and should be ignored then.
+   *        {@link net.sf.mmm.util.property.api.lang.GenericProperty} or
+   *        {@link net.sf.mmm.util.property.api.util.ListProperty}. Can be {@code null} if the generic value type is
+   *        already bound and should be ignored then.
    * @param polymorphic - see {@link #getFactoryForValueType(Class, boolean)}.
    * @param name the {@link ReadableProperty#getName() property name}.
    * @param bean the {@link ReadableProperty#getBean() property bean}.
@@ -116,6 +117,6 @@ public interface PropertyFactoryManager {
    */
   <V, PROPERTY extends ReadableProperty<V>> PROPERTY create(Class<PROPERTY> propertyType, GenericType<V> valueType,
       boolean polymorphic, String name, Bean bean, AbstractValidator<? super V> validator)
-          throws ObjectNotFoundException;
+      throws ObjectNotFoundException;
 
 }

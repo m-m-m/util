@@ -7,9 +7,9 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 /**
  * This is the interface for a factory that can dynamically {@link #createBundle(Class) create} instance of
  * {@link NlsBundle}-interfaces.
- * 
+ *
  * @see NlsAccess#getBundleFactory()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -21,7 +21,7 @@ public interface NlsBundleFactory {
 
   /**
    * This method dynamically creates an instance for the given {@code bundleInterface}.
-   * 
+   *
    * @param <BUNDLE> is the generic type of the requested {@link NlsBundle}.
    * @param bundleInterface the interface of the requested {@link NlsBundle}. Has to be a sub-interface of
    *        {@link NlsBundle} with according methods.

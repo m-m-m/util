@@ -3,32 +3,32 @@
 package net.sf.mmm.util.io.api;
 
 /**
- * This is the interface for an object providing data represented as sequence of {@code byte}s -
- * typically some sort of buffer. <br>
+ * This is the interface for an object providing data represented as sequence of {@code byte}s - typically some sort of
+ * buffer. <br>
  * Following the idiom <em>separations of concerns</em> the idea is to allow fast and easy
- * {@link ByteProcessor#process(byte[], int, int) processing} of the data without any dependency or knowledge
- * of the internals of this data-provider. <br>
- * The user of this API can implement a {@link ByteProcessor} (e.g. as anonymous or inner class) with its
- * custom logic. He is entirely independent from the underlying implementation of this interface that may use
- * one big byte-array to store the provided data or have it sliced into multiple smaller byte-arrays.
- * 
+ * {@link ByteProcessor#process(byte[], int, int) processing} of the data without any dependency or knowledge of the
+ * internals of this data-provider. <br>
+ * The user of this API can implement a {@link ByteProcessor} (e.g. as anonymous or inner class) with its custom logic.
+ * He is entirely independent from the underlying implementation of this interface that may use one big byte-array to
+ * store the provided data or have it sliced into multiple smaller byte-arrays.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
 public interface ByteProcessable {
 
   /**
-   * This method processes the number of bytes given by {@code length} (as far as available) using the
-   * given {@code processor}.
-   * 
-   * @param processor is the {@link ByteProcessor} called to process the bytes. It may be called multiple
-   *        types if the data is sliced into multiple byte-arrays.
-   * @param length is the desired number of bytes to process. The value has to be greater or equal to
-   *        {@code 0}. A value of {@code 0} will have no effect. If you want to process all
-   *        available data to the end of stream or buffer you may use {@link Long#MAX_VALUE}.
-   * @return the number of bytes that have actually been processed. For a sufficient {@code length} this
-   *         will typically be equal to {@code length}. However if the end of the data has been reached,
-   *         a smaller value is returned. The value will always be greater or equal to {@code 0}.
+   * This method processes the number of bytes given by {@code length} (as far as available) using the given
+   * {@code processor}.
+   *
+   * @param processor is the {@link ByteProcessor} called to process the bytes. It may be called multiple types if the
+   *        data is sliced into multiple byte-arrays.
+   * @param length is the desired number of bytes to process. The value has to be greater or equal to {@code 0}. A value
+   *        of {@code 0} will have no effect. If you want to process all available data to the end of stream or buffer
+   *        you may use {@link Long#MAX_VALUE}.
+   * @return the number of bytes that have actually been processed. For a sufficient {@code length} this will typically
+   *         be equal to {@code length}. However if the end of the data has been reached, a smaller value is returned.
+   *         The value will always be greater or equal to {@code 0}.
    */
   long process(ByteProcessor processor, long length);
 

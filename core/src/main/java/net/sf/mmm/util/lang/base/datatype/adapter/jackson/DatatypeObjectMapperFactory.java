@@ -4,18 +4,18 @@ package net.sf.mmm.util.lang.base.datatype.adapter.jackson;
 
 import javax.inject.Inject;
 
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
 import net.sf.mmm.util.lang.api.DatatypeDetector;
 import net.sf.mmm.util.lang.api.EnumProvider;
 
-import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-
 /**
- * This is a factory bean to {@link #create() create} an instance of {@link ObjectMapper} for JSON mapping
- * with {@link net.sf.mmm.util.lang.api.Datatype} support via {@link DatatypeDescriptorManager}.
+ * This is a factory bean to {@link #create() create} an instance of {@link ObjectMapper} for JSON mapping with
+ * {@link net.sf.mmm.util.lang.api.Datatype} support via {@link DatatypeDescriptorManager}.
  *
  * @see DatatypeDescriptorManager
  * @see DatatypeJsonSerializer
@@ -26,11 +26,11 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  */
 public class DatatypeObjectMapperFactory extends AbstractLoggableComponent {
 
-  private  DatatypeDescriptorManager datatypeDescriptorManager;
+  private DatatypeDescriptorManager datatypeDescriptorManager;
 
-  private  DatatypeDetector datatypeDetector;
+  private DatatypeDetector datatypeDetector;
 
-  private  EnumProvider enumProvider;
+  private EnumProvider enumProvider;
 
   /**
    * The constructor.
@@ -68,14 +68,15 @@ public class DatatypeObjectMapperFactory extends AbstractLoggableComponent {
   }
 
   /**
-   * @return an instance of {@link ObjectMapper} configured to support all
-   *         {@link net.sf.mmm.util.lang.api.Datatype}s supported by {@link DatatypeDescriptorManager}.
+   * @return an instance of {@link ObjectMapper} configured to support all {@link net.sf.mmm.util.lang.api.Datatype}s
+   *         supported by {@link DatatypeDescriptorManager}.
    */
   public ObjectMapper create() {
 
     ObjectMapper mapper = new ObjectMapper();
 
-    SimpleModule module = new SimpleModule("DatatypeAdapter", new Version(6, 0, 0, null, "net.sf.mmm", "mmm-util-core"));
+    SimpleModule module = new SimpleModule("DatatypeAdapter",
+        new Version(6, 0, 0, null, "net.sf.mmm", "mmm-util-core"));
 
     DatatypeJsonSerializers serializers = new DatatypeJsonSerializers();
     serializers.setDatatypeDescriptorManager(this.datatypeDescriptorManager);

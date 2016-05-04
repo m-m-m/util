@@ -7,15 +7,16 @@ import java.util.Map;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 
 /**
- * This is the abstract base implementation for a {@link net.sf.mmm.util.pojo.path.api.PojoPathFunction} that
- * operates on a {@link Map}.
+ * This is the abstract base implementation for a {@link net.sf.mmm.util.pojo.path.api.PojoPathFunction} that operates
+ * on a {@link Map}.
  *
  * @param <VALUE> is the value this function traverses to starting from the actual POJO.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractMapPojoPathFunction<VALUE> extends AbstractPojoPathFunction<Map<String, Object>, VALUE> {
+public abstract class AbstractMapPojoPathFunction<VALUE>
+    extends AbstractPojoPathFunction<Map<String, Object>, VALUE> {
 
   @SuppressWarnings("unchecked")
   @Override

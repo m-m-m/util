@@ -11,14 +11,14 @@ import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
 
 /**
  * This is the default implementation of the {@link PojoPathFunctionManager}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @SuppressWarnings("rawtypes")
 public class DefaultPojoPathFunctionManager extends AbstractComponent implements PojoPathFunctionManager {
 
-  private  final Map<String, PojoPathFunction> functionMap;
+  private final Map<String, PojoPathFunction> functionMap;
 
   /**
    * The constructor.
@@ -30,7 +30,7 @@ public class DefaultPojoPathFunctionManager extends AbstractComponent implements
 
   /**
    * The constructor.
-   * 
+   *
    * @param functionMap is the underlying {@link Map} with the {@link #getFunction(String) functions}.
    */
   public DefaultPojoPathFunctionManager(Map<String, PojoPathFunction> functionMap) {
@@ -46,15 +46,15 @@ public class DefaultPojoPathFunctionManager extends AbstractComponent implements
   }
 
   /**
-   * This method registers the given {@code function} for the given {@code functionName} so it is
-   * available via {@link #getFunction(String)}.
-   * 
+   * This method registers the given {@code function} for the given {@code functionName} so it is available via
+   * {@link #getFunction(String)}.
+   *
    * @see #getFunction(String)
-   * 
+   *
    * @param function is the {@link PojoPathFunction} to register.
    * @param functionName is the {@link #getFunction(String) associated name}.
-   * @return the {@link PojoPathFunction} that was registered before for the given {@code functionName}
-   *         and has now been replaced.
+   * @return the {@link PojoPathFunction} that was registered before for the given {@code functionName} and has now been
+   *         replaced.
    */
   public PojoPathFunction registerFunction(PojoPathFunction function, String functionName) {
 

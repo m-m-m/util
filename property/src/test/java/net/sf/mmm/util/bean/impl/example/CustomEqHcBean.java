@@ -18,11 +18,13 @@ public interface CustomEqHcBean extends Bean, CustomHashCode, CustomEquals<Custo
 
   IntegerProperty Value();
 
+  @Override
   default int hash() {
 
     return -Value().get();
   }
 
+  @Override
   default boolean isEqualTo(CustomEqHcBean other) {
 
     if (other == null) {

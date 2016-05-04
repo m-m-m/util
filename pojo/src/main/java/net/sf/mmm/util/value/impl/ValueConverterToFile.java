@@ -10,9 +10,8 @@ import javax.inject.Singleton;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to a {@link File}. It supports objects given as {@link CharSequence} (e.g. {@link String}
- * ).
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
+ * {@link Object} to a {@link File}. It supports objects given as {@link CharSequence} (e.g. {@link String} ).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -41,6 +40,7 @@ public class ValueConverterToFile extends AbstractSimpleValueConverter<CharSeque
     return File.class;
   }
 
+  @Override
   @SuppressWarnings("unchecked")
   public <T extends File> T convert(CharSequence value, Object valueSource, Class<T> targetClass) {
 

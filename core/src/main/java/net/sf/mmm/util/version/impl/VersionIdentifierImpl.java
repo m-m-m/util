@@ -16,7 +16,7 @@ import net.sf.mmm.util.version.base.AbstractVersionIdentifier;
 
 /**
  * This is the abstract base implementation of {@link net.sf.mmm.util.version.api.VersionIdentifier}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -62,16 +62,14 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
 
   /**
    * The constructor.
-   * 
+   *
    * @param stringRepresentation - see {@link #toString()}.
    * @param label - see {@link #getLabel()}. May be {@code null}.
    * @param timestamp - see {@link #getTimestamp()}. May be {@code null}.
    * @param revision - see {@link #getRevision()}. May be {@code null}.
    * @param phase - see {@link #getPhase()}. May be {@code null}.
-   * @param phaseAlias - see {@link #getPhase()}. May be {@code null} (only if {@code phase} is
-   *        {@code null}).
-   * @param phaseNumber - see {@link #getPhaseNumber()}. May be {@code null} (only if {@code phase}
-   *        is {@code null}).
+   * @param phaseAlias - see {@link #getPhase()}. May be {@code null} (only if {@code phase} is {@code null}).
+   * @param phaseNumber - see {@link #getPhaseNumber()}. May be {@code null} (only if {@code phase} is {@code null}).
    * @param snapshot - see {@link #isSnapshot()}.
    * @param versionSegments - see {@link #getVersionSegment(int)}. At least one segment is required if no
    *        {@link #isSnapshot() snapshot}.

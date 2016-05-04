@@ -5,9 +5,8 @@ package net.sf.mmm.util.transferobject.api;
 import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 
 /**
- * This is the abstract base class for a {@link TransferObject}. It already contains a small and simple
- * infrastructure for {@link #clone() cloning}, {@link #equals(Object)} and {@link #hashCode()} as well as
- * {@link #toString()}.
+ * This is the abstract base class for a {@link TransferObject}. It already contains a small and simple infrastructure
+ * for {@link #clone() cloning}, {@link #equals(Object)} and {@link #hashCode()} as well as {@link #toString()}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
@@ -71,8 +70,8 @@ public abstract class AbstractTransferObject implements TransferObject, Cloneabl
   /**
    * Method to extend {@link #toString()} logic. Override to add additional information.
    *
-   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the
-   *        string representation.
+   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the string
+   *        representation.
    */
   protected void toString(StringBuilder buffer) {
 

@@ -3,10 +3,9 @@
 package net.sf.mmm.util.io.api;
 
 /**
- * This type represents a Byte-Order-Mark (<a
- * href="http://www.unicode.org/unicode/faq/utf_bom.html#BOM">BOM</a>) of an Unicode-Transformation-Format
- * (UTF).
- * 
+ * This type represents a Byte-Order-Mark (<a href="http://www.unicode.org/unicode/faq/utf_bom.html#BOM">BOM</a>) of an
+ * Unicode-Transformation-Format (UTF).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -112,26 +111,26 @@ public enum ByteOrderMark {
 
   };
 
-  private  static final byte[] MAGIC_BYTES_UTF8 = new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
+  private static final byte[] MAGIC_BYTES_UTF8 = new byte[] { (byte) 0xef, (byte) 0xbb, (byte) 0xbf };
 
-  private  static final byte[] MAGIC_BYTES_UTF16_BE = new byte[] { (byte) 0xfe, (byte) 0xff };
+  private static final byte[] MAGIC_BYTES_UTF16_BE = new byte[] { (byte) 0xfe, (byte) 0xff };
 
-  private  static final byte[] MAGIC_BYTES_UTF16_LE = new byte[] { (byte) 0xff, (byte) 0xfe };
+  private static final byte[] MAGIC_BYTES_UTF16_LE = new byte[] { (byte) 0xff, (byte) 0xfe };
 
-  private  static final byte[] MAGIC_BYTES_UTF32_BE = new byte[] { 0x00, 0x00, (byte) 0xfe, (byte) 0xff };
+  private static final byte[] MAGIC_BYTES_UTF32_BE = new byte[] { 0x00, 0x00, (byte) 0xfe, (byte) 0xff };
 
-  private  static final byte[] MAGIC_BYTES_UTF32_LE = new byte[] { (byte) 0xff, (byte) 0xfe, 0x00, 0x00 };
+  private static final byte[] MAGIC_BYTES_UTF32_LE = new byte[] { (byte) 0xff, (byte) 0xfe, 0x00, 0x00 };
 
   /**
    * This method gets the encoding indicated by this {@link ByteOrderMark}.
-   * 
+   *
    * @return the encoding.
    */
   public abstract String getEncoding();
 
   /**
    * This method gets the number of bytes of this {@link ByteOrderMark}.
-   * 
+   *
    * @return the length.
    */
   public final int getLength() {
@@ -144,14 +143,13 @@ public enum ByteOrderMark {
    * <b>NOTE:</b><br>
    * A BOM may only occur at the head of your data (file, payload, etc.). <br>
    * <b>ATTENTION:</b><br>
-   * Please note that binary data may accidently have header bytes that represent this {@link ByteOrderMark}.
-   * This method can NOT know this and will return {@code true} even if the data is NOT encoded with the
-   * {@link #getEncoding() according encoding}. Therefore you should only use this method for the header of
-   * textual data.
-   * 
+   * Please note that binary data may accidently have header bytes that represent this {@link ByteOrderMark}. This
+   * method can NOT know this and will return {@code true} even if the data is NOT encoded with the
+   * {@link #getEncoding() according encoding}. Therefore you should only use this method for the header of textual
+   * data.
+   *
    * @param bytes is the buffer with the bytes to check.
-   * @param offset is the index of the first data-byte in {@code bytes}. Will typically be {@code 0}
-   *        .
+   * @param offset is the index of the first data-byte in {@code bytes}. Will typically be {@code 0} .
    * @return {@code true} if this {@link ByteOrderMark BOM} was detected in the
    */
   public final boolean isPresent(byte[] bytes, int offset) {
@@ -170,25 +168,23 @@ public enum ByteOrderMark {
 
   /**
    * This method gets the bytes of this BOM.
-   * 
+   *
    * @return the magic bytes of this BOM.
    */
   protected abstract byte[] getBytes();
 
   /**
-   * This method detects the {@link ByteOrderMark} that may be {@link #isPresent(byte[], int) present} in the
-   * given {@code bytes} starting at {@code offset}. <br>
+   * This method detects the {@link ByteOrderMark} that may be {@link #isPresent(byte[], int) present} in the given
+   * {@code bytes} starting at {@code offset}. <br>
    * <b>ATTENTION:</b><br>
-   * Please note that binary data may accidently have header bytes that represent a {@link ByteOrderMark}.
-   * This method can NOT know this and will return that {@link ByteOrderMark} even if the data is NOT encoded
-   * with the {@link #getEncoding() according encoding}. Therefore you should only use this method for the
-   * header of textual data.
-   * 
+   * Please note that binary data may accidently have header bytes that represent a {@link ByteOrderMark}. This method
+   * can NOT know this and will return that {@link ByteOrderMark} even if the data is NOT encoded with the
+   * {@link #getEncoding() according encoding}. Therefore you should only use this method for the header of textual
+   * data.
+   *
    * @param bytes is the buffer with the bytes to check.
-   * @param offset is the index of the first data-byte in {@code bytes}. Will typically be {@code 0}
-   *        .
-   * @return the detected {@link ByteOrderMark} or {@code null} if the given {@code bytes} have no
-   *         BOM.
+   * @param offset is the index of the first data-byte in {@code bytes}. Will typically be {@code 0} .
+   * @return the detected {@link ByteOrderMark} or {@code null} if the given {@code bytes} have no BOM.
    */
   public static ByteOrderMark detect(byte[] bytes, int offset) {
 

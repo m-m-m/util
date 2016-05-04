@@ -4,14 +4,14 @@ package net.sf.mmm.util.lang.base.datatype.adapter.jackson;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
-import net.sf.mmm.util.lang.api.DatatypeDetector;
-
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.module.SimpleSerializers;
+
+import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
+import net.sf.mmm.util.lang.api.DatatypeDetector;
 
 /**
  * This class extends {@link SimpleSerializers} in order to create serializers dynamically.
@@ -23,9 +23,9 @@ public class DatatypeJsonSerializers extends SimpleSerializers {
 
   private static final long serialVersionUID = 1L;
 
-  private  DatatypeDescriptorManager datatypeDescriptorManager;
+  private DatatypeDescriptorManager datatypeDescriptorManager;
 
-  private  DatatypeDetector datatypeDetector;
+  private DatatypeDetector datatypeDetector;
 
   /** @see #findSerializer(SerializationConfig, JavaType, BeanDescription) */
   private DatatypeJsonSerializer<?> datatypeJsonSerializer;

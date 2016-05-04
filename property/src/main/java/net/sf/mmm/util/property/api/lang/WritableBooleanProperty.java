@@ -12,7 +12,8 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableBooleanProperty extends ReadableBooleanProperty, WritableProperty<Boolean>, WritableBooleanValue {
+public interface WritableBooleanProperty
+    extends ReadableBooleanProperty, WritableProperty<Boolean>, WritableBooleanValue {
 
   @Override
   default boolean get() {

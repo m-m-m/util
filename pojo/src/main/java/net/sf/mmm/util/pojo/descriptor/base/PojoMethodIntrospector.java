@@ -10,12 +10,12 @@ import java.util.Iterator;
  * <b>ATTENTION:</b><br>
  * Since version 3.1.0 of mmm-util-core no {@link Method methods} inherited from {@link Class#getSuperclass()
  * superclass} are iterated by default implementations (see issue # 55).
- * 
+ *
  * @see #findMethods(Class)
- * 
+ *
  * @see net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor
  * @see net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -23,7 +23,7 @@ public interface PojoMethodIntrospector {
 
   /**
    * This method finds all {@link Method}s of the given {@code pojoType}.
-   * 
+   *
    * @param pojoType is the type reflecting the POJO for which the {@link Method}s are requested.
    * @return a read-only iterator of all the {@link Method}s.
    */

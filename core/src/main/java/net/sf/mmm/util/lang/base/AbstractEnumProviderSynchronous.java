@@ -7,7 +7,7 @@ import net.sf.mmm.util.lang.api.EnumDefinition;
 /**
  * This is the abstract base implementation of {@link AbstractEnumProvider} that retrieves
  * {@link #getEnumValues(net.sf.mmm.util.lang.api.EnumDefinition) enum values} synchronously.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

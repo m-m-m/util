@@ -8,9 +8,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 /**
  * This is a simple implementation of the {@link net.sf.mmm.util.component.api.IocContainer} using spring. <br>
  * <b>ATTENTION:</b><br>
- * Please check your dependencies as {@code spring} is an optional dependency in
- * {@code mmm-util-core}.
- * 
+ * Please check your dependencies as {@code spring} is an optional dependency in {@code mmm-util-core}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -26,7 +25,7 @@ public class SpringContainer extends AbstractSpringContainer {
 
   /**
    * The constructor.
-   * 
+   *
    * @param packages are the {@link Package}s containing components to manage.
    */
   public SpringContainer(String... packages) {
@@ -36,7 +35,7 @@ public class SpringContainer extends AbstractSpringContainer {
 
   /**
    * The constructor.
-   * 
+   *
    * @param applicationContext is the {@link ConfigurableApplicationContext} to adapt.
    */
   public SpringContainer(ConfigurableApplicationContext applicationContext) {

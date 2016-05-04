@@ -16,13 +16,13 @@ import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for {@link java.util.Date}s using
  * {@link Iso8601Util}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class AbstractNlsFormatterDateIso8601 extends SimpleNlsFormatter<Object> {
 
-  private  Iso8601Util iso8601Util;
+  private Iso8601Util iso8601Util;
 
   /**
    * The constructor.
@@ -34,7 +34,7 @@ public abstract class AbstractNlsFormatterDateIso8601 extends SimpleNlsFormatter
 
   /**
    * The constructor.
-   * 
+   *
    * @param iso8601Util is the {@link Iso8601Util} instance to use.
    */
   public AbstractNlsFormatterDateIso8601(Iso8601Util iso8601Util) {

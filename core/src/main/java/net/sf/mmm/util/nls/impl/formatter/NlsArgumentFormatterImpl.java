@@ -39,8 +39,8 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
   }
 
   @Override
-  public void format(NlsArgument argument, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
-      Appendable buffer) throws IOException {
+  public void format(NlsArgument argument, Locale locale, Map<String, Object> arguments,
+      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
     Object value = null;
     boolean hasValue = false;

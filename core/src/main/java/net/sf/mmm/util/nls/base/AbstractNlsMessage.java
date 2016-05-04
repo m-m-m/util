@@ -10,8 +10,8 @@ import net.sf.mmm.util.session.api.UserSessionAccess;
 
 /**
  * This is the abstract base implementation of {@link NlsMessage}. <br>
- * You should extend this class rather than directly implementing the {@link NlsMessage} interface to gain
- * compatibility with further releases.
+ * You should extend this class rather than directly implementing the {@link NlsMessage} interface to gain compatibility
+ * with further releases.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
@@ -38,6 +38,7 @@ public abstract class AbstractNlsMessage implements NlsMessage {
    * @return the argument at the given index or {@code null} if no such argument exists.
    * @deprecated use {@link #getArgument(String)}
    */
+  @Override
   @Deprecated
   public Object getArgument(int index) {
 
@@ -69,6 +70,7 @@ public abstract class AbstractNlsMessage implements NlsMessage {
     getLocalizedMessage(locale, null, buffer);
   }
 
+  @Override
   @SuppressWarnings("deprecation")
   public String getLocalizedMessage(Locale locale, NlsTemplateResolver resolver) {
 

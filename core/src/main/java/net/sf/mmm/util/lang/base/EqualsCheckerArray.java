@@ -7,12 +7,12 @@ import net.sf.mmm.util.lang.api.EqualsChecker;
 
 /**
  * This is an implementation of {@link EqualsChecker} that recursively checks arrays based on a given
- * {@link EqualsChecker} delegate. So if two objects should be {@link #isEqual(Object, Object) checked for
- * equality} that are both arrays of the same kind, this implementation will check if they have the same
- * length and then recursively {@link #isEqual(Object, Object) check} the contained elements. For objects of
- * other types it will delegate to the {@link EqualsChecker} given at construction. This way you can simply
- * check if two arrays have the {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame same} or
- * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual equal} elements.
+ * {@link EqualsChecker} delegate. So if two objects should be {@link #isEqual(Object, Object) checked for equality}
+ * that are both arrays of the same kind, this implementation will check if they have the same length and then
+ * recursively {@link #isEqual(Object, Object) check} the contained elements. For objects of other types it will
+ * delegate to the {@link EqualsChecker} given at construction. This way you can simply check if two arrays have the
+ * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame same} or {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual
+ * equal} elements.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

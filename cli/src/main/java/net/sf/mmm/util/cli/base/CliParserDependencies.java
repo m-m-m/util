@@ -14,8 +14,8 @@ import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
- * This interface bundles the dependencies for the {@link net.sf.mmm.util.cli.api.CliParser}. It contains
- * components required by the parser.
+ * This interface bundles the dependencies for the {@link net.sf.mmm.util.cli.api.CliParser}. It contains components
+ * required by the parser.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

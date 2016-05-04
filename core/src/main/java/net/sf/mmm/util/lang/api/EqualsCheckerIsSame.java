@@ -3,8 +3,8 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This is an implementation of {@link EqualsChecker} that simply checks if two objects are same (identical
- * instances, checked via {@code ==} operator).
+ * This is an implementation of {@link EqualsChecker} that simply checks if two objects are same (identical instances,
+ * checked via {@code ==} operator).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -13,7 +13,7 @@ public final class EqualsCheckerIsSame extends AbstractEqualsChecker<Object> {
 
   private static final long serialVersionUID = 1L;
 
-  private  static final EqualsCheckerIsSame INSTANCE = new EqualsCheckerIsSame();
+  private static final EqualsCheckerIsSame INSTANCE = new EqualsCheckerIsSame();
 
   /**
    * The constructor. <br>

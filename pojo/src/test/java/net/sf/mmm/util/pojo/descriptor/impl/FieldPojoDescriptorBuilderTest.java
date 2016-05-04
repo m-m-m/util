@@ -2,16 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
+import org.junit.Test;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.base.NoPojoMethodIntrospector;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
-import org.junit.Test;
-
 /**
  * This is the test-case for {@link FieldPojoDescriptorBuilder}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

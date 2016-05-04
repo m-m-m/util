@@ -17,10 +17,10 @@ public class VersionIdentifierFormatterPhaseAlias extends AbstractVersionIdentif
   /**
    * The constructor.
    *
-   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getPhase() phase}. Will
-   *        be omitted if {@link VersionIdentifier#getPhase() phase} is {@code null}.
-   * @param maximumLength is the maximum number of letters for the {@link VersionIdentifier#getPhaseAlias()
-   *        phase alias}. The default is {@link Integer#MAX_VALUE}.
+   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getPhase() phase}. Will be omitted
+   *        if {@link VersionIdentifier#getPhase() phase} is {@code null}.
+   * @param maximumLength is the maximum number of letters for the {@link VersionIdentifier#getPhaseAlias() phase alias}
+   *        . The default is {@link Integer#MAX_VALUE}.
    */
   public VersionIdentifierFormatterPhaseAlias(String prefix, int maximumLength) {
 

@@ -15,17 +15,17 @@ public class AddressEto extends EntityTo<Long> implements Address {
 
   private static final long serialVersionUID = 4411887131075490176L;
 
-  private  String city;
+  private String city;
 
-  private  String houseNumber;
+  private String houseNumber;
 
-  private  String state;
+  private String state;
 
-  private  String street;
+  private String street;
 
-  private  String zip;
+  private String zip;
 
-  private  String country;
+  private String country;
 
   /**
    * The constructor.

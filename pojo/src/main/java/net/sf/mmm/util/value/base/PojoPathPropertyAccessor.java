@@ -10,8 +10,7 @@ import net.sf.mmm.util.pojo.path.base.PojoPathContextBean;
 import net.sf.mmm.util.value.api.PropertyAccessor;
 
 /**
- * This is an implementation of {@link PropertyAccessor} using {@link PojoPathNavigator} (based on
- * reflection).
+ * This is an implementation of {@link PropertyAccessor} using {@link PojoPathNavigator} (based on reflection).
  *
  * @param <POJO> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo} to access.
  * @param <VALUE> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo POJOs} property to access.
@@ -19,8 +18,8 @@ import net.sf.mmm.util.value.api.PropertyAccessor;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<POJO, VALUE>,
-    AttributeReadValueType<VALUE> {
+public class PojoPathPropertyAccessor<POJO, VALUE>
+    implements PropertyAccessor<POJO, VALUE>, AttributeReadValueType<VALUE> {
 
   /** The {@link PojoPathNavigator} instance to use. */
   private final PojoPathNavigator navigator;
@@ -28,7 +27,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
   /** The {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property to access. */
   private final String pojoPath;
 
-  private  final Class<VALUE> valueType;
+  private final Class<VALUE> valueType;
 
   /** The {@link PojoPathMode} used for {@link #setValue(Object, Object) write access}. */
   private final PojoPathMode writeMode;
@@ -40,8 +39,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
    * The constructor.
    *
    * @param navigator is the {@link PojoPathNavigator} instance to use.
-   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property
-   *        to access.
+   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property to access.
    * @param valueType is the {@link #getValueType() value type}.
    */
   public PojoPathPropertyAccessor(PojoPathNavigator navigator, String pojoPath, Class<VALUE> valueType) {
@@ -53,8 +51,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
    * The constructor.
    *
    * @param navigator is the {@link PojoPathNavigator} instance to use.
-   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property
-   *        to access.
+   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property to access.
    * @param valueType is the {@link #getValueType() value type}.
    * @param writeMode is the {@link PojoPathMode} used for {@link #setValue(Object, Object) write access}. For
    *        {@link #getValue(Object) read-access} always {@link PojoPathMode#RETURN_IF_NULL} is used.
@@ -69,8 +66,7 @@ public class PojoPathPropertyAccessor<POJO, VALUE> implements PropertyAccessor<P
    * The constructor.
    *
    * @param navigator is the {@link PojoPathNavigator} instance to use.
-   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property
-   *        to access.
+   * @param pojoPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPath} pointing to the according property to access.
    * @param valueType is the {@link #getValueType() value type}.
    * @param writeMode is the {@link PojoPathMode} used for {@link #setValue(Object, Object) write access}. For
    *        {@link #getValue(Object) read-access} always {@link PojoPathMode#RETURN_IF_NULL} is used.

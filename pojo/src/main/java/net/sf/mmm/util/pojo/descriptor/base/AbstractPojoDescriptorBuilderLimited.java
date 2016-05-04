@@ -6,6 +6,8 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gwt.core.shared.GWT;
+
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
@@ -14,20 +16,18 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
 
-import com.google.gwt.core.shared.GWT;
-
 /**
  * This is the abstract base-implementation of the {@link PojoDescriptorBuilder} interface.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLoggableComponent implements
-    PojoDescriptorBuilder {
+public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLoggableComponent
+    implements PojoDescriptorBuilder {
 
-  private  static final PojoDescriptorBuilder INSTANCE = GWT.create(PojoDescriptorBuilder.class);
+  private static final PojoDescriptorBuilder INSTANCE = GWT.create(PojoDescriptorBuilder.class);
 
-  private  final Map<Class<?>, AbstractPojoDescriptorImpl<?>> pojoMap;
+  private final Map<Class<?>, AbstractPojoDescriptorImpl<?>> pojoMap;
 
   /**
    * The constructor.

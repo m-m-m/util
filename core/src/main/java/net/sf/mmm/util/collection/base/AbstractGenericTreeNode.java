@@ -23,11 +23,11 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT extends GenericTreeNode<CHILD, PARENT>>
     implements GenericTreeNode<CHILD, PARENT> {
 
-  private  final transient List<CHILD> mutableChildList;
+  private final transient List<CHILD> mutableChildList;
 
-  private  final List<CHILD> children;
+  private final List<CHILD> children;
 
-  private  PARENT parent;
+  private PARENT parent;
 
   /**
    * The constructor.
@@ -80,9 +80,9 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   /**
    * This method sets the {@link #getParent() parent} of this {@link GenericTreeNode}.
    *
-   * @param parent is the {@link #getParent() parent} to set. It may be {@code null}. However you should
-   *        typically only call this method once with a non-null argument. It is still legal to re-arrange the
-   *        tree-structure on existing {@link GenericTreeNode}s.
+   * @param parent is the {@link #getParent() parent} to set. It may be {@code null}. However you should typically only
+   *        call this method once with a non-null argument. It is still legal to re-arrange the tree-structure on
+   *        existing {@link GenericTreeNode}s.
    */
   protected void setParent(PARENT parent) {
 
@@ -104,11 +104,10 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method adds the given {@code child} to the {@link #getChildren() children} of this
-   * {@link GenericTreeNode}.
+   * This method adds the given {@code child} to the {@link #getChildren() children} of this {@link GenericTreeNode}.
    *
-   * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be
-   *        identical to this {@link GenericTreeNode}.
+   * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be identical to
+   *        this {@link GenericTreeNode}.
    */
   protected void addChild(CHILD child) {
 
@@ -122,13 +121,11 @@ public abstract class AbstractGenericTreeNode<CHILD extends Node<PARENT>, PARENT
   }
 
   /**
-   * This method adds the given {@code child} to the {@link #getChildren() children} of this
-   * {@link GenericTreeNode}.
+   * This method adds the given {@code child} to the {@link #getChildren() children} of this {@link GenericTreeNode}.
    *
-   * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be
-   *        identical to this {@link GenericTreeNode}.
-   * @param index is the {@link List#get(int) index} where to {@link List#add(int, Object) insert} the new
-   *        child.
+   * @param child is the {@link #getChildren() child} to add. It's {@link #getParent() parent} has to be identical to
+   *        this {@link GenericTreeNode}.
+   * @param index is the {@link List#get(int) index} where to {@link List#add(int, Object) insert} the new child.
    */
   protected void addChild(CHILD child, int index) {
 

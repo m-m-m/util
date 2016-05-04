@@ -15,20 +15,19 @@ import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InvocationFailedException;
 
 /**
- * This is the implementation of the {@link PojoPropertyAccessorOneArg} interface for accessing a
- * {@link Method}.
- * 
+ * This is the implementation of the {@link PojoPropertyAccessorOneArg} interface for accessing a {@link Method}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorOneArgMethod extends AbstractPojoPropertyAccessorMethod implements
-    PojoPropertyAccessorOneArg {
+public class PojoPropertyAccessorOneArgMethod extends AbstractPojoPropertyAccessorMethod
+    implements PojoPropertyAccessorOneArg {
 
-  private  final PojoPropertyAccessorOneArgMode mode;
+  private final PojoPropertyAccessorOneArgMode mode;
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the property.
    * @param mode is the {@link #getMode() mode} of access.
@@ -36,8 +35,9 @@ public class PojoPropertyAccessorOneArgMethod extends AbstractPojoPropertyAccess
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param method is the {@link #getMethod() method} to access.
    */
-  public PojoPropertyAccessorOneArgMethod(String propertyName, Type propertyType, PojoPropertyAccessorOneArgMode mode,
-      PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies, Method method) {
+  public PojoPropertyAccessorOneArgMethod(String propertyName, Type propertyType,
+      PojoPropertyAccessorOneArgMode mode, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies,
+      Method method) {
 
     super(propertyName, propertyType, descriptor, dependencies, method);
     this.mode = mode;

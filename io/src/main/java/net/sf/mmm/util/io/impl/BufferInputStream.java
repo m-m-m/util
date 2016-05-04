@@ -13,11 +13,11 @@ import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This class represents a {@link InputStream} that works like a {@link java.io.BufferedInputStream} but
- * exposes its internal state to be used for lookahead operations. <br>
+ * This class represents a {@link InputStream} that works like a {@link java.io.BufferedInputStream} but exposes its
+ * internal state to be used for lookahead operations. <br>
  * <b>ATTENTION:</b><br>
  * This class is intended for internal usage only. <br>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -46,7 +46,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
 
   /**
    * The constructor.
-   * 
+   *
    * @param inStream is the {@link InputStream} to adapt.
    */
   public BufferInputStream(InputStream inStream) {
@@ -56,10 +56,10 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
 
   /**
    * The constructor.
-   * 
+   *
    * @param inStream is the {@link InputStream} to adapt.
-   * @param capacity is the capacity for each of the two {@link ByteArrayBufferImpl} s. Please note that
-   *        therefore the double amount of memory is allocated.
+   * @param capacity is the capacity for each of the two {@link ByteArrayBufferImpl} s. Please note that therefore the
+   *        double amount of memory is allocated.
    */
   public BufferInputStream(InputStream inStream, int capacity) {
 
@@ -68,10 +68,10 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
 
   /**
    * The constructor.
-   * 
+   *
    * @param inStream is the {@link InputStream} to adapt.
-   * @param capacity is the capacity for each of the two {@link ByteArrayBufferImpl} s. Please note that
-   *        therefore the double amount of memory is allocated.
+   * @param capacity is the capacity for each of the two {@link ByteArrayBufferImpl} s. Please note that therefore the
+   *        double amount of memory is allocated.
    * @param bufferCount is the number of buffers to use.
    */
   private BufferInputStream(InputStream inStream, int capacity, int bufferCount) {
@@ -88,7 +88,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
 
   /**
    * This method ensures that this stream has NOT been {@link #close() closed}.
-   * 
+   *
    * @throws IOException if this stream has been {@link #close() closed}.
    */
   protected void ensureOpen() throws IOException {
@@ -109,12 +109,12 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
   }
 
   /**
-   * This method (re-)fills the internal buffer as far as data is available from the underlying
-   * {@link InputStream} without {@link #read() consuming} data from the stream. If the internal buffer is
-   * already filled, the call of this method will have no effect. <br>
-   * 
-   * @return {@code true} if the end of the stream was encountered while (re)filling the internal buffer,
-   *         {@code false} otherwise.
+   * This method (re-)fills the internal buffer as far as data is available from the underlying {@link InputStream}
+   * without {@link #read() consuming} data from the stream. If the internal buffer is already filled, the call of this
+   * method will have no effect. <br>
+   *
+   * @return {@code true} if the end of the stream was encountered while (re)filling the internal buffer, {@code false}
+   *         otherwise.
    * @throws IOException if the operation fails.
    */
   public boolean fill() throws IOException {
@@ -212,11 +212,11 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
   }
 
   /**
-   * This method creates a new {@link ProcessableByteArrayBuffer buffer} for lookahead operations on the data
-   * from the underlying stream. That buffer is a view on the internal buffer of this stream with its own
-   * state for the read position. Consuming data from that buffer will NOT influence the state of this buffer,
-   * while consuming data from this stream will refill the returned buffer.
-   * 
+   * This method creates a new {@link ProcessableByteArrayBuffer buffer} for lookahead operations on the data from the
+   * underlying stream. That buffer is a view on the internal buffer of this stream with its own state for the read
+   * position. Consuming data from that buffer will NOT influence the state of this buffer, while consuming data from
+   * this stream will refill the returned buffer.
+   *
    * @return the lookahead buffer.
    */
   public ProcessableByteArrayBuffer createLookaheadBuffer() {
@@ -225,8 +225,8 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
   }
 
   /**
-   * This inner class is the {@link ByteProcessor} used to copy bytes from the buffer to the caller consuming
-   * data from this stream.
+   * This inner class is the {@link ByteProcessor} used to copy bytes from the buffer to the caller consuming data from
+   * this stream.
    */
   protected static class CopyProcessor implements ByteProcessor {
 
@@ -246,7 +246,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
 
     /**
      * The constructor.
-     * 
+     *
      * @param targetBuffer the buffer to copy to.
      * @param targetOffset the offset in {@code targetBuffer}.
      */
@@ -257,6 +257,7 @@ public class BufferInputStream extends InputStream implements ByteProcessable {
       this.targetOffset = targetOffset;
     }
 
+    @Override
     public int process(byte[] buffer, int offset, int length) {
 
       System.arraycopy(buffer, offset, this.targetBuffer, this.targetOffset, length);

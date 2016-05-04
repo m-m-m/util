@@ -16,10 +16,9 @@ import net.sf.mmm.util.component.base.AbstractLoggableHttpServlet;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
- * This is a {@link javax.servlet.http.HttpServlet} that dynamically generates some JavaScript containing the
- * content of {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users
- * locale.
- * 
+ * This is a {@link javax.servlet.http.HttpServlet} that dynamically generates some JavaScript containing the content of
+ * {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users locale.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -69,11 +68,10 @@ public abstract class AbstractNlsResourceBundleJavaScriptServlet extends Abstrac
 
   /**
    * This method writes the given {@link ResourceBundle} to the {@code writer}.
-   * 
+   *
    * @param writer is the {@link PrintWriter} to use.
    * @param name is the {@link ResourceBundle#getBundle(String) bundle name}.
-   * @param bundle is the {@link ResourceBundle} for the users locale to write to the given
-   *        {@code writer}.
+   * @param bundle is the {@link ResourceBundle} for the users locale to write to the given {@code writer}.
    */
   protected void writeBundle(PrintWriter writer, String name, ResourceBundle bundle) {
 
@@ -108,8 +106,8 @@ public abstract class AbstractNlsResourceBundleJavaScriptServlet extends Abstrac
 
   /**
    * @param name is the {@link ResourceBundle#getBundle(String) bundle name} to escape for JavaScript.
-   * @return the escaped name. As JavaScript does not accept periods (.) in variable names they are replaced
-   *         with the dollar sign ($).
+   * @return the escaped name. As JavaScript does not accept periods (.) in variable names they are replaced with the
+   *         dollar sign ($).
    */
   protected String escapeBundleName(String name) {
 

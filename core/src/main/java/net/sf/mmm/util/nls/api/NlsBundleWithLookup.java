@@ -10,7 +10,7 @@ import java.util.Map;
  * <b>Note:</b><br>
  * Please only use this interface when the {@link #getMessage(String, Map)} is really required. Otherwise only extend
  * {@link NlsBundle}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -18,26 +18,27 @@ public abstract interface NlsBundleWithLookup extends NlsBundle, NlsMessageLooku
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * This allows generic access to invoke a specific method of your bundle. E.g. assume you have an interface
    * {@code NlsBundleMyExampleRoot} extending {@link NlsMessageLookup} that declares the following method:
-   * 
+   *
    * <pre>
    * &#064;NlsBundleMessage(&quot;The object \&quot;{object}\&quot; is null!&quot;)
    * NlsMessage errorArgumentNull(@Named(&quot;object&quot;) Object object);
    * </pre>
-   * 
+   *
    * Then you could do:
-   * 
+   *
    * <pre>
    * NlsBundleMyExampleRoot myBundle = {@link NlsAccess}.getBundleFactory().createBundle(NlsBundleMyExampleRoot.class);
    * Map&lt;String, Object&gt; parameters = new HashMap&lt;&gt;();
    * parameters.put("object", myObject);
    * {@link NlsMessage} message = myBundle.getMessage("errorArgumentNull", parameters);
    * </pre>
-   * 
+   *
    * This would have the same result as {@code myBundle.errorArgumentNull(myObject)}.
    */
+  @Override
   // ATTENTION: parameter names must NOT be changed!
   NlsMessage getMessage(String methodName, Map<String, Object> nlsArguments);
 

@@ -5,4 +5,3 @@
  * {@link net.sf.mmm.util.nls.api.NlsBundleFactory}.
  */
 package net.sf.mmm.util.nls.impl.rebind;
-

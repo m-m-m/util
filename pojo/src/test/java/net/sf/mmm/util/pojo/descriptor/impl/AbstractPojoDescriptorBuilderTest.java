@@ -2,14 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
+import org.junit.Assert;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
-
-import org.junit.Assert;
 
 /**
  * This is the abstract test-case for implementations of
@@ -20,8 +20,8 @@ import org.junit.Assert;
 public abstract class AbstractPojoDescriptorBuilderTest extends Assert {
 
   /**
-   * This method checks read/write accessors to the property {@code propertyName} of the
-   * {@code pojoDescriptor} according to the given {@code readType} and {@code writeType}.
+   * This method checks read/write accessors to the property {@code propertyName} of the {@code pojoDescriptor}
+   * according to the given {@code readType} and {@code writeType}.
    *
    * @param pojoDescriptor is the descriptor.
    * @param propertyName is the name of the property to check.

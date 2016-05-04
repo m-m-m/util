@@ -2,19 +2,19 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.context.impl;
 
-import net.sf.mmm.util.context.api.GenericContext;
-import net.sf.mmm.util.context.api.GenericContextFactory;
-import net.sf.mmm.util.context.api.MutableGenericContext;
-import net.sf.mmm.util.value.api.ValueNotSetException;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.mmm.util.context.api.GenericContext;
+import net.sf.mmm.util.context.api.GenericContextFactory;
+import net.sf.mmm.util.context.api.MutableGenericContext;
+import net.sf.mmm.util.value.api.ValueNotSetException;
+
 /**
  * This is the test-case for {@link GenericContextFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -22,7 +22,7 @@ public class GenericContextFactoryTest {
 
   /**
    * This method gets an instance of the {@link GenericContextFactory}.
-   * 
+   *
    * @return the {@link GenericContextFactory}.
    */
   protected GenericContextFactory getFactory() {
@@ -134,7 +134,7 @@ public class GenericContextFactoryTest {
   /**
    * This method tests modifications of a root-context while concurrent threads read from individual
    * {@link GenericContext#createChildContext() child contexts}.
-   * 
+   *
    * @throws Exception on failure.
    */
   @Test
@@ -176,15 +176,15 @@ public class GenericContextFactoryTest {
     /** Name of variable to indicate stop. */
     private static final String DONE = "done";
 
-    private  final GenericContext context;
+    private final GenericContext context;
 
-    private  final Logger logger;
+    private final Logger logger;
 
-    private  final String name;
+    private final String name;
 
     /**
      * The constructor.
-     * 
+     *
      * @param context is the context to read from.
      * @param name is the name of this reader.
      */
@@ -196,6 +196,7 @@ public class GenericContextFactoryTest {
       this.name = name;
     }
 
+    @Override
     public void run() {
 
       try {

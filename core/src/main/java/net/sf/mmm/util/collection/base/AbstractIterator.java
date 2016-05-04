@@ -6,16 +6,16 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This is an abstract base implementation of the {@link Iterator} interface. It allows to implement an
- * read-only lookahead {@link Iterator} easier:<br>
+ * This is an abstract base implementation of the {@link Iterator} interface. It allows to implement an read-only
+ * lookahead {@link Iterator} easier:<br>
  * Simply extend this class and implement {@link #findNext()}. From your constructor or initializer call
  * {@link #findFirst()}. <br>
  * <b>ATTENTION:</b><br>
- * This {@link Iterator} can NOT iterate {@code null} values. Further do NOT forget to call
- * {@link #findFirst()} from your constructor or your iterator will always be empty.
- * 
+ * This {@link Iterator} can NOT iterate {@code null} values. Further do NOT forget to call {@link #findFirst()} from
+ * your constructor or your iterator will always be empty.
+ *
  * @param <E> is the generic type of the {@link #next() iterated} elements.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -26,7 +26,7 @@ public abstract class AbstractIterator<E> implements Iterator<E> {
 
   /**
    * The constructor.
-   * 
+   *
    * @see #findFirst()
    */
   public AbstractIterator() {
@@ -44,7 +44,7 @@ public abstract class AbstractIterator<E> implements Iterator<E> {
 
   /**
    * This method tries to find the {@link #next() next} element.
-   * 
+   *
    * @return the next element or {@code null} if {@link #hasNext() done}.
    */
   protected abstract E findNext();
@@ -69,9 +69,9 @@ public abstract class AbstractIterator<E> implements Iterator<E> {
 
   /**
    * This method will always throw an exception.
-   * 
+   *
    * @see java.util.Iterator#remove()
-   * 
+   *
    * @throws UnsupportedOperationException whenever this method is called.
    */
   @Override

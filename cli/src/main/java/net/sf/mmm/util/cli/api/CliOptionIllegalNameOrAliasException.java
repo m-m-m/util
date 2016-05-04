@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
  * A {@link CliOptionIllegalNameOrAliasException} is thrown if the {@link CliOption#name() name} or
  * {@link CliOption#aliases() alias} of a {@link CliOption} is illegal. <br>

@@ -16,9 +16,9 @@ import net.sf.mmm.util.lang.api.SystemUtil;
  */
 public class SystemUtilImpl extends AbstractLoggableComponent implements SystemUtil {
 
-  private  static SystemUtil instance;
+  private static SystemUtil instance;
 
-  private  final SystemInformation systemInformation;
+  private final SystemInformation systemInformation;
 
   /**
    * The constructor.

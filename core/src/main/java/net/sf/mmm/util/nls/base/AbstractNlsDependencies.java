@@ -7,13 +7,13 @@ import net.sf.mmm.util.nls.impl.NlsDependenciesImpl;
 
 /**
  * This is the abstract base implementation of {@link NlsDependencies}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
 public abstract class AbstractNlsDependencies extends AbstractLoggableComponent implements NlsDependencies {
 
-  private  static AbstractNlsDependencies instance;
+  private static AbstractNlsDependencies instance;
 
   /**
    * The constructor.

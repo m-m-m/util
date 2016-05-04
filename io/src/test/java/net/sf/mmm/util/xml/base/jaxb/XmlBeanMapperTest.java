@@ -15,14 +15,14 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.junit.Test;
+
 import junit.framework.Assert;
 import net.sf.mmm.test.ExceptionHelper;
 
-import org.junit.Test;
-
 /**
  * This is the test-case for {@link XmlBeanMapper}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
  */
@@ -104,7 +104,8 @@ public class XmlBeanMapperTest {
   public void testLoadXmlWithInvalidIds() {
 
     String xml = "<?xml version='1.0'?><bean><node id='duplicate-id'/>"
-        + "<node id='duplicate-id' parent='undefined-parent'/>" + "<node id='root' parent='unknown-parent'/></bean>";
+        + "<node id='duplicate-id' parent='undefined-parent'/>"
+        + "<node id='root' parent='unknown-parent'/></bean>";
     XmlBeanMapper<XmlBean> mapper = new XmlBeanMapper<XmlBeanMapperTest.XmlBean>(XmlBean.class);
     mapper.initialize();
     ByteArrayInputStream inputStream = new ByteArrayInputStream(xml.getBytes());
@@ -157,7 +158,8 @@ public class XmlBeanMapperTest {
 
   protected static class XmlAdapterTestEnum extends XmlAdapterEnum<TestEnum> {
 
-    @Override    protected Class<TestEnum> getEnumClass() {
+    @Override
+    protected Class<TestEnum> getEnumClass() {
 
       return TestEnum.class;
     }

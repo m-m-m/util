@@ -13,7 +13,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link HashSetFactory#INSTANCE}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

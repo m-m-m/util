@@ -24,9 +24,9 @@ public class PojoMap extends AbstractSimpleMap<String, Object> {
   @SuppressWarnings("rawtypes")
   private final PojoDescriptor pojoDescriptor;
 
-  private  final Object pojo;
+  private final Object pojo;
 
-  private  Set<String> keySet;
+  private Set<String> keySet;
 
   /**
    * The constructor.
@@ -42,6 +42,7 @@ public class PojoMap extends AbstractSimpleMap<String, Object> {
     this.keySet = null;
   }
 
+  @Override
   @SuppressWarnings("unchecked")
   public Object get(Object key) {
 

@@ -38,12 +38,12 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   @XmlElement(name = "extension")
   private final Set<String> mutableExtensions;
 
-  private  final transient Collection<String> extensions;
+  private final transient Collection<String> extensions;
 
   @XmlIDREF
   private ContentTypeBean technicalParent;
 
-  private  String defaultExtension;
+  private String defaultExtension;
 
   @XmlAttribute(name = "title")
   private String title;
@@ -118,8 +118,8 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   /**
    * This method sets the {@link #getDefaultExtension() default extension}. <br>
    * <b>ATTENTION:</b><br>
-   * You should also {@link #addExtension(String) add} the {@code defaultExtension} to the
-   * {@link #getExtensions() extensions}.
+   * You should also {@link #addExtension(String) add} the {@code defaultExtension} to the {@link #getExtensions()
+   * extensions}.
    *
    * @param defaultExtension is the defaultExtension to set.
    */
@@ -199,8 +199,7 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method gets the {@link SegmentContainerSequence} representing the actual format of the
-   * {@link ContentType}.
+   * This method gets the {@link SegmentContainerSequence} representing the actual format of the {@link ContentType}.
    *
    * @return the format.
    */
@@ -226,8 +225,8 @@ public class ContentTypeBean extends AbstractTreeNode<ContentType> implements Co
   }
 
   /**
-   * This method is required for JAXB. As there is no way than the return type to specify the type of a
-   * {@link XmlIDREF} of a getter, we also need a specialized setter with that type to satisfy JAXB.
+   * This method is required for JAXB. As there is no way than the return type to specify the type of a {@link XmlIDREF}
+   * of a getter, we also need a specialized setter with that type to satisfy JAXB.
    *
    * @see net.sf.mmm.util.collection.base.AbstractGenericTreeNode#setParent(net.sf.mmm.util.collection.api.GenericTreeNode)
    *

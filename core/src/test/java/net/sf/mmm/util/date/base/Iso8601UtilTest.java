@@ -10,10 +10,11 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.date.api.Iso8601Util;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.sf.mmm.util.date.api.Iso8601Util;
+import net.sf.mmm.util.date.api.Iso8601UtilLimited;
 
 /**
  * This is the test-case for {@link Iso8601UtilImpl}.
@@ -44,7 +45,7 @@ public class Iso8601UtilTest extends Assert {
   @Test
   public void testPatterns() {
 
-    Pattern datePattern = Pattern.compile(Iso8601Util.PATTERN_STRING_DATE);
+    Pattern datePattern = Pattern.compile(Iso8601UtilLimited.PATTERN_STRING_DATE);
     Matcher matcher = datePattern.matcher("1999-12-31");
     assertTrue(matcher.matches());
     assertEquals(3, matcher.groupCount());
@@ -52,7 +53,7 @@ public class Iso8601UtilTest extends Assert {
     assertEquals("12", matcher.group(2));
     assertEquals("31", matcher.group(3));
 
-    Pattern timePattern = Pattern.compile(Iso8601Util.PATTERN_STRING_TIME);
+    Pattern timePattern = Pattern.compile(Iso8601UtilLimited.PATTERN_STRING_TIME);
     matcher = timePattern.matcher("23:59:58");
     assertTrue(matcher.matches());
     assertEquals(3, matcher.groupCount());
@@ -60,7 +61,7 @@ public class Iso8601UtilTest extends Assert {
     assertEquals("59", matcher.group(2));
     assertEquals("58", matcher.group(3));
 
-    Pattern timezonePattern = Pattern.compile(Iso8601Util.PATTERN_STRING_TIMEZONE);
+    Pattern timezonePattern = Pattern.compile(Iso8601UtilLimited.PATTERN_STRING_TIMEZONE);
     matcher = timezonePattern.matcher("+23:59:58");
     assertTrue(matcher.matches());
     assertEquals(6, matcher.groupCount());

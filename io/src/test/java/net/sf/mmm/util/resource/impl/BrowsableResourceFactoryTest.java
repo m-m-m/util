@@ -4,15 +4,15 @@ package net.sf.mmm.util.resource.impl;
 
 import java.util.Date;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
-
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
 
 /**
  * This is the test-case for the class {@link DataResourceFactory}.

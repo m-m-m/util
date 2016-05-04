@@ -17,17 +17,18 @@ import net.sf.mmm.util.value.api.ValueConvertException;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**
- * This is a generic value converter that is GWT compatible and therefore has reduced flexibility. If you have
- * no GWT limitations you should use {@link net.sf.mmm.util.value.api.ComposedValueConverter} instead.
- * 
+ * This is a generic value converter that is GWT compatible and therefore has reduced flexibility. If you have no GWT
+ * limitations you should use {@link net.sf.mmm.util.value.api.ComposedValueConverter} instead.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent implements SimpleGenericValueConverter {
+public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent
+    implements SimpleGenericValueConverter {
 
-  private  Iso8601UtilLimited iso8601Util;
+  private Iso8601UtilLimited iso8601Util;
 
-  private  MathUtilLimited mathUtil;
+  private MathUtilLimited mathUtil;
 
   /**
    * The constructor.

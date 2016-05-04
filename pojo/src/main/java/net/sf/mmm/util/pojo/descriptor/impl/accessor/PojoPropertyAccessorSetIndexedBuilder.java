@@ -18,15 +18,15 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorIndexed
 /**
  * This is the implementation of the {@link PojoPropertyAccessorIndexedOneArgBuilder} interface for
  * {@link PojoPropertyAccessorIndexedOneArgMode#SET_INDEXED indexed setter-access}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 @Singleton
 @Named
-public class PojoPropertyAccessorSetIndexedBuilder extends
-    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorIndexedOneArg> implements
-    PojoPropertyAccessorIndexedOneArgBuilder {
+public class PojoPropertyAccessorSetIndexedBuilder
+    extends AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorIndexedOneArg>
+    implements PojoPropertyAccessorIndexedOneArgBuilder {
 
   /** alternative method name prefixes for boolean getters. */
   private static final String[] METHOD_PREFIXES = new String[] { "set" };

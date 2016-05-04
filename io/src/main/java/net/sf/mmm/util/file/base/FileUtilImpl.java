@@ -42,19 +42,19 @@ import net.sf.mmm.util.resource.api.ResourcePathNode;
 @Named(FileUtil.CDI_NAME)
 public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
 
-  private  static FileUtil instance;
+  private static FileUtil instance;
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
-  private  String userHomeDirectoryPath;
+  private String userHomeDirectoryPath;
 
-  private  File userHomeDirectory;
+  private File userHomeDirectory;
 
-  private  String userLogin;
+  private String userLogin;
 
-  private  String temporaryDirectoryPath;
+  private String temporaryDirectoryPath;
 
-  private  File temporaryDirectory;
+  private File temporaryDirectory;
 
   /**
    * The constructor.
@@ -244,9 +244,9 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   /**
    * This method copies the file or directory given by {@code source} into the given {@code destination}. <br>
    * <b>ATTENTION:</b><br>
-   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the
-   * {@code destination} has to point to the final place where the copy should appear rather than the directory
-   * where the copy will be located in. <br>
+   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the {@code destination} has
+   * to point to the final place where the copy should appear rather than the directory where the copy will be located
+   * in. <br>
    * <br>
    * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory "/tmp". The
    * copy will have the same name "foo".
@@ -386,12 +386,11 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   }
 
   /**
-   * This method adds all files matching with the given {@code path} and {@code fileType} to the
-   * {@code list}.
+   * This method adds all files matching with the given {@code path} and {@code fileType} to the {@code list}.
    *
    * @param cwd is the current working directory and should therefore point to an existing {@link File#isDirectory()
-   *        directory}. If the given {@code path} is NOT {@link File#isAbsolute() absolute} it is interpreted
-   *        relative to this directory.
+   *        directory}. If the given {@code path} is NOT {@link File#isAbsolute() absolute} it is interpreted relative
+   *        to this directory.
    * @param segments is the path the files to collect must match. If this path is NOT {@link File#isAbsolute() absolute}
    *        it is interpreted relative to the {@link File#isDirectory() directory} given by {@code cwd}.
    * @param segmentIndex is the current index in {@code pathChars} for the collection process.

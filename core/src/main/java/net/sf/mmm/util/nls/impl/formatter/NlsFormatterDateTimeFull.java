@@ -10,7 +10,7 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 /**
  * The {@link NlsFormatterDateTime} for {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_FULL full}
  * {@link #getStyle() style}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

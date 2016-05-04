@@ -5,11 +5,11 @@ package net.sf.mmm.util.xml.impl.stax;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 
-import net.sf.mmm.util.resource.api.DataResource;
-import net.sf.mmm.util.resource.base.ClasspathResource;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.sf.mmm.util.resource.api.DataResource;
+import net.sf.mmm.util.resource.base.ClasspathResource;
 
 /**
  * This is the test of {@link XIncludeStreamReaderTest}.
@@ -21,7 +21,7 @@ public class XIncludeStreamReaderTest extends Assert {
 
   /**
    * Tests {@link XIncludeStreamReader}.
-   * 
+   *
    * @throws Exception if the test fails.
    */
   @Test

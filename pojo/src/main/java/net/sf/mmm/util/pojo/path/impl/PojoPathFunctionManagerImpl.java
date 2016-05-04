@@ -16,7 +16,7 @@ import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
 
 /**
  * This is the implementation of {@link PojoPathFunctionManager}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -25,9 +25,9 @@ import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
 @SuppressWarnings("rawtypes")
 public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager {
 
-  private  Map<String, PojoPathFunction> functionMap;
+  private Map<String, PojoPathFunction> functionMap;
 
-  private  List<PojoPathNamedFunction> functions;
+  private List<PojoPathNamedFunction> functions;
 
   /**
    * The constructor.
@@ -58,7 +58,7 @@ public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager 
   /**
    * This method sets a {@link List} of {@link PojoPathNamedFunction named functions} to be
    * {@link #registerFunction(PojoPathFunction, String) registered} in this manager.
-   * 
+   *
    * @param functions are the {@link PojoPathNamedFunction named functions} to register.
    */
   @Inject

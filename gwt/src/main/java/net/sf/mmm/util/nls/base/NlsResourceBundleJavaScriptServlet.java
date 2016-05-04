@@ -11,18 +11,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 /**
- * This is a {@link javax.servlet.http.HttpServlet} that dynamically generates some JavaScript containing the
- * content of {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users
- * locale.
- * 
+ * This is a {@link javax.servlet.http.HttpServlet} that dynamically generates some JavaScript containing the content of
+ * {@link net.sf.mmm.util.nls.api.NlsBundle}s and {@link java.util.ResourceBundle}s for the users locale.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 // @Named(AbstractNlsResourceBundleJavaScriptServlet.URL_PATH)
 @Named("NlsResourceBundleJavaScriptServlet")
 @WebServlet(AbstractNlsResourceBundleJavaScriptServlet.URL_PATH)
-public class NlsResourceBundleJavaScriptServlet extends AbstractNlsResourceBundleJavaScriptServlet implements
-    Controller {
+public class NlsResourceBundleJavaScriptServlet extends AbstractNlsResourceBundleJavaScriptServlet
+    implements Controller {
 
   private static final long serialVersionUID = 2060146216723588926L;
 

@@ -8,19 +8,19 @@ import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
- * This is an abstract base-implementation for a {@link net.sf.mmm.util.value.api.ValueConverter} that
- * performs recursive conversions on the {@link #getComposedValueConverter() owning-converter} for converting
- * child values.
- * 
+ * This is an abstract base-implementation for a {@link net.sf.mmm.util.value.api.ValueConverter} that performs
+ * recursive conversions on the {@link #getComposedValueConverter() owning-converter} for converting child values.
+ *
  * @param <SOURCE> is the generic {@link #getSourceType() source-type}.
  * @param <TARGET> is the generic {@link #getTargetType() target-type}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends AbstractValueConverter<SOURCE, TARGET> {
+public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET>
+    extends AbstractValueConverter<SOURCE, TARGET> {
 
-  private  ComposedValueConverter composedValueConverter;
+  private ComposedValueConverter composedValueConverter;
 
   /**
    * The constructor.
@@ -31,9 +31,9 @@ public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends Ab
   }
 
   /**
-   * This method gets the {@link ComposedValueConverter} owing this converter. It is required for recursive
-   * invocations during conversion.
-   * 
+   * This method gets the {@link ComposedValueConverter} owing this converter. It is required for recursive invocations
+   * during conversion.
+   *
    * @return the {@link ComposedValueConverter}.
    */
   protected ComposedValueConverter getComposedValueConverter() {
@@ -42,9 +42,9 @@ public abstract class AbstractRecursiveValueConverter<SOURCE, TARGET> extends Ab
   }
 
   /**
-   * This method sets (injects) the {@link #getComposedValueConverter() composedValueConverter}. It has to be
-   * called before {@link #initialize()} is invoked.
-   * 
+   * This method sets (injects) the {@link #getComposedValueConverter() composedValueConverter}. It has to be called
+   * before {@link #initialize()} is invoked.
+   *
    * @param composedValueConverter is the {@link ComposedValueConverter} to set.
    */
   @Inject

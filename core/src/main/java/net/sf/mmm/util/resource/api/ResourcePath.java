@@ -34,8 +34,7 @@ public interface ResourcePath {
   String URL_SCHEME_AUTHORITY_SEPARATOR = "://";
 
   /**
-   * @return the parent {@link ResourcePathNode} or {@code null} if this is the {@link #isRoot()}
-   *         segment.
+   * @return the parent {@link ResourcePathNode} or {@code null} if this is the {@link #isRoot()} segment.
    */
   ResourcePath getParent();
 

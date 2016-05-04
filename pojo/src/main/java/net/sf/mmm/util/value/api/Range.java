@@ -28,9 +28,9 @@ public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, Att
 
   private static final long serialVersionUID = 6426261544538415827L;
 
-  private  V min;
+  private V min;
 
-  private  V max;
+  private V max;
 
   /** The unbound minimum. */
   public static final String MIN_UNBOUND = "\u2212\u221E";
@@ -123,12 +123,11 @@ public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, Att
   }
 
   /**
-   * This method determines if the given {@code value} is within this {@link Range} from {@link #getMin() minimum}
-   * to {@link #getMax() maximum}.
+   * This method determines if the given {@code value} is within this {@link Range} from {@link #getMin() minimum} to
+   * {@link #getMax() maximum}.
    *
    * @param value is the vale to check.
-   * @return {@code true} if contained ({@link #getMin() minimum} &lt;= {@code value} &lt;= {@link #getMax()
-   *         maximum}).
+   * @return {@code true} if contained ({@link #getMin() minimum} &lt;= {@code value} &lt;= {@link #getMax() maximum}).
    */
   public boolean isContained(V value) {
 

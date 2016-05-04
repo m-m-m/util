@@ -6,21 +6,21 @@ import net.sf.mmm.util.text.api.Justification;
 
 /**
  * This class represents an argument of an {@link net.sf.mmm.util.nls.api.NlsMessage}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public class NlsArgument {
 
-  private  final String key;
+  private final String key;
 
-  private  final NlsFormatter<?> formatter;
+  private final NlsFormatter<?> formatter;
 
-  private  final Justification justification;
+  private final Justification justification;
 
   /**
    * The constructor.
-   * 
+   *
    * @param key is the {@link #getKey() key}.
    * @param formatter is the {@link #getFormatter() formatter}.
    * @param justification is the {@link #getJustification() justification}.
@@ -35,7 +35,7 @@ public class NlsArgument {
 
   /**
    * This method gets the key of the argument to format.
-   * 
+   *
    * @return the key
    */
   public String getKey() {
@@ -45,7 +45,7 @@ public class NlsArgument {
 
   /**
    * Is the formatter used to format the {@link #getKey() argument}.
-   * 
+   *
    * @return the formatter
    */
   public NlsFormatter<?> getFormatter() {
@@ -55,7 +55,7 @@ public class NlsArgument {
 
   /**
    * This method gets the optional {@link Justification}.
-   * 
+   *
    * @return the justification or {@code null} for none.
    */
   public Justification getJustification() {

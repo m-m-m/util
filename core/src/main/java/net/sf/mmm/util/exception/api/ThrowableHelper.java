@@ -5,9 +5,9 @@ package net.sf.mmm.util.exception.api;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import net.sf.mmm.util.reflect.api.AccessFailedException;
-
 import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.reflect.api.AccessFailedException;
 
 /**
  * This is a small hack to truncate exceptions.
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 final class ThrowableHelper {
 
-  private  static Helper helper;
+  private static Helper helper;
 
   /**
    * Construction forbidden.
@@ -88,8 +88,8 @@ final class ThrowableHelper {
         field.setAccessible(true);
         return field;
       } catch (Exception e) {
-        LoggerFactory.getLogger(ThrowableHelper.class).error(
-            "Exception truncation not possible due to reflection limitation!", e);
+        LoggerFactory.getLogger(ThrowableHelper.class)
+            .error("Exception truncation not possible due to reflection limitation!", e);
       }
       return null;
     }

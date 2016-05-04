@@ -11,9 +11,8 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector}
- * interface.
- * 
+ * This is the implementation of the {@link net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector} interface.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -31,7 +30,7 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
 
   /**
    * The constructor. Configures and {@link #initialize() initializes} the component.
-   * 
+   *
    * @param visibility is the {@link #getVisibility() visibility}.
    * @param acceptStatic is the {@link #isAcceptStatic() accept-static} flag.
    */
@@ -61,7 +60,7 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
 
     /**
      * The constructor.
-     * 
+     *
      * @param pojoClass is the class for which the property-accessors should be iterated.
      */
     protected PojoFieldIterator(Class<?> pojoClass) {
@@ -72,7 +71,8 @@ public class PojoFieldIntrospectorImpl extends AbstractPojoIntrospector implemen
       findFirst();
     }
 
-    @Override    protected Field findNext() {
+    @Override
+    protected Field findNext() {
 
       while (this.index < this.fields.length) {
         Field field = this.fields[this.index++];

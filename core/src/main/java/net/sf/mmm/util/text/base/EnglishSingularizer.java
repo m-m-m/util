@@ -20,7 +20,7 @@ public class EnglishSingularizer extends AbstractTextTransformer implements Sing
   /** The singleton instance. */
   public static final EnglishSingularizer INSTANCE = new EnglishSingularizer();
 
-  private  static final List<TransformerRule> RULES;
+  private static final List<TransformerRule> RULES;
 
   static {
     List<TransformerRule> rules = new ArrayList<>();

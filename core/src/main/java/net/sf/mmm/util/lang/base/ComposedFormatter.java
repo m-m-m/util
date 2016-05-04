@@ -7,10 +7,9 @@ import java.io.IOException;
 import net.sf.mmm.util.lang.api.Formatter;
 
 /**
- * This is the implementation of a {@link Formatter} that is composed out of other {@link Formatter}s. It
- * implements the divide and conquer strategy by delegating to a given sequence of sub-{@link Formatter
- * formatters} in a given order. Each sub-formatter appends a particular part to the result according to his
- * responsibility.
+ * This is the implementation of a {@link Formatter} that is composed out of other {@link Formatter}s. It implements the
+ * divide and conquer strategy by delegating to a given sequence of sub-{@link Formatter formatters} in a given order.
+ * Each sub-formatter appends a particular part to the result according to his responsibility.
  *
  * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)

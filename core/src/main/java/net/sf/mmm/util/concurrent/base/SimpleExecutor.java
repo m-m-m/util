@@ -10,7 +10,7 @@ import javax.inject.Singleton;
 
 /**
  * This is a very simple implementation of the {@link Executor} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -22,7 +22,7 @@ public class SimpleExecutor implements Executor {
    */
   public static final SimpleExecutor INSTANCE = new SimpleExecutor();
 
-  private  final ThreadFactory threadFactory;
+  private final ThreadFactory threadFactory;
 
   /**
    * The constructor.
@@ -35,7 +35,7 @@ public class SimpleExecutor implements Executor {
 
   /**
    * The constructor.
-   * 
+   *
    * @param factory is the thread-factory to use.
    */
   public SimpleExecutor(ThreadFactory factory) {

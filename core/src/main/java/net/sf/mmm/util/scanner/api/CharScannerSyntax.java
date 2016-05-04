@@ -25,6 +25,7 @@ public interface CharScannerSyntax extends StringSyntax {
    *
    * @see #getEntityStart()
    */
+  @Override
   char getEscape();
 
   /**

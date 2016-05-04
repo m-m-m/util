@@ -10,7 +10,7 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 
 /**
  * This is a dummy pojo for testing.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -46,11 +46,13 @@ public class MyPojo extends AbstractPojo {
     this.privateString = "privateString";
   }
 
+  @Override
   public Integer getPort() {
 
     return this.port;
   }
 
+  @Override
   public void setPort(int port) {
 
     this.port = Integer.valueOf(port);

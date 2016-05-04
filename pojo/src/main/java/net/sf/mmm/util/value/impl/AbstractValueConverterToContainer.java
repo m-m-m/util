@@ -60,8 +60,8 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 @Singleton
 @Named
 @SuppressWarnings({ "rawtypes" })
-public abstract class AbstractValueConverterToContainer<CONTAINER> extends
-    AbstractRecursiveValueConverter<Object, CONTAINER> {
+public abstract class AbstractValueConverterToContainer<CONTAINER>
+    extends AbstractRecursiveValueConverter<Object, CONTAINER> {
 
   /** The character used to separate the element of the collection. */
   protected static final char ELEMENT_SEPARATOR = ',';
@@ -76,7 +76,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    */
   protected static final String ELEMENT_ESCAPE_END = "]}>";
 
-  private  CollectionReflectionUtil collectionReflectionUtil;
+  private CollectionReflectionUtil collectionReflectionUtil;
 
   /**
    * The constructor.
@@ -218,8 +218,8 @@ public abstract class AbstractValueConverterToContainer<CONTAINER> extends
    * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @param value is the original value to convert.
    */
-  protected abstract void convertContainerEntry(Object element, int index, CONTAINER container,
-      Object valueSource, GenericType<? extends CONTAINER> targetType, Object value);
+  protected abstract void convertContainerEntry(Object element, int index, CONTAINER container, Object valueSource,
+      GenericType<? extends CONTAINER> targetType, Object value);
 
   // {
   // ComposedValueConverter parentConverter = getComposedValueConverter();

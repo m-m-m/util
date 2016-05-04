@@ -8,15 +8,14 @@ import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
- * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the international call prefix
- * (also called exit code or IDD code) for a phone number. It is the sequence that has to be dialed before the
+ * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the international call prefix (also called
+ * exit code or IDD code) for a phone number. It is the sequence that has to be dialed before the
  * {@link PhoneCountryCode} to make an international call. The {@link InternationalCallPrefix} is specific for the
- * county the caller is dialing from. Therefore it is typically indicated by the plus sign (+) in
- * internationalized phone numbers. The {@link InternationalCallPrefix} is typically "00" as suggested by the
- * international telecommunications union (ITU). However, some countries have other codes like "011" (NANPA).
- * In Finland there are multiple international call prefixes for different phone carriers. The longest prefix
- * is (so far) 5 digits.
- * 
+ * county the caller is dialing from. Therefore it is typically indicated by the plus sign (+) in internationalized
+ * phone numbers. The {@link InternationalCallPrefix} is typically "00" as suggested by the international
+ * telecommunications union (ITU). However, some countries have other codes like "011" (NANPA). In Finland there are
+ * multiple international call prefixes for different phone carriers. The longest prefix is (so far) 5 digits.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -50,7 +49,7 @@ public final class InternationalCallPrefix extends AbstractSimpleDatatype<String
 
   /**
    * The constructor.
-   * 
+   *
    * @param prefix - see {@link #getValue()}.
    */
   public InternationalCallPrefix(String prefix) {

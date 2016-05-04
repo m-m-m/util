@@ -6,9 +6,9 @@ import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 
 /**
  * This enum contains the available values for the orientation.
- * 
+ *
  * @see Alignment
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -24,13 +24,13 @@ public enum Orientation implements SimpleDatatype<String> {
    */
   VERTICAL("|", NlsBundleUtilCoreRoot.INF_VERTICAL);
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
    */
@@ -54,7 +54,7 @@ public enum Orientation implements SimpleDatatype<String> {
 
   /**
    * This method gets the {@link Orientation} with the given {@link #getValue() value}.
-   * 
+   *
    * @param value is the {@link #getValue() value} of the requested {@link Orientation}.
    * @return the requested {@link Orientation}.
    */
@@ -70,7 +70,7 @@ public enum Orientation implements SimpleDatatype<String> {
 
   /**
    * This method gets the inverse orientation.
-   * 
+   *
    * @return {@link #VERTICAL} if this orientation is {@link #HORIZONTAL} and vice versa.
    */
   public Orientation getMirrored() {

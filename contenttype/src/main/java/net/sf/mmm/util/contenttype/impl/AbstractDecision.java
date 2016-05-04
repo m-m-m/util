@@ -11,7 +11,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -26,24 +26,19 @@ public abstract class AbstractDecision {
   }
 
   /**
-   * @see net.sf.mmm.util.contenttype.base.DecisionTreeNode#detect(DetectorStreamBuffer,
-   *      Map, boolean)
-   * 
-   * @param buffer is the {@link DetectorStreamBuffer} containing the next bytes
-   *        to process.
-   * @param metadata is a {@link Map} with metadata. New metadata read from the
-   *        stream is added to this {@link Map} if NOT already defined. If
-   *        metadata in this {@link Map} is already present before it is
-   *        detected, the {@code buffer} shall be modified to reflect this
-   *        metadata value.
-   * @param eos - {@code true} if the end of the stream has been reached
-   *        and the given {@code buffer} contains the remaining data.
-   * @return the {@link DecisionTreeNode} representing the current state of
-   *         detection or {@code null} if the stream does NOT match any
-   *         known filetype.
+   * @see net.sf.mmm.util.contenttype.base.DecisionTreeNode#detect(DetectorStreamBuffer, Map, boolean)
+   *
+   * @param buffer is the {@link DetectorStreamBuffer} containing the next bytes to process.
+   * @param metadata is a {@link Map} with metadata. New metadata read from the stream is added to this {@link Map} if
+   *        NOT already defined. If metadata in this {@link Map} is already present before it is detected, the
+   *        {@code buffer} shall be modified to reflect this metadata value.
+   * @param eos - {@code true} if the end of the stream has been reached and the given {@code buffer} contains the
+   *        remaining data.
+   * @return the {@link DecisionTreeNode} representing the current state of detection or {@code null} if the stream does
+   *         NOT match any known filetype.
    */
-  public abstract DecisionTreeNodeImpl detect(DetectorStreamBuffer buffer,
-      Map<String, Object> metadata, boolean eos);
+  public abstract DecisionTreeNodeImpl detect(DetectorStreamBuffer buffer, Map<String, Object> metadata,
+      boolean eos);
 
   public abstract AbstractDecision merge(ContentTypeBean contentType, SegmentContainerSequence segment,
       int segmentIndex);

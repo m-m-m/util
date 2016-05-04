@@ -62,6 +62,7 @@ public class ComposedValidator<V> extends AbstractValidator<V> implements Compos
    *
    * @return the number of {@link #getValidator(int) validators}.
    */
+  @Override
   public int getValidatorCount() {
 
     return this.validators.length;
@@ -75,6 +76,7 @@ public class ComposedValidator<V> extends AbstractValidator<V> implements Compos
    * @param index is the index of the {@link ValueValidator} to get.
    * @return the requested {@link ValueValidator}.
    */
+  @Override
   public AbstractValidator<? super V> getValidator(int index) {
 
     return this.validators[index];

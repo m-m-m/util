@@ -5,6 +5,10 @@ package net.sf.mmm.util.cli.base;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliException;
@@ -23,10 +27,6 @@ import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.AnnotationUtilImpl;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.slf4j.LoggerFactory;
 
 /**
  * This is the test-case for {@link CliMode}.
@@ -323,8 +323,8 @@ public class CliStateTest extends Assert {
   }
 
   @CliModes(value = { @CliMode(id = "foo", title = "Foo", parentIds = { "bar1", "bar2" }),
-      @CliMode(id = "bar1", title = "Bar1", parentIds = { "bar2" }),
-      @CliMode(id = "bar2", title = "Bar2", parentIds = { "foo", "bar1" }) })
+  @CliMode(id = "bar1", title = "Bar1", parentIds = { "bar2" }),
+  @CliMode(id = "bar2", title = "Bar2", parentIds = { "foo", "bar1" }) })
   public static class CyclicTest2 {
 
   }
@@ -339,27 +339,27 @@ public class CliStateTest extends Assert {
     private boolean bool;
   }
 
-  @CliModes({
-      @CliMode(id = MODE_X_EXTENDS_DEFAULT, parentIds = CliMode.ID_DEFAULT),
-      @CliMode(id = CliMode.ID_DEFAULT, title = "default"),
-      @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT, MODE_Y_EXTENDS_HELP, CliMode.ID_HELP }),
-      @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP), @CliMode(id = CliMode.ID_HELP, title = "help") })
+  @CliModes({ @CliMode(id = MODE_X_EXTENDS_DEFAULT, parentIds = CliMode.ID_DEFAULT),
+  @CliMode(id = CliMode.ID_DEFAULT, title = "default"),
+  @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT, MODE_Y_EXTENDS_HELP,
+  CliMode.ID_HELP }), @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP),
+  @CliMode(id = CliMode.ID_HELP, title = "help") })
   public static class ArgumentTest1 {
 
     @CliArgument(name = ARGUMENT_NAME_STRING, usage = OPTION_USAGE_STRING, //
-    mode = MODE_Z_EXTENDS_X_Y_HELP)
+        mode = MODE_Z_EXTENDS_X_Y_HELP)
     private String string;
 
     @CliArgument(name = ARGUMENT_NAME_BOOLEAN, addCloseTo = CliArgument.ID_FIRST, //
-    addAfter = false, usage = OPTION_USAGE_BOOLEAN)
+        addAfter = false, usage = OPTION_USAGE_BOOLEAN)
     private boolean bool;
 
     @CliArgument(name = ARGUMENT_NAME_FOO, addCloseTo = ARGUMENT_NAME_BAR, //
-    addAfter = false, usage = "some foo", mode = MODE_X_EXTENDS_DEFAULT)
+        addAfter = false, usage = "some foo", mode = MODE_X_EXTENDS_DEFAULT)
     private String foo;
 
     @CliArgument(name = ARGUMENT_NAME_BAR, addCloseTo = ARGUMENT_NAME_BOOLEAN, //
-    addAfter = true, usage = "some bar", mode = MODE_X_EXTENDS_DEFAULT)
+        addAfter = true, usage = "some bar", mode = MODE_X_EXTENDS_DEFAULT)
     private String bar;
 
   }
@@ -367,11 +367,11 @@ public class CliStateTest extends Assert {
   public static class ArgumentTest2 extends ArgumentTest1 {
 
     @CliArgument(name = ARGUMENT_NAME_THING, addCloseTo = CliArgument.ID_LAST, //
-    addAfter = true, usage = "some thing", mode = MODE_X_EXTENDS_DEFAULT)
+        addAfter = true, usage = "some thing", mode = MODE_X_EXTENDS_DEFAULT)
     private String thing;
 
     @CliArgument(name = ARGUMENT_NAME_WHOOP, addCloseTo = ARGUMENT_NAME_FOO, //
-    addAfter = false, usage = "some whoop")
+        addAfter = false, usage = "some whoop")
     private boolean whoop;
 
   }

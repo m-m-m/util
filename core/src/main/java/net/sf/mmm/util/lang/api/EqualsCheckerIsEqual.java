@@ -12,7 +12,7 @@ public final class EqualsCheckerIsEqual extends AbstractEqualsChecker<Object> {
 
   private static final long serialVersionUID = 1L;
 
-  private  static final EqualsCheckerIsEqual INSTANCE = new EqualsCheckerIsEqual();
+  private static final EqualsCheckerIsEqual INSTANCE = new EqualsCheckerIsEqual();
 
   /**
    * The constructor. <br>

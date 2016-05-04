@@ -9,11 +9,11 @@ import net.sf.mmm.util.lang.api.HashCodeFunction;
 
 /**
  * This is an abstract base class that allows to use any {@link #getDelegate() object} as
- * {@link java.util.Map#get(Object) hash-key} with external custom implementations of {@link #equals(Object)
- * equals} and {@link Object#hashCode() hashCode}.
- * 
+ * {@link java.util.Map#get(Object) hash-key} with external custom implementations of {@link #equals(Object) equals} and
+ * {@link Object#hashCode() hashCode}.
+ *
  * @param <T> is the generic type of the {@link #getDelegate() delegate-object}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -21,9 +21,9 @@ public abstract class AbstractHashKey<T> implements Serializable {
 
   private static final long serialVersionUID = -2858598306180975505L;
 
-  private  T delegate;
+  private T delegate;
 
-  private  int hashCode;
+  private int hashCode;
 
   /**
    * The constructor for de-serialization in GWT.
@@ -35,7 +35,7 @@ public abstract class AbstractHashKey<T> implements Serializable {
 
   /**
    * The constructor.
-   * 
+   *
    * @param object is the {@link #getDelegate() delegate object}.
    */
   public AbstractHashKey(T object) {
@@ -46,7 +46,7 @@ public abstract class AbstractHashKey<T> implements Serializable {
 
   /**
    * This method gets the original object this hash-key delegates to.
-   * 
+   *
    * @return the data object.
    */
   public T getDelegate() {

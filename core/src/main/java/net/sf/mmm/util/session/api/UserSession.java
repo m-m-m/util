@@ -24,19 +24,20 @@ public interface UserSession {
   String getLogin();
 
   /**
-   * @return the {@link Locale} of the current user, or the {@link Locale#getDefault() system default locale}
-   *         as {@link #isFallback() fallback}.
+   * @return the {@link Locale} of the current user, or the {@link Locale#getDefault() system default locale} as
+   *         {@link #isFallback() fallback}.
    */
   Locale getLocale();
 
   /**
-   * This method determines if this {@link UserSession} was {@link UserSessionAccess#getSession() received} or
-   * is currently called outside the scope of a current user session. On the server side a {@link UserSession}
-   * typically exists in the context of a servlet container or JEE application server. If the context is not
-   * available this method will return {@code true}. This may be because the user is currently not logged in (anonymous access) or the context is not available for technical reasons (e.g. misconfiguration).
+   * This method determines if this {@link UserSession} was {@link UserSessionAccess#getSession() received} or is
+   * currently called outside the scope of a current user session. On the server side a {@link UserSession} typically
+   * exists in the context of a servlet container or JEE application server. If the context is not available this method
+   * will return {@code true}. This may be because the user is currently not logged in (anonymous access) or the context
+   * is not available for technical reasons (e.g. misconfiguration).
    *
-   * @return {@code true} if {@link UserSessionAccess#getSession() received} or called outside the scope
-   *         of a current user session, {@code false} otherwise.
+   * @return {@code true} if {@link UserSessionAccess#getSession() received} or called outside the scope of a current
+   *         user session, {@code false} otherwise.
    */
   boolean isFallback();
 

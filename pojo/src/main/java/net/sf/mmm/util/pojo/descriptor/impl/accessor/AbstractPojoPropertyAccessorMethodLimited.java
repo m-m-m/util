@@ -7,24 +7,23 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.AbstractPojoPropertyAccesso
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the abstract base implementation of
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} for accessing a
- * {@link java.lang.reflect.Method} (getter or setter) in a limited environment (GWT).
- * 
+ * This is the abstract base implementation of {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor}
+ * for accessing a {@link java.lang.reflect.Method} (getter or setter) in a limited environment (GWT).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
 public abstract class AbstractPojoPropertyAccessorMethodLimited extends AbstractPojoPropertyAccessor {
 
-  private  final String name;
+  private final String name;
 
-  private  final GenericType<?> propertyType;
+  private final GenericType<?> propertyType;
 
-  private  final Class<?> declaringClass;
+  private final Class<?> declaringClass;
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() property type}.
    * @param declaringClass is the {@link #getDeclaringClass() declaring class}.

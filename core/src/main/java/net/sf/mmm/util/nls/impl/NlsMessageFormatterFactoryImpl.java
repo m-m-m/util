@@ -14,7 +14,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsMessageFormatterImpl;
 
 /**
  * This is the implementation of the {@link NlsMessageFormatterFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -22,7 +22,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsMessageFormatterImpl;
 @Named
 public class NlsMessageFormatterFactoryImpl extends AbstractComponent implements NlsMessageFormatterFactory {
 
-  private  NlsDependencies dependencies;
+  private NlsDependencies dependencies;
 
   /**
    * The constructor.

@@ -25,11 +25,11 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
   /** The comparison operator. */
   private final CompareOperator comparator;
 
-  private  final AttributeReadValue<V> valueSource;
+  private final AttributeReadValue<V> valueSource;
 
-  private  final String source;
+  private final String source;
 
-  private  final boolean dynamic;
+  private final boolean dynamic;
 
   /**
    * The constructor.
@@ -38,8 +38,8 @@ public class ValidatorCompare<V extends Comparable<V>> extends AbstractValueVali
    *        value to validate} (first argument) with the value of the given {@code valueSource}.
    * @param valueSource is a reference to something that {@link AttributeReadValue#getValue() provides a value} and will
    *        be evaluated {@link #isDynamic() dynamically} on every {@link #validate(Object) validation}.
-   * @param source is a brief description of the {@code valueSource} for potential failure messages. E.g. in case
-   *        of a user interface the label of the field providing the value. May be {@code null}.
+   * @param source is a brief description of the {@code valueSource} for potential failure messages. E.g. in case of a
+   *        user interface the label of the field providing the value. May be {@code null}.
    */
   public ValidatorCompare(CompareOperator comparator, AttributeReadValue<V> valueSource, String source) {
 

@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliClassNoPropertyException} is thrown if a {@link CliClass CLI-class} is illegal because it has
- * no property annotated with {@link CliOption} or {@link CliArgument}.
+ * A {@link CliClassNoPropertyException} is thrown if a {@link CliClass CLI-class} is illegal because it has no property
+ * annotated with {@link CliOption} or {@link CliArgument}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

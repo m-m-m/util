@@ -4,7 +4,7 @@ package net.sf.mmm.util.datatype.api.color;
 
 /**
  * This {@link Enum} contains the available types of the {@link Segment segments} of a {@link Color}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

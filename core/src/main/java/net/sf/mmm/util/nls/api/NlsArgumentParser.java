@@ -7,7 +7,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * The {@link NlsArgumentParser} is used to {@link #parse(CharSequenceScanner) parse} an {@link NlsArgument}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -24,12 +24,12 @@ public interface NlsArgumentParser {
   char FORMAT_SEPARATOR = ',';
 
   /**
-   * This method parses the {@link NlsMessage#getInternationalizedMessage() internationalized message} given
-   * as {@link CharSequenceScanner} pointing the beginning of an argument (immediately after
+   * This method parses the {@link NlsMessage#getInternationalizedMessage() internationalized message} given as
+   * {@link CharSequenceScanner} pointing the beginning of an argument (immediately after
    * {@link NlsArgumentParser#START_EXPRESSION}).
-   * 
+   *
    * @see NlsFormatterManager#getFormatter(String, String)
-   * 
+   *
    * @param scanner is the {@link CharSequenceScanner}.
    * @return the according {@link NlsFormatter} instance.
    */

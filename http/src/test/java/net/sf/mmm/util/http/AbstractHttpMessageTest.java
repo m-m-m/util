@@ -2,11 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.http;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import junit.framework.TestCase;
 
 /**
  * This is a {@link TestCase test-case} for {@link HttpMessage}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -29,8 +31,7 @@ public abstract class AbstractHttpMessageTest {
     String ccMain = ccStart + ",max-age=" + maxage;
     assertEquals(ccMain, message.getHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL));
     message.appendHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL, "foo-bar", "; ");
-    assertEquals(ccMain + "; foo-bar", message
-        .getHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL));
+    assertEquals(ccMain + "; foo-bar", message.getHeaderProperty(HttpMessage.HEADER_PROPERTY_CACHE_CONTROL));
     assertEquals(maxage, message.getCacheControlMaxAge());
   }
 }

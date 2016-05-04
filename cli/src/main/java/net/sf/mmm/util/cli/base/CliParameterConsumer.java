@@ -5,8 +5,8 @@ package net.sf.mmm.util.cli.base;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
- * A {@link CliParameterConsumer} holds the command-line parameters together with the current index. In other
- * words it is like an {@link java.util.Iterator} for the parameters.
+ * A {@link CliParameterConsumer} holds the command-line parameters together with the current index. In other words it
+ * is like an {@link java.util.Iterator} for the parameters.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -16,9 +16,9 @@ public class CliParameterConsumer {
   /** An empty instance. */
   static final CliParameterConsumer EMPTY_INSTANCE = new CliParameterConsumer();
 
-  private  final String[] parameters;
+  private final String[] parameters;
 
-  private  int index;
+  private int index;
 
   /**
    * The constructor.
@@ -57,8 +57,8 @@ public class CliParameterConsumer {
   }
 
   /**
-   * This method gets the current element. It is the same as {@link #getNext()} except that it does NOT step
-   * on to the next element.
+   * This method gets the current element. It is the same as {@link #getNext()} except that it does NOT step on to the
+   * next element.
    *
    * @return the current element or {@code null} if no {@link #hasNext() next} is available.
    */

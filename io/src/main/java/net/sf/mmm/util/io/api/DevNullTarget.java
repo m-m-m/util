@@ -5,9 +5,9 @@ package net.sf.mmm.util.io.api;
 import java.io.OutputStream;
 
 /**
- * This is an implementation of {@code /dev/null} as {@link OutputStream}. In other words the
- * {@link DevNullTarget} is a dummy {@link OutputStream} that ignores all the data written.
- * 
+ * This is an implementation of {@code /dev/null} as {@link OutputStream}. In other words the {@link DevNullTarget} is a
+ * dummy {@link OutputStream} that ignores all the data written.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

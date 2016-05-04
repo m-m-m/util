@@ -6,10 +6,10 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * The enum represents the gender of a natural person.
- * 
+ *
  * @see #MALE
  * @see #FEMALE
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -25,13 +25,13 @@ public enum Gender implements SimpleDatatype<String> {
    */
   FEMALE("F", "female");
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.
-   * 
+   *
    * @param value - see {@link #getValue()}.
    * @param title - see {@link #toString()}.
    */
@@ -55,7 +55,7 @@ public enum Gender implements SimpleDatatype<String> {
 
   /**
    * This method gets the {@link Gender} for the given {@code value}.
-   * 
+   *
    * @param value is the {@link #getValue() value} of the requested {@link Gender}.
    * @return the requested {@link Gender} or {@code null} if no such {@link Gender} exists.
    */

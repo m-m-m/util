@@ -12,9 +12,9 @@ import net.sf.mmm.util.lang.api.CharIterator;
 
 /**
  * This is the implementation of the {@link BasicUtil} interface.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -22,7 +22,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
 @Named(BasicUtil.CDI_NAME)
 public class BasicUtilImpl implements BasicUtil {
 
-  private  static BasicUtil instance;
+  private static BasicUtil instance;
 
   /**
    * The constructor.
@@ -36,7 +36,7 @@ public class BasicUtilImpl implements BasicUtil {
    * This method gets the singleton instance of this {@link BasicUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static BasicUtil getInstance() {

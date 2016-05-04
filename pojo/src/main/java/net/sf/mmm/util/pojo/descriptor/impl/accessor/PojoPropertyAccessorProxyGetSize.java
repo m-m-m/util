@@ -13,16 +13,16 @@ import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
  * This is the implementation of the {@link PojoPropertyAccessorNonArg} interface for
  * {@link PojoPropertyAccessorNonArgMode#GET getting} the size of an array, {@link java.util.List} or
  * {@link java.util.Map} from another accessor.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccessorProxyAdapter implements
-    PojoPropertyAccessorNonArg {
+public class PojoPropertyAccessorProxyGetSize extends AbstractPojoPropertyAccessorProxyAdapter
+    implements PojoPropertyAccessorNonArg {
 
   /**
    * The constructor.
-   * 
+   *
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array, map or collection property.
    */

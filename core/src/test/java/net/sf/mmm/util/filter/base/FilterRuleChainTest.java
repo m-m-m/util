@@ -8,12 +8,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import net.sf.mmm.util.filter.api.FilterRule;
-import net.sf.mmm.util.filter.base.FilterRuleChain;
-import net.sf.mmm.util.filter.base.PatternFilterRule;
 
 /**
  * This is the test-case for {@link FilterRuleChain}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -36,8 +34,8 @@ public class FilterRuleChainTest {
   public void test() {
 
     FilterRule<String>[] rules = new FilterRule[] { new PatternFilterRule("^/doc/", true),
-        new PatternFilterRule("(?i)\\.pdf$", false), new PatternFilterRule("^/data/", true),
-        new PatternFilterRule("(?i)\\.(xml|xsl)$", false), };
+    new PatternFilterRule("(?i)\\.pdf$", false), new PatternFilterRule("^/data/", true),
+    new PatternFilterRule("(?i)\\.(xml|xsl)$", false), };
     FilterRuleChain chain = new FilterRuleChain(true, rules);
     check(chain);
     assertTrue(chain.accept("/foo/bar/file.bar"));

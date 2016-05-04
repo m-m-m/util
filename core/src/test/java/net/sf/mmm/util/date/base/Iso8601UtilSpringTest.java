@@ -7,7 +7,7 @@ import net.sf.mmm.util.date.api.Iso8601Util;
 
 /**
  * This is the test-case for {@link Iso8601Util} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class Iso8601UtilSpringTest extends Iso8601UtilTest {

@@ -5,19 +5,19 @@ package net.sf.mmm.util.entity.base;
 import net.sf.mmm.util.entity.api.MutableRevisionedEntity;
 
 /**
- * This is the abstract base-class that implementations of {@link MutableRevisionedEntity} should inherit from
- * (if possible).
- * 
+ * This is the abstract base-class that implementations of {@link MutableRevisionedEntity} should inherit from (if
+ * possible).
+ *
  * @param <ID> is the type of the {@link #getId() primary key}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public abstract class AbstractRevisionedEntity<ID> extends AbstractGenericEntity<ID> implements
-    MutableRevisionedEntity<ID> {
+public abstract class AbstractRevisionedEntity<ID> extends AbstractGenericEntity<ID>
+    implements MutableRevisionedEntity<ID> {
 
   private static final long serialVersionUID = -3138296535416100839L;
 
-  private  Number revision;
+  private Number revision;
 
   /**
    * The constructor.
@@ -71,9 +71,9 @@ public abstract class AbstractRevisionedEntity<ID> extends AbstractGenericEntity
 
   /**
    * Method to extend {@link #toString()} logic.
-   * 
-   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the
-   *        string representation.
+   *
+   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the string
+   *        representation.
    */
   @Override
   protected void toString(StringBuilder buffer) {

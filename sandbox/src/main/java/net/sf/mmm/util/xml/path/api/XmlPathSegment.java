@@ -4,6 +4,7 @@ package net.sf.mmm.util.xml.path.api;
 
 /**
  * This is the interface for a single segment of an {@link XmlPath}.
+ * 
  * <pre>
  * //
  * /a*b
@@ -11,7 +12,7 @@ package net.sf.mmm.util.xml.path.api;
  * .
  * *[position()=1]
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface XmlPathSegment {

@@ -10,12 +10,12 @@ import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
- * This is the interface for a generic provider of {@link EnumType enumerations}. The major goal of this
- * component is generic support for enumerations of any kind. This may e.g. be used for user-interfaces in
- * radio-groups, drop-downs, combo-boxes, or the like. More advanced cases are implementations that
- * dynamically load the {@link #getEnumValues(EnumDefinition) enum values} from a file, database or a service.
- * Within {@code mmm-util-core} you will only find simple implementations of this interface. Dynamic
- * enumerations are provided by higher-level components of the project.
+ * This is the interface for a generic provider of {@link EnumType enumerations}. The major goal of this component is
+ * generic support for enumerations of any kind. This may e.g. be used for user-interfaces in radio-groups, drop-downs,
+ * combo-boxes, or the like. More advanced cases are implementations that dynamically load the
+ * {@link #getEnumValues(EnumDefinition) enum values} from a file, database or a service. Within {@code mmm-util-core}
+ * you will only find simple implementations of this interface. Dynamic enumerations are provided by higher-level
+ * components of the project.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -32,8 +32,8 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
   Iterator<EnumDefinition<?, ?>> iterator();
 
   /**
-   * This method gets an (unmodifiable) {@link Iterator} with all existing {@link EnumDefinition}s. In most
-   * cases this is a static list, however it may also be dynamic.
+   * This method gets an (unmodifiable) {@link Iterator} with all existing {@link EnumDefinition}s. In most cases this
+   * is a static list, however it may also be dynamic.
    *
    * @see #iterator()
    *
@@ -42,12 +42,12 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
   Iterator<EnumDefinition<?, ?>> getEnumDefinitions();
 
   /**
-   * This method gets the {@link EnumDefinition} with the given {@code key}. To get the default
-   * {@link EnumDefinition} for a particular {@link EnumDefinition#getEnumType() enum type} you should use
-   * {@link #getEnumDefinition(Class)} instead. However, for the same enum type multiple
-   * {@link EnumDefinition}s can exists. The default definition should have the {@link Class#getName()
-   * qualified name} of the {@link EnumDefinition#getEnumType() enum type} while additional definitions should
-   * have more specific keys that do not clash with others (e.g. "java.lang.Boolean_All_None").
+   * This method gets the {@link EnumDefinition} with the given {@code key}. To get the default {@link EnumDefinition}
+   * for a particular {@link EnumDefinition#getEnumType() enum type} you should use {@link #getEnumDefinition(Class)}
+   * instead. However, for the same enum type multiple {@link EnumDefinition}s can exists. The default definition should
+   * have the {@link Class#getName() qualified name} of the {@link EnumDefinition#getEnumType() enum type} while
+   * additional definitions should have more specific keys that do not clash with others (e.g.
+   * "java.lang.Boolean_All_None").
    *
    * @param key is the {@link EnumDefinition#getValue() key} of the requested definition.
    * @return the requested {@link EnumDefinition}.
@@ -84,25 +84,23 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
    * {@link #getEnumValues(EnumDefinition) enum values} can be retrieved.
    *
    * @param enumDefinition is the {@link EnumDefinition} to check.
-   * @return {@code true} if the {@link #getEnumValues(EnumDefinition) enum values} for the given
-   *         {@link EnumDefinition} are available (already loaded / in cache), {@code false} otherwise.
+   * @return {@code true} if the {@link #getEnumValues(EnumDefinition) enum values} for the given {@link EnumDefinition}
+   *         are available (already loaded / in cache), {@code false} otherwise.
    */
   boolean isAvailable(EnumDefinition<?, ?> enumDefinition);
 
   /**
-   * This method triggers that the given {@link EnumDefinition}s are {@link #isAvailable(EnumDefinition)
-   * available}.
+   * This method triggers that the given {@link EnumDefinition}s are {@link #isAvailable(EnumDefinition) available}.
    *
    * @param enumDefinitions are the {@link EnumDefinition}s of the required enumerations.
    */
   void require(EnumDefinition<?, ?>... enumDefinitions);
 
   /**
-   * This method triggers that the given {@link EnumDefinition}s are {@link #isAvailable(EnumDefinition)
-   * available}. In advanced to {@link #require(EnumDefinition...)} it allows to specify a callback that gets
-   * invoked after the required {@link EnumDefinition}s are {@link #isAvailable(EnumDefinition) available}.
-   * This is useful in asynchronous environments (e.g. in client applications that have to receive the values
-   * (asynchronously) from the server).
+   * This method triggers that the given {@link EnumDefinition}s are {@link #isAvailable(EnumDefinition) available}. In
+   * advanced to {@link #require(EnumDefinition...)} it allows to specify a callback that gets invoked after the
+   * required {@link EnumDefinition}s are {@link #isAvailable(EnumDefinition) available}. This is useful in asynchronous
+   * environments (e.g. in client applications that have to receive the values (asynchronously) from the server).
    *
    * @param callback is a {@link Runnable} that will be {@link Runnable#run() called} after all given
    *        {@link EnumDefinition}s are {@link #isAvailable(EnumDefinition) available}.
@@ -114,8 +112,8 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
    * This method gets the {@link List} of {@link EnumType}-instances that represent the values of the given
    * {@link EnumDefinition}. In case the {@link EnumDefinition#getEnumType() enum type} implements
    * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated} the
-   * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated#isDeprecated() deprecated} enum values
-   * will be excluded from the returned {@link List}.
+   * {@link net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated#isDeprecated() deprecated} enum values will be
+   * excluded from the returned {@link List}.
    *
    * @param <ENUM> is the generic for the {@link EnumDefinition#getEnumType() enum type}.
    *
@@ -125,49 +123,42 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
   <ENUM> List<ENUM> getEnumValues(EnumDefinition<ENUM, ?> enumDefinition);
 
   /**
-   * This method gets the {@link EnumType}-instance of the given {@link EnumDefinition} identified by the
-   * given {@code value}.
+   * This method gets the {@link EnumType}-instance of the given {@link EnumDefinition} identified by the given
+   * {@code value}.
    *
    * @param <ENUM> is the generic for the {@link EnumDefinition#getEnumType() enum type}.
    *
    * @param enumDefinition is the {@link EnumDefinition} for which the value is requested.
-   * @param value is the {@link Formatter#format(Object) string representation} of the requested
-   *        {@link EnumType} instance based on {@link EnumDefinition#getFormatter()}.
-   * @param required - {@code true} if the requested {@link EnumType}-instance is required,
-   *        {@code false} otherwise.
-   * @return the {@link EnumType}-instance. Will be {@code null} if {@code value} is
-   *         {@code null} or if {@code required} is {@code false} and no such {@link EnumType}
-   *         instance exists.
-   * @throws IllegalCaseException if {@code required} is {@code true} and no such {@link EnumType}
-   *         instance exists.
+   * @param value is the {@link Formatter#format(Object) string representation} of the requested {@link EnumType}
+   *        instance based on {@link EnumDefinition#getFormatter()}.
+   * @param required - {@code true} if the requested {@link EnumType}-instance is required, {@code false} otherwise.
+   * @return the {@link EnumType}-instance. Will be {@code null} if {@code value} is {@code null} or if {@code required}
+   *         is {@code false} and no such {@link EnumType} instance exists.
+   * @throws IllegalCaseException if {@code required} is {@code true} and no such {@link EnumType} instance exists.
    */
   <ENUM> ENUM getEnumValue(EnumDefinition<ENUM, ?> enumDefinition, String value, boolean required)
       throws IllegalCaseException;
 
   /**
-   * This method gets the {@link EnumType}-instance of the given {@link EnumDefinition} identified by the
-   * given {@code value}.
+   * This method gets the {@link EnumType}-instance of the given {@link EnumDefinition} identified by the given
+   * {@code value}.
    *
    * @param <ENUM> is the generic for the {@link EnumDefinition#getEnumType() enum type}.
    *
    * @param enumType is the {@link EnumType} for which the value is requested.
-   * @param value is the {@link Formatter#format(Object) string representation} of the requested
-   *        {@link EnumType} instance based on {@link EnumDefinition#getFormatter()}.
-   * @param required - {@code true} if the requested {@link EnumType}-instance is required,
-   *        {@code false} otherwise.
-   * @return the {@link EnumType}-instance. Will be {@code null} if {@code value} is
-   *         {@code null} or if {@code required} is {@code false} and no such {@link EnumType}
-   *         instance exists.
-   * @throws IllegalCaseException if {@code required} is {@code true} and no such {@link EnumType}
-   *         instance exists.
+   * @param value is the {@link Formatter#format(Object) string representation} of the requested {@link EnumType}
+   *        instance based on {@link EnumDefinition#getFormatter()}.
+   * @param required - {@code true} if the requested {@link EnumType}-instance is required, {@code false} otherwise.
+   * @return the {@link EnumType}-instance. Will be {@code null} if {@code value} is {@code null} or if {@code required}
+   *         is {@code false} and no such {@link EnumType} instance exists.
+   * @throws IllegalCaseException if {@code required} is {@code true} and no such {@link EnumType} instance exists.
    */
   <ENUM> ENUM getEnumValue(Class<ENUM> enumType, String value, boolean required) throws IllegalCaseException;
 
   /**
-   * This method gets the {@link List} of {@link #getEnumValues(EnumDefinition) enum values} filtered by the
-   * given {@link EnumTypeWithCategory#getCategory() categories}. So only these
-   * {@link #getEnumValues(EnumDefinition) enum values} are returned that have a
-   * {@link EnumTypeWithCategory#getCategory() category}
+   * This method gets the {@link List} of {@link #getEnumValues(EnumDefinition) enum values} filtered by the given
+   * {@link EnumTypeWithCategory#getCategory() categories}. So only these {@link #getEnumValues(EnumDefinition) enum
+   * values} are returned that have a {@link EnumTypeWithCategory#getCategory() category}
    *
    * @param <CATEGORY> is the generic type of the {@link EnumDefinition#getCategory() category}
    *        {@link EnumDefinition#getEnumType() type}.
@@ -182,8 +173,8 @@ public interface EnumProvider extends Iterable<EnumDefinition<?, ?>> {
       EnumDefinition<ENUM, CATEGORY> enumDefinition, CATEGORY... categories);
 
   /**
-   * This method clears the (potentially) cached {@link #getEnumValues(EnumDefinition) enum values} of the
-   * given {@link EnumDefinition}. If the enum is {@link EnumDefinition#isMutable() dynamic} it is NOT
+   * This method clears the (potentially) cached {@link #getEnumValues(EnumDefinition) enum values} of the given
+   * {@link EnumDefinition}. If the enum is {@link EnumDefinition#isMutable() dynamic} it is NOT
    * {@link #isAvailable(EnumDefinition) available} (anymore) after this operation.
    *
    * @param enumDefinition is the {@link EnumDefinition} to clear.

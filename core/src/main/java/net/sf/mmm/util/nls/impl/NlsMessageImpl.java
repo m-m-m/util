@@ -92,7 +92,8 @@ public class NlsMessageImpl extends BasicNlsMessage {
               AbstractNlsDependencies.getInstance());
         }
         if (!success) {
-          NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(message, AbstractNlsDependencies.getInstance());
+          NlsMessageFormatterImpl format = new NlsMessageFormatterImpl(message,
+              AbstractNlsDependencies.getInstance());
           format.format(null, actualLocale, arguments, resolver, buffer);
         }
       }

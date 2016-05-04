@@ -2,12 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.file.base;
 
-import net.sf.mmm.util.file.api.FileUtilLimited;
-
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import ch.qos.logback.core.util.FileUtil;
+import net.sf.mmm.util.file.api.FileUtilLimited;
 
 /**
  * This is the test-case for {@link FileUtilImpl}.
@@ -57,7 +56,8 @@ public class FileUtilLimitedTest extends Assertions {
     assertThat(util.normalizePath("~someuser", '/')).isEqualTo("~/../someuser");
     String uncPath = "\\\\10.0.0.1/share";
     assertThat(util.normalizePath(uncPath, '/')).isEqualTo(uncPath);
-    assertThat(util.normalizePath("http://www.host.com/foo/bar/./test/.././..")).isEqualTo("http://www.host.com/foo");
+    assertThat(util.normalizePath("http://www.host.com/foo/bar/./test/.././.."))
+        .isEqualTo("http://www.host.com/foo");
     assertThat(util.normalizePath("../..\\foo/../bar\\.\\some", '/')).isEqualTo("../../bar/some");
   }
 

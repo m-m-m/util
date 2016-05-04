@@ -3,9 +3,9 @@
 package net.sf.mmm.util.contenttype.base.format;
 
 /**
- * This class represents a {@link Segment} that indicates the end of the stream.
- * It matches if the stream data is entirely processed.
- * 
+ * This class represents a {@link Segment} that indicates the end of the stream. It matches if the stream data is
+ * entirely processed.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

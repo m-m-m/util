@@ -41,9 +41,9 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
 
 /**
  * This is the implementation of the {@link StreamUtil} interface.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -51,13 +51,13 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
 @Named(StreamUtil.CDI_NAME)
 public class StreamUtilImpl extends AbstractLoggableComponent implements StreamUtil {
 
-  private  static StreamUtil instance;
+  private static StreamUtil instance;
 
-  private  Executor executor;
+  private Executor executor;
 
-  private  Pool<byte[]> byteArrayPool;
+  private Pool<byte[]> byteArrayPool;
 
-  private  Pool<char[]> charArrayPool;
+  private Pool<char[]> charArrayPool;
 
   /**
    * The constructor.
@@ -74,7 +74,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
    * This method gets the singleton instance of this {@link StreamUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static StreamUtil getInstance() {
@@ -93,7 +93,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method gets the {@link Executor} used to run asynchronous tasks. It may use a thread-pool.
-   * 
+   *
    * @return the executor.
    */
   protected Executor getExecutor() {
@@ -103,7 +103,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method sets the {@link #getExecutor() executor}.
-   * 
+   *
    * @param executor the executor to set.
    */
   @Inject
@@ -115,9 +115,9 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method gets the byte-array {@link Pool} used to transfer streams. <br>
-   * The implementation should create byte-arrays with a suitable length (at least 512, suggested is 4096).
-   * Override this method to use a real pool implementation.
-   * 
+   * The implementation should create byte-arrays with a suitable length (at least 512, suggested is 4096). Override
+   * this method to use a real pool implementation.
+   *
    * @return the {@link Pool} instance.
    */
   protected Pool<byte[]> getByteArrayPool() {
@@ -127,7 +127,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method sets the {@link #getByteArrayPool() byte-array-pool}.
-   * 
+   *
    * @param byteArrayPool the byteArrayPool to set
    */
   // @Resource
@@ -141,7 +141,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
    * This method gets the char-array {@link Pool} used to transfer {@link Reader}s and {@link Writer}s. The
    * implementation should create char-arrays with a suitable length (at least 512, suggested is 2048). <br>
    * Override this method to use a real pool implementation.
-   * 
+   *
    * @return the {@link Pool} instance.
    */
   protected Pool<char[]> getCharArrayPool() {
@@ -151,7 +151,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method sets the {@link #getCharArrayPool() char-array-pool}.
-   * 
+   *
    * @param charArrayPool the charArrayPool to set
    */
   // @Resource
@@ -278,7 +278,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   @Override
-  public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen, TransferCallback callback) {
+  public AsyncTransferrer transferAsync(Reader reader, Writer writer, boolean keepWriterOpen,
+      TransferCallback callback) {
 
     ReaderTransferrer transferrer = new ReaderTransferrer(reader, writer, keepWriterOpen, callback);
     AsyncTransferrerImpl task = new AsyncTransferrerImpl(transferrer);
@@ -395,7 +396,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
     /**
      * The constructor.
-     * 
+     *
      * @param transferrer is the actual transferrer task.
      */
     public AsyncTransferrerImpl(BaseTransferrer<?> transferrer) {
@@ -414,14 +415,13 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This is the abstract base class for the {@link Callable} that transfers data of streams or
-   * readers/writers.
+   * This is the abstract base class for the {@link Callable} that transfers data of streams or readers/writers.
    */
   protected abstract static class AbstractAsyncTransferrer implements Callable<Long>, Stoppable {
 
-    private  volatile boolean stopped;
+    private volatile boolean stopped;
 
-    private  volatile boolean completed;
+    private volatile boolean completed;
 
     @Override
     public void stop() {
@@ -431,7 +431,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
     /**
      * This method determines if this transferrer was {@link #stop() stopped}.
-     * 
+     *
      * @return {@code true} if stopped, {@code false} otherwise.
      */
     public final boolean isStopped() {
@@ -441,9 +441,9 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
     /**
      * This method determines if the transfer has been completed successfully.
-     * 
-     * @return {@code true} if successfully completed, {@code false} if still running,
-     *         {@link #isStopped() stopped} or an exception occurred.
+     *
+     * @return {@code true} if successfully completed, {@code false} if still running, {@link #isStopped() stopped} or
+     *         an exception occurred.
      */
     public final boolean isCompleted() {
 
@@ -461,9 +461,9 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This is an abstract implementation of the {@link AsyncTransferrer} interface, that implements
-   * {@link Runnable} defining the main flow.
-   * 
+   * This is an abstract implementation of the {@link AsyncTransferrer} interface, that implements {@link Runnable}
+   * defining the main flow.
+   *
    * @param <BUFFER> is the generic type of the buffers provided by {@link BaseTransferrer#getPool()}.
    */
   protected abstract class BaseTransferrer<BUFFER> extends AbstractAsyncTransferrer {
@@ -478,10 +478,10 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
     /**
      * The constructor.
-     * 
+     *
      * @param callback is the callback or {@code null}.
-     * @param keepDestinationOpen {@code true} if the {@link #getDestination() destination} should be
-     *        closed, {@code false} otherwise.
+     * @param keepDestinationOpen {@code true} if the {@link #getDestination() destination} should be closed,
+     *        {@code false} otherwise.
      */
     public BaseTransferrer(TransferCallback callback, boolean keepDestinationOpen) {
 
@@ -492,28 +492,28 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
     /**
      * This method gets the source to transfer.
-     * 
+     *
      * @return the source (e.g. {@link InputStream} or {@link Reader}).
      */
     protected abstract Closeable getSource();
 
     /**
      * This method gets the destination to transfer to.
-     * 
+     *
      * @return the destination (e.g. {@link OutputStream} or {@link Writer}).
      */
     protected abstract Closeable getDestination();
 
     /**
      * This method gets the {@link Pool} to retrieve buffers.
-     * 
+     *
      * @return the {@link Pool}.
      */
     protected abstract Pool<BUFFER> getPool();
 
     /**
      * This method performs the actual transfer.
-     * 
+     *
      * @param buffer is the buffer used for the transfer.
      * @return the number of bytes that have been transferred.
      * @throws IOException if the transfer failed.
@@ -522,7 +522,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
     /**
      * This method performs the actual transfer.
-     * 
+     *
      * @return the number of bytes that have been transferred.
      * @throws RuntimeIoException if the transfer failed.
      */
@@ -616,9 +616,9 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
     /**
      * The constructor.
-     * 
+     *
      * @see StreamUtilImpl#transfer(InputStream, OutputStream, boolean)
-     * 
+     *
      * @param source is {@link InputStream} to read from.
      * @param destination the {@link OutputStream} to write to.
      * @param keepDestinationOpen {@code true} if the {@code destination} should be closed.
@@ -632,17 +632,20 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       this.destination = destination;
     }
 
-    @Override    protected InputStream getSource() {
+    @Override
+    protected InputStream getSource() {
 
       return this.source;
     }
 
-    @Override    protected OutputStream getDestination() {
+    @Override
+    protected OutputStream getDestination() {
 
       return this.destination;
     }
 
-    @Override    protected Pool<byte[]> getPool() {
+    @Override
+    protected Pool<byte[]> getPool() {
 
       return getByteArrayPool();
     }
@@ -677,32 +680,36 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
     /**
      * The constructor.
-     * 
+     *
      * @see StreamUtilImpl#transfer(Reader, Writer, boolean)
-     * 
+     *
      * @param source is {@link Reader} to read from.
      * @param destination the {@link Writer} to write to.
      * @param keepDestinationOpen {@code true} if the {@code destination} should be closed.
      * @param callback is the callback or {@code null}.
      */
-    public ReaderTransferrer(Reader source, Writer destination, boolean keepDestinationOpen, TransferCallback callback) {
+    public ReaderTransferrer(Reader source, Writer destination, boolean keepDestinationOpen,
+        TransferCallback callback) {
 
       super(callback, keepDestinationOpen);
       this.source = source;
       this.destination = destination;
     }
 
-    @Override    protected Reader getSource() {
+    @Override
+    protected Reader getSource() {
 
       return this.source;
     }
 
-    @Override    protected Writer getDestination() {
+    @Override
+    protected Writer getDestination() {
 
       return this.destination;
     }
 
-    @Override    protected Pool<char[]> getPool() {
+    @Override
+    protected Pool<char[]> getPool() {
 
       return getCharArrayPool();
     }

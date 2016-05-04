@@ -5,7 +5,7 @@ package net.sf.mmm.util.nls.api;
 /**
  * This is the interface for a manager of {@link NlsFormatter}s. <br>
  * A legal implementation of this interface has to be thread-safe.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -55,28 +55,27 @@ public interface NlsFormatterManager {
 
   /**
    * This method gets the default {@link NlsFormatter}. <br>
-   * 
+   *
    * @see #getFormatter(String, String)
-   * 
+   *
    * @return the default {@link NlsFormatter} instance.
    */
   NlsFormatter<Object> getFormatter();
 
   /**
    * This method gets the {@link NlsFormatter} for the given {@code formatType}. <br>
-   * 
+   *
    * @see #getFormatter(String, String)
-   * 
+   *
    * @param formatType is the type to be formatted.
    * @return the according {@link NlsFormatter} instance.
    */
   NlsFormatter<?> getFormatter(String formatType);
 
   /**
-   * This method gets the {@link NlsFormatter} for the given {@code formatType} and
-   * {@code formatStyle}. <br>
-   * To be compliant with {@link java.text.MessageFormat} the following types and styles need to be supported
-   * by the implementation: <br>
+   * This method gets the {@link NlsFormatter} for the given {@code formatType} and {@code formatStyle}. <br>
+   * To be compliant with {@link java.text.MessageFormat} the following types and styles need to be supported by the
+   * implementation: <br>
    * <br>
    * {@code formatType}:
    * <ul>
@@ -99,15 +98,15 @@ public interface NlsFormatterManager {
    * <li><em>additional custom styles (named [a-z]*)</em></li>
    * <li><em>anything else will be treated as SubformatPattern</em></li>
    * </ul>
-   * 
+   *
    * <b>ATTENTION:</b><br>
-   * The support for {@link java.text.ChoiceFormat}s is NOT provided in a compatible way as by hacking
-   * internal arrays of {@link java.text.MessageFormat}. Instead this implementation provides a clean
-   * configuration via {@code formatStyle} when {@code formatType} is {@code choice} (see
+   * The support for {@link java.text.ChoiceFormat}s is NOT provided in a compatible way as by hacking internal arrays
+   * of {@link java.text.MessageFormat}. Instead this implementation provides a clean configuration via
+   * {@code formatStyle} when {@code formatType} is {@code choice} (see
    * {@link net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoice}).
-   * 
+   *
    * @see java.text.MessageFormat
-   * 
+   *
    * @param formatType is the type to be formatted.
    * @param formatStyle is the style defining details of formatting.
    * @return the according {@link NlsFormatter} instance.

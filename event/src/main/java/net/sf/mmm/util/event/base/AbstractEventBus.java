@@ -37,7 +37,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
 
   private final Queue<Object> eventQueue;
 
-  private  GlobalExceptionHandler globalExceptionHandler;
+  private GlobalExceptionHandler globalExceptionHandler;
 
   /**
    * The constructor.
@@ -182,9 +182,9 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
    *
    * @param <E> is the generic type of {@code eventType}.
    * @param eventType is the {@link Class} reflecting the {@link net.sf.mmm.util.event.api.Event event}.
-   * @return the most specific {@link EventDispatcher} responsible for the given {@code eventType}. May be
-   *         {@code null} if no {@link EventListener} is {@link #addListener(Class, EventListener) registered} for
-   *         a compatible {@code eventType}.
+   * @return the most specific {@link EventDispatcher} responsible for the given {@code eventType}. May be {@code null}
+   *         if no {@link EventListener} is {@link #addListener(Class, EventListener) registered} for a compatible
+   *         {@code eventType}.
    */
   @SuppressWarnings("unchecked")
   protected <E> EventDispatcher<? super E> getEventDispatcherOptional(Class<E> eventType) {
@@ -196,8 +196,8 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
    * Gets or creates the {@link EventDispatcher} for the given {@code eventType}.
    *
    * @param eventType is the {@link Class} reflecting the {@link net.sf.mmm.util.event.api.Event event}.
-   * @param createIfNotExists - if {@code true} the requested {@link EventDispatcher} will be created if it does
-   *        not exists, if {@code false} this method will return {@code null} if it does not exist.
+   * @param createIfNotExists - if {@code true} the requested {@link EventDispatcher} will be created if it does not
+   *        exists, if {@code false} this method will return {@code null} if it does not exist.
    * @return the {@link EventDispatcher} responsible for the given {@code eventType}. May be {@code null} if
    *         {@code createIfNotExists} is {@code null} and not available.
    */
@@ -260,9 +260,9 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
    */
   protected static class EventListenerContainer<E> {
 
-    private  final Class<E> eventType;
+    private final Class<E> eventType;
 
-    private  EventListener<E> eventListener;
+    private EventListener<E> eventListener;
 
     /**
      * The constructor.
@@ -331,8 +331,8 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
     /**
      * The constructor.
      *
-     * @param parent is the {@link EventDispatcher} responsible for the super-class or {@code null} if this is the
-     *        root {@link EventDispatcher} responsible for {@link Object}.
+     * @param parent is the {@link EventDispatcher} responsible for the super-class or {@code null} if this is the root
+     *        {@link EventDispatcher} responsible for {@link Object}.
      * @param collectionFactory is the {@link CollectionFactory} used to create {@link Collection}s e.g. for the
      *        {@link EventListenerContainer}s.
      */

@@ -218,8 +218,8 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
     } else {
       String argument = scanner.readWhile(FILTER_COMPARATOR_ARGUMENT);
       if (argument.length() == 0) {
-        throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()),
-            REQUIRED_FORMAT_CONDITION, getType());
+        throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), REQUIRED_FORMAT_CONDITION,
+            getType());
       }
       if ("null".equals(argument)) {
         comparatorArgument = null;
@@ -349,6 +349,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
       this.comparatorArgument = comparatorArgument;
     }
 
+    @Override
     public boolean accept(Object value) {
 
       if (this.comparator == null) {

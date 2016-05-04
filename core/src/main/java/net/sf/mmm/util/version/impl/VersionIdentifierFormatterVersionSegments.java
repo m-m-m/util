@@ -11,7 +11,7 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
 /**
  * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the plain
  * {@link VersionIdentifier#getVersionSegment(int) version number}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -37,15 +37,13 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
 
   /**
    * The constructor.
-   * 
+   *
    * @param stringUtil is the {@link StringUtil} instance.
-   * @param prefix is the static prefix to append before the number. Will be omitted if the number is
-   *        {@code null}.
-   * @param segmentSeparator is the separator for {@link VersionIdentifier#getVersionSegment(int) segments}.
-   *        The typical value is the dot sign (".").
+   * @param prefix is the static prefix to append before the number. Will be omitted if the number is {@code null}.
+   * @param segmentSeparator is the separator for {@link VersionIdentifier#getVersionSegment(int) segments}. The typical
+   *        value is the dot sign (".").
    * @param minimumSegmentCount is the minimum number of segments to format. The default is {@code 0}.
-   * @param maximumSegmentCount is maximum number of segments to format. The default is
-   *        {@link Integer#MAX_VALUE}.
+   * @param maximumSegmentCount is maximum number of segments to format. The default is {@link Integer#MAX_VALUE}.
    * @param segmentPadding is the padding (minimum number of digits) for each
    *        {@link VersionIdentifier#getVersionSegment(int) segment}. The default is {@code 0}.
    */
@@ -83,9 +81,8 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
   }
 
   /**
-   * This method formats the {@link VersionIdentifier#getVersionSegment(int) segment} at the given
-   * {@code index}.
-   * 
+   * This method formats the {@link VersionIdentifier#getVersionSegment(int) segment} at the given {@code index}.
+   *
    * @param value is the {@link VersionIdentifier}.
    * @param index is the index of the {@link VersionIdentifier#getVersionSegment(int) segment} to format.
    * @return the formatted segment.

@@ -8,8 +8,8 @@ package net.sf.mmm.util.event.api;
  * For event base communication between loosely coupled components we recommend to use {@link EventBus}.
  *
  * @param <E> is the templated type of the {@link Event events} to send.
- * @param <L> is the templated type of the {@link net.sf.mmm.util.event.api.EventListener listeners} that can
- *        be {@link #addListener(EventListener) registered} here and that will
+ * @param <L> is the templated type of the {@link net.sf.mmm.util.event.api.EventListener listeners} that can be
+ *        {@link #addListener(EventListener) registered} here and that will
  *        {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Object) receive} the events.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -25,13 +25,11 @@ public interface EventSource<E extends Event, L extends EventListener<E>> {
   void addListener(L listener);
 
   /**
-   * This method removes a listener. If the listener was not registered before this method does not do any
-   * change.
+   * This method removes a listener. If the listener was not registered before this method does not do any change.
    *
    * @param listener is the listener to remove.
-   * @return {@code true} if the given {@code listener} has successfully been removed,
-   *         {@code false} if the {@code listener} was NOT {@link #addListener(EventListener)
-   *         registered}.
+   * @return {@code true} if the given {@code listener} has successfully been removed, {@code false} if the
+   *         {@code listener} was NOT {@link #addListener(EventListener) registered}.
    */
   boolean removeListener(L listener);
 

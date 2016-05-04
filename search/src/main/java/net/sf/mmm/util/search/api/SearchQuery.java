@@ -3,11 +3,10 @@
 package net.sf.mmm.util.search.api;
 
 /**
- * This interface represents a search query that is supposed to be created from particular
- * {@link SearchCriteria}. <br>
+ * This interface represents a search query that is supposed to be created from particular {@link SearchCriteria}. <br>
  * <b>ATTENTION:</b><br>
- * This is a stateful object and therefore NOT thread-safe. Further, each of the methods will cause an
- * (expensive) query to be performed. <br>
+ * This is a stateful object and therefore NOT thread-safe. Further, each of the methods will cause an (expensive) query
+ * to be performed. <br>
  * <b>EXAMPLE:</b><br>
  *
  * <pre>
@@ -19,8 +18,8 @@ package net.sf.mmm.util.search.api;
  * </pre>
  *
  * @param <HIT> is the generic type of the {@link #search() result} of this query. Typically one of your
- *        {@link net.sf.mmm.util.entity.api.GenericEntity entities} but may also be a transfer object (in case
- *        of constructor-query).
+ *        {@link net.sf.mmm.util.entity.api.GenericEntity entities} but may also be a transfer object (in case of
+ *        constructor-query).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -36,8 +35,8 @@ public interface SearchQuery<HIT> {
   long count();
 
   /**
-   * This method performs the actual search to get the {@link SearchResult}. To prevent performance problems
-   * the {@link SearchResult} may be {@link SearchResult#isComplete() limited} according to the
+   * This method performs the actual search to get the {@link SearchResult}. To prevent performance problems the
+   * {@link SearchResult} may be {@link SearchResult#isComplete() limited} according to the
    * {@link SearchCriteria#getMaximumHitCount() maximum hit count} as well as by a
    * {@link SearchCriteria#getSearchTimeout() timeout}.
    *

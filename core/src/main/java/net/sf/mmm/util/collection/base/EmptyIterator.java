@@ -8,17 +8,17 @@ import java.util.NoSuchElementException;
 /**
  * This is an implementation of the {@link Iterator} interface that is always empty. It will never have any
  * {@link #hasNext() next} element.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class EmptyIterator implements Iterator<Object> {
 
-  private  static final EmptyIterator INSTANCE = new EmptyIterator();
+  private static final EmptyIterator INSTANCE = new EmptyIterator();
 
   /**
    * The constructor.
-   * 
+   *
    */
   public EmptyIterator() {
 
@@ -27,7 +27,7 @@ public class EmptyIterator implements Iterator<Object> {
 
   /**
    * This method gets the singleton instance of this empty iterator.
-   * 
+   *
    * @param <E> is the type of the element to iterate.
    * @return the empty iterator instance.
    */

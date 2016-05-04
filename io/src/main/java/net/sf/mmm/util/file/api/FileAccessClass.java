@@ -4,11 +4,11 @@ package net.sf.mmm.util.file.api;
 
 /**
  * This class represents the three distinct classes of Unix (POSIX) file permissions.
- * 
+ *
  * @see #USER
  * @see #GROUP
  * @see #OTHERS
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */

@@ -3,9 +3,9 @@
 package net.sf.mmm.util.text.base;
 
 /**
- * This is a simple, inefficient implementation of {@link net.sf.mmm.util.text.api.StringHasher} that is
- * compatible to {@link String#hashCode()}.
- * 
+ * This is a simple, inefficient implementation of {@link net.sf.mmm.util.text.api.StringHasher} that is compatible to
+ * {@link String#hashCode()}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

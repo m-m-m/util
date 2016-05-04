@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
+import org.slf4j.Logger;
+
 import net.sf.mmm.util.cli.api.CliOptionDuplicateException;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
-
-import org.slf4j.Logger;
 
 /**
  * This is an implementation of {@link CliValueContainer} for simple objects (no arrays, collections, maps).
@@ -16,7 +16,7 @@ import org.slf4j.Logger;
  */
 public class CliValueContainerObject extends AbstractCliValueContainer {
 
-  private  Object value;
+  private Object value;
 
   /**
    * The constructor.
@@ -36,6 +36,7 @@ public class CliValueContainerObject extends AbstractCliValueContainer {
   /**
    * @return the value
    */
+  @Override
   public Object getValue() {
 
     return this.value;

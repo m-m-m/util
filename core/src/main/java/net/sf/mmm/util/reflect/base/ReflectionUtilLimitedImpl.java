@@ -21,7 +21,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
  */
 public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent implements ReflectionUtilLimited {
 
-  private  static final ReflectionUtilLimited INSTANCE = new ReflectionUtilLimitedImpl();
+  private static final ReflectionUtilLimited INSTANCE = new ReflectionUtilLimitedImpl();
 
   /**
    * The constructor.

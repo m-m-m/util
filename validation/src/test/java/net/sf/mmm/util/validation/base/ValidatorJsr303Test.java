@@ -6,12 +6,12 @@ import javax.validation.MessageInterpolator;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import net.sf.mmm.util.nls.base.AbstractNlsMessage;
-import net.sf.mmm.util.validation.api.ValidationFailure;
-
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.sf.mmm.util.nls.base.AbstractNlsMessage;
+import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
  * This is the test-case for {@link ValidatorJsr303}.

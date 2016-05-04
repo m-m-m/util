@@ -5,17 +5,18 @@ package net.sf.mmm.util.lang.api;
 import java.io.Serializable;
 
 /**
- * This is an implementation of {@link HashCodeFunction} that delegates to
- * {@link System#identityHashCode(Object)} and conforms to {@link EqualsCheckerIsSame}.
- * 
+ * This is an implementation of {@link HashCodeFunction} that delegates to {@link System#identityHashCode(Object)} and
+ * conforms to {@link EqualsCheckerIsSame}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public final class HashCodeFunctionSystemIdentity extends AbstractHashCodeFunction<Object> implements Serializable {
+public final class HashCodeFunctionSystemIdentity extends AbstractHashCodeFunction<Object>
+    implements Serializable {
 
   private static final long serialVersionUID = 142095355155291498L;
 
-  private  static final HashCodeFunctionSystemIdentity INSTANCE = new HashCodeFunctionSystemIdentity();
+  private static final HashCodeFunctionSystemIdentity INSTANCE = new HashCodeFunctionSystemIdentity();
 
   /**
    * The constructor.

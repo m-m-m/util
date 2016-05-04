@@ -28,6 +28,15 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.exception.api.NlsParseException;
@@ -42,18 +51,9 @@ import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.api.XmlCompareMode;
 import net.sf.mmm.util.xml.api.XmlException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Entity;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
 /**
  * This utility class contains methods that help to deal with the {@link org.w3c.dom.Node DOM} API.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -61,7 +61,7 @@ import org.xml.sax.SAXException;
 @Named(DomUtil.CDI_NAME)
 public final class DomUtilImpl extends AbstractLoggableComponent implements DomUtil {
 
-  private  static DomUtil instance;
+  private static DomUtil instance;
 
   /** the document builder factory used to read and parse XML */
   private DocumentBuilderFactory documentBuilderFactory;
@@ -69,7 +69,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /** the transformer factory used to transform or write XML */
   private TransformerFactory transformerFactory;
 
-  private  BasicUtil basicUtil;
+  private BasicUtil basicUtil;
 
   /**
    * The constructor.
@@ -81,7 +81,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method gets the {@link DocumentBuilderFactory}.
-   * 
+   *
    * @return the {@link DocumentBuilderFactory} to use.
    */
   protected DocumentBuilderFactory getDocumentBuilderFactory() {
@@ -91,7 +91,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method sets the {@link #getDocumentBuilderFactory() documentBuilderFactory}.
-   * 
+   *
    * @param documentBuilderFactory is the documentBuilderFactory to set.
    */
   public void setDocumentBuilderFactory(DocumentBuilderFactory documentBuilderFactory) {
@@ -102,7 +102,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method gets the {@link TransformerFactory}.
-   * 
+   *
    * @return the {@link TransformerFactory} to use.
    */
   protected TransformerFactory getTransformerFactory() {
@@ -112,7 +112,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method sets the {@link #getTransformerFactory() transformerFactory}.
-   * 
+   *
    * @param transformerFactory is the transformerFactory to set
    */
   public void setTransformerFactory(TransformerFactory transformerFactory) {
@@ -123,7 +123,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method gets the {@link BasicUtil}.
-   * 
+   *
    * @return the {@link BasicUtil} to use.
    */
   protected BasicUtil getBasicUtil() {
@@ -133,7 +133,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method sets the {@link #getBasicUtil() BasicUtil}.
-   * 
+   *
    * @param basicUtil is the {@link BasicUtil} to set
    */
   @Inject
@@ -147,7 +147,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
    * This method gets the singleton instance of this {@link DomUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static DomUtil getInstance() {
@@ -192,7 +192,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method creates a new document builder.
-   * 
+   *
    * @return the new document builder instance.
    */
   private DocumentBuilder createDocumentBuilder() {
@@ -200,16 +200,16 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     try {
       return this.documentBuilderFactory.newDocumentBuilder();
     } catch (ParserConfigurationException e) {
-      throw new IllegalStateException("XML Parser misconfigured!"
-          + " Probably your JVM does not support the required JAXP version!", e);
+      throw new IllegalStateException(
+          "XML Parser misconfigured!" + " Probably your JVM does not support the required JAXP version!", e);
     }
   }
 
   /**
    * This method creates a new transformer.
-   * 
-   * @param indent - {@code true} if the XML should be indented (automatically add linebreaks before
-   *        opening tags), {@code false} otherwise.
+   *
+   * @param indent - {@code true} if the XML should be indented (automatically add linebreaks before opening tags),
+   *        {@code false} otherwise.
    * @return the new transformer.
    */
   private Transformer createTransformer(boolean indent) {
@@ -221,8 +221,8 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
       }
       return result;
     } catch (TransformerConfigurationException e) {
-      throw new IllegalStateException("XML Transformer misconfigured!"
-          + " Probably your JVM does not support the required JAXP version!", e);
+      throw new IllegalStateException(
+          "XML Transformer misconfigured!" + " Probably your JVM does not support the required JAXP version!", e);
     }
   }
 
@@ -260,7 +260,8 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     Element result = getFirstChildElement(element, tagName);
     if (result == null) {
       // TODO: NLS
-      throw new IllegalArgumentException("Missing element '" + tagName + "' in element '" + element.getTagName() + "'!");
+      throw new IllegalArgumentException(
+          "Missing element '" + tagName + "' in element '" + element.getTagName() + "'!");
     }
     return result;
   }
@@ -318,7 +319,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method removes all {@link Node#getChildNodes() child nodes} of the given node.
-   * 
+   *
    * @param node is the node to clean of children.
    */
   @Override
@@ -401,11 +402,11 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * This method determines if the given nodes have the same {@link #getLocalName(Node) name} and
    * {@link Node#getNamespaceURI() namespace}.
-   * 
+   *
    * @param node1 is the first node.
    * @param node2 is the second node.
-   * @return {@code true} if both nodes have equal {@link #getLocalName(Node) name} and
-   *         {@link Node#getNamespaceURI() namespace}.
+   * @return {@code true} if both nodes have equal {@link #getLocalName(Node) name} and {@link Node#getNamespaceURI()
+   *         namespace}.
    */
   private boolean isEqualName(Node node1, Node node2) {
 
@@ -489,9 +490,9 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method determines if the given {@link CharSequence}s are equal.
-   * 
+   *
    * @see #isEqual(Node, Node, XmlCompareMode)
-   * 
+   *
    * @param charIterator1 is the first {@link CharIterator}.
    * @param charIterator2 is the second {@link CharIterator}.
    * @param mode is the mode of comparison.
@@ -512,9 +513,9 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method determines if the given {@link Element elements} are equal.
-   * 
+   *
    * @see #isEqual(Node, Node, XmlCompareMode)
-   * 
+   *
    * @param element1 is the first {@link Element}.
    * @param element2 is the second {@link Element}.
    * @param mode is the mode of comparison.
@@ -557,7 +558,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
 
   /**
    * This method determines if the given {@link NodeList}s are equal.
-   * 
+   *
    * @param nodeList1 is the first {@link NodeList}.
    * @param nodeList2 is the second {@link NodeList}.
    * @param mode is the mode of comparison.

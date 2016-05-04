@@ -7,9 +7,9 @@ import net.sf.mmm.util.exception.api.IllegalCaseException;
 
 /**
  * This enum represents a vertical alignment of some object. <br>
- * 
+ *
  * @see HorizontalAlignment
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -26,13 +26,13 @@ public enum VerticalAlignment implements SimpleDatatype<String> {
    */
   CENTER("-", NlsBundleUtilCoreRoot.INF_CENTER);
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
    */
@@ -50,7 +50,7 @@ public enum VerticalAlignment implements SimpleDatatype<String> {
 
   /**
    * This method gets the corresponding {@link Alignment}.
-   * 
+   *
    * @return the corresponding {@link Alignment}.
    */
   public Alignment getAlignment() {
@@ -62,7 +62,7 @@ public enum VerticalAlignment implements SimpleDatatype<String> {
         return Alignment.CENTER;
       case BOTTOM:
         return Alignment.BOTTOM;
-      default :
+      default:
         throw new IllegalCaseException(VerticalAlignment.class, this);
     }
   }
@@ -75,7 +75,7 @@ public enum VerticalAlignment implements SimpleDatatype<String> {
 
   /**
    * This method gets the {@link VerticalAlignment} with the given {@link #getValue() value}.
-   * 
+   *
    * @param value is the {@link #getValue() value} of the requested {@link VerticalAlignment}.
    * @return the requested {@link VerticalAlignment}.
    */

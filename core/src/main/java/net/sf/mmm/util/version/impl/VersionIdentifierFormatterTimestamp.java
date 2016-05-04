@@ -12,7 +12,7 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
 /**
  * This is the implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the
  * {@link VersionIdentifier#getTimestamp() timestamp}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -26,14 +26,11 @@ public class VersionIdentifierFormatterTimestamp extends AbstractVersionIdentifi
 
   /**
    * The constructor.
-   * 
-   * @param iso8601Util is the {@link Iso8601Util} instance. May be {@code null} is
-   *        {@code dateFormat} is given.
-   * @param dateFormat is the {@link DateFormat} to use. If {@code null} {@code iso8601Util} will be
-   *        used instead.
-   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getTimestamp()
-   *        timestamp}. Will be omitted if {@link VersionIdentifier#getTimestamp() timestamp} is
-   *        {@code null}.
+   *
+   * @param iso8601Util is the {@link Iso8601Util} instance. May be {@code null} is {@code dateFormat} is given.
+   * @param dateFormat is the {@link DateFormat} to use. If {@code null} {@code iso8601Util} will be used instead.
+   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getTimestamp() timestamp}. Will be
+   *        omitted if {@link VersionIdentifier#getTimestamp() timestamp} is {@code null}.
    */
   public VersionIdentifierFormatterTimestamp(Iso8601Util iso8601Util, DateFormat dateFormat, String prefix) {
 

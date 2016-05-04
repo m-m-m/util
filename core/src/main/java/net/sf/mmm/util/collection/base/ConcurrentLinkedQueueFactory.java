@@ -19,6 +19,7 @@ public class ConcurrentLinkedQueueFactory extends AbstractQueueFactory {
   /** The singleton instance. */
   public static final QueueFactory INSTANCE = new ConcurrentLinkedQueueFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<ConcurrentLinkedQueue> getCollectionImplementation() {
 

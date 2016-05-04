@@ -140,8 +140,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
    * @param newValidator the new {@link #getValidator() validator}.
    * @return the new property instance.
    */
-  public final AbstractProperty<V> copy(String newName, Bean newBean,
-      AbstractValidator<? super V> newValidator) {
+  public final AbstractProperty<V> copy(String newName, Bean newBean, AbstractValidator<? super V> newValidator) {
 
     AbstractProperty<V> copy = clone();
     copy.name = newName;
@@ -272,6 +271,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
       return this;
     }
 
+    @Override
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public T build() {
 

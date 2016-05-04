@@ -7,31 +7,31 @@ import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 
 /**
  * This is the abstract base implementation of the {@link CharScannerSyntax} interface. <br>
- * The actual {@code char}s like {@link #getEscape() escape} are realized as simple bean-properties and
- * initialized with <code>'\0'</code> so they are disabled by default.
- * 
+ * The actual {@code char}s like {@link #getEscape() escape} are realized as simple bean-properties and initialized with
+ * <code>'\0'</code> so they are disabled by default.
+ *
  * @see net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean, CharScannerSyntax)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public abstract class AbstractCharScannerSyntax extends StringSyntaxBean implements CharScannerSyntax {
 
-  private  char quoteEscape;
+  private char quoteEscape;
 
-  private  boolean quoteEscapeLazy;
+  private boolean quoteEscapeLazy;
 
-  private  char altQuoteStart;
+  private char altQuoteStart;
 
-  private  char altQuoteEnd;
+  private char altQuoteEnd;
 
-  private  char altQuoteEscape;
+  private char altQuoteEscape;
 
-  private  boolean altQuoteEscapeLazy;
+  private boolean altQuoteEscapeLazy;
 
-  private  char entityStart;
+  private char entityStart;
 
-  private  char entityEnd;
+  private char entityEnd;
 
   /**
    * The constructor.
@@ -71,13 +71,14 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
 
   /**
    * This method gets the alternative character used to start a quotation that should be terminated by a
-   * {@link #getAltQuoteEnd() alt-quote-end} character. The text inside the quote is taken as is (without the
-   * quote characters).
-   * 
+   * {@link #getAltQuoteEnd() alt-quote-end} character. The text inside the quote is taken as is (without the quote
+   * characters).
+   *
    * @see #getQuoteStart()
-   * 
+   *
    * @return the alternative character used to start a quotation or {@code '\0'} for no quotation.
    */
+  @Override
   public char getAltQuoteStart() {
 
     return this.altQuoteStart;
@@ -93,11 +94,12 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
 
   /**
    * This method gets the alternative character used to end a quotation.
-   * 
+   *
    * @see #getAltQuoteStart()
-   * 
+   *
    * @return the alternative character used to end a quotation.
    */
+  @Override
   public char getAltQuoteEnd() {
 
     return this.altQuoteEnd;
@@ -105,7 +107,7 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
 
   /**
    * This method sets the {@link #getAltQuoteEnd() alt-quote-end} character.
-   * 
+   *
    * @param alternativeQuoteEnd is the {@link #getAltQuoteEnd() alt-quote-end} character.
    */
   public void setAltQuoteEnd(char alternativeQuoteEnd) {
@@ -114,9 +116,9 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
   }
 
   /**
-   * This method sets both the {@link #getAltQuoteStart() alt-quote-start} and {@link #getAltQuoteEnd()
-   * alt-quote-end} character.
-   * 
+   * This method sets both the {@link #getAltQuoteStart() alt-quote-start} and {@link #getAltQuoteEnd() alt-quote-end}
+   * character.
+   *
    * @param altQuote the alt-quote character to set.
    */
   public void setAltQuote(char altQuote) {
@@ -183,10 +185,11 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * <b>ATTENTION:</b><br>
    * You need to override this method if you want to {@link #setEntityStart(char) use} entities.
    */
+  @Override
   public String resolveEntity(String entity) {
 
     throw new UnsupportedOperationException();

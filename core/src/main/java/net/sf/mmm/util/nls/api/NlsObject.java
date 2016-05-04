@@ -3,10 +3,10 @@
 package net.sf.mmm.util.nls.api;
 
 /**
- * This is the interface for an object with native language support. Such object be can
- * {@link #toNlsMessage() converted} to an {@link NlsMessage i18n-message} describing the object analog to its
- * {@link Object#toString() string representation}.
- * 
+ * This is the interface for an object with native language support. Such object be can {@link #toNlsMessage()
+ * converted} to an {@link NlsMessage i18n-message} describing the object analog to its {@link Object#toString() string
+ * representation}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -101,42 +101,42 @@ public interface NlsObject {
 
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
-   * 
+   *
    * @since 2.0.1
    */
   String KEY_ERROR = "error";
 
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
-   * 
+   *
    * @since 3.0.0
    */
   String KEY_USER = "user";
 
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
-   * 
+   *
    * @since 3.0.0
    */
   String KEY_EXISTING = "existing";
 
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
-   * 
+   *
    * @since 3.0.0
    */
   String KEY_EXPECTED = "expected";
 
   /**
    * Key for the {@link NlsMessage#getArgument(String) argument} {@value}.
-   * 
+   *
    * @since 3.0.0
    */
   String KEY_CONTAINER = "container";
 
   /**
    * This method is the equivalent to {@link Object#toString()} with native language support.
-   * 
+   *
    * @return an nls message representing this object.
    */
   NlsMessage toNlsMessage();

@@ -12,8 +12,7 @@ import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsMessage} for composing other objects or
- * messages.
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsMessage} for composing other objects or messages.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
@@ -22,7 +21,7 @@ public class ComposedNlsMessage extends AbstractNlsMessage {
 
   private static final long serialVersionUID = 1L;
 
-  private  Object[] arguments;
+  private Object[] arguments;
 
   /**
    * The constructor for de-serialization in GWT.

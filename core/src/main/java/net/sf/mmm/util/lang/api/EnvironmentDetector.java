@@ -74,10 +74,9 @@ public interface EnvironmentDetector {
   boolean isProductionEnvironment();
 
   /**
-   * @return {@code true} if the {@link #getEnvironmentType() environment type} is
-   *         {@link #ENVIRONMENT_TYPE_PRODUCTION} or close to production such as
-   *         {@link #ENVIRONMENT_TYPE_PRE_PRODUCTION}, {@link #ENVIRONMENT_TYPE_ACCEPTANCE}, or
-   *         {@link #ENVIRONMENT_TYPE_STAGING}.
+   * @return {@code true} if the {@link #getEnvironmentType() environment type} is {@link #ENVIRONMENT_TYPE_PRODUCTION}
+   *         or close to production such as {@link #ENVIRONMENT_TYPE_PRE_PRODUCTION},
+   *         {@link #ENVIRONMENT_TYPE_ACCEPTANCE}, or {@link #ENVIRONMENT_TYPE_STAGING}.
    */
   boolean isEnvironmentCloseToProduction();
 

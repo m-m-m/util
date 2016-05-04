@@ -10,19 +10,17 @@ import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.pattern.base.GlobPatternCompiler;
 
 /**
- * This is the implementation of a {@link FileFilter} that filters using a {@link java.util.regex.Pattern
- * pattern}.
- * 
+ * This is the implementation of a {@link FileFilter} that filters using a {@link java.util.regex.Pattern pattern}.
+ *
  * @see net.sf.mmm.util.pattern.api.PatternCompiler
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 public class PatternFileFilter implements FileFilter {
 
   /**
-   * the pattern that must match in order to {@link #accept(File) accept} a file by its {@link File#getName()
-   * name}.
+   * the pattern that must match in order to {@link #accept(File) accept} a file by its {@link File#getName() name}.
    */
   private final Pattern pattern;
 
@@ -33,9 +31,9 @@ public class PatternFileFilter implements FileFilter {
 
   /**
    * The constructor.
-   * 
-   * @param filenamePattern is the pattern that must match in order to {@link #accept(File) accept} a file by
-   *        its {@link File#getName() name}.
+   *
+   * @param filenamePattern is the pattern that must match in order to {@link #accept(File) accept} a file by its
+   *        {@link File#getName() name}.
    */
   public PatternFileFilter(Pattern filenamePattern) {
 
@@ -44,11 +42,10 @@ public class PatternFileFilter implements FileFilter {
 
   /**
    * The constructor.
-   * 
+   *
    * @param filenamePattern is the {@link GlobPatternCompiler glob-pattern} that must match in order to
    *        {@link #accept(File) accept} a file by its {@link File#getName() name}.
-   * @param type the type of the {@link #accept(File) acceptable} files or {@code null} if any type is
-   *        acceptable.
+   * @param type the type of the {@link #accept(File) acceptable} files or {@code null} if any type is acceptable.
    */
   public PatternFileFilter(String filenamePattern, FileType type) {
 
@@ -57,11 +54,10 @@ public class PatternFileFilter implements FileFilter {
 
   /**
    * The constructor.
-   * 
-   * @param filenamePattern is the pattern that must match in order to {@link #accept(File) accept} a file by
-   *        its {@link File#getName() name}.
-   * @param type the type of the {@link #accept(File) acceptable} files or {@code null} if any type is
-   *        acceptable.
+   *
+   * @param filenamePattern is the pattern that must match in order to {@link #accept(File) accept} a file by its
+   *        {@link File#getName() name}.
+   * @param type the type of the {@link #accept(File) acceptable} files or {@code null} if any type is acceptable.
    */
   public PatternFileFilter(Pattern filenamePattern, FileType type) {
 

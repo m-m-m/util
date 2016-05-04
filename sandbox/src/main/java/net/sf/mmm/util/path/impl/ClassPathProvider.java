@@ -13,8 +13,8 @@ import net.sf.mmm.util.path.api.PathProvider;
 import net.sf.mmm.util.path.api.PathUri;
 
 /**
- * This is the implementation of {@link PathProvider} for the {@link PathUri#SCHEME_PREFIX_CLASSPATH
- * classpath} {@link PathUri#getSchemePrefix() scheme}.
+ * This is the implementation of {@link PathProvider} for the {@link PathUri#SCHEME_PREFIX_CLASSPATH classpath}
+ * {@link PathUri#getSchemePrefix() scheme}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

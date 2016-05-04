@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlValue;
 
 /**
  * This class represents a simple {@link java.util.Properties#getProperty(String) property} as JAXB bean.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -34,7 +34,7 @@ public class Property {
 
   /**
    * The constructor.
-   * 
+   *
    * @param key is the {@link #getKey() key}.
    * @param value is the {@link #getValue() value}.
    */
@@ -47,7 +47,7 @@ public class Property {
 
   /**
    * This method gets the {@link String}.
-   * 
+   *
    * @return the {@link String}.
    */
   public String getKey() {
@@ -65,7 +65,7 @@ public class Property {
 
   /**
    * This method gets the {@link String}.
-   * 
+   *
    * @return the {@link String}.
    */
   public String getValue() {

@@ -6,32 +6,33 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.junit.Assert;
+
 import net.sf.mmm.util.lang.api.Message;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
 
-import org.junit.Assert;
-
 /**
  * This is the test-case for {@link ValueValidator}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractValidatorTest extends Assert {
 
   /**
    * This method verifies a negative {@link ValueValidator#validate(Object, Object) validation}.
-   * 
+   *
    * @param <V> is the generic type of the {@code value}.
-   * 
+   *
    * @param validator is the {@link ValueValidator} to test.
    * @param value is the value expected to be invalid.
-   * @param i18nMessage is the expected {@link ValidationFailure#getMessage(java.util.Locale) message for the
-   *        root locale}.
+   * @param i18nMessage is the expected {@link ValidationFailure#getMessage(java.util.Locale) message for the root
+   *        locale}.
    * @return the {@link ValidationFailure} for additional asserts.
    */
-  protected <V> ValidationFailure verifyNegativeValidation(ValueValidator<V> validator, V value, String i18nMessage) {
+  protected <V> ValidationFailure verifyNegativeValidation(ValueValidator<V> validator, V value,
+      String i18nMessage) {
 
     assertNotNull(validator);
     String source = "myMagicSource";
@@ -46,9 +47,9 @@ public abstract class AbstractValidatorTest extends Assert {
 
   /**
    * This method verifies a positive {@link ValueValidator#validate(Object, Object) validation}.
-   * 
+   *
    * @param <V> is the generic type of the {@code value}.
-   * 
+   *
    * @param validator is the {@link ValueValidator} to test.
    * @param value is the value expected to be invalid.
    */

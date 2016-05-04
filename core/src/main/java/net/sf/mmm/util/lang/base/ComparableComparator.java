@@ -17,7 +17,7 @@ import java.util.Comparator;
 @SuppressWarnings("rawtypes")
 public class ComparableComparator<T extends Comparable> implements Comparator<T> {
 
-  private  static final ComparableComparator INSTANCE = new ComparableComparator();
+  private static final ComparableComparator INSTANCE = new ComparableComparator();
 
   /**
    * The constructor.

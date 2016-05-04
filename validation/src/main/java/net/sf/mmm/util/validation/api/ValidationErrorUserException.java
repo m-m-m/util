@@ -38,7 +38,7 @@ public class ValidationErrorUserException extends NlsRuntimeException {
 
   private static final long serialVersionUID = 1L;
 
-  private  Set<ConstraintViolation<?>> constraintViolations;
+  private Set<ConstraintViolation<?>> constraintViolations;
 
   /**
    * The constructor for de-serialization in GWT.

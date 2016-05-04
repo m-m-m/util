@@ -10,24 +10,23 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
  * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} that acts as proxy to a
  * {@link #getDelegate() delegate} allowing to add new ways to access a property. <br>
  * E.g. if the {@link #getDelegate() delegate} is a
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter} that returns
- * an array or a {@link java.util.List} then this adapter may expose it as
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED
- * indexed getter} or
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE size} accessor.
- * 
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET getter} that returns an array
+ * or a {@link java.util.List} then this adapter may expose it as
+ * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED indexed getter}
+ * or {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode#GET_SIZE size} accessor.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 public abstract class AbstractPojoPropertyAccessorProxyAdapter extends AbstractPojoPropertyAccessorProxy {
 
-  private  final PojoPropertyAccessorNonArg containerGetAccessor;
+  private final PojoPropertyAccessorNonArg containerGetAccessor;
 
-  private  final PojoDescriptorDependencies dependencies;
+  private final PojoDescriptorDependencies dependencies;
 
   /**
    * The constructor.
-   * 
+   *
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array, map or collection property.
    */

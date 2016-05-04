@@ -3,11 +3,11 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} represents the <em>chroma</em> of a {@link Color}. The chroma is a {@link Factor
- * factor} indicating the colorfulness relative to the brightness of a similarly illuminated white.
- * 
+ * This {@link Segment} represents the <em>chroma</em> of a {@link Color}. The chroma is a {@link Factor factor}
+ * indicating the colorfulness relative to the brightness of a similarly illuminated white.
+ *
  * @see GenericColor#getChroma()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -25,7 +25,7 @@ public class Chroma extends Factor<Chroma> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Chroma(Double value) {
@@ -35,7 +35,7 @@ public class Chroma extends Factor<Chroma> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Chroma(double value) {
@@ -45,7 +45,7 @@ public class Chroma extends Factor<Chroma> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param byteValue is the {@link #getValueAsByte() value given as byte}.
    */
   public Chroma(int byteValue) {
@@ -55,7 +55,7 @@ public class Chroma extends Factor<Chroma> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */

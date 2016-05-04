@@ -13,6 +13,9 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -21,14 +24,10 @@ import net.sf.mmm.util.xml.api.XmlUtil;
 import net.sf.mmm.util.xml.base.StreamReaderProxy;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * This is an implementation of the {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader}
- * adding support for XInclude. <br>
- * For details about XInclude see: <a
- * href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>. <br>
+ * This is an implementation of the {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader} adding
+ * support for XInclude. <br>
+ * For details about XInclude see: <a href="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</a>. <br>
  * <b>ATTENTION:</b><br>
  * Please note that currently only plain XML inclusion is currently supported and no XPointer.
  *
@@ -67,8 +66,8 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   private String includeText;
 
   /**
-   * The current depth in the XML tree relative to the first "include" tag of the XInclude namespace that is
-   * currently active. Will be {@code 0} if we are outside of an XInclude.
+   * The current depth in the XML tree relative to the first "include" tag of the XInclude namespace that is currently
+   * active. Will be {@code 0} if we are outside of an XInclude.
    */
   private int depth;
 
@@ -80,8 +79,8 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   /**
    * The constructor.
    *
-   * @param factory is the {@link XMLInputFactory} required to create new {@link XMLStreamReader} instances
-   *        for includes.
+   * @param factory is the {@link XMLInputFactory} required to create new {@link XMLStreamReader} instances for
+   *        includes.
    * @param resource is the {@link DataResource} pointing to the XML content.
    */
   public XIncludeStreamReader(XMLInputFactory factory, DataResource resource) {
@@ -124,12 +123,11 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   /**
    * This method detects if a recursive inclusion takes place. <br>
    *
-   * TODO: Potentially the same resource could cause an inclusion cycle without causing an infinity loop by
-   * using different XPointer expressions.
+   * TODO: Potentially the same resource could cause an inclusion cycle without causing an infinity loop by using
+   * different XPointer expressions.
    *
    * @param dataResource is the current data-resource to include.
-   * @throws XMLStreamException if the given {@code dataResource} has already been included causing an
-   *         infinity loop.
+   * @throws XMLStreamException if the given {@code dataResource} has already been included causing an infinity loop.
    */
   protected void detectRecursiveInclusion(DataResource dataResource) throws XMLStreamException {
 
@@ -150,14 +148,13 @@ public class XIncludeStreamReader extends StreamReaderProxy {
    *
    * <b>ATTENTION:</b><br>
    * This method violates the StAX API and closes the underlying input stream!<br>
-   * The StAX API has a bad design mistake about the {@link #close()} method NOT to close the underlying input
-   * stream. Besides the {@link XMLStreamReader} the user also has to manage the input stream what will lead
-   * in additional programming mistakes ending up with open file-handles. Since many {@link XMLStreamReader}
-   * implementations have an empty body for this method developers, may tend to take it NOT as serious as e.g.
-   * {@link InputStream#close()}. Since this implementation has to open new streams behind the scenes the only
-   * senseful implementation of this method is to close the underlying stream (and recursively closing all
-   * included streams). You have to ensure this reader is safely closed via this method so remaining open
-   * streams are closed.
+   * The StAX API has a bad design mistake about the {@link #close()} method NOT to close the underlying input stream.
+   * Besides the {@link XMLStreamReader} the user also has to manage the input stream what will lead in additional
+   * programming mistakes ending up with open file-handles. Since many {@link XMLStreamReader} implementations have an
+   * empty body for this method developers, may tend to take it NOT as serious as e.g. {@link InputStream#close()}.
+   * Since this implementation has to open new streams behind the scenes the only senseful implementation of this method
+   * is to close the underlying stream (and recursively closing all included streams). You have to ensure this reader is
+   * safely closed via this method so remaining open streams are closed.
    */
   @Override
   public void close() throws XMLStreamException {
@@ -180,8 +177,8 @@ public class XIncludeStreamReader extends StreamReaderProxy {
   }
 
   /**
-   * This method is called when an include tag of the XInclude namespace was started. It resolves the include
-   * and finds a fallback on failure.
+   * This method is called when an include tag of the XInclude namespace was started. It resolves the include and finds
+   * a fallback on failure.
    *
    * @return the next event type.
    * @throws XMLStreamException if the XML stream processing caused an error.

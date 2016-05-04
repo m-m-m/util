@@ -52,7 +52,8 @@ public class ErrorMessage extends AbstractErrorMessage {
    * @param technical - {@code true} in case of {@link NlsThrowable#isTechnical() technical error} with
    *        {@link #TYPE_TECHNICAL_ERROR}, {@code false} otherwise (business error).
    */
-  public ErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details, boolean technical) {
+  public ErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details,
+      boolean technical) {
 
     super(code, source, message, uuid, details, technical);
   }

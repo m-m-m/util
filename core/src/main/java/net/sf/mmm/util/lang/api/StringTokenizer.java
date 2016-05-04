@@ -13,8 +13,8 @@ import net.sf.mmm.util.exception.api.NlsParseException;
  * {@link #next() returns} an empty {@link String} if a duplicate delimiter is detected. Further it implements
  * {@link Iterable} and can be used in enhanced for-loops. <br>
  * <b>ATTENTION:</b><br>
- * Returning an empty {@link String} also for duplicated delimited might NOT always be desired (especially
- * when delimiter is whitespace).
+ * Returning an empty {@link String} also for duplicated delimited might NOT always be desired (especially when
+ * delimiter is whitespace).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -68,15 +68,13 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    * will return "foo,{[bar,thing]}".
    *
    * @param string is the string to be tokenized.
-   * @param escapeStart is the string used to start escaping of a token. The string has to be free of
-   *        {@code delimiters}.
-   * @param escapeEnd is the string used to end escaping of a token. The string has to be free of
-   *        {@code delimiters}.
+   * @param escapeStart is the string used to start escaping of a token. The string has to be free of {@code delimiters}
+   *        .
+   * @param escapeEnd is the string used to end escaping of a token. The string has to be free of {@code delimiters}.
    * @param delimiters are the characters that will be detected as delimiters.
-   * @throws NlsIllegalArgumentException if {@code escapeStart} or {@code escapeEnd} is an empty
-   *         string or contains a character of {@code delimiters}, or one of them is {@code null}
-   *         while the other is not, or both are not {@code null} but {@link Object#equals(Object) equal}
-   *         to each other.
+   * @throws NlsIllegalArgumentException if {@code escapeStart} or {@code escapeEnd} is an empty string or contains a
+   *         character of {@code delimiters}, or one of them is {@code null} while the other is not, or both are not
+   *         {@code null} but {@link Object#equals(Object) equal} to each other.
    *
    * @since 2.0.0
    */
@@ -92,15 +90,14 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    * @see #StringTokenizer(String, String, String, char...)
    *
    * @param string is the string to be tokenized.
-   * @param escapeStart is the string used to start escaping of a token. May NOT be the empty string. The
-   *        string has to be free of {@code delimiters}.
-   * @param escapeEnd is the string used to end escaping of a token. May NOT be the empty string.The string
-   *        has to be free of {@code delimiters}.
+   * @param escapeStart is the string used to start escaping of a token. May NOT be the empty string. The string has to
+   *        be free of {@code delimiters}.
+   * @param escapeEnd is the string used to end escaping of a token. May NOT be the empty string.The string has to be
+   *        free of {@code delimiters}.
    * @param delimiters are the characters that will be detected as delimiters.
-   * @throws NlsIllegalArgumentException if {@code escapeStart} or {@code escapeEnd} is an empty
-   *         string or contains a character of {@code delimiters}, or one of them is {@code null}
-   *         while the other is not, or both are not {@code null} but {@link Object#equals(Object) equal}
-   *         to each other.
+   * @throws NlsIllegalArgumentException if {@code escapeStart} or {@code escapeEnd} is an empty string or contains a
+   *         character of {@code delimiters}, or one of them is {@code null} while the other is not, or both are not
+   *         {@code null} but {@link Object#equals(Object) equal} to each other.
    *
    * @since 2.0.0
    */
@@ -151,13 +148,11 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   }
 
   /**
-   * This method checks that the given {@code escape} sequence does NOT contain any of the
-   * {@code delimiters}.
+   * This method checks that the given {@code escape} sequence does NOT contain any of the {@code delimiters}.
    *
    * @param escape is the escape-sequence to check.
    * @param delimiters are the delimiters that should NOT be contained in {@code escape}.
-   * @return {@code true} if {@code escape} contains a character of {@code delimiters},
-   *         {@code false} otherwise.
+   * @return {@code true} if {@code escape} contains a character of {@code delimiters}, {@code false} otherwise.
    */
   private static boolean containsDelimiter(char[] escape, char[] delimiters) {
 
@@ -232,8 +227,8 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
           }
         }
         if (!isDelimiter) {
-          throw new NlsParseException(new String(this.string, rawStart, this.index + 1 - rawStart), new String(
-              this.escapeEnd) + this.delimiters[0], "token");
+          throw new NlsParseException(new String(this.string, rawStart, this.index + 1 - rawStart),
+              new String(this.escapeEnd) + this.delimiters[0], "token");
         }
       }
     } else {
@@ -258,8 +253,8 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
   }
 
   /**
-   * This method tests if the string to tokenize contains the given {@code substring} starting at the
-   * given {@code index}.
+   * This method tests if the string to tokenize contains the given {@code substring} starting at the given
+   * {@code index}.
    *
    * @param substring is the substring to check for.
    * @param startIndex is the start index in the string to tokenize.

@@ -46,9 +46,9 @@ public interface PojoUtil {
    * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed {@link Object}s. If an
    *        {@link Object} is not {@link Filter#accept(Object) accepted} by this {@link Filter} the recursion stops at
    *        this point.
-   * @param loopProtection - {@code true} to collect all visited {@link Object}s in a {@link Set} in order to
-   *        prevent infinity loops, {@code false} otherwise (to save performance if no loops are possible for the
-   *        given {@link Object}).
+   * @param loopProtection - {@code true} to collect all visited {@link Object}s in a {@link Set} in order to prevent
+   *        infinity loops, {@code false} otherwise (to save performance if no loops are possible for the given
+   *        {@link Object}).
    */
   void visitObjectRecursive(Object object, Filter<Object> visitor, boolean loopProtection);
 

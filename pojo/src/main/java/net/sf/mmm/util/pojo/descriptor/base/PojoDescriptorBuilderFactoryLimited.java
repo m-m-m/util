@@ -7,9 +7,9 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory} for
- * a limited environment (GWT).
- * 
+ * This is the implementation of {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory} for a limited
+ * environment (GWT).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */

@@ -36,11 +36,11 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
 @Named(PojoUtil.CDI_NAME)
 public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil {
 
-  private  static PojoUtil instance;
+  private static PojoUtil instance;
 
-  private  PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
+  private PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory;
 
-  private  PojoDescriptorBuilder pojoDescriptorBuilder;
+  private PojoDescriptorBuilder pojoDescriptorBuilder;
 
   /**
    * The constructor.

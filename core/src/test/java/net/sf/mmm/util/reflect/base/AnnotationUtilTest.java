@@ -15,16 +15,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
 
+import junit.framework.TestCase;
 import net.sf.mmm.util.reflect.api.AnnotationUtil;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
  * This is the {@link TestCase} for the class {@link AnnotationUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -59,7 +58,7 @@ public class AnnotationUtilTest {
     MyAnnotation classAnnotation = util.getClassAnnotation(Bar.class, MyAnnotation.class);
     assertNotNull(classAnnotation);
     assertEquals(FOO_CLASS, classAnnotation.value());
-    Method barMethod = Bar.class.getMethod("foo", ReflectionUtil.NO_PARAMETERS);
+    Method barMethod = Bar.class.getMethod("foo", ReflectionUtilLimited.NO_PARAMETERS);
     MyAnnotation methodAnnotation = util.getMethodAnnotation(barMethod, MyAnnotation.class);
     assertNotNull(methodAnnotation);
     assertEquals(FOO_IF, methodAnnotation.value());
@@ -100,10 +99,12 @@ public class AnnotationUtilTest {
   @MyAnnotation(FOO_CLASS)
   private static class Foo implements BarIF, Comparable<Foo> {
 
+    @Override
     public void foo() {
 
     }
 
+    @Override
     public int compareTo(Foo o) {
 
       return 0;
@@ -113,6 +114,7 @@ public class AnnotationUtilTest {
 
   private static class Bar extends Foo {
 
+    @Override
     public void foo() {
 
     }

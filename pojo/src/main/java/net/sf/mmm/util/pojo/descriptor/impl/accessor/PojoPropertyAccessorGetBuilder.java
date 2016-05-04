@@ -19,7 +19,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorNonArgB
 /**
  * This is the implementation of the {@link PojoPropertyAccessorNonArgBuilder} interface for
  * {@link PojoPropertyAccessorNonArgMode#GET getter-access}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */

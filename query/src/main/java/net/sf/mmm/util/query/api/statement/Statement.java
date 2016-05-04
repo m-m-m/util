@@ -47,6 +47,7 @@ public abstract interface Statement<E, SELF extends Statement<E, SELF>> extends 
    *         operation such as {@link SelectStatement#fetch()} will complete the statement. Has to be rebuild after
    *         every modification to the {@link Statement}.
    */
+  @Override
   String getSql();
 
   /**

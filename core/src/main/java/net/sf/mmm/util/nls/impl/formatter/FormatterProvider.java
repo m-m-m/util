@@ -21,9 +21,9 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 
 /**
  * This class provides {@link Formatter}s for various types. It contains the formatting logic for various
- * implementations of {@link net.sf.mmm.util.nls.base.SimpleNlsFormatter}. This way it is easier to maintain
- * GWT compatibility by replacing this class.
- * 
+ * implementations of {@link net.sf.mmm.util.nls.base.SimpleNlsFormatter}. This way it is easier to maintain GWT
+ * compatibility by replacing this class.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -38,9 +38,9 @@ public final class FormatterProvider {
   }
 
   /**
-   * This method converts the given {@link net.sf.mmm.util.nls.api.NlsFormatterPlugin#getStyle() style} to the
-   * according {@link DateFormat}-style constant.
-   * 
+   * This method converts the given {@link net.sf.mmm.util.nls.api.NlsFormatterPlugin#getStyle() style} to the according
+   * {@link DateFormat}-style constant.
+   *
    * @param style is the {@link net.sf.mmm.util.nls.api.NlsFormatterPlugin#getStyle() style} to convert.
    * @return the according {@link DateFormat}-style constant (e.g. {@link DateFormat#MEDIUM}).
    */
@@ -171,7 +171,7 @@ public final class FormatterProvider {
 
     /**
      * The constructor.
-     * 
+     *
      * @param locale is the {@link Locale} to use.
      * @param iso8601Util is the {@link Iso8601Util}.
      * @param type is the {@link net.sf.mmm.util.nls.api.NlsFormatterPlugin#getType() type}.
@@ -185,7 +185,7 @@ public final class FormatterProvider {
     }
 
     /**
-     * 
+     *
      * @param object is the value to format that should be converted to {@link Calendar}.
      * @return the {@link Calendar}.
      */
@@ -207,7 +207,8 @@ public final class FormatterProvider {
       return calendar;
     }
 
-    @Override    protected void doFormat(Object value, Appendable buffer) throws IOException {
+    @Override
+    protected void doFormat(Object value, Appendable buffer) throws IOException {
 
       Calendar calendar = convertObject(value);
       if (calendar == null) {
@@ -233,11 +234,11 @@ public final class FormatterProvider {
    */
   private static class FormatFormatter extends AbstractFormatter<Object> {
 
-    private  final Format format;
+    private final Format format;
 
     /**
      * The constructor.
-     * 
+     *
      * @param format is the {@link Format} to adapt.
      */
     public FormatFormatter(Format format) {
@@ -246,7 +247,8 @@ public final class FormatterProvider {
       this.format = format;
     }
 
-    @Override    protected void doFormat(Object value, Appendable buffer) throws IOException {
+    @Override
+    protected void doFormat(Object value, Appendable buffer) throws IOException {
 
       buffer.append(this.format.format(value));
     }

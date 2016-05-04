@@ -20,6 +20,7 @@ public class HashMapFactory extends AbstractMapFactory {
   @SuppressWarnings("rawtypes")
   public static final MapFactory<Map> INSTANCE = new HashMapFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<HashMap> getMapImplementation() {
 

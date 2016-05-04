@@ -6,9 +6,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * This is the {@link JavaScriptObject} representing a {@code CssStyleDeclaration}.
- * 
+ *
  * @see JavaScriptUtil#getComputedStyle(com.google.gwt.dom.client.Element)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -128,19 +128,18 @@ public class JsCssStyleDeclaration extends JavaScriptObject {
     super();
   }
 
-  //formatter:off
+  // formatter:off
 
   /**
    * This method gets the value of the given {@code property}.
    *
-   * @param property is the name of the property to get. E.g.
-   * {@link #STYLE_WIDTH} or {@link #STYLE_BACKGROUND_COLOR}.
+   * @param property is the name of the property to get. E.g. {@link #STYLE_WIDTH} or {@link #STYLE_BACKGROUND_COLOR}.
    * @return the value of the style property. Will be {@code null} if the property does not exist.
    */
   public final native String getPropertyValue(String property) /*-{
-    return this.getPropertyValue(property);
-  }-*/;
+                                                               return this.getPropertyValue(property);
+                                                               }-*/;
 
-  //formatter:on
+  // formatter:on
 
 }

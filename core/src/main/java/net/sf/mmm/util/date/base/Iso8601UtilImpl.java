@@ -29,7 +29,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 @Named(Iso8601Util.CDI_NAME)
 public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso8601Util {
 
-  private  static Iso8601UtilImpl instance;
+  private static Iso8601UtilImpl instance;
 
   /** The ID for UTC (Coordinated Universal Time). */
   private static final String UTC_ID = "UTC";
@@ -121,7 +121,8 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   }
 
   @Override
-  public String formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone) {
+  public String formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime,
+      boolean extendedTimezone) {
 
     // "yyyy-MM-ddTHH:mm:ss+hh:ss".length() == 25
     StringBuilder buffer = new StringBuilder(25);
@@ -130,8 +131,8 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   }
 
   @Override
-  public void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone,
-      Appendable buffer) {
+  public void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime,
+      boolean extendedTimezone, Appendable buffer) {
 
     try {
       formatDate(calendar, extendedDate, buffer);

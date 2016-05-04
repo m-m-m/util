@@ -20,7 +20,7 @@ public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefi
 
   private static final long serialVersionUID = 5984869515955299731L;
 
-  private  Formatter<TYPE> formatter;
+  private Formatter<TYPE> formatter;
 
   /**
    * The constructor.
@@ -72,9 +72,8 @@ public abstract class AbstractEnumDefinition<TYPE, CATEGORY> implements EnumDefi
   }
 
   /**
-   * @return the {@link List} of the {@link Class#getEnumConstants() enum values} or {@code null} if the
-   *         values are NOT static and have to be loaded asynchronous via
-   *         {@link net.sf.mmm.util.lang.api.EnumProvider}.
+   * @return the {@link List} of the {@link Class#getEnumConstants() enum values} or {@code null} if the values are NOT
+   *         static and have to be loaded asynchronous via {@link net.sf.mmm.util.lang.api.EnumProvider}.
    */
   public List<TYPE> getEnumValues() {
 

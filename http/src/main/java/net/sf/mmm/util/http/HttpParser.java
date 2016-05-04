@@ -11,7 +11,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
  * This is a utility class used to parse {@link HttpMessage HTTP-messages}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public final class HttpParser {
@@ -22,15 +22,16 @@ public final class HttpParser {
   /** char-filter for a token as defined by the HTTP specification */
   private static final CharFilter TOKEN_FILTER = new CharFilter() {
 
+    @Override
     public boolean accept(char c) {
 
       if ((c < 31) || (c == 127)) {
         // no CTL
         return false;
       }
-      if ((c == '(') || (c == ')') || (c == '>') || (c == '>') || (c == '@') || (c == ',') || (c == ';') || (c == ':')
-          || (c == '\\') || (c == '"') || (c == '/') || (c == '[') || (c == ']') || (c == '?') || (c == '=')
-          || (c == '{') || (c == '}') || (c == ' ')) {
+      if ((c == '(') || (c == ')') || (c == '>') || (c == '>') || (c == '@') || (c == ',') || (c == ';')
+          || (c == ':') || (c == '\\') || (c == '"') || (c == '/') || (c == '[') || (c == ']') || (c == '?')
+          || (c == '=') || (c == '{') || (c == '}') || (c == ' ')) {
         // no tspecials (HT already covered by CTL)
         return false;
       }
@@ -48,10 +49,10 @@ public final class HttpParser {
   }
 
   /**
-   * This method parses a single line of an HTTP header from the given {@code stream}. It (re)uses the
-   * given {@code buffer} to cache bytes while reading. To convert the read bytes to a string the given
-   * {@code charset} is used.
-   * 
+   * This method parses a single line of an HTTP header from the given {@code stream}. It (re)uses the given
+   * {@code buffer} to cache bytes while reading. To convert the read bytes to a string the given {@code charset} is
+   * used.
+   *
    * @param stream is the input stream to read from.
    * @param buffer is where the bytes can be cached.
    * @param charset is used to convert the bytes to a string.
@@ -93,13 +94,12 @@ public final class HttpParser {
   }
 
   /**
-   * This method parses the HTTP header properties from the given {@code stream}. This method should be
-   * called after the first line has been read and an HTTP-version greator or equal to "1.0" has been
-   * detected.
-   * 
+   * This method parses the HTTP header properties from the given {@code stream}. This method should be called after the
+   * first line has been read and an HTTP-version greator or equal to "1.0" has been detected.
+   *
    * @param stream is the stream to read from.
-   * @param message is the HTTP-message where to {@link HttpMessage#setHeaderProperty(String, String) set} the
-   *        parsed properties.
+   * @param message is the HTTP-message where to {@link HttpMessage#setHeaderProperty(String, String) set} the parsed
+   *        properties.
    * @param charset is the charset used to parse the properties.
    * @param buffer is a buffer used to cache bytes.
    * @throws IOException if the operation failes with an I/O problem.
@@ -133,12 +133,12 @@ public final class HttpParser {
   }
 
   /**
-   * This method parses the HTTP-header from the given {@code stream} and applies all information to the
-   * given {@code request}. After this method has been called, the given {@code stream} is pointing
-   * to the beginning of the HTTP-body (or EOF if empty). <br>
-   * 
-   * @param stream is the input-stream to read the header from. Only the header is read so the stream is NOT
-   *        closed by this method.
+   * This method parses the HTTP-header from the given {@code stream} and applies all information to the given
+   * {@code request}. After this method has been called, the given {@code stream} is pointing to the beginning of the
+   * HTTP-body (or EOF if empty). <br>
+   *
+   * @param stream is the input-stream to read the header from. Only the header is read so the stream is NOT closed by
+   *        this method.
    * @param request is where to apply the parsed information to. Simply supply a new instance.
    * @throws IOException if the operation failes with an I/O problem.
    */
@@ -148,12 +148,12 @@ public final class HttpParser {
   }
 
   /**
-   * This method parses the HTTP-header from the given {@code stream} and applies all information to the
-   * given {@code request}. After this method has been called, the given {@code stream} is pointing
-   * to the beginning of the HTTP-body (or EOF if empty). <br>
-   * 
-   * @param stream is the input-stream to read the header from. Only the header is read so the stream is NOT
-   *        closed by this method.
+   * This method parses the HTTP-header from the given {@code stream} and applies all information to the given
+   * {@code request}. After this method has been called, the given {@code stream} is pointing to the beginning of the
+   * HTTP-body (or EOF if empty). <br>
+   *
+   * @param stream is the input-stream to read the header from. Only the header is read so the stream is NOT closed by
+   *        this method.
    * @param request is where to apply the parsed information to. Simply supply a new instance.
    * @param charset is the charset used to convert the read bytes to strings.
    * @throws IOException if the operation failes with an I/O problem.

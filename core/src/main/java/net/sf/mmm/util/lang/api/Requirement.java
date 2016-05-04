@@ -8,14 +8,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to associate code with requirements. A requirement is a specific need a system has
- * to fulfill. Typically the implementation of a requirement contains aspects in different layers of the
- * application and is not directly reflected by grouping units such as modules or java packages. Therefore
- * this annotation may be used to identify which code belongs to a particular requirement. Therefore you
- * should define a class, interface, or enum with string constants for the names of your requirements. The
- * javadoc of these constants shall provide further documentation of the requirement like the detailed
- * description or links to further documentation.
- * 
+ * This annotation is used to associate code with requirements. A requirement is a specific need a system has to
+ * fulfill. Typically the implementation of a requirement contains aspects in different layers of the application and is
+ * not directly reflected by grouping units such as modules or java packages. Therefore this annotation may be used to
+ * identify which code belongs to a particular requirement. Therefore you should define a class, interface, or enum with
+ * string constants for the names of your requirements. The javadoc of these constants shall provide further
+ * documentation of the requirement like the detailed description or links to further documentation.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

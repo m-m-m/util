@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.api.NlsObject;
 
 /**
  * This enum contains all possible directions.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -95,13 +95,13 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
     }
   };
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.
-   * 
+   *
    * @param value - see {@link #getValue()}.
    * @param title - see {@link #toString()}.
    */
@@ -132,8 +132,8 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if pointing to the east ({@link #EAST}, {@link #SOUTH_EAST}, or
-   *         {@link #NORTH_EAST}), {@code false} otherwise.
+   * @return {@code true} if pointing to the east ({@link #EAST}, {@link #SOUTH_EAST}, or {@link #NORTH_EAST}),
+   *         {@code false} otherwise.
    */
   public boolean isToEast() {
 
@@ -141,8 +141,8 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if pointing to the west ({@link #WEST}, {@link #SOUTH_WEST}, or
-   *         {@link #NORTH_WEST}), {@code false} otherwise.
+   * @return {@code true} if pointing to the west ({@link #WEST}, {@link #SOUTH_WEST}, or {@link #NORTH_WEST}),
+   *         {@code false} otherwise.
    */
   public boolean isToWest() {
 
@@ -150,8 +150,8 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if pointing to the south ({@link #SOUTH}, {@link #SOUTH_EAST}, or
-   *         {@link #SOUTH_WEST}), {@code false} otherwise.
+   * @return {@code true} if pointing to the south ({@link #SOUTH}, {@link #SOUTH_EAST}, or {@link #SOUTH_WEST}),
+   *         {@code false} otherwise.
    */
   public boolean isToSouth() {
 
@@ -159,8 +159,8 @@ public enum Direction implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if pointing to the north ({@link #NORTH}, {@link #NORTH_EAST}, or
-   *         {@link #NORTH_WEST}), {@code false} otherwise.
+   * @return {@code true} if pointing to the north ({@link #NORTH}, {@link #NORTH_EAST}, or {@link #NORTH_WEST}),
+   *         {@code false} otherwise.
    */
   public boolean isToNorth() {
 

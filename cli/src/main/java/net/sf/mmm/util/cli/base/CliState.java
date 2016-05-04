@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliArgumentReferenceMissingException;
 import net.sf.mmm.util.cli.api.CliClassNoPropertyException;
@@ -41,8 +43,6 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderNone;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 
-import org.slf4j.Logger;
-
 /**
  * This is a container for the {@link #getStateClass() state-class}. It determines and holds the CLI-informations of
  * that {@link #getStateClass() state-class}. In advance to {@link CliClassContainer} it also handles the CLI specific
@@ -53,17 +53,17 @@ import org.slf4j.Logger;
  */
 public class CliState extends CliClassContainer {
 
-  private  final ReflectionUtil reflectionUtil;
+  private final ReflectionUtil reflectionUtil;
 
-  private  final AnnotationUtil annotationUtil;
+  private final AnnotationUtil annotationUtil;
 
-  private  final Map<String, CliOptionContainer> name2OptionMap;
+  private final Map<String, CliOptionContainer> name2OptionMap;
 
-  private  final List<CliOptionContainer> optionList;
+  private final List<CliOptionContainer> optionList;
 
-  private  final List<CliArgumentContainer> arguments;
+  private final List<CliArgumentContainer> arguments;
 
-  private  final ValidatorBuilder validatorBuilder;
+  private final ValidatorBuilder validatorBuilder;
 
   /**
    * The constructor.
@@ -85,10 +85,10 @@ public class CliState extends CliClassContainer {
     this.reflectionUtil = reflectionUtil;
     this.annotationUtil = annotationUtil;
     this.validatorBuilder = createValidatorBuilder();
-    boolean fieldAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory
-        .createPrivateFieldDescriptorBuilder());
-    boolean methodAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory
-        .createPublicMethodDescriptorBuilder());
+    boolean fieldAnnotationFound = findPropertyAnnotations(
+        descriptorBuilderFactory.createPrivateFieldDescriptorBuilder());
+    boolean methodAnnotationFound = findPropertyAnnotations(
+        descriptorBuilderFactory.createPublicMethodDescriptorBuilder());
     if (!fieldAnnotationFound && !methodAnnotationFound) {
       // is this really forbidden? Add handling to CliStyle?
       throw new CliClassNoPropertyException(stateClass);
@@ -214,8 +214,8 @@ public class CliState extends CliClassContainer {
    *
    * @param node is the node to initialize (link into the node-list).
    * @param argumentMap maps the {@link CliArgumentContainer#getId() id} to the according argument-node.
-   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or {@code null}
-   *         if the initialization was successful.
+   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or {@code null} if the
+   *         initialization was successful.
    * @throws NodeCycleException if a cyclic dependency was detected and completed.
    */
   protected NodeCycle<CliArgumentContainer> initializeArgumentRecursive(
@@ -478,7 +478,8 @@ public class CliState extends CliClassContainer {
     /** The singleton instance. */
     private static final CliArgumentFormatter INSTANCE = new CliArgumentFormatter();
 
-    @Override    @SuppressWarnings("all")
+    @Override
+    @SuppressWarnings("all")
     public <T extends String> T convert(CliArgumentContainer value, Object valueSource, Class<T> targetClass)
         throws ValueException {
 

@@ -5,6 +5,10 @@ package net.sf.mmm.util.text.base;
 import java.text.BreakIterator;
 import java.util.Locale;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.LineWrapper;
@@ -12,10 +16,6 @@ import net.sf.mmm.util.text.api.TextColumn;
 import net.sf.mmm.util.text.api.TextColumnInfo;
 import net.sf.mmm.util.text.api.TextColumnInfo.IndentationMode;
 import net.sf.mmm.util.text.api.TextTableInfo;
-
-import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link DefaultLineWrapper}.

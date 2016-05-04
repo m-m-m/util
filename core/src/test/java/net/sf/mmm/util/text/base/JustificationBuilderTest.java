@@ -10,7 +10,7 @@ import net.sf.mmm.util.text.api.JustificationBuilder;
 
 /**
  * This is the test-case for {@link JustificationBuilder}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
  */
@@ -18,7 +18,7 @@ public class JustificationBuilderTest {
 
   /**
    * This method gets an instance of the {@link JustificationBuilder}.
-   * 
+   *
    * @return the {@link JustificationBuilder}.
    */
   protected JustificationBuilder getJustificationBuilder() {

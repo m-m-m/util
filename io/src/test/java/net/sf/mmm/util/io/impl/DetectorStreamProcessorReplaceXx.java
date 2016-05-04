@@ -10,9 +10,9 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 import net.sf.mmm.util.io.api.spi.DetectorStreamProcessor;
 
 /**
- * This is an implementation of {@link DetectorStreamProcessor} that replaces a sequence of two ASCII 'x'
- * bytes with one ASCII 'y'.
- * 
+ * This is an implementation of {@link DetectorStreamProcessor} that replaces a sequence of two ASCII 'x' bytes with one
+ * ASCII 'y'.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */

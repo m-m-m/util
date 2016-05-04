@@ -5,11 +5,11 @@ package net.sf.mmm.util.event.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Test;
+
 import net.sf.mmm.util.event.api.EventBus;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.exception.api.GlobalExceptionHandler;
-
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link EventBus} and its implementation.

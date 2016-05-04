@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+
 import net.sf.mmm.test.TestResourceHelper;
 import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
-
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link FileUtilImpl}.
@@ -55,7 +55,8 @@ public class FileUtilTest extends Assertions {
     assertThat(util.normalizePath(homeDir + "/../someuser", '/')).isEqualTo(util.normalizePath("~someuser", '/'));
     String uncPath = "\\\\10.0.0.1\\share";
     assertThat(util.normalizePath(uncPath, '\\')).isEqualTo(uncPath);
-    assertThat(util.normalizePath("http://www.host.com/foo/bar/./test/.././..")).isEqualTo("http://www.host.com/foo");
+    assertThat(util.normalizePath("http://www.host.com/foo/bar/./test/.././.."))
+        .isEqualTo("http://www.host.com/foo");
     assertThat(util.normalizePath("../..\\foo/../bar\\.\\some", '/')).isEqualTo("../../bar/some");
   }
 
@@ -174,15 +175,15 @@ public class FileUtilTest extends Assertions {
     List<File> list = new ArrayList<File>();
     String testPath = TestResourceHelper.getTestPath() + "../java";
     // when
-    boolean hasPattern = util.collectMatchingFiles(new File(testPath), "net/sf/mmm/ut?l/**/impl/*.java", FileType.FILE,
-        list);
+    boolean hasPattern = util.collectMatchingFiles(new File(testPath), "net/sf/mmm/ut?l/**/impl/*.java",
+        FileType.FILE, list);
     // then
     assertThat(hasPattern).isTrue();
-    assertThat(list).contains(
-        create(testPath, net.sf.mmm.util.resource.impl.BrowsableResourceFactoryTest.class,
-            net.sf.mmm.util.resource.impl.BrowsableResourceFactorySpringTest.class,
-            net.sf.mmm.util.io.impl.DetectorStreamTest.class));
-    assertThat(list).doesNotContain(create(testPath, net.sf.mmm.util.xml.impl.stax.XIncludeStreamReaderTest.class));
+    assertThat(list).contains(create(testPath, net.sf.mmm.util.resource.impl.BrowsableResourceFactoryTest.class,
+        net.sf.mmm.util.resource.impl.BrowsableResourceFactorySpringTest.class,
+        net.sf.mmm.util.io.impl.DetectorStreamTest.class));
+    assertThat(list)
+        .doesNotContain(create(testPath, net.sf.mmm.util.xml.impl.stax.XIncludeStreamReaderTest.class));
   }
 
   private File[] create(String testPath, Class<?>... classes) {

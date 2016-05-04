@@ -4,17 +4,16 @@ package net.sf.mmm.util.event.impl;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.event.api.EventBus;
-import net.sf.mmm.util.event.api.EventListener;
-
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.Event.Type;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
+import net.sf.mmm.util.event.api.EventBus;
+import net.sf.mmm.util.event.api.EventListener;
+
 /**
- * This is an implementation of {@link com.google.web.bindery.event.shared.EventBus} that delegates to an
- * implementation of the {@link EventBus} interface. So you can adapt a GWT event bus usage to
- * {@link EventBus}.
+ * This is an implementation of {@link com.google.web.bindery.event.shared.EventBus} that delegates to an implementation
+ * of the {@link EventBus} interface. So you can adapt a GWT event bus usage to {@link EventBus}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0

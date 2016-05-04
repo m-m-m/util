@@ -55,9 +55,8 @@ public class NlsFormatterMap extends AbstractComponent {
    * @param formatter is the formatter to register.
    * @param formatType is the type to be formatted.
    * @param formatStyle is the style defining details of formatting. May be {@code null} for default formatter.
-   * @return the {@link NlsFormatter} that was registered for the given {@code formatType} and
-   *         {@code formatStyle} and is now replaced by the given {@code formatter} or {@code null} if no
-   *         {@link NlsFormatter} was replaced.
+   * @return the {@link NlsFormatter} that was registered for the given {@code formatType} and {@code formatStyle} and
+   *         is now replaced by the given {@code formatter} or {@code null} if no {@link NlsFormatter} was replaced.
    */
   public NlsFormatter<?> registerFormatter(NlsFormatter<?> formatter, String formatType, String formatStyle) {
 
@@ -77,8 +76,8 @@ public class NlsFormatterMap extends AbstractComponent {
    * @see net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter(String, String)
    *
    * @param formatType is the type to be formatted.
-   * @param formatStyle is the style defining details of formatting. May be {@code null} for default formatter of
-   *        the given {@code formatType}.
+   * @param formatStyle is the style defining details of formatting. May be {@code null} for default formatter of the
+   *        given {@code formatType}.
    * @return the according {@link NlsFormatter} instance or {@code null} if NO such {@link NlsFormatter} is
    *         {@link #registerFormatter(NlsFormatter, String, String) registered} .
    */

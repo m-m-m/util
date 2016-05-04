@@ -11,21 +11,22 @@ import net.sf.mmm.util.reflect.api.GenericType;
 /**
  * This is the abstract base implementation of {@link PojoPropertyAccessorNonArg} for accessing a getter
  * {@link java.lang.reflect.Method} in a limited environment (GWT).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public abstract class AbstractPojoPropertyAccessorGetMethod extends AbstractPojoPropertyAccessorMethodLimited implements
-    PojoPropertyAccessorNonArg {
+public abstract class AbstractPojoPropertyAccessorGetMethod extends AbstractPojoPropertyAccessorMethodLimited
+    implements PojoPropertyAccessorNonArg {
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() property type}.
    * @param declaringClass is the {@link #getDeclaringClass() declaring class}.
    */
-  public AbstractPojoPropertyAccessorGetMethod(String propertyName, GenericType<?> propertyType, Class<?> declaringClass) {
+  public AbstractPojoPropertyAccessorGetMethod(String propertyName, GenericType<?> propertyType,
+      Class<?> declaringClass) {
 
     super(propertyName, propertyType, declaringClass);
   }

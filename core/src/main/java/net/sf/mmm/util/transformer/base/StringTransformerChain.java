@@ -14,12 +14,11 @@ import net.sf.mmm.util.transformer.api.Transformer;
 
 /**
  * This class represents a {@link Transformer} for {@link String}s that is build out of a list of
- * {@link StringTransformerRule rules}. It performs its {@link #transform(String) transformation} by passing
- * the given value to the first rule and its result to the next rule and so on. If a rule matched, it can stop
- * further proceeding via the {@link StringTransformerRule#isStopOnMatch() stop-on-match} flag and cause its
- * result to be returned immediately. Otherwise the result of the last rule in the chain is returned (like a
- * left associative operator).
- * 
+ * {@link StringTransformerRule rules}. It performs its {@link #transform(String) transformation} by passing the given
+ * value to the first rule and its result to the next rule and so on. If a rule matched, it can stop further proceeding
+ * via the {@link StringTransformerRule#isStopOnMatch() stop-on-match} flag and cause its result to be returned
+ * immediately. Otherwise the result of the last rule in the chain is returned (like a left associative operator).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -39,8 +38,7 @@ public class StringTransformerChain implements Transformer<String> {
   /**
    * The non-arg constructor. <br>
    * <b>NOTE:</b><br>
-   * This constructor should not be called directly! It is only intended for reflective access (e.g. for
-   * JAXB).
+   * This constructor should not be called directly! It is only intended for reflective access (e.g. for JAXB).
    */
   public StringTransformerChain() {
 
@@ -49,7 +47,7 @@ public class StringTransformerChain implements Transformer<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param rules are the rules of this chain.
    */
   public StringTransformerChain(StringTransformerRule... rules) {
@@ -60,10 +58,9 @@ public class StringTransformerChain implements Transformer<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param id the {@link #getId() ID} of this chain.
-   * @param parent is the parent {@link StringTransformerChain chain} to extend or {@code null} for a
-   *        root-chain.
+   * @param parent is the parent {@link StringTransformerChain chain} to extend or {@code null} for a root-chain.
    * @param rules are the rules of this chain.
    */
   public StringTransformerChain(String id, StringTransformerChain parent, StringTransformerRule... rules) {
@@ -82,10 +79,10 @@ public class StringTransformerChain implements Transformer<String> {
 
   /**
    * This method implements {@link #transform(String)} recursively.
-   * 
+   *
    * @param original is the original value.
-   * @param state is the {@link State} used to indicate if a {@link StringTransformerRule rule} causes the
-   *        chain to {@link State#stop}.
+   * @param state is the {@link State} used to indicate if a {@link StringTransformerRule rule} causes the chain to
+   *        {@link State#stop}.
    * @return the transformed result.
    */
   private String transformRecursive(String original, State state) {
@@ -110,7 +107,7 @@ public class StringTransformerChain implements Transformer<String> {
 
   /**
    * This method gets the ID used to identify this chain.
-   * 
+   *
    * @return the ID or {@code null} if undefined.
    */
   public String getId() {
@@ -124,7 +121,7 @@ public class StringTransformerChain implements Transformer<String> {
    * If you want to be able to marshall the chain with JAXB, you have to use
    * {@link StringTransformerChain#StringTransformerChain(String, StringTransformerChain, StringTransformerRule...)}
    * instead.
-   * 
+   *
    * @param additionalRules are the rules to add.
    * @return the chain that also checks the {@code additionalRules} if none of this rules match.
    */
@@ -138,7 +135,7 @@ public class StringTransformerChain implements Transformer<String> {
 
   /**
    * This inner class contains the state of a transformation.
-   * 
+   *
    * @since 2.0.0
    */
   protected static class State {

@@ -28,8 +28,8 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  */
 @Singleton
 @Named
-public class PeriodicRefresherImpl extends AbstractLoggableComponent implements PeriodicRefresher, Runnable,
-    Closeable {
+public class PeriodicRefresherImpl extends AbstractLoggableComponent
+    implements PeriodicRefresher, Runnable, Closeable {
 
   /** The default {@link #setRefreshDelayInSeconds(int) refresh-delay}. */
   private static final int DEFAULT_REFRESH_DELAY_IN_SECONDS = 5 * 60;
@@ -37,18 +37,18 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   /** The minimum value allowed for {@link #refreshDelayInSeconds}. */
   private static final Integer MIN_DELAY = Integer.valueOf(1);
 
-  private  Executor executor;
+  private Executor executor;
 
-  private  int refreshDelayInSeconds;
+  private int refreshDelayInSeconds;
 
-  private  boolean active;
+  private boolean active;
 
-  private  volatile boolean shutdown;
+  private volatile boolean shutdown;
 
   /** The {@link Set} of {@link Refreshable}s. */
   private Set<Refreshable> refreshableSet;
 
-  private  Thread refreshThread;
+  private Thread refreshThread;
 
   /**
    * The constructor.

@@ -19,9 +19,9 @@ import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoPropertyDescriptor;
  */
 public class PojoPropertyDescriptorImpl extends AbstractPojoPropertyDescriptor {
 
-  private  final Map<PojoPropertyAccessorMode<?>, PojoPropertyAccessor> accessorMap;
+  private final Map<PojoPropertyAccessorMode<?>, PojoPropertyAccessor> accessorMap;
 
-  private  final Collection<? extends PojoPropertyAccessor> accessors;
+  private final Collection<? extends PojoPropertyAccessor> accessors;
 
   /**
    * The constructor.

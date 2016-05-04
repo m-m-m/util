@@ -7,7 +7,7 @@ import net.sf.mmm.util.pojo.path.api.TypedProperty;
 /**
  * This is a fallback implementation of {@link ValidatorBuilder} that may be used if JSR 303 is not available (missing
  * on classpath, configured wrongly, or the like).
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
@@ -34,7 +34,8 @@ public class ValidatorBuilderNone extends AbstractValidatorBuilder {
   }
 
   @Override
-  public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property, Class<T> propertyType) {
+  public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property,
+      Class<T> propertyType) {
 
     return ValidatorNone.getInstance();
   }

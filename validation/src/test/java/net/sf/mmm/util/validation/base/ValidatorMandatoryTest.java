@@ -6,13 +6,13 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Locale;
 
-import net.sf.mmm.util.validation.api.ValidationFailure;
-
 import org.junit.Test;
+
+import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
  * This is the test-case for {@link ValidatorMandatory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ValidatorMandatoryTest extends AbstractValidatorTest {

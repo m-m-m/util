@@ -25,21 +25,21 @@ import net.sf.mmm.util.reflect.base.AbstractGenericType;
  */
 public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
-  private  final GenericType<?> definingType;
+  private final GenericType<?> definingType;
 
-  private  final Type type;
+  private final Type type;
 
-  private  final Class<? extends T> assignmentClass;
+  private final Class<? extends T> assignmentClass;
 
-  private  final Class<T> retrievalClass;
+  private final Class<T> retrievalClass;
 
-  private  final Type[] typeArgs;
+  private final Type[] typeArgs;
 
-  private  final GenericType<?>[] typesArguments;
+  private final GenericType<?>[] typesArguments;
 
-  private  GenericType<?> componentType;
+  private GenericType<?> componentType;
 
-  private  GenericType<?> keyType;
+  private GenericType<?> keyType;
 
   /**
    * The constructor.
@@ -160,8 +160,8 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
 
   /**
    * This method gets the most specific {@link Class} available by the type-safe analyzation of the given generic
-   * {@code type}. Unlike {@link #getClassBounds(Type)} this method resolves {@link TypeVariable} s with the proper
-   * type they have been bound with. <br>
+   * {@code type}. Unlike {@link #getClassBounds(Type)} this method resolves {@link TypeVariable} s with the proper type
+   * they have been bound with. <br>
    *
    * Examples: <br>
    * <table border="1">
@@ -312,9 +312,9 @@ public class GenericTypeImpl<T> extends AbstractGenericType<T> {
    */
   protected static class ClassBounds {
 
-    private  final Class<?> assignmentClass;
+    private final Class<?> assignmentClass;
 
-    private  final Class<?> retrievalClass;
+    private final Class<?> retrievalClass;
 
     /**
      * The constructor.

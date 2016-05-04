@@ -13,14 +13,14 @@ import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.junit.Test;
+
 import net.sf.mmm.util.math.api.NumberConversionException;
 import net.sf.mmm.util.math.api.NumberType;
 
-import org.junit.Test;
-
 /**
  * This is the test-case for {@link NumberType}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -220,7 +220,7 @@ public class NumberTypeImplTest {
   public void testExcactnesDifference() {
 
     NumberType[] numberTypeOrder = new NumberType[] { NumberTypeImpl.BYTE, NumberTypeImpl.SHORT,
-        NumberTypeImpl.INTEGER, NumberTypeImpl.LONG, NumberTypeImpl.BIG_INTEGER };
+    NumberTypeImpl.INTEGER, NumberTypeImpl.LONG, NumberTypeImpl.BIG_INTEGER };
     for (int i = 1; i < numberTypeOrder.length; i++) {
       NumberType lessExact = numberTypeOrder[i - i];
       NumberType moreExact = numberTypeOrder[i];

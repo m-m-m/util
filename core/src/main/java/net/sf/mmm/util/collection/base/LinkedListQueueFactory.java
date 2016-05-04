@@ -19,6 +19,7 @@ public class LinkedListQueueFactory extends AbstractQueueFactory {
   /** The singleton instance. */
   public static final QueueFactory INSTANCE = new LinkedListQueueFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<LinkedList> getCollectionImplementation() {
 

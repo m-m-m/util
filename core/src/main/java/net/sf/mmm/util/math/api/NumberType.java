@@ -11,24 +11,23 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadMinimumValue;
  * Further it acts as factory to create according numbers {@link NumberType#valueOf(String) from string} or
  * {@link NumberType#valueOf(String) by converting an given number}. <br>
  * This is a class and NOT an {@link Enum} to be extensible.
- * 
+ *
  * @see net.sf.mmm.util.math.base.MathUtilImpl#getNumberType(Class)
  * @param <NUMBER> is the generic type of the {@link #getNumberClass() represented number-class}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public interface NumberType<NUMBER extends Number> extends AttributeReadMinimumValue<NUMBER>,
-    AttributeReadMaximumValue<NUMBER> {
+public interface NumberType<NUMBER extends Number>
+    extends AttributeReadMinimumValue<NUMBER>, AttributeReadMaximumValue<NUMBER> {
 
   /**
    * This method gets an instance of the {@link #getNumberClass() represented number-class} with the numeric value given
    * by {@code number}.
-   * 
+   *
    * @param number is the numeric value to convert.
-   * @param failIfUnprecise - if {@code true} and conversion causes precision loss, a
-   *        {@link NumberConversionException} is thrown, if {@code false} this method acts like a primitive cast
-   *        and conversion is always successfully.
+   * @param failIfUnprecise - if {@code true} and conversion causes precision loss, a {@link NumberConversionException}
+   *        is thrown, if {@code false} this method acts like a primitive cast and conversion is always successfully.
    * @return a {@link Number} instance of the {@link #getNumberClass() represented number-class} with the value of the
    *         given {@code number}. This will be the same instance as {@code number} if it is an
    *         {@link Class#isInstance(Object) instance} of the {@link #getNumberClass() represented number-class} .
@@ -40,7 +39,7 @@ public interface NumberType<NUMBER extends Number> extends AttributeReadMinimumV
   /**
    * This method gets an instance of the {@link #getNumberClass() represented number-class} with the numeric value
    * identified by the given string {@code number}.
-   * 
+   *
    * @param number is the string to be parsed as number.
    * @return the parsed number of the according type.
    * @throws NumberConversionException if the given {@code number} has an illegal format.
@@ -49,7 +48,7 @@ public interface NumberType<NUMBER extends Number> extends AttributeReadMinimumV
 
   /**
    * This method gets the {@link Class} reflecting the {@link Number} represented by this {@link NumberType}.
-   * 
+   *
    * @return the number type.
    */
   Class<NUMBER> getNumberClass();
@@ -58,7 +57,7 @@ public interface NumberType<NUMBER extends Number> extends AttributeReadMinimumV
    * This method determines if the represented {@link #getNumberClass() Number} is a decimal value. <br>
    * E.g. {@link Double}, {@link Float}, or {@link java.math.BigDecimal} represent decimal values while {@link Integer}
    * or {@link Long} are NOT decimal.
-   * 
+   *
    * @return {@code true} if the represented {@link #getNumberClass() Number} is a decimal value.
    */
   boolean isDecimal();
@@ -79,19 +78,19 @@ public interface NumberType<NUMBER extends Number> extends AttributeReadMinimumV
    * <li>{@link java.math.BigInteger}</li>
    * <li>{@link java.math.BigDecimal}</li>
    * </ol>
-   * 
+   *
    * @param otherType is the {@link NumberType} to compare with.
-   * @return the difference of the exactness. Will be {@code 0} if this {@link NumberType} is equal to
-   *         {@code otherType}, positive if this {@link NumberType} is more exact (later in the examples above) and
-   *         negative if {@code otherType} is more exact.
+   * @return the difference of the exactness. Will be {@code 0} if this {@link NumberType} is equal to {@code otherType}
+   *         , positive if this {@link NumberType} is more exact (later in the examples above) and negative if
+   *         {@code otherType} is more exact.
    */
   int getExactnessDifference(NumberType<?> otherType);
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * Will return {@code null} in case of an unbounded type such as {@link java.math.BigInteger}.
-   * 
+   *
    * @since 4.0.0
    */
   @Override
@@ -99,9 +98,9 @@ public interface NumberType<NUMBER extends Number> extends AttributeReadMinimumV
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * Will return {@code null} in case of an unbounded type such as {@link java.math.BigInteger}.
-   * 
+   *
    * @since 4.0.0
    */
   @Override

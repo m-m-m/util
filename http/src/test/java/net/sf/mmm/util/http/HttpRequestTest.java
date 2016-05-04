@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * This is a test-case for {@link HttpRequest}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

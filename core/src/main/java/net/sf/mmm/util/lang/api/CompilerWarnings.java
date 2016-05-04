@@ -4,7 +4,7 @@ package net.sf.mmm.util.lang.api;
 
 /**
  * This type contains the available string constants for the {@link SuppressWarnings} annotation.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */

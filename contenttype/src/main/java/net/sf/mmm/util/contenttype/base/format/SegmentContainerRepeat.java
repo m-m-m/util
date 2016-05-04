@@ -7,13 +7,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 
 /**
- * A {@link SegmentContainerRepeat} is a {@link SegmentContainerSequence} that
- * can be repeated. The occurrences of the actual sequence is bound by
- * {@link #getMinimumOccurrence()} and {@link #getMaximumOccurrence()}. <br>
- * The following example shows a metadata definition of key/value pairs
- * ("KEY=VALUE;") that are terminated by '\0'. There has to be at least 1 and at
- * maximum 99 of such key/value pairs to match.
- * 
+ * A {@link SegmentContainerRepeat} is a {@link SegmentContainerSequence} that can be repeated. The occurrences of the
+ * actual sequence is bound by {@link #getMinimumOccurrence()} and {@link #getMaximumOccurrence()}. <br>
+ * The following example shows a metadata definition of key/value pairs ("KEY=VALUE;") that are terminated by '\0'.
+ * There has to be at least 1 and at maximum 99 of such key/value pairs to match.
+ *
  * <pre>
  * ...
  * &lt;repeat minOccure="1" maxOccure="99">
@@ -25,7 +23,7 @@ import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
  * &lt;constant hex="00"/>
  * ..
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -59,7 +57,7 @@ public class SegmentContainerRepeat extends SegmentContainerSequence {
   }
 
   /**
-   * 
+   *
    * @return the minimum repeat count.
    */
   public int getMinimumOccurrence() {
@@ -69,7 +67,7 @@ public class SegmentContainerRepeat extends SegmentContainerSequence {
 
   /**
    * This method gets the maximum occurrence of this repeated sequence.
-   * 
+   *
    * @return the maximum occurrence.
    */
   public int getMaximumOccurrence() {

@@ -7,13 +7,14 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 /**
  * This is the interface for an object, that {@link #getValue() has a value} as well as
  * {@link #addValidator(ValueValidator) validators} and can be {@link #validate(ValidationState) validated}.
- * 
+ *
  * @param <V> is the generic type of the {@link #getValue() value} to validate.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public interface ValidatableObject<V> extends HasValueValidators<V>, AttributeReadValue<V>, AbstractValidatableObject {
+public interface ValidatableObject<V>
+    extends HasValueValidators<V>, AttributeReadValue<V>, AbstractValidatableObject {
 
   // nothing to add...
 

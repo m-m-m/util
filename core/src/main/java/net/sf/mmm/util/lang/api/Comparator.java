@@ -117,9 +117,9 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
     }
   };
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /** @see #eval(Object, Object) */
   // private final boolean evalTrueIfEquals;
@@ -132,11 +132,10 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
    *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
-   * @param evalTrueIfEquals - {@code true} if {@link Comparator} {@link #eval(Object, Object) evaluates}
-   *        to {@code true} if arguments are equal, {@code false} otherwise.
-   * @param less - {@link Boolean#TRUE} if {@link Comparator} {@link #eval(Object, Object) evaluates} to
-   *        {@code true} if first argument is less than second, {@link Boolean#FALSE} on greater,
-   *        {@code null} otherwise.
+   * @param evalTrueIfEquals - {@code true} if {@link Comparator} {@link #eval(Object, Object) evaluates} to
+   *        {@code true} if arguments are equal, {@code false} otherwise.
+   * @param less - {@link Boolean#TRUE} if {@link Comparator} {@link #eval(Object, Object) evaluates} to {@code true} if
+   *        first argument is less than second, {@link Boolean#FALSE} on greater, {@code null} otherwise.
    */
   private Comparator(String value, String title, boolean evalTrueIfEquals, Boolean less) {
 
@@ -147,9 +146,8 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
-   *         {@code true} for {@link Object}s that are {@link Object#equals(Object) equal} to each other,
-   *         {@code false} otherwise.
+   * @return {@code true} if this {@link Comparator} {@link #eval(Object, Object) evaluates} to {@code true} for
+   *         {@link Object}s that are {@link Object#equals(Object) equal} to each other, {@code false} otherwise.
    */
   boolean isTrueIfEquals() {
 
@@ -157,9 +155,8 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
-   *         {@code true} in case the first argument is less than the second, {@code false}
-   *         otherwise.
+   * @return {@code true} if this {@link Comparator} {@link #eval(Object, Object) evaluates} to {@code true} in case the
+   *         first argument is less than the second, {@code false} otherwise.
    */
   boolean isTrueIfLess() {
 
@@ -167,9 +164,8 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link Comparator} {@link #eval(Object, Object) evaluates} to
-   *         {@code true} in case the first argument is greater than the second, {@code false}
-   *         otherwise.
+   * @return {@code true} if this {@link Comparator} {@link #eval(Object, Object) evaluates} to {@code true} in case the
+   *         first argument is greater than the second, {@code false} otherwise.
    */
   boolean isTrueIfGreater() {
 
@@ -209,8 +205,7 @@ public enum Comparator implements SimpleDatatype<String>, NlsObject {
    *
    * @param object is the value to convert.
    * @param otherType the type of the value to compare that differs from the type
-   * @return a simpler representation of {@code value} or the same {@code value} if on simpler type
-   *         is known.
+   * @return a simpler representation of {@code value} or the same {@code value} if on simpler type is known.
    */
   private Object convert(Object object, Class<?> otherType) {
 

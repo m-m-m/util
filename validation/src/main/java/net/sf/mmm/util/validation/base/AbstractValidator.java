@@ -74,8 +74,8 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
   }
 
   /**
-   * @return {@code true} if this is a validator for mandatory fields (that will not accept {@code null} or
-   *         empty values), {@code false} otherwise.
+   * @return {@code true} if this is a validator for mandatory fields (that will not accept {@code null} or empty
+   *         values), {@code false} otherwise.
    */
   public final boolean isMandatory() {
 
@@ -103,9 +103,7 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
   /**
    * Gets the value of a property.
    *
-   * @param
-   *        <P>
-   *        the generic type of the requested property.
+   * @param <P> the generic type of the requested property.
    * @param property the {@link TypedProperty}.
    * @return the requested value or {@code null} if undefined.
    * @since 7.1.0

@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This is an implementation of {@code /dev/zero} as {@link InputStream}. In other words the
- * {@link DevZero} is a dummy {@link InputStream} that produces infinite zeros. <br>
+ * This is an implementation of {@code /dev/zero} as {@link InputStream}. In other words the {@link DevZero} is a dummy
+ * {@link InputStream} that produces infinite zeros. <br>
  * <b>ATTENTION:</b><br>
  * Please be careful NOT to cause infinity loops when using this class!
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

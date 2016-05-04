@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
@@ -22,8 +24,6 @@ import net.sf.mmm.util.pojo.descriptor.impl.dummy.AbstractPojo;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.GenericPojo;
 import net.sf.mmm.util.pojo.descriptor.impl.dummy.MyPojo;
 import net.sf.mmm.util.reflect.api.GenericType;
-
-import org.junit.Test;
 
 /**
  * This is the abstract test-case for {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder} implementations
@@ -274,7 +274,8 @@ public abstract class AbstractMyPojoDescriptorBuilderTest extends AbstractPojoDe
 
   }
 
-  protected <POJO extends MyPojo> PojoDescriptor<POJO> checkPojoDescriptor(POJO pojoInstance, Class<POJO> pojoClass) {
+  protected <POJO extends MyPojo> PojoDescriptor<POJO> checkPojoDescriptor(POJO pojoInstance,
+      Class<POJO> pojoClass) {
 
     PojoDescriptorBuilder builder = getPojoDescriptorBuilder();
     PojoDescriptor<POJO> pojoDescriptor = builder.getDescriptor(pojoClass);

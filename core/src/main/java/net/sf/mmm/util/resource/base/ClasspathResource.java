@@ -13,20 +13,20 @@ import net.sf.mmm.util.resource.api.ResourceUri;
 /**
  * This is the implementation of the {@link DataResource} interface for a resource that comes from the
  * {@link ClassLoader#getResource(String) classpath}. <br>
- * A very nice feature of Java is to load resources from the classpath. This allows that these resource are
- * deployed within a jar-file. Adding a directory to the beginning of the classpath still allows to override
- * such a resource. <br>
+ * A very nice feature of Java is to load resources from the classpath. This allows that these resource are deployed
+ * within a jar-file. Adding a directory to the beginning of the classpath still allows to override such a resource.
+ * <br>
  * Anyways a typical mistake is illustrated by the following code example:
  *
  * <pre>
  * MyClass.class.{@link Class#getResourceAsStream(String) getResourceAsStream}("config.xml")
  * </pre>
  *
- * This will NOT allow to override resources in other classpath entries and especially NOT work in situations
- * where there are specific classloaders, what is a typical situation in environments of applications servers
- * or IoC frameworks. <br>
- * The solution is to use the {@link Thread#getContextClassLoader() context-class-loader} to get resources
- * what is done by this implementation. A proper version of the example above is:
+ * This will NOT allow to override resources in other classpath entries and especially NOT work in situations where
+ * there are specific classloaders, what is a typical situation in environments of applications servers or IoC
+ * frameworks. <br>
+ * The solution is to use the {@link Thread#getContextClassLoader() context-class-loader} to get resources what is done
+ * by this implementation. A proper version of the example above is:
  *
  * <pre>
  * {@link DataResource} resource = {@link ClasspathResource#ClasspathResource(String) ClasspathResource}((MyClass.class.getPackage(), "config.xml"));
@@ -48,9 +48,9 @@ public class ClasspathResource extends AbstractDataResource {
    */
   public static final String SCHEME_PREFIX = ResourceUri.SCHEME_PREFIX_CLASSPATH;
 
-  private  final String path;
+  private final String path;
 
-  private  final URL url;
+  private final URL url;
 
   /**
    * The constructor.
@@ -75,10 +75,9 @@ public class ClasspathResource extends AbstractDataResource {
   }
 
   /**
-   * The constructor for a classpath-resource identified by {@code someClass} and the given
-   * {@code nameOrSuffix}. <br>
-   * E.g. the following code would get a resource named " {@linkplain ClasspathResource}.xml" from the same
-   * package where this class is located:
+   * The constructor for a classpath-resource identified by {@code someClass} and the given {@code nameOrSuffix}. <br>
+   * E.g. the following code would get a resource named " {@linkplain ClasspathResource}.xml" from the same package
+   * where this class is located:
    *
    * <pre>
    * new {@link ClasspathResource}({@link net.sf.mmm.util.resource.base.ClasspathResource}.class,
@@ -100,13 +99,11 @@ public class ClasspathResource extends AbstractDataResource {
    *
    * @see #ClasspathResource(Package, String)
    *
-   * @param someClass is the class identifying the path where the resource is located and the prefix of its
-   *        filename.
-   * @param nameOrSuffix is the filename of the resource or a suffix (e.g. ".properties" or "-test.xml") for
-   *        it depending on {@code append}.
-   * @param append - if {@code true} the {@code nameOrSuffix} is appended to the
-   *        {@link Class#getSimpleName() simple classname} of {@code someClass} or {@code false} if
-   *        the simple name is replaced by {@code nameOrSuffix}.
+   * @param someClass is the class identifying the path where the resource is located and the prefix of its filename.
+   * @param nameOrSuffix is the filename of the resource or a suffix (e.g. ".properties" or "-test.xml") for it
+   *        depending on {@code append}.
+   * @param append - if {@code true} the {@code nameOrSuffix} is appended to the {@link Class#getSimpleName() simple
+   *        classname} of {@code someClass} or {@code false} if the simple name is replaced by {@code nameOrSuffix}.
    */
   public ClasspathResource(Class<?> someClass, String nameOrSuffix, boolean append) {
 
@@ -114,10 +111,9 @@ public class ClasspathResource extends AbstractDataResource {
   }
 
   /**
-   * The constructor. for a classpath-resource identified by {@code somePackage} and the given
-   * {@code filename}. <br>
-   * E.g. the following code would create a resource named "relection.properties" from the same package where
-   * this class is located:
+   * The constructor. for a classpath-resource identified by {@code somePackage} and the given {@code filename}. <br>
+   * E.g. the following code would create a resource named "relection.properties" from the same package where this class
+   * is located:
    *
    * <pre>
    * new {@link ClasspathResource}({@link ClasspathResource}.class.{@link Class#getPackage() getPackage}(),
@@ -149,13 +145,11 @@ public class ClasspathResource extends AbstractDataResource {
   /**
    * @see #ClasspathResource(Class, String, boolean)
    *
-   * @param someClass is the class identifying the path where the resource is located and the prefix of its
-   *        filename.
-   * @param nameOrSuffix is the filename of the resource or a suffix (e.g. ".properties" or "-test.xml") for
-   *        it depending on {@code append}.
-   * @param append - if {@code true} the {@code nameOrSuffix} is appended to the
-   *        {@link Class#getSimpleName() simple classname} of {@code someClass} or {@code false} if
-   *        the simple name is replaced by {@code nameOrSuffix}.
+   * @param someClass is the class identifying the path where the resource is located and the prefix of its filename.
+   * @param nameOrSuffix is the filename of the resource or a suffix (e.g. ".properties" or "-test.xml") for it
+   *        depending on {@code append}.
+   * @param append - if {@code true} the {@code nameOrSuffix} is appended to the {@link Class#getSimpleName() simple
+   *        classname} of {@code someClass} or {@code false} if the simple name is replaced by {@code nameOrSuffix}.
    * @return the absolute path.
    */
   private static String getAbsolutePath(Class<?> someClass, String nameOrSuffix, boolean append) {

@@ -7,19 +7,18 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.lang.api.DatatypeDescriptor;
-import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
-import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
+import net.sf.mmm.util.lang.api.DatatypeDescriptor;
+import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
+import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
+
 /**
  * This is a generic {@link JsonSerializer} based on {@link DatatypeDescriptorManager} so every
- * {@link net.sf.mmm.util.lang.api.Datatype} supported by {@link DatatypeDescriptorManager} can be serialized
- * to JSON.
+ * {@link net.sf.mmm.util.lang.api.Datatype} supported by {@link DatatypeDescriptorManager} can be serialized to JSON.
  *
  * @see DatatypeJsonDeserializer
  *
@@ -30,7 +29,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  */
 public class DatatypeJsonSerializer<T> extends JsonSerializer<T> {
 
-  private  DatatypeDescriptorManager datatypeDescriptorManager;
+  private DatatypeDescriptorManager datatypeDescriptorManager;
 
   /**
    * The constructor.
@@ -102,8 +101,8 @@ public class DatatypeJsonSerializer<T> extends JsonSerializer<T> {
   }
 
   @Override
-  public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
-      JsonProcessingException {
+  public void serialize(T value, JsonGenerator jgen, SerializerProvider provider)
+      throws IOException, JsonProcessingException {
 
     serializeGeneric(value, jgen, provider);
   }

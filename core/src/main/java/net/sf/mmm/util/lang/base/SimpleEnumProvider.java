@@ -6,8 +6,8 @@ import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 
 /**
- * This is a simple implementation of {@link net.sf.mmm.util.lang.api.EnumProvider}. It only supports
- * {@link Boolean} and any static {@link Enum} (where it dynamically creates definitions).
+ * This is a simple implementation of {@link net.sf.mmm.util.lang.api.EnumProvider}. It only supports {@link Boolean}
+ * and any static {@link Enum} (where it dynamically creates definitions).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

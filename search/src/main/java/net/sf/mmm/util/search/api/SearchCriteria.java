@@ -5,15 +5,13 @@ package net.sf.mmm.util.search.api;
 import net.sf.mmm.util.transferobject.api.TransferObject;
 
 /**
- * This is the interface for a transfer-object with the criteria for a {@link SearchQuery search query}. Such
- * object specifies the criteria selecting which {@link SearchResult#getHits() hits} will match when
- * performing a search. <br>
+ * This is the interface for a transfer-object with the criteria for a {@link SearchQuery search query}. Such object
+ * specifies the criteria selecting which {@link SearchResult#getHits() hits} will match when performing a search. <br>
  * <b>NOTE:</b><br>
  * This interface only holds generic settings for the query such as {@link #getHitOffset()},
  * {@link #getMaximumHitCount()}, and {@link #getSearchTimeout()}. For your individual search, you can extend
- * {@link net.sf.mmm.util.search.base.AbstractSearchCriteria} to create a java bean with all the fields for
- * your search. For searches in a database using JPA there is additional support provided by
- * {@code mmm-persistence}.
+ * {@link net.sf.mmm.util.search.base.AbstractSearchCriteria} to create a java bean with all the fields for your search.
+ * For searches in a database using JPA there is additional support provided by {@code mmm-persistence}.
  *
  * @see SearchResult
  *
@@ -32,8 +30,8 @@ public interface SearchCriteria extends TransferObject {
   Integer getMaximumHitCount();
 
   /**
-   * This method gets the offset for the first hit. This is {@code 0} by default. By providing a multiple
-   * of {@link #getMaximumHitCount()} you can simply implement paging. <br>
+   * This method gets the offset for the first hit. This is {@code 0} by default. By providing a multiple of
+   * {@link #getMaximumHitCount()} you can simply implement paging. <br>
    * <b>Note:</b><br>
    * This feature is the same as {@code Query.setFirstResult(int)} in JPA.
    *
@@ -52,9 +50,8 @@ public interface SearchCriteria extends TransferObject {
 
   /**
    * This method determines if the search should be performed in read-only mode. In such case the
-   * {@link SearchResult#getHits() result hits} can NOT be modified or their changes will NOT be persisted. If
-   * a search-engine does not support this feature (e.g. for full-text search this makes no sense), it will be
-   * ignored.
+   * {@link SearchResult#getHits() result hits} can NOT be modified or their changes will NOT be persisted. If a
+   * search-engine does not support this feature (e.g. for full-text search this makes no sense), it will be ignored.
    *
    * @return {@code true} if read-only, {@code false} otherwise (default).
    * @since 3.1.0

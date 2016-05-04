@@ -15,7 +15,7 @@ import net.sf.mmm.util.reflect.base.ManifestLoader;
  * @since 1.0.0
  */
 @CliMode(id = CliMode.ID_VERSION, title = NlsBundleUtilCliRoot.INF_MAIN_MODE_VERSION, //
-usage = NlsBundleUtilCliRoot.MSG_MAIN_MODE_VERSION_USAGE)
+    usage = NlsBundleUtilCliRoot.MSG_MAIN_MODE_VERSION_USAGE)
 public abstract class AbstractVersionedMain extends AbstractMain {
 
   /** The {@link #getVersion() version} if NOT available from {@link Manifest}. */
@@ -23,7 +23,7 @@ public abstract class AbstractVersionedMain extends AbstractMain {
 
   /** The option to print the version. */
   @CliOption(name = CliOption.NAME_VERSION, aliases = CliOption.ALIAS_VERSION, //
-  usage = NlsBundleUtilCliRoot.MSG_MAIN_OPTION_VERSION_USAGE, mode = CliMode.ID_VERSION, required = true)
+      usage = NlsBundleUtilCliRoot.MSG_MAIN_OPTION_VERSION_USAGE, mode = CliMode.ID_VERSION, required = true)
   private boolean version;
 
   /**
@@ -61,8 +61,8 @@ public abstract class AbstractVersionedMain extends AbstractMain {
   }
 
   /**
-   * This method is called from {@link #run(CliModeObject)} if the program is executed in
-   * {@link CliMode#ID_DEFAULT default} {@link CliModeObject mode}.
+   * This method is called from {@link #run(CliModeObject)} if the program is executed in {@link CliMode#ID_DEFAULT
+   * default} {@link CliModeObject mode}.
    *
    * @return the error-code or {@link #EXIT_CODE_OK} on success.
    * @throws Exception in case of an unexpected error.

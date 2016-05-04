@@ -12,7 +12,7 @@ import net.sf.mmm.util.io.base.AbstractDetectorStreamProcessorFactory;
 /**
  * This is the implementation of {@link net.sf.mmm.util.io.api.spi.DetectorStreamProcessorFactory} for
  * {@link ContentTypeDetectorStreamProcessor}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -21,11 +21,11 @@ public class ContentTypeDetectorStreamProcessorFactory extends AbstractDetectorS
   /** The top-level {@link DecisionTreeNode}. */
   private final DecisionTreeNode rootNode;
 
-  private  final int lookaheadCount;
+  private final int lookaheadCount;
 
   /**
    * The constructor.
-   * 
+   *
    * @param rootNode is the top-level {@link DecisionTreeNode}.
    * @param lookaheadCount - see {@link #getLookaheadCount()}.
    */

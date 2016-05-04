@@ -10,9 +10,9 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 /**
- * This is a {@link org.springframework.test.context.TestExecutionListener} that allows testing with
- * spring-beans of the scope <em>request</em> or <em>session</em>.
- * 
+ * This is a {@link org.springframework.test.context.TestExecutionListener} that allows testing with spring-beans of the
+ * scope <em>request</em> or <em>session</em>.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class WebContextTestExecutionListener extends AbstractTestExecutionListener {

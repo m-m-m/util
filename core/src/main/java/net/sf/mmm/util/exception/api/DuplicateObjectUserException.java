@@ -3,8 +3,7 @@
 package net.sf.mmm.util.exception.api;
 
 /**
- * This is a {@link DuplicateObjectException} that represents a user failure (is NOT {@link #isTechnical()
- * technical}).
+ * This is a {@link DuplicateObjectException} that represents a user failure (is NOT {@link #isTechnical() technical}).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

@@ -53,11 +53,11 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
 
   private static final Class<?>[] CAPACITY_CONSTRUCTOR_ARGS = new Class<?>[] { int.class };
 
-  private  static CollectionReflectionUtilImpl instance;
+  private static CollectionReflectionUtilImpl instance;
 
-  private  CollectionFactoryManager collectionFactoryManager;
+  private CollectionFactoryManager collectionFactoryManager;
 
-  private  int maximumListGrowth;
+  private int maximumListGrowth;
 
   /**
    * The constructor.

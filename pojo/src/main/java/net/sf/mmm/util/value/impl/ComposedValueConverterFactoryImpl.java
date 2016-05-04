@@ -24,9 +24,9 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverterFactory;
 @Named
 public class ComposedValueConverterFactoryImpl extends AbstractComposedValueConverterFactory {
 
-  private  List<ValueConverter<?, ?>> converters;
+  private List<ValueConverter<?, ?>> converters;
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -37,7 +37,8 @@ public class ComposedValueConverterFactoryImpl extends AbstractComposedValueConv
   }
 
   @Override
-  public ComposedValueConverter createConverter(boolean addDefaultConverters, List<ValueConverter<?, ?>> converterList) {
+  public ComposedValueConverter createConverter(boolean addDefaultConverters,
+      List<ValueConverter<?, ?>> converterList) {
 
     ComposedValueConverterImpl impl = new ComposedValueConverterImpl();
     List<ValueConverter<?, ?>> actualConverters = converterList;

@@ -40,9 +40,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
  */
 public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescriptor<POJO> {
 
-  private  final Map<String, PojoPropertyDescriptorImpl> propertyMap;
+  private final Map<String, PojoPropertyDescriptorImpl> propertyMap;
 
-  private  final Collection<PojoPropertyDescriptorImpl> properties;
+  private final Collection<PojoPropertyDescriptorImpl> properties;
 
   /**
    * The constructor.
@@ -96,15 +96,15 @@ public abstract class AbstractPojoDescriptorImpl<POJO> extends AbstractPojoDescr
         PojoPropertyAccessorIndexedNonArg indexedGetAccessor = descriptor
             .getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED);
         if (indexedGetAccessor != null) {
-          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByIndex(indexedGetAccessor, pojoProperty
-              .getIndex().intValue());
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxyGetByIndex(indexedGetAccessor,
+              pojoProperty.getIndex().intValue());
         }
       } else if (mode == PojoPropertyAccessorOneArgMode.SET) {
         PojoPropertyAccessorIndexedOneArg indexedSetAccessor = descriptor
             .getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED);
         if (indexedSetAccessor != null) {
-          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByIndex(indexedSetAccessor, pojoProperty
-              .getIndex().intValue());
+          accessor = (ACCESSOR) new PojoPropertyAccessorProxySetByIndex(indexedSetAccessor,
+              pojoProperty.getIndex().intValue());
         }
       }
     } else if (pojoProperty.getKey() != null) {

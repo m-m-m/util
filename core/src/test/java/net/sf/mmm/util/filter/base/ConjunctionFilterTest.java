@@ -8,12 +8,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import net.sf.mmm.util.filter.api.Filter;
-import net.sf.mmm.util.filter.base.ConjunctionFilter;
 import net.sf.mmm.util.lang.api.Conjunction;
 
 /**
  * This is the test-case for {@link ConjunctionFilter}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -133,6 +132,7 @@ public class ConjunctionFilterTest {
       this.acceptValue = acceptValue;
     }
 
+    @Override
     public boolean accept(Integer value) {
 
       if (value == null) {

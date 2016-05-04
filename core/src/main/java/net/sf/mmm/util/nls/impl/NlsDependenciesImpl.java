@@ -18,7 +18,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
 
 /**
  * This is the implementation of the {@link NlsDependencies} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -26,13 +26,13 @@ import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
 @Named(NlsDependencies.CDI_NAME)
 public class NlsDependenciesImpl extends AbstractNlsDependencies {
 
-  private  NlsArgumentParser argumentParser;
+  private NlsArgumentParser argumentParser;
 
-  private  NlsArgumentFormatter argumentFormatter;
+  private NlsArgumentFormatter argumentFormatter;
 
-  private  NlsMessageFormatterFactory messageFormatterFactory;
+  private NlsMessageFormatterFactory messageFormatterFactory;
 
-  private  Iso8601UtilLimited iso8601Util;
+  private Iso8601UtilLimited iso8601Util;
 
   /**
    * The constructor.

@@ -10,10 +10,10 @@ import net.sf.mmm.util.math.api.NumberType;
 
 /**
  * This is the implementation of the {@link NumberType} interface.
- * 
+ *
  * @see net.sf.mmm.util.math.base.MathUtilImpl#getNumberType(Class)
  * @param <NUMBER> is the generic type of the {@link #getNumberClass() represented number-class}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -38,12 +38,14 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       return false;
     }
 
-    @Override    protected Byte convert(Number number) {
+    @Override
+    protected Byte convert(Number number) {
 
       return Byte.valueOf(number.byteValue());
     }
 
-    @Override    protected Byte parse(String number) throws NumberFormatException {
+    @Override
+    protected Byte parse(String number) throws NumberFormatException {
 
       return Byte.valueOf(number);
     }
@@ -66,12 +68,14 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       return false;
     }
 
-    @Override    protected Short convert(Number number) {
+    @Override
+    protected Short convert(Number number) {
 
       return Short.valueOf(number.shortValue());
     }
 
-    @Override    protected Short parse(String number) throws NumberFormatException {
+    @Override
+    protected Short parse(String number) throws NumberFormatException {
 
       return Short.valueOf(number);
     }
@@ -94,12 +98,14 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       return false;
     }
 
-    @Override    protected Integer convert(Number number) {
+    @Override
+    protected Integer convert(Number number) {
 
       return Integer.valueOf(number.intValue());
     }
 
-    @Override    protected Integer parse(String number) throws NumberFormatException {
+    @Override
+    protected Integer parse(String number) throws NumberFormatException {
 
       return Integer.valueOf(number);
     }
@@ -122,12 +128,14 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       return false;
     }
 
-    @Override    protected Long convert(Number number) {
+    @Override
+    protected Long convert(Number number) {
 
       return Long.valueOf(number.longValue());
     }
 
-    @Override    protected Long parse(String number) throws NumberFormatException {
+    @Override
+    protected Long parse(String number) throws NumberFormatException {
 
       return Long.valueOf(number);
     }
@@ -150,12 +158,14 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       return true;
     }
 
-    @Override    protected Float convert(Number number) {
+    @Override
+    protected Float convert(Number number) {
 
       return Float.valueOf(number.floatValue());
     }
 
-    @Override    protected Float parse(String number) throws NumberFormatException {
+    @Override
+    protected Float parse(String number) throws NumberFormatException {
 
       return Float.valueOf(number);
     }
@@ -178,12 +188,14 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       return true;
     }
 
-    @Override    protected Double convert(Number number) {
+    @Override
+    protected Double convert(Number number) {
 
       return Double.valueOf(number.doubleValue());
     }
 
-    @Override    protected Double parse(String number) throws NumberFormatException {
+    @Override
+    protected Double parse(String number) throws NumberFormatException {
 
       return Double.valueOf(number);
     }
@@ -205,12 +217,14 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       return false;
     }
 
-    @Override    protected BigInteger convert(Number number) {
+    @Override
+    protected BigInteger convert(Number number) {
 
       return BigInteger.valueOf(number.longValue());
     }
 
-    @Override    protected BigInteger parse(String number) throws NumberFormatException {
+    @Override
+    protected BigInteger parse(String number) throws NumberFormatException {
 
       return new BigInteger(number);
     }
@@ -232,27 +246,29 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
       return true;
     }
 
-    @Override    protected BigDecimal convert(Number number) {
+    @Override
+    protected BigDecimal convert(Number number) {
 
       return BigDecimal.valueOf(number.doubleValue());
     }
 
-    @Override    protected BigDecimal parse(String number) throws NumberFormatException {
+    @Override
+    protected BigDecimal parse(String number) throws NumberFormatException {
 
       return new BigDecimal(number);
     }
 
   };
 
-  private  final int exactness;
+  private final int exactness;
 
-  private  final NUMBER minimumValue;
+  private final NUMBER minimumValue;
 
-  private  final NUMBER maximumValue;
+  private final NUMBER maximumValue;
 
   /**
    * The constructor.
-   * 
+   *
    * @param exactness is the internal exactness level for {@link #getExactnessDifference(NumberType)}.
    * @param min is the {@link #getMinimumValue() minimum value}.
    * @param max is the {@link #getMaximumValue() maximum value}.
@@ -266,10 +282,10 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   }
 
   /**
-   * This method converts the given {@code number} to the {@link #getNumberClass() number-class} represented by
-   * this object. Like a cast this operation may loose precision (e.g. when converting a {@link Double} to
-   * {@link Integer}) without warning. Use {@link #valueOf(Number, boolean)} instead to avoid this.
-   * 
+   * This method converts the given {@code number} to the {@link #getNumberClass() number-class} represented by this
+   * object. Like a cast this operation may loose precision (e.g. when converting a {@link Double} to {@link Integer})
+   * without warning. Use {@link #valueOf(Number, boolean)} instead to avoid this.
+   *
    * @param number is the number to convert.
    * @return the converted number.
    */
@@ -318,18 +334,18 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
   /**
    * This method gets an instance of the {@link #getNumberClass() represented number-class} with the numeric value
    * identified by the given string {@code number}.
-   * 
+   *
    * @param number is the string to be parsed as number.
    * @return the parsed number of the according type.
    * @throws NumberConversionException if the given {@code number} has an illegal format.
-   * @throws NumberFormatException if the given {@code number} has an illegal format. This exception will be
-   *         converted to a {@link NumberConversionException}.
+   * @throws NumberFormatException if the given {@code number} has an illegal format. This exception will be converted
+   *         to a {@link NumberConversionException}.
    */
   protected abstract NUMBER parse(String number) throws NumberConversionException, NumberFormatException;
 
   /**
-   * This method gets the difference of the exactness of this {@link NumberTypeImpl} and the given
-   * {@code otherType}. <br>
+   * This method gets the difference of the exactness of this {@link NumberTypeImpl} and the given {@code otherType}.
+   * <br>
    * <b>ATTENTION:</b><br>
    * Some types such as {@link Double} and {@link BigInteger} are NOT really comparable so the exactness difference
    * might only make sense if the compared {@link NumberTypeImpl types} are both {@link #isDecimal() decimal} or both
@@ -344,11 +360,11 @@ public abstract class NumberTypeImpl<NUMBER extends Number> implements NumberTyp
    * <li>{@link BigInteger}</li>
    * <li>{@link BigDecimal}</li>
    * </ol>
-   * 
+   *
    * @param otherType is the {@link NumberTypeImpl} to compare with.
    * @return the difference of the exactness. Will be {@code 0} if this {@link NumberTypeImpl} is equal to
-   *         {@code otherType}, positive if this {@link NumberTypeImpl} is more exact (later in the examples above)
-   *         and negative if {@code otherType} is more exact.
+   *         {@code otherType}, positive if this {@link NumberTypeImpl} is more exact (later in the examples above) and
+   *         negative if {@code otherType} is more exact.
    */
   @Override
   public int getExactnessDifference(NumberType<?> otherType) {

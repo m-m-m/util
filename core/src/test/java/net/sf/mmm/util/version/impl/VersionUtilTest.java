@@ -4,12 +4,12 @@ package net.sf.mmm.util.version.impl;
 
 import java.text.SimpleDateFormat;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 import net.sf.mmm.util.version.api.VersionUtil;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link VersionUtilImpl}.
@@ -29,8 +29,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method {@link VersionUtil#createVersionIdentifier(String) parses} a {@link VersionIdentifier} given
-   * by {@code versionString}. It also does some sanity checks.
+   * This method {@link VersionUtil#createVersionIdentifier(String) parses} a {@link VersionIdentifier} given by
+   * {@code versionString}. It also does some sanity checks.
    *
    * @param versionString is the {@link String} to parse.
    * @return the parsed {@link VersionIdentifier}.
@@ -43,8 +43,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
-   * {@link VersionIdentifier} with only a major version.
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of {@link VersionIdentifier} with
+   * only a major version.
    */
   @Test
   public void testParseVersionMajor() {
@@ -68,8 +68,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
-   * {@link VersionIdentifier} "SNAPSHOT".
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of {@link VersionIdentifier}
+   * "SNAPSHOT".
    */
   @Test
   public void testParseVersionSnapshot() {
@@ -92,8 +92,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
-   * {@link VersionIdentifier} with 4 version segments.
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of {@link VersionIdentifier} with
+   * 4 version segments.
    */
   @Test
   public void testParseVersion4Segments() {
@@ -116,8 +116,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
-   * {@link VersionIdentifier} with 4 version segments and phase update number 5.
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of {@link VersionIdentifier} with
+   * 4 version segments and phase update number 5.
    */
   @Test
   public void testParseVersion4SegmentsUpdate5() {
@@ -140,8 +140,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
-   * {@link VersionIdentifier} with 4 version segments, Snapshot and revision number.
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of {@link VersionIdentifier} with
+   * 4 version segments, Snapshot and revision number.
    */
   @Test
   public void testParseVersion4SegmentsSnapshotRevision() {
@@ -164,8 +164,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
-   * {@link VersionIdentifier} with 4 version segments, Snapshot, revision number and timestamp.
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of {@link VersionIdentifier} with
+   * 4 version segments, Snapshot, revision number and timestamp.
    *
    * @throws Exception if something went wrong.
    */
@@ -190,8 +190,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
-   * {@link VersionIdentifier} with 2 segments and phase release candidate number 5.
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of {@link VersionIdentifier} with
+   * 2 segments and phase release candidate number 5.
    */
   @Test
   public void testParseVersion2SegmentsRc5() {
@@ -211,8 +211,8 @@ public class VersionUtilTest extends Assert {
   }
 
   /**
-   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of
-   * {@link VersionIdentifier}s from {@link String}s.
+   * This method tests the {@link VersionUtil#createVersionIdentifier(String) parsing} of {@link VersionIdentifier}s
+   * from {@link String}s.
    */
   @Test
   public void testCompareTo() {

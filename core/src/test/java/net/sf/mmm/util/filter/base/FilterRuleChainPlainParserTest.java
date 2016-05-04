@@ -8,9 +8,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import net.sf.mmm.util.resource.base.ClasspathResource;
-
 import org.junit.Test;
+
+import net.sf.mmm.util.resource.base.ClasspathResource;
 
 /**
  * This is the test-case for {@link FilterRuleChainPlainParser}.
@@ -24,7 +24,8 @@ public class FilterRuleChainPlainParserTest {
   public void test() throws Exception {
 
     FilterRuleChainPlainParser parser = new FilterRuleChainPlainParser();
-    try (InputStream inStream = new ClasspathResource(FilterRuleChainPlainParserTest.class, ".txt", true).openStream()) {
+    try (InputStream inStream = new ClasspathResource(FilterRuleChainPlainParserTest.class, ".txt", true)
+        .openStream()) {
       FilterRuleChain chain = parser.parse(new InputStreamReader(inStream, "UTF-8"), true);
       assertTrue(chain.accept("/doc/manual.pdf"));
       assertFalse(chain.accept("/data/manual.pdf"));

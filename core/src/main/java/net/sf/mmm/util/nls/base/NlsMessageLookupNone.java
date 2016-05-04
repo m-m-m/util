@@ -9,9 +9,9 @@ import net.sf.mmm.util.nls.api.NlsMessageLookup;
 
 /**
  * This is a dummy implementation of {@link NlsMessageLookup} that will always return {@code null}.
- * 
+ *
  * @see #INSTANCE
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */

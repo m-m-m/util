@@ -9,13 +9,14 @@ import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 
 /**
- * This is an abstract implementation of the {@link BrowsableResource} interface that {@link #getDelegate()
- * delegates to another} {@link BrowsableResource}.
+ * This is an abstract implementation of the {@link BrowsableResource} interface that {@link #getDelegate() delegates to
+ * another} {@link BrowsableResource}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourceProxy implements BrowsableResource {
+public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourceProxy
+    implements BrowsableResource {
 
   /**
    * The constructor.

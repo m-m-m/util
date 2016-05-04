@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl.rebind;
 
-import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderLimited;
-import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.CachedGeneratorResult;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -15,10 +12,13 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
+import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderLimited;
+import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
+
 /**
- * This is the {@link net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator incremental GWT generator}
- * to generate the implementation of {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}.
- * 
+ * This is the {@link net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator incremental GWT generator} to
+ * generate the implementation of {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -69,9 +69,9 @@ public class PojoDescriptorBuilderGenerator extends AbstractPojoDescriptorGenera
 
   /**
    * Generates the method {@link AbstractPojoDescriptorBuilderLimited#createDescriptor(Class)}.
-   * 
-   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the
-   *        source code to.
+   *
+   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the source code
+   *        to.
    * @param logger is the {@link TreeLogger}.
    * @param simpleName is the {@link Class#getSimpleName() simple name} of the {@link Class} to generate.
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via

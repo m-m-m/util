@@ -12,11 +12,10 @@ import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to an {@link Enum}. It supports objects given as {@link CharSequence} (e.g.
- * {@link String}) or {@link Number} as well as an {@link Enum} having an value with the same
- * {@link Enum#name() name}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
+ * {@link Object} to an {@link Enum}. It supports objects given as {@link CharSequence} (e.g. {@link String}) or
+ * {@link Number} as well as an {@link Enum} having an value with the same {@link Enum#name() name}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -25,7 +24,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, Enum> {
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
   /**
    * The constructor.
@@ -37,7 +36,7 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
 
   /**
    * This method gets the {@link StringUtil} to use.
-   * 
+   *
    * @return the {@link StringUtil} instance.
    */
   protected StringUtil getStringUtil() {
@@ -47,7 +46,7 @@ public class ValueConverterToEnum extends AbstractSimpleValueConverter<Object, E
 
   /**
    * This method sets the {@link StringUtil} to use.
-   * 
+   *
    * @param stringUtil is the {@link StringUtil} instance.
    */
   public void setStringUtil(StringUtil stringUtil) {

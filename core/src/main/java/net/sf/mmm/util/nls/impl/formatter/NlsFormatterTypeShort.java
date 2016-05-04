@@ -3,7 +3,6 @@
 package net.sf.mmm.util.nls.impl.formatter;
 
 import javax.inject.Named;
-
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
@@ -11,7 +10,7 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 /**
  * The {@link NlsFormatterType} for {@link net.sf.mmm.util.nls.api.NlsFormatterManager#STYLE_SHORT short}
  * {@link #getStyle() style}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

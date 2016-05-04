@@ -10,6 +10,7 @@ package net.sf.mmm.jpa.query.base.statement.jpql;
  */
 public class UnquotedJpqlDialect extends JpqlDialect {
 
+  @Override
   public String quoteReference() {
 
     return "";

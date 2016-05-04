@@ -11,9 +11,9 @@ import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to a {@link Boolean}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
+ * {@link Object} to a {@link Boolean}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -21,7 +21,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @Named
 public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object, Boolean> {
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
   /**
    * The constructor.
@@ -33,7 +33,7 @@ public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object
 
   /**
    * This method gets the {@link StringUtil} to use.
-   * 
+   *
    * @return the {@link StringUtil} instance.
    */
   protected StringUtil getStringUtil() {
@@ -43,7 +43,7 @@ public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object
 
   /**
    * This method sets the {@link StringUtil} to use.
-   * 
+   *
    * @param stringUtil is the {@link StringUtil} instance.
    */
   @Inject
@@ -73,6 +73,7 @@ public class ValueConverterToBoolean extends AbstractSimpleValueConverter<Object
     return Boolean.class;
   }
 
+  @Override
   @SuppressWarnings("all")
   public <T extends Boolean> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

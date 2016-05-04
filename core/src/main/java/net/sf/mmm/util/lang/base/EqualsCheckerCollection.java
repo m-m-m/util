@@ -9,18 +9,16 @@ import net.sf.mmm.util.lang.api.AbstractEqualsChecker;
 import net.sf.mmm.util.lang.api.EqualsChecker;
 
 /**
- * This is an implementation of {@link EqualsChecker} that recursively checks {@link Collection}s based on a
- * given {@link EqualsChecker} delegate. So if two objects should be {@link #isEqual(Object, Object) checked
- * for equality} that are both {@link Collection}s of the same kind, this implementation will check if they
- * have the same length and then recursively {@link #isEqual(Object, Object) check} the contained elements.
- * For objects of other types it will delegate to the {@link EqualsChecker} given at construction. This way
- * you can simply check if two {@link Collection}s have the
- * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame same} or
+ * This is an implementation of {@link EqualsChecker} that recursively checks {@link Collection}s based on a given
+ * {@link EqualsChecker} delegate. So if two objects should be {@link #isEqual(Object, Object) checked for equality}
+ * that are both {@link Collection}s of the same kind, this implementation will check if they have the same length and
+ * then recursively {@link #isEqual(Object, Object) check} the contained elements. For objects of other types it will
+ * delegate to the {@link EqualsChecker} given at construction. This way you can simply check if two {@link Collection}s
+ * have the {@link net.sf.mmm.util.lang.api.EqualsCheckerIsSame same} or
  * {@link net.sf.mmm.util.lang.api.EqualsCheckerIsEqual equal} elements. <br>
- * In case you want to ignore the type of the collection (e.g. allow {@link java.util.List} and
- * {@link java.util.Set} or only different implementations of {@link java.util.List} with same elements to be
- * considered as equal) you can extend this class and override
- * {@link #isEqualCollectionType(Collection, Collection)}.
+ * In case you want to ignore the type of the collection (e.g. allow {@link java.util.List} and {@link java.util.Set} or
+ * only different implementations of {@link java.util.List} with same elements to be considered as equal) you can extend
+ * this class and override {@link #isEqualCollectionType(Collection, Collection)}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -75,13 +73,13 @@ public class EqualsCheckerCollection extends AbstractEqualsChecker<Object> {
   }
 
   /**
-   * This method is called from {@link #isEqualNotNull(Object, Object)} to check if the
-   * {@link Object#getClass() type} of two given {@link Collection}s should be considered as equal.
+   * This method is called from {@link #isEqualNotNull(Object, Object)} to check if the {@link Object#getClass() type}
+   * of two given {@link Collection}s should be considered as equal.
    *
    * @param collection1 is the first {@link Collection}.
    * @param collection2 is the second {@link Collection}.
-   * @return {@code true} if the {@link Object#getClass() type} of the given {@link Collection}s is
-   *         considered as equal, {@code false} otherwise.
+   * @return {@code true} if the {@link Object#getClass() type} of the given {@link Collection}s is considered as equal,
+   *         {@code false} otherwise.
    */
   protected boolean isEqualCollectionType(Collection<?> collection1, Collection<?> collection2) {
 

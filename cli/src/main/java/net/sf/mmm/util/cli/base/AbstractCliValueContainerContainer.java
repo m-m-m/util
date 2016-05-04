@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.base;
 
+import org.slf4j.Logger;
+
 import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliOptionDuplicateException;
 import net.sf.mmm.util.cli.api.CliStyle;
@@ -9,8 +11,6 @@ import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.reflect.api.GenericType;
-
-import org.slf4j.Logger;
 
 /**
  * This is the abstract base class for a {@link CliValueContainer} that holds a {@link CliContainerStyle
@@ -53,7 +53,7 @@ public abstract class AbstractCliValueContainerContainer extends AbstractCliValu
       case COMMA_SEPARATED:
         setValueInternal(argument, ',', propertyType);
         break;
-      default :
+      default:
         throw new IllegalCaseException(CliContainerStyle.class, style);
     }
   }

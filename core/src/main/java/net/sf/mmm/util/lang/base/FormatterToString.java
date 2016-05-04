@@ -9,7 +9,7 @@ import net.sf.mmm.util.lang.api.StringUtil;
 /**
  * This is an implementation of {@link net.sf.mmm.util.lang.api.Formatter} that simply delegates to
  * {@link Object#toString()}.
- * 
+ *
  * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0

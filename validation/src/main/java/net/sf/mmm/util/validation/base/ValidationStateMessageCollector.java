@@ -6,11 +6,11 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
- * This is an implementation of {@link ValidationState} that wraps an existing {@link ValidationState} and
- * allows to {@link #onFailure(ValidationFailure) collect the potential}
- * {@link ValidationFailure#getMessage() messages} for a part of the validation process. <br>
+ * This is an implementation of {@link ValidationState} that wraps an existing {@link ValidationState} and allows to
+ * {@link #onFailure(ValidationFailure) collect the potential} {@link ValidationFailure#getMessage() messages} for a
+ * part of the validation process. <br>
  * <b>Example:</b><br>
- * 
+ *
  * <pre>
  * public boolean {@link net.sf.mmm.util.validation.api.ValidatableObject#validate(ValidationState) validate}({@link ValidationState} state) {
  *
@@ -31,19 +31,19 @@ import net.sf.mmm.util.validation.api.ValidationState;
  *   return messageCollector.{@link #isValid()};
  * }
  * </pre>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public class ValidationStateMessageCollector extends AbstractValidationStateCollector {
 
-  private  final String separator;
+  private final String separator;
 
-  private  StringBuilder failureMessages;
+  private StringBuilder failureMessages;
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link ValidationState} to adapt.
    */
   public ValidationStateMessageCollector(ValidationState delegate) {
@@ -53,7 +53,7 @@ public class ValidationStateMessageCollector extends AbstractValidationStateColl
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link ValidationState} to {@link #getDelegate() adapt}.
    * @param separator is the {@link #getSeparator() separator}.
    */
@@ -64,9 +64,9 @@ public class ValidationStateMessageCollector extends AbstractValidationStateColl
   }
 
   /**
-   * This method gets the {@link String} used to separate individual {@link #onFailure(ValidationFailure)
-   * validation failure} {@link ValidationFailure#getMessage() messages} for {@link #getFailureMessages()}.
-   * 
+   * This method gets the {@link String} used to separate individual {@link #onFailure(ValidationFailure) validation
+   * failure} {@link ValidationFailure#getMessage() messages} for {@link #getFailureMessages()}.
+   *
    * @return the separator.
    */
   public String getSeparator() {
@@ -93,9 +93,9 @@ public class ValidationStateMessageCollector extends AbstractValidationStateColl
   }
 
   /**
-   * This method gets the {@link #onFailure(ValidationFailure) collected}
-   * {@link ValidationFailure#getMessage() messages} separated with the {@link #getSeparator() separator}.
-   * 
+   * This method gets the {@link #onFailure(ValidationFailure) collected} {@link ValidationFailure#getMessage()
+   * messages} separated with the {@link #getSeparator() separator}.
+   *
    * @return the {@link ValidationFailure#getMessage() failure messages} or {@code null} if valid.
    */
   public String getFailureMessages() {

@@ -7,7 +7,7 @@ import net.sf.mmm.util.filter.api.Filter;
 /**
  * This is a filter that only {@link #accept(Class) accepts} {@link Class types} that are
  * {@link Class#isAssignableFrom(Class) assignable from} a {@link #AssignableFromFilter(Class) special type}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -16,11 +16,11 @@ public class AssignableFromFilter implements Filter<Class<?>> {
   /** The class */
   private final Class<?> superClass;
 
-  private  final boolean excludeSuperType;
+  private final boolean excludeSuperType;
 
   /**
    * The constructor.
-   * 
+   *
    * @param superClass is the super-type defining which types to {@link #accept(Class) accept}.
    */
   public AssignableFromFilter(Class<?> superClass) {
@@ -30,10 +30,10 @@ public class AssignableFromFilter implements Filter<Class<?>> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param superClass is the super-type defining which types to {@link #accept(Class) accept}.
-   * @param excludeSuperClass - {@code true} if the given {@code superClass} itself shall NOT be
-   *        {@link #accept(Class) accepted}, {@code false} otherwise.
+   * @param excludeSuperClass - {@code true} if the given {@code superClass} itself shall NOT be {@link #accept(Class)
+   *        accepted}, {@code false} otherwise.
    * @since 3.0.0
    */
   public AssignableFromFilter(Class<?> superClass, boolean excludeSuperClass) {
@@ -45,12 +45,12 @@ public class AssignableFromFilter implements Filter<Class<?>> {
 
   /**
    * {@inheritDoc}
-   * 
-   * @return {@code true} if and only if the given {@code type} is
-   *         {@link Class#isAssignableFrom(Class) assignable from} the super-type defined at
-   *         {@link #AssignableFromFilter(Class) construction}. This means the given {@code type} has to
-   *         implement/extend the super-type or be equal to it.
+   *
+   * @return {@code true} if and only if the given {@code type} is {@link Class#isAssignableFrom(Class) assignable from}
+   *         the super-type defined at {@link #AssignableFromFilter(Class) construction}. This means the given
+   *         {@code type} has to implement/extend the super-type or be equal to it.
    */
+  @Override
   public boolean accept(Class<?> type) {
 
     if (type != null) {

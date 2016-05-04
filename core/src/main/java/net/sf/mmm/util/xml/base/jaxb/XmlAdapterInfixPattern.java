@@ -8,7 +8,7 @@ import net.sf.mmm.util.pattern.base.RegexInfixPatternCompiler;
 
 /**
  * This class extends {@link XmlAdapterPattern} using {@link RegexInfixPatternCompiler}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

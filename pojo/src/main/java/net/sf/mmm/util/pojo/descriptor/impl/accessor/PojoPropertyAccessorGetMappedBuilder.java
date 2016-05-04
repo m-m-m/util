@@ -19,7 +19,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgB
 /**
  * This is the implementation of the {@link PojoPropertyAccessorOneArgBuilder} interface for
  * {@link PojoPropertyAccessorOneArgMode#GET_MAPPED mapped getter-access}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */

@@ -8,8 +8,8 @@ import java.util.List;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 
 /**
- * This is the abstract base implementation of {@link EnumDefinition} with no {@link #getCategory() category}
- * and a static set of {@link #getEnumValues() enum values}. For an example see {@link BooleanEnumDefinition}.
+ * This is the abstract base implementation of {@link EnumDefinition} with no {@link #getCategory() category} and a
+ * static set of {@link #getEnumValues() enum values}. For an example see {@link BooleanEnumDefinition}.
  *
  * @param <TYPE> is the generic type of the {@link #getEnumType() enum type}.
  *
@@ -20,7 +20,7 @@ public abstract class AbstractSimpleEnumDefinition<TYPE> extends AbstractEnumDef
 
   private static final long serialVersionUID = 6132710595390153755L;
 
-  private  List<TYPE> enumValues;
+  private List<TYPE> enumValues;
 
   /**
    * The constructor.

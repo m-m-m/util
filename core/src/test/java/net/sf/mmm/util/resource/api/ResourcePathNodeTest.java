@@ -4,15 +4,15 @@ package net.sf.mmm.util.resource.api;
 
 import java.util.regex.Pattern;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+
 import net.sf.mmm.util.lang.api.function.Function;
 import net.sf.mmm.util.lang.api.function.VoidFunction;
 import net.sf.mmm.util.resource.api.ResourcePathNode.ResourcePathRootHome;
 import net.sf.mmm.util.resource.api.ResourcePathNode.ResourcePathRootUnc;
 import net.sf.mmm.util.resource.api.ResourcePathNode.ResourcePathRootUrl;
 import net.sf.mmm.util.resource.api.ResourcePathNode.ResourcePathRootWindows;
-
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link ResourcePathNode}.

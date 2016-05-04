@@ -20,8 +20,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileAlreadyExistsException
    *
    * @param file is the name or path of the file.
-   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
-   *        if unknown.
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" already exists!")
@@ -31,8 +30,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileNotExistsException
    *
    * @param file is the name or path of the file.
-   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
-   *        if unknown.
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" does not exist!")
@@ -42,8 +40,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileCreationFailedException
    *
    * @param file is the name or path of the file.
-   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
-   *        if unknown.
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be created!")
@@ -53,8 +50,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileAttributeModificationFailedException
    *
    * @param file is the name or path of the file.
-   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
-   *        if unknown.
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The attributes of the {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be modified!")
@@ -65,8 +61,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @see net.sf.mmm.util.file.api.FileDeletionFailedException
    *
    * @param file is the name or path of the file.
-   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or
-   *        if unknown.
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or if unknown.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be deleted!")

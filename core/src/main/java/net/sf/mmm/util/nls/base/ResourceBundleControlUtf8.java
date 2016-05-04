@@ -29,8 +29,8 @@ public class ResourceBundleControlUtf8 extends Control {
   }
 
   @Override
-  public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
-      throws IllegalAccessException, InstantiationException, IOException {
+  public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader,
+      boolean reload) throws IllegalAccessException, InstantiationException, IOException {
 
     // copy of default implementation but with UTF-8 encoding.
     String bundleName = toBundleName(baseName, locale);

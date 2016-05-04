@@ -216,8 +216,8 @@ public interface GenericType<T> extends Type {
    * @see #getTypeArgumentCount()
    * @see java.lang.reflect.ParameterizedType#getActualTypeArguments()
    *
-   * @param index is the position of the requested type-argument. It has to be in the range from {@code 0} to 
-   *        <code>{@link #getTypeArgumentCount()} - 1</code>.
+   * @param index is the position of the requested type-argument. It has to be in the range from {@code 0} to <code>
+   *        {@link #getTypeArgumentCount()} - 1</code>.
    * @return the type-argument at the given {@code index}.
    */
   GenericType<?> getTypeArgument(int index);
@@ -244,6 +244,7 @@ public interface GenericType<T> extends Type {
    *
    * @return this {@link GenericType} as string.
    */
+  @Override
   String toString();
 
   /**

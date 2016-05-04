@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
  * The abstract base implementation of {@link Segment}.
- * 
+ *
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -25,7 +25,7 @@ public abstract class AbstractSegment<V extends Number> extends AbstractSimpleDa
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public AbstractSegment(V value) {
@@ -53,8 +53,8 @@ public abstract class AbstractSegment<V extends Number> extends AbstractSimpleDa
 
   /**
    * @param d is the {@link Double} value.
-   * @return the string representation formatted in a human friendly way (no scientific notation, limited
-   *         number of decimal digits, etc.) with potential precision loss.
+   * @return the string representation formatted in a human friendly way (no scientific notation, limited number of
+   *         decimal digits, etc.) with potential precision loss.
    */
   private static String formatDouble(double d) {
 

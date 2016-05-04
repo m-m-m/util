@@ -13,25 +13,25 @@ import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
  * This is an implementation of the {@link PojoPathContext} interface as simple Java bean.
- * 
+ *
  * @see DefaultPojoPathContext
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 public class PojoPathContextBean implements PojoPathContext {
 
-  private  Map<Object, Object> cache;
+  private Map<Object, Object> cache;
 
-  private  Properties properties;
+  private Properties properties;
 
-  private  PojoPathRecognizer recognizer;
+  private PojoPathRecognizer recognizer;
 
-  private  ComposedValueConverter additionalConverter;
+  private ComposedValueConverter additionalConverter;
 
-  private  PojoPathFunctionManager additionalFunctionManager;
+  private PojoPathFunctionManager additionalFunctionManager;
 
-  private  PojoFactory pojoFactory;
+  private PojoFactory pojoFactory;
 
   /**
    * The constructor. All fields are initially {@code null}.
@@ -49,7 +49,7 @@ public class PojoPathContextBean implements PojoPathContext {
 
   /**
    * This method sets the {@link #getAdditionalFunctionManager() additional function-manager}.
-   * 
+   *
    * @param additionalFunctionManager is the {@link PojoPathFunctionManager} to set.
    */
   public void setAdditionalFunctionManager(PojoPathFunctionManager additionalFunctionManager) {
@@ -65,7 +65,7 @@ public class PojoPathContextBean implements PojoPathContext {
 
   /**
    * This method sets the {@link #getAdditionalConverter() additional converter} .
-   * 
+   *
    * @param additionalConverter is the {@link ComposedValueConverter} to set.
    */
   public void setAdditionalConverter(ComposedValueConverter additionalConverter) {
@@ -81,7 +81,7 @@ public class PojoPathContextBean implements PojoPathContext {
 
   /**
    * This method sets the {@link #getCache() cache}.
-   * 
+   *
    * @param cache is the cache to set.
    */
   public void setCache(Map<Object, Object> cache) {
@@ -97,7 +97,7 @@ public class PojoPathContextBean implements PojoPathContext {
 
   /**
    * This method sets the {@link #getProperties() properties}.
-   * 
+   *
    * @param properties are the {@link Properties} to set.
    */
   public void setProperties(Properties properties) {
@@ -113,7 +113,7 @@ public class PojoPathContextBean implements PojoPathContext {
 
   /**
    * This method sets the {@link #getRecognizer() recognizer}.
-   * 
+   *
    * @param recognizer is the {@link PojoPathRecognizer} to set.
    */
   public void setRecognizer(PojoPathRecognizer recognizer) {
@@ -129,7 +129,7 @@ public class PojoPathContextBean implements PojoPathContext {
 
   /**
    * This method sets the {@link #getPojoFactory() pojo-factory}.
-   * 
+   *
    * @param pojoFactory is the {@link PojoFactory} to set.
    */
   public void setPojoFactory(PojoFactory pojoFactory) {

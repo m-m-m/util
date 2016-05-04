@@ -3,9 +3,8 @@
 package net.sf.mmm.util.filter.api;
 
 /**
- * This is a simple indirection to {@link Character#isWhitespace(char)} that can be replaced for GWT
- * compatibility.
- * 
+ * This is a simple indirection to {@link Character#isWhitespace(char)} that can be replaced for GWT compatibility.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -21,8 +20,7 @@ final class WhitespaceHelper {
 
   /**
    * @param c is the character to check.
-   * @return {@code true} if {@link Character#isWhitespace(char) whitespace}, {@code false}
-   *         otherwise.
+   * @return {@code true} if {@link Character#isWhitespace(char) whitespace}, {@code false} otherwise.
    */
   public static boolean isWhitespace(char c) {
 

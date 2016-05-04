@@ -9,17 +9,17 @@ import java.util.Set;
 
 /**
  * Generic {@link ResourceBundle} for dynamic creation from key/value pairs.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
 public class GenericResourceBundle extends ResourceBundle {
 
-  private  final Hashtable<String, String> bundle;
+  private final Hashtable<String, String> bundle;
 
   /**
    * The constructor.
-   * 
+   *
    * @param bundle are the actual key/value pairs with the bundle texts.
    */
   public GenericResourceBundle(Hashtable<String, String> bundle) {

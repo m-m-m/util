@@ -12,7 +12,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * This class is a {@link Writer} that adapts an {@link Appendable}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -23,7 +23,7 @@ public class AppendableWriter extends Writer {
 
   /**
    * The constructor.
-   * 
+   *
    * @param appendable is the {@link Appendable} to adapt.
    */
   public AppendableWriter(Appendable appendable) {
@@ -115,7 +115,7 @@ public class AppendableWriter extends Writer {
 
   /**
    * This method gets the {@link Appendable} to delegate to.
-   * 
+   *
    * @return the appendable
    */
   public Appendable getAppendable() {

@@ -6,8 +6,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 /**
- * This class extends {@link AbstractValueConverterToCompatiblePojo} so it is used as fallback converter for
- * any {@link Object} if no more specific converter is matching.
+ * This class extends {@link AbstractValueConverterToCompatiblePojo} so it is used as fallback converter for any
+ * {@link Object} if no more specific converter is matching.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0

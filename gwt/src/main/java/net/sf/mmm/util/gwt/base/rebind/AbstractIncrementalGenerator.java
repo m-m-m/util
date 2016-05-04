@@ -8,8 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-
 import com.google.gwt.core.ext.CachedGeneratorResult;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.IncrementalGenerator;
@@ -24,12 +22,13 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+
 /**
- * This is the abstract base implementation for {@link IncrementalGenerator}s for GWT environments, that
- * generates a {@link Class} from a single input type. If the input type has not been modified since the last
- * generation the {@link #isCachedResultObsolete(CachedGeneratorResult, String) generated result is reused by
- * default}.
- * 
+ * This is the abstract base implementation for {@link IncrementalGenerator}s for GWT environments, that generates a
+ * {@link Class} from a single input type. If the input type has not been modified since the last generation the
+ * {@link #isCachedResultObsolete(CachedGeneratorResult, String) generated result is reused by default}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -62,7 +61,7 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
 
   /**
    * This method performs the actual generation of the {@link Class} to rebind.
-   * 
+   *
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @param logger is the {@link TreeLogger}.
@@ -74,7 +73,8 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
     String packageName = inputType.getPackage().getName();
     String simpleName = createClassName(inputType);
     logger.log(TreeLogger.DEBUG, getClass().getSimpleName() + ": Generating " + simpleName);
-    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName, simpleName);
+    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName,
+        simpleName);
     // Import statements
     generateImportStatements(inputType, logger, sourceComposerFactory, context);
 
@@ -93,9 +93,8 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
 
   /**
    * This method generates the import statements. It shall only perform invocations of
-   * {@link ClassSourceFileComposerFactory#addImport(String)} to the given
-   * {@link ClassSourceFileComposerFactory}.
-   * 
+   * {@link ClassSourceFileComposerFactory#addImport(String)} to the given {@link ClassSourceFileComposerFactory}.
+   *
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @param logger is the {@link TreeLogger}.
@@ -106,8 +105,8 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
       ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context);
 
   /**
-   * This method generates the additional things for the class declaration. This is the place where to invoke
-   * methods like
+   * This method generates the additional things for the class declaration. This is the place where to invoke methods
+   * like
    * <ul>
    * <li>{@link ClassSourceFileComposerFactory#setSuperclass(String)}</li>
    * <li>{@link ClassSourceFileComposerFactory#addImplementedInterface(String)}</li>
@@ -116,11 +115,11 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
    * <li>{@link ClassSourceFileComposerFactory#setJavaDocCommentForClass(String)}</li>
    * </ul>
    * on the given {@link ClassSourceFileComposerFactory}. E.g.
-   * 
+   *
    * <pre>
    * sourceComposerFactory.addImplementedInterface(inputType.getQualifiedSourceName());
    * </pre>
-   * 
+   *
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @param logger is the {@link TreeLogger}.
@@ -132,12 +131,12 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
 
   /**
    * This method generates the actual contents of the {@link Class} to generate.
-   * 
+   *
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @param logger is the {@link TreeLogger}.
-   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the
-   *        source code to.
+   * @param sourceWriter is the {@link SourceWriter} where to {@link SourceWriter#print(String) write} the source code
+   *        to.
    * @param simpleName is the {@link Class#getSimpleName() simple name} of the {@link Class} to generate.
    * @param context is the {@link GeneratorContext}.
    */
@@ -145,10 +144,10 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
       String simpleName, GeneratorContext context);
 
   /**
-   * This method creates the {@link Class#getSimpleName() simple name} of the {@link Class} to generate.
-   * Typically derived from {@link JClassType#getName()} of the given {@code inputType} with a static
-   * suffix or prefix that is specific enough to avoid clashing with existing classes.
-   * 
+   * This method creates the {@link Class#getSimpleName() simple name} of the {@link Class} to generate. Typically
+   * derived from {@link JClassType#getName()} of the given {@code inputType} with a static suffix or prefix that is
+   * specific enough to avoid clashing with existing classes.
+   *
    * @param inputType is the {@link JClassType} reflecting the input-type that triggered the generation via
    *        {@link com.google.gwt.core.client.GWT#create(Class)}.
    * @return the {@link Class#getSimpleName() simple name} of the {@link Class} to generate.
@@ -161,7 +160,7 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
 
   /**
    * Generates the the default constructor.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param simpleName is the {@link Class#getSimpleName() simple name}.
    */
@@ -175,7 +174,7 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
   /**
    * This method generates the source code for a public method or constructor including the opening brace and
    * indentation.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param methodName is the name of the method (or the {@link Class#getSimpleName() simple class name} for a
    *        constructor}.
@@ -186,9 +185,8 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
   }
 
   /**
-   * This method generates the source code for a public method declaration including the opening brace and
-   * indentation.
-   * 
+   * This method generates the source code for a public method declaration including the opening brace and indentation.
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param method is the {@link JMethod} to implement.
    */
@@ -210,7 +208,7 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
   /**
    * This method generates the source code for a public method or constructor including the opening brace and
    * indentation.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param returnType is the return type of the method.
    * @param methodName is the name of the method (or the {@link Class#getSimpleName() simple class name} for a
@@ -238,7 +236,7 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
 
   /**
    * This method generates the source code to close a block (method body, if-block, while-block, etc.).
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    */
   protected final void generateSourceCloseBlock(SourceWriter sourceWriter) {
@@ -250,11 +248,11 @@ public abstract class AbstractIncrementalGenerator extends IncrementalGenerator 
 
   /**
    * This method determines whether a {@link CachedGeneratorResult} is obsolete or can be reused.
-   * 
+   *
    * @param cachedGeneratorResult is the {@link CachedGeneratorResult}.
    * @param typeName is the full-qualified name of the {@link Class} to generate.
-   * @return {@code true} if the {@link CachedGeneratorResult} is obsolete and has to be re-generated,
-   *         {@code false} otherwise (if it can be reused).
+   * @return {@code true} if the {@link CachedGeneratorResult} is obsolete and has to be re-generated, {@code false}
+   *         otherwise (if it can be reused).
    */
   protected boolean isCachedResultObsolete(CachedGeneratorResult cachedGeneratorResult, String typeName) {
 

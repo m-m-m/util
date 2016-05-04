@@ -13,8 +13,7 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
- * This is an abstract base implementation of a checked exception with real <em>native language support</em>
- * (NLS). <br>
+ * This is an abstract base implementation of a checked exception with real <em>native language support</em> (NLS). <br>
  * <b>ATTENTION:</b><br>
  * Checked exceptions are discouraged and should be avoided. Use {@link NlsRuntimeException} instead.
  *
@@ -30,7 +29,7 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
   /** the internationalized message */
   private final NlsMessage nlsMessage;
 
-  private  final UUID uuid;
+  private final UUID uuid;
 
   /**
    * The constructor.
@@ -131,8 +130,8 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
   /**
    * {@inheritDoc}
    *
-   * This default implementation is using {@link #createCopyViaClone(ExceptionTruncation) clone} to create a
-   * copy and truncate it as configured. However, a proper implementation would use the appropriate
+   * This default implementation is using {@link #createCopyViaClone(ExceptionTruncation) clone} to create a copy and
+   * truncate it as configured. However, a proper implementation would use the appropriate
    * {@link #NlsException(NlsException, ExceptionTruncation) copy constructor} instead.
    */
   @Override

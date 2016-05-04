@@ -5,14 +5,14 @@ package net.sf.mmm.util.event.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.util.event.api.ChangeEvent;
 import net.sf.mmm.util.event.api.ChangeType;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventBus;
 import net.sf.mmm.util.event.api.EventListener;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link EventBus} and its implementation.
@@ -210,8 +210,8 @@ public abstract class EventBusTest extends Assert {
     private int eventId;
 
     /**
-     * The {@link EventThread#getId() id} of the thread who initially triggered the event (mainly for
-     * debugging and tracing).
+     * The {@link EventThread#getId() id} of the thread who initially triggered the event (mainly for debugging and
+     * tracing).
      */
     private int sourceThreadId;
 

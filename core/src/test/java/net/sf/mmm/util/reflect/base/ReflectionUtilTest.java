@@ -21,6 +21,7 @@ import org.junit.runner.Result;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.impl.GenericTypeImpl;
 import net.sf.mmm.util.reflect.impl.TypeVariableImpl;
 
@@ -46,7 +47,7 @@ public class ReflectionUtilTest extends Assertions {
   private GenericType getReturnType(GenericType definingType, String methodName) throws Exception {
 
     Class<?> declaringClass = definingType.getRetrievalClass();
-    Method method = declaringClass.getMethod(methodName, ReflectionUtil.NO_PARAMETERS);
+    Method method = declaringClass.getMethod(methodName, ReflectionUtilLimited.NO_PARAMETERS);
     return getReflectionUtil().createGenericType(method.getGenericReturnType(), definingType);
   }
 
@@ -286,6 +287,7 @@ public class ReflectionUtilTest extends Assertions {
     Set<String> resourceNameSet;
     Filter<String> filter = new Filter<String>() {
 
+      @Override
       public boolean accept(String value) {
 
         if (value.endsWith(".xml")) {
@@ -331,13 +333,22 @@ public class ReflectionUtilTest extends Assertions {
 
   public static class StringList extends ArrayList<String> {
 
+    /** TODO: javadoc. */
+    private static final long serialVersionUID = 1L;
+
   }
 
   public static class ParameterizedStringList<E> extends StringList {
 
+    /** TODO: javadoc. */
+    private static final long serialVersionUID = 1L;
+
   }
 
   public static class ExParameterizedStringList extends ParameterizedStringList<Integer> {
+
+    /** TODO: javadoc. */
+    private static final long serialVersionUID = 1L;
 
   }
 

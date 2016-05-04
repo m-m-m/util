@@ -6,7 +6,7 @@ import net.sf.mmm.util.entity.api.EntityId;
 
 /**
  * This is the abstract base implementation of {@link EntityId}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

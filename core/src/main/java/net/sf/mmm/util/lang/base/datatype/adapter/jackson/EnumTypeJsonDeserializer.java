@@ -6,17 +6,16 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.lang.api.EnumProvider;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
+import net.sf.mmm.util.lang.api.EnumProvider;
+
 /**
- * This is a generic implementation of {@link JsonDeserializer} based on {@link EnumProvider} so every
- * {@link Enum} and {@link net.sf.mmm.util.lang.api.EnumType} supported by {@link EnumProvider} can be
- * deserialized from JSON.
+ * This is a generic implementation of {@link JsonDeserializer} based on {@link EnumProvider} so every {@link Enum} and
+ * {@link net.sf.mmm.util.lang.api.EnumType} supported by {@link EnumProvider} can be deserialized from JSON.
  *
  * @see DatatypeJsonSerializer
  *
@@ -30,7 +29,7 @@ public class EnumTypeJsonDeserializer<T> extends JsonDeserializer<T> {
   /** The class reflecting the datatype to deserialize. */
   private final Class<T> enumType;
 
-  private  EnumProvider enumProvider;
+  private EnumProvider enumProvider;
 
   /**
    * The constructor.
@@ -66,7 +65,8 @@ public class EnumTypeJsonDeserializer<T> extends JsonDeserializer<T> {
   }
 
   @Override
-  public T deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+  public T deserialize(JsonParser parser, DeserializationContext context)
+      throws IOException, JsonProcessingException {
 
     String value = parser.getText();
     return this.enumProvider.getEnumValue(this.enumType, value, true);

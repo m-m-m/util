@@ -51,7 +51,7 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
 @Named
 public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFactory {
 
-  private  static BeanFactory instance;
+  private static BeanFactory instance;
 
   private static final Type PROPERTY_VALUE_TYPE_VARIABLE = Property.class.getTypeParameters()[0];
 
@@ -474,8 +474,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
     /**
      * @param type the {@link Class} reflecting the {@link Bean} or one of its parent types to visit.
-     * @return {@code true} if the given {@link Class} should be visited (introspected), {@code false} if it
-     *         has already been visited.
+     * @return {@code true} if the given {@link Class} should be visited (introspected), {@code false} if it has already
+     *         been visited.
      */
     public boolean visitType(Class<?> type) {
 

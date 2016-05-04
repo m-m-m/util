@@ -151,9 +151,9 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
     }
   };
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.
@@ -173,9 +173,8 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *         {@code true} for {@link Object}s that are {@link Object#equals(Object) equal} to each other,
-   *         {@code false} otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to {@code true} for
+   *         {@link Object}s that are {@link Object#equals(Object) equal} to each other, {@code false} otherwise.
    */
   boolean isTrueIfEquals() {
 
@@ -183,8 +182,8 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *         {@code true} in case the first argument is less than the second, {@code false} otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to {@code true} in
+   *         case the first argument is less than the second, {@code false} otherwise.
    */
   boolean isTrueIfLess() {
 
@@ -192,8 +191,8 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *         {@code true} in case the first argument is greater than the second, {@code false} otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to {@code true} in
+   *         case the first argument is greater than the second, {@code false} otherwise.
    */
   boolean isTrueIfGreater() {
 

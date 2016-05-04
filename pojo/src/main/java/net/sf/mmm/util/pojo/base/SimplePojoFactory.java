@@ -11,7 +11,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 /**
  * This is the simplest implementation of the {@link PojoFactory} interface. <br>
  * It uses {@link Class#newInstance()} to create {@link #newInstance(Class) new instances}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -39,7 +39,7 @@ public class SimplePojoFactory extends AbstractLoggableComponent implements Pojo
 
   /**
    * Implementation of {@link #newInstance(Class)} for regular class.
-   * 
+   *
    * @param <POJO> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
    * @param pojoType is the {@link Class} reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
    * @return the new instance of the given {@code pojoType}.
@@ -55,13 +55,12 @@ public class SimplePojoFactory extends AbstractLoggableComponent implements Pojo
   }
 
   /**
-   * This method is invoked from {@link #newInstance(Class)} if the given {@link Class} is an
-   * {@link Class#isInterface() interface}.
-   * 
+   * This method is invoked from {@link #newInstance(Class)} if the given {@link Class} is an {@link Class#isInterface()
+   * interface}.
+   *
    * @param <POJO> is the generic type of the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
    * @param pojoInterface is the interface reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} to create.
-   * @return the new instance of the given {@code pojoType} or {@code null} if no implementation
-   *         could be found.
+   * @return the new instance of the given {@code pojoType} or {@code null} if no implementation could be found.
    * @throws InstantiationFailedException if the instantiation failed.
    */
   protected <POJO> POJO newInstanceForInterface(Class<POJO> pojoInterface) throws InstantiationFailedException {

@@ -9,13 +9,13 @@ import static org.junit.Assert.fail;
 
 import java.util.NoSuchElementException;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
+
+import junit.framework.Assert;
 
 /**
  * This is the test-case for {@link StringTokenizer}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

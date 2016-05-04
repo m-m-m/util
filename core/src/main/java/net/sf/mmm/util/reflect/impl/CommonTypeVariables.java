@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This class contains common {@link TypeVariable}s.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */

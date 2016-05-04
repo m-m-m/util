@@ -10,23 +10,24 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.SimpleGenericTypeLimited;
 
 /**
- * This is the abstract base implementation of the {@link PojoPropertyAccessorOneArg} interface for accessing
- * a setter {@link java.lang.reflect.Method} in a limited environment (GWT).
- * 
+ * This is the abstract base implementation of the {@link PojoPropertyAccessorOneArg} interface for accessing a setter
+ * {@link java.lang.reflect.Method} in a limited environment (GWT).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public abstract class AbstractPojoPropertyAccessorSetMethod extends AbstractPojoPropertyAccessorMethodLimited implements
-    PojoPropertyAccessorOneArg {
+public abstract class AbstractPojoPropertyAccessorSetMethod extends AbstractPojoPropertyAccessorMethodLimited
+    implements PojoPropertyAccessorOneArg {
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() property type}.
    * @param declaringClass is the {@link #getDeclaringClass() declaring class}.
    */
-  public AbstractPojoPropertyAccessorSetMethod(String propertyName, GenericType<?> propertyType, Class<?> declaringClass) {
+  public AbstractPojoPropertyAccessorSetMethod(String propertyName, GenericType<?> propertyType,
+      Class<?> declaringClass) {
 
     super(propertyName, propertyType, declaringClass);
   }

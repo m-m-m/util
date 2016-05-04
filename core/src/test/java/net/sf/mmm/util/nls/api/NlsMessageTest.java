@@ -14,6 +14,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
@@ -25,15 +28,12 @@ import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.nls.impl.NlsTemplateResolverImpl;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceNoElseConditionException;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceOnlyElseConditionException;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.text.api.Justification;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link NlsMessage} and {@link NlsMessageFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -98,11 +98,12 @@ public class NlsMessageTest {
 
     String keyExpected = "expectedType";
     String keyActual = "actualType";
-    final String err = "The given value must be of the type \"{" + keyExpected + "}\" but has the type \"{" + keyActual
-        + "}\"!";
+    final String err = "The given value must be of the type \"{" + keyExpected + "}\" but has the type \"{"
+        + keyActual + "}\"!";
     final String errDe = "Der angegebene Wert muss vom Typ \"{" + keyExpected + "}\" sein, hat aber den Typ \"{"
         + keyActual + "}\"!";
-    NlsMessage cascadedMessage = factory.create(err, keyExpected, simpleMessageInteger, keyActual, simpleMessageReal);
+    NlsMessage cascadedMessage = factory.create(err, keyExpected, simpleMessageInteger, keyActual,
+        simpleMessageReal);
     AbstractNlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
       @Override
@@ -121,8 +122,9 @@ public class NlsMessageTest {
     };
     translatorDe.initialize();
     String msgDe = cascadedMessage.getLocalizedMessage(Locale.GERMAN, translatorDe);
-    Assert.assertEquals("Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein, "
-        + "hat aber den Typ \"relle Zahl[-5,5]\"!", msgDe);
+    Assert.assertEquals(
+        "Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein, " + "hat aber den Typ \"relle Zahl[-5,5]\"!",
+        msgDe);
   }
 
   @Test
@@ -162,8 +164,10 @@ public class NlsMessageTest {
         + " and by custom pattern: 1999.12.31-23:59:59+0100!", msg.getMessage());
     Locale german = Locale.GERMAN;
     String dateStringDe = formatDate(date, german);
-    Assert.assertEquals("Datum formatiert nach Locale: " + dateStringDe + ", nach ISO-8601: " + iso8601String
-        + " und nach individueller Vorlage: 1999.12.31-23:59:59+0100!", msg.getLocalizedMessage(german, resolver));
+    Assert.assertEquals(
+        "Datum formatiert nach Locale: " + dateStringDe + ", nach ISO-8601: " + iso8601String
+            + " und nach individueller Vorlage: 1999.12.31-23:59:59+0100!",
+        msg.getLocalizedMessage(german, resolver));
     // test custom format
     String customFormat = "yyyyMMdd";
     msg = factory.create("{date,date," + customFormat + "}", "date", date);
@@ -172,11 +176,11 @@ public class NlsMessageTest {
     Assert.assertEquals(expected, msg.getMessage());
 
     String[] types = new String[] { NlsFormatterManager.TYPE_DATE, NlsFormatterManager.TYPE_TIME,
-        NlsFormatterManager.TYPE_DATETIME };
+    NlsFormatterManager.TYPE_DATETIME };
     String[] styles = new String[] { NlsFormatterManager.STYLE_SHORT, NlsFormatterManager.STYLE_MEDIUM,
-        NlsFormatterManager.STYLE_LONG, NlsFormatterManager.STYLE_FULL, null };
+    NlsFormatterManager.STYLE_LONG, NlsFormatterManager.STYLE_FULL, null };
     int[] dateStyles = new int[] { DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.LONG, DateFormat.FULL,
-        DateFormat.MEDIUM };
+    DateFormat.MEDIUM };
     Locale locale = Locale.GERMANY;
     for (String type : types) {
       for (int styleIndex = 0; styleIndex < styles.length; styleIndex++) {
@@ -228,10 +232,9 @@ public class NlsMessageTest {
     Assert.assertEquals(
         "Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!",
         msg.getMessage());
-    Assert
-        .assertEquals(
-            "Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
-            msg.getLocalizedMessage(Locale.GERMANY, resolver));
+    Assert.assertEquals(
+        "Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
+        msg.getLocalizedMessage(Locale.GERMANY, resolver));
   }
 
   /**
@@ -240,7 +243,7 @@ public class NlsMessageTest {
   @Test
   public void testMessageTypeType() throws Exception {
 
-    Method method = GenericClass.class.getMethod("get", ReflectionUtil.NO_PARAMETERS);
+    Method method = GenericClass.class.getMethod("get", ReflectionUtilLimited.NO_PARAMETERS);
     Type type = method.getGenericReturnType();
     String key = "key";
     NlsMessage msg;
@@ -374,6 +377,9 @@ public class NlsMessageTest {
    * A very stupid and insane template implementation for testing.
    */
   private static class GermanTemplate extends AbstractNlsTemplate {
+
+    /** TODO: javadoc. */
+    private static final long serialVersionUID = 1L;
 
     private final String msgDe;
 

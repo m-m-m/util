@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
 
 /**
  * This is the implementation of {@link NlsMessageFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

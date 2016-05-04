@@ -7,12 +7,14 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
 
 /**
  * This is the interface used to create a {@link PojoPropertyAccessorOneArg one-arg accessor}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public interface PojoPropertyAccessorOneArgBuilder extends PojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg> {
+public interface PojoPropertyAccessorOneArgBuilder
+    extends PojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg> {
 
+  @Override
   PojoPropertyAccessorOneArgMode getMode();
 
 }

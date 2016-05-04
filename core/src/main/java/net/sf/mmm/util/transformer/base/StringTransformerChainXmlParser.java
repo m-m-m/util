@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import net.sf.mmm.util.pattern.api.PatternCompiler;
 import net.sf.mmm.util.pattern.base.RegexPatternCompiler;
 import net.sf.mmm.util.transformer.api.StringTransformerRule;
 import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.base.DomUtilImpl;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * This class allows to parse a list of {@link StringTransformerRule}s from XML and build an according
@@ -35,10 +35,10 @@ import org.w3c.dom.NodeList;
  * @deprecated - use JAXB directly:
  *
  *             <pre>
- * JAXBContext context = JAXBContext.newInstance(StringTransformerList.class);
- * 
- * StringTransformerList chains = (StringTransformerList) context.createUnmarshaller().unmarshal(source);
- * </pre>
+ *             JAXBContext context = JAXBContext.newInstance(StringTransformerList.class);
+ *
+ *             StringTransformerList chains = (StringTransformerList) context.createUnmarshaller().unmarshal(source);
+ *             </pre>
  */
 @Deprecated
 public class StringTransformerChainXmlParser {
@@ -70,8 +70,8 @@ public class StringTransformerChainXmlParser {
   public static final String XML_ATR_RULE_REPLACEMENT = "replacement";
 
   /**
-   * The name of the XML attribute for {@link RegexStringTransformerRule#isReplaceAll()}. Default value is
-   * {@code false}.
+   * The name of the XML attribute for {@link RegexStringTransformerRule#isReplaceAll()}. Default value is {@code false}
+   * .
    */
   public static final String XML_ATR_RULE_REPLACEALL = "replace-all";
 
@@ -81,7 +81,7 @@ public class StringTransformerChainXmlParser {
    */
   public static final String XML_ATR_RULE_STOPONMATCH = "stop-on-match";
 
-  private  final DomUtil domUtil;
+  private final DomUtil domUtil;
 
   /** @see #StringTransformerChainXmlParser(DomUtil, PatternCompiler) */
   private PatternCompiler patternCompiler;

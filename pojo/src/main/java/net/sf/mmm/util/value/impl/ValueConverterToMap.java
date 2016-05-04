@@ -14,9 +14,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to a {@link Map}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
+ * {@link Object} to a {@link Map}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -77,7 +77,8 @@ public class ValueConverterToMap extends AbstractValueConverterToContainer<Map> 
   @Override
   protected <T extends Map> T createContainer(GenericType<T> targetType, int length) {
 
-    CollectionFactoryManager collectionFactoryManager = getCollectionReflectionUtil().getCollectionFactoryManager();
+    CollectionFactoryManager collectionFactoryManager = getCollectionReflectionUtil()
+        .getCollectionFactoryManager();
     Class<T> mapType = targetType.getRetrievalClass();
     return (T) collectionFactoryManager.getMapFactory(mapType).create(length);
   }

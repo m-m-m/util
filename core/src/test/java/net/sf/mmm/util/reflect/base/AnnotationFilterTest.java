@@ -10,11 +10,9 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.reflect.base.AnnotationFilter;
-
 /**
  * This is the test-case for the class {@link AnnotationFilter}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

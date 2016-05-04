@@ -12,8 +12,8 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor} for a
- * {@link SimpleDatatype}.
+ * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor} for a {@link SimpleDatatype}
+ * .
  *
  * @param <T> is the generic type of the described {@link SimpleDatatype}.
  * @param <V> is the generic type of the datatypes {@link SimpleDatatype#getValue() value}.
@@ -21,8 +21,8 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
  */
-public class DatatypeSegmentDescriptorSimpleDatatype<T extends SimpleDatatype<V>, V> extends
-    AbstractDatatypeSegmentDescriptor<T, V> {
+public class DatatypeSegmentDescriptorSimpleDatatype<T extends SimpleDatatype<V>, V>
+    extends AbstractDatatypeSegmentDescriptor<T, V> {
 
   /**
    * The constructor.
@@ -42,8 +42,8 @@ public class DatatypeSegmentDescriptorSimpleDatatype<T extends SimpleDatatype<V>
   }
 
   /**
-   * Creates a new instance of {@link DatatypeSegmentDescriptorSimpleDatatype} for the given
-   * {@link SimpleDatatype} {@link Class}.
+   * Creates a new instance of {@link DatatypeSegmentDescriptorSimpleDatatype} for the given {@link SimpleDatatype}
+   * {@link Class}.
    *
    * @param <T> is the generic type of the {@link SimpleDatatype}.
    * @param <V> is the generic type of the datatypes {@link SimpleDatatype#getValue() value}.

@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliOptionAndArgumentAnnotationException} is thrown if a property is annotated with both
- * {@link CliOption} and {@link CliArgument}.
+ * A {@link CliOptionAndArgumentAnnotationException} is thrown if a property is annotated with both {@link CliOption}
+ * and {@link CliArgument}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

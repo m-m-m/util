@@ -12,10 +12,10 @@ import net.sf.mmm.util.collection.api.DoubleLinkedNode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleLinkedNode<V>> implements
-    DoubleLinkedNode<V, BasicDoubleLinkedNode<V>> {
+public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleLinkedNode<V>>
+    implements DoubleLinkedNode<V, BasicDoubleLinkedNode<V>> {
 
-  private  BasicDoubleLinkedNode<V> previous;
+  private BasicDoubleLinkedNode<V> previous;
 
   /**
    * The constructor.
@@ -34,8 +34,8 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   /**
    * This method sets the {@link #getPrevious() previous node}.
    *
-   * @param previous is the {@link #getPrevious() previous node} to set. May be {@code null} to indicate that this
-   *        is the first node of the list.
+   * @param previous is the {@link #getPrevious() previous node} to set. May be {@code null} to indicate that this is
+   *        the first node of the list.
    */
   public void setPrevious(BasicDoubleLinkedNode<V> previous) {
 
@@ -44,19 +44,19 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
 
   /**
    * This method inserts the given {@code value} into the list at the position represented by this node. It will
-   * typically create a new node containing the given {@code value} and {@link #setNext(AbstractLinkedNode) set it
-   * as next}. It will guarantee the following equation:
+   * typically create a new node containing the given {@code value} and {@link #setNext(AbstractLinkedNode) set it as
+   * next}. It will guarantee the following equation:
    *
    * <pre>
    * this.{@link #getNext()}.{@link #getPrevious()} == this
    * </pre>
    *
-   * If {@code overrideNullValue} is {@code true} and the {@link #getValue() value} of this node is
-   * {@code null}, then its value is set to the given {@code value} instead of creating a new node.
+   * If {@code overrideNullValue} is {@code true} and the {@link #getValue() value} of this node is {@code null}, then
+   * its value is set to the given {@code value} instead of creating a new node.
    *
    * @param value is the value to insert.
-   * @param overrideNullValue - {@code true} if a {@link #getValue() value} of {@code null} should be replaced
-   *        with the given {@code value}, {@code false} otherwise.
+   * @param overrideNullValue - {@code true} if a {@link #getValue() value} of {@code null} should be replaced with the
+   *        given {@code value}, {@code false} otherwise.
    * @return the node containing the given {@code value}.
    */
   public BasicDoubleLinkedNode<V> insertAsNext(V value, boolean overrideNullValue) {
@@ -74,8 +74,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given {@code node} into the list immediately after the position represented by this
-   * node.
+   * This method inserts the given {@code node} into the list immediately after the position represented by this node.
    *
    * @param node is the {@link BasicDoubleLinkedNode node} to add.
    */
@@ -91,8 +90,7 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
   }
 
   /**
-   * This method inserts the given {@code node} into the list immediately before the position represented by this
-   * node.
+   * This method inserts the given {@code node} into the list immediately before the position represented by this node.
    *
    * @param node is the {@link BasicDoubleLinkedNode node} to add.
    */
@@ -108,19 +106,19 @@ public class BasicDoubleLinkedNode<V> extends AbstractLinkedNode<V, BasicDoubleL
 
   /**
    * This method inserts the given {@code value} into the list at the position represented by this node. It will
-   * typically create a new node containing the given {@code value} and {@link #setNext(AbstractLinkedNode) set it
-   * as next}. It will guarantee the following equation:
+   * typically create a new node containing the given {@code value} and {@link #setNext(AbstractLinkedNode) set it as
+   * next}. It will guarantee the following equation:
    *
    * <pre>
    * this.{@link #getNext()}.{@link #getPrevious()} == this
    * </pre>
    *
-   * If {@code overrideNullValue} is {@code true} and the {@link #getValue() value} of this node is
-   * {@code null}, then its value is set to the given {@code value} instead of creating a new node.
+   * If {@code overrideNullValue} is {@code true} and the {@link #getValue() value} of this node is {@code null}, then
+   * its value is set to the given {@code value} instead of creating a new node.
    *
    * @param value is the value to insert.
-   * @param overrideNullValue - {@code true} if a {@link #getValue() value} of {@code null} should be replaced
-   *        with the given {@code value}, {@code false} otherwise.
+   * @param overrideNullValue - {@code true} if a {@link #getValue() value} of {@code null} should be replaced with the
+   *        given {@code value}, {@code false} otherwise.
    * @return the node containing the given {@code value}.
    */
   public BasicDoubleLinkedNode<V> insertAsPrevious(V value, boolean overrideNullValue) {

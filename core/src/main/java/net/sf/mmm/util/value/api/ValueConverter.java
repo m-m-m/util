@@ -51,6 +51,7 @@ public interface ValueConverter<SOURCE, TARGET> extends SimpleValueConverter<SOU
    *
    * @see #convert(Object, Object, GenericType)
    */
+  @Override
   <T extends TARGET> T convert(SOURCE value, Object valueSource, Class<T> targetClass) throws ValueException;
 
   /**
@@ -65,8 +66,8 @@ public interface ValueConverter<SOURCE, TARGET> extends SimpleValueConverter<SOU
    *        therefore contains more detailed information than a {@link Class}. E.g. the {@code targetType} could be
    *        <code>java.util.List&lt;Long&gt;</code>. This could help e.g. if the {@code value} is a string like
    *        {@code "2, 47, 4252525"}.
-   * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value
-   *         has to be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
+   * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value has to be
+   *         an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
    * @throws ValueException if the conversion failed (e.g. the given {@code value} is illegal for the given
    *         {@code targetClass}).
    */

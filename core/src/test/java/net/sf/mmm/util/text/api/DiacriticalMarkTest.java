@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * This is the test-case for {@link DiacriticalMark}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

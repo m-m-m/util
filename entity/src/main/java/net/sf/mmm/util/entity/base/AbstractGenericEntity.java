@@ -5,20 +5,20 @@ package net.sf.mmm.util.entity.base;
 import net.sf.mmm.util.entity.api.MutableGenericEntity;
 
 /**
- * This is the abstract base-class that implementations of {@link MutableGenericEntity} should inherit from
- * (if possible).
- * 
+ * This is the abstract base-class that implementations of {@link MutableGenericEntity} should inherit from (if
+ * possible).
+ *
  * @param <ID> is the type of the {@link #getId() primary key}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class AbstractGenericEntity<ID> implements MutableGenericEntity<ID> {
 
   private static final long serialVersionUID = 3293773825737626494L;
 
-  private  ID id;
+  private ID id;
 
-  private  int modificationCounter;
+  private int modificationCounter;
 
   /**
    * The constructor.
@@ -92,9 +92,9 @@ public abstract class AbstractGenericEntity<ID> implements MutableGenericEntity<
 
   /**
    * Method to extend {@link #toString()} logic.
-   * 
-   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the
-   *        string representation.
+   *
+   * @param buffer is the {@link StringBuilder} where to {@link StringBuilder#append(Object) append} the string
+   *        representation.
    */
   protected void toString(StringBuilder buffer) {
 

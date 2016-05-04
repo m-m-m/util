@@ -54,8 +54,7 @@ public class NlsClassCastException extends NlsRuntimeException {
    * This method gets the {@link #getClass() class} of an object in a null-safe way.
    *
    * @param object is the object for which the {@link #getClass() class} is requested. May be {@code null}
-   * @return the class reflecting the given {@code object} or {@code null} if {@code object} is
-   *         {@code null}.
+   * @return the class reflecting the given {@code object} or {@code null} if {@code object} is {@code null}.
    */
   private static Class<?> getType(Object object) {
 

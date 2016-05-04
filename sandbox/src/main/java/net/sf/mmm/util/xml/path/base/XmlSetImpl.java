@@ -11,20 +11,19 @@ import net.sf.mmm.util.xml.path.api.XmlSet;
 
 /**
  * This is the implementation of the {@link XmlSet} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
 
-  private  final Conjunction conjunction;
+  private final Conjunction conjunction;
 
-  private  final List<AbstractXmlSelector> selectorList;
+  private final List<AbstractXmlSelector> selectorList;
 
   /**
    * The constructor.
-   * 
-   * @param namespaceContext is the
-   *        {@link #getNamespaceContext() namespace-context}.
+   *
+   * @param namespaceContext is the {@link #getNamespaceContext() namespace-context}.
    * @param conjunction is the {@link #getConjunction() conjunction}.
    */
   public XmlSetImpl(NamespaceContext namespaceContext, Conjunction conjunction) {
@@ -55,7 +54,7 @@ public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
 
   /**
    * This method adds the given {@code selector} to this {@link XmlSet}.
-   * 
+   *
    * @param selector is the selector to add.
    */
   public void addSelector(AbstractXmlSelector selector) {
@@ -74,7 +73,7 @@ public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
       case INTERSECTION:
         conjunctionString = " & ";
         break;
-      default :
+      default:
         // this is actually an internal error!
         conjunctionString = " ?!? ";
         break;
@@ -86,7 +85,7 @@ public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
       } else {
         stringBuilder.append(conjunctionString);
       }
-      selector.toString(stringBuilder);      
+      selector.toString(stringBuilder);
     }
   }
 

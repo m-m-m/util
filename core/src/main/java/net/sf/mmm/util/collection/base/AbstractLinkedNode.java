@@ -16,12 +16,12 @@ import net.sf.mmm.util.collection.api.LinkedNode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, NODE>> implements
-    LinkedNode<V, NODE> {
+public abstract class AbstractLinkedNode<V, NODE extends AbstractLinkedNode<V, NODE>>
+    implements LinkedNode<V, NODE> {
 
-  private  V value;
+  private V value;
 
-  private  NODE next;
+  private NODE next;
 
   /**
    * The constructor.

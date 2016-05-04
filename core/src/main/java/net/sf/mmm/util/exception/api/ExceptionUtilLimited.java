@@ -14,8 +14,8 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface ExceptionUtilLimited {
 
   /**
-   * Gets the {@link Throwable#printStackTrace(java.io.PrintWriter) complete stacktrace} of the given
-   * {@code exception} as {@link String}. Ensured to work also in limited environments such as GWT.
+   * Gets the {@link Throwable#printStackTrace(java.io.PrintWriter) complete stacktrace} of the given {@code exception}
+   * as {@link String}. Ensured to work also in limited environments such as GWT.
    *
    * @param exception is the {@link Throwable} to get the stacktrace from.
    * @return the {@link Throwable#printStackTrace(java.io.PrintWriter) complete stacktrace} of the given

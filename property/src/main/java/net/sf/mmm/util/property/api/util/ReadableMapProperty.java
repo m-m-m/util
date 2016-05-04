@@ -27,6 +27,7 @@ public interface ReadableMapProperty<K, V>
   /**
    * @return the result of {@link #getValue()} but an empty {@link Map} instead of {@code null}.
    */
+  @Override
   default ObservableMap<K, V> getValueNotNull() {
 
     ObservableMap<K, V> Map = getValue();

@@ -10,11 +10,10 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import net.sf.mmm.util.file.api.FileAccessClass;
-import net.sf.mmm.util.file.base.FileAccessPermissions;
 
 /**
  * This is the test-case for {@link FileAccessPermissions}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

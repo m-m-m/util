@@ -2,11 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl.rebind;
 
-import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
-import net.sf.mmm.util.nls.api.NlsBundle;
-import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
-import net.sf.mmm.util.nls.impl.AbstractNlsBundleFactoryGwt;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -16,11 +11,16 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
+import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
+import net.sf.mmm.util.nls.api.NlsBundle;
+import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
+import net.sf.mmm.util.nls.impl.AbstractNlsBundleFactoryGwt;
+
 /**
  * This is the GWT {@link com.google.gwt.core.ext.Generator} for generation of the true
  * {@link net.sf.mmm.util.nls.api.NlsBundleFactory} implementation as well as according {@link NlsBundle}
  * implementations.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -61,12 +61,13 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
 
   /**
    * Generates the {@code createBundle} method.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
    */
-  protected void generateMethodCreateBundle(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context) {
+  protected void generateMethodCreateBundle(SourceWriter sourceWriter, TreeLogger logger,
+      GeneratorContext context) {
 
     // method declaration
     sourceWriter.print("public <BUNDLE extends ");
@@ -93,12 +94,13 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
 
   /**
    * Generates the block that creates the {@link NlsBundle} instance lazily via {@link GWT#create(Class)}.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
    */
-  protected void generateBlockBundleCreation(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context) {
+  protected void generateBlockBundleCreation(SourceWriter sourceWriter, TreeLogger logger,
+      GeneratorContext context) {
 
     // find all subclasses of NlsBundle
     TypeOracle typeOracle = context.getTypeOracle();
@@ -108,7 +110,8 @@ public class NlsBundleFactoryGenerator extends AbstractIncrementalGenerator {
     int bundleCount = 0;
     logger.log(Type.INFO, "Checking " + types.length + " types...");
     for (JClassType type : types) {
-      if ((type.isAssignableTo(bundleClass)) && (!type.equals(bundleClass) && (!type.equals(bundleWithLookupClass)))) {
+      if ((type.isAssignableTo(bundleClass))
+          && (!type.equals(bundleClass) && (!type.equals(bundleWithLookupClass)))) {
         logger.log(Type.INFO, "Found NlsBundle interface: " + type);
 
         sourceWriter.print("if (");

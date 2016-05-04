@@ -15,15 +15,14 @@ import net.sf.mmm.util.event.api.EventSource;
  * This is the abstract base implementation of the {@link net.sf.mmm.util.event.api.EventListener} interface.
  *
  * @param <E> is the templated type of the events to send.
- * @param <L> is the templated type of the listeners that can be {@link #addListener(EventListener)
- *        registered} here and that will {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Object)
- *        receive} the sent events.
+ * @param <L> is the templated type of the listeners that can be {@link #addListener(EventListener) registered} here and
+ *        that will {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Object) receive} the sent events.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>> extends
-    AbstractLoggableComponent implements EventSource<E, L> {
+public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>>
+    extends AbstractLoggableComponent implements EventSource<E, L> {
 
   /** the registered listeners */
   private final Collection<L> listeners;
@@ -62,8 +61,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
   }
 
   /**
-   * This method sends the given {@code event} to all {@link #addListener(EventListener) registered}
-   * listeners.
+   * This method sends the given {@code event} to all {@link #addListener(EventListener) registered} listeners.
    *
    * @param event the event to set.
    */
@@ -91,8 +89,8 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
 
   /**
    * This method is called if a listener throws something while handling an event. <br>
-   * The default implementation is log the error. Override this method to change the behaviour (e.g. ignore
-   * the problem, remove the "evil" listener, throw the error anyways).
+   * The default implementation is log the error. Override this method to change the behaviour (e.g. ignore the problem,
+   * remove the "evil" listener, throw the error anyways).
    *
    * @param listener is the listener that caused the error.
    * @param event is the event that could not be handled.

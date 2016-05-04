@@ -15,11 +15,11 @@ public class PersonEto extends EntityTo<Long> implements Person {
 
   private static final long serialVersionUID = 1L;
 
-  private  Long addressId;
+  private Long addressId;
 
-  private  String lastName;
+  private String lastName;
 
-  private  String firstName;
+  private String firstName;
 
   /**
    * The constructor.

@@ -105,7 +105,8 @@ public class PojoMethodIntrospectorImpl extends AbstractPojoIntrospector impleme
       findFirst();
     }
 
-    @Override    protected Method findNext() {
+    @Override
+    protected Method findNext() {
 
       Method next = null;
       while (this.index < this.methods.length) {

@@ -19,10 +19,10 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractComposedValueConverter extends AbstractGenericValueConverter<Object> implements
-    ComposedValueConverter {
+public abstract class AbstractComposedValueConverter extends AbstractGenericValueConverter<Object>
+    implements ComposedValueConverter {
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -93,6 +93,7 @@ public abstract class AbstractComposedValueConverter extends AbstractGenericValu
     return result;
   }
 
+  @Override
   @SuppressWarnings("unchecked")
   public <TARGET> TARGET convertValue(Object value, Object valueSource, Class<TARGET> targetClass, Type targetType)
       throws ValueNotSetException, WrongValueTypeException {

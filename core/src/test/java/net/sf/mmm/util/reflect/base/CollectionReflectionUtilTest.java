@@ -12,15 +12,15 @@ import java.util.SortedSet;
 import java.util.Vector;
 import java.util.concurrent.BlockingQueue;
 
-import net.sf.mmm.util.lang.api.GenericBean;
-import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import net.sf.mmm.util.lang.api.GenericBean;
+import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
+
 /**
  * This is the test-case for {@link CollectionReflectionUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

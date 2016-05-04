@@ -31,11 +31,11 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CollectionFactoryManagerImpl extends AbstractLoggableComponent implements CollectionFactoryManager {
 
-  private  static CollectionFactoryManager instance;
+  private static CollectionFactoryManager instance;
 
-  private  final Map<Class<? extends Collection>, CollectionFactory> collectionFactoryMap;
+  private final Map<Class<? extends Collection>, CollectionFactory> collectionFactoryMap;
 
-  private  final Map<Class<? extends Map>, MapFactory> mapFactoryMap;
+  private final Map<Class<? extends Map>, MapFactory> mapFactoryMap;
 
   /**
    * The constructor.
@@ -114,8 +114,7 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
    * @see #registerMapFactory(MapFactory, Class)
    *
    * @param factory is the {@link MapFactory} to register.
-   * @return the {@link MapFactory} that has been replaced with {@code factory} or {@code null} if none was
-   *         replaced.
+   * @return the {@link MapFactory} that has been replaced with {@code factory} or {@code null} if none was replaced.
    */
   protected MapFactory registerMapFactory(MapFactory factory) {
 
@@ -146,8 +145,8 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
    * @see #registerCollectionFactory(CollectionFactory, Class)
    *
    * @param factory is the {@link CollectionFactory} to register.
-   * @return the {@link CollectionFactory} that has been replaced with {@code factory} or {@code null} if none
-   *         was replaced.
+   * @return the {@link CollectionFactory} that has been replaced with {@code factory} or {@code null} if none was
+   *         replaced.
    */
   protected CollectionFactory registerCollectionFactory(CollectionFactory factory) {
 
@@ -162,8 +161,8 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
    * @param collectionInterface is the interface of the associated {@link Collection}. It has to be
    *        {@link Class#isAssignableFrom(Class) assignable from} the {@link CollectionFactory#getCollectionInterface()
    *        collection-interface} of the given {@code factory}.
-   * @return the {@link CollectionFactory} that was registered for the given {@code collectionInterface} before and
-   *         has now been replaced with {@code factory} or {@code null} if none was replaced.
+   * @return the {@link CollectionFactory} that was registered for the given {@code collectionInterface} before and has
+   *         now been replaced with {@code factory} or {@code null} if none was replaced.
    */
   protected <COLLECTION extends Collection> CollectionFactory registerCollectionFactory(
       CollectionFactory<? extends COLLECTION> factory, Class<COLLECTION> collectionInterface) {

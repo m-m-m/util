@@ -44,9 +44,9 @@ public enum HorizontalAlignment implements SimpleDatatype<String> {
    */
   CENTER("~", NlsBundleUtilCoreRoot.INF_CENTER);
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.

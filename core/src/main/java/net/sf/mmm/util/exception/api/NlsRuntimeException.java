@@ -18,9 +18,9 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.uuid.api.UuidAccess;
 
 /**
- * This is an abstract base implementation of {@link NlsThrowable} based on {@link RuntimeException}. For
- * further details see {@link NlsThrowable}. For an example read the {@link net.sf.mmm.util.exception.api
- * package javadoc} or see the source code of the derived exceptions.
+ * This is an abstract base implementation of {@link NlsThrowable} based on {@link RuntimeException}. For further
+ * details see {@link NlsThrowable}. For an example read the {@link net.sf.mmm.util.exception.api package javadoc} or
+ * see the source code of the derived exceptions.
  *
  * @see NlsThrowable
  *
@@ -34,7 +34,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /** the internationalized message */
   private NlsMessage nlsMessage;
 
-  private  UUID uuid;
+  private UUID uuid;
 
   /**
    * The constructor for de-serialization in GWT.
@@ -59,12 +59,11 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * The constructor. <br>
    * <b>ATTENTION:</b><br>
-   * Please use {@link NlsRuntimeException#NlsRuntimeException(NlsMessage)} in advance to this constructor to
-   * get best NLS/I18N.
+   * Please use {@link NlsRuntimeException#NlsRuntimeException(NlsMessage)} in advance to this constructor to get best
+   * NLS/I18N.
    *
    * @param internationalizedMessage is a short description of the problem. It is used for
-   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
-   *        language.
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English language.
    */
   public NlsRuntimeException(String internationalizedMessage) {
 
@@ -74,13 +73,12 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * The constructor. <br>
    * <b>ATTENTION:</b><br>
-   * Please use {@link NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)} in advance to this
-   * constructor to get best NLS/I18N.
+   * Please use {@link NlsRuntimeException#NlsRuntimeException(Throwable, NlsMessage)} in advance to this constructor to
+   * get best NLS/I18N.
    *
    * @param cause is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It is used for
-   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English
-   *        language.
+   *        {@link NlsMessage#getInternationalizedMessage() internationalization} and should be in English language.
    */
   public NlsRuntimeException(Throwable cause, String internationalizedMessage) {
 
@@ -316,8 +314,8 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   /**
    * {@inheritDoc}
    *
-   * This default implementation is using {@link #createCopyViaClone(ExceptionTruncation) clone} to create a
-   * copy and truncate it as configured. However, a proper implementation would use the appropriate
+   * This default implementation is using {@link #createCopyViaClone(ExceptionTruncation) clone} to create a copy and
+   * truncate it as configured. However, a proper implementation would use the appropriate
    * {@link #NlsRuntimeException(NlsRuntimeException, ExceptionTruncation) copy constructor} instead.
    */
   @Override

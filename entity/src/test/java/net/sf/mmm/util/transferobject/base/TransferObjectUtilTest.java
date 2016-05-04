@@ -5,6 +5,9 @@ package net.sf.mmm.util.transferobject.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.util.transferobject.api.TransferObjectUtil;
 import net.sf.mmm.util.transferobject.base.example.common.Address;
 import net.sf.mmm.util.transferobject.base.example.common.ContactInfo;
@@ -13,9 +16,6 @@ import net.sf.mmm.util.transferobject.base.example.common.to.PersonEto;
 import net.sf.mmm.util.transferobject.base.example.persistence.AddressEntity;
 import net.sf.mmm.util.transferobject.base.example.persistence.ContactInfoEntity;
 import net.sf.mmm.util.transferobject.base.example.persistence.PersonEntity;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link TransferObjectUtil}.

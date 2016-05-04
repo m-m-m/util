@@ -20,7 +20,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} that formats {@link Type}s.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -29,13 +29,13 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
   /** The package {@code java.lang}. */
   private static final Package PACKAGE_JAVA_LANG = Package.class.getPackage();
 
-  private  final String style;
+  private final String style;
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
-   * 
+   *
    * @param style is the {@link #getStyle() style}.
    */
   public NlsFormatterType(String style) {
@@ -115,11 +115,11 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
    */
   private class ClassFormatter implements Visitor<Class<?>> {
 
-    private  final Appendable buffer;
+    private final Appendable buffer;
 
     /**
      * The constructor.
-     * 
+     *
      * @param buffer is the {@link Appendable}.
      */
     public ClassFormatter(Appendable buffer) {
@@ -128,6 +128,7 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
       this.buffer = buffer;
     }
 
+    @Override
     public void visit(Class<?> value) {
 
       try {

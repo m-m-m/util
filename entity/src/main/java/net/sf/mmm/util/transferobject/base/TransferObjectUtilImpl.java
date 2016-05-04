@@ -37,13 +37,13 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   /** The singleton instance of {@link EtoHelper}. */
   private static final EtoHelper HELPER = new EtoHelper();
 
-  private  static TransferObjectUtil instance;
+  private static TransferObjectUtil instance;
 
-  private  ComposedValueConverter composedValueConverter;
+  private ComposedValueConverter composedValueConverter;
 
-  private  PojoUtil pojoUtil;
+  private PojoUtil pojoUtil;
 
-  private  DatatypeDetector datatypeDetector;
+  private DatatypeDetector datatypeDetector;
 
   /**
    * The constructor.
@@ -224,6 +224,7 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
 
     Filter<Object> visitor = new Filter<Object>() {
 
+      @Override
       public boolean accept(Object value) {
 
         if (TransferObjectUtilImpl.this.datatypeDetector.isDatatype(value.getClass())) {
@@ -247,7 +248,8 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
    */
   private static class EtoHelper extends PersistentEntityAccess {
 
-    @Override    protected <ID> void setPersistentEntity(EntityTo<ID> eto, PersistenceEntity<ID> persistentEntity) {
+    @Override
+    protected <ID> void setPersistentEntity(EntityTo<ID> eto, PersistenceEntity<ID> persistentEntity) {
 
       super.setPersistentEntity(eto, persistentEntity);
     }

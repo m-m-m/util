@@ -7,9 +7,9 @@ import java.util.NoSuchElementException;
 
 /**
  * This is an implementation of the {@link Iterator} interface that {@link #next() iterates} a single element.
- * 
+ *
  * @param <E> is the templated type of the elements to iterate.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -20,9 +20,8 @@ public class SingleElementIterator<E> implements Iterator<E> {
 
   /**
    * The constructor.
-   * 
-   * @param element is the single element to iterate. If {@code null} the iterator will be entirely
-   *        empty.
+   *
+   * @param element is the single element to iterate. If {@code null} the iterator will be entirely empty.
    */
   public SingleElementIterator(E element) {
 

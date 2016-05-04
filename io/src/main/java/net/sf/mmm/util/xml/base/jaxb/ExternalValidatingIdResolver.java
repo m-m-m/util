@@ -11,14 +11,14 @@ import org.xml.sax.SAXException;
 import com.sun.xml.bind.IDResolver;
 
 /**
- * This is an implementation of {@link IDResolver} validating that no IDs are duplicated or missing (IDRef is
- * pointing to an undefined ID). <br>
+ * This is an implementation of {@link IDResolver} validating that no IDs are duplicated or missing (IDRef is pointing
+ * to an undefined ID). <br>
  * <b>ATTENTION:</b><br>
  * This class only works if {@code jaxb-impl} (com.sun.xml.bind) is on your classpath!
- * 
+ *
  * @see InternalValidatingIdResolver
  * @see XmlBeanMapper#getOrCreateUnmarshaller()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.1
  */

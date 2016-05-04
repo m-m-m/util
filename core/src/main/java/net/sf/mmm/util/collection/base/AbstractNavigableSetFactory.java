@@ -29,11 +29,13 @@ public abstract class AbstractNavigableSetFactory implements NavigableSetFactory
     return NavigableSet.class;
   }
 
+  @Override
   public NavigableSet createGeneric() {
 
     return create();
   }
 
+  @Override
   public NavigableSet createGeneric(int capacity) {
 
     return create(capacity);

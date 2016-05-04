@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliArgumentMissingException} is thrown if a {@link CliArgument#required() required}
- * {@link CliArgument argument} is missing.
+ * A {@link CliArgumentMissingException} is thrown if a {@link CliArgument#required() required} {@link CliArgument
+ * argument} is missing.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

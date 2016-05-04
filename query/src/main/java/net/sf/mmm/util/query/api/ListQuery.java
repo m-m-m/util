@@ -26,6 +26,7 @@ public interface ListQuery<E> extends Query<List<E>>, Iterable<E> {
    *
    * @return an {@link Iterator} of the {@link #execute() results}.
    */
+  @Override
   default Iterator<E> iterator() {
 
     return execute().iterator();

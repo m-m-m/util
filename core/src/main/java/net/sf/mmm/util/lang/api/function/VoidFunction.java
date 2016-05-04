@@ -3,8 +3,8 @@
 package net.sf.mmm.util.lang.api.function;
 
 /**
- * This is an implementation of {@link Function} with the return type {@link Void} that can therefore only
- * return {@code null}.
+ * This is an implementation of {@link Function} with the return type {@link Void} that can therefore only return
+ * {@code null}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.0.0

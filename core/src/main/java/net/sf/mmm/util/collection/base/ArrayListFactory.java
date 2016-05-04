@@ -19,6 +19,7 @@ public class ArrayListFactory extends AbstractListFactory {
   /** The default instance creating an {@link java.util.ArrayList}. */
   public static final ListFactory INSTANCE = new ArrayListFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<ArrayList> getCollectionImplementation() {
 

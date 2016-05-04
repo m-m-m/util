@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * This is a simple application to test a pipe.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

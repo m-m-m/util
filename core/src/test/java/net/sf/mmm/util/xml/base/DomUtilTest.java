@@ -12,7 +12,7 @@ import net.sf.mmm.util.xml.api.DomUtil;
 
 /**
  * This is the test-case for {@link DomUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

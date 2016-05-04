@@ -14,9 +14,9 @@ import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 
 /**
- * This is the base class of a {@link Segment} that represents a format pattern (or pieces of such) to detect
- * a {@link net.sf.mmm.util.contenttype.api.ContentType}.
- * 
+ * This is the base class of a {@link Segment} that represents a format pattern (or pieces of such) to detect a
+ * {@link net.sf.mmm.util.contenttype.api.ContentType}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -24,7 +24,7 @@ import net.sf.mmm.util.io.api.spi.DetectorStreamBuffer;
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class Segment {
 
-  private  SegmentContainer parent;
+  private SegmentContainer parent;
 
   /**
    * The constructor.
@@ -36,7 +36,7 @@ public abstract class Segment {
 
   /**
    * This method gets the parent {@link SegmentContainer} containing this segment.
-   * 
+   *
    * @return the parent {@link SegmentContainer} or {@code null} if this is the top-level sequence.
    */
   public SegmentContainer getParent() {
@@ -46,7 +46,7 @@ public abstract class Segment {
 
   /**
    * This method sets the {@link #getParent() parent} of this {@link Segment}.
-   * 
+   *
    * @param parent is the new parent.
    */
   protected void setParent(SegmentContainer parent) {
@@ -56,18 +56,17 @@ public abstract class Segment {
 
   /**
    * This method gets the minimum length of this {@link Segment}.
-   * 
+   *
    * @return the minimum length.
    */
   public abstract long getMinimumLength();
 
   /**
-   * This method gets the maximum length of this {@link Segment}. Simple {@link Segment}s like
-   * {@link SegmentConstant} have a fixed length. In this case the result of this method is the same as
-   * {@link #getMinimumLength()}. Otherwise, the {@link Segment} is variable and this method returns a value
-   * greater than {@link #getMinimumLength()}. Use {@link Long#MAX_VALUE} for an unbound segment like
-   * {@link SegmentAny}.
-   * 
+   * This method gets the maximum length of this {@link Segment}. Simple {@link Segment}s like {@link SegmentConstant}
+   * have a fixed length. In this case the result of this method is the same as {@link #getMinimumLength()}. Otherwise,
+   * the {@link Segment} is variable and this method returns a value greater than {@link #getMinimumLength()}. Use
+   * {@link Long#MAX_VALUE} for an unbound segment like {@link SegmentAny}.
+   *
    * @return the maximum length.
    */
   public long getMaximumLength() {
@@ -77,14 +76,14 @@ public abstract class Segment {
 
   /**
    * This method gets the XML tag-name of this {@link Segment}.
-   * 
+   *
    * @return the tag-name.
    */
   protected abstract String getTagName();
 
   /**
    * This method gets an identifier of this {@link Segment} for the source used in potential error messages.
-   * 
+   *
    * @return the source identifier.
    */
   protected String getSourceIdentifier() {
@@ -94,7 +93,7 @@ public abstract class Segment {
 
   /**
    * This method validates this segment recursively to ensure the correctness of the configured format.
-   * 
+   *
    * @param source describes the source of the validation.
    */
   public final void validate(StringBuilder source) {
@@ -109,7 +108,7 @@ public abstract class Segment {
 
   /**
    * This method validates this segment recursively to ensure the correctness of the configured format.
-   * 
+   *
    * @param source describes the source of the validation.
    */
   protected void doValidate(StringBuilder source) {
@@ -122,7 +121,7 @@ public abstract class Segment {
    * <b>ATTENTION:</b><br>
    * This method does NOT perform a recursive validation of potential {@link SegmentContainer#getSegment(int)
    * sub-segments}.
-   * 
+   *
    * @param source describes the source of the validation.
    */
   protected void validateNonRecursive(StringBuilder source) {
@@ -138,7 +137,7 @@ public abstract class Segment {
   }
 
   /**
-   * 
+   *
    * @param state
    * @param stateList
    * @param buffer

@@ -33,15 +33,16 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  */
 @Singleton
 @Named(StringValueConverter.CDI_NAME)
-public class StringValueConverterImpl extends AbstractGenericValueConverter<String> implements StringValueConverter {
+public class StringValueConverterImpl extends AbstractGenericValueConverter<String>
+    implements StringValueConverter {
 
-  private  static StringValueConverterImpl instance;
+  private static StringValueConverterImpl instance;
 
-  private  Iso8601Util iso8601Util;
+  private Iso8601Util iso8601Util;
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
-  private  EnumProvider enumProvider;
+  private EnumProvider enumProvider;
 
   /**
    * The constructor.
@@ -153,9 +154,9 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
    * This method parses a numeric value.
    *
    * @param numberValue is the number value as string.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier.
    * @return the value as number.
    * @throws WrongValueTypeException if the given string is no number.
    */
@@ -231,28 +232,26 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   }
 
   /**
-   * This method converts the given {@link String}-{@code value} to the given {@code type}. It is
-   * called from {@link #convertValue(String, Object, Class, Type)} if the given {@code type} is unknown.
-   * This default implementation simply throws a new {@link WrongValueTypeException}. You can extend this
-   * class and override this method in order to support the conversion for additional types. You should first
-   * handle the conversion for all value types you like. Then for all other types you should delegate to the
-   * {@code super} method implementation.
+   * This method converts the given {@link String}-{@code value} to the given {@code type}. It is called from
+   * {@link #convertValue(String, Object, Class, Type)} if the given {@code type} is unknown. This default
+   * implementation simply throws a new {@link WrongValueTypeException}. You can extend this class and override this
+   * method in order to support the conversion for additional types. You should first handle the conversion for all
+   * value types you like. Then for all other types you should delegate to the {@code super} method implementation.
    *
    * @param value is the value to convert.
    * @param type is the type the {@code value} should be converted to.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier.
    *
    * @param <V> is the type the {@code value} should be converted to.
    * @return the {@code value} converted to {@code type}.
    * @throws ValueNotSetException if the given {@code value} is {@code null}.
-   * @throws WrongValueTypeException if the given {@code value} is NOT {@code null} but can NOT be
-   *         converted to the given {@code type} (e.g. if {@code value} is "12x" and
-   *         {@code type} is {@code Integer.class}).
+   * @throws WrongValueTypeException if the given {@code value} is NOT {@code null} but can NOT be converted to the
+   *         given {@code type} (e.g. if {@code value} is "12x" and {@code type} is {@code Integer.class}).
    */
-  protected <V> V convertUnknownValue(String value, Class<V> type, Object valueSource) throws ValueNotSetException,
-      WrongValueTypeException {
+  protected <V> V convertUnknownValue(String value, Class<V> type, Object valueSource)
+      throws ValueNotSetException, WrongValueTypeException {
 
     // throw new UnknownValueType();
     throw new WrongValueTypeException(value, valueSource, type);

@@ -25,7 +25,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the implementation of {@link PojoPathNavigator}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -33,9 +33,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
 @Named(PojoPathNavigator.CDI_NAME)
 public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
 
-  private  PojoDescriptorBuilder descriptorBuilder;
+  private PojoDescriptorBuilder descriptorBuilder;
 
-  private  PojoDescriptorBuilderFactory descriptorBuilderFactory;
+  private PojoDescriptorBuilderFactory descriptorBuilderFactory;
 
   /**
    * The constructor. <br>
@@ -49,7 +49,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
 
   /**
    * This method gets the {@link PojoDescriptorBuilder} used for the underlying reflectional property access.
-   * 
+   *
    * @return the descriptorBuilder
    */
   protected PojoDescriptorBuilder getDescriptorBuilder() {
@@ -59,7 +59,7 @@ public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
 
   /**
    * This method sets the {@link #getDescriptorBuilder() descriptor-builder} to use.
-   * 
+   *
    * @param descriptorBuilder is the descriptorBuilder to use.
    */
   public void setDescriptorBuilder(PojoDescriptorBuilder descriptorBuilder) {

@@ -14,8 +14,7 @@ import net.sf.mmm.util.reflect.api.InvocationFailedException;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeDescriptor} for a
- * {@link SimpleDatatype}.
+ * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeDescriptor} for a {@link SimpleDatatype}.
  *
  * @param <T> is the generic type of the {@link SimpleDatatype} to describe.
  *
@@ -24,7 +23,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
  */
 public class DatatypeDescriptorSimpleDatatype<T extends SimpleDatatype<?>> extends AbstractDatatypeDescriptor<T> {
 
-  private  final Constructor<T> constructor;
+  private final Constructor<T> constructor;
 
   /**
    * The constructor.

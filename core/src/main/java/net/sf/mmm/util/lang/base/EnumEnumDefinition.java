@@ -33,17 +33,17 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
 
   private static final long serialVersionUID = -5796877491769409263L;
 
-  private  String value;
+  private String value;
 
-  private  String title;
+  private String title;
 
-  private  EnumDefinition<CATEGORY, ?> category;
+  private EnumDefinition<CATEGORY, ?> category;
 
-  private  Class<TYPE> enumType;
+  private Class<TYPE> enumType;
 
-  private  List<TYPE> enumValues;
+  private List<TYPE> enumValues;
 
-  private  StringUtil stringUtil;
+  private StringUtil stringUtil;
 
   /**
    * The constructor. A potential {@link #getCategory() category} is automatically detected.
@@ -78,8 +78,8 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
    * @param stringUtil is the {@link StringUtil} instance to use.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  private EnumEnumDefinition(Class<TYPE> enumType, NodeCycle<Class<?>> cycle,
-      EnumDefinition<CATEGORY, ?> category, StringUtil stringUtil) {
+  private EnumEnumDefinition(Class<TYPE> enumType, NodeCycle<Class<?>> cycle, EnumDefinition<CATEGORY, ?> category,
+      StringUtil stringUtil) {
 
     super();
     this.enumType = enumType;
@@ -208,7 +208,8 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
       super();
     }
 
-    @Override    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
+    @Override
+    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
 
       SimpleDatatype<?> datatype = (SimpleDatatype<?>) enumValue;
       Object result = datatype.getValue();
@@ -233,7 +234,8 @@ public class EnumEnumDefinition<TYPE extends Enum<TYPE>, CATEGORY> extends Abstr
       super();
     }
 
-    @Override    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
+    @Override
+    protected void doFormat(TYPE enumValue, Appendable buffer) throws IOException {
 
       String result = EnumEnumDefinition.this.stringUtil.toCamlCase(enumValue.name());
       buffer.append(result);

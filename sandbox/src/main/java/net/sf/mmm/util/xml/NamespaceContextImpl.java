@@ -12,9 +12,9 @@ import net.sf.mmm.util.collection.base.AbstractIterator;
 
 /**
  * This is a public implementation of the {@link NamespaceContext} interface. It can store
- * {@link #setNamespace(String, String) own namespace declarations} and also inherit declarations from a
- * parent {@link NamespaceContext}.
- * 
+ * {@link #setNamespace(String, String) own namespace declarations} and also inherit declarations from a parent
+ * {@link NamespaceContext}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class NamespaceContextImpl implements NamespaceContext {
@@ -38,7 +38,7 @@ public class NamespaceContextImpl implements NamespaceContext {
 
   /**
    * The constructor.
-   * 
+   *
    * @param parentContext is the parent context to inherit from.
    */
   public NamespaceContextImpl(NamespaceContext parentContext) {
@@ -82,7 +82,7 @@ public class NamespaceContextImpl implements NamespaceContext {
 
   /**
    * This method is used to declare a namespace in this context.
-   * 
+   *
    * @param prefix is the prefix for the namespace.
    * @param uri is the URI of the namespace.
    */
@@ -97,13 +97,13 @@ public class NamespaceContextImpl implements NamespaceContext {
    */
   protected static class PrefixIterator extends AbstractIterator<String> {
 
-    private  final Iterator<String> parentIterator;
+    private final Iterator<String> parentIterator;
 
-    private  final String prefix;
+    private final String prefix;
 
     /**
      * The constructor.
-     * 
+     *
      * @param parentIterator
      * @param prefix
      */
@@ -115,7 +115,8 @@ public class NamespaceContextImpl implements NamespaceContext {
       findFirst();
     }
 
-    @Override    protected String findNext() {
+    @Override
+    protected String findNext() {
 
       if ((this.parentIterator != null) && (this.parentIterator.hasNext())) {
         return this.parentIterator.next();

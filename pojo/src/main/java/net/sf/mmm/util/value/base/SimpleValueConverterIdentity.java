@@ -6,11 +6,10 @@ import net.sf.mmm.util.value.api.SimpleValueConverter;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**
- * This is an implementation of {@link SimpleValueConverter} that returns the unmodified value (identity
- * conversion).
- * 
+ * This is an implementation of {@link SimpleValueConverter} that returns the unmodified value (identity conversion).
+ *
  * @param <V> is the generic type of the value.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -38,7 +37,7 @@ public class SimpleValueConverterIdentity<V> implements SimpleValueConverter<V, 
 
   /**
    * @param <V> is the generic type of the value.
-   * 
+   *
    * @return the instance
    */
   public static <V> SimpleValueConverterIdentity<V> getInstance() {

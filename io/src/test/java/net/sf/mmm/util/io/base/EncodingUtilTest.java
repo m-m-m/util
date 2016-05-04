@@ -21,24 +21,24 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
 
+import org.junit.Test;
+
 import net.sf.mmm.util.file.base.DirectoryFilter;
 import net.sf.mmm.util.file.base.PlainFileFilter;
 import net.sf.mmm.util.io.api.EncodingDetectionReader;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.lang.base.BasicUtilImpl;
 
-import org.junit.Test;
-
 /**
  * This is the test-case for {@link EncodingUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class EncodingUtilTest {
 
   private static final String[] UNSUPPORTED_ENCODINGS = { EncodingUtil.ENCODING_ISO_8859_10,
-      EncodingUtil.ENCODING_ISO_8859_12, EncodingUtil.ENCODING_ISO_8859_14, EncodingUtil.ENCODING_ISO_8859_16 };
+  EncodingUtil.ENCODING_ISO_8859_12, EncodingUtil.ENCODING_ISO_8859_14, EncodingUtil.ENCODING_ISO_8859_16 };
 
   protected EncodingUtil getEncodingUtil() {
 
@@ -99,7 +99,7 @@ public class EncodingUtilTest {
     int len = expectedData.length();
     for (int i = 0; i < len; i++) {
       int c = reader.read();
-      assertEquals((int) expectedData.charAt(i), c);
+      assertEquals(expectedData.charAt(i), c);
     }
     int c = reader.read();
     assertEquals(-1, c);
@@ -154,7 +154,7 @@ public class EncodingUtilTest {
     int len = expectedData.length();
     for (int i = 0; i < len; i++) {
       int c = utfReader.read();
-      assertEquals((int) expectedData.charAt(i), c);
+      assertEquals(expectedData.charAt(i), c);
     }
     int c = utfReader.read();
     assertEquals(-1, c);
@@ -221,6 +221,7 @@ public class EncodingUtilTest {
 
   protected static class AsciiProducer implements DataProducer {
 
+    @Override
     public void produce(Writer writer) throws IOException {
 
       for (int i = 32; i < 127; i++) {
@@ -231,6 +232,7 @@ public class EncodingUtilTest {
 
   protected static class Latin1Producer implements DataProducer {
 
+    @Override
     public void produce(Writer writer) throws IOException {
 
       for (int i = 32; i < 255; i++) {
@@ -241,6 +243,7 @@ public class EncodingUtilTest {
 
   protected static class UnicodeProducer implements DataProducer {
 
+    @Override
     public void produce(Writer writer) throws IOException {
 
       for (int i = 32; i < (4 * 4096); i++) {
@@ -251,6 +254,7 @@ public class EncodingUtilTest {
 
   protected static class EmptyProducer implements DataProducer {
 
+    @Override
     public void produce(Writer writer) throws IOException {
 
     }

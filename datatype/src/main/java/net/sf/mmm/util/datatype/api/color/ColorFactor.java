@@ -5,7 +5,7 @@ package net.sf.mmm.util.datatype.api.color;
 /**
  * This class is a generic implementation of {@link Factor} used for color transformations such as
  * {@link GenericColor#lighten(ColorFactor)} or {@link GenericColor#darken(ColorFactor)}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -23,7 +23,7 @@ public class ColorFactor extends Factor<ColorFactor> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public ColorFactor(double value) {
@@ -33,7 +33,7 @@ public class ColorFactor extends Factor<ColorFactor> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public ColorFactor(Double value) {
@@ -43,7 +43,7 @@ public class ColorFactor extends Factor<ColorFactor> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */

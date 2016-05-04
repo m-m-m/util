@@ -156,8 +156,8 @@ public class BeanMethod {
   }
 
   /**
-   * @return the generic {@link Type} of the property or {@code null} if no property. Will be the {@link Type} of
-   *         the {@link WritableProperty} for {@link BeanMethodType#PROPERTY}.
+   * @return the generic {@link Type} of the property or {@code null} if no property. Will be the {@link Type} of the
+   *         {@link WritableProperty} for {@link BeanMethodType#PROPERTY}.
    */
   public Type getPropertyType() {
 

@@ -17,11 +17,10 @@ import org.junit.Test;
 
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
-import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
 
 /**
  * This is the test-case for {@link CollectionFactoryManagerImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -34,7 +33,8 @@ public class CollectionFactoryManagerImplTest {
 
   protected <COLLECTION extends Collection> void checkCollection(Class<COLLECTION> collectionInterface) {
 
-    CollectionFactory<COLLECTION> factory = getCollectionFactoryManager().getCollectionFactory(collectionInterface);
+    CollectionFactory<COLLECTION> factory = getCollectionFactoryManager()
+        .getCollectionFactory(collectionInterface);
     assertNotNull(factory);
     assertTrue(collectionInterface.isAssignableFrom(factory.getCollectionInterface()));
     COLLECTION collection = factory.createGeneric();

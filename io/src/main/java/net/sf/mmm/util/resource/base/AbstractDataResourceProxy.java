@@ -10,9 +10,9 @@ import java.util.Date;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
- * This is an abstract implementation of the {@link DataResource} interface that {@link #getDelegate()
- * delegates to another} {@link DataResource}.
- * 
+ * This is an abstract implementation of the {@link DataResource} interface that {@link #getDelegate() delegates to
+ * another} {@link DataResource}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -28,7 +28,7 @@ public abstract class AbstractDataResourceProxy implements DataResource {
 
   /**
    * This method gets the {@link DataResource} this proxy delegates to.
-   * 
+   *
    * @return the delegate.
    */
   protected abstract DataResource getDelegate();

@@ -9,12 +9,9 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.file.base.FileAccessPermissions;
-import net.sf.mmm.util.file.base.FileAttributes;
-
 /**
  * This is the test-case for {@link FileAttributes}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

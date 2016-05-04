@@ -6,11 +6,11 @@ import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.io.api.ByteArray} that holds a pooled
- * {@link #getBytes() byte-array}.
- * 
+ * This is an implementation of {@link net.sf.mmm.util.io.api.ByteArray} that holds a pooled {@link #getBytes()
+ * byte-array}.
+ *
  * @see net.sf.mmm.util.pool.api.ByteArrayPool
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -22,11 +22,11 @@ public class PooledByteArray extends ByteArrayImpl {
   /** The number of {@link #createSubArray(int, int) children} created. */
   private int childCount;
 
-  private  boolean released;
+  private boolean released;
 
   /**
    * The constructor.
-   * 
+   *
    * @param buffer is the internal {@link #getBytes() buffer}.
    */
   public PooledByteArray(byte[] buffer) {
@@ -36,10 +36,10 @@ public class PooledByteArray extends ByteArrayImpl {
 
   /**
    * The constructor.
-   * 
+   *
    * @param buffer is the internal {@link #getBytes() buffer}.
-   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the
-   *        {@link #getMinimumIndex() minimum index}.
+   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the {@link #getMinimumIndex() minimum
+   *        index}.
    * @param maximumIndex is the {@link #getMaximumIndex() maximum index}.
    */
   public PooledByteArray(byte[] buffer, int startIndex, int maximumIndex) {
@@ -49,10 +49,10 @@ public class PooledByteArray extends ByteArrayImpl {
 
   /**
    * The constructor.
-   * 
+   *
    * @param buffer is the internal {@link #getBytes() buffer}.
-   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the
-   *        {@link #getMinimumIndex() minimum index}.
+   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the {@link #getMinimumIndex() minimum
+   *        index}.
    * @param maximumIndex is the {@link #getMaximumIndex() maximum index}.
    * @param parent is the parent that {@link #createSubArray(int, int) created} this array.
    */
@@ -80,9 +80,9 @@ public class PooledByteArray extends ByteArrayImpl {
 
   /**
    * This method marks this array to be released.
-   * 
-   * @return {@code true} if this array can be released, {@code false} if there are references left
-   *         that have to be released before.
+   *
+   * @return {@code true} if this array can be released, {@code false} if there are references left that have to be
+   *         released before.
    */
   public boolean release() {
 

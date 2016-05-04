@@ -80,7 +80,8 @@ public class ValidatorBuilderJsr303 extends AbstractValidatorBuilder {
   }
 
   @Override
-  public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property, Class<T> propertyType) {
+  public <T> AbstractValidator<T> newValidator(Class<?> pojoType, TypedProperty<T> property,
+      Class<T> propertyType) {
 
     return new ValidatorJsr303<>(this.validator, pojoType, property.getPojoPath(), propertyType, this.groups);
   }

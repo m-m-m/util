@@ -15,9 +15,9 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
  */
 public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDescriptor {
 
-  private  final String name;
+  private final String name;
 
-  private  Field field;
+  private Field field;
 
   /**
    * The constructor.
@@ -64,8 +64,7 @@ public abstract class AbstractPojoPropertyDescriptor implements PojoPropertyDesc
    *
    * @param accessor is the accessor to add.
    * @return the {@link PojoPropertyAccessor} with the same {@link PojoPropertyAccessor#getMode() mode} as the given
-   *         {@code accessor} that has been replaced by {@code accessor} or {@code null} if none has been
-   *         replaced.
+   *         {@code accessor} that has been replaced by {@code accessor} or {@code null} if none has been replaced.
    */
   public abstract PojoPropertyAccessor putAccessor(PojoPropertyAccessor accessor);
 

@@ -106,9 +106,9 @@ public class ValueOutOfRangeException extends ValueException {
    *
    * @param <V> is the generic type of the values.
    *
-   * @param valueSource describes the source of the value or {@code null} if NOT available. This may be the
-   *        filename where the value was read from, an XPath where the value was located in an XML document, etc. It is
-   *        used in exceptions thrown if something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value or {@code null} if NOT available. This may be the filename
+   *        where the value was read from, an XPath where the value was located in an XML document, etc. It is used in
+   *        exceptions thrown if something goes wrong. This will help to find the problem easier.
    * @param value is the number that is out of range.
    * @param minimum is the minimum value allowed
    * @param maximum is the maximum value allowed.
@@ -170,8 +170,7 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * This method checks that the given {@code value} is in the inclusive range from {@code minimum} to
-   * {@code maximum}.
+   * This method checks that the given {@code value} is in the inclusive range from {@code minimum} to {@code maximum}.
    *
    * @param <V> the generic type of the {@code value} to check.
    *
@@ -221,8 +220,7 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * This method checks that the given {@code value} is in the inclusive range from {@code minimum} to
-   * {@code maximum}.
+   * This method checks that the given {@code value} is in the inclusive range from {@code minimum} to {@code maximum}.
    *
    * @param value is the value to check.
    * @param minimum is the minimum number allowed.
@@ -250,8 +248,8 @@ public class ValueOutOfRangeException extends ValueException {
   }
 
   /**
-   * Creates a new error {@link NlsMessage} that the given {@code value} is not in the range from
-   * {@code minimum} to {@code maximum}.
+   * Creates a new error {@link NlsMessage} that the given {@code value} is not in the range from {@code minimum} to
+   * {@code maximum}.
    *
    * @param <V> is the generic type of the values. Needs to be an instance of {@link Number} or {@link Comparable}.
    * @param value is the invalid value.

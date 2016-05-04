@@ -119,9 +119,9 @@ public enum Conjunction implements EnumType<String> {
     }
   };
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.

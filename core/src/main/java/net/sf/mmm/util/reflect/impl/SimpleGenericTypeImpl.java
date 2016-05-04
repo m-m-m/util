@@ -30,11 +30,11 @@ public class SimpleGenericTypeImpl<T> extends AbstractGenericType<T> {
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public static final GenericType<?> TYPE_INT = new SimpleGenericTypeImpl(int.class);
 
-  private  final Class<T> type;
+  private final Class<T> type;
 
-  private  GenericType<?> componentType;
+  private GenericType<?> componentType;
 
-  private  GenericType<?> keyType;
+  private GenericType<?> keyType;
 
   /**
    * The constructor.

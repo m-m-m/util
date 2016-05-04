@@ -19,9 +19,9 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
 
   private static final long serialVersionUID = 681216451154445513L;
 
-  private  transient int hash;
+  private transient int hash;
 
-  private  transient String stringRepresentation;
+  private transient String stringRepresentation;
 
   /**
    * The constructor.
@@ -76,8 +76,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the
-   * {@link #getVersionSegment(int) version number}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getVersionSegment(int)
+   * version number}.
    *
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
@@ -132,8 +132,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp()
-   * timestamp}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp() timestamp}.
    *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
@@ -197,8 +196,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp()
-   * timestamp}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp() timestamp}.
    *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
@@ -210,8 +208,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for linear and optional attributes
-   * like {@link #getTimestamp()} or {@link #getRevision()}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for linear and optional attributes like
+   * {@link #getTimestamp()} or {@link #getRevision()}.
    *
    * @param <T> is the generic type of the {@link Comparable} value.
    * @param currentResult is the current result so far.
@@ -256,8 +254,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getRevision()
-   * revision}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getRevision() revision}.
    *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.

@@ -3,11 +3,11 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * This {@link Segment} represents the main characteristic of a a color by the degree of the angle around that
- * axis in the color cube starting with red at 0°.
- * 
+ * This {@link Segment} represents the main characteristic of a a color by the degree of the angle around that axis in
+ * the color cube starting with red at 0°.
+ *
  * @see GenericColor#getHue()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -19,8 +19,8 @@ public class Hue extends AbstractDoubleSegment<Hue> {
   private static final long serialVersionUID = 3822877998535396427L;
 
   /**
-   * If {@link Chroma} is {@code 0} then {@link Hue} is actually undefined. This value represent this
-   * undefined value. For convenience a {@link #getValue() value} of 0° is used as representation.
+   * If {@link Chroma} is {@code 0} then {@link Hue} is actually undefined. This value represent this undefined value.
+   * For convenience a {@link #getValue() value} of 0° is used as representation.
    */
   public static final Hue UNDEFINED = new Hue(0);
 
@@ -37,7 +37,7 @@ public class Hue extends AbstractDoubleSegment<Hue> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the #getValue()
    */
   public Hue(double value) {
@@ -47,7 +47,7 @@ public class Hue extends AbstractDoubleSegment<Hue> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the #getValue()
    */
   public Hue(Double value) {
@@ -57,7 +57,7 @@ public class Hue extends AbstractDoubleSegment<Hue> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link String} in {@link #toString() default} or
    *        {@link #toStringAsPercent() percent} representation.
    */

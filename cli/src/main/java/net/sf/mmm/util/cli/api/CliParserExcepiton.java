@@ -2,10 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliParserExcepiton} is thrown if a {@link net.sf.mmm.util.cli.api.CliClass state class} could NOT
- * be parsed.
+ * A {@link CliParserExcepiton} is thrown if a {@link net.sf.mmm.util.cli.api.CliClass state class} could NOT be parsed.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

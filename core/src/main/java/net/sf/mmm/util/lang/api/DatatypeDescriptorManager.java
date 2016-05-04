@@ -5,14 +5,13 @@ package net.sf.mmm.util.lang.api;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a manager of {@link DatatypeDescriptor}s for all supported {@link Datatype}s.
- * Instead of writing adapters for all kinds of mapping technologies (hibernate, jackson, jaxb, etc.) you can
- * simple create central support via {@link DatatypeDescriptorManager} and use the generic adapters for
- * according mapping technologies provided by this project (see
- * {@link net.sf.mmm.util.lang.base.datatype.adapter}). If you use {@link SimpleDatatype} there is even
- * nothing left to do as your {@link Datatype} is supported out of the box. For composed {@link Datatype}s you
- * can implement your own {@link DatatypeDescriptor} and plugin it into the {@link DatatypeDescriptorManager}
- * via {@link net.sf.mmm.util.component.api.Cdi}.
+ * This is the interface for a manager of {@link DatatypeDescriptor}s for all supported {@link Datatype}s. Instead of
+ * writing adapters for all kinds of mapping technologies (hibernate, jackson, jaxb, etc.) you can simple create central
+ * support via {@link DatatypeDescriptorManager} and use the generic adapters for according mapping technologies
+ * provided by this project (see {@link net.sf.mmm.util.lang.base.datatype.adapter}). If you use {@link SimpleDatatype}
+ * there is even nothing left to do as your {@link Datatype} is supported out of the box. For composed {@link Datatype}s
+ * you can implement your own {@link DatatypeDescriptor} and plugin it into the {@link DatatypeDescriptorManager} via
+ * {@link net.sf.mmm.util.component.api.Cdi}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0

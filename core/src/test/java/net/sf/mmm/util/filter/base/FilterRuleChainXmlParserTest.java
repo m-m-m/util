@@ -7,9 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
 
-import net.sf.mmm.util.resource.base.ClasspathResource;
-
 import org.junit.Test;
+
+import net.sf.mmm.util.resource.base.ClasspathResource;
 
 /**
  * This is the test-case for {@link FilterRuleChainXmlParser}.
@@ -23,7 +23,8 @@ public class FilterRuleChainXmlParserTest {
   public void test() throws Exception {
 
     FilterRuleChainXmlParser parser = new FilterRuleChainXmlParser();
-    try (InputStream inStream = new ClasspathResource(FilterRuleChainXmlParserTest.class, ".xml", true).openStream()) {
+    try (InputStream inStream = new ClasspathResource(FilterRuleChainXmlParserTest.class, ".xml", true)
+        .openStream()) {
       FilterRuleChain chain = parser.parseChain(inStream);
       assertTrue(chain.accept("/doc/manual.pdf"));
       assertFalse(chain.accept("/data/manual.pdf"));

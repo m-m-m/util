@@ -25,9 +25,9 @@ import net.sf.mmm.util.validation.api.ValueValidator;
 public interface PojoUtilLimited {
 
   /**
-   * This method creates a copy (e.g. via copy-constructor or {@link Cloneable clone}) of the given {@code value}.
-   * If the given {@code value} is immutable (like {@link String}, {@link Long}, etc.) it is legal to return the
-   * same given instance.
+   * This method creates a copy (e.g. via copy-constructor or {@link Cloneable clone}) of the given {@code value}. If
+   * the given {@code value} is immutable (like {@link String}, {@link Long}, etc.) it is legal to return the same given
+   * instance.
    *
    * @param <V> is the generic type of the value to copy. Typically a {@code TransferObject} or a
    *        {@link net.sf.mmm.util.lang.api.Datatype}.
@@ -38,14 +38,14 @@ public interface PojoUtilLimited {
 
   /**
    * This method determines if the given object is a (immutable) {@link net.sf.mmm.util.lang.api.Datatype}. It will
-   * return {@code true} if the given {@code value} is a {@link String}, {@link Boolean}, {@link Character},
-   * anything derived from {@link Number}, an {@link Enum}, an instance of {@link net.sf.mmm.util.lang.api.Datatype}, a
+   * return {@code true} if the given {@code value} is a {@link String}, {@link Boolean}, {@link Character}, anything
+   * derived from {@link Number}, an {@link Enum}, an instance of {@link net.sf.mmm.util.lang.api.Datatype}, a
    * {@link java.util.Date} (even though not immutable) or anything similar should be considered as datatype due to a
    * custom extension.
    *
    * @param value is the object to check.
-   * @return {@code true} if the given value is a (immutable) {@link net.sf.mmm.util.lang.api.Datatype},
-   *         {@code false} otherwise.
+   * @return {@code true} if the given value is a (immutable) {@link net.sf.mmm.util.lang.api.Datatype}, {@code false}
+   *         otherwise.
    */
   boolean isDatatype(Object value);
 
@@ -65,12 +65,11 @@ public interface PojoUtilLimited {
    * This method gets or creates the {@link ValueValidator} for the specified property derived from annotations (e.g.
    * JSR 303 or JSR 308). <br>
    * <b>ATTENTION:</b><br>
-   * This is NOT an implementation of JSR 303 ({@code javax.validation}) nor is it strictly compatible to it.
-   * Instead this is an abstraction that may be implemented using JSR 303 or maybe not. However, we want to be GWT
-   * compatible and we want to directly bind the validation to the UI widgets (see
+   * This is NOT an implementation of JSR 303 ({@code javax.validation}) nor is it strictly compatible to it. Instead
+   * this is an abstraction that may be implemented using JSR 303 or maybe not. However, we want to be GWT compatible
+   * and we want to directly bind the validation to the UI widgets (see
    * {@code UiWidgetWithValue#addValidator(ValueValidator)}). The API of JSR 303 is unfortunately biased. A simple
-   * bridge to JSR 303 can be achieved via
-   * {@code javax.validation.Validator.validateProperty(Object, String, Class)}.
+   * bridge to JSR 303 can be achieved via {@code javax.validation.Validator.validateProperty(Object, String, Class)}.
    *
    * @param pojoType is the class reflecting the {@link net.sf.mmm.util.pojo.api.Pojo} owning the property.
    * @param propertyName is the {@link net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName#getName() name}
@@ -105,8 +104,7 @@ public interface PojoUtilLimited {
 
   /**
    * This method sets the value of the specified property. <br>
-   * E.g. {@code setPropertyValue(pojo, "foo", value)} should have the same effect as
-   * {@code pojo.setFoo(value)}. <br>
+   * E.g. {@code setPropertyValue(pojo, "foo", value)} should have the same effect as {@code pojo.setFoo(value)}. <br>
    *
    * @param pojo is the {@link net.sf.mmm.util.pojo.api.Pojo} owning the property.
    * @param propertyName is the {@link net.sf.mmm.util.pojo.descriptor.api.attribute.PojoAttributeName#getName() name}

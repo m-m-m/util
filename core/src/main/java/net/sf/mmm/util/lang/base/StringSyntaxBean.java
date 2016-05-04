@@ -6,17 +6,17 @@ import net.sf.mmm.util.lang.api.StringSyntax;
 
 /**
  * This is the implementation of {@link StringSyntax} as simple Java bean.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
 public class StringSyntaxBean implements StringSyntax {
 
-  private  char escape;
+  private char escape;
 
-  private  char quoteStart;
+  private char quoteStart;
 
-  private  char quoteEnd;
+  private char quoteEnd;
 
   /**
    * The constructor.
@@ -28,7 +28,7 @@ public class StringSyntaxBean implements StringSyntax {
 
   /**
    * The constructor.
-   * 
+   *
    * @param escape - see {@link #getEscape()}.
    */
   public StringSyntaxBean(char escape) {
@@ -38,7 +38,7 @@ public class StringSyntaxBean implements StringSyntax {
 
   /**
    * The constructor.
-   * 
+   *
    * @param escape - see {@link #getEscape()}.
    * @param quote - see {@link #setQuote(char)}.
    */
@@ -49,7 +49,7 @@ public class StringSyntaxBean implements StringSyntax {
 
   /**
    * The constructor.
-   * 
+   *
    * @param escape - see {@link #getEscape()}.
    * @param quoteStart - see {@link #getQuoteStart()}.
    * @param quoteEnd - see @{@link #getQuoteEnd()}.
@@ -105,9 +105,8 @@ public class StringSyntaxBean implements StringSyntax {
   }
 
   /**
-   * This method sets both the {@link #getQuoteStart() quote-start} and {@link #getQuoteEnd() quote-end}
-   * character.
-   * 
+   * This method sets both the {@link #getQuoteStart() quote-start} and {@link #getQuoteEnd() quote-end} character.
+   *
    * @param quote the quote character to set.
    */
   public void setQuote(char quote) {

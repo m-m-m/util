@@ -22,13 +22,13 @@ public class PersonEntity extends AbstractEntity<Long> implements Person {
 
   private static final long serialVersionUID = 1L;
 
-  private  String firstName;
+  private String firstName;
 
-  private  String lastName;
+  private String lastName;
 
-  private  AddressEntity address;
+  private AddressEntity address;
 
-  private  List<ContactInfoEntity> contactInfos;
+  private List<ContactInfoEntity> contactInfos;
 
   /**
    * The constructor.

@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.Test;
+
 import junit.framework.Assert;
 import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
@@ -27,11 +29,9 @@ import net.sf.mmm.util.pojo.path.base.DefaultPojoPathContext;
 import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
 import net.sf.mmm.util.reflect.api.GenericType;
 
-import org.junit.Test;
-
 /**
  * This is the abstract test-case for {@link PojoPathNavigator} implementations.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
@@ -102,14 +102,14 @@ public abstract class PojoPathNavigatorTest {
     DefaultPojoPathContext defaultContext = new DefaultPojoPathContext();
     defaultContext.setAdditionalFunctionManager(functionManager);
     context = defaultContext;
-    result = navigator.get(myPojo, PojoPathFunction.FUNCTION_NAME_PREFIX + functionName, PojoPathMode.RETURN_IF_NULL,
-        context);
+    result = navigator.get(myPojo, PojoPathFunction.FUNCTION_NAME_PREFIX + functionName,
+        PojoPathMode.RETURN_IF_NULL, context);
     assertEquals(foo, result);
     Integer bar = Integer.valueOf(84);
     myPojo.setBar(bar.intValue());
     myPojo.setFlag();
-    result = navigator.get(myPojo, PojoPathFunction.FUNCTION_NAME_PREFIX + functionName, PojoPathMode.RETURN_IF_NULL,
-        context);
+    result = navigator.get(myPojo, PojoPathFunction.FUNCTION_NAME_PREFIX + functionName,
+        PojoPathMode.RETURN_IF_NULL, context);
     assertEquals(bar, result);
   }
 
@@ -552,16 +552,19 @@ public abstract class PojoPathNavigatorTest {
    */
   public static class FooFunction extends AbstractPojoPathFunction<MyPojo, Integer> {
 
+    @Override
     public Class<MyPojo> getInputClass() {
 
       return MyPojo.class;
     }
 
+    @Override
     public Class<Integer> getValueClass() {
 
       return Integer.class;
     }
 
+    @Override
     public Integer get(MyPojo actual, String functionName, PojoPathContext context) {
 
       if (actual != null) {
@@ -585,16 +588,19 @@ public abstract class PojoPathNavigatorTest {
    */
   public static class FooOrBarFunction extends AbstractPojoPathFunction<MyPojo, Integer> {
 
+    @Override
     public Class<MyPojo> getInputClass() {
 
       return MyPojo.class;
     }
 
+    @Override
     public Class<Integer> getValueClass() {
 
       return Integer.class;
     }
 
+    @Override
     public Integer get(MyPojo actual, String functionName, PojoPathContext context) {
 
       if (actual != null) {
@@ -607,6 +613,7 @@ public abstract class PojoPathNavigatorTest {
       return null;
     }
 
+    @Override
     public boolean isDeterministic() {
 
       // in this case it depends on the point of view whether this function

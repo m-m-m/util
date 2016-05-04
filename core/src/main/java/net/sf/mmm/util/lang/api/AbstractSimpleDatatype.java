@@ -15,7 +15,7 @@ public abstract class AbstractSimpleDatatype<V> extends AbstractSimpleDatatypeBa
 
   private static final long serialVersionUID = -7672725330000849564L;
 
-  private  V value;
+  private V value;
 
   /**
    * The constructor for de-serialization in GWT.

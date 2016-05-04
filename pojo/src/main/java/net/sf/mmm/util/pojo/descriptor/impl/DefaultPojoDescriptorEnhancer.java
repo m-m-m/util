@@ -5,8 +5,6 @@ package net.sf.mmm.util.pojo.descriptor.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
@@ -63,36 +61,36 @@ import net.sf.mmm.util.text.base.EnglishSingularizer;
  * List &lt; Foo &gt; getChildren()
  * </pre>
  *
- * is available via the {@link PojoPropertyDescriptor} {@link PojoPropertyDescriptor#getName() named}
- * {@code children}. Further the method
+ * is available via the {@link PojoPropertyDescriptor} {@link PojoPropertyDescriptor#getName() named} {@code children}.
+ * Further the method
  *
  * <pre>
  * void addChild(Foo child)
  * </pre>
  *
- * is available via the {@link PojoPropertyDescriptor} {@link PojoPropertyDescriptor#getName() named} {@code child}
- * . This enhancer makes the {@code addChild}-method also available via {@code children} which is the plural
- * form of {@code child}. Further it will add the virtual {@link PojoPropertyAccessor accessors} as described above
- * so it behaves as if the following method would also be present:
+ * is available via the {@link PojoPropertyDescriptor} {@link PojoPropertyDescriptor#getName() named} {@code child} .
+ * This enhancer makes the {@code addChild}-method also available via {@code children} which is the plural form of
+ * {@code child}. Further it will add the virtual {@link PojoPropertyAccessor accessors} as described above so it
+ * behaves as if the following method would also be present:
  *
  * <pre>
  * Foo getChild(int index) {
- * 
+ *
  *   return getChildren().get(index);
  * }
  *
  * void setChild(int index, Foo child) {
- * 
+ *
  *   getChildren().set(index, child);
  * }
  *
  * void removeChild(Foo child) {
- * 
+ *
  *   getChildren().remove(child);
  * }
  *
  * int getChildCount() {
- * 
+ *
  *   return getChildren().size();
  * }
  * </pre>
@@ -114,7 +112,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   /** @see #DefaultPojoDescriptorEnhancer(boolean, boolean) */
   private final boolean addVirtualAccessors;
 
-  private  PojoDescriptorDependencies dependencies;
+  private PojoDescriptorDependencies dependencies;
 
   /**
    * The constructor.
@@ -127,15 +125,14 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   /**
    * The constructor.
    *
-   * @param addSingularAccessors - if {@code true} each {@link PojoPropertyAccessorNonArgMode#GET getter} that
-   *        points to an array, {@link java.util.Collection} or {@link Map} is scanned. If it has a plural form for that
-   *        the {@link #getSingularizer() singular form can be determined}, the {@link PojoPropertyAccessor}s of the
+   * @param addSingularAccessors - if {@code true} each {@link PojoPropertyAccessorNonArgMode#GET getter} that points to
+   *        an array, {@link java.util.Collection} or {@link Map} is scanned. If it has a plural form for that the
+   *        {@link #getSingularizer() singular form can be determined}, the {@link PojoPropertyAccessor}s of the
    *        singular {@link PojoPropertyDescriptor} are copied to the plural {@link PojoPropertyDescriptor} as long as
    *        no such {@link PojoPropertyAccessor} already exists.
-   * @param addVirtualAccessors - if {@code true} for each {@link PojoPropertyAccessorNonArgMode#GET getter} that
-   *        points to an array, {@link java.util.Collection} or {@link Map} according virtual
-   *        {@link PojoPropertyAccessor}s are created and added as long as senseful and no such
-   *        {@link PojoPropertyAccessor} already exists.
+   * @param addVirtualAccessors - if {@code true} for each {@link PojoPropertyAccessorNonArgMode#GET getter} that points
+   *        to an array, {@link java.util.Collection} or {@link Map} according virtual {@link PojoPropertyAccessor}s are
+   *        created and added as long as senseful and no such {@link PojoPropertyAccessor} already exists.
    */
   public DefaultPojoDescriptorEnhancer(boolean addSingularAccessors, boolean addVirtualAccessors) {
 
@@ -145,8 +142,8 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
   }
 
   /**
-   * This method gets the {@link Singularizer}, which is used to determine singular forms so e.g.
-   * {@code getChildren} and {@code addChild} can be matched to the same property.
+   * This method gets the {@link Singularizer}, which is used to determine singular forms so e.g. {@code getChildren}
+   * and {@code addChild} can be matched to the same property.
    *
    * @return the {@link Singularizer} to use.
    */

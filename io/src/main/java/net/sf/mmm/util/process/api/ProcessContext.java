@@ -9,21 +9,21 @@ import net.sf.mmm.util.io.api.DevNullSource;
 import net.sf.mmm.util.io.api.DevNullTarget;
 
 /**
- * This class represents the context for a process. It is a java-bean that holds the {@link #getInStream()
- * stdin}, {@link #getOutStream() stdout} and {@link #getErrStream() stderr}.
- * 
+ * This class represents the context for a process. It is a java-bean that holds the {@link #getInStream() stdin},
+ * {@link #getOutStream() stdout} and {@link #getErrStream() stderr}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class ProcessContext {
 
-  private  OutputStream outStream;
+  private OutputStream outStream;
 
-  private  OutputStream errStream;
+  private OutputStream errStream;
 
-  private  InputStream inStream;
+  private InputStream inStream;
 
-  private  boolean keepStreamsOpen;
+  private boolean keepStreamsOpen;
 
   /**
    * The constructor. All streams are initialized to act like {@code /dev/null}.
@@ -70,7 +70,7 @@ public class ProcessContext {
 
   /**
    * This method gets the input stream that is transferred to the process as {@code stdin}.
-   * 
+   *
    * @return the inStream.
    */
   public InputStream getInStream() {

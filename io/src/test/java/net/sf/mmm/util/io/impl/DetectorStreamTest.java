@@ -14,6 +14,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.util.io.api.DetectorInputStream;
 import net.sf.mmm.util.io.api.DetectorOutputStream;
 import net.sf.mmm.util.io.api.DetectorStreamProvider;
@@ -23,9 +26,6 @@ import net.sf.mmm.util.io.base.StreamUtilImpl;
 import net.sf.mmm.util.pool.api.ByteArrayPool;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test-case for the detector-stream-framework.
@@ -189,7 +189,7 @@ public class DetectorStreamTest {
    */
   protected static class DummyByteArrayPool implements ByteArrayPool {
 
-    private  final Set<byte[]> bufferSet;
+    private final Set<byte[]> bufferSet;
 
     /** the size of the byte-arrays. */
     private final int arraySize;
@@ -206,6 +206,7 @@ public class DetectorStreamTest {
       this.arraySize = arraySize;
     }
 
+    @Override
     public byte[] borrow() {
 
       byte[] buffer = new byte[this.arraySize];
@@ -213,11 +214,13 @@ public class DetectorStreamTest {
       return buffer;
     }
 
+    @Override
     public boolean isEmpty() {
 
       return false;
     }
 
+    @Override
     public void release(byte[] element) {
 
       boolean okay = this.bufferSet.remove(element);

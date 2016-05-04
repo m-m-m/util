@@ -10,9 +10,8 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.impl.NlsMessageImpl;
 
 /**
- * This is the abstract but almost complete implementation of
- * {@link net.sf.mmm.util.nls.api.NlsMessageFactory}.
- * 
+ * This is the abstract but almost complete implementation of {@link net.sf.mmm.util.nls.api.NlsMessageFactory}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */

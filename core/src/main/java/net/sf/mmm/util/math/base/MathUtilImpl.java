@@ -13,7 +13,7 @@ import net.sf.mmm.util.math.api.NumberType;
 
 /**
  * This class is a collection of utility functions for dealing with numbers.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -36,12 +36,14 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
       return false;
     }
 
-    @Override    protected AtomicLong convert(Number number) {
+    @Override
+    protected AtomicLong convert(Number number) {
 
       return new AtomicLong(number.longValue());
     }
 
-    @Override    protected AtomicLong parse(String number) throws NumberFormatException {
+    @Override
+    protected AtomicLong parse(String number) throws NumberFormatException {
 
       return new AtomicLong(Long.parseLong(number));
     }
@@ -61,7 +63,8 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
   };
 
   /** The {@link NumberTypeImpl} for {@link AtomicInteger}. */
-  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3, null, null) {
+  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3, null,
+      null) {
 
     @Override
     public Class<AtomicInteger> getNumberClass() {
@@ -75,12 +78,14 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
       return false;
     }
 
-    @Override    protected AtomicInteger convert(Number number) {
+    @Override
+    protected AtomicInteger convert(Number number) {
 
       return new AtomicInteger(number.intValue());
     }
 
-    @Override    protected AtomicInteger parse(String number) throws NumberFormatException {
+    @Override
+    protected AtomicInteger parse(String number) throws NumberFormatException {
 
       return new AtomicInteger(Integer.parseInt(number));
     }
@@ -99,7 +104,7 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
 
   };
 
-  private  static MathUtil instance;
+  private static MathUtil instance;
 
   /**
    * The constructor.
@@ -113,7 +118,7 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
    * This method gets the singleton instance of {@link MathUtil}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static MathUtil getInstance() {

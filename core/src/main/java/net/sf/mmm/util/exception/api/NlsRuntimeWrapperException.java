@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.api;
 
-
 /**
  * This is an {@link NlsRuntimeException} to wrap an arbitrary {@link NlsThrowable}.
  *

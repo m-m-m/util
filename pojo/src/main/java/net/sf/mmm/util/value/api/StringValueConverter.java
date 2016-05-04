@@ -5,11 +5,11 @@ package net.sf.mmm.util.value.api;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is a sub-interface of {@link GenericValueConverter} for the most common value type {@link String}. It
- * is typically used for dealing with values (e.g. when reading configurations).
- * 
+ * This is a sub-interface of {@link GenericValueConverter} for the most common value type {@link String}. It is
+ * typically used for dealing with values (e.g. when reading configurations).
+ *
  * @see ComposedValueConverter
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */

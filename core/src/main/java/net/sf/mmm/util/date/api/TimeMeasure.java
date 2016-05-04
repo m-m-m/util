@@ -2,9 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.api;
 
-import net.sf.mmm.util.date.base.DurationUtilImpl;
-
 import org.slf4j.Logger;
+
+import net.sf.mmm.util.date.base.DurationUtilImpl;
 
 /**
  * This class makes it very easy to do performance monitoring. It can be used as following:
@@ -31,8 +31,8 @@ public class TimeMeasure {
   private long duration;
 
   /**
-   * The {@link Result} if {@link #duration} time has been set and measure is completed or {@code null}
-   * if still in progress.
+   * The {@link Result} if {@link #duration} time has been set and measure is completed or {@code null} if still in
+   * progress.
    */
   private Result result;
 
@@ -89,8 +89,7 @@ public class TimeMeasure {
   }
 
   /**
-   * @return {@code true} if completed ({@link #isSuccess()} or {@link #isFailure()}), {@code false}
-   *         otherwise.
+   * @return {@code true} if completed ({@link #isSuccess()} or {@link #isFailure()}), {@code false} otherwise.
    */
   public boolean isCompleted() {
 
@@ -98,13 +97,13 @@ public class TimeMeasure {
   }
 
   /**
-   * Calls {@link #failIfNotSucceeded()} and the logs the status and {@link #getDurationAsString() duration}
-   * of this measure.
+   * Calls {@link #failIfNotSucceeded()} and the logs the status and {@link #getDurationAsString() duration} of this
+   * measure.
    *
    * @param logger is the {@link Logger}.
    * @param operation represents the operation that was measured. Typically a {@link String}. Its
-   *        {@link Object#toString() string representation} is logged and shall be a brief description of the
-   *        measured operation.
+   *        {@link Object#toString() string representation} is logged and shall be a brief description of the measured
+   *        operation.
    */
   public void log(Logger logger, Object operation) {
 

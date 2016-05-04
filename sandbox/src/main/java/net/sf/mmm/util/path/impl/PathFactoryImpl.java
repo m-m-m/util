@@ -23,7 +23,7 @@ import net.sf.mmm.util.path.base.AbstractPathFactory;
 @Named(PathFactory.CDI_NAME)
 public class PathFactoryImpl extends AbstractPathFactory {
 
-  private  List<PathProvider> providers;
+  private List<PathProvider> providers;
 
   /**
    * The constructor.
@@ -57,8 +57,7 @@ public class PathFactoryImpl extends AbstractPathFactory {
   }
 
   /**
-   * This method sets the {@link List} of {@link PathProvider}s to {@link #registerProvider(PathProvider)
-   * register}.
+   * This method sets the {@link List} of {@link PathProvider}s to {@link #registerProvider(PathProvider) register}.
    *
    * @param providers is the list of providers.
    */

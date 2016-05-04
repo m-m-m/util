@@ -5,11 +5,10 @@ package net.sf.mmm.util.datatype.api.color;
 import net.sf.mmm.util.lang.api.EnumType;
 
 /**
- * This enum contains the available {@link ColorModel}s supported by {@link GenericColor}. Please note that a
- * color typically has four {@link Segment segments} where only three of them are specific for the
- * {@link ColorModel} and the fourth is {@link Alpha} (opacity). So for each of these {@link ColorModel}s
- * there is a notation with and without {@link Alpha}. E.g. "rgb(255, 255, 255)" is the same as
- * "rgba(255, 255, 255, 1.0)".
+ * This enum contains the available {@link ColorModel}s supported by {@link GenericColor}. Please note that a color
+ * typically has four {@link Segment segments} where only three of them are specific for the {@link ColorModel} and the
+ * fourth is {@link Alpha} (opacity). So for each of these {@link ColorModel}s there is a notation with and without
+ * {@link Alpha}. E.g. "rgb(255, 255, 255)" is the same as "rgba(255, 255, 255, 1.0)".
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -17,8 +16,8 @@ import net.sf.mmm.util.lang.api.EnumType;
 public enum ColorModel implements EnumType<String> {
 
   /**
-   * The indicator for the RGB color model, where RGB stands for the components {@link Red}, {@link Green},
-   * and {@link Blue}.
+   * The indicator for the RGB color model, where RGB stands for the components {@link Red}, {@link Green}, and
+   * {@link Blue}.
    */
   RGB {
 
@@ -42,8 +41,8 @@ public enum ColorModel implements EnumType<String> {
   },
 
   /**
-   * The indicator for the HSB color model, where HSB stands for the components {@link Hue},
-   * {@link Saturation}, and {@link Brightness}.
+   * The indicator for the HSB color model, where HSB stands for the components {@link Hue}, {@link Saturation}, and
+   * {@link Brightness}.
    */
   HSB {
 
@@ -92,8 +91,8 @@ public enum ColorModel implements EnumType<String> {
   },
 
   /**
-   * The indicator for the HSL color model, where HSL stands for the components {@link Hue},
-   * {@link Saturation}, and {@link Lightness}.
+   * The indicator for the HSL color model, where HSL stands for the components {@link Hue}, {@link Saturation}, and
+   * {@link Lightness}.
    */
   HSL {
 

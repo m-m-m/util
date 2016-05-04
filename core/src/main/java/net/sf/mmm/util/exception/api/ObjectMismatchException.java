@@ -54,8 +54,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
    * @param source is the source of the mismatching {@code object}.
-   * @param property is the property or key of the {@code container} containing the mismatching {@code object}
-   *        .
+   * @param property is the property or key of the {@code container} containing the mismatching {@code object} .
    */
   public ObjectMismatchException(Object object, Object expected, Object source, Object property) {
 
@@ -94,8 +93,7 @@ public class ObjectMismatchException extends NlsRuntimeException {
    * @param object is the object (value) that does not match as expected.
    * @param expected is the expected object (value).
    * @param source is the source of the mismatching {@code object}.
-   * @param property is the property or key of the {@code container} containing the mismatching {@code object}
-   *        .
+   * @param property is the property or key of the {@code container} containing the mismatching {@code object} .
    */
   public ObjectMismatchException(Throwable nested, Object object, Object expected, Object source,
       Object property) {

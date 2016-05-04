@@ -17,11 +17,11 @@ import net.sf.mmm.util.value.api.SimpleValueConverter;
  */
 public class NodeCycle<V> {
 
-  private  List<V> inverseCycle;
+  private List<V> inverseCycle;
 
-  private  V startNode;
+  private V startNode;
 
-  private  final SimpleValueConverter<V, String> formatter;
+  private final SimpleValueConverter<V, String> formatter;
 
   /**
    * The constructor.

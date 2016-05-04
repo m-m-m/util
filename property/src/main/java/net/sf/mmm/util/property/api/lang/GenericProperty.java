@@ -49,8 +49,7 @@ public class GenericProperty<V> extends AbstractRegularProperty<V> {
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public GenericProperty(String name, GenericType<V> type, Bean bean,
-      AbstractValidator<? super V> validator) {
+  public GenericProperty(String name, GenericType<V> type, Bean bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
     this.type = type;
   }

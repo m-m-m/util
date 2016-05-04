@@ -58,14 +58,14 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    */
   private static final Pattern PATTERN_MIXED_SHORT_OPTIONS = Pattern.compile("-([a-zA-Z0-9]{2,})");
 
-  private  final CliState cliState;
+  private final CliState cliState;
 
-  private  final CliParserDependencies dependencies;
+  private final CliParserDependencies dependencies;
 
   /** The {@link CliValueMap}. */
   private final CliValueMap valueMap;
 
-  private  final Object state;
+  private final Object state;
 
   /**
    * The constructor.
@@ -203,8 +203,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    * @param argumentContainer is the {@link CliArgumentContainer} for the current argument.
    * @param parameterConsumer is the {@link CliParameterConsumer}.
    */
-  protected void parseArgument(CliParserState parserState, String argument,
-      CliArgumentContainer argumentContainer, CliParameterConsumer parameterConsumer) {
+  protected void parseArgument(CliParserState parserState, String argument, CliArgumentContainer argumentContainer,
+      CliParameterConsumer parameterConsumer) {
 
     CliValueContainer valueContainer = this.valueMap.getOrCreate(argumentContainer);
     valueContainer.setValue(argument);
@@ -268,8 +268,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
 
     if (parserState.isOptionsComplete()) {
       // no more options (e.g. --foo), only arguments from here
-      List<CliArgumentContainer> argumentList = this.cliState.getArguments(parserState
-          .requireCurrentMode(this.cliState));
+      List<CliArgumentContainer> argumentList = this.cliState
+          .getArguments(parserState.requireCurrentMode(this.cliState));
       int argumentIndex = parserState.getArgumentIndex();
       if (argumentIndex >= argumentList.size()) {
         throw new NlsIllegalArgumentException(parameter);
@@ -511,11 +511,11 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    */
   protected static class CliParserState {
 
-    private  CliModeObject currentMode;
+    private CliModeObject currentMode;
 
-    private  String modeOption;
+    private String modeOption;
 
-    private  int argumentIndex;
+    private int argumentIndex;
 
     /**
      * The constructor.
@@ -719,9 +719,9 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    */
   public static class CliArgumentHelpInfo {
 
-    private  final CliArgumentContainer argument;
+    private final CliArgumentContainer argument;
 
-    private  final String name;
+    private final String name;
 
     /**
      * The constructor.
@@ -851,8 +851,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method prints the help for the {@link CliArgument arguments} given by {@code argumentList}. It prints
-     * them with localized usage texts in a two column-layout via {@link LineWrapper}.
+     * This method prints the help for the {@link CliArgument arguments} given by {@code argumentList}. It prints them
+     * with localized usage texts in a two column-layout via {@link LineWrapper}.
      *
      * @param argumentList is the {@link List} with the according {@link CliArgumentHelpInfo help infos}.
      * @param maxArgumentColumnWidth is the maximum width of the argument-name column.
@@ -883,8 +883,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     }
 
     /**
-     * This method prints the help for the {@link CliOption options} given by {@code modeOptions}. It prints them
-     * with localized usage texts in a two column-layout via {@link LineWrapper}.
+     * This method prints the help for the {@link CliOption options} given by {@code modeOptions}. It prints them with
+     * localized usage texts in a two column-layout via {@link LineWrapper}.
      *
      * @param modeOptions is the {@link Collection} with the options to print.
      * @param option2HelpMap is the {@link Map} with the according {@link CliOptionHelpInfo help infos}.
@@ -904,8 +904,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
      *
      * @param modeOptions is the {@link Collection} with the options to print.
      * @param option2HelpMap is the {@link Map} with the according {@link CliOptionHelpInfo help infos}.
-     * @param required - {@code true} if required options should be printed, {@code false} if additional
-     *        options should be printed.
+     * @param required - {@code true} if required options should be printed, {@code false} if additional options should
+     *        be printed.
      */
     private void printOptions(Collection<CliOptionContainer> modeOptions,
         Map<CliOption, CliOptionHelpInfo> option2HelpMap, boolean required) {

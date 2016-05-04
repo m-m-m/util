@@ -26,7 +26,7 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
  */
 public abstract class AbstractPathFactory extends AbstractLoggableComponent implements PathFactory {
 
-  private  final Map<String, PathProvider> schema2providerMap;
+  private final Map<String, PathProvider> schema2providerMap;
 
   /**
    * The constructor.
@@ -66,8 +66,8 @@ public abstract class AbstractPathFactory extends AbstractLoggableComponent impl
    * This method registers the given {@link PathProvider}.
    *
    * @param provider is the {@link PathProvider} to register.
-   * @param schemePrefix is the {@link PathUri#getSchemePrefix() scheme-prefix} for which the
-   *        {@link PathProvider} shall be registered.
+   * @param schemePrefix is the {@link PathUri#getSchemePrefix() scheme-prefix} for which the {@link PathProvider} shall
+   *        be registered.
    * @throws DuplicateObjectException if a {@link PathProvider} is already registered for one of the
    *         {@link PathProvider#getSchemePrefixes() scheme-prefixes}.
    */
@@ -87,10 +87,10 @@ public abstract class AbstractPathFactory extends AbstractLoggableComponent impl
    * This method gets the {@link PathProvider} for the given {@link PathUri}.
    *
    * @param pathUri is the {@link PathUri}.
-   * @return the {@link PathProvider} {@link PathProvider#getSchemePrefixes() responsible} for the given
-   *         {@link PathUri}.
-   * @throws ResourceUriUndefinedException if no {@link PathProvider provider} is
-   *         {@link #registerProvider(PathProvider) registered} that is responsible.
+   * @return the {@link PathProvider} {@link PathProvider#getSchemePrefixes() responsible} for the given {@link PathUri}
+   *         .
+   * @throws ResourceUriUndefinedException if no {@link PathProvider provider} is {@link #registerProvider(PathProvider)
+   *         registered} that is responsible.
    */
   protected PathProvider getProvider(PathUri pathUri) throws ResourceUriUndefinedException {
 

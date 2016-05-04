@@ -3,12 +3,12 @@
 package net.sf.mmm.util.datatype.api.color;
 
 /**
- * The implementation of {@link Segment} for a factor in the range from {@code 0} to {@code 1} such
- * as {@link Saturation}, {@link Lightness}, or {@link Brightness}. <br>
+ * The implementation of {@link Segment} for a factor in the range from {@code 0} to {@code 1} such as
+ * {@link Saturation}, {@link Lightness}, or {@link Brightness}. <br>
  * <b>ATTENTION:</b><br>
  * Beside {@link #toStringAsPercent() percent} notation the {@link String} constructor both accepts
  * {@link #getValueAsByte() byte values} as well as {@link #toStringAsFactor() factor} notation.
- * 
+ *
  * @param <SELF> is the generic type of the class itself (bound by the actual final subclass).
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -33,7 +33,7 @@ public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSe
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Factor(double value) {
@@ -43,7 +43,7 @@ public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSe
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value}.
    */
   public Factor(Double value) {
@@ -53,7 +53,7 @@ public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSe
 
   /**
    * The constructor.
-   * 
+   *
    * @param byteValue is the {@link #getValueAsByte() value given as byte}.
    */
   public Factor(int byteValue) {
@@ -63,7 +63,7 @@ public abstract class Factor<SELF extends Factor<SELF>> extends AbstractDoubleSe
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} given as {@link #toStringAsFactor() factor} or
    *        {@link #toStringAsPercent() percent} {@link String}.
    */

@@ -14,7 +14,7 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the implementation of the {@link MutableGenericContext} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -25,7 +25,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
 
   /**
    * The constructor for a root-context.
-   * 
+   *
    * @param mapFactory is used to create the map for storing variables.
    */
   @SuppressWarnings(CompilerWarnings.RAWTYPES)
@@ -36,20 +36,21 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
 
   /**
    * The constructor for a {@link #createChildContext() sub-context}.
-   * 
+   *
    * @param mapFactory is used to create the map for storing variables.
    * @param valueConverter is the {@link GenericValueConverter} used to convert variables that are
    *        {@link #getVariable(String, Class) requested} as a different type.
    */
   @SuppressWarnings(CompilerWarnings.RAWTYPES)
-  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericValueConverter<Object> valueConverter) {
+  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory,
+      GenericValueConverter<Object> valueConverter) {
 
     this(mapFactory, null, valueConverter);
   }
 
   /**
    * The constructor for a {@link #createChildContext() sub-context}.
-   * 
+   *
    * @param mapFactory is used to create the map for storing variables.
    * @param parentContext is the context the created one will derive from.
    */
@@ -61,7 +62,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
 
   /**
    * The constructor for a {@link #createChildContext() sub-context}.
-   * 
+   *
    * @param mapFactory is used to create the map for storing variables.
    * @param parentContext is the context the created one will derive from.
    * @param valueConverter is the {@link GenericValueConverter} used to convert variables that are

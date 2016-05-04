@@ -38,9 +38,9 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   /** The name of the method {@link net.sf.mmm.util.nls.api.NlsBundleWithLookup#getMessage(String, Map)}. */
   public static final String METHOD_NAME_LOOKUP = "getMessage";
 
-  private  final ClassLoader classLoader;
+  private final ClassLoader classLoader;
 
-  private  final Map<Class<? extends NlsBundle>, NlsBundle> bundleMap;
+  private final Map<Class<? extends NlsBundle>, NlsBundle> bundleMap;
 
   /**
    * The constructor.
@@ -145,8 +145,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * This method converts the given {@code arguments} to a {@link Map} with the
-     * {@link NlsMessage#getArgument(String) arguments}.
+     * This method converts the given {@code arguments} to a {@link Map} with the {@link NlsMessage#getArgument(String)
+     * arguments}.
      *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @param methodInfo is the {@link NlsBundleMethodInfo} for the given {@link Method}.
@@ -244,12 +244,13 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @param method is the {@link Method} or {@code null} for generic invocation (lookup).
      * @param args are the method arguments or {@code null} for generic invocation (lookup).
      * @param methodName is the {@link Method#getName() name} of the {@link Method}.
-     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by
-     *        {@code methodName} if not given.
+     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by {@code methodName} if
+     *        not given.
      * @return the {@link NlsBundleMethodInfo}. May be {@code null} for generic invocation if method for
      *         {@code methodName} was not found (does not exist).
      */
-    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName, Object proxy) {
+    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName,
+        Object proxy) {
 
       NlsBundleMethodInfo methodInfo;
       methodInfo = this.method2BundleInfoMap.get(methodName);
@@ -315,9 +316,9 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
    */
   protected static class NlsBundleMethodInfo {
 
-    private  final NlsTemplate template;
+    private final NlsTemplate template;
 
-    private  final String[] argumentNames;
+    private final String[] argumentNames;
 
     /**
      * The constructor.

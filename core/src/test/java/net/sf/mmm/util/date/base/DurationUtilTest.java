@@ -2,10 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.base;
 
-import net.sf.mmm.util.date.api.DurationUtil;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import net.sf.mmm.util.date.api.DurationUtil;
 
 /**
  * This is the test-case for {@link DurationUtil}.

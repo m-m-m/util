@@ -20,9 +20,9 @@ public class CustomHashKey<T> extends AbstractHashKey<T> {
 
   private static final long serialVersionUID = 1601614479939341307L;
 
-  private  EqualsChecker<T> equalsChecker;
+  private EqualsChecker<T> equalsChecker;
 
-  private  HashCodeFunction<T> hashCodeFunction;
+  private HashCodeFunction<T> hashCodeFunction;
 
   /**
    * The constructor for de-serialization in GWT.

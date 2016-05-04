@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 /**
  * This is an implementation of the {@link java.util.List} interface that adapts another {@link Collection} as
  * {@link #getDelegate() delegate}.
- * 
+ *
  * @param <E> is the generic type of the elements.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -20,11 +20,11 @@ public class CollectionList<E> extends ArrayList<E> {
 
   private static final long serialVersionUID = -8534525840753920810L;
 
-  private  Collection<E> delegate;
+  private Collection<E> delegate;
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link Collection} to adapt.
    */
   public CollectionList(Collection<E> delegate) {
@@ -35,7 +35,7 @@ public class CollectionList<E> extends ArrayList<E> {
 
   /**
    * This method gets the underlying {@link Collection} that is adapted to appear as {@link java.util.List}.
-   * 
+   *
    * @return the delegate.
    */
   public Collection<E> getDelegate() {
@@ -108,22 +108,24 @@ public class CollectionList<E> extends ArrayList<E> {
     private int cursor;
 
     /**
-     * Index of element returned by most recent call to next or previous. Reset to -1 if this element is
-     * deleted by a call to remove.
+     * Index of element returned by most recent call to next or previous. Reset to -1 if this element is deleted by a
+     * call to remove.
      */
     private int lastRet = -1;
 
     /**
-     * The modCount value that the iterator believes that the backing List should have. If this expectation is
-     * violated, the iterator has detected concurrent modification.
+     * The modCount value that the iterator believes that the backing List should have. If this expectation is violated,
+     * the iterator has detected concurrent modification.
      */
     private int expectedModCount = CollectionList.this.modCount;
 
+    @Override
     public boolean hasNext() {
 
       return this.cursor != size();
     }
 
+    @Override
     public E next() {
 
       checkForComodification();
@@ -137,6 +139,7 @@ public class CollectionList<E> extends ArrayList<E> {
       }
     }
 
+    @Override
     public void remove() {
 
       if (this.lastRet == -1) {

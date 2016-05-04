@@ -16,7 +16,7 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
 /**
  * This class is used to {@link #findResource(String, String, Locale) find} a {@link Locale localized}
  * {@link DataResource resource}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

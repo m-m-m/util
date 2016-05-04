@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliOptionUndefinedException} is thrown if an {@link CliOption option} is given as
- * commandline-argument if NOT defined.
+ * A {@link CliOptionUndefinedException} is thrown if an {@link CliOption option} is given as commandline-argument if
+ * NOT defined.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

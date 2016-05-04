@@ -51,8 +51,8 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  * the type of the getter in parallel with the according {@link TypedProperty} constant. In the same moment the compiler
  * will reject the above code to create the query and you will be able to fix all places where generic access to the
  * "age" property takes place. When using simple string references for property access (
- * {@code addCondition(String, Operator, Object)}) instead you would have to pray that you did NOT miss anything in
- * the code or you get errors in production at runtime.
+ * {@code addCondition(String, Operator, Object)}) instead you would have to pray that you did NOT miss anything in the
+ * code or you get errors in production at runtime.
  *
  * @param <T> is the generic type of the property.
  *
@@ -61,15 +61,15 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
  */
 public class TypedProperty<T> implements TypedPath<T>, AttributeReadTitle<String> {
 
-  private  final String segment;
+  private final String segment;
 
-  private  final String pojoPath;
+  private final String pojoPath;
 
-  private  final Class<T> propertyType;
+  private final Class<T> propertyType;
 
-  private  final String parentPath;
+  private final String parentPath;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.

@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliOptionMisplacedException} is thrown if an option is misplaced, meaning that it occurred after
- * the first {@link CliArgument argument} has been detected.
+ * A {@link CliOptionMisplacedException} is thrown if an option is misplaced, meaning that it occurred after the first
+ * {@link CliArgument argument} has been detected.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

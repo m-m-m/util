@@ -2,18 +2,18 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.color;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.nls.api.NlsObject;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 /**
  * This is the test-case for {@link GenericColor}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -24,7 +24,7 @@ public class GenericColorTest extends Assert {
 
   /**
    * Checks that the given {@link Segment}s match according to {@code matchType}.
-   * 
+   *
    * @param expected is the expected {@link Segment}.
    * @param actual is the current {@link Segment} to compare with {@code expected}.
    * @param matchType is the {@link MatchType}.
@@ -43,17 +43,17 @@ public class GenericColorTest extends Assert {
         assertNotSame(expected, actual);
         assertEquals(expected.getValueAsFactor(), actual.getValueAsFactor(), PRECISION_CLOSE_MATCH);
         break;
-      default :
+      default:
         throw new IllegalCaseException(MatchType.class, matchType);
     }
   }
 
   /**
-   * Checks that all {@link Segment}s of the given {@link GenericColor} match to the given values. This method
-   * expects that the four {@link Segment}s used to create the {@link GenericColor} via the given
-   * {@link ColorModel} have to be same. The others have to be equal (if {@code allEqual} is
-   * {@code true}) or at least match with {@link #PRECISION_CLOSE_MATCH}.
-   * 
+   * Checks that all {@link Segment}s of the given {@link GenericColor} match to the given values. This method expects
+   * that the four {@link Segment}s used to create the {@link GenericColor} via the given {@link ColorModel} have to be
+   * same. The others have to be equal (if {@code allEqual} is {@code true}) or at least match with
+   * {@link #PRECISION_CLOSE_MATCH}.
+   *
    * @param color is the {@link GenericColor} to test.
    * @param red is the expected {@link Red} value.
    * @param green is the expected {@link Green} value.
@@ -66,8 +66,8 @@ public class GenericColorTest extends Assert {
    * @param chroma is the expected {@link Chroma} value.
    * @param alpha is the expected {@link Alpha} value.
    * @param allEqual - {@code true} if all {@link Segment}s have to be equal, {@code false} if
-   *        {@link #PRECISION_CLOSE_MATCH} is sufficient for all {@link Segment}s except the four used to
-   *        create the color.
+   *        {@link #PRECISION_CLOSE_MATCH} is sufficient for all {@link Segment}s except the four used to create the
+   *        color.
    * @param model is the {@link ColorModel} that was used to create the given {@code color}.
    */
   private void checkColor(GenericColor color, Red red, Green green, Blue blue, Hue hue, Saturation saturationHsb,
@@ -125,7 +125,7 @@ public class GenericColorTest extends Assert {
   /**
    * Checks the conversion of {@link GenericColor} {@link GenericColor#valueOf(String) from} and
    * {@link GenericColor#toString(ColorModel) to} {@link String}.
-   * 
+   *
    * @param color is the {@link GenericColor} to test.
    * @param colorModel is the expected {@link ColorModel}.
    */
@@ -159,8 +159,8 @@ public class GenericColorTest extends Assert {
     // then
     assertEquals(color, GenericColor.valueOf("white"));
     assertEquals(color, GenericColor.valueOf("#FFFFFF"));
-    checkColor(color, red, green, blue, new Hue(0.0), new Saturation(0.0), new Saturation(0.0), new Brightness(1.0),
-        new Lightness(1.0), new Chroma(0.0), alpha, true, model);
+    checkColor(color, red, green, blue, new Hue(0.0), new Saturation(0.0), new Saturation(0.0),
+        new Brightness(1.0), new Lightness(1.0), new Chroma(0.0), alpha, true, model);
   }
 
   /**
@@ -182,8 +182,8 @@ public class GenericColorTest extends Assert {
     // then
     assertEquals("#7F7F7F", color.toColor().toString());
     assertEquals(color, GenericColor.valueOf("rgb(0.5, 0.5, 0.5)"));
-    checkColor(color, red, green, blue, new Hue(0.0), new Saturation(0.0), new Saturation(0.0), new Brightness(0.5),
-        new Lightness(0.5), new Chroma(0.0), alpha, true, model);
+    checkColor(color, red, green, blue, new Hue(0.0), new Saturation(0.0), new Saturation(0.0),
+        new Brightness(0.5), new Lightness(0.5), new Chroma(0.0), alpha, true, model);
   }
 
   /**
@@ -206,8 +206,8 @@ public class GenericColorTest extends Assert {
     assertEquals(color, GenericColor.valueOf("BLACK"));
     assertEquals(color, GenericColor.valueOf("#000000"));
     assertEquals(color, GenericColor.valueOf("rgb(0, 0, 0)"));
-    checkColor(color, red, green, blue, new Hue(0.0), new Saturation(0.0), new Saturation(0.0), new Brightness(0.0),
-        new Lightness(0.0), new Chroma(0.0), alpha, true, model);
+    checkColor(color, red, green, blue, new Hue(0.0), new Saturation(0.0), new Saturation(0.0),
+        new Brightness(0.0), new Lightness(0.0), new Chroma(0.0), alpha, true, model);
   }
 
   /**
@@ -229,8 +229,8 @@ public class GenericColorTest extends Assert {
     // then
     assertEquals("#FF0000", color.toColor().toString());
     assertEquals(color, GenericColor.valueOf("rEd"));
-    checkColor(color, red, green, blue, new Hue(0.0), new Saturation(1.0), new Saturation(1.0), new Brightness(1.0),
-        new Lightness(0.5), new Chroma(1.0), alpha, true, model);
+    checkColor(color, red, green, blue, new Hue(0.0), new Saturation(1.0), new Saturation(1.0),
+        new Brightness(1.0), new Lightness(0.5), new Chroma(1.0), alpha, true, model);
   }
 
   /**
@@ -319,8 +319,8 @@ public class GenericColorTest extends Assert {
     Lightness lightness = new Lightness(0.6233045);
     Saturation saturationHsl = new Saturation(0.8168282);
     Chroma chroma = new Chroma(0.615391);
-    checkColor(color, red, green, blue, hue, saturationHsb, saturationHsl, brightness, lightness, chroma, alpha, false,
-        model);
+    checkColor(color, red, green, blue, hue, saturationHsb, saturationHsl, brightness, lightness, chroma, alpha,
+        false, model);
     // check additional precision...
     assertEquals(red, color.getRed());
     assertEquals(lightness, color.getLightness());
@@ -352,8 +352,8 @@ public class GenericColorTest extends Assert {
     Lightness lightness = new Lightness(0.750);
     Saturation saturationHsl = new Saturation(1.000);
     Chroma chroma = new Chroma(0.500);
-    checkColor(color, red, green, blue, hue, saturationHsb, saturationHsl, brightness, lightness, chroma, alpha, true,
-        model);
+    checkColor(color, red, green, blue, hue, saturationHsb, saturationHsl, brightness, lightness, chroma, alpha,
+        true, model);
     // check additional precision...
     assertEquals(red, color.getRed());
     assertEquals(lightness, color.getLightness());
@@ -385,8 +385,8 @@ public class GenericColorTest extends Assert {
     Brightness brightness = new Brightness(0.750);
     Saturation saturationHsb = new Saturation(0.6666666666666666);
     Chroma chroma = new Chroma(0.500);
-    checkColor(color, red, green, blue, hue, saturationHsb, saturationHsl, brightness, lightness, chroma, alpha, false,
-        model);
+    checkColor(color, red, green, blue, hue, saturationHsb, saturationHsl, brightness, lightness, chroma, alpha,
+        false, model);
     // check additional precision...
     assertEquals(red, color.getRed());
     assertEquals(lightness, color.getLightness());
@@ -442,8 +442,8 @@ public class GenericColorTest extends Assert {
     double r = 0x8A / 255.0;
     double g = 0x2B / 255.0;
     double b = 0xE2 / 255.0;
-    assertEquals(GenericColor.valueOf(new Red(r + (1 - r) * 0.5), new Green(g + (1 - g) * 0.5), new Blue(b + (1 - b)
-        * 0.5), Alpha.OPAQUE), blueViolet.lighten(half));
+    assertEquals(GenericColor.valueOf(new Red(r + (1 - r) * 0.5), new Green(g + (1 - g) * 0.5),
+        new Blue(b + (1 - b) * 0.5), Alpha.OPAQUE), blueViolet.lighten(half));
     assertEquals(white, blueViolet.lighten(full));
     assertEquals(blueViolet, blueViolet.lighten(none));
   }

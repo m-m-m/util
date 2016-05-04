@@ -19,6 +19,7 @@ public class LinkedListDequeFactory extends AbstractDequeFactory {
   /** The singleton instance. */
   public static final DequeFactory INSTANCE = new LinkedListDequeFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<LinkedList> getCollectionImplementation() {
 

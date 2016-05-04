@@ -15,11 +15,11 @@ import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
  */
 public abstract class AbstractDatatypeSegmentDescriptor<T, V> implements DatatypeSegmentDescriptor<T, V> {
 
-  private  final String name;
+  private final String name;
 
-  private  final Class<V> type;
+  private final Class<V> type;
 
-  private  final boolean optional;
+  private final boolean optional;
 
   /**
    * The constructor.

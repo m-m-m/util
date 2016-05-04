@@ -7,7 +7,7 @@ import net.sf.mmm.util.pool.base.AbstractPool;
 
 /**
  * This is the default implementation of the {@link net.sf.mmm.util.pool.api.Pool} interface for char-arrays.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -30,7 +30,7 @@ public class CharArrayPoolImpl extends AbstractPool<char[]> implements CharArray
 
   /**
    * The constructor.
-   * 
+   *
    * @param capacity is the {@link #getCapacity() capacity} of the pool.
    * @param arrayLength is the length of each pooled byte-array.
    */

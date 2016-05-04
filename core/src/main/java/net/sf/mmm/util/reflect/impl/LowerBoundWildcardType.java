@@ -10,9 +10,9 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of the {@link WildcardType} interface for a single lower bound.
- * 
+ *
  * @see ReflectionUtilImpl#toType(String)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -21,11 +21,11 @@ public class LowerBoundWildcardType implements WildcardType {
   /** The prefix of the {@link #toString() string representation}. */
   public static final String PREFIX = "? super ";
 
-  private  final Type lowerBound;
+  private final Type lowerBound;
 
   /**
    * The constructor.
-   * 
+   *
    * @param lowerBound is the single {@link #getLowerBounds() lower-bound}.
    */
   public LowerBoundWildcardType(Type lowerBound) {

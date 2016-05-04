@@ -5,13 +5,11 @@ package net.sf.mmm.util.contenttype.base.format;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- * This class represents a {@link Segment} for a metadata value. The value of
- * this segment will be added to the metadata during detection associated with
- * the {@link #getKey() key}. If a {@link SegmentValue} has a
- * {@link #getMaximumLength() variable length} then it is terminated as soon as
- * the next {@link Segment} is matched (what is typically a
- * {@link SegmentConstant}).
- * 
+ * This class represents a {@link Segment} for a metadata value. The value of this segment will be added to the metadata
+ * during detection associated with the {@link #getKey() key}. If a {@link SegmentValue} has a
+ * {@link #getMaximumLength() variable length} then it is terminated as soon as the next {@link Segment} is matched
+ * (what is typically a {@link SegmentConstant}).
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -38,14 +36,12 @@ public class SegmentValue extends SegmentVariableLength {
   }
 
   /**
-   * This method gets the key to associate this value in the
-   * {@link net.sf.mmm.util.io.api.DetectorStream#getMetadata() detected
-   * metadata}. <br>
-   * The key may also be {@code null} to indicate a variable key depending
-   * on the streamed data. Then the last {@link SegmentKey} that matched before
-   * is used to determine the key. If there is no such {@link SegmentKey} the
+   * This method gets the key to associate this value in the {@link net.sf.mmm.util.io.api.DetectorStream#getMetadata()
+   * detected metadata}. <br>
+   * The key may also be {@code null} to indicate a variable key depending on the streamed data. Then the last
+   * {@link SegmentKey} that matched before is used to determine the key. If there is no such {@link SegmentKey} the
    * format specification is invalid.
-   * 
+   *
    * @return the key or {@code null}.
    */
   public String getKey() {

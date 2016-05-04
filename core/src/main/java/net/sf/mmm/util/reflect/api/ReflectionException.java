@@ -6,8 +6,7 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * A {@link ReflectionException} is thrown if an operation based on {@link java.lang.reflect reflection}
- * failed.
+ * A {@link ReflectionException} is thrown if an operation based on {@link java.lang.reflect reflection} failed.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -23,8 +22,8 @@ public abstract class ReflectionException extends NlsRuntimeException {
    * The constructor.
    *
    * @param internationalizedMessage is a short description of the problem. It is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
-   *        should be in English language.
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and should be
+   *        in English language.
    */
   public ReflectionException(String internationalizedMessage) {
 
@@ -36,8 +35,8 @@ public abstract class ReflectionException extends NlsRuntimeException {
    *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
-   *        should be in English language.
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and should be
+   *        in English language.
    */
   public ReflectionException(Throwable nested, String internationalizedMessage) {
 

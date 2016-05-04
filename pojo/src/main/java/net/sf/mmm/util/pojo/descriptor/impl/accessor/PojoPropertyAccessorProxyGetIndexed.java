@@ -11,9 +11,9 @@ import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the implementation of the {@link PojoPropertyAccessorIndexedNonArg} interface for
- * {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED getting} an element from another accessor
- * returning an array or {@link java.util.List}.
- * 
+ * {@link PojoPropertyAccessorIndexedNonArgMode#GET_INDEXED getting} an element from another accessor returning an array
+ * or {@link java.util.List}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -22,7 +22,7 @@ public class PojoPropertyAccessorProxyGetIndexed extends AbstractPojoPropertyAcc
 
   /**
    * The constructor.
-   * 
+   *
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param containerGetAccessor is the accessor delegate that gets an array, map or collection property.
    */

@@ -9,19 +9,19 @@ import net.sf.mmm.util.date.api.WeekdaySet;
 
 /**
  * This is the implementation of {@link Recurrence} as simple Java Bean.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class RecurrenceBean implements Recurrence {
 
-  private  DateUnit unit;
+  private DateUnit unit;
 
-  private  int step;
+  private int step;
 
-  private  WeekdaySet weekdays;
+  private WeekdaySet weekdays;
 
-  private  WeekOfMonth weekOfMonth;
+  private WeekOfMonth weekOfMonth;
 
   /**
    * The constructor.
@@ -33,7 +33,7 @@ public class RecurrenceBean implements Recurrence {
 
   /**
    * The constructor.
-   * 
+   *
    * @param unit - see {@link #getUnit()}.
    * @param step - see {@link #getStep()}.
    * @param weekdays - see {@link #getWeekdays()}.

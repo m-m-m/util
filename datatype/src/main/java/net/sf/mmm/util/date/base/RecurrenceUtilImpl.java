@@ -21,9 +21,9 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.date.api.RecurrenceUtil} interface.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -31,7 +31,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 @Named
 public class RecurrenceUtilImpl extends AbstractLoggableComponent implements RecurrenceUtil {
 
-  private  static RecurrenceUtil instance;
+  private static RecurrenceUtil instance;
 
   /**
    * The constructor.
@@ -45,7 +45,7 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
    * This method gets the singleton instance of this {@link RecurrenceUtil}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static RecurrenceUtil getInstance() {
@@ -80,8 +80,8 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
     DateUnit unit = recurrence.getUnit();
     NlsNullPointerException.checkNotNull(DateUnit.class, unit);
     int step = recurrence.getStep();
-    ValueOutOfRangeException.checkRange(Integer.valueOf(step), Integer.valueOf(1), Integer.valueOf(Integer.MAX_VALUE),
-        recurrence);
+    ValueOutOfRangeException.checkRange(Integer.valueOf(step), Integer.valueOf(1),
+        Integer.valueOf(Integer.MAX_VALUE), recurrence);
     result.add(unit.getCalendarId(), step);
     WeekdaySet weekdaySet = recurrence.getWeekdays();
     if (weekdaySet == null) {
@@ -137,7 +137,7 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
           result.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         }
         break;
-      default :
+      default:
         throw new IllegalCaseException(DateUnit.class, unit);
     }
 

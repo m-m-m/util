@@ -17,7 +17,7 @@ import net.sf.mmm.util.date.api.DurationUtil;
 @Named(DurationUtil.CDI_NAME)
 public class DurationUtilImpl implements DurationUtil {
 
-  private  static DurationUtil instance;
+  private static DurationUtil instance;
 
   /**
    * The constructor.
@@ -66,7 +66,8 @@ public class DurationUtilImpl implements DurationUtil {
 
   /**
    * @param duration is the duration to format.
-   * @param unitPerSeconds is the number of units per second ({@code duration/unitsPerSecond} is the duration in seconds).
+   * @param unitPerSeconds is the number of units per second ({@code duration/unitsPerSecond} is the duration in
+   *        seconds).
    * @return the formatted duration.
    */
   private String formatDuration(long duration, long unitPerSeconds) {

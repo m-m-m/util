@@ -3,13 +3,12 @@
 package net.sf.mmm.util.transferobject.api;
 
 /**
- * This is the abstract base class for a composite {@link TransferObject}. Such object should contain
- * (aggregate) other {@link AbstractTransferObject}s but no atomic data. This means it has properties that
- * contain a {@link TransferObject} or a {@link java.util.Collection} of those but no
- * {@link net.sf.mmm.util.lang.api.Datatype values}. <br>
+ * This is the abstract base class for a composite {@link TransferObject}. Such object should contain (aggregate) other
+ * {@link AbstractTransferObject}s but no atomic data. This means it has properties that contain a
+ * {@link TransferObject} or a {@link java.util.Collection} of those but no {@link net.sf.mmm.util.lang.api.Datatype
+ * values}. <br>
  * Classes extending this class should carry the suffix {@code Cto}. <br>
- * For additional details and an example consult the {@link net.sf.mmm.util.transferobject.api package
- * JavaDoc}.
+ * For additional details and an example consult the {@link net.sf.mmm.util.transferobject.api package JavaDoc}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

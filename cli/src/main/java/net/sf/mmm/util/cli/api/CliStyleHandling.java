@@ -6,12 +6,12 @@ import org.slf4j.Logger;
 
 /**
  * This enum contains the available ways to handle a specific CLI-style.
- * 
+ *
  * @see CliStyle#optionNameNotAcceptedByFilter()
  * @see CliStyle#optionSyntaxAssignment()
  * @see CliStyle#optionDuplicated()
  * @see CliStyle#modeUndefined()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -62,7 +62,7 @@ public enum CliStyleHandling {
   /**
    * This method performs the handling of the anomaly represented by the given {@code exception}. <br>
    * You should avoid creating the exception and call this method for the handling {@link #OK}.
-   * 
+   *
    * @param logger is the {@link Logger} potentially used to log the exception (-message).
    * @param exception informs about the anomaly.
    */

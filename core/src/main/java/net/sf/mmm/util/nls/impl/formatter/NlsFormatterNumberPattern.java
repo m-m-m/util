@@ -9,19 +9,19 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
- * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for
- * {@link NlsFormatterManager#TYPE_NUMBER} using a custom pattern.
- * 
+ * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} for {@link NlsFormatterManager#TYPE_NUMBER}
+ * using a custom pattern.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public final class NlsFormatterNumberPattern extends SimpleNlsFormatter<Object> {
 
-  private  final String pattern;
+  private final String pattern;
 
   /**
    * The constructor.
-   * 
+   *
    * @param pattern is the custom number pattern.
    */
   public NlsFormatterNumberPattern(String pattern) {

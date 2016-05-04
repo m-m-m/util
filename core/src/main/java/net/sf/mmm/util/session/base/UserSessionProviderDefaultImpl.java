@@ -5,17 +5,17 @@ package net.sf.mmm.util.session.base;
 import java.security.Principal;
 import java.util.Locale;
 
-import net.sf.mmm.util.session.api.MutableUserSession;
-import net.sf.mmm.util.session.api.UserSession;
-import net.sf.mmm.util.session.api.UserSessionAccess.AbstractUserSessionProvider;
-
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import net.sf.mmm.util.session.api.MutableUserSession;
+import net.sf.mmm.util.session.api.UserSession;
+import net.sf.mmm.util.session.api.UserSessionAccess.AbstractUserSessionProvider;
+
 /**
- * This is the default implementation of {@link UserSessionProvider}. It simply delegates to according classes
- * provided by the springframework.
+ * This is the default implementation of {@link UserSessionProvider}. It simply delegates to according classes provided
+ * by the springframework.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0

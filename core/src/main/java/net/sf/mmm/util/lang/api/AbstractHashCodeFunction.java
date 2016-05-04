@@ -3,11 +3,11 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This is the abstract base implementation of {@link HashCodeFunction}. It contains the handling of
- * {@code null} values.
- * 
+ * This is the abstract base implementation of {@link HashCodeFunction}. It contains the handling of {@code null}
+ * values.
+ *
  * @param <VALUE> is the generic type of the objects to {@link #hashCode(Object) hash}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -32,7 +32,7 @@ public abstract class AbstractHashCodeFunction<VALUE> implements HashCodeFunctio
 
   /**
    * @see #hashCode(Object)
-   * 
+   *
    * @param value is the object to hash. Will NOT be {@code null}.
    * @return the custom {@link #hashCode(Object) hash code} of the given {@code value}.
    */

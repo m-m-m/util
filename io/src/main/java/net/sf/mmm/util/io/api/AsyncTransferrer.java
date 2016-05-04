@@ -9,7 +9,7 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * This is the interface for an async transferrer of streams or readers/writers.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -17,16 +17,18 @@ public interface AsyncTransferrer extends Future<Long> {
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @return the number of bytes that have been transferred.
    */
+  @Override
   Long get() throws InterruptedException, ExecutionException;
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @return the number of bytes that have been transferred.
    */
+  @Override
   Long get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
 
 }

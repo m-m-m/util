@@ -4,9 +4,9 @@ package net.sf.mmm.util.cli.base;
 
 import java.util.Collection;
 
-import net.sf.mmm.util.reflect.api.GenericType;
-
 import org.slf4j.Logger;
+
+import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is an implementation of {@link CliValueContainer} for a {@link Collection}.
@@ -16,7 +16,7 @@ import org.slf4j.Logger;
  */
 public class CliValueContainerCollection extends AbstractCliValueContainerContainer {
 
-  private  Collection<Object> collection;
+  private Collection<Object> collection;
 
   /**
    * The constructor.

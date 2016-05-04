@@ -8,12 +8,13 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNavigatorTest;
 
 /**
  * This is the test-case for {@link PojoPathNavigator} using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class PojoPathNavigatorSpringTest extends PojoPathNavigatorTest {
 
+  @Override
   protected PojoPathNavigator createNavigator() {
 
     PojoPathNavigator navigator = SpringContainerPool.getInstance().get(PojoPathNavigator.class);

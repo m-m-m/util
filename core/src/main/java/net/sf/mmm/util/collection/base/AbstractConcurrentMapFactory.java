@@ -8,7 +8,7 @@ import net.sf.mmm.util.collection.api.ConcurrentMapFactory;
 
 /**
  * This is the abstract base implementation of the {@link ConcurrentMapFactory} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */

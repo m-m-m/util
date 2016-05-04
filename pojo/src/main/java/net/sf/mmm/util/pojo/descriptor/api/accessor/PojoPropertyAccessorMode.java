@@ -16,9 +16,9 @@ package net.sf.mmm.util.pojo.descriptor.api.accessor;
  */
 public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAccessor> {
 
-  private  final String name;
+  private final String name;
 
-  private  final boolean reading;
+  private final boolean reading;
 
   /**
    * The constructor.
@@ -47,8 +47,8 @@ public abstract class PojoPropertyAccessorMode<ACCESSOR extends PojoPropertyAcce
    * This method determines if this mode is for a reading {@link PojoPropertyAccessor accessor}.
    *
    * @return {@code true} if this mode is for a reading {@link PojoPropertyAccessor accessor} that
-   *         {@link PojoPropertyAccessor#getReturnType() returns} a property-value, {@code false} if this
-   *         mode is for a modifying {@link PojoPropertyAccessor accessor} that expects a
+   *         {@link PojoPropertyAccessor#getReturnType() returns} a property-value, {@code false} if this mode is for a
+   *         modifying {@link PojoPropertyAccessor accessor} that expects a
    *         {@link PojoPropertyAccessor#getPropertyType() property}-value as argument.
    */
   public boolean isReading() {

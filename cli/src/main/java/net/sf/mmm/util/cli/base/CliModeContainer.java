@@ -17,15 +17,15 @@ import net.sf.mmm.util.component.api.InitializationState;
  */
 public class CliModeContainer implements CliModeObject {
 
-  private  final String id;
+  private final String id;
 
-  private  final CliMode mode;
+  private final CliMode mode;
 
-  private  final Class<?> annotatedClass;
+  private final Class<?> annotatedClass;
 
-  private  final Set<CliModeContainer> extendedModes;
+  private final Set<CliModeContainer> extendedModes;
 
-  private  InitializationState state;
+  private InitializationState state;
 
   /**
    * The constructor for a dummy instance.

@@ -11,18 +11,18 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * This is the abstract base class for the default implementation of
  * {@link net.sf.mmm.util.pojo.descriptor.base.PojoMethodIntrospector} or
  * {@link net.sf.mmm.util.pojo.descriptor.base.PojoFieldIntrospector}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 // TODO Hohwiller - why dont we just extends AbstractComponent here?
 public abstract class AbstractPojoIntrospector {
 
-  private  final InitializationState initializationState;
+  private final InitializationState initializationState;
 
-  private  VisibilityModifier visibility;
+  private VisibilityModifier visibility;
 
-  private  boolean acceptStatic;
+  private boolean acceptStatic;
 
   /**
    * The constructor.
@@ -35,7 +35,7 @@ public abstract class AbstractPojoIntrospector {
 
   /**
    * The constructor. Configures and {@link #initialize() initializes} the component.
-   * 
+   *
    * @param visibility is the {@link #getVisibility() visibility}.
    * @param acceptStatic is the {@link #isAcceptStatic() accept-static} flag.
    */
@@ -56,9 +56,9 @@ public abstract class AbstractPojoIntrospector {
   }
 
   /**
-   * This method gets the {@link VisibilityModifier#getOrder() lowest} {@link VisibilityModifier visibility}
-   * to be considered when searching for methods or fields.
-   * 
+   * This method gets the {@link VisibilityModifier#getOrder() lowest} {@link VisibilityModifier visibility} to be
+   * considered when searching for methods or fields.
+   *
    * @return the visibility
    */
   public VisibilityModifier getVisibility() {
@@ -68,9 +68,9 @@ public abstract class AbstractPojoIntrospector {
 
   /**
    * This method sets the {@link #getVisibility() visibility}.
-   * 
-   * @param visibility is the {@link VisibilityModifier#getOrder() lowest} {@link VisibilityModifier
-   *        visibility} to be considered when searching for accessors-fields.
+   *
+   * @param visibility is the {@link VisibilityModifier#getOrder() lowest} {@link VisibilityModifier visibility} to be
+   *        considered when searching for accessors-fields.
    */
   public void setVisibility(VisibilityModifier visibility) {
 

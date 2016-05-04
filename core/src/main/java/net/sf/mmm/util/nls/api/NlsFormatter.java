@@ -8,11 +8,11 @@ import java.util.Map;
 
 /**
  * This is the interface for a formatter of an arbitrary object in a localized way. <br>
- * 
+ *
  * @see java.text.Format
- * 
+ *
  * @param <O> is the generic type of the object to {@link #format(Object, Locale, Map, NlsTemplateResolver)}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -20,7 +20,7 @@ public interface NlsFormatter<O> {
 
   /**
    * This method formats the given {@code object} according to the given {@code locale}.
-   * 
+   *
    * @param object is the object to format.
    * @param locale is the locale used for localized formatting.
    * @param arguments is the {@link Map} of arguments.
@@ -31,7 +31,7 @@ public interface NlsFormatter<O> {
 
   /**
    * This method formats the given {@code object} according to the given {@code locale}.
-   * 
+   *
    * @param object is the object to format.
    * @param locale is the locale used for localized formatting.
    * @param arguments is the {@link Map} of {@link NlsMessage#getArgument(String) arguments}.
@@ -39,7 +39,7 @@ public interface NlsFormatter<O> {
    * @param buffer is where to append the formatted {@code object}.
    * @throws IOException if the given {@link Appendable} caused such exception.
    */
-  void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver, Appendable buffer)
-      throws IOException;
+  void format(O object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException;
 
 }

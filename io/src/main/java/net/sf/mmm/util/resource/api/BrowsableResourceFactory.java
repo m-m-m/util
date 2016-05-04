@@ -16,8 +16,8 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 public interface BrowsableResourceFactory extends DataResourceFactory {
 
   /**
-   * This method creates a new {@link BrowsableResource} from the given {@code resourceUri}. The
-   * following URI-schemes are guaranteed to be supported:
+   * This method creates a new {@link BrowsableResource} from the given {@code resourceUri}. The following URI-schemes
+   * are guaranteed to be supported:
    * <table border="1">
    * <tr>
    * <th>scheme</th>
@@ -31,11 +31,11 @@ public interface BrowsableResourceFactory extends DataResourceFactory {
    * </tr>
    * </table>
    *
-   * @param resourceUri is the {@link DataResource#getUri() absolute URI} pointing to the location of the
-   *        requested {@link BrowsableResource}.
+   * @param resourceUri is the {@link DataResource#getUri() absolute URI} pointing to the location of the requested
+   *        {@link BrowsableResource}.
    * @return the requested {@link BrowsableResource}.
-   * @throws ResourceUriUndefinedException if the given {@code resourceUri} is undefined (e.g. the scheme
-   *         is NOT supported).
+   * @throws ResourceUriUndefinedException if the given {@code resourceUri} is undefined (e.g. the scheme is NOT
+   *         supported).
    */
   BrowsableResource createBrowsableResource(String resourceUri) throws ResourceUriUndefinedException;
 

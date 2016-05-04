@@ -353,8 +353,8 @@ public interface BeanAccess {
    * @see BeanPrototypeBuilder#getOrCreatePrototype(Class)
    * @see BeanPrototypeBuilder#createPrototype(Class, String, Bean...)
    *
-   * @return {@code true} if this {@link BeanAccess} belongs to a {@link BeanFactory#createPrototype(Class)
-   *         prototype}, {@code false} otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
+   * @return {@code true} if this {@link BeanAccess} belongs to a {@link BeanFactory#createPrototype(Class) prototype},
+   *         {@code false} otherwise (if it belongs to an {@link BeanFactory#create(Bean) instance}).
    */
   boolean isPrototype();
 

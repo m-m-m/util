@@ -9,11 +9,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import net.sf.mmm.util.pojo.descriptor.base.PojoProperty;
-
 /**
  * This is the test-case for the class {@link PojoProperty}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

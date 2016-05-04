@@ -2,11 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base.datatype.descriptor;
 
-
 /**
  * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeDescriptor} for an atomic Java
- * {@link net.sf.mmm.util.lang.api.Datatype} such as {@link Integer}, {@link String}, {@link Long},
- * {@link Double}, {@link Boolean}, etc.
+ * {@link net.sf.mmm.util.lang.api.Datatype} such as {@link Integer}, {@link String}, {@link Long}, {@link Double},
+ * {@link Boolean}, etc.
  *
  * @param <T> is the generic type of the atomic Java {@link net.sf.mmm.util.lang.api.Datatype} to describe.
  *

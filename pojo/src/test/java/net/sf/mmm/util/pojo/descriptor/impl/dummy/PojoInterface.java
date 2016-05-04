@@ -4,7 +4,7 @@ package net.sf.mmm.util.pojo.descriptor.impl.dummy;
 
 /**
  * This is a dummy pojo interface for testing.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

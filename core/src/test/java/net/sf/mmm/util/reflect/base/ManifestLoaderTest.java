@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 /**
  * This is the {@link TestCase} for {@link ManifestLoader}.
@@ -24,8 +24,7 @@ import org.junit.Test;
 public class ManifestLoaderTest {
 
   /**
-   * Tests the content of the manifest from the servlet-api that is added as test-dependency especially for
-   * this test.
+   * Tests the content of the manifest from the servlet-api that is added as test-dependency especially for this test.
    *
    * @throws IOException on error.
    */

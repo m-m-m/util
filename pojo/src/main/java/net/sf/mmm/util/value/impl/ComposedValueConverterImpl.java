@@ -34,11 +34,11 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
 @Named(ComposedValueConverter.CDI_NAME)
 public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
 
-  private  final TargetClass2ConverterMap targetClass2converterMap;
+  private final TargetClass2ConverterMap targetClass2converterMap;
 
-  private  final TargetClass2ConverterMap targetArrayClass2converterMap;
+  private final TargetClass2ConverterMap targetArrayClass2converterMap;
 
-  private  List<ValueConverter<?, ?>> converters;
+  private List<ValueConverter<?, ?>> converters;
 
   /**
    * The constructor.
@@ -145,8 +145,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       } else {
         valueClassName = value.getClass().getName();
       }
-      getLogger().trace(
-          "starting conversion of '" + value + "' from '" + valueClassName + "' to '" + targetType + "'");
+      getLogger()
+          .trace("starting conversion of '" + value + "' from '" + valueClassName + "' to '" + targetType + "'");
     }
     Class<?> targetClass = targetType.getRetrievalClass();
     if (targetClass.isInstance(value)) {
@@ -229,8 +229,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method determines if the given {@code converterTargetClass} is applicable for the
-   * {@code expectedTargetClass}.
+   * This method determines if the given {@code converterTargetClass} is applicable for the {@code expectedTargetClass}.
    *
    * @param converterTargetClass is the {@link ValueConverter#getTargetType() target-class} of the
    *        {@link ValueConverter} to check.
@@ -254,8 +253,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method determines if the given {@code type} is accepted as significant type for registration and lookup
-   * of {@link ValueConverter}s. E.g. interfaces such as {@link Cloneable} or {@link java.io.Serializable} are not more
+   * This method determines if the given {@code type} is accepted as significant type for registration and lookup of
+   * {@link ValueConverter}s. E.g. interfaces such as {@link Cloneable} or {@link java.io.Serializable} are not more
    * significant than {@link Object} in order to choose the appropriate {@link ValueConverter} and should therefore be
    * skipped when the {@link Class}-hierarchy is recursively traversed. <br>
    * <b>ATTENTION:</b><br>
@@ -264,8 +263,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * just that class is skipped, but {@link Class#getSuperclass() super-classes} are recursively traversed.
    *
    * @param type is the {@link Class} reflecting the type to check.
-   * @return {@code true} if the given {@code type} is acceptable, {@code false} if the given
-   *         {@code type} should be ignored.
+   * @return {@code true} if the given {@code type} is acceptable, {@code false} if the given {@code type} should be
+   *         ignored.
    */
   protected boolean isAccepted(Class<?> type) {
 
@@ -290,8 +289,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * @param previousConverter is the converter that has been tried last time without success. It is used to avoid trying
    *        the same converter again. Will initially be {@code null}.
    * @param converterMap is the {@link TargetClass2ConverterMap}.
-   * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value
-   *         has to be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
+   * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value has to be
+   *         an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object convertRecursive(Object value, Object valueSource, GenericType<?> targetType,
@@ -358,9 +357,9 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    */
   protected class ComposedTargetTypeConverter<TARGET> implements ValueConverter<Object, TARGET> {
 
-    private  final Class<TARGET> targetType;
+    private final Class<TARGET> targetType;
 
-    private  final Map<Class<?>, ValueConverter<?, TARGET>> sourceClass2converterMap;
+    private final Map<Class<?>, ValueConverter<?, TARGET>> sourceClass2converterMap;
 
     /**
      * The constructor.
@@ -424,8 +423,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      *        goes wrong. This will help to find the problem easier.
      * @param genericTargetType is the {@link GenericType} to convert the {@code value} to.
      * @param sourceClass is the current {@link ValueConverter#getSourceType() source-type} to try.
-     * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned
-     *         value has to be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
+     * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value has to
+     *         be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
      */
     @SuppressWarnings("unchecked")
     protected <T extends TARGET> T convertRecursive(Object value, Object valueSource,
@@ -442,9 +441,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
               .get(currentClass);
           if (converter != null) {
             if (traceEnabled) {
-              getLogger().trace(
-                  "trying converter for source-type '" + currentClass + "': "
-                      + converter.getClass().getSimpleName());
+              getLogger().trace("trying converter for source-type '" + currentClass + "': "
+                  + converter.getClass().getSimpleName());
             }
             T result = converter.convert(value, valueSource, genericTargetType);
             if (result != null) {
@@ -498,7 +496,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       super(mapFactory);
     }
 
-    @Override    protected Class<?> getClass(ComposedTargetTypeConverter<?> element) {
+    @Override
+    protected Class<?> getClass(ComposedTargetTypeConverter<?> element) {
 
       return element.getTargetType();
     }
@@ -509,7 +508,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       return super.put(type, element);
     }
 
-    @Override    protected boolean isAccepted(Class<?> type) {
+    @Override
+    protected boolean isAccepted(Class<?> type) {
 
       if (!ComposedValueConverterImpl.this.isAccepted(type)) {
         return false;

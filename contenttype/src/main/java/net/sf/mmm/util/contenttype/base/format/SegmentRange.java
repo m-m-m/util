@@ -7,11 +7,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 
 /**
- * A {@link SegmentRange} is a {@link Segment} that matches a value of a fixed
- * {@link #getMinimumLength() length} like {@link SegmentConstant} but the value
- * can be in a specific range from {@link #getBytesMinimum()} to
+ * A {@link SegmentRange} is a {@link Segment} that matches a value of a fixed {@link #getMinimumLength() length} like
+ * {@link SegmentConstant} but the value can be in a specific range from {@link #getBytesMinimum()} to
  * {@link #getBytesMaximum()}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -30,9 +29,9 @@ public class SegmentRange extends Segment {
   @XmlAttribute(name = XML_ATTRIBUTE_HEX_MAX)
   private String hexMax;
 
-  private  byte[] bytesMinimum;
+  private byte[] bytesMinimum;
 
-  private  byte[] bytesMaximum;
+  private byte[] bytesMaximum;
 
   /**
    * The constructor.
@@ -87,8 +86,8 @@ public class SegmentRange extends Segment {
     }
     if (length != getBytesMaximum().length) {
 
-      throw new NlsIllegalArgumentException(Integer.valueOf(length), "min.length != max.length["
-          + getBytesMaximum().length + "]");
+      throw new NlsIllegalArgumentException(Integer.valueOf(length),
+          "min.length != max.length[" + getBytesMaximum().length + "]");
     }
   }
 

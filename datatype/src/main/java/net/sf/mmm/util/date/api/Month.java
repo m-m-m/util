@@ -9,7 +9,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * The enum contains the twelve months of a year in Gregorian calendar.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -51,13 +51,13 @@ public enum Month implements SimpleDatatype<Integer> {
   /** The according month. */
   DECEMBER(12, "December");
 
-  private  final Integer value;
+  private final Integer value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.
-   * 
+   *
    * @param value - see {@link #getValue()}.
    * @param title - see {@link #toString()}.
    */
@@ -69,10 +69,10 @@ public enum Month implements SimpleDatatype<Integer> {
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * <b>ATTENTION:</b><br>
-   * Unlike java {@link java.util.Calendar} this will return the natural representation of a {@link Month} in
-   * the range from {@code 1-12}.
+   * Unlike java {@link java.util.Calendar} this will return the natural representation of a {@link Month} in the range
+   * from {@code 1-12}.
    */
   @Override
   public Integer getValue() {
@@ -82,7 +82,7 @@ public enum Month implements SimpleDatatype<Integer> {
 
   /**
    * This method gets the maximum number of days in this {@link Month}.
-   * 
+   *
    * @return the maximum number of days (29, 30, or 31).
    */
   public int getMaxDays() {
@@ -95,14 +95,14 @@ public enum Month implements SimpleDatatype<Integer> {
       case SEPTEMBER:
       case NOVEMBER:
         return 30;
-      default :
+      default:
         return 31;
     }
   }
 
   /**
    * This method gets the minimum number of days in this {@link Month}.
-   * 
+   *
    * @return the minimum number of days (28, 30, or 31).
    */
   public int getMinDays() {
@@ -116,7 +116,7 @@ public enum Month implements SimpleDatatype<Integer> {
 
   /**
    * This method gets the {@link DateUnit} for the given {@code value}.
-   * 
+   *
    * @param value is the {@link #getValue() value} of the requested {@link DateUnit}.
    * @return the requested {@link DateUnit} or {@code null} if no such {@link DateUnit} exists.
    */
@@ -132,7 +132,7 @@ public enum Month implements SimpleDatatype<Integer> {
 
   /**
    * This method gets the {@link Month} from the given {@code date}.
-   * 
+   *
    * @param date is the {@link Date}.
    * @return the {@link Month} of the given {@link Date}.
    */

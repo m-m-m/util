@@ -4,7 +4,7 @@ package net.sf.mmm.util.process.base;
 
 /**
  * This is a simple application that never exits.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")

@@ -6,23 +6,23 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
 /**
  * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler.
- * 
+ *
  * @see java.nio.ByteBuffer#wrap(byte[], int, int)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 public class ByteArrayImpl extends AbstractByteArray {
 
-  private  final byte[] buffer;
+  private final byte[] buffer;
 
-  private  int minimumIndex;
+  private int minimumIndex;
 
-  private  int maximumIndex;
+  private int maximumIndex;
 
   /**
    * The constructor.
-   * 
+   *
    * @param capacity is the {@code length} of the internal {@link #getBytes() buffer}.
    */
   public ByteArrayImpl(int capacity) {
@@ -32,7 +32,7 @@ public class ByteArrayImpl extends AbstractByteArray {
 
   /**
    * The constructor.
-   * 
+   *
    * @param buffer is the internal {@link #getBytes() buffer}.
    */
   public ByteArrayImpl(byte[] buffer) {
@@ -42,10 +42,10 @@ public class ByteArrayImpl extends AbstractByteArray {
 
   /**
    * The constructor.
-   * 
+   *
    * @param buffer is the internal {@link #getBytes() buffer}.
-   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the
-   *        {@link #getMinimumIndex() minimum index}.
+   * @param startIndex is the {@link #getCurrentIndex() current index} as well as the {@link #getMinimumIndex() minimum
+   *        index}.
    * @param maximumIndex is the {@link #getMaximumIndex() maximum index}.
    */
   public ByteArrayImpl(byte[] buffer, int startIndex, int maximumIndex) {
@@ -84,14 +84,13 @@ public class ByteArrayImpl extends AbstractByteArray {
   }
 
   /**
-   * This method sets the {@link #getMaximumIndex() maximumIndex}. This may be useful if the buffer should be
-   * reused. <br>
+   * This method sets the {@link #getMaximumIndex() maximumIndex}. This may be useful if the buffer should be reused.
+   * <br>
    * <b>ATTENTION:</b><br>
    * Be very careful and only use this method if you know what you are doing!
-   * 
-   * @param maximumIndex is the {@link #getMaximumIndex() maximumIndex} to set. It has to be in the range from
-   *        {@code 0} ( <code>{@link #getCurrentIndex() currentIndex} - 1</code>) to
-   *        <code>{@link #getBytes()}.length</code>.
+   *
+   * @param maximumIndex is the {@link #getMaximumIndex() maximumIndex} to set. It has to be in the range from {@code 0}
+   *        ( <code>{@link #getCurrentIndex() currentIndex} - 1</code>) to <code>{@link #getBytes()}.length</code>.
    */
   protected void setMaximumIndex(int maximumIndex) {
 

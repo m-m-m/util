@@ -41,7 +41,8 @@ public class DatatypeDescriptorLocalDate extends AbstractDatatypeDescriptor<Loca
       super("year", Integer.class);
     }
 
-    @Override    protected Integer doGetSegment(LocalDate datatype) {
+    @Override
+    protected Integer doGetSegment(LocalDate datatype) {
 
       return Integer.valueOf(datatype.getYear());
     }
@@ -59,7 +60,8 @@ public class DatatypeDescriptorLocalDate extends AbstractDatatypeDescriptor<Loca
       super("month", Integer.class);
     }
 
-    @Override    protected Integer doGetSegment(LocalDate datatype) {
+    @Override
+    protected Integer doGetSegment(LocalDate datatype) {
 
       return Integer.valueOf(datatype.getMonthValue());
     }
@@ -77,7 +79,8 @@ public class DatatypeDescriptorLocalDate extends AbstractDatatypeDescriptor<Loca
       super("day", Integer.class);
     }
 
-    @Override    protected Integer doGetSegment(LocalDate datatype) {
+    @Override
+    protected Integer doGetSegment(LocalDate datatype) {
 
       return Integer.valueOf(datatype.getDayOfMonth());
     }

@@ -10,8 +10,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 
 /**
  * This is an abstract base implementation of {@link net.sf.mmm.util.value.api.ValueConverter} that extends
- * {@link AbstractValueConverterToCompatiblePojo} and adds tolerance for unmatched properties. Instead of
- * throwing an exception the first usage of an unmatched setter is logged once as warning.
+ * {@link AbstractValueConverterToCompatiblePojo} and adds tolerance for unmatched properties. Instead of throwing an
+ * exception the first usage of an unmatched setter is logged once as warning.
  *
  * @param <SOURCE> is the generic {@link #getSourceType() source-type}.
  * @param <TARGET> is the generic {@link #getTargetType() target-type}.
@@ -19,8 +19,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractValueConverterToSimilarPojo<SOURCE, TARGET> extends
-    AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> {
+public abstract class AbstractValueConverterToSimilarPojo<SOURCE, TARGET>
+    extends AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> {
 
   /** @see #handleNoGetterForSetter(PojoPropertyAccessorOneArg, Class, Object, Class) */
   private final Set<PojoPropertyAccessorOneArg> unmatchedSetters;
@@ -45,8 +45,8 @@ public abstract class AbstractValueConverterToSimilarPojo<SOURCE, TARGET> extend
   }
 
   @Override
-  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass, Object sourceObject,
-      Class<?> sourceClass) {
+  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass,
+      Object sourceObject, Class<?> sourceClass) {
 
     boolean added = this.unmatchedSetters.add(setter);
     if (added) {

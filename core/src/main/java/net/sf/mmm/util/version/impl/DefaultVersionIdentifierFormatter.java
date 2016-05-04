@@ -12,14 +12,13 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
 import net.sf.mmm.util.version.api.VersionIdentifierFormatter;
 
 /**
- * This is the default implementation of the {@link net.sf.mmm.util.version.api.VersionIdentifierFormatter}
- * interface.
+ * This is the default implementation of the {@link net.sf.mmm.util.version.api.VersionIdentifierFormatter} interface.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class DefaultVersionIdentifierFormatter extends AbstractFormatter<VersionIdentifier> implements
-    VersionIdentifierFormatter {
+public class DefaultVersionIdentifierFormatter extends AbstractFormatter<VersionIdentifier>
+    implements VersionIdentifierFormatter {
 
   /** The {@link Iso8601Util} instance. */
   private final Iso8601Util iso8601Util;

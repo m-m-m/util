@@ -52,11 +52,11 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   /** The {@link #isAbsolute() absolute} home {@link #isRoot() root} {@link ResourcePathNode} (~). */
   public static final ResourcePathNode<Void> ROOT_HOME = new ResourcePathRootHome<>(VOID_FUNCTION);
 
-  private  final ResourcePathNode<D> parent;
+  private final ResourcePathNode<D> parent;
 
-  private  final String name;
+  private final String name;
 
-  private  final D data;
+  private final D data;
 
   /**
    * The constructor for a root {@link ResourcePathNode}.
@@ -101,7 +101,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param name - see {@link #getName()}.
    * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
    */
-  protected ResourcePathNode(ResourcePathNode<D> parent, String name, Function<ResourcePathNode<D>, D> dataFunction) {
+  protected ResourcePathNode(ResourcePathNode<D> parent, String name,
+      Function<ResourcePathNode<D>, D> dataFunction) {
 
     super();
     Objects.requireNonNull(parent, "parent");
@@ -555,7 +556,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static final class ResourcePathRootAbsolute<D> extends ResourcePathNode<D> {
 
-      private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -573,7 +574,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
       return true;
     }
 
-    @Override    protected boolean isAppendSeparator() {
+    @Override
+    protected boolean isAppendSeparator() {
 
       return false;
     }
@@ -586,7 +588,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static class ResourcePathRootWindows<D> extends ResourcePathNode<D> {
 
-      private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -613,7 +615,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static final class ResourcePathRootRelative<D> extends ResourcePathNode<D> {
 
-      private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -631,7 +633,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
       return false;
     }
 
-    @Override    protected boolean isAppendSeparator() {
+    @Override
+    protected boolean isAppendSeparator() {
 
       return false;
     }
@@ -644,7 +647,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static class ResourcePathRootHome<D> extends ResourcePathNode<D> {
 
-      private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -681,7 +684,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static class ResourcePathRootUnc<D> extends ResourcePathNode<D> {
 
-      private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * The constructor.
@@ -708,11 +711,11 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    */
   public static class ResourcePathRootUrl<D> extends ResourcePathNode<D> {
 
-      private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    private  final String scheme;
+    private final String scheme;
 
-    private  final String authority;
+    private final String authority;
 
     /**
      * The constructor.

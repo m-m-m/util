@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
-import net.sf.mmm.util.text.api.Hyphenation;
-import net.sf.mmm.util.text.api.Hyphenator;
-
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
+
+import net.sf.mmm.util.text.api.Hyphenation;
+import net.sf.mmm.util.text.api.Hyphenator;
 
 /**
  * This is the abstract base-class for test-cases of {@link Hyphenator}.
@@ -27,8 +27,7 @@ public abstract class AbstractHyphenatorTest extends Assertions {
   }
 
   /**
-   * This method checks if a given {@code hyphenatedWord} is properly hyphenated using the given
-   * {@code hyphenator}.
+   * This method checks if a given {@code hyphenatedWord} is properly hyphenated using the given {@code hyphenator}.
    *
    * @param hyphenator is the {@link Hyphenator} to test.
    * @param hyphenatedWord is the hyphenated word.

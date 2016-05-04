@@ -2,14 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.color;
 
-import net.sf.mmm.util.lang.base.StringUtilImpl;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import net.sf.mmm.util.lang.base.StringUtilImpl;
+
 /**
  * This is the test-case for {@link Color}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -69,7 +69,7 @@ public class ColorTest extends Assert {
 
   /**
    * Performs generic checks on the given {@link Color}.
-   * 
+   *
    * @param color is the {@link Color} to test.
    * @param colorString is the expected {@link Color#toString() string representation} of the {@link Color}.
    */

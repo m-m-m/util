@@ -19,15 +19,15 @@ public abstract class AbstractMessage implements Message {
 
   private static final long serialVersionUID = -88269463788978385L;
 
-  private  String code;
+  private String code;
 
-  private  String source;
+  private String source;
 
-  private  NlsMessage message;
+  private NlsMessage message;
 
-  private  UUID uuid;
+  private UUID uuid;
 
-  private  String details;
+  private String details;
 
   /**
    * The constructor for de-serialization in GWT.

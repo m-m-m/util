@@ -26,12 +26,12 @@ import net.sf.mmm.util.pool.base.NoByteArrayPool;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractDetectorStreamProvider extends AbstractLoggableComponent implements
-    DetectorStreamProvider {
+public abstract class AbstractDetectorStreamProvider extends AbstractLoggableComponent
+    implements DetectorStreamProvider {
 
-  private  List<DetectorStreamProcessorFactory> processorFactoryList;
+  private List<DetectorStreamProcessorFactory> processorFactoryList;
 
-  private  ByteArrayPool byteArrayPool;
+  private ByteArrayPool byteArrayPool;
 
   /**
    * The constructor.

@@ -11,8 +11,7 @@ import net.sf.mmm.util.lang.base.datatype.descriptor.AbstractDatatypeDescriptor;
 import net.sf.mmm.util.lang.base.datatype.descriptor.AbstractDatatypeSegmentDescriptor;
 
 /**
- * This is the {@link net.sf.mmm.util.lang.api.DatatypeDescriptor} implementation of
- * {@link SampleComposedDatatype}.
+ * This is the {@link net.sf.mmm.util.lang.api.DatatypeDescriptor} implementation of {@link SampleComposedDatatype}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
@@ -37,7 +36,8 @@ public class SampleComposedDatatypeDescriptor extends AbstractDatatypeDescriptor
   }
 
   /** Implementation for {@link SampleComposedDatatype#getAmount()}. */
-  private static class AmountSegment extends AbstractDatatypeSegmentDescriptor<SampleComposedDatatype, BigDecimal> {
+  private static class AmountSegment
+      extends AbstractDatatypeSegmentDescriptor<SampleComposedDatatype, BigDecimal> {
 
     /**
      * The constructor.
@@ -47,7 +47,8 @@ public class SampleComposedDatatypeDescriptor extends AbstractDatatypeDescriptor
       super("amount", BigDecimal.class);
     }
 
-    @Override    protected BigDecimal doGetSegment(SampleComposedDatatype datatype) {
+    @Override
+    protected BigDecimal doGetSegment(SampleComposedDatatype datatype) {
 
       return datatype.getAmount();
     }
@@ -55,7 +56,8 @@ public class SampleComposedDatatypeDescriptor extends AbstractDatatypeDescriptor
   }
 
   /** Implementation for {@link SampleComposedDatatype#getAmount()}. */
-  private static class CurrencySegment extends AbstractDatatypeSegmentDescriptor<SampleComposedDatatype, Currency> {
+  private static class CurrencySegment
+      extends AbstractDatatypeSegmentDescriptor<SampleComposedDatatype, Currency> {
 
     /**
      * The constructor.
@@ -65,7 +67,8 @@ public class SampleComposedDatatypeDescriptor extends AbstractDatatypeDescriptor
       super("currency", Currency.class);
     }
 
-    @Override    protected Currency doGetSegment(SampleComposedDatatype datatype) {
+    @Override
+    protected Currency doGetSegment(SampleComposedDatatype datatype) {
 
       return datatype.getCurrency();
     }

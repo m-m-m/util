@@ -7,17 +7,17 @@ import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueConverter;
 
 /**
- * This is an abstract base-implementation of the {@link ValueConverter} interface that simply works with
- * {@link Class} rather than {@link GenericType}.
- * 
+ * This is an abstract base-implementation of the {@link ValueConverter} interface that simply works with {@link Class}
+ * rather than {@link GenericType}.
+ *
  * @param <SOURCE> is the generic {@link #getSourceType() source-type}.
  * @param <TARGET> is the generic {@link #getTargetType() target-type}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> extends AbstractLoggableComponent implements
-    ValueConverter<SOURCE, TARGET> {
+public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> extends AbstractLoggableComponent
+    implements ValueConverter<SOURCE, TARGET> {
 
   /**
    * The constructor.

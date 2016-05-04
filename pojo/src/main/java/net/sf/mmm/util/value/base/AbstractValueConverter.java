@@ -11,17 +11,17 @@ import net.sf.mmm.util.value.api.ValueConverter;
 
 /**
  * This is the abstract base-implementation of the {@link ValueConverter} interface.
- * 
+ *
  * @param <SOURCE> is the generic {@link #getSourceType() source-type}.
  * @param <TARGET> is the generic {@link #getTargetType() target-type}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLoggableComponent implements
-    ValueConverter<SOURCE, TARGET> {
+public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLoggableComponent
+    implements ValueConverter<SOURCE, TARGET> {
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -33,7 +33,7 @@ public abstract class AbstractValueConverter<SOURCE, TARGET> extends AbstractLog
 
   /**
    * This method gets the {@link ReflectionUtilImpl} instance to use.
-   * 
+   *
    * @return the {@link ReflectionUtilImpl} to use.
    */
   public ReflectionUtil getReflectionUtil() {

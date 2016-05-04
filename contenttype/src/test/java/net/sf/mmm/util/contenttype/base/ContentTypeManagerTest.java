@@ -2,16 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.contenttype.base;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.util.contenttype.api.ContentType;
 import net.sf.mmm.util.contenttype.api.ContentTypeManager;
 import net.sf.mmm.util.contenttype.impl.ContentTypeManagerImpl;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class ContentTypeManagerTest {

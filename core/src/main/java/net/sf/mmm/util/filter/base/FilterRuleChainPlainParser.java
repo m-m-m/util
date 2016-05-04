@@ -34,21 +34,21 @@ import net.sf.mmm.util.filter.api.FilterRule;
  * # character (+/-).
  * # A list starting with the '#' character indicates a comment and is therefore
  * # ignored. The same applies for empty lines.
- * 
+ *
  * # 1. rule says that all strings that start with "/doc/" will be accepted:
  * +^/doc/
- * 
+ *
  * # 2. rule says that all strings that end ($) with ".pdf" ignoring the case (?i)
  * # of the characters will be rejected:
  * -(?i)\.pdf$
- * 
+ *
  * # 3. rule says that all string that start with "/data/" will be accepted:
  * +^/data/
- * 
+ *
  * # 4. rule says that all string that end ($) with ".xml" or ".xsl" ignoring the
  * # case (?i) of the characters will be rejected:
  * -(?i)\.(xml|xsl)$
- * 
+ *
  * # 5. rule says that everything else is accepted
  * +.*
  * </pre>
@@ -60,11 +60,11 @@ import net.sf.mmm.util.filter.api.FilterRule;
  */
 public class FilterRuleChainPlainParser {
 
-  private  char acceptChar;
+  private char acceptChar;
 
-  private  char denyChar;
+  private char denyChar;
 
-  private  char commentChar;
+  private char commentChar;
 
   /**
    * The constructor.
@@ -176,8 +176,8 @@ public class FilterRuleChainPlainParser {
           } else if (first == this.commentChar) {
             // ignore line
           } else {
-            throw new IllegalArgumentException("Illegal start character '" + first + "' in line " + lineCount
-                + "!");
+            throw new IllegalArgumentException(
+                "Illegal start character '" + first + "' in line " + lineCount + "!");
           }
         }
         line = reader.readLine();

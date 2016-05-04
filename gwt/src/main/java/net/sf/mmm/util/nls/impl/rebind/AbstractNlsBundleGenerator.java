@@ -7,15 +7,6 @@ import java.util.Map;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.exception.api.ObjectMismatchException;
-import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
-import net.sf.mmm.util.nls.api.NlsAccess;
-import net.sf.mmm.util.nls.api.NlsBundle;
-import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
-import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
-import net.sf.mmm.util.nls.base.NlsMessagePlain;
-
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
@@ -26,10 +17,19 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
+import net.sf.mmm.util.gwt.base.rebind.AbstractIncrementalGenerator;
+import net.sf.mmm.util.nls.api.NlsAccess;
+import net.sf.mmm.util.nls.api.NlsBundle;
+import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
+import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
+import net.sf.mmm.util.nls.base.NlsMessagePlain;
+
 /**
- * This is the abstract base implementation of a GWT {@link com.google.gwt.core.ext.Generator} for rebinding
- * the {@link net.sf.mmm.util.nls.api.NlsBundleFactory} implementation.
- * 
+ * This is the abstract base implementation of a GWT {@link com.google.gwt.core.ext.Generator} for rebinding the
+ * {@link net.sf.mmm.util.nls.api.NlsBundleFactory} implementation.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -98,14 +98,13 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
 
   /**
    * Generates the implementation of {@link NlsBundleWithLookup#getMessage(String, Map)}.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
-   * @param method is the {@link NlsBundleWithLookup#getMessage(String, Map)}-method to generate an
-   *        implementation for.
-   * @param methods is the list of all declared methods of the bundle. Likely to be ignored but may be used to
-   *        generate a switch statement with delegations.
+   * @param method is the {@link NlsBundleWithLookup#getMessage(String, Map)}-method to generate an implementation for.
+   * @param methods is the list of all declared methods of the bundle. Likely to be ignored but may be used to generate
+   *        a switch statement with delegations.
    */
   protected void generateLookupMethod(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context,
       JMethod method, JMethod[] methods) {
@@ -165,13 +164,14 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
 
   /**
    * Generates an implementation of an {@link NlsBundle}-method.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
    * @param method is the {@link NlsBundle}-method to generate an implementation for.
    */
-  protected void generateMethod(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context, JMethod method) {
+  protected void generateMethod(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context,
+      JMethod method) {
 
     generateSourcePublicMethodDeclaration(sourceWriter, method);
     generateMethodBody(sourceWriter, logger, context, method);
@@ -180,7 +180,7 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
 
   /**
    * Generates an the body of an {@link NlsBundle}-method.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
@@ -222,10 +222,10 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
 
   /**
    * Generates the source code block to create a new {@link NlsMessage}.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
-   * @param hasArguments - {@code true} if {@link NlsMessage#getArgument(String) arguments} are given,
-   *        {@code false} otherwise.
+   * @param hasArguments - {@code true} if {@link NlsMessage#getArgument(String) arguments} are given, {@code false}
+   *        otherwise.
    */
   private void generateCreateMessageBlock(SourceWriter sourceWriter, boolean hasArguments) {
 
@@ -248,9 +248,9 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
   }
 
   /**
-   * Generates the block of the {@link NlsBundle}-method body that creates the code block with the
-   * {@link String} variable {@link #VARIABLE_MESSAGE} excluding the {@link String} declaration.
-   * 
+   * Generates the block of the {@link NlsBundle}-method body that creates the code block with the {@link String}
+   * variable {@link #VARIABLE_MESSAGE} excluding the {@link String} declaration.
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
@@ -261,7 +261,7 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
 
   /**
    * Generates the (private) fields.
-   * 
+   *
    * @param sourceWriter is the {@link SourceWriter}.
    * @param logger is the {@link TreeLogger}.
    * @param context is the {@link GeneratorContext}.
@@ -276,12 +276,11 @@ public abstract class AbstractNlsBundleGenerator extends AbstractIncrementalGene
 
   /**
    * Determines if the given {@link JMethod} is declared in {@link NlsBundleWithLookup}.
-   * 
+   *
    * @see NlsBundleWithLookup#getMessage(String, Map)
-   * 
+   *
    * @param method is the {@link JMethod} to test.
-   * @return {@code true} if the given method is from {@link NlsBundleWithLookup}, {@code false}
-   *         otherwise.
+   * @return {@code true} if the given method is from {@link NlsBundleWithLookup}, {@code false} otherwise.
    */
   protected boolean isLookupMethod(JMethod method) {
 

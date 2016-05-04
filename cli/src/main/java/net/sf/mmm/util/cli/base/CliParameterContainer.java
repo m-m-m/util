@@ -16,9 +16,8 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMo
 import net.sf.mmm.util.validation.api.ValueValidator;
 
 /**
- * This is the abstract base class for a container with the metadata of a CLI-parameter. A parameter is either
- * an {@link net.sf.mmm.util.cli.api.CliOption option} or an {@link net.sf.mmm.util.cli.api.CliArgument
- * argument}.
+ * This is the abstract base class for a container with the metadata of a CLI-parameter. A parameter is either an
+ * {@link net.sf.mmm.util.cli.api.CliOption option} or an {@link net.sf.mmm.util.cli.api.CliArgument argument}.
  *
  * @see CliArgumentContainer
  * @see CliOptionContainer
@@ -28,11 +27,11 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  */
 public abstract class CliParameterContainer {
 
-  private  final PojoPropertyAccessorOneArg setter;
+  private final PojoPropertyAccessorOneArg setter;
 
-  private  final PojoPropertyAccessorNonArg getter;
+  private final PojoPropertyAccessorNonArg getter;
 
-  private  final ValueValidator<?> validator;
+  private final ValueValidator<?> validator;
 
   /**
    * The constructor.
@@ -83,8 +82,8 @@ public abstract class CliParameterContainer {
   protected abstract String getName();
 
   /**
-   * This method gets the annotation with the metadata of the {@link net.sf.mmm.util.cli.api.CliOption option}
-   * or {@link net.sf.mmm.util.cli.api.CliArgument argument}.
+   * This method gets the annotation with the metadata of the {@link net.sf.mmm.util.cli.api.CliOption option} or
+   * {@link net.sf.mmm.util.cli.api.CliArgument argument}.
    *
    * @return the {@link Annotation}.
    */
@@ -106,8 +105,7 @@ public abstract class CliParameterContainer {
    *
    * @see CliValueContainer#isArrayMapOrCollection()
    *
-   * @return {@code true} if the {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} is a
-   *         container-type.
+   * @return {@code true} if the {@link PojoPropertyAccessorOneArg#getPropertyType() property-type} is a container-type.
    */
   public boolean isArrayMapOrCollection() {
 
@@ -116,8 +114,7 @@ public abstract class CliParameterContainer {
   }
 
   /**
-   * This method determines if the given {@code type} is a container-type (an array, {@link Collection}
-   * or {@link Map}).
+   * This method determines if the given {@code type} is a container-type (an array, {@link Collection} or {@link Map}).
    *
    * @see CliValueContainer#isArrayMapOrCollection()
    *
@@ -152,10 +149,10 @@ public abstract class CliParameterContainer {
   }
 
   /**
-   * This method gets the {@link CliContainerStyle style} of this parameter. If the style of the
-   * parameter-annotation ( {@link net.sf.mmm.util.cli.api.CliArgument#containerStyle()} or
-   * {@link net.sf.mmm.util.cli.api.CliOption#containerStyle()}) is {@link CliContainerStyle#DEFAULT} this
-   * method will return {@link net.sf.mmm.util.cli.api.CliStyle#containerStyle()}.
+   * This method gets the {@link CliContainerStyle style} of this parameter. If the style of the parameter-annotation (
+   * {@link net.sf.mmm.util.cli.api.CliArgument#containerStyle()} or
+   * {@link net.sf.mmm.util.cli.api.CliOption#containerStyle()}) is {@link CliContainerStyle#DEFAULT} this method will
+   * return {@link net.sf.mmm.util.cli.api.CliStyle#containerStyle()}.
    *
    * @param cliStyle TODO
    *

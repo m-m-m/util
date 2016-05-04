@@ -6,18 +6,18 @@ import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 
 /**
  * T import net.sf.mmm.util.nls.api.NlsTemplateResolver; his is the abstract base-implementation of an
- * {@link net.sf.mmm.util.nls.api.NlsFormatter} that is no {@link net.sf.mmm.util.nls.api.NlsMessageFormatter}
- * but a {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter(String, String) sub-formatter} for a
- * specific {@link #getType() type} and {@link #getStyle() style}.
- * 
+ * {@link net.sf.mmm.util.nls.api.NlsFormatter} that is no {@link net.sf.mmm.util.nls.api.NlsMessageFormatter} but a
+ * {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter(String, String) sub-formatter} for a specific
+ * {@link #getType() type} and {@link #getStyle() style}.
+ *
  * @param <O> is the generic type of the object to
- *        {@link #format(Object, java.util.Locale, java.util.Map, net.sf.mmm.util.nls.api.NlsTemplateResolver)
- *        format}.
- * 
+ *        {@link #format(Object, java.util.Locale, java.util.Map, net.sf.mmm.util.nls.api.NlsTemplateResolver) format}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractNlsFormatterPlugin<O> extends AbstractNlsFormatter<O> implements NlsFormatterPlugin<O> {
+public abstract class AbstractNlsFormatterPlugin<O> extends AbstractNlsFormatter<O>
+    implements NlsFormatterPlugin<O> {
 
   /**
    * The constructor.

@@ -11,18 +11,17 @@ import net.sf.mmm.util.contenttype.base.AbstractContentTypeManager;
 import net.sf.mmm.util.contenttype.base.ContentTypeListLoader;
 
 /**
- * This is the implementation of the
- * {@link net.sf.mmm.util.contenttype.api.ContentTypeManager} interface.
- * 
+ * This is the implementation of the {@link net.sf.mmm.util.contenttype.api.ContentTypeManager} interface.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Singleton
 @Named
 public class ContentTypeManagerImpl extends AbstractContentTypeManager {
 
-  private  ContentType rootType;
+  private ContentType rootType;
 
-  private  ContentType technicalRootType;
+  private ContentType technicalRootType;
 
   /**
    * The constructor.
@@ -41,17 +40,16 @@ public class ContentTypeManagerImpl extends AbstractContentTypeManager {
 
     ContentTypeListLoader loader = new ContentTypeListLoader();
     loader.initialize();
-    this.rootType = loader.loadXml("classpath:net/sf/mmm/util/contenttype/contenttypes.xml")
-        .getRoot();
+    this.rootType = loader.loadXml("classpath:net/sf/mmm/util/contenttype/contenttypes.xml").getRoot();
     addContentTypeRecursively(this.rootType);
   }
 
   /**
-   * This method walks down the tree of {@link ContentType}s recursively and
-   * {@link #addContentType(ContentType) adds} them to this manager.
-   * 
-   * @param contentType is the {@link ContentType} to register recursively (via
-   *        its {@link ContentType#getChildren() children}).
+   * This method walks down the tree of {@link ContentType}s recursively and {@link #addContentType(ContentType) adds}
+   * them to this manager.
+   *
+   * @param contentType is the {@link ContentType} to register recursively (via its {@link ContentType#getChildren()
+   *        children}).
    */
   private void addContentTypeRecursively(ContentType contentType) {
 

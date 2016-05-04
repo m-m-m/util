@@ -9,21 +9,21 @@ import net.sf.mmm.util.text.api.Hyphenation;
 
 /**
  * This is the implementation of the {@link Hyphenation} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public class HyphenationImpl implements Hyphenation {
 
-  private  final String word;
+  private final String word;
 
-  private  final int[] hyphenationPoints;
+  private final int[] hyphenationPoints;
 
-  private  final char hyphen;
+  private final char hyphen;
 
   /**
    * The constructor.
-   * 
+   *
    * @param word is the {@link #getWord() word}.
    * @param hyphen is the {@link #getHyphen() hyphen-character}.
    * @param hyphenationPoints are the actual {@link #getHyphenation(int) hyphenation-points}.
@@ -38,7 +38,7 @@ public class HyphenationImpl implements Hyphenation {
 
   /**
    * The constructor.
-   * 
+   *
    * @param hyphenatedWord is the hyphenated word.
    */
   public HyphenationImpl(String hyphenatedWord) {
@@ -48,7 +48,7 @@ public class HyphenationImpl implements Hyphenation {
 
   /**
    * The constructor.
-   * 
+   *
    * @param hyphenatedWord is the hyphenated word.
    * @param hyphen is the {@link #getHyphen() hyphen-character}.
    */

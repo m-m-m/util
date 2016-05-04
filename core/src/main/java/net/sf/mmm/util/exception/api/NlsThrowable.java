@@ -18,8 +18,8 @@ import net.sf.mmm.util.nls.api.NlsObject;
  * <li>a {@link #getUuid() UUID} unique per exception instance automatically generated once per exception
  * {@link #getCause() chain}.</li>
  * <li>an {@link #getCode() error code} that should be unique per exception type.</li>
- * <li>distinguish between {@link #isTechnical() technical} exceptions and exceptions {@link #isForUser()
- * intended for end-users}.</li>
+ * <li>distinguish between {@link #isTechnical() technical} exceptions and exceptions {@link #isForUser() intended for
+ * end-users}.</li>
  * <li>support for {@link #createCopy(ExceptionTruncation) copying and truncation} of the exception.</li>
  * </ul>
  * <b>NOTE:</b><br>
@@ -32,8 +32,8 @@ import net.sf.mmm.util.nls.api.NlsObject;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeReadMessage, AttributeReadMessageCode,
-    Serializable {
+public interface NlsThrowable
+    extends NlsObject, AttributeReadUuid, AttributeReadMessage, AttributeReadMessageCode, Serializable {
 
   /**
    * @return the {@link Throwable#getCause() cause}.
@@ -43,18 +43,17 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
   /**
    * Determines if this is a <em>technical exception</em>.
    * <ul>
-   * <li>A technical exception is an unexpected situation that is to be logged on error level and should be
-   * analyzed by the operators or software developers of the system. Further in such case the end-user can
-   * typically do nothing about the problem (except to retry his operation) and will typically not understand
-   * the problem. Therefore a generic message should be {@link #isForUser() displayed to the end-user} in such
-   * case. See {@link net.sf.mmm.util.exception.api.TechnicalErrorUserException}.</li>
-   * <li>A non technical exception is called <em>user failure</em>. It is an undesired but NOT abnormal
-   * situation. It should be logged on a level less than error (typically info). The {@link #getMessage()
-   * message} is typically {@link #isForUser() intended for to end-users} and has to be easy to understand.</li>
+   * <li>A technical exception is an unexpected situation that is to be logged on error level and should be analyzed by
+   * the operators or software developers of the system. Further in such case the end-user can typically do nothing
+   * about the problem (except to retry his operation) and will typically not understand the problem. Therefore a
+   * generic message should be {@link #isForUser() displayed to the end-user} in such case. See
+   * {@link net.sf.mmm.util.exception.api.TechnicalErrorUserException}.</li>
+   * <li>A non technical exception is called <em>user failure</em>. It is an undesired but NOT abnormal situation. It
+   * should be logged on a level less than error (typically info). The {@link #getMessage() message} is typically
+   * {@link #isForUser() intended for to end-users} and has to be easy to understand.</li>
    * </ul>
-   * This separation is intentionally not done via inheritance of technical and business exception base
-   * classes to allow reuse. However, if you want to have it this way, create such classes derived from
-   * {@link NlsRuntimeException}.
+   * This separation is intentionally not done via inheritance of technical and business exception base classes to allow
+   * reuse. However, if you want to have it this way, create such classes derived from {@link NlsRuntimeException}.
    *
    * @see #isForUser()
    *
@@ -63,8 +62,8 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
   boolean isTechnical();
 
   /**
-   * @return {@code true} if the {@link #getMessage() message} of this exception is for end-users (or
-   *         clients), {@code false} otherwise (for internal {@link #isTechnical() technical} errors).
+   * @return {@code true} if the {@link #getMessage() message} of this exception is for end-users (or clients),
+   *         {@code false} otherwise (for internal {@link #isTechnical() technical} errors).
    */
   boolean isForUser();
 
@@ -111,11 +110,11 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
   StackTraceElement[] getStackTrace();
 
   /**
-   * Returns a copy of the given exception where the specified details are removed. See {@link ExceptionUtil}
-   * for advanced usage and further details. <br>
+   * Returns a copy of the given exception where the specified details are removed. See {@link ExceptionUtil} for
+   * advanced usage and further details. <br>
    * <b>NOTE:</b><br>
-   * Implementations/subclasses can override the return type with the subclass. As Java does not support an
-   * implicit SELF generic and we do not want to overload all exceptions with a generic type.
+   * Implementations/subclasses can override the return type with the subclass. As Java does not support an implicit
+   * SELF generic and we do not want to overload all exceptions with a generic type.
    *
    * @param truncation the {@link ExceptionTruncation} to configure what to remove. E.g.
    *        {@link ExceptionTruncation#REMOVE_ALL}.
@@ -128,23 +127,26 @@ public interface NlsThrowable extends NlsObject, AttributeReadUuid, AttributeRea
    *
    * @see #toString(Locale)
    */
+  @Override
   String toString();
 
   /**
    * Like {@link #toString()} but using the specified {@link Locale}.
    *
    * @param locale is the {@link Locale} used for {@link #getLocalizedMessage(Locale)}.
-   * @return the localized string representation of this exception as described in
-   *         {@link #toString(Locale, Appendable)}.
+   * @return the localized string representation of this exception as described in {@link #toString(Locale, Appendable)}
+   *         .
    * @since 6.0.0
    */
   String toString(Locale locale);
 
   /**
-   * {@link Appendable#append(CharSequence) appends} the localized string representation of this exception. It
-   * is defined as following:
+   * {@link Appendable#append(CharSequence) appends} the localized string representation of this exception. It is
+   * defined as following:
    *
-   * <pre>&lt;{@link Class#getName() classname}>: [&lt;custom-{@link #getCode() code}>: ]&lt;{@link #getLocalizedMessage(Locale) message}></pre>
+   * <pre>
+   * &lt;{@link Class#getName() classname}>: [&lt;custom-{@link #getCode() code}>: ]&lt;{@link #getLocalizedMessage(Locale) message}>
+   * </pre>
    *
    * @param locale is the {@link Locale} used for {@link #getLocalizedMessage(Locale)}.
    * @param appendable is the buffer to {@link Appendable#append(CharSequence) append} to. Will be created as

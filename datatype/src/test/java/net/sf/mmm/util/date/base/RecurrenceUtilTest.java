@@ -4,6 +4,9 @@ package net.sf.mmm.util.date.base;
 
 import java.util.Calendar;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.util.date.api.DateUnit;
 import net.sf.mmm.util.date.api.Recurrence;
 import net.sf.mmm.util.date.api.RecurrenceUtil;
@@ -11,12 +14,9 @@ import net.sf.mmm.util.date.api.WeekOfMonth;
 import net.sf.mmm.util.date.api.Weekday;
 import net.sf.mmm.util.date.api.WeekdaySet;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 /**
  * This is the test-case for {@link RecurrenceUtilImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.base.SimpleNlsFormatter;
 
 /**
  * This is the abstract base implementation for a {@link SimpleNlsFormatter} for {@link java.util.Date}s.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

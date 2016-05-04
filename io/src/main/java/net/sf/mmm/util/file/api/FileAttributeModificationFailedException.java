@@ -8,10 +8,10 @@ import net.sf.mmm.util.file.NlsBundleUtilFileRoot;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * A {@link FileAttributeModificationFailedException} is thrown if the <em>attributes</em> of a
- * {@link File#isFile() file} or {@link File#isDirectory() directory} failed to be modified. The term
- * attributes refers to {@link net.sf.mmm.util.file.base.FileAccessPermissions}s as well as other metadata
- * such as e.g. {@link File#setLastModified(long) last modified}.
+ * A {@link FileAttributeModificationFailedException} is thrown if the <em>attributes</em> of a {@link File#isFile()
+ * file} or {@link File#isDirectory() directory} failed to be modified. The term attributes refers to
+ * {@link net.sf.mmm.util.file.base.FileAccessPermissions}s as well as other metadata such as e.g.
+ * {@link File#setLastModified(long) last modified}.
  *
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -45,8 +45,8 @@ public class FileAttributeModificationFailedException extends RuntimeIoException
    * The constructor.
    *
    * @param file is the name of the file that could NOT be created.
-   * @param directory - {@code true} if the exception is about a directory, {@code false} if the
-   *        exception is about a file.
+   * @param directory - {@code true} if the exception is about a directory, {@code false} if the exception is about a
+   *        file.
    */
   public FileAttributeModificationFailedException(String file, boolean directory) {
 

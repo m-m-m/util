@@ -12,7 +12,7 @@ import net.sf.mmm.util.text.api.Justification;
 
 /**
  * This is the implementation of a {@link Justification}. <br>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
  */
@@ -47,7 +47,7 @@ public class JustificationImpl implements Justification {
 
   /**
    * The constructor.
-   * 
+   *
    * @param format is the justification-format.
    */
   public JustificationImpl(String format) {
@@ -105,7 +105,7 @@ public class JustificationImpl implements Justification {
         case RIGHT:
           leftSpace = space;
           break;
-        default :
+        default:
           throw new IllegalCaseException(HorizontalAlignment.class, this.alignment);
       }
     }

@@ -15,11 +15,11 @@ import net.sf.mmm.util.validation.api.ValidationState;
  *
  * <pre>
  * public boolean {@link net.sf.mmm.util.validation.api.ValidatableObject#validate(ValidationState) validate}({@link ValidationState} state) {
- * 
+ *
  *   if (state == null) {
  *     state = new {@link ValidationStateImpl}();
  *   }
- * 
+ *
  *   {@link ValidationStateFailureCollector} failureCollector = new {@link ValidationStateFailureCollector}(state);
  *   validateRecursive(failureCollector);
  *   {@link List}&lt;{@link ValidationFailure}&gt; childFailureList = failureCollector.{@link #getFailureList()};
@@ -35,7 +35,7 @@ import net.sf.mmm.util.validation.api.ValidationState;
  */
 public class ValidationStateFailureCollector extends AbstractValidationStateCollector {
 
-  private  final List<ValidationFailure> failureList;
+  private final List<ValidationFailure> failureList;
 
   /**
    * The constructor.

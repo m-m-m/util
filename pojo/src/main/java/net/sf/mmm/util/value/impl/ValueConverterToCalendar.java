@@ -14,9 +14,9 @@ import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
- * an {@link Object} to a {@link Calendar}.
- * 
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
+ * {@link Object} to a {@link Calendar}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -24,7 +24,7 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 @Named
 public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Object, Calendar> {
 
-  private  Iso8601Util iso8601Util;
+  private Iso8601Util iso8601Util;
 
   /**
    * The constructor.
@@ -36,7 +36,7 @@ public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Objec
 
   /**
    * This method gets the {@link Iso8601Util} to use.
-   * 
+   *
    * @return the {@link Iso8601Util} instance.
    */
   protected Iso8601Util getIso8601Util() {
@@ -46,7 +46,7 @@ public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Objec
 
   /**
    * This method sets the {@link Iso8601Util} to use.
-   * 
+   *
    * @param iso8601Util is the {@link Iso8601Util} to use.
    */
   @Inject
@@ -76,6 +76,7 @@ public class ValueConverterToCalendar extends AbstractSimpleValueConverter<Objec
     return Calendar.class;
   }
 
+  @Override
   @SuppressWarnings("all")
   public <T extends Calendar> T convert(Object value, Object valueSource, Class<T> targetClass) {
 

@@ -17,7 +17,7 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
  */
 public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
 
-  private  static ComposedValueConverter instance;
+  private static ComposedValueConverter instance;
 
   /**
    * The constructor.

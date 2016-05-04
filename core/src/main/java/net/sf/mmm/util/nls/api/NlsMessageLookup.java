@@ -6,9 +6,9 @@ import java.util.Map;
 
 /**
  * This interface provides a {@link #getMessage(String, Map) generic lookup} of a {@link NlsMessage}. <br>
- * 
+ *
  * @see NlsBundleWithLookup
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
@@ -16,12 +16,11 @@ public abstract interface NlsMessageLookup {
 
   /**
    * This method create the {@link NlsMessage} for the given {@code key} with the given {@code nlsArguments}.
-   * 
+   *
    * @param key is the {@link java.lang.reflect.Method#getName() method name}.
-   * @param nlsArguments are the {@link NlsMessage#getArgument(String) arguments}. May be {@code null} for no
-   *        arguments.
-   * @return the {@link NlsMessage} or {@code null} if no message exists for the given {@code methodName} (no
-   *         such method exists).
+   * @param nlsArguments are the {@link NlsMessage#getArgument(String) arguments}. May be {@code null} for no arguments.
+   * @return the {@link NlsMessage} or {@code null} if no message exists for the given {@code methodName} (no such
+   *         method exists).
    */
   NlsMessage getMessage(String key, Map<String, Object> nlsArguments);
 

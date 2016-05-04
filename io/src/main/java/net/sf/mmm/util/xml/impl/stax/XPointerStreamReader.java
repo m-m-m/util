@@ -10,9 +10,9 @@ import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.xml.base.StreamReaderProxy;
 
 /**
- * This is an implementation of the {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader}
- * adding limited XPointer support. <br>
- * 
+ * This is an implementation of the {@link XMLStreamReader} interface that adapts an {@link XMLStreamReader} adding
+ * limited XPointer support. <br>
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class XPointerStreamReader extends StreamReaderProxy {
@@ -22,7 +22,7 @@ public class XPointerStreamReader extends StreamReaderProxy {
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the reader to adapt.
    * @param xpointer is the XPointer expression.
    */

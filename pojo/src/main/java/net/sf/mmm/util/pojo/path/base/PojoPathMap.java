@@ -8,25 +8,25 @@ import net.sf.mmm.util.pojo.path.api.PojoPathMode;
 import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
 
 /**
- * This is represents a given {@link net.sf.mmm.util.pojo.api.Pojo} as {@link java.util.Map} where the key is
- * a {@link net.sf.mmm.util.pojo.path.api.PojoPath}-String.
- * 
+ * This is represents a given {@link net.sf.mmm.util.pojo.api.Pojo} as {@link java.util.Map} where the key is a
+ * {@link net.sf.mmm.util.pojo.path.api.PojoPath}-String.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.1
  */
 public class PojoPathMap extends AbstractSimpleMap<String, Object> {
 
-  private  final PojoPathNavigator pojoPathNavigator;
+  private final PojoPathNavigator pojoPathNavigator;
 
-  private  final Object pojo;
+  private final Object pojo;
 
-  private  final PojoPathMode mode;
+  private final PojoPathMode mode;
 
-  private  final PojoPathContext context;
+  private final PojoPathContext context;
 
   /**
    * The constructor.
-   * 
+   *
    * @param pojoPathNavigator the {@link PojoPathNavigator} to use.
    * @param pojo the {@link net.sf.mmm.util.pojo.api.Pojo} to represent as {@link java.util.Map}.
    */
@@ -37,7 +37,7 @@ public class PojoPathMap extends AbstractSimpleMap<String, Object> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param pojoPathNavigator the {@link PojoPathNavigator} to use.
    * @param pojo the {@link net.sf.mmm.util.pojo.api.Pojo} to represent as {@link java.util.Map}.
    * @param context is the {@link PojoPathContext}.
@@ -49,13 +49,14 @@ public class PojoPathMap extends AbstractSimpleMap<String, Object> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param pojoPathNavigator the {@link PojoPathNavigator} to use.
    * @param pojo the {@link net.sf.mmm.util.pojo.api.Pojo} to represent as {@link java.util.Map}.
    * @param context is the {@link PojoPathContext}.
    * @param mode is the {@link PojoPathMode}.
    */
-  public PojoPathMap(PojoPathNavigator pojoPathNavigator, Object pojo, PojoPathContext context, PojoPathMode mode) {
+  public PojoPathMap(PojoPathNavigator pojoPathNavigator, Object pojo, PojoPathContext context,
+      PojoPathMode mode) {
 
     super();
     this.pojoPathNavigator = pojoPathNavigator;

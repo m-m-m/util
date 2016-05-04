@@ -24,6 +24,7 @@ public class FeatureWhereImpl extends AbstractFeature implements FeatureWhere<Fe
     super(SORT_INDEX_WHERE);
   }
 
+  @Override
   public FeatureWhereImpl where(Expression... expressions) {
 
     Expression expression = combine(this.where, Conjunction.AND, expressions);

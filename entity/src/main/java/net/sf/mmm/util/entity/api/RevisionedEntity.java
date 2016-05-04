@@ -3,25 +3,24 @@
 package net.sf.mmm.util.entity.api;
 
 /**
- * This is the interface for a {@link GenericEntity} that is (potentially) revision-controlled. An instance of
- * this interface represents the {@link #getRevision() revision} of a {@link GenericEntity}. There are two
- * cases to distinguish:
+ * This is the interface for a {@link GenericEntity} that is (potentially) revision-controlled. An instance of this
+ * interface represents the {@link #getRevision() revision} of a {@link GenericEntity}. There are two cases to
+ * distinguish:
  * <ul>
  * <li><b>{@link #LATEST_REVISION latest revision}</b><br>
- * A {@link RevisionedEntity} pointing to {@link #LATEST_REVISION} represents the latest state of the entity
- * and can be modified.</li>
+ * A {@link RevisionedEntity} pointing to {@link #LATEST_REVISION} represents the latest state of the entity and can be
+ * modified.</li>
  * <li><b>historic {@link #getRevision() revision}</b><br>
  * If the object is {@link #getRevision() revision controlled}, it has a history of modifications. A
- * {@link RevisionedEntity} can represent a historic {@link #getRevision() revision} out of this history. It
- * therefore is immutable so operations to modify the {@link RevisionedEntity} will typically fail. At least
- * they can NOT be written to the database.</li>
+ * {@link RevisionedEntity} can represent a historic {@link #getRevision() revision} out of this history. It therefore
+ * is immutable so operations to modify the {@link RevisionedEntity} will typically fail. At least they can NOT be
+ * written to the database.</li>
  * </ul>
  * <b>ATTENTION:</b><br>
- * Due to the lack of multi-inheritance and for simplicity one will typically implement this interface in
- * base-classes of the data-model. However, maybe only some classes of the hierarchy (or even not at all) are
- * actually revision controlled. In case of envers you can see this by looking for {@code @Audited}
- * annotations. Also in case of {@code mmm-persistence} you will notice this by looking at the
- * {@code DAO}.
+ * Due to the lack of multi-inheritance and for simplicity one will typically implement this interface in base-classes
+ * of the data-model. However, maybe only some classes of the hierarchy (or even not at all) are actually revision
+ * controlled. In case of envers you can see this by looking for {@code @Audited} annotations. Also in case of
+ * {@code mmm-persistence} you will notice this by looking at the {@code DAO}.
  *
  * @param <ID> is the type of the {@link #getId() primary key}.
  *
@@ -36,9 +35,9 @@ public interface RevisionedEntity<ID> extends GenericEntity<ID> {
   Number LATEST_REVISION = null;
 
   /**
-   * This method gets the revision of this entity. The {@link RevisionedEntity#LATEST_REVISION latest
-   * revision} of an entity will always return {@code null}. Otherwise this object is a
-   * <em>historic entity</em> and it will be read-only so modifications are NOT permitted.
+   * This method gets the revision of this entity. The {@link RevisionedEntity#LATEST_REVISION latest revision} of an
+   * entity will always return {@code null}. Otherwise this object is a <em>historic entity</em> and it will be
+   * read-only so modifications are NOT permitted.
    *
    * @return the revision or {@link #LATEST_REVISION} ({@code null}) if this is the latest revision.
    */

@@ -3,19 +3,19 @@
 package net.sf.mmm.util.xml.api;
 
 /**
- * This Class contains the state of an HTML
- * {@link XmlUtil#extractPlainText(String, StringBuilder, ParserState) parsing} process.
- * 
+ * This Class contains the state of an HTML {@link XmlUtil#extractPlainText(String, StringBuilder, ParserState) parsing}
+ * process.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 public class ParserState {
 
-  private  int tagStartIndex;
+  private int tagStartIndex;
 
-  private  char inAttribute;
+  private char inAttribute;
 
-  private  int cdataCloseCount;
+  private int cdataCloseCount;
 
   /**
    * The constructor.
@@ -27,7 +27,7 @@ public class ParserState {
 
   /**
    * The constructor.
-   * 
+   *
    * @param other is the state to continue with.
    */
   public ParserState(ParserState other) {
@@ -44,7 +44,7 @@ public class ParserState {
     }
   }
 
-/**
+  /**
    * @return index of first char after '<' in string or 0 if not in tag.
    */
   public int getTagStartIndex() {
@@ -77,8 +77,8 @@ public class ParserState {
   }
 
   /**
-   * @return the CDATA close character count. This value is set to 3 at start of CDATA section, count down for
-   *         closing "]]>" but reset to 3 on mismatch.
+   * @return the CDATA close character count. This value is set to 3 at start of CDATA section, count down for closing
+   *         "]]>" but reset to 3 on mismatch.
    */
   public int getCdataCloseCount() {
 

@@ -24,8 +24,8 @@ public interface DataResourceProvider<R extends DataResource> {
   String[] getSchemePrefixes();
 
   /**
-   * This method gets the type of the resource managed by this provider. This is e.g. used to determine if the
-   * managed resources implement {@link net.sf.mmm.util.resource.api.BrowsableResource}.
+   * This method gets the type of the resource managed by this provider. This is e.g. used to determine if the managed
+   * resources implement {@link net.sf.mmm.util.resource.api.BrowsableResource}.
    *
    * @return the class reflecting the type of the resources.
    */

@@ -11,20 +11,19 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorDependencies;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
- * This is the abstract implementation of the
- * {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor} interface used to access a
- * {@link Field}.
- * 
+ * This is the abstract implementation of the {@link net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor}
+ * interface used to access a {@link Field}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoPropertyAccessorBase {
 
-  private  final Field field;
+  private final Field field;
 
   /**
    * The constructor.
-   * 
+   *
    * @param descriptor is the descriptor this accessor is intended for.
    * @param dependencies are the {@link PojoDescriptorDependencies} to use.
    * @param field is the {@link #getField() field} to access.
@@ -37,7 +36,7 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
 
   /**
    * The constructor.
-   * 
+   *
    * @param propertyName is the {@link #getName() name} of the property.
    * @param propertyType is the {@link #getPropertyType() generic type} of the property.
    * @param descriptor is the descriptor this accessor is intended for.
@@ -53,7 +52,7 @@ public abstract class AbstractPojoPropertyAccessorField extends AbstractPojoProp
 
   /**
    * @see #getAccessibleObject()
-   * 
+   *
    * @return the field to access.
    */
   protected Field getField() {

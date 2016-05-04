@@ -2,6 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.gwt;
 
+import org.slf4j.LoggerFactory;
+
+import com.google.gwt.junit.client.GWTTestCase;
+
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
@@ -11,10 +15,6 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
 import net.sf.mmm.util.pojo.descriptor.base.AbstractPojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorBuilderFactoryLimited;
-
-import org.slf4j.LoggerFactory;
-
-import com.google.gwt.junit.client.GWTTestCase;
 
 /**
  * This is the test-case to test GWT compatibility of {@code mmm-util-core}.

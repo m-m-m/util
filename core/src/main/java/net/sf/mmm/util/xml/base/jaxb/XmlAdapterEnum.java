@@ -9,9 +9,8 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
- * This is an implementation of {@link XmlAdapter} for mapping {@link Enum}s to {@link #normalize(String)
- * nice} names.
- * 
+ * This is an implementation of {@link XmlAdapter} for mapping {@link Enum}s to {@link #normalize(String) nice} names.
+ *
  * @param <E> is the type of the enum.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -28,7 +27,7 @@ public abstract class XmlAdapterEnum<E extends Enum<E>> extends XmlAdapter<Strin
 
   /**
    * This method gets the {@link Class} reflecting the enum.
-   * 
+   *
    * @return the enum type.
    */
   protected abstract Class<E> getEnumClass();
@@ -45,7 +44,7 @@ public abstract class XmlAdapterEnum<E extends Enum<E>> extends XmlAdapter<Strin
 
   /**
    * This method normalizes the constant {@link Enum#name() name} of the {@link Enum}.
-   * 
+   *
    * @param enumName is the {@link Enum#name() name}.
    * @return the normalized name.
    */

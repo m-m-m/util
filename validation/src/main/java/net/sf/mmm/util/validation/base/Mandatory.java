@@ -11,10 +11,10 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * This is a {@link Constraint} for a mandatory field. It is similar to
- * {@link javax.validation.constraints.NotNull} but with an appropriate {@link #message() message} and also
- * considering empty {@link String}s, {@link java.util.Collection}s or {@link java.util.Map}s.
- * 
+ * This is a {@link Constraint} for a mandatory field. It is similar to {@link javax.validation.constraints.NotNull} but
+ * with an appropriate {@link #message() message} and also considering empty {@link String}s,
+ * {@link java.util.Collection}s or {@link java.util.Map}s.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

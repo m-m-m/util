@@ -39,11 +39,11 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  */
 public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
-  private  ExtendedPojoDescriptorDependencies configuration;
+  private ExtendedPojoDescriptorDependencies configuration;
 
-  private  PojoMethodIntrospector methodIntrospector;
+  private PojoMethodIntrospector methodIntrospector;
 
-  private  PojoFieldIntrospector fieldIntrospector;
+  private PojoFieldIntrospector fieldIntrospector;
 
   /**
    * The constructor. By default it only introspects {@link Method methods} that are public and NOT static. <br>
@@ -174,8 +174,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    *
    * @param descriptor is the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}.
    * @param accessor is the {@link PojoPropertyAccessor} to register.
-   * @return {@code true} if the given {@code accessor} has been registered or {@code false} if it has
-   *         been ignored (it is a duplicate).
+   * @return {@code true} if the given {@code accessor} has been registered or {@code false} if it has been ignored (it
+   *         is a duplicate).
    */
   protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor) {
 
@@ -403,10 +403,10 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method is called if the {@link PojoPropertyAccessor accessor} given by {@code duplicate} was ignored
-   * because it has the same {@link PojoPropertyAccessor#getName() name} and {@link PojoPropertyAccessor#getMode() mode}
-   * as the given {@code accessor} that is already registered. This method does nothing. It may be overridden to do
-   * some debug logging.
+   * This method is called if the {@link PojoPropertyAccessor accessor} given by {@code duplicate} was ignored because
+   * it has the same {@link PojoPropertyAccessor#getName() name} and {@link PojoPropertyAccessor#getMode() mode} as the
+   * given {@code accessor} that is already registered. This method does nothing. It may be overridden to do some debug
+   * logging.
    *
    * @param accessor is the accessor that is already registered.
    * @param duplicate is the duplicate that has been ignored.

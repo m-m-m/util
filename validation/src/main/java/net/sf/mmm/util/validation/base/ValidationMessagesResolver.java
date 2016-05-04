@@ -8,12 +8,12 @@ import com.google.gwt.validation.client.UserValidationMessagesResolver;
 
 /**
  * This is the {@link UserValidationMessagesResolver} for {@link ValidationMessages}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public class ValidationMessagesResolver extends AbstractValidationMessageResolver implements
-    UserValidationMessagesResolver {
+public class ValidationMessagesResolver extends AbstractValidationMessageResolver
+    implements UserValidationMessagesResolver {
 
   /**
    * The constructor.

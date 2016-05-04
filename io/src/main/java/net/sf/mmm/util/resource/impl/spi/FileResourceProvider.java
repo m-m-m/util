@@ -13,9 +13,8 @@ import net.sf.mmm.util.resource.base.FileResource;
 import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.resource.api.spi.DataResourceProvider} for
- * {@link FileResource}.
- * 
+ * This is the implementation of {@link net.sf.mmm.util.resource.api.spi.DataResourceProvider} for {@link FileResource}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -23,7 +22,7 @@ import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
 @Named
 public class FileResourceProvider extends AbstractDataResourceProvider<FileResource> {
 
-  private  FileUtil fileUtil;
+  private FileUtil fileUtil;
 
   /**
    * The constructor.

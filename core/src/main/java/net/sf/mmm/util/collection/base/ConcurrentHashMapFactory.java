@@ -19,6 +19,7 @@ public class ConcurrentHashMapFactory extends AbstractConcurrentMapFactory {
   /** The singleton instance. */
   public static final ConcurrentMapFactory INSTANCE = new ConcurrentHashMapFactory();
 
+  @Override
   @SuppressWarnings("rawtypes")
   public Class<ConcurrentHashMap> getMapImplementation() {
 

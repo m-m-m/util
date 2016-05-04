@@ -11,9 +11,8 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
- * This is a dummy implementation of {@link NlsMessage} that only returns the {@link #getMessage() message}
- * given at {@link #NlsMessagePlain(String) construction} and never has any {@link #getArgument(String)
- * arguments}.
+ * This is a dummy implementation of {@link NlsMessage} that only returns the {@link #getMessage() message} given at
+ * {@link #NlsMessagePlain(String) construction} and never has any {@link #getArgument(String) arguments}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0

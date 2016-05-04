@@ -7,19 +7,19 @@ import java.lang.reflect.Type;
 
 /**
  * This is an implementation of the {@link GenericArrayType} interface.
- * 
+ *
  * @see net.sf.mmm.util.reflect.base.ReflectionUtilImpl#toType(String)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
 public class GenericArrayTypeImpl implements GenericArrayType {
 
-  private  final Type genericComponentType;
+  private final Type genericComponentType;
 
   /**
    * The constructor.
-   * 
+   *
    * @param componentType is the {@link #getGenericComponentType() generic component-type}.
    */
   public GenericArrayTypeImpl(Type componentType) {

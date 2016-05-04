@@ -6,17 +6,17 @@ import net.sf.mmm.util.contenttype.base.format.Segment;
 
 /**
  * TODO: this class ...
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public class DecisionState {
 
-  private  Segment segment;
+  private Segment segment;
 
-  private  long streamOffset;
+  private long streamOffset;
 
-  private  String key;
+  private String key;
 
   /**
    * @return the segment
@@ -43,10 +43,9 @@ public class DecisionState {
   }
 
   /**
-   * 
-   * 
-   * @param bytes is the number of bytes to add to the
-   *        {@link #getStreamOffset() stream offset}.
+   *
+   *
+   * @param bytes is the number of bytes to add to the {@link #getStreamOffset() stream offset}.
    */
   public void addStreamOffset(int bytes) {
 

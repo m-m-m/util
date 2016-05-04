@@ -9,11 +9,11 @@ import net.sf.mmm.util.lang.base.AbstractFormatter;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
- * This is the abstract base implementation of {@link net.sf.mmm.util.lang.api.Formatter} for a numeric part
- * of the {@link VersionIdentifier}.
- * 
+ * This is the abstract base implementation of {@link net.sf.mmm.util.lang.api.Formatter} for a numeric part of the
+ * {@link VersionIdentifier}.
+ *
  * @see ComposedVersionIdentifierFormatter
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -30,12 +30,10 @@ public abstract class AbstractVersionIdentifierFormatterNumber extends AbstractF
 
   /**
    * The constructor.
-   * 
+   *
    * @param stringUtil is the {@link StringUtil} instance.
-   * @param prefix is the static prefix to append before the number. Will be omitted if the number is
-   *        {@code null}.
-   * @param padding is the padding (minimum number of digits) for the number to format. The default is
-   *        {@code 0}.
+   * @param prefix is the static prefix to append before the number. Will be omitted if the number is {@code null}.
+   * @param padding is the padding (minimum number of digits) for the number to format. The default is {@code 0}.
    */
   public AbstractVersionIdentifierFormatterNumber(StringUtil stringUtil, String prefix, int padding) {
 
@@ -47,7 +45,7 @@ public abstract class AbstractVersionIdentifierFormatterNumber extends AbstractF
 
   /**
    * This method gets the {@link Number} to format.
-   * 
+   *
    * @param value is the {@link VersionIdentifier}.
    * @return the {@link Number} to format.
    */

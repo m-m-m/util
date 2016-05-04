@@ -7,10 +7,10 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValidationState;
 
 /**
- * This is the abstract base implementation of {@link ValidationState} that wraps an existing
- * {@link ValidationState} and allows to {@link #onFailure(ValidationFailure) collect the potential failures}
- * for a part of the validation process. <br>
- * 
+ * This is the abstract base implementation of {@link ValidationState} that wraps an existing {@link ValidationState}
+ * and allows to {@link #onFailure(ValidationFailure) collect the potential failures} for a part of the validation
+ * process. <br>
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -21,7 +21,7 @@ public abstract class AbstractValidationStateCollector implements ValidationStat
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link ValidationState} to adapt.
    */
   public AbstractValidationStateCollector(ValidationState delegate) {
@@ -32,8 +32,8 @@ public abstract class AbstractValidationStateCollector implements ValidationStat
   }
 
   /**
-   * @return the {@link ValidationState} to adapt. Each call to {@link #onFailure(ValidationFailure)} will
-   *         also be propagated to this delegate.
+   * @return the {@link ValidationState} to adapt. Each call to {@link #onFailure(ValidationFailure)} will also be
+   *         propagated to this delegate.
    */
   protected ValidationState getDelegate() {
 
@@ -54,12 +54,12 @@ public abstract class AbstractValidationStateCollector implements ValidationStat
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * <br>
    * <b>ATTENTION:</b><br>
-   * This method only returns {@code false} if a {@link ValidationFailure} has been
-   * {@link #onFailure(ValidationFailure) collected} by this instance. It may therefore return
-   * {@code true} even if the {@link #getDelegate() delegate} would return {@code false}.
+   * This method only returns {@code false} if a {@link ValidationFailure} has been {@link #onFailure(ValidationFailure)
+   * collected} by this instance. It may therefore return {@code true} even if the {@link #getDelegate() delegate} would
+   * return {@code false}.
    */
   @Override
   public boolean isValid() {

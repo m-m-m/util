@@ -7,6 +7,11 @@ import java.lang.annotation.ElementType;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.lang.api.Datatype;
@@ -14,12 +19,6 @@ import net.sf.mmm.util.lang.api.Direction;
 import net.sf.mmm.util.lang.api.Password;
 import net.sf.mmm.util.lang.api.SimpleDatatype;
 import net.sf.mmm.util.lang.base.datatype.adapter.SampleComposedDatatype;
-import net.sf.mmm.util.lang.base.datatype.adapter.jackson.DatatypeObjectMapperFactory;
-
-import org.junit.Assert;
-import org.junit.Test;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * This is the test-case for {@link DatatypeObjectMapperFactory}.
@@ -59,8 +58,7 @@ public class DatatypeObjectMapperFactoryTest extends Assert {
   }
 
   /**
-   * Test of customized {@link ObjectMapper} for standard {@link Enum} (that does not implement
-   * {@link SimpleDatatype}).
+   * Test of customized {@link ObjectMapper} for standard {@link Enum} (that does not implement {@link SimpleDatatype}).
    *
    * @throws IOException if something goes wrong.
    */

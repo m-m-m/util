@@ -13,15 +13,14 @@ import net.sf.mmm.util.lang.api.GwtHelper;
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color} based on {@link Factor factors}. <br>
  * <b>Note:</b><br>
- * Use {@link Color} for simple and efficient representation and transport of color information. However, if
- * precision is required or for transformation between different {@link ColorModel color models} use this
- * class instead. <br>
+ * Use {@link Color} for simple and efficient representation and transport of color information. However, if precision
+ * is required or for transformation between different {@link ColorModel color models} use this class instead. <br>
  * <b>Credits:</b><br>
- * The algorithms for transformation of the color models are mainly taken from <a
- * href="http://en.wikipedia.org/wiki/HSL_and_HSV">HSL and HSV on wikipedia</a>. <br>
+ * The algorithms for transformation of the color models are mainly taken from
+ * <a href="http://en.wikipedia.org/wiki/HSL_and_HSV">HSL and HSV on wikipedia</a>. <br>
  * <b>ATTENTION:</b><br>
  * This implementation does not support color profiles or the Adobe RGB color space.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -31,31 +30,31 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * The {@link java.util.regex.Pattern} for a valid string representation.
-   * 
+   *
    * @see #valueOf(String)
    * @see #toString(ColorModel)
    */
   private static final String PATTERN = "#RRGGBB|(rgb|hsl|hsv|hsb)[a](<num>,<num>,<num>[,<num>])";
 
-  private  Alpha alpha;
+  private Alpha alpha;
 
-  private  Hue hue;
+  private Hue hue;
 
-  private  Saturation saturationHsb;
+  private Saturation saturationHsb;
 
-  private  Saturation saturationHsl;
+  private Saturation saturationHsl;
 
-  private  Brightness brightness;
+  private Brightness brightness;
 
-  private  Lightness lightness;
+  private Lightness lightness;
 
-  private  Chroma chroma;
+  private Chroma chroma;
 
-  private  Red red;
+  private Red red;
 
-  private  Blue blue;
+  private Blue blue;
 
-  private  Green green;
+  private Green green;
 
   /**
    * The constructor. Use {@code valueOf} methods to instantiate.
@@ -67,7 +66,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Parses the {@link GenericColor} given as {@link String} representation.
-   * 
+   *
    * @param colorString is the color as {@link String}.
    * @return the parsed {@link GenericColor}.
    * @throws NlsParseException if the syntax is invalid.
@@ -126,13 +125,13 @@ public final class GenericColor extends AbstractDatatype {
                   case RGB:
                     return valueOf(new Red(firstSegment), new Green(secondSegment), new Blue(thirdSegment), alpha);
                   case HSL:
-                    return valueOf(new Hue(firstSegment), new Saturation(secondSegment), new Lightness(thirdSegment),
-                        alpha);
+                    return valueOf(new Hue(firstSegment), new Saturation(secondSegment),
+                        new Lightness(thirdSegment), alpha);
                   case HSV:
                   case HSB:
-                    return valueOf(new Hue(firstSegment), new Saturation(secondSegment), new Brightness(thirdSegment),
-                        alpha);
-                  default :
+                    return valueOf(new Hue(firstSegment), new Saturation(secondSegment),
+                        new Brightness(thirdSegment), alpha);
+                  default:
                     throw new IllegalCaseException(ColorModel.class, colorModel);
                 }
               }
@@ -148,7 +147,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Converts the given {@link Color} to a {@link GenericColor}.
-   * 
+   *
    * @param color is the discrete RGBA {@link Color}.
    * @return the corresponding {@link GenericColor}.
    */
@@ -164,7 +163,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Creates a {@link GenericColor} from the given {@link Segment}s of {@link ColorModel#RGB}.
-   * 
+   *
    * @param red is the {@link Red} part.
    * @param green is the {@link Green} part.
    * @param blue is the {@link Blue} part.
@@ -222,7 +221,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Calculate the {@link Saturation} for {@link ColorModel#HSL}.
-   * 
+   *
    * @param chroma is the {@link Chroma} value.
    * @param lightness is the {@link Lightness} value.
    * @return the {@link Saturation}.
@@ -238,7 +237,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Calculate the {@link Hue}.
-   * 
+   *
    * @param red is the {@link Red} value.
    * @param green is the {@link Green} value.
    * @param blue is the {@link Blue} value.
@@ -269,7 +268,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Creates a {@link GenericColor} from the given {@link Segment}s of {@link ColorModel#HSB}.
-   * 
+   *
    * @param hue is the {@link Hue} part.
    * @param saturation is the {@link Saturation} part.
    * @param brightness is the {@link Brightness} part.
@@ -301,7 +300,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Creates a {@link GenericColor} from the given {@link Segment}s of {@link ColorModel#HSL}.
-   * 
+   *
    * @param hue is the {@link Hue} part.
    * @param saturation is the {@link Saturation} part.
    * @param lightness is the {@link Lightness} part.
@@ -342,7 +341,7 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Calculates and the RGB values and sets them in the given {@link GenericColor}.
-   * 
+   *
    * @param genericColor is the {@link GenericColor} to complete.
    * @param hue is the {@link Hue} value.
    * @param min is the minimum {@link Factor} of R/G/B.
@@ -492,7 +491,7 @@ public final class GenericColor extends AbstractDatatype {
         return this.lightness;
       case ALPHA:
         return this.alpha;
-      default :
+      default:
         throw new IllegalCaseException(ColorSegmentType.class, type);
     }
   }
@@ -507,9 +506,8 @@ public final class GenericColor extends AbstractDatatype {
   }
 
   /**
-   * @param model the {@link ColorModel} indicating the {@link Segment}s to
-   *        {@link AbstractDoubleSegment#invert() invert}. Typically {@link ColorModel#RGB} to build the
-   *        complement of the color.
+   * @param model the {@link ColorModel} indicating the {@link Segment}s to {@link AbstractDoubleSegment#invert()
+   *        invert}. Typically {@link ColorModel#RGB} to build the complement of the color.
    * @return the complementary (or inverse) color.
    */
   public GenericColor invert(ColorModel model) {
@@ -522,16 +520,16 @@ public final class GenericColor extends AbstractDatatype {
       case HSB:
       case HSV:
         return valueOf(this.hue.invert(), this.saturationHsb.invert(), this.brightness.invert(), this.alpha);
-      default :
+      default:
         throw new IllegalCaseException(ColorModel.class, model);
     }
   }
 
   /**
    * Lightens this color by the given {@code factor}.
-   * 
-   * @param factor is the factor to increase by. E.g. {@code 0.0} will cause no change, while
-   *        {@code 1.0} will return {@link Color#WHITE white}.
+   *
+   * @param factor is the factor to increase by. E.g. {@code 0.0} will cause no change, while {@code 1.0} will return
+   *        {@link Color#WHITE white}.
    * @return a new color lighter by the given {@code factor}.
    */
   public GenericColor lighten(ColorFactor factor) {
@@ -541,9 +539,9 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * Darkens this color by the given {@code factor}.
-   * 
-   * @param factor is the factor to decrease by. E.g. {@code 0.0} will cause no change, while
-   *        {@code 1.0} will return {@link Color#BLACK black}.
+   *
+   * @param factor is the factor to decrease by. E.g. {@code 0.0} will cause no change, while {@code 1.0} will return
+   *        {@link Color#BLACK black}.
    * @return a new color darker by the given {@code factor}.
    */
   public GenericColor darken(ColorFactor factor) {
@@ -559,8 +557,8 @@ public final class GenericColor extends AbstractDatatype {
 
   /**
    * @param colorModel is the {@link ColorModel}.
-   * @return this color as {@link String} in notation of the given {@link ColorModel} (e.g.
-   *         "rgba(255, 128, 64, 1.0)" for {@link ColorModel#RGB}).
+   * @return this color as {@link String} in notation of the given {@link ColorModel} (e.g. "rgba(255, 128, 64, 1.0)"
+   *         for {@link ColorModel#RGB}).
    */
   public String toString(ColorModel colorModel) {
 

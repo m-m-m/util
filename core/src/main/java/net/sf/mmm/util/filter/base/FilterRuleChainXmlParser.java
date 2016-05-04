@@ -12,15 +12,15 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.sf.mmm.util.filter.api.FilterRule;
-import net.sf.mmm.util.xml.api.DomUtil;
-import net.sf.mmm.util.xml.base.DomUtilImpl;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import net.sf.mmm.util.filter.api.FilterRule;
+import net.sf.mmm.util.xml.api.DomUtil;
+import net.sf.mmm.util.xml.base.DomUtilImpl;
 
 /**
  * This class allows to parse a list of including and excluding regex {@link PatternFilterRule}s from XML and build an
@@ -75,7 +75,7 @@ public class FilterRuleChainXmlParser {
    */
   public static final String XML_ATR_RULE_PATTERN = "pattern";
 
-  private  final DomUtil domUtil;
+  private final DomUtil domUtil;
 
   /**
    * The constructor.
@@ -97,9 +97,9 @@ public class FilterRuleChainXmlParser {
   }
 
   /**
-   * This method parses the chain from the given {@code inStream}. The XML contained in {@code inStream} needs
-   * to contain the chain rules as child-nodes of the {@link Document#getDocumentElement() root-element}. The name of
-   * the root-element is ignored (use e.g. "chain").
+   * This method parses the chain from the given {@code inStream}. The XML contained in {@code inStream} needs to
+   * contain the chain rules as child-nodes of the {@link Document#getDocumentElement() root-element}. The name of the
+   * root-element is ignored (use e.g. "chain").
    *
    * @param inStream is the stream containing the XML to parse. It will be closed by this method (on success as well as
    *        in an exceptional state).

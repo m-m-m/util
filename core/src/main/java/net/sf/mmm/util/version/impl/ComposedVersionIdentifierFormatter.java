@@ -14,8 +14,8 @@ import net.sf.mmm.util.version.api.VersionIdentifierFormatter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class ComposedVersionIdentifierFormatter extends ComposedFormatter<VersionIdentifier> implements
-    VersionIdentifierFormatter {
+public class ComposedVersionIdentifierFormatter extends ComposedFormatter<VersionIdentifier>
+    implements VersionIdentifierFormatter {
 
   /**
    * The constructor.

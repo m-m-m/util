@@ -9,11 +9,11 @@ import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
- * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents a 2 letter code representing a
- * country of the world according to ISO 3116.
- * 
+ * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents a 2 letter code representing a country of
+ * the world according to ISO 3116.
+ *
  * @see java.util.Locale#getCountry()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -21,9 +21,9 @@ public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
 
   private static final long serialVersionUID = 6243639424166029515L;
 
-  private  static final Pattern PATTERN_COUNTRY_CODE = Pattern.compile("[A-Z]{2}");
+  private static final Pattern PATTERN_COUNTRY_CODE = Pattern.compile("[A-Z]{2}");
 
-  private  String title;
+  private String title;
 
   /**
    * The constructor for de-serialization in GWT.
@@ -35,7 +35,7 @@ public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param value is the {@link #getValue() value} and has to consist of exactly two Latin letters.
    */
   public Iso2CountryCode(String value) {

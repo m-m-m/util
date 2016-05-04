@@ -7,7 +7,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
  * This is the abstract base-implementation of the {@link PojoPropertyAccessor} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */

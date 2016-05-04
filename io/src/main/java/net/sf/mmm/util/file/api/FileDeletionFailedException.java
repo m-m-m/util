@@ -8,8 +8,7 @@ import net.sf.mmm.util.file.NlsBundleUtilFileRoot;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * A {@link FileDeletionFailedException} is thrown if a file or directory should be deleted but the deletion
- * failed.
+ * A {@link FileDeletionFailedException} is thrown if a file or directory should be deleted but the deletion failed.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -42,8 +41,8 @@ public class FileDeletionFailedException extends RuntimeIoException {
    * The constructor.
    *
    * @param file is the name of the file that could NOT be deleted.
-   * @param directory - {@code true} if the exception is about a directory, {@code false} if the
-   *        exception is about a file.
+   * @param directory - {@code true} if the exception is about a directory, {@code false} if the exception is about a
+   *        file.
    */
   public FileDeletionFailedException(String file, boolean directory) {
 

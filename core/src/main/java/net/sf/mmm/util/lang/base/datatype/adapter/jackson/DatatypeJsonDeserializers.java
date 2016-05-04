@@ -4,10 +4,6 @@ package net.sf.mmm.util.lang.base.datatype.adapter.jackson;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
-import net.sf.mmm.util.lang.api.DatatypeDetector;
-import net.sf.mmm.util.lang.api.EnumProvider;
-
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.JavaType;
@@ -15,9 +11,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.module.SimpleDeserializers;
 
+import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
+import net.sf.mmm.util.lang.api.DatatypeDetector;
+import net.sf.mmm.util.lang.api.EnumProvider;
+
 /**
- * This class extends {@link SimpleDeserializers} in order to create a {@link DatatypeJsonDeserializer}
- * dynamically as requested.
+ * This class extends {@link SimpleDeserializers} in order to create a {@link DatatypeJsonDeserializer} dynamically as
+ * requested.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
@@ -26,11 +26,11 @@ public class DatatypeJsonDeserializers extends SimpleDeserializers {
 
   private static final long serialVersionUID = 1L;
 
-  private  DatatypeDescriptorManager datatypeDescriptorManager;
+  private DatatypeDescriptorManager datatypeDescriptorManager;
 
-  private  DatatypeDetector datatypeDetector;
+  private DatatypeDetector datatypeDetector;
 
-  private  EnumProvider enumProvider;
+  private EnumProvider enumProvider;
 
   /**
    * The constructor.
@@ -68,16 +68,16 @@ public class DatatypeJsonDeserializers extends SimpleDeserializers {
   }
 
   @Override
-  public JsonDeserializer<?> findEnumDeserializer(Class<?> type, DeserializationConfig config, BeanDescription beanDesc)
-      throws JsonMappingException {
+  public JsonDeserializer<?> findEnumDeserializer(Class<?> type, DeserializationConfig config,
+      BeanDescription beanDesc) throws JsonMappingException {
 
     return new EnumTypeJsonDeserializer<>(type, this.enumProvider);
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public JsonDeserializer<?> findBeanDeserializer(JavaType type, DeserializationConfig config, BeanDescription beanDesc)
-      throws JsonMappingException {
+  public JsonDeserializer<?> findBeanDeserializer(JavaType type, DeserializationConfig config,
+      BeanDescription beanDesc) throws JsonMappingException {
 
     JsonDeserializer<?> deserializer = super.findBeanDeserializer(type, config, beanDesc);
     if (deserializer == null) {

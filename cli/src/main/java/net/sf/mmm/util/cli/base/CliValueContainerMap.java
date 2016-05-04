@@ -4,13 +4,13 @@ package net.sf.mmm.util.cli.base;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+
 import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.GenericValueConverter;
-
-import org.slf4j.Logger;
 
 /**
  * This is an implementation of {@link CliValueContainer} for a {@link Map}.
@@ -20,7 +20,7 @@ import org.slf4j.Logger;
  */
 public class CliValueContainerMap extends AbstractCliValueContainerContainer {
 
-  private  Map<Object, Object> map;
+  private Map<Object, Object> map;
 
   /**
    * The constructor.

@@ -7,11 +7,11 @@ import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.lang.api.Conjunction;
 
 /**
- * This is an implementation of the {@link Filter} interface that combines a given list of filters using a
- * boolean {@link Conjunction}.
- * 
+ * This is an implementation of the {@link Filter} interface that combines a given list of filters using a boolean
+ * {@link Conjunction}.
+ *
  * @param <V> is the generic type of the value to check.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -25,7 +25,7 @@ public class ConjunctionFilter<V> implements Filter<V> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param conjunction is the {@link Conjunction} used to combine the {@code filters}.
    * @param filters are the filters to combine.
    */
@@ -64,7 +64,7 @@ public class ConjunctionFilter<V> implements Filter<V> {
             return true;
           }
           break;
-        default :
+        default:
           throw new IllegalCaseException(Conjunction.class, this.conjunction);
       }
     }
@@ -75,7 +75,7 @@ public class ConjunctionFilter<V> implements Filter<V> {
       case AND:
       case NOR:
         return true;
-      default :
+      default:
         throw new IllegalCaseException(Conjunction.class, this.conjunction);
     }
   }

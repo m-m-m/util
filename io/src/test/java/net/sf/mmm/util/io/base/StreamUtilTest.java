@@ -230,12 +230,14 @@ public class StreamUtilTest extends Assertions {
 
   public static class StreamUtilImplWithTestLogger extends StreamUtilImpl {
 
-    @Override    protected Logger createLogger() {
+    @Override
+    protected Logger createLogger() {
 
       return new TestLogger();
     }
 
-    @Override    protected TestLogger getLogger() {
+    @Override
+    protected TestLogger getLogger() {
 
       return (TestLogger) super.getLogger();
     }

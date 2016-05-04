@@ -17,7 +17,7 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
 
   private static final long serialVersionUID = 1997543457414946906L;
 
-  private  boolean technical;
+  private boolean technical;
 
   /**
    * The constructor for de-serialization in GWT.
@@ -38,7 +38,8 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
    * @param technical - {@code true} in case of {@link NlsThrowable#isTechnical() technical error} with
    *        {@link #TYPE_TECHNICAL_ERROR}, {@code false} otherwise (business error).
    */
-  public AbstractErrorMessage(String code, Object source, String message, UUID uuid, String details, boolean technical) {
+  public AbstractErrorMessage(String code, Object source, String message, UUID uuid, String details,
+      boolean technical) {
 
     super(code, source, message, uuid, details);
     this.technical = technical;

@@ -30,8 +30,8 @@ public class NumberConversionException extends NlsRuntimeException {
    * The constructor.
    *
    * @param value is the value that could NOT be converted.
-   * @param targetType represents the type the {@code value} should have been converted to. This will
-   *        typically be a {@link Class} object.
+   * @param targetType represents the type the {@code value} should have been converted to. This will typically be a
+   *        {@link Class} object.
    */
   public NumberConversionException(Object value, Object targetType) {
 
@@ -43,8 +43,8 @@ public class NumberConversionException extends NlsRuntimeException {
    *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param value is the value that could NOT be converted.
-   * @param targetType represents the type the {@code value} should have been converted to. This will
-   *        typically be a {@link Class} object.
+   * @param targetType represents the type the {@code value} should have been converted to. This will typically be a
+   *        {@link Class} object.
    */
   public NumberConversionException(Throwable nested, Object value, Object targetType) {
 

@@ -14,6 +14,9 @@ import net.sf.mmm.util.lang.base.NumberComparator;
  */
 public class NumberRange extends Range<Number> {
 
+  /** TODO: javadoc. */
+  private static final long serialVersionUID = 1L;
+
   /**
    * The constructor.
    */

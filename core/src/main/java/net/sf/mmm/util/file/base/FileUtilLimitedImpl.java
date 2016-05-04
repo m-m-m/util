@@ -24,7 +24,7 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
   /** The typical home directory of the user "root" under Unix/Linux. */
   protected static final String HOME_ROOT = "/root";
 
-  private  static FileUtilLimited instance;
+  private static FileUtilLimited instance;
 
   /**
    * The constructor.
@@ -74,8 +74,7 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
   }
 
   /**
-   * Normalize the potential home segment of the path (if starts with ~ such as "~/.ssh", "~root/" or
-   * "~admin/..").
+   * Normalize the potential home segment of the path (if starts with ~ such as "~/.ssh", "~root/" or "~admin/..").
    *
    * @param path is the path where to normalize the home segment.
    * @return the normalized path.

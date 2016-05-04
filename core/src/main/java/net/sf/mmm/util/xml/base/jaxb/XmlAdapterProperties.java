@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import net.sf.mmm.util.exception.api.NlsClassCastException;
 
 /**
- * This is an implementation of {@link XmlAdapter} for mapping {@link Properties}. It uses a
- * {@link PropertyList} as JAXB mappable object.
- * 
+ * This is an implementation of {@link XmlAdapter} for mapping {@link Properties}. It uses a {@link PropertyList} as
+ * JAXB mappable object.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */

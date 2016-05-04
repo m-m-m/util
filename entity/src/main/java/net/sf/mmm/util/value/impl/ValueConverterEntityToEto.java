@@ -12,9 +12,8 @@ import net.sf.mmm.util.transferobject.api.EntityTo.PersistentEntityAccess;
 import net.sf.mmm.util.value.api.ValueException;
 
 /**
- * This class extends {@link AbstractValueConverterToCompatiblePojo} for conversion from
- * {@link PersistenceEntity} to {@link EntityTo ETO}. See {@link EntityTo#getModificationCounter()} for
- * further details.
+ * This class extends {@link AbstractValueConverterToCompatiblePojo} for conversion from {@link PersistenceEntity} to
+ * {@link EntityTo ETO}. See {@link EntityTo#getModificationCounter()} for further details.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0
@@ -62,7 +61,8 @@ public class ValueConverterEntityToEto extends AbstractValueConverterToSimilarPo
    */
   private static class EtoHelper extends PersistentEntityAccess {
 
-    @Override    protected <ID> void setPersistentEntity(EntityTo<ID> eto, PersistenceEntity<ID> persistentEntity) {
+    @Override
+    protected <ID> void setPersistentEntity(EntityTo<ID> eto, PersistenceEntity<ID> persistentEntity) {
 
       super.setPersistentEntity(eto, persistentEntity);
     }

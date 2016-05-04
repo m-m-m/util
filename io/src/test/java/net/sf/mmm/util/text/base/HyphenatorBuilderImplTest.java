@@ -4,11 +4,11 @@ package net.sf.mmm.util.text.base;
 
 import java.util.Locale;
 
+import org.junit.Test;
+
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.text.api.Hyphenator;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
-
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link HyphenatorBuilderImpl}.
@@ -71,8 +71,7 @@ public class HyphenatorBuilderImplTest extends AbstractHyphenatorTest {
     Hyphenator hyphenator = getHyphenator(Locale.US);
     assertThat(hyphenator.getLocale()).isEqualTo(AbstractNlsMessage.LOCALE_ROOT);
 
-    checkHyphenations(hyphenator, "word", "this", "a",
-        "con-struc-tion",
+    checkHyphenations(hyphenator, "word", "this", "a", "con-struc-tion",
         // "spec-tro-elec-tro-chem-is-try",
         "spec-tro-elec-tro-chem-istry", "hy-phen-ation", "hyp-not-ic", "care-tak-er", "as-pi-rin", "as-pir-ing",
         "in-de-pen-dent", "tri-bune", "pro-gress", "even-ing", "pe-ri-od-ic", "as-so-ciate", "squirmed",

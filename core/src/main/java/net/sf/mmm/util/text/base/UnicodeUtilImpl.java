@@ -23,11 +23,11 @@ import net.sf.mmm.util.text.api.UnicodeUtil;
 @SuppressWarnings("boxing")
 public class UnicodeUtilImpl extends AbstractLoggableComponent implements UnicodeUtil {
 
-  private  static UnicodeUtil instance;
+  private static UnicodeUtil instance;
 
-  private  static final Map<Character, String> CHARACTER_TO_ASCII_MAP;
+  private static final Map<Character, String> CHARACTER_TO_ASCII_MAP;
 
-  private  static final Map<Character, String> TRANSLITERATION_MAP;
+  private static final Map<Character, String> TRANSLITERATION_MAP;
 
   static {
     CHARACTER_TO_ASCII_MAP = new HashMap<>();

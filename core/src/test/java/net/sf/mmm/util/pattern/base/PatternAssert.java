@@ -8,15 +8,14 @@ import org.junit.Assert;
 
 /**
  * This class allows junit-style assertions for matching {@link Pattern}s.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class PatternAssert {
 
   /**
-   * Asserts that {@code string} is {@link java.util.regex.Matcher#matches() matching}
-   * {@code pattern}.
-   * 
+   * Asserts that {@code string} is {@link java.util.regex.Matcher#matches() matching} {@code pattern}.
+   *
    * @param pattern is the {@link Pattern}.
    * @param string is the string to match.
    */
@@ -27,16 +26,15 @@ public class PatternAssert {
   }
 
   /**
-   * Asserts that {@code string} is NOT {@link java.util.regex.Matcher#matches() matching}
-   * {@code pattern}.
-   * 
+   * Asserts that {@code string} is NOT {@link java.util.regex.Matcher#matches() matching} {@code pattern}.
+   *
    * @param pattern is the {@link Pattern}.
    * @param string is the string that should NOT match.
    */
   public static void assertMatchesNot(Pattern pattern, String string) {
 
-    Assert.assertFalse("String '" + string + "' should NOT match pattern '" + pattern.pattern() + "'!", pattern
-        .matcher(string).matches());
+    Assert.assertFalse("String '" + string + "' should NOT match pattern '" + pattern.pattern() + "'!",
+        pattern.matcher(string).matches());
   }
 
 }

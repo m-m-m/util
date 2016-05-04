@@ -20,7 +20,7 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorTwoArgB
 /**
  * This is the implementation of the {@link PojoPropertyAccessorTwoArgBuilder} interface for
  * {@link PojoPropertyAccessorTwoArgMode#SET_MAPPED mapped setter-access}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */

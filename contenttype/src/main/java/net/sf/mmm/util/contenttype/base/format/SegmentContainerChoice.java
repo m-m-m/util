@@ -3,11 +3,11 @@
 package net.sf.mmm.util.contenttype.base.format;
 
 /**
- * A {@link SegmentContainerChoice} is a {@link SegmentContainer} that matches
- * if any of the {@link #getSegment(int) contained} {@link Segment}s match. <br>
- * In typical cases it will contain multiple {@link SegmentContainerSequence}
- * instances that represent alternative patterns in the stream.
- * 
+ * A {@link SegmentContainerChoice} is a {@link SegmentContainer} that matches if any of the {@link #getSegment(int)
+ * contained} {@link Segment}s match. <br>
+ * In typical cases it will contain multiple {@link SegmentContainerSequence} instances that represent alternative
+ * patterns in the stream.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */

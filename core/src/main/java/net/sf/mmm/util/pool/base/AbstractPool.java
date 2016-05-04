@@ -6,9 +6,9 @@ import net.sf.mmm.util.pool.api.Pool;
 
 /**
  * This is the abstract base implementation of the {@link Pool} interface.
- * 
+ *
  * @param <E> is the generic type of the pooled elements.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -28,10 +28,10 @@ public abstract class AbstractPool<E> implements Pool<E> {
 
   /**
    * The constructor.
-   * 
+   *
    * <b>ATTENTION:</b><br>
-   * This constructor uses a default capacity of {@value #DEFAULT_CAPACITY}. A suitable default capacity
-   * depends on the type of objects that are pooled ({@literal <E>}).
+   * This constructor uses a default capacity of {@value #DEFAULT_CAPACITY}. A suitable default capacity depends on the
+   * type of objects that are pooled ({@literal <E>}).
    */
   public AbstractPool() {
 
@@ -40,10 +40,10 @@ public abstract class AbstractPool<E> implements Pool<E> {
 
   /**
    * The constructor.
-   * 
+   *
    * @param capacity is the {@link #getCapacity() capacity}.
-   * @param threadsafe if {@code true} the pool needs to be accessed by multiple {@link Thread}s
-   *        concurrently, {@code false} otherwise.
+   * @param threadsafe if {@code true} the pool needs to be accessed by multiple {@link Thread}s concurrently,
+   *        {@code false} otherwise.
    */
   public AbstractPool(int capacity, boolean threadsafe) {
 
@@ -52,7 +52,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
 
   /**
    * The constructor for a thread-safe pool with an externally given {@code lock} for synchronization.
-   * 
+   *
    * @param capacity is the {@link #getCapacity() capacity}.
    * @param lock is an object used for synchronization.
    */
@@ -64,12 +64,12 @@ public abstract class AbstractPool<E> implements Pool<E> {
 
   /**
    * The constructor.
-   * 
-   * @param threadsafe if {@code true} the pool needs to be accessed by multiple {@link Thread}s
-   *        concurrently, {@code false} otherwise.
+   *
+   * @param threadsafe if {@code true} the pool needs to be accessed by multiple {@link Thread}s concurrently,
+   *        {@code false} otherwise.
    * @param capacity the capacity of this pool.
-   * @param lock is an explicit synchronization-lock object. It may be {@code null}. If it is NOT
-   *        {@code null}, {@code threadsafe} has to be {@code true}.
+   * @param lock is an explicit synchronization-lock object. It may be {@code null}. If it is NOT {@code null},
+   *        {@code threadsafe} has to be {@code true}.
    */
   private AbstractPool(boolean threadsafe, int capacity, Object lock) {
 
@@ -101,7 +101,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
 
   /**
    * @see #borrow()
-   * 
+   *
    * @return the borrowed object.
    */
   @SuppressWarnings("unchecked")
@@ -118,21 +118,21 @@ public abstract class AbstractPool<E> implements Pool<E> {
 
   /**
    * This method creates a new element. It is used if there is no instance left in the pool.
-   * 
+   *
    * @return the new instance.
    */
   protected abstract E create();
 
   /**
    * This method resets the given {@code element} so it can be reused. It is called if an element is
-   * {@link #release(Object) released} and will be stored in the pool. The implementation depends on the type
-   * of element. Some types may become inconsistent if they are directly reused. Further this method may clear
-   * data from the element for security reasons, because the same instance may be given to some other
-   * component that is NOT trusted enough (because it may be vulnerably).
-   * 
+   * {@link #release(Object) released} and will be stored in the pool. The implementation depends on the type of
+   * element. Some types may become inconsistent if they are directly reused. Further this method may clear data from
+   * the element for security reasons, because the same instance may be given to some other component that is NOT
+   * trusted enough (because it may be vulnerably).
+   *
    * @param element the element to reset.
-   * @return {@code true} if the given {@code element} can be reused and should be added to the
-   *         pool, {@code false} otherwise.
+   * @return {@code true} if the given {@code element} can be reused and should be added to the pool, {@code false}
+   *         otherwise.
    */
   protected boolean reset(E element) {
 
@@ -147,7 +147,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
 
   /**
    * This method gets the size of the pool.
-   * 
+   *
    * @return the size
    */
   public int getSize() {
@@ -156,14 +156,14 @@ public abstract class AbstractPool<E> implements Pool<E> {
   }
 
   /**
-   * This method gets the capacity of this pool. This value is the maximum {@link #getSize() size} of this
-   * pool. If that size is reached further {@link #release(Object) released} objects are NOT pooled and can be
-   * freed by the garbage-collector. <br>
+   * This method gets the capacity of this pool. This value is the maximum {@link #getSize() size} of this pool. If that
+   * size is reached further {@link #release(Object) released} objects are NOT pooled and can be freed by the
+   * garbage-collector. <br>
    * <b>ATTENTION:</b><br>
-   * The optimal capacity of a {@link Pool} depends heavily on the type of objects that are pooled. For some
-   * lightweight objects a very high capacity may suite. However for big buffers (e.g.
-   * {@code char[65536]}) the capacity should be very low because otherwise your heap might get crowded.
-   * 
+   * The optimal capacity of a {@link Pool} depends heavily on the type of objects that are pooled. For some lightweight
+   * objects a very high capacity may suite. However for big buffers (e.g. {@code char[65536]}) the capacity should be
+   * very low because otherwise your heap might get crowded.
+   *
    * @return the capacity of the pool.
    */
   public int getCapacity() {
@@ -192,8 +192,7 @@ public abstract class AbstractPool<E> implements Pool<E> {
   }
 
   /**
-   * This method clears the complete pool. After the call of this method, the pool will be {@link #isEmpty()
-   * empty}.
+   * This method clears the complete pool. After the call of this method, the pool will be {@link #isEmpty() empty}.
    */
   public void clear() {
 

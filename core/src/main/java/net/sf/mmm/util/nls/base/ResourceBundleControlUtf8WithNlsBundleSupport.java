@@ -9,15 +9,14 @@ import java.util.ResourceBundle;
 import net.sf.mmm.util.nls.api.NlsBundle;
 
 /**
- * Extends {@link ResourceBundleControlUtf8} with support for {@link NlsBundle} to prevent exception overhead.
- * If {@link NlsBundle}s are used to create {@link net.sf.mmm.util.nls.api.NlsMessage}s and
+ * Extends {@link ResourceBundleControlUtf8} with support for {@link NlsBundle} to prevent exception overhead. If
+ * {@link NlsBundle}s are used to create {@link net.sf.mmm.util.nls.api.NlsMessage}s and
  * {@link net.sf.mmm.util.nls.api.NlsMessage#getLocalizedMessage(Locale) localization} takes place for a
  * {@link java.util.Locale} where no {@link ResourceBundle} is available then every lookup will cause a
- * {@link java.util.MissingResourceException}. As this is causing massive overhead when many localizations
- * take place, we use this control class with the following strategy:<br>
- * If {@link #newBundle(String, Locale, String, ClassLoader, boolean)} is called with
- * {@link java.util.Locale#ROOT} and there is no regular {@link ResourceBundle} available, but an
- * {@link NlsBundle} with the given {@code baseName} it is
+ * {@link java.util.MissingResourceException}. As this is causing massive overhead when many localizations take place,
+ * we use this control class with the following strategy:<br>
+ * If {@link #newBundle(String, Locale, String, ClassLoader, boolean)} is called with {@link java.util.Locale#ROOT} and
+ * there is no regular {@link ResourceBundle} available, but an {@link NlsBundle} with the given {@code baseName} it is
  * {@link NlsBundleHelper#toResourceBundle(Class) converted} to a {@link ResourceBundle} and returned.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -38,8 +37,8 @@ public class ResourceBundleControlUtf8WithNlsBundleSupport extends ResourceBundl
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
-      throws IllegalAccessException, InstantiationException, IOException {
+  public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader,
+      boolean reload) throws IllegalAccessException, InstantiationException, IOException {
 
     ResourceBundle bundle = super.newBundle(baseName, locale, format, loader, reload);
     if ((bundle == null) && (Locale.ROOT.equals(locale))) {

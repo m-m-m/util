@@ -5,19 +5,20 @@ package net.sf.mmm.util.collection.api;
 import java.util.SortedSet;
 
 /**
- * This is the interface for a {@link CollectionFactory} that {@link #create() creates} instances of
- * {@link SortedSet}.
- * 
+ * This is the interface for a {@link CollectionFactory} that {@link #create() creates} instances of {@link SortedSet}.
+ *
  * @see net.sf.mmm.util.collection.base.TreeSetFactory#INSTANCE
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
 @SuppressWarnings("rawtypes")
 public interface SortedSetFactory extends CollectionFactory<SortedSet> {
 
+  @Override
   <E> SortedSet<E> create();
 
+  @Override
   <E> SortedSet<E> create(int capacity);
 
 }

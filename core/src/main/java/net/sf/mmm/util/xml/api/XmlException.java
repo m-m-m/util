@@ -19,8 +19,8 @@ public abstract class XmlException extends NlsRuntimeException {
    * The constructor.
    *
    * @param internationalizedMessage is a short description of the problem. It is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
-   *        should be in English language.
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and should be
+   *        in English language.
    */
   public XmlException(String internationalizedMessage) {
 
@@ -32,8 +32,8 @@ public abstract class XmlException extends NlsRuntimeException {
    *
    * @param nested is the {@link #getCause() cause} of this exception.
    * @param internationalizedMessage is a short description of the problem. It is used for
-   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and
-   *        should be in English language.
+   *        {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalization} and should be
+   *        in English language.
    */
   public XmlException(Throwable nested, String internationalizedMessage) {
 

@@ -8,8 +8,8 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface for a provider of {@link Path}s for a {@link #getSchemePrefixes() specific}
- * {@link java.nio.file.FileSystem}. It is not intended to be used by end-users. Instead it allows service
- * providers to add support for new {@link #getSchemePrefixes() scheme prefixes}.
+ * {@link java.nio.file.FileSystem}. It is not intended to be used by end-users. Instead it allows service providers to
+ * add support for new {@link #getSchemePrefixes() scheme prefixes}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0

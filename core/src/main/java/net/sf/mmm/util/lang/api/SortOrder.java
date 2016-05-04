@@ -16,9 +16,9 @@ public enum SortOrder implements SimpleDatatype<String> {
   /** Indicating that values are in decreasing order (e.g. "3, 2, 1"). */
   DESCENDING("desc", "descending");
 
-  private  final String value;
+  private final String value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.
@@ -39,13 +39,13 @@ public enum SortOrder implements SimpleDatatype<String> {
   }
 
   /**
-   * Adjusts the {@link Math#signum(double)} of a {@link Comparable#compareTo(Object) compare to} result with
-   * this {@link SortOrder} to the semantic of
-   * {@link java.util.Collections#sort(java.util.List, java.util.Comparator)}. In other words *
+   * Adjusts the {@link Math#signum(double)} of a {@link Comparable#compareTo(Object) compare to} result with this
+   * {@link SortOrder} to the semantic of {@link java.util.Collections#sort(java.util.List, java.util.Comparator)}. In
+   * other words *
    *
    * @param compareTo is the result of a regular {@link Comparable#compareTo(Object) compare to} operation.
-   * @return the given value ({@code compareTo}) for {@link #ASCENDING} and the negation (
-   *         {@code -compareTo}) otherwise (for {@link #DESCENDING}).
+   * @return the given value ({@code compareTo}) for {@link #ASCENDING} and the negation ( {@code -compareTo}) otherwise
+   *         (for {@link #DESCENDING}).
    */
   public int adjustSignum(int compareTo) {
 

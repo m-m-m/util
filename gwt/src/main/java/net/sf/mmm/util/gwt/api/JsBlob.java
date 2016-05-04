@@ -7,7 +7,7 @@ import com.google.gwt.core.client.UnsafeNativeLong;
 
 /**
  * This is the {@link JavaScriptObject} representing a BLOB.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -21,22 +21,22 @@ public class JsBlob extends JavaScriptObject {
     super();
   }
 
-  //formatter:off
+  // formatter:off
 
   /**
    * @return the size of this BLOB in bytes.
    */
   @UnsafeNativeLong
   public final native long getSize() /*-{
-    return this.size;
-  }-*/;
+                                     return this.size;
+                                     }-*/;
 
   /**
    * @return the mimetype of this BLOB (e.g. "image/jpeg").
    */
   public final native String getType() /*-{
-    return this.type;
-  }-*/;
+                                       return this.type;
+                                       }-*/;
 
-  //formatter:on
+  // formatter:on
 }

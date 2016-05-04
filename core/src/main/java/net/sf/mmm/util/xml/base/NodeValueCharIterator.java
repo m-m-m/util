@@ -2,21 +2,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
-import net.sf.mmm.util.lang.api.CharIterator;
-
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import net.sf.mmm.util.lang.api.CharIterator;
+
 /**
- * This is an implementation of {@link CharIterator} that iterates the characters of the
- * {@link Node#getNodeValue() value}(s) of a single node or a node-list.
+ * This is an implementation of {@link CharIterator} that iterates the characters of the {@link Node#getNodeValue()
+ * value}(s) of a single node or a node-list.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 class NodeValueCharIterator implements CharIterator {
 
-  private  final NodeList nodeList;
+  private final NodeList nodeList;
 
   /** The current {@link NodeList#item(int) index} in {@link #nodeList}. */
   private int nodeIndex;
@@ -33,8 +33,8 @@ class NodeValueCharIterator implements CharIterator {
   /**
    * The constructor.
    *
-   * @param nodeList is the {@link NodeList} containing the {@link Node}s with the {@link Node#getNodeValue()
-   *        values} to iterate char by char.
+   * @param nodeList is the {@link NodeList} containing the {@link Node}s with the {@link Node#getNodeValue() values} to
+   *        iterate char by char.
    */
   public NodeValueCharIterator(NodeList nodeList) {
 
@@ -45,8 +45,7 @@ class NodeValueCharIterator implements CharIterator {
   /**
    * The constructor.
    *
-   * @param singleNode is the single {@link Node} with the {@link Node#getNodeValue() value} to iterate char
-   *        by char.
+   * @param singleNode is the single {@link Node} with the {@link Node#getNodeValue() value} to iterate char by char.
    */
   public NodeValueCharIterator(Node singleNode) {
 

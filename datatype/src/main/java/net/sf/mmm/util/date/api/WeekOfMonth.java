@@ -6,7 +6,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * The enum contains the twelve months of a year in Gregorian calendar.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -27,13 +27,13 @@ public enum WeekOfMonth implements SimpleDatatype<Integer> {
   /** The according month. */
   LAST(5, "last");
 
-  private  final Integer value;
+  private final Integer value;
 
-  private  final String title;
+  private final String title;
 
   /**
    * The constructor.
-   * 
+   *
    * @param value - see {@link #getValue()}.
    * @param title - see {@link #toString()}.
    */
@@ -57,7 +57,7 @@ public enum WeekOfMonth implements SimpleDatatype<Integer> {
 
   /**
    * This method gets the {@link WeekOfMonth} for the given {@code value}.
-   * 
+   *
    * @param value is the {@link #getValue() value} of the requested {@link WeekOfMonth}.
    * @return the requested {@link WeekOfMonth} or {@code null} if no such {@link WeekOfMonth} exists.
    */

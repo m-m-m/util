@@ -42,7 +42,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 @Named(LineWrapper.CDI_NAME)
 public class DefaultLineWrapper extends AbstractLineWrapper {
 
-  private  HyphenatorBuilder hyphenatorBuilder;
+  private HyphenatorBuilder hyphenatorBuilder;
 
   /**
    * The constructor.
@@ -96,8 +96,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       for (int i = 0; i < columnStates.length; i++) {
         if (columnStates[i].width == TextColumnInfo.WIDTH_AUTO_ADJUST) {
           // better exception message?
-          throw new NlsIllegalArgumentException(Integer.valueOf(tableWidth), "tableInfo.width && columnInfo[" + i
-              + "].width");
+          throw new NlsIllegalArgumentException(Integer.valueOf(tableWidth),
+              "tableInfo.width && columnInfo[" + i + "].width");
         }
       }
       return;
@@ -236,7 +236,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       boolean todo = true;
       ColumnState[] columnStates = new ColumnState[columns.length];
       for (int i = 0; i < columns.length; i++) {
-        columnStates[i] = new ColumnState(columns[i].getText(), columns[i].getColumnInfo(), this.hyphenatorBuilder);
+        columnStates[i] = new ColumnState(columns[i].getText(), columns[i].getColumnInfo(),
+            this.hyphenatorBuilder);
       }
       autoAdjustWidthOfColumns(columnStates, tableInfo);
       assert (verifyWithOfColumns(columnStates, tableInfo));
@@ -480,8 +481,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    *
    * @param appendable is where to append to.
    * @param state is the current {@link ColumnState}.
-   * @param doIndentThisLine - {@code true} if the current cell should be {@link TextColumnInfo#getIndent()
-   *        indented}, {@code false} otherwise.
+   * @param doIndentThisLine - {@code true} if the current cell should be {@link TextColumnInfo#getIndent() indented},
+   *        {@code false} otherwise.
    * @param cellBuffer is the text to align and append.
    * @throws IOException if throw by the {@link Appendable}.
    */
@@ -586,17 +587,17 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    */
   protected static class TextSegment {
 
-    private  final String text;
+    private final String text;
 
-    private  final Hyphenator hyphenator;
+    private final Hyphenator hyphenator;
 
-    private  int startIndex;
+    private int startIndex;
 
-    private  int endIndex;
+    private int endIndex;
 
-    private  TextSegmentType type;
+    private TextSegmentType type;
 
-    private  Hyphenation hyphenatedWord;
+    private Hyphenation hyphenatedWord;
 
     /**
      * The constructor.
@@ -712,23 +713,23 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /** The {@link Hyphenator} to use. */
     private final Hyphenator hyphenator;
 
-    private  final BreakIterator breakIterator;
+    private final BreakIterator breakIterator;
 
-    private  int breakIteratorIndex;
+    private int breakIteratorIndex;
 
-    private  int segmentIndex;
+    private int segmentIndex;
 
-    private  int textIndex;
+    private int textIndex;
 
-    private  int width;
+    private int width;
 
-    private  boolean indent;
+    private boolean indent;
 
-    private  TextSegment currentSegment;
+    private TextSegment currentSegment;
 
-    private  TextSegment nextSegment;
+    private TextSegment nextSegment;
 
-    private  int subsequentNewlineCount;
+    private int subsequentNewlineCount;
 
     /**
      * The constructor.
@@ -750,9 +751,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
       this.breakIteratorIndex = 0;
       this.subsequentNewlineCount = 0;
       this.indent = false;
-      if ((columnInfo.getIndent() == null)
-          || ((columnInfo.getWidth() != TextColumnInfo.WIDTH_AUTO_ADJUST) && (columnInfo.getIndent().length() >= columnInfo
-              .getWidth()))) {
+      if ((columnInfo.getIndent() == null) || ((columnInfo.getWidth() != TextColumnInfo.WIDTH_AUTO_ADJUST)
+          && (columnInfo.getIndent().length() >= columnInfo.getWidth()))) {
         throw new NlsIllegalArgumentException(columnInfo.getIndent(), "TextColumnInfo.indent");
       }
       this.currentSegment = next(new TextSegment(text, this.hyphenator));
@@ -786,12 +786,11 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
     /**
      * This method gets the current number of subsequent newlines. If {@link #getCurrentSegment() current segment} is a
      * {@link TextSegmentType#NEWLINE}, this method will return the number of {@link TextSegmentType#NEWLINE} segments
-     * (including the current) that occurred since the last other segment. Otherwise it will always return
-     * {@code 0}.
+     * (including the current) that occurred since the last other segment. Otherwise it will always return {@code 0}.
      *
      * @return the subsequentNewlineCount the number of subsequent {@link TextSegmentType#NEWLINE} segments including
-     *         the {@link #getCurrentSegment() current segment} or {@code 0} if the {@link #getCurrentSegment()
-     *         current segment} is no {@link TextSegmentType#NEWLINE}.
+     *         the {@link #getCurrentSegment() current segment} or {@code 0} if the {@link #getCurrentSegment() current
+     *         segment} is no {@link TextSegmentType#NEWLINE}.
      */
     public int getSubsequentNewlineCount() {
 
@@ -803,8 +802,8 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
      * the {@link #getNextSegment() next segment} and the {@link #getNextSegment() next segment} is set to the next
      * determined segment.
      *
-     * @return {@code true} if a new {@link #getCurrentSegment() current segment} is available, {@code false}
-     *         if the entire text has been proceeded.
+     * @return {@code true} if a new {@link #getCurrentSegment() current segment} is available, {@code false} if the
+     *         entire text has been proceeded.
      */
     public boolean proceedTextSegment() {
 
@@ -977,11 +976,11 @@ public class DefaultLineWrapper extends AbstractLineWrapper {
    */
   protected static class CellBuffer {
 
-    private  final StringBuilder buffer;
+    private final StringBuilder buffer;
 
-    private  int maxLength;
+    private int maxLength;
 
-    private  int rest;
+    private int rest;
 
     /**
      * The constructor.

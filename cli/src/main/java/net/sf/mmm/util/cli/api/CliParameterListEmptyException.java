@@ -2,10 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
- * A {@link CliParameterListEmptyException} is thrown if {@link CliParser#parseParameters(String...)} is
- * called without a single parameter.
+ * A {@link CliParameterListEmptyException} is thrown if {@link CliParser#parseParameters(String...)} is called without
+ * a single parameter.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0

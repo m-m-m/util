@@ -7,7 +7,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * This interface bundles the dependencies for the POJO-introspection. It contains the required components.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0 (renamed, 1.1.0)
  */
@@ -15,14 +15,14 @@ public interface PojoDescriptorDependencies {
 
   /**
    * This method gets the {@link ReflectionUtil} instance to use.
-   * 
+   *
    * @return the {@link ReflectionUtil} to use.
    */
   ReflectionUtil getReflectionUtil();
 
   /**
    * This method gets the {@link CollectionReflectionUtil} instance to use.
-   * 
+   *
    * @return the {@link CollectionReflectionUtil} to use.
    */
   CollectionReflectionUtil getCollectionReflectionUtil();

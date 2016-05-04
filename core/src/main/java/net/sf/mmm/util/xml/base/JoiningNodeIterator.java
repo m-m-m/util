@@ -2,15 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.xml.base;
 
-import net.sf.mmm.util.xml.api.XmlCompareMode;
-
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import net.sf.mmm.util.xml.api.XmlCompareMode;
+
 /**
- * This class is used to {@link java.util.Iterator#next() iterate} the {@link Node}s of a {@link NodeList}.
- * Depending on the {@link XmlCompareMode} given at construction it automatically joins {@link Node}s of
- * according {@link Node#getNodeType() types} by returning them as a {@link org.w3c.dom.DocumentFragment}.
+ * This class is used to {@link java.util.Iterator#next() iterate} the {@link Node}s of a {@link NodeList}. Depending on
+ * the {@link XmlCompareMode} given at construction it automatically joins {@link Node}s of according
+ * {@link Node#getNodeType() types} by returning them as a {@link org.w3c.dom.DocumentFragment}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2

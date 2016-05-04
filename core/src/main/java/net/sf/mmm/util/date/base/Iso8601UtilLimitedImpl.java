@@ -12,8 +12,8 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.date.api.Iso8601UtilLimited} interface. It does
- * NOT use {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe. <br>
+ * This is the implementation of the {@link net.sf.mmm.util.date.api.Iso8601UtilLimited} interface. It does NOT use
+ * {@link java.text.SimpleDateFormat}. All methods of this class are fast and thread-safe. <br>
  *
  * @see Iso8601UtilImpl
  *
@@ -29,7 +29,7 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   /** The maximum month of the year. */
   protected static final int MAX_MONTH = 12;
 
-  private  static Iso8601UtilLimitedImpl instance;
+  private static Iso8601UtilLimitedImpl instance;
 
   /**
    * The constructor.
@@ -90,8 +90,8 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
    * @param year is the {@link java.util.Calendar#YEAR year}
    * @param month is the month (1-12).
    * @param day is the {@link java.util.Calendar#DAY_OF_MONTH day}.
-   * @param extended if {@code false} the basic date format ("yyyyMMdd") is used, if {@code true}
-   *        the extended date format ("yyyy-MM-dd") is used.
+   * @param extended if {@code false} the basic date format ("yyyyMMdd") is used, if {@code true} the extended date
+   *        format ("yyyy-MM-dd") is used.
    * @param buffer is where to append the formatted date.
    */
   public void formatDate(int year, int month, int day, boolean extended, Appendable buffer) {
@@ -168,8 +168,8 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
    * @param hours are the {@link java.util.Calendar#HOUR_OF_DAY hours}.
    * @param minutes are the {@link java.util.Calendar#MINUTE minutes}.
    * @param seconds are the {@link java.util.Calendar#SECOND seconds}.
-   * @param extended if {@code false} the basic time format ("HHmmss") is used, if {@code true} the
-   *        extended time format ("HH:mm:ss") is used.
+   * @param extended if {@code false} the basic time format ("HHmmss") is used, if {@code true} the extended time format
+   *        ("HH:mm:ss") is used.
    * @param buffer is where to append the formatted date.
    */
   public void formatTime(int hours, int minutes, int seconds, boolean extended, Appendable buffer) {
@@ -352,8 +352,8 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
    * This method reads two digits from the given {@code scanner}.
    *
    * @param scanner is the scanner potentially pointing to the digits.
-   * @return {@code -1} if the {@code scanner} does NOT point to a digit or the number represented
-   *         by the two digits consumed from the {@code scanner}.
+   * @return {@code -1} if the {@code scanner} does NOT point to a digit or the number represented by the two digits
+   *         consumed from the {@code scanner}.
    * @throws IllegalDateFormatException if the {@code scanner} only contained a single digit.
    */
   private int read2Digits(CharSequenceScanner scanner) throws IllegalDateFormatException {
@@ -370,7 +370,8 @@ public class Iso8601UtilLimitedImpl implements Iso8601UtilLimited {
   }
 
   /**
-   * This method parses the time (or timezone offset) from the given {@code scanner}. The format is {@code hh[[:]mm[[:]ss]]}.
+   * This method parses the time (or timezone offset) from the given {@code scanner}. The format is
+   * {@code hh[[:]mm[[:]ss]]}.
    *
    * @param scanner is the parser pointing to the time.
    * @return an int-array containing the hour, minute and second in that order.

@@ -16,8 +16,7 @@ import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 
 /**
- * This is the implementation of the {@link DataResource} interface for a resource that comes from an
- * {@link URL}.
+ * This is the implementation of the {@link DataResource} interface for a resource that comes from an {@link URL}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -33,7 +32,7 @@ public class UrlResource extends AbstractDataResource {
   /** The {@link #getSchemePrefix() scheme-prefix} for FTP. */
   public static final String SCHEME_PREFIX_FTP = ResourceUri.SCHEME_PREFIX_FTP;
 
-  private  final URL url;
+  private final URL url;
 
   /** The {@link FileUtilLimited} instance. */
   private final FileUtilLimited fileUtil;

@@ -6,9 +6,9 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.lang.api.CharIterator;
 
 /**
- * This is an implementation of the {@link CharIterator} interface that adapts a {@link CharIterator} such
- * that spaces are normalized.
- * 
+ * This is an implementation of the {@link CharIterator} interface that adapts a {@link CharIterator} such that spaces
+ * are normalized.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -35,7 +35,7 @@ public class SpaceNormalizingCharIterator implements CharIterator {
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link CharIterator} to adapt.
    */
   public SpaceNormalizingCharIterator(CharIterator delegate) {
@@ -45,10 +45,10 @@ public class SpaceNormalizingCharIterator implements CharIterator {
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the {@link CharIterator} to adapt.
-   * @param spaceFilter is the {@link CharFilter} that defines what is {@link CharFilter#accept(char)
-   *        accepted} as space. It needs to {@link CharFilter#accept(char) accept} at least ' '.
+   * @param spaceFilter is the {@link CharFilter} that defines what is {@link CharFilter#accept(char) accepted} as
+   *        space. It needs to {@link CharFilter#accept(char) accept} at least ' '.
    * @param trim - if {@code true} leading and trailing spaces are entirely consumed.
    */
   public SpaceNormalizingCharIterator(CharIterator delegate, CharFilter spaceFilter, boolean trim) {

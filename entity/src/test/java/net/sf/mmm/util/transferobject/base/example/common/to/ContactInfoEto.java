@@ -18,11 +18,11 @@ public class ContactInfoEto extends EntityTo<Long> implements ContactInfo {
 
   private static final long serialVersionUID = 1468867969942249329L;
 
-  private  String phone;
+  private String phone;
 
-  private  String email;
+  private String email;
 
-  private  String fax;
+  private String fax;
 
   /**
    * The constructor.

@@ -9,8 +9,8 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * This is the interface for a generic factory used to {@link #newInstance(Class) create new instances} of
  * {@link net.sf.mmm.util.pojo.api.Pojo}s. <br>
  * Typically a {@link net.sf.mmm.util.pojo.api.Pojo} has a public non-arg constructor. However there can be arbitrary
- * reasons why {@link Class#newInstance()} might NOT do it and you want some abstraction like this
- * interface. Here are just a few of them.
+ * reasons why {@link Class#newInstance()} might NOT do it and you want some abstraction like this interface. Here are
+ * just a few of them.
  * <ul>
  * <li>Reflection is NOT available (e.g. in GWT environments)</li>
  * <li>The provided {@link Class} is an {@link Class#isInterface() interface} such as {@link java.util.List}.</li>

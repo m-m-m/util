@@ -12,12 +12,13 @@ import net.sf.mmm.util.pojo.path.impl.function.PojoPathNamedFunctionToString;
 
 /**
  * This is the test-case for {@link PojoPathNavigatorImpl}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
 public class PojoPathNavigatorImplTest extends PojoPathNavigatorTest {
 
+  @Override
   protected PojoPathNavigator createNavigator() {
 
     PojoPathNavigatorImpl navigator = new PojoPathNavigatorImpl();

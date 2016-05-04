@@ -10,23 +10,23 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler. However it allows to
- * {@link #setCurrentIndex(int) set the current index} so the internal {@link #getBytes() buffer}-array can be
- * consumed externally and proceeded very fast. <br>
+ * {@link #setCurrentIndex(int) set the current index} so the internal {@link #getBytes() buffer}-array can be consumed
+ * externally and proceeded very fast. <br>
  * <b>ATTENTION:</b><br>
  * This class is NOT intended to be exposed. It should only be used internally by some class or component. <br>
- * 
+ *
  * @see java.nio.ByteBuffer#wrap(byte[], int, int)
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
 public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffer {
 
-  private  int currentIndex;
+  private int currentIndex;
 
   /**
    * The constructor.
-   * 
+   *
    * @param capacity is the {@code length} of the internal {@link #getBytes() buffer}.
    */
   public ByteArrayBufferImpl(int capacity) {
@@ -36,7 +36,7 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
 
   /**
    * The constructor.
-   * 
+   *
    * @param buffer is the internal {@link #getBytes() buffer}.
    */
   public ByteArrayBufferImpl(byte[] buffer) {
@@ -47,7 +47,7 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
 
   /**
    * The constructor.
-   * 
+   *
    * @param buffer is the internal {@link #getBytes() buffer}.
    * @param currentIndex is the {@link #getCurrentIndex() current index}.
    * @param maximumIndex is the {@link #getMaximumIndex() maximum index}.

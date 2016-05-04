@@ -9,7 +9,7 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * This is the interface for an async executor of a {@link Process}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -17,16 +17,18 @@ public interface AsyncProcessExecutor extends Future<Integer> {
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @return the {@link Process#waitFor() exit-code} of the process.
    */
+  @Override
   Integer get() throws InterruptedException, ExecutionException;
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @return the {@link Process#waitFor() exit-code} of the process.
    */
+  @Override
   Integer get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
 
 }

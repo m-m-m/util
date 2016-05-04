@@ -15,8 +15,7 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @author hohwille
  * @since 8.0.0
  */
-public interface WritableProperty<V>
-    extends Property<V>, AttributeWriteValue<V>, ReadableProperty<V> {
+public interface WritableProperty<V> extends Property<V>, AttributeWriteValue<V>, ReadableProperty<V> {
 
   /** Empty array instance. */
   WritableProperty<?>[] NO_PROPERTIES = new WritableProperty<?>[0];
@@ -41,8 +40,7 @@ public interface WritableProperty<V>
   /**
    * @see ValueValidator#validate(Object)
    *
-   * @return the {@link ValidationFailure} or {@code null} if the {@link #getValue() value} is {@link #isValid()
-   *         valid}.
+   * @return the {@link ValidationFailure} or {@code null} if the {@link #getValue() value} is {@link #isValid() valid}.
    */
   ValidationFailure validate();
 

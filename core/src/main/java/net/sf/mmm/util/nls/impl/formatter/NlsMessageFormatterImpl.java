@@ -95,16 +95,16 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
   /**
    * This inner class represents a segment out of the parsed message-pattern. <br>
    * E.g. if the message-pattern is "Hi {0} you have {1} items!" then it is parsed into two {@link PatternSegment}s. The
-   * first has a {@link #getPrefix() prefix} of {@code "Hi "} and {@link #getArgument() argument} of
-   * <code>{0}</code> and the second has {@code " you have "} as {@link #getPrefix() prefix} and
-   * {@link #getArgument() argument} of <code>{1}</code>. The rest of the pattern which is {@code " items!"} will
-   * be stored in {@link NlsMessageFormatterImpl#getSuffix() suffix}.
+   * first has a {@link #getPrefix() prefix} of {@code "Hi "} and {@link #getArgument() argument} of <code>{0}</code>
+   * and the second has {@code " you have "} as {@link #getPrefix() prefix} and {@link #getArgument() argument} of
+   * <code>{1}</code>. The rest of the pattern which is {@code " items!"} will be stored in
+   * {@link NlsMessageFormatterImpl#getSuffix() suffix}.
    */
   protected static class PatternSegment {
 
-    private  final String prefix;
+    private final String prefix;
 
-    private  final NlsArgument argument;
+    private final NlsArgument argument;
 
     /**
      * The constructor.

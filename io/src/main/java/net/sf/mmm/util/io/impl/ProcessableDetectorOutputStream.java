@@ -15,17 +15,17 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
 
 /**
  * This is the implementation of the {@link DetectorOutputStream}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 public class ProcessableDetectorOutputStream extends ProcessableDetectorStream implements DetectorOutputStream {
 
-  private  final WrapperOutputStream wrapperOutputStream;
+  private final WrapperOutputStream wrapperOutputStream;
 
   /**
    * The constructor.
-   * 
+   *
    * @param outputStream is the raw {@link OutputStream} to {@link #getStream() warp}.
    * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable metadata}.
    * @param provider is the {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this instance.
@@ -46,7 +46,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
 
   /**
    * This inner class is the actual wrapper stream.
-   * 
+   *
    * @see ProcessableDetectorOutputStream#getStream()
    */
   protected class WrapperOutputStream extends OutputStream implements DetectorStreamProcessor {
@@ -62,7 +62,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
 
     /**
      * The constructor.
-     * 
+     *
      * @param outputStream is the {@link OutputStream} to adapt.
      */
     public WrapperOutputStream(OutputStream outputStream) {
@@ -89,7 +89,7 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
 
     /**
      * This method flushes the internal {@link #bytes buffer}.
-     * 
+     *
      * @throws IOException if the underlying {@link OutputStream} caused such exception.
      */
     private void flushBuffer() throws IOException {
@@ -127,7 +127,9 @@ public class ProcessableDetectorOutputStream extends ProcessableDetectorStream i
       this.bytes[this.count++] = (byte) b;
     }
 
-    public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException {
+    @Override
+    public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos)
+        throws IOException {
 
       int arrayCount = buffer.getByteArrayCount();
       for (int i = 0; i < arrayCount; i++) {

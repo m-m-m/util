@@ -17,17 +17,16 @@ import net.sf.mmm.util.io.base.ByteArrayImpl;
 import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
- * This is the abstract base implementation of the {@link ProcessableByteArrayBuffer} interface for a
- * {@code byte[]}-Buffer that represents the concatenation of multiple {@link ByteArrayBufferImpl}s. It
- * has its own state (read-pointer) and does NOT modify a contained {@link ByteArrayBufferImpl buffer} when
- * reading. If one of the underlying {@link ByteArrayBufferImpl buffers} has been read to the
- * {@link ByteArrayBufferImpl#getMaximumIndex() end} this class steps to the next one in a rotating way until
- * the last buffer has been reached, that contains data that has NOT been read before. Further this class
- * allows to be {@link #fill(InputStream) (re)filled}. <br>
+ * This is the abstract base implementation of the {@link ProcessableByteArrayBuffer} interface for a {@code byte[]}
+ * -Buffer that represents the concatenation of multiple {@link ByteArrayBufferImpl}s. It has its own state
+ * (read-pointer) and does NOT modify a contained {@link ByteArrayBufferImpl buffer} when reading. If one of the
+ * underlying {@link ByteArrayBufferImpl buffers} has been read to the {@link ByteArrayBufferImpl#getMaximumIndex() end}
+ * this class steps to the next one in a rotating way until the last buffer has been reached, that contains data that
+ * has NOT been read before. Further this class allows to be {@link #fill(InputStream) (re)filled}. <br>
  * <b>NOTE:</b><br>
- * This class is NOT public visible, because further releases might break it's compatibility. Feel free to
- * review and give feedback on the mailing list if you want to use it directly.
- * 
+ * This class is NOT public visible, because further releases might break it's compatibility. Feel free to review and
+ * give feedback on the mailing list if you want to use it directly.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -58,14 +57,14 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   private int currentBufferMax;
 
   /**
-   * The value of
-   * <code>{@link #buffers}[{@link #buffersIndex}].{@link ByteArrayBufferImpl#getBytes() getBytes()}</code> .
+   * The value of <code>{@link #buffers}[{@link #buffersIndex}].{@link ByteArrayBufferImpl#getBytes() getBytes()}</code>
+   * .
    */
   private byte[] currentBufferBytes;
 
   /**
    * The constructor.
-   * 
+   *
    * @param buffers are the buffers to concat.
    */
   public AbstractByteArrayBufferBuffer(ByteArrayBufferImpl... buffers) {
@@ -92,7 +91,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
 
   /**
    * The constructor used to copy from the given {@code template}.
-   * 
+   *
    * @param template is the buffer to copy.
    */
   protected AbstractByteArrayBufferBuffer(AbstractByteArrayBufferBuffer template) {
@@ -109,7 +108,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
 
   /**
    * This method gets the current {@link ByteArrayBufferImpl}.
-   * 
+   *
    * @return the current {@link ByteArrayBufferImpl}.
    */
   protected ByteArrayBuffer getCurrentBuffer() {
@@ -119,7 +118,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
 
   /**
    * This method gets the current index in the {@link #getCurrentBuffer() current buffer}.
-   * 
+   *
    * @return the position in the {@link #getCurrentBuffer() current buffer}.
    */
   protected int getCurrentBufferIndex() {
@@ -128,14 +127,13 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   }
 
   /**
-   * This method switches the {@link #getCurrentBuffer() current buffer} to the next available buffer. If this
-   * method is called when the last buffer has already been reached, the {@link #getCurrentBufferIndex()
-   * index} will be set to
-   * <code>{@link #getCurrentBuffer()}.{@link ByteArrayBufferImpl#getMaximumIndex() getMaximumIndex()}+1</code>
-   * so the end of this buffer is reached and {@link #hasNext()} will return {@code false}.
-   * 
-   * @return {@code true} if there was a next buffer to switch to, {@code false} if the
-   *         {@link #getCurrentBuffer() current buffer} is already the last one.
+   * This method switches the {@link #getCurrentBuffer() current buffer} to the next available buffer. If this method is
+   * called when the last buffer has already been reached, the {@link #getCurrentBufferIndex() index} will be set to
+   * <code>{@link #getCurrentBuffer()}.{@link ByteArrayBufferImpl#getMaximumIndex() getMaximumIndex()}+1</code> so the
+   * end of this buffer is reached and {@link #hasNext()} will return {@code false}.
+   *
+   * @return {@code true} if there was a next buffer to switch to, {@code false} if the {@link #getCurrentBuffer()
+   *         current buffer} is already the last one.
    */
   protected boolean nextBuffer() {
 
@@ -250,7 +248,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
 
   /**
    * This method synchronizes the buffer with the given {@code master}.
-   * 
+   *
    * @param master is the buffer this buffer was created from.
    */
   protected void sync(AbstractByteArrayBufferBuffer master) {
@@ -268,13 +266,13 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
   }
 
   /**
-   * This method fills this buffer using the given {@code inputStream}. If the buffer is already filled,
-   * this method will have no effect and return {@code false}.
-   * 
+   * This method fills this buffer using the given {@code inputStream}. If the buffer is already filled, this method
+   * will have no effect and return {@code false}.
+   *
    * @param inputStream is the {@link InputStream} providing the data to fill this buffer with.
    * @throws IOException if caused by the {@code inputStream} whilst reading.
-   * @return {@code true} if the end of the stream was encountered while (re)filling this buffer,
-   *         {@code false} otherwise.
+   * @return {@code true} if the end of the stream was encountered while (re)filling this buffer, {@code false}
+   *         otherwise.
    */
   protected boolean fill(InputStream inputStream) throws IOException {
 

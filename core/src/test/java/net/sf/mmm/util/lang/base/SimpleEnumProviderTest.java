@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
@@ -13,9 +16,6 @@ import net.sf.mmm.util.lang.api.EnumTypeWithCategory;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated;
 import net.sf.mmm.util.nls.api.NlsAccess;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link SimpleEnumProvider}.
@@ -118,14 +118,14 @@ public class SimpleEnumProviderTest extends Assert {
 
   // totally incomplete - just for testing...
   @SuppressWarnings("all")
-  public static enum IncompleteCountry implements EnumTypeWithCategory<String, Continent>, AttributeReadDeprecated {
+  public static enum IncompleteCountry
+      implements EnumTypeWithCategory<String, Continent>, AttributeReadDeprecated {
 
     GERMANY(Continent.EUROPE, "DE"),
 
     FRANCE(Continent.EUROPE, "FR"),
 
-    @Deprecated
-    YUGOSLAVIA(Continent.EUROPE, "IE"),
+    @Deprecated YUGOSLAVIA(Continent.EUROPE, "IE"),
 
     USA(Continent.AMERICA, "US"),
 
@@ -135,9 +135,9 @@ public class SimpleEnumProviderTest extends Assert {
 
     AUSTRALIA(Continent.AUSTRALIA, "AU");
 
-    private  final String isoCode;
+    private final String isoCode;
 
-    private  final Continent continent;
+    private final Continent continent;
 
     /**
      * The constructor.

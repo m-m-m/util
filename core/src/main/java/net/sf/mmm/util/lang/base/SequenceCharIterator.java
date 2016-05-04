@@ -7,13 +7,13 @@ import net.sf.mmm.util.lang.api.CharIterator;
 /**
  * This is an implementation of the {@link CharIterator} interface that simply iterates a
  * {@link #SequenceCharIterator(CharSequence) given} {@link CharSequence}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 public class SequenceCharIterator implements CharIterator {
 
-  private  final CharSequence sequence;
+  private final CharSequence sequence;
 
   /** The {@link CharSequence#length() length} of the {@link #sequence}. */
   private final int length;
@@ -23,7 +23,7 @@ public class SequenceCharIterator implements CharIterator {
 
   /**
    * The constructor.
-   * 
+   *
    * @param sequence the {@link CharSequence} to {@link #next() iterate} char by char.
    */
   public SequenceCharIterator(CharSequence sequence) {

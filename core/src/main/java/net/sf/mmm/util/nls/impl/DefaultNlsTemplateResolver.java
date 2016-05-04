@@ -28,12 +28,12 @@ import net.sf.mmm.util.nls.base.NlsResourceBundleProvider;
  */
 @Named(NlsTemplateResolver.CDI_NAME)
 @Singleton
-public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplateResolver implements
-    NlsResourceBundleProvider {
+public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplateResolver
+    implements NlsResourceBundleProvider {
 
-  private  NlsResourceBundleLocator resourceBundleFinder;
+  private NlsResourceBundleLocator resourceBundleFinder;
 
-  private  NlsReversedResourceBundle[] nlsBundles;
+  private NlsReversedResourceBundle[] nlsBundles;
 
   /**
    * The constructor.

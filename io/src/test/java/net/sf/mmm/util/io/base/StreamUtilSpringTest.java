@@ -7,7 +7,7 @@ import net.sf.mmm.util.io.api.StreamUtil;
 
 /**
  * This is the test-case for {@link StreamUtil} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class StreamUtilSpringTest extends StreamUtilTest {

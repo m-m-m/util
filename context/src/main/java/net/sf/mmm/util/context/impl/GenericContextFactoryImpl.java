@@ -18,7 +18,7 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 
 /**
  * This is the implementation of {@link GenericContextFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
@@ -26,7 +26,7 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
 @Named(GenericContextFactory.CDI_NAME)
 public class GenericContextFactoryImpl extends AbstractGenericContextFactory {
 
-  private  ComposedValueConverter composedValueConverter;
+  private ComposedValueConverter composedValueConverter;
 
   /**
    * The constructor.

@@ -4,7 +4,7 @@ package net.sf.mmm.util.http;
 
 /**
  * This class represents an HTTP request message.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class HttpRequest extends HttpMessage {
@@ -39,9 +39,9 @@ public class HttpRequest extends HttpMessage {
   /** the M-SEARCH method */
   public static final String METHOD_M_SEARCH = "M-SEARCH";
 
-  private  String method;
+  private String method;
 
-  private  String uri;
+  private String uri;
 
   /**
    * The constructor.
@@ -55,9 +55,8 @@ public class HttpRequest extends HttpMessage {
 
   /**
    * This method gets the HTTP method to use. <br>
-   * The typical methods are {@link #METHOD_GET GET}, {@link #METHOD_HEAD HEAD},
-   * {@link #METHOD_POST POST}.
-   * 
+   * The typical methods are {@link #METHOD_GET GET}, {@link #METHOD_HEAD HEAD}, {@link #METHOD_POST POST}.
+   *
    * @return the HTTP method.
    */
   public String getMethod() {
@@ -67,7 +66,7 @@ public class HttpRequest extends HttpMessage {
 
   /**
    * This method sets the HTTP {@link #getMethod() method} to use.
-   * 
+   *
    * @param httpMethod the HTTP method to set.
    */
   public void setMethod(String httpMethod) {
@@ -77,7 +76,7 @@ public class HttpRequest extends HttpMessage {
 
   /**
    * This method gets the requested URI (e.g. "/").
-   * 
+   *
    * @return the requested URI.
    */
   public String getUri() {
@@ -87,9 +86,9 @@ public class HttpRequest extends HttpMessage {
 
   /**
    * This method sets the requested URI.
-   * 
+   *
    * @see #getUri()
-   * 
+   *
    * @param requestUri the uri to set
    */
   public void setUri(String requestUri) {

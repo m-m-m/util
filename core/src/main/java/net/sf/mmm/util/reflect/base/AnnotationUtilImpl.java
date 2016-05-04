@@ -21,9 +21,9 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 
 /**
  * This class is a collection of utility functions for dealing with {@link Annotation annotations}.
- * 
+ *
  * @see #getInstance()
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -31,9 +31,9 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 @Named(AnnotationUtil.CDI_NAME)
 public class AnnotationUtilImpl implements AnnotationUtil {
 
-  private  static AnnotationUtilImpl instance;
+  private static AnnotationUtilImpl instance;
 
-  private  ReflectionUtil reflectionUtil;
+  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -47,7 +47,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
    * This method gets the singleton instance of this {@link AnnotationUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
-   * 
+   *
    * @return the singleton instance.
    */
   public static AnnotationUtilImpl getInstance() {
@@ -66,7 +66,7 @@ public class AnnotationUtilImpl implements AnnotationUtil {
 
   /**
    * This method gets the {@link ReflectionUtilImpl} used by this {@link AnnotationUtilImpl} instance.
-   * 
+   *
    * @return the {@link ReflectionUtilImpl} to use.
    */
   protected ReflectionUtil getReflectionUtil() {
@@ -136,22 +136,20 @@ public class AnnotationUtilImpl implements AnnotationUtil {
   }
 
   /**
-   * This method gets the first {@link Class#getAnnotation(Class) annotation} of the type given by
-   * {@code annotation} in the {@link Class#getInterfaces() hierarchy} of the given
-   * {@code annotatedInterface}. <br>
-   * This method is only useful if the given {@code annotation} is a {@link #isRuntimeAnnotation(Class)
-   * runtime annotation} that is {@link #isAnnotationForType(Class, ElementType) applicable} for
-   * {@link ElementType#TYPE classes}.
-   * 
+   * This method gets the first {@link Class#getAnnotation(Class) annotation} of the type given by {@code annotation} in
+   * the {@link Class#getInterfaces() hierarchy} of the given {@code annotatedInterface}. <br>
+   * This method is only useful if the given {@code annotation} is a {@link #isRuntimeAnnotation(Class) runtime
+   * annotation} that is {@link #isAnnotationForType(Class, ElementType) applicable} for {@link ElementType#TYPE
+   * classes}.
+   *
    * @param <A> is the type of the requested annotation.
-   * @param annotatedType is the type potentially implementing an interface annotated with the given
-   *        {@code annotation}. This should NOT be an {@link Class#isPrimitive() primitive},
-   *        {@link Class#isArray() array}, {@link Class#isEnum() enum}, or {@link Class#isAnnotation()
-   *        annotation}.
+   * @param annotatedType is the type potentially implementing an interface annotated with the given {@code annotation}.
+   *        This should NOT be an {@link Class#isPrimitive() primitive}, {@link Class#isArray() array},
+   *        {@link Class#isEnum() enum}, or {@link Class#isAnnotation() annotation}.
    * @param annotation is the type of the requested annotation.
-   * @return the requested annotation or {@code null} if neither the {@code annotatedInterface} nor
-   *         one of its {@link Class#getInterfaces() super-interfaces} are {@link Class#getAnnotation(Class)
-   *         annotated} with the given {@code annotation}.
+   * @return the requested annotation or {@code null} if neither the {@code annotatedInterface} nor one of its
+   *         {@link Class#getInterfaces() super-interfaces} are {@link Class#getAnnotation(Class) annotated} with the
+   *         given {@code annotation}.
    */
   private <A extends Annotation> A getInterfacesAnnotation(Class<?> annotatedType, Class<A> annotation) {
 

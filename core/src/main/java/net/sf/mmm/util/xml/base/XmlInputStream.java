@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 
 /**
  * This class is an input-stream that detects the encoding from the potential XML-header of a stream.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
@@ -39,11 +39,10 @@ final class XmlInputStream extends InputStream {
 
   /**
    * The constructor.
-   * 
+   *
    * @param delegate is the input-stream to adapt.
    * @param defaultCharset is the {@link Charset} used if NO encoding was specified via an XML header.
-   * @throws IOException if an I/O error was caused by {@code delegate} when trying to read the XML
-   *         header.
+   * @throws IOException if an I/O error was caused by {@code delegate} when trying to read the XML header.
    */
   public XmlInputStream(InputStream delegate, Charset defaultCharset) throws IOException {
 
@@ -102,7 +101,7 @@ final class XmlInputStream extends InputStream {
 
   /**
    * This method gets the {@link Charset} that was detected.
-   * 
+   *
    * @return the charset.
    */
   public Charset getCharset() {

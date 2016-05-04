@@ -7,9 +7,9 @@ import java.util.UUID;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a factory used to create {@link UUID}s. There can be different implementations
- * for the various {@link UUID#variant() variants} and {@link UUID#version() versions} of {@link UUID}s.
- * 
+ * This is the interface for a factory used to create {@link UUID}s. There can be different implementations for the
+ * various {@link UUID#variant() variants} and {@link UUID#version() versions} of {@link UUID}s.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
@@ -21,7 +21,7 @@ public interface UuidFactory {
 
   /**
    * This method creates a new {@link UUID}.
-   * 
+   *
    * @return the new {@link UUID}.
    */
   UUID createUuid();

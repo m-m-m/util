@@ -55,9 +55,8 @@ public class NlsBundleHelper extends AbstractLoggableObject {
     if (simpleName.endsWith(NlsBundle.INTERFACE_NAME_SUFFIX)) {
       simpleName = simpleName.substring(0, simpleName.length() - NlsBundle.INTERFACE_NAME_SUFFIX.length());
     } else {
-      getLogger().error(
-          "Illegal NlsBundle interface '" + nlsBundleInterface.getName() + "': has to end with the suffix '"
-              + NlsBundle.INTERFACE_NAME_SUFFIX + "'.");
+      getLogger().error("Illegal NlsBundle interface '" + nlsBundleInterface.getName()
+          + "': has to end with the suffix '" + NlsBundle.INTERFACE_NAME_SUFFIX + "'.");
     }
     return new ClassName(nlsBundleInterface.getPackage().getName(), simpleName);
   }
@@ -122,10 +121,10 @@ public class NlsBundleHelper extends AbstractLoggableObject {
    * This method determines if the given {@link Method} is a regular {@link NlsBundle}-method.
    *
    * @param method the {@link Method} to check.
-   * @param ignoreIllegalMethods - {@code true} if illegal methods (non NlsBundleMethods other than those defined
-   *        by {@link Object}) should be ignored, {@code false} if they should cause an exception.
-   * @return {@code true} if the given {@link Method} is a legal {@link NlsBundle} method, {@code false}
-   *         otherwise (e.g. for {@code toString()}).
+   * @param ignoreIllegalMethods - {@code true} if illegal methods (non NlsBundleMethods other than those defined by
+   *        {@link Object}) should be ignored, {@code false} if they should cause an exception.
+   * @return {@code true} if the given {@link Method} is a legal {@link NlsBundle} method, {@code false} otherwise (e.g.
+   *         for {@code toString()}).
    */
   public boolean isNlsBundleMethod(Method method, boolean ignoreIllegalMethods) {
 

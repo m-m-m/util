@@ -13,7 +13,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
 
 /**
  * This is the implementation of {@link NlsBundleFactory}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -21,7 +21,7 @@ import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
 @Singleton
 public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
 
-  private  NlsMessageFactory messageFactory;
+  private NlsMessageFactory messageFactory;
 
   /**
    * The constructor.
@@ -33,7 +33,7 @@ public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
 
   /**
    * The constructor.
-   * 
+   *
    * @param classLoader is the {@link ClassLoader} to use.
    */
   public NlsBundleFactoryImpl(ClassLoader classLoader) {

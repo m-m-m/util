@@ -22,11 +22,11 @@ public class ResourceUriImpl implements ResourceUri {
    */
   private static final Pattern SCHEME_PATTERN = Pattern.compile("([a-zA-Z][a-zA-Z0-9\\.\\-+]+:(//)?)(.*)");
 
-  private  final String uri;
+  private final String uri;
 
-  private  final String schemePrefix;
+  private final String schemePrefix;
 
-  private  final String path;
+  private final String path;
 
   /**
    * The constructor.

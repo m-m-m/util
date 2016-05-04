@@ -7,7 +7,7 @@ import net.sf.mmm.util.file.api.FileUtil;
 
 /**
  * This is the test-case for {@link FileUtil} configured using spring.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public class FileUtilSpringTest extends FileUtilTest {

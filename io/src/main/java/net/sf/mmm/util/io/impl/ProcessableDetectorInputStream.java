@@ -14,17 +14,17 @@ import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.io.api.DetectorOutputStream}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 public class ProcessableDetectorInputStream extends ProcessableDetectorStream implements DetectorInputStream {
 
-  private  final WrapperInputStream wrapperInputStream;
+  private final WrapperInputStream wrapperInputStream;
 
   /**
    * The constructor.
-   * 
+   *
    * @param inputStream is the raw {@link InputStream} to {@link #getStream() warp}.
    * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable metadata}.
    * @param provider is the {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this instance.
@@ -45,7 +45,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
 
   /**
    * This inner class is the actual wrapper stream.
-   * 
+   *
    * @see ProcessableDetectorInputStream#getStream()
    */
   protected class WrapperInputStream extends InputStream implements DetectorStreamProcessor {
@@ -63,7 +63,7 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
 
     /**
      * The constructor.
-     * 
+     *
      * @param inputStream is the {@link InputStream} to adapt.
      */
     public WrapperInputStream(InputStream inputStream) {
@@ -128,11 +128,11 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
     }
 
     /**
-     * This method tries to ensure that the internal buffer has at least the given number of bytes available.
-     * If less bytes are available, the buffer is filled up accordingly using the underlying stream. <br>
+     * This method tries to ensure that the internal buffer has at least the given number of bytes available. If less
+     * bytes are available, the buffer is filled up accordingly using the underlying stream. <br>
      * <b>ATTENTION:</b><br>
      * If EOS is hit, the requested buffer size can NOT be ensured.
-     * 
+     *
      * @param requiredBufferLength is the desired number of bytes for the buffer.
      * @throws IOException if an I/O error occurred.
      */
@@ -168,7 +168,9 @@ public class ProcessableDetectorInputStream extends ProcessableDetectorStream im
       }
     }
 
-    public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos) throws IOException {
+    @Override
+    public void process(DetectorStreamBuffer buffer, Map<String, Object> metadata, boolean eos)
+        throws IOException {
 
       if (this.endOfStream) {
         // throw new NlsIllegalStateException();

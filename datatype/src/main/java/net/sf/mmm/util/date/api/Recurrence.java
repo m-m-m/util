@@ -2,12 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.api;
 
-
 /**
- * This is the interface for a datatype representing the recurrence of an event
- * or appointment. <br>
- * In addition to the method specification here are some examples to get started
- * easily:
+ * This is the interface for a datatype representing the recurrence of an event or appointment. <br>
+ * In addition to the method specification here are some examples to get started easily:
  * <table border="1">
  * <tr>
  * <th>example</th>
@@ -80,7 +77,7 @@ package net.sf.mmm.util.date.api;
  * <td>{@link WeekOfMonth#SECOND}</td>
  * </tr>
  * </table>
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -88,57 +85,47 @@ public interface Recurrence {
 
   /**
    * This method gets the {@link DateUnit} of this {@link Recurrence}.
-   * 
+   *
    * @see #getStep()
-   * 
+   *
    * @return the {@link DateUnit}.
    */
   DateUnit getUnit();
 
   /**
-   * This method gets the step of this {@link Recurrence}. The
-   * {@link Recurrence} will happen every {@link #getStep() step}
-   * {@link #getUnit() units} (e.g. every day or every 2 weeks). The returned
-   * value has to be greater or equal to {@code 1}.
-   * 
+   * This method gets the step of this {@link Recurrence}. The {@link Recurrence} will happen every {@link #getStep()
+   * step} {@link #getUnit() units} (e.g. every day or every 2 weeks). The returned value has to be greater or equal to
+   * {@code 1}.
+   *
    * @return the step.
    */
   int getStep();
 
   /**
-   * This method gets the {@link WeekdaySet} containing the
-   * {@link net.sf.mmm.util.date.api.Weekday}s of the recurrence. This
-   * is used as a filter to match only for particular
-   * {@link net.sf.mmm.util.date.api.Weekday}s. The default is
-   * {@link WeekdaySet#ALL}. This method is ignored for {@link DateUnit#WEEK
-   * weekly} {@link Recurrence} as it would NOT make any sense. <br>
+   * This method gets the {@link WeekdaySet} containing the {@link net.sf.mmm.util.date.api.Weekday}s of the recurrence.
+   * This is used as a filter to match only for particular {@link net.sf.mmm.util.date.api.Weekday}s. The default is
+   * {@link WeekdaySet#ALL}. This method is ignored for {@link DateUnit#WEEK weekly} {@link Recurrence} as it would NOT
+   * make any sense. <br>
    * <b>ATTENTION:</b><br>
-   * If {@link #getUnit() unit} is {@link DateUnit#DAY daily} recurrences that
-   * do not
-   * {@link WeekdaySet#contains(net.sf.mmm.util.date.api.Weekday)
-   * match} will be omitted, while otherwise the closest match will be used. If
-   * it is {@link DateUnit#MONTH monthly} or {@link DateUnit#YEAR yearly} it
-   * will recurre on the <em>first</em> match of the weekdays according to the
-   * value of {@link #getWeekOfMonth()}.
-   * 
+   * If {@link #getUnit() unit} is {@link DateUnit#DAY daily} recurrences that do not
+   * {@link WeekdaySet#contains(net.sf.mmm.util.date.api.Weekday) match} will be omitted, while otherwise the closest
+   * match will be used. If it is {@link DateUnit#MONTH monthly} or {@link DateUnit#YEAR yearly} it will recurre on the
+   * <em>first</em> match of the weekdays according to the value of {@link #getWeekOfMonth()}.
+   *
    * @return the {@link WeekdaySet} or {@code null}.
    */
   WeekdaySet getWeekdays();
 
   /**
-   * This method gets the {@link WeekOfMonth} of a {@link DateUnit#MONTH
-   * monthly} or {@link DateUnit#YEAR yearly} recurrence. By default (if this
-   * method returns {@code null} and {@link #getWeekdays()} returns
-   * {@link WeekdaySet#ALL}) such recurrence always takes place on a fixed day
-   * of the month based on the initial occurrence. However, to specify a
-   * {@link DateUnit#MONTH monthly} or {@link DateUnit#YEAR yearly}
-   * {@link Recurrence} taking place on a specific {@link #getWeekdays() day of
-   * the week} this method can return a value identifying the week within the
-   * month (e.g. "on <b>first</b> Friday every month", or
-   * "on <b>last</b> weekday every month"). This method is ignored if this
-   * {@link #getUnit() is} NOT a {@link DateUnit#MONTH monthly} or
-   * {@link DateUnit#YEAR yearly} {@link Recurrence}.
-   * 
+   * This method gets the {@link WeekOfMonth} of a {@link DateUnit#MONTH monthly} or {@link DateUnit#YEAR yearly}
+   * recurrence. By default (if this method returns {@code null} and {@link #getWeekdays()} returns
+   * {@link WeekdaySet#ALL}) such recurrence always takes place on a fixed day of the month based on the initial
+   * occurrence. However, to specify a {@link DateUnit#MONTH monthly} or {@link DateUnit#YEAR yearly} {@link Recurrence}
+   * taking place on a specific {@link #getWeekdays() day of the week} this method can return a value identifying the
+   * week within the month (e.g. "on <b>first</b> Friday every month", or "on <b>last</b> weekday every month"). This
+   * method is ignored if this {@link #getUnit() is} NOT a {@link DateUnit#MONTH monthly} or {@link DateUnit#YEAR
+   * yearly} {@link Recurrence}.
+   *
    * @return the {@link WeekOfMonth} or {@code null}.
    */
   WeekOfMonth getWeekOfMonth();

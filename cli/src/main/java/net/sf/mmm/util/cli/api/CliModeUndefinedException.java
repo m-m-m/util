@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.cli.api;
 
-
 /**
  * A {@link CliModeUndefinedException} is thrown if a {@link CliOption} or {@link CliArgument} defines a
  * {@link CliOption#mode() mode} that is NOT {@link CliMode defined}.
@@ -21,8 +20,8 @@ public class CliModeUndefinedException extends CliException {
    * The constructor.
    *
    * @param mode is the undefined mode.
-   * @param annotation is the object representing the {@link CliOption} or {@link CliArgument} that used the
-   *        undefined mode.
+   * @param annotation is the object representing the {@link CliOption} or {@link CliArgument} that used the undefined
+   *        mode.
    */
   public CliModeUndefinedException(String mode, Object annotation) {
 

@@ -10,17 +10,17 @@ import net.sf.mmm.util.io.api.DetectorStream;
 
 /**
  * This is the abstract base implementation of a {@link DetectorStream}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
 public abstract class AbstractDetectorStream implements DetectorStream {
 
-  private  final Map<String, Object> mutableMetadata;
+  private final Map<String, Object> mutableMetadata;
 
-  private  final Map<String, Object> metadata;
+  private final Map<String, Object> metadata;
 
-  private  boolean done;
+  private boolean done;
 
   /**
    * The constructor.
@@ -32,7 +32,7 @@ public abstract class AbstractDetectorStream implements DetectorStream {
 
   /**
    * The constructor.
-   * 
+   *
    * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable metadata}.
    */
   public AbstractDetectorStream(Map<String, Object> mutableMetadata) {
@@ -51,7 +51,7 @@ public abstract class AbstractDetectorStream implements DetectorStream {
 
   /**
    * This method gets the mutable {@link #getMetadata() Metadata}.
-   * 
+   *
    * @return the internal {@link #getMetadata() Metadata}-Map that is mutable.
    */
   protected Map<String, Object> getMutableMetadata() {

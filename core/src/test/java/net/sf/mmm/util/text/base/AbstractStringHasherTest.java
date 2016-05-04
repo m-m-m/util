@@ -2,15 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.base;
 
-import net.sf.mmm.test.TestValues;
-import net.sf.mmm.util.text.api.StringHasher;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import net.sf.mmm.test.TestValues;
+import net.sf.mmm.util.text.api.StringHasher;
+
 /**
  * This is the abstract base class for test-cases of {@link StringHasher} implementations.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
@@ -18,15 +18,14 @@ public abstract class AbstractStringHasherTest {
 
   /**
    * This method gets the {@link StringHasher} to test.
-   * 
+   *
    * @return the {@link StringHasher} to test.
    */
   protected abstract StringHasher getStringHasher();
 
   /**
-   * This method performs arbitrary checks to verify consistency of the various methods of a
-   * {@link StringHasher}.
-   * 
+   * This method performs arbitrary checks to verify consistency of the various methods of a {@link StringHasher}.
+   *
    * @param hasher is the {@link StringHasher} to test.
    * @param string is a reasonable test-string.
    */
@@ -64,8 +63,8 @@ public abstract class AbstractStringHasherTest {
   }
 
   /**
-   * This method performs general {@link #check(StringHasher, String) checks} to verify the
-   * {@link #getStringHasher() hasher}.
+   * This method performs general {@link #check(StringHasher, String) checks} to verify the {@link #getStringHasher()
+   * hasher}.
    */
   @Test
   public void testHasher() {

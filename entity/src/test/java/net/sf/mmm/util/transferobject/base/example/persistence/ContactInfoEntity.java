@@ -19,13 +19,13 @@ public class ContactInfoEntity extends AbstractEntity<Long> implements ContactIn
 
   private static final long serialVersionUID = 1468867969942249329L;
 
-  private  String phone;
+  private String phone;
 
-  private  String email;
+  private String email;
 
-  private  String fax;
+  private String fax;
 
-  private  String type;
+  private String type;
 
   /**
    * The constructor.

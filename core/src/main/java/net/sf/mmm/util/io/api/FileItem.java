@@ -3,8 +3,8 @@
 package net.sf.mmm.util.io.api;
 
 /**
- * This is the interface for a {@link java.io.File}. This abstraction is required as abstraction since a
- * web-client cannot support {@link java.io.File}.
+ * This is the interface for a {@link java.io.File}. This abstraction is required as abstraction since a web-client
+ * cannot support {@link java.io.File}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
@@ -12,8 +12,8 @@ package net.sf.mmm.util.io.api;
 public interface FileItem {
 
   /**
-   * @return the unique ID of the file. This can be the absolute path of the filesystem or the ID of a BLOB in
-   *         a database.
+   * @return the unique ID of the file. This can be the absolute path of the filesystem or the ID of a BLOB in a
+   *         database.
    */
   Object getId();
 

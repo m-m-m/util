@@ -48,7 +48,7 @@ import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTypeShort;
 @Named
 public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
 
-  private  List<? extends NlsFormatterPlugin<?>> formatters;
+  private List<? extends NlsFormatterPlugin<?>> formatters;
 
   /**
    * The constructor.

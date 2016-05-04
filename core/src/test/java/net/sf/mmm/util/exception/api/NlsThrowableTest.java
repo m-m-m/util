@@ -7,15 +7,15 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.test.SerializationHelper;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.nls.base.MyResourceBundle;
 import net.sf.mmm.util.session.api.UserSessionAccess;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.slf4j.LoggerFactory;
 
 /**
  * This is the test-case for {@link net.sf.mmm.util.exception.api.NlsException}.
@@ -55,8 +55,8 @@ public class NlsThrowableTest extends Assert {
     pw.flush();
     String expected = sw.toString();
     assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
-    LoggerFactory.getLogger(NlsThrowableTest.class).error(
-        "This is a test and should contain the UUID and code of the exception", e);
+    LoggerFactory.getLogger(NlsThrowableTest.class)
+        .error("This is a test and should contain the UUID and code of the exception", e);
   }
 
   /**
@@ -66,7 +66,11 @@ public class NlsThrowableTest extends Assert {
   public void testNlsException() {
 
     String source = "bad boy";
-    NlsException e = new NlsException(NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {};
+    NlsException e = new NlsException(NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {
+
+      /** TODO: javadoc. */
+      private static final long serialVersionUID = 1L;
+    };
     String message = "NullPointerException caused by \"" + source + "\"!";
     assertEquals(message, e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
     String messageDe = "NullZeigerAusnahme verursacht durch \"" + source + "\"!";
@@ -91,12 +95,13 @@ public class NlsThrowableTest extends Assert {
     String value = "value";
     Class type = String.class;
     NlsParseException parseException = new NlsParseException(value, type);
-    assertEquals("Failed to parse \"" + value + "\" as value of the type \"" + type.getName() + "\"!", parseException
-        .getNlsMessage().getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
+    assertEquals("Failed to parse \"" + value + "\" as value of the type \"" + type.getName() + "\"!",
+        parseException.getNlsMessage().getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
     String source = "source";
     parseException = new NlsParseException(value, type, source);
-    assertEquals("Failed to parse \"" + value + "\" from \"" + source + "\" as value of the type \"" + type.getName()
-        + "\"!", parseException.getNlsMessage().getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
+    assertEquals("Failed to parse \"" + value + "\" from \"" + source + "\" as value of the type \""
+        + type.getName() + "\"!",
+        parseException.getNlsMessage().getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
   }
 
   /**
@@ -106,7 +111,11 @@ public class NlsThrowableTest extends Assert {
   public void testNlsRuntimeException() {
 
     String source = "bad boy";
-    NlsRuntimeException e = new NlsRuntimeException(NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {
+    NlsRuntimeException e = new NlsRuntimeException(
+        NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {
+
+      /** TODO: javadoc. */
+      private static final long serialVersionUID = 1L;
 
       @Override
       public String getCode() {

@@ -16,6 +16,9 @@ import net.sf.mmm.util.lang.api.Id;
  */
 public abstract class AbstractId<E> implements Id<E> {
 
+  /** TODO: javadoc. */
+  private static final long serialVersionUID = 1L;
+
   private long objectId;
 
   private Number revision;

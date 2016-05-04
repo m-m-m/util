@@ -14,17 +14,17 @@ import net.sf.mmm.util.io.base.AbstractDetectorStreamProvider;
 import net.sf.mmm.util.pool.api.ByteArrayPool;
 
 /**
- * This is the abstract base implementation of a {@link net.sf.mmm.util.io.api.DetectorStream} specific for
- * this implementation.
- * 
+ * This is the abstract base implementation of a {@link net.sf.mmm.util.io.api.DetectorStream} specific for this
+ * implementation.
+ *
  * @see ProcessableDetectorInputStream
  * @see ProcessableDetectorInputStream
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
 
-  private  final ByteArrayPool byteArrayPool;
+  private final ByteArrayPool byteArrayPool;
 
   /** The first buffer of the chain. */
   private DetectorStreamBufferImpl firstBuffer;
@@ -32,9 +32,9 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
   /**
    * The constructor. <br>
    * <b>ATTENTION:</b><br>
-   * You have to call {@link #initialize(AbstractDetectorStreamProvider, DetectorStreamProcessor)} after
-   * {@code super}-call in subclass-constructor.
-   * 
+   * You have to call {@link #initialize(AbstractDetectorStreamProvider, DetectorStreamProcessor)} after {@code super}
+   * -call in subclass-constructor.
+   *
    * @param mutableMetadata is the initial {@link #getMutableMetadata() mutable metadata}.
    * @param byteArrayPool is used to pool byte[]-buffers.
    */
@@ -46,7 +46,7 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
 
   /**
    * This method initializes this class. It has to be called to complete the construction.
-   * 
+   *
    * @param provider is the {@link net.sf.mmm.util.io.api.DetectorStreamProvider} creating this instance.
    * @param lastProcessor is the last {@link DetectorStreamProcessor} of the chain (the data-receiver).
    */
@@ -65,10 +65,9 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
 
   /**
    * @see DetectorStreamProcessor#process(net.sf.mmm.util.io.api.spi.DetectorStreamBuffer, Map, boolean)
-   * 
+   *
    * @param buffer is the next part of the streamed data.
-   * @param eos - {@code true} if the end of the stream has been reached and the given
-   *        {@code buffer} has to be
+   * @param eos - {@code true} if the end of the stream has been reached and the given {@code buffer} has to be
    * @throws IOException in case of an Input/Output error. Should only be used internally.
    */
   public void processInternal(ByteArray buffer, boolean eos) throws IOException {
@@ -84,7 +83,7 @@ public abstract class ProcessableDetectorStream extends AbstractDetectorStream {
 
   /**
    * This method gets a pool used to manage byte-arrays.
-   * 
+   *
    * @return the {@link ByteArrayPool} instance.
    */
   protected ByteArrayPool getByteArrayPool() {
