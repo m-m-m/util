@@ -4,7 +4,7 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 == Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]
 
-image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status","https://travis-ci.org/m-m-m/util"]
+image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/util"]
 
 == mmm-util
 
