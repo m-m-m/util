@@ -10,8 +10,6 @@ import java.io.Writer;
 import java.util.Iterator;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -57,8 +55,6 @@ import net.sf.mmm.util.xml.api.XmlException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-@Singleton
-@Named(DomUtil.CDI_NAME)
 public final class DomUtilImpl extends AbstractLoggableComponent implements DomUtil {
 
   private static DomUtil instance;
@@ -208,8 +204,8 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * This method creates a new transformer.
    *
-   * @param indent - {@code true} if the XML should be indented (automatically add linebreaks before opening tags),
-   *        {@code false} otherwise.
+   * @param indent - {@code true} if the XML should be indented (automatically add linebreaks before opening
+   *        tags), {@code false} otherwise.
    * @return the new transformer.
    */
   private Transformer createTransformer(boolean indent) {
@@ -405,8 +401,8 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
    *
    * @param node1 is the first node.
    * @param node2 is the second node.
-   * @return {@code true} if both nodes have equal {@link #getLocalName(Node) name} and {@link Node#getNamespaceURI()
-   *         namespace}.
+   * @return {@code true} if both nodes have equal {@link #getLocalName(Node) name} and
+   *         {@link Node#getNamespaceURI() namespace}.
    */
   private boolean isEqualName(Node node1, Node node2) {
 

@@ -3,8 +3,6 @@
 package net.sf.mmm.util.nls.impl;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsMessageFormatter;
@@ -18,8 +16,6 @@ import net.sf.mmm.util.nls.impl.formatter.NlsMessageFormatterImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Singleton
-@Named
 public class NlsMessageFormatterFactoryImpl extends AbstractComponent implements NlsMessageFormatterFactory {
 
   private NlsDependencies dependencies;

@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.base.HashKey;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
@@ -32,8 +30,6 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.1.0
  */
-@Singleton
-@Named(PojoUtil.CDI_NAME)
 public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil {
 
   private static PojoUtil instance;
@@ -102,7 +98,8 @@ public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil 
   }
 
   /**
-   * @param pojoDescriptorBuilderFactory is the instance of {@link PojoDescriptorBuilderFactory} to {@link Inject}.
+   * @param pojoDescriptorBuilderFactory is the instance of {@link PojoDescriptorBuilderFactory} to
+   *        {@link Inject}.
    */
   @Inject
   public void setPojoDescriptorBuilderFactory(PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory) {
@@ -147,11 +144,11 @@ public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil 
    * @see #visitObjectRecursive(Object, Filter, boolean)
    *
    * @param object is the {@link Object} to traverse recursively.
-   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed {@link Object}s. If an
-   *        {@link Object} is not {@link Filter#accept(Object) accepted} by this {@link Filter} the recursion stops at
-   *        this point.
-   * @param visitedSet is the {@link Set} where to collect all object to visit in order to prevent infinity loops or
-   *        {@code null} to disable.
+   * @param visitor is the {@link Filter} {@link Filter#accept(Object) invoked} for all traversed
+   *        {@link Object}s. If an {@link Object} is not {@link Filter#accept(Object) accepted} by this
+   *        {@link Filter} the recursion stops at this point.
+   * @param visitedSet is the {@link Set} where to collect all object to visit in order to prevent infinity
+   *        loops or {@code null} to disable.
    */
   protected void visitObjectRecursive(Object object, Filter<Object> visitor, Set<HashKey<Object>> visitedSet) {
 

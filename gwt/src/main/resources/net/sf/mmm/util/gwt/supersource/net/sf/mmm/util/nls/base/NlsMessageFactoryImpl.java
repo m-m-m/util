@@ -35,8 +35,6 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named(NlsMessageFactory.CDI_NAME)
-@Singleton
 public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl implements NlsResourceBundleRequestor {
 
   private final Map<String, DictionaryContainer> name2dictionaryContainerMap;

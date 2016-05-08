@@ -20,7 +20,7 @@ import net.sf.mmm.util.text.base.UnicodeUtilImpl;
  */
 @Configuration
 @SuppressWarnings("javadoc")
-public class TextSpringConfig {
+public class UtilTextSpringConfigBase {
 
   @Bean
   public JustificationBuilder justificationBuilder() {

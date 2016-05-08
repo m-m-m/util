@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.date.base;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.date.api.DurationUtil;
 
 /**
@@ -13,8 +10,6 @@ import net.sf.mmm.util.date.api.DurationUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-@Singleton
-@Named(DurationUtil.CDI_NAME)
 public class DurationUtilImpl implements DurationUtil {
 
   private static DurationUtil instance;
@@ -66,8 +61,8 @@ public class DurationUtilImpl implements DurationUtil {
 
   /**
    * @param duration is the duration to format.
-   * @param unitPerSeconds is the number of units per second ({@code duration/unitsPerSecond} is the duration in
-   *        seconds).
+   * @param unitPerSeconds is the number of units per second ({@code duration/unitsPerSecond} is the duration
+   *        in seconds).
    * @return the formatted duration.
    */
   private String formatDuration(long duration, long unitPerSeconds) {

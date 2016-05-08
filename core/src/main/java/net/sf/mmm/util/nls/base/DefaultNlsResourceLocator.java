@@ -4,9 +4,6 @@ package net.sf.mmm.util.nls.base;
 
 import java.util.Locale;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsResourceLocator;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -20,8 +17,6 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Singleton
-@Named
 public class DefaultNlsResourceLocator extends AbstractComponent implements NlsResourceLocator {
 
   /**

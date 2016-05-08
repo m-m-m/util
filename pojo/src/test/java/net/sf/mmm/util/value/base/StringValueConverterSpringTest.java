@@ -2,21 +2,33 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
+import javax.inject.Inject;
+
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.value.api.StringValueConverter;
+import net.sf.mmm.util.value.impl.spring.UtilValueSpringConfig;
 
 /**
  * This is the test-case for {@link StringValueConverter} configured using spring.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { UtilValueSpringConfig.class })
 public class StringValueConverterSpringTest extends StringValueConverterTest {
+
+  @Inject
+  private StringValueConverter stringValueConverter;
 
   @Override
   public StringValueConverter getStringValueConverter() {
 
-    return SpringContainerPool.getInstance().get(StringValueConverter.class);
+    return this.stringValueConverter;
   }
 
   @Override

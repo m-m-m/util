@@ -5,8 +5,8 @@ package net.sf.mmm.util.value.api;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is a sub-interface of {@link GenericValueConverter} for the most common value type {@link String}. It is
- * typically used for dealing with values (e.g. when reading configurations).
+ * This is a sub-interface of {@link GenericValueConverter} for the most common value type {@link String}. It
+ * is typically used for dealing with values (e.g. when reading configurations).
  *
  * @see ComposedValueConverter
  *
@@ -15,8 +15,5 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  */
 @ComponentSpecification
 public interface StringValueConverter extends GenericValueConverter<String> {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.value.api.StringValueConverter";
 
 }

@@ -15,8 +15,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.date.api.Iso8601Util;
@@ -44,8 +42,6 @@ import net.sf.mmm.util.version.api.VersionUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-@Singleton
-@Named(VersionUtil.CDI_NAME)
 public class VersionUtilImpl extends AbstractLoggableComponent implements VersionUtil {
 
   /** A {@link CharFilter} that accepts all but ASCII letters. */
@@ -81,12 +77,12 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
 
   /**
    * This method gets the singleton instance of this {@link VersionUtilImpl}. <br>
-   * This design is the best compromise between easy access (via this indirection you have direct, static access to all
-   * offered functionality) and IoC-style design which allows extension and customization. <br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via the
-   * {@link net.sf.mmm.util.component.api.IocContainer container-framework} of your choice. To wire up the dependent
-   * components everything is properly annotated using annotations (JSR-250 and JSR-330). If your container does NOT
-   * support this, you should consider using a better one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static
+   * access to all offered functionality) and IoC-style design which allows extension and customization. <br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
+   * the {@link net.sf.mmm.util.component.api.IocContainer container-framework} of your choice. To wire up the
+   * dependent components everything is properly annotated using annotations (JSR-250 and JSR-330). If your
+   * container does NOT support this, you should consider using a better one.
    *
    * @return the singleton instance.
    */
@@ -215,6 +211,15 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
           this.phasePrefixSet.add(key.substring(0, index));
         }
       }
+    }
+  }
+
+  @Override
+  protected void doInitialized() {
+
+    super.doInitialized();
+    if (instance == null) {
+      instance = this;
     }
   }
 
@@ -362,15 +367,14 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
           }
           if (currentPhase == null) {
             if (label != null) {
-              throw new NlsParseException(new DuplicateObjectException(phaseOrLabel, "label", label),
-                  versionString, VersionIdentifier.class);
+              throw new NlsParseException(new DuplicateObjectException(phaseOrLabel, "label", label), versionString,
+                  VersionIdentifier.class);
             }
             label = phaseOrLabel;
           } else {
             if (phase != null) {
-              throw new NlsParseException(
-                  new DuplicateObjectException(currentPhase, DevelopmentPhase.class, phase), versionString,
-                  VersionIdentifier.class);
+              throw new NlsParseException(new DuplicateObjectException(currentPhase, DevelopmentPhase.class, phase),
+                  versionString, VersionIdentifier.class);
             }
             phase = currentPhase;
             phaseAlias = phaseOrLabel;
@@ -434,8 +438,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
         scanner.require('}');
       }
       status.versionSegmentsCount++;
-      return new VersionIdentifierFormatterVersionSegments(this.stringUtil, infixBuffer.toString(),
-          segmentSeparator, minimumSegmentCount, maximumSegmentCount, segmentPadding);
+      return new VersionIdentifierFormatterVersionSegments(this.stringUtil, infixBuffer.toString(), segmentSeparator,
+          minimumSegmentCount, maximumSegmentCount, segmentPadding);
     } else if ((c == 'P') || (c == 'A') || (c == 'L')) {
       int maximumLength = 0;
       if (scanner.expect('{')) {
@@ -530,8 +534,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   }
 
   /**
-   * This inner class holds the status used to determine if a {@link VersionUtilImpl#createFormatter(String, boolean)
-   * formatPattern} is {@link #isStrict() strict}.
+   * This inner class holds the status used to determine if a
+   * {@link VersionUtilImpl#createFormatter(String, boolean) formatPattern} is {@link #isStrict() strict}.
    */
   protected static class FormatPatternStatus {
 

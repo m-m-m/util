@@ -15,12 +15,10 @@ import net.sf.mmm.util.exception.api.NlsParseException;
 @ComponentSpecification
 public interface VersionUtil {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.version.api.VersionUtil";
-
   /**
-   * This method parses the given {@code versionString} and builds an according {@link VersionIdentifier} instance. It
-   * delegates to {@link #createFormatter(String, boolean)} using {@code false} for {@code normalizeFormat}.
+   * This method parses the given {@code versionString} and builds an according {@link VersionIdentifier}
+   * instance. It delegates to {@link #createFormatter(String, boolean)} using {@code false} for
+   * {@code normalizeFormat}.
    *
    * @param versionString is the {@link VersionIdentifier#toString() string representation} of a
    *        {@link VersionIdentifier}.
@@ -30,7 +28,8 @@ public interface VersionUtil {
   VersionIdentifier createVersionIdentifier(String versionString) throws NlsParseException;
 
   /**
-   * This method parses the given {@code versionString} and builds an according {@link VersionIdentifier} instance.
+   * This method parses the given {@code versionString} and builds an according {@link VersionIdentifier}
+   * instance.
    *
    * @param versionString is the {@link VersionIdentifier#toString() string representation} of a
    *        {@link VersionIdentifier}.
@@ -40,8 +39,7 @@ public interface VersionUtil {
    * @return the parsed {@link VersionIdentifier}.
    * @throws NlsParseException if the given {@code versionString} is invalid and could not be parsed.
    */
-  VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat)
-      throws NlsParseException;
+  VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat) throws NlsParseException;
 
   /**
    * @return the default {@link VersionIdentifierFormatter}.
@@ -61,8 +59,8 @@ public interface VersionUtil {
 
   /**
    * This method creates a {@link VersionIdentifierFormatter} for the given {@code formatPattern}. Similar to
-   * {@link java.text.SimpleDateFormat} the format pattern is parsed and there are particular <em>letter symbols</em>
-   * that have a specific meaning.
+   * {@link java.text.SimpleDateFormat} the format pattern is parsed and there are particular
+   * <em>letter symbols</em> that have a specific meaning.
    * <table border="1">
    * <tr>
    * <th>letter</th>
@@ -72,41 +70,44 @@ public interface VersionUtil {
    * <tr>
    * <td>V</td>
    * <td>{@link VersionIdentifier#getVersionSegment(int) version segments}</td>
-   * <td>Needs to be of the form <code>V«separator»[{«min»,«max»,«padding»}]</code> where {@code «separator»} is a
-   * character used to separate the {@link VersionIdentifier#getVersionSegment(int) version segments} (typically the dot
-   * sign '.'). Further, {@code «min»} and {@code «max»} are the minimum and maximum number of
-   * {@link VersionIdentifier#getVersionSegment(int) segments} to format and {@code «padding»} is the minimum number of
-   * digits to {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} each
+   * <td>Needs to be of the form <code>V«separator»[{«min»,«max»,«padding»}]</code> where {@code «separator»}
+   * is a character used to separate the {@link VersionIdentifier#getVersionSegment(int) version segments}
+   * (typically the dot sign '.'). Further, {@code «min»} and {@code «max»} are the minimum and maximum number
+   * of {@link VersionIdentifier#getVersionSegment(int) segments} to format and {@code «padding»} is the
+   * minimum number of digits to {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} each
    * {@link VersionIdentifier#getVersionSegment(int) segment}.</td>
    * </tr>
    * <tr>
    * <td>P</td>
    * <td>{@link VersionIdentifier#getPhase() phase}</td>
-   * <td>The {@link DevelopmentPhase#toString() official phase name} - typically you want to use "A" instead. May be
-   * followed by <code>{«max»}</code> to limit (truncate) to a maximum number of characters.</td>
+   * <td>The {@link DevelopmentPhase#toString() official phase name} - typically you want to use "A" instead.
+   * May be followed by <code>{«max»}</code> to limit (truncate) to a maximum number of characters.</td>
    * </tr>
    * <tr>
    * <td>A</td>
    * <td>{@link VersionIdentifier#getPhaseAlias() alias}</td>
-   * <td>The phase alias. May be followed by <code>{«max»}</code> to limit (truncate) to a maximum number of characters.
-   * </td>
+   * <td>The phase alias. May be followed by <code>{«max»}</code> to limit (truncate) to a maximum number of
+   * characters.</td>
    * </tr>
    * <tr>
    * <td>N</td>
    * <td>{@link VersionIdentifier#getPhaseNumber() phase number}</td>
-   * <td>The {@link VersionIdentifier#getPhaseNumber() phase number}. May be followed by <code>{«padding»}</code> to
-   * {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} to a minimum number of digits.</td>
+   * <td>The {@link VersionIdentifier#getPhaseNumber() phase number}. May be followed by
+   * <code>{«padding»}</code> to {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} to a
+   * minimum number of digits.</td>
    * </tr>
    * <tr>
    * <td>S</td>
    * <td>{@link VersionIdentifier#isSnapshot() snapshot} indicator</td>
-   * <td>The {@link VersionIdentifier#isSnapshot() snapshot} indicator. May be followed by <code>{«indicator»}</code> to
-   * override the {@link VersionIdentifier#SNAPSHOT default snapshot indicator} with {«indicator»}.</td>
+   * <td>The {@link VersionIdentifier#isSnapshot() snapshot} indicator. May be followed by
+   * <code>{«indicator»}</code> to override the {@link VersionIdentifier#SNAPSHOT default snapshot indicator}
+   * with {«indicator»}.</td>
    * </tr>
    * <tr>
    * <td>L</td>
    * <td>{@link VersionIdentifier#getLabel() label}</td>
-   * <td>The label. May be followed by <code>{«max»}</code> to limit (truncate) to a maximum number of characters.</td>
+   * <td>The label. May be followed by <code>{«max»}</code> to limit (truncate) to a maximum number of
+   * characters.</td>
    * </tr>
    * <tr>
    * <tr>
@@ -118,16 +119,17 @@ public interface VersionUtil {
    * <tr>
    * <td>T</td>
    * <td>{@link VersionIdentifier#getTimestamp() timestamp}</td>
-   * <td>The timestamp by default in basic {@link net.sf.mmm.util.date.api.Iso8601Util ISO-8601} format. May be followed
-   * by <code>{«format»}</code> to use the given format instead as {@link java.text.SimpleDateFormat} pattern (e.g.
-   * "T{yyyy-MM-dd}").</td>
+   * <td>The timestamp by default in basic {@link net.sf.mmm.util.date.api.Iso8601Util ISO-8601} format. May
+   * be followed by <code>{«format»}</code> to use the given format instead as
+   * {@link java.text.SimpleDateFormat} pattern (e.g. "T{yyyy-MM-dd}").</td>
    * </tr>
    * </table>
-   * As all ASCII letters are reserved for existing letter symbol definitions (see table above) or further extensions,
-   * you need to enclose static text in braces (e.g. "(rev)" to represent the static {@link String} "rev" as infix for a
-   * format pattern). <br>
-   * Further, infix text (no matter if enclosed in braces or not) is omitted if the following letter symbol is resolved
-   * as undefined. To prevent this add the dollar character ($) to terminate a static infix that should always occur.
+   * As all ASCII letters are reserved for existing letter symbol definitions (see table above) or further
+   * extensions, you need to enclose static text in braces (e.g. "(rev)" to represent the static
+   * {@link String} "rev" as infix for a format pattern). <br>
+   * Further, infix text (no matter if enclosed in braces or not) is omitted if the following letter symbol is
+   * resolved as undefined. To prevent this add the dollar character ($) to terminate a static infix that
+   * should always occur.
    *
    * <table border="1">
    * <tr>
@@ -214,9 +216,10 @@ public interface VersionUtil {
    *
    * @param formatPattern is the format string.
    * @param strict - if {@code true} then the given {@code formatPattern} has to include at least the
-   *        {@link VersionIdentifier#getVersionSegment(int) version segments}, the {@link VersionIdentifier#getPhase()
-   *        phase} (in any form including alias), {@link VersionIdentifier#getPhaseNumber() phase number}, and
-   *        {@link VersionIdentifier#isSnapshot() snapshot}.
+   *        {@link VersionIdentifier#getVersionSegment(int) version segments}, the
+   *        {@link VersionIdentifier#getPhase() phase} (in any form including alias),
+   *        {@link VersionIdentifier#getPhaseNumber() phase number}, and {@link VersionIdentifier#isSnapshot()
+   *        snapshot}.
    * @return the according {@link VersionIdentifierFormatter}.
    */
   VersionIdentifierFormatter createFormatter(String formatPattern, boolean strict);

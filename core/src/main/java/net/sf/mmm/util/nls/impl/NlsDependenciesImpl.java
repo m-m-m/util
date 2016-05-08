@@ -3,8 +3,6 @@
 package net.sf.mmm.util.nls.impl;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.date.api.Iso8601UtilLimited;
@@ -22,8 +20,6 @@ import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Singleton
-@Named(NlsDependencies.CDI_NAME)
 public class NlsDependenciesImpl extends AbstractNlsDependencies {
 
   private NlsArgumentParser argumentParser;

@@ -7,8 +7,6 @@ import java.io.OutputStream;
 import java.io.Writer;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -35,8 +33,6 @@ import net.sf.mmm.util.xml.impl.stax.XIncludeStreamReader;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-@Singleton
-@Named(StaxUtil.CDI_NAME)
 public final class StaxUtilImpl extends AbstractLoggableComponent implements StaxUtil {
 
   private static StaxUtil instance;
@@ -203,8 +199,8 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   }
 
   @Override
-  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName,
-      Class<V> type) throws ValueException {
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type)
+      throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
@@ -212,8 +208,8 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   }
 
   @Override
-  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName,
-      Class<V> type, V defaultValue) throws ValueException {
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type,
+      V defaultValue) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     return getValueConverter().convertValue(value, localAttributeName, type, type, defaultValue);
@@ -332,7 +328,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
         return "START_DOCUMENT";
       case XMLStreamConstants.START_ELEMENT:
         return "START_ELEMENT";
-      default:
+      default :
         return "UNKNOWN_EVENT_TYPE (" + String.valueOf(eventType) + ")";
     }
   }

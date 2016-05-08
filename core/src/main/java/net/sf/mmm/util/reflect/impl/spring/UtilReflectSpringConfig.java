@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
+import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.AnnotationUtilImpl;
 import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
@@ -33,6 +35,12 @@ public class UtilReflectSpringConfig {
   public CollectionReflectionUtil collectionReflectionUtil() {
 
     return new CollectionReflectionUtilImpl();
+  }
+
+  @Bean
+  public AnnotationUtil annotationUtil() {
+
+    return new AnnotationUtilImpl();
   }
 
 }

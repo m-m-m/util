@@ -3,8 +3,6 @@
 package net.sf.mmm.util.pojo.path.impl;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -29,8 +27,6 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@Singleton
-@Named(PojoPathNavigator.CDI_NAME)
 public class PojoPathNavigatorImpl extends AbstractPojoPathNavigator {
 
   private PojoDescriptorBuilder descriptorBuilder;

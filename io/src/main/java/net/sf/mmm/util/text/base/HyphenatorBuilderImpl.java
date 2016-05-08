@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamConstants;
@@ -37,8 +35,6 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Singleton
-@Named(HyphenatorBuilder.CDI_NAME)
 public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
 
   /** @see #createHyphenator(String) */
@@ -211,8 +207,8 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   }
 
   /**
-   * This method parses a list of strings enclosed by elements with the given {@code elementName} until the current
-   * element ends. E.g. if you have this XML:
+   * This method parses a list of strings enclosed by elements with the given {@code elementName} until the
+   * current element ends. E.g. if you have this XML:
    *
    * <pre>
    * &lt;foo>
@@ -222,8 +218,8 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
    * &lt;/foo>
    * </pre>
    *
-   * And your XML-reader is pointing after the opening &lt;foo> and you call this method, you will get a list with
-   * "text1", "text2", and "text3".
+   * And your XML-reader is pointing after the opening &lt;foo> and you call this method, you will get a list
+   * with "text1", "text2", and "text3".
    *
    * @param reader is the XMLEventReader pointing after the {@link StartElement} of the surrounding element.
    * @param elementName is the name of the element containing a single string.

@@ -7,15 +7,13 @@ import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
 
 /**
- * This interface bundles the dependencies for the native language support (NLS). It contains the required components.
+ * This interface bundles the dependencies for the native language support (NLS). It contains the required
+ * components.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public interface NlsDependencies {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.nls.base.NlsDependencies";
 
   /**
    * This method gets the {@link NlsArgumentParser}.

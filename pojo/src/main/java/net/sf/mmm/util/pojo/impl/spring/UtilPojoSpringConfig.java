@@ -3,18 +3,26 @@
 package net.sf.mmm.util.pojo.impl.spring;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
+import net.sf.mmm.util.math.impl.spring.UtilMathSpringConfig;
 import net.sf.mmm.util.pojo.api.PojoFactory;
+import net.sf.mmm.util.pojo.api.PojoUtil;
 import net.sf.mmm.util.pojo.base.GuessingPojoFactory;
+import net.sf.mmm.util.pojo.base.PojoUtilImpl;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.pojo.descriptor.base.ExtendedPojoDescriptorDependencies;
 import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer;
 import net.sf.mmm.util.pojo.descriptor.impl.DefaultPojoDescriptorEnhancer;
 import net.sf.mmm.util.pojo.descriptor.impl.ExtendedPojoDescriptorDependenciesImpl;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
+import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
+import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
+import net.sf.mmm.util.pojo.path.impl.PojoPathFunctionManagerImpl;
+import net.sf.mmm.util.pojo.path.impl.PojoPathNavigatorImpl;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.pojo}.
@@ -23,9 +31,16 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
  * @since 8.0.0
  */
 @Configuration
-@Import(UtilCollectionSpringConfig.class)
+@Import({ UtilCollectionSpringConfig.class, UtilMathSpringConfig.class })
+@ComponentScan({ "net.sf.mmm.util.pojo.descriptor.impl.accessor", "net.sf.mmm.util.pojo.path.impl.function" })
 @SuppressWarnings("javadoc")
 public class UtilPojoSpringConfig {
+
+  @Bean
+  public PojoUtil pojoUtil() {
+
+    return new PojoUtilImpl();
+  }
 
   @Bean
   public PojoDescriptorBuilderFactory pojoDescriptorBuilderFactory() {
@@ -49,6 +64,18 @@ public class UtilPojoSpringConfig {
   public PojoDescriptorEnhancer pojoDescriptorEnhancer() {
 
     return new DefaultPojoDescriptorEnhancer();
+  }
+
+  @Bean
+  public PojoPathNavigator pojoPathNavigator() {
+
+    return new PojoPathNavigatorImpl();
+  }
+
+  @Bean
+  public PojoPathFunctionManager pojoPathFunctionManager() {
+
+    return new PojoPathFunctionManagerImpl();
   }
 
 }

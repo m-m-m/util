@@ -10,9 +10,6 @@ package net.sf.mmm.util.date.api;
  */
 public interface DurationUtil {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.date.api.DurationUtil";
-
   /**
    * This method formats the given nanoseconds as a human readable {@link String}.
    * <table border="1">

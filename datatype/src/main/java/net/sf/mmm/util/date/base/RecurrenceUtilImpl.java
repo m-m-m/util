@@ -80,8 +80,8 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
     DateUnit unit = recurrence.getUnit();
     NlsNullPointerException.checkNotNull(DateUnit.class, unit);
     int step = recurrence.getStep();
-    ValueOutOfRangeException.checkRange(Integer.valueOf(step), Integer.valueOf(1),
-        Integer.valueOf(Integer.MAX_VALUE), recurrence);
+    ValueOutOfRangeException.checkRange(Integer.valueOf(step), Integer.valueOf(1), Integer.valueOf(Integer.MAX_VALUE),
+        recurrence);
     result.add(unit.getCalendarId(), step);
     WeekdaySet weekdaySet = recurrence.getWeekdays();
     if (weekdaySet == null) {
@@ -137,7 +137,7 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
           result.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         }
         break;
-      default:
+      default :
         throw new IllegalCaseException(DateUnit.class, unit);
     }
 

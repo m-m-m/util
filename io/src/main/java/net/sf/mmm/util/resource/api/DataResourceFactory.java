@@ -4,22 +4,20 @@ package net.sf.mmm.util.resource.api;
 
 /**
  * This is the interface for a factory used to create {@link DataResource}s. <br>
- * If you want to read resources from configurable locations, you should use this factory. In situations where you want
- * to load a resource, for which you already know the location (e.g. from a specific classpath location) and you are
- * going to wire the location into your code, you can bypass this factory and simply create a new instance of the
- * according {@link DataResource} -implementation (e.g. {@link net.sf.mmm.util.resource.base.ClasspathResource} ).
+ * If you want to read resources from configurable locations, you should use this factory. In situations where
+ * you want to load a resource, for which you already know the location (e.g. from a specific classpath
+ * location) and you are going to wire the location into your code, you can bypass this factory and simply
+ * create a new instance of the according {@link DataResource} -implementation (e.g.
+ * {@link net.sf.mmm.util.resource.base.ClasspathResource} ).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 public interface DataResourceFactory {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.resource.api.DataResourceFactory";
-
   /**
-   * This method creates a new {@link DataResource} from the given {@code resourceUri}. The following URI-schemes are
-   * guaranteed to be supported:
+   * This method creates a new {@link DataResource} from the given {@code resourceUri}. The following
+   * URI-schemes are guaranteed to be supported:
    * <table border="1">
    * <tr>
    * <th>scheme</th>
@@ -43,11 +41,11 @@ public interface DataResourceFactory {
    * </tr>
    * </table>
    *
-   * @param resourceUri is the {@link DataResource#getUri() absolute URI} pointing to the location of the requested
-   *        {@link DataResource}.
+   * @param resourceUri is the {@link DataResource#getUri() absolute URI} pointing to the location of the
+   *        requested {@link DataResource}.
    * @return the requested {@link DataResource}.
-   * @throws ResourceUriUndefinedException if the given {@code resourceUri} is undefined (e.g. the scheme is NOT
-   *         supported).
+   * @throws ResourceUriUndefinedException if the given {@code resourceUri} is undefined (e.g. the scheme is
+   *         NOT supported).
    */
   DataResource createDataResource(String resourceUri) throws ResourceUriUndefinedException;
 

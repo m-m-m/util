@@ -7,8 +7,9 @@ import java.io.InputStream;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a collection of utility functions to that help deal with <em>encodings</em>. An encoding
- * defines a mapping of {@link Character}s of a {@link java.nio.charset.Charset} to {@link Byte}s and vice versa.
+ * This is the interface for a collection of utility functions to that help deal with <em>encodings</em>. An
+ * encoding defines a mapping of {@link Character}s of a {@link java.nio.charset.Charset} to {@link Byte}s and
+ * vice versa.
  *
  * @see net.sf.mmm.util.io.base.EncodingUtilImpl
  *
@@ -18,17 +19,14 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 @ComponentSpecification
 public interface EncodingUtil {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.io.api.EncodingUtil";
-
   /**
    * The default encoding used by this JVM as fallback if no explicit encoding is specified.
    */
   String SYSTEM_DEFAULT_ENCODING = System.getProperty("file.encoding");
 
   /**
-   * The encoding {@code US-ASCII} (American Standard Code for Information Interchange) also just called {@code ASCII}.
-   * <br>
+   * The encoding {@code US-ASCII} (American Standard Code for Information Interchange) also just called
+   * {@code ASCII}. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_US_ASCII = "US-ASCII";
@@ -40,8 +38,8 @@ public interface EncodingUtil {
   String ENCODING_UTF_8 = "UTF-8";
 
   /**
-   * The encoding {@code UTF-16}. It is an 16-bit Unicode Transformation Format. The byte-order is determined by an
-   * optional {@link ByteOrderMark}. <br>
+   * The encoding {@code UTF-16}. It is an 16-bit Unicode Transformation Format. The byte-order is determined
+   * by an optional {@link ByteOrderMark}. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_UTF_16 = "UTF-16";
@@ -59,8 +57,8 @@ public interface EncodingUtil {
   String ENCODING_UTF_16_BE = "UTF-16BE";
 
   /**
-   * The encoding {@code UTF-32}. It is an 32-bit Unicode Transformation Format. The byte-order is determined by an
-   * optional {@link ByteOrderMark}. <br>
+   * The encoding {@code UTF-32}. It is an 32-bit Unicode Transformation Format. The byte-order is determined
+   * by an optional {@link ByteOrderMark}. <br>
    * <b>ATTENTION:</b><br>
    * UTF-32 is NOT yet supported by Java.
    */
@@ -81,32 +79,36 @@ public interface EncodingUtil {
   String ENCODING_UTF_32_BE = "UTF-32BE";
 
   /**
-   * The encoding {@code ISO-8859-1} also called {@code Latin-1}. It is covering most Western European languages. <br>
+   * The encoding {@code ISO-8859-1} also called {@code Latin-1}. It is covering most Western European
+   * languages. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_ISO_8859_1 = "ISO-8859-1";
 
   /**
-   * The encoding {@code ISO-8859-2} also called {@code Latin-2}. It is covering the Central and Eastern European
-   * languages that use the Latin alphabet. <br>
+   * The encoding {@code ISO-8859-2} also called {@code Latin-2}. It is covering the Central and Eastern
+   * European languages that use the Latin alphabet. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_ISO_8859_2 = "ISO-8859-2";
 
   /**
-   * The encoding {@code ISO-8859-3} also called {@code Latin-3}. It is covering the South European languages. <br>
+   * The encoding {@code ISO-8859-3} also called {@code Latin-3}. It is covering the South European languages.
+   * <br>
    * This is an extended encoding for Java contained in {@code lib/charsets.jar}.
    */
   String ENCODING_ISO_8859_3 = "ISO-8859-3";
 
   /**
-   * The encoding {@code ISO-8859-4} also called {@code Latin-4}. It is covering the North European languages. <br>
+   * The encoding {@code ISO-8859-4} also called {@code Latin-4}. It is covering the North European languages.
+   * <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_ISO_8859_4 = "ISO-8859-4";
 
   /**
-   * The encoding {@code ISO-8859-5}. It is covering mostly Slavic languages that use a Cyrillic alphabet. <br>
+   * The encoding {@code ISO-8859-5}. It is covering mostly Slavic languages that use a Cyrillic alphabet.
+   * <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_ISO_8859_5 = "ISO-8859-5";
@@ -149,7 +151,8 @@ public interface EncodingUtil {
   String ENCODING_ISO_8859_11 = "x-iso-8859-11";
 
   /**
-   * The encoding {@code ISO-8859-12}. The work on this encoding for Devanagari was stopped so it does NOT exist at all.
+   * The encoding {@code ISO-8859-12}. The work on this encoding for Devanagari was stopped so it does NOT
+   * exist at all.
    */
   @Deprecated
   String ENCODING_ISO_8859_12 = "ISO-8859-12";
@@ -167,15 +170,16 @@ public interface EncodingUtil {
   String ENCODING_ISO_8859_14 = "ISO-8859-14";
 
   /**
-   * The encoding {@code ISO-8859-15} also called {@code Latin-9}. It is very similar to {@link #ENCODING_ISO_8859_1
-   * Latin-1} but adds the euro-sign and 7 other characters by replacing rarely used ones. <br>
+   * The encoding {@code ISO-8859-15} also called {@code Latin-9}. It is very similar to
+   * {@link #ENCODING_ISO_8859_1 Latin-1} but adds the euro-sign and 7 other characters by replacing rarely
+   * used ones. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_ISO_8859_15 = "ISO-8859-15";
 
   /**
-   * The encoding {@code ISO-8859-16} also called {@code Latin-10}. It is covering South-Eastern European languages and
-   * includes the euro-sign. <br>
+   * The encoding {@code ISO-8859-16} also called {@code Latin-10}. It is covering South-Eastern European
+   * languages and includes the euro-sign. <br>
    * This encoding is NOT supported by Java.
    */
   String ENCODING_ISO_8859_16 = "ISO-8859-16";
@@ -202,20 +206,20 @@ public interface EncodingUtil {
   String ENCODING_CP_437 = "IBM437";
 
   /**
-   * The encoding {@code CP737}. It is used by MS-DOS for Greek and is therefore related to {@link #ENCODING_CP_869} and
-   * {@link #ENCODING_ISO_8859_7}.
+   * The encoding {@code CP737}. It is used by MS-DOS for Greek and is therefore related to
+   * {@link #ENCODING_CP_869} and {@link #ENCODING_ISO_8859_7}.
    */
   String ENCODING_CP_737 = "x-IBM737";
 
   /**
-   * The encoding {@code CP850}. It is used by MS-DOS for Western European languages and is therefore related to
-   * {@link #ENCODING_ISO_8859_1}.
+   * The encoding {@code CP850}. It is used by MS-DOS for Western European languages and is therefore related
+   * to {@link #ENCODING_ISO_8859_1}.
    */
   String ENCODING_CP_850 = "IBM850";
 
   /**
-   * The encoding {@code CP852}. It is used by MS-DOS for Central European languages and is therefore related to
-   * {@link #ENCODING_ISO_8859_2}.
+   * The encoding {@code CP852}. It is used by MS-DOS for Central European languages and is therefore related
+   * to {@link #ENCODING_ISO_8859_2}.
    */
   String ENCODING_CP_852 = "IBM852";
 
@@ -245,8 +249,8 @@ public interface EncodingUtil {
   String ENCODING_CP_860 = "IBM860";
 
   /**
-   * The encoding {@code CP861}. It is used by MS-DOS for Nordic languages especially for Icelandic and is therefore
-   * related to {@link #ENCODING_ISO_8859_10}.
+   * The encoding {@code CP861}. It is used by MS-DOS for Nordic languages especially for Icelandic and is
+   * therefore related to {@link #ENCODING_ISO_8859_10}.
    */
   String ENCODING_CP_861 = "IBM861";
 
@@ -269,87 +273,88 @@ public interface EncodingUtil {
   String ENCODING_CP_866 = "IBM866";
 
   /**
-   * The encoding {@code CP869}. It is used by MS-DOS for Greek and is therefore related to {@link #ENCODING_CP_737} and
-   * {@link #ENCODING_ISO_8859_7}.
+   * The encoding {@code CP869}. It is used by MS-DOS for Greek and is therefore related to
+   * {@link #ENCODING_CP_737} and {@link #ENCODING_ISO_8859_7}.
    */
   String ENCODING_CP_869 = "IBM869";
 
   /**
-   * The encoding {@code CP1250} also called {@code Windows-1250}. It is used by Microsoft Windows for Central European
-   * languages and is similar to {@link #ENCODING_ISO_8859_2}. <br>
+   * The encoding {@code CP1250} also called {@code Windows-1250}. It is used by Microsoft Windows for Central
+   * European languages and is similar to {@link #ENCODING_ISO_8859_2}. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_WINDOWS_1250 = "windows-1250";
 
   /**
-   * The encoding {@code CP1251} also called {@code Windows-1251}. It is used by Microsoft Windows for Cyrillic letters
-   * and is similar to {@link #ENCODING_ISO_8859_5}. <br>
+   * The encoding {@code CP1251} also called {@code Windows-1251}. It is used by Microsoft Windows for
+   * Cyrillic letters and is similar to {@link #ENCODING_ISO_8859_5}. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_WINDOWS_1251 = "windows-1251";
 
   /**
-   * The encoding {@code CP1252} also called {@code Windows-1252}. It is used by Microsoft Windows for Western European
-   * languages and is similar to {@link #ENCODING_ISO_8859_1}. <br>
+   * The encoding {@code CP1252} also called {@code Windows-1252}. It is used by Microsoft Windows for Western
+   * European languages and is similar to {@link #ENCODING_ISO_8859_1}. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_WINDOWS_1252 = "windows-1252";
 
   /**
-   * The encoding {@code CP1253} also called {@code Windows-1253}. It is used by Microsoft Windows for Greek and is
-   * similar to {@link #ENCODING_ISO_8859_7}. <br>
+   * The encoding {@code CP1253} also called {@code Windows-1253}. It is used by Microsoft Windows for Greek
+   * and is similar to {@link #ENCODING_ISO_8859_7}. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_WINDOWS_1253 = "windows-1253";
 
   /**
-   * The encoding {@code CP1254} also called {@code Windows-1254}. It is used by Microsoft Windows for Turkish and is
-   * similar to {@link #ENCODING_ISO_8859_9}. <br>
+   * The encoding {@code CP1254} also called {@code Windows-1254}. It is used by Microsoft Windows for Turkish
+   * and is similar to {@link #ENCODING_ISO_8859_9}. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_WINDOWS_1254 = "windows-1254";
 
   /**
-   * The encoding {@code CP1255} also called {@code Windows-1255}. It is used by Microsoft Windows for Hebrew and is
-   * similar to {@link #ENCODING_ISO_8859_8}.
+   * The encoding {@code CP1255} also called {@code Windows-1255}. It is used by Microsoft Windows for Hebrew
+   * and is similar to {@link #ENCODING_ISO_8859_8}.
    */
   String ENCODING_WINDOWS_1255 = "windows-1255";
 
   /**
-   * The encoding {@code CP1256} also called {@code Windows-1256}. It is used by Microsoft Windows for Arabic and is
-   * similar to {@link #ENCODING_ISO_8859_6}.
+   * The encoding {@code CP1256} also called {@code Windows-1256}. It is used by Microsoft Windows for Arabic
+   * and is similar to {@link #ENCODING_ISO_8859_6}.
    */
   String ENCODING_WINDOWS_1256 = "windows-1256";
 
   /**
-   * The encoding {@code CP1257} also called {@code Windows-1257}. It is used by Microsoft Windows for Baltic languages
-   * and is similar to {@link #ENCODING_ISO_8859_13}. <br>
+   * The encoding {@code CP1257} also called {@code Windows-1257}. It is used by Microsoft Windows for Baltic
+   * languages and is similar to {@link #ENCODING_ISO_8859_13}. <br>
    * This is a basic encoding for Java contained in {@code lib/rt.jar}.
    */
   String ENCODING_WINDOWS_1257 = "windows-1257";
 
   /**
-   * The encoding {@code CP1258} also called {@code Windows-1258}. It is used by Microsoft Windows for Vietnamese and is
-   * similar to {@link #ENCODING_WINDOWS_1252}.
+   * The encoding {@code CP1258} also called {@code Windows-1258}. It is used by Microsoft Windows for
+   * Vietnamese and is similar to {@link #ENCODING_WINDOWS_1252}.
    */
   String ENCODING_WINDOWS_1258 = "windows-1258";
 
   /**
    * This method creates a new {@link java.io.Reader} for the given {@code inputStream}. The
-   * {@link EncodingDetectionReader} automatically detects UTF (Unicode Transformation Format) encodings. If the data
-   * provided by {@code inputStream} is NOT in such encoding, it will use the given {@code nonUtfEncoding} as fallback.
-   * <br>
-   * The {@link EncodingDetectionReader} will behave like {@link java.io.InputStreamReader} but with an encoding that is
-   * automatically detected whilst reading. It will use a lookahead buffer to detect the encoding. As long as no UTF
-   * characteristic was detected and only ASCII-characters ({@code <128}) are hit, the encoding remains
-   * {@link #ENCODING_US_ASCII}. As soon as an UTF sequence was detected (e.g. {@link #ENCODING_UTF_8} or
-   * {@link #ENCODING_UTF_16_BE}), the encoding switches to that encoding. If a non-ASCII character is hit and no UTF
-   * encoding is detected, the {@link EncodingDetectionReader} switches to the given {@code nonUtfEncoding}.
+   * {@link EncodingDetectionReader} automatically detects UTF (Unicode Transformation Format) encodings. If
+   * the data provided by {@code inputStream} is NOT in such encoding, it will use the given
+   * {@code nonUtfEncoding} as fallback. <br>
+   * The {@link EncodingDetectionReader} will behave like {@link java.io.InputStreamReader} but with an
+   * encoding that is automatically detected whilst reading. It will use a lookahead buffer to detect the
+   * encoding. As long as no UTF characteristic was detected and only ASCII-characters ({@code <128}) are hit,
+   * the encoding remains {@link #ENCODING_US_ASCII}. As soon as an UTF sequence was detected (e.g.
+   * {@link #ENCODING_UTF_8} or {@link #ENCODING_UTF_16_BE}), the encoding switches to that encoding. If a
+   * non-ASCII character is hit and no UTF encoding is detected, the {@link EncodingDetectionReader} switches
+   * to the given {@code nonUtfEncoding}.
    *
    * @param inputStream is the {@link InputStream} to decode and read.
    * @param nonUtfEncoding is the encoding to use in case the data is NOT encoded in UTF (e.g.
-   *        {@link #ENCODING_ISO_8859_15}). It is pointless to use an UTF-based encoding or {@link #ENCODING_US_ASCII}
-   *        here.
+   *        {@link #ENCODING_ISO_8859_15}). It is pointless to use an UTF-based encoding or
+   *        {@link #ENCODING_US_ASCII} here.
    * @return a new {@link EncodingDetectionReader} that can be used to read the {@code inputStream}.
    */
   EncodingDetectionReader createUtfDetectionReader(InputStream inputStream, String nonUtfEncoding);

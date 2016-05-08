@@ -4,9 +4,6 @@ package net.sf.mmm.util.nls.impl;
 
 import java.util.ResourceBundle;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.nls.api.NlsResourceBundleRequestor;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 
@@ -16,8 +13,6 @@ import net.sf.mmm.util.nls.base.AbstractNlsMessage;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-@Named(NlsResourceBundleRequestor.CDI_NAME)
-@Singleton
 public class DefaultNlsResourceBundleRequestor implements NlsResourceBundleRequestor {
 
   /**

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.ConcurrentHashMapFactory;
@@ -31,7 +30,6 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
  */
-@Named
 public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent implements DatatypeDescriptorManager {
 
   private static DatatypeDescriptorManagerImpl instance;
@@ -78,8 +76,8 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   /**
    * This method gets the singleton instance of this {@link DatatypeDescriptorManager}. <br>
    * Will only work after this class has been properly initialized (by an
-   * {@link net.sf.mmm.util.component.api.IocContainer}). This method shall only be used for classes that can not be
-   * managed by an {@link net.sf.mmm.util.component.api.IocContainer} e.g. for
+   * {@link net.sf.mmm.util.component.api.IocContainer}). This method shall only be used for classes that can
+   * not be managed by an {@link net.sf.mmm.util.component.api.IocContainer} e.g. for
    * {@link javax.xml.bind.annotation.adapters.XmlAdapter}s. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
@@ -184,8 +182,8 @@ public class DatatypeDescriptorManagerImpl extends AbstractLoggableComponent imp
   }
 
   /**
-   * Creates a generic {@link DatatypeDescriptor} for the given {@link net.sf.mmm.util.lang.api.Datatype} {@link Class}
-   * dynamically.
+   * Creates a generic {@link DatatypeDescriptor} for the given {@link net.sf.mmm.util.lang.api.Datatype}
+   * {@link Class} dynamically.
    *
    * @param <T> is the generic type of the {@link net.sf.mmm.util.lang.api.Datatype}.
    * @param datatype is the {@link Class} reflecting the {@link net.sf.mmm.util.lang.api.Datatype}.

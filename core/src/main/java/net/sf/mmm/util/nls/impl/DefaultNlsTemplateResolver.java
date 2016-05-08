@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsResourceBundle;
@@ -18,16 +16,15 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.NlsResourceBundleProvider;
 
 /**
- * This is the default implementation of the {@link NlsTemplateResolver}. It locates all {@link ResourceBundle}s
- * declared in the {@link NlsTemplateResolver#CLASSPATH_NLS_BUNDLE bundle-declaration-files}.
+ * This is the default implementation of the {@link NlsTemplateResolver}. It locates all
+ * {@link ResourceBundle}s declared in the {@link NlsTemplateResolver#CLASSPATH_NLS_BUNDLE
+ * bundle-declaration-files}.
  *
  * @see AbstractResourceBundleNlsTemplateResolver
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Named(NlsTemplateResolver.CDI_NAME)
-@Singleton
 public class DefaultNlsTemplateResolver extends AbstractResourceBundleNlsTemplateResolver
     implements NlsResourceBundleProvider {
 

@@ -8,9 +8,6 @@ import java.util.Date;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.date.api.IllegalDateFormatException;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.exception.api.NlsParseException;
@@ -25,8 +22,6 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named(Iso8601Util.CDI_NAME)
 public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso8601Util {
 
   private static Iso8601UtilImpl instance;
@@ -131,8 +126,8 @@ public final class Iso8601UtilImpl extends Iso8601UtilLimitedImpl implements Iso
   }
 
   @Override
-  public void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime,
-      boolean extendedTimezone, Appendable buffer) {
+  public void formatDateTime(Calendar calendar, boolean extendedDate, boolean extendedTime, boolean extendedTimezone,
+      Appendable buffer) {
 
     try {
       formatDate(calendar, extendedDate, buffer);

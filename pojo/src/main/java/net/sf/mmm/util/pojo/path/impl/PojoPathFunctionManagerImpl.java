@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
@@ -20,8 +18,6 @@ import net.sf.mmm.util.pojo.path.base.DefaultPojoPathFunctionManager;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@Singleton
-@Named(PojoPathFunctionManager.CDI_NAME)
 @SuppressWarnings("rawtypes")
 public class PojoPathFunctionManagerImpl extends DefaultPojoPathFunctionManager {
 

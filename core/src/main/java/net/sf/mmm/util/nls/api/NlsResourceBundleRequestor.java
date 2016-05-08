@@ -6,9 +6,10 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the interface of a component to {@link #requestBundlesAsynchron(Runnable, String...) request}
- * {@link NlsResourceBundle}s. In regular contexts there is no need in requesting resource bundles and all methods of
- * this component will have no effect. However, on special client-environments like GWT you may need to request them
- * explicitly if you do NOT use {@link NlsBundle} and want to make use of code-splitting and lazy loading.
+ * {@link NlsResourceBundle}s. In regular contexts there is no need in requesting resource bundles and all
+ * methods of this component will have no effect. However, on special client-environments like GWT you may
+ * need to request them explicitly if you do NOT use {@link NlsBundle} and want to make use of code-splitting
+ * and lazy loading.
  *
  * @see NlsMessageFactory#createDirect(String, String, java.util.Map)
  *
@@ -18,19 +19,16 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 @ComponentSpecification
 public interface NlsResourceBundleRequestor {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.nls.api.NlsResourceBundleRequestor";
-
   /**
    * This method requests a number of {@link java.util.ResourceBundle}s by their
-   * {@link java.util.ResourceBundle#getBundle(String) base-name}. In a GWT environment this will cause that these
-   * {@link java.util.ResourceBundle} are loaded from the server (if not already available) in the
-   * {@link java.util.Locale} of the user so they are available for dictionaries. After the last bundle has been loaded
-   * the given {@code callback} will be invoked. In other environments this method will do nothing but synchronously
-   * invoking the {@code callback}.
+   * {@link java.util.ResourceBundle#getBundle(String) base-name}. In a GWT environment this will cause that
+   * these {@link java.util.ResourceBundle} are loaded from the server (if not already available) in the
+   * {@link java.util.Locale} of the user so they are available for dictionaries. After the last bundle has
+   * been loaded the given {@code callback} will be invoked. In other environments this method will do nothing
+   * but synchronously invoking the {@code callback}.
    *
-   * @param callback is the {@link Runnable} that is {@link Runnable#run() called} when all bundles are loaded and
-   *        available.
+   * @param callback is the {@link Runnable} that is {@link Runnable#run() called} when all bundles are loaded
+   *        and available.
    * @param bundleNames are the {@link java.util.ResourceBundle#getBundle(String) base-names} of the requested
    *        {@link java.util.ResourceBundle}s.
    */

@@ -5,9 +5,6 @@ package net.sf.mmm.util.math.base;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.api.NumberType;
 
@@ -17,8 +14,6 @@ import net.sf.mmm.util.math.api.NumberType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named(MathUtil.CDI_NAME)
 public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
 
   /** The {@link NumberTypeImpl} for {@link AtomicLong}. */
@@ -63,8 +58,7 @@ public class MathUtilImpl extends MathUtilLimitedImpl implements MathUtil {
   };
 
   /** The {@link NumberTypeImpl} for {@link AtomicInteger}. */
-  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3, null,
-      null) {
+  public static final NumberTypeImpl<AtomicInteger> ATOMIC_INTEGER = new NumberTypeImpl<AtomicInteger>(3, null, null) {
 
     @Override
     public Class<AtomicInteger> getNumberClass() {

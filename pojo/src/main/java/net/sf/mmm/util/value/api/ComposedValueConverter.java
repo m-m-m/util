@@ -5,19 +5,20 @@ package net.sf.mmm.util.value.api;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a {@link ValueConverter} that is composed out of individual {@link ValueConverter}s. The
- * idea of this component is the idiom <em>separations of concerns</em>. Therefore you can write an individual
- * {@link ValueConverter} for each type of value you want to deal with. These individual {@link ValueConverter}s are
- * combined to one generic converter following the composition-pattern. Therefore this generic converter needs to choose
- * the individual {@link ValueConverter} that is appropriate for a specific
- * {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType) conversion}. <br>
+ * This is the interface for a {@link ValueConverter} that is composed out of individual
+ * {@link ValueConverter}s. The idea of this component is the idiom <em>separations of concerns</em>.
+ * Therefore you can write an individual {@link ValueConverter} for each type of value you want to deal with.
+ * These individual {@link ValueConverter}s are combined to one generic converter following the
+ * composition-pattern. Therefore this generic converter needs to choose the individual {@link ValueConverter}
+ * that is appropriate for a specific {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType)
+ * conversion}. <br>
  * <br>
- * The meaning of <em>appropriate</em> here can depend on the implementation. However it needs to guarantee that the
- * {@link #getSourceType() source-type} of the chosen {@link ValueConverter} {@link Class#isAssignableFrom(Class) is
- * assignable from} the actual {@link Object#getClass() type} of the object to convert. Additionally the
- * {@link ValueConverter#getTargetType() target-type} of the chosen {@link ValueConverter} needs to be
- * {@link Class#isAssignableFrom(Class) assignable from} the actual type to convert to or vice versa. The following
- * table illustrates this with some examples:<br>
+ * The meaning of <em>appropriate</em> here can depend on the implementation. However it needs to guarantee
+ * that the {@link #getSourceType() source-type} of the chosen {@link ValueConverter}
+ * {@link Class#isAssignableFrom(Class) is assignable from} the actual {@link Object#getClass() type} of the
+ * object to convert. Additionally the {@link ValueConverter#getTargetType() target-type} of the chosen
+ * {@link ValueConverter} needs to be {@link Class#isAssignableFrom(Class) assignable from} the actual type to
+ * convert to or vice versa. The following table illustrates this with some examples:<br>
  * <table border="1">
  * <tr>
  * <th>sourceType</th>
@@ -99,10 +100,10 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * </tr>
  * </table>
  * <br>
- * However the chosen converter may {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType) return}
- * {@code null} to indicate that conversion is NOT possible. This {@link ComposedValueConverter} should therefore try
- * all applicable converters starting from most to least specific until conversion succeeds. If all applicable
- * converters fail it will also fail and return {@code null}. <br>
+ * However the chosen converter may {@link #convert(Object, Object, net.sf.mmm.util.reflect.api.GenericType)
+ * return} {@code null} to indicate that conversion is NOT possible. This {@link ComposedValueConverter}
+ * should therefore try all applicable converters starting from most to least specific until conversion
+ * succeeds. If all applicable converters fail it will also fail and return {@code null}. <br>
  *
  * @see net.sf.mmm.util.value.impl.DefaultComposedValueConverter#getInstance()
  *
@@ -111,8 +112,5 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  */
 @ComponentSpecification
 public interface ComposedValueConverter extends ValueConverter<Object, Object>, GenericValueConverter<Object> {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.value.api.ComposedValueConverter";
 
 }

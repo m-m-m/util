@@ -6,11 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.resource.api.DataResource;
-import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.api.spi.DataResourceProvider;
 import net.sf.mmm.util.resource.base.AbstractBrowsableResourceFactory;
 import net.sf.mmm.util.resource.impl.spi.ClasspathResourceProvider;
@@ -18,13 +15,12 @@ import net.sf.mmm.util.resource.impl.spi.FileResourceProvider;
 import net.sf.mmm.util.resource.impl.spi.UrlResourceProvider;
 
 /**
- * This is the default implementation of the {@link net.sf.mmm.util.resource.api.BrowsableResourceFactory} interface.
+ * This is the default implementation of the {@link net.sf.mmm.util.resource.api.BrowsableResourceFactory}
+ * interface.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Singleton
-@Named(DataResourceFactory.CDI_NAME)
 public class BrowsableResourceFactoryImpl extends AbstractBrowsableResourceFactory {
 
   private List<DataResourceProvider<? extends DataResource>> providers;

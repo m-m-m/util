@@ -13,7 +13,4 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 @ComponentSpecification
 public interface MathUtil extends MathUtilLimited {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.math.api.MathUtil";
-
 }

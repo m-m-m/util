@@ -9,8 +9,6 @@ import java.util.Currency;
 import java.util.Date;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
@@ -20,6 +18,7 @@ import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.SimpleEnumProvider;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
+import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.api.ValueNotSetException;
@@ -31,14 +30,13 @@ import net.sf.mmm.util.value.api.WrongValueTypeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@Singleton
-@Named(StringValueConverter.CDI_NAME)
-public class StringValueConverterImpl extends AbstractGenericValueConverter<String>
-    implements StringValueConverter {
+public class StringValueConverterImpl extends AbstractGenericValueConverter<String> implements StringValueConverter {
 
   private static StringValueConverterImpl instance;
 
   private Iso8601Util iso8601Util;
+
+  private MathUtil mathUtil;
 
   private StringUtil stringUtil;
 
@@ -82,6 +80,9 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
     }
     if (this.stringUtil == null) {
       this.stringUtil = StringUtilImpl.getInstance();
+    }
+    if (this.mathUtil == null) {
+      this.mathUtil = MathUtilImpl.getInstance();
     }
     if (this.enumProvider == null) {
       SimpleEnumProvider impl = new SimpleEnumProvider();
@@ -154,17 +155,17 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
    * This method parses a numeric value.
    *
    * @param numberValue is the number value as string.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
-   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
-   *        wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read
+   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
+   *        thrown if something goes wrong. This will help to find the problem easier.
    * @return the value as number.
    * @throws WrongValueTypeException if the given string is no number.
    */
-  private static Number parseNumber(String numberValue, Object valueSource) throws WrongValueTypeException {
+  private Number parseNumber(String numberValue, Object valueSource) throws WrongValueTypeException {
 
     try {
       Double d = Double.valueOf(numberValue);
-      return MathUtilImpl.getInstance().toSimplestNumber(d);
+      return this.mathUtil.toSimplestNumber(d);
     } catch (NumberFormatException e) {
       throw new WrongValueTypeException(e, numberValue, valueSource, Number.class);
     }
@@ -234,21 +235,23 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   /**
    * This method converts the given {@link String}-{@code value} to the given {@code type}. It is called from
    * {@link #convertValue(String, Object, Class, Type)} if the given {@code type} is unknown. This default
-   * implementation simply throws a new {@link WrongValueTypeException}. You can extend this class and override this
-   * method in order to support the conversion for additional types. You should first handle the conversion for all
-   * value types you like. Then for all other types you should delegate to the {@code super} method implementation.
+   * implementation simply throws a new {@link WrongValueTypeException}. You can extend this class and
+   * override this method in order to support the conversion for additional types. You should first handle the
+   * conversion for all value types you like. Then for all other types you should delegate to the
+   * {@code super} method implementation.
    *
    * @param value is the value to convert.
    * @param type is the type the {@code value} should be converted to.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
-   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
-   *        wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read
+   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
+   *        thrown if something goes wrong. This will help to find the problem easier.
    *
    * @param <V> is the type the {@code value} should be converted to.
    * @return the {@code value} converted to {@code type}.
    * @throws ValueNotSetException if the given {@code value} is {@code null}.
-   * @throws WrongValueTypeException if the given {@code value} is NOT {@code null} but can NOT be converted to the
-   *         given {@code type} (e.g. if {@code value} is "12x" and {@code type} is {@code Integer.class}).
+   * @throws WrongValueTypeException if the given {@code value} is NOT {@code null} but can NOT be converted
+   *         to the given {@code type} (e.g. if {@code value} is "12x" and {@code type} is
+   *         {@code Integer.class}).
    */
   protected <V> V convertUnknownValue(String value, Class<V> type, Object valueSource)
       throws ValueNotSetException, WrongValueTypeException {

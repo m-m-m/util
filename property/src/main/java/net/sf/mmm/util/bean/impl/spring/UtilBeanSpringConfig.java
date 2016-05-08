@@ -12,6 +12,7 @@ import net.sf.mmm.util.bean.impl.BeanFactoryImpl;
 import net.sf.mmm.util.bean.impl.mapping.GenericPojoBeanMapperImpl;
 import net.sf.mmm.util.pojo.impl.spring.UtilPojoSpringConfig;
 import net.sf.mmm.util.property.impl.spring.UtilPropertySpringConfig;
+import net.sf.mmm.util.value.impl.spring.UtilValueSpringConfig;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.bean}.
@@ -20,7 +21,7 @@ import net.sf.mmm.util.property.impl.spring.UtilPropertySpringConfig;
  * @since 8.0.0
  */
 @Configuration
-@Import({ UtilPropertySpringConfig.class, UtilPojoSpringConfig.class })
+@Import({ UtilPropertySpringConfig.class, UtilPojoSpringConfig.class, UtilValueSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class UtilBeanSpringConfig {
 

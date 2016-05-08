@@ -5,8 +5,6 @@ package net.sf.mmm.util.context.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.context.api.GenericContextFactory;
@@ -22,8 +20,6 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@Singleton
-@Named(GenericContextFactory.CDI_NAME)
 public class GenericContextFactoryImpl extends AbstractGenericContextFactory {
 
   private ComposedValueConverter composedValueConverter;

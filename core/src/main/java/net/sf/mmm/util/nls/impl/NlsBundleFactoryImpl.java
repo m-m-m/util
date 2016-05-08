@@ -3,8 +3,6 @@
 package net.sf.mmm.util.nls.impl;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundleFactory;
@@ -17,8 +15,6 @@ import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-@Named(NlsBundleFactory.CDI_NAME)
-@Singleton
 public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
 
   private NlsMessageFactory messageFactory;

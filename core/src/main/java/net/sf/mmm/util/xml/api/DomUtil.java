@@ -20,17 +20,14 @@ import org.xml.sax.InputSource;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
- * This is the interface for a collection of utility functions that help to deal with the {@link org.w3c.dom.Node DOM}
- * API.
+ * This is the interface for a collection of utility functions that help to deal with the
+ * {@link org.w3c.dom.Node DOM} API.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
 @ComponentSpecification
 public interface DomUtil {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.xml.api.DomUtil";
 
   /**
    * This method creates a new empty XML DOM document.
@@ -42,8 +39,8 @@ public interface DomUtil {
   /**
    * This method parses an XML document from a given input stream.
    *
-   * @param inputStream is the input stream to the XML data. If will be closed at the end of this method (on success as
-   *        well as in an exceptional state).
+   * @param inputStream is the input stream to the XML data. If will be closed at the end of this method (on
+   *        success as well as in an exceptional state).
    * @return the parsed XML DOM document.
    * @throws XmlException if the XML is invalid and could NOT be parsed.
    * @throws IOException if the input stream produced an error while reading.
@@ -73,8 +70,8 @@ public interface DomUtil {
    *
    * @param xmlNode is the "root" node of the XML tree to write (e.g. the Document or just a single Element).
    * @param outputStream is where the serialized XML is written to.
-   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before opening tags),
-   *        {@code false} otherwise.
+   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before opening
+   *        tags), {@code false} otherwise.
    * @throws XmlException if XML is inconsistent.
    */
   void writeXml(Node xmlNode, OutputStream outputStream, boolean indent) throws XmlException;
@@ -84,8 +81,8 @@ public interface DomUtil {
    *
    * @param xmlNode is the "root" node of the XML tree to write (e.g. the Document or just a single Element).
    * @param writer is where the serialized XML is written to.
-   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before opening tags),
-   *        {@code false} otherwise.
+   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before opening
+   *        tags), {@code false} otherwise.
    * @throws XmlException if XML is inconsistent.
    */
   void writeXml(Node xmlNode, Writer writer, boolean indent) throws XmlException;
@@ -95,15 +92,15 @@ public interface DomUtil {
    *
    * @param source is a source (e.g. DomSource, etc.)
    * @param result is a result (e.g. DomResult, StreamResult, etc.)
-   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before opening tags),
-   *        {@code false} otherwise.
+   * @param indent - {@code true} if the XML should be indented (automatically add line-breaks before opening
+   *        tags), {@code false} otherwise.
    * @throws XmlException if the transformation failed (e.g. invalid XML).
    */
   void transformXml(Source source, Result result, boolean indent) throws XmlException;
 
   /**
-   * This method gets the local name of a given {@code element}. This is the name of the element without any namespace
-   * prefix. <br>
+   * This method gets the local name of a given {@code element}. This is the name of the element without any
+   * namespace prefix. <br>
    * The method {@link Node#getLocalName()} will return {@code null} if the {@link Node} has no
    * {@link Node#getNamespaceURI() namespace}. Therefore this method makes your life a little easier.
    *
@@ -113,9 +110,9 @@ public interface DomUtil {
   String getLocalName(Node node);
 
   /**
-   * This method determines if two {@link Node XML-nodes} represent the same XML. This is quite a complex operation
-   * since the two given nodes may have different segmentations of the text they contain and one might use
-   * {@link org.w3c.dom.Text} while the other may use a {@link org.w3c.dom.CDATASection}.
+   * This method determines if two {@link Node XML-nodes} represent the same XML. This is quite a complex
+   * operation since the two given nodes may have different segmentations of the text they contain and one
+   * might use {@link org.w3c.dom.Text} while the other may use a {@link org.w3c.dom.CDATASection}.
    *
    * @param node1 is the first {@link Node} to compare.
    * @param node2 is the second {@link Node} to compare.
@@ -138,10 +135,10 @@ public interface DomUtil {
    * This method gets the first element of the given node-list with the specified tag-name.
    *
    * @param nodeList is the node-list (potentially) containing the requested element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null} if any element
-   *        is acceptable.
-   * @return the first element in the node-list with the given tag-name (or at all if tag-name is {@code null}). If no
-   *         such element exists in the node-list, {@code null} is returned.
+   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null} if
+   *        any element is acceptable.
+   * @return the first element in the node-list with the given tag-name (or at all if tag-name is {@code null}
+   *         ). If no such element exists in the node-list, {@code null} is returned.
    */
   Element getFirstElement(NodeList nodeList, String tagName);
 
@@ -149,10 +146,10 @@ public interface DomUtil {
    * This method gets the first child-element of the given {@code element} with the specified {@code tagName}.
    *
    * @param element is the element (potentially) containing the requested child-element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null} if any element
-   *        is acceptable.
-   * @return the first element in the node-list with the given tag-name (or at all if tag-name is {@code null}). If no
-   *         such element exists in the node-list, {@code null} is returned.
+   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null} if
+   *        any element is acceptable.
+   * @return the first element in the node-list with the given tag-name (or at all if tag-name is {@code null}
+   *         ). If no such element exists in the node-list, {@code null} is returned.
    */
   Element getFirstChildElement(Element element, String tagName);
 
@@ -162,8 +159,10 @@ public interface DomUtil {
    * @param element is the element potentially containing the requested boolean attribute.
    * @param attribute is the name of the requested attribute.
    * @param defaultValue is the default returned if the attribute is NOT present.
-   * @return the value of the specified {@code attribute} or the {@code defaultValue} if the attribute is NOT present.
-   * @throws IllegalArgumentException if the value of the specified attribute does NOT represent a boolean value.
+   * @return the value of the specified {@code attribute} or the {@code defaultValue} if the attribute is NOT
+   *         present.
+   * @throws IllegalArgumentException if the value of the specified attribute does NOT represent a boolean
+   *         value.
    */
   boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue)
       throws IllegalArgumentException;
@@ -184,25 +183,26 @@ public interface DomUtil {
    * @see #getNodeText(Node, Appendable, int)
    *
    * @param node is the xml node containing the text.
-   * @param depth specifies how deep to step into child elements. If less than 1, the text of child elements is ignored.
+   * @param depth specifies how deep to step into child elements. If less than 1, the text of child elements
+   *        is ignored.
    * @return the text of the node including child nodes down to the specified depth.
    */
   String getNodeText(Node node, int depth);
 
   /**
-   * This method appends the text of the given node to the string buffer. Text means the plain characters between the
-   * opening and the closing tag of the element including the text of CDATA sections. The text of child elements is only
-   * appended according to the given depth. If the depth is less than 1, child elements are ignored, if equal to 1, the
-   * text of child elements is included without their child elements. For an infinite depth use
-   * {@code Integer.MAX_VALUE}. E.g. for the a element {@code a} in <br>
+   * This method appends the text of the given node to the string buffer. Text means the plain characters
+   * between the opening and the closing tag of the element including the text of CDATA sections. The text of
+   * child elements is only appended according to the given depth. If the depth is less than 1, child elements
+   * are ignored, if equal to 1, the text of child elements is included without their child elements. For an
+   * infinite depth use {@code Integer.MAX_VALUE}. E.g. for the a element {@code a} in <br>
    *
    * <pre>
    * {@code <a>123<b/>4<c>5<d>6</d></c><![CDATA[7]]>8</a>}
    * </pre>
    *
    * <br>
-   * the call of {@code getNodeText(a, buffer, depth)} will append the following text to the buffer according to the
-   * given depth.
+   * the call of {@code getNodeText(a, buffer, depth)} will append the following text to the buffer according
+   * to the given depth.
    * <ol start="0">
    * <li>"123478"</li>
    * <li>"1234578"</li>
@@ -211,17 +211,20 @@ public interface DomUtil {
    *
    * @param node is the xml node containing the text.
    * @param buffer is the where to append the text to.
-   * @param depth specifies how deep to step into child elements. If less than 1, the text of child elements is ignored.
+   * @param depth specifies how deep to step into child elements. If less than 1, the text of child elements
+   *        is ignored.
    */
   void getNodeText(Node node, Appendable buffer, int depth);
 
   /**
-   * This method requires the first child-element of the given {@code element} with the specified {@code tagName}.
+   * This method requires the first child-element of the given {@code element} with the specified
+   * {@code tagName}.
    *
    * @param element is the element (potentially) containing the requested child-element.
-   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null} if any element
-   *        is acceptable.
-   * @return the first element in the node-list with the given tag-name (or at all if tag-name is {@code null}).
+   * @param tagName is the {@link Element#getTagName() tag-name} of the requested element or {@code null} if
+   *        any element is acceptable.
+   * @return the first element in the node-list with the given tag-name (or at all if tag-name is {@code null}
+   *         ).
    * @throws IllegalArgumentException if the requested child element does NOT exist.
    */
   Element requireFirstChildElement(Element element, String tagName) throws IllegalArgumentException;

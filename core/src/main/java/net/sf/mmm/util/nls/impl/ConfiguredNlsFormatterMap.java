@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
@@ -38,14 +36,12 @@ import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTypeMedium;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterTypeShort;
 
 /**
- * This is a sub-class of {@link NlsFormatterMap} as a ready to use configurable component. It contains all the defaults
- * but can also be configured for your custom needs.
+ * This is a sub-class of {@link NlsFormatterMap} as a ready to use configurable component. It contains all
+ * the defaults but can also be configured for your custom needs.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Singleton
-@Named
 public class ConfiguredNlsFormatterMap extends NlsFormatterMap {
 
   private List<? extends NlsFormatterPlugin<?>> formatters;

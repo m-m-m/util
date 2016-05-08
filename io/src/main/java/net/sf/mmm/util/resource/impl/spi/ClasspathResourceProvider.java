@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.impl.spi;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.resource.api.ResourceUri;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
@@ -16,8 +13,6 @@ import net.sf.mmm.util.resource.base.spi.AbstractDataResourceProvider;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Singleton
-@Named
 public class ClasspathResourceProvider extends AbstractDataResourceProvider<ClasspathResource> {
 
   /**

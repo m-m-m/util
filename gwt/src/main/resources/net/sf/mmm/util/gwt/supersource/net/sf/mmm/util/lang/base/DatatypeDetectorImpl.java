@@ -14,7 +14,6 @@ import net.sf.mmm.util.lang.api.DatatypeDetector;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-@Named(DatatypeDetector.CDI_NAME)
 public class DatatypeDetectorImpl extends AbstractDatatypeDetector {
 
   /**

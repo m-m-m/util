@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsFormatter;
@@ -26,8 +23,6 @@ import net.sf.mmm.util.text.api.Justification;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@Singleton
-@Named(NlsArgumentFormatter.CDI_NAME)
 public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> implements NlsArgumentFormatter {
 
   /**
@@ -39,8 +34,8 @@ public class NlsArgumentFormatterImpl extends AbstractNlsFormatter<NlsArgument> 
   }
 
   @Override
-  public void format(NlsArgument argument, Locale locale, Map<String, Object> arguments,
-      NlsTemplateResolver resolver, Appendable buffer) throws IOException {
+  public void format(NlsArgument argument, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
+      Appendable buffer) throws IOException {
 
     Object value = null;
     boolean hasValue = false;

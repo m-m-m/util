@@ -11,10 +11,11 @@ import net.sf.mmm.util.file.base.FileAccessPermissions;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
- * This is the interface for a collection of utility functions for {@link File} handling and manipulation. <br>
+ * This is the interface for a collection of utility functions for {@link File} handling and manipulation.
+ * <br>
  * <b>NOTE:</b><br>
- * Since Java7 there is also {@link java.nio.file.Files} that offers similar and additional features. However this is
- * not supported in limited environments such as e.g. GWT.
+ * Since Java7 there is also {@link java.nio.file.Files} that offers similar and additional features. However
+ * this is not supported in limited environments such as e.g. GWT.
  *
  * @see net.sf.mmm.util.file.base.FileUtilImpl
  *
@@ -24,11 +25,9 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
 @ComponentSpecification
 public interface FileUtil extends FileUtilLimited {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.file.api.FileUtil";
-
   /**
-   * This method gets the {@link File} representing the {@link #PROPERTY_USER_HOME home directory of the current user}.
+   * This method gets the {@link File} representing the {@link #PROPERTY_USER_HOME home directory of the
+   * current user}.
    *
    * @return the home directory of the user.
    */
@@ -45,7 +44,8 @@ public interface FileUtil extends FileUtilLimited {
    * This method copies the file given by {@code source} to the file given by {@code destination}.
    *
    * @param source is the existing file to copy from.
-   * @param destination is the file to copy to. It will be created if it does NOT exist and overridden otherwise.
+   * @param destination is the file to copy to. It will be created if it does NOT exist and overridden
+   *        otherwise.
    * @throws RuntimeIoException if the operation fails.
    */
   void copyFile(File source, File destination) throws RuntimeIoException;
@@ -56,9 +56,10 @@ public interface FileUtil extends FileUtilLimited {
    * This method will only work with java 1.6 and above!
    *
    * @param source is the existing file to copy from.
-   * @param destination is the file to copy to. It will be created if it does NOT exist and overridden otherwise.
-   * @param keepFlags - {@code true} if the flags of the file should be copied as well, {@code false} otherwise (a new
-   *        file is created with default flags and only the content is copied).
+   * @param destination is the file to copy to. It will be created if it does NOT exist and overridden
+   *        otherwise.
+   * @param keepFlags - {@code true} if the flags of the file should be copied as well, {@code false}
+   *        otherwise (a new file is created with default flags and only the content is copied).
    * @throws RuntimeIoException if the operation fails.
    */
   void copyFile(File source, File destination, boolean keepFlags) throws RuntimeIoException;
@@ -66,12 +67,12 @@ public interface FileUtil extends FileUtilLimited {
   /**
    * This method gets the {@link FileAccessPermissions permissions} of the given {@code file}. <br>
    * <b>ATTENTION:</b><br>
-   * This operation is only available since java 6. Further it is limited and can only determine the permissions granted
-   * to the current user running this application.
+   * This operation is only available since java 6. Further it is limited and can only determine the
+   * permissions granted to the current user running this application.
    *
    * @param file is the file for which the permissions are requested.
-   * @param accessClass is the {@link FileAccessClass distinct class} the permission should be applied to in the
-   *        returned permissions. It may be {@code null} to apply the permissions to all distinct classes.
+   * @param accessClass is the {@link FileAccessClass distinct class} the permission should be applied to in
+   *        the returned permissions. It may be {@code null} to apply the permissions to all distinct classes.
    * @return the permissions of {@code file}.
    */
   FileAccessPermissions getPermissions(File file, FileAccessClass accessClass);
@@ -80,8 +81,8 @@ public interface FileUtil extends FileUtilLimited {
    * This method sets the {@link FileAccessPermissions permissions} of the given {@code file}. <br>
    * <b>ATTENTION:</b><br>
    * This operation is only available since java 6. Further it is limited to the permissions
-   * {@link FileAccessClass#OTHERS} and {@link FileAccessClass#USER} so {@link FileAccessClass#GROUP} flags are ignored
-   * as well as the global s-bits ({@link FileAccessPermissions#isSticky() sticky},
+   * {@link FileAccessClass#OTHERS} and {@link FileAccessClass#USER} so {@link FileAccessClass#GROUP} flags
+   * are ignored as well as the global s-bits ({@link FileAccessPermissions#isSticky() sticky},
    * {@link FileAccessPermissions#isSetgid() setgid} and {@link FileAccessPermissions#isSetgid() setuid}).
    *
    * @param file is the file to modify.
@@ -92,12 +93,12 @@ public interface FileUtil extends FileUtilLimited {
   /**
    * This method copies the file or directory given by {@code source} into the given {@code destination}. <br>
    * <b>ATTENTION:</b><br>
-   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the {@code destination} has
-   * to point to the final place where the copy should appear rather than the directory where the copy will be located
-   * in. <br>
+   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the
+   * {@code destination} has to point to the final place where the copy should appear rather than the
+   * directory where the copy will be located in. <br>
    * <br>
-   * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory "/tmp". The
-   * copy will have the same name "foo".
+   * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory
+   * "/tmp". The copy will have the same name "foo".
    *
    * <pre>
    * {@link File} source = new {@link File}("/usr/local/foo");
@@ -107,8 +108,9 @@ public interface FileUtil extends FileUtilLimited {
    *
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.
-   * @param allowOverwrite - if {@code false} and the {@code destination} already exists, a {@link RuntimeIoException}
-   *        is thrown, else if {@code true} the {@code destination} will be overwritten.
+   * @param allowOverwrite - if {@code false} and the {@code destination} already exists, a
+   *        {@link RuntimeIoException} is thrown, else if {@code true} the {@code destination} will be
+   *        overwritten.
    * @throws RuntimeIoException if the operation fails.
    */
   void copyRecursive(File source, File destination, boolean allowOverwrite) throws RuntimeIoException;
@@ -116,19 +118,21 @@ public interface FileUtil extends FileUtilLimited {
   /**
    * This method copies the file or directory given by {@code source} into the given {@code destination}. <br>
    * <b>ATTENTION:</b><br>
-   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the {@code destination} has
-   * to point to the final place where the copy should appear rather than the directory where the copy will be located
-   * in. <br>
+   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the
+   * {@code destination} has to point to the final place where the copy should appear rather than the
+   * directory where the copy will be located in. <br>
    * <br>
    *
    * @see #copyRecursive(File, File, boolean)
    *
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.
-   * @param allowOverwrite - if {@code false} and the {@code destination} already exists, a {@link RuntimeIoException}
-   *        is thrown, else if {@code true} the {@code destination} will be overwritten.
-   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File) decides} which files should be copied.
-   *        Only {@link FileFilter#accept(File) accepted} files and directories are copied, others will be ignored.
+   * @param allowOverwrite - if {@code false} and the {@code destination} already exists, a
+   *        {@link RuntimeIoException} is thrown, else if {@code true} the {@code destination} will be
+   *        overwritten.
+   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File) decides} which files should be
+   *        copied. Only {@link FileFilter#accept(File) accepted} files and directories are copied, others
+   *        will be ignored.
    * @throws RuntimeIoException if the operation fails.
    */
   void copyRecursive(File source, File destination, boolean allowOverwrite, FileFilter filter)
@@ -147,9 +151,10 @@ public interface FileUtil extends FileUtilLimited {
   int deleteRecursive(File path) throws RuntimeIoException;
 
   /**
-   * This method {@link File#delete() deletes} all {@link File#listFiles() children} of the given {@code directory}
-   * recursively. If the given {@code directory} denotes an {@link File#exists() existing} {@link File#isDirectory()
-   * directory} then it will be empty after the call of this method, else this method will have no effect.
+   * This method {@link File#delete() deletes} all {@link File#listFiles() children} of the given
+   * {@code directory} recursively. If the given {@code directory} denotes an {@link File#exists() existing}
+   * {@link File#isDirectory() directory} then it will be empty after the call of this method, else this
+   * method will have no effect.
    *
    * @param directory is the directory to delete.
    * @return the number of files that have been deleted (excluding the directories).
@@ -158,27 +163,29 @@ public interface FileUtil extends FileUtilLimited {
   int deleteChildren(File directory) throws RuntimeIoException;
 
   /**
-   * This method gets all {@link File files} matching to the given {@code path} and {@code fileType} . The {@code path}
-   * may contain {@link net.sf.mmm.util.pattern.base.PathPatternCompiler wildcards}. <br>
+   * This method gets all {@link File files} matching to the given {@code path} and {@code fileType} . The
+   * {@code path} may contain {@link net.sf.mmm.util.pattern.base.PathPatternCompiler wildcards}. <br>
    * Examples:
    * <ul>
    * <li><code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd,
-   * "*", {@link FileType#DIRECTORY})</code> will return all {@link File#isDirectory() directories} in {@code cwd}</li>
+   * "*", {@link FileType#DIRECTORY})</code> will return all {@link File#isDirectory() directories} in
+   * {@code cwd}</li>
    * <li><code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd,
    * "*&#47;*.xml", {@link FileType#FILE})</code> will return all {@link File#isFile() files} from all direct
    * {@link File#list() sub-folders} of {@code cwd} that end with ".xml"</li>
    * <li><code>{@link #getMatchingFiles(File, String, FileType) getMatchingFiles}(cwd,
-   * "**&#47;*.xml", {@link FileType#FILE})</code> will return all {@link File#isFile() files} in {@code cwd} or any of
-   * its transitive {@link File#list() sub-folders} that end with ".xml"</li>
+   * "**&#47;*.xml", {@link FileType#FILE})</code> will return all {@link File#isFile() files} in {@code cwd}
+   * or any of its transitive {@link File#list() sub-folders} that end with ".xml"</li>
    * </ul>
    *
    * @see #collectMatchingFiles(File, String, FileType, List)
    *
-   * @param cwd is the current working directory and should therefore point to an existing {@link File#isDirectory()
-   *        directory}. If the given {@code path} is NOT {@link File#isAbsolute() absolute} it is interpreted relative
-   *        to this directory.
-   * @param path is the path the requested files must match. If this path is NOT {@link File#isAbsolute() absolute} it
-   *        is interpreted relative to the {@link File#isDirectory() directory} given by {@code cwd}.
+   * @param cwd is the current working directory and should therefore point to an existing
+   *        {@link File#isDirectory() directory}. If the given {@code path} is NOT {@link File#isAbsolute()
+   *        absolute} it is interpreted relative to this directory.
+   * @param path is the path the requested files must match. If this path is NOT {@link File#isAbsolute()
+   *        absolute} it is interpreted relative to the {@link File#isDirectory() directory} given by
+   *        {@code cwd}.
    * @param fileType is the type of the requested files or {@code null} if files of any type are acceptable.
    * @return an array containing all the {@link File files} that match the given {@code path} and apply to
    *         {@code ignore}
@@ -189,15 +196,17 @@ public interface FileUtil extends FileUtilLimited {
    * This method adds all files matching the given {@code path} and {@code fileType} to the {@code list}. The
    * {@code path} may contain {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcards}.
    *
-   * @param cwd is the current working directory and should therefore point to an existing {@link File#isDirectory()
-   *        directory}. If the given {@code path} is NOT {@link File#isAbsolute() absolute} it is interpreted relative
-   *        to this directory.
-   * @param path is the path the files to collect must match. If this path is NOT {@link File#isAbsolute() absolute} it
-   *        is interpreted relative to the {@link File#isDirectory() directory} given by {@code cwd}.
+   * @param cwd is the current working directory and should therefore point to an existing
+   *        {@link File#isDirectory() directory}. If the given {@code path} is NOT {@link File#isAbsolute()
+   *        absolute} it is interpreted relative to this directory.
+   * @param path is the path the files to collect must match. If this path is NOT {@link File#isAbsolute()
+   *        absolute} it is interpreted relative to the {@link File#isDirectory() directory} given by
+   *        {@code cwd}.
    * @param fileType is the type of the files to collect or {@code null} if files of any type are acceptable.
    * @param list is the list where to {@link List#add(Object) add} the collected files.
-   * @return {@code false} if the path is a regular string and {@code true} if the given path contains at least one
-   *         {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcard} ( {@code '*'} or {@code '?'}).
+   * @return {@code false} if the path is a regular string and {@code true} if the given path contains at
+   *         least one {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcard} ( {@code '*'} or
+   *         {@code '?'}).
    */
   boolean collectMatchingFiles(File cwd, String path, FileType fileType, List<File> list);
 

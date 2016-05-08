@@ -17,18 +17,16 @@ import net.sf.mmm.util.value.api.GenericValueConverter;
 @ComponentSpecification
 public interface GenericContextFactory {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.context.api.GenericContextFactory";
-
   /**
    * This method creates a new instance of a {@link MutableGenericContext}. It will use a
-   * {@link net.sf.mmm.util.collection.base.HashMapFactory} and delegate to {@link #createContext(MapFactory)} . <br>
+   * {@link net.sf.mmm.util.collection.base.HashMapFactory} and delegate to {@link #createContext(MapFactory)}
+   * . <br>
    * <b>ATTENTION:</b><br>
-   * Such context is usually suitable even if {@link GenericContext#createChildContext() child-contexts} are created and
-   * passed to other threads while the original thread is modifying the original context as proved in the according
-   * test-case. However {@link java.util.HashMap#get(Object)} is not academically thread-safe so if you need
-   * mission-critical safety, you might want to pass {@link net.sf.mmm.util.collection.base.ConcurrentHashMapFactory} to
-   * {@link #createContext(MapFactory)}.
+   * Such context is usually suitable even if {@link GenericContext#createChildContext() child-contexts} are
+   * created and passed to other threads while the original thread is modifying the original context as proved
+   * in the according test-case. However {@link java.util.HashMap#get(Object)} is not academically thread-safe
+   * so if you need mission-critical safety, you might want to pass
+   * {@link net.sf.mmm.util.collection.base.ConcurrentHashMapFactory} to {@link #createContext(MapFactory)}.
    *
    * @return the new context.
    */

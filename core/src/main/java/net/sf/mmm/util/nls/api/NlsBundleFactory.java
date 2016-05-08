@@ -16,9 +16,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 @ComponentSpecification
 public interface NlsBundleFactory {
 
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.util.nls.api.NlsBundleFactory";
-
   /**
    * This method dynamically creates an instance for the given {@code bundleInterface}.
    *

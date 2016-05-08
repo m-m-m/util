@@ -4,9 +4,6 @@ package net.sf.mmm.util.nls.base;
 
 import java.util.Map;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
@@ -17,8 +14,6 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named(NlsMessageFactory.CDI_NAME)
-@Singleton
 public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl {
 
   /**
