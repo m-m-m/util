@@ -12,5 +12,5 @@ This module is part of link:../../..#mmm-util[mmm-util] and brings GWT support f
 * GWT support for http://www.slf4j.org/[SLF4J] briding to https://github.com/fredsa/gwt-log[gwt-log] to use logging in shared code without depending on GWT.
 * GWT support for POJO introspection from link:../pojo[mmm-util-pojo].
 * GWT support for lots of other stuff from link:../pojo[mmm-util-core].
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/gwt/api/package-summary.html#package.description[GWT API] with some nice additional features. 
-* http://m-m-m.github.io/maven/apidocs/[and much more... ]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/gwt/api/package-summary.html#package.description[GWT API] with some nice additional features. 
+* https://m-m-m.github.io/maven/apidocs/[and much more... ]

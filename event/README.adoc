@@ -8,5 +8,5 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 This module is part of link:../../..#mmm-util[mmm-util] and brings generic support for creating, sending and receving events:
 
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/event/api/package-summary.html#package.description[Entity API] containg simple but powerful base classes for events and event handling.
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/event/api/EventBus.html[EventBus] is straight forward interface for a powerful event bus that also comes with a ready-to-use  http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/event/impl/EventBusImpl.html[implementation].
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/event/api/package-summary.html#package.description[Entity API] containg simple but powerful base classes for events and event handling.
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/event/api/EventBus.html[EventBus] is straight forward interface for a powerful event bus that also comes with a ready-to-use  https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/event/impl/EventBusImpl.html[implementation].

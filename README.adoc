@@ -23,7 +23,7 @@ The mmm-util project brings generic utilities that make your life easier.
 * link:../../tree/master/context[mmm-util-context] support for generic and hierarchical contexts (variable maps).
 * link:../../tree/master/version[mmm-util-version] support for parsing and comparing versions.
 * link:../../tree/master/gwt[mmm-util-gwt] brings most of this project into your GWT based application.
-* http://m-m-m.github.io/maven/apidocs/[and much more... ]
+* https://m-m-m.github.io/maven/apidocs/[and much more... ]
 
 == Links
 

@@ -8,5 +8,5 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 This module is part of link:../../..#mmm-util[mmm-util] and brings support for parsing and comparing versions:
 
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/version/api/package-summary.html#package.description[Version API]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/version/api/package-summary.html#package.description[Version API]
 providing interfaces to parse and compare versions.

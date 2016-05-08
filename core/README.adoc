@@ -8,14 +8,14 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 This module is part of link:../../..#mmm-util[mmm-util] and brings many fundamental features missing in JDK like:
 
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/nls/api/package-summary.html#package.description[NLS/I18N]
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/reflect/api/package-summary.html#package.description[Advanced Reflection]
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/resource/api/package-summary.html#package.description[Powerful resource abstraction] (see also link:../io[mmm-util-io])
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/collection/api/package-summary.html#package.description[Collection Factories]
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/date/api/package-summary.html#package.description[Utilities for legacy Date/Calendar - esp. ISO-8601]
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pattern/api/package-summary.html#package.description[Pattern compiler abstraction to support both Regex and Glob]
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/scanner/api/package-summary.html#package.description[Scanners to build generic parsers easily]
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/text/api/package-summary.html#package.description[Text and advanced unicode support]
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/version/api/package-summary.html#package.description[Parsing and comparing versions]
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/package-summary.html#package.description[Generic universal stuff such as Datatype support]
-* http://m-m-m.github.io/maven/apidocs/[and much more... ]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/nls/api/package-summary.html#package.description[NLS/I18N]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/reflect/api/package-summary.html#package.description[Advanced Reflection]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/resource/api/package-summary.html#package.description[Powerful resource abstraction] (see also link:../io[mmm-util-io])
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/collection/api/package-summary.html#package.description[Collection Factories]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/date/api/package-summary.html#package.description[Utilities for legacy Date/Calendar - esp. ISO-8601]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pattern/api/package-summary.html#package.description[Pattern compiler abstraction to support both Regex and Glob]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/scanner/api/package-summary.html#package.description[Scanners to build generic parsers easily]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/text/api/package-summary.html#package.description[Text and advanced unicode support]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/version/api/package-summary.html#package.description[Parsing and comparing versions]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/package-summary.html#package.description[Generic universal stuff such as Datatype support]
+* https://m-m-m.github.io/maven/apidocs/[and much more... ]

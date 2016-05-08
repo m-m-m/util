@@ -8,6 +8,6 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 This module is part of the link:../README.adoc[mmm-util project] and brings generic support for searches:
 
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/search/api/package-summary.html#package.description[Search API] for http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/search/api/SearchCriteria.html[SearchCriteria] and http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/search/api/SearchResult.html[SearchResult].
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/search/api/package-summary.html#package.description[Search API] for https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/search/api/SearchCriteria.html[SearchCriteria] and https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/search/api/SearchResult.html[SearchResult].
 * Including support for pagination and timeouts. 
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/search/base/package-summary.html#package.description[Search Base] brings base implementation for extension.
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/search/base/package-summary.html#package.description[Search Base] brings base implementation for extension.

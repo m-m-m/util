@@ -8,8 +8,8 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 This module is part of link:../../..#mmm-util[mmm-util] and brings extended features for dealing wiht POJOs including introspection and value conversion:
 
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/api/package-summary.html#package.description[POJO API] including generic fabrication API.
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html#package.description[POJO Descriptor] for reflective introspection of POJOs.
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/path/api/package-summary.html#package.description[POJO Path] for reflective navigation on POJOs.
-* http://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/value/api/package-summary.html#package.description[Value conversion] for generic and powerful conversion between any kind of values.
-* http://m-m-m.github.io/maven/apidocs/[and much more... ]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/api/package-summary.html#package.description[POJO API] including generic fabrication API.
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/descriptor/api/package-summary.html#package.description[POJO Descriptor] for reflective introspection of POJOs.
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/pojo/path/api/package-summary.html#package.description[POJO Path] for reflective navigation on POJOs.
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/value/api/package-summary.html#package.description[Value conversion] for generic and powerful conversion between any kind of values.
+* https://m-m-m.github.io/maven/apidocs/[and much more... ]
