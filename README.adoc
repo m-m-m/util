@@ -21,6 +21,7 @@ The mmm-util project brings generic utilities that make your life easier.
 * link:../../tree/master/cli[mmm-util-cli] brings support to build powerful and flexible command-line clients with automatic help and version options, NLS/I18N, etc.
 * link:../../tree/master/search[mmm-util-search] brings generic search API for search criteria and search result supporting pagination.
 * link:../../tree/master/context[mmm-util-context] support for generic and hierarchical contexts (variable maps).
+* link:../../tree/master/version[mmm-util-version] support for parsing and comparing versions.
 * link:../../tree/master/gwt[mmm-util-gwt] brings most of this project into your GWT based application.
 * http://m-m-m.github.io/maven/apidocs/[and much more... ]
 

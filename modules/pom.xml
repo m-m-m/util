@@ -26,6 +26,7 @@
     <module>../query</module>
     <module>../jpa</module>
     <module>../search</module>
+    <module>../version</module>
     <module>../gwt</module>
   </modules>
 
