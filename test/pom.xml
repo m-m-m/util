@@ -35,7 +35,6 @@
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
     </dependency>
-    <!-- SLF4J Design Flaw and GWT + Jetty bundling prevents us from using slf4j -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>

@@ -81,11 +81,9 @@
       <artifactId>spring-webmvc</artifactId>
       <optional>true</optional>
     </dependency>
-
-    <!-- servlet 3.0 in progress, depends on GWT support -->
     <dependency>
-      <groupId>org.apache.geronimo.specs</groupId>
-      <artifactId>geronimo-servlet_3.0_spec</artifactId>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
   </dependencies>

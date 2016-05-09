@@ -4,12 +4,14 @@
   <!-- <inherits name="net.sf.mmm.util.UtilCore"/> -->
 
   <!-- Enable/Disable loggers -->
+  <!--
   <set-property name="log_ConsoleLogger" value="ENABLED"/>
   <set-property name="log_FirebugLogger" value="ENABLED"/>
   <set-property name="log_GWTLogger" value="ENABLED"/>
   <set-property name="log_DivLogger" value="DISABLED"/>
   <set-property name="log_SystemLogger" value="DISABLED"/>
   <set-property name="log_WindowLogger" value="DISABLED"/>
+   -->
   <!-- Set log pattern -->
   <set-configuration-property name="log_pattern" value="(%F:%L) %d [%-5p] %m%n"/>
 
