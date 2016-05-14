@@ -22,8 +22,6 @@
     <module>../event</module>
     <module>../pojo</module>
     <module>../validation</module>
-    <module>../property</module>
-    <module>../query</module>
     <module>../search</module>
     <module>../version</module>
     <module>../gwt</module>
@@ -33,6 +31,8 @@
     <profile>
       <id>dev</id>
       <modules>
+        <module>../property</module>
+        <module>../query</module>
         <module>../http</module>
         <module>../contenttype</module>
         <module>../metakeys</module>
