@@ -24,7 +24,6 @@
     <module>../validation</module>
     <module>../property</module>
     <module>../query</module>
-    <module>../jpa</module>
     <module>../search</module>
     <module>../version</module>
     <module>../gwt</module>
