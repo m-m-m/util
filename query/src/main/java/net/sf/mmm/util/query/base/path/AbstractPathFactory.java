@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base.path;
 
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.ReadableSetProperty;
 import net.sf.mmm.util.property.api.lang.ReadableBooleanProperty;

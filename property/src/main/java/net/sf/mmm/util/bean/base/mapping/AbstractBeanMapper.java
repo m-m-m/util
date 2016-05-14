@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.api.BeanPrototypeBuilder;
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.bean.impl.BeanFactoryImpl;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 
@@ -16,7 +16,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
  * {@link net.sf.mmm.util.bean.api.mapping.DocumentBeanMapper}.
  *
  * @param <P> the base type of the {@link net.sf.mmm.util.pojo.api.Pojo}s to convert (e.g. {@link Object} or
- *        {@link net.sf.mmm.util.bean.api.Entity}).
+ *        {@link net.sf.mmm.util.bean.api.entity.Entity}).
  * @param <B> the base type of the {@link Bean} to convert (e.g. {@link Bean} or {@link EntityBean}).
  *
  * @author hohwille

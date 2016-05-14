@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.query.base.argument;
 
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.query.api.argument.EntityBeanArgument;
 import net.sf.mmm.util.query.api.expression.Expression;
 

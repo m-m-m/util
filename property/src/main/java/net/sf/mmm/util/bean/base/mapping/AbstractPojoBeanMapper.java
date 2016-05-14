@@ -3,7 +3,7 @@
 package net.sf.mmm.util.bean.base.mapping;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.bean.api.mapping.DocumentBeanMapper;
 import net.sf.mmm.util.bean.api.mapping.PojoBeanMapper;
 

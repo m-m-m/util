@@ -1,10 +1,8 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.lang.base;
+package net.sf.mmm.util.bean.api.id;
 
 import java.util.Objects;
-
-import net.sf.mmm.util.lang.api.Id;
 
 /**
  * This is the abstract base implementation of {@link Id}.
@@ -12,16 +10,13 @@ import net.sf.mmm.util.lang.api.Id;
  * @param <E> the generic type of the identified entity.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.0.0
  */
 public abstract class AbstractId<E> implements Id<E> {
 
-  /** TODO: javadoc. */
   private static final long serialVersionUID = 1L;
 
-  private long objectId;
-
-  private Number revision;
+  private long id;
 
   private Class<E> type;
 
@@ -36,30 +31,18 @@ public abstract class AbstractId<E> implements Id<E> {
    * The constructor.
    *
    * @param type - see {@link #getType()}.
-   * @param objectId - see {@link #getId()}.
+   * @param id - see {@link #getId()}.
    */
-  public AbstractId(Class<E> type, long objectId) {
-    this(type, objectId, null);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param type - see {@link #getType()}.
-   * @param objectId - see {@link #getId()}.
-   * @param revision - see {@link #getRevision()}.
-   */
-  public AbstractId(Class<E> type, long objectId, Number revision) {
+  public AbstractId(Class<E> type, long id) {
     super();
     this.type = type;
-    this.objectId = objectId;
-    this.revision = revision;
+    this.id = id;
   }
 
   @Override
   public long getId() {
 
-    return this.objectId;
+    return this.id;
   }
 
   @Override
@@ -69,15 +52,9 @@ public abstract class AbstractId<E> implements Id<E> {
   }
 
   @Override
-  public Number getRevision() {
-
-    return this.revision;
-  }
-
-  @Override
   public final int hashCode() {
 
-    return Objects.hash(Long.valueOf(this.objectId), this.type, this.revision);
+    return ~((int) this.id);
   }
 
   @Override
@@ -90,13 +67,13 @@ public abstract class AbstractId<E> implements Id<E> {
       return false;
     }
     AbstractId<?> other = (AbstractId<?>) obj;
-    if (this.objectId != other.objectId) {
+    if (this.id != other.id) {
       return false;
     }
     if (!Objects.equals(this.type, other.type)) {
       return false;
     }
-    if (!Objects.equals(this.revision, other.revision)) {
+    if (getVersion() != other.getVersion()) {
       return false;
     }
     return true;
@@ -112,8 +89,8 @@ public abstract class AbstractId<E> implements Id<E> {
 
   /**
    * @see #toString()
-   * @param buffer the {@link StringBuilder} where to {@link StringBuilder#append(CharSequence) append} the string
-   *        representation to.
+   * @param buffer the {@link StringBuilder} where to {@link StringBuilder#append(CharSequence) append} the
+   *        string representation to.
    */
   protected void toString(StringBuilder buffer) {
 
@@ -121,10 +98,11 @@ public abstract class AbstractId<E> implements Id<E> {
       buffer.append(this.type.getSimpleName());
       buffer.append(':');
     }
-    buffer.append(this.objectId);
-    if (this.revision != null) {
-      buffer.append(':');
-      buffer.append(this.revision);
+    buffer.append(this.id);
+    long version = getVersion();
+    if (version != VERSION_LATEST) {
+      buffer.append('@');
+      buffer.append(version);
     }
   }
 

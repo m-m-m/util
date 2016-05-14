@@ -5,7 +5,7 @@ package net.sf.mmm.util.query.base.example;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.IntegerProperty;

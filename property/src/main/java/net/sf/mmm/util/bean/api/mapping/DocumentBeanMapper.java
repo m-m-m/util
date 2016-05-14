@@ -4,7 +4,7 @@ package net.sf.mmm.util.bean.api.mapping;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 
 /**
  * This is the interface used to map a fixed type of <em>document</em> (generic container object) {@link #toBean(Object)

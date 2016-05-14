@@ -5,7 +5,7 @@ package net.sf.mmm.util.property.impl.factory;
 import javax.inject.Named;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.bean.api.link.Link;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;

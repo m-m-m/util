@@ -4,9 +4,9 @@ package net.sf.mmm.util.bean.base.link;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
+import net.sf.mmm.util.bean.api.id.Id;
 import net.sf.mmm.util.bean.api.link.Link;
-import net.sf.mmm.util.lang.api.Id;
 
 /**
  * Abstract base implementation of {@link Link}.

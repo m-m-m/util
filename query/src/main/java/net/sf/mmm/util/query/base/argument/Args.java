@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.query.api.argument.Argument;
 import net.sf.mmm.util.query.api.argument.BooleanArgument;
 import net.sf.mmm.util.query.api.argument.CollectionArgument;

@@ -31,8 +31,8 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidator;
 
 /**
- * This is the implementation of {@link BeanAccess} for the {@link BeanFactory#createPrototype(Class) prototype} of a
- * {@link Bean}.
+ * This is the implementation of {@link BeanAccess} for the {@link BeanFactory#createPrototype(Class)
+ * prototype} of a {@link Bean}.
  *
  * @param <BEAN> the generic type of the {@link Bean}.
  *
@@ -124,8 +124,7 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
       // copy properties from master to new prototype
       for (BeanPrototypeProperty prototypeProperty : master.name2PropertyMap.values()) {
         AbstractProperty<?> property = prototypeProperty.getProperty();
-        BeanPrototypeProperty copy = new BeanPrototypeProperty(property.copy(getBean()),
-            prototypeProperty.getIndex());
+        BeanPrototypeProperty copy = new BeanPrototypeProperty(property.copy(getBean()), prototypeProperty.getIndex());
         this.name2PropertyMap.put(property.getName(), copy);
       }
       this.method2OperationMap = new HashMap<>(master.method2OperationMap.size());
@@ -141,7 +140,8 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
   }
 
   /**
-   * @return a new {@link Map} instance such as {@link HashMap} or {@link ConcurrentHashMap} for the properties.
+   * @return a new {@link Map} instance such as {@link HashMap} or {@link ConcurrentHashMap} for the
+   *         properties.
    */
   protected Map<String, BeanPrototypeProperty> createPropertyMap() {
 
@@ -291,8 +291,8 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
 
   /**
    * @param property the {@link WritableProperty} to add.
-   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property}, {@code false}
-   *        otherwise (inherited).
+   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property},
+   *        {@code false} otherwise (inherited).
    */
   protected void addProperty(AbstractProperty<?> property, boolean declared) {
 
@@ -300,19 +300,20 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
   }
 
   /**
-   * Internal implementation of {@link #addProperty(AbstractProperty, boolean)} (e.g. recursive and without locking).
+   * Internal implementation of {@link #addProperty(AbstractProperty, boolean)} (e.g. recursive and without
+   * locking).
    *
    * @param property the {@link WritableProperty} to add.
-   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property}, {@code false}
-   *        otherwise (inherited).
+   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property},
+   *        {@code false} otherwise (inherited).
    */
   protected void addPropertyInternal(AbstractProperty<?> property, boolean declared) {
 
     String name = property.getName();
     this.name2PropertyMap.compute(name, (k, v) -> {
       if (v != null) {
-        throw new DuplicateObjectException(property.getBean().access().getSimpleName() + "." + property.getName(),
-            name, v);
+        throw new DuplicateObjectException(property.getBean().access().getSimpleName() + "." + property.getName(), k,
+            v);
       }
       return new BeanPrototypeProperty(property, this.name2PropertyMap.size());
     });

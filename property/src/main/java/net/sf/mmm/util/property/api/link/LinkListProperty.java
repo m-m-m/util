@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.bean.api.link.Link;
 import net.sf.mmm.util.property.api.lang.GenericProperty;
 import net.sf.mmm.util.property.api.util.ListProperty;

@@ -4,8 +4,8 @@ package net.sf.mmm.util.bean.base.link;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.bean.api.EntityBean;
-import net.sf.mmm.util.lang.api.Id;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
+import net.sf.mmm.util.bean.api.id.Id;
 
 /**
  * Implementation of {@link AbstractLink} based on an already resolved {@link EntityBean}.

@@ -4,7 +4,7 @@ package net.sf.mmm.util.bean.api.mapping;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanFactory;
-import net.sf.mmm.util.bean.api.EntityBean;
+import net.sf.mmm.util.bean.api.entity.EntityBean;
 
 /**
  * This is the interface used to map instances from a hierarchy of {@link net.sf.mmm.util.pojo.api.Pojo POJOs}
@@ -13,7 +13,7 @@ import net.sf.mmm.util.bean.api.EntityBean;
  * To map from a fixed generic container object see {@link DocumentBeanMapper} instead.
  *
  * @param <P> the base type of the {@link net.sf.mmm.util.pojo.api.Pojo}s to convert (e.g. {@link Object} or
- *        {@link net.sf.mmm.util.bean.api.Entity}).
+ *        {@link net.sf.mmm.util.bean.api.entity.Entity}).
  * @param <B> the base type of the {@link Bean} to map (e.g. {@link Bean} or {@link EntityBean}).
  *
  * @author hohwille
