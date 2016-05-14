@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.api.id;
 
-import javax.persistence.Id;
-
 /**
  * This is a simple implementation of {@link Id}.
  *
