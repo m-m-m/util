@@ -1,12 +1,11 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.value.api;
+package net.sf.mmm.util.exception.api;
 
 import java.util.Comparator;
 import java.util.Objects;
 
 import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
-import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.base.ComparableComparator;
 import net.sf.mmm.util.lang.base.NumberComparator;
 import net.sf.mmm.util.nls.api.NlsMessage;
@@ -15,10 +14,8 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  * This is the exception thrown if a numeric value is not in the expected range.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- * @deprecated use {@link net.sf.mmm.util.exception.api.ValueOutOfRangeException}
+ * @since 7.2.0 (moved from 1.0.0)
  */
-@Deprecated
 public class ValueOutOfRangeException extends ValueException {
 
   private static final long serialVersionUID = 3363522277063736719L;
@@ -32,37 +29,6 @@ public class ValueOutOfRangeException extends ValueException {
   protected ValueOutOfRangeException() {
 
     super();
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param value is the number that is out of range.
-   * @param minimum is the minimum value allowed
-   * @param maximum is the maximum value allowed.
-   * @deprecated - will be removed soon - use {@link #ValueOutOfRangeException(Object, Object, Object)}
-   *             instead.
-   */
-  @Deprecated
-  public ValueOutOfRangeException(Number value, Number minimum, Number maximum) {
-
-    this((Object) value, (Object) minimum, (Object) maximum, null);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param value is the number that is out of range.
-   * @param minimum is the minimum value allowed
-   * @param maximum is the maximum value allowed.
-   * @param valueSource describes the source of the value.
-   * @deprecated - will be removed soon - use
-   *             {@link #ValueOutOfRangeException(Object, Object, Object, Object)} instead.
-   */
-  @Deprecated
-  public ValueOutOfRangeException(Number value, Number minimum, Number maximum, Object valueSource) {
-
-    this((Object) value, (Object) minimum, (Object) maximum, valueSource);
   }
 
   /**
@@ -103,30 +69,6 @@ public class ValueOutOfRangeException extends ValueException {
     } else if (value instanceof Number) {
       verifyNumber((Number) value, (Number) minimum, (Number) maximum);
     }
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param <V> is the generic type of the values.
-   *
-   * @param valueSource describes the source of the value or {@code null} if NOT available. This may be the
-   *        filename where the value was read from, an XPath where the value was located in an XML document,
-   *        etc. It is used in exceptions thrown if something goes wrong. This will help to find the problem
-   *        easier.
-   * @param value is the number that is out of range.
-   * @param minimum is the minimum value allowed
-   * @param maximum is the maximum value allowed.
-   * @since 3.0.0
-   * @deprecated - will be removed soon - use
-   *             {@link #ValueOutOfRangeException(Object, Object, Object, Object)} instead.
-   */
-  @Deprecated
-  @SuppressWarnings("rawtypes")
-  public <V extends Comparable> ValueOutOfRangeException(Object valueSource, V value, V minimum, V maximum) {
-
-    super(createMessage(value, minimum, maximum, valueSource));
-    verifyComparable(value, minimum, maximum);
   }
 
   /**
@@ -222,35 +164,6 @@ public class ValueOutOfRangeException extends ValueException {
     }
     if (!valid) {
       throw new ValueOutOfRangeException(value, minimum, maximum, valueSource);
-    }
-  }
-
-  /**
-   * This method checks that the given {@code value} is in the inclusive range from {@code minimum} to
-   * {@code maximum}.
-   *
-   * @param value is the value to check.
-   * @param minimum is the minimum number allowed.
-   * @param maximum is the maximum number allowed.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier. It may be {@code null}
-   *        if there is no helpful source available.
-   * @throws ValueOutOfRangeException - if the given {@code value} is NOT in the range from {@code minimum} to
-   *         {@code maximum}.
-   * @deprecated - will be removed - use {@link #checkRange(Object, Object, Object, Object)} instead.
-   */
-  @Deprecated
-  public static void checkRange(Number value, Number minimum, Number maximum, Object valueSource)
-      throws ValueOutOfRangeException {
-
-    double d = value.doubleValue();
-    if ((d < minimum.doubleValue()) || (d > maximum.doubleValue())) {
-      if (valueSource == null) {
-        throw new ValueOutOfRangeException(value, minimum, maximum);
-      } else {
-        throw new ValueOutOfRangeException(value, minimum, maximum, valueSource);
-      }
     }
   }
 

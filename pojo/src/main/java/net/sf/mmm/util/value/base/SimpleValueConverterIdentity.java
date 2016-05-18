@@ -2,11 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
+import net.sf.mmm.util.exception.api.ValueException;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
-import net.sf.mmm.util.value.api.ValueException;
 
 /**
- * This is an implementation of {@link SimpleValueConverter} that returns the unmodified value (identity conversion).
+ * This is an implementation of {@link SimpleValueConverter} that returns the unmodified value (identity
+ * conversion).
  *
  * @param <V> is the generic type of the value.
  *

@@ -9,22 +9,21 @@ import javax.inject.Inject;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.date.api.Iso8601UtilLimited;
 import net.sf.mmm.util.date.base.Iso8601UtilLimitedImpl;
+import net.sf.mmm.util.exception.api.ValueConvertException;
+import net.sf.mmm.util.exception.api.ValueException;
 import net.sf.mmm.util.math.api.MathUtilLimited;
 import net.sf.mmm.util.math.api.NumberType;
 import net.sf.mmm.util.math.base.MathUtilLimitedImpl;
 import net.sf.mmm.util.value.api.SimpleGenericValueConverter;
-import net.sf.mmm.util.value.api.ValueConvertException;
-import net.sf.mmm.util.value.api.ValueException;
 
 /**
- * This is a generic value converter that is GWT compatible and therefore has reduced flexibility. If you have no GWT
- * limitations you should use {@link net.sf.mmm.util.value.api.ComposedValueConverter} instead.
+ * This is a generic value converter that is GWT compatible and therefore has reduced flexibility. If you have
+ * no GWT limitations you should use {@link net.sf.mmm.util.value.api.ComposedValueConverter} instead.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent
-    implements SimpleGenericValueConverter {
+public class SimpleGenericValueConverterImpl extends AbstractLoggableComponent implements SimpleGenericValueConverter {
 
   private Iso8601UtilLimited iso8601Util;
 

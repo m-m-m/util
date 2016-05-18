@@ -1,20 +1,17 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.value.api;
+package net.sf.mmm.util.exception.api;
 
 import java.lang.reflect.Type;
 
 import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
- * The {@link ValueConvertException} is thrown if the {@link ValueConverter#convert(Object, Object, Class)
- * conversion} of some value failed.
+ * The {@link ValueConvertException} is thrown if a value could not be converted to a given type.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
- * @deprecated use {@link net.sf.mmm.util.exception.api.ValueConvertException}
  */
-@Deprecated
 public class ValueConvertException extends ValueException {
 
   /** UID for serialization */

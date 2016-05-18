@@ -16,10 +16,10 @@ import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.AdvancedClassHierarchyMap;
 import net.sf.mmm.util.component.api.ResourceMissingException;
 import net.sf.mmm.util.exception.api.NlsParseException;
+import net.sf.mmm.util.exception.api.ValueException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.ValueConverter;
-import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
 
 /**

@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.value.api;
+package net.sf.mmm.util.exception.api;
 
 import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
@@ -8,14 +8,12 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  * This is the exception thrown if a required value was not set.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- * @deprecated use {@link net.sf.mmm.util.exception.api.ValueNotSetException}
+ * @since 7.2.0 (moved from 1.0.0)
  */
-@Deprecated
 public class ValueNotSetException extends ValueException {
 
   /** uid for serialization */
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = -8722582228766326020L;
 
   /** @see #getCode() */
   public static final String MESSAGE_CODE = "ValueNotSet";

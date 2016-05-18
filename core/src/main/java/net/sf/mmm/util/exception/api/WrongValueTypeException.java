@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.value.api;
+package net.sf.mmm.util.exception.api;
 
 import java.lang.reflect.Type;
 
@@ -10,13 +10,11 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
  * This exception is thrown if a value has the wrong type (a different value type was expected).
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.0
- * @deprecated use {@link net.sf.mmm.util.exception.api.WrongValueTypeException}
+ * @since 7.2.0 (moved from 1.0.0)
  */
-@Deprecated
 public class WrongValueTypeException extends ValueException {
 
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 3681394831124284211L;
 
   /** @see #getCode() */
   public static final String MESSAGE_CODE = "WrongValueType";

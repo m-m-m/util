@@ -7,7 +7,6 @@ import javax.inject.Singleton;
 
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.AbstractValueConverter;
 
 /**
@@ -44,8 +43,7 @@ public class ValueConverterToClass extends AbstractValueConverter<CharSequence, 
 
   @Override
   @SuppressWarnings("all")
-  public <T extends Class> T convert(CharSequence value, Object valueSource, GenericType<T> targetType)
-      throws ValueException {
+  public <T extends Class> T convert(CharSequence value, Object valueSource, GenericType<T> targetType) {
 
     if (value == null) {
       return null;

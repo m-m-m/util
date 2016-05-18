@@ -13,6 +13,8 @@ import javax.inject.Inject;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.ValueNotSetException;
+import net.sf.mmm.util.exception.api.WrongValueTypeException;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.StringUtil;
@@ -21,8 +23,6 @@ import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.base.MathUtilImpl;
 import net.sf.mmm.util.value.api.StringValueConverter;
-import net.sf.mmm.util.value.api.ValueNotSetException;
-import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the implementation of {@link StringValueConverter}.

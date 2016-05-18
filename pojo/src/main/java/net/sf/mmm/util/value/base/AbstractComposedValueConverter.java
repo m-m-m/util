@@ -6,12 +6,12 @@ import java.lang.reflect.Type;
 
 import javax.inject.Inject;
 
+import net.sf.mmm.util.exception.api.ValueNotSetException;
+import net.sf.mmm.util.exception.api.WrongValueTypeException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
-import net.sf.mmm.util.value.api.ValueNotSetException;
-import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the abstract base implementation of the {@link ComposedValueConverter} interface.

@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.validation.api;
+package net.sf.mmm.util.exception.api;
 
 import java.util.Collections;
 import java.util.Set;
@@ -8,9 +8,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-import net.sf.mmm.util.exception.api.ExceptionTruncation;
-import net.sf.mmm.util.exception.api.NlsRuntimeException;
-import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 
 /**
  * This exception is thrown if a validation failed unexpectedly. You may just use
@@ -30,11 +28,8 @@ import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
  * @see javax.validation.ConstraintViolationException
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 4.0.0
- *
- * @deprecated use {@link net.sf.mmm.util.exception.api.ValidationErrorUserException}.
+ * @since 7.2.0 (moved from 4.0.0)
  */
-@Deprecated
 public class ValidationErrorUserException extends NlsRuntimeException {
 
   /** @see #getCode() */
@@ -60,7 +55,7 @@ public class ValidationErrorUserException extends NlsRuntimeException {
    */
   public ValidationErrorUserException(Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilValidationRoot.class).errorValidation());
+    super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorValidation());
     if (nested instanceof ConstraintViolationException) {
       this.constraintViolations = ((ConstraintViolationException) nested).getConstraintViolations();
     } else {
