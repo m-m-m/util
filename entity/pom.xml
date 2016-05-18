@@ -6,7 +6,7 @@
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-util-modules</artifactId>
     <version>dev-SNAPSHOT</version>
-    <relativePath>../mmm-util-modules/pom.xml</relativePath>
+    <relativePath>../modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-entity</artifactId>
   <version>${net.sf.mmm.util.version}</version>
