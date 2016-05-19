@@ -4,11 +4,11 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 == Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]
 
-image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/util"]
-
 == mmm-util
 
-The mmm-util project brings generic utilities that make your life easier.
+image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/util"]
+
+The `mmm-util` project is part of is part of link:../../..#mmm[mmm] and brings generic utilities that make your life easier:
 
 * link:../../tree/master/core[mmm-util-core] brings many fundamental features missing in JDK like NLS/I18N, reflection and introspection, etc.
 * link:../../tree/master/pojo[mmm-util-pojo] brings powerful POJO introspection and value conversion
