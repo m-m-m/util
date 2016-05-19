@@ -37,8 +37,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Failed to parse \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} as value of the type \"{type}\"!")
-  NlsMessage errorParseType(@Named("value") Object value, @Named("type") Object type,
-      @Named("source") Object source);
+  NlsMessage errorParseType(@Named("value") Object value, @Named("type") Object type, @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.exception.api.NlsParseException
@@ -50,8 +49,8 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Failed to parse \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} as \"{type}\" - required format is \"{format}\"!")
-  NlsMessage errorParseFormat(@Named("value") Object value, @Named("format") Object format,
-      @Named("type") Object type, @Named("source") Object source);
+  NlsMessage errorParseFormat(@Named("value") Object value, @Named("format") Object format, @Named("type") Object type,
+      @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.exception.api.NlsIllegalArgumentException
@@ -186,8 +185,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The operation \"{operation}\" was invoked{source,choice,(?==null)''(else)' on \"'{source}'\"'} but is NOT supported!")
-  NlsMessage errorUnsupportedOperationWithName(@Named("operation") Object operation,
-      @Named("source") Object source);
+  NlsMessage errorUnsupportedOperationWithName(@Named("operation") Object operation, @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.exception.api.ReadOnlyException
@@ -218,5 +216,60 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    */
   @NlsBundleMessage("The object \"{object}\" has already been disposed!")
   NlsMessage errorObjectDisposed(@Named("object") Object object);
+
+  /**
+   * @see net.sf.mmm.util.exception.api.ValidationErrorUserException
+   *
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("Validation failed - please ensure to provide complete and correct data.")
+  NlsMessage errorValidation();
+
+  /**
+   * @see net.sf.mmm.util.exception.api.WrongValueTypeException
+   *
+   * @param value is the invalid value.
+   * @param valueType is the actual type of the value.
+   * @param targetType is the expected type of the value.
+   * @param source is the source of the value.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} with the type "
+      + "\"{valueType}\" can NOT be converted to the requested type \"{targetType}\"!")
+  NlsMessage errorValueWrongType(@Named("value") Object value, @Named("valueType") Object valueType,
+      @Named("targetType") Object targetType, @Named("source") Object source);
+
+  /**
+   * @see net.sf.mmm.util.exception.api.ValueNotSetException
+   *
+   * @param value is the invalid value.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The value from \"{source}\" is not set!")
+  NlsMessage errorValueNotSet(@Named("source") Object value);
+
+  /**
+   * @see net.sf.mmm.util.exception.api.ValueOutOfRangeException
+   *
+   * @param value is the invalid value.
+   * @param min is the minimum value.
+   * @param max is the maximum value.
+   * @param source is the source of the value or {@code null} if NOT available.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The value {value}{source,choice,(?==null)''(else)' from \"'{source}'\"'} needs to be in the range from {min} to {max}.")
+  NlsMessage errorValueOutOfRange(@Named("value") Object value, @Named("min") Object min, @Named("max") Object max,
+      @Named("source") Object source);
+
+  /**
+   * @see net.sf.mmm.util.exception.api.ValueConvertException
+   *
+   * @param value is the value that could NOT be converted.
+   * @param type is the type to convert to.
+   * @param source is the source of the value.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} could NOT be converted to \"{type}\"!")
+  NlsMessage errorValueConvert(@Named("value") Object value, @Named("type") Type type, @Named("source") Object source);
 
 }

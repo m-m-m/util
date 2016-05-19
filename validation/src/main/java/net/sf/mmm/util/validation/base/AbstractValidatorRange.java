@@ -4,15 +4,15 @@ package net.sf.mmm.util.validation.base;
 
 import java.util.Objects;
 
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValueValidator;
-import net.sf.mmm.util.value.NlsBundleUtilValueRoot;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * This is the abstract implementation of a {@link ValueValidator} {@link #validate(Object) validating} that a given
- * value {@link Range#isContained(Object) is contained} in a given {@link Range}.
+ * This is the abstract implementation of a {@link ValueValidator} {@link #validate(Object) validating} that a
+ * given value {@link Range#isContained(Object) is contained} in a given {@link Range}.
  *
  * @param <V> the generic type of the value to {@link #validate(Object) validate}.
  * @param <R> the generic type of the {@link Range}-bounds.
@@ -63,7 +63,7 @@ public class AbstractValidatorRange<V, R> extends AbstractValueValidator<V> {
     if (this.range.isContained(convertedValue)) {
       return null;
     } else {
-      return createBundle(NlsBundleUtilValueRoot.class).errorValueOutOfRange(convertedValue, this.range.getMin(),
+      return createBundle(NlsBundleUtilExceptionRoot.class).errorValueOutOfRange(convertedValue, this.range.getMin(),
           this.range.getMax(), null);
     }
   }
