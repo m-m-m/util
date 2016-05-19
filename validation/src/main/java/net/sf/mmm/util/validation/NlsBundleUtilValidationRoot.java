@@ -17,16 +17,6 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 public interface NlsBundleUtilValidationRoot extends NlsBundle {
 
   /**
-   * @see net.sf.mmm.util.validation.api.ValidationErrorUserException
-   *
-   * @return the {@link NlsMessage}
-   * @deprecated - use {@link net.sf.mmm.util.NlsBundleUtilCoreRoot#errorValidation()}
-   */
-  @Deprecated
-  @NlsBundleMessage("Validation failed - please ensure to provide complete and correct data.")
-  NlsMessage errorValidation();
-
-  /**
    * @see net.sf.mmm.util.validation.base.text.ValidatorPattern
    *
    * @param value is the value that does NOT match the expected format.

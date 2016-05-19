@@ -8,9 +8,9 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 import net.sf.mmm.util.exception.api.ExceptionTruncation;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
-import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 
 /**
  * This exception is thrown if a validation failed unexpectedly. You may just use
@@ -60,7 +60,7 @@ public class ValidationErrorUserException extends NlsRuntimeException {
    */
   public ValidationErrorUserException(Throwable nested) {
 
-    super(nested, createBundle(NlsBundleUtilValidationRoot.class).errorValidation());
+    super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorValidation());
     if (nested instanceof ConstraintViolationException) {
       this.constraintViolations = ((ConstraintViolationException) nested).getConstraintViolations();
     } else {
