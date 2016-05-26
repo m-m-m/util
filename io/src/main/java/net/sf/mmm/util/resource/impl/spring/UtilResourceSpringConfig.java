@@ -29,7 +29,7 @@ import net.sf.mmm.util.resource.impl.spi.UrlResourceProvider;
 public class UtilResourceSpringConfig extends UtilResourceSpringConfigBase {
 
   @Bean
-  public BrowsableResourceFactory cliParserBuilder() {
+  public BrowsableResourceFactory browsableResourceFactory() {
 
     return new BrowsableResourceFactoryImpl();
   }
