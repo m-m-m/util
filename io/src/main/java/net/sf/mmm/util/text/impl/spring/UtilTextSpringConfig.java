@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import net.sf.mmm.util.nls.impl.spring.UtilNlsSpringConfig;
 import net.sf.mmm.util.text.api.HyphenatorBuilder;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.base.DefaultLineWrapper;
@@ -20,7 +21,7 @@ import net.sf.mmm.util.xml.impl.spring.UtilXmlSpringConfig;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilXmlSpringConfig.class, UtilValueSpringConfig.class })
+@Import({ UtilNlsSpringConfig.class, UtilXmlSpringConfig.class, UtilValueSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class UtilTextSpringConfig extends UtilTextSpringConfigBase {
 

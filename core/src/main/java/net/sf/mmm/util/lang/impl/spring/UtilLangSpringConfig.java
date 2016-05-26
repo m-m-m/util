@@ -7,17 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.sf.mmm.util.lang.api.BasicUtil;
 import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
 import net.sf.mmm.util.lang.api.DatatypeDetector;
 import net.sf.mmm.util.lang.api.EnumProvider;
-import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.lang.api.SystemUtil;
-import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.lang.base.DatatypeDetectorImpl;
 import net.sf.mmm.util.lang.base.SimpleEnumProvider;
-import net.sf.mmm.util.lang.base.StringUtilImpl;
-import net.sf.mmm.util.lang.base.SystemUtilImpl;
 import net.sf.mmm.util.lang.base.datatype.descriptor.DatatypeDescriptorManagerImpl;
 import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 
@@ -28,28 +22,10 @@ import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
  * @since 8.0.0
  */
 @Configuration
-@Import(UtilReflectSpringConfig.class)
+@Import({ UtilReflectSpringConfig.class, UtilLangSpringConfigBase.class })
 @ComponentScan("net.sf.mmm.util.lang.base.datatype.descriptor")
 @SuppressWarnings("javadoc")
 public class UtilLangSpringConfig {
-
-  @Bean
-  public BasicUtil basicUtil() {
-
-    return new BasicUtilImpl();
-  }
-
-  @Bean
-  public StringUtil stringUtil() {
-
-    return new StringUtilImpl();
-  }
-
-  @Bean
-  public SystemUtil systemUtil() {
-
-    return new SystemUtilImpl();
-  }
 
   @Bean
   public DatatypeDetector datatypeDetector() {

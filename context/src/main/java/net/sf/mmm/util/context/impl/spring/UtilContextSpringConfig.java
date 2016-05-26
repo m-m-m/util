@@ -22,7 +22,7 @@ import net.sf.mmm.util.value.impl.spring.UtilValueSpringConfig;
 public class UtilContextSpringConfig {
 
   @Bean
-  public GenericContextFactory cliParserBuilder() {
+  public GenericContextFactory genericContextFactory() {
 
     return new GenericContextFactoryImpl();
   }
