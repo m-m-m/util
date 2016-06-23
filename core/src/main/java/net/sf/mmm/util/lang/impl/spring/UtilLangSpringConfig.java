@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.base.DatatypeDetectorImpl;
 import net.sf.mmm.util.lang.base.SimpleEnumProvider;
 import net.sf.mmm.util.lang.base.datatype.descriptor.DatatypeDescriptorManagerImpl;
-import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
+import net.sf.mmm.util.nls.impl.spring.UtilNlsSpringConfig;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.lang}.
@@ -22,7 +22,7 @@ import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
  * @since 8.0.0
  */
 @Configuration
-@Import({ UtilReflectSpringConfig.class, UtilLangSpringConfigBase.class })
+@Import({ UtilNlsSpringConfig.class, UtilLangSpringConfigBase.class })
 @ComponentScan("net.sf.mmm.util.lang.base.datatype.descriptor")
 @SuppressWarnings("javadoc")
 public class UtilLangSpringConfig {

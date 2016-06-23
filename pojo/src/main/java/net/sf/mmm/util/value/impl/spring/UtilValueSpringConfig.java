@@ -7,11 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.sf.mmm.util.date.impl.spring.UtilDateSpringConfig;
 import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 import net.sf.mmm.util.math.impl.spring.UtilMathSpringConfig;
 import net.sf.mmm.util.pojo.impl.spring.UtilPojoSpringConfig;
-import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.base.StringValueConverterImpl;
@@ -24,8 +22,7 @@ import net.sf.mmm.util.value.impl.ComposedValueConverterImpl;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilMathSpringConfig.class, UtilLangSpringConfig.class, UtilReflectSpringConfig.class,
-    UtilDateSpringConfig.class, UtilPojoSpringConfig.class })
+@Import({ UtilMathSpringConfig.class, UtilLangSpringConfig.class, UtilPojoSpringConfig.class })
 @ComponentScan("net.sf.mmm.util.value.impl")
 @SuppressWarnings("javadoc")
 public class UtilValueSpringConfig {

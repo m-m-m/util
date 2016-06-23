@@ -3,6 +3,7 @@
 package net.sf.mmm.util.bean.api.id;
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * This is the abstract base implementation of {@link Id}.
@@ -15,8 +16,6 @@ import java.util.Objects;
 public abstract class AbstractId<E> implements Id<E> {
 
   private static final long serialVersionUID = 1L;
-
-  private long id;
 
   private Class<E> type;
 
@@ -31,18 +30,10 @@ public abstract class AbstractId<E> implements Id<E> {
    * The constructor.
    *
    * @param type - see {@link #getType()}.
-   * @param id - see {@link #getId()}.
    */
-  public AbstractId(Class<E> type, long id) {
+  public AbstractId(Class<E> type) {
     super();
     this.type = type;
-    this.id = id;
-  }
-
-  @Override
-  public long getId() {
-
-    return this.id;
   }
 
   @Override
@@ -54,7 +45,12 @@ public abstract class AbstractId<E> implements Id<E> {
   @Override
   public final int hashCode() {
 
-    return ~((int) this.id);
+    long id = getId();
+    if (id == ID_UUID) {
+      return ~getUuid().hashCode();
+    } else {
+      return ~((int) id);
+    }
   }
 
   @Override
@@ -67,7 +63,10 @@ public abstract class AbstractId<E> implements Id<E> {
       return false;
     }
     AbstractId<?> other = (AbstractId<?>) obj;
-    if (this.id != other.id) {
+    if (getId() != other.getId()) {
+      return false;
+    }
+    if (!Objects.equals(getUuid(), other.getUuid())) {
       return false;
     }
     if (!Objects.equals(this.type, other.type)) {
@@ -89,20 +88,38 @@ public abstract class AbstractId<E> implements Id<E> {
 
   /**
    * @see #toString()
-   * @param buffer the {@link StringBuilder} where to {@link StringBuilder#append(CharSequence) append} the
-   *        string representation to.
+   * @param buffer the {@link StringBuilder} where to {@link StringBuilder#append(CharSequence) append} the string
+   *        representation to.
    */
   protected void toString(StringBuilder buffer) {
 
-    if (this.type != null) {
-      buffer.append(this.type.getSimpleName());
-      buffer.append(':');
+    UUID uuid = getUuid();
+    if (uuid == null) {
+      long id = getId();
+      buffer.append(id);
+      assert (id != ID_UUID);
+    } else {
+      buffer.append(uuid);
+      assert (getId() == ID_UUID);
     }
-    buffer.append(this.id);
     long version = getVersion();
     if (version != VERSION_LATEST) {
-      buffer.append('@');
+      buffer.append(VERSION_SEPARATOR);
       buffer.append(version);
+    }
+  }
+
+  /**
+   * @param idString the id (without version) as {@link String}.
+   * @return the {@code idString} as {@link UUID} or {@code null} if not a {@link #getUuid() UUID} (but {@link #getId()
+   *         ID} instead).
+   */
+  protected static UUID parseUuid(String idString) {
+
+    if ((idString.length() > 29) && (idString.indexOf('-') > 0)) {
+      return UUID.fromString(idString);
+    } else {
+      return null;
     }
   }
 

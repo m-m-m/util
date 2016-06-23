@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
+import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 import net.sf.mmm.util.math.impl.spring.UtilMathSpringConfig;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.api.PojoUtil;
@@ -31,7 +31,7 @@ import net.sf.mmm.util.pojo.path.impl.PojoPathNavigatorImpl;
  * @since 8.0.0
  */
 @Configuration
-@Import({ UtilCollectionSpringConfig.class, UtilMathSpringConfig.class })
+@Import({ UtilLangSpringConfig.class, UtilMathSpringConfig.class })
 @ComponentScan({ "net.sf.mmm.util.pojo.descriptor.impl.accessor", "net.sf.mmm.util.pojo.path.impl.function" })
 @SuppressWarnings("javadoc")
 public class UtilPojoSpringConfig {
