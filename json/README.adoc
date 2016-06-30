@@ -1,0 +1,13 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-property
+
+This module is part of link:../../..#mmm-util[mmm-util] and brings extended JSON support including:
+
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/json/api/JsonUtil.html[JsonUtil] for advanced generic JSON support based on JSON-P.
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/json/api/JsonSupport.html[JsonSupport] interface as API for objects with build-in JSON support.
+* https://m-m-m.github.io/maven/apidocs/[and much more... ]

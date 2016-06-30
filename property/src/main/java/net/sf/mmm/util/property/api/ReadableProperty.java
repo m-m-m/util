@@ -4,7 +4,8 @@ package net.sf.mmm.util.property.api;
 
 import javafx.beans.property.ReadOnlyProperty;
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.lang.IntegerProperty;
+import net.sf.mmm.util.json.api.JsonSupport;
+import net.sf.mmm.util.property.api.math.IntegerProperty;
 import net.sf.mmm.util.property.api.path.PropertyPath;
 import net.sf.mmm.util.reflect.api.GenericType;
 
@@ -16,7 +17,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @author hohwille
  * @since 8.0.0
  */
-public interface ReadableProperty<V> extends ReadOnlyProperty<V>, PropertyPath<V> {
+public interface ReadableProperty<V> extends ReadOnlyProperty<V>, PropertyPath<V>, JsonSupport {
 
   /**
    * @return the name of the property. By convention it should start with a {@link Character#isUpperCase(char) capital}

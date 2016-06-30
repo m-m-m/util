@@ -9,9 +9,9 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.lang.api.Orientation;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.BooleanProperty;
-import net.sf.mmm.util.property.api.lang.IntegerProperty;
-import net.sf.mmm.util.property.api.lang.WritableIntegerProperty;
 import net.sf.mmm.util.property.api.lang.WritableStringProperty;
+import net.sf.mmm.util.property.api.math.IntegerProperty;
+import net.sf.mmm.util.property.api.math.WritableIntegerProperty;
 import net.sf.mmm.util.validation.base.Mandatory;
 
 /**

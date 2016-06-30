@@ -4,9 +4,9 @@ package net.sf.mmm.util.property.api;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.lang.BooleanPropertyExpression;
-import net.sf.mmm.util.property.api.lang.IntegerPropertyExpression;
 import net.sf.mmm.util.property.api.lang.ReadableBooleanProperty;
-import net.sf.mmm.util.property.api.lang.ReadableIntegerProperty;
+import net.sf.mmm.util.property.api.math.IntegerPropertyExpression;
+import net.sf.mmm.util.property.api.math.ReadableIntegerProperty;
 import net.sf.mmm.util.property.api.util.ReadableContainerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;

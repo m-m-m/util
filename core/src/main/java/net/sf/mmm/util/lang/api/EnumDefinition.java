@@ -35,8 +35,8 @@ public interface EnumDefinition<TYPE, CATEGORY> extends SimpleDatatype<String> {
    * <b>ATTENTION:</b><br>
    * A {@link EnumDefinition} may be used with or without allowing a {@code null} value. Therefore, this
    * {@link Formatter} should be able to properly format {@code null} (see
-   * {@link net.sf.mmm.util.lang.base.AbstractFormatter#formatNull()}). E.g. a {@link Boolean} option in a search form
-   * may be optional and displayed as "any".
+   * {@link net.sf.mmm.util.lang.base.AbstractFormatter}{@code .formatNull()}). E.g. a {@link Boolean} option in a
+   * search form may be optional and displayed as "any".
    *
    * @return the {@link Formatter}.
    */

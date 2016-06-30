@@ -4,7 +4,7 @@ package net.sf.mmm.util.property.api.util;
 
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.lang.ReadableBooleanProperty;
-import net.sf.mmm.util.property.api.lang.ReadableIntegerProperty;
+import net.sf.mmm.util.property.api.math.ReadableIntegerProperty;
 
 /**
  * This is the interface for a {@link ReadableProperty} of the {@link #getValue() value}-{@link #getType() type}

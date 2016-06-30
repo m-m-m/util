@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.lang;
 
+import javax.json.stream.JsonGenerator;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularPropertyExpression;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -41,5 +43,11 @@ public abstract class BooleanPropertyExpression extends AbstractRegularPropertyE
   public ValidatorBuilderBoolean<PropertyBuilder<BooleanProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderBoolean<>(x));
+  }
+
+  @Override
+  protected void toJson(JsonGenerator json, Boolean booleanValue) {
+
+    json.write(getName(), booleanValue.booleanValue());
   }
 }

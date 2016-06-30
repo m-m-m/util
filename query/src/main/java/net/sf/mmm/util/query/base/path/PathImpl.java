@@ -9,7 +9,7 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.link.Link;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadName;
 import net.sf.mmm.util.property.api.ReadableProperty;
-import net.sf.mmm.util.property.api.lang.IntegerProperty;
+import net.sf.mmm.util.property.api.math.IntegerProperty;
 import net.sf.mmm.util.query.api.path.EntityAlias;
 import net.sf.mmm.util.query.api.path.Path;
 import net.sf.mmm.util.query.api.path.PathRoot;

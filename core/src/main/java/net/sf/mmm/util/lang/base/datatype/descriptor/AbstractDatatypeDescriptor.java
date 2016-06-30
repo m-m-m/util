@@ -8,10 +8,10 @@ import java.util.List;
 
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.DatatypeDescriptor;
 import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the abstract base implementation of {@link DatatypeDescriptor}.
@@ -87,8 +87,8 @@ public abstract class AbstractDatatypeDescriptor<T> implements DatatypeDescripto
               Integer.valueOf(this.segmentDescriptorList.size()), "segments.length");
         } else if (segments.length < this.requiredSegmentCount) {
           throw new ValueOutOfRangeException(Integer.valueOf(segments.length),
-              (Number) Integer.valueOf(this.requiredSegmentCount),
-              Integer.valueOf(this.segmentDescriptorList.size()), "segments.length");
+              (Number) Integer.valueOf(this.requiredSegmentCount), Integer.valueOf(this.segmentDescriptorList.size()),
+              "segments.length");
         }
       }
       return doCreate(segments);

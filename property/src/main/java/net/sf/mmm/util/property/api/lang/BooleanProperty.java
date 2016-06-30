@@ -4,7 +4,12 @@ package net.sf.mmm.util.property.api.lang;
 
 import java.util.Objects;
 
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonParser;
+import javax.json.stream.JsonParser.Event;
+
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.exception.api.WrongValueTypeException;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
@@ -60,6 +65,25 @@ public class BooleanProperty extends AbstractRegularProperty<Boolean> implements
   public ValidatorBuilderBoolean<PropertyBuilder<BooleanProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderBoolean<>(x));
+  }
+
+  @Override
+  protected void toJson(JsonGenerator json, Boolean booleanValue) {
+
+    json.write(getName(), booleanValue.booleanValue());
+  }
+
+  @Override
+  public void fromJson(JsonParser json) {
+
+    Event e = json.next();
+    if (e == Event.VALUE_TRUE) {
+      set(true);
+    } else if (e == Event.VALUE_FALSE) {
+      set(false);
+    } else {
+      throw new WrongValueTypeException(e, Boolean.class);
+    }
   }
 
 }

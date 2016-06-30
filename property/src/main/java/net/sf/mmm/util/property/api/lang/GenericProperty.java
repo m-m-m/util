@@ -4,6 +4,9 @@ package net.sf.mmm.util.property.api.lang;
 
 import java.util.Objects;
 
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonParser;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
@@ -86,6 +89,19 @@ public class GenericProperty<V> extends AbstractRegularProperty<V> {
   public ObjectValidatorBuilder<? extends V, ? extends PropertyBuilder<? extends GenericProperty<? extends V>>, ?> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderObject(x));
+  }
+
+  @Override
+  protected void toJson(JsonGenerator json, V propertyValue) {
+
+    getJsonUtil().toJson(json, getName(), propertyValue);
+  }
+
+  @Override
+  public void fromJson(JsonParser json) {
+
+    V v = getJsonUtil().fromJson(json, this.type);
+    setValue(v);
   }
 
 }

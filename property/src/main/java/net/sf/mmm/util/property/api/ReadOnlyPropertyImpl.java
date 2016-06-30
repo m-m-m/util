@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonParser;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
@@ -152,6 +155,18 @@ public class ReadOnlyPropertyImpl<V> implements WritableProperty<V> {
   public String toString() {
 
     return this.property.toString();
+  }
+
+  @Override
+  public void toJson(JsonGenerator json) {
+
+    this.property.toJson(json);
+  }
+
+  @Override
+  public void fromJson(JsonParser json) {
+
+    this.property.fromJson(json);
   }
 
 }

@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.lang.LongProperty;
+import net.sf.mmm.util.property.api.math.LongProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**

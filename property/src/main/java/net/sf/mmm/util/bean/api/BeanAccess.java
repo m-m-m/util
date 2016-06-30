@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.inject.Named;
 
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
+import net.sf.mmm.util.json.api.JsonSupport;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -23,7 +24,7 @@ import net.sf.mmm.util.validation.base.ValidationFailureComposer;
  * @author hohwille
  * @since 8.0.0
  */
-public interface BeanAccess {
+public interface BeanAccess extends JsonSupport {
 
   /**
    * @return an {@link Iterable} with all the properties of this {@link Bean}.
@@ -278,8 +279,7 @@ public interface BeanAccess {
    * @param propertyType the Class reflecting the {@link WritableProperty} to create.
    * @return the newly created property.
    */
-  default <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name,
-      Class<PROPERTY> propertyType) {
+  default <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, Class<PROPERTY> propertyType) {
 
     GenericType<V> valueType = null;
     return createProperty(name, valueType, propertyType);
@@ -296,8 +296,8 @@ public interface BeanAccess {
    * @param propertyType the Class reflecting the {@link WritableProperty} to create.
    * @return the newly created property.
    */
-  <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name,
-      GenericType<? extends V> valueType, Class<PROPERTY> propertyType);
+  <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<? extends V> valueType,
+      Class<PROPERTY> propertyType);
 
   /**
    * This method updates a given {@link WritableProperty property} such that the provided {@link AbstractValidator

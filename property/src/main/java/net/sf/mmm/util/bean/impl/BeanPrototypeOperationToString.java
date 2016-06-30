@@ -2,10 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.bean.impl;
 
+import java.io.StringWriter;
 import java.lang.reflect.Method;
 
+import javax.json.Json;
+import javax.json.stream.JsonGenerator;
+
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
  * Operation for {@link Bean#toString()}.
@@ -28,19 +31,13 @@ public class BeanPrototypeOperationToString extends BeanPrototypeOperation {
   @Override
   public Object invoke(BeanAccessBase<?> access, Object[] args) {
 
-    StringBuilder buffer = new StringBuilder();
-    buffer.append('{');
-    String indent = "";
-    for (WritableProperty<?> property : access.getProperties()) {
-      Object value = property.getValue();
-      if (value != null) {
-        buffer.append(indent);
-        indent = ",\n";
-        buffer.append(property.toString());
-      }
-    }
-    buffer.append('}');
-    return buffer.toString();
+    StringWriter writer = new StringWriter();
+    JsonGenerator json = Json.createGenerator(writer);
+    json.writeStartObject();
+    access.toJson(json);
+    json.writeEnd();
+    json.close();
+    return writer.toString();
   }
 
 }

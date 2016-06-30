@@ -9,6 +9,7 @@ import java.util.Set;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.collection.base.ArrayIterator;
+import net.sf.mmm.util.exception.api.ReadOnlyException;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.GenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -137,7 +138,7 @@ public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBa
       GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
 
     if (isReadOnly()) {
-      throw new UnsupportedOperationException();
+      throw new ReadOnlyException(getBeanClass().getSimpleName(), name);
     }
     getPrototype().createProperty(name, valueType, propertyType);
     return (PROPERTY) getProperty(name);

@@ -4,6 +4,10 @@ package net.sf.mmm.util.property.api.util;
 
 import java.util.function.Function;
 
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonParser;
+import javax.json.stream.JsonParser.Event;
+
 import com.sun.javafx.binding.MapExpressionHelper;
 
 import javafx.beans.InvalidationListener;
@@ -11,6 +15,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.property.api.AbstractContainerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
@@ -126,8 +131,7 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
     Function factory = new Function<PropertyBuilder<MapProperty<K, V>>, ValidatorBuilderMap<K, V, PropertyBuilder<MapProperty<K, V>>>>() {
 
       @Override
-      public ValidatorBuilderMap<K, V, PropertyBuilder<MapProperty<K, V>>> apply(
-          PropertyBuilder<MapProperty<K, V>> t) {
+      public ValidatorBuilderMap<K, V, PropertyBuilder<MapProperty<K, V>>> apply(PropertyBuilder<MapProperty<K, V>> t) {
 
         return new ValidatorBuilderMap<>(t);
       }
@@ -175,6 +179,31 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
   protected void fireValueChangedEvent() {
 
     MapExpressionHelper.fireValueChangedEvent(this.helper);
+  }
+
+  @Override
+  protected void toJson(JsonGenerator json, ObservableMap<K, V> mapValue) {
+
+    JsonUtil jsonUtil = getJsonUtil();
+    json.writeStartObject(getName());
+    for (Entry<K, V> entry : mapValue.entrySet()) {
+      Object key = entry.getKey();
+      String keyString = "null";
+      if (key != null) {
+        keyString = key.toString();
+      }
+      jsonUtil.toJson(json, keyString, entry.getValue());
+    }
+    json.writeEnd();
+  }
+
+  @Override
+  public void fromJson(JsonParser json) {
+
+    JsonUtil jsonUtil = getJsonUtil();
+    jsonUtil.expectJsonEvent(json, Event.START_OBJECT);
+    ObservableMap<K, V> map = jsonUtil.fromJsonMap(json, getType());
+    set(map);
   }
 
 }

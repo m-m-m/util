@@ -24,6 +24,8 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.api.BeanPrototypeBuilder;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.json.api.JsonUtil;
+import net.sf.mmm.util.json.base.JsonUtilImpl;
 import net.sf.mmm.util.property.api.AbstractProperty;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
@@ -60,6 +62,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
   private ReflectionUtil reflectionUtil;
 
+  private JsonUtil jsonUtil;
+
   private PropertyFactoryManager propertyFactoryManager;
 
   /**
@@ -81,7 +85,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
-   * @return the {@link PropertyFactoryManager}.
+   * @return the {@link PropertyFactoryManager} to use.
    */
   protected PropertyFactoryManager getPropertyFactoryManager() {
 
@@ -99,7 +103,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
-   * @return the {@link ReflectionUtil}.
+   * @return the {@link ReflectionUtil} to use.
    */
   protected ReflectionUtil getReflectionUtil() {
 
@@ -107,13 +111,30 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
-   * @param reflectionUtil is the reflectionUtil to set
+   * @param reflectionUtil is the {@link ReflectionUtil} to {@link Inject}.
    */
   @Inject
   public void setReflectionUtil(ReflectionUtil reflectionUtil) {
 
     getInitializationState().requireNotInitilized();
     this.reflectionUtil = reflectionUtil;
+  }
+
+  /**
+   * @return the {@link JsonUtil} instance to use.
+   */
+  protected JsonUtil getJsonUtil() {
+
+    return this.jsonUtil;
+  }
+
+  /**
+   * @param jsonUtil is the {@link JsonUtil} to {@link Inject}.
+   */
+  @Inject
+  public void setJsonUtil(JsonUtil jsonUtil) {
+
+    this.jsonUtil = jsonUtil;
   }
 
   /**
@@ -144,6 +165,9 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     }
     if (this.propertyFactoryManager == null) {
       this.propertyFactoryManager = PropertyFactoryManagerImpl.getInstance();
+    }
+    if (this.jsonUtil == null) {
+      this.jsonUtil = JsonUtilImpl.getInstance();
     }
     super.doInitialize();
   }
@@ -220,9 +244,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
-   * Gets the initial internal and not-{@link BeanAccessPrototype#isDynamic() dynamic}
-   * {@link BeanAccessPrototype}. Using a {@link WeakHashMap} as cache to avoid memory leaking and a
-   * {@link ReentrantLock} to be thread-safe.
+   * Gets the initial internal and not-{@link BeanAccessPrototype#isDynamic() dynamic} {@link BeanAccessPrototype}.
+   * Using a {@link WeakHashMap} as cache to avoid memory leaking and a {@link ReentrantLock} to be thread-safe.
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
@@ -236,8 +259,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
-   * Creates the initial internal and not-{@link BeanAccessPrototype#isDynamic() dynamic}
-   * {@link BeanAccessPrototype}.
+   * Creates the initial internal and not-{@link BeanAccessPrototype#isDynamic() dynamic} {@link BeanAccessPrototype}.
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
@@ -255,8 +277,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
-   * Recursively introspect, create and collect the {@link BeanMethod}s for a {@link Bean} {@link Class}. Also
-   * creates the {@link AbstractProperty properties} for the {@link BeanMethodType#PROPERTY property} methods.
+   * Recursively introspect, create and collect the {@link BeanMethod}s for a {@link Bean} {@link Class}. Also creates
+   * the {@link AbstractProperty properties} for the {@link BeanMethodType#PROPERTY property} methods.
    *
    * @param type is the current {@link Bean} {@link Class} to introspect.
    * @param introspectionData the {@link BeanIntrospectionData}.
@@ -324,8 +346,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
   /**
    * @param beanMethod the {@link BeanMethod}.
-   * @param beanType the {@link GenericType} reflecting the {@link WritableProperty#getBean() bean owning the
-   *        property} to create.
+   * @param beanType the {@link GenericType} reflecting the {@link WritableProperty#getBean() bean owning the property}
+   *        to create.
    * @param bean the {@link Bean} instance to create this property for.
    * @return the new property instance.
    */
@@ -367,8 +389,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param name the {@link WritableProperty#getName() property name}.
    * @param valueType the {@link WritableProperty#getType() property type}.
    * @param bean the {@link WritableProperty#getBean() property bean}.
-   * @param propertyClass the {@link Class} reflecting the {@link WritableProperty} or {@code null} if no
-   *        property method exists and this method is called for plain getter or setter.
+   * @param propertyClass the {@link Class} reflecting the {@link WritableProperty} or {@code null} if no property
+   *        method exists and this method is called for plain getter or setter.
    * @return the new instance of {@link AbstractProperty}.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -474,8 +496,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
 
     /**
      * @param type the {@link Class} reflecting the {@link Bean} or one of its parent types to visit.
-     * @return {@code true} if the given {@link Class} should be visited (introspected), {@code false} if it
-     *         has already been visited.
+     * @return {@code true} if the given {@link Class} should be visited (introspected), {@code false} if it has already
+     *         been visited.
      */
     public boolean visitType(Class<?> type) {
 

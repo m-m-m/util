@@ -5,6 +5,10 @@ package net.sf.mmm.util.property.api.time;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonParser;
+import javax.json.stream.JsonParser.Event;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -61,6 +65,19 @@ public class LocalDateProperty extends AbstractRegularProperty<LocalDate> implem
   public ValidatorBuilderLocalDate<PropertyBuilder<LocalDateProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderLocalDate<>(x));
+  }
+
+  @Override
+  protected void toJson(JsonGenerator json, LocalDate instantValue) {
+
+    json.write(getName(), instantValue.toString());
+  }
+
+  @Override
+  public void fromJson(JsonParser json) {
+
+    getJsonUtil().expectJsonEvent(json, Event.VALUE_STRING);
+    setValue(LocalDate.parse(json.getString()));
   }
 
 }

@@ -2,11 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import java.io.StringWriter;
 import java.util.Objects;
 import java.util.function.Function;
 
+import javax.json.Json;
+import javax.json.stream.JsonGenerator;
+
 import javafx.beans.value.ObservableValue;
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.json.api.JsonUtil;
+import net.sf.mmm.util.json.base.JsonUtilImpl;
 import net.sf.mmm.util.lang.api.Builder;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
@@ -208,24 +214,46 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
   public abstract ObjectValidatorBuilder<? extends V, ? extends PropertyBuilder<? extends AbstractProperty<? extends V>>, ?> withValdidator();
 
   @Override
-  public String toString() {
+  public final String toString() {
 
-    StringBuilder sb = new StringBuilder();
-    sb.append('\"');
-    sb.append(getName());
-    sb.append("\": ");
+    StringWriter writer = new StringWriter();
+    JsonGenerator json = Json.createGenerator(writer);
+    json.writeStartObject();
     V value = getValue();
     if (value == null) {
-      sb.append("null");
-    } else if ((value instanceof CharSequence) || ((value instanceof Enum))) {
-      sb.append('\"');
-      sb.append(value);
-      sb.append('\"');
+      json.writeNull(getName());
     } else {
-      sb.append(value);
+      toJson(json, value);
     }
-    return sb.toString();
+    json.writeEnd();
+    json.close();
+    return writer.toString();
   }
+
+  /**
+   * @return the {@link JsonUtil}.
+   */
+  protected final JsonUtil getJsonUtil() {
+
+    return JsonUtilImpl.getInstance();
+  }
+
+  @Override
+  public final void toJson(JsonGenerator json) {
+
+    V value = getValue();
+    if (value == null) {
+      return;
+    }
+    toJson(json, value);
+  }
+
+  /**
+   * @see #toJson(JsonGenerator)
+   * @param json the {@link JsonGenerator}.
+   * @param value the {@link #getValue() value}.
+   */
+  protected abstract void toJson(JsonGenerator json, V value);
 
   /**
    * Implementation of {@link Builder} to {@link #build() build} a copy of the {@link AbstractProperty property}.

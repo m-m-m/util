@@ -4,6 +4,10 @@ package net.sf.mmm.util.property.api.lang;
 
 import java.util.Objects;
 
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonParser;
+import javax.json.stream.JsonParser.Event;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -60,6 +64,19 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
   public ValidatorBuilderString<PropertyBuilder<StringProperty>> withValdidator() {
 
     return withValdidator(x -> new ValidatorBuilderString<>(x));
+  }
+
+  @Override
+  protected void toJson(JsonGenerator json, String stringValue) {
+
+    json.write(getName(), stringValue);
+  }
+
+  @Override
+  public void fromJson(JsonParser json) {
+
+    getJsonUtil().expectJsonEvent(json, Event.VALUE_STRING);
+    set(json.getString());
   }
 
 }

@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import javax.json.stream.JsonParser;
+
 import com.sun.javafx.binding.ExpressionHelper;
 
 import javafx.beans.InvalidationListener;
@@ -148,6 +150,17 @@ public abstract class AbstractRegularPropertyExpression<V> extends AbstractPrope
   public boolean isValid() {
 
     return validate() == null;
+  }
+
+  @Override
+  public void fromJson(JsonParser json) {
+
+    Bean bean = getBean();
+    String name = getName();
+    if (bean != null) {
+      name = bean.access().getSimpleName() + '.' + name;
+    }
+    throw new ReadOnlyException(name);
   }
 
 }

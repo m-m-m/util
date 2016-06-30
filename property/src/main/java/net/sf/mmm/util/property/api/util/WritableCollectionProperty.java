@@ -19,6 +19,10 @@ import net.sf.mmm.util.property.api.WritableProperty;
 public interface WritableCollectionProperty<E, V extends Collection<E>>
     extends ReadableCollectionProperty<E, V>, WritableProperty<V> {
 
-  // nothing to add...
+  /**
+   * @return the result of {@link #getValue()} but including lazy initialization with an empty {@link Collection} to
+   *         prevent {@code null} as result.
+   */
+  V getOrCreateValue();
 
 }

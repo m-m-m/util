@@ -11,12 +11,12 @@ import org.junit.Test;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.component.impl.SpringContainerPool;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.lang.api.DatatypeDescriptor;
 import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
 import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the test-case for {@link DatatypeDescriptorManager} or technically
@@ -34,8 +34,8 @@ public class DatatypeDescriptorManagerTest extends Assert {
     return SpringContainerPool.getInstance().get(DatatypeDescriptorManager.class);
   }
 
-  private <T> void checkSegment(DatatypeSegmentDescriptor<T, ?> segment, String name, Class<?> type,
-      boolean optional, T instance, Object value) {
+  private <T> void checkSegment(DatatypeSegmentDescriptor<T, ?> segment, String name, Class<?> type, boolean optional,
+      T instance, Object value) {
 
     assertNotNull(segment);
     assertEquals(name, segment.getName());
@@ -107,8 +107,7 @@ public class DatatypeDescriptorManagerTest extends Assert {
         descriptor.create(year, month, day, hour, minute));
     assertEquals(Iso8601UtilImpl.getInstance().parseDate("2013-12-31T23:00:00"),
         descriptor.create(year, month, day, hour));
-    assertEquals(Iso8601UtilImpl.getInstance().parseDate("2013-12-31T00:00:00"),
-        descriptor.create(year, month, day));
+    assertEquals(Iso8601UtilImpl.getInstance().parseDate("2013-12-31T00:00:00"), descriptor.create(year, month, day));
 
     try {
       descriptor.create(year, month);

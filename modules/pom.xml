@@ -31,6 +31,7 @@
     <profile>
       <id>dev</id>
       <modules>
+        <module>../json</module>
         <module>../property</module>
         <module>../query</module>
         <module>../http</module>

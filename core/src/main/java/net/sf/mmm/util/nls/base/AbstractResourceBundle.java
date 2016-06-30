@@ -32,7 +32,7 @@ import java.util.Set;
  * <tr>
  * <td>ERR_</td>
  * <td>Text for an exception message.</td>
- * <td>{@code ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!"}</td>
+ * <td><code>ERR_VALUE_NOT_SET = "The value \"{value}\" is not set!"</code></td>
  * </tr>
  * <tr>
  * <td>MSG_</td>

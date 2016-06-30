@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.json.stream.JsonGenerator;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
@@ -245,6 +247,12 @@ public class StringListProperty extends StringProperty {
       value = SEPARATOR + csv.replace(separator, SEPARATOR) + SEPARATOR;
     }
     setValue(value);
+  }
+
+  @Override
+  protected void toJson(JsonGenerator json, String stringValue) {
+
+    getJsonUtil().toJson(json, getName(), asList());
   }
 
 }

@@ -5,6 +5,7 @@ package net.sf.mmm.util.property.api.util;
 import java.util.List;
 
 import javafx.beans.value.WritableListValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import net.sf.mmm.util.property.api.WritableProperty;
 
@@ -19,6 +20,17 @@ import net.sf.mmm.util.property.api.WritableProperty;
  */
 public interface WritableListProperty<E>
     extends ReadableListProperty<E>, WritableCollectionProperty<E, ObservableList<E>>, WritableListValue<E> {
+
+  @Override
+  default ObservableList<E> getOrCreateValue() {
+
+    ObservableList<E> value = getValue();
+    if (value == null) {
+      value = FXCollections.observableArrayList();
+      setValue(value);
+    }
+    return value;
+  }
 
   @Override
   default ObservableList<E> get() {

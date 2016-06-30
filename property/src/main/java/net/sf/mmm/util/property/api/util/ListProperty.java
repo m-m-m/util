@@ -5,6 +5,10 @@ package net.sf.mmm.util.property.api.util;
 import java.util.List;
 import java.util.function.Function;
 
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonParser;
+import javax.json.stream.JsonParser.Event;
+
 import com.sun.javafx.binding.ListExpressionHelper;
 
 import javafx.beans.InvalidationListener;
@@ -30,11 +34,11 @@ import net.sf.mmm.util.validation.base.collection.ValidatorBuilderCollection;
  * @since 8.0.0
  */
 @SuppressWarnings("restriction")
-public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>>
-    implements WritableListProperty<E> {
+public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>> implements WritableListProperty<E> {
 
+  /** The generic fallback {@link #getType() type} - please avoid and provide correct type information instead. */
   @SuppressWarnings("rawtypes")
-  private static final GenericType TYPE = new SimpleGenericTypeImpl<>(ObservableList.class);
+  public static final GenericType TYPE = new SimpleGenericTypeImpl<>(ObservableList.class);
 
   private final ListChangeListener<E> listChangeListener = change -> {
     invalidateProperties();
@@ -119,8 +123,7 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
     Function factory = new Function<PropertyBuilder<ListProperty<E>>, ValidatorBuilderCollection<E, PropertyBuilder<ListProperty<E>>>>() {
 
       @Override
-      public ValidatorBuilderCollection<E, PropertyBuilder<ListProperty<E>>> apply(
-          PropertyBuilder<ListProperty<E>> t) {
+      public ValidatorBuilderCollection<E, PropertyBuilder<ListProperty<E>>> apply(PropertyBuilder<ListProperty<E>> t) {
 
         return new ValidatorBuilderCollection<>(t);
       }
@@ -177,9 +180,25 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
    */
   public static <E> GenericType<ObservableList<E>> createListType(GenericType<E> elementType) {
 
-    return new GenericTypeBuilder<ObservableList<E>>() {
-    }.with(new GenericTypeVariable<E>() {
-    }, elementType).build();
+    return new GenericTypeBuilder<ObservableList<E>>() {}.with(new GenericTypeVariable<E>() {}, elementType).build();
   }
 
+  @Override
+  protected void toJson(JsonGenerator json, ObservableList<E> listValue) {
+
+    json.writeStartArray(getName());
+    for (E item : listValue) {
+      getJsonUtil().toJson(json, null, item);
+    }
+    json.writeEnd();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public void fromJson(JsonParser json) {
+
+    getJsonUtil().expectJsonEvent(json, Event.START_ARRAY);
+    ObservableList<E> list = getOrCreateValue();
+    getJsonUtil().fromJsonCollection(json, list, (GenericType<E>) getType().getComponentType());
+  }
 }

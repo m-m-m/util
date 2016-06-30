@@ -8,9 +8,9 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
-import net.sf.mmm.util.property.api.lang.LongProperty;
-import net.sf.mmm.util.property.api.lang.ReadableLongProperty;
-import net.sf.mmm.util.property.api.lang.WritableLongProperty;
+import net.sf.mmm.util.property.api.math.LongProperty;
+import net.sf.mmm.util.property.api.math.ReadableLongProperty;
+import net.sf.mmm.util.property.api.math.WritableLongProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 

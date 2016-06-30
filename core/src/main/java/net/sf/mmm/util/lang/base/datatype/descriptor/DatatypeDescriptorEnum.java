@@ -3,8 +3,8 @@
 package net.sf.mmm.util.lang.base.datatype.descriptor;
 
 import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.WrongValueTypeException;
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the implementation of {@link net.sf.mmm.util.lang.api.DatatypeDescriptor} for a {@link Enum}.

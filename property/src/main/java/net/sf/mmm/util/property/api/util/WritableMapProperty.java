@@ -3,6 +3,7 @@
 package net.sf.mmm.util.property.api.util;
 
 import javafx.beans.value.WritableMapValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import net.sf.mmm.util.property.api.WritableProperty;
 
@@ -18,6 +19,20 @@ import net.sf.mmm.util.property.api.WritableProperty;
  */
 public interface WritableMapProperty<K, V>
     extends ReadableMapProperty<K, V>, WritableProperty<ObservableMap<K, V>>, WritableMapValue<K, V> {
+
+  /**
+   * @return the result of {@link #getValue()} but including lazy initialization with an empty {@link ObservableMap} to
+   *         prevent {@code null} as result.
+   */
+  default ObservableMap<K, V> getOrCreateValue() {
+
+    ObservableMap<K, V> value = getValue();
+    if (value == null) {
+      value = FXCollections.observableHashMap();
+      setValue(value);
+    }
+    return value;
+  }
 
   @Override
   default ObservableMap<K, V> get() {

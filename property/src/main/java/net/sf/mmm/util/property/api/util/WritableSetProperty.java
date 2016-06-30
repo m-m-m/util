@@ -2,9 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.util;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javafx.beans.value.WritableSetValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import net.sf.mmm.util.property.api.ReadableSetProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
@@ -20,6 +22,17 @@ import net.sf.mmm.util.property.api.WritableProperty;
  */
 public interface WritableSetProperty<E>
     extends ReadableSetProperty<E>, WritableCollectionProperty<E, ObservableSet<E>>, WritableSetValue<E> {
+
+  @Override
+  default ObservableSet<E> getOrCreateValue() {
+
+    ObservableSet<E> value = getValue();
+    if (value == null) {
+      value = FXCollections.observableSet(new HashSet<>());
+      setValue(value);
+    }
+    return value;
+  }
 
   @Override
   default ObservableSet<E> get() {

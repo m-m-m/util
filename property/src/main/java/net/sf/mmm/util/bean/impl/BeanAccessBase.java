@@ -5,9 +5,24 @@ package net.sf.mmm.util.bean.impl;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonParser;
+import javax.json.stream.JsonParser.Event;
+
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.ReadOnlyException;
+import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.api.lang.BooleanProperty;
+import net.sf.mmm.util.property.api.lang.GenericProperty;
+import net.sf.mmm.util.property.api.lang.StringProperty;
+import net.sf.mmm.util.property.api.math.BigDecimalProperty;
+import net.sf.mmm.util.property.api.util.ListProperty;
+import net.sf.mmm.util.property.api.util.MapProperty;
 
 /**
  * This is the abstract base implementation of {@link BeanAccess}.
@@ -23,6 +38,8 @@ public abstract class BeanAccessBase<BEAN extends Bean>
   private final Class<BEAN> beanClass;
 
   private final BEAN bean;
+
+  private final BeanFactoryImpl beanFactory;
 
   /**
    * The constructor.
@@ -45,6 +62,7 @@ public abstract class BeanAccessBase<BEAN extends Bean>
     super();
     this.beanClass = beanClass;
     this.bean = beanFactory.createProxy(this, interfaces);
+    this.beanFactory = beanFactory;
   }
 
   @Override
@@ -99,10 +117,95 @@ public abstract class BeanAccessBase<BEAN extends Bean>
     return result;
   }
 
+  /**
+   * @return the {@link JsonUtil} to use.
+   */
+  protected final JsonUtil getJsonUtil() {
+
+    return this.beanFactory.getJsonUtil();
+  }
+
   @SuppressWarnings("unchecked")
   static <BEAN extends Bean> BeanAccessBase<BEAN> get(BEAN bean) {
 
     return (BeanAccessBase<BEAN>) bean.access();
+  }
+
+  @Override
+  public void toJson(JsonGenerator json) {
+
+    json.write(PROPERTY_TYPE, getSimpleName());
+    for (WritableProperty<?> property : getProperties()) {
+      property.toJson(json);
+    }
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
+  public void fromJson(JsonParser json) {
+
+    if (isReadOnly()) {
+      throw new ReadOnlyException(getBeanClass().getSimpleName());
+    }
+    JsonUtil jsonUtil = getJsonUtil();
+    while (json.hasNext()) {
+      Event e = json.next();
+      if (e == Event.KEY_NAME) {
+        String propertyName = json.getString();
+        if (PROPERTY_TYPE.equals(propertyName)) {
+          e = json.next();
+          assert (e == Event.VALUE_STRING);
+          assert (getSimpleName().equals(json.getString()));
+        } else {
+          WritableProperty<?> property = getProperty(propertyName);
+          if (property == null) {
+            if (isDynamic()) {
+              e = json.next();
+              switch (e) {
+                case VALUE_STRING:
+                  StringProperty stringProperty = createProperty(propertyName, StringProperty.class);
+                  stringProperty.setValue(json.getString());
+                  break;
+                case VALUE_NUMBER:
+                  BigDecimalProperty numberProperty = createProperty(propertyName, BigDecimalProperty.class);
+                  numberProperty.setValue(json.getBigDecimal());
+                  break;
+                case VALUE_TRUE:
+                case VALUE_FALSE:
+                  BooleanProperty booleanProperty = createProperty(propertyName, BooleanProperty.class);
+                  booleanProperty.set(e == Event.VALUE_TRUE);
+                  break;
+                case VALUE_NULL:
+                  // ignore null values...
+                  break;
+                case START_ARRAY:
+                  ListProperty<?> listProperty = createProperty(propertyName, ListProperty.class);
+                  ObservableList list = listProperty.getOrCreateValue();
+                  while (e != Event.END_ARRAY) {
+                    Object item = jsonUtil.fromJson(json, GenericProperty.TYPE_DEFAULT, e);
+                    list.add(item);
+                  }
+                  break;
+                case START_OBJECT:
+                  MapProperty<?, ?> mapProperty = createProperty(propertyName, MapProperty.class);
+                  ObservableMap map = mapProperty.getOrCreateValue();
+                  while (e != Event.END_OBJECT) {
+                    jsonUtil.expectJsonEvent(e, Event.KEY_NAME);
+                    String key = json.getString();
+                    Object item = jsonUtil.fromJson(json, GenericProperty.TYPE_DEFAULT, json.next());
+                    map.put(key, item);
+                  }
+                  break;
+                default :
+                  throw new IllegalCaseException(Event.class, e);
+              }
+            }
+          } else {
+            property.fromJson(json);
+          }
+        }
+      }
+    }
   }
 
 }

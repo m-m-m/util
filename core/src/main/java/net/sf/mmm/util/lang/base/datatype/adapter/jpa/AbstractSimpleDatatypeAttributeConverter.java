@@ -18,7 +18,7 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * configured in {@code org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.setPackagesToScan}.</li>
  * </ol>
  *
- * For an example how to implement such a converter see e.g. {@link VersionIdentifierAttributeConverter}.
+ * For an example how to implement such a converter see e.g. {@code VersionIdentifierAttributeConverter}.
  *
  * <br/>
  * <b>ATTENTION:</b><br/>
