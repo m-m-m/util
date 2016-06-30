@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 import net.sf.mmm.util.math.impl.spring.UtilMathSpringConfig;
 import net.sf.mmm.util.pojo.impl.spring.UtilPojoSpringConfig;
+import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.StringValueConverter;
 import net.sf.mmm.util.value.base.StringValueConverterImpl;
@@ -22,7 +23,8 @@ import net.sf.mmm.util.value.impl.ComposedValueConverterImpl;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilMathSpringConfig.class, UtilLangSpringConfig.class, UtilPojoSpringConfig.class })
+@Import({ UtilMathSpringConfig.class, UtilTextSpringConfigBase.class, UtilLangSpringConfig.class,
+    UtilPojoSpringConfig.class })
 @ComponentScan("net.sf.mmm.util.value.impl")
 @SuppressWarnings("javadoc")
 public class UtilValueSpringConfig {
