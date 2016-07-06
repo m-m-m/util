@@ -12,8 +12,10 @@ package net.sf.mmm.util.lang.api.function;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.0.0
+ * @deprecated use {@link java.util.function.Function} directly.
  */
-public interface Function<T, R/* > extends java.util.function.Function<T, R */> {
+@Deprecated
+public interface Function<T, R> extends java.util.function.Function<T, R> {
 
   /**
    * Applies this function to the given argument.
