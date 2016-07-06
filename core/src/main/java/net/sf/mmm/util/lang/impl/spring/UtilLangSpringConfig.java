@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Import;
 import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
 import net.sf.mmm.util.lang.api.DatatypeDetector;
 import net.sf.mmm.util.lang.api.EnumProvider;
+import net.sf.mmm.util.lang.api.EnvironmentDetector;
 import net.sf.mmm.util.lang.base.DatatypeDetectorImpl;
+import net.sf.mmm.util.lang.base.EnvironmentDetectorSpringProfileImpl;
 import net.sf.mmm.util.lang.base.SimpleEnumProvider;
 import net.sf.mmm.util.lang.base.datatype.descriptor.DatatypeDescriptorManagerImpl;
 import net.sf.mmm.util.nls.impl.spring.UtilNlsSpringConfig;
@@ -43,6 +45,12 @@ public class UtilLangSpringConfig {
   public EnumProvider enumProvider() {
 
     return new SimpleEnumProvider();
+  }
+
+  @Bean
+  public EnvironmentDetector environmentDetector() {
+
+    return new EnvironmentDetectorSpringProfileImpl();
   }
 
 }
