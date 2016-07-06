@@ -4,11 +4,11 @@ package net.sf.mmm.util.lang.base;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import net.sf.mmm.test.AbstractSpringTest;
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.lang.api.EnvironmentDetector;
+import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 
 /**
  * This is the test-case for {@link EnvironmentDetector} in simulated production mode.
@@ -23,11 +23,9 @@ public class EnvironmentDetectorDynamicTest {
    * @param activeProfiles are the profiles to activate.
    * @return the {@link EnvironmentDetector} instance for further assertions.
    */
-  protected EnvironmentDetector checkEnvironmentDetector(String expectedEnvironmentType,
-      String... activeProfiles) {
+  protected EnvironmentDetector checkEnvironmentDetector(String expectedEnvironmentType, String... activeProfiles) {
 
-    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-        AbstractSpringTest.SPRING_CONFIG_UTIL_CORE);
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(UtilLangSpringConfig.class);
     context.getEnvironment().setActiveProfiles(activeProfiles);
     EnvironmentDetector environmentDetector = context.getBean(EnvironmentDetector.class);
     Assert.assertEquals(expectedEnvironmentType, environmentDetector.getEnvironmentType());

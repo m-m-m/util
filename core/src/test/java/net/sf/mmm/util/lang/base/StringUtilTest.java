@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import net.sf.mmm.util.lang.api.StringUtil;
@@ -20,7 +20,7 @@ import net.sf.mmm.util.value.api.ValueException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StringUtilTest extends Assert {
+public class StringUtilTest extends Assertions {
 
   public StringUtil getStringUtil() {
 
@@ -30,16 +30,16 @@ public class StringUtilTest extends Assert {
   @Test
   public void testIsEmpty() {
 
-    assertTrue(getStringUtil().isEmpty(null));
-    assertTrue(getStringUtil().isEmpty(""));
-    assertTrue(getStringUtil().isEmpty("\t"));
-    assertTrue(getStringUtil().isEmpty("\n"));
-    assertTrue(getStringUtil().isEmpty("\r"));
-    assertTrue(getStringUtil().isEmpty(" "));
-    assertTrue(getStringUtil().isEmpty("\t\n\r \r\n"));
-    assertFalse(getStringUtil().isEmpty("a"));
-    assertFalse(getStringUtil().isEmpty(" a "));
-    assertFalse(getStringUtil().isEmpty(" ", false));
+    assertThat(getStringUtil().isEmpty(null)).isTrue();
+    assertThat(getStringUtil().isEmpty("")).isTrue();
+    assertThat(getStringUtil().isEmpty("\t")).isTrue();
+    assertThat(getStringUtil().isEmpty("\n")).isTrue();
+    assertThat(getStringUtil().isEmpty("\r")).isTrue();
+    assertThat(getStringUtil().isEmpty(" ")).isTrue();
+    assertThat(getStringUtil().isEmpty("\t\n\r \r\n")).isTrue();
+    assertThat(getStringUtil().isEmpty("a")).isFalse();
+    assertThat(getStringUtil().isEmpty(" a ")).isFalse();
+    assertThat(getStringUtil().isEmpty(" ", false)).isFalse();
   }
 
   /**
@@ -48,9 +48,9 @@ public class StringUtilTest extends Assert {
   @Test
   public void testIsAllUpperCase() {
 
-    assertTrue(getStringUtil().isAllUpperCase("UPPER_CASE"));
-    assertFalse(getStringUtil().isAllUpperCase("lower_case"));
-    assertFalse(getStringUtil().isAllUpperCase("CamlCase"));
+    assertThat(getStringUtil().isAllUpperCase("UPPER_CASE")).isTrue();
+    assertThat(getStringUtil().isAllUpperCase("lower_case")).isFalse();
+    assertThat(getStringUtil().isAllUpperCase("CamlCase")).isFalse();
   }
 
   /**
@@ -59,52 +59,54 @@ public class StringUtilTest extends Assert {
   @Test
   public void testIsAllLowerCase() {
 
-    assertFalse(getStringUtil().isAllLowerCase("UPPER_CASE"));
-    assertTrue(getStringUtil().isAllLowerCase("lower_case"));
-    assertFalse(getStringUtil().isAllLowerCase("CamlCase"));
+    assertThat(getStringUtil().isAllLowerCase("UPPER_CASE")).isFalse();
+    assertThat(getStringUtil().isAllLowerCase("lower_case")).isTrue();
+    assertThat(getStringUtil().isAllLowerCase("CamlCase")).isFalse();
   }
 
   @Test
   public void testToCamlCase() {
 
-    assertEquals("abc", getStringUtil().toCamlCase("abc"));
-    assertEquals("aaBbCc", getStringUtil().toCamlCase("aa-bb-cc"));
-    assertEquals("aaBbCc", getStringUtil().toCamlCase("aa bb_cc"));
-    assertEquals("aaBb", getStringUtil().toCamlCase("aa -_bb_ "));
+    assertThat(getStringUtil().toCamlCase("abc")).isEqualTo("abc");
+    assertThat(getStringUtil().toCamlCase("aa-bb-cc")).isEqualTo("aaBbCc");
+    assertThat(getStringUtil().toCamlCase("aa bb_cc")).isEqualTo("aaBbCc");
+    assertThat(getStringUtil().toCamlCase("aa -_bb_ ")).isEqualTo("aaBb");
   }
 
   @Test
   public void testFromCamlCase() {
 
-    assertEquals("abc", getStringUtil().fromCamlCase("abc", ' '));
-    assertEquals("foo-bar", getStringUtil().fromCamlCase("FooBar", '-'));
-    assertEquals("foo_bar", getStringUtil().fromCamlCase("FOO_BAR", '*'));
-    assertEquals("some.word.mix", getStringUtil().fromCamlCase("someWordMix", '.'));
-    assertEquals("abbreviations_like_xmlshould_not_be_capitalized",
-        getStringUtil().fromCamlCase("AbbreviationsLikeXMLshouldNotBeCapitalized", '_'));
+    assertThat(getStringUtil().fromCamlCase("abc", ' ')).isEqualTo("abc");
+    assertThat(getStringUtil().fromCamlCase("FooBar", '-')).isEqualTo("foo-bar");
+    assertThat(getStringUtil().fromCamlCase("FOO_BAR", '*')).isEqualTo("foo_bar");
+    assertThat(getStringUtil().fromCamlCase("someWordMix", '.')).isEqualTo("some.word.mix");
+    assertThat(getStringUtil().fromCamlCase("AbbreviationsLikeXMLshouldNotBeCapitalized", '_'))
+        .isEqualTo("abbreviations_like_xmlshould_not_be_capitalized");
   }
 
   @Test
   public void testPadNumber() {
 
-    assertEquals("005", getStringUtil().padNumber(5, 3));
-    assertEquals("025", getStringUtil().padNumber(25, 3));
-    assertEquals("100", getStringUtil().padNumber(100, 3));
-    assertEquals("1234", getStringUtil().padNumber(1234, 3));
+    assertThat(getStringUtil().padNumber(5, 3)).isEqualTo("005");
+    assertThat(getStringUtil().padNumber(25, 3)).isEqualTo("025");
+    assertThat(getStringUtil().padNumber(100, 3)).isEqualTo("100");
+    assertThat(getStringUtil().padNumber(1234, 3)).isEqualTo("1234");
   }
 
   @Test
   public void testReplaceSuffixWithCase() {
 
-    assertEquals("foofoo", getStringUtil().replaceSuffixWithCase("foobar", 3, "foo"));
-    assertEquals("FOOFOO", getStringUtil().replaceSuffixWithCase("FOOBAR", 3, "foo"));
-    assertEquals("FooFoo", getStringUtil().replaceSuffixWithCase("FooBar", 3, "foo"));
-    assertEquals("FooBfoo", getStringUtil().replaceSuffixWithCase("FooBar", 2, "foo"));
-    assertEquals("FUSS", getStringUtil().replaceSuffixWithCase("FOO", 2, "u\u00df"));
+    assertThat(getStringUtil().replaceSuffixWithCase("foobar", 3, "foo")).isEqualTo("foofoo");
+    assertThat(getStringUtil().replaceSuffixWithCase("FOOBAR", 3, "foo")).isEqualTo("FOOFOO");
+    assertThat(getStringUtil().replaceSuffixWithCase("FooBar", 3, "foo")).isEqualTo("FooFoo");
+    assertThat(getStringUtil().replaceSuffixWithCase("FooBar", 2, "foo")).isEqualTo("FooBfoo");
+    assertThat(getStringUtil().replaceSuffixWithCase("FOO", 2, "u\u00df")).isEqualTo("FUSS");
   }
 
   @Test
   public void testToSeparatedString() {
+
+    StringUtil util = getStringUtil();
 
     Collection<Object> collection = new ArrayList<Object>();
     collection.add("abc;");
@@ -113,14 +115,14 @@ public class StringUtilTest extends Assert {
     collection.add(Character.valueOf('\''));
 
     StringSyntaxBean syntax = new StringSyntaxBean('\\');
-    assertEquals("abc;,a\\,b\\,c,123,'", getStringUtil().toSeparatedString(collection, ",", syntax));
+    assertThat(util.toSeparatedString(collection, ",", syntax)).isEqualTo("abc;,a\\,b\\,c,123,'");
 
     syntax.setQuote('\'');
-    assertEquals("'abc;','a,b,c','123','\\''", getStringUtil().toSeparatedString(collection, ",", syntax));
+    assertThat(util.toSeparatedString(collection, ",", syntax)).isEqualTo("'abc;','a,b,c','123','\\''");
 
     syntax.setQuoteStart('[');
     syntax.setQuoteEnd(']');
-    assertEquals("[abc;]; [a,b,c]; [123]; [']", getStringUtil().toSeparatedString(collection, "; ", syntax));
+    assertThat(util.toSeparatedString(collection, "; ", syntax)).isEqualTo("[abc;]; [a,b,c]; [123]; [']");
   }
 
   @Test
@@ -128,11 +130,7 @@ public class StringUtilTest extends Assert {
 
     StringSyntaxBean syntax = new StringSyntaxBean('\\');
     List<String> list = getStringUtil().fromSeparatedString("a,bc,d,ef", ",", syntax);
-    assertEquals(4, list.size());
-    assertEquals("a", list.get(0));
-    assertEquals("bc", list.get(1));
-    assertEquals("d", list.get(2));
-    assertEquals("ef", list.get(3));
+    assertThat(list).hasSize(4).containsExactly("a", "bc", "d", "ef");
 
     List<Integer> collection = new ArrayList<Integer>();
     ValueConverter<String, Integer> converter = new ValueConverter<String, Integer>() {
@@ -164,10 +162,7 @@ public class StringUtilTest extends Assert {
       }
     };
     getStringUtil().fromSeparatedString("1; 42; 3; 99", "; ", syntax, collection, converter, Integer.class);
-    assertEquals(4, collection.size());
-    assertEquals(Integer.valueOf(1), collection.get(0));
-    assertEquals(Integer.valueOf(42), collection.get(1));
-    assertEquals(Integer.valueOf(3), collection.get(2));
-    assertEquals(Integer.valueOf(99), collection.get(3));
+    assertThat(collection).hasSize(4).containsExactly(Integer.valueOf(1), Integer.valueOf(42), Integer.valueOf(3),
+        Integer.valueOf(99));
   }
 }

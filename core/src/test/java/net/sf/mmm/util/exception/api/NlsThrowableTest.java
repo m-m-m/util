@@ -7,7 +7,7 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
@@ -23,20 +23,12 @@ import net.sf.mmm.util.session.api.UserSessionAccess;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class NlsThrowableTest extends Assert {
-
-  /**
-   * The constructor.
-   */
-  public NlsThrowableTest() {
-
-    super();
-  }
+public class NlsThrowableTest extends Assertions {
 
   protected void checkException(String expectedMessage, NlsThrowable e, Locale locale) {
 
     UUID uuid = e.getUuid();
-    assertNotNull(uuid);
+    assertThat(uuid).isNotNull();
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter(sw);
     // test stacktrace via PrintWriter in default locale
@@ -54,7 +46,7 @@ public class NlsThrowableTest extends Assert {
     pw.print("\tat ");
     pw.flush();
     String expected = sw.toString();
-    assertTrue(stacktrace + "\n*****\n" + expected, stacktrace.contains(expected));
+    assertThat(stacktrace.contains(expected)).as(stacktrace + "\n*****\n" + expected).isTrue();
     LoggerFactory.getLogger(NlsThrowableTest.class)
         .error("This is a test and should contain the UUID and code of the exception", e);
   }
@@ -72,9 +64,9 @@ public class NlsThrowableTest extends Assert {
       private static final long serialVersionUID = 1L;
     };
     String message = "NullPointerException caused by \"" + source + "\"!";
-    assertEquals(message, e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
+    assertThat(e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT)).isEqualTo(message);
     String messageDe = "NullZeigerAusnahme verursacht durch \"" + source + "\"!";
-    assertEquals(messageDe, e.getLocalizedMessage(Locale.GERMAN));
+    assertThat(e.getLocalizedMessage(Locale.GERMAN)).isEqualTo(messageDe);
 
     // test UUID and stacktrace
     checkException(e.getLocalizedMessage(), e, null);
@@ -95,13 +87,12 @@ public class NlsThrowableTest extends Assert {
     String value = "value";
     Class type = String.class;
     NlsParseException parseException = new NlsParseException(value, type);
-    assertEquals("Failed to parse \"" + value + "\" as value of the type \"" + type.getName() + "\"!",
-        parseException.getNlsMessage().getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
+    assertThat(parseException.getNlsMessage().getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT))
+        .isEqualTo("Failed to parse \"" + value + "\" as value of the type \"" + type.getName() + "\"!");
     String source = "source";
     parseException = new NlsParseException(value, type, source);
-    assertEquals("Failed to parse \"" + value + "\" from \"" + source + "\" as value of the type \""
-        + type.getName() + "\"!",
-        parseException.getNlsMessage().getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
+    assertThat(parseException.getNlsMessage().getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT)).isEqualTo(
+        "Failed to parse \"" + value + "\" from \"" + source + "\" as value of the type \"" + type.getName() + "\"!");
   }
 
   /**
@@ -111,8 +102,7 @@ public class NlsThrowableTest extends Assert {
   public void testNlsRuntimeException() {
 
     String source = "bad boy";
-    NlsRuntimeException e = new NlsRuntimeException(
-        NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {
+    NlsRuntimeException e = new NlsRuntimeException(NlsAccess.getFactory().create(MyResourceBundle.ERR_NULL, source)) {
 
       /** TODO: javadoc. */
       private static final long serialVersionUID = 1L;
@@ -124,9 +114,9 @@ public class NlsThrowableTest extends Assert {
       }
     };
     String message = "NullPointerException caused by \"" + source + "\"!";
-    assertEquals(message, e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
+    assertThat(e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT)).isEqualTo(message);
     String messageDe = "NullZeigerAusnahme verursacht durch \"" + source + "\"!";
-    assertEquals(messageDe, e.getLocalizedMessage(Locale.GERMAN));
+    assertThat(e.getLocalizedMessage(Locale.GERMAN)).isEqualTo(messageDe);
 
     // test UUID and stacktrace
     checkException(e.getLocalizedMessage(), e, null);
@@ -147,12 +137,12 @@ public class NlsThrowableTest extends Assert {
     String source = "bad boy";
     NlsNullPointerException e = new NlsNullPointerException(source);
     NlsNullPointerException clone = SerializationHelper.reserialize(e);
-    assertNotNull(clone);
-    assertNotSame(e, clone);
+    assertThat(clone).isNotNull();
+    assertThat(clone).isNotSameAs(e);
     String message = "The object \"" + source + "\" is null!";
-    assertEquals(message, e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT));
+    assertThat(e.getLocalizedMessage(AbstractNlsMessage.LOCALE_ROOT)).isEqualTo(message);
     String messageDe = "Das Objekt \"" + source + "\" ist null!";
-    assertEquals(messageDe, e.getLocalizedMessage(Locale.GERMAN));
+    assertThat(e.getLocalizedMessage(Locale.GERMAN)).isEqualTo(messageDe);
 
     // test UUID and stacktrace
     checkException(e.getLocalizedMessage(), e, null);

@@ -2,16 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.util.NoSuchElementException;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
-
-import junit.framework.Assert;
 
 /**
  * This is the test-case for {@link StringTokenizer}.
@@ -19,7 +13,7 @@ import junit.framework.Assert;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class StringTokenizerTest {
+public class StringTokenizerTest extends Assertions {
 
   public void checkTokenizer(String escapeStart, String escapeEnd, char[] delimiters, String... strings) {
 
@@ -37,16 +31,16 @@ public class StringTokenizerTest {
     // JDK StringTokenizer compliance
     tokenizer = new StringTokenizer(buffer.toString(), new String(delimiters));
     for (String s : strings) {
-      assertTrue(tokenizer.hasMoreTokens());
-      assertEquals(s, tokenizer.nextToken());
+      assertThat(tokenizer.hasMoreTokens()).isTrue();
+      assertThat(tokenizer.nextToken()).isEqualTo(s);
     }
     // advanced API
     tokenizer = new StringTokenizer(buffer.toString(), delimiters);
     int index = 0;
     for (String s : tokenizer) {
-      assertEquals(strings[index++], s);
+      assertThat(s).isEqualTo(strings[index++]);
     }
-    assertFalse(tokenizer.hasMoreTokens());
+    assertThat(tokenizer.hasMoreTokens()).isFalse();
   }
 
   @Test
@@ -54,7 +48,7 @@ public class StringTokenizerTest {
 
     StringTokenizer stringTokenizer;
     stringTokenizer = new StringTokenizer("", '.');
-    assertFalse(stringTokenizer.hasNext());
+    assertThat(stringTokenizer.hasNext()).isFalse();
     try {
       stringTokenizer.next();
       fail("Exception expected");
@@ -70,9 +64,9 @@ public class StringTokenizerTest {
   public void testTokenizerWithEscaping() {
 
     StringTokenizer tokenizer = new StringTokenizer("{[foo,{[bar,thing]}]},some", "{[", "]}", ',');
-    Assert.assertEquals("foo,{[bar,thing]}", tokenizer.next());
-    Assert.assertEquals("some", tokenizer.next());
-    Assert.assertFalse("no next token expected", tokenizer.hasNext());
+    assertThat(tokenizer.next()).isEqualTo("foo,{[bar,thing]}");
+    assertThat(tokenizer.next()).isEqualTo("some");
+    assertThat(tokenizer.hasNext()).as("no next token expected").isFalse();
   }
 
 }

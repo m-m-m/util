@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import net.sf.mmm.util.lang.api.BasicUtil;
@@ -12,7 +12,7 @@ import net.sf.mmm.util.lang.api.BasicUtil;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-public class BasicUtilTest extends Assert {
+public class BasicUtilTest extends Assertions {
 
   /**
    * @return the {@link BasicUtil} to test.
@@ -28,14 +28,14 @@ public class BasicUtilTest extends Assert {
   @Test
   public void testIsEqual() {
 
-    assertTrue(getBasicUtil().isEqual(null, null));
-    assertFalse(getBasicUtil().isEqual("", null));
-    assertFalse(getBasicUtil().isEqual(null, Boolean.TRUE));
-    assertTrue(getBasicUtil().isEqual(Boolean.TRUE, Boolean.TRUE));
+    assertThat(getBasicUtil().isEqual(null, null)).isTrue();
+    assertThat(getBasicUtil().isEqual("", null)).isFalse();
+    assertThat(getBasicUtil().isEqual(null, Boolean.TRUE)).isFalse();
+    assertThat(getBasicUtil().isEqual(Boolean.TRUE, Boolean.TRUE)).isTrue();
     String string = "test42";
     String newString = new String(string);
-    assertNotSame(string, newString);
-    assertTrue(getBasicUtil().isEqual(string, newString));
+    assertThat(newString).isNotSameAs(string);
+    assertThat(getBasicUtil().isEqual(string, newString)).isTrue();
   }
 
   /**
@@ -44,10 +44,10 @@ public class BasicUtilTest extends Assert {
   @Test
   public void testIsEqualArray() {
 
-    assertTrue(getBasicUtil().isEqual((Object[]) null, (Object[]) null));
-    assertTrue(getBasicUtil().isEqual(new Object[0], new Object[0]));
-    assertFalse(getBasicUtil().isEqual((Object[]) null, new Object[0]));
-    assertFalse(getBasicUtil().isEqual(new Object[0], (Object[]) null));
+    assertThat(getBasicUtil().isEqual((Object[]) null, (Object[]) null)).isTrue();
+    assertThat(getBasicUtil().isEqual(new Object[0], new Object[0])).isTrue();
+    assertThat(getBasicUtil().isEqual((Object[]) null, new Object[0])).isFalse();
+    assertThat(getBasicUtil().isEqual(new Object[0], (Object[]) null)).isFalse();
     String[] array1 = new String[] { "foo", "bar", "42" };
     Object[] array2 = new Object[array1.length];
     for (int i = 0; i < array1.length; i++) {
@@ -57,7 +57,7 @@ public class BasicUtilTest extends Assert {
         array2[i] = new String(array1[i]);
       }
     }
-    assertTrue(getBasicUtil().isEqual(array1, array2));
+    assertThat(getBasicUtil().isEqual(array1, array2)).isTrue();
   }
 
   /**
@@ -66,9 +66,9 @@ public class BasicUtilTest extends Assert {
   @Test
   public void testIsDeepEqual() {
 
-    assertTrue(getBasicUtil().isDeepEqual(null, null));
-    assertFalse(getBasicUtil().isDeepEqual("", null));
-    assertFalse(getBasicUtil().isDeepEqual(null, Boolean.TRUE));
+    assertThat(getBasicUtil().isDeepEqual(null, null)).isTrue();
+    assertThat(getBasicUtil().isDeepEqual("", null)).isFalse();
+    assertThat(getBasicUtil().isDeepEqual(null, Boolean.TRUE)).isFalse();
     int[] intArray1 = new int[] { 42, 1, 7, -42 };
     int[] intArray2 = new int[intArray1.length];
     for (int i = 0; i < intArray1.length; i++) {
@@ -78,7 +78,7 @@ public class BasicUtilTest extends Assert {
     int[][] subArray2 = new int[][] { intArray2, intArray1 };
     Object[] array1 = new Object[] { intArray1, null, subArray1 };
     Object[] array2 = new Object[] { intArray2, null, subArray2 };
-    assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+    assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
 
   }
 
@@ -97,7 +97,7 @@ public class BasicUtilTest extends Assert {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+      assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
     }
     {
       // short arrays
@@ -107,7 +107,7 @@ public class BasicUtilTest extends Assert {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+      assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
     }
     {
       // int arrays
@@ -117,7 +117,7 @@ public class BasicUtilTest extends Assert {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+      assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
     }
     {
       // long arrays
@@ -127,7 +127,7 @@ public class BasicUtilTest extends Assert {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+      assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
     }
     {
       // float arrays
@@ -137,7 +137,7 @@ public class BasicUtilTest extends Assert {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+      assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
     }
     {
       // double arrays
@@ -147,7 +147,7 @@ public class BasicUtilTest extends Assert {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+      assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
     }
     {
       // char arrays
@@ -157,7 +157,7 @@ public class BasicUtilTest extends Assert {
         array1[i] = i;
         array2[i] = i;
       }
-      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+      assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
     }
     {
       // boolean arrays
@@ -167,7 +167,7 @@ public class BasicUtilTest extends Assert {
         array1[i] = ((i % 3) == 0);
         array2[i] = array1[i];
       }
-      assertTrue(getBasicUtil().isDeepEqual(array1, array2));
+      assertThat(getBasicUtil().isDeepEqual(array1, array2)).isTrue();
     }
   }
 

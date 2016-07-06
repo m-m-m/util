@@ -5,7 +5,7 @@ package net.sf.mmm.util.lang.api;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import net.sf.mmm.util.exception.api.IllegalCaseException;
@@ -16,7 +16,7 @@ import net.sf.mmm.util.exception.api.IllegalCaseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class ComparatorTest {
+public class ComparatorTest extends Assertions {
 
   /**
    * This method checks the {@link CompareOperator#eval(Object, Object)} for the given {@code comparator} and according
@@ -30,35 +30,35 @@ public class ComparatorTest {
    */
   protected void checkEvalTrue(Object arg1, Object arg2, CompareOperator comparator) {
 
-    Assert.assertTrue(comparator.eval(arg1, arg2));
+    assertThat(comparator.eval(arg1, arg2)).isTrue();
     switch (comparator) {
       case EQUAL:
-        Assert.assertTrue(CompareOperator.GREATER_OR_EQUAL.eval(arg1, arg2));
-        Assert.assertTrue(CompareOperator.LESS_OR_EQUAL.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.NOT_EQUAL.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.LESS_THAN.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.GREATER_THAN.eval(arg1, arg2));
+        assertThat(CompareOperator.GREATER_OR_EQUAL.eval(arg1, arg2)).isTrue();
+        assertThat(CompareOperator.LESS_OR_EQUAL.eval(arg1, arg2)).isTrue();
+        assertThat(CompareOperator.NOT_EQUAL.eval(arg1, arg2)).isFalse();
+        assertThat(CompareOperator.LESS_THAN.eval(arg1, arg2)).isFalse();
+        assertThat(CompareOperator.GREATER_THAN.eval(arg1, arg2)).isFalse();
         break;
       case NOT_EQUAL:
-        Assert.assertFalse(CompareOperator.GREATER_OR_EQUAL.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.LESS_OR_EQUAL.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.EQUAL.eval(arg1, arg2));
+        assertThat(CompareOperator.GREATER_OR_EQUAL.eval(arg1, arg2)).isFalse();
+        assertThat(CompareOperator.LESS_OR_EQUAL.eval(arg1, arg2)).isFalse();
+        assertThat(CompareOperator.EQUAL.eval(arg1, arg2)).isFalse();
         break;
       case GREATER_THAN:
-        Assert.assertTrue(CompareOperator.GREATER_OR_EQUAL.eval(arg1, arg2));
-        Assert.assertTrue(CompareOperator.NOT_EQUAL.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.LESS_OR_EQUAL.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.LESS_THAN.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.EQUAL.eval(arg1, arg2));
+        assertThat(CompareOperator.GREATER_OR_EQUAL.eval(arg1, arg2)).isTrue();
+        assertThat(CompareOperator.NOT_EQUAL.eval(arg1, arg2)).isTrue();
+        assertThat(CompareOperator.LESS_OR_EQUAL.eval(arg1, arg2)).isFalse();
+        assertThat(CompareOperator.LESS_THAN.eval(arg1, arg2)).isFalse();
+        assertThat(CompareOperator.EQUAL.eval(arg1, arg2)).isFalse();
         break;
       case LESS_THAN:
-        Assert.assertTrue(CompareOperator.LESS_OR_EQUAL.eval(arg1, arg2));
-        Assert.assertTrue(CompareOperator.NOT_EQUAL.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.GREATER_OR_EQUAL.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.GREATER_THAN.eval(arg1, arg2));
-        Assert.assertFalse(CompareOperator.EQUAL.eval(arg1, arg2));
+        assertThat(CompareOperator.LESS_OR_EQUAL.eval(arg1, arg2)).isTrue();
+        assertThat(CompareOperator.NOT_EQUAL.eval(arg1, arg2)).isTrue();
+        assertThat(CompareOperator.GREATER_OR_EQUAL.eval(arg1, arg2)).isFalse();
+        assertThat(CompareOperator.GREATER_THAN.eval(arg1, arg2)).isFalse();
+        assertThat(CompareOperator.EQUAL.eval(arg1, arg2)).isFalse();
         break;
-      default:
+      default :
         throw new IllegalCaseException(CompareOperator.class, comparator);
     }
   }

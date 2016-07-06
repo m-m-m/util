@@ -3,10 +3,9 @@
 package net.sf.mmm.util.lang.base;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import net.sf.mmm.util.NlsBundleUtilCoreRoot;
@@ -23,7 +22,7 @@ import net.sf.mmm.util.nls.api.NlsAccess;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class SimpleEnumProviderTest extends Assert {
+public class SimpleEnumProviderTest extends Assertions {
 
   /**
    * @return the {@link EnumProvider} instance to test.
@@ -43,22 +42,20 @@ public class SimpleEnumProviderTest extends Assert {
 
     EnumProvider provider = getEnumProvider();
 
-    assertNotNull(provider);
+    assertThat(provider).isNotNull();
     EnumDefinition<Boolean, ?> booleanDefinition = provider.getEnumDefinition(Boolean.class);
-    assertNotNull(booleanDefinition);
-    assertEquals(Boolean.class, booleanDefinition.getEnumType());
-    assertNull(booleanDefinition.getCategory());
-    assertEquals(Boolean.class.getName(), booleanDefinition.getValue());
+    assertThat(booleanDefinition).isNotNull();
+    assertThat(booleanDefinition.getEnumType()).isEqualTo(Boolean.class);
+    assertThat(booleanDefinition.getCategory()).isNull();
+    assertThat(booleanDefinition.getValue()).isEqualTo(Boolean.class.getName());
     Formatter<Boolean> formatter = booleanDefinition.getFormatter();
-    assertNotNull(formatter);
+    assertThat(formatter).isNotNull();
     // we do not know the default locale for sure...
     NlsBundleUtilCoreRoot bundle = NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
-    assertEquals(bundle.infoYes().getLocalizedMessage(), formatter.format(Boolean.TRUE));
-    assertEquals(bundle.infoNo().getLocalizedMessage(), formatter.format(Boolean.FALSE));
+    assertThat(formatter.format(Boolean.TRUE)).isEqualTo(bundle.infoYes().getLocalizedMessage());
+    assertThat(formatter.format(Boolean.FALSE)).isEqualTo(bundle.infoNo().getLocalizedMessage());
     List<Boolean> enumValues = provider.getEnumValues(booleanDefinition);
-    assertNotNull(enumValues);
-    assertEquals(2, enumValues.size());
-    assertEquals(Arrays.asList(Boolean.TRUE, Boolean.FALSE), enumValues);
+    assertThat(enumValues).isNotNull().hasSize(2).containsExactly(Boolean.TRUE, Boolean.FALSE);
   }
 
   /**
@@ -68,37 +65,35 @@ public class SimpleEnumProviderTest extends Assert {
   public void testCustomEnum() {
 
     EnumProvider provider = getEnumProvider();
-    assertNotNull(provider);
+    assertThat(provider).isNotNull();
     EnumDefinition<IncompleteCountry, Continent> testDefinition = provider
         .getEnumDefinitionWithCategory(IncompleteCountry.class);
-    assertNotNull(testDefinition);
-    assertEquals(IncompleteCountry.class, testDefinition.getEnumType());
+    assertThat(testDefinition).isNotNull();
+    assertThat(testDefinition.getEnumType()).isEqualTo(IncompleteCountry.class);
     EnumDefinition<?, ?> categoryDefinition = testDefinition.getCategory();
-    assertNotNull(categoryDefinition);
-    assertEquals(Continent.class, categoryDefinition.getEnumType());
-    assertEquals(IncompleteCountry.class.getName(), testDefinition.getValue());
+    assertThat(categoryDefinition).isNotNull();
+    assertThat(categoryDefinition.getEnumType()).isEqualTo(Continent.class);
+    assertThat(testDefinition.getValue()).isEqualTo(IncompleteCountry.class.getName());
     Formatter<IncompleteCountry> formatter = testDefinition.getFormatter();
-    assertNotNull(formatter);
-    assertEquals(IncompleteCountry.GERMANY.toString(), formatter.format(IncompleteCountry.GERMANY));
+    assertThat(formatter).isNotNull();
+    assertThat(formatter.format(IncompleteCountry.GERMANY)).isEqualTo(IncompleteCountry.GERMANY.toString());
 
     List<IncompleteCountry> enumValues = provider.getEnumValues(testDefinition);
-    assertNotNull(enumValues);
+    assertThat(enumValues).isNotNull();
     List<IncompleteCountry> expected = new ArrayList<>();
     for (IncompleteCountry country : IncompleteCountry.values()) {
       if (!country.isDeprecated()) {
         expected.add(country);
       }
     }
-    assertEquals(expected, enumValues);
+    assertThat(enumValues).isEqualTo(expected);
 
     enumValues = provider.getEnumValues(testDefinition, Continent.AMERICA);
-    assertNotNull(enumValues);
-    assertEquals(Arrays.asList(IncompleteCountry.USA, IncompleteCountry.CANADA), enumValues);
+    assertThat(enumValues).isNotNull().containsExactly(IncompleteCountry.USA, IncompleteCountry.CANADA);
 
     enumValues = provider.getEnumValues(testDefinition, Continent.AMERICA, Continent.AUSTRALIA);
-    assertNotNull(enumValues);
-    assertEquals(Arrays.asList(IncompleteCountry.USA, IncompleteCountry.CANADA, IncompleteCountry.AUSTRALIA),
-        enumValues);
+    assertThat(enumValues).isNotNull().containsExactly(IncompleteCountry.USA, IncompleteCountry.CANADA,
+        IncompleteCountry.AUSTRALIA);
   }
 
   @SuppressWarnings("all")
@@ -118,8 +113,7 @@ public class SimpleEnumProviderTest extends Assert {
 
   // totally incomplete - just for testing...
   @SuppressWarnings("all")
-  public static enum IncompleteCountry
-      implements EnumTypeWithCategory<String, Continent>, AttributeReadDeprecated {
+  public static enum IncompleteCountry implements EnumTypeWithCategory<String, Continent>, AttributeReadDeprecated {
 
     GERMANY(Continent.EUROPE, "DE"),
 

@@ -4,13 +4,15 @@ package net.sf.mmm.util.lang.base;
 
 import javax.inject.Inject;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import net.sf.mmm.test.AbstractSpringTest;
 import net.sf.mmm.util.lang.api.EnvironmentDetector;
+import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 
 /**
  * This is the test-case for {@link EnvironmentDetector} in simulated production mode.
@@ -18,9 +20,10 @@ import net.sf.mmm.util.lang.api.EnvironmentDetector;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-@ContextConfiguration(AbstractSpringTest.SPRING_CONFIG_UTIL_CORE)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { UtilLangSpringConfig.class })
 @ActiveProfiles({ "default", "devLocal" })
-public class EnvironmentDetectorDevelopmentTest extends AbstractSpringTest {
+public class EnvironmentDetectorDevelopmentTest extends Assertions {
 
   /** The {@link EnvironmentDetector} instance. */
   @Inject
@@ -32,10 +35,10 @@ public class EnvironmentDetectorDevelopmentTest extends AbstractSpringTest {
   @Test
   public void testEnvironmentDetected() {
 
-    Assert.assertEquals(EnvironmentDetector.ENVIRONMENT_TYPE_DEVELOPMENT,
-        this.environmentDetector.getEnvironmentType());
-    Assert.assertTrue(this.environmentDetector.isDevelopmentEnvironment());
-    Assert.assertFalse(this.environmentDetector.isProductionEnvironment());
+    assertThat(this.environmentDetector.getEnvironmentType())
+        .isEqualTo(EnvironmentDetector.ENVIRONMENT_TYPE_DEVELOPMENT);
+    assertThat(this.environmentDetector.isDevelopmentEnvironment()).isTrue();
+    assertThat(this.environmentDetector.isProductionEnvironment()).isFalse();
   }
 
 }
