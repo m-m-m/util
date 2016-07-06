@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import javafx.beans.property.Property;
 import net.sf.mmm.util.property.api.WritableProperty;
+import net.sf.mmm.util.property.api.lang.GenericProperty;
 
 /**
  * This is the interface for a generic bean based on {@link net.sf.mmm.util.property.api.WritableProperty generic
@@ -13,7 +14,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * <ul>
  * <li>Simplicity - just create your interface, no need to write boiler-plate code for implementation.</li>
  * <li>Generic - fast, easy and reliable introspection via {@link BeanAccess#getProperties()}. No greedy introspection
- * via reflection.</li>
+ * via reflection for each access but only once per {@link Bean} interface.</li>
  * <li>Dynamic - supports combination of Java's strong typing with {@link BeanAccess#isDynamic() dynamic} beans. E.g. if
  * read data from Database, XML, or JSON you can still map "undefined" properties in your {@link Bean}. This way a
  * client can receive an object from a newer version of a database or (REST-)service with added properties that will be
@@ -30,18 +31,27 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * <li>Validation - build-in {@link BeanAccess#validate() validation support}. This can be configured via
  * Bean-Validation standard (JSR303) or even more efficient and reusable via custom properties or in default methods for
  * the properties of your {@link Bean} interface.</li>
+ * <li>JSON-Support - mapping {@link BeanAccess#fromJson(javax.json.stream.JsonParser) from} and
+ * {@link BeanAccess#toJson(javax.json.stream.JsonGenerator) to} JSON is already build in and is extremely efficient. If
+ * you need custom datatypes you can simply extend {@link GenericProperty} and tweak the JSON mapping as needed. No
+ * separate classes for mapping from or to JSON are required - also not for database if you use Java standard datatypes
+ * as value and keep your custom logic in the property.</li>
+ * <li>Portability - everything relies only on established Java default mechanisms such as dynamic proxies. No
+ * customization of build processes, IDEs, etc. needed. It just works with any build tool (maven, gradle, buildr, ant,
+ * etc.) and IDE (Eclipse, IntelliJ, NetBeans, etc.) without plugins and therefore will also work in the future whatever
+ * may come..</li>
  * </ul>
  *
- * In order to create your own bean simple create a new interface extending this {@link Bean} interface. Have a look at
- * the following example:
+ * In order to define your own bean simply create a new interface (directly or indirectly) extending this {@link Bean}
+ * interface as in the following example:
  *
  * <pre>
  * public interface AddressBean extends {@link Bean} {
- *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} Street();
- *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} HouseNumber();
- *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} PostalCode();
- *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} City();
- *   {@link net.sf.mmm.util.property.api.lang.WritableStringProperty} Country();
+ *   {@link net.sf.mmm.util.property.api.lang.StringProperty} Street();
+ *   {@link net.sf.mmm.util.property.api.lang.StringProperty} HouseNumber();
+ *   {@link net.sf.mmm.util.property.api.lang.StringProperty} PostalCode();
+ *   {@link net.sf.mmm.util.property.api.lang.StringProperty} City();
+ *   {@link net.sf.mmm.util.property.api.lang.StringProperty} Country();
  *   // if you want you may also define regular getters and setters as well
  *   String getStreet();
  *   void setStreet(String street);
@@ -67,6 +77,14 @@ import net.sf.mmm.util.property.api.WritableProperty;
  *       System.out.println("Property '" + property.{@link net.sf.mmm.util.property.api.WritableProperty#getName() getName()} + "' of type ' + property.{@link WritableProperty#getType() getType()} + ' has value '" + property.{@link WritableProperty#getValue() getValue()} + "'.");
  *     }
  *   }
+ * }
+ * </pre>
+ *
+ * If you are very pragmatic do not like {@link net.sf.mmm.util.component.api.Ioc} you can also use
+ * {@link net.sf.mmm.util.bean.impl.BeanFactoryImpl#getInstance()}. For most simplistic fabrication you can create a
+ * static method to your {@link Bean}: <pre>
+ * static AddressBean create() {
+ *   return BeanFactoryImpl.getInstance().create(AddressBean.class);
  * }
  * </pre>
  *
