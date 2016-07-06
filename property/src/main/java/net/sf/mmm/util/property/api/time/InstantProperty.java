@@ -4,6 +4,7 @@ package net.sf.mmm.util.property.api.time;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
@@ -45,6 +46,17 @@ public class InstantProperty extends AbstractRegularProperty<Instant> implements
     super(name, bean, validator);
   }
 
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public InstantProperty(String name, Bean bean, Supplier<Instant> expression) {
+    super(name, bean, expression);
+  }
+
   @Override
   protected Instant doGetValue() {
 
@@ -76,7 +88,7 @@ public class InstantProperty extends AbstractRegularProperty<Instant> implements
   @Override
   public void fromJson(JsonParser json) {
 
-    getJsonUtil().expectJsonEvent(json, Event.VALUE_STRING);
+    getJsonUtil().expectEvent(json, Event.VALUE_STRING);
     setValue(Instant.parse(json.getString()));
   }
 

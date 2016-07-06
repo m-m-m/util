@@ -3,6 +3,7 @@
 package net.sf.mmm.util.property.api.math;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
@@ -38,6 +39,17 @@ public abstract class NumberProperty<N extends Number> extends AbstractRegularPr
    */
   public NumberProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public NumberProperty(String name, Bean bean, Supplier<? extends Number> expression) {
+    super(name, bean, expression);
   }
 
   @SuppressWarnings("unchecked")

@@ -3,6 +3,7 @@
 package net.sf.mmm.util.property.api.lang;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
@@ -44,6 +45,17 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
     super(name, bean, validator);
   }
 
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public StringProperty(String name, Bean bean, Supplier<String> expression) {
+    super(name, bean, expression);
+  }
+
   @Override
   protected String doGetValue() {
 
@@ -75,7 +87,7 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
   @Override
   public void fromJson(JsonParser json) {
 
-    getJsonUtil().expectJsonEvent(json, Event.VALUE_STRING);
+    getJsonUtil().expectEvent(json, Event.VALUE_STRING);
     set(json.getString());
   }
 

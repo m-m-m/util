@@ -105,7 +105,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public <T> T fromJson(JsonParser json, GenericType<T> type, Event e) {
+  public <T> T read(JsonParser json, GenericType<T> type, Event e) {
 
     if (e == Event.VALUE_NULL) {
       return null;
@@ -113,29 +113,29 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
     Class<?> valueClass = type.getAssignmentClass();
     Object result;
     if (valueClass == String.class) {
-      expectJsonEvent(e, Event.VALUE_STRING);
+      expectEvent(e, Event.VALUE_STRING);
       result = json.getString();
     } else if (Number.class.isAssignableFrom(valueClass)) {
-      expectJsonEvent(e, Event.VALUE_NUMBER);
-      result = fromJsonNumber(json, (Class) valueClass);
+      expectEvent(e, Event.VALUE_NUMBER);
+      result = readNumber(json, (Class) valueClass);
     } else if ((valueClass == Boolean.class) || (valueClass == boolean.class)) {
-      result = Boolean.valueOf(fromJsonBoolean(e));
+      result = Boolean.valueOf(readBoolean(e));
     } else if (valueClass.isEnum()) {
-      expectJsonEvent(e, Event.VALUE_STRING);
-      result = fromJsonEnum(json, (Class<? extends Enum>) valueClass);
+      expectEvent(e, Event.VALUE_STRING);
+      result = readEnum(json, (Class<? extends Enum>) valueClass);
     } else if (Collection.class.isAssignableFrom(valueClass)) {
-      expectJsonEvent(e, Event.START_ARRAY);
-      result = fromJsonCollection(json, (GenericType<? extends Collection<?>>) type);
+      expectEvent(e, Event.START_ARRAY);
+      result = readCollection(json, (GenericType<? extends Collection<?>>) type);
     } else if (valueClass.isArray()) {
-      expectJsonEvent(e, Event.START_ARRAY);
+      expectEvent(e, Event.START_ARRAY);
       GenericType<?> componentType = type.getComponentType();
       List<Object> list = new ArrayList<>();
-      fromJsonCollection(json, (Collection) list, componentType);
+      readCollection(json, (Collection) list, componentType);
       result = Array.newInstance(componentType.getRetrievalClass(), list.size());
       result = list.toArray((Object[]) result);
     } else if (Map.class.isAssignableFrom(valueClass)) {
-      expectJsonEvent(e, Event.START_OBJECT);
-      result = fromJsonMap(json, (GenericType<Map<?, ?>>) type);
+      expectEvent(e, Event.START_OBJECT);
+      result = readMap(json, (GenericType<Map<?, ?>>) type);
     } else {
       throw new IllegalArgumentException(type.toString());
     }
@@ -143,7 +143,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   }
 
   @Override
-  public <E extends Enum<E>> E fromJsonEnum(JsonParser json, Class<E> enumType) throws IllegalCaseException {
+  public <E extends Enum<E>> E readEnum(JsonParser json, Class<E> enumType) throws IllegalCaseException {
 
     String value = json.getString();
     E[] constants = enumType.getEnumConstants();
@@ -163,28 +163,28 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public <C extends Collection<?>> C fromJsonCollection(JsonParser json, GenericType<C> type) {
+  public <C extends Collection<?>> C readCollection(JsonParser json, GenericType<C> type) {
 
     C collection = this.collectionReflectionUtil.create(type.getAssignmentClass());
-    fromJsonCollection(json, (Collection) collection, type.getComponentType());
+    readCollection(json, (Collection) collection, type.getComponentType());
     return collection;
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public <E> void fromJsonCollection(JsonParser json, Collection<E> collection, GenericType<E> type) {
+  public <E> void readCollection(JsonParser json, Collection<E> collection, GenericType<E> type) {
 
     Collection c = collection;
     Event e = json.next();
     while (e != Event.END_ARRAY) {
-      Object item = fromJson(json, type, e);
+      Object item = read(json, type, e);
       c.add(item);
       e = json.next();
     }
   }
 
   @Override
-  public <M extends Map<?, ?>> M fromJsonMap(JsonParser json, GenericType<M> type) {
+  public <M extends Map<?, ?>> M readMap(JsonParser json, GenericType<M> type) {
 
     // TODO Auto-generated method stub
     return null;

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 
@@ -51,6 +52,17 @@ public class StringListProperty extends StringProperty {
    */
   public StringListProperty(String name, Bean bean, AbstractValidator<? super String> validator) {
     super(name, bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public StringListProperty(String name, Bean bean, Supplier<String> expression) {
+    super(name, bean, expression);
   }
 
   @Override
@@ -252,7 +264,7 @@ public class StringListProperty extends StringProperty {
   @Override
   protected void toJson(JsonGenerator json, String stringValue) {
 
-    getJsonUtil().toJson(json, getName(), asList());
+    getJsonUtil().write(json, getName(), asList());
   }
 
 }

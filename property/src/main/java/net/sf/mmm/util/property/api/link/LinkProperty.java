@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.link;
 
+import java.util.function.Supplier;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.bean.api.link.Link;
@@ -46,9 +48,20 @@ public class LinkProperty<E extends EntityBean> extends GenericProperty<Link<E>>
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public LinkProperty(String name, GenericType<Link<E>> type, Bean bean,
-      AbstractValidator<? super Link<E>> validator) {
+  public LinkProperty(String name, GenericType<Link<E>> type, Bean bean, AbstractValidator<? super Link<E>> validator) {
     super(name, type, bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public LinkProperty(String name, GenericType<Link<E>> type, Bean bean, Supplier<? extends Link<E>> expression) {
+    super(name, type, bean, expression);
   }
 
   /**
@@ -63,9 +76,7 @@ public class LinkProperty<E extends EntityBean> extends GenericProperty<Link<E>>
     if (beanClass == null) {
       return (GenericType) TYPE;
     }
-    return new GenericTypeBuilder<Link<E>>() {
-    }.with(new GenericTypeVariable<E>() {
-    }, beanClass).build();
+    return new GenericTypeBuilder<Link<E>>() {}.with(new GenericTypeVariable<E>() {}, beanClass).build();
   }
 
 }

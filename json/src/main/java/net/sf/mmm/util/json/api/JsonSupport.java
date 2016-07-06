@@ -6,7 +6,8 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 
 /**
- * This is the interface for an object that supports to {@link #toJson(JsonGenerator) serialize itself to JSON}.
+ * This is the interface for an object that supports to {@link #toJson(JsonGenerator) serialize} and
+ * {@link #fromJson(JsonParser) deserialize} itself to JSON.
  *
  * @author hohwille
  * @since 8.0.0
@@ -19,7 +20,7 @@ public interface JsonSupport {
   /**
    * Serializes this object as JSON (JavaScript-Object-Notation).
    *
-   * @see JsonHelper#toJson(JsonGenerator, String, Object)
+   * @see JsonUtil#write(JsonGenerator, String, Object)
    *
    * @param json the {@link JsonGenerator} where to write this object to. Has to be in
    *        {@link JsonGenerator#writeStartObject()} state.

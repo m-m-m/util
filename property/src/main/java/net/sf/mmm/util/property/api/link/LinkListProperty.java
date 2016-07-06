@@ -3,6 +3,7 @@
 package net.sf.mmm.util.property.api.link;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import javafx.collections.ObservableList;
 import net.sf.mmm.util.bean.api.Bean;
@@ -46,6 +47,19 @@ public class LinkListProperty<E extends EntityBean> extends ListProperty<Link<E>
   public LinkListProperty(String name, GenericType<ObservableList<Link<E>>> type, Bean bean,
       AbstractValidator<? super ObservableList<Link<E>>> validator) {
     super(name, type, bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public LinkListProperty(String name, GenericType<? extends ObservableList<Link<E>>> type, Bean bean,
+      Supplier<ObservableList<Link<E>>> expression) {
+    super(name, type, bean, expression);
   }
 
   /**

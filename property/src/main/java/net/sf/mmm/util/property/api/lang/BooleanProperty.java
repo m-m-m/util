@@ -3,6 +3,7 @@
 package net.sf.mmm.util.property.api.lang;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
@@ -43,6 +44,17 @@ public class BooleanProperty extends AbstractRegularProperty<Boolean> implements
    */
   public BooleanProperty(String name, Bean bean, AbstractValidator<? super Boolean> validator) {
     super(name, bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public BooleanProperty(String name, Bean bean, Supplier<Boolean> expression) {
+    super(name, bean, expression);
   }
 
   @Override

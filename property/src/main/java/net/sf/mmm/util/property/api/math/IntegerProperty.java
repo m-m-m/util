@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.math;
 
+import java.util.function.Supplier;
+
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
@@ -41,6 +43,17 @@ public class IntegerProperty extends NumberProperty<Integer> implements Writable
     super(name, bean, validator);
   }
 
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public IntegerProperty(String name, Bean bean, Supplier<Integer> expression) {
+    super(name, bean, expression);
+  }
+
   @Override
   public void setValue(Number value) {
 
@@ -78,7 +91,7 @@ public class IntegerProperty extends NumberProperty<Integer> implements Writable
   @Override
   public void fromJson(JsonParser json) {
 
-    getJsonUtil().expectJsonEvent(json, Event.VALUE_NUMBER);
+    getJsonUtil().expectEvent(json, Event.VALUE_NUMBER);
     set(json.getInt());
   }
 

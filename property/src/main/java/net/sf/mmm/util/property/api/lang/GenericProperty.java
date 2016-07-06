@@ -3,6 +3,7 @@
 package net.sf.mmm.util.property.api.lang;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
@@ -41,7 +42,7 @@ public class GenericProperty<V> extends AbstractRegularProperty<V> {
    * @param bean - see {@link #getBean()}.
    */
   public GenericProperty(String name, GenericType<V> type, Bean bean) {
-    this(name, type, bean, null);
+    this(name, type, bean, (AbstractValidator<? super V>) null);
   }
 
   /**
@@ -54,6 +55,19 @@ public class GenericProperty<V> extends AbstractRegularProperty<V> {
    */
   public GenericProperty(String name, GenericType<V> type, Bean bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
+    this.type = type;
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public GenericProperty(String name, GenericType<V> type, Bean bean, Supplier<? extends V> expression) {
+    super(name, bean, expression);
     this.type = type;
   }
 
@@ -94,13 +108,13 @@ public class GenericProperty<V> extends AbstractRegularProperty<V> {
   @Override
   protected void toJson(JsonGenerator json, V propertyValue) {
 
-    getJsonUtil().toJson(json, getName(), propertyValue);
+    getJsonUtil().write(json, getName(), propertyValue);
   }
 
   @Override
   public void fromJson(JsonParser json) {
 
-    V v = getJsonUtil().fromJson(json, this.type);
+    V v = getJsonUtil().read(json, this.type);
     setValue(v);
   }
 

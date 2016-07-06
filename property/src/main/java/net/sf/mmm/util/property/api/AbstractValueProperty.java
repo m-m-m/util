@@ -3,12 +3,14 @@
 package net.sf.mmm.util.property.api;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.value.ObservableValue;
 import net.sf.mmm.util.bean.api.Bean;
+import net.sf.mmm.util.exception.api.ReadOnlyException;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidationFailure;
@@ -25,11 +27,15 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
 
   private ValidationFailure validationResult;
 
-  private ReadOnlyPropertyImpl<V> readOnlyProperty;
+  private boolean readOnly;
+
+  private AbstractValueProperty<V> readOnlyProperty;
 
   private ObservableValue<? extends V> binding;
 
   private InvalidationListener bindingListener;
+
+  private Supplier<? extends V> expression;
 
   /**
    * The constructor.
@@ -38,7 +44,7 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
    * @param bean - see {@link #getBean()}.
    */
   public AbstractValueProperty(String name, Bean bean) {
-    this(name, bean, null);
+    this(name, bean, (AbstractValidator<? super V>) null);
   }
 
   /**
@@ -50,6 +56,21 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
    */
   public AbstractValueProperty(String name, Bean bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
+    this.readOnly = false;
+    this.expression = null;
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public AbstractValueProperty(String name, Bean bean, Supplier<? extends V> expression) {
+    super(name, bean);
+    this.readOnly = true;
+    this.expression = expression;
   }
 
   @Override
@@ -66,6 +87,9 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
   @Override
   public final V getValue() {
 
+    if (this.expression != null) {
+      return this.expression.get();
+    }
     if (this.binding != null) {
       return this.binding.getValue();
     }
@@ -82,21 +106,27 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
 
     Objects.requireNonNull(observable, "observable");
     if (!observable.equals(this.binding)) {
+      requireWritable();
       unbind();
-      this.binding = observable;
-      if (this.bindingListener == null) {
-        this.bindingListener = new BindingInvalidationListener(this);
-      }
-      observable.addListener(this.bindingListener);
-      markInvalid();
+      bindInternal(observable);
     }
+  }
+
+  void bindInternal(ObservableValue<? extends V> observable) {
+
+    this.binding = observable;
+    if (this.bindingListener == null) {
+      this.bindingListener = new BindingInvalidationListener(this);
+    }
+    observable.addListener(this.bindingListener);
+    markInvalid();
   }
 
   @Override
   public void unbind() {
 
     if (this.binding != null) {
-
+      requireWritable();
       assignValueFrom(this.binding);
       this.binding.removeListener(this.bindingListener);
       this.binding = null;
@@ -126,12 +156,24 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
   public void setValue(V value) {
 
     if (isBound()) {
-      throw new RuntimeException((getBean() != null && getName() != null
-          ? getBean().getClass().getSimpleName() + "." + getName() + " : " : "") + "A bound value cannot be set.");
+      throw new RuntimeException(
+          (getBean() != null && getName() != null ? getBean().getClass().getSimpleName() + "." + getName() + " : " : "")
+              + "A bound value cannot be set.");
     }
+    requireWritable();
     boolean changed = doSetValue(value);
     if (changed) {
       markInvalid();
+    }
+  }
+
+  /**
+   * @throws ReadOnlyException if this property is {@link #isReadOnly() read-only}.
+   */
+  protected final void requireWritable() throws ReadOnlyException {
+
+    if (isReadOnly()) {
+      throw new ReadOnlyException(getBean(), getName());
     }
   }
 
@@ -210,8 +252,15 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
   @Override
   public WritableProperty<V> getReadOnly() {
 
+    if (isReadOnly()) {
+      return this;
+    }
     if (this.readOnlyProperty == null) {
-      this.readOnlyProperty = new ReadOnlyPropertyImpl<>(this);
+      AbstractValueProperty<V> copy = copy();
+      copy.binding = null;
+      copy.bindInternal(this);
+      copy.readOnly = true;
+      this.readOnlyProperty = copy;
     }
     return this.readOnlyProperty;
   }
@@ -219,7 +268,7 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
   @Override
   public final boolean isReadOnly() {
 
-    return false;
+    return this.readOnly;
   }
 
   @Override

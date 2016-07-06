@@ -51,4 +51,18 @@ public interface WritableProperty<V> extends Property<V>, AttributeWriteValue<V>
    */
   boolean isValid();
 
+  /**
+   * @param <P> the generic type of the property.
+   * @param property the {@link WritableProperty property} to get as {@link #isReadOnly() read-only} view.
+   * @return the {@link #getReadOnly() read-only view} of the given {@link WritableProperty property}.
+   */
+  @SuppressWarnings("unchecked")
+  static <P extends WritableProperty<?>> P getReadOnly(P property) {
+
+    if (property.isReadOnly()) {
+      return property;
+    }
+    return (P) property.getReadOnly();
+  }
+
 }

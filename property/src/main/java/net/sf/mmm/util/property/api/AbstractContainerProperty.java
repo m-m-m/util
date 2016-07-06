@@ -2,10 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import java.util.function.Supplier;
+
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.property.api.lang.BooleanPropertyExpression;
+import net.sf.mmm.util.property.api.lang.BooleanProperty;
 import net.sf.mmm.util.property.api.lang.ReadableBooleanProperty;
-import net.sf.mmm.util.property.api.math.IntegerPropertyExpression;
+import net.sf.mmm.util.property.api.math.IntegerProperty;
 import net.sf.mmm.util.property.api.math.ReadableIntegerProperty;
 import net.sf.mmm.util.property.api.util.ReadableContainerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -24,9 +26,9 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
 
   private final GenericType<? extends V> type;
 
-  private SizeProperty sizeProperty;
+  private IntegerProperty sizeProperty;
 
-  private EmptyProperty emptyProperty;
+  private BooleanProperty emptyProperty;
 
   /**
    * The constructor.
@@ -36,7 +38,7 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
    * @param bean - see {@link #getBean()}.
    */
   public AbstractContainerProperty(String name, GenericType<? extends V> type, Bean bean) {
-    this(name, type, bean, null);
+    this(name, type, bean, (AbstractValidator<? super V>) null);
   }
 
   /**
@@ -53,6 +55,20 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
     this.type = type;
   }
 
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public AbstractContainerProperty(String name, GenericType<? extends V> type, Bean bean,
+      Supplier<? extends V> expression) {
+    super(name, bean, expression);
+    this.type = type;
+  }
+
   @Override
   public GenericType<? extends V> getType() {
 
@@ -63,7 +79,7 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
   public ReadableIntegerProperty sizeProperty() {
 
     if (this.sizeProperty == null) {
-      this.sizeProperty = new SizeProperty();
+      this.sizeProperty = new IntegerProperty(getName() + ".size", getBean(), () -> Integer.valueOf(size()));
     }
     return this.sizeProperty;
   }
@@ -72,7 +88,7 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
   public ReadableBooleanProperty emptyProperty() {
 
     if (this.emptyProperty == null) {
-      this.emptyProperty = new EmptyProperty();
+      this.emptyProperty = new BooleanProperty(getName() + ".empty", getBean(), () -> Boolean.valueOf(isEmpty()));
     }
     return this.emptyProperty;
   }
@@ -87,50 +103,6 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
     }
     if (this.emptyProperty != null) {
       this.emptyProperty.fireValueChangedEvent();
-    }
-  }
-
-  private class SizeProperty extends IntegerPropertyExpression {
-
-    /**
-     * The constructor.
-     */
-    public SizeProperty() {
-      super(AbstractContainerProperty.this.getName() + ".size", AbstractContainerProperty.this.getBean());
-    }
-
-    @Override
-    public Integer getValue() {
-
-      return Integer.valueOf(size());
-    }
-
-    @Override
-    protected void fireValueChangedEvent() {
-
-      super.fireValueChangedEvent();
-    }
-  }
-
-  private class EmptyProperty extends BooleanPropertyExpression {
-
-    /**
-     * The constructor.
-     */
-    public EmptyProperty() {
-      super(AbstractContainerProperty.this.getName() + ".empty", AbstractContainerProperty.this.getBean());
-    }
-
-    @Override
-    public Boolean getValue() {
-
-      return Boolean.valueOf(isEmpty());
-    }
-
-    @Override
-    protected void fireValueChangedEvent() {
-
-      super.fireValueChangedEvent();
     }
   }
 

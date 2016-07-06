@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api;
 
+import java.util.function.Supplier;
+
 import com.sun.javafx.binding.ExpressionHelper;
 
 import javafx.beans.InvalidationListener;
@@ -30,7 +32,7 @@ public abstract class AbstractRegularProperty<V> extends AbstractValueProperty<V
    * @param bean - see {@link #getBean()}.
    */
   public AbstractRegularProperty(String name, Bean bean) {
-    this(name, bean, null);
+    super(name, bean);
   }
 
   /**
@@ -42,6 +44,17 @@ public abstract class AbstractRegularProperty<V> extends AbstractValueProperty<V
    */
   public AbstractRegularProperty(String name, Bean bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public AbstractRegularProperty(String name, Bean bean, Supplier<? extends V> expression) {
+    super(name, bean, expression);
   }
 
   @Override

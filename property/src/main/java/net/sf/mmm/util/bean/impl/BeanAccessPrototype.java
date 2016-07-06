@@ -15,9 +15,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
@@ -31,8 +28,8 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidator;
 
 /**
- * This is the implementation of {@link BeanAccess} for the {@link BeanFactory#createPrototype(Class)
- * prototype} of a {@link Bean}.
+ * This is the implementation of {@link BeanAccess} for the {@link BeanFactory#createPrototype(Class) prototype} of a
+ * {@link Bean}.
  *
  * @param <BEAN> the generic type of the {@link Bean}.
  *
@@ -40,8 +37,6 @@ import net.sf.mmm.util.validation.base.ComposedValidator;
  * @since 8.0.0
  */
 public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessBase<BEAN> {
-
-  private static final Logger LOG = LoggerFactory.getLogger(BeanAccessPrototype.class);
 
   private final String simpleName;
 
@@ -140,8 +135,7 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
   }
 
   /**
-   * @return a new {@link Map} instance such as {@link HashMap} or {@link ConcurrentHashMap} for the
-   *         properties.
+   * @return a new {@link Map} instance such as {@link HashMap} or {@link ConcurrentHashMap} for the properties.
    */
   protected Map<String, BeanPrototypeProperty> createPropertyMap() {
 
@@ -291,8 +285,8 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
 
   /**
    * @param property the {@link WritableProperty} to add.
-   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property},
-   *        {@code false} otherwise (inherited).
+   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property}, {@code false}
+   *        otherwise (inherited).
    */
   protected void addProperty(AbstractProperty<?> property, boolean declared) {
 
@@ -300,12 +294,11 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
   }
 
   /**
-   * Internal implementation of {@link #addProperty(AbstractProperty, boolean)} (e.g. recursive and without
-   * locking).
+   * Internal implementation of {@link #addProperty(AbstractProperty, boolean)} (e.g. recursive and without locking).
    *
    * @param property the {@link WritableProperty} to add.
-   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property},
-   *        {@code false} otherwise (inherited).
+   * @param declared - {@code true} in case of {@link #getDeclaredPropertyNames() declared property}, {@code false}
+   *        otherwise (inherited).
    */
   protected void addPropertyInternal(AbstractProperty<?> property, boolean declared) {
 

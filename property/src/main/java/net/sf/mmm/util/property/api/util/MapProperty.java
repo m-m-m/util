@@ -3,6 +3,7 @@
 package net.sf.mmm.util.property.api.util;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
@@ -78,6 +79,19 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
   public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Bean bean,
       AbstractValidator<? super ObservableMap<K, V>> validator) {
     super(name, requireType(type), bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Bean bean,
+      Supplier<? extends ObservableMap<K, V>> expression) {
+    super(name, type, bean, expression);
   }
 
   private static <K, V> GenericType<? extends ObservableMap<K, V>> requireType(
@@ -192,7 +206,7 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
       if (key != null) {
         keyString = key.toString();
       }
-      jsonUtil.toJson(json, keyString, entry.getValue());
+      jsonUtil.write(json, keyString, entry.getValue());
     }
     json.writeEnd();
   }
@@ -201,8 +215,8 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
   public void fromJson(JsonParser json) {
 
     JsonUtil jsonUtil = getJsonUtil();
-    jsonUtil.expectJsonEvent(json, Event.START_OBJECT);
-    ObservableMap<K, V> map = jsonUtil.fromJsonMap(json, getType());
+    jsonUtil.expectEvent(json, Event.START_OBJECT);
+    ObservableMap<K, V> map = jsonUtil.readMap(json, getType());
     set(map);
   }
 

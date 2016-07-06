@@ -4,6 +4,7 @@ package net.sf.mmm.util.property.api.time;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
@@ -46,6 +47,17 @@ public class LocalDateTimeProperty extends AbstractRegularProperty<LocalDateTime
     super(name, bean, validator);
   }
 
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public LocalDateTimeProperty(String name, Bean bean, Supplier<LocalDateTime> expression) {
+    super(name, bean, expression);
+  }
+
   @Override
   protected LocalDateTime doGetValue() {
 
@@ -77,7 +89,7 @@ public class LocalDateTimeProperty extends AbstractRegularProperty<LocalDateTime
   @Override
   public void fromJson(JsonParser json) {
 
-    getJsonUtil().expectJsonEvent(json, Event.VALUE_STRING);
+    getJsonUtil().expectEvent(json, Event.VALUE_STRING);
     setValue(LocalDateTime.parse(json.getString()));
   }
 

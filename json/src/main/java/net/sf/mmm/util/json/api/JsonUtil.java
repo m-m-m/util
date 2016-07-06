@@ -13,8 +13,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import org.assertj.core.util.Arrays;
-
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.exception.api.WrongValueTypeException;
@@ -37,10 +35,10 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, Object value) {
+  default void write(JsonGenerator json, String property, Object value) {
 
     if (value == null) {
-      toJsonNull(json, property);
+      writeNull(json, property);
     } else if (value instanceof JsonSupport) {
       if (property != null) {
         json.writeStartObject(property);
@@ -50,11 +48,11 @@ public interface JsonUtil {
         json.writeEnd();
       }
     } else if (value instanceof Number) {
-      toJson(json, property, (Number) value);
+      write(json, property, (Number) value);
     } else if (value instanceof Boolean) {
       boolean booleanValue = ((Boolean) value).booleanValue();
-      toJson(json, property, booleanValue);
-    } else if (Arrays.isArray(value)) {
+      write(json, property, booleanValue);
+    } else if (value.getClass().isArray()) {
       int length = Array.getLength(value);
       if (property == null) {
         json.writeStartArray();
@@ -62,16 +60,16 @@ public interface JsonUtil {
         json.writeStartArray(property);
       }
       for (int i = 0; i < length; i++) {
-        toJson(json, null, Array.get(value, i));
+        write(json, null, Array.get(value, i));
       }
       json.writeEnd();
     } else if (value instanceof Iterable) {
-      toJson(json, property, (Iterable<?>) value);
+      write(json, property, (Iterable<?>) value);
     } else if (value instanceof Map) {
-      toJson(json, property, (Map<?, ?>) value);
+      write(json, property, (Map<?, ?>) value);
     } else {
       String string = value.toString();
-      toJson(json, property, string);
+      write(json, property, string);
     }
   }
 
@@ -82,10 +80,10 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, String value) {
+  default void write(JsonGenerator json, String property, String value) {
 
     if (value == null) {
-      toJsonNull(json, property);
+      writeNull(json, property);
       return;
     }
     if (property == null) {
@@ -102,7 +100,7 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, boolean value) {
+  default void write(JsonGenerator json, String property, boolean value) {
 
     if (property == null) {
       json.write(value);
@@ -118,22 +116,22 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, Number value) {
+  default void write(JsonGenerator json, String property, Number value) {
 
     if (value instanceof Long) {
-      toJson(json, property, value.longValue());
+      write(json, property, value.longValue());
     } else if ((value instanceof Integer) || (value instanceof Short) || (value instanceof Byte)) {
-      toJson(json, property, value.intValue());
+      write(json, property, value.intValue());
     } else if (value instanceof BigDecimal) {
-      toJson(json, property, (BigDecimal) value);
+      write(json, property, (BigDecimal) value);
     } else if (value instanceof BigInteger) {
-      toJson(json, property, (BigInteger) value);
+      write(json, property, (BigInteger) value);
     } else {
       if (value == null) {
-        toJsonNull(json, property);
+        writeNull(json, property);
         return;
       }
-      toJson(json, property, value.doubleValue());
+      write(json, property, value.doubleValue());
     }
   }
 
@@ -144,7 +142,7 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, long value) {
+  default void write(JsonGenerator json, String property, long value) {
 
     if (property == null) {
       json.write(value);
@@ -160,7 +158,7 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, double value) {
+  default void write(JsonGenerator json, String property, double value) {
 
     if (property == null) {
       json.write(value);
@@ -176,10 +174,10 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, BigDecimal value) {
+  default void write(JsonGenerator json, String property, BigDecimal value) {
 
     if (value == null) {
-      toJsonNull(json, property);
+      writeNull(json, property);
       return;
     }
     if (property == null) {
@@ -196,10 +194,10 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, BigInteger value) {
+  default void write(JsonGenerator json, String property, BigInteger value) {
 
     if (value == null) {
-      toJsonNull(json, property);
+      writeNull(json, property);
       return;
     }
     if (property == null) {
@@ -216,7 +214,7 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, int value) {
+  default void write(JsonGenerator json, String property, int value) {
 
     if (property == null) {
       json.write(value);
@@ -231,7 +229,7 @@ public interface JsonUtil {
    * @param json the {@link JsonGenerator}.
    * @param property the name of the JSON property or {@code null} for no property (just to write {@code null}).
    */
-  default void toJsonNull(JsonGenerator json, String property) {
+  default void writeNull(JsonGenerator json, String property) {
 
     if (property == null) {
       json.writeNull();
@@ -245,10 +243,10 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, Iterable<?> value) {
+  default void write(JsonGenerator json, String property, Iterable<?> value) {
 
     if (value == null) {
-      toJsonNull(json, property);
+      writeNull(json, property);
       return;
     }
     if (property == null) {
@@ -257,7 +255,7 @@ public interface JsonUtil {
       json.writeStartArray(property);
     }
     for (Object item : value) {
-      toJson(json, null, item);
+      write(json, null, item);
     }
     json.writeEnd();
   }
@@ -269,10 +267,10 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, Map<?, ?> value) {
+  default void write(JsonGenerator json, String property, Map<?, ?> value) {
 
     if (value == null) {
-      toJsonNull(json, property);
+      writeNull(json, property);
       return;
     }
     if (property == null) {
@@ -286,7 +284,7 @@ public interface JsonUtil {
       if (key != null) {
         keyString = key.toString();
       }
-      toJson(json, keyString, entry.getValue());
+      write(json, keyString, entry.getValue());
     }
     json.writeEnd();
   }
@@ -298,10 +296,10 @@ public interface JsonUtil {
    * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
    * @param value the value to write as JSON array. May be {@code null}.
    */
-  default void toJson(JsonGenerator json, String property, Object[] value) {
+  default void write(JsonGenerator json, String property, Object[] value) {
 
     if (value == null) {
-      toJsonNull(json, property);
+      writeNull(json, property);
       return;
     }
     if (property == null) {
@@ -310,7 +308,7 @@ public interface JsonUtil {
       json.writeStartArray(property);
     }
     for (Object item : value) {
-      toJson(json, null, item);
+      write(json, null, item);
     }
     json.writeEnd();
   }
@@ -320,10 +318,10 @@ public interface JsonUtil {
    * @param event the expected {@link Event}.
    * @throws ObjectMismatchException if the expected {@link Event} does not match.
    */
-  default void expectJsonEvent(JsonParser json, Event event) throws ObjectMismatchException {
+  default void expectEvent(JsonParser json, Event event) throws ObjectMismatchException {
 
     Event e = json.next();
-    expectJsonEvent(e, event);
+    expectEvent(e, event);
   }
 
   /**
@@ -331,7 +329,7 @@ public interface JsonUtil {
    * @param expected the expected {@link Event}.
    * @throws ObjectMismatchException if the expected {@link Event} does not match.
    */
-  default void expectJsonEvent(Event actual, Event expected) {
+  default void expectEvent(Event actual, Event expected) {
 
     if (actual != expected) {
       throw new ObjectMismatchException(actual, expected);
@@ -344,9 +342,9 @@ public interface JsonUtil {
    * @param type the {@link GenericType} of the requested object to parse.
    * @return the parsed value.
    */
-  default <T> T fromJson(JsonParser json, GenericType<T> type) {
+  default <T> T read(JsonParser json, GenericType<T> type) {
 
-    return fromJson(json, type, json.next());
+    return read(json, type, json.next());
   }
 
   /**
@@ -358,7 +356,7 @@ public interface JsonUtil {
    * @param stringUtil the {@link StringUtil} instance.
    * @return the parsed value.
    */
-  <T> T fromJson(JsonParser json, GenericType<T> type, Event e);
+  <T> T read(JsonParser json, GenericType<T> type, Event e);
 
   /**
    * @param <E> the generic type of the {@link Enum} to parse.
@@ -368,7 +366,7 @@ public interface JsonUtil {
    * @return the parsed {@link Enum} constant.
    * @throws IllegalCaseException if no such {@link Enum} constant exists.
    */
-  <E extends Enum<E>> E fromJsonEnum(JsonParser json, Class<E> enumType) throws IllegalCaseException;
+  <E extends Enum<E>> E readEnum(JsonParser json, Class<E> enumType) throws IllegalCaseException;
 
   /**
    * @param <C> the generic type of the {@link Collection}.
@@ -376,7 +374,7 @@ public interface JsonUtil {
    * @param type the {@link GenericType} of the {@link Collection}.
    * @return the parsed {@link Collection}.
    */
-  <C extends Collection<?>> C fromJsonCollection(JsonParser json, GenericType<C> type);
+  <C extends Collection<?>> C readCollection(JsonParser json, GenericType<C> type);
 
   /**
    * @param <E> the generic type of the {@link Collection#add(Object) elements} in the {@link Collection}.
@@ -384,7 +382,7 @@ public interface JsonUtil {
    * @param collection the {@link Collection} where to {@link Collection#add(Object) add} the elements parsed from JSON.
    * @param type the {@link GenericType} of the {@link Collection#add(Object) elements} in the {@link Collection}.
    */
-  <E> void fromJsonCollection(JsonParser json, Collection<E> collection, GenericType<E> type);
+  <E> void readCollection(JsonParser json, Collection<E> collection, GenericType<E> type);
 
   /**
    * @param <M> the generic type of the {@link Map}.
@@ -392,13 +390,13 @@ public interface JsonUtil {
    * @param type the {@link GenericType} of the {@link Map}.
    * @return the parsed {@link Map}.
    */
-  <M extends Map<?, ?>> M fromJsonMap(JsonParser json, GenericType<M> type);
+  <M extends Map<?, ?>> M readMap(JsonParser json, GenericType<M> type);
 
   /**
    * @param e the JSON {@link Event}.
    * @return the coressponding {@link Boolean} value.
    */
-  default boolean fromJsonBoolean(Event e) {
+  default boolean readBoolean(Event e) {
 
     if (e == Event.VALUE_TRUE) {
       return true;
@@ -415,7 +413,7 @@ public interface JsonUtil {
    * @return the parsed value.
    */
   @SuppressWarnings("unchecked")
-  default <N extends Number> N fromJsonNumber(JsonParser json, Class<N> type) {
+  default <N extends Number> N readNumber(JsonParser json, Class<N> type) {
 
     Number result;
     String value = json.getString();
@@ -439,6 +437,51 @@ public interface JsonUtil {
       throw new IllegalArgumentException(type.getName());
     }
     return (N) result;
+  }
+
+  /**
+   * Skips the current value from the {@link JsonParser}.
+   *
+   * @param json the {@link JsonParser}.
+   */
+  default void skipValue(JsonParser json) {
+
+    skipValue(json, json.next());
+  }
+
+  /**
+   * Skips the current value from the {@link JsonParser} when the current {@link Event} was already
+   * {@link JsonParser#next() read} and is given.
+   *
+   * @param json the {@link JsonParser}.
+   * @param e the {@link Event} that was already {@link JsonParser#next() read} before.
+   */
+  default void skipValue(JsonParser json, Event e) {
+
+    Event event;
+    switch (e) {
+      case VALUE_FALSE:
+      case VALUE_NULL:
+      case VALUE_NUMBER:
+      case VALUE_STRING:
+      case VALUE_TRUE:
+        break;
+      case START_ARRAY:
+        event = json.next();
+        while (event != Event.END_ARRAY) {
+          skipValue(json, event);
+        }
+        break;
+      case START_OBJECT:
+        event = json.next();
+        while (event != Event.END_OBJECT) {
+          expectEvent(event, Event.KEY_NAME);
+          skipValue(json);
+        }
+        break;
+      default :
+        throw new IllegalCaseException(Event.class, e);
+    }
   }
 
 }

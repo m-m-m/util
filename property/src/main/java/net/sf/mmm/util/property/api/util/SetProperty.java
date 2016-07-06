@@ -3,6 +3,7 @@
 package net.sf.mmm.util.property.api.util;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
@@ -76,6 +77,19 @@ public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> 
   public SetProperty(String name, GenericType<? extends ObservableSet<E>> type, Bean bean,
       AbstractValidator<? super ObservableSet<E>> validator) {
     super(name, type, bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public SetProperty(String name, GenericType<? extends ObservableSet<E>> type, Bean bean,
+      Supplier<ObservableSet<E>> expression) {
+    super(name, type, bean, expression);
   }
 
   @Override
@@ -176,7 +190,7 @@ public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> 
     JsonUtil jsonUtil = getJsonUtil();
     json.writeStartArray(getName());
     for (E item : setValue) {
-      jsonUtil.toJson(json, null, item);
+      jsonUtil.write(json, null, item);
     }
     json.writeEnd();
   }
@@ -185,8 +199,8 @@ public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> 
   public void fromJson(JsonParser json) {
 
     JsonUtil jsonUtil = getJsonUtil();
-    jsonUtil.expectJsonEvent(json, Event.START_ARRAY);
-    ObservableSet<E> set = jsonUtil.fromJsonCollection(json, getType());
+    jsonUtil.expectEvent(json, Event.START_ARRAY);
+    ObservableSet<E> set = jsonUtil.readCollection(json, getType());
     set(set);
   }
 

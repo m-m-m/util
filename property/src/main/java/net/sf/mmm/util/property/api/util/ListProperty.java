@@ -4,6 +4,7 @@ package net.sf.mmm.util.property.api.util;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
@@ -79,6 +80,19 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
   public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Bean bean,
       AbstractValidator<? super ObservableList<E>> validator) {
     super(name, type, bean, validator);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param name - see {@link #getName()}.
+   * @param type - see {@link #getType()}.
+   * @param bean - see {@link #getBean()}.
+   * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
+   */
+  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Bean bean,
+      Supplier<ObservableList<E>> expression) {
+    super(name, type, bean, expression);
   }
 
   @Override
@@ -188,7 +202,7 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
 
     json.writeStartArray(getName());
     for (E item : listValue) {
-      getJsonUtil().toJson(json, null, item);
+      getJsonUtil().write(json, null, item);
     }
     json.writeEnd();
   }
@@ -197,8 +211,8 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
   @Override
   public void fromJson(JsonParser json) {
 
-    getJsonUtil().expectJsonEvent(json, Event.START_ARRAY);
+    getJsonUtil().expectEvent(json, Event.START_ARRAY);
     ObservableList<E> list = getOrCreateValue();
-    getJsonUtil().fromJsonCollection(json, list, (GenericType<E>) getType().getComponentType());
+    getJsonUtil().readCollection(json, list, (GenericType<E>) getType().getComponentType());
   }
 }

@@ -4,7 +4,6 @@ package net.sf.mmm.util.bean.impl;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
-import net.sf.mmm.util.property.api.ReadOnlyPropertyImpl;
 import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
@@ -36,7 +35,7 @@ public class BeanAccessReadOnly<BEAN extends Bean> extends BeanAccessInstance<BE
   protected WritableProperty<?> createProperty(BeanPrototypeProperty prototypeProperty) {
 
     WritableProperty<?> property = this.delegate.getProperty(prototypeProperty.getProperty().getName());
-    return new ReadOnlyPropertyImpl<>(property);
+    return property.getReadOnly();
   }
 
   @Override
