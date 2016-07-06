@@ -212,19 +212,6 @@
         <version>${net.sf.mmm.util.version}</version>
         <classifier>sources</classifier>
       </dependency>
-      <!--
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-util-datatype</artifactId>
-        <version>${net.sf.mmm.util.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-util-datatype</artifactId>
-        <version>${net.sf.mmm.util.version}</version>
-        <classifier>sources</classifier>
-      </dependency>
-      -->
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-io</artifactId>
