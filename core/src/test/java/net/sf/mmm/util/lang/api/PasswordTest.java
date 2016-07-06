@@ -19,7 +19,8 @@ public class PasswordTest extends Assertions {
 
     assertThat(Password.valueOf(null)).isNull();
     assertThat(Password.valueOf("")).isNull();
-    assertThat(AbstractSimpleDatatypeBase.getValue(null)).isNull();
+    Object value = AbstractSimpleDatatypeBase.getValue(null);
+    assertThat(value).isNull();
   }
 
   /** Test {@link Password} with empty value. */
