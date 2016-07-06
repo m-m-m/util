@@ -7,6 +7,7 @@ import java.util.UUID;
 import net.sf.mmm.util.bean.api.entity.Entity;
 import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.lang.api.Datatype;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadUuid;
 
 /**
  * This is the interface for an ID that uniquely identifies an {@link Entity} of a particular {@link #getType() type}.
@@ -31,7 +32,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  * @author hohwille
  * @since 8.0.0
  */
-public interface Id<E> extends Datatype {
+public interface Id<E> extends Datatype, AttributeReadUuid {
 
   /**
    * The value used as {@link #getVersion() version} if it unspecified. If you are using an {@link Id} as link to an
