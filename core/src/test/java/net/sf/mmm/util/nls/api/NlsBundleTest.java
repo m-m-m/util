@@ -35,13 +35,15 @@ public class NlsBundleTest extends Assertions {
   public void testNlsBundleObjectMethods() {
 
     // given
-    NlsBundleUtilCoreRoot bundle = getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
+    Class<NlsBundleUtilCoreRoot> bundleInterface = NlsBundleUtilCoreRoot.class;
+    NlsBundleUtilCoreRoot bundle = getBundleFactory().createBundle(bundleInterface);
 
     // then
     assertThat(bundle.toString()).isEqualTo("net.sf.mmm.util.NlsBundleUtilCore");
     assertThat(bundle.equals(null)).isFalse();
     assertThat(bundle.equals(bundle)).isTrue();
     assertThat(bundle.hashCode()).isNotNull();
+    assertThat(bundle.getClass().getInterfaces()[0]).isEqualTo(bundleInterface);
   }
 
   /**
