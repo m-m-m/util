@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,11 +21,27 @@ import net.sf.mmm.util.nls.base.AbstractNlsMessage;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class NlsBundleTest {
+public class NlsBundleTest extends Assertions {
 
   protected NlsBundleFactory getBundleFactory() {
 
     return NlsAccess.getBundleFactory();
+  }
+
+  /**
+   * This method tests {@link NlsBundleFactory#createBundle(Class)} for a regular {@link NlsBundle}.
+   */
+  @Test
+  public void testNlsBundleObjectMethods() {
+
+    // given
+    NlsBundleUtilCoreRoot bundle = getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
+
+    // then
+    assertThat(bundle.toString()).isEqualTo("net.sf.mmm.util.NlsBundleUtilCore");
+    assertThat(bundle.equals(null)).isFalse();
+    assertThat(bundle.equals(bundle)).isTrue();
+    assertThat(bundle.hashCode()).isNotNull();
   }
 
   /**

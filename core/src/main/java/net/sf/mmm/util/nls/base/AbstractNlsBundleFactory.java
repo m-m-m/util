@@ -4,6 +4,7 @@ package net.sf.mmm.util.nls.base;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import javax.inject.Named;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
+import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
@@ -153,8 +155,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @param arguments are the arguments for the call of the {@link Method}.
      * @return the {@link Map} with the {@link NlsMessage#getArgument(String) arguments}.
      */
-    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo,
-        Object[] arguments) {
+    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo, Object[] arguments) {
 
       Map<String, Object> map = new HashMap<>();
       String[] argumentNames = methodInfo.argumentNames;
@@ -232,10 +233,28 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
           }
         }
       } else {
-        // equals, hashCode, etc.
-        result = method.invoke(proxy, args);
+        result = handleObjectMethod(proxy, method, args);
       }
       return result;
+    }
+
+    private Object handleObjectMethod(Object proxy, Method method, Object[] args)
+        throws IllegalAccessException, InvocationTargetException {
+
+      int len;
+      if (args == null) {
+        len = 0;
+      } else {
+        len = args.length;
+      }
+      if ("equals".equals(method.getName()) && (len == 1)) {
+        return Boolean.valueOf(args[0] == proxy);
+      } else if ("hashCode".equals(method.getName()) && (len == 0)) {
+        return Integer.valueOf(this.bundleName.hashCode());
+      } else if ("toString".equals(method.getName()) && (len == 0)) {
+        return this.bundleName;
+      }
+      throw new NlsUnsupportedOperationException(method.toString());
     }
 
     /**
@@ -249,8 +268,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @return the {@link NlsBundleMethodInfo}. May be {@code null} for generic invocation if method for
      *         {@code methodName} was not found (does not exist).
      */
-    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName,
-        Object proxy) {
+    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName, Object proxy) {
 
       NlsBundleMethodInfo methodInfo;
       methodInfo = this.method2BundleInfoMap.get(methodName);
