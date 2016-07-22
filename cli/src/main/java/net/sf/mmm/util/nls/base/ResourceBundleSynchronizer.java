@@ -44,10 +44,11 @@ import net.sf.mmm.util.reflect.base.AssignableFromFilter;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
- * This class can be used to create and update the localized bundles (properties) from an {@link AbstractResourceBundle}
- * . <br>
- * It is a main-program. Simply call it with the parameter "--help" to get help. <b>ATTENTION:</b><br>
- * This class only works with java 6 or above.
+ * This class can be used to create and update the localized bundles (properties) from an {@link NlsBundle} or
+ * {@link AbstractResourceBundle}. If you do not explicitly specify the bundle to synchronize as commandline option
+ * (using {@code --bundle}) this {@link ResourceBundleSynchronizer} will automatically scan your classpath for
+ * {@link NlsBundle}s and synchronize all of them.<br>
+ * This is a main-program to execute via command-line. Simply call it with the parameter {@code --help} to get help.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
