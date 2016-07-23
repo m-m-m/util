@@ -4,6 +4,7 @@ package net.sf.mmm.util.nls.base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,8 +12,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -63,29 +64,37 @@ public class ResourceBundleSynchronizer extends AbstractResourceBundleCli {
     this.locales = locales;
   }
 
-  /**
-   * Like {@link #synchronize(NlsBundleContainer)} but for a single {@link Locale}.
-   *
-   * @param bundle is the bundle instance as java object.
-   * @param locale is the locale to synchronize as string.
-   * @param propertyPath is the path to the property-file excluding locale-suffix.
-   * @param date is the current date as string.
-   * @throws IOException if an I/O problem occurred.
-   */
   @Override
-  protected void synchronize(NlsBundleContainer bundle, String locale, String propertyPath, String date)
-      throws IOException {
+  protected File getTargetFile(NlsBundleContainer bundle, String locale) {
 
-    PrintWriter out = getStandardOutput();
-    StringBuffer pathBuffer = new StringBuffer(propertyPath);
+    StringBuilder pathBuffer = new StringBuilder(getPath());
+    pathBuffer.append('/');
+    pathBuffer.append(bundle.getQualifiedNamePath());
     if (locale.length() > 0) {
       pathBuffer.append('_');
       pathBuffer.append(locale);
     }
     pathBuffer.append(".properties");
     File file = new File(pathBuffer.toString());
+    return file;
+  }
+
+  @Override
+  protected void synchronize(NlsBundleContainer bundle, String locale, File targetFile, String date)
+      throws IOException {
+
+    PrintWriter out = getStandardOutput();
+    boolean update = targetFile.exists();
+    Properties existingBundle = loadOrCreatePropertiesFile(out, targetFile, update);
+    StringBuffer buffer = new StringBuffer();
+    synchronizeProperties(bundle, locale, existingBundle, buffer);
+    writeProperties(date, targetFile, update, buffer);
+  }
+
+  private Properties loadOrCreatePropertiesFile(PrintWriter out, File file, boolean update)
+      throws FileNotFoundException, UnsupportedEncodingException {
+
     Properties existingBundle;
-    boolean update = file.exists();
     if (update) {
       out.println("Updating " + file.getPath());
       FileInputStream in = new FileInputStream(file);
@@ -95,14 +104,19 @@ public class ResourceBundleSynchronizer extends AbstractResourceBundleCli {
       out.println("Creating " + file.getPath());
       existingBundle = new Properties();
     }
-    StringBuffer buffer = new StringBuffer();
+    return existingBundle;
+  }
+
+  private void synchronizeProperties(NlsBundleContainer bundle, String locale, Properties existingBundle,
+      StringBuffer buffer) {
+
     Map<String, String> bundleProperties = bundle.getProperties();
     for (Entry<String, String> entry : bundleProperties.entrySet()) {
       String key = entry.getKey();
       if (!existingBundle.containsKey(key)) {
         String value = entry.getValue();
         buffer.append(key);
-        buffer.append(" = ");
+        buffer.append('=');
         if (locale.length() > 0) {
           buffer.append("TODO(");
           buffer.append(locale);
@@ -115,6 +129,11 @@ public class ResourceBundleSynchronizer extends AbstractResourceBundleCli {
         buffer.append(getNewline());
       }
     }
+  }
+
+  private void writeProperties(String date, File file, boolean update, StringBuffer buffer)
+      throws FileNotFoundException, UnsupportedEncodingException, IOException {
+
     if (buffer.length() > 0) {
       OutputStream outStream = new FileOutputStream(file, update);
       try {

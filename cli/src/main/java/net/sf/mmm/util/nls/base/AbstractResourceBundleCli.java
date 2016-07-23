@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -318,44 +319,56 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
 
     PrintWriter out = getStandardOutput();
     if (bundle.getProperties().isEmpty()) {
-      out.println(bundle.getClass().getName() + " is empty - noting to do!");
+      out.println(bundle.getQualifiedName() + " is empty - noting to do!");
+      return;
+    }
+    List<String> locales = getLocales(bundle);
+    if (locales.isEmpty()) {
+      getStandardError().println("No localized bundles for " + bundle.getQualifiedName() + " on your classpath!");
       return;
     }
     SimpleDateFormat sdf = new SimpleDateFormat(this.datePattern);
     String date = sdf.format(new Date());
-    String propertyPath = this.path + File.separatorChar + bundle.getName().replace('.', File.separatorChar);
-    File directory = new File(propertyPath).getParentFile();
+    for (String locale : locales) {
+      File targetFile = getTargetFileMkdirs(bundle, locale);
+      synchronize(bundle, locale, targetFile, date);
+    }
+  }
+
+  protected File getTargetFileMkdirs(NlsBundleContainer bundle, String locale) {
+
+    File targetFile = getTargetFile(bundle, locale);
+    File directory = targetFile.getParentFile();
     if (!directory.exists()) {
       boolean success = directory.mkdirs();
       if (!success) {
         throw new FileCreationFailedException(directory);
       }
     }
-    String[] locales = getLocales(bundle);
-    for (String locale : locales) {
-      synchronize(bundle, locale, propertyPath, date);
-    }
+    return targetFile;
   }
+
+  protected abstract File getTargetFile(NlsBundleContainer bundle, String locale);
 
   /**
    * @param bundle the {@link NlsBundleContainer}.
    * @return the {@link #getLocales() locales} to process for the bundle.
    */
-  protected String[] getLocales(NlsBundleContainer bundle) {
+  protected List<String> getLocales(NlsBundleContainer bundle) {
 
-    return getLocales();
+    return Arrays.asList(getLocales());
   }
 
   /**
    * Like {@link #synchronize(NlsBundleContainer)} but for a single {@link Locale}.
    *
-   * @param bundle is the bundle instance as java object.
-   * @param locale is the locale to synchronize as string.
-   * @param propertyPath is the path to the property-file excluding locale-suffix.
+   * @param bundle the bundle instance as java object.
+   * @param locale the locale to synchronize as string.
+   * @param targetFile the {@link File} to write to. May not yet exists but parent folder exists.
    * @param date is the current date as string.
    * @throws IOException if an I/O problem occurred.
    */
-  protected abstract void synchronize(NlsBundleContainer bundle, String locale, String propertyPath, String date)
+  protected abstract void synchronize(NlsBundleContainer bundle, String locale, File targetFile, String date)
       throws IOException;
 
   @Override
@@ -426,6 +439,16 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
 
     private Map<String, String> properties;
 
+    private final String qualifiedName;
+
+    private final String packageName;
+
+    private final String packagePath;
+
+    private final String qualifiedNamePath;
+
+    private final String name;
+
     /**
      * The constructor.
      *
@@ -433,9 +456,7 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
      */
     public NlsBundleContainer(ResourceBundle resourceBundle) {
 
-      super();
-      this.resourceBundle = resourceBundle;
-      this.nlsBundleInterface = null;
+      this(null, resourceBundle);
     }
 
     /**
@@ -445,24 +466,75 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
      */
     public NlsBundleContainer(Class<? extends NlsBundle> nlsBundleInterface) {
 
+      this(nlsBundleInterface, null);
+    }
+
+    private NlsBundleContainer(Class<? extends NlsBundle> nlsBundleInterface, ResourceBundle resourceBundle) {
+
       super();
       this.nlsBundleInterface = nlsBundleInterface;
       this.resourceBundle = null;
+      if (this.nlsBundleInterface != null) {
+        this.qualifiedName = getBundleHelper().getQualifiedLocation(this.nlsBundleInterface).getName();
+      } else {
+        this.qualifiedName = this.resourceBundle.getClass().getName();
+      }
+      int lastDot = this.qualifiedName.lastIndexOf('.');
+      if (lastDot > 0) {
+        this.packageName = this.qualifiedName.substring(0, lastDot);
+        this.name = this.qualifiedName.substring(lastDot + 1);
+      } else {
+        this.packageName = "";
+        this.name = this.qualifiedName;
+      }
+      this.qualifiedNamePath = this.qualifiedName.replace('.', '/');
+      this.packagePath = this.packageName.replace('.', '/');
     }
 
     /**
      * @return the fully qualified name of the bundle in java class notation.
      */
-    public String getName() {
+    public String getQualifiedName() {
 
-      if (this.nlsBundleInterface != null) {
-        return getBundleHelper().getQualifiedLocation(this.nlsBundleInterface).getName();
-      }
-      return this.resourceBundle.getClass().getName();
+      return this.qualifiedName;
     }
 
     /**
-     * @return the properties
+     * @return the {@link #getQualifiedName() qualified name} as path (e.g. "net/sf/mmm/util/cli/NlsBundleUtilCli" for
+     *         name "net.sf.mmm.util.cli.NlsBundleUtilCli").
+     */
+    public String getQualifiedNamePath() {
+
+      return this.qualifiedNamePath;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+
+      return this.name;
+    }
+
+    /**
+     * @return the {@link Package} name.
+     */
+    public String getPackageName() {
+
+      return this.packageName;
+    }
+
+    /**
+     * @return the {@link #getPackageName() package name} as path (e.g. "net/sf/mmm/util/cli" for name
+     *         "net.sf.mmm.util.cli").
+     */
+    public String getPackagePath() {
+
+      return this.packagePath;
+    }
+
+    /**
+     * @return the properties as key/value {@link Map}.
      */
     public Map<String, String> getProperties() {
 

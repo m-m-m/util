@@ -57,9 +57,21 @@ public interface NlsResourceLocator {
   String[] getLocaleInfixes(Locale locale);
 
   /**
+   * Create a {@link Locale} from a given {@link String} representation such as {@link Locale#toString()} or
+   * {@link Locale#forLanguageTag(String)}.
+   *
+   * @param locale the {@link String} representation of the {@link Locale}.
+   * @return the parsed {@link Locale}.
+   * @since 7.3.0
+   */
+  Locale getLocale(String locale);
+
+  /**
    * This method gets the {@link Locale} for the given {@link #getLocaleInfixes(Locale) locale-infix}.
    *
-   * @param localeInfix is the locale-infix (e.g. "en_US").
+   * @see #getLocale(String)
+   *
+   * @param localeInfix is the locale-infix (e.g. "_en_US").
    * @return the Locale for the given {@code localeInfix}. {@link Locale#ROOT} if the given {@code localeInfix} is
    *         invalid.
    */

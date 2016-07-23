@@ -45,16 +45,37 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
   String MSG_SYNCHRONIZER_USAGE_MODE_DEFAULT = "Create and/or "
       + "update resource-bundle property-files from <bundle-class> for the given "
       + "locales (including the root locale). Example:\n\n"
-      + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample de de_DE en en_US en_GB fr zh ja_JP zh_TW\n\n"
-      + "For each locale a property-file foo/bar/NlsBundleMyExample_<locale>.properties "
-      + "will be created or updated in the base-path. In each property-file all "
-      + "properties defined in <bundle-class> will be added with a TODO-marker "
-      + "and the original text as value. If the property-file already exists, all "
-      + "existing properties will remain unchanged and comments will be kept.";
+      + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample --locale de de_DE en en_US en_GB fr zh ja_JP zh_TW\n\n"
+      + "For each locale a property-file foo/bar/NlsBundleMyExample_<locale>.properties will be created or updated "
+      + "in the base-path. In each property-file all properties defined in <bundle-class> will be added with a "
+      + "TODO-marker and the original text as value. If the property-file already exists, all existing properties "
+      + "will remain unchanged and comments will be kept.";
+
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleConverter */
+  String MSG_BUNDLE_CONVERTER_USAGE = "Convert localization resource-bundle property-files to different formats.";
+
+  /** @see net.sf.mmm.util.nls.base.ResourceBundleConverter */
+  String MSG_BUNDLE_CONVERTER_USAGE_MODE_DEFAULT = "Convert  resource-bundle property-files from <bundle-class> for "
+      + "all available or the explicitly given locales. Example:\n\n"
+      + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample \n\n"
+      + "For each available locale where a localization exists in property-file "
+      + "foo/bar/NlsBundleMyExample_<locale>.properties an according converted file is created in <path>."
+      + "Already existing files will be overridden.";
+
+  /** @see #messageBundleConverterUsageKeyPattern(Object) */
+  String MSG_BUNDLE_CONVERTER_USAGE_KEY_PATTERN = "The {operand} is used as pattern to filter the resource "
+      + "bundle keys to convert (e.g. \"label.*\").";
+
+  /** @see #messageBundleConverterUsageFormat(Object, Object) */
+  String MSG_BUNDLE_CONVERTER_USAGE_FORMAT = "Write the converted output in the specified format {operand} (Default is \"{default}\").";
+
+  /** @see #messageBundleConverterUsagePathExpression(Object, Object) */
+  String MSG_BUNDLE_CONVERTER_USAGE_PATH_EXPRESSION = "The expression {operand} for the path of the converted output "
+      + "file including filename relative to the output path (Default is \"{default}\").";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   String MSG_SYNCHRONIZER_USAGE_LOCALES = "The list of locales "
-      + "to synchronize. Each locale has to be in the form \"ll[_CC[_vv]]\" where "
+      + "to process. Each locale has to be in the form \"ll[_CC[_vv]]\" where "
       + "\"ll\" is the lowercase ISO 639 code, CC is the uppercase ISO 3166 "
       + "2-letter code and vv is an arbitrary variant. Examples are \"de\", " + "\"en_US\" or \"th_TH_TH\".";
 
@@ -68,7 +89,7 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   String MSG_SYNCHRONIZER_USAGE_DATE_PATTERN = "Use the specified "
-      + "date pattern for writing synchronization date to property-files (Default is \"{default}\").";
+      + "date pattern {operand} for writing synchronization date to property-files (Default is \"{default}\").";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   String MSG_SYNCHRONIZER_USAGE_BUNDLE_CLASS = "The explicit "
@@ -193,15 +214,19 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage(MSG_SYNCHRONIZER_USAGE_PATH)
-  NlsMessage messageSynchronizerUsagePath(@Named("operand") Object operand, @Named("defaultValue") Object defaultValue);
+  NlsMessage messageSynchronizerUsagePath(@Named("operand") Object operand,
+      @Named("defaultValue") Object defaultValue);
 
   /**
    * @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer
    *
+   * @param operand is the operand is the name of the operand for this option.
+   * @param defaultValue is the default value for this option.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage(MSG_SYNCHRONIZER_USAGE_DATE_PATTERN)
-  NlsMessage messageSynchronizerUsageDatePattern();
+  NlsMessage messageSynchronizerUsageDatePattern(@Named("operand") Object operand,
+      @Named("defaultValue") Object defaultValue);
 
   /**
    * @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer
@@ -306,7 +331,8 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The argument \"{argument}\" referenced by \"{reference}\" is not defined!")
-  NlsMessage errorCliArgumentReferenceMissing(@Named("reference") Object reference, @Named("argument") Object argument);
+  NlsMessage errorCliArgumentReferenceMissing(@Named("reference") Object reference,
+      @Named("argument") Object argument);
 
   /**
    * @see net.sf.mmm.util.cli.api.CliOptionMisplacedException
@@ -383,5 +409,53 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
    */
   @NlsBundleMessage("The class \"{type}\" is invalid as command-line interface state-object!")
   NlsMessage errorCliParser(@Named("type") Object type);
+
+  /**
+   * @see net.sf.mmm.util.nls.base.ResourceBundleConverter
+   *
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE)
+  NlsMessage messageBundleConverterUsage();
+
+  /**
+   * @see net.sf.mmm.util.nls.base.ResourceBundleConverter
+   *
+   * @param mainClass is the {@link Class} with the main-method.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_MODE_DEFAULT)
+  NlsMessage messageBundleConverterUsageDefaultMode(@Named("mainClass") Object mainClass);
+
+  /**
+   * @see net.sf.mmm.util.nls.base.ResourceBundleConverter#getKeyPattern()
+   *
+   * @param operand is the operand is the name of the operand for this option.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_KEY_PATTERN)
+  NlsMessage messageBundleConverterUsageKeyPattern(@Named("operand") Object operand);
+
+  /**
+   * @see net.sf.mmm.util.nls.base.ResourceBundleConverter#getFormat()
+   *
+   * @param operand is the operand is the name of the operand for this option.
+   * @param defaultValue is the default value for this option.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_FORMAT)
+  NlsMessage messageBundleConverterUsageFormat(@Named("operand") Object operand,
+      @Named("defaultValue") Object defaultValue);
+
+  /**
+   * @see net.sf.mmm.util.nls.base.ResourceBundleConverter#getPathExpression()
+   *
+   * @param operand is the operand is the name of the operand for this option.
+   * @param defaultValue is the default value for this option.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_PATH_EXPRESSION)
+  NlsMessage messageBundleConverterUsagePathExpression(@Named("operand") Object operand,
+      @Named("defaultValue") Object defaultValue);
 
 }

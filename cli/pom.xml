@@ -27,6 +27,12 @@
       <artifactId>mmm-util-io</artifactId>
     </dependency>
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-l10n-ALL</artifactId>
+      <type>pom</type>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <optional>true</optional>
