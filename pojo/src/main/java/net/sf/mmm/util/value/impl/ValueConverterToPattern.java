@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.impl;
 
-import java.io.File;
+import java.util.regex.Pattern;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -11,19 +11,19 @@ import net.sf.mmm.util.value.base.AbstractSimpleValueConverter;
 
 /**
  * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts a
- * {@link CharSequence} to a {@link File}.
+ * {@link CharSequence} to a {@link Pattern}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.1
+ * @since 7.3.0
  */
 @Singleton
 @Named
-public class ValueConverterToFile extends AbstractSimpleValueConverter<CharSequence, File> {
+public class ValueConverterToPattern extends AbstractSimpleValueConverter<CharSequence, Pattern> {
 
   /**
    * The constructor.
    */
-  public ValueConverterToFile() {
+  public ValueConverterToPattern() {
 
     super();
   }
@@ -35,19 +35,19 @@ public class ValueConverterToFile extends AbstractSimpleValueConverter<CharSeque
   }
 
   @Override
-  public Class<File> getTargetType() {
+  public Class<Pattern> getTargetType() {
 
-    return File.class;
+    return Pattern.class;
   }
 
-  @Override
   @SuppressWarnings("unchecked")
-  public <T extends File> T convert(CharSequence value, Object valueSource, Class<T> targetClass) {
+  @Override
+  public <T extends Pattern> T convert(CharSequence value, Object valueSource, Class<T> targetClass) {
 
     if (value == null) {
       return null;
     }
-    return (T) new File(value.toString());
+    return (T) Pattern.compile(value.toString());
   }
 
 }
