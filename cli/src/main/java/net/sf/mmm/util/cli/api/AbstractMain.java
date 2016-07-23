@@ -209,7 +209,7 @@ public abstract class AbstractMain extends AbstractLoggableObject {
    *
    * @return the output stream.
    */
-  public final Appendable getStandardError() {
+  public final PrintWriter getStandardError() {
 
     return this.standardError;
   }
@@ -267,8 +267,10 @@ public abstract class AbstractMain extends AbstractLoggableObject {
       return run(mode);
     } catch (Exception e) {
       return handleError(e, parser);
+    } finally {
+      getStandardOutput().flush();
+      getStandardError().flush();
     }
-
   }
 
   /**
