@@ -473,7 +473,7 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
 
       super();
       this.nlsBundleInterface = nlsBundleInterface;
-      this.resourceBundle = null;
+      this.resourceBundle = resourceBundle;
       if (this.nlsBundleInterface != null) {
         this.qualifiedName = getBundleHelper().getQualifiedLocation(this.nlsBundleInterface).getName();
       } else {
