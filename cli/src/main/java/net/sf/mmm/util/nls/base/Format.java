@@ -103,7 +103,7 @@ enum Format {
         }
         break;
       case json:
-        writer.write('{');
+        writer.write("{\n");
         break;
       default:
         break;
@@ -114,7 +114,7 @@ enum Format {
 
     switch (this) {
       case json:
-        writer.write('}');
+        writer.write("\n}");
         break;
       default:
         break;
