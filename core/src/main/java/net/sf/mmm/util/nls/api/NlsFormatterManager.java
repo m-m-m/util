@@ -23,7 +23,7 @@ public interface NlsFormatterManager {
   /** @see java.text.DateFormat#getDateTimeInstance(int, int, java.util.Locale) */
   String TYPE_DATETIME = "datetime";
 
-  /** @see java.text.ChoiceFormat */
+  /** @see net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoice */
   String TYPE_CHOICE = "choice";
 
   /** Format for {@link java.lang.reflect.Type} */
@@ -111,6 +111,6 @@ public interface NlsFormatterManager {
    * @param formatStyle is the style defining details of formatting.
    * @return the according {@link NlsFormatter} instance.
    */
-  NlsFormatter<?> getFormatter(String formatType, String formatStyle);
+  NlsFormatterPlugin<?> getFormatter(String formatType, String formatStyle);
 
 }

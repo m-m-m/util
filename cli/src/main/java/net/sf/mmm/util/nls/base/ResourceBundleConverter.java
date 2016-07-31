@@ -20,10 +20,21 @@ import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.collection.base.SortedProperties;
+import net.sf.mmm.util.component.api.IocContainer;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.lang.api.Visitor;
+import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsBundle;
+import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
+import net.sf.mmm.util.nls.api.NlsMessageFormatter;
+import net.sf.mmm.util.nls.api.NlsMessageFormatterFactory;
 import net.sf.mmm.util.nls.api.NlsResourceLocator;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoice;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoice.Choice;
+import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoice.Segment;
+import net.sf.mmm.util.text.api.Justification;
 
 /**
  * This class can be used to create and update the localized bundles (properties) from an {@link NlsBundle} or
@@ -49,6 +60,15 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   /** The command-line option to set the {@link #getFormat()}. */
   public static final String OPTION_PATH_EXPRESSION = "--path-expression";
 
+  /** The command-line option to set the {@link #getFormat()}. */
+  public static final String OPTION_ARGUMENT = "--argument";
+
+  /** The command-line option to set the {@link #getEvalChoice()}. */
+  public static final String OPTION_EVAL_CHOICE = "--eval-choice";
+
+  /** The default for option {@link #getArgument() argument}. */
+  private static final String DEFAULT_ARGUMENT = "{key,type,style{justification}}";
+
   @CliOption(name = OPTION_LOCALE, aliases = "-l", operand = "LOCALE", //
       required = false, usage = NlsBundleUtilCliRoot.MSG_SYNCHRONIZER_USAGE_LOCALES)
   private String[] locales;
@@ -65,7 +85,17 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
       required = false, usage = NlsBundleUtilCliRoot.MSG_BUNDLE_CONVERTER_USAGE_PATH_EXPRESSION)
   private String pathExpression;
 
+  @CliOption(name = OPTION_ARGUMENT, aliases = "-a", operand = "EXP", //
+      required = false, usage = NlsBundleUtilCliRoot.MSG_BUNDLE_CONVERTER_USAGE_ARGUMENT)
+  private String argument = DEFAULT_ARGUMENT;
+
+  @CliOption(name = OPTION_EVAL_CHOICE, aliases = "-c", operand = "EVAL", //
+      required = false, usage = NlsBundleUtilCliRoot.MSG_BUNDLE_CONVERTER_USAGE_EVAL_CHOICE)
+  private ChoiceEvaluation evalChoice;
+
   private NlsResourceLocator resourceLocator;
+
+  private NlsMessageFormatterFactory messageFormatterFactory;
 
   /**
    * The constructor.
@@ -76,6 +106,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
     this.locales = null;
     this.format = Format.properties;
     this.pathExpression = "{packagePath}/{name}-{locale}";
+    setPath("target/nls");
   }
 
   /**
@@ -84,11 +115,32 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   public NlsResourceLocator getResourceLocator() {
 
     if (this.resourceLocator == null) {
-      DefaultNlsResourceLocator impl = new DefaultNlsResourceLocator();
-      impl.initialize();
-      this.resourceLocator = impl;
+      IocContainer iocContainer = getIocContainer();
+      if (iocContainer != null) {
+        this.resourceLocator = iocContainer.get(NlsResourceLocator.class);
+      } else {
+        DefaultNlsResourceLocator impl = new DefaultNlsResourceLocator();
+        impl.initialize();
+        this.resourceLocator = impl;
+      }
     }
     return this.resourceLocator;
+  }
+
+  /**
+   * @return the messageFormatterFactory
+   */
+  public NlsMessageFormatterFactory getMessageFormatterFactory() {
+
+    if (this.messageFormatterFactory == null) {
+      IocContainer iocContainer = getIocContainer();
+      if (iocContainer != null) {
+        this.messageFormatterFactory = iocContainer.get(NlsMessageFormatterFactory.class);
+      } else {
+        this.messageFormatterFactory = AbstractNlsDependencies.getInstance().getMessageFormatterFactory();
+      }
+    }
+    return this.messageFormatterFactory;
   }
 
   /**
@@ -140,6 +192,38 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
     this.pathExpression = pathExpression;
   }
 
+  /**
+   * @return the expression/pattern used to convert {@link net.sf.mmm.util.nls.api.NlsArgument}s.
+   */
+  public String getArgument() {
+
+    return this.argument;
+  }
+
+  /**
+   * @param argument the new value of {@link #getArgument()}.
+   */
+  public void setArgument(String argument) {
+
+    this.argument = argument;
+  }
+
+  /**
+   * @return the {@link ChoiceEvaluation} or {@code null} to leave unmodified.
+   */
+  public ChoiceEvaluation getEvalChoice() {
+
+    return this.evalChoice;
+  }
+
+  /**
+   * @param evalChoice the new value of {@link #getEvalChoice()}.
+   */
+  public void setEvalChoice(ChoiceEvaluation evalChoice) {
+
+    this.evalChoice = evalChoice;
+  }
+
   @Override
   public String[] getLocales() {
 
@@ -153,7 +237,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   }
 
   @Override
-  protected List<String> getLocales(NlsBundleContainer bundle) {
+  protected List<String> getLocales(NlsBundleDescriptor bundle) {
 
     if (this.locales != null) {
       return Arrays.asList(this.locales);
@@ -180,7 +264,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   }
 
   @Override
-  protected File getTargetFile(NlsBundleContainer bundle, String locale) {
+  protected File getTargetFile(NlsBundleDescriptor bundle, String locale) {
 
     StringBuilder pathBuffer = new StringBuilder(getPath());
     pathBuffer.append('/');
@@ -193,11 +277,11 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   }
 
   /**
-   * @param bundle the {@link AbstractResourceBundleCli.NlsBundleContainer}.
+   * @param bundle the {@link NlsBundleDescriptor}.
    * @param locale the {@link Locale}.
    * @return the {@link #getPathExpression() path expression} with all variables resolved.
    */
-  protected String getPathExpressionResolved(NlsBundleContainer bundle, String locale) {
+  protected String getPathExpressionResolved(NlsBundleDescriptor bundle, String locale) {
 
     Map<String, String> variables = getVariableMap(bundle, locale);
     int length = this.pathExpression.length();
@@ -234,11 +318,12 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   }
 
   /**
-   * @param bundle the {@link AbstractResourceBundleCli.NlsBundleContainer}.
+   * @param bundle the {@link NlsBundleDescriptor}.
    * @param locale the {@link Locale}.
-   * @return a {@link Map} with the variables to {@link #getPathExpressionResolved(NlsBundleContainer, String) resolve}.
+   * @return a {@link Map} with the variables to {@link #getPathExpressionResolved(NlsBundleDescriptor, String)
+   *         resolve}.
    */
-  protected Map<String, String> getVariableMap(NlsBundleContainer bundle, String locale) {
+  protected Map<String, String> getVariableMap(NlsBundleDescriptor bundle, String locale) {
 
     Map<String, String> variables = new HashMap<>();
     variables.put("packageName", bundle.getPackageName());
@@ -249,7 +334,16 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   }
 
   @Override
-  protected void synchronize(NlsBundleContainer bundle, String localeString, File targetFile, String date)
+  protected int runDefaultMode() throws Exception {
+
+    if ((this.evalChoice != null) && (this.argument == null)) {
+      this.argument = DEFAULT_ARGUMENT;
+    }
+    return super.runDefaultMode();
+  }
+
+  @Override
+  protected void synchronize(NlsBundleDescriptor bundle, String localeString, File targetFile, String date)
       throws IOException {
 
     Locale locale = getResourceLocator().getLocale(localeString);
@@ -257,10 +351,10 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
     ResourceBundle resourceBundle = ResourceBundle.getBundle(qualifiedName, locale,
         ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
     Properties properties = new SortedProperties();
-    Map<String, String> bundleProperties = bundle.getProperties();
-    for (String key : bundleProperties.keySet()) {
+    for (String key : bundle.getMessages().keySet()) {
       if ((this.keyPattern == null) || (this.keyPattern.matcher(key).matches())) {
         String message = resourceBundle.getString(key);
+        message = convertMessage(message, key, bundle, localeString);
         properties.setProperty(key, message);
       } else {
         getLogger().debug("Ignoring key {} in bundle {} as it does not match key pattern {}", key, qualifiedName,
@@ -268,6 +362,138 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
       }
     }
     this.format.write(properties, targetFile, getEncoding(), "Generated " + date);
+  }
+
+  private String convertMessage(String message, String key, NlsBundleDescriptor bundle, String locale) {
+
+    try {
+      final StringBuilder buffer = new StringBuilder(message.length());
+      final NlsMessageDescriptor messageDescriptor = bundle.getMessage(key);
+      final List<String> argumentList = new ArrayList<>();
+
+      NlsMessageFormatter formatter = getMessageFormatterFactory().create(message);
+      Visitor<String> textVisitor = new Visitor<String>() {
+        @Override
+        public void visit(String text) {
+
+          buffer.append(text);
+        }
+      };
+      Visitor<NlsArgument> argumentVisitor = new Visitor<NlsArgument>() {
+
+        @Override
+        public void visit(NlsArgument nlsArgument) {
+
+          convertArgument(nlsArgument, buffer, messageDescriptor, argumentList);
+        }
+      };
+      formatter.visit(textVisitor, argumentVisitor);
+      String result = buffer.toString();
+      return result;
+    } catch (Exception e) {
+      getLogger().warn("Malformed NLS message {}.{} for locale {}.", bundle.getQualifiedName(), key, locale, e);
+      return message;
+    }
+  }
+
+  private void convertArgument(NlsArgument nlsArgument, StringBuilder buffer,
+      NlsMessageDescriptor messageDescriptor, List<String> argumentList) {
+
+    NlsFormatterPlugin<?> formatter = nlsArgument.getFormatter();
+    if ((this.evalChoice != null) && (formatter instanceof NlsFormatterChoice)) {
+      convertArgumentChoice((NlsFormatterChoice) formatter, buffer, messageDescriptor, argumentList);
+    } else {
+      String result = this.argument;
+      String key = nlsArgument.getKey();
+      result = result.replace("key", key);
+      result = convertArgumentFormatter(formatter, result);
+      result = convertArgumentJustification(nlsArgument.getJustification(), result);
+      result = convertArgumentIndex(messageDescriptor, argumentList, result, key);
+      buffer.append(result);
+    }
+  }
+
+  private void convertArgumentChoice(NlsFormatterChoice formatter, StringBuilder buffer,
+      NlsMessageDescriptor messageDescriptor, List<String> argumentList) {
+
+    Choice choice = extracted(formatter);
+    if (choice == null) {
+      return;
+    }
+    for (Segment segment : choice.getSegments()) {
+      buffer.append(segment.getLiteral());
+      NlsArgument nlsArgument = segment.getArgument();
+      if (nlsArgument != null) {
+        convertArgument(nlsArgument, buffer, messageDescriptor, argumentList);
+      }
+    }
+  }
+
+  private Choice extracted(NlsFormatterChoice formatter) {
+
+    for (Choice choice : formatter.getChoices()) {
+      switch (this.evalChoice) {
+        case asElse:
+          if (choice.isElse()) {
+            return choice;
+          }
+          break;
+        case asNull:
+          if (choice.getCondition().accept(null)) {
+            return choice;
+          }
+          break;
+        default:
+          throw new IllegalCaseException(ChoiceEvaluation.class, this.evalChoice);
+      }
+    }
+    return null;
+  }
+
+  private String convertArgumentIndex(NlsMessageDescriptor messageDescriptor, List<String> argumentList,
+      String result, String key) {
+
+    int fallbackIndex = argumentList.indexOf(key);
+    if (fallbackIndex == -1) {
+      fallbackIndex = argumentList.size();
+      argumentList.add(key);
+    }
+    int index = fallbackIndex;
+    if (messageDescriptor != null) {
+      NlsArgumentDescriptor argumentDescriptor = messageDescriptor.getArgument(key);
+      if (argumentDescriptor != null) {
+        index = argumentDescriptor.getIndex();
+      }
+    }
+    return result.replace("index", Integer.toString(index));
+  }
+
+  private String convertArgumentFormatter(NlsFormatterPlugin<?> formatter, String arg) {
+
+    String result = arg;
+    result = convertSegment(result, "type", formatter.getType());
+    result = convertSegment(result, "style", formatter.getStyle());
+    return result;
+  }
+
+  private String convertSegment(String result, String segment, String type) {
+
+    String t = type;
+    if (type == null) {
+      t = "";
+    } else {
+      t = "," + type;
+    }
+    return result.replace("," + segment, t);
+  }
+
+  private String convertArgumentJustification(Justification justification, String result) {
+
+    String justify = "";
+    if (justification != null) {
+      justify = "{" + justification.toString() + "}";
+    }
+    return result.replace("{justification}", justify);
   }
 
   /**

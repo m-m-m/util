@@ -5,15 +5,11 @@ package net.sf.mmm.util.nls.base;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -25,7 +21,6 @@ import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.file.api.FileCreationFailedException;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.nls.api.NlsBundle;
-import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsBundleOptions;
 import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocator;
@@ -126,7 +121,7 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
   }
 
   /**
-   * This method gets the locales of the bundles that should be {@link #synchronize(NlsBundleContainer) synchronized}.
+   * This method gets the locales of the bundles that should be {@link #synchronize(NlsBundleDescriptor) synchronized}.
    * Examples for locales (entries of the returned array) are {@code ""}, {@code "en"}, or {@code "en_GB"}.
    *
    * @return the locales to create/update.
@@ -315,10 +310,10 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
    * @param bundle is the bundle instance as java object.
    * @throws IOException if the operation failed with an input/output error.
    */
-  public void synchronize(NlsBundleContainer bundle) throws IOException {
+  public void synchronize(NlsBundleDescriptor bundle) throws IOException {
 
     PrintWriter out = getStandardOutput();
-    if (bundle.getProperties().isEmpty()) {
+    if (bundle.getMessages().isEmpty()) {
       out.println(bundle.getQualifiedName() + " is empty - noting to do!");
       return;
     }
@@ -335,7 +330,7 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
     }
   }
 
-  protected File getTargetFileMkdirs(NlsBundleContainer bundle, String locale) {
+  protected File getTargetFileMkdirs(NlsBundleDescriptor bundle, String locale) {
 
     File targetFile = getTargetFile(bundle, locale);
     File directory = targetFile.getParentFile();
@@ -348,19 +343,19 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
     return targetFile;
   }
 
-  protected abstract File getTargetFile(NlsBundleContainer bundle, String locale);
+  protected abstract File getTargetFile(NlsBundleDescriptor bundle, String locale);
 
   /**
-   * @param bundle the {@link NlsBundleContainer}.
+   * @param bundle the {@link NlsBundleDescriptor}.
    * @return the {@link #getLocales() locales} to process for the bundle.
    */
-  protected List<String> getLocales(NlsBundleContainer bundle) {
+  protected List<String> getLocales(NlsBundleDescriptor bundle) {
 
     return Arrays.asList(getLocales());
   }
 
   /**
-   * Like {@link #synchronize(NlsBundleContainer)} but for a single {@link Locale}.
+   * Like {@link #synchronize(NlsBundleDescriptor)} but for a single {@link Locale}.
    *
    * @param bundle the bundle instance as java object.
    * @param locale the locale to synchronize as string.
@@ -368,7 +363,7 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
    * @param date is the current date as string.
    * @throws IOException if an I/O problem occurred.
    */
-  protected abstract void synchronize(NlsBundleContainer bundle, String locale, File targetFile, String date)
+  protected abstract void synchronize(NlsBundleDescriptor bundle, String locale, File targetFile, String date)
       throws IOException;
 
   @Override
@@ -378,7 +373,7 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
       List<ResourceBundle> bundleList = getResourceBundleLocator().findBundles();
       for (ResourceBundle resourceBundle : bundleList) {
         if (isProductive(resourceBundle.getClass())) {
-          synchronize(new NlsBundleContainer(resourceBundle));
+          synchronize(new NlsBundleDescriptor(resourceBundle));
         }
       }
       Set<String> allClasses = getReflectionUtil().findClassNames("", true);
@@ -388,20 +383,20 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
       for (Class<? extends NlsBundle> bundleClass : nlsBundleClasses) {
         if (bundleClass != NlsBundleWithLookup.class) {
           if (isProductive(bundleClass)) {
-            synchronize(new NlsBundleContainer(bundleClass));
+            synchronize(new NlsBundleDescriptor(bundleClass));
           }
         }
       }
     } else {
       for (Class<?> bundleClass : this.bundleClasses) {
-        NlsBundleContainer bundle;
+        NlsBundleDescriptor bundle;
         if (ResourceBundle.class.isAssignableFrom(bundleClass)) {
           ResourceBundle resourceBundle = (ResourceBundle) bundleClass.newInstance();
-          bundle = new NlsBundleContainer(resourceBundle);
+          bundle = new NlsBundleDescriptor(resourceBundle);
         } else if (NlsBundle.class.isAssignableFrom(bundleClass)) {
           @SuppressWarnings("unchecked")
           Class<? extends NlsBundle> bundleInterface = (Class<? extends NlsBundle>) bundleClass;
-          bundle = new NlsBundleContainer(bundleInterface);
+          bundle = new NlsBundleDescriptor(bundleInterface);
         } else {
           throw new IllegalArgumentException(bundleClass.getName());
         }
@@ -424,144 +419,6 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
       return options.productive();
     }
     return true;
-  }
-
-  /**
-   * This inner class is a container for {@link ResourceBundle} or {@link NlsBundle}.
-   */
-  public class NlsBundleContainer {
-
-    /** The {@link ResourceBundle} or {@code null} if {@link #nlsBundleInterface} is given. */
-    private final ResourceBundle resourceBundle;
-
-    /** The {@link NlsBundle}-interface or {@code null} if {@link #resourceBundle} is given. */
-    private final Class<? extends NlsBundle> nlsBundleInterface;
-
-    private Map<String, String> properties;
-
-    private final String qualifiedName;
-
-    private final String packageName;
-
-    private final String packagePath;
-
-    private final String qualifiedNamePath;
-
-    private final String name;
-
-    /**
-     * The constructor.
-     *
-     * @param resourceBundle is the {@link ResourceBundle}.
-     */
-    public NlsBundleContainer(ResourceBundle resourceBundle) {
-
-      this(null, resourceBundle);
-    }
-
-    /**
-     * The constructor.
-     *
-     * @param nlsBundleInterface is the {@link NlsBundle} interface.
-     */
-    public NlsBundleContainer(Class<? extends NlsBundle> nlsBundleInterface) {
-
-      this(nlsBundleInterface, null);
-    }
-
-    private NlsBundleContainer(Class<? extends NlsBundle> nlsBundleInterface, ResourceBundle resourceBundle) {
-
-      super();
-      this.nlsBundleInterface = nlsBundleInterface;
-      this.resourceBundle = resourceBundle;
-      if (this.nlsBundleInterface != null) {
-        this.qualifiedName = getBundleHelper().getQualifiedLocation(this.nlsBundleInterface).getName();
-      } else {
-        this.qualifiedName = this.resourceBundle.getClass().getName();
-      }
-      int lastDot = this.qualifiedName.lastIndexOf('.');
-      if (lastDot > 0) {
-        this.packageName = this.qualifiedName.substring(0, lastDot);
-        this.name = this.qualifiedName.substring(lastDot + 1);
-      } else {
-        this.packageName = "";
-        this.name = this.qualifiedName;
-      }
-      this.qualifiedNamePath = this.qualifiedName.replace('.', '/');
-      this.packagePath = this.packageName.replace('.', '/');
-    }
-
-    /**
-     * @return the fully qualified name of the bundle in java class notation.
-     */
-    public String getQualifiedName() {
-
-      return this.qualifiedName;
-    }
-
-    /**
-     * @return the {@link #getQualifiedName() qualified name} as path (e.g. "net/sf/mmm/util/cli/NlsBundleUtilCli" for
-     *         name "net.sf.mmm.util.cli.NlsBundleUtilCli").
-     */
-    public String getQualifiedNamePath() {
-
-      return this.qualifiedNamePath;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-
-      return this.name;
-    }
-
-    /**
-     * @return the {@link Package} name.
-     */
-    public String getPackageName() {
-
-      return this.packageName;
-    }
-
-    /**
-     * @return the {@link #getPackageName() package name} as path (e.g. "net/sf/mmm/util/cli" for name
-     *         "net.sf.mmm.util.cli").
-     */
-    public String getPackagePath() {
-
-      return this.packagePath;
-    }
-
-    /**
-     * @return the properties as key/value {@link Map}.
-     */
-    public Map<String, String> getProperties() {
-
-      if (this.properties == null) {
-        this.properties = new HashMap<>();
-        if (this.resourceBundle == null) {
-          for (Method method : this.nlsBundleInterface.getMethods()) {
-            if (getBundleHelper().isNlsBundleMethod(method, false)) {
-              String key = getBundleHelper().getKey(method);
-              String message = "";
-              NlsBundleMessage messageAnnotation = method.getAnnotation(NlsBundleMessage.class);
-              if (messageAnnotation != null) {
-                message = messageAnnotation.value();
-              }
-              this.properties.put(key, message);
-            }
-          }
-        } else {
-          Enumeration<String> keyEnum = this.resourceBundle.getKeys();
-          while (keyEnum.hasMoreElements()) {
-            String key = keyEnum.nextElement();
-            this.properties.put(key, this.resourceBundle.getString(key));
-          }
-        }
-      }
-      return this.properties;
-    }
   }
 
 }

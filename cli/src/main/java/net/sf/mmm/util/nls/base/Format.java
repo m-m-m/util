@@ -20,7 +20,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  * @author hohwille
  * @since 7.3.0
  */
-enum Format {
+public enum Format {
 
   /** Format as {@link Properties}. */
   properties() {
@@ -42,9 +42,9 @@ enum Format {
 
   abstract String getNewline();
 
-  void write(Properties properties, File file, String encoding, String comment) {
+  void write(Properties props, File file, String encoding, String comment) {
 
-    if (properties.isEmpty()) {
+    if (props.isEmpty()) {
       return;
     }
     try (FileOutputStream out = new FileOutputStream(file);
@@ -52,9 +52,9 @@ enum Format {
       try {
         writeStart(writer, comment);
         boolean first = true;
-        for (Object k : properties.keySet()) {
+        for (Object k : props.keySet()) {
           String key = (String) k;
-          String value = properties.getProperty(key);
+          String value = props.getProperty(key);
           writeProperty(writer, key, value, first);
           first = false;
         }

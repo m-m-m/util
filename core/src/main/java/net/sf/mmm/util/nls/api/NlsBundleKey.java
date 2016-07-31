@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 
 /**
  * This optional annotation is used to define a different {@link java.util.ResourceBundle#containsKey(String) key} for a
- * method of an {@link NlsBundle} interface. If NOT present, the {@link java.lang.reflect.Method#getName() name of the
- * method} is used as key.
+ * {@link java.lang.reflect.Method} of an {@link NlsBundle} interface. If NOT present, the
+ * {@link java.lang.reflect.Method#getName() name of the method} is used as key.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -20,7 +20,8 @@ import java.lang.annotation.Target;
 public @interface NlsBundleKey {
 
   /**
-   * The {@link java.util.ResourceBundle#getString(String) key} for the annotated method.
+   * The {@link java.util.ResourceBundle#getString(String) key} for the annotated method. Defaults to the
+   * {@link java.lang.reflect.Method#getName() method-name} of the {@link NlsBundle} {@link java.lang.reflect.Method}.
    */
   String value();
 }

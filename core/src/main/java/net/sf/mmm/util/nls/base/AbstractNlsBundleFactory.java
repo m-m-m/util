@@ -155,7 +155,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @param arguments are the arguments for the call of the {@link Method}.
      * @return the {@link Map} with the {@link NlsMessage#getArgument(String) arguments}.
      */
-    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo, Object[] arguments) {
+    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo,
+        Object[] arguments) {
 
       Map<String, Object> map = new HashMap<>();
       String[] argumentNames = methodInfo.argumentNames;
@@ -238,6 +239,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       return result;
     }
 
+    @SuppressWarnings("null") // Eclipse is a little stupid...
     private Object handleObjectMethod(Object proxy, Method method, Object[] args)
         throws IllegalAccessException, InvocationTargetException {
 
@@ -268,7 +270,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @return the {@link NlsBundleMethodInfo}. May be {@code null} for generic invocation if method for
      *         {@code methodName} was not found (does not exist).
      */
-    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName, Object proxy) {
+    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName,
+        Object proxy) {
 
       NlsBundleMethodInfo methodInfo;
       methodInfo = this.method2BundleInfoMap.get(methodName);

@@ -65,7 +65,7 @@ public class ResourceBundleSynchronizer extends AbstractResourceBundleCli {
   }
 
   @Override
-  protected File getTargetFile(NlsBundleContainer bundle, String locale) {
+  protected File getTargetFile(NlsBundleDescriptor bundle, String locale) {
 
     StringBuilder pathBuffer = new StringBuilder(getPath());
     pathBuffer.append('/');
@@ -80,7 +80,7 @@ public class ResourceBundleSynchronizer extends AbstractResourceBundleCli {
   }
 
   @Override
-  protected void synchronize(NlsBundleContainer bundle, String locale, File targetFile, String date)
+  protected void synchronize(NlsBundleDescriptor bundle, String locale, File targetFile, String date)
       throws IOException {
 
     PrintWriter out = getStandardOutput();
@@ -107,14 +107,14 @@ public class ResourceBundleSynchronizer extends AbstractResourceBundleCli {
     return existingBundle;
   }
 
-  private void synchronizeProperties(NlsBundleContainer bundle, String locale, Properties existingBundle,
+  private void synchronizeProperties(NlsBundleDescriptor bundle, String locale, Properties existingBundle,
       StringBuffer buffer) {
 
-    Map<String, String> bundleProperties = bundle.getProperties();
-    for (Entry<String, String> entry : bundleProperties.entrySet()) {
+    Map<String, NlsMessageDescriptor> messages = bundle.getMessages();
+    for (Entry<String, NlsMessageDescriptor> entry : messages.entrySet()) {
       String key = entry.getKey();
       if (!existingBundle.containsKey(key)) {
-        String value = entry.getValue();
+        NlsMessageDescriptor value = entry.getValue();
         buffer.append(key);
         buffer.append('=');
         if (locale.length() > 0) {
@@ -123,9 +123,9 @@ public class ResourceBundleSynchronizer extends AbstractResourceBundleCli {
           buffer.append("):");
         }
         // escape newlines for properties-syntax
-        value = value.replace("\r", "");
-        value = value.replace("\n", "\\n");
-        buffer.append(value);
+        String message = value.getMessage();
+        message = message.replace("\r", "").replace("\n", "\\n");
+        buffer.append(message);
         buffer.append(getNewline());
       }
     }

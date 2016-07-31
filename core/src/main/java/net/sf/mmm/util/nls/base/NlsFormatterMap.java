@@ -12,7 +12,7 @@ import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 
 /**
- * This class is like a {@link Map} to {@link #registerFormatter(NlsFormatter, String, String) register} and
+ * This class is like a {@link Map} to {@link #registerFormatter(NlsFormatterPlugin, String, String) register} and
  * {@link #getFormatter(String, String) retrieve} {@link NlsFormatter}s. <br>
  * <b>ATTENTION:</b><br>
  * The {@link net.sf.mmm.util.nls.api.NlsFormatterManager#getFormatter() default formatter} is NOT stored in this map.
@@ -25,7 +25,7 @@ import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 public class NlsFormatterMap extends AbstractComponent {
 
   /** @see #getFormatter(String, String) */
-  private final Map<String, Map<String, NlsFormatter<?>>> builders;
+  private final Map<String, Map<String, NlsFormatterPlugin<?>>> builders;
 
   /**
    * The constructor.
@@ -58,13 +58,14 @@ public class NlsFormatterMap extends AbstractComponent {
    * @return the {@link NlsFormatter} that was registered for the given {@code formatType} and {@code formatStyle} and
    *         is now replaced by the given {@code formatter} or {@code null} if no {@link NlsFormatter} was replaced.
    */
-  public NlsFormatter<?> registerFormatter(NlsFormatter<?> formatter, String formatType, String formatStyle) {
+  public NlsFormatter<?> registerFormatter(NlsFormatterPlugin<?> formatter, String formatType,
+      String formatStyle) {
 
     NlsNullPointerException.checkNotNull(NlsFormatter.class, formatter);
     if ((formatType == null) && (formatStyle != null)) {
       throw new NullPointerException("formatType");
     }
-    Map<String, NlsFormatter<?>> style2builderMap = this.builders.get(formatType);
+    Map<String, NlsFormatterPlugin<?>> style2builderMap = this.builders.get(formatType);
     if (style2builderMap == null) {
       style2builderMap = new HashMap<>();
       this.builders.put(formatType, style2builderMap);
@@ -79,12 +80,12 @@ public class NlsFormatterMap extends AbstractComponent {
    * @param formatStyle is the style defining details of formatting. May be {@code null} for default formatter of the
    *        given {@code formatType}.
    * @return the according {@link NlsFormatter} instance or {@code null} if NO such {@link NlsFormatter} is
-   *         {@link #registerFormatter(NlsFormatter, String, String) registered} .
+   *         {@link #registerFormatter(NlsFormatterPlugin, String, String) registered} .
    */
-  public NlsFormatter<?> getFormatter(String formatType, String formatStyle) {
+  public NlsFormatterPlugin<?> getFormatter(String formatType, String formatStyle) {
 
-    NlsFormatter<?> result = null;
-    Map<String, NlsFormatter<?>> style2builderMap = this.builders.get(formatType);
+    NlsFormatterPlugin<?> result = null;
+    Map<String, NlsFormatterPlugin<?>> style2builderMap = this.builders.get(formatType);
     if (style2builderMap != null) {
       result = style2builderMap.get(formatStyle);
       if ((result == null) && (formatStyle == null)) {

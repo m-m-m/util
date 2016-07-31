@@ -10,6 +10,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.NlsParseException;
+import net.sf.mmm.util.lang.api.Visitor;
 import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
@@ -55,7 +56,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
     this.nlsDependnecies = nlsDependencies;
     List<PatternSegment> segmentList = new ArrayList<>();
     CharSequenceScanner scanner = new CharSequenceScanner(pattern);
-    String prefix = scanner.readUntil(NlsArgumentParser.START_EXPRESSION, true, SYNTAX);
+    String prefix = scanner.readUntil(NlsArgumentParser.START_EXPRESSION, true, '\\');
     while (scanner.hasNext()) {
       NlsArgument argument;
       int index = scanner.getCurrentIndex() - 1;
@@ -66,7 +67,7 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
       }
       PatternSegment segment = new PatternSegment(prefix, argument);
       segmentList.add(segment);
-      prefix = scanner.readUntil(NlsArgumentParser.START_EXPRESSION, true, SYNTAX);
+      prefix = scanner.readUntil(NlsArgumentParser.START_EXPRESSION, true, '\\');
     }
     this.suffix = prefix;
     this.segments = segmentList.toArray(new PatternSegment[segmentList.size()]);
@@ -90,6 +91,16 @@ public class NlsMessageFormatterImpl extends AbstractNlsMessageFormatter {
   public String getSuffix() {
 
     return this.suffix;
+  }
+
+  @Override
+  public void visit(Visitor<String> staticTextVisitor, Visitor<NlsArgument> dynamicArgumentVisitor) {
+
+    for (PatternSegment segment : this.segments) {
+      staticTextVisitor.visit(segment.prefix);
+      dynamicArgumentVisitor.visit(segment.argument);
+    }
+    staticTextVisitor.visit(this.suffix);
   }
 
   /**

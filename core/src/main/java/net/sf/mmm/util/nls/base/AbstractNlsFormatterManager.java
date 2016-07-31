@@ -12,6 +12,7 @@ import net.sf.mmm.util.nls.api.NlsArgument;
 import net.sf.mmm.util.nls.api.NlsArgumentParser;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
+import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterManagerImpl;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.text.api.Justification;
@@ -84,7 +85,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
     char c = scanner.next();
     int index = scanner.getCurrentIndex();
     String formatType = null;
-    NlsFormatter<?> formatter = null;
+    NlsFormatterPlugin<?> formatter = null;
     if (c == NlsArgumentParser.FORMAT_SEPARATOR) {
       formatType = scanner.readWhile(NO_COMMA_OR_END_EXPRESSION);
       index = scanner.getCurrentIndex();
@@ -127,7 +128,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
    * @param scanner is the current {@link CharSequenceScanner} for parsing the style defining details of formatting.
    * @return the according {@link NlsFormatter}.
    */
-  protected NlsFormatter<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
+  protected NlsFormatterPlugin<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
 
     String formatStyle = scanner.readWhile(NO_EXPRESSION);
     return getFormatter(formatType, formatStyle);
@@ -165,13 +166,13 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
 
   @Override
   @SuppressWarnings("unchecked")
-  public NlsFormatter<Object> getFormatter() {
+  public NlsFormatterPlugin<Object> getFormatter() {
 
-    return (NlsFormatter<Object>) getFormatter(null);
+    return (NlsFormatterPlugin<Object>) getFormatter(null);
   }
 
   @Override
-  public NlsFormatter<?> getFormatter(String formatType) {
+  public NlsFormatterPlugin<?> getFormatter(String formatType) {
 
     return getFormatter(formatType, null);
   }

@@ -52,26 +52,33 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
       + "will remain unchanged and comments will be kept.";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleConverter */
-  String MSG_BUNDLE_CONVERTER_USAGE = "Convert localization resource-bundle property-files to different formats.";
+  String MSG_BUNDLE_CONVERTER_USAGE = "Converts resource-bundle property-files to different formats.";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleConverter */
-  String MSG_BUNDLE_CONVERTER_USAGE_MODE_DEFAULT = "Convert  resource-bundle property-files from <bundle-class> for "
+  String MSG_BUNDLE_CONVERTER_USAGE_MODE_DEFAULT = "Convert resource-bundle property-files from <bundle-class> for "
       + "all available or the explicitly given locales. Example:\n\n"
       + "{mainClass} --bundle-class foo.bar.NlsBundleMyExample \n\n"
-      + "For each available locale where a localization exists in property-file "
-      + "foo/bar/NlsBundleMyExample_<locale>.properties an according converted file is created in <path>."
-      + "Already existing files will be overridden.";
+      + "For each locale where a localization exists in property-file foo/bar/NlsBundleMyExample_<locale>.properties "
+      + "an according converted file is created in <path>. Already existing files will be overridden.";
 
-  /** @see #messageBundleConverterUsageKeyPattern(Object) */
-  String MSG_BUNDLE_CONVERTER_USAGE_KEY_PATTERN = "The {operand} is used as pattern to filter the resource "
-      + "bundle keys to convert (e.g. \"label.*\").";
+  /** @see #messageBundleConverterUsageKeyPattern(Object, Object) */
+  String MSG_BUNDLE_CONVERTER_USAGE_KEY_PATTERN = "Use {operand} as regular expression to filter the resource "
+      + "bundle keys (e.g. \"label.*\").";
 
   /** @see #messageBundleConverterUsageFormat(Object, Object) */
   String MSG_BUNDLE_CONVERTER_USAGE_FORMAT = "Write the converted output in the specified format {operand} (Default is \"{default}\").";
 
   /** @see #messageBundleConverterUsagePathExpression(Object, Object) */
-  String MSG_BUNDLE_CONVERTER_USAGE_PATH_EXPRESSION = "The expression {operand} for the path of the converted output "
+  String MSG_BUNDLE_CONVERTER_USAGE_PATH_EXPRESSION = "Use the expression {operand} for the path of the converted output "
       + "file including filename relative to the output path (Default is \"{default}\").";
+
+  /** @see #messageBundleConverterUsageArgument(Object, Object) */
+  String MSG_BUNDLE_CONVERTER_USAGE_ARGUMENT = "Convert the arguments of the messages to the format {operand} (e.g. \"\\{{key}}\" "
+      + "or \"\\{index,format}\"). Can be used to convert the syntax for other NLS frameworks such as angular-translate "
+      + "(Default is \"{default}\").";
+
+  /** @see #messageBundleConverterUsageEvalChoice(Object, Object) */
+  String MSG_BUNDLE_CONVERTER_USAGE_EVAL_CHOICE = "Simplify and resolve CHOICE format expressions using {operand}.";
 
   /** @see net.sf.mmm.util.nls.base.ResourceBundleSynchronizer */
   String MSG_SYNCHRONIZER_USAGE_LOCALES = "The list of locales "
@@ -425,16 +432,18 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_MODE_DEFAULT)
-  NlsMessage messageBundleConverterUsageDefaultMode(@Named("mainClass") Object mainClass);
+  NlsMessage messageBundleConverterUsageModeDefault(@Named("mainClass") Object mainClass);
 
   /**
    * @see net.sf.mmm.util.nls.base.ResourceBundleConverter#getKeyPattern()
    *
    * @param operand is the operand is the name of the operand for this option.
+   * @param defaultValue is the default value for this option.
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_KEY_PATTERN)
-  NlsMessage messageBundleConverterUsageKeyPattern(@Named("operand") Object operand);
+  NlsMessage messageBundleConverterUsageKeyPattern(@Named("operand") Object operand,
+      @Named("defaultValue") Object defaultValue);
 
   /**
    * @see net.sf.mmm.util.nls.base.ResourceBundleConverter#getFormat()
@@ -456,6 +465,28 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
    */
   @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_PATH_EXPRESSION)
   NlsMessage messageBundleConverterUsagePathExpression(@Named("operand") Object operand,
+      @Named("defaultValue") Object defaultValue);
+
+  /**
+   * @see net.sf.mmm.util.nls.base.ResourceBundleConverter#getArgument()
+   *
+   * @param operand is the operand is the name of the operand for this option.
+   * @param defaultValue is the default value for this option.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_ARGUMENT)
+  NlsMessage messageBundleConverterUsageArgument(@Named("operand") Object operand,
+      @Named("defaultValue") Object defaultValue);
+
+  /**
+   * @see net.sf.mmm.util.nls.base.ResourceBundleConverter#getEvalChoice()
+   *
+   * @param operand is the operand is the name of the operand for this option.
+   * @param defaultValue is the default value for this option.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage(MSG_BUNDLE_CONVERTER_USAGE_EVAL_CHOICE)
+  NlsMessage messageBundleConverterUsageEvalChoice(@Named("operand") Object operand,
       @Named("defaultValue") Object defaultValue);
 
 }

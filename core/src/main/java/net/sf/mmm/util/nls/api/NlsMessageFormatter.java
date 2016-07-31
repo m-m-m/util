@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.mmm.util.lang.api.Visitor;
+
 /**
  * This is the interface for a formatter of a message-text. It is a simplified view on something like
  * {@link java.text.MessageFormat}.
@@ -26,5 +28,13 @@ public interface NlsMessageFormatter extends NlsFormatter<Void> {
   @Override
   void format(Void nothing, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver,
       Appendable buffer) throws IOException;
+
+  /**
+   * Visits the child elements of this {@link NlsMessageFormatter}.
+   *
+   * @param staticTextVisitor a {@link Visitor} for the static text segments.
+   * @param dynamicArgumentVisitor a {@link Visitor} for the {@link NlsArgument}s.
+   */
+  void visit(Visitor<String> staticTextVisitor, Visitor<NlsArgument> dynamicArgumentVisitor);
 
 }
