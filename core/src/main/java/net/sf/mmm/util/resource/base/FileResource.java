@@ -151,6 +151,12 @@ public class FileResource extends AbstractBrowsableResource {
   }
 
   @Override
+  public BrowsableResource cd(String path) {
+
+    return new FileResource(new File(this.file, path));
+  }
+
+  @Override
   public Iterable<BrowsableResource> getChildResources() {
 
     return new FileResourceIterable();

@@ -49,6 +49,12 @@ public abstract class AbstractBrowsableResourceProxy extends AbstractDataResourc
   }
 
   @Override
+  public BrowsableResource cd(String path) {
+
+    return getDelegate().cd(path);
+  }
+
+  @Override
   public OutputStream openOutputStream() throws ResourceNotWritableException {
 
     return getDelegate().openOutputStream();

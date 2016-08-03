@@ -56,4 +56,16 @@ public interface BrowsableResource extends DataResource {
    */
   boolean isFolder();
 
+  /**
+   * Changes the {@link #isFolder() directory} from this {@link BrowsableResource} to the given {@code path}.
+   *
+   * @see #navigate(String)
+   *
+   * @param path the absolute or relative path pointing to a new resource. If it is a relative path, it is interpreted
+   *        relative to the current URI (directory) if this is a {@link #isFolder() folder} and relative to the parent
+   *        URI otherwise.
+   * @return the resource pointing to the given path (relative to this resource).
+   */
+  BrowsableResource cd(String path);
+
 }
