@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.filter.api.Filter;
-import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ClasspathScanner;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -51,7 +50,6 @@ public class ClasspathScannerTest extends Assertions {
   protected ClasspathScanner createClasspathScanner() {
 
     ClasspathScannerImpl impl = new ClasspathScannerImpl();
-    impl.setReflectionUtil(ReflectionUtilImpl.getInstance());
     impl.initialize();
     return impl;
   }
@@ -167,6 +165,25 @@ public class ClasspathScannerTest extends Assertions {
     assertThat(nonExistentResource).isNotNull();
     assertThat(nonExistentResource).isInstanceOf(ClasspathResource.class);
     assertThat(nonExistentResource.getPath()).isEqualTo("net/sf/mmm/util/non-existent/path");
+  }
+
+  /** The of {@link ClasspathScanner#getQualifiedName(DataResource)}. */
+  @Test
+  public void testGetQualifiedName() {
+
+    // given
+    ClasspathScanner scanner = getClasspathScanner();
+    Class<ClasspathScanner> javaClass = ClasspathScanner.class;
+    String packageName = javaClass.getPackage().getName();
+    String qualifiedName = javaClass.getName();
+    // when
+    BrowsableResource packageResource = scanner.getClasspathResource(packageName.replace('.', '/'));
+    DataResource classResource = scanner.getClasspathResource(qualifiedName.replace('.', '/') + ".class");
+    BrowsableResource fileResource = scanner.getClasspathResource(CLASSPATH_HYPHENATION_XML);
+    // then
+    assertThat(scanner.getQualifiedName(packageResource)).isEqualTo(packageName);
+    assertThat(scanner.getQualifiedName(classResource)).isEqualTo(qualifiedName);
+    assertThat(scanner.getQualifiedName(fileResource)).isNull();
   }
 
   /**

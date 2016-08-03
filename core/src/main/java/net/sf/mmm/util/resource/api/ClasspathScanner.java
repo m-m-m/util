@@ -56,6 +56,36 @@ public interface ClasspathScanner {
   Iterable<? extends BrowsableResource> getClasspathResourceFiles(Filter<? super BrowsableResource> filter);
 
   /**
+   * @param classnameFilter a {@link Filter} used to {@link Filter#accept(Object) filter} by {@link Class#getName()
+   *        qualified classname} (to prevent unnecessary classloading).
+   * @param classFilter a {@link Filter} used to {@link Filter#accept(Object) filter} the {@link Class}es that have
+   *        passed the {@code classnameFilter} and should be returned.
+   * @return an {@link Iterable} with the {@link Filter#accept(Object) accepted} classes.
+   * @since 7.3.0
+   */
+  Iterable<Class<?>> getClasspathResourceClasses(Filter<String> classnameFilter, Filter<Class<?>> classFilter);
+
+  /**
+   * @param classResource a {@link DataResource} that identifies a Java *.{@link Class class} file or a {@link Package}
+   *        from your classpath. Should be retrieved from this {@link ClasspathScanner}.
+   * @return the corresponding qualified {@link Class#getName() class name} or {@link Package#getName() package name}.
+   *         Will be {@code null} in case the given {@link DataResource} is not pointing to a {@link Class} or
+   *         {@link Package}.
+   * @since 7.3.0
+   */
+  String getQualifiedName(DataResource classResource);
+
+  /**
+   * @param <T> the generic type of the returned {@link Class} for simplistic usage.
+   * @param classResource a {@link BrowsableResource} that identifies a Java *.class file from your classpath. Should be
+   *        retrieved from this {@link ClasspathScanner}.
+   * @return the loaded {@link Class}.
+   * @throws IllegalArgumentException if the given {@link BrowsableResource} does not point to a *.class file.
+   * @since 7.3.0
+   */
+  <T> Class<T> loadClass(BrowsableResource classResource) throws IllegalArgumentException;
+
+  /**
    * Evicts all cache data so that any further invocation of the other methods will rebuild the cached data from
    * scratch. <br/>
    * <b>ATTENTION:</b><br/>
