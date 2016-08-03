@@ -7,16 +7,24 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
+import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
@@ -27,6 +35,8 @@ import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
+import net.sf.mmm.util.resource.api.ClasspathScanner;
+import net.sf.mmm.util.resource.impl.AbstractClasspathScanner;
 
 /**
  * This is the abstract base implementation of {@link NlsBundleFactory}.
@@ -34,15 +44,26 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-@NlsBundleOptions
+@NlsBundleOptions // annotation here is used to get a default as fallback
 public abstract class AbstractNlsBundleFactory extends AbstractComponent implements NlsBundleFactory {
 
   /** The name of the method {@link net.sf.mmm.util.nls.api.NlsBundleWithLookup#getMessage(String, Map)}. */
   public static final String METHOD_NAME_LOOKUP = "getMessage";
 
+  /** An internal trick used for optimization to avoid reflective parameter lookup. */
+  private static final Object[] FAKE_ARGS = new Object[1];
+
+  private static final Pattern NLS_BUNDLE_CLASS_NAME_PATTERN = Pattern.compile("(.*\\.)?NlsBundle.*Root");
+
   private final ClassLoader classLoader;
 
   private final Map<Class<? extends NlsBundle>, NlsBundle> bundleMap;
+
+  private NlsMessageFactory messageFactory;
+
+  private ClasspathScanner classpathScanner;
+
+  private List<NlsBundleInvocationHandler> bundleDescriptors;
 
   /**
    * The constructor.
@@ -64,19 +85,82 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     this.bundleMap = new ConcurrentHashMap<>();
   }
 
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.messageFactory == null) {
+      this.messageFactory = NlsAccess.getFactory();
+    }
+    if (this.classpathScanner == null) {
+      this.classpathScanner = AbstractClasspathScanner.getInstance();
+    }
+  }
+
+  @Override
+  protected void doInitialized() {
+
+    super.doInitialized();
+    NlsAccess.setBundleFactory(this);
+  }
+
+  /**
+   * @return the {@link NlsMessageFactory}.
+   */
+  protected NlsMessageFactory getMessageFactory() {
+
+    return this.messageFactory;
+  }
+
+  /**
+   * @param messageFactory the {@link NlsMessageFactory} to {@link Inject}.
+   */
+  @Inject
+  public void setMessageFactory(NlsMessageFactory messageFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.messageFactory = messageFactory;
+  }
+
+  /**
+   * @return the classpathScanner
+   */
+  public ClasspathScanner getClasspathScanner() {
+
+    return this.classpathScanner;
+  }
+
+  /**
+   * @param classpathScanner the {@link ClasspathScanner} to {@link Inject}.
+   */
+  @Inject
+  public void setClasspathScanner(ClasspathScanner classpathScanner) {
+
+    getInitializationState().requireNotInitilized();
+    this.classpathScanner = classpathScanner;
+  }
+
   @SuppressWarnings("unchecked")
   @Override
   public <BUNDLE extends NlsBundle> BUNDLE createBundle(Class<BUNDLE> bundleInterface) {
 
+    // #151: when switching to Java8: change get to computeIfAbsence
     BUNDLE result = (BUNDLE) this.bundleMap.get(bundleInterface);
     if (result == null) {
-      if (!bundleInterface.isInterface()) {
-        throw new IllegalArgumentException(bundleInterface.getName());
-      }
-      InvocationHandler handler = createHandler(bundleInterface);
-      result = (BUNDLE) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { bundleInterface }, handler);
+      result = createBundleInternal(bundleInterface);
       this.bundleMap.put(bundleInterface, result);
     }
+    return result;
+  }
+
+  @SuppressWarnings("unchecked")
+  private <BUNDLE extends NlsBundle> BUNDLE createBundleInternal(Class<BUNDLE> bundleInterface) {
+
+    if (!bundleInterface.isInterface()) {
+      throw new IllegalArgumentException(bundleInterface.getName());
+    }
+    InvocationHandler handler = createHandler(bundleInterface);
+    BUNDLE result = (BUNDLE) Proxy.newProxyInstance(this.classLoader, new Class<?>[] { bundleInterface }, handler);
     return result;
   }
 
@@ -107,21 +191,78 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
     String bundleName = NlsBundleHelper.getInstance().getQualifiedLocation(bundleInterface).getName();
     NlsBundleOptions options = getBundleOptions(bundleInterface);
-    return new NlsBundleInvocationHandler(bundleName, options);
+    return new NlsBundleInvocationHandler(bundleInterface, bundleName, options);
   }
 
   /**
-   * @return the {@link NlsMessageFactory}.
+   * @return a {@link Collection} of {@link NlsBundleDescriptor}s for all {@link NlsBundle}-interfaces on the classpath
+   *         following the suggested naming convention {@code NlsBundle*Root}.
    */
-  protected NlsMessageFactory getMessageFactory() {
+  public Collection<? extends NlsBundleDescriptor> getNlsBundleDescriptors() {
 
-    return NlsAccess.getFactory();
+    if (this.bundleDescriptors == null) {
+      synchronized (this) {
+        if (this.bundleDescriptors == null) {
+          List<NlsBundleInvocationHandler> descriptors = populateNlsBundleDescriptors();
+          this.bundleDescriptors = Collections.unmodifiableList(descriptors);
+        }
+      }
+    }
+    return this.bundleDescriptors;
+  }
+
+  private List<NlsBundleInvocationHandler> populateNlsBundleDescriptors() {
+
+    List<NlsBundleInvocationHandler> descriptors = new ArrayList<>();
+
+    Filter<String> classnameFilter = new Filter<String>() {
+
+      @Override
+      public boolean accept(String classname) {
+
+        return NLS_BUNDLE_CLASS_NAME_PATTERN.matcher(classname).matches();
+      }
+    };
+    Filter<Class<?>> classFilter = new Filter<Class<?>>() {
+      @Override
+      public boolean accept(Class<?> javaClass) {
+
+        return NlsBundle.class.isAssignableFrom(javaClass);
+      }
+    };
+    Iterable<Class<? extends NlsBundle>> classes = (Iterable) this.classpathScanner
+        .getClasspathResourceClasses(classnameFilter, classFilter);
+    for (Class<? extends NlsBundle> bundleInterface : classes) {
+      NlsBundle bundle = createBundle(bundleInterface);
+      NlsBundleInvocationHandler invocationHandler = (NlsBundleInvocationHandler) Proxy
+          .getInvocationHandler(bundle);
+      invocationHandler.populate();
+      descriptors.add(invocationHandler);
+    }
+    return descriptors;
+  }
+
+  /**
+   * Interface describing an {@link NlsBundle} interface.
+   *
+   * @since 7.3.0
+   */
+  public interface NlsBundleDescriptor {
+
+    /**
+     * @return an {@link Iterable} with the containers {@link Provider#get() providing} the contained
+     *         {@link NlsTemplate}s.
+     */
+    Iterable<? extends Provider<NlsTemplate>> getTemplateContainers();
+
   }
 
   /**
    * This inner class is an {@link InvocationHandler} for the dynamic {@link NlsBundle} instance.
    */
-  protected class NlsBundleInvocationHandler implements InvocationHandler {
+  protected class NlsBundleInvocationHandler implements InvocationHandler, NlsBundleDescriptor {
+
+    private final Class<? extends NlsBundle> bundleInterface;
 
     /** @see #invoke(Object, Method, Object[]) */
     private final String bundleName;
@@ -135,12 +276,15 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     /**
      * The constructor.
      *
+     * @param bundleInterface the {@link NlsBundle} interface.
      * @param bundleName is the qualified name of the {@link java.util.ResourceBundle}.
      * @param options are the {@link NlsBundleOptions}.
      */
-    public NlsBundleInvocationHandler(String bundleName, NlsBundleOptions options) {
+    public NlsBundleInvocationHandler(Class<? extends NlsBundle> bundleInterface, String bundleName,
+        NlsBundleOptions options) {
 
       super();
+      this.bundleInterface = bundleInterface;
       this.bundleName = bundleName;
       this.options = options;
       this.method2BundleInfoMap = new ConcurrentHashMap<>();
@@ -274,37 +418,45 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
         Object proxy) {
 
       NlsBundleMethodInfo methodInfo;
+      // #151: when switching to Java8: change get to computeIfAbsence
       methodInfo = this.method2BundleInfoMap.get(methodName);
       if (methodInfo == null) {
-        Method identifiedMethod = method;
-        if (identifiedMethod == null) {
-          Class<?>[] interfaces = proxy.getClass().getInterfaces();
-          if (interfaces.length != 1) {
-            throw new IllegalArgumentException(proxy.getClass().toString());
-          }
-          Method[] methods = interfaces[0].getMethods();
-          for (Method currentMethod : methods) {
-            if (currentMethod.getName().equals(methodName)) {
-              identifiedMethod = currentMethod;
-              break;
-            }
-          }
-          if (identifiedMethod == null) {
-            // Method not found / does not exist...
-            return null;
-          }
+        methodInfo = createMethodInfo(method, args, methodName, proxy);
+        if (methodInfo != null) {
+          this.method2BundleInfoMap.put(methodName, methodInfo);
         }
-        NlsTemplate template = createTemplate(identifiedMethod);
-        String[] argumentNames;
-        if ((args != null) && (args.length == 0)) {
-          argumentNames = StringUtil.EMPTY_STRING_ARRAY;
-        } else {
-          argumentNames = getArgumentNames(identifiedMethod);
-        }
-        methodInfo = new NlsBundleMethodInfo(template, argumentNames);
-        this.method2BundleInfoMap.put(methodName, methodInfo);
       }
       return methodInfo;
+    }
+
+    private NlsBundleMethodInfo createMethodInfo(Method method, Object[] args, String methodName, Object proxy) {
+
+      Method identifiedMethod = method;
+      if (identifiedMethod == null) {
+        Class<?>[] interfaces = proxy.getClass().getInterfaces();
+        if (interfaces.length != 1) {
+          throw new IllegalArgumentException(proxy.getClass().toString());
+        }
+        Method[] methods = interfaces[0].getMethods();
+        for (Method currentMethod : methods) {
+          if (currentMethod.getName().equals(methodName)) {
+            identifiedMethod = currentMethod;
+            break;
+          }
+        }
+        if (identifiedMethod == null) {
+          // Method not found / does not exist...
+          return null;
+        }
+      }
+      NlsTemplate template = createTemplate(identifiedMethod);
+      String[] argumentNames;
+      if ((args != null) && (args.length == 0)) {
+        argumentNames = StringUtil.EMPTY_STRING_ARRAY;
+      } else {
+        argumentNames = getArgumentNames(identifiedMethod);
+      }
+      return new NlsBundleMethodInfo(template, argumentNames);
     }
 
     /**
@@ -330,12 +482,28 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       return template;
     }
 
+    @Override
+    public Iterable<? extends Provider<NlsTemplate>> getTemplateContainers() {
+
+      return this.method2BundleInfoMap.values();
+    }
+
+    private void populate() {
+
+      NlsBundleHelper bundleHelper = NlsBundleHelper.getInstance();
+      for (Method method : this.bundleInterface.getMethods()) {
+        if (bundleHelper.isNlsBundleMethod(method, true)) {
+          getOrCreateMethodInfo(method, FAKE_ARGS, method.getName(), null);
+        }
+      }
+    }
+
   }
 
   /**
    * This inner class holds all the information to be cached for a {@link NlsBundle}-method.
    */
-  protected static class NlsBundleMethodInfo {
+  protected static class NlsBundleMethodInfo implements Provider<NlsTemplate> {
 
     private final NlsTemplate template;
 
@@ -358,6 +526,15 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @return the {@link NlsTemplate}
      */
     public NlsTemplate getTemplate() {
+
+      return this.template;
+    }
+
+    /**
+     * @see #getTemplate()
+     */
+    @Override
+    public NlsTemplate get() {
 
       return this.template;
     }

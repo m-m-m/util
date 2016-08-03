@@ -2,11 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.impl;
 
-import javax.inject.Inject;
-
-import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundleFactory;
-import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
 
 /**
@@ -16,8 +12,6 @@ import net.sf.mmm.util.nls.base.AbstractNlsBundleFactory;
  * @since 3.0.0
  */
 public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
-
-  private NlsMessageFactory messageFactory;
 
   /**
    * The constructor.
@@ -35,32 +29,6 @@ public class NlsBundleFactoryImpl extends AbstractNlsBundleFactory {
   public NlsBundleFactoryImpl(ClassLoader classLoader) {
 
     super(classLoader);
-  }
-
-  @Override
-  protected void doInitialized() {
-
-    super.doInitialized();
-    NlsAccess.setBundleFactory(this);
-  }
-
-  @Override
-  protected NlsMessageFactory getMessageFactory() {
-
-    if (this.messageFactory == null) {
-      return super.getMessageFactory();
-    }
-    return this.messageFactory;
-  }
-
-  /**
-   * @param messageFactory is the messageFactory to set
-   */
-  @Inject
-  public void setMessageFactory(NlsMessageFactory messageFactory) {
-
-    getInitializationState().requireNotInitilized();
-    this.messageFactory = messageFactory;
   }
 
 }

@@ -28,6 +28,7 @@ import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.AssignableFromFilter;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
+import net.sf.mmm.util.resource.api.ClasspathScanner;
 
 /**
  * The abstract base class for a {@link AbstractMain CLI program} to process {@link NlsBundle}s or
@@ -376,6 +377,8 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
           synchronize(new NlsBundleDescriptor(resourceBundle));
         }
       }
+      ClasspathScanner scanner;
+
       Set<String> allClasses = getReflectionUtil().findClassNames("", true);
       Filter<? super Class<?>> filter = new AssignableFromFilter(NlsBundle.class, true);
       @SuppressWarnings({ "unchecked", "rawtypes" })

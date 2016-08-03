@@ -41,7 +41,9 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
    * @param internationalizedMessage is the message for which the {@link NlsTemplate} is required.
    * @return the according {@link NlsTemplate} or {@code null} if the {@code internationalizedMessage} is NOT declared
    *         in {@code resourceBundle}.
+   * @deprecated obsolete, will be removed.
    */
+  @Deprecated
   protected NlsTemplate resolveTemplate(NlsReversedResourceBundle reversedBundle,
       String internationalizedMessage) {
 
@@ -62,7 +64,9 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
    *        {@code internationalizedMessage}.
    * @return the according {@link NlsTemplate} or {@code null} if the {@code internationalizedMessage} is NOT declared
    *         in {@code resourceBundle}.
+   * @deprecated obsolete, will be removed.
    */
+  @Deprecated
   public NlsTemplate resolveTemplate(String internationalizedMessage, NlsReversedResourceBundle... bundles) {
 
     NlsTemplate result = null;

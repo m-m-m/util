@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.nls.base.NlsMessageFactoryImpl;
 import net.sf.mmm.util.nls.impl.DefaultNlsTemplateResolver;
 import net.sf.mmm.util.nls.impl.NlsBundleFactoryImpl;
@@ -14,6 +17,8 @@ import net.sf.mmm.util.nls.impl.NlsBundleFactoryImpl;
  * @since 1.0.0
  */
 public final class NlsAccess {
+
+  private static final Logger LOG = LoggerFactory.getLogger(NlsAccess.class);
 
   private static NlsMessageFactory factory;
 
@@ -65,11 +70,16 @@ public final class NlsAccess {
    * operation in the JVM you are using. Additionally this method should only be invoked in the initialization phase of
    * your application.
    *
-   * @param instance the factory-instance to use.
+   * @param factory the factory-instance to use.
    */
-  public static void setFactory(NlsMessageFactory instance) {
+  public static void setFactory(NlsMessageFactory factory) {
 
-    NlsAccess.factory = instance;
+    if (NlsAccess.factory == null) {
+      NlsAccess.factory = factory;
+    } else if (NlsAccess.factory != factory) {
+      LOG.warn("NlsTemplateResolver is already set to {} and will not be changed to {}.", NlsAccess.factory,
+          factory);
+    }
   }
 
   /**
@@ -85,7 +95,6 @@ public final class NlsAccess {
         if (templateResolver == null) {
           DefaultNlsTemplateResolver resolver = new DefaultNlsTemplateResolver();
           resolver.initialize();
-          templateResolver = resolver;
         }
       }
     }
@@ -105,7 +114,12 @@ public final class NlsAccess {
    */
   public static void setTemplateResolver(NlsTemplateResolver templateResolver) {
 
-    NlsAccess.templateResolver = templateResolver;
+    if (NlsAccess.templateResolver == null) {
+      NlsAccess.templateResolver = templateResolver;
+    } else if (NlsAccess.templateResolver != templateResolver) {
+      LOG.warn("NlsTemplateResolver is already set to {} and will not be changed to {}.",
+          NlsAccess.templateResolver, templateResolver);
+    }
   }
 
   /**
@@ -121,7 +135,6 @@ public final class NlsAccess {
         if (bundleFactory == null) {
           NlsBundleFactoryImpl impl = new NlsBundleFactoryImpl();
           impl.initialize();
-          bundleFactory = impl;
         }
       }
     }
@@ -142,7 +155,12 @@ public final class NlsAccess {
    */
   public static void setBundleFactory(NlsBundleFactory bundleFactory) {
 
-    NlsAccess.bundleFactory = bundleFactory;
+    if (NlsAccess.bundleFactory == null) {
+      NlsAccess.bundleFactory = bundleFactory;
+    } else if (NlsAccess.bundleFactory != bundleFactory) {
+      LOG.warn("NlsBundleFactory is already set to {} and will not be changed to {}.", NlsAccess.bundleFactory,
+          bundleFactory);
+    }
   }
 
 }

@@ -38,12 +38,6 @@ public abstract class AbstractNlsMessageFactoryImpl extends AbstractNlsMessageFa
   }
 
   @Override
-  protected void doInitialize() {
-
-    super.doInitialize();
-  }
-
-  @Override
   protected void doInitialized() {
 
     super.doInitialized();

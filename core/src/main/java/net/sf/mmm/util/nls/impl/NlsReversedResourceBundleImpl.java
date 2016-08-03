@@ -14,7 +14,9 @@ import java.util.ResourceBundle;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
+ * @deprecated replaced with simple Map<String, NlsTemplate> in {@link DefaultNlsTemplateResolver}
  */
+@Deprecated
 public class NlsReversedResourceBundleImpl implements NlsReversedResourceBundle {
 
   private final String name;

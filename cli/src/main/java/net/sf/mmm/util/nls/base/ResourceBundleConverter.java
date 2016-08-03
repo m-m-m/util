@@ -348,8 +348,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
 
     Locale locale = getResourceLocator().getLocale(localeString);
     String qualifiedName = bundle.getQualifiedName();
-    ResourceBundle resourceBundle = ResourceBundle.getBundle(qualifiedName, locale,
-        ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
+    ResourceBundle resourceBundle = getBundleHelper().getResourceBundle(qualifiedName, locale);
     Properties properties = new SortedProperties();
     for (String key : bundle.getMessages().keySet()) {
       if ((this.keyPattern == null) || (this.keyPattern.matcher(key).matches())) {

@@ -5,6 +5,7 @@ package net.sf.mmm.util.nls.base;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.inject.Named;
@@ -79,6 +80,17 @@ public class NlsBundleHelper extends AbstractLoggableObject {
       key = keyAnnotation.value();
     }
     return key;
+  }
+
+  /**
+   * @param qualifiedBundleName the {@link Class#getName() qualified name} of the {@link ResourceBundle} to load.
+   * @param locale the {@link Locale} to translate to.
+   * @return the requested {@link ResourceBundle}.
+   */
+  public ResourceBundle getResourceBundle(String qualifiedBundleName, Locale locale) {
+
+    return ResourceBundle.getBundle(qualifiedBundleName, locale,
+        ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
   }
 
   /**

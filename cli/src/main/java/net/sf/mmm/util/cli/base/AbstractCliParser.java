@@ -37,10 +37,12 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
+import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.text.api.TextColumnInfo;
 import net.sf.mmm.util.text.api.TextTableInfo;
@@ -57,6 +59,8 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
    * The {@link Pattern} for a mix of multiple short-options. E.g. "-vpa" instead of "-v", "-p" and "-a".
    */
   private static final Pattern PATTERN_MIXED_SHORT_OPTIONS = Pattern.compile("-([a-zA-Z0-9]{2,})");
+
+  private final NlsBundleUtilCliRoot nlsBundle;
 
   private final CliState cliState;
 
@@ -77,6 +81,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   public AbstractCliParser(Object state, CliState cliState, CliParserDependencies dependencies) {
 
     super();
+    this.nlsBundle = NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCliRoot.class);
     this.state = state;
     this.cliState = cliState;
     this.dependencies = dependencies;
@@ -359,13 +364,11 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
 
     NlsMessageFactory nlsMessageFactory = this.dependencies.getNlsMessageFactory();
 
-    CliHelpWriter writer = new CliHelpWriter(appendable, settings, this.dependencies, this.cliState, this.state);
+    CliHelpWriter writer = new CliHelpWriter(appendable, settings);
 
     Map<String, Object> nlsArguments = writer.getArguments();
     // TODO: NLS
-    nlsArguments.put(NlsObject.KEY_OPTION, "[<option>*]");
-
-    writer.printText(NlsBundleUtilCliRoot.MSG_CLI_USAGE);
+    writer.printMessage(this.nlsBundle.messageCliUsage(AbstractCliParser.this.cliState.getName(), "[<option>*]"));
 
     String mainUsage = this.cliState.getCliClass().usage();
     if (mainUsage.length() > 0) {
@@ -380,7 +383,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       if ((cliMode == null) || (!cliMode.isAbstract())) {
         NlsMessage modeMessage = nlsMessageFactory.create(mode.getTitle());
         nlsArguments.put(NlsObject.KEY_MODE, modeMessage);
-        writer.printText(NlsBundleUtilCliRoot.MSG_CLI_MODE_USAGE);
+        writer.printMessage(this.nlsBundle.messageCliModeUsage(modeMessage));
         parameters.setLength(0);
         Collection<CliOptionContainer> modeOptions = this.cliState.getOptions(mode);
         int maxOptionColumnWidth = printHelpOptions(settings, option2HelpMap, parameters, modeOptions);
@@ -420,7 +423,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
         }
 
         nlsArguments.put(NlsObject.KEY_OPTION, parameters);
-        writer.printText(NlsBundleUtilCliRoot.MSG_CLI_USAGE);
+        writer.printMessage(this.nlsBundle.messageCliUsage(this.cliState.getName(), parameters));
         writer.println();
         String optionUsage = "";
         if (cliMode != null) {
@@ -765,7 +768,7 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
   /**
    * This inner class is a helper to simplify writing the help-usage.
    */
-  public static class CliHelpWriter {
+  public class CliHelpWriter {
 
     /** The {@link Appendable} where to write help to. */
     private final Appendable appendable;
@@ -779,30 +782,19 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     /** The {@link TextColumnInfo} for the main column. */
     private final TextColumnInfo mainColumnInfo;
 
-    /** The {@link CliParserDependencies}. */
-    private final CliParserDependencies dependencies;
-
     /** The NLS-arguments. */
     private final Map<String, Object> arguments;
-
-    /** The {@link AbstractCliParser#getState() state-object}. */
-    private final Object state;
 
     /**
      * The constructor.
      *
      * @param appendable is the {@link Appendable} where to write help to.
      * @param settings is the {@link CliOutputSettings}.
-     * @param dependencies are the {@link CliParserDependencies}.
-     * @param cliState is the {@link CliState}.
-     * @param state is the {@link AbstractCliParser#getState() state-object}.
      */
-    public CliHelpWriter(Appendable appendable, CliOutputSettings settings, CliParserDependencies dependencies,
-        CliState cliState, Object state) {
+    public CliHelpWriter(Appendable appendable, CliOutputSettings settings) {
 
       super();
       this.appendable = appendable;
-      this.state = state;
 
       String lineSeparator = settings.getLineSeparator();
       this.tableInfo = new TextTableInfo();
@@ -820,11 +812,9 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
       this.parameterColumnInfo.setBorderRight("  ");
 
       this.arguments = new HashMap<>();
-      this.arguments.put("mainClass", cliState.getName());
-      this.arguments.put("optionCount", Integer.valueOf(cliState.getOptions().size()));
-      this.arguments.put("argumentCount", Integer.valueOf(cliState.getArguments().size()));
-
-      this.dependencies = dependencies;
+      this.arguments.put("mainClass", AbstractCliParser.this.cliState.getName());
+      this.arguments.put("optionCount", Integer.valueOf(AbstractCliParser.this.cliState.getOptions().size()));
+      this.arguments.put("argumentCount", Integer.valueOf(AbstractCliParser.this.cliState.getArguments().size()));
     }
 
     /**
@@ -844,8 +834,19 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
      */
     public void printText(String nlsText) {
 
-      LineWrapper lineWrapper = this.dependencies.getLineWrapper();
-      NlsMessage message = this.dependencies.getNlsMessageFactory().create(nlsText, this.arguments);
+      NlsMessage message = AbstractCliParser.this.dependencies.getNlsMessageFactory().create(nlsText,
+          this.arguments);
+      printMessage(message);
+    }
+
+    /**
+     * Prints the given {@link NlsMessage} for the proper {@link Locale}.
+     *
+     * @param message the {@link NlsMessage} to print.
+     */
+    private void printMessage(NlsMessage message) {
+
+      LineWrapper lineWrapper = AbstractCliParser.this.dependencies.getLineWrapper();
       String text = message.getLocalizedMessage(this.mainColumnInfo.getLocale());
       lineWrapper.wrap(this.appendable, this.tableInfo, text, this.mainColumnInfo);
     }
@@ -860,20 +861,20 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     public void printArguments(List<CliArgumentHelpInfo> argumentList, int maxArgumentColumnWidth) {
 
       if (!argumentList.isEmpty()) {
-        printText(NlsBundleUtilCliRoot.MSG_CLI_ARGUMENTS);
+        printMessage(AbstractCliParser.this.nlsBundle.messageCliArguments());
         this.parameterColumnInfo.setWidth(maxArgumentColumnWidth);
-        LineWrapper lineWrapper = this.dependencies.getLineWrapper();
+        LineWrapper lineWrapper = AbstractCliParser.this.dependencies.getLineWrapper();
 
         for (CliArgumentHelpInfo helpInfo : argumentList) {
           CliArgumentContainer argumentContainer = helpInfo.argument;
           CliArgument cliArgument = argumentContainer.getArgument();
           Object defaultValue = null;
           if (argumentContainer.getGetter() != null) {
-            defaultValue = argumentContainer.getGetter().invoke(this.state);
+            defaultValue = argumentContainer.getGetter().invoke(AbstractCliParser.this.state);
           }
           this.arguments.put(NlsObject.KEY_DEFAULT, defaultValue);
-          NlsMessage usageMessage = this.dependencies.getNlsMessageFactory().create(cliArgument.usage(),
-              this.arguments);
+          NlsMessage usageMessage = AbstractCliParser.this.dependencies.getNlsMessageFactory()
+              .create(cliArgument.usage(), this.arguments);
           String usageText = usageMessage.getLocalizedMessage(this.mainColumnInfo.getLocale());
 
           lineWrapper.wrap(this.appendable, this.tableInfo, helpInfo.name, this.parameterColumnInfo, usageText,
@@ -910,32 +911,51 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     private void printOptions(Collection<CliOptionContainer> modeOptions,
         Map<CliOption, CliOptionHelpInfo> option2HelpMap, boolean required) {
 
-      LineWrapper lineWrapper = this.dependencies.getLineWrapper();
+      LineWrapper lineWrapper = AbstractCliParser.this.dependencies.getLineWrapper();
       // required options
       boolean firstOption = true;
       for (CliOptionContainer option : modeOptions) {
         CliOption cliOption = option.getOption();
         if (cliOption.required() == required) {
           if (firstOption) {
-            String nlsText;
+            NlsMessage optionsMessage;
             if (required) {
-              nlsText = NlsBundleUtilCliRoot.MSG_CLI_REQUIRED_OPTIONS;
+              optionsMessage = AbstractCliParser.this.nlsBundle.messageCliRequiredOptions();
             } else {
-              nlsText = NlsBundleUtilCliRoot.MSG_CLI_ADDITIONAL_OPTIONS;
+              optionsMessage = AbstractCliParser.this.nlsBundle.messageCliAdditionalOptions();
             }
-            printText(nlsText);
+            printMessage(optionsMessage);
             firstOption = false;
           }
           CliOptionHelpInfo helpInfo = option2HelpMap.get(cliOption);
           this.arguments.put(NlsObject.KEY_OPERAND, helpInfo.operand);
           Object defaultValue = null;
           if (option.getGetter() != null) {
-            defaultValue = option.getGetter().invoke(this.state);
+            defaultValue = option.getGetter().invoke(AbstractCliParser.this.state);
           }
           this.arguments.put(NlsObject.KEY_DEFAULT, defaultValue);
-          NlsMessage usageMessage = this.dependencies.getNlsMessageFactory().create(cliOption.usage(),
-              this.arguments);
+          NlsMessageFactory nlsMessageFactory = AbstractCliParser.this.dependencies.getNlsMessageFactory();
+          NlsMessage usageMessage = nlsMessageFactory.create(cliOption.usage(), this.arguments);
+
           String usageText = usageMessage.getLocalizedMessage(this.mainColumnInfo.getLocale());
+          GenericType<?> propertyType = helpInfo.option.getSetter().getPropertyType();
+          Class<?> propertyClass = propertyType.getAssignmentClass();
+          if (propertyClass.isEnum()) {
+            NlsMessage enumOptionsMessage = AbstractCliParser.this.nlsBundle.messageCliOptionValues();
+            @SuppressWarnings({ "rawtypes", "unchecked" })
+            Enum[] enumConstants = ((Class<? extends Enum>) propertyClass).getEnumConstants();
+            StringBuilder buffer = new StringBuilder(usageText);
+            buffer.append(this.tableInfo.getLineSeparator());
+            buffer.append(enumOptionsMessage.getLocalizedMessage(this.mainColumnInfo.getLocale()));
+            String separator = " ";
+            for (Enum constant : enumConstants) {
+              buffer.append(separator);
+              // TODO add support for NlsObject in enum constants for help and parsing?
+              buffer.append(constant.name());
+              separator = ", ";
+            }
+            usageText = buffer.toString();
+          }
 
           lineWrapper.wrap(this.appendable, this.tableInfo, helpInfo.syntax, this.parameterColumnInfo, usageText,
               this.mainColumnInfo);

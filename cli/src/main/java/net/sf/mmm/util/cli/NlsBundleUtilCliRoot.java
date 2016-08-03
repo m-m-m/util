@@ -4,6 +4,8 @@ package net.sf.mmm.util.cli;
 
 import javax.inject.Named;
 
+import net.sf.mmm.util.cli.api.CliMode;
+import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
@@ -105,21 +107,6 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
       + "For all given locales the according property-file is created or updated. "
       + "If this option is omitted the bundle-classes are resolved from all instances of "
       + NlsTemplateResolver.CLASSPATH_NLS_BUNDLE + " on your classpath.";
-
-  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
-  String MSG_CLI_USAGE = "Usage: {mainClass} {option}";
-
-  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
-  String MSG_CLI_MODE_USAGE = "Mode {mode}:";
-
-  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
-  String MSG_CLI_REQUIRED_OPTIONS = "Required options:";
-
-  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
-  String MSG_CLI_ADDITIONAL_OPTIONS = "Additional options:";
-
-  /** @see net.sf.mmm.util.cli.base.AbstractCliParser */
-  String MSG_CLI_ARGUMENTS = "Arguments:";
 
   /**
    * @see net.sf.mmm.util.cli.api.AbstractMain
@@ -246,25 +233,28 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
   /**
    * @see net.sf.mmm.util.cli.base.AbstractCliParser
    *
+   * @param mainClass the {@link Class#getName() qualified name} of the CLI {@link Class} (with the main method).
+   * @param option the {@link CliOption}.
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage(MSG_CLI_USAGE)
-  NlsMessage messageCliUsage();
+  @NlsBundleMessage("Usage: {mainClass} {option}")
+  NlsMessage messageCliUsage(@Named("mainClass") Object mainClass, @Named("option") Object option);
+
+  /**
+   * @see net.sf.mmm.util.cli.base.AbstractCliParser
+   *
+   * @param mode the {@link CliMode}.
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("Mode {mode}:")
+  NlsMessage messageCliModeUsage(@Named("mode") Object mode);
 
   /**
    * @see net.sf.mmm.util.cli.base.AbstractCliParser
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage(MSG_CLI_MODE_USAGE)
-  NlsMessage messageCliModeUsage();
-
-  /**
-   * @see net.sf.mmm.util.cli.base.AbstractCliParser
-   *
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage(MSG_CLI_REQUIRED_OPTIONS)
+  @NlsBundleMessage("Required options:")
   NlsMessage messageCliRequiredOptions();
 
   /**
@@ -272,15 +262,21 @@ public interface NlsBundleUtilCliRoot extends NlsBundle {
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage(MSG_CLI_ADDITIONAL_OPTIONS)
+  @NlsBundleMessage("Additional options:")
   NlsMessage messageCliAdditionalOptions();
+
+  /**
+   * @return the {@link NlsMessage}
+   */
+  @NlsBundleMessage("Possible values:")
+  NlsMessage messageCliOptionValues();
 
   /**
    * @see net.sf.mmm.util.cli.base.AbstractCliParser
    *
    * @return the {@link NlsMessage}
    */
-  @NlsBundleMessage(MSG_CLI_ARGUMENTS)
+  @NlsBundleMessage("Arguments:")
   NlsMessage messageCliArguments();
 
   /**

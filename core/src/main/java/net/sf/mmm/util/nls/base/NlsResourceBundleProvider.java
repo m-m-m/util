@@ -5,6 +5,7 @@ package net.sf.mmm.util.nls.base;
 import java.util.Collection;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
+import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsResourceBundle;
 
 /**
@@ -12,7 +13,9 @@ import net.sf.mmm.util.nls.api.NlsResourceBundle;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
+ * @deprecated use {@link NlsBundle} instead of {@link NlsResourceBundle}.
  */
+@Deprecated
 @ComponentSpecification
 public interface NlsResourceBundleProvider {
 
