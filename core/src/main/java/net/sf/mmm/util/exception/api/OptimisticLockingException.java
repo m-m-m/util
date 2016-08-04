@@ -8,8 +8,8 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
- * This is a variant of exceptions like {@link javax.persistence.OptimisticLockException} that is suitable for end-users
- * and support NLS/I18N.
+ * This is a variant of exceptions like {@link javax.persistence.OptimisticLockException} that is suitable for
+ * end-users and support NLS/I18N.
  *
  * @author hohwille
  * @since 7.3.0
@@ -30,34 +30,7 @@ public class OptimisticLockingException extends NlsRuntimeException {
     super(cause, createBundle(NlsBundleUtilExceptionRoot.class).errorOptimisticLocking(entity, id));
   }
 
-  /**
-   * The constructor.
-   *
-   * @param cause is the {@link javax.persistence.OptimisticLockException}.
-   */
-  public OptimisticLockingException(javax.persistence.OptimisticLockException cause) {
-    this(cause, getEntityRepresentation(cause.getEntity()), getId(cause.getEntity()));
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param cause is the {@link org.springframework.orm.ObjectOptimisticLockingFailureException}.
-   */
-  public OptimisticLockingException(org.springframework.orm.ObjectOptimisticLockingFailureException cause) {
-    this(cause, getEntityRepresentation(cause.getPersistentClassName()), cause.getIdentifier());
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param cause is the {@link org.hibernate.StaleObjectStateException}.
-   */
-  public OptimisticLockingException(org.hibernate.StaleObjectStateException cause) {
-    this(cause, getEntityRepresentation(cause.getEntityName()), cause.getIdentifier());
-  }
-
-  private static Object getId(Object entity) {
+  static Object getId(Object entity) {
 
     if (entity == null) {
       return null;
@@ -71,7 +44,7 @@ public class OptimisticLockingException extends NlsRuntimeException {
     }
   }
 
-  private static String getEntityRepresentation(Object entity) {
+  static String getEntityRepresentation(Object entity) {
 
     if (entity == null) {
       return null;
@@ -99,6 +72,45 @@ public class OptimisticLockingException extends NlsRuntimeException {
   public boolean isForUser() {
 
     return true;
+  }
+
+  /**
+   * Creates an {@link OptimisticLockingException} for the given {@link Throwable} cause.
+   *
+   * @param optimisticLockError a {@link Throwable} like {@link org.hibernate.StaleObjectStateException},
+   *        {@link javax.persistence.OptimisticLockException}, or
+   *        {@link org.springframework.orm.ObjectOptimisticLockingFailureException}.
+   * @return the wrapped {@link OptimisticLockingException} or {@code null} if the given {@link Throwable} is
+   *         not a known optimitisc locking exception.
+   */
+  public static OptimisticLockingException of(Throwable optimisticLockError) {
+
+    if (optimisticLockError instanceof OptimisticLockingException) {
+      return (OptimisticLockingException) optimisticLockError;
+    }
+    // ATTENTION: keep all these referenced qualified and prevent imports to avoid NoClassDefFoundError
+    try {
+      if (optimisticLockError instanceof org.hibernate.StaleObjectStateException) {
+        return new OptimisticLockingExceptionHibernate((org.hibernate.StaleObjectStateException) optimisticLockError);
+      }
+    } catch (NoClassDefFoundError e) {
+      // ignore
+    }
+    try {
+      if (optimisticLockError instanceof javax.persistence.OptimisticLockException) {
+        return new OptimisticLockingExceptionJpa((javax.persistence.OptimisticLockException) optimisticLockError);
+      }
+    } catch (NoClassDefFoundError e) {
+      // ignore
+    }
+    try {
+      if (optimisticLockError instanceof org.springframework.orm.ObjectOptimisticLockingFailureException) {
+        return new OptimisticLockingExceptionSpring((org.springframework.orm.ObjectOptimisticLockingFailureException) optimisticLockError);
+      }
+    } catch (NoClassDefFoundError e) {
+      // ignore
+    }
+    return null;
   }
 
 }
