@@ -49,8 +49,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Failed to parse \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} as \"{type}\" - required format is \"{format}\"!")
-  NlsMessage errorParseFormat(@Named("value") Object value, @Named("format") Object format, @Named("type") Object type,
-      @Named("source") Object source);
+  NlsMessage errorParseFormat(@Named("value") Object value, @Named("format") Object format, @Named("type") Object type, @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.exception.api.NlsIllegalArgumentException
@@ -116,8 +115,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("Duplicate object \"{object}\" for key \"{key}\" - already mapped to \"{existing}\"!")
-  NlsMessage errorDuplicateObjectWithKeyAndExisting(@Named("object") Object object, @Named("key") Object key,
-      @Named("existing") Object existing);
+  NlsMessage errorDuplicateObjectWithKeyAndExisting(@Named("object") Object object, @Named("key") Object key, @Named("existing") Object existing);
 
   /**
    * @see net.sf.mmm.util.exception.api.ObjectMismatchException
@@ -130,8 +128,8 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    */
   @NlsBundleMessage("Mismatch detected{source,choice,(?==null)''(else)' in \"'{source}'\"'}"
       + "{property,choice,(?==null)''(else)' for \"'{property}'\"'}: found \"{object}\", but expected \"{expected}\"!")
-  NlsMessage errorObjectMismatch(@Named("object") Object object, @Named("expected") Object expected,
-      @Named("source") Object source, @Named("property") Object property);
+  NlsMessage errorObjectMismatch(@Named("object") Object object, @Named("expected") Object expected, @Named("source") Object source,
+      @Named("property") Object property);
 
   /**
    * @see net.sf.mmm.util.exception.api.ObjectNotFoundException
@@ -236,8 +234,8 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    */
   @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} with the type "
       + "\"{valueType}\" can NOT be converted to the requested type \"{targetType}\"!")
-  NlsMessage errorValueWrongType(@Named("value") Object value, @Named("valueType") Object valueType,
-      @Named("targetType") Object targetType, @Named("source") Object source);
+  NlsMessage errorValueWrongType(@Named("value") Object value, @Named("valueType") Object valueType, @Named("targetType") Object targetType,
+      @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.exception.api.ValueNotSetException
@@ -258,8 +256,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The value {value}{source,choice,(?==null)''(else)' from \"'{source}'\"'} needs to be in the range from {min} to {max}.")
-  NlsMessage errorValueOutOfRange(@Named("value") Object value, @Named("min") Object min, @Named("max") Object max,
-      @Named("source") Object source);
+  NlsMessage errorValueOutOfRange(@Named("value") Object value, @Named("min") Object min, @Named("max") Object max, @Named("source") Object source);
 
   /**
    * @see net.sf.mmm.util.exception.api.ValueConvertException
@@ -271,5 +268,17 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
    */
   @NlsBundleMessage("The value \"{value}\"{source,choice,(?==null)''(else)' from \"'{source}'\"'} could NOT be converted to \"{type}\"!")
   NlsMessage errorValueConvert(@Named("value") Object value, @Named("type") Type type, @Named("source") Object source);
+
+  /**
+   * @see net.sf.mmm.util.exception.api.OptimisticLockingException
+   *
+   * @param entity the entity representation (e.g. simple name).
+   * @param id the ID of the entity.
+   * @return the {@link NlsMessage}.
+   */
+  @NlsBundleMessage("The operation failed due to a conflict of concurrent modification. "
+      + "Please save your changes via copy and paste or screenshot, reject your changes and repeat the operation. "
+      + "The conflict concerns the entity {entity} with primary key {id}.")
+  NlsMessage errorOptimisticLocking(Object entity, Object id);
 
 }
