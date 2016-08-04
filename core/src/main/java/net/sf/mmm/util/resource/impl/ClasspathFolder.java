@@ -178,11 +178,16 @@ class ClasspathFolder extends AbstractBrowsableClasspathResource {
   DataResource navigate(String resourcePath, boolean returnNullIfNotExists) {
 
     ResourcePathNode<Void> path = ResourcePathNode.create(resourcePath);
-    DataResource result = getParent().navigate(path, false);
+    ClasspathFolder parent = getParent();
+    if (parent == null) {
+      // in case of root...
+      parent = this;
+    }
+    DataResource result = parent.navigate(path, false);
     if ((result == null) && !returnNullIfNotExists) {
       String parentPath = "";
       if (!isRoot()) {
-        parentPath = getParent().getPath();
+        parentPath = parent.getPath();
       }
       ResourcePathNode<Void> targetPath = ResourcePathNode.create(parentPath).navigateTo(path);
       String classpath = targetPath.toString();
