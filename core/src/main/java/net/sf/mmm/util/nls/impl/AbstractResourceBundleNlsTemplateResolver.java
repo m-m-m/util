@@ -23,6 +23,7 @@ import net.sf.mmm.util.nls.base.NlsTemplateImplWithMessage;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@SuppressWarnings("javadoc")
 public abstract class AbstractResourceBundleNlsTemplateResolver extends AbstractNlsTemplateResolver {
 
   /**
@@ -44,8 +45,7 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
    * @deprecated obsolete, will be removed.
    */
   @Deprecated
-  protected NlsTemplate resolveTemplate(NlsReversedResourceBundle reversedBundle,
-      String internationalizedMessage) {
+  protected NlsTemplate resolveTemplate(NlsReversedResourceBundle reversedBundle, String internationalizedMessage) {
 
     // ResourceBundleReverse reverseBundle = getReverseBundle(resourceBundle);
     String key = reversedBundle.getKey(internationalizedMessage);

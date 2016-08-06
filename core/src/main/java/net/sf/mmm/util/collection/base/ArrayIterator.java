@@ -6,7 +6,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 
 /**
  * This class implements both {@link Iterator} and {@link Enumeration} to iterate/enumerate a given array. For

@@ -16,10 +16,10 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import net.sf.mmm.util.exception.api.ValueNotSetException;
 import net.sf.mmm.util.lang.api.DatatypeDescriptor;
 import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
 import net.sf.mmm.util.lang.api.DatatypeSegmentDescriptor;
-import net.sf.mmm.util.value.api.ValueNotSetException;
 
 /**
  * This is a generic implementation of {@link JsonDeserializer} based on {@link DatatypeDescriptorManager} so every
@@ -193,8 +193,8 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
    * @return the deserialized value.
    * @throws IOException if reading from {@link JsonParser} causes an I/O problem.
    */
-  public <V> V deserializeGeneric(JsonParser parser, DeserializationContext context, Class<V> type,
-      JsonNode parentNode, DatatypeSegmentDescriptor<?, ?> segment) throws IOException {
+  public <V> V deserializeGeneric(JsonParser parser, DeserializationContext context, Class<V> type, JsonNode parentNode,
+      DatatypeSegmentDescriptor<?, ?> segment) throws IOException {
 
     DatatypeDescriptor<V> descriptor = this.datatypeDescriptorManager.getDatatypeDescriptor(type);
     List<DatatypeSegmentDescriptor<V, ?>> segmentList = descriptor.getSegmentDescriptors();
@@ -227,8 +227,7 @@ public class DatatypeJsonDeserializer<T> extends JsonDeserializer<T> {
   }
 
   @Override
-  public T deserialize(JsonParser parser, DeserializationContext context)
-      throws IOException, JsonProcessingException {
+  public T deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 
     return deserializeGeneric(parser, context, this.datatype, null, null);
   }

@@ -12,7 +12,7 @@ import net.sf.mmm.util.resource.base.AbstractBrowsableResource;
 import net.sf.mmm.util.resource.base.ClasspathResource;
 
 /**
- * Abstract base implementation of {@link BrowsableResource} for {@link ClasspathFile} or {@link ClasspathFolder}.
+ * Abstract base implementation of {@link BrowsableResource} for {@code ClasspathFile} or {@code ClasspathFolder}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.3.0 (moved from 7.0.0)
@@ -40,8 +40,7 @@ abstract class AbstractBrowsableClasspathResource extends AbstractBrowsableResou
     this.name = name;
     if (isData()) {
       if (name.endsWith(EXTENSION_CLASS)) {
-        this.qualifiedName = parent.getQualifiedName() + "."
-            + name.substring(0, name.length() - EXTENSION_CLASS.length());
+        this.qualifiedName = parent.getQualifiedName() + "." + name.substring(0, name.length() - EXTENSION_CLASS.length());
       } else {
         this.qualifiedName = null;
       }

@@ -41,8 +41,8 @@ public class GenericTypeBuilderTest extends Assertions {
 
   private static <T> GenericType<List<Provider<T>>> typeOfListOfProviderOf(GenericType<T> type) {
 
-    return new GenericTypeBuilder<List<Provider<T>>>() {
-    }.with(new GenericTypeVariable<T>() {
+    return new GenericTypeBuilder<List<Provider<T>>>() { // anonymous
+    }.with(new GenericTypeVariable<T>() { // anonymous
     }, type).build();
   }
 

@@ -224,18 +224,18 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       }
     };
     Filter<Class<?>> classFilter = new Filter<Class<?>>() {
+
       @Override
       public boolean accept(Class<?> javaClass) {
 
         return NlsBundle.class.isAssignableFrom(javaClass);
       }
     };
-    Iterable<Class<? extends NlsBundle>> classes = (Iterable) this.classpathScanner
-        .getClasspathResourceClasses(classnameFilter, classFilter);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    Iterable<Class<? extends NlsBundle>> classes = (Iterable) this.classpathScanner.getClasspathResourceClasses(classnameFilter, classFilter);
     for (Class<? extends NlsBundle> bundleInterface : classes) {
       NlsBundle bundle = createBundle(bundleInterface);
-      NlsBundleInvocationHandler invocationHandler = (NlsBundleInvocationHandler) Proxy
-          .getInvocationHandler(bundle);
+      NlsBundleInvocationHandler invocationHandler = (NlsBundleInvocationHandler) Proxy.getInvocationHandler(bundle);
       invocationHandler.populate();
       descriptors.add(invocationHandler);
     }
@@ -280,8 +280,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @param bundleName is the qualified name of the {@link java.util.ResourceBundle}.
      * @param options are the {@link NlsBundleOptions}.
      */
-    public NlsBundleInvocationHandler(Class<? extends NlsBundle> bundleInterface, String bundleName,
-        NlsBundleOptions options) {
+    public NlsBundleInvocationHandler(Class<? extends NlsBundle> bundleInterface, String bundleName, NlsBundleOptions options) {
 
       super();
       this.bundleInterface = bundleInterface;
@@ -299,8 +298,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @param arguments are the arguments for the call of the {@link Method}.
      * @return the {@link Map} with the {@link NlsMessage#getArgument(String) arguments}.
      */
-    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo,
-        Object[] arguments) {
+    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo, Object[] arguments) {
 
       Map<String, Object> map = new HashMap<>();
       String[] argumentNames = methodInfo.argumentNames;
@@ -384,8 +382,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     @SuppressWarnings("null") // Eclipse is a little stupid...
-    private Object handleObjectMethod(Object proxy, Method method, Object[] args)
-        throws IllegalAccessException, InvocationTargetException {
+    private Object handleObjectMethod(Object proxy, Method method, Object[] args) throws IllegalAccessException, InvocationTargetException {
 
       int len;
       if (args == null) {
@@ -414,8 +411,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @return the {@link NlsBundleMethodInfo}. May be {@code null} for generic invocation if method for
      *         {@code methodName} was not found (does not exist).
      */
-    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName,
-        Object proxy) {
+    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName, Object proxy) {
 
       NlsBundleMethodInfo methodInfo;
       // #151: when switching to Java8: change get to computeIfAbsence

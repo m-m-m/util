@@ -13,4 +13,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 @ComponentSpecification
 public interface MathUtil extends MathUtilLimited {
 
+  // nothing to add...
+
 }

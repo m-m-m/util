@@ -164,25 +164,25 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   @Override
   public <E> GenericType<List<E>> createGenericTypeOfList(GenericType<E> elementType) {
 
-    return new GenericTypeBuilder<List<E>>() {
-    }.with(new GenericTypeVariable<E>() {
+    return new GenericTypeBuilder<List<E>>() { // anonymous
+    }.with(new GenericTypeVariable<E>() { // anonymous
     }, elementType).build();
   }
 
   @Override
   public <K, V> GenericType<Map<K, V>> createGenericTypeOfMap(GenericType<K> keyType, GenericType<V> valueType) {
 
-    return new GenericTypeBuilder<Map<K, V>>() {
-    }.with(new GenericTypeVariable<K>() {
-    }, keyType).with(new GenericTypeVariable<V>() {
+    return new GenericTypeBuilder<Map<K, V>>() { // anonymous
+    }.with(new GenericTypeVariable<K>() { // anonymous
+    }, keyType).with(new GenericTypeVariable<V>() { // anonymous
     }, valueType).build();
   }
 
   @Override
   public <E> GenericType<Set<E>> createGenericTypeOfSet(GenericType<E> elementType) {
 
-    return new GenericTypeBuilder<Set<E>>() {
-    }.with(new GenericTypeVariable<E>() {
+    return new GenericTypeBuilder<Set<E>>() { // anonymous
+    }.with(new GenericTypeVariable<E>() { // anonymous
     }, elementType).build();
   }
 
@@ -413,6 +413,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
     final StringBuilder buffer = new StringBuilder();
     Visitor<Class<?>> formatter = new Visitor<Class<?>>() {
+
       @Override
       public void visit(Class<?> clazz) {
 
@@ -526,8 +527,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   @Override
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
-      boolean mustBeFinal, boolean inherit)
+  public <T> T getStaticField(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch, boolean mustBeFinal, boolean inherit)
       throws NoSuchFieldException, IllegalAccessException, IllegalArgumentException {
 
     Field field = type.getField(fieldName);
@@ -554,15 +554,15 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
       throw new NoSuchFieldException(fieldName);
     }
     if (typeMismatch) {
-      throw new IllegalArgumentException("Field '" + fieldName + "' (in type '" + type + "') has type '"
-          + field.getType() + "' but requested type was '" + fieldType + "'!");
+      throw new IllegalArgumentException(
+          "Field '" + fieldName + "' (in type '" + type + "') has type '" + field.getType() + "' but requested type was '" + fieldType + "'!");
     }
     return (T) field.get(null);
   }
 
   @Override
-  public <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch,
-      boolean mustBeFinal, boolean inherit) throws IllegalArgumentException {
+  public <T> T getStaticFieldOrNull(Class<?> type, String fieldName, Class<T> fieldType, boolean exactTypeMatch, boolean mustBeFinal, boolean inherit)
+      throws IllegalArgumentException {
 
     try {
       return getStaticField(type, fieldName, fieldType, exactTypeMatch, mustBeFinal, inherit);
@@ -580,8 +580,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   @Override
-  public Method getParentMethod(Class<?> inheritingClass, String methodName, Class<?>[] parameterTypes)
-      throws SecurityException {
+  public Method getParentMethod(Class<?> inheritingClass, String methodName, Class<?>[] parameterTypes) throws SecurityException {
 
     Class<?> parentClass = inheritingClass.getSuperclass();
     if (parentClass != null) {
@@ -618,8 +617,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * @param qualifiedNamePrefixLength the length of the prefix used to rest the string-builder after reuse.
    * @param visitor is the {@link ResourceVisitor}.
    */
-  private static void visitResources(File packageDirectory, StringBuilder qualifiedNameBuilder,
-      int qualifiedNamePrefixLength, ResourceVisitor visitor) {
+  private static void visitResources(File packageDirectory, StringBuilder qualifiedNameBuilder, int qualifiedNamePrefixLength, ResourceVisitor visitor) {
 
     for (File childFile : packageDirectory.listFiles()) {
       String fileName = childFile.getName();
@@ -654,8 +652,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   @Override
-  public Set<String> findClassNames(String packageName, boolean includeSubPackages,
-      Filter<? super String> filter) {
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
 
     Set<String> result = new HashSet<>();
     findClassNames(packageName, includeSubPackages, result, filter, getDefaultClassLoader(filter.getClass()));
@@ -663,8 +660,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   @Override
-  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter,
-      ClassLoader classLoader) {
+  public Set<String> findClassNames(String packageName, boolean includeSubPackages, Filter<? super String> filter, ClassLoader classLoader) {
 
     Set<String> result = new HashSet<>();
     findClassNames(packageName, includeSubPackages, result, filter, classLoader);
@@ -684,23 +680,21 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @throws RuntimeIoException if the operation failed with an I/O error.
    */
-  protected void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet,
-      Filter<? super String> filter, ClassLoader classLoader) throws RuntimeIoException {
+  protected void findClassNames(String packageName, boolean includeSubPackages, Set<String> classSet, Filter<? super String> filter, ClassLoader classLoader)
+      throws RuntimeIoException {
 
     ResourceVisitor visitor = new ClassNameCollector(classSet, filter);
     visitResourceNames(packageName, includeSubPackages, classLoader, visitor);
   }
 
   @Override
-  public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
-      Filter<? super String> filter) {
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
 
     return findResourceNames(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
 
   @Override
-  public Set<String> findResourceNames(String packageName, boolean includeSubPackages,
-      Filter<? super String> filter, ClassLoader classLoader) {
+  public Set<String> findResourceNames(String packageName, boolean includeSubPackages, Filter<? super String> filter, ClassLoader classLoader) {
 
     Set<String> result = new HashSet<>();
     ResourceNameCollector visitor = new ResourceNameCollector(result, filter);
@@ -709,8 +703,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   @Override
-  public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
-      Filter<? super String> filter) {
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter) {
 
     return findResources(packageName, includeSubPackages, filter, getDefaultClassLoader(filter.getClass()));
   }
@@ -732,8 +725,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   @Override
-  public Set<DataResource> findResources(String packageName, boolean includeSubPackages,
-      Filter<? super String> filter, ClassLoader classLoader) {
+  public Set<DataResource> findResources(String packageName, boolean includeSubPackages, Filter<? super String> filter, ClassLoader classLoader) {
 
     Set<DataResource> result = new HashSet<>();
     ResourceVisitor visitor = new ResourceCollector(result, filter);
@@ -752,8 +744,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * @param visitor is the {@link ResourceVisitor}.
    * @throws RuntimeIoException if the operation failed with an I/O error.
    */
-  public void visitResourceNames(String packageName, boolean includeSubPackages, ClassLoader classLoader,
-      ResourceVisitor visitor) throws RuntimeIoException {
+  public void visitResourceNames(String packageName, boolean includeSubPackages, ClassLoader classLoader, ResourceVisitor visitor) throws RuntimeIoException {
 
     try {
       String path = packageName.replace('.', '/');
@@ -829,8 +820,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   @Override
   public Set<Class<?>> loadClasses(Collection<String> qualifiedClassNames) {
 
-    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER,
-        ConstantFilter.getInstance(true));
+    return loadClasses(qualifiedClassNames, ClassResolver.CLASS_FOR_NAME_RESOLVER, ConstantFilter.getInstance(true));
   }
 
   @Override
@@ -840,8 +830,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   @Override
-  public Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver,
-      Filter<? super Class<?>> filter) {
+  public Set<Class<?>> loadClasses(Collection<String> classNames, ClassResolver classResolver, Filter<? super Class<?>> filter) {
 
     Set<Class<?>> classesSet = new HashSet<>();
     for (String className : classNames) {

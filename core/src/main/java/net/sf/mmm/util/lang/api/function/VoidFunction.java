@@ -9,6 +9,7 @@ package net.sf.mmm.util.lang.api.function;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.0.0
  */
+@SuppressWarnings({ "deprecation", "javadoc" })
 public final class VoidFunction implements Function<Object, Void> {
 
   /** The singleton instance. */

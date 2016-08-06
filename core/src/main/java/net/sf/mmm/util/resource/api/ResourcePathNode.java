@@ -22,6 +22,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.0.0
  */
+@SuppressWarnings("deprecation")
 public class ResourcePathNode<D> implements ResourcePath, Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -30,8 +31,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   private static final char WINDOWS_DRIVE_LETTER_SUFFIX = ':';
 
   /** The {@link Void} data function. */
-  private static final Function<ResourcePathNode<Void>, Void> VOID_FUNCTION = VoidFunction
-      .<ResourcePathNode<Void>> getInstance();
+  private static final Function<ResourcePathNode<Void>, Void> VOID_FUNCTION = VoidFunction.<ResourcePathNode<Void>> getInstance();
 
   /** The {@link Void} data function. */
   private static final Function<ResourcePathNode<Pattern>, Pattern> GLOB_PATTERN_FUNCTION = new Function<ResourcePathNode<Pattern>, Pattern>() {
@@ -64,6 +64,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param name - see {@link #getName()}.
    * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
    */
+  @SuppressWarnings("javadoc")
   protected ResourcePathNode(String name, Function<ResourcePathNode<D>, D> dataFunction) {
 
     super();
@@ -101,8 +102,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param name - see {@link #getName()}.
    * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
    */
-  protected ResourcePathNode(ResourcePathNode<D> parent, String name,
-      Function<ResourcePathNode<D>, D> dataFunction) {
+  @SuppressWarnings("javadoc")
+  protected ResourcePathNode(ResourcePathNode<D> parent, String name, Function<ResourcePathNode<D>, D> dataFunction) {
 
     super();
     Objects.requireNonNull(parent, "parent");
@@ -424,6 +425,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param path - see {@link #create(String)}.
    * @return the parsed {@link ResourcePathNode}.
    */
+  @SuppressWarnings("javadoc")
   public static ResourcePathNode<Pattern> createPattern(String path) {
 
     return create(path, GLOB_PATTERN_FUNCTION);
@@ -437,7 +439,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
    * @return the parsed {@code path}.
    */
-  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @SuppressWarnings({ "unchecked", "rawtypes", "javadoc" })
   public static <D> ResourcePathNode<D> create(String path, Function<ResourcePathNode<D>, D> dataFunction) {
 
     if (path == null) {
@@ -596,6 +598,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * @param drive is the Windows drive letter (e.g. "C" for "C:\\").
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
      */
+    @SuppressWarnings("javadoc")
     public ResourcePathRootWindows(String drive, Function<ResourcePathNode<D>, D> dataFunction) {
 
       super(drive + WINDOWS_DRIVE_LETTER_SUFFIX, dataFunction);
@@ -654,6 +657,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      *
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
      */
+    @SuppressWarnings("javadoc")
     public ResourcePathRootHome(Function<ResourcePathNode<D>, D> dataFunction) {
 
       this("", dataFunction);
@@ -665,6 +669,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * @param user the name of the user.
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
      */
+    @SuppressWarnings("javadoc")
     public ResourcePathRootHome(String user, Function<ResourcePathNode<D>, D> dataFunction) {
 
       super(HOME_PATH_CHAR + user, dataFunction);
@@ -692,6 +697,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * @param uncAuthority is the authority or host of the UNC root.
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
      */
+    @SuppressWarnings("javadoc")
     public ResourcePathRootUnc(String uncAuthority, Function<ResourcePathNode<D>, D> dataFunction) {
 
       super(UNC_PATH_PREFIX + uncAuthority, dataFunction);
@@ -724,6 +730,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * @param authority - see {@link #getAuthority()}.
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
      */
+    @SuppressWarnings("javadoc")
     public ResourcePathRootUrl(String scheme, String authority, Function<ResourcePathNode<D>, D> dataFunction) {
 
       super(scheme + URL_SCHEME_AUTHORITY_SEPARATOR + authority, dataFunction);
