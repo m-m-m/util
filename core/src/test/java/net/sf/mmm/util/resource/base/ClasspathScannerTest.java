@@ -126,6 +126,7 @@ public class ClasspathScannerTest extends Assertions {
   /**
    * @param clazz the {@link Class} to test via {@link ClasspathScanner}.
    */
+  @SuppressWarnings({ "unchecked", "rawtypes" }) // Workaround for bug in Eclipse compiler
   protected void checkClass(Class<?> clazz) {
 
     ClasspathScanner scanner = getClasspathScanner();
@@ -135,8 +136,7 @@ public class ClasspathScannerTest extends Assertions {
     assertThat(packageResource.isData()).isFalse();
     assertThat(packageResource.getPath()).isEqualTo(clazz.getPackage().getName().replace('.', '/'));
     assertThat(packageResource.isAvailable()).isFalse();
-    assertThat(packageResource.getChildResources()).contains(scanner.getClasspathResource(clazz.getName().replace('.', '/') + ".class"));
-
+    assertThat((Iterable) packageResource.getChildResources()).contains(scanner.getClasspathResource(clazz.getName().replace('.', '/') + ".class"));
   }
 
   /** Test of {@link ClasspathScanner#getClasspathResourceFiles()}. */
@@ -149,7 +149,8 @@ public class ClasspathScannerTest extends Assertions {
     Iterable<? extends BrowsableResource> files = scanner.getClasspathResourceFiles();
     // then
     assertThat(files).isInstanceOf(List.class);
-    List<? extends BrowsableResource> fileList = (List<? extends BrowsableResource>) files;
+    @SuppressWarnings("unchecked") // Workaround for bug in Eclipse compiler
+    List<BrowsableResource> fileList = (List<BrowsableResource>) files;
     assertThat(fileList.size()).isBetween(Integer.valueOf(600), Integer.valueOf(1200));
     assertThat(fileList).contains(scanner.getClasspathResource(CLASSPATH_HYPHENATION_XML), scanner.getClasspathResource(CLASSPATH_NLS_BUNDLES));
   }

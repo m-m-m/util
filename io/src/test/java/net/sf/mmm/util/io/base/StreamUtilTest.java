@@ -171,9 +171,6 @@ public class StreamUtilTest extends Assertions {
       transferrer.get();
       fail("expected " + ExecutionException.class);
     } catch (ExecutionException e) {
-      if (error != e.getCause()) {
-        e.printStackTrace();
-      }
       ExceptionHelper.assertCause(e, error);
     }
     assertThat(outStream.size()).isZero();
