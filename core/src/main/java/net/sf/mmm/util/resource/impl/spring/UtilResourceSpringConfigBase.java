@@ -4,7 +4,9 @@ package net.sf.mmm.util.resource.impl.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
+import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 import net.sf.mmm.util.resource.api.ClasspathScanner;
 import net.sf.mmm.util.resource.impl.ClasspathScannerImpl;
 
@@ -15,6 +17,7 @@ import net.sf.mmm.util.resource.impl.ClasspathScannerImpl;
  * @since 7.1.0
  */
 @Configuration
+@Import(value = UtilReflectSpringConfig.class)
 @SuppressWarnings("javadoc")
 public class UtilResourceSpringConfigBase {
 

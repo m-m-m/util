@@ -6,7 +6,7 @@ package net.sf.mmm.util.nls.api;
  * This is the marker interface for all "resource-bundles" for this native language support. Instead of a
  * {@link java.util.ResourceBundle} you create a custom interface extending this one in order to define the
  * {@link NlsMessage#getInternationalizedMessage() messages}. This is done by defining methods with {@link NlsMessage}
- * as return type and the {@link NlsMessage#getArgument(String) NLS arguments} as parameter. <br>
+ * as return type and the {@link NlsMessage#getArgument(String) NLS argument values} as parameter. <br>
  * <b>NOTE:</b><br>
  * You should NOT create an implementation of that interface as this is created for you automatically via
  * {@link NlsBundleFactory#createBundle(Class)}. This is the recommended approach for defining and binding

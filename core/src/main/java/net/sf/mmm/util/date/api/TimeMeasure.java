@@ -15,7 +15,7 @@ import net.sf.mmm.util.date.base.DurationUtilImpl;
  *   doSomething();
  *   measure.{@link #succeed()};
  * } finally {
- *   measure.log
+ *   measure.{@link #log(Logger, Object) log}(getLogger(), "Something");
  * }
  * </pre>
  *

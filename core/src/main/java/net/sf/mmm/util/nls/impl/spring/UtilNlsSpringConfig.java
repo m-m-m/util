@@ -28,7 +28,7 @@ import net.sf.mmm.util.nls.impl.NlsMessageFormatterFactoryImpl;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocator;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
 import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
-import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
+import net.sf.mmm.util.resource.impl.spring.UtilResourceSpringConfigBase;
 import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
 
 /**
@@ -38,7 +38,7 @@ import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilDateSpringConfig.class, UtilReflectSpringConfig.class, UtilTextSpringConfigBase.class })
+@Import({ UtilDateSpringConfig.class, UtilResourceSpringConfigBase.class, UtilTextSpringConfigBase.class })
 @ComponentScan("net.sf.mmm.util.nls.impl.formatter")
 @SuppressWarnings("javadoc")
 public class UtilNlsSpringConfig {

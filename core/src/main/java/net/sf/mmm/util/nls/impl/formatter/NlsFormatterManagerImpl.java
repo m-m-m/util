@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.nls.api.NlsFormatter;
+import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 import net.sf.mmm.util.nls.base.AbstractNlsDependencies;
 import net.sf.mmm.util.nls.base.MappedNlsFormatterManager;
 import net.sf.mmm.util.nls.base.NlsDependencies;
@@ -48,7 +48,7 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
   }
 
   @Override
-  protected NlsFormatter<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
+  protected NlsFormatterPlugin<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
 
     if (TYPE_CHOICE.equals(formatType)) {
       return new NlsFormatterChoice(scanner, this.nlsDependencies);
@@ -58,7 +58,7 @@ public class NlsFormatterManagerImpl extends MappedNlsFormatterManager {
   }
 
   @Override
-  protected NlsFormatter<Object> getSubFormatter(String formatType, String subformat) {
+  protected NlsFormatterPlugin<Object> getSubFormatter(String formatType, String subformat) {
 
     if (TYPE_NUMBER.equals(formatType)) {
       return new NlsFormatterNumberPattern(subformat);

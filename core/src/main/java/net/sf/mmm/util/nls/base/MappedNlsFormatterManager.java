@@ -5,6 +5,7 @@ package net.sf.mmm.util.nls.base;
 import javax.inject.Inject;
 
 import net.sf.mmm.util.nls.api.NlsFormatter;
+import net.sf.mmm.util.nls.api.NlsFormatterPlugin;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.nls.api.NlsFormatterManager} interface.
@@ -38,22 +39,22 @@ public abstract class MappedNlsFormatterManager extends AbstractNlsFormatterMana
 
   /**
    * This method creates the {@link NlsFormatter} for the given {@code formatType} and the custom {@code subformat}. It
-   * is called if no formatter is {@link NlsFormatterMap#registerFormatter(NlsFormatter, String, String) registered} for
-   * the given arguments. <br>
+   * is called if no formatter is {@link NlsFormatterMap#registerFormatter(NlsFormatterPlugin, String, String)
+   * registered} for the given arguments. <br>
    *
    * @param formatType is the type to be formatted.
    * @param subformat is the custom formatStyle for which no static formatter is registered.
    * @return the according custom formatter or {@code null} if no such formatter is could be created.
    */
-  protected NlsFormatter<Object> getSubFormatter(String formatType, String subformat) {
+  protected NlsFormatterPlugin<Object> getSubFormatter(String formatType, String subformat) {
 
     return null;
   }
 
   @Override
-  public NlsFormatter<?> getFormatter(String formatType, String formatStyle) {
+  public NlsFormatterPlugin<?> getFormatter(String formatType, String formatStyle) {
 
-    NlsFormatter<?> result = null;
+    NlsFormatterPlugin<?> result = null;
     result = this.formatterMap.getFormatter(formatType, formatStyle);
     if (result == null) {
       if (formatStyle != null) {

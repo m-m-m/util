@@ -28,32 +28,41 @@ public class DefaultNlsResourceLocator extends AbstractComponent implements NlsR
   }
 
   @Override
-  public Locale getLocaleForInfix(String localeInfix) {
+  public Locale getLocale(String locale) {
 
-    if ((localeInfix != null) && (localeInfix.startsWith(Character.toString(SEPARATOR)))) {
-      int start = 1;
-      int end = localeInfix.indexOf(SEPARATOR, start);
-      int length = localeInfix.length();
+    int start = 0;
+    int end = locale.indexOf(SEPARATOR, 0);
+    if (end < 0) {
+      if (locale.indexOf('-') > 0) {
+        return Locale.forLanguageTag(locale);
+      } else {
+        return new Locale(locale);
+      }
+    }
+    int length = locale.length();
+    String language = locale.substring(start, end);
+    String country = "";
+    String variant = "";
+    start = end + 1;
+    if (start < length) {
+      end = locale.indexOf(SEPARATOR, start);
       if (end == -1) {
         end = length;
       }
-      String language = localeInfix.substring(start, end);
-      String country = "";
-      String variant = "";
+      country = locale.substring(start, end);
       start = end + 1;
       if (start < length) {
-        end = localeInfix.indexOf(SEPARATOR, start);
-        if (end == -1) {
-          end = length;
-        }
-        country = localeInfix.substring(start, end);
-        start = end + 1;
-        if (start < length) {
-          end = length;
-          variant = localeInfix.substring(start, end);
-        }
+        variant = locale.substring(start);
       }
-      return new Locale(language, country, variant);
+    }
+    return new Locale(language, country, variant);
+  }
+
+  @Override
+  public Locale getLocaleForInfix(String localeInfix) {
+
+    if ((localeInfix != null) && (localeInfix.startsWith(Character.toString(SEPARATOR)))) {
+      return getLocale(localeInfix.substring(1));
     }
     return AbstractNlsMessage.LOCALE_ROOT;
   }

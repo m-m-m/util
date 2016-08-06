@@ -195,6 +195,19 @@ public abstract class AbstractBrowsableResourceFactory extends AbstractDataResou
       }
     }
 
+    @Override
+    public BrowsableResource cd(String path) {
+
+      BrowsableResource target;
+      ResourceUri resourceUri = new ResourceUriImpl(path);
+      if (resourceUri.getSchemePrefix() == null) {
+        target = super.cd(path);
+      } else {
+        target = createBrowsableResource(resourceUri);
+      }
+      return new BrowsableResourceAdapter(target);
+    }
+
   }
 
 }

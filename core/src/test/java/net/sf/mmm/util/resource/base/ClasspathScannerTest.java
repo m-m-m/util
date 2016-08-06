@@ -4,7 +4,9 @@ package net.sf.mmm.util.resource.base;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.assertj.core.api.Assertions;
 import org.junit.AfterClass;
@@ -12,12 +14,13 @@ import org.junit.Test;
 
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.util.filter.api.Filter;
-import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ClasspathScanner;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
+import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 import net.sf.mmm.util.resource.api.ResourcePathNode;
+import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
 import net.sf.mmm.util.resource.impl.ClasspathScannerImpl;
 
 /**
@@ -51,7 +54,6 @@ public class ClasspathScannerTest extends Assertions {
   protected ClasspathScanner createClasspathScanner() {
 
     ClasspathScannerImpl impl = new ClasspathScannerImpl();
-    impl.setReflectionUtil(ReflectionUtilImpl.getInstance());
     impl.initialize();
     return impl;
   }
@@ -133,8 +135,7 @@ public class ClasspathScannerTest extends Assertions {
     assertThat(packageResource.isData()).isFalse();
     assertThat(packageResource.getPath()).isEqualTo(clazz.getPackage().getName().replace('.', '/'));
     assertThat(packageResource.isAvailable()).isFalse();
-    assertThat(packageResource.getChildResources())
-        .contains(scanner.getClasspathResource(clazz.getName().replace('.', '/') + ".class"));
+    assertThat(packageResource.getChildResources()).contains(scanner.getClasspathResource(clazz.getName().replace('.', '/') + ".class"));
 
   }
 
@@ -150,8 +151,7 @@ public class ClasspathScannerTest extends Assertions {
     assertThat(files).isInstanceOf(List.class);
     List<? extends BrowsableResource> fileList = (List<? extends BrowsableResource>) files;
     assertThat(fileList.size()).isBetween(Integer.valueOf(600), Integer.valueOf(1200));
-    assertThat(fileList).contains(scanner.getClasspathResource(CLASSPATH_HYPHENATION_XML),
-        scanner.getClasspathResource(CLASSPATH_NLS_BUNDLES));
+    assertThat(fileList).contains(scanner.getClasspathResource(CLASSPATH_HYPHENATION_XML), scanner.getClasspathResource(CLASSPATH_NLS_BUNDLES));
   }
 
   /** Test of {@link ClasspathScanner#getClasspathResource()} with navigation to non-existent resource. */
@@ -167,6 +167,83 @@ public class ClasspathScannerTest extends Assertions {
     assertThat(nonExistentResource).isNotNull();
     assertThat(nonExistentResource).isInstanceOf(ClasspathResource.class);
     assertThat(nonExistentResource.getPath()).isEqualTo("net/sf/mmm/util/non-existent/path");
+  }
+
+  /** Test of {@link ClasspathScanner#getClasspathResourceClasses(Filter, Filter)}. */
+  @Test
+  public void testGetClasspathResourceClasses() {
+
+    // given
+    ClasspathScanner scanner = getClasspathScanner();
+    Filter<String> classnameFilter = new Filter<String>() {
+
+      @Override
+      public boolean accept(String value) {
+
+        return value.startsWith(ClasspathScanner.class.getPackage().getName() + ".Resource");
+      }
+    };
+    Filter<Class<?>> classFilter = new Filter<Class<?>>() {
+
+      @Override
+      public boolean accept(Class<?> value) {
+
+        return Exception.class.isAssignableFrom(value);
+      }
+    };
+    // when
+    Iterable<Class<?>> classes = scanner.getClasspathResourceClasses(classnameFilter, classFilter);
+    // then
+    assertThat(classes).containsExactlyInAnyOrder(ResourceNotAvailableException.class, ResourceNotWritableException.class, ResourceUriUndefinedException.class);
+  }
+
+  /** Test of {@link ClasspathScanner#getClasspathResourceFiles(Filter)}. */
+  @Test
+  public void testGetClasspathResourceFiles() {
+
+    // given
+    ClasspathScanner scanner = getClasspathScanner();
+    final Class<?>[] classes = new Class<?>[] { ClasspathScannerTest.class, ClasspathResourceTest.class };
+    final Set<String> classNames = new HashSet<>(classes.length);
+    for (Class<?> type : classes) {
+      classNames.add(type.getName().replace('.', '/') + ".class");
+    }
+    Filter<BrowsableResource> filter = new Filter<BrowsableResource>() {
+
+      @Override
+      public boolean accept(BrowsableResource value) {
+
+        return classNames.contains(value.getPath());
+      }
+    };
+    // when
+    Iterable<? extends BrowsableResource> files = scanner.getClasspathResourceFiles(filter);
+    // then
+    Set<Class<?>> classSet = new HashSet<>(classes.length);
+    for (BrowsableResource resource : files) {
+      assertThat(resource.isData()).isTrue();
+      classSet.add(scanner.loadClass(resource));
+    }
+    assertThat(classSet).containsExactlyInAnyOrder(classes);
+  }
+
+  /** Test of {@link ClasspathScanner#getQualifiedName(DataResource)}. */
+  @Test
+  public void testGetQualifiedName() {
+
+    // given
+    ClasspathScanner scanner = getClasspathScanner();
+    Class<ClasspathScanner> javaClass = ClasspathScanner.class;
+    String packageName = javaClass.getPackage().getName();
+    String qualifiedName = javaClass.getName();
+    // when
+    BrowsableResource packageResource = scanner.getClasspathResource(packageName.replace('.', '/'));
+    DataResource classResource = scanner.getClasspathResource(qualifiedName.replace('.', '/') + ".class");
+    BrowsableResource fileResource = scanner.getClasspathResource(CLASSPATH_HYPHENATION_XML);
+    // then
+    assertThat(scanner.getQualifiedName(packageResource)).isEqualTo(packageName);
+    assertThat(scanner.getQualifiedName(classResource)).isEqualTo(qualifiedName);
+    assertThat(scanner.getQualifiedName(fileResource)).isNull();
   }
 
   /**

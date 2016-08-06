@@ -13,7 +13,6 @@ import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConjunctionCharFilter;
-import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.lang.api.Conjunction;
@@ -35,7 +34,7 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * <th>Example result</th>
  * </tr>
  * <tr>
- * <td>{deleteCount} {deleteCount,choice,(?==1)['files'](else)['file']} deleted.</td>
+ * <td>{deleteCount} {deleteCount,choice,(?==1)'files'(else)'file'} deleted.</td>
  * <td>1 file deleted.</td>
  * </tr>
  * <tr>
@@ -43,6 +42,10 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * <td>23:59:59</td>
  * </tr>
  * </table>
+ * <b>Note:</b><br>
+ * Literal text in choice format has to be enclosed by single (') or double (") quotes. If you need to use such quote
+ * inside the text either use a different enclosing quote or use a duplicated quote sign to escape the quote. As a
+ * single quote is often used in languages such as French or Spanish it is better to escape with double quotes.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -74,7 +77,7 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   public static final String CONDITION_ELSE = "else";
 
   /** The {@link Filter} for {@link #CONDITION_ELSE}. */
-  private static final Filter<Object> FILTER_ELSE = ConstantFilter.getInstance(true);
+  private static final Filter<Object> FILTER_ELSE = new Condition(null, null);
 
   /**
    * The {@link CharFilter} for the {@link CompareOperator#getValue() comparator symbol} .
@@ -155,17 +158,6 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
         break;
       }
     }
-    // char c = scanner.forceNext();
-    // if (c == NlsArgumentParser.START_EXPRESSION) {
-    // NlsArgument argument = this.nlsDependencies.getArgumentParser().parse(scanner);
-    // choice = new Choice(condition, null, argument);
-    // } else if ((c == '"') || (c == '\'')) {
-    // String result = scanner.readUntil(c, false, c);
-    // choice = new Choice(condition, result, null);
-    // } else {
-    // throw new NlsParseException(scanner.substring(index, scanner.getCurrentIndex()), "({...}|'.*'])",
-    // NlsArgument.class);
-    // }
     return new Choice(condition, segments);
   }
 
@@ -269,9 +261,29 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
   }
 
   /**
+   * @return the {@link List} of {@link Choice}s. Do not modify.
+   */
+  public List<Choice> getChoices() {
+
+    return this.choices;
+  }
+
+  @Override
+  public String toString() {
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(NlsFormatterManager.TYPE_CHOICE);
+    sb.append(",");
+    for (Choice choice : this.choices) {
+      sb.append(choice);
+    }
+    return sb.toString();
+  }
+
+  /**
    * This inner class represents a single choice.
    */
-  private static final class Choice {
+  public static final class Choice {
 
     /** The condition that determines when the choice applies. */
     private final Filter<Object> condition;
@@ -291,12 +303,52 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
       this.condition = condition;
       this.segments = segments;
     }
+
+    /**
+     * @return the condition that {@link Filter#accept(Object) determines} if this {@link Choice} shall match.
+     */
+    public Filter<Object> getCondition() {
+
+      return this.condition;
+    }
+
+    /**
+     * @return {@code true} if {@link #getCondition() coniditon} is '(else)', {@code false} otherwise.
+     */
+    public boolean isElse() {
+
+      return (this.condition == FILTER_ELSE);
+    }
+
+    /**
+     * @return the {@link List} of {@link Segment}s. Do not modify this {@link List}.
+     */
+    public List<Segment> getSegments() {
+
+      return this.segments;
+    }
+
+    @Override
+    public String toString() {
+
+      StringBuilder buffer = new StringBuilder();
+      buffer.append(this.condition);
+      for (Segment segment : this.segments) {
+        buffer.append('\'');
+        buffer.append(segment.literal.replace("'", "''"));
+        buffer.append('\'');
+        if (segment.argument != null) {
+          buffer.append(segment.argument);
+        }
+      }
+      return buffer.toString();
+    }
   }
 
   /**
    * This inner class represents a single segment of a {@link Choice}.
    */
-  private static class Segment {
+  public static class Segment {
 
     /** The literal result. */
     private final String literal;
@@ -321,6 +373,22 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
         this.literal = literal;
       }
       this.argument = argument;
+    }
+
+    /**
+     * @return the literal (static text).
+     */
+    public String getLiteral() {
+
+      return this.literal;
+    }
+
+    /**
+     * @return the {@link NlsArgument} (dynamic parameter).
+     */
+    public NlsArgument getArgument() {
+
+      return this.argument;
     }
 
   }
@@ -356,6 +424,20 @@ public final class NlsFormatterChoice extends AbstractNlsFormatterPlugin<Object>
         return true;
       }
       return this.comparator.eval(value, this.comparatorArgument);
+    }
+
+    @Override
+    public String toString() {
+
+      if (this.comparator == null) {
+        return "(else)";
+      }
+      StringBuilder buffer = new StringBuilder();
+      buffer.append("(?");
+      buffer.append(this.comparator.getValue());
+      buffer.append(this.comparatorArgument);
+      buffer.append(")");
+      return buffer.toString();
     }
   }
 

@@ -2,9 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
+import java.util.Locale;
 import java.util.ResourceBundle;
+
+import javax.inject.Named;
 
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
@@ -62,10 +66,9 @@ public class NlsBundleHelper extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the {@link NlsBundleKey key} of an {@link NlsBundle}-method.
-   *
-   * @param method is the Method to check.
-   * @return the requested key.
+   * @param method is the {@link Method} of a {@link NlsBundle}.
+   * @return the {@link NlsBundleKey#value() key} of the {@link Method} (defaults to {@link Method#getName()} if not
+   *         annotated with {@link NlsBundleKey}).
    */
   public String getKey(Method method) {
 
@@ -80,9 +83,18 @@ public class NlsBundleHelper extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the {@link NlsBundleMessage message} of an {@link NlsBundle}-method.
-   *
-   * @param method is the {@link Method} of a {@link NlsBundle}.
+   * @param qualifiedBundleName the {@link Class#getName() qualified name} of the {@link ResourceBundle} to load.
+   * @param locale the {@link Locale} to translate to.
+   * @return the requested {@link ResourceBundle}.
+   */
+  public ResourceBundle getResourceBundle(String qualifiedBundleName, Locale locale) {
+
+    return ResourceBundle.getBundle(qualifiedBundleName, locale,
+        ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
+  }
+
+  /**
+   * @param method the {@link NlsBundle} {@link Method}.
    * @return the {@link NlsBundleMessage#value() bundle message} or {@code null} if not present.
    * @since 4.0.0
    */
@@ -93,6 +105,48 @@ public class NlsBundleHelper extends AbstractLoggableObject {
       return messageAnnotation.value();
     }
     return null;
+  }
+
+  /**
+   * @param method the {@link NlsBundle} {@link Method}.
+   * @return the {@link NlsMessageDescriptor} for the given {@link Method}.
+   */
+  public NlsMessageDescriptor getDescriptor(Method method) {
+
+    return new NlsMessageDescriptor(method);
+  }
+
+  /**
+   *
+   * @param method is the {@link Method} of a {@link NlsBundle}.
+   * @return an array of {@link NlsArgumentDescriptor}s describing the method parameters.
+   * @since 7.3.0
+   */
+  public NlsArgumentDescriptor[] getArguments(Method method) {
+
+    Class<?>[] parameterTypes = method.getParameterTypes();
+    if (parameterTypes.length == 0) {
+      return NlsArgumentDescriptor.EMPTY_ARRAY;
+    }
+    Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+    NlsArgumentDescriptor[] arguments = new NlsArgumentDescriptor[parameterTypes.length];
+    for (int i = 0; i < parameterTypes.length; i++) {
+      String name = getName(parameterAnnotations[i], i);
+      NlsArgumentDescriptor arg = new NlsArgumentDescriptor(name, parameterTypes[i], i);
+      arguments[i] = arg;
+    }
+    return arguments;
+  }
+
+  private String getName(Annotation[] annotations, int i) {
+
+    for (Annotation currentAnnotation : annotations) {
+      if (currentAnnotation instanceof Named) {
+        Named namedAnnotation = (Named) currentAnnotation;
+        return namedAnnotation.value();
+      }
+    }
+    return Integer.toString(i);
   }
 
   /**

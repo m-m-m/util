@@ -10,7 +10,9 @@ import net.sf.mmm.util.nls.api.NlsResourceBundle;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated replaced with simple Map<String, NlsTemplate> in {@link DefaultNlsTemplateResolver}
  */
+@Deprecated
 public interface NlsReversedResourceBundle extends NlsResourceBundle {
 
   /**

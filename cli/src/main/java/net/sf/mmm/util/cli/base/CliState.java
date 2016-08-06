@@ -104,7 +104,7 @@ public class CliState extends CliClassContainer {
     ValidatorBuilder builder;
     try {
       builder = new net.sf.mmm.util.validation.base.ValidatorBuilderJsr303();
-    } catch (RuntimeException e) {
+    } catch (Throwable e) {
       getLogger().error("Failed to setup javax.validation - validation disabled", e);
       builder = new ValidatorBuilderNone();
     }

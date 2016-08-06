@@ -21,7 +21,7 @@ import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
-import net.sf.mmm.util.nls.base.ResourceBundleControlUtf8WithNlsBundleSupport;
+import net.sf.mmm.util.nls.base.NlsBundleHelper;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -91,55 +91,76 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
   protected void doInitialize() {
 
     super.doInitialize();
-    Logger logger = getLogger();
-    if (this.nlsBundles == null) {
-      this.nlsBundles = new ArrayList<>();
-      if (this.reflectionUtil == null) {
-        this.reflectionUtil = ReflectionUtilImpl.getInstance();
-      }
-      Set<DataResource> bundleResources = this.reflectionUtil.findResources(NlsTemplateResolver.CLASSPATH_NLS_BUNDLE);
-      for (DataResource dataResource : bundleResources) {
-        if (logger.isTraceEnabled()) {
-          logger.trace("Loading " + dataResource.getUri());
-        }
-        try (InputStream inStream = dataResource.openStream();
-            InputStreamReader isr = new InputStreamReader(inStream);
-            BufferedReader reader = new BufferedReader(isr)) {
-          boolean noEntryInBundleResource = true;
-          String line = reader.readLine();
-          while (line != null) {
-            line = line.trim();
-            if (line.length() > 0) {
-              if (logger.isTraceEnabled()) {
-                logger.trace("Loading resource bundle " + line);
-              }
-              noEntryInBundleResource = false;
-              try {
-                ResourceBundle bundleInstance = ResourceBundle.getBundle(line, AbstractNlsMessage.LOCALE_ROOT,
-                    ResourceBundleControlUtf8WithNlsBundleSupport.INSTANCE);
-                this.nlsBundles.add(bundleInstance);
-              } catch (Exception e) {
-                logger.error(
-                    "Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line + "' is invalid!", e);
-              }
-            }
-            line = reader.readLine();
-          }
-          if (noEntryInBundleResource) {
-            logger.error("Illegal bundle declaration " + dataResource.getUri() + ": no entry!");
-          }
-        } catch (IOException e) {
-          throw new RuntimeIoException(e, IoMode.READ);
-        }
-      }
-      this.nlsBundles = Collections.unmodifiableList(this.nlsBundles);
+    if (this.reflectionUtil == null) {
+      this.reflectionUtil = ReflectionUtilImpl.getInstance();
     }
   }
 
   @Override
   public List<ResourceBundle> findBundles() {
 
+    if (this.nlsBundles == null) {
+      synchronized (this) {
+        if (this.nlsBundles == null) {
+          if (this.nlsBundles == null) {
+            this.nlsBundles = Collections.unmodifiableList(loadNlsBundles());
+          }
+        }
+      }
+    }
     return this.nlsBundles;
+  }
+
+  private List<ResourceBundle> loadNlsBundles() {
+
+    Logger logger = getLogger();
+    List<ResourceBundle> bundles = new ArrayList<>();
+    Set<DataResource> bundleResources = this.reflectionUtil
+        .findResources(NlsTemplateResolver.CLASSPATH_NLS_BUNDLE);
+    for (DataResource dataResource : bundleResources) {
+      if (logger.isTraceEnabled()) {
+        logger.trace("Loading " + dataResource.getUri());
+      }
+      try (InputStream inStream = dataResource.openStream();
+          InputStreamReader isr = new InputStreamReader(inStream);
+          BufferedReader reader = new BufferedReader(isr)) {
+        boolean noEntryInBundleResource = true;
+        String line = reader.readLine();
+        while (line != null) {
+          line = line.trim();
+          if (line.length() > 0) {
+            ResourceBundle bundleInstance = loadNlsBundle(logger, dataResource, line);
+            if (bundleInstance != null) {
+              bundles.add(bundleInstance);
+              noEntryInBundleResource = false;
+            }
+          }
+          line = reader.readLine();
+        }
+        if (noEntryInBundleResource) {
+          logger.error("Illegal bundle declaration " + dataResource.getUri() + ": no entry!");
+        }
+      } catch (IOException e) {
+        throw new RuntimeIoException(e, IoMode.READ);
+      }
+    }
+    return bundles;
+  }
+
+  private ResourceBundle loadNlsBundle(Logger logger, DataResource dataResource, String line) {
+
+    if (logger.isTraceEnabled()) {
+      logger.trace("Loading resource bundle " + line);
+    }
+    try {
+      ResourceBundle bundleInstance = NlsBundleHelper.getInstance().getResourceBundle(line,
+          AbstractNlsMessage.LOCALE_ROOT);
+      return bundleInstance;
+    } catch (Exception e) {
+      logger.error("Illegal bundle declaration " + dataResource.getUri() + ": Class '" + line + "' is invalid!",
+          e);
+    }
+    return null;
   }
 
 }

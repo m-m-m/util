@@ -19,7 +19,9 @@ import net.sf.mmm.util.nls.api.NlsTemplate;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated use {@link DefaultNlsTemplateResolver} instead.
  */
+@Deprecated
 public class NlsTemplateResolverImpl extends AbstractResourceBundleNlsTemplateResolver {
 
   /** the original bundles */

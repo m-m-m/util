@@ -9,7 +9,7 @@
  * helpful types in this package. <br>
  * E.g. representation of date and time there is a common standard with ISO 8601. Therefore
  * {@link net.sf.mmm.util.date.api.Iso8601Util} comes with support to format and parse date and time according to this
- * standard in a stateless and thread-safe way. Further for for simplifying performance measurement there is
+ * standard in a stateless and thread-safe way. Further for simplifying performance measurement there is
  * {@link net.sf.mmm.util.date.api.TimeMeasure} that makes your life easier.
  */
 package net.sf.mmm.util.date.api;

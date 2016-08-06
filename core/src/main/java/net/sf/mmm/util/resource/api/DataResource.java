@@ -126,13 +126,16 @@ public interface DataResource {
    * a {@link BrowsableResource#isFolder() folder}. Due to this generic API this is the only consistent way as there are
    * implementations that can not easily know if they represent a {@link BrowsableResource#isFolder() folder} or a
    * {@link BrowsableResource#isData() file} or maybe even both at the same time. However, please be aware of this and
-   * do not get confused as you might expect this to be a {@code cd} command if invoked on a
-   * {@link BrowsableResource#isFolder() folder} what is not exactly not the case (instead it is a {@code cd} on the
-   * parent folder).
+   * do not get confused as you might expect this to be a {@link BrowsableResource#cd(String) cd} command if invoked on
+   * a {@link BrowsableResource#isFolder() folder} what is not exactly not the case (instead it is a
+   * {@link BrowsableResource#cd(String) cd} on the parent folder). On a {@link BrowsableResource} you can use
+   * {@link BrowsableResource#cd(String)} instead to avoid confusion.
    *
-   * @param resourcePath is the absolute or relative path pointing to a new resource. If it is a relative path, it is
+   * @see BrowsableResource#cd(String)
+   *
+   * @param resourcePath the absolute or relative path pointing to a new resource. If it is a relative path, it is
    *        interpreted relative to the parent URI (directory) of this resource.
-   * @return is the resource pointing to the given path (relative to this resource).
+   * @return the resource pointing to the given path (relative to this resource).
    * @throws ResourceUriUndefinedException if the given {@code resourcePath} leads to an undefined or illegal URI.
    */
   DataResource navigate(String resourcePath) throws ResourceUriUndefinedException;

@@ -324,7 +324,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     while (this.pos < this.endIndex) {
       char c = this.chars[this.pos++];
       if (c == escape) {
-        result.append(this.chars, start, this.pos - start - 1);
+        appendFromStartToPos(result, start, true);
         // lookahead
         if (this.pos < this.endIndex) {
           c = this.chars[this.pos];
@@ -338,15 +338,26 @@ public class CharSequenceScanner implements CharStreamScanner {
           }
         }
       } else if (c == stop) {
-        result.append(this.chars, start, this.pos - start - 1);
+        appendFromStartToPos(result, start, true);
         return result.toString();
       }
     }
     if (acceptEof) {
-      result.append(this.chars, start, this.pos - start - 1);
+      appendFromStartToPos(result, start, false);
       return result.toString();
     } else {
       return null;
+    }
+  }
+
+  private void appendFromStartToPos(StringBuilder result, int start, boolean omitLast) {
+
+    int len = this.pos - start;
+    if (omitLast) {
+      len--;
+    }
+    if (len > 0) {
+      result.append(this.chars, start, len);
     }
   }
 
@@ -447,10 +458,7 @@ public class CharSequenceScanner implements CharStreamScanner {
         }
       }
       if (append) {
-        int len = this.pos - index - 1;
-        if (len > 0) {
-          result.append(this.chars, index, len);
-        }
+        appendFromStartToPos(result, index, true);
         if (done) {
           return result.toString();
         }
