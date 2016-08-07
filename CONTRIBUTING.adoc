@@ -1,0 +1,7 @@
+= Contributing
+
+This project is very happy to receive your contribution. 
+
+However, please study our https://github.com/m-m-m/mmm/wiki/Contributing[contribution guidelines] before you get started.
+
+Thank you so much!
