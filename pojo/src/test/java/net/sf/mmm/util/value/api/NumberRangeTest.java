@@ -27,4 +27,25 @@ public class NumberRangeTest extends Assertions {
     assertThat(range.isContained(max + 1L)).isFalse();
   }
 
+  @Test
+  public void testBuilder() {
+
+    NumberRange range = new NumberRange();
+    assertThat(range.getMinimumValue()).isNull();
+    assertThat(range.getMaximumValue()).isNull();
+    assertThat(range.withMin(null)).isSameAs(range);
+    assertThat(range.withMax(null)).isSameAs(range);
+    Double min = Double.valueOf(-5.8);
+    NumberRange rangeWithMin = range.withMin(min);
+    assertThat(rangeWithMin).isNotSameAs(range).isNotNull();
+    assertThat(rangeWithMin.getMin()).isSameAs(min);
+    Long max = Long.valueOf(42000);
+    NumberRange rangeWithMinAndMax = rangeWithMin.withMax(max);
+    assertThat(rangeWithMinAndMax).isNotSameAs(rangeWithMin).isNotSameAs(range).isNotNull();
+    assertThat(rangeWithMinAndMax.getMin()).isSameAs(min);
+    assertThat(rangeWithMinAndMax.getMax()).isSameAs(max);
+    Integer min2 = Integer.valueOf(-42);
+    NumberRange rangeWithMin2AndMax = rangeWithMinAndMax.withMin(min2);
+    assertThat(rangeWithMin2AndMax).isNotSameAs(rangeWithMinAndMax).isNotSameAs(rangeWithMin).isNotSameAs(range).isNotNull();
+  }
 }

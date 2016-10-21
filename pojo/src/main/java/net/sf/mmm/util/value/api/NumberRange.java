@@ -3,6 +3,7 @@
 package net.sf.mmm.util.value.api;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import net.sf.mmm.util.lang.base.NumberComparator;
 
@@ -14,7 +15,6 @@ import net.sf.mmm.util.lang.base.NumberComparator;
  */
 public class NumberRange extends Range<Number> {
 
-  /** TODO: javadoc. */
   private static final long serialVersionUID = 1L;
 
   /**
@@ -38,6 +38,24 @@ public class NumberRange extends Range<Number> {
   protected Comparator<? super Number> getComparator() {
 
     return NumberComparator.getInstance();
+  }
+
+  @Override
+  public NumberRange withMin(Number minimum) {
+
+    if (Objects.equals(getMin(), minimum)) {
+      return this;
+    }
+    return new NumberRange(minimum, getMax());
+  }
+
+  @Override
+  public NumberRange withMax(Number maximum) {
+
+    if (Objects.equals(getMax(), maximum)) {
+      return this;
+    }
+    return new NumberRange(getMin(), maximum);
   }
 
 }

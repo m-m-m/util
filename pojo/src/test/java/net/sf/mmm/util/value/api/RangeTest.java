@@ -3,6 +3,7 @@
 package net.sf.mmm.util.value.api;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -45,4 +46,25 @@ public class RangeTest extends Assertions {
     assertThat(range.isContained(max.plusDays(1))).isFalse();
   }
 
+  @Test
+  public void testBuilder() {
+
+    Range<LocalDateTime> range = new Range<LocalDateTime>();
+    assertThat(range.getMinimumValue()).isNull();
+    assertThat(range.getMaximumValue()).isNull();
+    assertThat(range.withMin(null)).isSameAs(range);
+    assertThat(range.withMax(null)).isSameAs(range);
+    LocalDateTime min = LocalDateTime.of(1999, 12, 31, 23, 59);
+    Range<LocalDateTime> rangeWithMin = range.withMin(min);
+    assertThat(rangeWithMin).isNotSameAs(range).isNotNull();
+    assertThat(rangeWithMin.getMin()).isSameAs(min);
+    LocalDateTime max = LocalDateTime.of(2000, 1, 1, 00, 00);
+    Range<LocalDateTime> rangeWithMinAndMax = rangeWithMin.withMax(max);
+    assertThat(rangeWithMinAndMax).isNotSameAs(rangeWithMin).isNotSameAs(range).isNotNull();
+    assertThat(rangeWithMinAndMax.getMin()).isSameAs(min);
+    assertThat(rangeWithMinAndMax.getMax()).isSameAs(max);
+    LocalDateTime min2 = LocalDateTime.of(1998, 12, 31, 23, 59);
+    Range<LocalDateTime> rangeWithMin2AndMax = rangeWithMinAndMax.withMin(min2);
+    assertThat(rangeWithMin2AndMax).isNotSameAs(rangeWithMinAndMax).isNotSameAs(rangeWithMin).isNotSameAs(range).isNotNull();
+  }
 }
