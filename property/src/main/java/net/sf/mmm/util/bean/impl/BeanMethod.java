@@ -5,6 +5,8 @@ package net.sf.mmm.util.bean.impl;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import javax.inject.Inject;
+
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.WritableProperty;
 
@@ -69,8 +71,10 @@ public class BeanMethod {
       } else if (name.equals("getClass")) {
         // ignore getClass()
       } else if (Character.isUpperCase(first)) {
-        mType = BeanMethodType.PROPERTY;
-        pName = name;
+        if ((!defaultMethod) || (method.isAnnotationPresent(Inject.class))) {
+          mType = BeanMethodType.PROPERTY;
+          pName = name;
+        }
       } else if (name.equals(NAME_HASH_CODE)) {
         mType = BeanMethodType.HASH_CODE;
       } else if (name.equals(NAME_TO_STRING)) {
@@ -92,8 +96,7 @@ public class BeanMethod {
       if (pName != null) {
         mType = BeanMethodType.SET;
         pType = method.getGenericParameterTypes()[0];
-      } else if (name.equals(NAME_IS_EQUAL_TO) && defaultMethod
-          && Bean.class.isAssignableFrom(parameterTypes[0])) {
+      } else if (name.equals(NAME_IS_EQUAL_TO) && defaultMethod && Bean.class.isAssignableFrom(parameterTypes[0])) {
         mType = BeanMethodType.CUSTOM_EQUALS;
       } else if (name.equals(NAME_EQUALS) && (parameterTypes[0] == Object.class)) {
         mType = BeanMethodType.EQUALS;
@@ -162,6 +165,12 @@ public class BeanMethod {
   public Type getPropertyType() {
 
     return this.propertyType;
+  }
+
+  @Override
+  public String toString() {
+
+    return this.method.getDeclaringClass().getSimpleName() + "." + this.method.getName();
   }
 
 }
