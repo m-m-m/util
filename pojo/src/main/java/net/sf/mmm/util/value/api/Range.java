@@ -196,6 +196,34 @@ public class Range<V> implements Serializable, AttributeReadMinimumValue<V>, Att
   }
 
   @Override
+  public final boolean equals(Object obj) {
+
+    if (obj == this) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (!(obj instanceof Range)) {
+      return false;
+    }
+    Range<?> other = (Range<?>) obj;
+    if (!Objects.equals(this.min, other.min)) {
+      return false;
+    }
+    if (!Objects.equals(this.max, other.max)) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public final int hashCode() {
+
+    return Objects.hash(this.min, this.max);
+  }
+
+  @Override
   public String toString() {
 
     StringBuilder buffer = new StringBuilder();
