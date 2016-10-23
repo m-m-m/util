@@ -9,6 +9,8 @@ import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.mapping.Collection;
+
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -159,6 +161,18 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
     return true;
   }
 
+  @Override
+  public boolean isMap() {
+
+    return (getKeyType() != null);
+  }
+
+  @Override
+  public boolean isCollection() {
+
+    return ((getComponentType() != null) && (Collection.class.isAssignableFrom(getAssignmentClass())));
+  }
+
   /**
    * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and collects the
    * generic {@link Class#getGenericSuperclass() super-classes} or {@link Class#getGenericInterfaces() super-interfaces}
@@ -259,8 +273,7 @@ public abstract class AbstractGenericType<T> implements GenericType<T> {
    *         was {@link TypeVariable#getGenericDeclaration() declared} in a {@link Class} that is NOT
    *         {@link Class#isAssignableFrom(Class) assignable from} the given {@code declaringType}) .
    */
-  private Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType,
-      Class<?> declaringClass) {
+  private Type resolveTypeVariable(TypeVariable<?> typeVariable, GenericType<?> declaringType, Class<?> declaringClass) {
 
     List<Type> hierarchy = getGenericDeclarations(declaringClass, declaringType.getRetrievalClass());
     if (hierarchy != null) {

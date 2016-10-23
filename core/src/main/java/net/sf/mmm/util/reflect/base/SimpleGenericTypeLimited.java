@@ -164,6 +164,18 @@ public class SimpleGenericTypeLimited<T> implements GenericType<T> {
   }
 
   @Override
+  public boolean isMap() {
+
+    return (this.keyType != null);
+  }
+
+  @Override
+  public boolean isCollection() {
+
+    return ((this.componentType != null) && (!this.type.isArray()));
+  }
+
+  @Override
   public int hashCode() {
 
     return ~this.type.hashCode();

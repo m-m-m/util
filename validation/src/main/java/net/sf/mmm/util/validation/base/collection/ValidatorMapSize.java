@@ -5,6 +5,7 @@ package net.sf.mmm.util.validation.base.collection;
 import java.util.Map;
 
 import net.sf.mmm.util.validation.base.AbstractValidatorRange;
+import net.sf.mmm.util.value.api.NumberRange;
 import net.sf.mmm.util.value.api.Range;
 
 /**
@@ -14,14 +15,14 @@ import net.sf.mmm.util.value.api.Range;
  * @author hohwille
  * @since 7.1.0
  */
-public class ValidatorMapSize extends AbstractValidatorRange<Map<?, ?>, Integer> {
+public class ValidatorMapSize extends AbstractValidatorRange<Map<?, ?>, Number> {
 
   /**
    * The constructor.
    *
    * @param range is the {@link Range} the value has to be {@link Range#isContained(Object) contained in}.
    */
-  public ValidatorMapSize(Range<Integer> range) {
+  public ValidatorMapSize(Range<Number> range) {
     super(range);
   }
 
@@ -32,7 +33,7 @@ public class ValidatorMapSize extends AbstractValidatorRange<Map<?, ?>, Integer>
    * @param maxLength the {@link Range#getMax() maximum} {@link Map#size() size} allowed for the {@link Map} values.
    */
   public ValidatorMapSize(int maxLength) {
-    this(new Range<>(null, Integer.valueOf(maxLength)));
+    this(new NumberRange(null, Integer.valueOf(maxLength)));
   }
 
   @Override
