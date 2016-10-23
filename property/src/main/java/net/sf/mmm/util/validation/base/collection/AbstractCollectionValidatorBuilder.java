@@ -43,7 +43,7 @@ public abstract class AbstractCollectionValidatorBuilder<E, V extends Collection
    * @param range the {@link Range} to limit the {@link Collection#size() size} of the {@link Collection}.
    * @return this build instance for fluent API calls.
    */
-  public SELF size(Range<Integer> range) {
+  public SELF size(Range<Number> range) {
 
     return add(new ValidatorCollectionSize(range));
   }
@@ -86,8 +86,7 @@ public abstract class AbstractCollectionValidatorBuilder<E, V extends Collection
    *        method on the supplied {@link ObjectValidatorBuilderFactory} with the given dummy element.
    * @return the new sub-builder.
    */
-  public <SUB extends ObjectValidatorBuilder<E, ? extends SELF, ?>> SUB with(
-      BiFunction<ObjectValidatorBuilderFactory<SELF>, E, SUB> factory) {
+  public <SUB extends ObjectValidatorBuilder<E, ? extends SELF, ?>> SUB with(BiFunction<ObjectValidatorBuilderFactory<SELF>, E, SUB> factory) {
 
     if (this.subBuilder != null) {
       throw new IllegalStateException("subBuilder already exists!");
