@@ -18,11 +18,15 @@ import net.sf.mmm.util.json.api.JsonUtil;
  */
 public class JsonUtilTest extends Assertions {
 
+  /**
+   * @return the {@link JsonUtil} to test.
+   */
   protected JsonUtil getJsonUtil() {
 
     return JsonUtilImpl.getInstance();
   }
 
+  /** Test of basic functionality */
   @Test
   public void testTrivials() {
 
