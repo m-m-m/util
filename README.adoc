@@ -6,7 +6,8 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 == mmm-util
 
-image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/util"]
+master: image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/util"]
+7.x: image:https://travis-ci.org/m-m-m/util.svg?branch=7.x["build-status",link="https://travis-ci.org/m-m-m/util"]
 
 The `mmm-util` project is part of is part of link:../../..#mmm[mmm] and brings generic utilities that make your life easier:
 
