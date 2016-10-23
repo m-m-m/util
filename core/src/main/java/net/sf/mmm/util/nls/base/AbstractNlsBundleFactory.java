@@ -165,8 +165,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   }
 
   /**
-   * This method gets the {@link NlsBundleOptions} for the given {@code bundleInterface}. If NOT present a default
-   * instance is returned.
+   * This method gets the {@link NlsBundleOptions} for the given {@code bundleInterface}. If NOT present a
+   * default instance is returned.
    *
    * @param bundleInterface is the {@link Class} reflecting the {@link NlsBundle} interface.
    * @return the annotated {@link NlsBundleOptions} or the default if {@code bundleInterface} is NOT annotated
@@ -195,8 +195,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   }
 
   /**
-   * @return a {@link Collection} of {@link NlsBundleDescriptor}s for all {@link NlsBundle}-interfaces on the classpath
-   *         following the suggested naming convention {@code NlsBundle*Root}.
+   * @return a {@link Collection} of {@link NlsBundleDescriptor}s for all {@link NlsBundle}-interfaces on the
+   *         classpath following the suggested naming convention {@code NlsBundle*Root}.
    */
   public Collection<? extends NlsBundleDescriptor> getNlsBundleDescriptors() {
 
@@ -224,18 +224,17 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
       }
     };
     Filter<Class<?>> classFilter = new Filter<Class<?>>() {
+
       @Override
       public boolean accept(Class<?> javaClass) {
 
         return NlsBundle.class.isAssignableFrom(javaClass);
       }
     };
-    Iterable<Class<? extends NlsBundle>> classes = (Iterable) this.classpathScanner
-        .getClasspathResourceClasses(classnameFilter, classFilter);
+    Iterable<Class<? extends NlsBundle>> classes = (Iterable) this.classpathScanner.getClasspathResourceClasses(classnameFilter, classFilter);
     for (Class<? extends NlsBundle> bundleInterface : classes) {
       NlsBundle bundle = createBundle(bundleInterface);
-      NlsBundleInvocationHandler invocationHandler = (NlsBundleInvocationHandler) Proxy
-          .getInvocationHandler(bundle);
+      NlsBundleInvocationHandler invocationHandler = (NlsBundleInvocationHandler) Proxy.getInvocationHandler(bundle);
       invocationHandler.populate();
       descriptors.add(invocationHandler);
     }
@@ -280,8 +279,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
      * @param bundleName is the qualified name of the {@link java.util.ResourceBundle}.
      * @param options are the {@link NlsBundleOptions}.
      */
-    public NlsBundleInvocationHandler(Class<? extends NlsBundle> bundleInterface, String bundleName,
-        NlsBundleOptions options) {
+    public NlsBundleInvocationHandler(Class<? extends NlsBundle> bundleInterface, String bundleName, NlsBundleOptions options) {
 
       super();
       this.bundleInterface = bundleInterface;
@@ -291,16 +289,15 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * This method converts the given {@code arguments} to a {@link Map} with the {@link NlsMessage#getArgument(String)
-     * arguments}.
+     * This method converts the given {@code arguments} to a {@link Map} with the
+     * {@link NlsMessage#getArgument(String) arguments}.
      *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @param methodInfo is the {@link NlsBundleMethodInfo} for the given {@link Method}.
      * @param arguments are the arguments for the call of the {@link Method}.
      * @return the {@link Map} with the {@link NlsMessage#getArgument(String) arguments}.
      */
-    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo,
-        Object[] arguments) {
+    protected Map<String, Object> createArgumentMap(Method method, NlsBundleMethodInfo methodInfo, Object[] arguments) {
 
       Map<String, Object> map = new HashMap<>();
       String[] argumentNames = methodInfo.argumentNames;
@@ -314,7 +311,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given {@link Method}.
+     * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given
+     * {@link Method}.
      *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @return an array with the {@link NlsMessage#getArgument(String) argument-names}.
@@ -384,8 +382,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     @SuppressWarnings("null") // Eclipse is a little stupid...
-    private Object handleObjectMethod(Object proxy, Method method, Object[] args)
-        throws IllegalAccessException, InvocationTargetException {
+    private Object handleObjectMethod(Object proxy, Method method, Object[] args) throws IllegalAccessException, InvocationTargetException {
 
       int len;
       if (args == null) {
@@ -404,18 +401,18 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * Gets {@link NlsBundleMethodInfo} for {@code methodName} from cache or creates it and puts it into the cache.
+     * Gets {@link NlsBundleMethodInfo} for {@code methodName} from cache or creates it and puts it into the
+     * cache.
      *
      * @param method is the {@link Method} or {@code null} for generic invocation (lookup).
      * @param args are the method arguments or {@code null} for generic invocation (lookup).
      * @param methodName is the {@link Method#getName() name} of the {@link Method}.
-     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by {@code methodName} if
-     *        not given.
+     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by
+     *        {@code methodName} if not given.
      * @return the {@link NlsBundleMethodInfo}. May be {@code null} for generic invocation if method for
      *         {@code methodName} was not found (does not exist).
      */
-    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName,
-        Object proxy) {
+    private NlsBundleMethodInfo getOrCreateMethodInfo(Method method, Object[] args, String methodName, Object proxy) {
 
       NlsBundleMethodInfo methodInfo;
       // #151: when switching to Java8: change get to computeIfAbsence

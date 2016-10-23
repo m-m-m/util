@@ -18,9 +18,9 @@ import javax.xml.stream.events.XMLEvent;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.exception.api.ValueException;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.value.api.StringValueConverter;
-import net.sf.mmm.util.value.api.ValueException;
 import net.sf.mmm.util.value.base.StringValueConverterImpl;
 import net.sf.mmm.util.xml.api.StaxUtil;
 import net.sf.mmm.util.xml.api.XmlException;
@@ -199,8 +199,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   }
 
   @Override
-  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type)
-      throws ValueException {
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     String valueSource = xmlReader.getLocalName() + "/@" + localAttributeName;
@@ -208,8 +207,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   }
 
   @Override
-  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type,
-      V defaultValue) throws ValueException {
+  public <V> V parseAttribute(XMLStreamReader xmlReader, String namespaceUri, String localAttributeName, Class<V> type, V defaultValue) throws ValueException {
 
     String value = xmlReader.getAttributeValue(namespaceUri, localAttributeName);
     return getValueConverter().convertValue(value, localAttributeName, type, type, defaultValue);
