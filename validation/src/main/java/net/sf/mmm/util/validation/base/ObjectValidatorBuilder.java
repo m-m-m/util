@@ -18,7 +18,7 @@ import net.sf.mmm.util.lang.api.Builder;
  * @since 7.1.0
  */
 public abstract class ObjectValidatorBuilder<V, PARENT, SELF extends ObjectValidatorBuilder<V, PARENT, SELF>>
-    implements Builder<AbstractValidator<? super V>> {
+    implements Builder<AbstractValidator<? super V>>, ValidatorRegistry<V, SELF> {
 
   private final PARENT parent;
 

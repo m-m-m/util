@@ -11,8 +11,8 @@ import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * This is the abstract implementation of a {@link ValueValidator} {@link #validate(Object) validating} that a
- * given value {@link Range#isContained(Object) is contained} in a given {@link Range}.
+ * This is the abstract implementation of a {@link ValueValidator} {@link #validate(Object) validating} that a given
+ * value {@link Range#isContained(Object) is contained} in a given {@link Range}.
  *
  * @param <V> the generic type of the value to {@link #validate(Object) validate}.
  * @param <R> the generic type of the {@link Range}-bounds.
@@ -45,6 +45,14 @@ public class AbstractValidatorRange<V, R> extends AbstractValueValidator<V> {
   }
 
   /**
+   * @return the {@link Range} to validate.
+   */
+  public Range<R> getRange() {
+
+    return this.range;
+  }
+
+  /**
    * Converts the value to the type of the range.
    *
    * @param value is the value to convert.
@@ -63,8 +71,7 @@ public class AbstractValidatorRange<V, R> extends AbstractValueValidator<V> {
     if (this.range.isContained(convertedValue)) {
       return null;
     } else {
-      return createBundle(NlsBundleUtilExceptionRoot.class).errorValueOutOfRange(convertedValue, this.range.getMin(),
-          this.range.getMax(), null);
+      return createBundle(NlsBundleUtilExceptionRoot.class).errorValueOutOfRange(convertedValue, this.range.getMin(), this.range.getMax(), null);
     }
   }
 

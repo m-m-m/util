@@ -193,6 +193,10 @@ public interface GenericType<T> extends Type {
    * <td>{@literal Map<String, Long>}</td>
    * <td>{@code String}</td>
    * </tr>
+   * <tr>
+   * <td>{@literal HashMap<? extends Number, Long>}</td>
+   * <td>{@code ? extends Number}</td>
+   * </tr>
    * </table>
    *
    * @since 2.0.0
@@ -235,6 +239,18 @@ public interface GenericType<T> extends Type {
    * @return {@code true} if objects of the type {@code subType} can be assigned to this {@link GenericType}.
    */
   boolean isAssignableFrom(GenericType<?> subType);
+
+  /**
+   * @return {@code true} if this {@link GenericType} represents a {@link java.util.Collection}.
+   * @since 7.4.0
+   */
+  boolean isCollection();
+
+  /**
+   * @return {@code true} if this {@link GenericType} represents a {@link java.util.Map}.
+   * @since 7.4.0
+   */
+  boolean isMap();
 
   /**
    * This method gets the string representation of this {@link GenericType}. In case the underlying {@link #getType()

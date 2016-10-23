@@ -5,6 +5,7 @@ package net.sf.mmm.util.validation.base.collection;
 import java.util.Collection;
 
 import net.sf.mmm.util.validation.base.AbstractValidatorRange;
+import net.sf.mmm.util.value.api.NumberRange;
 import net.sf.mmm.util.value.api.Range;
 
 /**
@@ -15,14 +16,14 @@ import net.sf.mmm.util.value.api.Range;
  * @author hohwille
  * @since 7.1.0
  */
-public class ValidatorCollectionSize extends AbstractValidatorRange<Collection<?>, Integer> {
+public class ValidatorCollectionSize extends AbstractValidatorRange<Collection<?>, Number> {
 
   /**
    * The constructor.
    *
    * @param range is the {@link Range} the value has to be {@link Range#isContained(Object) contained in}.
    */
-  public ValidatorCollectionSize(Range<Integer> range) {
+  public ValidatorCollectionSize(Range<Number> range) {
     super(range);
   }
 
@@ -34,7 +35,7 @@ public class ValidatorCollectionSize extends AbstractValidatorRange<Collection<?
    *        {@link Collection} values.
    */
   public ValidatorCollectionSize(int maxLength) {
-    this(new Range<>(null, Integer.valueOf(maxLength)));
+    this(new NumberRange(null, Integer.valueOf(maxLength)));
   }
 
   @Override
