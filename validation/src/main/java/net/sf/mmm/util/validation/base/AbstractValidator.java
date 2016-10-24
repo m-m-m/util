@@ -136,6 +136,9 @@ public abstract class AbstractValidator<V> implements ValueValidator<V> {
       return this;
     }
     if (validators.length == 1) {
+      if (validators[0] == ValidatorNone.getInstance()) {
+        return this;
+      }
       return new ComposedValidator<>(this, validators[0]);
     }
     AbstractValidator<? super V>[] array = new AbstractValidator[validators.length + 1];
