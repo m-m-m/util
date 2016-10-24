@@ -61,8 +61,7 @@ public abstract class AbstractBeanTest extends Assertions {
     assertThat(error).isNotNull().hasMessageContaining(undefinedProperty);
     for (WritableProperty<?> property : access.getProperties()) {
       String name = property.getName();
-      assertThat(property).isSameAs(access.getProperty(property.getName()))
-          .isSameAs(access.getRequiredProperty(name))
+      assertThat(property).isSameAs(access.getProperty(property.getName())).isSameAs(access.getRequiredProperty(name))
           .isSameAs(access.getOrCreateProperty(name, property.getType()));
     }
 
@@ -89,16 +88,11 @@ public abstract class AbstractBeanTest extends Assertions {
     assertThat(access.isVirtual()).isFalse();
     CountryCodeProperty countryCode = bean.CountryCode();
     WritableIntegerProperty propertyAge = bean.Age();
-    WritableProperty<?>[] properties = { countryCode, propertyName, propertyAge, propertyFriend,
-    propertyOrientation };
+    WritableProperty<?>[] properties = { countryCode, propertyName, propertyAge, propertyFriend, propertyOrientation };
     assertThat(access.getProperties()).contains(properties);
 
     assertThat(access.getPropertyNameForAlias("Alias")).isEqualTo("Name");
     assertThat(access.getRequiredProperty("Alias")).isSameAs(access.getRequiredProperty("Name"));
-
-    String name = "magicName";
-    propertyName.setValue(name);
-    assertThat(propertyName.get()).isEqualTo(name);
 
     // validation
     // invalid mandatory fields
@@ -106,10 +100,16 @@ public abstract class AbstractBeanTest extends Assertions {
     assertThat(failure).isNotNull();
     assertThat(failure.getCode()).isEqualTo(ComposedValidator.CODE);
     ComposedValidationFailure composedFailure = (ComposedValidationFailure) failure;
-    assertThat(composedFailure.getFailureCount()).isEqualTo(2);
+    assertThat(composedFailure.getFailureCount()).isEqualTo(3);
+    Set<String> failureSources = new HashSet<>();
     for (ValidationFailure subFailure : composedFailure) {
       assertThat(subFailure.getCode()).isSameAs(ValidatorMandatory.CODE);
+      failureSources.add(subFailure.getSource());
     }
+
+    String name = "magicName";
+    propertyName.setValue(name);
+    assertThat(propertyName.get()).isEqualTo(name);
 
     // valid
     countryCode.set("DE");

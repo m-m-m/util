@@ -34,6 +34,11 @@ public interface ExamplePropertyBean extends Bean {
     return new IntegerProperty(null, null).withValdidator().mandatory().range(0, 200).and().build();
   }
 
+  default WritableIntegerProperty AgeDelegate() {
+
+    return Age();
+  }
+
   BooleanProperty Friend();
 
   WritableProperty<Orientation> Orientation();

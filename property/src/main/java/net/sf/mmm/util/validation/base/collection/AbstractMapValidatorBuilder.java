@@ -45,7 +45,7 @@ public abstract class AbstractMapValidatorBuilder<K, V, M extends Map<K, V>, PAR
    * @param range the {@link Range} to limit the {@link Map#size() size} of the {@link Map}.
    * @return this build instance for fluent API calls.
    */
-  public SELF size(Range<Integer> range) {
+  public SELF size(Range<Number> range) {
 
     return add(new ValidatorMapSize(range));
   }
@@ -88,8 +88,7 @@ public abstract class AbstractMapValidatorBuilder<K, V, M extends Map<K, V>, PAR
    *        method on the supplied {@link ObjectValidatorBuilderFactory} with the given dummy element.
    * @return the new sub-builder.
    */
-  public <SUB extends ObjectValidatorBuilder<K, ? extends SELF, ?>> SUB withKeys(
-      BiFunction<ObjectValidatorBuilderFactory<SELF>, K, SUB> factory) {
+  public <SUB extends ObjectValidatorBuilder<K, ? extends SELF, ?>> SUB withKeys(BiFunction<ObjectValidatorBuilderFactory<SELF>, K, SUB> factory) {
 
     if (this.keySubBuilder != null) {
       throw new IllegalStateException("keySubBuilder already exists!");
@@ -114,8 +113,7 @@ public abstract class AbstractMapValidatorBuilder<K, V, M extends Map<K, V>, PAR
    *        method on the supplied {@link ObjectValidatorBuilderFactory} with the given dummy element.
    * @return the new sub-builder.
    */
-  public <SUB extends ObjectValidatorBuilder<V, ? extends SELF, ?>> SUB withValues(
-      BiFunction<ObjectValidatorBuilderFactory<SELF>, V, SUB> factory) {
+  public <SUB extends ObjectValidatorBuilder<V, ? extends SELF, ?>> SUB withValues(BiFunction<ObjectValidatorBuilderFactory<SELF>, V, SUB> factory) {
 
     if (this.valueSubBuilder != null) {
       throw new IllegalStateException("valueSubBuilder already exists!");

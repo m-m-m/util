@@ -26,6 +26,7 @@ import net.sf.mmm.util.bean.api.BeanPrototypeBuilder;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.json.base.JsonUtilImpl;
+import net.sf.mmm.util.lang.api.Builder;
 import net.sf.mmm.util.property.api.AbstractProperty;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
@@ -42,7 +43,10 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
+import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
 import net.sf.mmm.util.validation.base.ValidatorNone;
+import net.sf.mmm.util.validation.base.jsr303.BeanValidationProcessor;
+import net.sf.mmm.util.validation.base.jsr303.BeanValidationProcessorImpl;
 
 /**
  * This is the implementation of {@link BeanFactory}.
@@ -65,6 +69,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   private JsonUtil jsonUtil;
 
   private PropertyFactoryManager propertyFactoryManager;
+
+  private BeanValidationProcessor beanValidationProcessor;
 
   /**
    * The constructor.
@@ -138,6 +144,15 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   }
 
   /**
+   * @param beanValidationProcessor the {@link BeanValidationProcessor} to {@link Inject}.
+   */
+  @Inject
+  public void setBeanValidationProcessor(BeanValidationProcessor beanValidationProcessor) {
+
+    this.beanValidationProcessor = beanValidationProcessor;
+  }
+
+  /**
    * This method gets the singleton instance of this {@link BeanFactory}. <br>
    * <b>ATTENTION:</b><br>
    * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
@@ -168,6 +183,11 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     }
     if (this.jsonUtil == null) {
       this.jsonUtil = JsonUtilImpl.getInstance();
+    }
+    if (this.beanValidationProcessor == null) {
+      BeanValidationProcessorImpl impl = new BeanValidationProcessorImpl();
+      impl.initialize();
+      this.beanValidationProcessor = impl;
     }
     super.doInitialize();
   }
@@ -238,8 +258,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
   public <BEAN extends Bean> BEAN createPrototype(Class<BEAN> type) {
 
     BeanAccessPrototypeInternal<BEAN> prototype = getPrototypeInternal(type);
-    BeanAccessPrototypeExternal<BEAN> copy = new BeanAccessPrototypeExternal<>(prototype, false,
-        getQualifiedName(type));
+    BeanAccessPrototypeExternal<BEAN> copy = new BeanAccessPrototypeExternal<>(prototype, false, getQualifiedName(type));
     return copy.getBean();
   }
 
@@ -294,7 +313,6 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     if (type == Bean.class) {
       for (Method method : Object.class.getDeclaredMethods()) {
         introspectionData.addMethod(method, Object.class);
-
       }
     } else {
       for (Class<?> superInterface : type.getInterfaces()) {
@@ -308,8 +326,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @param prototype the {@link BeanAccessPrototype} to process and complete.
    * @param beanType the {@link GenericType} reflecting the {@link Bean}.
    */
-  private void processMethods(BeanIntrospectionData introspectionData, BeanAccessPrototype<?> prototype,
-      GenericType<?> beanType) {
+  private void processMethods(BeanIntrospectionData introspectionData, BeanAccessPrototype<?> prototype, GenericType<?> beanType) {
 
     for (BeanMethod beanMethod : introspectionData.methods) {
       BeanMethodType methodType = beanMethod.getMethodType();
@@ -319,17 +336,22 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         if (prototypeProperty == null) {
           GenericType<?> propertyType = this.reflectionUtil.createGenericType(beanMethod.getPropertyType(), beanType);
           AbstractProperty<?> property = createProperty(propertyName, propertyType, prototype.getBean());
+          property = decorateProperty(beanMethod.getMethod(), property, propertyType);
           prototype.addProperty(property, introspectionData.isDeclared(beanMethod.getMethod()));
+        } else if (methodType == BeanMethodType.GET) {
+          AbstractProperty<?> property = prototypeProperty.getProperty();
+          AbstractProperty<?> decoratedProperty = decorateProperty(beanMethod.getMethod(), property, property.getType());
+          if (decoratedProperty != property) {
+            prototypeProperty.setProperty(decoratedProperty);
+          }
         }
       }
 
       BeanPrototypeOperation operation;
       if ((methodType == BeanMethodType.EQUALS) && (introspectionData.customEquals != null)) {
-        operation = new BeanPrototypeOperationCustomEquals(prototype, beanMethod.getMethod(),
-            introspectionData.customEquals.getMethod(), this.reflectionUtil);
+        operation = new BeanPrototypeOperationCustomEquals(prototype, beanMethod.getMethod(), introspectionData.customEquals.getMethod(), this.reflectionUtil);
       } else if ((methodType == BeanMethodType.HASH_CODE) && (introspectionData.customHashCode != null)) {
-        operation = new BeanPrototypeOperationDefaultMethod(prototype, beanMethod.getMethod(),
-            introspectionData.customHashCode.getMethod());
+        operation = new BeanPrototypeOperationDefaultMethod(prototype, beanMethod.getMethod(), introspectionData.customHashCode.getMethod());
       } else {
         operation = BeanPrototypeOperation.create(beanMethod, prototype);
       }
@@ -357,17 +379,24 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     Method method = beanMethod.getMethod();
     AbstractProperty<?> property = null;
     if (method.isDefault()) {
-      property = (AbstractProperty<?>) LookupHelper.INSTANCE.invokeDefaultMethod(bean, method,
-          ReflectionUtilLimited.NO_ARGUMENTS);
+      property = (AbstractProperty<?>) LookupHelper.INSTANCE.invokeDefaultMethod(bean, method, ReflectionUtilLimited.NO_ARGUMENTS);
       property = property.copy(beanMethod.getPropertyName(), bean);
     }
     if (property == null) {
       GenericType<?> propertyType = this.reflectionUtil.createGenericType(beanMethod.getPropertyType(), beanType);
       GenericType<?> valueType = this.reflectionUtil.createGenericType(PROPERTY_VALUE_TYPE_VARIABLE, propertyType);
-      property = createProperty(beanMethod.getPropertyName(), valueType, bean,
-          (Class) propertyType.getRetrievalClass());
+      property = createProperty(beanMethod.getPropertyName(), valueType, bean, (Class) propertyType.getRetrievalClass());
+      property = decorateProperty(method, property, valueType);
     }
     return property;
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  private AbstractProperty<?> decorateProperty(Method method, AbstractProperty<?> property, GenericType<?> valueType) {
+
+    ObjectValidatorBuilder<?, Builder<? extends AbstractProperty<?>>, ?> valdidatorBuilder = (ObjectValidatorBuilder) property.withValdidator();
+    this.beanValidationProcessor.processConstraints(method, valdidatorBuilder, valueType);
+    return valdidatorBuilder.and().build();
   }
 
   /**
@@ -394,8 +423,8 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
    * @return the new instance of {@link AbstractProperty}.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  protected <V, PROPERTY extends ReadableProperty<V>> AbstractProperty<V> createProperty(String name,
-      GenericType<? extends V> valueType, Bean bean, Class<PROPERTY> propertyClass) {
+  protected <V, PROPERTY extends ReadableProperty<V>> AbstractProperty<V> createProperty(String name, GenericType<? extends V> valueType, Bean bean,
+      Class<PROPERTY> propertyClass) {
 
     AbstractProperty result;
     Class<? extends V> valueClass = null;
@@ -405,20 +434,16 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
     PropertyFactory<V, ?> factory = this.propertyFactoryManager.getFactory(propertyClass, valueClass, false);
     if (factory != null) {
       result = (AbstractProperty) factory.create(name, valueType, bean, null);
-    } else if ((propertyClass != null) && (!propertyClass.isInterface())
-        && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
+    } else if ((propertyClass != null) && (!propertyClass.isInterface()) && (!Modifier.isAbstract(propertyClass.getModifiers()))) {
       result = createPropertyFromSpecifiedClass(name, valueType, bean, propertyClass);
     } else {
-      getLogger().debug(
-          "Could not resolve specific property for class '{}' and value-type '{}'. Using GenericProperty as fallback.",
-          propertyClass, valueType);
+      getLogger().debug("Could not resolve specific property for class '{}' and value-type '{}'. Using GenericProperty as fallback.", propertyClass, valueType);
       result = new GenericProperty<>(name, valueType, bean);
     }
     return result;
   }
 
-  private AbstractProperty<?> createPropertyFromSpecifiedClass(String name, GenericType<?> type, Bean bean,
-      Class<?> propertyClass) {
+  private AbstractProperty<?> createPropertyFromSpecifiedClass(String name, GenericType<?> type, Bean bean, Class<?> propertyClass) {
 
     Constructor<?> constructor = null;
     try {
@@ -430,19 +455,16 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
             if (parameterTypes.length == 2) {
               return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, bean });
             } else if ((parameterTypes.length == 3) && (parameterTypes[2] == AbstractValidator.class)) {
-              return (AbstractProperty<?>) constructor
-                  .newInstance(new Object[] { name, bean, ValidatorNone.getInstance() });
+              return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, bean, ValidatorNone.getInstance() });
             }
-          } else if ((parameterTypes[1] == GenericType.class) && (parameterTypes.length >= 3)
-              && (parameterTypes[2] == Bean.class)) {
+          } else if ((parameterTypes[1] == GenericType.class) && (parameterTypes.length >= 3) && (parameterTypes[2] == Bean.class)) {
             if (type == null) {
               throw new IllegalStateException(constructor.toGenericString());
             }
             if (parameterTypes.length == 3) {
               return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, type, bean });
             } else if (parameterTypes[3] == AbstractValidator.class) {
-              return (AbstractProperty<?>) constructor
-                  .newInstance(new Object[] { name, type, bean, ValidatorNone.getInstance() });
+              return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, type, bean, ValidatorNone.getInstance() });
             }
           }
         }

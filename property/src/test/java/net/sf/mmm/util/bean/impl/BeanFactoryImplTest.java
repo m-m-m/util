@@ -31,8 +31,7 @@ public class BeanFactoryImplTest extends AbstractBeanTest {
     assertThat(prototype.access().isDynamic()).isFalse();
     assertThat(prototype.access().getBeanClass()).isEqualTo(ExamplePropertyBean.class);
     assertThat(prototype.access().getSimpleName()).isEqualTo("RenamedBean");
-    assertThat(prototype.access().getDeclaredPropertyNames()).containsOnly("CountryCode", "Name", "Age", "Friend",
-        "Orientation");
+    assertThat(prototype.access().getDeclaredPropertyNames()).containsOnly("CountryCode", "Name", "Age", "Friend", "Orientation");
   }
 
   @Test
@@ -45,8 +44,7 @@ public class BeanFactoryImplTest extends AbstractBeanTest {
     assertThat(bean.access().isDynamic()).isFalse();
     assertThat(bean.access().getBeanClass()).isEqualTo(ExamplePropertyBean.class);
     assertThat(bean.access().getSimpleName()).isEqualTo("RenamedBean");
-    assertThat(bean.access().getDeclaredPropertyNames()).containsOnly("CountryCode", "Name", "Age", "Friend",
-        "Orientation");
+    assertThat(bean.access().getDeclaredPropertyNames()).containsOnly("CountryCode", "Name", "Age", "Friend", "Orientation");
   }
 
   @Test
