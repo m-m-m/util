@@ -304,6 +304,10 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
     public T build() {
 
       AbstractValidator<? super V> newValidator = (AbstractValidator) this.builder.build();
+      newValidator = AbstractProperty.this.validator.append((AbstractValidator) newValidator);
+      if ((AbstractProperty.this.validator == newValidator) && (this.newBean == null)) {
+        return (T) AbstractProperty.this;
+      }
       AbstractProperty<V> copy;
       if (this.newBean == null) {
         copy = copy(newValidator);

@@ -16,6 +16,7 @@ import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.impl.example.CountryCodeProperty;
+import net.sf.mmm.util.bean.impl.example.ExamplePojo;
 import net.sf.mmm.util.bean.impl.example.ExamplePojoBean;
 import net.sf.mmm.util.bean.impl.example.ExamplePropertyBean;
 import net.sf.mmm.util.lang.api.Orientation;
@@ -100,16 +101,26 @@ public abstract class AbstractBeanTest extends Assertions {
     assertThat(failure).isNotNull();
     assertThat(failure.getCode()).isEqualTo(ComposedValidator.CODE);
     ComposedValidationFailure composedFailure = (ComposedValidationFailure) failure;
-    assertThat(composedFailure.getFailureCount()).isEqualTo(3);
+    String[] mandatoryProperties;
+    if (bean instanceof ExamplePojo) {
+      mandatoryProperties = new String[] { "Name", "Age", "CountryCode", "Orientation" };
+    } else {
+      mandatoryProperties = new String[] { "Name", "Age", "CountryCode" };
+    }
+    assertThat(composedFailure.getFailureCount()).isEqualTo(mandatoryProperties.length);
     Set<String> failureSources = new HashSet<>();
     for (ValidationFailure subFailure : composedFailure) {
       assertThat(subFailure.getCode()).isSameAs(ValidatorMandatory.CODE);
       failureSources.add(subFailure.getSource());
     }
+    assertThat(failureSources).containsOnly(mandatoryProperties);
 
     String name = "magicName";
     propertyName.setValue(name);
-    assertThat(propertyName.get()).isEqualTo(name);
+    assertThat(propertyName.getValue()).isEqualTo(name);
+
+    propertyOrientation.setValue(Orientation.HORIZONTAL);
+    assertThat(propertyOrientation.getValue()).isEqualTo(Orientation.HORIZONTAL);
 
     // valid
     countryCode.set("DE");
@@ -148,7 +159,11 @@ public abstract class AbstractBeanTest extends Assertions {
           assertThat(beanJsonMap.containsKey(property.getName())).isFalse();
         } else {
           Object valueJson = beanJsonMap.get(property.getName());
-          assertThat(valueJson).isEqualTo(valueProperty);
+          if (valueProperty instanceof Enum) {
+            assertThat(valueJson).isEqualTo(valueProperty.toString());
+          } else {
+            assertThat(valueJson).isEqualTo(valueProperty);
+          }
         }
       }
     } catch (Exception e) {
