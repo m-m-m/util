@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
+import java.util.Objects;
+
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**
@@ -37,6 +39,19 @@ public final class ValidatorNone extends AbstractValidator<Object> {
   public ValidationFailure validate(Object value, Object valueSource) {
 
     return null;
+  }
+
+  @Override
+  public AbstractValidator<Object> append(AbstractValidator<? super Object>... validators) {
+
+    Objects.requireNonNull(validators, "validators");
+    if (validators.length == 0) {
+      return this;
+    } else if (validators.length == 1) {
+      return validators[0];
+    } else {
+      return new ComposedValidator<>(validators);
+    }
   }
 
   @Override
