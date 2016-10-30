@@ -2,19 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base.jsr303;
 
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
 import net.sf.mmm.util.validation.base.Mandatory;
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessor;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorDecimalMax;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorDecimalMin;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorFuture;
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorMandatory;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorMax;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorMin;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorPast;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorPattern;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorSize;
+import net.sf.mmm.util.validation.base.jsr303.constraints.TypedConstraintProcessor;
 
 /**
  * The (default) implementation of {@link BeanValidationProcessor}.
@@ -33,6 +29,18 @@ public class BeanValidationProcessorImpl extends AbstractBeanValidationProcessor
   }
 
   /**
+   * @param processors the {@link List} of {@link TypedConstraintProcessor} to {@link Inject} and
+   *        {@link #registerProcessor(TypedConstraintProcessor) register}.
+   */
+  @Inject
+  public void setTypedConstraintProcessors(List<TypedConstraintProcessor<?>> processors) {
+
+    for (TypedConstraintProcessor<?> typedProcessor : processors) {
+      registerProcessor(typedProcessor);
+    }
+  }
+
+  /**
    * Registers the {@link ConstraintProcessor}s.
    */
   private void registerProcessors() {
@@ -41,14 +49,6 @@ public class BeanValidationProcessorImpl extends AbstractBeanValidationProcessor
     registerProcessor("org.hibernate.validator.constraints.NotEmpty", mandatory);
     registerProcessor(NotNull.class, mandatory);
     registerProcessor(Mandatory.class, mandatory);
-    registerProcessor(new ConstraintProcessorSize());
-    registerProcessor(new ConstraintProcessorMin());
-    registerProcessor(new ConstraintProcessorMax());
-    registerProcessor(new ConstraintProcessorDecimalMax());
-    registerProcessor(new ConstraintProcessorDecimalMin());
-    registerProcessor(new ConstraintProcessorFuture());
-    registerProcessor(new ConstraintProcessorPast());
-    registerProcessor(new ConstraintProcessorPattern());
   }
 
 }

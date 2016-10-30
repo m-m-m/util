@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base.jsr303.constraints;
 
+import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
 import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
@@ -13,6 +14,7 @@ import net.sf.mmm.util.validation.base.text.ValidatorPattern;
  * @author hohwille
  * @since 8.0.0
  */
+@Named
 public class ConstraintProcessorPattern implements TypedConstraintProcessor<Pattern> {
 
   @Override
