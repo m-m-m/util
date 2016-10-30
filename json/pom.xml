@@ -9,7 +9,7 @@
     <relativePath>../modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-util-json</artifactId>
-  <version>${net.sf.mmm.util8.version}</version>
+  <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project provides advanced JSON support based on JSON-P.</description>
@@ -41,17 +41,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>
