@@ -19,7 +19,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * This is a helper class with static methods to deal with JSON.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 public interface JsonUtil {
 

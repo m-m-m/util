@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 
 import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.json.base.JsonUtilImpl;
+import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 
 /**
@@ -18,7 +19,7 @@ import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilReflectSpringConfig.class })
+@Import({ UtilReflectSpringConfig.class, UtilLangSpringConfig.class })
 @ComponentScan("net.sf.mmm.util.value.impl")
 @SuppressWarnings("javadoc")
 public class UtilJsonSpringConfig {
