@@ -16,7 +16,7 @@ import net.sf.mmm.util.lang.base.SystemUtilImpl;
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.lang}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.1.0
  */
 @Configuration
 @SuppressWarnings("javadoc")

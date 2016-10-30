@@ -21,7 +21,7 @@ import net.sf.mmm.util.nls.impl.spring.UtilNlsSpringConfig;
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.lang}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.1.0
  */
 @Configuration
 @Import({ UtilNlsSpringConfig.class, UtilLangSpringConfigBase.class })

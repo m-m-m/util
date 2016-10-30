@@ -12,7 +12,7 @@ import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.reflect}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.1.0
  */
 @Configuration
 @SuppressWarnings("javadoc")

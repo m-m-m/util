@@ -28,7 +28,7 @@ import net.sf.mmm.util.pojo.path.impl.PojoPathNavigatorImpl;
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.pojo}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.1.0
  */
 @Configuration
 @Import({ UtilLangSpringConfig.class, UtilMathSpringConfig.class })
