@@ -15,10 +15,9 @@ import net.sf.mmm.util.validation.base.ValidatorRange;
  * @param <SELF> the generic type of this builder itself (this).
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
-public abstract class ValidatorBuilderTime<V, PARENT, SELF extends ValidatorBuilderTime<V, PARENT, SELF>>
-    extends ObjectValidatorBuilder<V, PARENT, SELF> {
+public abstract class ValidatorBuilderTime<V, PARENT, SELF extends ValidatorBuilderTime<V, PARENT, SELF>> extends ObjectValidatorBuilder<V, PARENT, SELF> {
 
   /**
    * The constructor.

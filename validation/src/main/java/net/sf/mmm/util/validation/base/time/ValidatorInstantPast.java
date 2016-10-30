@@ -3,20 +3,19 @@
 package net.sf.mmm.util.validation.base.time;
 
 import java.time.Instant;
-import java.time.LocalDate;
 
 /**
- * Implementation of {@link ValidatorTimeFuture} for {@link LocalDate}.
+ * Implementation of {@link ValidatorTimePast} for {@link Instant}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.0.0
+ * @since 8.4.0
  */
-public class ValidatorInstantFuture extends ValidatorTimeFuture<Instant> {
+public class ValidatorInstantPast extends ValidatorTimePast<Instant> {
 
   @Override
-  protected boolean isFuture(Instant value) {
+  protected boolean isPast(Instant value) {
 
-    return value.isAfter(Instant.now());
+    return value.isBefore(Instant.now());
   }
 
 }

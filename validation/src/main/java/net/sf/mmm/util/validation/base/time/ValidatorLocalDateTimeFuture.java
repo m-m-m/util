@@ -5,17 +5,17 @@ package net.sf.mmm.util.validation.base.time;
 import java.time.LocalDateTime;
 
 /**
- * Implementation of {@link ValidatorTimePast} for {@link LocalDateTime}.
+ * Implementation of {@link ValidatorTimeFuture} for {@link LocalDateTime}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.0.0
+ * @since 8.4.0
  */
-public class ValidatorLocalDateTimePast extends ValidatorTimePast<LocalDateTime> {
+public class ValidatorLocalDateTimeFuture extends ValidatorTimeFuture<LocalDateTime> {
 
   @Override
-  protected boolean isPast(LocalDateTime value) {
+  protected boolean isFuture(LocalDateTime value) {
 
-    return value.isBefore(LocalDateTime.now());
+    return value.isAfter(LocalDateTime.now());
   }
 
 }

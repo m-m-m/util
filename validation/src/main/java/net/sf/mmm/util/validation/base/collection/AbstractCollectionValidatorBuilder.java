@@ -21,7 +21,7 @@ import net.sf.mmm.util.value.api.Range;
  * @param <SELF> the generic type of this builder itself (this).
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractCollectionValidatorBuilder<E, V extends Collection<E>, PARENT, SELF extends AbstractCollectionValidatorBuilder<E, V, PARENT, SELF>>
     extends ComplexValidatorBuilder<V, PARENT, SELF> {

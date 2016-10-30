@@ -2,20 +2,21 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base.time;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 /**
- * Implementation of {@link ValidatorTimePast} for {@link LocalDate}.
+ * Implementation of {@link ValidatorTimeFuture} for {@link LocalDate}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.0.0
+ * @since 8.4.0
  */
-public class ValidatorLocalDatePast extends ValidatorTimePast<LocalDate> {
+public class ValidatorInstantFuture extends ValidatorTimeFuture<Instant> {
 
   @Override
-  protected boolean isPast(LocalDate value) {
+  protected boolean isFuture(Instant value) {
 
-    return value.isBefore(LocalDate.now());
+    return value.isAfter(Instant.now());
   }
 
 }

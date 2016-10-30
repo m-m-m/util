@@ -2,24 +2,24 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base.time;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
 
 /**
- * Implementation of {@link ValidatorTimeAfter} for {@link LocalDate}.
+ * Implementation of {@link ValidatorTimeBefore} for {@link Instant}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.0.0
+ * @since 8.4.0
  */
-public class ValidatorLocalDateAfter extends ValidatorTimeAfter<LocalDate> {
+public class ValidatorInstantBefore extends ValidatorTimeBefore<Instant> {
 
   /**
    * The constructor.
    *
    * @param valueSource the {@link AttributeReadValue source} of the value to compare to.
    */
-  public ValidatorLocalDateAfter(AttributeReadValue<LocalDate> valueSource) {
+  public ValidatorInstantBefore(AttributeReadValue<Instant> valueSource) {
     super(valueSource);
   }
 
@@ -28,14 +28,14 @@ public class ValidatorLocalDateAfter extends ValidatorTimeAfter<LocalDate> {
    *
    * @param value the value to compare to.
    */
-  public ValidatorLocalDateAfter(LocalDate value) {
+  public ValidatorInstantBefore(Instant value) {
     super(value);
   }
 
   @Override
-  protected boolean isAfter(LocalDate value, LocalDate limit) {
+  protected boolean isBefore(Instant value, Instant limit) {
 
-    return value.isAfter(limit);
+    return value.isBefore(limit);
   }
 
 }

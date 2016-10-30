@@ -2,36 +2,34 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base.collection;
 
-import java.util.Map;
+import java.util.Collection;
 
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for a {@link Map}.
+ * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for a {@link Collection} of {@link Object}s.
  *
- * @param <K> the generic type of the {@link java.util.Map.Entry#getKey() keys}.
- * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
+ * @param <E> the generic type of the {@link Collection#contains(Object) elements contained} in the {@link Collection}.
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 8.4.0
  */
-public class ValidatorBuilderMap<K, V, PARENT>
-    extends AbstractMapValidatorBuilder<K, V, Map<K, V>, PARENT, ValidatorBuilderMap<K, V, PARENT>> {
+public class ValidatorBuilderCollection<E, PARENT> extends AbstractCollectionValidatorBuilder<E, Collection<E>, PARENT, ValidatorBuilderCollection<E, PARENT>> {
 
   /**
    * The constructor.
    *
    * @param parent the {@link #and() parent} builder.
    */
-  public ValidatorBuilderMap(PARENT parent) {
+  public ValidatorBuilderCollection(PARENT parent) {
     super(parent);
   }
 
   @Override
-  public ValidatorBuilderMap<K, V, PARENT> range(String min, String max) {
+  public ValidatorBuilderCollection<E, PARENT> range(String min, String max) {
 
     Integer iMin = null;
     if (min != null) {
@@ -41,7 +39,7 @@ public class ValidatorBuilderMap<K, V, PARENT>
     if (max != null) {
       iMax = Integer.valueOf(max);
     }
-    add(new ValidatorMapSize(new Range<>(iMin, iMax)));
+    add(new ValidatorCollectionSize(new Range<>(iMin, iMax)));
     return self();
   }
 

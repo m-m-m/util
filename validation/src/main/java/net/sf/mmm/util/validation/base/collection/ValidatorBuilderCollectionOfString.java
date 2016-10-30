@@ -14,7 +14,7 @@ import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class ValidatorBuilderCollectionOfString<PARENT> extends ValidatorBuilderCollection<String, PARENT> {
 

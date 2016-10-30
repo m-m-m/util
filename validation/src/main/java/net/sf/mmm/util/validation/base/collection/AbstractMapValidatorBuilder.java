@@ -21,7 +21,7 @@ import net.sf.mmm.util.value.api.Range;
  * @param <SELF> the generic type of this builder itself (this).
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractMapValidatorBuilder<K, V, M extends Map<K, V>, PARENT, SELF extends AbstractMapValidatorBuilder<K, V, M, PARENT, SELF>>
     extends ComplexValidatorBuilder<M, PARENT, SELF> {
