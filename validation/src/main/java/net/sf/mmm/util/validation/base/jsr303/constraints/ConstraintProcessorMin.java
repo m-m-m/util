@@ -12,7 +12,7 @@ import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
  * Implementation of {@link ConstraintProcessor} for {@link ValidatorRange} based on constraint {@link Min}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 @Named
 public class ConstraintProcessorMin implements TypedConstraintProcessor<Min> {

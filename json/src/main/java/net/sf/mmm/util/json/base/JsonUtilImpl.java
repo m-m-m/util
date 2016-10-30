@@ -35,7 +35,7 @@ import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
  * @see #getInstance()
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil {
 

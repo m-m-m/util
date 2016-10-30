@@ -11,9 +11,9 @@ import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
  * Implementation of {@link ConstraintProcessor} for {@link ValidatorDatePast} based on constraint {@link Past}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
-public class ConstraintProcessorPast implements TypedConstraintProcessor<Past> {
+public class ConstraintProcessorPastDate implements TypedConstraintProcessor<Past> {
 
   @Override
   public Class<Past> getType() {

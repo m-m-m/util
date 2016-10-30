@@ -12,7 +12,7 @@ import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
  * @param <C> the type of the constraint {@link Annotation} {@link #process(Annotation, ConstraintContext) handled} by
  *        this {@link ConstraintProcessor}.
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 public interface ConstraintProcessor<C extends Annotation> {
 

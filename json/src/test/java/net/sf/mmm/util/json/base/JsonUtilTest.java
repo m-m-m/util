@@ -22,9 +22,6 @@ import net.sf.mmm.util.reflect.base.GenericTypeBuilder;
 
 /**
  * This is the test-case for {@link JsonUtil}.
- *
- * @author hohwille
- * @since 8.0.0
  */
 public class JsonUtilTest extends Assertions {
 

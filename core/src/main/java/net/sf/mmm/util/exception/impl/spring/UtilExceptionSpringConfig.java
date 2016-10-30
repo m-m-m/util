@@ -19,7 +19,7 @@ import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.transferobject}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 @Configuration
 @Import(UtilLangSpringConfig.class)

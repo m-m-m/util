@@ -4,10 +4,10 @@ package net.sf.mmm.util.validation.base.jsr303;
 
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorDecimalMax;
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorDecimalMin;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorFuture;
+import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorFutureDate;
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorMax;
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorMin;
-import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorPast;
+import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorPastDate;
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorPattern;
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorSize;
 
@@ -30,8 +30,8 @@ public class DefaultBeanValidationProcessor extends BeanValidationProcessorImpl 
     registerProcessor(new ConstraintProcessorDecimalMax());
     registerProcessor(new ConstraintProcessorDecimalMin());
     registerProcessor(new ConstraintProcessorPattern());
-    registerProcessor(new ConstraintProcessorFuture());
-    registerProcessor(new ConstraintProcessorPast());
+    registerProcessor(new ConstraintProcessorFutureDate());
+    registerProcessor(new ConstraintProcessorPastDate());
   }
 
 }

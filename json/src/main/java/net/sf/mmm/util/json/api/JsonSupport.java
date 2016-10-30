@@ -10,7 +10,7 @@ import javax.json.stream.JsonParser;
  * {@link #fromJson(JsonParser) deserialize} itself to JSON.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 public interface JsonSupport {
 
