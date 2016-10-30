@@ -31,7 +31,7 @@ public class BeanValidationProcessorTest extends Assertions {
 
   protected BeanValidationProcessor getBeanValidationProcessor() {
 
-    BeanValidationProcessorImpl processor = new BeanValidationProcessorImpl();
+    BeanValidationProcessorImpl processor = new DefaultBeanValidationProcessor();
     processor.initialize();
     return processor;
   }

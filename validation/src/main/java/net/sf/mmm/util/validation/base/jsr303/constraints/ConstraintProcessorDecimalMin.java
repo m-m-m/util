@@ -4,6 +4,7 @@ package net.sf.mmm.util.validation.base.jsr303.constraints;
 
 import java.math.BigDecimal;
 
+import javax.inject.Named;
 import javax.validation.constraints.DecimalMin;
 
 import net.sf.mmm.util.validation.base.ValidatorRange;
@@ -15,6 +16,7 @@ import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
  * @author hohwille
  * @since 8.0.0
  */
+@Named
 public class ConstraintProcessorDecimalMin implements TypedConstraintProcessor<DecimalMin> {
 
   @Override

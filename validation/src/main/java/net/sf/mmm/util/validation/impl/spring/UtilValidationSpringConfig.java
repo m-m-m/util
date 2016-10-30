@@ -3,6 +3,7 @@
 package net.sf.mmm.util.validation.impl.spring;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -19,6 +20,7 @@ import net.sf.mmm.util.validation.base.jsr303.BeanValidationProcessorImpl;
  */
 @Configuration
 @Import({ UtilMathSpringConfig.class, UtilLangSpringConfig.class })
+@ComponentScan("net.sf.mmm.util.validation.base.jsr303.constraints")
 @SuppressWarnings("javadoc")
 public class UtilValidationSpringConfig {
 
