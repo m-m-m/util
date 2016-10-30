@@ -20,6 +20,7 @@
   <source path="uuid"/>
   <source path="logging"/>
   <source path="text" includes="**/*Justification*"/>
+  <source path="io" includes="NlsBundleUtilIoRoot.java"/>
   <source path="io/api" includes="RuntimeIoException.java,IoMode.java,FileItem.java"/>
   <source path="validation"/>
   <source path="transferobject" excludes="base/TransferObjectUtilImpl.java"/>
