@@ -42,6 +42,7 @@ public final class ValidatorNone extends AbstractValidator<Object> {
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public AbstractValidator<Object> append(AbstractValidator<? super Object>... validators) {
 
     Objects.requireNonNull(validators, "validators");
