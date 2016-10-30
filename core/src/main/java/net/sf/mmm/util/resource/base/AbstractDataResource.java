@@ -46,13 +46,16 @@ public abstract class AbstractDataResource implements DataResource {
     if (!Objects.equals(getPath(), other.getPath())) {
       return false;
     }
+    if (!Objects.equals(getSchemePrefix(), other.getSchemePrefix())) {
+      return false;
+    }
     return true;
   }
 
   @Override
   public int hashCode() {
 
-    return Objects.hashCode(getSchemePrefix() + getPath());
+    return Objects.hash(getSchemePrefix(), getPath());
   }
 
   /**
@@ -124,8 +127,7 @@ public abstract class AbstractDataResource implements DataResource {
   }
 
   @Override
-  public OutputStream openOutputStream()
-      throws ResourceNotAvailableException, ResourceNotWritableException, RuntimeIoException {
+  public OutputStream openOutputStream() throws ResourceNotAvailableException, ResourceNotWritableException, RuntimeIoException {
 
     throw new ResourceNotWritableException(getUri());
   }
