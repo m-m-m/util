@@ -2,17 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import junit.framework.Assert;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
@@ -21,19 +17,19 @@ import net.sf.mmm.util.resource.api.DataResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class ClasspathResourceTest {
+public class ClasspathResourceTest extends Assertions {
 
   public static void verifyResource(DataResource resource) throws Exception {
 
-    assertTrue(resource.isAvailable());
-    assertEquals(41, resource.getSize());
+    assertThat(resource.isAvailable()).isTrue();
+    assertThat(resource.getSize()).isEqualTo(41);
     InputStream in = in = resource.openStream();
     try {
       BufferedReader reader = new BufferedReader(new InputStreamReader(in));
       String line = reader.readLine();
-      assertEquals("This is a resource loaded from classpath.", line);
+      assertThat(line).isEqualTo("This is a resource loaded from classpath.");
       line = reader.readLine();
-      assertNull(line);
+      assertThat(line).isNull();
     } finally {
       in.close();
     }
@@ -46,13 +42,12 @@ public class ClasspathResourceTest {
     verifyResource(resource);
     verifyResource(new ClasspathResource(ClasspathResource.class, //
         ClasspathResource.class.getSimpleName() + ".txt", false));
-    verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(),
-        ClasspathResource.class.getSimpleName() + ".txt"));
+    verifyResource(new ClasspathResource(ClasspathResource.class.getPackage(), ClasspathResource.class.getSimpleName() + ".txt"));
     String name = ClasspathResource.class.getSimpleName() + ".txt";
     String absoluteClasspath = ClasspathResource.class.getPackage().getName().replace('.', '/') + "/" + name;
     verifyResource(new ClasspathResource(absoluteClasspath));
-    Assert.assertEquals(name, resource.getName());
-    Assert.assertEquals(absoluteClasspath, resource.getPath());
-    Assert.assertEquals(ClasspathResource.SCHEME_PREFIX + absoluteClasspath, resource.getUri());
+    assertThat(resource.getName()).isEqualTo(name);
+    assertThat(resource.getPath()).isEqualTo(absoluteClasspath);
+    assertThat(resource.getUri()).isEqualTo(ClasspathResource.SCHEME_PREFIX + absoluteClasspath);
   }
 }
