@@ -222,6 +222,11 @@
         <artifactId>mmm-util-cli</artifactId>
         <version>${net.sf.mmm.util.version}</version>
       </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-json</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 </project>
