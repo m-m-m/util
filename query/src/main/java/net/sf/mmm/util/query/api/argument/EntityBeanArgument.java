@@ -11,7 +11,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * @param <V> the generic type of the value to check by the {@link Expression} to build.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface EntityBeanArgument<V extends EntityBean> extends Argument<V> {
 

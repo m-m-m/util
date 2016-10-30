@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.base.feature.FeatureSetImpl;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractStoreStatement<E, SELF extends StoreStatement<E, SELF>>
     extends AbstractModifyStatement<E, SELF> implements StoreStatement<E, SELF> {

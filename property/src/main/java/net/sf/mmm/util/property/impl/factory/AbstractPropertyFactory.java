@@ -12,7 +12,7 @@ import net.sf.mmm.util.property.api.factory.PropertyFactory;
  * @param <P> the generic type of the {@link WritableProperty property}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractPropertyFactory<V, P extends WritableProperty<V>> implements PropertyFactory<V, P> {
 

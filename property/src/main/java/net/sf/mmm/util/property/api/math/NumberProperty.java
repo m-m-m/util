@@ -15,7 +15,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @param <N> is the generic type of the internal numeric {@link #getValue() value} representation.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class NumberProperty<N extends Number> extends AbstractRegularProperty<Number>
     implements WritableNumberProperty<N> {

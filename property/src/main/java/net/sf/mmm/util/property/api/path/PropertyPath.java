@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * @param <V> the generic type of the property value identified by this path.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface PropertyPath<V> extends AttributeReadName, AttributeReadValue<V> {
 

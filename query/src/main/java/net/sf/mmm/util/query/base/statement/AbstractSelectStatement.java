@@ -31,7 +31,7 @@ import net.sf.mmm.util.query.base.feature.FeatureWhereImpl;
  * @param <T> the generic type of the {@link #execute(String, QueryMode) internal results}. See {@link #getMapper()}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractSelectStatement<E, SELF extends SelectStatement<E, SELF>, T>
     extends AbstractStatement<E, SELF> implements SelectStatement<E, SELF> {

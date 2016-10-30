@@ -16,7 +16,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface WritableListProperty<E>
     extends ReadableListProperty<E>, WritableCollectionProperty<E, ObservableList<E>>, WritableListValue<E> {

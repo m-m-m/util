@@ -18,7 +18,7 @@ import net.sf.mmm.util.value.impl.spring.UtilValueSpringConfig;
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.bean}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @Configuration
 @Import({ UtilPropertySpringConfig.class, UtilPojoSpringConfig.class, UtilValueSpringConfig.class })

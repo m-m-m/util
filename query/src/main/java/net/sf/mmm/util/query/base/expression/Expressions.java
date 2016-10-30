@@ -10,7 +10,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * Gives static access to create {@link Expression}s and {@link Argument}s.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class Expressions {
 

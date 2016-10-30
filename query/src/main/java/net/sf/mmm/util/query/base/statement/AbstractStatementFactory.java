@@ -9,7 +9,7 @@ import net.sf.mmm.util.query.api.statement.StatementFactory;
  * This is the abstract base implementation of {@link StatementFactory}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractStatementFactory extends AbstractLoggableComponent implements StatementFactory {
 

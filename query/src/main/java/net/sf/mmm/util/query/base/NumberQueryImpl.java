@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.base.statement.AbstractSelectStatement;
  * @param <T> the generic type of the {@link AbstractSelectStatement#execute(String, QueryMode) internal results}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class NumberQueryImpl<R extends Number & Comparable<?>, E, T> extends QueryImpl<R, E, T>
     implements NumberQuery<R> {

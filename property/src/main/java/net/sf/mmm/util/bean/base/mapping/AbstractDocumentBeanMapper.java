@@ -23,7 +23,7 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
  * @param <M> the generic type of the internal {@link Mapping}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends AbstractDocumentBeanMapper.Mapping<D, B>>
     extends AbstractBeanMapper<D, B> implements DocumentBeanMapper<D, B> {

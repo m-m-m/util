@@ -16,7 +16,7 @@ import net.sf.mmm.util.query.api.feature.FeatureWhere;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface SelectStatement<E, SELF extends SelectStatement<E, SELF>> extends Statement<E, SELF>,
     FeatureFetch<E>, FeatureWhere<SELF>, FeatureOrderBy<SELF>, FeatureGroupBy<SELF>, FeaturePaging<SELF> {

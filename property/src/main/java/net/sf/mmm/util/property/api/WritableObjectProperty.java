@@ -11,7 +11,7 @@ import javafx.beans.value.WritableObjectValue;
  * @param <V> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface WritableObjectProperty<V> extends ReadableObjectProperty<V>, WritableObjectValue<V> {
 

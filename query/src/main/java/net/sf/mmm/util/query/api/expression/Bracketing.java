@@ -8,7 +8,7 @@ import net.sf.mmm.util.lang.api.Conjunction;
  * This enum controls how {@link Expression}s are surrounded with brackets when formatted.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public enum Bracketing {
 

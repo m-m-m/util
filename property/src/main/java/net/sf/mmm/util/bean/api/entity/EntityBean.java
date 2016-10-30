@@ -10,7 +10,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * This is the interface for an {@link Entity} as a {@link Bean}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface EntityBean extends Bean, Entity {
 

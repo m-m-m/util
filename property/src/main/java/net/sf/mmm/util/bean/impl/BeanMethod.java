@@ -14,7 +14,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * This is a container for a {@link Method} of a {@link Bean} with additional introspection information.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class BeanMethod {
 

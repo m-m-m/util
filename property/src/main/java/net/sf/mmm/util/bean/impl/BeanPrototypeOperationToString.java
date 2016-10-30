@@ -14,7 +14,7 @@ import net.sf.mmm.util.bean.api.Bean;
  * Operation for {@link Bean#toString()}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class BeanPrototypeOperationToString extends BeanPrototypeOperation {
 

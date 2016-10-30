@@ -11,7 +11,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface FeatureHaving<SELF extends FeatureHaving<SELF>> extends StatementFeature {
 

@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.base.statement.SqlBuilder;
  * Implementation of {@link AbstractFeature} for {@link FeatureWhere}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class FeatureAndFromImpl extends AbstractFeature implements FeatureAndFrom<FeatureAndFromImpl> {
 

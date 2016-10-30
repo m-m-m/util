@@ -20,7 +20,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * This is the implementation of {@link PropertyFactory} for {@link InstantProperty}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @Named
 public class PropertyFactoryInstant extends AbstractPropertyFactory<Instant, InstantProperty> {

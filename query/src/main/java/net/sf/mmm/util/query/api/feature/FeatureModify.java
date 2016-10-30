@@ -8,7 +8,7 @@ package net.sf.mmm.util.query.api.feature;
  * @see net.sf.mmm.util.query.api.statement.ModifyStatement
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface FeatureModify extends StatementFeature {
 

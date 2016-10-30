@@ -11,7 +11,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * This is the factory used to {@link #create(Class) create} instances of {@link Bean}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @ComponentSpecification
 public interface BeanFactory extends AbstractBeanFactory {

@@ -21,7 +21,7 @@ import net.sf.mmm.util.validation.api.ValidationFailure;
  *
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  * @deprecated use {@link WritableProperty#getReadOnly()}
  */
 @Deprecated

@@ -10,7 +10,7 @@ package net.sf.mmm.util.query.api.feature;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface FeatureUpsert<SELF extends FeatureUpsert<SELF>> extends StatementFeature {
 

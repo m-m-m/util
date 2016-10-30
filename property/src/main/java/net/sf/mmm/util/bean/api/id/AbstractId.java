@@ -11,7 +11,7 @@ import java.util.UUID;
  * @param <E> the generic type of the identified entity.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractId<E> implements Id<E> {
 

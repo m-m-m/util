@@ -12,7 +12,7 @@ import net.sf.mmm.util.query.api.path.Path;
  * @param <V> the generic type of the value the check by the {@link Expression} to build.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class ConstantArgument<V> implements AbstractArgument<V> {
 

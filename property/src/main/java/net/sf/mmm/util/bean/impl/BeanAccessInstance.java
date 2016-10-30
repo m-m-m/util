@@ -20,7 +20,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @param <BEAN> the generic type of the intercepted {@link #getBean() bean}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class BeanAccessInstance<BEAN extends Bean> extends BeanAccessBase<BEAN> {
 

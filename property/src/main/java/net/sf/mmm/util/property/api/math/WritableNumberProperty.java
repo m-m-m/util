@@ -12,7 +12,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * @param <N> is the generic type of the internal numeric {@link #getValue() value} representation.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface WritableNumberProperty<N extends Number>
     extends ReadableNumberProperty<N>, WritableProperty<Number>, WritableNumberValue {

@@ -16,7 +16,7 @@ import net.sf.mmm.util.property.api.path.PropertyPath;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface FeatureValues<SELF extends FeatureValues<SELF>> extends StatementFeature {
 

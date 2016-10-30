@@ -18,7 +18,7 @@ import net.sf.mmm.util.query.api.expression.ExpressionFormatter;
  * @see #valueOf(boolean)
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class ConstantExpression implements Expression {
 

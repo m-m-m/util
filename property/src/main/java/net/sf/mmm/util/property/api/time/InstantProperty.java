@@ -19,7 +19,7 @@ import net.sf.mmm.util.validation.base.time.ValidatorBuilderInstant;
  * This is the implementation of {@link WritableInstantProperty}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class InstantProperty extends AbstractRegularProperty<Instant> implements WritableInstantProperty {
 

@@ -12,7 +12,7 @@ import net.sf.mmm.util.query.api.feature.FeatureWhere;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface DeleteStatement<E, SELF extends DeleteStatement<E, SELF>>
     extends ModifyStatement<E, SELF>, FeatureWhere<SELF>, FeatureLimit<SELF> {

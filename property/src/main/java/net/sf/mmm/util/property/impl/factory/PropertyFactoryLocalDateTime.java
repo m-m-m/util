@@ -20,7 +20,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * This is the implementation of {@link PropertyFactory} for {@link LocalDateTimeProperty}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @Named
 public class PropertyFactoryLocalDateTime extends AbstractPropertyFactory<LocalDateTime, LocalDateTimeProperty> {

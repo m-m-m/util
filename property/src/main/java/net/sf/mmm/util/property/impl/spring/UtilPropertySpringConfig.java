@@ -15,7 +15,7 @@ import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.property}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @Configuration
 @ComponentScan(basePackageClasses = PropertyFactoryManagerImpl.class)

@@ -11,7 +11,7 @@ import net.sf.mmm.util.property.api.lang.GenericProperty;
  * {@link Bean}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class BeanPrototypeProperty {
 

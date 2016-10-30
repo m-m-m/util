@@ -14,7 +14,7 @@ import net.sf.mmm.util.bean.api.entity.EntityBean;
  * @param <B> the base type of the {@link Bean} to map (e.g. {@link Bean} or {@link EntityBean}).
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface DocumentBeanMapper<D, B extends Bean> {
 

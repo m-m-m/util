@@ -11,7 +11,7 @@ import net.sf.mmm.util.bean.api.id.Id;
  * be identified uniquely by its {@link #getId() primary key}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface Entity {
 

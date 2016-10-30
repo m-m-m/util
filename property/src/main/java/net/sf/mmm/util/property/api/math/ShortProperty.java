@@ -16,7 +16,7 @@ import net.sf.mmm.util.validation.base.number.ValidatorBuilderInteger;
  * This is the implementation of {@link WritableShortProperty}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class ShortProperty extends NumberProperty<Short> implements WritableShortProperty {
 

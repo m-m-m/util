@@ -21,7 +21,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @see PropertyFactoryManager
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @ComponentSpecification(plugin = true)
 public interface PropertyFactory<V, P extends ReadableProperty<V>> {

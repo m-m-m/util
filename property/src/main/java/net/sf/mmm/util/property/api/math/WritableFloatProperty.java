@@ -10,7 +10,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * {@link Float}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface WritableFloatProperty
     extends ReadableFloatProperty, WritableNumberProperty<Float>, WritableFloatValue {

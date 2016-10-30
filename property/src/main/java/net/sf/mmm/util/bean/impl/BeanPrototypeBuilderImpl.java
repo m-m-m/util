@@ -18,7 +18,7 @@ import net.sf.mmm.util.exception.api.DuplicateObjectException;
  * Implementation of {@link BeanPrototypeBuilder}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class BeanPrototypeBuilderImpl extends AbstractLoggableObject implements BeanPrototypeBuilder {
 

@@ -11,7 +11,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * {@link LocalDateTime}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface WritableLocalDateTimeProperty
     extends ReadableLocalDateTimeProperty, WritableProperty<LocalDateTime> {

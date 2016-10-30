@@ -17,7 +17,7 @@ import net.sf.mmm.util.query.base.statement.AbstractSelectStatement;
  * @param <T> the generic type of the {@link AbstractSelectStatement#execute(String, QueryMode) internal results}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class ListQueryImpl<E, T> extends QueryImpl<List<E>, E, T> implements ListQuery<E> {
 

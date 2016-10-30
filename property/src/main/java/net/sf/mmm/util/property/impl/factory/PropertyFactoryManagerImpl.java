@@ -23,7 +23,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * This is the implementation of {@link PropertyFactoryManager}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implements PropertyFactoryManager {
 

@@ -15,7 +15,7 @@ import net.sf.mmm.util.query.base.expression.SqlOperator;
  * @param <E> the generic type of the {@link Collection}-{@link Collection#contains(Object) elements}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface AbstractCollectionArgument<V extends Collection<E>, E>
     extends AbstractArgument<V>, CollectionArgument<V, E> {

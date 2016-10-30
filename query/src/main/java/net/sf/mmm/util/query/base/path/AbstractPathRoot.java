@@ -10,7 +10,7 @@ import net.sf.mmm.util.query.api.path.PathRoot;
  * @param <E> the generic type of the {@link #getPrototype() prototype}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractPathRoot<E> extends AbstractPathFactory implements PathRoot<E> {
 

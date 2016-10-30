@@ -19,7 +19,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @param <V> is the generic type of the {@link GenericProperty#getValue() value}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @Named
 @SuppressWarnings({ "rawtypes", "unchecked" })

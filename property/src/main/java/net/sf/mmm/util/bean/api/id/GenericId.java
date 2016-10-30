@@ -12,7 +12,7 @@ import net.sf.mmm.util.exception.api.ObjectMismatchException;
  * @param <E> the generic type of the identified entity.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class GenericId<E> extends AbstractId<E> {
 

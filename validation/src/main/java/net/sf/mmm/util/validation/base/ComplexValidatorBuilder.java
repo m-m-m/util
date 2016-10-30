@@ -13,7 +13,7 @@ import java.util.Collection;
  * @param <SELF> the generic type of this builder itself (this).
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class ComplexValidatorBuilder<V, PARENT, SELF extends ComplexValidatorBuilder<V, PARENT, SELF>>
     extends ObjectValidatorBuilder<V, PARENT, SELF> {

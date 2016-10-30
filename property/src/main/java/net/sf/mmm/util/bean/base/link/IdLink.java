@@ -17,7 +17,7 @@ import net.sf.mmm.util.bean.api.link.Link;
  * @param <E> the generic type of the {@link #getTarget() linked} {@link EntityBean}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class IdLink<E extends EntityBean> extends AbstractLink<E> {
 

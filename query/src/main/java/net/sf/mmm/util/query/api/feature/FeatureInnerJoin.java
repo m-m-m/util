@@ -15,7 +15,7 @@ import net.sf.mmm.util.query.base.path.Alias;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface FeatureInnerJoin<SELF extends FeatureInnerJoin<SELF>> extends StatementFeature {
 

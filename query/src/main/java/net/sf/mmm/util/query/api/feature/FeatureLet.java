@@ -12,7 +12,7 @@ import net.sf.mmm.util.query.api.variable.Variable;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface FeatureLet<SELF extends FeatureLet<SELF>> extends StatementFeature {
 

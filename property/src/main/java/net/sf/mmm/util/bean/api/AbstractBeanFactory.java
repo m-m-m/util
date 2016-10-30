@@ -6,7 +6,7 @@ package net.sf.mmm.util.bean.api;
  * This is the abstract base interface for {@link BeanFactory} and {@link BeanPrototypeBuilder}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface AbstractBeanFactory {
 

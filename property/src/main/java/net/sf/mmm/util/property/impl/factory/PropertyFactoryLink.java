@@ -21,7 +21,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @Named
 @SuppressWarnings({ "unchecked", "rawtypes" })

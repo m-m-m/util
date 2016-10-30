@@ -23,7 +23,7 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
  *
  * @param <V> is the generic type of the {@link #getValue() value}.
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractProperty<V> implements WritableProperty<V>, Cloneable {
 

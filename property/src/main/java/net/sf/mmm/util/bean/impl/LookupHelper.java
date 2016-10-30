@@ -16,7 +16,7 @@ import net.sf.mmm.util.reflect.api.InvocationFailedException;
  * Helper class for {@link Lookup} in order to invoke default methods and other magic stuff.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 final class LookupHelper {
 

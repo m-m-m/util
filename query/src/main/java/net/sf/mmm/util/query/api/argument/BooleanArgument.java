@@ -8,7 +8,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * Extends {@link Argument} to build an {@link Expression} for {@link Boolean} value(s).
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface BooleanArgument extends ComparableArgument<Boolean> {
 

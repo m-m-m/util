@@ -32,7 +32,7 @@ import net.sf.mmm.util.validation.base.collection.ValidatorBuilderCollection;
  * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 @SuppressWarnings("restriction")
 public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>> implements WritableListProperty<E> {

@@ -18,7 +18,7 @@ import net.sf.mmm.util.query.base.argument.ConstantArgument;
  * @param <R> the generic type of the {@link #getArg1() right hand}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class SingleExpression<L, R> implements Expression {
 

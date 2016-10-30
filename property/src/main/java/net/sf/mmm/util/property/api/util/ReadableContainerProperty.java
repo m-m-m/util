@@ -13,7 +13,7 @@ import net.sf.mmm.util.property.api.math.ReadableIntegerProperty;
  * @param <V> the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface ReadableContainerProperty<V> extends ReadableProperty<V> {
 

@@ -11,7 +11,7 @@ import java.util.function.Function;
  * of a different type using a given mapping {@link Function}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 class MappingList<S, E> extends AbstractList<E> {
 

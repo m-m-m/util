@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.api.argument.MapArgument;
  * @param <V> the generic type of the {@link Map}-{@link Map#values() values}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class ConstantMapArgument<K, V> extends ConstantArgument<Map<K, V>> implements AbstractMapArgument<K, V> {
 

@@ -10,7 +10,7 @@ import net.sf.mmm.util.query.api.statement.DeleteStatement;
  * {@link DeleteStatement}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface FeatureDelete extends StatementFactoryFeature {
 

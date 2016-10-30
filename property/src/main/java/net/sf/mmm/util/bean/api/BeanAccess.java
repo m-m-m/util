@@ -22,7 +22,7 @@ import net.sf.mmm.util.validation.base.ValidationFailureComposer;
  * This is the interface for all generic operations on a {@link Bean}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface BeanAccess extends JsonSupport {
 

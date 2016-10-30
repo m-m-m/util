@@ -16,7 +16,7 @@ import net.sf.mmm.util.bean.api.id.Id;
  * An implementation of {@link JsonDeserializer} for {@link Id}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class GenericIdJsonDeserializer extends JsonDeserializer<GenericId<?>> {
 

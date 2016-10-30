@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.base.argument.AbstractEntityBeanArgument;
  * @param <V> the generic type of the property value identified by this path.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class EntityBeanPathImpl<V extends EntityBean> extends PathImpl<V>
     implements EntityBeanPath<V>, AbstractEntityBeanArgument<V> {

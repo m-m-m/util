@@ -13,7 +13,7 @@ import net.sf.mmm.util.validation.api.ValueValidator;
  * @param <V> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface WritableProperty<V> extends Property<V>, AttributeWriteValue<V>, ReadableProperty<V> {
 

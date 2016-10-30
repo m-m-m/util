@@ -10,7 +10,7 @@ package net.sf.mmm.util.bean.api;
  * proved a default method with the same signature as {@link #hash()}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface CustomHashCode {
 

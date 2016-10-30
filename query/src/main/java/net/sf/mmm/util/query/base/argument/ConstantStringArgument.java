@@ -8,7 +8,7 @@ import net.sf.mmm.util.query.api.argument.StringArgument;
  * This is the {@link #isConstant() constant} implementation of {@link StringArgument}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class ConstantStringArgument extends ConstantComparableArgument<String> implements AbstractStringArgument {
 

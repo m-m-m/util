@@ -19,7 +19,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @param <V> the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract class AbstractContainerProperty<V> extends AbstractValueProperty<V>
     implements ReadableContainerProperty<V> {

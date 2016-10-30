@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.base.expression.SqlOperator;
  * This is the interface for an SQL dialect.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface SqlDialect {
 

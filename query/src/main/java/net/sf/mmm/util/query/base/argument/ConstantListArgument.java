@@ -12,7 +12,7 @@ import net.sf.mmm.util.query.api.argument.ListArgument;
  * @param <E> the generic type of the {@link List}-{@link List#get(int) elements}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class ConstantListArgument<E> extends ConstantCollectionArgument<List<E>, E>
     implements AbstractListArgument<E> {

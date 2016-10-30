@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * @param <E> the generic type of the {@link List}-{@link List#get(int) elements}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface SetArgument<E> extends CollectionArgument<Set<E>, E> {
 

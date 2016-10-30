@@ -17,7 +17,7 @@ import net.sf.mmm.util.query.base.expression.SqlOperator;
  * @param <V> the generic type of the value the check by the {@link Expression} to build.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface AbstractArgument<V> extends Argument<V> {
 

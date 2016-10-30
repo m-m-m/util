@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.api.argument.ListArgument;
  * @param <E> the generic type of the {@link Collection}-{@link Collection#contains(Object) elements}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface AbstractListArgument<E> extends AbstractCollectionArgument<List<E>, E>, ListArgument<E> {
 

@@ -30,7 +30,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadUuid;
  *
  * @see GenericId
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public interface Id<E> extends Datatype, AttributeReadUuid {
 

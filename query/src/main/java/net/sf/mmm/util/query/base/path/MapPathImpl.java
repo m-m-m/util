@@ -16,7 +16,7 @@ import net.sf.mmm.util.query.base.argument.AbstractMapArgument;
  * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public class MapPathImpl<K, V> extends PathImpl<Map<K, V>> implements MapPath<K, V>, AbstractMapArgument<K, V> {
 

@@ -11,7 +11,7 @@ import net.sf.mmm.util.query.base.expression.SqlOperator.SqlOperatorLike;
  * The abstract base implementation of {@link StringArgument}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 8.4.0
  */
 public abstract interface AbstractStringArgument extends AbstractComparableArgument<String>, StringArgument {
 
