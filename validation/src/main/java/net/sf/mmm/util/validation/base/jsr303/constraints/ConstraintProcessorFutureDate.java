@@ -13,7 +13,7 @@ import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
  * @author hohwille
  * @since 7.4.0
  */
-public class ConstraintProcessorFuture implements TypedConstraintProcessor<Future> {
+public class ConstraintProcessorFutureDate implements TypedConstraintProcessor<Future> {
 
   @Override
   public Class<Future> getType() {
