@@ -16,7 +16,7 @@ import net.sf.mmm.util.validation.base.ValidatorRegistry;
  * standard.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 public interface BeanValidationProcessor {
 

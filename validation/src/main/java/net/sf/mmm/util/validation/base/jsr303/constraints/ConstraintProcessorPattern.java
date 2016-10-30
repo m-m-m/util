@@ -12,7 +12,7 @@ import net.sf.mmm.util.validation.base.text.ValidatorPattern;
  * Implementation of {@link ConstraintProcessor} for {@link ValidatorPattern} based on constraint {@link Pattern}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 @Named
 public class ConstraintProcessorPattern implements TypedConstraintProcessor<Pattern> {

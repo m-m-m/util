@@ -11,7 +11,7 @@ import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
  * Implementation of {@link ConstraintProcessor} for {@link ValidatorDateFuture} based on constraint {@link Future}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 public class ConstraintProcessorFuture implements TypedConstraintProcessor<Future> {
 

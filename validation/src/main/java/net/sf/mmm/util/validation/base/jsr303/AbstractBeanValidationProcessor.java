@@ -22,7 +22,7 @@ import net.sf.mmm.util.validation.base.jsr303.constraints.TypedConstraintProcess
  * The (default) implementation of {@link BeanValidationProcessor}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 public abstract class AbstractBeanValidationProcessor extends AbstractLoggableComponent implements BeanValidationProcessor {
 

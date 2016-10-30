@@ -13,7 +13,7 @@ import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
  * {@link net.sf.mmm.util.validation.base.Mandatory}.
  *
  * @author hohwille
- * @since 8.0.0
+ * @since 7.4.0
  */
 public class ConstraintProcessorMandatory implements ConstraintProcessor<Annotation> {
 
