@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 import net.sf.mmm.util.context.api.MutableGenericContext;
-import net.sf.mmm.util.value.api.ValueNotSetException;
+import net.sf.mmm.util.exception.api.ValueNotSetException;
 
 /**
  * This is the test-case for {@link GenericContextFactory}.

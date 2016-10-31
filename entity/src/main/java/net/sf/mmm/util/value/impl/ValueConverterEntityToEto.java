@@ -6,10 +6,10 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import net.sf.mmm.util.entity.api.PersistenceEntity;
+import net.sf.mmm.util.exception.api.ValueException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.transferobject.api.EntityTo;
 import net.sf.mmm.util.transferobject.api.EntityTo.PersistentEntityAccess;
-import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This class extends {@link AbstractValueConverterToCompatiblePojo} for conversion from {@link PersistenceEntity} to
@@ -48,8 +48,7 @@ public class ValueConverterEntityToEto extends AbstractValueConverterToSimilarPo
 
   @SuppressWarnings("unchecked")
   @Override
-  public <T extends EntityTo> T convert(PersistenceEntity value, Object valueSource, GenericType<T> targetType)
-      throws ValueException {
+  public <T extends EntityTo> T convert(PersistenceEntity value, Object valueSource, GenericType<T> targetType) throws ValueException {
 
     T eto = super.convert(value, valueSource, targetType);
     HELPER.setPersistentEntity(eto, value);

@@ -165,8 +165,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   }
 
   /**
-   * This method gets the {@link NlsBundleOptions} for the given {@code bundleInterface}. If NOT present a
-   * default instance is returned.
+   * This method gets the {@link NlsBundleOptions} for the given {@code bundleInterface}. If NOT present a default
+   * instance is returned.
    *
    * @param bundleInterface is the {@link Class} reflecting the {@link NlsBundle} interface.
    * @return the annotated {@link NlsBundleOptions} or the default if {@code bundleInterface} is NOT annotated
@@ -195,8 +195,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   }
 
   /**
-   * @return a {@link Collection} of {@link NlsBundleDescriptor}s for all {@link NlsBundle}-interfaces on the
-   *         classpath following the suggested naming convention {@code NlsBundle*Root}.
+   * @return a {@link Collection} of {@link NlsBundleDescriptor}s for all {@link NlsBundle}-interfaces on the classpath
+   *         following the suggested naming convention {@code NlsBundle*Root}.
    */
   public Collection<? extends NlsBundleDescriptor> getNlsBundleDescriptors() {
 
@@ -211,6 +211,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     return this.bundleDescriptors;
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private List<NlsBundleInvocationHandler> populateNlsBundleDescriptors() {
 
     List<NlsBundleInvocationHandler> descriptors = new ArrayList<>();
@@ -289,8 +290,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * This method converts the given {@code arguments} to a {@link Map} with the
-     * {@link NlsMessage#getArgument(String) arguments}.
+     * This method converts the given {@code arguments} to a {@link Map} with the {@link NlsMessage#getArgument(String)
+     * arguments}.
      *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @param methodInfo is the {@link NlsBundleMethodInfo} for the given {@link Method}.
@@ -311,8 +312,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given
-     * {@link Method}.
+     * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given {@link Method}.
      *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @return an array with the {@link NlsMessage#getArgument(String) argument-names}.
@@ -401,14 +401,13 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * Gets {@link NlsBundleMethodInfo} for {@code methodName} from cache or creates it and puts it into the
-     * cache.
+     * Gets {@link NlsBundleMethodInfo} for {@code methodName} from cache or creates it and puts it into the cache.
      *
      * @param method is the {@link Method} or {@code null} for generic invocation (lookup).
      * @param args are the method arguments or {@code null} for generic invocation (lookup).
      * @param methodName is the {@link Method#getName() name} of the {@link Method}.
-     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by
-     *        {@code methodName} if not given.
+     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by {@code methodName} if
+     *        not given.
      * @return the {@link NlsBundleMethodInfo}. May be {@code null} for generic invocation if method for
      *         {@code methodName} was not found (does not exist).
      */

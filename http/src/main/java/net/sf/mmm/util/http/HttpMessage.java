@@ -136,7 +136,7 @@ public abstract class HttpMessage {
   public HttpMessage() {
 
     super();
-    this.header = new HashMap<Object, String>();
+    this.header = new HashMap<>();
     this.version = VERSION_1_1;
   }
 
@@ -250,8 +250,7 @@ public abstract class HttpMessage {
         }
       }
       if (!found) {
-        StringBuffer buffer = new StringBuffer(
-            value.length() + attributeName.length() + attributeValue.length() + 2);
+        StringBuffer buffer = new StringBuffer(value.length() + attributeName.length() + attributeValue.length() + 2);
         buffer.append(value);
         buffer.append(',');
         buffer.append(attributeName);

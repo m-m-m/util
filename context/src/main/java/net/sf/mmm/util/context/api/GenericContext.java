@@ -5,7 +5,7 @@ package net.sf.mmm.util.context.api;
 import java.util.Map;
 import java.util.Set;
 
-import net.sf.mmm.util.value.api.ValueNotSetException;
+import net.sf.mmm.util.exception.api.ValueNotSetException;
 
 /**
  * This is the interface for a context of variables. It allows to read all variables as well as to

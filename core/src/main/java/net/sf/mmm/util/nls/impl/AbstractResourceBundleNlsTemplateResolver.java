@@ -9,7 +9,7 @@ import net.sf.mmm.util.nls.base.NlsTemplateImplWithMessage;
 /**
  * This is an abstract base implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplateResolver} interface. <br>
  * The localization is done by a reverse lookup of the message key from the given {@link #resolveTemplate(String)
- * internationalized message} using {@link NlsReversedResourceBundle}. With that key and the name of the according
+ * internationalized message} using {@code NlsReversedResourceBundle}. With that key and the name of the according
  * {@link java.util.ResourceBundle} it is possible to create the according {@link NlsTemplate}. <br>
  * The template does the localization by a forward {@link java.util.ResourceBundle#getBundle(String, java.util.Locale)
  * lookup} for a regular {@link java.util.ResourceBundle bundle} with the same {@link Class#getName() name}. <br>
@@ -44,8 +44,7 @@ public abstract class AbstractResourceBundleNlsTemplateResolver extends Abstract
    * @deprecated obsolete, will be removed.
    */
   @Deprecated
-  protected NlsTemplate resolveTemplate(NlsReversedResourceBundle reversedBundle,
-      String internationalizedMessage) {
+  protected NlsTemplate resolveTemplate(NlsReversedResourceBundle reversedBundle, String internationalizedMessage) {
 
     // ResourceBundleReverse reverseBundle = getReverseBundle(resourceBundle);
     String key = reversedBundle.getKey(internationalizedMessage);

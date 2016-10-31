@@ -21,8 +21,8 @@ import java.lang.annotation.Target;
  * <b>ATTENTION:</b><br>
  * Whenever possible prefer a {@link CliOption} over a {@link CliArgument}. However having a single {@link CliArgument}
  * is just fine. But having multiple {@link CliArgument arguments} together in some {@link #mode() mode} can cause
- * maintenance trouble. This is only supported to avoid limitations (e.g. if you want to implement something like
- * "grep pattern [file]+") but NOT recommended.
+ * maintenance trouble. This is only supported to avoid limitations (e.g. if you want to implement something like "grep
+ * pattern [file]+") but NOT recommended.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -43,61 +43,58 @@ public @interface CliArgument {
   String ID_LAST = "#last";
 
   /**
-   * The ID of the argument used to identify the argument e.g. via {@link #addCloseTo()}. The default is the empty
-   * string that is treated as if the ID is set to the same value as {@link #name()}.
+   * @return the ID of the argument used to identify the argument e.g. via {@link #addCloseTo()}. The default is the
+   *         empty string that is treated as if the ID is set to the same value as {@link #name()}.
    */
   String id() default "";
 
   /**
-   * The name of the argument used for help usage output.
+   * @return the name of the argument used for help usage output.
    */
   String name();
 
   /**
-   * Determines if this {@link CliArgument} should be add after ( {@code true}) or before ( {@code false}) the
-   * {@link CliArgument argument} identified by {@link #addCloseTo()}.
+   * @return determines if this {@link CliArgument} should be add after ( {@code true}) or before ( {@code false}) the
+   *         {@link CliArgument argument} identified by {@link #addCloseTo()}.
    */
   boolean addAfter() default true;
 
   /**
-   * The {@link #name() name} of the argument where to add this {@link CliArgument} in the list of arguments. The
-   * default is {@link #ID_LAST}.
-   *
+   * @return the {@link #name() name} of the argument where to add this {@link CliArgument} in the list of arguments.
+   *         The default is {@link #ID_LAST}.
    * @see #ID_FIRST
    * @see #ID_LAST
    */
   String addCloseTo() default CliArgument.ID_LAST;
 
   /**
-   * The mode of this argument.
-   *
+   * @return the mode of this argument.
    * @see CliOption#mode()
    */
   String mode() default CliMode.ID_DEFAULT;
 
   /**
-   * The description of this argument for {@link CliParser#printHelp(Appendable) help usage}. It should be an
-   * {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalized message} that will be
-   * localized using {@link net.sf.mmm.util.nls.api.NlsMessage}.
-   * {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) NLS-arguments} are "default" for the default value.
+   * @return the description of this argument for {@link CliParser#printHelp(Appendable) help usage}. It should be an
+   *         {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalized message} that
+   *         will be localized using {@link net.sf.mmm.util.nls.api.NlsMessage}.
+   *         {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) NLS-arguments} are "default" for the default
+   *         value.
    */
   String usage();
 
   /**
-   * The flag that indicates if this argument is required. The default value is {@code true}. Use a value of
-   * {@code false} to make this argument optional within it's {@link #mode() mode}. <br>
-   * <b>ATTENTION:</b><br>
-   * Avoid optional arguments and use {@link CliOption options} instead. If you use optional arguments anyway, please
-   * note that potentially following options also need to be optional then.
-   *
+   * @return the flag that indicates if this argument is required. The default value is {@code true}. Use a value of
+   *         {@code false} to make this argument optional within it's {@link #mode() mode}. <br>
+   *         <b>ATTENTION:</b><br>
+   *         Avoid optional arguments and use {@link CliOption options} instead. If you use optional arguments anyway,
+   *         please note that potentially following options also need to be optional then.
    * @see CliMode#parentIds()
    */
   boolean required() default true;
 
   /**
-   * The {@link CliContainerStyle style} of this argument if it has a container type. The default is
-   * {@link CliContainerStyle#DEFAULT}.
-   *
+   * @return the {@link CliContainerStyle style} of this argument if it has a container type. The default is
+   *         {@link CliContainerStyle#DEFAULT}.
    * @see CliStyle#containerStyle()
    */
   CliContainerStyle containerStyle() default CliContainerStyle.DEFAULT;

@@ -50,41 +50,41 @@ public @interface CliMode {
   String ID_VERSION = "version";
 
   /**
-   * The unique id of this {@link CliMode}. Should match to {@link CliOption#mode() mode} of {@link CliOption options}.
+   * @return the unique id of this {@link CliMode}. Should match to {@link CliOption#mode() mode} of {@link CliOption
+   *         options}.
    */
   String id();
 
   /**
-   * The title of this {@link CliMode} for displaying in help-usage for the end-user. The default is the empty string
-   * that is treated as fallback to show the {@link #id() ID} as title.
-   *
+   * @return the title of this {@link CliMode} for displaying in help-usage for the end-user. The default is the empty
+   *         string that is treated as fallback to show the {@link #id() ID} as title.
    * @see net.sf.mmm.util.nls.api.NlsMessage
    */
   String title() default "";
 
   /**
-   * A brief description of what the program actually does in this mode. If not present no explicit description will be
-   * {@link CliParser#printHelp(Appendable) printed}.
+   * @return a brief description of what the program actually does in this mode. If not present no explicit description
+   *         will be {@link CliParser#printHelp(Appendable) printed}.
    */
   String usage() default "";
 
   /**
-   * The {@link #id() IDs} of the {@link CliMode modes} to extend. <br>
-   * If you have two {@link CliOption options} with different {@link CliOption#mode() modes} and the first extends the
-   * second, then the two {@link CliOption options} can be used together and the mode of the extended {@link CliMode
-   * mode} is chosen. For the chosen {@link CliMode mode} and all {@link CliMode modes} inherited (recursively) all
-   * {@link CliOption#required() required} {@link CliOption options} have to be present.
+   * @return the {@link #id() IDs} of the {@link CliMode modes} to extend. <br>
+   *         If you have two {@link CliOption options} with different {@link CliOption#mode() modes} and the first
+   *         extends the second, then the two {@link CliOption options} can be used together and the mode of the
+   *         extended {@link CliMode mode} is chosen. For the chosen {@link CliMode mode} and all {@link CliMode modes}
+   *         inherited (recursively) all {@link CliOption#required() required} {@link CliOption options} have to be
+   *         present.
    */
-  String[] parentIds() default { //
-  };
+  String[] parentIds() default {};
 
   /**
-   * {@code true} if this mode is <em>abstract</em>, {@code false} otherwise (default). <br>
-   * An abstract mode needs to have one or multiple child modes (that {@link #parentIds() extend} the abstract mode). If
-   * an {@link CliOption option} {@link CliOption#mode() has a mode}, that is {@link #isAbstract() abstract}, then this
-   * {@link CliOption option} can only be used together with another {@link CliOption option} that
-   * {@link CliOption#mode() has a mode} that is NOT {@link #isAbstract() abstract} and {@link #parentIds() extends} the
-   * {@link #isAbstract() abstract} mode.
+   * @return {@code true} if this mode is <em>abstract</em>, {@code false} otherwise (default). <br>
+   *         An abstract mode needs to have one or multiple child modes (that {@link #parentIds() extend} the abstract
+   *         mode). If an {@link CliOption option} {@link CliOption#mode() has a mode}, that is {@link #isAbstract()
+   *         abstract}, then this {@link CliOption option} can only be used together with another {@link CliOption
+   *         option} that {@link CliOption#mode() has a mode} that is NOT {@link #isAbstract() abstract} and
+   *         {@link #parentIds() extends} the {@link #isAbstract() abstract} mode.
    */
   boolean isAbstract() default false;
 

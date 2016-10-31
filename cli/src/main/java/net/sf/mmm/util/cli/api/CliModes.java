@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
 public @interface CliModes {
 
   /**
-   * The array with all annotated {@link CliMode}s.
+   * @return the array with all annotated {@link CliMode}s.
    */
   CliMode[] value();
 

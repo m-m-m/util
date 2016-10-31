@@ -8,9 +8,9 @@ import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.context.base.AbstractMutableGenericContext;
+import net.sf.mmm.util.exception.api.WrongValueTypeException;
 import net.sf.mmm.util.lang.api.CompilerWarnings;
 import net.sf.mmm.util.value.api.GenericValueConverter;
-import net.sf.mmm.util.value.api.WrongValueTypeException;
 
 /**
  * This is the implementation of the {@link MutableGenericContext} interface.
@@ -42,8 +42,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    *        {@link #getVariable(String, Class) requested} as a different type.
    */
   @SuppressWarnings(CompilerWarnings.RAWTYPES)
-  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory,
-      GenericValueConverter<Object> valueConverter) {
+  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericValueConverter<Object> valueConverter) {
 
     this(mapFactory, null, valueConverter);
   }
@@ -69,8 +68,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    *        {@link #getVariable(String, Class) requested} as a different type.
    */
   @SuppressWarnings(CompilerWarnings.RAWTYPES)
-  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericContext parentContext,
-      GenericValueConverter<Object> valueConverter) {
+  public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericContext parentContext, GenericValueConverter<Object> valueConverter) {
 
     super(mapFactory, parentContext);
     this.valueConverter = valueConverter;

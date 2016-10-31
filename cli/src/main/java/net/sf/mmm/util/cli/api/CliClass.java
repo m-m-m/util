@@ -29,16 +29,16 @@ import java.lang.annotation.Target;
 public @interface CliClass {
 
   /**
-   * The name of the main-program for the usage. By default the {@link Class#getName() qualified classname} of the
-   * program is used. You can set this explicitly if your main-program is always run from a front-end shell-script or
-   * you do NOT want to annotate you main-program class but use an externalized state object.
+   * @return the name of the main-program for the usage. By default the {@link Class#getName() qualified classname} of
+   *         the program is used. You can set this explicitly if your main-program is always run from a front-end
+   *         shell-script or you do NOT want to annotate you main-program class but use an externalized state object.
    */
   String name() default "";
 
   /**
-   * A brief description of what this program actually does. This is added to the generated
-   * {@link CliParser#printHelp(Appendable) usage help} of the program. If not set no additional custom description will
-   * be {@link CliParser#printHelp(Appendable) printed}.
+   * @return a brief description of what this program actually does. This is added to the generated
+   *         {@link CliParser#printHelp(Appendable) usage help} of the program. If not set no additional custom
+   *         description will be {@link CliParser#printHelp(Appendable) printed}.
    */
   String usage() default "";
 

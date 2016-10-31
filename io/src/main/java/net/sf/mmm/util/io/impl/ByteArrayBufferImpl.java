@@ -4,9 +4,9 @@ package net.sf.mmm.util.io.impl;
 
 import java.util.NoSuchElementException;
 
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This class is similar to {@link java.nio.ByteBuffer} but a lot simpler. However it allows to
@@ -67,8 +67,8 @@ public class ByteArrayBufferImpl extends ByteArrayImpl implements ByteArrayBuffe
   @Override
   public void setCurrentIndex(int currentIndex) {
 
-    ValueOutOfRangeException.checkRange(Integer.valueOf(currentIndex), Integer.valueOf(getMinimumIndex()),
-        Integer.valueOf(getMaximumIndex() + 1), "currentIndex");
+    ValueOutOfRangeException.checkRange(Integer.valueOf(currentIndex), Integer.valueOf(getMinimumIndex()), Integer.valueOf(getMaximumIndex() + 1),
+        "currentIndex");
     this.currentIndex = currentIndex;
   }
 

@@ -40,7 +40,7 @@ public class ValueConverterToPattern extends AbstractSimpleValueConverter<CharSe
     return Pattern.class;
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("all")
   @Override
   public <T extends Pattern> T convert(CharSequence value, Object valueSource, Class<T> targetClass) {
 
