@@ -10,7 +10,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.time.ValidatorBuilderLocalDate;
@@ -31,7 +30,7 @@ public class LocalDateProperty extends AbstractRegularProperty<LocalDate> implem
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public LocalDateProperty(String name, Bean bean) {
+  public LocalDateProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -42,7 +41,7 @@ public class LocalDateProperty extends AbstractRegularProperty<LocalDate> implem
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public LocalDateProperty(String name, Bean bean, AbstractValidator<? super LocalDate> validator) {
+  public LocalDateProperty(String name, Object bean, AbstractValidator<? super LocalDate> validator) {
     super(name, bean, validator);
   }
 
@@ -53,7 +52,7 @@ public class LocalDateProperty extends AbstractRegularProperty<LocalDate> implem
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public LocalDateProperty(String name, Bean bean, Supplier<LocalDate> expression) {
+  public LocalDateProperty(String name, Object bean, Supplier<LocalDate> expression) {
     super(name, bean, expression);
   }
 

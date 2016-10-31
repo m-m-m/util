@@ -63,9 +63,9 @@ public class BeanPrototypeProperty {
   public String toString() {
 
     StringBuilder buffer = new StringBuilder();
-    Bean bean = this.property.getBean();
+    Object bean = this.property.getBean();
     if (bean != null) {
-      buffer.append(bean.access().getSimpleName());
+      buffer.append(((Bean) bean).access().getSimpleName());
       buffer.append('.');
     }
     buffer.append(this.property.getName());

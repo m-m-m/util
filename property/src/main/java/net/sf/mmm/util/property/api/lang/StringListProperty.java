@@ -13,7 +13,6 @@ import java.util.function.Supplier;
 
 import javax.json.stream.JsonGenerator;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
@@ -39,7 +38,7 @@ public class StringListProperty extends StringProperty {
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public StringListProperty(String name, Bean bean) {
+  public StringListProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -50,7 +49,7 @@ public class StringListProperty extends StringProperty {
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public StringListProperty(String name, Bean bean, AbstractValidator<? super String> validator) {
+  public StringListProperty(String name, Object bean, AbstractValidator<? super String> validator) {
     super(name, bean, validator);
   }
 
@@ -61,7 +60,7 @@ public class StringListProperty extends StringProperty {
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public StringListProperty(String name, Bean bean, Supplier<String> expression) {
+  public StringListProperty(String name, Object bean, Supplier<String> expression) {
     super(name, bean, expression);
   }
 

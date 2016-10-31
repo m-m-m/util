@@ -5,7 +5,6 @@ package net.sf.mmm.util.property.impl.factory;
 import javax.inject.Named;
 
 import javafx.collections.ObservableList;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
@@ -52,7 +51,7 @@ public class PropertyFactoryList<E> extends AbstractPropertyFactory<ObservableLi
   }
 
   @Override
-  public ListProperty<E> create(String name, GenericType<? extends ObservableList<E>> valueType, Bean bean,
+  public ListProperty<E> create(String name, GenericType<? extends ObservableList<E>> valueType, Object bean,
       AbstractValidator<? super ObservableList<E>> validator) {
 
     return new ListProperty<>(name, valueType, bean, validator);

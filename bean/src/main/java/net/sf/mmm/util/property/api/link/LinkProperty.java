@@ -4,7 +4,6 @@ package net.sf.mmm.util.property.api.link;
 
 import java.util.function.Supplier;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.bean.api.link.Link;
 import net.sf.mmm.util.property.api.lang.GenericProperty;
@@ -36,7 +35,7 @@ public class LinkProperty<E extends EntityBean> extends GenericProperty<Link<E>>
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public LinkProperty(String name, GenericType<Link<E>> type, Bean bean) {
+  public LinkProperty(String name, GenericType<Link<E>> type, Object bean) {
     super(name, type, bean);
   }
 
@@ -48,7 +47,7 @@ public class LinkProperty<E extends EntityBean> extends GenericProperty<Link<E>>
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public LinkProperty(String name, GenericType<Link<E>> type, Bean bean, AbstractValidator<? super Link<E>> validator) {
+  public LinkProperty(String name, GenericType<Link<E>> type, Object bean, AbstractValidator<? super Link<E>> validator) {
     super(name, type, bean, validator);
   }
 
@@ -60,7 +59,7 @@ public class LinkProperty<E extends EntityBean> extends GenericProperty<Link<E>>
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public LinkProperty(String name, GenericType<Link<E>> type, Bean bean, Supplier<? extends Link<E>> expression) {
+  public LinkProperty(String name, GenericType<Link<E>> type, Object bean, Supplier<? extends Link<E>> expression) {
     super(name, type, bean, expression);
   }
 

@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -41,7 +40,7 @@ public class GenericProperty<V> extends AbstractRegularProperty<V> {
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public GenericProperty(String name, GenericType<V> type, Bean bean) {
+  public GenericProperty(String name, GenericType<V> type, Object bean) {
     this(name, type, bean, (AbstractValidator<? super V>) null);
   }
 
@@ -53,7 +52,7 @@ public class GenericProperty<V> extends AbstractRegularProperty<V> {
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public GenericProperty(String name, GenericType<V> type, Bean bean, AbstractValidator<? super V> validator) {
+  public GenericProperty(String name, GenericType<V> type, Object bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
     this.type = type;
   }
@@ -66,7 +65,7 @@ public class GenericProperty<V> extends AbstractRegularProperty<V> {
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public GenericProperty(String name, GenericType<V> type, Bean bean, Supplier<? extends V> expression) {
+  public GenericProperty(String name, GenericType<V> type, Object bean, Supplier<? extends V> expression) {
     super(name, bean, expression);
     this.type = type;
   }

@@ -15,7 +15,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.property.api.AbstractContainerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -62,7 +61,7 @@ public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> 
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public SetProperty(String name, GenericType<? extends ObservableSet<E>> type, Bean bean) {
+  public SetProperty(String name, GenericType<? extends ObservableSet<E>> type, Object bean) {
     super(name, type, bean);
   }
 
@@ -74,8 +73,7 @@ public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> 
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public SetProperty(String name, GenericType<? extends ObservableSet<E>> type, Bean bean,
-      AbstractValidator<? super ObservableSet<E>> validator) {
+  public SetProperty(String name, GenericType<? extends ObservableSet<E>> type, Object bean, AbstractValidator<? super ObservableSet<E>> validator) {
     super(name, type, bean, validator);
   }
 
@@ -87,8 +85,7 @@ public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> 
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public SetProperty(String name, GenericType<? extends ObservableSet<E>> type, Bean bean,
-      Supplier<ObservableSet<E>> expression) {
+  public SetProperty(String name, GenericType<? extends ObservableSet<E>> type, Object bean, Supplier<ObservableSet<E>> expression) {
     super(name, type, bean, expression);
   }
 

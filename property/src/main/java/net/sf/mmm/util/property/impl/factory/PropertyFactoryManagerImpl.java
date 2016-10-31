@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.pojo.api.PojoFactory;
@@ -85,8 +84,7 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
     register(this.propertyType2factoryMap, type, factory, allowOverride);
   }
 
-  private static void register(Map<Class<?>, PropertyFactory<?, ?>> map, Class<?> type,
-      PropertyFactory<?, ?> factory, boolean allowOverride) {
+  private static void register(Map<Class<?>, PropertyFactory<?, ?>> map, Class<?> type, PropertyFactory<?, ?> factory, boolean allowOverride) {
 
     if (type == null) {
       return;
@@ -127,7 +125,7 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
     registerFactory(new PropertyFactoryList());
     registerFactory(new PropertyFactorySet());
     registerFactory(new PropertyFactoryMap());
-    registerFactory(new PropertyFactoryLink());
+    // registerFactory(new PropertyFactoryLink());
   }
 
   /**
@@ -161,16 +159,14 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactoryForPropertyType(
-      Class<PROPERTY> propertyType) {
+  public <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactoryForPropertyType(Class<PROPERTY> propertyType) {
 
     return (PropertyFactory) this.propertyType2factoryMap.get(propertyType);
   }
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<? extends V> valueType,
-      boolean polymorphic) {
+  public <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<? extends V> valueType, boolean polymorphic) {
 
     PropertyFactory<?, ?> factory = this.valueType2factoryMap.get(valueType);
     if ((factory == null) && polymorphic) {
@@ -186,9 +182,8 @@ public class PropertyFactoryManagerImpl extends AbstractLoggableComponent implem
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public <V, PROPERTY extends ReadableProperty<V>> PROPERTY create(Class<PROPERTY> propertyType,
-      GenericType<V> valueType, boolean polymorphic, String name, Bean bean,
-      AbstractValidator<? super V> validator) {
+  public <V, PROPERTY extends ReadableProperty<V>> PROPERTY create(Class<PROPERTY> propertyType, GenericType<V> valueType, boolean polymorphic, String name,
+      Object bean, AbstractValidator<? super V> validator) {
 
     Class<V> valueClass = null;
     if (valueType != null) {

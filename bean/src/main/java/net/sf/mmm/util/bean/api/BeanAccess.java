@@ -13,10 +13,7 @@ import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyNotFoundException;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
-import net.sf.mmm.util.validation.api.ValidationFailure;
-import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.validation.base.AbstractValidator;
-import net.sf.mmm.util.validation.base.ValidationFailureComposer;
 
 /**
  * This is the interface for all generic operations on a {@link Bean}.
@@ -119,22 +116,6 @@ public interface BeanAccess extends JsonSupport {
   }
 
   /**
-   * @see ValueValidator#validate(Object)
-   *
-   * @return the {@link ValidationFailure} or {@code null} if this {@link Bean} is valid according to this
-   *         {@link ValueValidator}.
-   */
-  default ValidationFailure validate() {
-
-    ValidationFailureComposer composer = new ValidationFailureComposer();
-    for (WritableProperty<?> property : getProperties()) {
-      ValidationFailure failure = property.validate();
-      composer.add(failure);
-    }
-    return composer.get(this);
-  }
-
-  /**
    * {@link #getProperty(String) Gets} or {@link #createProperty(String, GenericType) creates} the specified property.
    * If the property already exists also the {@link WritableProperty#getType() type} has to match the given {@code type}
    * or an exception will be thrown.
@@ -167,8 +148,7 @@ public interface BeanAccess extends JsonSupport {
    * @param propertyType the Class reflecting the {@link WritableProperty} to create.
    * @return the requested property.
    */
-  default <V, PROPERTY extends WritableProperty<V>> PROPERTY getOrCreateProperty(String name,
-      Class<PROPERTY> propertyType) {
+  default <V, PROPERTY extends WritableProperty<V>> PROPERTY getOrCreateProperty(String name, Class<PROPERTY> propertyType) {
 
     GenericType<V> valueType = null;
     return getOrCreateProperty(name, valueType, propertyType);
@@ -185,8 +165,8 @@ public interface BeanAccess extends JsonSupport {
    * @param propertyType the Class reflecting the {@link WritableProperty} to create.
    * @return the requested property.
    */
-  default <V, PROPERTY extends WritableProperty<V>> PROPERTY getOrCreateProperty(String name,
-      GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
+  default <V, PROPERTY extends WritableProperty<V>> PROPERTY getOrCreateProperty(String name, GenericType<? extends V> valueType,
+      Class<PROPERTY> propertyType) {
 
     WritableProperty<?> property = getProperty(name);
     if (property != null) {
@@ -296,8 +276,7 @@ public interface BeanAccess extends JsonSupport {
    * @param propertyType the Class reflecting the {@link WritableProperty} to create.
    * @return the newly created property.
    */
-  <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<? extends V> valueType,
-      Class<PROPERTY> propertyType);
+  <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<? extends V> valueType, Class<PROPERTY> propertyType);
 
   /**
    * This method updates a given {@link WritableProperty property} such that the provided {@link AbstractValidator
@@ -311,8 +290,7 @@ public interface BeanAccess extends JsonSupport {
    * @param validator is the {@link AbstractValidator validator} to add. The implementation tries its best to be
    *        idempotent so adding the same validator again should have no effect.
    */
-  <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
-      AbstractValidator<? super V> validator);
+  <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property, AbstractValidator<? super V> validator);
 
   /**
    * This method updates a given {@link WritableProperty property} such that the provided {@link AbstractValidator
@@ -326,8 +304,7 @@ public interface BeanAccess extends JsonSupport {
    * @param validators is the {@link Collection} with the {@link AbstractValidator validators} to add. The
    *        implementation tries its best to be idempotent so adding the same validator again should have no effect.
    */
-  <V, PROPERTY extends WritableProperty<V>> void addPropertyValidators(WritableProperty<?> property,
-      Collection<AbstractValidator<? super V>> validators);
+  <V, PROPERTY extends WritableProperty<V>> void addPropertyValidators(WritableProperty<?> property, Collection<AbstractValidator<? super V>> validators);
 
   /**
    * @see BeanFactory#getReadOnlyBean(Bean)

@@ -5,7 +5,6 @@ package net.sf.mmm.util.property.api.math;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
@@ -17,8 +16,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @author hohwille
  * @since 8.4.0
  */
-public abstract class NumberProperty<N extends Number> extends AbstractRegularProperty<Number>
-    implements WritableNumberProperty<N> {
+public abstract class NumberProperty<N extends Number> extends AbstractRegularProperty<Number> implements WritableNumberProperty<N> {
 
   /**
    * The constructor.
@@ -26,7 +24,7 @@ public abstract class NumberProperty<N extends Number> extends AbstractRegularPr
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public NumberProperty(String name, Bean bean) {
+  public NumberProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -37,7 +35,7 @@ public abstract class NumberProperty<N extends Number> extends AbstractRegularPr
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public NumberProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public NumberProperty(String name, Object bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -48,7 +46,7 @@ public abstract class NumberProperty<N extends Number> extends AbstractRegularPr
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public NumberProperty(String name, Bean bean, Supplier<? extends Number> expression) {
+  public NumberProperty(String name, Object bean, Supplier<? extends Number> expression) {
     super(name, bean, expression);
   }
 

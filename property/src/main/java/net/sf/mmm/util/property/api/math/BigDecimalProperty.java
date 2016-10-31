@@ -9,7 +9,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -34,7 +33,7 @@ public class BigDecimalProperty extends NumberProperty<BigDecimal> {
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public BigDecimalProperty(String name, Bean bean) {
+  public BigDecimalProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -45,7 +44,7 @@ public class BigDecimalProperty extends NumberProperty<BigDecimal> {
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public BigDecimalProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public BigDecimalProperty(String name, Object bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -56,7 +55,7 @@ public class BigDecimalProperty extends NumberProperty<BigDecimal> {
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public BigDecimalProperty(String name, Bean bean, Supplier<BigDecimal> expression) {
+  public BigDecimalProperty(String name, Object bean, Supplier<BigDecimal> expression) {
     super(name, bean, expression);
   }
 

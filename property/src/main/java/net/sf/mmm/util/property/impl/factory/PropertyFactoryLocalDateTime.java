@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
@@ -50,7 +49,7 @@ public class PropertyFactoryLocalDateTime extends AbstractPropertyFactory<LocalD
   }
 
   @Override
-  public LocalDateTimeProperty create(String name, GenericType<? extends LocalDateTime> valueType, Bean bean,
+  public LocalDateTimeProperty create(String name, GenericType<? extends LocalDateTime> valueType, Object bean,
       AbstractValidator<? super LocalDateTime> validator) {
 
     return new LocalDateTimeProperty(name, bean, validator);

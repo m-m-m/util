@@ -10,7 +10,6 @@ import javax.json.Json;
 import javax.json.stream.JsonGenerator;
 
 import javafx.beans.value.ObservableValue;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.json.base.JsonUtilImpl;
 import net.sf.mmm.util.lang.api.Builder;
@@ -29,7 +28,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
 
   private String name;
 
-  private Bean bean;
+  private Object bean;
 
   private AbstractValidator<? super V> validator;
 
@@ -39,7 +38,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractProperty(String name, Bean bean) {
+  public AbstractProperty(String name, Object bean) {
     this(name, bean, null);
   }
 
@@ -50,7 +49,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractProperty(String name, Bean bean, AbstractValidator<? super V> validator) {
+  public AbstractProperty(String name, Object bean, AbstractValidator<? super V> validator) {
     super();
     this.name = name;
     this.bean = bean;
@@ -68,7 +67,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
   }
 
   @Override
-  public Bean getBean() {
+  public Object getBean() {
 
     return this.bean;
   }
@@ -98,7 +97,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
    * @param newBean the new {@link #getBean() bean}.
    * @return the new property instance.
    */
-  public final AbstractProperty<V> copy(Bean newBean) {
+  public final AbstractProperty<V> copy(Object newBean) {
 
     return copy(this.name, newBean, this.validator);
   }
@@ -121,7 +120,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
    * @param newValidator the new {@link #getValidator() validator}.
    * @return the new property instance.
    */
-  public final AbstractProperty<V> copy(Bean newBean, AbstractValidator<? super V> newValidator) {
+  public final AbstractProperty<V> copy(Object newBean, AbstractValidator<? super V> newValidator) {
 
     return copy(this.name, newBean, newValidator);
   }
@@ -133,7 +132,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
    * @param newBean the new {@link #getBean() bean}.
    * @return the new property instance.
    */
-  public final AbstractProperty<V> copy(String newName, Bean newBean) {
+  public final AbstractProperty<V> copy(String newName, Object newBean) {
 
     return copy(newName, newBean, this.validator);
   }
@@ -146,7 +145,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
    * @param newValidator the new {@link #getValidator() validator}.
    * @return the new property instance.
    */
-  public final AbstractProperty<V> copy(String newName, Bean newBean, AbstractValidator<? super V> newValidator) {
+  public final AbstractProperty<V> copy(String newName, Object newBean, AbstractValidator<? super V> newValidator) {
 
     AbstractProperty<V> copy = clone();
     copy.name = newName;
@@ -266,7 +265,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
 
     private boolean assignValue;
 
-    private Bean newBean;
+    private Object newBean;
 
     /**
      * The constructor.
@@ -279,7 +278,7 @@ public abstract class AbstractProperty<V> implements WritableProperty<V>, Clonea
      * @param otherBean the new value of {@link AbstractProperty#getBean()}.
      * @return this build instance for fluent API calls.
      */
-    public PropertyBuilder<T> withBean(Bean otherBean) {
+    public PropertyBuilder<T> withBean(Object otherBean) {
 
       this.newBean = otherBean;
       return this;

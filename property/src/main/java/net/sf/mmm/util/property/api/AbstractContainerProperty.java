@@ -4,7 +4,6 @@ package net.sf.mmm.util.property.api;
 
 import java.util.function.Supplier;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.lang.BooleanProperty;
 import net.sf.mmm.util.property.api.lang.ReadableBooleanProperty;
 import net.sf.mmm.util.property.api.math.IntegerProperty;
@@ -21,8 +20,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @author hohwille
  * @since 8.4.0
  */
-public abstract class AbstractContainerProperty<V> extends AbstractValueProperty<V>
-    implements ReadableContainerProperty<V> {
+public abstract class AbstractContainerProperty<V> extends AbstractValueProperty<V> implements ReadableContainerProperty<V> {
 
   private final GenericType<? extends V> type;
 
@@ -37,7 +35,7 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractContainerProperty(String name, GenericType<? extends V> type, Bean bean) {
+  public AbstractContainerProperty(String name, GenericType<? extends V> type, Object bean) {
     this(name, type, bean, (AbstractValidator<? super V>) null);
   }
 
@@ -49,8 +47,7 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractContainerProperty(String name, GenericType<? extends V> type, Bean bean,
-      AbstractValidator<? super V> validator) {
+  public AbstractContainerProperty(String name, GenericType<? extends V> type, Object bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
     this.type = type;
   }
@@ -63,8 +60,7 @@ public abstract class AbstractContainerProperty<V> extends AbstractValueProperty
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public AbstractContainerProperty(String name, GenericType<? extends V> type, Bean bean,
-      Supplier<? extends V> expression) {
+  public AbstractContainerProperty(String name, GenericType<? extends V> type, Object bean, Supplier<? extends V> expression) {
     super(name, bean, expression);
     this.type = type;
   }

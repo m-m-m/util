@@ -8,7 +8,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderLong;
 
@@ -28,7 +27,7 @@ public class LongProperty extends NumberProperty<Long> implements WritableLongPr
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public LongProperty(String name, Bean bean) {
+  public LongProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -39,7 +38,7 @@ public class LongProperty extends NumberProperty<Long> implements WritableLongPr
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public LongProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public LongProperty(String name, Object bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -50,7 +49,7 @@ public class LongProperty extends NumberProperty<Long> implements WritableLongPr
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public LongProperty(String name, Bean bean, Supplier<Long> expression) {
+  public LongProperty(String name, Object bean, Supplier<Long> expression) {
     super(name, bean, expression);
   }
 

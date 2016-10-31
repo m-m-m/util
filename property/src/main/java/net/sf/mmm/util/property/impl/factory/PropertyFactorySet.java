@@ -5,7 +5,6 @@ package net.sf.mmm.util.property.impl.factory;
 import javax.inject.Named;
 
 import javafx.collections.ObservableSet;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.ReadableSetProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
@@ -52,7 +51,7 @@ public class PropertyFactorySet<E> extends AbstractPropertyFactory<ObservableSet
   }
 
   @Override
-  public SetProperty<E> create(String name, GenericType<? extends ObservableSet<E>> valueType, Bean bean,
+  public SetProperty<E> create(String name, GenericType<? extends ObservableSet<E>> valueType, Object bean,
       AbstractValidator<? super ObservableSet<E>> validator) {
 
     return new SetProperty<>(name, valueType, bean, validator);

@@ -81,14 +81,13 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
    * @param dynamic - see {@link #isDynamic()}.
    * @param interfaces - the interfaces to be implemented by the {@link #getBean() dynamic proxy}.
    */
-  protected BeanAccessPrototype(BeanAccessPrototype<BEAN> master, String qualifiedName, boolean dynamic,
-      Class<?>... interfaces) {
+  protected BeanAccessPrototype(BeanAccessPrototype<BEAN> master, String qualifiedName, boolean dynamic, Class<?>... interfaces) {
 
     this(master.getBeanClass(), qualifiedName, master.beanFactory, master, dynamic, interfaces);
   }
 
-  private BeanAccessPrototype(Class<BEAN> beanClass, String qualifiedName, BeanFactoryImpl beanFactory,
-      BeanAccessPrototype<BEAN> master, boolean dynamic, Class<?>... interfaces) {
+  private BeanAccessPrototype(Class<BEAN> beanClass, String qualifiedName, BeanFactoryImpl beanFactory, BeanAccessPrototype<BEAN> master, boolean dynamic,
+      Class<?>... interfaces) {
 
     super(beanClass, beanFactory);
 
@@ -192,8 +191,7 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
 
   @SuppressWarnings("unchecked")
   @Override
-  public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name,
-      GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
+  public <V, PROPERTY extends WritableProperty<V>> PROPERTY createProperty(String name, GenericType<? extends V> valueType, Class<PROPERTY> propertyType) {
 
     if (!isDynamic()) {
       throw new ReadOnlyException(getBeanClass().getSimpleName(), name);
@@ -305,8 +303,7 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
     String name = property.getName();
     this.name2PropertyMap.compute(name, (k, v) -> {
       if (v != null) {
-        throw new DuplicateObjectException(property.getBean().access().getSimpleName() + "." + property.getName(), k,
-            v);
+        throw new DuplicateObjectException(((Bean) property.getBean()).access().getSimpleName() + "." + property.getName(), k, v);
       }
       return new BeanPrototypeProperty(property, this.name2PropertyMap.size());
     });
@@ -346,8 +343,7 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
   }
 
   @Override
-  public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property,
-      AbstractValidator<? super V> validator) {
+  public <V, PROPERTY extends WritableProperty<V>> void addPropertyValidator(WritableProperty<?> property, AbstractValidator<? super V> validator) {
 
     addPropertyValidators(property, Arrays.asList(validator));
   }
@@ -397,8 +393,8 @@ public abstract class BeanAccessPrototype<BEAN extends Bean> extends BeanAccessB
     return ((BeanAccessBase<BEAN>) bean.access()).getPrototype();
   }
 
-  private static <V> void addValidator(AbstractValidator<? super V> currentValidator,
-      Collection<AbstractValidator<? super V>> validatorsToAdd, AbstractValidator<? super V> validator) {
+  private static <V> void addValidator(AbstractValidator<? super V> currentValidator, Collection<AbstractValidator<? super V>> validatorsToAdd,
+      AbstractValidator<? super V> validator) {
 
     if (!currentValidator.contains(validator)) {
       if (validator.getClass() == ComposedValidator.class) {

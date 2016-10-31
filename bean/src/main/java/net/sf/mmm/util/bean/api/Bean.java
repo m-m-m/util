@@ -7,6 +7,9 @@ import javax.inject.Inject;
 import javafx.beans.property.Property;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.GenericProperty;
+import net.sf.mmm.util.validation.api.Validatable;
+import net.sf.mmm.util.validation.api.ValidationFailure;
+import net.sf.mmm.util.validation.base.ValidationFailureComposer;
 
 /**
  * This is the interface for a generic bean based on {@link net.sf.mmm.util.property.api.WritableProperty generic
@@ -91,7 +94,7 @@ import net.sf.mmm.util.property.api.lang.GenericProperty;
  * @author hohwille
  * @since 8.4.0
  */
-public interface Bean {
+public interface Bean extends Validatable {
 
   /**
    * @return the {@link BeanAccess} with all generic features and methods on a {@link Bean}. These are encapsulated in
@@ -99,5 +102,16 @@ public interface Bean {
    *         better compatibility on enhancements.
    */
   BeanAccess access();
+
+  @Override
+  default ValidationFailure validate() {
+
+    ValidationFailureComposer composer = new ValidationFailureComposer();
+    for (WritableProperty<?> property : access().getProperties()) {
+      ValidationFailure failure = property.validate();
+      composer.add(failure);
+    }
+    return composer.get(this);
+  }
 
 }

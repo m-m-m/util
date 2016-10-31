@@ -27,6 +27,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
 public class PathImpl<V> extends AbstractPathFactory implements Path<V>, AbstractArgument<V> {
 
   private static final Bean AGGREGATE_FUNCTION_BEAN = new Bean() {
+
     @Override
     public BeanAccess access() {
 
@@ -88,7 +89,7 @@ public class PathImpl<V> extends AbstractPathFactory implements Path<V>, Abstrac
 
   private boolean verify() {
 
-    Bean bean = this.property.getBean();
+    Bean bean = (Bean) this.property.getBean();
     if (this.parent == null) {
       Object prototype = this.root.getPrototype();
       if ((prototype != null) && (bean != null) && (prototype != bean)) {
@@ -108,8 +109,8 @@ public class PathImpl<V> extends AbstractPathFactory implements Path<V>, Abstrac
 
   private void fail(String expectedType, Bean bean) {
 
-    throw new IllegalArgumentException("Path " + getParentName(false) + " leads to type " + expectedType
-        + " but property " + this.property.getName() + " belongs to " + bean.access().getSimpleName());
+    throw new IllegalArgumentException("Path " + getParentName(false) + " leads to type " + expectedType + " but property " + this.property.getName()
+        + " belongs to " + bean.access().getSimpleName());
   }
 
   private void verifyBeanProperty(Bean bean, ReadableProperty<?> prop) {

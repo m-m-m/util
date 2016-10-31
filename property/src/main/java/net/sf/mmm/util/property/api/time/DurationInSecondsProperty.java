@@ -6,7 +6,6 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.function.Supplier;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.math.LongProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
@@ -24,7 +23,7 @@ public class DurationInSecondsProperty extends LongProperty {
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public DurationInSecondsProperty(String name, Bean bean) {
+  public DurationInSecondsProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -35,7 +34,7 @@ public class DurationInSecondsProperty extends LongProperty {
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public DurationInSecondsProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public DurationInSecondsProperty(String name, Object bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -46,7 +45,7 @@ public class DurationInSecondsProperty extends LongProperty {
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public DurationInSecondsProperty(String name, Bean bean, Supplier<Long> expression) {
+  public DurationInSecondsProperty(String name, Object bean, Supplier<Long> expression) {
     super(name, bean, expression);
   }
 

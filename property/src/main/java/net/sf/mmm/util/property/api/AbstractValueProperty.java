@@ -9,8 +9,8 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.Property;
 import javafx.beans.value.ObservableValue;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
+import net.sf.mmm.util.validation.api.Validatable;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidationFailure;
@@ -43,7 +43,7 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractValueProperty(String name, Bean bean) {
+  public AbstractValueProperty(String name, Object bean) {
     this(name, bean, (AbstractValidator<? super V>) null);
   }
 
@@ -54,7 +54,7 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractValueProperty(String name, Bean bean, AbstractValidator<? super V> validator) {
+  public AbstractValueProperty(String name, Object bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
     this.readOnly = false;
     this.expression = null;
@@ -67,7 +67,7 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public AbstractValueProperty(String name, Bean bean, Supplier<? extends V> expression) {
+  public AbstractValueProperty(String name, Object bean, Supplier<? extends V> expression) {
     super(name, bean);
     this.readOnly = true;
     this.expression = expression;
@@ -157,8 +157,7 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
 
     if (isBound()) {
       throw new RuntimeException(
-          (getBean() != null && getName() != null ? getBean().getClass().getSimpleName() + "." + getName() + " : " : "")
-              + "A bound value cannot be set.");
+          (getBean() != null && getName() != null ? getBean().getClass().getSimpleName() + "." + getName() + " : " : "") + "A bound value cannot be set.");
     }
     requireWritable();
     boolean changed = doSetValue(value);
@@ -230,8 +229,8 @@ public abstract class AbstractValueProperty<V> extends AbstractProperty<V> {
       V v = getValue();
       String source = getName();
       ValidationFailure failure = getValidator().validate(v, source);
-      if (v instanceof Bean) {
-        ValidationFailure failure2 = ((Bean) v).access().validate();
+      if (v instanceof Validatable) {
+        ValidationFailure failure2 = ((Validatable) v).validate();
         if (failure == null) {
           failure = failure2;
         } else if (failure2 != null) {

@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.factory;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.property.api.ReadableProperty;
@@ -28,8 +27,7 @@ public interface PropertyFactoryManager {
    *        {@link PropertyFactory#getImplementationClass() implementation}.
    * @return the according {@link PropertyFactory} or {@code null} if no such factory is registered.
    */
-  <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactoryForPropertyType(
-      Class<PROPERTY> propertyType);
+  <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactoryForPropertyType(Class<PROPERTY> propertyType);
 
   /**
    * @see PropertyFactory#getValueClass()
@@ -41,8 +39,7 @@ public interface PropertyFactoryManager {
    *        otherwise (more efficient).
    * @return the according {@link PropertyFactory} or {@code null} if no such factory is registered.
    */
-  <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<? extends V> valueType,
-      boolean polymorphic);
+  <V> PropertyFactory<V, ? extends ReadableProperty<V>> getFactoryForValueType(Class<? extends V> valueType, boolean polymorphic);
 
   /**
    * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
@@ -56,14 +53,13 @@ public interface PropertyFactoryManager {
    * @return the according {@link PropertyFactory} or {@code null} if no such factory is registered.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  default <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactory(
-      Class<PROPERTY> propertyType, Class<? extends V> valueType, boolean polymorphic) {
+  default <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getFactory(Class<PROPERTY> propertyType,
+      Class<? extends V> valueType, boolean polymorphic) {
 
     PropertyFactory/* <V, ? extends PROPERTY> */ factory = getFactoryForPropertyType(propertyType);
     if (valueType != null) {
       if ((factory == null) || (factory.getValueClass() == null)) {
-        PropertyFactory<V, ? extends ReadableProperty<V>> valueFactory = getFactoryForValueType(valueType,
-            polymorphic);
+        PropertyFactory<V, ? extends ReadableProperty<V>> valueFactory = getFactoryForValueType(valueType, polymorphic);
         if (valueFactory != null) {
           if ((propertyType == null) || (propertyType.isAssignableFrom(valueFactory.getImplementationClass()))) {
             factory = valueFactory;
@@ -85,8 +81,8 @@ public interface PropertyFactoryManager {
    * @param polymorphic - see {@link #getFactoryForValueType(Class, boolean)}.
    * @return the according {@link PropertyFactory} or {@code null} if no such factory is registered.
    */
-  default <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getRequiredFactory(
-      Class<PROPERTY> propertyType, Class<V> valueType, boolean polymorphic) {
+  default <V, PROPERTY extends ReadableProperty<V>> PropertyFactory<V, ? extends PROPERTY> getRequiredFactory(Class<PROPERTY> propertyType, Class<V> valueType,
+      boolean polymorphic) {
 
     PropertyFactory<V, ? extends PROPERTY> factory = getFactory(propertyType, valueType, polymorphic);
     if (factory == null) {
@@ -115,8 +111,7 @@ public interface PropertyFactoryManager {
    * @throws ObjectNotFoundException if no {@link PropertyFactory} was {@link #getFactoryForPropertyType(Class) found}
    *         for {@code propertyType}.
    */
-  <V, PROPERTY extends ReadableProperty<V>> PROPERTY create(Class<PROPERTY> propertyType, GenericType<V> valueType,
-      boolean polymorphic, String name, Bean bean, AbstractValidator<? super V> validator)
-      throws ObjectNotFoundException;
+  <V, PROPERTY extends ReadableProperty<V>> PROPERTY create(Class<PROPERTY> propertyType, GenericType<V> valueType, boolean polymorphic, String name,
+      Object bean, AbstractValidator<? super V> validator) throws ObjectNotFoundException;
 
 }

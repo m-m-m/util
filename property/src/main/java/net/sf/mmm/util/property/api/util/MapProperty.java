@@ -15,7 +15,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.property.api.AbstractContainerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
@@ -34,8 +33,7 @@ import net.sf.mmm.util.validation.base.collection.ValidatorBuilderMap;
  * @since 8.4.0
  */
 @SuppressWarnings("restriction")
-public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K, V>>
-    implements WritableMapProperty<K, V> {
+public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K, V>> implements WritableMapProperty<K, V> {
 
   @SuppressWarnings("rawtypes")
   private static final GenericType TYPE = new SimpleGenericTypeImpl<>(ObservableMap.class);
@@ -64,7 +62,7 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Bean bean) {
+  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Object bean) {
     super(name, requireType(type), bean);
   }
 
@@ -76,8 +74,7 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Bean bean,
-      AbstractValidator<? super ObservableMap<K, V>> validator) {
+  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Object bean, AbstractValidator<? super ObservableMap<K, V>> validator) {
     super(name, requireType(type), bean, validator);
   }
 
@@ -89,13 +86,11 @@ public class MapProperty<K, V> extends AbstractContainerProperty<ObservableMap<K
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Bean bean,
-      Supplier<? extends ObservableMap<K, V>> expression) {
+  public MapProperty(String name, GenericType<? extends ObservableMap<K, V>> type, Object bean, Supplier<? extends ObservableMap<K, V>> expression) {
     super(name, type, bean, expression);
   }
 
-  private static <K, V> GenericType<? extends ObservableMap<K, V>> requireType(
-      GenericType<? extends ObservableMap<K, V>> type) {
+  private static <K, V> GenericType<? extends ObservableMap<K, V>> requireType(GenericType<? extends ObservableMap<K, V>> type) {
 
     if (type != null) {
       return type;

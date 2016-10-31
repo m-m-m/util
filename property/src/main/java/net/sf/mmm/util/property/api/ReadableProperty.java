@@ -3,7 +3,6 @@
 package net.sf.mmm.util.property.api;
 
 import javafx.beans.property.ReadOnlyProperty;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.json.api.JsonSupport;
 import net.sf.mmm.util.property.api.math.IntegerProperty;
 import net.sf.mmm.util.property.api.path.PropertyPath;
@@ -36,7 +35,10 @@ public interface ReadableProperty<V> extends ReadOnlyProperty<V>, PropertyPath<V
    */
   GenericType<? extends V> getType();
 
+  /**
+   * @return the {{@code net.sf.mmm.util.bean.api.Bean} owning the property.
+   */
   @Override
-  Bean getBean();
+  Object getBean();
 
 }

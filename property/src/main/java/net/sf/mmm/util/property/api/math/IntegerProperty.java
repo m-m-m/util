@@ -8,7 +8,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderInteger;
 
@@ -28,7 +27,7 @@ public class IntegerProperty extends NumberProperty<Integer> implements Writable
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public IntegerProperty(String name, Bean bean) {
+  public IntegerProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -39,7 +38,7 @@ public class IntegerProperty extends NumberProperty<Integer> implements Writable
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public IntegerProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public IntegerProperty(String name, Object bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -50,7 +49,7 @@ public class IntegerProperty extends NumberProperty<Integer> implements Writable
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public IntegerProperty(String name, Bean bean, Supplier<Integer> expression) {
+  public IntegerProperty(String name, Object bean, Supplier<Integer> expression) {
     super(name, bean, expression);
   }
 

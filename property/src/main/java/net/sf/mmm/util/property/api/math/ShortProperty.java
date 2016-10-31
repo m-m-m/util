@@ -8,7 +8,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.number.ValidatorBuilderInteger;
 
@@ -28,7 +27,7 @@ public class ShortProperty extends NumberProperty<Short> implements WritableShor
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public ShortProperty(String name, Bean bean) {
+  public ShortProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -39,7 +38,7 @@ public class ShortProperty extends NumberProperty<Short> implements WritableShor
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public ShortProperty(String name, Bean bean, AbstractValidator<? super Number> validator) {
+  public ShortProperty(String name, Object bean, AbstractValidator<? super Number> validator) {
     super(name, bean, validator);
   }
 
@@ -50,7 +49,7 @@ public class ShortProperty extends NumberProperty<Short> implements WritableShor
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public ShortProperty(String name, Bean bean, Supplier<Short> expression) {
+  public ShortProperty(String name, Object bean, Supplier<Short> expression) {
     super(name, bean, expression);
   }
 

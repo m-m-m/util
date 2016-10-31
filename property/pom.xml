@@ -12,7 +12,7 @@
   <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
-  <description>This project provides advanced property and bean support to make your life a lot easier.</description>
+  <description>This project provides advanced property support based on JavaFx.</description>
 
   <dependencies>
     <dependency>

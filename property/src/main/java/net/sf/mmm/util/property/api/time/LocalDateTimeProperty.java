@@ -10,7 +10,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.time.ValidatorBuilderLocalDateTime;
@@ -21,8 +20,7 @@ import net.sf.mmm.util.validation.base.time.ValidatorBuilderLocalDateTime;
  * @author hohwille
  * @since 8.4.0
  */
-public class LocalDateTimeProperty extends AbstractRegularProperty<LocalDateTime>
-    implements WritableLocalDateTimeProperty {
+public class LocalDateTimeProperty extends AbstractRegularProperty<LocalDateTime> implements WritableLocalDateTimeProperty {
 
   private LocalDateTime value;
 
@@ -32,7 +30,7 @@ public class LocalDateTimeProperty extends AbstractRegularProperty<LocalDateTime
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public LocalDateTimeProperty(String name, Bean bean) {
+  public LocalDateTimeProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -43,7 +41,7 @@ public class LocalDateTimeProperty extends AbstractRegularProperty<LocalDateTime
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public LocalDateTimeProperty(String name, Bean bean, AbstractValidator<? super LocalDateTime> validator) {
+  public LocalDateTimeProperty(String name, Object bean, AbstractValidator<? super LocalDateTime> validator) {
     super(name, bean, validator);
   }
 
@@ -54,7 +52,7 @@ public class LocalDateTimeProperty extends AbstractRegularProperty<LocalDateTime
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public LocalDateTimeProperty(String name, Bean bean, Supplier<LocalDateTime> expression) {
+  public LocalDateTimeProperty(String name, Object bean, Supplier<LocalDateTime> expression) {
     super(name, bean, expression);
   }
 

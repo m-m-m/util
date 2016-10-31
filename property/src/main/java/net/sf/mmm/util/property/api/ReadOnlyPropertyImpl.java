@@ -9,7 +9,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.api.ValidationFailure;
@@ -88,7 +87,7 @@ public class ReadOnlyPropertyImpl<V> implements WritableProperty<V> {
   }
 
   @Override
-  public Bean getBean() {
+  public Object getBean() {
 
     return this.property.getBean();
   }

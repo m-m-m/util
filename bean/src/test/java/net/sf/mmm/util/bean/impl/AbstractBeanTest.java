@@ -97,7 +97,7 @@ public abstract class AbstractBeanTest extends Assertions {
 
     // validation
     // invalid mandatory fields
-    ValidationFailure failure = access.validate();
+    ValidationFailure failure = bean.validate();
     assertThat(failure).isNotNull();
     assertThat(failure.getCode()).isEqualTo(ComposedValidator.CODE);
     ComposedValidationFailure composedFailure = (ComposedValidationFailure) failure;
@@ -125,18 +125,18 @@ public abstract class AbstractBeanTest extends Assertions {
     // valid
     countryCode.set("DE");
     propertyAge.set(5);
-    failure = access.validate();
+    failure = bean.validate();
     assertThat(failure).isNull();
 
     // invalid country code
     countryCode.set("xyz");
-    failure = access.validate();
+    failure = bean.validate();
     assertThat(failure).isNotNull();
     assertThat(failure.getCode()).isEqualTo(ValidatorPattern.CODE);
 
     // and also invalid age
     propertyAge.set(500);
-    failure = access.validate();
+    failure = bean.validate();
     assertThat(failure).isNotNull();
     assertThat(failure.getCode()).isEqualTo(ComposedValidator.CODE);
     composedFailure = (ComposedValidationFailure) failure;

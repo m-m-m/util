@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.factory;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
@@ -61,6 +60,6 @@ public interface PropertyFactory<V, P extends ReadableProperty<V>> {
    *
    * @return the new instance of the property.
    */
-  P create(String name, GenericType<? extends V> valueType, Bean bean, AbstractValidator<? super V> validator);
+  P create(String name, GenericType<? extends V> valueType, Object bean, AbstractValidator<? super V> validator);
 
 }

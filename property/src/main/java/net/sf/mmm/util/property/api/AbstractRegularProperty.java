@@ -8,7 +8,6 @@ import com.sun.javafx.binding.ExpressionHelper;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
@@ -31,7 +30,7 @@ public abstract class AbstractRegularProperty<V> extends AbstractValueProperty<V
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public AbstractRegularProperty(String name, Bean bean) {
+  public AbstractRegularProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -42,7 +41,7 @@ public abstract class AbstractRegularProperty<V> extends AbstractValueProperty<V
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public AbstractRegularProperty(String name, Bean bean, AbstractValidator<? super V> validator) {
+  public AbstractRegularProperty(String name, Object bean, AbstractValidator<? super V> validator) {
     super(name, bean, validator);
   }
 
@@ -53,7 +52,7 @@ public abstract class AbstractRegularProperty<V> extends AbstractValueProperty<V
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public AbstractRegularProperty(String name, Bean bean, Supplier<? extends V> expression) {
+  public AbstractRegularProperty(String name, Object bean, Supplier<? extends V> expression) {
     super(name, bean, expression);
   }
 

@@ -5,7 +5,6 @@ package net.sf.mmm.util.property.impl.factory;
 import javax.inject.Named;
 
 import javafx.collections.ObservableMap;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
@@ -54,7 +53,7 @@ public class PropertyFactoryMap<K, V> extends AbstractPropertyFactory<Observable
   }
 
   @Override
-  public MapProperty<K, V> create(String name, GenericType<? extends ObservableMap<K, V>> valueType, Bean bean,
+  public MapProperty<K, V> create(String name, GenericType<? extends ObservableMap<K, V>> valueType, Object bean,
       AbstractValidator<? super ObservableMap<K, V>> validator) {
 
     return new MapProperty<>(name, valueType, bean, validator);

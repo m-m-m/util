@@ -4,7 +4,6 @@ package net.sf.mmm.util.property.impl.factory;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.entity.EntityBean;
 import net.sf.mmm.util.bean.api.link.Link;
 import net.sf.mmm.util.property.api.ReadableProperty;
@@ -52,8 +51,7 @@ public class PropertyFactoryLink<E extends EntityBean> extends AbstractPropertyF
   }
 
   @Override
-  public LinkProperty<E> create(String name, GenericType<? extends Link<E>> valueType, Bean bean,
-      AbstractValidator<? super Link<E>> validator) {
+  public LinkProperty<E> create(String name, GenericType<? extends Link<E>> valueType, Object bean, AbstractValidator<? super Link<E>> validator) {
 
     return new LinkProperty<>(name, (GenericType) valueType, bean, validator);
   }

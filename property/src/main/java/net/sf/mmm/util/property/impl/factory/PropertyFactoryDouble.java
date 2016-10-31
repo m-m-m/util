@@ -4,7 +4,6 @@ package net.sf.mmm.util.property.impl.factory;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
@@ -48,8 +47,7 @@ public class PropertyFactoryDouble extends AbstractPropertyFactory<Number, Doubl
   }
 
   @Override
-  public DoubleProperty create(String name, GenericType<? extends Number> valueType, Bean bean,
-      AbstractValidator<? super Number> validator) {
+  public DoubleProperty create(String name, GenericType<? extends Number> valueType, Object bean, AbstractValidator<? super Number> validator) {
 
     return new DoubleProperty(name, bean, validator);
   }

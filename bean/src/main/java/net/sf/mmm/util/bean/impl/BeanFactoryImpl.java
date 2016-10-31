@@ -451,13 +451,13 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
         constructor = c;
         Class<?>[] parameterTypes = constructor.getParameterTypes();
         if ((parameterTypes.length >= 2) && (parameterTypes.length <= 4) && (parameterTypes[0] == String.class)) {
-          if (parameterTypes[1] == Bean.class) {
+          if (parameterTypes[1] == Object.class) {
             if (parameterTypes.length == 2) {
               return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, bean });
             } else if ((parameterTypes.length == 3) && (parameterTypes[2] == AbstractValidator.class)) {
               return (AbstractProperty<?>) constructor.newInstance(new Object[] { name, bean, ValidatorNone.getInstance() });
             }
-          } else if ((parameterTypes[1] == GenericType.class) && (parameterTypes.length >= 3) && (parameterTypes[2] == Bean.class)) {
+          } else if ((parameterTypes[1] == GenericType.class) && (parameterTypes.length >= 3) && (parameterTypes[2] == Object.class)) {
             if (type == null) {
               throw new IllegalStateException(constructor.toGenericString());
             }
@@ -469,7 +469,7 @@ public class BeanFactoryImpl extends AbstractLoggableComponent implements BeanFa
           }
         }
       }
-      return null;
+      throw new IllegalStateException(propertyClass.getName());
     } catch (InstantiationException e) {
       throw new InstantiationFailedException(e, propertyClass);
     } catch (IllegalAccessException e) {

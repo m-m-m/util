@@ -10,7 +10,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.time.ValidatorBuilderInstant;
@@ -31,7 +30,7 @@ public class InstantProperty extends AbstractRegularProperty<Instant> implements
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public InstantProperty(String name, Bean bean) {
+  public InstantProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -42,7 +41,7 @@ public class InstantProperty extends AbstractRegularProperty<Instant> implements
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public InstantProperty(String name, Bean bean, AbstractValidator<? super Instant> validator) {
+  public InstantProperty(String name, Object bean, AbstractValidator<? super Instant> validator) {
     super(name, bean, validator);
   }
 
@@ -53,7 +52,7 @@ public class InstantProperty extends AbstractRegularProperty<Instant> implements
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public InstantProperty(String name, Bean bean, Supplier<Instant> expression) {
+  public InstantProperty(String name, Object bean, Supplier<Instant> expression) {
     super(name, bean, expression);
   }
 

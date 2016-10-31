@@ -4,7 +4,6 @@ package net.sf.mmm.util.bean.impl.example;
 
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.lang.StringProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ComposedValidator;
@@ -20,8 +19,7 @@ public class CountryCodeProperty extends StringProperty {
 
   private static final Pattern PATTERN = Pattern.compile("[A-Z]{2}");
 
-  private static final AbstractValidator<String> VALIDATOR = new ComposedValidator<>(
-      ValidatorMandatory.getInstance(), new ValidatorPattern(PATTERN));
+  private static final AbstractValidator<String> VALIDATOR = new ComposedValidator<>(ValidatorMandatory.getInstance(), new ValidatorPattern(PATTERN));
 
   /**
    * The constructor.
@@ -29,7 +27,7 @@ public class CountryCodeProperty extends StringProperty {
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public CountryCodeProperty(String name, Bean bean) {
+  public CountryCodeProperty(String name, Object bean) {
     super(name, bean, VALIDATOR);
   }
 
@@ -40,7 +38,7 @@ public class CountryCodeProperty extends StringProperty {
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  protected CountryCodeProperty(String name, Bean bean, AbstractValidator<? super String> validator) {
+  protected CountryCodeProperty(String name, Object bean, AbstractValidator<? super String> validator) {
     super(name, bean, validator);
   }
 

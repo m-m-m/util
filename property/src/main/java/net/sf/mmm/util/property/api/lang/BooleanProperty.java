@@ -9,7 +9,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.exception.api.WrongValueTypeException;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -31,7 +30,7 @@ public class BooleanProperty extends AbstractRegularProperty<Boolean> implements
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public BooleanProperty(String name, Bean bean) {
+  public BooleanProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -42,7 +41,7 @@ public class BooleanProperty extends AbstractRegularProperty<Boolean> implements
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public BooleanProperty(String name, Bean bean, AbstractValidator<? super Boolean> validator) {
+  public BooleanProperty(String name, Object bean, AbstractValidator<? super Boolean> validator) {
     super(name, bean, validator);
   }
 
@@ -53,7 +52,7 @@ public class BooleanProperty extends AbstractRegularProperty<Boolean> implements
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public BooleanProperty(String name, Bean bean, Supplier<Boolean> expression) {
+  public BooleanProperty(String name, Object bean, Supplier<Boolean> expression) {
     super(name, bean, expression);
   }
 

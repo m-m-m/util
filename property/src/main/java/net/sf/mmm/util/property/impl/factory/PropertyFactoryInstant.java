@@ -6,7 +6,6 @@ import java.time.Instant;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
@@ -50,8 +49,7 @@ public class PropertyFactoryInstant extends AbstractPropertyFactory<Instant, Ins
   }
 
   @Override
-  public InstantProperty create(String name, GenericType<? extends Instant> valueType, Bean bean,
-      AbstractValidator<? super Instant> validator) {
+  public InstantProperty create(String name, GenericType<? extends Instant> valueType, Object bean, AbstractValidator<? super Instant> validator) {
 
     return new InstantProperty(name, bean, validator);
   }

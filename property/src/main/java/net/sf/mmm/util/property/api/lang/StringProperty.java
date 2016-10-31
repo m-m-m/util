@@ -9,7 +9,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractRegularProperty;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
@@ -30,7 +29,7 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
    * @param name - see {@link #getName()}.
    * @param bean - see {@link #getBean()}.
    */
-  public StringProperty(String name, Bean bean) {
+  public StringProperty(String name, Object bean) {
     super(name, bean);
   }
 
@@ -41,7 +40,7 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public StringProperty(String name, Bean bean, AbstractValidator<? super String> validator) {
+  public StringProperty(String name, Object bean, AbstractValidator<? super String> validator) {
     super(name, bean, validator);
   }
 
@@ -52,7 +51,7 @@ public class StringProperty extends AbstractRegularProperty<String> implements W
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public StringProperty(String name, Bean bean, Supplier<String> expression) {
+  public StringProperty(String name, Object bean, Supplier<String> expression) {
     super(name, bean, expression);
   }
 

@@ -16,7 +16,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.property.api.AbstractContainerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.GenericTypeBuilder;
@@ -65,7 +64,7 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
    * @param type - see {@link #getType()}.
    * @param bean - see {@link #getBean()}.
    */
-  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Bean bean) {
+  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Object bean) {
     super(name, type, bean);
   }
 
@@ -77,8 +76,7 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
    * @param bean - see {@link #getBean()}.
    * @param validator - see {@link #validate()}.
    */
-  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Bean bean,
-      AbstractValidator<? super ObservableList<E>> validator) {
+  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Object bean, AbstractValidator<? super ObservableList<E>> validator) {
     super(name, type, bean, validator);
   }
 
@@ -90,8 +88,7 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
    * @param bean - see {@link #getBean()}.
    * @param expression the {@link Supplier} {@link Supplier#get() providing} the actual {@link #getValue() value}.
    */
-  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Bean bean,
-      Supplier<ObservableList<E>> expression) {
+  public ListProperty(String name, GenericType<? extends ObservableList<E>> type, Object bean, Supplier<ObservableList<E>> expression) {
     super(name, type, bean, expression);
   }
 
