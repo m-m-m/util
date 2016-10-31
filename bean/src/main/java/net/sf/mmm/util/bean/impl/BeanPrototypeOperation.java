@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 
 import net.sf.mmm.util.bean.api.Bean;
 import net.sf.mmm.util.bean.api.BeanAccess;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
@@ -97,6 +98,8 @@ public abstract class BeanPrototypeOperation {
         case CUSTOM_EQUALS:
         case CUSTOM_HASH_CODE:
           return new BeanPrototypeOperationDefaultMethod(prototype, method);
+        default :
+          throw new IllegalCaseException(BeanMethodType.class, methodType);
       }
     }
     return null;

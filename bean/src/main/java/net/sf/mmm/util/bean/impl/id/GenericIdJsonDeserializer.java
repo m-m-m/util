@@ -9,8 +9,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
-import net.sf.mmm.util.bean.api.id.GenericId;
-import net.sf.mmm.util.bean.api.id.Id;
+import net.sf.mmm.util.data.api.id.GenericId;
+import net.sf.mmm.util.data.api.id.Id;
 
 /**
  * An implementation of {@link JsonDeserializer} for {@link Id}.

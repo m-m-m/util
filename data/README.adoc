@@ -1,0 +1,11 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-data
+
+This module is part of link:../../..#mmm-util[mmm-util] and provides an API for data entities:
+
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/data/api/package-summary.html#package.description[Data API] containg well-documented interfaces for entities, IDs, etc.

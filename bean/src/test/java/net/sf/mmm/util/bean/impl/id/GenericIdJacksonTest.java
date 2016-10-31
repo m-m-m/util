@@ -10,9 +10,9 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import net.sf.mmm.util.bean.api.id.GenericId;
-import net.sf.mmm.util.bean.api.id.Id;
 import net.sf.mmm.util.bean.impl.example.ExamplePojoBean;
+import net.sf.mmm.util.data.api.id.GenericId;
+import net.sf.mmm.util.data.api.id.Id;
 
 /**
  * Test-case of {@link IdJsonSerializer} and {@link GenericIdJsonDeserializer}.

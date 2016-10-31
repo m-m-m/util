@@ -16,7 +16,7 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
  * {@link net.sf.mmm.util.bean.api.mapping.DocumentBeanMapper}.
  *
  * @param <P> the base type of the {@link net.sf.mmm.util.pojo.api.Pojo}s to convert (e.g. {@link Object} or
- *        {@link net.sf.mmm.util.bean.api.entity.Entity}).
+ *        {@link net.sf.mmm.util.data.api.entity.Entity}).
  * @param <B> the base type of the {@link Bean} to convert (e.g. {@link Bean} or {@link EntityBean}).
  *
  * @author hohwille

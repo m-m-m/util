@@ -25,8 +25,8 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
  * @author hohwille
  * @since 8.4.0
  */
-public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends AbstractDocumentBeanMapper.Mapping<D, B>>
-    extends AbstractBeanMapper<D, B> implements DocumentBeanMapper<D, B> {
+public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends AbstractDocumentBeanMapper.Mapping<D, B>> extends AbstractBeanMapper<D, B>
+    implements DocumentBeanMapper<D, B> {
 
   private Map<String, M> beanMap;
 
@@ -43,7 +43,7 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
    */
   protected void addMapping(M mapping) {
 
-    addMapping(getKey(mapping.prototype), mapping);
+    addMapping(getKey(mapping.getPrototype()), mapping);
   }
 
   /**
@@ -134,7 +134,7 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
     }
     String key = getKey(document);
     M mapping = getOrCreateMapping(key, k -> createMapping(key, document));
-    B bean = getBeanPrototypeBuilder().create(mapping.prototype);
+    B bean = getBeanPrototypeBuilder().create(mapping.getPrototype());
     mapPropertiesToBean(document, bean);
     return (T) bean;
   }
@@ -185,7 +185,7 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
   public abstract static class Mapping<D, B extends Bean> {
 
     /** The {@link Bean} {@link BeanFactory#createPrototype(Class) prototype}. */
-    public final B prototype;
+    private final B prototype;
 
     /**
      * The constructor.
@@ -195,6 +195,14 @@ public abstract class AbstractDocumentBeanMapper<D, B extends Bean, M extends Ab
     public Mapping(B prototype) {
       super();
       this.prototype = prototype;
+    }
+
+    /**
+     * @return the prototype
+     */
+    public B getPrototype() {
+
+      return this.prototype;
     }
 
     /**

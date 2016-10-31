@@ -11,8 +11,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 /**
  * This is the interface for the factory of a specific {@link ReadableProperty property} type. You can directly
  * instantiate implementations such as {@link net.sf.mmm.util.property.api.lang.StringProperty}. However for generic
- * support such as {@link net.sf.mmm.util.bean.api.BeanAccess#createProperty(String, Class)} according types have to be
- * registered via an implementation of this interface.
+ * support according types have to be registered via an implementation of this interface.
  *
  * @param <V> the generic type of the {@link ReadableProperty#getValue() property value}.
  * @param <P> the generic type of the {@link #getImplementationClass() property implementation}.
@@ -32,12 +31,14 @@ public interface PropertyFactory<V, P extends ReadableProperty<V>> {
   Class<? extends V> getValueClass();
 
   /**
-   * @return the {@link Class} reflecting the {@link ReadableProperty} interface.
+   * @return the {@link Class} reflecting the {@link ReadableProperty} interface. May be {@code null} if no dedicated
+   *         readable interface exists.
    */
   Class<? extends ReadableProperty<V>> getReadableInterface();
 
   /**
-   * @return the {@link Class} reflecting the {@link WritableProperty} interface.
+   * @return the {@link Class} reflecting the {@link WritableProperty} interface. May be {@code null} if no dedicated
+   *         writable interface exists.
    */
   Class<? extends WritableProperty<V>> getWritableInterface();
 

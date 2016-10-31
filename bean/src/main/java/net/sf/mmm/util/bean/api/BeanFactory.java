@@ -5,7 +5,6 @@ package net.sf.mmm.util.bean.api;
 import javax.inject.Named;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
-import net.sf.mmm.util.property.api.WritableProperty;
 
 /**
  * This is the factory used to {@link #create(Class) create} instances of {@link Bean}.
@@ -57,8 +56,8 @@ public interface BeanFactory extends AbstractBeanFactory {
   /**
    * Creates a prototype of the given {@link Bean}. A prototype is used as template to {@link #create(Bean) create}
    * regular {@link Bean}s. Such beans will inherit the defaults from the prototype what are the
-   * {@link BeanAccess#getProperties() available properties} as well as their default {@link WritableProperty#getValue()
-   * value}.<br>
+   * {@link BeanAccess#getProperties() available properties} as well as their default
+   * {@link net.sf.mmm.util.property.api.WritableProperty#getValue() value}.<br>
    * While in regular Java there is a separation between a {@link Class} for reflection and its {@link Object} instance,
    * this approach makes it a lot easier. The prototype is like the {@link Class} where {@link Bean}-instances can be
    * {@link #create(Bean) created} of that are of the same type.

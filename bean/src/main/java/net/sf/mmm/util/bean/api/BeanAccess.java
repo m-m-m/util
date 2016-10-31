@@ -193,7 +193,6 @@ public interface BeanAccess extends JsonSupport {
   }
 
   /**
-   * @param bean the {@link Bean} instance.
    * @param name the {@link WritableProperty#getName() name} of the property.
    * @param value new {@link WritableProperty#getValue() value} of the specified property.
    */
@@ -272,7 +271,7 @@ public interface BeanAccess extends JsonSupport {
    * @param <V> the generic type of the {@link WritableProperty#getValue() property value}.
    * @param <PROPERTY> the generic type of the {@link WritableProperty property}.
    * @param name the {@link WritableProperty#getName() property name}.
-   * @param valueType
+   * @param valueType the {@link GenericType} reflecting the {@link WritableProperty#getValue() property value}.
    * @param propertyType the Class reflecting the {@link WritableProperty} to create.
    * @return the newly created property.
    */

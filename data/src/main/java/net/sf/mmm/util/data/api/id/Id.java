@@ -1,17 +1,16 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.bean.api.id;
+package net.sf.mmm.util.data.api.id;
 
 import java.util.UUID;
 
-import net.sf.mmm.util.bean.api.entity.Entity;
-import net.sf.mmm.util.bean.api.entity.EntityBean;
+import net.sf.mmm.util.data.api.entity.Entity;
 import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadUuid;
 
 /**
- * This is the interface for an ID that uniquely identifies an {@link Entity} of a particular {@link #getType() type}.
- * <br>
+ * This is the interface for an ID that uniquely identifies an {@link net.sf.mmm.util.data.api.entity.Entity} of a particular
+ * {@link #getType() type}. <br>
  * An {@link Id} is build out of the following parts:
  * <ul>
  * <li>{@link #getId() object-id} - the ID that identifies the entity and is unique for a specific {@link #getType()
@@ -36,7 +35,8 @@ public interface Id<E> extends Datatype, AttributeReadUuid {
 
   /**
    * The value used as {@link #getVersion() version} if it unspecified. If you are using an {@link Id} as link to an
-   * {@link Entity} you will use this value to point to the recent version of the {@link Entity}.
+   * {@link Entity} you will use this value to point to the recent version of the
+   * {@link net.sf.mmm.util.data.api.entity.Entity}.
    */
   long VERSION_LATEST = -1;
 
@@ -57,8 +57,8 @@ public interface Id<E> extends Datatype, AttributeReadUuid {
    * {@link #getId()}. However a {@link UUID} can be used in the following scenarios:
    * <ul>
    * <li>Your data store uses {@link UUID}s natively as <em>primary key</em> (e.g. apache cassandra supports this). In
-   * such case {@link #getId()} will always return {@link #ID_UUID} and {@link #getUuid()} holds the actual
-   * <em>primary key</em>.</li>
+   * such case {@link #getId()} will always return {@link #ID_UUID} and {@link #getUuid()} holds the actual <em>primary
+   * key</em>.</li>
    * <li>You may need to express a link to a transient entity. Then you can temporary assign a {@link UUID} to the
    * entity on the client and link it via such ID. On the server-side the actual {@link UUID} based {@link Id} can then
    * be replaced with the actual {@link #getId() ID} while persisting the data.</li>
@@ -90,15 +90,17 @@ public interface Id<E> extends Datatype, AttributeReadUuid {
   Id<E> withLatestVersion();
 
   /**
-   * @return the {@code version} of this entity. Whenever the {@link Entity} gets updated (a modification is saved and
-   *         the transaction is committed), this counter is increased. The initial value of a new {@link EntityBean} is
-   *         {@code 0}. The version acts as a modification counter for optimistic locking. On each update it will be
-   *         verified that the version has not been increased already by another transaction. When linking an
-   *         {@link Entity} ({@link Id} used as foreign key) the version can act as revision for auditing. If it is
-   *         {@link #VERSION_LATEST} it points to the latest revision of the {@link Entity}. Otherwise it points to a
-   *         specific historic revision of the {@link Entity}. Depending on the database technology (e.g. when using
-   *         hibernate envers) the version and the revision can be semantically different. In such case a
-   *         {@link Entity#getId() primary key} can not directly be used as revisioned foreign key {@link Id}.
+   * @return the {@code version} of this entity. Whenever the {@link net.sf.mmm.util.data.api.entity.Entity} gets updated (a
+   *         modification is saved and the transaction is committed), this counter is increased. The initial value of a
+   *         new {@link net.sf.mmm.util.data.api.entity.Entity} is {@code 0}. The version acts as a modification counter for
+   *         optimistic locking. On each update it will be verified that the version has not been increased already by
+   *         another transaction. When linking an {@link net.sf.mmm.util.data.api.entity.Entity} ({@link Id} used as foreign
+   *         key) the version can act as revision for auditing. If it is {@link #VERSION_LATEST} it points to the latest
+   *         revision of the {@link net.sf.mmm.util.data.api.entity.Entity}. Otherwise it points to a specific historic
+   *         revision of the {@link net.sf.mmm.util.data.api.entity.Entity}. Depending on the database technology (e.g. when
+   *         using hibernate envers) the version and the revision can be semantically different. In such case a
+   *         {@link net.sf.mmm.util.data.api.entity.Entity#getId() primary key} can not directly be used as revisioned foreign
+   *         key {@link Id}.
    */
   long getVersion();
 

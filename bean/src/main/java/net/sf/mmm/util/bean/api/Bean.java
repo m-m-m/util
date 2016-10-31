@@ -31,9 +31,9 @@ import net.sf.mmm.util.validation.base.ValidationFailureComposer;
  * <li>Powerful properties - {@link net.sf.mmm.util.property.api.WritableProperty} is based on JavaFx {@link Property}
  * supporting listeners and bindings but also additional features such as
  * {@link net.sf.mmm.util.property.api.WritableProperty#getType() generic type information}.</li>
- * <li>Validation - build-in {@link BeanAccess#validate() validation support}. This can be configured via
- * Bean-Validation standard (JSR303) or even more efficient and reusable via custom properties or in default methods for
- * the properties of your {@link Bean} interface.</li>
+ * <li>Validation - build-in {@link #validate() validation support}. This can be configured via Bean-Validation standard
+ * (JSR303) or even more efficient and reusable via custom properties or in default methods for the properties of your
+ * {@link Bean} interface.</li>
  * <li>JSON-Support - mapping {@link BeanAccess#fromJson(javax.json.stream.JsonParser) from} and
  * {@link BeanAccess#toJson(javax.json.stream.JsonGenerator) to} JSON is already build in and is extremely efficient. If
  * you need custom datatypes you can simply extend {@link GenericProperty} and tweak the JSON mapping as needed. No
@@ -77,7 +77,8 @@ import net.sf.mmm.util.validation.base.ValidationFailureComposer;
  *     address.City().setValue("Rafferty");
  *     address.Country().setValue("Gerryland");
  *     for (Property{@literal <?>} property: address.{@link #access()}.{@link BeanAccess#getProperties() getProperties()}) {
- *       System.out.println("Property '" + property.{@link net.sf.mmm.util.property.api.WritableProperty#getName() getName()} + "' of type ' + property.{@link WritableProperty#getType() getType()} + ' has value '" + property.{@link WritableProperty#getValue() getValue()} + "'.");
+ *       System.out.println("Property '" + property.{@link net.sf.mmm.util.property.api.WritableProperty#getName() getName()} + "' of type ' +
+ *       property.{@link WritableProperty#getType() getType()} + ' has value '" + property.{@link WritableProperty#getValue() getValue()} + "'.");
  *     }
  *   }
  * }

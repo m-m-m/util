@@ -1,22 +1,22 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.bean.base.link;
+package net.sf.mmm.util.data.base.link;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.bean.api.entity.EntityBean;
-import net.sf.mmm.util.bean.api.id.Id;
-import net.sf.mmm.util.bean.api.link.Link;
+import net.sf.mmm.util.data.api.entity.Entity;
+import net.sf.mmm.util.data.api.id.Id;
+import net.sf.mmm.util.data.api.link.Link;
 
 /**
  * Abstract base implementation of {@link Link}.
  *
- * @param <E> the generic type of the {@link #getTarget() linked} {@link EntityBean}.
+ * @param <E> the generic type of the {@link #getTarget() linked} {@link Entity}.
  *
  * @author hohwille
  * @since 8.4.0
  */
-public abstract class AbstractLink<E extends EntityBean> implements Link<E> {
+public abstract class AbstractLink<E extends Entity> implements Link<E> {
 
   /**
    * The constructor.

@@ -4,27 +4,26 @@ package net.sf.mmm.util.property.impl.factory;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.bean.api.entity.EntityBean;
-import net.sf.mmm.util.bean.api.link.Link;
+import net.sf.mmm.util.data.api.entity.Entity;
+import net.sf.mmm.util.data.api.link.Link;
 import net.sf.mmm.util.property.api.ReadableProperty;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.factory.PropertyFactory;
 import net.sf.mmm.util.property.api.link.LinkProperty;
-import net.sf.mmm.util.property.api.math.IntegerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
- * This is the implementation of {@link PropertyFactory} for {@link IntegerProperty}.
+ * This is the implementation of {@link PropertyFactory} for {@link LinkProperty}.
  *
- * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
+ * @param <E> the generic type of the {@link Link#getTarget() linked} {@link Entity}.
  *
  * @author hohwille
  * @since 8.4.0
  */
 @Named
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class PropertyFactoryLink<E extends EntityBean> extends AbstractPropertyFactory<Link<E>, LinkProperty<E>> {
+public class PropertyFactoryLink<E extends Entity> extends AbstractPropertyFactory<Link<E>, LinkProperty<E>> {
 
   @Override
   public Class<Link<E>> getValueClass() {

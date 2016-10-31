@@ -1,25 +1,24 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.bean.base.link;
+package net.sf.mmm.util.data.base.link;
 
 import java.util.function.Function;
 
-import net.sf.mmm.util.bean.api.entity.EntityBean;
-import net.sf.mmm.util.bean.api.id.Id;
-import net.sf.mmm.util.bean.api.link.Link;
+import net.sf.mmm.util.data.api.entity.Entity;
+import net.sf.mmm.util.data.api.id.Id;
+import net.sf.mmm.util.data.api.link.Link;
 
 /**
- * This is an implementation of {@link Link} that initially only carries the {@link Id} of an entity and
- * allows lazy loading on the first call of {@link #getTarget()} via an externally given resolver
- * {@link Function function}. This approach is easier, less invasive and more lightweight as using proxy
- * objects for entities.
+ * This is an implementation of {@link Link} that may initially only carry the {@link Id} of an entity and allows lazy
+ * loading on the first call of {@link #getTarget()} via an externally given resolver {@link Function function}. This
+ * approach is easier, less invasive and more lightweight as using proxy objects for entities.
  *
- * @param <E> the generic type of the {@link #getTarget() linked} {@link EntityBean}.
+ * @param <E> the generic type of the {@link #getTarget() linked} {@link Entity}.
  *
  * @author hohwille
  * @since 8.4.0
  */
-public class IdLink<E extends EntityBean> extends AbstractLink<E> {
+public class IdLink<E extends Entity> extends AbstractLink<E> {
 
   private final Id<E> id;
 
@@ -39,8 +38,8 @@ public class IdLink<E extends EntityBean> extends AbstractLink<E> {
    * The constructor.
    *
    * @param id - see {@link #getId()}.
-   * @param resolver the {@link Function} to {@link #isResolved() resolve} the {@link #getTarget() link
-   *        target} (the entity).
+   * @param resolver the {@link Function} to {@link #isResolved() resolve} the {@link #getTarget() link target} (the
+   *        entity).
    */
   protected IdLink(Id<E> id, Function<Id<E>, E> resolver) {
     super();
@@ -82,12 +81,12 @@ public class IdLink<E extends EntityBean> extends AbstractLink<E> {
   }
 
   /**
-   * @param <E> the generic type of the {@link #getTarget() linked} {@link EntityBean}.
+   * @param <E> the generic type of the {@link #getTarget() linked} {@link Entity}.
    * @param id - see {@link #getId()}.
    * @param resolver the {@link Function} to {@link Function#apply(Object) resolve} the {@link Id}.
    * @return the {@link IdLink} instance.
    */
-  public static <E extends EntityBean> IdLink<E> valueOf(Id<E> id, Function<Id<E>, E> resolver) {
+  public static <E extends Entity> IdLink<E> valueOf(Id<E> id, Function<Id<E>, E> resolver) {
 
     return new IdLink<>(id, resolver);
   }

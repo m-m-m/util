@@ -36,9 +36,9 @@ public class StringListPropertyTest extends Assertions {
     assertThat(property.getValueAsList()).containsExactly("a", "bc", "d");
   }
 
-  /** Test of {@link StringListProperty#setValueAsList()}. */
+  /** Test of {@link StringListProperty#setValueAsCollection(java.util.Collection)}. */
   @Test
-  public void testSetValueAsList() {
+  public void testSetValueAsCollection() {
 
     StringListProperty property = new StringListProperty("stringList", null);
     property.setValueAsCollection(Arrays.asList("a", "bc", "d"));

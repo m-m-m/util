@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import net.sf.mmm.util.bean.api.id.Id;
+import net.sf.mmm.util.data.api.id.Id;
 
 /**
  * An implementation of {@link JsonSerializer} for {@link Id}.

@@ -25,6 +25,7 @@
     <module>../search</module>
     <module>../version</module>
     <module>../json</module>
+    <module>../data</module>
     <module>../property</module>
     <module>../bean</module>
     <module>../query</module>

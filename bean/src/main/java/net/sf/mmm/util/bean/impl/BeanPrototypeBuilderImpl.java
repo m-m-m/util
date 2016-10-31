@@ -102,8 +102,7 @@ public class BeanPrototypeBuilderImpl extends AbstractLoggableObject implements 
       if ((Bean.class.isAssignableFrom(superInterface)) && (superInterface != Bean.class)) {
         Bean superBean = doGetOrCreatePrototype((Class) superInterface);
         BeanAccessBase<BEAN> access = (BeanAccessBase<BEAN>) superBean.access();
-        BeanAccessPrototypePolymorphic<BEAN> superPrototype = (BeanAccessPrototypePolymorphic<BEAN>) access
-            .getPrototype();
+        BeanAccessPrototypePolymorphic<BEAN> superPrototype = (BeanAccessPrototypePolymorphic<BEAN>) access.getPrototype();
         superPrototype.addChild(prototype);
       }
     }
@@ -114,14 +113,14 @@ public class BeanPrototypeBuilderImpl extends AbstractLoggableObject implements 
 
     getLogger().debug("Creating bean prototype for {}.", type);
     BeanAccessPrototype<BEAN> prototypeInteranl = this.beanFactory.getPrototypeInternal(type);
-    BeanAccessPrototypePolymorphic<BEAN> prototypeExternal = new BeanAccessPrototypePolymorphic<>(this,
-        prototypeInteranl, this.dynamic, prototypeInteranl.getQualifiedName());
+    BeanAccessPrototypePolymorphic<BEAN> prototypeExternal = new BeanAccessPrototypePolymorphic<>(this, prototypeInteranl, this.dynamic,
+        prototypeInteranl.getQualifiedName());
     return prototypeExternal.getBean();
   }
 
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
-  public <BEAN extends Bean> BEAN createPrototype(BEAN superPrototypeBean, String name,
-      Bean... superBeanPrototypes) {
+  public <BEAN extends Bean> BEAN createPrototype(BEAN superPrototypeBean, String name, Bean... superBeanPrototypes) {
 
     Class<? extends Bean> type = superPrototypeBean.access().getBeanClass();
     Set<Class<?>> interfaceSet = new HashSet<>(superBeanPrototypes.length + 20);
@@ -143,8 +142,7 @@ public class BeanPrototypeBuilderImpl extends AbstractLoggableObject implements 
     BeanAccessPrototypePolymorphic<BEAN> superPrototype = BeanAccessPrototypePolymorphic.get(superPrototypeBean);
     String qualifiedName = this.beanFactory.getQualifiedName(type, name);
     Class<?>[] interfaces = interfaceSet.toArray(new Class<?>[interfaceSet.size()]);
-    BeanAccessPrototypeVirtual<BEAN> prototype = new BeanAccessPrototypeVirtual<>(this, superPrototype,
-        this.dynamic, qualifiedName, interfaces);
+    BeanAccessPrototypeVirtual<BEAN> prototype = new BeanAccessPrototypeVirtual<>(this, superPrototype, this.dynamic, qualifiedName, interfaces);
     BEAN bean = prototype.getBean();
 
     this.lock.lock();

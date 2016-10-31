@@ -3,7 +3,8 @@
 package net.sf.mmm.util.bean.api.entity;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.bean.api.id.Id;
+import net.sf.mmm.util.data.api.entity.Entity;
+import net.sf.mmm.util.data.api.id.Id;
 import net.sf.mmm.util.property.api.WritableProperty;
 
 /**

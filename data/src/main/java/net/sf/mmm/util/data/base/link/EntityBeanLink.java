@@ -1,21 +1,21 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.bean.base.link;
+package net.sf.mmm.util.data.base.link;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.bean.api.entity.EntityBean;
-import net.sf.mmm.util.bean.api.id.Id;
+import net.sf.mmm.util.data.api.entity.Entity;
+import net.sf.mmm.util.data.api.id.Id;
 
 /**
- * Implementation of {@link AbstractLink} based on an already resolved {@link EntityBean}.
+ * Implementation of {@link AbstractLink} based on an already resolved {@link Entity}.
  *
- * @param <E> the generic type of the {@link #getTarget() linked} {@link EntityBean}.
+ * @param <E> the generic type of the {@link #getTarget() linked} {@link Entity}.
  *
  * @author hohwille
  * @since 8.4.0
  */
-public class EntityBeanLink<E extends EntityBean> extends AbstractLink<E> {
+public class EntityBeanLink<E extends Entity> extends AbstractLink<E> {
 
   private final E bean;
 
@@ -73,11 +73,11 @@ public class EntityBeanLink<E extends EntityBean> extends AbstractLink<E> {
   }
 
   /**
-   * @param <E> the generic type of the {@link #getTarget() linked} {@link EntityBean}.
-   * @param bean the {@link #getTarget() linked} {@link EntityBean}.
+   * @param <E> the generic type of the {@link #getTarget() linked} {@link Entity}.
+   * @param bean the {@link #getTarget() linked} {@link Entity}.
    * @return the new {@link EntityBeanLink} instance.
    */
-  public static <E extends EntityBean> EntityBeanLink<E> valueOf(E bean) {
+  public static <E extends Entity> EntityBeanLink<E> valueOf(E bean) {
 
     if (bean == null) {
       return null;

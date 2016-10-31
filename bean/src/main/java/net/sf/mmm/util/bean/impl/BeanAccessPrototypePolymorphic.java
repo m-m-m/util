@@ -9,13 +9,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 import net.sf.mmm.util.bean.api.Bean;
-import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.api.BeanPrototypeBuilder;
 import net.sf.mmm.util.property.api.AbstractProperty;
 
 /**
- * This class extends {@link BeanAccessPrototypeExternal} for a polymorphic {@link BeanFactory#createPrototype(Class)
- * prototype} of a {@link Bean} that will also inherit its newly created properties to its inherited sub-{@link Bean}s.
+ * This class extends {@link BeanAccessPrototypeExternal} for a polymorphic
+ * {@link net.sf.mmm.util.bean.api.BeanFactory#createPrototype(Class) prototype} of a {@link Bean} that will also
+ * inherit its newly created properties to its inherited sub-{@link Bean}s.
  *
  * @param <BEAN> the generic type of the {@link Bean}.
  *
@@ -36,8 +36,7 @@ public class BeanAccessPrototypePolymorphic<BEAN extends Bean> extends BeanAcces
    * @param dynamic - see {@link #isDynamic()}.
    * @param qualifiedName - see {@link #getQualifiedName()}.
    */
-  public BeanAccessPrototypePolymorphic(BeanPrototypeBuilderImpl prototypeBuilder,
-      BeanAccessPrototype<BEAN> master, boolean dynamic, String qualifiedName) {
+  public BeanAccessPrototypePolymorphic(BeanPrototypeBuilderImpl prototypeBuilder, BeanAccessPrototype<BEAN> master, boolean dynamic, String qualifiedName) {
     super(master, dynamic, qualifiedName);
     this.prototypeBuilder = prototypeBuilder;
     this.children = new ArrayList<>();
@@ -52,8 +51,8 @@ public class BeanAccessPrototypePolymorphic<BEAN extends Bean> extends BeanAcces
    * @param qualifiedName - see {@link #getQualifiedName()}.
    * @param interfaces - the interfaces to be implemented by the {@link #getBean() dynamic proxy}.
    */
-  protected BeanAccessPrototypePolymorphic(BeanPrototypeBuilderImpl prototypeBuilder,
-      BeanAccessPrototype<BEAN> master, boolean dynamic, String qualifiedName, Class<?>... interfaces) {
+  protected BeanAccessPrototypePolymorphic(BeanPrototypeBuilderImpl prototypeBuilder, BeanAccessPrototype<BEAN> master, boolean dynamic, String qualifiedName,
+      Class<?>... interfaces) {
     super(master, dynamic, qualifiedName, interfaces);
     this.prototypeBuilder = prototypeBuilder;
     this.children = new ArrayList<>();

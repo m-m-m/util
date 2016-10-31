@@ -47,7 +47,6 @@ public interface BeanPrototypeBuilder extends AbstractBeanFactory {
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param prototype the main prototype of the {@link Bean}.
-   * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
    * @param name the explicit {@link BeanAccess#getSimpleName() name} of the {@link Bean}.
    * @param superBeanPrototypes the additional prototypes of the {@link Bean}s (mixins) that will also be inherited from
    *        the prototype to create in addition to the given {@code prototype}. They have to be
@@ -65,7 +64,6 @@ public interface BeanPrototypeBuilder extends AbstractBeanFactory {
    *
    * @param <BEAN> the generic type of the {@link Bean}.
    * @param type the {@link Class} reflecting the {@link Bean}.
-   * @param dynamic the {@link BeanAccess#isDynamic() dynamic flag} of the {@link Bean}.
    * @param name the explicit {@link BeanAccess#getSimpleName() name} of the {@link Bean}.
    * @param superBeanPrototypes the prototypes of the {@link Bean}s to inherit the prototype to create. Have to be
    *        {@link #getPrototype(Bean) prototypes}. Further one of these prototypes has to correspond to the given

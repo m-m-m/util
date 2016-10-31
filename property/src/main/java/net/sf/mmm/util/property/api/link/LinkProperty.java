@@ -4,8 +4,8 @@ package net.sf.mmm.util.property.api.link;
 
 import java.util.function.Supplier;
 
-import net.sf.mmm.util.bean.api.entity.EntityBean;
-import net.sf.mmm.util.bean.api.link.Link;
+import net.sf.mmm.util.data.api.entity.Entity;
+import net.sf.mmm.util.data.api.link.Link;
 import net.sf.mmm.util.property.api.lang.GenericProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.GenericTypeBuilder;
@@ -15,14 +15,14 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
 
 /**
  * This class represents a {@link GenericProperty property} containing a {@link Link} that {@link Link#getTarget()
- * points to} an {@link EntityBean}.
+ * points to} an {@link Entity}.
  *
- * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
+ * @param <E> the generic type of the {@link Link#getTarget() linked} {@link Entity}.
  *
  * @author hohwille
  * @since 1.0.0
  */
-public class LinkProperty<E extends EntityBean> extends GenericProperty<Link<E>> {
+public class LinkProperty<E extends Entity> extends GenericProperty<Link<E>> {
 
   /** The fallback for {@link #getType()} if linked class is unknown. */
   @SuppressWarnings("rawtypes")
@@ -64,13 +64,13 @@ public class LinkProperty<E extends EntityBean> extends GenericProperty<Link<E>>
   }
 
   /**
-   * @param <E> the generic type of the {@link Link#getTarget() linked} {@link EntityBean}.
-   * @param beanClass the class reflecting the linked {@link EntityBean}.
-   * @return the {@link GenericType} for an {@link Link} {@link Link#getTarget() pointing to} an {@link EntityBean} of
-   *         the given {@link Class}.
+   * @param <E> the generic type of the {@link Link#getTarget() linked} {@link Entity}.
+   * @param beanClass the class reflecting the linked {@link Entity}.
+   * @return the {@link GenericType} for an {@link Link} {@link Link#getTarget() pointing to} an {@link Entity} of the
+   *         given {@link Class}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public static <E extends EntityBean> GenericType<Link<E>> createLinkType(Class<E> beanClass) {
+  public static <E extends Entity> GenericType<Link<E>> createLinkType(Class<E> beanClass) {
 
     if (beanClass == null) {
       return (GenericType) TYPE;
