@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import net.sf.mmm.util.json.impl.spring.UtilJsonSpringConfig;
 import net.sf.mmm.util.property.api.factory.PropertyFactoryManager;
 import net.sf.mmm.util.property.impl.factory.PropertyFactoryManagerImpl;
 import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
@@ -19,7 +20,7 @@ import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
  */
 @Configuration
 @ComponentScan(basePackageClasses = PropertyFactoryManagerImpl.class)
-@Import(UtilReflectSpringConfig.class)
+@Import({ UtilReflectSpringConfig.class, UtilJsonSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class UtilPropertySpringConfig {
 

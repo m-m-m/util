@@ -10,8 +10,8 @@ import net.sf.mmm.util.bean.api.BeanFactory;
 import net.sf.mmm.util.bean.api.mapping.GenericPojoBeanMapper;
 import net.sf.mmm.util.bean.impl.BeanFactoryImpl;
 import net.sf.mmm.util.bean.impl.mapping.GenericPojoBeanMapperImpl;
-import net.sf.mmm.util.pojo.impl.spring.UtilPojoSpringConfig;
 import net.sf.mmm.util.property.impl.spring.UtilPropertySpringConfig;
+import net.sf.mmm.util.validation.impl.spring.UtilValidationSpringConfig;
 import net.sf.mmm.util.value.impl.spring.UtilValueSpringConfig;
 
 /**
@@ -21,7 +21,7 @@ import net.sf.mmm.util.value.impl.spring.UtilValueSpringConfig;
  * @since 8.4.0
  */
 @Configuration
-@Import({ UtilPropertySpringConfig.class, UtilPojoSpringConfig.class, UtilValueSpringConfig.class })
+@Import({ UtilPropertySpringConfig.class, UtilValueSpringConfig.class, UtilValidationSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class UtilBeanSpringConfig {
 
