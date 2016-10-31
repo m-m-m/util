@@ -86,63 +86,61 @@ public @interface CliOption {
   String NAME_VERBOSE = "--verbose";
 
   /**
-   * The actual option (e.g. "--help"). <br>
-   * By convention this should be a GNU long-named option starting with "--" followed by a self-explanatory name where
-   * terms may with separated with hyphens (e.g. "--with-extra-option").
+   * @return the actual option (e.g. "--help"). <br>
+   *         By convention this should be a GNU long-named option starting with "--" followed by a self-explanatory name
+   *         where terms may with separated with hyphens (e.g. "--with-extra-option").
    */
   String name();
 
   /**
-   * The name of the operand for the {@link #usage() usage}. A {@link CliOption} can either be a switch (if type of
-   * annotated field is boolean/Boolean) or it takes an operand (e.g. "--delay 5"). The name of this operand for the
-   * {@link #usage() usage} output can be configured here.
+   * @return the name of the operand for the {@link #usage() usage}. A {@link CliOption} can either be a switch (if type
+   *         of annotated field is boolean/Boolean) or it takes an operand (e.g. "--delay 5"). The name of this operand
+   *         for the {@link #usage() usage} output can be configured here.
    */
   String operand() default OPERAND_DEFAULT;
 
   /**
-   * The list of optional aliases that can be used instead of the {@link #name()}. E.g. for {@link #name()} "--help" an
-   * alias could be "-h".
+   * @return the list of optional aliases that can be used instead of the {@link #name()}. E.g. for {@link #name()}
+   *         "--help" an alias could be "-h".
    */
   String[] aliases() default { //
   };
 
   /**
-   * The description of this option for {@link CliParser#printHelp(Appendable) help usage}. It should be an
-   * {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalized message} that will be
-   * localized using {@link net.sf.mmm.util.nls.api.NlsMessage}.
-   * {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) NLS-arguments} are "operand" for the localized
-   * {@link #operand() operand} and "default" for the default value.
+   * @return the description of this option for {@link CliParser#printHelp(Appendable) help usage}. It should be an
+   *         {@link net.sf.mmm.util.nls.api.NlsMessage#getInternationalizedMessage() internationalized message} that
+   *         will be localized using {@link net.sf.mmm.util.nls.api.NlsMessage}.
+   *         {@link net.sf.mmm.util.nls.api.NlsMessage#getArgument(String) NLS-arguments} are "operand" for the
+   *         localized {@link #operand() operand} and "default" for the default value.
    */
   String usage();
 
   /**
-   * The flag that indicates if this option is required. Use a value of {@code true} to make this option required within
-   * it's {@link #mode() mode}.
+   * @return the flag that indicates if this option is required. Use a value of {@code true} to make this option
+   *         required within it's {@link #mode() mode}.
    *
    * @see CliMode#parentIds()
    */
   boolean required() default false;
 
   /**
-   * The {@link CliMode#id() ID} of the {@link CliMode mode}. A typical main-program has different modes how it can be
-   * invoked. <br>
-   * The {@link CliOption options} of a program can be split into groups that represent such mode. The options are
-   * ordered by their mode in the help-usage-output and modes allow to express that an {@link CliOption option} is
-   * {@link #required() required} only in a specific mode. <br>
-   * {@link CliOption Options} can only be combined as command-line arguments if their {@link #mode() modes} are
-   * compatible. This means that the modes have to be identical or one mode {@link CliMode#parentIds() extends} the
-   * other. In the latter case the most special mode is triggered. For each {@link #mode() mode} that is used in an
-   * {@link CliClass CLI annotated class} an according {@link CliMode} annotation has to be present in order to define
-   * the mode.
-   *
+   * @return the {@link CliMode#id() ID} of the {@link CliMode mode}. A typical main-program has different modes how it
+   *         can be invoked. <br>
+   *         The {@link CliOption options} of a program can be split into groups that represent such mode. The options
+   *         are ordered by their mode in the help-usage-output and modes allow to express that an {@link CliOption
+   *         option} is {@link #required() required} only in a specific mode. <br>
+   *         {@link CliOption Options} can only be combined as command-line arguments if their {@link #mode() modes} are
+   *         compatible. This means that the modes have to be identical or one mode {@link CliMode#parentIds() extends}
+   *         the other. In the latter case the most special mode is triggered. For each {@link #mode() mode} that is
+   *         used in an {@link CliClass CLI annotated class} an according {@link CliMode} annotation has to be present
+   *         in order to define the mode.
    * @see CliMode
    */
   String mode() default CliMode.ID_DEFAULT;
 
   /**
-   * The {@link CliContainerStyle style} of this option if it has a container type. The default is
-   * {@link CliContainerStyle#DEFAULT}.
-   *
+   * @return the {@link CliContainerStyle style} of this option if it has a container type. The default is
+   *         {@link CliContainerStyle#DEFAULT}.
    * @see CliStyle#containerStyle()
    */
   CliContainerStyle containerStyle() default CliContainerStyle.DEFAULT;

@@ -8,9 +8,9 @@ package net.sf.mmm.util.component.api;
  * a {@link net.sf.mmm.util.component.api.ComponentSpecification component}. The main idea is to abstract from the
  * implementation of the component so it gets replaceable and the design is maintainable. <br>
  * The most important type in Java to define an API is the {@link Class#isInterface() interface}. However an API may
- * also consist of {@link Enum} types or POJO {@link Class classes} and {@link net.sf.mmm.util.lang.api.Datatype}s that
- * are accepted as arguments by an interface. The actual <em>API</em> of a
- * {@link net.sf.mmm.util.component.api.ComponentSpecification component} is therefore the combination of all these
+ * also consist of {@link Enum} types or POJO {@link Class classes} (see {@code net.sf.mmm.util.pojo.api.Pojo}) and
+ * {@link net.sf.mmm.util.lang.api.Datatype}s that are accepted as arguments by an interface. The actual <em>API</em> of
+ * a {@link net.sf.mmm.util.component.api.ComponentSpecification component} is therefore the combination of all these
  * types. It has to be <em>self-contained</em> what means that it only contains references to types legally considered
  * as part of the <em>API</em>. With references we are NOT talking about JavaDoc-links. <br>
  * A typical negative example is an interface that references objects from the implementation. That is bad design as the

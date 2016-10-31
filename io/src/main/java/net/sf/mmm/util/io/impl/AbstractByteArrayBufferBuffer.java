@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.NoSuchElementException;
 
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.io.api.BufferExceedException;
 import net.sf.mmm.util.io.api.ByteArray;
 import net.sf.mmm.util.io.api.ByteArrayBuffer;
@@ -14,7 +15,6 @@ import net.sf.mmm.util.io.api.ByteProcessor;
 import net.sf.mmm.util.io.api.ComposedByteBuffer;
 import net.sf.mmm.util.io.api.ProcessableByteArrayBuffer;
 import net.sf.mmm.util.io.base.ByteArrayImpl;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the abstract base implementation of the {@link ProcessableByteArrayBuffer} interface for a {@code byte[]}
@@ -226,8 +226,7 @@ public abstract class AbstractByteArrayBufferBuffer implements ProcessableByteAr
       if (processor != null) {
         consumed = processor.process(this.currentBufferBytes, this.currentBufferIndex, len);
         if ((consumed < 0) || (consumed > len)) {
-          throw new ValueOutOfRangeException(Integer.valueOf(consumed), Integer.valueOf(0), Integer.valueOf(len),
-              processor);
+          throw new ValueOutOfRangeException(Integer.valueOf(consumed), Integer.valueOf(0), Integer.valueOf(len), processor);
         }
       }
       this.currentBufferIndex = this.currentBufferIndex + consumed;

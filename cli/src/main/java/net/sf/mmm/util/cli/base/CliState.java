@@ -41,7 +41,6 @@ import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.validation.base.ValidatorBuilder;
 import net.sf.mmm.util.validation.base.ValidatorBuilderNone;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
-import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This is a container for the {@link #getStateClass() state-class}. It determines and holds the CLI-informations of
@@ -75,8 +74,8 @@ public class CliState extends CliClassContainer {
    * @param reflectionUtil is the {@link ReflectionUtil} instance to use.
    * @param annotationUtil is the {@link AnnotationUtil} instance to use.
    */
-  public CliState(Class<?> stateClass, PojoDescriptorBuilderFactory descriptorBuilderFactory, Logger logger,
-      ReflectionUtil reflectionUtil, AnnotationUtil annotationUtil) {
+  public CliState(Class<?> stateClass, PojoDescriptorBuilderFactory descriptorBuilderFactory, Logger logger, ReflectionUtil reflectionUtil,
+      AnnotationUtil annotationUtil) {
 
     super(stateClass, logger);
     this.name2OptionMap = new HashMap<>();
@@ -85,10 +84,8 @@ public class CliState extends CliClassContainer {
     this.reflectionUtil = reflectionUtil;
     this.annotationUtil = annotationUtil;
     this.validatorBuilder = createValidatorBuilder();
-    boolean fieldAnnotationFound = findPropertyAnnotations(
-        descriptorBuilderFactory.createPrivateFieldDescriptorBuilder());
-    boolean methodAnnotationFound = findPropertyAnnotations(
-        descriptorBuilderFactory.createPublicMethodDescriptorBuilder());
+    boolean fieldAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory.createPrivateFieldDescriptorBuilder());
+    boolean methodAnnotationFound = findPropertyAnnotations(descriptorBuilderFactory.createPublicMethodDescriptorBuilder());
     if (!fieldAnnotationFound && !methodAnnotationFound) {
       // is this really forbidden? Add handling to CliStyle?
       throw new CliClassNoPropertyException(stateClass);
@@ -218,8 +215,7 @@ public class CliState extends CliClassContainer {
    *         initialization was successful.
    * @throws NodeCycleException if a cyclic dependency was detected and completed.
    */
-  protected NodeCycle<CliArgumentContainer> initializeArgumentRecursive(
-      BasicDoubleLinkedNode<CliArgumentContainer> node,
+  protected NodeCycle<CliArgumentContainer> initializeArgumentRecursive(BasicDoubleLinkedNode<CliArgumentContainer> node,
       Map<String, BasicDoubleLinkedNode<CliArgumentContainer>> argumentMap) throws NodeCycleException {
 
     CliArgumentContainer argumentContainer = node.getValue();
@@ -278,8 +274,7 @@ public class CliState extends CliClassContainer {
         } else if ((option != null) || (argument != null)) {
           annotationFound = true;
           PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
-          ValueValidator<?> validator = this.validatorBuilder.newValidator(getStateClass(),
-              propertyDescriptor.getName());
+          ValueValidator<?> validator = this.validatorBuilder.newValidator(getStateClass(), propertyDescriptor.getName());
           if (option != null) {
             CliOptionContainer optionContainer = new CliOptionContainer(option, setter, getter, validator);
             addOption(optionContainer);
@@ -480,8 +475,7 @@ public class CliState extends CliClassContainer {
 
     @Override
     @SuppressWarnings("all")
-    public <T extends String> T convert(CliArgumentContainer value, Object valueSource, Class<T> targetClass)
-        throws ValueException {
+    public <T extends String> T convert(CliArgumentContainer value, Object valueSource, Class<T> targetClass) {
 
       return (T) value.getId();
     }

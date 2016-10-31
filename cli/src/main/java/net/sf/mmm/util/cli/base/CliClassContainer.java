@@ -22,7 +22,6 @@ import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.value.api.SimpleValueConverter;
-import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * A {@link CliClassContainer} determines and holds the class-specific CLI-informations of a {@link #getStateClass()
@@ -74,8 +73,7 @@ public class CliClassContainer {
       cliStyleAnnotation = CliDefaultAnnotations.CLI_STYLE;
     }
     if (cliStyleAnnotation.containerStyle() == CliContainerStyle.DEFAULT) {
-      throw new NlsIllegalArgumentException(CliContainerStyle.DEFAULT,
-          "@" + CliStyle.class.getSimpleName() + ".containerStyle()");
+      throw new NlsIllegalArgumentException(CliContainerStyle.DEFAULT, "@" + CliStyle.class.getSimpleName() + ".containerStyle()");
     }
     this.cliStyle = cliStyleAnnotation;
     if (cliClassAnnotation == null) {
@@ -285,8 +283,7 @@ public class CliClassContainer {
 
     @Override
     @SuppressWarnings("all")
-    public <T extends String> T convert(CliModeContainer value, Object valueSource, Class<T> targetClass)
-        throws ValueException {
+    public <T extends String> T convert(CliModeContainer value, Object valueSource, Class<T> targetClass) {
 
       return (T) value.getId();
     }

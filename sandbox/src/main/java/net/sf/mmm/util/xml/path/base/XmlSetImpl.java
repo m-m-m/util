@@ -31,7 +31,7 @@ public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
     super(namespaceContext);
     assert (conjunction != null);
     this.conjunction = conjunction;
-    this.selectorList = new ArrayList<AbstractXmlSelector>();
+    this.selectorList = new ArrayList<>();
   }
 
   @Override
@@ -73,7 +73,7 @@ public class XmlSetImpl extends AbstractXmlSelector implements XmlSet {
       case INTERSECTION:
         conjunctionString = " & ";
         break;
-      default:
+      default :
         // this is actually an internal error!
         conjunctionString = " ?!? ";
         break;

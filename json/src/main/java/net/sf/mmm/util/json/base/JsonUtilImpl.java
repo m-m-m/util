@@ -254,6 +254,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
     return (V) result;
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   public void write(JsonGenerator json, String property, Object value) {
 

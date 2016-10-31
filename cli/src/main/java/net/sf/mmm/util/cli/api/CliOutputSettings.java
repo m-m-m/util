@@ -4,9 +4,9 @@ package net.sf.mmm.util.cli.api;
 
 import java.util.Locale;
 
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This class represents the settings for the {@link CliParser#printHelp(Appendable, CliOutputSettings) help output}.
@@ -67,8 +67,7 @@ public class CliOutputSettings {
   public void setWidth(int width) {
 
     if (width < MIN_WIDTH) {
-      throw new ValueOutOfRangeException(Integer.valueOf(width), (Number) Integer.valueOf(MIN_WIDTH),
-          Integer.valueOf(Integer.MAX_VALUE), "width");
+      throw new ValueOutOfRangeException(Integer.valueOf(width), (Number) Integer.valueOf(MIN_WIDTH), Integer.valueOf(Integer.MAX_VALUE), "width");
     }
     this.width = width;
   }

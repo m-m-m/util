@@ -45,8 +45,8 @@ public class NamespaceContextImpl implements NamespaceContext {
 
     super();
     this.parentContext = parentContext;
-    this.prefix2namespace = new HashMap<String, String>();
-    this.namespace2prefix = new HashMap<String, String>();
+    this.prefix2namespace = new HashMap<>();
+    this.namespace2prefix = new HashMap<>();
   }
 
   @Override

@@ -17,6 +17,7 @@ import net.sf.mmm.util.resource.base.ClasspathResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.3.0 (moved from 7.0.0)
  */
+@SuppressWarnings("javadoc")
 abstract class AbstractBrowsableClasspathResource extends AbstractBrowsableResource implements ResourcePath {
 
   private static final String EXTENSION_CLASS = ".class";

@@ -26,7 +26,7 @@ public class XmlPathImpl extends AbstractXmlSelector implements XmlPath {
   public XmlPathImpl(NamespaceContext namespaceContext) {
 
     super(namespaceContext);
-    this.segmentList = new ArrayList<AbstractXmlPathSegment>();
+    this.segmentList = new ArrayList<>();
   }
 
   @Override

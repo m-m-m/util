@@ -28,7 +28,6 @@ import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.AssignableFromFilter;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
-import net.sf.mmm.util.resource.api.ClasspathScanner;
 
 /**
  * The abstract base class for a {@link AbstractMain CLI program} to process {@link NlsBundle}s or
@@ -331,6 +330,11 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
     }
   }
 
+  /**
+   * @param bundle the {@link NlsBundleDescriptor}.
+   * @param locale the {@link Locale} to generate as {@link String}.
+   * @return the target {@link File} to generate. It is ensured that the parent directory exists.
+   */
   protected File getTargetFileMkdirs(NlsBundleDescriptor bundle, String locale) {
 
     File targetFile = getTargetFile(bundle, locale);
@@ -344,6 +348,11 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
     return targetFile;
   }
 
+  /**
+   * @param bundle the {@link NlsBundleDescriptor}.
+   * @param locale the {@link Locale} to generate as {@link String}.
+   * @return the target {@link File} to generate.
+   */
   protected abstract File getTargetFile(NlsBundleDescriptor bundle, String locale);
 
   /**
@@ -364,8 +373,7 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
    * @param date is the current date as string.
    * @throws IOException if an I/O problem occurred.
    */
-  protected abstract void synchronize(NlsBundleDescriptor bundle, String locale, File targetFile, String date)
-      throws IOException;
+  protected abstract void synchronize(NlsBundleDescriptor bundle, String locale, File targetFile, String date) throws IOException;
 
   @Override
   protected int runDefaultMode() throws Exception {
@@ -377,8 +385,6 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
           synchronize(new NlsBundleDescriptor(resourceBundle));
         }
       }
-      ClasspathScanner scanner;
-
       Set<String> allClasses = getReflectionUtil().findClassNames("", true);
       Filter<? super Class<?>> filter = new AssignableFromFilter(NlsBundle.class, true);
       @SuppressWarnings({ "unchecked", "rawtypes" })
