@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.property.api.util;
 
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -18,6 +19,8 @@ import javafx.collections.SetChangeListener;
 import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.property.api.AbstractContainerProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
+import net.sf.mmm.util.reflect.base.GenericTypeBuilder;
+import net.sf.mmm.util.reflect.base.GenericTypeVariable;
 import net.sf.mmm.util.reflect.impl.SimpleGenericTypeImpl;
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.collection.AbstractCollectionValidatorBuilder;
@@ -201,4 +204,13 @@ public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> 
     set(set);
   }
 
+  /**
+   * @param <E> the generic type of the {@link Set#contains(Object) elements} of the {@link Set}.
+   * @param elementType the {@link GenericType} reflecting the {@link Set#contains(Object) elements} of the {@link Set}.
+   * @return the {@link GenericType} for an {@link ObservableSet} with the given element type.
+   */
+  public static <E> GenericType<ObservableSet<E>> createSetType(GenericType<E> elementType) {
+
+    return new GenericTypeBuilder<ObservableSet<E>>() {}.with(new GenericTypeVariable<E>() {}, elementType).build();
+  }
 }

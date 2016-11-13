@@ -184,16 +184,6 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
     ListExpressionHelper.fireValueChangedEvent(this.helper);
   }
 
-  /**
-   * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
-   * @param elementType the {@link GenericType} reflecting the {@link List#get(int) elements} of the {@link List}.
-   * @return the {@link GenericType} for an {@link ObservableList} with the given element type.
-   */
-  public static <E> GenericType<ObservableList<E>> createListType(GenericType<E> elementType) {
-
-    return new GenericTypeBuilder<ObservableList<E>>() {}.with(new GenericTypeVariable<E>() {}, elementType).build();
-  }
-
   @Override
   protected void toJson(JsonGenerator json, ObservableList<E> listValue) {
 
@@ -211,5 +201,15 @@ public class ListProperty<E> extends AbstractContainerProperty<ObservableList<E>
     getJsonUtil().expectEvent(json, Event.START_ARRAY);
     ObservableList<E> list = getOrCreateValue();
     getJsonUtil().readCollection(json, list, (GenericType<E>) getType().getComponentType());
+  }
+
+  /**
+   * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
+   * @param elementType the {@link GenericType} reflecting the {@link List#get(int) elements} of the {@link List}.
+   * @return the {@link GenericType} for an {@link ObservableList} with the given element type.
+   */
+  public static <E> GenericType<ObservableList<E>> createListType(GenericType<E> elementType) {
+
+    return new GenericTypeBuilder<ObservableList<E>>() {}.with(new GenericTypeVariable<E>() {}, elementType).build();
   }
 }

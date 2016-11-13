@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import net.sf.mmm.util.data.api.id.Id;
+import net.sf.mmm.util.data.api.id.LongId;
 
 /**
  * An implementation of {@link JsonSerializer} for {@link Id}.
@@ -34,14 +35,30 @@ public class IdJsonSerializer extends JsonSerializer<Id<?>> {
   }
 
   @Override
-  public void serialize(Id<?> id, JsonGenerator gen, SerializerProvider serializers)
-      throws IOException, JsonProcessingException {
+  public void serialize(Id<?> id, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 
     if (id == null) {
       return;
     }
-    String idString = id.toString();
-    gen.writeString(idString);
+    long version = id.getVersion();
+    if (version == Id.VERSION_LATEST) {
+      writeId(id, gen);
+    } else {
+      gen.writeStartObject();
+      gen.writeFieldName(Id.PROPERTY_ID);
+      writeId(id, gen);
+      gen.writeNumberField(Id.PROPERTY_VERSION, version);
+      gen.writeEndObject();
+    }
+  }
+
+  private void writeId(Id<?> id, JsonGenerator gen) throws IOException {
+
+    if (id instanceof LongId) {
+      gen.writeNumber(((LongId<?>) id).getIdAsLong());
+    } else {
+      gen.writeString(id.getId().toString());
+    }
   }
 
 }

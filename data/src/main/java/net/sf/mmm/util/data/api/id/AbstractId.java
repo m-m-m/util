@@ -5,6 +5,8 @@ package net.sf.mmm.util.data.api.id;
 import java.util.Objects;
 import java.util.UUID;
 
+import net.sf.mmm.util.exception.api.ObjectMismatchException;
+
 /**
  * This is the abstract base implementation of {@link Id}.
  *
@@ -17,13 +19,17 @@ public abstract class AbstractId<E> implements Id<E> {
 
   private static final long serialVersionUID = 1L;
 
-  private Class<E> type;
+  private final Class<E> type;
+
+  private final long version;
 
   /**
    * The constructor.
    */
   protected AbstractId() {
     super();
+    this.type = null;
+    this.version = VERSION_LATEST;
   }
 
   /**
@@ -32,8 +38,19 @@ public abstract class AbstractId<E> implements Id<E> {
    * @param type - see {@link #getType()}.
    */
   public AbstractId(Class<E> type) {
+    this(type, VERSION_LATEST);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param type - see {@link #getType()}.
+   * @param version - see {@link #getVersion()}.
+   */
+  public AbstractId(Class<E> type, long version) {
     super();
     this.type = type;
+    this.version = version;
   }
 
   @Override
@@ -43,14 +60,46 @@ public abstract class AbstractId<E> implements Id<E> {
   }
 
   @Override
+  public long getVersion() {
+
+    return this.version;
+  }
+
+  @Override
+  public Id<E> withVersion(long newVersion) {
+
+    if (this.version == newVersion) {
+      return this;
+    }
+    return newId(this.type, newVersion);
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
+  public final Id<E> withType(Class<?> newType) {
+
+    if (this.type == null) {
+      return (Id) newId(newType, this.version);
+    } else if (this.type != newType) {
+      throw new ObjectMismatchException(newType, this.type, this);
+    }
+    return this;
+  }
+
+  /**
+   * Internal method called from {@link #withType(Class)} to create a new instance.
+   *
+   * @param <T> the generic type of {@code newType}.
+   * @param newType the new {@link #getType() type}.
+   * @param newVersion the new {@link #getVersion() version}.
+   * @return the new instance of the {@link Id} implementation.
+   */
+  protected abstract <T> AbstractId<T> newId(Class<T> newType, long newVersion);
+
+  @Override
   public final int hashCode() {
 
-    long id = getId();
-    if (id == ID_UUID) {
-      return ~getUuid().hashCode();
-    } else {
-      return ~((int) id);
-    }
+    return ~getId().hashCode();
   }
 
   @Override
@@ -63,16 +112,13 @@ public abstract class AbstractId<E> implements Id<E> {
       return false;
     }
     AbstractId<?> other = (AbstractId<?>) obj;
-    if (getId() != other.getId()) {
-      return false;
-    }
-    if (!Objects.equals(getUuid(), other.getUuid())) {
+    if (!Objects.equals(getId(), other.getId())) {
       return false;
     }
     if (!Objects.equals(this.type, other.type)) {
       return false;
     }
-    if (getVersion() != other.getVersion()) {
+    if (this.version != other.version) {
       return false;
     }
     return true;
@@ -93,26 +139,16 @@ public abstract class AbstractId<E> implements Id<E> {
    */
   protected void toString(StringBuilder buffer) {
 
-    UUID uuid = getUuid();
-    if (uuid == null) {
-      long id = getId();
-      buffer.append(id);
-      assert (id != ID_UUID);
-    } else {
-      buffer.append(uuid);
-      assert (getId() == ID_UUID);
-    }
-    long version = getVersion();
-    if (version != VERSION_LATEST) {
+    buffer.append(getId());
+    if (this.version != VERSION_LATEST) {
       buffer.append(VERSION_SEPARATOR);
-      buffer.append(version);
+      buffer.append(this.version);
     }
   }
 
   /**
    * @param idString the id (without version) as {@link String}.
-   * @return the {@code idString} as {@link UUID} or {@code null} if not a {@link #getUuid() UUID} (but {@link #getId()
-   *         ID} instead).
+   * @return the {@code idString} as {@link UUID} or {@code null} if not a {@link UUID}.
    */
   protected static UUID parseUuid(String idString) {
 

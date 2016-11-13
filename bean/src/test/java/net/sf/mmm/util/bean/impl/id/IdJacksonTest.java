@@ -11,24 +11,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import net.sf.mmm.util.bean.impl.example.ExamplePojoBean;
-import net.sf.mmm.util.data.api.id.GenericId;
 import net.sf.mmm.util.data.api.id.Id;
+import net.sf.mmm.util.data.api.id.LongId;
 
 /**
- * Test-case of {@link IdJsonSerializer} and {@link GenericIdJsonDeserializer}.
+ * Test-case of {@link IdJsonSerializer} and {@link IdJsonDeserializer}.
  *
  * @author hohwille
  */
-public class GenericIdJacksonTest extends Assertions {
+public class IdJacksonTest extends Assertions {
 
   protected ObjectMapper getObjectMapper() {
 
     ObjectMapper mapper = new ObjectMapper();
     SimpleModule module = new SimpleModule("test");
     module.addSerializer(new IdJsonSerializer());
-    GenericIdJsonDeserializer idDeserializer = new GenericIdJsonDeserializer();
-    module.addDeserializer(Id.class, idDeserializer);
-    module.addDeserializer(GenericId.class, idDeserializer);
+    module.addDeserializer(Id.class, new IdJsonDeserializer());
     mapper.registerModule(module);
     return mapper;
   }
@@ -42,11 +40,11 @@ public class GenericIdJacksonTest extends Assertions {
     // given
     long id = 4711;
     long version = 1;
-    GenericId<?> genericId = GenericId.of(MyBean.class, id, version);
+    LongId<MyBean> genericId = LongId.of(MyBean.class, id, version);
     MyBean bean = new MyBean();
     bean.setId(genericId);
     long fkId = 4712;
-    GenericId<ExamplePojoBean> foreignKey = GenericId.of(ExamplePojoBean.class, fkId);
+    LongId<ExamplePojoBean> foreignKey = LongId.of(ExamplePojoBean.class, fkId);
     bean.setForeignKey(foreignKey);
 
     ObjectMapper mapper = getObjectMapper();
@@ -56,7 +54,7 @@ public class GenericIdJacksonTest extends Assertions {
     MyBean beanFromJson = mapper.readValue(json, MyBean.class);
 
     // then
-    assertThat(json).isEqualTo("{\"id\":\"4711@1\",\"foreignKey\":\"4712\"}");
+    assertThat(json).isEqualTo("{\"id\":{\"id\":4711,\"version\":1},\"foreignKey\":4712}");
     assertThat(beanFromJson.getId()).isEqualTo(genericId);
     assertThat(beanFromJson.getForeignKey()).isEqualTo(foreignKey);
   }
