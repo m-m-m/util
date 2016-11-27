@@ -47,6 +47,17 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
   NlsMessage errorFileCreationFailed(@Named("file") String file, @Named("directory") boolean directory);
 
   /**
+   * @see net.sf.mmm.util.file.api.FilePermissionException
+   *
+   * @param file is the name or path of the file.
+   * @param directory {@code true} if the given {@code file} is a directory, {@code false} otherwise or if unknown.
+   * @return the {@link NlsMessage}
+   * @since 7.4.0
+   */
+  @NlsBundleMessage("Insufficient permissions for {directory,choice,(?==true)'directory'(else)'file'} \"{file}\"!")
+  NlsMessage errorFilePermission(@Named("file") String file, @Named("directory") boolean directory);
+
+  /**
    * @see net.sf.mmm.util.file.api.FileAttributeModificationFailedException
    *
    * @param file is the name or path of the file.
@@ -54,8 +65,7 @@ public interface NlsBundleUtilFileRoot extends NlsBundle {
    * @return the {@link NlsMessage}
    */
   @NlsBundleMessage("The attributes of the {directory,choice,(?==true)'directory'(else)'file'} \"{file}\" could not be modified!")
-  NlsMessage errorFileAttributeModificationFailed(@Named("file") String file,
-      @Named("directory") boolean directory);
+  NlsMessage errorFileAttributeModificationFailed(@Named("file") String file, @Named("directory") boolean directory);
 
   /**
    * @see net.sf.mmm.util.file.api.FileDeletionFailedException

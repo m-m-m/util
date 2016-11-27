@@ -34,6 +34,19 @@ public class FileCreationFailedException extends RuntimeIoException {
   /**
    * The constructor.
    *
+   * @param file is the file that could NOT be created.
+   * @param directory - {@code true} if the exception is about a directory, {@code false} if the exception is about a
+   *        file.
+   * @since 7.4.0
+   */
+  public FileCreationFailedException(File file, boolean directory) {
+
+    this(file.getAbsolutePath(), directory);
+  }
+
+  /**
+   * The constructor.
+   *
    * @param file is the name of the file that could NOT be created.
    */
   public FileCreationFailedException(String file) {
@@ -50,7 +63,47 @@ public class FileCreationFailedException extends RuntimeIoException {
    */
   public FileCreationFailedException(String file, boolean directory) {
 
-    super(createBundle(NlsBundleUtilFileRoot.class).errorFileCreationFailed(file, directory));
+    this(null, file, directory);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param cause the {@link Throwable} that {@link #getCause() caused} this error.
+   * @param file is the name of the file that could NOT be created.
+   * @since 7.4.0
+   */
+  public FileCreationFailedException(Throwable cause, File file) {
+
+    this(cause, file.getAbsolutePath(), false);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param cause the {@link Throwable} that {@link #getCause() caused} this error.
+   * @param file is the name of the file that could NOT be created.
+   * @param directory - {@code true} if the exception is about a directory, {@code false} if the exception is about a
+   *        file.
+   * @since 7.4.0
+   */
+  public FileCreationFailedException(Throwable cause, File file, boolean directory) {
+
+    this(cause, file.getAbsolutePath(), directory);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param cause the {@link Throwable} that {@link #getCause() caused} this error.
+   * @param file is the name of the file that could NOT be created.
+   * @param directory - {@code true} if the exception is about a directory, {@code false} if the exception is about a
+   *        file.
+   * @since 7.4.0
+   */
+  public FileCreationFailedException(Throwable cause, String file, boolean directory) {
+
+    super(cause, createBundle(NlsBundleUtilFileRoot.class).errorFileCreationFailed(file, directory));
   }
 
 }

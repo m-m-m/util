@@ -55,8 +55,7 @@ public class FileUtilTest extends Assertions {
     assertThat(util.normalizePath(homeDir + "/../someuser", '/')).isEqualTo(util.normalizePath("~someuser", '/'));
     String uncPath = "\\\\10.0.0.1\\share";
     assertThat(util.normalizePath(uncPath, '\\')).isEqualTo(uncPath);
-    assertThat(util.normalizePath("http://www.host.com/foo/bar/./test/.././.."))
-        .isEqualTo("http://www.host.com/foo");
+    assertThat(util.normalizePath("http://www.host.com/foo/bar/./test/.././..")).isEqualTo("http://www.host.com/foo");
     assertThat(util.normalizePath("../..\\foo/../bar\\.\\some", '/')).isEqualTo("../../bar/some");
   }
 
@@ -166,6 +165,31 @@ public class FileUtilTest extends Assertions {
     assertThat(copyDir.exists()).isFalse();
   }
 
+  /** Test of {@link FileUtil#touch(File)}. */
+  @Test
+  public void testTouch() throws Exception {
+
+    FileUtil util = getFileUtil();
+    File tmpFile = File.createTempFile("test-", "-touch");
+    assertThat(tmpFile).isFile();
+    assertThat(util.ensureFileExists(tmpFile)).isFalse();
+    long before = System.currentTimeMillis();
+    assertThat(util.touch(tmpFile)).isFalse();
+    long after = System.currentTimeMillis();
+    assertThat(tmpFile.lastModified()).isBetween(before, after);
+    assertThat(tmpFile.delete()).isTrue();
+    assertThat(tmpFile).doesNotExist();
+    assertThat(util.touch(tmpFile)).isTrue();
+    assertThat(tmpFile).isFile();
+    tmpFile.delete();
+    File tmpFile2 = new File(tmpFile, "sub1/sub2/test-file");
+    assertThat(tmpFile2).doesNotExist();
+    assertThat(tmpFile).doesNotExist();
+    assertThat(util.touch(tmpFile2)).isTrue();
+    assertThat(tmpFile2).isFile();
+    util.deleteRecursive(tmpFile);
+  }
+
   /** Tests {@link FileUtil#collectMatchingFiles(File, String, FileType, java.util.List)}. */
   @Test
   public void testCollectMatchingFiles() {
@@ -175,15 +199,12 @@ public class FileUtilTest extends Assertions {
     List<File> list = new ArrayList<File>();
     String testPath = TestResourceHelper.getTestPath() + "../java";
     // when
-    boolean hasPattern = util.collectMatchingFiles(new File(testPath), "net/sf/mmm/ut?l/**/impl/*.java",
-        FileType.FILE, list);
+    boolean hasPattern = util.collectMatchingFiles(new File(testPath), "net/sf/mmm/ut?l/**/impl/*.java", FileType.FILE, list);
     // then
     assertThat(hasPattern).isTrue();
     assertThat(list).contains(create(testPath, net.sf.mmm.util.resource.impl.BrowsableResourceFactoryTest.class,
-        net.sf.mmm.util.resource.impl.BrowsableResourceFactorySpringTest.class,
-        net.sf.mmm.util.io.impl.DetectorStreamTest.class));
-    assertThat(list)
-        .doesNotContain(create(testPath, net.sf.mmm.util.xml.impl.stax.XIncludeStreamReaderTest.class));
+        net.sf.mmm.util.resource.impl.BrowsableResourceFactorySpringTest.class, net.sf.mmm.util.io.impl.DetectorStreamTest.class));
+    assertThat(list).doesNotContain(create(testPath, net.sf.mmm.util.xml.impl.stax.XIncludeStreamReaderTest.class));
   }
 
   private File[] create(String testPath, Class<?>... classes) {
