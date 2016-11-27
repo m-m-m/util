@@ -20,6 +20,7 @@ import net.sf.mmm.util.file.api.FileAlreadyExistsException;
 import net.sf.mmm.util.file.api.FileAttributeModificationFailedException;
 import net.sf.mmm.util.file.api.FileCreationFailedException;
 import net.sf.mmm.util.file.api.FileDeletionFailedException;
+import net.sf.mmm.util.file.api.FilePermissionException;
 import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.io.api.IoMode;
@@ -143,8 +144,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   }
 
   /**
-   * This method set the {@link #getUserHomeDirectory() users home directory}. It can only be set during
-   * initialization.
+   * This method set the {@link #getUserHomeDirectory() users home directory}. It can only be set during initialization.
    *
    * @param userHome is the home directory of the user.
    * @throws AlreadyInitializedException if the value has already been set.
@@ -189,11 +189,65 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   }
 
   @Override
+  public boolean mkdirs(File directory) {
+
+    if (directory.isDirectory()) {
+      return false;
+    }
+    boolean mkdirs = directory.mkdirs();
+    if (!mkdirs) {
+      // retry (e.g. Windows filesystem can be picky)
+      mkdirs = directory.mkdirs();
+      if (!mkdirs) {
+        throw new FileCreationFailedException(directory, true);
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public boolean ensureFileExists(File file) {
+
+    if (file.exists()) {
+      if (file.isDirectory()) {
+        throw new FileCreationFailedException(file.getPath(), false);
+      }
+      return false;
+    } else {
+      File parent = file.getParentFile();
+      if (parent != null) {
+        mkdirs(parent);
+      }
+      boolean created = false;
+      try {
+        created = file.createNewFile();
+      } catch (IOException e) {
+        throw new FileCreationFailedException(e, file);
+      }
+      assert (file.isFile());
+      return created;
+    }
+  }
+
+  @Override
+  public boolean touch(File file) {
+
+    boolean created = ensureFileExists(file);
+    if (!file.canWrite()) {
+      throw new FilePermissionException(file);
+    }
+    boolean touched = file.setLastModified(System.currentTimeMillis());
+    if (!touched) {
+      throw new FileAttributeModificationFailedException(file);
+    }
+    return created;
+  }
+
+  @Override
   public void copyFile(File source, File destination) {
 
     // There is also Files.copy but its implementation does not seem as efficient...
-    try (FileInputStream sourceStream = new FileInputStream(source);
-        FileOutputStream destinationStream = new FileOutputStream(destination)) {
+    try (FileInputStream sourceStream = new FileInputStream(source); FileOutputStream destinationStream = new FileOutputStream(destination)) {
 
       FileChannel sourceChannel = sourceStream.getChannel();
       sourceChannel.transferTo(0, sourceChannel.size(), destinationStream.getChannel());
@@ -241,12 +295,12 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   /**
    * This method copies the file or directory given by {@code source} into the given {@code destination}. <br>
    * <b>ATTENTION:</b><br>
-   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the
-   * {@code destination} has to point to the final place where the copy should appear rather than the
-   * directory where the copy will be located in. <br>
+   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the {@code destination} has
+   * to point to the final place where the copy should appear rather than the directory where the copy will be located
+   * in. <br>
    * <br>
-   * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory
-   * "/tmp". The copy will have the same name "foo".
+   * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory "/tmp". The
+   * copy will have the same name "foo".
    *
    * <pre>
    * {@link File} source = new {@link File}("/usr/local/foo");
@@ -256,9 +310,8 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
    *
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.
-   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File) decides} which files should be
-   *        copied. Only {@link FileFilter#accept(File) accepted} files and directories are copied, others
-   *        will be ignored.
+   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File) decides} which files should be copied.
+   *        Only {@link FileFilter#accept(File) accepted} files and directories are copied, others will be ignored.
    */
   private void copyRecursive(File source, File destination, FileFilter filter) {
 
@@ -386,18 +439,16 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   /**
    * This method adds all files matching with the given {@code path} and {@code fileType} to the {@code list}.
    *
-   * @param cwd is the current working directory and should therefore point to an existing
-   *        {@link File#isDirectory() directory}. If the given {@code path} is NOT {@link File#isAbsolute()
-   *        absolute} it is interpreted relative to this directory.
-   * @param segments is the path the files to collect must match. If this path is NOT {@link File#isAbsolute()
-   *        absolute} it is interpreted relative to the {@link File#isDirectory() directory} given by
-   *        {@code cwd}.
+   * @param cwd is the current working directory and should therefore point to an existing {@link File#isDirectory()
+   *        directory}. If the given {@code path} is NOT {@link File#isAbsolute() absolute} it is interpreted relative
+   *        to this directory.
+   * @param segments is the path the files to collect must match. If this path is NOT {@link File#isAbsolute() absolute}
+   *        it is interpreted relative to the {@link File#isDirectory() directory} given by {@code cwd}.
    * @param segmentIndex is the current index in {@code pathChars} for the collection process.
    * @param fileType is the type of the files to collect or {@code null} if files of any type are acceptable.
    * @param list is the list where to {@link List#add(Object) add} the collected files.
    */
-  private void collectMatchingFiles(File cwd, List<ResourcePathNode<Pattern>> segments, int segmentIndex,
-      FileType fileType, List<File> list) {
+  private void collectMatchingFiles(File cwd, List<ResourcePathNode<Pattern>> segments, int segmentIndex, FileType fileType, List<File> list) {
 
     boolean lastSegment;
     if ((segmentIndex + 1) < segments.size()) {
