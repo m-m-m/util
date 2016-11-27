@@ -372,21 +372,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   }
 
   @Override
-  public int deleteRecursive(File path) {
-
-    int deleteCount = 0;
-    if (path.exists()) {
-      if (path.isDirectory()) {
-        deleteCount = deleteChildren(path);
-      } else {
-        deleteCount = 1;
-      }
-      delete(path);
-    }
-    return deleteCount;
-  }
-
-  @Override
   public boolean delete(File file) throws FileDeletionFailedException {
 
     if (!file.exists()) {
@@ -403,32 +388,33 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
       return true;
     }
     throw new FileDeletionFailedException(file);
+  }
 
+  @Override
+  public int deleteRecursive(File path) {
+
+    return deleteRecursive(path, null);
   }
 
   @Override
   public int deleteRecursive(File path, FileFilter filter) throws RuntimeIoException {
 
-    if (!path.exists()) {
-      return 0;
-    }
     int deleteCount = 0;
-    if (path.isDirectory()) {
-      File[] children = path.listFiles();
-      if (children != null) {
-        for (File file : children) {
-          if (file.isDirectory()) {
-            deleteCount += deleteRecursive(file, filter);
-          } else if (filter.accept(file)) {
-            delete(file);
-            deleteCount++;
+    if (path.exists()) {
+      if (path.isDirectory()) {
+        deleteCount = deleteChildren(path, filter);
+        if (filter == null) {
+          delete(path);
+        } else {
+          boolean deleted = path.delete();
+          if (!deleted) {
+            getLogger().debug("Directory {} was not deleted.", path);
           }
         }
+      } else if ((filter == null) || (filter.accept(path))) {
+        deleteCount = 1;
+        delete(path);
       }
-      path.delete();
-    } else if (filter.accept(path)) {
-      delete(path);
-      deleteCount++;
     }
     return deleteCount;
   }
@@ -436,16 +422,30 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   @Override
   public int deleteChildren(File directory) {
 
+    return deleteChildren(directory, null);
+  }
+
+  @Override
+  public int deleteChildren(File directory, FileFilter filter) throws FileDeletionFailedException {
+
     int deleteCount = 0;
     File[] children = directory.listFiles();
     if (children != null) {
       for (File file : children) {
         if (file.isDirectory()) {
-          deleteCount += deleteChildren(file);
-        } else {
+          deleteCount += deleteChildren(file, filter);
+          if (filter == null) {
+            delete(file);
+          } else {
+            boolean deleted = file.delete();
+            if (!deleted) {
+              getLogger().trace("Directory {} was not deleted.", file);
+            }
+          }
+        } else if ((filter == null) || (filter.accept(file))) {
+          delete(file);
           deleteCount++;
         }
-        delete(file);
       }
     }
     return deleteCount;

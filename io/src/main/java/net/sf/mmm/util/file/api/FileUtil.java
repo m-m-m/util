@@ -180,9 +180,9 @@ public interface FileUtil extends FileUtilLimited {
    *
    * @param path is the path to delete.
    * @return the number of files that have been deleted (excluding the directories).
-   * @throws RuntimeIoException if a file or directory could NOT be {@link File#delete() deleted}.
+   * @throws FileDeletionFailedException if a file or directory could NOT be {@link File#delete() deleted}.
    */
-  int deleteRecursive(File path) throws RuntimeIoException;
+  int deleteRecursive(File path) throws FileDeletionFailedException;
 
   /**
    * This method {@link File#delete() deletes} the given {@code path}. If the {@code path} denotes a
@@ -199,10 +199,10 @@ public interface FileUtil extends FileUtilLimited {
    * @param filter the {@link FileFilter} applied for each {@link File#isFile() regular file} that
    *        {@link FileFilter#accept(File) decides} which {@link File}s to delete.
    * @return the number of files that have been deleted (excluding the directories).
-   * @throws RuntimeIoException if a file or directory could NOT be {@link File#delete() deleted}.
+   * @throws FileDeletionFailedException if a file or directory could NOT be {@link File#delete() deleted}.
    * @since 7.4.0
    */
-  int deleteRecursive(File path, FileFilter filter) throws RuntimeIoException;
+  int deleteRecursive(File path, FileFilter filter) throws FileDeletionFailedException;
 
   /**
    * @param file the {@link File#listFiles() regular} {@link File} to {@link File#delete() delete}.
@@ -218,11 +218,28 @@ public interface FileUtil extends FileUtilLimited {
    * recursively. If the given {@code directory} denotes an {@link File#exists() existing} {@link File#isDirectory()
    * directory} then it will be empty after the call of this method, else this method will have no effect.
    *
-   * @param directory is the directory to delete.
+   * @param directory is the directory where to delete.
    * @return the number of files that have been deleted (excluding the directories).
-   * @throws RuntimeIoException if a file or directory could NOT be {@link File#delete() deleted}.
+   * @throws FileDeletionFailedException if a file or directory could NOT be {@link File#delete() deleted}.
    */
-  int deleteChildren(File directory) throws RuntimeIoException;
+  int deleteChildren(File directory) throws FileDeletionFailedException;
+
+  /**
+   * This method traverses all {@link File#listFiles() children} of the given {@code directory} recursively. For each
+   * {@link File#isFile() regular file} traversed, the given {@link FileFilter} is applied. If the {@link File} is
+   * {@link FileFilter#accept(File) accepted}, it will be {@link File#delete() deleted}. If a {@link File#isDirectory()
+   * directory} has been visited where all {@link File#listFiles() children} have been deleted, it will also be
+   * {@link File#delete() deleted}. So in case the {@link FileFilter} {@link FileFilter#accept(File) accepts} all
+   * {@link File}s, this method behaves like {@link #deleteChildren(File)}.
+   *
+   * @param directory is the directory where to delete.
+   * @param filter the {@link FileFilter} applied for each {@link File#isFile() regular file} that
+   *        {@link FileFilter#accept(File) decides} which {@link File}s to delete.
+   * @return the number of files that have been deleted (excluding the directories).
+   * @throws FileDeletionFailedException if a file or directory could NOT be {@link File#delete() deleted}.
+   * @since 7.4.0
+   */
+  int deleteChildren(File directory, FileFilter filter) throws FileDeletionFailedException;
 
   /**
    * This method gets all {@link File files} matching to the given {@code path} and {@code fileType} . The {@code path}
