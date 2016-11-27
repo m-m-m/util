@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -380,10 +381,54 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
       } else {
         deleteCount = 1;
       }
-      boolean deleted = path.delete();
-      if (!deleted) {
-        throw new FileDeletionFailedException(path);
+      delete(path);
+    }
+    return deleteCount;
+  }
+
+  @Override
+  public boolean delete(File file) throws FileDeletionFailedException {
+
+    if (!file.exists()) {
+      return false;
+    }
+    boolean deleted = file.delete();
+    if (deleted) {
+      return true;
+    }
+    // retry...
+    deleted = file.delete();
+    if (deleted) {
+      getLogger().debug("Deletion failed and succeeded after retry for file {}", file);
+      return true;
+    }
+    throw new FileDeletionFailedException(file);
+
+  }
+
+  @Override
+  public int deleteRecursive(File path, FileFilter filter) throws RuntimeIoException {
+
+    if (!path.exists()) {
+      return 0;
+    }
+    int deleteCount = 0;
+    if (path.isDirectory()) {
+      File[] children = path.listFiles();
+      if (children != null) {
+        for (File file : children) {
+          if (file.isDirectory()) {
+            deleteCount += deleteRecursive(file, filter);
+          } else if (filter.accept(file)) {
+            delete(file);
+            deleteCount++;
+          }
+        }
       }
+      path.delete();
+    } else if (filter.accept(path)) {
+      delete(path);
+      deleteCount++;
     }
     return deleteCount;
   }
@@ -400,10 +445,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
         } else {
           deleteCount++;
         }
-        boolean deleted = file.delete();
-        if (!deleted) {
-          throw new FileDeletionFailedException(file);
-        }
+        delete(file);
       }
     }
     return deleteCount;
@@ -418,7 +460,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   }
 
   @Override
-  public boolean collectMatchingFiles(File cwd, String path, FileType fileType, List<File> list) {
+  public boolean collectMatchingFiles(File cwd, String path, FileType fileType, Collection<File> list) {
 
     if ((path == null) || (path.length() == 0)) {
       throw new IllegalArgumentException("Path must not be empty");
@@ -446,9 +488,9 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
    *        it is interpreted relative to the {@link File#isDirectory() directory} given by {@code cwd}.
    * @param segmentIndex is the current index in {@code pathChars} for the collection process.
    * @param fileType is the type of the files to collect or {@code null} if files of any type are acceptable.
-   * @param list is the list where to {@link List#add(Object) add} the collected files.
+   * @param list is the {@link Collection} where to {@link Collection#add(Object) add} the collected files.
    */
-  private void collectMatchingFiles(File cwd, List<ResourcePathNode<Pattern>> segments, int segmentIndex, FileType fileType, List<File> list) {
+  private void collectMatchingFiles(File cwd, List<ResourcePathNode<Pattern>> segments, int segmentIndex, FileType fileType, Collection<File> list) {
 
     boolean lastSegment;
     if ((segmentIndex + 1) < segments.size()) {

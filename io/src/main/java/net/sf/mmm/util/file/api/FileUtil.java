@@ -4,7 +4,7 @@ package net.sf.mmm.util.file.api;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.file.base.FileAccessPermissions;
@@ -185,6 +185,35 @@ public interface FileUtil extends FileUtilLimited {
   int deleteRecursive(File path) throws RuntimeIoException;
 
   /**
+   * This method {@link File#delete() deletes} the given {@code path}. If the {@code path} denotes a
+   * {@link File#isDirectory() directory} then it will be traversed recursively. For each {@link File#isFile() regular
+   * file} traversed, the given {@link FileFilter} is applied. If the {@link File} is {@link FileFilter#accept(File)
+   * accepted}, it will be {@link File#delete() deleted}. If a {@link File#isDirectory() directory} has been visited
+   * where all {@link File#listFiles() children} have been deleted, it will also be {@link File#delete() deleted}. So in
+   * case the {@link FileFilter} {@link FileFilter#accept(File) accepts} all {@link File}s, this method behaves like
+   * {@link #deleteRecursive(File)}.
+   *
+   * @see #deleteChildren(File)
+   *
+   * @param path is the {@link File} where to delete.
+   * @param filter the {@link FileFilter} applied for each {@link File#isFile() regular file} that
+   *        {@link FileFilter#accept(File) decides} which {@link File}s to delete.
+   * @return the number of files that have been deleted (excluding the directories).
+   * @throws RuntimeIoException if a file or directory could NOT be {@link File#delete() deleted}.
+   * @since 7.4.0
+   */
+  int deleteRecursive(File path, FileFilter filter) throws RuntimeIoException;
+
+  /**
+   * @param file the {@link File#listFiles() regular} {@link File} to {@link File#delete() delete}.
+   * @throws FileDeletionFailedException if the {@link File} could not be {@link File#delete() deleted}.
+   * @return {@code true} if the {@link File} has been {@link File#delete() deleted} successfully, {@code false} if the
+   *         {@link File} did not {@link File#exists() exist} and nothing hat to be done.
+   * @since 7.4.0
+   */
+  boolean delete(File file) throws FileDeletionFailedException;
+
+  /**
    * This method {@link File#delete() deletes} all {@link File#listFiles() children} of the given {@code directory}
    * recursively. If the given {@code directory} denotes an {@link File#exists() existing} {@link File#isDirectory()
    * directory} then it will be empty after the call of this method, else this method will have no effect.
@@ -210,7 +239,7 @@ public interface FileUtil extends FileUtilLimited {
    * its transitive {@link File#list() sub-folders} that end with ".xml"</li>
    * </ul>
    *
-   * @see #collectMatchingFiles(File, String, FileType, List)
+   * @see #collectMatchingFiles(File, String, FileType, Collection)
    *
    * @param cwd is the current working directory and should therefore point to an existing {@link File#isDirectory()
    *        directory}. If the given {@code path} is NOT {@link File#isAbsolute() absolute} it is interpreted relative
@@ -233,10 +262,10 @@ public interface FileUtil extends FileUtilLimited {
    * @param path is the path the files to collect must match. If this path is NOT {@link File#isAbsolute() absolute} it
    *        is interpreted relative to the {@link File#isDirectory() directory} given by {@code cwd}.
    * @param fileType is the type of the files to collect or {@code null} if files of any type are acceptable.
-   * @param list is the list where to {@link List#add(Object) add} the collected files.
+   * @param list is the {@link Collection} where to {@link Collection#add(Object) add} the collected files.
    * @return {@code false} if the path is a regular string and {@code true} if the given path contains at least one
    *         {@link net.sf.mmm.util.pattern.base.GlobPatternCompiler wildcard} ( {@code '*'} or {@code '?'}).
    */
-  boolean collectMatchingFiles(File cwd, String path, FileType fileType, List<File> list);
+  boolean collectMatchingFiles(File cwd, String path, FileType fileType, Collection<File> list);
 
 }

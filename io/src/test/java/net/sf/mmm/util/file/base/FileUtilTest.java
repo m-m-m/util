@@ -3,6 +3,7 @@
 package net.sf.mmm.util.file.base;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -158,11 +159,23 @@ public class FileUtilTest extends Assertions {
     assertThat(matchingFiles.length).isEqualTo(3);
     assertThat(new String[] { matchingFiles[0].getName(), matchingFiles[1].getName(), matchingFiles[2].getName() })
         .containsOnly(new String[] { fooFile.getName(), testFile.getName(), copyFile.getName() });
+
     // delete recursive
-    util.deleteRecursive(subdir);
-    util.deleteRecursive(copyDir);
+    FileFilter filter = new FileFilter() {
+
+      @Override
+      public boolean accept(File pathname) {
+
+        return pathname.getName().endsWith(".properties");
+      }
+    };
+    int deleteCount = util.deleteRecursive(subdir, filter);
     assertThat(subdir.exists()).isFalse();
+    assertThat(deleteCount).isEqualTo(3);
+
+    deleteCount = util.deleteRecursive(copyDir);
     assertThat(copyDir.exists()).isFalse();
+    assertThat(deleteCount).isEqualTo(3);
   }
 
   /** Test of {@link FileUtil#touch(File)}. */
