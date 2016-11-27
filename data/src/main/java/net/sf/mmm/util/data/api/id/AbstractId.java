@@ -87,7 +87,7 @@ public abstract class AbstractId<E> implements Id<E> {
   }
 
   /**
-   * Internal method called from {@link #withType(Class)} to create a new instance.
+   * Internal method called from {@link #withType(Class)} or {@link #withType(Class)} to create a new instance.
    *
    * @param <T> the generic type of {@code newType}.
    * @param newType the new {@link #getType() type}.
