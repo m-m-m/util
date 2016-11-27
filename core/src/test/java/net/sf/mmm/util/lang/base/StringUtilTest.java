@@ -80,8 +80,7 @@ public class StringUtilTest extends Assertions {
     assertThat(getStringUtil().fromCamlCase("FooBar", '-')).isEqualTo("foo-bar");
     assertThat(getStringUtil().fromCamlCase("FOO_BAR", '*')).isEqualTo("foo_bar");
     assertThat(getStringUtil().fromCamlCase("someWordMix", '.')).isEqualTo("some.word.mix");
-    assertThat(getStringUtil().fromCamlCase("AbbreviationsLikeXMLshouldNotBeCapitalized", '_'))
-        .isEqualTo("abbreviations_like_xmlshould_not_be_capitalized");
+    assertThat(getStringUtil().fromCamlCase("AbbreviationsLikeXMLshouldNotBeCapitalized", '_')).isEqualTo("abbreviations_like_xmlshould_not_be_capitalized");
   }
 
   @Test
@@ -148,21 +147,28 @@ public class StringUtilTest extends Assertions {
       }
 
       @Override
-      public <T extends Integer> T convert(String value, Object valueSource, Class<T> targetClass)
-          throws ValueException {
+      public <T extends Integer> T convert(String value, Object valueSource, Class<T> targetClass) throws ValueException {
 
         return (T) Integer.valueOf(value);
       }
 
       @Override
-      public <T extends Integer> T convert(String value, Object valueSource, GenericType<T> targetType)
-          throws ValueException {
+      public <T extends Integer> T convert(String value, Object valueSource, GenericType<T> targetType) throws ValueException {
 
         return convert(value, valueSource, targetType.getAssignmentClass());
       }
     };
     getStringUtil().fromSeparatedString("1; 42; 3; 99", "; ", syntax, collection, converter, Integer.class);
-    assertThat(collection).hasSize(4).containsExactly(Integer.valueOf(1), Integer.valueOf(42), Integer.valueOf(3),
-        Integer.valueOf(99));
+    assertThat(collection).hasSize(4).containsExactly(Integer.valueOf(1), Integer.valueOf(42), Integer.valueOf(3), Integer.valueOf(99));
+  }
+
+  @Test
+  public void testToHex() {
+
+    StringUtil util = getStringUtil();
+    assertThat(util.toHex(new byte[] { 0x00f, 0x01e, 0x02d, 0x03c, 0x04b, 0x05a, 0x069, 0x078 })).isEqualTo("0f1e2d3c4b5a6978");
+    assertThat(util.toHex(new byte[] { (byte) 0x0fe, (byte) 0x0dc, (byte) 0x0ba, (byte) 0x098, 0x076, 0x054, 0x032, 0x010 })).isEqualTo("fedcba9876543210");
+    assertThat(util.toHex(new byte[] { 0x07f })).isEqualTo("7f");
+    assertThat(util.toHex(new byte[0])).isEqualTo("");
   }
 }
