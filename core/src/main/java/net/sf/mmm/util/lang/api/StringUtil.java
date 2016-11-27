@@ -516,8 +516,7 @@ public interface StringUtil {
    * @return the formatted string.
    * @since 3.0.0
    */
-  <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
-      Formatter<E> formatter);
+  <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax, Formatter<E> formatter);
 
   /**
    * This method is like {@link #toSeparatedString(Collection, String, StringSyntax)} but allows to specify an explicit
@@ -536,8 +535,7 @@ public interface StringUtil {
    * @param buffer is where the separated string is {@link Appendable#append(CharSequence) appended} to.
    * @since 3.0.0
    */
-  <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
-      Formatter<E> formatter, Appendable buffer);
+  <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax, Formatter<E> formatter, Appendable buffer);
 
   /**
    * This method is like {@link #fromSeparatedString(CharSequence, String, StringSyntax, Collection, ValueConverter)}
@@ -565,8 +563,7 @@ public interface StringUtil {
    * @param collection is where to add the elements to. This should be initially empty.
    * @since 3.0.0
    */
-  void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
-      Collection<String> collection);
+  void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax, Collection<String> collection);
 
   /**
    * This method parses the given {@code separatedString} that contains elements separated with {@code separator} and
@@ -585,8 +582,8 @@ public interface StringUtil {
    * @param converter is used to parse the given elements from {@link String} to their actual type ( {@literal <E>}).
    * @since 3.0.0
    */
-  <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
-      Collection<E> collection, ValueConverter<String, E> converter);
+  <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax, Collection<E> collection,
+      ValueConverter<String, E> converter);
 
   /**
    * This method parses the given {@code separatedString} that contains elements separated with {@code separator} and
@@ -607,7 +604,14 @@ public interface StringUtil {
    * @param type is the {@link Class} reflecting the elements to add to {@code collection}.
    * @since 3.0.0
    */
-  <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
-      Collection<E> collection, ValueConverter<? super String, ? super E> converter, Class<E> type);
+  <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax, Collection<E> collection,
+      ValueConverter<? super String, ? super E> converter, Class<E> type);
+
+  /**
+   * @param data the {@code byte} array with the data.
+   * @return a hexadecimal {@link String} representation of the data.
+   * @since 7.4.0
+   */
+  String toHex(byte[] data);
 
 }

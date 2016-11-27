@@ -36,6 +36,8 @@ public class StringUtilImpl implements StringUtil {
 
   private static final char[] SEPARATORS = new char[] { ' ', '-', '_', '.' };
 
+  private static final char[] HEX = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+
   /**
    * The constructor.
    */
@@ -341,8 +343,7 @@ public class StringUtilImpl implements StringUtil {
   }
 
   @Override
-  public <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
-      Formatter<E> formatter) {
+  public <E> String toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax, Formatter<E> formatter) {
 
     StringBuilder buffer = new StringBuilder();
     toSeparatedString(collection, separator, syntax, formatter, buffer);
@@ -350,8 +351,7 @@ public class StringUtilImpl implements StringUtil {
   }
 
   @Override
-  public <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax,
-      Formatter<E> formatter, Appendable buffer) {
+  public <E> void toSeparatedString(Collection<E> collection, String separator, StringSyntax syntax, Formatter<E> formatter, Appendable buffer) {
 
     NlsNullPointerException.checkNotNull("separator", separator);
     if (separator.length() == 0) {
@@ -407,23 +407,22 @@ public class StringUtilImpl implements StringUtil {
   }
 
   @Override
-  public void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
-      Collection<String> collection) {
+  public void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax, Collection<String> collection) {
 
     ValueConverterIdentity<String> identityConverter = new ValueConverterIdentity<>(String.class);
     fromSeparatedString(separatedString, separator, syntax, collection, identityConverter);
   }
 
   @Override
-  public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
-      Collection<E> collection, ValueConverter<String, E> converter) {
+  public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax, Collection<E> collection,
+      ValueConverter<String, E> converter) {
 
     fromSeparatedString(separatedString, separator, syntax, collection, converter, converter.getTargetType());
   }
 
   @Override
-  public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax,
-      Collection<E> collection, ValueConverter<? super String, ? super E> converter, Class<E> type) {
+  public <E> void fromSeparatedString(CharSequence separatedString, String separator, StringSyntax syntax, Collection<E> collection,
+      ValueConverter<? super String, ? super E> converter, Class<E> type) {
 
     NlsNullPointerException.checkNotNull("separator", separator);
     if (separator.length() == 0) {
@@ -483,5 +482,17 @@ public class StringUtilImpl implements StringUtil {
       E element = converter.convert(elementString, separatedString, type);
       collection.add(element);
     }
+  }
+
+  @Override
+  public String toHex(byte[] data) {
+
+    char[] buffer = new char[data.length * 2];
+    int i = 0;
+    for (byte b : data) {
+      buffer[i++] = HEX[(b & 0xF0) >> 4];
+      buffer[i++] = HEX[b & 0x0F];
+    }
+    return new String(buffer);
   }
 }
