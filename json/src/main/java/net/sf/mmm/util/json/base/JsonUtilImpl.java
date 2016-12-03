@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -172,7 +173,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
         return e;
       }
     }
-    String deCamlCased = this.stringUtil.fromCamlCase(value.toString(), '_');
+    String deCamlCased = this.stringUtil.fromCamlCase(value.toString(), '_').toUpperCase(Locale.US);
     for (E e : constants) {
       if (e.name().equals(deCamlCased)) {
         return e;

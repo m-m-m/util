@@ -28,6 +28,11 @@ public interface JsonSupport {
   void toJson(JsonGenerator json);
 
   /**
+   * @return this object as JSON (JavaScript-Object-Notation).
+   */
+  String toJson();
+
+  /**
    * Deserializes this object from JSON (JavaScript-Object-Notation). This operation is typically NOT symmetric to
    * {@link #toJson(JsonGenerator)} - e.g. {@link #toJson(JsonGenerator)} might write a property with its value while
    * {@link #fromJson(JsonParser)} may only deserialze the value as the parent object has to handle the property names
@@ -37,4 +42,8 @@ public interface JsonSupport {
    */
   void fromJson(JsonParser json);
 
+  /**
+   * @param json the JSON (JavaScript-Object-Notation) for this object.
+   */
+  void fromJson(String json);
 }

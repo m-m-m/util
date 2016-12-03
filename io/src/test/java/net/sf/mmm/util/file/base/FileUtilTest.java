@@ -189,7 +189,8 @@ public class FileUtilTest extends Assertions {
     long before = System.currentTimeMillis();
     assertThat(util.touch(tmpFile)).isFalse();
     long after = System.currentTimeMillis();
-    assertThat(tmpFile.lastModified()).isBetween(before, after);
+    long delta = 5000; // precision of filesystem is quite low...
+    assertThat(tmpFile.lastModified()).isBetween(before - delta, after + delta);
     assertThat(tmpFile.delete()).isTrue();
     assertThat(tmpFile).doesNotExist();
     assertThat(util.touch(tmpFile)).isTrue();
