@@ -23,7 +23,7 @@ import java.util.Map;
  *   wrappedOutStream.close();
  *
  *   {@link Map}&lt;String, Object&gt; metadata = detectorOutStream.{@link DetectorStream#getMetadata() getMetadata()};
- *   Long bytesWritten = metadata.{@link Map#get(Object) get}("filesize");
+ *   Long bytesWritten = (Long) metadata.{@link Map#get(Object) get}("filesize");
  * </pre>
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
