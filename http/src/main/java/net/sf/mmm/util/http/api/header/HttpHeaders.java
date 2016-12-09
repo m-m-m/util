@@ -66,6 +66,14 @@ public class HttpHeaders {
   }
 
   /**
+   * @return the {@link HttpHeaderUserAgent} or {@code null} if not present.
+   */
+  public HttpHeaderUserAgent getUserAgent() {
+
+    return (HttpHeaderUserAgent) getHeader(HttpRequestHeader.HEADER_USER_AGENT);
+  }
+
+  /**
    * @return the {@link #getHeaderValue(String) value} of the {@link HttpRequestHeader#HEADER_HOST Host header}.
    */
   public String getHost() {

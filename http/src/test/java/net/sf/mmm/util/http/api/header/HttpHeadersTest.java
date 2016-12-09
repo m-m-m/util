@@ -29,7 +29,7 @@ public class HttpHeadersTest extends Assertions {
 
   /**
    * Test of {@link HttpHeaders#parse(BufferedReader)}
-   * 
+   *
    * @throws Exception if something goes wrong.
    */
   @Test
@@ -40,7 +40,12 @@ public class HttpHeadersTest extends Assertions {
     br.readLine();
     HttpHeaders headers = HttpHeaders.parse(br);
     assertThat(headers.getHost()).isEqualTo("m-m-m.github.io");
-
+    HttpHeaderUserAgent userAgent = headers.getUserAgent();
+    assertThat(userAgent.getBrowser()).isEqualTo("Firefox");
+    assertThat(userAgent.getBrowserVersion()).isEqualTo("50.0");
+    assertThat(userAgent.getOs().getSystemName()).isEqualTo("Windows NT");
+    assertThat(userAgent.getOs().getSystemVersion()).isEqualTo("6.1");
+    assertThat(userAgent.getOs().is64Bit()).isTrue();
   }
 
 }

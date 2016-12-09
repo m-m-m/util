@@ -8,9 +8,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import net.sf.mmm.test.ObjectHelper;
-import net.sf.mmm.util.http.api.header.AbstractHttpHeader;
-import net.sf.mmm.util.http.api.header.HttpHeader;
-import net.sf.mmm.util.http.api.header.HttpHeaderContentDisposition;
 
 /**
  * This is the test for {@link HttpHeaderContentDisposition}.
@@ -51,7 +48,7 @@ public class HttpHeaderContentDispositionTest extends Assertions {
     contentDisposition = HttpHeaderContentDisposition.ofValue("filename=image.jpg");
     assertThat(contentDisposition.getType()).isNull();
     assertThat(contentDisposition.getFilename()).isEqualTo("image.jpg");
-    assertThat(contentDisposition.getValue()).isEqualTo("; filename=\"image.jpg\"");
+    assertThat(contentDisposition.getValue()).isEqualTo("filename=\"image.jpg\"");
 
     contentDisposition = HttpHeaderContentDisposition
         .ofValue("inline;name=upload-field;filename=\"genome.jpeg\";modification-date=\"Wed, 12 Feb 1997 16:29:51 -0500\";");
