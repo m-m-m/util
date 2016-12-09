@@ -11,6 +11,7 @@ import javax.json.stream.JsonGenerator;
 
 import javafx.beans.value.ObservableValue;
 import net.sf.mmm.util.json.api.JsonUtil;
+import net.sf.mmm.util.json.base.AbstractJsonSupport;
 import net.sf.mmm.util.json.base.JsonUtilImpl;
 import net.sf.mmm.util.lang.api.Builder;
 import net.sf.mmm.util.validation.base.AbstractValidator;
@@ -24,7 +25,7 @@ import net.sf.mmm.util.validation.base.ValidatorNone;
  * @author hohwille
  * @since 8.4.0
  */
-public abstract class AbstractProperty<V> implements WritableProperty<V>, Cloneable {
+public abstract class AbstractProperty<V> extends AbstractJsonSupport implements WritableProperty<V>, Cloneable {
 
   private String name;
 

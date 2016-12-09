@@ -147,10 +147,11 @@ public abstract class AbstractBeanTest extends Assertions {
     String[] codes = { ValidatorPattern.CODE, AbstractValidatorRange.CODE };
     assertThat(failureCodes).hasSize(codes.length).contains(codes);
 
-    // toString()
+    // toString() and JSON support
     ObjectMapper mapper = new ObjectMapper();
     Map<String, ?> beanJsonMap;
     String json = bean.toString();
+    assertThat(access.toJson()).isEqualTo(json);
     try {
       beanJsonMap = mapper.readValue(json, Map.class);
       for (WritableProperty<?> property : access.getProperties()) {
@@ -169,6 +170,9 @@ public abstract class AbstractBeanTest extends Assertions {
     } catch (Exception e) {
       fail("Failed to parse bean.toString() as JSON: " + json, e);
     }
+    ExamplePropertyBean beanFromJson = beanFactory.create(beanFactory.getPrototype(bean));
+    beanFromJson.access().fromJson(json);
+    assertThat(beanFromJson).isEqualTo(bean);
 
     // equals and hashCode
     ExamplePropertyBean copy = beanFactory.copy(bean);

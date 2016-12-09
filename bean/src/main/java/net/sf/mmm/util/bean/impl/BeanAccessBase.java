@@ -19,6 +19,7 @@ import net.sf.mmm.util.bean.api.BeanAccess;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.ReadOnlyException;
 import net.sf.mmm.util.json.api.JsonUtil;
+import net.sf.mmm.util.json.base.AbstractJsonSupport;
 import net.sf.mmm.util.property.api.WritableProperty;
 import net.sf.mmm.util.property.api.lang.BooleanProperty;
 import net.sf.mmm.util.property.api.lang.GenericProperty;
@@ -35,8 +36,7 @@ import net.sf.mmm.util.property.api.util.MapProperty;
  * @author hohwille
  * @since 8.4.0
  */
-public abstract class BeanAccessBase<BEAN extends Bean>
-    implements InvocationHandler, BeanAccess, Iterable<WritableProperty<?>> {
+public abstract class BeanAccessBase<BEAN extends Bean> extends AbstractJsonSupport implements InvocationHandler, BeanAccess, Iterable<WritableProperty<?>> {
 
   static final Logger LOG = LoggerFactory.getLogger(BeanAccessBase.class);
 
@@ -207,7 +207,7 @@ public abstract class BeanAccessBase<BEAN extends Bean>
     JsonUtil jsonUtil = getJsonUtil();
     if (!isDynamic()) {
       LOG.debug("ignoring undefined property {}.{}", getBeanClass(), propertyName);
-      getJsonUtil().skipValue(json);
+      jsonUtil.skipValue(json);
       return;
     }
     Event e = json.next();
