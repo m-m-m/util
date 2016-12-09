@@ -30,13 +30,13 @@
     <module>../bean</module>
     <module>../query</module>
     <module>../gwt</module>
+    <module>../http</module>
   </modules>
 
   <profiles>
     <profile>
       <id>dev</id>
       <modules>
-        <module>../http</module>
         <module>../contenttype</module>
         <module>../metakeys</module>
         <module>../datatype</module>
