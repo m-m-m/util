@@ -18,11 +18,27 @@ public interface SystemInformation {
    */
   String SYSTEM_TYPE_WINDOWS = "Windows";
 
+  /** The {@link #getSystemType() system-type} for <em>Windows Phone</em> (Windows mobile OS). */
+  String SYSTEM_TYPE_WINDOWS_PHONE = "Windows Phone";
+
   /**
    * The {@link #getSystemType() system-type} for a variant of Apples operating system ("Mac OS", "Mac OS X" or any
    * variant of "iOS").
+   *
+   * @deprecated use {@link #SYSTEM_TYPE_MAC_OS}
+   * @deprecated use {@link #SYSTEM_TYPE_IOS}
    */
+  @Deprecated
   String SYSTEM_TYPE_MAC_IOS = "Mac/iOS";
+
+  /** The {@link #getSystemType() system-type} for <em>Mac OS</em> (Apple Macintosh). */
+  String SYSTEM_TYPE_MAC_OS = "Mac OS";
+
+  /** The {@link #getSystemType() system-type} for <em>iOS</em> (Apple Mobile OS for iPhone, iPad, etc.). */
+  String SYSTEM_TYPE_IOS = "iOS";
+
+  /** The {@link #getSystemType() system-type} for <em>tvOS</em> (for AppleTV). */
+  String SYSTEM_TYPE_TV_OS = "tvOS";
 
   /**
    * The {@link #getSystemType() system-type} for a distribution of Linux (android, ubuntu, kubuntu, debian, openSUSE,
@@ -38,26 +54,82 @@ public interface SystemInformation {
   String SYSTEM_TYPE_UNIX = "UNIX";
 
   /**
-   * The {@link #getSystemType() system-type} for a BSD operating system (freeBSD, openBSD, etc.).
+   * The {@link #getSystemType() system-type} for a <em>BSD</em> (Berkeley Software Distribution) operating system
+   * (freeBSD, openBSD, etc.).
    */
   String SYSTEM_TYPE_BSD = "BSD";
 
   /**
    * The {@link #getSystemType() system-type} for operating systems dedicated for mainframe machines ([Open]VMS, z/OS,
-   * BS2000, OS/360, OS/390, etc.). A mainframe is a (traditional) high-end server.
+   * AIX, BS2000, OS/360, OS/390, etc.). A mainframe is a (traditional) high-end server.
    */
   String SYSTEM_TYPE_MAINFRAIME = "Mainfraime";
 
-  /**
-   * The {@link #getSystemType() system-type} for anything else that is not further classified. Please note that in new
-   * releases of this project, a new classification can be added and systems that have been in
-   * {@link #SYSTEM_TYPE_OTHER} are then of a new type.
-   */
-  String SYSTEM_TYPE_OTHER = "Other";
+  /** The {@link #getSystemType() system-type} for <em>Android</em>. */
+  String SYSTEM_TYPE_ANDROID = "Android";
+
+  /** The {@link #getSystemType() system-type} for <em>Nintendo</em>. */
+  String SYSTEM_TYPE_NINTENDO = "Nintendo";
+
+  /** The {@link #getSystemType() system-type} for <em>PlayStation</em>. */
+  String SYSTEM_TYPE_PLAYSTATION = "PlayStation";
+
+  /** The {@link #getSystemType() system-type} for <em>Xbox</em>. */
+  String SYSTEM_TYPE_XBOX = "Xbox";
+
+  /** The {@link #getSystemType() system-type} for <em>Fire OS</em> (from Amazon for Kindle, Fire Phone, or Fire TV). */
+  String SYSTEM_TYPE_FIRE_OS = "Fire OS";
+
+  /** The {@link #getSystemType() system-type} for <em>Bada</em> (from Samsung Electronics for Smartphone). */
+  String SYSTEM_TYPE_BADA = "Bada";
+
+  /** The {@link #getSystemType() system-type} for <em>Sailfish</em> (Linux based mobile OS). */
+  String SYSTEM_TYPE_SAILFISH = "Sailfish";
 
   /**
-   * This method gets the name of the operating system running this java virtual machine. Here is an incomplete list of
-   * possible results:
+   * The result for any of the {@link SystemInformation} segments (especially {@link #getSystemType() system-type}
+   * potentially also {@link #getSystemName() system-name}, {@link #getSystemVersion() system-version}, or
+   * {@link #getSystemArchitecture() system-architecture}) if the value is unknown. Please note that in new releases of
+   * this project, the classification and detection can be improved so segments that used to be {@link #UNKNOWN} will
+   * then have proper values.
+   *
+   * @since 7.4.0
+   */
+  String UNKNOWN = "unknown";
+
+  /**
+   * The {@link #getSystemType() system-type} for anything else that is not further classified.
+   *
+   * @deprecated replaced by {@link #UNKNOWN}.
+   */
+  @Deprecated
+  String SYSTEM_TYPE_OTHER = UNKNOWN;
+
+  /**
+   * The {@link #getSystemArchitecture() architecture} <em>arm</em> (Advanced RISC Machine) used especially for
+   * {@link #isLimitedDevice() mobile and embedded devices}.
+   *
+   * @since 7.4.0
+   */
+  String SYSTEM_ARCHITECTURE_ARM = "arm";
+
+  /**
+   * The {@link #getSystemArchitecture() architecture} <em>x86</em> (80x86 CPU Series) unlike.
+   *
+   * @since 7.4.0
+   */
+  String SYSTEM_ARCHITECTURE_X86 = "x86";
+
+  /**
+   * The {@link #getSystemArchitecture() architecture} <em>x64</em> for {@link #SYSTEM_ARCHITECTURE_X86 80x86 CPUs} with
+   * 64-BIT.
+   *
+   * @since 7.4.0
+   */
+  String SYSTEM_ARCHITECTURE_X64 = "x64";
+
+  /**
+   * This method gets the name of the operating system. Here is an incomplete list of possible results:
    * <ul>
    * <li>Windows 95</li>
    * <li>Windows 98</li>
@@ -93,7 +165,7 @@ public interface SystemInformation {
   String getSystemName();
 
   /**
-   * This method gets the architecture of the operating system running this java virtual machine. Typical results are:
+   * This method gets the architecture of the operating system. Typical results are:
    * <ul>
    * <li>x86</li>
    * <li>x86_64</li>
@@ -117,7 +189,7 @@ public interface SystemInformation {
   String getSystemArchitecture();
 
   /**
-   * This method gets the version of the operating system running this java virtual machine in lower-case.
+   * This method gets the version of the operating system in lower-case.
    *
    * @see SystemUtil#PROPERTY_OS_VERSION
    *
@@ -126,28 +198,46 @@ public interface SystemInformation {
   String getSystemVersion();
 
   /**
-   * This method gets the type of the operating system running this java virtual machine. The type is not something
-   * directly provided by the JRE. It is defined by this API and is derived from the {@link #getSystemName()
-   * system-name} to make things easier for you.
+   * This method gets the type (or family) of the operating system. The type is derived from the {@link #getSystemName()
+   * system-name} to make detection easier.
    *
    * @see #SYSTEM_TYPE_WINDOWS
    * @see #SYSTEM_TYPE_MAC_IOS
    * @see #SYSTEM_TYPE_LINUX
    * @see #SYSTEM_TYPE_BSD
    * @see #SYSTEM_TYPE_UNIX
-   * @see #SYSTEM_TYPE_OTHER
+   * @see #UNKNOWN
    *
    * @return the type of the operating system as one of the {@code SYSTEM_TYPE_*} constants defined in this interface.
    */
   String getSystemType();
 
   /**
-   * This method determines if the operating system running this java virtual machine is for mobile or embedded devices
-   * or maybe tablets but not for full-fledged PC or server machines. In such case you can assume that you are running
-   * on a mobile or embedded device. Please note that this is NOT a guarantee.
+   * This method determines if the operating system is from a limited device. Here, limited means limited computing
+   * power or limited display resolution (typically both). Limited devices are mobile or embedded devices as well as
+   * most tablets (but not a regular laptop even with touch screen). Regular devices that are not limited are
+   * full-fledged PC or server machines. Please note that the flag returned by this method is just an indicator and NOT
+   * a guarantee.
    *
    * @return {@code true} if operating system is for limited device, {@code false} otherwise.
    */
   boolean isLimitedDevice();
+
+  /**
+   * @return {@code true} if the {@link #getSystemArchitecture() architecture} supports 64-Bit (both by CPU and OS),
+   *         {@code false} otherwise. Please note that this is just a good guess based on the information available from
+   *         the {@link String} provided by {@link #getSystemArchitecture()}.
+   * @since 7.4.0
+   */
+  boolean is64Bit();
+
+  /**
+   * @return {@code true} if the {@link #getSystemArchitecture() architecture} indicates an
+   *         {@link #SYSTEM_ARCHITECTURE_X86 80x86 CPU} ("x86", "x86_64", "x64", "amd64", "ia-64", "i686", etc.),
+   *         {@code false} otherwise. The result is independent from the number of bits such as 16, 32, or
+   *         {@link #is64Bit() 64}.
+   * @since 7.4.0
+   */
+  boolean isX86();
 
 }
