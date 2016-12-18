@@ -45,12 +45,6 @@ public abstract class AbstractNameVersion extends AbstractStringWritable impleme
     return this.version;
   }
 
-  /**
-   * @param newVersion the new {@link #getVersion() version}.
-   * @return a copy of this object with the given {@link #getVersion() version}.
-   */
-  public abstract AbstractNameVersion withVersion(String newVersion);
-
   @Override
   public int hashCode() {
 
