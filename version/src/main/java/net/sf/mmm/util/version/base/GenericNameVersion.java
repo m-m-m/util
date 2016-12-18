@@ -38,7 +38,10 @@ public class GenericNameVersion extends AbstractNameVersion {
     return this.name;
   }
 
-  @Override
+  /**
+   * @param newVersion the new {@link #getVersion() version}.
+   * @return a copy of this object with the given {@link #getVersion() version}.
+   */
   public GenericNameVersion withVersion(String newVersion) {
 
     if (Objects.equals(getVersion(), newVersion)) {
@@ -132,6 +135,22 @@ public class GenericNameVersion extends AbstractNameVersion {
     String name = matcher.group(1);
     String version = matcher.group(2);
     return new GenericNameVersion(name, version);
+  }
+
+  /**
+   * @param nameVersions the {@link NameVersion}-instances to format as a single {@link String}.
+   * @return the {@link String} representation of all given {@link NameVersion}s separated by a whitespace.
+   */
+  public static String toString(NameVersion... nameVersions) {
+
+    StringBuilder buffer = new StringBuilder();
+    for (NameVersion nameVersion : nameVersions) {
+      if (buffer.length() > 0) {
+        buffer.append(' ');
+      }
+      nameVersion.write(buffer);
+    }
+    return buffer.toString();
   }
 
 }
