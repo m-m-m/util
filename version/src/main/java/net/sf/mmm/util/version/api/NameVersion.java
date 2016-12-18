@@ -4,6 +4,8 @@ package net.sf.mmm.util.version.api;
 
 import java.util.regex.Pattern;
 
+import net.sf.mmm.util.lang.api.StringWritable;
+
 /**
  * This is a simple container for a combination of a {@link #getName() name} together with its {@link #getVersion()
  * version}. A {@link NameVersion} implementation has to follow a {@link #toString() specified string representation}.
@@ -14,7 +16,7 @@ import java.util.regex.Pattern;
  * @author hohwille
  * @since 7.4.0
  */
-public interface NameVersion {
+public interface NameVersion extends StringWritable {
 
   /**
    * The character used to separate {@link #getName() name} and {@link #getVersion() version} in {@link #toString()
@@ -23,7 +25,7 @@ public interface NameVersion {
   public static final char NAME_VERSION_SEPARATOR = '/';
 
   /** The regular expression {@link String} for a {@link NameVersion}. */
-  String NAME_VERSION_REGEX = "([\\w_#][^/()]*)/([\\w._+-~#]+)";
+  String NAME_VERSION_REGEX = "([\\w_#][^/ ()]*)/([\\w._~#+-]+)";
 
   /** The regular expression {@link Pattern} for a {@link NameVersion}. */
   Pattern NAME_VERSION_PATTERN = Pattern.compile(NAME_VERSION_REGEX);
