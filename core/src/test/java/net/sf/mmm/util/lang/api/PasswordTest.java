@@ -6,10 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
- * Test-case for {@link Password}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 7.0.0
+ * Test of {@link Password}.
  */
 public class PasswordTest extends Assertions {
 

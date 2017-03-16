@@ -8,9 +8,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 /**
- * This is the test-case for {@link StringTokenizer}.
- *
- * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * Test of {@link StringTokenizer}.
  */
 @SuppressWarnings("all")
 public class StringTokenizerTest extends Assertions {
