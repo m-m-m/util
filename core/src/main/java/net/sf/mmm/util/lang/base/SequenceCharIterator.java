@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public class SequenceCharIterator implements CharIterator {
+public class SequenceCharIterator extends AbstractCharIterator {
 
   private final CharSequence sequence;
 
@@ -31,21 +31,22 @@ public class SequenceCharIterator implements CharIterator {
     super();
     this.sequence = sequence;
     this.length = this.sequence.length();
+    findFirst();
   }
 
   @Override
-  public boolean hasNext() {
-
-    return (this.index < this.length);
-  }
-
-  @Override
-  public char next() {
+  protected char findNext() {
 
     if (this.index < this.length) {
       return this.sequence.charAt(this.index++);
     }
     return END_OF_ITERATOR;
+  }
+
+  @Override
+  public String toString() {
+
+    return this.sequence.toString();
   }
 
 }

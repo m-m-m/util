@@ -40,7 +40,7 @@ public abstract class AbstractCharIterator implements CharIterator {
   /**
    * This method tries to find the {@link #next() next} element.
    *
-   * @return the next element or {@code null} if {@link #hasNext() done}.
+   * @return the next element or {@link #END_OF_ITERATOR} if {@link #hasNext() done}.
    */
   protected abstract char findNext();
 
@@ -58,5 +58,22 @@ public abstract class AbstractCharIterator implements CharIterator {
       this.next = findNext();
     }
     return c;
+  }
+
+  @Override
+  public char nextOrFail() {
+
+    if (!hasNext()) {
+      throw new IllegalArgumentException(getData());
+    }
+    return next();
+  }
+
+  /**
+   * @return the underlying data.
+   */
+  protected String getData() {
+
+    return toString();
   }
 }

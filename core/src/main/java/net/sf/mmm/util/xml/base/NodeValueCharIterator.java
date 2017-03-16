@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.sf.mmm.util.lang.api.CharIterator;
+import net.sf.mmm.util.lang.base.AbstractCharIterator;
 
 /**
  * This is an implementation of {@link CharIterator} that iterates the characters of the {@link Node#getNodeValue()
@@ -14,7 +15,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-class NodeValueCharIterator implements CharIterator {
+class NodeValueCharIterator extends AbstractCharIterator {
 
   private final NodeList nodeList;
 
@@ -40,6 +41,7 @@ class NodeValueCharIterator implements CharIterator {
 
     super();
     this.nodeList = nodeList;
+    findFirst();
   }
 
   /**
@@ -52,42 +54,42 @@ class NodeValueCharIterator implements CharIterator {
     super();
     this.nodeList = null;
     this.value = singleNode.getNodeValue();
-    this.valueLength = this.value.length();
+    if (this.value != null) {
+      this.valueLength = this.value.length();
+    }
+    findFirst();
   }
 
   @Override
-  public boolean hasNext() {
+  protected char findNext() {
 
-    return false;
-  }
-
-  @Override
-  public char next() {
-
-    while (true) {
-      if (this.value == null) {
-        if (this.nodeList != null) {
-          while (this.nodeIndex < this.nodeList.getLength()) {
-            Node node = this.nodeList.item(this.nodeIndex++);
-            String nodeValue = node.getNodeValue();
-            if ((nodeValue != null) && (nodeValue.length() > 0)) {
-              this.value = nodeValue;
-              this.valueIndex = 0;
-              this.valueLength = this.value.length();
-              break;
-            }
-          }
-          if (this.value == null) {
-            return END_OF_ITERATOR;
+    if ((this.value == null) || (this.valueIndex >= this.valueLength)) {
+      if (this.nodeList != null) {
+        while (this.nodeIndex < this.nodeList.getLength()) {
+          Node node = this.nodeList.item(this.nodeIndex++);
+          String nodeValue = node.getNodeValue();
+          if ((nodeValue != null) && (nodeValue.length() > 0)) {
+            this.value = nodeValue;
+            this.valueIndex = 0;
+            this.valueLength = nodeValue.length();
+            break;
           }
         }
       }
-      if (this.valueIndex < this.valueLength) {
-        return this.value.charAt(this.valueIndex++);
-      } else {
-        this.value = null;
-      }
     }
+    if (this.value == null) {
+      return END_OF_ITERATOR;
+    }
+    return this.value.charAt(this.valueIndex++);
+  }
+
+  @Override
+  public String toString() {
+
+    if (this.value == null) {
+      return "";
+    }
+    return this.value;
   }
 
 }

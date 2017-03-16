@@ -12,7 +12,7 @@ import net.sf.mmm.util.lang.api.CharIterator;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public class SpaceNormalizingCharIterator implements CharIterator {
+public class SpaceNormalizingCharIterator extends AbstractCharIterator {
 
   /** The underlying {@link CharIterator} to delegate to. */
   private final CharIterator delegate;
@@ -23,15 +23,11 @@ public class SpaceNormalizingCharIterator implements CharIterator {
   /** {@link #SpaceNormalizingCharIterator(CharIterator, CharFilter, boolean)} */
   private final boolean trim;
 
-  /**
-   * {@code true} if {@link #next()} has already been called, initially {@code false}.
-   */
-  private boolean nextCalled;
+  /** The next char from lookahead. */
+  private char next;
 
-  /**
-   * A buffer for the next non-space char if lookahead went to far, or ' ' if no char is buffered.
-   */
-  private char nextNonSpace;
+  /** {@code true} if the first non-whitespace was found (for trim). */
+  private boolean foundNonWhitespace;
 
   /**
    * The constructor.
@@ -57,49 +53,38 @@ public class SpaceNormalizingCharIterator implements CharIterator {
     this.delegate = delegate;
     this.spaceFilter = spaceFilter;
     this.trim = trim;
-    this.nextNonSpace = ' ';
+    this.next = END_OF_ITERATOR;
+    findFirst();
   }
 
   @Override
-  public boolean hasNext() {
-
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public char next() {
+  protected char findNext() {
 
     char result;
-    if (this.nextNonSpace != ' ') {
-      result = this.nextNonSpace;
-      if (this.nextNonSpace != END_OF_ITERATOR) {
-        this.nextNonSpace = ' ';
-      }
+    if (this.next != END_OF_ITERATOR) {
+      result = this.next;
+      this.next = END_OF_ITERATOR;
     } else {
-      char next = this.delegate.next();
-      char space = 0;
-      while ((next != END_OF_ITERATOR) && this.spaceFilter.accept(next)) {
-        if (next == '\n') {
-          space = next;
-        } else if (space == 0) {
-          space = ' ';
+      result = this.delegate.next();
+      if ((result != END_OF_ITERATOR) && this.spaceFilter.accept(result)) {
+        do {
+          this.next = this.delegate.next();
+        } while ((this.next != END_OF_ITERATOR) && this.spaceFilter.accept(this.next));
+        if (this.trim & (!this.foundNonWhitespace || (this.next != END_OF_ITERATOR))) {
+          result = this.next;
+          this.next = END_OF_ITERATOR;
         }
-        next = this.delegate.next();
-      }
-      // space(s) found?
-      if (space == 0) {
-        result = next;
       } else {
-        this.nextNonSpace = next;
-        if (this.trim && ((this.nextNonSpace == END_OF_ITERATOR) || (!this.nextCalled))) {
-          result = next;
-        } else {
-          result = space;
-        }
+        this.foundNonWhitespace = true;
       }
-      this.nextCalled = true;
+
     }
     return result;
+  }
+
+  @Override
+  public String toString() {
+
+    return this.delegate.toString();
   }
 }
