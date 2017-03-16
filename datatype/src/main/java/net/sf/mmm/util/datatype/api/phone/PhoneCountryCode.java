@@ -3,8 +3,8 @@
 package net.sf.mmm.util.datatype.api.phone;
 
 import net.sf.mmm.util.exception.api.NlsParseException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the country code for a phone number. The
@@ -45,8 +45,7 @@ public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
   public PhoneCountryCode(int countryCode) {
 
     super(Integer.valueOf(countryCode));
-    ValueOutOfRangeException.checkRange(Integer.valueOf(countryCode), Integer.valueOf(0),
-        Integer.valueOf(MAX_VALUE), "country code");
+    ValueOutOfRangeException.checkRange(Integer.valueOf(countryCode), Integer.valueOf(0), Integer.valueOf(MAX_VALUE), "country code");
   }
 
   /**

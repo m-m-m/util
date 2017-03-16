@@ -7,9 +7,9 @@ import java.util.Map;
 
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.NlsParseException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 import net.sf.mmm.util.lang.api.BasicHelper;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color}. It is based on values for {@link #getRed()
