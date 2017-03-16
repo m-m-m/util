@@ -8,7 +8,7 @@ import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractDatatype;
-import net.sf.mmm.util.lang.api.GwtHelper;
+import net.sf.mmm.util.lang.api.BasicHelper;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color} based on {@link Factor factors}. <br>
@@ -88,7 +88,7 @@ public final class GenericColor extends AbstractDatatype {
       }
       // "rgb(1,1,1)" = 10
       if (length >= 7) {
-        String model = GwtHelper.toUpperCase(colorString.substring(0, 3));
+        String model = BasicHelper.toUpperCase(colorString.substring(0, 3));
         ColorModel colorModel = ColorModel.valueOf(model);
         int index = 3;
         boolean hasAlpha = false;
@@ -125,13 +125,11 @@ public final class GenericColor extends AbstractDatatype {
                   case RGB:
                     return valueOf(new Red(firstSegment), new Green(secondSegment), new Blue(thirdSegment), alpha);
                   case HSL:
-                    return valueOf(new Hue(firstSegment), new Saturation(secondSegment),
-                        new Lightness(thirdSegment), alpha);
+                    return valueOf(new Hue(firstSegment), new Saturation(secondSegment), new Lightness(thirdSegment), alpha);
                   case HSV:
                   case HSB:
-                    return valueOf(new Hue(firstSegment), new Saturation(secondSegment),
-                        new Brightness(thirdSegment), alpha);
-                  default:
+                    return valueOf(new Hue(firstSegment), new Saturation(secondSegment), new Brightness(thirdSegment), alpha);
+                  default :
                     throw new IllegalCaseException(ColorModel.class, colorModel);
                 }
               }
@@ -491,7 +489,7 @@ public final class GenericColor extends AbstractDatatype {
         return this.lightness;
       case ALPHA:
         return this.alpha;
-      default:
+      default :
         throw new IllegalCaseException(ColorSegmentType.class, type);
     }
   }
@@ -501,8 +499,7 @@ public final class GenericColor extends AbstractDatatype {
    */
   public Color toColor() {
 
-    return new Color(this.red.getValueAsByte(), this.green.getValueAsByte(), this.blue.getValueAsByte(),
-        this.alpha.getValueAsByte());
+    return new Color(this.red.getValueAsByte(), this.green.getValueAsByte(), this.blue.getValueAsByte(), this.alpha.getValueAsByte());
   }
 
   /**
@@ -520,7 +517,7 @@ public final class GenericColor extends AbstractDatatype {
       case HSB:
       case HSV:
         return valueOf(this.hue.invert(), this.saturationHsb.invert(), this.brightness.invert(), this.alpha);
-      default:
+      default :
         throw new IllegalCaseException(ColorModel.class, model);
     }
   }
@@ -562,7 +559,7 @@ public final class GenericColor extends AbstractDatatype {
    */
   public String toString(ColorModel colorModel) {
 
-    StringBuilder buffer = new StringBuilder(GwtHelper.toLowerCase(colorModel.toString()));
+    StringBuilder buffer = new StringBuilder(BasicHelper.toLowerCase(colorModel.toString()));
     buffer.append("a(");
     buffer.append(getSegment(colorModel.getFirstSegmentType()));
     buffer.append(',');

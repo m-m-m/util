@@ -46,7 +46,7 @@ public interface StringUtil {
    * The platform-specific line-separator string. Should be one of {@link #LINE_SEPARATOR_LF},
    * {@link #LINE_SEPARATOR_CRLF}, {@link #LINE_SEPARATOR_LFCR}, {@link #LINE_SEPARATOR_CR}.
    */
-  String LINE_SEPARATOR = GwtHelper.LINE_SEPARATOR;
+  String LINE_SEPARATOR = BasicHelper.LINE_SEPARATOR;
 
   /**
    * The {@link System#getProperty(String) system property name} for {@link #LINE_SEPARATOR}.
