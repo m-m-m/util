@@ -5,7 +5,7 @@ package net.sf.mmm.util.scanner.base;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.lang.api.GwtHelper;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
@@ -605,7 +605,7 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
     char[] subChars;
     if (ignoreCase) {
-      subChars = GwtHelper.toLowerCase(substring).toCharArray();
+      subChars = BasicHelper.toLowerCase(substring).toCharArray();
     } else {
       subChars = substring.toCharArray();
     }

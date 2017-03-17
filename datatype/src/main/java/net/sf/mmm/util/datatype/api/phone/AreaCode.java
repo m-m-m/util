@@ -3,8 +3,8 @@
 package net.sf.mmm.util.datatype.api.phone;
 
 import net.sf.mmm.util.exception.api.NlsParseException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This class is a {@link net.sf.mmm.util.lang.api.Datatype} that represents the area code for a phone number. The area
@@ -36,8 +36,7 @@ public final class AreaCode extends AbstractSimpleDatatype<Integer> {
   public AreaCode(int areaCode) {
 
     super(Integer.valueOf(areaCode));
-    ValueOutOfRangeException.checkRange(Integer.valueOf(areaCode), Integer.valueOf(0), Integer.valueOf(99999999),
-        "area code");
+    ValueOutOfRangeException.checkRange(Integer.valueOf(areaCode), Integer.valueOf(0), Integer.valueOf(99999999), "area code");
   }
 
   /**

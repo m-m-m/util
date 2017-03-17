@@ -21,11 +21,11 @@ import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.lang.api.EnumDefinition;
 import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.EnumTypeWithCategory;
 import net.sf.mmm.util.lang.api.Formatter;
-import net.sf.mmm.util.lang.api.GwtHelper;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadDeprecated;
 
@@ -147,8 +147,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
 
   @Override
   @SuppressWarnings("unchecked")
-  public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> EnumDefinition<ENUM, CATEGORY> getEnumDefinitionWithCategory(
-      Class<? extends ENUM> enumType) throws ObjectNotFoundException {
+  public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> EnumDefinition<ENUM, CATEGORY> getEnumDefinitionWithCategory(Class<? extends ENUM> enumType)
+      throws ObjectNotFoundException {
 
     return (EnumDefinition<ENUM, CATEGORY>) getEnumDefinition(enumType);
   }
@@ -211,8 +211,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
   }
 
   @Override
-  public <ENUM> ENUM getEnumValue(Class<ENUM> enumType, String value, boolean required)
-      throws IllegalCaseException {
+  public <ENUM> ENUM getEnumValue(Class<ENUM> enumType, String value, boolean required) throws IllegalCaseException {
 
     return getEnumValue(getEnumDefinition(enumType), value, required);
   }
@@ -239,8 +238,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     for (ENUM enumVal : enumValues) {
       String string = formatter.format(enumVal);
       String stringNormalized = normalizeStringRepresentation(string);
-      if (valueNormalized.equals(stringNormalized)
-          || (isEnum && valueNormalized.equals(normalizeStringRepresentation(((Enum<?>) enumVal).name())))) {
+      if (valueNormalized.equals(stringNormalized) || (isEnum && valueNormalized.equals(normalizeStringRepresentation(((Enum<?>) enumVal).name())))) {
         if (result == null) {
           result = enumVal;
         } else {
@@ -269,7 +267,7 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
     if (value == null) {
       return null;
     }
-    return GwtHelper.toLowerCase(value.replaceAll("[-_ .]", ""));
+    return BasicHelper.toLowerCase(value.replaceAll("[-_ .]", ""));
   }
 
   @Override
@@ -293,8 +291,8 @@ public abstract class AbstractEnumProvider extends AbstractLoggableComponent imp
 
   @Override
   @SuppressWarnings("unchecked")
-  public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> List<ENUM> getEnumValues(
-      EnumDefinition<ENUM, CATEGORY> enumDefinition, CATEGORY... categories) {
+  public <CATEGORY, ENUM extends EnumTypeWithCategory<?, CATEGORY>> List<ENUM> getEnumValues(EnumDefinition<ENUM, CATEGORY> enumDefinition,
+      CATEGORY... categories) {
 
     assert (enumDefinition.getCategory() != null);
     List<?> allEnumValues = getEnumValues(enumDefinition);

@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.color;
 
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 
 /**
  * This is the abstract implementation of a {@link Segment} based on {@link Double}.
@@ -11,8 +11,7 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<SELF>>
-    extends AbstractSegment<Double> {
+public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<SELF>> extends AbstractSegment<Double> {
 
   private static final long serialVersionUID = 9206218315093630999L;
 

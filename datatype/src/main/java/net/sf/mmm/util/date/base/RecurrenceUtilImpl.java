@@ -17,7 +17,7 @@ import net.sf.mmm.util.date.api.Weekday;
 import net.sf.mmm.util.date.api.WeekdaySet;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 
 /**
  * This is the implementation of the {@link net.sf.mmm.util.date.api.RecurrenceUtil} interface.
@@ -80,8 +80,7 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
     DateUnit unit = recurrence.getUnit();
     NlsNullPointerException.checkNotNull(DateUnit.class, unit);
     int step = recurrence.getStep();
-    ValueOutOfRangeException.checkRange(Integer.valueOf(step), Integer.valueOf(1), Integer.valueOf(Integer.MAX_VALUE),
-        recurrence);
+    ValueOutOfRangeException.checkRange(Integer.valueOf(step), Integer.valueOf(1), Integer.valueOf(Integer.MAX_VALUE), recurrence);
     result.add(unit.getCalendarId(), step);
     WeekdaySet weekdaySet = recurrence.getWeekdays();
     if (weekdaySet == null) {

@@ -40,4 +40,14 @@ public interface CharIterator {
    */
   char next();
 
+  /**
+   * Like {@link #next()} but fails if no {@link #next() next} character is {@link #hasNext() available}.
+   *
+   * @return the next character.
+   * @throws IllegalArgumentException with the underlying data as {@link Exception#getMessage() message} because it is
+   *         assumed that the underlying data was given and is illegal.
+   * @since 7.4.0
+   */
+  char nextOrFail();
+
 }

@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This {@link net.sf.mmm.util.lang.api.Datatype} represents a {@link #getSet() set} of {@link Weekday}s. It can

@@ -7,9 +7,9 @@ import java.util.Map;
 
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.NlsParseException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
-import net.sf.mmm.util.lang.api.GwtHelper;
-import net.sf.mmm.util.value.api.ValueOutOfRangeException;
+import net.sf.mmm.util.lang.api.BasicHelper;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} for a {@link Color}. It is based on values for {@link #getRed()
@@ -238,7 +238,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
       if (hexColor != null) {
         return hexColor;
       } else {
-        String upperColor = GwtHelper.toUpperCase(color);
+        String upperColor = BasicHelper.toUpperCase(color);
         Color namedColor = NAME_TO_COLOR_MAP.get(upperColor);
         if (namedColor != null) {
           return namedColor;
@@ -379,7 +379,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
    */
   public static Color fromName(String name) {
 
-    return NAME_TO_COLOR_MAP.get(GwtHelper.toUpperCase(name));
+    return NAME_TO_COLOR_MAP.get(BasicHelper.toUpperCase(name));
   }
 
   /**
@@ -429,7 +429,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
       for (int i = delta; i > 0; i--) {
         buffer.append('0');
       }
-      buffer.append(GwtHelper.toUpperCase(hexString));
+      buffer.append(BasicHelper.toUpperCase(hexString));
     } else {
       buffer = new StringBuilder(RGBA_PREFIX);
       buffer.append(getRed());

@@ -13,8 +13,8 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.lang.api.Formatter;
-import net.sf.mmm.util.lang.api.GwtHelper;
 import net.sf.mmm.util.lang.api.StringSyntax;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
@@ -68,7 +68,7 @@ public class StringUtilImpl implements StringUtil {
   @Override
   public String getLineSeparator() {
 
-    return GwtHelper.getSystemProperty(SYSTEM_PROPERTY_LINE_SEPARATOR);
+    return BasicHelper.getSystemProperty(SYSTEM_PROPERTY_LINE_SEPARATOR);
   }
 
   @Override
@@ -183,7 +183,7 @@ public class StringUtilImpl implements StringUtil {
           if (c == Character.toLowerCase(c)) {
             // capitalize
             String first = newSuffixLowerCase.substring(0, 1);
-            String capital = GwtHelper.toUpperCase(first, locale);
+            String capital = BasicHelper.toUpperCase(first, locale);
             if (capital.length() == 1) {
               result.append(newSuffixLowerCase);
               result.setCharAt(replaceIndex, capital.charAt(0));
@@ -193,7 +193,7 @@ public class StringUtilImpl implements StringUtil {
             }
           } else {
             // all upper case
-            result.append(GwtHelper.toUpperCase(newSuffixLowerCase, locale));
+            result.append(BasicHelper.toUpperCase(newSuffixLowerCase, locale));
           }
         }
       }

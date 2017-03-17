@@ -12,7 +12,6 @@ import org.junit.Test;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueConverter;
-import net.sf.mmm.util.value.api.ValueException;
 
 /**
  * This is the test-case for {@link StringUtilImpl}.
@@ -147,13 +146,13 @@ public class StringUtilTest extends Assertions {
       }
 
       @Override
-      public <T extends Integer> T convert(String value, Object valueSource, Class<T> targetClass) throws ValueException {
+      public <T extends Integer> T convert(String value, Object valueSource, Class<T> targetClass) {
 
         return (T) Integer.valueOf(value);
       }
 
       @Override
-      public <T extends Integer> T convert(String value, Object valueSource, GenericType<T> targetType) throws ValueException {
+      public <T extends Integer> T convert(String value, Object valueSource, GenericType<T> targetType) {
 
         return convert(value, valueSource, targetType.getAssignmentClass());
       }
