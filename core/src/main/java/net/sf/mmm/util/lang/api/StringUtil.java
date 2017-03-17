@@ -321,7 +321,9 @@ public interface StringUtil {
 
   /**
    * This method converts the given {@code string} to caml-case syntax using the default separators {@code ' '},
-   * {@code '-'}, {@code '_'} and {@code '.'}.
+   * {@code '-'}, {@code '_'} and {@code '.'}.<br>
+   * <b>Attention:</b><br>
+   * In most cases you should prefer using {@link CaseSyntax} instead.
    *
    * @see #toCamlCase(String, char[])
    *
@@ -335,6 +337,9 @@ public interface StringUtil {
    * In caml-case syntax words are written without a separator but each new word starts with a capitalized letter. This
    * method removes all characters from the given {@code string} that are in the list given by {@code separators} and
    * capitalizes the first character of the following word. <br>
+   * <b>Attention:</b><br>
+   * In most cases you should prefer using {@link CaseSyntax} instead.<br>
+   * <br>
    * Examples for separators ' ', '-', '_', '.': <br>
    * <table border="1">
    * <tr>
@@ -364,6 +369,9 @@ public interface StringUtil {
   /**
    * This method converts the given {@code string} from caml-case syntax to lower-case using the given {@code separator}
    * as word-boundary. <br>
+   * <b>Attention:</b><br>
+   * In most cases you should prefer using {@link CaseSyntax} instead.<br>
+   * <br>
    * Example:<br>
    * <table border="1">
    * <tr>
