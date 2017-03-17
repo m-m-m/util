@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.http;
+package net.sf.mmm.util.http.api;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
 /**
- * This is a utility class used to parse {@link HttpMessage HTTP-messages}.
+ * This is a utility class used to parse {@link AbstractHttpMessage HTTP-messages}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -29,9 +29,8 @@ public final class HttpParser {
         // no CTL
         return false;
       }
-      if ((c == '(') || (c == ')') || (c == '>') || (c == '>') || (c == '@') || (c == ',') || (c == ';')
-          || (c == ':') || (c == '\\') || (c == '"') || (c == '/') || (c == '[') || (c == ']') || (c == '?')
-          || (c == '=') || (c == '{') || (c == '}') || (c == ' ')) {
+      if ((c == '(') || (c == ')') || (c == '>') || (c == '>') || (c == '@') || (c == ',') || (c == ';') || (c == ':') || (c == '\\') || (c == '"')
+          || (c == '/') || (c == '[') || (c == ']') || (c == '?') || (c == '=') || (c == '{') || (c == '}') || (c == ' ')) {
         // no tspecials (HT already covered by CTL)
         return false;
       }
@@ -98,14 +97,13 @@ public final class HttpParser {
    * first line has been read and an HTTP-version greator or equal to "1.0" has been detected.
    *
    * @param stream is the stream to read from.
-   * @param message is the HTTP-message where to {@link HttpMessage#setHeaderProperty(String, String) set} the parsed
-   *        properties.
+   * @param message is the HTTP-message where to {@link AbstractHttpMessage#setHeaderProperty(String, String) set} the
+   *        parsed properties.
    * @param charset is the charset used to parse the properties.
    * @param buffer is a buffer used to cache bytes.
    * @throws IOException if the operation failes with an I/O problem.
    */
-  private static void parseProperties(InputStream stream, HttpMessage message, Charset charset, byte[] buffer)
-      throws IOException {
+  private static void parseProperties(InputStream stream, AbstractHttpMessage message, Charset charset, byte[] buffer) throws IOException {
 
     String line = parseLine(stream, buffer, charset);
     String currentProperty = null;
@@ -114,7 +112,7 @@ public final class HttpParser {
       if ((c == ' ') || (c == '\t')) {
         // LWS
         if (currentProperty != null) {
-          message.appendHeaderProperty(currentProperty, line);
+          message.getHeaders().addHeader(currentProperty, line);
         }
       } else {
         CharSequenceScanner parser = new CharSequenceScanner(line);
@@ -125,7 +123,7 @@ public final class HttpParser {
           parser.skipWhile(CharFilter.WHITESPACE_FILTER);
           currentProperty = property;
           String value = parser.read(Integer.MAX_VALUE);
-          message.appendHeaderProperty(property, value);
+          message.getHeaders().addHeader(property, value);
         }
       }
       line = parseLine(stream, buffer, charset);
@@ -142,7 +140,7 @@ public final class HttpParser {
    * @param request is where to apply the parsed information to. Simply supply a new instance.
    * @throws IOException if the operation failes with an I/O problem.
    */
-  public static void parseRequest(InputStream stream, HttpRequest request) throws IOException {
+  public static void parseRequest(InputStream stream, HttpRequestImpl request) throws IOException {
 
     parseRequest(stream, request, CHARSET_US_ASCII);
   }
@@ -158,7 +156,7 @@ public final class HttpParser {
    * @param charset is the charset used to convert the read bytes to strings.
    * @throws IOException if the operation failes with an I/O problem.
    */
-  public static void parseRequest(InputStream stream, HttpRequest request, Charset charset) throws IOException {
+  public static void parseRequest(InputStream stream, HttpRequestImpl request, Charset charset) throws IOException {
 
     byte[] buffer = new byte[256];
     String line = parseLine(stream, buffer, charset);
@@ -167,22 +165,22 @@ public final class HttpParser {
     if (method == null) {
       throw new IllegalStateException("Illegal HTTP header!");
     }
-    request.setMethod(method.toUpperCase());
+    // request.setMethod(method.toUpperCase());
     String uri = parser.readUntil(' ', true);
     if (uri == null) {
       throw new IllegalStateException("Illegal HTTP header!");
     }
-    request.setUri(uri);
+    // request.setUri(uri);
     if (parser.hasNext()) {
-      boolean compliant = parser.expect(HttpMessage.VERSION_PREFIX, true);
+      boolean compliant = parser.expect(HttpVersion.HTTP, true);
       if (!compliant) {
         throw new IllegalStateException("Illegal HTTP header!");
       }
       String version = parser.read(Integer.MAX_VALUE);
-      request.setVersion(version);
+      // request.setVersion(version);
       parseProperties(stream, request, charset, buffer);
     } else {
-      request.setVersion(HttpMessage.VERSION_0_9);
+      // request.setVersion(AbstractHttpMessage.HTTP_VERSION_0_9);
     }
   }
 

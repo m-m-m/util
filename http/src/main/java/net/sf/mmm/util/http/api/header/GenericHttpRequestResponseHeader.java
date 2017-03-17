@@ -11,11 +11,12 @@ import java.util.List;
  * @author hohwille
  * @since 8.4.0
  */
-class GenericHttpRequestResponseHeader extends GenericHttpHeader implements HttpResponseHeader {
+final class GenericHttpRequestResponseHeader extends GenericHttpHeader implements HttpResponseHeader {
 
-  static final List<String> HEADERS = Arrays.asList(HttpHeader.HEADER_CACHE_CONTROL, HttpHeader.HEADER_CONNECTION, HttpHeader.HEADER_CONTENT_LENGTH,
-      HttpHeader.HEADER_CONTENT_MD5, HttpHeader.HEADER_CONTENT_TYPE, HttpHeader.HEADER_DATE, HttpHeader.HEADER_TRANSFER_ENCODING, HttpHeader.HEADER_VIA,
-      HttpHeader.HEADER_WARNING, HttpHeader.HEADER_X_CORRELATION_ID, HttpHeader.HEADER_X_REQUEST_ID, HttpHeader.HEADER_X_ROBOTS_TAG);
+  static final List<String> HEADERS = Arrays.asList(HttpHeader.HEADER_CACHE_CONTROL, HttpHeader.HEADER_CONNECTION, HttpHeader.HEADER_CONTENT_DISPOSITION,
+      HttpHeader.HEADER_CONTENT_LENGTH, HttpHeader.HEADER_CONTENT_MD5, HttpHeader.HEADER_CONTENT_TYPE, HttpHeader.HEADER_DATE,
+      HttpHeader.HEADER_TRANSFER_ENCODING, HttpHeader.HEADER_PRAGMA, HttpHeader.HEADER_VIA, HttpHeader.HEADER_WARNING, HttpHeader.HEADER_X_CORRELATION_ID,
+      HttpHeader.HEADER_X_REQUEST_ID, HttpHeader.HEADER_X_ROBOTS_TAG);
 
   /**
    * The constructor.
@@ -39,17 +40,10 @@ class GenericHttpRequestResponseHeader extends GenericHttpHeader implements Http
     return true;
   }
 
-  static class Factory extends AbstractHttpHeaderFactory {
+  @Override
+  protected AbstractHttpHeader withValue(String value) {
 
-    Factory(String name) {
-      super(name);
-    }
-
-    @Override
-    AbstractHttpHeader create(String value) {
-
-      return new GenericHttpRequestResponseHeader(this.name, value);
-    }
+    return new GenericHttpRequestResponseHeader(getName(), value);
   }
 
 }

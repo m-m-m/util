@@ -29,6 +29,24 @@ public interface HttpRequestHeader extends HttpHeader {
   String HEADER_COOKIE = "Cookie";
 
   /**
+   * The {@link #getName() name} of the
+   * <a href="http://www.webdav.org/specs/rfc2518.html#rfc.section.9.3">Destination</a> header.
+   */
+  String HEADER_DESTINATION = "Destination";
+
+  /**
+   * The {@link #getName() name} of the <a href="http://www.webdav.org/specs/rfc2518.html#rfc.section.9.6">Overwrite</a>
+   * header.
+   */
+  String HEADER_OVERWRITE = "Overwrite";
+
+  /**
+   * The {@link #getName() name} of the
+   * <a href="http://www.webdav.org/specs/rfc2518.html#rfc.section.9.5">Lock-Token</a> header.
+   */
+  String HEADER_LOCK_TOKEN = "Lock-Token";
+
+  /**
    * The {@link #getName() name} of the <a href="https://en.wikipedia.org/wiki/Do_Not_Track"><em>DNT</em></a> (Do Not
    * Track) header.
    */

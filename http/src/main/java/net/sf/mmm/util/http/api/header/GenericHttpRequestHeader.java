@@ -11,7 +11,7 @@ import java.util.List;
  * @author hohwille
  * @since 8.4.0
  */
-class GenericHttpRequestHeader extends GenericHttpHeader implements HttpRequestHeader {
+final class GenericHttpRequestHeader extends GenericHttpHeader implements HttpRequestHeader {
 
   static final List<String> HEADERS = Arrays.asList(HttpRequestHeader.HEADER_ACCEPT, HttpRequestHeader.HEADER_ACCEPT_CHARSET,
       HttpRequestHeader.HEADER_ACCEPT_ENCODING, HttpRequestHeader.HEADER_ACCEPT_LANGUAGE, HttpRequestHeader.HEADER_AUTHORIZATION,
@@ -19,8 +19,9 @@ class GenericHttpRequestHeader extends GenericHttpHeader implements HttpRequestH
       HttpRequestHeader.HEADER_IF_MATCH, HttpRequestHeader.HEADER_IF_MODIFIED_SINCE, HttpRequestHeader.HEADER_IF_NONE_MATCH, HttpRequestHeader.HEADER_IF_RANGE,
       HttpRequestHeader.HEADER_IF_UNMODIFIED_SINCE, HttpRequestHeader.HEADER_MAX_FORWARDS, HttpRequestHeader.HEADER_PROXY_AUTHORIZATION,
       HttpRequestHeader.HEADER_RANGE, HttpRequestHeader.HEADER_REFERER, HttpRequestHeader.HEADER_TE, HttpRequestHeader.HEADER_UPGRADE,
-      HttpRequestHeader.HEADER_X_CSRF_TOKEN, HttpRequestHeader.HEADER_X_FORWARDED_FOR, HttpRequestHeader.HEADER_X_FORWARDED_HOST,
-      HttpRequestHeader.HEADER_X_FORWARDED_PORT, HttpRequestHeader.HEADER_X_FORWARDED_PROTO, HttpRequestHeader.HEADER_X_REQUESTED_WITH);
+      HttpRequestHeader.HEADER_USER_AGENT, HttpRequestHeader.HEADER_X_CSRF_TOKEN, HttpRequestHeader.HEADER_X_FORWARDED_FOR,
+      HttpRequestHeader.HEADER_X_FORWARDED_HOST, HttpRequestHeader.HEADER_X_FORWARDED_PORT, HttpRequestHeader.HEADER_X_FORWARDED_PROTO,
+      HttpRequestHeader.HEADER_X_REQUESTED_WITH);
 
   /**
    * The constructor.
@@ -44,17 +45,10 @@ class GenericHttpRequestHeader extends GenericHttpHeader implements HttpRequestH
     return false;
   }
 
-  static class Factory extends AbstractHttpHeaderFactory {
+  @Override
+  protected AbstractHttpHeader withValue(String value) {
 
-    Factory(String name) {
-      super(name);
-    }
-
-    @Override
-    AbstractHttpHeader create(String value) {
-
-      return new GenericHttpRequestHeader(this.name, value);
-    }
+    return new GenericHttpRequestHeader(getName(), value);
   }
 
 }

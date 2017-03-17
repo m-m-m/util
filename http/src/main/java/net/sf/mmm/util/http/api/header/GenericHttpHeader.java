@@ -12,8 +12,6 @@ abstract class GenericHttpHeader extends AbstractHttpHeader {
 
   private final String name;
 
-  private final String value;
-
   /**
    * The constructor.
    *
@@ -21,21 +19,14 @@ abstract class GenericHttpHeader extends AbstractHttpHeader {
    * @param value the {@link #getValue() value} of this {@link HttpHeader}.
    */
   GenericHttpHeader(String name, String value) {
-    super();
+    super(value);
     this.name = name;
-    this.value = value;
   }
 
   @Override
   public String getName() {
 
     return this.name;
-  }
-
-  @Override
-  public String getValue() {
-
-    return this.value;
   }
 
 }

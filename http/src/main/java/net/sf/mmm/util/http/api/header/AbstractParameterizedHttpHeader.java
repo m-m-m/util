@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.function.Function;
 
+import net.sf.mmm.util.exception.api.ReadOnlyException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
@@ -178,6 +179,9 @@ public abstract class AbstractParameterizedHttpHeader extends AbstractHttpHeader
    */
   protected Object setParameter(String key, Object value) {
 
+    if (isImmutable()) {
+      throw new ReadOnlyException(this, key);
+    }
     String keyLowerCase = key.toLowerCase(Locale.US);
     if (value == null) {
       return this.parameters.remove(keyLowerCase);
@@ -298,6 +302,24 @@ public abstract class AbstractParameterizedHttpHeader extends AbstractHttpHeader
     } else {
       return PARAMETER_SEPARATOR_SEMICOLON;
     }
+  }
+
+  @Override
+  protected String calculateValue() {
+
+    StringBuilder buffer = new StringBuilder();
+    calculateValueStart(buffer);
+    formatParameters(buffer);
+    return buffer.toString();
+  }
+
+  /**
+   * @param buffer the {@link StringBuilder} where to {@link StringBuilder#append(String) append} initial data for
+   *        {@link #getValue()}.
+   */
+  protected void calculateValueStart(StringBuilder buffer) {
+
+    // nothing to do by default, override to extend...
   }
 
 }

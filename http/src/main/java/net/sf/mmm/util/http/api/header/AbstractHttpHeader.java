@@ -24,8 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
+import net.sf.mmm.util.http.api.AbstractHttpObject;
 
 /**
  * This is the abstract base implementation of {@link HttpHeader}.
@@ -33,11 +32,13 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  * @author hohwille
  * @since 8.4.0
  */
-public abstract class AbstractHttpHeader implements HttpHeader {
+public abstract class AbstractHttpHeader extends AbstractHttpObject implements HttpHeader {
 
   private static final DateTimeFormatter RFC_1123_FORMATTER = DateTimeFormatter.RFC_1123_DATE_TIME.withZone(ZoneId.of("UTC"));
 
   private static final Logger LOG = LoggerFactory.getLogger(AbstractHttpHeader.class);
+
+  private static Map<String, AbstractHttpHeader> FACTORY_MAP;
 
   private static final Set<String> MULTI_VALUE_HEADERS = new HashSet<>(Arrays.asList(HttpRequestHeader.HEADER_ACCEPT_CHARSET,
       HttpRequestHeader.HEADER_ACCEPT_ENCODING, HttpRequestHeader.HEADER_ACCEPT_LANGUAGE, HttpResponseHeader.HEADER_ACCEPT_RANGES, HEADER_CACHE_CONTROL,
@@ -46,33 +47,64 @@ public abstract class AbstractHttpHeader implements HttpHeader {
       HttpResponseHeader.HEADER_TRAILER, HEADER_TRANSFER_ENCODING, HttpRequestHeader.HEADER_UPGRADE, HttpResponseHeader.HEADER_VARY, HEADER_VIA, HEADER_WARNING,
       HttpResponseHeader.HEADER_WWW_AUTHENTICATE));
 
-  private static final Map<String, AbstractHttpHeaderFactory> FACTORY_MAP = createFactoryMap();
+  private String value;
 
-  private AbstractHttpHeader nextValue;
+  private AbstractHttpHeader next;
 
-  private static Map<String, AbstractHttpHeaderFactory> createFactoryMap() {
-
-    Map<String, AbstractHttpHeaderFactory> map = new HashMap<>();
-    register(new HttpHeaderCacheControl.Factory(), map);
-    register(new HttpHeaderContentDisposition.Factory(), map);
-    register(new HttpHeaderPragma.Factory(), map);
-    register(new HttpHeaderUserAgent.Factory(), map);
-    for (String header : GenericHttpRequestHeader.HEADERS) {
-      register(new GenericHttpRequestHeader.Factory(header), map);
-    }
-    for (String header : GenericHttpResponseHeader.HEADERS) {
-      register(new GenericHttpResponseHeader.Factory(header), map);
-    }
-    for (String header : GenericHttpRequestResponseHeader.HEADERS) {
-      register(new GenericHttpRequestResponseHeader.Factory(header), map);
-    }
-    return Collections.unmodifiableMap(map);
+  /**
+   * The constructor.
+   */
+  public AbstractHttpHeader() {
+    super();
   }
 
-  private static void register(AbstractHttpHeaderFactory factory, Map<String, AbstractHttpHeaderFactory> map) {
+  /**
+   * The constructor.
+   *
+   * @param value the {@link #getValue() value}.
+   */
+  public AbstractHttpHeader(String value) {
+    super();
+    this.value = value;
+  }
+
+  private static Map<String, AbstractHttpHeader> getFactoryMap() {
+
+    if (FACTORY_MAP == null) {
+      Map<String, AbstractHttpHeader> map = new HashMap<>();
+      register(HttpHeaderServer.FACTORY, map);
+      register(HttpHeaderUserAgent.FACTORY, map);
+      register(HttpHeaderCacheControl.FACTORY, map);
+      register(HttpHeaderContentDisposition.FACTORY, map);
+      register(HttpHeaderContentType.FACTORY, map);
+      register(HttpHeaderPragma.FACTORY, map);
+      for (String header : GenericHttpRequestHeader.HEADERS) {
+        register(new GenericHttpRequestHeader(header, ""), map, false);
+      }
+      for (String header : GenericHttpResponseHeader.HEADERS) {
+        register(new GenericHttpResponseHeader(header, ""), map, false);
+      }
+      for (String header : GenericHttpRequestResponseHeader.HEADERS) {
+        register(new GenericHttpRequestResponseHeader(header, ""), map, false);
+      }
+      FACTORY_MAP = Collections.unmodifiableMap(map);
+    }
+    return FACTORY_MAP;
+  }
+
+  private static void register(AbstractHttpHeader factory, Map<String, AbstractHttpHeader> map) {
+
+    register(factory, map, true);
+  }
+
+  private static void register(AbstractHttpHeader factory, Map<String, AbstractHttpHeader> map, boolean override) {
 
     String name = factory.getName();
-    AbstractHttpHeaderFactory old = map.put(name.toLowerCase(Locale.US), factory);
+    String key = name.toLowerCase(Locale.US);
+    if (!override && map.containsKey(key)) {
+      return;
+    }
+    AbstractHttpHeader old = map.put(key, factory);
     if (old != null) {
       LOG.warn("Duplicate factory for header {} - replaced {} with {}", name, old, factory);
     }
@@ -196,15 +228,15 @@ public abstract class AbstractHttpHeader implements HttpHeader {
   @Override
   public List<String> getValues() {
 
-    AbstractHttpHeader next = this.nextValue;
-    if (next == null) {
+    AbstractHttpHeader nextHeader = this.next;
+    if (nextHeader == null) {
       return Arrays.asList(getValue());
     }
     List<String> values = new ArrayList<>();
     values.add(getValue());
-    while (next != null) {
-      values.add(next.getValue());
-      next = next.nextValue;
+    while (nextHeader != null) {
+      values.add(nextHeader.getValue());
+      nextHeader = nextHeader.next;
     }
     return values;
   }
@@ -212,41 +244,82 @@ public abstract class AbstractHttpHeader implements HttpHeader {
   /**
    * @return {@code true} if this {@link HttpHeader} accepts multiple {@link #getValues() values} separated by comma.
    */
+  @Override
   public boolean isSupportingMultiValue() {
 
     return MULTI_VALUE_HEADERS.contains(getName());
   }
 
   @Override
-  public AbstractHttpHeader getNextValue() {
+  public AbstractHttpHeader getNext() {
 
-    return this.nextValue;
+    return this.next;
   }
 
   /**
    * @param <H> the type of the requested {@link HttpHeader}.
    * @param headerType the {@link Class} reflecting the requested {@link HttpHeader}.
-   * @return the {@link #getNextValue() next header} casted to the requested type or {@code null} if not possible.
+   * @return the {@link #getNext() next header} casted to the requested type or {@code null} if not possible.
    */
   protected <H extends AbstractHttpHeader> H getNextValue(Class<H> headerType) {
 
-    if ((this.nextValue == null) || !headerType.isAssignableFrom(this.nextValue.getClass())) {
+    if ((this.next == null) || !headerType.isAssignableFrom(this.next.getClass())) {
       return null;
     }
-    return headerType.cast(this.nextValue);
+    return headerType.cast(this.next);
   }
 
-  void append(AbstractHttpHeader next) {
+  @Override
+  public AbstractHttpHeader setImmutable() {
 
-    Objects.requireNonNull(next, "next");
-    if (!getName().equals(next.getName())) {
-      throw new ObjectMismatchException(next.getName(), getName(), next);
+    super.setImmutable();
+    if (this.next != null) {
+      this.next.setImmutable();
     }
+    return this;
+  }
+
+  @Override
+  public final String getValue() {
+
+    if (this.value == null) {
+      this.value = calculateValue();
+    }
+    return this.value;
+  }
+
+  /**
+   * @return the calculated value.
+   */
+  protected String calculateValue() {
+
+    throw new IllegalStateException();
+  }
+
+  /**
+   * @param newValue the header {@link #getValue() value}.
+   * @return the new {@link AbstractHttpHeader} with the same {@link #getName() name} and {@link #getClass() type} as
+   *         this header but with the given value.
+   */
+  protected abstract AbstractHttpHeader withValue(String newValue);
+
+  void append(AbstractHttpHeader nextHeader) {
+
+    Objects.requireNonNull(nextHeader, "next");
+    String name = getName();
+    if (!name.equals(nextHeader.getName())) {
+      throw new ObjectMismatchException(nextHeader.getName(), name, nextHeader);
+    }
+    requireMutable(name);
+    String nextHeaderValue = nextHeader.getValue();
     AbstractHttpHeader current = this;
-    while (current.nextValue != null) {
-      current = current.nextValue;
+    while (current.next != null) {
+      if (current.getValue().equals(nextHeaderValue)) {
+        return;
+      }
+      current = current.next;
     }
-    current.nextValue = next;
+    current.next = nextHeader;
   }
 
   @Override
@@ -268,7 +341,7 @@ public abstract class AbstractHttpHeader implements HttpHeader {
     if (!Objects.equals(getValue(), other.getValue())) {
       return false;
     }
-    if (!Objects.equals(this.nextValue, other.nextValue)) {
+    if (!Objects.equals(this.next, other.next)) {
       return false;
     }
     return true;
@@ -281,53 +354,30 @@ public abstract class AbstractHttpHeader implements HttpHeader {
   }
 
   @Override
-  public String toString() {
+  protected void doWrite(Appendable buffer, boolean fromToString) throws IOException {
 
-    StringBuilder buffer = new StringBuilder(getName().length() + 16);
-    toString(buffer);
-    return buffer.toString();
-  }
-
-  /**
-   * @see #toString()
-   * @param buffer the {@link StringBuilder} where to {@link StringBuilder#append(String) append} to.
-   */
-  public void toString(Appendable buffer) {
-
-    toString(buffer, false);
-  }
-
-  /**
-   * @see #toString()
-   * @param buffer the {@link StringBuilder} where to {@link StringBuilder#append(String) append} to.
-   * @param newline - {@code true} if the header should be terminated by a {@link #NEWLINE}, {@code false} otherwise.
-   */
-  protected void toString(Appendable buffer, boolean newline) {
-
-    try {
-      String name = getName();
-      int valueCount = 0;
-      HttpHeader header = this;
-      boolean csv = isSupportingMultiValue();
-      while (header != null) {
-        if ((valueCount == 0) || !csv) {
-          if (valueCount > 0) {
-            buffer.append(NEWLINE);
-          }
-          buffer.append(name);
-          buffer.append(": ");
-        } else if (valueCount > 0) {
-          buffer.append(", ");
+    String name = getName();
+    int valueCount = 0;
+    AbstractHttpHeader header = this;
+    boolean csv = isSupportingMultiValue();
+    while (header != null) {
+      if ((valueCount == 0) || !csv) {
+        if (valueCount > 0) {
+          buffer.append(CRLF);
         }
-        buffer.append(getValue());
-        header = header.getNextValue();
-        valueCount++;
+        buffer.append(name);
+        buffer.append(": ");
+      } else if (valueCount > 0) {
+        buffer.append(", ");
       }
-      if (newline) {
-        buffer.append(NEWLINE);
+      if (this.value != null) {
+        buffer.append(this.value);
       }
-    } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.WRITE);
+      header = header.next;
+      valueCount++;
+    }
+    if (!fromToString) {
+      buffer.append(CRLF);
     }
   }
 
@@ -353,20 +403,47 @@ public abstract class AbstractHttpHeader implements HttpHeader {
   /**
    * @param name the {@link HttpHeader#getName() name} of the {@link HttpHeader}.
    * @param value the {@link HttpHeader#getValue() value} of the {@link HttpHeader}.
-   * @return the parsed {@link HttpHeader} or {@code null} if the given {@code header} was {@code null}.
+   * @return the specified {@link AbstractHttpHeader} instance.
    */
   public static AbstractHttpHeader of(String name, String value) {
 
-    AbstractHttpHeaderFactory factory = FACTORY_MAP.get(name);
+    AbstractHttpHeader factory = getFactoryMap().get(name);
     if (factory == null) {
       String key = name.toLowerCase(Locale.US);
-      factory = FACTORY_MAP.get(key);
+      factory = getFactoryMap().get(key);
       if (factory == null) {
         // fallback for unknown header...
         return new GenericHttpRequestResponseHeader(name, value);
       }
     }
-    return factory.create(value);
+    return factory.withValue(value);
+  }
+
+  /**
+   * @param name the {@link HttpHeader#getName() name} of the {@link HttpHeader}.
+   * @param values the {@link HttpHeader#getValues() values} of the {@link HttpHeader}.
+   * @return the specified {@link AbstractHttpHeader} instance, or {@code null} if the given {@link List} is
+   *         {@code null} or {@link List#isEmpty() empty}.
+   */
+  public static AbstractHttpHeader of(String name, List<String> values) {
+
+    if ((values == null) || values.isEmpty()) {
+      return null;
+    }
+    AbstractHttpHeader header = null;
+    AbstractHttpHeader next = null;
+    for (String value : values) {
+      AbstractHttpHeader current = of(name, value);
+      if (header == null) {
+        header = current;
+        next = current;
+      } else {
+        Objects.requireNonNull(next);
+        next.append(current);
+        next = current;
+      }
+    }
+    return header;
   }
 
   /**
@@ -407,24 +484,6 @@ public abstract class AbstractHttpHeader implements HttpHeader {
       }
     }
     return result;
-  }
-
-  abstract static class AbstractHttpHeaderFactory {
-
-    protected final String name;
-
-    AbstractHttpHeaderFactory(String name) {
-      super();
-      this.name = name;
-    }
-
-    String getName() {
-
-      return this.name;
-    }
-
-    abstract AbstractHttpHeader create(String value);
-
   }
 
 }

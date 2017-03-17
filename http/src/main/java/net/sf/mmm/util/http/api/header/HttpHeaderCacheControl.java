@@ -16,6 +16,12 @@ import java.util.Map;
  */
 public class HttpHeaderCacheControl extends AbstractParameterizedHttpHeader implements HttpRequestHeader, HttpResponseHeader {
 
+  /** An empty instance of {@link HttpHeaderUserAgent} that acts as factory. */
+  public static final HttpHeaderCacheControl FACTORY = new HttpHeaderCacheControl();
+
+  /** The {@link #getName() name} of this {@link HttpHeader}. */
+  public static final String HEADER = HttpHeader.HEADER_CACHE_CONTROL;
+
   /**
    * The {@link #getParameterAsBooleanFlag(String) parameter flag}
    * <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.1">no-cache</a>.
@@ -88,8 +94,6 @@ public class HttpHeaderCacheControl extends AbstractParameterizedHttpHeader impl
    */
   public static final String PARAMETER_S_MAX_AGE = "s-maxage";
 
-  private static final HttpHeaderCacheControl EMPTY = new HttpHeaderCacheControl();
-
   /**
    * The constructor.
    */
@@ -107,7 +111,7 @@ public class HttpHeaderCacheControl extends AbstractParameterizedHttpHeader impl
   @Override
   public String getName() {
 
-    return HEADER_CACHE_CONTROL;
+    return HEADER;
   }
 
   @Override
@@ -139,15 +143,13 @@ public class HttpHeaderCacheControl extends AbstractParameterizedHttpHeader impl
   }
 
   @Override
-  public String getValue() {
+  protected AbstractHttpHeader withValue(String value) {
 
-    StringBuilder buffer = new StringBuilder();
-    formatParameters(buffer);
-    return buffer.toString();
+    return ofValue(value);
   }
 
   /**
-   * @param headerValue the value of the {@link #HEADER_PRAGMA Pragma HTTP header}.
+   * @param headerValue the header {@link #getValues() value}.
    * @return the parsed {@link HttpHeaderCacheControl}.
    */
   public static HttpHeaderCacheControl ofValue(String headerValue) {
@@ -156,21 +158,21 @@ public class HttpHeaderCacheControl extends AbstractParameterizedHttpHeader impl
     if (value == null) {
       return null;
     }
-    Map<String, Object> parameters = EMPTY.parseParameters(value);
+    Map<String, Object> parameters = FACTORY.parseParameters(value);
     return new HttpHeaderCacheControl(parameters);
   }
 
-  static class Factory extends AbstractHttpHeaderFactory {
+  /**
+   * @param headers the {@link HttpHeader} to get this header from. May be {@code null}.
+   * @return the {@link HttpHeaderCacheControl} form the given {@link HttpHeaders} or {@code null} if not present.
+   */
+  public static HttpHeaderCacheControl get(HttpHeaders headers) {
 
-    Factory() {
-      super(HEADER_CACHE_CONTROL);
+    if (headers == null) {
+      return null;
     }
-
-    @Override
-    AbstractHttpHeader create(String value) {
-
-      return ofValue(value);
-    }
+    HttpHeader header = headers.getHeader(HEADER);
+    return (HttpHeaderCacheControl) header;
   }
 
 }

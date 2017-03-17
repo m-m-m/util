@@ -18,6 +18,9 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.lang.api.SystemInformation;
 import net.sf.mmm.util.lang.base.SystemInformationImpl;
+import net.sf.mmm.util.version.api.NameVersionComment;
+import net.sf.mmm.util.version.base.GenericNameVersion;
+import net.sf.mmm.util.version.base.GenericNameVersionComment;
 
 /**
  * This class represents the HTTP {@link #HEADER_PRAGMA Pragma} header according to
@@ -29,7 +32,13 @@ import net.sf.mmm.util.lang.base.SystemInformationImpl;
  * @author hohwille
  * @since 8.4.0
  */
-public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements HttpRequestHeader {
+public class HttpHeaderUserAgent extends AbstractHttpHeader implements HttpRequestHeader {
+
+  /** An empty instance of {@link HttpHeaderUserAgent} that acts as factory. */
+  public static final HttpHeaderUserAgent FACTORY = new HttpHeaderUserAgent();
+
+  /** The {@link #getName() name} of this {@link HttpHeader}. */
+  public static final String HEADER = HttpRequestHeader.HEADER_USER_AGENT;
 
   /** The {@link #getBrowser() browser} <em>Firefox</em>. */
   public static final String BROWSER_FIREFOX = "Firefox";
@@ -105,7 +114,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
 
   private static final Pattern PATTERN_VERSION = Pattern.compile("[0-9]+(.[0-9]+)*");
 
-  private static final UserAgentSegment OS_UNKNOWN = new UserAgentSegment(UNKNOWN, UNKNOWN, UNKNOWN);
+  private static final GenericNameVersionComment OS_UNKNOWN = new GenericNameVersionComment(UNKNOWN, UNKNOWN, UNKNOWN);
 
   private static final String IEMOBILE = "iemobile";
 
@@ -113,7 +122,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
 
   private static final String CRAWLER_INDICATOR = "compatible;";
 
-  private List<UserAgentSegment> segments;
+  private List<GenericNameVersionComment> segments;
 
   private String browser;
 
@@ -122,6 +131,13 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
   private SystemInformation os;
 
   private Boolean crawler;
+
+  /**
+   * The internal factory constructor.
+   */
+  private HttpHeaderUserAgent() {
+    super();
+  }
 
   /**
    * The constructor.
@@ -142,7 +158,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     map.put("msie", BROWSER_INTERNET_EXPLORER);
     map.put(IEMOBILE, BROWSER_INTERNET_EXPLORER);
     map.put("conkeror", BROWSER_KONQUEROR);
-    // map.put("applewebkit", BROWSER_SAFARI);
+    map.put("mobile safari", BROWSER_SAFARI);
     for (int i = 0; i < size; i++) {
       String key = browsers[i].toLowerCase(Locale.US);
       map.put(key, browsers[i]);
@@ -206,7 +222,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
   @Override
   public String getName() {
 
-    return HEADER_USER_AGENT;
+    return HEADER;
   }
 
   @Override
@@ -239,43 +255,14 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
   }
 
   /**
-   * @return the segments
+   * @return the {@link GenericNameVersionComment} segments.
    */
-  public List<UserAgentSegment> getSegments() {
+  public List<GenericNameVersionComment> getSegments() {
 
     if (this.segments == null) {
-      this.segments = Collections.unmodifiableList(UserAgentSegment.ofUserAgent(getValue()));
+      this.segments = Collections.unmodifiableList(GenericNameVersionComment.ofAll(getValue()));
     }
     return this.segments;
-  }
-
-  /**
-   * @return the last {@link UserAgentSegment} (typically the most relevant for {@link #getBrowser() browser} detection)
-   *         or {@code null} if no segments available (very uncommon).
-   */
-  public UserAgentSegment getLastSegment() {
-
-    getSegments();
-    if (this.segments.isEmpty()) {
-      return null;
-    }
-    return this.segments.get(this.segments.size() - 1);
-  }
-
-  /**
-   * @return the first {@link UserAgentSegment#getComment() comment} from the {@link #getSegments() segments} (what
-   *         typically contains the {@link #getOs() OS} information). Will be {@code null} if no
-   *         {@link UserAgentSegment#getComment() comment} is present.
-   */
-  public String getFirstComment() {
-
-    for (UserAgentSegment segment : getSegments()) {
-      String comment = segment.getComment();
-      if (comment != null) {
-        return comment;
-      }
-    }
-    return null;
   }
 
   /**
@@ -292,7 +279,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
   private void detectCrawlerByIndicator(int segmentCount) {
 
     if (segmentCount > 0) {
-      UserAgentSegment segment = this.segments.get(0);
+      GenericNameVersionComment segment = this.segments.get(0);
       if (segment.getName().equals(MOZILLA)) {
         String comment = segment.getComment();
         if ((comment != null) && (comment.startsWith(CRAWLER_INDICATOR))) {
@@ -332,7 +319,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     assert (this.browserVersion == null);
     String userAgent = getValue();
     String userAgentLowerCase = userAgent.toLowerCase(Locale.US);
-    UserAgentSegment osInfo = detectOs(userAgent, userAgentLowerCase);
+    GenericNameVersionComment osInfo = detectOs(userAgent, userAgentLowerCase);
     String systemType = osInfo.getComment();
     String systemArchitecture = detectArchitecture(userAgentLowerCase, systemType);
     detectCrawler(userAgent, userAgentLowerCase);
@@ -341,11 +328,11 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
       if (ieMobileStartIndex > 0) {
         this.browser = BROWSER_INTERNET_EXPLORER_MOBILE;
         String ieMobile = userAgent.substring(ieMobileStartIndex);
-        Matcher matcher = UserAgentSegment.PATTERN_NAME_VERSION.matcher(ieMobile);
-        if (matcher.find()) {
-          this.browserVersion = matcher.group(2);
-        } else {
+        GenericNameVersion ieMobileNameVersion = GenericNameVersion.ofFirst(ieMobile);
+        if (ieMobileNameVersion == null) {
           this.browserVersion = UNKNOWN;
+        } else {
+          this.browserVersion = ieMobileNameVersion.getVersion();
         }
       }
     }
@@ -378,7 +365,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     } else {
       this.browser = BROWSER_CRAWLER;
     }
-    UserAgentSegment crawlerSegment = UserAgentSegment.first(crawlerString);
+    GenericNameVersionComment crawlerSegment = GenericNameVersionComment.ofFirst(crawlerString);
     if (crawlerSegment != null) {
       String name = crawlerSegment.getName();
       if (name.startsWith(this.browser)) {
@@ -388,11 +375,11 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     }
   }
 
-  private UserAgentSegment detectOs(String userAgent, String userAgentLowerCase) {
+  private GenericNameVersionComment detectOs(String userAgent, String userAgentLowerCase) {
 
-    UserAgentSegment osInfo = OS_UNKNOWN;
+    GenericNameVersionComment osInfo = OS_UNKNOWN;
     String osVariant = null;
-    for (UserAgentSegment segment : getSegments()) {
+    for (GenericNameVersionComment segment : getSegments()) {
       String comment = segment.getComment();
       osInfo = detectOsFromComment(osInfo, comment);
       if (osVariant == null) {
@@ -406,7 +393,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
       }
     }
     if (osInfo == OS_UNKNOWN) {
-      Matcher matcher = UserAgentSegment.PATTERN_COMMENT.matcher(userAgent);
+      Matcher matcher = NameVersionComment.COMMENT_PATTERN.matcher(userAgent);
       while (matcher.find()) {
         String comment = matcher.group(1);
         osInfo = detectOsFromComment(osInfo, comment);
@@ -422,11 +409,11 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
 
     int segmentCount = getSegments().size();
     for (int i = segmentCount - 1; i >= 0; i--) {
-      UserAgentSegment segment = this.segments.get(i);
+      GenericNameVersionComment segment = this.segments.get(i);
       String nameLowerCase = segment.getName().toLowerCase(Locale.US);
       String browserName = BROWSERS.get(nameLowerCase);
       if (BROWSER_SAFARI.equals(browserName) && (i > 1)) {
-        UserAgentSegment previousSegment = this.segments.get(i - 1);
+        GenericNameVersionComment previousSegment = this.segments.get(i - 1);
         if (previousSegment.getName().equals(BROWSER_CHROME)) {
           this.browser = BROWSER_CHROME;
           this.browserVersion = previousSegment.getVersion();
@@ -475,9 +462,9 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     return end;
   }
 
-  private UserAgentSegment detectOsFromComment(UserAgentSegment osSegment, String comment) {
+  private GenericNameVersionComment detectOsFromComment(GenericNameVersionComment osSegment, String comment) {
 
-    UserAgentSegment osInfo = osSegment;
+    GenericNameVersionComment osInfo = osSegment;
     if ((comment != null) && (osInfo == OS_UNKNOWN)) {
       String[] tokens = comment.split(";");
       String[] tokensLowerCase = new String[tokens.length];
@@ -496,7 +483,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
       while (tokenIndex < tokens.length) {
         String token = tokens[tokenIndex];
         String tokenLower = tokensLowerCase[tokenIndex];
-        UserAgentSegment newOsInfo = detectOsFromToken(token, tokenLower, osInfo);
+        GenericNameVersionComment newOsInfo = detectOsFromToken(token, tokenLower, osInfo);
         if (newOsInfo != null) {
           if (osInfo == null) {
             osInfo = newOsInfo;
@@ -510,7 +497,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     return osInfo;
   }
 
-  private UserAgentSegment detectOsVariant(String userAgentLowerCase, UserAgentSegment osInfo) {
+  private GenericNameVersionComment detectOsVariant(String userAgentLowerCase, GenericNameVersionComment osInfo) {
 
     for (String variant : LINUX_VARIANTS.keySet()) {
       if (userAgentLowerCase.contains(variant)) {
@@ -521,16 +508,16 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     return osInfo;
   }
 
-  private UserAgentSegment getOsInfoForOsVariant(UserAgentSegment osInfo, String osVariant, String expectedOsType) {
+  private GenericNameVersionComment getOsInfoForOsVariant(GenericNameVersionComment osInfo, String osVariant, String expectedOsType) {
 
     String osType = osInfo.getComment();
     if (!UNKNOWN.equals(osType) && !expectedOsType.equals(osType)) {
       LOG.debug("Changed OS type from {} to {} because variant {} was detected", osType, expectedOsType, osVariant);
     }
-    return new UserAgentSegment(osVariant + " " + osInfo.getName(), osInfo.getVersion(), expectedOsType);
+    return new GenericNameVersionComment(osVariant + " " + osInfo.getName(), osInfo.getVersion(), expectedOsType);
   }
 
-  private UserAgentSegment mergeOsInfo(UserAgentSegment osInfo, UserAgentSegment newOsInfo) {
+  private GenericNameVersionComment mergeOsInfo(GenericNameVersionComment osInfo, GenericNameVersionComment newOsInfo) {
 
     if (osInfo == OS_UNKNOWN) {
       return newOsInfo;
@@ -544,7 +531,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     return osInfo;
   }
 
-  private UserAgentSegment detectOsFromToken(String token, String tokenLower, UserAgentSegment osInfo) {
+  private GenericNameVersionComment detectOsFromToken(String token, String tokenLower, GenericNameVersionComment osInfo) {
 
     int winNtStartIndex = token.indexOf("WinNT");
     if (winNtStartIndex >= 0) {
@@ -555,7 +542,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
       if (versionIndex >= 0) {
         systemVersion = getVersion(fragments[versionIndex]);
       }
-      return new UserAgentSegment("Windows NT", systemVersion, SystemInformation.SYSTEM_TYPE_WINDOWS);
+      return new GenericNameVersionComment("Windows NT", systemVersion, SystemInformation.SYSTEM_TYPE_WINDOWS);
     }
     for (String type : SYSTEM_TYPES.keySet()) {
       int typeStartIndex = tokenLower.indexOf(type);
@@ -581,7 +568,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
             systemName.append(fragments[i]);
           }
         }
-        return new UserAgentSegment(systemName.toString(), systemVersion, systemType);
+        return new GenericNameVersionComment(systemName.toString(), systemVersion, systemType);
       } else if (osInfo != OS_UNKNOWN) {
         String version = getVersion(token);
         if (version != null) {
@@ -623,7 +610,7 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     return null;
   }
 
-  private String getVersion(UserAgentSegment segment) {
+  private String getVersion(GenericNameVersionComment segment) {
 
     String version = getVersion(segment.getVersion());
     if (version != null) {
@@ -653,9 +640,16 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     return UNKNOWN;
   }
 
+  @Override
+  protected AbstractHttpHeader withValue(String value) {
+
+    return ofValue(value);
+  }
+
   /**
-   * @param headerValue the value of the {@link #HEADER_PRAGMA Pragma HTTP header}.
-   * @return the parsed {@link HttpHeaderUserAgent}.
+   * @param headerValue the header {@link #getValues() value}.
+   * @return the parsed {@link HttpHeaderUserAgent} or {@code null} if the given value is {@code null} or
+   *         {@link String#isEmpty() empty}.
    */
   public static HttpHeaderUserAgent ofValue(String headerValue) {
 
@@ -666,17 +660,17 @@ public class HttpHeaderUserAgent extends AbstractSimpleHttpHeader implements Htt
     return new HttpHeaderUserAgent(value);
   }
 
-  static class Factory extends AbstractHttpHeaderFactory {
+  /**
+   * @param headers the {@link HttpHeaders} to get this header from. May be {@code null}.
+   * @return the {@link HttpHeaderUserAgent} form the given {@link HttpHeaders} or {@code null} if not present.
+   */
+  public static HttpHeaderUserAgent get(HttpHeaders headers) {
 
-    Factory() {
-      super(HEADER_USER_AGENT);
+    if (headers == null) {
+      return null;
     }
-
-    @Override
-    AbstractHttpHeader create(String value) {
-
-      return ofValue(value);
-    }
+    HttpHeader header = headers.getHeader(HEADER);
+    return (HttpHeaderUserAgent) header;
   }
 
 }

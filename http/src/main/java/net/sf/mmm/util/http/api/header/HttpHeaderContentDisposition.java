@@ -9,7 +9,7 @@ import java.util.Map;
 import net.sf.mmm.util.lang.api.GenericBean;
 
 /**
- * This class represents the HTTP {@link #HEADER_CONTENT_DISPOSITION Content-Disposition} header according to
+ * This is the {@link #HEADER_CONTENT_DISPOSITION Content-Disposition} {@link HttpHeader} according to
  * <a href="https://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a> (and <a href="https://www.ietf.org/rfc/rfc1806.txt">RFC
  * 1806</a>). It contains the meta-data of an uploaded or downloaded file. See also
  * <a href="http://www.iana.org/assignments/cont-disp/cont-disp.xhtml">Content Disposition Values and Parameters</a>.
@@ -18,6 +18,12 @@ import net.sf.mmm.util.lang.api.GenericBean;
  * @since 8.4.0
  */
 public class HttpHeaderContentDisposition extends AbstractParameterizedHttpHeader implements HttpRequestHeader, HttpResponseHeader {
+
+  /** An empty instance of {@link HttpHeaderUserAgent} that acts as factory. */
+  public static final HttpHeaderContentDisposition FACTORY = new HttpHeaderContentDisposition("", Collections.<String, Object> emptyMap());
+
+  /** The {@link #getName() name} of this {@link HttpHeader}. */
+  public static final String HEADER = HttpHeader.HEADER_CONTENT_DISPOSITION;
 
   /** The name of the {@link #getParameter(String) parameter} containing the {@link #getFilename() filename}. */
   public static final String PARAMETER_FILENAME = "filename";
@@ -108,8 +114,6 @@ public class HttpHeaderContentDisposition extends AbstractParameterizedHttpHeade
   /** The {@link #getType() type} <em>recording-session</em>. */
   public static final String TYPE_RECORDING_SESSION = "recording-session";
 
-  private static final HttpHeaderContentDisposition EMPTY = new HttpHeaderContentDisposition("", Collections.<String, Object> emptyMap());
-
   private final String type;
 
   /**
@@ -154,7 +158,7 @@ public class HttpHeaderContentDisposition extends AbstractParameterizedHttpHeade
   @Override
   public String getName() {
 
-    return HEADER_CONTENT_DISPOSITION;
+    return HEADER;
   }
 
   @Override
@@ -252,9 +256,8 @@ public class HttpHeaderContentDisposition extends AbstractParameterizedHttpHeade
   }
 
   @Override
-  public String getValue() {
+  protected void calculateValueStart(StringBuilder buffer) {
 
-    StringBuilder buffer = new StringBuilder();
     if (this.type != null) {
       buffer.append(this.type);
       if (hasParameters()) {
@@ -262,12 +265,17 @@ public class HttpHeaderContentDisposition extends AbstractParameterizedHttpHeade
         buffer.append(' ');
       }
     }
-    formatParameters(buffer);
-    return buffer.toString();
+    super.calculateValueStart(buffer);
+  }
+
+  @Override
+  protected AbstractHttpHeader withValue(String value) {
+
+    return ofValue(value);
   }
 
   /**
-   * @param headerValue the value of the {@link #HEADER_CONTENT_DISPOSITION Content-Disposition HTTP header}.
+   * @param headerValue the header {@link #getValues() value}.
    * @return the parsed {@link HttpHeaderContentDisposition}.
    */
   public static HttpHeaderContentDisposition ofValue(String headerValue) {
@@ -277,7 +285,7 @@ public class HttpHeaderContentDisposition extends AbstractParameterizedHttpHeade
       return null;
     }
     final GenericBean<String> receiver = new GenericBean<>();
-    Map<String, Object> parameters = EMPTY.parseParameters(value, x -> {
+    Map<String, Object> parameters = FACTORY.parseParameters(value, x -> {
       receiver.setValue(x);
       return null;
     });
@@ -298,17 +306,17 @@ public class HttpHeaderContentDisposition extends AbstractParameterizedHttpHeade
     return new HttpHeaderContentDisposition(type, parameters);
   }
 
-  static class Factory extends AbstractHttpHeaderFactory {
+  /**
+   * @param headers the {@link HttpHeader} to get this header from. May be {@code null}.
+   * @return the {@link HttpHeaderContentDisposition} form the given {@link HttpHeaders} or {@code null} if not present.
+   */
+  public static HttpHeaderContentDisposition get(HttpHeaders headers) {
 
-    Factory() {
-      super(HEADER_CONTENT_DISPOSITION);
+    if (headers == null) {
+      return null;
     }
-
-    @Override
-    AbstractHttpHeader create(String value) {
-
-      return ofValue(value);
-    }
+    HttpHeader header = headers.getHeader(HEADER);
+    return (HttpHeaderContentDisposition) header;
   }
 
 }

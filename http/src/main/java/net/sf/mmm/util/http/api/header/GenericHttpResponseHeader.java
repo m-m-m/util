@@ -11,7 +11,7 @@ import java.util.List;
  * @author hohwille
  * @since 8.4.0
  */
-class GenericHttpResponseHeader extends GenericHttpHeader implements HttpResponseHeader {
+final class GenericHttpResponseHeader extends GenericHttpHeader implements HttpResponseHeader {
 
   static final List<String> HEADERS = Arrays.asList(HttpResponseHeader.HEADER_ACCEPT_RANGES, HttpResponseHeader.HEADER_AGE, HttpResponseHeader.HEADER_ALLOW,
       HttpResponseHeader.HEADER_CONTENT_DESCRIPTION, HttpResponseHeader.HEADER_CONTENT_ENCODING, HttpResponseHeader.HEADER_CONTENT_LANGUAGE,
@@ -44,17 +44,10 @@ class GenericHttpResponseHeader extends GenericHttpHeader implements HttpRespons
     return true;
   }
 
-  static class Factory extends AbstractHttpHeaderFactory {
+  @Override
+  protected AbstractHttpHeader withValue(String value) {
 
-    Factory(String name) {
-      super(name);
-    }
-
-    @Override
-    AbstractHttpHeader create(String value) {
-
-      return new GenericHttpResponseHeader(this.name, value);
-    }
+    return new GenericHttpResponseHeader(getName(), value);
   }
 
 }

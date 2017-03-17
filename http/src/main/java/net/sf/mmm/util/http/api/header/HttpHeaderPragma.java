@@ -18,13 +18,17 @@ import net.sf.mmm.util.lang.api.GenericBean;
  */
 public class HttpHeaderPragma extends AbstractParameterizedHttpHeader implements HttpRequestHeader, HttpResponseHeader {
 
+  /** An empty instance of {@link HttpHeaderUserAgent} that acts as factory. */
+  public static final HttpHeaderPragma FACTORY = new HttpHeaderPragma();
+
+  /** The {@link #getName() name} of this {@link HttpHeader}. */
+  public static final String HEADER = HttpHeader.HEADER_PRAGMA;
+
   /**
    * The value to disable caching (if present in a request message, an application SHOULD forward the request toward the
    * origin server even if it has a cached copy of what is being requested).
    */
   public static final String VALUE_NO_CACHE = "no-cache";
-
-  private static final HttpHeaderPragma NO_CACHE = new HttpHeaderPragma();
 
   private final boolean noCache;
 
@@ -47,7 +51,7 @@ public class HttpHeaderPragma extends AbstractParameterizedHttpHeader implements
   @Override
   public String getName() {
 
-    return HEADER_PRAGMA;
+    return HEADER;
   }
 
   @Override
@@ -71,9 +75,8 @@ public class HttpHeaderPragma extends AbstractParameterizedHttpHeader implements
   }
 
   @Override
-  public String getValue() {
+  protected void calculateValueStart(StringBuilder buffer) {
 
-    StringBuilder buffer = new StringBuilder();
     if (this.noCache) {
       buffer.append(VALUE_NO_CACHE);
       if (hasParameters()) {
@@ -81,12 +84,17 @@ public class HttpHeaderPragma extends AbstractParameterizedHttpHeader implements
         buffer.append(' ');
       }
     }
-    formatParameters(buffer);
-    return buffer.toString();
+    super.calculateValueStart(buffer);
+  }
+
+  @Override
+  protected AbstractHttpHeader withValue(String value) {
+
+    return ofValue(value);
   }
 
   /**
-   * @param headerValue the value of the {@link #HEADER_PRAGMA Pragma HTTP header}.
+   * @param headerValue the header {@link #getValues() value}.
    * @return the parsed {@link HttpHeaderPragma}.
    */
   public static HttpHeaderPragma ofValue(String headerValue) {
@@ -96,7 +104,7 @@ public class HttpHeaderPragma extends AbstractParameterizedHttpHeader implements
       return null;
     }
     final GenericBean<Boolean> receiver = new GenericBean<>();
-    Map<String, Object> parameters = NO_CACHE.parseParameters(value, x -> {
+    Map<String, Object> parameters = FACTORY.parseParameters(value, x -> {
       if (VALUE_NO_CACHE.equals(x)) {
         receiver.setValue(Boolean.TRUE);
         return null;
@@ -109,22 +117,22 @@ public class HttpHeaderPragma extends AbstractParameterizedHttpHeader implements
       return null;
     }
     if (noCache && (parameters == null)) {
-      return NO_CACHE;
+      return FACTORY;
     }
     return new HttpHeaderPragma(noCache, parameters);
   }
 
-  static class Factory extends AbstractHttpHeaderFactory {
+  /**
+   * @param headers the {@link HttpHeader} to get this header from. May be {@code null}.
+   * @return the {@link HttpHeaderPragma} form the given {@link HttpHeaders} or {@code null} if not present.
+   */
+  public static HttpHeaderPragma get(HttpHeaders headers) {
 
-    Factory() {
-      super(HEADER_PRAGMA);
+    if (headers == null) {
+      return null;
     }
-
-    @Override
-    AbstractHttpHeader create(String value) {
-
-      return ofValue(value);
-    }
+    HttpHeader header = headers.getHeader(HEADER);
+    return (HttpHeaderPragma) header;
   }
 
 }
