@@ -167,6 +167,7 @@ public class CaseSyntaxTest extends Assertions {
     verifyCombined("caml.Dot", "my.Variable.Name", VARIANTS);
 
     // edge cases
+    assertThat(CaseSyntax.ofExample("_package", false).convert("mY.PacKagE_Name.With.Some_seGmentS")).isEqualTo("my.package_name.with.some_segments");
     assertThat(CaseSyntax.ofExample("UPPER", false).convert("Ruß")).isEqualTo("RUSS");
     assertThat(CaseSyntax.ofExample("PascalCase", false).convert("ßv")).isEqualTo("Ssv");
     CaseSyntax syntax = CaseSyntax.ofExample("Capitalizedlower", false);
@@ -208,6 +209,7 @@ public class CaseSyntaxTest extends Assertions {
     verifyExampleInvalid("A$B$", dollarCount);
 
     verifyExampleInvalid("a-b.c", ": different word separators '-' and '.'!");
+    verifyExampleInvalid("_ab.c", ": different word separators '\\0' and '.'!");
     verifyExampleInvalid("a--c", ": duplicate word separators '--'!");
 
     verifyExampleInvalid("AbC-d", ": word separator '-' detected but word start was already detected via case change!");
