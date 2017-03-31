@@ -209,7 +209,7 @@ public class CaseSyntaxTest extends Assertions {
     verifyExampleInvalid("A$B$", dollarCount);
 
     verifyExampleInvalid("a-b.c", ": different word separators '-' and '.'!");
-    verifyExampleInvalid("_ab.c", ": different word separators '\\0' and '.'!");
+    verifyExampleInvalid("_ab.c", ": different word separators '\0' (_) and '.'!");
     verifyExampleInvalid("a--c", ": duplicate word separators '--'!");
 
     verifyExampleInvalid("AbC-d", ": word separator '-' detected but word start was already detected via case change!");
