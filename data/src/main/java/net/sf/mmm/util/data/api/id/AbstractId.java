@@ -5,32 +5,24 @@ package net.sf.mmm.util.data.api.id;
 import java.util.Objects;
 import java.util.UUID;
 
+import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
 
 /**
  * This is the abstract base implementation of {@link Id}.
  *
  * @param <E> the generic type of the identified entity.
+ * @param <I> the generic type of the {@link #getId() ID}.
+ * @param <V> the generic type of the {@link #getVersion() Version}.
  *
  * @author hohwille
  * @since 8.4.0
  */
-public abstract class AbstractId<E> implements Id<E> {
+public abstract class AbstractId<E, I, V extends Comparable<?>> implements Id<E> {
 
   private static final long serialVersionUID = 1L;
 
   private final Class<E> type;
-
-  private final long version;
-
-  /**
-   * The constructor.
-   */
-  protected AbstractId() {
-    super();
-    this.type = null;
-    this.version = VERSION_LATEST;
-  }
 
   /**
    * The constructor.
@@ -38,19 +30,8 @@ public abstract class AbstractId<E> implements Id<E> {
    * @param type - see {@link #getType()}.
    */
   public AbstractId(Class<E> type) {
-    this(type, VERSION_LATEST);
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param type - see {@link #getType()}.
-   * @param version - see {@link #getVersion()}.
-   */
-  public AbstractId(Class<E> type, long version) {
     super();
     this.type = type;
-    this.version = version;
   }
 
   @Override
@@ -60,15 +41,25 @@ public abstract class AbstractId<E> implements Id<E> {
   }
 
   @Override
-  public long getVersion() {
-
-    return this.version;
-  }
+  public abstract I getId();
 
   @Override
-  public Id<E> withVersion(long newVersion) {
+  public abstract V getVersion();
 
-    if (this.version == newVersion) {
+  @Override
+  public Id<E> withLatestVersion() {
+
+    return withVersion(null);
+  }
+
+  /**
+   * @param newVersion the new value of {@link #getVersion()}.
+   * @return a copy of this {@link Id} with the given {@link #getVersion() version} or this {@link Id} itself if already
+   *         satisfying.
+   */
+  public Id<E> withVersion(V newVersion) {
+
+    if (getVersion() == newVersion) {
       return this;
     }
     return newId(this.type, newVersion);
@@ -79,7 +70,7 @@ public abstract class AbstractId<E> implements Id<E> {
   public final Id<E> withType(Class<?> newType) {
 
     if (this.type == null) {
-      return (Id) newId(newType, this.version);
+      return (Id) newId(newType, getVersion());
     } else if (this.type != newType) {
       throw new ObjectMismatchException(newType, this.type, this);
     }
@@ -94,7 +85,7 @@ public abstract class AbstractId<E> implements Id<E> {
    * @param newVersion the new {@link #getVersion() version}.
    * @return the new instance of the {@link Id} implementation.
    */
-  protected abstract <T> AbstractId<T> newId(Class<T> newType, long newVersion);
+  protected abstract <T> AbstractId<T, I, V> newId(Class<T> newType, V newVersion);
 
   @Override
   public final int hashCode() {
@@ -111,14 +102,14 @@ public abstract class AbstractId<E> implements Id<E> {
     if ((obj == null) || !(obj instanceof AbstractId)) {
       return false;
     }
-    AbstractId<?> other = (AbstractId<?>) obj;
+    AbstractId<?, ?, ?> other = (AbstractId<?, ?, ?>) obj;
     if (!Objects.equals(getId(), other.getId())) {
       return false;
     }
-    if (!Objects.equals(this.type, other.type)) {
+    if ((this.type != null) && (other.type != null) && !this.type.equals(other.type)) {
       return false;
     }
-    if (this.version != other.version) {
+    if (!Objects.equals(getVersion(), other.getVersion())) {
       return false;
     }
     return true;
@@ -140,9 +131,92 @@ public abstract class AbstractId<E> implements Id<E> {
   protected void toString(StringBuilder buffer) {
 
     buffer.append(getId());
-    if (this.version != VERSION_LATEST) {
+    V version = getVersion();
+    if (version != null) {
       buffer.append(VERSION_SEPARATOR);
-      buffer.append(this.version);
+      buffer.append(version);
+    }
+  }
+
+  /**
+   * @param <E> the type of the identified entity.
+   * @param id the existing {@link Id} or {@code null}.
+   * @param type the {@link #getType() type} to {@link #withType(Class) ensure}.
+   * @return the result of <code>id.{@link Id#withType(Class) withType}(type)</code> or {@code null} if the given
+   *         {@link Id} is {@code null}.
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  public static <E> Id<E> getWithType(Id<?> id, Class<E> type) {
+
+    if (id == null) {
+      return null;
+    }
+    return (Id) id.withType(type);
+  }
+
+  /**
+   * @param <I> the generic type expected for {@link Id#getId()}.
+   * @param id the actual {@link Id} instance.
+   * @param type the {@link Class} reflecting the expected type of {@link Id#getId()}.
+   * @return the {@link #getId() primary key} of the given {@link Id}. May be {@code null} if the given {@link Id} is
+   *         {@code null}.
+   * @throws IllegalArgumentException if the given {@code type} does not match.
+   */
+  @SuppressWarnings("unchecked")
+  public static <I> I getIdAs(Id<?> id, Class<I> type) throws IllegalArgumentException {
+
+    return getAs(id, type, PROPERTY_ID);
+  }
+
+  /**
+   * @param <V> the generic type expected for {@link Id#getVersion()}.
+   * @param id the actual {@link Id} instance.
+   * @param type the {@link Class} reflecting the expected type of {@link Id#getVersion()}.
+   * @return the {@link #getVersion() version} of the given {@link Id}. May be {@code null} if the given {@link Id}
+   *         itself or its {@link #getVersion() version} is {@code null}.
+   * @throws IllegalArgumentException if the given {@code type} does not match.
+   */
+  public static <V> V getVersionAs(Id<?> id, Class<V> type) throws IllegalArgumentException {
+
+    return getAs(id, type, PROPERTY_VERSION);
+  }
+
+  /**
+   * @param id the actual {@link Id} instance.
+   * @return the {@link #getVersion() version} of the given {@link Id}. May be {@code null} if the given {@link Id}
+   *         itself or its {@link #getVersion() version} is {@code null}.
+   * @throws IllegalArgumentException if the given {@code type} does not match.
+   */
+  public static long getVersionAsLong(Id<?> id) throws IllegalArgumentException {
+
+    Long version = getVersionAs(id, Long.class);
+    if (version == null) {
+      return 0;
+    }
+    return version.longValue();
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <V> V getAs(Id<?> id, Class<V> type, String property) throws IllegalArgumentException {
+
+    if (id == null) {
+      return null;
+    }
+    Object value;
+    if (PROPERTY_ID.equals(property)) {
+      value = id.getId();
+    } else if (PROPERTY_VERSION.equals(property)) {
+      value = id.getVersion();
+    } else {
+      throw new IllegalCaseException(property);
+    }
+    if (value == null) {
+      return null;
+    } else if (type.isInstance(value)) {
+      return (V) value;
+    } else {
+      throw new IllegalArgumentException("Expected type " + type.getSimpleName() + " for property " + property + " but found " + value + " of type "
+          + value.getClass().getSimpleName() + " from ID " + id + " of type " + id.getClass().getSimpleName());
     }
   }
 

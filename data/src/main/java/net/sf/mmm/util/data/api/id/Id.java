@@ -3,6 +3,9 @@
 package net.sf.mmm.util.data.api.id;
 
 import net.sf.mmm.util.data.api.entity.Entity;
+import net.sf.mmm.util.data.base.id.LongVersionId;
+import net.sf.mmm.util.data.base.id.StringVersionId;
+import net.sf.mmm.util.data.base.id.UuidVersionId;
 import net.sf.mmm.util.lang.api.Datatype;
 
 /**
@@ -41,15 +44,15 @@ public interface Id<E> extends Datatype {
    * {@link Entity} you will use this value to point to the recent version of the
    * {@link net.sf.mmm.util.data.api.entity.Entity}.
    */
-  long VERSION_LATEST = -1;
+  Comparable<?> VERSION_LATEST = null;
 
   /** The separator for the {@link #getVersion() version}. */
   char VERSION_SEPARATOR = '@';
 
   /**
-   * @see LongId
-   * @see UuidId
-   * @see StringId
+   * @see LongVersionId
+   * @see UuidVersionId
+   * @see StringVersionId
    *
    * @return the <em>primary key</em> of the identified {@link Entity} as {@link Object} value. It is only unique for a
    *         particular {@link #getType() type} of an <em>entity</em>.
@@ -75,33 +78,24 @@ public interface Id<E> extends Datatype {
    *         {@link Id} as regular <em>foreign key</em> (pointing to the latest revision and not a historic revision) or
    *         this {@link Id} itself if already satisfying.
    */
-  default Id<E> withLatestVersion() {
-
-    return withVersion(VERSION_LATEST);
-  }
-
-  /**
-   * @param version the new value pf {@link #getVersion()}.
-   * @return a copy of this {@link Id} with the given {@link #getVersion() version} or this {@link Id} itself if already
-   *         satisfying.
-   */
-  Id<E> withVersion(long version);
+  Id<E> withLatestVersion();
 
   /**
    * @return the {@code version} of this entity. Whenever the {@link net.sf.mmm.util.data.api.entity.Entity} gets
-   *         updated (a modification is saved and the transaction is committed), this counter is increased. The initial
-   *         value of a new {@link net.sf.mmm.util.data.api.entity.Entity} is {@code 0}. The version acts as a
-   *         modification counter for optimistic locking. On each update it will be verified that the version has not
-   *         been increased already by another transaction. When linking an
-   *         {@link net.sf.mmm.util.data.api.entity.Entity} ({@link Id} used as foreign key) the version can act as
-   *         revision for auditing. If it is {@link #VERSION_LATEST} it points to the latest revision of the
-   *         {@link net.sf.mmm.util.data.api.entity.Entity}. Otherwise it points to a specific historic revision of the
-   *         {@link net.sf.mmm.util.data.api.entity.Entity}. Depending on the database technology (e.g. when using
-   *         hibernate envers) the version and the revision can be semantically different. In such case a
-   *         {@link net.sf.mmm.util.data.api.entity.Entity#getId() primary key} can not directly be used as revisioned
-   *         foreign key {@link Id}.
+   *         updated (a modification is saved and the transaction is committed), this version is increased. Typically
+   *         the version is a {@link Number} starting with {@code 0} for a new
+   *         {@link net.sf.mmm.util.data.api.entity.Entity} that is increased whenever a modification is committed.
+   *         However, it may also be an {@link java.time.Instant}. The version acts as a modification sequence for
+   *         optimistic locking. On each update it will be verified that the version has not been increased already by
+   *         another transaction. When linking an {@link net.sf.mmm.util.data.api.entity.Entity} ({@link Id} used as
+   *         foreign key) the version can act as revision for auditing. If it is {@link #VERSION_LATEST} ({@code null})
+   *         it points to the latest revision of the {@link net.sf.mmm.util.data.api.entity.Entity}. Otherwise it points
+   *         to a specific historic revision of the {@link net.sf.mmm.util.data.api.entity.Entity}. Depending on the
+   *         database technology (e.g. when using hibernate envers) the version and the revision can be semantically
+   *         different. In such case a {@link net.sf.mmm.util.data.api.entity.Entity#getId() primary key} can not be
+   *         converted 1:1 as revisioned foreign key {@link Id}.
    */
-  long getVersion();
+  Comparable<?> getVersion();
 
   /**
    * @return the {@link String} representation of this {@link Id}. Will consist of {@link #getId() object-id},
