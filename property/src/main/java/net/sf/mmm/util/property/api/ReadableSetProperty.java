@@ -17,7 +17,7 @@ import net.sf.mmm.util.property.api.util.ReadableCollectionProperty;
  * @param <E> the generic type of the {@link ObservableSet#contains(Object) elements} of the {@link ObservableSet}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface ReadableSetProperty<E>
     extends ReadableCollectionProperty<E, ObservableSet<E>>, ObservableSetValue<E> {

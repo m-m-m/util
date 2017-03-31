@@ -14,7 +14,7 @@ import net.sf.mmm.util.value.api.Range;
  * @param <V> the generic type of the value to check by the {@link Expression} to build.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract interface AbstractNumberArgument<V extends Number & Comparable<?>>
     extends AbstractComparableArgument<V>, NumberArgument<V> {

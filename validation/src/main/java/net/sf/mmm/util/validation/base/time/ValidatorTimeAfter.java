@@ -17,7 +17,7 @@ import net.sf.mmm.util.validation.base.AbstractValueValidator;
  * @param <V> is the generic type of the value to {@link #validate(Object) validate}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class ValidatorTimeAfter<V> extends AbstractValueValidator<V> {
 

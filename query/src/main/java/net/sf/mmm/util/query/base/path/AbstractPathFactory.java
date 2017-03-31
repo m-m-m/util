@@ -25,7 +25,7 @@ import net.sf.mmm.util.query.api.path.StringPath;
  * This is the abstract base implementation of {@link PathFactory}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractPathFactory implements PathFactory {
 

@@ -8,7 +8,7 @@ import java.time.Instant;
  * Implementation of {@link ValidatorTimePast} for {@link Instant}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class ValidatorInstantPast extends ValidatorTimePast<Instant> {
 

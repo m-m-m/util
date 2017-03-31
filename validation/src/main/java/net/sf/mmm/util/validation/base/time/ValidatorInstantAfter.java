@@ -10,7 +10,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * Implementation of {@link ValidatorTimeAfter} for {@link Instant}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class ValidatorInstantAfter extends ValidatorTimeAfter<Instant> {
 

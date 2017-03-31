@@ -13,7 +13,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * Extends {@link LongProperty} to store a {@link Duration} in seconds.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class DurationInSecondsProperty extends LongProperty {
 

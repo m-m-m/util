@@ -13,7 +13,7 @@ import net.sf.mmm.util.version.api.NameVersion;
  * This is the implementation of {@link SsdpResponse}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class SsdpResponseImpl extends AbstractHttpResponse implements SsdpResponse {
 

@@ -12,7 +12,7 @@ import net.sf.mmm.util.http.api.header.AbstractHttpHeaders;
  * This is the abstract base implementation of {@link HttpRequest}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractHttpRequest extends AbstractHttpMessage implements HttpRequest {
 

@@ -8,7 +8,7 @@ import net.sf.mmm.util.query.api.argument.BooleanArgument;
  * This is the interface for a {@link Path} that is a {@link BooleanArgument}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface BooleanPath extends ComparablePath<Boolean>, BooleanArgument {
 

@@ -14,7 +14,7 @@ import net.sf.mmm.util.data.api.id.Id;
  * @param <I> the generic type of the {@link #getId() ID}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractInstantId<E, I> extends AbstractId<E, I, Instant> {
 

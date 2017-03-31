@@ -10,7 +10,7 @@ import net.sf.mmm.util.version.api.NameVersion;
  * {@link SsdpRequest}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface SsdpResponse extends HttpResponse, SsdpMessage {
 

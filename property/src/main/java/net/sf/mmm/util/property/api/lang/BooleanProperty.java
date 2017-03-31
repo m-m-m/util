@@ -18,7 +18,7 @@ import net.sf.mmm.util.validation.base.ValidatorBuilderBoolean;
  * This is the implementation of {@link BooleanProperty}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class BooleanProperty extends AbstractRegularProperty<Boolean> implements WritableBooleanProperty {
 

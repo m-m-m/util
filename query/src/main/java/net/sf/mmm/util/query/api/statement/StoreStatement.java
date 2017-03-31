@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.api.feature.FeatureSet;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface StoreStatement<E, SELF extends StoreStatement<E, SELF>>
     extends ModifyStatement<E, SELF>, FeatureSet<SELF> {

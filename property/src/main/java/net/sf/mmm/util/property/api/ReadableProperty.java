@@ -14,7 +14,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * @param <V> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface ReadableProperty<V> extends ReadOnlyProperty<V>, PropertyPath<V>, JsonSupport {
 

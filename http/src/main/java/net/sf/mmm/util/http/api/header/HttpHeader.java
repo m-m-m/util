@@ -11,7 +11,7 @@ import net.sf.mmm.util.lang.api.StringWritable;
  * This is the interface for a header of <a href="https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface HttpHeader extends StringWritable {
 

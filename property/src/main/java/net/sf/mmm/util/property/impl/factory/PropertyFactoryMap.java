@@ -22,7 +22,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 @Named
 @SuppressWarnings({ "unchecked", "rawtypes" })

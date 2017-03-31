@@ -12,7 +12,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadName;
  * @param <E> the generic type of the {@link #getPrototype() prototype}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface PathRoot<E> extends PathFactory, AttributeReadName {
 

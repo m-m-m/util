@@ -9,7 +9,7 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * This is the interface for a generic {@link PojoBeanMapper}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 @ComponentSpecification
 public interface GenericPojoBeanMapper extends PojoBeanMapper<Object, Bean> {

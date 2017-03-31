@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
  * This is the abstract base implementation for a dynamic {@link BooleanBinding}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractBooleanBinding extends BooleanBinding {
 

@@ -20,7 +20,7 @@ import net.sf.mmm.util.query.base.statement.AbstractSelectStatement;
  * @param <T> the generic type of the internal {@link ListQuery} results.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class SingleQueryImpl<R, T> extends QueryImpl<R, R, T> implements SingleQuery<R> {
 

@@ -16,7 +16,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  * {@link javax.servlet.http.HttpServletResponse response}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 class HttpHeadersImpl extends AbstractHttpHeaders {
 

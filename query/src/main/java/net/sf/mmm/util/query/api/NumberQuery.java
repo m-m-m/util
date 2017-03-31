@@ -8,7 +8,7 @@ package net.sf.mmm.util.query.api;
  * @param <E> the generic type of the {@link #execute() result}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface NumberQuery<E extends Number & Comparable<?>> extends Query<E> {
 

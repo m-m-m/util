@@ -13,7 +13,7 @@ import net.sf.mmm.util.property.api.lang.GenericProperty;
  * {@link GenericProperty#bind(javafx.beans.value.ObservableValue) binding}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 class BindingInvalidationListener implements InvalidationListener {
 

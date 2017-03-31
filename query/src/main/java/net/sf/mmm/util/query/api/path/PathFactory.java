@@ -17,7 +17,7 @@ import net.sf.mmm.util.property.api.util.ReadableMapProperty;
  * and its sub-types. An instance of {@link PathFactory} is either a {@link Path} itself or a {@link PathRoot}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract interface PathFactory {
 

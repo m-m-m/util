@@ -6,7 +6,7 @@ package net.sf.mmm.util.http.api.header;
  * This is a generic implementation of {@link HttpHeader}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 abstract class GenericHttpHeader extends AbstractHttpHeader {
 

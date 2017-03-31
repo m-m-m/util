@@ -6,7 +6,7 @@ package net.sf.mmm.util.http.api.header;
  * {@link HttpHeader} of an {@link javax.servlet.http.HttpServletResponse HTTP-response}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface HttpResponseHeader extends HttpHeader {
 

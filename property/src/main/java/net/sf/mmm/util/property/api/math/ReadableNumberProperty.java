@@ -22,7 +22,7 @@ import net.sf.mmm.util.property.api.ReadableProperty;
  * @param <N> is the generic type of the internal numeric {@link #getValue() value} representation.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface ReadableNumberProperty<N extends Number> extends ReadableProperty<Number>, NumberExpression {
 

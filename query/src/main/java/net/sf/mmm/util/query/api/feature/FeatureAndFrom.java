@@ -12,7 +12,7 @@ import net.sf.mmm.util.query.api.path.EntityAlias;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract interface FeatureAndFrom<SELF extends FeatureAndFrom<SELF>> extends StatementFeature {
 

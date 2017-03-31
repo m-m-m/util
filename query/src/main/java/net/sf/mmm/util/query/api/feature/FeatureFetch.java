@@ -19,7 +19,7 @@ import net.sf.mmm.util.query.api.SingleQuery;
  * @param <E> the generic type of the entity to fetch.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract interface FeatureFetch<E> extends StatementFeature {
 

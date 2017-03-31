@@ -9,7 +9,7 @@ package net.sf.mmm.util.query.api.statement;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface InsertStatement<E, SELF extends InsertStatement<E, SELF>> extends StoreStatement<E, SELF> {
 

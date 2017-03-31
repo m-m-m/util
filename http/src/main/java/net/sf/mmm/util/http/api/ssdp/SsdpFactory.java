@@ -11,7 +11,7 @@ import net.sf.mmm.util.http.api.upnp.UpnpVersion;
  * TODO: this class ...
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 class SsdpFactory implements Ssdp {
 

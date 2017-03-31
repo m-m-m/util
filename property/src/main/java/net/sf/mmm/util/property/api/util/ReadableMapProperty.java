@@ -19,7 +19,7 @@ import net.sf.mmm.util.property.api.ReadableProperty;
  * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface ReadableMapProperty<K, V>
     extends ReadableContainerProperty<ObservableMap<K, V>>, ObservableMapValue<K, V> {

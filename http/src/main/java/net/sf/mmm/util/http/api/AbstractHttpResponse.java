@@ -11,7 +11,7 @@ import net.sf.mmm.util.http.api.header.AbstractHttpHeaders;
  * This class represents an HTTP response message.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractHttpResponse extends AbstractHttpMessage implements HttpResponse {
 

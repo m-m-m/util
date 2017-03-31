@@ -13,7 +13,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * This is the interface for the manager where all {@link PropertyFactory} variants are registered.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 @ComponentSpecification
 public interface PropertyFactoryManager {

@@ -19,7 +19,7 @@ import net.sf.mmm.util.property.api.ReadableProperty;
  * @param <E> the generic type of the {@link List#get(int) elements} of the {@link List}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface ReadableListProperty<E>
     extends ReadableCollectionProperty<E, ObservableList<E>>, ObservableListValue<E> {

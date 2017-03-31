@@ -19,7 +19,7 @@ import net.sf.mmm.util.validation.base.AbstractValidator;
  * This is the interface for all generic operations on a {@link Bean}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface BeanAccess extends JsonSupport {
 

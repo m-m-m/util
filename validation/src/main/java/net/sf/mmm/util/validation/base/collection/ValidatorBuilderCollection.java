@@ -15,7 +15,7 @@ import net.sf.mmm.util.value.api.Range;
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class ValidatorBuilderCollection<E, PARENT> extends AbstractCollectionValidatorBuilder<E, Collection<E>, PARENT, ValidatorBuilderCollection<E, PARENT>> {
 

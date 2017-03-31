@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.base.statement.AbstractSelectStatement;
  * @param <T> the generic type of the {@link AbstractSelectStatement#execute(String, QueryMode) internal results}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class QueryImpl<R, E, T> implements Query<R> {
 

@@ -16,7 +16,7 @@ import net.sf.mmm.util.value.api.Range;
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class ValidatorBuilderMap<K, V, PARENT> extends AbstractMapValidatorBuilder<K, V, Map<K, V>, PARENT, ValidatorBuilderMap<K, V, PARENT>> {
 

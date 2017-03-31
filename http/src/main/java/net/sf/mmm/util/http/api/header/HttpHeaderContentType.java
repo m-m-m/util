@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.GenericBean;
  * well as <a href="https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html">RFC 1341, section 7.2</a>.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class HttpHeaderContentType extends AbstractParameterizedHttpHeader implements HttpRequestHeader, HttpResponseHeader {
 

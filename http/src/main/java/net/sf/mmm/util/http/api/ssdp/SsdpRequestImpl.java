@@ -14,7 +14,7 @@ import net.sf.mmm.util.version.api.NameVersion;
  * This is the implementation of {@link SsdpRequest}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 class SsdpRequestImpl extends AbstractHttpRequest implements SsdpRequest {
 

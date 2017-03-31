@@ -9,7 +9,7 @@ import net.sf.mmm.util.lang.api.StringWritable;
  * This is the interface for an entity as optional part of an {@link HttpMessage} (body).
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface HttpEntity extends StringWritable {
 

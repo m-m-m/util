@@ -22,7 +22,7 @@ import net.sf.mmm.util.validation.base.time.ValidatorLocalDateTimePast;
  * Implementation of {@link ConstraintProcessor} for {@link ValidatorDatePast} based on constraint {@link Past}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 @Named
 public class ConstraintProcessorPast implements TypedConstraintProcessor<Past> {

@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.api.argument.MapArgument;
  * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface MapPath<K, V> extends Path<Map<K, V>>, MapArgument<K, V> {
 

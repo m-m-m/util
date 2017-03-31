@@ -15,7 +15,7 @@ import net.sf.mmm.util.lang.api.GenericBean;
  * <a href="http://www.iana.org/assignments/cont-disp/cont-disp.xhtml">Content Disposition Values and Parameters</a>.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class HttpHeaderContentDisposition extends AbstractParameterizedHttpHeader implements HttpRequestHeader, HttpResponseHeader {
 

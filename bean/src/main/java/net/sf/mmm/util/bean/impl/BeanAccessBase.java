@@ -34,7 +34,7 @@ import net.sf.mmm.util.property.api.util.MapProperty;
  * @param <BEAN> the generic type of the intercepted {@link #getBean() bean}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class BeanAccessBase<BEAN extends Bean> extends AbstractJsonSupport implements InvocationHandler, BeanAccess, Iterable<WritableProperty<?>> {
 

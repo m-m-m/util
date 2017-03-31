@@ -14,7 +14,7 @@ import net.sf.mmm.util.version.base.GenericNameVersion;
  * TODO: this class ...
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public final class HttpHeaderServerHelper {
 

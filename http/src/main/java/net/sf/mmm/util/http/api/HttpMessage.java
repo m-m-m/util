@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.StringWritable;
  * server or a {@link HttpResponse} sent back from the server to the client.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface HttpMessage extends StringWritable {
 

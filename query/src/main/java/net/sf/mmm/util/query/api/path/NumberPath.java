@@ -10,7 +10,7 @@ import net.sf.mmm.util.query.api.argument.NumberArgument;
  * @param <V> the generic type of the property value identified by this path.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface NumberPath<V extends Number & Comparable<?>> extends ComparablePath<V>, NumberArgument<V> {
 

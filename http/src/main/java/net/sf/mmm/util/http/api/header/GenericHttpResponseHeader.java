@@ -9,7 +9,7 @@ import java.util.List;
  * This is the generic implementation of both {@link HttpRequestHeader} and {@link HttpResponseHeader}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 final class GenericHttpResponseHeader extends GenericHttpHeader implements HttpResponseHeader {
 

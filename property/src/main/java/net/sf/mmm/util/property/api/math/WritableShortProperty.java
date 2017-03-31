@@ -7,7 +7,7 @@ package net.sf.mmm.util.property.api.math;
  * {@link Short}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface WritableShortProperty extends ReadableShortProperty, WritableNumberProperty<Short> {
 

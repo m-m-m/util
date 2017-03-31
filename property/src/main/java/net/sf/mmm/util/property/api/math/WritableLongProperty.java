@@ -9,7 +9,7 @@ import javafx.beans.value.WritableLongValue;
  * {@link Long}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface WritableLongProperty
     extends ReadableLongProperty, WritableNumberProperty<Long>, WritableLongValue {

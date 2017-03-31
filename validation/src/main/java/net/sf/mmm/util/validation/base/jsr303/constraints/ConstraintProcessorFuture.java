@@ -22,7 +22,7 @@ import net.sf.mmm.util.validation.base.time.ValidatorLocalDateTimeFuture;
  * Implementation of {@link ConstraintProcessor} for {@link ValidatorDateFuture} based on constraint {@link Future}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 @Named
 public class ConstraintProcessorFuture implements TypedConstraintProcessor<Future> {

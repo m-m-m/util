@@ -11,7 +11,7 @@ import net.sf.mmm.util.query.base.argument.AbstractStringArgument;
  * This is the implementation of {@link StringPath}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class StringPathImpl extends PathImpl<String> implements StringPath, AbstractStringArgument {
 

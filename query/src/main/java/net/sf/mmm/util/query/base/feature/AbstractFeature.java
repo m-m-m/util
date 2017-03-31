@@ -21,7 +21,7 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * This is the abstract base implementation of {@link StatementFeature}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractFeature implements StatementFeature, Comparable<AbstractFeature> {
 

@@ -12,7 +12,7 @@ import net.sf.mmm.util.property.api.WritableProperty;
  * Operation for {@link Bean#equals(Object)}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class BeanPrototypeOperationEquals extends BeanPrototypeOperation {
 

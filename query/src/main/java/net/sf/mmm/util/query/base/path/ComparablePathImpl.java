@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.base.argument.AbstractComparableArgument;
  * @param <V> the generic type of the property value identified by this path.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class ComparablePathImpl<V extends Comparable<?>> extends PathImpl<V>
     implements ComparablePath<V>, AbstractComparableArgument<V> {

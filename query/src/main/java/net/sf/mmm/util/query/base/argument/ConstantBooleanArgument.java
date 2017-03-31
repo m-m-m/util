@@ -8,7 +8,7 @@ import net.sf.mmm.util.query.api.argument.BooleanArgument;
  * This is the {@link #isConstant() constant} implementation of {@link BooleanArgument}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class ConstantBooleanArgument extends ConstantComparableArgument<Boolean>
     implements AbstractBooleanArgument {

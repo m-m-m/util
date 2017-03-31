@@ -6,7 +6,7 @@ package net.sf.mmm.util.query.base.statement;
  * The default implementation of {@link SqlDialect}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class DefaultSqlDialect implements SqlDialect {
 

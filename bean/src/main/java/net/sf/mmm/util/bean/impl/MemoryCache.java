@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * A simple cache implementation that is thread-safe and uses {@link WeakReference}s to avoid memory leaks.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 class MemoryCache<K, V> {
 

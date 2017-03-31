@@ -15,7 +15,7 @@ import net.sf.mmm.util.validation.base.number.ValidatorBuilderFloat;
  * This is the implementation of {@link WritableFloatProperty}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class FloatProperty extends NumberProperty<Float> implements WritableFloatProperty {
 

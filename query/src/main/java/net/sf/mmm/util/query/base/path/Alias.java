@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.api.path.EntityAlias;
  * @param <E> the generic type of the {@link #getEntityType() type} of this {@link Alias}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class Alias<E> extends AbstractPathRoot<E> implements EntityAlias<E> {
 

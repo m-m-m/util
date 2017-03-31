@@ -14,7 +14,7 @@ import net.sf.mmm.util.data.api.link.Link;
  * @param <E> the generic type of the {@link #getTarget() linked} {@link Entity}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractLink<E extends Entity> implements Link<E> {
 

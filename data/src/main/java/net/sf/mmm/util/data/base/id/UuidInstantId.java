@@ -24,7 +24,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadUuid;
  * @param <E> the generic type of the identified entity.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class UuidInstantId<E> extends AbstractInstantId<E, UUID> implements AttributeReadId<UUID>, AttributeReadUuid {
 

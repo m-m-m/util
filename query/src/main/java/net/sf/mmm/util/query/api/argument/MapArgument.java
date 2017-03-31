@@ -14,7 +14,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * @param <V> the generic type of the {@link java.util.Map.Entry#getValue() values}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface MapArgument<K, V> extends Argument<Map<K, V>> {
 

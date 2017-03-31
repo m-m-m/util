@@ -8,7 +8,7 @@ import net.sf.mmm.util.query.api.argument.StringArgument;
  * This is the interface for a {@link Path} that is a {@link StringArgument}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface StringPath extends ComparablePath<String>, StringArgument {
 

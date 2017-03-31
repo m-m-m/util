@@ -30,7 +30,7 @@ import net.sf.mmm.util.http.api.AbstractHttpObject;
  * This is the abstract base implementation of {@link HttpHeader}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractHttpHeader extends AbstractHttpObject implements HttpHeader {
 

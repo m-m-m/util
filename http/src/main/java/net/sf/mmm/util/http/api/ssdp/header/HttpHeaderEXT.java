@@ -13,7 +13,7 @@ import net.sf.mmm.util.http.api.header.HttpRequestHeader;
  * TODO: this class ...
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class HttpHeaderEXT extends AbstractHttpHeader implements HttpRequestHeader {
 

@@ -18,7 +18,7 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  * The abstract base implementation of {@link HttpMessage}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractHttpMessage extends AbstractHttpObject implements HttpMessage {
 

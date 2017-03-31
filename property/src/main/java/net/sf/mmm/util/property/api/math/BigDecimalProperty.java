@@ -18,7 +18,7 @@ import net.sf.mmm.util.validation.base.number.ValidatorBuilderBigDecimal;
  * This is the implementation of {@link WritableDoubleProperty}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class BigDecimalProperty extends NumberProperty<BigDecimal> {
 

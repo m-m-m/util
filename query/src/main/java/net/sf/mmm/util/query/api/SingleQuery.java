@@ -11,7 +11,7 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
  * @see #executeRequired()
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface SingleQuery<E> extends Query<E> {
 

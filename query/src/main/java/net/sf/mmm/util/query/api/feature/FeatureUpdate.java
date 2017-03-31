@@ -10,7 +10,7 @@ import net.sf.mmm.util.query.api.statement.UpdateStatement;
  * {@link UpdateStatement}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract interface FeatureUpdate extends StatementFactoryFeature {
 

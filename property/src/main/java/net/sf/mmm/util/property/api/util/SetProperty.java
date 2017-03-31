@@ -32,7 +32,7 @@ import net.sf.mmm.util.validation.base.collection.ValidatorBuilderCollection;
  * @param <E> the generic type of the {@link ObservableSet#contains(Object) elements} of the {@link ObservableSet}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 @SuppressWarnings("restriction")
 public class SetProperty<E> extends AbstractContainerProperty<ObservableSet<E>> implements WritableSetProperty<E> {

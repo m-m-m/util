@@ -17,7 +17,7 @@ import net.sf.mmm.util.query.api.expression.ExpressionFormatter;
  * Implementation of {@link Expression} for logical {@link Conjunction} of a list of {@link Expression}s.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class ConjunctionExpression implements Expression {
 

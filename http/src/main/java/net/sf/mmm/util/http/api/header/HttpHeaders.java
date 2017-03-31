@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.StringWritable;
  * @see net.sf.mmm.util.http.api.HttpMessage#getHeaders()
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface HttpHeaders extends StringWritable {
 

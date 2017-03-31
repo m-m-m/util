@@ -11,7 +11,7 @@ import net.sf.mmm.util.query.base.argument.AbstractBooleanArgument;
  * This is the implementation of {@link BooleanPath}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class BooleanPathImpl extends PathImpl<Boolean> implements BooleanPath, AbstractBooleanArgument {
 

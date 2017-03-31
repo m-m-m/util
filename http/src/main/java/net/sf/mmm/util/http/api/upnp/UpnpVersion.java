@@ -10,7 +10,7 @@ import net.sf.mmm.util.version.base.AbstractNameVersion;
  * <a href="http://upnp.org/specs/">UPnP (Universal Plug and Play)</a>.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class UpnpVersion extends AbstractNameVersion {
 

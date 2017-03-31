@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
  * @param <E> the generic type of the {@link #get(int) elements} of this list.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public final class ImmutableObservableList<E> extends AbstractList<E> implements ObservableList<E> {
 

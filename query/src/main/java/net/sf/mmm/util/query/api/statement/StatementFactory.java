@@ -10,7 +10,7 @@ import net.sf.mmm.util.query.api.feature.FeatureUpdate;
  * This is the interface for the factory used to create SQL {@link Statement}s using a type-safe and fluent builder API.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface StatementFactory extends FeatureSelect, FeatureUpdate, FeatureDelete {
 

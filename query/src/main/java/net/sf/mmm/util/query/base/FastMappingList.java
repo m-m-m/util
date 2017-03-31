@@ -10,7 +10,7 @@ import java.util.function.Function;
  * original adapted list does not change (neither the {@link List#size() size} nor its {@link List#get(int) elements}).
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 class FastMappingList<S, E> extends MappingList<S, E> {
 

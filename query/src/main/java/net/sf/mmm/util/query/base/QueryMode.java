@@ -6,7 +6,7 @@ package net.sf.mmm.util.query.base;
  * This is the {@link Enum} for the available modes of a {@link net.sf.mmm.util.query.api.Query}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public enum QueryMode {
 

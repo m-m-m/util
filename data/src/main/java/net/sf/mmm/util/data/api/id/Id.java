@@ -29,7 +29,7 @@ import net.sf.mmm.util.lang.api.Datatype;
  *
  * @see AbstractId
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface Id<E> extends Datatype {
 

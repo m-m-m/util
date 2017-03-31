@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.Conjunction;
  * @see net.sf.mmm.util.query.base.expression.Expressions
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface Expression {
 

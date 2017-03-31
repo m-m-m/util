@@ -18,7 +18,7 @@ import net.sf.mmm.util.validation.base.time.ValidatorBuilderLocalDate;
  * This is the implementation of {@link WritableLocalDateProperty}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class LocalDateProperty extends AbstractRegularProperty<LocalDate> implements WritableLocalDateProperty {
 

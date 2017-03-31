@@ -8,7 +8,7 @@ import net.sf.mmm.util.query.api.expression.Expression;
  * Extends {@link Argument} to build an {@link Expression} of {@link String} value(s).
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface StringArgument extends Argument<String> {
 

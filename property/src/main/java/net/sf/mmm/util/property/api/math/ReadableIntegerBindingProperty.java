@@ -14,7 +14,7 @@ import javafx.beans.binding.LongBinding;
  * @param <N> is the generic type of the internal numeric {@link #getValue() value} representation.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract interface ReadableIntegerBindingProperty<N extends Number> extends ReadableNumberProperty<N> {
 

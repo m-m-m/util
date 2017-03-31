@@ -15,7 +15,7 @@ import net.sf.mmm.util.query.base.argument.AbstractSetArgument;
  * @param <E> the generic type of the {@link Set}-{@link Set#contains(Object) elements}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class SetPathImpl<E> extends CollectionPathImpl<Set<E>, E> implements SetPath<E>, AbstractSetArgument<E> {
 

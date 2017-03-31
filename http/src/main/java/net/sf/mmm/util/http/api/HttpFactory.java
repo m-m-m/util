@@ -11,7 +11,7 @@ import java.util.Map;
  * Factory used to create instances of {@link HttpRequest} and {@link HttpResponse}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 class HttpFactory implements Http {
 

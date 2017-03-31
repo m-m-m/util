@@ -7,7 +7,7 @@ package net.sf.mmm.util.query.api;
  * It is either a {@link Query} or a {@link net.sf.mmm.util.query.api.statement.Statement}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract interface Command {
 

@@ -30,7 +30,7 @@ import net.sf.mmm.util.reflect.api.GenericType;
  * This is the implementation of {@link net.sf.mmm.util.bean.impl.mapping.GenericPojoBeanMapperImpl}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class GenericPojoBeanMapperImpl extends AbstractPojoBeanMapper<Object, Bean>
     implements GenericPojoBeanMapper {

@@ -17,7 +17,7 @@ import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
  * This is the implementation of {@link WritableStringProperty}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class StringProperty extends AbstractRegularProperty<String> implements WritableStringProperty {
 

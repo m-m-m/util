@@ -11,7 +11,7 @@ import net.sf.mmm.util.version.base.GenericNameVersionComment;
  * TODO: this class ...
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class HttpHeaderServer extends AbstractHttpHeader implements HttpResponseHeader {
 

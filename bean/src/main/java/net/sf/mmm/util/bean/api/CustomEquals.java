@@ -12,7 +12,7 @@ package net.sf.mmm.util.bean.api;
  * @param <E> the generic type of the {@link Bean} interface itself.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface CustomEquals<E extends CustomEquals<E>> {
 

@@ -14,7 +14,7 @@ import java.net.URI;
  * @see javax.servlet.http.HttpServletRequest
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface HttpRequest extends HttpMessage {
 

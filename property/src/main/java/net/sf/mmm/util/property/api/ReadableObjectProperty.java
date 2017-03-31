@@ -14,7 +14,7 @@ import javafx.beans.value.ObservableStringValue;
  * @param <V> is the generic type of the {@link #getValue() value}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public interface ReadableObjectProperty<V> extends ReadableProperty<V>, ObservableObjectValue<V> {
 

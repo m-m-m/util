@@ -9,7 +9,7 @@ import java.util.function.Function;
  * TODO: this class ...
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 final class ListHelper {
 

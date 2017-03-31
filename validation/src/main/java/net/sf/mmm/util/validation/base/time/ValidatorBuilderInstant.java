@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class ValidatorBuilderInstant<PARENT> extends ValidatorBuilderTime<Instant, PARENT, ValidatorBuilderInstant<PARENT>> {
 

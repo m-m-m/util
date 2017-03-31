@@ -13,7 +13,7 @@ import net.sf.mmm.util.property.api.path.PropertyPath;
  * @param <V> the generic type of the value represented by this variable.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class Variable<V> implements AttributeReadName {
 

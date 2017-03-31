@@ -23,7 +23,7 @@ import net.sf.mmm.util.query.api.argument.StringArgument;
  * Static factory to create {@link Argument}s.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public final class Args {
 

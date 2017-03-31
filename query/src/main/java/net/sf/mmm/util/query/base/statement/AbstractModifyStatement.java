@@ -13,7 +13,7 @@ import net.sf.mmm.util.query.base.feature.FeaturePagingImpl;
  * @param <SELF> the generic type of this query itself (this) for fluent API calls.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public abstract class AbstractModifyStatement<E, SELF extends ModifyStatement<E, SELF>>
     extends AbstractStatement<E, SELF> implements ModifyStatement<E, SELF> {

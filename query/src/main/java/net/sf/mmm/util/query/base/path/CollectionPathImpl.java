@@ -17,7 +17,7 @@ import net.sf.mmm.util.query.base.argument.AbstractCollectionArgument;
  * @param <E> the generic type of the {@link Collection}-{@link Collection#contains(Object) elements}.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class CollectionPathImpl<V extends Collection<E>, E> extends PathImpl<V>
     implements CollectionPath<V, E>, AbstractCollectionArgument<V, E> {

@@ -28,7 +28,7 @@ import net.sf.mmm.util.value.api.Range;
  * This class represents the with context to build the SQL string and collect bind variables.
  *
  * @author hohwille
- * @since 8.4.0
+ * @since 8.5.0
  */
 public class SqlBuilder extends SimpleExpressionFormatter {
 
