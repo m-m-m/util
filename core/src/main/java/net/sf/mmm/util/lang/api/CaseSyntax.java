@@ -496,6 +496,10 @@ public class CaseSyntax {
     CaseConversion other = null;
     CaseConversion wordStart = null;
     char c = charIterator.next();
+    if (c == '_') {
+      separator = KEEP_SPECIAL_CHARS;
+      c = charIterator.next();
+    }
     CaseConversion first = CaseConversion.ofExample(c, false);
     CharClass previousClass = CharClass.of(c);
     CaseConversion previousCase = first;
@@ -549,7 +553,13 @@ public class CaseSyntax {
             }
             separator = Character.valueOf(c);
           } else if (c != separator.charValue()) {
-            throw new IllegalArgumentException(example + ": different word separators '" + separator + "' and '" + c + "'!");
+            String sep;
+            if (separator == KEEP_SPECIAL_CHARS) {
+              sep = "'\0' (_)";
+            } else {
+              sep = "'" + separator + "'";
+            }
+            throw new IllegalArgumentException(example + ": different word separators " + sep + " and '" + c + "'!");
           } else if (previousClass == CharClass.SEPARATOR) {
             throw new IllegalArgumentException(example + ": duplicate word separators '" + separator + separator + "'!");
           }
