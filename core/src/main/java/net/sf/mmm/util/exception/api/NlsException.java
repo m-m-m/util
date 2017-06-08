@@ -51,12 +51,30 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
    */
   public NlsException(Throwable nested, NlsMessage message) {
 
+    this(nested, message, null);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param nested is the {@link #getCause() cause} of this exception. May be <code>null</code>.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
+   * @param uuid the explicit {@link #getUuid() UUID} or <code>null</code> to initialize by default (from given
+   *        {@link Throwable} or as new {@link UUID}).
+   * @since 7.5.0
+   */
+  public NlsException(Throwable nested, NlsMessage message, UUID uuid) {
+
     super(nested);
     this.nlsMessage = message;
-    if ((nested != null) && (nested instanceof NlsThrowable)) {
-      this.uuid = ((NlsThrowable) nested).getUuid();
+    if (uuid == null) {
+      if ((nested != null) && (nested instanceof NlsThrowable)) {
+        this.uuid = ((NlsThrowable) nested).getUuid();
+      } else {
+        this.uuid = createUuid();
+      }
     } else {
-      this.uuid = createUuid();
+      this.uuid = uuid;
     }
   }
 
@@ -68,8 +86,7 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
    */
   protected NlsException(NlsException copySource, ExceptionTruncation truncation) {
 
-    super(null, truncation.isRemoveCause() ? null : copySource.getCause(), !truncation.isRemoveSuppressed(),
-        !truncation.isRemoveStacktrace());
+    super(null, truncation.isRemoveCause() ? null : copySource.getCause(), !truncation.isRemoveSuppressed(), !truncation.isRemoveStacktrace());
     this.nlsMessage = copySource.nlsMessage;
     this.uuid = copySource.uuid;
     if (!truncation.isRemoveStacktrace()) {
