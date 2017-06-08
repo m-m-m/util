@@ -93,12 +93,30 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
    */
   public NlsRuntimeException(Throwable cause, NlsMessage message) {
 
+    this(cause, message, null);
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param cause is the {@link #getCause() cause} of this exception. May be <code>null</code>.
+   * @param message the {@link #getNlsMessage() message} describing the problem briefly.
+   * @param uuid the explicit {@link #getUuid() UUID} or <code>null</code> to initialize by default (from given
+   *        {@link Throwable} or as new {@link UUID}).
+   * @since 7.5.0
+   */
+  public NlsRuntimeException(Throwable cause, NlsMessage message, UUID uuid) {
+
     super(cause);
     this.nlsMessage = message;
-    if ((cause != null) && (cause instanceof NlsThrowable)) {
-      this.uuid = ((NlsThrowable) cause).getUuid();
+    if (uuid == null) {
+      if ((cause != null) && (cause instanceof NlsThrowable)) {
+        this.uuid = ((NlsThrowable) cause).getUuid();
+      } else {
+        this.uuid = createUuid();
+      }
     } else {
-      this.uuid = createUuid();
+      this.uuid = uuid;
     }
   }
 
