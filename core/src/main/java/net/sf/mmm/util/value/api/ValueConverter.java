@@ -48,14 +48,6 @@ public interface ValueConverter<SOURCE, TARGET> extends SimpleValueConverter<SOU
   Class<TARGET> getTargetType();
 
   /**
-   * {@inheritDoc}
-   *
-   * @see #convert(Object, Object, GenericType)
-   */
-  @Override
-  <T extends TARGET> T convert(SOURCE value, Object valueSource, Class<T> targetClass) throws ValueException;
-
-  /**
    * This method converts the given {@code pojo} to the {@literal <TARGET>}-type.
    *
    * @param <T> is the generic type of {@code targetClass}.
