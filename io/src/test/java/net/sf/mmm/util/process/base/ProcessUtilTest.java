@@ -15,9 +15,10 @@ import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import net.sf.mmm.test.TestCategoryManual;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.process.api.AsyncProcessExecutor;
 import net.sf.mmm.util.process.api.ProcessContext;
@@ -35,8 +36,7 @@ public class ProcessUtilTest {
   private static final String LINE_SEPARATOR = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
 
   /** The classpath for java execution. */
-  private static final String CLASSPATH = "target/test-classes" + File.pathSeparatorChar
-      + "eclipse-target/test-classes";
+  private static final String CLASSPATH = "target/test-classes" + File.pathSeparatorChar + "eclipse-target/test-classes";
 
   public ProcessUtil getProcessUtil() {
 
@@ -71,6 +71,7 @@ public class ProcessUtilTest {
   }
 
   @Test
+  @Category(TestCategoryManual.class)
   public void testExecuteAsyncTimeout() throws Exception {
 
     ProcessContext context = new ProcessContext();
@@ -88,8 +89,8 @@ public class ProcessUtilTest {
     }
   }
 
-  @Ignore("manual test, cannot run headless")
   @Test
+  @Category(TestCategoryManual.class)
   public void testExecuteAsyncStop() throws Exception {
 
     ProcessContext context = new ProcessContext();
@@ -113,8 +114,8 @@ public class ProcessUtilTest {
     assertTrue(errStream.isClosed());
   }
 
-  @Ignore("manual test, cannot run headless")
   @Test
+  @Category(TestCategoryManual.class)
   public void testExecuteAsyncStopChildProcess() throws Exception {
 
     ProcessContext context = new ProcessContext();
@@ -126,6 +127,7 @@ public class ProcessUtilTest {
   }
 
   @Test
+  @Category(TestCategoryManual.class)
   public void testExecutePipe() throws Exception {
 
     ProcessContext context = new ProcessContext();
@@ -150,8 +152,7 @@ public class ProcessUtilTest {
     // test output of stderr
     byte[] errBytes = errStream.toByteArray();
     String errString = new String(errBytes);
-    String expectedErrString = PipeApp1.class.getSimpleName() + " done." + LINE_SEPARATOR
-        + PipeApp2.class.getSimpleName() + " done." + LINE_SEPARATOR;
+    String expectedErrString = PipeApp1.class.getSimpleName() + " done." + LINE_SEPARATOR + PipeApp2.class.getSimpleName() + " done." + LINE_SEPARATOR;
     assertEquals(expectedErrString, errString);
   }
 
