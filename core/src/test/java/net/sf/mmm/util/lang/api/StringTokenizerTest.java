@@ -63,6 +63,7 @@ public class StringTokenizerTest extends Assertions {
 
     StringTokenizer tokenizer = new StringTokenizer("{[foo,{[bar,thing]}]},some", "{[", "]}", ',');
     assertThat(tokenizer.next()).isEqualTo("foo,{[bar,thing]}");
+    assertThat(tokenizer.hasNext()).isTrue();
     assertThat(tokenizer.next()).isEqualTo("some");
     assertThat(tokenizer.hasNext()).as("no next token expected").isFalse();
   }
