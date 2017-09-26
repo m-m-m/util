@@ -7,8 +7,8 @@ import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 
 /**
  * This is the abstract base implementation of the {@link CharScannerSyntax} interface. <br>
- * The actual {@code char}s like {@link #getEscape() escape} are realized as simple bean-properties and initialized with
- * <code>'\0'</code> so they are disabled by default.
+ * The actual {@code char}s like {@link #getEscape() escape} are realized as simple bean-properties and
+ * initialized with <code>'\0'</code> so they are disabled by default.
  *
  * @see net.sf.mmm.util.scanner.api.CharStreamScanner#readUntil(char, boolean, CharScannerSyntax)
  *
@@ -71,8 +71,8 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
 
   /**
    * This method gets the alternative character used to start a quotation that should be terminated by a
-   * {@link #getAltQuoteEnd() alt-quote-end} character. The text inside the quote is taken as is (without the quote
-   * characters).
+   * {@link #getAltQuoteEnd() alt-quote-end} character. The text inside the quote is taken as is (without the
+   * quote characters).
    *
    * @see #getQuoteStart()
    *
@@ -116,8 +116,8 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
   }
 
   /**
-   * This method sets both the {@link #getAltQuoteStart() alt-quote-start} and {@link #getAltQuoteEnd() alt-quote-end}
-   * character.
+   * This method sets both the {@link #getAltQuoteStart() alt-quote-start} and {@link #getAltQuoteEnd()
+   * alt-quote-end} character.
    *
    * @param altQuote the alt-quote character to set.
    */
@@ -192,6 +192,6 @@ public abstract class AbstractCharScannerSyntax extends StringSyntaxBean impleme
   @Override
   public String resolveEntity(String entity) {
 
-    throw new UnsupportedOperationException();
+    throw new IllegalArgumentException(entity);
   }
 }

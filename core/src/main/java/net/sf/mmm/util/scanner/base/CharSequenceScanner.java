@@ -2,44 +2,28 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.scanner.base;
 
-import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.lang.api.BasicHelper;
-import net.sf.mmm.util.scanner.api.CharScannerSyntax;
-import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
 /**
  * This class represents a {@link String} or better a sequence of characters ( {@code char[]}) together with a
  * {@link #getCurrentIndex() position} in that sequence. <br>
- * It has various useful methods for scanning the sequence. This scanner is designed to be fast on long sequences and
- * therefore internally {@link String#toCharArray() converts} {@link String}s to a char array instead of frequently
- * calling {@link String#charAt(int)}. <br>
+ * It has various useful methods for scanning the sequence. This scanner is designed to be fast on long
+ * sequences and therefore internally {@link String#toCharArray() converts} {@link String}s to a char array
+ * instead of frequently calling {@link String#charAt(int)}. <br>
  * <b>ATTENTION:</b><br>
  * This implementation is NOT and has no intention to be thread-safe.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class CharSequenceScanner implements CharStreamScanner {
+public class CharSequenceScanner extends AbstractCharStreamScannerImpl {
 
-  private String str;
+  private String string;
 
-  /** the string to parse as char array */
-  private char[] chars;
-
-  private int pos;
-
-  /** The start-index in {@link #chars}. */
-  private final int startIndex;
-
-  /** The exclusive end-index in {@link #chars}. */
-  private final int endIndex;
-
-  /**
-   * The length of the char-sequence: <code>{@link #endIndex} - {@link #startIndex}</code>.
-   */
-  private final int length;
+  /** The initial {@link #offset} in the {@link #buffer}. */
+  private final int initialOffset;
 
   /**
    * The constructor.
@@ -59,7 +43,7 @@ public class CharSequenceScanner implements CharStreamScanner {
   public CharSequenceScanner(String string) {
 
     this(string.toCharArray());
-    this.str = string;
+    this.string = string;
   }
 
   /**
@@ -76,14 +60,14 @@ public class CharSequenceScanner implements CharStreamScanner {
    * The constructor.
    *
    * @param characters is an array containing the characters to scan.
-   * @param offset is the index of the first char to scan in {@code characters} (typically {@code 0} to start at the
-   *        beginning of the array).
-   * @param length is the {@link #getLength() number of characters} to scan from {@code characters} starting at
-   *        {@code offset} (typically <code>characters.length - offset</code>).
+   * @param offset is the index of the first char to scan in {@code characters} (typically {@code 0} to start
+   *        at the beginning of the array).
+   * @param length is the {@link #getLength() number of characters} to scan from {@code characters} starting
+   *        at {@code offset} (typically <code>characters.length - offset</code>).
    */
   public CharSequenceScanner(char[] characters, int offset, int length) {
 
-    super();
+    super(characters);
     if (offset < 0) {
       throw new IndexOutOfBoundsException(Integer.toString(offset));
     }
@@ -93,11 +77,11 @@ public class CharSequenceScanner implements CharStreamScanner {
     if (offset > characters.length - length) {
       throw new IndexOutOfBoundsException(Integer.toString(offset + length));
     }
-    this.chars = characters;
-    this.length = length;
-    this.startIndex = offset;
-    this.endIndex = offset + this.length;
-    this.pos = this.startIndex;
+    this.offset = offset;
+    // this.length = length;
+    this.initialOffset = offset;
+    this.limit = offset + length;
+    this.offset = this.initialOffset;
   }
 
   /**
@@ -108,7 +92,7 @@ public class CharSequenceScanner implements CharStreamScanner {
    */
   public char charAt(int index) {
 
-    return this.chars[this.startIndex + index];
+    return this.buffer[this.initialOffset + index];
   }
 
   /**
@@ -118,7 +102,7 @@ public class CharSequenceScanner implements CharStreamScanner {
    */
   public int getLength() {
 
-    return this.length;
+    return this.limit - this.initialOffset;
   }
 
   /**
@@ -131,12 +115,12 @@ public class CharSequenceScanner implements CharStreamScanner {
    */
   public String substring(int start, int end) {
 
-    return new String(this.chars, this.startIndex + start, end - start);
+    return new String(this.buffer, this.initialOffset + start, end - start);
   }
 
   /**
-   * This method gets the {@link #getOriginalString() original string} where the {@link #substring(int, int) substring}
-   * specified by {@code start} and {@code end} is replaced by {@code substitute}.
+   * This method gets the {@link #getOriginalString() original string} where the {@link #substring(int, int)
+   * substring} specified by {@code start} and {@code end} is replaced by {@code substitute}.
    *
    * @param substitute is the string used as replacement.
    * @param start is the inclusive start index of the substring to replace.
@@ -146,68 +130,85 @@ public class CharSequenceScanner implements CharStreamScanner {
    */
   public String getReplaced(String substitute, int start, int end) {
 
-    int restLength = this.endIndex - end;
-    StringBuffer buffer = new StringBuffer(start + restLength + substitute.length());
-    buffer.append(this.chars, this.startIndex, start);
-    buffer.append(substitute);
-    buffer.append(this.chars, this.startIndex + end, restLength);
-    return buffer.toString();
+    int restLength = this.limit - end;
+    StringBuilder builder = builder(null);
+    builder.append(this.buffer, this.initialOffset, start);
+    builder.append(substitute);
+    builder.append(this.buffer, this.initialOffset + end, restLength);
+    return builder.toString();
   }
 
   /**
-   * This method appends the {@link #substring(int, int) substring} specified by {@code start} and {@code end} to the
-   * given {@code buffer}. <br>
-   * This avoids the overhead of creating a new string and copying the char array.
-   *
-   * @param buffer is the buffer where to append the substring to.
+   * @param appendable is the buffer where to append the substring to.
    * @param start the start index, inclusive.
    * @param end the end index, exclusive.
+   * @deprecated use {@link #appendSubstring(StringBuilder, int, int)}
    */
-  public void appendSubstring(StringBuffer buffer, int start, int end) {
+  @Deprecated
+  public void appendSubstring(StringBuffer appendable, int start, int end) {
 
-    buffer.append(this.chars, this.startIndex + start, end - start);
+    appendable.append(this.buffer, this.initialOffset + start, end - start);
   }
 
-  @Override
+  /**
+   * This method appends the {@link #substring(int, int) substring} specified by {@code start} and {@code end}
+   * to the given {@code buffer}. <br>
+   * This avoids the overhead of creating a new string and copying the char array.
+   *
+   * @param appendable is the buffer where to append the substring to.
+   * @param start the start index, inclusive.
+   * @param end the end index, exclusive.
+   * @since 7.5.0
+   */
+  public void appendSubstring(StringBuilder appendable, int start, int end) {
+
+    appendable.append(this.buffer, this.initialOffset + start, end - start);
+  }
+
+  /**
+   * This method gets the current position in the stream to scan. It will initially be {@code 0}. In other
+   * words this method returns the number of characters that have already been {@link #next() consumed}.
+   *
+   * @return the current index position.
+   */
   public int getCurrentIndex() {
 
-    return this.pos - this.startIndex;
+    return this.offset - this.initialOffset;
   }
 
   /**
    * This method sets the {@link #getCurrentIndex() current index}.
    *
-   * @param index is the next index position to set. The value has to be greater or equal to {@code 0} and less or equal
-   *        to {@link #getLength()} .
+   * @param index is the next index position to set. The value has to be greater or equal to {@code 0} and
+   *        less or equal to {@link #getLength()} .
    */
   public void setCurrentIndex(int index) {
 
-    // yes, index == this.length is allowed - that is the state when the end
-    // is reached and setCurrentIndex(getCurrentPosition()) should NOT cause an
-    // exception...
-    if ((index < 0) || (index > this.length)) {
+    // yes, index == getLength() is allowed - that is the state when the end is reached and
+    // setCurrentIndex(getCurrentPosition()) should NOT cause an exception...
+    if ((index < 0) || (index > getLength())) {
       throw new IndexOutOfBoundsException(Integer.toString(index));
     }
-    this.pos = this.startIndex + index;
+    this.offset = this.initialOffset + index;
   }
 
   @Override
   public boolean hasNext() {
 
-    return (this.pos < this.endIndex);
+    return (this.offset < this.limit);
   }
 
   @Override
   public char next() {
 
-    return this.chars[this.pos++];
+    return this.buffer[this.offset++];
   }
 
   @Override
   public char forceNext() {
 
-    if (this.pos < this.endIndex) {
-      return this.chars[this.pos++];
+    if (this.offset < this.limit) {
+      return this.buffer[this.offset++];
     } else {
       return 0;
     }
@@ -216,384 +217,72 @@ public class CharSequenceScanner implements CharStreamScanner {
   @Override
   public char peek() {
 
-    return this.chars[this.pos];
-  }
-
-  /**
-   * This method peeks the number of {@link #peek() next characters} given by {@code count} and returns them as string.
-   * If there are less characters {@link #hasNext() available} the returned string will be shorter than {@code count}
-   * and only contain the available characters. Unlike {@link #read(int)} this method does NOT consume the characters
-   * and will therefore NOT change the state of this scanner.
-   *
-   * @param count is the number of characters to peek. You may use {@link Integer#MAX_VALUE} to peek until the end of
-   *        data if the data-size is suitable.
-   * @return a string with the given number of characters or all available characters if less than {@code count}. Will
-   *         be the empty string if no character is {@link #hasNext() available} at all.
-   * @since 3.0.0
-   */
-  public String peek(int count) {
-
-    int len = this.endIndex - this.pos;
-    if (len > count) {
-      len = count;
-    }
-    String result = new String(this.chars, this.pos, len);
-    return result;
+    return this.buffer[this.offset];
   }
 
   @Override
   public char forcePeek() {
 
-    if (this.pos < this.endIndex) {
-      return this.chars[this.pos];
+    if (this.offset < this.limit) {
+      return this.buffer[this.offset];
     } else {
       return 0;
     }
   }
 
   /**
-   * This method decrements the {@link #getCurrentIndex() index} by one. If the {@link #getCurrentIndex() index} is
-   * {@code 0} this method will have no effect. <br>
+   * This method peeks the number of {@link #peek() next characters} given by {@code count} and returns them
+   * as string. If there are less characters {@link #hasNext() available} the returned string will be shorter
+   * than {@code count} and only contain the available characters. Unlike {@link #read(int)} this method does
+   * NOT consume the characters and will therefore NOT change the state of this scanner.
+   *
+   * @param count is the number of characters to peek. You may use {@link Integer#MAX_VALUE} to peek until the
+   *        end of text (EOT) if the data-size is suitable.
+   * @return a string with the given number of characters or all available characters if less than
+   *         {@code count}. Will be the empty string if no character is {@link #hasNext() available} at all.
+   * @since 3.0.0
+   */
+  public String peek(int count) {
+
+    int len = this.limit - this.offset;
+    if (len > count) {
+      len = count;
+    }
+    String result = new String(this.buffer, this.offset, len);
+    return result;
+  }
+
+  /**
+   * This method decrements the {@link #getCurrentIndex() index} by one. If the {@link #getCurrentIndex()
+   * index} is {@code 0} this method will have no effect. <br>
    * E.g. use this method if you read a character too much.
    */
   public void stepBack() {
 
-    if (this.pos > this.startIndex) {
-      this.pos--;
+    if (this.offset > this.initialOffset) {
+      this.offset--;
     }
   }
 
   @Override
-  public boolean skipUntil(char stop) {
+  public String readUntil(CharFilter filter, boolean acceptEot) {
 
-    while (this.pos < this.endIndex) {
-      if (this.chars[this.pos++] == stop) {
-        return true;
+    int start = this.offset;
+    while (this.offset < this.limit) {
+      if (filter.accept(this.buffer[this.offset++])) {
+        return new String(this.buffer, start, this.offset - start - 1);
       }
     }
-    return false;
-  }
-
-  @Override
-  public String readUntil(char stop, boolean acceptEof) {
-
-    int start = this.pos;
-    while (this.pos < this.endIndex) {
-      if (this.chars[this.pos++] == stop) {
-        return new String(this.chars, start, this.pos - start - 1);
-      }
-    }
-    if (acceptEof) {
-      int len = this.pos - start;
+    if (acceptEot) {
+      int len = this.offset - start;
       if (len > 0) {
-        return new String(this.chars, start, len);
+        return new String(this.buffer, start, len);
       } else {
         return "";
       }
     } else {
       return null;
     }
-  }
-
-  @Override
-  public String readUntil(CharFilter filter, boolean acceptEof) {
-
-    int start = this.pos;
-    while (this.pos < this.endIndex) {
-      if (filter.accept(this.chars[this.pos++])) {
-        return new String(this.chars, start, this.pos - start - 1);
-      }
-    }
-    if (acceptEof) {
-      int len = this.pos - start;
-      if (len > 0) {
-        return new String(this.chars, start, len);
-      } else {
-        return "";
-      }
-    } else {
-      return null;
-    }
-  }
-
-  @Override
-  public String readUntil(char stop, boolean acceptEof, char escape) {
-
-    StringBuilder result = new StringBuilder();
-    int start = this.pos;
-    while (this.pos < this.endIndex) {
-      char c = this.chars[this.pos++];
-      if (c == escape) {
-        appendFromStartToPos(result, start, true);
-        // lookahead
-        if (this.pos < this.endIndex) {
-          c = this.chars[this.pos];
-          if ((escape == stop) && (c != stop)) {
-            return result.toString();
-          } else {
-            // escape character
-            result.append(c);
-            this.pos++;
-            start = this.pos;
-          }
-        }
-      } else if (c == stop) {
-        appendFromStartToPos(result, start, true);
-        return result.toString();
-      }
-    }
-    if (acceptEof) {
-      appendFromStartToPos(result, start, false);
-      return result.toString();
-    } else {
-      return null;
-    }
-  }
-
-  private void appendFromStartToPos(StringBuilder result, int start, boolean omitLast) {
-
-    int len = this.pos - start;
-    if (omitLast) {
-      len--;
-    }
-    if (len > 0) {
-      result.append(this.chars, start, len);
-    }
-  }
-
-  @Override
-  public String readUntil(char stop, boolean acceptEof, CharScannerSyntax syntax) {
-
-    StringBuilder result = new StringBuilder();
-    char escape = syntax.getEscape();
-    char quoteStart = syntax.getQuoteStart();
-    char altQuoteStart = syntax.getAltQuoteStart();
-    char entityStart = syntax.getEntityStart();
-    boolean escapeActive = false;
-    boolean done = false;
-    char quoteEnd = 0;
-    char quoteEscape = 0;
-    char entityEnd = 0;
-    boolean quoteLazy = false;
-    int index = this.pos;
-    int restIndex = this.endIndex;
-    while (this.pos < this.endIndex) {
-      char c = this.chars[this.pos++];
-      boolean append = false;
-      boolean newEscapeActive = false;
-      if (quoteEnd != 0) {
-        // in quotation
-        if (escapeActive) {
-          // current character c was escaped
-          // it will be taken as is on the next append
-        } else if (c == quoteEscape) {
-          // escape in quote --> lookahead
-          if (this.pos < this.endIndex) {
-            c = this.chars[this.pos];
-            if (c == quoteEnd) {
-              // quoteEnd was escaped
-              append = true;
-              newEscapeActive = true;
-            } else if (quoteEscape == quoteEnd) {
-              // quotation done
-              quoteEnd = 0;
-              append = true;
-            }
-          } else {
-            // end reached without stop char
-            if (quoteEscape == quoteEnd) {
-              // omit quote on appending of rest
-              restIndex--;
-            }
-            break;
-          }
-        } else if (c == quoteEnd) {
-          // quotation done
-          quoteEnd = 0;
-          append = true;
-        }
-      } else if (entityEnd != 0) {
-        if (c == entityEnd) {
-          // entity end detected...
-          entityEnd = 0;
-          int len = this.pos - index - 1;
-          String entity = new String(this.chars, index, len);
-          result.append(syntax.resolveEntity(entity));
-          index = this.pos;
-        }
-      } else if (escapeActive) {
-        // current character c was escaped
-        // it will be taken as is on the next append
-      } else if (c == stop) {
-        append = true;
-        done = true;
-      } else if (c == escape) {
-        append = true;
-        newEscapeActive = true;
-      } else if (c == entityStart) {
-        entityEnd = syntax.getEntityEnd();
-        append = true;
-      } else {
-        if (c == quoteStart) {
-          quoteEnd = syntax.getQuoteEnd();
-          quoteEscape = syntax.getQuoteEscape();
-          quoteLazy = syntax.isQuoteEscapeLazy();
-        } else if (c == altQuoteStart) {
-          quoteEnd = syntax.getAltQuoteEnd();
-          quoteEscape = syntax.getAltQuoteEscape();
-          quoteLazy = syntax.isAltQuoteEscapeLazy();
-        }
-        if (quoteEnd != 0) {
-          append = true;
-          if ((quoteEnd == quoteEscape) && (c == quoteEscape) && (quoteLazy)) {
-            // lazy quotation mode active --> lookahead
-            if (this.pos < this.endIndex) {
-              if (this.chars[this.pos] == quoteEscape) {
-                // lazy quotation detected
-                quoteEnd = 0;
-                newEscapeActive = true;
-              }
-            }
-          }
-        }
-      }
-      if (append) {
-        appendFromStartToPos(result, index, true);
-        if (done) {
-          return result.toString();
-        }
-        index = this.pos;
-      }
-      escapeActive = newEscapeActive;
-    }
-    if (acceptEof) {
-      int len = restIndex - index;
-      if (len > 0) {
-        // append rest
-        result.append(this.chars, index, len);
-      }
-      return result.toString();
-    } else {
-      return null;
-    }
-  }
-
-  @Override
-  public String read(int count) {
-
-    int len = this.endIndex - this.pos;
-    if (len > count) {
-      len = count;
-    }
-    String result = new String(this.chars, this.pos, len);
-    this.pos += len;
-    return result;
-  }
-
-  @Override
-  public int readDigit() {
-
-    int result = -1;
-    if (this.pos < this.endIndex) {
-      char c = this.chars[this.pos];
-      if ((c >= '0') && (c <= '9')) {
-        result = c - '0';
-        this.pos++;
-      }
-    }
-    return result;
-  }
-
-  @Override
-  public long readLong(int maxDigits) throws NumberFormatException {
-
-    if (maxDigits <= 0) {
-      throw new NlsIllegalArgumentException(Integer.toString(maxDigits), "maxDigits");
-    }
-    int index = this.pos;
-    int end = this.pos + maxDigits;
-    if (end > this.endIndex) {
-      end = this.endIndex;
-    }
-    while (this.pos < end) {
-      char c = this.chars[this.pos];
-      if ((c < '0') || (c > '9')) {
-        break;
-      }
-      this.pos++;
-    }
-    int len = this.pos - index;
-    if (len < 1) {
-      throw new NlsParseException(getTail(), "[0-9]+", Number.class);
-    }
-    String number = new String(this.chars, index, len);
-    return Long.parseLong(number);
-  }
-
-  @Override
-  public double readDouble() throws NumberFormatException {
-
-    String number = consumeDecimal();
-    return Double.parseDouble(number);
-  }
-
-  @Override
-  public float readFloat() throws NumberFormatException {
-
-    String number = consumeDecimal();
-    return Float.parseFloat(number);
-  }
-
-  /**
-   * Consumes the characters of a decimal number (double or float).
-   *
-   * @return the decimal number as {@link String}.
-   */
-  private String consumeDecimal() {
-
-    int index = this.pos;
-    boolean noSign = false;
-    boolean noExponent = false;
-    boolean noDot = false;
-    while (this.pos < this.endIndex) {
-      char c = this.chars[this.pos];
-      if ((c == '+') || (c == '-')) {
-        if (noSign) {
-          break;
-        } else {
-          noSign = true;
-        }
-      } else if (c == 'e') {
-        if (noExponent) {
-          break;
-        } else {
-          noExponent = true;
-          noSign = false;
-          noDot = true;
-        }
-      } else if (c == '.') {
-        if (noDot) {
-          break;
-        } else {
-          noDot = true;
-        }
-      } else if ((c < '0') || (c > '9')) {
-        break;
-      }
-      this.pos++;
-    }
-    int len = this.pos - index;
-    if (len < 1) {
-      throw new NlsParseException(getTail(), "([0-9.e+-]+", Number.class);
-    }
-    String number = new String(this.chars, index, len);
-    return number;
-  }
-
-  @Override
-  public boolean skipOver(String substring, boolean ignoreCase) {
-
-    return skipOver(substring, ignoreCase, null);
   }
 
   @Override
@@ -611,10 +300,10 @@ public class CharSequenceScanner implements CharStreamScanner {
     }
     // we can only find the substring at a position
     // until where enough chars are left to go...
-    int max = this.endIndex - subLength;
+    int max = this.limit - subLength;
     char first = subChars[0];
-    while (this.pos <= max) {
-      char c = this.chars[this.pos++];
+    while (this.offset <= max) {
+      char c = this.buffer[this.offset++];
       if (stopFilter != null) {
         if (stopFilter.accept(c)) {
           return false;
@@ -625,11 +314,11 @@ public class CharSequenceScanner implements CharStreamScanner {
       }
       if (c == first) {
         // found first character
-        int myCharsIndex = this.pos;
+        int myCharsIndex = this.offset;
         int subCharsIndex = 1;
         boolean found = true;
         while (subCharsIndex < subLength) {
-          c = this.chars[myCharsIndex++];
+          c = this.buffer[myCharsIndex++];
           if (ignoreCase) {
             c = Character.toLowerCase(c);
           }
@@ -639,49 +328,26 @@ public class CharSequenceScanner implements CharStreamScanner {
           }
         }
         if (found) {
-          this.pos = myCharsIndex;
+          this.offset = myCharsIndex;
           return true;
         }
       }
     }
     // substring not found (EOF)
-    this.pos = this.endIndex;
+    this.offset = this.limit;
     return false;
-  }
-
-  @Override
-  public boolean expect(String expected, boolean ignoreCase) {
-
-    int len = expected.length();
-    for (int i = 0; i < len; i++) {
-      if (this.pos >= this.endIndex) {
-        return false;
-      }
-      char c = this.chars[this.pos];
-      char exp = expected.charAt(i);
-      if (c != exp) {
-        if (!ignoreCase) {
-          return false;
-        }
-        if (Character.toLowerCase(c) != Character.toLowerCase(exp)) {
-          return false;
-        }
-      }
-      this.pos++;
-    }
-    return true;
   }
 
   @Override
   public boolean expectStrict(String expected, boolean ignoreCase) {
 
     int len = expected.length();
-    int newPos = this.pos;
+    int newPos = this.offset;
     for (int i = 0; i < len; i++) {
-      if (newPos >= this.endIndex) {
+      if (newPos >= this.limit) {
         return false;
       }
-      char c = this.chars[newPos];
+      char c = this.buffer[newPos];
       char exp = expected.charAt(i);
       if (c != exp) {
         if (!ignoreCase) {
@@ -693,34 +359,8 @@ public class CharSequenceScanner implements CharStreamScanner {
       }
       newPos++;
     }
-    this.pos = newPos;
+    this.offset = newPos;
     return true;
-  }
-
-  @Override
-  public boolean expect(char expected) {
-
-    if (this.pos < this.endIndex) {
-      if (this.chars[this.pos] == expected) {
-        this.pos++;
-        return true;
-      }
-    }
-    return false;
-  }
-
-  @Override
-  public void require(char expected) throws NlsParseException {
-
-    String value = "";
-    if (this.pos < this.endIndex) {
-      if (this.chars[this.pos] == expected) {
-        this.pos++;
-        return;
-      }
-      value = Character.toString(this.chars[this.pos]);
-    }
-    throw new NlsParseException(value, Character.toString(expected), Character.class, getOriginalString());
   }
 
   /**
@@ -731,15 +371,15 @@ public class CharSequenceScanner implements CharStreamScanner {
   protected String getTail() {
 
     String tail = "";
-    if (this.pos < this.endIndex) {
-      tail = new String(this.chars, this.pos, this.endIndex - this.pos + 1);
+    if (this.offset < this.limit) {
+      tail = new String(this.buffer, this.offset, this.limit - this.offset + 1);
     }
     return tail;
   }
 
   /**
-   * This method gets the tail of this scanner limited (truncated) to the given {@code maximum} number of characters
-   * without changing the state.
+   * This method gets the tail of this scanner limited (truncated) to the given {@code maximum} number of
+   * characters without changing the state.
    *
    * @param maximum is the maximum number of characters to return from the {@link #getTail() tail}.
    * @return the tail of this scanner.
@@ -747,12 +387,12 @@ public class CharSequenceScanner implements CharStreamScanner {
   protected String getTail(int maximum) {
 
     String tail = "";
-    if (this.pos < this.endIndex) {
-      int count = this.endIndex - this.pos + 1;
+    if (this.offset < this.limit) {
+      int count = this.limit - this.offset + 1;
       if (count > maximum) {
         count = maximum;
       }
-      tail = new String(this.chars, this.pos, count);
+      tail = new String(this.buffer, this.offset, count);
     }
     return tail;
   }
@@ -766,87 +406,14 @@ public class CharSequenceScanner implements CharStreamScanner {
   }
 
   @Override
-  public boolean skipUntil(char stop, char escape) {
-
-    boolean escapeActive = false;
-    while (this.pos < this.endIndex) {
-      char c = this.chars[this.pos++];
-      if (c == escape) {
-        escapeActive = !escapeActive;
-      } else {
-        if ((c == stop) && (!escapeActive)) {
-          return true;
-        }
-        escapeActive = false;
-      }
-    }
-    return false;
-  }
-
-  @Override
-  public int skipWhile(char c) {
-
-    int currentPos = this.pos;
-    while (this.pos < this.endIndex) {
-      if (this.chars[this.pos] != c) {
-        break;
-      }
-      this.pos++;
-    }
-    return this.pos - currentPos;
-  }
-
-  @Override
-  public int skipWhile(CharFilter filter) {
-
-    return skipWhile(filter, Integer.MAX_VALUE);
-  }
-
-  @Override
-  public int skipWhile(CharFilter filter, int max) {
-
-    if (max < 0) {
-      throw new IllegalArgumentException("Max must NOT be negative: " + max);
-    }
-    int currentPos = this.pos;
-    int end = currentPos + max;
-    if (end < 0) {
-      end = max;
-    }
-    if (this.endIndex < end) {
-      end = this.endIndex;
-    }
-    while (this.pos < end) {
-      char c = this.chars[this.pos];
-      if (!filter.accept(c)) {
-        break;
-      }
-      this.pos++;
-    }
-    return this.pos - currentPos;
-  }
-
-  @Override
-  public String readWhile(CharFilter filter) {
-
-    int currentPos = this.pos;
-    int len = skipWhile(filter);
-    if (len == 0) {
-      return "";
-    } else {
-      return new String(this.chars, currentPos, len);
-    }
-  }
-
-  @Override
   public String readWhile(CharFilter filter, int max) {
 
-    int currentPos = this.pos;
-    int len = skipWhile(filter);
+    int currentPos = this.offset;
+    int len = skipWhile(filter, max);
     if (len == 0) {
       return "";
     } else {
-      return new String(this.chars, currentPos, len);
+      return new String(this.buffer, currentPos, len);
     }
   }
 
@@ -859,20 +426,10 @@ public class CharSequenceScanner implements CharStreamScanner {
    */
   public String getOriginalString() {
 
-    if (this.str != null) {
-      this.str = new String(this.chars, this.startIndex, this.length);
+    if (this.string != null) {
+      this.string = new String(this.buffer, this.initialOffset, getLength());
     }
-    return this.str;
-  }
-
-  @Override
-  public String toString() {
-
-    if (this.pos < this.endIndex) {
-      return new String(this.chars, this.pos, this.endIndex - this.pos);
-    } else {
-      return "";
-    }
+    return this.string;
   }
 
 }
