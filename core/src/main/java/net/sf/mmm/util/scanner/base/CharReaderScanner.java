@@ -180,7 +180,7 @@ public class CharReaderScanner extends AbstractCharStreamScannerImpl {
     if (!hasNext()) {
       return false;
     }
-    if (!isEos() && (this.offset + expectedLength >= this.limit)) {
+    if (!isEos() && (this.offset + expectedLength > this.limit)) {
       return false;
     }
     char[] expectedChars;
@@ -195,7 +195,7 @@ public class CharReaderScanner extends AbstractCharStreamScannerImpl {
     int expectedIndex = 0;
     while (expectedIndex < expectedLength) {
       char c = myBuffer[myOffset++];
-      char exp = expectedChars[expectedIndex];
+      char exp = expectedChars[expectedIndex++];
       if (c != exp) {
         if (!ignoreCase) {
           return false;
@@ -204,7 +204,7 @@ public class CharReaderScanner extends AbstractCharStreamScannerImpl {
           return false;
         }
       }
-      if (myOffset >= myLimit) {
+      if ((myOffset >= myLimit) && (expectedIndex < expectedLength)) {
         if (myBuffer != this.buffer) {
           throw new IllegalStateException();
         }

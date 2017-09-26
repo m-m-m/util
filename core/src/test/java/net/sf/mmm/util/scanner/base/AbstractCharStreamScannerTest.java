@@ -380,6 +380,8 @@ public abstract class AbstractCharStreamScannerTest extends Assertions {
     syntax.setQuote('"');
     syntax.setQuoteEscape('$');
     syntax.setAltQuote('\'');
+    syntax.setAltQuoteStart('\'');
+    syntax.setAltQuoteEnd('\'');
     syntax.setAltQuoteEscape('\'');
     syntax.setEntityStart('&');
     syntax.setEntityEnd(';');
@@ -420,6 +422,20 @@ public abstract class AbstractCharStreamScannerTest extends Assertions {
     assertThat(scanner.expect(start, false)).isTrue();
     assertThat(scanner.expect(middle.toUpperCase(Locale.ENGLISH), true)).isTrue();
     assertThat(scanner.expect(end.toLowerCase(Locale.ENGLISH), true)).isTrue();
+    assertThat(scanner.hasNext()).isFalse();
+  }
+
+  @Test
+  public void testExpectStrict() {
+
+    // given
+    String string = "Hello World!";
+    // when
+    CharStreamScanner scanner = scanner(string, true);
+    // then
+    assertThat(scanner.expectStrict("Hello WorlD", false)).isFalse();
+    assertThat(scanner.expectStrict("Hello ", false)).isTrue();
+    assertThat(scanner.expectStrict("WorlD!", true)).isTrue();
     assertThat(scanner.hasNext()).isFalse();
   }
 
