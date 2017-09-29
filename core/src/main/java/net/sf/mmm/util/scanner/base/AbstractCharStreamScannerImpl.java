@@ -7,6 +7,8 @@ import java.util.NoSuchElementException;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.lang.api.BasicHelper;
+import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
@@ -88,6 +90,25 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
   }
 
   /**
+   * @param builder a local {@link StringBuilder} variable to be allocated lazily.
+   * @param start the start index in the underlying buffer to append.
+   * @param end the limit index in the underlying buffer pointing to the next position after the last
+   *        character to append.
+   * @return the given {@link StringBuilder} if not {@code null} or otherwise a reused {@link StringBuilder}
+   *         instance that has been reset.
+   */
+  protected StringBuilder append(StringBuilder builder, int start, int end) {
+
+    int len = end - start;
+    if (len <= 0) {
+      return builder;
+    }
+    StringBuilder b = builder(builder);
+    b.append(this.buffer, start, len);
+    return b;
+  }
+
+  /**
    * @param builder the local {@link StringBuilder} instance where data may already have been appended to. May
    *        be {@code null}.
    * @param start the start index in the underlying buffer to append.
@@ -98,10 +119,14 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
    */
   protected String getAppended(StringBuilder builder, int start, int end) {
 
+    int len = end - start;
+    if (len <= 0) {
+      return eot(builder, true);
+    }
     if (builder == null) {
-      return new String(this.buffer, start, end - start);
+      return new String(this.buffer, start, len);
     } else {
-      builder.append(this.buffer, start, end - start);
+      builder.append(this.buffer, start, len);
       return builder.toString();
     }
   }
@@ -115,26 +140,23 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
     return fill();
   }
 
-  /**
-   * @return {@code true} if the end of a potentially underlying stream has been reached, {@code false}
-   *         otherwise. EOS stands for end of stream and in that case the {@link #buffer} contains the entire
-   *         rest of the data to scan. So if all data is consumed from the buffer and EOS is reached, then
-   *         also {@link #isEot() EOT} has been reached.
-   */
-  protected boolean isEos() {
+  @Override
+  public boolean isEos() {
 
     return true;
   }
 
   /**
-   * @return {@code true} if end of text (EOT) is known to been reached, {@code false} otherwise. The returned
-   *         result will be almost the same as <code>!{@link #hasNext()}</code> but this method will modify
-   *         the state of this scanner (read additional data, modify buffers, etc.). However, if the
-   *         underlying stream is already consumed without returning {@code -1} to signal {@link #isEos() EOS}
-   *         this method may return {@code false} even though the next call of {@link #hasNext()} may also
-   *         return {@code false}.
+   * @return {@code true} if end of buffer (EOB) or in other words no data is available after the current
+   *         {@link #buffer}, {@code false} otherwise (e.g. if not {@link #isEos() EOS}).
    */
-  protected boolean isEot() {
+  protected boolean isEob() {
+
+    return true;
+  }
+
+  @Override
+  public boolean isEot() {
 
     return (this.offset >= this.limit);
   }
@@ -187,7 +209,14 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
     return 0;
   }
 
-  private String eot(StringBuilder builder, boolean acceptEot) {
+  /**
+   * @param builder the optional {@link StringBuilder} where data may have already been appended.
+   * @param acceptEot {@code true} to accept {@link #isEot() EOT}, {@code false} otherwise.
+   * @return {@code null} if {@code acceptEot} is {@code false}, otherwise the {@link String} from the given
+   *         {@link StringBuilder} or the empty {@link String} in case the {@link StringBuilder} was
+   *         {@code null}.
+   */
+  protected String eot(StringBuilder builder, boolean acceptEot) {
 
     if (acceptEot) {
       if (builder == null) {
@@ -213,8 +242,7 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
           return getAppended(builder, start, this.offset - 1);
         }
       }
-      builder = builder(builder);
-      builder.append(this.buffer, start, this.limit - start);
+      builder = append(builder, start, this.limit);
       if (!fill()) {
         return eot(builder, acceptEot);
       }
@@ -291,8 +319,7 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
       while (this.offset < this.limit) {
         char c = this.buffer[this.offset++];
         if (c == escape) {
-          builder = builder(builder);
-          builder.append(this.buffer, start, this.offset - start - 1);
+          builder = append(builder, start, this.offset - 1);
           // lookahead
           if (this.offset >= this.limit) {
             if (!fill()) {
@@ -301,9 +328,10 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
           }
           c = this.buffer[this.offset];
           if ((escape == stop) && (c != stop)) {
-            return builder.toString();
+            return eot(builder, true);
           } else {
             // escape character
+            builder = builder(builder);
             builder.append(c);
             this.offset++;
             start = this.offset;
@@ -312,8 +340,7 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
           return getAppended(builder, start, this.offset - 1);
         }
       }
-      builder = builder(builder);
-      builder.append(this.buffer, start, this.limit - start);
+      builder = append(builder, start, this.limit);
       if (!fill()) {
         return eot(builder, acceptEot);
       }
@@ -326,24 +353,100 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
     if (!hasNext()) {
       eot(null, acceptEot);
     }
+    StringBuilder builder = null;
     while (true) {
-      StringBuilder builder = null;
       int start = this.offset;
       while (this.offset < this.limit) {
-        if (filter.accept(this.buffer[this.offset++])) {
+        if (filter.accept(this.buffer[this.offset])) {
           return getAppended(builder, start, this.offset - 1);
         }
+        this.offset++;
       }
-      builder = builder(builder);
-      builder.append(this.buffer, start, this.limit - start);
+      builder = append(builder, start, this.limit);
       if (!fill()) {
-        if (acceptEot) {
-          return builder.toString();
-        }
-        return null;
+        return eot(builder, acceptEot);
       }
     }
   }
+
+  @Override
+  public String readUntil(CharFilter stopFilter, boolean acceptEot, String stop, boolean ignoreCase, final boolean trim) {
+
+    int stopLength = stop.length();
+    if (stopLength == 0) {
+      return "";
+    }
+    verifyLookahead(stop);
+    if (!hasNext()) {
+      return eot(null, acceptEot);
+    }
+    if (trim) {
+      skipWhile(' ');
+    }
+    char[] stopChars;
+    if (ignoreCase) {
+      stopChars = BasicHelper.toLowerCase(stop).toCharArray();
+    } else {
+      stopChars = stop.toCharArray();
+    }
+    char first = stopChars[0];
+    Appender appender = newAppender(trim);
+    while (true) {
+      appender.start = this.offset;
+      appender.trimEnd = this.offset;
+      int max = this.limit;
+      if (isEos()) {
+        // we can only find the substring at a position
+        // until where enough chars are left to go...
+        max -= stopLength;
+      }
+      while (this.offset <= max) {
+        char c = this.buffer[this.offset];
+        if (stopFilter.accept(c)) {
+          return appender.getAppended();
+        }
+        if (c == first || (ignoreCase && (Character.toLowerCase(c) == first))) {
+          // found first character
+          boolean found = expectRestWithLookahead(stopChars, ignoreCase, appender, false);
+          if (found) {
+            return appender.getAppended(this.offset);
+          }
+        }
+        if (trim && (c != ' ')) {
+          appender.foundNonSpace();
+        }
+        this.offset++;
+      }
+      if (!fill()) {
+        // substring not found (EOT)
+        this.offset = this.limit;
+        return appender.toString();
+      }
+    }
+  }
+
+  /**
+   * @param substring the substring to match without consuming what requires a lookahead.
+   */
+  protected void verifyLookahead(String substring) {
+    // nothing by default
+  }
+
+  /**
+   * @param stopChars the stop {@link String} as {@link String#toCharArray() char[]}. If {@code ignoreCase} is
+   *        {@code true} in lower case.
+   * @param ignoreCase - {@code true} to (also) compare chars in {@link Character#toLowerCase(char) lower
+   *        case}, {@code false} otherwise.
+   * @param appender an optional lambda to {@link Runnable#run() run} before shifting buffers to append data.
+   * @param skip - {@code true} to update buffers and offset such that on success this scanner points after
+   *        the expected stop {@link String}, {@code false} otherwise (to not consume any character in any
+   *        case).
+   * @return {@code true} if the stop {@link String} ({@code stopChars}) was found and consumed, {@code false}
+   *         otherwise (and no data consumed).
+   * @see #readUntil(CharFilter, boolean, String, boolean)
+   * @see #skipOver(String, boolean, CharFilter)
+   */
+  protected abstract boolean expectRestWithLookahead(char[] stopChars, boolean ignoreCase, Runnable appender, boolean skip);
 
   @Override
   public void require(char expected) throws NlsParseException {
@@ -404,45 +507,131 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
   }
 
   @Override
-  public String readLine() {
+  public String readLine(boolean trim) {
 
     if (!hasNext()) {
       return null;
     }
-    StringBuilder builder = null;
+    if (trim) {
+      skipWhile(' ');
+    }
+    Appender appender = newAppender(trim);
     while (true) {
-      int start = this.offset;
+      appender.start = this.offset;
+      appender.trimEnd = this.offset;
       while (this.offset < this.limit) {
-        char c = this.buffer[this.offset++];
+        char c = this.buffer[this.offset];
         if (c == '\r') {
+          int end = this.offset;
+          this.offset++;
           if (this.offset < this.limit) {
-            int end = this.offset - 1;
             if (this.buffer[this.offset] == '\n') {
               this.offset++;
             }
-            return getAppended(builder, start, end);
+            return appender.getAppended(end);
           } else { // EOL insanity...
-            builder = builder(builder);
-            builder.append(this.buffer, start, this.offset - start - 1);
+            appender.append(end);
             if (fill()) {
-              start = this.offset;
               if (this.buffer[this.offset] == '\n') {
                 this.offset++;
               }
             }
-            return builder.toString();
+            return appender.toString();
           }
         } else if (c == '\n') {
-          return getAppended(builder, start, this.offset - 1);
+          String result = appender.getAppended();
+          this.offset++;
+          return result;
+        } else if (c != ' ') {
+          appender.foundNonSpace();
         }
+        this.offset++;
       }
-      builder = builder(builder);
-      builder.append(this.buffer, start, this.limit - start);
+      appender.append(this.limit);
       if (!fill()) {
-        return builder.toString();
+        return appender.toString();
       }
     }
+  }
 
+  @Override
+  public String readJavaStringLiteral() {
+
+    if (!hasNext()) {
+      return null;
+    }
+    if (this.buffer[this.offset] != '"') {
+      return null;
+    }
+    this.offset++;
+    StringBuilder builder = null;
+    while (hasNext()) {
+      int start = this.offset;
+      while (this.offset < this.limit) {
+        char c = this.buffer[this.offset++];
+        if (c == '"') {
+          return getAppended(builder, start, this.offset - 1);
+        } else if (c == '\\') {
+          builder = append(builder, start, this.offset - 1);
+          parseEscapeSequence(builder);
+          start = this.offset;
+        }
+      }
+      builder = append(builder, start, this.offset);
+    }
+    String value = "";
+    if (builder != null) {
+      value = builder.toString();
+    }
+    throw new NlsParseException(value, "terminated string", "Java string literal");
+  }
+
+  private void parseEscapeSequence(StringBuilder builder) {
+
+    char c = forceNext();
+    if (c == 'u') { // unicode
+      skipWhile('u');
+      char[] hex = new char[4];
+      hex[0] = forceNext();
+      hex[1] = forceNext();
+      hex[2] = forceNext();
+      hex[3] = forceNext();
+      if (hex[3] == '\0') {
+        int max = 2;
+        while (hex[max] == '\0') {
+          max--;
+          if (max < 0) {
+            break;
+          }
+        }
+        String hexString = new String(hex, 0, max + 1);
+        throw new NlsParseException("\\u" + hexString, "\\u+[0-9a-fA-F]{4}", "Java unicode escape sequence");
+      }
+      String hexString = new String(hex);
+      int value = Integer.parseInt(hexString, 16);
+      builder.append((char) value);
+    } else if (CharFilter.OCTAL_DIGIT_FILTER.accept(c)) { // octal C legacy stuff
+      int value = c - '0';
+      c = forcePeek();
+      if (CharFilter.OCTAL_DIGIT_FILTER.accept(c)) {
+        next();
+        value = (8 * value) + (c - '0');
+        if (value <= 31) {
+          c = forcePeek();
+          if (CharFilter.OCTAL_DIGIT_FILTER.accept(c)) {
+            next();
+            value = (8 * value) + (c - '0');
+          }
+        }
+      }
+      builder.append((char) value);
+    } else {
+      Character resolved = StringUtilImpl.getInstance().resolveEscape(c);
+      if (resolved == null) {
+        throw new NlsParseException("\\" + c, "\\[0-7bfnrt\\'\"]", "Java escape sequence");
+      }
+      builder.append(resolved.charValue());
+    }
   }
 
   @Override
@@ -538,13 +727,12 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
         }
         this.offset++;
       }
-      int len = this.offset - start;
       if (done) {
         return getAppended(builder, start, this.offset);
       }
+      int len = this.offset - start;
       if (len > 0) {
-        builder = builder(builder);
-        builder.append(this.buffer, start, len);
+        builder = append(builder, start, this.offset);
       }
       if (done || !fill()) {
         if (builder == null) {
@@ -589,8 +777,7 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
         String number = getAppended(builder, start, this.offset);
         return Long.parseLong(number);
       } else {
-        builder = builder(builder);
-        builder.append(this.buffer, start, this.offset - start);
+        builder = append(builder, start, this.offset);
         fill();
       }
     }
@@ -680,6 +867,53 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
   }
 
   @Override
+  public boolean skipOver(String substring, boolean ignoreCase, CharFilter stopFilter) {
+
+    int subLength = substring.length();
+    if (subLength == 0) {
+      return true;
+    }
+    verifyLookahead(substring);
+    if (!hasNext()) {
+      return false;
+    }
+    char[] subChars;
+    if (ignoreCase) {
+      subChars = BasicHelper.toLowerCase(substring).toCharArray();
+    } else {
+      subChars = substring.toCharArray();
+    }
+    char first = subChars[0];
+    while (true) {
+      int max = this.limit;
+      if (isEos()) {
+        // we can only find the substring at a position
+        // until where enough chars are left to go...
+        max -= subLength;
+      }
+      while (this.offset <= max) {
+        char c = this.buffer[this.offset];
+        if ((stopFilter != null) && stopFilter.accept(c)) {
+          return false;
+        }
+        if (c == first || (ignoreCase && (Character.toLowerCase(c) == first))) {
+          // found first character
+          boolean found = expectRestWithLookahead(subChars, ignoreCase, null, true);
+          if (found) {
+            return true;
+          }
+        }
+        this.offset++;
+      }
+      if (!fill()) {
+        // substring not found (EOT)
+        this.offset = this.limit;
+        return false;
+      }
+    }
+  }
+
+  @Override
   public String readWhile(CharFilter filter, int max) {
 
     if (max < 0) {
@@ -707,10 +941,9 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
       }
       int len = this.offset - start;
       remain -= len;
-      builder = builder(builder);
-      builder.append(this.buffer, start, this.offset);
+      builder = append(builder, start, this.offset);
       if ((remain == 0) || !fill()) {
-        return builder.toString();
+        return eot(builder, true);
       }
     }
   }
@@ -898,7 +1131,113 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
         this.start = AbstractCharStreamScannerImpl.this.offset;
       }
     }
+  }
 
+  private Appender newAppender(boolean trim) {
+
+    if (trim) {
+      return new TrimmingAppender();
+    } else {
+      return new PlainAppender();
+    }
+  }
+
+  private abstract class Appender implements Runnable {
+
+    protected StringBuilder builder;
+
+    protected int start;
+
+    protected int trimEnd;
+
+    protected abstract void append(int end);
+
+    protected abstract String getAppended(int end);
+
+    protected abstract String getAppended();
+
+    protected void foundNonSpace() {
+
+    }
+
+    @Override
+    public String toString() {
+
+      if (this.builder == null) {
+        return "";
+      }
+      return this.builder.toString();
+    }
+  }
+
+  private class PlainAppender extends Appender {
+
+    @Override
+    protected void append(int end) {
+
+      this.builder = AbstractCharStreamScannerImpl.this.append(this.builder, this.start, end);
+    }
+
+    @Override
+    protected String getAppended(int end) {
+
+      return AbstractCharStreamScannerImpl.this.getAppended(this.builder, this.start, end);
+    }
+
+    @Override
+    protected String getAppended() {
+
+      return AbstractCharStreamScannerImpl.this.getAppended(this.builder, this.start, AbstractCharStreamScannerImpl.this.offset);
+    }
+
+    @Override
+    public void run() {
+
+      this.builder = AbstractCharStreamScannerImpl.this.append(this.builder, this.start, AbstractCharStreamScannerImpl.this.offset);
+    }
+  }
+
+  private class TrimmingAppender extends Appender {
+
+    private int spaceCount;
+
+    @Override
+    protected void foundNonSpace() {
+
+      this.trimEnd = AbstractCharStreamScannerImpl.this.offset + 1;
+      if (this.spaceCount > 0) {
+        this.builder = builder(this.builder);
+        while (this.spaceCount > 0) {
+          this.builder.append(' ');
+          this.spaceCount--;
+        }
+      }
+    }
+
+    @Override
+    protected void append(int end) {
+
+      this.spaceCount += end - this.trimEnd;
+      this.builder = AbstractCharStreamScannerImpl.this.append(this.builder, this.start, this.trimEnd);
+    }
+
+    @Override
+    protected String getAppended(int end) {
+
+      return AbstractCharStreamScannerImpl.this.getAppended(this.builder, this.start, this.trimEnd);
+    }
+
+    @Override
+    protected String getAppended() {
+
+      return AbstractCharStreamScannerImpl.this.getAppended(this.builder, this.start, this.trimEnd);
+    }
+
+    @Override
+    public void run() {
+
+      this.builder = AbstractCharStreamScannerImpl.this.append(this.builder, this.start, this.trimEnd);
+    }
   }
 
 }

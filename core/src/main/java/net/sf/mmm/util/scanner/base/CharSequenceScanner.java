@@ -4,7 +4,6 @@ package net.sf.mmm.util.scanner.base;
 
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.lang.api.BasicHelper;
 
 /**
  * This class represents a {@link String} or better a sequence of characters ( {@code char[]}) together with a
@@ -269,9 +268,10 @@ public class CharSequenceScanner extends AbstractCharStreamScannerImpl {
 
     int start = this.offset;
     while (this.offset < this.limit) {
-      if (filter.accept(this.buffer[this.offset++])) {
-        return new String(this.buffer, start, this.offset - start - 1);
+      if (filter.accept(this.buffer[this.offset])) {
+        return new String(this.buffer, start, this.offset - start);
       }
+      this.offset++;
     }
     if (acceptEot) {
       int len = this.offset - start;
@@ -286,56 +286,21 @@ public class CharSequenceScanner extends AbstractCharStreamScannerImpl {
   }
 
   @Override
-  public boolean skipOver(String substring, boolean ignoreCase, CharFilter stopFilter) {
+  protected boolean expectRestWithLookahead(char[] stopChars, boolean ignoreCase, Runnable appender, boolean skip) {
 
-    int subLength = substring.length();
-    if (subLength == 0) {
-      return true;
-    }
-    char[] subChars;
-    if (ignoreCase) {
-      subChars = BasicHelper.toLowerCase(substring).toCharArray();
-    } else {
-      subChars = substring.toCharArray();
-    }
-    // we can only find the substring at a position
-    // until where enough chars are left to go...
-    int max = this.limit - subLength;
-    char first = subChars[0];
-    while (this.offset <= max) {
-      char c = this.buffer[this.offset++];
-      if (stopFilter != null) {
-        if (stopFilter.accept(c)) {
-          return false;
-        }
-      }
-      if (ignoreCase) {
-        c = Character.toLowerCase(c);
-      }
-      if (c == first) {
-        // found first character
-        int myCharsIndex = this.offset;
-        int subCharsIndex = 1;
-        boolean found = true;
-        while (subCharsIndex < subLength) {
-          c = this.buffer[myCharsIndex++];
-          if (ignoreCase) {
-            c = Character.toLowerCase(c);
-          }
-          if (c != subChars[subCharsIndex++]) {
-            found = false;
-            break;
-          }
-        }
-        if (found) {
-          this.offset = myCharsIndex;
-          return true;
-        }
+    int myCharsIndex = this.offset + 1;
+    int stopCharsIndex = 1;
+    while (stopCharsIndex < stopChars.length) {
+      char c = this.buffer[myCharsIndex++];
+      char stopChar = stopChars[stopCharsIndex++];
+      if ((c != stopChar) && (!ignoreCase || (Character.toLowerCase(c) != stopChar))) {
+        return false;
       }
     }
-    // substring not found (EOF)
-    this.offset = this.limit;
-    return false;
+    if (skip) {
+      this.offset = myCharsIndex;
+    }
+    return true;
   }
 
   @Override
