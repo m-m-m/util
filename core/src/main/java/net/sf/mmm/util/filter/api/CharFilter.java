@@ -3,10 +3,11 @@
 package net.sf.mmm.util.filter.api;
 
 /**
- * This is the interface for a filter that {@link #accept(char) decides} if a given character is acceptable or should be
- * filtered. <br>
- * It is used by {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} and avoids conversion of {@code char} to
- * {@link Character} for performance reasons. In other cases please prefer to use {@link Filter}.
+ * This is the interface for a filter that {@link #accept(char) decides} if a given character is acceptable or
+ * should be filtered. <br>
+ * It is used by {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} and avoids conversion of
+ * {@code char} to {@link Character} for performance reasons. In other cases please prefer to use
+ * {@link Filter}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -14,8 +15,9 @@ package net.sf.mmm.util.filter.api;
 public interface CharFilter {
 
   /**
-   * A filter that only {@link #accept(char) accepts} characters valid for a technical identifier-string (e.g. literal
-   * oder variable-name). This means accepted characters are Latin digits, ASCII letters or one of '.', '_' or '-'.
+   * A filter that only {@link #accept(char) accepts} characters valid for a technical identifier-string (e.g.
+   * literal oder variable-name). This means accepted characters are Latin digits, ASCII letters or one of
+   * '.', '_' or '-'.
    *
    * @since 1.1.1
    */
@@ -24,13 +26,13 @@ public interface CharFilter {
     @Override
     public boolean accept(char c) {
 
-      return (((c >= '0') && (c <= '9')) || ((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')) || (c == '_')
-          || (c == '-') || (c == '.'));
+      return ((c >= '0') && (c <= '9')) || ((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')) || (c == '_') || (c == '-') || (c == '.');
     }
   };
 
   /**
-   * A filter that only {@link #accept(char) accepts} the Latin digits '0'-'9' or ASCII letters 'a'-'z' and 'A'-'Z'.
+   * A filter that only {@link #accept(char) accepts} the Latin digits '0'-'9' or ASCII letters 'a'-'z' and
+   * 'A'-'Z'.
    *
    * @since 1.1.0
    */
@@ -39,7 +41,7 @@ public interface CharFilter {
     @Override
     public boolean accept(char c) {
 
-      return (((c >= '0') && (c <= '9')) || ((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
+      return ((c >= '0') && (c <= '9')) || ((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z'));
     }
   };
 
@@ -51,7 +53,7 @@ public interface CharFilter {
     @Override
     public boolean accept(char c) {
 
-      return ((c >= '0') && (c <= '9'));
+      return (c >= '0') && (c <= '9');
     }
   };
 
@@ -63,7 +65,7 @@ public interface CharFilter {
     @Override
     public boolean accept(char c) {
 
-      return (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
+      return ((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z'));
     }
   };
 
@@ -77,7 +79,7 @@ public interface CharFilter {
     @Override
     public boolean accept(char c) {
 
-      return (((c >= 'a') && (c <= 'z')));
+      return (c >= 'a') && (c <= 'z');
     }
   };
 
@@ -91,7 +93,7 @@ public interface CharFilter {
     @Override
     public boolean accept(char c) {
 
-      return (((c >= 'A') && (c <= 'Z')));
+      return (c >= 'A') && (c <= 'Z');
     }
   };
 
@@ -131,10 +133,49 @@ public interface CharFilter {
     @Override
     public boolean accept(char c) {
 
-      if ((c == '/') || (c == '\\')) {
-        return true;
-      }
-      return false;
+      return (c == '/') || (c == '\\');
+    }
+  };
+
+  /**
+   * {@link CharFilter} that {@link #accept(char) accepts} only carriage return ('\r') and line feed ('\n').
+   *
+   * @since 7.5.0
+   */
+  CharFilter NEWLINE_FILTER = new CharFilter() {
+
+    @Override
+    public boolean accept(char c) {
+
+      return (c == '\r') || (c == '\n');
+    }
+  };
+
+  /**
+   * {@link CharFilter} that {@link #accept(char) accepts} only the ocatal digits '0'-'7'.
+   *
+   * @since 7.5.0
+   */
+  CharFilter OCTAL_DIGIT_FILTER = new CharFilter() {
+
+    @Override
+    public boolean accept(char c) {
+
+      return (c >= '0') && (c <= '7');
+    }
+  };
+
+  /**
+   * {@link CharFilter} that {@link #accept(char) accepts} only the hex digits '0'-'9', 'a'-'f', or 'A'-'F'.
+   *
+   * @since 7.5.0
+   */
+  CharFilter HEX_DIGIT_FILTER = new CharFilter() {
+
+    @Override
+    public boolean accept(char c) {
+
+      return ((c >= '0') && (c <= '7')) || ((c >= 'a') && (c <= 'f')) || ((c >= 'A') && (c <= 'F'));
     }
   };
 
@@ -142,7 +183,8 @@ public interface CharFilter {
    * This method determines if the given character {@code c} should be accepted.
    *
    * @param c is the character to check.
-   * @return {@code true} if the given character {@code c} is acceptable, {@code false} if it should be filtered.
+   * @return {@code true} if the given character {@code c} is acceptable, {@code false} if it should be
+   *         filtered.
    */
   boolean accept(char c);
 

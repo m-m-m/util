@@ -68,9 +68,45 @@ public abstract class AbstractCharStreamScanner implements CharStreamScanner {
   }
 
   @Override
+  public String readUntil(CharFilter filter, boolean acceptEof, String stop) {
+
+    return readUntil(filter, acceptEof, stop, false);
+  }
+
+  @Override
+  public String readUntil(CharFilter filter, boolean acceptEot, String stop, boolean ignoreCase) {
+
+    return readUntil(filter, acceptEot, stop, ignoreCase, false);
+  }
+
+  @Override
+  public boolean skipOver(String substring) {
+
+    return skipOver(substring, false);
+  }
+
+  @Override
   public boolean skipOver(String substring, boolean ignoreCase) {
 
     return skipOver(substring, ignoreCase, null);
+  }
+
+  @Override
+  public String readLine() {
+
+    return readLine(false);
+  }
+
+  @Override
+  public boolean expect(String expected) {
+
+    return expect(expected, false);
+  }
+
+  @Override
+  public boolean expectStrict(String expected) {
+
+    return expectStrict(expected, false);
   }
 
 }

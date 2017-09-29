@@ -5,7 +5,6 @@ package net.sf.mmm.util.scanner.base;
 import java.util.Locale;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.data.Offset;
 import org.junit.Test;
 
 import net.sf.mmm.util.filter.api.CharFilter;
@@ -20,8 +19,6 @@ import net.sf.mmm.util.scanner.api.CharStreamScanner;
  */
 @SuppressWarnings("all")
 public abstract class AbstractCharStreamScannerTest extends Assertions {
-
-  protected static final Offset<Double> EPSYLON = Offset.offset(0.000000001d);
 
   protected CharStreamScanner scanner(String string) {
 
@@ -123,12 +120,9 @@ public abstract class AbstractCharStreamScannerTest extends Assertions {
 
   private void checkSkipOver(CharStreamScanner scanner, String substring, boolean ignoreCase) {
 
-    boolean found = scanner.skipOver(substring, ignoreCase);
-    assertThat(found).isTrue();
-    found = scanner.expect("FOO", ignoreCase);
-    assertThat(found).isTrue();
-    found = scanner.skipOver(substring, ignoreCase);
-    assertThat(found).isTrue();
+    assertThat(scanner.skipOver(substring, ignoreCase)).isTrue();
+    assertThat(scanner.expect("FOO", ignoreCase)).isTrue();
+    assertThat(scanner.skipOver(substring, ignoreCase)).isTrue();
     String rest = scanner.read(Integer.MAX_VALUE);
     if (ignoreCase) {
       rest = rest.toLowerCase();
@@ -204,6 +198,36 @@ public abstract class AbstractCharStreamScannerTest extends Assertions {
     assertThat(scanner.readUntil('"', false, '"')).isEqualTo("Quotet text with \" and \\ inside!");
     assertThat(scanner.readUntil('\0', true)).isEqualTo("bla");
 
+  }
+
+  /**
+   * Tests {@link CharStreamScanner#readUntil(CharFilter, boolean, String, boolean, boolean)}.
+   */
+  @Test
+  public void testReadUntilWithStopString() {
+
+    // given
+    CharFilter filter = CharFilter.NEWLINE_FILTER;
+    String string = "/* comment */\n" + //
+        "  /*\n" + //
+        "   *   Line  1.    \n" + //
+        "   * Line2  \n" + //
+        "   */";
+    // when
+    CharStreamScanner scanner = scanner(string, true);
+    // then
+    assertThat(scanner.expect("/*")).isTrue();
+    assertThat(scanner.readUntil(filter, false, "*/", false, true)).isEqualTo("comment");
+    assertThat(scanner.expect("*/")).isTrue();
+    assertThat(scanner.readLine()).isEmpty();
+    assertThat(scanner.readUntil(filter, false, "/*", false, true)).isEmpty();
+    assertThat(scanner.expect("/*")).isTrue();
+    assertThat(scanner.skipUntil('*')).isTrue();
+    assertThat(scanner.readUntil(filter, false, "*/", false, true)).isEqualTo("Line  1.");
+    assertThat(scanner.skipUntil('*')).isTrue();
+    assertThat(scanner.readUntil(filter, false, "*/", false, true)).isEqualTo("Line2");
+    assertThat(scanner.readLine()).isEmpty();
+    assertThat(scanner.readUntil(filter, false, "*/", false, false)).isEqualTo("   ");
   }
 
   /**
@@ -515,6 +539,24 @@ public abstract class AbstractCharStreamScannerTest extends Assertions {
   }
 
   @Test
+  public void testReadLineWithTrim() {
+
+    // given
+    String string = "  ab c \ndef\r ghi\r\nj k l\n \r \n  \r\n   end";
+    // when
+    CharStreamScanner scanner = scanner(string);
+    // then
+    assertThat(scanner.readLine(true)).isEqualTo("ab c");
+    assertThat(scanner.readLine(true)).isEqualTo("def");
+    assertThat(scanner.readLine(true)).isEqualTo("ghi");
+    assertThat(scanner.readLine(true)).isEqualTo("j k l");
+    assertThat(scanner.readLine(true)).isEmpty();
+    assertThat(scanner.readLine(true)).isEmpty();
+    assertThat(scanner.readLine(true)).isEmpty();
+    assertThat(scanner.readLine(true)).isEqualTo("end");
+  }
+
+  @Test
   public void testReadDigit() {
 
     // given
@@ -612,5 +654,22 @@ public abstract class AbstractCharStreamScannerTest extends Assertions {
     assertThat(scanner.skipWhileAndPeek(filter, 10)).isEqualTo('\0');
     assertThat(scanner.expect(' ')).isFalse();
     assertThat(scanner.expect("Text", true)).isFalse();
+  }
+
+  /**
+   * Tests {@link CharStreamScanner#readJavaStringLiteral()}.
+   */
+  @Test
+  public void testReadJavaStringLiteral() {
+
+    // given
+    String string = "\"Hi \\\"\\176\\477\\579\\u2022\\uuuuu2211\\\"\\n\"";
+    // when
+    CharStreamScanner scanner = scanner(string);
+    String result = scanner.readJavaStringLiteral();
+    // then
+    assertThat(result).isEqualTo("Hi \"~'7/9•∑\"\n");
+    assertThat(result).isEqualTo("Hi \"\176\477\579\u2022\uuuuu2211\"\n");
+    assertThat(scanner.hasNext()).isFalse();
   }
 }

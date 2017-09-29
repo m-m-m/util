@@ -170,4 +170,67 @@ public class StringUtilTest extends Assertions {
     assertThat(util.toHex(new byte[] { 0x07f })).isEqualTo("7f");
     assertThat(util.toHex(new byte[0])).isEqualTo("");
   }
+
+  @Test
+  public void testResolveEscapeChar() {
+
+    // given
+    StringUtil util = getStringUtil();
+    // when + then
+    assertThat(util.resolveEscape('B')).isNull();
+    assertThat(util.resolveEscape('b')).isEqualTo('\b');
+    assertThat(util.resolveEscape('\'')).isEqualTo('\'');
+    assertThat(util.resolveEscape('"')).isEqualTo('\"');
+    assertThat(util.resolveEscape('t')).isEqualTo('\t');
+    assertThat(util.resolveEscape('n')).isEqualTo('\n');
+    assertThat(util.resolveEscape('r')).isEqualTo('\r');
+    assertThat(util.resolveEscape('0')).isEqualTo('\0');
+    assertThat(util.resolveEscape('1')).isEqualTo('\1');
+    assertThat(util.resolveEscape('2')).isEqualTo('\2');
+    assertThat(util.resolveEscape('3')).isEqualTo('\3');
+    assertThat(util.resolveEscape('4')).isEqualTo('\4');
+    assertThat(util.resolveEscape('5')).isEqualTo('\5');
+    assertThat(util.resolveEscape('6')).isEqualTo('\6');
+    assertThat(util.resolveEscape('7')).isEqualTo('\7');
+    assertThat(util.resolveEscape('8')).isNull();
+    assertThat(util.resolveEscape('9')).isNull();
+    assertThat(util.resolveEscape('a')).isNull();
+  }
+
+  @Test
+  public void testResolveEscapeString() {
+
+    // given
+    StringUtil util = getStringUtil();
+    // when + then
+    assertThat(util.resolveEscape("B")).isNull();
+    assertThat(util.resolveEscape("b")).isEqualTo('\b');
+    assertThat(util.resolveEscape("\'")).isEqualTo('\'');
+    assertThat(util.resolveEscape("\"")).isEqualTo('\"');
+    assertThat(util.resolveEscape("t")).isEqualTo('\t');
+    assertThat(util.resolveEscape("n")).isEqualTo('\n');
+    assertThat(util.resolveEscape("r")).isEqualTo('\r');
+    assertThat(util.resolveEscape("0")).isEqualTo('\0');
+    assertThat(util.resolveEscape("1")).isEqualTo('\1');
+    assertThat(util.resolveEscape("2")).isEqualTo('\2');
+    assertThat(util.resolveEscape("3")).isEqualTo('\3');
+    assertThat(util.resolveEscape("4")).isEqualTo('\4');
+    assertThat(util.resolveEscape("5")).isEqualTo('\5');
+    assertThat(util.resolveEscape("6")).isEqualTo('\6');
+    assertThat(util.resolveEscape("7")).isEqualTo('\7');
+    assertThat(util.resolveEscape("8")).isNull();
+    assertThat(util.resolveEscape("9")).isNull();
+    assertThat(util.resolveEscape("a")).isNull();
+    assertThat(util.resolveEscape("17")).isEqualTo('\17');
+    assertThat(util.resolveEscape("37")).isEqualTo('\37');
+    assertThat(util.resolveEscape("77")).isEqualTo('\77');
+    assertThat(util.resolveEscape("377")).isEqualTo('\377');
+    assertThat(util.resolveEscape("378")).isNull();
+    assertThat(util.resolveEscape("400")).isNull();
+    assertThat(util.resolveEscape("u1234")).isEqualTo('\u1234');
+    assertThat(util.resolveEscape("uu1234")).isEqualTo('\uu1234');
+    // Java Language Spec is somewhat crazy
+    assertThat(util.resolveEscape("uuuuuuuuuuuuuuuuuuuuuuuuu1234")).isEqualTo('\uuuuuuuuuuuuuuuuuuuuuuuuu1234');
+  }
+
 }

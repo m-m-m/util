@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
-import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.BasicHelper;
@@ -153,7 +152,19 @@ public class CharReaderScanner extends AbstractCharStreamScannerImpl {
   }
 
   @Override
-  protected boolean isEot() {
+  protected boolean isEob() {
+
+    if (this.reader != null) {
+      return false;
+    }
+    if (this.lookaheadLimit > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public boolean isEot() {
 
     if (this.offset < this.limit) {
       return false;
@@ -224,89 +235,55 @@ public class CharReaderScanner extends AbstractCharStreamScannerImpl {
   }
 
   @Override
-  public boolean skipOver(String substring, boolean ignoreCase, CharFilter stopFilter) {
+  protected void verifyLookahead(String substring) {
 
     int subLength = substring.length();
-    if (subLength == 0) {
-      return true;
-    }
     if (subLength > this.buffer.length) {
       throw new ValueOutOfRangeException(Integer.valueOf(subLength), Integer.valueOf(0), Integer.valueOf(this.buffer.length), substring);
     }
-    if (!hasNext()) {
-      return false;
-    }
-    char[] subChars;
-    if (ignoreCase) {
-      subChars = BasicHelper.toLowerCase(substring).toCharArray();
-    } else {
-      subChars = substring.toCharArray();
-    }
-    char first = subChars[0];
-    while (true) {
-      int max = this.limit;
-      if (isEos()) {
-        // we can only find the substring at a position
-        // until where enough chars are left to go...
-        max -= subLength;
-      }
-      while (this.offset <= max) {
-        char c = this.buffer[this.offset++];
-        if ((stopFilter != null) && stopFilter.accept(c)) {
+  }
+
+  @Override
+  protected boolean expectRestWithLookahead(char[] stopChars, boolean ignoreCase, Runnable appender, boolean skip) {
+
+    int myCharsIndex = this.offset + 1;
+    int subCharsIndex = 1;
+    while (subCharsIndex < stopChars.length) {
+      if (myCharsIndex == this.limit) { // lookahead required?
+        if (!fillLookahead()) {
+          if (skip) {
+            this.offset = this.limit;
+          }
           return false;
         }
-        if (ignoreCase) {
-          c = Character.toLowerCase(c);
-        }
-        if (c == first) {
-          // found first character
-          int myCharsIndex = this.offset;
-          int subCharsIndex = 1;
-          boolean found = true;
-          while (subCharsIndex < subLength) {
-            if (myCharsIndex == this.limit) {
-              if (!fillLookahead()) {
-                return false;
-              }
-              int lookaheadIndex = 0;
-              while (subCharsIndex < subLength) {
-                c = this.lookaheadBuffer[lookaheadIndex++];
-                if (ignoreCase) {
-                  c = Character.toLowerCase(c);
-                }
-                if (c != subChars[subCharsIndex++]) {
-                  found = false;
-                  break;
-                }
-              }
-              if (found) {
-                shiftLookahead();
-                this.offset = lookaheadIndex;
-                return true;
-              }
-            } else {
-              c = this.buffer[myCharsIndex++];
-              if (ignoreCase) {
-                c = Character.toLowerCase(c);
-              }
-              if (c != subChars[subCharsIndex++]) {
-                found = false;
-                break;
-              }
-            }
-          }
-          if (found) {
-            this.offset = myCharsIndex;
-            return true;
+        int lookaheadIndex = 0;
+        while (subCharsIndex < stopChars.length) {
+          char c = this.lookaheadBuffer[lookaheadIndex++];
+          char stopChar = stopChars[subCharsIndex++];
+          if (c != stopChar && (!ignoreCase || (Character.toLowerCase(c) != stopChar))) {
+            return false;
           }
         }
-      }
-      if (!fill()) {
-        // substring not found (EOT)
-        this.offset = this.limit;
-        return false;
+        if (appender != null) {
+          appender.run();
+        }
+        if (skip) {
+          shiftLookahead();
+          this.offset = lookaheadIndex;
+        }
+        return true;
+      } else {
+        char c = this.buffer[myCharsIndex++];
+        char stopChar = stopChars[subCharsIndex++];
+        if (c != stopChar && (!ignoreCase || (Character.toLowerCase(c) != stopChar))) {
+          return false;
+        }
       }
     }
+    if (skip) {
+      this.offset = myCharsIndex;
+    }
+    return true;
   }
 
 }
