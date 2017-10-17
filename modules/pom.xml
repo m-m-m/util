@@ -26,9 +26,6 @@
     <module>../version</module>
     <module>../json</module>
     <module>../data</module>
-    <module>../property</module>
-    <module>../bean</module>
-    <module>../query</module>
     <module>../gwt</module>
     <module>../http</module>
   </modules>
