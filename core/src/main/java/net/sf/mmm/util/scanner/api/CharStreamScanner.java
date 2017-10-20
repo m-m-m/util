@@ -63,6 +63,18 @@ public interface CharStreamScanner {
   int readDigit();
 
   /**
+   * This method reads the {@link #next() next character} if it is a digit within the given {@code radix}.
+   * Else the state remains unchanged.
+   *
+   * @param radix the radix that defines the range of the digits. See {@link Integer#parseInt(String, int)}.
+   *        E.g. {@code 10} to read any Latin digit (see {@link #readDigit()}), {@code 8} to read octal digit,
+   *        {@code 16} to read hex decimal digits.
+   * @return the numeric value of the next digit within the given {@code radix} or {@code -1} if the
+   *         {@link #peek() current character} is no such digit.
+   */
+  int readDigit(int radix);
+
+  /**
    * This method reads the long starting at the current position by reading as many Latin digits as available
    * but at maximum the given {@code maxDigits} and returns its {@link Long#parseLong(String) parsed} value.
    * <br>
@@ -569,7 +581,7 @@ public interface CharStreamScanner {
    *         {@code null} if the EOT has already been reached and {@link #hasNext()} returns {@code false}.
    * @since 7.5.0
    */
-  public String readLine();
+  String readLine();
 
   /**
    * @param trim - {@code true} if the result should be {@link String#trim() trimmed}, {@code false}
@@ -578,7 +590,7 @@ public interface CharStreamScanner {
    *         if {@code trim} is {@code true}) or {@link #isEot() EOT}. Will be {@code null} if the EOT has
    *         already been reached and {@link #hasNext()} returns {@code false}.
    */
-  public String readLine(boolean trim);
+  String readLine(boolean trim);
 
   /**
    * Reads and parses a Java {@link String} literal value according to JLS 3.10.6. <br>
@@ -589,7 +601,96 @@ public interface CharStreamScanner {
    *         literal.
    * @see net.sf.mmm.util.lang.api.StringUtil#resolveEscape(String)
    */
-  public String readJavaStringLiteral();
+  String readJavaStringLiteral();
+
+  /**
+   * Reads and parses a Java {@link String} literal value according to JLS 3.10.6. <br>
+   * As a complex example for the input "Hi \"\176\477\579\u2022\uuuuu2211\"\n" this scanner would return the
+   * {@link String} output {@code Hi "~'7/9•∑"} followed by a newline character.
+   *
+   * @return the parsed Java {@link String} literal value or {@code null} if not pointing to a {@link String}
+   *         literal.
+   * @param tolerant - {@code true} if invalid escape sequences should be tolerated (as '?'), {@code false} to
+   *        throw an exception in such case.
+   * @see net.sf.mmm.util.lang.api.StringUtil#resolveEscape(String)
+   */
+  String readJavaStringLiteral(boolean tolerant);
+
+  /**
+   * Reads and parses a Java {@link Character} literal value according to JLS 3.10.6. <br>
+   * Examples are given in the following table:
+   * <table border="1">
+   * <tr>
+   * <th>literal</th>
+   * <th>result</th>
+   * <th>comment</th>
+   * </tr>
+   * <tr>
+   * <td>{@code 'a'}</td>
+   * <td>a</td>
+   * <td>regular char</td>
+   * </tr>
+   * <tr>
+   * <td>{@code '\''}</td>
+   * <td>'</td>
+   * <td>escaped char</td>
+   * </tr>
+   * <tr>
+   * <td>{@code '\176'}</td>
+   * <td>~</td>
+   * <td>escaped octal representation</td>
+   * </tr>
+   * <tr>
+   * <td>{@code '\u2022'}</td>
+   * <td>•</td>
+   * <td>escaped unicode representation</td>
+   * </tr>
+   * </table>
+   *
+   * @return the parsed Java {@link String} literal value or {@code null} if not pointing to a {@link String}
+   *         literal.
+   * @see net.sf.mmm.util.lang.api.StringUtil#resolveEscape(char)
+   */
+  Character readJavaCharLiteral();
+
+  /**
+   * Reads and parses a Java {@link Character} literal value according to JLS 3.10.6. <br>
+   * Examples are given in the following table:
+   * <table border="1">
+   * <tr>
+   * <th>literal</th>
+   * <th>result</th>
+   * <th>comment</th>
+   * </tr>
+   * <tr>
+   * <td>{@code 'a'}</td>
+   * <td>a</td>
+   * <td>regular char</td>
+   * </tr>
+   * <tr>
+   * <td>{@code '\''}</td>
+   * <td>'</td>
+   * <td>escaped char</td>
+   * </tr>
+   * <tr>
+   * <td>{@code '\176'}</td>
+   * <td>~</td>
+   * <td>escaped octal representation</td>
+   * </tr>
+   * <tr>
+   * <td>{@code '\u2022'}</td>
+   * <td>•</td>
+   * <td>escaped unicode representation</td>
+   * </tr>
+   * </table>
+   *
+   * @return the parsed Java {@link String} literal value or {@code null} if not pointing to a {@link String}
+   *         literal.
+   * @param tolerant - {@code true} if an invalid char literal should be tolerated (as '?'), {@code false} to
+   *        throw an exception in such case.
+   * @see net.sf.mmm.util.lang.api.StringUtil#resolveEscape(char)
+   */
+  Character readJavaCharLiteral(boolean tolerant);
 
   /**
    * @return {@code true} if end of text (EOT) is known to have been reached, {@code false} otherwise. The

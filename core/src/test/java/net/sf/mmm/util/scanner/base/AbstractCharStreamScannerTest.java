@@ -7,8 +7,10 @@ import java.util.Locale;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
+import net.sf.mmm.util.nls.api.NlsObject;
 import net.sf.mmm.util.scanner.api.CharScannerSyntax;
 import net.sf.mmm.util.scanner.api.CharStreamScanner;
 
@@ -671,5 +673,106 @@ public abstract class AbstractCharStreamScannerTest extends Assertions {
     assertThat(result).isEqualTo("Hi \"~'7/9•∑\"\n");
     assertThat(result).isEqualTo("Hi \"\176\477\579\u2022\uuuuu2211\"\n");
     assertThat(scanner.hasNext()).isFalse();
+  }
+
+  /**
+   * Tests {@link CharStreamScanner#readJavaStringLiteral()} with invald data.
+   */
+  @Test
+  public void testReadJavaStringLiteralErrors() {
+
+    readJavaStringLiteralInvalid("\"", "\"", "");
+    readJavaStringLiteralInvalid("\"a", "\"a", "a");
+    readJavaStringLiteralInvalid("\"ab", "\"ab", "ab");
+    readJavaStringLiteralInvalid("\"ab\\\"", "\"ab\"", "ab\"");
+    readJavaStringLiteralInvalid("\"ab\\\"\\8", "\\8", "ab\"8");
+    readJavaStringLiteralInvalid("\"\\u1\"$", "\\u1", "?");
+    readJavaStringLiteralInvalid("\"a\\u123x\"", "\\u123", "a?x");
+  }
+
+  private void readJavaStringLiteralInvalid(String string, String expectedErrorValue, String tolerantResult) {
+
+    assertThat(scanner(string).readJavaStringLiteral(true)).isEqualTo(tolerantResult);
+    Class<NlsParseException> exception = NlsParseException.class;
+    try {
+      scanner(string).readJavaStringLiteral();
+      failBecauseExceptionWasNotThrown(exception);
+    } catch (Exception e) {
+      assertThat(e).isInstanceOf(exception);
+      NlsParseException ex = (NlsParseException) e;
+      assertThat(ex.getNlsMessage().getArgument(NlsObject.KEY_VALUE)).isEqualTo(expectedErrorValue);
+    }
+  }
+
+  /**
+   * Tests {@link CharStreamScanner#readJavaCharLiteral()}.
+   */
+  @Test
+  public void testReadJavaCharLiteral() {
+
+    // given
+    String string = "'a'$'\\''$'\\\\'$'\\0'$'\\47'$'\\176'$'\\u2022'$";
+    // when
+    CharStreamScanner scanner = scanner(string);
+    // then
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('a');
+    assertThat(scanner.expect('$')).isTrue();
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('\'');
+    assertThat(scanner.expect('$')).isTrue();
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('\\');
+    assertThat(scanner.expect('$')).isTrue();
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('\0');
+    assertThat(scanner.expect('$')).isTrue();
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('\'');
+    assertThat(scanner.expect('$')).isTrue();
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('~');
+    assertThat(scanner.expect('$')).isTrue();
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('•');
+    assertThat(scanner.expect('$')).isTrue();
+    assertThat(scanner.hasNext()).isFalse();
+
+    // and given
+    string = "'a''\\'''\\\\''\\0''\\47''\\176''\\u2022'";
+    // when
+    scanner = scanner(string);
+    // then
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('a');
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('\'');
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('\\');
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('\0');
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('\'');
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('~');
+    assertThat(scanner.readJavaCharLiteral()).isEqualTo('•');
+    assertThat(scanner.hasNext()).isFalse();
+  }
+
+  /**
+   * Tests {@link CharStreamScanner#readJavaCharLiteral()} with invalid data.
+   */
+  @Test
+  public void testReadJavaCharLiteralErrors() {
+
+    readJavaCharLiteralInvalid("'", "'");
+    readJavaCharLiteralInvalid("'a", "'a");
+    readJavaCharLiteralInvalid("'ab'", "'ab'");
+    readJavaCharLiteralInvalid("'ab'$", "'ab'");
+    readJavaCharLiteralInvalid("'\\u12345'$", "'\\u12345'");
+    readJavaCharLiteralInvalid("'\\8'$", "'\\8'");
+    readJavaCharLiteralInvalid("'\\78'$", "'\\78'");
+    readJavaCharLiteralInvalid("'\\477'$", "'\\477'");
+  }
+
+  private void readJavaCharLiteralInvalid(String string, String expectedErrorValue) {
+
+    assertThat(scanner(string).readJavaCharLiteral(true)).isEqualTo('?');
+    Class<NlsParseException> exception = NlsParseException.class;
+    try {
+      scanner(string).readJavaCharLiteral();
+      failBecauseExceptionWasNotThrown(exception);
+    } catch (Exception e) {
+      assertThat(e).isInstanceOf(exception);
+      NlsParseException ex = (NlsParseException) e;
+      assertThat(ex.getNlsMessage().getArgument(NlsObject.KEY_VALUE)).isEqualTo(expectedErrorValue);
+    }
   }
 }
