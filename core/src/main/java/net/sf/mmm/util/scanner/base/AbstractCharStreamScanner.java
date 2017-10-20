@@ -22,6 +22,12 @@ public abstract class AbstractCharStreamScanner implements CharStreamScanner {
   }
 
   @Override
+  public int readDigit() {
+
+    return readDigit(10);
+  }
+
+  @Override
   public double readDouble() throws NumberFormatException {
 
     String number = consumeDecimal();
@@ -107,6 +113,18 @@ public abstract class AbstractCharStreamScanner implements CharStreamScanner {
   public boolean expectStrict(String expected) {
 
     return expectStrict(expected, false);
+  }
+
+  @Override
+  public Character readJavaCharLiteral() {
+
+    return readJavaCharLiteral(false);
+  }
+
+  @Override
+  public String readJavaStringLiteral() {
+
+    return readJavaStringLiteral(false);
   }
 
 }

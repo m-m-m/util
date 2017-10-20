@@ -4,6 +4,9 @@ package net.sf.mmm.util.scanner.base;
 
 import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
@@ -21,6 +24,17 @@ import net.sf.mmm.util.scanner.api.CharStreamScanner;
  * @since 7.5.0
  */
 public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamScanner {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractCharStreamScannerImpl.class);
+
+  private static final CharFilter FILTER_SINGLE_QUOTE = new CharFilter() {
+
+    @Override
+    public boolean accept(char c) {
+
+      return c == '\'';
+    }
+  };
 
   /** The internal buffer with character data. */
   protected char[] buffer;
@@ -555,7 +569,7 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
   }
 
   @Override
-  public String readJavaStringLiteral() {
+  public String readJavaStringLiteral(boolean tolerant) {
 
     if (!hasNext()) {
       return null;
@@ -573,7 +587,8 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
           return getAppended(builder, start, this.offset - 1);
         } else if (c == '\\') {
           builder = append(builder, start, this.offset - 1);
-          parseEscapeSequence(builder);
+          builder = builder(builder);
+          parseEscapeSequence(builder, tolerant);
           start = this.offset;
         }
       }
@@ -583,33 +598,106 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
     if (builder != null) {
       value = builder.toString();
     }
-    throw new NlsParseException(value, "terminated string", "Java string literal");
+    if (tolerant) {
+      LOG.debug("Tolerating unterminated string literal: {}", value);
+      return value;
+    }
+    throw new NlsParseException("\"" + value, "terminated string", "Java string literal");
   }
 
-  private void parseEscapeSequence(StringBuilder builder) {
+  @Override
+  public Character readJavaCharLiteral(boolean tolerant) {
+
+    if (expect('\'')) {
+      StringBuilder error = null;
+      char c = forceNext();
+      char next = 0;
+      if (c == '\\') {
+        c = forceNext();
+        if (c == 'u') {
+          c = parseUnicodeEscapeSequence(tolerant);
+          if (expect('\'')) {
+            return Character.valueOf(c);
+          }
+          error = createUnicodeLiteralError(c);
+        } else {
+          next = forceNext();
+          if (next == '\'') {
+            Character character = StringUtilImpl.getInstance().resolveEscape(c);
+            if (character != null) {
+              return character;
+            }
+          } else if (CharFilter.OCTAL_DIGIT_FILTER.accept(c) && CharFilter.OCTAL_DIGIT_FILTER.accept(next)) {
+            int value = ((c - '0') * 8) + (next - '0');
+            char last = forceNext();
+            if (CharFilter.OCTAL_DIGIT_FILTER.accept(last) && (value <= 37)) {
+              value = (value * 8) + (last - '0');
+              last = forceNext();
+            }
+            if (last == '\'') {
+              return Character.valueOf((char) value);
+            }
+            error = new StringBuilder("'\\");
+            error.append(Integer.toString(value, 8));
+            error.append(last);
+          }
+          if (error == null) {
+            error = new StringBuilder("'\\");
+            error.append(c);
+            error.append(next);
+          }
+        }
+      } else if (expect('\'')) {
+        return Character.valueOf(c);
+      } else {
+        error = new StringBuilder("'");
+        if (c != 0) {
+          error.append(c);
+        }
+      }
+      if (next != '\'') {
+        String rest = readUntil(FILTER_SINGLE_QUOTE, true);
+        error.append(rest);
+        if (expect('\'')) {
+          error.append('\'');
+        }
+      }
+      if (tolerant) {
+        LOG.debug("Tolerating invalid char literal: {}", error.toString());
+        return Character.valueOf('?');
+      }
+      throw new NlsParseException(error.toString(), "terminated char", "Java character literal");
+      // LOG.warn("Invalid char literal {}.", error.toString());
+      // return Character.valueOf('?');
+    }
+    return null;
+
+  }
+
+  private StringBuilder createUnicodeLiteralError(char c) {
+
+    StringBuilder error;
+    error = new StringBuilder("'\\");
+    error.append('u');
+    String hex = Integer.toString(c, 16);
+    int length = hex.length();
+    if (length == 1) {
+      hex = "000" + hex;
+    } else if (length == 2) {
+      hex = "00" + hex;
+    } else if (length == 3) {
+      hex = "0" + hex;
+    }
+    error.append(hex);
+    return error;
+  }
+
+  private void parseEscapeSequence(StringBuilder builder, boolean tolerant) {
 
     char c = forceNext();
     if (c == 'u') { // unicode
-      skipWhile('u');
-      char[] hex = new char[4];
-      hex[0] = forceNext();
-      hex[1] = forceNext();
-      hex[2] = forceNext();
-      hex[3] = forceNext();
-      if (hex[3] == '\0') {
-        int max = 2;
-        while (hex[max] == '\0') {
-          max--;
-          if (max < 0) {
-            break;
-          }
-        }
-        String hexString = new String(hex, 0, max + 1);
-        throw new NlsParseException("\\u" + hexString, "\\u+[0-9a-fA-F]{4}", "Java unicode escape sequence");
-      }
-      String hexString = new String(hex);
-      int value = Integer.parseInt(hexString, 16);
-      builder.append((char) value);
+      char value = parseUnicodeEscapeSequence(tolerant);
+      builder.append(value);
     } else if (CharFilter.OCTAL_DIGIT_FILTER.accept(c)) { // octal C legacy stuff
       int value = c - '0';
       c = forcePeek();
@@ -628,10 +716,46 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
     } else {
       Character resolved = StringUtilImpl.getInstance().resolveEscape(c);
       if (resolved == null) {
-        throw new NlsParseException("\\" + c, "\\[0-7bfnrt\\'\"]", "Java escape sequence");
+        if (tolerant) {
+          builder.append(c);
+        } else {
+          throw new NlsParseException("\\" + c, "\\[0-7bfnrt\\'\"]", "Java escape sequence");
+        }
+      } else {
+        builder.append(resolved.charValue());
       }
-      builder.append(resolved.charValue());
     }
+  }
+
+  private char parseUnicodeEscapeSequence(boolean tolerant) {
+
+    skipWhile('u');
+    int i = 0;
+    int value = 0;
+    int radix = 16;
+    while (i < 4) {
+      int digit = readDigit(radix);
+      if (digit < 0) {
+        String hexString;
+        if (i == 0) {
+          hexString = "";
+        } else {
+          hexString = Integer.toString(value, radix);
+          while (hexString.length() < i) {
+            hexString = "0" + hexString;
+          }
+        }
+        if (tolerant) {
+          LOG.debug("Tolerating invalid unicode escape sequence: {}", hexString);
+          return '?';
+        } else {
+          throw new NlsParseException("\\u" + hexString, "\\u+[0-9a-fA-F]{4}", "Java unicode escape sequence");
+        }
+      }
+      value = (value * radix) + digit;
+      i++;
+    }
+    return (char) value;
   }
 
   @Override
@@ -664,13 +788,23 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
   }
 
   @Override
-  public int readDigit() {
+  public int readDigit(int radix) {
 
     int result = -1;
     if (hasNext()) {
       char c = this.buffer[this.offset];
+      int value = -1;
       if ((c >= '0') && (c <= '9')) {
-        result = c - '0';
+        value = c - '0';
+      }
+      if ((c >= 'a') && (c <= 'z')) {
+        value = (c - 'a') + 10;
+      }
+      if ((c >= 'A') && (c <= 'Z')) {
+        value = (c - 'A') + 10;
+      }
+      if ((value >= 0) && (value < radix)) {
+        result = value;
         this.offset++;
       }
     }

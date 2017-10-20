@@ -281,4 +281,13 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
       + "The conflict concerns the entity {entity} with primary key {id}.")
   NlsMessage errorOptimisticLocking(Object entity, Object id);
 
+  /**
+   * @param service the service that failed (e.g. qualified name of service interface).
+   * @param message the actual error message.
+   * @return the {@link NlsMessage}.
+   */
+  @NlsBundleMessage("While invoking the service {service} the following error occurred: {message}. Probably the service is temporary unavailable. "
+      + "Please try again later. If the problem persists contact your system administrator.")
+  NlsMessage errorServiceInvocationFailed(@Named("service") String service, @Named("message") String message);
+
 }
