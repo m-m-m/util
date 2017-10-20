@@ -18,7 +18,7 @@
   <properties>
     <!-- Internal project versions -->
     <net.sf.mmm.l10n.version>1.5.0</net.sf.mmm.l10n.version>
-    <net.sf.mmm.util.version>7.5.0-SNAPSHOT</net.sf.mmm.util.version>
+    <net.sf.mmm.util.version>7.5.0</net.sf.mmm.util.version>
   </properties>
 
   <modules>
