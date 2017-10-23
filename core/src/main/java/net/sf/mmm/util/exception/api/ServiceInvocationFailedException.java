@@ -56,4 +56,10 @@ public class ServiceInvocationFailedException extends NlsRuntimeException {
     return this.code;
   }
 
+  @Override
+  public boolean isForUser() {
+
+    return true;
+  }
+
 }
