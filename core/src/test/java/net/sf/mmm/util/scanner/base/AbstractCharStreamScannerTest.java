@@ -325,6 +325,26 @@ public abstract class AbstractCharStreamScannerTest extends Assertions {
     check('\0', true, syntax, "\"\"a\"\"\"\"b\"\"\"c\"", "\"a\"\"b\"c");
   }
 
+  /**
+   * Test of {@link CharStreamScanner#readUntil(CharFilter, boolean, String, boolean ignoreCase, boolean)}
+   * with buffer limit overflow.
+   */
+  @Test
+  public void testReadUntilWithCharFilterAndStopString() {
+
+    // given
+    String string = " blabla_$\n";
+    CharStreamScanner scanner;
+    // when
+    scanner = scanner(string);
+    // then
+    assertThat(scanner.readUntil(CharFilter.NEWLINE_FILTER, true, "$", false, true)).isEqualTo("blabla_");
+    // and when
+    scanner = scanner(string, true);
+    // then
+    assertThat(scanner.readUntil(CharFilter.NEWLINE_FILTER, true, "_$", false, true)).isEqualTo("blabla");
+  }
+
   @Test
   public void testReadLong() {
 
