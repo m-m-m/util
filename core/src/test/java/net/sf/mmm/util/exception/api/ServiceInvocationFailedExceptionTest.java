@@ -28,6 +28,7 @@ public class ServiceInvocationFailedExceptionTest extends Assertions {
     ServiceInvocationFailedException error = new ServiceInvocationFailedException(message, code, uuid, service);
     assertThat(error.getUuid()).isSameAs(uuid);
     assertThat(error.getCode()).isSameAs(code);
+    assertThat(error.isForUser()).isTrue();
     NlsMessage nlsMessage = error.getNlsMessage();
     assertThat(nlsMessage.getArgument("service")).isSameAs(service);
     assertThat(nlsMessage.getArgument("message")).isSameAs(message);

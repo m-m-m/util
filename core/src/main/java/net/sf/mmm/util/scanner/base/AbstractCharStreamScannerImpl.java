@@ -414,7 +414,7 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
         // until where enough chars are left to go...
         max -= stopLength;
       }
-      while (this.offset <= max) {
+      while (this.offset < max) {
         char c = this.buffer[this.offset];
         if (stopFilter.accept(c)) {
           return appender.getAppended();
@@ -431,6 +431,7 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
         }
         this.offset++;
       }
+      appender.append(this.offset);
       if (!fill()) {
         // substring not found (EOT)
         this.offset = this.limit;
