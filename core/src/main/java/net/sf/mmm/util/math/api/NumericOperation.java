@@ -14,60 +14,200 @@ import java.math.BigInteger;
 public abstract class NumericOperation {
 
   /**
-   * @param value1 the first {@link Numeric} value.
-   * @param value2 the second {@link Numeric} value.
-   * @return the computed value as {@link Byte}.
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code byte}.
    */
-  public abstract Byte computeByte(Numeric value1, Numeric value2);
+  public byte computeByte(Numeric value1, Numeric value2) {
+
+    return computeByte(value1.byteValue(), value2.byteValue());
+  }
 
   /**
-   * @param value1 the first {@link Numeric} value.
-   * @param value2 the second {@link Numeric} value.
-   * @return the computed value as {@link Short}.
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code byte}.
    */
-  public abstract Short computeShort(Numeric value1, Numeric value2);
+  public byte computeByte(Number value1, Number value2) {
+
+    return computeByte(value1.byteValue(), value2.byteValue());
+  }
 
   /**
-   * @param value1 the first {@link Numeric} value.
-   * @param value2 the second {@link Numeric} value.
-   * @return the computed value as {@link Integer}.
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code byte}.
    */
-  public abstract Integer computeInteger(Numeric value1, Numeric value2);
+  public abstract byte computeByte(byte value1, byte value2);
 
   /**
-   * @param value1 the first {@link Numeric} value.
-   * @param value2 the second {@link Numeric} value.
-   * @return the computed value as {@link Long}.
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code short}.
    */
-  public abstract Long computeLong(Numeric value1, Numeric value2);
+  public short computeShort(Numeric value1, Numeric value2) {
+
+    return computeShort(value1.shortValue(), value2.shortValue());
+  }
 
   /**
-   * @param value1 the first {@link Numeric} value.
-   * @param value2 the second {@link Numeric} value.
-   * @return the computed value as {@link Float}.
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code short}.
    */
-  public abstract Float computeFloat(Numeric value1, Numeric value2);
+  public short computeShort(Number value1, Number value2) {
+
+    return computeShort(value1.shortValue(), value2.shortValue());
+  }
 
   /**
-   * @param value1 the first {@link Numeric} value.
-   * @param value2 the second {@link Numeric} value.
-   * @return the computed value as {@link Double}.
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code short}.
    */
-  public abstract Double computeDouble(Numeric value1, Numeric value2);
+  public abstract short computeShort(short value1, short value2);
 
   /**
-   * @param value1 the first {@link Numeric} value.
-   * @param value2 the second {@link Numeric} value.
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code int}.
+   */
+  public int computeInteger(Numeric value1, Numeric value2) {
+
+    return computeInteger(value1.intValue(), value2.intValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code int}.
+   */
+  public int computeInteger(Number value1, Number value2) {
+
+    return computeInteger(value1.intValue(), value2.intValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code int}.
+   */
+  public abstract int computeInteger(int value1, int value2);
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code long}.
+   */
+  public long computeLong(Numeric value1, Numeric value2) {
+
+    return computeLong(value1.longValue(), value2.longValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code long}.
+   */
+  public long computeLong(Number value1, Number value2) {
+
+    return computeLong(value1.longValue(), value2.longValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code long}.
+   */
+  public abstract long computeLong(long value1, long value2);
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code float}.
+   */
+  public float computeFloat(Numeric value1, Numeric value2) {
+
+    return computeFloat(value1.floatValue(), value2.floatValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code float}.
+   */
+  public float computeFloat(Number value1, Number value2) {
+
+    return computeFloat(value1.floatValue(), value2.floatValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code float}.
+   */
+  public abstract float computeFloat(float value1, float value2);
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code double}.
+   */
+  public double computeDouble(Numeric value1, Numeric value2) {
+
+    return computeDouble(value1.doubleValue(), value2.doubleValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code double}.
+   */
+  public double computeDouble(Number value1, Number value2) {
+
+    return computeDouble(value1.doubleValue(), value2.doubleValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@code double}.
+   */
+  public abstract double computeDouble(double value1, double value2);
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
    * @return the computed value as {@link BigInteger}.
    */
-  public abstract BigInteger computeBigInteger(Numeric value1, Numeric value2);
+  public BigInteger computeBigInteger(Numeric value1, Numeric value2) {
+
+    return computeBigInteger(value1.bigIntegerValue(), value2.bigIntegerValue());
+  }
 
   /**
-   * @param value1 the first {@link Numeric} value.
-   * @param value2 the second {@link Numeric} value.
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@link BigInteger}.
+   */
+  public abstract BigInteger computeBigInteger(BigInteger value1, BigInteger value2);
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
    * @return the computed value as {@link BigDecimal}.
    */
-  public abstract BigDecimal computeBigDecimal(Numeric value1, Numeric value2);
+  public BigDecimal computeBigDecimal(Numeric value1, Numeric value2) {
+
+    return computeBigDecimal(value1.bigDecimalValue(), value2.bigDecimalValue());
+  }
+
+  /**
+   * @param value1 the first value.
+   * @param value2 the second value.
+   * @return the computed value as {@link BigDecimal}.
+   */
+  public abstract BigDecimal computeBigDecimal(BigDecimal value1, BigDecimal value2);
 
   /**
    * {@link NumericOperation} for add ({@code +}).
@@ -75,51 +215,51 @@ public abstract class NumericOperation {
   public static final NumericOperation ADD = new NumericOperation() {
 
     @Override
-    public Byte computeByte(Numeric value1, Numeric value2) {
+    public byte computeByte(byte value1, byte value2) {
 
-      return Byte.valueOf((byte) (value1.byteValue() + value2.byteValue()));
+      return (byte) (value1 + value2);
     }
 
     @Override
-    public Short computeShort(Numeric value1, Numeric value2) {
+    public short computeShort(short value1, short value2) {
 
-      return Short.valueOf((short) (value1.shortValue() + value2.shortValue()));
+      return (short) (value1 + value2);
     }
 
     @Override
-    public Integer computeInteger(Numeric value1, Numeric value2) {
+    public int computeInteger(int value1, int value2) {
 
-      return Integer.valueOf(value1.intValue() + value2.intValue());
+      return value1 + value2;
     }
 
     @Override
-    public Long computeLong(Numeric value1, Numeric value2) {
+    public long computeLong(long value1, long value2) {
 
-      return Long.valueOf(value1.longValue() + value2.longValue());
+      return value1 + value2;
     }
 
     @Override
-    public Float computeFloat(Numeric value1, Numeric value2) {
+    public float computeFloat(float value1, float value2) {
 
-      return Float.valueOf(value1.floatValue() + value2.floatValue());
+      return value1 + value2;
     }
 
     @Override
-    public Double computeDouble(Numeric value1, Numeric value2) {
+    public double computeDouble(double value1, double value2) {
 
-      return Double.valueOf(value1.doubleValue() + value2.doubleValue());
+      return value1 + value2;
     }
 
     @Override
-    public BigInteger computeBigInteger(Numeric value1, Numeric value2) {
+    public BigInteger computeBigInteger(BigInteger value1, BigInteger value2) {
 
-      return value1.bigIntegerValue().add(value2.bigIntegerValue());
+      return value1.add(value2);
     }
 
     @Override
-    public BigDecimal computeBigDecimal(Numeric value1, Numeric value2) {
+    public BigDecimal computeBigDecimal(BigDecimal value1, BigDecimal value2) {
 
-      return value1.bigDecimalValue().add(value2.bigDecimalValue());
+      return value1.add(value2);
     }
   };
 
@@ -129,51 +269,51 @@ public abstract class NumericOperation {
   public static final NumericOperation SUBTRACT = new NumericOperation() {
 
     @Override
-    public Byte computeByte(Numeric value1, Numeric value2) {
+    public byte computeByte(byte value1, byte value2) {
 
-      return Byte.valueOf((byte) (value1.byteValue() - value2.byteValue()));
+      return (byte) (value1 - value2);
     }
 
     @Override
-    public Short computeShort(Numeric value1, Numeric value2) {
+    public short computeShort(short value1, short value2) {
 
-      return Short.valueOf((short) (value1.shortValue() - value2.shortValue()));
+      return (short) (value1 - value2);
     }
 
     @Override
-    public Integer computeInteger(Numeric value1, Numeric value2) {
+    public int computeInteger(int value1, int value2) {
 
-      return Integer.valueOf(value1.intValue() - value2.intValue());
+      return value1 - value2;
     }
 
     @Override
-    public Long computeLong(Numeric value1, Numeric value2) {
+    public long computeLong(long value1, long value2) {
 
-      return Long.valueOf(value1.longValue() - value2.longValue());
+      return value1 - value2;
     }
 
     @Override
-    public Float computeFloat(Numeric value1, Numeric value2) {
+    public float computeFloat(float value1, float value2) {
 
-      return Float.valueOf(value1.floatValue() - value2.floatValue());
+      return value1 - value2;
     }
 
     @Override
-    public Double computeDouble(Numeric value1, Numeric value2) {
+    public double computeDouble(double value1, double value2) {
 
-      return Double.valueOf(value1.doubleValue() - value2.doubleValue());
+      return value1 - value2;
     }
 
     @Override
-    public BigInteger computeBigInteger(Numeric value1, Numeric value2) {
+    public BigInteger computeBigInteger(BigInteger value1, BigInteger value2) {
 
-      return value1.bigIntegerValue().subtract(value2.bigIntegerValue());
+      return value1.subtract(value2);
     }
 
     @Override
-    public BigDecimal computeBigDecimal(Numeric value1, Numeric value2) {
+    public BigDecimal computeBigDecimal(BigDecimal value1, BigDecimal value2) {
 
-      return value1.bigDecimalValue().subtract(value2.bigDecimalValue());
+      return value1.subtract(value2);
     }
   };
 
@@ -183,51 +323,51 @@ public abstract class NumericOperation {
   public static final NumericOperation MULTIPLY = new NumericOperation() {
 
     @Override
-    public Byte computeByte(Numeric value1, Numeric value2) {
+    public byte computeByte(byte value1, byte value2) {
 
-      return Byte.valueOf((byte) (value1.byteValue() * value2.byteValue()));
+      return (byte) (value1 * value2);
     }
 
     @Override
-    public Short computeShort(Numeric value1, Numeric value2) {
+    public short computeShort(short value1, short value2) {
 
-      return Short.valueOf((short) (value1.shortValue() * value2.shortValue()));
+      return (short) (value1 * value2);
     }
 
     @Override
-    public Integer computeInteger(Numeric value1, Numeric value2) {
+    public int computeInteger(int value1, int value2) {
 
-      return Integer.valueOf(value1.intValue() * value2.intValue());
+      return value1 * value2;
     }
 
     @Override
-    public Long computeLong(Numeric value1, Numeric value2) {
+    public long computeLong(long value1, long value2) {
 
-      return Long.valueOf(value1.longValue() * value2.longValue());
+      return value1 * value2;
     }
 
     @Override
-    public Float computeFloat(Numeric value1, Numeric value2) {
+    public float computeFloat(float value1, float value2) {
 
-      return Float.valueOf(value1.floatValue() * value2.floatValue());
+      return value1 * value2;
     }
 
     @Override
-    public Double computeDouble(Numeric value1, Numeric value2) {
+    public double computeDouble(double value1, double value2) {
 
-      return Double.valueOf(value1.doubleValue() * value2.doubleValue());
+      return value1 * value2;
     }
 
     @Override
-    public BigInteger computeBigInteger(Numeric value1, Numeric value2) {
+    public BigInteger computeBigInteger(BigInteger value1, BigInteger value2) {
 
-      return value1.bigIntegerValue().multiply(value2.bigIntegerValue());
+      return value1.multiply(value2);
     }
 
     @Override
-    public BigDecimal computeBigDecimal(Numeric value1, Numeric value2) {
+    public BigDecimal computeBigDecimal(BigDecimal value1, BigDecimal value2) {
 
-      return value1.bigDecimalValue().multiply(value2.bigDecimalValue());
+      return value1.multiply(value2);
     }
   };
 
@@ -237,51 +377,51 @@ public abstract class NumericOperation {
   public static final NumericOperation DIVIDE = new NumericOperation() {
 
     @Override
-    public Byte computeByte(Numeric value1, Numeric value2) {
+    public byte computeByte(byte value1, byte value2) {
 
-      return Byte.valueOf((byte) (value1.byteValue() / value2.byteValue()));
+      return (byte) (value1 / value2);
     }
 
     @Override
-    public Short computeShort(Numeric value1, Numeric value2) {
+    public short computeShort(short value1, short value2) {
 
-      return Short.valueOf((short) (value1.shortValue() / value2.shortValue()));
+      return (short) (value1 / value2);
     }
 
     @Override
-    public Integer computeInteger(Numeric value1, Numeric value2) {
+    public int computeInteger(int value1, int value2) {
 
-      return Integer.valueOf(value1.intValue() / value2.intValue());
+      return value1 / value2;
     }
 
     @Override
-    public Long computeLong(Numeric value1, Numeric value2) {
+    public long computeLong(long value1, long value2) {
 
-      return Long.valueOf(value1.longValue() / value2.longValue());
+      return value1 / value2;
     }
 
     @Override
-    public Float computeFloat(Numeric value1, Numeric value2) {
+    public float computeFloat(float value1, float value2) {
 
-      return Float.valueOf(value1.floatValue() / value2.floatValue());
+      return value1 / value2;
     }
 
     @Override
-    public Double computeDouble(Numeric value1, Numeric value2) {
+    public double computeDouble(double value1, double value2) {
 
-      return Double.valueOf(value1.doubleValue() / value2.doubleValue());
+      return value1 / value2;
     }
 
     @Override
-    public BigInteger computeBigInteger(Numeric value1, Numeric value2) {
+    public BigInteger computeBigInteger(BigInteger value1, BigInteger value2) {
 
-      return value1.bigIntegerValue().divide(value2.bigIntegerValue());
+      return value1.divide(value2);
     }
 
     @Override
-    public BigDecimal computeBigDecimal(Numeric value1, Numeric value2) {
+    public BigDecimal computeBigDecimal(BigDecimal value1, BigDecimal value2) {
 
-      return value1.bigDecimalValue().divide(value2.bigDecimalValue());
+      return value1.divide(value2);
     }
   };
 }
