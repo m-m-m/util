@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
-import java.util.Collection;
-
 import net.sf.mmm.util.validation.base.collection.ValidatorCollectionSize;
 import net.sf.mmm.util.value.api.Range;
 
@@ -27,13 +25,14 @@ public abstract class CompareableValidatorBuilder<V extends Comparable, PARENT, 
    * @param parent the {@link #and() parent} builder.
    */
   public CompareableValidatorBuilder(PARENT parent) {
+
     super(parent);
   }
 
   /**
    * @see ValidatorCollectionSize
    *
-   * @param range the {@link Range} to limit the {@link Collection#size() size} of the {@link Collection}.
+   * @param range the {@link Range} to limit the value (or its size).
    * @return this build instance for fluent API calls.
    */
   public SELF range(Range<V> range) {
