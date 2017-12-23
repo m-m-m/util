@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base.number;
 
-import java.util.Collection;
-
 import net.sf.mmm.util.validation.base.AbstractValidator;
 import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
 import net.sf.mmm.util.value.api.Range;
@@ -16,8 +14,7 @@ import net.sf.mmm.util.value.api.Range;
  * @author hohwille
  * @since 7.1.0
  */
-public class ValidatorBuilderInteger<PARENT>
-    extends NumberValidatorBuilder<Integer, PARENT, ValidatorBuilderInteger<PARENT>> {
+public class ValidatorBuilderInteger<PARENT> extends NumberValidatorBuilder<Integer, PARENT, ValidatorBuilderInteger<PARENT>> {
 
   /**
    * The constructor.
@@ -25,14 +22,15 @@ public class ValidatorBuilderInteger<PARENT>
    * @param parent the {@link #and() parent} builder.
    */
   public ValidatorBuilderInteger(PARENT parent) {
+
     super(parent);
   }
 
   /**
    * @see #range(Range)
    *
-   * @param min the minimum {@link Collection#size() size} allowed.
-   * @param max the maximum {@link Collection#size() size} allowed.
+   * @param min the minimum allowed value.
+   * @param max the maximum allowed value.
    * @return this build instance for fluent API calls.
    */
   public ValidatorBuilderInteger<PARENT> range(int min, int max) {
