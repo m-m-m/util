@@ -7,21 +7,21 @@ import net.sf.mmm.util.validation.base.ObjectValidatorBuilder;
 import net.sf.mmm.util.value.api.Range;
 
 /**
- * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for {@link Float} values.
+ * The {@link ObjectValidatorBuilder builder} of {@link AbstractValidator} for {@link Short} values.
  *
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  *
  * @author hohwille
- * @since 7.1.0
+ * @since 7.6.0
  */
-public class ValidatorBuilderFloat<PARENT> extends NumberValidatorBuilder<Float, PARENT, ValidatorBuilderFloat<PARENT>> {
+public class ValidatorBuilderShort<PARENT> extends NumberValidatorBuilder<Short, PARENT, ValidatorBuilderShort<PARENT>> {
 
   /**
    * The constructor.
    *
    * @param parent the {@link #and() parent} builder.
    */
-  public ValidatorBuilderFloat(PARENT parent) {
+  public ValidatorBuilderShort(PARENT parent) {
 
     super(parent);
   }
@@ -33,9 +33,9 @@ public class ValidatorBuilderFloat<PARENT> extends NumberValidatorBuilder<Float,
    * @param max the maximum allowed value.
    * @return this build instance for fluent API calls.
    */
-  public ValidatorBuilderFloat<PARENT> range(float min, float max) {
+  public ValidatorBuilderShort<PARENT> range(short min, short max) {
 
-    return range(new Range<>(Float.valueOf(min), Float.valueOf(max)));
+    return range(new Range<>(Short.valueOf(min), Short.valueOf(max)));
   }
 
 }
