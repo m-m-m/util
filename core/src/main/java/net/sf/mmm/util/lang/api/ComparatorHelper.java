@@ -2,13 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.api;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
- * This class contains the implementation of {@link CompareOperator#eval(Object, Object)} for {@link Comparable}
- * arguments. This allows the implementation to be replaced with a GWT compatible one.
+ * This class contains the implementation of {@link CompareOperator#eval(Object, Object)} for
+ * {@link Comparable} arguments. This allows the implementation to be replaced with a GWT compatible one.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
@@ -33,11 +36,23 @@ final class ComparatorHelper {
    */
   static Object convert(Object object, Class<?> otherType) {
 
-    if (object instanceof Calendar) {
-      return ((Calendar) object).getTime();
-    }
-    if (object instanceof XMLGregorianCalendar) {
-      return ((XMLGregorianCalendar) object).toGregorianCalendar().getTime();
+    if (otherType == Date.class) {
+      if (object instanceof Calendar) {
+        return ((Calendar) object).getTime();
+      }
+      if (object instanceof XMLGregorianCalendar) {
+        return ((XMLGregorianCalendar) object).toGregorianCalendar().getTime();
+      }
+    } else if (otherType == BigDecimal.class) {
+      if (object instanceof BigInteger) {
+        return new BigDecimal((BigInteger) object);
+      } else if (object instanceof Number) {
+        return BigDecimal.valueOf(((Number) object).doubleValue());
+      }
+    } else if (otherType == BigInteger.class) {
+      if (!(object instanceof BigDecimal) && (object instanceof Number)) {
+        return BigInteger.valueOf(((Number) object).longValue());
+      }
     }
     return object;
   }
@@ -57,27 +72,24 @@ final class ComparatorHelper {
     Class<?> type2 = arg2.getClass();
     int delta;
     if (type1.equals(type2) || type1.isAssignableFrom(type2)) {
-      delta = arg1.compareTo(arg2);
+      delta = signum(arg1.compareTo(arg2));
     } else if (type2.isAssignableFrom(type1)) {
-      int compareTo = arg2.compareTo(arg1);
-      if (compareTo == Integer.MIN_VALUE) {
-        delta = Integer.MAX_VALUE;
-      } else {
-        delta = -compareTo;
-      }
+      delta = -signum(arg2.compareTo(arg1));
     } else {
       // incompatible comparables
       return (arg1.equals(arg2) == comparator.isTrueIfEquals());
     }
-    if (delta == 0) {
-      // arg1 == arg2
-      return comparator.isTrueIfEquals();
-    } else if (delta < 0) {
-      // arg1 < arg2
-      return comparator.isTrueIfLess();
+    return comparator.eval(delta);
+  }
+
+  private static int signum(int delta) {
+
+    if (delta < 0) {
+      return -1;
+    } else if (delta > 0) {
+      return 1;
     } else {
-      // arg1 > arg2
-      return comparator.isTrueIfGreater();
+      return 0;
     }
   }
 
