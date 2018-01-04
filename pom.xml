@@ -18,7 +18,7 @@
   <properties>
     <java.version>1.8</java.version>
     <!-- Internal project versions -->
-    <net.sf.mmm.l10n.version>1.5.0</net.sf.mmm.l10n.version>
+    <net.sf.mmm.l10n.version>1.6.0</net.sf.mmm.l10n.version>
     <net.sf.mmm.util.version>8.6.0-SNAPSHOT</net.sf.mmm.util.version>
   </properties>
 

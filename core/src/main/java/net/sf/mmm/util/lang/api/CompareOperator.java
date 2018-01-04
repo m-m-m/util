@@ -19,9 +19,9 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   GREATER_THAN(">", NlsBundleUtilCoreRoot.INF_GREATER_THAN) {
 
     @Override
-    public boolean eval(double arg1, double arg2) {
+    public boolean eval(int delta) {
 
-      return arg1 > arg2;
+      return delta > 0;
     }
 
     @Override
@@ -41,9 +41,9 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   GREATER_OR_EQUAL(">=", NlsBundleUtilCoreRoot.INF_GREATER_OR_EQUAL) {
 
     @Override
-    public boolean eval(double arg1, double arg2) {
+    public boolean eval(int delta) {
 
-      return arg1 >= arg2;
+      return delta >= 0;
     }
 
     @Override
@@ -63,9 +63,12 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   LESS_THAN("<", NlsBundleUtilCoreRoot.INF_LESS_THAN) {
 
     @Override
-    public boolean eval(double arg1, double arg2) {
+    public boolean eval(int delta) {
 
-      return arg1 < arg2;
+      if (delta == Integer.MIN_VALUE) {
+        return false;
+      }
+      return delta < 0;
     }
 
     @Override
@@ -85,9 +88,12 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   LESS_OR_EQUAL("<=", NlsBundleUtilCoreRoot.INF_LESS_OR_EQUAL) {
 
     @Override
-    public boolean eval(double arg1, double arg2) {
+    public boolean eval(int delta) {
 
-      return arg1 <= arg2;
+      if (delta == Integer.MIN_VALUE) {
+        return false;
+      }
+      return delta <= 0;
     }
 
     @Override
@@ -109,9 +115,9 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   EQUAL("==", NlsBundleUtilCoreRoot.INF_EQUAL) {
 
     @Override
-    public boolean eval(double arg1, double arg2) {
+    public boolean eval(int delta) {
 
-      return arg1 == arg2;
+      return delta == 0;
     }
 
     @Override
@@ -133,9 +139,9 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   NOT_EQUAL("!=", NlsBundleUtilCoreRoot.INF_NOT_EQUAL) {
 
     @Override
-    public boolean eval(double arg1, double arg2) {
+    public boolean eval(int delta) {
 
-      return arg1 != arg2;
+      return delta != 0;
     }
 
     @Override
@@ -160,8 +166,8 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
    *
    * @param value is the {@link #getValue() raw value} (symbol).
    * @param title is the {@link #toString() string representation}.
-   * @param evalTrueIfEquals - {@code true} if {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
-   *        {@code true} if arguments are equal, {@code false} otherwise.
+   * @param evalTrueIfEquals - {@code true} if {@link CompareOperator} {@link #eval(Object, Object) evaluates}
+   *        to {@code true} if arguments are equal, {@code false} otherwise.
    * @param less - {@link Boolean#TRUE} if {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
    *        {@code true} if first argument is less than second, {@link Boolean#FALSE} on greater, {@code null}
    *        otherwise.
@@ -173,8 +179,9 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to {@code true} for
-   *         {@link Object}s that are {@link Object#equals(Object) equal} to each other, {@code false} otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
+   *         {@code true} for {@link Object}s that are {@link Object#equals(Object) equal} to each other,
+   *         {@code false} otherwise.
    */
   boolean isTrueIfEquals() {
 
@@ -182,8 +189,8 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to {@code true} in
-   *         case the first argument is less than the second, {@code false} otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
+   *         {@code true} in case the first argument is less than the second, {@code false} otherwise.
    */
   boolean isTrueIfLess() {
 
@@ -191,8 +198,8 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
   }
 
   /**
-   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to {@code true} in
-   *         case the first argument is greater than the second, {@code false} otherwise.
+   * @return {@code true} if this {@link CompareOperator} {@link #eval(Object, Object) evaluates} to
+   *         {@code true} in case the first argument is greater than the second, {@code false} otherwise.
    */
   boolean isTrueIfGreater() {
 
@@ -225,12 +232,30 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
    * @param arg2 is the second argument.
    * @return the result of the {@link CompareOperator} applied to the given arguments.
    */
-  public abstract boolean eval(double arg1, double arg2);
+  public final boolean eval(double arg1, double arg2) {
+
+    double delta = arg1 - arg2;
+    if (delta < 0) {
+      return eval(-1);
+    } else if (delta > 0) {
+      return eval(1);
+    } else {
+      return eval(0);
+    }
+  }
+
+  /**
+   * @param delta the signum of {@link Comparable#compareTo(Object)} or {@link Integer#MIN_VALUE} if only one
+   *        of the arguments to compare has been {@code null}.
+   * @return the result of the {@link CompareOperator} for the given {@code delta}.
+   * @since 7.6.0
+   */
+  public abstract boolean eval(int delta);
 
   /**
    * @since 7.1.0
-   * @return the negation of this {@link CompareOperator} that {@link #eval(double, double) evaluates} to the negated
-   *         result.
+   * @return the negation of this {@link CompareOperator} that {@link #eval(double, double) evaluates} to the
+   *         negated result.
    */
   public abstract CompareOperator negate();
 
@@ -253,6 +278,7 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
    * @param arg2 is the second argument.
    * @return the result of the {@link CompareOperator} applied to the given arguments.
    */
+  @SuppressWarnings("rawtypes")
   private boolean evalComparable(Comparable arg1, Comparable arg2) {
 
     return ComparatorHelper.evalComparable(this, arg1, arg2);
@@ -280,10 +306,11 @@ public enum CompareOperator implements SimpleDatatype<String>, NlsObject {
       if (!type1.equals(type2)) {
         v1 = convert(v1, type2);
         v2 = convert(v2, type1);
+        if ((v1 == arg1) && (v2 == arg2) && (v1 instanceof Number) && (v2 instanceof Number)) {
+          return eval(((Number) v1).doubleValue(), ((Number) v2).doubleValue());
+        }
       }
-      if ((v1 instanceof Number) && (v2 instanceof Number)) {
-        return eval(((Number) v1).doubleValue(), ((Number) v2).doubleValue());
-      } else if ((v1 instanceof Comparable) && (v2 instanceof Comparable)) {
+      if ((v1 instanceof Comparable) && (v2 instanceof Comparable)) {
         return evalComparable((Comparable) v1, (Comparable) v2);
       } else if (v1.equals(v2)) {
         return isTrueIfEquals();

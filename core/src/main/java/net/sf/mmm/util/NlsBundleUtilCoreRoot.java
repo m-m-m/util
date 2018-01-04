@@ -101,7 +101,7 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   String INF_LESS_THAN = "less than";
 
   /** @see #infoLessOrEqual() */
-  String INF_LESS_OR_EQUAL = "less or equal";
+  String INF_LESS_OR_EQUAL = "less or equal to";
 
   /**
    * @see net.sf.mmm.util.lang.api.HorizontalAlignment#LEFT
