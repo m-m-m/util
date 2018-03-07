@@ -9,13 +9,15 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
+ * @deprecated will be removed
  */
+@Deprecated
 @ComponentSpecification
 public interface ExceptionUtilLimited {
 
   /**
-   * Gets the {@link Throwable#printStackTrace(java.io.PrintWriter) complete stacktrace} of the given {@code exception}
-   * as {@link String}. Ensured to work also in limited environments such as GWT.
+   * Gets the {@link Throwable#printStackTrace(java.io.PrintWriter) complete stacktrace} of the given
+   * {@code exception} as {@link String}. Ensured to work also in limited environments such as GWT.
    *
    * @param exception is the {@link Throwable} to get the stacktrace from.
    * @return the {@link Throwable#printStackTrace(java.io.PrintWriter) complete stacktrace} of the given
@@ -32,7 +34,8 @@ public interface ExceptionUtilLimited {
    * @see net.sf.mmm.util.exception.api.TechnicalErrorUserException
    *
    * @param exception is the exception to wrap.
-   * @return the converted exception. Will be an instance of {@link net.sf.mmm.util.exception.api.NlsThrowable}.
+   * @return the converted exception. Will be an instance of
+   *         {@link net.sf.mmm.util.exception.api.NlsThrowable}.
    */
   Throwable convertForUser(Throwable exception);
 

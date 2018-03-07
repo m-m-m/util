@@ -13,8 +13,7 @@ import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 /**
  * This exception is thrown if a validation failed unexpectedly. You may just use
  * {@link javax.validation.ValidationException}. However, this exception implements
- * {@link net.sf.mmm.util.exception.api.NlsThrowable} will all features and allows
- * {@link net.sf.mmm.util.exception.api.ExceptionTruncation}. <br>
+ * {@link net.sf.mmm.util.exception.api.NlsThrowable} will all features.<br>
  * <b>ATTENTION:</b><br>
  * Regular validation should not use exceptions. E.g. in a rich client validation happens for usability to
  * give early feedback to the end-user in case his data is incomplete or wrong and to prevent sending requests
@@ -71,7 +70,9 @@ public class ValidationErrorUserException extends NlsRuntimeException {
    *
    * @param copySource is the exception to copy.
    * @param truncation is the {@link ExceptionTruncation} to configure potential truncations.
+   * @deprecated will be removed
    */
+  @Deprecated
   protected ValidationErrorUserException(ValidationErrorUserException copySource, ExceptionTruncation truncation) {
 
     super(copySource, truncation);
