@@ -15,10 +15,7 @@ import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.ValueNotSetException;
 import net.sf.mmm.util.exception.api.WrongValueTypeException;
-import net.sf.mmm.util.lang.api.EnumDefinition;
-import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.lang.base.SimpleEnumProvider;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.base.MathUtilImpl;
@@ -39,8 +36,6 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   private MathUtil mathUtil;
 
   private StringUtil stringUtil;
-
-  private EnumProvider enumProvider;
 
   /**
    * The constructor.
@@ -83,11 +78,6 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
     }
     if (this.mathUtil == null) {
       this.mathUtil = MathUtilImpl.getInstance();
-    }
-    if (this.enumProvider == null) {
-      SimpleEnumProvider impl = new SimpleEnumProvider();
-      impl.initialize();
-      this.enumProvider = impl;
     }
   }
 
@@ -135,23 +125,6 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
   }
 
   /**
-   * @return the {@link EnumProvider} used to deal with {@link Enum}s.
-   */
-  protected EnumProvider getEnumProvider() {
-
-    return this.enumProvider;
-  }
-
-  /**
-   * @param enumProvider is the {@link EnumProvider} to {@link Inject}.
-   */
-  @Inject
-  public void setEnumProvider(EnumProvider enumProvider) {
-
-    this.enumProvider = enumProvider;
-  }
-
-  /**
    * This method parses a numeric value.
    *
    * @param numberValue is the number value as string.
@@ -182,8 +155,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
     Object result;
     try {
       if (type.isEnum()) {
-        EnumDefinition<TARGET, ?> enumDefinition = this.enumProvider.getEnumDefinition(type);
-        result = this.enumProvider.getEnumValue(enumDefinition, value, true);
+        result = EnumHelper.fromString((Class<? extends Enum<?>>) type, value, true);
       } else if (type.isAssignableFrom(String.class)) {
         result = value;
       } else if ((type == boolean.class) || (type == Boolean.class)) {
@@ -253,8 +225,7 @@ public class StringValueConverterImpl extends AbstractGenericValueConverter<Stri
    *         to the given {@code type} (e.g. if {@code value} is "12x" and {@code type} is
    *         {@code Integer.class}).
    */
-  protected <V> V convertUnknownValue(String value, Class<V> type, Object valueSource)
-      throws ValueNotSetException, WrongValueTypeException {
+  protected <V> V convertUnknownValue(String value, Class<V> type, Object valueSource) throws ValueNotSetException, WrongValueTypeException {
 
     // throw new UnknownValueType();
     throw new WrongValueTypeException(value, valueSource, type);
