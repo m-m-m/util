@@ -2,13 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.api;
 
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import net.sf.mmm.util.lang.api.function.Function;
-import net.sf.mmm.util.lang.api.function.VoidFunction;
 import net.sf.mmm.util.resource.api.ResourcePathNode.ResourcePathRootHome;
 import net.sf.mmm.util.resource.api.ResourcePathNode.ResourcePathRootUnc;
 import net.sf.mmm.util.resource.api.ResourcePathNode.ResourcePathRootUrl;
@@ -309,8 +308,7 @@ public class ResourcePathNodeTest extends Assertions {
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorWithEmptyNameFunction() {
 
-    Function<ResourcePathNode<Void>, Void> function = VoidFunction.getInstance();
-    new ResourcePathNode<>(ResourcePathNode.ROOT_ABSOLUTE, "", function);
+    new ResourcePathNode<>(ResourcePathNode.ROOT_ABSOLUTE, "", (Function) x -> null);
   }
 
 }

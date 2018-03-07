@@ -8,8 +8,9 @@ package net.sf.mmm.util.lang.api.function;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.0.0
+ * @deprecated use {@link java.util.function.Function} and lambda expression instead.
  */
-@SuppressWarnings({ "deprecation", "javadoc" })
+@Deprecated
 public final class VoidFunction implements Function<Object, Void> {
 
   /** The singleton instance. */

@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.filter.api.CharFilter;
-import net.sf.mmm.util.lang.api.function.Function;
-import net.sf.mmm.util.lang.api.function.VoidFunction;
 import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 
@@ -31,17 +30,11 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   private static final char WINDOWS_DRIVE_LETTER_SUFFIX = ':';
 
   /** The {@link Void} data function. */
-  private static final Function<ResourcePathNode<Void>, Void> VOID_FUNCTION = VoidFunction.<ResourcePathNode<Void>> getInstance();
+  private static final Function<ResourcePathNode<Void>, Void> VOID_FUNCTION = x -> null;
 
   /** The {@link Void} data function. */
-  private static final Function<ResourcePathNode<Pattern>, Pattern> GLOB_PATTERN_FUNCTION = new Function<ResourcePathNode<Pattern>, Pattern>() {
-
-    @Override
-    public Pattern apply(ResourcePathNode<Pattern> path) {
-
-      return WildcardGlobPatternCompiler.INSTANCE.compile(path.getName());
-    };
-  };
+  private static final Function<ResourcePathNode<Pattern>, Pattern> GLOB_PATTERN_FUNCTION = path -> WildcardGlobPatternCompiler.INSTANCE
+      .compile(path.getName());
 
   /** The {@link #isAbsolute() absolute} {@link #isRoot() root} {@link ResourcePathNode} (.). */
   public static final ResourcePathNode<Void> ROOT_ABSOLUTE = new ResourcePathRootAbsolute<>(VOID_FUNCTION);
@@ -64,7 +57,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param name - see {@link #getName()}.
    * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
    */
-  @SuppressWarnings("javadoc")
   protected ResourcePathNode(String name, Function<ResourcePathNode<D>, D> dataFunction) {
 
     super();
@@ -102,7 +94,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param name - see {@link #getName()}.
    * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
    */
-  @SuppressWarnings("javadoc")
   protected ResourcePathNode(ResourcePathNode<D> parent, String name, Function<ResourcePathNode<D>, D> dataFunction) {
 
     super();
@@ -425,7 +416,6 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param path - see {@link #create(String)}.
    * @return the parsed {@link ResourcePathNode}.
    */
-  @SuppressWarnings("javadoc")
   public static ResourcePathNode<Pattern> createPattern(String path) {
 
     return create(path, GLOB_PATTERN_FUNCTION);
@@ -438,8 +428,24 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @param path is the path to parse.
    * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
    * @return the parsed {@code path}.
+   * @deprecated use {@link #create(String, Function)} instead.
    */
-  @SuppressWarnings({ "unchecked", "rawtypes", "javadoc" })
+  @Deprecated
+  public static <D> ResourcePathNode<D> create(String path, net.sf.mmm.util.lang.api.function.Function<ResourcePathNode<D>, D> dataFunction) {
+
+    Function<ResourcePathNode<D>, D> function = x -> dataFunction.apply(x);
+    return create(path, function);
+  }
+
+  /**
+   * Flexible implementation of {@link #create(String)} to custom data function.
+   *
+   * @param <D> is the type of the {@link #getData() generic data}. For simple usage just {@link Void}.
+   * @param path is the path to parse.
+   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+   * @return the parsed {@code path}.
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public static <D> ResourcePathNode<D> create(String path, Function<ResourcePathNode<D>, D> dataFunction) {
 
     if (path == null) {
@@ -597,8 +603,20 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      *
      * @param drive is the Windows drive letter (e.g. "C" for "C:\\").
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @deprecated use #ResourcePathRootWindows(String, Function) instead.
      */
-    @SuppressWarnings("javadoc")
+    @Deprecated
+    public ResourcePathRootWindows(String drive, net.sf.mmm.util.lang.api.function.Function<ResourcePathNode<D>, D> dataFunction) {
+
+      super(drive + WINDOWS_DRIVE_LETTER_SUFFIX, dataFunction);
+    }
+
+    /**
+     * The constructor.
+     *
+     * @param drive is the Windows drive letter (e.g. "C" for "C:\\").
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     */
     public ResourcePathRootWindows(String drive, Function<ResourcePathNode<D>, D> dataFunction) {
 
       super(drive + WINDOWS_DRIVE_LETTER_SUFFIX, dataFunction);
@@ -656,8 +674,19 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * The constructor.
      *
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @deprecated use {@link #ResourcePathRootHome(Function)} instead.
      */
-    @SuppressWarnings("javadoc")
+    @Deprecated
+    public ResourcePathRootHome(net.sf.mmm.util.lang.api.function.Function<ResourcePathNode<D>, D> dataFunction) {
+
+      this("", dataFunction);
+    }
+
+    /**
+     * The constructor.
+     *
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     */
     public ResourcePathRootHome(Function<ResourcePathNode<D>, D> dataFunction) {
 
       this("", dataFunction);
@@ -668,8 +697,20 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      *
      * @param user the name of the user.
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @deprecated use {@link #ResourcePathNode(String, Function)} instead.
      */
-    @SuppressWarnings("javadoc")
+    @Deprecated
+    public ResourcePathRootHome(String user, net.sf.mmm.util.lang.api.function.Function<ResourcePathNode<D>, D> dataFunction) {
+
+      super(HOME_PATH_CHAR + user, dataFunction);
+    }
+
+    /**
+     * The constructor.
+     *
+     * @param user the name of the user.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     */
     public ResourcePathRootHome(String user, Function<ResourcePathNode<D>, D> dataFunction) {
 
       super(HOME_PATH_CHAR + user, dataFunction);
@@ -696,8 +737,20 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      *
      * @param uncAuthority is the authority or host of the UNC root.
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @deprecated use #ResourcePathRootUnc(String, Function) instead.
      */
-    @SuppressWarnings("javadoc")
+    @Deprecated
+    public ResourcePathRootUnc(String uncAuthority, net.sf.mmm.util.lang.api.function.Function<ResourcePathNode<D>, D> dataFunction) {
+
+      super(UNC_PATH_PREFIX + uncAuthority, dataFunction);
+    }
+
+    /**
+     * The constructor.
+     *
+     * @param uncAuthority is the authority or host of the UNC root.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     */
     public ResourcePathRootUnc(String uncAuthority, Function<ResourcePathNode<D>, D> dataFunction) {
 
       super(UNC_PATH_PREFIX + uncAuthority, dataFunction);
@@ -729,8 +782,23 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * @param scheme - see {@link #getScheme()}.
      * @param authority - see {@link #getAuthority()}.
      * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @deprecated use #ResourcePathRootUrl(String, String, Function) instead.
      */
-    @SuppressWarnings("javadoc")
+    @Deprecated
+    public ResourcePathRootUrl(String scheme, String authority, net.sf.mmm.util.lang.api.function.Function<ResourcePathNode<D>, D> dataFunction) {
+
+      super(scheme + URL_SCHEME_AUTHORITY_SEPARATOR + authority, dataFunction);
+      this.scheme = scheme;
+      this.authority = authority;
+    }
+
+    /**
+     * The constructor.
+     *
+     * @param scheme - see {@link #getScheme()}.
+     * @param authority - see {@link #getAuthority()}.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     */
     public ResourcePathRootUrl(String scheme, String authority, Function<ResourcePathNode<D>, D> dataFunction) {
 
       super(scheme + URL_SCHEME_AUTHORITY_SEPARATOR + authority, dataFunction);
