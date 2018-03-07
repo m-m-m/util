@@ -76,7 +76,7 @@ import net.sf.mmm.util.text.api.Justification;
  * <tr>
  * <td>{@link NlsFormatterManager#TYPE_NUMBER number}</td>
  * <td>{@link NlsFormatterManager#STYLE_CURRENCY currency}</td>
- * <td>123,456.78 �</td>
+ * <td>123,456.78 ¤</td>
  * <td>Number as currency</td>
  * </tr>
  * <tr>
