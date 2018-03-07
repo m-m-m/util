@@ -15,7 +15,9 @@ import net.sf.mmm.util.security.api.SecurityErrorUserException;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated will be removed
  */
+@Deprecated
 public class ExceptionUtilLimitedImpl extends AbstractLoggableComponent implements ExceptionUtilLimited {
 
   /**

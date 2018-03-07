@@ -14,7 +14,9 @@ import net.sf.mmm.util.reflect.api.AccessFailedException;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
+ * @deprecated will be removed
  */
+@Deprecated
 final class ThrowableHelper {
 
   private static Helper helper;
@@ -88,8 +90,7 @@ final class ThrowableHelper {
         field.setAccessible(true);
         return field;
       } catch (Exception e) {
-        LoggerFactory.getLogger(ThrowableHelper.class)
-            .error("Exception truncation not possible due to reflection limitation!", e);
+        LoggerFactory.getLogger(ThrowableHelper.class).error("Exception truncation not possible due to reflection limitation!", e);
       }
       return null;
     }

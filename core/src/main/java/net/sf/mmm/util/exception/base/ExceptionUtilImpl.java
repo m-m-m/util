@@ -23,7 +23,9 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
+ * @deprecated will be removed
  */
+@Deprecated
 public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements ExceptionUtil {
 
   private static ExceptionUtil instance;
@@ -109,8 +111,8 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
       code = exception.getClass().getSimpleName();
       uuid = UuidAccess.getFactory().createUuid();
     }
-    GenericSerializableException serializableException = new GenericSerializableException(cause, message,
-        originalExceptionName, stacktrace, technical, code, uuid);
+    GenericSerializableException serializableException = new GenericSerializableException(cause, message, originalExceptionName, stacktrace, technical, code,
+        uuid);
     if (!truncation.isRemoveSuppressed()) {
       for (Throwable suppressed : exception.getSuppressed()) {
         serializableException.addSuppressed(convertForSerialization(suppressed, truncation));
@@ -169,8 +171,8 @@ public class ExceptionUtilImpl extends ExceptionUtilLimitedImpl implements Excep
   }
 
   /**
-   * @return {@code true} if {@link #obfuscateException(Throwable)} shall remove the {@link Throwable#getStackTrace()
-   *         stacktrace} of the resulting exception.
+   * @return {@code true} if {@link #obfuscateException(Throwable)} shall remove the
+   *         {@link Throwable#getStackTrace() stacktrace} of the resulting exception.
    */
   protected boolean isRemoveStacktrace() {
 

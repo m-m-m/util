@@ -7,14 +7,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.sf.mmm.util.lang.api.DatatypeDescriptorManager;
 import net.sf.mmm.util.lang.api.DatatypeDetector;
-import net.sf.mmm.util.lang.api.EnumProvider;
 import net.sf.mmm.util.lang.api.EnvironmentDetector;
 import net.sf.mmm.util.lang.base.DatatypeDetectorImpl;
 import net.sf.mmm.util.lang.base.EnvironmentDetectorSpringProfileImpl;
-import net.sf.mmm.util.lang.base.SimpleEnumProvider;
-import net.sf.mmm.util.lang.base.datatype.descriptor.DatatypeDescriptorManagerImpl;
 import net.sf.mmm.util.nls.impl.spring.UtilNlsSpringConfig;
 
 /**
@@ -33,18 +29,6 @@ public class UtilLangSpringConfig {
   public DatatypeDetector datatypeDetector() {
 
     return new DatatypeDetectorImpl();
-  }
-
-  @Bean
-  public DatatypeDescriptorManager datatypeDescriptorManager() {
-
-    return new DatatypeDescriptorManagerImpl();
-  }
-
-  @Bean
-  public EnumProvider enumProvider() {
-
-    return new SimpleEnumProvider();
   }
 
   @Bean

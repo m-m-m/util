@@ -3,7 +3,8 @@
 package net.sf.mmm.util.exception.api;
 
 /**
- * This class configures the (potential) truncation of an exception. A truncation includes the following aspects:
+ * This class configures the (potential) truncation of an exception. A truncation includes the following
+ * aspects:
  * <ul>
  * <li>{@link #isRemoveCause() remove cause}</li>
  * <li>{@link #isRemoveStacktrace() remove stacktrace}</li>
@@ -12,7 +13,9 @@ package net.sf.mmm.util.exception.api;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
+ * @deprecated will be removed
  */
+@Deprecated
 public class ExceptionTruncation {
 
   /** Instance to remove all additional details. */
@@ -21,8 +24,7 @@ public class ExceptionTruncation {
   /**
    * Instance to remove {@link #isRemoveStacktrace() stacktrace} and {@link #isRemoveSuppressed() suppressed}.
    */
-  public static final ExceptionTruncation REMOVE_STACKTRACE_AND_SUPPRESSED = new ExceptionTruncation(true, false,
-      true);
+  public static final ExceptionTruncation REMOVE_STACKTRACE_AND_SUPPRESSED = new ExceptionTruncation(true, false, true);
 
   /** Instance to remove no additional details. */
   public static final ExceptionTruncation REMOVE_NONE = new ExceptionTruncation(false, false, false);
@@ -49,8 +51,8 @@ public class ExceptionTruncation {
   }
 
   /**
-   * @return {@code true} if the {@link Throwable#getSuppressed() suppressed exceptions} shall be removed, {@code false}
-   *         otherwise.
+   * @return {@code true} if the {@link Throwable#getSuppressed() suppressed exceptions} shall be removed,
+   *         {@code false} otherwise.
    */
   public boolean isRemoveSuppressed() {
 
@@ -66,7 +68,8 @@ public class ExceptionTruncation {
   }
 
   /**
-   * @return {@code true} if the {@link Throwable#getStackTrace() stacktrace} shall be removed, {@code false} otherwise.
+   * @return {@code true} if the {@link Throwable#getStackTrace() stacktrace} shall be removed, {@code false}
+   *         otherwise.
    */
   public boolean isRemoveStacktrace() {
 
@@ -90,7 +93,8 @@ public class ExceptionTruncation {
    * @see #isRemoveCause()
    * @see #isRemoveSuppressed()
    *
-   * @return {@code true} if no details shall be removed (all information is retained), {@code false} otherwise.
+   * @return {@code true} if no details shall be removed (all information is retained), {@code false}
+   *         otherwise.
    */
   public boolean isRetainAll() {
 
@@ -100,8 +104,8 @@ public class ExceptionTruncation {
   @Override
   public String toString() {
 
-    return "ExceptionTruncation [removeCause=" + this.removeCause + ", removeSuppressed=" + this.removeSuppressed
-        + ", removeStacktrace=" + this.removeStacktrace + "]";
+    return "ExceptionTruncation [removeCause=" + this.removeCause + ", removeSuppressed=" + this.removeSuppressed + ", removeStacktrace="
+        + this.removeStacktrace + "]";
   }
 
 }
