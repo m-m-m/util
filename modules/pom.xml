@@ -27,7 +27,6 @@
     <module>../json</module>
     <module>../data</module>
     <module>../gwt</module>
-    <module>../http</module>
   </modules>
 
   <profiles>
