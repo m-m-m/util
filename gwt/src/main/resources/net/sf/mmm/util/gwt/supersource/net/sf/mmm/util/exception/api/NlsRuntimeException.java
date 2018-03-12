@@ -103,19 +103,6 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   }
 
   /**
-   * The copy constructor.
-   *
-   * @param copySource is the exception to copy.
-   * @param truncation is the {@link ExceptionTruncation} to configure potential truncations.
-   */
-  protected NlsRuntimeException(NlsRuntimeException copySource, ExceptionTruncation truncation) {
-
-    super();
-    this.nlsMessage = copySource.nlsMessage;
-    this.uuid = copySource.uuid;
-  }
-
-  /**
    * This method creates a new {@link UUID}.
    *
    * @return the new {@link UUID} or {@code null} to turn this feature off.
