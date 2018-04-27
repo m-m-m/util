@@ -12,6 +12,8 @@ public class BinaryTypeTest extends Assertions {
 
   private static final byte[] SAMPLE_BLOB_DATA = new byte[] { 0x01, 0x23, 0x45, 0x67, (byte) 0x089, (byte) 0x0ab, (byte) 0x0cd, (byte) 0x0ef };
 
+  private static final String SAMPLE_BLOB_BASE64 = "ASNFZ4mrze8=";
+
   private static final int LENGTH_MIN = 1;
 
   private static final int LENGTH_MAX = 10;
@@ -77,8 +79,17 @@ public class BinaryTypeTest extends Assertions {
   @Test
   public void testStringConstructor() {
 
-    BinaryType blob = new Blob(SAMPLE_BLOB_HEX);
-    verifyBlob8ByteHex(blob);
+    BinaryType blob = new Blob(SAMPLE_BLOB_BASE64);
+    verifyBlob8ByteHexAndBase64(blob);
+    assertThat(blob.isZeros()).isFalse();
+  }
+
+  /** Test of {@link BinaryType#parseHex(String)} with valid data. */
+  @Test
+  public void testParseHex() {
+
+    BinaryType blob = Blob.ofHex(SAMPLE_BLOB_HEX);
+    verifyBlob8ByteHexAndBase64(blob);
     assertThat(blob.isZeros()).isFalse();
   }
 
@@ -87,7 +98,7 @@ public class BinaryTypeTest extends Assertions {
   public void testByteConstructor() {
 
     BinaryType blob = new Blob(SAMPLE_BLOB_DATA);
-    verifyBlob8ByteHex(blob);
+    verifyBlob8ByteHexAndBase64(blob);
     assertThat(blob.isZeros()).isFalse();
   }
 
@@ -96,9 +107,9 @@ public class BinaryTypeTest extends Assertions {
   public void testEqualsAndHashCode() {
 
     BinaryType byteBlob = new Blob(SAMPLE_BLOB_DATA);
-    BinaryType hexBlob = new Blob(SAMPLE_BLOB_HEX);
-    assertThat(byteBlob).isEqualTo(hexBlob).isEqualTo(byteBlob);
-    assertThat(byteBlob.hashCode()).isEqualTo(hexBlob.hashCode());
+    BinaryType base64Blob = new Blob(SAMPLE_BLOB_BASE64);
+    assertThat(byteBlob).isEqualTo(base64Blob).isEqualTo(byteBlob);
+    assertThat(byteBlob.hashCode()).isEqualTo(base64Blob.hashCode());
     assertThat(byteBlob).isNotEqualTo(null).isNotEqualTo("").isNotEqualTo(new Blob("12345678"));
   }
 
@@ -111,10 +122,11 @@ public class BinaryTypeTest extends Assertions {
     assertThat(blob.getMaxLength()).isEqualTo(Integer.MAX_VALUE);
   }
 
-  private void verifyBlob8ByteHex(BinaryType blob) {
+  private void verifyBlob8ByteHexAndBase64(BinaryType blob) {
 
     assertThat(blob.getHex()).isEqualTo(SAMPLE_BLOB_HEX);
-    assertThat(blob.toString()).isEqualTo(SAMPLE_BLOB_HEX);
+    assertThat(blob.getBase64()).isEqualTo(SAMPLE_BLOB_BASE64);
+    assertThat(blob.toString()).isEqualTo(SAMPLE_BLOB_BASE64);
     assertThat(blob.getData()).isEqualTo(SAMPLE_BLOB_DATA);
     byte[] buffer = new byte[SAMPLE_BLOB_DATA.length];
     blob.getData(buffer, 0);
@@ -129,9 +141,14 @@ public class BinaryTypeTest extends Assertions {
       super(data);
     }
 
-    public Blob(String hex) {
+    public Blob(String base64) {
 
-      super(hex);
+      super(base64);
+    }
+
+    static Blob ofHex(String hex) {
+
+      return new Blob(parseHex(hex));
     }
 
     @Override
