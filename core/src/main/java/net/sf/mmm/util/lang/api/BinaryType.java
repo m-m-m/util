@@ -1,6 +1,7 @@
 package net.sf.mmm.util.lang.api;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Objects;
 
 /**
@@ -39,16 +40,16 @@ public class BinaryType implements Binary {
   /**
    * The constructor (mainly for testing).
    *
-   * @param hex the {@link #getData() data} as {@link #getHex() hex}.
+   * @param base64 the {@link #getData() data} as {@link #getBase64() base64}.
    */
-  public BinaryType(String hex) {
+  public BinaryType(String base64) {
 
-    this(parseHex(hex));
+    this(parseBase64(base64));
   }
 
   /**
-   * @return the minimum allowed length of the {@link #getData() data}. Implementation has to be static and return the
-   *         same value for each class with each call.
+   * @return the minimum allowed length of the {@link #getData() data}. Implementation has to be static and
+   *         return the same value for each class with each call.
    */
   protected int getMinLength() {
 
@@ -56,8 +57,8 @@ public class BinaryType implements Binary {
   }
 
   /**
-   * @return the maximum allowed length of the {@link #getData() data}. Implementation has to be static and return the
-   *         same value for each class with each call.
+   * @return the maximum allowed length of the {@link #getData() data}. Implementation has to be static and
+   *         return the same value for each class with each call.
    */
   protected int getMaxLength() {
 
@@ -93,6 +94,12 @@ public class BinaryType implements Binary {
   }
 
   @Override
+  public String getBase64() {
+
+    return formatBase64(this.data);
+  }
+
+  @Override
   public boolean isZeros() {
 
     for (byte b : this.data) {
@@ -106,7 +113,13 @@ public class BinaryType implements Binary {
   @Override
   public int hashCode() {
 
-    return Arrays.hashCode(this.data);
+    // for transparency and stability we do not rely on any external function.
+    // Arrays.hashCode(Object[]) might most probably never change but you will never know...
+    int hash = 1;
+    for (byte b : this.data) {
+      hash = 31 * hash + b;
+    }
+    return hash;
   }
 
   @Override
@@ -131,7 +144,7 @@ public class BinaryType implements Binary {
   @Override
   public String toString() {
 
-    return getHex();
+    return getBase64();
   }
 
   /**
@@ -167,6 +180,26 @@ public class BinaryType implements Binary {
       buffer[i++] = HEX[b & 0x0F];
     }
     return new String(buffer);
+  }
+
+  /**
+   * @param base64 the BLOB to parse as {@link java.util.Base64} encoded {@link String}.
+   * @return the parsed {@code base64} String.
+   */
+  public static byte[] parseBase64(String base64) {
+
+    return Base64.getDecoder().decode(base64);
+  }
+
+  /**
+   * @param data the {@link #getData() data} to format.
+   * @return the given {@code data} formatted as {@link java.util.Base64} encoded {@link String}
+   *         representation.
+   * @see #getBase64()
+   */
+  public static String formatBase64(byte[] data) {
+
+    return Base64.getEncoder().encodeToString(data);
   }
 
 }
