@@ -48,8 +48,8 @@ public class BinaryType implements Binary {
   }
 
   /**
-   * @return the minimum allowed length of the {@link #getData() data}. Implementation has to be static and
-   *         return the same value for each class with each call.
+   * @return the minimum allowed length of the {@link #getData() data}. Implementation has to be static and return the
+   *         same value for each class with each call.
    */
   protected int getMinLength() {
 
@@ -57,8 +57,8 @@ public class BinaryType implements Binary {
   }
 
   /**
-   * @return the maximum allowed length of the {@link #getData() data}. Implementation has to be static and
-   *         return the same value for each class with each call.
+   * @return the maximum allowed length of the {@link #getData() data}. Implementation has to be static and return the
+   *         same value for each class with each call.
    */
   protected int getMaxLength() {
 
@@ -157,14 +157,27 @@ public class BinaryType implements Binary {
     if ((length % 2) != 0) {
       throw new IllegalArgumentException("Hex has odd length: " + length);
     }
-    byte[] bytes = new byte[length / 2];
-    int charIndex = 0;
-    for (int byteIndex = 0; byteIndex < bytes.length; byteIndex++) {
-      int high = Character.digit(hex.charAt(charIndex++), 16);
-      int low = Character.digit(hex.charAt(charIndex++), 16);
-      bytes[byteIndex] = (byte) ((high << 4) + low);
+    try {
+      byte[] bytes = new byte[length / 2];
+      int charIndex = 0;
+      for (int byteIndex = 0; byteIndex < bytes.length; byteIndex++) {
+        byte high = parseHexChar(hex.charAt(charIndex++));
+        byte low = parseHexChar(hex.charAt(charIndex++));
+        bytes[byteIndex] = (byte) ((high << 4) + low);
+      }
+      return bytes;
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Invalid hexadecimal value: " + hex, e);
     }
-    return bytes;
+  }
+
+  private static byte parseHexChar(char c) {
+
+    int value = Character.digit(c, 16);
+    if ((value < 0) || (value >= 16)) {
+      throw new IllegalArgumentException("'" + c + "' is not a valid hexadecimal character.");
+    }
+    return (byte) value;
   }
 
   /**
@@ -193,13 +206,72 @@ public class BinaryType implements Binary {
 
   /**
    * @param data the {@link #getData() data} to format.
-   * @return the given {@code data} formatted as {@link java.util.Base64} encoded {@link String}
-   *         representation.
+   * @return the given {@code data} formatted as {@link java.util.Base64} encoded {@link String} representation.
    * @see #getBase64()
    */
   public static String formatBase64(byte[] data) {
 
     return Base64.getEncoder().encodeToString(data);
+  }
+
+  /**
+   * @param value the {@code long} value.
+   * @return the value as array of 8 {@code byte}s.
+   */
+  public static byte[] toBytes(long value) {
+
+    long v = value;
+    byte[] bytes = new byte[8];
+    for (int i = 7; i >= 0; i--) {
+      bytes[i] = (byte) v;
+      v >>= 8;
+    }
+    return bytes;
+  }
+
+  /**
+   * @param value the {@code int} value.
+   * @return the value as array of 4 {@code byte}s.
+   */
+  public static byte[] toBytes(int value) {
+
+    int v = value;
+    byte[] bytes = new byte[4];
+    for (int i = 3; i >= 0; i--) {
+      bytes[i] = (byte) v;
+      v >>= 8;
+    }
+    return bytes;
+  }
+
+  /**
+   * @param data the long value as {@code byte[]} with a maximum length of 8 (see {@link #toBytes(long)}).
+   * @return the value {@code long}.
+   */
+  public static long toLong(byte[] data) {
+
+    assert (data.length <= 8);
+    long v = 0;
+    for (byte b : data) {
+      v <<= 8;
+      v = v | (b & 0x0FF);
+    }
+    return v;
+  }
+
+  /**
+   * @param data the long value as {@code byte[]} with a maximum length of 8 (see {@link #toBytes(long)}).
+   * @return the value {@code long}.
+   */
+  public static long toInt(byte[] data) {
+
+    assert (data.length <= 4);
+    int v = 0;
+    for (byte b : data) {
+      v <<= 8;
+      v = v | (b & 0x0FF);
+    }
+    return v;
   }
 
 }

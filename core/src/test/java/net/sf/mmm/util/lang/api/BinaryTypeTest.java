@@ -122,6 +122,29 @@ public class BinaryTypeTest extends Assertions {
     assertThat(blob.getMaxLength()).isEqualTo(Integer.MAX_VALUE);
   }
 
+  /** Test of {@link BinaryType#toBytes(int)} and {@link BinaryType#toBytes(long)}. */
+  @Test
+  public void testToBytes() {
+
+    assertThat(BinaryType.toBytes(0x0FEDCBA98)).containsExactly(0x0FE, 0x0DC, 0x0BA, 0x098);
+    assertThat(BinaryType.toBytes(0x0FEDCBA9876543210L)).containsExactly(0x0FE, 0x0DC, 0x0BA, 0x098, 0x076, 0x054, 0x032, 0x010);
+  }
+
+  /** Test of {@link BinaryType#toInt(byte[])}. */
+  @Test
+  public void testToInt() {
+
+    assertThat(BinaryType.toInt(new byte[] { (byte) 0x0FE, (byte) 0x0DC, (byte) 0x0BA, (byte) 0x098 })).isEqualTo(0x0FEDCBA98);
+  }
+
+  /** Test of {@link BinaryType#toLong(byte[])}. */
+  @Test
+  public void testToLong() {
+
+    assertThat(BinaryType.toLong(new byte[] { (byte) 0x0FE, (byte) 0x0DC, (byte) 0x0BA, (byte) 0x098, 0x076, 0x054, 0x032, 0x010 }))
+        .isEqualTo(0x0FEDCBA9876543210L);
+  }
+
   private void verifyBlob8ByteHexAndBase64(BinaryType blob) {
 
     assertThat(blob.getHex()).isEqualTo(SAMPLE_BLOB_HEX);
