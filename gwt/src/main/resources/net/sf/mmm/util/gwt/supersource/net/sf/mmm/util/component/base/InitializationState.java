@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.component.base;
 
-import net.sf.mmm.util.component.api.AlreadyInitializedException;
-import net.sf.mmm.util.component.api.NotInitializedException;
-
 /**
  * This class represents the state of an initialization. <br>
  * It therefore offers the method {@link #requireNotInitilized()} that can be called before initialization
@@ -12,9 +9,9 @@ import net.sf.mmm.util.component.api.NotInitializedException;
  * {@link #setInitializing() initialization}. Additionally there is {@link #requireInitilized()} that can be
  * called after initialization e.g. from functional methods of the component to ensure that the component has
  * been {@link #setInitializing() initialized}.
- * 
+ *
  * @see javax.annotation.PostConstruct
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
@@ -47,7 +44,7 @@ public class InitializationState {
    * This method sets the state to <em>initializing</em>. This should be done to start the initialization in a
    * thread-safe and atomic way. After the initialization has completed, the method {@link #setInitialized()}
    * should be invoked.
-   * 
+   *
    * @return {@code true} if the state was NOT {@link #isInitialized() initialized} and is now
    *         {@link #isInitialized() initialized}, {@code false} if the state is already
    *         {@link #isInitialized() initialized}.
@@ -70,7 +67,7 @@ public class InitializationState {
     this.state = STATE_INITIALIZED;
     if (!okay) {
       if (isInitialized()) {
-        throw new AlreadyInitializedException();
+        throw new IllegalStateException("Already initialized.");
       } else {
         throw new IllegalStateException("You need to call setInitializing() before!");
       }
@@ -79,7 +76,7 @@ public class InitializationState {
 
   /**
    * This method gets the status of the {@link #setInitialized() initialization} .
-   * 
+   *
    * @return {@code true} if this component has been {@link #setInitializing() initialized},
    *         {@code false} otherwise.
    */
@@ -90,25 +87,25 @@ public class InitializationState {
 
   /**
    * This method checks that this state has already been {@link #setInitialized() initialized}.
-   * 
-   * @throws NotInitializedException if this state has NOT been initialized yet.
+   *
+   * @throws IllegalStateException if this state has NOT been initialized yet.
    */
-  public void requireInitilized() throws NotInitializedException {
+  public void requireInitilized() {
 
     if (!isInitialized()) {
-      throw new NotInitializedException();
+      throw new IllegalStateException("Not initialized.");
     }
   }
 
   /**
    * This method checks that this state has NOT yet been {@link #setInitialized() initialized}.
-   * 
-   * @throws AlreadyInitializedException if this state has already been initialized.
+   *
+   * @throws IllegalStateException if this state has already been initialized.
    */
-  public void requireNotInitilized() throws AlreadyInitializedException {
+  public void requireNotInitilized() {
 
     if (isInitialized()) {
-      throw new AlreadyInitializedException();
+      throw new IllegalStateException("Already initialized.");
     }
   }
 

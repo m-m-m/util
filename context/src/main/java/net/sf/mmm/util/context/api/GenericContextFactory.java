@@ -5,7 +5,6 @@ package net.sf.mmm.util.context.api;
 import java.util.Map;
 
 import net.sf.mmm.util.collection.api.MapFactory;
-import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 
 /**
@@ -14,7 +13,6 @@ import net.sf.mmm.util.value.api.GenericValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@ComponentSpecification
 public interface GenericContextFactory {
 
   /**
@@ -52,7 +50,6 @@ public interface GenericContextFactory {
    * @since 2.0.0
    */
   @SuppressWarnings("rawtypes")
-  MutableGenericContext createContext(MapFactory<? extends Map> mapFactory,
-      GenericValueConverter<Object> valueConverter);
+  MutableGenericContext createContext(MapFactory<? extends Map> mapFactory, GenericValueConverter<Object> valueConverter);
 
 }

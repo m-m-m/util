@@ -8,9 +8,10 @@ import net.sf.mmm.util.value.api.ValueConverter;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 
 /**
- * This is a default {@link net.sf.mmm.util.value.api.ComposedValueConverter} to be used without IoC-Container. It
- * extends {@link ComposedValueConverterImpl} by {@link #addConverter(net.sf.mmm.util.value.api.ValueConverter) adding}
- * typical {@link net.sf.mmm.util.value.api.ValueConverter}s.
+ * This is a default {@link net.sf.mmm.util.value.api.ComposedValueConverter} to be used without
+ * IoC-Container. It extends {@link ComposedValueConverterImpl} by
+ * {@link #addConverter(net.sf.mmm.util.value.api.ValueConverter) adding} typical
+ * {@link net.sf.mmm.util.value.api.ValueConverter}s.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -30,7 +31,7 @@ public class DefaultComposedValueConverter extends ComposedValueConverterImpl {
   /**
    * This method gets the singleton instance of this {@link ComposedValueConverter}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    * @since 3.1.0

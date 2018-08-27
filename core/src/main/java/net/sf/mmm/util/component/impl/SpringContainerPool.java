@@ -11,11 +11,13 @@ import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.base.SpringConfigs;
 
 /**
- * This is just an ugly static pool used to simplify testing. It might cause memory holes and should never be used in
- * productive code.
+ * This is just an ugly static pool used to simplify testing. It might cause memory holes and should never be
+ * used in productive code.
  *
+ * @deprecated will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@Deprecated
 public final class SpringContainerPool {
 
   private static Map<String, SpringContainer> xml2containerMap;
@@ -71,8 +73,8 @@ public final class SpringContainerPool {
   }
 
   /**
-   * This method disposes the {@link #getInstance(String) instance} identified by the given {@code xmlClasspath} (if it
-   * exists).
+   * This method disposes the {@link #getInstance(String) instance} identified by the given
+   * {@code xmlClasspath} (if it exists).
    *
    * @param xmlClasspath is the classpath to the XML configuration.
    */

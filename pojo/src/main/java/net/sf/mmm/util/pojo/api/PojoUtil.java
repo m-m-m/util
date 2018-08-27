@@ -4,7 +4,6 @@ package net.sf.mmm.util.pojo.api;
 
 import java.util.Set;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
@@ -16,7 +15,6 @@ import net.sf.mmm.util.filter.api.Filter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.1.0
  */
-@ComponentSpecification
 public interface PojoUtil {
 
   /**

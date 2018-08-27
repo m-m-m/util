@@ -18,8 +18,7 @@ import net.sf.mmm.util.value.api.GenericValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggableComponent
-    implements GenericValueConverter<SOURCE> {
+public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLoggableComponent implements GenericValueConverter<SOURCE> {
 
   /**
    * The constructor.
@@ -30,15 +29,14 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   }
 
   @Override
-  public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass)
-      throws ValueNotSetException, WrongValueTypeException {
+  public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass) throws ValueNotSetException, WrongValueTypeException {
 
     return convertValue(value, valueSource, targetClass, targetClass);
   }
 
   @Override
-  public final <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> type, Type targetType,
-      TARGET defaultValue) throws WrongValueTypeException {
+  public final <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> type, Type targetType, TARGET defaultValue)
+      throws WrongValueTypeException {
 
     if (value == null) {
       return defaultValue;
@@ -48,15 +46,14 @@ public abstract class AbstractGenericValueConverter<SOURCE> extends AbstractLogg
   }
 
   @Override
-  public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass, TARGET defaultValue)
-      throws WrongValueTypeException {
+  public <TARGET> TARGET convertValue(SOURCE value, Object valueSource, Class<TARGET> targetClass, TARGET defaultValue) throws WrongValueTypeException {
 
     return convertValue(value, valueSource, targetClass, targetClass, defaultValue);
   }
 
   @Override
-  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum, TARGET maximum,
-      TARGET defaultValue) throws WrongValueTypeException, ValueOutOfRangeException {
+  public <TARGET extends Number> TARGET convertValue(SOURCE value, Object valueSource, TARGET minimum, TARGET maximum, TARGET defaultValue)
+      throws WrongValueTypeException, ValueOutOfRangeException {
 
     if (defaultValue != null) {
       ValueOutOfRangeException.checkRange((Object) defaultValue, minimum, maximum, valueSource);

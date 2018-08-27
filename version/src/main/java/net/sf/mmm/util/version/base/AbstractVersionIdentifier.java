@@ -3,8 +3,8 @@
 package net.sf.mmm.util.version.base;
 
 import java.util.Date;
+import java.util.Objects;
 
-import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 import net.sf.mmm.util.version.impl.VersionUtilImpl;
@@ -76,8 +76,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getVersionSegment(int)
-   * version number}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the
+   * {@link #getVersionSegment(int) version number}.
    *
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
@@ -132,7 +132,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp() timestamp}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp()
+   * timestamp}.
    *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
@@ -196,7 +197,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp() timestamp}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getTimestamp()
+   * timestamp}.
    *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
@@ -208,8 +210,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for linear and optional attributes like
-   * {@link #getTimestamp()} or {@link #getRevision()}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for linear and optional attributes
+   * like {@link #getTimestamp()} or {@link #getRevision()}.
    *
    * @param <T> is the generic type of the {@link Comparable} value.
    * @param currentResult is the current result so far.
@@ -218,8 +220,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
    * @return the result of comparison.
    */
-  private <T extends Comparable<T>> int compareToLinear(int currentResult, T thisValue, T otherValue,
-      VersionIdentifier otherVersion) {
+  private <T extends Comparable<T>> int compareToLinear(int currentResult, T thisValue, T otherValue, VersionIdentifier otherVersion) {
 
     if (currentResult == COMPARE_TO_INCOMPARABLE) {
       return COMPARE_TO_INCOMPARABLE;
@@ -254,7 +255,8 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   }
 
   /**
-   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getRevision() revision}.
+   * This method performs the part of {@link #compareTo(VersionIdentifier)} for the {@link #getRevision()
+   * revision}.
    *
    * @param currentResult is the current result so far.
    * @param otherVersion is the {@link VersionIdentifier} to compare to.
@@ -296,7 +298,7 @@ public abstract class AbstractVersionIdentifier implements VersionIdentifier {
   @Override
   public final int compareTo(VersionIdentifier otherVersion) {
 
-    NlsNullPointerException.checkNotNull(VersionIdentifier.class, otherVersion);
+    Objects.requireNonNull(otherVersion, "otherVersion");
     int result = compareToVersionNumber(otherVersion);
     result = compareToPhase(result, otherVersion);
     result = compareToRevision(result, otherVersion);

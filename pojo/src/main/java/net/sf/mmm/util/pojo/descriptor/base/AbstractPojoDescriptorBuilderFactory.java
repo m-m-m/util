@@ -13,8 +13,7 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggableComponent
-    implements PojoDescriptorBuilderFactory {
+public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggableComponent implements PojoDescriptorBuilderFactory {
 
   private static AbstractPojoDescriptorBuilderFactory instance;
 
@@ -40,7 +39,7 @@ public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLogga
   /**
    * This method gets the singleton instance of {@link PojoDescriptorBuilderFactory}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the static instance of this class. May be {@code null} if not initialized.
    */

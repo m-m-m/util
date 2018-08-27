@@ -409,14 +409,6 @@ public interface NlsBundleUtilCoreRoot extends NlsBundle {
   NlsMessage errorNumberConversion(@Named("value") Object value, @Named("type") Object type);
 
   /**
-   * @see net.sf.mmm.util.security.api.SecurityErrorUserException
-   *
-   * @return the {@link NlsMessage}
-   */
-  @NlsBundleMessage("The operation failed due to security restrictions. Please contact the support in case of a permission problem.")
-  NlsMessage errorSecurityRestriction();
-
-  /**
    * @see net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceNoElseConditionException
    *
    * @return the {@link NlsMessage}

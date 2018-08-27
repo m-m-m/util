@@ -16,7 +16,7 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.XMLEvent;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.ValueException;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -33,7 +33,7 @@ import net.sf.mmm.util.xml.impl.stax.XIncludeStreamReader;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public final class StaxUtilImpl extends AbstractLoggableComponent implements StaxUtil {
+public final class StaxUtilImpl extends AbstractComponent implements StaxUtil {
 
   private static StaxUtil instance;
 
@@ -54,7 +54,7 @@ public final class StaxUtilImpl extends AbstractLoggableComponent implements Sta
   /**
    * This method gets the singleton instance of this {@link StaxUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */

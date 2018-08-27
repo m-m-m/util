@@ -8,11 +8,12 @@ import net.sf.mmm.util.lang.api.EnvironmentDetector;
 /**
  * This is the abstract base implementation of {@link EnvironmentDetector}.
  *
+ * @deprecated will be removed (see {@link EnvironmentDetector}).
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public abstract class AbstractEnvironmentDetector extends AbstractLoggableComponent
-    implements EnvironmentDetector {
+@Deprecated
+public abstract class AbstractEnvironmentDetector extends AbstractLoggableComponent implements EnvironmentDetector {
 
   /**
    * The constructor.
@@ -38,10 +39,8 @@ public abstract class AbstractEnvironmentDetector extends AbstractLoggableCompon
   public boolean isEnvironmentCloseToProduction() {
 
     String environmentType = getEnvironmentType();
-    if (ENVIRONMENT_TYPE_PRODUCTION.equals(environmentType)
-        || ENVIRONMENT_TYPE_PRE_PRODUCTION.equals(environmentType)
-        || ENVIRONMENT_TYPE_STAGING.equals(environmentType)
-        || ENVIRONMENT_TYPE_ACCEPTANCE.equals(environmentType)) {
+    if (ENVIRONMENT_TYPE_PRODUCTION.equals(environmentType) || ENVIRONMENT_TYPE_PRE_PRODUCTION.equals(environmentType)
+        || ENVIRONMENT_TYPE_STAGING.equals(environmentType) || ENVIRONMENT_TYPE_ACCEPTANCE.equals(environmentType)) {
       return true;
     }
     return false;

@@ -7,7 +7,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
@@ -20,7 +19,6 @@ import net.sf.mmm.util.io.api.RuntimeIoException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-@ComponentSpecification
 public interface XmlUtil {
 
   /** the URI of the xmlns namespace */

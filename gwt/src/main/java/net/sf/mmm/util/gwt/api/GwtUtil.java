@@ -28,7 +28,7 @@ public class GwtUtil {
   }
 
   /**
-   * @see net.sf.mmm.util.component.api.Cdi#GET_INSTANCE
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance of {@link GwtUtil}.
    */
@@ -50,9 +50,9 @@ public class GwtUtil {
   }
 
   /**
-   * This method gets the ID of the given {@link Element}. If the {@link Element} {@link Element#getId() has no ID} set,
-   * this method will {@link DOM#createUniqueId() create a unique ID} and {@link Element#setId(String) assign} it to the
-   * given {@link Element}.
+   * This method gets the ID of the given {@link Element}. If the {@link Element} {@link Element#getId() has
+   * no ID} set, this method will {@link DOM#createUniqueId() create a unique ID} and
+   * {@link Element#setId(String) assign} it to the given {@link Element}.
    *
    * @param element is the {@link Element} for which the ID is requested.
    * @return the (unique) ID of the {@link Element}. Created if not set.

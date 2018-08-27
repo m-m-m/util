@@ -11,7 +11,7 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import net.sf.mmm.util.collection.base.HashKey;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.pojo.api.PojoUtil;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -30,7 +30,7 @@ import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.1.0
  */
-public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil {
+public class PojoUtilImpl extends AbstractComponent implements PojoUtil {
 
   private static PojoUtil instance;
 
@@ -49,7 +49,7 @@ public class PojoUtilImpl extends AbstractLoggableComponent implements PojoUtil 
   /**
    * This method gets the singleton instance of this {@link PojoUtil}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */

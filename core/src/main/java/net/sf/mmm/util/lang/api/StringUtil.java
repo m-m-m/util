@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.value.api.ValueConverter;
 
 /**
@@ -19,7 +18,6 @@ import net.sf.mmm.util.value.api.ValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-@ComponentSpecification
 public interface StringUtil {
 
   /** a string representing the boolean value {@code true} */

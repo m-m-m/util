@@ -9,14 +9,17 @@ import javax.inject.Inject;
 import org.springframework.core.env.Environment;
 
 import net.sf.mmm.util.component.api.ResourceMissingException;
+import net.sf.mmm.util.lang.api.EnvironmentDetector;
 
 /**
- * This is the default implementation of {@link net.sf.mmm.util.lang.api.EnvironmentDetector}. It is based on spring
- * profiles.
+ * This is the default implementation of {@link net.sf.mmm.util.lang.api.EnvironmentDetector}. It is based on
+ * spring profiles.
  *
+ * @deprecated will be removed (see {@link EnvironmentDetector}).
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
+@Deprecated
 public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDetector {
 
   /** The {@link Environment} used to determine if we are running in production. */
@@ -93,8 +96,7 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
     super.logEnvironmentStatus();
     if (isDevelopmentEnvironment()) {
       getLogger().warn("ATTENTION: You are currently running in DEVELOPMENT mode.");
-      getLogger().warn(
-          "Ensure to manage your environments properly via spring profiles (e.g. by setting the system property 'spring.profiles.active'");
+      getLogger().warn("Ensure to manage your environments properly via spring profiles (e.g. by setting the system property 'spring.profiles.active'");
     }
   }
 
@@ -112,8 +114,8 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
           detectedEnvironmentType = newType;
           getLogger().info("Profile '{}' triggered environment type '{}'.", name, newType);
         } else if (!detectedEnvironmentType.equals(newType)) {
-          throw new IllegalStateException("Environment type is " + detectedEnvironmentType + " but profile " + name
-              + " triggered different environment type " + newType);
+          throw new IllegalStateException(
+              "Environment type is " + detectedEnvironmentType + " but profile " + name + " triggered different environment type " + newType);
         }
       }
     }
@@ -127,14 +129,13 @@ public class EnvironmentDetectorSpringProfileImpl extends AbstractEnvironmentDet
 
   /**
    * @param name is the name of an actual environment or a configuration profile.
-   * @return the {@link #getEnvironmentType() environment type} that has been detected by naming convention, or
-   *         {@code null} if nothing could be detected.
+   * @return the {@link #getEnvironmentType() environment type} that has been detected by naming convention,
+   *         or {@code null} if nothing could be detected.
    */
   protected String detectEnvironmentType(String name) {
 
     String lowercaseName = name.toLowerCase(Locale.US);
-    if (lowercaseName.contains("pre-live") || lowercaseName.contains("pre-prod")
-        || lowercaseName.contains("prelive") || lowercaseName.contains("preprod")) {
+    if (lowercaseName.contains("pre-live") || lowercaseName.contains("pre-prod") || lowercaseName.contains("prelive") || lowercaseName.contains("preprod")) {
       return ENVIRONMENT_TYPE_PRE_PRODUCTION;
     } else if (lowercaseName.contains("prod") || lowercaseName.contains("live")) {
       return ENVIRONMENT_TYPE_PRODUCTION;

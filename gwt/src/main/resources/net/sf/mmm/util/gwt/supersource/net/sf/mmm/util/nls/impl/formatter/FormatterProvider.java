@@ -9,7 +9,6 @@ import java.util.Locale;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.base.AbstractFormatter;
-import net.sf.mmm.util.nls.api.IllegalCaseException;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -20,7 +19,7 @@ import com.google.gwt.i18n.client.NumberFormat;
  * This class provides {@link Formatter}s for various types. It contains the formatting logic for various
  * implementations of {@link net.sf.mmm.util.nls.base.SimpleNlsFormatter}. This way it is easier to maintain
  * GWT compatibility by replacing this class.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
@@ -76,10 +75,10 @@ public final class FormatterProvider {
         format = PredefinedFormat.DATE_TIME_SHORT;
       }
     } else {
-      throw new IllegalCaseException(type);
+      throw new IllegalArgumentException(type);
     }
     if (format == null) {
-      throw new IllegalCaseException(style);
+      throw new IllegalArgumentException(style);
     }
     return new DateTimeFormatFormatter(DateTimeFormat.getFormat(format));
   }
@@ -166,7 +165,7 @@ public final class FormatterProvider {
 
     /**
      * The constructor.
-     * 
+     *
      * @param iso8601Util is the {@link Iso8601Util}.
      * @param type is the {@link net.sf.mmm.util.nls.api.NlsFormatterPlugin#getType() type}.
      */
@@ -178,7 +177,7 @@ public final class FormatterProvider {
     }
 
     /**
-     * 
+     *
      * @param object is the value to format that should be converted to {@link Date}.
      * @return the {@link Date}.
      */
@@ -213,7 +212,7 @@ public final class FormatterProvider {
         } else if (NlsFormatterManager.TYPE_DATETIME.equals(this.type)) {
           this.iso8601Util.formatDateTime(date, true, true, true, buffer);
         } else {
-          throw new IllegalCaseException(this.type);
+          throw new IllegalStateException(this.type);
         }
       }
     }
@@ -228,7 +227,7 @@ public final class FormatterProvider {
 
     /**
      * The constructor.
-     * 
+     *
      * @param format is the {@link NumberFormat} to adapt.
      */
     public NumberFormatFormatter(NumberFormat format) {
@@ -237,7 +236,8 @@ public final class FormatterProvider {
       this.format = format;
     }
 
-    @Override    protected void doFormat(Object value, Appendable buffer) throws IOException {
+    @Override
+    protected void doFormat(Object value, Appendable buffer) throws IOException {
 
       if (value instanceof Number) {
         buffer.append(this.format.format((Number) value));
@@ -245,7 +245,6 @@ public final class FormatterProvider {
         buffer.append(value.toString());
       }
     }
-
   }
 
   /**
@@ -257,7 +256,7 @@ public final class FormatterProvider {
 
     /**
      * The constructor.
-     * 
+     *
      * @param format is the {@link DateTimeFormat} to adapt.
      */
     public DateTimeFormatFormatter(DateTimeFormat format) {
@@ -266,7 +265,8 @@ public final class FormatterProvider {
       this.format = format;
     }
 
-    @Override    protected void doFormat(Object value, Appendable buffer) throws IOException {
+    @Override
+    protected void doFormat(Object value, Appendable buffer) throws IOException {
 
       if (value instanceof Date) {
         buffer.append(this.format.format((Date) value));

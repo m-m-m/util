@@ -17,8 +17,7 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.exception.api.IllegalCaseException;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.exception.api.ValueConvertException;
 import net.sf.mmm.util.exception.api.WrongValueTypeException;
@@ -38,7 +37,7 @@ import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
  * @author hohwille
  * @since 7.4.0
  */
-public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil {
+public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
 
   private static JsonUtil instance;
 
@@ -50,6 +49,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
    * The constructor.
    */
   public JsonUtilImpl() {
+
     super();
   }
 
@@ -95,7 +95,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   /**
    * This method gets the singleton instance of this {@link JsonUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */
@@ -152,7 +152,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   }
 
   @Override
-  public <E extends Enum<E>> E readEnum(JsonParser json, Class<E> enumType) throws IllegalCaseException {
+  public <E extends Enum<E>> E readEnum(JsonParser json, Class<E> enumType) {
 
     String value = json.getString();
     return convertEnum(value, enumType);
@@ -163,9 +163,9 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
    * @param value the value to convert to the {@link Enum}.
    * @param enumType the {@link Class} reflecting the {@link Enum} to parse.
    * @return the parsed {@link Enum} constant.
-   * @throws IllegalCaseException if no such {@link Enum} constant exists.
+   * @throws IllegalStateException if no such {@link Enum} constant exists.
    */
-  protected <E extends Enum<E>> E convertEnum(String value, Class<E> enumType) throws IllegalCaseException {
+  protected <E extends Enum<E>> E convertEnum(String value, Class<E> enumType) {
 
     E[] constants = enumType.getEnumConstants();
     for (E e : constants) {
@@ -179,7 +179,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
         return e;
       }
     }
-    throw new IllegalCaseException(value.toString() + "@" + enumType.getName());
+    throw new IllegalStateException(value.toString() + "@" + enumType.getName());
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -465,7 +465,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   }
 
   @Override
-  public void expectEvent(JsonParser json, Event event) throws ObjectMismatchException {
+  public void expectEvent(JsonParser json, Event event) {
 
     Event e = json.next();
     expectEvent(e, event);
@@ -566,7 +566,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
         }
         break;
       default :
-        throw new IllegalCaseException(Event.class, e);
+        throw new IllegalStateException("Unhandled event: " + e);
     }
   }
 

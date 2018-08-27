@@ -11,7 +11,7 @@
   <source path="collection" excludes="**/*Concurrent*,**/*Deque*,**/*BlockingQueue*,base/*Hierarchy*,base/SortedProperties.java,base/AdvancedClassHierarchyMap.java,impl/CollectionFactoryManagerImpl.java"/>
   <!-- includes="AbstractIterator.java,SingleElementIterator.java,NodeCycle.java,NodeCycleException.java"/> -->
   <source path="date" includes="**/*Limited*,**/*Exception.java"/>
-  <source path="component" excludes="NlsBundleUtilComponentRoot.java,impl/**,base/*Servlet*"/>
+  <source path="component" excludes="NlsBundleUtilComponentRoot.java,api/*Exception.java,impl/**,base/*Servlet*"/>
   <source path="scanner"/>
   <source path="session"/>
   <source path="exception" excludes="api/ExceptionUtil.java,base/ExceptionUtilImpl.java"/>

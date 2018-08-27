@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.api;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
-
 /**
  * This is the interface for a {@link ValueConverter} that is composed out of individual
  * {@link ValueConverter}s. The idea of this component is the idiom <em>separations of concerns</em>.
@@ -110,7 +108,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@ComponentSpecification
 public interface ComposedValueConverter extends ValueConverter<Object, Object>, GenericValueConverter<Object> {
 
 }

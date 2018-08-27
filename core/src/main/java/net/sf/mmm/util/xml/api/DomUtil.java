@@ -17,8 +17,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
-
 /**
  * This is the interface for a collection of utility functions that help to deal with the
  * {@link org.w3c.dom.Node DOM} API.
@@ -26,7 +24,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-@ComponentSpecification
 public interface DomUtil {
 
   /**
@@ -164,8 +161,7 @@ public interface DomUtil {
    * @throws IllegalArgumentException if the value of the specified attribute does NOT represent a boolean
    *         value.
    */
-  boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue)
-      throws IllegalArgumentException;
+  boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue) throws IllegalArgumentException;
 
   /**
    * This method gets the text of the given node excluding the text of child elements (depth=0).

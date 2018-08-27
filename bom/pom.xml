@@ -16,8 +16,8 @@
 
   <properties>
     <mmm.flatten.mode>bom</mmm.flatten.mode>
-    <javax.validation.version>1.1.0.Final</javax.validation.version>
-    <org.slf4j.version>1.7.21</org.slf4j.version>
+    <javax.validation.version>2.0.1.Final</javax.validation.version>
+    <org.slf4j.version>1.7.25</org.slf4j.version>
   </properties>
 
   <dependencyManagement>
@@ -30,26 +30,12 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- BOM of spring -->
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>1.3.4.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
 
       <dependency>
-        <groupId>org.hibernate.javax.persistence</groupId>
-        <artifactId>hibernate-jpa-2.1-api</artifactId>
-        <version>1.0.0.Final</version>
+        <groupId>javax.inject</groupId>
+        <artifactId>javax.inject</artifactId>
+        <version>1</version>
       </dependency>
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-dbcp2</artifactId>
-        <version>2.1.1</version>
-      </dependency>
-
       <dependency>
         <groupId>javax.validation</groupId>
         <artifactId>validation-api</artifactId>
@@ -62,10 +48,28 @@
         <classifier>sources</classifier>
       </dependency>
       <dependency>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <classifier>sources</classifier>
+        <version>6.0.9.Final</version>
+      </dependency>
+
+      <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
+        <!-- <version>4.0.1</version> -->
         <version>3.1.0</version>
         <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.el</groupId>
+        <artifactId>javax.el-api</artifactId>
+        <version>3.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.el</artifactId>
+        <version>3.0.1-b09</version>
       </dependency>
 
       <dependency>
@@ -104,7 +108,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.4.1</version>
+        <version>3.11.0</version>
       </dependency>
 
       <!-- Internal dependencies -->
@@ -112,6 +116,149 @@
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-test</artifactId>
         <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-lang</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-lang</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-scanner</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-scanner</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-pattern</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-pattern</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-uuid</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-uuid</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-math</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-math</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-date</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-date</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-session</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-session</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-text</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-text</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-collection</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-collection</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-resource</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-resource</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-reflect</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-reflect</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-nls</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-nls</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-exception</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-exception</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>

@@ -4,8 +4,6 @@ package net.sf.mmm.util.io.api;
 
 import java.io.InputStream;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
-
 /**
  * This is the interface for a collection of utility functions to that help deal with <em>encodings</em>. An
  * encoding defines a mapping of {@link Character}s of a {@link java.nio.charset.Charset} to {@link Byte}s and
@@ -16,7 +14,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-@ComponentSpecification
 public interface EncodingUtil {
 
   /**

@@ -8,9 +8,11 @@ import net.sf.mmm.util.lang.api.DatatypeDetector;
 /**
  * This is the default implementation of {@link DatatypeDetector}.
  *
+ * @deprecated see {@link DatatypeDetector}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
+@Deprecated
 public class DatatypeDetectorImpl extends AbstractDatatypeDetector {
 
   /**

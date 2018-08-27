@@ -6,12 +6,14 @@ import net.sf.mmm.util.component.NlsBundleUtilComponentRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
- * This is the exception thrown if a unique {@link javax.annotation.Resource resource} is required but multiple
- * instances have been found.
+ * This is the exception thrown if a unique {@link javax.annotation.Resource resource} is required but
+ * multiple instances have been found.
  *
+ * @deprecated will be removed in some future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@Deprecated
 public class ResourceAmbiguousException extends NlsRuntimeException {
 
   private static final long serialVersionUID = -6589910110649307658L;

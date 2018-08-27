@@ -6,24 +6,23 @@ import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
 
 /**
- * This class extends {@link AbstractSynchronizedEventSource} with the ability to send events asynchronous in separate
- * {@link Thread}s.
+ * This class extends {@link AbstractSynchronizedEventSource} with the ability to send events asynchronous in
+ * separate {@link Thread}s.
  *
  * @param <E> is the templated type of the events to send.
- * @param <L> is the templated type of the listeners that can be {@link #addListener(EventListener) registered} here and
- *        that will {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Object) receive} the sent events.
+ * @param <L> is the templated type of the listeners that can be {@link #addListener(EventListener)
+ *        registered} here and that will {@link net.sf.mmm.util.event.api.EventListener#handleEvent(Object)
+ *        receive} the sent events.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractMultiThreadedEventSource<E extends Event, L extends EventListener<E>>
-    extends AbstractSynchronizedEventSource<E, L> {
+public abstract class AbstractMultiThreadedEventSource<E extends Event, L extends EventListener<E>> extends AbstractSynchronizedEventSource<E, L> {
 
   private Executor executor;
 
@@ -44,9 +43,7 @@ public abstract class AbstractMultiThreadedEventSource<E extends Event, L extend
   @Inject
   public void setExecutor(Executor threadPool) {
 
-    if (this.executor != null) {
-      throw new AlreadyInitializedException();
-    }
+    getInitializationState().requireNotInitilized();
     this.executor = threadPool;
   }
 

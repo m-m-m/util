@@ -8,19 +8,21 @@ package net.sf.mmm.util.component.api;
  * @see java.io.Closeable
  * @see java.io.Flushable
  *
+ * @deprecated will be removed in some future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
+@Deprecated
 public interface Refreshable {
 
   /**
-   * This method refreshes the given object. This can be anything from reloading configuration to rebuilding the
-   * internal state. An invocation of this method may be expensive and should only be invoked as needed. The
-   * implementation of this method should be thread-safe if the object itself is to be used by separate consumers at
-   * all.
+   * This method refreshes the given object. This can be anything from reloading configuration to rebuilding
+   * the internal state. An invocation of this method may be expensive and should only be invoked as needed.
+   * The implementation of this method should be thread-safe if the object itself is to be used by separate
+   * consumers at all.
    *
-   * @return {@code true} if something has changed, {@code false} otherwise. If the implementation can not determine the
-   *         change it should return {@code true}.
+   * @return {@code true} if something has changed, {@code false} otherwise. If the implementation can not
+   *         determine the change it should return {@code true}.
    */
   boolean refresh();
 

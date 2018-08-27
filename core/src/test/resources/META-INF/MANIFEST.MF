@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Version: 42.1.2.3
-Implementation-Title: mmm-util-core

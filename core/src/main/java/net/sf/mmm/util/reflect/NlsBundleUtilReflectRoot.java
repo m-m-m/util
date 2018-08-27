@@ -11,9 +11,12 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 /**
  * This interface holds the {@link NlsBundle internationalized messages} for this module.
  *
+ * @deprecated not used any more as {@code mmm-util-reflect} was moved to a separate module and had to be
+ *             decoupled from {{@code mmm-util-nls}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
+@Deprecated
 public interface NlsBundleUtilReflectRoot extends NlsBundle {
 
   /**

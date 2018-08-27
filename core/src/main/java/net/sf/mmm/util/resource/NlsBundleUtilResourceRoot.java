@@ -11,9 +11,11 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 /**
  * This interface holds the {@link NlsBundle internationalized messages} for this module.
  *
+ * @deprecated will be removed.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0
  */
+@Deprecated
 public interface NlsBundleUtilResourceRoot extends NlsBundle {
 
   /**

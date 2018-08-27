@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.version.api;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.exception.api.NlsParseException;
 
 /**
@@ -12,7 +11,6 @@ import net.sf.mmm.util.exception.api.NlsParseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-@ComponentSpecification
 public interface VersionUtil {
 
   /**
@@ -59,8 +57,8 @@ public interface VersionUtil {
 
   /**
    * This method creates a {@link VersionIdentifierFormatter} for the given {@code formatPattern}. Similar to
-   * {@link java.text.SimpleDateFormat} the format pattern is parsed and there are particular
-   * <em>letter symbols</em> that have a specific meaning.
+   * {@link java.text.SimpleDateFormat} the format pattern is parsed and there are particular <em>letter
+   * symbols</em> that have a specific meaning.
    * <table border="1">
    * <tr>
    * <th>letter</th>

@@ -35,7 +35,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.io.api.IoMode;
@@ -55,7 +55,7 @@ import net.sf.mmm.util.xml.api.XmlException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public final class DomUtilImpl extends AbstractLoggableComponent implements DomUtil {
+public final class DomUtilImpl extends AbstractComponent implements DomUtil {
 
   private static DomUtil instance;
 
@@ -142,7 +142,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
   /**
    * This method gets the singleton instance of this {@link DomUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */
@@ -196,8 +196,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     try {
       return this.documentBuilderFactory.newDocumentBuilder();
     } catch (ParserConfigurationException e) {
-      throw new IllegalStateException(
-          "XML Parser misconfigured!" + " Probably your JVM does not support the required JAXP version!", e);
+      throw new IllegalStateException("XML Parser misconfigured!" + " Probably your JVM does not support the required JAXP version!", e);
     }
   }
 
@@ -217,8 +216,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
       }
       return result;
     } catch (TransformerConfigurationException e) {
-      throw new IllegalStateException(
-          "XML Transformer misconfigured!" + " Probably your JVM does not support the required JAXP version!", e);
+      throw new IllegalStateException("XML Transformer misconfigured!" + " Probably your JVM does not support the required JAXP version!", e);
     }
   }
 
@@ -256,15 +254,13 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     Element result = getFirstChildElement(element, tagName);
     if (result == null) {
       // TODO: NLS
-      throw new IllegalArgumentException(
-          "Missing element '" + tagName + "' in element '" + element.getTagName() + "'!");
+      throw new IllegalArgumentException("Missing element '" + tagName + "' in element '" + element.getTagName() + "'!");
     }
     return result;
   }
 
   @Override
-  public boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue)
-      throws IllegalArgumentException {
+  public boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue) throws IllegalArgumentException {
 
     boolean result = defaultValue;
     if (element.hasAttribute(attribute)) {
@@ -431,8 +427,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
     if (type1 != type2) {
       boolean accept = false;
       if (mode.isJoinText() && mode.isJoinCData()) {
-        if (((type1 == Node.TEXT_NODE) && (type2 == Node.CDATA_SECTION_NODE))
-            || ((type1 == Node.CDATA_SECTION_NODE) && (type2 == Node.TEXT_NODE))) {
+        if (((type1 == Node.TEXT_NODE) && (type2 == Node.CDATA_SECTION_NODE)) || ((type1 == Node.CDATA_SECTION_NODE) && (type2 == Node.TEXT_NODE))) {
           accept = true;
         }
       }
@@ -571,8 +566,7 @@ public final class DomUtilImpl extends AbstractLoggableComponent implements DomU
         return false;
       }
       Node child2 = nodeIterator2.next();
-      if ((child1.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE)
-          && (child2.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE)) {
+      if ((child1.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE) && (child2.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE)) {
         // according to DOM-spec nodes can never return DocumentFragment as
         // child - in our case this indicates that the JoiningNodeIterator has
         // joined CharacterData according to "mode" into a DocumentFragment.

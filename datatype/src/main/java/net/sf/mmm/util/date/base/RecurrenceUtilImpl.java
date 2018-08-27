@@ -8,7 +8,7 @@ import java.util.Date;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.api.DateUnit;
 import net.sf.mmm.util.date.api.Recurrence;
 import net.sf.mmm.util.date.api.RecurrenceUtil;
@@ -29,7 +29,7 @@ import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
  */
 @Singleton
 @Named
-public class RecurrenceUtilImpl extends AbstractLoggableComponent implements RecurrenceUtil {
+public class RecurrenceUtilImpl extends AbstractComponent implements RecurrenceUtil {
 
   private static RecurrenceUtil instance;
 
@@ -44,7 +44,7 @@ public class RecurrenceUtilImpl extends AbstractLoggableComponent implements Rec
   /**
    * This method gets the singleton instance of this {@link RecurrenceUtil}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */

@@ -17,9 +17,11 @@ import net.sf.mmm.util.exception.api.ObjectDisposedException;
  * <b>ATTENTION:</b><br>
  * Please check your dependencies as {@code spring} is an optional dependency in {@code mmm-util-core}.
  *
+ * @deprecated will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Deprecated
 public abstract class AbstractSpringContainer extends AbstractLoggableComponent implements IocContainer {
 
   /** The {@link ConfigurableApplicationContext} to delegate to. */

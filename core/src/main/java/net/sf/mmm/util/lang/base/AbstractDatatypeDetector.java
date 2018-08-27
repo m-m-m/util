@@ -17,9 +17,11 @@ import net.sf.mmm.util.lang.api.DatatypeDetector;
 /**
  * This is the abstract base implementation of {@link DatatypeDetector}.
  *
+ * @deprecated see {@link DatatypeDetector}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
+@Deprecated
 public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent implements DatatypeDetector {
 
   private final Set<String> customDatatypeSet;
@@ -50,8 +52,8 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
   }
 
   /**
-   * Like {@link #registerCustomDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can be used to
-   * prevent compile-time dependencies on datatype.
+   * Like {@link #registerCustomDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can be
+   * used to prevent compile-time dependencies on datatype.
    *
    * @see #registerCustomDatatype(Class)
    *
@@ -76,8 +78,8 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
   }
 
   /**
-   * Like {@link #registerStandardDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can be used to
-   * prevent compile-time dependencies on datatype.
+   * Like {@link #registerStandardDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can
+   * be used to prevent compile-time dependencies on datatype.
    *
    * @see #registerStandardDatatype(Class)
    *

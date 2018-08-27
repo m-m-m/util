@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.text.api;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
-
 /**
  * This is the interface used to {@link #wrap(Appendable, TextTableInfo, String, TextColumnInfo) wrap} texts
  * if they exceed a specific length. It even allows to do complex
@@ -12,7 +10,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-@ComponentSpecification
 public interface LineWrapper {
 
   /**
@@ -53,8 +50,7 @@ public interface LineWrapper {
    *         {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() line separators} that have been
    *         appended.
    */
-  int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text, TextColumnInfo column1Info,
-      String column2Text, TextColumnInfo column2Info);
+  int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text, TextColumnInfo column1Info, String column2Text, TextColumnInfo column2Info);
 
   /**
    * This method is like {@link #wrap(Appendable, TextTableInfo, String, TextColumnInfo)} but for a
@@ -76,8 +72,8 @@ public interface LineWrapper {
    *         appended.
    */
   // CHECKSTYLE:OFF (more than 7 parameters required here)
-  int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text, TextColumnInfo column1Info,
-      String column2Text, TextColumnInfo column2Info, String column3Text, TextColumnInfo column3Info);
+  int wrap(Appendable appendable, TextTableInfo tableInfo, String column1Text, TextColumnInfo column1Info, String column2Text, TextColumnInfo column2Info,
+      String column3Text, TextColumnInfo column3Info);
 
   // CHECKSTYLE:ON
 

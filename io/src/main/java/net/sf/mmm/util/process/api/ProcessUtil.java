@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
-
 /**
  * This is the interface for a collection of utility functions to deal with {@link Process}es.
  *
@@ -16,7 +14,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-@ComponentSpecification
 public interface ProcessUtil {
 
   /**
@@ -60,8 +57,7 @@ public interface ProcessUtil {
    * @throws InterruptedException if the calling {@link Thread} was interrupted while waiting for the
    *         {@link Process} -pipe to complete and before the {@code timeout} occurred.
    */
-  int execute(ProcessContext context, long timeout, TimeUnit unit, ProcessBuilder... builders)
-      throws IOException, TimeoutException, InterruptedException;
+  int execute(ProcessContext context, long timeout, TimeUnit unit, ProcessBuilder... builders) throws IOException, TimeoutException, InterruptedException;
 
   /**
    * This method executes the external {@link Process}es configured by the given {@code builders} as async

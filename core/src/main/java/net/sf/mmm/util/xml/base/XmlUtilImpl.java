@@ -307,7 +307,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
   /**
    * This method gets the singleton instance of this {@link XmlUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */

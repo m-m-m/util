@@ -129,7 +129,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
   /**
    * This method gets the singleton instance of this {@link EncodingUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */
@@ -589,8 +589,7 @@ public class EncodingUtilImpl extends AbstractLoggableComponent implements Encod
             if (this.detectionBuffer.hasNext()) {
               int lookahead = (int) this.detectionBuffer.process(this.detectionProcessor, Integer.MAX_VALUE);
               if ((!this.eos) && (!this.detectionProcessor.maybeAscii)) {
-                int nonAsciiOffset = (int) (this.detectionProcessor.bytePosition
-                    - this.detectionProcessor.firstNonAsciiPosition);
+                int nonAsciiOffset = (int) (this.detectionProcessor.bytePosition - this.detectionProcessor.firstNonAsciiPosition);
                 if (nonAsciiOffset < REQUIRED_LOOKAHEAD) {
                   this.encoding = this.detectionProcessor.getLowByteEncoding();
                   if (this.encoding == null) {

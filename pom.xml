@@ -19,6 +19,7 @@
     <!-- Internal project versions -->
     <net.sf.mmm.l10n.version>1.6.0</net.sf.mmm.l10n.version>
     <net.sf.mmm.util.version>7.6.0-SNAPSHOT</net.sf.mmm.util.version>
+    <com.google.gwt.version>2.8.1</com.google.gwt.version>
     <mmm.repository>util</mmm.repository>
   </properties>
 
@@ -35,7 +36,7 @@
           <name>env.CI</name>
           <value>true</value>
         </property>
-      </activation>      
+      </activation>
       <build>
         <plugins>
           <plugin>
@@ -46,7 +47,7 @@
             </configuration>
           </plugin>
         </plugins>
-      </build>      
+      </build>
     </profile>
   </profiles>
 </project>

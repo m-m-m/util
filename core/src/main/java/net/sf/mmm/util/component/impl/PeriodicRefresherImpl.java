@@ -21,9 +21,11 @@ import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 /**
  * This is the implementation of {@link PeriodicRefresher}.
  *
+ * @deprecated will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Deprecated
 public class PeriodicRefresherImpl extends AbstractLoggableComponent implements PeriodicRefresher, Runnable, Closeable {
 
   /** The default {@link #setRefreshDelayInSeconds(int) refresh-delay}. */
@@ -67,13 +69,14 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   }
 
   /**
-   * This method will initialize and startup this refresher. On the first call of this method a new thread will be
-   * started, that periodically performs a refresh. <br>
-   * Multiple calls of this method have no further effect unless the refresher is {@link #close() closed}. <br>
+   * This method will initialize and startup this refresher. On the first call of this method a new thread
+   * will be started, that periodically performs a refresh. <br>
+   * Multiple calls of this method have no further effect unless the refresher is {@link #close() closed}.
+   * <br>
    * <b>NOTE:</b><br>
    * This is intentionally NOT performed automatically via
-   * {@link net.sf.mmm.util.component.base.AbstractComponent#initialize()} so the startup only happens if explicitly
-   * required and not accidently because this component if found and managed by some container.
+   * {@link net.sf.mmm.util.component.base.AbstractComponent#initialize()} so the startup only happens if
+   * explicitly required and not accidently because this component if found and managed by some container.
    */
   public void startup() {
 
@@ -178,8 +181,8 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   }
 
   /**
-   * This method sets the refresh-delay in seconds. A reasonable value should be at least 5 seconds but better in the
-   * range of minutes.
+   * This method sets the refresh-delay in seconds. A reasonable value should be at least 5 seconds but better
+   * in the range of minutes.
    *
    * @param refreshDelayInSeconds is the refreshDelayInSeconds to set
    */

@@ -95,7 +95,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
   /**
    * This method gets the singleton instance of this {@link HyphenatorBuilderImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */
@@ -190,8 +190,7 @@ public class HyphenatorBuilderImpl extends AbstractHyphenatorBuilder {
           throw new NlsIllegalStateException();
         }
         reader.close();
-        HyphenatorImpl hyphenator = new HyphenatorImpl(locale, hyphen, patterns, exceptions, this.stringHasher,
-            this.stringUtil);
+        HyphenatorImpl hyphenator = new HyphenatorImpl(locale, hyphen, patterns, exceptions, this.stringHasher, this.stringUtil);
         hyphenator.initialize();
         return hyphenator;
       } finally {

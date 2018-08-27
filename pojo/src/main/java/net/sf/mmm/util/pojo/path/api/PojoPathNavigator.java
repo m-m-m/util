@@ -5,7 +5,6 @@ package net.sf.mmm.util.pojo.path.api;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
@@ -23,7 +22,6 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@ComponentSpecification
 public interface PojoPathNavigator {
 
   /**
@@ -78,8 +76,7 @@ public interface PojoPathNavigator {
    *         and could NOT be converted.
    */
   <TYPE> TYPE get(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context, Class<TYPE> targetClass)
-      throws PojoPathException, IllegalPojoPathException, PojoPathSegmentIsNullException, InstantiationFailedException,
-      PojoPathConversionException;
+      throws PojoPathException, IllegalPojoPathException, PojoPathSegmentIsNullException, InstantiationFailedException, PojoPathConversionException;
 
   /**
    * This method determines the result-type for the given {@link PojoPath pojoPath} starting at the given
@@ -181,8 +178,7 @@ public interface PojoPathNavigator {
    *         for the given {@code pojoPath} and could NOT be converted.
    */
   Object set(Object pojo, String pojoPath, PojoPathMode mode, PojoPathContext context, Object value)
-      throws PojoPathException, IllegalPojoPathException, PojoPathSegmentIsNullException, InstantiationFailedException,
-      PojoPathConversionException;
+      throws PojoPathException, IllegalPojoPathException, PojoPathSegmentIsNullException, InstantiationFailedException, PojoPathConversionException;
 
   /**
    * This method creates a lazy, immutable {@link Map} reflecting the given
