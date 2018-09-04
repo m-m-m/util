@@ -8,7 +8,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,16 +17,12 @@ import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
-import net.sf.mmm.util.exception.api.ObjectMismatchException;
-import net.sf.mmm.util.exception.api.ValueConvertException;
-import net.sf.mmm.util.exception.api.WrongValueTypeException;
 import net.sf.mmm.util.json.api.JsonSupport;
 import net.sf.mmm.util.json.api.JsonUtil;
-import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
+import net.sf.mmm.util.reflect.base.EnumHelper;
 
 /**
  * The implementation of {@link JsonUtil}.
@@ -41,8 +36,6 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
 
   private static JsonUtil instance;
 
-  private StringUtil stringUtil;
-
   private CollectionReflectionUtil collectionReflectionUtil;
 
   /**
@@ -51,15 +44,6 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
   public JsonUtilImpl() {
 
     super();
-  }
-
-  /**
-   * @param stringUtil is the {@link StringUtil} to {@link Inject}.
-   */
-  @Inject
-  public void setStringUtil(StringUtil stringUtil) {
-
-    this.stringUtil = stringUtil;
   }
 
   /**
@@ -75,9 +59,6 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.stringUtil == null) {
-      this.stringUtil = StringUtilImpl.getInstance();
-    }
     if (this.collectionReflectionUtil == null) {
       this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
     }
@@ -167,19 +148,7 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
    */
   protected <E extends Enum<E>> E convertEnum(String value, Class<E> enumType) {
 
-    E[] constants = enumType.getEnumConstants();
-    for (E e : constants) {
-      if (e.name().equals(value)) {
-        return e;
-      }
-    }
-    String deCamlCased = this.stringUtil.fromCamlCase(value.toString(), '_').toUpperCase(Locale.US);
-    for (E e : constants) {
-      if (e.name().equals(deCamlCased)) {
-        return e;
-      }
-    }
-    throw new IllegalStateException(value.toString() + "@" + enumType.getName());
+    return EnumHelper.fromString(value, enumType);
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -245,10 +214,7 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
     } else if (valueClass.isEnum()) {
       result = convertEnum(value, (Class) valueClass);
     } else if ((valueClass == boolean.class) || (valueClass == Boolean.class)) {
-      result = this.stringUtil.parseBoolean(value);
-      if (result == null) {
-        throw new ValueConvertException(value, valueClass);
-      }
+      result = Boolean.valueOf(value);
     } else {
       throw new IllegalArgumentException(type.toString());
     }
@@ -475,7 +441,7 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
   public void expectEvent(Event actual, Event expected) {
 
     if (actual != expected) {
-      throw new ObjectMismatchException(actual, expected);
+      throw new IllegalStateException("Expecting event '" + expected + "' but found '" + actual + "'.");
     }
   }
 
@@ -493,7 +459,7 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
     } else if (e == Event.VALUE_FALSE) {
       return false;
     }
-    throw new WrongValueTypeException(e, Boolean.class);
+    throw new IllegalStateException("Expecting boolean value but found: " + e);
   }
 
   @Override

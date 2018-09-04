@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
 import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.json.base.JsonUtilImpl;
-import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfigBase;
+import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.value}.
@@ -18,7 +18,7 @@ import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfigBase;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilCollectionSpringConfig.class, UtilLangSpringConfigBase.class })
+@Import({ UtilCollectionSpringConfig.class, UtilReflectSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class UtilJsonSpringConfig {
 
