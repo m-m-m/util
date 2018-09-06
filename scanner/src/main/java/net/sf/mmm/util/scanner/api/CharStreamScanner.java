@@ -456,6 +456,17 @@ public interface CharStreamScanner {
   String readWhile(CharFilter filter, int max);
 
   /**
+   * This method skips the number of {@link #next() next characters} given by {@code count}.
+   *
+   * @param count is the number of characters to skip. You may use {@link Integer#MAX_VALUE} to read until the
+   *        end of data if the data-size is suitable.
+   * @return a to total number of characters that have been skipped. Typically equal to {@code count}. Will be
+   *         less in case the {@link #isEos() end of the stream} was reached.
+   * @since 7.6.0
+   */
+  int skip(int count);
+
+  /**
    * This method reads all {@link #next() next characters} until the given {@code substring} has been
    * detected. <br>
    * After the call of this method, the current index will point to the next character after the first

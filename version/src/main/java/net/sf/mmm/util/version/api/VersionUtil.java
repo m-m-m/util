@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.version.api;
 
-import net.sf.mmm.util.exception.api.NlsParseException;
-
 /**
  * This is the interface for a collection of utility functions that help to deal with versions. E.g. you can
  * {@link #createVersionIdentifier(String) parse} a a version {@link String} to a {@link VersionIdentifier}.
@@ -21,9 +19,8 @@ public interface VersionUtil {
    * @param versionString is the {@link VersionIdentifier#toString() string representation} of a
    *        {@link VersionIdentifier}.
    * @return the parsed {@link VersionIdentifier}.
-   * @throws NlsParseException if the given {@code versionString} is invalid and could not be parsed.
    */
-  VersionIdentifier createVersionIdentifier(String versionString) throws NlsParseException;
+  VersionIdentifier createVersionIdentifier(String versionString);
 
   /**
    * This method parses the given {@code versionString} and builds an according {@link VersionIdentifier}
@@ -35,9 +32,8 @@ public interface VersionUtil {
    *        {@link VersionIdentifier#toString() string representation} that may differ from the given
    *        {@code versionString}. Otherwise the original {@code versionString} will be used.
    * @return the parsed {@link VersionIdentifier}.
-   * @throws NlsParseException if the given {@code versionString} is invalid and could not be parsed.
    */
-  VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat) throws NlsParseException;
+  VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat);
 
   /**
    * @return the default {@link VersionIdentifierFormatter}.

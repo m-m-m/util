@@ -913,6 +913,28 @@ public abstract class AbstractCharStreamScannerImpl extends AbstractCharStreamSc
   }
 
   @Override
+  public int skip(int count) {
+
+    if ((count == 0) || !hasNext()) {
+      return 0;
+    }
+    int skipped = 0;
+    int remain = count;
+    while (remain > 0) {
+      int len = this.limit - this.offset;
+      if (len >= remain) {
+        this.offset += remain;
+        return count;
+      }
+      skipped = skipped + len;
+      if (!fill()) {
+        break;
+      }
+    }
+    return skipped;
+  }
+
+  @Override
   public boolean skipUntil(char stop) {
 
     while (hasNext()) {

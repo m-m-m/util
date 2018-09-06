@@ -4,7 +4,6 @@ package net.sf.mmm.util.version.impl;
 
 import java.io.IOException;
 
-import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.AbstractFormatter;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
@@ -16,9 +15,6 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
  * @since 3.0.0
  */
 public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter<VersionIdentifier> {
-
-  /** The {@link StringUtil} instance. */
-  private final StringUtil stringUtil;
 
   /** The static prefix. */
   private final String prefix;
@@ -38,20 +34,20 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
   /**
    * The constructor.
    *
-   * @param stringUtil is the {@link StringUtil} instance.
-   * @param prefix is the static prefix to append before the number. Will be omitted if the number is {@code null}.
-   * @param segmentSeparator is the separator for {@link VersionIdentifier#getVersionSegment(int) segments}. The typical
-   *        value is the dot sign (".").
+   * @param prefix is the static prefix to append before the number. Will be omitted if the number is
+   *        {@code null}.
+   * @param segmentSeparator is the separator for {@link VersionIdentifier#getVersionSegment(int) segments}.
+   *        The typical value is the dot sign (".").
    * @param minimumSegmentCount is the minimum number of segments to format. The default is {@code 0}.
-   * @param maximumSegmentCount is maximum number of segments to format. The default is {@link Integer#MAX_VALUE}.
+   * @param maximumSegmentCount is maximum number of segments to format. The default is
+   *        {@link Integer#MAX_VALUE}.
    * @param segmentPadding is the padding (minimum number of digits) for each
    *        {@link VersionIdentifier#getVersionSegment(int) segment}. The default is {@code 0}.
    */
-  public VersionIdentifierFormatterVersionSegments(StringUtil stringUtil, String prefix, String segmentSeparator,
-      int minimumSegmentCount, int maximumSegmentCount, int segmentPadding) {
+  public VersionIdentifierFormatterVersionSegments(String prefix, String segmentSeparator, int minimumSegmentCount, int maximumSegmentCount,
+      int segmentPadding) {
 
     super();
-    this.stringUtil = stringUtil;
     this.prefix = prefix;
     this.segmentSeparator = segmentSeparator;
     this.minimumSegmentCount = minimumSegmentCount;
@@ -81,7 +77,8 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
   }
 
   /**
-   * This method formats the {@link VersionIdentifier#getVersionSegment(int) segment} at the given {@code index}.
+   * This method formats the {@link VersionIdentifier#getVersionSegment(int) segment} at the given
+   * {@code index}.
    *
    * @param value is the {@link VersionIdentifier}.
    * @param index is the index of the {@link VersionIdentifier#getVersionSegment(int) segment} to format.
@@ -90,7 +87,7 @@ public class VersionIdentifierFormatterVersionSegments extends AbstractFormatter
   protected CharSequence doFormatSegment(VersionIdentifier value, int index) {
 
     int segment = value.getVersionSegment(index);
-    return this.stringUtil.padNumber(segment, this.segmentPadding);
+    return AbstractVersionIdentifierFormatterNumber.padNumber(segment, this.segmentPadding, 10);
   }
 
 }

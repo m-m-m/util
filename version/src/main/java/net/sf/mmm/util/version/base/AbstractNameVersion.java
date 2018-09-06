@@ -5,7 +5,6 @@ package net.sf.mmm.util.version.base;
 import java.io.IOException;
 import java.util.Objects;
 
-import net.sf.mmm.util.lang.base.AbstractStringWritable;
 import net.sf.mmm.util.version.api.NameVersion;
 
 /**
@@ -15,7 +14,7 @@ import net.sf.mmm.util.version.api.NameVersion;
  * @author hohwille
  * @since 7.4.0
  */
-public abstract class AbstractNameVersion extends AbstractStringWritable implements NameVersion {
+public abstract class AbstractNameVersion implements NameVersion {
 
   private final String version;
 
@@ -25,13 +24,14 @@ public abstract class AbstractNameVersion extends AbstractStringWritable impleme
    * @param version the {@link #getVersion() version}.
    */
   public AbstractNameVersion(String version) {
+
     super();
     this.version = version;
   }
 
   /**
-   * @return the name of the {@link #getVersion() versioned} object (protocol, software product, etc.). Examples are
-   *         "HTTP", "UPnP", "Mozilla", "FireFox", etc.
+   * @return the name of the {@link #getVersion() versioned} object (protocol, software product, etc.).
+   *         Examples are "HTTP", "UPnP", "Mozilla", "FireFox", etc.
    */
   @Override
   public abstract String getName();
@@ -43,6 +43,32 @@ public abstract class AbstractNameVersion extends AbstractStringWritable impleme
   public String getVersion() {
 
     return this.version;
+  }
+
+  @Override
+  public void write(Appendable appendable) {
+
+    try {
+      doWrite(appendable, false);
+    } catch (IOException e) {
+      throw new IllegalStateException("Error writing to Appendable.", e);
+    }
+  }
+
+  /**
+   * Called from {@link #write(Appendable)} or {@link #toString()} to write the serialized data of this
+   * object.
+   *
+   * @param appendable the {@link StringBuilder} where to {@link StringBuilder#append(String) append} to.
+   * @param fromToString - {@code true} if called from {@link #toString()}, {@code false} otherwise. Can be
+   *        ignored if not relevant.
+   * @throws IOException if an error occurred whilst writing the data.
+   */
+  protected void doWrite(Appendable appendable, boolean fromToString) throws IOException {
+
+    appendable.append(getName());
+    appendable.append(NAME_VERSION_SEPARATOR);
+    appendable.append(this.version);
   }
 
   @Override
@@ -71,11 +97,15 @@ public abstract class AbstractNameVersion extends AbstractStringWritable impleme
   }
 
   @Override
-  protected void doWrite(Appendable appendable, boolean fromToString) throws IOException {
+  public String toString() {
 
-    appendable.append(getName());
-    appendable.append(NAME_VERSION_SEPARATOR);
-    appendable.append(this.version);
+    StringBuilder buffer = new StringBuilder();
+    try {
+      doWrite(buffer, true);
+    } catch (IOException e) {
+      buffer.append(e.getMessage());
+    }
+    return buffer.toString();
   }
 
 }

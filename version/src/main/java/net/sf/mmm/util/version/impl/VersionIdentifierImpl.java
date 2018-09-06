@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.base.AbstractVersionIdentifier;
 
@@ -69,14 +68,15 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
    * @param revision - see {@link #getRevision()}. May be {@code null}.
    * @param phase - see {@link #getPhase()}. May be {@code null}.
    * @param phaseAlias - see {@link #getPhase()}. May be {@code null} (only if {@code phase} is {@code null}).
-   * @param phaseNumber - see {@link #getPhaseNumber()}. May be {@code null} (only if {@code phase} is {@code null}).
+   * @param phaseNumber - see {@link #getPhaseNumber()}. May be {@code null} (only if {@code phase} is
+   *        {@code null}).
    * @param snapshot - see {@link #isSnapshot()}.
    * @param versionSegments - see {@link #getVersionSegment(int)}. At least one segment is required if no
    *        {@link #isSnapshot() snapshot}.
    */
   // CHECKSTYLE:OFF (only internal constructor)
-  public VersionIdentifierImpl(String stringRepresentation, String label, Date timestamp, Long revision,
-      DevelopmentPhase phase, String phaseAlias, Integer phaseNumber, boolean snapshot, int... versionSegments) {
+  public VersionIdentifierImpl(String stringRepresentation, String label, Date timestamp, Long revision, DevelopmentPhase phase, String phaseAlias,
+      Integer phaseNumber, boolean snapshot, int... versionSegments) {
 
     // CHECKSTYLE:ON
     super(stringRepresentation);
@@ -98,22 +98,22 @@ public class VersionIdentifierImpl extends AbstractVersionIdentifier {
   private void validate() {
 
     if ((this.segments.length < 0) && (!this.snapshot)) {
-      throw new NlsIllegalArgumentException(Integer.valueOf(this.segments.length), "segments.length");
+      throw new IllegalArgumentException("segments.length:" + Integer.valueOf(this.segments.length));
     }
     for (int i = 0; i < this.segments.length; i++) {
       if (this.segments[i] < 0) {
-        throw new NlsIllegalArgumentException(Integer.valueOf(this.segments[i]), "segments[" + i + "]");
+        throw new IllegalArgumentException("segments[" + i + "]:" + Integer.valueOf(this.segments[i]));
       }
     }
     if (this.phaseNumber != null) {
       if (this.phaseNumber.intValue() < 0) {
-        throw new NlsIllegalArgumentException(this.phaseNumber, "phaseNumber");
+        throw new IllegalArgumentException("phaseNumber:" + this.phaseNumber);
       }
       if (this.phase == null) {
-        throw new NlsIllegalArgumentException(this.phaseNumber, "phaseNumber (phase==null)");
+        throw new IllegalArgumentException("phaseNumber (phase==null):" + this.phaseNumber);
       }
       if ((this.phase == DevelopmentPhase.RELEASE) && (this.phaseNumber.intValue() != 0)) {
-        throw new NlsIllegalArgumentException(this.phaseNumber, "phaseNumber (phase==RELEASE)");
+        throw new IllegalArgumentException("phaseNumber (phase==RELEASE):" + this.phaseNumber);
       }
     }
   }
