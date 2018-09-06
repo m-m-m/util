@@ -8,8 +8,8 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.Iterator;
+import java.util.Objects;
 
-import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -36,14 +36,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
-import net.sf.mmm.util.exception.api.NlsIllegalStateException;
-import net.sf.mmm.util.exception.api.NlsParseException;
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.lang.api.BasicUtil;
 import net.sf.mmm.util.lang.api.CharIterator;
-import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.lang.base.BasicUtilImpl;
 import net.sf.mmm.util.lang.base.SpaceNormalizingCharIterator;
 import net.sf.mmm.util.xml.api.DomUtil;
 import net.sf.mmm.util.xml.api.XmlCompareMode;
@@ -64,8 +57,6 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
 
   /** the transformer factory used to transform or write XML */
   private TransformerFactory transformerFactory;
-
-  private BasicUtil basicUtil;
 
   /**
    * The constructor.
@@ -118,28 +109,6 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
   }
 
   /**
-   * This method gets the {@link BasicUtil}.
-   *
-   * @return the {@link BasicUtil} to use.
-   */
-  protected BasicUtil getBasicUtil() {
-
-    return this.basicUtil;
-  }
-
-  /**
-   * This method sets the {@link #getBasicUtil() BasicUtil}.
-   *
-   * @param basicUtil is the {@link BasicUtil} to set
-   */
-  @Inject
-  public void setBasicUtil(BasicUtil basicUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.basicUtil = basicUtil;
-  }
-
-  /**
    * This method gets the singleton instance of this {@link DomUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
    * Please prefer dependency-injection instead of using this method.
@@ -170,7 +139,7 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
         factory.setNamespaceAware(true);
         this.documentBuilderFactory = factory;
       } catch (FactoryConfigurationError e) {
-        throw new NlsIllegalStateException(e);
+        throw new IllegalStateException(e);
       }
     }
     if (this.transformerFactory == null) {
@@ -178,11 +147,8 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
         TransformerFactory factory = TransformerFactory.newInstance();
         this.transformerFactory = factory;
       } catch (TransformerFactoryConfigurationError e) {
-        throw new NlsIllegalStateException(e);
+        throw new IllegalStateException(e);
       }
-    }
-    if (this.basicUtil == null) {
-      this.basicUtil = BasicUtilImpl.getInstance();
     }
   }
 
@@ -265,12 +231,12 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
     boolean result = defaultValue;
     if (element.hasAttribute(attribute)) {
       String flag = element.getAttribute(attribute);
-      if (StringUtil.TRUE.equalsIgnoreCase(flag)) {
+      if ("true".equalsIgnoreCase(flag)) {
         result = true;
-      } else if (StringUtil.FALSE.equalsIgnoreCase(flag)) {
+      } else if ("false".equalsIgnoreCase(flag)) {
         result = false;
       } else {
-        throw new NlsParseException(flag, element.getTagName() + "@" + attribute, boolean.class);
+        throw new IllegalStateException("Invalid boolean value '" + flag + "' for '" + element.getTagName() + "@" + attribute + "'.");
       }
     }
     return result;
@@ -305,7 +271,7 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
         }
       }
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.WRITE);
+      throw new IllegalStateException("Error writing to Appendable.", e);
     }
   }
 
@@ -330,32 +296,36 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
   }
 
   @Override
-  public Document parseDocument(InputStream inputStream) throws XmlException, IOException {
+  public Document parseDocument(InputStream inputStream) {
 
     try {
-      return createDocumentBuilder().parse(inputStream);
-    } catch (SAXException e) {
-      throw new XmlInvalidException(e);
-    } finally {
-      inputStream.close();
+      try {
+        return createDocumentBuilder().parse(inputStream);
+      } catch (SAXException e) {
+        throw new XmlInvalidException(e);
+      } finally {
+        inputStream.close();
+      }
+    } catch (IOException e) {
+      throw new IllegalStateException("Error reading XML from stream.", e);
     }
   }
 
   @Override
-  public Document parseDocument(Reader reader) throws XmlException {
+  public Document parseDocument(Reader reader) {
 
     return parseDocument(new InputSource(reader));
   }
 
   @Override
-  public Document parseDocument(InputSource inputSource) throws XmlException {
+  public Document parseDocument(InputSource inputSource) {
 
     try {
       return createDocumentBuilder().parse(inputSource);
     } catch (SAXException e) {
       throw new XmlInvalidException(e);
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.READ);
+      throw new IllegalStateException("Error reading XML from stream.", e);
     }
   }
 
@@ -402,10 +372,10 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
    */
   private boolean isEqualName(Node node1, Node node2) {
 
-    if (!this.basicUtil.isEqual(node1.getNamespaceURI(), node2.getNamespaceURI())) {
+    if (!Objects.equals(node1.getNamespaceURI(), node2.getNamespaceURI())) {
       return false;
     }
-    if (!this.basicUtil.isEqual(getLocalName(node1), getLocalName(node2))) {
+    if (!Objects.equals(getLocalName(node1), getLocalName(node2))) {
       return false;
     }
     return true;
@@ -441,7 +411,7 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
       if (!isEqualName(node1, node2)) {
         return false;
       }
-      if (!this.basicUtil.isEqual(node1.getNodeValue(), node2.getNodeValue())) {
+      if (!Objects.equals(node1.getNodeValue(), node2.getNodeValue())) {
         return false;
       }
       return true;
@@ -461,17 +431,17 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
     } else if (type1 == Node.ENTITY_NODE) {
       Entity entity1 = (Entity) node1;
       Entity entity2 = (Entity) node2;
-      if (!this.basicUtil.isEqual(entity1.getNotationName(), entity2.getNotationName())) {
+      if (!Objects.equals(entity1.getNotationName(), entity2.getNotationName())) {
         return false;
       }
       return true;
     } else if (type1 == Node.PROCESSING_INSTRUCTION_NODE) {
       ProcessingInstruction pi1 = (ProcessingInstruction) node1;
       ProcessingInstruction pi2 = (ProcessingInstruction) node2;
-      if (!this.basicUtil.isEqual(pi1.getTarget(), pi2.getTarget())) {
+      if (!Objects.equals(pi1.getTarget(), pi2.getTarget())) {
         return false;
       }
-      if (!this.basicUtil.isEqual(pi1.getData(), pi2.getData())) {
+      if (!Objects.equals(pi1.getData(), pi2.getData())) {
         return false;
       }
       return true;
@@ -499,7 +469,20 @@ public final class DomUtilImpl extends AbstractComponent implements DomUtil {
       c1 = charIterator1;
       c2 = charIterator2;
     }
-    return this.basicUtil.compare(c1, c2);
+    return compare(c1, c2);
+  }
+
+  private static boolean compare(CharIterator charIterator1, CharIterator charIterator2) {
+
+    char c1, c2;
+    do {
+      c1 = charIterator1.next();
+      c2 = charIterator2.next();
+      if (c1 != c2) {
+        return false;
+      }
+    } while (c1 != CharIterator.END_OF_ITERATOR);
+    return true;
   }
 
   /**

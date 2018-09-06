@@ -6,10 +6,9 @@ import java.util.Locale;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import net.sf.mmm.util.exception.api.ObjectNotFoundException;
-
 /**
- * This is an implementation of {@link XmlAdapter} for mapping {@link Enum}s to {@link #normalize(String) nice} names.
+ * This is an implementation of {@link XmlAdapter} for mapping {@link Enum}s to {@link #normalize(String)
+ * nice} names.
  *
  * @param <E> is the type of the enum.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -65,7 +64,7 @@ public abstract class XmlAdapterEnum<E extends Enum<E>> extends XmlAdapter<Strin
           return e;
         }
       }
-      throw new ObjectNotFoundException(getEnumClass().getSimpleName(), value);
+      throw new IllegalStateException(value + "@" + getEnumClass().getSimpleName());
     }
   }
 }

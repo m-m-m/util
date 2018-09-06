@@ -29,9 +29,11 @@ import net.sf.mmm.util.value.impl.ValueConverterEtoToEntity;
  *
  * @see #getInstance()
  *
+ * @deprecated see {@link TransferObjectUtil}
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Deprecated
 public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implements TransferObjectUtil {
 
   /** The singleton instance of {@link EtoHelper}. */

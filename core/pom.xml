@@ -33,6 +33,11 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-xml</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-test</artifactId>
       <scope>test</scope>
     </dependency>

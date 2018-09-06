@@ -5,8 +5,6 @@ package net.sf.mmm.util.xml.base;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import net.sf.mmm.util.collection.base.AbstractIterator;
-
 /**
  * This class is used to {@link java.util.Iterator#next() iterate} the {@link Node}s of a {@link NodeList}.
  *

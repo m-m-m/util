@@ -47,8 +47,8 @@ public class ManifestLoaderTest {
 
     Attributes mainAttributes = slf4jApiManifest.getMainAttributes();
     assertEquals("1.0", mainAttributes.getValue(Attributes.Name.MANIFEST_VERSION));
-    assertEquals("1.7.21", mainAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION));
+    assertEquals("1.7.25", mainAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION));
     assertEquals("Apache Maven", mainAttributes.getValue("Created-By"));
-    assertEquals("slf4j-api-1.7.21.jar", mainAttributes.getValue(ManifestLoader.MANIFEST_SOURCE));
+    assertEquals("slf4j-api-1.7.25.jar", mainAttributes.getValue(ManifestLoader.MANIFEST_SOURCE));
   }
 }

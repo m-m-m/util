@@ -11,11 +11,13 @@ import net.sf.mmm.util.transferobject.api.TransferObject;
 import net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited}.
+ * This is the implementation of {@link TransferObjectUtilLimited}.
  *
+ * @deprecated see {@link TransferObjectUtilLimited}
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Deprecated
 public class TransferObjectUtilLimitedImpl extends AbstractComponent implements TransferObjectUtilLimited {
 
   /**

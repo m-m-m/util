@@ -5,13 +5,14 @@ package net.sf.mmm.util.lang.base;
 import java.io.IOException;
 import java.util.Locale;
 
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.lang.NlsBundleUtilLangRoot;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
- * This is the default implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the type {@link Boolean}.
+ * This is the default implementation of {@link net.sf.mmm.util.lang.api.Formatter} for the type
+ * {@link Boolean}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
@@ -21,7 +22,7 @@ public class BooleanFormatter extends AbstractFormatter<Boolean> {
   private static final Formatter<Boolean> INSTANCE = new BooleanFormatter();
 
   /** @see #doFormat(Boolean, Appendable) */
-  private final NlsBundleUtilCoreRoot nlsBundle;
+  private final NlsBundleUtilLangRoot nlsBundle;
 
   /** @see #doFormat(Boolean, Appendable) */
   private final Locale locale;
@@ -42,7 +43,7 @@ public class BooleanFormatter extends AbstractFormatter<Boolean> {
   public BooleanFormatter(Locale locale) {
 
     super();
-    this.nlsBundle = NlsAccess.getBundleFactory().createBundle(NlsBundleUtilCoreRoot.class);
+    this.nlsBundle = NlsAccess.getBundleFactory().createBundle(NlsBundleUtilLangRoot.class);
     this.locale = null;
   }
 

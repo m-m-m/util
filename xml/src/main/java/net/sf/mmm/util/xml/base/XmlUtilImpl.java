@@ -13,9 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.text.api.UnicodeUtil;
 import net.sf.mmm.util.xml.api.ParserState;
 import net.sf.mmm.util.xml.api.XmlUtil;
 
@@ -44,7 +41,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     // HTML starts here
     ENTITY_MAP.put("apos", Character.valueOf((char) 39));
     // ISO-8859-1
-    ENTITY_MAP.put("nbsp", Character.valueOf(UnicodeUtil.NO_BREAK_SPACE));
+    ENTITY_MAP.put("nbsp", Character.valueOf((char) 0x0A0));
     ENTITY_MAP.put("iexcl", Character.valueOf((char) 161));
     ENTITY_MAP.put("cent", Character.valueOf((char) 162));
     ENTITY_MAP.put("pound", Character.valueOf((char) 163));
@@ -57,7 +54,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     ENTITY_MAP.put("ordf", Character.valueOf((char) 170));
     ENTITY_MAP.put("laquo", Character.valueOf((char) 171));
     ENTITY_MAP.put("not", Character.valueOf((char) 172));
-    ENTITY_MAP.put("shy", Character.valueOf(UnicodeUtil.SOFT_HYPHEN));
+    ENTITY_MAP.put("shy", Character.valueOf((char) 0x0AD));
     ENTITY_MAP.put("reg", Character.valueOf((char) 174));
     ENTITY_MAP.put("macr", Character.valueOf((char) 175));
     ENTITY_MAP.put("deg", Character.valueOf((char) 176));
@@ -226,7 +223,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     ENTITY_MAP.put("ni", Character.valueOf((char) 8715));
     ENTITY_MAP.put("prod", Character.valueOf((char) 8719));
     ENTITY_MAP.put("sum", Character.valueOf((char) 8721));
-    ENTITY_MAP.put("minus", Character.valueOf(UnicodeUtil.MINUS_SIGN));
+    ENTITY_MAP.put("minus", Character.valueOf((char) 0x02D));
     ENTITY_MAP.put("lowast", Character.valueOf((char) 8727));
     ENTITY_MAP.put("radic", Character.valueOf((char) 8730));
     ENTITY_MAP.put("prop", Character.valueOf((char) 8733));
@@ -278,20 +275,20 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
     ENTITY_MAP.put("zwj", Character.valueOf((char) 8205));
     ENTITY_MAP.put("lrm", Character.valueOf((char) 8206));
     ENTITY_MAP.put("rlm", Character.valueOf((char) 8207));
-    ENTITY_MAP.put("ndash", Character.valueOf(UnicodeUtil.EN_DASH));
-    ENTITY_MAP.put("mdash", Character.valueOf(UnicodeUtil.EM_DASH));
+    ENTITY_MAP.put("ndash", Character.valueOf((char) 0x02013));
+    ENTITY_MAP.put("mdash", Character.valueOf((char) 0x02014));
     ENTITY_MAP.put("lsquo", Character.valueOf((char) 8216));
     ENTITY_MAP.put("rsquo", Character.valueOf((char) 8217));
     ENTITY_MAP.put("sbquo", Character.valueOf((char) 8218));
     ENTITY_MAP.put("ldquo", Character.valueOf((char) 8220));
     ENTITY_MAP.put("rdquo", Character.valueOf((char) 8221));
     ENTITY_MAP.put("bdquo", Character.valueOf((char) 8222));
-    ENTITY_MAP.put("dagger", Character.valueOf(UnicodeUtil.DAGGER));
-    ENTITY_MAP.put("Dagger", Character.valueOf(UnicodeUtil.DOUBLE_DAGGER));
+    ENTITY_MAP.put("dagger", Character.valueOf((char) 0x02020));
+    ENTITY_MAP.put("Dagger", Character.valueOf((char) 0x02021));
     ENTITY_MAP.put("permil", Character.valueOf((char) 8240));
     ENTITY_MAP.put("lsaquo", Character.valueOf((char) 8249));
     ENTITY_MAP.put("rsaquo", Character.valueOf((char) 8250));
-    ENTITY_MAP.put("euro", Character.valueOf(UnicodeUtil.EURO_CURRENCY_SIGN));
+    ENTITY_MAP.put("euro", Character.valueOf((char) 0x020AC));
   }
 
   // CHECKSTYLE:ON
@@ -338,7 +335,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
       XmlInputStream streamAdapter = new XmlInputStream(inputStream, defaultCharset);
       return new InputStreamReader(streamAdapter, streamAdapter.getCharset());
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.READ);
+      throw new IllegalStateException("Error reading from stream.", e);
     }
   }
 
@@ -385,7 +382,7 @@ public class XmlUtilImpl extends AbstractComponent implements XmlUtil {
         }
       }
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.WRITE);
+      throw new IllegalStateException("Error writing to writer.", e);
     }
   }
 

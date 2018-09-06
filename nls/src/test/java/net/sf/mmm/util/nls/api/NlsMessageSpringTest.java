@@ -23,10 +23,19 @@ public class NlsMessageSpringTest extends NlsMessageTest {
   @Inject
   private NlsMessageFactory nlsMessageFactory;
 
+  @Inject
+  private NlsBundleFactory nlsBundleFactory;
+
   @Override
   protected NlsMessageFactory getMessageFactory() {
 
     return this.nlsMessageFactory;
+  }
+
+  @Override
+  protected NlsBundleFactory getBundleFactory() {
+
+    return this.nlsBundleFactory;
   }
 
 }

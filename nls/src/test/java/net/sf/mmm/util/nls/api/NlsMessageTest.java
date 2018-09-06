@@ -14,11 +14,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import net.sf.mmm.test.ExceptionHelper;
+import net.sf.mmm.test.TestValues;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
+import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplate;
 import net.sf.mmm.util.nls.base.AbstractNlsTemplateResolver;
@@ -36,11 +38,16 @@ import net.sf.mmm.util.text.api.Justification;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class NlsMessageTest {
+public class NlsMessageTest extends Assertions {
 
   protected NlsMessageFactory getMessageFactory() {
 
     return NlsAccess.getFactory();
+  }
+
+  protected NlsBundleFactory getBundleFactory() {
+
+    return NlsAccess.getBundleFactory();
   }
 
   protected NlsTemplateResolver createResolver(AbstractResourceBundle... bundles) {
@@ -64,9 +71,9 @@ public class NlsMessageTest {
     final String msg = hello + "{" + key + "}" + suffix;
     final String msgDe = helloDe + "{" + key + "}" + suffix;
     NlsMessage testMessage = getMessageFactory().create(msg, key, arg);
-    Assert.assertEquals(msg, testMessage.getInternationalizedMessage());
-    Assert.assertEquals(arg, testMessage.getArgument(key));
-    Assert.assertEquals(hello + arg + suffix, testMessage.getMessage());
+    assertThat(testMessage.getInternationalizedMessage()).isEqualTo(msg);
+    assertThat(testMessage.getArgument(key)).isEqualTo(arg);
+    assertThat(testMessage.getMessage()).isEqualTo(hello + arg + suffix);
     AbstractNlsTemplateResolver translatorDe = new AbstractNlsTemplateResolver() {
 
       @Override
@@ -79,7 +86,7 @@ public class NlsMessageTest {
       }
     };
     translatorDe.initialize();
-    Assert.assertEquals(helloDe + arg + suffix, testMessage.getLocalizedMessage(Locale.GERMAN, translatorDe));
+    assertThat(testMessage.getLocalizedMessage(Locale.GERMAN, translatorDe)).isEqualTo(helloDe + arg + suffix);
   }
 
   @Test
@@ -118,15 +125,32 @@ public class NlsMessageTest {
     };
     translatorDe.initialize();
     String msgDe = cascadedMessage.getLocalizedMessage(Locale.GERMAN, translatorDe);
-    Assert.assertEquals("Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein, " + "hat aber den Typ \"relle Zahl[-5,5]\"!", msgDe);
+    assertThat(msgDe).isEqualTo("Der angegebene Wert muss vom Typ \"Ganze Zahl\" sein, hat aber den Typ \"relle Zahl[-5,5]\"!");
+  }
+
+  @Test
+  public void testMessageWithEnumTranslation() {
+
+    // given
+    NlsBundleFactory bundleFactory = getBundleFactory();
+    NlsBundleTestRoot bundle = bundleFactory.createBundle(NlsBundleTestRoot.class);
+    Integer value = Integer.valueOf(42);
+
+    // when + then
+    CompareOperator cmp = CompareOperator.GREATER_OR_EQUAL;
+    NlsMessage message = bundle.errorIllegalValue(cmp, value);
+    assertThat(message.getLocalizedMessage(Locale.ROOT)).isEqualTo("The value has to be greater or equal to '42'!");
+    assertThat(message.getLocalizedMessage(Locale.GERMAN)).isEqualTo("Der Wert muss größer oder gleich '42' sein!");
+    assertThat(message.getLocalizedMessage(Locale.FRENCH)).isEqualTo("La valeur doit être supérieur ou égal à '42'!");
+    assertThat(message.getLocalizedMessage(TestValues.SPANISH)).isEqualTo("¡El valor tiene que estar mayor qué o igual a '42'!");
   }
 
   @Test
   public void testMessageDefaultResolver() {
 
     NlsMessage msg = getMessageFactory().create(MyResourceBundle.MSG_WELCOME, "name", "Paul");
-    Assert.assertEquals("Welcome \"Paul\"!", msg.getMessage());
-    Assert.assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN));
+    assertThat(msg.getMessage()).isEqualTo("Welcome \"Paul\"!");
+    assertThat(msg.getLocalizedMessage(Locale.GERMAN)).isEqualTo("Willkommen \"Paul\"!");
   }
 
   @Test
@@ -135,8 +159,8 @@ public class NlsMessageTest {
     MyResourceBundle myRB = new MyResourceBundle();
     NlsTemplateResolver resolver = createResolver(myRB);
     NlsMessage msg = getMessageFactory().create(MyResourceBundle.MSG_WELCOME, "name", "Paul");
-    Assert.assertEquals("Welcome \"Paul\"!", msg.getMessage());
-    Assert.assertEquals("Willkommen \"Paul\"!", msg.getLocalizedMessage(Locale.GERMAN, resolver));
+    assertThat(msg.getMessage()).isEqualTo("Welcome \"Paul\"!");
+    assertThat(msg.getLocalizedMessage(Locale.GERMAN, resolver)).isEqualTo("Willkommen \"Paul\"!");
   }
 
   /**
@@ -154,19 +178,18 @@ public class NlsMessageTest {
     // Make os/locale independent...
     TimeZone.setDefault(TimeZone.getTimeZone("GMT+01:00"));
     String dateString = formatDate(date, AbstractNlsMessage.LOCALE_ROOT);
-    Assert.assertEquals("Date formatted by locale: " + dateString + ", by ISO-8601: " + iso8601String + " and by custom pattern: 1999.12.31-23:59:59+0100!",
-        msg.getMessage());
+    assertThat(msg.getMessage())
+        .isEqualTo("Date formatted by locale: " + dateString + ", by ISO-8601: " + iso8601String + " and by custom pattern: 1999.12.31-23:59:59+0100!");
     Locale german = Locale.GERMAN;
     String dateStringDe = formatDate(date, german);
-    Assert.assertEquals(
-        "Datum formatiert nach Locale: " + dateStringDe + ", nach ISO-8601: " + iso8601String + " und nach individueller Vorlage: 1999.12.31-23:59:59+0100!",
-        msg.getLocalizedMessage(german, resolver));
+    assertThat(msg.getLocalizedMessage(german, resolver)).isEqualTo(
+        "Datum formatiert nach Locale: " + dateStringDe + ", nach ISO-8601: " + iso8601String + " und nach individueller Vorlage: 1999.12.31-23:59:59+0100!");
     // test custom format
     String customFormat = "yyyyMMdd";
     msg = factory.create("{date,date," + customFormat + "}", "date", date);
     String expected = new SimpleDateFormat(customFormat).format(date);
     // expected="19991231"
-    Assert.assertEquals(expected, msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo(expected);
 
     String[] types = new String[] { NlsFormatterManager.TYPE_DATE, NlsFormatterManager.TYPE_TIME, NlsFormatterManager.TYPE_DATETIME };
     String[] styles = new String[] { NlsFormatterManager.STYLE_SHORT, NlsFormatterManager.STYLE_MEDIUM, NlsFormatterManager.STYLE_LONG,
@@ -195,11 +218,11 @@ public class NlsMessageTest {
         }
         String localizedMessage = msg.getLocalizedMessage(locale);
         expected = dateFormat.format(date);
-        Assert.assertEquals("wrong result for message: " + arg + "!", expected, localizedMessage);
+        assertThat(localizedMessage).as("wrong result for message: " + arg + "!").isEqualTo(expected);
         // double check!
         if (type != NlsFormatterManager.TYPE_DATETIME) {
           expected = new MessageFormat(arg, locale).format(new Object[] { date });
-          Assert.assertEquals("wrong result for message: " + arg + "!", expected, localizedMessage);
+          assertThat(localizedMessage).as("wrong result for message: " + arg + "!").isEqualTo(expected);
         }
       }
     }
@@ -220,9 +243,9 @@ public class NlsMessageTest {
     NlsTemplateResolver resolver = createResolver(myRB);
     Number number = new Double(0.42);
     NlsMessage msg = getMessageFactory().create(MyResourceBundle.MSG_TEST_NUMBER, "value", number);
-    Assert.assertEquals("Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!", msg.getMessage());
-    Assert.assertEquals("Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!",
-        msg.getLocalizedMessage(Locale.GERMANY, resolver));
+    assertThat(msg.getMessage()).isEqualTo("Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!");
+    assertThat(msg.getLocalizedMessage(Locale.GERMANY, resolver))
+        .isEqualTo("Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!");
   }
 
   /**
@@ -236,18 +259,17 @@ public class NlsMessageTest {
     String key = "key";
     NlsMessage msg;
     msg = getMessageFactory().create("{" + key + ",type}", key, type);
-    Assert.assertEquals("java.util.Map", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("java.util.Map");
     msg = getMessageFactory().create("{" + key + ",type,short}", key, type);
-    Assert.assertEquals("Map", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("Map");
     msg = getMessageFactory().create("{" + key + ",type,medium}", key, type);
-    Assert.assertEquals("java.util.Map", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("java.util.Map");
     msg = getMessageFactory().create("{" + key + ",type,long}", key, type);
-    Assert.assertEquals("java.util.Map<java.util.List<? extends String>, java.util.List<java.util.Map<? " + "extends Object, ? super VARIABLE[]>>>",
-        msg.getMessage());
+    assertThat(msg.getMessage())
+        .isEqualTo("java.util.Map<java.util.List<? extends String>, java.util.List<java.util.Map<? extends Object, ? super VARIABLE[]>>>");
     msg = getMessageFactory().create("{" + key + ",type,full}", key, type);
-    Assert.assertEquals(
-        "java.util.Map<java.util.List<? extends java.lang.String>, " + "java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>",
-        msg.getMessage());
+    assertThat(msg.getMessage())
+        .isEqualTo("java.util.Map<java.util.List<? extends java.lang.String>, java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>");
   }
 
   /**
@@ -264,20 +286,20 @@ public class NlsMessageTest {
     template = "{" + key + ",choice,(?==true)'foo'(else)'bar'}";
     NlsMessageFactory factory = getMessageFactory();
     msg = factory.create(template, key, Boolean.TRUE);
-    Assert.assertEquals("foo", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("foo");
     msg = factory.create(template, key, Boolean.FALSE);
-    Assert.assertEquals("bar", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("bar");
 
     // numeric choice
     template = "{" + key + ",choice,(?==1)'one'(?>1)'many'(?<0)'negative'(else)'zero'}";
     msg = factory.create(template, key, 1);
-    Assert.assertEquals("one", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("one");
     msg = factory.create(template, key, 2);
-    Assert.assertEquals("many", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("many");
     msg = factory.create(template, key, -1);
-    Assert.assertEquals("negative", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("negative");
     msg = factory.create(template, key, 0);
-    Assert.assertEquals("zero", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("zero");
 
     // date choice
     template = "{" + key + ",choice,(?==2010-01-31T23:59:59Z)'special day'(?>2010-01-31T23:59:59Z)'after'(else)\"before\"}";
@@ -286,38 +308,38 @@ public class NlsMessageTest {
     calendar.set(2010, Calendar.JANUARY, 31, 23, 59, 59);
     calendar.set(Calendar.MILLISECOND, 0);
     msg = factory.create(template, key, calendar);
-    Assert.assertEquals("special day", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("special day");
     calendar.add(Calendar.SECOND, 1);
     msg = factory.create(template, key, calendar.getTime());
-    Assert.assertEquals("after", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("after");
     calendar.add(Calendar.MINUTE, -1);
     msg = factory.create(template, key, calendar);
-    Assert.assertEquals("before", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("before");
 
     // string choice
     template = "{" + key + ",choice,(?=='hello')'magic'(?>'hello')'after'(else)'before'}";
     msg = factory.create(template, key, "hello");
-    Assert.assertEquals("magic", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("magic");
     msg = factory.create(template, key, "hella");
-    Assert.assertEquals("before", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("before");
     msg = factory.create(template, key, "hellp");
-    Assert.assertEquals("after", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("after");
 
     // test quotation-symbol
     template = "{" + key + ",choice,(?=='a\"''b')\"a'\"\"b\"(else)''''}";
     msg = factory.create(template, key, "a\"'b");
-    Assert.assertEquals("a'\"b", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("a'\"b");
 
     // test nested choice
     String key2 = "key2";
     String key3 = "key3";
     template = "{" + key + ",choice,(?==true)'foo'(else){" + key2 + ",choice,(?==true)'bar'(else){" + key3 + "}}}";
     msg = factory.create(template, key, Boolean.TRUE);
-    Assert.assertEquals("foo", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("foo");
     msg = factory.create(template, key, Boolean.FALSE, key2, Boolean.TRUE);
-    Assert.assertEquals("bar", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("bar");
     msg = factory.create(template, key, Boolean.FALSE, key2, Boolean.FALSE, key3, key3);
-    Assert.assertEquals(key3, msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo(key3);
 
     // test missing else
     try {
@@ -348,17 +370,17 @@ public class NlsMessageTest {
     // right
     NlsMessageFactory factory = getMessageFactory();
     NlsMessage msg = factory.create("{" + key + "{0+4}}", key, value);
-    Assert.assertEquals("0042", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("0042");
     // left
     msg = factory.create("{" + key + "{.-4}}", key, value);
-    Assert.assertEquals("42..", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("42..");
     // center
     msg = factory.create("{" + key + "{_~11}}", key, value);
-    Assert.assertEquals("____42_____", msg.getMessage());
+    assertThat(msg.getMessage()).isEqualTo("____42_____");
     // combined
     msg = factory.create("Value {" + key + ",number,currency{_+15}}", key, value);
     String message = msg.getLocalizedMessage(Locale.GERMANY);
-    Assert.assertEquals("Value ________42,00 €", message);
+    assertThat(message).isEqualTo("Value ________42,00 €");
   }
 
   /**
@@ -366,7 +388,6 @@ public class NlsMessageTest {
    */
   private static class GermanTemplate extends AbstractNlsTemplate {
 
-    /** TODO: javadoc. */
     private static final long serialVersionUID = 1L;
 
     private final String msgDe;

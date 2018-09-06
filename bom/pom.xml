@@ -18,6 +18,7 @@
     <mmm.flatten.mode>bom</mmm.flatten.mode>
     <javax.validation.version>2.0.1.Final</javax.validation.version>
     <org.slf4j.version>1.7.25</org.slf4j.version>
+    <ch.qos.logback.version>1.2.3</ch.qos.logback.version>
   </properties>
 
   <dependencyManagement>
@@ -72,6 +73,7 @@
         <version>3.0.1-b09</version>
       </dependency>
 
+      <!-- Logging -->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
@@ -84,16 +86,58 @@
         <classifier>sources</classifier>
       </dependency>
       <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${ch.qos.logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${ch.qos.logback.version}</version>
+      </dependency>
+      <dependency>
         <groupId>com.allen-sauer.gwt.log</groupId>
         <artifactId>gwt-log</artifactId>
         <version>3.3.2</version>
       </dependency>
+      
+      <!-- Testing -->
       <dependency>
-        <groupId>org.javamoney</groupId>
-        <artifactId>moneta</artifactId>
-        <version>1.0</version>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>3.11.0</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
       </dependency>
 
+      <!-- Google Web Toolkit (GWT) -->      
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-dev</artifactId>
+        <version>${com.google.gwt.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-codeserver</artifactId>
+        <version>${com.google.gwt.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-user</artifactId>
+        <version>${com.google.gwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-servlet</artifactId>
+        <version>${com.google.gwt.version}</version>
+      </dependency>
+
+      <!-- JSON support -->
       <dependency>
         <groupId>javax.json</groupId>
         <artifactId>javax.json-api</artifactId>
@@ -103,12 +147,6 @@
         <groupId>org.glassfish</groupId>
         <artifactId>javax.json</artifactId>
         <version>1.0.4</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.assertj</groupId>
-        <artifactId>assertj-core</artifactId>
-        <version>3.11.0</version>
       </dependency>
 
       <!-- Internal dependencies -->
@@ -259,6 +297,11 @@
         <artifactId>mmm-util-exception</artifactId>
         <version>${net.sf.mmm.util.version}</version>
         <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-xml</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>

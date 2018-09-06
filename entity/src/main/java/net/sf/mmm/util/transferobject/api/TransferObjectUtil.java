@@ -12,9 +12,11 @@ import net.sf.mmm.util.entity.api.PersistenceEntity;
  *
  * @see net.sf.mmm.util.transferobject.base.TransferObjectUtilImpl#getInstance()
  *
+ * @deprecated use devon bean-mapping instead
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Deprecated
 public interface TransferObjectUtil extends TransferObjectUtilLimited {
 
   /**

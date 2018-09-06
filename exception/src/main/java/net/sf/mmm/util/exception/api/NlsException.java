@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.UUID;
 
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.uuid.api.UuidAccess;
@@ -15,14 +13,15 @@ import net.sf.mmm.util.uuid.api.UuidAccess;
 /**
  * This is an abstract base implementation of a checked exception with real <em>native language support</em>
  * (NLS). <br>
- * <b>ATTENTION:</b><br>
- * Checked exceptions are discouraged and should be avoided. Use {@link NlsRuntimeException} instead.
  *
  * @see NlsThrowable
  *
+ * @deprecated Checked exceptions are discouraged and should be avoided. Use {@link NlsRuntimeException}
+ *             instead.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Deprecated
 public abstract class NlsException extends Exception implements NlsThrowable, Cloneable {
 
   private static final long serialVersionUID = 1L;
@@ -259,7 +258,7 @@ public abstract class NlsException extends Exception implements NlsThrowable, Cl
       }
       return buffer;
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.WRITE);
+      throw new IllegalStateException("Failed to write to appendable", e);
     }
   }
 }

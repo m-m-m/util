@@ -7,11 +7,9 @@ import java.util.Properties;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import net.sf.mmm.util.exception.api.NlsClassCastException;
-
 /**
- * This is an implementation of {@link XmlAdapter} for mapping {@link Properties}. It uses a {@link PropertyList} as
- * JAXB mappable object.
+ * This is an implementation of {@link XmlAdapter} for mapping {@link Properties}. It uses a
+ * {@link PropertyList} as JAXB mappable object.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -38,7 +36,7 @@ public class XmlAdapterProperties extends XmlAdapter<PropertyList, Properties> {
         try {
           key = (String) keyObject;
         } catch (ClassCastException e) {
-          throw new NlsClassCastException(keyObject, String.class);
+          throw new IllegalStateException("" + keyObject, e);
         }
         String value = properties.getProperty(key);
         Property property = new Property(key, value);

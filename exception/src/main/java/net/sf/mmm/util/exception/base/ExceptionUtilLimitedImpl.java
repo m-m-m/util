@@ -8,7 +8,6 @@ import java.io.StringWriter;
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.exception.api.ExceptionUtilLimited;
 import net.sf.mmm.util.exception.api.TechnicalErrorUserException;
-import net.sf.mmm.util.security.api.SecurityErrorUserException;
 
 /**
  * This is the default implementation of {@link ExceptionUtilLimited}.
@@ -41,11 +40,6 @@ public class ExceptionUtilLimitedImpl extends AbstractLoggableComponent implemen
   @Override
   public Throwable convertForUser(Throwable exception) {
 
-    if (exception instanceof SecurityException) {
-      return new SecurityErrorUserException(exception);
-    }
-    // } else if (exception instanceof ValidationException) {
-    // return new ValidationErrorUserException(exception);
     return TechnicalErrorUserException.getOrCreateUserException(exception);
   }
 }

@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import net.sf.mmm.test.TestValues;
 import net.sf.mmm.util.nls.api.NlsMessage;
 
 /**
@@ -39,7 +40,7 @@ public class ServiceInvocationFailedExceptionTest extends Assertions {
     assertThat(nlsMessage.getLocalizedMessage(Locale.FRENCH)).isEqualTo("Lors de l'appel du service " + service + ", l'erreur suivante s'est produite: "
         + message
         + ". Probablement le service est indisponible temporairement. Veuillez réessayer plus tard. Si le problème persiste, contactez votre administrateur système.");
-    assertThat(nlsMessage.getLocalizedMessage(new Locale("es"))).isEqualTo("Al invocar el servicio " + service + ", se produjo el siguiente error: " + message
+    assertThat(nlsMessage.getLocalizedMessage(TestValues.SPANISH)).isEqualTo("Al invocar el servicio " + service + ", se produjo el siguiente error: " + message
         + ". Probablemente el servicio no esté disponible temporalmente. Por favor, inténtelo de nuevo más tarde. Si el problema persiste, póngase en contacto con el administrador del sistema.");
   }
 

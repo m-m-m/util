@@ -9,8 +9,6 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.UUID;
 
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
@@ -211,7 +209,7 @@ public class GenericSerializableException extends RuntimeException implements Nl
     try {
       buffer.append(getLocalizedMessage());
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.WRITE);
+      throw new IllegalStateException("Failed to write to appendable", e);
     }
   }
 
@@ -230,7 +228,7 @@ public class GenericSerializableException extends RuntimeException implements Nl
       try {
         buffer.append(writer.toString());
       } catch (IOException e) {
-        throw new RuntimeIoException(e, IoMode.WRITE);
+        throw new IllegalStateException("Failed to write to appendable", e);
       }
     }
   }
@@ -272,7 +270,7 @@ public class GenericSerializableException extends RuntimeException implements Nl
       }
       return buffer;
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.WRITE);
+      throw new IllegalStateException("Failed to write to appendable", e);
     }
   }
 

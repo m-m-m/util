@@ -18,6 +18,7 @@
     <module>../pattern</module>
     <module>../uuid</module>
     <module>../math</module>
+    <module>../xml</module>
     <module>../scanner</module>
     <module>../session</module>
     <module>../date</module>

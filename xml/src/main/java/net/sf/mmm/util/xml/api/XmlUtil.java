@@ -7,8 +7,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
-import net.sf.mmm.util.io.api.RuntimeIoException;
-
 /**
  * This is the interface for a collection of utility functions that help to deal with XML.
  *
@@ -116,9 +114,8 @@ public interface XmlUtil {
    * @param escapeQuotations if {@code true} also the ASCII quotation characters (apos {@code '\''} and quot
    *        {@code '"'} ) will be escaped, else if {@code false} quotations are untouched. Set this to
    *        {@code true} if you are writing the value of an attribute.
-   * @throws RuntimeIoException if the {@code writer} produced an I/O error.
    */
-  void escapeXml(String string, Writer writer, boolean escapeQuotations) throws RuntimeIoException;
+  void escapeXml(String string, Writer writer, boolean escapeQuotations);
 
   /**
    * This method creates a {@link Reader} from the given {@code inputStream} that uses the encoding specified
@@ -128,9 +125,8 @@ public interface XmlUtil {
    * @param inputStream is a fresh input-stream that is supposed to point to the content of an XML document.
    * @return a reader on the given {@code inputStream} that takes respect on the encoding specified in the
    *         (potential) XML header.
-   * @throws RuntimeIoException if an I/O error occurred when trying to read the XML header.
    */
-  Reader createXmlReader(InputStream inputStream) throws RuntimeIoException;
+  Reader createXmlReader(InputStream inputStream);
 
   /**
    * This method creates a {@link Reader} from the given {@code inputStream} that uses the encoding specified
@@ -141,9 +137,8 @@ public interface XmlUtil {
    * @param defaultCharset is the {@link Charset} used if NO encoding was specified via an XML header.
    * @return a reader on the given {@code inputStream} that takes respect on the encoding specified in the
    *         (potential) XML header.
-   * @throws RuntimeIoException if an I/O error occurred when trying to read the XML header.
    */
-  Reader createXmlReader(InputStream inputStream, Charset defaultCharset) throws RuntimeIoException;
+  Reader createXmlReader(InputStream inputStream, Charset defaultCharset);
 
   /**
    * This method resolves an HTML entity given by {@code entityName}.

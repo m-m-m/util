@@ -8,53 +8,41 @@
     <version>dev-SNAPSHOT</version>
     <relativePath>../modules/pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-util-validation</artifactId>
+  <artifactId>mmm-util-xml</artifactId>
   <version>${net.sf.mmm.util.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
-  <description>This project provides advanced validation support.</description>
+  <description>provides utilities to deal with XML.</description>
 
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-pojo</artifactId>
+      <artifactId>mmm-util-lang</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-user</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-pattern</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+    </dependency>
+    <!--
+      Spring-context is marked as optional component. You can use spring, guice, seam or whatever framework you like
+      together with mmm as it comes with proper annotations using JSR 250 and JSR 330.
+      However, everything is tested with spring so this will be best choice if there are no other constraints.
+    -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>org.hibernate.validator</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-    </dependency>
-    <!-- EL is required by BV -->
-    <dependency>
-      <groupId>org.glassfish</groupId>
-      <artifactId>javax.el</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!-- optional for EL and BV -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <optional>true</optional>
-    </dependency>
+
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
-
 </project>

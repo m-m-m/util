@@ -12,7 +12,7 @@ import java.util.Map;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.lang.api.attribute.AttributeReadValue;
+import net.sf.mmm.util.lang.api.attribute.AttributeReadTitle;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsObject;
@@ -56,7 +56,7 @@ public class NlsFormatterDefault extends AbstractNlsFormatterPlugin<Object> {
         }
       } else if (object instanceof Class) {
         result = ((Class<?>) object).getName();
-      } else if ((object instanceof Enum) && (object instanceof AttributeReadValue)) {
+      } else if ((object instanceof Enum) || (object instanceof AttributeReadTitle)) {
         NlsMessage message = NlsAccess.getFactory().create(object.toString());
         message.getLocalizedMessage(locale, resolver, buffer);
         return;

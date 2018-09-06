@@ -5,9 +5,11 @@ package net.sf.mmm.util.transferobject.api;
 /**
  * This is a limited subset of {@link TransferObjectUtil} that is GWT compatible.
  *
+ * @deprecated use devon bean-mapping instead
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Deprecated
 public interface TransferObjectUtilLimited {
 
   /**
