@@ -10,19 +10,19 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.mmm.util.collection.base.EmptyIterator;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 import net.sf.mmm.util.resource.api.ResourceNotWritableException;
 import net.sf.mmm.util.resource.api.ResourceUri;
 
 /**
- * This is the implementation of the {@link BrowsableResource} interface for a resource that is a {@link File#isFile()
- * regular} {@link File}. <br>
+ * This is the implementation of the {@link BrowsableResource} interface for a resource that is a
+ * {@link File#isFile() regular} {@link File}. <br>
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
@@ -182,7 +182,7 @@ public class FileResource extends AbstractBrowsableResource {
       if (FileResource.this.file.isDirectory()) {
         files = FileResource.this.file.listFiles();
       } else {
-        return EmptyIterator.getInstance();
+        return Collections.emptyIterator();
       }
       return new FileResourceIterator(files);
     }

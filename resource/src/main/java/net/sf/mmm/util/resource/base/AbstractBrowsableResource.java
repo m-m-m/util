@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
-import net.sf.mmm.util.collection.base.FilteredIterable;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 
@@ -25,7 +24,13 @@ public abstract class AbstractBrowsableResource extends AbstractDataResource imp
   @Override
   public Iterable<? extends BrowsableResource> getChildResources(Filter<? super BrowsableResource> filter) {
 
-    return new FilteredIterable<>(getChildResources(), filter);
+    return getResources(getChildResources(), filter);
+  }
+
+  protected static Iterable<? extends BrowsableResource> getResources(Iterable<? extends BrowsableResource> iterable,
+      Filter<? super BrowsableResource> filter) {
+
+    return new FilteredIterable<>(iterable, filter);
   }
 
 }

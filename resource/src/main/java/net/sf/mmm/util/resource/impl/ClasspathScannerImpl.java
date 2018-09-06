@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.collection.base.FilteredIterable;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
@@ -86,8 +85,7 @@ public class ClasspathScannerImpl extends AbstractClasspathScanner {
 
     if (this.cache == null) {
       ClasspathFolder rootFolder = new ClasspathFolder(null, "");
-      Set<String> resourceNames = this.reflectionUtil.findResourceNames("", true,
-          ConstantFilter.getInstance(true));
+      Set<String> resourceNames = this.reflectionUtil.findResourceNames("", true, ConstantFilter.getInstance(true));
       List<ClasspathFile> fileList = new ArrayList<>(resourceNames.size());
       for (String resource : resourceNames) {
         ResourcePathNode<Void> path = ResourcePathNode.create(resource);
@@ -145,15 +143,13 @@ public class ClasspathScannerImpl extends AbstractClasspathScanner {
   }
 
   @Override
-  public Iterable<? extends BrowsableResource> getClasspathResourceFiles(
-      Filter<? super BrowsableResource> filter) {
+  public Iterable<? extends BrowsableResource> getClasspathResourceFiles(Filter<? super BrowsableResource> filter) {
 
-    return new FilteredIterable<>(getCache().getClasspathResourceFiles(), filter);
+    return AbstractBrowsableClasspathResource.getResources(getCache().getClasspathResourceFiles(), filter);
   }
 
   @Override
-  public Iterable<Class<?>> getClasspathResourceClasses(Filter<String> classnameFilter,
-      Filter<Class<?>> classFilter) {
+  public Iterable<Class<?>> getClasspathResourceClasses(Filter<String> classnameFilter, Filter<Class<?>> classFilter) {
 
     return new ClassIterable(getCache().getClasspathResourceFiles(), classnameFilter, classFilter);
   }

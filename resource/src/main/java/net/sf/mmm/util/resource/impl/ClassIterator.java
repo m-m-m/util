@@ -3,8 +3,8 @@
 package net.sf.mmm.util.resource.impl;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-import net.sf.mmm.util.collection.base.AbstractIterator;
 import net.sf.mmm.util.filter.api.Filter;
 
 /**
@@ -14,13 +14,17 @@ import net.sf.mmm.util.filter.api.Filter;
  * @author hohwille
  * @since 7.3.0
  */
-class ClassIterator extends AbstractIterator<Class<?>> {
+class ClassIterator implements Iterator<Class<?>> {
 
   private final Iterator<ClasspathFile> classpathFiles;
 
   private final Filter<String> classnameFilter;
 
   private final Filter<Class<?>> classFilter;
+
+  private Class<?> next;
+
+  private boolean done;
 
   /**
    * The constructor.
@@ -29,18 +33,16 @@ class ClassIterator extends AbstractIterator<Class<?>> {
    * @param classnameFilter the {@link Class#getName() classname} {@link Filter}.
    * @param classFilter the {@link Class} {@link Filter}.
    */
-  public ClassIterator(Iterator<ClasspathFile> classpathFiles, Filter<String> classnameFilter,
-      Filter<Class<?>> classFilter) {
+  public ClassIterator(Iterator<ClasspathFile> classpathFiles, Filter<String> classnameFilter, Filter<Class<?>> classFilter) {
 
     super();
     this.classpathFiles = classpathFiles;
     this.classnameFilter = classnameFilter;
     this.classFilter = classFilter;
-    findFirst();
+    this.next = findNext();
   }
 
-  @Override
-  protected Class<?> findNext() {
+  private Class<?> findNext() {
 
     ClasspathFile classpathFile = null;
     while (this.classpathFiles.hasNext()) {
@@ -55,4 +57,46 @@ class ClassIterator extends AbstractIterator<Class<?>> {
     }
     return null;
   }
+
+  @Override
+  public final boolean hasNext() {
+
+    if (this.next != null) {
+      return true;
+    }
+    if (this.done) {
+      return false;
+    }
+    this.next = findNext();
+    if (this.next == null) {
+      this.done = true;
+    }
+    return (!this.done);
+  }
+
+  @Override
+  public final Class<?> next() {
+
+    if (this.next == null) {
+      throw new NoSuchElementException();
+    } else {
+      Class<?> result = this.next;
+      this.next = null;
+      return result;
+    }
+  }
+
+  /**
+   * This method will always throw an exception.
+   *
+   * @see java.util.Iterator#remove()
+   *
+   * @throws UnsupportedOperationException whenever this method is called.
+   */
+  @Override
+  public final void remove() throws UnsupportedOperationException {
+
+    throw new UnsupportedOperationException();
+  }
+
 }

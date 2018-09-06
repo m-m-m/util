@@ -4,6 +4,7 @@ package net.sf.mmm.util.resource.impl;
 
 import java.util.Date;
 
+import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourcePath;
@@ -161,6 +162,12 @@ abstract class AbstractBrowsableClasspathResource extends AbstractBrowsableResou
     for (AbstractBrowsableClasspathResource child : getChildResources()) {
       child.init();
     }
+  }
+
+  protected static Iterable<? extends BrowsableResource> getResources(Iterable<? extends BrowsableResource> iterable,
+      Filter<? super BrowsableResource> filter) {
+
+    return AbstractBrowsableResource.getResources(iterable, filter);
   }
 
 }
