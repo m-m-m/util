@@ -11,18 +11,19 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
 import net.sf.mmm.util.lang.api.StringTokenizer;
-import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 
 /**
- * This is the abstract base-implementation of a {@link net.sf.mmm.util.value.api.ValueConverter} that converts an
- * {@link Object} to a container type. A container type is an array, {@link java.util.Collection} or
- * {@link java.util.Map}. It supports objects given as {@link CharSequence} (e.g. {@link String}), {@link Collection},
- * or array. If a value is given as {@link CharSequence} it will be parsed as comma-separated values. An individual
- * value can be escaped by enclosing it with "<{[" and "]}>" so it can itself contain the separator character. <br>
+ * This is the abstract base-implementation of a {@link net.sf.mmm.util.value.api.ValueConverter} that
+ * converts an {@link Object} to a container type. A container type is an array, {@link java.util.Collection}
+ * or {@link java.util.Map}. It supports objects given as {@link CharSequence} (e.g. {@link String}),
+ * {@link Collection}, or array. If a value is given as {@link CharSequence} it will be parsed as
+ * comma-separated values. An individual value can be escaped by enclosing it with "<{[" and "]}>" so it can
+ * itself contain the separator character. <br>
  * Here are some examples:<br>
  * <table border="1">
  * <tr>
@@ -60,8 +61,7 @@ import net.sf.mmm.util.value.base.AbstractRecursiveValueConverter;
 @Singleton
 @Named
 @SuppressWarnings({ "rawtypes" })
-public abstract class AbstractValueConverterToContainer<CONTAINER>
-    extends AbstractRecursiveValueConverter<Object, CONTAINER> {
+public abstract class AbstractValueConverterToContainer<CONTAINER> extends AbstractRecursiveValueConverter<Object, CONTAINER> {
 
   /** The character used to separate the element of the collection. */
   protected static final char ELEMENT_SEPARATOR = ',';
@@ -76,7 +76,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER>
    */
   protected static final String ELEMENT_ESCAPE_END = "]}>";
 
-  private CollectionReflectionUtil collectionReflectionUtil;
+  private CollectionFactoryManager collectionFactoryManager;
 
   /**
    * The constructor.
@@ -87,31 +87,29 @@ public abstract class AbstractValueConverterToContainer<CONTAINER>
   }
 
   /**
-   * This method gets the {@link CollectionReflectionUtilImpl} instance to use.
-   *
-   * @return the {@link CollectionReflectionUtilImpl} to use.
+   * @return the instance of {@link CollectionFactoryManager} to use.
    */
-  protected CollectionReflectionUtil getCollectionReflectionUtil() {
+  protected CollectionFactoryManager getCollectionFactoryManager() {
 
-    return this.collectionReflectionUtil;
+    return this.collectionFactoryManager;
   }
 
   /**
-   * @param collectionReflectionUtil is the collectionReflectionUtil to set
+   * @param collectionFactoryManager is the {@link CollectionFactoryManager} to set
    */
   @Inject
-  public void setCollectionReflectionUtil(CollectionReflectionUtil collectionReflectionUtil) {
+  public void setCollectionFactoryManager(CollectionFactoryManager collectionFactoryManager) {
 
     getInitializationState().requireNotInitilized();
-    this.collectionReflectionUtil = collectionReflectionUtil;
+    this.collectionFactoryManager = collectionFactoryManager;
   }
 
   @Override
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.collectionReflectionUtil == null) {
-      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
+    if (this.collectionFactoryManager == null) {
+      this.collectionFactoryManager = CollectionFactoryManagerImpl.getInstance();
     }
   }
 
@@ -140,7 +138,8 @@ public abstract class AbstractValueConverterToContainer<CONTAINER>
   }
 
   /**
-   * This method performs the {@link #convert(Object, Object, GenericType) conversion} for {@link Collection} values.
+   * This method performs the {@link #convert(Object, Object, GenericType) conversion} for {@link Collection}
+   * values.
    *
    * @param <T> is the generic type of {@code targetType}.
    * @param collectionValue is the {@link Collection} value to convert.
@@ -148,8 +147,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER>
    * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @return the converted container.
    */
-  protected <T extends CONTAINER> T convertFromCollection(Collection collectionValue, Object valueSource,
-      GenericType<T> targetType) {
+  protected <T extends CONTAINER> T convertFromCollection(Collection collectionValue, Object valueSource, GenericType<T> targetType) {
 
     int size = collectionValue.size();
     T container = createContainer(targetType, size);
@@ -162,7 +160,8 @@ public abstract class AbstractValueConverterToContainer<CONTAINER>
   }
 
   /**
-   * This method performs the {@link #convert(Object, Object, GenericType) conversion} for {@link String} values.
+   * This method performs the {@link #convert(Object, Object, GenericType) conversion} for {@link String}
+   * values.
    *
    * @param <T> is the generic type of {@code targetType}.
    * @param stringValue is the {@link String} value to convert.
@@ -170,12 +169,10 @@ public abstract class AbstractValueConverterToContainer<CONTAINER>
    * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @return the converted container.
    */
-  protected <T extends CONTAINER> T convertFromString(String stringValue, Object valueSource,
-      GenericType<T> targetType) {
+  protected <T extends CONTAINER> T convertFromString(String stringValue, Object valueSource, GenericType<T> targetType) {
 
     List<String> stringList = new ArrayList<>();
-    StringTokenizer tokenizer = new StringTokenizer(stringValue, ELEMENT_ESCAPE_START, ELEMENT_ESCAPE_END,
-        ELEMENT_SEPARATOR);
+    StringTokenizer tokenizer = new StringTokenizer(stringValue, ELEMENT_ESCAPE_START, ELEMENT_ESCAPE_END, ELEMENT_SEPARATOR);
     for (String element : tokenizer) {
       stringList.add(element);
     }
@@ -196,8 +193,7 @@ public abstract class AbstractValueConverterToContainer<CONTAINER>
    * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @return the converted container.
    */
-  protected <T extends CONTAINER> T convertFromArray(Object arrayValue, Object valueSource,
-      GenericType<T> targetType) {
+  protected <T extends CONTAINER> T convertFromArray(Object arrayValue, Object valueSource, GenericType<T> targetType) {
 
     int len = Array.getLength(arrayValue);
     T container = createContainer(targetType, len);
@@ -218,8 +214,8 @@ public abstract class AbstractValueConverterToContainer<CONTAINER>
    * @param targetType is the {@link #getTargetType() target-type} to convert to.
    * @param value is the original value to convert.
    */
-  protected abstract void convertContainerEntry(Object element, int index, CONTAINER container, Object valueSource,
-      GenericType<? extends CONTAINER> targetType, Object value);
+  protected abstract void convertContainerEntry(Object element, int index, CONTAINER container, Object valueSource, GenericType<? extends CONTAINER> targetType,
+      Object value);
 
   // {
   // ComposedValueConverter parentConverter = getComposedValueConverter();

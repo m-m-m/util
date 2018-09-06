@@ -68,8 +68,7 @@ public interface VersionUtil {
    * is a character used to separate the {@link VersionIdentifier#getVersionSegment(int) version segments}
    * (typically the dot sign '.'). Further, {@code «min»} and {@code «max»} are the minimum and maximum number
    * of {@link VersionIdentifier#getVersionSegment(int) segments} to format and {@code «padding»} is the
-   * minimum number of digits to {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} each
-   * {@link VersionIdentifier#getVersionSegment(int) segment}.</td>
+   * minimum number of digits to pad each {@link VersionIdentifier#getVersionSegment(int) segment}.</td>
    * </tr>
    * <tr>
    * <td>P</td>
@@ -87,8 +86,7 @@ public interface VersionUtil {
    * <td>N</td>
    * <td>{@link VersionIdentifier#getPhaseNumber() phase number}</td>
    * <td>The {@link VersionIdentifier#getPhaseNumber() phase number}. May be followed by
-   * <code>{«padding»}</code> to {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} to a
-   * minimum number of digits.</td>
+   * <code>{«padding»}</code> to pad to a minimum number of digits.</td>
    * </tr>
    * <tr>
    * <td>S</td>
@@ -107,8 +105,7 @@ public interface VersionUtil {
    * <tr>
    * <td>R</td>
    * <td>{@link VersionIdentifier#getRevision() revision}</td>
-   * <td>The revision. May be followed by <code>{«padding»}</code> to
-   * {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} to a minimum number of digits.</td>
+   * <td>The revision. May be followed by <code>{«padding»}</code> to pad to a minimum number of digits.</td>
    * </tr>
    * <tr>
    * <td>T</td>

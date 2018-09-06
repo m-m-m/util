@@ -2,9 +2,23 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.collection.impl;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.Queue;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentNavigableMap;
+import java.util.concurrent.TransferQueue;
 
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
@@ -30,6 +44,8 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CollectionFactoryManagerImpl extends AbstractLoggableComponent implements CollectionFactoryManager {
+
+  private static final Class<?>[] CAPACITY_CONSTRUCTOR_ARGS = new Class<?>[] { int.class };
 
   private static CollectionFactoryManager instance;
 
@@ -174,6 +190,180 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
       throw new IllegalArgumentException();
     }
     return this.collectionFactoryMap.put(collectionInterface, factory);
+  }
+
+  @Override
+  public <C extends Collection> C create(Class<C> type) {
+
+    return create(type, null);
+  }
+
+  @Override
+  public <C extends Collection> C create(Class<C> type, int capacity) {
+
+    return create(type, Integer.valueOf(capacity));
+  }
+
+  /**
+   * @see #create(Class, int)
+   *
+   * @param <C> is the generic type of the collection.
+   * @param type is the type of collection to create. This is either an interface ({@link java.util.List},
+   *        {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract implementation of a
+   *        {@link Collection}.
+   * @param capacity is the initial capacity of the collection or {@code null} if unspecified.
+   * @return the new instance of the given {@code type}.
+   */
+  protected <C extends Collection<?>> C create(Class<C> type, Integer capacity) {
+
+    if (type.isInterface()) {
+      CollectionFactory<C> factory = getCollectionFactory(type);
+      if (factory == null) {
+        throw new UnknownCollectionInterfaceException(type);
+      }
+      if (capacity == null) {
+        return factory.createGeneric();
+      } else {
+        return factory.createGeneric(capacity.intValue());
+      }
+    } else if (Modifier.isAbstract(type.getModifiers())) {
+      Class<? extends Collection> collectionInterface = findCollectionInterface(type);
+      if (collectionInterface != Collection.class) {
+        return (C) create(collectionInterface, capacity);
+      }
+    }
+
+    try {
+      if (capacity != null) {
+        try {
+          Constructor<C> constructor = type.getConstructor(CAPACITY_CONSTRUCTOR_ARGS);
+          return constructor.newInstance(capacity);
+        } catch (Exception e) {
+          getLogger().debug("Failed to create collection via capacitory constructor.", e);
+        }
+      }
+      return type.newInstance();
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to create collection of type: " + type, e);
+    }
+  }
+
+  /**
+   * @param type {@link Class} reflecting the {@link Collection}.
+   * @return to most specific {@link Collection} {@link Class#isInterface() interface}
+   *         {@link Class#isAssignableFrom(Class) assignable from} the given {@code type}.
+   */
+  protected Class<? extends Collection> findCollectionInterface(Class<? extends Collection> type) {
+
+    // actually a generic approach based on the registered CollectionFactory instances would be better to
+    // support
+    // additional collection types in a pluggable way (e.g. ObservableList or ObservableSet would already
+    // require Java8
+    // if hardcoded here).
+    if (type.isInterface()) {
+      return type;
+    } else if (List.class.isAssignableFrom(type)) {
+      return List.class;
+    } else if (Queue.class.isAssignableFrom(type)) {
+      if (BlockingDeque.class.isAssignableFrom(type)) {
+        return BlockingDeque.class;
+      } else if (Deque.class.isAssignableFrom(type)) {
+        return Deque.class;
+      } else if (BlockingQueue.class.isAssignableFrom(type)) {
+        return BlockingQueue.class;
+      } else if (TransferQueue.class.isAssignableFrom(type)) {
+        return TransferQueue.class;
+      } else {
+        return Queue.class;
+      }
+    } else if (Set.class.isAssignableFrom(type)) {
+      if (NavigableSet.class.isAssignableFrom(type)) {
+        return NavigableSet.class;
+      } else if (SortedSet.class.isAssignableFrom(type)) {
+        return SortedSet.class;
+      } else {
+        return Set.class;
+      }
+    }
+    return Collection.class;
+  }
+
+  @Override
+  public <C extends Map> C createMap(Class<C> type) {
+
+    return createMap(type, null);
+  }
+
+  @Override
+  public <C extends Map> C createMap(Class<C> type, int capacity) {
+
+    return createMap(type, Integer.valueOf(capacity));
+  }
+
+  /**
+   * @see #create(Class, int)
+   *
+   * @param <C> is the generic type of the collection.
+   * @param type is the type of collection to create. This is either an interface ({@link java.util.List},
+   *        {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract implementation of a
+   *        {@link Collection}.
+   * @param capacity is the initial capacity of the collection or {@code null} if unspecified.
+   * @return the new instance of the given {@code type}.
+   */
+  protected <C extends Map<?, ?>> C createMap(Class<C> type, Integer capacity) {
+
+    if (type.isInterface()) {
+      MapFactory<C> factory = getMapFactory(type);
+      if (factory == null) {
+        throw new UnknownCollectionInterfaceException(type);
+      }
+      if (capacity == null) {
+        return factory.createGeneric();
+      } else {
+        return factory.createGeneric(capacity.intValue());
+      }
+    } else if (Modifier.isAbstract(type.getModifiers())) {
+      Class<? extends Map> collectionInterface = findMapInterface(type);
+      return (C) createMap(collectionInterface, capacity);
+    }
+
+    try {
+      if (capacity != null) {
+        try {
+          Constructor<C> constructor = type.getConstructor(CAPACITY_CONSTRUCTOR_ARGS);
+          return constructor.newInstance(capacity);
+        } catch (Exception e) {
+          getLogger().debug("Failed to create map via capacitory constructor.", e);
+        }
+      }
+      return type.newInstance();
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to create collection of type: " + type, e);
+    }
+  }
+
+  /**
+   * @param type {@link Class} reflecting the {@link Map}.
+   * @return to most specific {@link Map} {@link Class#isInterface() interface}
+   *         {@link Class#isAssignableFrom(Class) assignable from} the given {@code type}.
+   */
+  protected Class<? extends Map> findMapInterface(Class<? extends Map> type) {
+
+    // actually a generic approach based on the registered CollectionFactory instances would be better to
+    // support
+    // additional collection types in a pluggable way (e.g. ObservableList or ObservableSet would already
+    // require Java8
+    // if hardcoded here).
+    if (type.isInterface()) {
+      return type;
+    } else if (ConcurrentNavigableMap.class.isAssignableFrom(type)) {
+      return ConcurrentNavigableMap.class;
+    } else if (NavigableMap.class.isAssignableFrom(type)) {
+      return NavigableMap.class;
+    } else if (ConcurrentMap.class.isAssignableFrom(type)) {
+      return ConcurrentMap.class;
+    }
+    return Map.class;
   }
 
 }

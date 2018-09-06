@@ -1,17 +1,18 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.reflect.base;
+package net.sf.mmm.util.collection.impl;
 
+import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.lang.api.attribute.AttributeReadMessageCode;
 
 /**
  * A {@link UnknownCollectionInterfaceException} is thrown if a {@link java.util.Collection}-interface was
  * given that is unknown or no {@link java.util.Collection}.
  *
- * @see CollectionReflectionUtilImpl#create(Class)
+ * @see CollectionFactoryManager#create(Class)
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 1.0.2
+ * @since 7.6.0 (moved from 1.0.2)
  */
 public class UnknownCollectionInterfaceException extends RuntimeException implements AttributeReadMessageCode {
 

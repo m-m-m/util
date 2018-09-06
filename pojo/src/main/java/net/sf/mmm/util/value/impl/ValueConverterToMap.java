@@ -7,15 +7,14 @@ import java.util.Map;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * {@link Object} to a {@link Map}.
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
+ * an {@link Object} to a {@link Map}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
@@ -40,8 +39,8 @@ public class ValueConverterToMap extends AbstractValueConverterToContainer<Map> 
   }
 
   @Override
-  protected void convertContainerEntry(Object element, int index, Map container, Object valueSource,
-      GenericType<? extends Map> targetType, Object originalValue) {
+  protected void convertContainerEntry(Object element, int index, Map container, Object valueSource, GenericType<? extends Map> targetType,
+      Object originalValue) {
 
     ComposedValueConverter parentConverter = getComposedValueConverter();
     Object key;
@@ -77,10 +76,7 @@ public class ValueConverterToMap extends AbstractValueConverterToContainer<Map> 
   @Override
   protected <T extends Map> T createContainer(GenericType<T> targetType, int length) {
 
-    CollectionFactoryManager collectionFactoryManager = getCollectionReflectionUtil()
-        .getCollectionFactoryManager();
-    Class<T> mapType = targetType.getRetrievalClass();
-    return (T) collectionFactoryManager.getMapFactory(mapType).create(length);
+    return getCollectionFactoryManager().createMap(targetType.getRetrievalClass(), length);
   }
 
 }

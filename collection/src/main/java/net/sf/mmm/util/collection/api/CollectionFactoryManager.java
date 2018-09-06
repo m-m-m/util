@@ -39,4 +39,59 @@ public interface CollectionFactoryManager {
    */
   <COLLECTION extends Collection> CollectionFactory<COLLECTION> getCollectionFactory(Class<COLLECTION> collectionType);
 
+  /**
+   * This method creates a {@link Collection} implementing the given {@code type}.
+   *
+   * @param <C> is the generic type of the {@link Collection}.
+   * @param type is the type of {@link Collection} to create. This is either an interface
+   *        ({@link java.util.List}, {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract
+   *        implementation of a {@link Collection}.
+   * @return the new instance of the given {@code type}.
+   * @since 7.6.0
+   */
+  <C extends Collection> C create(Class<C> type);
+
+  /**
+   * This method creates a {@link Collection} implementing the given {@code type}.
+   *
+   * @since 1.7.0
+   *
+   * @param <C> is the generic type of the {@link Collection}.
+   * @param type is the type of {@link Collection} to create. This is either an interface
+   *        ({@link java.util.List}, {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract
+   *        implementation of a {@link Collection}.
+   * @param capacity is the initial capacity of the {@link Collection}.
+   * @return the new instance of the given {@code type}.
+   * @since 7.6.0
+   */
+  <C extends Collection> C create(Class<C> type, int capacity);
+
+  /**
+   * This method creates a {@link Map} implementing the given {@code type}.
+   *
+   * @since 1.7.0
+   *
+   * @param <C> is the generic type of the {@link Map}.
+   * @param type is the type of {@link Map} to create. This is either an interface ({@link Map},
+   *        {@link java.util.concurrent.ConcurrentMap}, {@link java.util.NavigableMap}, etc.) or a
+   *        non-abstract implementation of a {@link Map}.
+   * @return the new instance of the given {@code type}.
+   * @since 7.6.0
+   */
+  <C extends Map> C createMap(Class<C> type);
+
+  /**
+   * This method creates a {@link Map} implementing the given {@code type}.
+   *
+   * @since 1.7.0
+   *
+   * @param <C> is the generic type of the {@link Map}.
+   * @param type is the type of {@link Map} to create. This is either an interface ({@link Map},
+   *        {@link java.util.concurrent.ConcurrentMap}, {@link java.util.NavigableMap}, etc.) or a
+   *        non-abstract implementation of a {@link Map}.
+   * @param capacity is the initial capacity of the {@link Map}.
+   * @return the new instance of the given {@code type}.
+   * @since 7.6.0
+   */
+  <C extends Map> C createMap(Class<C> type, int capacity);
 }

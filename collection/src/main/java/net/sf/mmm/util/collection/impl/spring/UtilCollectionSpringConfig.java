@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
-import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
-import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.reflect}.
@@ -24,12 +22,6 @@ public class UtilCollectionSpringConfig {
   public CollectionFactoryManager collectionFactoryManager() {
 
     return new CollectionFactoryManagerImpl();
-  }
-
-  @Bean
-  public CollectionReflectionUtil collectionReflectionUtil() {
-
-    return new CollectionReflectionUtilImpl();
   }
 
 }

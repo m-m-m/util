@@ -1,16 +1,11 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.collection.base;
+package net.sf.mmm.util.reflect.base;
 
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Queue;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.Vector;
-import java.util.concurrent.BlockingQueue;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,42 +25,6 @@ public class CollectionReflectionUtilTest {
   protected CollectionReflectionUtil getCollectionReflectionUtil() {
 
     return CollectionReflectionUtilImpl.getInstance();
-  }
-
-  @Test
-  public void testCreate() {
-
-    CollectionReflectionUtil util = getCollectionReflectionUtil();
-    List<String> list = util.create(List.class);
-    Assert.assertNotNull(list);
-    Assert.assertTrue(list.isEmpty());
-    ArrayList<String> arrayList = util.create(ArrayList.class);
-    Assert.assertNotNull(arrayList);
-    Assert.assertTrue(arrayList.isEmpty());
-    Vector<String> vector = util.create(Vector.class);
-    Assert.assertNotNull(vector);
-    Assert.assertTrue(vector.isEmpty());
-    Set<String> set = util.create(Set.class);
-    Assert.assertNotNull(set);
-    Assert.assertTrue(set.isEmpty());
-    SortedSet<String> sortedSet = util.create(SortedSet.class);
-    Assert.assertNotNull(sortedSet);
-    Assert.assertTrue(sortedSet.isEmpty());
-    Queue<String> queue = util.create(Queue.class);
-    Assert.assertNotNull(queue);
-    Assert.assertTrue(queue.isEmpty());
-    BlockingQueue<String> blockingQueue = util.create(BlockingQueue.class);
-    Assert.assertNotNull(blockingQueue);
-    Assert.assertTrue(blockingQueue.isEmpty());
-  }
-
-  @Test
-  public void testCreateDeque() {
-
-    CollectionReflectionUtil util = getCollectionReflectionUtil();
-    Deque<String> deque = util.create(Deque.class);
-    Assert.assertNotNull(deque);
-    Assert.assertTrue(deque.isEmpty());
   }
 
   @Test

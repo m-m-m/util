@@ -67,7 +67,7 @@ public interface NlsBundleUtilReflectRoot extends NlsBundle {
   NlsMessage errorIncreaseExceedsMaxGrowth(@Named("size") int size, @Named("max") int max);
 
   /**
-   * @see net.sf.mmm.util.reflect.base.UnknownCollectionInterfaceException
+   * @see net.sf.mmm.util.collection.impl.UnknownCollectionInterfaceException
    *
    * @param type is the {@link Class} reflecting the unknown collection.
    * @return the {@link NlsMessage}

@@ -16,12 +16,12 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
+import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.json.api.JsonSupport;
 import net.sf.mmm.util.json.api.JsonUtil;
-import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
 import net.sf.mmm.util.reflect.base.EnumHelper;
 
 /**
@@ -36,7 +36,7 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
 
   private static JsonUtil instance;
 
-  private CollectionReflectionUtil collectionReflectionUtil;
+  private CollectionFactoryManager collectionFactoryManager;
 
   /**
    * The constructor.
@@ -47,20 +47,20 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
   }
 
   /**
-   * @param collectionReflectionUtil is the {@link CollectionReflectionUtil} to {@link Inject}.
+   * @param collectionFactoryManager is the {@link CollectionFactoryManager} to {@link Inject}.
    */
   @Inject
-  public void setCollectionReflectionUtil(CollectionReflectionUtil collectionReflectionUtil) {
+  public void setCollectionReflectionUtil(CollectionFactoryManager collectionFactoryManager) {
 
-    this.collectionReflectionUtil = collectionReflectionUtil;
+    this.collectionFactoryManager = collectionFactoryManager;
   }
 
   @Override
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.collectionReflectionUtil == null) {
-      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
+    if (this.collectionFactoryManager == null) {
+      this.collectionFactoryManager = CollectionFactoryManagerImpl.getInstance();
     }
   }
 
@@ -155,7 +155,7 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
   @Override
   public <C extends Collection<?>> C readCollection(JsonParser json, GenericType<C> type) {
 
-    C collection = this.collectionReflectionUtil.create(type.getAssignmentClass());
+    C collection = this.collectionFactoryManager.create(type.getAssignmentClass());
     readCollection(json, (Collection) collection, type.getComponentType());
     return collection;
   }
@@ -177,7 +177,7 @@ public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <K, V, M extends Map<K, V>> M readMap(JsonParser json, GenericType<M> type) {
 
-    M map = this.collectionReflectionUtil.createMap(type.getAssignmentClass());
+    M map = this.collectionFactoryManager.createMap(type.getAssignmentClass());
     readMap(json, map, (GenericType) type.getKeyType(), (GenericType) type.getComponentType());
     return map;
   }

@@ -7,14 +7,13 @@ import java.util.Collection;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
- * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts an
- * {@link Object} to a {@link Collection}.
+ * This is an implementation of the {@link net.sf.mmm.util.value.api.ValueConverter} interface that converts
+ * an {@link Object} to a {@link Collection}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
@@ -39,8 +38,8 @@ public class ValueConverterToCollection extends AbstractValueConverterToContaine
   }
 
   @Override
-  protected void convertContainerEntry(Object element, int index, Collection container, Object valueSource,
-      GenericType<? extends Collection> targetType, Object value) {
+  protected void convertContainerEntry(Object element, int index, Collection container, Object valueSource, GenericType<? extends Collection> targetType,
+      Object value) {
 
     ComposedValueConverter parentConverter = getComposedValueConverter();
     GenericType<?> componentType = targetType.getComponentType();
@@ -53,14 +52,10 @@ public class ValueConverterToCollection extends AbstractValueConverterToContaine
     container.add(resultElement);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   protected <T extends Collection> T createContainer(GenericType<T> targetType, int length) {
 
-    CollectionFactoryManager collectionFactoryManager = getCollectionReflectionUtil()
-        .getCollectionFactoryManager();
-    Class<T> collectionType = targetType.getRetrievalClass();
-    return (T) collectionFactoryManager.getCollectionFactory(collectionType).create(length);
+    return getCollectionFactoryManager().create(targetType.getRetrievalClass(), length);
   }
 
 }
