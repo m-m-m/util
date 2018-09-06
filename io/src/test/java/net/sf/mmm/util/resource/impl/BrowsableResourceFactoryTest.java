@@ -81,6 +81,6 @@ public class BrowsableResourceFactoryTest extends Assertions {
     assertThat(resource.getName()).isEqualTo("bar.txt");
     resource = resource.navigate("classpath:META-INF/maven/org.slf4j/slf4j-api/pom.properties");
     assertThat(resource.isAvailable()).isTrue();
-    assertThat(resource.getSize()).isEqualTo(110);
+    assertThat(resource.getSize()).isEqualTo(109);
   }
 }
