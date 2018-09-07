@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.math.base.MathUtilImpl;
@@ -24,7 +24,7 @@ import net.sf.mmm.util.validation.base.jsr303.constraints.TypedConstraintProcess
  * @author hohwille
  * @since 7.4.0
  */
-public abstract class AbstractBeanValidationProcessor extends AbstractLoggableComponent implements BeanValidationProcessor {
+public abstract class AbstractBeanValidationProcessor extends AbstractComponent implements BeanValidationProcessor {
 
   private final Map<String, ConstraintProcessor<?>> annotation2ProcessorMap;
 
@@ -34,6 +34,7 @@ public abstract class AbstractBeanValidationProcessor extends AbstractLoggableCo
    * The constructor.
    */
   public AbstractBeanValidationProcessor() {
+
     super();
     this.annotation2ProcessorMap = new HashMap<>();
   }

@@ -5,7 +5,7 @@ package net.sf.mmm.util.exception.base;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.ExceptionUtilLimited;
 import net.sf.mmm.util.exception.api.TechnicalErrorUserException;
 
@@ -17,7 +17,7 @@ import net.sf.mmm.util.exception.api.TechnicalErrorUserException;
  * @deprecated will be removed
  */
 @Deprecated
-public class ExceptionUtilLimitedImpl extends AbstractLoggableComponent implements ExceptionUtilLimited {
+public class ExceptionUtilLimitedImpl extends AbstractComponent implements ExceptionUtilLimited {
 
   /**
    * The constructor.

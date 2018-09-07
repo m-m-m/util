@@ -9,10 +9,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.mmm.util.component.base.AbstractLoggableHttpServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 /**
@@ -22,7 +25,9 @@ import net.sf.mmm.util.exception.api.ObjectNotFoundException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsResourceBundleJavaScriptServlet extends AbstractLoggableHttpServlet {
+public abstract class AbstractNlsResourceBundleJavaScriptServlet extends HttpServlet {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractNlsResourceBundleJavaScriptServlet.class);
 
   private static final long serialVersionUID = -2997745885840819492L;
 
@@ -55,7 +60,7 @@ public abstract class AbstractNlsResourceBundleJavaScriptServlet extends Abstrac
       ResourceBundle bundle = ResourceBundle.getBundle(name, locale);
       writeBundle(resp.getWriter(), name, bundle);
     } catch (RuntimeException e) {
-      getLogger().warn("Failed to provide bundle: " + name, e);
+      LOG.warn("Failed to provide bundle: " + name, e);
       throw e;
     }
   }

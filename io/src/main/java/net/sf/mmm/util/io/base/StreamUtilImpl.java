@@ -24,7 +24,10 @@ import java.util.concurrent.FutureTask;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.concurrent.api.Stoppable;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
@@ -45,7 +48,9 @@ import net.sf.mmm.util.pool.base.NoCharArrayPool;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class StreamUtilImpl extends AbstractLoggableComponent implements StreamUtil {
+public class StreamUtilImpl extends AbstractComponent implements StreamUtil {
+
+  private static final Logger LOG = LoggerFactory.getLogger(StreamUtilImpl.class);
 
   private static StreamUtil instance;
 
@@ -111,8 +116,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
 
   /**
    * This method gets the byte-array {@link Pool} used to transfer streams. <br>
-   * The implementation should create byte-arrays with a suitable length (at least 512, suggested is 4096).
-   * Override this method to use a real pool implementation.
+   * The implementation should create byte-arrays with a suitable length (at least 512, suggested is 4096). Override
+   * this method to use a real pool implementation.
    *
    * @return the {@link Pool} instance.
    */
@@ -330,7 +335,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     try {
       inputStream.close();
     } catch (Exception e) {
-      getLogger().warn("Failed to close stream!", e);
+      LOG.warn("Failed to close stream!", e);
     }
   }
 
@@ -360,7 +365,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     try {
       reader.close();
     } catch (Exception e) {
-      getLogger().warn("Failed to close reader!", e);
+      LOG.warn("Failed to close reader!", e);
     }
   }
 
@@ -373,7 +378,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
       if (channel instanceof WritableByteChannel) {
         throw new RuntimeIoException(e, IoMode.CLOSE);
       }
-      getLogger().warn("Failed to close channel!", e);
+      LOG.warn("Failed to close channel!", e);
     }
   }
 
@@ -406,8 +411,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This is the abstract base class for the {@link Callable} that transfers data of streams or
-   * readers/writers.
+   * This is the abstract base class for the {@link Callable} that transfers data of streams or readers/writers.
    */
   protected abstract static class AbstractAsyncTransferrer implements Callable<Long>, Stoppable {
 
@@ -434,8 +438,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
     /**
      * This method determines if the transfer has been completed successfully.
      *
-     * @return {@code true} if successfully completed, {@code false} if still running, {@link #isStopped()
-     *         stopped} or an exception occurred.
+     * @return {@code true} if successfully completed, {@code false} if still running, {@link #isStopped() stopped} or
+     *         an exception occurred.
      */
     public final boolean isCompleted() {
 
@@ -453,8 +457,8 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
   }
 
   /**
-   * This is an abstract implementation of the {@link AsyncTransferrer} interface, that implements
-   * {@link Runnable} defining the main flow.
+   * This is an abstract implementation of the {@link AsyncTransferrer} interface, that implements {@link Runnable}
+   * defining the main flow.
    *
    * @param <BUFFER> is the generic type of the buffers provided by {@link BaseTransferrer#getPool()}.
    */
@@ -585,7 +589,7 @@ public class StreamUtilImpl extends AbstractLoggableComponent implements StreamU
         }
         return Long.valueOf(bytes);
       } catch (Exception e) {
-        getLogger().error("Error during async transfer!", e);
+        LOG.error("Error during async transfer!", e);
         if (this.callback != null) {
           this.callback.transferFailed(e);
         }

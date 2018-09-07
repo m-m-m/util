@@ -9,17 +9,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.text.api.Hyphenation;
 import net.sf.mmm.util.text.api.StringHasher;
 
 /**
- * This is the implementation of the {@link net.sf.mmm.util.text.api.Hyphenator} interface. It uses a list of
- * rules to determine hyphenation-points.
+ * This is the implementation of the {@link net.sf.mmm.util.text.api.Hyphenator} interface. It uses a list of rules to
+ * determine hyphenation-points.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 public class HyphenatorImpl extends AbstractHyphenator {
+
+  private static final Logger LOG = LoggerFactory.getLogger(HyphenatorImpl.class);
 
   /** The {@link Map} with explicit exceptions. */
   private final Map<String, HyphenationImpl> exceptionMap;
@@ -66,8 +71,8 @@ public class HyphenatorImpl extends AbstractHyphenator {
   }
 
   /**
-   * This method sorts the given {@link HyphenationPattern patterns} according to the {@link String#length()
-   * length} of their {@link HyphenationPattern#getWordPart() word-part}.
+   * This method sorts the given {@link HyphenationPattern patterns} according to the {@link String#length() length} of
+   * their {@link HyphenationPattern#getWordPart() word-part}.
    *
    * @param patternArray are the unsorted {@link HyphenationPattern patterns}.
    * @return the sorted {@link HyphenationPattern patterns}.
@@ -114,9 +119,7 @@ public class HyphenatorImpl extends AbstractHyphenator {
       for (HyphenationPattern pattern : this.patterns) {
         state.apply(pattern);
       }
-      if (getLogger().isTraceEnabled()) {
-        getLogger().trace("Hyphenation is " + state.toString());
-      }
+      LOG.trace("Hyphenation is {}", state);
       hyphenation = state.toHyphenation();
     }
     return hyphenation;

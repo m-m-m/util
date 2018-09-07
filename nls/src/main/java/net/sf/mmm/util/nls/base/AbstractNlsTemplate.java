@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
@@ -17,7 +16,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsTemplate extends AbstractLoggableObject implements NlsTemplate {
+public abstract class AbstractNlsTemplate implements NlsTemplate {
 
   private static final long serialVersionUID = 6922837208667754806L;
 
@@ -39,15 +38,14 @@ public abstract class AbstractNlsTemplate extends AbstractLoggableObject impleme
    * @param nlsDependencies are the {@link NlsDependencies}.
    * @return the formatter instance.
    */
-  protected NlsMessageFormatter createFormatter(String messageTemplate, Locale locale,
-      NlsDependencies nlsDependencies) {
+  protected NlsMessageFormatter createFormatter(String messageTemplate, Locale locale, NlsDependencies nlsDependencies) {
 
     return nlsDependencies.getMessageFormatterFactory().create(messageTemplate);
   }
 
   @Override
-  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer,
-      NlsTemplateResolver resolver, NlsDependencies nlsDependencies) throws IOException {
+  public boolean translate(Locale locale, Map<String, Object> arguments, Appendable buffer, NlsTemplateResolver resolver, NlsDependencies nlsDependencies)
+      throws IOException {
 
     String translation = translate(locale);
     if (translation == null) {

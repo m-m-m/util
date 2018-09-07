@@ -4,6 +4,9 @@ package net.sf.mmm.util.value.impl;
 
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.collection.api.SetFactory;
 import net.sf.mmm.util.collection.base.ConcurrentHashSetFactory;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
@@ -19,8 +22,9 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractValueConverterToSimilarPojo<SOURCE, TARGET>
-    extends AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> {
+public abstract class AbstractValueConverterToSimilarPojo<SOURCE, TARGET> extends AbstractValueConverterToCompatiblePojo<SOURCE, TARGET> {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractValueConverterToSimilarPojo.class);
 
   /** @see #handleNoGetterForSetter(PojoPropertyAccessorOneArg, Class, Object, Class) */
   private final Set<PojoPropertyAccessorOneArg> unmatchedSetters;
@@ -45,13 +49,11 @@ public abstract class AbstractValueConverterToSimilarPojo<SOURCE, TARGET>
   }
 
   @Override
-  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass,
-      Object sourceObject, Class<?> sourceClass) {
+  protected void handleNoGetterForSetter(PojoPropertyAccessorOneArg setter, Class<?> targetClass, Object sourceObject, Class<?> sourceClass) {
 
     boolean added = this.unmatchedSetters.add(setter);
     if (added) {
-      getLogger().warn("Could not set propert {} of {} because source object {} has no such property.",
-          setter.getName(), targetClass, sourceClass);
+      LOG.warn("Could not set propert {} of {} because source object {} has no such property.", setter.getName(), targetClass, sourceClass);
     }
   }
 }

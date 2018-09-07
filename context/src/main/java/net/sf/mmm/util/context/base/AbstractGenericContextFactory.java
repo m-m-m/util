@@ -3,7 +3,7 @@
 package net.sf.mmm.util.context.base;
 
 import net.sf.mmm.util.collection.base.HashMapFactory;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.context.api.GenericContextFactory;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 
@@ -13,8 +13,7 @@ import net.sf.mmm.util.context.api.MutableGenericContext;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public abstract class AbstractGenericContextFactory extends AbstractLoggableComponent
-    implements GenericContextFactory {
+public abstract class AbstractGenericContextFactory extends AbstractComponent implements GenericContextFactory {
 
   /**
    * The constructor.

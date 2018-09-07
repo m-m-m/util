@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.lang.api.SystemInformation;
 import net.sf.mmm.util.lang.api.SystemUtil;
 
@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.SystemUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class SystemUtilImpl extends AbstractLoggableComponent implements SystemUtil {
+public class SystemUtilImpl extends AbstractComponent implements SystemUtil {
 
   private static SystemUtil instance;
 

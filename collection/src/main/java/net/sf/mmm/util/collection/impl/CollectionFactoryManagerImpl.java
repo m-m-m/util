@@ -20,6 +20,9 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.TransferQueue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.api.MapFactory;
@@ -34,7 +37,7 @@ import net.sf.mmm.util.collection.base.LinkedListQueueFactory;
 import net.sf.mmm.util.collection.base.NavigableTreeMapFactory;
 import net.sf.mmm.util.collection.base.NavigableTreeSetFactory;
 import net.sf.mmm.util.collection.base.TreeSetFactory;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 
 /**
  * This is the default implementation of the {@link CollectionFactoryManager} interface.
@@ -43,7 +46,9 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
  * @since 1.0.1
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class CollectionFactoryManagerImpl extends AbstractLoggableComponent implements CollectionFactoryManager {
+public class CollectionFactoryManagerImpl extends AbstractComponent implements CollectionFactoryManager {
+
+  private static final Logger LOG = LoggerFactory.getLogger(CollectionFactoryManagerImpl.class);
 
   private static final Class<?>[] CAPACITY_CONSTRUCTOR_ARGS = new Class<?>[] { int.class };
 
@@ -80,16 +85,6 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
     registerMapFactory(ConcurrentHashMapFactory.INSTANCE);
     registerMapFactory(NavigableTreeMapFactory.INSTANCE);
     registerMapFactory(ConcurrentSkipListMapFactory.INSTANCE);
-
-    // ObservableList, ObservableSet and ObservableMap are only available since java 1.8,
-    // allow this class to work with java 1.7 as well...
-    // try {
-    // } catch (Throwable e) {
-    // // Deque not available before java6, ignore...
-    // getLogger().info("Deque is NOT available before java 6 - support disabled: " + e.getClass().getName() +
-    // ": "
-    // + e.getMessage());
-    // }
   }
 
   /**
@@ -126,14 +121,12 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   }
 
   /**
-   * This method registers the given {@code factory} using its {@link MapFactory#getMapInterface()
-   * map-interface}.
+   * This method registers the given {@code factory} using its {@link MapFactory#getMapInterface() map-interface}.
    *
    * @see #registerMapFactory(MapFactory, Class)
    *
    * @param factory is the {@link MapFactory} to register.
-   * @return the {@link MapFactory} that has been replaced with {@code factory} or {@code null} if none was
-   *         replaced.
+   * @return the {@link MapFactory} that has been replaced with {@code factory} or {@code null} if none was replaced.
    */
   protected MapFactory registerMapFactory(MapFactory factory) {
 
@@ -146,10 +139,10 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
    * @param <MAP> is the generic type of the {@code mapInterface}.
    * @param factory is the {@link MapFactory} to register.
    * @param mapInterface is the interface of the associated {@link Map}. It has to be
-   *        {@link Class#isAssignableFrom(Class) assignable from} the {@link MapFactory#getMapInterface()
-   *        map-interface} of the given {@code factory}.
-   * @return the {@link MapFactory} that was registered for the given {@code mapInterface} before and has now
-   *         been replaced with {@code factory} or {@code null} if none was replaced.
+   *        {@link Class#isAssignableFrom(Class) assignable from} the {@link MapFactory#getMapInterface() map-interface}
+   *        of the given {@code factory}.
+   * @return the {@link MapFactory} that was registered for the given {@code mapInterface} before and has now been
+   *         replaced with {@code factory} or {@code null} if none was replaced.
    */
   protected <MAP extends Map> MapFactory registerMapFactory(MapFactory<? extends MAP> factory, Class<MAP> mapInterface) {
 
@@ -157,14 +150,14 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
   }
 
   /**
-   * This method registers the given {@code factory} using its
-   * {@link CollectionFactory#getCollectionInterface() collection-interface}.
+   * This method registers the given {@code factory} using its {@link CollectionFactory#getCollectionInterface()
+   * collection-interface}.
    *
    * @see #registerCollectionFactory(CollectionFactory, Class)
    *
    * @param factory is the {@link CollectionFactory} to register.
-   * @return the {@link CollectionFactory} that has been replaced with {@code factory} or {@code null} if none
-   *         was replaced.
+   * @return the {@link CollectionFactory} that has been replaced with {@code factory} or {@code null} if none was
+   *         replaced.
    */
   protected CollectionFactory registerCollectionFactory(CollectionFactory factory) {
 
@@ -177,11 +170,10 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
    * @param <COLLECTION> is the generic type of the {@code collectionInterface}.
    * @param factory is the {@link CollectionFactory} to register.
    * @param collectionInterface is the interface of the associated {@link Collection}. It has to be
-   *        {@link Class#isAssignableFrom(Class) assignable from} the
-   *        {@link CollectionFactory#getCollectionInterface() collection-interface} of the given
-   *        {@code factory}.
-   * @return the {@link CollectionFactory} that was registered for the given {@code collectionInterface}
-   *         before and has now been replaced with {@code factory} or {@code null} if none was replaced.
+   *        {@link Class#isAssignableFrom(Class) assignable from} the {@link CollectionFactory#getCollectionInterface()
+   *        collection-interface} of the given {@code factory}.
+   * @return the {@link CollectionFactory} that was registered for the given {@code collectionInterface} before and has
+   *         now been replaced with {@code factory} or {@code null} if none was replaced.
    */
   protected <COLLECTION extends Collection> CollectionFactory registerCollectionFactory(CollectionFactory<? extends COLLECTION> factory,
       Class<COLLECTION> collectionInterface) {
@@ -239,7 +231,7 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
           Constructor<C> constructor = type.getConstructor(CAPACITY_CONSTRUCTOR_ARGS);
           return constructor.newInstance(capacity);
         } catch (Exception e) {
-          getLogger().debug("Failed to create collection via capacitory constructor.", e);
+          LOG.debug("Failed to create collection via capacitory constructor.", e);
         }
       }
       return type.newInstance();
@@ -333,7 +325,7 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
           Constructor<C> constructor = type.getConstructor(CAPACITY_CONSTRUCTOR_ARGS);
           return constructor.newInstance(capacity);
         } catch (Exception e) {
-          getLogger().debug("Failed to create map via capacitory constructor.", e);
+          LOG.debug("Failed to create map via capacitory constructor.", e);
         }
       }
       return type.newInstance();
@@ -344,8 +336,8 @@ public class CollectionFactoryManagerImpl extends AbstractLoggableComponent impl
 
   /**
    * @param type {@link Class} reflecting the {@link Map}.
-   * @return to most specific {@link Map} {@link Class#isInterface() interface}
-   *         {@link Class#isAssignableFrom(Class) assignable from} the given {@code type}.
+   * @return to most specific {@link Map} {@link Class#isInterface() interface} {@link Class#isAssignableFrom(Class)
+   *         assignable from} the given {@code type}.
    */
   protected Class<? extends Map> findMapInterface(Class<? extends Map> type) {
 

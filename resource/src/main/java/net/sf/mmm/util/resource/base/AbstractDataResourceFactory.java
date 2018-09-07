@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.DataResourceFactory;
 import net.sf.mmm.util.resource.api.ResourceUri;
@@ -14,8 +14,7 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-public abstract class AbstractDataResourceFactory extends AbstractLoggableComponent
-    implements DataResourceFactory {
+public abstract class AbstractDataResourceFactory extends AbstractComponent implements DataResourceFactory {
 
   /**
    * The constructor.

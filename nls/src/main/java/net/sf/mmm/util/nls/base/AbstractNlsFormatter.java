@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
@@ -20,7 +20,7 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatter<O> extends AbstractLoggableComponent implements NlsFormatter<O> {
+public abstract class AbstractNlsFormatter<O> extends AbstractComponent implements NlsFormatter<O> {
 
   /**
    * The constructor.

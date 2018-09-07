@@ -5,7 +5,7 @@ package net.sf.mmm.util.file.base;
 import java.util.Locale;
 import java.util.Objects;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.file.api.FileUtilLimited;
 import net.sf.mmm.util.resource.api.ResourcePath;
 import net.sf.mmm.util.resource.api.ResourcePathNode;
@@ -18,7 +18,7 @@ import net.sf.mmm.util.resource.api.ResourcePathNode;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public class FileUtilLimitedImpl extends AbstractLoggableComponent implements FileUtilLimited {
+public class FileUtilLimitedImpl extends AbstractComponent implements FileUtilLimited {
 
   private static FileUtilLimited instance;
 

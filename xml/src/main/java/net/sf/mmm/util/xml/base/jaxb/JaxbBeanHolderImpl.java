@@ -5,7 +5,9 @@ package net.sf.mmm.util.xml.base.jaxb;
 import java.io.Flushable;
 import java.util.Date;
 
-import net.sf.mmm.util.component.base.AbstractLoggableObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.resource.api.DataResource;
 
@@ -17,8 +19,9 @@ import net.sf.mmm.util.resource.api.DataResource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggableObject
-    implements JaxbBeanHolder<VIEW>, Flushable {
+public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> implements JaxbBeanHolder<VIEW>, Flushable {
+
+  private static final Logger LOG = LoggerFactory.getLogger(JaxbBeanHolderImpl.class);
 
   /** The {@link DataResource} where the bean was loaded from. */
   private final DataResource dataResource;
@@ -119,7 +122,7 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> extends AbstractLoggabl
         }
       }
       if (reload) {
-        getLogger().debug("Releoading configuration from " + this.dataResource.getUri());
+        LOG.debug("Releoading configuration from {}", this.dataResource.getUri());
         this.bean = this.beanMapper.loadXml(this.dataResource);
         this.modificationDate = this.dataResource.getLastModificationDate();
       }

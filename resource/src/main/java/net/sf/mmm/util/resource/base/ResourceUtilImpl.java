@@ -10,7 +10,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
@@ -24,7 +24,7 @@ import net.sf.mmm.util.resource.api.ResourceUtil;
  * @author hohwille
  * @since 7.6.0
  */
-public class ResourceUtilImpl extends AbstractLoggableComponent implements ResourceUtil {
+public class ResourceUtilImpl extends AbstractComponent implements ResourceUtil {
 
   private static ResourceUtil instance;
 

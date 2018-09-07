@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.base;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
 
@@ -20,6 +23,8 @@ import net.sf.mmm.util.reflect.api.InstantiationFailedException;
  * @since 1.1.0
  */
 public class GuessingPojoFactory extends DefaultPojoFactory {
+
+  private static final Logger LOG = LoggerFactory.getLogger(GuessingPojoFactory.class);
 
   /** The conventional suffix for an implementation class. */
   private static final String IMPL_CLASS_SUFFIX = "Impl";
@@ -77,7 +82,7 @@ public class GuessingPojoFactory extends DefaultPojoFactory {
         if (pojoInterface.isAssignableFrom(implementation)) {
           pojo = pojoInterface.cast(newInstanceForClass(implementation));
         } else {
-          getLogger().warn("Class '" + implementation + "' does NOT implement '" + pojoInterface + "'!");
+          LOG.warn("Class '" + implementation + "' does NOT implement '" + pojoInterface + "'!");
         }
       }
     }

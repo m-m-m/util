@@ -2,7 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.nls.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.impl.NlsDependenciesImpl;
 
 /**
@@ -11,7 +14,9 @@ import net.sf.mmm.util.nls.impl.NlsDependenciesImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public abstract class AbstractNlsDependencies extends AbstractLoggableComponent implements NlsDependencies {
+public abstract class AbstractNlsDependencies extends AbstractComponent implements NlsDependencies {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractNlsDependencies.class);
 
   private static AbstractNlsDependencies instance;
 
@@ -45,7 +50,7 @@ public abstract class AbstractNlsDependencies extends AbstractLoggableComponent 
       if (instance == null) {
         instance = this;
       } else if (instance != this) {
-        getLogger().warn("Duplicate instances {} and {} (getInstance() vs. IoC)", instance, this);
+        LOG.warn("Duplicate instances {} and {} (getInstance() vs. IoC)", instance, this);
       }
     }
   }

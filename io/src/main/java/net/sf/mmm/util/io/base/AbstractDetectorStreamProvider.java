@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.io.api.DetectorInputStream;
 import net.sf.mmm.util.io.api.DetectorOutputStream;
 import net.sf.mmm.util.io.api.DetectorStreamProvider;
@@ -24,7 +24,7 @@ import net.sf.mmm.util.pool.base.NoByteArrayPool;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractDetectorStreamProvider extends AbstractLoggableComponent implements DetectorStreamProvider {
+public abstract class AbstractDetectorStreamProvider extends AbstractComponent implements DetectorStreamProvider {
 
   private List<DetectorStreamProcessorFactory> processorFactoryList;
 
@@ -39,8 +39,8 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggableCom
   }
 
   /**
-   * This method gets the {@link List} of {@link #addProcessorFactory(DetectorStreamProcessorFactory)
-   * registered} {@link DetectorStreamProcessorFactory}-instances.
+   * This method gets the {@link List} of {@link #addProcessorFactory(DetectorStreamProcessorFactory) registered}
+   * {@link DetectorStreamProcessorFactory}-instances.
    *
    * @return the processorFactoryList
    */
@@ -65,11 +65,11 @@ public abstract class AbstractDetectorStreamProvider extends AbstractLoggableCom
   }
 
   /**
-   * This method sets the complete {@link List} of {@link DetectorStreamProcessorFactory}-instances. Do NOT
-   * call this method after {@link #addProcessorFactory(DetectorStreamProcessorFactory)} has been called.
+   * This method sets the complete {@link List} of {@link DetectorStreamProcessorFactory}-instances. Do NOT call this
+   * method after {@link #addProcessorFactory(DetectorStreamProcessorFactory)} has been called.
    *
-   * @param processorFactoryList is the complete {@link List} of {@link DetectorStreamProcessorFactory}
-   *        -instances to set.
+   * @param processorFactoryList is the complete {@link List} of {@link DetectorStreamProcessorFactory} -instances to
+   *        set.
    */
   public void setProcessorFactoryList(List<DetectorStreamProcessorFactory> processorFactoryList) {
 

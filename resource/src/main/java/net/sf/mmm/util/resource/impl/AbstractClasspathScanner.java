@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.resource.impl;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.resource.api.ClasspathScanner;
 
 /**
@@ -11,7 +11,7 @@ import net.sf.mmm.util.resource.api.ClasspathScanner;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.3.0
  */
-public abstract class AbstractClasspathScanner extends AbstractLoggableComponent implements ClasspathScanner {
+public abstract class AbstractClasspathScanner extends AbstractComponent implements ClasspathScanner {
 
   private static ClasspathScanner instance;
 

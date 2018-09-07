@@ -9,7 +9,7 @@ import net.sf.mmm.util.cli.api.CliParserBuilder;
 import net.sf.mmm.util.cli.api.CliParserExcepiton;
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StringUtilImpl;
@@ -35,8 +35,7 @@ import net.sf.mmm.util.value.impl.DefaultComposedValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
-    implements CliParserBuilder, CliParserDependencies {
+public abstract class AbstractCliParserBuilder extends AbstractComponent implements CliParserBuilder, CliParserDependencies {
 
   private PojoDescriptorBuilderFactory descriptorBuilderFactory;
 
@@ -112,8 +111,7 @@ public abstract class AbstractCliParserBuilder extends AbstractLoggableComponent
       throw new NlsNullPointerException("pojo");
     }
     try {
-      CliState state = new CliState(pojo.getClass(), this.descriptorBuilderFactory, getLogger(),
-          getReflectionUtil(), getAnnotationUtil());
+      CliState state = new CliState(pojo.getClass(), this.descriptorBuilderFactory, getReflectionUtil(), getAnnotationUtil());
       CliParser parser = buildInternal(pojo, state);
       return parser;
     } catch (Exception e) {

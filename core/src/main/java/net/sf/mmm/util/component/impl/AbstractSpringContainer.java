@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.api.ResourceAmbiguousException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.ObjectDisposedException;
 
 /**
@@ -22,7 +22,7 @@ import net.sf.mmm.util.exception.api.ObjectDisposedException;
  * @since 3.1.0
  */
 @Deprecated
-public abstract class AbstractSpringContainer extends AbstractLoggableComponent implements IocContainer {
+public abstract class AbstractSpringContainer extends AbstractComponent implements IocContainer {
 
   /** The {@link ConfigurableApplicationContext} to delegate to. */
   private ApplicationContext applicationContext;

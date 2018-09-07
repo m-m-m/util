@@ -2,7 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
@@ -13,7 +16,9 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLoggableComponent implements PojoDescriptorBuilderFactory {
+public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractComponent implements PojoDescriptorBuilderFactory {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractPojoDescriptorBuilderFactory.class);
 
   private static AbstractPojoDescriptorBuilderFactory instance;
 
@@ -31,7 +36,7 @@ public abstract class AbstractPojoDescriptorBuilderFactory extends AbstractLogga
   protected static void setInstance(AbstractPojoDescriptorBuilderFactory instance) {
 
     if (AbstractPojoDescriptorBuilderFactory.instance != null) {
-      instance.getLogger().warn("Duplicate instantiation of PojoDescriptorBuilderFactory.");
+      LOG.warn("Duplicate instantiation of PojoDescriptorBuilderFactory.");
     }
     AbstractPojoDescriptorBuilderFactory.instance = instance;
   }

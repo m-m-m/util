@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.DatatypeDetector;
 
@@ -22,7 +22,7 @@ import net.sf.mmm.util.lang.api.DatatypeDetector;
  * @since 4.0.0
  */
 @Deprecated
-public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent implements DatatypeDetector {
+public abstract class AbstractDatatypeDetector extends AbstractComponent implements DatatypeDetector {
 
   private final Set<String> customDatatypeSet;
 
@@ -52,8 +52,8 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
   }
 
   /**
-   * Like {@link #registerCustomDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can be
-   * used to prevent compile-time dependencies on datatype.
+   * Like {@link #registerCustomDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can be used to
+   * prevent compile-time dependencies on datatype.
    *
    * @see #registerCustomDatatype(Class)
    *
@@ -78,8 +78,8 @@ public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent
   }
 
   /**
-   * Like {@link #registerStandardDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can
-   * be used to prevent compile-time dependencies on datatype.
+   * Like {@link #registerStandardDatatype(Class)} but via {@link Class#getName() fully qualified name}. Can be used to
+   * prevent compile-time dependencies on datatype.
    *
    * @see #registerStandardDatatype(Class)
    *

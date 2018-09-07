@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
@@ -18,7 +18,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class ReflectionUtilLimitedImpl extends AbstractLoggableComponent implements ReflectionUtilLimited {
+public class ReflectionUtilLimitedImpl extends AbstractComponent implements ReflectionUtilLimited {
 
   private static final ReflectionUtilLimited INSTANCE = new ReflectionUtilLimitedImpl();
 

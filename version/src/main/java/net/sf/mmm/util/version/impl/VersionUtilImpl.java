@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.filter.api.CharFilter;
@@ -37,7 +37,7 @@ import net.sf.mmm.util.version.api.VersionUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class VersionUtilImpl extends AbstractLoggableComponent implements VersionUtil {
+public class VersionUtilImpl extends AbstractComponent implements VersionUtil {
 
   /** A {@link CharFilter} that accepts all but ASCII letters. */
   private static final CharFilter INFIX_FILTER = new ConjunctionCharFilter(Conjunction.NOR, CharFilter.ASCII_LETTER_FILTER,
@@ -69,12 +69,11 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
 
   /**
    * This method gets the singleton instance of this {@link VersionUtilImpl}. <br>
-   * This design is the best compromise between easy access (via this indirection you have direct, static
-   * access to all offered functionality) and IoC-style design which allows extension and customization. <br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
-   * the IoC container-framework of your choice. To wire up the dependent components everything is properly
-   * annotated using annotations (JSR-250 and JSR-330). If your container does NOT support this, you should
-   * consider using a better one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static access to all
+   * offered functionality) and IoC-style design which allows extension and customization. <br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via the IoC
+   * container-framework of your choice. To wire up the dependent components everything is properly annotated using
+   * annotations (JSR-250 and JSR-330). If your container does NOT support this, you should consider using a better one.
    *
    * @return the singleton instance.
    */
@@ -519,8 +518,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   }
 
   /**
-   * This inner class holds the status used to determine if a
-   * {@link VersionUtilImpl#createFormatter(String, boolean) formatPattern} is {@link #isStrict() strict}.
+   * This inner class holds the status used to determine if a {@link VersionUtilImpl#createFormatter(String, boolean)
+   * formatPattern} is {@link #isStrict() strict}.
    */
   protected static class FormatPatternStatus {
 

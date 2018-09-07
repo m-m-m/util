@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.value.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.value.api.ValueConverter;
 
@@ -16,8 +16,7 @@ import net.sf.mmm.util.value.api.ValueConverter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> extends AbstractLoggableComponent
-    implements ValueConverter<SOURCE, TARGET> {
+public abstract class AbstractSimpleValueConverter<SOURCE, TARGET> extends AbstractComponent implements ValueConverter<SOURCE, TARGET> {
 
   /**
    * The constructor.

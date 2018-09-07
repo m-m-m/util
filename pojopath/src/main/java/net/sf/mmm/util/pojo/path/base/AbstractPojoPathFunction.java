@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.path.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.path.api.PojoPathContext;
 import net.sf.mmm.util.pojo.path.api.PojoPathFunction;
@@ -17,8 +17,7 @@ import net.sf.mmm.util.pojo.path.api.PojoPathNamedFunction;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractLoggableComponent
-    implements PojoPathFunction<IN, VALUE> {
+public abstract class AbstractPojoPathFunction<IN, VALUE> extends AbstractComponent implements PojoPathFunction<IN, VALUE> {
 
   /**
    * The constructor.

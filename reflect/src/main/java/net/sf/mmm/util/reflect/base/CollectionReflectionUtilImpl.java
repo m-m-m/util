@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 
@@ -21,11 +24,13 @@ import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public class CollectionReflectionUtilImpl extends AbstractLoggableComponent implements CollectionReflectionUtil {
+public class CollectionReflectionUtilImpl extends AbstractComponent implements CollectionReflectionUtil {
+
+  private static final Logger LOG = LoggerFactory.getLogger(CollectionReflectionUtilImpl.class);
 
   /**
-   * The default value for the maximum growth of the {@link #getSize(Object) size} of an array or {@link List}
-   * : {@value}
+   * The default value for the maximum growth of the {@link #getSize(Object) size} of an array or {@link List} :
+   * {@value}
    */
   public static final int DEFAULT_MAXIMUM_LIST_GROWTH = 128;
 
@@ -192,9 +197,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
     }
     if (type.isArray()) {
       if (growth > 0) {
-        if (getLogger().isTraceEnabled()) {
-          getLogger().trace("Increasing array size by {}", growth);
-        }
+        LOG.trace("Increasing array size by {}", Integer.valueOf(growth));
         Object newArray = Array.newInstance(type.getComponentType(), index + 1);
         System.arraycopy(arrayOrList, 0, newArray, 0, size);
         Array.set(newArray, index, item);
@@ -209,9 +212,7 @@ public class CollectionReflectionUtilImpl extends AbstractLoggableComponent impl
       // arrayOrList is list...
       // increase size of list
       if (growth > 0) {
-        if (getLogger().isTraceEnabled()) {
-          getLogger().trace("Increasing list size by {}", growth);
-        }
+        LOG.trace("Increasing list size by {}", Integer.valueOf(growth));
         growth--;
         while (growth > 0) {
           list.add(null);

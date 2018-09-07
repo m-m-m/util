@@ -13,6 +13,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.file.api.FileAccessClass;
 import net.sf.mmm.util.file.api.FileAlreadyExistsException;
 import net.sf.mmm.util.file.api.FileAttributeModificationFailedException;
@@ -35,6 +38,8 @@ import net.sf.mmm.util.resource.api.ResourcePathNode;
  * @since 1.0.1
  */
 public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
+
+  private static final Logger LOG = LoggerFactory.getLogger(FileUtilImpl.class);
 
   private static FileUtil instance;
 
@@ -219,12 +224,12 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   /**
    * This method copies the file or directory given by {@code source} into the given {@code destination}. <br>
    * <b>ATTENTION:</b><br>
-   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the
-   * {@code destination} has to point to the final place where the copy should appear rather than the
-   * directory where the copy will be located in. <br>
+   * In order to allow giving the copy of {@code source} a new {@link File#getName() name}, the {@code destination} has
+   * to point to the final place where the copy should appear rather than the directory where the copy will be located
+   * in. <br>
    * <br>
-   * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory
-   * "/tmp". The copy will have the same name "foo".
+   * E.g. the following code copies the folder "foo" located in "/usr/local" recursively to the directory "/tmp". The
+   * copy will have the same name "foo".
    *
    * <pre>
    * {@link File} source = new {@link File}("/usr/local/foo");
@@ -234,9 +239,8 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
    *
    * @param source is the file or directory to copy.
    * @param destination is the final place where the copy should appear.
-   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File) decides} which files should be
-   *        copied. Only {@link FileFilter#accept(File) accepted} files and directories are copied, others
-   *        will be ignored.
+   * @param filter is a {@link FileFilter} that {@link FileFilter#accept(File) decides} which files should be copied.
+   *        Only {@link FileFilter#accept(File) accepted} files and directories are copied, others will be ignored.
    */
   private void copyRecursive(File source, File destination, FileFilter filter) {
 
@@ -308,7 +312,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     // retry...
     deleted = file.delete();
     if (deleted) {
-      getLogger().debug("Deletion failed and succeeded after retry for file {}", file);
+      LOG.debug("Deletion failed and succeeded after retry for file {}", file);
       return true;
     }
     throw new FileDeletionFailedException(file);
@@ -332,7 +336,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
         } else {
           boolean deleted = path.delete();
           if (!deleted) {
-            getLogger().debug("Directory {} was not deleted.", path);
+            LOG.debug("Directory {} was not deleted.", path);
           }
         }
       } else if ((filter == null) || (filter.accept(path))) {
@@ -363,7 +367,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
           } else {
             boolean deleted = file.delete();
             if (!deleted) {
-              getLogger().trace("Directory {} was not deleted.", file);
+              LOG.trace("Directory {} was not deleted.", file);
             }
           }
         } else if ((filter == null) || (filter.accept(file))) {
@@ -405,12 +409,11 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   /**
    * This method adds all files matching with the given {@code path} and {@code fileType} to the {@code list}.
    *
-   * @param cwd is the current working directory and should therefore point to an existing
-   *        {@link File#isDirectory() directory}. If the given {@code path} is NOT {@link File#isAbsolute()
-   *        absolute} it is interpreted relative to this directory.
-   * @param segments is the path the files to collect must match. If this path is NOT {@link File#isAbsolute()
-   *        absolute} it is interpreted relative to the {@link File#isDirectory() directory} given by
-   *        {@code cwd}.
+   * @param cwd is the current working directory and should therefore point to an existing {@link File#isDirectory()
+   *        directory}. If the given {@code path} is NOT {@link File#isAbsolute() absolute} it is interpreted relative
+   *        to this directory.
+   * @param segments is the path the files to collect must match. If this path is NOT {@link File#isAbsolute() absolute}
+   *        it is interpreted relative to the {@link File#isDirectory() directory} given by {@code cwd}.
    * @param segmentIndex is the current index in {@code pathChars} for the collection process.
    * @param fileType is the type of the files to collect or {@code null} if files of any type are acceptable.
    * @param list is the {@link Collection} where to {@link Collection#add(Object) add} the collected files.

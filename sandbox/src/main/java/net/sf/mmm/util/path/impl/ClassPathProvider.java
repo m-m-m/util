@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.path.api.PathProvider;
 import net.sf.mmm.util.path.api.PathUri;
 
@@ -20,7 +20,7 @@ import net.sf.mmm.util.path.api.PathUri;
  * @since 1.0.0
  */
 @Named
-public class ClassPathProvider extends AbstractLoggableComponent implements PathProvider {
+public class ClassPathProvider extends AbstractComponent implements PathProvider {
 
   /**
    * The constructor.

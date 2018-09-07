@@ -16,8 +16,9 @@ import java.util.ResourceBundle;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.nls.base.NlsBundleHelper;
@@ -30,7 +31,9 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent implements NlsResourceBundleLocator {
+public class NlsResourceBundleLocatorImpl extends AbstractComponent implements NlsResourceBundleLocator {
+
+  private static final Logger LOG = LoggerFactory.getLogger(NlsResourceBundleLocatorImpl.class);
 
   private List<ResourceBundle> nlsBundles;
 
@@ -111,7 +114,6 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
 
   private List<ResourceBundle> loadNlsBundles() {
 
-    Logger logger = getLogger();
     List<ResourceBundle> bundles = new ArrayList<>();
     ClassLoader ccl = Thread.currentThread().getContextClassLoader();
     Enumeration<URL> resourceUrlEnumeration;
@@ -122,14 +124,14 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
     }
     while (resourceUrlEnumeration.hasMoreElements()) {
       URL url = resourceUrlEnumeration.nextElement();
-      logger.trace("Loading {}", url);
+      LOG.trace("Loading {}", url);
       try (InputStream inStream = url.openStream(); InputStreamReader isr = new InputStreamReader(inStream); BufferedReader reader = new BufferedReader(isr)) {
         boolean noEntryInBundleResource = true;
         String line = reader.readLine();
         while (line != null) {
           line = line.trim();
           if (line.length() > 0) {
-            ResourceBundle bundleInstance = loadNlsBundle(logger, url, line);
+            ResourceBundle bundleInstance = loadNlsBundle(LOG, url, line);
             if (bundleInstance != null) {
               bundles.add(bundleInstance);
               noEntryInBundleResource = false;
@@ -138,7 +140,7 @@ public class NlsResourceBundleLocatorImpl extends AbstractLoggableComponent impl
           line = reader.readLine();
         }
         if (noEntryInBundleResource) {
-          logger.error("Illegal bundle declaration {}: no entry!", url);
+          LOG.error("Illegal bundle declaration {}: no entry!", url);
         }
       } catch (IOException e) {
         throw new IllegalStateException("Error writing to Appendable.", e);

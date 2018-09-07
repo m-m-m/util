@@ -4,7 +4,10 @@ package net.sf.mmm.util.nls.base;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.nls.api.NlsArgument;
@@ -20,13 +23,15 @@ import net.sf.mmm.util.text.base.JustificationBuilderImpl;
 
 /**
  * This is the abstract base implementation of the {@link NlsFormatterManager} interface. <br>
- * You should extend this class rather than directly implementing the {@link NlsFormatterManager} interface to
- * gain compatibility with further releases.
+ * You should extend this class rather than directly implementing the {@link NlsFormatterManager} interface to gain
+ * compatibility with further releases.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public abstract class AbstractNlsFormatterManager extends AbstractLoggableComponent implements NlsFormatterManager, NlsArgumentParser {
+public abstract class AbstractNlsFormatterManager extends AbstractComponent implements NlsFormatterManager, NlsArgumentParser {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractNlsFormatterManager.class);
 
   /** A char filter that accepts everything except ',' and '}'. */
   protected static final CharFilter NO_COMMA_OR_END_EXPRESSION = new ListCharFilter(false, NlsArgumentParser.FORMAT_SEPARATOR,
@@ -70,7 +75,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
       if (instance == null) {
         instance = this;
       } else if (instance != this) {
-        getLogger().warn("Duplicate instances {} and {} (getInstance() vs. IoC)", instance, this);
+        LOG.warn("Duplicate instances {} and {} (getInstance() vs. IoC)", instance, this);
       }
     }
   }
@@ -119,8 +124,7 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
    * {@link AbstractNlsFormatterPlugin#getStyle() style} from the given scanner.
    *
    * @param formatType is the type to be formatted.
-   * @param scanner is the current {@link CharSequenceScanner} for parsing the style defining details of
-   *        formatting.
+   * @param scanner is the current {@link CharSequenceScanner} for parsing the style defining details of formatting.
    * @return the according {@link NlsFormatter}.
    */
   protected NlsFormatterPlugin<?> getSubFormatter(String formatType, CharSequenceScanner scanner) {
@@ -139,8 +143,8 @@ public abstract class AbstractNlsFormatterManager extends AbstractLoggableCompon
   }
 
   /**
-   * This method gets the {@link JustificationBuilder} used to {@link JustificationBuilder#build(String)
-   * build} {@link Justification}s.
+   * This method gets the {@link JustificationBuilder} used to {@link JustificationBuilder#build(String) build}
+   * {@link Justification}s.
    *
    * @return the {@link JustificationBuilder}.
    */

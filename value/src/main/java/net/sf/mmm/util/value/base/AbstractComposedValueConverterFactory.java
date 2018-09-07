@@ -4,7 +4,7 @@ package net.sf.mmm.util.value.base;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 import net.sf.mmm.util.value.api.ComposedValueConverterFactory;
 
@@ -14,8 +14,7 @@ import net.sf.mmm.util.value.api.ComposedValueConverterFactory;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public abstract class AbstractComposedValueConverterFactory extends AbstractLoggableComponent
-    implements ComposedValueConverterFactory {
+public abstract class AbstractComposedValueConverterFactory extends AbstractComponent implements ComposedValueConverterFactory {
 
   private ComposedValueConverter defaultConverter;
 

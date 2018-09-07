@@ -19,7 +19,10 @@ import javax.xml.bind.ValidationEventLocator;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.BrowsableResource;
@@ -34,23 +37,24 @@ import net.sf.mmm.util.xml.base.XmlInvalidException;
 
 /**
  * This class is a little helper for the simple but common use of JAXB where you simply want to
- * {@link #loadXml(InputStream, Object) read} or {@link #saveXml(Object, OutputStream) write} the XML for a
- * single JAXB annotated java bean. <br>
+ * {@link #loadXml(InputStream, Object) read} or {@link #saveXml(Object, OutputStream) write} the XML for a single JAXB
+ * annotated java bean. <br>
  * <b>ATTENTION:</b><br>
- * This class uses an {@code IDValidator} to validate duplicate or unresolved
- * {@link javax.xml.bind.annotation.XmlID}s on {@link #getOrCreateUnmarshaller() un-marshaling}. This is
- * unfortunately not the default for JAXB and also NOT part of the JAXB-API. So this feature depends on the
- * actual JAXB implementation you are using. We support the default implementation build into the JRE
- * (com.sun.internal.xml.bind). However if {@code jaxb-impl} (com.sun.xml.bind) is NOT on your classpath it
- * will replace the default implementation. For this reason we also support {@code jaxb-impl} as fallback.
- * Other implementations are NOT supported (everything should work but ID-validation is turned off then).
+ * This class uses an {@code IDValidator} to validate duplicate or unresolved {@link javax.xml.bind.annotation.XmlID}s
+ * on {@link #getOrCreateUnmarshaller() un-marshaling}. This is unfortunately not the default for JAXB and also NOT part
+ * of the JAXB-API. So this feature depends on the actual JAXB implementation you are using. We support the default
+ * implementation build into the JRE (com.sun.internal.xml.bind). However if {@code jaxb-impl} (com.sun.xml.bind) is NOT
+ * on your classpath it will replace the default implementation. For this reason we also support {@code jaxb-impl} as
+ * fallback. Other implementations are NOT supported (everything should work but ID-validation is turned off then).
  *
  * @param <T> is the generic type of the JAXB bean.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
 @SuppressWarnings("restriction")
-public class XmlBeanMapper<T> extends AbstractLoggableComponent implements ValidationEventHandler {
+public class XmlBeanMapper<T> extends AbstractComponent implements ValidationEventHandler {
+
+  private static final Logger LOG = LoggerFactory.getLogger(XmlBeanMapper.class);
 
   private final JAXBContext jaxbContext;
 
@@ -130,8 +134,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * @return {@code true} if undefined tags and attributes should be ignored (may be useful for
-   *         compatibility), {@code false} if they shall cause an exception (default is {@code false}).
+   * @return {@code true} if undefined tags and attributes should be ignored (may be useful for compatibility),
+   *         {@code false} if they shall cause an exception (default is {@code false}).
    */
   protected boolean isIgnoreUndefinedNodes() {
 
@@ -139,8 +143,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * @return {@code true} if {@link #loadXml(DataResource)} should support XIncludes when reading the XML,
-   *         {@code false} otherwise.
+   * @return {@code true} if {@link #loadXml(DataResource)} should support XIncludes when reading the XML, {@code false}
+   *         otherwise.
    */
   public boolean isXIncludeAware() {
 
@@ -156,8 +160,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method gets a {@link Marshaller} instance. This method potentially allows reusing the
-   * {@link Marshaller} (if it is thread-safe).
+   * This method gets a {@link Marshaller} instance. This method potentially allows reusing the {@link Marshaller} (if
+   * it is thread-safe).
    *
    * @return the {@link Marshaller}.
    */
@@ -173,8 +177,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method gets a {@link Marshaller} instance. This method potentially allows reusing the
-   * {@link Marshaller} (if it is thread-safe).
+   * This method gets a {@link Marshaller} instance. This method potentially allows reusing the {@link Marshaller} (if
+   * it is thread-safe).
    *
    * @return the {@link Unmarshaller}.
    */
@@ -187,10 +191,10 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
         unmarshaller.setProperty(com.sun.xml.internal.bind.IDResolver.class.getName(), new InternalValidatingIdResolver());
       } catch (Throwable e) {
         try {
-          getLogger().debug("No default JAXB implementation found ({0})- trying jaxb-impl (com.sun.xml.bind).", e.toString());
+          LOG.debug("No default JAXB implementation found ({0})- trying jaxb-impl (com.sun.xml.bind).", e.toString());
           unmarshaller.setProperty("com.sun.xml.bind.IDResolver", new ExternalValidatingIdResolver());
         } catch (Exception e2) {
-          getLogger().error("ID-validation will not work! Please check your JAXB implementation!", e2);
+          LOG.error("ID-validation will not work! Please check your JAXB implementation!", e2);
         }
       }
       return unmarshaller;
@@ -208,8 +212,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   }
 
   /**
-   * This method is invoked after the {@code jaxbBean} has been loaded and before it is saved. It does nothing
-   * by default but can be overridden to implement custom validation logic.
+   * This method is invoked after the {@code jaxbBean} has been loaded and before it is saved. It does nothing by
+   * default but can be overridden to implement custom validation logic.
    *
    * @param jaxbBean is the JAXB bean to validate.
    */
@@ -223,8 +227,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
    *
    * @param inputStream is the {@link InputStream} with the XML to parse.
    * @return the parsed XML converted to the according JAXB-bean.
-   * @param source describes the source of the invalid XML. Typically this will be the filename where the XML
-   *        was read from. It is used in in the exception message. This will help to find the problem easier.
+   * @param source describes the source of the invalid XML. Typically this will be the filename where the XML was read
+   *        from. It is used in in the exception message. This will help to find the problem easier.
    */
   public T loadXml(InputStream inputStream, Object source) {
 
@@ -241,8 +245,7 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
   /**
    * This method loads the JAXB-bean as XML from the given {@code location} .
    *
-   * @param locationUrl is the location URL for the {@link DataResource resource} pointing to the XML to
-   *        parse.
+   * @param locationUrl is the location URL for the {@link DataResource resource} pointing to the XML to parse.
    * @return the parsed XML converted to the according JAXB-bean.
    */
   public T loadXml(String locationUrl) {
@@ -341,8 +344,8 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
    * This method saves the given {@code jaxbBean} as XML to the given {@code locationUrl}. <br>
    *
    * @param jaxbBean is the JAXB-bean to save as XML.
-   * @param locationUrl is the location URL for the {@link BrowsableResource resource} where to write the XML
-   *        to. Typically a file-URL.
+   * @param locationUrl is the location URL for the {@link BrowsableResource resource} where to write the XML to.
+   *        Typically a file-URL.
    */
   public void saveXml(T jaxbBean, String locationUrl) {
 
@@ -371,9 +374,9 @@ public class XmlBeanMapper<T> extends AbstractLoggableComponent implements Valid
     switch (event.getSeverity()) {
       case ValidationEvent.WARNING:
         if (exception == null) {
-          getLogger().warn(message);
+          LOG.warn(message);
         } else {
-          getLogger().warn(message, exception);
+          LOG.warn(message, exception);
         }
         break;
       case ValidationEvent.ERROR:

@@ -2,7 +2,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.lang.api.EnvironmentDetector;
 
 /**
@@ -13,7 +16,9 @@ import net.sf.mmm.util.lang.api.EnvironmentDetector;
  * @since 4.0.0
  */
 @Deprecated
-public abstract class AbstractEnvironmentDetector extends AbstractLoggableComponent implements EnvironmentDetector {
+public abstract class AbstractEnvironmentDetector extends AbstractComponent implements EnvironmentDetector {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractEnvironmentDetector.class);
 
   /**
    * The constructor.
@@ -51,9 +56,7 @@ public abstract class AbstractEnvironmentDetector extends AbstractLoggableCompon
    */
   protected void logEnvironmentStatus() {
 
-    if (getLogger().isInfoEnabled()) {
-      getLogger().info("You are running in {} mode", getEnvironmentType());
-    }
+    LOG.info("You are running in {} mode", getEnvironmentType());
   }
 
 }

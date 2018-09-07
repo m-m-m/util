@@ -5,6 +5,9 @@ package net.sf.mmm.util.nls.base;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This class is the implementation of the {@link net.sf.mmm.util.nls.api.NlsTemplate} interface. It uses
  * {@link ResourceBundle}s for localization.
@@ -13,6 +16,8 @@ import java.util.ResourceBundle;
  * @since 2.0.0 (moved, 1.0.0)
  */
 public class NlsTemplateImpl extends AbstractNlsTemplate {
+
+  private static final Logger LOG = LoggerFactory.getLogger(NlsTemplateImpl.class);
 
   private static final long serialVersionUID = -312035648040124881L;
 
@@ -83,7 +88,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   protected String translateFallback(Exception e) {
 
     String messageId = this.name + ":" + this.key;
-    getLogger().warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
+    LOG.warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
     return translateFallback(messageId);
   }
 

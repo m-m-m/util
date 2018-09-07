@@ -22,13 +22,13 @@ import net.sf.mmm.util.value.api.ValueOutOfRangeException;
 
 /**
  * This is the implementation of {@link PeriodicRefresher}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @Singleton
 @Named
-public class PeriodicRefresherImpl extends AbstractLoggableComponent implements PeriodicRefresher,
+public class PeriodicRefresherImpl extends AbstractComponent implements PeriodicRefresher,
     Runnable, Closeable {
 
   /** The default {@link #setRefreshDelayInSeconds(int) refresh-delay}. */
@@ -89,7 +89,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
       throw new NlsIllegalStateException();
     }
     if (!this.active) {
-      getLogger().info("starting " + getThreadName() + "...");
+      LOG.info("starting " + getThreadName() + "...");
       Thread thread = new Thread(this);
       thread.setName(getThreadName());
       this.executor.execute(thread);
@@ -121,7 +121,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
 
   /**
    * This method gets the thread-name.
-   * 
+   *
    * @return the thread-name for debugging.
    */
   protected String getThreadName() {
@@ -134,7 +134,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
 
     this.refreshThread = Thread.currentThread();
     try {
-      getLogger().info(getThreadName() + " started.");
+      LOG.info(getThreadName() + " started.");
       while (!this.shutdown) {
         long sleepTime = TimeUnit.SECONDS.toMillis(this.refreshDelayInSeconds);
         Thread.sleep(sleepTime);
@@ -144,13 +144,13 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
           }
         }
       }
-      getLogger().info(getThreadName() + " ended.");
+      LOG.info(getThreadName() + " ended.");
     } catch (InterruptedException e) {
       if (!this.shutdown) {
-        getLogger().error("Illegal interrupt!", e);
+        LOG.error("Illegal interrupt!", e);
       }
     } catch (RuntimeException e) {
-      getLogger().error(getThreadName() + " crashed!", e);
+      LOG.error(getThreadName() + " crashed!", e);
     }
     this.active = false;
   }
@@ -184,7 +184,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   /**
    * This method sets the refresh-delay in seconds. A reasonable value should be
    * at least 5 seconds but better in the range of minutes.
-   * 
+   *
    * @param refreshDelayInSeconds is the refreshDelayInSeconds to set
    */
   public void setRefreshDelayInSeconds(int refreshDelayInSeconds) {

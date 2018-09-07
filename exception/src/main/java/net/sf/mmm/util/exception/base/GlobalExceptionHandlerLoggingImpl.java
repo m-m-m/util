@@ -2,6 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.exception.base;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This is the default implementation of the {@link net.sf.mmm.util.exception.api.GlobalExceptionHandler} interface. It
  * simply logs all errors.
@@ -11,9 +14,10 @@ package net.sf.mmm.util.exception.base;
  */
 public class GlobalExceptionHandlerLoggingImpl extends AbstractGlobalExceptionHandler {
 
+  private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandlerLoggingImpl.class);
+
   /**
    * The constructor.
-   *
    */
   public GlobalExceptionHandlerLoggingImpl() {
 
@@ -24,13 +28,13 @@ public class GlobalExceptionHandlerLoggingImpl extends AbstractGlobalExceptionHa
   public void handleErrors(Object context, Throwable... errors) {
 
     if (errors == null) {
-      getLogger().error("Invalid invocation: errors is null.");
+      LOG.error("Invalid invocation: errors is null.");
     } else {
       Throwable composed = composeErrors(errors);
       if (context == null) {
-        getLogger().error("Unhandled error in context of {}:", context, composed);
+        LOG.error("Unhandled error in context of {}:", context, composed);
       } else {
-        getLogger().error("Unhandled error:", composed);
+        LOG.error("Unhandled error:", composed);
       }
     }
   }

@@ -13,6 +13,9 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.AdvancedClassHierarchyMap;
 import net.sf.mmm.util.exception.api.NlsParseException;
@@ -29,6 +32,8 @@ import net.sf.mmm.util.value.base.AbstractComposedValueConverter;
  * @since 1.0.1
  */
 public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
+
+  private static final Logger LOG = LoggerFactory.getLogger(ComposedValueConverterImpl.class);
 
   private final TargetClass2ConverterMap targetClass2converterMap;
 
@@ -105,8 +110,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method injects a {@link List} of {@link ValueConverter}s to {@link #addConverter(ValueConverter)
-   * add}.
+   * This method injects a {@link List} of {@link ValueConverter}s to {@link #addConverter(ValueConverter) add}.
    *
    * @param converterList is the list of converters to register.
    */
@@ -132,7 +136,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
     if (value == null) {
       return null;
     }
-    if (getLogger().isTraceEnabled()) {
+    if (LOG.isTraceEnabled()) {
       Class<?> valueClass = value.getClass();
       String valueClassName;
       if (valueClass.isArray()) {
@@ -140,7 +144,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       } else {
         valueClassName = value.getClass().getName();
       }
-      getLogger().trace("starting conversion of '" + value + "' from '" + valueClassName + "' to '" + targetType + "'");
+      LOG.trace("starting conversion of '" + value + "' from '" + valueClassName + "' to '" + targetType + "'");
     }
     Class<?> targetClass = targetType.getRetrievalClass();
     if (targetClass.isInstance(value)) {
@@ -187,7 +191,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
         }
       }
       if (!conversionRequired) {
-        getLogger().trace("Value is already an instance of expected type.");
+        LOG.trace("Value is already an instance of expected type.");
         return (T) value;
       }
     }
@@ -223,8 +227,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method determines if the given {@code converterTargetClass} is applicable for the
-   * {@code expectedTargetClass}.
+   * This method determines if the given {@code converterTargetClass} is applicable for the {@code expectedTargetClass}.
    *
    * @param converterTargetClass is the {@link ValueConverter#getTargetType() target-class} of the
    *        {@link ValueConverter} to check.
@@ -248,20 +251,18 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
   }
 
   /**
-   * This method determines if the given {@code type} is accepted as significant type for registration and
-   * lookup of {@link ValueConverter}s. E.g. interfaces such as {@link Cloneable} or
-   * {@link java.io.Serializable} are not more significant than {@link Object} in order to choose the
-   * appropriate {@link ValueConverter} and should therefore be skipped when the {@link Class}-hierarchy is
-   * recursively traversed. <br>
+   * This method determines if the given {@code type} is accepted as significant type for registration and lookup of
+   * {@link ValueConverter}s. E.g. interfaces such as {@link Cloneable} or {@link java.io.Serializable} are not more
+   * significant than {@link Object} in order to choose the appropriate {@link ValueConverter} and should therefore be
+   * skipped when the {@link Class}-hierarchy is recursively traversed. <br>
    * <b>ATTENTION:</b><br>
-   * If this method returns {@code false} the behaviour differs between {@link Class#isInterface() interfaces}
-   * and regular classes. For an interface the entire traversal of super-interfaces is skipped, while for a
-   * regular class, just that class is skipped, but {@link Class#getSuperclass() super-classes} are
-   * recursively traversed.
+   * If this method returns {@code false} the behaviour differs between {@link Class#isInterface() interfaces} and
+   * regular classes. For an interface the entire traversal of super-interfaces is skipped, while for a regular class,
+   * just that class is skipped, but {@link Class#getSuperclass() super-classes} are recursively traversed.
    *
    * @param type is the {@link Class} reflecting the type to check.
-   * @return {@code true} if the given {@code type} is acceptable, {@code false} if the given {@code type}
-   *         should be ignored.
+   * @return {@code true} if the given {@code type} is acceptable, {@code false} if the given {@code type} should be
+   *         ignored.
    */
   protected boolean isAccepted(Class<?> type) {
 
@@ -278,22 +279,22 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
    * This method performs the {@link #convert(Object, Object, GenericType) conversion} recursive.
    *
    * @param value is the value to convert.
-   * @param valueSource describes the source of the value. This may be the filename where the value was read
-   *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-   *        thrown if something goes wrong. This will help to find the problem easier.
+   * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+   *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something goes
+   *        wrong. This will help to find the problem easier.
    * @param targetType is the {@link GenericType} to convert the {@code value} to.
    * @param currentTargetClass is the current {@link ValueConverter#getTargetType() target-type} to try.
-   * @param previousConverter is the converter that has been tried last time without success. It is used to
-   *        avoid trying the same converter again. Will initially be {@code null}.
+   * @param previousConverter is the converter that has been tried last time without success. It is used to avoid trying
+   *        the same converter again. Will initially be {@code null}.
    * @param converterMap is the {@link TargetClass2ConverterMap}.
-   * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value
-   *         has to be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
+   * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value has to be
+   *         an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
   protected Object convertRecursive(Object value, Object valueSource, GenericType<?> targetType, Class<?> currentTargetClass, ValueConverter previousConverter,
       TargetClass2ConverterMap converterMap) {
 
-    boolean traceEnabled = getLogger().isTraceEnabled();
+    boolean traceEnabled = LOG.isTraceEnabled();
     ValueConverter lastConverter = previousConverter;
     Class<?> currentClass = currentTargetClass;
     Object result = null;
@@ -301,7 +302,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
       while (currentClass != null) {
         if (isAccepted(currentClass)) {
           if (traceEnabled) {
-            getLogger().trace("searching converter for target-type '" + currentClass + "'");
+            LOG.trace("searching converter for target-type '" + currentClass + "'");
           }
           ValueConverter converter = converterMap.get(currentClass);
           if ((converter != null) && (converter != lastConverter) && (isApplicable(converter, targetType))) {
@@ -315,7 +316,7 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
                 sw.append(currentClass.toString());
                 sw.append("'");
               }
-              getLogger().trace(sw.toString());
+              LOG.trace(sw.toString());
             }
             result = converter.convert(value, valueSource, targetType);
             if (result != null) {
@@ -386,8 +387,8 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      * This method registers the given {@code converter} to this composed converter.
      *
      * @param converter is the converter to add.
-     * @return the converter with the same {@link ValueConverter#getSourceType() source-type} that has been
-     *         replaced by {@code converter} or {@code null} if no converter has been replaced.
+     * @return the converter with the same {@link ValueConverter#getSourceType() source-type} that has been replaced by
+     *         {@code converter} or {@code null} if no converter has been replaced.
      */
     public ValueConverter<?, TARGET> addConverter(ValueConverter<?, TARGET> converter) {
 
@@ -414,33 +415,31 @@ public class ComposedValueConverterImpl extends AbstractComposedValueConverter {
      *
      * @param <T> is the generic type of {@code genericTargetType}.
      * @param value is the value to convert.
-     * @param valueSource describes the source of the value. This may be the filename where the value was read
-     *        from, an XPath where the value was located in an XML document, etc. It is used in exceptions
-     *        thrown if something goes wrong. This will help to find the problem easier.
+     * @param valueSource describes the source of the value. This may be the filename where the value was read from, an
+     *        XPath where the value was located in an XML document, etc. It is used in exceptions thrown if something
+     *        goes wrong. This will help to find the problem easier.
      * @param genericTargetType is the {@link GenericType} to convert the {@code value} to.
      * @param sourceClass is the current {@link ValueConverter#getSourceType() source-type} to try.
-     * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned
-     *         value has to be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
+     * @return the converted {@code value} or {@code null} if the conversion is NOT possible. The returned value has to
+     *         be an {@link Class#isInstance(Object) instance} of the given {@code targetType}.
      */
     @SuppressWarnings("unchecked")
     protected <T extends TARGET> T convertRecursive(Object value, Object valueSource, GenericType<T> genericTargetType, Class<?> sourceClass) {
 
-      boolean traceEnabled = getLogger().isTraceEnabled();
+      boolean traceEnabled = LOG.isTraceEnabled();
       Class<?> currentClass = sourceClass;
       while (currentClass != null) {
         if (isAccepted(currentClass)) {
-          if (traceEnabled) {
-            getLogger().trace("searching converter for source-type '" + currentClass + "'");
-          }
+          LOG.trace("searching converter for source-type '{}'", currentClass);
           ValueConverter<Object, TARGET> converter = (ValueConverter<Object, TARGET>) this.sourceClass2converterMap.get(currentClass);
           if (converter != null) {
             if (traceEnabled) {
-              getLogger().trace("trying converter for source-type '" + currentClass + "': " + converter.getClass().getSimpleName());
+              LOG.trace("trying converter for source-type '{}': {}", currentClass, converter.getClass().getSimpleName());
             }
             T result = converter.convert(value, valueSource, genericTargetType);
             if (result != null) {
               if (traceEnabled) {
-                getLogger().trace("conversion successful using '" + converter.getClass().getName() + "'");
+                LOG.trace("conversion successful using '{}'", converter.getClass().getName());
               }
               return result;
             }

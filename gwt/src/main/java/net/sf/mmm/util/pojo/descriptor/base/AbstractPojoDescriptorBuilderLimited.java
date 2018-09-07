@@ -8,7 +8,7 @@ import java.util.Map;
 
 import com.google.gwt.core.shared.GWT;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.impl.AbstractPojoDescriptorImpl;
@@ -22,8 +22,7 @@ import net.sf.mmm.util.reflect.base.ReflectionUtilLimitedImpl;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractLoggableComponent
-    implements PojoDescriptorBuilder {
+public abstract class AbstractPojoDescriptorBuilderLimited extends AbstractComponent implements PojoDescriptorBuilder {
 
   private static final PojoDescriptorBuilder INSTANCE = GWT.create(PojoDescriptorBuilder.class);
 

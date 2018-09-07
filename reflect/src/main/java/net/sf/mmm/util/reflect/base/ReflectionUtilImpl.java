@@ -32,6 +32,9 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.filter.base.ConstantFilter;
@@ -59,6 +62,8 @@ import net.sf.mmm.util.scanner.base.CharSequenceScanner;
  * @since 1.0.1
  */
 public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements ReflectionUtil {
+
+  private static final Logger LOG = LoggerFactory.getLogger(ReflectionUtilImpl.class);
 
   private static final String FILE_EXTENSION_JAR = "jar";
 
@@ -191,15 +196,14 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and
-   * returns the sub-class or sub-interface of {@code ancestor} on that hierarchy-path. <br>
-   * Please note that if {@code ancestor} is an {@link Class#isInterface() interface}, the hierarchy may NOT
-   * be unique. In such case it will be unspecified which of the possible paths is used.
+   * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and returns the
+   * sub-class or sub-interface of {@code ancestor} on that hierarchy-path. <br>
+   * Please note that if {@code ancestor} is an {@link Class#isInterface() interface}, the hierarchy may NOT be unique.
+   * In such case it will be unspecified which of the possible paths is used.
    *
    * @param ancestor is the super-class or super-interface of {@code descendant}.
    * @param descendant is the sub-class or sub-interface of {@code ancestor}.
-   * @return the sub-class or sub-interface on the hierarchy-path from {@code descendant} up to
-   *         {@code ancestor}.
+   * @return the sub-class or sub-interface on the hierarchy-path from {@code descendant} up to {@code ancestor}.
    */
   protected Class<?> getSubClass(Class<?> ancestor, Class<?> descendant) {
 
@@ -232,15 +236,14 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and
-   * returns the sub-class or sub-interface of {@code ancestor} on that hierarchy-path. <br>
-   * Please note that if {@code ancestor} is an {@link Class#isInterface() interface}, the hierarchy may NOT
-   * be unique. In such case it will be unspecified which of the possible paths is used.
+   * This method walks up the {@link Class}-hierarchy from {@code descendant} up to {@code ancestor} and returns the
+   * sub-class or sub-interface of {@code ancestor} on that hierarchy-path. <br>
+   * Please note that if {@code ancestor} is an {@link Class#isInterface() interface}, the hierarchy may NOT be unique.
+   * In such case it will be unspecified which of the possible paths is used.
    *
    * @param ancestor is the super-class or super-interface of {@code descendant}.
    * @param descendant is the sub-class or sub-interface of {@code ancestor}.
-   * @return the sub-class or sub-interface on the hierarchy-path from {@code descendant} up to
-   *         {@code ancestor}.
+   * @return the sub-class or sub-interface on the hierarchy-path from {@code descendant} up to {@code ancestor}.
    */
   protected Type getGenericDeclaration(Class<?> ancestor, Class<?> descendant) {
 
@@ -305,13 +308,11 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
 
   /**
    * This method parses the given {@code type} as generic {@link Type}. <br>
-   * This would be easier when using {@code StringParser} but we want to avoid the dependency on
-   * {@code util-misc}.
+   * This would be easier when using {@code StringParser} but we want to avoid the dependency on {@code util-misc}.
    *
    * @param parser is the string-parser on the type string to parse.
    * @param resolver is used to resolve classes.
-   * @param owner is the {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type} or
-   *        {@code null}.
+   * @param owner is the {@link java.lang.reflect.ParameterizedType#getOwnerType() owner-type} or {@code null}.
    * @return the parsed type.
    */
   private Type toType(CharSequenceScanner parser, ClassResolver resolver, Type owner) {
@@ -620,8 +621,8 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * This method scans the given {@code packageDirectory} recursively for resources.
    *
    * @param packageDirectory is the directory representing the {@link Package}.
-   * @param qualifiedNameBuilder is a {@link StringBuilder} containing the qualified prefix (the
-   *        {@link Package} with a trailing dot).
+   * @param qualifiedNameBuilder is a {@link StringBuilder} containing the qualified prefix (the {@link Package} with a
+   *        trailing dot).
    * @param qualifiedNamePrefixLength the length of the prefix used to rest the string-builder after reuse.
    * @param visitor is the {@link ResourceVisitor}.
    */
@@ -679,12 +680,12 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
    * @see #findClassNames(String, boolean, Filter, ClassLoader)
    *
    * @param packageName is the name of the {@link Package} to scan.
-   * @param includeSubPackages - if {@code true} all sub-packages of the specified {@link Package} will be
-   *        included in the search.
+   * @param includeSubPackages - if {@code true} all sub-packages of the specified {@link Package} will be included in
+   *        the search.
    * @param classSet is where to add the classes.
-   * @param filter is used to {@link Filter#accept(Object) filter} the {@link Class}-names to be added to the
-   *        resulting {@link Set}. The {@link Filter} will receive {@link Class#getName() fully qualified
-   *        class-names} as argument (e.g. "net.sf.mmm.reflect.api.ReflectionUtil").
+   * @param filter is used to {@link Filter#accept(Object) filter} the {@link Class}-names to be added to the resulting
+   *        {@link Set}. The {@link Filter} will receive {@link Class#getName() fully qualified class-names} as argument
+   *        (e.g. "net.sf.mmm.reflect.api.ReflectionUtil").
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @if the operation failed with an I/O error.
    */
@@ -712,10 +713,10 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   /**
    * This method does the actual magic to locate resources on the classpath.
    *
-   * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator
-   *        (e.g. "net.sf.mmm.util.reflect).
-   * @param includeSubPackages - if {@code true} all sub-packages of the specified {@link Package} will be
-   *        included in the search.
+   * @param packageName is the name of the {@link Package} to scan. Both "." and "/" are accepted as separator (e.g.
+   *        "net.sf.mmm.util.reflect).
+   * @param includeSubPackages - if {@code true} all sub-packages of the specified {@link Package} will be included in
+   *        the search.
    * @param classLoader is the explicit {@link ClassLoader} to use.
    * @param visitor is the {@link ResourceVisitor}.
    * @if the operation failed with an I/O error.
@@ -725,9 +726,9 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
     try {
       String path = packageName.replace('.', '/');
       if (path.isEmpty()) {
-        getLogger().debug("Scanning entire classpath...");
+        LOG.debug("Scanning entire classpath...");
       } else {
-        getLogger().trace("Scanning for resources on classpath for {}", path);
+        LOG.trace("Scanning for resources on classpath for {}", path);
       }
       StringBuilder qualifiedNameBuilder = new StringBuilder(path);
       if (qualifiedNameBuilder.length() > 0) {
@@ -797,10 +798,10 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   private void visitResourceUrl(boolean includeSubPackages, ResourceVisitor visitor, String pathWithPrefix, StringBuilder qualifiedNameBuilder,
       int qualifiedNamePrefixLength, URL url, Set<String> urlSet) throws UnsupportedEncodingException, IOException {
 
-    getLogger().trace("Scanning classpath entry for URL: {}", url);
+    LOG.trace("Scanning classpath entry for URL: {}", url);
     boolean added = urlSet.add(url.toString());
     if (!added) {
-      getLogger().trace("Ignoring duplicate URL that has already been scanned: {}", url);
+      LOG.trace("Ignoring duplicate URL that has already been scanned: {}", url);
       return; // ignore duplicates already visited
     }
     String protocol = BasicHelper.toLowerCase(url.getProtocol());
@@ -855,7 +856,7 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
         }
       }
     } else {
-      getLogger().warn("Unknown protocol '" + protocol + "' in classpath entry!");
+      LOG.warn("Unknown protocol '" + protocol + "' in classpath entry!");
     }
   }
 
@@ -883,16 +884,15 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
         }
       } catch (Throwable e) {
         // we catch throwable to also get NoClassDefFoundError, etc.
-        getLogger().warn("Failed to resolve class {}: {}", className, e.toString());
+        LOG.warn("Failed to resolve class {}: {}", className, e.toString());
       }
     }
     return classesSet;
   }
 
   /**
-   * This method gets the default {@link ClassLoader} to use. This should be the
-   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to alternatives if no such
-   * {@link ClassLoader} is available.
+   * This method gets the default {@link ClassLoader} to use. This should be the {@link Thread#getContextClassLoader()
+   * ContextClassLoader} but falls back to alternatives if no such {@link ClassLoader} is available.
    *
    * @return the default {@link ClassLoader} to use.
    */
@@ -902,26 +902,25 @@ public class ReflectionUtilImpl extends ReflectionUtilLimitedImpl implements Ref
   }
 
   /**
-   * This method gets the default {@link ClassLoader} to use. This should be the
-   * {@link Thread#getContextClassLoader() ContextClassLoader} but falls back to alternatives if no such
-   * {@link ClassLoader} is available.
+   * This method gets the default {@link ClassLoader} to use. This should be the {@link Thread#getContextClassLoader()
+   * ContextClassLoader} but falls back to alternatives if no such {@link ClassLoader} is available.
    *
-   * @param fallbackClass is used to {@link Class#getClassLoader() retrieve} a {@link ClassLoader} as fallback
-   *        if the {@link Thread#getContextClassLoader() ContextClassLoader} is not available.
+   * @param fallbackClass is used to {@link Class#getClassLoader() retrieve} a {@link ClassLoader} as fallback if the
+   *        {@link Thread#getContextClassLoader() ContextClassLoader} is not available.
    * @return the default {@link ClassLoader} to use.
    */
   public ClassLoader getDefaultClassLoader(Class<?> fallbackClass) {
 
     ClassLoader result = Thread.currentThread().getContextClassLoader();
     if (result == null) {
-      getLogger().warn("strange container: no context-class-loader available!");
+      LOG.warn("strange container: no context-class-loader available!");
       Class<?> clazz = fallbackClass;
       if (clazz == null) {
         clazz = getClass();
       }
       result = clazz.getClassLoader();
       if (result == null) {
-        getLogger().warn("strange JVM: only system-class-loader available!");
+        LOG.warn("strange JVM: only system-class-loader available!");
         result = ClassLoader.getSystemClassLoader();
       }
     }

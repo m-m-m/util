@@ -11,9 +11,12 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.component.api.Refreshable;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
@@ -26,7 +29,9 @@ import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
  * @since 1.0.0
  */
 @Deprecated
-public class PeriodicRefresherImpl extends AbstractLoggableComponent implements PeriodicRefresher, Runnable, Closeable {
+public class PeriodicRefresherImpl extends AbstractComponent implements PeriodicRefresher, Runnable, Closeable {
+
+  private static final Logger LOG = LoggerFactory.getLogger(PeriodicRefresherImpl.class);
 
   /** The default {@link #setRefreshDelayInSeconds(int) refresh-delay}. */
   private static final int DEFAULT_REFRESH_DELAY_IN_SECONDS = 5 * 60;
@@ -69,14 +74,13 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   }
 
   /**
-   * This method will initialize and startup this refresher. On the first call of this method a new thread
-   * will be started, that periodically performs a refresh. <br>
-   * Multiple calls of this method have no further effect unless the refresher is {@link #close() closed}.
-   * <br>
+   * This method will initialize and startup this refresher. On the first call of this method a new thread will be
+   * started, that periodically performs a refresh. <br>
+   * Multiple calls of this method have no further effect unless the refresher is {@link #close() closed}. <br>
    * <b>NOTE:</b><br>
    * This is intentionally NOT performed automatically via
-   * {@link net.sf.mmm.util.component.base.AbstractComponent#initialize()} so the startup only happens if
-   * explicitly required and not accidently because this component if found and managed by some container.
+   * {@link net.sf.mmm.util.component.base.AbstractComponent#initialize()} so the startup only happens if explicitly
+   * required and not accidently because this component if found and managed by some container.
    */
   public void startup() {
 
@@ -87,7 +91,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
       if (this.active) {
         return;
       }
-      getLogger().info("starting " + getThreadName() + "...");
+      LOG.info("starting " + getThreadName() + "...");
       Thread thread = new Thread(this);
       thread.setName(getThreadName());
       this.executor.execute(thread); // NOSONAR
@@ -133,7 +137,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
 
     this.refreshThread = Thread.currentThread();
     try {
-      getLogger().info(getThreadName() + " started.");
+      LOG.info(getThreadName() + " started.");
       while (!this.shutdown) {
         long sleepTime = TimeUnit.SECONDS.toMillis(this.refreshDelayInSeconds);
         Thread.sleep(sleepTime);
@@ -143,13 +147,13 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
           }
         }
       }
-      getLogger().info(getThreadName() + " ended.");
+      LOG.info(getThreadName() + " ended.");
     } catch (InterruptedException e) {
       if (!this.shutdown) {
-        getLogger().error("Illegal interrupt!", e);
+        LOG.error("Illegal interrupt!", e);
       }
     } catch (RuntimeException e) {
-      getLogger().error(getThreadName() + " crashed!", e);
+      LOG.error(getThreadName() + " crashed!", e);
     }
     this.active = false;
   }
@@ -181,8 +185,8 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
   }
 
   /**
-   * This method sets the refresh-delay in seconds. A reasonable value should be at least 5 seconds but better
-   * in the range of minutes.
+   * This method sets the refresh-delay in seconds. A reasonable value should be at least 5 seconds but better in the
+   * range of minutes.
    *
    * @param refreshDelayInSeconds is the refreshDelayInSeconds to set
    */

@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
@@ -18,7 +18,7 @@ import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponent implements NlsMessageFactory {
+public abstract class AbstractNlsMessageFactory extends AbstractComponent implements NlsMessageFactory {
 
   /**
    * The constructor.
@@ -52,8 +52,8 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
 
   // CHECKSTYLE:OFF (many arguments for convenience)
   @Override
-  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
-      String key3, Object argument3, String key4, Object argument4) {
+  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2, String key3, Object argument3, String key4,
+      Object argument4) {
 
     // CHECKSTYLE:ON
 
@@ -66,8 +66,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
   }
 
   @Override
-  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2,
-      String key3, Object argument3) {
+  public NlsMessage create(NlsTemplate template, String key1, Object argument1, String key2, Object argument2, String key3, Object argument3) {
 
     Map<String, Object> arguments = new HashMap<>();
     arguments.put(key1, argument1);
@@ -95,8 +94,8 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
 
   // CHECKSTYLE:OFF (many arguments for convenience)
   @Override
-  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
-      Object argument2, String key3, Object argument3, String key4, Object argument4) {
+  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2, Object argument2, String key3, Object argument3,
+      String key4, Object argument4) {
 
     // CHECKSTYLE:ON
 
@@ -109,8 +108,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
   }
 
   @Override
-  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
-      Object argument2, String key3, Object argument3) {
+  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2, Object argument2, String key3, Object argument3) {
 
     Map<String, Object> arguments = new HashMap<>();
     arguments.put(key1, argument1);
@@ -120,8 +118,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractLoggableComponen
   }
 
   @Override
-  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2,
-      Object argument2) {
+  public NlsMessage create(String internationalizedMessage, String key1, Object argument1, String key2, Object argument2) {
 
     Map<String, Object> arguments = new HashMap<>();
     arguments.put(key1, argument1);
