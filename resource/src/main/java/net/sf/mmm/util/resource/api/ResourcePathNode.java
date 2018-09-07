@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 import net.sf.mmm.util.filter.api.CharFilter;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.lang.api.function.Function;
 import net.sf.mmm.util.lang.api.function.VoidFunction;
 import net.sf.mmm.util.pattern.base.WildcardGlobPatternCompiler;
@@ -30,8 +31,7 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   private static final char WINDOWS_DRIVE_LETTER_SUFFIX = ':';
 
   /** The {@link Void} data function. */
-  private static final Function<ResourcePathNode<Void>, Void> VOID_FUNCTION = VoidFunction
-      .<ResourcePathNode<Void>> getInstance();
+  private static final Function<ResourcePathNode<Void>, Void> VOID_FUNCTION = VoidFunction.<ResourcePathNode<Void>> getInstance();
 
   /** The {@link Void} data function. */
   private static final Function<ResourcePathNode<Pattern>, Pattern> GLOB_PATTERN_FUNCTION = new Function<ResourcePathNode<Pattern>, Pattern>() {
@@ -62,7 +62,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * The constructor for a root {@link ResourcePathNode}.
    *
    * @param name - see {@link #getName()}.
-   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData()
+   *        data}.
    */
   protected ResourcePathNode(String name, Function<ResourcePathNode<D>, D> dataFunction) {
 
@@ -99,10 +100,10 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    *
    * @param parent - see {@link #getParent()}.
    * @param name - see {@link #getName()}.
-   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData()
+   *        data}.
    */
-  protected ResourcePathNode(ResourcePathNode<D> parent, String name,
-      Function<ResourcePathNode<D>, D> dataFunction) {
+  protected ResourcePathNode(ResourcePathNode<D> parent, String name, Function<ResourcePathNode<D>, D> dataFunction) {
 
     super();
     Objects.requireNonNull(parent, "parent");
@@ -138,7 +139,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   }
 
   /**
-   * @return the optional generic data. E.g. the {@link #getName() name} compiled as {@link java.util.regex.Pattern}.
+   * @return the optional generic data. E.g. the {@link #getName() name} compiled as
+   *         {@link java.util.regex.Pattern}.
    */
   public D getData() {
 
@@ -167,8 +169,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   }
 
   /**
-   * @return {@code true} if {@link #toString(StringBuilder, char)} needs to append a separator after this segment,
-   *         {@code false} otherwise.
+   * @return {@code true} if {@link #toString(StringBuilder, char)} needs to append a separator after this
+   *         segment, {@code false} otherwise.
    */
   protected boolean isAppendSeparator() {
 
@@ -201,8 +203,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   }
 
   /**
-   * {@link Collection#add(Object) Adds} all {@link ResourcePathNode}s of this path from the {@link #getRoot() root}
-   * down to {@code this} node.
+   * {@link Collection#add(Object) Adds} all {@link ResourcePathNode}s of this path from the {@link #getRoot()
+   * root} down to {@code this} node.
    *
    * @param nodes is the {@link Collection} where to {@link Collection#add(Object) add} the nodes.
    */
@@ -229,8 +231,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
 
   /**
    * @param path is the path to navigate to from {@code this} path.
-   * @return the given {@code path} if {@link #isAbsolute() absolute}, otherwise the normalized path of {@code this}
-   *         path with the given path appended.
+   * @return the given {@code path} if {@link #isAbsolute() absolute}, otherwise the normalized path of
+   *         {@code this} path with the given path appended.
    */
   public ResourcePathNode<D> navigateTo(ResourcePathNode<D> path) {
 
@@ -242,8 +244,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   }
 
   /**
-   * @return {@code this} instance if this is the {@link #isRoot() root} or is {@link #PATH_SEGMENT_PARENT_DIRECTORY},
-   *         the {@link #getParent() parent} otherwise.
+   * @return {@code this} instance if this is the {@link #isRoot() root} or is
+   *         {@link #PATH_SEGMENT_PARENT_DIRECTORY}, the {@link #getParent() parent} otherwise.
    */
   private ResourcePathNode<D> navigateUp() {
 
@@ -434,7 +436,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    *
    * @param <D> is the type of the {@link #getData() generic data}. For simple usage just {@link Void}.
    * @param path is the path to parse.
-   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData()
+   *        data}.
    * @return the parsed {@code path}.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -489,10 +492,11 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
    * @see ResourcePathNode#isRoot()
    *
    * @param <D> is the type of the {@link #getData() generic data}. For simple usage just {@link Void}.
-   * @param scanner the fresh {@link CharSequenceScanner} for the entire path (normalized from of {@code originalPath}).
-   *        Only the root segment shall be consumed.
+   * @param scanner the fresh {@link CharSequenceScanner} for the entire path (normalized from of
+   *        {@code originalPath}). Only the root segment shall be consumed.
    * @param originalPath is the original path without normalization of slashed (may contain backslashes).
-   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+   * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData()
+   *        data}.
    * @return the {@link ResourcePathNode#isRoot() root path segment}.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -550,6 +554,44 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
   }
 
   /**
+   * @param path is the path where to normalize the home segment.
+   * @return the normalized path. In case the given {@code path} starts with ~ (such as "~/.ssh", "~root/", or
+   *         "~admin/..") this gets resolved to an absolute path. Otherwise the given {{@code path} is
+   *         returned unmodified.
+   * @since 7.6.0
+   */
+  public static String normalizeHome(String path) {
+
+    if (path.charAt(0) == ResourcePath.HOME_PATH_CHAR) {
+      // normalize home directory
+      int len = path.length();
+      int userEnd = 1;
+      while (userEnd < len) {
+        if (CharFilter.FILE_SEPARATOR_FILTER.accept(path.charAt(userEnd))) {
+          break;
+        }
+        userEnd++;
+      }
+      String user = path.substring(1, userEnd);
+      String userHome;
+      if (user.isEmpty() || (user.equals(BasicHelper.getUserLogin()))) {
+        userHome = BasicHelper.getUserHomePath();
+      } else if (user.equals("root")) {
+        userHome = "/root";
+      } else {
+        // ~<user> can not be resolved properly
+        // we would need to do OS-specific assumptions and look into
+        // /etc/passwd or whatever what might fail by missing read permissions
+        // This is just a hack that might work in most cases:
+        // we use the user.home dir get the dirname and append the user
+        userHome = BasicHelper.getUserHomePath() + "/../" + user;
+      }
+      return userHome + path.substring(userEnd);
+    }
+    return path;
+  }
+
+  /**
    * Implementation of Unix/Linux absolute root.
    *
    * @param <D> is the type of the {@link #getData() generic data}. For simple usage just {@link Void}.
@@ -561,7 +603,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     /**
      * The constructor.
      *
-     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the
+     *        {@link #getData() data}.
      */
     private ResourcePathRootAbsolute(Function<ResourcePathNode<D>, D> dataFunction) {
 
@@ -594,7 +637,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * The constructor.
      *
      * @param drive is the Windows drive letter (e.g. "C" for "C:\\").
-     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the
+     *        {@link #getData() data}.
      */
     public ResourcePathRootWindows(String drive, Function<ResourcePathNode<D>, D> dataFunction) {
 
@@ -620,7 +664,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     /**
      * The constructor.
      *
-     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the
+     *        {@link #getData() data}.
      */
     private ResourcePathRootRelative(Function<ResourcePathNode<D>, D> dataFunction) {
 
@@ -652,7 +697,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
     /**
      * The constructor.
      *
-     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the
+     *        {@link #getData() data}.
      */
     public ResourcePathRootHome(Function<ResourcePathNode<D>, D> dataFunction) {
 
@@ -663,7 +709,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * The constructor.
      *
      * @param user the name of the user.
-     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the
+     *        {@link #getData() data}.
      */
     public ResourcePathRootHome(String user, Function<ResourcePathNode<D>, D> dataFunction) {
 
@@ -690,7 +737,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      * The constructor.
      *
      * @param uncAuthority is the authority or host of the UNC root.
-     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the
+     *        {@link #getData() data}.
      */
     public ResourcePathRootUnc(String uncAuthority, Function<ResourcePathNode<D>, D> dataFunction) {
 
@@ -722,7 +770,8 @@ public class ResourcePathNode<D> implements ResourcePath, Serializable {
      *
      * @param scheme - see {@link #getScheme()}.
      * @param authority - see {@link #getAuthority()}.
-     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the {@link #getData() data}.
+     * @param dataFunction - the {@link Function} to {@link Function#apply(Object) create} the
+     *        {@link #getData() data}.
      */
     public ResourcePathRootUrl(String scheme, String authority, Function<ResourcePathNode<D>, D> dataFunction) {
 

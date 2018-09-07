@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import net.sf.mmm.test.TestResourceHelper;
@@ -24,55 +23,12 @@ import net.sf.mmm.util.file.api.FileUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class FileUtilTest extends Assertions {
+public class FileUtilTest extends FileUtilLimitedTest {
 
+  @Override
   protected FileUtil getFileUtil() {
 
     return FileUtilImpl.getInstance();
-  }
-
-  /**
-   * Tests {@link FileUtil#normalizePath(String)}.
-   */
-  @Test
-  public void testNormalizePath() {
-
-    FileUtil util = getFileUtil();
-    assertThat(util.normalizePath("/\\///.//", '/')).isEqualTo("/");
-    assertThat(util.normalizePath("/foo/../bar/..", '/')).isEqualTo("/");
-    assertThat(util.normalizePath("/foo/bar/../bar/..", '/')).isEqualTo("/foo");
-    assertThat(util.normalizePath("/foo\\bar/..\\bar/..", '/')).isEqualTo("/foo");
-    assertThat(util.normalizePath("/foo\\//.\\./bar/..\\bar/..", '/')).isEqualTo("/foo");
-    assertThat(util.normalizePath("foo\\//.\\./bar/.", '/')).isEqualTo("foo/bar");
-    String homeDir = System.getProperty("user.home").replace('\\', '/');
-    assertThat(util.normalizePath("~", '/')).isEqualTo(homeDir);
-    assertThat(util.normalizePath("~/foo/./..", '/')).isEqualTo(homeDir);
-    assertThat(util.normalizePath("~/foo/./..", '/')).isEqualTo(homeDir);
-    assertThat(util.normalizePath("~/.mmm/search.xml", '/')).isEqualTo(homeDir + "/.mmm/search.xml");
-    assertThat(util.normalizePath("~root/.ssh/authorized_keys", '/')).isEqualTo("/root/.ssh/authorized_keys");
-    if ("/root".equals(homeDir)) {
-      homeDir = "/home/nobody";
-    }
-    assertThat(util.normalizePath(homeDir + "/../someuser", '/')).isEqualTo(util.normalizePath("~someuser", '/'));
-    String uncPath = "\\\\10.0.0.1\\share";
-    assertThat(util.normalizePath(uncPath, '\\')).isEqualTo(uncPath);
-    assertThat(util.normalizePath("http://www.host.com/foo/bar/./test/.././..")).isEqualTo("http://www.host.com/foo");
-    assertThat(util.normalizePath("../..\\foo/../bar\\.\\some", '/')).isEqualTo("../../bar/some");
-  }
-
-  /**
-   * Tests special cases of {@link FileUtil#normalizePath(String)}.
-   */
-  @Test
-  public void testNormalizePathSpeical() {
-
-    FileUtilImpl impl = new FileUtilImpl();
-    impl.setUserLogin("root");
-    String rootHome = "/my/root/dir";
-    impl.setUserHomeDirectoryPath(rootHome);
-    impl.initialize();
-    FileUtil util = impl;
-    assertThat(util.normalizePath("~root", '/')).isEqualTo(rootHome);
   }
 
   protected void checkTestdata(File originalFile, File copyFile) throws IOException {
@@ -211,14 +167,14 @@ public class FileUtilTest extends Assertions {
     // given
     FileUtil util = getFileUtil();
     List<File> list = new ArrayList<File>();
-    String testPath = TestResourceHelper.getTestPath() + "../java";
+    String testPath = TestResourceHelper.getTestPath() + "../../main/java";
     // when
     boolean hasPattern = util.collectMatchingFiles(new File(testPath), "net/sf/mmm/ut?l/**/impl/*.java", FileType.FILE, list);
     // then
     assertThat(hasPattern).isTrue();
-    assertThat(list).contains(create(testPath, net.sf.mmm.util.resource.impl.BrowsableResourceFactoryTest.class,
-        net.sf.mmm.util.resource.impl.BrowsableResourceFactorySpringTest.class, net.sf.mmm.util.io.impl.DetectorStreamTest.class));
-    assertThat(list).doesNotContain(create(testPath, net.sf.mmm.util.xml.impl.stax.XIncludeStreamReaderTest.class));
+    assertThat(list).contains(create(testPath, net.sf.mmm.util.io.impl.BufferInputStream.class, net.sf.mmm.util.pool.impl.ByteArrayPoolImpl.class,
+        net.sf.mmm.util.io.impl.DetectorStreamProviderImpl.class));
+    assertThat(list).doesNotContain(create(testPath, net.sf.mmm.util.file.impl.spring.UtilFileSpringConfig.class));
   }
 
   private File[] create(String testPath, Class<?>... classes) {

@@ -13,9 +13,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.inject.Inject;
-
-import net.sf.mmm.util.component.api.AlreadyInitializedException;
 import net.sf.mmm.util.file.api.FileAccessClass;
 import net.sf.mmm.util.file.api.FileAlreadyExistsException;
 import net.sf.mmm.util.file.api.FileAttributeModificationFailedException;
@@ -26,8 +23,7 @@ import net.sf.mmm.util.file.api.FileType;
 import net.sf.mmm.util.file.api.FileUtil;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.lang.base.StringUtilImpl;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.resource.api.ResourcePathNode;
 
 /**
@@ -42,13 +38,7 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
 
   private static FileUtil instance;
 
-  private StringUtil stringUtil;
-
-  private String userHomeDirectoryPath;
-
   private File userHomeDirectory;
-
-  private String userLogin;
 
   private String temporaryDirectoryPath;
 
@@ -87,9 +77,6 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.stringUtil == null) {
-      this.stringUtil = StringUtilImpl.getInstance();
-    }
     if (this.temporaryDirectoryPath == null) {
       this.temporaryDirectoryPath = System.getProperty(PROPERTY_TMP_DIR);
     }
@@ -97,64 +84,15 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
     if (this.temporaryDirectory == null) {
       this.temporaryDirectory = new File(this.temporaryDirectoryPath);
     }
-    if (this.userHomeDirectoryPath == null) {
-      this.userHomeDirectoryPath = System.getProperty(PROPERTY_USER_HOME);
-    }
-    this.userHomeDirectoryPath = this.userHomeDirectoryPath.replace('\\', '/');
     if (this.userHomeDirectory == null) {
-      this.userHomeDirectory = new File(this.userHomeDirectoryPath);
+      this.userHomeDirectory = new File(BasicHelper.getUserHomePath());
     }
-    if (this.userLogin == null) {
-      this.userLogin = System.getProperty("user.name");
-    }
-  }
-
-  /**
-   * This method gets the {@link StringUtilImpl} that is used by this {@link FileUtilImpl}.
-   *
-   * @return the stringUtil the {@link StringUtilImpl}.
-   */
-  protected StringUtil getStringUtil() {
-
-    return this.stringUtil;
-  }
-
-  /**
-   * This method sets the {@link #getStringUtil() StringUtil}. It can only be set once during initialization.
-   *
-   * @param stringUtil the stringUtil to set.
-   * @throws AlreadyInitializedException if the value has already been set.
-   */
-  @Inject
-  public void setStringUtil(StringUtil stringUtil) throws AlreadyInitializedException {
-
-    getInitializationState().requireNotInitilized();
-    this.stringUtil = stringUtil;
   }
 
   @Override
   public File getUserHomeDirectory() {
 
     return this.userHomeDirectory;
-  }
-
-  @Override
-  protected String getUserHomeDirectoryPath() {
-
-    return this.userHomeDirectoryPath;
-  }
-
-  /**
-   * This method set the {@link #getUserHomeDirectory() users home directory}. It can only be set during
-   * initialization.
-   *
-   * @param userHome is the home directory of the user.
-   * @throws AlreadyInitializedException if the value has already been set.
-   */
-  public void setUserHomeDirectoryPath(String userHome) throws AlreadyInitializedException {
-
-    getInitializationState().requireNotInitilized();
-    this.userHomeDirectoryPath = userHome;
   }
 
   @Override
@@ -167,27 +105,11 @@ public class FileUtilImpl extends FileUtilLimitedImpl implements FileUtil {
    * This method sets the {@link #getTemporaryDirectory() tmp directory}.
    *
    * @param tmpDir the tmpDir to set
-   * @throws AlreadyInitializedException if the value has already been set.
    */
-  public void setTemporaryDirectoryPath(String tmpDir) throws AlreadyInitializedException {
+  public void setTemporaryDirectoryPath(String tmpDir) {
 
     getInitializationState().requireNotInitilized();
     this.temporaryDirectoryPath = tmpDir;
-  }
-
-  @Override
-  public String getUserLogin() {
-
-    return this.userLogin;
-  }
-
-  /**
-   * @param userLogin is the userLogin to set
-   */
-  public void setUserLogin(String userLogin) {
-
-    getInitializationState().requireNotInitilized();
-    this.userLogin = userLogin;
   }
 
   @Override

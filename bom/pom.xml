@@ -100,7 +100,7 @@
         <artifactId>gwt-log</artifactId>
         <version>3.3.2</version>
       </dependency>
-      
+
       <!-- Testing -->
       <dependency>
         <groupId>org.assertj</groupId>
@@ -113,7 +113,7 @@
         <version>4.12</version>
       </dependency>
 
-      <!-- Google Web Toolkit (GWT) -->      
+      <!-- Google Web Toolkit (GWT) -->
       <dependency>
         <groupId>com.google.gwt</groupId>
         <artifactId>gwt-dev</artifactId>
@@ -256,6 +256,17 @@
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-concurrent</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-concurrent</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-resource</artifactId>
         <version>${net.sf.mmm.util.version}</version>
       </dependency>
@@ -338,6 +349,28 @@
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-value</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-value</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-pojopath</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-pojopath</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-search</artifactId>
         <version>${net.sf.mmm.util.version}</version>
       </dependency>
@@ -410,6 +443,12 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-gwt</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-io</artifactId>
         <version>${net.sf.mmm.util.version}</version>
         <classifier>sources</classifier>
       </dependency>

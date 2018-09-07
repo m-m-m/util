@@ -25,8 +25,29 @@
       <optional>true</optional>
     </dependency>
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-resource</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-value</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
+    </dependency>
+    <!--
+    This dependency exists here in order to support jaxb-impl (com.sun.xml.bind). When this is on your classpath it will
+    override the default implementation from the JDK ((com.sun.internal.xml.bind). We also want to support jaxb-impl as
+    fallback so things also work when this gets on your classpath (e.g. as transitive dependency).
+     -->
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.1.6</version>
+      <optional>true</optional>
     </dependency>
     <!--
       Spring-context is marked as optional component. You can use spring, guice, seam or whatever framework you like

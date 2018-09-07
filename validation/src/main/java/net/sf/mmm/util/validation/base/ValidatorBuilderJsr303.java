@@ -6,7 +6,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 
 /**
  * This is a builder to create multiple instances of {@link ValidatorJsr303}.

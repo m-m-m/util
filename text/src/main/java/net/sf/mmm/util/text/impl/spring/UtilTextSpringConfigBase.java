@@ -17,7 +17,9 @@ import net.sf.mmm.util.text.base.UnicodeUtilImpl;
  *
  * @author hohwille
  * @since 7.1.0
+ * @deprecated use {@link UtilTextSpringConfig}.
  */
+@Deprecated
 @Configuration
 @SuppressWarnings("javadoc")
 public class UtilTextSpringConfigBase {

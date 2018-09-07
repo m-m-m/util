@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.validation.base;
 
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 
 /**
  * This is a fallback implementation of {@link ValidatorBuilder} that may be used if JSR 303 is not available (missing

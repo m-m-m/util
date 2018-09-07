@@ -31,10 +31,21 @@ public final class BasicHelper {
   /** The standard locale to use instead of {@link Locale#getDefault()}. */
   static final Locale STANDARD_LOCALE = Locale.US;
 
-  /**
-   * The system specific line separator.
-   */
-  public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+  /** The system specific line separator. */
+  public static final String LINE_SEPARATOR = getSystemProperty("line.separator");
+
+  /** An empty {@link String} array. */
+  public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+  /** An empty {@link Object} array. */
+  public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+  /** An empty int array. */
+  public static final int[] EMPTY_INT_ARRAY = new int[0];
+
+  private static final String USER_HOME = getSystemProperty("user.home").replace('\\', '/');
+
+  private static final String USER_NAME = getSystemProperty("user.name");
 
   /**
    * Construction prohibited.
@@ -108,6 +119,24 @@ public final class BasicHelper {
       return toUpperCase(string, STANDARD_LOCALE);
     }
     return string.toUpperCase(locale);
+  }
+
+  /**
+   * @return the path to the home directory of the current user (from system property "user.home").
+   * @since 7.6.0
+   */
+  public static String getUserHomePath() {
+
+    return USER_HOME;
+  }
+
+  /**
+   * @return the login of the current user (from system property "user.name").
+   * @since 7.6.0
+   */
+  public static String getUserLogin() {
+
+    return USER_NAME;
   }
 
 }

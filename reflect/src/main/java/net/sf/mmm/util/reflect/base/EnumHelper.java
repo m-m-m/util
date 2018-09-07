@@ -43,7 +43,11 @@ public class EnumHelper {
       if (value.equalsIgnoreCase(name)) {
         return e;
       }
-      name = name.replace("_", "");
+      name = name.replace("_", "-");
+      if (value.equalsIgnoreCase(name)) {
+        return e;
+      }
+      name = name.replace("-", "");
       if (value.equalsIgnoreCase(name)) {
         return e;
       }

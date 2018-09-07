@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMode;
@@ -49,8 +49,7 @@ public class PojoPropertyAccessorGetBuilder extends AbstractPojoPropertyAccessor
   }
 
   @Override
-  public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorDependencies dependencies) {
+  public PojoPropertyAccessorNonArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies) {
 
     if (method.getParameterTypes().length == 0) {
       Class<?> propertyClass = method.getReturnType();
@@ -61,11 +60,11 @@ public class PojoPropertyAccessorGetBuilder extends AbstractPojoPropertyAccessor
         propertyName = getPropertyName(methodName, METHOD_PREFIX_GET, "");
         if ((propertyName == null) && ((propertyClass == boolean.class) || (propertyClass == Boolean.class))) {
           // boolean getters may be is* or has* ...
-          propertyName = getPropertyName(methodName, METHOD_PREFIXES_BOOLEAN, StringUtil.EMPTY_STRING_ARRAY);
+          propertyName = getPropertyName(methodName, METHOD_PREFIXES_BOOLEAN, BasicHelper.EMPTY_STRING_ARRAY);
         }
         if (propertyName != null) {
-          return new PojoPropertyAccessorNonArgMethod(propertyName, method.getGenericReturnType(),
-              PojoPropertyAccessorNonArgMode.GET, descriptor, dependencies, method);
+          return new PojoPropertyAccessorNonArgMethod(propertyName, method.getGenericReturnType(), PojoPropertyAccessorNonArgMode.GET, descriptor, dependencies,
+              method);
         }
       }
     }
@@ -73,8 +72,7 @@ public class PojoPropertyAccessorGetBuilder extends AbstractPojoPropertyAccessor
   }
 
   @Override
-  public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorDependencies dependencies) {
+  public PojoPropertyAccessorNonArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies) {
 
     return new PojoPropertyAccessorGetField(descriptor, dependencies, field);
   }

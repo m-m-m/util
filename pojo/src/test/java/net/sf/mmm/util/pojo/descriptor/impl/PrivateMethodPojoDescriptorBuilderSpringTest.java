@@ -2,9 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.impl;
 
-import net.sf.mmm.util.component.impl.SpringContainerPool;
+import javax.inject.Inject;
+
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilderFactory;
+import net.sf.mmm.util.pojo.impl.spring.UtilPojoSpringConfig;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
@@ -12,13 +18,16 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { UtilPojoSpringConfig.class })
 public class PrivateMethodPojoDescriptorBuilderSpringTest extends PrivateMethodPojoDescriptorBuilderTest {
+
+  @Inject
+  private PojoDescriptorBuilderFactory factory;
 
   @Override
   protected PojoDescriptorBuilder getPojoDescriptorBuilder() {
 
-    PojoDescriptorBuilderFactory factory = SpringContainerPool.getInstance()
-        .get(PojoDescriptorBuilderFactory.class);
-    return factory.createDescriptorBuilder(VisibilityModifier.PRIVATE, null);
+    return this.factory.createDescriptorBuilder(VisibilityModifier.PRIVATE, null);
   }
 }

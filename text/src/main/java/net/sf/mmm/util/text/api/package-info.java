@@ -3,7 +3,9 @@
 /**
  * Provides the API for utilities that help with textual operations. <a name="documentation"></a>
  * <h2>Util Text API</h2> This package contains the API for various textual utilities.
- * {@link net.sf.mmm.util.text.api.Justification} allows simple justification of a short string. <br>
+ * {@link net.sf.mmm.util.text.api.Justification} allows simple justification of a short string while
+ * {@link net.sf.mmm.util.text.api.LineWrapper} offers justified text-layout with multiple-columns and hyphenation via
+ * {@link net.sf.mmm.util.text.api.Hyphenator}. <br>
  * For unicode support there is {@link net.sf.mmm.util.text.api.UnicodeUtil} and also
  * {@link net.sf.mmm.util.text.api.DiacriticalMark}. The {@link net.sf.mmm.util.text.api.Singularizer} transforms a term
  * in plural form to its according singular form (e.g. {@code "children"} to {@code "child"}). It is mainly intended for

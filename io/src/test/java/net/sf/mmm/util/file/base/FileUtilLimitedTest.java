@@ -46,16 +46,18 @@ public class FileUtilLimitedTest extends Assertions {
     assertThat(util.normalizePath("/foo\\bar/..\\bar/..", '/')).isEqualTo("/foo");
     assertThat(util.normalizePath("/foo\\//.\\./bar/..\\bar/..", '/')).isEqualTo("/foo");
     assertThat(util.normalizePath("foo\\//.\\./bar/.", '/')).isEqualTo("foo/bar");
-    String homeDir = "~";
+    String homeDir = System.getProperty("user.home").replace('\\', '/');
     assertThat(util.normalizePath("~", '/')).isEqualTo(homeDir);
-    assertThat(util.normalizePath("~/", '/')).isEqualTo(homeDir);
     assertThat(util.normalizePath("~/foo/./..", '/')).isEqualTo(homeDir);
     assertThat(util.normalizePath("~/foo/./..", '/')).isEqualTo(homeDir);
     assertThat(util.normalizePath("~/.mmm/search.xml", '/')).isEqualTo(homeDir + "/.mmm/search.xml");
     assertThat(util.normalizePath("~root/.ssh/authorized_keys", '/')).isEqualTo("/root/.ssh/authorized_keys");
-    assertThat(util.normalizePath("~someuser", '/')).isEqualTo("~/../someuser");
-    String uncPath = "\\\\10.0.0.1/share";
-    assertThat(util.normalizePath(uncPath, '/')).isEqualTo(uncPath);
+    if ("/root".equals(homeDir)) {
+      homeDir = "/home/nobody";
+    }
+    assertThat(util.normalizePath(homeDir + "/../someuser", '/')).isEqualTo(util.normalizePath("~someuser", '/'));
+    String uncPath = "\\\\10.0.0.1\\share";
+    assertThat(util.normalizePath(uncPath, '\\')).isEqualTo(uncPath);
     assertThat(util.normalizePath("http://www.host.com/foo/bar/./test/.././..")).isEqualTo("http://www.host.com/foo");
     assertThat(util.normalizePath("../..\\foo/../bar\\.\\some", '/')).isEqualTo("../../bar/some");
   }

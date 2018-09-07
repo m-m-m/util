@@ -54,8 +54,13 @@ public interface StringUtil {
    */
   String SYSTEM_PROPERTY_LINE_SEPARATOR = "line.separator";
 
-  /** An empty {@link String} array. */
-  String[] EMPTY_STRING_ARRAY = new String[0];
+  /**
+   * An empty {@link String} array.
+   * 
+   * @deprecated use {@link BasicHelper#EMPTY_STRING_ARRAY}.
+   */
+  @Deprecated
+  String[] EMPTY_STRING_ARRAY = BasicHelper.EMPTY_STRING_ARRAY;
 
   /**
    * An empty char array.

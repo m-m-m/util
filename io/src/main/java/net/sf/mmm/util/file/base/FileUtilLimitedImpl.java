@@ -7,7 +7,6 @@ import java.util.Objects;
 
 import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.file.api.FileUtilLimited;
-import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.resource.api.ResourcePath;
 import net.sf.mmm.util.resource.api.ResourcePathNode;
 
@@ -20,9 +19,6 @@ import net.sf.mmm.util.resource.api.ResourcePathNode;
  * @since 1.0.1
  */
 public class FileUtilLimitedImpl extends AbstractLoggableComponent implements FileUtilLimited {
-
-  /** The typical home directory of the user "root" under Unix/Linux. */
-  protected static final String HOME_ROOT = "/root";
 
   private static FileUtilLimited instance;
 
@@ -68,63 +64,9 @@ public class FileUtilLimitedImpl extends AbstractLoggableComponent implements Fi
     if (path.isEmpty()) {
       return path;
     }
-    String inputPath = normalizeHome(path);
+    String inputPath = ResourcePathNode.normalizeHome(path);
     ResourcePathNode<Void> resourcePath = ResourcePathNode.create(inputPath);
     return resourcePath.toString(separator);
-  }
-
-  /**
-   * Normalize the potential home segment of the path (if starts with ~ such as "~/.ssh", "~root/" or
-   * "~admin/..").
-   *
-   * @param path is the path where to normalize the home segment.
-   * @return the normalized path.
-   */
-  protected String normalizeHome(String path) {
-
-    if (path.charAt(0) == ResourcePath.HOME_PATH_CHAR) {
-      // normalize home directory
-      int len = path.length();
-      int userEnd = 1;
-      while (userEnd < len) {
-        if (CharFilter.FILE_SEPARATOR_FILTER.accept(path.charAt(userEnd))) {
-          break;
-        }
-        userEnd++;
-      }
-      String user = path.substring(1, userEnd);
-      String userHome;
-      if (user.isEmpty() || (user.equals(getUserLogin()))) {
-        userHome = getUserHomeDirectoryPath();
-      } else if (user.equals("root")) {
-        userHome = HOME_ROOT;
-      } else {
-        // ~<user> can not be resolved properly
-        // we would need to do OS-specific assumptions and look into
-        // /etc/passwd or whatever what might fail by missing read permissions
-        // This is just a hack that might work in most cases:
-        // we use the user.home dir get the dirname and append the user
-        userHome = getUserHomeDirectoryPath() + "/../" + user;
-      }
-      return userHome + path.substring(userEnd);
-    }
-    return path;
-  }
-
-  /**
-   * @return the path to the home directory of the current user.
-   */
-  protected String getUserHomeDirectoryPath() {
-
-    return "~";
-  }
-
-  /**
-   * @return the login of the current user (from system property "user.name").
-   */
-  protected String getUserLogin() {
-
-    return "anonymous";
   }
 
   @Override

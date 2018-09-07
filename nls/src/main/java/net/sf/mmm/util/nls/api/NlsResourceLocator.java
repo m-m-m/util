@@ -8,8 +8,8 @@ import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.resource.api.ResourceNotAvailableException;
 
 /**
- * A {@link NlsResourceLocator} is used to {@link #findResource(String, String, Locale) find} a {@link Locale localized}
- * {@link DataResource resource}. <br>
+ * A {@link NlsResourceLocator} is used to {@link #findResource(String, String, Locale) find} a {@link Locale
+ * localized} {@link DataResource resource}. <br>
  * The lookup algorithm is analog to the one used by {@link java.util.ResourceBundle}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
@@ -21,15 +21,15 @@ public interface NlsResourceLocator {
   char SEPARATOR = '_';
 
   /**
-   * This method determines the infix-strings for localization lookup ordered from most specific to least specific
-   * (empty string representing {@link Locale#ROOT}). Each infix is defined as:
+   * This method determines the infix-strings for localization lookup ordered from most specific to least
+   * specific (empty string representing {@link Locale#ROOT}). Each infix is defined as:
    *
    * <pre>
    * [_&lt;{@link Locale#getLanguage() language}&gt;[_&lt;{@link Locale#getCountry() country}&gt;[_&lt;{@link Locale#getVariant() variant}&gt;]]]
    * </pre>
    *
-   * Please note that if a segment is empty but a following segment is present, multiple underscores ('_') will occur.
-   * <br>
+   * Please note that if a segment is empty but a following segment is present, multiple underscores ('_')
+   * will occur. <br>
    * Examples:
    * <table border="1">
    * <tr>
@@ -51,9 +51,11 @@ public interface NlsResourceLocator {
    * </table>
    *
    * @param locale is the {@link Locale}.
-   * @return the localization-infixes ordered from most specific to least specific. The returned array will always
-   *         contain the empty string as last entry.
+   * @return the localization-infixes ordered from most specific to least specific. The returned array will
+   *         always contain the empty string as last entry.
+   * @deprecated use {@link net.sf.mmm.util.lang.api.LocaleHelper#getLocaleInfixes(Locale)}.
    */
+  @Deprecated
   String[] getLocaleInfixes(Locale locale);
 
   /**
@@ -63,7 +65,9 @@ public interface NlsResourceLocator {
    * @param locale the {@link String} representation of the {@link Locale}.
    * @return the parsed {@link Locale}.
    * @since 7.3.0
+   * @deprecated use {@link net.sf.mmm.util.lang.api.LocaleHelper#getLocale(String)}.
    */
+  @Deprecated
   Locale getLocale(String locale);
 
   /**
@@ -72,25 +76,28 @@ public interface NlsResourceLocator {
    * @see #getLocale(String)
    *
    * @param localeInfix is the locale-infix (e.g. "_en_US").
-   * @return the Locale for the given {@code localeInfix}. {@link Locale#ROOT} if the given {@code localeInfix} is
-   *         invalid.
+   * @return the Locale for the given {@code localeInfix}. {@link Locale#ROOT} if the given
+   *         {@code localeInfix} is invalid.
+   * @deprecated use {@link net.sf.mmm.util.lang.api.LocaleHelper#getLocale(String)}.
    */
+  @Deprecated
   Locale getLocaleForInfix(String localeInfix);
 
   /**
    * Like {@link #findResource(String, String, Locale)} but using a {@link Class} as {@code pathAndBasicName}.
    *
-   * @param type is the {@link Class} identifying the path of the resource including the filename without locale-part (
-   *        {@code infix}) or {@code extension}.
-   * @param extension is the final suffix of the requested {@link DataResource}. Typically ".properties" or ".xml".
+   * @param type is the {@link Class} identifying the path of the resource including the filename without
+   *        locale-part ( {@code infix}) or {@code extension}.
+   * @param extension is the final suffix of the requested {@link DataResource}. Typically ".properties" or
+   *        ".xml".
    * @param locale is the locale for which the {@link DataResource resource} is requested.
    * @return the most specific {@link DataResource resource} for the given {@link Locale}.
    */
   DataResource findResource(Class<?> type, String extension, Locale locale);
 
   /**
-   * This method finds a localized {@link DataResource resource}. It returns the most specific resource for the given
-   * path:
+   * This method finds a localized {@link DataResource resource}. It returns the most specific resource for
+   * the given path:
    *
    * <pre>
    * &lt;pathAndBasicName&gt;&lt;infix&gt;&lt;extension&gt;
@@ -106,17 +113,16 @@ public interface NlsResourceLocator {
    * {@link Locale#GERMANY} the following values are tried for {@literal <infix>}:<br>
    * {@code "de_DE", "de", ""}
    *
-   * @param pathAndBasicName is the path of the resource including the filename without locale-part or {@code extension}
-   *        . Folders (or packages) need to be separated with '/' and NOT with '.'. E.g.
+   * @param pathAndBasicName is the path of the resource including the filename without locale-part or
+   *        {@code extension} . Folders (or packages) need to be separated with '/' and NOT with '.'. E.g.
    *        "net/sf/mmm/util/nls/text/Hypenator".
-   * @param extension is the suffix of the requested {@link DataResource}. Typically ".properties" or ".xml". May be the
-   *        empty string.
+   * @param extension is the suffix of the requested {@link DataResource}. Typically ".properties" or ".xml".
+   *        May be the empty string.
    * @param locale is the locale for which the {@link DataResource resource} is requested.
    * @return the most specific {@link DataResource resource} for the given {@link Locale}.
-   * @throws ResourceNotAvailableException if no such {@link DataResource resource} including the {@link Locale#ROOT
-   *         un-localized} one is {@link DataResource#isAvailable() available}.
+   * @throws ResourceNotAvailableException if no such {@link DataResource resource} including the
+   *         {@link Locale#ROOT un-localized} one is {@link DataResource#isAvailable() available}.
    */
-  DataResource findResource(String pathAndBasicName, String extension, Locale locale)
-      throws ResourceNotAvailableException;
+  DataResource findResource(String pathAndBasicName, String extension, Locale locale) throws ResourceNotAvailableException;
 
 }

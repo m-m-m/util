@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.sf.m-m-m</groupId>
+    <artifactId>mmm-util-modules</artifactId>
+    <version>dev-SNAPSHOT</version>
+    <relativePath>../modules/pom.xml</relativePath>
+  </parent>
+  <artifactId>mmm-util-concurrent</artifactId>
+  <version>${net.sf.mmm.util.version}</version>
+  <packaging>jar</packaging>
+  <name>${project.artifactId}</name>
+  <description>provides concurrent utilities.</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-lang</artifactId>
+    </dependency>
+    <!--
+      Spring-context is marked as optional component. You can use spring, guice, seam or whatever framework you like
+      together with mmm as it comes with proper annotations using JSR 250 and JSR 330.
+      However, everything is tested with spring so this will be best choice if there are no other constraints.
+    -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

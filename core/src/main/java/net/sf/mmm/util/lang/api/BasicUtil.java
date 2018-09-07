@@ -16,8 +16,13 @@ package net.sf.mmm.util.lang.api;
  */
 public interface BasicUtil {
 
-  /** An empty int array. */
-  int[] EMPTY_INT_ARRAY = new int[0];
+  /**
+   * An empty int array.
+   *
+   * @deprecated use {@link BasicHelper#EMPTY_INT_ARRAY}.
+   */
+  @Deprecated
+  int[] EMPTY_INT_ARRAY = BasicHelper.EMPTY_INT_ARRAY;
 
   /**
    * This method checks if two given objects are {@link Object#equals(Object) equal} to each other. In advance

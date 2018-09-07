@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 
 /**
  * This is a dummy pojo for testing.
@@ -18,8 +18,7 @@ public class MyPojo extends AbstractPojo {
 
   public static final TypedProperty<Integer> PROPERTY_PORT = new TypedProperty<Integer>("port");
 
-  public static final TypedProperty<Long> PROPERTY_GENERICPOJO_ELEMENT = new TypedProperty<Long>("element",
-      "genericPojo");
+  public static final TypedProperty<Long> PROPERTY_GENERICPOJO_ELEMENT = new TypedProperty<Long>("element", "genericPojo");
 
   private Integer port;
 

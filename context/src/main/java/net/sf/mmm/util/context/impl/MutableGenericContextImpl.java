@@ -9,7 +9,6 @@ import net.sf.mmm.util.context.api.GenericContext;
 import net.sf.mmm.util.context.api.MutableGenericContext;
 import net.sf.mmm.util.context.base.AbstractMutableGenericContext;
 import net.sf.mmm.util.exception.api.WrongValueTypeException;
-import net.sf.mmm.util.lang.api.CompilerWarnings;
 import net.sf.mmm.util.value.api.GenericValueConverter;
 
 /**
@@ -28,7 +27,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    *
    * @param mapFactory is used to create the map for storing variables.
    */
-  @SuppressWarnings(CompilerWarnings.RAWTYPES)
+  @SuppressWarnings("rawtypes")
   public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory) {
 
     this(mapFactory, null, null);
@@ -41,7 +40,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    * @param valueConverter is the {@link GenericValueConverter} used to convert variables that are
    *        {@link #getVariable(String, Class) requested} as a different type.
    */
-  @SuppressWarnings(CompilerWarnings.RAWTYPES)
+  @SuppressWarnings("rawtypes")
   public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericValueConverter<Object> valueConverter) {
 
     this(mapFactory, null, valueConverter);
@@ -53,7 +52,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    * @param mapFactory is used to create the map for storing variables.
    * @param parentContext is the context the created one will derive from.
    */
-  @SuppressWarnings(CompilerWarnings.RAWTYPES)
+  @SuppressWarnings("rawtypes")
   public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericContext parentContext) {
 
     this(mapFactory, parentContext, null);
@@ -67,7 +66,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
    * @param valueConverter is the {@link GenericValueConverter} used to convert variables that are
    *        {@link #getVariable(String, Class) requested} as a different type.
    */
-  @SuppressWarnings(CompilerWarnings.RAWTYPES)
+  @SuppressWarnings("rawtypes")
   public MutableGenericContextImpl(MapFactory<? extends Map> mapFactory, GenericContext parentContext, GenericValueConverter<Object> valueConverter) {
 
     super(mapFactory, parentContext);
@@ -75,7 +74,7 @@ public class MutableGenericContextImpl extends AbstractMutableGenericContext {
   }
 
   @Override
-  @SuppressWarnings(CompilerWarnings.UNCHECKED)
+  @SuppressWarnings("unchecked")
   public <T> T getVariable(String variableName, Class<T> type) {
 
     Object variable = getVariable(variableName);

@@ -34,5 +34,10 @@
       <artifactId>mmm-util-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-scanner</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>

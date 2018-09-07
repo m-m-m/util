@@ -193,7 +193,8 @@ public class PojoUtilImpl extends AbstractComponent implements PojoUtil {
         return;
       }
       PojoDescriptor<?> descriptor = this.pojoDescriptorBuilder.getDescriptor(objectClass);
-      for (PojoPropertyDescriptor propertyDescriptor : descriptor.getPropertyDescriptors()) {
+      Collection<? extends PojoPropertyDescriptor> propertyDescriptors = descriptor.getPropertyDescriptors();
+      for (PojoPropertyDescriptor propertyDescriptor : propertyDescriptors) {
         if (!"class".equals(propertyDescriptor.getName())) {
           PojoPropertyAccessorNonArg getter = propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET);
           if (getter != null) {

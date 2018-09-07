@@ -29,7 +29,7 @@ import net.sf.mmm.util.nls.impl.NlsResourceBundleLocator;
 import net.sf.mmm.util.nls.impl.NlsResourceBundleLocatorImpl;
 import net.sf.mmm.util.nls.impl.formatter.NlsArgumentFormatterImpl;
 import net.sf.mmm.util.resource.impl.spring.UtilResourceSpringConfigBase;
-import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
+import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfig;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.value}.
@@ -38,7 +38,7 @@ import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilDateSpringConfig.class, UtilTextSpringConfigBase.class, UtilResourceSpringConfigBase.class })
+@Import({ UtilDateSpringConfig.class, UtilTextSpringConfig.class, UtilResourceSpringConfigBase.class })
 @ComponentScan("net.sf.mmm.util.nls.impl.formatter")
 @SuppressWarnings("javadoc")
 public class UtilNlsSpringConfig {

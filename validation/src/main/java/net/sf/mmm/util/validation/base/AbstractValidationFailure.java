@@ -4,8 +4,8 @@ package net.sf.mmm.util.validation.base;
 
 import java.util.UUID;
 
-import net.sf.mmm.util.lang.base.AbstractMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
+import net.sf.mmm.util.nls.base.AbstractMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 
 /**

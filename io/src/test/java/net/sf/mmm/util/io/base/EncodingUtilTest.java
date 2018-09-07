@@ -27,7 +27,6 @@ import net.sf.mmm.util.file.base.DirectoryFilter;
 import net.sf.mmm.util.file.base.PlainFileFilter;
 import net.sf.mmm.util.io.api.EncodingDetectionReader;
 import net.sf.mmm.util.io.api.EncodingUtil;
-import net.sf.mmm.util.lang.base.BasicUtilImpl;
 
 /**
  * This is the test-case for {@link EncodingUtilImpl}.
@@ -37,8 +36,8 @@ import net.sf.mmm.util.lang.base.BasicUtilImpl;
 @SuppressWarnings("all")
 public class EncodingUtilTest {
 
-  private static final String[] UNSUPPORTED_ENCODINGS = { EncodingUtil.ENCODING_ISO_8859_10,
-  EncodingUtil.ENCODING_ISO_8859_12, EncodingUtil.ENCODING_ISO_8859_14, EncodingUtil.ENCODING_ISO_8859_16 };
+  private static final String[] UNSUPPORTED_ENCODINGS = { EncodingUtil.ENCODING_ISO_8859_10, EncodingUtil.ENCODING_ISO_8859_12,
+      EncodingUtil.ENCODING_ISO_8859_14, EncodingUtil.ENCODING_ISO_8859_16 };
 
   protected EncodingUtil getEncodingUtil() {
 
@@ -66,8 +65,15 @@ public class EncodingUtilTest {
       if (Modifier.isStatic(modifiers) && Modifier.isPublic(modifiers)) {
         String name = field.getName();
         if (name.startsWith("ENCODING_")) {
+          boolean supportedEncoding = true;
           String encoding = (String) field.get(null);
-          if (!BasicUtilImpl.getInstance().isInArray(encoding, UNSUPPORTED_ENCODINGS, true)) {
+          for (String enc : UNSUPPORTED_ENCODINGS) {
+            if (encoding.equals(enc)) {
+              supportedEncoding = false;
+              break;
+            }
+          }
+          if (supportedEncoding) {
             checkEncoding(encoding);
           }
         }

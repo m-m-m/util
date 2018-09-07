@@ -8,7 +8,7 @@ import java.util.Map;
 
 import net.sf.mmm.util.lang.api.GenericBean;
 import net.sf.mmm.util.pojo.api.Pojo;
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 
 /**
  * This is a dummy pojo for testing.

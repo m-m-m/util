@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import net.sf.mmm.util.text.api.JustificationBuilder;
-import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
+import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfig;
 
 /**
  * This is the test-case for {@link JustificationBuilder} configured using spring.
@@ -18,7 +18,7 @@ import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
  * @since 1.1.1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { UtilTextSpringConfigBase.class })
+@ContextConfiguration(classes = { UtilTextSpringConfig.class })
 public class JustificationBuilderSpringTest extends JustificationBuilderTest {
 
   @Inject

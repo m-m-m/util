@@ -7,8 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
-import net.sf.mmm.util.math.impl.spring.UtilMathSpringConfig;
+import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.api.PojoUtil;
 import net.sf.mmm.util.pojo.base.GuessingPojoFactory;
@@ -19,10 +18,7 @@ import net.sf.mmm.util.pojo.descriptor.base.PojoDescriptorEnhancer;
 import net.sf.mmm.util.pojo.descriptor.impl.DefaultPojoDescriptorEnhancer;
 import net.sf.mmm.util.pojo.descriptor.impl.ExtendedPojoDescriptorDependenciesImpl;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoDescriptorBuilderFactoryImpl;
-import net.sf.mmm.util.pojo.path.api.PojoPathFunctionManager;
-import net.sf.mmm.util.pojo.path.api.PojoPathNavigator;
-import net.sf.mmm.util.pojo.path.impl.PojoPathFunctionManagerImpl;
-import net.sf.mmm.util.pojo.path.impl.PojoPathNavigatorImpl;
+import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.pojo}.
@@ -31,8 +27,8 @@ import net.sf.mmm.util.pojo.path.impl.PojoPathNavigatorImpl;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilLangSpringConfig.class, UtilMathSpringConfig.class })
-@ComponentScan({ "net.sf.mmm.util.pojo.descriptor.impl.accessor", "net.sf.mmm.util.pojo.path.impl.function" })
+@Import({ UtilReflectSpringConfig.class, UtilCollectionSpringConfig.class })
+@ComponentScan({ "net.sf.mmm.util.pojo.descriptor.impl.accessor" })
 @SuppressWarnings("javadoc")
 public class UtilPojoSpringConfig {
 
@@ -64,18 +60,6 @@ public class UtilPojoSpringConfig {
   public PojoDescriptorEnhancer pojoDescriptorEnhancer() {
 
     return new DefaultPojoDescriptorEnhancer();
-  }
-
-  @Bean
-  public PojoPathNavigator pojoPathNavigator() {
-
-    return new PojoPathNavigatorImpl();
-  }
-
-  @Bean
-  public PojoPathFunctionManager pojoPathFunctionManager() {
-
-    return new PojoPathFunctionManagerImpl();
   }
 
 }

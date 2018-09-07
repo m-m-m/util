@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import net.sf.mmm.util.text.api.Singularizer;
-import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
+import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfig;
 
 /**
  * This is the test-case for {@link EnglishSingularizer} configured using spring.
@@ -17,7 +17,7 @@ import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfigBase;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { UtilTextSpringConfigBase.class })
+@ContextConfiguration(classes = { UtilTextSpringConfig.class })
 public class EnglishSingularizerSpringTest extends EnglishSingularizerTest {
 
   @Inject

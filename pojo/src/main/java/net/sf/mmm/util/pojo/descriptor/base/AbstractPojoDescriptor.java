@@ -5,6 +5,7 @@ package net.sf.mmm.util.pojo.descriptor.base;
 import java.util.Collection;
 
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptorBuilder;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
@@ -18,7 +19,6 @@ import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArgMo
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
 import net.sf.mmm.util.pojo.descriptor.impl.PojoPropertyDescriptorImpl;
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.reflect.api.ReflectionException;
 
@@ -76,14 +76,13 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
    * This method gets the property-descriptor for the given {@code propertyName}.
    *
    * @param propertyName is the name of the requested property-descriptor.
-   * @return the requested property-descriptor or {@code null} if NO property exists with the given {@code propertyName}
-   *         .
+   * @return the requested property-descriptor or {@code null} if NO property exists with the given
+   *         {@code propertyName} .
    */
   public abstract PojoPropertyDescriptorImpl getOrCreatePropertyDescriptor(String propertyName);
 
   @Override
-  public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property,
-      PojoPropertyAccessorMode<ACCESSOR> mode) {
+  public <ACCESSOR extends PojoPropertyAccessor> ACCESSOR getAccessor(String property, PojoPropertyAccessorMode<ACCESSOR> mode) {
 
     return getAccessor(property, mode, false);
   }
@@ -93,11 +92,9 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
 
     PojoProperty pojoProperty = new PojoProperty(property);
     if (pojoProperty.getIndex() != null) {
-      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED, true)
-          .invoke(pojo, pojoProperty.getIndex().intValue());
+      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED, true).invoke(pojo, pojoProperty.getIndex().intValue());
     } else if (pojoProperty.getKey() != null) {
-      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorOneArgMode.GET_MAPPED, true).invoke(pojo,
-          pojoProperty.getKey());
+      return getAccessor(pojoProperty.getName(), PojoPropertyAccessorOneArgMode.GET_MAPPED, true).invoke(pojo, pojoProperty.getKey());
     } else {
       return getAccessor(property, PojoPropertyAccessorNonArgMode.GET, true).invoke(pojo);
     }
@@ -105,8 +102,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
 
   @SuppressWarnings("unchecked")
   @Override
-  public <V> V getProperty(POJO pojo, TypedProperty<V> property)
-      throws PojoPropertyNotFoundException, ReflectionException {
+  public <V> V getProperty(POJO pojo, TypedProperty<V> property) throws PojoPropertyNotFoundException, ReflectionException {
 
     if (property.getParentPath() != null) {
       return (V) getProperty(pojo, property.getPojoPath(), false);
@@ -120,11 +116,9 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
 
     PojoProperty property = new PojoProperty(propertyName);
     if (property.getIndex() != null) {
-      return getAccessor(property.getName(), PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, true).invoke(pojo,
-          property.getIndex().intValue(), value);
+      return getAccessor(property.getName(), PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED, true).invoke(pojo, property.getIndex().intValue(), value);
     } else if (property.getKey() != null) {
-      return getAccessor(property.getName(), PojoPropertyAccessorTwoArgMode.SET_MAPPED, true).invoke(pojo,
-          property.getKey(), value);
+      return getAccessor(property.getName(), PojoPropertyAccessorTwoArgMode.SET_MAPPED, true).invoke(pojo, property.getKey(), value);
     } else {
       return getAccessor(propertyName, PojoPropertyAccessorOneArgMode.SET, true).invoke(pojo, value);
     }
@@ -132,8 +126,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public <V> void setProperty(POJO pojo, TypedProperty<V> property, V value)
-      throws PojoPropertyNotFoundException, ReflectionException {
+  public <V> void setProperty(POJO pojo, TypedProperty<V> property, V value) throws PojoPropertyNotFoundException, ReflectionException {
 
     NlsNullPointerException.checkNotNull("pojo", pojo);
     NlsNullPointerException.checkNotNull(TypedProperty.class, property);
@@ -150,9 +143,10 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
   /**
    *
    * @param pojo is the {@link #getPojoClass() POJO} instance where to access the property.
-   * @param propertyPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPropertyPath#getPojoPath() POJO property path}.
-   * @param required - {@code true} if the result is required, {@code false} if any intermediate or the end result may
-   *        be {@code null} resulting in {@code null} being returned.
+   * @param propertyPath is the {@link net.sf.mmm.util.pojo.path.api.PojoPropertyPath#getPojoPath() POJO
+   *        property path}.
+   * @param required - {@code true} if the result is required, {@code false} if any intermediate or the end
+   *        result may be {@code null} resulting in {@code null} being returned.
    * @return the requested property value.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -190,8 +184,7 @@ public abstract class AbstractPojoDescriptor<POJO> implements PojoDescriptor<POJ
       Number size = (Number) result;
       return size.intValue();
     } catch (ClassCastException e) {
-      throw new IllegalStateException(
-          "Size of property '" + propertyName + "' in pojo '" + pojo + "' is no number: " + result);
+      throw new IllegalStateException("Size of property '" + propertyName + "' in pojo '" + pojo + "' is no number: " + result);
     }
   }
 

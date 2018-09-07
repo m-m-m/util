@@ -85,4 +85,20 @@ public final class BasicHelper {
     return string.toUpperCase();
   }
 
+  /**
+   * @return the path to the home directory of the current user.
+   */
+  public static String getUserHomeDirectoryPath() {
+
+    return "~";
+  }
+
+  /**
+   * @return the login of the current user (from system property "user.name").
+   */
+  public static String getUserLogin() {
+
+    return "anonymous";
+  }
+
 }

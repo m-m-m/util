@@ -20,6 +20,7 @@
     <module>../math</module>
     <module>../xml</module>
     <module>../scanner</module>
+    <module>../concurrent</module>
     <module>../session</module>
     <module>../date</module>
     <module>../text</module>
@@ -35,6 +36,8 @@
     <module>../context</module>
     <module>../event</module>
     <module>../pojo</module>
+    <module>../value</module>
+    <module>../pojopath</module>
     <module>../validation</module>
     <module>../search</module>
     <module>../version</module>
@@ -53,8 +56,8 @@
       </modules>
     </profile>
   </profiles>
-  
-  
+
+
   <dependencyManagement>
     <dependencies>
       <!-- BOM of mmm-util -->
@@ -92,5 +95,5 @@
       -->
     </dependencies>
   </dependencyManagement>
-  
+
 </project>
