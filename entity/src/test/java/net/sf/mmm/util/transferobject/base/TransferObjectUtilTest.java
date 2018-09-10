@@ -20,9 +20,11 @@ import net.sf.mmm.util.transferobject.base.example.persistence.PersonEntity;
 /**
  * This is the test-case for {@link TransferObjectUtil}.
  *
+ * @deprecated see {@link TransferObjectUtil}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Deprecated
 public class TransferObjectUtilTest extends Assert {
 
   /** Test ZIP code. */

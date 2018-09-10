@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.transferobject.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.reflect.api.AccessFailedException;
 import net.sf.mmm.util.reflect.api.InstantiationFailedException;
@@ -11,12 +11,14 @@ import net.sf.mmm.util.transferobject.api.TransferObject;
 import net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited;
 
 /**
- * This is the implementation of {@link net.sf.mmm.util.transferobject.api.TransferObjectUtilLimited}.
+ * This is the implementation of {@link TransferObjectUtilLimited}.
  *
+ * @deprecated see {@link TransferObjectUtilLimited}
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public class TransferObjectUtilLimitedImpl extends AbstractLoggableComponent implements TransferObjectUtilLimited {
+@Deprecated
+public class TransferObjectUtilLimitedImpl extends AbstractComponent implements TransferObjectUtilLimited {
 
   /**
    * The constructor.

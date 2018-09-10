@@ -7,5 +7,10 @@
  * {@link java.io.Writer}s as well as handling encodings. If a method specifies that a stream is closed, this is
  * guaranteed on success as well as in an exceptional state so your server-application does NOT run out of file-handles.
  * <br>
+ * <b>NOTE:</b><br>
+ * For high performance IO you should have a look at <a href="http://netty.io/">netty</a><br>
+ * <b>ATTENTION:</b><br>
+ * The most types from this package have been moved from {@code mmm-util-core} (from 4.0.0 to 5.0.0) to
+ * {@code mmm-util-io} (1.0.0).
  */
 package net.sf.mmm.util.io.api;

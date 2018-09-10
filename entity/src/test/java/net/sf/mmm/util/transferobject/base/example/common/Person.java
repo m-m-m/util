@@ -3,7 +3,7 @@
 package net.sf.mmm.util.transferobject.base.example.common;
 
 import net.sf.mmm.util.entity.api.GenericEntity;
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 
 /**
  * This is the interface for a contact person.
@@ -40,7 +40,8 @@ public interface Person extends GenericEntity<Long> {
   void setLastName(String lastName);
 
   /**
-   * @return the {@link #getId() ID} of the {@link Address} of this {@link Person} or {@code null} if not present.
+   * @return the {@link #getId() ID} of the {@link Address} of this {@link Person} or {@code null} if not
+   *         present.
    */
   Long getAddressId();
 

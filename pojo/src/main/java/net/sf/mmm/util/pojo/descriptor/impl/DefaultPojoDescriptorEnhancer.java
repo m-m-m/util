@@ -6,7 +6,10 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorIndexedNonArgMode;
@@ -101,7 +104,9 @@ import net.sf.mmm.util.text.base.EnglishSingularizer;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent implements PojoDescriptorEnhancer {
+public class DefaultPojoDescriptorEnhancer extends AbstractComponent implements PojoDescriptorEnhancer {
+
+  private static final Logger LOG = LoggerFactory.getLogger(DefaultPojoDescriptorEnhancer.class);
 
   /** The singularizer. */
   private Singularizer singularizer;
@@ -203,12 +208,9 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
    * @param propertyDescriptor is the descriptor of the property where to add the given {@code accessor}.
    * @param accessor is the (virtual) accessor to add.
    */
-  private void addVirtualAccessor(AbstractPojoPropertyDescriptor propertyDescriptor,
-      PojoPropertyAccessor accessor) {
+  private void addVirtualAccessor(AbstractPojoPropertyDescriptor propertyDescriptor, PojoPropertyAccessor accessor) {
 
-    if (getLogger().isTraceEnabled()) {
-      getLogger().trace("adding virtual accessor: " + accessor);
-    }
+    LOG.trace("adding virtual accessor: {}", accessor);
     propertyDescriptor.putAccessor(accessor);
   }
 
@@ -233,10 +235,7 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
                 PojoPropertyAccessorMode<? extends PojoPropertyAccessor> mode = singularAccessor.getMode();
                 PojoPropertyAccessor pluralAccessor = propertyDescriptor.getAccessor(mode);
                 if (pluralAccessor == null) {
-                  if (getLogger().isDebugEnabled()) {
-                    getLogger()
-                        .debug("copying accessor '" + singularAccessor + "' to '" + propertyDescriptor + "'");
-                  }
+                  LOG.debug("copying accessor '{}' to '{}'", singularAccessor, propertyDescriptor);
                   propertyDescriptor.putAccessor(singularAccessor);
                 }
               }
@@ -245,43 +244,35 @@ public class DefaultPojoDescriptorEnhancer extends AbstractLoggableComponent imp
           if (this.addVirtualAccessors) {
             // add size accessor
             if (propertyDescriptor.getAccessor(PojoPropertyAccessorNonArgMode.GET_SIZE) == null) {
-              addVirtualAccessor(propertyDescriptor,
-                  new PojoPropertyAccessorProxyGetSize(this.dependencies, getAccessor));
+              addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetSize(this.dependencies, getAccessor));
             }
             if (isMap) {
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.GET_MAPPED) == null) {
-                addVirtualAccessor(propertyDescriptor,
-                    new PojoPropertyAccessorProxyGetMapped(this.dependencies, getAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetMapped(this.dependencies, getAccessor));
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorTwoArgMode.SET_MAPPED) == null) {
-                addVirtualAccessor(propertyDescriptor,
-                    new PojoPropertyAccessorProxySetMapped(this.dependencies, getAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetMapped(this.dependencies, getAccessor));
               }
             } else {
               // array or collection
-              PojoPropertyAccessorOneArg setAccessor = propertyDescriptor
-                  .getAccessor(PojoPropertyAccessorOneArgMode.SET);
+              PojoPropertyAccessorOneArg setAccessor = propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.SET);
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.ADD) == null) {
                 // we can NOT add 'add'-accessor for arrays without setter
                 if (!typeClass.isArray() || (setAccessor != null)) {
-                  addVirtualAccessor(propertyDescriptor,
-                      new PojoPropertyAccessorProxyAdd(this.dependencies, getAccessor, setAccessor));
+                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyAdd(this.dependencies, getAccessor, setAccessor));
                 }
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorOneArgMode.REMOVE) == null) {
                 // we can NOT add 'remove'-accessor for arrays without setter
                 if (!typeClass.isArray() || (setAccessor != null)) {
-                  addVirtualAccessor(propertyDescriptor,
-                      new PojoPropertyAccessorProxyRemove(this.dependencies, getAccessor, setAccessor));
+                  addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyRemove(this.dependencies, getAccessor, setAccessor));
                 }
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorIndexedNonArgMode.GET_INDEXED) == null) {
-                addVirtualAccessor(propertyDescriptor,
-                    new PojoPropertyAccessorProxyGetIndexed(this.dependencies, getAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxyGetIndexed(this.dependencies, getAccessor));
               }
               if (propertyDescriptor.getAccessor(PojoPropertyAccessorIndexedOneArgMode.SET_INDEXED) == null) {
-                addVirtualAccessor(propertyDescriptor,
-                    new PojoPropertyAccessorProxySetIndexed(this.dependencies, getAccessor, setAccessor));
+                addVirtualAccessor(propertyDescriptor, new PojoPropertyAccessorProxySetIndexed(this.dependencies, getAccessor, setAccessor));
               }
             }
           }

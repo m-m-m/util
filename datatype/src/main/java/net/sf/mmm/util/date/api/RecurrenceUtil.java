@@ -5,20 +5,17 @@ package net.sf.mmm.util.date.api;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
-
 /**
  * This is the interface for a collection of utility functions that help with to deal with {@link Recurrence}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@ComponentSpecification
 public interface RecurrenceUtil {
 
   /**
-   * This method determines the next occurrence (as {@link Date}) after the given {@code date} based on the given
-   * {@link Recurrence}.
+   * This method determines the next occurrence (as {@link Date}) after the given {@code date} based on the
+   * given {@link Recurrence}.
    *
    * @see #getNextDate(Calendar, Recurrence)
    *
@@ -29,8 +26,8 @@ public interface RecurrenceUtil {
   Date getNextDate(Date date, Recurrence recurrence);
 
   /**
-   * This method determines the next occurrence (as {@link Calendar}) after the given {@code calendar} based on the
-   * given {@link Recurrence}.
+   * This method determines the next occurrence (as {@link Calendar}) after the given {@code calendar} based
+   * on the given {@link Recurrence}.
    *
    * @see #getNextDate(Date, Recurrence)
    *

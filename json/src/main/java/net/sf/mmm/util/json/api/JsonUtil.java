@@ -11,8 +11,6 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.reflect.api.GenericType;
 
 /**
@@ -27,7 +25,8 @@ public interface JsonUtil {
    * A generic implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@code value}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, Object value);
@@ -36,7 +35,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link String} value.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, String value);
@@ -45,7 +45,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link Boolean} value.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, boolean value);
@@ -54,7 +55,8 @@ public interface JsonUtil {
    * A generic implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link Number}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, Number value);
@@ -63,7 +65,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link Long}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, long value);
@@ -72,7 +75,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link Double}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, double value);
@@ -81,7 +85,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link BigDecimal}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, BigDecimal value);
@@ -90,7 +95,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link BigInteger}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, BigInteger value);
@@ -99,7 +105,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link Integer}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, int value);
@@ -108,7 +115,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} to write the {@code null} value.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write {@code null}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write
+   *        {@code null}).
    */
   void writeNull(JsonGenerator json, String property);
 
@@ -116,7 +124,8 @@ public interface JsonUtil {
    * An implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link Iterable}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, Iterable<?> value);
@@ -125,7 +134,8 @@ public interface JsonUtil {
    * A implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@link Map}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON. May be {@code null}.
    */
   void write(JsonGenerator json, String property, Map<?, ?> value);
@@ -134,7 +144,8 @@ public interface JsonUtil {
    * A implementation of {@link JsonSupport#toJson(JsonGenerator)} for a given {@code array}.
    *
    * @param json the {@link JsonGenerator}.
-   * @param property the name of the JSON property or {@code null} for no property (just to write the {@code value}).
+   * @param property the name of the JSON property or {@code null} for no property (just to write the
+   *        {@code value}).
    * @param value the value to write as JSON array. May be {@code null}.
    */
   void write(JsonGenerator json, String property, Object[] value);
@@ -142,14 +153,14 @@ public interface JsonUtil {
   /**
    * @param json the {@link JsonParser} to get the {@link JsonParser#next() next} {@link Event} from.
    * @param event the expected {@link Event}.
-   * @throws ObjectMismatchException if the expected {@link Event} does not match.
+   * @throws IllegalStateException if the expected {@link Event} does not match.
    */
-  void expectEvent(JsonParser json, Event event) throws ObjectMismatchException;
+  void expectEvent(JsonParser json, Event event);
 
   /**
    * @param actual the actual {@link Event} received from {@link JsonParser}.
    * @param expected the expected {@link Event}.
-   * @throws ObjectMismatchException if the expected {@link Event} does not match.
+   * @throws IllegalStateException if the expected {@link Event} does not match.
    */
   void expectEvent(Event actual, Event expected);
 
@@ -175,9 +186,9 @@ public interface JsonUtil {
    * @param json the {@link JsonParser}.
    * @param enumType the {@link Class} reflecting the {@link Enum} to parse.
    * @return the parsed {@link Enum} constant.
-   * @throws IllegalCaseException if no such {@link Enum} constant exists.
+   * @throws IllegalStateException if no such {@link Enum} constant exists.
    */
-  <E extends Enum<E>> E readEnum(JsonParser json, Class<E> enumType) throws IllegalCaseException;
+  <E extends Enum<E>> E readEnum(JsonParser json, Class<E> enumType);
 
   /**
    * @param <C> the generic type of the {@link Collection}.
@@ -190,8 +201,10 @@ public interface JsonUtil {
   /**
    * @param <E> the generic type of the {@link Collection#add(Object) elements} in the {@link Collection}.
    * @param json the {@link JsonParser}.
-   * @param collection the {@link Collection} where to {@link Collection#add(Object) add} the elements parsed from JSON.
-   * @param type the {@link GenericType} of the {@link Collection#add(Object) elements} in the {@link Collection}.
+   * @param collection the {@link Collection} where to {@link Collection#add(Object) add} the elements parsed
+   *        from JSON.
+   * @param type the {@link GenericType} of the {@link Collection#add(Object) elements} in the
+   *        {@link Collection}.
    */
   <E> void readCollection(JsonParser json, Collection<E> collection, GenericType<E> type);
 
@@ -223,7 +236,8 @@ public interface JsonUtil {
 
   /**
    * @param <N> the generic type of the {@link Number} to parse.
-   * @param json the {@link JsonParser} with {@link JsonParser#next() current event} being {@link Event#VALUE_NUMBER}.
+   * @param json the {@link JsonParser} with {@link JsonParser#next() current event} being
+   *        {@link Event#VALUE_NUMBER}.
    * @param type the {@link Class} reflecting the type of {@link Number} to parse.
    * @return the parsed value.
    */

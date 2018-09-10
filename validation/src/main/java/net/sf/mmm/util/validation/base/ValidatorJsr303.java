@@ -17,7 +17,7 @@ import javax.validation.metadata.PropertyDescriptor;
 
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 import net.sf.mmm.util.validation.NlsBundleUtilValidationRoot;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 

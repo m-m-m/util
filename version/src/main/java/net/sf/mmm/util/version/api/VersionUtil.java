@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.version.api;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
-import net.sf.mmm.util.exception.api.NlsParseException;
-
 /**
  * This is the interface for a collection of utility functions that help to deal with versions. E.g. you can
  * {@link #createVersionIdentifier(String) parse} a a version {@link String} to a {@link VersionIdentifier}.
@@ -12,7 +9,6 @@ import net.sf.mmm.util.exception.api.NlsParseException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-@ComponentSpecification
 public interface VersionUtil {
 
   /**
@@ -23,9 +19,8 @@ public interface VersionUtil {
    * @param versionString is the {@link VersionIdentifier#toString() string representation} of a
    *        {@link VersionIdentifier}.
    * @return the parsed {@link VersionIdentifier}.
-   * @throws NlsParseException if the given {@code versionString} is invalid and could not be parsed.
    */
-  VersionIdentifier createVersionIdentifier(String versionString) throws NlsParseException;
+  VersionIdentifier createVersionIdentifier(String versionString);
 
   /**
    * This method parses the given {@code versionString} and builds an according {@link VersionIdentifier}
@@ -37,9 +32,8 @@ public interface VersionUtil {
    *        {@link VersionIdentifier#toString() string representation} that may differ from the given
    *        {@code versionString}. Otherwise the original {@code versionString} will be used.
    * @return the parsed {@link VersionIdentifier}.
-   * @throws NlsParseException if the given {@code versionString} is invalid and could not be parsed.
    */
-  VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat) throws NlsParseException;
+  VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat);
 
   /**
    * @return the default {@link VersionIdentifierFormatter}.
@@ -59,8 +53,8 @@ public interface VersionUtil {
 
   /**
    * This method creates a {@link VersionIdentifierFormatter} for the given {@code formatPattern}. Similar to
-   * {@link java.text.SimpleDateFormat} the format pattern is parsed and there are particular
-   * <em>letter symbols</em> that have a specific meaning.
+   * {@link java.text.SimpleDateFormat} the format pattern is parsed and there are particular <em>letter
+   * symbols</em> that have a specific meaning.
    * <table border="1">
    * <tr>
    * <th>letter</th>
@@ -74,8 +68,7 @@ public interface VersionUtil {
    * is a character used to separate the {@link VersionIdentifier#getVersionSegment(int) version segments}
    * (typically the dot sign '.'). Further, {@code «min»} and {@code «max»} are the minimum and maximum number
    * of {@link VersionIdentifier#getVersionSegment(int) segments} to format and {@code «padding»} is the
-   * minimum number of digits to {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} each
-   * {@link VersionIdentifier#getVersionSegment(int) segment}.</td>
+   * minimum number of digits to pad each {@link VersionIdentifier#getVersionSegment(int) segment}.</td>
    * </tr>
    * <tr>
    * <td>P</td>
@@ -93,8 +86,7 @@ public interface VersionUtil {
    * <td>N</td>
    * <td>{@link VersionIdentifier#getPhaseNumber() phase number}</td>
    * <td>The {@link VersionIdentifier#getPhaseNumber() phase number}. May be followed by
-   * <code>{«padding»}</code> to {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} to a
-   * minimum number of digits.</td>
+   * <code>{«padding»}</code> to pad to a minimum number of digits.</td>
    * </tr>
    * <tr>
    * <td>S</td>
@@ -113,8 +105,7 @@ public interface VersionUtil {
    * <tr>
    * <td>R</td>
    * <td>{@link VersionIdentifier#getRevision() revision}</td>
-   * <td>The revision. May be followed by <code>{«padding»}</code> to
-   * {@link net.sf.mmm.util.lang.api.StringUtil#padNumber(long, int) pad} to a minimum number of digits.</td>
+   * <td>The revision. May be followed by <code>{«padding»}</code> to pad to a minimum number of digits.</td>
    * </tr>
    * <tr>
    * <td>T</td>

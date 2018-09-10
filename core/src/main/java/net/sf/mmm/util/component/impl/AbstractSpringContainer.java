@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.api.ResourceAmbiguousException;
 import net.sf.mmm.util.component.api.ResourceMissingException;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.ObjectDisposedException;
 
 /**
@@ -17,10 +17,12 @@ import net.sf.mmm.util.exception.api.ObjectDisposedException;
  * <b>ATTENTION:</b><br>
  * Please check your dependencies as {@code spring} is an optional dependency in {@code mmm-util-core}.
  *
+ * @deprecated will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
-public abstract class AbstractSpringContainer extends AbstractLoggableComponent implements IocContainer {
+@Deprecated
+public abstract class AbstractSpringContainer extends AbstractComponent implements IocContainer {
 
   /** The {@link ConfigurableApplicationContext} to delegate to. */
   private ApplicationContext applicationContext;

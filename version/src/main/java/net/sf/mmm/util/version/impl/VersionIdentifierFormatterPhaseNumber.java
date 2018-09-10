@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.version.impl;
 
-import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
@@ -17,15 +16,15 @@ public class VersionIdentifierFormatterPhaseNumber extends AbstractVersionIdenti
   /**
    * The constructor.
    *
-   * @param stringUtil is the {@link StringUtil} instance.
-   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getPhaseNumber() phase number}.
-   *        Will be omitted if {@link VersionIdentifier#getPhaseNumber() phase number} is {@code null}.
+   * @param prefix is the static prefix to append before the {@link VersionIdentifier#getPhaseNumber() phase
+   *        number}. Will be omitted if {@link VersionIdentifier#getPhaseNumber() phase number} is
+   *        {@code null}.
    * @param phaseNumberPadding is the padding (minimum number of digits) for the
    *        {@link VersionIdentifier#getPhaseNumber() phase number}. The default is {@code 0}.
    */
-  public VersionIdentifierFormatterPhaseNumber(StringUtil stringUtil, String prefix, int phaseNumberPadding) {
+  public VersionIdentifierFormatterPhaseNumber(String prefix, int phaseNumberPadding) {
 
-    super(stringUtil, prefix, phaseNumberPadding);
+    super(prefix, phaseNumberPadding);
   }
 
   @Override

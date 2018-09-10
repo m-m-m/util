@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorTwoArgMode;
@@ -26,8 +26,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorTwoArgB
  */
 @Singleton
 @Named
-public class PojoPropertyAccessorSetMappedBuilder extends
-    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorTwoArg> implements PojoPropertyAccessorTwoArgBuilder {
+public class PojoPropertyAccessorSetMappedBuilder extends AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorTwoArg>
+    implements PojoPropertyAccessorTwoArgBuilder {
 
   /** method name prefix for classic setter */
   private static final String METHOD_PREFIX_SET = "set";
@@ -47,27 +47,25 @@ public class PojoPropertyAccessorSetMappedBuilder extends
   }
 
   @Override
-  public PojoPropertyAccessorTwoArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorDependencies dependencies) {
+  public PojoPropertyAccessorTwoArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies) {
 
     String methodName = method.getName();
-    String propertyName = getPropertyName(methodName, METHOD_PREFIXES, StringUtil.EMPTY_STRING_ARRAY);
+    String propertyName = getPropertyName(methodName, METHOD_PREFIXES, BasicHelper.EMPTY_STRING_ARRAY);
     if (propertyName != null) {
       Class<?>[] argumentClasses = method.getParameterTypes();
       if (argumentClasses.length == 2) {
         Type[] argumentTypes = method.getGenericParameterTypes();
         assert (argumentTypes.length == 2);
         // found compliant setter
-        return new PojoPropertyAccessorTwoArgMethod(propertyName, argumentTypes[1],
-            PojoPropertyAccessorTwoArgMode.SET_MAPPED, descriptor, dependencies, method);
+        return new PojoPropertyAccessorTwoArgMethod(propertyName, argumentTypes[1], PojoPropertyAccessorTwoArgMode.SET_MAPPED, descriptor, dependencies,
+            method);
       }
     }
     return null;
   }
 
   @Override
-  public PojoPropertyAccessorTwoArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorDependencies dependencies) {
+  public PojoPropertyAccessorTwoArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies) {
 
     return null;
   }

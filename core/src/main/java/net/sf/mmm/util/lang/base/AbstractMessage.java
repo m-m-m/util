@@ -14,7 +14,9 @@ import net.sf.mmm.util.nls.base.NlsMessagePlain;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
+ * @deprecated use {@link net.sf.mmm.util.nls.base.AbstractMessage}.
  */
+@Deprecated
 public abstract class AbstractMessage implements Message {
 
   private static final long serialVersionUID = -88269463788978385L;

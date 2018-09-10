@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import net.sf.mmm.test.TestCategoryManual;
-import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.process.api.AsyncProcessExecutor;
 import net.sf.mmm.util.process.api.ProcessContext;
 import net.sf.mmm.util.process.api.ProcessUtil;
@@ -33,7 +33,7 @@ import net.sf.mmm.util.process.api.ProcessUtil;
 public class ProcessUtilTest {
 
   /** The platform specific line separator. */
-  private static final String LINE_SEPARATOR = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
+  private static final String LINE_SEPARATOR = BasicHelper.LINE_SEPARATOR;
 
   /** The classpath for java execution. */
   private static final String CLASSPATH = "target/test-classes" + File.pathSeparatorChar + "eclipse-target/test-classes";

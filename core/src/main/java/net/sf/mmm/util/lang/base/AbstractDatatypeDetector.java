@@ -10,17 +10,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.lang.api.Datatype;
 import net.sf.mmm.util.lang.api.DatatypeDetector;
 
 /**
  * This is the abstract base implementation of {@link DatatypeDetector}.
  *
+ * @deprecated see {@link DatatypeDetector}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-public abstract class AbstractDatatypeDetector extends AbstractLoggableComponent implements DatatypeDetector {
+@Deprecated
+public abstract class AbstractDatatypeDetector extends AbstractComponent implements DatatypeDetector {
 
   private final Set<String> customDatatypeSet;
 

@@ -13,39 +13,47 @@
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>provides core utilities that fill gaps in the jdk.</description>
-  <profiles>
-    <profile>
-      <id>oldjava</id>
-      <activation>
-        <jdk>[1.0,1.6]</jdk>
-      </activation>
-      <dependencies>
-        <dependency>
-          <!-- does NOT work before java 7 anymore, use 3.1.1 for java 5 or 6 -->
-          <groupId>wrong.java.version</groupId>
-          <artifactId>java-jvm</artifactId>
-          <version>1.7</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
 
   <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-exception</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-resource</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-collection</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-concurrent</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-math</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-xml</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-value</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- JPA for entity, however optional dependency, only required for AbstractSimpleDatatypeAttributeConverter -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <!-- should be included in java since 1.6, 1.7 or 1.8 but is not -->
-    <dependency>
-      <groupId>javax.inject</groupId>
-      <artifactId>javax.inject</artifactId>
-      <version>1</version>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <optional>true</optional>
     </dependency>
     <!--
       Spring-context is marked as optional component. You can use spring, guice, seam or whatever framework you like
@@ -58,44 +66,8 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-orm</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-core</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <!-- JPA for entity, however optional dependency, only required for javadoc links -->
-    <dependency>
-      <groupId>org.hibernate.javax.persistence</groupId>
-      <artifactId>hibernate-jpa-2.1-api</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <!-- Hibernate for generic UserType -->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <!-- JSR 303 Validation is recommended but not strictly required. Some validation features/classes will not work without -->
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <!-- optional for Abstract*Servlet classes, also needed to test the manifest loader -->
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
       <optional>true</optional>
     </dependency>
 
@@ -115,20 +87,4 @@
       <optional>true</optional>
     </dependency>
   </dependencies>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <!-- lack of multi-inheritance -->
-            <exclude>**/AbstractNlsException.java</exclude>
-            <exclude>**/AbstractNlsRuntimeException.java</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
 </project>

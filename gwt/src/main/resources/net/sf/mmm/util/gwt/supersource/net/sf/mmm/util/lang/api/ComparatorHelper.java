@@ -39,15 +39,15 @@ class ComparatorHelper {
   }
 
   /**
-   * Logic for {@link Comparator#eval(Object, Object)} with {@link Comparable} arguments.
+   * Logic for {@link CompareOperator#eval(Object, Object)} with {@link Comparable} arguments.
    *
-   * @param comparator is the {@link Comparator}.
+   * @param comparator is the {@link CompareOperator}.
    * @param arg1 is the first argument.
    * @param arg2 is the second argument.
    * @return the result of the {@link Comparator} applied to the given arguments.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  static boolean evalComparable(Comparator comparator, Comparable arg1, Comparable arg2) {
+  static boolean evalComparable(CompareOperator comparator, Comparable arg1, Comparable arg2) {
 
     int delta;
     try {

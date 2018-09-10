@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import net.sf.mmm.util.date.impl.spring.UtilDateSpringConfig;
-import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 import net.sf.mmm.util.version.api.VersionUtil;
 import net.sf.mmm.util.version.impl.VersionUtilImpl;
 
@@ -18,7 +17,7 @@ import net.sf.mmm.util.version.impl.VersionUtilImpl;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilDateSpringConfig.class, UtilLangSpringConfig.class })
+@Import({ UtilDateSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class UtilVersionSpringConfig {
 

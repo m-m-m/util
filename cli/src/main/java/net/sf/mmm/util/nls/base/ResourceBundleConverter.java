@@ -15,6 +15,9 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.cli.NlsBundleUtilCliRoot;
 import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
@@ -50,6 +53,8 @@ import net.sf.mmm.util.text.api.Justification;
 @CliMode(id = CliMode.ID_DEFAULT, title = NlsBundleUtilCliRoot.INF_MAIN_MODE_DEFAULT, //
     usage = NlsBundleUtilCliRoot.MSG_BUNDLE_CONVERTER_USAGE_MODE_DEFAULT)
 public class ResourceBundleConverter extends AbstractResourceBundleCli {
+
+  private static final Logger LOG = LoggerFactory.getLogger(ResourceBundleConverter.class);
 
   /** The command-line option to set the {@link #getKeyPattern() key pattern}. */
   public static final String OPTION_KEY_PATTERN = "--key-pattern";
@@ -244,6 +249,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
     }
     final String bundleNamePath = bundle.getQualifiedNamePath() + "_";
     Filter<String> filter = new Filter<String>() {
+
       @Override
       public boolean accept(String value) {
 
@@ -343,8 +349,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   }
 
   @Override
-  protected void synchronize(NlsBundleDescriptor bundle, String localeString, File targetFile, String date)
-      throws IOException {
+  protected void synchronize(NlsBundleDescriptor bundle, String localeString, File targetFile, String date) throws IOException {
 
     Locale locale = getResourceLocator().getLocale(localeString);
     String qualifiedName = bundle.getQualifiedName();
@@ -356,8 +361,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
         message = convertMessage(message, key, bundle, localeString);
         properties.setProperty(key, message);
       } else {
-        getLogger().debug("Ignoring key {} in bundle {} as it does not match key pattern {}", key, qualifiedName,
-            this.keyPattern);
+        LOG.debug("Ignoring key {} in bundle {} as it does not match key pattern {}", key, qualifiedName, this.keyPattern);
       }
     }
     this.format.write(properties, targetFile, getEncoding(), "Generated " + date);
@@ -372,6 +376,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
 
       NlsMessageFormatter formatter = getMessageFormatterFactory().create(message);
       Visitor<String> textVisitor = new Visitor<String>() {
+
         @Override
         public void visit(String text) {
 
@@ -390,13 +395,12 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
       String result = buffer.toString();
       return result;
     } catch (Exception e) {
-      getLogger().warn("Malformed NLS message {}.{} for locale {}.", bundle.getQualifiedName(), key, locale, e);
+      LOG.warn("Malformed NLS message {}.{} for locale {}.", bundle.getQualifiedName(), key, locale, e);
       return message;
     }
   }
 
-  private void convertArgument(NlsArgument nlsArgument, StringBuilder buffer,
-      NlsMessageDescriptor messageDescriptor, List<String> argumentList) {
+  private void convertArgument(NlsArgument nlsArgument, StringBuilder buffer, NlsMessageDescriptor messageDescriptor, List<String> argumentList) {
 
     NlsFormatterPlugin<?> formatter = nlsArgument.getFormatter();
     if ((this.evalChoice != null) && (formatter instanceof NlsFormatterChoice)) {
@@ -412,8 +416,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
     }
   }
 
-  private void convertArgumentChoice(NlsFormatterChoice formatter, StringBuilder buffer,
-      NlsMessageDescriptor messageDescriptor, List<String> argumentList) {
+  private void convertArgumentChoice(NlsFormatterChoice formatter, StringBuilder buffer, NlsMessageDescriptor messageDescriptor, List<String> argumentList) {
 
     Choice choice = extracted(formatter);
     if (choice == null) {
@@ -442,15 +445,14 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
             return choice;
           }
           break;
-        default:
+        default :
           throw new IllegalCaseException(ChoiceEvaluation.class, this.evalChoice);
       }
     }
     return null;
   }
 
-  private String convertArgumentIndex(NlsMessageDescriptor messageDescriptor, List<String> argumentList,
-      String result, String key) {
+  private String convertArgumentIndex(NlsMessageDescriptor messageDescriptor, List<String> argumentList, String result, String key) {
 
     int fallbackIndex = argumentList.indexOf(key);
     if (fallbackIndex == -1) {

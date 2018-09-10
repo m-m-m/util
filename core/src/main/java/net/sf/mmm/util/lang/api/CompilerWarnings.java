@@ -7,7 +7,9 @@ package net.sf.mmm.util.lang.api;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
+ * @deprecated overengineered - if JDK does not support it, use string literals
  */
+@Deprecated
 public interface CompilerWarnings {
 
   /** {@link SuppressWarnings Suppress} all warnings. */

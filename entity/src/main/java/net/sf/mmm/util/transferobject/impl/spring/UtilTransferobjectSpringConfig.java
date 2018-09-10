@@ -13,9 +13,11 @@ import net.sf.mmm.util.transferobject.base.TransferObjectUtilImpl;
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.transferobject}.
  *
+ * @deprecated see {@link TransferObjectUtil}.
  * @author hohwille
  * @since 7.1.0
  */
+@Deprecated
 @Configuration
 @Import(UtilLangSpringConfig.class)
 @SuppressWarnings("javadoc")

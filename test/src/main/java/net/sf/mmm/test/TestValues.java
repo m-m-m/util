@@ -2,12 +2,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.test;
 
+import java.util.Locale;
+
 /**
  * This interface contains arbitrary values for testing.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 public interface TestValues {
+
+  /** Spanish {@link Locale}. */
+  Locale SPANISH = new Locale("es");
 
   /**
    * Thai sentence: "The language barrier is a major problem for today's global communication."

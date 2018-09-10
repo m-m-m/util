@@ -10,11 +10,11 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.exception.api.ObjectMismatchException;
 import net.sf.mmm.util.json.api.JsonSupport;
 
 /**
- * Helper class to implement {@link JsonSupport} in case extending {@link AbstractJsonSupport} is not suitable.
+ * Helper class to implement {@link JsonSupport} in case extending {@link AbstractJsonSupport} is not
+ * suitable.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.6.0
@@ -46,7 +46,7 @@ public class JsonSupportHelper {
     JsonParser parser = Json.createParser(reader);
     Event event = parser.next();
     if (event != Event.START_OBJECT) {
-      throw new ObjectMismatchException(event, Event.START_OBJECT);
+      throw new IllegalStateException("Expected start event but found: " + event);
     }
     jsonSupport.fromJson(parser);
     reader.close();

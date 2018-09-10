@@ -4,7 +4,7 @@ package net.sf.mmm.util.validation.base;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValidationFailure;
 import net.sf.mmm.util.validation.api.ValueValidator;
 

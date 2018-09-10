@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.pojo.path.api.TypedProperty;
+import net.sf.mmm.util.pojo.api.TypedProperty;
 import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.value.api.Range;
 

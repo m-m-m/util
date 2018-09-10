@@ -5,8 +5,6 @@ package net.sf.mmm.util.lang.base;
 import java.io.IOException;
 import java.util.Locale;
 
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.LocalizableFormatter;
 
 /**
@@ -16,8 +14,7 @@ import net.sf.mmm.util.lang.api.LocalizableFormatter;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<V>
-    implements LocalizableFormatter<V> {
+public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<V> implements LocalizableFormatter<V> {
 
   /**
    * The constructor.
@@ -28,8 +25,8 @@ public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<
   }
 
   /**
-   * This method gets the default locale used if none is provided. Will return {@link Locale#getDefault()}. May be
-   * overridden to change.
+   * This method gets the default locale used if none is provided. Will return {@link Locale#getDefault()}.
+   * May be overridden to change.
    *
    * @return the default locale.
    */
@@ -59,7 +56,7 @@ public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<
   }
 
   @Override
-  public void format(V value, Appendable buffer, Locale locale) throws RuntimeIoException {
+  public void format(V value, Appendable buffer, Locale locale) {
 
     try {
       if (value == null) {
@@ -68,7 +65,7 @@ public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<
         doFormat(value, buffer, locale);
       }
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.WRITE);
+      throw new IllegalStateException("Error writing to Appendable.", e);
     }
   }
 
@@ -76,7 +73,8 @@ public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<
    * @see #format(Object, Appendable, Locale)
    *
    * @param value is the value to format (not {@code null}).
-   * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted value to.
+   * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
+   *        value to.
    * @param locale is the {@link Locale}.
    * @throws IOException if caused by {@link Appendable#append(CharSequence) append}.
    */

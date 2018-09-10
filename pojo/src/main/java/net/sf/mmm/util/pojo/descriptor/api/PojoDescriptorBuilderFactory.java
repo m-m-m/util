@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.pojo.descriptor.api;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
 import net.sf.mmm.util.reflect.api.VisibilityModifier;
 
 /**
@@ -11,13 +10,12 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.1.0
  */
-@ComponentSpecification
 public interface PojoDescriptorBuilderFactory {
 
   /**
    * This method creates a {@link PojoDescriptorBuilder} that introspects public methods for building
-   * {@link PojoPropertyDescriptor}s. All other methods and all fields will be ignored. This is the preferred way to use
-   * following the java-bean philosophy.
+   * {@link PojoPropertyDescriptor}s. All other methods and all fields will be ignored. This is the preferred
+   * way to use following the java-bean philosophy.
    *
    * @return the new {@link PojoDescriptorBuilder} instance.
    */
@@ -34,18 +32,18 @@ public interface PojoDescriptorBuilderFactory {
   PojoDescriptorBuilder createPrivateFieldDescriptorBuilder();
 
   /**
-   * This method creates a {@link PojoDescriptorBuilder} that introspects the methods and non-static fields with the
-   * given {@link VisibilityModifier visibility} or a higher {@link VisibilityModifier#getOrder() order}.
+   * This method creates a {@link PojoDescriptorBuilder} that introspects the methods and non-static fields
+   * with the given {@link VisibilityModifier visibility} or a higher {@link VisibilityModifier#getOrder()
+   * order}.
    *
    * @see #createPublicMethodDescriptorBuilder()
    *
-   * @param methodVisibility is the minimum {@link VisibilityModifier visibility} of the methods to introspect or
-   *        {@code null} to ignore all methods.
-   * @param fieldVisibility is the minimum {@link VisibilityModifier visibility} of the fields to introspect or
-   *        {@code null} to ignore all fields.
+   * @param methodVisibility is the minimum {@link VisibilityModifier visibility} of the methods to introspect
+   *        or {@code null} to ignore all methods.
+   * @param fieldVisibility is the minimum {@link VisibilityModifier visibility} of the fields to introspect
+   *        or {@code null} to ignore all fields.
    * @return the new {@link PojoDescriptorBuilder} instance.
    */
-  PojoDescriptorBuilder createDescriptorBuilder(VisibilityModifier methodVisibility,
-      VisibilityModifier fieldVisibility);
+  PojoDescriptorBuilder createDescriptorBuilder(VisibilityModifier methodVisibility, VisibilityModifier fieldVisibility);
 
 }

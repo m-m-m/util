@@ -5,9 +5,11 @@ package net.sf.mmm.util.component.base;
 /**
  * This type is a collection of spring XML configuration files for the entire project.
  *
+ * @deprecated Spring XML config is dead. Migrate to code configuration (and spring-boot).
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
+@Deprecated
 public interface SpringConfigs {
 
   /** The Spring XML configuration of {@code mmm-util-core}. */

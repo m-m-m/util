@@ -29,9 +29,11 @@ import net.sf.mmm.util.value.impl.ValueConverterEtoToEntity;
  *
  * @see #getInstance()
  *
+ * @deprecated see {@link TransferObjectUtil}
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Deprecated
 public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implements TransferObjectUtil {
 
   /** The singleton instance of {@link EtoHelper}. */
@@ -56,7 +58,7 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   /**
    * This method gets the singleton instance of this {@link TransferObjectUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */
@@ -150,15 +152,13 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   }
 
   @Override
-  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> TO convertFromEntity(ENTITY entity,
-      Class<TO> toType) {
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> TO convertFromEntity(ENTITY entity, Class<TO> toType) {
 
     return this.composedValueConverter.convert(entity, null, toType);
   }
 
   @Override
-  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> List<TO> convertFromEntityList(
-      List<ENTITY> entityList, Class<TO> toType) {
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> List<TO> convertFromEntityList(List<ENTITY> entityList, Class<TO> toType) {
 
     if (entityList == null) {
       return null;
@@ -171,8 +171,7 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   }
 
   @Override
-  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> Set<TO> convertFromEntitySet(
-      Set<ENTITY> entitySet, Class<TO> toType) {
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> Set<TO> convertFromEntitySet(Set<ENTITY> entitySet, Class<TO> toType) {
 
     if (entitySet == null) {
       return null;
@@ -185,15 +184,14 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   }
 
   @Override
-  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> ENTITY convertToEntity(
-      TO transferObject, Class<ENTITY> entityType) {
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> ENTITY convertToEntity(TO transferObject, Class<ENTITY> entityType) {
 
     return this.composedValueConverter.convert(transferObject, null, entityType);
   }
 
   @Override
-  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> List<ENTITY> convertToEntityList(
-      List<TO> transferObjects, Class<ENTITY> entityType) {
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> List<ENTITY> convertToEntityList(List<TO> transferObjects,
+      Class<ENTITY> entityType) {
 
     if (transferObjects == null) {
       return null;
@@ -206,8 +204,7 @@ public class TransferObjectUtilImpl extends TransferObjectUtilLimitedImpl implem
   }
 
   @Override
-  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> Set<ENTITY> convertToEntitySet(
-      Set<TO> transferObjects, Class<ENTITY> entityType) {
+  public <ID, ENTITY extends PersistenceEntity<ID>, TO extends EntityTo<ID>> Set<ENTITY> convertToEntitySet(Set<TO> transferObjects, Class<ENTITY> entityType) {
 
     if (transferObjects == null) {
       return null;

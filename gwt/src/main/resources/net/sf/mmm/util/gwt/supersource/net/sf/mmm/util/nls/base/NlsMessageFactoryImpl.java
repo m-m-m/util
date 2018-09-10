@@ -14,6 +14,9 @@ import java.util.Set;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.ScriptInjector;
@@ -36,6 +39,8 @@ import net.sf.mmm.util.nls.impl.NlsMessageImpl;
  * @since 1.0.0
  */
 public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl implements NlsResourceBundleRequestor {
+
+  private static final Logger LOG = LoggerFactory.getLogger(NlsMessageFactoryImpl.class);
 
   private final Map<String, DictionaryContainer> name2dictionaryContainerMap;
 
@@ -167,7 +172,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
         try {
           this.dictionary = Dictionary.getDictionary(this.dictionaryName);
         } catch (MissingResourceException e) {
-          getLogger().error("Dictionary not found for " + this.dictionaryName, e);
+          LOG.error("Dictionary not found for " + this.dictionaryName, e);
         }
       }
       return this.dictionary;
@@ -193,7 +198,7 @@ public class NlsMessageFactoryImpl extends AbstractNlsMessageFactoryImpl impleme
 
     public void onFailure(Exception error) {
 
-      getLogger().warn("Failed to load NLS bundle '" + this.bundleName + "'.", error);
+      LOG.warn("Failed to load NLS bundle '" + this.bundleName + "'.", error);
     }
 
     public void onSuccess(Void result) {

@@ -14,8 +14,8 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
 /**
- * This class holds a collection of utility functions for GWT (Google Web Toolkit) using JSNI (JavaScript Native
- * Interface).
+ * This class holds a collection of utility functions for GWT (Google Web Toolkit) using JSNI (JavaScript
+ * Native Interface).
  *
  * @see #getInstance()
  *
@@ -37,7 +37,7 @@ public class JavaScriptUtil {
   }
 
   /**
-   * @see net.sf.mmm.util.component.api.Cdi#GET_INSTANCE
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance of {@link JavaScriptUtil}.
    */
@@ -137,12 +137,13 @@ public class JavaScriptUtil {
                                        }-*/;
 
   /**
-   * This method sets the custom validation message of the given input {@link Element}. The Browser needs to support
-   * HTML5 for this feature.
+   * This method sets the custom validation message of the given input {@link Element}. The Browser needs to
+   * support HTML5 for this feature.
    *
    * @param inputElement is the input {@link Element} that has been validated.
    * @param message - the empty string to mark as valid, the validation failure message otherwise.
-   * @return {@code true} if the browser supports custom validity and it has been set, {@code false} otherwise.
+   * @return {@code true} if the browser supports custom validity and it has been set, {@code false}
+   *         otherwise.
    */
   public native boolean setCustomValidity(Element inputElement, String message) /*-{
                                                                                 if (inputElement.setCustomValidity) {
@@ -153,8 +154,8 @@ public class JavaScriptUtil {
                                                                                 }-*/;
 
   /**
-   * Creates an {@link InputElement} of a custom {@link InputElement#getType() type}. Only used while GWT does NOT
-   * directly provide a way to create HTML5 input elements.
+   * Creates an {@link InputElement} of a custom {@link InputElement#getType() type}. Only used while GWT does
+   * NOT directly provide a way to create HTML5 input elements.
    *
    * @param type is the requested {@link InputElement#getType() type} (e.g. "range", "date", etc.).
    * @return the requested {@link InputElement} of the given {@code type}.
@@ -229,9 +230,9 @@ public class JavaScriptUtil {
                                                              }-*/;
 
   /**
-   * This method gets the {@link JsFileList} for a given {@link Event}. E.g. if files are dragged onto some element in
-   * the browser or in case of an {@link Event} (e.g. of {@value Event#ONCHANGE}) of a file input you can receive the
-   * {@link JsFileList} here.
+   * This method gets the {@link JsFileList} for a given {@link Event}. E.g. if files are dragged onto some
+   * element in the browser or in case of an {@link Event} (e.g. of {@value Event#ONCHANGE}) of a file input
+   * you can receive the {@link JsFileList} here.
    *
    * @param event is the {@link Event}.
    * @return the {@link JsFileList} or {@code null} if no files are available.
@@ -249,8 +250,8 @@ public class JavaScriptUtil {
                                                     }-*/;
 
   /**
-   * This method creates the URL pointing to a {@link JsBlob}. Such URL is starting with the "blob:" scheme and is only
-   * valid within the current JS context.
+   * This method creates the URL pointing to a {@link JsBlob}. Such URL is starting with the "blob:" scheme
+   * and is only valid within the current JS context.
    *
    * @param blob is the {@link JsBlob}.
    * @return the new instance.
@@ -260,8 +261,9 @@ public class JavaScriptUtil {
                                                }-*/;
 
   /**
-   * This method opens a given {@link JsBlob}. The browser will show a regular popup to open the file or save it to the
-   * local disc. Depending on its mimetype the browser might already open the file immediately in a new window.
+   * This method opens a given {@link JsBlob}. The browser will show a regular popup to open the file or save
+   * it to the local disc. Depending on its mimetype the browser might already open the file immediately in a
+   * new window.
    *
    * @param blob is the {@link JsBlob}.
    */
@@ -272,9 +274,9 @@ public class JavaScriptUtil {
   /**
    * This method gets the {@link JsCssStyleDeclaration computed style} of the given {@link Element}. <br>
    * <b>ATTENTION:</b><br>
-   * Do not get confused by the name of this method. It will only "calculate" the CSS rules but return these properties
-   * unmodified. So if you are looking for a way to get the actual calculated width or height of an {@link Element} in
-   * pixels (rather than something like "50%") just use {@link Element#getOffsetWidth()} or
+   * Do not get confused by the name of this method. It will only "calculate" the CSS rules but return these
+   * properties unmodified. So if you are looking for a way to get the actual calculated width or height of an
+   * {@link Element} in pixels (rather than something like "50%") just use {@link Element#getOffsetWidth()} or
    * {@link Element#getOffsetHeight()} instead.
    *
    * @param element is the {@link Element} to compute the style of.
@@ -300,8 +302,9 @@ public class JavaScriptUtil {
                                            }-*/;
 
   /**
-   * This method gets the {@link JsSelection} of the given {@code <iframe>} {@link Element}. The given {@code iframe}
-   * needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)} to ensure.
+   * This method gets the {@link JsSelection} of the given {@code <iframe>} {@link Element}. The given
+   * {@code iframe} needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
+   * to ensure.
    *
    * @param iframe is the {@code <iframe>} {@link Element}.
    * @return the corresponding {@link JsSelection}.
@@ -328,8 +331,8 @@ public class JavaScriptUtil {
    * Determines if the given {@link Element} is focusable or tab-able.
    *
    * @param element is the {@link Element} to check.
-   * @param tabable - {@code true} if the check should only consider tab-able {@link Element}s (so if tabindex is
-   *        negative, the result is {@code false}), {@code false} otherwise.
+   * @param tabable - {@code true} if the check should only consider tab-able {@link Element}s (so if tabindex
+   *        is negative, the result is {@code false}), {@code false} otherwise.
    * @return {@code true} if focusable/tab-able, {@code false} otherwise.
    */
   public native boolean isFocusable(Element element, boolean tabable) /*-{
@@ -353,7 +356,8 @@ public class JavaScriptUtil {
                                                                       }-*/;
 
   /**
-   * @return the {@link Element} that is currently focused or {@code null} if focus is outside the current document.
+   * @return the {@link Element} that is currently focused or {@code null} if focus is outside the current
+   *         document.
    */
   public native Element getFocusedElement() /*-{
                                             return $doc.activeElement;
@@ -363,10 +367,10 @@ public class JavaScriptUtil {
    * Get the first/last focusable or tab-able (child) {@link Element}.
    *
    * @param element is the {@link Element} to scan recursively.
-   * @param tabable - {@code true} if the check should only consider tab-able {@link Element}s (so if tabindex is
-   *        negative, the result is {@code false}), {@code false} otherwise.
-   * @param last - {@code true} if the last focusable/tab-able element shall be returned, {@code false} for the last
-   *        focusable/tab-able element.
+   * @param tabable - {@code true} if the check should only consider tab-able {@link Element}s (so if tabindex
+   *        is negative, the result is {@code false}), {@code false} otherwise.
+   * @param last - {@code true} if the last focusable/tab-able element shall be returned, {@code false} for
+   *        the last focusable/tab-able element.
    * @return the first/last focusable or tab-able {@link Element} or {@code null} if none exists.
    */
   public native Element getFocusable(Element element, boolean tabable, boolean last) /*-{
@@ -404,8 +408,9 @@ public class JavaScriptUtil {
                                                                                      }-*/;
 
   /**
-   * This method gets the {@link Document} of a given {@code <iframe>} {@link Element}. The given {@code iframe} needs
-   * to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)} to ensure.
+   * This method gets the {@link Document} of a given {@code <iframe>} {@link Element}. The given
+   * {@code iframe} needs to be loaded when calling this method. Use {@link #onLoadFrame(Element, Runnable)}
+   * to ensure.
    *
    * @param iframe is the {@code <iframe>} {@link Element}.
    * @return the corresponding {@link Document}.
@@ -418,7 +423,8 @@ public class JavaScriptUtil {
                                                           }-*/;
 
   /**
-   * This method {@link Runnable#run() executes} the given {@code callback} when the given {@code iframe} is loaded.
+   * This method {@link Runnable#run() executes} the given {@code callback} when the given {@code iframe} is
+   * loaded.
    *
    * @param iframe is the {@code <iframe>} {@link Element}.
    * @param callback is the callback to {@link Runnable#run() execute}.

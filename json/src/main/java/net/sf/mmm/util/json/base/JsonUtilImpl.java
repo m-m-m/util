@@ -8,7 +8,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -17,18 +16,13 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-import net.sf.mmm.util.exception.api.ObjectMismatchException;
-import net.sf.mmm.util.exception.api.ValueConvertException;
-import net.sf.mmm.util.exception.api.WrongValueTypeException;
+import net.sf.mmm.util.collection.api.CollectionFactoryManager;
+import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.json.api.JsonSupport;
 import net.sf.mmm.util.json.api.JsonUtil;
-import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.lang.base.StringUtilImpl;
-import net.sf.mmm.util.reflect.api.CollectionReflectionUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
-import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
+import net.sf.mmm.util.reflect.base.EnumHelper;
 
 /**
  * The implementation of {@link JsonUtil}.
@@ -38,48 +32,35 @@ import net.sf.mmm.util.reflect.base.CollectionReflectionUtilImpl;
  * @author hohwille
  * @since 7.4.0
  */
-public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil {
+public class JsonUtilImpl extends AbstractComponent implements JsonUtil {
 
   private static JsonUtil instance;
 
-  private StringUtil stringUtil;
-
-  private CollectionReflectionUtil collectionReflectionUtil;
+  private CollectionFactoryManager collectionFactoryManager;
 
   /**
    * The constructor.
    */
   public JsonUtilImpl() {
+
     super();
   }
 
   /**
-   * @param stringUtil is the {@link StringUtil} to {@link Inject}.
+   * @param collectionFactoryManager is the {@link CollectionFactoryManager} to {@link Inject}.
    */
   @Inject
-  public void setStringUtil(StringUtil stringUtil) {
+  public void setCollectionReflectionUtil(CollectionFactoryManager collectionFactoryManager) {
 
-    this.stringUtil = stringUtil;
-  }
-
-  /**
-   * @param collectionReflectionUtil is the {@link CollectionReflectionUtil} to {@link Inject}.
-   */
-  @Inject
-  public void setCollectionReflectionUtil(CollectionReflectionUtil collectionReflectionUtil) {
-
-    this.collectionReflectionUtil = collectionReflectionUtil;
+    this.collectionFactoryManager = collectionFactoryManager;
   }
 
   @Override
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.stringUtil == null) {
-      this.stringUtil = StringUtilImpl.getInstance();
-    }
-    if (this.collectionReflectionUtil == null) {
-      this.collectionReflectionUtil = CollectionReflectionUtilImpl.getInstance();
+    if (this.collectionFactoryManager == null) {
+      this.collectionFactoryManager = CollectionFactoryManagerImpl.getInstance();
     }
   }
 
@@ -95,7 +76,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   /**
    * This method gets the singleton instance of this {@link JsonUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */
@@ -152,7 +133,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   }
 
   @Override
-  public <E extends Enum<E>> E readEnum(JsonParser json, Class<E> enumType) throws IllegalCaseException {
+  public <E extends Enum<E>> E readEnum(JsonParser json, Class<E> enumType) {
 
     String value = json.getString();
     return convertEnum(value, enumType);
@@ -163,30 +144,18 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
    * @param value the value to convert to the {@link Enum}.
    * @param enumType the {@link Class} reflecting the {@link Enum} to parse.
    * @return the parsed {@link Enum} constant.
-   * @throws IllegalCaseException if no such {@link Enum} constant exists.
+   * @throws IllegalStateException if no such {@link Enum} constant exists.
    */
-  protected <E extends Enum<E>> E convertEnum(String value, Class<E> enumType) throws IllegalCaseException {
+  protected <E extends Enum<E>> E convertEnum(String value, Class<E> enumType) {
 
-    E[] constants = enumType.getEnumConstants();
-    for (E e : constants) {
-      if (e.name().equals(value)) {
-        return e;
-      }
-    }
-    String deCamlCased = this.stringUtil.fromCamlCase(value.toString(), '_').toUpperCase(Locale.US);
-    for (E e : constants) {
-      if (e.name().equals(deCamlCased)) {
-        return e;
-      }
-    }
-    throw new IllegalCaseException(value.toString() + "@" + enumType.getName());
+    return EnumHelper.fromString(value, enumType);
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public <C extends Collection<?>> C readCollection(JsonParser json, GenericType<C> type) {
 
-    C collection = this.collectionReflectionUtil.create(type.getAssignmentClass());
+    C collection = this.collectionFactoryManager.create(type.getAssignmentClass());
     readCollection(json, (Collection) collection, type.getComponentType());
     return collection;
   }
@@ -208,7 +177,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <K, V, M extends Map<K, V>> M readMap(JsonParser json, GenericType<M> type) {
 
-    M map = this.collectionReflectionUtil.createMap(type.getAssignmentClass());
+    M map = this.collectionFactoryManager.createMap(type.getAssignmentClass());
     readMap(json, map, (GenericType) type.getKeyType(), (GenericType) type.getComponentType());
     return map;
   }
@@ -245,10 +214,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
     } else if (valueClass.isEnum()) {
       result = convertEnum(value, (Class) valueClass);
     } else if ((valueClass == boolean.class) || (valueClass == Boolean.class)) {
-      result = this.stringUtil.parseBoolean(value);
-      if (result == null) {
-        throw new ValueConvertException(value, valueClass);
-      }
+      result = Boolean.valueOf(value);
     } else {
       throw new IllegalArgumentException(type.toString());
     }
@@ -465,7 +431,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   }
 
   @Override
-  public void expectEvent(JsonParser json, Event event) throws ObjectMismatchException {
+  public void expectEvent(JsonParser json, Event event) {
 
     Event e = json.next();
     expectEvent(e, event);
@@ -475,7 +441,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
   public void expectEvent(Event actual, Event expected) {
 
     if (actual != expected) {
-      throw new ObjectMismatchException(actual, expected);
+      throw new IllegalStateException("Expecting event '" + expected + "' but found '" + actual + "'.");
     }
   }
 
@@ -493,7 +459,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
     } else if (e == Event.VALUE_FALSE) {
       return false;
     }
-    throw new WrongValueTypeException(e, Boolean.class);
+    throw new IllegalStateException("Expecting boolean value but found: " + e);
   }
 
   @Override
@@ -566,7 +532,7 @@ public class JsonUtilImpl extends AbstractLoggableComponent implements JsonUtil 
         }
         break;
       default :
-        throw new IllegalCaseException(Event.class, e);
+        throw new IllegalStateException("Unhandled event: " + e);
     }
   }
 

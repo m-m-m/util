@@ -16,6 +16,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.base.ConcurrentHashMapFactory;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
@@ -39,6 +42,8 @@ import net.sf.mmm.util.reflect.api.VisibilityModifier;
  */
 public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
 
+  private static final Logger LOG = LoggerFactory.getLogger(PojoDescriptorBuilderImpl.class);
+
   private ExtendedPojoDescriptorDependencies configuration;
 
   private PojoMethodIntrospector methodIntrospector;
@@ -46,8 +51,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   private PojoFieldIntrospector fieldIntrospector;
 
   /**
-   * The constructor. By default it only introspects {@link Method methods} that are public and NOT static.
-   * <br>
+   * The constructor. By default it only introspects {@link Method methods} that are public and NOT static. <br>
    * <b>ATTENTION:</b><br>
    * You need to {@link #initialize()} this component before it can be used.
    */
@@ -57,8 +61,7 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * The constructor. By default it only introspects {@link Method methods} that are public and NOT static.
-   * <br>
+   * The constructor. By default it only introspects {@link Method methods} that are public and NOT static. <br>
    * <b>ATTENTION:</b><br>
    * You need to {@link #initialize()} this component before it can be used.
    *
@@ -87,9 +90,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method gets the introspector used to find potential {@link Method methods} for
-   * {@link PojoPropertyAccessor accessing} {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
-   * properties} of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+   * This method gets the introspector used to find potential {@link Method methods} for {@link PojoPropertyAccessor
+   * accessing} {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties} of a
+   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
    *
    * @return the introspector to use.
    */
@@ -111,9 +114,9 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method gets the introspector used to find potential {@link Field fields} for
-   * {@link PojoPropertyAccessor accessing} {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor
-   * properties} of a {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
+   * This method gets the introspector used to find potential {@link Field fields} for {@link PojoPropertyAccessor
+   * accessing} {@link net.sf.mmm.util.pojo.descriptor.api.PojoPropertyDescriptor properties} of a
+   * {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor POJO}.
    *
    * @return the introspector to use.
    */
@@ -176,8 +179,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
    *
    * @param descriptor is the {@link net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor}.
    * @param accessor is the {@link PojoPropertyAccessor} to register.
-   * @return {@code true} if the given {@code accessor} has been registered or {@code false} if it has been
-   *         ignored (it is a duplicate).
+   * @return {@code true} if the given {@code accessor} has been registered or {@code false} if it has been ignored (it
+   *         is a duplicate).
    */
   protected boolean registerAccessor(PojoDescriptorImpl<?> descriptor, PojoPropertyAccessor accessor) {
 
@@ -235,11 +238,11 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * Makes all {@link AccessibleObject}s in the given {@link List}
-   * {@link AccessibleObject#setAccessible(boolean) accessible}.
+   * Makes all {@link AccessibleObject}s in the given {@link List} {@link AccessibleObject#setAccessible(boolean)
+   * accessible}.
    *
-   * @param nonPublicAccessibleObjects is the {@link List} where the non-public {@link AccessibleObject}s have
-   *        been collected.
+   * @param nonPublicAccessibleObjects is the {@link List} where the non-public {@link AccessibleObject}s have been
+   *        collected.
    */
   private void makeAccessible(List<AccessibleObject> nonPublicAccessibleObjects) {
 
@@ -261,13 +264,12 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * Introspects the {@link Field}s of the given {@link Class} and adds them to the given
-   * {@link PojoDescriptorImpl}.
+   * Introspects the {@link Field}s of the given {@link Class} and adds them to the given {@link PojoDescriptorImpl}.
    *
    * @param <P> is the generic type of {@code pojoClass}.
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
-   * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for
-   *        detected properties.
+   * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for detected
+   *        properties.
    * @param nonPublicAccessibleObjects is the {@link List} where to add non-public {@link AccessibleObject}s.
    */
   private <P> void introspectFields(Class<P> pojoClass, PojoDescriptorImpl<P> descriptor, List<AccessibleObject> nonPublicAccessibleObjects) {
@@ -299,13 +301,12 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * Introspects the {@link Method}s of the given {@link Class} and adds them to the given
-   * {@link PojoDescriptorImpl}.
+   * Introspects the {@link Method}s of the given {@link Class} and adds them to the given {@link PojoDescriptorImpl}.
    *
    * @param <P> is the generic type of {@code pojoClass}.
    * @param pojoClass is the {@link Class} for the {@link PojoDescriptorImpl#getPojoType() pojo type}.
-   * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for
-   *        detected properties.
+   * @param descriptor is the {@link PojoDescriptorImpl} where to add {@link PojoPropertyAccessor}s for detected
+   *        properties.
    * @param nonPublicAccessibleObjects is the {@link List} where to add non-public {@link AccessibleObject}s.
    */
   private <P> void introspectMethods(Class<P> pojoClass, PojoDescriptorImpl<P> descriptor, List<AccessibleObject> nonPublicAccessibleObjects) {
@@ -382,8 +383,8 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method determines if the given {@link Member} is {@link AccessibleObject#isAccessible() accessible}
-   * or {@code public} (declared as public in a public class).
+   * This method determines if the given {@link Member} is {@link AccessibleObject#isAccessible() accessible} or
+   * {@code public} (declared as public in a public class).
    *
    * @param member is the {@link Member} to check.
    * @return {@code true} if it can be accessed, {@code false} if it needs to be made accessible.
@@ -403,17 +404,17 @@ public class PojoDescriptorBuilderImpl extends AbstractPojoDescriptorBuilder {
   }
 
   /**
-   * This method is called if the {@link PojoPropertyAccessor accessor} given by {@code duplicate} was ignored
-   * because it has the same {@link PojoPropertyAccessor#getName() name} and
-   * {@link PojoPropertyAccessor#getMode() mode} as the given {@code accessor} that is already registered.
-   * This method does nothing. It may be overridden to do some debug logging.
+   * This method is called if the {@link PojoPropertyAccessor accessor} given by {@code duplicate} was ignored because
+   * it has the same {@link PojoPropertyAccessor#getName() name} and {@link PojoPropertyAccessor#getMode() mode} as the
+   * given {@code accessor} that is already registered. This method does nothing. It may be overridden to do some debug
+   * logging.
    *
    * @param accessor is the accessor that is already registered.
    * @param duplicate is the duplicate that has been ignored.
    */
   protected void logDuplicateAccessor(PojoPropertyAccessor accessor, PojoPropertyAccessor duplicate) {
 
-    getLogger().trace("accessor '{}' - is a duplicate of '{}'!", duplicate, accessor);
+    LOG.trace("accessor '{}' - is a duplicate of '{}'!", duplicate, accessor);
   }
 
 }

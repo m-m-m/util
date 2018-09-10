@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliArgumentReferenceMissingException;
@@ -52,6 +53,8 @@ import net.sf.mmm.util.value.api.SimpleValueConverter;
  */
 public class CliState extends CliClassContainer {
 
+  private static final Logger LOG = LoggerFactory.getLogger(CliState.class);
+
   private final ReflectionUtil reflectionUtil;
 
   private final AnnotationUtil annotationUtil;
@@ -74,10 +77,9 @@ public class CliState extends CliClassContainer {
    * @param reflectionUtil is the {@link ReflectionUtil} instance to use.
    * @param annotationUtil is the {@link AnnotationUtil} instance to use.
    */
-  public CliState(Class<?> stateClass, PojoDescriptorBuilderFactory descriptorBuilderFactory, Logger logger, ReflectionUtil reflectionUtil,
-      AnnotationUtil annotationUtil) {
+  public CliState(Class<?> stateClass, PojoDescriptorBuilderFactory descriptorBuilderFactory, ReflectionUtil reflectionUtil, AnnotationUtil annotationUtil) {
 
-    super(stateClass, logger);
+    super(stateClass);
     this.name2OptionMap = new HashMap<>();
     this.optionList = new ArrayList<>();
     this.arguments = new ArrayList<>();
@@ -102,7 +104,7 @@ public class CliState extends CliClassContainer {
     try {
       builder = new net.sf.mmm.util.validation.base.ValidatorBuilderJsr303();
     } catch (Throwable e) {
-      getLogger().error("Failed to setup javax.validation - validation disabled", e);
+      LOG.error("Failed to setup javax.validation - validation disabled", e);
       builder = new ValidatorBuilderNone();
     }
     return builder;
@@ -304,7 +306,7 @@ public class CliState extends CliClassContainer {
     if (modeObject == null) {
       CliStyleHandling handling = getCliStyle().modeUndefined();
       if (handling != CliStyleHandling.OK) {
-        handling.handle(getLogger(), new CliModeUndefinedException(id, annotationContainer));
+        handling.handle(LOG, new CliModeUndefinedException(id, annotationContainer));
       }
       CliModeContainer modeContainer = new CliModeContainer(id);
       addMode(modeContainer);

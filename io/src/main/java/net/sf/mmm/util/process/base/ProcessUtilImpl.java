@@ -14,7 +14,10 @@ import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.concurrent.api.Stoppable;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
@@ -28,17 +31,18 @@ import net.sf.mmm.util.process.api.ProcessUtil;
 /**
  * This is the implementation of the {@link ProcessUtil} interface. <br>
  * <b>ATTENTION:</b><br>
- * The {@code execute}-methods spin up multiple {@link Thread threads}, especially when multiple processes are
- * piped (2*n+1[+1] threads). Therefore you should NOT use the {@link #getInstance() singleton} variant of
- * this util except you are writing a simple command-line client that does a simple job and then terminates.
- * When writing a server-application or library, that makes such calls repetitive, you should create your own
- * instance and {@link #setExecutor(Executor) configure} a thread-pool as
- * {@link java.util.concurrent.Executor}.
+ * The {@code execute}-methods spin up multiple {@link Thread threads}, especially when multiple processes are piped
+ * (2*n+1[+1] threads). Therefore you should NOT use the {@link #getInstance() singleton} variant of this util except
+ * you are writing a simple command-line client that does a simple job and then terminates. When writing a
+ * server-application or library, that makes such calls repetitive, you should create your own instance and
+ * {@link #setExecutor(Executor) configure} a thread-pool as {@link java.util.concurrent.Executor}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class ProcessUtilImpl extends AbstractLoggableComponent implements ProcessUtil {
+public class ProcessUtilImpl extends AbstractComponent implements ProcessUtil {
+
+  private static final Logger LOG = LoggerFactory.getLogger(ProcessUtilImpl.class);
 
   private static ProcessUtil instance;
 
@@ -57,7 +61,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
   /**
    * This method gets the singleton instance of this {@link ProcessUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */
@@ -212,8 +216,8 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
      * The constructor.
      *
      * @param context is the context of the process pipe.
-     * @param builders are the configurations of the {@link Process}(es) to execute. The array needs to have a
-     *        length greater than zero.
+     * @param builders are the configurations of the {@link Process}(es) to execute. The array needs to have a length
+     *        greater than zero.
      * @throws IOException if an input/output error occurred.
      */
     public ProcessExecutor(ProcessContext context, ProcessBuilder[] builders) throws IOException {
@@ -244,8 +248,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
           this.transferrers[transferrersIndex] = inOutTransferrer;
           this.transferrers[transferrersIndex + 1] = errTransferrer;
         }
-        this.transferrers[builders.length + builders.length] = streamUtility.transferAsync(in, context.getOutStream(),
-            false);
+        this.transferrers[builders.length + builders.length] = streamUtility.transferAsync(in, context.getOutStream(), false);
         success = true;
       } finally {
         if (!success) {
@@ -255,8 +258,8 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
     }
 
     /**
-     * This method disposes this executor. All processes are {@link Process#destroy() destroyed} and all
-     * streams are closed.
+     * This method disposes this executor. All processes are {@link Process#destroy() destroyed} and all streams are
+     * closed.
      */
     protected void dispose() {
 
@@ -265,7 +268,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
           try {
             this.processes[i].destroy();
           } catch (RuntimeException e) {
-            getLogger().warn(e.getLocalizedMessage(), e);
+            LOG.warn(e.getLocalizedMessage(), e);
           }
           this.processes[i] = null;
         }
@@ -275,7 +278,7 @@ public class ProcessUtilImpl extends AbstractLoggableComponent implements Proces
           try {
             this.transferrers[i].cancel(true);
           } catch (RuntimeException e) {
-            getLogger().warn(e.getLocalizedMessage(), e);
+            LOG.warn(e.getLocalizedMessage(), e);
           }
           this.transferrers[i] = null;
         }

@@ -4,6 +4,9 @@ package net.sf.mmm.util.nls.base;
 
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gwt.i18n.client.Dictionary;
 
 /**
@@ -15,9 +18,11 @@ import com.google.gwt.i18n.client.Dictionary;
  */
 public class NlsTemplateImpl extends AbstractNlsTemplate {
 
-  private  /*final*/ String name;
+  private static final Logger LOG = LoggerFactory.getLogger(NlsTemplateImpl.class);
 
-  private  /*final*/ String key;
+  private /* final */ String name;
+
+  private /* final */ String key;
 
   /**
    * The constructor for de-serialization in GWT.
@@ -41,8 +46,8 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   }
 
   /**
-   * This method gets the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} used
-   * to lookup the bundle (typically a {@link java.util.ResourceBundle}).
+   * This method gets the {@link java.util.ResourceBundle#getBundle(String, java.util.Locale) base-name} used to lookup
+   * the bundle (typically a {@link java.util.ResourceBundle}).
    *
    * @return the bundleName is the base-name of the associated bundle.
    */
@@ -52,8 +57,8 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   }
 
   /**
-   * This method gets the {@link java.util.ResourceBundle#getString(String) key} of the string to lookup from
-   * the {@link #getName() bundle}. The key is a technical UID like ({@code ERR_VALUE_OUT_OF_RANGE}).
+   * This method gets the {@link java.util.ResourceBundle#getString(String) key} of the string to lookup from the
+   * {@link #getName() bundle}. The key is a technical UID like ({@code ERR_VALUE_OUT_OF_RANGE}).
    *
    * @return the bundleKey is the key used to lookup the string from the bundle.
    */
@@ -78,7 +83,7 @@ public class NlsTemplateImpl extends AbstractNlsTemplate {
   protected String translateFallback(Exception e) {
 
     String messageId = this.name + ":" + this.key;
-    getLogger().warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
+    LOG.warn("Failed to resolve message (" + messageId + "): " + e.getMessage());
     return translateFallback(messageId);
   }
 

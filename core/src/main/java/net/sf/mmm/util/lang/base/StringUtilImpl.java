@@ -11,8 +11,6 @@ import java.util.Locale;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.NlsParseException;
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.lang.api.Formatter;
 import net.sf.mmm.util.lang.api.StringSyntax;
@@ -81,7 +79,7 @@ public class StringUtilImpl implements StringUtil {
   /**
    * This method gets the singleton instance of this {@link StringUtilImpl}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */
@@ -426,7 +424,7 @@ public class StringUtilImpl implements StringUtil {
         }
       }
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.WRITE);
+      throw new IllegalStateException("Error writing to Appendable.", e);
     }
   }
 

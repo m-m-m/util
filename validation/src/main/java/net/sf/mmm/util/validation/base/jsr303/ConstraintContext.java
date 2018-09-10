@@ -5,7 +5,9 @@ package net.sf.mmm.util.validation.base.jsr303;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 
-import net.sf.mmm.util.component.base.AbstractLoggableObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.math.api.MathUtil;
 import net.sf.mmm.util.reflect.api.GenericType;
 import net.sf.mmm.util.validation.base.AbstractValidatorRange;
@@ -26,7 +28,9 @@ import net.sf.mmm.util.value.api.NumberRange;
  * @author hohwille
  * @since 7.4.0
  */
-public class ConstraintContext extends AbstractLoggableObject {
+public class ConstraintContext {
+
+  private static final Logger LOG = LoggerFactory.getLogger(ConstraintContext.class);
 
   private final ValidatorRegistry<?, ?> validatorRegistry;
 
@@ -49,6 +53,7 @@ public class ConstraintContext extends AbstractLoggableObject {
    * @param mathUtil the {@link MathUtil}.
    */
   ConstraintContext(ValidatorRegistry<?, ?> validatorRegistry, AnnotatedElement annotatedElement, GenericType<?> valueType, MathUtil mathUtil) {
+
     super();
     this.validatorRegistry = validatorRegistry;
     this.annotatedElement = annotatedElement;
@@ -114,7 +119,7 @@ public class ConstraintContext extends AbstractLoggableObject {
       Number min = this.range.getMin();
       Number max = this.range.getMax();
       if (((min != null) && (newRange.getMin() != min)) || (max != null) && (newRange.getMax() != max)) {
-        getLogger().warn("Replacing range {} with {} for constraint {} of {}.", this.range, newRange, this.constraint, this.annotatedElement);
+        LOG.warn("Replacing range {} with {} for constraint {} of {}.", this.range, newRange, this.constraint, this.annotatedElement);
       }
       this.range = newRange;
     }

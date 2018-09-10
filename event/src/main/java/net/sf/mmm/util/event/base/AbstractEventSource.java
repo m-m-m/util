@@ -4,9 +4,12 @@ package net.sf.mmm.util.event.base;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.base.ArrayListFactory;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventSource;
@@ -21,8 +24,9 @@ import net.sf.mmm.util.event.api.EventSource;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.1
  */
-public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>>
-    extends AbstractLoggableComponent implements EventSource<E, L> {
+public abstract class AbstractEventSource<E extends Event, L extends EventListener<E>> extends AbstractComponent implements EventSource<E, L> {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractEventSource.class);
 
   /** the registered listeners */
   private final Collection<L> listeners;
@@ -98,7 +102,7 @@ public abstract class AbstractEventSource<E extends Event, L extends EventListen
    */
   protected void handleListenerError(L listener, E event, Throwable error) {
 
-    getLogger().debug("The listener (" + listener + ") failed to handle event (" + event + "):", error);
+    LOG.debug("The listener (" + listener + ") failed to handle event (" + event + "):", error);
   }
 
 }

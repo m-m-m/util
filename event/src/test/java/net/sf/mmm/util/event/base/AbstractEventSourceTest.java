@@ -2,18 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.event.base;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.slf4j.Logger;
 
-import net.sf.mmm.logging.TestLogger;
 import net.sf.mmm.util.event.api.Event;
 import net.sf.mmm.util.event.api.EventListener;
 
@@ -23,7 +17,7 @@ import net.sf.mmm.util.event.api.EventListener;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class AbstractEventSourceTest {
+public class AbstractEventSourceTest extends Assertions {
 
   /**
    * Tests {@link AbstractEventSource#addListener(EventListener)}, {@link AbstractEventSource#fireEvent(Event)} and
@@ -33,7 +27,6 @@ public class AbstractEventSourceTest {
   public void testEvent() {
 
     MyEventSource source = new MyEventSource();
-    TestLogger testLogger = source.getLogger();
     source.initialize();
 
     MyEventListener listener1 = new MyEventListener();
@@ -41,42 +34,37 @@ public class AbstractEventSourceTest {
     // listener 1 added, fire event 1
     MyEvent event1 = new MyEvent();
     source.fireEvent(event1);
-    assertEquals(1, listener1.getEvents().size());
-    assertEquals(event1, listener1.getEvents().get(0));
+    assertThat(listener1.getEvents()).hasSize(1);
+    assertThat(listener1.getEvents().get(0)).isEqualTo(event1);
     MyEventListener listener2 = new MyEventListener();
     source.addListener(listener2);
     // listener 2 added, fire event 2
     MyEvent event2 = new MyEvent();
     source.fireEvent(event2);
-    assertEquals(2, listener1.getEvents().size());
-    assertEquals(event2, listener1.getEvents().get(1));
-    assertEquals(1, listener2.getEvents().size());
-    assertEquals(event2, listener2.getEvents().get(0));
-    assertTrue(source.removeListener(listener1));
+    assertThat(listener1.getEvents()).hasSize(2).containsExactly(event1, event2);
+    assertThat(listener2.getEvents()).hasSize(1).containsExactly(event2);
+    assertThat(source.removeListener(listener1)).isTrue();
     // listener 1 removed, fire event 3
     MyEvent event3 = new MyEvent();
     source.fireEvent(event3);
-    assertEquals(2, listener1.getEvents().size());
-    assertEquals(2, listener2.getEvents().size());
-    assertEquals(event3, listener2.getEvents().get(1));
-    assertTrue(source.removeListener(listener2));
+    assertThat(listener1.getEvents()).hasSize(2);
+    assertThat(listener2.getEvents()).hasSize(2).containsExactly(event2, event3);
+    assertThat(source.removeListener(listener2)).isTrue();
     // all listeners removed, fire event 4
     MyEvent event4 = new MyEvent();
     source.fireEvent(event4);
-    assertEquals(2, listener1.getEvents().size());
-    assertEquals(2, listener2.getEvents().size());
-    assertFalse(listener1.getEvents().contains(event4));
-    assertFalse(listener2.getEvents().contains(event4));
+    assertThat(listener1.getEvents()).hasSize(2).doesNotContain(event4).containsExactly(event1, event2);
+    assertThat(listener2.getEvents()).hasSize(2).doesNotContain(event4).containsExactly(event2, event3);
 
     // test error handling...
     EvilEventListener evilListener = new EvilEventListener();
     source.addListener(evilListener);
     MyEvent event5 = new MyEvent();
     // just to be sure ...
-    testLogger.getEventList().clear();
+    // testLogger.getEventList().clear();
     source.fireEvent(event5);
-    TestLogger.LogEvent logEntry = testLogger.getEventList().get(0);
-    Assert.assertSame(EvilEventListener.error, logEntry.getThrowable());
+    // TestLogger.LogEvent logEntry = testLogger.getEventList().get(0);
+    // assertThat(logEntry.getThrowable()).isSameAs(EvilEventListener.error);
   }
 
   protected static class MyEvent implements Event {
@@ -129,18 +117,6 @@ public class AbstractEventSourceTest {
     protected void fireEvent(MyEvent event) {
 
       super.fireEvent(event);
-    }
-
-    @Override
-    protected Logger createLogger() {
-
-      return new TestLogger();
-    }
-
-    @Override
-    protected TestLogger getLogger() {
-
-      return (TestLogger) super.getLogger();
     }
 
   }

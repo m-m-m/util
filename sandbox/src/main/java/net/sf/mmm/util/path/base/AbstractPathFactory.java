@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
@@ -24,7 +24,7 @@ import net.sf.mmm.util.resource.api.ResourceUriUndefinedException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0
  */
-public abstract class AbstractPathFactory extends AbstractLoggableComponent implements PathFactory {
+public abstract class AbstractPathFactory extends AbstractComponent implements PathFactory {
 
   private final Map<String, PathProvider> schema2providerMap;
 

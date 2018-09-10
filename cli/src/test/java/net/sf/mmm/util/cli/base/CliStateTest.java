@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliContainerStyle;
@@ -104,8 +103,7 @@ public class CliStateTest extends Assert {
 
   protected CliState createState(Class<?> stateClass) {
 
-    CliState state = new CliState(stateClass, getPojoDescriptorBuilderFactory(),
-        LoggerFactory.getLogger(CliStateTest.class), getReflectionUtil(), getAnnotationUtil());
+    CliState state = new CliState(stateClass, getPojoDescriptorBuilderFactory(), getReflectionUtil(), getAnnotationUtil());
     return state;
   }
 
@@ -322,9 +320,8 @@ public class CliStateTest extends Assert {
 
   }
 
-  @CliModes(value = { @CliMode(id = "foo", title = "Foo", parentIds = { "bar1", "bar2" }),
-  @CliMode(id = "bar1", title = "Bar1", parentIds = { "bar2" }),
-  @CliMode(id = "bar2", title = "Bar2", parentIds = { "foo", "bar1" }) })
+  @CliModes(value = { @CliMode(id = "foo", title = "Foo", parentIds = { "bar1", "bar2" }), @CliMode(id = "bar1", title = "Bar1", parentIds = { "bar2" }),
+      @CliMode(id = "bar2", title = "Bar2", parentIds = { "foo", "bar1" }) })
   public static class CyclicTest2 {
 
   }
@@ -339,11 +336,9 @@ public class CliStateTest extends Assert {
     private boolean bool;
   }
 
-  @CliModes({ @CliMode(id = MODE_X_EXTENDS_DEFAULT, parentIds = CliMode.ID_DEFAULT),
-  @CliMode(id = CliMode.ID_DEFAULT, title = "default"),
-  @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT, MODE_Y_EXTENDS_HELP,
-  CliMode.ID_HELP }), @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP),
-  @CliMode(id = CliMode.ID_HELP, title = "help") })
+  @CliModes({ @CliMode(id = MODE_X_EXTENDS_DEFAULT, parentIds = CliMode.ID_DEFAULT), @CliMode(id = CliMode.ID_DEFAULT, title = "default"),
+      @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT, MODE_Y_EXTENDS_HELP, CliMode.ID_HELP }),
+      @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP), @CliMode(id = CliMode.ID_HELP, title = "help") })
   public static class ArgumentTest1 {
 
     @CliArgument(name = ARGUMENT_NAME_STRING, usage = OPTION_USAGE_STRING, //

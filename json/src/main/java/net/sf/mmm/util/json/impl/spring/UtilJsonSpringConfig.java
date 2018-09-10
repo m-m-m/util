@@ -3,13 +3,12 @@
 package net.sf.mmm.util.json.impl.spring;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
 import net.sf.mmm.util.json.api.JsonUtil;
 import net.sf.mmm.util.json.base.JsonUtilImpl;
-import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 
 /**
@@ -19,13 +18,12 @@ import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilReflectSpringConfig.class, UtilLangSpringConfig.class })
-@ComponentScan("net.sf.mmm.util.value.impl")
+@Import({ UtilCollectionSpringConfig.class, UtilReflectSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class UtilJsonSpringConfig {
 
   @Bean
-  public JsonUtil stringValueConverter() {
+  public JsonUtil jsonUtil() {
 
     return new JsonUtilImpl();
   }

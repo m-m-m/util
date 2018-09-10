@@ -6,11 +6,14 @@ import net.sf.mmm.util.component.NlsBundleUtilComponentRoot;
 import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
- * This is the exception thrown if a {@link javax.annotation.Resource resource} is required but is NOT available.
+ * This is the exception thrown if a {@link javax.annotation.Resource resource} is required but is NOT
+ * available.
  *
+ * @deprecated will be removed in some future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Deprecated
 public class ResourceMissingException extends NlsRuntimeException {
 
   private static final long serialVersionUID = -3065138916833672449L;

@@ -10,12 +10,15 @@ import java.util.Queue;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.collection.api.CollectionFactory;
 import net.sf.mmm.util.collection.api.MapFactory;
 import net.sf.mmm.util.collection.api.QueueFactory;
 import net.sf.mmm.util.collection.base.ConcurrentHashMapFactory;
 import net.sf.mmm.util.collection.base.ConcurrentLinkedQueueFactory;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.event.api.EventBus;
 import net.sf.mmm.util.event.api.EventListener;
 import net.sf.mmm.util.event.api.EventListenerIgnore;
@@ -28,7 +31,9 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 5.0.0
  */
-public abstract class AbstractEventBus extends AbstractLoggableComponent implements EventBus {
+public abstract class AbstractEventBus extends AbstractComponent implements EventBus {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractEventBus.class);
 
   private final CollectionFactory<?> queueFactory;
 
@@ -144,7 +149,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
    */
   protected void handleUndispatchedEvent(Object event) {
 
-    getLogger().warn("Event send with no responsible listener registered: {}", event);
+    LOG.warn("Event send with no responsible listener registered: {}", event);
   }
 
   /**
@@ -157,7 +162,7 @@ public abstract class AbstractEventBus extends AbstractLoggableComponent impleme
 
     if (this.globalExceptionHandler == null) {
       for (Throwable error : errors) {
-        getLogger().error("Failed to dispatch event {}", event, error);
+        LOG.error("Failed to dispatch event {}", event, error);
       }
     } else {
       this.globalExceptionHandler.handleErrors(event, errors.toArray(new Throwable[errors.size()]));

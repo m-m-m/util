@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.lang.api.SystemInformation;
 import net.sf.mmm.util.lang.api.SystemUtil;
 
@@ -14,7 +14,7 @@ import net.sf.mmm.util.lang.api.SystemUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 2.0.0
  */
-public class SystemUtilImpl extends AbstractLoggableComponent implements SystemUtil {
+public class SystemUtilImpl extends AbstractComponent implements SystemUtil {
 
   private static SystemUtil instance;
 
@@ -32,7 +32,7 @@ public class SystemUtilImpl extends AbstractLoggableComponent implements SystemU
   /**
    * This method gets the singleton instance of this {@link SystemUtil}. <br>
    * <b>ATTENTION:</b><br>
-   * Please read {@link net.sf.mmm.util.component.api.Cdi#GET_INSTANCE} before using.
+   * Please prefer dependency-injection instead of using this method.
    *
    * @return the singleton instance.
    */

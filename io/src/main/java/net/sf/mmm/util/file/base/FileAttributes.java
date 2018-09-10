@@ -2,8 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.file.base;
 
-import net.sf.mmm.util.lang.api.BasicUtil;
-import net.sf.mmm.util.lang.base.BasicUtilImpl;
+import java.util.Objects;
 
 /**
  * This class represents the attributes of a file as defined in a Unix/Posix Filesystem. They consist of a
@@ -20,27 +19,12 @@ public class FileAttributes implements Cloneable {
 
   private FileAccessPermissions permissions;
 
-  /** the {@link BasicUtilImpl} instance to use. */
-  private BasicUtil basicUtil;
-
   /**
    * The constructor.
    */
   public FileAttributes() {
 
     super();
-    this.basicUtil = BasicUtilImpl.getInstance();
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param basicUtil the instance of {@link BasicUtilImpl} to use.
-   */
-  public FileAttributes(BasicUtil basicUtil) {
-
-    super();
-    this.basicUtil = basicUtil;
   }
 
   @Override
@@ -118,13 +102,13 @@ public class FileAttributes implements Cloneable {
       return false;
     }
     FileAttributes otherAttributes = (FileAttributes) obj;
-    if (!this.basicUtil.isEqual(this.user, otherAttributes.user)) {
+    if (!Objects.equals(this.user, otherAttributes.user)) {
       return false;
     }
-    if (!this.basicUtil.isEqual(this.group, otherAttributes.group)) {
+    if (!Objects.equals(this.group, otherAttributes.group)) {
       return false;
     }
-    if (!this.basicUtil.isEqual(this.permissions, otherAttributes.permissions)) {
+    if (!Objects.equals(this.permissions, otherAttributes.permissions)) {
       return false;
     }
     return true;

@@ -11,9 +11,12 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.component.api.PeriodicRefresher;
 import net.sf.mmm.util.component.api.Refreshable;
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.concurrent.base.SimpleExecutor;
 import net.sf.mmm.util.exception.api.NlsIllegalStateException;
 import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
@@ -21,10 +24,14 @@ import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 /**
  * This is the implementation of {@link PeriodicRefresher}.
  *
+ * @deprecated will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public class PeriodicRefresherImpl extends AbstractLoggableComponent implements PeriodicRefresher, Runnable, Closeable {
+@Deprecated
+public class PeriodicRefresherImpl extends AbstractComponent implements PeriodicRefresher, Runnable, Closeable {
+
+  private static final Logger LOG = LoggerFactory.getLogger(PeriodicRefresherImpl.class);
 
   /** The default {@link #setRefreshDelayInSeconds(int) refresh-delay}. */
   private static final int DEFAULT_REFRESH_DELAY_IN_SECONDS = 5 * 60;
@@ -84,7 +91,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
       if (this.active) {
         return;
       }
-      getLogger().info("starting " + getThreadName() + "...");
+      LOG.info("starting " + getThreadName() + "...");
       Thread thread = new Thread(this);
       thread.setName(getThreadName());
       this.executor.execute(thread); // NOSONAR
@@ -130,7 +137,7 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
 
     this.refreshThread = Thread.currentThread();
     try {
-      getLogger().info(getThreadName() + " started.");
+      LOG.info(getThreadName() + " started.");
       while (!this.shutdown) {
         long sleepTime = TimeUnit.SECONDS.toMillis(this.refreshDelayInSeconds);
         Thread.sleep(sleepTime);
@@ -140,13 +147,13 @@ public class PeriodicRefresherImpl extends AbstractLoggableComponent implements 
           }
         }
       }
-      getLogger().info(getThreadName() + " ended.");
+      LOG.info(getThreadName() + " ended.");
     } catch (InterruptedException e) {
       if (!this.shutdown) {
-        getLogger().error("Illegal interrupt!", e);
+        LOG.error("Illegal interrupt!", e);
       }
     } catch (RuntimeException e) {
-      getLogger().error(getThreadName() + " crashed!", e);
+      LOG.error(getThreadName() + " crashed!", e);
     }
     this.active = false;
   }

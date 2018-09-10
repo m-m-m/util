@@ -12,8 +12,6 @@ import java.io.Writer;
 import java.nio.channels.Channel;
 import java.util.Properties;
 
-import net.sf.mmm.util.component.api.ComponentSpecification;
-
 /**
  * This is the interface for a collection of utility functions that help to deal with {@link InputStream}s,
  * {@link OutputStream}s, {@link Reader}s and {@link Writer}s. <br>
@@ -27,7 +25,6 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
-@ComponentSpecification
 public interface StreamUtil {
 
   /**
@@ -85,8 +82,7 @@ public interface StreamUtil {
    * @return the number of bytes that have been transferred.
    * @throws RuntimeIoException if the operation failed. Closing is guaranteed even in exception state.
    */
-  long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen, long size)
-      throws RuntimeIoException;
+  long transfer(InputStream inStream, FileOutputStream outStream, boolean keepOutStreamOpen, long size) throws RuntimeIoException;
 
   /**
    * This method transfers the contents of the given {@code inStream} to the given {@code outStream} .
@@ -127,8 +123,7 @@ public interface StreamUtil {
    * @param callback is the callback that is invoked if the transfer is done.
    * @return the number of bytes that have been transferred.
    */
-  AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen,
-      TransferCallback callback);
+  AsyncTransferrer transferAsync(InputStream inStream, OutputStream outStream, boolean keepOutStreamOpen, TransferCallback callback);
 
   /**
    * This method transfers the contents of the given {@code reader} to the given {@code writer}.

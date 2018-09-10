@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliContainerStyle;
@@ -32,6 +33,8 @@ import net.sf.mmm.util.value.api.SimpleValueConverter;
  */
 public class CliClassContainer {
 
+  private static final Logger LOG = LoggerFactory.getLogger(CliClassContainer.class);
+
   private final Class<?> stateClass;
 
   private final CliStyle cliStyle;
@@ -42,19 +45,16 @@ public class CliClassContainer {
 
   private final String name;
 
-  private final Logger logger;
-
   /**
    * The constructor.
    *
    * @param stateClass is the {@link #getStateClass() state-class}.
    * @param logger is the {@link Logger} to use (e.g. for {@link CliStyleHandling}).
    */
-  public CliClassContainer(Class<?> stateClass, Logger logger) {
+  public CliClassContainer(Class<?> stateClass) {
 
     super();
     this.stateClass = stateClass;
-    this.logger = logger;
     this.id2ModeMap = new HashMap<>();
     CliStyle cliStyleAnnotation = null;
     CliClass cliClassAnnotation = null;
@@ -107,16 +107,6 @@ public class CliClassContainer {
         throw new NodeCycleException(cycle);
       }
     }
-  }
-
-  /**
-   * This method gets the {@link Logger}.
-   *
-   * @return the {@link Logger}.
-   */
-  public Logger getLogger() {
-
-    return this.logger;
   }
 
   /**
@@ -181,7 +171,7 @@ public class CliClassContainer {
       CliStyleHandling handling = this.cliStyle.modeDuplicated();
       DuplicateObjectException exception = new DuplicateObjectException(mode, mode.getMode().id());
       if (handling != CliStyleHandling.OK) {
-        handling.handle(this.logger, exception);
+        handling.handle(LOG, exception);
       }
     }
   }

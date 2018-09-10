@@ -4,13 +4,12 @@ package net.sf.mmm.util.version.impl;
 
 import java.io.IOException;
 
-import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.AbstractFormatter;
 import net.sf.mmm.util.version.api.VersionIdentifier;
 
 /**
- * This is the abstract base implementation of {@link net.sf.mmm.util.lang.api.Formatter} for a numeric part of the
- * {@link VersionIdentifier}.
+ * This is the abstract base implementation of {@link net.sf.mmm.util.lang.api.Formatter} for a numeric part
+ * of the {@link VersionIdentifier}.
  *
  * @see ComposedVersionIdentifierFormatter
  *
@@ -18,9 +17,6 @@ import net.sf.mmm.util.version.api.VersionIdentifier;
  * @since 3.0.0
  */
 public abstract class AbstractVersionIdentifierFormatterNumber extends AbstractFormatter<VersionIdentifier> {
-
-  /** The {@link StringUtil} instance. */
-  private final StringUtil stringUtil;
 
   /** The static prefix. */
   private final String prefix;
@@ -31,14 +27,14 @@ public abstract class AbstractVersionIdentifierFormatterNumber extends AbstractF
   /**
    * The constructor.
    *
-   * @param stringUtil is the {@link StringUtil} instance.
-   * @param prefix is the static prefix to append before the number. Will be omitted if the number is {@code null}.
-   * @param padding is the padding (minimum number of digits) for the number to format. The default is {@code 0}.
+   * @param prefix is the static prefix to append before the number. Will be omitted if the number is
+   *        {@code null}.
+   * @param padding is the padding (minimum number of digits) for the number to format. The default is
+   *        {@code 0}.
    */
-  public AbstractVersionIdentifierFormatterNumber(StringUtil stringUtil, String prefix, int padding) {
+  public AbstractVersionIdentifierFormatterNumber(String prefix, int padding) {
 
     super();
-    this.stringUtil = stringUtil;
     this.prefix = prefix;
     this.padding = padding;
   }
@@ -59,8 +55,24 @@ public abstract class AbstractVersionIdentifierFormatterNumber extends AbstractF
       if (this.prefix != null) {
         buffer.append(this.prefix);
       }
-      buffer.append(this.stringUtil.padNumber(number.longValue(), this.padding));
+      buffer.append(padNumber(number.longValue(), this.padding, 10));
     }
   }
 
+  static String padNumber(long number, int digits, int radix) {
+
+    String result = Long.toString(number, radix);
+    int leadingZeros = digits - result.length();
+    if (leadingZeros > 0) {
+      int capacity = result.length() + leadingZeros;
+      StringBuilder buffer = new StringBuilder(capacity);
+      while (leadingZeros > 0) {
+        buffer.append('0');
+        leadingZeros--;
+      }
+      buffer.append(result);
+      result = buffer.toString();
+    }
+    return result;
+  }
 }

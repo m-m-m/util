@@ -13,9 +13,11 @@ import net.sf.mmm.util.concurrent.impl.spring.UtilConcurrentSpringConfig;
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.component}.
  *
+ * @deprecated will be deleted in a future release.
  * @author hohwille
  * @since 7.1.0
  */
+@Deprecated
 @Configuration
 @Import(UtilConcurrentSpringConfig.class)
 @SuppressWarnings("javadoc")

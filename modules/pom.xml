@@ -14,6 +14,21 @@
 
   <modules>
     <module>../test</module>
+    <module>../lang</module>
+    <module>../pattern</module>
+    <module>../uuid</module>
+    <module>../math</module>
+    <module>../xml</module>
+    <module>../scanner</module>
+    <module>../concurrent</module>
+    <module>../session</module>
+    <module>../date</module>
+    <module>../text</module>
+    <module>../collection</module>
+    <module>../resource</module>
+    <module>../reflect</module>
+    <module>../nls</module>
+    <module>../exception</module>
     <module>../core</module>
     <module>../entity</module>
     <module>../cli</module>
@@ -21,6 +36,8 @@
     <module>../context</module>
     <module>../event</module>
     <module>../pojo</module>
+    <module>../value</module>
+    <module>../pojopath</module>
     <module>../validation</module>
     <module>../search</module>
     <module>../version</module>
@@ -40,8 +57,8 @@
       </modules>
     </profile>
   </profiles>
-  
-  
+
+
   <dependencyManagement>
     <dependencies>
       <!-- BOM of mmm-util -->
@@ -52,7 +69,32 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!-- BOM of spring -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>2.0.4.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>javax.persistence-api</artifactId>
+        <version>2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>6.0.9.Final</version>
+      </dependency>
+      <!--
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-dbcp2</artifactId>
+        <version>2.1.1</version>
+      </dependency>
+      -->
     </dependencies>
   </dependencyManagement>
-  
+
 </project>

@@ -16,20 +16,15 @@ import java.util.regex.Matcher;
 
 import javax.inject.Inject;
 
-import net.sf.mmm.util.component.base.AbstractLoggableComponent;
+import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
-import net.sf.mmm.util.exception.api.DuplicateObjectException;
-import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
-import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.filter.api.CharFilter;
 import net.sf.mmm.util.filter.base.ConjunctionCharFilter;
 import net.sf.mmm.util.filter.base.ListCharFilter;
 import net.sf.mmm.util.lang.api.Conjunction;
 import net.sf.mmm.util.lang.api.Formatter;
-import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.lang.base.StaticFormatter;
-import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.scanner.base.CharSequenceScanner;
 import net.sf.mmm.util.version.api.DevelopmentPhase;
 import net.sf.mmm.util.version.api.VersionIdentifier;
@@ -42,22 +37,19 @@ import net.sf.mmm.util.version.api.VersionUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class VersionUtilImpl extends AbstractLoggableComponent implements VersionUtil {
+public class VersionUtilImpl extends AbstractComponent implements VersionUtil {
 
   /** A {@link CharFilter} that accepts all but ASCII letters. */
-  private static final CharFilter INFIX_FILTER = new ConjunctionCharFilter(Conjunction.NOR,
-      CharFilter.ASCII_LETTER_FILTER, new ListCharFilter(true, '$', '(', ')', '{', '}'));
+  private static final CharFilter INFIX_FILTER = new ConjunctionCharFilter(Conjunction.NOR, CharFilter.ASCII_LETTER_FILTER,
+      new ListCharFilter(true, '$', '(', ')', '{', '}'));
 
   /** A {@link CharFilter} that accepts common separators. */
   private static final CharFilter SEPARATOR_FILTER = new ListCharFilter(true, '.', '-', '_', '#', ',');
 
   /** A {@link CharFilter} that accepts all but separators and digits. */
-  private static final CharFilter LETTER_FILTER = new ConjunctionCharFilter(Conjunction.NOR, SEPARATOR_FILTER,
-      CharFilter.LATIN_DIGIT_FILTER);
+  private static final CharFilter LETTER_FILTER = new ConjunctionCharFilter(Conjunction.NOR, SEPARATOR_FILTER, CharFilter.LATIN_DIGIT_FILTER);
 
   private static VersionUtil instance;
-
-  private StringUtil stringUtil;
 
   private Iso8601Util iso8601Util;
 
@@ -77,12 +69,11 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
 
   /**
    * This method gets the singleton instance of this {@link VersionUtilImpl}. <br>
-   * This design is the best compromise between easy access (via this indirection you have direct, static
-   * access to all offered functionality) and IoC-style design which allows extension and customization. <br>
-   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via
-   * the {@link net.sf.mmm.util.component.api.IocContainer container-framework} of your choice. To wire up the
-   * dependent components everything is properly annotated using annotations (JSR-250 and JSR-330). If your
-   * container does NOT support this, you should consider using a better one.
+   * This design is the best compromise between easy access (via this indirection you have direct, static access to all
+   * offered functionality) and IoC-style design which allows extension and customization. <br>
+   * For IoC usage, simply ignore all static {@link #getInstance()} methods and construct new instances via the IoC
+   * container-framework of your choice. To wire up the dependent components everything is properly annotated using
+   * annotations (JSR-250 and JSR-330). If your container does NOT support this, you should consider using a better one.
    *
    * @return the singleton instance.
    */
@@ -98,24 +89,6 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
       }
     }
     return instance;
-  }
-
-  /**
-   * @return the stringUtil
-   */
-  protected StringUtil getStringUtil() {
-
-    return this.stringUtil;
-  }
-
-  /**
-   * @param stringUtil is the stringUtil to set
-   */
-  @Inject
-  public void setStringUtil(StringUtil stringUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.stringUtil = stringUtil;
   }
 
   /**
@@ -191,9 +164,6 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   protected void doInitialize() {
 
     super.doInitialize();
-    if (this.stringUtil == null) {
-      this.stringUtil = StringUtilImpl.getInstance();
-    }
     if (this.iso8601Util == null) {
       this.iso8601Util = Iso8601UtilImpl.getInstance();
     }
@@ -237,7 +207,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
     while (newKey != null) {
       DevelopmentPhase existingPhase = map.get(newKey);
       if ((existingPhase != null) && (existingPhase != phase)) {
-        throw new DuplicateObjectException(phase, newKey, existingPhase);
+        throw new IllegalStateException("Development phase '" + phase + "' has key '" + newKey + "' that is already mapped to '" + existingPhase + "'.");
       }
       map.put(newKey, phase);
       if (newKey.contains("-")) {
@@ -267,17 +237,26 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   }
 
   @Override
-  public VersionIdentifier createVersionIdentifier(String versionString) throws NlsParseException {
+  public VersionIdentifier createVersionIdentifier(String versionString) {
 
     return createVersionIdentifier(versionString, false);
   }
 
   @Override
-  public VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat)
-      throws NlsParseException {
+  public VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat) {
 
     List<Integer> versionSegmentList = new ArrayList<>();
     CharSequenceScanner scanner = new CharSequenceScanner(versionString);
+    try {
+      return createVersionIdentifier(versionString, normalizeFormat, versionSegmentList, scanner);
+    } catch (Exception e) {
+      throw new IllegalArgumentException(versionString, e);
+    }
+  }
+
+  private VersionIdentifier createVersionIdentifier(String versionString, boolean normalizeFormat, List<Integer> versionSegmentList,
+      CharSequenceScanner scanner) {
+
     String label = null;
     Date timestamp = null;
     Long revision = null;
@@ -291,15 +270,13 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
       // snapshot
       if (scanner.expectStrict(VersionIdentifier.SNAPSHOT, true)) {
         if (snapshot) {
-          throw new NlsParseException(new DuplicateObjectException(Boolean.TRUE, VersionIdentifier.SNAPSHOT),
-              versionString, VersionIdentifier.class);
+          throw new IllegalStateException("Duplicate SNAPSHOT found.");
         }
         snapshot = true;
       } else if (scanner.expectStrict("rev", true)) {
         // revision
         if (revision != null) {
-          throw new NlsParseException(new DuplicateObjectException(revision, "revision"), versionString,
-              VersionIdentifier.class);
+          throw new IllegalStateException("Duplicate revision found (" + revision + ").");
         }
         segmentsCompleted = true;
         scanner.expectStrict("ision", true);
@@ -309,38 +286,11 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
       // number
       String numberString = scanner.readWhile(CharFilter.LATIN_DIGIT_FILTER);
       if (numberString.length() > 0) {
-        // timestamp?
-        // 19991231, 1999-12-31
-        if ((numberString.length() >= 4) && (numberString.length() <= 14)) {
-          if (numberString.startsWith("19") || numberString.startsWith("20") || numberString.startsWith("21")) {
-            // longest ISO-8601 format is 28 characters
-            // 1999-12-31T23:59:59+12:45:00
-            // shortest format is 8 characters
-            // 19991231
-            StringBuffer buffer = new StringBuffer(numberString);
-            buffer.append(scanner.peek(28 - numberString.length()));
-            String dateString = buffer.toString();
-            Matcher isoMatcher = Iso8601Util.PATTERN_ALL.matcher(dateString);
-            if (isoMatcher.find()) {
-              int end = isoMatcher.end();
-              buffer.setLength(end);
-              if (timestamp != null) {
-                throw new NlsParseException(new DuplicateObjectException(buffer, "timestamp"), versionString,
-                    VersionIdentifier.class);
-              }
-              timestamp = this.iso8601Util.parseDate(buffer.toString());
-              scanner.read(end - numberString.length());
-            } else {
-              // support other date formats?
-              throw new NlsParseException(new NlsParseException(dateString, Date.class), versionString,
-                  VersionIdentifier.class);
-            }
-          }
-        }
+        timestamp = parseTimestamp(scanner, timestamp, numberString);
         if (timestamp == null) {
           // version segment...
           if (segmentsCompleted) {
-            throw new NlsParseException(versionString, VersionIdentifier.class);
+            throw new IllegalStateException("Invalid segment: " + numberString);
           }
           Integer segment = Integer.valueOf(numberString);
           versionSegmentList.add(segment);
@@ -367,14 +317,12 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
           }
           if (currentPhase == null) {
             if (label != null) {
-              throw new NlsParseException(new DuplicateObjectException(phaseOrLabel, "label", label), versionString,
-                  VersionIdentifier.class);
+              throw new IllegalStateException("Label '" + label + "' is a duplicate of '" + phaseOrLabel + "'.");
             }
             label = phaseOrLabel;
           } else {
             if (phase != null) {
-              throw new NlsParseException(new DuplicateObjectException(currentPhase, DevelopmentPhase.class, phase),
-                  versionString, VersionIdentifier.class);
+              throw new IllegalStateException("Phase '" + phase + "' is a duplicate of '" + currentPhase + "'.");
             }
             phase = currentPhase;
             phaseAlias = phaseOrLabel;
@@ -392,19 +340,48 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
     for (int i = 0; i < versionSegments.length; i++) {
       versionSegments[i] = versionSegmentList.get(i).intValue();
     }
-    VersionIdentifierImpl result = new VersionIdentifierImpl(versionString, label, timestamp, revision, phase,
-        phaseAlias, phaseNumber, snapshot, versionSegments);
+    VersionIdentifierImpl result = new VersionIdentifierImpl(versionString, label, timestamp, revision, phase, phaseAlias, phaseNumber, snapshot,
+        versionSegments);
     if (normalizeFormat) {
       result.setStringRepresentation(this.defaultFormatter.format(result));
     }
     return result;
   }
 
+  private Date parseTimestamp(CharSequenceScanner scanner, Date timestamp, String numberString) {
+
+    // 19991231, 1999-12-31
+    if ((numberString.length() >= 4) && (numberString.length() <= 14)) {
+      if (numberString.startsWith("19") || numberString.startsWith("20") || numberString.startsWith("21")) {
+        // longest ISO-8601 format is 28 characters
+        // 1999-12-31T23:59:59+12:45:00
+        // shortest format is 8 characters
+        // 19991231
+        StringBuffer buffer = new StringBuffer(numberString);
+        buffer.append(scanner.peek(28 - numberString.length()));
+        String dateString = buffer.toString();
+        Matcher isoMatcher = Iso8601Util.PATTERN_ALL.matcher(dateString);
+        if (isoMatcher.find()) {
+          int end = isoMatcher.end();
+          buffer.setLength(end);
+          if (timestamp != null) {
+            throw new IllegalStateException("Duplicate timestamp found (" + buffer + ").");
+          }
+          scanner.skip(end - numberString.length());
+          return this.iso8601Util.parseDate(buffer.toString());
+        } else {
+          // support other date formats?
+          throw new IllegalStateException("Illegal date format (" + dateString + ").");
+        }
+      }
+    }
+    return timestamp;
+  }
+
   @Override
   public VersionIdentifierFormatter createFormatter(String formatPattern) {
 
-    boolean strict = true;
-    return createFormatter(formatPattern, strict);
+    return createFormatter(formatPattern, true);
   }
 
   /**
@@ -416,14 +393,14 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
    * @param status is the {@link FormatPatternStatus}.
    * @return the sub {@link Formatter} or {@code null} to continue parsing the infix.
    */
-  protected Formatter<VersionIdentifier> parseSubFormatter(CharSequenceScanner scanner, String formatPattern,
-      StringBuilder infixBuffer, FormatPatternStatus status) {
+  protected Formatter<VersionIdentifier> parseSubFormatter(CharSequenceScanner scanner, String formatPattern, StringBuilder infixBuffer,
+      FormatPatternStatus status) {
 
     char c = scanner.next();
     if (c == 'V') {
       char segment = scanner.forceNext();
       if (segment == '\0') {
-        throw new NlsParseException(formatPattern, formatPattern + "<separator>");
+        throw new IllegalStateException(formatPattern + "<separator>");
       }
       String segmentSeparator = Character.toString(segment);
       int minimumSegmentCount = 0;
@@ -438,8 +415,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
         scanner.require('}');
       }
       status.versionSegmentsCount++;
-      return new VersionIdentifierFormatterVersionSegments(this.stringUtil, infixBuffer.toString(), segmentSeparator,
-          minimumSegmentCount, maximumSegmentCount, segmentPadding);
+      return new VersionIdentifierFormatterVersionSegments(infixBuffer.toString(), segmentSeparator, minimumSegmentCount, maximumSegmentCount, segmentPadding);
     } else if ((c == 'P') || (c == 'A') || (c == 'L')) {
       int maximumLength = 0;
       if (scanner.expect('{')) {
@@ -462,10 +438,10 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
         scanner.require('}');
       }
       if (c == 'R') {
-        return new VersionIdentifierFormatterRevision(this.stringUtil, infixBuffer.toString(), padding);
+        return new VersionIdentifierFormatterRevision(infixBuffer.toString(), padding);
       } else {
         status.phaseNumberCount++;
-        return new VersionIdentifierFormatterPhaseNumber(this.stringUtil, infixBuffer.toString(), padding);
+        return new VersionIdentifierFormatterPhaseNumber(infixBuffer.toString(), padding);
       }
     } else if (c == 'T') {
       DateFormat dateFormat = null;
@@ -497,16 +473,25 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
       status.inBrace = false;
       return null;
     } else {
-      NlsIllegalArgumentException cause = new NlsIllegalArgumentException(Character.toString(c));
-      throw new NlsParseException(cause, formatPattern, VersionIdentifierFormatter.class);
+      throw new IllegalStateException(Character.toString(c));
     }
   }
 
   @Override
   public VersionIdentifierFormatter createFormatter(String formatPattern, boolean strict) {
 
-    CharSequenceScanner scanner = new CharSequenceScanner(formatPattern);
-    List<Formatter<VersionIdentifier>> subFormatterList = new ArrayList<>();
+    try {
+      CharSequenceScanner scanner = new CharSequenceScanner(formatPattern);
+      List<Formatter<VersionIdentifier>> subFormatterList = new ArrayList<>();
+      return createFormatter(formatPattern, strict, scanner, subFormatterList);
+    } catch (Exception e) {
+      throw new IllegalArgumentException(formatPattern, e);
+    }
+  }
+
+  private VersionIdentifierFormatter createFormatter(String formatPattern, boolean strict, CharSequenceScanner scanner,
+      List<Formatter<VersionIdentifier>> subFormatterList) {
+
     FormatPatternStatus status = new FormatPatternStatus();
     StringBuilder infixBuffer = new StringBuilder();
     while (scanner.hasNext()) {
@@ -522,11 +507,10 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
       }
     }
     if (strict && !status.isStrict()) {
-      NlsIllegalArgumentException cause = new NlsIllegalArgumentException("strict");
-      throw new NlsParseException(cause, formatPattern, VersionIdentifierFormatter.class);
+      throw new IllegalStateException("strict");
     }
     if (subFormatterList.size() == 0) {
-      throw new NlsParseException(formatPattern, VersionIdentifierFormatter.class);
+      throw new IllegalStateException("No sub-formatter.");
     }
     @SuppressWarnings("unchecked")
     Formatter<VersionIdentifier>[] subFormatters = new Formatter[subFormatterList.size()];
@@ -534,8 +518,8 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
   }
 
   /**
-   * This inner class holds the status used to determine if a
-   * {@link VersionUtilImpl#createFormatter(String, boolean) formatPattern} is {@link #isStrict() strict}.
+   * This inner class holds the status used to determine if a {@link VersionUtilImpl#createFormatter(String, boolean)
+   * formatPattern} is {@link #isStrict() strict}.
    */
   protected static class FormatPatternStatus {
 
@@ -559,8 +543,7 @@ public class VersionUtilImpl extends AbstractLoggableComponent implements Versio
      */
     public boolean isStrict() {
 
-      return ((this.versionSegmentsCount == 1) && (this.phaseCount == 1) && (this.phaseNumberCount == 1)
-          && (this.snapshotCount == 1));
+      return ((this.versionSegmentsCount == 1) && (this.phaseCount == 1) && (this.phaseNumberCount == 1) && (this.snapshotCount == 1));
     }
 
   }

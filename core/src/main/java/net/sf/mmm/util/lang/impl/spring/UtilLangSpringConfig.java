@@ -18,7 +18,9 @@ import net.sf.mmm.util.nls.impl.spring.UtilNlsSpringConfig;
  *
  * @author hohwille
  * @since 7.1.0
+ * @deprecated use {@link UtilLangSpringConfigBase} instead.
  */
+@Deprecated
 @Configuration
 @Import({ UtilNlsSpringConfig.class, UtilLangSpringConfigBase.class })
 @ComponentScan("net.sf.mmm.util.lang.base.datatype.descriptor")

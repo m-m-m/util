@@ -1,0 +1,572 @@
+/* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 */
+package net.sf.mmm.util.xml.base;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
+import java.util.Iterator;
+import java.util.Objects;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.FactoryConfigurationError;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.events.ProcessingInstruction;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Entity;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import net.sf.mmm.util.component.base.AbstractComponent;
+import net.sf.mmm.util.lang.api.CharIterator;
+import net.sf.mmm.util.lang.base.SpaceNormalizingCharIterator;
+import net.sf.mmm.util.xml.api.DomUtil;
+import net.sf.mmm.util.xml.api.XmlCompareMode;
+import net.sf.mmm.util.xml.api.XmlException;
+
+/**
+ * This utility class contains methods that help to deal with the {@link org.w3c.dom.Node DOM} API.
+ *
+ * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
+ * @since 1.0.2
+ */
+public final class DomUtilImpl extends AbstractComponent implements DomUtil {
+
+  private static DomUtil instance;
+
+  /** the document builder factory used to read and parse XML */
+  private DocumentBuilderFactory documentBuilderFactory;
+
+  /** the transformer factory used to transform or write XML */
+  private TransformerFactory transformerFactory;
+
+  /**
+   * The constructor.
+   */
+  public DomUtilImpl() {
+
+    super();
+  }
+
+  /**
+   * This method gets the {@link DocumentBuilderFactory}.
+   *
+   * @return the {@link DocumentBuilderFactory} to use.
+   */
+  protected DocumentBuilderFactory getDocumentBuilderFactory() {
+
+    return this.documentBuilderFactory;
+  }
+
+  /**
+   * This method sets the {@link #getDocumentBuilderFactory() documentBuilderFactory}.
+   *
+   * @param documentBuilderFactory is the documentBuilderFactory to set.
+   */
+  public void setDocumentBuilderFactory(DocumentBuilderFactory documentBuilderFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.documentBuilderFactory = documentBuilderFactory;
+  }
+
+  /**
+   * This method gets the {@link TransformerFactory}.
+   *
+   * @return the {@link TransformerFactory} to use.
+   */
+  protected TransformerFactory getTransformerFactory() {
+
+    return this.transformerFactory;
+  }
+
+  /**
+   * This method sets the {@link #getTransformerFactory() transformerFactory}.
+   *
+   * @param transformerFactory is the transformerFactory to set
+   */
+  public void setTransformerFactory(TransformerFactory transformerFactory) {
+
+    getInitializationState().requireNotInitilized();
+    this.transformerFactory = transformerFactory;
+  }
+
+  /**
+   * This method gets the singleton instance of this {@link DomUtilImpl}. <br>
+   * <b>ATTENTION:</b><br>
+   * Please prefer dependency-injection instead of using this method.
+   *
+   * @return the singleton instance.
+   */
+  public static DomUtil getInstance() {
+
+    if (instance == null) {
+      synchronized (DomUtilImpl.class) {
+        if (instance == null) {
+          DomUtilImpl util = new DomUtilImpl();
+          util.initialize();
+          instance = util;
+        }
+      }
+    }
+    return instance;
+  }
+
+  @Override
+  protected void doInitialize() {
+
+    super.doInitialize();
+    if (this.documentBuilderFactory == null) {
+      try {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        this.documentBuilderFactory = factory;
+      } catch (FactoryConfigurationError e) {
+        throw new IllegalStateException(e);
+      }
+    }
+    if (this.transformerFactory == null) {
+      try {
+        TransformerFactory factory = TransformerFactory.newInstance();
+        this.transformerFactory = factory;
+      } catch (TransformerFactoryConfigurationError e) {
+        throw new IllegalStateException(e);
+      }
+    }
+  }
+
+  /**
+   * This method creates a new document builder.
+   *
+   * @return the new document builder instance.
+   */
+  private DocumentBuilder createDocumentBuilder() {
+
+    try {
+      return this.documentBuilderFactory.newDocumentBuilder();
+    } catch (ParserConfigurationException e) {
+      throw new IllegalStateException("XML Parser misconfigured!" + " Probably your JVM does not support the required JAXP version!", e);
+    }
+  }
+
+  /**
+   * This method creates a new transformer.
+   *
+   * @param indent - {@code true} if the XML should be indented (automatically add linebreaks before opening
+   *        tags), {@code false} otherwise.
+   * @return the new transformer.
+   */
+  private Transformer createTransformer(boolean indent) {
+
+    try {
+      Transformer result = this.transformerFactory.newTransformer();
+      if (indent) {
+        result.setOutputProperty(OutputKeys.INDENT, "yes");
+      }
+      return result;
+    } catch (TransformerConfigurationException e) {
+      throw new IllegalStateException("XML Transformer misconfigured!" + " Probably your JVM does not support the required JAXP version!", e);
+    }
+  }
+
+  @Override
+  public Element getFirstElement(NodeList nodeList) {
+
+    return getFirstElement(nodeList, null);
+  }
+
+  @Override
+  public Element getFirstElement(NodeList nodeList, String tagName) {
+
+    int len = nodeList.getLength();
+    for (int i = 0; i < len; i++) {
+      Node node = nodeList.item(i);
+      if (node.getNodeType() == Node.ELEMENT_NODE) {
+        Element element = (Element) node;
+        if ((tagName == null) || (tagName.equals(element.getTagName()))) {
+          return element;
+        }
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public Element getFirstChildElement(Element element, String tagName) {
+
+    return getFirstElement(element.getChildNodes(), tagName);
+  }
+
+  @Override
+  public Element requireFirstChildElement(Element element, String tagName) throws IllegalArgumentException {
+
+    Element result = getFirstChildElement(element, tagName);
+    if (result == null) {
+      // TODO: NLS
+      throw new IllegalArgumentException("Missing element '" + tagName + "' in element '" + element.getTagName() + "'!");
+    }
+    return result;
+  }
+
+  @Override
+  public boolean getAttributeAsBoolean(Element element, String attribute, boolean defaultValue) throws IllegalArgumentException {
+
+    boolean result = defaultValue;
+    if (element.hasAttribute(attribute)) {
+      String flag = element.getAttribute(attribute);
+      if ("true".equalsIgnoreCase(flag)) {
+        result = true;
+      } else if ("false".equalsIgnoreCase(flag)) {
+        result = false;
+      } else {
+        throw new IllegalStateException("Invalid boolean value '" + flag + "' for '" + element.getTagName() + "@" + attribute + "'.");
+      }
+    }
+    return result;
+  }
+
+  @Override
+  public String getNodeText(Node node) {
+
+    return getNodeText(node, 0);
+  }
+
+  @Override
+  public String getNodeText(Node node, int depth) {
+
+    StringBuffer buffer = new StringBuffer();
+    getNodeText(node, buffer, depth);
+    return buffer.toString();
+  }
+
+  @Override
+  public void getNodeText(Node node, Appendable buffer, int depth) {
+
+    try {
+      NodeList nodeList = node.getChildNodes();
+      for (int i = 0; i < nodeList.getLength(); i++) {
+        Node childNode = nodeList.item(i);
+        if ((childNode.getNodeType() == Node.TEXT_NODE) || (childNode.getNodeType() == Node.CDATA_SECTION_NODE)) {
+
+          buffer.append(childNode.getNodeValue());
+        } else if ((depth > 0) && (childNode.getNodeType() == Node.ELEMENT_NODE)) {
+          getNodeText(childNode, buffer, depth - 1);
+        }
+      }
+    } catch (IOException e) {
+      throw new IllegalStateException("Error writing to Appendable.", e);
+    }
+  }
+
+  /**
+   * This method removes all {@link Node#getChildNodes() child nodes} of the given node.
+   *
+   * @param node is the node to clean of children.
+   */
+  @Override
+  public void removeChildren(Element node) {
+
+    NodeList children = node.getChildNodes();
+    for (int i = (children.getLength() - 1); i >= 0; i--) {
+      node.removeChild(children.item(i));
+    }
+  }
+
+  @Override
+  public Document createDocument() {
+
+    return createDocumentBuilder().newDocument();
+  }
+
+  @Override
+  public Document parseDocument(InputStream inputStream) {
+
+    try {
+      try {
+        return createDocumentBuilder().parse(inputStream);
+      } catch (SAXException e) {
+        throw new XmlInvalidException(e);
+      } finally {
+        inputStream.close();
+      }
+    } catch (IOException e) {
+      throw new IllegalStateException("Error reading XML from stream.", e);
+    }
+  }
+
+  @Override
+  public Document parseDocument(Reader reader) {
+
+    return parseDocument(new InputSource(reader));
+  }
+
+  @Override
+  public Document parseDocument(InputSource inputSource) {
+
+    try {
+      return createDocumentBuilder().parse(inputSource);
+    } catch (SAXException e) {
+      throw new XmlInvalidException(e);
+    } catch (IOException e) {
+      throw new IllegalStateException("Error reading XML from stream.", e);
+    }
+  }
+
+  @Override
+  public void writeXml(Node xmlNode, OutputStream outputStream, boolean indent) throws XmlException {
+
+    transformXml(new DOMSource(xmlNode), new StreamResult(outputStream), indent);
+  }
+
+  @Override
+  public void writeXml(Node xmlNode, Writer writer, boolean indent) throws XmlException {
+
+    transformXml(new DOMSource(xmlNode), new StreamResult(writer), indent);
+  }
+
+  @Override
+  public void transformXml(Source source, Result result, boolean indent) throws XmlException {
+
+    try {
+      createTransformer(indent).transform(source, result);
+    } catch (TransformerException e) {
+      throw new XmlInvalidException(e);
+    }
+  }
+
+  @Override
+  public String getLocalName(Node node) {
+
+    String localName = node.getLocalName();
+    if (localName == null) {
+      localName = node.getNodeName();
+    }
+    return localName;
+  }
+
+  /**
+   * This method determines if the given nodes have the same {@link #getLocalName(Node) name} and
+   * {@link Node#getNamespaceURI() namespace}.
+   *
+   * @param node1 is the first node.
+   * @param node2 is the second node.
+   * @return {@code true} if both nodes have equal {@link #getLocalName(Node) name} and
+   *         {@link Node#getNamespaceURI() namespace}.
+   */
+  private boolean isEqualName(Node node1, Node node2) {
+
+    if (!Objects.equals(node1.getNamespaceURI(), node2.getNamespaceURI())) {
+      return false;
+    }
+    if (!Objects.equals(getLocalName(node1), getLocalName(node2))) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public boolean isEqual(Node node1, Node node2, XmlCompareMode mode) {
+
+    if (node1 == null) {
+      return (node2 == null);
+    } else {
+      if (node2 == null) {
+        return false;
+      }
+    }
+
+    short type1 = node1.getNodeType();
+    short type2 = node2.getNodeType();
+    if (type1 != type2) {
+      boolean accept = false;
+      if (mode.isJoinText() && mode.isJoinCData()) {
+        if (((type1 == Node.TEXT_NODE) && (type2 == Node.CDATA_SECTION_NODE)) || ((type1 == Node.CDATA_SECTION_NODE) && (type2 == Node.TEXT_NODE))) {
+          accept = true;
+        }
+      }
+      if (!accept) {
+        return false;
+      }
+    }
+    if (type1 == Node.ELEMENT_NODE) {
+      return isEqual((Element) node1, (Element) node2, mode);
+    } else if (type1 == Node.ATTRIBUTE_NODE) {
+      if (!isEqualName(node1, node2)) {
+        return false;
+      }
+      if (!Objects.equals(node1.getNodeValue(), node2.getNodeValue())) {
+        return false;
+      }
+      return true;
+    } else if ((type1 == Node.COMMENT_NODE) && !mode.isCheckComments()) {
+      return true;
+    } else if ((type1 == Node.TEXT_NODE) || (type1 == Node.CDATA_SECTION_NODE) || (type1 == Node.COMMENT_NODE)) {
+      CharIterator charIterator1 = new NodeValueCharIterator(node1);
+      CharIterator charIterator2 = new NodeValueCharIterator(node2);
+      return isEqual(charIterator1, charIterator2, mode);
+    } else if (type1 == Node.DOCUMENT_NODE) {
+      Document doc1 = (Document) node1;
+      Document doc2 = (Document) node2;
+      return isEqual(doc1.getDocumentElement(), doc2.getDocumentElement(), mode);
+    } else if (type1 == Node.DOCUMENT_FRAGMENT_NODE) {
+      // this should actually never happen...
+      return isEqual(node1.getChildNodes(), node1.getChildNodes(), mode);
+    } else if (type1 == Node.ENTITY_NODE) {
+      Entity entity1 = (Entity) node1;
+      Entity entity2 = (Entity) node2;
+      if (!Objects.equals(entity1.getNotationName(), entity2.getNotationName())) {
+        return false;
+      }
+      return true;
+    } else if (type1 == Node.PROCESSING_INSTRUCTION_NODE) {
+      ProcessingInstruction pi1 = (ProcessingInstruction) node1;
+      ProcessingInstruction pi2 = (ProcessingInstruction) node2;
+      if (!Objects.equals(pi1.getTarget(), pi2.getTarget())) {
+        return false;
+      }
+      if (!Objects.equals(pi1.getData(), pi2.getData())) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * This method determines if the given {@link CharSequence}s are equal.
+   *
+   * @see #isEqual(Node, Node, XmlCompareMode)
+   *
+   * @param charIterator1 is the first {@link CharIterator}.
+   * @param charIterator2 is the second {@link CharIterator}.
+   * @param mode is the mode of comparison.
+   * @return {@code true} if equal, {@code false} otherwise.
+   */
+  protected boolean isEqual(CharIterator charIterator1, CharIterator charIterator2, XmlCompareMode mode) {
+
+    CharIterator c1, c2;
+    if (mode.isNormalizeSpaces()) {
+      c1 = new SpaceNormalizingCharIterator(charIterator1);
+      c2 = new SpaceNormalizingCharIterator(charIterator2);
+    } else {
+      c1 = charIterator1;
+      c2 = charIterator2;
+    }
+    return compare(c1, c2);
+  }
+
+  private static boolean compare(CharIterator charIterator1, CharIterator charIterator2) {
+
+    char c1, c2;
+    do {
+      c1 = charIterator1.next();
+      c2 = charIterator2.next();
+      if (c1 != c2) {
+        return false;
+      }
+    } while (c1 != CharIterator.END_OF_ITERATOR);
+    return true;
+  }
+
+  /**
+   * This method determines if the given {@link Element elements} are equal.
+   *
+   * @see #isEqual(Node, Node, XmlCompareMode)
+   *
+   * @param element1 is the first {@link Element}.
+   * @param element2 is the second {@link Element}.
+   * @param mode is the mode of comparison.
+   * @return {@code true} if equal, {@code false} otherwise.
+   */
+  protected boolean isEqual(Element element1, Element element2, XmlCompareMode mode) {
+
+    if (!isEqualName(element1, element2)) {
+      return false;
+    }
+    // compare attributes
+    NamedNodeMap attributes1 = element1.getAttributes();
+    NamedNodeMap attributes2 = element2.getAttributes();
+    int length = attributes1.getLength();
+    if (attributes2.getLength() != length) {
+      return false;
+    }
+    for (int i = 0; i < length; i++) {
+      Node attr1 = attributes1.item(i);
+      String namespaceUri = attr1.getNamespaceURI();
+      String name = getLocalName(attr1);
+      Node attr2;
+      if (namespaceUri == null) {
+        attr2 = attributes2.getNamedItem(name);
+      } else {
+        attr2 = attributes2.getNamedItemNS(namespaceUri, name);
+      }
+      if (attr2 == null) {
+        return false;
+      }
+      if (!attr1.getNodeValue().equals(attr2.getNodeValue())) {
+        return false;
+      }
+    }
+    if (!isEqual(element1.getChildNodes(), element2.getChildNodes(), mode)) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * This method determines if the given {@link NodeList}s are equal.
+   *
+   * @param nodeList1 is the first {@link NodeList}.
+   * @param nodeList2 is the second {@link NodeList}.
+   * @param mode is the mode of comparison.
+   * @return {@code true} if equal, {@code false} otherwise.
+   */
+  protected boolean isEqual(NodeList nodeList1, NodeList nodeList2, XmlCompareMode mode) {
+
+    // compare child nodes
+    Iterator<Node> nodeIterator1 = new JoiningNodeIterator(nodeList1, mode);
+    Iterator<Node> nodeIterator2 = new JoiningNodeIterator(nodeList2, mode);
+    while (nodeIterator1.hasNext()) {
+      Node child1 = nodeIterator1.next();
+      if (!nodeIterator2.hasNext()) {
+        return false;
+      }
+      Node child2 = nodeIterator2.next();
+      if ((child1.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE) && (child2.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE)) {
+        // according to DOM-spec nodes can never return DocumentFragment as
+        // child - in our case this indicates that the JoiningNodeIterator has
+        // joined CharacterData according to "mode" into a DocumentFragment.
+        CharIterator charIterator1 = new NodeValueCharIterator(child1.getChildNodes());
+        CharIterator charIterator2 = new NodeValueCharIterator(child2.getChildNodes());
+        if (!isEqual(charIterator1, charIterator2, mode)) {
+          return false;
+        }
+      }
+      if (!isEqual(child1, child2, mode)) {
+        return false;
+      }
+    }
+    if (nodeIterator2.hasNext()) {
+      return false;
+    }
+    return true;
+  }
+
+}

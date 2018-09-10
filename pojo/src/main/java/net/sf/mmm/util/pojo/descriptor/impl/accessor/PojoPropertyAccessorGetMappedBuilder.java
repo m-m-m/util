@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.util.lang.api.StringUtil;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArgMode;
@@ -25,8 +25,8 @@ import net.sf.mmm.util.pojo.descriptor.base.accessor.PojoPropertyAccessorOneArgB
  */
 @Singleton
 @Named
-public class PojoPropertyAccessorGetMappedBuilder extends
-    AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg> implements PojoPropertyAccessorOneArgBuilder {
+public class PojoPropertyAccessorGetMappedBuilder extends AbstractPojoPropertyAccessorBuilder<PojoPropertyAccessorOneArg>
+    implements PojoPropertyAccessorOneArgBuilder {
 
   /** method name prefix for classic getter. */
   private static final String METHOD_PREFIX_GET = "get";
@@ -49,8 +49,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
   }
 
   @Override
-  public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor,
-      PojoDescriptorDependencies dependencies) {
+  public PojoPropertyAccessorOneArg create(Method method, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies) {
 
     Class<?>[] parameterTypes = method.getParameterTypes();
     if (parameterTypes.length == 1) {
@@ -62,11 +61,11 @@ public class PojoPropertyAccessorGetMappedBuilder extends
         propertyName = getPropertyName(methodName, METHOD_PREFIX_GET, "");
         if ((propertyName == null) && ((propertyClass == boolean.class) || (propertyClass == Boolean.class))) {
           // boolean getters may be is* or has* ...
-          propertyName = getPropertyName(methodName, METHOD_PREFIXES_BOOLEAN, StringUtil.EMPTY_STRING_ARRAY);
+          propertyName = getPropertyName(methodName, METHOD_PREFIXES_BOOLEAN, BasicHelper.EMPTY_STRING_ARRAY);
         }
         if (propertyName != null) {
-          return new PojoPropertyAccessorOneArgMethod(propertyName, method.getGenericReturnType(),
-              PojoPropertyAccessorOneArgMode.GET_MAPPED, descriptor, dependencies, method);
+          return new PojoPropertyAccessorOneArgMethod(propertyName, method.getGenericReturnType(), PojoPropertyAccessorOneArgMode.GET_MAPPED, descriptor,
+              dependencies, method);
         }
       }
     }
@@ -74,8 +73,7 @@ public class PojoPropertyAccessorGetMappedBuilder extends
   }
 
   @Override
-  public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor,
-      PojoDescriptorDependencies dependencies) {
+  public PojoPropertyAccessorOneArg create(Field field, PojoDescriptor<?> descriptor, PojoDescriptorDependencies dependencies) {
 
     return null;
   }
