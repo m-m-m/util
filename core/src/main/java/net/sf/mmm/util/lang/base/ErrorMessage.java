@@ -10,9 +10,11 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 /**
  * This is the implementation of an error {@link net.sf.mmm.util.lang.api.Message} that is already localized.
  *
+ * @deprecated use {@link net.sf.mmm.util.exception.base.ErrorMessage} instead.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
+@Deprecated
 public class ErrorMessage extends AbstractErrorMessage {
 
   private static final long serialVersionUID = 1L;
@@ -52,8 +54,7 @@ public class ErrorMessage extends AbstractErrorMessage {
    * @param technical - {@code true} in case of {@link NlsThrowable#isTechnical() technical error} with
    *        {@link #TYPE_TECHNICAL_ERROR}, {@code false} otherwise (business error).
    */
-  public ErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details,
-      boolean technical) {
+  public ErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details, boolean technical) {
 
     super(code, source, message, uuid, details, technical);
   }

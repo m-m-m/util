@@ -13,6 +13,15 @@ import java.util.Locale;
  */
 public final class BasicHelper {
 
+  /** An empty {@link String} array. */
+  public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+  /** An empty {@link Object} array. */
+  public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+  /** An empty int array. */
+  public static final int[] EMPTY_INT_ARRAY = new int[0];
+
   /**
    * The system specific line separator.
    */

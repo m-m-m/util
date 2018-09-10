@@ -4,7 +4,6 @@ package net.sf.mmm.util.datatype.api.phone;
 
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
@@ -56,7 +55,7 @@ public final class InternationalCallPrefix extends AbstractSimpleDatatype<String
 
     super(prefix);
     if (!PATTERN_PREFIX.matcher(prefix).matches()) {
-      throw new NlsParseException(prefix, PATTERN_PREFIX.pattern(), InternationalCallPrefix.class);
+      throw new IllegalArgumentException(prefix);
     }
   }
 

@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.color;
 
-import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
-
 /**
  * This is the abstract implementation of a {@link Segment} based on {@link Double}.
  *
@@ -33,7 +31,7 @@ public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<S
     super(value);
     double d = value.doubleValue();
     if ((d < 0.0) || (d > getMaximumValue().doubleValue())) {
-      throw new ValueOutOfRangeException(value, getMinimumValue(), getMaximumValue());
+      throw new IllegalArgumentException(value + "([" + getMinimumValue() + "-" + getMaximumValue() + "])");
     }
   }
 
@@ -46,7 +44,7 @@ public abstract class AbstractDoubleSegment<SELF extends AbstractDoubleSegment<S
 
     super(Double.valueOf(value));
     if ((value < 0.0) || (value > getMaximumValue().doubleValue())) {
-      throw new ValueOutOfRangeException(Double.valueOf(value), getMinimumValue(), getMaximumValue());
+      throw new IllegalArgumentException(value + "([" + getMinimumValue() + "-" + getMaximumValue() + "])");
     }
   }
 

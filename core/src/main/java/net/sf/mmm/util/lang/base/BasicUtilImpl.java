@@ -2,6 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.lang.base;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import net.sf.mmm.util.lang.api.BasicUtil;
@@ -12,9 +13,11 @@ import net.sf.mmm.util.lang.api.CharIterator;
  *
  * @see #getInstance()
  *
+ * @deprecated use {@link java.util.Objects}, {@link java.util.Arrays}, and other existing solutions.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@Deprecated
 public class BasicUtilImpl implements BasicUtil {
 
   private static BasicUtil instance;

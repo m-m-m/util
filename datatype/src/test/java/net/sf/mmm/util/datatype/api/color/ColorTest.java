@@ -5,7 +5,7 @@ package net.sf.mmm.util.datatype.api.color;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.sf.mmm.util.lang.base.StringUtilImpl;
+import net.sf.mmm.util.lang.api.BasicHelper;
 
 /**
  * This is the test-case for {@link Color}.
@@ -32,7 +32,11 @@ public class ColorTest extends Assert {
 
       // test string representation
       String colorString = color.toString();
-      assertEquals("#" + StringUtilImpl.getInstance().padNumber(i, 6, 16).toUpperCase(), colorString);
+      String hex = BasicHelper.toUpperCase(Integer.toString(i, 16));
+      while (hex.length() < 6) {
+        hex = "0" + hex;
+      }
+      assertEquals("#" + hex, colorString);
       assertEquals(colorString, color.toString());
 
       checkColorGeneric(color, colorString);
@@ -82,8 +86,7 @@ public class ColorTest extends Assert {
     copy = Color.valueOf(colorString);
     assertEquals(color, copy);
     // test copy from RGBA String representation
-    String rgbString = "rgba(" + color.getRed() + "," + color.getGreen() + ", " + color.getBlue() + ","
-        + new Alpha(color.getAlpha()) + ")";
+    String rgbString = "rgba(" + color.getRed() + "," + color.getGreen() + ", " + color.getBlue() + "," + new Alpha(color.getAlpha()) + ")";
     copy = Color.valueOf(rgbString);
     assertEquals(color, copy);
     // // test copy from HSBA values

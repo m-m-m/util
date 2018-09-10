@@ -71,7 +71,7 @@ public class NlsBundleDescriptor {
     this.nlsBundleInterface = nlsBundleInterface;
     this.resourceBundle = resourceBundle;
     if (this.nlsBundleInterface != null) {
-      this.qualifiedName = this.bundleHelper.getQualifiedLocation(this.nlsBundleInterface).getName();
+      this.qualifiedName = this.bundleHelper.getQualifiedLocation(this.nlsBundleInterface);
     } else {
       this.qualifiedName = this.resourceBundle.getClass().getName();
     }
@@ -96,8 +96,8 @@ public class NlsBundleDescriptor {
   }
 
   /**
-   * @return the {@link #getQualifiedName() qualified name} as path (e.g.
-   *         "net/sf/mmm/util/cli/NlsBundleUtilCli" for name "net.sf.mmm.util.cli.NlsBundleUtilCli").
+   * @return the {@link #getQualifiedName() qualified name} as path (e.g. "net/sf/mmm/util/cli/NlsBundleUtilCli" for
+   *         name "net.sf.mmm.util.cli.NlsBundleUtilCli").
    */
   public String getQualifiedNamePath() {
 

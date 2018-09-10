@@ -1,4 +1,4 @@
-package net.sf.mmm.util.lang.api;
+package net.sf.mmm.util.datatype.api;
 
 /**
  * Interface for smaller binary data (e.g. a cryptographic signature). Implementations shall be immutable.

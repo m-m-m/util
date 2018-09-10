@@ -5,9 +5,11 @@ package net.sf.mmm.util.lang.base;
 /**
  * This is an abstract base implementation of the {@link CharSequence} interface.
  *
+ * @deprecated not needed, not used, will be removed in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@Deprecated
 public abstract class CoreCharSequence implements CharSequence {
 
   /** the hash of this sequence or {@code 0} if not cached */

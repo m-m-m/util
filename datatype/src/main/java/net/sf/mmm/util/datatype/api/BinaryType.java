@@ -1,4 +1,4 @@
-package net.sf.mmm.util.lang.api;
+package net.sf.mmm.util.datatype.api;
 
 import java.util.Arrays;
 import java.util.Base64;

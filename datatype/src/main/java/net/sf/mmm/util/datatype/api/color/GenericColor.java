@@ -4,9 +4,6 @@ package net.sf.mmm.util.datatype.api.color;
 
 import java.util.Objects;
 
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-import net.sf.mmm.util.exception.api.NlsNullPointerException;
-import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractDatatype;
 import net.sf.mmm.util.lang.api.BasicHelper;
 
@@ -27,14 +24,6 @@ import net.sf.mmm.util.lang.api.BasicHelper;
 public final class GenericColor extends AbstractDatatype {
 
   private static final long serialVersionUID = 3175467633850341788L;
-
-  /**
-   * The {@link java.util.regex.Pattern} for a valid string representation.
-   *
-   * @see #valueOf(String)
-   * @see #toString(ColorModel)
-   */
-  private static final String PATTERN = "#RRGGBB|(rgb|hsl|hsv|hsb)[a](<num>,<num>,<num>[,<num>])";
 
   private Alpha alpha;
 
@@ -67,57 +56,56 @@ public final class GenericColor extends AbstractDatatype {
   /**
    * Parses the {@link GenericColor} given as {@link String} representation.
    *
-   * @param colorString is the color as {@link String}.
+   * @param color is the color as {@link String}.
    * @return the parsed {@link GenericColor}.
-   * @throws NlsParseException if the syntax is invalid.
    */
-  public static GenericColor valueOf(String colorString) throws NlsParseException {
+  public static GenericColor valueOf(String color) {
 
-    NlsNullPointerException.checkNotNull("color", colorString);
-    Color namedColor = Color.fromName(colorString);
+    Objects.requireNonNull(color, "color");
+    Color namedColor = Color.fromName(color);
     if (namedColor != null) {
       return valueOf(namedColor);
     }
-    int length = colorString.length();
+    int length = color.length();
     Throwable cause = null;
     try {
       // "#RRGGBB" / #AARRGGBB
-      Color hexColor = Color.parseHexString(colorString);
+      Color hexColor = Color.parseHexString(color);
       if (hexColor != null) {
         return valueOf(hexColor);
       }
       // "rgb(1,1,1)" = 10
       if (length >= 7) {
-        String model = BasicHelper.toUpperCase(colorString.substring(0, 3));
+        String model = BasicHelper.toUpperCase(color.substring(0, 3));
         ColorModel colorModel = ColorModel.valueOf(model);
         int index = 3;
         boolean hasAlpha = false;
-        char c = Character.toLowerCase(colorString.charAt(index));
+        char c = Character.toLowerCase(color.charAt(index));
         if (c == 'a') {
           hasAlpha = true;
           index++;
-          c = colorString.charAt(index);
+          c = color.charAt(index);
         }
         if (c == '(') {
           index++;
-          int endIndex = colorString.indexOf(',', index);
+          int endIndex = color.indexOf(',', index);
           if (endIndex > 0) {
-            String firstSegment = colorString.substring(index, endIndex).trim();
+            String firstSegment = color.substring(index, endIndex).trim();
             index = endIndex + 1;
-            endIndex = colorString.indexOf(',', index);
+            endIndex = color.indexOf(',', index);
             if (endIndex > 0) {
-              String secondSegment = colorString.substring(index, endIndex).trim();
+              String secondSegment = color.substring(index, endIndex).trim();
               index = endIndex + 1;
               if (hasAlpha) {
-                endIndex = colorString.indexOf(',', index);
+                endIndex = color.indexOf(',', index);
               } else {
                 endIndex = length - 1;
               }
               if (endIndex > 0) {
-                String thirdSegment = colorString.substring(index, endIndex).trim();
+                String thirdSegment = color.substring(index, endIndex).trim();
                 Alpha alpha;
                 if (hasAlpha) {
-                  alpha = new Alpha(colorString.substring(endIndex + 1, length - 1));
+                  alpha = new Alpha(color.substring(endIndex + 1, length - 1));
                 } else {
                   alpha = Alpha.OPAQUE;
                 }
@@ -130,7 +118,7 @@ public final class GenericColor extends AbstractDatatype {
                   case HSB:
                     return valueOf(new Hue(firstSegment), new Saturation(secondSegment), new Brightness(thirdSegment), alpha);
                   default :
-                    throw new IllegalCaseException(ColorModel.class, colorModel);
+                    throw new IllegalStateException("" + colorModel);
                 }
               }
             }
@@ -140,7 +128,7 @@ public final class GenericColor extends AbstractDatatype {
     } catch (RuntimeException e) {
       cause = e;
     }
-    throw new NlsParseException(cause, colorString, PATTERN, GenericColor.class);
+    throw new IllegalArgumentException(color, cause);
   }
 
   /**
@@ -151,7 +139,7 @@ public final class GenericColor extends AbstractDatatype {
    */
   public static GenericColor valueOf(Color color) {
 
-    NlsNullPointerException.checkNotNull(Color.class, color);
+    Objects.requireNonNull(color, "color");
     Red red = new Red(color.getRed());
     Green green = new Green(color.getGreen());
     Blue blue = new Blue(color.getBlue());
@@ -170,10 +158,10 @@ public final class GenericColor extends AbstractDatatype {
    */
   public static GenericColor valueOf(Red red, Green green, Blue blue, Alpha alpha) {
 
-    NlsNullPointerException.checkNotNull(Red.class, red);
-    NlsNullPointerException.checkNotNull(Green.class, green);
-    NlsNullPointerException.checkNotNull(Blue.class, blue);
-    NlsNullPointerException.checkNotNull(Alpha.class, alpha);
+    Objects.requireNonNull(red, "red");
+    Objects.requireNonNull(green, "green");
+    Objects.requireNonNull(blue, "blue");
+    Objects.requireNonNull(alpha, "alpha");
     GenericColor genericColor = new GenericColor();
     genericColor.red = red;
     genericColor.green = green;
@@ -275,10 +263,10 @@ public final class GenericColor extends AbstractDatatype {
    */
   public static GenericColor valueOf(Hue hue, Saturation saturation, Brightness brightness, Alpha alpha) {
 
-    NlsNullPointerException.checkNotNull(Hue.class, hue);
-    NlsNullPointerException.checkNotNull(Saturation.class, saturation);
-    NlsNullPointerException.checkNotNull(Brightness.class, brightness);
-    NlsNullPointerException.checkNotNull(Alpha.class, alpha);
+    Objects.requireNonNull(hue, "hue");
+    Objects.requireNonNull(saturation, "saturation");
+    Objects.requireNonNull(brightness, "brightness");
+    Objects.requireNonNull(alpha, "alpha");
     GenericColor genericColor = new GenericColor();
     genericColor.hue = hue;
     genericColor.saturationHsb = saturation;
@@ -307,10 +295,10 @@ public final class GenericColor extends AbstractDatatype {
    */
   public static GenericColor valueOf(Hue hue, Saturation saturation, Lightness lightness, Alpha alpha) {
 
-    NlsNullPointerException.checkNotNull(Hue.class, hue);
-    NlsNullPointerException.checkNotNull(Saturation.class, saturation);
-    NlsNullPointerException.checkNotNull(Lightness.class, lightness);
-    NlsNullPointerException.checkNotNull(Alpha.class, alpha);
+    Objects.requireNonNull(hue, "hue");
+    Objects.requireNonNull(saturation, "saturation");
+    Objects.requireNonNull(lightness, "lightness");
+    Objects.requireNonNull(alpha, "alpha");
     GenericColor genericColor = new GenericColor();
     genericColor.hue = hue;
     genericColor.saturationHsl = saturation;
@@ -469,7 +457,7 @@ public final class GenericColor extends AbstractDatatype {
    */
   public AbstractDoubleSegment<?> getSegment(ColorSegmentType type) {
 
-    NlsNullPointerException.checkNotNull(ColorSegmentType.class, type);
+    Objects.requireNonNull(type, "type");
     switch (type) {
       case RED:
         return this.red;
@@ -490,7 +478,7 @@ public final class GenericColor extends AbstractDatatype {
       case ALPHA:
         return this.alpha;
       default :
-        throw new IllegalCaseException(ColorSegmentType.class, type);
+        throw new IllegalStateException("" + type);
     }
   }
 
@@ -518,7 +506,7 @@ public final class GenericColor extends AbstractDatatype {
       case HSV:
         return valueOf(this.hue.invert(), this.saturationHsb.invert(), this.brightness.invert(), this.alpha);
       default :
-        throw new IllegalCaseException(ColorModel.class, model);
+        throw new IllegalStateException("" + model);
     }
   }
 

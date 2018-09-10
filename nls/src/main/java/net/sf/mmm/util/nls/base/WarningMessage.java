@@ -1,6 +1,6 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.lang.base;
+package net.sf.mmm.util.nls.base;
 
 import java.util.UUID;
 
@@ -10,11 +10,9 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  * This is the implementation of an {@link net.sf.mmm.util.lang.api.Message#TYPE_WARNING warning}
  * {@link net.sf.mmm.util.lang.api.Message}.
  *
- * @deprecated use {@link net.sf.mmm.util.nls.base.WarningMessage} instead.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
-@Deprecated
 public class WarningMessage extends AbstractMessage {
 
   private static final long serialVersionUID = 1L;
@@ -80,22 +78,9 @@ public class WarningMessage extends AbstractMessage {
   }
 
   @Override
-  public String getDetails() {
-
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
   public String getType() {
 
     return TYPE_WARNING;
-  }
-
-  @Override
-  public UUID getUuid() {
-
-    return null;
   }
 
 }

@@ -5,6 +5,8 @@ package net.sf.mmm.util.lang.api;
 /**
  * This enum contains the possible values for the sort order of a list.
  *
+ * @deprecated too many redundant enums for this purpose already available. Use alternative from spring-data, swing,
+ *             etc.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

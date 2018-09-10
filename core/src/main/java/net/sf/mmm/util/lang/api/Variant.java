@@ -22,9 +22,11 @@ package net.sf.mmm.util.lang.api;
  * <b>ATTENTION:</b><br>
  * If not documented otherwise a {@link Variant} may always be {@code null} what is typically the default.
  *
+ * @deprecated over-engineered. Will be deleted in a future release.
  * @author hohwille
  * @since 3.1.0
  */
+@Deprecated
 public interface Variant {
 
   // just a marker interface or for documentation purpose...

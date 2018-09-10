@@ -8,6 +8,7 @@ package net.sf.mmm.util.lang.api;
  * a default that is neither {@code true} nor {@code false} e.g. if the default can be determined from other values. In
  * such case you can use {@link BooleanEnum} instead and {@link BooleanEnum#NULL} as default.
  *
+ * @deprecated not needed, not used, will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

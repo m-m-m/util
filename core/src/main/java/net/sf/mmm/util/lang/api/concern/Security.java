@@ -9,9 +9,11 @@ package net.sf.mmm.util.lang.api.concern;
  * However, there are some missing links that we aim to close with our project. Have a look at the known subinterfaces
  * and implementing classes to get an overview.
  *
+ * @deprecated over-engineered. Will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
+@Deprecated
 public interface Security {
 
   // nothing to add...

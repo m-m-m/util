@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
+import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
-import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 
 /**
  * This is the implementation of the {@link NlsMessageFactory} interface.
@@ -137,7 +137,7 @@ public abstract class AbstractNlsMessageFactory extends AbstractComponent implem
   @Override
   public NlsMessage create(NlsTemplate template) {
 
-    return create(template, ReflectionUtilLimited.NO_ARGUMENTS);
+    return create(template, BasicHelper.EMPTY_OBJECT_ARRAY);
   }
 
   @Override

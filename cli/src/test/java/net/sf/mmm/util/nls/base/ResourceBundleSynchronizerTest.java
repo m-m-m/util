@@ -74,9 +74,8 @@ public class ResourceBundleSynchronizerTest {
     Class<?> bundleClass = MyResourceBundle.class;
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
-    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
-    ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
-    bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
+    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath, ResourceBundleSynchronizer.OPTION_ENCODING, encoding,
+        ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS, bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
     MyResourceBundle bundle = new MyResourceBundle();
     String resultFileBase = targetPath + "/" + bundleClass.getName().replace('.', '/');
@@ -95,14 +94,12 @@ public class ResourceBundleSynchronizerTest {
     Class<NlsBundleUtilCoreRoot> bundleClass = NlsBundleUtilCoreRoot.class;
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
-    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
-    ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
-    bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
+    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath, ResourceBundleSynchronizer.OPTION_ENCODING, encoding,
+        ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS, bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
 
     ResourceBundle bundle = bundleHelper.toResourceBundle(bundleClass);
-    String resultFileBase = targetPath + "/"
-        + bundleHelper.getQualifiedLocation(bundleClass).getName().replace('.', '/');
+    String resultFileBase = targetPath + "/" + bundleHelper.getQualifiedLocation(bundleClass).replace('.', '/');
 
     // checkBundle(bundle, resultFileBase, null);
     checkBundle(bundle, resultFileBase, locale1);

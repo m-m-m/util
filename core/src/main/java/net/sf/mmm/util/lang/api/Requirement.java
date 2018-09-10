@@ -15,6 +15,7 @@ import java.lang.annotation.Target;
  * string constants for the names of your requirements. The javadoc of these constants shall provide further
  * documentation of the requirement like the detailed description or links to further documentation.
  *
+ * @deprecated create your own annotation and keep control of it. This annotation will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

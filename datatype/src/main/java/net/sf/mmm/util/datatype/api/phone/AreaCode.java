@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.phone;
 
-import net.sf.mmm.util.exception.api.NlsParseException;
-import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
@@ -36,7 +34,9 @@ public final class AreaCode extends AbstractSimpleDatatype<Integer> {
   public AreaCode(int areaCode) {
 
     super(Integer.valueOf(areaCode));
-    ValueOutOfRangeException.checkRange(Integer.valueOf(areaCode), Integer.valueOf(0), Integer.valueOf(99999999), "area code");
+    if ((areaCode < 0) || (areaCode > 99999999)) {
+      throw new IllegalArgumentException("" + areaCode);
+    }
   }
 
   /**
@@ -66,13 +66,13 @@ public final class AreaCode extends AbstractSimpleDatatype<Integer> {
       normalized = normalized.substring(1);
     }
     if (normalized.startsWith("0")) {
-      throw new NlsParseException(areaCode, AreaCode.class);
+      throw new IllegalArgumentException(areaCode);
     }
     try {
       int ac = Integer.parseInt(normalized);
       return ac;
     } catch (NumberFormatException e) {
-      throw new NlsParseException(e, areaCode, AreaCode.class);
+      throw new IllegalArgumentException(areaCode, e);
     }
   }
 

@@ -2,7 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.address;
 
-import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
@@ -22,7 +21,7 @@ import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
  */
 public class PostalCode extends AbstractSimpleDatatype<String> {
 
-  private static final long serialVersionUID = -7499247409257142127L;
+  private static final long serialVersionUID = 1L;
 
   /**
    * The constructor for de-serialization in GWT.
@@ -40,8 +39,6 @@ public class PostalCode extends AbstractSimpleDatatype<String> {
   public PostalCode(String value) {
 
     super(value);
-    NlsNullPointerException.checkNotNull("value", value);
-    // TODO: more precise validation using pattern...
   }
 
 }

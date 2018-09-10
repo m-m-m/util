@@ -1,17 +1,17 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.lang.api;
+package net.sf.mmm.util.datatype.api;
+
+import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
  * This is the {@link net.sf.mmm.util.lang.api.Datatype} used to store a simple password as {@link String}. Its
  * {@link #toString() string representation} is a fixed {@link String} (********) in order to prevent accidental logging
  * or other spreading of passwords. The actually get the password as {@link String} use {@link #getValue()}.
  *
- * @deprecated use {@link Password} instead.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
  */
-@Deprecated
 public class Password extends AbstractSimpleDatatype<String> {
 
   private static final long serialVersionUID = 2487698739503641538L;
