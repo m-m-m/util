@@ -29,7 +29,7 @@ The `mmm-util` project is part of is part of link:../../..#mmm[mmm] and brings g
 
 == Dependency Diagram
 
-image:http://m-m-m.github.io/util/util.svg
+image:http://m-m-m.github.io/util/util.svg["dependency diagram"]
 
 == Links
 
