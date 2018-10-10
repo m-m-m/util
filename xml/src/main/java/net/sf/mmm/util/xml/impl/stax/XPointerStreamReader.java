@@ -6,7 +6,6 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.xml.base.StreamReaderProxy;
 
 /**
@@ -33,7 +32,7 @@ public class XPointerStreamReader extends StreamReaderProxy {
     // figure out the actual syntax to include all children as this is not
     // standard compliant / invalid
     if (!"element(/1/*)".equals(xpointer)) {
-      throw new NlsUnsupportedOperationException(xpointer);
+      throw new UnsupportedOperationException(xpointer);
     }
     this.depth = 0;
   }

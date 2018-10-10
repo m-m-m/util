@@ -21,11 +21,6 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-pattern</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-resource</artifactId>
       <optional>true</optional>
     </dependency>
