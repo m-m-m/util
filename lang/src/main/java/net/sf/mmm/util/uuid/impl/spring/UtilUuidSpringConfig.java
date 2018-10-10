@@ -20,7 +20,7 @@ import net.sf.mmm.util.uuid.base.RandomUuidFactory;
 public class UtilUuidSpringConfig {
 
   @Bean
-  public UuidFactory stringValueConverter() {
+  public UuidFactory uuidFactory() {
 
     RandomUuidFactory uuidFactory = new RandomUuidFactory();
     UuidAccess.setFactory(uuidFactory);
