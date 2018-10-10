@@ -9,7 +9,7 @@ import net.sf.mmm.util.validation.base.jsr303.ConstraintContext;
 
 /**
  * Implementation of {@link ConstraintProcessor} for {@link ValidatorMandatory}. Should be registered for constraints
- * such as {@link javax.validation.constraints.NotNull}, {@link org.hibernate.validator.constraints.NotEmpty} or
+ * such as {@link javax.validation.constraints.NotNull}, {@link javax.validation.constraints.NotEmpty} or
  * {@link net.sf.mmm.util.validation.base.Mandatory}.
  *
  * @author hohwille

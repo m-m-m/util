@@ -9,7 +9,10 @@ package net.sf.mmm.util.validation.api;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
+ * @deprecated use {@link ValidationFailure} and {@link Validatable} for simplicity. This API including
+ *             {@link ValidatableObject} is considered overengineered and will be removed in the future.
  */
+@Deprecated
 public interface ValidationState extends ValidationCollector {
 
   /**

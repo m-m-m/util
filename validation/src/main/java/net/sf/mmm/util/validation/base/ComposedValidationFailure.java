@@ -58,7 +58,7 @@ public class ComposedValidationFailure extends AbstractValidationFailure impleme
   }
 
   /**
-   * @return the line separator (e.g. {@link net.sf.mmm.util.lang.api.StringUtil#LINE_SEPARATOR_LF}).
+   * @return the line separator.
    */
   protected String getSeparator() {
 

@@ -12,8 +12,8 @@ import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorPat
 import net.sf.mmm.util.validation.base.jsr303.constraints.ConstraintProcessorSize;
 
 /**
- * This is the default implementation of {@link BeanValidationProcessor} to be used in case no
- * {@link net.sf.mmm.util.component.api.Cdi} is available.
+ * This is the default implementation of {@link BeanValidationProcessor} to be used in case no dependency injection is
+ * available.
  *
  * @author hohwille
  * @since 7.4.0
