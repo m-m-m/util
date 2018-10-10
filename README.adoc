@@ -27,6 +27,10 @@ The `mmm-util` project is part of is part of link:../../..#mmm[mmm] and brings g
 * link:../../tree/master/gwt[mmm-util-gwt] brings most of this project into your GWT based application.
 * https://m-m-m.github.io/maven/apidocs/[and much more... ]
 
+== Dependency Diagram
+
+image:http://m-m-m.github.io/util/util.svg
+
 == Links
 
 * http://m-m-m.sourceforge.net/mmm-util/index.html[Homepage]
