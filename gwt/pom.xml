@@ -17,11 +17,11 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-core</artifactId>
+      <artifactId>mmm-util-pojo</artifactId>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-core</artifactId>
+      <artifactId>mmm-util-pojo</artifactId>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
@@ -62,15 +62,6 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-reflect</artifactId>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-pojo</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-pojo</artifactId>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
