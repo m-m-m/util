@@ -23,7 +23,6 @@ import net.sf.mmm.util.cli.api.CliClass;
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.collection.base.SortedProperties;
-import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.filter.api.Filter;
@@ -120,14 +119,9 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   public NlsResourceLocator getResourceLocator() {
 
     if (this.resourceLocator == null) {
-      IocContainer iocContainer = getIocContainer();
-      if (iocContainer != null) {
-        this.resourceLocator = iocContainer.get(NlsResourceLocator.class);
-      } else {
-        DefaultNlsResourceLocator impl = new DefaultNlsResourceLocator();
-        impl.initialize();
-        this.resourceLocator = impl;
-      }
+      DefaultNlsResourceLocator impl = new DefaultNlsResourceLocator();
+      impl.initialize();
+      this.resourceLocator = impl;
     }
     return this.resourceLocator;
   }
@@ -138,12 +132,7 @@ public class ResourceBundleConverter extends AbstractResourceBundleCli {
   public NlsMessageFormatterFactory getMessageFormatterFactory() {
 
     if (this.messageFormatterFactory == null) {
-      IocContainer iocContainer = getIocContainer();
-      if (iocContainer != null) {
-        this.messageFormatterFactory = iocContainer.get(NlsMessageFormatterFactory.class);
-      } else {
-        this.messageFormatterFactory = AbstractNlsDependencies.getInstance().getMessageFormatterFactory();
-      }
+      this.messageFormatterFactory = AbstractNlsDependencies.getInstance().getMessageFormatterFactory();
     }
     return this.messageFormatterFactory;
   }

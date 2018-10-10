@@ -6,11 +6,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class represents the state of an initialization. <br>
- * It therefore offers the method {@link #requireNotInitilized()} that can be called before initialization
- * e.g. from injection-setters so nothing can be re-injected after {@link #setInitializing() initialization}.
- * Additionally there is {@link #requireInitilized()} that can be called after initialization e.g. from
- * functional methods of the component to ensure that the component has been {@link #setInitializing()
- * initialized}.
+ * It therefore offers the method {@link #requireNotInitilized()} that can be called before initialization e.g. from
+ * injection-setters so nothing can be re-injected after {@link #setInitializing() initialization}. Additionally there
+ * is {@link #requireInitilized()} that can be called after initialization e.g. from functional methods of the component
+ * to ensure that the component has been {@link #setInitializing() initialized}.
  *
  * @see javax.annotation.PostConstruct
  *
@@ -44,12 +43,11 @@ public class InitializationState {
 
   /**
    * This method sets the state to <em>initializing</em>. This should be done to start the initialization in a
-   * thread-safe and atomic way. After the initialization has completed, the method {@link #setInitialized()}
-   * should be invoked.
+   * thread-safe and atomic way. After the initialization has completed, the method {@link #setInitialized()} should be
+   * invoked.
    *
-   * @return {@code true} if the state was NOT {@link #isInitialized() initialized} and is now
-   *         {@link #isInitialized() initialized}, {@code false} if the state is already
-   *         {@link #isInitialized() initialized}.
+   * @return {@code true} if the state was NOT {@link #isInitialized() initialized} and is now {@link #isInitialized()
+   *         initialized}, {@code false} if the state is already {@link #isInitialized() initialized}.
    */
   public boolean setInitializing() {
 
@@ -74,14 +72,20 @@ public class InitializationState {
   }
 
   /**
-   * This method gets the status of the {@link #setInitialized() initialization} .
-   *
-   * @return {@code true} if this component has been {@link #setInitializing() initialized}, {@code false}
-   *         otherwise.
+   * @return {@code true} if this state is {@link #setInitialized() initialized}, {@code false} otherwise.
    */
   public boolean isInitialized() {
 
     return (this.state.get() == STATE_INITIALIZED);
+  }
+
+  /**
+   * @return {@code true} if this state is {@link #setInitializing() initializing}, {@code false} otherwise.
+   * @since 7.6.0
+   */
+  public boolean isInitializing() {
+
+    return (this.state.get() == STATE_INITIALIZING);
   }
 
   /**

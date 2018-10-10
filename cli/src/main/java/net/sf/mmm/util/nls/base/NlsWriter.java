@@ -8,7 +8,6 @@ import java.util.Map;
 
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.io.base.AppendableWriter;
-import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
@@ -69,7 +68,7 @@ public class NlsWriter extends AppendableWriter {
    */
   public NlsWriter(Appendable appendable, Map<String, Object> arguments, Locale locale) {
 
-    this(appendable, arguments, locale, StringUtilImpl.getInstance().getLineSeparator());
+    this(appendable, arguments, locale, System.lineSeparator());
   }
 
   /**
@@ -78,7 +77,7 @@ public class NlsWriter extends AppendableWriter {
    * @param appendable is the {@link Appendable} to delegate to.
    * @param arguments are the {@link #getArguments() arguments}.
    * @param locale is the {@link Locale}.
-   * @param newline is the {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() line-separator}.
+   * @param newline is the line-separator.
    */
   public NlsWriter(Appendable appendable, Map<String, Object> arguments, Locale locale, String newline) {
 
@@ -91,11 +90,10 @@ public class NlsWriter extends AppendableWriter {
    * @param appendable is the {@link Appendable} to delegate to.
    * @param arguments are the {@link #getArguments() arguments}.
    * @param locale is the {@link Locale}.
-   * @param newline is the {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() line-separator}.
+   * @param newline is the line-separator.
    * @param messageFactory is the {@link NlsMessageFactory}.
    */
-  public NlsWriter(Appendable appendable, Map<String, Object> arguments, Locale locale, String newline,
-      NlsMessageFactory messageFactory) {
+  public NlsWriter(Appendable appendable, Map<String, Object> arguments, Locale locale, String newline, NlsMessageFactory messageFactory) {
 
     this(appendable, arguments, locale, newline, messageFactory, null);
   }
@@ -106,12 +104,12 @@ public class NlsWriter extends AppendableWriter {
    * @param appendable is the {@link Appendable} to delegate to.
    * @param arguments are the {@link #getArguments() arguments}.
    * @param locale is the {@link Locale}.
-   * @param newline is the {@link net.sf.mmm.util.lang.api.StringUtil#getLineSeparator() line-separator}.
+   * @param newline is the line-separator.
    * @param messageFactory is the {@link NlsMessageFactory}.
    * @param resolver is the {@link NlsTemplateResolver} to use.
    */
-  public NlsWriter(Appendable appendable, Map<String, Object> arguments, Locale locale, String newline,
-      NlsMessageFactory messageFactory, NlsTemplateResolver resolver) {
+  public NlsWriter(Appendable appendable, Map<String, Object> arguments, Locale locale, String newline, NlsMessageFactory messageFactory,
+      NlsTemplateResolver resolver) {
 
     super(appendable);
     this.messageFactory = messageFactory;

@@ -3,7 +3,6 @@
 package net.sf.mmm.util.cli.base;
 
 import net.sf.mmm.util.collection.api.CollectionFactoryManager;
-import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.reflect.api.AnnotationUtil;
@@ -13,18 +12,13 @@ import net.sf.mmm.util.text.api.LineWrapper;
 import net.sf.mmm.util.value.api.ComposedValueConverter;
 
 /**
- * This interface bundles the dependencies for the {@link net.sf.mmm.util.cli.api.CliParser}. It contains
- * components required by the parser.
+ * This interface bundles the dependencies for the {@link net.sf.mmm.util.cli.api.CliParser}. It contains components
+ * required by the parser.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface CliParserDependencies {
-
-  /**
-   * @return the {@link StringUtil} instance to use.
-   */
-  StringUtil getStringUtil();
 
   /**
    * @return the {@link ReflectionUtil} instance to use.

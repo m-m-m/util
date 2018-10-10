@@ -7,7 +7,7 @@ import java.util.Set;
 
 import net.sf.mmm.util.cli.api.CliMode;
 import net.sf.mmm.util.cli.api.CliModeObject;
-import net.sf.mmm.util.component.api.InitializationState;
+import net.sf.mmm.util.component.base.InitializationState;
 
 /**
  * This is a container for a {@link CliMode} together with additional associated information.
@@ -63,7 +63,7 @@ public class CliModeContainer implements CliModeObject {
     this.annotatedClass = annotatedClass;
     this.extendedModes = new HashSet<>();
     this.extendedModes.add(this);
-    this.state = InitializationState.UNINITIALIZED;
+    this.state = new InitializationState();
   }
 
   @Override
@@ -128,14 +128,6 @@ public class CliModeContainer implements CliModeObject {
   public InitializationState getState() {
 
     return this.state;
-  }
-
-  /**
-   * @param state is the state to set
-   */
-  public void setState(InitializationState state) {
-
-    this.state = state;
   }
 
   @Override

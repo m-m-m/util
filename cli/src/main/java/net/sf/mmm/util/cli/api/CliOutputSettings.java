@@ -5,7 +5,6 @@ package net.sf.mmm.util.cli.api;
 import java.util.Locale;
 
 import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
-import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
 /**
@@ -33,7 +32,7 @@ public class CliOutputSettings {
   public CliOutputSettings() {
 
     super();
-    this.lineSeparator = System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR);
+    this.lineSeparator = System.lineSeparator();
     this.width = 80;
     this.locale = Locale.getDefault();
     this.templateResolver = null;
