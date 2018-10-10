@@ -11,10 +11,12 @@ import net.sf.mmm.util.lang.api.LocalizableFormatter;
  * This is the implementation of a {@link LocalizableFormatter} that is composed out of other
  * {@link LocalizableFormatter}s. See {@link ComposedFormatter} for further details.
  *
+ * @deprecated not needed, not used, will be removed in a future release.
  * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
+@Deprecated
 public class ComposedLocalizableFormatter<V> extends AbstractLocalizableFormatter<V> {
 
   /** @see #doFormat(Object, Appendable) */

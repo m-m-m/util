@@ -36,7 +36,6 @@ import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
@@ -175,20 +174,22 @@ public abstract class AbstractCliParser extends AbstractLoggableObject implement
     Class<?> propertyClass = setter.getPropertyClass();
     String argument;
     if (optionContainer.isTrigger()) {
-      argument = StringUtil.TRUE;
+      argument = "true";
     } else if (Boolean.class.equals(propertyClass)) {
       String lookahead = parameterConsumer.getCurrent();
-      Boolean value = this.dependencies.getStringUtil().parseBoolean(lookahead);
-      if (value == null) {
+      if ("true".equalsIgnoreCase(lookahead)) {
+        parameterConsumer.getNext();
+        argument = "true";
+      } else if ("false".equalsIgnoreCase(lookahead)) {
+        parameterConsumer.getNext();
+        argument = "false";
+      } else {
         // option (e.g. "--trigger") is not followed by "true" or "false"
         CliStyleHandling handling = this.cliState.getCliStyle().optionMissingBooleanValue();
         if (handling != CliStyleHandling.OK) {
           handling.handle(getLogger(), new CliOptionMissingValueException(option));
         }
-        argument = StringUtil.TRUE;
-      } else {
-        // getNext() == lookahead
-        argument = parameterConsumer.getNext();
+        argument = "true";
       }
     } else {
       if (!parameterConsumer.hasNext()) {

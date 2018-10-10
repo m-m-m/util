@@ -5,7 +5,6 @@ package net.sf.mmm.util.datatype.api.address;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
@@ -42,7 +41,7 @@ public class Iso2CountryCode extends AbstractSimpleDatatype<String> {
 
     super(value.toUpperCase(Locale.US));
     if (!PATTERN_COUNTRY_CODE.matcher(getValue()).matches()) {
-      throw new NlsParseException(value, PATTERN_COUNTRY_CODE.pattern(), Iso2CountryCode.class);
+      throw new IllegalArgumentException(value);
     }
   }
 

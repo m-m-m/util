@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Import;
 import net.sf.mmm.util.cli.api.CliParserBuilder;
 import net.sf.mmm.util.cli.impl.DefaultCliParserBuilder;
 import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
-import net.sf.mmm.util.lang.impl.spring.UtilLangSpringConfig;
 import net.sf.mmm.util.pojo.impl.spring.UtilPojoSpringConfig;
 import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
 import net.sf.mmm.util.text.impl.spring.UtilTextSpringConfig;
@@ -22,8 +21,8 @@ import net.sf.mmm.util.value.impl.spring.UtilValueSpringConfig;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilLangSpringConfig.class, UtilReflectSpringConfig.class, UtilPojoSpringConfig.class,
-    UtilValueSpringConfig.class, UtilCollectionSpringConfig.class, UtilTextSpringConfig.class })
+@Import({ UtilReflectSpringConfig.class, UtilPojoSpringConfig.class, UtilValueSpringConfig.class, UtilCollectionSpringConfig.class,
+    UtilTextSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class UtilCliSpringConfig {
 

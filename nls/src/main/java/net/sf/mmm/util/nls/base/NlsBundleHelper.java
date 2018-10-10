@@ -10,12 +10,13 @@ import java.util.ResourceBundle;
 
 import javax.inject.Named;
 
-import net.sf.mmm.util.component.base.AbstractLoggableObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleKey;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
-import net.sf.mmm.util.reflect.api.ClassName;
 
 /**
  * Helper class to deal with {@link NlsBundle} interfaces.
@@ -23,7 +24,9 @@ import net.sf.mmm.util.reflect.api.ClassName;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
-public class NlsBundleHelper extends AbstractLoggableObject {
+public class NlsBundleHelper {
+
+  private static final Logger LOG = LoggerFactory.getLogger(NlsBundleHelper.class);
 
   /** @see #getInstance() */
   public static final NlsBundleHelper INSTANCE = new NlsBundleHelper();
@@ -46,29 +49,27 @@ public class NlsBundleHelper extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the location of the {@link java.util.ResourceBundle} base name for the given
-   * {@link NlsBundle} interface.
+   * This method gets the location of the {@link java.util.ResourceBundle} base name for the given {@link NlsBundle}
+   * interface.
    *
    * @param nlsBundleInterface is the {@link NlsBundle} interface.
-   * @return the fully qualified {@link java.util.ResourceBundle} base name for the given {@link NlsBundle}
-   *         interface.
+   * @return the fully qualified {@link java.util.ResourceBundle} base name for the given {@link NlsBundle} interface.
    */
-  public ClassName getQualifiedLocation(Class<? extends NlsBundle> nlsBundleInterface) {
+  public String getQualifiedLocation(Class<? extends NlsBundle> nlsBundleInterface) {
 
-    String simpleName = nlsBundleInterface.getSimpleName();
-    if (simpleName.endsWith(NlsBundle.INTERFACE_NAME_SUFFIX)) {
-      simpleName = simpleName.substring(0, simpleName.length() - NlsBundle.INTERFACE_NAME_SUFFIX.length());
+    String fqn = nlsBundleInterface.getName();
+    if (fqn.endsWith(NlsBundle.INTERFACE_NAME_SUFFIX)) {
+      fqn = fqn.substring(0, fqn.length() - NlsBundle.INTERFACE_NAME_SUFFIX.length());
     } else {
-      getLogger()
-          .error("Illegal NlsBundle interface '" + nlsBundleInterface.getName() + "': has to end with the suffix '" + NlsBundle.INTERFACE_NAME_SUFFIX + "'.");
+      LOG.error("Illegal NlsBundle interface '" + nlsBundleInterface.getName() + "': has to end with the suffix '" + NlsBundle.INTERFACE_NAME_SUFFIX + "'.");
     }
-    return new ClassName(nlsBundleInterface.getPackage().getName(), simpleName);
+    return fqn;
   }
 
   /**
    * @param method is the {@link Method} of a {@link NlsBundle}.
-   * @return the {@link NlsBundleKey#value() key} of the {@link Method} (defaults to {@link Method#getName()}
-   *         if not annotated with {@link NlsBundleKey}).
+   * @return the {@link NlsBundleKey#value() key} of the {@link Method} (defaults to {@link Method#getName()} if not
+   *         annotated with {@link NlsBundleKey}).
    */
   public String getKey(Method method) {
 
@@ -83,8 +84,7 @@ public class NlsBundleHelper extends AbstractLoggableObject {
   }
 
   /**
-   * @param qualifiedBundleName the {@link Class#getName() qualified name} of the {@link ResourceBundle} to
-   *        load.
+   * @param qualifiedBundleName the {@link Class#getName() qualified name} of the {@link ResourceBundle} to load.
    * @param locale the {@link Locale} to translate to.
    * @return the requested {@link ResourceBundle}.
    */
@@ -175,10 +175,10 @@ public class NlsBundleHelper extends AbstractLoggableObject {
    * This method determines if the given {@link Method} is a regular {@link NlsBundle}-method.
    *
    * @param method the {@link Method} to check.
-   * @param ignoreIllegalMethods - {@code true} if illegal methods (non NlsBundleMethods other than those
-   *        defined by {@link Object}) should be ignored, {@code false} if they should cause an exception.
-   * @return {@code true} if the given {@link Method} is a legal {@link NlsBundle} method, {@code false}
-   *         otherwise (e.g. for {@code toString()}).
+   * @param ignoreIllegalMethods - {@code true} if illegal methods (non NlsBundleMethods other than those defined by
+   *        {@link Object}) should be ignored, {@code false} if they should cause an exception.
+   * @return {@code true} if the given {@link Method} is a legal {@link NlsBundle} method, {@code false} otherwise (e.g.
+   *         for {@code toString()}).
    */
   public boolean isNlsBundleMethod(Method method, boolean ignoreIllegalMethods) {
 

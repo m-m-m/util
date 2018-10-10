@@ -17,7 +17,6 @@ import net.sf.mmm.util.cli.NlsBundleUtilCliRoot;
 import net.sf.mmm.util.cli.api.AbstractMain;
 import net.sf.mmm.util.cli.api.AbstractVersionedMain;
 import net.sf.mmm.util.cli.api.CliOption;
-import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.file.api.FileCreationFailedException;
 import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.nls.api.NlsBundle;
@@ -237,14 +236,9 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
   public NlsResourceBundleLocator getResourceBundleLocator() {
 
     if (this.resourceBundleLocator == null) {
-      IocContainer container = getIocContainer();
-      if (container == null) {
-        NlsResourceBundleLocatorImpl impl = new NlsResourceBundleLocatorImpl();
-        impl.initialize();
-        this.resourceBundleLocator = impl;
-      } else {
-        this.resourceBundleLocator = container.get(NlsResourceBundleLocator.class);
-      }
+      NlsResourceBundleLocatorImpl impl = new NlsResourceBundleLocatorImpl();
+      impl.initialize();
+      this.resourceBundleLocator = impl;
     }
     return this.resourceBundleLocator;
   }
@@ -265,12 +259,7 @@ public abstract class AbstractResourceBundleCli extends AbstractVersionedMain {
   public ReflectionUtil getReflectionUtil() {
 
     if (this.reflectionUtil == null) {
-      IocContainer container = getIocContainer();
-      if (container == null) {
-        this.reflectionUtil = ReflectionUtilImpl.getInstance();
-      } else {
-        this.reflectionUtil = container.get(ReflectionUtil.class);
-      }
+      this.reflectionUtil = ReflectionUtilImpl.getInstance();
     }
     return this.reflectionUtil;
   }

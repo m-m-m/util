@@ -17,17 +17,13 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-test</artifactId>
-      <scope>test</scope>
+      <artifactId>mmm-util-lang</artifactId>
     </dependency>
+
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.javamoney</groupId>
-      <artifactId>moneta</artifactId>
-      <version>1.0</version>
+      <artifactId>mmm-util-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

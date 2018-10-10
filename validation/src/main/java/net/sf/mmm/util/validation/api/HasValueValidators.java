@@ -10,7 +10,9 @@ package net.sf.mmm.util.validation.api;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
+ * @deprecated use {@link Validatable}
  */
+@Deprecated
 public interface HasValueValidators<V> {
 
   /**

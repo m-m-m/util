@@ -10,10 +10,11 @@ package net.sf.mmm.util.lang.api.concern;
  * disabilities by enriching your application with semantical information - we already do our best to make this easy for
  * you. Have a look at the known subinterfaces and implementing classes to get an overview of our supporting code.
  *
- *
+ * @deprecated over-engineered. Will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
+@Deprecated
 public abstract interface Accessibility {
 
   /**

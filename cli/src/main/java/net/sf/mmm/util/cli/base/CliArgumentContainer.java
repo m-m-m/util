@@ -7,7 +7,7 @@ import java.lang.annotation.Annotation;
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliStyle;
-import net.sf.mmm.util.component.api.InitializationState;
+import net.sf.mmm.util.component.base.InitializationState;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorNonArg;
 import net.sf.mmm.util.pojo.descriptor.api.accessor.PojoPropertyAccessorOneArg;
 import net.sf.mmm.util.validation.api.ValueValidator;
@@ -32,12 +32,11 @@ public class CliArgumentContainer extends CliParameterContainer {
    * @param getter is the {@link #getGetter() getter}
    * @param validator is the {@link #getValidator() validator}.
    */
-  public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter,
-      PojoPropertyAccessorNonArg getter, ValueValidator<?> validator) {
+  public CliArgumentContainer(CliArgument argument, PojoPropertyAccessorOneArg setter, PojoPropertyAccessorNonArg getter, ValueValidator<?> validator) {
 
     super(setter, getter, validator);
     this.argument = argument;
-    this.state = InitializationState.UNINITIALIZED;
+    this.state = new InitializationState();
   }
 
   /**
@@ -84,12 +83,10 @@ public class CliArgumentContainer extends CliParameterContainer {
     return this.state;
   }
 
-  /**
-   * @param state is the state to set
-   */
-  public void setState(InitializationState state) {
+  void init() {
 
-    this.state = state;
+    this.state.setInitializing();
+    this.state.setInitialized();
   }
 
   @Override

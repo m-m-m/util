@@ -10,9 +10,11 @@ import net.sf.mmm.util.nls.api.NlsMessage;
  * This is the implementation of an {@link net.sf.mmm.util.lang.api.Message#TYPE_WARNING warning}
  * {@link net.sf.mmm.util.lang.api.Message}.
  *
+ * @deprecated use {@link net.sf.mmm.util.nls.base.WarningMessage} instead.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 4.0.0
  */
+@Deprecated
 public class WarningMessage extends AbstractMessage {
 
   private static final long serialVersionUID = 1L;

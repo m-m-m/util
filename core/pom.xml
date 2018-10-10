@@ -43,6 +43,10 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-value</artifactId>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mmm-util-datatype</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>

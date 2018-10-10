@@ -8,7 +8,6 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.mmm.util.exception.api.NlsUnsupportedOperationException;
 import net.sf.mmm.util.resource.api.DataResource;
 
 /**
@@ -102,7 +101,7 @@ public class JaxbBeanHolderImpl<VIEW, BEAN extends VIEW> implements JaxbBeanHold
   public synchronized void flush() {
 
     if (!this.allowSave) {
-      throw new NlsUnsupportedOperationException("save");
+      throw new UnsupportedOperationException("save");
     }
     if (this.beanMapper != null) {
       this.beanMapper.saveXml(this.bean, this.dataResource);

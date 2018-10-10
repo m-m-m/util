@@ -33,11 +33,12 @@ import net.sf.mmm.util.lang.api.SimpleDatatype;
  * @param <V> the generic for the basic java type representing the {@link SimpleDatatype#getValue() value}.
  * @param <T> the generic for the adapted {@link SimpleDatatype}.
  *
+ * @deprecated unneccesary dependency for 4 lines of code.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 6.0.0
  */
-public abstract class AbstractSimpleDatatypeAttributeConverter<T extends SimpleDatatype<V>, V>
-    implements AttributeConverter<T, V> {
+@Deprecated
+public abstract class AbstractSimpleDatatypeAttributeConverter<T extends SimpleDatatype<V>, V> implements AttributeConverter<T, V> {
 
   /**
    * The constructor.

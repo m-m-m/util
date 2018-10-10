@@ -16,9 +16,13 @@ import net.sf.mmm.util.exception.api.NlsParseException;
  * Returning an empty {@link String} also for duplicated delimited might NOT always be desired (especially when
  * delimiter is whitespace).
  *
+ * @deprecated even though this is a better and more flexible implementation than {@link java.util.StringTokenizer} it
+ *             pollutes the classpath with duplicate classname and reinvents the wheel. Therefore it will be removed in
+ *             a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@Deprecated
 public class StringTokenizer extends AbstractIterator<String> implements Iterable<String> {
 
   /** The string to be tokenized */
@@ -78,8 +82,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    *
    * @since 2.0.0
    */
-  public StringTokenizer(String string, String escapeStart, String escapeEnd, char... delimiters)
-      throws NlsIllegalArgumentException {
+  public StringTokenizer(String string, String escapeStart, String escapeEnd, char... delimiters) throws NlsIllegalArgumentException {
 
     this(string.toCharArray(), escapeStart, escapeEnd, delimiters);
   }
@@ -101,8 +104,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
    *
    * @since 2.0.0
    */
-  public StringTokenizer(char[] string, String escapeStart, String escapeEnd, char... delimiters)
-      throws NlsIllegalArgumentException {
+  public StringTokenizer(char[] string, String escapeStart, String escapeEnd, char... delimiters) throws NlsIllegalArgumentException {
 
     super();
     this.string = string;
@@ -227,8 +229,7 @@ public class StringTokenizer extends AbstractIterator<String> implements Iterabl
           }
         }
         if (!isDelimiter) {
-          throw new NlsParseException(new String(this.string, rawStart, this.index + 1 - rawStart),
-              new String(this.escapeEnd) + this.delimiters[0], "token");
+          throw new NlsParseException(new String(this.string, rawStart, this.index + 1 - rawStart), new String(this.escapeEnd) + this.delimiters[0], "token");
         }
       }
     } else {

@@ -4,10 +4,8 @@ package net.sf.mmm.util.datatype.api.color;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-import net.sf.mmm.util.exception.api.NlsNullPointerException;
-import net.sf.mmm.util.exception.api.NlsParseException;
-import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 import net.sf.mmm.util.lang.api.BasicHelper;
 
@@ -62,8 +60,6 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   /** The separator for the the segments (e.g. in rgb(r,g,b) or rgba(r,g,b,a) syntax). */
   private static final char SEPARATOR = ',';
 
-  private static final Integer MIN_VALUE = Integer.valueOf(0);
-
   /** The length of an RGB value in hexadecimal notation (#RRGGBB). */
   private static final int LENGTH_HEX_RGB = 7;
 
@@ -75,12 +71,6 @@ public class Color extends AbstractSimpleDatatype<Integer> {
 
   /** Bit-mask for a the {@link #getAlpha() alpha} value in {@link #getValue() combined value}. */
   private static final int MASK_ALPHA = 0xFF000000;
-
-  /** @see #Color(int, int, int) */
-  private static final Integer MAX_SEGMENT = Integer.valueOf(MASK);
-
-  /** The {@link java.util.regex.Pattern} for a valid {@link Color} {@link #toString() as string}. */
-  private static final String PATTERN = "#RRGGBB|rgba(r,g,b,a)|hsla(h,s,l,a)";
 
   /** The {@link Color} transparent (actually not really a color). */
   public static final Color TRANSPARENT = new Color(0);
@@ -227,11 +217,10 @@ public class Color extends AbstractSimpleDatatype<Integer> {
    *
    * @param color is the {@link Color} given as {@link String} representation.
    * @return the parsed {@link Color}.
-   * @throws NlsParseException if the syntax is invalid.
    */
-  public static Color valueOf(String color) throws NlsParseException {
+  public static Color valueOf(String color) {
 
-    NlsNullPointerException.checkNotNull("color", color);
+    Objects.requireNonNull(color, "color");
     Throwable cause = null;
     try {
       Color hexColor = parseHexString(color);
@@ -254,7 +243,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
     } catch (NumberFormatException e) {
       cause = e;
     }
-    throw new NlsParseException(cause, color, PATTERN, Color.class);
+    throw new IllegalArgumentException(color, cause);
   }
 
   /**
@@ -368,7 +357,7 @@ public class Color extends AbstractSimpleDatatype<Integer> {
   private static void verifySegment(int segment, ColorSegmentType type) {
 
     if ((segment < 0) || (segment > MASK)) {
-      throw new ValueOutOfRangeException(Integer.valueOf(segment), (Number) MIN_VALUE, MAX_SEGMENT, type);
+      throw new IllegalArgumentException(segment + "([0-255])");
     }
   }
 

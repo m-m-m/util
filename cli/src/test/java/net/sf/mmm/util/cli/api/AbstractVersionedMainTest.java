@@ -5,8 +5,6 @@ package net.sf.mmm.util.cli.api;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.sf.mmm.util.lang.api.StringUtil;
-
 /**
  * This is the test-case for {@link AbstractVersionedMain}.
  *
@@ -53,7 +51,7 @@ public class AbstractVersionedMainTest {
     int exitCode = main.run(new String[] { "--version" });
     Assert.assertEquals(0, exitCode);
     String version = outputBuffer.toString();
-    Assert.assertEquals("42.1.2.3" + System.getProperty(StringUtil.SYSTEM_PROPERTY_LINE_SEPARATOR), version);
+    Assert.assertEquals("42.1.2.3" + System.lineSeparator(), version);
     Assert.assertEquals("", errorBuffer.toString());
   }
 

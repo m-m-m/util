@@ -15,8 +15,8 @@
   <modules>
     <module>../test</module>
     <module>../lang</module>
+    <module>../datatype</module>
     <module>../pattern</module>
-    <module>../uuid</module>
     <module>../math</module>
     <module>../xml</module>
     <module>../scanner</module>
@@ -52,7 +52,6 @@
       <modules>
         <module>../contenttype</module>
         <module>../metakeys</module>
-        <module>../datatype</module>
         <module>../sandbox</module>
       </modules>
     </profile>

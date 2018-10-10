@@ -190,17 +190,6 @@
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-util-uuid</artifactId>
-        <version>${net.sf.mmm.util.version}</version>
-        <classifier>sources</classifier>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-util-uuid</artifactId>
-        <version>${net.sf.mmm.util.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-math</artifactId>
         <version>${net.sf.mmm.util.version}</version>
       </dependency>
@@ -448,7 +437,12 @@
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>mmm-util-io</artifactId>
+        <artifactId>mmm-util-datatype</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-datatype</artifactId>
         <version>${net.sf.mmm.util.version}</version>
         <classifier>sources</classifier>
       </dependency>
@@ -456,6 +450,12 @@
         <groupId>${project.groupId}</groupId>
         <artifactId>mmm-util-io</artifactId>
         <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-io</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+        <classifier>sources</classifier>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>

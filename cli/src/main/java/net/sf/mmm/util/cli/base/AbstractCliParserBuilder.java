@@ -11,8 +11,6 @@ import net.sf.mmm.util.collection.api.CollectionFactoryManager;
 import net.sf.mmm.util.collection.impl.CollectionFactoryManagerImpl;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
-import net.sf.mmm.util.lang.api.StringUtil;
-import net.sf.mmm.util.lang.base.StringUtilImpl;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
@@ -44,8 +42,6 @@ public abstract class AbstractCliParserBuilder extends AbstractComponent impleme
   private NlsMessageFactory nlsMessageFactory;
 
   private NlsTemplateResolver nlsTemplateResolver;
-
-  private StringUtil stringUtil;
 
   private AnnotationUtil annotationUtil;
 
@@ -79,14 +75,8 @@ public abstract class AbstractCliParserBuilder extends AbstractComponent impleme
     if (this.nlsMessageFactory == null) {
       this.nlsMessageFactory = NlsAccess.getFactory();
     }
-    // if (this.nlsTemplateResolver == null) {
-    // this.nlsTemplateResolver = null;
-    // }
     if (this.converter == null) {
       this.converter = DefaultComposedValueConverter.getInstance();
-    }
-    if (this.stringUtil == null) {
-      this.stringUtil = StringUtilImpl.getInstance();
     }
     if (this.reflectionUtil == null) {
       this.reflectionUtil = ReflectionUtilImpl.getInstance();
@@ -178,22 +168,6 @@ public abstract class AbstractCliParserBuilder extends AbstractComponent impleme
 
     getInitializationState().requireNotInitilized();
     this.collectionFactoryManager = collectionFactoryManager;
-  }
-
-  @Override
-  public StringUtil getStringUtil() {
-
-    return this.stringUtil;
-  }
-
-  /**
-   * @param stringUtil is the stringUtil to set
-   */
-  @Inject
-  public void setStringUtil(StringUtil stringUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.stringUtil = stringUtil;
   }
 
   @Override

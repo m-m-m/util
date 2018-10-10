@@ -21,7 +21,6 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
-import net.sf.mmm.util.filter.api.Filter;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsBundleFactory;
@@ -31,8 +30,6 @@ import net.sf.mmm.util.nls.api.NlsBundleWithLookup;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.api.NlsMessageFactory;
 import net.sf.mmm.util.nls.api.NlsTemplate;
-import net.sf.mmm.util.resource.api.ClasspathScanner;
-import net.sf.mmm.util.resource.impl.AbstractClasspathScanner;
 
 /**
  * This is the abstract base implementation of {@link NlsBundleFactory}.
@@ -52,7 +49,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   /** An internal trick used for optimization to avoid reflective parameter lookup. */
   private static final Object[] FAKE_ARGS = new Object[1];
 
-  private static final Pattern NLS_BUNDLE_CLASS_NAME_PATTERN = Pattern.compile("(.*\\.)?NlsBundle.*Root");
+  static final Pattern NLS_BUNDLE_CLASS_NAME_PATTERN = Pattern.compile("(.*\\.)?NlsBundle.*Root");
 
   private final ClassLoader classLoader;
 
@@ -60,9 +57,9 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
 
   private NlsMessageFactory messageFactory;
 
-  private ClasspathScanner classpathScanner;
-
   private List<NlsBundleInvocationHandler> bundleDescriptors;
+
+  private NlsBundleLocator bundleLocator;
 
   /**
    * The constructor.
@@ -91,8 +88,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     if (this.messageFactory == null) {
       this.messageFactory = NlsAccess.getFactory();
     }
-    if (this.classpathScanner == null) {
-      this.classpathScanner = AbstractClasspathScanner.getInstance();
+    if (this.bundleLocator == null) {
+      this.bundleLocator = new NlsBundleLocatorDefault();
     }
   }
 
@@ -122,21 +119,21 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   }
 
   /**
-   * @return the classpathScanner
+   * @return the {@link NlsBundleLocator}.
    */
-  public ClasspathScanner getClasspathScanner() {
+  public NlsBundleLocator getBundleLocator() {
 
-    return this.classpathScanner;
+    return this.bundleLocator;
   }
 
   /**
-   * @param classpathScanner the {@link ClasspathScanner} to {@link Inject}.
+   * @param bundleLocator the {@link NlsBundleLocator} to {@link Inject}.
    */
   @Inject
-  public void setClasspathScanner(ClasspathScanner classpathScanner) {
+  public void setBundleLocator(NlsBundleLocator bundleLocator) {
 
     getInitializationState().requireNotInitilized();
-    this.classpathScanner = classpathScanner;
+    this.bundleLocator = bundleLocator;
   }
 
   @SuppressWarnings("unchecked")
@@ -164,8 +161,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
   }
 
   /**
-   * This method gets the {@link NlsBundleOptions} for the given {@code bundleInterface}. If NOT present a
-   * default instance is returned.
+   * This method gets the {@link NlsBundleOptions} for the given {@code bundleInterface}. If NOT present a default
+   * instance is returned.
    *
    * @param bundleInterface is the {@link Class} reflecting the {@link NlsBundle} interface.
    * @return the annotated {@link NlsBundleOptions} or the default if {@code bundleInterface} is NOT annotated
@@ -188,14 +185,14 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
    */
   protected InvocationHandler createHandler(Class<? extends NlsBundle> bundleInterface) {
 
-    String bundleName = NlsBundleHelper.getInstance().getQualifiedLocation(bundleInterface).getName();
+    String bundleName = NlsBundleHelper.getInstance().getQualifiedLocation(bundleInterface);
     NlsBundleOptions options = getBundleOptions(bundleInterface);
     return new NlsBundleInvocationHandler(bundleInterface, bundleName, options);
   }
 
   /**
-   * @return a {@link Collection} of {@link NlsBundleDescriptor}s for all {@link NlsBundle}-interfaces on the
-   *         classpath following the suggested naming convention {@code NlsBundle*Root}.
+   * @return a {@link Collection} of {@link NlsBundleDescriptor}s for all {@link NlsBundle}-interfaces on the classpath
+   *         following the suggested naming convention {@code NlsBundle*Root}.
    */
   public Collection<? extends NlsBundleDescriptor> getNlsBundleDescriptors() {
 
@@ -210,29 +207,11 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     return this.bundleDescriptors;
   }
 
-  @SuppressWarnings({ "rawtypes", "unchecked" })
   private List<NlsBundleInvocationHandler> populateNlsBundleDescriptors() {
 
     List<NlsBundleInvocationHandler> descriptors = new ArrayList<>();
 
-    Filter<String> classnameFilter = new Filter<String>() {
-
-      @Override
-      public boolean accept(String classname) {
-
-        return NLS_BUNDLE_CLASS_NAME_PATTERN.matcher(classname).matches();
-      }
-    };
-    Filter<Class<?>> classFilter = new Filter<Class<?>>() {
-
-      @Override
-      public boolean accept(Class<?> javaClass) {
-
-        return NlsBundle.class.isAssignableFrom(javaClass);
-      }
-    };
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    Iterable<Class<? extends NlsBundle>> classes = (Iterable) this.classpathScanner.getClasspathResourceClasses(classnameFilter, classFilter);
+    Iterable<Class<? extends NlsBundle>> classes = this.bundleLocator.findBundles();
     for (Class<? extends NlsBundle> bundleInterface : classes) {
       NlsBundle bundle = createBundle(bundleInterface);
       NlsBundleInvocationHandler invocationHandler = (NlsBundleInvocationHandler) Proxy.getInvocationHandler(bundle);
@@ -290,8 +269,8 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * This method converts the given {@code arguments} to a {@link Map} with the
-     * {@link NlsMessage#getArgument(String) arguments}.
+     * This method converts the given {@code arguments} to a {@link Map} with the {@link NlsMessage#getArgument(String)
+     * arguments}.
      *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @param methodInfo is the {@link NlsBundleMethodInfo} for the given {@link Method}.
@@ -312,8 +291,7 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given
-     * {@link Method}.
+     * This method gets the names of the {@link NlsMessage#getArgument(String) arguments} for the given {@link Method}.
      *
      * @param method is the {@link NlsBundle}-{@link Method} that has been invoked.
      * @return an array with the {@link NlsMessage#getArgument(String) argument-names}.
@@ -402,14 +380,13 @@ public abstract class AbstractNlsBundleFactory extends AbstractComponent impleme
     }
 
     /**
-     * Gets {@link NlsBundleMethodInfo} for {@code methodName} from cache or creates it and puts it into the
-     * cache.
+     * Gets {@link NlsBundleMethodInfo} for {@code methodName} from cache or creates it and puts it into the cache.
      *
      * @param method is the {@link Method} or {@code null} for generic invocation (lookup).
      * @param args are the method arguments or {@code null} for generic invocation (lookup).
      * @param methodName is the {@link Method#getName() name} of the {@link Method}.
-     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by
-     *        {@code methodName} if not given.
+     * @param proxy is the proxy object used for generic invocation to find the {@link Method} by {@code methodName} if
+     *        not given.
      * @return the {@link NlsBundleMethodInfo}. May be {@code null} for generic invocation if method for
      *         {@code methodName} was not found (does not exist).
      */

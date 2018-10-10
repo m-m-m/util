@@ -32,7 +32,9 @@ import net.sf.mmm.util.validation.api.ValidationState;
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
+ * @deprecated see {@link ValidationState}
  */
+@Deprecated
 public class ValidationStateFailureCollector extends AbstractValidationStateCollector {
 
   private final List<ValidationFailure> failureList;

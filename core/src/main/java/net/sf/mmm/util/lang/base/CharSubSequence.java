@@ -8,9 +8,11 @@ package net.sf.mmm.util.lang.base;
  * ATTENTION: This implementation assumes that the original char sequence has an immutable {@link CharSequence#length()
  * length} (at least it should NOT shrink)!
  *
+ * @deprecated not needed, not used, will be removed in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.2
  */
+@Deprecated
 public class CharSubSequence extends CoreCharSequence {
 
   /** the original sequence that is wrapped here */
@@ -44,14 +46,12 @@ public class CharSubSequence extends CoreCharSequence {
       throw new IndexOutOfBoundsException("Start (" + startPosition + ") must not be negative!");
     }
     if (endPosition < startPosition) {
-      throw new IndexOutOfBoundsException(
-          "End (" + endPosition + ") must be greater or equal to start (" + startPosition + ")!");
+      throw new IndexOutOfBoundsException("End (" + endPosition + ") must be greater or equal to start (" + startPosition + ")!");
     }
     // do not allow to resize the sequence to read beyond the shrinked
     // sub-sequence.
     if (endPosition > length()) {
-      throw new IndexOutOfBoundsException(
-          "End (" + endPosition + ") greater than length of sequence (" + length() + ")");
+      throw new IndexOutOfBoundsException("End (" + endPosition + ") greater than length of sequence (" + length() + ")");
     }
     return new CharSubSequence(this.original, this.start + startPosition, endPosition);
   }

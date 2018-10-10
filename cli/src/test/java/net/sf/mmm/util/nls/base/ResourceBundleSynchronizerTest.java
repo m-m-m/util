@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 import org.junit.Test;
 
 import junit.framework.Assert;
-import net.sf.mmm.util.NlsBundleUtilCoreRoot;
+import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
 import net.sf.mmm.util.file.base.FileUtilImpl;
 import net.sf.mmm.util.io.api.EncodingUtil;
 import net.sf.mmm.util.io.base.StreamUtilImpl;
@@ -74,9 +74,8 @@ public class ResourceBundleSynchronizerTest {
     Class<?> bundleClass = MyResourceBundle.class;
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
-    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
-    ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
-    bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
+    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath, ResourceBundleSynchronizer.OPTION_ENCODING, encoding,
+        ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS, bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
     MyResourceBundle bundle = new MyResourceBundle();
     String resultFileBase = targetPath + "/" + bundleClass.getName().replace('.', '/');
@@ -92,17 +91,15 @@ public class ResourceBundleSynchronizerTest {
     ResourceBundleSynchronizer synchronizer = new ResourceBundleSynchronizer();
     String targetPath = TARGET_TEST;
     FileUtilImpl.getInstance().deleteRecursive(new File(targetPath));
-    Class<NlsBundleUtilCoreRoot> bundleClass = NlsBundleUtilCoreRoot.class;
+    Class<NlsBundleUtilExceptionRoot> bundleClass = NlsBundleUtilExceptionRoot.class;
     String encoding = EncodingUtil.ENCODING_ISO_8859_1;
     String locale1 = "de";
-    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath,
-    ResourceBundleSynchronizer.OPTION_ENCODING, encoding, ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS,
-    bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
+    int exitCode = synchronizer.run(new String[] { ResourceBundleSynchronizer.OPTION_PATH, targetPath, ResourceBundleSynchronizer.OPTION_ENCODING, encoding,
+        ResourceBundleSynchronizer.OPTION_BUNDLE_CLASS, bundleClass.getName(), ResourceBundleSynchronizer.OPTION_LOCALE, locale1 });
     Assert.assertEquals(0, exitCode);
 
     ResourceBundle bundle = bundleHelper.toResourceBundle(bundleClass);
-    String resultFileBase = targetPath + "/"
-        + bundleHelper.getQualifiedLocation(bundleClass).getName().replace('.', '/');
+    String resultFileBase = targetPath + "/" + bundleHelper.getQualifiedLocation(bundleClass).replace('.', '/');
 
     // checkBundle(bundle, resultFileBase, null);
     checkBundle(bundle, resultFileBase, locale1);

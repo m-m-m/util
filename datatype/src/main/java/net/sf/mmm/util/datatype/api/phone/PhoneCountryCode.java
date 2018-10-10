@@ -2,8 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.phone;
 
-import net.sf.mmm.util.exception.api.NlsParseException;
-import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatype;
 
 /**
@@ -45,7 +43,9 @@ public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
   public PhoneCountryCode(int countryCode) {
 
     super(Integer.valueOf(countryCode));
-    ValueOutOfRangeException.checkRange(Integer.valueOf(countryCode), Integer.valueOf(0), Integer.valueOf(MAX_VALUE), "country code");
+    if ((countryCode < 0) || (countryCode > MAX_VALUE)) {
+      throw new IllegalArgumentException("" + countryCode);
+    }
   }
 
   /**
@@ -76,13 +76,13 @@ public final class PhoneCountryCode extends AbstractSimpleDatatype<Integer> {
       normalized = normalized.substring(3);
     }
     if (normalized.startsWith("0")) {
-      throw new NlsParseException(countryCode, PhoneCountryCode.class);
+      throw new IllegalArgumentException(countryCode);
     }
     try {
       int cc = Integer.parseInt(normalized);
       return cc;
     } catch (NumberFormatException e) {
-      throw new NlsParseException(e, countryCode, PhoneCountryCode.class);
+      throw new IllegalArgumentException(countryCode, e);
     }
   }
 

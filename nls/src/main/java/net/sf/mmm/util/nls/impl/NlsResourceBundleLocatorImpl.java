@@ -13,8 +13,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +20,6 @@ import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.nls.base.NlsBundleHelper;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
-import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is the implementation of {@link NlsResourceBundleLocator}.
@@ -36,8 +32,6 @@ public class NlsResourceBundleLocatorImpl extends AbstractComponent implements N
   private static final Logger LOG = LoggerFactory.getLogger(NlsResourceBundleLocatorImpl.class);
 
   private List<ResourceBundle> nlsBundles;
-
-  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -66,35 +60,6 @@ public class NlsResourceBundleLocatorImpl extends AbstractComponent implements N
 
     getInitializationState().requireNotInitilized();
     this.nlsBundles = nlsBundles;
-  }
-
-  /**
-   * This method gets the {@link ReflectionUtil}.
-   *
-   * @return the {@link ReflectionUtil}.
-   */
-  public ReflectionUtil getReflectionUtil() {
-
-    return this.reflectionUtil;
-  }
-
-  /**
-   * @param reflectionUtil is the reflectionUtil to set
-   */
-  @Inject
-  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.reflectionUtil = reflectionUtil;
-  }
-
-  @Override
-  protected void doInitialize() {
-
-    super.doInitialize();
-    if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtilImpl.getInstance();
-    }
   }
 
   @Override

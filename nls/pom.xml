@@ -28,16 +28,12 @@
       <artifactId>mmm-util-session</artifactId>
     </dependency>
 
-    <!-- Only required for NlsResourceLoader* -->
+    <!-- Any of spring-core, mmm-util-resource, or mmm-util-reflect is required. -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-util-resource</artifactId>
+      <optional>true</optional>
     </dependency>
-    <!--
-      Spring-context is marked as optional component. You can use spring, guice, seam or whatever framework you like
-      together with mmm as it comes with proper annotations using JSR 250 and JSR 330.
-      However, everything is tested with spring so this will be best choice if there are no other constraints.
-    -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>

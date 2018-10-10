@@ -5,7 +5,6 @@ package net.sf.mmm.util.datatype.api.phone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.mmm.util.exception.api.NlsParseException;
 import net.sf.mmm.util.lang.api.AbstractSimpleDatatypeBase;
 
 /**
@@ -22,8 +21,8 @@ public class PhoneNumber extends AbstractSimpleDatatypeBase<String> {
 
   private static final long serialVersionUID = -6395551467951327196L;
 
-  private static final Pattern PATTERN_PHONENUMBER = Pattern.compile(
-      "((([+]|00|011)([1-9][0-9]{1,3}))[/ -])?([(][01][)])?([0-9]{1,6})[/ -]([0-9/ -]{1,11})([-]([0-9]{1,8}))?");
+  private static final Pattern PATTERN_PHONENUMBER = Pattern
+      .compile("((([+]|00|011)([1-9][0-9]{1,3}))[/ -])?([(][01][)])?([0-9]{1,6})[/ -]([0-9/ -]{1,11})([-]([0-9]{1,8}))?");
 
   private static final Pattern PATTERN_PHONENUMBER_FREEFORM = Pattern.compile("[+]?[0-9*#~]+[0-9*#/ -]*[0-9*#]+");
 
@@ -69,7 +68,7 @@ public class PhoneNumber extends AbstractSimpleDatatypeBase<String> {
       String countryCodeString = matcher.group(2);
       if (countryCodeString == null) {
         if (countryCode == null) {
-          throw new NlsParseException(phoneNumber, PhoneNumber.class);
+          throw new IllegalArgumentException(phoneNumber);
         }
         this.countryCode = countryCode;
       } else {
@@ -81,7 +80,7 @@ public class PhoneNumber extends AbstractSimpleDatatypeBase<String> {
       this.phoneNumber = formatPhoneNumber();
     } else {
       if (!PATTERN_PHONENUMBER_FREEFORM.matcher(phoneNumber).matches()) {
-        throw new NlsParseException(phoneNumber, PATTERN_PHONENUMBER_FREEFORM.pattern(), PhoneNumber.class);
+        throw new IllegalArgumentException(phoneNumber);
       }
       this.phoneNumber = phoneNumber;
       this.countryCode = null;

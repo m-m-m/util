@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.util.datatype.api.color;
 
-import net.sf.mmm.util.lang.api.EnumType;
+import net.sf.mmm.util.lang.api.SimpleDatatype;
 
 /**
  * This enum contains the available {@link ColorModel}s supported by {@link GenericColor}. Please note that a color
@@ -13,7 +13,7 @@ import net.sf.mmm.util.lang.api.EnumType;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-public enum ColorModel implements EnumType<String> {
+public enum ColorModel implements SimpleDatatype<String> {
 
   /**
    * The indicator for the RGB color model, where RGB stands for the components {@link Red}, {@link Green}, and

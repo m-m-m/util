@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import net.sf.mmm.util.collection.impl.spring.UtilCollectionSpringConfig;
+import net.sf.mmm.util.nls.impl.spring.UtilNlsSpringConfig;
 import net.sf.mmm.util.pojo.api.PojoFactory;
 import net.sf.mmm.util.pojo.api.PojoUtil;
 import net.sf.mmm.util.pojo.base.GuessingPojoFactory;
@@ -27,7 +28,7 @@ import net.sf.mmm.util.reflect.impl.spring.UtilReflectSpringConfig;
  * @since 7.1.0
  */
 @Configuration
-@Import({ UtilReflectSpringConfig.class, UtilCollectionSpringConfig.class })
+@Import({ UtilReflectSpringConfig.class, UtilCollectionSpringConfig.class, UtilNlsSpringConfig.class })
 @ComponentScan({ "net.sf.mmm.util.pojo.descriptor.impl.accessor" })
 @SuppressWarnings("javadoc")
 public class UtilPojoSpringConfig {

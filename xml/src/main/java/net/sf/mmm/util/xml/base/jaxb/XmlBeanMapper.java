@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
@@ -23,8 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
-import net.sf.mmm.util.exception.api.NlsIllegalStateException;
-import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
 import net.sf.mmm.util.resource.api.DataResource;
@@ -79,7 +78,7 @@ public class XmlBeanMapper<T> extends AbstractComponent implements ValidationEve
     try {
       this.jaxbContext = JAXBContext.newInstance(xmlBeanClass);
     } catch (JAXBException e) {
-      throw new NlsIllegalStateException(e);
+      throw new IllegalStateException(e);
     }
   }
 
@@ -172,7 +171,7 @@ public class XmlBeanMapper<T> extends AbstractComponent implements ValidationEve
       marshaller.setEventHandler(this);
       return marshaller;
     } catch (JAXBException e) {
-      throw new NlsIllegalStateException(e);
+      throw new IllegalStateException(e);
     }
   }
 
@@ -199,7 +198,7 @@ public class XmlBeanMapper<T> extends AbstractComponent implements ValidationEve
       }
       return unmarshaller;
     } catch (JAXBException e) {
-      throw new NlsIllegalStateException(e);
+      throw new IllegalStateException(e);
     }
   }
 
@@ -219,7 +218,7 @@ public class XmlBeanMapper<T> extends AbstractComponent implements ValidationEve
    */
   protected void validate(T jaxbBean) {
 
-    NlsNullPointerException.checkNotNull(this.xmlBeanClass, jaxbBean);
+    Objects.requireNonNull(jaxbBean, this.xmlBeanClass.getName());
   }
 
   /**
@@ -336,7 +335,7 @@ public class XmlBeanMapper<T> extends AbstractComponent implements ValidationEve
     } catch (MarshalException e) {
       throw new XmlInvalidException(e, jaxbBean);
     } catch (JAXBException e) {
-      throw new NlsIllegalStateException(e);
+      throw new IllegalStateException(e);
     }
   }
 

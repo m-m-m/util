@@ -10,10 +10,12 @@ import net.sf.mmm.util.lang.api.LocalizableFormatter;
 /**
  * This is the abstract base implementation of the {@link LocalizableFormatter} interface.
  *
+ * @deprecated not needed, not used, will be removed in a future release.
  * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */
+@Deprecated
 public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<V> implements LocalizableFormatter<V> {
 
   /**
@@ -25,8 +27,8 @@ public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<
   }
 
   /**
-   * This method gets the default locale used if none is provided. Will return {@link Locale#getDefault()}.
-   * May be overridden to change.
+   * This method gets the default locale used if none is provided. Will return {@link Locale#getDefault()}. May be
+   * overridden to change.
    *
    * @return the default locale.
    */
@@ -73,8 +75,7 @@ public abstract class AbstractLocalizableFormatter<V> extends AbstractFormatter<
    * @see #format(Object, Appendable, Locale)
    *
    * @param value is the value to format (not {@code null}).
-   * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
-   *        value to.
+   * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted value to.
    * @param locale is the {@link Locale}.
    * @throws IOException if caused by {@link Appendable#append(CharSequence) append}.
    */

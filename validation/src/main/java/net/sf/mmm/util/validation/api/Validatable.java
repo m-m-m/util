@@ -3,9 +3,7 @@
 package net.sf.mmm.util.validation.api;
 
 /**
- * This is the abstract interface for an object, that can be {@link #validate() validated}.<br>
- * <b>NOTE:</b> It is a simpler and more convenient API than {@link AbstractValidatableObject} and
- * {@link ValidatableObject}.
+ * This is the abstract interface for an object, that can be {@link #validate() validated}.
  *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 7.4.0

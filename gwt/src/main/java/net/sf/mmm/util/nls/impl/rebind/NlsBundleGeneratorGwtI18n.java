@@ -21,7 +21,6 @@ import net.sf.mmm.util.nls.api.NlsBundleKey;
 import net.sf.mmm.util.nls.api.NlsBundleMessage;
 import net.sf.mmm.util.nls.api.NlsMessage;
 import net.sf.mmm.util.nls.base.NlsBundleHelper;
-import net.sf.mmm.util.reflect.api.ClassName;
 import net.sf.mmm.util.reflect.api.TypeNotFoundException;
 
 /**
@@ -45,8 +44,8 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
   }
 
   @Override
-  protected void generateImportStatements(JClassType inputType, TreeLogger logger,
-      ClassSourceFileComposerFactory sourceComposerFactory, GeneratorContext context) {
+  protected void generateImportStatements(JClassType inputType, TreeLogger logger, ClassSourceFileComposerFactory sourceComposerFactory,
+      GeneratorContext context) {
 
     super.generateImportStatements(inputType, logger, sourceComposerFactory, context);
     sourceComposerFactory.addImport(Constants.class.getName());
@@ -54,8 +53,7 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
   }
 
   @Override
-  protected void generateFields(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context,
-      JClassType bundleClass) {
+  protected void generateFields(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context, JClassType bundleClass) {
 
     super.generateFields(sourceWriter, logger, context, bundleClass);
 
@@ -72,8 +70,7 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
   }
 
   @Override
-  protected void generateMethodMessageBlock(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context,
-      String methodName) {
+  protected void generateMethodMessageBlock(SourceWriter sourceWriter, TreeLogger logger, GeneratorContext context, String methodName) {
 
     sourceWriter.print(VARIABLE_MESSAGE);
     sourceWriter.print(" = ");
@@ -102,17 +99,21 @@ public class NlsBundleGeneratorGwtI18n extends AbstractNlsBundleGenerator {
       throw new TypeNotFoundException(bundleName);
     }
     @SuppressWarnings("unchecked")
-    ClassName bundleClassName = NlsBundleHelper.getInstance().getQualifiedLocation(bundleJavaClass);
-    String packageName = bundleClassName.getPackageName();
-    String simpleName = bundleClassName.getSimpleName();
-    if (bundleClassName.getName().equals(bundleName)) {
-      logger.log(TreeLogger.ERROR, getClass().getSimpleName() + ": Illegal NlsBundle '" + bundleName
-          + "' - has to end with suffix 'Root'. Localization will not work!");
+    String bundleClassName = NlsBundleHelper.getInstance().getQualifiedLocation(bundleJavaClass);
+    String simpleName = bundleClassName;
+    String packageName = "";
+    int lastDot = bundleClassName.lastIndexOf('.');
+    if (lastDot > 0) {
+      packageName = bundleClassName.substring(0, lastDot);
+      simpleName = bundleClassName.substring(lastDot + 1);
+    }
+    if (bundleClassName.equals(bundleName)) {
+      logger.log(TreeLogger.ERROR,
+          getClass().getSimpleName() + ": Illegal NlsBundle '" + bundleName + "' - has to end with suffix 'Root'. Localization will not work!");
       simpleName = simpleName + "_Interface";
     }
     logger.log(TreeLogger.INFO, getClass().getSimpleName() + ": Generating " + simpleName);
-    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName,
-        simpleName);
+    ClassSourceFileComposerFactory sourceComposerFactory = new ClassSourceFileComposerFactory(packageName, simpleName);
     sourceComposerFactory.makeInterface();
     // import statements
     sourceComposerFactory.addImport(Constants.class.getName());

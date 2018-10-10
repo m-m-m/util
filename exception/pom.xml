@@ -21,7 +21,8 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-uuid</artifactId>
+      <artifactId>mmm-util-reflect</artifactId>
+      <optional>true</optional>
     </dependency>
     <!-- JSR 303 optional for ValidationErrorUserException -->
     <dependency>

@@ -20,7 +20,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-util-collection</artifactId>
+      <artifactId>mmm-util-resource</artifactId>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>

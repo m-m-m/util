@@ -3,18 +3,17 @@
 package net.sf.mmm.util.nls.impl.formatter;
 
 import java.io.IOException;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.inject.Inject;
-
-import net.sf.mmm.util.lang.api.Visitor;
 import net.sf.mmm.util.nls.api.NlsFormatterManager;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 import net.sf.mmm.util.nls.base.AbstractNlsFormatterPlugin;
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
-import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 /**
  * This is an implementation of {@link net.sf.mmm.util.nls.api.NlsFormatter} that formats {@link Type}s.
@@ -28,8 +27,6 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
   private static final Package PACKAGE_JAVA_LANG = Package.class.getPackage();
 
   private final String style;
-
-  private ReflectionUtil reflectionUtil;
 
   /**
    * The constructor.
@@ -54,93 +51,93 @@ public class NlsFormatterType extends AbstractNlsFormatterPlugin<Object> {
     return NlsFormatterManager.TYPE_TYPE;
   }
 
-  /**
-   * @return the reflectionUtil
-   */
-  protected ReflectionUtil getReflectionUtil() {
-
-    return this.reflectionUtil;
-  }
-
-  /**
-   * @param reflectionUtil is the reflectionUtil to set
-   */
-  @Inject
-  public void setReflectionUtil(ReflectionUtil reflectionUtil) {
-
-    getInitializationState().requireNotInitilized();
-    this.reflectionUtil = reflectionUtil;
-  }
-
-  @Override
-  protected void doInitialize() {
-
-    super.doInitialize();
-    if (this.reflectionUtil == null) {
-      this.reflectionUtil = ReflectionUtilImpl.getInstance();
-    }
-  }
-
   @Override
   public void format(Object object, Locale locale, Map<String, Object> arguments, NlsTemplateResolver resolver, Appendable buffer) throws IOException {
 
     if (object == null) {
       buffer.append("null");
     } else if (object instanceof Type) {
-      Type type = (Type) object;
-      if (NlsFormatterManager.STYLE_SHORT.equals(this.style)) {
-        Class<?> rawType = this.reflectionUtil.createGenericType(type).getAssignmentClass();
-        buffer.append(rawType.getSimpleName());
-      } else if (NlsFormatterManager.STYLE_MEDIUM.equals(this.style)) {
-        Class<?> rawType = this.reflectionUtil.createGenericType(type).getAssignmentClass();
-        if (PACKAGE_JAVA_LANG.equals(rawType.getPackage())) {
-          buffer.append(rawType.getSimpleName());
-        } else {
-          buffer.append(rawType.getCanonicalName());
-        }
-      } else {
-        ClassFormatter formatter = new ClassFormatter(buffer);
-        this.reflectionUtil.toString(type, buffer, formatter);
-      }
+      toString((Type) object, buffer);
     } else {
       buffer.append(object.toString());
     }
   }
 
-  /**
-   * This inner class is used to format {@link Class}es.
-   */
-  private class ClassFormatter implements Visitor<Class<?>> {
+  private void toString(Type type, Appendable appendable) {
 
-    private final Appendable buffer;
-
-    /**
-     * The constructor.
-     *
-     * @param buffer is the {@link Appendable}.
-     */
-    public ClassFormatter(Appendable buffer) {
-
-      super();
-      this.buffer = buffer;
-    }
-
-    @Override
-    public void visit(Class<?> value) {
-
-      try {
-        if (NlsFormatterManager.STYLE_LONG.equals(NlsFormatterType.this.style)) {
-          if (PACKAGE_JAVA_LANG.equals(value.getPackage())) {
-            this.buffer.append(value.getSimpleName());
+    try {
+      if (type instanceof Class<?>) {
+        Class<?> clazz = (Class<?>) type;
+        if (this.style.equals(NlsFormatterManager.STYLE_SHORT)) {
+          appendable.append(clazz.getSimpleName());
+        } else if (this.style.equals(NlsFormatterManager.STYLE_LONG) || this.style.equals(NlsFormatterManager.STYLE_MEDIUM)) {
+          if (PACKAGE_JAVA_LANG.equals(clazz.getPackage())) {
+            appendable.append(clazz.getSimpleName());
           } else {
-            this.buffer.append(value.getCanonicalName());
+            appendable.append(clazz.getCanonicalName());
           }
         } else {
-          this.buffer.append(value.getCanonicalName());
+          appendable.append(clazz.getCanonicalName());
         }
-      } catch (IOException e) {
-        throw new IllegalStateException("Error writing to Appendable.", e);
+      } else if (type instanceof ParameterizedType) {
+        ParameterizedType parameterizedType = (ParameterizedType) type;
+        boolean longOrFullStyle = this.style.equals(NlsFormatterManager.STYLE_LONG) || this.style.equals(NlsFormatterManager.STYLE_FULL);
+        if (longOrFullStyle) {
+          Type ownerType = parameterizedType.getOwnerType();
+          if (ownerType != null) {
+            toString(ownerType, appendable);
+            appendable.append('.');
+          }
+        }
+        toString(parameterizedType.getRawType(), appendable);
+        if (longOrFullStyle) {
+          appendable.append('<');
+          boolean separator = false;
+          for (Type arg : parameterizedType.getActualTypeArguments()) {
+            if (separator) {
+              appendable.append(", ");
+            }
+            toString(arg, appendable);
+            separator = true;
+          }
+          appendable.append('>');
+        }
+      } else if (type instanceof TypeVariable<?>) {
+        TypeVariable<?> typeVariable = (TypeVariable<?>) type;
+        appendable.append(typeVariable.getName());
+        Type[] bounds = typeVariable.getBounds();
+        if (bounds.length > 0) {
+          // is this supported after all?
+          Type firstBound = bounds[0];
+          if (!Object.class.equals(firstBound)) {
+            appendable.append(" extends ");
+            toString(firstBound, appendable);
+          }
+        }
+      } else if (type instanceof WildcardType) {
+        WildcardType wildcardType = (WildcardType) type;
+        Type[] lowerBounds = wildcardType.getLowerBounds();
+        if (lowerBounds.length > 0) {
+          appendable.append("? super ");
+          toString(lowerBounds[0], appendable);
+        } else {
+          Type[] upperBounds = wildcardType.getUpperBounds();
+          if (upperBounds.length > 0) {
+            appendable.append("? extends ");
+            toString(upperBounds[0], appendable);
+          } else {
+            appendable.append("?");
+          }
+        }
+      } else if (type instanceof GenericArrayType) {
+        toString(((GenericArrayType) type).getGenericComponentType(), appendable);
+        appendable.append("[]");
+      } else {
+        appendable.append(type.toString());
       }
+    } catch (IOException e) {
+      throw new IllegalStateException("Error writing type to Appendable.", e);
     }
   }
+
 }

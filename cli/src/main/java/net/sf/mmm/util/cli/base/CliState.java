@@ -23,9 +23,7 @@ import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.cli.api.CliOptionAndArgumentAnnotationException;
 import net.sf.mmm.util.cli.api.CliStyleHandling;
 import net.sf.mmm.util.collection.base.BasicDoubleLinkedNode;
-import net.sf.mmm.util.collection.base.NodeCycle;
-import net.sf.mmm.util.collection.base.NodeCycleException;
-import net.sf.mmm.util.component.api.InitializationState;
+import net.sf.mmm.util.component.base.InitializationState;
 import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.NlsIllegalArgumentException;
 import net.sf.mmm.util.pojo.descriptor.api.PojoDescriptor;
@@ -41,7 +39,6 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.validation.api.ValueValidator;
 import net.sf.mmm.util.validation.base.ValidatorBuilder;
 import net.sf.mmm.util.validation.base.ValidatorBuilderNone;
-import net.sf.mmm.util.value.api.SimpleValueConverter;
 
 /**
  * This is a container for the {@link #getStateClass() state-class}. It determines and holds the CLI-informations of
@@ -73,7 +70,6 @@ public class CliState extends CliClassContainer {
    * @param stateClass is the {@link #getStateClass() state-class}.
    * @param descriptorBuilderFactory is the {@link PojoDescriptorBuilderFactory} used to introspect the
    *        {@link PojoPropertyDescriptor properties} of the {@link #getStateClass() stateClass}.
-   * @param logger is the {@link Logger} to use (e.g. for {@link CliStyleHandling}).
    * @param reflectionUtil is the {@link ReflectionUtil} instance to use.
    * @param annotationUtil is the {@link AnnotationUtil} instance to use.
    */
@@ -167,7 +163,7 @@ public class CliState extends CliClassContainer {
             startHead = node;
           }
         }
-        argumentContainer.setState(InitializationState.INITIALIZED);
+        argumentContainer.init();
       } else if (CliArgument.ID_LAST.equals(nextTo)) {
         if ((endTail == null) || (endHead == null)) {
           endTail = node;
@@ -181,7 +177,7 @@ public class CliState extends CliClassContainer {
             endHead = node;
           }
         }
-        argumentContainer.setState(InitializationState.INITIALIZED);
+        argumentContainer.init();
       }
     }
     if ((startTail != null) && (endHead != null)) {
@@ -189,7 +185,17 @@ public class CliState extends CliClassContainer {
       startTail.insertAsNext(endHead);
     }
     for (BasicDoubleLinkedNode<CliArgumentContainer> node : argumentMap.values()) {
-      initializeArgumentRecursive(node, argumentMap);
+      List<String> cycle = initializeArgumentRecursive(node, argumentMap);
+      if (cycle != null) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = cycle.size() - 1; i >= 0; i--) {
+          sb.append(cycle.get(i));
+          if (i > 0) {
+            sb.append("-->");
+          }
+        }
+        throw new IllegalStateException("Cyclic dependency of CLI modes: " + sb.toString());
+      }
     }
     // order arguments
     if (startHead != null) {
@@ -213,20 +219,22 @@ public class CliState extends CliClassContainer {
    *
    * @param node is the node to initialize (link into the node-list).
    * @param argumentMap maps the {@link CliArgumentContainer#getId() id} to the according argument-node.
-   * @return a {@link NodeCycle} if a cyclic dependency has been detected but is NOT yet complete or {@code null} if the
-   *         initialization was successful.
-   * @throws NodeCycleException if a cyclic dependency was detected and completed.
+   * @return a {@link List} of {@link CliArgumentContainer#getId() CLI argument IDs} (in reverse order) of a cyclic
+   *         dependency that was detected, or {@code null} if the initialization was successful.
    */
-  protected NodeCycle<CliArgumentContainer> initializeArgumentRecursive(BasicDoubleLinkedNode<CliArgumentContainer> node,
-      Map<String, BasicDoubleLinkedNode<CliArgumentContainer>> argumentMap) throws NodeCycleException {
+  protected List<String> initializeArgumentRecursive(BasicDoubleLinkedNode<CliArgumentContainer> node,
+      Map<String, BasicDoubleLinkedNode<CliArgumentContainer>> argumentMap) {
 
     CliArgumentContainer argumentContainer = node.getValue();
-    if (argumentContainer.getState() != InitializationState.INITIALIZED) {
-      if (argumentContainer.getState() == InitializationState.INITIALIZING) {
+    InitializationState state = argumentContainer.getState();
+    if (!state.isInitialized()) {
+      if (state.isInitializing()) {
         // cycle detected
-        return new NodeCycle<>(argumentContainer, CliArgumentFormatter.INSTANCE);
+        List<String> cycle = new ArrayList<>();
+        cycle.add(argumentContainer.getId());
+        return cycle;
       } else {
-        argumentContainer.setState(InitializationState.INITIALIZING);
+        state.setInitializing();
       }
       CliArgument cliArgument = argumentContainer.getArgument();
       String nextTo = cliArgument.addCloseTo();
@@ -236,12 +244,8 @@ public class CliState extends CliClassContainer {
         throw new CliArgumentReferenceMissingException(argumentContainer);
       }
       boolean addAfter = cliArgument.addAfter();
-      NodeCycle<CliArgumentContainer> cycle = initializeArgumentRecursive(nextToNode, argumentMap);
+      List<String> cycle = initializeArgumentRecursive(nextToNode, argumentMap);
       if (cycle != null) {
-        cycle.getInverseCycle().add(argumentContainer);
-        if (cycle.getStartNode() == argumentContainer) {
-          throw new NodeCycleException(cycle);
-        }
         return cycle;
       }
       if (addAfter) {
@@ -249,7 +253,7 @@ public class CliState extends CliClassContainer {
       } else {
         nextToNode.insertAsPrevious(node);
       }
-      argumentContainer.setState(InitializationState.INITIALIZED);
+      state.setInitialized();
     }
     return null;
   }
@@ -412,35 +416,6 @@ public class CliState extends CliClassContainer {
     return result;
   }
 
-  // /**
-  // * This method gets the {@link List} of {@link CliArgumentContainer
-  // * CLI-arguments} for the given {@link CliModeObject mode}.
-  // *
-  // * @param mode is the according {@link CliModeContainer mode}.
-  // * @return the arguments or {@code null} if no arguments are defined
-  // for
-  // * this mode.
-  // */
-  // protected List<CliArgumentContainer> getArgumentsRecursive(CliModeObject
-  // mode) {
-  //
-  // List<CliArgumentContainer> modeArguments =
-  // this.mode2argumentsMap.get(mode.getId());
-  // if (modeArguments == null) {
-  // CliMode cliMode = mode.getMode();
-  // if (cliMode != null) {
-  // for (String parentId : cliMode.parentIds()) {
-  // CliModeObject parentMode = getMode(parentId);
-  // modeArguments = getArgumentsRecursive(parentMode);
-  // if (modeArguments != null) {
-  // break;
-  // }
-  // }
-  // }
-  // }
-  // return modeArguments;
-  // }
-
   /**
    * This method gets the {@link CliOption options} for the given {@link CliModeObject mode}.
    *
@@ -465,22 +440,6 @@ public class CliState extends CliClassContainer {
       }
     }
     return result;
-  }
-
-  /**
-   * This inner class converts a {@link CliArgumentContainer} to a {@link String}.
-   */
-  protected static final class CliArgumentFormatter implements SimpleValueConverter<CliArgumentContainer, String> {
-
-    /** The singleton instance. */
-    private static final CliArgumentFormatter INSTANCE = new CliArgumentFormatter();
-
-    @Override
-    @SuppressWarnings("all")
-    public <T extends String> T convert(CliArgumentContainer value, Object valueSource, Class<T> targetClass) {
-
-      return (T) value.getId();
-    }
   }
 
 }

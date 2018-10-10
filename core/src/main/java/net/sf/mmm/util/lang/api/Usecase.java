@@ -18,8 +18,9 @@ import javax.inject.Qualifier;
  * usecases. The javadoc of these constants shall provide further documentation of the usecase like the detailed
  * description or links to further documentation.<br/>
  * <b>Note:</b><br/>
- * This {@link Annotation} is also a {@link Qualifier} for {@link net.sf.mmm.util.component.api.Cdi}.
+ * This {@link Annotation} is also a {@link Qualifier} for CDI.
  *
+ * @deprecated create your own annotation and keep control of it. This annotation will be deleted in a future release.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.0.0
  */

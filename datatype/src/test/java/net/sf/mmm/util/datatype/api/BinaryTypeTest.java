@@ -1,7 +1,9 @@
-package net.sf.mmm.util.lang.api;
+package net.sf.mmm.util.datatype.api;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+
+import net.sf.mmm.util.datatype.api.BinaryType;
 
 /**
  * This is the test-case for {@link BinaryType}.

@@ -10,9 +10,11 @@ import net.sf.mmm.util.nls.api.NlsMessage;
 /**
  * This is the abstract base class for an error {@link net.sf.mmm.util.lang.api.Message}.
  *
+ * @deprecated use {@link net.sf.mmm.util.exception.base.ErrorMessage} instead.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 3.1.0
  */
+@Deprecated
 public abstract class AbstractErrorMessage extends AbstractMessage {
 
   private static final long serialVersionUID = 1997543457414946906L;
@@ -38,8 +40,7 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
    * @param technical - {@code true} in case of {@link NlsThrowable#isTechnical() technical error} with
    *        {@link #TYPE_TECHNICAL_ERROR}, {@code false} otherwise (business error).
    */
-  public AbstractErrorMessage(String code, Object source, String message, UUID uuid, String details,
-      boolean technical) {
+  public AbstractErrorMessage(String code, Object source, String message, UUID uuid, String details, boolean technical) {
 
     super(code, source, message, uuid, details);
     this.technical = technical;
@@ -56,8 +57,7 @@ public abstract class AbstractErrorMessage extends AbstractMessage {
    * @param technical - {@code true} in case of {@link NlsThrowable#isTechnical() technical error} with
    *        {@link #TYPE_TECHNICAL_ERROR}, {@code false} otherwise (business error).
    */
-  public AbstractErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details,
-      boolean technical) {
+  public AbstractErrorMessage(String code, Object source, NlsMessage message, UUID uuid, String details, boolean technical) {
 
     super(code, source, message, uuid, details);
     this.technical = technical;

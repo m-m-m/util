@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 
 import net.sf.mmm.util.cli.NlsBundleUtilCliRoot;
 import net.sf.mmm.util.cli.impl.DefaultCliParserBuilder;
-import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.base.AbstractLoggableObject;
 import net.sf.mmm.util.io.api.StreamUtil;
 import net.sf.mmm.util.io.base.AppendableWriter;
@@ -114,41 +113,27 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   }
 
   /**
-   * This method gets the {@link IocContainer} used to manage components with their implementation. It should be created
-   * and initialized on the first call of this method. <br>
-   * This default implementation simply returns {@code null} to avoid dependencies on a {@link IocContainer}
-   * implementation. Override this method to use proper component management.
-   *
-   * @see net.sf.mmm.util.component.impl.SpringContainer
-   *
-   * @return the {@link IocContainer}.
-   */
-  protected IocContainer getIocContainer() {
-
-    return null;
-  }
-
-  /**
    * This method gets the {@link CliParserBuilder} used to {@link CliParserBuilder#build(Object) build} the
    * {@link CliParser}. <br>
-   * To extend with custom functionality you should use an {@link #getIocContainer() IoC container} in advance to
-   * overriding this method.
    *
    * @return the {@link CliParserBuilder}.
    */
   protected CliParserBuilder getParserBuilder() {
 
     if (this.parserBuilder == null) {
-      IocContainer container = getIocContainer();
-      if (container == null) {
-        DefaultCliParserBuilder impl = new DefaultCliParserBuilder();
-        impl.initialize();
-        this.parserBuilder = impl;
-      } else {
-        this.parserBuilder = container.get(CliParserBuilder.class);
-      }
+      DefaultCliParserBuilder impl = new DefaultCliParserBuilder();
+      impl.initialize();
+      this.parserBuilder = impl;
     }
     return this.parserBuilder;
+  }
+
+  /**
+   * @param parserBuilder the new value of {@link #getParserBuilder()}.
+   */
+  public void setParserBuilder(CliParserBuilder parserBuilder) {
+
+    this.parserBuilder = parserBuilder;
   }
 
   /**
@@ -159,14 +144,17 @@ public abstract class AbstractMain extends AbstractLoggableObject {
   protected StreamUtil getStreamUtil() {
 
     if (this.streamUtil == null) {
-      IocContainer container = getIocContainer();
-      if (container == null) {
-        this.streamUtil = StreamUtilImpl.getInstance();
-      } else {
-        this.streamUtil = container.get(StreamUtil.class);
-      }
+      this.streamUtil = StreamUtilImpl.getInstance();
     }
     return this.streamUtil;
+  }
+
+  /**
+   * @param streamUtil the new value of {@link #getStreamUtil()}.
+   */
+  public void setStreamUtil(StreamUtil streamUtil) {
+
+    this.streamUtil = streamUtil;
   }
 
   /**
