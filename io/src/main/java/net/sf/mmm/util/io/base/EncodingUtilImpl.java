@@ -12,7 +12,6 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.mmm.util.collection.base.RankMap;
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.io.api.ByteOrderMark;
 import net.sf.mmm.util.io.api.ByteProcessor;
