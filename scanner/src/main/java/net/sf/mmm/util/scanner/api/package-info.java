@@ -9,13 +9,15 @@
  * ugly monolithic code that is hard to maintain. <br>
  * The {@link net.sf.mmm.util.scanner.api.CharStreamScanner} is an interface that covers typical tasks when paring
  * strings or streams and therefore makes your life a lot easier. You can concentrate on the syntax you want to parse
- * and do NOT need to repeat checks if the end is already reached all the time. For parsing strings there is the
- * implementation {@link net.sf.mmm.util.scanner.base.CharSequenceScanner} that bundles the string together with the
- * state (parsing position) so you can easily delegate a step to another method or class. Otherwise you would need to
- * pass the current position to that method and return the new one from there. This is tricky if the method should
- * already return something else. <br>
- * Here is a little example of an entirely handwritten parser:
- * 
+ * and do NOT need to repeat checks if the end is already reached all the time. For parsing enitre streams (e.g. from a
+ * {@link java.io.Reader}) there is the implementation {@link net.sf.mmm.util.scanner.base.CharReaderScanner} while for
+ * simple {@link java.lang.String}s there is the implementation
+ * {@link net.sf.mmm.util.scanner.base.CharSequenceScanner}. In any case the entire data and state (parsing position) is
+ * encapsulated so you can easily delegate a step to another method or class. Otherwise you would need to pass the
+ * current position to that method and return the new one from there. This is tricky if the method should already return
+ * something else. <br>
+ * As a motivation and anti-pattern, here is a little example of an entirely handwritten parser:
+ *
  * <pre>
  * String input = getInputString();
  * int i = 0;
@@ -47,9 +49,9 @@
  *   value = input.substring(start, i);
  * }
  * </pre>
- * 
+ *
  * Here is the same thing when using {@link net.sf.mmm.util.scanner.base.CharSequenceScanner}:
- * 
+ *
  * <pre>
  * String input = getInputString();
  * {@link net.sf.mmm.util.scanner.api.CharStreamScanner} scanner = new {@link net.sf.mmm.util.scanner.base.CharSequenceScanner}(input);
@@ -61,5 +63,9 @@
  * String value = scanner.{@link net.sf.mmm.util.scanner.api.CharStreamScanner#readWhile(net.sf.mmm.util.filter.api.CharFilter)
  * readWhile}({@link net.sf.mmm.util.filter.api.CharFilter#LATIN_DIGIT_FILTER});
  * </pre>
+ *
+ * This is just a simple example. The API offers all real-live scenarios you will need to parse your data. The
+ * implementations are highly efficient and internally directly operate on {@code char[]}. Streaming implementations use
+ * optimized lookahead buffers that can even be configured at construction time.
  */
 package net.sf.mmm.util.scanner.api;

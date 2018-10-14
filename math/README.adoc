@@ -1,0 +1,12 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-math
+
+This module is part of link:../../..#mmm-util[mmm-util] and brings support for generic processing of numbers.
+For details read the JavaDocs:
+
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/math/api/package-summary.html#package.description[Math API]

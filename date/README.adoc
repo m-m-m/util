@@ -1,0 +1,13 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-date
+
+This module is part of link:../../..#mmm-util[mmm-util] and brings support for the legacy types `Date` and `Calendar` (esp. ISO 8601).
+We recommend to use JSR310 (`java.time.*`) if possible. However, if you still have to use the legacy types, this library can help you.
+For details read the JavaDocs:
+
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/date/api/package-summary.html#package.description[Date API]
