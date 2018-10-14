@@ -9,7 +9,6 @@ import java.util.UUID;
 import net.sf.mmm.util.gwt.api.JavaScriptUtil;
 import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
-import net.sf.mmm.util.lang.api.StringUtil;
 import net.sf.mmm.util.nls.api.NlsAccess;
 import net.sf.mmm.util.nls.api.NlsBundle;
 import net.sf.mmm.util.nls.api.NlsMessage;
@@ -157,28 +156,28 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
         buffer.append(throwable.getClass().getName());
         buffer.append(": ");
         throwable.getLocalizedMessage(locale, buffer);
-        buffer.append(StringUtil.LINE_SEPARATOR);
+        buffer.append('\n');
         UUID uuid = throwable.getUuid();
         if (uuid != null) {
           buffer.append(uuid.toString());
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append('\n');
         }
         StackTraceElement[] trace = throwable.getStackTrace();
         for (int i = 0; i < trace.length; i++) {
           buffer.append("\tat ");
           buffer.append(trace[i].toString());
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append('\n');
         }
         for (Throwable suppressed : ((Throwable) throwable).getSuppressed()) {
           buffer.append("Suppressed: ");
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append('\n');
           printStackTraceCause(suppressed, locale, buffer);
         }
 
         Throwable cause = throwable.getCause();
         if (cause != null) {
           buffer.append("Caused by: ");
-          buffer.append(StringUtil.LINE_SEPARATOR);
+          buffer.append('\n');
           printStackTraceCause(cause, locale, buffer);
         }
       }
@@ -203,12 +202,12 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
       for (StackTraceElement element : nested.getStackTrace()) {
         buffer.append("\tat ");
         buffer.append(element.toString());
-        buffer.append(StringUtil.LINE_SEPARATOR);
+        buffer.append('\n');
       }
       Throwable cause = nested.getCause();
       if (cause != null) {
         buffer.append("Caused by: ");
-        buffer.append(StringUtil.LINE_SEPARATOR);
+        buffer.append('\n');
         printStackTraceCause(cause, locale, buffer);
       }
     }
@@ -284,7 +283,6 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
   protected NlsRuntimeException createCopyViaClone(ExceptionTruncation truncation) {
 
     NlsRuntimeException copy = (NlsRuntimeException) JavaScriptUtil.getInstance().clone(this);
-    // ThrowableHelper.removeDetails(copy, truncation);
     return copy;
   }
 
@@ -333,7 +331,7 @@ public abstract class NlsRuntimeException extends RuntimeException implements Nl
       }
       buffer.append(getLocalizedMessage(locale));
       if (this.uuid != null) {
-        buffer.append(StringUtil.LINE_SEPARATOR);
+        buffer.append('\n');
         buffer.append(this.uuid.toString());
       }
       return buffer;
