@@ -18,7 +18,7 @@
   <properties>
     <!-- Internal project versions -->
     <net.sf.mmm.l10n.version>1.7.0</net.sf.mmm.l10n.version>
-    <net.sf.mmm.util.version>7.7.0-SNAPSHOT</net.sf.mmm.util.version>
+    <net.sf.mmm.util.version>7.6.1-SNAPSHOT</net.sf.mmm.util.version>
     <com.google.gwt.version>2.8.1</com.google.gwt.version>
     <mmm.repository>util</mmm.repository>
   </properties>
