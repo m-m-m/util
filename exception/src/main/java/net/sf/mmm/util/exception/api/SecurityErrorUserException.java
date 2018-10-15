@@ -1,10 +1,8 @@
 /* Copyright (c) The m-m-m Team, Licensed under the Apache License, Version 2.0
  * http://www.apache.org/licenses/LICENSE-2.0 */
-package net.sf.mmm.util.security.api;
+package net.sf.mmm.util.exception.api;
 
 import net.sf.mmm.util.exception.NlsBundleUtilExceptionRoot;
-import net.sf.mmm.util.exception.api.ExceptionTruncation;
-import net.sf.mmm.util.exception.api.NlsRuntimeException;
 
 /**
  * This exception is thrown if an operation or invocation failed due to security restrictions. This can be any form of
@@ -13,19 +11,12 @@ import net.sf.mmm.util.exception.api.NlsRuntimeException;
  * problem is e.g. if an attacker can distinguish between "account does not exist" and "invalid credentials" he can
  * easily scan for valid accounts. A large list of valid accounts can be the basis for another account wit a standard
  * password and rotating logins what is hard to detect and prevent. <br>
- * <b>ATTENTION:</b><br>
- * When sending security exceptions as response to a remote request you have to ensure
- * {@link net.sf.mmm.util.exception.api.ExceptionTruncation}. All this is handled by
- * {@link net.sf.mmm.util.exception.api.ExceptionUtil#convertForClient(Throwable)}.
  *
  * @see SecurityException
  *
- * @deprecated will be removed in the future. Use {@link net.sf.mmm.util.exception.api.SecurityErrorUserException}
- *             instead.
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
- * @since 4.0.0
+ * @since 7.6.1
  */
-@Deprecated
 public class SecurityErrorUserException extends NlsRuntimeException {
 
   /** @see #getCode() */
@@ -51,26 +42,6 @@ public class SecurityErrorUserException extends NlsRuntimeException {
     super(nested, createBundle(NlsBundleUtilExceptionRoot.class).errorSecurityRestriction());
   }
 
-  /**
-   * The copy constructor.
-   *
-   * @see net.sf.mmm.util.exception.api.NlsRuntimeException#NlsRuntimeException(net.sf.mmm.util.exception.api.NlsRuntimeException,
-   *      ExceptionTruncation)
-   *
-   * @param copySource is the exception to copy.
-   * @param truncation is the {@link ExceptionTruncation} to configure potential truncations.
-   */
-  protected SecurityErrorUserException(SecurityErrorUserException copySource, ExceptionTruncation truncation) {
-
-    super(copySource, truncation);
-  }
-
-  @Override
-  public SecurityErrorUserException createCopy(ExceptionTruncation truncation) {
-
-    return new SecurityErrorUserException(this, truncation);
-  }
-
   @Override
   public String getCode() {
 
@@ -86,8 +57,7 @@ public class SecurityErrorUserException extends NlsRuntimeException {
   @Override
   public boolean isTechnical() {
 
-    // should be logged with details and shall not happen in normal situations.
-    return true;
+    return false;
   }
 
 }
