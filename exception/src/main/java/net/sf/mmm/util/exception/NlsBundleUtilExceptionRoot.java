@@ -291,7 +291,7 @@ public interface NlsBundleUtilExceptionRoot extends NlsBundle {
   NlsMessage errorServiceInvocationFailed(@Named("service") String service, @Named("message") String message);
 
   /**
-   * @see net.sf.mmm.util.security.api.SecurityErrorUserException
+   * @see net.sf.mmm.util.exception.api.SecurityErrorUserException
    *
    * @return the {@link NlsMessage}
    */

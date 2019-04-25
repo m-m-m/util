@@ -1,0 +1,25 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-lang
+
+This module is part of link:../../..#mmm-util[mmm-util] and brings small but fundamental APIs and types missing in JDK like:
+
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/filter/api/package-summary.html#package.description[Filtering API]
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/filter/api/CharFilter.html[CharFilter]
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/package-summary.html#package.description[Generic universal stuff]
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/Builder.html[Builder]
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/CaseConversion.html[CaseConversion]
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/CaseSyntax.html[CaseSyntax] (see https://github.com/m-m-m/util/tree/master/lang/src/test/java/net/sf/mmm/util/lang/api/CaseSyntaxTest.java[CaseSyntaxTest])
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/CompareOperator.html[CompareOperator]
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/Conjunction.html[Conjunction]
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/Datatype.html[Datatype]
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/Formatter.html[Formatter]
+** https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/lang/api/Visitor.html[Visitor]
+** etc.
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/uuid/api/package-summary.html#package.description[UUID factory abstraction]
+
+Besides classes like e.g. `CaseSyntax` this library is mainly a foundation for other `mmm-util` modules.

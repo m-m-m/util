@@ -1,0 +1,13 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-session
+
+This module is part of link:../../..#mmm-util[mmm-util] and brings a minimal shim to access login, locale, and other such data from a user session.
+The implementation simply delegates to standards from spring and spring-security. However, this module allows that features from other modules are not hardwired against spring 
+and may also be used in other contexts by providing an alternative implementation. 
+
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/session/api/package-summary.html#package.description[Session API]

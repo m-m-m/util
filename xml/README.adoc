@@ -1,0 +1,12 @@
+= Mature Modular Meta-framework (mmm)
+
+image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png[logo]
+
+*Welcome to the wonderful world of http://m-m-m.sourceforge.net/index.html[mmm]!*
+
+== mmm-util-xml
+
+This module is part of link:../../..#mmm-util[mmm-util] and brings advanced XML support.
+For details read the JavaDocs:
+
+* https://m-m-m.github.io/maven/apidocs/net/sf/mmm/util/xml/api/package-summary.html#package.description[XML API]
