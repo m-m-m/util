@@ -27,7 +27,7 @@ public interface TestValues {
   String UNICODE_DIGITS = "6\u096C\u0CEC\u1C50"; // + "\u2165\u0BF0\uD835\uDFE8\u2160";
 
   /** Exotic symbols from different blocks. */
-  String UNICODE_NON_ALPHANUMERIC_SYMBOLS = "\u19E0\u1AB0\u1C80\u1CC0\u1CD0\u1DC0\u2023\u20A0\u20D0\u2100\u2190\u2200\u2300";
+  String UNICODE_NON_ALPHANUMERIC_SYMBOLS = "\u19E0\u1AB0\u1CC0\u1CD0\u1DC0\u2023\u20A0\u20D0\u2100\u2190\u2200\u2300";
 
   /** The date 2000-01-01 in milliseconds. */
   long DATE_2000_01_01 = 946681200000L;

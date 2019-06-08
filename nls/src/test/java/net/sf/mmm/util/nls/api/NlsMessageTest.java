@@ -14,9 +14,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
-
 import net.sf.mmm.test.ExceptionHelper;
 import net.sf.mmm.test.TestValues;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
@@ -31,6 +28,10 @@ import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceNoElseConditionExcep
 import net.sf.mmm.util.nls.impl.formatter.NlsFormatterChoiceOnlyElseConditionException;
 import net.sf.mmm.util.reflect.api.ReflectionUtilLimited;
 import net.sf.mmm.util.text.api.Justification;
+import net.sf.mmm.util.text.api.UnicodeUtil;
+
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link NlsMessage} and {@link NlsMessageFactory}.
@@ -178,12 +179,12 @@ public class NlsMessageTest extends Assertions {
     // Make os/locale independent...
     TimeZone.setDefault(TimeZone.getTimeZone("GMT+01:00"));
     String dateString = formatDate(date, AbstractNlsMessage.LOCALE_ROOT);
-    assertThat(msg.getMessage())
-        .isEqualTo("Date formatted by locale: " + dateString + ", by ISO-8601: " + iso8601String + " and by custom pattern: 1999.12.31-23:59:59+0100!");
+    assertThat(msg.getMessage()).isEqualTo("Date formatted by locale: " + dateString + ", by ISO-8601: " + iso8601String
+        + " and by custom pattern: 1999.12.31-23:59:59+0100!");
     Locale german = Locale.GERMAN;
     String dateStringDe = formatDate(date, german);
-    assertThat(msg.getLocalizedMessage(german, resolver)).isEqualTo(
-        "Datum formatiert nach Locale: " + dateStringDe + ", nach ISO-8601: " + iso8601String + " und nach individueller Vorlage: 1999.12.31-23:59:59+0100!");
+    assertThat(msg.getLocalizedMessage(german, resolver)).isEqualTo("Datum formatiert nach Locale: " + dateStringDe + ", nach ISO-8601: "
+        + iso8601String + " und nach individueller Vorlage: 1999.12.31-23:59:59+0100!");
     // test custom format
     String customFormat = "yyyyMMdd";
     msg = factory.create("{date,date," + customFormat + "}", "date", date);
@@ -193,7 +194,7 @@ public class NlsMessageTest extends Assertions {
 
     String[] types = new String[] { NlsFormatterManager.TYPE_DATE, NlsFormatterManager.TYPE_TIME, NlsFormatterManager.TYPE_DATETIME };
     String[] styles = new String[] { NlsFormatterManager.STYLE_SHORT, NlsFormatterManager.STYLE_MEDIUM, NlsFormatterManager.STYLE_LONG,
-        NlsFormatterManager.STYLE_FULL, null };
+    NlsFormatterManager.STYLE_FULL, null };
     int[] dateStyles = new int[] { DateFormat.SHORT, DateFormat.MEDIUM, DateFormat.LONG, DateFormat.FULL, DateFormat.MEDIUM };
     Locale locale = Locale.GERMANY;
     for (String type : types) {
@@ -243,8 +244,9 @@ public class NlsMessageTest extends Assertions {
     NlsTemplateResolver resolver = createResolver(myRB);
     Number number = new Double(0.42);
     NlsMessage msg = getMessageFactory().create(MyResourceBundle.MSG_TEST_NUMBER, "value", number);
-    assertThat(msg.getMessage()).isEqualTo("Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!");
-    assertThat(msg.getLocalizedMessage(Locale.GERMANY, resolver))
+    assertThat(msg.getMessage().replace(UnicodeUtil.NO_BREAK_SPACE, ' ').replace("42 %", "42%"))
+        .isEqualTo("Number formatted by default: 0.42, as percent: 42%, as currency: \u00a4 0.42 and by custom pattern: #0.42!");
+    assertThat(msg.getLocalizedMessage(Locale.GERMANY, resolver).replace(UnicodeUtil.NO_BREAK_SPACE, ' ').replace("42 %", "42%"))
         .isEqualTo("Zahl formatiert nach Standard: 0,42, in Prozent: 42%, als Währung: 0,42 \u20ac und nach individueller Vorlage: #0,42!");
   }
 
@@ -268,8 +270,8 @@ public class NlsMessageTest extends Assertions {
     assertThat(msg.getMessage())
         .isEqualTo("java.util.Map<java.util.List<? extends String>, java.util.List<java.util.Map<? extends Object, ? super VARIABLE[]>>>");
     msg = getMessageFactory().create("{" + key + ",type,full}", key, type);
-    assertThat(msg.getMessage())
-        .isEqualTo("java.util.Map<java.util.List<? extends java.lang.String>, java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>");
+    assertThat(msg.getMessage()).isEqualTo(
+        "java.util.Map<java.util.List<? extends java.lang.String>, java.util.List<java.util.Map<? extends java.lang.Object, ? super VARIABLE[]>>>");
   }
 
   /**
@@ -380,6 +382,7 @@ public class NlsMessageTest extends Assertions {
     // combined
     msg = factory.create("Value {" + key + ",number,currency{_+15}}", key, value);
     String message = msg.getLocalizedMessage(Locale.GERMANY);
+    message = message.replace(UnicodeUtil.NO_BREAK_SPACE, ' ');
     assertThat(message).isEqualTo("Value ________42,00 €");
   }
 

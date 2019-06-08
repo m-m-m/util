@@ -6,9 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
-
 import net.sf.mmm.util.cli.api.CliArgument;
 import net.sf.mmm.util.cli.api.CliContainerStyle;
 import net.sf.mmm.util.cli.api.CliException;
@@ -26,6 +23,9 @@ import net.sf.mmm.util.reflect.api.AnnotationUtil;
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.AnnotationUtilImpl;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
+
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link CliMode}.
@@ -172,9 +172,10 @@ public class CliStateTest extends Assertions {
     CliModeContainer modeObject = (CliModeContainer) state.getMode(MODE_Z_EXTENDS_X_Y_HELP);
     assertThat(modeObject).isNotNull();
     assertThat(modeObject.getId()).isEqualTo(MODE_Z_EXTENDS_X_Y_HELP);
-    Set<? extends CliModeObject> extendedModes = modeObject.getExtendedModes();
-    assertThat(extendedModes).containsExactlyInAnyOrder(state.getMode(MODE_Z_EXTENDS_X_Y_HELP), state.getMode(MODE_X_EXTENDS_DEFAULT),
-        state.getMode(MODE_Y_EXTENDS_HELP), state.getMode(CliMode.ID_HELP), state.getMode(CliMode.ID_DEFAULT));
+    Set<CliModeObject> extendedModes = (Set) modeObject.getExtendedModes();
+    CliModeObject[] states = new CliModeObject[] { state.getMode(MODE_Z_EXTENDS_X_Y_HELP), state.getMode(MODE_X_EXTENDS_DEFAULT),
+    state.getMode(MODE_Y_EXTENDS_HELP), state.getMode(CliMode.ID_HELP), state.getMode(CliMode.ID_DEFAULT) };
+    assertThat(extendedModes).containsExactlyInAnyOrder(states);
   }
 
   /**
@@ -294,8 +295,8 @@ public class CliStateTest extends Assertions {
 
   }
 
-  @CliModes(value = { @CliMode(id = "foo", title = "Foo", parentIds = { "bar1", "bar2" }), @CliMode(id = "bar1", title = "Bar1", parentIds = { "bar2" }),
-      @CliMode(id = "bar2", title = "Bar2", parentIds = { "foo", "bar1" }) })
+  @CliModes(value = { @CliMode(id = "foo", title = "Foo", parentIds = { "bar1", "bar2" }),
+  @CliMode(id = "bar1", title = "Bar1", parentIds = { "bar2" }), @CliMode(id = "bar2", title = "Bar2", parentIds = { "foo", "bar1" }) })
   public static class CyclicTest2 {
 
   }
@@ -311,8 +312,8 @@ public class CliStateTest extends Assertions {
   }
 
   @CliModes({ @CliMode(id = MODE_X_EXTENDS_DEFAULT, parentIds = CliMode.ID_DEFAULT), @CliMode(id = CliMode.ID_DEFAULT, title = "default"),
-      @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT, MODE_Y_EXTENDS_HELP, CliMode.ID_HELP }),
-      @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP), @CliMode(id = CliMode.ID_HELP, title = "help") })
+  @CliMode(id = MODE_Z_EXTENDS_X_Y_HELP, parentIds = { MODE_X_EXTENDS_DEFAULT, MODE_Y_EXTENDS_HELP, CliMode.ID_HELP }),
+  @CliMode(id = MODE_Y_EXTENDS_HELP, parentIds = CliMode.ID_HELP), @CliMode(id = CliMode.ID_HELP, title = "help") })
   public static class ArgumentTest1 {
 
     @CliArgument(name = ARGUMENT_NAME_STRING, usage = OPTION_USAGE_STRING, //

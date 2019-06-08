@@ -5,7 +5,6 @@ package net.sf.mmm.util.process.base;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -15,14 +14,15 @@ import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-
 import net.sf.mmm.test.TestCategoryManual;
 import net.sf.mmm.util.lang.api.BasicHelper;
 import net.sf.mmm.util.process.api.AsyncProcessExecutor;
 import net.sf.mmm.util.process.api.ProcessContext;
 import net.sf.mmm.util.process.api.ProcessUtil;
+
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * This is the test-case for {@link ProcessUtilImpl}.
@@ -30,7 +30,7 @@ import net.sf.mmm.util.process.api.ProcessUtil;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @SuppressWarnings("all")
-public class ProcessUtilTest {
+public class ProcessUtilTest extends Assertions {
 
   /** The platform specific line separator. */
   private static final String LINE_SEPARATOR = BasicHelper.LINE_SEPARATOR;
@@ -53,7 +53,7 @@ public class ProcessUtilTest {
     assertEquals(0, exitCode);
     byte[] errBytes = errStream.toByteArray();
     String errString = new String(errBytes);
-    assertTrue(errString.contains("java version"));
+    assertThat(errString).contains(" version").contains("Runtime Environment");
   }
 
   @Test
@@ -67,7 +67,7 @@ public class ProcessUtilTest {
     assertEquals(0, exitCode);
     byte[] errBytes = errStream.toByteArray();
     String errString = new String(errBytes);
-    assertTrue(errString.contains("java version"));
+    assertThat(errString).contains(" version").contains("Runtime Environment");
   }
 
   @Test
@@ -103,9 +103,10 @@ public class ProcessUtilTest {
     ProcessBuilder builder = new ProcessBuilder("java", "-classpath", CLASSPATH, SleepApp.class.getName());
     assertFalse(inStream.isClosed());
     AsyncProcessExecutor executor = getProcessUtil().executeAsync(context, builder);
-    Thread.sleep(1);
+    Thread.sleep(10);
     assertFalse(outStream.isClosed());
     assertFalse(errStream.isClosed());
+    Thread.sleep(1);
     boolean stopped = executor.cancel(true);
     assertTrue(stopped);
     Thread.sleep(10);
@@ -152,7 +153,8 @@ public class ProcessUtilTest {
     // test output of stderr
     byte[] errBytes = errStream.toByteArray();
     String errString = new String(errBytes);
-    String expectedErrString = PipeApp1.class.getSimpleName() + " done." + LINE_SEPARATOR + PipeApp2.class.getSimpleName() + " done." + LINE_SEPARATOR;
+    String expectedErrString = PipeApp1.class.getSimpleName() + " done." + LINE_SEPARATOR + PipeApp2.class.getSimpleName() + " done."
+        + LINE_SEPARATOR;
     assertEquals(expectedErrString, errString);
   }
 

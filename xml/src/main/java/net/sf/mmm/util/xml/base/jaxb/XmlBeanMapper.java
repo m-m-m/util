@@ -20,9 +20,6 @@ import javax.xml.bind.ValidationEventLocator;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.resource.api.BrowsableResource;
 import net.sf.mmm.util.resource.api.BrowsableResourceFactory;
@@ -33,6 +30,9 @@ import net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl;
 import net.sf.mmm.util.xml.api.StaxUtil;
 import net.sf.mmm.util.xml.base.StaxUtilImpl;
 import net.sf.mmm.util.xml.base.XmlInvalidException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is a little helper for the simple but common use of JAXB where you simply want to
@@ -187,14 +187,9 @@ public class XmlBeanMapper<T> extends AbstractComponent implements ValidationEve
       Unmarshaller unmarshaller = this.jaxbContext.createUnmarshaller();
       unmarshaller.setEventHandler(this);
       try {
-        unmarshaller.setProperty(com.sun.xml.internal.bind.IDResolver.class.getName(), new InternalValidatingIdResolver());
-      } catch (Throwable e) {
-        try {
-          LOG.debug("No default JAXB implementation found ({0})- trying jaxb-impl (com.sun.xml.bind).", e.toString());
-          unmarshaller.setProperty("com.sun.xml.bind.IDResolver", new ExternalValidatingIdResolver());
-        } catch (Exception e2) {
-          LOG.error("ID-validation will not work! Please check your JAXB implementation!", e2);
-        }
+        unmarshaller.setProperty("com.sun.xml.bind.IDResolver", new ExternalValidatingIdResolver());
+      } catch (Exception e2) {
+        LOG.error("ID-validation will not work! Please check your JAXB implementation!", e2);
       }
       return unmarshaller;
     } catch (JAXBException e) {
@@ -387,7 +382,7 @@ public class XmlBeanMapper<T> extends AbstractComponent implements ValidationEve
         break;
       case ValidationEvent.FATAL_ERROR:
         throw new XmlInvalidException(exception, message);
-      default :
+      default:
         // ignore unknown severity...
     }
     return true;

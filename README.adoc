@@ -6,6 +6,8 @@ image:https://raw.github.com/m-m-m/mmm/master/src/site/resources/images/logo.png
 
 == mmm-util
 
+image:https://img.shields.io/github/license/m-m-m/util.svg?label=License["Apache License, Version 2.0",link=https://github.com/m-m-m/util/blob/develop/LICENSE.txt]
+image:https://img.shields.io/maven-central/v/net.sf.mmm/mmm-util-core.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:net.sf.mmm]
 master: image:https://travis-ci.org/m-m-m/util.svg?branch=master["build-status",link="https://travis-ci.org/m-m-m/util"]
 7.x: image:https://travis-ci.org/m-m-m/util.svg?branch=7.x["build-status",link="https://travis-ci.org/m-m-m/util"]
 

@@ -6,13 +6,13 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.junit.Test;
-
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 import net.sf.mmm.util.lang.api.CompareOperator;
 import net.sf.mmm.util.nls.base.AbstractNlsMessage;
 import net.sf.mmm.util.validation.api.ValidationFailure;
+
+import org.junit.Test;
 
 /**
  * This is the test-case for {@link ValidatorCompare}.
@@ -31,8 +31,7 @@ public class ValidatorCompareTest extends AbstractValidatorTest {
     verifyPositiveValidation(validator, null);
     verifyPositiveValidation(validator, Integer.valueOf(0));
     verifyPositiveValidation(validator, Integer.valueOf(41));
-    ValidationFailure failure = verifyNegativeValidation(validator, Integer.valueOf(42),
-        "The value needs to be less than \"42\"!");
+    ValidationFailure failure = verifyNegativeValidation(validator, Integer.valueOf(42), "The value needs to be less than \"42\"!");
     assertEquals("Der Wert muss kleiner als \"42\" sein!", failure.getMessage(Locale.GERMANY));
   }
 
@@ -52,13 +51,25 @@ public class ValidatorCompareTest extends AbstractValidatorTest {
     // test i18n message
     Locale locale = AbstractNlsMessage.LOCALE_ROOT;
     String tz = TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT, locale);
+    String dateString;
+    String javaVersion = System.getProperty("java.version");
+    boolean java1_8_or_earlier = javaVersion.startsWith("1.");
+    if (java1_8_or_earlier) {
+      dateString = "1/31/00 11:59:59 PM";
+    } else {
+      dateString = "2000-01-31 23:59:59";
+    }
     ValidationFailure failure = verifyNegativeValidation(validator, isoUtil.parseDate("2000-01-31T23:59:58"),
-        "The value needs to be greater or equal to \"1/31/00 11:59:59 PM " + tz + "\"!");
+        "The value needs to be greater or equal to \"" + dateString + " " + tz + "\"!");
 
     // test German localization
     locale = Locale.GERMANY;
     tz = TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT, locale);
-    assertEquals("Der Wert muss größer oder gleich \"31.01.00 23:59:59 " + tz + "\" sein!",
-        failure.getMessage(locale));
+    if (java1_8_or_earlier) {
+      dateString = "31.01.00 23:59:59";
+    } else {
+      dateString = "31.01.00, 23:59:59";
+    }
+    assertEquals("Der Wert muss größer oder gleich \"" + dateString + " " + tz + "\" sein!", failure.getMessage(locale));
   }
 }
