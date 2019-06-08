@@ -20,7 +20,7 @@
     <!-- Internal project versions -->
     <net.sf.mmm.l10n.version>1.7.0</net.sf.mmm.l10n.version>
     <net.sf.mmm.util.version>8.6.0</net.sf.mmm.util.version>
-    <com.google.gwt.version>2.8.1</com.google.gwt.version>
+    <com.google.gwt.version>2.8.2</com.google.gwt.version>
     <mmm.repository>util</mmm.repository>
   </properties>
 
