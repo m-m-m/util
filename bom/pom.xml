@@ -52,7 +52,7 @@
         <groupId>org.hibernate.validator</groupId>
         <artifactId>hibernate-validator</artifactId>
         <classifier>sources</classifier>
-        <version>6.0.9.Final</version>
+        <version>6.1.0.Final</version>
       </dependency>
 
       <dependency>
