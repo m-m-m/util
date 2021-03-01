@@ -14,8 +14,7 @@ import net.sf.mmm.util.lang.api.Builder;
  * @param <PARENT> the generic type of the {@link #and() parent builder}.
  * @param <SELF> the generic type of this builder itself (this).
  *
- * @author hohwille
- * @since 7.1.0
+ * @since 1.0.0
  */
 public abstract class ObjectValidatorBuilder<V, PARENT, SELF extends ObjectValidatorBuilder<V, PARENT, SELF>>
     implements Builder<AbstractValidator<? super V>>, ValidatorRegistry<V, SELF> {
@@ -30,6 +29,7 @@ public abstract class ObjectValidatorBuilder<V, PARENT, SELF extends ObjectValid
    * @param parent the {@link #and() parent} builder.
    */
   public ObjectValidatorBuilder(PARENT parent) {
+
     super();
     this.validators = new ArrayList<>();
     this.parent = parent;
@@ -66,6 +66,7 @@ public abstract class ObjectValidatorBuilder<V, PARENT, SELF extends ObjectValid
    * @param validator the {@link AbstractValidator} to add to this builder.
    * @return this build instance for fluent API calls.
    */
+  @Override
   public SELF add(AbstractValidator<? super V> validator) {
 
     this.validators.add(validator);

@@ -15,8 +15,7 @@ import net.sf.mmm.util.validation.base.text.ValidatorBuilderString;
  *
  * @param <PARENT> the generic type of the {@link #getParent() parent}.
  *
- * @author hohwille
- * @since 8.5.0
+ * @since 1.0.0
  */
 public class ObjectValidatorBuilderFactory<PARENT> {
 
@@ -30,6 +29,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
    * @param parent - see {@link #getParent()}.
    */
   public ObjectValidatorBuilderFactory(PARENT parent) {
+
     super();
     this.parent = parent;
   }
@@ -119,6 +119,7 @@ public class ObjectValidatorBuilderFactory<PARENT> {
      * The constructor.
      */
     BuilderFactory() {
+
       super(null);
     }
 

@@ -17,12 +17,12 @@ public interface CollectionFactoryManager {
   /**
    * This method gets the {@link MapFactory} for the given {@code mapType}.
    *
-   * @param <MAP> is the generic type of the {@link Map}.
+   * @param <MAP> type of the {@link Map}.
    * @param mapType is the type of the {@link Map}. This should be the interface such as {@link Map}.class or
    *        {@link java.util.SortedMap}.class.
    * @return the {@link MapFactory} for the given {@code mapType}. The {@code mapType} has to be
-   *         {@link Class#isAssignableFrom(Class) assignable from} {@link MapFactory#getMapInterface()} of the
-   *         returned instance. Typically it will be equal.
+   *         {@link Class#isAssignableFrom(Class) assignable from} {@link MapFactory#getMapInterface()} of the returned
+   *         instance. Typically it will be equal.
    */
   <MAP extends Map> MapFactory getMapFactory(Class<MAP> mapType);
 
@@ -30,12 +30,11 @@ public interface CollectionFactoryManager {
    * This method gets the {@link CollectionFactory} for the given {@code collectionType}.
    *
    * @param <COLLECTION> is the generic type of the {@link Collection}.
-   * @param collectionType is the type of the {@link Collection}. This should be the {@link Collection}
-   *        interface such as {@link java.util.List}{@code .class}.
-   * @return the {@link CollectionFactory} for the given {@code collectionType}. The {@code collectionType}
-   *         has to be {@link Class#isAssignableFrom(Class) assignable from}
-   *         {@link CollectionFactory#getCollectionInterface()} of the returned instance. Typically it will be
-   *         equal.
+   * @param collectionType is the type of the {@link Collection}. This should be the {@link Collection} interface such
+   *        as {@link java.util.List}{@code .class}.
+   * @return the {@link CollectionFactory} for the given {@code collectionType}. The {@code collectionType} has to be
+   *         {@link Class#isAssignableFrom(Class) assignable from} {@link CollectionFactory#getCollectionInterface()} of
+   *         the returned instance. Typically it will be equal.
    */
   <COLLECTION extends Collection> CollectionFactory<COLLECTION> getCollectionFactory(Class<COLLECTION> collectionType);
 
@@ -43,9 +42,9 @@ public interface CollectionFactoryManager {
    * This method creates a {@link Collection} implementing the given {@code type}.
    *
    * @param <C> is the generic type of the {@link Collection}.
-   * @param type is the type of {@link Collection} to create. This is either an interface
-   *        ({@link java.util.List}, {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract
-   *        implementation of a {@link Collection}.
+   * @param type is the type of {@link Collection} to create. This is either an interface ({@link java.util.List},
+   *        {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract implementation of a
+   *        {@link Collection}.
    * @return the new instance of the given {@code type}.
    * @since 7.6.0
    */
@@ -57,9 +56,9 @@ public interface CollectionFactoryManager {
    * @since 1.7.0
    *
    * @param <C> is the generic type of the {@link Collection}.
-   * @param type is the type of {@link Collection} to create. This is either an interface
-   *        ({@link java.util.List}, {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract
-   *        implementation of a {@link Collection}.
+   * @param type is the type of {@link Collection} to create. This is either an interface ({@link java.util.List},
+   *        {@link java.util.Set}, {@link java.util.Queue}, etc.) or a non-abstract implementation of a
+   *        {@link Collection}.
    * @param capacity is the initial capacity of the {@link Collection}.
    * @return the new instance of the given {@code type}.
    * @since 7.6.0
@@ -73,8 +72,8 @@ public interface CollectionFactoryManager {
    *
    * @param <C> is the generic type of the {@link Map}.
    * @param type is the type of {@link Map} to create. This is either an interface ({@link Map},
-   *        {@link java.util.concurrent.ConcurrentMap}, {@link java.util.NavigableMap}, etc.) or a
-   *        non-abstract implementation of a {@link Map}.
+   *        {@link java.util.concurrent.ConcurrentMap}, {@link java.util.NavigableMap}, etc.) or a non-abstract
+   *        implementation of a {@link Map}.
    * @return the new instance of the given {@code type}.
    * @since 7.6.0
    */
@@ -87,8 +86,8 @@ public interface CollectionFactoryManager {
    *
    * @param <C> is the generic type of the {@link Map}.
    * @param type is the type of {@link Map} to create. This is either an interface ({@link Map},
-   *        {@link java.util.concurrent.ConcurrentMap}, {@link java.util.NavigableMap}, etc.) or a
-   *        non-abstract implementation of a {@link Map}.
+   *        {@link java.util.concurrent.ConcurrentMap}, {@link java.util.NavigableMap}, etc.) or a non-abstract
+   *        implementation of a {@link Map}.
    * @param capacity is the initial capacity of the {@link Map}.
    * @return the new instance of the given {@code type}.
    * @since 7.6.0

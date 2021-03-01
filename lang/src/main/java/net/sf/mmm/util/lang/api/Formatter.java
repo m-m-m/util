@@ -3,8 +3,8 @@
 package net.sf.mmm.util.lang.api;
 
 /**
- * This is the interface for a formatter that allows to {@link #format(Object) format} a given object of a
- * generic type. <br>
+ * This is the interface for a formatter that allows to {@link #format(Object) format} a given object of a generic type.
+ * <br>
  * Unlike {@link java.util.Formatter} this variant concentrates on an API rather than an implementation.
  *
  * @param <V> is the generic type of the actual value to {@link #format(Object) format}.
@@ -14,30 +14,26 @@ package net.sf.mmm.util.lang.api;
 public interface Formatter<V> {
 
   /**
-   * This method formats the given {@code value}. <br>
-   * This is a shorthand of the following code:
-   *
-   * <pre>
-   * {@link StringBuilder} buffer = new StringBuilder();
-   * {@link #format(Object, Appendable) format}(value, buffer);
-   * return buffer.toString();
-   * </pre>
-   *
    * @param value is the value to format. May be {@code null}.
-   * @return the formatted value. If the given {@code value} is {@code null}, a legal implementation will
-   *         return "null" or "".
+   * @return the given value formatted as {@link String}. If the given {@code value} is {@code null}, a legal
+   *         implementation will return "null" or "".
+   * @see #format(Object, Appendable)
    */
-  String format(V value);
+  default String format(V value) {
+
+    StringBuilder buffer = new StringBuilder();
+    format(value, buffer);
+    return buffer.toString();
+  }
 
   /**
-   * This method formats the given {@code value} and directly {@link Appendable#append(CharSequence) appends}
-   * to the given {@code buffer}.
+   * This method formats the given {@code value} and directly {@link Appendable#append(CharSequence) appends} to the
+   * given {@code buffer}.
    *
    * @param value is the value to format. May be {@code null}.
-   * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted
-   *        value to.
-   * @throws RuntimeException ({@code RuntimeIoException}) if {@link Appendable#append(CharSequence) append}
-   *         caused a {@link java.io.IOException}.
+   * @param buffer is the {@link Appendable} to {@link Appendable#append(CharSequence) append} the formatted value to.
+   * @throws RuntimeException ({@code RuntimeIoException}) if {@link Appendable#append(CharSequence) append} caused a
+   *         {@link java.io.IOException}.
    */
   void format(V value, Appendable buffer);
 
