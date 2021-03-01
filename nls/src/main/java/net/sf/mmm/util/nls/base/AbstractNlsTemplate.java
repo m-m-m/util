@@ -10,6 +10,9 @@ import net.sf.mmm.util.nls.api.NlsMessageFormatter;
 import net.sf.mmm.util.nls.api.NlsTemplate;
 import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This is the abstract base implementation of the {@link NlsTemplate} interface.
  *
@@ -19,6 +22,8 @@ import net.sf.mmm.util.nls.api.NlsTemplateResolver;
 public abstract class AbstractNlsTemplate implements NlsTemplate {
 
   private static final long serialVersionUID = 6922837208667754806L;
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractNlsTemplate.class);
 
   /**
    * The constructor.
@@ -56,9 +61,9 @@ public abstract class AbstractNlsTemplate implements NlsTemplate {
         formatter.format(null, locale, arguments, resolver, buffer);
         return true;
       } catch (Exception e) {
-        buffer.append(translation);
-        buffer.append("@");
-        buffer.append(arguments.toString());
+        String fallback = translation + "@" + arguments.toString();
+        buffer.append(fallback);
+        LOG.info("Failed to format message: {}", fallback, e);
         // true lies...
         return true;
       }
